@@ -1,0 +1,62 @@
+{
+  "artifactVersion": "input-live-v4-entrypoint-failure-v1",
+  "status": "authorization and preflight passed; committed entrypoint refused before phase 1 and writer",
+  "recordedOffline": true,
+  "v4EvidenceBytesChanged": false,
+  "lineage": {
+    "protocolCommit": "25b820868104be65194f83e154f59b70aacf2bae",
+    "authorizationCommit": "bd343680b446a828190f176e525e5616752f9e5f",
+    "codeCommit": "bd343680b446a828190f176e525e5616752f9e5f",
+    "protocolPath": "recipe/evidence/input-field-live-pivot-v4/protocol.json",
+    "protocolSha256": "e65584d1d52178cd80dddbe42458a58b0a1ade4f24e41fb53fa4b9cdb97105d6",
+    "authorizationPath": "recipe/evidence/input-field-live-pivot-v4/capture-authorization.json",
+    "authorizationSha256": "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b",
+    "entrypointPath": "recipe/run-input-field-live-v4.ts",
+    "entrypointSha256": "5ac591fd39b0d83e773f9ae4b0c348d7334c6357fb0ce12f53da61e21bb7ddd6"
+  },
+  "preflight": {
+    "passed": true,
+    "authorizationCommit": "bd343680b446a828190f176e525e5616752f9e5f",
+    "codeCommit": "bd343680b446a828190f176e525e5616752f9e5f",
+    "attemptRequested": 1,
+    "completedAttempts": [],
+    "targetFileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "capture": false
+  },
+  "entrypointFailure": {
+    "exitCode": 1,
+    "function": "refuseDraftExecution",
+    "sourceLines": "recipe/run-input-field-live-v4.ts:140-153",
+    "message": "Input live v4 is draft committed antecedent pending authorization. No live execution is authorized for byMp6lt0Ij9b2QbkDGFwBh. A separate authorization commit must precede any clean published descendant run.",
+    "beforePhase1": true,
+    "writerReached": false,
+    "bridgeInvocations": 0
+  },
+  "artifacts": {
+    "generatedWriterPresent": false,
+    "generatedTransportPresent": false,
+    "phaseJournalsWritten": 0,
+    "captureArtifactsWritten": 0,
+    "figmaArtifactsCreated": 0
+  },
+  "scratchFingerprint": {
+    "algorithm": "cyrb64",
+    "pre": "10ba6b57da3cfa97",
+    "post": "10ba6b57da3cfa97",
+    "exact": true,
+    "v4Observed": false,
+    "basis": "No v4 bridge or Figma call occurred. Both fields repeat the last exact post-cleanup Scratch fingerprint verified by v3 attempt 3; they are continuity bounds, not new v4 measurements.",
+    "pageCountAtLastObservation": 13,
+    "collectionCountAtLastObservation": 14,
+    "variableCountAtLastObservation": 11163
+  },
+  "claims": {
+    "v4AttemptExists": false,
+    "liveExecutionOccurred": false,
+    "captureOccurred": false,
+    "resultClaimed": false,
+    "objectiveClaimed": false,
+    "humanSignoff": "pending",
+    "overallInputSuccess": false
+  }
+}

@@ -33,11 +33,28 @@
 > restored Scratch fingerprint `10ba6b57da3cfa97` exactly.
 > Current machine status is
 > `recipe/evidence/status-index.json`; exhausted v3 evidence is
-> `recipe/evidence/input-field-live-pivot-v3/index.json`. The separate v4
-> protocol is a draft committed antecedent pending authorization. It introduces
-> generic binding/unit normalization, immediate hash-chained phase journals,
-> persisted cleanup ownership, and forbids capture until all technical gates
-> pass. No v4 write or capture is authorized. A technically
+> `recipe/evidence/input-field-live-pivot-v3/index.json`. V4 protocol commit
+> `25b820868104be65194f83e154f59b70aacf2bae` and authorization commit
+> `bd343680b446a828190f176e525e5616752f9e5f` passed authorization and preflight,
+> but the committed entrypoint then called `refuseDraftExecution()` before phase
+> 1, writer construction, or any bridge invocation. V4 therefore produced zero
+> generated writer/transport artifacts, journals, Figma artifacts, or captures
+> and no attempt or result. Existing v4 bytes remain unchanged; the failure is
+> recorded at `recipe/evidence/input-field-live-pivot-v4-failure.json`. Its
+> pre/post fields repeat the last exact verified Scratch fingerprint
+> `10ba6b57da3cfa97`; they are not new v4 observations because no bridge call
+> occurred.
+>
+> V5 is the replacement draft antecedent. It retains every v4 product criterion
+> and threshold and adds a generated 2×128 writer, exact-byte transport,
+> complete expected scene plans, authorization-aware executable orchestration,
+> immediate hash-chained journals, and a strict offline bridge smoke through
+> the live orchestration functions. It is currently uncommitted and
+> unauthorized. No v5 attempt, live write, capture, outcome, or target metric
+> exists. A distinct v5 authorization artifact must be added in a later commit
+> strictly descending from the future antecedent commit; v4 authorization is
+> not reusable. At most three future v5 attempts may run, each from a clean
+> published descendant after authorization. A technically
 > successful mint is not a proven bidirectional round trip until scene-derived
 > inversion and accounting pass.**
 >
@@ -100,8 +117,10 @@
 > `recipe/evidence/input-field-live-pivot-v2/index.json`.
 > Exhausted v3 evidence and all 128 attempt-3 screenshots are indexed at
 > `recipe/evidence/input-field-live-pivot-v3/index.json`; the v4 protocol and
-> pending-uncommitted authorization are indexed at
-> `recipe/evidence/input-field-live-pivot-v4/index.json`.
+> historical authorization declaration are indexed at
+> `recipe/evidence/input-field-live-pivot-v4/index.json`; the v4 entrypoint
+> failure is separate. The executable v5 draft and generated hashes are indexed
+> at `recipe/evidence/input-field-live-pivot-v5/index.json`.
 > The source-neutral calibration corpus, captures, result, exact-byte attempts,
 > and cleanup receipt are indexed at
 > `recipe/evidence/raster-calibration-v1/index.json`.
@@ -1376,20 +1395,20 @@ samples rather than this two-package, 128-cell paired denominator.
 
 ##### Input/Field evidence index
 
-| version        | offline implementation | paired blind recognisability                                                       | WC parity                                               | live Figma  | accounting                                              | overall Input success |
-| -------------- | ---------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------- | ----------- | ------------------------------------------------------- | --------------------- |
-| v1             | pass                   | **fail** — 40/128 < 88/128                                                         | 128/128 byte/pixel/geometry/semantic; parity only       | pending     | offline pass; live pending                              | **false**             |
-| v2             | pass                   | **blocked** — reliable 95/128 > 0/128 consensus, unresolved unchanged-legacy swing | 128/128 perceptual-pixel/geometry/semantic; parity only | pending     | 89/89 fields/source; no loss                            | **false**             |
-| calibrated     | unchanged              | **refused pre-unseal** — invalid grade envelopes; Fleiss κ 0.473 < 0.60            | unchanged                                               | blocked     | unchanged                                               | **false**             |
-| calibration v2 | unchanged              | **incomplete** — A failed 22/24 and 11/12; B/C passed 24/24; performance sealed    | unchanged                                               | blocked     | unchanged                                               | **false**             |
-| replacement v3 | unchanged              | **refused pre-unseal** — 3 valid envelopes; Fleiss κ 0.409255 < 0.60               | unchanged parity-only                                   | blocked     | unchanged                                               | **false**             |
-| paired v1      | unchanged              | **qualification failed** — 44/48, 42/48, 41/48; performance key remains sealed     | unchanged parity-only                                   | blocked     | offline pass; live pending                              | **false**             |
-| objective v1   | unchanged v2 bytes     | human recognisability pending; deterministic visual gate **failed**                | 128/128 parity; structure 128/128                       | blocked     | offline pass; live pending                              | **false**             |
-| objective v2   | pass                   | human recognisability pending; deterministic offline visual gate **passed**        | 128/128 parity; structure 128/128                       | authorized  | offline pass; live pending                              | **false**             |
-| live v1        | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                 | live validation failed; artifacts cleaned               | **failed**  | live 14,064/14,064 accounted                            | **false**             |
-| live v2        | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**         | historical structure/usability metrics retained         | **failed**  | historical self-referential account is not re-certified | **false**             |
-| live v3        | failed                 | attempt 3 retained 128 unscored captures after host normalization failure           | writer/runtime returned; all downstream gates unavailable | **failed** | no measured account; v3 permanently exhausted           | **false**             |
-| live v4 authorization | offline architecture | no capture; no objective values                                                | pinned normalization and transactional journal           | pending parent commit and push | prospective occurrence-preserving account       | **false**             |
+| version               | offline implementation | paired blind recognisability                                                       | WC parity                                                 | live Figma                     | accounting                                              | overall Input success |
+| --------------------- | ---------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------ | ------------------------------------------------------- | --------------------- |
+| v1                    | pass                   | **fail** — 40/128 < 88/128                                                         | 128/128 byte/pixel/geometry/semantic; parity only         | pending                        | offline pass; live pending                              | **false**             |
+| v2                    | pass                   | **blocked** — reliable 95/128 > 0/128 consensus, unresolved unchanged-legacy swing | 128/128 perceptual-pixel/geometry/semantic; parity only   | pending                        | 89/89 fields/source; no loss                            | **false**             |
+| calibrated            | unchanged              | **refused pre-unseal** — invalid grade envelopes; Fleiss κ 0.473 < 0.60            | unchanged                                                 | blocked                        | unchanged                                               | **false**             |
+| calibration v2        | unchanged              | **incomplete** — A failed 22/24 and 11/12; B/C passed 24/24; performance sealed    | unchanged                                                 | blocked                        | unchanged                                               | **false**             |
+| replacement v3        | unchanged              | **refused pre-unseal** — 3 valid envelopes; Fleiss κ 0.409255 < 0.60               | unchanged parity-only                                     | blocked                        | unchanged                                               | **false**             |
+| paired v1             | unchanged              | **qualification failed** — 44/48, 42/48, 41/48; performance key remains sealed     | unchanged parity-only                                     | blocked                        | offline pass; live pending                              | **false**             |
+| objective v1          | unchanged v2 bytes     | human recognisability pending; deterministic visual gate **failed**                | 128/128 parity; structure 128/128                         | blocked                        | offline pass; live pending                              | **false**             |
+| objective v2          | pass                   | human recognisability pending; deterministic offline visual gate **passed**        | 128/128 parity; structure 128/128                         | authorized                     | offline pass; live pending                              | **false**             |
+| live v1               | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                 | live validation failed; artifacts cleaned                 | **failed**                     | live 14,064/14,064 accounted                            | **false**             |
+| live v2               | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**         | historical structure/usability metrics retained           | **failed**                     | historical self-referential account is not re-certified | **false**             |
+| live v3               | failed                 | attempt 3 retained 128 unscored captures after host normalization failure          | writer/runtime returned; all downstream gates unavailable | **failed**                     | no measured account; v3 permanently exhausted           | **false**             |
+| live v4 authorization | offline architecture   | no capture; no objective values                                                    | pinned normalization and transactional journal            | pending parent commit and push | prospective occurrence-preserving account               | **false**             |
 
 Input/Field v1 remains a failed historical result. V2's internally reliable
 consensus meets the within-batch arithmetic criterion without a denominator
@@ -1409,13 +1428,13 @@ recognisability remains pending.
 
 #### Pivot progress
 
-| archetype   | progress                                                                                           | next evidence boundary                                                                                   |
-| ----------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| Button      | **technical mint retained; overall false/pending**                                                 | attributable human signoff plus fresh scene-derived inversion/accounting                                 |
+| archetype   | progress                                                                                                          | next evidence boundary                                                                                         |
+| ----------- | ----------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| Button      | **technical mint retained; overall false/pending**                                                                | attributable human signoff plus fresh scene-derived inversion/accounting                                       |
 | Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted and cleaned; v4 authorization pending commit; false** | parent commits the separate authorization, pushes it, and runs the history/upstream preflight before attempt 1 |
-| Combobox    | not claimed                                                                                        | detached listbox/popover structure                                                                       |
-| Data Table  | not claimed                                                                                        | row/column templates and matched matrix                                                                  |
-| Calendar    | not claimed                                                                                        | new archetype plus absolute acceptance                                                                   |
+| Combobox    | not claimed                                                                                                       | detached listbox/popover structure                                                                             |
+| Data Table  | not claimed                                                                                                       | row/column templates and matched matrix                                                                        |
+| Calendar    | not claimed                                                                                                       | new archetype plus absolute acceptance                                                                         |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
 

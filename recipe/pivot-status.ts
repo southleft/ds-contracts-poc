@@ -33,9 +33,23 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 authorization pending parent commit; Button false/pending; Input false";
+  "Input live v3 exhausted; v4 authorization lineage non-executable; v5 draft uncommitted and unauthorized; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
+const V4_FAILURE_STATUS =
+  "authorization and preflight passed; committed entrypoint refused before phase 1 and writer; lineage invalid for execution";
+const V4_FAILURE_PATH =
+  "recipe/evidence/input-field-live-pivot-v4-failure.json";
+const V4_FAILURE_SHA256 =
+  "43161312f76b50cb1bd392b0ca55d8892f3af4f5bfd809ec94b944ed0e7a48ee";
+const V5_ROOT = "recipe/evidence/input-field-live-pivot-v5";
+const V5_STATUS =
+  "draft antecedent uncommitted; pending separate authorization; execution forbidden";
+const V5_PROTOCOL_SHA256 =
+  "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf";
+const V5_PLAN_SHA256 =
+  "e651ddc0e47476da219d587161d02394ad03025667e9cd44460d821eef1df178";
+const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
   "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b";
 const V4_INDEX_PATH = "recipe/evidence/input-field-live-pivot-v4/index.json";
@@ -151,7 +165,7 @@ export function validatePivotStatus(
     status.input?.liveV3?.attempt3?.exactFigmaIdsAvailable !== false ||
     status.input?.liveV3?.attempt3?.remainingOwnedNodes !== 0 ||
     status.input?.liveV3?.attempt3?.remainingOwnedCollections !== 0 ||
-    status.input?.liveV4?.status !== V4_PENDING_STATUS ||
+    status.input?.liveV4?.status !== V4_FAILURE_STATUS ||
     status.input?.liveV4?.protocolStatus !== INPUT_LIVE_V4_STATUS ||
     status.input?.liveV4?.antecedentCommit !==
       INPUT_LIVE_V4_ANTECEDENT_COMMIT ||
@@ -161,15 +175,43 @@ export function validatePivotStatus(
     status.input?.liveV4?.authorizationPath !==
       INPUT_LIVE_V4_AUTHORIZATION_PATH ||
     status.input?.liveV4?.authorizationSha256 !== V4_AUTHORIZATION_SHA256 ||
+    status.input?.liveV4?.authorizationCommit !== V4_AUTHORIZATION_COMMIT ||
     status.input?.liveV4?.authorizationState !==
-      "pending-uncommitted-authorization" ||
+      "committed and published but non-executable entrypoint" ||
     status.input?.liveV4?.authorizationEstablishedOnlyByHistoryVerifier !==
       true ||
+    status.input?.liveV4?.authorizationVerifierPassed !== true ||
+    status.input?.liveV4?.preflightPassed !== true ||
+    status.input?.liveV4?.entrypointRefusedBeforePhase1 !== true ||
+    status.input?.liveV4?.writerReached !== false ||
+    status.input?.liveV4?.bridgeInvocations !== 0 ||
+    status.input?.liveV4?.generatedWriterPresent !== false ||
+    status.input?.liveV4?.generatedTransportPresent !== false ||
+    status.input?.liveV4?.phaseJournalsWritten !== 0 ||
+    status.input?.liveV4?.captureArtifactsWritten !== 0 ||
+    status.input?.liveV4?.figmaArtifactsCreated !== 0 ||
+    status.input?.liveV4?.failureEvidencePath !== V4_FAILURE_PATH ||
+    status.input?.liveV4?.failureEvidenceSha256 !== V4_FAILURE_SHA256 ||
+    status.input?.liveV4?.authorizationReusableForV5 !== false ||
     status.input?.liveV4?.authorized !== false ||
     status.input?.liveV4?.liveExecutionOccurred !== false ||
     status.input?.liveV4?.attemptsExecuted !== 0 ||
-    status.input?.liveV4?.nextAttempt !== 1 ||
-    status.input?.liveV4?.humanSignoff !== "pending"
+    status.input?.liveV4?.nextAttempt !== null ||
+    status.input?.liveV4?.humanSignoff !== "pending" ||
+    status.input?.liveV5?.status !== V5_STATUS ||
+    status.input?.liveV5?.protocolSha256 !== V5_PROTOCOL_SHA256 ||
+    status.input?.liveV5?.writerPlanSha256 !== V5_PLAN_SHA256 ||
+    status.input?.liveV5?.authorizationPresent !== false ||
+    status.input?.liveV5?.authorizationCommitted !== false ||
+    status.input?.liveV5?.authorized !== false ||
+    status.input?.liveV5?.v4AuthorizationReused !== false ||
+    status.input?.liveV5?.attemptsExecuted !== 0 ||
+    status.input?.liveV5?.nextAttempt !== 1 ||
+    status.input?.liveV5?.maximumFutureAttempts !== 3 ||
+    status.input?.liveV5?.liveExecutionOccurred !== false ||
+    status.input?.liveV5?.captureArtifactsPresent !== false ||
+    status.input?.liveV5?.outcomes !== null ||
+    status.input?.liveV5?.humanSignoff !== "pending"
   )
     fail("v3 exhausted/v4 draft status");
   const unexpected = v3Files.filter(
@@ -230,6 +272,9 @@ export function verifyPivotStatus(): void {
     `${V3_ROOT}/index.json`,
   );
   const v4Index = readRepositoryJson<Record<string, any>>(V4_INDEX_PATH);
+  const v5Index = readRepositoryJson<Record<string, any>>(
+    `${V5_ROOT}/index.json`,
+  );
   const protocolHash = sha256(
     readRepositoryEvidence(INPUT_LIVE_V3_PROTOCOL_PATH),
   );
@@ -247,6 +292,47 @@ export function verifyPivotStatus(): void {
       sha256(readRepositoryEvidence(INPUT_LIVE_V4_AUTHORIZATION_PATH)),
     ),
   );
+  if (
+    sha256(readRepositoryEvidence(V4_FAILURE_PATH)) !== V4_FAILURE_SHA256 ||
+    sha256(readRepositoryEvidence(`${V5_ROOT}/protocol.json`)) !==
+      V5_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V5_ROOT}/writer-plan.json`)) !==
+      V5_PLAN_SHA256
+  )
+    failures.push("v4 failure or v5 draft evidence hash mismatch");
+  if (
+    v5Index.artifactVersion !== "input-live-v5-index-v1" ||
+    v5Index.status !== V5_STATUS ||
+    v5Index.protocol?.sha256 !== V5_PROTOCOL_SHA256 ||
+    v5Index.authorization?.present !== false ||
+    v5Index.authorization?.committed !== false ||
+    v5Index.authorization?.authorized !== false ||
+    v5Index.authorization?.v4AuthorizationReusable !== false ||
+    v5Index.attempts?.executed !== 0 ||
+    v5Index.attempts?.next !== 1 ||
+    v5Index.attempts?.maximum !== 3 ||
+    v5Index.liveExecutionOccurred !== false ||
+    v5Index.captureArtifactsPresent !== false ||
+    v5Index.outcomes !== null ||
+    v5Index.humanSignoff !== "pending" ||
+    v5Index.overallInputSuccess !== false
+  )
+    failures.push("v5 draft authorization/attempt/status overclaim");
+  for (const artifact of [
+    v5Index.generated?.writer,
+    v5Index.generated?.transportEnvelope,
+    v5Index.generated?.transportWrapper,
+    v5Index.generated?.writerPlan,
+    v5Index.generated?.conformance,
+    ...(v5Index.generated?.expectedScenePlans ?? []),
+  ] as Array<{ path: string; sha256: string }>) {
+    if (
+      !artifact?.path ||
+      !artifact.sha256 ||
+      sha256(readRepositoryEvidence(artifact.path)) !== artifact.sha256
+    )
+      failures.push(`v5 generated artifact hash mismatch: ${artifact?.path}`);
+  }
   for (const [dependencyPath, dependencyHash] of Object.entries(
     protocol.implementationDependencies?.sha256 ?? {},
   )) {

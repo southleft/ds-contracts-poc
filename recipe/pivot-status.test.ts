@@ -20,7 +20,7 @@ const fixtures = () => ({
   ),
 });
 
-test("v3 remains exhausted and v4 authorization remains pending-uncommitted", () => {
+test("v3 stays exhausted while the historical v4 preparation index remains immutable", () => {
   const value = fixtures();
   assert.deepEqual(
     validatePivotStatus(
@@ -52,7 +52,7 @@ test("v3 remains exhausted and v4 authorization remains pending-uncommitted", ()
   );
 });
 
-test("v4 index cannot claim authorization, capture, signoff, or criteria changes", () => {
+test("historical v4 preparation index cannot claim capture, signoff, or criteria changes", () => {
   const index = readRepositoryJson<Record<string, any>>(
     "recipe/evidence/input-field-live-pivot-v4/index.json",
   );

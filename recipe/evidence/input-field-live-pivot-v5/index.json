@@ -1,0 +1,88 @@
+{
+  "artifactVersion": "input-live-v5-index-v1",
+  "status": "draft antecedent uncommitted; pending separate authorization; execution forbidden",
+  "protocol": {
+    "path": "recipe/evidence/input-field-live-pivot-v5/protocol.json",
+    "sha256": "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf",
+    "criteriaRetainedFromV4": true
+  },
+  "authorization": {
+    "path": "recipe/evidence/input-field-live-pivot-v5/capture-authorization.json",
+    "present": false,
+    "committed": false,
+    "upstreamPublished": false,
+    "authorized": false,
+    "separateCommitRequired": true,
+    "v4AuthorizationReusable": false
+  },
+  "generated": {
+    "writer": {
+      "path": "recipe/evidence/input-field-live-pivot-v5/writer.js",
+      "bytes": 2453320,
+      "sha256": "1d7028a5d726d642c268f64f3f55cbfa25e6d293404203aca3a111c7916bea0f"
+    },
+    "transportEnvelope": {
+      "path": "recipe/evidence/input-field-live-pivot-v5/transport-envelope.json",
+      "sha256": "678b74fb6cb77aeac35cbd55b930fdd22fd4d741b837114ef5004302c5cea16f"
+    },
+    "transportWrapper": {
+      "path": "recipe/evidence/input-field-live-pivot-v5/writer-wrapper.txt",
+      "bytes": 3281237,
+      "sha256": "37c781786e6b765db9ae3330f9503a254268cf0b09bdc7279afd4f73d431c15f"
+    },
+    "writerPlan": {
+      "path": "recipe/evidence/input-field-live-pivot-v5/writer-plan.json",
+      "sha256": "e651ddc0e47476da219d587161d02394ad03025667e9cd44460d821eef1df178"
+    },
+    "conformance": {
+      "path": "recipe/evidence/input-field-live-pivot-v5/conformance-report.json",
+      "sha256": "05e0d5fcf4f37c28774c2812fda0568616ef4b803488186fa097fa075a189755",
+      "ok": true,
+      "variants": 256,
+      "variables": 152,
+      "pluginDataWrites": 11547,
+      "propertyWrites": 37647,
+      "bindings": 8192
+    },
+    "expectedScenePlans": [
+      {
+        "library": "mui",
+        "path": "recipe/evidence/input-field-live-pivot-v5/expected-scene-plan-mui.json.gz",
+        "sha256": "96e8d543b259066268af2d871f1a0258bdd3173b5c4402ed3f4d57296cfddfa3",
+        "facts": 22811,
+        "generatedDescendants": 128
+      },
+      {
+        "library": "polaris",
+        "path": "recipe/evidence/input-field-live-pivot-v5/expected-scene-plan-polaris.json.gz",
+        "sha256": "6e6517f9a819ce6cffff9e6bda913f3c9c8bdd6d0da95bcebffcdb972bbcd41d",
+        "facts": 20915,
+        "generatedDescendants": 128
+      }
+    ]
+  },
+  "offlineSmoke": {
+    "usesLiveEntrypointOrchestration": true,
+    "strictFakeBridgeInjected": true,
+    "simulatedAuthorizationRequired": true,
+    "generatedWriterPayloadEvaluated": true,
+    "orderedJournalPhases": 8,
+    "captureBeforeGatesRejected": true,
+    "captureAfterGatesReached": true,
+    "retentionAndCleanupReached": true,
+    "figmaArtifactsCreated": 0,
+    "captureArtifactsCreated": 0,
+    "resultClaimed": false
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3,
+    "cleanPublishedDescendantsOnly": true
+  },
+  "liveExecutionOccurred": false,
+  "captureArtifactsPresent": false,
+  "outcomes": null,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

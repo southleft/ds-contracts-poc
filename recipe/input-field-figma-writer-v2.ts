@@ -85,11 +85,15 @@ export function validateInputFieldLiveMockV2(
  */
 export function emitInputFieldFigmaWriterV2(
   inputs: readonly InputFieldFigmaWriterInput[],
+  options: {
+    namespace?: string;
+    runSuffix?: "input-v2" | "input-v5";
+  } = {},
 ): InputFieldFigmaWriterV2 {
   const base = lowerInputFieldFigmaWriter(inputs, {
     version: 2,
-    namespace: INPUT_FIELD_FIGMA_V2_NAMESPACE,
-    runSuffix: "input-v2",
+    namespace: options.namespace ?? INPUT_FIELD_FIGMA_V2_NAMESPACE,
+    runSuffix: options.runSuffix ?? "input-v2",
     overlayPositioning: true,
     restoreFillAfterComponentProperties: true,
     sceneReadbackInstrumentation: true,

@@ -70,7 +70,7 @@ export interface InputFieldFigmaWriter {
 export interface InputFieldFigmaWriterProgram {
   version: 1 | 2;
   namespace: string;
-  runSuffix: "input-v1" | "input-v2";
+  runSuffix: "input-v1" | "input-v2" | "input-v5";
   overlayPositioning: boolean;
   restoreFillAfterComponentProperties: boolean;
   sceneReadbackInstrumentation: boolean;
@@ -681,10 +681,14 @@ export function lowerInputFieldFigmaWriter(
   inputs: readonly InputFieldFigmaWriterInput[],
   program: InputFieldFigmaWriterProgram,
 ): InputFieldFigmaWriter {
-  if (
-    !/^ds\.contracts\.input\.recipe\.v[12]$/.test(program.namespace) ||
-    program.version !== Number(program.runSuffix.at(-1))
-  ) {
+  const versionedLineage =
+    /^ds\.contracts\.input\.recipe\.v[12]$/.test(program.namespace) &&
+    program.version === Number(program.runSuffix.at(-1));
+  const v5ExecutionLineage =
+    program.namespace === "ds.contracts.input.recipe.v5" &&
+    program.version === 2 &&
+    program.runSuffix === "input-v5";
+  if (!versionedLineage && !v5ExecutionLineage) {
     throw new TypeError("input-field writer: invalid typed program identity");
   }
   const sourcePlans = inputs.map(planSource);

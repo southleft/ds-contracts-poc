@@ -67,11 +67,16 @@ export function decodeWriterTransportEnvelope(
 
 export function createWriterTransportWrapper(
   envelope: WriterTransportEnvelope,
+  stateKey = "__recipeTransportV3",
 ): string {
   const serialized = JSON.stringify(envelope);
+  const stateAssignment =
+    stateKey === "__recipeTransportV3"
+      ? "globalThis.__recipeTransportV3=state;"
+      : `globalThis[${JSON.stringify(stateKey)}]=state;`;
   return `return await (async()=>{const envelope=${serialized};${FIGMA_PORTABLE_RUNTIME}
 const state={protocol:envelope.protocol,payloadBytes:envelope.payloadBytes,expectedSha256:envelope.payloadSha256,decodedBytes:null,decodedSha256:null,hashImplementation:null,utf8Implementation:null,evalBegan:false,evalCompleted:false,runtimePreflight:null};
-globalThis.__recipeTransportV3=state;
+${stateAssignment}
 const fail=(code)=>{state.failure=code;throw new Error(code);};
 state.runtimePreflight=runtimePreflight();
 if(figma.fileKey!=="byMp6lt0Ij9b2QbkDGFwBh"||figma.root.name!=="Scratch Project"||figma.editorType!=="figma")fail("WRITER-TRANSPORT-WRONG-TARGET");
@@ -95,12 +100,16 @@ return {transport:state,result};
 
 export function createStagedWriterTransportWrapper(
   envelope: WriterTransportEnvelope,
+  stateKey = "__recipeTransportV3",
 ): string {
   const placeholder = "__WRITER_TRANSPORT_STAGED_PAYLOAD__";
-  const template = createWriterTransportWrapper({
-    ...envelope,
-    payload: placeholder,
-  });
+  const template = createWriterTransportWrapper(
+    {
+      ...envelope,
+      payload: placeholder,
+    },
+    stateKey,
+  );
   const marker = `"payload":"${placeholder}"`;
   if (!template.includes(marker)) {
     throw new Error("WRITER-TRANSPORT-STAGED-TEMPLATE");
@@ -113,10 +122,11 @@ export function createStagedWriterTransportWrapper(
 
 export function createWriterTransportArtifact(
   writerBytes: Uint8Array,
+  stateKey = "__recipeTransportV3",
 ): WriterTransportArtifact {
   const envelope = createWriterTransportEnvelope(writerBytes);
   const envelopeBytes = `${JSON.stringify(envelope, null, 2)}\n`;
-  const wrapper = createWriterTransportWrapper(envelope);
+  const wrapper = createWriterTransportWrapper(envelope, stateKey);
   return {
     envelope,
     envelopeSha256: sha256(envelopeBytes),
