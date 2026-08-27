@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -500,8 +500,14 @@ const V19_AUTHORIZATION_TEMPLATE_SHA256 =
 const V19_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v19-status.json";
 const V19_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V19_BASE_COMMIT = "7a576062c2998f5fa0733c856f7b0424a07b674d";
+const V19_ANTECEDENT_COMMIT = "53e0ee50e1c7ab08442bec8b666cd95cbd92e600";
+const V19_AUTHORIZATION_PATH = `${V19_ROOT}/capture-authorization.json`;
+const V19_AUTHORIZATION_SHA256 =
+  "fc8c0d6baf426239507c5d1c8e8c5c40d1b9c01f7a0bddd90230b9956b6012e1";
+const V19_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "af528b74b14780f6978056ff803c452b27a714830eeb405a1a47fa936a970de5";
 const V18_SCENE_READBACK_SHA256 =
   "3028b85f4605c058dfe79344417c75a5ac2a550d8f693d1d61f72931a64a7cab";
 const V17_SCENE_READBACK_SHA256 =
@@ -1577,9 +1583,16 @@ export function validatePivotStatus(
     status.input?.liveV19?.antecedentHashSetSha256 !== V19_HASH_SET_SHA256 ||
     status.input?.liveV19?.authorizationTemplateSha256 !==
       V19_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV19?.authorizationPresent !== false ||
-    status.input?.liveV19?.authorizationCommitted !== false ||
+    status.input?.liveV19?.antecedentCommit !== V19_ANTECEDENT_COMMIT ||
+    status.input?.liveV19?.authorizationPresent !== true ||
+    status.input?.liveV19?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV19?.authorizationEffective !== false ||
+    status.input?.liveV19?.authorizationPath !== V19_AUTHORIZATION_PATH ||
+    status.input?.liveV19?.authorizationSha256 !== V19_AUTHORIZATION_SHA256 ||
+    status.input?.liveV19?.signingPublicKeySpkiSha256 !==
+      V19_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV19?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV19?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV19?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -3290,9 +3303,16 @@ export function verifyPivotStatus(): void {
     v19Status.artifactVersion !== "input-live-v19-status-v1" ||
     v19Status.status !== V19_STATUS ||
     v19Status.baseCommit !== V19_BASE_COMMIT ||
-    v19Status.authorization?.present !== false ||
-    v19Status.authorization?.committed !== false ||
+    v19Status.antecedent?.commit !== V19_ANTECEDENT_COMMIT ||
+    v19Status.authorization?.present !== true ||
+    v19Status.authorization?.commitStateDerivedByHistory !== true ||
     v19Status.authorization?.effective !== false ||
+    v19Status.authorization?.path !== V19_AUTHORIZATION_PATH ||
+    v19Status.authorization?.sha256 !== V19_AUTHORIZATION_SHA256 ||
+    v19Status.authorization?.signingPublicKeySpkiSha256 !==
+      V19_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V19_AUTHORIZATION_PATH)) !==
+      V19_AUTHORIZATION_SHA256 ||
     v19Status.authorization?.v18AuthorizationReusable !== false ||
     v19Status.smallestHonestDelta
       ?.taughtUniformPerSideStrokeWeightAsStrokes0Weight !== true ||
