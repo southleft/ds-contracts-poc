@@ -1,0 +1,119 @@
+{
+  "artifactVersion": "input-live-v19-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "d3b5429cac9df5877143dfb79e617b544d7688f0",
+  "codeCommit": "d3b5429cac9df5877143dfb79e617b544d7688f0",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 976,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8402443,
+    "hostNormalizeAccount": false,
+    "marker": "INPUT-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL"
+  },
+  "v16FailureCleared": {
+    "leadingSlotSolidPaintSurfacedFromPayloadOrChild": true
+  },
+  "v17FailureCleared": {
+    "leadingSlotColorBindingSurfacedFromChild": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedSurfaceStrokeWeightBindings": {
+    "mui": {
+      "hasStrokes0Weight": 0,
+      "hasStrokeWeight": 0,
+      "hasPerSideStrokeWeights": 128,
+      "fourPerSideBindSameFloat": 128,
+      "total": 128
+    },
+    "polaris": {
+      "hasStrokes0Weight": 0,
+      "hasStrokeWeight": 0,
+      "hasPerSideStrokeWeights": 128,
+      "fourPerSideBindSameFloat": 128,
+      "total": 128
+    }
+  },
+  "observedVariantWidthBindings": {
+    "mui": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "failingVariantHasFigmaWidthFloat": true,
+      "failingVariantRole": "input-field/variant/small/default/placeholder/true/none",
+      "total": 128
+    },
+    "polaris": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "failingVariantHasFigmaWidthFloat": true,
+      "failingVariantRole": "input-field/variant/small/default/placeholder/true/none",
+      "total": 128
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:990 via recipe/input-field-live-v3-verifier-v19.ts:443",
+    "messages": [
+      "input-field@1: input-field/variant/small/default/placeholder/true/none: required token binding layout.width.value must appear exactly once"
+    ],
+    "cause": "Carried v19 scene-readback was not the refusal locus. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8402443 bytes). Content-width census remains MUI 128/128 FILL and Polaris 128/128 FILL. Host collapse refused required token binding layout.width.value on the first none-adornment variant. Extract shows that variant binds Figma width to an existing FLOAT (MUI imported.text-field.small.width; Polaris p.text-field.slim.width) and binds no layout.width.value. Scene-readback maps Figma width to width.value. Across both roots, 32+32 variants bind Figma width and 96+96 bind no width. Surface nodes still bind four per-side stroke weights to the same FLOAT and bind no strokeWeight / strokes.0.weight in the extract; host did not refuse strokes.0.weight this attempt. Do not teach FIXED. Do not invent a variable. Do not restart v19 attempt 2 as-is. Scene-readback-v19 bytes are in the v19 hash set.",
+    "inputFieldRecipeInV19AntecedentHashSet": false,
+    "writerInV19AntecedentHashSet": true,
+    "restoreInV19AntecedentHashSet": true,
+    "extractRuntimeInV19AntecedentHashSet": true,
+    "sceneReadbackInV19AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v17AntecedentBytesUnchanged": true,
+  "v17SceneReadbackUnchanged": true,
+  "v17AuthorizationBytesUnchanged": true,
+  "v18AntecedentBytesUnchanged": true,
+  "v18SceneReadbackUnchanged": true,
+  "v18AuthorizationBytesUnchanged": true,
+  "v18Attempt1BytesUnchanged": true,
+  "v19AntecedentBytesUnchanged": true,
+  "v19AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV19Attempt2WithoutVariantLayoutWidthForbidden": true
+}

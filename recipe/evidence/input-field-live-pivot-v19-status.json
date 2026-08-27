@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v19-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused variant layout.width.value; cleanup complete",
   "baseCommit": "7a576062c2998f5fa0733c856f7b0424a07b674d",
   "antecedent": {
     "commit": "53e0ee50e1c7ab08442bec8b666cd95cbd92e600",
@@ -101,12 +101,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v19-attempt-1.json",
+  "attempt1Sha256": "2e9126c40c8b24fb12f70362667fe13d51d08fd1c3841ec1d57195c4d579671c",
+  "restartAsV19Attempt2WithoutVariantLayoutWidthForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }
