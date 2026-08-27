@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v3-index-v1",
-  "status": "draft-uncommitted; chronology unproven; capture forbidden",
+  "status": "runner prepared-uncommitted; capture not yet run",
   "captureAuthorized": false,
   "protocol": {
     "path": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
@@ -14,8 +14,14 @@
     "figmaOrCaptureRun": false,
     "claimsLiveReadiness": false
   },
+  "runnerPreparation": {
+    "prepared": true,
+    "committed": false,
+    "figmaOrCaptureRun": false,
+    "generatedPlan": "recipe/evidence/input-field-live-pivot-v3/writer-plan.json"
+  },
   "blockers": [
-    "protocol has no externally verifiable committed chronology",
+    "runner and verifier scaffolding are not yet committed as a clean authorization descendant",
     "scene-derived live inversion/accounting has not run",
     "typed adornment/font lowering has not been verified against a newly authorized Figma scene",
     "attributable human signoff has not occurred"

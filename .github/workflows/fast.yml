@@ -261,6 +261,12 @@ jobs:
       - name: recipe:input-field:live:v3:authorization:check (committed antecedent and clean descendant)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v3:authorization:check -- --capture-code-commit HEAD
+      - name: recipe:input-field:live:v3:offline:check (deterministic plan, scene proof, hard-gate falsifications)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v3:offline:check
+      - name: recipe:input-field:live:v3:preflight (clean authorized descendant and exact offline execution bytes)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v3:preflight -- --file-key byMp6lt0Ij9b2QbkDGFwBh --bridge-exact-count 1
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check

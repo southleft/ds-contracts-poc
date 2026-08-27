@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "criterion committed; authorization is git-history-derived; no capture has occurred",
+  "status": "criterion and authorization committed; runner prepared-uncommitted; capture not yet run",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -58,7 +58,7 @@
       ]
     },
     "liveV3": {
-      "status": "criterion committed; authorization requires the committed first-add artifact; no capture has occurred",
+      "status": "runner prepared-uncommitted; capture not yet run",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
       "protocolSha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23",
       "antecedentCommit": "be6b01300ad99d8a29ea4c11508d192dec84bbea",
@@ -66,6 +66,8 @@
       "captureAuthorizationDerivedByGate": true,
       "captureOccurred": false,
       "offlineCorrectionTask2Implemented": true,
+      "runnerPrepared": true,
+      "runnerCommitted": false,
       "sceneDerivedLiveVerificationRun": false
     }
   }

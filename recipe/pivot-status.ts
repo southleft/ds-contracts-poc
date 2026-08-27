@@ -17,7 +17,20 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "criterion committed; authorization is git-history-derived; no capture has occurred";
+  "criterion and authorization committed; runner prepared-uncommitted; capture not yet run";
+const V3_INDEX_STATUS = "runner prepared-uncommitted; capture not yet run";
+const V3_PREPARED_FILES = [
+  "capture-authorization.json",
+  "conformance-report.json",
+  "expected-scene-plan-mui.json.gz",
+  "expected-scene-plan-polaris.json.gz",
+  "index.json",
+  "protocol.json",
+  "transport-envelope.json",
+  "writer-plan.json",
+  "writer-wrapper.txt",
+  "writer.js",
+] as const;
 const sha256 = (bytes: Uint8Array): string =>
   createHash("sha256").update(bytes).digest("hex");
 
@@ -35,7 +48,7 @@ export function validatePivotStatus(
   if (
     status.status !== STATUS_INDEX_STATUS ||
     protocol.status !== DRAFT_STATUS ||
-    index.status !== DRAFT_STATUS
+    index.status !== V3_INDEX_STATUS
   )
     fail("criterion/authorization chronology status");
   if (
@@ -90,9 +103,7 @@ export function validatePivotStatus(
     fail("v3 result must be absent");
   const unexpected = v3Files.filter(
     (file) =>
-      !["capture-authorization.json", "index.json", "protocol.json"].includes(
-        file,
-      ),
+      !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
   );
   if (unexpected.length > 0)
     fail(`capture forbidden; unexpected v3 artifacts: ${unexpected.join(",")}`);

@@ -9,9 +9,10 @@
 > still fails adornment-content and MUI-stratum safeguards. Commit
 > `be6b01300ad99d8a29ea4c11508d192dec84bbea` now fixes the exact prospective
 > `input-live-v3` criterion bytes before capture authorization. A separate
-> authorization artifact is pending its own commit; until Git history contains
-> that first-add commit, the gate reports `pending-uncommitted-authorization`
-> and capture remains forbidden. Current machine status is
+> authorization artifact was first committed at
+> `ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b`. The typed runner, verifier,
+> preflight, and evidence writer are prepared-uncommitted; capture has not run.
+> Current machine status is
 > `recipe/evidence/status-index.json`; the v3 draft is
 > `recipe/evidence/input-field-live-pivot-v3/index.json`. A technically
 > successful mint is not a proven bidirectional round trip until scene-derived
@@ -126,11 +127,10 @@ bytes, explicit page ownership, collection/adapter collision refusal, and
 future scene-readback instrumentation. Scene accounting compares the complete
 adornment payload and visual fields with stable occurrence IDs.
 
-This is an offline correction only. Button overall remains false/pending and
-Input remains blocked. No Figma v3 write or capture occurred. The prospective
-v3 criterion semantics and thresholds are unchanged; its implementation
-dependency hashes are refreshed, but its status remains
-`draft-uncommitted; chronology unproven; capture forbidden`.
+This remains offline preparation only. Button overall remains false/pending and
+Input remains blocked. The v3 runner is prepared-uncommitted; no Figma v3 write
+or capture occurred. The prospective v3 criterion bytes, semantics, thresholds,
+antecedent, and authorization artifact are unchanged.
 
 ## 0 · The decision, in one paragraph
 
@@ -1273,19 +1273,19 @@ samples rather than this two-package, 128-cell paired denominator.
 
 ##### Input/Field evidence index
 
-| version        | offline implementation | paired blind recognisability                                                         | WC parity                                               | live Figma  | accounting                                              | overall Input success |
-| -------------- | ---------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------- | ----------- | ------------------------------------------------------- | --------------------- |
-| v1             | pass                   | **fail** — 40/128 < 88/128                                                           | 128/128 byte/pixel/geometry/semantic; parity only       | pending     | offline pass; live pending                              | **false**             |
-| v2             | pass                   | **blocked** — reliable 95/128 > 0/128 consensus, unresolved unchanged-legacy swing   | 128/128 perceptual-pixel/geometry/semantic; parity only | pending     | 89/89 fields/source; no loss                            | **false**             |
-| calibrated     | unchanged              | **refused pre-unseal** — invalid grade envelopes; Fleiss κ 0.473 < 0.60              | unchanged                                               | blocked     | unchanged                                               | **false**             |
-| calibration v2 | unchanged              | **incomplete** — A failed 22/24 and 11/12; B/C passed 24/24; performance sealed      | unchanged                                               | blocked     | unchanged                                               | **false**             |
-| replacement v3 | unchanged              | **refused pre-unseal** — 3 valid envelopes; Fleiss κ 0.409255 < 0.60                 | unchanged parity-only                                   | blocked     | unchanged                                               | **false**             |
-| paired v1      | unchanged              | **qualification failed** — 44/48, 42/48, 41/48; performance key remains sealed       | unchanged parity-only                                   | blocked     | offline pass; live pending                              | **false**             |
-| objective v1   | unchanged v2 bytes     | human recognisability pending; deterministic visual gate **failed**                  | 128/128 parity; structure 128/128                       | blocked     | offline pass; live pending                              | **false**             |
-| objective v2   | pass                   | human recognisability pending; deterministic offline visual gate **passed**          | 128/128 parity; structure 128/128                       | authorized  | offline pass; live pending                              | **false**             |
-| live v1        | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                   | live validation failed; artifacts cleaned               | **failed**  | live 14,064/14,064 accounted                            | **false**             |
-| live v2        | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**           | historical structure/usability metrics retained         | **failed**  | historical self-referential account is not re-certified | **false**             |
-| live v3        | pending                | criterion committed; authorization artifact pending its first-add commit; no capture | scene-derived protocol only; no capture                 | **blocked** | prospective multiset account                            | **false**             |
+| version        | offline implementation | paired blind recognisability                                                       | WC parity                                               | live Figma  | accounting                                              | overall Input success |
+| -------------- | ---------------------- | ---------------------------------------------------------------------------------- | ------------------------------------------------------- | ----------- | ------------------------------------------------------- | --------------------- |
+| v1             | pass                   | **fail** — 40/128 < 88/128                                                         | 128/128 byte/pixel/geometry/semantic; parity only       | pending     | offline pass; live pending                              | **false**             |
+| v2             | pass                   | **blocked** — reliable 95/128 > 0/128 consensus, unresolved unchanged-legacy swing | 128/128 perceptual-pixel/geometry/semantic; parity only | pending     | 89/89 fields/source; no loss                            | **false**             |
+| calibrated     | unchanged              | **refused pre-unseal** — invalid grade envelopes; Fleiss κ 0.473 < 0.60            | unchanged                                               | blocked     | unchanged                                               | **false**             |
+| calibration v2 | unchanged              | **incomplete** — A failed 22/24 and 11/12; B/C passed 24/24; performance sealed    | unchanged                                               | blocked     | unchanged                                               | **false**             |
+| replacement v3 | unchanged              | **refused pre-unseal** — 3 valid envelopes; Fleiss κ 0.409255 < 0.60               | unchanged parity-only                                   | blocked     | unchanged                                               | **false**             |
+| paired v1      | unchanged              | **qualification failed** — 44/48, 42/48, 41/48; performance key remains sealed     | unchanged parity-only                                   | blocked     | offline pass; live pending                              | **false**             |
+| objective v1   | unchanged v2 bytes     | human recognisability pending; deterministic visual gate **failed**                | 128/128 parity; structure 128/128                       | blocked     | offline pass; live pending                              | **false**             |
+| objective v2   | pass                   | human recognisability pending; deterministic offline visual gate **passed**        | 128/128 parity; structure 128/128                       | authorized  | offline pass; live pending                              | **false**             |
+| live v1        | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                 | live validation failed; artifacts cleaned               | **failed**  | live 14,064/14,064 accounted                            | **false**             |
+| live v2        | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**         | historical structure/usability metrics retained         | **failed**  | historical self-referential account is not re-certified | **false**             |
+| live v3        | pending                | runner prepared-uncommitted; capture not yet run                                   | scene-derived verifier prepared; no capture             | **blocked** | prospective multiset account                            | **false**             |
 
 Input/Field v1 remains a failed historical result. V2's internally reliable
 consensus meets the within-batch arithmetic criterion without a denominator
@@ -1305,13 +1305,13 @@ recognisability remains pending.
 
 #### Pivot progress
 
-| archetype   | progress                                                                                 | next evidence boundary                                                                 |
-| ----------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| Button      | **technical mint retained; overall false/pending**                                       | attributable human signoff plus fresh scene-derived inversion/accounting               |
-| Input/Field | **offline objective passed; live v1/v2 failed and cleaned; v3 capture forbidden; false** | complete correction task 2, then commit the criterion before any authorized v3 capture |
-| Combobox    | not claimed                                                                              | detached listbox/popover structure                                                     |
-| Data Table  | not claimed                                                                              | row/column templates and matched matrix                                                |
-| Calendar    | not claimed                                                                              | new archetype plus absolute acceptance                                                 |
+| archetype   | progress                                                                                           | next evidence boundary                                                                                   |
+| ----------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
+| Button      | **technical mint retained; overall false/pending**                                                 | attributable human signoff plus fresh scene-derived inversion/accounting                                 |
+| Input/Field | **offline objective passed; live v1/v2 failed and cleaned; v3 runner prepared-uncommitted; false** | commit runner scaffolding as a clean authorization descendant, then pass preflight before manual capture |
+| Combobox    | not claimed                                                                                        | detached listbox/popover structure                                                                       |
+| Data Table  | not claimed                                                                                        | row/column templates and matched matrix                                                                  |
+| Calendar    | not claimed                                                                                        | new archetype plus absolute acceptance                                                                   |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
 
@@ -1578,15 +1578,16 @@ It must strictly descend from the antecedent. A capture `codeCommit` must equal
 that authorization commit or be a clean descendant containing identical
 authorization and protocol bytes.
 
-The authorization artifact exists in the authoring tree but is not externally
-established until its parent change is committed. Before that commit,
+The authorization artifact was first added by
+`ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b`. The typed runner/verifier
+scaffolding is now prepared-uncommitted and capture has not run. After that
+scaffolding is committed from a clean tree, both
 `npm run recipe:input-field:live:v3:authorization:check -- --capture-code-commit HEAD`
-must fail by name with `pending-uncommitted-authorization`. After committing
-from a clean tree, run that exact command again; only a green result authorizes
-the separately handed-off capture runner, and only for Figma file key
-`byMp6lt0Ij9b2QbkDGFwBh`. A later receipt must record the antecedent,
-discovered authorization, and capture code commits and must itself descend from
-the authorization commit. No receipt or observed capture data exists now.
+and the v3 preflight must pass before the separately handed-off runner may
+target Figma file key `byMp6lt0Ij9b2QbkDGFwBh`. A later receipt must record the
+antecedent, discovered authorization, and capture code commits and must itself
+descend from the authorization commit. No receipt or observed capture data
+exists now.
 
 The hash changed only because correction-task implementation dependency hashes
 were added; criterion semantics and thresholds below did not change.
