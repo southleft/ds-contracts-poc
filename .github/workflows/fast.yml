@@ -333,6 +333,9 @@ jobs:
       - name: recipe:input-field:live:v26:check (place remaining content bindings at compile field order; hashed v25 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v26:check
+      - name: recipe:input-field:live:v27:check (recover hug height for hidden content FIXED; hashed v26 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v27:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
