@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -530,8 +530,14 @@ const V20_AUTHORIZATION_TEMPLATE_SHA256 =
 const V20_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v20-status.json";
 const V20_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V20_BASE_COMMIT = "4e0e582d2b64202d07a99a5471bc5ff40b87bb9c";
+const V20_ANTECEDENT_COMMIT = "d49f2da22d897b4a42e1a0e0f8ef302c61383417";
+const V20_AUTHORIZATION_PATH = `${V20_ROOT}/capture-authorization.json`;
+const V20_AUTHORIZATION_SHA256 =
+  "f43874d8748b45cfc02ea2621e877bcc22028a8153b71f55485396e18c595422";
+const V20_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "40f026cd0bd21e156746997fac2aba7fbe5a36890f3a8e561c6fe70022eaddc7";
 const V19_SCENE_READBACK_SHA256 =
   "6fea0cbd9c096b28d7c9178bb1c5e5b901a45d843c42ecac39b71e915a46e25f";
 const V18_SCENE_READBACK_SHA256 =
@@ -1670,9 +1676,16 @@ export function validatePivotStatus(
     status.input?.liveV20?.antecedentHashSetSha256 !== V20_HASH_SET_SHA256 ||
     status.input?.liveV20?.authorizationTemplateSha256 !==
       V20_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV20?.authorizationPresent !== false ||
-    status.input?.liveV20?.authorizationCommitted !== false ||
+    status.input?.liveV20?.antecedentCommit !== V20_ANTECEDENT_COMMIT ||
+    status.input?.liveV20?.authorizationPresent !== true ||
+    status.input?.liveV20?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV20?.authorizationEffective !== false ||
+    status.input?.liveV20?.authorizationPath !== V20_AUTHORIZATION_PATH ||
+    status.input?.liveV20?.authorizationSha256 !== V20_AUTHORIZATION_SHA256 ||
+    status.input?.liveV20?.signingPublicKeySpkiSha256 !==
+      V20_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV20?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV20?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV20?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -3496,9 +3509,16 @@ export function verifyPivotStatus(): void {
     v20Status.artifactVersion !== "input-live-v20-status-v1" ||
     v20Status.status !== V20_STATUS ||
     v20Status.baseCommit !== V20_BASE_COMMIT ||
-    v20Status.authorization?.present !== false ||
-    v20Status.authorization?.committed !== false ||
+    v20Status.antecedent?.commit !== V20_ANTECEDENT_COMMIT ||
+    v20Status.authorization?.present !== true ||
+    v20Status.authorization?.commitStateDerivedByHistory !== true ||
     v20Status.authorization?.effective !== false ||
+    v20Status.authorization?.path !== V20_AUTHORIZATION_PATH ||
+    v20Status.authorization?.sha256 !== V20_AUTHORIZATION_SHA256 ||
+    v20Status.authorization?.signingPublicKeySpkiSha256 !==
+      V20_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V20_AUTHORIZATION_PATH)) !==
+      V20_AUTHORIZATION_SHA256 ||
     v20Status.authorization?.v19AuthorizationReusable !== false ||
     v20Status.smallestHonestDelta?.taughtVariantLayoutWidthFromWidthValue !==
       true ||

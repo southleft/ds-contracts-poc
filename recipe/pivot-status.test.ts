@@ -308,7 +308,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
         false;
     },
     (value) => {
-      value.status.input.liveV20.authorizationPresent = true;
+      value.status.input.liveV20.authorizationPresent = false;
     },
     (value) => {
       value.status.input.liveV20.overallInputSuccess = true;
