@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -410,8 +410,14 @@ const V16_AUTHORIZATION_TEMPLATE_SHA256 =
 const V16_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v16-status.json";
 const V16_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V16_BASE_COMMIT = "72a3c5d8b9bbce9e53b730374d4a0796aa33a2be";
+const V16_ANTECEDENT_COMMIT = "a764804c4191d161d08ab9527938ce6d29009af7";
+const V16_AUTHORIZATION_PATH = `${V16_ROOT}/capture-authorization.json`;
+const V16_AUTHORIZATION_SHA256 =
+  "377ae973efecf53cbb3684ec449dd4f9f388ce36ad5e19572e681fb85ba15f8f";
+const V16_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "cf89747d6dc04c6944170c2e4ea1450055eaabebeb6ba72aec05c049f1fa7ae0";
 const V15_RESTORE_SOURCE_SHA256 =
   "005196311279494e58dd419c5c7626aaa55617b540ef825442df478891d469fc";
 const V15_RESTORE_BLUEPRINT_SHA256 =
@@ -1295,9 +1301,16 @@ export function validatePivotStatus(
     status.input?.liveV16?.antecedentHashSetSha256 !== V16_HASH_SET_SHA256 ||
     status.input?.liveV16?.authorizationTemplateSha256 !==
       V16_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV16?.authorizationPresent !== false ||
-    status.input?.liveV16?.authorizationCommitted !== false ||
+    status.input?.liveV16?.antecedentCommit !== V16_ANTECEDENT_COMMIT ||
+    status.input?.liveV16?.authorizationPresent !== true ||
+    status.input?.liveV16?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV16?.authorizationEffective !== false ||
+    status.input?.liveV16?.authorizationPath !== V16_AUTHORIZATION_PATH ||
+    status.input?.liveV16?.authorizationSha256 !== V16_AUTHORIZATION_SHA256 ||
+    status.input?.liveV16?.signingPublicKeySpkiSha256 !==
+      V16_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV16?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV16?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV16?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -2648,9 +2661,16 @@ export function verifyPivotStatus(): void {
     v16Status.artifactVersion !== "input-live-v16-status-v1" ||
     v16Status.status !== V16_STATUS ||
     v16Status.baseCommit !== V16_BASE_COMMIT ||
-    v16Status.authorization?.present !== false ||
-    v16Status.authorization?.committed !== false ||
+    v16Status.antecedent?.commit !== V16_ANTECEDENT_COMMIT ||
+    v16Status.authorization?.present !== true ||
+    v16Status.authorization?.commitStateDerivedByHistory !== true ||
     v16Status.authorization?.effective !== false ||
+    v16Status.authorization?.path !== V16_AUTHORIZATION_PATH ||
+    v16Status.authorization?.sha256 !== V16_AUTHORIZATION_SHA256 ||
+    v16Status.authorization?.signingPublicKeySpkiSha256 !==
+      V16_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V16_AUTHORIZATION_PATH)) !==
+      V16_AUTHORIZATION_SHA256 ||
     v16Status.authorization?.v15AuthorizationReusable !== false ||
     v16Status.smallestHonestDelta?.taughtMeasureFillWhileVisible !== true ||
     v16Status.smallestHonestDelta
