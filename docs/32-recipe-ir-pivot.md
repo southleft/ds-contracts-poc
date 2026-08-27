@@ -98,12 +98,26 @@
 > simulation creates synthetic Git antecedent and authorization commits and
 > proves that the same generated antecedent remains byte-green in both phases.
 >
-> Future authorization remains security-blocked until the exposed Figma PAT is
-> revoked or replaced, every MCP process is restarted after rotation, the
+> The separate v7 authorization is now prepared against antecedent
+> `117f1cddce797393b1b705da62323615e584d54b`. Its artifact SHA-256 is
+> `43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda`
+> and its new Ed25519 SPKI identity SHA-256 is
+> `7a0fe64eced707be7797f7fefe030fcca73c4ae0259d4786985b24c73457780f`.
+> The precommit verifier reports `pending-uncommitted-authorization`; after the
+> parent commits and publishes these lifecycle files, verify with
+> `--expect-authorized`. Commit state is derived from Git history rather than
+> embedded in the authorization or status artifacts.
+>
+> Live use remains security-blocked until the exposed Figma PAT is revoked or
+> replaced, every MCP process is restarted after rotation, the
 > environment file is owner-only mode 0600, the tracked-and-untracked repository
 > secret scan is zero, and an exact read-only Scratch file-key/name/editor probe
 > passes. Runtime attestation must be created only after those steps and may
-> contain no token value. V7 has executed zero attempts; Input remains false.**
+> contain no token value. The safe template is
+> `recipe/evidence/input-field-live-pivot-v7/operator-security-attestation-template.json`;
+> the completed untracked attestation belongs at
+> `private/input-live-v7-security-attestation.json`. V7 has executed zero
+> attempts; Input remains false.**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
@@ -175,8 +189,9 @@
 > at `recipe/evidence/input-field-live-pivot-v6/index.json`; its lifecycle defect
 > and retirement are recorded separately. V7's authorization-independent hash
 > set is `recipe/evidence/input-field-live-pivot-v7/antecedent-index.json`, with
-> lifecycle status outside that set. V7 live execution remains forbidden pending
-> a distinct published authorization and all runtime security prerequisites.
+> lifecycle status outside that set. The distinct authorization is declared, but
+> v7 live execution remains forbidden until its commit is published and all
+> runtime security prerequisites pass.
 > The source-neutral calibration corpus, captures, result, exact-byte attempts,
 > and cleanup receipt are indexed at
 > `recipe/evidence/raster-calibration-v1/index.json`.

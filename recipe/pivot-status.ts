@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 authorization declared and security-blocked; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -126,6 +126,12 @@ const V7_HASH_SET_SHA256 =
   "09437c70458cda74a774dfa056cd91d0ac836d73d2e1d6a8567e6fe631df5be7";
 const V7_AUTHORIZATION_TEMPLATE_SHA256 =
   "b7ceb531e84d5a4002e9a4240925a15837841cc922dda4cac492e903ba07978b";
+const V7_ANTECEDENT_COMMIT = "117f1cddce797393b1b705da62323615e584d54b";
+const V7_AUTHORIZATION_PATH = `${V7_ROOT}/capture-authorization.json`;
+const V7_AUTHORIZATION_SHA256 =
+  "43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda";
+const V7_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "7a0fe64eced707be7797f7fefe030fcca73c4ae0259d4786985b24c73457780f";
 const V7_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v7-status.json";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
@@ -392,9 +398,10 @@ export function validatePivotStatus(
     status.input?.liveV6?.outcomes !== null ||
     status.input?.liveV6?.overallInputSuccess !== false ||
     status.input?.liveV7?.status !==
-      "draft antecedent; pending separate authorization; live execution forbidden" ||
+      "authorization declared; security-blocked; live execution forbidden" ||
     status.input?.liveV7?.baseCommit !==
       "e5d6814982cbbe498ed630e7d988eae10bcb5d77" ||
+    status.input?.liveV7?.antecedentCommit !== V7_ANTECEDENT_COMMIT ||
     status.input?.liveV7?.protocolSha256 !== V7_PROTOCOL_SHA256 ||
     status.input?.liveV7?.proofPlanSha256 !== V7_PLAN_SHA256 ||
     status.input?.liveV7?.captureManifestSha256 !==
@@ -405,9 +412,17 @@ export function validatePivotStatus(
     status.input?.liveV7?.antecedentHashSetSha256 !== V7_HASH_SET_SHA256 ||
     status.input?.liveV7?.authorizationTemplateSha256 !==
       V7_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV7?.authorizationPresent !== false ||
-    status.input?.liveV7?.authorizationCommitted !== false ||
+    status.input?.liveV7?.authorizationPresent !== true ||
+    status.input?.liveV7?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV7?.authorizationEffective !== false ||
+    status.input?.liveV7?.authorizationPath !== V7_AUTHORIZATION_PATH ||
+    status.input?.liveV7?.authorizationSha256 !== V7_AUTHORIZATION_SHA256 ||
+    status.input?.liveV7?.signingPublicKeySpkiSha256 !==
+      V7_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV7?.precommitHistoryState !==
+      "pending-uncommitted-authorization" ||
+    status.input?.liveV7?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV7?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV7?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -421,7 +436,9 @@ export function validatePivotStatus(
     status.input?.liveV7?.captureBeforeTechnicalGates !== false ||
     status.input?.liveV7?.security?.figmaPatRevokedOrReplacedRequired !==
       true ||
+    status.input?.liveV7?.security?.figmaPatRevokedOrReplaced !== false ||
     status.input?.liveV7?.security?.mcpRestartAfterRotationRequired !== true ||
+    status.input?.liveV7?.security?.mcpRestartedAfterRotation !== false ||
     status.input?.liveV7?.security?.ownerOnlyEnvironmentFileMode0600Required !==
       true ||
     status.input?.liveV7?.security?.repositorySecretScanZeroRequired !== true ||
@@ -631,7 +648,10 @@ export function verifyPivotStatus(): void {
       failures.push(`v6 indexed artifact hash mismatch: ${artifactPath}`);
   }
   const v7AuthorizationPath = resolveRepositoryEvidencePath(
-    `${V7_ROOT}/capture-authorization.json`,
+    V7_AUTHORIZATION_PATH,
+  );
+  const v7Authorization = readRepositoryJson<Record<string, any>>(
+    V7_AUTHORIZATION_PATH,
   );
   const v7Serialized = JSON.stringify([v7Protocol, v7Index, v7Status]);
   if (
@@ -679,15 +699,41 @@ export function verifyPivotStatus(): void {
     v7Index.counts?.remoteRequests !== 132 ||
     v7Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
     v7Status.artifactVersion !== "input-live-v7-status-v1" ||
-    v7Status.authorization?.present !== false ||
+    v7Status.status !==
+      "authorization declared; security-blocked; live execution forbidden" ||
+    v7Status.antecedent?.commit !== V7_ANTECEDENT_COMMIT ||
+    v7Status.authorization?.present !== true ||
+    v7Status.authorization?.commitStateDerivedByHistory !== true ||
     v7Status.authorization?.effective !== false ||
+    v7Status.authorization?.path !== V7_AUTHORIZATION_PATH ||
+    v7Status.authorization?.sha256 !== V7_AUTHORIZATION_SHA256 ||
+    v7Status.authorization?.signingPublicKeySpkiSha256 !==
+      V7_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v7Status.authorization?.precommitHistoryState !==
+      "pending-uncommitted-authorization" ||
+    v7Status.securityPrerequisites?.status !==
+      "blocked-pending-user-account-action" ||
+    v7Status.securityPrerequisites?.figmaPatRevokedOrReplaced !== false ||
+    v7Status.securityPrerequisites?.mcpRestartedAfterRotation !== false ||
     v7Status.attemptsExecuted !== 0 ||
     v7Status.maximumFutureAttempts !== 3 ||
     v7Status.liveExecutionOccurred !== false ||
     /"(?:outcome|outcomes|result|results|measurement|observed|score|winner)"\s*:/.test(
       v7Serialized,
     ) ||
-    existsSync(v7AuthorizationPath)
+    !existsSync(v7AuthorizationPath) ||
+    sha256(readRepositoryEvidence(V7_AUTHORIZATION_PATH)) !==
+      V7_AUTHORIZATION_SHA256 ||
+    v7Authorization.artifactVersion !==
+      "input-live-v7-capture-authorization-v1" ||
+    v7Authorization.authorizationId !== "input-live-v7" ||
+    v7Authorization.antecedent?.commit !== V7_ANTECEDENT_COMMIT ||
+    v7Authorization.antecedent?.indexSha256 !== V7_INDEX_SHA256 ||
+    v7Authorization.antecedent?.hashSetSha256 !== V7_HASH_SET_SHA256 ||
+    v7Authorization.signingPublicKey?.spkiSha256 !==
+      V7_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v7Authorization.execution?.v6AuthorizationReusable !== false ||
+    v7Authorization.humanSignoff?.status !== "pending"
   )
     failures.push("v7 antecedent/status lifecycle or hash mismatch");
   for (const [artifactPath, metadata] of Object.entries(

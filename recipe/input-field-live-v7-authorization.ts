@@ -26,6 +26,7 @@ export interface InputLiveV7AuthorizationArtifact {
     indexPath: typeof INPUT_LIVE_V7_INDEX_PATH;
     indexSha256: string;
     hashSetSha256: string;
+    artifacts: Record<string, { bytes: number; sha256: string }>;
   };
   signingPublicKey: {
     algorithm: "Ed25519";
@@ -48,8 +49,22 @@ export interface InputLiveV7AuthorizationArtifact {
     expectedFacts: 43726;
   };
   execution: {
+    phaseOrder: [
+      "writer",
+      "persist signed cleanup recovery request",
+      "extract",
+      "host normalize and account both roots",
+      "probe",
+      "host bind technical gates",
+      "capture-000 through capture-127",
+      "cleanup",
+    ];
     maximumAttempts: 3;
     attemptsExecuted: 0;
+    cleanWorktreeRequired: true;
+    upstreamEqualityRequired: true;
+    codeCommitMustStrictlyDescendFromAntecedent: true;
+    authorizationArtifactMustBeCommittedUnchanged: true;
     captureBeforeHashBoundTechnicalGates: false;
     durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance: true;
     cleanupMustRemainExecutableAfterHostFailure: true;
@@ -94,6 +109,7 @@ export interface InputLiveV7HistoryState {
   codeCommit: string;
   upstreamCommit?: string;
   clean: boolean;
+  pendingChangesOnlyAuthorizationLifecycle?: boolean;
 }
 
 export interface InputLiveV7AuthorizationProof extends InputLiveV7TransactionAuthorization {
@@ -186,6 +202,9 @@ const lifecyclePath = (artifactPath: string): boolean =>
   artifactPath.includes("input-field-live-v7-preflight") ||
   artifactPath.includes("input-field-live-v7-authorized") ||
   artifactPath.includes("input-field-live-pivot-v7-status") ||
+  artifactPath === "recipe/pivot-status.ts" ||
+  artifactPath === "recipe/pivot-status.test.ts" ||
+  artifactPath === "docs/32-recipe-ir-pivot.md" ||
   artifactPath.endsWith("/status-index.json");
 
 const privateMaterialPaths = (value: unknown, prefix = "$"): string[] => {
@@ -332,6 +351,7 @@ export function buildInputLiveV7AuthorizationArtifact(options: {
       indexPath: INPUT_LIVE_V7_INDEX_PATH,
       indexSha256: sha256(options.antecedentIndexBytes),
       hashSetSha256: index.hashSetSha256,
+      artifacts: structuredClone(index.artifacts),
     },
     signingPublicKey: {
       algorithm: "Ed25519",
@@ -354,8 +374,22 @@ export function buildInputLiveV7AuthorizationArtifact(options: {
       expectedFacts: 43_726,
     },
     execution: {
+      phaseOrder: [
+        "writer",
+        "persist signed cleanup recovery request",
+        "extract",
+        "host normalize and account both roots",
+        "probe",
+        "host bind technical gates",
+        "capture-000 through capture-127",
+        "cleanup",
+      ],
       maximumAttempts: 3,
       attemptsExecuted: 0,
+      cleanWorktreeRequired: true,
+      upstreamEqualityRequired: true,
+      codeCommitMustStrictlyDescendFromAntecedent: true,
+      authorizationArtifactMustBeCommittedUnchanged: true,
       captureBeforeHashBoundTechnicalGates: false,
       durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance: true,
       cleanupMustRemainExecutableAfterHostFailure: true,
@@ -391,7 +425,8 @@ export function validateInputLiveV7AuthorizationArtifact(
   if (
     artifact?.antecedent?.indexPath !== INPUT_LIVE_V7_INDEX_PATH ||
     artifact?.antecedent?.indexSha256 !== indexSha256 ||
-    artifact?.antecedent?.hashSetSha256 !== index?.hashSetSha256
+    artifact?.antecedent?.hashSetSha256 !== index?.hashSetSha256 ||
+    !equalJson(artifact?.antecedent?.artifacts, index?.artifacts)
   )
     failures.push("v7 authorization pins wrong antecedent index");
   if (privateMaterialPaths(artifact).length)
@@ -432,8 +467,23 @@ export function validateInputLiveV7AuthorizationArtifact(
   )
     failures.push("v7 two-root or capture denominator changed");
   if (
+    !equalJson(artifact?.execution?.phaseOrder, [
+      "writer",
+      "persist signed cleanup recovery request",
+      "extract",
+      "host normalize and account both roots",
+      "probe",
+      "host bind technical gates",
+      "capture-000 through capture-127",
+      "cleanup",
+    ]) ||
     artifact?.execution?.maximumAttempts !== 3 ||
     artifact?.execution?.attemptsExecuted !== 0 ||
+    artifact?.execution?.cleanWorktreeRequired !== true ||
+    artifact?.execution?.upstreamEqualityRequired !== true ||
+    artifact?.execution?.codeCommitMustStrictlyDescendFromAntecedent !== true ||
+    artifact?.execution?.authorizationArtifactMustBeCommittedUnchanged !==
+      true ||
     artifact?.execution?.captureBeforeHashBoundTechnicalGates !== false ||
     artifact?.execution
       ?.durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance !==
@@ -442,7 +492,7 @@ export function validateInputLiveV7AuthorizationArtifact(
     artifact?.execution?.v6AuthorizationReusable !== false
   )
     failures.push(
-      "v7 execution, capture, cleanup, or v6-reuse policy weakened",
+      "v7 phase order, lineage, execution, capture, cleanup, or v6-reuse policy weakened",
     );
   if (
     artifact?.securityPrerequisite?.figmaPatRevokedOrReplacedRequired !==
@@ -471,7 +521,6 @@ export function validateInputLiveV7History(
   const failures = validateInputLiveV7AntecedentIndex(state.index);
   if (!SHA40.test(state.codeCommit))
     failures.push("v7 code commit is not a full SHA");
-  if (!state.clean) failures.push("dirty worktree");
   if (!state.upstreamCommit || state.upstreamCommit !== state.codeCommit)
     failures.push("code commit is unpushed or differs from upstream");
   if (
@@ -494,16 +543,41 @@ export function validateInputLiveV7History(
     state.authorizationPresentAtCodeCommit ||
     state.authorization !== undefined;
   if (expected === "pending") {
-    if (authorizationExists)
+    const committedAuthorizationExists =
+      state.authorizationAddingCommits.length > 0 ||
+      state.authorizationCommit !== undefined ||
+      state.authorizationPresentAtCodeCommit;
+    if (committedAuthorizationExists)
       failures.push(
-        "stale history mode: expected pending but authorization exists",
+        "stale history mode: expected pending but committed authorization exists",
       );
+    if (!state.clean && !state.pendingChangesOnlyAuthorizationLifecycle)
+      failures.push("pending history contains non-lifecycle worktree changes");
+    if (state.authorization !== undefined) {
+      failures.push(
+        ...validateInputLiveV7AuthorizationArtifact(
+          state.authorization,
+          state.index,
+          state.indexSha256,
+        ),
+      );
+      if (state.authorization.antecedent.commit !== state.antecedentCommit)
+        failures.push("pending v7 authorization pins wrong antecedent commit");
+    }
     return failures;
   }
+  if (!state.clean) failures.push("dirty worktree");
   if (!authorizationExists) {
     failures.push(
       "stale history mode: expected authorized but authorization is pending",
     );
+    return failures;
+  }
+  if (
+    state.authorization !== undefined &&
+    state.authorizationAddingCommits.length === 0
+  ) {
+    failures.push("pending-uncommitted-authorization");
     return failures;
   }
   failures.push(
@@ -606,6 +680,20 @@ export function readInputLiveV7HistoryState(
         `${codeCommit}:${INPUT_LIVE_V7_AUTHORIZATION_PATH}`,
       ])
     : Buffer.alloc(0);
+  const statusEntries = git(repositoryRoot, [
+    "status",
+    "--porcelain=v1",
+    "--untracked-files=all",
+  ])
+    .toString("utf8")
+    .trimEnd()
+    .split("\n")
+    .filter(Boolean);
+  const pendingPaths = statusEntries.map((entry) => {
+    const value = entry.slice(3);
+    const rename = value.lastIndexOf(" -> ");
+    return rename >= 0 ? value.slice(rename + 4) : value;
+  });
   return {
     index,
     indexSha256: sha256(indexBytes),
@@ -644,12 +732,9 @@ export function readInputLiveV7HistoryState(
     ),
     codeCommit,
     upstreamCommit,
-    clean:
-      gitText(repositoryRoot, [
-        "status",
-        "--porcelain",
-        "--untracked-files=all",
-      ]) === "",
+    clean: statusEntries.length === 0,
+    pendingChangesOnlyAuthorizationLifecycle:
+      pendingPaths.length > 0 && pendingPaths.every(lifecyclePath),
   };
 }
 
@@ -717,6 +802,6 @@ if (import.meta.url === `file://${path.resolve(process.argv[1] ?? "")}`) {
   const expected = expectedMode();
   const state = verifyInputLiveV7History(expected);
   process.stdout.write(
-    `Input live v7 history ${expected}: antecedent=${state.antecedentCommit} authorization=${state.authorizationCommit ?? "pending"} code=${state.codeCommit}\n`,
+    `Input live v7 history ${expected}: antecedent=${state.antecedentCommit} authorization=${state.authorizationCommit ?? (state.authorization ? "pending-uncommitted" : "pending")} code=${state.codeCommit}\n`,
   );
 }

@@ -113,7 +113,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV6.authorizationHistoryValid = false;
     },
     (value) => {
-      value.status.input.liveV7.authorizationPresent = true;
+      value.status.input.liveV7.authorizationPresent = false;
     },
     (value) => {
       value.status.input.liveV7.authorizationCanBeAddedWithoutAntecedentRebuild = false;

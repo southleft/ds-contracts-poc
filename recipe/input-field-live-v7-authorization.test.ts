@@ -40,6 +40,14 @@ const artifact = (): InputLiveV7AuthorizationArtifact => {
   });
 };
 
+const preparedArtifact = (): InputLiveV7AuthorizationArtifact =>
+  JSON.parse(
+    readFileSync(
+      "recipe/evidence/input-field-live-pivot-v7/capture-authorization.json",
+      "utf8",
+    ),
+  ) as InputLiveV7AuthorizationArtifact;
+
 const pendingState = (): InputLiveV7HistoryState => ({
   index: index(),
   indexSha256: inputLiveV7Sha256(indexBytes()),
@@ -57,6 +65,7 @@ const pendingState = (): InputLiveV7HistoryState => ({
   codeCommit: "a".repeat(40),
   upstreamCommit: "a".repeat(40),
   clean: true,
+  pendingChangesOnlyAuthorizationLifecycle: false,
 });
 
 const authorizedState = (): InputLiveV7HistoryState => ({
@@ -161,6 +170,26 @@ test("pending, changed, and committed authorization states are pure fixtures", (
   );
 });
 
+test("prepared authorization pins the published antecedent and a non-v6 identity", () => {
+  const prepared = preparedArtifact();
+  assert.deepEqual(
+    validateInputLiveV7AuthorizationArtifact(
+      prepared,
+      index(),
+      inputLiveV7Sha256(indexBytes()),
+    ),
+    [],
+  );
+  assert.equal(
+    prepared.antecedent.commit,
+    "117f1cddce797393b1b705da62323615e584d54b",
+  );
+  assert.notEqual(
+    prepared.signingPublicKey.spkiSha256,
+    "c5d04bf950dea3e1b62a2a274031677546e9c24bbee4cabb64773d0f1a7b3ac4",
+  );
+});
+
 test("stale expected history modes fail closed", () => {
   assert.match(
     validateInputLiveV7History(pendingState(), "authorized").join("\n"),
@@ -169,6 +198,36 @@ test("stale expected history modes fail closed", () => {
   assert.match(
     validateInputLiveV7History(authorizedState(), "pending").join("\n"),
     /stale history mode.*authorization exists/,
+  );
+  const uncommitted = pendingState();
+  uncommitted.authorization = artifact();
+  uncommitted.clean = false;
+  uncommitted.pendingChangesOnlyAuthorizationLifecycle = true;
+  assert.deepEqual(validateInputLiveV7History(uncommitted, "pending"), []);
+  assert.match(
+    validateInputLiveV7History(uncommitted, "authorized").join("\n"),
+    /pending-uncommitted-authorization/,
+  );
+});
+
+test("authorized history requires clean published strict descendants", () => {
+  const dirty = authorizedState();
+  dirty.clean = false;
+  assert.match(
+    validateInputLiveV7History(dirty, "authorized").join("\n"),
+    /dirty worktree/,
+  );
+  const unpublished = authorizedState();
+  unpublished.upstreamCommit = "d".repeat(40);
+  assert.match(
+    validateInputLiveV7History(unpublished, "authorized").join("\n"),
+    /unpushed or differs from upstream/,
+  );
+  const nonDescendant = authorizedState();
+  nonDescendant.authorizationStrictlyDescendsFromAntecedent = false;
+  assert.match(
+    validateInputLiveV7History(nonDescendant, "authorized").join("\n"),
+    /does not strictly descend/,
   );
 });
 
@@ -218,9 +277,14 @@ test("authorization lifecycle files cannot enter the antecedent hash set", () =>
   }
 });
 
-test("wrong target, tool, signing key, and private material are rejected", () => {
+test("wrong antecedent, target, tool, signing key, and private material are rejected", () => {
   const baseline = artifact();
   for (const mutate of [
+    (value: Record<string, any>) => {
+      value.antecedent.artifacts[
+        "recipe/evidence/input-field-live-pivot-v7/protocol.json"
+      ].sha256 = "0".repeat(64);
+    },
     (value: Record<string, any>) => {
       value.operatorBoundary.target.fileKey = "wrong";
     },
@@ -247,9 +311,12 @@ test("wrong target, tool, signing key, and private material are rejected", () =>
   }
 });
 
-test("two-root denominator, capture gate, cleanup, v6 reuse, and result leakage are rejected", () => {
+test("phase order, denominator, capture gate, cleanup, v6 reuse, and result leakage are rejected", () => {
   const baseline = artifact();
   for (const mutate of [
+    (value: Record<string, any>) => {
+      value.execution.phaseOrder[3] = "capture";
+    },
     (value: Record<string, any>) => {
       value.denominator.sourceRoots = 1;
     },

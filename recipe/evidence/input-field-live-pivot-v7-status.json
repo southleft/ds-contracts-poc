@@ -1,8 +1,9 @@
 {
   "artifactVersion": "input-live-v7-status-v1",
-  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "status": "authorization declared; security-blocked; live execution forbidden",
   "baseCommit": "e5d6814982cbbe498ed630e7d988eae10bcb5d77",
   "antecedent": {
+    "commit": "117f1cddce797393b1b705da62323615e584d54b",
     "indexPath": "recipe/evidence/input-field-live-pivot-v7/antecedent-index.json",
     "indexSha256": "3fa459844440098aae47432ba58108eff51edc332086b2d93de795d5f192f069",
     "hashSetSha256": "09437c70458cda74a774dfa056cd91d0ac836d73d2e1d6a8567e6fe631df5be7",
@@ -10,12 +11,16 @@
     "byteStableAcrossLaterAuthorization": true
   },
   "authorization": {
-    "present": false,
-    "committed": false,
+    "present": true,
+    "commitStateDerivedByHistory": true,
     "effective": false,
+    "path": "recipe/evidence/input-field-live-pivot-v7/capture-authorization.json",
+    "sha256": "43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda",
+    "signingPublicKeySpkiSha256": "7a0fe64eced707be7797f7fefe030fcca73c4ae0259d4786985b24c73457780f",
     "templatePath": "recipe/evidence/input-field-live-pivot-v7/authorization-template.json",
     "templateSha256": "b7ceb531e84d5a4002e9a4240925a15837841cc922dda4cac492e903ba07978b",
-    "expectedHistoryModeAfterAntecedentCommit": "--expect-pending",
+    "precommitHistoryState": "pending-uncommitted-authorization",
+    "expectedHistoryModeAfterAuthorizationCommit": "--expect-authorized",
     "v6AuthorizationReusable": false
   },
   "denominator": {
@@ -27,12 +32,18 @@
     "hostPhases": 3
   },
   "securityPrerequisites": {
+    "status": "blocked-pending-user-account-action",
+    "figmaPatRevokedOrReplaced": false,
     "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartedAfterRotation": false,
     "mcpRestartAfterRotationRequired": true,
     "ownerOnlyEnvironmentFileMode0600Required": true,
     "repositorySecretScanZeroRequired": true,
     "exactScratchReadOnlyProbeRequired": true,
-    "tokenValuesForbidden": true
+    "tokenValuesForbidden": true,
+    "attestationTemplatePath": "recipe/evidence/input-field-live-pivot-v7/operator-security-attestation-template.json",
+    "attestationRuntimePath": "private/input-live-v7-security-attestation.json",
+    "liveExecutionForbidden": true
   },
   "attemptsExecuted": 0,
   "nextAttempt": 1,
