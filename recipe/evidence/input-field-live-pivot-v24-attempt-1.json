@@ -1,0 +1,257 @@
+{
+  "artifactVersion": "input-live-v24-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "5530ad3d4040faa45a0d03943b6da48c618daaf4",
+  "codeCommit": "5530ad3d4040faa45a0d03943b6da48c618daaf4",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "hostNormalizeAccount": false,
+    "marker": "INPUT-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL"
+  },
+  "v16FailureCleared": {
+    "leadingSlotSolidPaintSurfacedFromPayloadOrChild": true
+  },
+  "v17FailureCleared": {
+    "leadingSlotColorBindingSurfacedFromChild": true
+  },
+  "v19FailureCleared": {
+    "variantLayoutWidthValueNotTheRefusalLocus": true
+  },
+  "v20FailureCleared": {
+    "surfaceLayoutHeightValueNotTheRefusalLocus": true
+  },
+  "v21FailureCleared": {
+    "variantBindingsLengthNotTheRefusalLocus": true
+  },
+  "v22FailureCleared": {
+    "variantBindingsFieldOrderNotTheRefusalLocus": true
+  },
+  "v23FailureCleared": {
+    "surfaceBindingsLengthNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedVariantWidthBindings": {
+    "mui": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "total": 128
+    },
+    "polaris": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "total": 128
+    }
+  },
+  "observedSurfaceHeightBindings": {
+    "mui": {
+      "hasFigmaHeight": 128,
+      "hasLayoutHeightValue": 0,
+      "hasHeightValue": 0,
+      "missingHeightBinding": 0,
+      "failingSurfaceHasFigmaHeightFloat": true,
+      "failingSurfaceRole": "input-field/surface",
+      "failingSurfaceVariable": "imported.text-field.medium.surface-height",
+      "failingSurfaceResolvedType": "FLOAT",
+      "total": 128
+    },
+    "polaris": {
+      "hasFigmaHeight": 128,
+      "hasLayoutHeightValue": 0,
+      "hasHeightValue": 0,
+      "missingHeightBinding": 0,
+      "failingSurfaceHasFigmaHeightFloat": true,
+      "failingSurfaceRole": "input-field/surface",
+      "failingSurfaceVariable": "p.text-field.medium.surface-height",
+      "failingSurfaceResolvedType": "FLOAT",
+      "total": 128
+    }
+  },
+  "observedExtractFirstVariantBindings": {
+    "role": "input-field/variant/medium/default/placeholder/false/none",
+    "muiBindingFields": ["itemSpacing", "minWidth", "width"],
+    "polarisBindingFields": ["itemSpacing", "minWidth", "width"]
+  },
+  "observedHostNormalizedFirstVariantBindings": {
+    "role": "input-field/variant/medium/default/placeholder/false/none",
+    "muiBindingFields": [
+      "layout.itemSpacing",
+      "layout.width.value",
+      "layout.minWidth"
+    ],
+    "polarisBindingFields": [
+      "layout.itemSpacing",
+      "layout.width.value",
+      "layout.minWidth"
+    ],
+    "recipeCompileNoneAdornmentBindingCount": 3,
+    "recipeCompileNoneAdornmentBindingFields": [
+      "layout.itemSpacing",
+      "layout.width.value",
+      "layout.minWidth"
+    ]
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": {
+      "role": "input-field/surface",
+      "bindingFields": [
+        "bottomLeftRadius",
+        "bottomRightRadius",
+        "fills.0.color",
+        "fills.0",
+        "height",
+        "minHeight",
+        "minWidth",
+        "paddingLeft",
+        "paddingRight",
+        "strokeBottomWeight",
+        "strokeLeftWeight",
+        "strokeRightWeight",
+        "strokes.0.paint.color",
+        "strokes.0",
+        "strokeTopWeight",
+        "topLeftRadius",
+        "topRightRadius"
+      ],
+      "bindingCount": 17
+    },
+    "polaris": {
+      "role": "input-field/label-row",
+      "bindingFields": ["itemSpacing", "paddingLeft", "paddingTop"],
+      "bindingCount": 3
+    }
+  },
+  "observedHostNormalizedFirstNestedChild": {
+    "mui": {
+      "role": "input-field/surface",
+      "bindingFields": [
+        "cornerRadius.bottomLeft",
+        "cornerRadius.bottomRight",
+        "fills.0.color",
+        "layout.minHeight",
+        "layout.minWidth",
+        "layout.padding.left",
+        "layout.padding.right",
+        "strokes.0.paint.color",
+        "cornerRadius.topLeft",
+        "cornerRadius.topRight",
+        "strokes.0.weight",
+        "layout.height.value"
+      ],
+      "bindingCount": 12,
+      "recipeCompileStackedFalseNoEffectsBindingCount": 12,
+      "recipeCompileStackedFalseNoEffectsBindingFields": [
+        "layout.padding.right",
+        "layout.padding.left",
+        "layout.height.value",
+        "layout.minWidth",
+        "layout.minHeight",
+        "fills.0.color",
+        "strokes.0.weight",
+        "strokes.0.paint.color",
+        "cornerRadius.topLeft",
+        "cornerRadius.topRight",
+        "cornerRadius.bottomRight",
+        "cornerRadius.bottomLeft"
+      ]
+    },
+    "polaris": {
+      "role": "input-field/label-row",
+      "bindingFields": [
+        "layout.itemSpacing",
+        "layout.padding.left",
+        "layout.padding.top"
+      ],
+      "bindingCount": 3
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v24.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[0].children[0].bindings[0].field; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v24 scene-readback dropped extra surface bindings that collapse treats as a length edit (exact field+type+variable mapped color duplicates, and per-side strokes.0.weight.{top,right,bottom,left} once the uniform strokes.0.weight alias is present). Host did not refuse $.children[0].children[0].bindings.length. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes). Content-width census remains MUI 128/128 FILL and Polaris 128/128 FILL. Host collapse then refused unsupported structural edit at $.children[0].children[0].bindings[0].field. $.children[0] is the first variant (input-field/variant/medium/default/placeholder/false/none). $.children[0].children[0] is the MUI first-variant first child (input-field/surface). Extract first-variant boundVariables are itemSpacing, minWidth, width (Figma FLOAT). After scene-readback-v24 the same variant has three bindings in compile order: layout.itemSpacing, layout.width.value, layout.minWidth. The MUI surface extract has 17 boundVariables including duplicate fills.0.color/fills.0, duplicate strokes.0.paint.color/strokes.0, four per-side stroke weights, and height FLOAT imported.text-field.medium.surface-height. After scene-readback-v24 that surface has 12 bindings: one fills.0.color, one strokes.0.paint.color, uniform strokes.0.weight, aliased layout.height.value, and the remaining layout/radius fields. Recipe compile for a non-stacked no-effects surface also emits 12 bindings, but in compile order starting at layout.padding.right; host remaining order starts at cornerRadius.bottomLeft. Polaris first nested child is input-field/label-row (3 bindings) because Polaris label placement is floating; the first mapped root is MUI. Extract still shows 32+32 variants bind Figma width FLOAT, 0 layout.width.value, 0 width.value, 96+96 unbound. Surfaces still bind Figma height FLOAT (MUI imported.text-field.medium.surface-height; Polaris p.text-field.medium.surface-height; resolvedType FLOAT) and bind no layout.height.value / height.value in the extract. Host did not refuse layout.height.value, layout.width.value, bindings.length on the variant, bindings[1].field, or surface bindings.length this attempt. Do not teach FIXED. Do not invent a variable. Do not restart v24 attempt 2 as-is. Scene-readback-v24 bytes are in the v24 hash set.",
+    "inputFieldRecipeInV24AntecedentHashSet": false,
+    "writerInV24AntecedentHashSet": true,
+    "restoreInV24AntecedentHashSet": true,
+    "extractRuntimeInV24AntecedentHashSet": true,
+    "sceneReadbackInV24AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v17AntecedentBytesUnchanged": true,
+  "v17SceneReadbackUnchanged": true,
+  "v17AuthorizationBytesUnchanged": true,
+  "v18AntecedentBytesUnchanged": true,
+  "v18SceneReadbackUnchanged": true,
+  "v18AuthorizationBytesUnchanged": true,
+  "v18Attempt1BytesUnchanged": true,
+  "v19AntecedentBytesUnchanged": true,
+  "v19SceneReadbackUnchanged": true,
+  "v19AuthorizationBytesUnchanged": true,
+  "v19Attempt1BytesUnchanged": true,
+  "v20AntecedentBytesUnchanged": true,
+  "v20SceneReadbackUnchanged": true,
+  "v20AuthorizationBytesUnchanged": true,
+  "v20Attempt1BytesUnchanged": true,
+  "v21AntecedentBytesUnchanged": true,
+  "v21SceneReadbackUnchanged": true,
+  "v21AuthorizationBytesUnchanged": true,
+  "v21Attempt1BytesUnchanged": true,
+  "v22AntecedentBytesUnchanged": true,
+  "v22SceneReadbackUnchanged": true,
+  "v22AuthorizationBytesUnchanged": true,
+  "v22Attempt1BytesUnchanged": true,
+  "v23AntecedentBytesUnchanged": true,
+  "v23SceneReadbackUnchanged": true,
+  "v23AuthorizationBytesUnchanged": true,
+  "v23Attempt1BytesUnchanged": true,
+  "v24AntecedentBytesUnchanged": true,
+  "v24AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV24Attempt2WithoutSurfaceBindingsFieldForbidden": true
+}
