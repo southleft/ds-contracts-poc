@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 authorization lineage non-executable; v5 draft uncommitted and unauthorized; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 authorization lineage non-executable; v5 authorization prepared uncommitted and capture forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -165,13 +165,16 @@
       "humanSignoff": "pending"
     },
     "liveV5": {
-      "status": "draft antecedent uncommitted; pending separate authorization; execution forbidden",
+      "status": "authorization prepared uncommitted; capture forbidden",
+      "antecedentCommit": "a29d034b746d0831ce93f88f1aeb5630ad4b0453",
+      "protocolFirstAddCommit": "e9f9712a55147a4329f51cfd4bf024866dfd489f",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v5/protocol.json",
       "protocolSha256": "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf",
       "writerPlanPath": "recipe/evidence/input-field-live-pivot-v5/writer-plan.json",
-      "writerPlanSha256": "d6ff229c9187f814fdd97698a5302ec0b982947b4aef3732edaf943d6daaf848",
+      "writerPlanSha256": "09fbdda142727a0238bb0f30721e30015cdfb714c24314d0b33d6b7b53081b10",
       "authorizationPath": "recipe/evidence/input-field-live-pivot-v5/capture-authorization.json",
-      "authorizationPresent": false,
+      "authorizationSha256": "acb54eda9a4994c9f1d7502b79d21adcaf28cca06b0566f344a9647219ff39e6",
+      "authorizationPresent": true,
       "authorizationCommitted": false,
       "authorized": false,
       "v4AuthorizationReused": false,

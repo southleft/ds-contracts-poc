@@ -1,6 +1,10 @@
 {
   "artifactVersion": "input-live-v5-index-v1",
-  "status": "draft antecedent uncommitted; pending separate authorization; execution forbidden",
+  "status": "authorization prepared uncommitted; capture forbidden",
+  "antecedent": {
+    "executableCommit": "a29d034b746d0831ce93f88f1aeb5630ad4b0453",
+    "protocolFirstAddCommit": "e9f9712a55147a4329f51cfd4bf024866dfd489f"
+  },
   "protocol": {
     "path": "recipe/evidence/input-field-live-pivot-v5/protocol.json",
     "sha256": "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf",
@@ -8,7 +12,8 @@
   },
   "authorization": {
     "path": "recipe/evidence/input-field-live-pivot-v5/capture-authorization.json",
-    "present": false,
+    "sha256": "acb54eda9a4994c9f1d7502b79d21adcaf28cca06b0566f344a9647219ff39e6",
+    "present": true,
     "committed": false,
     "upstreamPublished": false,
     "authorized": false,
@@ -32,7 +37,7 @@
     },
     "writerPlan": {
       "path": "recipe/evidence/input-field-live-pivot-v5/writer-plan.json",
-      "sha256": "d6ff229c9187f814fdd97698a5302ec0b982947b4aef3732edaf943d6daaf848"
+      "sha256": "09fbdda142727a0238bb0f30721e30015cdfb714c24314d0b33d6b7b53081b10"
     },
     "conformance": {
       "path": "recipe/evidence/input-field-live-pivot-v5/conformance-report.json",

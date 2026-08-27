@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { execFileSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
   copyFileSync,
@@ -13,7 +14,11 @@ import path from "node:path";
 import test from "node:test";
 
 import {
+  createInputLiveV5AuthorizationArtifact,
+  INPUT_LIVE_V5_ANTECEDENT_COMMIT,
+  INPUT_LIVE_V5_ANTECEDENT_DEPENDENCY_SHA256,
   INPUT_LIVE_V5_EVIDENCE_ROOT,
+  INPUT_LIVE_V5_PROTOCOL_FIRST_ADD_COMMIT,
   INPUT_LIVE_V5_PROTOCOL_SHA256,
   INPUT_LIVE_V5_TARGET,
   simulatedInputLiveV5Authorization,
@@ -437,47 +442,20 @@ test("live mode cannot use simulated authorization or a fake bridge", async () =
 });
 
 const authorizationState = (): InputLiveV5AuthorizationState => ({
-  authorization: {
-    artifactVersion: "input-live-v5-capture-authorization-v1",
-    authorizationId: "input-live-v5",
-    status: "authorized by separate published descendant commit",
-    antecedent: {
-      protocolPath: "recipe/evidence/input-field-live-pivot-v5/protocol.json",
-      protocolSha256: INPUT_LIVE_V5_PROTOCOL_SHA256,
-      discovery:
-        "unique first commit adding protocol; authorization must strictly descend",
-    },
-    target: INPUT_LIVE_V5_TARGET,
-    attempts: {
-      maximum: 3,
-      cleanPublishedDescendantsOnly: true,
-      v4AuthorizationReusable: false,
-    },
-    evidenceRoot: INPUT_LIVE_V5_EVIDENCE_ROOT,
-    requiredPhases: [
-      "preflight",
-      "writer-result",
-      "raw-scene-and-variable-table",
-      "host-normalization",
-      "accounting-and-fixed-point",
-      "usability-and-restoration",
-      "captures-and-objective",
-      "retention-and-cleanup",
-    ],
-    criterionPolicy: {
-      protocolCriteriaAltered: false,
-      outcomesPresent: false,
-      humanSignoff: "pending",
-    },
-  },
-  protocolAddingCommits: ["1".repeat(40)],
+  authorization: createInputLiveV5AuthorizationArtifact(),
+  protocolAddingCommits: [INPUT_LIVE_V5_PROTOCOL_FIRST_ADD_COMMIT],
   authorizationAddingCommits: ["2".repeat(40)],
-  protocolCommit: "1".repeat(40),
+  protocolCommit: INPUT_LIVE_V5_PROTOCOL_FIRST_ADD_COMMIT,
   authorizationCommit: "2".repeat(40),
   codeCommit: "3".repeat(40),
   upstreamCommit: "3".repeat(40),
   clean: true,
+  antecedentExists: true,
+  antecedentExecutable: true,
+  antecedentIsAncestorOfCode: true,
   protocolBytesMatch: true,
+  antecedentDependencyBytesMatch: true,
+  preservedEvidenceTreesMatch: true,
   authorizationBytesMatchFirstAddition: true,
   authorizationPresentAtCodeCommit: true,
   protocolStrictlyPrecedesAuthorization: true,
@@ -485,11 +463,11 @@ const authorizationState = (): InputLiveV5AuthorizationState => ({
   target: INPUT_LIVE_V5_TARGET,
 });
 
-test("runtime authorization rejects absent, dirty, unpushed, and wrong-target states", () => {
+test("runtime authorization rejects absent, non-executable, dirty, unpushed, and wrong-target states", () => {
   assert.deepEqual(validateInputLiveV5Authorization(authorizationState()), []);
   for (const [pattern, mutate] of [
     [
-      /authorization absent/,
+      /authorization declaration missing|pending-uncommitted-authorization/,
       (value: InputLiveV5AuthorizationState) => {
         value.authorization = undefined;
         value.authorizationAddingCommits = [];
@@ -500,6 +478,18 @@ test("runtime authorization rejects absent, dirty, unpushed, and wrong-target st
       /dirty worktree/,
       (value: InputLiveV5AuthorizationState) => {
         value.clean = false;
+      },
+    ],
+    [
+      /non-executable/,
+      (value: InputLiveV5AuthorizationState) => {
+        value.antecedentExecutable = false;
+      },
+    ],
+    [
+      /generated pin drift/,
+      (value: InputLiveV5AuthorizationState) => {
+        value.antecedentDependencyBytesMatch = false;
       },
     ],
     [
@@ -519,6 +509,76 @@ test("runtime authorization rejects absent, dirty, unpushed, and wrong-target st
     mutate(value);
     assert.match(validateInputLiveV5Authorization(value).join("\n"), pattern);
   }
+});
+
+test("authorization rejects result leakage, changed thresholds, and prior authorization reuse", () => {
+  for (const [pattern, mutate] of [
+    [
+      /result leakage or changed thresholds/,
+      (value: InputLiveV5AuthorizationState) => {
+        value.authorization!.result = "pass";
+      },
+    ],
+    [
+      /result leakage or changed thresholds/,
+      (value: InputLiveV5AuthorizationState) => {
+        value.authorization!.thresholds = { pixels: 5 };
+      },
+    ],
+    [
+      /v3\/v4 authorization or evidence reuse/,
+      (value: InputLiveV5AuthorizationState) => {
+        value.authorization!.capture = {
+          evidenceRoot: "recipe/evidence/input-field-live-pivot-v4",
+        };
+      },
+    ],
+  ] as Array<[RegExp, (value: InputLiveV5AuthorizationState) => void]>) {
+    const value = authorizationState();
+    mutate(value);
+    assert.match(validateInputLiveV5Authorization(value).join("\n"), pattern);
+  }
+});
+
+test("published executable antecedent pins protocol and every declared dependency", () => {
+  assert.equal(
+    execFileSync("git", ["rev-parse", `${INPUT_LIVE_V5_ANTECEDENT_COMMIT}^{commit}`], {
+      encoding: "utf8",
+    }).trim(),
+    INPUT_LIVE_V5_ANTECEDENT_COMMIT,
+  );
+  const protocol = execFileSync(
+    "git",
+    [
+      "show",
+      `${INPUT_LIVE_V5_ANTECEDENT_COMMIT}:recipe/evidence/input-field-live-pivot-v5/protocol.json`,
+    ],
+    { encoding: "buffer" },
+  );
+  assert.equal(sha256(protocol), INPUT_LIVE_V5_PROTOCOL_SHA256);
+  for (const [filePath, expectedHash] of Object.entries(
+    INPUT_LIVE_V5_ANTECEDENT_DEPENDENCY_SHA256,
+  )) {
+    const bytes = execFileSync(
+      "git",
+      ["show", `${INPUT_LIVE_V5_ANTECEDENT_COMMIT}:${filePath}`],
+      { encoding: "buffer", maxBuffer: 10 * 1024 * 1024 },
+    );
+    assert.equal(sha256(bytes), expectedHash, filePath);
+  }
+});
+
+test("preflight refuses attempt greater than three", () => {
+  assert.throws(
+    () =>
+      runInputLiveV5Preflight(
+        process.cwd(),
+        simulatedInputLiveV5Authorization(),
+        4,
+        [1, 2, 3],
+      ),
+    /exceeds maximum 3/,
+  );
 });
 
 test("v5 control-flow gate passes runner and catches the exact v4 refusal defect", () => {

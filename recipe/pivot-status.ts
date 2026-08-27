@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 authorization lineage non-executable; v5 draft uncommitted and unauthorized; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 authorization lineage non-executable; v5 authorization prepared uncommitted and capture forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -44,11 +44,16 @@ const V4_FAILURE_SHA256 =
   "43161312f76b50cb1bd392b0ca55d8892f3af4f5bfd809ec94b944ed0e7a48ee";
 const V5_ROOT = "recipe/evidence/input-field-live-pivot-v5";
 const V5_STATUS =
-  "draft antecedent uncommitted; pending separate authorization; execution forbidden";
+  "authorization prepared uncommitted; capture forbidden";
+const V5_ANTECEDENT_COMMIT = "a29d034b746d0831ce93f88f1aeb5630ad4b0453";
+const V5_PROTOCOL_FIRST_ADD_COMMIT =
+  "e9f9712a55147a4329f51cfd4bf024866dfd489f";
 const V5_PROTOCOL_SHA256 =
   "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf";
 const V5_PLAN_SHA256 =
-  "d6ff229c9187f814fdd97698a5302ec0b982947b4aef3732edaf943d6daaf848";
+  "09fbdda142727a0238bb0f30721e30015cdfb714c24314d0b33d6b7b53081b10";
+const V5_AUTHORIZATION_SHA256 =
+  "acb54eda9a4994c9f1d7502b79d21adcaf28cca06b0566f344a9647219ff39e6";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
   "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b";
@@ -199,9 +204,13 @@ export function validatePivotStatus(
     status.input?.liveV4?.nextAttempt !== null ||
     status.input?.liveV4?.humanSignoff !== "pending" ||
     status.input?.liveV5?.status !== V5_STATUS ||
+    status.input?.liveV5?.antecedentCommit !== V5_ANTECEDENT_COMMIT ||
+    status.input?.liveV5?.protocolFirstAddCommit !==
+      V5_PROTOCOL_FIRST_ADD_COMMIT ||
     status.input?.liveV5?.protocolSha256 !== V5_PROTOCOL_SHA256 ||
     status.input?.liveV5?.writerPlanSha256 !== V5_PLAN_SHA256 ||
-    status.input?.liveV5?.authorizationPresent !== false ||
+    status.input?.liveV5?.authorizationSha256 !== V5_AUTHORIZATION_SHA256 ||
+    status.input?.liveV5?.authorizationPresent !== true ||
     status.input?.liveV5?.authorizationCommitted !== false ||
     status.input?.liveV5?.authorized !== false ||
     status.input?.liveV5?.v4AuthorizationReused !== false ||
@@ -297,14 +306,20 @@ export function verifyPivotStatus(): void {
     sha256(readRepositoryEvidence(`${V5_ROOT}/protocol.json`)) !==
       V5_PROTOCOL_SHA256 ||
     sha256(readRepositoryEvidence(`${V5_ROOT}/writer-plan.json`)) !==
-      V5_PLAN_SHA256
+      V5_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V5_ROOT}/capture-authorization.json`)) !==
+      V5_AUTHORIZATION_SHA256
   )
     failures.push("v4 failure or v5 draft evidence hash mismatch");
   if (
     v5Index.artifactVersion !== "input-live-v5-index-v1" ||
     v5Index.status !== V5_STATUS ||
+    v5Index.antecedent?.executableCommit !== V5_ANTECEDENT_COMMIT ||
+    v5Index.antecedent?.protocolFirstAddCommit !==
+      V5_PROTOCOL_FIRST_ADD_COMMIT ||
     v5Index.protocol?.sha256 !== V5_PROTOCOL_SHA256 ||
-    v5Index.authorization?.present !== false ||
+    v5Index.authorization?.sha256 !== V5_AUTHORIZATION_SHA256 ||
+    v5Index.authorization?.present !== true ||
     v5Index.authorization?.committed !== false ||
     v5Index.authorization?.authorized !== false ||
     v5Index.authorization?.v4AuthorizationReusable !== false ||
@@ -319,6 +334,7 @@ export function verifyPivotStatus(): void {
   )
     failures.push("v5 draft authorization/attempt/status overclaim");
   for (const artifact of [
+    v5Index.authorization,
     v5Index.generated?.writer,
     v5Index.generated?.transportEnvelope,
     v5Index.generated?.transportWrapper,

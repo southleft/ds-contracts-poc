@@ -45,16 +45,18 @@
 > `10ba6b57da3cfa97`; they are not new v4 observations because no bridge call
 > occurred.
 >
-> V5 is the replacement draft antecedent. It retains every v4 product criterion
+> V5 is the replacement executable antecedent. It retains every v4 product criterion
 > and threshold and adds a generated 2×128 writer, exact-byte transport,
 > complete expected scene plans, authorization-aware executable orchestration,
 > immediate hash-chained journals, and a strict offline bridge smoke through
-> the live orchestration functions. It is currently uncommitted and
-> unauthorized. No v5 attempt, live write, capture, outcome, or target metric
-> exists. A distinct v5 authorization artifact must be added in a later commit
-> strictly descending from the future antecedent commit; v4 authorization is
-> not reusable. At most three future v5 attempts may run, each from a clean
-> published descendant after authorization. A technically
+> the live orchestration functions. The green executable antecedent is the
+> published commit `a29d034b746d0831ce93f88f1aeb5630ad4b0453`; its protocol was
+> first added by parent `e9f9712a55147a4329f51cfd4bf024866dfd489f`. The
+> separate v5 authorization artifact is prepared but uncommitted, so capture
+> remains forbidden. No v5 attempt, live write, capture, outcome, or target
+> metric exists. V4 authorization is not reusable. At most three future v5
+> attempts may run, each from a clean upstream-equal descendant after the
+> authorization is committed separately and published. A technically
 > successful mint is not a proven bidirectional round trip until scene-derived
 > inversion and accounting pass.**
 >
@@ -119,8 +121,10 @@
 > `recipe/evidence/input-field-live-pivot-v3/index.json`; the v4 protocol and
 > historical authorization declaration are indexed at
 > `recipe/evidence/input-field-live-pivot-v4/index.json`; the v4 entrypoint
-> failure is separate. The executable v5 draft and generated hashes are indexed
-> at `recipe/evidence/input-field-live-pivot-v5/index.json`.
+> failure is separate. The executable v5 antecedent, prepared-uncommitted
+> authorization, and generated hashes are indexed at
+> `recipe/evidence/input-field-live-pivot-v5/index.json`; capture remains
+> forbidden until the separate authorization commit is published.
 > The source-neutral calibration corpus, captures, result, exact-byte attempts,
 > and cleanup receipt are indexed at
 > `recipe/evidence/raster-calibration-v1/index.json`.

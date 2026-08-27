@@ -172,8 +172,7 @@ export async function buildInputLiveV5Proof(
   ];
   const plan = {
     artifactVersion: "input-live-v5-writer-plan-v1",
-    status:
-      "draft antecedent uncommitted; no v5 authorization or live attempt exists",
+    status: "authorization prepared uncommitted; capture forbidden",
     target: INPUT_LIVE_V5_TARGET,
     pageName: writer.pageName,
     runIdentity: writer.runIdentity,
@@ -181,7 +180,8 @@ export async function buildInputLiveV5Proof(
       protocolPath: INPUT_LIVE_V5_PROTOCOL_PATH,
       protocolSha256: INPUT_LIVE_V5_PROTOCOL_SHA256,
       authorizationPath: INPUT_LIVE_V5_AUTHORIZATION_PATH,
-      authorizationPresent: false,
+      authorizationPresent: true,
+      authorizationSha256: sha256(bytes(INPUT_LIVE_V5_AUTHORIZATION_PATH)),
       v4AuthorizationReusable: false,
     },
     typedLowering: {

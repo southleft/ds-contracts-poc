@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v5-writer-plan-v1",
-  "status": "draft antecedent uncommitted; no v5 authorization or live attempt exists",
+  "status": "authorization prepared uncommitted; capture forbidden",
   "target": {
     "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
     "fileName": "Scratch Project",
@@ -12,7 +12,8 @@
     "protocolPath": "recipe/evidence/input-field-live-pivot-v5/protocol.json",
     "protocolSha256": "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf",
     "authorizationPath": "recipe/evidence/input-field-live-pivot-v5/capture-authorization.json",
-    "authorizationPresent": false,
+    "authorizationPresent": true,
+    "authorizationSha256": "acb54eda9a4994c9f1d7502b79d21adcaf28cca06b0566f344a9647219ff39e6",
     "v4AuthorizationReusable": false
   },
   "typedLowering": {
@@ -158,8 +159,8 @@
     }
   },
   "moduleHashes": {
-    "recipe/build-input-field-live-proof-v5.ts": "d2f650125305b4c4e0b2402979d6456e5f4a0d7af315b25f38d587b6b1e780ef",
-    "recipe/input-field-live-v5-authorization.ts": "fb1a550be331d3cc1d90e453180f8e63bc68772745e36aa834ed32eaafa4bd5d",
+    "recipe/build-input-field-live-proof-v5.ts": "fc9cc4127f71ad1d29194c5657fcb64189cfac931d6e0ffb19295866d2ee899d",
+    "recipe/input-field-live-v5-authorization.ts": "ca25f99d99bee7b0f19f1089945f17af9991badfaa832429723678f8d0cdf9fa",
     "recipe/input-field-live-v5-journal.ts": "e521c21e68754188ebe166fccfc5160867610026477614395b750f4c08d695cf",
     "recipe/input-field-live-v5-preflight.ts": "21ce81a912ffa58ecd458cade70e65a2eea8f8ae6b142f5ca3b6f1bdec7eeaec",
     "recipe/run-input-field-live-v5.ts": "278c6c9a06dd9cf22c34b4ec55b9f8e64b2ccb3aa806ad7e3ca1fcbc2b64a313",
