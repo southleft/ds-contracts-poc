@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -440,8 +440,14 @@ const V17_AUTHORIZATION_TEMPLATE_SHA256 =
 const V17_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v17-status.json";
 const V17_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V17_BASE_COMMIT = "09b37d378b5750e6f2cefe2a6ebee953f7cb3dcc";
+const V17_ANTECEDENT_COMMIT = "2a764e90d7683afd39ab08ad5b8cbf3e639c56a2";
+const V17_AUTHORIZATION_PATH = `${V17_ROOT}/capture-authorization.json`;
+const V17_AUTHORIZATION_SHA256 =
+  "2f2a7fdb89b983f566f78da5bf0fc52f037cb8f33818941207b6854fe3e88b73";
+const V17_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "66cbff883845e854f6d1fa03e478db12554ef8986d39dd347c90543c57661da3";
 const V16_RESTORE_SOURCE_SHA256 =
   "a7df1e4af2ff4872a43a122e2dbfb3f0123aa53575ab93478a434f0bfd6ab1b1";
 const V16_RESTORE_BLUEPRINT_SHA256 =
@@ -1393,9 +1399,16 @@ export function validatePivotStatus(
     status.input?.liveV17?.antecedentHashSetSha256 !== V17_HASH_SET_SHA256 ||
     status.input?.liveV17?.authorizationTemplateSha256 !==
       V17_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV17?.authorizationPresent !== false ||
-    status.input?.liveV17?.authorizationCommitted !== false ||
+    status.input?.liveV17?.antecedentCommit !== V17_ANTECEDENT_COMMIT ||
+    status.input?.liveV17?.authorizationPresent !== true ||
+    status.input?.liveV17?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV17?.authorizationEffective !== false ||
+    status.input?.liveV17?.authorizationPath !== V17_AUTHORIZATION_PATH ||
+    status.input?.liveV17?.authorizationSha256 !== V17_AUTHORIZATION_SHA256 ||
+    status.input?.liveV17?.signingPublicKeySpkiSha256 !==
+      V17_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV17?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV17?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV17?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -2867,9 +2880,16 @@ export function verifyPivotStatus(): void {
     v17Status.artifactVersion !== "input-live-v17-status-v1" ||
     v17Status.status !== V17_STATUS ||
     v17Status.baseCommit !== V17_BASE_COMMIT ||
-    v17Status.authorization?.present !== false ||
-    v17Status.authorization?.committed !== false ||
+    v17Status.antecedent?.commit !== V17_ANTECEDENT_COMMIT ||
+    v17Status.authorization?.present !== true ||
+    v17Status.authorization?.commitStateDerivedByHistory !== true ||
     v17Status.authorization?.effective !== false ||
+    v17Status.authorization?.path !== V17_AUTHORIZATION_PATH ||
+    v17Status.authorization?.sha256 !== V17_AUTHORIZATION_SHA256 ||
+    v17Status.authorization?.signingPublicKeySpkiSha256 !==
+      V17_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V17_AUTHORIZATION_PATH)) !==
+      V17_AUTHORIZATION_SHA256 ||
     v17Status.authorization?.v16AuthorizationReusable !== false ||
     v17Status.smallestHonestDelta?.taughtLeadingSlotSolidPaintFromPayloadOrChild !==
       true ||
