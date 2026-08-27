@@ -206,6 +206,13 @@
 > restart v19 attempt 2 as-is. The next lineage must not patch hashed v19
 > scene-readback bytes. Cleanup accepted; owned Input pages are gone; no
 > captures; no live success.
+> V20 is the replacement lineage: it copies the v19 stack and teaches host
+> scene-readback to surface variant `layout.width.value` from the existing
+> Figma `width` / `width.value` FLOAT when `layout.width.value` is absent.
+> V16 writer, restore, runtime, and extract bytes stay frozen. Hashed v19
+> scene-readback stays frozen. Do not teach FIXED. Do not invent a
+> variable. **Draft prepared** on top of `4e0e582d`. Authorization is a
+> separate later commit.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -502,7 +509,8 @@ lineage; do not patch hashed bytes in place.
 | A5ac | PREPARE INPUT V19. Copy the v18 stack. Do not patch hashed v18 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface `strokes.0.weight` from the existing uniform per-side stroke-weight bindings when the surface node's own `strokeWeight` is absent. Do not invent variables. Do not teach FIXED. | **Done** at `53e0ee50e1c7ab08442bec8b666cd95cbd92e600`. Antecedent index SHA-256 `fc5d43842b0c6cafb1cbbcf62980492a842f77598f60f0d3bed1a1957232082f`. |
 | A5ad | AUTHORIZE INPUT V19 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `53e0ee50e1c7ab08442bec8b666cd95cbd92e600`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `fc8c0d6baf426239507c5d1c8e8c5c40d1b9c01f7a0bddd90230b9956b6012e1`; SPKI SHA-256 `af528b74b14780f6978056ff803c452b27a714830eeb405a1a47fa936a970de5`. Do not patch hashed v18 or v19 bytes. | **Done** at `d3b5429cac9df5877143dfb79e617b544d7688f0`. |
 | A5ae | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host refused variant `layout.width.value` (none-adornment variants bind Figma `width` FLOAT; scene-readback maps it to `width.value`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v19 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5af | PREPARE INPUT V20. Copy the v19 stack. Do not patch hashed v19 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface variant `layout.width.value` from the existing Figma `width` / `width.value` FLOAT when `layout.width.value` is absent. Do not invent variables. Do not teach FIXED. | Open only after RECORD. If a hashed v20 file later fails closed, open v21. |
+| A5af | PREPARE INPUT V20. Copy the v19 stack. Do not patch hashed v19 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface variant `layout.width.value` from the existing Figma `width` / `width.value` FLOAT when `layout.width.value` is absent. Do not invent variables. Do not teach FIXED. | **Draft prepared** on top of `4e0e582d`. Antecedent index SHA-256 `72207d604be0227da52ab915d8f904ebd829c6f8ba21dff284e01f88ac4579b2`. |
+| A5ag | AUTHORIZE INPUT V20 as a **separate** commit. New prepare-era Ed25519 signer. Auth lifecycle stays out of the hash set. Do not patch hashed v19 or v20 bytes. | Open after PREPARE. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1925,7 +1933,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, and v19 attempt 1 failed closed; false** | PREPARE INPUT V20 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, and v19 attempt 1 failed closed; v20 draft antecedent pending separate authorization; false** | AUTHORIZE INPUT V20 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

@@ -312,6 +312,9 @@ jobs:
       - name: recipe:input-field:live:v19:check (surface strokes.0.weight from uniform per-side FLOAT; hashed v18 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v19:check
+      - name: recipe:input-field:live:v20:check (surface variant layout.width.value from existing width FLOAT; hashed v19 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v20:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
