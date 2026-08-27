@@ -324,6 +324,9 @@ jobs:
       - name: recipe:input-field:live:v23:check (place aliased layout.width.value at compile index; hashed v22 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v23:check
+      - name: recipe:input-field:live:v24:check (drop extra surface bindings; hashed v23 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v24:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
