@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -708,7 +708,11 @@ const V26_AUTHORIZATION_TEMPLATE_SHA256 =
 const V26_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v26-status.json";
 const V26_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused content/placeholder height.mode; cleanup complete";
+const V26_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v26-attempt-1.json";
+const V26_ATTEMPT_1_SHA256 =
+  "0da96a75beb493f7bba564f021dd4428682254df4efd5bfc2e1f63665a2d6e77";
 const V26_BASE_COMMIT = "629078879e34b8380bb52a39eb6ff5e8794e7166";
 const V26_ANTECEDENT_COMMIT = "ae5811a45a2508a5387b99df4fcebbb12a8ab167";
 const V26_AUTHORIZATION_PATH = `${V26_ROOT}/capture-authorization.json`;
@@ -2269,11 +2273,17 @@ export function validatePivotStatus(
     status.input?.liveV26?.hostPhases !== 3 ||
     status.input?.liveV26?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV26?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV26?.attemptsExecuted !== 0 ||
-    status.input?.liveV26?.nextAttempt !== 1 ||
-    status.input?.liveV26?.liveExecutionOccurred !== false ||
-    status.input?.liveV26?.figmaWrites !== 0 ||
+    status.input?.liveV26?.attemptsExecuted !== 1 ||
+    status.input?.liveV26?.nextAttempt !== 2 ||
+    status.input?.liveV26?.liveExecutionOccurred !== true ||
+    status.input?.liveV26?.figmaWrites !== 4 ||
     status.input?.liveV26?.figmaCaptures !== 0 ||
+    status.input?.liveV26?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV26?.attempt1Path !== V26_ATTEMPT_1_PATH ||
+    status.input?.liveV26?.attempt1Sha256 !== V26_ATTEMPT_1_SHA256 ||
+    status.input?.liveV26
+      ?.restartAsV26Attempt2WithoutContentPlaceholderHeightModeForbidden !==
+      true ||
     status.input?.liveV26?.humanSignoff !== "pending" ||
     status.input?.liveV26?.overallInputSuccess !== false
   )
@@ -4813,9 +4823,18 @@ export function verifyPivotStatus(): void {
       true ||
     v26Status.smallestHonestDelta?.v25SceneReadbackUnchanged !== true ||
     v26Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v26Status.attemptsExecuted !== 0 ||
-    v26Status.liveExecutionOccurred !== false ||
-    v26Status.figmaWrites !== 0 ||
+    v26Status.attemptsExecuted !== 1 ||
+    v26Status.nextAttempt !== 2 ||
+    v26Status.liveExecutionOccurred !== true ||
+    v26Status.figmaWrites !== 4 ||
+    v26Status.figmaCaptures !== 0 ||
+    v26Status.createdNodesThenRemoved !== 2317 ||
+    v26Status.attempt1Path !== V26_ATTEMPT_1_PATH ||
+    v26Status.attempt1Sha256 !== V26_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V26_ATTEMPT_1_PATH)) !==
+      V26_ATTEMPT_1_SHA256 ||
+    v26Status.restartAsV26Attempt2WithoutContentPlaceholderHeightModeForbidden !==
+      true ||
     v26Status.overallInputSuccess !== false
   )
     failures.push("v26 draft antecedent/status mismatch");
