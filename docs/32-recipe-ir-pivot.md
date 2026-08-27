@@ -250,10 +250,21 @@
 > `width.value` / `height.value` binding. Variant width and surface height
 > roles only. V16 writer, restore, runtime, and extract bytes stay frozen.
 > Hashed v21 scene-readback stays frozen. Do not teach FIXED. Do not invent
-> a variable. Authorization pins antecedent
-> `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Live execution remains
-> forbidden until runtime security prerequisites pass. Do not restart v21
-> attempt 2 as-is.
+> a variable. Authorization is published at
+> `281bb2594408ebbfef6b332c2f8b7b05a56bd7b9`. V22 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse `bindings.length`. Host collapse
+> then refused `$.children[0].bindings[1].field`. After scene-readback-v22
+> the first variant has three bindings (`layout.itemSpacing`,
+> `layout.minWidth`, `layout.width.value`); recipe compile emits the same
+> three none-adornment fields as `layout.itemSpacing`,
+> `layout.width.value`, `layout.minWidth`. The alias appends
+> `layout.width.value` after dropping `width.value`. Do not teach FIXED.
+> Do not invent a variable. Do not restart v22 attempt 2 as-is. The next
+> lineage must not patch hashed v22 scene-readback bytes. Cleanup
+> accepted; owned Input pages are gone; no captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -557,7 +568,9 @@ lineage; do not patch hashed bytes in place.
 | A5aj | AUTHORIZE INPUT V21 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `21fd65bb5a1f9874b96de05547dc092298738f59`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `15afeb3ecab3bc6493f6738a07c97e69f8bbe628afe92538a0c9bb807f865d3a`; SPKI SHA-256 `d26147dd1a658f2a3d585437c44105eabe7dfe3abfeac349a138e1163175d09f`. Do not patch hashed v20 or v21 bytes. | **Done** at `33108d6b18f2b37f9e03359949ce757554ae4c44`. |
 | A5ak | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse surface `layout.height.value`, then refused variant `$.children[0].bindings.length` (live first variant has `width.value` plus surfaced `layout.width.value`; compile emits three none-adornment bindings). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v21 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
 | A5al | PREPARE INPUT V22. Copy the v21 stack. Do not patch hashed v21 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface the existing width/height FLOAT onto the recipe field without leaving a duplicate `width.value` / `height.value` binding that collapse treats as a structural edit. Do not invent variables. Do not teach FIXED. | **Done** at `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Antecedent index SHA-256 `10bac5a8b65db4c6618132818eadf7345c6045bcf3e48e29c2b2e547e0692c7f`. |
-| A5am | AUTHORIZE INPUT V22 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `d29a41ee155fb6645d0ccd40a136933530f91b4b6f90bc1dcdc377be5fa5b0e3`; SPKI SHA-256 `020c28eb8a67e123d0c4b5965a92a2968716fedfc2f02b0875e272fe4c32598c`. Do not patch hashed v21 or v22 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v22 file fails closed, open v23. |
+| A5am | AUTHORIZE INPUT V22 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `d29a41ee155fb6645d0ccd40a136933530f91b4b6f90bc1dcdc377be5fa5b0e3`; SPKI SHA-256 `020c28eb8a67e123d0c4b5965a92a2968716fedfc2f02b0875e272fe4c32598c`. Do not patch hashed v21 or v22 bytes. | **Done** at `281bb2594408ebbfef6b332c2f8b7b05a56bd7b9`. |
+| A5an | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `bindings.length`, then refused variant `$.children[0].bindings[1].field` (alias dropped `width.value` and appended `layout.width.value`; compile wants `layout.width.value` at index 1 before `layout.minWidth`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v22 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ao | PREPARE INPUT V23. Copy the v22 stack. Do not patch hashed v22 scene-readback, extract, restore, writer, or runtime bytes. Teach host to place the aliased `layout.width.value` at the recipe compile index rather than appending it. Do not invent variables. Do not teach FIXED. | Open only after RECORD. If a hashed v23 file later fails closed, open v24. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1980,7 +1993,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, and v21 attempt 1 failed closed; v22 authorization declared; false** | attestation + Scratch-only live v22 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, and v22 attempt 1 failed closed; false** | PREPARE INPUT V23 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

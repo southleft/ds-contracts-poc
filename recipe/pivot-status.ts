@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -590,7 +590,11 @@ const V22_AUTHORIZATION_TEMPLATE_SHA256 =
 const V22_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v22-status.json";
 const V22_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused variant bindings[1].field; cleanup complete";
+const V22_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v22-attempt-1.json";
+const V22_ATTEMPT_1_SHA256 =
+  "4ea930a3a31a7f835a0af8adb7ef5d7c07f405304c79aacc66f9ae3b5d45468a";
 const V22_BASE_COMMIT = "2ce24dc2292ed8c85fa5bd0eae38ff87fc503a65";
 const V22_ANTECEDENT_COMMIT = "edcfe4fbc45c72932d414f4b006d163a18f922d5";
 const V22_AUTHORIZATION_PATH = `${V22_ROOT}/capture-authorization.json`;
@@ -1897,11 +1901,16 @@ export function validatePivotStatus(
     status.input?.liveV22?.hostPhases !== 3 ||
     status.input?.liveV22?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV22?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV22?.attemptsExecuted !== 0 ||
-    status.input?.liveV22?.nextAttempt !== 1 ||
-    status.input?.liveV22?.liveExecutionOccurred !== false ||
-    status.input?.liveV22?.figmaWrites !== 0 ||
+    status.input?.liveV22?.attemptsExecuted !== 1 ||
+    status.input?.liveV22?.nextAttempt !== 2 ||
+    status.input?.liveV22?.liveExecutionOccurred !== true ||
+    status.input?.liveV22?.figmaWrites !== 4 ||
     status.input?.liveV22?.figmaCaptures !== 0 ||
+    status.input?.liveV22?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV22?.attempt1Path !== V22_ATTEMPT_1_PATH ||
+    status.input?.liveV22?.attempt1Sha256 !== V22_ATTEMPT_1_SHA256 ||
+    status.input?.liveV22
+      ?.restartAsV22Attempt2WithoutVariantBindingsFieldForbidden !== true ||
     status.input?.liveV22?.humanSignoff !== "pending" ||
     status.input?.liveV22?.overallInputSuccess !== false
   )
@@ -3943,9 +3952,18 @@ export function verifyPivotStatus(): void {
       true ||
     v22Status.smallestHonestDelta?.v21SceneReadbackUnchanged !== true ||
     v22Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v22Status.attemptsExecuted !== 0 ||
-    v22Status.liveExecutionOccurred !== false ||
-    v22Status.figmaWrites !== 0 ||
+    v22Status.attemptsExecuted !== 1 ||
+    v22Status.nextAttempt !== 2 ||
+    v22Status.liveExecutionOccurred !== true ||
+    v22Status.figmaWrites !== 4 ||
+    v22Status.figmaCaptures !== 0 ||
+    v22Status.createdNodesThenRemoved !== 2317 ||
+    v22Status.attempt1Path !== V22_ATTEMPT_1_PATH ||
+    v22Status.attempt1Sha256 !== V22_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V22_ATTEMPT_1_PATH)) !==
+      V22_ATTEMPT_1_SHA256 ||
+    v22Status.restartAsV22Attempt2WithoutVariantBindingsFieldForbidden !==
+      true ||
     v22Status.overallInputSuccess !== false
   )
     failures.push("v22 draft antecedent/status mismatch");
