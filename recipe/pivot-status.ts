@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -470,8 +470,14 @@ const V18_AUTHORIZATION_TEMPLATE_SHA256 =
 const V18_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v18-status.json";
 const V18_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V18_BASE_COMMIT = "cd247ebbe050b74232dd4ad24602d733a7c1bb48";
+const V18_ANTECEDENT_COMMIT = "cfdc6a7cff19b619640dc9dcea0d79a79f1ade75";
+const V18_AUTHORIZATION_PATH = `${V18_ROOT}/capture-authorization.json`;
+const V18_AUTHORIZATION_SHA256 =
+  "7a95ddb633dbad6c8bf10110af41d18acfc11719dabc28044b28dead846671e0";
+const V18_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "8d2c69e5310eb77f4c0bbb9f42d0bb23d01df03318d73705cf0ff40f33a70cb8";
 const V17_SCENE_READBACK_SHA256 =
   "4a99833d5576a23134a5be6a1b62225eadfae46949563249dd324d0e5d514762";
 const V16_RESTORE_SOURCE_SHA256 =
@@ -1485,9 +1491,16 @@ export function validatePivotStatus(
     status.input?.liveV18?.antecedentHashSetSha256 !== V18_HASH_SET_SHA256 ||
     status.input?.liveV18?.authorizationTemplateSha256 !==
       V18_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV18?.authorizationPresent !== false ||
-    status.input?.liveV18?.authorizationCommitted !== false ||
+    status.input?.liveV18?.antecedentCommit !== V18_ANTECEDENT_COMMIT ||
+    status.input?.liveV18?.authorizationPresent !== true ||
+    status.input?.liveV18?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV18?.authorizationEffective !== false ||
+    status.input?.liveV18?.authorizationPath !== V18_AUTHORIZATION_PATH ||
+    status.input?.liveV18?.authorizationSha256 !== V18_AUTHORIZATION_SHA256 ||
+    status.input?.liveV18?.signingPublicKeySpkiSha256 !==
+      V18_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV18?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV18?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV18?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -3083,9 +3096,16 @@ export function verifyPivotStatus(): void {
     v18Status.artifactVersion !== "input-live-v18-status-v1" ||
     v18Status.status !== V18_STATUS ||
     v18Status.baseCommit !== V18_BASE_COMMIT ||
-    v18Status.authorization?.present !== false ||
-    v18Status.authorization?.committed !== false ||
+    v18Status.antecedent?.commit !== V18_ANTECEDENT_COMMIT ||
+    v18Status.authorization?.present !== true ||
+    v18Status.authorization?.commitStateDerivedByHistory !== true ||
     v18Status.authorization?.effective !== false ||
+    v18Status.authorization?.path !== V18_AUTHORIZATION_PATH ||
+    v18Status.authorization?.sha256 !== V18_AUTHORIZATION_SHA256 ||
+    v18Status.authorization?.signingPublicKeySpkiSha256 !==
+      V18_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V18_AUTHORIZATION_PATH)) !==
+      V18_AUTHORIZATION_SHA256 ||
     v18Status.authorization?.v17AuthorizationReusable !== false ||
     v18Status.smallestHonestDelta?.taughtLeadingSlotColorBindingFromChild !==
       true ||
