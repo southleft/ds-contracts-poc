@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 authorization declared; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -1223,7 +1223,7 @@
       "overallInputSuccess": false
     },
     "liveV17": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused leading slot color binding; cleanup complete",
       "baseCommit": "09b37d378b5750e6f2cefe2a6ebee953f7cb3dcc",
       "antecedentCommit": "2a764e90d7683afd39ab08ad5b8cbf3e639c56a2",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v17/protocol.json",
@@ -1328,13 +1328,17 @@
         "tokenValuesForbidden": true,
         "liveExecutionForbidden": true
       },
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
       "maximumFutureAttempts": 3,
       "humanSignoff": "pending",
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 4,
       "figmaCaptures": 0,
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v17-attempt-1.json",
+      "attempt1Sha256": "f738d983cf4171a8f9bb3c8f2476ad83cb7e10fbb5fa53d1a3ff6ad844a10a6d",
+      "restartAsV17Attempt2WithoutLeadingSlotColorBindingForbidden": true,
       "overallInputSuccess": false
     }
   }

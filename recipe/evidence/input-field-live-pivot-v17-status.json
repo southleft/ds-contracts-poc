@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v17-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused leading slot color binding; cleanup complete",
   "baseCommit": "09b37d378b5750e6f2cefe2a6ebee953f7cb3dcc",
   "antecedent": {
     "commit": "2a764e90d7683afd39ab08ad5b8cbf3e639c56a2",
@@ -93,12 +93,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v17-attempt-1.json",
+  "attempt1Sha256": "f738d983cf4171a8f9bb3c8f2476ad83cb7e10fbb5fa53d1a3ff6ad844a10a6d",
+  "restartAsV17Attempt2WithoutLeadingSlotColorBindingForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }
