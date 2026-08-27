@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.text-input",
   "name": "TextInput",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "status": "draft",
-  "description": "Astryx TextInput — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the optional/required/disabled/clear/autofocus flags are verbatim (83% facts-carried); description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. Wave B.3: showcase width (320px), inputWrapper border (color-border-emphasized), startIcon row (type-mapped 16px glyphs, color-icon-secondary), and placeholder hierarchy (body-size secondary text) from TextInput.tsx + inputStyles.stylex source — not harness-captured.",
+  "description": "Astryx TextInput — a labelled single-line text field. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/TextInput/TextInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). type/label/size/placeholder and the required/disabled/clear flags are verbatim; description, disabledMessage, labelTooltip, htmlName and isLoading are dropped. value is materialized as a placeholder-backed text field. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/textinput/decisions.md); extension sidecar carries the named overflow.",
   "archetype": "input / field",
   "semantics": {
     "element": "div"
@@ -40,6 +40,8 @@
       "name": "label",
       "description": "The field label.",
       "type": "text",
+      "default": "Email",
+      "required": true,
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -48,9 +50,7 @@
         "code": {
           "prop": "label"
         }
-      },
-      "required": true,
-      "default": "Email"
+      }
     },
     {
       "name": "size",
@@ -82,6 +82,7 @@
       "name": "placeholder",
       "description": "Placeholder text.",
       "type": "text",
+      "default": "you@example.com",
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -90,8 +91,7 @@
         "code": {
           "prop": "placeholder"
         }
-      },
-      "default": "you@example.com"
+      }
     },
     {
       "name": "isRequired",
@@ -146,119 +146,169 @@
         "display": "flex",
         "direction": "column"
       },
-      "tokens": {
-        "color": "{color-text-primary}",
-        "gap": "{spacing-1}",
-        "font-family": "{font-family-body}",
-        "font-size": "{font-size-sm}"
-      },
-      "literals": {
-        "width": "320px"
-      },
       "parts": {
         "label": {
-          "element": "span",
+          "element": "label",
           "content": {
             "prop": "label"
           },
-          "tokens": {
-            "color": "{color-text-secondary}",
-            "font-size": "{font-size-xs}"
-          }
-        },
-        "field": {
-          "element": "div",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|field-label — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
-            "direction": "row",
             "align": "center"
           },
-          "tokens": {
-            "background-color": "{color-background-surface}",
-            "border-color": "{color-border-emphasized}",
-            "border-width": "{border-width}",
-            "border-radius": "{radius-element}",
-            "gap": "{spacing-2}",
-            "padding-block": "{spacing-2}",
-            "padding-inline": "{spacing-3}"
+          "declared": {
+            "cursor": "pointer",
+            "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
           },
-          "tokensByProp": {
-            "prop": "size",
-            "map": {
-              "sm": {
-                "padding-block": "{spacing-1}",
-                "padding-inline": "{spacing-2}"
-              },
-              "md": {
-                "padding-block": "{spacing-2}",
-                "padding-inline": "{spacing-3}"
-              },
-              "lg": {
-                "padding-block": "{spacing-3}",
-                "padding-inline": "{spacing-4}"
-              }
-            }
+          "tokens": {
+            "color": "{imported.text-input.label.color}",
+            "column-gap": "{imported.shared.size-4}",
+            "font-size": "{imported.text-input.label.font-size}",
+            "font-weight": "{imported.text-input.label.font-weight}",
+            "line-height": "{imported.text-input.label.line-height}",
+            "row-gap": "{imported.shared.size-4}"
+          }
+        },
+        "part-1": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column"
           },
           "parts": {
-            "start-icon": {
+            "text-input": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|text-input — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
                 "align": "center"
               },
               "parts": {
-                "icon-text": {
-                  "icon": {
-                    "asset": "text-input-user",
-                    "size": 16
+                "part-1-0-0": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "appearance": "auto",
+                    "border-bottom-style": "none",
+                    "border-left-style": "none",
+                    "border-right-style": "none",
+                    "border-top-style": "none",
+                    "cursor": "text",
+                    "overflow-x": "clip",
+                    "overflow-y": "clip"
                   },
-                  "visibleWhen": {
-                    "prop": "type",
-                    "equals": "text"
-                  },
-                  "tokens": {
-                    "color": "{color-icon-secondary}"
-                  }
-                },
-                "icon-email": {
-                  "icon": {
-                    "asset": "text-input-mail",
-                    "size": 16
-                  },
-                  "visibleWhen": {
-                    "prop": "type",
-                    "equals": "email"
+                  "layout": {
+                    "grow": true
                   },
                   "tokens": {
-                    "color": "{color-icon-secondary}"
-                  }
-                },
-                "icon-password": {
-                  "icon": {
-                    "asset": "text-input-lock",
-                    "size": 16
-                  },
-                  "visibleWhen": {
-                    "prop": "type",
-                    "equals": "password"
-                  },
-                  "tokens": {
-                    "color": "{color-icon-secondary}"
+                    "color": "{imported.shared.color-171717}",
+                    "flex-grow": "{imported.text-input.part-1-0-0.flex-grow}",
+                    "font-size": "{imported.text-input.part-1-0-0.font-size}",
+                    "line-height": "{imported.text-input.part-1-0-0.line-height}",
+                    "min-width": "{imported.shared.size-0}",
+                    "placeholder-color": "{imported.text-input.part-1-0-0.placeholder-color}"
                   }
                 }
-              }
-            },
-            "placeholder-text": {
-              "element": "span",
-              "content": {
-                "prop": "placeholder"
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "position": "relative",
+                "transition-duration": "0.125s",
+                "transition-property": "border-color, box-shadow",
+                "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
               },
               "tokens": {
-                "color": "{color-text-secondary}",
-                "font-size": "{font-size-sm}"
-              }
+                "background-color": "{imported.text-input.text-input.background-color}",
+                "border-bottom-color": "{imported.shared.color-d4d4d4}",
+                "border-bottom-left-radius": "{imported.shared.size-10}",
+                "border-bottom-right-radius": "{imported.shared.size-10}",
+                "border-bottom-width": "{imported.shared.size-1}",
+                "border-left-color": "{imported.shared.color-d4d4d4}",
+                "border-left-width": "{imported.shared.size-1}",
+                "border-right-color": "{imported.shared.color-d4d4d4}",
+                "border-right-width": "{imported.shared.size-1}",
+                "border-top-color": "{imported.shared.color-d4d4d4}",
+                "border-top-left-radius": "{imported.shared.size-10}",
+                "border-top-right-radius": "{imported.shared.size-10}",
+                "border-top-width": "{imported.shared.size-1}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-171717}",
+                "column-gap": "{imported.shared.size-8}",
+                "left": "{imported.shared.size-0}",
+                "padding-bottom": "{imported.shared.size-4}",
+                "padding-left": "{imported.shared.size-8}",
+                "padding-right": "{imported.shared.size-8}",
+                "padding-top": "{imported.shared.size-4}",
+                "right": "{imported.shared.size-0}",
+                "row-gap": "{imported.shared.size-8}",
+                "top": "{imported.shared.size-0}",
+                "z-index": "{imported.text-input.text-input.z-index}"
+              },
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "box-shadow",
+                  "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-bottom-color",
+                  "value": "#262626",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-left-color",
+                  "value": "#262626",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-right-color",
+                  "value": "#262626",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-top-color",
+                  "value": "#262626",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "box-shadow",
+                  "value": "rgba(241, 241, 241, 1) 0px 0px 0px 2px inset",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "box-shadow",
+                  "value": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             }
+          },
+          "declared": {
+            "isolation": "isolate"
+          },
+          "tokens": {
+            "color": "{imported.shared.color-171717}"
           }
         }
+      },
+      "tokens": {
+        "color": "{imported.shared.color-171717}",
+        "column-gap": "{imported.shared.size-4}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "row-gap": "{imported.shared.size-4}",
+        "width": "{imported.text-input.root.width}"
       }
     }
   },

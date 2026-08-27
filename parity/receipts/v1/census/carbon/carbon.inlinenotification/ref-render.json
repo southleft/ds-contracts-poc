@@ -1,0 +1,143 @@
+{
+  "id": "carbon.inlinenotification",
+  "library": "carbon",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "recipe": "examples/carbon sandbox (.carbon-sandbox; examples/carbon/README) mounted per extract/computed/configs/carbon.json"
+  },
+  "configPath": "extract/computed/configs/carbon.json",
+  "component": "InlineNotification",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "kind-error__contrast-high",
+      "status": "rendered",
+      "png": "ref-kind-error__contrast-high.png",
+      "props": {
+        "title": "Notification title",
+        "subtitle": "Notification subtitle",
+        "kind": "error",
+        "lowContrast": false,
+        "onClose": {
+          "$callback": true
+        },
+        "onCloseButtonClick": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-error__contrast-low",
+      "status": "rendered",
+      "png": "ref-kind-error__contrast-low.png",
+      "props": {
+        "title": "Notification title",
+        "subtitle": "Notification subtitle",
+        "kind": "error",
+        "lowContrast": true,
+        "onClose": {
+          "$callback": true
+        },
+        "onCloseButtonClick": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-info__contrast-high",
+      "status": "rendered",
+      "png": "ref-kind-info__contrast-high.png",
+      "props": {
+        "title": "Notification title",
+        "subtitle": "Notification subtitle",
+        "kind": "info",
+        "lowContrast": false,
+        "onClose": {
+          "$callback": true
+        },
+        "onCloseButtonClick": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-info-square__contrast-high",
+      "status": "rendered",
+      "png": "ref-kind-info-square__contrast-high.png",
+      "props": {
+        "title": "Notification title",
+        "subtitle": "Notification subtitle",
+        "kind": "info-square",
+        "lowContrast": false,
+        "onClose": {
+          "$callback": true
+        },
+        "onCloseButtonClick": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-success__contrast-high",
+      "status": "rendered",
+      "png": "ref-kind-success__contrast-high.png",
+      "props": {
+        "title": "Notification title",
+        "subtitle": "Notification subtitle",
+        "kind": "success",
+        "lowContrast": false,
+        "onClose": {
+          "$callback": true
+        },
+        "onCloseButtonClick": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-warning__contrast-high",
+      "status": "rendered",
+      "png": "ref-kind-warning__contrast-high.png",
+      "props": {
+        "title": "Notification title",
+        "subtitle": "Notification subtitle",
+        "kind": "warning",
+        "lowContrast": false,
+        "onClose": {
+          "$callback": true
+        },
+        "onCloseButtonClick": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "kind-warning-alt__contrast-high",
+      "status": "rendered",
+      "png": "ref-kind-warning-alt__contrast-high.png",
+      "props": {
+        "title": "Notification title",
+        "subtitle": "Notification subtitle",
+        "kind": "warning-alt",
+        "lowContrast": false,
+        "onClose": {
+          "$callback": true
+        },
+        "onCloseButtonClick": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 7,
+  "unmappable": 0
+}

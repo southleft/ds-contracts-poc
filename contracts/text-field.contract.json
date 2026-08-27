@@ -197,7 +197,8 @@
             "padding-block": "{space.inset-y.{size}}",
             "font-size": "{font.control.size.{size}}",
             "font-family": "{font.control.family}",
-            "color": "{color.surface.foreground}"
+            "color": "{color.surface.foreground}",
+          "placeholder-color": "{color.input.placeholder}"
           }
         }
       }

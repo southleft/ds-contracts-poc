@@ -1,0 +1,4 @@
+[data-cf="flex-direction-by-axis"] { display: flex; flex-direction: column; gap: 4px; }
+[data-cf="flex-direction-by-axis"][data-orientation="horizontal"] { flex-direction: row; }
+[data-cf="flex-direction-by-axis"] .cf-a { display: block; background: rgb(220, 230, 245); padding: 2px 6px; }
+[data-cf="flex-direction-by-axis"] .cf-b { display: block; background: rgb(245, 230, 220); padding: 2px 6px; }

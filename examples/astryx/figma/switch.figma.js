@@ -40,7 +40,7 @@ const COMPONENTS = [
             "blockFlow": true
           },
           "fixedWidth": {
-            "px": 178.016,
+            "px": 173.25,
             "varName": "imported/switch/root/width"
           },
           "children": [
@@ -58,7 +58,7 @@ const COMPONENTS = [
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
-                "px": 178.016,
+                "px": 173.25,
                 "varName": "imported/switch/part-0/width"
               },
               "children": [
@@ -150,7 +150,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "fixedWidth": {
-                    "px": 130.016,
+                    "px": 125.25,
                     "varName": "imported/switch/part-0-1/width/end"
                   },
                   "children": [
@@ -195,7 +195,7 @@ const COMPONENTS = [
             "blockFlow": true
           },
           "fixedWidth": {
-            "px": 178.016,
+            "px": 173.25,
             "varName": "imported/switch/root/width"
           },
           "children": [
@@ -213,7 +213,7 @@ const COMPONENTS = [
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
-                "px": 178.016,
+                "px": 173.25,
                 "varName": "imported/switch/part-0/width"
               },
               "children": [
@@ -227,7 +227,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "fixedWidth": {
-                    "px": 130.016,
+                    "px": 125.25,
                     "varName": "imported/switch/part-0-0/width/start"
                   },
                   "children": [
@@ -350,7 +350,7 @@ const COMPONENTS = [
             "blockFlow": true
           },
           "fixedWidth": {
-            "px": 178.016,
+            "px": 173.25,
             "varName": "imported/switch/root/width"
           },
           "children": [
@@ -368,7 +368,7 @@ const COMPONENTS = [
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
-                "px": 178.016,
+                "px": 173.25,
                 "varName": "imported/switch/part-0/width"
               },
               "children": [
@@ -459,7 +459,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "fixedWidth": {
-                    "px": 130.016,
+                    "px": 125.25,
                     "varName": "imported/switch/part-0-1/width/end"
                   },
                   "children": [
@@ -504,7 +504,7 @@ const COMPONENTS = [
             "blockFlow": true
           },
           "fixedWidth": {
-            "px": 178.016,
+            "px": 173.25,
             "varName": "imported/switch/root/width"
           },
           "children": [
@@ -522,7 +522,7 @@ const COMPONENTS = [
                 "minWidth": "imported/shared/size-0"
               },
               "fixedWidth": {
-                "px": 178.016,
+                "px": 173.25,
                 "varName": "imported/switch/part-0/width"
               },
               "children": [
@@ -536,7 +536,7 @@ const COMPONENTS = [
                     "stretchChildren": true
                   },
                   "fixedWidth": {
-                    "px": 130.016,
+                    "px": 125.25,
                     "varName": "imported/switch/part-0-0/width/start"
                   },
                   "children": [

@@ -1,0 +1,160 @@
+{
+  "id": "fluent.input",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Input",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "appearance-outline__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-medium.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__size-small",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-small.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "outline",
+        "size": "small"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__size-large",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-large.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "outline",
+        "size": "large"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-underline__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-underline__size-medium.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "underline",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled-darker__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled-darker__size-medium.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "filled-darker",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled-lighter__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled-lighter__size-medium.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "filled-lighter",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled-darker-shadow__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled-darker-shadow__size-medium.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "filled-darker-shadow",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled-lighter-shadow__size-medium",
+      "status": "rendered",
+      "png": "ref-appearance-filled-lighter-shadow__size-medium.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "filled-lighter-shadow",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__size-medium__state-active",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-medium__state-active.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__size-medium__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-medium__state-focus-visible.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__size-medium__state-hover",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-medium__state-hover.png",
+      "props": {
+        "type": "text",
+        "placeholder": "Value",
+        "defaultValue": "",
+        "appearance": "outline",
+        "size": "medium"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 11,
+  "unmappable": 0
+}

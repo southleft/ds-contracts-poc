@@ -1,0 +1,28 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "both variants: child content missing \u2014 canvas renders empty 640x70 rounded boxes (muted: gray tint; section: white); ref shows the same boxes containing 'The quick brown fox jumps over the lazy dog.' An empty rounded rectangle is not identifiable as a Section."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "slot-only section renders as an empty rounded box in both halves",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23929",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.section.dump.json",
+  "matched": 13,
+  "diverged": [
+   "part root/content \u2014 missing from proposal",
+   "part root/Children \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root layout align:stretch` \u2014 stretch leaves no artifact here (children are instances/slots \u2014 excluded from the generator fill-width path)"
+  ]
+ }
+}

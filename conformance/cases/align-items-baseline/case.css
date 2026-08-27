@@ -1,3 +1,3 @@
-[data-cf="align-items-baseline"] { display: flex; align-items: baseline; column-gap: 8px; row-gap: 8px; background: rgb(240, 240, 240); }
-[data-cf="align-items-baseline"] .cf-a { font-size: 20px; }
-[data-cf="align-items-baseline"] .cf-b { font-size: 12px; }
+[data-cf="align-items-baseline"] { display: flex; flex-direction: row; align-items: baseline; gap: 4px; }
+[data-cf="align-items-baseline"] .cf-a { display: block; font-size: 20px; background: rgb(220, 230, 245); padding: 2px 6px; }
+[data-cf="align-items-baseline"] .cf-b { display: block; font-size: 10px; background: rgb(245, 230, 220); padding: 2px 6px; }

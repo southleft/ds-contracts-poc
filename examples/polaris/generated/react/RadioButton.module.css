@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: flex-start;
   border: 0;
+  color: var(--imported-shared-color-303030);
   height: var(--imported-radio-button-root-height);
   padding-bottom: var(--imported-radio-button-root-padding-bottom);
   padding-top: var(--imported-radio-button-root-padding-top);
@@ -34,6 +35,7 @@
 .choice__control {
   display: flex;
   align-items: stretch;
+  color: var(--imported-shared-color-303030);
   flex-shrink: var(--imported-radio-button-choice-control-flex-shrink);
   margin-right: var(--imported-radio-button-choice-control-margin-right);
   width: var(--imported-radio-button-choice-control-width);
@@ -47,6 +49,7 @@
 .radiobutton {
   display: flex;
   bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-303030);
   height: var(--imported-shared-size-18);
   left: var(--imported-shared-size-0);
   margin-bottom: var(--imported-shared-size-1);
@@ -117,7 +120,9 @@
   height: 18px;
   flex-shrink: 0;
   border-radius: var(--p-border-radius-full);
+  border-width: var(--p-border-width-0165);
   bottom: var(--imported-shared-size-0);
+  color: var(--imported-shared-color-303030);
   height: var(--imported-shared-size-18);
   left: var(--imported-shared-size-0);
   min-height: var(--imported-shared-size-0);
@@ -125,6 +130,7 @@
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
   width: var(--imported-shared-size-18);
+  border-style: solid;
   display: block;
   border-bottom-style: solid;
   border-left-style: solid;
@@ -183,6 +189,10 @@
   flex-shrink: 0;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 1);
+  border-top-width: 0px;
+  border-right-width: 0px;
+  border-bottom-width: 0px;
+  border-left-width: 0px;
 }
 
 .checked-unchecked .backdrop-before {
@@ -197,6 +207,7 @@
 
 .choice__label {
   display: flex;
+  color: var(--imported-shared-color-303030);
   width: var(--imported-radio-button-choice-label-width);
   display: block;
   cursor: pointer;
@@ -211,6 +222,7 @@
 }
 
 .label {
+  color: var(--imported-shared-color-303030);
   font-size: var(--imported-radio-button-label-font-size);
   font-weight: var(--imported-radio-button-label-font-weight);
   line-height: var(--imported-radio-button-label-line-height);
@@ -218,6 +230,7 @@
   min-width: var(--imported-shared-size-0);
   display: inline;
   cursor: pointer;
+  font-family: Inter, -apple-system, "system-ui", "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
 }
 
 .root:disabled .label {

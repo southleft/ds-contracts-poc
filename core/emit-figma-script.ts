@@ -1428,6 +1428,16 @@ interface TextCtx {
   /** The same literal as CSS text — what an icon child bakes into its glyph
    *  markup in place of the token path's resolved literal (iconSvg). */
   textFillLitCss?: string;
+  /** RC7 — THE PLACEHOLDER PLANE'S INK. `placeholder-color` is a SYNTHETIC
+   *  channel (extract/computed/lib.ts foldPlaceholderInk hoists
+   *  `::placeholder{color}` onto its host when it DIFFERS from the host's
+   *  own `color`). It rides the text context exactly as `color` does so a
+   *  child control inherits nothing it was not given, and it is consumed
+   *  ONLY by the placeholder text node — the control's own `color` keeps
+   *  painting the VALUE ink everywhere else. */
+  placeholderFill?: string;
+  placeholderFillLit?: { r: number; g: number; b: number; a?: number };
+  placeholderFillLitCss?: string;
   /** Round 4: token dot-path behind a part's CSS `fill` channel — promoted
    *  svg hosts' glyph paint (attribute-less paths inherit it). */
   glyphFillPath?: string;
@@ -1947,7 +1957,52 @@ function applyTokens(
   const sideValues = new Set(sidePaths.map((p) => String(resolveLiteral(p))));
   const hasWidthSource = ['border-width', 'border-top-width', 'border-right-width', 'border-bottom-width', 'border-left-width']
     .some((chn) => tokens[chn] !== undefined);
-  const uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
+  let uniformSideStroke = sidePaths.length > 0 && sideValues.size === 1 && hasWidthSource ? figmaName(sidePaths[0]) : null;
+  // CENSUS (fluent.input) — the one-paint rule, refined twice, both honest:
+  //   1. A side whose carried WIDTH resolves to 0 draws nothing in CSS, so
+  //      its colour cannot constrain the paint (fluent underline carries
+  //      four side colours but only the bottom has a non-zero width — the
+  //      old uniformity test read the three invisible sides and refused the
+  //      one that draws, so the underline minted ZERO ink).
+  //   2. When the DRAWN sides genuinely disagree, the value the MAJORITY of
+  //      them share lowers to the paint and each outvoted side is a NAMED
+  //      code-only fact (fluent outline: top/left/right #d1d1d1, the
+  //      accessible bottom darker — three sides of true ink beat four sides
+  //      of nothing). A tie refuses exactly as before.
+  // Components whose carried sides all agree keep their old bytes: the
+  // refinement only runs where the old rule refused.
+  const outvotedSides = new Set<string>();
+  if (uniformSideStroke === null && sidePaths.length > 0 && hasWidthSource) {
+    const sideInfo = SIDE_COLOR_CHANNELS.filter((chn) => tokens[chn] !== undefined).map((chn) => {
+      const side = chn.split('-')[1];
+      let cp = tokens[chn].slice(1, -1);
+      for (const [propName, value] of Object.entries(subst)) cp = cp.replaceAll(`{${propName}}`, value);
+      const wRef = tokens[`border-${side}-width`] ?? tokens['border-width'];
+      let drawn = true;
+      if (wRef !== undefined) {
+        let wp = wRef.slice(1, -1);
+        for (const [propName, value] of Object.entries(subst)) wp = wp.replaceAll(`{${propName}}`, value);
+        const w = px(resolveLiteral(wp));
+        if (Number.isFinite(w) && w === 0) drawn = false;
+      }
+      return { chn, path: cp, value: String(resolveLiteral(cp)), drawn };
+    });
+    const drawn = sideInfo.filter((s) => s.drawn);
+    const tally = new Map<string, number>();
+    for (const s of drawn) tally.set(s.value, (tally.get(s.value) ?? 0) + 1);
+    let majority: string | null = null;
+    let best = 0;
+    let tied = false;
+    for (const [v, n] of tally) {
+      if (n > best) { best = n; majority = v; tied = false; }
+      else if (n === best) tied = true;
+    }
+    if (drawn.length > 0 && majority !== null && !tied) {
+      const winner = drawn.find((s) => s.value === majority)!;
+      uniformSideStroke = figmaName(winner.path);
+      for (const s of drawn) if (s.value !== majority) outvotedSides.add(s.chn);
+    }
+  }
   // Decided BEFORE the loop so it cannot depend on which channel the switch
   // happens to reach first: a Figma node has ONE strokes paint, so a drawn
   // outline and a drawn border compete for it, and the winner must not be
@@ -2002,6 +2057,12 @@ function applyTokens(
       case 'border-right-color':
       case 'border-bottom-color':
       case 'border-left-color':
+        // The outvoted side of a majority-lowered paint stays code-only BY
+        // NAME (the one-paint limit — see the majority rule above).
+        if (outvotedSides.has(cssProp)) {
+          miss(spec, cssProp, 'a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side\'s colour disagrees and stays code-only (the one-paint limit, named per side).', ref);
+          break;
+        }
         if (uniformSideStroke !== null && spec.stroke === undefined) spec.stroke = uniformSideStroke;
         // fix 3: ONE strokes paint list serves all four sides (matrix §2), so
         // per-side colours only lower when every carried side agrees AND a
@@ -2019,6 +2080,13 @@ function applyTokens(
         // R7: a bound ink on THIS part replaces an inherited literal one.
         next.textFillLit = undefined;
         next.textFillLitCss = undefined;
+        break;
+      // RC7: the placeholder plane's ink. Stored, never applied to this
+      // node — the host frame paints no text; its placeholder CHILD does.
+      case 'placeholder-color':
+        next.placeholderFill = varName;
+        next.placeholderFillLit = undefined;
+        next.placeholderFillLitCss = undefined;
         break;
       // Round 4 (canvas-gate finding): the CSS `fill` channel — promoted svg
       // hosts carry per-axis glyph paint as `fill` (attribute-less paths
@@ -2589,6 +2657,25 @@ function applyLiterals(
         next.textFillLitCss = v;
         next.textFill = undefined;
         next.textFillPath = undefined;
+        break;
+      }
+      // RC7: the LITERAL twin of the token case — the same parse, the same
+      // refusals, stored on the placeholder plane instead of the text plane.
+      case 'placeholder-color': {
+        const v = value.trim();
+        if (tokens?.['placeholder-color'] !== undefined) {
+          literalMiss(spec, cssProp, value, 'a token binds the same channel on this part — the bound variable is the canvas placeholder fill, the literal is not drawn');
+          break;
+        }
+        if (v === 'inherit' || v === 'currentColor') break;
+        const c = v === 'transparent' ? { r: 0, g: 0, b: 0, a: 0 } : parseLitColor(v);
+        if (!c) {
+          literalMiss(spec, cssProp, value, `"${v}" is not a hex / rgb() / rgba() colour the canvas can paint`);
+          break;
+        }
+        next.placeholderFillLit = c;
+        next.placeholderFillLitCss = v;
+        next.placeholderFill = undefined;
         break;
       }
       case 'background':
@@ -3429,7 +3516,18 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
   // parsed it leniently, so this only surfaced on a live canvas.
   const svgTagHasFill = /<svg\b[^>]*\sfill=/.test(out);
   const childHasFill = /<(path|circle|rect|polygon|ellipse|g)[^>]*\sfill=/.test(out);
-  if (hasPaint && !svgTagHasFill && !childHasFill) {
+  // REJECTED-SETS ROUND (shadcn.checkbox census reject): a STROKE-drawn glyph
+  // whose markup carries no fill anywhere (the lucide check: an OPEN path with
+  // stroke=currentColor) must NOT get the paint injected as fill — SVG's
+  // initial fill is BLACK, so the open check path renders as a filled blob
+  // (the browser truth was fill="none" on the <svg> tag; older reconstructed
+  // assets dropped it). Inject fill="none" instead: the stroke pass above
+  // already carries the paint, and the explicit none neutralises the black
+  // default for both the real importer and the committed stroke-only assets.
+  const childHasStroke = /<(path|circle|rect|polygon|ellipse|polyline|line|g)[^>]*\sstroke=/.test(out);
+  if (!svgTagHasFill && !childHasFill && childHasStroke) {
+    out = out.replace(/^<svg /, `<svg fill="none" `);
+  } else if (hasPaint && !svgTagHasFill && !childHasFill) {
     out = out.replace(/^<svg /, `<svg fill="${hex}" `);
   }
   if (part.icon!.size) {
@@ -3450,6 +3548,73 @@ function iconSvg(part: Part, subst: Record<string, string>, ctx: TextCtx): strin
 
 const PLACEHOLDER_ATTR_REF = /^\{([a-z][\w-]*)\}$/;
 
+/** RC7 — THE PLACEHOLDER CONCEPT, DECIDED IN ONE PLACE.
+ *
+ *  A form control has a placeholder if, and only if, one of two CONTRACT
+ *  facts says so:
+ *   · it carries `attrs.placeholder` — the contract spells the HTML attribute
+ *     outright, either as a literal string or as a `{prop}` reference; or
+ *   · the contract exposes a TEXT prop whose CODE binding IS the `placeholder`
+ *     attribute (`bindings.code.prop === 'placeholder'`). That is the name the
+ *     DOM gives the attribute and the name emit-html/emit-react actually write
+ *     it under for a non-`children` text prop — it is the element grammar, not
+ *     a component name and not a layer name. (antd's Input is this shape: no
+ *     `attrs`, one `placeholder` text prop defaulting to "Input".)
+ *
+ *  WHY IT MATTERS THAT THIS BE NARROW. 28 of the 33 input/textarea parts in
+ *  contracts/ and examples/ have NO placeholder: every checkbox, radio,
+ *  switch, slider thumb and native select input. A guard that keys on "the
+ *  drawn placeholder string came out empty" is TRUE for all of them, and it
+ *  would seed the loss ledger, the "(N code-only facts)" set description and
+ *  the plugin report with facts that do not exist about contracts that never
+ *  had the concept. Those are the instruments this project measures itself
+ *  with; poisoning them is its own defect. Returns null for "no placeholder". */
+function placeholderConcept(
+  attrs: Record<string, string> | undefined,
+  contract: Contract,
+): { prop?: Prop; literal?: string } | null {
+  const attr = attrs?.placeholder;
+  if (typeof attr === 'string') {
+    const ref = attr.match(PLACEHOLDER_ATTR_REF);
+    if (ref) {
+      const prop = contract.props.find((p) => p.type === 'text' && p.name === ref[1]);
+      return prop ? { prop } : { literal: '' };
+    }
+    return { literal: attr };
+  }
+  const prop = contract.props.find((p) => p.type === 'text' && p.bindings.code.prop === 'placeholder');
+  return prop ? { prop } : null;
+}
+
+/** RC7 — the text context the PLACEHOLDER node draws in. The control's own
+ *  `color` (the VALUE ink) keeps painting everywhere else; only this node
+ *  swaps to the placeholder plane's ink, and only when the contract carries
+ *  it. `carried: false` is the honest fallback — the value ink is then the
+ *  only ink there is, it IS drawn, and the caller NAMES the substitution. */
+function placeholderInkCtx(ctx: TextCtx): { ctx: TextCtx; carried: boolean } {
+  if (ctx.placeholderFill !== undefined) {
+    return {
+      ctx: { ...ctx, textFill: ctx.placeholderFill, textFillPath: undefined, textFillLit: undefined, textFillLitCss: undefined },
+      carried: true,
+    };
+  }
+  if (ctx.placeholderFillLit !== undefined) {
+    return {
+      ctx: { ...ctx, textFill: undefined, textFillPath: undefined, textFillLit: ctx.placeholderFillLit, textFillLitCss: ctx.placeholderFillLitCss },
+      carried: true,
+    };
+  }
+  return { ctx, carried: false };
+}
+
+/** The two NAMED walls of this class, worded once. */
+const PLACEHOLDER_INK_FALLBACK_REASON =
+  'this contract carries no `placeholder-color`, so the placeholder text is drawn in the control\'s OWN `color` — the VALUE ink. An empty field therefore reads as a filled one. The ink IS measurable (`::placeholder{color}` is read on every capture and folds to `placeholder-color`); re-derive this contract to carry it.';
+const PLACEHOLDER_VALUE_INK_REASON =
+  'this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).';
+const PLACEHOLDER_STRING_REASON =
+  'the placeholder STRING is an HTML attribute the browser renders through `::placeholder`, not DOM text — a computed-style capture reads its ink and never its characters, and this contract carries no default for the bound text prop and no literal `placeholder` attr. The TEXT node is kept so the Figma TEXT property can bind to it, and it is left EMPTY rather than filled with an invented string.';
+
 /** Form-control parts (input/textarea) render as a real element in code via
  *  attrs; on the canvas the same part becomes a framed box whose placeholder
  *  text binds to the referenced TEXT property. */
@@ -3468,10 +3633,12 @@ function formControlSpec(
     grow: part.layout?.grow || undefined,
   };
   const childCtx = applyStyling(spec, part, subst, ctx);
-  const ref = (part.attrs?.placeholder ?? '').match(PLACEHOLDER_ATTR_REF);
-  const prop = ref
-    ? contract.props.find((p) => p.type === 'text' && p.name === ref[1])
-    : undefined;
+  // RC7: the placeholder CONCEPT decides everything below — whether there is
+  // a string to draw, whether an empty one is a LOSS, and whether the ink
+  // fallback is worth naming. A control with no placeholder (every checkbox,
+  // radio, switch and slider thumb in the corpus) reaches none of it.
+  const concept = placeholderConcept(part.attrs, contract);
+  const prop = concept?.prop;
   // Never paint an unresolved `{placeholder}` brace form on canvas (Polaris
   // TextField live finding). Prefer the prop default; otherwise a short
   // showcase string when the attr is a prop-ref; only use a literal attr
@@ -3482,8 +3649,17 @@ function formControlSpec(
   } else if (prop) {
     placeholderCharacters = '';
   } else {
-    const attr = part.attrs?.placeholder ?? '';
-    placeholderCharacters = PLACEHOLDER_ATTR_REF.test(attr) ? '' : attr;
+    placeholderCharacters = concept?.literal ?? '';
+  }
+  const ink = placeholderInkCtx(childCtx);
+  if (concept !== null && !ink.carried && (childCtx.textFill !== undefined || childCtx.textFillLit !== undefined)) {
+    miss(spec, 'placeholder-color', PLACEHOLDER_INK_FALLBACK_REASON, childCtx.textFill ?? childCtx.textFillLitCss ?? '');
+  }
+  if (ink.carried && (part.tokens?.['color'] !== undefined || part.literals?.['color'] !== undefined)) {
+    miss(spec, 'color', PLACEHOLDER_VALUE_INK_REASON, part.tokens?.['color'] ?? part.literals?.['color'] ?? '');
+  }
+  if (concept !== null && placeholderCharacters === '') {
+    miss(spec, 'placeholder', PLACEHOLDER_STRING_REASON, '');
   }
   spec.children = [
     {
@@ -3493,7 +3669,7 @@ function formControlSpec(
       fontSize: childCtx.fontSize ?? 16,
       fontStyle: figmaFaceStyle(childCtx),
       ...(childCtx.lineHeight !== undefined ? { lineHeight: childCtx.lineHeight } : {}),
-      ...textExtras(childCtx),
+      ...textExtras(ink.ctx),
       ...textIdentity(childCtx),
       // B-3 finding 1: the placeholder paint comes from the CONTRACT — the
       // control part's own carried `color` channel (childCtx.textFill), the
@@ -3502,11 +3678,75 @@ function formControlSpec(
       // foreign token set mints: Polaris text-field.figma.js threw `Missing
       // variable` at run time. When the contract carries no color channel,
       // NO placeholder-specific variable reference is emitted at all.
-      textFill: childCtx.textFill,
+      //
+      // RC7: when the contract DOES carry the placeholder plane's own ink
+      // (`placeholder-color`, folded from `::placeholder{color}` at the read
+      // boundary) that ink wins here — it is the pixel the library draws, and
+      // painting the value ink instead is what made every empty field read as
+      // a filled one. The variable is the contract's, never a repo name.
+      textFill: ink.ctx.textFill,
       contentProp: prop?.bindings.figma.property,
     },
   ];
   return spec;
+}
+
+/** RC7 — THE ROOT THAT *IS* THE CONTROL.
+ *
+ *  Two of the five graded rows have no control PART at all: the component is
+ *  one <input> (shadcn's Input, semantics.element = input, `parts: {}`,
+ *  `props: []`; antd's is the same shape with a `placeholder` TEXT prop).
+ *  formControlSpec never runs for them, so:
+ *   · antd drew its placeholder through the generic root textProp label — in
+ *     the ROOT's own `color`, the VALUE ink, exactly the RC7 defect; and
+ *   · shadcn, having no text prop either, drew NOTHING — the blank sliver
+ *     the census graded.
+ *
+ *  This returns the label spec for both, in PLACEHOLDER ink, and names the
+ *  value-ink fallback on the root when the contract does not carry the ink.
+ *  It draws a literal `attrs.placeholder` only when there is no bound text
+ *  prop to own the string — the prop stays the per-usage API wherever one
+ *  exists. */
+function rootPlaceholderLabel(
+  root: Part,
+  contract: Contract,
+  ctx: TextCtx,
+  rootSpec: NodeSpec,
+  textProp: Prop | undefined,
+  label: string,
+): NodeSpec[] {
+  const concept = placeholderConcept(root.attrs, contract);
+  if (concept === null) return [];
+  // The label the ROOT draws is the placeholder only when the text prop IS
+  // the placeholder (or there is no prop and the attr is literal).
+  const isPlaceholderLabel = textProp === undefined || concept.prop?.name === textProp.name;
+  if (!isPlaceholderLabel) return [];
+  const characters = textProp ? label : (concept.literal ?? '');
+  const ink = placeholderInkCtx(ctx);
+  if (!ink.carried && (ctx.textFill !== undefined || ctx.textFillLit !== undefined)) {
+    miss(rootSpec, 'placeholder-color', PLACEHOLDER_INK_FALLBACK_REASON, ctx.textFill ?? ctx.textFillLitCss ?? '');
+  }
+  if (ink.carried && (root.tokens?.['color'] !== undefined || root.literals?.['color'] !== undefined)) {
+    miss(rootSpec, 'color', PLACEHOLDER_VALUE_INK_REASON, root.tokens?.['color'] ?? root.literals?.['color'] ?? '');
+  }
+  if (characters === '') {
+    miss(rootSpec, 'placeholder', PLACEHOLDER_STRING_REASON, '');
+    if (textProp === undefined) return []; // nothing to draw and no property to bind
+  }
+  return [
+    {
+      type: 'text',
+      name: textProp ? 'label' : 'placeholder',
+      characters,
+      fontSize: ctx.fontSize ?? 16,
+      fontStyle: figmaFaceStyle(ctx),
+      ...textIdentity(ctx),
+      textFill: ink.ctx.textFill,
+      ...(ctx.lineHeight !== undefined ? { lineHeight: ctx.lineHeight } : {}),
+      ...textExtras(ink.ctx),
+      ...(textProp ? { contentProp: textProp.bindings.figma.property } : {}),
+    },
+  ];
 }
 
 const PARENT_PROP_REF = /^\{([a-z][\w-]*)\}$/;
@@ -4844,7 +5084,11 @@ function annotateFillW(rootSpec: NodeSpec): void {
         // hugging displaces it; the flag is the runtime's proof.
         if (c.type === 'text' && !c.textTruncation) c.fillText = true;
       }
-      walk(c, fills || hasOwnWidth(c) || gridParent);
+      // REJECTED-SETS ROUND: an hAligned grid occupant HUGS its width (the
+      // runtime skips FILL for it — CSS justify-self beats the stretch
+      // default), so its subtree is NOT width-established; treating it as
+      // established FILLed the dialog's Close button into its whole cell.
+      walk(c, fills || hasOwnWidth(c) || (gridParent && c.cell?.hAlign === undefined));
     }
   };
   walk(rootSpec, hasOwnWidth(rootSpec));
@@ -5067,7 +5311,9 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
       // is an <input> drawing its placeholder — text starts at the padding
       // edge (antd `text-align: start`), it is never centred like a Button.
       if (textProp.bindings.code.prop !== 'children' && rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
-      rootSpec.children = [
+      // RC7: when that label IS the placeholder it takes PLACEHOLDER ink.
+      const ph = rootPlaceholderLabel(root, contract, ctx, rootSpec, textProp, label);
+      rootSpec.children = ph.length > 0 ? ph : [
         {
           type: 'text',
           name: 'label',
@@ -5081,6 +5327,22 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           contentProp: textProp.bindings.figma.property,
         },
       ];
+    } else if (rootIsTextControl && !root.parts) {
+      // RC7: a root that IS the control with NO text prop (shadcn's Input)
+      // drew nothing at all — no branch above claims it. It draws its
+      // MOUNTED placeholder string, in placeholder ink; where the contract
+      // carries no string the gap is NAMED and nothing is invented.
+      //
+      // CENSUS (shadcn.input, merged in): the leaf text control is an
+      // <input> — its text starts at the padding edge exactly as the
+      // textProp branch above insists, never centred like a Button. Without
+      // this the placeholder RC7 now draws would be centred in the field.
+      // The census branch reached the same line from the other side (it
+      // drew an EMPTY placeholder to reserve the line box; RC7's version
+      // supersedes that by drawing the REAL mounted string, so only the
+      // alignment fact survives the merge).
+      if (rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
+      rootSpec.children = rootPlaceholderLabel(root, contract, ctx, rootSpec, undefined, label);
     }
     const collectStyles = (s: NodeSpec) => {
       if (s.fontStyle) fontStyles.add(s.fontStyle);
@@ -5193,7 +5455,14 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
           centerStrokeGlyphsInHosts(rootSpec.children);
           stampGridCells(rootSpec, root, subst); // A2 grid — see stampGridCells
         } else if (textProp && !textOutOfBoxOn(root as Part, subst)) {
-          rootSpec.children = [
+          // MINT ROUND (2026-08-25): the state-preview twin of the withheld
+          // out-of-box label — same Part.textOutOfBox discipline as the base
+          // loop above.
+          // RC7: the state-preview twin of the base branch — a preview cell
+          // whose disabled plane repaints the placeholder must repaint the
+          // PLACEHOLDER ink, not the value ink.
+          const ph = rootPlaceholderLabel(root, contract, ctx, rootSpec, textProp, label);
+          rootSpec.children = ph.length > 0 ? ph : [
             {
               type: 'text',
               name: 'label',
@@ -5207,6 +5476,12 @@ function compileComponentData(contract: Contract, byId: Map<string, Contract>): 
               contentProp: textProp.bindings.figma.property,
             },
           ];
+        } else if (rootIsTextControl && !root.parts) {
+          // The leaf-text-control line box, in the preview loop too — the
+          // census's state cells (State=Active / Focus Visible) are drawn
+          // here, and they collapsed to the same 288x8 sliver.
+          if (rootSpec.layout && rootSpec.layout.primary === 'CENTER') rootSpec.layout = { ...rootSpec.layout, primary: 'MIN' };
+          rootSpec.children = rootPlaceholderLabel(root, contract, ctx, rootSpec, undefined, label);
         }
         const collectStyles = (s: NodeSpec) => {
           if (s.fontStyle) fontStyles.add(s.fontStyle);
@@ -6503,7 +6778,16 @@ function applyGridChildren(parent, spec, built) {
       ' (P9 overflow absorption / P10 mode-switch loss) — refusing to carry a write the contract did not make'
     );
   }
-  const inFlow = built.filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE');
+  // REJECTED-SETS ROUND (fluent.dialog): a grid child with margins is built
+  // INSIDE its "(margin box)" wrapper — the WRAPPER is the node the grid
+  // actually parents, and the child-side placement setter throws 'Node is
+  // not a grid child' on the inner node. Every placement/sizing/align write
+  // below therefore targets the outermost ancestor whose parent IS the grid
+  // frame (the wrapper when one exists, the node itself otherwise).
+  const gridChildOf = (n) => { let m = n; while (m.parent && m.parent !== parent) m = m.parent; return m; };
+  const inFlow = built
+    .filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE')
+    .map((p) => [p[0], gridChildOf(p[1])]);
   const placed = inFlow.filter((p) => p[0].cell);
   if (!l.grid.flow) {
     // FC-GRID-APPEND-AUTOPLACE. appendChild does not park a grid child
@@ -6597,14 +6881,22 @@ function applyGridChildren(parent, spec, built) {
     // exactly the right contribution.
     const hugW = !!(l.grid.hugWidth || (childGrid && childGrid.hugWidth));
     const hugH = !!(l.grid.hugHeight || (childGrid && childGrid.hugHeight));
-    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW) {
+    // REJECTED-SETS ROUND (fluent.dialog actions): G3's FILL is stretch-by-
+    // ABSENCE — a child that CARRIES an alignment on an axis resolves to its
+    // content size there (CSS: justify-self/align-self beat the stretch
+    // default), so an aligned axis HUGS and never fills. Filling it drew the
+    // dialog's Close button 267px wide (modal) and collapsed it to 0 inside
+    // the hugging non-modal grid (the FILL-in-HUG degenerate cycle).
+    const alignedW = !!(cs.cell && cs.cell.hAlign);
+    const alignedH = !!(cs.cell && cs.cell.vAlign);
+    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW && !alignedW) {
       try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal FILL refused; the grid child keeps its drawn width', e); }
-    } else if (l.grid.hugWidth && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+    } else if ((l.grid.hugWidth || alignedW) && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
       try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal HUG refused; the grid child keeps its drawn width', e); }
     }
-    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH) {
+    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH && !alignedH) {
       try { cn.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical FILL refused; the grid child keeps its drawn height', e); }
-    } else if (l.grid.hugHeight && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+    } else if ((l.grid.hugHeight || alignedH) && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
       try { cn.layoutSizingVertical = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical HUG refused; the grid child keeps its drawn height', e); }
     }
   }

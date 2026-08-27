@@ -1,0 +1,53 @@
+{
+  "id": "mui.card",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Card",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "elevation-1",
+      "status": "rendered",
+      "png": "ref-elevation-1.png",
+      "props": {
+        "elevation": 1
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "elevation-0",
+      "status": "rendered",
+      "png": "ref-elevation-0.png",
+      "props": {
+        "elevation": 0
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "elevation-3",
+      "status": "rendered",
+      "png": "ref-elevation-3.png",
+      "props": {
+        "elevation": 3
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "elevation-8",
+      "status": "rendered",
+      "png": "ref-elevation-8.png",
+      "props": {
+        "elevation": 8
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

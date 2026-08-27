@@ -2,12 +2,12 @@
   "_marker": "THE DENOMINATOR. Hand-authored per case, generated into one index. Deliberately NOT derived from isFusable / styled / DECLARED_CHANNELS / CHANNEL_TO_COMPUTED / TOKEN_CHANNELS / carriedParts — every instrument in the pipeline derives its denominator from the same filter that decides carriage, which is why a channel the filter never opened scores 100%. This file is the independent one.",
   "generatedBy": "conformance/build.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "count": 115,
+  "count": 127,
   "byExpectation": {
-    "CARRIED": 70,
+    "CARRIED": 78,
     "LOWERED": 5,
-    "REFUSED": 22,
-    "UNSUPPORTED": 18
+    "REFUSED": 27,
+    "UNSUPPORTED": 17
   },
   "cases": [
     {
@@ -31,20 +31,19 @@
     {
       "id": "align-items-baseline",
       "feature": "layout",
-      "construct": "align-items: baseline on a flex row",
-      "why": "Mixed type sizes on one row (a price beside a currency mark, a label beside a hint) sit on the shared baseline, and counterAxisAlignItems: 'BASELINE' is native on a HORIZONTAL auto-layout frame. `baseline` has been in LayoutSchema.align and in the emitter's ALIGN_FIGMA table all along; the enrichment vocabulary's align-items map simply did not list it, so the value fell to layout-value-outside-vocabulary and stayed code-only. The register named that boundary arbitrary rather than a carriage limit, and this case is the proof.",
+      "construct": "uniform align-items: baseline on a flex row of two differing font sizes",
+      "why": "`baseline` is a documented CARRY-BOTH value of LayoutSchema.align — packages/core/src/anatomy.ts lowers it to CSS and emit-figma-script lowers it to counterAxisAlignItems BASELINE (with the VERTICAL -> MIN projection). Only the DETECTION map lacked the entry, so the keyword left as `layout-value-outside-vocabulary` and antd.checkbox, antd.radio, astryx.progress-bar and carbon.modal all minted with the counter-axis default instead.",
       "expect": "CARRIED",
       "expectName": "",
-      "expectWhere": "anatomy.root.layout.align",
+      "expectWhere": "anatomy.root.layout.align = baseline",
       "observable": {
         "part": "root",
         "channel": "align-items",
-        "capturedValue": "baseline",
-        "carriedValue": "baseline"
+        "capturedValue": "baseline"
       },
       "canvas": {
         "expect": "PRESENT",
-        "note": "counterAxisAlignItems 'BASELINE'"
+        "note": "counterAxisAlignItems BASELINE is native on a HORIZONTAL auto-layout frame"
       }
     },
     {
@@ -247,6 +246,42 @@
       }
     },
     {
+      "id": "block-root-shrink-to-fit",
+      "feature": "invariant",
+      "construct": "a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family)",
+      "why": "The block-root width door admitted any block root that measured neither the stage box nor the viewport, with a receipt that said 'the number is the library's' — and the number was the sample text's: astryx.card shipped width 114.203px while a fresh re-fuse of the SAME library version measured 119.016px (a font swap moved the text metrics), and the canvas drew 13 hug-pill variants. The complement of stage-box-equal: a width that is a function of the harness is refused BY NAME whether it equals the harness box or not.",
+      "expect": "REFUSED",
+      "expectName": "block-root-width-refused",
+      "expectWhere": "LEDGER.md / enriched.extension.json receipts",
+      "observable": {
+        "part": "root",
+        "channel": "width",
+        "capturedValue": "50px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "no fixed width is drawn — the canvas hugs; a 50px token here would be a harness fact"
+      }
+    },
+    {
+      "id": "border-color-control-equal",
+      "feature": "paint",
+      "construct": "a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border",
+      "why": "The styled-channel door subtracts the control, so a global reset that reaches the control erases the subject's base border colour — shadcn.select shipped border style+width with NO base colour, the CSS surface still painted via border-color's currentColor initial-value rule, and the canvas drew NO stroke at all (the rejected census set: a bare trigger with no box). Equality with a control that draws no border proves library authorship, not absence.",
+      "expect": "CARRIED",
+      "expectName": "reset-supplied-border-color-admitted",
+      "expectWhere": "anatomy.root.parts.a.tokens.border-top-color",
+      "observable": {
+        "part": "a",
+        "channel": "border-top-color",
+        "capturedValue": "rgb(0, 0, 0)"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the 2px border strokes on canvas with the carried colour — width and style alone paint nothing there"
+      }
+    },
+    {
       "id": "border-radius-px",
       "feature": "geometry",
       "construct": "border-radius: 6px",
@@ -299,6 +334,62 @@
         "expect": "PRESENT",
         "note": "the resolved px is right; the token name is at risk"
       }
+    },
+    {
+      "id": "child-order-permuted-by-axis",
+      "feature": "layout",
+      "construct": "CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal",
+      "why": "The only per-variant child-order spelling either target system has is a reversed main axis (CSS row-reverse / Figma children.reverse()); an arbitrary permutation has no contract spelling and no canvas lowering. It must be REFUSED BY NAME rather than flattened onto the base order — the honest refusal this class exists to protect, and the guard that keeps the reversal door from being widened into a guess.",
+      "expect": "REFUSED",
+      "expectName": "child-order-varies-unreversible",
+      "expectWhere": "enriched.extension.json receipts",
+      "observable": {
+        "part": "root",
+        "channel": "__child-order",
+        "capturedValue": "span|b>span|c>span|a"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "no canvas spelling for an arbitrary per-variant child permutation"
+      },
+      "axes": [
+        {
+          "prop": "rotation",
+          "values": [
+            "none",
+            "once"
+          ],
+          "default": "none"
+        }
+      ]
+    },
+    {
+      "id": "child-order-reversed-by-axis",
+      "feature": "layout",
+      "construct": "CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape)",
+      "why": "The union anatomy collapses every combo's children into ONE part order and emits `union-order-drift` about it, and enrichLayout reads only `el.node.style[channel]` — no reader anywhere between capture and contract consumes child order. Both enum values therefore mint the base order, so two distinct variants render byte-identically. The schema already owns the spelling: VariantLayoutSchema's REVERSED directions are documented as \"the canvas (which has no reverse) reverses the compiled child order per variant instead\".",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layoutByProp.map.before.direction = row-reverse",
+      "observable": {
+        "part": "root",
+        "channel": "__child-order",
+        "capturedValue": "span|b>span|a"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the `before` variant compiles with the two children in the opposite order (isReversed -> spec.children.reverse())"
+      },
+      "axes": [
+        {
+          "prop": "labelPosition",
+          "values": [
+            "after",
+            "before"
+          ],
+          "default": "after"
+        }
+      ]
     },
     {
       "id": "clip-path-polygon",
@@ -730,6 +821,34 @@
       "blockStage": true
     },
     {
+      "id": "flex-direction-by-axis",
+      "feature": "layout",
+      "construct": "flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape",
+      "why": "Uniform-or-nothing layout enrichment dropped flex-direction on ANY component with an orientation-style axis, so the DEFAULT (column) variant drew the emitters' horizontal default — the rejected fluent.card census set glued its preview and header side by side on both surfaces. The base value plus a layoutByProp override is the schema's own v7 spelling.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.direction (base) + anatomy.root.layoutByProp.map.horizontal.direction",
+      "observable": {
+        "part": "root",
+        "channel": "flex-direction",
+        "capturedValue": "column"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the default variant stacks vertically; the horizontal variant rides layoutByProp and compiles per variant (resolveLayout)"
+      },
+      "axes": [
+        {
+          "prop": "orientation",
+          "values": [
+            "vertical",
+            "horizontal"
+          ],
+          "default": "vertical"
+        }
+      ]
+    },
+    {
       "id": "flex-direction-column",
       "feature": "layout-flex",
       "construct": "display: flex; flex-direction: column — the main axis turned vertical",
@@ -747,6 +866,34 @@
         "note": "layoutMode VERTICAL on the root auto-layout frame"
       },
       "blockStage": true
+    },
+    {
+      "id": "flex-direction-reverse-by-axis",
+      "feature": "layout",
+      "construct": "flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one)",
+      "why": "LAYOUT_CHANNEL_TO_FIELD — the only reader that turns a captured flex keyword into a Part.layout fact — mapped `row` and `column` only, while VariantLayoutSchema already accepted the reversed spellings and BOTH emitters already lower them (css.ts writes flex-direction verbatim, emit-figma-script's isReversed reverses the compiled children). The base combo's measured keyword had no slot, so the whole channel left as `layout-not-uniform` and Carbon's Accordion drew its chevron on the wrong side in every align=end variant.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.layout.direction = row-reverse + anatomy.root.layoutByProp.map.start.direction = row",
+      "observable": {
+        "part": "root",
+        "channel": "flex-direction",
+        "capturedValue": "row-reverse"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the base variant compiles with reversed children; the start variant rides layoutByProp back to plain row"
+      },
+      "axes": [
+        {
+          "prop": "align",
+          "values": [
+            "end",
+            "start"
+          ],
+          "default": "end"
+        }
+      ]
     },
     {
       "id": "flex-gap",
@@ -769,11 +916,11 @@
     {
       "id": "flex-wrap-wrap",
       "feature": "layout",
-      "construct": "flex-wrap: wrap on a flex container",
-      "why": "Chip rows and tag groups wrap in every target system, and the canvas has the native twin (layoutWrap: 'WRAP'). LayoutSchema.wrap has declared the fact since v15 and the emitter has lowered it since v15 — but the four-property enrichment vocabulary never contained flex-wrap, so nothing in the pipeline ever DETECTED it. A schema slot with no producer is the shape schema.wrap-declared-never-detected named.",
+      "construct": "uniform flex-wrap: wrap on a flex row narrow enough to wrap",
+      "why": "LayoutSchema.wrap is a first-class v15/S4 fact with a real lowering on both halves (css.ts writes flex-wrap: wrap; emit-figma-script writes native layoutWrap 'WRAP'), and LAYOUT_CHANNEL_TO_FIELD had NO entry for the channel at all — so the fact could only ever arrive from a hand-authored static contract and never from a captured library (carbon.inlinenotification's text wrapper, mui.autocomplete / badge / breadcrumbs / snackbar).",
       "expect": "CARRIED",
       "expectName": "",
-      "expectWhere": "anatomy.root.layout.wrap (mirrored to the CSS spelling `flex-wrap: wrap`)",
+      "expectWhere": "anatomy.root.layout.wrap = true",
       "observable": {
         "part": "root",
         "channel": "flex-wrap",
@@ -781,7 +928,7 @@
       },
       "canvas": {
         "expect": "PRESENT",
-        "note": "layoutWrap 'WRAP'"
+        "note": "native layoutWrap 'WRAP' on the auto-layout frame"
       }
     },
     {
@@ -1773,6 +1920,26 @@
       "dumpSnippet": "dump.snippet.json"
     },
     {
+      "id": "grid-zero-track-collapse",
+      "feature": "grid-tracks",
+      "construct": "a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant)",
+      "why": "The authored-zero fence (P2b) poisoned the computed-evidence plane: fluent.card's CardHeader resolves grid-template-columns \"0px 404px\" (the absent media column) and fluent.dialog's DialogBody \"267px 267px 0px\" — the whole grid promotion abandoned and the parts fell to the emitters' horizontal-row default, gluing header and description onto one line (the rejected census sets). A resolved 0px track occupies no space and hosts no drawn child: it collapses out of the carried list by name and every placement re-indexes.",
+      "expect": "CARRIED",
+      "expectName": "grid-zero-track-collapsed",
+      "expectWhere": "anatomy.root.layout.columns (the collapsed list) + the grid-zero-track-collapsed receipt",
+      "observable": {
+        "part": "root",
+        "channel": "grid-template-columns",
+        "capturedValue": "0px 288px",
+        "carriedValue": "288px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the carried single-column grid stacks the two children; the empty 0px slot column draws nothing on either surface"
+      },
+      "blockStage": true
+    },
+    {
       "id": "layout-on-non-flex-container",
       "feature": "layout",
       "construct": "align-items / justify-content authored on a container whose display is NOT flex (here display: table)",
@@ -1938,6 +2105,91 @@
       }
     },
     {
+      "id": "overlay-text-fill-pinned-size",
+      "feature": "geometry",
+      "construct": "a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape",
+      "why": "The overlay-cluster geometry admission drops every text-bearing part with one sentence, 'font-metric-dependent widths'. That is true of a shrink-to-fit box and FALSE of a box the layout pinned: shadcn's `size-full` fallback inside a `size-8` root IS the root's 32x32 box, and losing it minted a 17x20 hug pinned to the top-left corner of a 32x32 transparent frame — the census verdict's 'circle offset, large empty area, glyphs overflow the circle'. The part's own reported box equals the ancestor's CONTENT box in every combo, and that content box MOVES with the size axis, so the number is the library's.",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.b.tokens.width / .height",
+      "observable": {
+        "part": "b",
+        "channel": "width",
+        "capturedValue": "24px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the filled child draws concentric and full-size inside the root instead of hugging its sample string in a corner"
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "default",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ]
+    },
+    {
+      "id": "overlay-text-fill-stage-derived",
+      "feature": "geometry",
+      "construct": "a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do",
+      "why": "THE HARNESS PIN. This is the fluent.Card / mui.Accordion / carbon.Modal shape reduced to a fixture, and it is the exact defect the previous attempt at the fill door shipped: it admitted label widths of 412/404/396px (fluent, root 428 = stage 460 − 2×16), 256px (mui, root 288 = stage 320 − 2×16) and 366/474/690/798px (carbon, 48%/60%/84%/96% of a root width ALREADY refused as browser.viewport.width) and asserted in the receipt that the number was evidence-backed. Every counter-evidence test the fill door has passes here — the box IS the ancestor's content box in every combo, and the ancestor moves 32px — and the fill must be refused anyway, because the box a fill copies is the harness's mount stage. A canvas frame has no stage.",
+      "expect": "REFUSED",
+      "expectName": "text-fill-pinned-geometry-refused",
+      "expectWhere": "enriched.extension.json receipts",
+      "observable": {
+        "part": "b",
+        "channel": "width",
+        "capturedValue": "256px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the canvas hugs; minting the stage width would draw the harness window on the design surface (task #20)"
+      },
+      "blockStage": true,
+      "axes": [
+        {
+          "prop": "gutters",
+          "values": [
+            "wide",
+            "none"
+          ],
+          "default": "wide"
+        }
+      ]
+    },
+    {
+      "id": "overlay-text-hug-excluded",
+      "feature": "geometry",
+      "construct": "a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it",
+      "why": "THE WALL PIN for the fill door. Its width is a function of the harness's sample text and font (the astryx.card 114.203px / 119.016px measurement of the SAME library version across a font swap), and its 20px height is its own line box, not the root's 24px content box. The ancestor MOVES here, so the case cannot pass by accident of a single observation: the fill test itself must fail. If a future widening of the text-fill door ever turns this case CARRIED, the gate goes red — the door can never become a blanket.",
+      "expect": "REFUSED",
+      "expectName": "absolute-geometry-excluded",
+      "expectWhere": "enriched.extension.json receipts",
+      "observable": {
+        "part": "b",
+        "channel": "height",
+        "capturedValue": "20px"
+      },
+      "canvas": {
+        "expect": "ABSENT",
+        "note": "the canvas hugs, which is the honest outcome of an honest refusal"
+      },
+      "axes": [
+        {
+          "prop": "size",
+          "values": [
+            "default",
+            "lg"
+          ],
+          "default": "default"
+        }
+      ]
+    },
+    {
       "id": "padding-asymmetric-block",
       "feature": "box",
       "construct": "padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT",
@@ -2069,6 +2321,35 @@
       "blockStage": true
     },
     {
+      "id": "presence-hidden-axis-geometry",
+      "feature": "tokens",
+      "construct": "an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked)",
+      "why": "The mint's single-axis fit refused the map because the presence-hidden value has no observation, and the refusal claimed the values 'differ without correlating to any variant axis' — a false receipt: they correlate exactly; the hole is a presence-gated missing cell. The canvas then drew polaris.checkbox's check icon with NO insets (it fell to static position below the box). The undrawn plane fills from the base-most observed value — ink-invisible there, closing only the dangling-ref hole. (The case's DEFAULT combo renders the part so the observable is measurable; the presence-hidden plane is the non-default 'unchecked' value, exactly the polaris shape.)",
+      "expect": "CARRIED",
+      "expectName": "",
+      "expectWhere": "anatomy.root.parts.a — the checked-keyed per-axis carriage of the inset",
+      "observable": {
+        "part": "a",
+        "channel": "top",
+        "capturedValue": "3px"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the badge pins to the declared inset on the rendered variants; the hidden variant draws nothing"
+      },
+      "axes": [
+        {
+          "prop": "checked",
+          "values": [
+            "checked",
+            "indeterminate",
+            "unchecked"
+          ],
+          "default": "checked"
+        }
+      ]
+    },
+    {
       "id": "pseudo-backdrop",
       "feature": "pseudo-elements",
       "construct": "dialog::backdrop { background-color }",
@@ -2146,18 +2427,18 @@
       "id": "pseudo-placeholder",
       "feature": "pseudo-elements",
       "construct": "input::placeholder { color }",
-      "why": "Placeholder colour is a REVIEWED design token in every input in every design system.",
-      "expect": "UNSUPPORTED",
-      "expectName": "::placeholder",
+      "why": "Placeholder colour is a REVIEWED design token in every input in every design system. MANIFEST EDIT (RC7 round), on the -webkit-text-fill-color precedent immediately below: the engine’s behaviour genuinely changed. `::placeholder { color }` is now FOLDED ONTO THE HOST as the synthetic channel `placeholder-color` at BOTH read boundaries (lib.ts foldPlaceholderInk, capture + replay), registered in TOKEN_CHANNELS with a `pseudo-element` CSS disposition that lowers it back to a real `::placeholder` rule on every stylesheet surface, and drawn on canvas as the placeholder text node’s own ink. Declaring it CARRIED on `placeholder-color` is strictly STRONGER than the old UNSUPPORTED: it asserts the contract holds the HINT ink, so reverting the fold turns the case red (the reader records nothing on that channel and the prediction fails) instead of passing on the mere presence of the string ‘::placeholder’ in some receipt.",
+      "expect": "CARRIED",
+      "expectName": "placeholder-color",
       "expectWhere": "LEDGER.md",
       "observable": {
-        "part": "a::placeholder",
-        "channel": "color",
+        "part": "a",
+        "channel": "placeholder-color",
         "capturedValue": "rgb(150, 150, 150)"
       },
       "canvas": {
         "expect": "PRESENT",
-        "note": "placeholder text is REAL INK on a canvas mock-up — the loss is visible"
+        "note": "placeholder text is REAL INK on a canvas mock-up — the loss is visible; the emitter now draws the placeholder TEXT node in THIS ink, never in the control’s VALUE ink (RC7: an empty field must not read as a filled one)"
       }
     },
     {
@@ -2390,6 +2671,24 @@
       "canvas": {
         "expect": "ABSENT",
         "note": "the asset grammar admits path/g only"
+      }
+    },
+    {
+      "id": "svg-stroke-glyph-fill-none",
+      "feature": "anatomy",
+      "construct": "a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill=\"none\" on the svg)",
+      "why": "The asset reconstruction folded the path's fill:none into the svg tag's inherited none and emitted NO fill attribute — but SVG's initial fill is BLACK, so the committed asset filled the open check path into a blob the moment it rendered standalone, and the canvas emitter then injected the paint as fill and drew shadcn.checkbox's check as a malformed filled blob overflowing the 16px box (the rejected census set). fill=\"none\" is a paint fact and must survive reconstruction by name. The channel itself has no contract spelling (the glyph is consumed into the reconstructed asset — the ledger's own 'no schema channel today' row), so the disposition is a NAMED refusal: the receipt that proves fill=\"none\" survived into the asset markup.",
+      "expect": "REFUSED",
+      "expectName": "svg-stroke-glyph-fill-none",
+      "expectWhere": "LEDGER.md (the svg asset reconstruction receipts)",
+      "observable": {
+        "part": "a",
+        "channel": "fill",
+        "capturedValue": "none"
+      },
+      "canvas": {
+        "expect": "PRESENT",
+        "note": "the check draws as a 2px STROKE; nothing fills the open path on either surface"
       }
     },
     {

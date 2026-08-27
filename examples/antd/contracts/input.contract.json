@@ -147,6 +147,7 @@
         "left": "{imported.shared.size-0}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}",
+        "placeholder-color": "{imported.input.root.placeholder-color}",
         "right": "{imported.shared.size-0}",
         "top": "{imported.shared.size-0}",
         "width": "{imported.input.root.width}"

@@ -1,0 +1,21 @@
+{
+  "id": "child-order-reversed-by-axis",
+  "feature": "layout",
+  "construct": "CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape)",
+  "why": "The union anatomy collapses every combo's children into ONE part order and emits `union-order-drift` about it, and enrichLayout reads only `el.node.style[channel]` — no reader anywhere between capture and contract consumes child order. Both enum values therefore mint the base order, so two distinct variants render byte-identically. The schema already owns the spelling: VariantLayoutSchema's REVERSED directions are documented as \"the canvas (which has no reverse) reverses the compiled child order per variant instead\".",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layoutByProp.map.before.direction = row-reverse",
+  "observable": {
+    "part": "root",
+    "channel": "__child-order",
+    "capturedValue": "span|b>span|a"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the `before` variant compiles with the two children in the opposite order (isReversed -> spec.children.reverse())"
+  },
+  "axes": [
+    { "prop": "labelPosition", "values": ["after", "before"], "default": "after" }
+  ]
+}

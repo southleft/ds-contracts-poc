@@ -3,6 +3,7 @@
   "component": "Accordion",
   "config": "extract/computed/configs/carbon.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -272,13 +273,14 @@
     "component": "Accordion",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 16,
     "interactions": 4,
     "computed": {
       "cellsCompared": 10144,
-      "cellsEqual": 8568,
-      "pctEqual": 84.46372239747635,
+      "cellsEqual": 8600,
+      "pctEqual": 84.77917981072555,
       "rowsFullyEqual": 0,
       "rows": 64
     },
@@ -304,65 +306,65 @@
       "mintedLeavesUnfolded": 37,
       "baseBindings": 62,
       "stateBindings": 6,
-      "codeOnlyChannels": 38,
+      "codeOnlyChannels": 37,
       "overflowBindings": 3,
       "folds": 97
     },
     "worstRows": [
       {
-        "key": "end.unset.disabled__hover",
+        "key": "start.unset.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       },
       {
-        "key": "end.unset.disabled__active",
+        "key": "start.unset.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       },
       {
-        "key": "end.sm.disabled__hover",
+        "key": "start.sm.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       },
       {
-        "key": "end.sm.disabled__active",
+        "key": "start.sm.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       },
       {
-        "key": "end.md.disabled__hover",
+        "key": "start.md.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       },
       {
-        "key": "end.md.disabled__active",
+        "key": "start.md.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       },
       {
-        "key": "end.lg.disabled__hover",
+        "key": "start.lg.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       },
       {
-        "key": "end.lg.disabled__active",
+        "key": "start.lg.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 39,
+        "channelsMismatched": 38,
         "unscorable": "no-original"
       }
     ],
@@ -438,7 +440,6 @@
       "code-only: accordion__item.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: accordion__item.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: accordion__item.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: accordion__heading.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: accordion__heading.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: accordion__heading.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: icon.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -477,7 +478,7 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 839,
+      "leavesAdded": 842,
       "divergent": []
     },
     "rows": [
@@ -5468,7 +5469,7 @@
       {
         "key": "end.unset.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5508,12 +5509,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -5551,6 +5546,83 @@
       {
         "key": "end.unset.enabled__hover",
         "channelsCompared": 170,
+        "channelsEqual": 159,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__item",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "transition-behavior",
+            "ours": "normal",
+            "theirs": "allow-discrete"
+          },
+          {
+            "part": "label-2",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "end.unset.enabled__focus-visible",
+        "channelsCompared": 170,
         "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
@@ -5591,95 +5663,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "allow-discrete"
-          },
-          {
-            "part": "label-2",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "end.unset.enabled__focus-visible",
-        "channelsCompared": 170,
-        "channelsEqual": 157,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -5723,7 +5706,7 @@
       {
         "key": "end.unset.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5766,12 +5749,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
@@ -5806,7 +5783,7 @@
       {
         "key": "end.unset.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5870,12 +5847,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -6039,7 +6010,7 @@
       {
         "key": "end.unset.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6115,12 +6086,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -6284,7 +6249,7 @@
       {
         "key": "end.unset.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6348,12 +6313,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -6517,7 +6476,7 @@
       {
         "key": "end.unset.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6593,12 +6552,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -6762,7 +6715,7 @@
       {
         "key": "end.sm.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6802,12 +6755,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -6845,6 +6792,83 @@
       {
         "key": "end.sm.enabled__hover",
         "channelsCompared": 170,
+        "channelsEqual": 159,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__item",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "transition-behavior",
+            "ours": "normal",
+            "theirs": "allow-discrete"
+          },
+          {
+            "part": "label-2",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "end.sm.enabled__focus-visible",
+        "channelsCompared": 170,
         "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
@@ -6885,95 +6909,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "allow-discrete"
-          },
-          {
-            "part": "label-2",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "end.sm.enabled__focus-visible",
-        "channelsCompared": 170,
-        "channelsEqual": 157,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -7017,7 +6952,7 @@
       {
         "key": "end.sm.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7060,12 +6995,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
@@ -7100,7 +7029,7 @@
       {
         "key": "end.sm.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7164,12 +7093,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -7333,7 +7256,7 @@
       {
         "key": "end.sm.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7409,12 +7332,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -7578,7 +7495,7 @@
       {
         "key": "end.sm.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7642,12 +7559,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -7811,7 +7722,7 @@
       {
         "key": "end.sm.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7887,12 +7798,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -8056,7 +7961,7 @@
       {
         "key": "end.md.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8096,12 +8001,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -8139,6 +8038,83 @@
       {
         "key": "end.md.enabled__hover",
         "channelsCompared": 170,
+        "channelsEqual": 159,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__item",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "transition-behavior",
+            "ours": "normal",
+            "theirs": "allow-discrete"
+          },
+          {
+            "part": "label-2",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "end.md.enabled__focus-visible",
+        "channelsCompared": 170,
         "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
@@ -8179,95 +8155,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "allow-discrete"
-          },
-          {
-            "part": "label-2",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "end.md.enabled__focus-visible",
-        "channelsCompared": 170,
-        "channelsEqual": 157,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -8311,7 +8198,7 @@
       {
         "key": "end.md.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8354,12 +8241,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
@@ -8394,7 +8275,7 @@
       {
         "key": "end.md.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8458,12 +8339,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -8627,7 +8502,7 @@
       {
         "key": "end.md.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8703,12 +8578,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -8872,7 +8741,7 @@
       {
         "key": "end.md.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8936,12 +8805,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -9105,7 +8968,7 @@
       {
         "key": "end.md.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9181,12 +9044,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -9350,7 +9207,7 @@
       {
         "key": "end.lg.enabled__default",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9390,12 +9247,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -9433,6 +9284,83 @@
       {
         "key": "end.lg.enabled__hover",
         "channelsCompared": 170,
+        "channelsEqual": 159,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__item",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-bottom-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-left-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-right-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "border-top-color",
+            "ours": "rgba(0, 0, 0, 1)",
+            "theirs": "rgba(22, 22, 22, 1)"
+          },
+          {
+            "part": "accordion__heading",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "label",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "accordion__wrapper",
+            "channel": "transition-behavior",
+            "ours": "normal",
+            "theirs": "allow-discrete"
+          },
+          {
+            "part": "label-2",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "end.lg.enabled__focus-visible",
+        "channelsCompared": 170,
         "channelsEqual": 158,
         "pctExact": null,
         "pctAA": null,
@@ -9473,95 +9401,6 @@
             "channel": "border-top-color",
             "ours": "rgba(0, 0, 0, 1)",
             "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "label",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__wrapper",
-            "channel": "transition-behavior",
-            "ours": "normal",
-            "theirs": "allow-discrete"
-          },
-          {
-            "part": "label-2",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          }
-        ],
-        "note": "original screenshot unavailable — pixel not scored"
-      },
-      {
-        "key": "end.lg.enabled__focus-visible",
-        "channelsCompared": 170,
-        "channelsEqual": 157,
-        "pctExact": null,
-        "pctAA": null,
-        "unscorable": "no-original",
-        "mismatches": [
-          {
-            "part": "root",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__item",
-            "channel": "list-style-type",
-            "ours": "disc",
-            "theirs": "none"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-bottom-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-left-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-right-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "border-top-color",
-            "ours": "rgba(0, 0, 0, 1)",
-            "theirs": "rgba(22, 22, 22, 1)"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -9605,7 +9444,7 @@
       {
         "key": "end.lg.enabled__active",
         "channelsCompared": 170,
-        "channelsEqual": 158,
+        "channelsEqual": 159,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9648,12 +9487,6 @@
           },
           {
             "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
-          },
-          {
-            "part": "accordion__heading",
             "channel": "list-style-type",
             "ours": "disc",
             "theirs": "none"
@@ -9688,7 +9521,7 @@
       {
         "key": "end.lg.disabled__default",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9752,12 +9585,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -9921,7 +9748,7 @@
       {
         "key": "end.lg.disabled__hover",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9997,12 +9824,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -10166,7 +9987,7 @@
       {
         "key": "end.lg.disabled__focus-visible",
         "channelsCompared": 147,
-        "channelsEqual": 110,
+        "channelsEqual": 111,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10230,12 +10051,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",
@@ -10399,7 +10214,7 @@
       {
         "key": "end.lg.disabled__active",
         "channelsCompared": 147,
-        "channelsEqual": 108,
+        "channelsEqual": 109,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10475,12 +10290,6 @@
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "not-allowed"
-          },
-          {
-            "part": "accordion__heading",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "row-reverse"
           },
           {
             "part": "accordion__heading",

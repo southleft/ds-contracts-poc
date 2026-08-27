@@ -1,0 +1,68 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [
+  "CODE-CANVAS-CONSISTENT-GLYPH-SUBSTITUTE:spinner-arc"
+ ],
+ "defects": [
+  "label-position=before: canvas renders square-left/label-right \u2014 identical arrangement to 'after' \u2014 while ref puts 'Loading' BEFORE (left of) the spinner; order axis uncarried",
+  "label-position=above: canvas renders square and label side-by-side on one row (ink bbox confirms single band) instead of ref's label-above-spinner stack, AND the label is clipped mid-glyph to 'Loadi' (19 dark pixel rows on the right image edge)",
+  "label-position=below: same side-by-side layout instead of ref's spinner-above-label stack, label clipped to 'Loadi'",
+  "the walled square substitute means no cell reads as a spinner: a flat light-blue square beside 'Loading' does not read as 'spinner' even before the axis defects (wall covers the glyph difference but the component fails the that-is-this-component bar)",
+  "appearance=inverted white-on-white blank in both halves is consistent with the row's notes (harness), not separately counted"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "layout axis",
+  "layout axis",
+  "glyph geometry",
+  "match-note"
+ ],
+ "notes": "both halves draw the spinner glyph as the same light-blue square substitute beside the Loading label across all 8 sizes; inverted cell is white-on-white in both",
+ "reviewedAt": "60793cc0",
+ "setNodeId": "39:13192",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-fluent-fluent.spinner.dump.json",
+  "matched": 12,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"extra-tiny\",\"tiny\",\"extra-small\",\"small\",\"medium\",\"large\",\"extra-large\",\"huge\"]} vs {\"enum\":[\"medium\",\"extraTiny\",\"tiny\",\"extraSmall\",\"small\",\"large\",\"extraLarge\",\"huge\"]}",
+   "prop size bindings.figma.values \u2014 {\"extra-tiny\":\"Extra Tiny\",\"tiny\":\"Tiny\",\"extra-small\":\"Extra Small\",\"small\":\"Small\",\"medium\":\"Medium\",\"large\":\"Large\",\"extra-large\":\"Extra Large\",\"huge\":\"Huge\"} vs {\"medium\":\"Medium\",\"e",
+   "prop labelPosition type \u2014 {\"enum\":[\"above\",\"below\",\"before\",\"after\"]} vs {\"enum\":[\"after\",\"above\",\"below\",\"before\"]}",
+   "prop labelPosition bindings.figma.values \u2014 {\"above\":\"Above\",\"below\":\"Below\",\"before\":\"Before\",\"after\":\"After\"} vs {\"after\":\"After\",\"above\":\"Above\",\"below\":\"Below\",\"before\":\"Before\"}",
+   "part root column-gap \u2014 {imported.spinner.root.column-gap} missing from proposal",
+   "part root height \u2014 {imported.spinner.root.height.{size}.{labelPosition}} missing from proposal",
+   "part root line-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root row-gap \u2014 {imported.spinner.root.row-gap} missing from proposal",
+   "part root width \u2014 {imported.spinner.root.width.{size}.{labelPosition}} missing from proposal",
+   "part root gap \u2014 proposal has {imported.spinner.root.column-gap}, contract has nothing",
+   "part root/spinner bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner flex-shrink \u2014 {imported.spinner.spinner.flex-shrink} missing from proposal",
+   "part root/spinner left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner line-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner background-color \u2014 proposal has {imported.spinner.spinner.background-color.{appearance}}, contract has nothing",
+   "part root/spinner width \u2014 proposal has {imported.spinner.spinner.width.medium}, contract has nothing",
+   "part root/spinner height \u2014 proposal has {imported.spinner.spinner.height.medium}, contract has nothing",
+   "part root/spinner/spinnertail bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner/spinnertail left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner/spinnertail line-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner/spinnertail min-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner/spinnertail right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner/spinnertail top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/spinner/spinnertail width \u2014 proposal has {imported.spinner.spinnertail.width.medium}, contract has nothing",
+   "part root/spinner/spinnertail height \u2014 proposal has {imported.spinner.spinnertail.height.medium}, contract has nothing",
+   "text root/label color (effective) \u2014 proposal has {imported.spinner.label.color.{appearance}}, contract has nothing"
+  ],
+  "lost": [
+   "`part root/spinner element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/spinner/spinnertail element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/label element` \u2014 host element (\"label\") is not drawn on the canvas",
+   "`Spinner:root/label` fontSize = `16` \u2014 nearest tokens: `{space.inset-x.md}`, `{space.gap.md}`, `{size.checkbox.sm}`, `{size.slider.thumb}`, `{size.switch.thumb}`",
+   "`Spinner:root/label` fontWeight = `600` \u2014 nearest tokens: `{font.title.weight}`, `{font.tab.selected.weight}`, `{font.weight.semibold}`",
+   "`Spinner:root/label` lineHeight = `22` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

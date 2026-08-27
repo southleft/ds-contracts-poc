@@ -1,0 +1,73 @@
+{
+  "id": "flowbite.toggleswitch",
+  "library": "tailwind",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "flowbite-react",
+    "version": "0.12.17",
+    "recipe": "examples/tailwind sandbox (.tw-sandbox; examples/tailwind/README) mounted per extract/computed/configs/tailwind.json"
+  },
+  "configPath": "extract/computed/configs/tailwind.json",
+  "component": "ToggleSwitch",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "sizing-md__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-sizing-md__checked-unchecked.png",
+      "props": {
+        "label": "Toggle",
+        "sizing": "md",
+        "checked": false,
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "sizing-md__checked-checked",
+      "status": "rendered",
+      "png": "ref-sizing-md__checked-checked.png",
+      "props": {
+        "label": "Toggle",
+        "sizing": "md",
+        "checked": true,
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "sizing-sm__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-sizing-sm__checked-unchecked.png",
+      "props": {
+        "label": "Toggle",
+        "sizing": "sm",
+        "checked": false,
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "sizing-lg__checked-unchecked",
+      "status": "rendered",
+      "png": "ref-sizing-lg__checked-unchecked.png",
+      "props": {
+        "label": "Toggle",
+        "sizing": "lg",
+        "checked": false,
+        "onChange": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

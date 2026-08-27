@@ -166,8 +166,8 @@
       "status": "rendered",
       "png": "code-modal-type-modal.png",
       "contentBox": {
-        "width": 1017.17,
-        "height": 1328
+        "width": 1100,
+        "height": 1400
       }
     },
     {
@@ -182,8 +182,8 @@
       "status": "rendered",
       "png": "code-modal-type-non-modal.png",
       "contentBox": {
-        "width": 1043.17,
-        "height": 1326
+        "width": 1098,
+        "height": 1398
       }
     },
     {
@@ -198,8 +198,8 @@
       "status": "rendered",
       "png": "code-modal-type-alert.png",
       "contentBox": {
-        "width": 1017.17,
-        "height": 1328
+        "width": 1100,
+        "height": 1400
       }
     }
   ],

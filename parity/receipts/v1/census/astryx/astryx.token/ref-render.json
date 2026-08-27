@@ -1,0 +1,160 @@
+{
+  "id": "astryx.token",
+  "library": "astryx",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "recipe": "examples/astryx sandbox (.astryx-sandbox; examples/astryx/README) mounted per extract/computed/configs/astryx.json"
+  },
+  "configPath": "extract/computed/configs/astryx.json",
+  "component": "Token",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-md__color-default",
+      "status": "rendered",
+      "png": "ref-size-md__color-default.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-red",
+      "status": "rendered",
+      "png": "ref-size-md__color-red.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "red"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-orange",
+      "status": "rendered",
+      "png": "ref-size-md__color-orange.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "orange"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-yellow",
+      "status": "rendered",
+      "png": "ref-size-md__color-yellow.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "yellow"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-green",
+      "status": "rendered",
+      "png": "ref-size-md__color-green.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "green"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-teal",
+      "status": "rendered",
+      "png": "ref-size-md__color-teal.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "teal"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-cyan",
+      "status": "rendered",
+      "png": "ref-size-md__color-cyan.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "cyan"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-blue",
+      "status": "rendered",
+      "png": "ref-size-md__color-blue.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "blue"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-purple",
+      "status": "rendered",
+      "png": "ref-size-md__color-purple.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "purple"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-pink",
+      "status": "rendered",
+      "png": "ref-size-md__color-pink.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "pink"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-md__color-gray",
+      "status": "rendered",
+      "png": "ref-size-md__color-gray.png",
+      "props": {
+        "label": "Tag",
+        "size": "md",
+        "color": "gray"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-sm__color-default",
+      "status": "rendered",
+      "png": "ref-size-sm__color-default.png",
+      "props": {
+        "label": "Tag",
+        "size": "sm",
+        "color": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-lg__color-default",
+      "status": "rendered",
+      "png": "ref-size-lg__color-default.png",
+      "props": {
+        "label": "Tag",
+        "size": "lg",
+        "color": "default"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 13,
+  "unmappable": 0
+}

@@ -9,7 +9,7 @@ import styles from './Checkbox.module.css';
 
 const ICONS: Record<string, string> = {
   'checkbox-part-0':
-    '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M 20 6 L 9 17 L 4 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    '<svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M 20 6 L 9 17 L 4 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
 export interface CheckboxProps extends ButtonHTMLAttributes<HTMLButtonElement> {

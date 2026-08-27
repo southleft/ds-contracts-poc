@@ -1,0 +1,2180 @@
+{
+ "_provenance": {
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "extractedAt": "2026-08-24",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design\u2192contract proposal.",
+  "dumpVersion": "1.32",
+  "sets": [
+   "Heading"
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (altitude.button):Variant=Secondary, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (altitude.button):Variant=Tertiary, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (altitude.button):Variant=Bare, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (altitude.button):Variant=Danger, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "IconClose:Size=Xs/root-xs/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "IconClose:Size=Sm/root-sm/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "IconClose:Size=Md/root-md/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "IconClose:Size=Lg/root-lg/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "IconClose:Size=Xl/root-xl/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "IconClose:Size=Xxl/root-xxl/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "IconClose:Size=Xxxl/root-xxxl/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Link:Variant=Xs, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Xs, State=Default/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Link:Variant=Sm, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Sm, State=Default/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Link:Variant=Lg, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Lg, State=Default/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Xs, State=Focus Visible/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Sm, State=Focus Visible/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Lg, State=Focus Visible/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Xs, State=Hover/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Sm, State=Hover/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  },
+  {
+   "code": "text-channel-unsupported",
+   "nodePath": "Link:Variant=Lg, State=Hover/label",
+   "message": "text channel(s) with no dump v1 projection: textDecoration UNDERLINE (the canvas twin of CSS text-decoration-line: underline \u2014 drawn, not read back) \u2014 typography carries (fontSize, fontStyle, style identity) only"
+  }
+ ],
+ "_variables": {
+  "imported/avatar/root/border-top-left-radius/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/avatar/root/border-top-right-radius/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/avatar/root/border-bottom-left-radius/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/avatar/root/border-bottom-right-radius/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/shared/size-0": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/avatar/root/background-color": {
+   "type": "COLOR",
+   "value": "#f4f3f1",
+   "modes": {
+    "Light": "#f4f3f1",
+    "Dark": "#f4f3f1"
+   }
+  },
+  "imported/avatar/root/font-size/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/avatar/badge/column-gap": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/shared/size-8": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/avatar/badge/background-color": {
+   "type": "COLOR",
+   "value": "#f4f3f1",
+   "modes": {
+    "Light": "#f4f3f1",
+    "Dark": "#f4f3f1"
+   }
+  },
+  "imported/badge/root/column-gap": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/badge/root/padding-left/default": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/badge/root/padding-right/default": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/badge/root/border-top-left-radius/default": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/badge/root/border-top-right-radius/default": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/badge/root/border-bottom-left-radius/default": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/badge/root/border-bottom-right-radius/default": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/badge/root/min-width/default": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/badge/root/min-height/default": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/badge/root/background-color/info": {
+   "type": "COLOR",
+   "value": "#4375ff",
+   "modes": {
+    "Light": "#4375ff",
+    "Dark": "#4375ff"
+   }
+  },
+  "imported/badge/root/font-size": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/badge/root/color/info": {
+   "type": "COLOR",
+   "value": "#000b29",
+   "modes": {
+    "Light": "#000b29",
+    "Dark": "#000b29"
+   }
+  },
+  "imported/badge/root/padding-left/dot": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/badge/root/padding-right/dot": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/badge/root/border-top-left-radius/dot": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/border-top-right-radius/dot": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/border-bottom-left-radius/dot": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/border-bottom-right-radius/dot": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/min-width/dot": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/min-height/dot": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/background-color/success": {
+   "type": "COLOR",
+   "value": "#3ee48c",
+   "modes": {
+    "Light": "#3ee48c",
+    "Dark": "#36b370"
+   }
+  },
+  "imported/badge/root/color/success": {
+   "type": "COLOR",
+   "value": "#00190c",
+   "modes": {
+    "Light": "#00190c",
+    "Dark": "#00190c"
+   }
+  },
+  "imported/badge/root/background-color/warning": {
+   "type": "COLOR",
+   "value": "#ffab00",
+   "modes": {
+    "Light": "#ffab00",
+    "Dark": "#ffab00"
+   }
+  },
+  "imported/badge/root/color/warning": {
+   "type": "COLOR",
+   "value": "#191100",
+   "modes": {
+    "Light": "#191100",
+    "Dark": "#191100"
+   }
+  },
+  "imported/badge/root/background-color/danger": {
+   "type": "COLOR",
+   "value": "#f05735",
+   "modes": {
+    "Light": "#f05735",
+    "Dark": "#f05735"
+   }
+  },
+  "imported/badge/root/color/danger": {
+   "type": "COLOR",
+   "value": "#1f0600",
+   "modes": {
+    "Light": "#1f0600",
+    "Dark": "#1f0600"
+   }
+  },
+  "imported/shared/size-16": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/shared/size-4": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/button/root/border-top-width/secondary": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-bottom-width/secondary": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-left-width/secondary": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-right-width/secondary": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/background-color/secondary": {
+   "type": "COLOR",
+   "value": "#a49981",
+   "modes": {
+    "Light": "#a49981",
+    "Dark": "#a49981"
+   }
+  },
+  "imported/button/root/border-top-color/secondary": {
+   "type": "COLOR",
+   "value": "#191306",
+   "modes": {
+    "Light": "#191306",
+    "Dark": "#191306"
+   }
+  },
+  "imported/button/root/color/secondary": {
+   "type": "COLOR",
+   "value": "#191306",
+   "modes": {
+    "Light": "#191306",
+    "Dark": "#191306"
+   }
+  },
+  "imported/button/root/border-top-width/tertiary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/border-bottom-width/tertiary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/border-left-width/tertiary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/border-right-width/tertiary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/background-color/tertiary": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/border-top-color/tertiary": {
+   "type": "COLOR",
+   "value": "#b0b0b0",
+   "modes": {
+    "Light": "#b0b0b0",
+    "Dark": "#b0b0b0"
+   }
+  },
+  "imported/button/root/color/tertiary": {
+   "type": "COLOR",
+   "value": "#101010",
+   "modes": {
+    "Light": "#101010",
+    "Dark": "#f8f8f6"
+   }
+  },
+  "imported/button/root/border-top-width/bare": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-bottom-width/bare": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-left-width/bare": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-right-width/bare": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/background-color/bare": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/button/root/border-top-color/bare": {
+   "type": "COLOR",
+   "value": "#101010",
+   "modes": {
+    "Light": "#101010",
+    "Dark": "#101010"
+   }
+  },
+  "imported/button/root/color/bare": {
+   "type": "COLOR",
+   "value": "#101010",
+   "modes": {
+    "Light": "#101010",
+    "Dark": "#f8f8f6"
+   }
+  },
+  "imported/button/root/border-top-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-bottom-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-left-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-right-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/background-color/danger": {
+   "type": "COLOR",
+   "value": "#f05735",
+   "modes": {
+    "Light": "#f05735",
+    "Dark": "#f05735"
+   }
+  },
+  "imported/button/root/border-top-color/danger": {
+   "type": "COLOR",
+   "value": "#1f0600",
+   "modes": {
+    "Light": "#1f0600",
+    "Dark": "#1f0600"
+   }
+  },
+  "imported/button/root/color/danger": {
+   "type": "COLOR",
+   "value": "#1f0600",
+   "modes": {
+    "Light": "#1f0600",
+    "Dark": "#1f0600"
+   }
+  },
+  "imported/button/root/outline-width-state-focus-visible": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/button/root/outline-color-state-focus-visible": {
+   "type": "COLOR",
+   "value": "#4375ff",
+   "modes": {
+    "Light": "#4375ff",
+    "Dark": "#4375ff"
+   }
+  },
+  "imported/button/root/background-color-state-hover/unset": {
+   "type": "COLOR",
+   "value": "#6b93ff",
+   "modes": {
+    "Light": "#6b93ff",
+    "Dark": "#6b93ff"
+   }
+  },
+  "imported/button/root/color-state-hover/unset": {
+   "type": "COLOR",
+   "value": "#000b29",
+   "modes": {
+    "Light": "#000b29",
+    "Dark": "#000b29"
+   }
+  },
+  "imported/chip/root/column-gap": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/chip/root/padding-left": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/chip/root/padding-top": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/chip/root/padding-right": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/chip/root/padding-bottom": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/chip/root/border-top-left-radius/unset": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/chip/root/border-top-right-radius/unset": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/chip/root/border-bottom-left-radius/unset": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/chip/root/border-bottom-right-radius/unset": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/chip/root/border-top-width/secondary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/chip/root/border-bottom-width/secondary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/chip/root/border-left-width/secondary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/chip/root/border-right-width/secondary": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/chip/root/min-width": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/min-height": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/background-color/secondary": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/chip/root/border-top-color/secondary": {
+   "type": "COLOR",
+   "value": "#b0b0b0",
+   "modes": {
+    "Light": "#b0b0b0",
+    "Dark": "#b0b0b0"
+   }
+  },
+  "imported/chip/root/font-size": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/chip/root/color/secondary": {
+   "type": "COLOR",
+   "value": "#3a3a3a",
+   "modes": {
+    "Light": "#3a3a3a",
+    "Dark": "#bdb39e"
+   }
+  },
+  "imported/chip/root/border-top-left-radius/squared": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/chip/root/border-top-right-radius/squared": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/chip/root/border-bottom-left-radius/squared": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/chip/root/border-bottom-right-radius/squared": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/chip/root/border-top-width/info": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-bottom-width/info": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-left-width/info": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-right-width/info": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/background-color/info": {
+   "type": "COLOR",
+   "value": "#4375ff",
+   "modes": {
+    "Light": "#4375ff",
+    "Dark": "#4375ff"
+   }
+  },
+  "imported/chip/root/border-top-color/info": {
+   "type": "COLOR",
+   "value": "#000b29",
+   "modes": {
+    "Light": "#000b29",
+    "Dark": "#000b29"
+   }
+  },
+  "imported/chip/root/color/info": {
+   "type": "COLOR",
+   "value": "#000b29",
+   "modes": {
+    "Light": "#000b29",
+    "Dark": "#000b29"
+   }
+  },
+  "imported/chip/root/border-top-width/success": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-bottom-width/success": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-left-width/success": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-right-width/success": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/background-color/success": {
+   "type": "COLOR",
+   "value": "#3ee48c",
+   "modes": {
+    "Light": "#3ee48c",
+    "Dark": "#36b370"
+   }
+  },
+  "imported/chip/root/border-top-color/success": {
+   "type": "COLOR",
+   "value": "#00190c",
+   "modes": {
+    "Light": "#00190c",
+    "Dark": "#00190c"
+   }
+  },
+  "imported/chip/root/color/success": {
+   "type": "COLOR",
+   "value": "#00190c",
+   "modes": {
+    "Light": "#00190c",
+    "Dark": "#00190c"
+   }
+  },
+  "imported/chip/root/border-top-width/warning": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-bottom-width/warning": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-left-width/warning": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-right-width/warning": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/background-color/warning": {
+   "type": "COLOR",
+   "value": "#ffab00",
+   "modes": {
+    "Light": "#ffab00",
+    "Dark": "#ffab00"
+   }
+  },
+  "imported/chip/root/border-top-color/warning": {
+   "type": "COLOR",
+   "value": "#191100",
+   "modes": {
+    "Light": "#191100",
+    "Dark": "#191100"
+   }
+  },
+  "imported/chip/root/color/warning": {
+   "type": "COLOR",
+   "value": "#191100",
+   "modes": {
+    "Light": "#191100",
+    "Dark": "#191100"
+   }
+  },
+  "imported/chip/root/border-top-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-bottom-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-left-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/border-right-width/danger": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/chip/root/background-color/danger": {
+   "type": "COLOR",
+   "value": "#f05735",
+   "modes": {
+    "Light": "#f05735",
+    "Dark": "#f05735"
+   }
+  },
+  "imported/chip/root/border-top-color/danger": {
+   "type": "COLOR",
+   "value": "#1f0600",
+   "modes": {
+    "Light": "#1f0600",
+    "Dark": "#1f0600"
+   }
+  },
+  "imported/chip/root/color/danger": {
+   "type": "COLOR",
+   "value": "#1f0600",
+   "modes": {
+    "Light": "#1f0600",
+    "Dark": "#1f0600"
+   }
+  },
+  "imported/divider/root/width/unset": {
+   "type": "FLOAT",
+   "value": 288,
+   "modes": {
+    "Light": 288,
+    "Dark": 288
+   }
+  },
+  "imported/divider/root/min-width": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/divider/root/min-height": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/divider/root/background-color": {
+   "type": "COLOR",
+   "value": "#b0b0b0",
+   "modes": {
+    "Light": "#b0b0b0",
+    "Dark": "#8a8a8a"
+   }
+  },
+  "imported/divider/root/width/vertical": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/heading/root/width": {
+   "type": "FLOAT",
+   "value": 328,
+   "modes": {
+    "Light": 328,
+    "Dark": 328
+   }
+  },
+  "imported/heading/root/min-width": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/heading/root/min-height": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/heading/root/font-size/display-lg": {
+   "type": "FLOAT",
+   "value": 48,
+   "modes": {
+    "Light": 48,
+    "Dark": 48
+   }
+  },
+  "imported/heading/root/font-size/display-md": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "imported/heading/root/font-size/display-sm": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/heading/root/font-size/lg": {
+   "type": "FLOAT",
+   "value": 28,
+   "modes": {
+    "Light": 28,
+    "Dark": 28
+   }
+  },
+  "imported/heading/root/font-size/md": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/heading/root/font-size/sm": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/icon-close/root/width/xs": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/icon-close/root/min-width": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/icon-close/root/min-height": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/icon-close/root/color": {
+   "type": "COLOR",
+   "value": "#101010",
+   "modes": {
+    "Light": "#101010",
+    "Dark": "#101010"
+   }
+  },
+  "imported/icon-close/root/width/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/icon-close/root/width/md": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/icon-close/root/width/lg": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/icon-close/root/width/xl": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/icon-close/root/width/xxl": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "imported/icon-close/root/width/xxxl": {
+   "type": "FLOAT",
+   "value": 40,
+   "modes": {
+    "Light": 40,
+    "Dark": 40
+   }
+  },
+  "imported/link/root/column-gap": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/link/root/min-width": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/link/root/min-height": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/link/root/font-size/xs": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/link/root/color": {
+   "type": "COLOR",
+   "value": "#4375ff",
+   "modes": {
+    "Light": "#4375ff",
+    "Dark": "#4375ff"
+   }
+  },
+  "imported/link/root/font-size/sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/link/root/font-size/lg": {
+   "type": "FLOAT",
+   "value": 18,
+   "modes": {
+    "Light": 18,
+    "Dark": 18
+   }
+  },
+  "imported/link/root/color-state-hover": {
+   "type": "COLOR",
+   "value": "#6b93ff",
+   "modes": {
+    "Light": "#6b93ff",
+    "Dark": "#6b93ff"
+   }
+  }
+ },
+ "Heading": {
+  "setName": "Heading",
+  "description": "Heading \u2014 generated from contract altitude.heading v0.2.0 \u2020 (2 code-only facts \u2014 see plugin report)",
+  "contractId": "altitude.heading",
+  "specHash": "3759093838",
+  "version": "0.2.0",
+  "propNames": {
+   "Variant": "variant",
+   "Weight": "weight",
+   "Content": "children"
+  },
+  "semantics": {
+   "element": "h2"
+  },
+  "type": "COMPONENT_SET",
+  "nodeId": "39:6778",
+  "key": "a6adad2801d32e5e4c7bbd46e647235928574b9c",
+  "variants": [
+   {
+    "name": "Variant=Display Lg, Weight=Regular",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Display Lg",
+     "Weight": "Regular"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 52
+    },
+    "abs": {
+     "x": 40,
+     "y": 40,
+     "right": 408,
+     "bottom": 420,
+     "width": 328,
+     "height": 52,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 48,
+       "fontStyle": "Regular",
+       "lineHeight": 52,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/display-lg",
+       "fontWeightVar": "imported/heading/root/font-weight/regular",
+       "lineHeightVar": "imported/heading/root/line-height/display-lg"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Display Lg, Weight=Bold",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Display Lg",
+     "Weight": "Bold"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 52
+    },
+    "abs": {
+     "x": 408,
+     "y": 40,
+     "right": 40,
+     "bottom": 420,
+     "width": 328,
+     "height": 52,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 48,
+       "fontStyle": "SemiBold",
+       "lineHeight": 52,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/display-lg",
+       "fontWeightVar": "imported/heading/root/font-weight/bold",
+       "lineHeightVar": "imported/heading/root/line-height/display-lg"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Display Md, Weight=Regular",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Display Md",
+     "Weight": "Regular"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 44
+    },
+    "abs": {
+     "x": 40,
+     "y": 132,
+     "right": 408,
+     "bottom": 336,
+     "width": 328,
+     "height": 44,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 36,
+       "fontStyle": "Regular",
+       "lineHeight": 44,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/display-md",
+       "fontWeightVar": "imported/heading/root/font-weight/regular",
+       "lineHeightVar": "imported/heading/root/line-height/display-md"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Display Md, Weight=Bold",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Display Md",
+     "Weight": "Bold"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 44
+    },
+    "abs": {
+     "x": 408,
+     "y": 132,
+     "right": 40,
+     "bottom": 336,
+     "width": 328,
+     "height": 44,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 36,
+       "fontStyle": "SemiBold",
+       "lineHeight": 44,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/display-md",
+       "fontWeightVar": "imported/heading/root/font-weight/bold",
+       "lineHeightVar": "imported/heading/root/line-height/display-md"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Display Sm, Weight=Regular",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Display Sm",
+     "Weight": "Regular"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 40
+    },
+    "abs": {
+     "x": 40,
+     "y": 216,
+     "right": 408,
+     "bottom": 256,
+     "width": 328,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 32,
+       "fontStyle": "Regular",
+       "lineHeight": 40,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/display-sm",
+       "fontWeightVar": "imported/heading/root/font-weight/regular",
+       "lineHeightVar": "imported/heading/root/line-height/display-sm"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Display Sm, Weight=Bold",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Display Sm",
+     "Weight": "Bold"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 40
+    },
+    "abs": {
+     "x": 408,
+     "y": 216,
+     "right": 40,
+     "bottom": 256,
+     "width": 328,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 32,
+       "fontStyle": "SemiBold",
+       "lineHeight": 40,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/display-sm",
+       "fontWeightVar": "imported/heading/root/font-weight/bold",
+       "lineHeightVar": "imported/heading/root/line-height/display-sm"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Lg, Weight=Regular",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Lg",
+     "Weight": "Regular"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 36
+    },
+    "abs": {
+     "x": 40,
+     "y": 296,
+     "right": 408,
+     "bottom": 180,
+     "width": 328,
+     "height": 36,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 28,
+       "fontStyle": "Regular",
+       "lineHeight": 36,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/lg",
+       "fontWeightVar": "imported/heading/root/font-weight/regular",
+       "lineHeightVar": "imported/heading/root/line-height/lg"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Lg, Weight=Bold",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Lg",
+     "Weight": "Bold"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 36
+    },
+    "abs": {
+     "x": 408,
+     "y": 296,
+     "right": 40,
+     "bottom": 180,
+     "width": 328,
+     "height": 36,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 28,
+       "fontStyle": "SemiBold",
+       "lineHeight": 36,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/lg",
+       "fontWeightVar": "imported/heading/root/font-weight/bold",
+       "lineHeightVar": "imported/heading/root/line-height/lg"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Md, Weight=Regular",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Md",
+     "Weight": "Regular"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 32
+    },
+    "abs": {
+     "x": 40,
+     "y": 372,
+     "right": 408,
+     "bottom": 108,
+     "width": 328,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 24,
+       "fontStyle": "Regular",
+       "lineHeight": 32,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/md",
+       "fontWeightVar": "imported/heading/root/font-weight/regular",
+       "lineHeightVar": "imported/heading/root/line-height/md"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Md, Weight=Bold",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Md",
+     "Weight": "Bold"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 32
+    },
+    "abs": {
+     "x": 408,
+     "y": 372,
+     "right": 40,
+     "bottom": 108,
+     "width": 328,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 24,
+       "fontStyle": "SemiBold",
+       "lineHeight": 32,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/md",
+       "fontWeightVar": "imported/heading/root/font-weight/bold",
+       "lineHeightVar": "imported/heading/root/line-height/md"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Sm, Weight=Regular",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Sm",
+     "Weight": "Regular"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 28
+    },
+    "abs": {
+     "x": 40,
+     "y": 444,
+     "right": 408,
+     "bottom": 40,
+     "width": 328,
+     "height": 28,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 20,
+       "fontStyle": "Regular",
+       "lineHeight": 28,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/sm",
+       "fontWeightVar": "imported/heading/root/font-weight/regular",
+       "lineHeightVar": "imported/heading/root/line-height/sm"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Variant=Sm, Weight=Bold",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Variant": "Sm",
+     "Weight": "Bold"
+    },
+    "bbox": {
+     "width": 328,
+     "height": 28
+    },
+    "abs": {
+     "x": 408,
+     "y": 444,
+     "right": 40,
+     "bottom": 40,
+     "width": 328,
+     "height": 28,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/heading/root/width",
+     "minWidth": "imported/heading/root/min-width",
+     "minHeight": "imported/heading/root/min-height"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Heading",
+       "fontSize": 20,
+       "fontStyle": "SemiBold",
+       "lineHeight": 28,
+       "fontFamily": "IBM Plex Sans",
+       "fontSizeVar": "imported/heading/root/font-size/sm",
+       "fontWeightVar": "imported/heading/root/font-weight/bold",
+       "lineHeightVar": "imported/heading/root/line-height/sm"
+      },
+      "fill": {
+       "hex": "000000"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   }
+  ],
+  "propertyDefinitions": {
+   "Content#39:1717": {
+    "type": "TEXT",
+    "defaultValue": "Heading"
+   },
+   "Variant": {
+    "type": "VARIANT",
+    "defaultValue": "Display Lg",
+    "variantOptions": [
+     "Display Lg",
+     "Display Md",
+     "Display Sm",
+     "Lg",
+     "Md",
+     "Sm"
+    ]
+   },
+   "Weight": {
+    "type": "VARIANT",
+    "defaultValue": "Regular",
+    "variantOptions": [
+     "Regular",
+     "Bold"
+    ]
+   }
+  }
+ }
+}

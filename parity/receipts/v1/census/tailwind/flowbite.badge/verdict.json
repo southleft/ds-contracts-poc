@@ -1,0 +1,36 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "all 7 colors + sm + state previews match; hover/active previews identical to default by design (bg-only deltas)",
+ "reviewedAt": "ad1e0fbb",
+ "setNodeId": "39:5808",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-tailwind-flowbite.badge.dump.json",
+  "matched": 11,
+  "diverged": [
+   "part root/label \u2014 missing from proposal",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root column-gap \u2014 {imported.shared.size-4} missing from proposal",
+   "part root row-gap \u2014 {imported.shared.size-4} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.badge.root.background-color.{color}}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-4}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.shared.size-4}, contract has nothing",
+   "part root line-height \u2014 proposal has {imported.badge.label.line-height.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root font-weight` \u2014 {imported.badge.root.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-weight` \u2014 {imported.badge.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ],
+  "identicalToCommittedBaseline": true
+ }
+}

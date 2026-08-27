@@ -1,0 +1,35 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24004",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.tab.dump.json",
+  "matched": 15,
+  "diverged": [
+   "part root/iconSlot \u2014 missing from proposal",
+   "part root/endContent \u2014 missing from proposal",
+   "part root/Icon \u2014 proposal has a part the contract does not",
+   "part root/EndContent \u2014 proposal has a part the contract does not",
+   "text root/labelText font-size (effective) \u2014 {font.control.size.sm} missing from proposal"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"button\",\"role\":\"tab\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`Tab:root/labelText` fontSize = `14` \u2014 nearest tokens: `{font.control.size.sm}`, `{font.avatar.size.md}`, `{font.size.200}`"
+  ]
+ }
+}

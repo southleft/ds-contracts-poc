@@ -36,7 +36,7 @@
       {
         "name": "initials",
         "type": "text",
-        "default": "TP"
+        "default": null
       },
       {
         "name": "customer",
@@ -56,7 +56,7 @@
       {
         "name": "withInitials",
         "type": "boolean",
-        "default": true
+        "default": false
       }
     ],
     "states": [],

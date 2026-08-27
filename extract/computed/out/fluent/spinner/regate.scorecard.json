@@ -3,6 +3,7 @@
   "component": "Spinner",
   "config": "extract/computed/configs/fluent.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -78,6 +79,8 @@
     "component": "Spinner",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 64,
     "interactions": 4,
@@ -110,7 +113,7 @@
       "mintedLeavesUnfolded": 194,
       "baseBindings": 33,
       "stateBindings": 0,
-      "codeOnlyChannels": 13,
+      "codeOnlyChannels": 12,
       "overflowBindings": 0,
       "folds": 40
     },
@@ -144,28 +147,28 @@
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__default",
+        "key": "extra-tiny.primary.before__default",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__hover",
+        "key": "extra-tiny.primary.before__hover",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__focus-visible",
+        "key": "extra-tiny.primary.before__focus-visible",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
-        "key": "extra-tiny.primary.below__active",
+        "key": "extra-tiny.primary.before__active",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 13,
@@ -229,7 +232,6 @@
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: spinnertail::before is painted by a mechanism the grammar cannot read (background-image: conic-gradient(rgba(255, 255, 255, 1) 135deg, rgba(0, 0, 0, 0) 135deg)) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
       "promotion: pseudo-decor-outside-grammar: spinnertail::after is painted by a mechanism the grammar cannot read (background-image: conic-gradient(rgba(255, 255, 255, 1) 135deg, rgba(0, 0, 0, 0) 135deg)) — the decor grammar reads background-color alpha and border rings only; the box is NOT promoted",
-      "code-only: root.flex-direction — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: spinner.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: spinner.animation-iteration-count — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -249,7 +251,7 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1531,
+      "leavesAdded": 1527,
       "divergent": [
         {
           "token": "imported.spinner.label.color.inverted",
@@ -445,7 +447,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -534,7 +536,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -623,7 +625,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -712,7 +714,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -793,17 +795,11 @@
       {
         "key": "extra-tiny.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -882,17 +878,11 @@
       {
         "key": "extra-tiny.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -971,17 +961,11 @@
       {
         "key": "extra-tiny.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1060,17 +1044,11 @@
       {
         "key": "extra-tiny.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1149,11 +1127,17 @@
       {
         "key": "extra-tiny.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1232,11 +1216,17 @@
       {
         "key": "extra-tiny.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1315,11 +1305,17 @@
       {
         "key": "extra-tiny.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1398,11 +1394,17 @@
       {
         "key": "extra-tiny.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -1821,7 +1823,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -1910,7 +1912,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -1999,7 +2001,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -2088,7 +2090,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -2169,17 +2171,11 @@
       {
         "key": "extra-tiny.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2258,17 +2254,11 @@
       {
         "key": "extra-tiny.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2347,17 +2337,11 @@
       {
         "key": "extra-tiny.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2436,17 +2420,11 @@
       {
         "key": "extra-tiny.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2525,11 +2503,17 @@
       {
         "key": "extra-tiny.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2608,11 +2592,17 @@
       {
         "key": "extra-tiny.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2691,11 +2681,17 @@
       {
         "key": "extra-tiny.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -2774,11 +2770,17 @@
       {
         "key": "extra-tiny.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3197,7 +3199,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -3286,7 +3288,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -3375,7 +3377,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -3464,7 +3466,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -3545,17 +3547,11 @@
       {
         "key": "tiny.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3634,17 +3630,11 @@
       {
         "key": "tiny.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3723,17 +3713,11 @@
       {
         "key": "tiny.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3812,17 +3796,11 @@
       {
         "key": "tiny.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3901,11 +3879,17 @@
       {
         "key": "tiny.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -3984,11 +3968,17 @@
       {
         "key": "tiny.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -4067,11 +4057,17 @@
       {
         "key": "tiny.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -4150,11 +4146,17 @@
       {
         "key": "tiny.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -4573,7 +4575,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -4662,7 +4664,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -4751,7 +4753,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -4840,7 +4842,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -4921,17 +4923,11 @@
       {
         "key": "tiny.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5010,17 +5006,11 @@
       {
         "key": "tiny.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5099,17 +5089,11 @@
       {
         "key": "tiny.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5188,17 +5172,11 @@
       {
         "key": "tiny.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5277,11 +5255,17 @@
       {
         "key": "tiny.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5360,11 +5344,17 @@
       {
         "key": "tiny.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5443,11 +5433,17 @@
       {
         "key": "tiny.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5526,11 +5522,17 @@
       {
         "key": "tiny.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -5949,7 +5951,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -6038,7 +6040,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -6127,7 +6129,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -6216,7 +6218,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -6297,17 +6299,11 @@
       {
         "key": "extra-small.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6386,17 +6382,11 @@
       {
         "key": "extra-small.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6475,17 +6465,11 @@
       {
         "key": "extra-small.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6564,17 +6548,11 @@
       {
         "key": "extra-small.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6653,11 +6631,17 @@
       {
         "key": "extra-small.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6736,11 +6720,17 @@
       {
         "key": "extra-small.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6819,11 +6809,17 @@
       {
         "key": "extra-small.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -6902,11 +6898,17 @@
       {
         "key": "extra-small.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7325,7 +7327,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -7414,7 +7416,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -7503,7 +7505,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -7592,7 +7594,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -7673,17 +7675,11 @@
       {
         "key": "extra-small.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7762,17 +7758,11 @@
       {
         "key": "extra-small.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7851,17 +7841,11 @@
       {
         "key": "extra-small.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -7940,17 +7924,11 @@
       {
         "key": "extra-small.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8029,11 +8007,17 @@
       {
         "key": "extra-small.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8112,11 +8096,17 @@
       {
         "key": "extra-small.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8195,11 +8185,17 @@
       {
         "key": "extra-small.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8278,11 +8274,17 @@
       {
         "key": "extra-small.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -8701,7 +8703,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -8790,7 +8792,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -8879,7 +8881,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -8968,7 +8970,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -9049,17 +9051,11 @@
       {
         "key": "small.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9138,17 +9134,11 @@
       {
         "key": "small.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9227,17 +9217,11 @@
       {
         "key": "small.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9316,17 +9300,11 @@
       {
         "key": "small.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9405,11 +9383,17 @@
       {
         "key": "small.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9488,11 +9472,17 @@
       {
         "key": "small.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9571,11 +9561,17 @@
       {
         "key": "small.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -9654,11 +9650,17 @@
       {
         "key": "small.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10077,7 +10079,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -10166,7 +10168,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -10255,7 +10257,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -10344,7 +10346,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -10425,17 +10427,11 @@
       {
         "key": "small.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10514,17 +10510,11 @@
       {
         "key": "small.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10603,17 +10593,11 @@
       {
         "key": "small.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10692,17 +10676,11 @@
       {
         "key": "small.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10781,11 +10759,17 @@
       {
         "key": "small.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10864,11 +10848,17 @@
       {
         "key": "small.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -10947,11 +10937,17 @@
       {
         "key": "small.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11030,11 +11026,17 @@
       {
         "key": "small.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11453,7 +11455,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -11542,7 +11544,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -11631,7 +11633,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -11720,7 +11722,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -11801,17 +11803,11 @@
       {
         "key": "medium.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11890,17 +11886,11 @@
       {
         "key": "medium.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -11979,17 +11969,11 @@
       {
         "key": "medium.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12068,17 +12052,11 @@
       {
         "key": "medium.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12157,11 +12135,17 @@
       {
         "key": "medium.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12240,11 +12224,17 @@
       {
         "key": "medium.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12323,11 +12313,17 @@
       {
         "key": "medium.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12406,11 +12402,17 @@
       {
         "key": "medium.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -12829,7 +12831,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -12918,7 +12920,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -13007,7 +13009,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -13096,7 +13098,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -13177,17 +13179,11 @@
       {
         "key": "medium.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13266,17 +13262,11 @@
       {
         "key": "medium.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13355,17 +13345,11 @@
       {
         "key": "medium.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13444,17 +13428,11 @@
       {
         "key": "medium.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13533,11 +13511,17 @@
       {
         "key": "medium.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13616,11 +13600,17 @@
       {
         "key": "medium.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13699,11 +13689,17 @@
       {
         "key": "medium.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -13782,11 +13778,17 @@
       {
         "key": "medium.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14205,7 +14207,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -14294,7 +14296,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -14383,7 +14385,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -14472,7 +14474,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -14553,17 +14555,11 @@
       {
         "key": "large.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14642,17 +14638,11 @@
       {
         "key": "large.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14731,17 +14721,11 @@
       {
         "key": "large.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14820,17 +14804,11 @@
       {
         "key": "large.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14909,11 +14887,17 @@
       {
         "key": "large.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -14992,11 +14976,17 @@
       {
         "key": "large.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15075,11 +15065,17 @@
       {
         "key": "large.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15158,11 +15154,17 @@
       {
         "key": "large.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -15581,7 +15583,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -15670,7 +15672,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -15759,7 +15761,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -15848,7 +15850,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -15929,17 +15931,11 @@
       {
         "key": "large.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16018,17 +16014,11 @@
       {
         "key": "large.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16107,17 +16097,11 @@
       {
         "key": "large.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16196,17 +16180,11 @@
       {
         "key": "large.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16285,11 +16263,17 @@
       {
         "key": "large.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16368,11 +16352,17 @@
       {
         "key": "large.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16451,11 +16441,17 @@
       {
         "key": "large.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16534,11 +16530,17 @@
       {
         "key": "large.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -16957,7 +16959,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -17046,7 +17048,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -17135,7 +17137,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -17224,7 +17226,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -17305,17 +17307,11 @@
       {
         "key": "extra-large.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17394,17 +17390,11 @@
       {
         "key": "extra-large.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17483,17 +17473,11 @@
       {
         "key": "extra-large.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17572,17 +17556,11 @@
       {
         "key": "extra-large.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17661,11 +17639,17 @@
       {
         "key": "extra-large.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17744,11 +17728,17 @@
       {
         "key": "extra-large.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17827,11 +17817,17 @@
       {
         "key": "extra-large.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -17910,11 +17906,17 @@
       {
         "key": "extra-large.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18333,7 +18335,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -18422,7 +18424,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -18511,7 +18513,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -18600,7 +18602,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -18681,17 +18683,11 @@
       {
         "key": "extra-large.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18770,17 +18766,11 @@
       {
         "key": "extra-large.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18859,17 +18849,11 @@
       {
         "key": "extra-large.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -18948,17 +18932,11 @@
       {
         "key": "extra-large.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19037,11 +19015,17 @@
       {
         "key": "extra-large.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19120,11 +19104,17 @@
       {
         "key": "extra-large.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19203,11 +19193,17 @@
       {
         "key": "extra-large.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19286,11 +19282,17 @@
       {
         "key": "extra-large.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -19709,7 +19711,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -19798,7 +19800,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -19887,7 +19889,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -19976,7 +19978,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -20057,17 +20059,11 @@
       {
         "key": "huge.primary.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20146,17 +20142,11 @@
       {
         "key": "huge.primary.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20235,17 +20225,11 @@
       {
         "key": "huge.primary.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20324,17 +20308,11 @@
       {
         "key": "huge.primary.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20413,11 +20391,17 @@
       {
         "key": "huge.primary.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20496,11 +20480,17 @@
       {
         "key": "huge.primary.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20579,11 +20569,17 @@
       {
         "key": "huge.primary.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -20662,11 +20658,17 @@
       {
         "key": "huge.primary.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21085,7 +21087,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -21174,7 +21176,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -21263,7 +21265,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -21352,7 +21354,7 @@
           {
             "part": "root",
             "channel": "flex-direction",
-            "ours": "row",
+            "ours": "column-reverse",
             "theirs": "column"
           },
           {
@@ -21433,17 +21435,11 @@
       {
         "key": "huge.inverted.below__default",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21522,17 +21518,11 @@
       {
         "key": "huge.inverted.below__hover",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21611,17 +21601,11 @@
       {
         "key": "huge.inverted.below__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21700,17 +21684,11 @@
       {
         "key": "huge.inverted.below__active",
         "channelsCompared": 97,
-        "channelsEqual": 84,
+        "channelsEqual": 85,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "flex-direction",
-            "ours": "row",
-            "theirs": "column"
-          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21789,11 +21767,17 @@
       {
         "key": "huge.inverted.before__default",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21872,11 +21856,17 @@
       {
         "key": "huge.inverted.before__hover",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -21955,11 +21945,17 @@
       {
         "key": "huge.inverted.before__focus-visible",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",
@@ -22038,11 +22034,17 @@
       {
         "key": "huge.inverted.before__active",
         "channelsCompared": 97,
-        "channelsEqual": 85,
+        "channelsEqual": 84,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
+          {
+            "part": "root",
+            "channel": "flex-direction",
+            "ours": "row-reverse",
+            "theirs": "row"
+          },
           {
             "part": "root",
             "channel": "min-width",

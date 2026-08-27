@@ -2,29 +2,11 @@
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
   "generatedBy": "extract/computed/run.ts",
   "library": "@ds-contracts/conformance@0.1.0",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
-      "shared": {
-        "color-663399": {
-          "$value": "#663399",
-          "$type": "color"
-        },
-        "color-bebebe": {
-          "$value": "#bebebe",
-          "$type": "color"
-        },
-        "size-1": {
-          "$value": "1px",
-          "$type": "dimension"
-        }
-      },
       "case-pseudo-placeholder": {
         "root": {
-          "color": {
-            "$value": "#1976d2",
-            "$type": "color"
-          },
           "font-size": {
             "$value": "12px",
             "$type": "dimension"
@@ -47,6 +29,10 @@
             "$value": "2px",
             "$type": "dimension"
           },
+          "placeholder-color": {
+            "$value": "#969696",
+            "$type": "color"
+          },
           "outline-color-state-active": {
             "$value": "#005fcc",
             "$type": "color"
@@ -64,47 +50,20 @@
             "$type": "dimension"
           }
         }
+      },
+      "shared": {
+        "color-bebebe": {
+          "$value": "#bebebe",
+          "$type": "color"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        }
       }
     }
   },
-  "folds": [
-    {
-      "part": "root",
-      "channel": "caret-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "root",
-      "channel": "column-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "root",
-      "channel": "outline-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "root",
-      "channel": "row-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "root",
-      "channel": "text-decoration-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "root",
-      "channel": "text-emphasis-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    }
-  ],
+  "folds": [],
   "foldedStateSkips": [],
   "layout": {
     "enriched": [],
@@ -235,17 +194,10 @@
   "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
-    "control-equal-drop: root — 381 of 396 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: root — 11 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-left-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-right-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); border-top-color=rgba(102, 51, 153, 1) (in-page control also read rgba(102, 51, 153, 1); UA control reads rgba(0, 0, 0, 1)); caret-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); column-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); outline-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); row-rule-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-decoration-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1)); text-emphasis-color=rgba(25, 118, 210, 1) (in-page control also read rgba(25, 118, 210, 1); UA control reads rgba(0, 0, 0, 1))",
-    "control-equal-drop: root — 377 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <input> — span control used (part a)",
-    "ua-control-fallback: no UA baseline for <input> — span UA control used (part a)",
-    "control-equal-drop: a — 372 of 396 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "control-equal-drop: a — 368 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "placeholder-ink-admitted: a — the element's ::placeholder plane paints an ink DIFFERENT from its own color (rgba(150, 150, 150, 1) vs rgba(0, 0, 0, 1)); the synthetic placeholder-color channel joins fusion so an EMPTY field stops minting in VALUE ink (RC7). Where the two inks AGREE the fold does not fire and the existing color channel already paints the right pixel.",
     "geometry-excluded: a — inline-size 154px, perspective-origin 77px 9px, transform-origin 77px 9px, width 154px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: root — inline-size 154px, perspective-origin 77px 9px, transform-origin 77px 9px, width 154px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
-    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-only: a.font-size equals ancestor \"root\" on all 4 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [

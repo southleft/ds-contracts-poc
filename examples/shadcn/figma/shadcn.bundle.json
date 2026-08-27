@@ -1130,14 +1130,6 @@
                 "$type": "color"
               }
             },
-            "column-gap": {
-              "$value": "2px",
-              "$type": "dimension"
-            },
-            "grid-template-columns": {
-              "$value": "254px",
-              "$type": "dimension"
-            },
             "padding-bottom": {
               "$value": "12px",
               "$type": "dimension"
@@ -1152,10 +1144,6 @@
             },
             "padding-top": {
               "$value": "12px",
-              "$type": "dimension"
-            },
-            "row-gap": {
-              "$value": "2px",
               "$type": "dimension"
             }
           },
@@ -1193,6 +1181,10 @@
           }
         },
         "shared": {
+          "color-e5e5e5": {
+            "$value": "#e5e5e5",
+            "$type": "color"
+          },
           "size-10": {
             "$value": "10px",
             "$type": "dimension"
@@ -1288,6 +1280,10 @@
         },
         "avatar": {
           "root": {
+            "color": {
+              "$value": "#0a0a0a",
+              "$type": "color"
+            },
             "flex-shrink": {
               "$value": "0",
               "$type": "number"
@@ -1348,6 +1344,20 @@
               "$value": "400",
               "$type": "number"
             },
+            "height": {
+              "default": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "40px",
+                "$type": "dimension"
+              }
+            },
             "line-height": {
               "default": {
                 "$value": "20px",
@@ -1359,6 +1369,20 @@
               },
               "lg": {
                 "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "width": {
+              "default": {
+                "$value": "32px",
+                "$type": "dimension"
+              },
+              "sm": {
+                "$value": "24px",
+                "$type": "dimension"
+              },
+              "lg": {
+                "$value": "40px",
                 "$type": "dimension"
               }
             }
@@ -2454,6 +2478,22 @@
               "$value": "1px",
               "$type": "dimension"
             }
+          },
+          "part-0": {
+            "color": {
+              "checked": {
+                "$value": "#fafafa",
+                "$type": "color"
+              },
+              "indeterminate": {
+                "$value": "#0a0a0a",
+                "$type": "color"
+              },
+              "unchecked": {
+                "$value": "#fafafa",
+                "$type": "color"
+              }
+            }
           }
         },
         "input": {
@@ -2462,8 +2502,16 @@
               "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
               "$type": "shadow"
             },
+            "color": {
+              "$value": "#0a0a0a",
+              "$type": "color"
+            },
             "font-size": {
               "$value": "14px",
+              "$type": "dimension"
+            },
+            "height": {
+              "$value": "36px",
               "$type": "dimension"
             },
             "line-height": {
@@ -2489,6 +2537,10 @@
             "padding-top": {
               "$value": "4px",
               "$type": "dimension"
+            },
+            "placeholder-color": {
+              "$value": "#737373",
+              "$type": "color"
             },
             "width": {
               "$value": "288px",
@@ -2522,6 +2574,10 @@
               "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
               "$type": "shadow"
             },
+            "height": {
+              "$value": "36px",
+              "$type": "dimension"
+            },
             "padding-left": {
               "$value": "10px",
               "$type": "dimension"
@@ -2550,8 +2606,16 @@
               "$value": "0",
               "$type": "number"
             },
+            "height": {
+              "$value": "16px",
+              "$type": "dimension"
+            },
             "stroke-width": {
               "$value": "2px",
+              "$type": "dimension"
+            },
+            "width": {
+              "$value": "16px",
               "$type": "dimension"
             }
           }
@@ -2770,8 +2834,8 @@
     }
   },
   "icons": {
-    "checkbox-part-0": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-    "select-icon": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 9 L 12 15 L 18 9\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
+    "checkbox-part-0": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+    "select-icon": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 6 9 L 12 15 L 18 9\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>"
   },
   "contracts": [
     {
@@ -2813,17 +2877,13 @@
       "states": [],
       "anatomy": {
         "root": {
-          "layout": {
-            "display": "flex",
-            "direction": "column",
-            "align": "stretch"
-          },
           "parts": {
             "label": {
               "text": "Alert title",
               "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
+                "font-family": "\"Inter Variable\", sans-serif",
                 "text-align": "left"
               },
               "tokens": {
@@ -2850,6 +2910,7 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
+                "font-family": "\"Inter Variable\", sans-serif",
                 "text-align": "left"
               },
               "tokens": {
@@ -2872,6 +2933,22 @@
               ]
             }
           },
+          "layout": {
+            "display": "grid",
+            "columns": [
+              {
+                "px": 254
+              }
+            ],
+            "gap": {
+              "row": 2,
+              "column": 2
+            },
+            "flow": "row"
+          },
+          "literals": {
+            "width": "288px"
+          },
           "declared": {
             "border-bottom-style": "solid",
             "border-left-style": "solid",
@@ -2882,18 +2959,20 @@
           },
           "tokens": {
             "background-color": "{imported.alert.root.background-color}",
+            "border-bottom-color": "{imported.shared.color-e5e5e5}",
             "border-bottom-left-radius": "{imported.shared.size-10}",
             "border-bottom-right-radius": "{imported.shared.size-10}",
             "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-e5e5e5}",
             "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-e5e5e5}",
             "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-e5e5e5}",
             "border-top-left-radius": "{imported.shared.size-10}",
             "border-top-right-radius": "{imported.shared.size-10}",
             "border-top-width": "{imported.shared.size-1}",
             "bottom": "{imported.shared.size-0}",
-            "column-gap": "{imported.alert.root.column-gap}",
             "font-size": "{imported.shared.size-14}",
-            "grid-template-columns": "{imported.alert.root.grid-template-columns}",
             "left": "{imported.shared.size-0}",
             "line-height": "{imported.shared.size-20}",
             "padding-bottom": "{imported.alert.root.padding-bottom}",
@@ -2901,7 +2980,6 @@
             "padding-right": "{imported.alert.root.padding-right}",
             "padding-top": "{imported.alert.root.padding-top}",
             "right": "{imported.shared.size-0}",
-            "row-gap": "{imported.alert.root.row-gap}",
             "top": "{imported.shared.size-0}"
           },
           "tokensByProp": [
@@ -2990,6 +3068,7 @@
               },
               "declared": {
                 "aspect-ratio": "1 / 1",
+                "font-family": "\"Inter Variable\", sans-serif",
                 "user-select": "none"
               },
               "tokens": {
@@ -3007,15 +3086,21 @@
                   "map": {
                     "default": {
                       "font-size": "{imported.avatar.label.font-size.default}",
-                      "line-height": "{imported.avatar.label.line-height.default}"
+                      "height": "{imported.avatar.label.height.default}",
+                      "line-height": "{imported.avatar.label.line-height.default}",
+                      "width": "{imported.avatar.label.width.default}"
                     },
                     "lg": {
                       "font-size": "{imported.avatar.label.font-size.lg}",
-                      "line-height": "{imported.avatar.label.line-height.lg}"
+                      "height": "{imported.avatar.label.height.lg}",
+                      "line-height": "{imported.avatar.label.line-height.lg}",
+                      "width": "{imported.avatar.label.width.lg}"
                     },
                     "sm": {
                       "font-size": "{imported.avatar.label.font-size.sm}",
-                      "line-height": "{imported.avatar.label.line-height.sm}"
+                      "height": "{imported.avatar.label.height.sm}",
+                      "line-height": "{imported.avatar.label.line-height.sm}",
+                      "width": "{imported.avatar.label.width.sm}"
                     }
                   }
                 }
@@ -3032,6 +3117,7 @@
             "border-top-left-radius": "{imported.shared.size-9999}",
             "border-top-right-radius": "{imported.shared.size-9999}",
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.avatar.root.color}",
             "flex-shrink": "{imported.avatar.root.flex-shrink}",
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
@@ -3829,11 +3915,6 @@
             "part-0": {
               "element": "span",
               "description": "Promoted from the computed floor (round 4): rendered anatomy span| — this element exists in the real component's DOM; the static layer had no part for it.",
-              "layout": {
-                "display": "flex",
-                "direction": "column",
-                "align": "stretch"
-              },
               "stylesWhen": [
                 {
                   "prop": "checked",
@@ -3858,7 +3939,31 @@
                 "grid-template-rows": "{imported.shared.size-14}",
                 "height": "{imported.shared.size-14}",
                 "width": "{imported.shared.size-14}"
-              }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "checked": {
+                      "color": "{imported.checkbox.part-0.color.checked}"
+                    },
+                    "indeterminate": {
+                      "color": "{imported.checkbox.part-0.color.indeterminate}"
+                    },
+                    "unchecked": {
+                      "color": "{imported.checkbox.part-0.color.unchecked}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "cursor",
+                  "value": "not-allowed",
+                  "reason": "declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                }
+              ]
             }
           },
           "declared": {
@@ -3937,6 +4042,14 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "focus-visible",
+              "channel": "--tw-ring-shadow",
+              "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+              "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+            }
           ]
         }
       },
@@ -3989,6 +4102,9 @@
             "transition-property": "color, box-shadow",
             "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
           },
+          "attrs": {
+            "placeholder": "Value"
+          },
           "declaredStates": {
             "disabled": {
               "cursor": "not-allowed",
@@ -3996,22 +4112,29 @@
             }
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-e5e5e5}",
             "border-bottom-left-radius": "{imported.shared.size-8}",
             "border-bottom-right-radius": "{imported.shared.size-8}",
             "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-e5e5e5}",
             "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-e5e5e5}",
             "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-e5e5e5}",
             "border-top-left-radius": "{imported.shared.size-8}",
             "border-top-right-radius": "{imported.shared.size-8}",
             "border-top-width": "{imported.shared.size-1}",
             "box-shadow": "{imported.input.root.box-shadow}",
+            "color": "{imported.input.root.color}",
             "font-size": "{imported.input.root.font-size}",
+            "height": "{imported.input.root.height}",
             "line-height": "{imported.input.root.line-height}",
             "min-width": "{imported.input.root.min-width}",
             "padding-bottom": "{imported.input.root.padding-bottom}",
             "padding-left": "{imported.input.root.padding-left}",
             "padding-right": "{imported.input.root.padding-right}",
             "padding-top": "{imported.input.root.padding-top}",
+            "placeholder-color": "{imported.input.root.placeholder-color}",
             "width": "{imported.input.root.width}"
           },
           "states": {
@@ -4034,7 +4157,21 @@
               "box-shadow": "{imported.input.root.box-shadow-state-focus-visible}",
               "outline-width": "{imported.input.root.outline-width-state-focus-visible}"
             }
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "--tw-ring-shadow",
+              "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+              "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "--tw-ring-shadow",
+              "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+              "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+            }
+          ]
         }
       },
       "bindings": {
@@ -4087,6 +4224,7 @@
               },
               "declared": {
                 "cursor": "default",
+                "font-family": "\"Inter Variable\", sans-serif",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
                 "pointer-events": "none",
@@ -4131,9 +4269,11 @@
                 "color": "{imported.shared.color-737373}",
                 "flex-shrink": "{imported.select.icon.flex-shrink}",
                 "font-size": "{imported.shared.size-14}",
+                "height": "{imported.select.icon.height}",
                 "line-height": "{imported.shared.size-20}",
                 "stroke": "{imported.shared.color-737373}",
-                "stroke-width": "{imported.select.icon.stroke-width}"
+                "stroke-width": "{imported.select.icon.stroke-width}",
+                "width": "{imported.select.icon.width}"
               }
             }
           },
@@ -4157,11 +4297,15 @@
             }
           },
           "tokens": {
+            "border-bottom-color": "{imported.shared.color-e5e5e5}",
             "border-bottom-left-radius": "{imported.shared.size-8}",
             "border-bottom-right-radius": "{imported.shared.size-8}",
             "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-color": "{imported.shared.color-e5e5e5}",
             "border-left-width": "{imported.shared.size-1}",
+            "border-right-color": "{imported.shared.color-e5e5e5}",
             "border-right-width": "{imported.shared.size-1}",
+            "border-top-color": "{imported.shared.color-e5e5e5}",
             "border-top-left-radius": "{imported.shared.size-8}",
             "border-top-right-radius": "{imported.shared.size-8}",
             "border-top-width": "{imported.shared.size-1}",
@@ -4169,6 +4313,7 @@
             "color": "{imported.shared.color-737373}",
             "column-gap": "{imported.shared.size-6}",
             "font-size": "{imported.shared.size-14}",
+            "height": "{imported.select.root.height}",
             "line-height": "{imported.shared.size-20}",
             "padding-bottom": "{imported.shared.size-8}",
             "padding-left": "{imported.select.root.padding-left}",
@@ -4188,7 +4333,15 @@
               "box-shadow": "{imported.select.root.box-shadow-state-focus-visible}",
               "outline-width": "{imported.select.root.outline-width-state-focus-visible}"
             }
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "focus-visible",
+              "channel": "--tw-ring-shadow",
+              "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+              "reason": "CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel"
+            }
+          ]
         }
       },
       "bindings": {
@@ -4847,28 +5000,6 @@
         {
           "part": "root",
           "kind": "channel",
-          "channel": "column-gap",
-          "value": "{imported.alert.root.column-gap}",
-          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-          "variants": {
-            "count": 2,
-            "of": 2
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "grid-template-columns",
-          "value": "{imported.alert.root.grid-template-columns}",
-          "reason": "Figma has no grid track sizing; the canvas lowers grids to nested auto-layout stacks.",
-          "variants": {
-            "count": 2,
-            "of": 2
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
           "channel": "left",
           "value": "{imported.shared.size-0}",
           "reason": "bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back",
@@ -4965,7 +5096,7 @@
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
-          "reason": "the canvas has no aspect-ratio field — this part carries no bound or literal width to derive a height from, so nothing was drawn from the ratio (a parent that takes its height from this part's ratio names that lowering on itself)",
+          "reason": "the canvas has no aspect-ratio field — this part already carries a height channel, which wins; the ratio itself is not enforced on the canvas",
           "variants": {
             "count": 3,
             "of": 3
@@ -5522,6 +5653,17 @@
       "facts": [
         {
           "part": "part-0",
+          "kind": "capture",
+          "channel": "cursor [disabled]",
+          "value": "not-allowed",
+          "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "part-0",
           "kind": "declared",
           "channel": "cursor",
           "value": "default",
@@ -5548,6 +5690,17 @@
           "channel": "transition-property",
           "value": "none",
           "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+          "variants": {
+            "count": 9,
+            "of": 9
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "--tw-ring-shadow [focus-visible]",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
           "variants": {
             "count": 9,
             "of": 9
@@ -5795,6 +5948,28 @@
       "facts": [
         {
           "part": "root",
+          "kind": "capture",
+          "channel": "--tw-ring-shadow [active]",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+          "variants": {
+            "count": 4,
+            "of": 4
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "--tw-ring-shadow [focus-visible]",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
+          "variants": {
+            "count": 4,
+            "of": 4
+          }
+        },
+        {
+          "part": "root",
           "kind": "channel",
           "channel": "border-bottom-color",
           "value": "{imported.shared.color-a1a1a1}",
@@ -5851,6 +6026,17 @@
               "State=Active",
               "State=Focus Visible"
             ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "color",
+          "value": "{imported.input.root.color}",
+          "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+          "variants": {
+            "count": 4,
+            "of": 4
           }
         },
         {
@@ -6111,6 +6297,17 @@
           "channel": "text-wrap-mode",
           "value": "nowrap",
           "reason": "Line-breaking rules differ: Figma wraps by box width only.",
+          "variants": {
+            "count": 1,
+            "of": 1
+          }
+        },
+        {
+          "part": "root",
+          "kind": "capture",
+          "channel": "--tw-ring-shadow [focus-visible]",
+          "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+          "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
           "variants": {
             "count": 1,
             "of": 1

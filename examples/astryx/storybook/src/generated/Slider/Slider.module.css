@@ -1,5 +1,11 @@
+/* code-only facts — REFUSED BY NAME, not silently dropped:
+     translate-x: SYNTHETIC (decomposeTranslate) — folded into absolute x placement on canvas; CSS has no translate-x longhand.
+     translate-y: SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.
+   CSS has no per-component translate longhand and this contract conditions
+   the components on different axes, so no single `translate:` declaration
+   can carry them. The canvas lowers them to absolute placement. */
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/slider.contract.json (astryx.slider v0.4.0)
+ * Source of truth: contracts/slider.contract.json (astryx.slider v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -16,18 +22,37 @@
   border: 0;
   position: relative;
   column-gap: var(--imported-shared-size-4);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
   row-gap: var(--imported-shared-size-4);
+  width: var(--imported-slider-root-width);
   color: var(--color-on-light);
   gap: var(--spacing-1);
   font-size: 16px;
 }
 
-.orientation-horizontal {
-  width: 240px;
+.orientation-horizontal.valueDisplay-tooltip {
+  height: var(--imported-slider-root-height-horizontal-tooltip);
 }
 
-.orientation-vertical {
-  width: 56px;
+.orientation-horizontal.valueDisplay-text {
+  height: var(--imported-slider-root-height-horizontal-text);
+}
+
+.orientation-horizontal.valueDisplay-none {
+  height: var(--imported-slider-root-height-horizontal-none);
+}
+
+.orientation-vertical.valueDisplay-tooltip {
+  height: var(--imported-slider-root-height-vertical-tooltip);
+}
+
+.orientation-vertical.valueDisplay-text {
+  height: var(--imported-slider-root-height-vertical-text);
+}
+
+.orientation-vertical.valueDisplay-none {
+  height: var(--imported-slider-root-height-vertical-none);
 }
 
 .label {
@@ -38,7 +63,6 @@
   line-height: var(--imported-shared-size-20-0004);
   row-gap: var(--imported-shared-size-4);
   cursor: pointer;
-  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 }
 
 .slider {
@@ -46,6 +70,7 @@
   align-items: center;
   column-gap: var(--imported-shared-size-8);
   row-gap: var(--imported-shared-size-8);
+  width: var(--imported-slider-slider-width);
 }
 
 .valueDisplay-none.orientation-horizontal .slider {
@@ -76,6 +101,7 @@
   display: flex;
   align-items: center;
   bottom: var(--imported-shared-size-0);
+  flex-grow: var(--imported-shared-num-1);
   left: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
@@ -87,21 +113,31 @@
 }
 
 .orientation-horizontal .part-1-0 {
-  width: 240px;
-  height: 20px;
+  height: var(--imported-slider-part-1-0-height-horizontal);
 }
 
 .orientation-vertical .part-1-0 {
-  width: 20px;
-  height: 160px;
+  height: var(--imported-slider-part-1-0-height-vertical);
+}
+
+.valueDisplay-none .part-1-0 {
+  width: var(--imported-slider-part-1-0-width-none);
+}
+
+.valueDisplay-text .part-1-0 {
+  width: var(--imported-slider-part-1-0-width-text);
+}
+
+.valueDisplay-tooltip .part-1-0 {
+  width: var(--imported-slider-part-1-0-width-tooltip);
 }
 
 .slider-track {
   background-color: var(--imported-slider-slider-track-background-color);
-  border-bottom-left-radius: var(--radius-full);
-  border-bottom-right-radius: var(--radius-full);
-  border-top-left-radius: var(--radius-full);
-  border-top-right-radius: var(--radius-full);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: block;
@@ -111,26 +147,107 @@
 }
 
 .orientation-horizontal .slider-track {
-  left: 0px;
-  right: 0px;
-  height: 4px;
-  top: 8px;
+  bottom: var(--imported-slider-slider-track-bottom-horizontal);
+}
+
+.orientation-horizontal .slider-track {
+  height: var(--imported-slider-slider-track-height-horizontal);
+}
+
+.orientation-horizontal .slider-track {
+  top: var(--imported-slider-slider-track-top-horizontal);
 }
 
 .orientation-vertical .slider-track {
-  top: 0px;
-  bottom: 0px;
-  width: 4px;
-  left: 8px;
-  height: 160px;
+  bottom: var(--imported-slider-slider-track-bottom-vertical);
+}
+
+.orientation-vertical .slider-track {
+  height: var(--imported-slider-slider-track-height-vertical);
+}
+
+.orientation-vertical .slider-track {
+  top: var(--imported-slider-slider-track-top-vertical);
+}
+
+.valueDisplay-none.orientation-horizontal .slider-track {
+  left: var(--imported-slider-slider-track-left-horizontal-none);
+}
+
+.valueDisplay-none.orientation-vertical .slider-track {
+  left: var(--imported-slider-slider-track-left-vertical-none);
+}
+
+.valueDisplay-none.orientation-horizontal .slider-track {
+  right: var(--imported-slider-slider-track-right-horizontal-none);
+}
+
+.valueDisplay-none.orientation-vertical .slider-track {
+  right: var(--imported-slider-slider-track-right-vertical-none);
+}
+
+.valueDisplay-none.orientation-horizontal .slider-track {
+  width: var(--imported-slider-slider-track-width-horizontal-none);
+}
+
+.valueDisplay-none.orientation-vertical .slider-track {
+  width: var(--imported-slider-slider-track-width-vertical-none);
+}
+
+.valueDisplay-text.orientation-horizontal .slider-track {
+  left: var(--imported-slider-slider-track-left-horizontal-text);
+}
+
+.valueDisplay-text.orientation-vertical .slider-track {
+  left: var(--imported-slider-slider-track-left-vertical-text);
+}
+
+.valueDisplay-text.orientation-horizontal .slider-track {
+  right: var(--imported-slider-slider-track-right-horizontal-text);
+}
+
+.valueDisplay-text.orientation-vertical .slider-track {
+  right: var(--imported-slider-slider-track-right-vertical-text);
+}
+
+.valueDisplay-text.orientation-horizontal .slider-track {
+  width: var(--imported-slider-slider-track-width-horizontal-text);
+}
+
+.valueDisplay-text.orientation-vertical .slider-track {
+  width: var(--imported-slider-slider-track-width-vertical-text);
+}
+
+.valueDisplay-tooltip.orientation-horizontal .slider-track {
+  left: var(--imported-slider-slider-track-left-horizontal-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-vertical .slider-track {
+  left: var(--imported-slider-slider-track-left-vertical-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-horizontal .slider-track {
+  right: var(--imported-slider-slider-track-right-horizontal-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-vertical .slider-track {
+  right: var(--imported-slider-slider-track-right-vertical-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-horizontal .slider-track {
+  width: var(--imported-slider-slider-track-width-horizontal-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-vertical .slider-track {
+  width: var(--imported-slider-slider-track-width-vertical-tooltip);
 }
 
 .part-1-0-1 {
-  background-color: var(--color-accent);
-  border-bottom-left-radius: var(--radius-full);
-  border-bottom-right-radius: var(--radius-full);
-  border-top-left-radius: var(--radius-full);
-  border-top-right-radius: var(--radius-full);
+  background-color: var(--imported-shared-color-262626);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
   display: block;
@@ -140,45 +257,216 @@
 }
 
 .orientation-horizontal .part-1-0-1 {
-  left: 0px;
-  width: 96px;
-  height: 4px;
-  top: 8px;
+  bottom: var(--imported-slider-part-1-0-1-bottom-horizontal);
+}
+
+.orientation-horizontal .part-1-0-1 {
+  height: var(--imported-slider-part-1-0-1-height-horizontal);
+}
+
+.orientation-horizontal .part-1-0-1 {
+  top: var(--imported-slider-part-1-0-1-top-horizontal);
 }
 
 .orientation-vertical .part-1-0-1 {
-  top: 96px;
-  height: 64px;
-  width: 4px;
-  left: 8px;
+  bottom: var(--imported-slider-part-1-0-1-bottom-vertical);
+}
+
+.orientation-vertical .part-1-0-1 {
+  height: var(--imported-slider-part-1-0-1-height-vertical);
+}
+
+.orientation-vertical .part-1-0-1 {
+  top: var(--imported-slider-part-1-0-1-top-vertical);
+}
+
+.valueDisplay-none.orientation-horizontal .part-1-0-1 {
+  left: var(--imported-slider-part-1-0-1-left-horizontal-none);
+}
+
+.valueDisplay-none.orientation-vertical .part-1-0-1 {
+  left: var(--imported-slider-part-1-0-1-left-vertical-none);
+}
+
+.valueDisplay-none.orientation-horizontal .part-1-0-1 {
+  right: var(--imported-slider-part-1-0-1-right-horizontal-none);
+}
+
+.valueDisplay-none.orientation-vertical .part-1-0-1 {
+  right: var(--imported-slider-part-1-0-1-right-vertical-none);
+}
+
+.valueDisplay-none.orientation-horizontal .part-1-0-1 {
+  width: var(--imported-slider-part-1-0-1-width-horizontal-none);
+}
+
+.valueDisplay-none.orientation-vertical .part-1-0-1 {
+  width: var(--imported-slider-part-1-0-1-width-vertical-none);
+}
+
+.valueDisplay-text.orientation-horizontal .part-1-0-1 {
+  left: var(--imported-slider-part-1-0-1-left-horizontal-text);
+}
+
+.valueDisplay-text.orientation-vertical .part-1-0-1 {
+  left: var(--imported-slider-part-1-0-1-left-vertical-text);
+}
+
+.valueDisplay-text.orientation-horizontal .part-1-0-1 {
+  right: var(--imported-slider-part-1-0-1-right-horizontal-text);
+}
+
+.valueDisplay-text.orientation-vertical .part-1-0-1 {
+  right: var(--imported-slider-part-1-0-1-right-vertical-text);
+}
+
+.valueDisplay-text.orientation-horizontal .part-1-0-1 {
+  width: var(--imported-slider-part-1-0-1-width-horizontal-text);
+}
+
+.valueDisplay-text.orientation-vertical .part-1-0-1 {
+  width: var(--imported-slider-part-1-0-1-width-vertical-text);
+}
+
+.valueDisplay-tooltip.orientation-horizontal .part-1-0-1 {
+  left: var(--imported-slider-part-1-0-1-left-horizontal-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-vertical .part-1-0-1 {
+  left: var(--imported-slider-part-1-0-1-left-vertical-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-horizontal .part-1-0-1 {
+  right: var(--imported-slider-part-1-0-1-right-horizontal-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-vertical .part-1-0-1 {
+  right: var(--imported-slider-part-1-0-1-right-vertical-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-horizontal .part-1-0-1 {
+  width: var(--imported-slider-part-1-0-1-width-horizontal-tooltip);
+}
+
+.valueDisplay-tooltip.orientation-vertical .part-1-0-1 {
+  width: var(--imported-slider-part-1-0-1-width-vertical-tooltip);
 }
 
 .slider-thumb-2 {
-  background-color: var(--color-accent);
-  border-bottom-left-radius: var(--radius-full);
-  border-bottom-right-radius: var(--radius-full);
-  border-top-left-radius: var(--radius-full);
-  border-top-right-radius: var(--radius-full);
+  background-color: var(--imported-shared-color-262626);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  height: var(--imported-shared-size-20);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
   z-index: var(--imported-shared-num-1);
-  width: 20px;
-  height: 20px;
   display: block;
   position: absolute;
   cursor: grab;
-  transition-duration: 0.175s;
+  transition-duration: 0.125s;
   transition-property: background-color, box-shadow;
   transition-timing-function: cubic-bezier(0.24, 1, 0.4, 1);
   user-select: none;
 }
 
 .orientation-horizontal .slider-thumb-2 {
-  left: 86px;
-  top: 0px;
+  bottom: var(--imported-slider-slider-thumb-2-bottom-horizontal);
+}
+
+.orientation-horizontal .slider-thumb-2 {
+  top: var(--imported-slider-slider-thumb-2-top-horizontal);
 }
 
 .orientation-vertical .slider-thumb-2 {
-  left: 0px;
-  top: 86px;
+  bottom: var(--imported-slider-slider-thumb-2-bottom-vertical);
+}
+
+.orientation-vertical .slider-thumb-2 {
+  top: var(--imported-slider-slider-thumb-2-top-vertical);
+}
+
+.valueDisplay-tooltip .slider-thumb-2 {
+  display: none;
+}
+
+.part-1-0-2 {
+  display: flex;
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: contents;
+  cursor: pointer;
+  user-select: none;
+}
+
+.valueDisplay-text .part-1-0-2 {
+  display: none;
+}
+
+.valueDisplay-none .part-1-0-2 {
+  display: none;
+}
+
+.slider-thumb {
+  background-color: var(--imported-shared-color-262626);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  height: var(--imported-shared-size-20);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  width: var(--imported-shared-size-20);
+  z-index: var(--imported-shared-num-1);
+  display: block;
+  position: absolute;
+  cursor: grab;
+  transition-duration: 0.125s;
+  transition-property: background-color, box-shadow;
+  transition-timing-function: cubic-bezier(0.24, 1, 0.4, 1);
+  user-select: none;
+}
+
+.orientation-horizontal .slider-thumb {
+  bottom: var(--imported-slider-slider-thumb-bottom-horizontal);
+}
+
+.orientation-horizontal .slider-thumb {
+  left: var(--imported-slider-slider-thumb-left-horizontal);
+}
+
+.orientation-horizontal .slider-thumb {
+  right: var(--imported-slider-slider-thumb-right-horizontal);
+}
+
+.orientation-horizontal .slider-thumb {
+  top: var(--imported-slider-slider-thumb-top-horizontal);
+}
+
+.orientation-vertical .slider-thumb {
+  bottom: var(--imported-slider-slider-thumb-bottom-vertical);
+}
+
+.orientation-vertical .slider-thumb {
+  left: var(--imported-slider-slider-thumb-left-vertical);
+}
+
+.orientation-vertical .slider-thumb {
+  right: var(--imported-slider-slider-thumb-right-vertical);
+}
+
+.orientation-vertical .slider-thumb {
+  top: var(--imported-slider-slider-thumb-top-vertical);
+}
+
+.valueDisplay-text .slider-thumb {
+  display: none;
+}
+
+.valueDisplay-none .slider-thumb {
+  display: none;
 }
 
 .tooltip {
@@ -188,20 +476,23 @@
   border-bottom-right-radius: var(--imported-shared-size-12);
   border-top-left-radius: var(--imported-shared-size-12);
   border-top-right-radius: var(--imported-shared-size-12);
+  bottom: var(--imported-shared-size-0);
   color: var(--imported-slider-tooltip-color);
   font-size: var(--imported-shared-size-14);
+  left: var(--imported-shared-size-0);
   line-height: var(--imported-shared-size-20-0004);
   min-height: var(--imported-shared-size-0);
   min-width: var(--imported-shared-size-0);
+  right: var(--imported-shared-size-0);
+  top: var(--imported-shared-size-0);
   display: none;
-  position: absolute;
   border-bottom-style: none;
   border-left-style: none;
   border-right-style: none;
   border-top-style: none;
   cursor: pointer;
-  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   user-select: none;
+  position: absolute;
 }
 
 .orientation-horizontal .tooltip {
@@ -236,16 +527,6 @@
   margin-top: var(--imported-slider-tooltip-margin-top-vertical);
 }
 
-.orientation-horizontal .tooltip {
-  left: 79px;
-  top: -36px;
-}
-
-.orientation-vertical .tooltip {
-  left: -40px;
-  top: 78px;
-}
-
 .valueDisplay-tooltip .tooltip {
   display: flex;
 }
@@ -272,7 +553,6 @@
   padding-top: var(--imported-shared-size-4);
   display: block;
   cursor: pointer;
-  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   user-select: none;
 }
 
@@ -285,13 +565,11 @@
 }
 
 .label-3 {
-  color: var(--imported-slider-label-3-color);
   flex-shrink: var(--imported-slider-label-3-flex-shrink);
   font-size: var(--imported-shared-size-14);
   font-weight: var(--imported-slider-label-3-font-weight);
   line-height: var(--imported-slider-label-3-line-height);
   display: block;
-  font-family: -apple-system, 'system-ui', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
   text-wrap-mode: nowrap;
 }
 

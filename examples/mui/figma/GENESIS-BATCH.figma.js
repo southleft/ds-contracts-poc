@@ -30062,7 +30062,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "CENTER"
+                    "counter": "CENTER",
+                    "wrap": true
                   },
                   "bindings": {
                     "bottomLeftRadius": "imported/shared/size-4",
@@ -30491,7 +30492,8 @@ const COMPONENTS = [
                   "layout": {
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
-                    "counter": "CENTER"
+                    "counter": "CENTER",
+                    "wrap": true
                   },
                   "bindings": {
                     "bottomLeftRadius": "imported/shared/size-4",
@@ -32428,6 +32430,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
@@ -70050,7 +70053,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "children": [
                 {
@@ -70147,7 +70151,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -70224,7 +70229,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "children": [
                 {
@@ -70321,7 +70327,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -70398,7 +70405,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "children": [
                 {
@@ -70495,7 +70503,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -70572,7 +70581,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "children": [
                 {
@@ -70669,7 +70679,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -70746,7 +70757,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "children": [
                 {
@@ -70843,7 +70855,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -70920,7 +70933,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "children": [
                 {
@@ -71017,7 +71031,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -71094,7 +71109,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "children": [
                 {
@@ -71191,7 +71207,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "CENTER",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "insetOverlay": true,
               "insetOffsets": {
@@ -71972,6 +71989,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
@@ -80707,7 +80725,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
@@ -81432,6 +81451,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
@@ -90475,7 +90495,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "fill": "imported/snackbar/paper-root/background-color",
               "bindings": {
@@ -90586,7 +90607,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "fill": "imported/snackbar/paper-root/background-color",
               "bindings": {
@@ -90697,7 +90719,8 @@ const COMPONENTS = [
               "layout": {
                 "mode": "HORIZONTAL",
                 "primary": "MIN",
-                "counter": "CENTER"
+                "counter": "CENTER",
+                "wrap": true
               },
               "fill": "imported/snackbar/paper-root/background-color",
               "bindings": {
@@ -91301,6 +91324,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,

@@ -1,0 +1,30 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "canvas collapsed to a 1280x2 sliver \u2014 nothing renders; ref shows a 1200x96 empty band. Zero visible body on canvas."
+ ],
+ "defectClasses": [
+  "min-size collapse"
+ ],
+ "notes": "slot-only layout renders empty in both halves \u2014 the pair agrees",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23859",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.two-column.dump.json",
+  "matched": 7,
+  "diverged": [
+   "part root/start \u2014 missing from proposal",
+   "part root/end \u2014 missing from proposal",
+   "part root/Start \u2014 proposal has a part the contract does not",
+   "part root/End \u2014 proposal has a part the contract does not",
+   "part root grid-area-map \u2014 undefined vs {\"Start\":{\"row\":0,\"column\":0},\"End\":{\"row\":0,\"column\":1}}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable"
+  ]
+ }
+}

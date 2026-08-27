@@ -1,0 +1,83 @@
+{
+  "id": "astryx.button",
+  "library": "astryx",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "recipe": "examples/astryx sandbox (.astryx-sandbox; examples/astryx/README) mounted per extract/computed/configs/astryx.json"
+  },
+  "configPath": "extract/computed/configs/astryx.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-secondary__size-md",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-md.png",
+      "props": {
+        "label": "Button",
+        "variant": "secondary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__size-sm",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-sm.png",
+      "props": {
+        "label": "Button",
+        "variant": "secondary",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__size-lg",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-lg.png",
+      "props": {
+        "label": "Button",
+        "variant": "secondary",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-primary__size-md",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-md.png",
+      "props": {
+        "label": "Button",
+        "variant": "primary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-ghost__size-md",
+      "status": "rendered",
+      "png": "ref-variant-ghost__size-md.png",
+      "props": {
+        "label": "Button",
+        "variant": "ghost",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-destructive__size-md",
+      "status": "rendered",
+      "png": "ref-variant-destructive__size-md.png",
+      "props": {
+        "label": "Button",
+        "variant": "destructive",
+        "size": "md"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 6,
+  "unmappable": 0
+}

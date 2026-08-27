@@ -1,0 +1,161 @@
+{
+  "id": "fluent.button",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-medium__shape-rounded.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-circular",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-medium__shape-circular.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "circular"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-square",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-medium__shape-square.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "square"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-secondary__size-small__shape-rounded",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-small__shape-rounded.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "small",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-secondary__size-large__shape-rounded",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-large__shape-rounded.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "large",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-primary__size-medium__shape-rounded",
+      "status": "rendered",
+      "png": "ref-appearance-primary__size-medium__shape-rounded.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "primary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-outline__size-medium__shape-rounded",
+      "status": "rendered",
+      "png": "ref-appearance-outline__size-medium__shape-rounded.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "outline",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-subtle__size-medium__shape-rounded",
+      "status": "rendered",
+      "png": "ref-appearance-subtle__size-medium__shape-rounded.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "subtle",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-transparent__size-medium__shape-rounded",
+      "status": "rendered",
+      "png": "ref-appearance-transparent__size-medium__shape-rounded.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "transparent",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded__state-active",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-medium__shape-rounded__state-active.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-medium__shape-rounded__state-focus-visible.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-secondary__size-medium__shape-rounded__state-hover",
+      "status": "rendered",
+      "png": "ref-appearance-secondary__size-medium__shape-rounded__state-hover.png",
+      "props": {
+        "iconPosition": "before",
+        "appearance": "secondary",
+        "size": "medium",
+        "shape": "rounded"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 12,
+  "unmappable": 0
+}

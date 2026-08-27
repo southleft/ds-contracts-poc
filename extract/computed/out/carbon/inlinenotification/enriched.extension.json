@@ -1184,10 +1184,17 @@
         "part": "inline-notification__close-button",
         "field": "justify",
         "value": "center"
+      },
+      {
+        "part": "inline-notification__text-wrapper",
+        "field": "wrap",
+        "value": true
       }
     ],
     "contradictions": [],
-    "receipts": [],
+    "receipts": [
+      "child-order-varies-membership: icon's in-flow children differ in MEMBERSHIP across combos, not only in order — a per-variant child set is not a layout fact and has no contract spelling; the order stays code-only"
+    ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
@@ -1706,6 +1713,7 @@
     "refusals": []
   },
   "enrichmentNotes": [
+    "layout enriched: inline-notification__text-wrapper.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inline-notification__close-button.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inline-notification__close-button.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inline-notification__close-button.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",

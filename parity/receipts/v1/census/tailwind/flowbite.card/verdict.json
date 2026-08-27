@@ -1,0 +1,57 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "card (only cell): ref shows a soft drop shadow below/around the box; the tightly-cropped canvas export shows the border and radius but the shadow is barely perceptible \u2014 either unpainted or clipped by the export bounds; walls array is empty so not excused; the box still reads unambiguously as the Card"
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "box, radius, shadow match; label column top-aligned on canvas vs centered block in code render",
+ "reviewedAt": "ad1e0fbb",
+ "setNodeId": "39:5982",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-tailwind-flowbite.card.dump.json",
+  "matched": 8,
+  "diverged": [
+   "part root/label/label-text \u2014 proposal has a part the contract does not",
+   "part root border-bottom-color \u2014 {imported.shared.color-e5e7eb} missing from proposal",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-left-color \u2014 {imported.shared.color-e5e7eb} missing from proposal",
+   "part root border-left-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-right-color \u2014 {imported.shared.color-e5e7eb} missing from proposal",
+   "part root border-right-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-top-color \u2014 {imported.shared.color-e5e7eb} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root box-shadow \u2014 {imported.card.root.box-shadow} missing from proposal",
+   "part root border-color \u2014 proposal has {imported.shared.color-e5e7eb}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-8}, contract has nothing",
+   "part root border-width \u2014 proposal has {imported.shared.size-1}, contract has nothing",
+   "part root/label column-gap \u2014 {imported.shared.size-16} missing from proposal",
+   "part root/label line-height \u2014 {imported.shared.size-24} missing from proposal",
+   "part root/label padding-bottom \u2014 {imported.shared.size-24} missing from proposal",
+   "part root/label padding-left \u2014 {imported.shared.size-24} missing from proposal",
+   "part root/label padding-right \u2014 {imported.shared.size-24} missing from proposal",
+   "part root/label padding-top \u2014 {imported.shared.size-24} missing from proposal",
+   "part root/label row-gap \u2014 {imported.shared.size-16} missing from proposal",
+   "part root/label padding-inline \u2014 proposal has {imported.shared.size-24}, contract has nothing",
+   "part root/label padding-block \u2014 proposal has {imported.shared.size-24}, contract has nothing",
+   "part root/label gap \u2014 proposal has {imported.shared.size-16}, contract has nothing",
+   "part root/label content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root/label font-size (effective) \u2014 {imported.shared.size-16} missing from proposal",
+   "text root/label font-weight (effective) \u2014 {imported.card.label.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`Card:root/label/label-text` text fill = `#000000` \u2014 nearest tokens: `{color.black}`",
+   "`Card:root` effects = `0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 4px 6px -1px #0000001a, 0px 2px 4px -2px #0000001a` \u2014 nearest tokens: `{radius.banner.section}`, `{ra"
+  ],
+  "identicalToCommittedBaseline": true
+ }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "ds.citation",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-label",
+      "status": "rendered",
+      "png": "ref-variant-label.png",
+      "props": {
+        "variant": "label"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-number",
+      "status": "rendered",
+      "png": "ref-variant-number.png",
+      "props": {
+        "variant": "number"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 2,
+  "unmappable": 0
+}

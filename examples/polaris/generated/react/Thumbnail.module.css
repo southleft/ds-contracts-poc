@@ -51,7 +51,6 @@
 }
 
 .part-0 {
-  border-radius: var(--p-border-radius-200);
   bottom: var(--imported-shared-size-0);
   color: var(--imported-thumbnail-part-0-color);
   left: var(--imported-shared-size-0);
@@ -59,6 +58,7 @@
   min-width: var(--imported-shared-size-0);
   right: var(--imported-shared-size-0);
   top: var(--imported-shared-size-0);
+  border-radius: var(--p-border-radius-200);
   display: block;
   position: absolute;
   aspect-ratio: 1 / 1;
@@ -68,10 +68,6 @@
   overflow-y: clip;
   width: 100%;
   height: 100%;
-}
-
-.size-extraSmall .part-0 {
-  border-radius: var(--p-border-radius-150);
 }
 
 .size-extraSmall .part-0 {

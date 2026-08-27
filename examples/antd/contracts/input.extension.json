@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); the structure receipts are capture-time too and are CARRIED FORWARD and unioned with whatever this re-fuse recomputed (144 carried); every other receipt is recomputed from the same truth.",
   "library": "antd@5.29.3",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -722,6 +722,10 @@
               "$value": "7px",
               "$type": "dimension"
             }
+          },
+          "placeholder-color": {
+            "$value": "#00000040",
+            "$type": "color"
           },
           "width": {
             "$value": "288px",
@@ -2369,6 +2373,7 @@
     "stage-fill-root-admitted: root — display:inline-block root measures exactly the stage content box (288px) in every enabled combo: it fills its container like a block root (antd Input `width: 100%`), so the captured stage width joins fusion under the block-root receipt below",
     "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
     "control-fallback: no control for <input> — span control used (part root)",
+    "placeholder-ink-admitted: root — the element's ::placeholder plane paints an ink DIFFERENT from its own color (rgba(0, 0, 0, 0.25) vs rgba(0, 0, 0, 0.88)); the synthetic placeholder-color channel joins fusion so an EMPTY field stops minting in VALUE ink (RC7). Where the two inks AGREE the fold does not fire and the existing color channel already paints the right pixel.",
     "geometry-excluded: root — block-size 32px, height 32px, inline-size 288px, perspective-origin 144px 16px, transform-origin 144px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (root); -webkit-text-stroke-color (root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",

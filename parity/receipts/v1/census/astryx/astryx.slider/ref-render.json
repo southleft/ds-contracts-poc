@@ -1,0 +1,65 @@
+{
+  "id": "astryx.slider",
+  "library": "astryx",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "recipe": "examples/astryx sandbox (.astryx-sandbox; examples/astryx/README) mounted per extract/computed/configs/astryx.json"
+  },
+  "configPath": "extract/computed/configs/astryx.json",
+  "component": "Slider",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "orientation-horizontal__value-display-tooltip",
+      "status": "rendered",
+      "png": "ref-orientation-horizontal__value-display-tooltip.png",
+      "props": {
+        "label": "Volume",
+        "value": 40,
+        "orientation": "horizontal",
+        "valueDisplay": "tooltip"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "orientation-horizontal__value-display-text",
+      "status": "rendered",
+      "png": "ref-orientation-horizontal__value-display-text.png",
+      "props": {
+        "label": "Volume",
+        "value": 40,
+        "orientation": "horizontal",
+        "valueDisplay": "text"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "orientation-horizontal__value-display-none",
+      "status": "rendered",
+      "png": "ref-orientation-horizontal__value-display-none.png",
+      "props": {
+        "label": "Volume",
+        "value": 40,
+        "orientation": "horizontal",
+        "valueDisplay": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "orientation-vertical__value-display-tooltip",
+      "status": "rendered",
+      "png": "ref-orientation-vertical__value-display-tooltip.png",
+      "props": {
+        "label": "Volume",
+        "value": 40,
+        "orientation": "vertical",
+        "valueDisplay": "tooltip"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

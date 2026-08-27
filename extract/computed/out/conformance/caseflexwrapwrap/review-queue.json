@@ -3,6 +3,6 @@
   "component": "CaseFlexWrapWrap",
   "contract": "conformance/seeds/flex-wrap-wrap.contract.json",
   "generatedBy": "extract/computed/run.ts",
-  "browser": "149.0.7827.55",
+  "browser": "151.0.7922.34",
   "items": []
 }

@@ -8289,6 +8289,10 @@
             "$value": "#000000",
             "$type": "color"
           },
+          "color-242424": {
+            "$value": "#242424",
+            "$type": "color"
+          },
           "size-3": {
             "$value": "3px",
             "$type": "dimension"
@@ -8316,10 +8320,6 @@
           "size-8": {
             "$value": "8px",
             "$type": "dimension"
-          },
-          "color-242424": {
-            "$value": "#242424",
-            "$type": "color"
           },
           "color-ffffff": {
             "$value": "#ffffff",
@@ -10893,42 +10893,6 @@
             "flex-shrink": {
               "$value": "0",
               "$type": "number"
-            },
-            "height": {
-              "$value": "40px",
-              "$type": "dimension"
-            },
-            "width": {
-              "small": {
-                "horizontal": {
-                  "$value": "361.281px",
-                  "$type": "dimension"
-                },
-                "vertical": {
-                  "$value": "412px",
-                  "$type": "dimension"
-                }
-              },
-              "medium": {
-                "horizontal": {
-                  "$value": "353.281px",
-                  "$type": "dimension"
-                },
-                "vertical": {
-                  "$value": "404px",
-                  "$type": "dimension"
-                }
-              },
-              "large": {
-                "horizontal": {
-                  "$value": "345.281px",
-                  "$type": "dimension"
-                },
-                "vertical": {
-                  "$value": "396px",
-                  "$type": "dimension"
-                }
-              }
             }
           }
         },
@@ -12356,6 +12320,10 @@
                 "$type": "shadow"
               }
             },
+            "color": {
+              "$value": "#242424",
+              "$type": "color"
+            },
             "column-gap": {
               "small": {
                 "$value": "2px",
@@ -12848,6 +12816,10 @@
             }
           },
           "input": {
+            "color": {
+              "$value": "{color-neutral-foreground1}",
+              "$type": "color"
+            },
             "flex-grow": {
               "$value": "1",
               "$type": "number"
@@ -12993,6 +12965,10 @@
                 "$value": "18px",
                 "$type": "dimension"
               }
+            },
+            "placeholder-color": {
+              "$value": "#707070",
+              "$type": "color"
             },
             "width": {
               "small": {
@@ -16388,7 +16364,8 @@
       "anatomy": {
         "root": {
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "direction": "column"
           },
           "parts": {
             "checkbox": {
@@ -16463,6 +16440,32 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-offset",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             },
             "label": {
@@ -16471,6 +16474,7 @@
               "declared": {
                 "display": "block",
                 "cursor": "pointer",
+                "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
                 "position": "relative"
               },
               "declaredStates": {
@@ -16481,6 +16485,7 @@
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-242424}",
                 "font-size": "{imported.shared.size-14}",
                 "font-weight": "{imported.shared.num-400}",
                 "left": "{imported.shared.size-0}",
@@ -16524,6 +16529,68 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             },
             "cardheader": {
@@ -16535,8 +16602,13 @@
                   "layout": {
                     "display": "flex"
                   },
+                  "placement": {
+                    "row": 0,
+                    "column": 0
+                  },
                   "declared": {
-                    "cursor": "pointer"
+                    "cursor": "pointer",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
                   },
                   "declaredStates": {
                     "disabled": {
@@ -16545,6 +16617,7 @@
                     }
                   },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "font-size": "{imported.shared.size-14}",
                     "font-weight": "{imported.shared.num-400}",
                     "line-height": "{imported.shared.size-20}"
@@ -16553,7 +16626,69 @@
                     "disabled": {
                       "color": "{imported.shared.color-bdbdbd}"
                     }
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "caret-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "column-rule-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "outline-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "row-rule-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-decoration-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-emphasis-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
                 },
                 "label-3": {
                   "text": "Card description",
@@ -16561,8 +16696,13 @@
                   "layout": {
                     "display": "flex"
                   },
+                  "placement": {
+                    "row": 1,
+                    "column": 0
+                  },
                   "declared": {
-                    "cursor": "pointer"
+                    "cursor": "pointer",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
                   },
                   "declaredStates": {
                     "disabled": {
@@ -16571,6 +16711,7 @@
                     }
                   },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "font-size": "{imported.shared.size-14}",
                     "font-weight": "{imported.shared.num-400}",
                     "line-height": "{imported.shared.size-20}"
@@ -16579,8 +16720,90 @@
                     "disabled": {
                       "color": "{imported.shared.color-bdbdbd}"
                     }
-                  }
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "caret-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "column-rule-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "outline-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "row-rule-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-decoration-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "text-emphasis-color",
+                      "value": "#bdbdbd",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
+                  ]
                 }
+              },
+              "layout": {
+                "display": "grid",
+                "rows": [
+                  {
+                    "px": 20
+                  },
+                  {
+                    "px": 20
+                  }
+                ],
+                "columns": [
+                  {
+                    "px": 404
+                  }
+                ]
+              },
+              "literals": {
+                "width": "fit-content",
+                "height": "fit-content"
               },
               "declared": {
                 "cursor": "pointer"
@@ -16592,8 +16815,8 @@
                 }
               },
               "tokens": {
-                "flex-shrink": "{imported.card.cardheader.flex-shrink}",
-                "height": "{imported.card.cardheader.height}"
+                "color": "{imported.shared.color-242424}",
+                "flex-shrink": "{imported.card.cardheader.flex-shrink}"
               },
               "states": {
                 "disabled": {
@@ -16605,16 +16828,84 @@
                   "prop": "orientation",
                   "map": {
                     "horizontal": {
-                      "flex-grow": "{imported.card.cardheader.flex-grow.horizontal}",
-                      "width": "{imported.card.cardheader.width.{size}.horizontal}"
+                      "flex-grow": "{imported.card.cardheader.flex-grow.horizontal}"
                     },
                     "vertical": {
-                      "flex-grow": "{imported.card.cardheader.flex-grow.vertical}",
-                      "width": "{imported.card.cardheader.width.{size}.vertical}"
+                      "flex-grow": "{imported.card.cardheader.flex-grow.vertical}"
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
+            }
+          },
+          "layoutByProp": {
+            "prop": "orientation",
+            "map": {
+              "horizontal": {
+                "direction": "row"
+              }
             }
           },
           "declared": {
@@ -16632,6 +16923,7 @@
           },
           "tokens": {
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-242424}",
             "height": "{imported.card.root.height.{size}.{orientation}}",
             "left": "{imported.shared.size-0}",
             "min-height": "{imported.shared.size-0}",
@@ -16900,6 +17192,32 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#545454",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-offset",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             },
             "indicator": {
@@ -16977,6 +17295,50 @@
                             }
                           }
                         }
+                      ],
+                      "codeOnly": [
+                        {
+                          "state": "active",
+                          "channel": "color",
+                          "value": "rgba(15, 84, 140, 1)",
+                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "fill",
+                          "value": "rgba(15, 84, 140, 1)",
+                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "color",
+                          "value": "rgba(189, 189, 189, 1)",
+                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "cursor",
+                          "value": "default",
+                          "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "fill",
+                          "value": "rgba(189, 189, 189, 1)",
+                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                        },
+                        {
+                          "state": "hover",
+                          "channel": "color",
+                          "value": "rgba(17, 94, 163, 1)",
+                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                        },
+                        {
+                          "state": "hover",
+                          "channel": "fill",
+                          "value": "rgba(17, 94, 163, 1)",
+                          "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                        }
                       ]
                     }
                   },
@@ -16994,6 +17356,50 @@
                           "font-size": "{imported.checkbox.icon.font-size.medium}"
                         }
                       }
+                    }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "color",
+                      "value": "rgba(15, 84, 140, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "fill",
+                      "value": "rgba(15, 84, 140, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "color",
+                      "value": "rgba(189, 189, 189, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "default",
+                      "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "fill",
+                      "value": "rgba(189, 189, 189, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "color",
+                      "value": "rgba(17, 94, 163, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "fill",
+                      "value": "rgba(17, 94, 163, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
                     }
                   ]
                 }
@@ -17085,6 +17491,122 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "background-color",
+                  "value": "{imported.checkbox.indicator.background-color-state-active.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-bottom-color",
+                  "value": "{imported.checkbox.indicator.border-bottom-color-state-active.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-left-color",
+                  "value": "{imported.checkbox.indicator.border-left-color-state-active.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-right-color",
+                  "value": "{imported.checkbox.indicator.border-right-color-state-active.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-top-color",
+                  "value": "{imported.checkbox.indicator.border-top-color-state-active.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "color",
+                  "value": "{imported.checkbox.indicator.color-state-active.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "fill",
+                  "value": "{imported.checkbox.indicator.fill-state-active.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#e0e0e0",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#e0e0e0",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#e0e0e0",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#e0e0e0",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "fill",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "background-color",
+                  "value": "{imported.checkbox.indicator.background-color-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-bottom-color",
+                  "value": "{imported.checkbox.indicator.border-bottom-color-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-left-color",
+                  "value": "{imported.checkbox.indicator.border-left-color-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-right-color",
+                  "value": "{imported.checkbox.indicator.border-right-color-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-top-color",
+                  "value": "{imported.checkbox.indicator.border-top-color-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "color",
+                  "value": "{imported.checkbox.indicator.color-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "fill",
+                  "value": "{imported.checkbox.indicator.fill-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             },
             "label": {
@@ -17093,7 +17615,8 @@
               "description": "Promoted from the computed floor (round 4): rendered anatomy label|Checkbox__label.Label — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
                 "display": "block",
-                "cursor": "pointer"
+                "cursor": "pointer",
+                "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
               },
               "declaredStates": {
                 "disabled": {
@@ -17144,6 +17667,14 @@
                       "margin-top": "{imported.checkbox.label.margin-top.medium}"
                     }
                   }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "hover",
+                  "channel": "color",
+                  "value": "{imported.checkbox.label.color-state-hover.{checked}}",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
                 }
               ]
             }
@@ -17321,7 +17852,8 @@
                   "text": "Dialog title",
                   "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
-                    "display": "block"
+                    "display": "block",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
                   },
                   "stylesWhen": [
                     {
@@ -17339,7 +17871,13 @@
                       }
                     }
                   ],
+                  "placement": {
+                    "row": 0,
+                    "column": 0,
+                    "columnSpan": 2
+                  },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "font-size": "{imported.shared.size-20}",
                     "font-weight": "{imported.shared.num-600}",
                     "line-height": "{imported.dialog.label-4.line-height}"
@@ -17423,6 +17961,15 @@
                         "top": "{imported.shared.size-0}"
                       }
                     }
+                  },
+                  "placement": {
+                    "row": 0,
+                    "column": 2,
+                    "alignX": "end",
+                    "alignY": "start"
+                  },
+                  "tokens": {
+                    "color": "{imported.shared.color-242424}"
                   }
                 },
                 "label-5": {
@@ -17431,6 +17978,7 @@
                   "declared": {
                     "display": "block",
                     "box-sizing": "border-box",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
                     "overflow-x": "auto",
                     "overflow-y": "auto"
                   },
@@ -17450,7 +17998,13 @@
                       }
                     }
                   ],
+                  "placement": {
+                    "row": 1,
+                    "column": 0,
+                    "columnSpan": 3
+                  },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "font-size": "{imported.shared.size-14}",
                     "font-weight": "{imported.dialog.label-5.font-weight}",
                     "line-height": "{imported.shared.size-20}",
@@ -17551,24 +18105,63 @@
                       }
                     }
                   },
+                  "placement": {
+                    "row": 2,
+                    "column": 1,
+                    "columnSpan": 2,
+                    "alignX": "end"
+                  },
                   "declared": {
                     "box-sizing": "border-box"
                   },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "column-gap": "{imported.shared.size-8}",
                     "row-gap": "{imported.shared.size-8}"
                   }
                 }
               },
+              "layout": {
+                "display": "grid",
+                "rows": [
+                  {
+                    "px": 28
+                  },
+                  {
+                    "px": 28
+                  },
+                  {
+                    "px": 32
+                  }
+                ],
+                "columns": [
+                  {
+                    "px": 257
+                  },
+                  {
+                    "px": 257
+                  },
+                  {
+                    "px": 20
+                  }
+                ],
+                "gap": {
+                  "row": 8,
+                  "column": 8
+                }
+              },
+              "literals": {
+                "width": "fit-content",
+                "height": "fit-content"
+              },
               "declared": {
                 "box-sizing": "border-box"
               },
               "tokens": {
-                "column-gap": "{imported.shared.size-8}",
+                "color": "{imported.shared.color-242424}",
                 "max-height": "{imported.dialog.dialogbody-2.max-height}",
                 "min-height": "{imported.shared.size-0}",
-                "min-width": "{imported.shared.size-0}",
-                "row-gap": "{imported.shared.size-8}"
+                "min-width": "{imported.shared.size-0}"
               }
             },
             "dialogsurface__backdrop": {
@@ -17587,6 +18180,7 @@
               ],
               "tokens": {
                 "background-color": "{imported.dialog.dialogsurface-backdrop.background-color}",
+                "color": "{imported.shared.color-242424}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
               }
@@ -17628,7 +18222,8 @@
                       "text": "Dialog title",
                       "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
-                        "display": "block"
+                        "display": "block",
+                        "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
                       },
                       "stylesWhen": [
                         {
@@ -17639,7 +18234,13 @@
                           }
                         }
                       ],
+                      "placement": {
+                        "row": 0,
+                        "column": 0,
+                        "columnSpan": 2
+                      },
                       "tokens": {
+                        "color": "{imported.shared.color-242424}",
                         "font-size": "{imported.shared.size-20}",
                         "font-weight": "{imported.shared.num-600}",
                         "line-height": "{imported.dialog.label.line-height}"
@@ -17651,6 +18252,7 @@
                       "declared": {
                         "display": "block",
                         "box-sizing": "border-box",
+                        "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
                         "overflow-x": "auto",
                         "overflow-y": "auto"
                       },
@@ -17663,7 +18265,13 @@
                           }
                         }
                       ],
+                      "placement": {
+                        "row": 1,
+                        "column": 0,
+                        "columnSpan": 2
+                      },
                       "tokens": {
+                        "color": "{imported.shared.color-242424}",
                         "font-size": "{imported.shared.size-14}",
                         "font-weight": "{imported.dialog.label-2.font-weight}",
                         "line-height": "{imported.shared.size-20}",
@@ -17750,24 +18358,59 @@
                           }
                         }
                       },
+                      "placement": {
+                        "row": 2,
+                        "column": 1,
+                        "alignX": "end"
+                      },
                       "declared": {
                         "box-sizing": "border-box"
                       },
                       "tokens": {
+                        "color": "{imported.shared.color-242424}",
                         "column-gap": "{imported.shared.size-8}",
                         "row-gap": "{imported.shared.size-8}"
                       }
                     }
                   },
+                  "layout": {
+                    "display": "grid",
+                    "rows": [
+                      {
+                        "px": 28
+                      },
+                      {
+                        "px": 28
+                      },
+                      {
+                        "px": 32
+                      }
+                    ],
+                    "columns": [
+                      {
+                        "px": 267
+                      },
+                      {
+                        "px": 267
+                      }
+                    ],
+                    "gap": {
+                      "row": 8,
+                      "column": 8
+                    }
+                  },
+                  "literals": {
+                    "width": "550px",
+                    "height": "fit-content"
+                  },
                   "declared": {
                     "box-sizing": "border-box"
                   },
                   "tokens": {
-                    "column-gap": "{imported.shared.size-8}",
+                    "color": "{imported.shared.color-242424}",
                     "max-height": "{imported.dialog.dialogbody.max-height}",
                     "min-height": "{imported.shared.size-0}",
-                    "min-width": "{imported.shared.size-0}",
-                    "row-gap": "{imported.shared.size-8}"
+                    "min-width": "{imported.shared.size-0}"
                   }
                 }
               },
@@ -17786,6 +18429,7 @@
                 "border-top-right-radius": "{imported.shared.size-8}",
                 "border-top-width": "{imported.shared.size-1}",
                 "box-shadow": "{imported.dialog.dialogsurface.box-shadow}",
+                "color": "{imported.shared.color-242424}",
                 "margin-bottom": "{imported.dialog.dialogsurface.margin-bottom}",
                 "margin-left": "{imported.dialog.dialogsurface.margin-left}",
                 "margin-right": "{imported.dialog.dialogsurface.margin-right}",
@@ -17804,6 +18448,7 @@
           },
           "tokens": {
             "background-color": "{imported.shared.color-ffffff}",
+            "color": "{imported.shared.color-242424}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           },
@@ -17985,6 +18630,9 @@
             "input": {
               "element": "input",
               "description": "Promoted from the computed floor (round 4): rendered anatomy input|Input__input — this element exists in the real component's DOM; the static layer had no part for it.",
+              "attrs": {
+                "placeholder": "Value"
+              },
               "declared": {
                 "display": "block",
                 "appearance": "auto",
@@ -17993,6 +18641,9 @@
                 "overflow-x": "clip",
                 "overflow-y": "clip",
                 "text-align": "start"
+              },
+              "layout": {
+                "grow": true
               },
               "declaredStates": {
                 "disabled": {
@@ -18004,8 +18655,10 @@
                 "border-left-color": "{imported.shared.color-767676}",
                 "border-right-color": "{imported.shared.color-767676}",
                 "border-top-color": "{imported.shared.color-767676}",
+                "color": "{imported.input.input.color}",
                 "flex-grow": "{imported.input.input.flex-grow}",
-                "min-width": "{imported.shared.size-0}"
+                "min-width": "{imported.shared.size-0}",
+                "placeholder-color": "{imported.input.input.placeholder-color}"
               },
               "states": {
                 "disabled": {
@@ -18042,6 +18695,92 @@
                     }
                   }
                 }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#7676764d",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#7676764d",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#7676764d",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#7676764d",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-color",
+                  "value": "#005fcc",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "1px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
               ]
             }
           },
@@ -18050,6 +18789,53 @@
             "box-sizing": "border-box",
             "position": "relative"
           },
+          "stylesWhen": [
+            {
+              "prop": "appearance",
+              "equals": "outline",
+              "styles": {
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid"
+              }
+            },
+            {
+              "prop": "appearance",
+              "equals": "filled-darker",
+              "styles": {
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid"
+              }
+            },
+            {
+              "prop": "appearance",
+              "equals": "filled-lighter",
+              "styles": {
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid"
+              }
+            },
+            {
+              "prop": "appearance",
+              "equals": "filled-darker-shadow",
+              "styles": {
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid"
+              }
+            },
+            {
+              "prop": "appearance",
+              "equals": "filled-lighter-shadow",
+              "styles": {
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid"
+              }
+            }
+          ],
           "declaredStates": {
             "active": {
               "outline-style": "solid"
@@ -18064,6 +18850,7 @@
           "tokens": {
             "border-bottom-width": "{imported.input.root.border-bottom-width}",
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.input.root.color}",
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
@@ -18347,8 +19134,23 @@
         "root": {
           "layout": {
             "display": "flex",
+            "direction": "row",
             "align": "center",
             "justify": "center"
+          },
+          "layoutByProp": {
+            "prop": "labelPosition",
+            "map": {
+              "above": {
+                "direction": "column-reverse"
+              },
+              "below": {
+                "direction": "column"
+              },
+              "before": {
+                "direction": "row-reverse"
+              }
+            }
           },
           "parts": {
             "spinner": {
@@ -18656,7 +19458,19 @@
         "root": {
           "layout": {
             "display": "flex",
+            "direction": "row",
             "align": "start"
+          },
+          "layoutByProp": {
+            "prop": "labelPosition",
+            "map": {
+              "above": {
+                "direction": "column-reverse"
+              },
+              "before": {
+                "direction": "row-reverse"
+              }
+            }
           },
           "parts": {
             "input": {
@@ -20421,6 +21235,116 @@
       "facts": [
         {
           "part": "cardheader",
+          "kind": "capture",
+          "channel": "border-bottom-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "border-left-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "border-right-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "border-top-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "caret-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "column-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "outline-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "row-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "text-decoration-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
+          "kind": "capture",
+          "channel": "text-emphasis-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "cardheader",
           "kind": "channel",
           "channel": "flex-grow",
           "value": "{imported.card.cardheader.flex-grow.horizontal}",
@@ -20528,6 +21452,50 @@
         },
         {
           "part": "checkbox",
+          "kind": "capture",
+          "channel": "outline-color [disabled]",
+          "value": "#545454",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "checkbox",
+          "kind": "capture",
+          "channel": "outline-color [focus-visible]",
+          "value": "#005fcc",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "checkbox",
+          "kind": "capture",
+          "channel": "outline-offset [focus-visible]",
+          "value": "2px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "checkbox",
+          "kind": "capture",
+          "channel": "outline-width [focus-visible]",
+          "value": "1px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "checkbox",
           "kind": "declared",
           "channel": "appearance",
           "value": "auto",
@@ -20598,6 +21566,116 @@
           "channel": "user-select",
           "value": "none",
           "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "border-bottom-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "border-left-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "border-right-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "border-top-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "caret-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "column-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "outline-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "row-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "text-decoration-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label",
+          "kind": "capture",
+          "channel": "text-emphasis-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
             "count": 40,
             "of": 40
@@ -20704,6 +21782,116 @@
         },
         {
           "part": "label-2",
+          "kind": "capture",
+          "channel": "border-bottom-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "border-left-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "border-right-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "border-top-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "caret-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "column-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "outline-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "row-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "text-decoration-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
+          "kind": "capture",
+          "channel": "text-emphasis-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-2",
           "kind": "declared",
           "channel": "cursor",
           "value": "not-allowed",
@@ -20730,6 +21918,116 @@
           "channel": "user-select",
           "value": "none",
           "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "border-bottom-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "border-left-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "border-right-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "border-top-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "caret-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "column-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "outline-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "row-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "text-decoration-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 40,
+            "of": 40
+          }
+        },
+        {
+          "part": "label-3",
+          "kind": "capture",
+          "channel": "text-emphasis-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
             "count": 40,
             "of": 40
@@ -20935,6 +22233,73 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "column-gap",
+          "value": "{imported.card.root.column-gap.large}",
+          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+          "variants": {
+            "count": 4,
+            "of": 40,
+            "names": [
+              "Appearance=Filled, Size=Large, Orientation=Vertical",
+              "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
+              "Appearance=Outline, Size=Large, Orientation=Vertical",
+              "Appearance=Subtle, Size=Large, Orientation=Vertical"
+            ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "column-gap",
+          "value": "{imported.card.root.column-gap.medium}",
+          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+          "variants": {
+            "count": 20,
+            "of": 40,
+            "names": [
+              "Appearance=Filled, Size=Medium, Orientation=Vertical",
+              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
+              "Appearance=Outline, Size=Medium, Orientation=Vertical",
+              "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
+              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
+              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
+              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
+              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
+              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
+              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
+              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
+              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover"
+            ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "column-gap",
+          "value": "{imported.card.root.column-gap.small}",
+          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+          "variants": {
+            "count": 4,
+            "of": 40,
+            "names": [
+              "Appearance=Filled, Size=Small, Orientation=Vertical",
+              "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
+              "Appearance=Outline, Size=Small, Orientation=Vertical",
+              "Appearance=Subtle, Size=Small, Orientation=Vertical"
+            ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "column-rule-color",
           "value": "{imported.shared.color-bdbdbd}",
           "reason": "a column-rule longhand the computed sweep enumerates; the canvas has no column rules.",
@@ -20978,16 +22343,12 @@
           "value": "{imported.card.root.row-gap.large}",
           "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
           "variants": {
-            "count": 8,
+            "count": 4,
             "of": 40,
             "names": [
-              "Appearance=Filled, Size=Large, Orientation=Vertical",
               "Appearance=Filled, Size=Large, Orientation=Horizontal",
-              "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
               "Appearance=Filled Alternative, Size=Large, Orientation=Horizontal",
-              "Appearance=Outline, Size=Large, Orientation=Vertical",
               "Appearance=Outline, Size=Large, Orientation=Horizontal",
-              "Appearance=Subtle, Size=Large, Orientation=Vertical",
               "Appearance=Subtle, Size=Large, Orientation=Horizontal"
             ]
           }
@@ -20999,33 +22360,13 @@
           "value": "{imported.card.root.row-gap.medium}",
           "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
           "variants": {
-            "count": 24,
+            "count": 4,
             "of": 40,
             "names": [
-              "Appearance=Filled, Size=Medium, Orientation=Vertical",
               "Appearance=Filled, Size=Medium, Orientation=Horizontal",
-              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
               "Appearance=Filled Alternative, Size=Medium, Orientation=Horizontal",
-              "Appearance=Outline, Size=Medium, Orientation=Vertical",
               "Appearance=Outline, Size=Medium, Orientation=Horizontal",
-              "Appearance=Subtle, Size=Medium, Orientation=Vertical",
-              "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
-              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
-              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
-              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
-              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
-              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
-              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
-              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
-              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
-              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
-              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
-              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
-              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
-              "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
-              "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
-              "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
-              "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover"
+              "Appearance=Subtle, Size=Medium, Orientation=Horizontal"
             ]
           }
         },
@@ -21036,16 +22377,12 @@
           "value": "{imported.card.root.row-gap.small}",
           "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
           "variants": {
-            "count": 8,
+            "count": 4,
             "of": 40,
             "names": [
-              "Appearance=Filled, Size=Small, Orientation=Vertical",
               "Appearance=Filled, Size=Small, Orientation=Horizontal",
-              "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
               "Appearance=Filled Alternative, Size=Small, Orientation=Horizontal",
-              "Appearance=Outline, Size=Small, Orientation=Vertical",
               "Appearance=Outline, Size=Small, Orientation=Horizontal",
-              "Appearance=Subtle, Size=Small, Orientation=Vertical",
               "Appearance=Subtle, Size=Small, Orientation=Horizontal"
             ]
           }
@@ -21164,6 +22501,83 @@
       "facts": [
         {
           "part": "icon",
+          "kind": "capture",
+          "channel": "color [active]",
+          "value": "rgba(15, 84, 140, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "icon",
+          "kind": "capture",
+          "channel": "color [disabled]",
+          "value": "rgba(189, 189, 189, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "icon",
+          "kind": "capture",
+          "channel": "color [hover]",
+          "value": "rgba(17, 94, 163, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "icon",
+          "kind": "capture",
+          "channel": "cursor [disabled]",
+          "value": "default",
+          "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "icon",
+          "kind": "capture",
+          "channel": "fill [active]",
+          "value": "rgba(15, 84, 140, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "icon",
+          "kind": "capture",
+          "channel": "fill [disabled]",
+          "value": "rgba(189, 189, 189, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "icon",
+          "kind": "capture",
+          "channel": "fill [hover]",
+          "value": "rgba(17, 94, 163, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "icon",
           "kind": "channel",
           "channel": "aspect-ratio",
           "value": "1 / 1",
@@ -21219,6 +22633,215 @@
           "channel": "pointer-events",
           "value": "none",
           "reason": "Pointer-event gating exists only in the coded component.",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "background-color [active]",
+          "value": "{imported.checkbox.indicator.background-color-state-active.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "background-color [hover]",
+          "value": "{imported.checkbox.indicator.background-color-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-bottom-color [active]",
+          "value": "{imported.checkbox.indicator.border-bottom-color-state-active.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-bottom-color [disabled]",
+          "value": "#e0e0e0",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-bottom-color [hover]",
+          "value": "{imported.checkbox.indicator.border-bottom-color-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-left-color [active]",
+          "value": "{imported.checkbox.indicator.border-left-color-state-active.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-left-color [disabled]",
+          "value": "#e0e0e0",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-left-color [hover]",
+          "value": "{imported.checkbox.indicator.border-left-color-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-right-color [active]",
+          "value": "{imported.checkbox.indicator.border-right-color-state-active.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-right-color [disabled]",
+          "value": "#e0e0e0",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-right-color [hover]",
+          "value": "{imported.checkbox.indicator.border-right-color-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-top-color [active]",
+          "value": "{imported.checkbox.indicator.border-top-color-state-active.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-top-color [disabled]",
+          "value": "#e0e0e0",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "border-top-color [hover]",
+          "value": "{imported.checkbox.indicator.border-top-color-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "color [active]",
+          "value": "{imported.checkbox.indicator.color-state-active.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "color [hover]",
+          "value": "{imported.checkbox.indicator.color-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "fill [active]",
+          "value": "{imported.checkbox.indicator.fill-state-active.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "fill [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "indicator",
+          "kind": "capture",
+          "channel": "fill [hover]",
+          "value": "{imported.checkbox.indicator.fill-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
           "variants": {
             "count": 24,
             "of": 24
@@ -21325,6 +22948,50 @@
         },
         {
           "part": "input",
+          "kind": "capture",
+          "channel": "outline-color [disabled]",
+          "value": "#545454",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-color [focus-visible]",
+          "value": "#005fcc",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-offset [focus-visible]",
+          "value": "2px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-width [focus-visible]",
+          "value": "1px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "input",
           "kind": "declared",
           "channel": "appearance",
           "value": "auto",
@@ -21391,6 +23058,17 @@
         },
         {
           "part": "label",
+          "kind": "capture",
+          "channel": "color [hover]",
+          "value": "{imported.checkbox.label.color-state-hover.{checked}}",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "label",
           "kind": "declared",
           "channel": "cursor",
           "value": "default",
@@ -21417,6 +23095,83 @@
           "channel": "display",
           "value": "block",
           "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "capture",
+          "channel": "color [active]",
+          "value": "rgba(15, 84, 140, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "capture",
+          "channel": "color [disabled]",
+          "value": "rgba(189, 189, 189, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "capture",
+          "channel": "color [hover]",
+          "value": "rgba(17, 94, 163, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "capture",
+          "channel": "cursor [disabled]",
+          "value": "default",
+          "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "capture",
+          "channel": "fill [active]",
+          "value": "rgba(15, 84, 140, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "capture",
+          "channel": "fill [disabled]",
+          "value": "rgba(189, 189, 189, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
+          "variants": {
+            "count": 24,
+            "of": 24
+          }
+        },
+        {
+          "part": "part-1-0-0",
+          "kind": "capture",
+          "channel": "fill [hover]",
+          "value": "rgba(17, 94, 163, 1)",
+          "reason": "observed by the computed capture and refused by the contract grammar — default-state values not kind-compatible for padding — cannot correlate",
           "variants": {
             "count": 24,
             "of": 24
@@ -22100,21 +23855,6 @@
         {
           "part": "dialogbody",
           "kind": "channel",
-          "channel": "column-gap",
-          "value": "{imported.shared.size-8}",
-          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-          "variants": {
-            "count": 2,
-            "of": 3,
-            "names": [
-              "Modal Type=Modal",
-              "Modal Type=Alert"
-            ]
-          }
-        },
-        {
-          "part": "dialogbody",
-          "kind": "channel",
           "channel": "max-height",
           "value": "{imported.dialog.dialogbody.max-height}",
           "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
@@ -22124,20 +23864,6 @@
             "names": [
               "Modal Type=Modal",
               "Modal Type=Alert"
-            ]
-          }
-        },
-        {
-          "part": "dialogbody-2",
-          "kind": "channel",
-          "channel": "column-gap",
-          "value": "{imported.shared.size-8}",
-          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-          "variants": {
-            "count": 1,
-            "of": 3,
-            "names": [
-              "Modal Type=Non Modal"
             ]
           }
         },
@@ -22275,21 +24001,6 @@
         },
         {
           "part": "label-2",
-          "kind": "channel",
-          "channel": "margin-top/margin-right/margin-bottom/margin-left",
-          "value": "-2px/-2px/-2px/-2px",
-          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-          "variants": {
-            "count": 2,
-            "of": 3,
-            "names": [
-              "Modal Type=Modal",
-              "Modal Type=Alert"
-            ]
-          }
-        },
-        {
-          "part": "label-2",
           "kind": "declared",
           "channel": "display",
           "value": "block",
@@ -22407,20 +24118,6 @@
           "variants": {
             "count": 3,
             "of": 3
-          }
-        },
-        {
-          "part": "label-5",
-          "kind": "channel",
-          "channel": "margin-top/margin-right/margin-bottom/margin-left",
-          "value": "-2px/-2px/-2px/-2px",
-          "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-          "variants": {
-            "count": 1,
-            "of": 3,
-            "names": [
-              "Modal Type=Non Modal"
-            ]
           }
         },
         {
@@ -22725,6 +24422,160 @@
       "facts": [
         {
           "part": "input",
+          "kind": "capture",
+          "channel": "border-bottom-color [disabled]",
+          "value": "#7676764d",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "border-left-color [disabled]",
+          "value": "#7676764d",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "border-right-color [disabled]",
+          "value": "#7676764d",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "border-top-color [disabled]",
+          "value": "#7676764d",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "caret-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "column-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-color [active]",
+          "value": "#005fcc",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-color [focus-visible]",
+          "value": "#005fcc",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-width [active]",
+          "value": "1px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "outline-width [focus-visible]",
+          "value": "1px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "row-rule-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "text-decoration-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "capture",
+          "channel": "text-emphasis-color [disabled]",
+          "value": "#bdbdbd",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 42,
+            "of": 42
+          }
+        },
+        {
+          "part": "input",
           "kind": "channel",
           "channel": "border-bottom-color",
           "value": "{imported.shared.color-767676}",
@@ -22765,6 +24616,63 @@
           "variants": {
             "count": 42,
             "of": 42
+          }
+        },
+        {
+          "part": "input",
+          "kind": "channel",
+          "channel": "color",
+          "value": "{imported.input.input.color}",
+          "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+          "variants": {
+            "count": 36,
+            "of": 42,
+            "names": [
+              "Appearance=Outline, Size=Medium",
+              "Appearance=Outline, Size=Small",
+              "Appearance=Outline, Size=Large",
+              "Appearance=Underline, Size=Medium",
+              "Appearance=Underline, Size=Small",
+              "Appearance=Underline, Size=Large",
+              "Appearance=Filled Darker, Size=Medium",
+              "Appearance=Filled Darker, Size=Small",
+              "Appearance=Filled Darker, Size=Large",
+              "Appearance=Filled Lighter, Size=Medium",
+              "Appearance=Filled Lighter, Size=Small",
+              "Appearance=Filled Lighter, Size=Large",
+              "Appearance=Filled Darker Shadow, Size=Medium",
+              "Appearance=Filled Darker Shadow, Size=Small",
+              "Appearance=Filled Darker Shadow, Size=Large",
+              "Appearance=Filled Lighter Shadow, Size=Medium",
+              "Appearance=Filled Lighter Shadow, Size=Small",
+              "Appearance=Filled Lighter Shadow, Size=Large",
+              "Appearance=Outline, Size=Medium, State=Active",
+              "Appearance=Underline, Size=Medium, State=Active",
+              "Appearance=Filled Darker, Size=Medium, State=Active",
+              "Appearance=Filled Lighter, Size=Medium, State=Active",
+              "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+              "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+            ],
+            "more": 12
+          }
+        },
+        {
+          "part": "input",
+          "kind": "channel",
+          "channel": "color",
+          "value": "{imported.shared.color-bdbdbd}",
+          "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+          "variants": {
+            "count": 6,
+            "of": 42,
+            "names": [
+              "Appearance=Outline, Size=Medium, State=Disabled",
+              "Appearance=Underline, Size=Medium, State=Disabled",
+              "Appearance=Filled Darker, Size=Medium, State=Disabled",
+              "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+              "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+              "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled"
+            ]
           }
         },
         {
@@ -22884,7 +24792,7 @@
           "kind": "channel",
           "channel": "border-bottom-color",
           "value": "{imported.input.root.border-bottom-color.outline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+          "reason": "a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour disagrees and stays code-only (the one-paint limit, named per side).",
           "variants": {
             "count": 7,
             "of": 42,
@@ -22896,26 +24804,6 @@
               "Appearance=Outline, Size=Medium, State=Disabled",
               "Appearance=Outline, Size=Medium, State=Focus Visible",
               "Appearance=Outline, Size=Medium, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-bottom-color",
-          "value": "{imported.input.root.border-bottom-color.underline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 7,
-            "of": 42,
-            "names": [
-              "Appearance=Underline, Size=Medium",
-              "Appearance=Underline, Size=Small",
-              "Appearance=Underline, Size=Large",
-              "Appearance=Underline, Size=Medium, State=Active",
-              "Appearance=Underline, Size=Medium, State=Disabled",
-              "Appearance=Underline, Size=Medium, State=Focus Visible",
-              "Appearance=Underline, Size=Medium, State=Hover"
             ]
           }
         },
@@ -22999,46 +24887,6 @@
           "part": "root",
           "kind": "channel",
           "channel": "border-left-color",
-          "value": "{imported.input.root.border-left-color.outline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 7,
-            "of": 42,
-            "names": [
-              "Appearance=Outline, Size=Medium",
-              "Appearance=Outline, Size=Small",
-              "Appearance=Outline, Size=Large",
-              "Appearance=Outline, Size=Medium, State=Active",
-              "Appearance=Outline, Size=Medium, State=Disabled",
-              "Appearance=Outline, Size=Medium, State=Focus Visible",
-              "Appearance=Outline, Size=Medium, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-left-color",
-          "value": "{imported.input.root.border-left-color.underline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 7,
-            "of": 42,
-            "names": [
-              "Appearance=Underline, Size=Medium",
-              "Appearance=Underline, Size=Small",
-              "Appearance=Underline, Size=Large",
-              "Appearance=Underline, Size=Medium, State=Active",
-              "Appearance=Underline, Size=Medium, State=Disabled",
-              "Appearance=Underline, Size=Medium, State=Focus Visible",
-              "Appearance=Underline, Size=Medium, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-left-color",
           "value": "{imported.shared.color-e0e0e0}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
@@ -23115,46 +24963,6 @@
           "part": "root",
           "kind": "channel",
           "channel": "border-right-color",
-          "value": "{imported.input.root.border-right-color.outline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 7,
-            "of": 42,
-            "names": [
-              "Appearance=Outline, Size=Medium",
-              "Appearance=Outline, Size=Small",
-              "Appearance=Outline, Size=Large",
-              "Appearance=Outline, Size=Medium, State=Active",
-              "Appearance=Outline, Size=Medium, State=Disabled",
-              "Appearance=Outline, Size=Medium, State=Focus Visible",
-              "Appearance=Outline, Size=Medium, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-right-color",
-          "value": "{imported.input.root.border-right-color.underline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 7,
-            "of": 42,
-            "names": [
-              "Appearance=Underline, Size=Medium",
-              "Appearance=Underline, Size=Small",
-              "Appearance=Underline, Size=Large",
-              "Appearance=Underline, Size=Medium, State=Active",
-              "Appearance=Underline, Size=Medium, State=Disabled",
-              "Appearance=Underline, Size=Medium, State=Focus Visible",
-              "Appearance=Underline, Size=Medium, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-right-color",
           "value": "{imported.shared.color-e0e0e0}",
           "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
           "variants": {
@@ -23224,46 +25032,6 @@
               "Appearance=Filled Lighter, Size=Medium, State=Hover",
               "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
               "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-top-color",
-          "value": "{imported.input.root.border-top-color.outline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 7,
-            "of": 42,
-            "names": [
-              "Appearance=Outline, Size=Medium",
-              "Appearance=Outline, Size=Small",
-              "Appearance=Outline, Size=Large",
-              "Appearance=Outline, Size=Medium, State=Active",
-              "Appearance=Outline, Size=Medium, State=Disabled",
-              "Appearance=Outline, Size=Medium, State=Focus Visible",
-              "Appearance=Outline, Size=Medium, State=Hover"
-            ]
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-top-color",
-          "value": "{imported.input.root.border-top-color.underline}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 7,
-            "of": 42,
-            "names": [
-              "Appearance=Underline, Size=Medium",
-              "Appearance=Underline, Size=Small",
-              "Appearance=Underline, Size=Large",
-              "Appearance=Underline, Size=Medium, State=Active",
-              "Appearance=Underline, Size=Medium, State=Disabled",
-              "Appearance=Underline, Size=Medium, State=Focus Visible",
-              "Appearance=Underline, Size=Medium, State=Hover"
             ]
           }
         },
@@ -23492,12 +25260,77 @@
         {
           "part": "root",
           "kind": "channel",
+          "channel": "column-gap",
+          "value": "{imported.spinner.root.column-gap}",
+          "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+          "variants": {
+            "count": 32,
+            "of": 64,
+            "names": [
+              "Size=Medium, Appearance=Primary, Label Position=Above",
+              "Size=Medium, Appearance=Primary, Label Position=Below",
+              "Size=Medium, Appearance=Inverted, Label Position=Above",
+              "Size=Medium, Appearance=Inverted, Label Position=Below",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=Above",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=Below",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=Above",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=Below",
+              "Size=Tiny, Appearance=Primary, Label Position=Above",
+              "Size=Tiny, Appearance=Primary, Label Position=Below",
+              "Size=Tiny, Appearance=Inverted, Label Position=Above",
+              "Size=Tiny, Appearance=Inverted, Label Position=Below",
+              "Size=Extra Small, Appearance=Primary, Label Position=Above",
+              "Size=Extra Small, Appearance=Primary, Label Position=Below",
+              "Size=Extra Small, Appearance=Inverted, Label Position=Above",
+              "Size=Extra Small, Appearance=Inverted, Label Position=Below",
+              "Size=Small, Appearance=Primary, Label Position=Above",
+              "Size=Small, Appearance=Primary, Label Position=Below",
+              "Size=Small, Appearance=Inverted, Label Position=Above",
+              "Size=Small, Appearance=Inverted, Label Position=Below",
+              "Size=Large, Appearance=Primary, Label Position=Above",
+              "Size=Large, Appearance=Primary, Label Position=Below",
+              "Size=Large, Appearance=Inverted, Label Position=Above",
+              "Size=Large, Appearance=Inverted, Label Position=Below"
+            ],
+            "more": 8
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
           "channel": "row-gap",
           "value": "{imported.spinner.root.row-gap}",
           "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
           "variants": {
-            "count": 64,
-            "of": 64
+            "count": 32,
+            "of": 64,
+            "names": [
+              "Size=Medium, Appearance=Primary, Label Position=After",
+              "Size=Medium, Appearance=Primary, Label Position=Before",
+              "Size=Medium, Appearance=Inverted, Label Position=After",
+              "Size=Medium, Appearance=Inverted, Label Position=Before",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=After",
+              "Size=Extra Tiny, Appearance=Primary, Label Position=Before",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=After",
+              "Size=Extra Tiny, Appearance=Inverted, Label Position=Before",
+              "Size=Tiny, Appearance=Primary, Label Position=After",
+              "Size=Tiny, Appearance=Primary, Label Position=Before",
+              "Size=Tiny, Appearance=Inverted, Label Position=After",
+              "Size=Tiny, Appearance=Inverted, Label Position=Before",
+              "Size=Extra Small, Appearance=Primary, Label Position=After",
+              "Size=Extra Small, Appearance=Primary, Label Position=Before",
+              "Size=Extra Small, Appearance=Inverted, Label Position=After",
+              "Size=Extra Small, Appearance=Inverted, Label Position=Before",
+              "Size=Small, Appearance=Primary, Label Position=After",
+              "Size=Small, Appearance=Primary, Label Position=Before",
+              "Size=Small, Appearance=Inverted, Label Position=After",
+              "Size=Small, Appearance=Inverted, Label Position=Before",
+              "Size=Large, Appearance=Primary, Label Position=After",
+              "Size=Large, Appearance=Primary, Label Position=Before",
+              "Size=Large, Appearance=Inverted, Label Position=After",
+              "Size=Large, Appearance=Inverted, Label Position=Before"
+            ],
+            "more": 8
           }
         },
         {
@@ -23923,10 +25756,33 @@
           "kind": "channel",
           "channel": "margin",
           "value": "8px",
+          "reason": "lowered to the parent's itemSpacing (8px, bound to imported/shared/size-8): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — indicator.margin-left",
+          "variants": {
+            "count": 2,
+            "of": 10,
+            "names": [
+              "Checked=Unchecked, Label Position=Before",
+              "Checked=Checked, Label Position=Before"
+            ]
+          }
+        },
+        {
+          "part": "root",
+          "kind": "channel",
+          "channel": "margin",
+          "value": "8px",
           "reason": "lowered to the parent's itemSpacing (8px, bound to imported/shared/size-8): CSS spells between-sibling space per CHILD and auto-layout spells it once per PARENT, so 1 sibling margin(s) become one gap — indicator.margin-right",
           "variants": {
-            "count": 10,
-            "of": 10
+            "count": 6,
+            "of": 10,
+            "names": [
+              "Checked=Unchecked, Label Position=After",
+              "Checked=Checked, Label Position=After",
+              "Checked=Unchecked, Label Position=After, State=Disabled",
+              "Checked=Checked, Label Position=After, State=Disabled",
+              "Checked=Unchecked, Label Position=After, State=Focus Visible",
+              "Checked=Checked, Label Position=After, State=Focus Visible"
+            ]
           }
         },
         {

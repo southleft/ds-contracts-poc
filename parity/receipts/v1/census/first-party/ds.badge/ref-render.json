@@ -1,0 +1,62 @@
+{
+  "id": "ds.badge",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-info",
+      "status": "rendered",
+      "png": "ref-variant-info.png",
+      "props": {
+        "variant": "info"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-success",
+      "status": "rendered",
+      "png": "ref-variant-success.png",
+      "props": {
+        "variant": "success"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-warning",
+      "status": "rendered",
+      "png": "ref-variant-warning.png",
+      "props": {
+        "variant": "warning"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-danger",
+      "status": "rendered",
+      "png": "ref-variant-danger.png",
+      "props": {
+        "variant": "danger"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-error",
+      "status": "rendered",
+      "png": "ref-variant-error.png",
+      "props": {
+        "variant": "error"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

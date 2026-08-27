@@ -95,7 +95,8 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "flex"
+        "display": "flex",
+        "direction": "column"
       },
       "parts": {
         "checkbox": {
@@ -170,6 +171,32 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         },
         "label": {
@@ -178,6 +205,7 @@
           "declared": {
             "display": "block",
             "cursor": "pointer",
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
             "position": "relative"
           },
           "declaredStates": {
@@ -188,6 +216,7 @@
           },
           "tokens": {
             "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-242424}",
             "font-size": "{imported.shared.size-14}",
             "font-weight": "{imported.shared.num-400}",
             "left": "{imported.shared.size-0}",
@@ -231,6 +260,68 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "caret-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "column-rule-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "row-rule-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-decoration-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-emphasis-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         },
         "cardheader": {
@@ -242,8 +333,13 @@
               "layout": {
                 "display": "flex"
               },
+              "placement": {
+                "row": 0,
+                "column": 0
+              },
               "declared": {
-                "cursor": "pointer"
+                "cursor": "pointer",
+                "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
               },
               "declaredStates": {
                 "disabled": {
@@ -252,6 +348,7 @@
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-242424}",
                 "font-size": "{imported.shared.size-14}",
                 "font-weight": "{imported.shared.num-400}",
                 "line-height": "{imported.shared.size-20}"
@@ -260,7 +357,69 @@
                 "disabled": {
                   "color": "{imported.shared.color-bdbdbd}"
                 }
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             },
             "label-3": {
               "text": "Card description",
@@ -268,8 +427,13 @@
               "layout": {
                 "display": "flex"
               },
+              "placement": {
+                "row": 1,
+                "column": 0
+              },
               "declared": {
-                "cursor": "pointer"
+                "cursor": "pointer",
+                "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
               },
               "declaredStates": {
                 "disabled": {
@@ -278,6 +442,7 @@
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-242424}",
                 "font-size": "{imported.shared.size-14}",
                 "font-weight": "{imported.shared.num-400}",
                 "line-height": "{imported.shared.size-20}"
@@ -286,8 +451,90 @@
                 "disabled": {
                   "color": "{imported.shared.color-bdbdbd}"
                 }
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "caret-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "column-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "outline-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "row-rule-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-decoration-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "text-emphasis-color",
+                  "value": "#bdbdbd",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
             }
+          },
+          "layout": {
+            "display": "grid",
+            "rows": [
+              {
+                "px": 20
+              },
+              {
+                "px": 20
+              }
+            ],
+            "columns": [
+              {
+                "px": 404
+              }
+            ]
+          },
+          "literals": {
+            "width": "fit-content",
+            "height": "fit-content"
           },
           "declared": {
             "cursor": "pointer"
@@ -299,8 +546,8 @@
             }
           },
           "tokens": {
-            "flex-shrink": "{imported.card.cardheader.flex-shrink}",
-            "height": "{imported.card.cardheader.height}"
+            "color": "{imported.shared.color-242424}",
+            "flex-shrink": "{imported.card.cardheader.flex-shrink}"
           },
           "states": {
             "disabled": {
@@ -312,16 +559,84 @@
               "prop": "orientation",
               "map": {
                 "horizontal": {
-                  "flex-grow": "{imported.card.cardheader.flex-grow.horizontal}",
-                  "width": "{imported.card.cardheader.width.{size}.horizontal}"
+                  "flex-grow": "{imported.card.cardheader.flex-grow.horizontal}"
                 },
                 "vertical": {
-                  "flex-grow": "{imported.card.cardheader.flex-grow.vertical}",
-                  "width": "{imported.card.cardheader.width.{size}.vertical}"
+                  "flex-grow": "{imported.card.cardheader.flex-grow.vertical}"
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "caret-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "column-rule-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "row-rule-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-decoration-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "text-emphasis-color",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
+        }
+      },
+      "layoutByProp": {
+        "prop": "orientation",
+        "map": {
+          "horizontal": {
+            "direction": "row"
+          }
         }
       },
       "declared": {
@@ -339,6 +654,7 @@
       },
       "tokens": {
         "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-242424}",
         "height": "{imported.card.root.height.{size}.{orientation}}",
         "left": "{imported.shared.size-0}",
         "min-height": "{imported.shared.size-0}",

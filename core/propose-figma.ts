@@ -222,6 +222,13 @@ export interface MinimalAnatomyPart {
   tokens?: Record<string, string>;
   literals?: Record<string, string>;
   parts?: Record<string, MinimalAnatomyPart>;
+  /** RC7 — the HTML element this part renders as. Read by exactly one
+   *  door: the placeholder fold, whose whole legitimacy rests on the part
+   *  being a VOID form control (see foldPlaceholderTextChild). */
+  element?: string;
+  /** RC7 — the authored attributes, so the fold can tell a placeholder the
+   *  contract already spelled from one it would be inventing. */
+  attrs?: Record<string, string>;
 }
 
 // ---------------------------------------------------------------------------
@@ -3938,6 +3945,108 @@ function declareRelativeIfPositionedChildren(
  *  base [2,8,2,6] used to refuse padding-inline here and the pill hugged its
  *  text). A side that is zero in every variant needs no token; an all-zero
  *  pair needs none at all. */
+/** RC7 — THE PLACEHOLDER TEXT CHILD FOLDS BACK TO ITS CONTROL'S CHANNEL.
+ *
+ *  The canvas has no `::placeholder` plane: the emitter draws a form
+ *  control's placeholder as a real TEXT node inside the control's frame. On
+ *  the way back that node must become the channel it came from
+ *  (`placeholder-color` + `attrs.placeholder`) rather than a CHILD PART —
+ *  an <input> with a child part re-emits as `<input>…</input>`, which is not
+ *  a thing, and the round trip would not close at the spelling it was sent.
+ *
+ *  THE ELEMENT GUARD IS THE WHOLE ARGUMENT, and it is not a layer-name
+ *  heuristic. `<input>` and `<textarea>` (a text control's replaced content
+ *  is its value, not children) CANNOT hold element children in any DOM: a
+ *  child node under one in the dump is emitter-synthesized BY CONSTRUCTION.
+ *  Under any other element — a <div> holding a text layer a designer named
+ *  "placeholder", an empty-state message, a chart's zero-data label — the
+ *  child is REAL CONTENT and folding it would destroy the text, its
+ *  typography and the part itself with no receipt anywhere. That is a
+ *  silent-loss class in its own right, and it is pinned by
+ *  core/placeholder-ink-check.ts case (g).
+ *
+ *  Four further conditions, each closing a way to lose a fact:
+ *   · the control part must be the SOLE child (a control with more children
+ *     is not a shape this emitter draws);
+ *   · the child must bind NO TEXT property — a BOUND placeholder is
+ *     per-usage API and folding it would drop the property the designer
+ *     wired; it keeps the `parts.placeholder` spelling and the divergence is
+ *     NAMED (a real, named round-trip asymmetry);
+ *   · every channel the child carries BESIDES `color` must be byte-equal to
+ *     the parent's own (it is, by construction — the emitter gives the
+ *     placeholder node the control's own typography). A child that diverges
+ *     carries a fact the parent does not, so the fold REFUSES BY NAME rather
+ *     than dropping it;
+ *   · the folded ink must actually DIFFER from the control's own `color` —
+ *     that difference is the entire reason `placeholder-color` exists (the
+ *     read-boundary fold uses the identical test). Equal inks fold to
+ *     nothing and the child part is simply dropped as the redundant echo of
+ *     the control's own ink, receipted. */
+function foldPlaceholderTextChild(
+  part: Record<string, unknown>,
+  parts: Record<string, unknown>,
+  ctx: Ctx,
+  where: string,
+): void {
+  const keys = Object.keys(parts);
+  if (keys.length !== 1 || keys[0] !== 'placeholder') return;
+  const authored = authoredPartAt(ctx, partPathOf(where));
+  const element = authored?.element;
+  if (element !== 'input' && element !== 'textarea') return;
+  const child = parts['placeholder'] as Record<string, unknown> | undefined;
+  if (!child || typeof child !== 'object') return;
+  if (child.parts || child.slot || child.component || child.icon || child.content) return;
+  if (typeof child.text !== 'string') return;
+  const childTokens = (child.tokens ?? {}) as Record<string, string>;
+  const childLiterals = (child.literals ?? {}) as Record<string, string>;
+  const ink = childTokens['color'] ?? childLiterals['color'];
+  if (ink === undefined) return;
+  const parentTokens = (part.tokens ?? {}) as Record<string, string>;
+  const parentLiterals = (part.literals ?? {}) as Record<string, string>;
+  const diverging: string[] = [];
+  for (const [k, v] of [...Object.entries(childTokens), ...Object.entries(childLiterals)]) {
+    if (k === 'color') continue;
+    if ((parentTokens[k] ?? parentLiterals[k]) !== v) diverging.push(`${k}=${v}`);
+  }
+  const structural = Object.keys(child).filter(
+    (k) => !['text', 'tokens', 'literals', 'element', 'declared'].includes(k),
+  );
+  if (diverging.length > 0 || structural.length > 0) {
+    ctx.notes.push(
+      `${where}: the <${element}> control's sole TEXT child "placeholder" was NOT folded back to \`placeholder-color\` — it carries ${
+        diverging.length > 0 ? `channel(s) the control does not (${diverging.join(', ')})` : `structural field(s) (${structural.join(', ')})`
+      }, and folding would drop them. It stays a child part; the control re-emits with a nested element, which an <${element}> cannot hold — review.`,
+    );
+    return;
+  }
+  const parentInk = parentTokens['color'] ?? parentLiterals['color'];
+  delete parts['placeholder'];
+  if (ink === parentInk) {
+    ctx.notes.push(
+      `${where}: the <${element}> control's placeholder TEXT child echoes the control's OWN ink (${ink}) — no \`placeholder-color\` is proposed (the channel exists precisely for the case where the two DIFFER; an equal ink is already painted by \`color\`).`,
+    );
+  } else {
+    if (childTokens['color'] !== undefined) {
+      (part.tokens ??= {} as Record<string, string>);
+      (part.tokens as Record<string, string>)['placeholder-color'] = childTokens['color'];
+    } else {
+      (part.literals ??= {} as Record<string, string>);
+      (part.literals as Record<string, string>)['placeholder-color'] = childLiterals['color'];
+    }
+    ctx.notes.push(
+      `${where}: the <${element}> control's placeholder TEXT child folds back to \`placeholder-color\` = ${ink} — the canvas has no ::placeholder plane, so the emitter draws that ink as a real TEXT node inside the control and the return leg restores the channel it came from (RC7).`,
+    );
+  }
+  if (child.text.length > 0 && typeof authored?.attrs?.placeholder === 'string' && !authored.attrs.placeholder.startsWith('{')) {
+    (part.attrs ??= {} as Record<string, string>);
+    (part.attrs as Record<string, string>)['placeholder'] = child.text;
+  } else if (child.text.length > 0) {
+    ctx.notes.push(
+      `${where}: the placeholder STRING "${child.text}" came back from the canvas but the contract does not spell it as a literal \`attrs.placeholder\` — it is NOT proposed as one (it would fabricate an attribute the source contract binds through a prop, or does not carry at all).`,
+    );
+  }
+}
+
 function authoredPartAt(ctx: Ctx, partPath: string): MinimalAnatomyPart | undefined {
   let cur: MinimalAnatomyPart | undefined = ctx.contractsById?.get(ctx.selfId)?.anatomy?.root;
   if (!cur) return undefined;
@@ -7964,6 +8073,9 @@ function buildPart(
   const mode = parentModesOf(m, ctx.mint !== undefined);
   // Pre-order key claiming + P9 run detection — see buildChildParts.
   const parts = buildChildParts(m.children, mode, ctx, where, selfKey);
+  // RC7: a form control's placeholder TEXT node folds back to the channel it
+  // came from — ELEMENT-guarded (see foldPlaceholderTextChild).
+  foldPlaceholderTextChild(part, parts, ctx, where);
   if (Object.keys(parts).length > 0) part.parts = parts;
   // A2 grid (G4): slot parts' cells hoist to layout.areas — the area name IS
   // the slot anchor; no-op unless this part carried a manual grid.

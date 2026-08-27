@@ -1,6 +1,6 @@
 # 7 · Validation — Claims, Evals, Evidence
 
-This PoC makes eight falsifiable claims. Each is backed by an automated eval (`npm run eval`, 230 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **230/230 deterministic evals pass** (`evals/results.json`) — the two long-standing named reds (`mui-figma-genesis`, `child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16 — and all live checks pass. This section is written to be lifted into a PRD.
+This PoC makes eight falsifiable claims. Each is backed by an automated eval (`npm run eval`, 230 cases, runs the real pipeline in a scratch copy — not mocks) or an executed live design-tool check. Current status: **227 of 230 deterministic evals pass** (`evals/results.json`); the three reds are named with their measurements in [docs/23 §B.38](23-known-limitations.md) — the three the census/stack-to-main merge measured and refused to re-record green (`astryx-reanchor-minted`, `minted-leaves-bind-to-something`, `console-loop-canvas-drift-probe`). All live checks pass. This section is written to be lifted into a PRD.
 
 The suite tags every case with the claim it defends, so the rollup below is derived from `evals/results.json`, not asserted:
 

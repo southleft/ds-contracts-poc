@@ -1,0 +1,18 @@
+{
+  "id": "border-color-control-equal",
+  "feature": "paint",
+  "construct": "a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border",
+  "why": "The styled-channel door subtracts the control, so a global reset that reaches the control erases the subject's base border colour — shadcn.select shipped border style+width with NO base colour, the CSS surface still painted via border-color's currentColor initial-value rule, and the canvas drew NO stroke at all (the rejected census set: a bare trigger with no box). Equality with a control that draws no border proves library authorship, not absence.",
+  "expect": "CARRIED",
+  "expectName": "reset-supplied-border-color-admitted",
+  "expectWhere": "anatomy.root.parts.a.tokens.border-top-color",
+  "observable": {
+    "part": "a",
+    "channel": "border-top-color",
+    "capturedValue": "rgb(0, 0, 0)"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the 2px border strokes on canvas with the carried colour — width and style alone paint nothing there"
+  }
+}

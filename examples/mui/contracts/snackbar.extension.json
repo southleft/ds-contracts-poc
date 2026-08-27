@@ -244,6 +244,11 @@
         "part": "paper-root",
         "field": "align",
         "value": "center"
+      },
+      {
+        "part": "paper-root",
+        "field": "wrap",
+        "value": true
       }
     ],
     "contradictions": [],
@@ -379,6 +384,7 @@
     "refusals": []
   },
   "enrichmentNotes": [
+    "layout enriched: paper-root.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.justify = start (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: paper-root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",

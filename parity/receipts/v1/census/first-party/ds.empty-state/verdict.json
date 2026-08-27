@@ -1,0 +1,30 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23659",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.empty-state.dump.json",
+  "matched": 20,
+  "diverged": [
+   "part root/iconArea \u2014 missing from proposal",
+   "part root/actions \u2014 missing from proposal",
+   "part root/Icon \u2014 proposal has a part the contract does not",
+   "part root/Actions \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop title required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/title element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/descriptionText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/title font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/descriptionText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

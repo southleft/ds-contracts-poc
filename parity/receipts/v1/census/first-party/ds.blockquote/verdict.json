@@ -1,0 +1,35 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "canvas collapsed to a 70x34 empty box with only the left rule visible; the quote text is missing entirely. Ref (794x168) shows the full quote line 'The quick brown fox jumps over the lazy dog.' beside the left rule. Child text content is not minted."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "slot-bearing quote: code render blank, canvas draws the rule only \u2014 both sides carry no sample copy",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23501",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.blockquote.dump.json",
+  "matched": 8,
+  "diverged": [
+   "part root/quote \u2014 missing from proposal",
+   "part root/citation \u2014 missing from proposal",
+   "part root/Children \u2014 proposal has a part the contract does not",
+   "part root/Cite \u2014 proposal has a part the contract does not",
+   "part root border-left-color \u2014 {color.divider.strong} missing from proposal",
+   "part root border-color \u2014 proposal has {color.divider.strong}, contract has nothing"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root color` \u2014 {color.text.secondary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-family` \u2014 {font.control.family} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-size` \u2014 {font.control.size.md} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/citation font-size` \u2014 {font.control.size.sm} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

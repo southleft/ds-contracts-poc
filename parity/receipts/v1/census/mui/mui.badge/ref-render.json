@@ -1,0 +1,113 @@
+{
+  "id": "mui.badge",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Badge",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "color-default__variant-standard",
+      "status": "rendered",
+      "png": "ref-color-default__variant-standard.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "default",
+        "variant": "standard"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__variant-dot",
+      "status": "rendered",
+      "png": "ref-color-default__variant-dot.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "default",
+        "variant": "dot"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-primary__variant-standard",
+      "status": "rendered",
+      "png": "ref-color-primary__variant-standard.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "primary",
+        "variant": "standard"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-secondary__variant-standard",
+      "status": "rendered",
+      "png": "ref-color-secondary__variant-standard.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "secondary",
+        "variant": "standard"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-error__variant-standard",
+      "status": "rendered",
+      "png": "ref-color-error__variant-standard.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "error",
+        "variant": "standard"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-info__variant-standard",
+      "status": "rendered",
+      "png": "ref-color-info__variant-standard.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "info",
+        "variant": "standard"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-success__variant-standard",
+      "status": "rendered",
+      "png": "ref-color-success__variant-standard.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "success",
+        "variant": "standard"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-warning__variant-standard",
+      "status": "rendered",
+      "png": "ref-color-warning__variant-standard.png",
+      "props": {
+        "badgeContent": 4,
+        "overlap": "circular",
+        "color": "warning",
+        "variant": "standard"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 8,
+  "unmappable": 0
+}

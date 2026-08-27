@@ -16,13 +16,13 @@ repo it is simply absent from the denominator and scores 100%.
 
 | | |
 |---|---|
-| cases | **115** |
-| 🟢 pass | **111** |
+| cases | **127** |
+| 🟢 pass | **123** |
 | 🔴 red | **4** |
 | 🟡 yellow (UNSUPPORTED, never read) | **0** |
-| **UNSUPPORTED declared — THE RATCHET** | **18** · may only DECREASE without an explicit manifest edit |
+| **UNSUPPORTED declared — THE RATCHET** | **17** · may only DECREASE without an explicit manifest edit |
 
-Declared dispositions: CARRIED 70 · LOWERED 5 · REFUSED 22 · UNSUPPORTED 18.
+Declared dispositions: CARRIED 78 · LOWERED 5 · REFUSED 27 · UNSUPPORTED 17.
 
 **A green gate here would mean the cases are too easy.** The point of the
 fixture is a measured frontier, and every red below is an open, named defect —
@@ -81,6 +81,7 @@ manifest.
 | 🟢 | `antd-forwarded-root-attrs` | anatomy | `label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio)` | CARRIED | carried | PASS |
 | 🟢 | `antd-overlay-digit-depth-three` | anatomy | `sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case)` | CARRIED | carried | PASS |
 | 🟢 | `antd-presence-times-axis-glyph` | anatomy | `a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert)` | CARRIED | carried | PASS |
+| 🟢 | `svg-stroke-glyph-fill-none` | anatomy | `a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill="none" on the svg)` | REFUSED | refused, by name | PASS |
 | 🔴 | `container-query` | at-rules | `@container (min-inline-size: 100px) { … }` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🔴 | `media-non-matching` | at-rules | `@media (min-width: 2000px) branch that does NOT match the pinned viewport` | UNSUPPORTED | carried | UNDECLARED-CARRY |
 | 🟢 | `margin-top-in-flow` | box | `margin-top: 12px on the SECOND child of a flex column whose parent declares no gap` | CARRIED | carried | PASS |
@@ -115,6 +116,9 @@ manifest.
 | 🟢 | `aspect-ratio` | geometry | `aspect-ratio: 2 / 1` | CARRIED | carried | PASS |
 | 🟢 | `border-radius-px` | geometry | `border-radius: 6px` | CARRIED | carried | PASS |
 | 🟢 | `min-max-width` | geometry | `min-width / max-width in px` | CARRIED | carried | PASS |
+| 🟢 | `overlay-text-fill-pinned-size` | geometry | `a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape` | CARRIED | carried | PASS |
+| 🟢 | `overlay-text-fill-stage-derived` | geometry | `a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do` | REFUSED | refused, by name | PASS |
+| 🟢 | `overlay-text-hug-excluded` | geometry | `a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it` | REFUSED | not read | PASS |
 | 🟢 | `grid-child-align` | grid-alignment | `justify-self: center; align-self: end on a fixed-size child` | CARRIED | carried | PASS |
 | 🟢 | `grid-child-align-self-start` | grid-alignment | `align-self: start on a fixed-size grid child, with no justify-self declared` | CARRIED | carried | PASS |
 | 🟢 | `grid-area-empty-slot` | grid-areas | `a declared grid area with NO children (empty slot)` | CARRIED | carried | PASS |
@@ -146,21 +150,28 @@ manifest.
 | 🟢 | `grid-track-zero-value` | grid-tracks | `a 0px or 0fr track written to the canvas` | REFUSED | refused, by name | PASS |
 | 🟢 | `grid-tracks-mixed-fractional` | grid-tracks | `grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values)` | CARRIED | carried | PASS |
 | 🟢 | `grid-two-column` | grid-tracks | `display: grid; grid-template-columns: 1fr 1fr` | CARRIED | carried | PASS |
+| 🟢 | `grid-zero-track-collapse` | grid-tracks | `a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant)` | CARRIED | carried | PASS |
 | 🟢 | `antd-focus-outline-ring` | interaction-states | `button.root:focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the focus ring as an OUTLINE state delta on the ROOT (antd Button, Switch)` | CARRIED | carried | PASS |
 | 🟢 | `antd-focus-outline-ring-child-part` | interaction-states | `label > span > [input.sr-only:focus-visible + span.box { outline: 3px solid rgb(145, 202, 255) }] — the focus ring as an OUTLINE state delta on a NESTED PART (antd Checkbox-inner, Radio-inner)` | REFUSED | refused, by name | PASS |
 | 🟢 | `antd-focus-outline-ring-ua-width` | interaction-states | `button.root { outline-style: none } :focus-visible { outline: 3px solid rgb(145, 202, 255); outline-offset: 1px } — the ring's declared width EQUALS Chromium's own `outline-width: medium` (3px) at rest, so the width never differs between planes (antd Button/Switch: --ant-line-width-focus is 3px)` | CARRIED | carried | PASS |
+| 🟢 | `block-root-shrink-to-fit` | invariant | `a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family)` | REFUSED | refused, by name | PASS |
 | 🟢 | `nonpainting-text-display-none` | invariant | `a NON-PAINTING element carrying text (display: none)` | CARRIED | carried | PASS |
 | 🟢 | `nonpainting-text-visibility-hidden` | invariant | `a NON-PAINTING element carrying text (visibility: hidden)` | REFUSED | refused, by name | PASS |
 | 🔴 | `stage-box-equal` | invariant | `a captured box exactly equal to the STAGE box (100% × 100%)` | REFUSED | carried | UNDECLARED-CARRY |
 | 🟢 | `flex-align-items-center` | layout-flex | `display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights` | CARRIED | carried | PASS |
 | 🟢 | `flex-direction-column` | layout-flex | `display: flex; flex-direction: column — the main axis turned vertical` | CARRIED | carried | PASS |
-| 🟢 | `align-items-baseline` | layout | `align-items: baseline on a flex row` | CARRIED | carried | PASS |
+| 🟢 | `align-items-baseline` | layout | `uniform align-items: baseline on a flex row of two differing font sizes` | CARRIED | carried | PASS |
+| 🟢 | `child-order-permuted-by-axis` | layout | `CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal` | REFUSED | refused, by name | PASS |
+| 🟢 | `child-order-reversed-by-axis` | layout | `CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape)` | CARRIED | carried | PASS |
+| 🟢 | `flex-direction-by-axis` | layout | `flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape` | CARRIED | carried | PASS |
+| 🟢 | `flex-direction-reverse-by-axis` | layout | `flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one)` | CARRIED | carried | PASS |
 | 🟢 | `flex-gap` | layout | `column-gap / row-gap in px` | CARRIED | carried | PASS |
-| 🟢 | `flex-wrap-wrap` | layout | `flex-wrap: wrap on a flex container` | CARRIED | carried | PASS |
+| 🟢 | `flex-wrap-wrap` | layout | `uniform flex-wrap: wrap on a flex row narrow enough to wrap` | CARRIED | carried | PASS |
 | 🟢 | `grid-2d` | layout | `display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED)` | CARRIED | carried | PASS |
 | 🟢 | `layout-on-non-flex-container` | layout | `align-items / justify-content authored on a container whose display is NOT flex (here display: table)` | REFUSED | refused, by name | PASS |
 | 🟢 | `antd-part-transition-channel` | motion | `.cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part)` | CARRIED | carried | PASS |
 | 🟢 | `transition-channel` | motion | `transition: background-color 200ms ease` | CARRIED | carried | PASS |
+| 🟢 | `border-color-control-equal` | paint | `a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border` | CARRIED | carried | PASS |
 | 🟢 | `position-absolute-insets` | position | `position: absolute + top/left insets` | CARRIED | carried | PASS |
 | 🟢 | `position-fixed` | position | `position: fixed` | REFUSED | refused, by name | PASS |
 | 🟢 | `position-sticky` | position | `position: sticky + top` | REFUSED | refused, by name | PASS |
@@ -168,7 +179,7 @@ manifest.
 | 🟢 | `pseudo-content-glyph` | pseudo-elements | `::before { content: "\2715"; font-family: icons }` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-gradient-only` | pseudo-elements | `::after painted ONLY by a linear-gradient` | REFUSED | refused, by name | PASS |
 | 🟢 | `pseudo-marker` | pseudo-elements | `li::marker { color; font-size }` | UNSUPPORTED | refused, by name | PASS |
-| 🟢 | `pseudo-placeholder` | pseudo-elements | `input::placeholder { color }` | UNSUPPORTED | refused, by name | PASS |
+| 🟢 | `pseudo-placeholder` | pseudo-elements | `input::placeholder { color }` | CARRIED | carried | PASS |
 | 🟢 | `pseudo-selection` | pseudo-elements | `::selection { background-color }` | UNSUPPORTED | not read | PASS |
 | 🟢 | `content-visibility-auto` | rendering | `content-visibility: auto` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `repeat-grid-month` | repetition | `a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160))` | CARRIED | carried | PASS |
@@ -185,6 +196,7 @@ manifest.
 | 🟢 | `text-indent-off-box` | text | `text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows)` | LOWERED | carried | PASS |
 | 🟢 | `text-overflow-ellipsis` | text | `text-overflow: ellipsis + overflow hidden + nowrap` | CARRIED | carried | PASS |
 | 🟢 | `antd-component-scoped-custom-property` | tokens | `.cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`)` | CARRIED | carried | PASS |
+| 🟢 | `presence-hidden-axis-geometry` | tokens | `an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked)` | CARRIED | carried | PASS |
 | 🟢 | `rotate-independent-property` | transform | `rotate: 15deg (the INDEPENDENT transform property)` | UNSUPPORTED | refused, by name | PASS |
 | 🟢 | `transform-scale-rotate` | transform | `transform: rotate(15deg) scale(1.2)` | REFUSED | refused, by name | PASS |
 | 🟢 | `em-relative-padding` | units | `padding: 1.5em against a 12px font-size` | CARRIED | carried | PASS |

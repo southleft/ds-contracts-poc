@@ -1,0 +1,478 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "token": {
+        "root": {
+          "background-color": {
+            "default": {
+              "$value": "#0000000f",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#facecb",
+              "$type": "color"
+            },
+            "orange": {
+              "$value": "#fad0b5",
+              "$type": "color"
+            },
+            "yellow": {
+              "$value": "#f8da9d",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#c5e5c0",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#a5e3d6",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#a3e0ef",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#c4ddfb",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#eccef3",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#fccadc",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#e5e5e5",
+              "$type": "color"
+            }
+          },
+          "color": {
+            "default": {
+              "$value": "#171717",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#89001a",
+              "$type": "color"
+            },
+            "orange": {
+              "$value": "#6e3500",
+              "$type": "color"
+            },
+            "yellow": {
+              "$value": "#584400",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#0c5700",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#005348",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#00505f",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#00458c",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#700084",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#83004b",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#262626",
+              "$type": "color"
+            }
+          },
+          "column-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20.0004px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "row-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "color": {
+            "default": {
+              "$value": "#171717",
+              "$type": "color"
+            },
+            "red": {
+              "$value": "#89001a",
+              "$type": "color"
+            },
+            "orange": {
+              "$value": "#6e3500",
+              "$type": "color"
+            },
+            "yellow": {
+              "$value": "#584400",
+              "$type": "color"
+            },
+            "green": {
+              "$value": "#0c5700",
+              "$type": "color"
+            },
+            "teal": {
+              "$value": "#005348",
+              "$type": "color"
+            },
+            "cyan": {
+              "$value": "#00505f",
+              "$type": "color"
+            },
+            "blue": {
+              "$value": "#00458c",
+              "$type": "color"
+            },
+            "purple": {
+              "$value": "#700084",
+              "$type": "color"
+            },
+            "pink": {
+              "$value": "#83004b",
+              "$type": "color"
+            },
+            "gray": {
+              "$value": "#262626",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "12px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20.0004px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "shared": {
+        "size-6": {
+          "$value": "6px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "center"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "none"
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "root",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "text-overflow",
+        "value": "ellipsis"
+      },
+      {
+        "part": "label",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label, root); -webkit-text-stroke-color (label, root)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-only: label.caret-color equals ancestor \"root\" on all 132 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"root\" on all 132 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-size equals ancestor \"root\" on all 132 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label.font-weight equals ancestor \"root\" on all 132 captured planes — the part carries no independent font-weight fact (CSS inheritance, observed)",
+    "inheritance-only: label.line-height equals ancestor \"root\" on all 132 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "full-width-carried: label spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.text-overflow = ellipsis (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "hug-evidence-unmeasurable: root.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-absent: root carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
+  ]
+}

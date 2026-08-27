@@ -1,0 +1,50 @@
+{
+  "id": "antd.card",
+  "library": "antd",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "antd",
+    "version": "5.29.3",
+    "recipe": "examples/antd sandbox (.antd-sandbox; examples/antd/README) mounted per extract/computed/configs/antd.json"
+  },
+  "configPath": "extract/computed/configs/antd.json",
+  "component": "Card",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-default__variant-outlined",
+      "status": "rendered",
+      "png": "ref-size-default__variant-outlined.png",
+      "props": {
+        "title": "Card title",
+        "size": "default",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-default__variant-borderless",
+      "status": "rendered",
+      "png": "ref-size-default__variant-borderless.png",
+      "props": {
+        "title": "Card title",
+        "size": "default",
+        "variant": "borderless"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small__variant-outlined",
+      "status": "rendered",
+      "png": "ref-size-small__variant-outlined.png",
+      "props": {
+        "title": "Card title",
+        "size": "small",
+        "variant": "outlined"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

@@ -111,9 +111,6 @@
 }
 
 .part-0 {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
   display: inline-flex;
   flex-shrink: 0;
   grid-template-columns: var(--imported-shared-size-14);
@@ -124,6 +121,18 @@
   pointer-events: none;
   text-align: center;
   transition-property: none;
+}
+
+.checked-checked .part-0 {
+  color: var(--imported-checkbox-part-0-color-checked);
+}
+
+.checked-indeterminate .part-0 {
+  color: var(--imported-checkbox-part-0-color-indeterminate);
+}
+
+.checked-unchecked .part-0 {
+  color: var(--imported-checkbox-part-0-color-unchecked);
 }
 
 .checked-unchecked .part-0 {

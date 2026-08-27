@@ -153,7 +153,7 @@
       "status": "rendered",
       "png": "code-size-medium__appearance-primary__label-position-above.png",
       "contentBox": {
-        "width": 102.22,
+        "width": 62.22,
         "height": 62
       }
     },
@@ -171,7 +171,7 @@
       "status": "rendered",
       "png": "code-size-medium__appearance-primary__label-position-below.png",
       "contentBox": {
-        "width": 102.22,
+        "width": 62.22,
         "height": 62
       }
     },

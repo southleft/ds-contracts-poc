@@ -56,6 +56,13 @@ export interface CaseEntry {
   blockStage?: boolean;
   stage?: { width: number; height: number; padding: number };
   sampleText?: string;
+  /** REJECTED-SETS ROUND — a case whose construct only EXISTS across a prop
+   *  space (fluent.card: flex-direction that varies on the orientation axis)
+   *  declares its enum axes here. The seed contract carries them as real
+   *  enum props and the config lists them as capture axes — the UNMODIFIED
+   *  runner enumerates the combos exactly as it does for a real library.
+   *  Case.tsx receives each prop by name (default = the declared default). */
+  axes?: Array<{ prop: string; values: string[]; default: string }>;
   /** A2 LAYOUT PROMOTION (conformance/layout-cases-draft): the case's
    *  TWO-DIRECTION disposition spec, carried VERBATIM from the hand-authored
    *  draft. `codeToCanvas` is the direction this fixture's gate measures
@@ -178,7 +185,19 @@ function seedContract(c: CaseEntry): Record<string, unknown> {
     status: 'draft',
     description: `SEED contract for the CSS/DOM conformance fixture case "${c.id}" (${c.feature}). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: ${c.construct}`,
     semantics: { element: 'div' },
-    props: [],
+    props: (c.axes ?? []).map((a) => ({
+      name: a.prop,
+      type: { enum: a.values },
+      default: a.default,
+      bindings: {
+        figma: {
+          kind: 'VARIANT',
+          property: a.prop[0].toUpperCase() + a.prop.slice(1),
+          values: Object.fromEntries(a.values.map((v) => [v, v[0].toUpperCase() + v.slice(1)])),
+        },
+        code: { prop: a.prop },
+      },
+    })),
     states: [],
     anatomy: { root: {} },
     bindings: {
@@ -263,7 +282,7 @@ export function build(): { cases: CaseEntry[] } {
       importName: exportNameFor(c.id),
       contract: `conformance/seeds/${c.id}.contract.json`,
       sampleText: c.sampleText ?? '',
-      axes: [],
+      axes: (c.axes ?? []).map((a) => a.prop),
       ...(c.blockStage ? { blockStage: true } : {}),
       ...(c.stage ? { stage: c.stage } : {}),
     })),

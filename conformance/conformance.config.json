@@ -51,7 +51,7 @@
       "axes": []
     },
     {
-      "__case": "layout: align-items: baseline on a flex row — declared CARRIED",
+      "__case": "layout: uniform align-items: baseline on a flex row of two differing font sizes — declared CARRIED",
       "name": "CaseAlignItemsBaseline",
       "importName": "CaseAlignItemsBaseline",
       "contract": "conformance/seeds/align-items-baseline.contract.json",
@@ -148,6 +148,22 @@
       "axes": []
     },
     {
+      "__case": "invariant: a display:block root that filled NOTHING — the flex stage made it a flex item and it shrink-to-fit its content, so its computed width is a harness-text measurement (the astryx.card 114.203px family) — declared REFUSED",
+      "name": "CaseBlockRootShrinkToFit",
+      "importName": "CaseBlockRootShrinkToFit",
+      "contract": "conformance/seeds/block-root-shrink-to-fit.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "paint: a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border — declared CARRIED",
+      "name": "CaseBorderColorControlEqual",
+      "importName": "CaseBorderColorControlEqual",
+      "contract": "conformance/seeds/border-color-control-equal.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
       "__case": "geometry: border-radius: 6px — declared CARRIED",
       "name": "CaseBorderRadiusPx",
       "importName": "CaseBorderRadiusPx",
@@ -170,6 +186,26 @@
       "contract": "conformance/seeds/calc-var.contract.json",
       "sampleText": "",
       "axes": []
+    },
+    {
+      "__case": "layout: CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal — declared REFUSED",
+      "name": "CaseChildOrderPermutedByAxis",
+      "importName": "CaseChildOrderPermutedByAxis",
+      "contract": "conformance/seeds/child-order-permuted-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "rotation"
+      ]
+    },
+    {
+      "__case": "layout: CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape) — declared CARRIED",
+      "name": "CaseChildOrderReversedByAxis",
+      "importName": "CaseChildOrderReversedByAxis",
+      "contract": "conformance/seeds/child-order-reversed-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "labelPosition"
+      ]
     },
     {
       "__case": "effects: clip-path: polygon(...) — declared UNSUPPORTED",
@@ -342,6 +378,16 @@
       "blockStage": true
     },
     {
+      "__case": "layout: flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape — declared CARRIED",
+      "name": "CaseFlexDirectionByAxis",
+      "importName": "CaseFlexDirectionByAxis",
+      "contract": "conformance/seeds/flex-direction-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "orientation"
+      ]
+    },
+    {
       "__case": "layout-flex: display: flex; flex-direction: column — the main axis turned vertical — declared CARRIED",
       "name": "CaseFlexDirectionColumn",
       "importName": "CaseFlexDirectionColumn",
@@ -349,6 +395,16 @@
       "sampleText": "",
       "axes": [],
       "blockStage": true
+    },
+    {
+      "__case": "layout: flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one) — declared CARRIED",
+      "name": "CaseFlexDirectionReverseByAxis",
+      "importName": "CaseFlexDirectionReverseByAxis",
+      "contract": "conformance/seeds/flex-direction-reverse-by-axis.contract.json",
+      "sampleText": "",
+      "axes": [
+        "align"
+      ]
     },
     {
       "__case": "layout: column-gap / row-gap in px — declared CARRIED",
@@ -359,7 +415,7 @@
       "axes": []
     },
     {
-      "__case": "layout: flex-wrap: wrap on a flex container — declared CARRIED",
+      "__case": "layout: uniform flex-wrap: wrap on a flex row narrow enough to wrap — declared CARRIED",
       "name": "CaseFlexWrapWrap",
       "importName": "CaseFlexWrapWrap",
       "contract": "conformance/seeds/flex-wrap-wrap.contract.json",
@@ -665,6 +721,15 @@
       "blockStage": true
     },
     {
+      "__case": "grid-tracks: a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant) — declared CARRIED",
+      "name": "CaseGridZeroTrackCollapse",
+      "importName": "CaseGridZeroTrackCollapse",
+      "contract": "conformance/seeds/grid-zero-track-collapse.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "blockStage": true
+    },
+    {
       "__case": "layout: align-items / justify-content authored on a container whose display is NOT flex (here display: table) — declared REFUSED",
       "name": "CaseLayoutOnNonFlexContainer",
       "importName": "CaseLayoutOnNonFlexContainer",
@@ -739,6 +804,37 @@
       "axes": []
     },
     {
+      "__case": "geometry: a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape — declared CARRIED",
+      "name": "CaseOverlayTextFillPinnedSize",
+      "importName": "CaseOverlayTextFillPinnedSize",
+      "contract": "conformance/seeds/overlay-text-fill-pinned-size.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
+      "__case": "geometry: a TEXT-bearing part that genuinely FILLS its pinned ancestor — where the ancestor's own box is the CAPTURE STAGE's content box (288px = stage 320 − 2×16), and its content box moves 32px only because the ancestor's own gutters do — declared REFUSED",
+      "name": "CaseOverlayTextFillStageDerived",
+      "importName": "CaseOverlayTextFillStageDerived",
+      "contract": "conformance/seeds/overlay-text-fill-stage-derived.contract.json",
+      "sampleText": "",
+      "axes": [
+        "gutters"
+      ],
+      "blockStage": true
+    },
+    {
+      "__case": "geometry: a TEXT-bearing part in an overlay anatomy whose box IS its own shrink-to-fit measurement — an inline-block beside a PINNED ancestor that moves (160px → 200px) without it — declared REFUSED",
+      "name": "CaseOverlayTextHugExcluded",
+      "importName": "CaseOverlayTextHugExcluded",
+      "contract": "conformance/seeds/overlay-text-hug-excluded.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size"
+      ]
+    },
+    {
       "__case": "box: padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT — declared CARRIED",
       "name": "CasePaddingAsymmetricBlock",
       "importName": "CasePaddingAsymmetricBlock",
@@ -800,6 +896,16 @@
       "blockStage": true
     },
     {
+      "__case": "tokens: an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) — declared CARRIED",
+      "name": "CasePresenceHiddenAxisGeometry",
+      "importName": "CasePresenceHiddenAxisGeometry",
+      "contract": "conformance/seeds/presence-hidden-axis-geometry.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked"
+      ]
+    },
+    {
       "__case": "pseudo-elements: dialog::backdrop { background-color } — declared UNSUPPORTED",
       "name": "CasePseudoBackdrop",
       "importName": "CasePseudoBackdrop",
@@ -834,7 +940,7 @@
       "blockStage": true
     },
     {
-      "__case": "pseudo-elements: input::placeholder { color } — declared UNSUPPORTED",
+      "__case": "pseudo-elements: input::placeholder { color } — declared CARRIED",
       "name": "CasePseudoPlaceholder",
       "importName": "CasePseudoPlaceholder",
       "contract": "conformance/seeds/pseudo-placeholder.contract.json",
@@ -923,6 +1029,14 @@
       "name": "CaseSvgOutsideGrammar",
       "importName": "CaseSvgOutsideGrammar",
       "contract": "conformance/seeds/svg-outside-grammar.contract.json",
+      "sampleText": "",
+      "axes": []
+    },
+    {
+      "__case": "anatomy: a STROKE-drawn svg glyph whose computed fill is none (the lucide check: an open path, stroke=currentColor, fill=\"none\" on the svg) — declared REFUSED",
+      "name": "CaseSvgStrokeGlyphFillNone",
+      "importName": "CaseSvgStrokeGlyphFillNone",
+      "contract": "conformance/seeds/svg-stroke-glyph-fill-none.contract.json",
       "sampleText": "",
       "axes": []
     },

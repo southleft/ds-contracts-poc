@@ -1,0 +1,719 @@
+{
+ "_provenance": {
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "extractedAt": "2026-08-24",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design\u2192contract proposal.",
+  "dumpVersion": "1.32",
+  "sets": [
+   "Input (shadcn.input)"
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (shadcn.input):State=Default",
+   "message": "prototype reaction(s) ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  }
+ ],
+ "_variables": {
+  "imported/input/root/padding-left": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/input/root/padding-top": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/padding-right": {
+   "type": "FLOAT",
+   "value": 10,
+   "modes": {
+    "Light": 10,
+    "Dark": 10
+   }
+  },
+  "imported/input/root/padding-bottom": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/width": {
+   "type": "FLOAT",
+   "value": 288,
+   "modes": {
+    "Light": 288,
+    "Dark": 288
+   }
+  },
+  "imported/input/root/height": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "imported/shared/size-8": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/shared/size-1": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/min-width": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/shared/color-e5e5e5": {
+   "type": "COLOR",
+   "value": "#e5e5e5",
+   "modes": {
+    "Light": "#e5e5e5",
+    "Dark": "#e5e5e5"
+   }
+  },
+  "imported/input/root/font-size": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  }
+ },
+ "Input (shadcn.input)": {
+  "setName": "Input (shadcn.input)",
+  "description": "Input \u2014 generated from contract shadcn.input v0.2.0 \u2020 (19 code-only facts \u2014 see plugin report)",
+  "contractId": "shadcn.input",
+  "specHash": "2824480501",
+  "version": "0.2.0",
+  "semantics": {
+   "element": "input"
+  },
+  "statePreviewAxis": {
+   "axis": "State",
+   "default": "Default",
+   "states": [
+    "Disabled",
+    "Active",
+    "Focus Visible"
+   ],
+   "primary": null,
+   "pinned": {}
+  },
+  "type": "COMPONENT_SET",
+  "nodeId": "39:24403",
+  "key": "fc46e7a1da86caca82f73a67eb91ac2e7468ed7f",
+  "variants": [
+   {
+    "name": "State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 288,
+     "height": 36
+    },
+    "abs": {
+     "x": 40,
+     "y": 40,
+     "right": 1024,
+     "bottom": 40,
+     "width": 288,
+     "height": 36,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      4,
+      10,
+      4,
+      10
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "clipsContent": true,
+    "cornerRadius": 8,
+    "bound": {
+     "paddingLeft": "imported/input/root/padding-left",
+     "paddingTop": "imported/input/root/padding-top",
+     "paddingRight": "imported/input/root/padding-right",
+     "paddingBottom": "imported/input/root/padding-bottom",
+     "width": "imported/input/root/width",
+     "height": "imported/input/root/height",
+     "topLeftRadius": "imported/shared/size-8",
+     "topRightRadius": "imported/shared/size-8",
+     "bottomLeftRadius": "imported/shared/size-8",
+     "bottomRightRadius": "imported/shared/size-8",
+     "strokeTopWeight": "imported/shared/size-1",
+     "strokeBottomWeight": "imported/shared/size-1",
+     "strokeLeftWeight": "imported/shared/size-1",
+     "strokeRightWeight": "imported/shared/size-1",
+     "minWidth": "imported/input/root/min-width"
+    },
+    "stroke": {
+     "var": "imported/shared/color-e5e5e5"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.05
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "reactions": [
+     {
+      "trigger": "ON_PRESS",
+      "action": "CHANGE_TO",
+      "destination": "39:24399",
+      "destinationName": "State=Active"
+     }
+    ],
+    "children": [
+     {
+      "name": "placeholder",
+      "type": "TEXT",
+      "text": {
+       "characters": "",
+       "fontSize": 14,
+       "fontStyle": "Medium",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/input/root/font-size",
+       "lineHeightVar": "imported/input/root/line-height"
+      },
+      "fill": {
+       "hex": "000000"
+      }
+     }
+    ]
+   },
+   {
+    "name": "State=Disabled",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "State": "Disabled"
+    },
+    "bbox": {
+     "width": 288,
+     "height": 36
+    },
+    "abs": {
+     "x": 368,
+     "y": 40,
+     "right": 696,
+     "bottom": 40,
+     "width": 288,
+     "height": 36,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      4,
+      10,
+      4,
+      10
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "clipsContent": true,
+    "cornerRadius": 8,
+    "bound": {
+     "paddingLeft": "imported/input/root/padding-left",
+     "paddingTop": "imported/input/root/padding-top",
+     "paddingRight": "imported/input/root/padding-right",
+     "paddingBottom": "imported/input/root/padding-bottom",
+     "width": "imported/input/root/width",
+     "height": "imported/input/root/height",
+     "topLeftRadius": "imported/shared/size-8",
+     "topRightRadius": "imported/shared/size-8",
+     "bottomLeftRadius": "imported/shared/size-8",
+     "bottomRightRadius": "imported/shared/size-8",
+     "strokeTopWeight": "imported/shared/size-1",
+     "strokeBottomWeight": "imported/shared/size-1",
+     "strokeLeftWeight": "imported/shared/size-1",
+     "strokeRightWeight": "imported/shared/size-1",
+     "minWidth": "imported/input/root/min-width"
+    },
+    "stroke": {
+     "var": "imported/shared/color-e5e5e5"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "opacity": 0.5,
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.05
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "placeholder",
+      "type": "TEXT",
+      "text": {
+       "characters": "",
+       "fontSize": 14,
+       "fontStyle": "Medium",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/input/root/font-size",
+       "lineHeightVar": "imported/input/root/line-height"
+      },
+      "fill": {
+       "hex": "000000"
+      }
+     }
+    ]
+   },
+   {
+    "name": "State=Active",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "State": "Active"
+    },
+    "bbox": {
+     "width": 288,
+     "height": 36
+    },
+    "abs": {
+     "x": 696,
+     "y": 40,
+     "right": 368,
+     "bottom": 40,
+     "width": 288,
+     "height": 36,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      4,
+      10,
+      4,
+      10
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "clipsContent": true,
+    "cornerRadius": 8,
+    "bound": {
+     "paddingLeft": "imported/input/root/padding-left",
+     "paddingTop": "imported/input/root/padding-top",
+     "paddingRight": "imported/input/root/padding-right",
+     "paddingBottom": "imported/input/root/padding-bottom",
+     "width": "imported/input/root/width",
+     "height": "imported/input/root/height",
+     "topLeftRadius": "imported/shared/size-8",
+     "topRightRadius": "imported/shared/size-8",
+     "bottomLeftRadius": "imported/shared/size-8",
+     "bottomRightRadius": "imported/shared/size-8",
+     "strokeTopWeight": "imported/shared/size-1",
+     "strokeBottomWeight": "imported/shared/size-1",
+     "strokeLeftWeight": "imported/shared/size-1",
+     "strokeRightWeight": "imported/shared/size-1",
+     "minWidth": "imported/input/root/min-width"
+    },
+    "stroke": {
+     "var": "imported/shared/color-e5e5e5"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.05
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "placeholder",
+      "type": "TEXT",
+      "text": {
+       "characters": "",
+       "fontSize": 14,
+       "fontStyle": "Medium",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/input/root/font-size",
+       "lineHeightVar": "imported/input/root/line-height"
+      },
+      "fill": {
+       "hex": "000000"
+      }
+     }
+    ]
+   },
+   {
+    "name": "State=Focus Visible",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "State": "Focus Visible"
+    },
+    "bbox": {
+     "width": 288,
+     "height": 36
+    },
+    "abs": {
+     "x": 1024,
+     "y": 40,
+     "right": 40,
+     "bottom": 40,
+     "width": 288,
+     "height": 36,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      4,
+      10,
+      4,
+      10
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "clipsContent": true,
+    "cornerRadius": 8,
+    "bound": {
+     "paddingLeft": "imported/input/root/padding-left",
+     "paddingTop": "imported/input/root/padding-top",
+     "paddingRight": "imported/input/root/padding-right",
+     "paddingBottom": "imported/input/root/padding-bottom",
+     "width": "imported/input/root/width",
+     "height": "imported/input/root/height",
+     "topLeftRadius": "imported/shared/size-8",
+     "topRightRadius": "imported/shared/size-8",
+     "bottomLeftRadius": "imported/shared/size-8",
+     "bottomRightRadius": "imported/shared/size-8",
+     "strokeTopWeight": "imported/shared/size-1",
+     "strokeBottomWeight": "imported/shared/size-1",
+     "strokeLeftWeight": "imported/shared/size-1",
+     "strokeRightWeight": "imported/shared/size-1",
+     "minWidth": "imported/input/root/min-width"
+    },
+    "stroke": {
+     "var": "imported/shared/color-e5e5e5"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 0
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.05
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "placeholder",
+      "type": "TEXT",
+      "text": {
+       "characters": "",
+       "fontSize": 14,
+       "fontStyle": "Medium",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/input/root/font-size",
+       "lineHeightVar": "imported/input/root/line-height"
+      },
+      "fill": {
+       "hex": "000000"
+      }
+     }
+    ]
+   }
+  ],
+  "propertyDefinitions": {
+   "State": {
+    "type": "VARIANT",
+    "defaultValue": "Default",
+    "variantOptions": [
+     "Default",
+     "Disabled",
+     "Active",
+     "Focus Visible"
+    ]
+   }
+  }
+ }
+}

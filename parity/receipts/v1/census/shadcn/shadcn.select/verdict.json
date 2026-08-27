@@ -1,0 +1,67 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [
+  "CODE-CANVAS-DISAGREE:root.border-color-unspecified"
+ ],
+ "defects": [
+  "trigger chevron: canvas renders a SOLID FILLED downward triangle; ref renders the lucide thin stroked chevron (open V, ~2px stroke) \u2014 different glyph, not covered by the border-color wall"
+ ],
+ "defectClasses": [
+  "glyph geometry"
+ ],
+ "notes": "placeholder + chevron match; trigger box stroke missing on canvas (same border-color gap)",
+ "reviewedAt": "60793cc0",
+ "setNodeId": "39:9568",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-shadcn-shadcn.select.dump.json",
+  "matched": 8,
+  "diverged": [
+   "part root/label/selectAnOption \u2014 proposal has a part the contract does not",
+   "part root/icon/Vector \u2014 proposal has a part the contract does not",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-left-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-right-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-width \u2014 {imported.shared.size-1} missing from proposal",
+   "part root box-shadow \u2014 {imported.select.root.box-shadow} missing from proposal",
+   "part root column-gap \u2014 {imported.shared.size-6} missing from proposal",
+   "part root line-height \u2014 {imported.shared.size-20} missing from proposal",
+   "part root padding-bottom \u2014 {imported.shared.size-8} missing from proposal",
+   "part root padding-top \u2014 {imported.shared.size-8} missing from proposal",
+   "part root row-gap \u2014 {imported.shared.size-6} missing from proposal",
+   "part root padding-block \u2014 proposal has {imported.shared.size-8}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-8}, contract has nothing",
+   "part root border-width \u2014 proposal has {imported.shared.size-1}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.shared.size-6}, contract has nothing",
+   "part root/label layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root/label column-gap \u2014 {imported.shared.size-6} missing from proposal",
+   "part root/label line-height \u2014 {imported.shared.size-20} missing from proposal",
+   "part root/label row-gap \u2014 {imported.shared.size-6} missing from proposal",
+   "part root/label gap \u2014 proposal has {imported.shared.size-6}, contract has nothing",
+   "part root/label text \u2014 \"Select an option\" vs undefined",
+   "part root/icon flex-shrink \u2014 {imported.select.icon.flex-shrink} missing from proposal",
+   "part root/icon line-height \u2014 {imported.shared.size-20} missing from proposal",
+   "part root/icon stroke \u2014 {imported.shared.color-737373} missing from proposal",
+   "part root/icon stroke-width \u2014 {imported.select.icon.stroke-width} missing from proposal",
+   "text root/label color (effective) \u2014 {imported.shared.color-737373} missing from proposal",
+   "text root/label font-size (effective) \u2014 {imported.shared.size-14} missing from proposal",
+   "text root/label font-weight (effective) \u2014 {imported.select.label.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root color` \u2014 {imported.shared.color-737373} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon color` \u2014 {imported.shared.color-737373} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/icon font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Select:root/icon/Vector` strokeWeight = `2` \u2014 nearest tokens: `{space.inset-y.xs}`, `{border.width.focus}`, `{border.width.divider.strong}`, `{space.25}`, `{border-width.200}`",
+   "`Select:root` effects = `0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 0px 0px #00000000, 0px 1px 2px #0000000d` \u2014 nearest tokens: `{radius.banner.section}`, `{radius.none}`"
+  ]
+ }
+}

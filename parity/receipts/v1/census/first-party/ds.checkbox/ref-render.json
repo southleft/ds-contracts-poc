@@ -1,0 +1,57 @@
+{
+  "id": "ds.checkbox",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "value-unchecked__size-medium",
+      "status": "rendered",
+      "png": "ref-value-unchecked__size-medium.png",
+      "props": {
+        "value": "unchecked",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "value-unchecked__size-small",
+      "status": "rendered",
+      "png": "ref-value-unchecked__size-small.png",
+      "props": {
+        "value": "unchecked",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "value-checked__size-medium",
+      "status": "rendered",
+      "png": "ref-value-checked__size-medium.png",
+      "props": {
+        "value": "checked",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "value-indeterminate__size-medium",
+      "status": "rendered",
+      "png": "ref-value-indeterminate__size-medium.png",
+      "props": {
+        "value": "indeterminate",
+        "size": "md"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

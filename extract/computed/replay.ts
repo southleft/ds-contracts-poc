@@ -16,6 +16,7 @@
 import {
   decomposeTranslate,
   flatten,
+  foldPlaceholderInk,
   foldTextFillColor,
   normalizeValue,
   PSEUDO_KEY_RE,
@@ -92,7 +93,16 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
     const i = key.lastIndexOf('__');
     return { combo: key.slice(0, i), interaction: key.slice(i + 2) };
   };
-  out.push({ ...split(truth.base.key), root: truth.base.root });
+  // DETERMINISM (RC7). The base capture was pushed BY REFERENCE, so the
+  // read-boundary folds below (decomposeTranslate / foldTextFillColor /
+  // foldPlaceholderInk) mutated the caller's truth file in place — and the
+  // NEXT reconstruction then started from a base whose derived keys were
+  // already present, in a DIFFERENT position, so the delta captures'
+  // `structuredClone(truth.base.root)` produced a different key ORDER.
+  // `assertReplaySufficient` compares two runs with JSON.stringify and
+  // correctly called that non-deterministic; the aliasing was the cause.
+  // A reconstruction must be a pure function of the file — it is now.
+  out.push({ ...split(truth.base.key), root: structuredClone(truth.base.root) });
   const pathByPart = new Map(truth.anatomy.map((a) => [a.part, a.path] as const));
   const entryByPart = new Map(truth.anatomy.map((a) => [a.part, a] as const));
   const baseByPath = new Map(flatten(truth.base.root).map((e) => [e.path, e.node] as const));
@@ -188,6 +198,13 @@ export function reconstructCaptures(truth: CapturedTruthFile): Capture[] {
       // idempotent — a capture already folded recomputes byte-identically.
       foldTextFillColor(node.style);
       for (const st of Object.values(node.pseudo)) if (st) { decomposeTranslate(st as StyleMap); foldTextFillColor(st as StyleMap); }
+      // RC7 — the placeholder-ink fold rides this boundary for exactly the
+      // reason the two above do: `::placeholder{color}` has been in every
+      // committed capture since R7 and there was no channel to carry it to,
+      // so an offline re-fuse of committed truth is the ONLY way the four
+      // foreign input contracts gain the ink without a recapture wave. Pure
+      // and idempotent (it reads the pseudo plane and writes one key).
+      foldPlaceholderInk(node.style, node.pseudo as Record<string, StyleMap | undefined>);
       for (const c of node.nodes) if (c.t === 'el') walk(c.el);
     };
     walk(cap.root);

@@ -77,6 +77,11 @@
     "root": {
       "declared": {
         "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "clip",
         "overflow-y": "clip"
       },
@@ -88,10 +93,9 @@
         "border-bottom-right-radius": "{imported.shared.size-12}",
         "border-top-left-radius": "{imported.shared.size-12}",
         "border-top-right-radius": "{imported.shared.size-12}",
+        "color": "{color-on-light}",
         "font-weight": "{imported.card.root.font-weight}",
-        "line-height": "{imported.card.root.line-height}",
-        "width": "{imported.card.root.width}",
-        "color": "{color-on-light}"
+        "line-height": "{imported.card.root.line-height}"
       },
       "tokensByProp": [
         {

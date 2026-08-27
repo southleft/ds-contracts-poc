@@ -3,6 +3,7 @@
   "component": "IconClose",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -23,6 +24,7 @@
     "component": "IconClose",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 8,
     "interactions": 4,
@@ -51,9 +53,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 12,
-      "mintedLeavesUnfolded": 12,
-      "baseBindings": 5,
+      "mintedLeaves": 4,
+      "mintedLeavesUnfolded": 4,
+      "baseBindings": 4,
       "stateBindings": 0,
       "codeOnlyChannels": 1,
       "overflowBindings": 0,
@@ -127,7 +129,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 303,
+      "leavesAdded": 316,
       "divergent": []
     },
     "rows": [

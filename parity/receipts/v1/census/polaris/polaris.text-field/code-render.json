@@ -26,7 +26,7 @@
       {
         "name": "placeholder",
         "type": "text",
-        "default": "Example"
+        "default": null
       },
       {
         "name": "value",
@@ -229,6 +229,7 @@
     ],
     "contentSlots": [],
     "tokenRefs": [
+      "imported.shared.color-303030",
       "imported.shared.color-616161",
       "imported.shared.color-b5b5b5",
       "imported.shared.num-0",
@@ -250,14 +251,12 @@
       "imported.text-field.clearbutton-2.background-color",
       "imported.text-field.clearbutton-2.bottom.medium",
       "imported.text-field.clearbutton-2.bottom.slim",
-      "imported.text-field.clearbutton-2.color",
       "imported.text-field.clearbutton-2.top.medium",
       "imported.text-field.clearbutton-2.top.slim",
       "imported.text-field.connected-item.height.medium",
       "imported.text-field.connected-item.height.slim",
       "imported.text-field.connected.height.medium",
       "imported.text-field.connected.height.slim",
-      "imported.text-field.connected.width.off.off",
       "imported.text-field.input.height.medium",
       "imported.text-field.input.height.slim",
       "imported.text-field.label-text.width",
@@ -272,6 +271,7 @@
       "name",
       "p.border-radius-200",
       "p.border-width-0",
+      "p.border-width-0165",
       "p.color-input-bg-surface",
       "p.color-input-border",
       "p.color-text",
@@ -308,7 +308,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -328,7 +328,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-none__align-left__variant-inherit__size-slim.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 52
       }
     },
@@ -348,7 +348,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-none__align-left__variant-borderless__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -368,7 +368,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-none__align-center__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -388,7 +388,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-none__align-right__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -408,7 +408,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-text__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -428,7 +428,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-decimal__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -448,7 +448,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-numeric__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -468,7 +468,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-tel__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -488,7 +488,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-search__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -508,7 +508,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-email__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -528,7 +528,7 @@
       "status": "rendered",
       "png": "code-type-text__input-mode-url__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -548,7 +548,7 @@
       "status": "rendered",
       "png": "code-type-email__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -568,7 +568,7 @@
       "status": "rendered",
       "png": "code-type-number__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -588,7 +588,7 @@
       "status": "rendered",
       "png": "code-type-integer__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -608,7 +608,7 @@
       "status": "rendered",
       "png": "code-type-password__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -628,7 +628,7 @@
       "status": "rendered",
       "png": "code-type-search__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -648,7 +648,7 @@
       "status": "rendered",
       "png": "code-type-tel__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -668,7 +668,7 @@
       "status": "rendered",
       "png": "code-type-url__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -688,7 +688,7 @@
       "status": "rendered",
       "png": "code-type-date__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -708,7 +708,7 @@
       "status": "rendered",
       "png": "code-type-datetime-local__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -728,7 +728,7 @@
       "status": "rendered",
       "png": "code-type-month__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -748,7 +748,7 @@
       "status": "rendered",
       "png": "code-type-time__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     },
@@ -768,7 +768,7 @@
       "status": "rendered",
       "png": "code-type-week__input-mode-none__align-left__variant-inherit__size-medium.png",
       "contentBox": {
-        "width": 211,
+        "width": 190,
         "height": 60
       }
     }

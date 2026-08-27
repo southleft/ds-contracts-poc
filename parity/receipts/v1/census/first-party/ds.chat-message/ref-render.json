@@ -1,0 +1,44 @@
+{
+  "id": "ds.chat-message",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "sender-assistant",
+      "status": "rendered",
+      "png": "ref-sender-assistant.png",
+      "props": {
+        "sender": "assistant"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "sender-user",
+      "status": "rendered",
+      "png": "ref-sender-user.png",
+      "props": {
+        "sender": "user"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "sender-system",
+      "status": "rendered",
+      "png": "ref-sender-system.png",
+      "props": {
+        "sender": "system"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

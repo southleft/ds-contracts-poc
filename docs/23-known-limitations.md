@@ -1343,6 +1343,167 @@ would render with the same resolved literals the exam measured. Not scheduled
 until the code→canvas half of the exam (the library TJ picks) is run, so both
 halves can be captured on one tree.
 
+---
+
+## B.37 The corpus re-derivation drops CURATED contract facts, and nothing re-derives them
+
+**The shape.** A contract in `examples/<lib>/contracts/` is not purely
+derived. Most of it comes from fusion, but some facts are **curated on top**:
+geometry pins for a variant the capture cannot resolve, a `display` restore
+that makes a conditional part visible, a `declared.transform` on an icon, a
+`tokens.width` binding, and the hand-written `description` that says why. The
+engine cannot produce these — and a regeneration of the contract silently
+replaces the curated file with the fusion output, taking them with it.
+
+**Proven, not inferred.** `extract/computed/out/astryx/slider/enriched.contract.json`
+— the FUSION OUTPUT — is byte-identical on `origin/main` and on this branch,
+and NEITHER carries the `valueDisplay=tooltip -> display:flex` restore for the
+Slider's tooltip part. `origin/main`'s committed CONTRACT does carry it. So the
+rule is curation layered on fusion, the engine never emitted it, and the
+re-derivation that produced this corpus (`cb13a56f`) dropped it.
+
+**Measured, on this branch AFTER the four carry-backs below, against
+`origin/main`.** 15 contracts still DROP a fact main carries:
+
+| kind | facts still lost |
+|---|---:|
+| `tokens` | 33 |
+| parts (renamed by the re-derivation — not counted as loss) | 20 |
+| `literalsByProp` | 9 |
+| `declared` | 5 |
+| `literals` | 4 |
+| `stylesWhen` | 0 |
+
+Across astryx (7 contracts), polaris (4), fluent (2), carbon (1), shadcn (1).
+Every `stylesWhen` loss is closed; the geometry and token bindings are not.
+
+**Four facts were carried back, and only four** — the ones a gate names:
+astryx Slider's tooltip `display:flex` restore and label-3's vertical pin
+(`FC-ASTRYX-SLIDER-TOOLTIP`), polaris Spinner's `rotate(90deg)`
+(`FC-SVG-ROTATION`), and polaris TextField's `connected.width` binding
+(`FC-WIDTH-TOKEN`). The rest are still lost.
+
+**Why the rest were NOT carried back — measured both ways.** A first attempt
+restored all 47 and made the tree WORSE, and the suite said so by name:
+
+- `promote-generalization` went red. `carbon/textinput.contract.json` is
+  PROMOTE-REPRODUCIBLE — the shared promote module is its source of truth, so
+  any curated addition stops it reproducing its own committed bytes. Curation
+  is not permitted on that contract at all.
+- the child-wider ratchet went red: astryx overflows 0 -> 3, all three the
+  Slider's VERTICAL variants, `slider` painting 240px inside a 56px parent.
+  main's `literalsByProp` numbers are pinned to MAIN's anatomy; on this
+  corpus's re-derived anatomy the same numbers are a real defect.
+
+That is the general rule and the reason this stays open: **a curated fact is
+only true against the anatomy it was measured on.** Restoring them wholesale
+is not a merge operation.
+
+**What it would take.** A curation round on the re-derived corpus: for each of
+the 16 contracts, decide per fact whether it still applies to the new anatomy,
+re-measure the geometry ones against the current capture, and re-write the
+descriptions. It is reviewed work, not a script. Until then the corpus carries
+fusion truth and less curation than main's does.
+
+---
+
+## B.38 Three eval reds this branch measured and did not re-record green
+
+The suite is 230 cases. These three are red on the recorded run, and each one
+is a gate working correctly on a fact nobody has closed.
+
+**`astryx-reanchor-minted` — an owner-acked refusal whose premise is now false.**
+`examples/astryx/tokens/reanchor-decisions.json` carries an acked no-match row
+`RA-nomatch-0536591a` for `imported.badge.root.background-color.neutral`. The
+ack's whole argument is an ALPHA-SERIALISATION near-miss: the source declares
+`colorVars['--color-neutral']` = `rgba(5, 54, 89, 0.1)` and the capture
+serialised `#0536591A`, so the value join refuses near-miss equality BY DESIGN
+and no honest candidate row can be written. **That argument no longer
+describes the leaf.** The value is now `#e5e5e5` — an opaque light grey, not a
+translucent dark blue, and not an alpha near-miss of one. The guard refuses
+rather than reusing the stale ack, which is correct. Re-acking it here would
+launder a falsified premise, and the ack note already reads "flagged for owner
+review".
+
+Worth recording, because it inverts the obvious reading: the CAPTURE says
+`rgba(229, 229, 229, 1)` on `origin/main` AND here — identical bytes. So
+main's minted `#0536591a` is the stale value and this corpus's `#e5e5e5` is
+faithful to what the browser rendered. The open question is a real one about
+the library: astryx Badge's neutral background does not render as the token
+its own source names.
+
+**`minted-leaves-bind-to-something` — the decrease-only ratchet, refused.**
+Two libraries grew variables that nothing binds:
+
+| library | baseline | measured | leaves shipped |
+|---|---:|---:|---:|
+| astryx | 8 | **21** | 565 |
+| carbon | 92 | **94** | 879 |
+
+astryx's 21 are badge 10, text-input 3, card 2, checkbox-input 2, switch 2,
+button 1, shared 1. carbon's 94 are icon-button 72, text-input 5, checkbox 4,
+tabs 4, toggle 4, accordion 2, inline-notification 2, shared 1. The ratchet may
+only DECREASE, and re-recording an increase is exactly the move this project
+has spent the session refusing — the burn-down already declined to re-record
+carbon 92 -> 94 and left it red. Nothing here changes that.
+
+**`console-loop-canvas-drift-probe` — the LIVE canvas is stale, not the code.**
+The probe reads `parity/receipts/console-loop/astryx/canvas-drift/LIVE-SNAPSHOT.json`
+— a snapshot of the real Figma file, **minted 2026-08-09** — against each
+stem's committed emit script. The scripts moved (this corpus re-derived them,
+and this branch re-emitted them); the live canvas has not been re-applied
+since. Measured: **3 in-sync, 10 DRIFT** of 13 stems, and the drift classes are
+what a stale canvas looks like — BINDING-DRIFT on banner/button/progress-bar/
+slider/text-input/token (the spec binds a variable, the live cell holds a
+literal), VALUE-DRIFT on checkbox-input and switch, FC-FONT-STYLE-UNRESOLVED on
+card and toast.
+
+Closing it needs someone to run the emit scripts against the live Figma file
+and re-mint the snapshot — a live-file operation with a PAT, not something a
+branch can do. The probe is doing its job: it is the only instrument that asks
+whether the live cell is the product of this lane's own committed script.
+
+All three are now carried in `parity/receipts/v1/eval-reds.json` with a cause
+and a **closing condition stated as a checkable event** — the ledger #68 added,
+which lets a red suite ship only when every red is named. An unnamed red still
+refuses, and a row whose eval has gone green refuses as stale.
+
+---
+
+## B.39 antd's STRUCTURAL re-derivation has never been verified, on any machine
+
+`corpus:reproducible:check` has two halves. The **promote** half re-derives each
+library's committed artifacts from its committed capture record; the
+**structural** half re-derives the capture record itself from the library's seed
++ config + sandbox. For antd the second half has never run:
+
+```
+· antd: capture PENDING — the measuring run captured nothing for antd —
+  examples/antd/.antd-sandbox is git-ignored and this machine does not carry it
+  (examples/antd/PROVENANCE.md has the recreate block).
+  NOT measured, never counted as reproducing.
+```
+
+**It is PENDING in CI and PENDING locally, for the same reason** — the sandbox
+is git-ignored, so neither the runner nor a developer checkout has it. This is
+not a red and not a pass: the gate refuses to count it either way, which is the
+right behaviour and also why it is easy to stop seeing. Every other captured
+library reports a real fraction (`altitude 5/8`, `carbon 8/10`, `mui 28/31`,
+`fluent|polaris|shadcn|tailwind` all n/n).
+
+**What is and is not known.** antd's promote half IS measured and green — its 37
+committed artifacts re-derive from the committed capture record. What has never
+been checked is whether that *capture record* can be regenerated from the
+library at all. So antd's contracts are reproducible from a record whose own
+provenance is unverified.
+
+**What it would take.** Recreate the sandbox from
+`examples/antd/PROVENANCE.md`'s block on a machine that then runs
+`corpus:reproducible:check`, and either record the fraction or name what stops
+it. Making it a CI-visible number means either committing the sandbox (large,
+and the reason it is ignored) or a lane step that installs the pinned package
+before the check — neither has been scheduled.
+
 ## C.1 Coverage — how much of a library is actually captured
 
 Seven distinct libraries across eight rounds, five styling architectures, one

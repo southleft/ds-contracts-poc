@@ -46,6 +46,7 @@
     ],
     "contentSlots": [],
     "tokenRefs": [
+      "imported.input.input.color",
       "imported.input.input.flex-grow",
       "imported.input.input.font-size.large",
       "imported.input.input.font-size.medium",
@@ -59,6 +60,7 @@
       "imported.input.input.padding-right.large",
       "imported.input.input.padding-right.medium",
       "imported.input.input.padding-right.small",
+      "imported.input.input.placeholder-color",
       "imported.input.input.width.large",
       "imported.input.input.width.medium",
       "imported.input.input.width.small",
@@ -141,6 +143,7 @@
       "imported.input.root.box-shadow.filled-lighter-shadow",
       "imported.input.root.box-shadow.outline",
       "imported.input.root.box-shadow.underline",
+      "imported.input.root.color",
       "imported.input.root.column-gap.large",
       "imported.input.root.column-gap.medium",
       "imported.input.root.column-gap.small",

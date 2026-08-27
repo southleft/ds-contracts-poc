@@ -1,0 +1,33 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "size-sm: canvas-size-sm.png is byte-identical (same md5 4055b86f) to canvas-size-md.png \u2014 the size axis has no effect on canvas, while ref sm has a smaller box (36px vs 44px) and smaller label; the sm variant is just the md rendering",
+  "both sizes: canvas label 'Accept terms' ink is near-black #171717 vs ref gray #737373"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "other"
+ ],
+ "notes": "box + label both sizes match",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14128",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.checkbox-input.dump.json",
+  "matched": 21,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\"]} vs {\"enum\":[\"md\",\"sm\"]}",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Sm\",\"md\":\"Md\"} vs {\"md\":\"Md\",\"sm\":\"Sm\"}"
+  ],
+  "lost": [
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root/control element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/label element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/label font-family (effective)` \u2014 {font-family-body} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

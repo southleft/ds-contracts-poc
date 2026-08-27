@@ -1,0 +1,198 @@
+{
+  "id": "mui.button",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-text__color-primary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-text__color-primary__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-primary__size-small",
+      "status": "rendered",
+      "png": "ref-variant-text__color-primary__size-small.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "primary",
+        "size": "small"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-primary__size-large",
+      "status": "rendered",
+      "png": "ref-variant-text__color-primary__size-large.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "primary",
+        "size": "large"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-secondary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-text__color-secondary__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "secondary",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-error__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-text__color-error__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "error",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-success__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-text__color-success__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "success",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-warning__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-text__color-warning__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "warning",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-info__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-text__color-info__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "info",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-inherit__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-text__color-inherit__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "inherit",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-contained__color-primary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-contained__color-primary__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "contained",
+        "color": "primary",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-outlined__color-primary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-outlined__color-primary__size-medium.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "outlined",
+        "color": "primary",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-disabled",
+      "status": "rendered",
+      "png": "ref-variant-text__color-primary__size-medium__state-disabled.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "primary",
+        "size": "medium",
+        "disabled": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-active",
+      "status": "rendered",
+      "png": "ref-variant-text__color-primary__size-medium__state-active.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-variant-text__color-primary__size-medium__state-focus-visible.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-text__color-primary__size-medium__state-hover",
+      "status": "rendered",
+      "png": "ref-variant-text__color-primary__size-medium__state-hover.png",
+      "props": {
+        "disableRipple": true,
+        "variant": "text",
+        "color": "primary",
+        "size": "medium"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 15,
+  "unmappable": 0
+}

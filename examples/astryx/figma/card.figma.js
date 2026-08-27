@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "astryx.card",
     "version": "0.3.0",
     "anchorKey": null,
-    "description": "Card — generated from contract astryx.card v0.3.0 † (1 code-only facts — see plugin report)",
+    "description": "Card — generated from contract astryx.card v0.3.0 † (6 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -45,10 +45,6 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/default",
             "paddingTop": "imported/card/root/padding-top/default"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/default",
           "stroke": "imported/card/root/border-top-color/default",
           "lits": {
@@ -58,6 +54,7 @@ const COMPONENTS = [
             "paddingRight": 15
           },
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -72,6 +69,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -105,13 +103,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/transparent",
             "paddingTop": "imported/card/root/padding-top/transparent"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/transparent",
           "stroke": "imported/card/root/border-top-color/transparent",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -126,6 +121,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -159,13 +155,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/muted",
             "paddingTop": "imported/card/root/padding-top/muted"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/muted",
           "stroke": "imported/card/root/border-top-color/muted",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -180,6 +173,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -213,13 +207,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/blue",
             "paddingTop": "imported/card/root/padding-top/blue"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/blue",
           "stroke": "imported/card/root/border-top-color/blue",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -234,6 +225,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -267,13 +259,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/cyan",
             "paddingTop": "imported/card/root/padding-top/cyan"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/cyan",
           "stroke": "imported/card/root/border-top-color/cyan",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -288,6 +277,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -321,13 +311,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/gray",
             "paddingTop": "imported/card/root/padding-top/gray"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/gray",
           "stroke": "imported/card/root/border-top-color/gray",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -342,6 +329,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -375,13 +363,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/green",
             "paddingTop": "imported/card/root/padding-top/green"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/green",
           "stroke": "imported/card/root/border-top-color/green",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -396,6 +381,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -429,13 +415,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/orange",
             "paddingTop": "imported/card/root/padding-top/orange"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/orange",
           "stroke": "imported/card/root/border-top-color/orange",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -450,6 +433,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -483,13 +467,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/pink",
             "paddingTop": "imported/card/root/padding-top/pink"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/pink",
           "stroke": "imported/card/root/border-top-color/pink",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -504,6 +485,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -537,13 +519,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/purple",
             "paddingTop": "imported/card/root/padding-top/purple"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/purple",
           "stroke": "imported/card/root/border-top-color/purple",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -558,6 +537,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -591,13 +571,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/red",
             "paddingTop": "imported/card/root/padding-top/red"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/red",
           "stroke": "imported/card/root/border-top-color/red",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -612,6 +589,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -645,13 +623,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/teal",
             "paddingTop": "imported/card/root/padding-top/teal"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/teal",
           "stroke": "imported/card/root/border-top-color/teal",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -666,6 +641,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -699,13 +675,10 @@ const COMPONENTS = [
             "paddingRight": "imported/card/root/padding-right/yellow",
             "paddingTop": "imported/card/root/padding-top/yellow"
           },
-          "fixedWidth": {
-            "px": 114.203,
-            "varName": "imported/card/root/width"
-          },
           "fill": "imported/card/root/background-color/yellow",
           "stroke": "imported/card/root/border-top-color/yellow",
           "clipsContent": true,
+          "blockRoot": true,
           "children": [
             {
               "type": "text",
@@ -720,6 +693,7 @@ const COMPONENTS = [
                 "value": 24,
                 "unit": "PIXELS"
               },
+              "fontFamily": "Figtree",
               "contentProp": "Body"
             }
           ]
@@ -737,9 +711,64 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "declared",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 13,
+          "of": 13
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-left-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 13,
+          "of": 13
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-right-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 13,
+          "of": 13
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
+        "channel": "border-top-style",
+        "value": "solid",
+        "reason": "This part's borders use different styles per side in code; Figma strokes share one style.",
+        "variants": {
+          "count": 13,
+          "of": 13
+        }
+      },
+      {
+        "part": "root",
+        "kind": "declared",
         "channel": "display",
         "value": "block",
         "reason": "CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack).",
+        "variants": {
+          "count": 13,
+          "of": 13
+        }
+      },
+      {
+        "part": "root",
+        "kind": "preview",
+        "channel": "display",
+        "value": "block",
+        "reason": "a block root has no intrinsic width — the canvas draws a preview width, the code surface fills its container",
         "variants": {
           "count": 13,
           "of": 13
@@ -1352,6 +1381,55 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.

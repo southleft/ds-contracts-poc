@@ -772,6 +772,7 @@
   letter-spacing: var(--p-text-body-sm-font-letter-spacing);
   display: block;
   cursor: pointer;
+  font-family: Inter, -apple-system, "system-ui", "San Francisco", "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
   text-align: center;
   user-select: none;
 }

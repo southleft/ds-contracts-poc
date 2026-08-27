@@ -262,25 +262,6 @@
           }
         },
         {
-          "prop": "tone",
-          "map": {
-            "critical": {
-              "background-color": "{imported.button.root.background-color.{variant}.critical}",
-              "background-image": "{imported.button.root.background-image.{variant}.critical}",
-              "box-shadow": "{imported.button.root.box-shadow.{variant}.critical}",
-              "color": "{imported.button.root.color.{variant}.critical}",
-              "outline-color": "{imported.button.root.outline-color.{variant}.critical}"
-            },
-            "success": {
-              "background-color": "{imported.button.root.background-color.{variant}.success}",
-              "background-image": "{imported.button.root.background-image.{variant}.success}",
-              "box-shadow": "{imported.button.root.box-shadow.{variant}.success}",
-              "color": "{imported.button.root.color.{variant}.success}",
-              "outline-color": "{imported.button.root.outline-color.{variant}.success}"
-            }
-          }
-        },
-        {
           "prop": "variant",
           "map": {
             "monochromePlain": {
@@ -302,6 +283,25 @@
             "tertiary": {
               "background-image": "{imported.button.root.background-image.tertiary.none}",
               "outline-color": "{imported.button.root.outline-color.tertiary.none}"
+            }
+          }
+        },
+        {
+          "prop": "tone",
+          "map": {
+            "critical": {
+              "background-color": "{imported.button.root.background-color.{variant}.critical}",
+              "background-image": "{imported.button.root.background-image.{variant}.critical}",
+              "box-shadow": "{imported.button.root.box-shadow.{variant}.critical}",
+              "color": "{imported.button.root.color.{variant}.critical}",
+              "outline-color": "{imported.button.root.outline-color.{variant}.critical}"
+            },
+            "success": {
+              "background-color": "{imported.button.root.background-color.{variant}.success}",
+              "background-image": "{imported.button.root.background-image.{variant}.success}",
+              "box-shadow": "{imported.button.root.box-shadow.{variant}.success}",
+              "color": "{imported.button.root.color.{variant}.success}",
+              "outline-color": "{imported.button.root.outline-color.{variant}.success}"
             }
           }
         }
@@ -377,13 +377,95 @@
               "tokens": {
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}"
-              }
+              },
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "color",
+                  "value": "rgba(0, 46, 106, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "active",
+                  "channel": "fill",
+                  "value": "rgba(0, 46, 106, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "color",
+                  "value": "rgba(181, 181, 181, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "pointer-events",
+                  "value": "none",
+                  "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "color",
+                  "value": "rgba(0, 66, 153, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "hover",
+                  "channel": "color",
+                  "value": "rgba(0, 66, 153, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                }
+              ]
             }
           },
           "tokens": {
             "margin-bottom": "{imported.button.icon.margin-bottom}",
             "margin-top": "{imported.button.icon.margin-top}"
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "color",
+              "value": "rgba(0, 46, 106, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "active",
+              "channel": "fill",
+              "value": "rgba(0, 46, 106, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "active",
+              "channel": "transform",
+              "value": "matrix(1, 0, 0, 1, 0, 1)",
+              "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "rgba(181, 181, 181, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "disabled",
+              "channel": "pointer-events",
+              "value": "none",
+              "reason": "declared-channel state delta on 60/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "color",
+              "value": "rgba(0, 66, 153, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "rgba(0, 66, 153, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            }
+          ]
         },
         "label": {
           "element": "span",
@@ -423,6 +505,7 @@
           "declared": {
             "display": "block",
             "cursor": "pointer",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif",
             "text-align": "center",
             "user-select": "none"
           },
@@ -430,7 +513,45 @@
             "disabled": {
               "pointer-events": "none"
             }
-          }
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "color",
+              "value": "{imported.button.label.color-state-active.{variant}.{tone}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "fill",
+              "value": "{imported.button.label.fill-state-active.{variant}.{tone}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "transform",
+              "value": "matrix(1, 0, 0, 1, 0, 1)",
+              "reason": "declared-channel state delta on 48/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+            },
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "{imported.button.label.color-state-disabled.{variant}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "color",
+              "value": "{imported.button.label.color-state-focus-visible.{variant}.{tone}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "{imported.button.label.color-state-hover.{variant}.{tone}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
         }
       },
       "declared": {
@@ -453,7 +574,153 @@
         "focus-visible": {
           "outline-style": "solid"
         }
-      }
+      },
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-active.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "box-shadow",
+          "value": "{imported.button.root.box-shadow-state-active.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "color",
+          "value": "{imported.button.root.color-state-active.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "fill",
+          "value": "{imported.button.root.fill-state-active.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "outline-color",
+          "value": "{imported.button.root.outline-color-state-active.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "active",
+          "channel": "text-decoration-line",
+          "value": "underline",
+          "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "active",
+          "channel": "text-decoration",
+          "value": "underline",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        },
+        {
+          "state": "disabled",
+          "channel": "background-attachment",
+          "value": "scroll",
+          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "disabled",
+          "channel": "background-blend-mode",
+          "value": "normal",
+          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "disabled",
+          "channel": "background-clip",
+          "value": "border-box",
+          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "disabled",
+          "channel": "background-origin",
+          "value": "padding-box",
+          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "disabled",
+          "channel": "background-position",
+          "value": "0% 0%",
+          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "disabled",
+          "channel": "background-repeat",
+          "value": "repeat",
+          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "disabled",
+          "channel": "background-size",
+          "value": "auto",
+          "reason": "declared-channel state delta on 8/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-focus-visible.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "color",
+          "value": "{imported.button.root.color-state-focus-visible.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "outline-offset",
+          "value": "{imported.button.root.outline-offset-state-focus-visible.{variant}.{size}}",
+          "reason": "state pair ref — root states carry ≤1 placeholder (S3 residue)"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "text-decoration-line",
+          "value": "underline",
+          "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "focus-visible",
+          "channel": "text-decoration",
+          "value": "underline",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        },
+        {
+          "state": "hover",
+          "channel": "background-color",
+          "value": "{imported.button.root.background-color-state-hover.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "color",
+          "value": "{imported.button.root.color-state-hover.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "outline-color",
+          "value": "{imported.button.root.outline-color-state-hover.{variant}.{tone}}",
+          "reason": "state×tone set-planes beyond the carried unset plane (S3 residue — leaves exist in the minted tree)"
+        },
+        {
+          "state": "hover",
+          "channel": "text-decoration-line",
+          "value": "underline",
+          "reason": "declared-channel state delta on 24/120 combos — partial coverage cannot carry as a state selector (v15); named residue"
+        },
+        {
+          "state": "hover",
+          "channel": "text-decoration",
+          "value": "underline",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        }
+      ]
     }
   },
   "bindings": {

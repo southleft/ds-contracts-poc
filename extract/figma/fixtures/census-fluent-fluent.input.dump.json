@@ -1,0 +1,6029 @@
+{
+ "_provenance": {
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "extractedAt": "2026-08-24",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design\u2192contract proposal.",
+  "dumpVersion": "1.32",
+  "sets": [
+   "Input (fluent.input)"
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (fluent.input):Appearance=Outline, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "stroke-weights-nonuniform",
+   "nodePath": "Input (fluent.input):Appearance=Underline, Size=Medium, State=Default",
+   "message": "per-side stroke weights [0, 0, 1, 0] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) \u2014 dump v1 carries a uniform border-width (strokeWeight) only"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (fluent.input):Appearance=Underline, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "stroke-weights-nonuniform",
+   "nodePath": "Input (fluent.input):Appearance=Underline, Size=Small, State=Default",
+   "message": "per-side stroke weights [0, 0, 1, 0] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) \u2014 dump v1 carries a uniform border-width (strokeWeight) only"
+  },
+  {
+   "code": "stroke-weights-nonuniform",
+   "nodePath": "Input (fluent.input):Appearance=Underline, Size=Large, State=Default",
+   "message": "per-side stroke weights [0, 0, 1, 0] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) \u2014 dump v1 carries a uniform border-width (strokeWeight) only"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (fluent.input):Appearance=Filled Darker, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (fluent.input):Appearance=Filled Lighter, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (fluent.input):Appearance=Filled Darker Shadow, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Input (fluent.input):Appearance=Filled Lighter Shadow, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "stroke-weights-nonuniform",
+   "nodePath": "Input (fluent.input):Appearance=Underline, Size=Medium, State=Disabled",
+   "message": "per-side stroke weights [0, 0, 1, 0] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) \u2014 dump v1 carries a uniform border-width (strokeWeight) only"
+  },
+  {
+   "code": "stroke-weights-nonuniform",
+   "nodePath": "Input (fluent.input):Appearance=Underline, Size=Medium, State=Hover",
+   "message": "per-side stroke weights [0, 0, 1, 0] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) \u2014 dump v1 carries a uniform border-width (strokeWeight) only"
+  }
+ ],
+ "_variables": {
+  "imported/input/root/column-gap/medium": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/input/root/width/outline/medium": {
+   "type": "FLOAT",
+   "value": 180,
+   "modes": {
+    "Light": 180,
+    "Dark": 180
+   }
+  },
+  "imported/input/root/height/medium": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "imported/input/root/border-top-left-radius/outline": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-right-radius/outline": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-left-radius/outline": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-right-radius/outline": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-width/outline": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-bottom-width": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-left-width/outline": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-right-width/outline": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/background-color/outline": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#292929"
+   }
+  },
+  "imported/input/root/border-top-color/outline": {
+   "type": "COLOR",
+   "value": "#d1d1d1",
+   "modes": {
+    "Light": "#d1d1d1",
+    "Dark": "#d1d1d1"
+   }
+  },
+  "imported/input/input/padding-left/medium": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/input/input/padding-right/medium": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/input/input/width/medium": {
+   "type": "FLOAT",
+   "value": 178,
+   "modes": {
+    "Light": 178,
+    "Dark": 178
+   }
+  },
+  "imported/input/input/height/outline/medium": {
+   "type": "FLOAT",
+   "value": 30,
+   "modes": {
+    "Light": 30,
+    "Dark": 30
+   }
+  },
+  "imported/shared/size-0": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/input/font-size/medium": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/input/root/column-gap/small": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/input/root/width/outline/small": {
+   "type": "FLOAT",
+   "value": 150,
+   "modes": {
+    "Light": 150,
+    "Dark": 150
+   }
+  },
+  "imported/input/root/height/small": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/input/input/padding-left/small": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/input/input/padding-right/small": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/input/input/width/small": {
+   "type": "FLOAT",
+   "value": 148,
+   "modes": {
+    "Light": 148,
+    "Dark": 148
+   }
+  },
+  "imported/input/input/height/outline/small": {
+   "type": "FLOAT",
+   "value": 22,
+   "modes": {
+    "Light": 22,
+    "Dark": 22
+   }
+  },
+  "imported/input/input/font-size/small": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/input/root/column-gap/large": {
+   "type": "FLOAT",
+   "value": 6,
+   "modes": {
+    "Light": 6,
+    "Dark": 6
+   }
+  },
+  "imported/input/root/width/outline/large": {
+   "type": "FLOAT",
+   "value": 213,
+   "modes": {
+    "Light": 213,
+    "Dark": 213
+   }
+  },
+  "imported/input/root/height/large": {
+   "type": "FLOAT",
+   "value": 40,
+   "modes": {
+    "Light": 40,
+    "Dark": 40
+   }
+  },
+  "imported/input/input/padding-left/large": {
+   "type": "FLOAT",
+   "value": 18,
+   "modes": {
+    "Light": 18,
+    "Dark": 18
+   }
+  },
+  "imported/input/input/padding-right/large": {
+   "type": "FLOAT",
+   "value": 18,
+   "modes": {
+    "Light": 18,
+    "Dark": 18
+   }
+  },
+  "imported/input/input/width/large": {
+   "type": "FLOAT",
+   "value": 211,
+   "modes": {
+    "Light": 211,
+    "Dark": 211
+   }
+  },
+  "imported/input/input/height/outline/large": {
+   "type": "FLOAT",
+   "value": 38,
+   "modes": {
+    "Light": 38,
+    "Dark": 38
+   }
+  },
+  "imported/input/input/font-size/large": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/input/root/width/underline/medium": {
+   "type": "FLOAT",
+   "value": 178,
+   "modes": {
+    "Light": 178,
+    "Dark": 178
+   }
+  },
+  "imported/input/root/border-top-left-radius/underline": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/root/border-top-right-radius/underline": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/root/border-bottom-left-radius/underline": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/root/border-bottom-right-radius/underline": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/root/border-top-width/underline": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/root/border-left-width/underline": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/root/border-right-width/underline": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/input/root/background-color/underline": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/input/root/border-bottom-color/underline": {
+   "type": "COLOR",
+   "value": "#616161",
+   "modes": {
+    "Light": "#616161",
+    "Dark": "#adadad"
+   }
+  },
+  "imported/input/input/height/underline/medium": {
+   "type": "FLOAT",
+   "value": 31,
+   "modes": {
+    "Light": 31,
+    "Dark": 31
+   }
+  },
+  "imported/input/root/width/underline/small": {
+   "type": "FLOAT",
+   "value": 148,
+   "modes": {
+    "Light": 148,
+    "Dark": 148
+   }
+  },
+  "imported/input/input/height/underline/small": {
+   "type": "FLOAT",
+   "value": 23,
+   "modes": {
+    "Light": 23,
+    "Dark": 23
+   }
+  },
+  "imported/input/root/width/underline/large": {
+   "type": "FLOAT",
+   "value": 211,
+   "modes": {
+    "Light": 211,
+    "Dark": 211
+   }
+  },
+  "imported/input/input/height/underline/large": {
+   "type": "FLOAT",
+   "value": 39,
+   "modes": {
+    "Light": 39,
+    "Dark": 39
+   }
+  },
+  "imported/input/root/width/filled-darker/medium": {
+   "type": "FLOAT",
+   "value": 180,
+   "modes": {
+    "Light": 180,
+    "Dark": 180
+   }
+  },
+  "imported/input/root/border-top-left-radius/filled-darker": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-right-radius/filled-darker": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-left-radius/filled-darker": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-right-radius/filled-darker": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-width/filled-darker": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-left-width/filled-darker": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-right-width/filled-darker": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/background-color/filled-darker": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#141414"
+   }
+  },
+  "imported/input/root/border-top-color/filled-darker": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/input/input/height/filled-darker/medium": {
+   "type": "FLOAT",
+   "value": 30,
+   "modes": {
+    "Light": 30,
+    "Dark": 30
+   }
+  },
+  "imported/input/root/width/filled-darker/small": {
+   "type": "FLOAT",
+   "value": 150,
+   "modes": {
+    "Light": 150,
+    "Dark": 150
+   }
+  },
+  "imported/input/input/height/filled-darker/small": {
+   "type": "FLOAT",
+   "value": 22,
+   "modes": {
+    "Light": 22,
+    "Dark": 22
+   }
+  },
+  "imported/input/root/width/filled-darker/large": {
+   "type": "FLOAT",
+   "value": 213,
+   "modes": {
+    "Light": 213,
+    "Dark": 213
+   }
+  },
+  "imported/input/input/height/filled-darker/large": {
+   "type": "FLOAT",
+   "value": 38,
+   "modes": {
+    "Light": 38,
+    "Dark": 38
+   }
+  },
+  "imported/input/root/width/filled-lighter/medium": {
+   "type": "FLOAT",
+   "value": 180,
+   "modes": {
+    "Light": 180,
+    "Dark": 180
+   }
+  },
+  "imported/input/root/border-top-left-radius/filled-lighter": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-right-radius/filled-lighter": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-left-radius/filled-lighter": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-right-radius/filled-lighter": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-width/filled-lighter": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-left-width/filled-lighter": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-right-width/filled-lighter": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/background-color/filled-lighter": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#292929"
+   }
+  },
+  "imported/input/root/border-top-color/filled-lighter": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/input/input/height/filled-lighter/medium": {
+   "type": "FLOAT",
+   "value": 30,
+   "modes": {
+    "Light": 30,
+    "Dark": 30
+   }
+  },
+  "imported/input/root/width/filled-lighter/small": {
+   "type": "FLOAT",
+   "value": 150,
+   "modes": {
+    "Light": 150,
+    "Dark": 150
+   }
+  },
+  "imported/input/input/height/filled-lighter/small": {
+   "type": "FLOAT",
+   "value": 22,
+   "modes": {
+    "Light": 22,
+    "Dark": 22
+   }
+  },
+  "imported/input/root/width/filled-lighter/large": {
+   "type": "FLOAT",
+   "value": 213,
+   "modes": {
+    "Light": 213,
+    "Dark": 213
+   }
+  },
+  "imported/input/input/height/filled-lighter/large": {
+   "type": "FLOAT",
+   "value": 38,
+   "modes": {
+    "Light": 38,
+    "Dark": 38
+   }
+  },
+  "imported/input/root/width/filled-darker-shadow/medium": {
+   "type": "FLOAT",
+   "value": 180,
+   "modes": {
+    "Light": 180,
+    "Dark": 180
+   }
+  },
+  "imported/input/root/border-top-left-radius/filled-darker-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-right-radius/filled-darker-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-left-radius/filled-darker-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-right-radius/filled-darker-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-width/filled-darker-shadow": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-left-width/filled-darker-shadow": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-right-width/filled-darker-shadow": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/background-color/filled-darker-shadow": {
+   "type": "COLOR",
+   "value": "#f5f5f5",
+   "modes": {
+    "Light": "#f5f5f5",
+    "Dark": "#141414"
+   }
+  },
+  "imported/input/root/border-top-color/filled-darker-shadow": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/input/input/height/filled-darker-shadow/medium": {
+   "type": "FLOAT",
+   "value": 30,
+   "modes": {
+    "Light": 30,
+    "Dark": 30
+   }
+  },
+  "imported/input/root/width/filled-darker-shadow/small": {
+   "type": "FLOAT",
+   "value": 150,
+   "modes": {
+    "Light": 150,
+    "Dark": 150
+   }
+  },
+  "imported/input/input/height/filled-darker-shadow/small": {
+   "type": "FLOAT",
+   "value": 22,
+   "modes": {
+    "Light": 22,
+    "Dark": 22
+   }
+  },
+  "imported/input/root/width/filled-darker-shadow/large": {
+   "type": "FLOAT",
+   "value": 213,
+   "modes": {
+    "Light": 213,
+    "Dark": 213
+   }
+  },
+  "imported/input/input/height/filled-darker-shadow/large": {
+   "type": "FLOAT",
+   "value": 38,
+   "modes": {
+    "Light": 38,
+    "Dark": 38
+   }
+  },
+  "imported/input/root/width/filled-lighter-shadow/medium": {
+   "type": "FLOAT",
+   "value": 180,
+   "modes": {
+    "Light": 180,
+    "Dark": 180
+   }
+  },
+  "imported/input/root/border-top-left-radius/filled-lighter-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-right-radius/filled-lighter-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-left-radius/filled-lighter-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-bottom-right-radius/filled-lighter-shadow": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/input/root/border-top-width/filled-lighter-shadow": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-left-width/filled-lighter-shadow": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/border-right-width/filled-lighter-shadow": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/input/root/background-color/filled-lighter-shadow": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#292929"
+   }
+  },
+  "imported/input/root/border-top-color/filled-lighter-shadow": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/input/input/height/filled-lighter-shadow/medium": {
+   "type": "FLOAT",
+   "value": 30,
+   "modes": {
+    "Light": 30,
+    "Dark": 30
+   }
+  },
+  "imported/input/root/width/filled-lighter-shadow/small": {
+   "type": "FLOAT",
+   "value": 150,
+   "modes": {
+    "Light": 150,
+    "Dark": 150
+   }
+  },
+  "imported/input/input/height/filled-lighter-shadow/small": {
+   "type": "FLOAT",
+   "value": 22,
+   "modes": {
+    "Light": 22,
+    "Dark": 22
+   }
+  },
+  "imported/input/root/width/filled-lighter-shadow/large": {
+   "type": "FLOAT",
+   "value": 213,
+   "modes": {
+    "Light": 213,
+    "Dark": 213
+   }
+  },
+  "imported/input/input/height/filled-lighter-shadow/large": {
+   "type": "FLOAT",
+   "value": 38,
+   "modes": {
+    "Light": 38,
+    "Dark": 38
+   }
+  },
+  "imported/input/root/outline-width-state-active": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/shared/color-00000000": {
+   "type": "COLOR",
+   "value": "#00000000",
+   "modes": {
+    "Light": "#00000000",
+    "Dark": "#00000000"
+   }
+  },
+  "imported/shared/color-bdbdbd": {
+   "type": "COLOR",
+   "value": "#bdbdbd",
+   "modes": {
+    "Light": "#bdbdbd",
+    "Dark": "#bdbdbd"
+   }
+  },
+  "imported/input/root/outline-width-state-focus-visible": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  }
+ },
+ "Input (fluent.input)": {
+  "setName": "Input (fluent.input)",
+  "description": "Input \u2014 generated from contract fluent.input v0.2.0 \u2020 (52 code-only facts \u2014 see plugin report)",
+  "contractId": "fluent.input",
+  "specHash": "1198433575",
+  "version": "0.2.0",
+  "propNames": {
+   "Appearance": "appearance",
+   "Size": "size"
+  },
+  "semantics": {
+   "element": "span"
+  },
+  "statePreviewAxis": {
+   "axis": "State",
+   "default": "Default",
+   "states": [
+    "Active",
+    "Disabled",
+    "Focus Visible",
+    "Hover"
+   ],
+   "primary": "Appearance",
+   "pinned": {
+    "Size": "Medium"
+   }
+  },
+  "type": "COMPONENT_SET",
+  "nodeId": "39:24533",
+  "key": "989a6c0ed11203436333e060784c2ab7fb558659",
+  "variants": [
+   {
+    "name": "Appearance=Outline, Size=Medium, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Outline",
+     "Size": "Medium",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 40,
+     "y": 40,
+     "right": 1363,
+     "bottom": 448,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/outline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/outline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/outline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/outline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/outline",
+     "strokeTopWeight": "imported/input/root/border-top-width/outline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/outline",
+     "strokeRightWeight": "imported/input/root/border-right-width/outline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/outline"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/outline"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "reactions": [
+     {
+      "trigger": "ON_HOVER",
+      "action": "CHANGE_TO",
+      "destination": "39:24515",
+      "destinationName": "Appearance=Outline, Size=Medium, State=Hover"
+     },
+     {
+      "trigger": "ON_PRESS",
+      "action": "CHANGE_TO",
+      "destination": "39:24461",
+      "destinationName": "Appearance=Outline, Size=Medium, State=Active"
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/outline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Outline, Size=Small, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Outline",
+     "Size": "Small",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 150,
+     "height": 24
+    },
+    "abs": {
+     "x": 260,
+     "y": 40,
+     "right": 1173,
+     "bottom": 456,
+     "width": 150,
+     "height": 24,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/small",
+     "width": "imported/input/root/width/outline/small",
+     "height": "imported/input/root/height/small",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/outline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/outline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/outline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/outline",
+     "strokeTopWeight": "imported/input/root/border-top-width/outline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/outline",
+     "strokeRightWeight": "imported/input/root/border-right-width/outline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/outline"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/outline"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        8,
+        0,
+        8
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/small",
+       "paddingRight": "imported/input/input/padding-right/small",
+       "width": "imported/input/input/width/small",
+       "height": "imported/input/input/height/outline/small",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/small",
+         "lineHeightVar": "imported/input/input/line-height/small"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Outline, Size=Large, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Outline",
+     "Size": "Large",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 213,
+     "height": 40
+    },
+    "abs": {
+     "x": 450,
+     "y": 40,
+     "right": 920,
+     "bottom": 440,
+     "width": 213,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 6,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/large",
+     "width": "imported/input/root/width/outline/large",
+     "height": "imported/input/root/height/large",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/outline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/outline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/outline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/outline",
+     "strokeTopWeight": "imported/input/root/border-top-width/outline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/outline",
+     "strokeRightWeight": "imported/input/root/border-right-width/outline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/outline"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/outline"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        18,
+        0,
+        18
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/large",
+       "paddingRight": "imported/input/input/padding-right/large",
+       "width": "imported/input/input/width/large",
+       "height": "imported/input/input/height/outline/large",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 16,
+         "fontStyle": "Medium",
+         "lineHeight": 22,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/large",
+         "lineHeightVar": "imported/input/input/line-height/large"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Underline, Size=Medium, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Underline",
+     "Size": "Medium",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 178,
+     "height": 32
+    },
+    "abs": {
+     "x": 40,
+     "y": 120,
+     "right": 1365,
+     "bottom": 368,
+     "width": 178,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/underline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/underline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/underline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/underline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/underline",
+     "strokeTopWeight": "imported/input/root/border-top-width/underline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/underline",
+     "strokeRightWeight": "imported/input/root/border-right-width/underline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/underline",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-bottom-color/underline"
+    },
+    "strokeAlign": "INSIDE",
+    "reactions": [
+     {
+      "trigger": "ON_HOVER",
+      "action": "CHANGE_TO",
+      "destination": "39:24518",
+      "destinationName": "Appearance=Underline, Size=Medium, State=Hover"
+     },
+     {
+      "trigger": "ON_PRESS",
+      "action": "CHANGE_TO",
+      "destination": "39:24464",
+      "destinationName": "Appearance=Underline, Size=Medium, State=Active"
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/underline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Underline, Size=Small, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Underline",
+     "Size": "Small",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 148,
+     "height": 24
+    },
+    "abs": {
+     "x": 260,
+     "y": 120,
+     "right": 1175,
+     "bottom": 376,
+     "width": 148,
+     "height": 24,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/small",
+     "width": "imported/input/root/width/underline/small",
+     "height": "imported/input/root/height/small",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/underline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/underline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/underline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/underline",
+     "strokeTopWeight": "imported/input/root/border-top-width/underline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/underline",
+     "strokeRightWeight": "imported/input/root/border-right-width/underline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/underline",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-bottom-color/underline"
+    },
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        8,
+        0,
+        8
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/small",
+       "paddingRight": "imported/input/input/padding-right/small",
+       "width": "imported/input/input/width/small",
+       "height": "imported/input/input/height/underline/small",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/small",
+         "lineHeightVar": "imported/input/input/line-height/small"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Underline, Size=Large, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Underline",
+     "Size": "Large",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 211,
+     "height": 40
+    },
+    "abs": {
+     "x": 450,
+     "y": 120,
+     "right": 922,
+     "bottom": 360,
+     "width": 211,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 6,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/large",
+     "width": "imported/input/root/width/underline/large",
+     "height": "imported/input/root/height/large",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/underline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/underline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/underline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/underline",
+     "strokeTopWeight": "imported/input/root/border-top-width/underline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/underline",
+     "strokeRightWeight": "imported/input/root/border-right-width/underline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/underline",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-bottom-color/underline"
+    },
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        18,
+        0,
+        18
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/large",
+       "paddingRight": "imported/input/input/padding-right/large",
+       "width": "imported/input/input/width/large",
+       "height": "imported/input/input/height/underline/large",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 16,
+         "fontStyle": "Medium",
+         "lineHeight": 22,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/large",
+         "lineHeightVar": "imported/input/input/line-height/large"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker, Size=Medium, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker",
+     "Size": "Medium",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 40,
+     "y": 200,
+     "right": 1363,
+     "bottom": 288,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "reactions": [
+     {
+      "trigger": "ON_HOVER",
+      "action": "CHANGE_TO",
+      "destination": "39:24521",
+      "destinationName": "Appearance=Filled Darker, Size=Medium, State=Hover"
+     },
+     {
+      "trigger": "ON_PRESS",
+      "action": "CHANGE_TO",
+      "destination": "39:24467",
+      "destinationName": "Appearance=Filled Darker, Size=Medium, State=Active"
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker, Size=Small, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker",
+     "Size": "Small",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 150,
+     "height": 24
+    },
+    "abs": {
+     "x": 260,
+     "y": 200,
+     "right": 1173,
+     "bottom": 296,
+     "width": 150,
+     "height": 24,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/small",
+     "width": "imported/input/root/width/filled-darker/small",
+     "height": "imported/input/root/height/small",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        8,
+        0,
+        8
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/small",
+       "paddingRight": "imported/input/input/padding-right/small",
+       "width": "imported/input/input/width/small",
+       "height": "imported/input/input/height/filled-darker/small",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/small",
+         "lineHeightVar": "imported/input/input/line-height/small"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker, Size=Large, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker",
+     "Size": "Large",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 213,
+     "height": 40
+    },
+    "abs": {
+     "x": 450,
+     "y": 200,
+     "right": 920,
+     "bottom": 280,
+     "width": 213,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 6,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/large",
+     "width": "imported/input/root/width/filled-darker/large",
+     "height": "imported/input/root/height/large",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        18,
+        0,
+        18
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/large",
+       "paddingRight": "imported/input/input/padding-right/large",
+       "width": "imported/input/input/width/large",
+       "height": "imported/input/input/height/filled-darker/large",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 16,
+         "fontStyle": "Medium",
+         "lineHeight": 22,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/large",
+         "lineHeightVar": "imported/input/input/line-height/large"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter, Size=Medium, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter",
+     "Size": "Medium",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 40,
+     "y": 280,
+     "right": 1363,
+     "bottom": 208,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "reactions": [
+     {
+      "trigger": "ON_HOVER",
+      "action": "CHANGE_TO",
+      "destination": "39:24524",
+      "destinationName": "Appearance=Filled Lighter, Size=Medium, State=Hover"
+     },
+     {
+      "trigger": "ON_PRESS",
+      "action": "CHANGE_TO",
+      "destination": "39:24470",
+      "destinationName": "Appearance=Filled Lighter, Size=Medium, State=Active"
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter, Size=Small, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter",
+     "Size": "Small",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 150,
+     "height": 24
+    },
+    "abs": {
+     "x": 260,
+     "y": 280,
+     "right": 1173,
+     "bottom": 216,
+     "width": 150,
+     "height": 24,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/small",
+     "width": "imported/input/root/width/filled-lighter/small",
+     "height": "imported/input/root/height/small",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        8,
+        0,
+        8
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/small",
+       "paddingRight": "imported/input/input/padding-right/small",
+       "width": "imported/input/input/width/small",
+       "height": "imported/input/input/height/filled-lighter/small",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/small",
+         "lineHeightVar": "imported/input/input/line-height/small"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter, Size=Large, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter",
+     "Size": "Large",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 213,
+     "height": 40
+    },
+    "abs": {
+     "x": 450,
+     "y": 280,
+     "right": 920,
+     "bottom": 200,
+     "width": 213,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 6,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/large",
+     "width": "imported/input/root/width/filled-lighter/large",
+     "height": "imported/input/root/height/large",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        18,
+        0,
+        18
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/large",
+       "paddingRight": "imported/input/input/padding-right/large",
+       "width": "imported/input/input/width/large",
+       "height": "imported/input/input/height/filled-lighter/large",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 16,
+         "fontStyle": "Medium",
+         "lineHeight": 22,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/large",
+         "lineHeightVar": "imported/input/input/line-height/large"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker Shadow, Size=Medium, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker Shadow",
+     "Size": "Medium",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 40,
+     "y": 360,
+     "right": 1363,
+     "bottom": 128,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "reactions": [
+     {
+      "trigger": "ON_HOVER",
+      "action": "CHANGE_TO",
+      "destination": "39:24527",
+      "destinationName": "Appearance=Filled Darker Shadow, Size=Medium, State=Hover"
+     },
+     {
+      "trigger": "ON_PRESS",
+      "action": "CHANGE_TO",
+      "destination": "39:24473",
+      "destinationName": "Appearance=Filled Darker Shadow, Size=Medium, State=Active"
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker Shadow, Size=Small, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker Shadow",
+     "Size": "Small",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 150,
+     "height": 24
+    },
+    "abs": {
+     "x": 260,
+     "y": 360,
+     "right": 1173,
+     "bottom": 136,
+     "width": 150,
+     "height": 24,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/small",
+     "width": "imported/input/root/width/filled-darker-shadow/small",
+     "height": "imported/input/root/height/small",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        8,
+        0,
+        8
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/small",
+       "paddingRight": "imported/input/input/padding-right/small",
+       "width": "imported/input/input/width/small",
+       "height": "imported/input/input/height/filled-darker-shadow/small",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/small",
+         "lineHeightVar": "imported/input/input/line-height/small"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker Shadow, Size=Large, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker Shadow",
+     "Size": "Large",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 213,
+     "height": 40
+    },
+    "abs": {
+     "x": 450,
+     "y": 360,
+     "right": 920,
+     "bottom": 120,
+     "width": 213,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 6,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/large",
+     "width": "imported/input/root/width/filled-darker-shadow/large",
+     "height": "imported/input/root/height/large",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        18,
+        0,
+        18
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/large",
+       "paddingRight": "imported/input/input/padding-right/large",
+       "width": "imported/input/input/width/large",
+       "height": "imported/input/input/height/filled-darker-shadow/large",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 16,
+         "fontStyle": "Medium",
+         "lineHeight": 22,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/large",
+         "lineHeightVar": "imported/input/input/line-height/large"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter Shadow, Size=Medium, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter Shadow",
+     "Size": "Medium",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 40,
+     "y": 440,
+     "right": 1363,
+     "bottom": 48,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "reactions": [
+     {
+      "trigger": "ON_HOVER",
+      "action": "CHANGE_TO",
+      "destination": "39:24530",
+      "destinationName": "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover"
+     },
+     {
+      "trigger": "ON_PRESS",
+      "action": "CHANGE_TO",
+      "destination": "39:24476",
+      "destinationName": "Appearance=Filled Lighter Shadow, Size=Medium, State=Active"
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter Shadow, Size=Small, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter Shadow",
+     "Size": "Small",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 150,
+     "height": 24
+    },
+    "abs": {
+     "x": 260,
+     "y": 440,
+     "right": 1173,
+     "bottom": 56,
+     "width": 150,
+     "height": 24,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/small",
+     "width": "imported/input/root/width/filled-lighter-shadow/small",
+     "height": "imported/input/root/height/small",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        8,
+        0,
+        8
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/small",
+       "paddingRight": "imported/input/input/padding-right/small",
+       "width": "imported/input/input/width/small",
+       "height": "imported/input/input/height/filled-lighter-shadow/small",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 12,
+         "fontStyle": "Medium",
+         "lineHeight": 16,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/small",
+         "lineHeightVar": "imported/input/input/line-height/small"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter Shadow, Size=Large, State=Default",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter Shadow",
+     "Size": "Large",
+     "State": "Default"
+    },
+    "bbox": {
+     "width": 213,
+     "height": 40
+    },
+    "abs": {
+     "x": 450,
+     "y": 440,
+     "right": 920,
+     "bottom": 40,
+     "width": 213,
+     "height": 40,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 6,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/large",
+     "width": "imported/input/root/width/filled-lighter-shadow/large",
+     "height": "imported/input/root/height/large",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        18,
+        0,
+        18
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/large",
+       "paddingRight": "imported/input/input/padding-right/large",
+       "width": "imported/input/input/width/large",
+       "height": "imported/input/input/height/filled-lighter-shadow/large",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 16,
+         "fontStyle": "Medium",
+         "lineHeight": 22,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/large",
+         "lineHeightVar": "imported/input/input/line-height/large"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Outline, Size=Medium, State=Active",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Outline",
+     "Size": "Medium",
+     "State": "Active"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 703,
+     "y": 40,
+     "right": 700,
+     "bottom": 448,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/outline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/outline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/outline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/outline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/outline",
+     "strokeTopWeight": "imported/input/root/outline-width-state-active",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-active",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-active",
+     "strokeRightWeight": "imported/input/root/outline-width-state-active"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/outline"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/outline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Underline, Size=Medium, State=Active",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Underline",
+     "Size": "Medium",
+     "State": "Active"
+    },
+    "bbox": {
+     "width": 178,
+     "height": 32
+    },
+    "abs": {
+     "x": 703,
+     "y": 120,
+     "right": 702,
+     "bottom": 368,
+     "width": 178,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/underline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/underline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/underline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/underline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/underline",
+     "strokeTopWeight": "imported/input/root/outline-width-state-active",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-active",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-active",
+     "strokeRightWeight": "imported/input/root/outline-width-state-active"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/underline",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/underline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker, Size=Medium, State=Active",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker",
+     "Size": "Medium",
+     "State": "Active"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 703,
+     "y": 200,
+     "right": 700,
+     "bottom": 288,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker",
+     "strokeTopWeight": "imported/input/root/outline-width-state-active",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-active",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-active",
+     "strokeRightWeight": "imported/input/root/outline-width-state-active"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter, Size=Medium, State=Active",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter",
+     "Size": "Medium",
+     "State": "Active"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 703,
+     "y": 280,
+     "right": 700,
+     "bottom": 208,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter",
+     "strokeTopWeight": "imported/input/root/outline-width-state-active",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-active",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-active",
+     "strokeRightWeight": "imported/input/root/outline-width-state-active"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker Shadow, Size=Medium, State=Active",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker Shadow",
+     "Size": "Medium",
+     "State": "Active"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 703,
+     "y": 360,
+     "right": 700,
+     "bottom": 128,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker-shadow",
+     "strokeTopWeight": "imported/input/root/outline-width-state-active",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-active",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-active",
+     "strokeRightWeight": "imported/input/root/outline-width-state-active"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker-shadow"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter Shadow, Size=Medium, State=Active",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter Shadow",
+     "Size": "Medium",
+     "State": "Active"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 703,
+     "y": 440,
+     "right": 700,
+     "bottom": 48,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter-shadow",
+     "strokeTopWeight": "imported/input/root/outline-width-state-active",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-active",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-active",
+     "strokeRightWeight": "imported/input/root/outline-width-state-active"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter-shadow"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Outline, Size=Medium, State=Disabled",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Outline",
+     "Size": "Medium",
+     "State": "Disabled"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 923,
+     "y": 40,
+     "right": 480,
+     "bottom": 448,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/outline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/outline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/outline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/outline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/outline",
+     "strokeTopWeight": "imported/input/root/border-top-width/outline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/outline",
+     "strokeRightWeight": "imported/input/root/border-right-width/outline"
+    },
+    "fill": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/outline"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/outline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium",
+         "fillVar": "imported/shared/color-bdbdbd"
+        },
+        "fill": {
+         "var": "imported/shared/color-bdbdbd"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Underline, Size=Medium, State=Disabled",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Underline",
+     "Size": "Medium",
+     "State": "Disabled"
+    },
+    "bbox": {
+     "width": 178,
+     "height": 32
+    },
+    "abs": {
+     "x": 923,
+     "y": 120,
+     "right": 482,
+     "bottom": 368,
+     "width": 178,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/underline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/underline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/underline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/underline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/underline",
+     "strokeTopWeight": "imported/input/root/border-top-width/underline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/underline",
+     "strokeRightWeight": "imported/input/root/border-right-width/underline"
+    },
+    "fill": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-bottom-color/underline"
+    },
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/underline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium",
+         "fillVar": "imported/shared/color-bdbdbd"
+        },
+        "fill": {
+         "var": "imported/shared/color-bdbdbd"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker, Size=Medium, State=Disabled",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker",
+     "Size": "Medium",
+     "State": "Disabled"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 923,
+     "y": 200,
+     "right": 480,
+     "bottom": 288,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker"
+    },
+    "fill": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium",
+         "fillVar": "imported/shared/color-bdbdbd"
+        },
+        "fill": {
+         "var": "imported/shared/color-bdbdbd"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter, Size=Medium, State=Disabled",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter",
+     "Size": "Medium",
+     "State": "Disabled"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 923,
+     "y": 280,
+     "right": 480,
+     "bottom": 208,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter"
+    },
+    "fill": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium",
+         "fillVar": "imported/shared/color-bdbdbd"
+        },
+        "fill": {
+         "var": "imported/shared/color-bdbdbd"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker Shadow, Size=Medium, State=Disabled",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker Shadow",
+     "Size": "Medium",
+     "State": "Disabled"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 923,
+     "y": 360,
+     "right": 480,
+     "bottom": 128,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker-shadow"
+    },
+    "fill": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium",
+         "fillVar": "imported/shared/color-bdbdbd"
+        },
+        "fill": {
+         "var": "imported/shared/color-bdbdbd"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter Shadow, Size=Medium, State=Disabled",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter Shadow",
+     "Size": "Medium",
+     "State": "Disabled"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 923,
+     "y": 440,
+     "right": 480,
+     "bottom": 48,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter-shadow"
+    },
+    "fill": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium",
+         "fillVar": "imported/shared/color-bdbdbd"
+        },
+        "fill": {
+         "var": "imported/shared/color-bdbdbd"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Outline, Size=Medium, State=Focus Visible",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Outline",
+     "Size": "Medium",
+     "State": "Focus Visible"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1143,
+     "y": 40,
+     "right": 260,
+     "bottom": 448,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/outline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/outline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/outline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/outline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/outline",
+     "strokeTopWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeRightWeight": "imported/input/root/outline-width-state-focus-visible"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/outline"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/outline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Underline, Size=Medium, State=Focus Visible",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Underline",
+     "Size": "Medium",
+     "State": "Focus Visible"
+    },
+    "bbox": {
+     "width": 178,
+     "height": 32
+    },
+    "abs": {
+     "x": 1143,
+     "y": 120,
+     "right": 262,
+     "bottom": 368,
+     "width": 178,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/underline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/underline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/underline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/underline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/underline",
+     "strokeTopWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeRightWeight": "imported/input/root/outline-width-state-focus-visible"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/underline",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/underline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker, Size=Medium, State=Focus Visible",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker",
+     "Size": "Medium",
+     "State": "Focus Visible"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1143,
+     "y": 200,
+     "right": 260,
+     "bottom": 288,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker",
+     "strokeTopWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeRightWeight": "imported/input/root/outline-width-state-focus-visible"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter, Size=Medium, State=Focus Visible",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter",
+     "Size": "Medium",
+     "State": "Focus Visible"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1143,
+     "y": 280,
+     "right": 260,
+     "bottom": 208,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter",
+     "strokeTopWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeRightWeight": "imported/input/root/outline-width-state-focus-visible"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker Shadow, Size=Medium, State=Focus Visible",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker Shadow",
+     "Size": "Medium",
+     "State": "Focus Visible"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1143,
+     "y": 360,
+     "right": 260,
+     "bottom": 128,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker-shadow",
+     "strokeTopWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeRightWeight": "imported/input/root/outline-width-state-focus-visible"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker-shadow"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter Shadow, Size=Medium, State=Focus Visible",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter Shadow",
+     "Size": "Medium",
+     "State": "Focus Visible"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1143,
+     "y": 440,
+     "right": 260,
+     "bottom": 48,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter-shadow",
+     "strokeTopWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeBottomWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeLeftWeight": "imported/input/root/outline-width-state-focus-visible",
+     "strokeRightWeight": "imported/input/root/outline-width-state-focus-visible"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter-shadow"
+    },
+    "stroke": {
+     "var": "imported/shared/color-00000000",
+     "alpha": 0
+    },
+    "strokeWeight": 2,
+    "strokeAlign": "OUTSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Outline, Size=Medium, State=Hover",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Outline",
+     "Size": "Medium",
+     "State": "Hover"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1363,
+     "y": 40,
+     "right": 40,
+     "bottom": 448,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/outline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/outline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/outline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/outline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/outline",
+     "strokeTopWeight": "imported/input/root/border-top-width/outline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/outline",
+     "strokeRightWeight": "imported/input/root/border-right-width/outline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/outline"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/outline"
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/outline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Underline, Size=Medium, State=Hover",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Underline",
+     "Size": "Medium",
+     "State": "Hover"
+    },
+    "bbox": {
+     "width": 178,
+     "height": 32
+    },
+    "abs": {
+     "x": 1363,
+     "y": 120,
+     "right": 42,
+     "bottom": 368,
+     "width": 178,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/underline/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/underline",
+     "topRightRadius": "imported/input/root/border-top-right-radius/underline",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/underline",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/underline",
+     "strokeTopWeight": "imported/input/root/border-top-width/underline",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/underline",
+     "strokeRightWeight": "imported/input/root/border-right-width/underline"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/underline",
+     "alpha": 0
+    },
+    "stroke": {
+     "var": "imported/input/root/border-bottom-color/underline"
+    },
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/underline/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker, Size=Medium, State=Hover",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker",
+     "Size": "Medium",
+     "State": "Hover"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1363,
+     "y": 200,
+     "right": 40,
+     "bottom": 288,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter, Size=Medium, State=Hover",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter",
+     "Size": "Medium",
+     "State": "Hover"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1363,
+     "y": 280,
+     "right": 40,
+     "bottom": 208,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Darker Shadow, Size=Medium, State=Hover",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Darker Shadow",
+     "Size": "Medium",
+     "State": "Hover"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1363,
+     "y": 360,
+     "right": 40,
+     "bottom": 128,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-darker-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-darker-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-darker-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-darker-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-darker-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-darker-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-darker-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-darker-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-darker-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-darker-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-darker-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "name": "Appearance=Filled Lighter Shadow, Size=Medium, State=Hover",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Appearance": "Filled Lighter Shadow",
+     "Size": "Medium",
+     "State": "Hover"
+    },
+    "bbox": {
+     "width": 180,
+     "height": 32
+    },
+    "abs": {
+     "x": 1363,
+     "y": 440,
+     "right": 40,
+     "bottom": 48,
+     "width": 180,
+     "height": 32,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 2,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "FIXED",
+     "counterSizing": "FIXED"
+    },
+    "cornerRadius": 4,
+    "bound": {
+     "itemSpacing": "imported/input/root/column-gap/medium",
+     "width": "imported/input/root/width/filled-lighter-shadow/medium",
+     "height": "imported/input/root/height/medium",
+     "topLeftRadius": "imported/input/root/border-top-left-radius/filled-lighter-shadow",
+     "topRightRadius": "imported/input/root/border-top-right-radius/filled-lighter-shadow",
+     "bottomLeftRadius": "imported/input/root/border-bottom-left-radius/filled-lighter-shadow",
+     "bottomRightRadius": "imported/input/root/border-bottom-right-radius/filled-lighter-shadow",
+     "strokeTopWeight": "imported/input/root/border-top-width/filled-lighter-shadow",
+     "strokeBottomWeight": "imported/input/root/border-bottom-width",
+     "strokeLeftWeight": "imported/input/root/border-left-width/filled-lighter-shadow",
+     "strokeRightWeight": "imported/input/root/border-right-width/filled-lighter-shadow"
+    },
+    "fill": {
+     "var": "imported/input/root/background-color/filled-lighter-shadow"
+    },
+    "stroke": {
+     "var": "imported/input/root/border-top-color/filled-lighter-shadow",
+     "alpha": 0
+    },
+    "strokeWeight": 1,
+    "strokeAlign": "INSIDE",
+    "effects": [
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.12
+      },
+      "offset": {
+       "x": 0,
+       "y": 0
+      },
+      "radius": 2
+     },
+     {
+      "type": "DROP_SHADOW",
+      "color": {
+       "hex": "000000",
+       "alpha": 0.14
+      },
+      "offset": {
+       "x": 0,
+       "y": 1
+      },
+      "radius": 2
+     }
+    ],
+    "children": [
+     {
+      "name": "input",
+      "type": "FRAME",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 0,
+       "padding": [
+        0,
+        12,
+        0,
+        12
+       ],
+       "primarySizing": "FIXED",
+       "counterSizing": "FIXED"
+      },
+      "clipsContent": true,
+      "bound": {
+       "paddingLeft": "imported/input/input/padding-left/medium",
+       "paddingRight": "imported/input/input/padding-right/medium",
+       "width": "imported/input/input/width/medium",
+       "height": "imported/input/input/height/filled-lighter-shadow/medium",
+       "minWidth": "imported/shared/size-0"
+      },
+      "children": [
+       {
+        "name": "placeholder",
+        "type": "TEXT",
+        "text": {
+         "characters": "",
+         "fontSize": 14,
+         "fontStyle": "Medium",
+         "lineHeight": 20,
+         "fontFamily": "Inter",
+         "fontSizeVar": "imported/input/input/font-size/medium",
+         "lineHeightVar": "imported/input/input/line-height/medium"
+        },
+        "fill": {
+         "hex": "000000"
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "propertyDefinitions": {
+   "Appearance": {
+    "type": "VARIANT",
+    "defaultValue": "Outline",
+    "variantOptions": [
+     "Outline",
+     "Underline",
+     "Filled Darker",
+     "Filled Lighter",
+     "Filled Darker Shadow",
+     "Filled Lighter Shadow"
+    ]
+   },
+   "Size": {
+    "type": "VARIANT",
+    "defaultValue": "Medium",
+    "variantOptions": [
+     "Medium",
+     "Small",
+     "Large"
+    ]
+   },
+   "State": {
+    "type": "VARIANT",
+    "defaultValue": "Default",
+    "variantOptions": [
+     "Default",
+     "Active",
+     "Disabled",
+     "Focus Visible",
+     "Hover"
+    ]
+   }
+  }
+ }
+}

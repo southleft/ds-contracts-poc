@@ -1,0 +1,31 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "all 11 colors and 3 sizes match",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14408",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.token.dump.json",
+  "matched": 8,
+  "diverged": [
+   "prop label \u2014 missing from proposal",
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"md\",\"sm\",\"lg\"]}",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Sm\",\"md\":\"Md\",\"lg\":\"Lg\"} vs {\"md\":\"Md\",\"sm\":\"Sm\",\"lg\":\"Lg\"}",
+   "prop children \u2014 proposal has a prop the contract does not",
+   "part root/label \u2014 missing from proposal",
+   "part root background-color \u2014 {color-background-gray} vs {color-background-muted}"
+  ],
+  "lost": [
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root color` \u2014 {color-text-primary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-family` \u2014 {font-family-body} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root font-weight` \u2014 {font-weight-medium} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Token:root/label` fontSize = `10` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

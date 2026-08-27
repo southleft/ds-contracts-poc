@@ -471,6 +471,14 @@
   padding-top: var(--imported-shared-size-8);
   display: block;
   cursor: pointer;
+  font-family:
+    'Segoe UI',
+    'Segoe UI Web (West European)',
+    -apple-system,
+    'system-ui',
+    Roboto,
+    'Helvetica Neue',
+    sans-serif;
 }
 
 .checked-checked .label {

@@ -1,0 +1,50 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "all 4 sizes: canvas placeholder box has NO border stroke \u2014 pixel-verified: canvas edge pixels are uniformly the fill gray (217,217,217) edge-to-edge, while ref shows a distinct darker 1px border ring around the (216,216,216) fill; walls are empty so the missing border is unwalled",
+  "canvas corner radius reads proportionally smaller than ref's at the small sizes (slight rounding on canvas-extra-small vs clearly rounded ref)"
+ ],
+ "defectClasses": [
+  "missing ink",
+  "other"
+ ],
+ "notes": "gray placeholder box on canvas beside the code render's broken-image alt text \u2014 the canvas draws the placeholder the contract describes",
+ "reviewedAt": "ef10d9b1",
+ "setNodeId": "39:22944",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-polaris-polaris.thumbnail.dump.json",
+  "matched": 8,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"extraSmall\",\"small\",\"medium\",\"large\"]} vs {\"enum\":[\"medium\",\"extraSmall\",\"small\",\"large\"]}",
+   "prop size bindings.figma.values \u2014 {\"extraSmall\":\"Extra Small\",\"small\":\"Small\",\"medium\":\"Medium\",\"large\":\"Large\"} vs {\"medium\":\"Medium\",\"extraSmall\":\"Extra Small\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "prop alt \u2014 missing from proposal",
+   "prop transparent default \u2014 undefined vs false",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root background \u2014 {p.color-bg-surface} missing from proposal",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root background-color \u2014 proposal has {p.color-bg-surface}, contract has nothing",
+   "part root height \u2014 proposal has {imported.thumbnail.root.height.{size}}, contract has nothing",
+   "part root/part-0 bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 min-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 width \u2014 proposal has {imported.thumbnail.part-0.width.{size}}, contract has nothing",
+   "part root/part-0 height \u2014 proposal has {imported.thumbnail.part-0.height.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`part root/part-0 element` \u2014 host element (\"img\") is not drawn on the canvas",
+   "`part root/part-0 attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root/part-0 color` \u2014 {imported.thumbnail.part-0.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Thumbnail:root` minWidth = `24` \u2014 nearest tokens: `{space.inset-x.lg}`, `{space.gap.lg}`, `{size.avatar.sm}`, `{size.spinner.lg}`, `{space.300}`",
+   "`Thumbnail:root/part-0` fill = `#d9d9d9` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

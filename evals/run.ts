@@ -8420,7 +8420,22 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       // label-wrapper widths — FC-CARBON-TABS-LABEL demands the wrappers HUG,
       // so their minted fixed widths left the tree): 1207 + 15 − 1 − 6 = 1215.
       // Variant cells (132) and source aliases (96) are unchanged.
-      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1215 variables\)/.test(batch.out)) {
+      // BURN-DOWN 2026-08-25: 1215 -> 1218. THREE minted leaves, each measured
+      // and attributed, not three unexplained variables:
+      //   + imported.text-input.text-input.placeholder-color  — RC7's channel,
+      //     bound by textinput.contract.json and lowered to a real
+      //     `::placeholder` rule on every stylesheet surface.
+      //   + imported.text-input.text-input.outline-width-state-active
+      //   + imported.text-input.text-input.outline-width-state-focus-visible
+      //     — NOT this round's mint. Re-fusing carbon/TextInput and
+      //     re-promoting on the BASE engine (no RC1/RC7/RC8 in the tree) takes
+      //     the minted tree 876 -> 878 with exactly these two leaves, so any
+      //     re-derivation of this component surfaces them; RC7's re-derivation
+      //     is what made them visible. They are UNREFERENCED, which is why
+      //     `minted-leaves-bind-to-something` reports carbon 92 -> 94 and stays
+      //     RED rather than being re-recorded — an increase is the one thing
+      //     that ratchet exists to refuse.
+      if (!/mock-proven \(10 sets: Accordion\(8\), Button\(80\), Checkbox\(3\), IconButton\(16\), InlineNotification\(12\), Modal\(4\), Tabs\(3\), Tag\(36\), TextInput\(8\), Toggle\(4\); 1218 variables\)/.test(batch.out)) {
         throw new Error(`carbon genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // The token wrap is a PURE function of the pinned compiled stylesheet, so
@@ -8524,7 +8539,15 @@ console.log(JSON.stringify({ assign, cross, ok: a.reactions.length }));
       }
       const batch = run(process.execPath, ['examples/altitude/scripts/build-genesis-batch.mjs']);
       if (batch.status !== 0) throw new Error(`altitude genesis batch refused:\n${batch.out.slice(0, 1600)}`);
-      if (!/mock-proven \(7 sets: Badge\(8\), Button\(12\), Chip\(10\), Divider\(2\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar; 638 variables\)/.test(batch.out)) {
+      // BURN-DOWN 2026-08-25: 638 -> 643. FIVE minted leaves, all RC8's, all
+      // bound: imported.avatar.root.{width,height}.{unset,sm} — the four
+      // geometry leaves the re-derivation carries as ALIASES to altitude's own
+      // {theme-icon-xxxl}/{theme-icon-xl} (the row's census defect was a 14x17
+      // hug where the library draws a 32x32 circle) — plus
+      // imported.shared.color-101010, the glyph ink the same re-derivation
+      // picked up from a door that postdates this contract's 2026-07-27
+      // capture. altitude's unreferenced-leaf count does NOT move.
+      if (!/mock-proven \(7 sets: Badge\(8\), Button\(12\), Chip\(10\), Divider\(2\), Heading\(12\), IconClose\(7\), Link\(9\); standalone: Avatar; 643 variables\)/.test(batch.out)) {
         throw new Error(`altitude genesis batch missing the mock-proof line:\n${batch.out.slice(0, 800)}`);
       }
       // THE SHADOW-DOM ANATOMY PINS, read off the COMMITTED promoted contracts.

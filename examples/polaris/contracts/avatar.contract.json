@@ -56,9 +56,8 @@
     },
     {
       "name": "initials",
-      "description": "Initials of person to display. Default TP matches developed receipt (examples/polaris/receipts/avatar/default.png); without a string default, contentFallsThrough kept only the silhouette SVG children.",
+      "description": "Initials of person to display",
       "type": "text",
-      "default": "TP",
       "bindings": {
         "figma": {
           "kind": "TEXT",
@@ -67,7 +66,8 @@
         "code": {
           "prop": "initials"
         }
-      }
+      },
+      "default": "TP"
     },
     {
       "name": "customer",
@@ -113,7 +113,7 @@
     },
     {
       "name": "withInitials",
-      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `initials` (\"TP\"); the created subtree is carried as parts gated on this prop. Default true so canvas showcase matches developed initials receipt (silhouette remains via Show WithInitials=false + icon assets once gated).",
+      "description": "Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `initials` (\"TP\"); the created subtree is carried as parts gated on this prop.",
       "type": "boolean",
       "default": true,
       "bindings": {

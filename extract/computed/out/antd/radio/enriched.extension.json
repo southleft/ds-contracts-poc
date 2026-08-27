@@ -416,11 +416,15 @@
     "fold-carries-state-delta: [disabled] root.text-emphasis-color rides its source fact"
   ],
   "layout": {
-    "enriched": [],
-    "contradictions": [],
-    "receipts": [
-      "layout-value-outside-vocabulary: root.align-items = \"baseline\" — stays code-only"
+    "enriched": [
+      {
+        "part": "root",
+        "field": "align",
+        "value": "baseline"
+      }
     ],
+    "contradictions": [],
+    "receipts": [],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
   "declaredFacts": {
@@ -1095,6 +1099,7 @@
     "declared state fact carried: [focus-visible] radio-inner.transition-duration = 0s, 0s (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] radio-inner.transition-property = outline-offset, outline (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] radio-inner.transition-timing-function = ease, ease (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] radio-input.outline-style = auto (v15 declared vocabulary)"
+    "declared state fact carried: [focus-visible] radio-input.outline-style = auto (v15 declared vocabulary)",
+    "layout enriched: root.layout.align = baseline (uniform computed keyword — the schema's own vocabulary)"
   ]
 }

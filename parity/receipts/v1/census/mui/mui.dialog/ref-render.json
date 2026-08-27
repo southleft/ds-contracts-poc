@@ -1,0 +1,87 @@
+{
+  "id": "mui.dialog",
+  "library": "mui",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@mui/material",
+    "version": "9.2.0",
+    "recipe": "examples/mui sandbox (.mui-sandbox; examples/mui/README) mounted per extract/computed/configs/mui.json"
+  },
+  "configPath": "extract/computed/configs/mui.json",
+  "component": "Dialog",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "max-width-sm",
+      "status": "rendered",
+      "png": "ref-max-width-sm.png",
+      "props": {
+        "transitionDuration": 0,
+        "maxWidth": "sm",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "max-width-xs",
+      "status": "rendered",
+      "png": "ref-max-width-xs.png",
+      "props": {
+        "transitionDuration": 0,
+        "maxWidth": "xs",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "max-width-md",
+      "status": "rendered",
+      "png": "ref-max-width-md.png",
+      "props": {
+        "transitionDuration": 0,
+        "maxWidth": "md",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "max-width-lg",
+      "status": "rendered",
+      "png": "ref-max-width-lg.png",
+      "props": {
+        "transitionDuration": 0,
+        "maxWidth": "lg",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "max-width-xl",
+      "status": "rendered",
+      "png": "ref-max-width-xl.png",
+      "props": {
+        "transitionDuration": 0,
+        "maxWidth": "xl",
+        "onClose": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

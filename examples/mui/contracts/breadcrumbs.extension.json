@@ -662,6 +662,11 @@
         "part": "breadcrumbs-ol",
         "field": "align",
         "value": "center"
+      },
+      {
+        "part": "breadcrumbs-ol",
+        "field": "wrap",
+        "value": true
       }
     ],
     "contradictions": [],
@@ -1072,6 +1077,7 @@
     "refusals": []
   },
   "enrichmentNotes": [
+    "layout enriched: breadcrumbs-ol.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: breadcrumbs-ol.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: breadcrumbs-ol.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",

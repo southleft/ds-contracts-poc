@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (69 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@fluentui/react-components@9.74.5",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -1326,6 +1326,11 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
       }
     ],
     "state": [
@@ -7534,11 +7539,18 @@
     "absolute-geometry-admitted: indicator — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: icon — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: part-1-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "token-named-geometry-admitted: input.width — the library's own stylesheet binds it to --spacingHorizontalS (8px) at `.ruo9svu`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)",
     "control-fallback: no control for <input> — span control used (part input)",
     "control-fallback: no control for <svg> — span control used (part icon)",
     "control-fallback: no control for <path> — span control used (part part-1-0-0)",
     "control-fallback: no control for <label> — span control used (part label)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "text-part-typography-carried: label — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "geometry-excluded: icon — block-size 12px, inline-size 12px, perspective-origin 6px 6px, transform-origin 6px 6px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: indicator — block-size 16px, inline-size 16px, perspective-origin 8px 8px, transform-origin 8px 8px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: input — block-size 32px, inline-size 32px, perspective-origin 16px 16px, transform-origin 16px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — inline-size 64.375px, perspective-origin 38.1875px 18px, transform-origin 38.1875px 18px, width 64.375px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 32px, inline-size 108.375px, perspective-origin 54.1875px 16px, transform-origin 54.1875px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (icon, indicator, input, label, part-1-0-0, root); -webkit-text-stroke-color (icon, indicator, input, label, part-1-0-0, root)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: icon.line-height — values track ancestor \"indicator\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -7713,22 +7725,21 @@
     "declared fact carried: indicator.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: indicator.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: indicator.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: indicator.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: indicator.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: indicator.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: indicator.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: indicator.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-1-0-0.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = \"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared state fact carried: [disabled] indicator.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] input.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] label.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] root.cursor = default (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)",
-    "hug-evidence-unmeasurable: root.max-width = fit-content — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
-    "hug-evidence-absent: root carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
+    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)"
   ]
 }

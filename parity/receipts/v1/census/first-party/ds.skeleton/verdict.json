@@ -1,0 +1,25 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23952",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.skeleton.dump.json",
+  "matched": 11,
+  "diverged": [],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root/block text \"\"` \u2014 empty static text renders no glyphs \u2014 the styled wrapper alone is on the canvas",
+   "`part root/block element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/block animation` \u2014 motion is not canvas-representable (documented fidelity scope)"
+  ]
+ }
+}

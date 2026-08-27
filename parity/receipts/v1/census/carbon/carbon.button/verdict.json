@@ -1,0 +1,46 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [
+  "FC-EXPORT-RING-UNPAINTED",
+  "CODE-CANVAS-DISAGREE:button.tertiary/border"
+ ],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "primary/secondary/danger kinds + 6 sizes match; tertiary draws its 1px blue border on canvas, absent in the code render; Active/Focus double ring carried as effect data but unpainted in COMPONENT export",
+ "reviewedAt": "3f3b23b4",
+ "setNodeId": "39:8296",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-carbon-carbon.button.dump.json",
+  "matched": 10,
+  "diverged": [
+   "prop kind type \u2014 {\"enum\":[\"primary\",\"secondary\",\"tertiary\",\"ghost\",\"danger\",\"danger--primary\",\"danger--ghost\",\"danger--tertiary\"]} vs {\"enum\":[\"primary\",\"secondary\",\"tertiary\",\"ghost\",\"danger\",\"dangerPrimary\",\"dangerGhos",
+   "prop kind bindings.figma.values \u2014 {\"primary\":\"Primary\",\"secondary\":\"Secondary\",\"tertiary\":\"Tertiary\",\"ghost\":\"Ghost\",\"danger\":\"Danger\",\"danger--primary\":\"Danger Primary\",\"danger--ghost\":\"Danger Ghost\",\"danger--tertiary\":",
+   "prop size default \u2014 undefined vs \"xs\"",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root flex-shrink \u2014 {imported.button.root.flex-shrink} missing from proposal",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root letter-spacing \u2014 {imported.button.root.letter-spacing} missing from proposal",
+   "part root min-height \u2014 {imported.button.root.min-height.unset} vs {imported.button.root.min-height.{size}}",
+   "part root padding-bottom \u2014 {imported.button.root.padding-bottom.unset} vs {imported.button.root.padding-bottom.{size}}",
+   "part root padding-top \u2014 {imported.button.root.padding-top.unset} vs {imported.button.root.padding-top.{size}}",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.button.root.background-color.primary}, contract has nothing",
+   "part root border-color \u2014 proposal has {imported.button.root.border-top-color.primary}, contract has nothing",
+   "part root padding-right \u2014 proposal has {imported.button.root.padding-right.primary}, contract has nothing",
+   "part root border-top-width \u2014 proposal has {imported.button.root.border-top-width.primary}, contract has nothing",
+   "part root border-right-width \u2014 proposal has {imported.button.root.border-right-width.primary}, contract has nothing",
+   "part root border-bottom-width \u2014 proposal has {imported.button.root.border-bottom-width.primary}, contract has nothing",
+   "part root border-left-width \u2014 proposal has {imported.button.root.border-left-width.primary}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root color (effective) \u2014 proposal has {imported.button.root.color.primary}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)"
+  ]
+ }
+}

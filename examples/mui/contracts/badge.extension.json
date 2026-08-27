@@ -457,6 +457,16 @@
         "part": "label-2",
         "field": "justify",
         "value": "center"
+      },
+      {
+        "part": "badge-anchororigintopright",
+        "field": "wrap",
+        "value": true
+      },
+      {
+        "part": "label-2",
+        "field": "wrap",
+        "value": true
       }
     ],
     "contradictions": [],
@@ -748,6 +758,8 @@
     "refusals": []
   },
   "enrichmentNotes": [
+    "layout enriched: badge-anchororigintopright.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label-2.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: badge-anchororigintopright.layout.align = center (uniform computed keyword — the schema's own vocabulary)",

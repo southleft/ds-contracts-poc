@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.dialog",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (54 code-only facts — see plugin report)",
+    "description": "Dialog — generated from contract fluent.dialog v0.2.0 † (50 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -136,16 +136,45 @@ const COMPONENTS = [
                   "type": "frame",
                   "name": "dialogbody",
                   "layout": {
-                    "mode": "VERTICAL",
+                    "mode": "GRID",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true,
-                    "blockFlow": true
+                    "grid": {
+                      "rows": [
+                        {
+                          "type": "FIXED",
+                          "value": 28
+                        },
+                        {
+                          "type": "FIXED",
+                          "value": 28
+                        },
+                        {
+                          "type": "FIXED",
+                          "value": 32
+                        }
+                      ],
+                      "columns": [
+                        {
+                          "type": "FIXED",
+                          "value": 267
+                        },
+                        {
+                          "type": "FIXED",
+                          "value": 267
+                        }
+                      ],
+                      "rowGap": 8,
+                      "columnGap": 8,
+                      "hugHeight": true
+                    }
                   },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
-                    "minWidth": "imported/shared/size-0",
-                    "itemSpacing": "imported/shared/size-8"
+                    "minWidth": "imported/shared/size-0"
+                  },
+                  "lits": {
+                    "width": 550
                   },
                   "children": [
                     {
@@ -157,9 +186,16 @@ const COMPONENTS = [
                       "fontSizeVar": "imported/shared/size-20",
                       "fontWeightVar": "imported/shared/num-600",
                       "lineHeightVar": "imported/dialog/label/line-height",
+                      "textFill": "imported/shared/color-242424",
                       "lineHeight": {
                         "value": 28,
                         "unit": "PIXELS"
+                      },
+                      "fontFamily": "Segoe UI",
+                      "cell": {
+                        "row": 0,
+                        "column": 0,
+                        "columnSpan": 2
                       }
                     },
                     {
@@ -180,12 +216,20 @@ const COMPONENTS = [
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/dialog/label-2/font-weight",
                           "lineHeightVar": "imported/shared/size-20",
+                          "textFill": "imported/shared/color-242424",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
-                          }
+                          },
+                          "fontFamily": "Segoe UI"
                         }
                       ],
+                      "margins": {
+                        "bottom": -2,
+                        "left": -2,
+                        "right": -2,
+                        "top": -2
+                      },
                       "bindings": {
                         "minHeight": "imported/dialog/label-2/min-height",
                         "paddingBottom": "imported/shared/size-2",
@@ -193,7 +237,11 @@ const COMPONENTS = [
                         "paddingRight": "imported/shared/size-2",
                         "paddingTop": "imported/shared/size-2"
                       },
-                      "fillW": true
+                      "cell": {
+                        "row": 1,
+                        "column": 0,
+                        "columnSpan": 2
+                      }
                     },
                     {
                       "type": "frame",
@@ -252,11 +300,14 @@ const COMPONENTS = [
                             "paddingRight": "imported/shared/size-12",
                             "paddingTop": "imported/shared/size-5"
                           },
-                          "clipsContent": true,
-                          "fillW": true
+                          "clipsContent": true
                         }
                       ],
-                      "fillW": true
+                      "cell": {
+                        "row": 2,
+                        "column": 1,
+                        "hAlign": "MAX"
+                      }
                     }
                   ]
                 }
@@ -327,16 +378,47 @@ const COMPONENTS = [
               "type": "frame",
               "name": "dialogbody-2",
               "layout": {
-                "mode": "VERTICAL",
+                "mode": "GRID",
                 "primary": "MIN",
                 "counter": "MIN",
-                "stretchChildren": true,
-                "blockFlow": true
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 28
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 28
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 32
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 257
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 257
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "rowGap": 8,
+                  "columnGap": 8,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "bindings": {
                 "minHeight": "imported/shared/size-0",
-                "minWidth": "imported/shared/size-0",
-                "itemSpacing": "imported/shared/size-8"
+                "minWidth": "imported/shared/size-0"
               },
               "children": [
                 {
@@ -348,9 +430,16 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-20",
                   "fontWeightVar": "imported/shared/num-600",
                   "lineHeightVar": "imported/dialog/label-4/line-height",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 28,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0,
+                    "columnSpan": 2
                   }
                 },
                 {
@@ -394,7 +483,12 @@ const COMPONENTS = [
                       }
                     }
                   ],
-                  "fillW": true
+                  "cell": {
+                    "row": 0,
+                    "column": 2,
+                    "hAlign": "MAX",
+                    "vAlign": "MIN"
+                  }
                 },
                 {
                   "type": "frame",
@@ -414,12 +508,20 @@ const COMPONENTS = [
                       "fontSizeVar": "imported/shared/size-14",
                       "fontWeightVar": "imported/dialog/label-5/font-weight",
                       "lineHeightVar": "imported/shared/size-20",
+                      "textFill": "imported/shared/color-242424",
                       "lineHeight": {
                         "value": 20,
                         "unit": "PIXELS"
-                      }
+                      },
+                      "fontFamily": "Segoe UI"
                     }
                   ],
+                  "margins": {
+                    "bottom": -2,
+                    "left": -2,
+                    "right": -2,
+                    "top": -2
+                  },
                   "bindings": {
                     "minHeight": "imported/dialog/label-5/min-height",
                     "paddingBottom": "imported/shared/size-2",
@@ -427,7 +529,11 @@ const COMPONENTS = [
                     "paddingRight": "imported/shared/size-2",
                     "paddingTop": "imported/shared/size-2"
                   },
-                  "fillW": true
+                  "cell": {
+                    "row": 1,
+                    "column": 0,
+                    "columnSpan": 3
+                  }
                 },
                 {
                   "type": "frame",
@@ -486,11 +592,15 @@ const COMPONENTS = [
                         "paddingRight": "imported/shared/size-12",
                         "paddingTop": "imported/shared/size-5"
                       },
-                      "clipsContent": true,
-                      "fillW": true
+                      "clipsContent": true
                     }
                   ],
-                  "fillW": true
+                  "cell": {
+                    "row": 2,
+                    "column": 1,
+                    "columnSpan": 2,
+                    "hAlign": "MAX"
+                  }
                 }
               ]
             }
@@ -615,16 +725,45 @@ const COMPONENTS = [
                   "type": "frame",
                   "name": "dialogbody",
                   "layout": {
-                    "mode": "VERTICAL",
+                    "mode": "GRID",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true,
-                    "blockFlow": true
+                    "grid": {
+                      "rows": [
+                        {
+                          "type": "FIXED",
+                          "value": 28
+                        },
+                        {
+                          "type": "FIXED",
+                          "value": 28
+                        },
+                        {
+                          "type": "FIXED",
+                          "value": 32
+                        }
+                      ],
+                      "columns": [
+                        {
+                          "type": "FIXED",
+                          "value": 267
+                        },
+                        {
+                          "type": "FIXED",
+                          "value": 267
+                        }
+                      ],
+                      "rowGap": 8,
+                      "columnGap": 8,
+                      "hugHeight": true
+                    }
                   },
                   "bindings": {
                     "minHeight": "imported/shared/size-0",
-                    "minWidth": "imported/shared/size-0",
-                    "itemSpacing": "imported/shared/size-8"
+                    "minWidth": "imported/shared/size-0"
+                  },
+                  "lits": {
+                    "width": 550
                   },
                   "children": [
                     {
@@ -636,9 +775,16 @@ const COMPONENTS = [
                       "fontSizeVar": "imported/shared/size-20",
                       "fontWeightVar": "imported/shared/num-600",
                       "lineHeightVar": "imported/dialog/label/line-height",
+                      "textFill": "imported/shared/color-242424",
                       "lineHeight": {
                         "value": 28,
                         "unit": "PIXELS"
+                      },
+                      "fontFamily": "Segoe UI",
+                      "cell": {
+                        "row": 0,
+                        "column": 0,
+                        "columnSpan": 2
                       }
                     },
                     {
@@ -659,12 +805,20 @@ const COMPONENTS = [
                           "fontSizeVar": "imported/shared/size-14",
                           "fontWeightVar": "imported/dialog/label-2/font-weight",
                           "lineHeightVar": "imported/shared/size-20",
+                          "textFill": "imported/shared/color-242424",
                           "lineHeight": {
                             "value": 20,
                             "unit": "PIXELS"
-                          }
+                          },
+                          "fontFamily": "Segoe UI"
                         }
                       ],
+                      "margins": {
+                        "bottom": -2,
+                        "left": -2,
+                        "right": -2,
+                        "top": -2
+                      },
                       "bindings": {
                         "minHeight": "imported/dialog/label-2/min-height",
                         "paddingBottom": "imported/shared/size-2",
@@ -672,7 +826,11 @@ const COMPONENTS = [
                         "paddingRight": "imported/shared/size-2",
                         "paddingTop": "imported/shared/size-2"
                       },
-                      "fillW": true
+                      "cell": {
+                        "row": 1,
+                        "column": 0,
+                        "columnSpan": 2
+                      }
                     },
                     {
                       "type": "frame",
@@ -731,11 +889,14 @@ const COMPONENTS = [
                             "paddingRight": "imported/shared/size-12",
                             "paddingTop": "imported/shared/size-5"
                           },
-                          "clipsContent": true,
-                          "fillW": true
+                          "clipsContent": true
                         }
                       ],
-                      "fillW": true
+                      "cell": {
+                        "row": 2,
+                        "column": 1,
+                        "hAlign": "MAX"
+                      }
                     }
                   ]
                 }
@@ -784,21 +945,6 @@ const COMPONENTS = [
       {
         "part": "dialogbody",
         "kind": "channel",
-        "channel": "column-gap",
-        "value": "{imported.shared.size-8}",
-        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-        "variants": {
-          "count": 2,
-          "of": 3,
-          "names": [
-            "Modal Type=Modal",
-            "Modal Type=Alert"
-          ]
-        }
-      },
-      {
-        "part": "dialogbody",
-        "kind": "channel",
         "channel": "max-height",
         "value": "{imported.dialog.dialogbody.max-height}",
         "reason": "Figma has no maxHeight field (maxWidth exists; its height twin does not).",
@@ -808,20 +954,6 @@ const COMPONENTS = [
           "names": [
             "Modal Type=Modal",
             "Modal Type=Alert"
-          ]
-        }
-      },
-      {
-        "part": "dialogbody-2",
-        "kind": "channel",
-        "channel": "column-gap",
-        "value": "{imported.shared.size-8}",
-        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
-        "variants": {
-          "count": 1,
-          "of": 3,
-          "names": [
-            "Modal Type=Non Modal"
           ]
         }
       },
@@ -959,21 +1091,6 @@ const COMPONENTS = [
       },
       {
         "part": "label-2",
-        "kind": "channel",
-        "channel": "margin-top/margin-right/margin-bottom/margin-left",
-        "value": "-2px/-2px/-2px/-2px",
-        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-        "variants": {
-          "count": 2,
-          "of": 3,
-          "names": [
-            "Modal Type=Modal",
-            "Modal Type=Alert"
-          ]
-        }
-      },
-      {
-        "part": "label-2",
         "kind": "declared",
         "channel": "display",
         "value": "block",
@@ -1091,20 +1208,6 @@ const COMPONENTS = [
         "variants": {
           "count": 3,
           "of": 3
-        }
-      },
-      {
-        "part": "label-5",
-        "kind": "channel",
-        "channel": "margin-top/margin-right/margin-bottom/margin-left",
-        "value": "-2px/-2px/-2px/-2px",
-        "reason": "the margin-box wrapper is skipped — a FILL-sized child cannot be wrapped in a margin box without breaking the fill; the residual margin is not canvas-drawable (FC-EMIT-MARGIN-BOX-SKIPPED)",
-        "variants": {
-          "count": 1,
-          "of": 3,
-          "names": [
-            "Modal Type=Non Modal"
-          ]
         }
       },
       {
@@ -1869,9 +1972,13 @@ function dsDeclaredClipStops(n) {
 }
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
+  // A2 grid: GRID frames take the declaration path — the flex fields below
+  // (axis aligns, layoutWrap) are not grid facts and are never written.
+  if (l.mode === 'GRID') { applyGridFrame(node, l); } else {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  }
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
@@ -1956,6 +2063,61 @@ function applyFrameSpec(node, spec) {
       if (spec.fixedHeight.varName) node.setBoundVariable('height', need(spec.fixedHeight.varName));
     }
   }
+  if (spec.lits) {
+    // v14 literals: no variable to bind — plain values, compile-parsed.
+    const li = spec.lits;
+    if (li.paddingTop !== undefined) node.paddingTop = li.paddingTop;
+    if (li.paddingBottom !== undefined) node.paddingBottom = li.paddingBottom;
+    if (li.paddingLeft !== undefined) node.paddingLeft = li.paddingLeft;
+    if (li.paddingRight !== undefined) node.paddingRight = li.paddingRight;
+    if (li.itemSpacing !== undefined) node.itemSpacing = li.itemSpacing;
+    if (li.radius !== undefined) node.cornerRadius = li.radius;
+    if (li.strokeWeight !== undefined) node.strokeWeight = li.strokeWeight;
+    if (li.minWidth !== undefined) { try { node.minWidth = li.minWidth; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minWidth ' + li.minWidth + ' refused (needs auto-layout); the literal min-width does not draw', e); } }
+    if (li.minHeight !== undefined) { try { node.minHeight = li.minHeight; } catch (e) { degrade('FC-RT-MIN-SIZE-REFUSED', node, 'minHeight ' + li.minHeight + ' refused (needs auto-layout); the literal min-height does not draw', e); } }
+    // #60 fix 1 (fillClear precedence): a spec-carried fill is NEVER
+    // trampled — fillClear only clears when no fill was spec'd. The compile
+    // side already drops fillClear when a fill binding exists (applyLiterals);
+    // this runtime guard makes the emitted script safe even for hand-fed
+    // specs carrying both.
+    if (li.fillClear && !spec.fill) node.fills = [];
+    else if (li.fillColor) node.fills = [{ type: 'SOLID', color: { r: li.fillColor.r, g: li.fillColor.g, b: li.fillColor.b }, opacity: li.fillColor.a === undefined ? 1 : li.fillColor.a }];
+    if (li.radiusCorners) {
+      const rc = li.radiusCorners;
+      if (rc.tl !== undefined) node.topLeftRadius = rc.tl;
+      if (rc.tr !== undefined) node.topRightRadius = rc.tr;
+      if (rc.bl !== undefined) node.bottomLeftRadius = rc.bl;
+      if (rc.br !== undefined) node.bottomRightRadius = rc.br;
+    }
+    if (li.strokeSides) {
+      const sw = li.strokeSides;
+      // ELLIPSE/LINE expose strokeWeight only — per-side props throw
+      // "Cannot add property strokeTopWeight, object is not extensible"
+      // (Tailwind ToggleSwitch thumb live finding, Wave B.1).
+      if ('strokeTopWeight' in node) {
+        if (sw.top !== undefined) node.strokeTopWeight = sw.top;
+        if (sw.right !== undefined) node.strokeRightWeight = sw.right;
+        if (sw.bottom !== undefined) node.strokeBottomWeight = sw.bottom;
+        if (sw.left !== undefined) node.strokeLeftWeight = sw.left;
+      } else {
+        const w = sw.top !== undefined ? sw.top : (sw.right !== undefined ? sw.right : (sw.bottom !== undefined ? sw.bottom : sw.left));
+        if (w !== undefined) node.strokeWeight = w;
+      }
+    }
+    if (li.width !== undefined || li.height !== undefined) {
+      node.resize(li.width !== undefined ? li.width : node.width, li.height !== undefined ? li.height : node.height);
+      // GRID's primary axis is HORIZONTAL (GP1b: primaryAxisSizingMode='AUTO'
+      // reads back as layoutSizingHorizontal 'HUG'), like a HORIZONTAL frame.
+      const gm = (spec.layout || { mode: 'HORIZONTAL' }).mode;
+      const horizontalIsPrimary = gm === 'HORIZONTAL' || gm === 'GRID';
+      if (li.width !== undefined) {
+        if (horizontalIsPrimary) node.primaryAxisSizingMode = 'FIXED'; else node.counterAxisSizingMode = 'FIXED';
+      }
+      if (li.height !== undefined) {
+        if (horizontalIsPrimary) node.counterAxisSizingMode = 'FIXED'; else node.primaryAxisSizingMode = 'FIXED';
+      }
+    }
+  }
 }
 
 // v7 overlay: out-of-flow edge attachment. Must run AFTER appendChild —
@@ -2011,6 +2173,216 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
     }
     childNode.visible = true;
   }
+}
+
+// A2 grid: declaration order is API-pinned (P2: sizes must match the CURRENT
+// count — "Grid track sizes must be the same length as the grid column
+// count"), so counts are written FIRST, then sizes, then gaps, then flow.
+// P10 hazard guard (mode-switch destroys tracks): entering GRID resets the
+// canvas to a default 2×2 — safe ONLY because the full declaration is
+// rewritten here every time, and applyGridChildren re-verifies the canvas
+// holds EXACTLY the declared lists before any placement. Nothing ever relies
+// on tracks surviving a mode switch.
+function applyGridFrame(node, l) {
+  const g = l.grid;
+  node.layoutMode = 'GRID';
+  node.gridRowCount = g.rows.length;
+  node.gridColumnCount = g.columns.length;
+  // FC-GRID-HUG-VALUE. READ and WRITE are not symmetric here. P2b observed a
+  // HUG track reading back as {type:'HUG', value:1} and this emitter mirrored
+  // that shape into the WRITE — but writing {type:'HUG', value:1} makes the
+  // API reinterpret the entry as FIXED at that value, so every "fit" track
+  // silently became a 1px fixed track (live probe: {type:'HUG'} round-trips
+  // as HUG; {type:'HUG', value:1} reads back FIXED, and re-setting it with a
+  // value can never recover). HUG is written as the bare type, never valued.
+  const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
+  node.gridRowSizes = g.rows.map(trackWrite);
+  node.gridColumnSizes = g.columns.map(trackWrite);
+  node.gridRowGap = g.rowGap;
+  node.gridColumnGap = g.columnGap;
+  if (g.flow) node.gridItemsPositioning = g.flow;
+  // FC-GRID-ROOT-VSIZE — CLOSED by G8 (2026-08-08). NOT here: see applyGridHug,
+  // which runs LAST. primaryAxisSizingMode/counterAxisSizingMode = 'AUTO' (the
+  // flex spelling of hug, applied by the caller) are INERT on a GRID frame
+  // (GP1b/GP8: they read back HUG while the frame keeps its FIXED size), so a
+  // grid frame kept createFrame's FIXED 100 on any unpinned axis. The contract
+  // now states the fact — literals width/height "fit-content" — and the ONLY
+  // faithful lowering is layoutSizing{Horizontal,Vertical}='HUG', written after
+  // resize() and after every child (GP4b: a later resize of a hugged axis
+  // silently reverts BOTH the sizing mode and the track list).
+}
+
+// G8 — the LAST write on a grid frame. Deliberately separate from
+// applyGridFrame: hug must follow resize() and every child append (GP4b), so
+// applyGridChildren calls it at its own tail. Hugging an axis that carries an
+// {fr} track destroys the ratio silently (GP1/GP5/GP12), so the schema refuses
+// that combination BY NAME (grid-hug-flex-axis) and this function asserts it
+// rather than trusting the compile step.
+function applyGridHug(node, l) {
+  const g = l.grid;
+  if (!g) return;
+  if (g.hugWidth) {
+    if (g.columns.some(function (t) { return t.type === 'FLEX'; }))
+      throw new Error('grid-hug-flex-axis: refusing to hug the width of a grid whose column tracks contain FLEX — the ratio would be silently normalized to HUG (GP1/GP12)');
+    node.layoutSizingHorizontal = 'HUG';
+  }
+  if (g.hugHeight) {
+    if (g.rows.some(function (t) { return t.type === 'FLEX'; }))
+      throw new Error('grid-hug-flex-axis: refusing to hug the height of a grid whose row tracks contain FLEX — the ratio would be silently normalized to HUG (GP1/GP5)');
+    node.layoutSizingVertical = 'HUG';
+  }
+}
+
+// A2 grid: children were appended by the caller — now the probe-pinned tail:
+// place ALL children (child.setGridChildPosition, the child-side setter, P3)
+// BEFORE any span (the occupancy throw) — but placement is a PERMUTATION,
+// not a loop, because appendChild already auto-placed every child row-major
+// (FC-GRID-APPEND-AUTOPLACE, see below) — then FILL (G3: a placed part fills
+// both axes of its cell; fixed channels keep their box; TEXT hugs — the flex
+// fence re-proved under grid, P4), then per-child aligns (P3's four-value
+// fence). Out-of-flow children are skipped throughout (P13).
+function applyGridChildren(parent, spec, built) {
+  const l = spec.layout;
+  if (!l || l.mode !== 'GRID' || !l.grid) return;
+  // P9/P10 declaration guard: Figma absorbs placement overflow by REWRITING
+  // gridRowCount (P9) and destroys tracks on mode switch (P10). A mismatch
+  // here means the canvas holds a declaration the contract did not make —
+  // refuse loudly, never carry the rewrite.
+  if (parent.gridRowSizes.length !== l.grid.rows.length || parent.gridColumnSizes.length !== l.grid.columns.length) {
+    throw new Error(
+      'grid-declaration-rewritten: canvas holds ' + parent.gridRowSizes.length + 'x' + parent.gridColumnSizes.length +
+      ' tracks but the contract declared ' + l.grid.rows.length + 'x' + l.grid.columns.length +
+      ' (P9 overflow absorption / P10 mode-switch loss) — refusing to carry a write the contract did not make'
+    );
+  }
+  // REJECTED-SETS ROUND (fluent.dialog): a grid child with margins is built
+  // INSIDE its "(margin box)" wrapper — the WRAPPER is the node the grid
+  // actually parents, and the child-side placement setter throws 'Node is
+  // not a grid child' on the inner node. Every placement/sizing/align write
+  // below therefore targets the outermost ancestor whose parent IS the grid
+  // frame (the wrapper when one exists, the node itself otherwise).
+  const gridChildOf = (n) => { let m = n; while (m.parent && m.parent !== parent) m = m.parent; return m; };
+  const inFlow = built
+    .filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE')
+    .map((p) => [p[0], gridChildOf(p[1])]);
+  const placed = inFlow.filter((p) => p[0].cell);
+  if (!l.grid.flow) {
+    // FC-GRID-APPEND-AUTOPLACE. appendChild does not park a grid child
+    // nowhere — the canvas AUTO-PLACES it row-major into the next free cell
+    // (live probe: five appends land (0,0)(0,1)(0,2)(0,3)(1,0)). So by the
+    // time this runs every child already OCCUPIES a cell, and a naive
+    // one-pass "place them all in contract order" throws P3's occupancy
+    // error the moment a target cell is still held by a sibling that has not
+    // been moved yet — which the canonical bento hits on its SECOND child.
+    // Placement is therefore a PERMUTATION problem, not a loop: repeatedly
+    // place every child whose target is free, and when only cycles remain,
+    // park one child in a spare cell to break the cycle. Spans stay in the
+    // second pass (all children at span 1 while the permutation resolves —
+    // the probe-pinned place-before-span rule is what makes that sound).
+    const rowCount = l.grid.rows.length;
+    const colCount = l.grid.columns.length;
+    const cellKey = (r, c) => r + ',' + c;
+    const liveOccupancy = () => {
+      const m = {};
+      for (const p of placed) m[cellKey(p[1].gridRowAnchorIndex, p[1].gridColumnAnchorIndex)] = p;
+      return m;
+    };
+    const moveTo = (p, r, c) => { p[1].setGridChildPosition(r, c); };
+    const remaining = placed.slice();
+    let guard = remaining.length * remaining.length + remaining.length + 8;
+    while (remaining.length > 0) {
+      if (guard-- <= 0) {
+        throw new Error(
+          'grid-placement-unresolvable: could not sequence ' + remaining.length +
+          ' grid placement(s) without an occupancy collision (FC-GRID-APPEND-AUTOPLACE guard)'
+        );
+      }
+      const occ = liveOccupancy();
+      let moved = false;
+      for (let i = remaining.length - 1; i >= 0; i--) {
+        const p = remaining[i];
+        const t = cellKey(p[0].cell.row, p[0].cell.column);
+        const holder = occ[t];
+        if (holder && holder !== p) continue; // still blocked by a sibling
+        moveTo(p, p[0].cell.row, p[0].cell.column);
+        remaining.splice(i, 1);
+        moved = true;
+      }
+      if (moved || remaining.length === 0) continue;
+      // Every remaining target is blocked by another remaining child — a
+      // permutation CYCLE. Park one of them in a cell nobody wants and that
+      // nobody currently holds; the next pass then has a free target.
+      const occ2 = liveOccupancy();
+      const wanted = {};
+      for (const p of remaining) wanted[cellKey(p[0].cell.row, p[0].cell.column)] = true;
+      let spare = null;
+      for (let r = 0; r < rowCount && !spare; r++) {
+        for (let c = 0; c < colCount && !spare; c++) {
+          const k = cellKey(r, c);
+          if (!occ2[k] && !wanted[k]) spare = { r: r, c: c };
+        }
+      }
+      if (!spare) {
+        throw new Error(
+          'grid-placement-cycle-no-spare: the declared ' + rowCount + 'x' + colCount +
+          ' grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script'
+        );
+      }
+      moveTo(remaining[0], spare.r, spare.c);
+    }
+    for (const p of placed) {
+      if (p[0].cell.rowSpan) p[1].gridRowSpan = p[0].cell.rowSpan;
+      if (p[0].cell.columnSpan) p[1].gridColumnSpan = p[0].cell.columnSpan;
+    }
+  }
+  for (const p of inFlow) {
+    const cs = p[0], cn = p[1];
+    if (cs.type === 'text') continue; // text hugs its glyphs (P4's fence)
+    // G8: a child that declares its OWN intrinsic axis keeps it — FILL would
+    // silently overwrite the hug applied by that child's own applyGridHug.
+    const childGrid = cs.layout && cs.layout.grid ? cs.layout.grid : null;
+    // G3′ (2026-08-08, probe GP14) — FILL AND HUG ON THE SAME AXIS IS CIRCULAR.
+    // G3's default is that a placed part fills both axes of its cell. On an axis
+    // the PARENT hugs, that makes the track's size a function of the child and
+    // the child's size a function of the track: Figma resolves the loop by
+    // FREEZING whatever box the node already had. Measured live: a hugging
+    // two-column root with two FILL slots reported layoutSizingVertical 'HUG'
+    // and stayed 640x100; the instant its children stopped filling, the root
+    // collapsed to the real content height, and restoring FILL did not undo it.
+    // A frozen box is worse than a wrong one — it is a stale box that reads as
+    // a measurement. So on a hugged axis the child HUGS (its own content is what
+    // the track must measure) and never fills. CSS agrees: against a
+    // fit-content track, align-self:stretch resolves to the content size — the
+    // track is sized first and the child stretches into the RESULT.
+    // A non-auto-layout frame refuses HUG (P4) and keeps its drawn box, which is
+    // exactly the right contribution.
+    const hugW = !!(l.grid.hugWidth || (childGrid && childGrid.hugWidth));
+    const hugH = !!(l.grid.hugHeight || (childGrid && childGrid.hugHeight));
+    // REJECTED-SETS ROUND (fluent.dialog actions): G3's FILL is stretch-by-
+    // ABSENCE — a child that CARRIES an alignment on an axis resolves to its
+    // content size there (CSS: justify-self/align-self beat the stretch
+    // default), so an aligned axis HUGS and never fills. Filling it drew the
+    // dialog's Close button 267px wide (modal) and collapsed it to 0 inside
+    // the hugging non-modal grid (the FILL-in-HUG degenerate cycle).
+    const alignedW = !!(cs.cell && cs.cell.hAlign);
+    const alignedH = !!(cs.cell && cs.cell.vAlign);
+    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW && !alignedW) {
+      try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal FILL refused; the grid child keeps its drawn width', e); }
+    } else if ((l.grid.hugWidth || alignedW) && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+      try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal HUG refused; the grid child keeps its drawn width', e); }
+    }
+    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH && !alignedH) {
+      try { cn.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical FILL refused; the grid child keeps its drawn height', e); }
+    } else if ((l.grid.hugHeight || alignedH) && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+      try { cn.layoutSizingVertical = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical HUG refused; the grid child keeps its drawn height', e); }
+    }
+  }
+  for (const p of placed) {
+    if (p[0].cell.hAlign) p[1].gridChildHorizontalAlign = p[0].cell.hAlign;
+    if (p[0].cell.vAlign) p[1].gridChildVerticalAlign = p[0].cell.vAlign;
+  }
+  // G8 — LAST, after resize and after every child (GP4b).
+  applyGridHug(parent, spec.layout);
 }
 
 async function buildNode(spec, registry) {
@@ -2261,6 +2633,7 @@ async function buildNode(spec, registry) {
     }
     applyMarginBox(node, childNode, child, registry);
   }
+  applyGridChildren(node, spec, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
@@ -2685,6 +3058,7 @@ async function amendSet(set, C) {
         }
     applyMarginBox(comp, childNode, childSpec, registry);
       }
+  applyGridChildren(comp, v.spec, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID
@@ -2908,6 +3282,7 @@ async function amendComponent(comp, C) {
     }
     applyMarginBox(comp, childNode, childSpec, registry);
   }
+  applyGridChildren(comp, v.spec, built);
   // FC-SLOT-BIRTH-BOX: dissolve Figma's 100x100 birth box now that every child
   // (including a slot's defaultContent) is in place. Only a node that ENDED UP
   // childless is affected — one with children has already relaid out — and GRID

@@ -1,0 +1,44 @@
+{
+  "id": "ds.skeleton",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-text",
+      "status": "rendered",
+      "png": "ref-variant-text.png",
+      "props": {
+        "variant": "text"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-rect",
+      "status": "rendered",
+      "png": "ref-variant-rect.png",
+      "props": {
+        "variant": "rect"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-circle",
+      "status": "rendered",
+      "png": "ref-variant-circle.png",
+      "props": {
+        "variant": "circle"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

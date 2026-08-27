@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/badge.contract.json (astryx.badge v0.3.1)
+ * Source of truth: contracts/badge.contract.json (astryx.badge v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -41,8 +41,8 @@
 }
 
 .variant-error {
-  background-color: var(--imported-badge-root-background-color-error);
-  color: var(--imported-badge-root-color-error);
+  background-color: var(--color-error);
+  color: var(--color-on-accent);
 }
 
 .variant-green {
@@ -51,13 +51,13 @@
 }
 
 .variant-info {
-  background-color: var(--imported-badge-root-background-color-info);
-  color: var(--imported-badge-root-color-info);
+  background-color: var(--color-accent);
+  color: var(--color-on-accent);
 }
 
 .variant-neutral {
-  background-color: var(--imported-badge-root-background-color-neutral);
-  color: var(--color-text-primary);
+  background-color: var(--color-neutral);
+  color: var(--imported-badge-root-color-neutral);
 }
 
 .variant-orange {
@@ -81,8 +81,8 @@
 }
 
 .variant-success {
-  background-color: var(--imported-badge-root-background-color-success);
-  color: var(--imported-badge-root-color-success);
+  background-color: var(--color-success);
+  color: var(--color-on-accent);
 }
 
 .variant-teal {
@@ -91,8 +91,8 @@
 }
 
 .variant-warning {
-  background-color: var(--imported-badge-root-background-color-warning);
-  color: var(--imported-badge-root-color-warning);
+  background-color: var(--color-warning);
+  color: var(--color-on-warning);
 }
 
 .variant-yellow {

@@ -3,6 +3,7 @@
   "component": "Badge",
   "config": "extract/computed/configs/astryx.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -58,6 +59,8 @@
     "component": "Badge",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 14,
     "interactions": 4,
@@ -176,7 +179,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 284,
+      "leavesAdded": 529,
       "divergent": [
         {
           "token": "imported.badge.root.background-color.blue",
@@ -191,28 +194,10 @@
           "resolvedEqual": true
         },
         {
-          "token": "imported.badge.root.background-color.error",
-          "fresh": "#e33f4a",
-          "shipped": "{color-error}",
-          "resolvedEqual": false
-        },
-        {
           "token": "imported.badge.root.background-color.green",
           "fresh": "#c5e5c0",
           "shipped": "{color-background-green}",
           "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.background-color.info",
-          "fresh": "#0074e2",
-          "shipped": "{color-accent}",
-          "resolvedEqual": false
-        },
-        {
-          "token": "imported.badge.root.background-color.neutral",
-          "fresh": "#e5e5e5",
-          "shipped": "#0536591a",
-          "resolvedEqual": false
         },
         {
           "token": "imported.badge.root.background-color.orange",
@@ -239,22 +224,10 @@
           "resolvedEqual": true
         },
         {
-          "token": "imported.badge.root.background-color.success",
-          "fresh": "#198100",
-          "shipped": "{color-success}",
-          "resolvedEqual": false
-        },
-        {
           "token": "imported.badge.root.background-color.teal",
           "fresh": "#a5e3d6",
           "shipped": "{color-background-teal}",
           "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.background-color.warning",
-          "fresh": "#ffce2f",
-          "shipped": "{color-warning}",
-          "resolvedEqual": false
         },
         {
           "token": "imported.badge.root.background-color.yellow",
@@ -275,12 +248,6 @@
           "resolvedEqual": true
         },
         {
-          "token": "imported.badge.root.color.error",
-          "fresh": "#ffffff",
-          "shipped": "{color-on-error}",
-          "resolvedEqual": true
-        },
-        {
           "token": "imported.badge.root.color.green",
           "fresh": "#0c5700",
           "shipped": "{color-text-green}",
@@ -291,12 +258,6 @@
           "fresh": "#ffffff",
           "shipped": "{color-on-accent}",
           "resolvedEqual": true
-        },
-        {
-          "token": "imported.badge.root.color.neutral",
-          "fresh": "#262626",
-          "shipped": "{color-text-primary}",
-          "resolvedEqual": false
         },
         {
           "token": "imported.badge.root.color.orange",

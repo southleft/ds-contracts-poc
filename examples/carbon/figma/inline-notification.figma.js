@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "carbon.inlinenotification",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "InlineNotification — generated from contract carbon.inlinenotification v0.2.0 † (37 code-only facts — see plugin report)",
+    "description": "InlineNotification — generated from contract carbon.inlinenotification v0.2.0 † (34 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -31,6 +31,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/inline-notification/root/background-color/error/high",
+          "stroke": "imported/inline-notification/root/border-left-color/error/high",
           "bindings": {
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "strokeTopWeight": "imported/inline-notification/root/border-top-width/high",
@@ -81,7 +82,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -186,6 +188,7 @@ const COMPONENTS = [
             "minWidth": "imported/inline-notification/root/min-width",
             "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
+          "stroke": "imported/inline-notification/root/border-top-color/low",
           "hugCeiling": true,
           "children": [
             {
@@ -226,7 +229,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -321,6 +325,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/inline-notification/root/background-color/info/high",
+          "stroke": "imported/inline-notification/root/border-left-color/info/high",
           "bindings": {
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "strokeTopWeight": "imported/inline-notification/root/border-top-width/high",
@@ -370,7 +375,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -475,6 +481,7 @@ const COMPONENTS = [
             "minWidth": "imported/inline-notification/root/min-width",
             "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
+          "stroke": "imported/inline-notification/root/border-top-color/low",
           "hugCeiling": true,
           "children": [
             {
@@ -514,7 +521,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -609,6 +617,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/inline-notification/root/background-color/info-square/high",
+          "stroke": "imported/inline-notification/root/border-left-color/info-square/high",
           "bindings": {
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "strokeTopWeight": "imported/inline-notification/root/border-top-width/high",
@@ -658,7 +667,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -763,6 +773,7 @@ const COMPONENTS = [
             "minWidth": "imported/inline-notification/root/min-width",
             "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
+          "stroke": "imported/inline-notification/root/border-top-color/low",
           "hugCeiling": true,
           "children": [
             {
@@ -802,7 +813,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -897,6 +909,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/inline-notification/root/background-color/success/high",
+          "stroke": "imported/inline-notification/root/border-left-color/success/high",
           "bindings": {
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "strokeTopWeight": "imported/inline-notification/root/border-top-width/high",
@@ -946,7 +959,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -1051,6 +1065,7 @@ const COMPONENTS = [
             "minWidth": "imported/inline-notification/root/min-width",
             "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
+          "stroke": "imported/inline-notification/root/border-top-color/low",
           "hugCeiling": true,
           "children": [
             {
@@ -1090,7 +1105,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -1185,6 +1201,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/inline-notification/root/background-color/warning/high",
+          "stroke": "imported/inline-notification/root/border-left-color/warning/high",
           "bindings": {
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "strokeTopWeight": "imported/inline-notification/root/border-top-width/high",
@@ -1234,7 +1251,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -1339,6 +1357,7 @@ const COMPONENTS = [
             "minWidth": "imported/inline-notification/root/min-width",
             "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
+          "stroke": "imported/inline-notification/root/border-top-color/low",
           "hugCeiling": true,
           "children": [
             {
@@ -1378,7 +1397,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -1473,6 +1493,7 @@ const COMPONENTS = [
             "counter": "CENTER"
           },
           "fill": "imported/inline-notification/root/background-color/warning-alt/high",
+          "stroke": "imported/inline-notification/root/border-left-color/warning-alt/high",
           "bindings": {
             "strokeLeftWeight": "imported/inline-notification/root/border-left-width",
             "strokeTopWeight": "imported/inline-notification/root/border-top-width/high",
@@ -1522,7 +1543,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -1627,6 +1649,7 @@ const COMPONENTS = [
             "minWidth": "imported/inline-notification/root/min-width",
             "itemSpacing": "imported/inline-notification/inline-notification-details/margin-right"
           },
+          "stroke": "imported/inline-notification/root/border-top-color/low",
           "hugCeiling": true,
           "children": [
             {
@@ -1666,7 +1689,8 @@ const COMPONENTS = [
                     "mode": "HORIZONTAL",
                     "primary": "MIN",
                     "counter": "MIN",
-                    "stretchChildren": true
+                    "stretchChildren": true,
+                    "wrap": true
                   },
                   "bindings": {
                     "paddingBottom": "imported/inline-notification/inline-notification-text-wrapper/padding-bottom",
@@ -2013,45 +2037,20 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
-        "channel": "border-bottom-color",
-        "value": "{imported.inline-notification.root.border-bottom-color.{contrast}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 12,
-          "of": 12
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
         "channel": "border-left-color",
         "value": "{imported.inline-notification.root.border-left-color.{kind}.{contrast}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+        "reason": "a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour disagrees and stays code-only (the one-paint limit, named per side).",
         "variants": {
-          "count": 12,
-          "of": 12
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-right-color",
-        "value": "{imported.inline-notification.root.border-right-color.{contrast}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 12,
-          "of": 12
-        }
-      },
-      {
-        "part": "root",
-        "kind": "channel",
-        "channel": "border-top-color",
-        "value": "{imported.inline-notification.root.border-top-color.{contrast}}",
-        "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-        "variants": {
-          "count": 12,
-          "of": 12
+          "count": 6,
+          "of": 12,
+          "names": [
+            "Kind=Error, Contrast=Low",
+            "Kind=Info, Contrast=Low",
+            "Kind=Info Square, Contrast=Low",
+            "Kind=Success, Contrast=Low",
+            "Kind=Warning, Contrast=Low",
+            "Kind=Warning Alt, Contrast=Low"
+          ]
         }
       },
       {
@@ -2606,6 +2605,7 @@ function applyFrameSpec(node, spec) {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  if (l.wrap && node.layoutMode === 'HORIZONTAL') node.layoutWrap = 'WRAP';
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,

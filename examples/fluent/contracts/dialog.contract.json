@@ -67,7 +67,8 @@
               "text": "Dialog title",
               "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle — this element exists in the real component's DOM; the static layer had no part for it.",
               "declared": {
-                "display": "block"
+                "display": "block",
+                "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
               },
               "stylesWhen": [
                 {
@@ -85,7 +86,13 @@
                   }
                 }
               ],
+              "placement": {
+                "row": 0,
+                "column": 0,
+                "columnSpan": 2
+              },
               "tokens": {
+                "color": "{imported.shared.color-242424}",
                 "font-size": "{imported.shared.size-20}",
                 "font-weight": "{imported.shared.num-600}",
                 "line-height": "{imported.dialog.label-4.line-height}"
@@ -169,6 +176,15 @@
                     "top": "{imported.shared.size-0}"
                   }
                 }
+              },
+              "placement": {
+                "row": 0,
+                "column": 2,
+                "alignX": "end",
+                "alignY": "start"
+              },
+              "tokens": {
+                "color": "{imported.shared.color-242424}"
               }
             },
             "label-5": {
@@ -177,6 +193,7 @@
               "declared": {
                 "display": "block",
                 "box-sizing": "border-box",
+                "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
                 "overflow-x": "auto",
                 "overflow-y": "auto"
               },
@@ -196,7 +213,13 @@
                   }
                 }
               ],
+              "placement": {
+                "row": 1,
+                "column": 0,
+                "columnSpan": 3
+              },
               "tokens": {
+                "color": "{imported.shared.color-242424}",
                 "font-size": "{imported.shared.size-14}",
                 "font-weight": "{imported.dialog.label-5.font-weight}",
                 "line-height": "{imported.shared.size-20}",
@@ -297,24 +320,63 @@
                   }
                 }
               },
+              "placement": {
+                "row": 2,
+                "column": 1,
+                "columnSpan": 2,
+                "alignX": "end"
+              },
               "declared": {
                 "box-sizing": "border-box"
               },
               "tokens": {
+                "color": "{imported.shared.color-242424}",
                 "column-gap": "{imported.shared.size-8}",
                 "row-gap": "{imported.shared.size-8}"
               }
             }
           },
+          "layout": {
+            "display": "grid",
+            "rows": [
+              {
+                "px": 28
+              },
+              {
+                "px": 28
+              },
+              {
+                "px": 32
+              }
+            ],
+            "columns": [
+              {
+                "px": 257
+              },
+              {
+                "px": 257
+              },
+              {
+                "px": 20
+              }
+            ],
+            "gap": {
+              "row": 8,
+              "column": 8
+            }
+          },
+          "literals": {
+            "width": "fit-content",
+            "height": "fit-content"
+          },
           "declared": {
             "box-sizing": "border-box"
           },
           "tokens": {
-            "column-gap": "{imported.shared.size-8}",
+            "color": "{imported.shared.color-242424}",
             "max-height": "{imported.dialog.dialogbody-2.max-height}",
             "min-height": "{imported.shared.size-0}",
-            "min-width": "{imported.shared.size-0}",
-            "row-gap": "{imported.shared.size-8}"
+            "min-width": "{imported.shared.size-0}"
           }
         },
         "dialogsurface__backdrop": {
@@ -333,6 +395,7 @@
           ],
           "tokens": {
             "background-color": "{imported.dialog.dialogsurface-backdrop.background-color}",
+            "color": "{imported.shared.color-242424}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}"
           }
@@ -374,7 +437,8 @@
                   "text": "Dialog title",
                   "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
-                    "display": "block"
+                    "display": "block",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
                   },
                   "stylesWhen": [
                     {
@@ -385,7 +449,13 @@
                       }
                     }
                   ],
+                  "placement": {
+                    "row": 0,
+                    "column": 0,
+                    "columnSpan": 2
+                  },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "font-size": "{imported.shared.size-20}",
                     "font-weight": "{imported.shared.num-600}",
                     "line-height": "{imported.dialog.label.line-height}"
@@ -397,6 +467,7 @@
                   "declared": {
                     "display": "block",
                     "box-sizing": "border-box",
+                    "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif",
                     "overflow-x": "auto",
                     "overflow-y": "auto"
                   },
@@ -409,7 +480,13 @@
                       }
                     }
                   ],
+                  "placement": {
+                    "row": 1,
+                    "column": 0,
+                    "columnSpan": 2
+                  },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "font-size": "{imported.shared.size-14}",
                     "font-weight": "{imported.dialog.label-2.font-weight}",
                     "line-height": "{imported.shared.size-20}",
@@ -496,24 +573,59 @@
                       }
                     }
                   },
+                  "placement": {
+                    "row": 2,
+                    "column": 1,
+                    "alignX": "end"
+                  },
                   "declared": {
                     "box-sizing": "border-box"
                   },
                   "tokens": {
+                    "color": "{imported.shared.color-242424}",
                     "column-gap": "{imported.shared.size-8}",
                     "row-gap": "{imported.shared.size-8}"
                   }
                 }
               },
+              "layout": {
+                "display": "grid",
+                "rows": [
+                  {
+                    "px": 28
+                  },
+                  {
+                    "px": 28
+                  },
+                  {
+                    "px": 32
+                  }
+                ],
+                "columns": [
+                  {
+                    "px": 267
+                  },
+                  {
+                    "px": 267
+                  }
+                ],
+                "gap": {
+                  "row": 8,
+                  "column": 8
+                }
+              },
+              "literals": {
+                "width": "550px",
+                "height": "fit-content"
+              },
               "declared": {
                 "box-sizing": "border-box"
               },
               "tokens": {
-                "column-gap": "{imported.shared.size-8}",
+                "color": "{imported.shared.color-242424}",
                 "max-height": "{imported.dialog.dialogbody.max-height}",
                 "min-height": "{imported.shared.size-0}",
-                "min-width": "{imported.shared.size-0}",
-                "row-gap": "{imported.shared.size-8}"
+                "min-width": "{imported.shared.size-0}"
               }
             }
           },
@@ -532,6 +644,7 @@
             "border-top-right-radius": "{imported.shared.size-8}",
             "border-top-width": "{imported.shared.size-1}",
             "box-shadow": "{imported.dialog.dialogsurface.box-shadow}",
+            "color": "{imported.shared.color-242424}",
             "margin-bottom": "{imported.dialog.dialogsurface.margin-bottom}",
             "margin-left": "{imported.dialog.dialogsurface.margin-left}",
             "margin-right": "{imported.dialog.dialogsurface.margin-right}",
@@ -550,6 +663,7 @@
       },
       "tokens": {
         "background-color": "{imported.shared.color-ffffff}",
+        "color": "{imported.shared.color-242424}",
         "min-height": "{imported.shared.size-0}",
         "min-width": "{imported.shared.size-0}"
       },

@@ -1,0 +1,57 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "ALL 4 sizes: canvas renders 'Placeholder' in near-black ink (reads as a typed value); ref renders it in placeholder gray ~#a8a8a8 \u2014 the sampled empty/default state reads as a filled input on canvas; label, field fill, and bottom border otherwise match"
+ ],
+ "defectClasses": [
+  "other"
+ ],
+ "notes": "label + filled field with bottom border match across 4 sizes",
+ "reviewedAt": "3f3b23b4",
+ "setNodeId": "39:8832",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-carbon-carbon.textinput.dump.json",
+  "matched": 4,
+  "diverged": [
+   "name \u2014 TextInput vs Textinput",
+   "prop size default \u2014 undefined vs \"xs\"",
+   "part root/text-input__label-wrapper \u2014 missing from proposal",
+   "part root/text-input__label-wrapper/label \u2014 missing from proposal",
+   "part root/text-input__field-outer-wrapper \u2014 missing from proposal",
+   "part root/text-input__field-outer-wrapper/text-input__field-wrapper \u2014 missing from proposal",
+   "part root/text-input__field-outer-wrapper/text-input__field-wrapper/text-input \u2014 missing from proposal",
+   "part root/text-input__field-outer-wrapper/text-input__field-wrapper/text-input__counter-alert \u2014 missing from proposal",
+   "part root/textInputLabelWrapper \u2014 proposal has a part the contract does not",
+   "part root/textInputLabelWrapper/labelmarginBox \u2014 proposal has a part the contract does not",
+   "part root/textInputLabelWrapper/labelmarginBox/label \u2014 proposal has a part the contract does not",
+   "part root/textInputFieldOuterWrapp \u2014 proposal has a part the contract does not",
+   "part root/textInputFieldOuterWrapp/textInputFieldWrapper \u2014 proposal has a part the contract does not",
+   "part root/textInputFieldOuterWrapp/textInputFieldWrapper/text-input \u2014 proposal has a part the contract does not",
+   "part root/textInputFieldOuterWrapp/textInputFieldWrapper/text-input/placeholder \u2014 proposal has a part the contract does not",
+   "part root flex-grow \u2014 {imported.text-input.root.flex-grow} missing from proposal",
+   "part root height \u2014 {imported.text-input.root.height.unset} vs {imported.text-input.root.height.{size}}",
+   "part root letter-spacing \u2014 {imported.shared.size-0-16} missing from proposal",
+   "part root line-height \u2014 {imported.shared.size-18-0001} missing from proposal",
+   "part root min-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root width \u2014 {imported.shared.size-288} missing from proposal",
+   "part root max-width \u2014 proposal has {imported.shared.size-288}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__label-wrapper font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__label-wrapper/label color` \u2014 {imported.text-input.label.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__label-wrapper/label font-size` \u2014 {imported.text-input.label.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__label-wrapper/label font-weight` \u2014 {imported.text-input.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__field-outer-wrapper font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__field-outer-wrapper/text-input__field-wrapper font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__field-outer-wrapper/text-input__field-wrapper/text-input font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/text-input__field-outer-wrapper/text-input__field-wrapper/text-input__counter-alert font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Textinput:root/text-input__field-outer-wrapper/text-input__field-wrapper/text-input/placeholder` text fill = `#000000` \u2014 nearest tokens: `{color.black}`"
+  ]
+ }
+}

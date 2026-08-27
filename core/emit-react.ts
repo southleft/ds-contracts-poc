@@ -92,7 +92,7 @@ export {
   type GridCellPlan,
 } from '../packages/core/src/grid.js';
 export { validateContract } from '../packages/core/src/validate.js';
-export { generateCss, stripCanvasOnlyChannels } from '../packages/core/src/css.js';
+export { generateCss, stripCanvasOnlyChannels, finishStylesheet, lowerPseudoElementChannels } from '../packages/core/src/css.js';
 export { ELEMENT_META } from '../packages/core/src/elements.js';
 
 // ---------------------------------------------------------------------------

@@ -67,7 +67,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -126,7 +126,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -185,7 +185,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -243,7 +243,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -302,7 +302,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/warning/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -361,7 +361,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/warning/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -420,7 +420,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/warning/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -478,7 +478,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/warning/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -537,7 +537,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/error/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -596,7 +596,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/error/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -655,7 +655,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/error/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -713,7 +713,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/error/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -772,7 +772,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/warning/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -831,7 +831,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/warning/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -890,7 +890,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/warning/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -948,7 +948,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/small",
               "lineHeightVar": "imported/input/root/line-height/small",
-              "textFill": "imported/input/root/color/warning/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1007,7 +1007,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/error/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1066,7 +1066,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/error/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1125,7 +1125,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/error/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1183,7 +1183,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/error/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1242,7 +1242,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/warning/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1301,7 +1301,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/warning/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1360,7 +1360,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/warning/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1418,7 +1418,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/large",
               "lineHeightVar": "imported/input/root/line-height/large",
-              "textFill": "imported/input/root/color/warning/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 24,
                 "unit": "PIXELS"
@@ -1489,7 +1489,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color-state-disabled/unset/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1548,7 +1548,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color-state-disabled/unset/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1607,7 +1607,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color-state-disabled/unset/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1665,7 +1665,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color-state-disabled/unset/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1738,7 +1738,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1798,7 +1798,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1858,7 +1858,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1917,7 +1917,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -1976,7 +1976,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -2035,7 +2035,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -2094,7 +2094,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -2152,7 +2152,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -2225,7 +2225,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/outlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -2285,7 +2285,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/borderless",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -2345,7 +2345,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/filled",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"
@@ -2404,7 +2404,7 @@ const COMPONENTS = [
               "fontStyle": "Medium",
               "fontSizeVar": "imported/input/root/font-size/middle",
               "lineHeightVar": "imported/input/root/line-height/middle",
-              "textFill": "imported/input/root/color/error/underlined",
+              "textFill": "imported/input/root/placeholder-color",
               "lineHeight": {
                 "value": 22,
                 "unit": "PIXELS"

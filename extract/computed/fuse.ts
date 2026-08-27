@@ -50,6 +50,7 @@ import {
   kindOf,
   pairwiseCertificate,
   PILL_RADIUS_SENTINEL,
+  planeChannelValue,
   SYNTHETIC_CHANNELS,
   type Capture,
   type Combo,
@@ -517,6 +518,209 @@ export function viewportResolvedParts(
   return out;
 }
 
+// ---------------------------------------------------------------------------
+// RC8 — A TEXT PART THAT FILLS A PINNED BOX IS NOT MEASURING ITS GLYPHS
+// ---------------------------------------------------------------------------
+/** THE EXCLUSION'S PREMISE, AND WHERE IT IS FALSE.
+ *
+ *  `absClusterParts` drops EVERY text-bearing part from the overlay-cluster
+ *  geometry admission with one sentence — "font-metric-dependent widths".
+ *  That sentence is true of a shrink-to-fit box (its size IS the sample
+ *  string the harness mounted, and a font swap moves it: the astryx.card
+ *  114.203px/119.016px measurement) and FALSE of a box the layout PINNED.
+ *
+ *  MEASURED, shadcn Avatar: the fallback `<span class="size-full">` inside a
+ *  `size-8` root is 32x32 in every combo — the root's own box, not a
+ *  measurement of "CN". Losing it minted a 17x20 hug pinned to the top-left
+ *  corner of a 32x32 transparent frame (label carries the fill and the
+ *  radius), which is the census verdict's "circle offset … large empty area
+ *  … glyphs overflow the circle".
+ *
+ *  WHAT THE PREVIOUS ATTEMPT AT THIS DOOR GOT WRONG, and what this one
+ *  refuses because of it (adversarial findings, both BLOCKING):
+ *
+ *   (1) A WINDOW MEASUREMENT LAUNDERED THROUGH ONE IN-FLOW GENERATION WALKED
+ *       STRAIGHT THROUGH. It checked `windowRefused` for the part and its
+ *       IMMEDIATE ancestor only. carbon Modal's root is `position: fixed`
+ *       with width 900px = browser.viewport.width and is refused BY NAME —
+ *       and its label-2/-3/-5 then took 366/474/690/798px, which are exactly
+ *       48%/60%/84%/96% of that same refused 900px, through modal-container
+ *       and modal-header. The refusal is now TRANSITIVE: every ancestor up to
+ *       the root is tested, not one.
+ *   (2) THE FILL WAS ADMITTED EVEN WHEN THE PINNED BOX WAS THE CAPTURE STAGE.
+ *       mui Accordion root = 288px = stage 320 − 2×16; fluent Card root =
+ *       428px = stage 460 − 2×16. A box that fills the harness's mount stage
+ *       is a fact about the harness (task #20, defect B) whichever door
+ *       carried it, so the whole ancestor chain is now tested against the
+ *       stage content box AND the viewport, arithmetically, in every combo.
+ *   (3) THE "ANCESTOR MOVED" COUNTER-EVIDENCE HAD NO MAGNITUDE FLOOR — mui
+ *       Accordion's witness read "2 DISTINCT ancestor sizes (254px / 256px)",
+ *       i.e. a 1px border pair. A shrink-to-fit box changes size in units of
+ *       glyph advances; below one em of the part's own font-size, "the box
+ *       tracked its parent" and "the text happened to measure that" are not
+ *       distinguishable, so one em is the floor. Deliberately conservative:
+ *       it refuses more than strictly necessary, because an ugly mint is
+ *       worse than an honest refusal.
+ *   (4) THE MATCH WAS ALLOWED TO ALTERNATE BASIS (the part's own reported box
+ *       OR its border box). Two alternatives make an equality cheap to hit by
+ *       accident, and the accident is not hypothetical: mui Select's label
+ *       reports a 23px content height whose border box (23 + 8.5 + 8.5) is
+ *       the root's 40px — but that 40px comes FROM the label's own
+ *       `min-height: 1.4375em` + padding, so the label DRIVES the root and
+ *       carrying its height would double-count the padding on canvas. One
+ *       basis only: the part's own reported box against the ancestor's
+ *       CONTENT box, in every combo.
+ *
+ *  Admission therefore needs FIVE pieces of counter-evidence, all measured:
+ *    (a) the nearest ancestor part is itself geometry-admitted by the overlay
+ *        cluster, and is not a lowered table box;
+ *    (b) in EVERY enabled default-plane combo the part's own reported box on
+ *        that axis EQUALS that ancestor's content box (one basis, no
+ *        alternatives);
+ *    (c) the ancestor's content box takes at least TWO DISTINCT values across
+ *        those combos, spanning at least one em of the part's font-size;
+ *    (d) NO ancestor on the chain from the part to the root — nor the part
+ *        itself — has that axis in `viewportDerivedRefusals`;
+ *    (e) NO ancestor on that chain, in any combo, measures the browser
+ *        viewport or the capture stage's content box on that axis.
+ *  Anything short of that keeps the exclusion, named per axis. */
+export function textFillPinnedAxes(
+  a: AlignedSweep,
+  space: PropSpace,
+  env: FusionEnv,
+  vpRefused: Map<number, Set<string>>,
+  table: TableGeometry,
+): { admit: Map<number, Set<string>>; receipts: string[]; refusals: Map<number, Map<string, string>> } {
+  const admit = new Map<number, Set<string>>();
+  const receipts: string[] = [];
+  const refusals = new Map<number, Map<string, string>>();
+  const { absAdmit, clusterAdmit, textExcluded } = absClusterParts(a, space);
+  if (textExcluded.size === 0) return { admit, receipts, refusals };
+  const enabled = space.enumeration.combos.filter(isEnabled);
+  const idxByPath = new Map<string, number>(a.baseFlat.map((e, i) => [e.path, i]));
+  /** Strict ancestors, nearest first. */
+  const chainOf = (pi: number): number[] => {
+    const p = a.baseFlat[pi].path;
+    if (p === '') return [];
+    const segs = p.split('.');
+    const out: number[] = [];
+    for (let k = segs.length - 1; k >= 0; k--) {
+      const j = idxByPath.get(segs.slice(0, k).join('.'));
+      if (j !== undefined) out.push(j);
+    }
+    return out;
+  };
+  /** The element's CONTENT box on one axis — the exact inverse of `outerPx`:
+   *  Chromium reports the BORDER box for a `box-sizing: border-box` element
+   *  and the content box for a content-box one. */
+  const contentPx = (style: StyleMap, axis: 'width' | 'height'): number | null => {
+    const base = pxNum(style[axis]);
+    if (base === null) return null;
+    if (style['box-sizing'] !== 'border-box') return base;
+    const sides = axis === 'width' ? ['left', 'right'] : ['top', 'bottom'];
+    let inner = base;
+    for (const side of sides) {
+      inner -= pxNum(style[`padding-${side}`]) ?? 0;
+      inner -= pxNum(style[`border-${side}-width`]) ?? 0;
+    }
+    return Math.round(inner * 1000) / 1000;
+  };
+  const stageContent = {
+    width: env.stage.width - 2 * env.stage.padding,
+    height: env.stage.height - 2 * env.stage.padding,
+  };
+  /** (d)+(e) — the harness test, applied to ONE part on ONE axis. Returns the
+   *  quoted arithmetic when the box is a fact about the harness, else null. */
+  const harnessSized = (qi: number, axis: 'width' | 'height'): string | null => {
+    if (vpRefused.get(qi)?.has(axis)) {
+      return `${a.partNames[qi]}.${axis} is already REFUSED by name as viewport-derived (see viewport-derived-geometry-refused: ${a.partNames[qi]})`;
+    }
+    for (const combo of enabled) {
+      const el = a.getAligned(`${combo.key}__default`)[qi];
+      if (!el) continue;
+      const outer = outerPx(el.node.style, axis);
+      if (outer === null) continue;
+      if (outer === env.viewport[axis]) {
+        return `${a.partNames[qi]}.${axis} = ${outer}px = browser.viewport.${axis} (${env.viewport[axis]}px) in combo ${combo.key}`;
+      }
+      if (outer === stageContent[axis]) {
+        return `${a.partNames[qi]}.${axis} = ${outer}px = the capture stage's content box (stage ${env.stage[axis]}px − 2×${env.stage.padding}px) in combo ${combo.key}`;
+      }
+    }
+    return null;
+  };
+  for (const pi of [...textExcluded].sort((x, y) => x - y)) {
+    if (table.lowered.has(pi)) continue; // the table door owns cell geometry
+    const part = a.partNames[pi];
+    const chain = chainOf(pi);
+    const anc = chain[0];
+    const why = new Map<string, string>();
+    for (const axis of ['width', 'height'] as const) {
+      // (a) — no pinned ancestor box to fill: not a near miss, and the
+      // legacy exclusion line already names the drop.
+      if (anc === undefined) continue;
+      if (!(absAdmit.has(anc) || clusterAdmit.has(anc)) || table.lowered.has(anc)) continue;
+      // (b) one basis: the part's own reported box vs the ancestor's content box
+      const ancSizes = new Set<number>();
+      let fills = true;
+      let seen = 0;
+      let witness = '';
+      for (const combo of enabled) {
+        const els = a.getAligned(`${combo.key}__default`);
+        const el = els[pi];
+        const ae = els[anc];
+        if (!el || !ae) continue;
+        seen++;
+        const mine = pxNum(el.node.style[axis]);
+        const theirs = contentPx(ae.node.style, axis);
+        if (mine === null || theirs === null || mine !== theirs) { fills = false; break; }
+        ancSizes.add(theirs);
+        if (!witness) witness = `${combo.key}: ${part} ${mine}px == ${a.partNames[anc]} content box ${theirs}px`;
+      }
+      if (seen === 0 || !fills) {
+        // NOT a near miss: the box is its own shrink-to-fit measurement of
+        // the mounted sample string, which is exactly what the exclusion is
+        // for. The legacy `absolute-geometry-excluded` line already names it;
+        // adding a second sentence here would churn every committed
+        // extension in the corpus for no new fact.
+        continue;
+      }
+      // (d)+(e), transitively, on the part and EVERY ancestor to the root.
+      // Evaluated AFTER the fill test so that a refusal recorded here is
+      // always a NEAR MISS — a box that really does fill its pinned ancestor
+      // and is refused anyway because the pinned box is the harness's.
+      const laundered = [pi, ...chain].map((qi) => harnessSized(qi, axis)).find((r) => r !== null);
+      if (laundered) {
+        why.set(axis, `a box on its ancestor chain is a measurement of the harness, not of the library — ${laundered}; admitting the fill would mint that same number one generation down`);
+        continue;
+      }
+      // (c) the ancestor MOVED, by at least one em of this part's own text
+      const em = pxNum(a.baseFlat[pi].node.style['font-size']) ?? 16;
+      const spread = Math.max(...ancSizes) - Math.min(...ancSizes);
+      if (ancSizes.size < 2) {
+        // NOT a near miss, and deliberately not receipted per part: with ONE
+        // observation "this box fills its parent" and "this text happened to
+        // measure the parent" are the SAME observation, so the engine has no
+        // evidence either way and the legacy exclusion line stands unchanged.
+        // (This is the majority case corpus-wide — 12 components — and
+        // restating the door's own policy on each of them would churn every
+        // committed extension for a decision nothing measured.)
+        continue;
+      }
+      if (spread < em) {
+        why.set(axis, `its ancestor ${a.partNames[anc]} moved by only ${Math.round(spread * 1000) / 1000}px across ${ancSizes.size} sizes (${[...ancSizes].sort((m, n) => m - n).join('px / ')}px), less than one em of this part's own ${em}px font — below a glyph advance the "it tracked its parent" evidence is indistinguishable from text metrics`);
+        continue;
+      }
+      (admit.get(pi) ?? admit.set(pi, new Set()).get(pi)!).add(axis);
+      receipts.push(
+        `text-fill-pinned-geometry-admitted: ${part}.${axis} — the overlay-cluster geometry exclusion is LIFTED for this one axis. The part's own reported box equals its ancestor ${a.partNames[anc]}'s CONTENT box in every enabled default-plane combo (${witness}), and that content box takes ${ancSizes.size} distinct values spanning ${Math.round(spread * 1000) / 1000}px (≥ one em of this part's ${em}px font): a box that moved WITH a parent that moved is filling it, not measuring its own glyphs. No box on the chain ${[part, ...chain.map((q) => a.partNames[q])].join(' → ')} measures the browser viewport (${env.viewport[axis]}px) or the capture stage content box (${stageContent[axis]}px) on this axis, and none of them is viewport-refused — the number is the library's, not the harness's.`,
+      );
+    }
+    if (why.size > 0) refusals.set(pi, why);
+  }
+  return { admit, receipts, refusals };
+}
+
 /** The geometry channels a viewport-resolved part must NOT mint, per part.
  *
  *  Both ends of a resolved axis go together. Chromium reports the USED value
@@ -613,10 +817,6 @@ export function styledChannels(
   // column rule below.
   const table = tableGeometry(a, space);
   receipts.push(...table.receipts, ...table.refusals);
-  for (const pi of textExcluded) {
-    if (table.lowered.has(pi)) continue;
-    receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)`);
-  }
   // VIEWPORT-DERIVED GEOMETRY (task #20): the parts whose boxes were laid out
   // against the capture WINDOW, and the geometry channels they must not mint.
   // Computed once and applied at EVERY door below — Carbon's Modal reaches
@@ -626,6 +826,35 @@ export function styledChannels(
   // window.
   const vpDerived = viewportDerivedRefusals(a, space, env);
   receipts.push(...vpDerived.receipts);
+  // RC8 — the text exclusion becomes PER AXIS, and it is the door's job to
+  // say which axes it kept and WHY it kept them. Computed here, after the
+  // viewport refusals, because condition (d) reads them: a fill whose pinned
+  // ancestor took its box from the window mints the window one generation
+  // down, which is exactly how task #20 re-entered by a new road.
+  const textFill = textFillPinnedAxes(a, space, env, vpDerived.refused, table);
+  receipts.push(...textFill.receipts);
+  for (const pi of [...textExcluded].sort((x, y) => x - y)) {
+    if (table.lowered.has(pi)) continue;
+    // The legacy line stays VERBATIM for every part that still keeps the
+    // exclusion on both axes — the drop ledger's wording is not a fact about
+    // the fix, and rewording it would restate 30-odd committed extensions
+    // that did not change their minds about anything.
+    const admitted = textFill.admit.get(pi);
+    if (!admitted || admitted.size === 0) {
+      receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)`);
+    } else {
+      const kept = (['width', 'height'] as const).filter((ax) => !admitted.has(ax));
+      if (kept.length > 0) {
+        receipts.push(`absolute-geometry-excluded: ${a.partNames[pi]} — text-bearing part in an overlay-anatomy component keeps the geometry exclusion on ${kept.join(' + ')} (font-metric-dependent widths); see text-fill-pinned-geometry-admitted for the ${[...admitted].sort().join(' + ')} axis it does not`);
+      }
+    }
+    // A NEAR MISS is worth its own line: the box really does fill a pinned
+    // ancestor, and the fill is refused anyway. Every one of these is a
+    // number the previous attempt at this door SHIPPED.
+    for (const [axis, reason] of [...(textFill.refusals.get(pi) ?? new Map())].sort((m, n) => m[0].localeCompare(n[0]))) {
+      receipts.push(`text-fill-pinned-geometry-refused: ${a.partNames[pi]}.${axis} — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: ${reason}`);
+    }
+  }
   // @door fuse.absolute-geometry-admitted
   for (const pi of [...absAdmit, ...parentAdmit].sort((x, y) => x - y)) {
     // @door fuse.table-geometry-excluded
@@ -721,6 +950,24 @@ export function styledChannels(
               : `The root is in normal flow but measures the window exactly, so its containing block is the document body (\`body { margin: 0 }\` on the capture page) — it was mounted OUTSIDE the stage${env.portaled ? ' (this component is captured through the portal reader, whose root is a child of <body>)' : ''}.`
           } A width that is a function of the capture window is a fact about the harness, not about the library: it is REFUSED here rather than minted with a warning, because the emitters read the token and not the receipt — a 900px token draws a 900px frame on canvas whatever the receipt says. The component's own drawn box is a DIFFERENT element (the dialog paper); choosing it is capture's root decision (demoteFullBleedScrim), not fusion's to fabricate.`,
         );
+      } else if (rootW !== null && rootW !== stageContent) {
+        // REJECTED-SETS ROUND (astryx.card census reject: 13 hug-pill
+        // variants at 114.203px). This branch used to ADMIT with the
+        // `block-root-width-source` receipt — "the admission stands — the
+        // number is the library's" — and the number was NOT the library's:
+        // it was the harness sample text's. The shipped astryx.card token
+        // (114.203px) and a fresh re-fuse of the SAME library version
+        // (119.016px) disagree by 4.8px because a font swap moved the text
+        // metrics — proof the measurement is a hug width, not a design
+        // width. A block root that measures neither its stage content box
+        // nor the viewport filled NOTHING (a flex stage makes a block child
+        // a flex item and it shrink-to-fits), so the width is a harness
+        // fact and is REFUSED like its viewport-derived siblings; the
+        // canvas draws HUG. Re-capture with blockStage: true to measure the
+        // real fill width (the fix the config comment on blockStage names).
+        receipts.push(
+          `block-root-width-refused (shrink-to-fit): ${a.partNames[rootPi]} — display:block root, width ${rootStyle['width']} is NOT the stage content box (stage ${env.stage.width}px − 2×${env.stage.padding}px = ${stageContent}px) and NOT the viewport (${env.viewport.width}px): a flex stage made the block root a flex item and it hugged its content (min-width ${rootStyle['min-width'] ?? 'auto'}, max-width ${rootStyle['max-width'] ?? 'none'}). A width that is a function of the harness sample text is a fact about the harness, not about the library — the emitters read the token and not the receipt, so it is REFUSED rather than minted with a warning; the canvas hugs. Re-capture with blockStage: true to measure the real container-fill width.`,
+        );
       } else {
         blockRootAdmit.add(rootPi);
         receipts.push(`block-root-width-admitted: ${a.partNames[rootPi]} — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)`);
@@ -801,6 +1048,7 @@ export function styledChannels(
         (GEOM_ADMIT.has(p) && !inTableBox && (absAdmit.has(pi) || parentAdmit.has(pi))) ||
         ((p === 'width' || p === 'height') && table.cellAdmit.has(pi)) ||
         (p === 'width' && blockRootAdmit.has(pi)) ||
+        textFill.admit.get(pi)?.has(p) === true ||
         tokenNamed(p));
     // @door fuse.control-fallback
     const tag = a.baseFlat[pi].node.tag;
@@ -874,6 +1122,20 @@ export function styledChannels(
         receipts.push(
           `reset-supplied-border-style-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-style', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-style', '-width')]}) and the style comes from the library's GLOBAL CSS (Tailwind preflight's \`* { border-style: solid }\` and its equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and colour ship and the border paints nothing.`,
         );
+      }
+      // @door fuse.page-inherited-ink-admitted
+      else if (pageInheritedInk(p, a.baseFlat[pi].node.style, ctrl)) {
+        set.add(p);
+        receipts.push(
+          `page-inherited-ink-admitted: ${a.partNames[pi]}.color = ${a.baseFlat[pi].node.style['color']} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).`,
+        );
+      }
+      // @door fuse.reset-supplied-border-color-admitted
+      else if (resetSuppliedBorderColor(p, a.baseFlat[pi].node.style, ctrl)) {
+        set.add(p);
+        receipts.push(
+          `reset-supplied-border-color-admitted: ${a.partNames[pi]}.${p} = ${a.baseFlat[pi].node.style[p]} — EQUAL to the <${tag}> control, so the styled-channel door would normally drop it as "not a fact of this component". Admitted anyway because this part draws a real border (${p.replace('-color', '-width')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-width')]}, ${p.replace('-color', '-style')} = ${a.baseFlat[pi].node.style[p.replace('-color', '-style')]}) and the control's own ${p} (${ctrl[p]}) differs from its \`color\` (${ctrl['color']}) — the UA's border colour is currentcolor, so the control was coloured by the library's GLOBAL CSS (shadcn's \`* { border-color: var(--border) }\`, Tailwind preflight's equivalents). The control correctly subtracts the reset; the emitted CSS does not REPRODUCE it, so without this the width and style ship and the border paints currentcolor on the code surface and NOTHING on the canvas.`,
+        );
       } else {
         dropped++;
         // A channel the library's own stylesheet DECLARES on this element and
@@ -882,6 +1144,7 @@ export function styledChannels(
         // the computed value matched it — so this is not a guess.
         if ((a.baseFlat[pi].node.vrefs?.[p]?.length ?? 0) > 0 && !p.startsWith('--')) droppedAuthored.push(p);
       }
+
     }
     // ═══ THE DOOR LEAVES A RECEIPT WHEN IT SUBTRACTS (door register rule).
     if (dropped > 0) {
@@ -966,6 +1229,39 @@ export function styledChannels(
         set.add('translate-y');
         receipts.push(
           `translate-door-generalized: ${a.partNames[pi]} — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round`,
+        );
+      }
+    }
+    // RC7 — THE PLACEHOLDER-INK DOOR. `placeholder-color` is synthetic
+    // (foldPlaceholderInk hoists `::placeholder{color}` onto the host at the
+    // read boundary) so it lives OUTSIDE `allProps`, the browser property
+    // enumeration, exactly like translate-x/y — the loop above can never see
+    // it and it needs its own admission.
+    //
+    // The STYLED-NESS TEST IS THE FOLD ITSELF: the fold only writes the key
+    // when the placeholder plane paints an ink DIFFERENT from the ink the
+    // element already carries. A control-equality comparison would be
+    // meaningless here (no <span> control has a placeholder plane), and the
+    // difference IS the fact — where the two agree the existing `color`
+    // channel already paints the right pixel and nothing is minted.
+    //
+    // Admitted across the whole enabled default plane the moment ANY combo
+    // carries it, so a per-combo hint ink (Fluent's 112 → 189 on disabled)
+    // fuses as a varying channel instead of vanishing on the combos that
+    // happen to agree with their own value ink.
+    {
+      const phStyles: StyleMap[] = [a.baseFlat[pi].node.style];
+      for (const combo of space.enumeration.combos) {
+        if (!isEnabled(combo)) continue;
+        const el = a.getAligned(`${combo.key}__default`)[pi];
+        if (el) phStyles.push(el.node.style);
+      }
+      if (phStyles.some((st) => st['placeholder-color'] !== undefined)) {
+        set.add('placeholder-color');
+        receipts.push(
+          `placeholder-ink-admitted: ${a.partNames[pi]} — the element's ::placeholder plane paints an ink DIFFERENT from its own color (${
+            phStyles.find((st) => st['placeholder-color'] !== undefined)!['placeholder-color']
+          } vs ${a.baseFlat[pi].node.style['color'] ?? 'unset'}); the synthetic placeholder-color channel joins fusion so an EMPTY field stops minting in VALUE ink (RC7). Where the two inks AGREE the fold does not fire and the existing color channel already paints the right pixel.`,
         );
       }
     }
@@ -1567,31 +1863,69 @@ export function textOutOfBoxEvidence(a: AlignedSweep, space: PropSpace): TextOut
 // truth becomes a named receipt (never silently overridden — the reviewed
 // static layer wins values, the floor wins truth).
 // ---------------------------------------------------------------------------
+/** THE VOCABULARY OF THE ONLY READER that turns a captured flex keyword into a
+ *  Part.layout fact. Every absence here has the same silent shape: no map
+ *  entry -> the channel leaves through `layout-value-outside-vocabulary` /
+ *  `layout-not-uniform` -> BOTH emitters draw their own default. That is not a
+ *  refusal a reader can see; it is a different component.
+ *
+ *  Three entries were missing and each was already lowered on both surfaces:
+ *   · row-reverse / column-reverse — VariantLayoutSchema already accepted
+ *     them, packages/core/src/css.ts writes flex-direction verbatim, and
+ *     core/emit-figma-script.ts `isReversed` reverses the compiled children.
+ *     Carbon's Accordion `align` prop DEFAULTS to `end` = row-reverse, so the
+ *     base combo's measured keyword had no slot at all.
+ *   · baseline — a documented CARRY-BOTH value of LayoutSchema.align, lowered
+ *     by packages/core/src/anatomy.ts (ALIGN_CSS) and emit-figma-script
+ *     (ALIGN_FIGMA BASELINE, with the VERTICAL -> MIN projection).
+ *   · flex-wrap — LayoutSchema.wrap is a first-class v15/S4 fact with a real
+ *     lowering on both halves; the map had no entry for the CHANNEL, so the
+ *     fact could only ever arrive from a hand-authored contract.
+ *
+ *  `omit` names the CSS-INITIAL value of a channel: observing it is observing
+ *  nothing, so it is consumed (never re-minted as a token) and never written
+ *  as a layout fact. Without it every flex container in the corpus would
+ *  suddenly carry `wrap: false`, which the schema cannot even spell. */
 const LAYOUT_CHANNEL_TO_FIELD: Record<
   string,
-  { field: 'display' | 'direction' | 'align' | 'justify' | 'wrap'; map: Record<string, string | boolean>; initial?: string }
+  { field: 'display' | 'direction' | 'align' | 'justify' | 'wrap'; map: Record<string, string | boolean>; omit?: string[] }
 > = {
   display: { field: 'display', map: { flex: 'flex', 'inline-flex': 'inline-flex' } },
-  'flex-direction': { field: 'direction', map: { row: 'row', column: 'column' } },
-  // LAYOUT ROUND (2026-08-26) — `baseline` was the register's own example of a
-  // value the schema already spells (LayoutSchema.align) and this vocabulary
-  // did not: it fell to `layout-value-outside-vocabulary` and stayed code-only
-  // while ALIGN_FIGMA in the emitter has carried BASELINE all along.
-  'align-items': { field: 'align', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', stretch: 'stretch', baseline: 'baseline' } },
+  'flex-direction': {
+    field: 'direction',
+    map: { row: 'row', column: 'column', 'row-reverse': 'row-reverse', 'column-reverse': 'column-reverse' },
+  },
+  'align-items': {
+    field: 'align',
+    map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', stretch: 'stretch', baseline: 'baseline' },
+  },
   'justify-content': { field: 'justify', map: { 'flex-start': 'start', center: 'center', 'flex-end': 'end', 'space-between': 'space-between' } },
-  // `flex-wrap: wrap` is natively CARRY-BOTH (LayoutSchema.wrap ->
-  // layoutWrap 'WRAP'), and the schema has declared it since v15 — but nothing
-  // ever DETECTED it, which is what schema.wrap-declared-never-detected named.
-  // `nowrap` is the CSS initial value: there is nothing to carry and nothing
-  // is lost, so it is skipped WITHOUT a receipt rather than reported as a
-  // vocabulary miss on every flex container in the corpus.
-  'flex-wrap': { field: 'wrap', map: { wrap: true }, initial: 'nowrap' },
+  'flex-wrap': { field: 'wrap', map: { wrap: true }, omit: ['nowrap'] },
 };
+
+/** The reversed spelling of a canonical direction, and back. The canvas has no
+ *  reversed auto-layout, so BOTH surfaces express "reversed" the same way the
+ *  schema documents it: code writes the keyword, the canvas compiles the
+ *  children in the opposite order. Flipping is therefore an involution on the
+ *  four canonical values and is the ONE operation the child-order door needs. */
+const flipReverse = (d: string): string =>
+  d.endsWith('-reverse') ? d.slice(0, -'-reverse'.length) : `${d}-reverse`;
 
 export interface LayoutEnrichment {
   /** per part: layout channels consumed here (excluded from minting). */
   handled: Map<string, Set<string>>;
-  enriched: Array<{ part: string; field: string; value: string | boolean }>;
+  enriched: Array<{
+    part: string;
+    field: string;
+    value: string | boolean;
+    /** REJECTED-SETS ROUND (fluent.card): a layout keyword that VARIES across
+     *  combos but FACTORS on exactly one enum axis carries the base-combo
+     *  value here plus the deviating values as a layoutByProp override map —
+     *  the schema's own v7 vocabulary (resolveLayout merges map[value] over
+     *  the base layout per compiled variant). `overrides` maps axis VALUE →
+     *  canonical layout keyword for this field. */
+    byProp?: { prop: string; overrides: Record<string, string> };
+  }>;
   contradictions: Array<{ part: string; field: string; carried: string; observed: string }>;
   receipts: string[];
 }
@@ -1607,6 +1941,14 @@ export function enrichLayout(
   const staticParts = new Map(walkAnatomy(contract).map((w) => [w.name, w.part] as const));
   const out: LayoutEnrichment = { handled: new Map(), enriched: [], contradictions: [], receipts: [] };
   const enabled = space.enumeration.combos.filter(isEnabled);
+  // The props a layoutByProp map may legally ride: validate.ts:310 requires a
+  // declared ENUM. `space.axes` also carries presence axes, which fuse into
+  // BOOLEAN props.
+  const enumAxisProps = new Set(
+    [...(contract.props ?? []), ...(space.contract.props ?? [])]
+      .filter((pr) => Array.isArray((pr as { type?: { enum?: unknown } }).type?.enum))
+      .map((pr) => pr.name),
+  );
   for (let pi = 0; pi < a.baseFlat.length; pi++) {
     const partName = a.partNames[pi];
     const target = staticParts.get(partName);
@@ -1674,19 +2016,97 @@ export function enrichLayout(
         if (el) values.add(el.node.style[channel]);
       }
       // @door fuse.layout-not-uniform
+      // A channel observed at its CSS-INITIAL value everywhere is observing
+      // nothing: consume it (so it is not re-minted as a token) and write no
+      // layout fact. `flex-wrap: nowrap` is the whole vocabulary of this rule
+      // today, and the schema has no spelling for the negative anyway.
+      if (spec.omit && values.size === 1 && spec.omit.includes([...values][0])) {
+        (out.handled.get(partName) ?? out.handled.set(partName, new Set()).get(partName)!).add(channel);
+        continue;
+      }
       if (values.size !== 1) {
-        out.receipts.push(`layout-not-uniform: ${partName}.${channel} varies across combos — stays code-only`);
+        // REJECTED-SETS ROUND (fluent.card census reject): uniform-or-nothing
+        // dropped flex-direction on ANY component with an orientation-style
+        // axis — the default (vertical → column) variant then drew the
+        // emitter's horizontal default, gluing the Card's preview and header
+        // side by side on BOTH surfaces. When the variance FACTORS on exactly
+        // one enum axis (per-axis-value the channel is uniform), the fact IS
+        // carriageable: base layout carries the base combo's keyword and the
+        // deviating axis values ride layoutByProp — the schema's own v7
+        // spelling, resolved per compiled variant by resolveLayout. Variance
+        // that factors on no single axis keeps the code-only receipt.
+        let factored: { prop: string; byValue: Map<string, string> } | null = null;
+        for (const ax of space.axes) {
+          // packages/core/src/validate.ts requires the layoutByProp driving
+          // prop to be a declared ENUM. `space.axes` also holds PRESENCE axes,
+          // which fuse into BOOLEAN contract props — factoring on one of those
+          // minted a contract the engine's own validator refuses, and that
+          // refusal is a WHOLE-ROUND abort (antd.alert: `layoutByProp prop
+          // "description" must be an enum prop`, no artifact written at all).
+          // A boolean driving axis is REFUSED BY NAME here instead: the loop
+          // falls through to the existing code-only receipt.
+          if (!enumAxisProps.has(ax.prop)) continue;
+          const byValue = new Map<string, Set<string>>();
+          for (const combo of enabled) {
+            const el = a.getAligned(`${combo.key}__default`)[pi];
+            if (!el) continue;
+            const av = combo.axisValues[ax.prop] ?? '';
+            (byValue.get(av) ?? byValue.set(av, new Set()).get(av)!).add(el.node.style[channel]);
+          }
+          if (byValue.size > 1 && [...byValue.values()].every((vs) => vs.size === 1)) {
+            factored = { prop: ax.prop, byValue: new Map([...byValue].map(([k, vs]) => [k, [...vs][0]])) };
+            break;
+          }
+        }
+        const baseValue = factored ? factored.byValue.get(space.baseAxisValues[factored.prop] ?? '') : undefined;
+        // VariantLayoutSchema carries display/direction/align/justify only —
+        // there is NO per-variant wrap spelling. Flattening the base combo's
+        // answer onto every variant would be a fiction, so the fact stays
+        // code-only and says so by name.
+        if (factored !== null && spec.field === 'wrap') {
+          out.receipts.push(
+            `layout-wrap-varies-by-axis: ${partName}.${channel} varies across combos and factors on enum axis "${factored.prop}", but layoutByProp (VariantLayoutSchema) carries display/direction/align/justify only — there is no per-variant wrap spelling, so the fact stays code-only rather than being flattened onto every variant`,
+          );
+          continue;
+        }
+        if (
+          factored === null ||
+          baseValue === undefined ||
+          [...factored.byValue.values()].some((v) => spec.map[v] === undefined) ||
+          // layoutByProp is refused on grid parts (P10 mode-switch destruction)
+          // — display itself may not ride the map, only row/column keywords may.
+          channel === 'display'
+        ) {
+          out.receipts.push(`layout-not-uniform: ${partName}.${channel} varies across combos — stays code-only`);
+          continue;
+        }
+        const overrides: Record<string, string> = {};
+        for (const [av, ov] of [...factored.byValue].sort(([x], [y]) => x.localeCompare(y))) {
+          if (ov !== baseValue) overrides[av] = String(spec.map[ov]);
+        }
+        const handledVar = out.handled.get(partName) ?? new Set<string>();
+        out.handled.set(partName, handledVar);
+        const carriedVar = target.layout?.[spec.field];
+        if (carriedVar !== undefined) {
+          handledVar.add(channel);
+          if (String(spec.map[baseValue]) !== String(carriedVar)) {
+            out.contradictions.push({ part: partName, field: spec.field, carried: String(carriedVar), observed: baseValue });
+          }
+          continue;
+        }
+        handledVar.add(channel);
+        out.enriched.push({
+          part: partName,
+          field: spec.field,
+          value: String(spec.map[baseValue]),
+          byProp: { prop: factored.prop, overrides },
+        });
+        out.receipts.push(
+          `layout-factored-on-axis: ${partName}.${channel} varies across combos but factors on enum axis "${factored.prop}" — base (${factored.prop}=${space.baseAxisValues[factored.prop]}) carries layout.${spec.field} = ${spec.map[baseValue]}; deviating value(s) ${Object.entries(overrides).map(([k, v]) => `${factored!.prop}=${k} → ${v}`).join(', ') || '(none differ)'} ride layoutByProp (schema v7; resolveLayout merges per compiled variant)`,
+        );
         continue;
       }
       const observed = [...values][0];
-      // The CSS INITIAL value is not a lost fact: there is nothing to carry
-      // and nothing to name. Reporting `flex-wrap: nowrap` as a vocabulary
-      // miss on every flex container in the corpus would bury the misses that
-      // are real.
-      if (spec.initial !== undefined && observed === spec.initial) {
-        (out.handled.get(partName) ?? out.handled.set(partName, new Set<string>()).get(partName)!).add(channel);
-        continue;
-      }
       const canonical = spec.map[observed];
       const handledSet = out.handled.get(partName) ?? new Set<string>();
       out.handled.set(partName, handledSet);
@@ -1707,6 +2127,178 @@ export function enrichLayout(
       }
       handledSet.add(channel);
       out.enriched.push({ part: partName, field: spec.field, value: canonical });
+    }
+  }
+
+  // -------------------------------------------------------------------------
+  // THE CHILD-ORDER DOOR (RC1, burn-down round 2)
+  //
+  // MEASURED ROOT CAUSE. Nothing between capture and contract ever read child
+  // ORDER. buildUnion (extract/computed/anatomy.ts) DETECTS the loss — it
+  // emits `union-order-drift: <combo> @<path> matched behind the cursor —
+  // document order varies across captures (named)` — and then discards it: the
+  // union's DFS order becomes the ONE part order for every combo. enrichLayout
+  // reads `el.node.style[channel]` and nothing else. A container whose children
+  // re-order on an enum axis therefore mints EVERY value of that axis with the
+  // base order, and the deviating variants come out indistinguishable from the
+  // base one. Corpus-wide that receipt fires in exactly two components —
+  // fluent.switch and fluent.spinner — and both were rejected by screenshot
+  // for precisely this: `labelPosition=above` draws the toggle above the label,
+  // the inverse of the library, and `above`/`below` render byte-identically.
+  // A receipt that names a loss while the mint ships a WRONG component is not
+  // an honest refusal; it is a shipped lie with a footnote.
+  //
+  // THE CARRIAGE. The schema already owns the spelling and says so:
+  // VariantLayoutSchema's REVERSED directions exist because "the canvas (which
+  // has no reverse) reverses the compiled child order per variant instead"
+  // (packages/schema/src/contract-schema.ts). Both lowerings are already
+  // written — css.ts emits the keyword, emit-figma-script's `isReversed`
+  // reverses `spec.children`. So a per-value order that is the EXACT REVERSE of
+  // the contract's own part order is carriable today, with no new vocabulary,
+  // by flipping that value's resolved direction. Nothing else is: an arbitrary
+  // permutation has no spelling on either surface and is REFUSED BY NAME rather
+  // than flattened onto the base order.
+  {
+    const idxOf = new Map(a.union.entries.map((e, i) => [e, i] as const));
+    const kidsOf: number[][] = a.union.entries.map((e) =>
+      e.children.map((c) => idxOf.get(c)).filter((j): j is number => j !== undefined),
+    );
+    const lastSeg = (p: string): number => Number(p.slice(p.lastIndexOf('.') + 1));
+    // OUT OF FLOW children are excluded from the comparison and are unaffected
+    // by the carriage: a reversed frame reverses them too, but they are placed
+    // by insets, so their index is not a rendered fact. fluent.Switch's
+    // `position: absolute` input is exactly this case.
+    const inFlow = (el: FlatEl): boolean => {
+      const st = el.node.style;
+      return st['display'] !== 'none' && st['position'] !== 'absolute' && st['position'] !== 'fixed';
+    };
+    for (let pi = 0; pi < a.baseFlat.length; pi++) {
+      const partName = a.partNames[pi];
+      const target = staticParts.get(partName);
+      if (!target || kidsOf[pi].length < 2) continue;
+      const orderFor = (key: string): number[] | null => {
+        let els: (FlatEl | null)[];
+        try {
+          els = a.getAligned(key);
+        } catch {
+          return null;
+        }
+        const rows: Array<{ j: number; at: number }> = [];
+        for (const j of kidsOf[pi]) {
+          const el = els[j];
+          if (!el || !inFlow(el)) continue;
+          rows.push({ j, at: lastSeg(el.path) });
+        }
+        return rows.sort((x, y) => x.at - y.at).map((r) => r.j);
+      };
+      const baseOrder = orderFor(`${space.baseComboKey}__default`);
+      if (!baseOrder || baseOrder.length < 2) continue;
+      const refSet = new Set(baseOrder);
+      // The reference order is the CONTRACT's order (union DFS), restricted to
+      // the base combo's in-flow set — never the base capture's own order,
+      // because the contract is what both emitters walk.
+      const unionOrder = kidsOf[pi].filter((j) => refSet.has(j));
+      const forward = unionOrder.join('>');
+      const backward = [...unionOrder].reverse().join('>');
+      type Verdict = 'same' | 'reverse' | 'other' | 'membership';
+      const verdictOf = (seq: number[] | null): Verdict | null => {
+        if (seq === null) return null;
+        if (seq.length !== unionOrder.length || seq.some((j) => !refSet.has(j))) return 'membership';
+        const k = seq.join('>');
+        return k === forward ? 'same' : k === backward ? 'reverse' : 'other';
+      };
+      const byCombo = new Map<Combo, Verdict>();
+      for (const combo of enabled) {
+        const v = verdictOf(orderFor(`${combo.key}__default`));
+        if (v !== null) byCombo.set(combo, v);
+      }
+      const seen = new Set(byCombo.values());
+      if (seen.size === 0 || (seen.size === 1 && seen.has('same'))) continue;
+      if (seen.has('membership')) {
+        out.receipts.push(
+          `child-order-varies-membership: ${partName}'s in-flow children differ in MEMBERSHIP across combos, not only in order — a per-variant child set is not a layout fact and has no contract spelling; the order stays code-only`,
+        );
+        continue;
+      }
+      if (seen.has('other')) {
+        out.receipts.push(
+          `child-order-varies-unreversible: ${partName}'s children re-order across combos by a permutation that is neither the identity nor a REVERSAL of the contract's part order — the only per-variant child-order spelling either surface has is a reversed main axis (CSS flex-direction: *-reverse / canvas children.reverse()), so an arbitrary permutation stays code-only rather than being flattened onto the base order`,
+        );
+        continue;
+      }
+      // Only 'same' and 'reverse' remain. Establish the base combo's own
+      // verdict and, if the rest deviate, the single ENUM axis they factor on.
+      const baseCombo = enabled.find((c) => c.key === space.baseComboKey);
+      const baseVerdict = (baseCombo && byCombo.get(baseCombo)) ?? 'same';
+      let factored: { prop: string; byValue: Map<string, Verdict> } | null = null;
+      if (seen.size > 1) {
+        for (const ax of space.axes) {
+          if (!enumAxisProps.has(ax.prop)) continue;
+          const byValue = new Map<string, Set<Verdict>>();
+          for (const [combo, v] of byCombo) {
+            const av = combo.axisValues[ax.prop] ?? '';
+            (byValue.get(av) ?? byValue.set(av, new Set()).get(av)!).add(v);
+          }
+          if (byValue.size > 1 && [...byValue.values()].every((vs) => vs.size === 1)) {
+            factored = { prop: ax.prop, byValue: new Map([...byValue].map(([k, vs]) => [k, [...vs][0]])) };
+            break;
+          }
+        }
+        if (factored === null) {
+          out.receipts.push(
+            `child-order-varies-not-factored: ${partName}'s children reverse across combos but the reversal factors on no single enum axis — layoutByProp is one {prop, map} per part (schema v7), so the order stays code-only`,
+          );
+          continue;
+        }
+      }
+      // The direction this part resolves to per axis value BEFORE the flip —
+      // the base layout's own keyword (carried, freshly enriched, or the
+      // measured computed value), plus any override the channel door made.
+      const enrichedDir = out.enriched.find((e) => e.part === partName && e.field === 'direction');
+      const baseDir = String(
+        enrichedDir?.value ?? target.layout?.direction ?? a.baseFlat[pi].node.style['flex-direction'] ?? 'row',
+      );
+      if (LAYOUT_CHANNEL_TO_FIELD['flex-direction'].map[baseDir] === undefined) {
+        out.receipts.push(
+          `child-order-reversal-outside-vocabulary: ${partName}'s children reverse across combos but its base flex-direction is "${baseDir}", which has no canonical spelling — the order stays code-only`,
+        );
+        continue;
+      }
+      if (factored !== null && enrichedDir?.byProp && enrichedDir.byProp.prop !== factored.prop) {
+        out.receipts.push(
+          `child-order-axis-conflicts-with-direction-axis: ${partName}'s child order reverses on enum axis "${factored.prop}" but its flex-direction already rides layoutByProp on "${enrichedDir.byProp.prop}" — one driving prop per part (schema v7), so the order stays code-only`,
+        );
+        continue;
+      }
+      const dirAt = (axisValue: string): string =>
+        String(enrichedDir?.byProp?.overrides[axisValue] ?? baseDir);
+      const newBase = baseVerdict === 'reverse' ? flipReverse(baseDir) : baseDir;
+      const overrides: Record<string, string> = { ...(enrichedDir?.byProp?.overrides ?? {}) };
+      if (factored !== null) {
+        for (const [av, v] of [...factored.byValue].sort(([x], [y]) => x.localeCompare(y))) {
+          const d = v === 'reverse' ? flipReverse(dirAt(av)) : dirAt(av);
+          if (d !== newBase) overrides[av] = d;
+          else delete overrides[av];
+        }
+      }
+      const byProp =
+        Object.keys(overrides).length > 0
+          ? { prop: (factored?.prop ?? enrichedDir?.byProp?.prop) as string, overrides }
+          : undefined;
+      if (enrichedDir) {
+        enrichedDir.value = newBase;
+        enrichedDir.byProp = byProp;
+      } else {
+        out.enriched.push({ part: partName, field: 'direction', value: newBase, byProp });
+      }
+      (out.handled.get(partName) ?? out.handled.set(partName, new Set()).get(partName)!).add('flex-direction');
+      out.receipts.push(
+        `child-order-carried-as-reversed-axis: ${partName}'s children are re-ordered across combos and every deviating order is the EXACT REVERSE of the contract's part order — carried as layout.direction = ${newBase}${
+          byProp
+            ? ` with ${Object.entries(byProp.overrides).map(([k, v]) => `${byProp.prop}=${k} → ${v}`).join(', ')} via layoutByProp`
+            : ''
+        } (the schema's documented spelling: code writes the keyword, the canvas compiles the children in reversed order)`,
+      );
     }
   }
   // ANTD EXAM (heal loop, 2026-08-23) — GROW IS A LAYOUT FACT, NOT A TOKEN.
@@ -2043,7 +2635,13 @@ export const INHERITED_CHANNELS = new Set([
  *  rule is how the base door and the state door drifted apart in the first
  *  place (the regression this comment's round repairs). */
 export const nestedStateCarriable = (channel: string, placeholders: string[]): boolean =>
-  ['color', 'background-color', 'border-color'].includes(channel) && placeholders.length === 0;
+  // RC7: `placeholder-color` joins the list by the door's OWN stated rule —
+  // it is a PLAIN COLOR-KIND ref, the ink of the control's placeholder text
+  // plane, on exactly the same footing as `color` two entries left. Its
+  // absence was an omission, not a decision: without it a control whose
+  // placeholder repaints on :disabled (Fluent 112 → 189, Carbon alpha .4 →
+  // .25) carries the RESTING ink into every disabled cell.
+  ['color', 'background-color', 'border-color', 'placeholder-color'].includes(channel) && placeholders.length === 0;
 
 /** Round 5c — SET-PLANE LITERALS: a geometry channel the mint refuses (or
  *  cannot kind — min-height auto→24px) still has EXACT per-plane truth on a
@@ -2134,6 +2732,80 @@ export const CONTROL_TAGS_MIRROR = new Set(['button', 'span', 'a', 'div']);
  *  came from the reset rather than from this component). Drop any one and the
  *  door either misses these two or re-admits the noise the control exists to
  *  remove. */
+/** REJECTED-SETS ROUND (shadcn.select census reject) — the COLOR twin of the
+ *  border-style door above, one channel over. shadcn's global stylesheet sets
+ *  `* { border-color: var(--border) }` (the Tailwind-v4 preflight idiom), so
+ *  the bare control element carries the SAME border-color as the subject
+ *  (--input == --border in the shadcn theme) and the styled-channel door
+ *  dropped the base border colour as "not a fact of this component" — with a
+ *  1px solid border carried, the canvas drew NO stroke while the CSS surface
+ *  painted one (border-color's initial value is currentColor, so CSS always
+ *  paints SOMETHING when style+width are carried; the canvas has no such
+ *  default). The clauses mirror the style door exactly: the channel is a
+ *  border-*-color, the SAME side draws (non-none style, non-zero width), and
+ *  the control agrees (proving the value came from a global reset the library
+ *  ships, not from UA noise). A colour equal to the part's own `color` still
+ *  folds into `color` downstream — the currentColor fold runs after this
+ *  admission, exactly as it does for ordinarily-admitted border colours. */
+/** REJECTED-SETS ROUND (polaris.checkbox label ink) — the INK sibling of the
+ *  two border doors below. Polaris sets the page's text ink globally
+ *  (--p-color-text on the body), so the bare control element computes the
+ *  SAME color as the subject (rgba(48,48,48,1)) and the styled-channel door
+ *  dropped the label's base `color` as "not a fact of this component" — the
+ *  canvas then drew default #000000 ink (the census verdict names the loss).
+ *  The tell is the CONTROL itself: a clean UA control's color is black, so a
+ *  control whose ink is NOT black was inked by the library's own global CSS,
+ *  and equality with it proves library authorship, not absence. Channel
+ *  `color` only; a subject whose ink differs from the control keeps the
+ *  ordinary door. */
+export const pageInheritedInk = (
+  channel: string,
+  style: Record<string, string | undefined>,
+  ctrl: Record<string, string | undefined>,
+): boolean => {
+  if (channel !== 'color') return false;
+  const value = style['color'];
+  if (!value) return false;
+  if (ctrl['color'] !== value) return false; // it differs — the ordinary door already admits it
+  const v = value.replace(/\s+/g, '');
+  return v !== 'rgb(0,0,0)' && v !== 'rgba(0,0,0,1)' && v !== '#000000' && v !== 'oklch(000)';
+};
+
+/*  MERGE (census/stack-to-main): #38 and #39 each grew this door
+ *  independently and git took BOTH additions without a conflict — two
+ *  `export const resetSuppliedBorderColor` in one module, which is a
+ *  redeclaration, and at runtime the second silently won for BOTH call sites.
+ *  Deduped to one definition carrying the UNION of the two premises, because
+ *  each side's extra clause is a guard the other side simply had not thought
+ *  of and neither narrows the case the other was fixing:
+ *
+ *    #39  `transparent` is not a rendered colour — admitting it re-mints an
+ *         invisible stroke as if it were a fact.
+ *    #38  the control's own border colour must DIFFER from the control's
+ *         `color`: the UA's border-color is `currentcolor`, so a control that
+ *         still reads its own text ink here was never re-coloured by the page,
+ *         and equality with it proves nothing about library authorship.
+ *
+ *  Measured on both originating rows: shadcn Input / shadcn.select keep the
+ *  admission under the union (border-color oklch(0.922 0 0), not transparent;
+ *  the control's border-color differs from its `color`). */
+export const resetSuppliedBorderColor = (
+  channel: string,
+  style: Record<string, string | undefined>,
+  ctrl: Record<string, string | undefined>,
+): boolean => {
+  const m = /^border-(top|right|bottom|left)-color$/.exec(channel);
+  if (!m) return false;
+  const value = style[channel];
+  if (!value || value === 'transparent') return false; // #39: an invisible colour is not a rendered fact
+  if (ctrl[channel] !== value) return false; // it differs — the ordinary door already admits it
+  const sideStyle = style[`border-${m[1]}-style`];
+  if (!sideStyle || sideStyle === 'none') return false;
+  const width = style[`border-${m[1]}-width`];
+  if (width === undefined || width === '0px' || width === '0') return false;
+  return ctrl[channel] !== ctrl['color']; // #38: an un-reset control reads its text ink here
+};
+
 export const resetSuppliedBorderStyle = (
   channel: string,
   style: Record<string, string | undefined>,
@@ -2339,6 +3011,18 @@ export function prepareMint(
     const rootPi = a.baseFlat.findIndex((e) => e.path === '');
     if (rootPi >= 0) out.add(rootPi);
     for (const pi of tableGeo.cellAdmit) out.add(pi);
+    // RC8: a text part whose fill of a pinned ancestor was ADMITTED
+    // (textFillPinnedAxes) rides the same box-sizing-aware outer baking as
+    // every other geometry-carrying part — a content-box fill would
+    // otherwise mint a canvas frame short by its own padding. Derived from
+    // `styled` rather than re-running the door, so this stays the one place
+    // that decides admission: a text-excluded part only reaches fusion with
+    // width/height through that door.
+    const { textExcluded } = absClusterParts(a, space);
+    for (const pi of textExcluded) {
+      const chans = styled.get(a.partNames[pi]);
+      if (chans?.has('width') || chans?.has('height')) out.add(pi);
+    }
     return out;
   })();
   const buildBaseObs = (skipFolds: boolean): { obs: MintObservation[]; codeOnly: CodeOnlyEntry[]; declared: DeclaredEnrichment[]; pairwiseRefusals: string[] } => {
@@ -2388,10 +3072,14 @@ export function prepareMint(
         const occurrences: MintObservation['occurrences'] = [];
         const rows: Array<{ axisValues: Record<string, string>; value: string }> = [];
         const values = new Set<string>();
+        // REJECTED-SETS ROUND — combos where the PART did not render: the
+        // presence-hidden planes the single-axis mint fit may fill (see
+        // MintObservation.partAbsentCombos — polaris.checkbox's icon insets).
+        const partAbsent: Array<Record<string, string>> = [];
         let unk: string | null = null;
         for (const combo of enabledCombos) {
           const el = a.getAligned(`${combo.key}__default`)[pi];
-          if (!el) continue;
+          if (!el) { partAbsent.push(combo.axisValues); continue; }
           let v = el.node.style[channel];
           // Absolute-position round: computed width/height are CONTENT-box
           // sizes; a canvas frame resize is the BORDER box. For the admitted
@@ -2459,9 +3147,12 @@ export function prepareMint(
           // thumb from moving. The identity is only ever applied to channels
           // the door already admitted (SYNTHETIC_CHANNELS).
           // @door fuse.absent-synthetic-is-zero
-          if (v === undefined && SYNTHETIC_CHANNELS.has(channel)) v = '0px';
           // @door fuse.channel-absent-in-combo
-          if (v === undefined) { unk ??= '<channel absent in this combo>'; continue; }
+          // RC7: and ABSENT ≡ the element's own `color` on a pseudo plane
+          // (planeChannelValue states both identities once).
+          const planeV = v === undefined ? planeChannelValue(el.node.style, channel) : v;
+          if (planeV === undefined) { unk ??= '<channel absent in this combo>'; continue; }
+          v = planeV;
           values.add(v);
           rows.push({ axisValues: combo.axisValues, value: v });
           const k = kindOf(channel, v);
@@ -2545,7 +3236,20 @@ export function prepareMint(
               for (const [av, s] of byVal) {
                 const v = [...s][0];
                 // @door fuse.border-style-solid-none-skip
-                if (v === 'solid' || v === 'none') continue; // the emitters' standing stroke style; the zero-width side already draws nothing
+                // 'none' still carries nothing: the zero-width side already
+                // draws nothing (computed width reads 0 when the style is
+                // none, and the per-appearance width tokens carry that 0).
+                // OBSERVED 'solid' now CARRIES (census, fluent.input): the
+                // old skip claimed solid is "the emitters' standing stroke
+                // style", which is true of the canvas (stroke drawn iff
+                // width > 0) and FALSE of the CSS surfaces for TOKEN widths —
+                // borderStyleDecls refuses to synthesise from a width whose
+                // value it cannot see (the altitude scar), so fluent's
+                // outline Input carried border-top-width.outline = 1px and
+                // painted no top border at all. A per-value observed style
+                // is a fact, not a synthesis; it rides the same stylesWhen
+                // rule the dashed/dotted values already ride.
+                if (v === 'none') continue;
                 declared.push({ part: partName, channel, value: v, when: { prop: ax.prop, equals: av } });
               }
               remintReceipts.push(`border-style-by-axis-carried: ${partName}.${channel} varies by "${ax.prop}" (${[...byVal].map(([k, s]) => `${k}=${[...s][0]}`).join(', ')}) — carried as per-value stylesWhen rules (code: \`.${ax.prop}-<value> { ${channel}: … }\`; canvas: a dashPattern on that variant's stroke)`);
@@ -2618,7 +3322,7 @@ export function prepareMint(
             continue;
           }
         }
-        obs.push({ nodePath: `${comp.name}:${partName}`, part: partName === 'root' ? '' : partName, cssProperty: channel, kind: kindOf(channel, [...values][0])!.kind, occurrences });
+        obs.push({ nodePath: `${comp.name}:${partName}`, part: partName === 'root' ? '' : partName, cssProperty: channel, kind: kindOf(channel, [...values][0])!.kind, occurrences, ...(partAbsent.length > 0 ? { partAbsentCombos: partAbsent } : {}) });
       }
     }
     return { obs, codeOnly, declared, pairwiseRefusals };
@@ -2720,8 +3424,7 @@ export function prepareMint(
    *  A synthetic channel absent on a plane is AT REST; any OTHER channel
    *  absent on a plane is genuinely unobserved there and is skipped rather
    *  than crashed (that guard is a pre-existing latent hole, now closed). */
-  const planeValue = (st: StyleMap, p: string): string | undefined =>
-    st[p] !== undefined ? st[p] : SYNTHETIC_CHANNELS.has(p) ? '0px' : undefined;
+  const planeValue = planeChannelValue;
 
   const pushStateValue = (state: string, part: string, channel: string, combo: Combo, v: string) => {
     const key = `${state}|${part}|${channel}`;
@@ -3035,7 +3738,29 @@ export function applyMintToContract(
     if (!target) continue;
     target.layout ??= {};
     (target.layout as Record<string, string | boolean>)[le.field] = le.value;
-    enrichmentNotes.push(`layout enriched: ${le.part}.layout.${le.field} = ${le.value} (uniform computed keyword — the schema's own vocabulary)`);
+    if (le.byProp === undefined) {
+      enrichmentNotes.push(`layout enriched: ${le.part}.layout.${le.field} = ${le.value} (uniform computed keyword — the schema's own vocabulary)`);
+      continue;
+    }
+    // REJECTED-SETS ROUND (fluent.card): the axis-factored half. layoutByProp
+    // is a SINGLE {prop, map} per part (schema v7) — a part whose layout
+    // already rides a DIFFERENT axis keeps it, and this enrichment refuses by
+    // name instead of silently rewiring the driving prop.
+    const lbp = (target as { layoutByProp?: { prop: string; map: Record<string, Record<string, string>> } }).layoutByProp;
+    if (lbp !== undefined && lbp.prop !== le.byProp.prop) {
+      enrichmentNotes.push(
+        `layout enrichment refused: ${le.part}.layout.${le.field} factors on axis "${le.byProp.prop}" but the part's layoutByProp already rides "${lbp.prop}" — one driving prop per part (schema v7); the deviating values stay code-only`,
+      );
+      continue;
+    }
+    const map = lbp?.map ?? {};
+    for (const [axisValue, keyword] of Object.entries(le.byProp.overrides)) {
+      map[axisValue] = { ...map[axisValue], [le.field]: keyword };
+    }
+    (target as { layoutByProp?: { prop: string; map: Record<string, Record<string, string>> } }).layoutByProp = { prop: le.byProp.prop, map };
+    enrichmentNotes.push(
+      `layout enriched per axis: ${le.part}.layout.${le.field} = ${le.value} at base; ${Object.entries(le.byProp.overrides).map(([k, v]) => `${le.byProp!.prop}=${k} → ${v}`).join(', ') || 'no deviations'} via layoutByProp (schema v7 — resolveLayout merges per compiled variant)`,
+    );
   }
   // v15 declared facts (S4): uniform registry-channel values → Part.declared;
   // full-coverage uniform state deltas → Part.declaredStates. The reviewed

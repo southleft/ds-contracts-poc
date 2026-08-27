@@ -1,0 +1,4 @@
+[data-cf="overlay-text-fill-stage-derived"] { position: relative; display: block; box-sizing: content-box; padding-left: 16px; padding-right: 16px; background: rgb(235, 235, 235); }
+[data-cf="overlay-text-fill-stage-derived"][data-gutters="none"] { padding-left: 0px; padding-right: 0px; }
+[data-cf="overlay-text-fill-stage-derived"] .cf-a { position: absolute; right: 0px; top: 0px; width: 8px; height: 8px; background: rgb(30, 160, 90); }
+[data-cf="overlay-text-fill-stage-derived"] .cf-b { display: block; box-sizing: border-box; font-size: 12px; line-height: 20px; color: rgb(20, 30, 60); background: rgb(190, 205, 230); }

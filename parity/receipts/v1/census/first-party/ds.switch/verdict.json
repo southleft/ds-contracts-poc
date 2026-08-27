@@ -1,0 +1,30 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23993",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.switch.dump.json",
+  "matched": 39,
+  "diverged": [],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`events` \u2014 the canvas cannot run behavior \u2014 toggle not recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/track/input` \u2014 native checkable control \u2014 code semantics; the canvas draws the presentational box, never the input",
+   "`part root/track element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/track/thumb text \"\"` \u2014 empty static text renders no glyphs \u2014 the styled wrapper alone is on the canvas",
+   "`part root/track/thumb element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/textCol/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/textCol/descriptionText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/textCol/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/textCol/descriptionText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

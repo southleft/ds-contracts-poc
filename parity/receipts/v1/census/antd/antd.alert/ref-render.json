@@ -1,0 +1,72 @@
+{
+  "id": "antd.alert",
+  "library": "antd",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "antd",
+    "version": "5.29.3",
+    "recipe": "examples/antd sandbox (.antd-sandbox; examples/antd/README) mounted per extract/computed/configs/antd.json"
+  },
+  "configPath": "extract/computed/configs/antd.json",
+  "component": "Alert",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "type-info__show-icon-noicon",
+      "status": "rendered",
+      "png": "ref-type-info__show-icon-noicon.png",
+      "props": {
+        "message": "Alert message",
+        "type": "info",
+        "showIcon": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-info__show-icon-icon",
+      "status": "rendered",
+      "png": "ref-type-info__show-icon-icon.png",
+      "props": {
+        "message": "Alert message",
+        "type": "info",
+        "showIcon": true
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-success__show-icon-noicon",
+      "status": "rendered",
+      "png": "ref-type-success__show-icon-noicon.png",
+      "props": {
+        "message": "Alert message",
+        "type": "success",
+        "showIcon": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-warning__show-icon-noicon",
+      "status": "rendered",
+      "png": "ref-type-warning__show-icon-noicon.png",
+      "props": {
+        "message": "Alert message",
+        "type": "warning",
+        "showIcon": false
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "type-error__show-icon-noicon",
+      "status": "rendered",
+      "png": "ref-type-error__show-icon-noicon.png",
+      "props": {
+        "message": "Alert message",
+        "type": "error",
+        "showIcon": false
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

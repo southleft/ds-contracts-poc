@@ -1,0 +1,46 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "wrapped-control slot is empty on canvas \u2014 only 'Field label' + 'Helper text for the wrapped control.' render (640x86); ref (730x220) shows a third line of control content ('The quick brown fox jumps over the lazy dog.') below the helper. The control the Field exists to wrap is missing."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23666",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.field.dump.json",
+  "matched": 22,
+  "diverged": [
+   "prop isRequired \u2014 missing from proposal",
+   "prop inputID \u2014 missing from proposal",
+   "prop required \u2014 proposal has a prop the contract does not",
+   "part root/control \u2014 missing from proposal",
+   "part root/labelRow/requiredMark/Vector \u2014 proposal has a part the contract does not",
+   "part root/labelRow/requiredMark/vector2 \u2014 proposal has a part the contract does not",
+   "part root/labelRow/requiredMark/vector3 \u2014 proposal has a part the contract does not",
+   "part root/Children \u2014 proposal has a part the contract does not",
+   "part root/labelRow/requiredMark visibleWhen \u2014 {\"prop\":\"isRequired\"} vs {\"prop\":\"required\"}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout align:stretch` \u2014 stretch leaves no artifact here (children are instances/slots \u2014 excluded from the generator fill-width path)",
+   "`part root/labelRow element` \u2014 host element (\"label\") is not drawn on the canvas",
+   "`part root/labelRow attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root/labelRow/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/descriptionText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/labelRow/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`text root/descriptionText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root/labelRow/requiredMark color` \u2014 {color.action.danger.background} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Field:root/labelRow/requiredMark/Vector` strokeWeight = `0.75` \u2014 nearest tokens: (none)",
+   "`Field:root/labelRow/requiredMark/Vector 2` strokeWeight = `0.75` \u2014 nearest tokens: (none)",
+   "`Field:root/labelRow/requiredMark/Vector 3` strokeWeight = `0.75` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

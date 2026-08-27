@@ -1,0 +1,37 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "state-default: 'Navigation item' not underlined on canvas; ref underlines it. state-selected: same underline loss inside the blue pill. Link underline styling dropped in both states."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "label matches; code render underlines the label, canvas does not",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23940",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.side-nav-item.dump.json",
+  "matched": 17,
+  "diverged": [
+   "prop href \u2014 missing from proposal",
+   "part root/iconSlot \u2014 missing from proposal",
+   "part root/endContent \u2014 missing from proposal",
+   "part root/Icon \u2014 proposal has a part the contract does not",
+   "part root/EndContent \u2014 proposal has a part the contract does not",
+   "part root/labelText layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":true,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/labelText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/labelText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

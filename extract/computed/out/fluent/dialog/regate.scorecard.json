@@ -3,8 +3,45 @@
   "component": "Dialog",
   "config": "extract/computed/configs/fluent.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid",
+        "when": {
+          "prop": "modalType",
+          "equals": "non-modal"
+        }
+      },
       {
         "part": "root",
         "channel": "font-family",
@@ -353,13 +390,15 @@
     "component": "Dialog",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 3,
     "interactions": 4,
     "computed": {
       "cellsCompared": 710,
-      "cellsEqual": 632,
-      "pctEqual": 89.01408450704226,
+      "cellsEqual": 672,
+      "pctEqual": 94.64788732394366,
       "rowsFullyEqual": 0,
       "rows": 12
     },
@@ -383,32 +422,32 @@
       "contradictions": 0,
       "mintedLeaves": 98,
       "mintedLeavesUnfolded": 98,
-      "baseBindings": 188,
+      "baseBindings": 184,
       "stateBindings": 0,
-      "codeOnlyChannels": 50,
+      "codeOnlyChannels": 13,
       "overflowBindings": 0,
       "folds": 170
     },
     "worstRows": [
       {
-        "key": "non-modal__default",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 34,
-        "unscorable": "no-original"
-      },
-      {
         "key": "modal__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 13,
         "unscorable": "no-original"
       },
       {
         "key": "alert__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 22,
+        "channelsMismatched": 13,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "non-modal__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 12,
         "unscorable": "no-original"
       },
       {
@@ -469,15 +508,7 @@
         2
       ],
       [
-        "dialogbody.display",
-        2
-      ],
-      [
         "dialogbody.grid-template-columns",
-        2
-      ],
-      [
-        "dialogbody.grid-template-rows",
         2
       ],
       [
@@ -485,15 +516,7 @@
         2
       ],
       [
-        "label.grid-column-start",
-        2
-      ],
-      [
         "label.grid-row-end",
-        2
-      ],
-      [
-        "label.grid-row-start",
         2
       ],
       [
@@ -501,18 +524,32 @@
         2
       ],
       [
-        "label-2.grid-column-start",
+        "label-2.grid-row-end",
         2
       ],
       [
-        "label-2.grid-row-end",
+        "dialogactions.grid-column-end",
         2
+      ],
+      [
+        "dialogactions.grid-row-end",
+        2
+      ],
+      [
+        "label-3.vertical-align",
+        2
+      ],
+      [
+        "root.max-height",
+        1
+      ],
+      [
+        "root.max-width",
+        1
       ]
     ],
     "namedLosses": [
-      "promotion: grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody-2)",
       "promotion: non-painting-part: part-1-0 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
-      "promotion: grid-two-dimensional: grid resolves 3 columns × 3 rows — a two-dimensional grid has no auto-layout spelling (one axis would have to be invented); no layout carried (named refusal) (part dialogbody)",
       "promotion: non-painting-part: part-1-2 <i> renders NO INK in any combo it appears in (content-visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
       "code-only: root.box-sizing — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.max-height — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
@@ -520,49 +557,12 @@
       "code-only: root.position — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: root.scale — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: dialogbody-2.display — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: dialogbody-2.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: dialogbody-2.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-4.grid-column-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-4.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-4.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-4.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: label-4.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: dialogtitle__action.align-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: dialogtitle__action.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogtitle__action.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogtitle__action.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogtitle__action.justify-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1-0.appearance — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: label-5.grid-column-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-5.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-5.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-5.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions-2.grid-column-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions-2.grid-column-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions-2.grid-row-end — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions-2.grid-row-start — grid placement not carried: parent dialogbody-2 declined structured grid promotion — child \"label-4\" grid-row \"1 / 1\": grid line `1 / 1` — end line must follow start line (1-based); not extracted; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions-2.justify-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: dialogsurface__backdrop.position — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: dialogsurface.position — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: dialogbody.display — declared-channel value outside the bounded grammar — named residue (v15)",
-      "code-only: dialogbody.grid-template-columns — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: dialogbody.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.grid-column-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label.grid-column-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label.grid-row-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label.grid-row-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: label-2.grid-column-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-2.grid-column-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-2.grid-row-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-2.grid-row-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions.grid-column-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions.grid-column-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions.grid-row-end — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions.grid-row-start — grid placement not carried: parent dialogbody declined structured grid promotion — computed grid-template-columns \"267px 267px 0px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: dialogactions.justify-self — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-3.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
@@ -571,14 +571,14 @@
     },
     "shippedMinted": {
       "path": "examples/fluent/tokens/fluent-minted.dtcg.json",
-      "leavesAdded": 1566,
+      "leavesAdded": 1562,
       "divergent": []
     },
     "rows": [
       {
         "key": "modal__default",
         "channelsCompared": 251,
-        "channelsEqual": 229,
+        "channelsEqual": 238,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -615,33 +615,15 @@
           },
           {
             "part": "dialogbody",
-            "channel": "display",
-            "ours": "flex",
-            "theirs": "grid"
-          },
-          {
-            "part": "dialogbody",
             "channel": "grid-template-columns",
-            "ours": "none",
+            "ours": "267px 267px",
             "theirs": "267px 267px 0px"
           },
           {
-            "part": "dialogbody",
-            "channel": "grid-template-rows",
-            "ours": "none",
-            "theirs": "28px 28px 32px"
-          },
-          {
             "part": "label",
             "channel": "grid-column-end",
-            "ours": "auto",
+            "ours": "span 2",
             "theirs": "4"
-          },
-          {
-            "part": "label",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "1"
           },
           {
             "part": "label",
@@ -650,22 +632,10 @@
             "theirs": "1"
           },
           {
-            "part": "label",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "1"
-          },
-          {
             "part": "label-2",
             "channel": "grid-column-end",
-            "ours": "auto",
+            "ours": "span 2",
             "theirs": "4"
-          },
-          {
-            "part": "label-2",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "1"
           },
           {
             "part": "label-2",
@@ -674,40 +644,16 @@
             "theirs": "2"
           },
           {
-            "part": "label-2",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "2"
-          },
-          {
             "part": "dialogactions",
             "channel": "grid-column-end",
             "ours": "auto",
             "theirs": "4"
-          },
-          {
-            "part": "dialogactions",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "2"
           },
           {
             "part": "dialogactions",
             "channel": "grid-row-end",
             "ours": "auto",
             "theirs": "3"
-          },
-          {
-            "part": "dialogactions",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "3"
-          },
-          {
-            "part": "dialogactions",
-            "channel": "justify-self",
-            "ours": "auto",
-            "theirs": "end"
           },
           {
             "part": "label-3",
@@ -751,59 +697,11 @@
       {
         "key": "non-modal__default",
         "channelsCompared": 208,
-        "channelsEqual": 174,
+        "channelsEqual": 196,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "max-height",
@@ -829,34 +727,10 @@
             "theirs": "1"
           },
           {
-            "part": "dialogbody-2",
-            "channel": "display",
-            "ours": "flex",
-            "theirs": "grid"
-          },
-          {
-            "part": "dialogbody-2",
-            "channel": "grid-template-columns",
-            "ours": "none",
-            "theirs": "257px 257px 20px"
-          },
-          {
-            "part": "dialogbody-2",
-            "channel": "grid-template-rows",
-            "ours": "none",
-            "theirs": "28px 28px 32px"
-          },
-          {
             "part": "label-4",
             "channel": "grid-column-end",
-            "ours": "auto",
+            "ours": "span 2",
             "theirs": "3"
-          },
-          {
-            "part": "label-4",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "1"
           },
           {
             "part": "label-4",
@@ -865,94 +739,34 @@
             "theirs": "1"
           },
           {
-            "part": "label-4",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "1"
-          },
-          {
-            "part": "dialogtitle__action",
-            "channel": "align-self",
-            "ours": "auto",
-            "theirs": "start"
-          },
-          {
-            "part": "dialogtitle__action",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "3"
-          },
-          {
             "part": "dialogtitle__action",
             "channel": "grid-row-end",
             "ours": "auto",
             "theirs": "1"
-          },
-          {
-            "part": "dialogtitle__action",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "1"
-          },
-          {
-            "part": "dialogtitle__action",
-            "channel": "justify-self",
-            "ours": "auto",
-            "theirs": "end"
           },
           {
             "part": "label-5",
             "channel": "grid-column-end",
-            "ours": "auto",
+            "ours": "span 3",
             "theirs": "4"
           },
           {
             "part": "label-5",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "1"
-          },
-          {
-            "part": "label-5",
             "channel": "grid-row-end",
-            "ours": "auto",
-            "theirs": "2"
-          },
-          {
-            "part": "label-5",
-            "channel": "grid-row-start",
             "ours": "auto",
             "theirs": "2"
           },
           {
             "part": "dialogactions-2",
             "channel": "grid-column-end",
-            "ours": "auto",
+            "ours": "span 2",
             "theirs": "4"
-          },
-          {
-            "part": "dialogactions-2",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "2"
           },
           {
             "part": "dialogactions-2",
             "channel": "grid-row-end",
             "ours": "auto",
             "theirs": "3"
-          },
-          {
-            "part": "dialogactions-2",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "3"
-          },
-          {
-            "part": "dialogactions-2",
-            "channel": "justify-self",
-            "ours": "auto",
-            "theirs": "end"
           },
           {
             "part": "label-6",
@@ -996,7 +810,7 @@
       {
         "key": "alert__default",
         "channelsCompared": 251,
-        "channelsEqual": 229,
+        "channelsEqual": 238,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1033,33 +847,15 @@
           },
           {
             "part": "dialogbody",
-            "channel": "display",
-            "ours": "flex",
-            "theirs": "grid"
-          },
-          {
-            "part": "dialogbody",
             "channel": "grid-template-columns",
-            "ours": "none",
+            "ours": "267px 267px",
             "theirs": "267px 267px 0px"
           },
           {
-            "part": "dialogbody",
-            "channel": "grid-template-rows",
-            "ours": "none",
-            "theirs": "28px 28px 32px"
-          },
-          {
             "part": "label",
             "channel": "grid-column-end",
-            "ours": "auto",
+            "ours": "span 2",
             "theirs": "4"
-          },
-          {
-            "part": "label",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "1"
           },
           {
             "part": "label",
@@ -1068,22 +864,10 @@
             "theirs": "1"
           },
           {
-            "part": "label",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "1"
-          },
-          {
             "part": "label-2",
             "channel": "grid-column-end",
-            "ours": "auto",
+            "ours": "span 2",
             "theirs": "4"
-          },
-          {
-            "part": "label-2",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "1"
           },
           {
             "part": "label-2",
@@ -1092,40 +876,16 @@
             "theirs": "2"
           },
           {
-            "part": "label-2",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "2"
-          },
-          {
             "part": "dialogactions",
             "channel": "grid-column-end",
             "ours": "auto",
             "theirs": "4"
-          },
-          {
-            "part": "dialogactions",
-            "channel": "grid-column-start",
-            "ours": "auto",
-            "theirs": "2"
           },
           {
             "part": "dialogactions",
             "channel": "grid-row-end",
             "ours": "auto",
             "theirs": "3"
-          },
-          {
-            "part": "dialogactions",
-            "channel": "grid-row-start",
-            "ours": "auto",
-            "theirs": "3"
-          },
-          {
-            "part": "dialogactions",
-            "channel": "justify-self",
-            "ours": "auto",
-            "theirs": "end"
           },
           {
             "part": "label-3",

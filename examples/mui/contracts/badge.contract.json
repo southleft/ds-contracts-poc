@@ -118,7 +118,8 @@
           "layout": {
             "display": "flex",
             "align": "center",
-            "justify": "center"
+            "justify": "center",
+            "wrap": true
           },
           "stylesWhen": [
             {
@@ -200,7 +201,8 @@
           "layout": {
             "display": "flex",
             "align": "center",
-            "justify": "center"
+            "justify": "center",
+            "wrap": true
           },
           "stylesWhen": [
             {

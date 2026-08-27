@@ -473,6 +473,10 @@
         "$value": "#000000",
         "$type": "color"
       },
+      "color-242424": {
+        "$value": "#242424",
+        "$type": "color"
+      },
       "size-3": {
         "$value": "3px",
         "$type": "dimension"
@@ -500,10 +504,6 @@
       "size-8": {
         "$value": "8px",
         "$type": "dimension"
-      },
-      "color-242424": {
-        "$value": "#242424",
-        "$type": "color"
       },
       "color-ffffff": {
         "$value": "#ffffff",
@@ -3077,42 +3077,6 @@
         "flex-shrink": {
           "$value": "0",
           "$type": "number"
-        },
-        "height": {
-          "$value": "40px",
-          "$type": "dimension"
-        },
-        "width": {
-          "small": {
-            "horizontal": {
-              "$value": "361.281px",
-              "$type": "dimension"
-            },
-            "vertical": {
-              "$value": "412px",
-              "$type": "dimension"
-            }
-          },
-          "medium": {
-            "horizontal": {
-              "$value": "353.281px",
-              "$type": "dimension"
-            },
-            "vertical": {
-              "$value": "404px",
-              "$type": "dimension"
-            }
-          },
-          "large": {
-            "horizontal": {
-              "$value": "345.281px",
-              "$type": "dimension"
-            },
-            "vertical": {
-              "$value": "396px",
-              "$type": "dimension"
-            }
-          }
         }
       }
     },
@@ -4540,6 +4504,10 @@
             "$type": "shadow"
           }
         },
+        "color": {
+          "$value": "#242424",
+          "$type": "color"
+        },
         "column-gap": {
           "small": {
             "$value": "2px",
@@ -5032,6 +5000,10 @@
         }
       },
       "input": {
+        "color": {
+          "$value": "{color-neutral-foreground1}",
+          "$type": "color"
+        },
         "flex-grow": {
           "$value": "1",
           "$type": "number"
@@ -5177,6 +5149,10 @@
             "$value": "18px",
             "$type": "dimension"
           }
+        },
+        "placeholder-color": {
+          "$value": "#707070",
+          "$type": "color"
         },
         "width": {
           "small": {

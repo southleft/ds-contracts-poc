@@ -3,8 +3,45 @@
   "component": "Button",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "tertiary"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "tertiary"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "tertiary"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "tertiary"
+        }
+      },
       {
         "part": "root",
         "channel": "cursor",
@@ -65,13 +102,14 @@
     "component": "Button",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 5,
     "interactions": 4,
     "computed": {
       "cellsCompared": 1340,
-      "cellsEqual": 1103,
-      "pctEqual": 82.31343283582089,
+      "cellsEqual": 1135,
+      "pctEqual": 84.70149253731343,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -103,20 +141,6 @@
     },
     "worstRows": [
       {
-        "key": "tertiary__hover",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 32,
-        "unscorable": "no-original"
-      },
-      {
-        "key": "tertiary__active",
-        "pctAA": null,
-        "pctExact": null,
-        "channelsMismatched": 32,
-        "unscorable": "no-original"
-      },
-      {
         "key": "secondary__hover",
         "pctAA": null,
         "pctExact": null,
@@ -125,6 +149,20 @@
       },
       {
         "key": "secondary__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 24,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "tertiary__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 24,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "tertiary__active",
         "pctAA": null,
         "pctExact": null,
         "channelsMismatched": 24,
@@ -240,7 +278,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 204,
+      "leavesAdded": 209,
       "divergent": [
         {
           "token": "imported.button.root.background-color-state-hover.bare",
@@ -762,59 +800,11 @@
       {
         "key": "tertiary__default",
         "channelsCompared": 67,
-        "channelsEqual": 58,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -827,7 +817,7 @@
       {
         "key": "tertiary__hover",
         "channelsCompared": 67,
-        "channelsEqual": 35,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -846,33 +836,9 @@
           },
           {
             "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
             "channel": "border-left-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(217, 217, 217, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "root",
@@ -882,33 +848,9 @@
           },
           {
             "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
             "channel": "border-top-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(217, 217, 217, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "root",
@@ -1030,59 +972,11 @@
       {
         "key": "tertiary__focus-visible",
         "channelsCompared": 67,
-        "channelsEqual": 58,
+        "channelsEqual": 66,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -1095,7 +989,7 @@
       {
         "key": "tertiary__active",
         "channelsCompared": 67,
-        "channelsEqual": 35,
+        "channelsEqual": 43,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1114,33 +1008,9 @@
           },
           {
             "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
             "channel": "border-left-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(176, 176, 176, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "root",
@@ -1150,33 +1020,9 @@
           },
           {
             "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
             "channel": "border-top-color",
             "ours": "rgba(0, 11, 41, 1)",
             "theirs": "rgba(176, 176, 176, 1)"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
           },
           {
             "part": "root",

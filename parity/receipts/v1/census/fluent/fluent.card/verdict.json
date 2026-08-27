@@ -1,0 +1,67 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "every variant: 'Card header' and 'Card description' run together on ONE horizontal line ('Card headerCard description', no gap) while ref stacks header above description vertically \u2014 header block axis is horizontal instead of vertical in all 10 sampled variants",
+  "state=focus-visible: canvas is byte-identical to the base filled card (diff bbox None); ref shows a thick black focus ring around the card \u2014 focus indicator missing",
+  "appearance=outline: canvas card has NO surface and NO border \u2014 139,985 of ~143,808 px fully transparent, zero opaque pixels outside the text block, so only the text floats; ref shows a white card with a gray border",
+  "orientation=horizontal: canvas renders the same broken one-line layout as vertical (Preview above the text run) instead of ref's Preview-left-of-header-stack arrangement"
+ ],
+ "defectClasses": [
+  "layout axis",
+  "missing ink",
+  "missing ink",
+  "layout axis"
+ ],
+ "notes": "preview + header/description across appearances, sizes, orientations and states match",
+ "reviewedAt": "60793cc0",
+ "setNodeId": "39:12565",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-fluent-fluent.card.dump.json",
+  "matched": 19,
+  "diverged": [
+   "prop appearance type \u2014 {\"enum\":[\"filled\",\"filled-alternative\",\"outline\",\"subtle\"]} vs {\"enum\":[\"filled\",\"filledAlternative\",\"outline\",\"subtle\"]}",
+   "prop appearance bindings.figma.values \u2014 {\"filled\":\"Filled\",\"filled-alternative\":\"Filled Alternative\",\"outline\":\"Outline\",\"subtle\":\"Subtle\"} vs {\"filled\":\"Filled\",\"filledAlternative\":\"Filled Alternative\",\"outline\":\"Outlin",
+   "prop size type \u2014 {\"enum\":[\"small\",\"medium\",\"large\"]} vs {\"enum\":[\"medium\",\"small\",\"large\"]}",
+   "prop size bindings.figma.values \u2014 {\"small\":\"Small\",\"medium\":\"Medium\",\"large\":\"Large\"} vs {\"medium\":\"Medium\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "prop orientation type \u2014 {\"enum\":[\"horizontal\",\"vertical\"]} vs {\"enum\":[\"vertical\",\"horizontal\"]}",
+   "prop orientation bindings.figma.values \u2014 {\"horizontal\":\"Horizontal\",\"vertical\":\"Vertical\"} vs {\"vertical\":\"Vertical\",\"horizontal\":\"Horizontal\"}",
+   "part root/checkbox \u2014 missing from proposal",
+   "part root/label \u2014 missing from proposal",
+   "part root/labelmarginBox \u2014 proposal has a part the contract does not",
+   "part root/labelmarginBox/label \u2014 proposal has a part the contract does not",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root height \u2014 {imported.card.root.height.{size}.{orientation}} missing from proposal",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root min-height \u2014 {imported.shared.size-0} missing from proposal",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root width \u2014 {imported.card.root.width} missing from proposal",
+   "part root background-color \u2014 proposal has {imported.card.root.background-color.filled}, contract has nothing",
+   "part root padding-left \u2014 proposal has {imported.card.root.padding-left.{size}}, contract has nothing",
+   "part root padding-right \u2014 proposal has {imported.card.root.padding-right.{size}}, contract has nothing",
+   "part root padding-top \u2014 proposal has {imported.card.root.padding-top.{size}}, contract has nothing",
+   "part root padding-bottom \u2014 proposal has {imported.card.root.padding-bottom.{size}}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.card.root.column-gap.{size}}, contract has nothing",
+   "part root max-width \u2014 proposal has {imported.card.root.width}, contract has nothing",
+   "part root/cardheader flex-shrink \u2014 {imported.card.cardheader.flex-shrink} missing from proposal"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/cardheader states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/cardheader/label-2 states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/cardheader/label-3 states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/checkbox color` \u2014 {imported.card.checkbox.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/checkbox font-size` \u2014 {imported.card.checkbox.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-weight` \u2014 {imported.shared.num-400} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Card:root/label (margin box)/label` text fill = `#000000` \u2014 nearest tokens: `{color.black}`",
+   "`Card:root/cardheader/label-2` text fill = `#000000` \u2014 nearest tokens: `{color.black}`",
+   "`Card:root/cardheader/label-3` text fill = `#000000` \u2014 nearest tokens: `{color.black}`"
+  ]
+ }
+}

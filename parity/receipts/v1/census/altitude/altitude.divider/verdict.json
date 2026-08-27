@@ -1,0 +1,28 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "variant-vertical: ref-variant-vertical.png is completely blank \u2014 zero ink pixels in the 736x96 capture even at threshold 250 \u2014 while ref-render.json self-attests status 'rendered' for this cell; canvas draws a plausible 2x200 px gray vertical rule. The line-vs-nothing difference is not a named wall (walls array is empty) and vertical parity is unverifiable from this evidence; only the default (horizontal) variant demonstrably matches. Failing per the default-to-fail rule; the broken half is the reference capture, so re-record the ref before re-grading the canvas."
+ ],
+ "defectClasses": [
+  "other"
+ ],
+ "notes": "horizontal + vertical rules match",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6751",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.divider.dump.json",
+  "matched": 7,
+  "diverged": [
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root width \u2014 {imported.divider.root.width.unset} missing from proposal",
+   "part root max-width \u2014 proposal has {imported.divider.root.width.unset}, contract has nothing"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.divider.root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

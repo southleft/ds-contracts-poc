@@ -9,7 +9,7 @@ import styles from './Select.module.css';
 
 const ICONS: Record<string, string> = {
   'select-icon':
-    '<svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M 6 9 L 12 15 L 18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    '<svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg"><path d="M 6 9 L 12 15 L 18 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>',
 };
 
 export interface SelectProps extends HTMLAttributes<HTMLDivElement> {}

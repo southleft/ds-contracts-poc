@@ -3,6 +3,7 @@
   "component": "Breadcrumbs",
   "config": "extract/computed/configs/mui.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -90,13 +91,15 @@
     "component": "Breadcrumbs",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 1,
     "interactions": 4,
     "computed": {
       "cellsCompared": 788,
-      "cellsEqual": 747,
-      "pctEqual": 94.79695431472081,
+      "cellsEqual": 751,
+      "pctEqual": 95.30456852791878,
       "rowsFullyEqual": 0,
       "rows": 4
     },
@@ -122,7 +125,7 @@
       "mintedLeavesUnfolded": 11,
       "baseBindings": 56,
       "stateBindings": 3,
-      "codeOnlyChannels": 20,
+      "codeOnlyChannels": 19,
       "overflowBindings": 3,
       "folds": 99
     },
@@ -131,36 +134,32 @@
         "key": "__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 11,
+        "channelsMismatched": 10,
         "unscorable": "no-original"
       },
       {
         "key": "__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       },
       {
         "key": "__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 10,
+        "channelsMismatched": 9,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
-      [
-        "breadcrumbs-ol.flex-wrap",
-        4
-      ],
       [
         "breadcrumbs-ol.list-style-type",
         4
@@ -207,7 +206,6 @@
       "overflow: label.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: label.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <nav>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <nav> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
-      "code-only: breadcrumbs-ol.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ol>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ol> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-ol.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ol>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ol> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-ol.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <ol>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <ol> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: breadcrumbs-li.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <li>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <li> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -240,17 +238,11 @@
       {
         "key": "__default",
         "channelsCompared": 197,
-        "channelsEqual": 187,
+        "channelsEqual": 188,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "breadcrumbs-ol",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
           {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",
@@ -311,17 +303,11 @@
       {
         "key": "__hover",
         "channelsCompared": 197,
-        "channelsEqual": 187,
+        "channelsEqual": 188,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "breadcrumbs-ol",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
           {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",
@@ -382,17 +368,11 @@
       {
         "key": "__focus-visible",
         "channelsCompared": 197,
-        "channelsEqual": 186,
+        "channelsEqual": 187,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "breadcrumbs-ol",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
           {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",
@@ -459,17 +439,11 @@
       {
         "key": "__active",
         "channelsCompared": 197,
-        "channelsEqual": 187,
+        "channelsEqual": 188,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "breadcrumbs-ol",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
           {
             "part": "breadcrumbs-ol",
             "channel": "list-style-type",

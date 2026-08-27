@@ -1,5 +1,5 @@
 /* GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/progress-bar.contract.json (astryx.progress-bar v0.1.0)
+ * Source of truth: contracts/progress-bar.contract.json (astryx.progress-bar v0.3.0)
  * Regenerate with: npm run generate
  */
 
@@ -14,43 +14,66 @@
   display: flex;
   flex-direction: column;
   border: 0;
-  color: var(--color-text-secondary);
-  gap: var(--spacing-1);
-  font-family: var(--font-family-body);
-  font-size: var(--font-size-xs);
-  width: 240px;
+  column-gap: var(--imported-progress-bar-root-column-gap);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-progress-bar-root-min-width);
+  row-gap: var(--imported-progress-bar-root-row-gap);
 }
 
-.track {
+.part-0 {
   display: flex;
-  background-color: var(--color-track);
-  border-radius: var(--radius-full);
-  height: var(--spacing-1);
-  width: 240px;
+  align-items: baseline;
+  justify-content: space-between;
 }
 
-.fill {
-  background-color: var(--color-accent);
-  border-radius: var(--radius-full);
-  height: var(--spacing-1);
+.label {
+  font-size: var(--imported-progress-bar-label-font-size);
+  font-weight: var(--imported-progress-bar-label-font-weight);
+  line-height: var(--imported-progress-bar-label-line-height);
+  display: block;
 }
 
-.variant-accent .fill {
-  background-color: var(--color-accent);
+.progressbar-track {
+  display: flex;
+  background-color: var(--imported-progress-bar-progressbar-track-background-color);
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  display: block;
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
-.variant-success .fill {
-  background-color: var(--color-success);
+.progressbar-fill {
+  border-bottom-left-radius: var(--imported-shared-size-9999);
+  border-bottom-right-radius: var(--imported-shared-size-9999);
+  border-top-left-radius: var(--imported-shared-size-9999);
+  border-top-right-radius: var(--imported-shared-size-9999);
+  min-height: var(--imported-shared-size-0);
+  min-width: var(--imported-shared-size-0);
+  display: block;
+  transition-duration: 0.3s;
+  transition-property: width;
+  transition-timing-function: cubic-bezier(0.24, 1, 0.4, 1);
 }
 
-.variant-warning .fill {
-  background-color: var(--color-warning);
+.variant-accent .progressbar-fill {
+  background-color: var(--imported-progress-bar-progressbar-fill-background-color-accent);
 }
 
-.variant-neutral .fill {
-  background-color: var(--color-neutral);
+.variant-error .progressbar-fill {
+  background-color: var(--imported-progress-bar-progressbar-fill-background-color-error);
 }
 
-.variant-error .fill {
-  background-color: var(--color-error);
+.variant-neutral .progressbar-fill {
+  background-color: var(--imported-progress-bar-progressbar-fill-background-color-neutral);
+}
+
+.variant-success .progressbar-fill {
+  background-color: var(--imported-progress-bar-progressbar-fill-background-color-success);
+}
+
+.variant-warning .progressbar-fill {
+  background-color: var(--imported-progress-bar-progressbar-fill-background-color-warning);
 }

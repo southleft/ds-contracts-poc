@@ -1,0 +1,33 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23567",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.chat-message-metadata.dump.json",
+  "matched": 12,
+  "diverged": [
+   "prop status type \u2014 {\"enum\":[\"sending\",\"sent\",\"delivered\",\"read\",\"error\"]} vs {\"enum\":[\"sent\",\"sending\",\"delivered\",\"read\",\"error\"]}",
+   "prop status bindings.figma.values \u2014 {\"sending\":\"Sending\",\"sent\":\"Sent\",\"delivered\":\"Delivered\",\"read\":\"Read\",\"error\":\"Error\"} vs {\"sent\":\"Sent\",\"sending\":\"Sending\",\"delivered\":\"Delivered\",\"read\":\"Read\",\"error\":\"Error\"}",
+   "part root/footer \u2014 missing from proposal",
+   "part root/statusIcon/Vector \u2014 proposal has a part the contract does not",
+   "part root/statusIcon/vector2 \u2014 proposal has a part the contract does not",
+   "part root/statusIcon/vector3 \u2014 proposal has a part the contract does not",
+   "part root/Footer \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root/timestampText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/timestampText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`ChatMessageMetadata:root/statusIcon/Vector` strokeWeight = `0.9000000357627869` \u2014 nearest tokens: (none)",
+   "`ChatMessageMetadata:root/statusIcon/Vector 2` strokeWeight = `0.9000000357627869` \u2014 nearest tokens: (none)",
+   "`ChatMessageMetadata:root/statusIcon/Vector 3` strokeWeight = `0.9000000357627869` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

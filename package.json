@@ -75,7 +75,7 @@
     "parity:flowbite": "tsx scripts/flowbite-contract-parity.ts",
     "extract:figma:visual:catalog": "tsx extract/figma/visual-parity/run.ts --summary button badge checkbox switch heading",
     "extract:figma:visual:anchors": "tsx extract/figma/visual-parity/anchor-check.ts",
-    "maintain": "npm run required-facts:check && npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run host-placement:check && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check && npm run root-text:check && npm run first-party-bundle:check && npm run prop-collision:check && npm run code-connect:check && npm run playground:flow-check",
+    "maintain": "npm run required-facts:check && npm run string-boolean-coercion:check && npm run token-set-prune:check && npm run exact-proposal:check && npm run flowbite-bundle-fresh:check && npm run plugin:check && npm run flowbite-dump-propose:check && npm run extract:figma:visual:anchors && npm run functional:flowbite && npm run parity:flowbite && npm run host-placement:check && npm run root-attrs:check && npm run css-vars:check && npm run code-only-facts:check && npm run root-text:check && npm run placeholder-ink:check && npm run first-party-bundle:check && npm run prop-collision:check && npm run code-connect:check && npm run playground:flow-check",
     "maintain:visual": "npm run extract:figma:visual:catalog",
     "maintain:all": "npm run maintain && npm run maintain:visual",
     "eval:record:check": "node scripts/eval-record-check.mjs",
@@ -168,6 +168,7 @@
     "stretch:check": "tsx core/stretch-default-check.ts",
     "extract:computed:portal:check": "tsx extract/computed/portal-wrapper-check.ts",
     "extract:computed:viewport:check": "tsx extract/computed/viewport-geometry-check.ts",
+    "extract:computed:geometry:census": "tsx extract/computed/fusion-geometry-census.ts",
     "extract:computed:pseudo-decor-size:check": "tsx extract/computed/pseudo-decor-size-check.ts",
     "extract:computed:pseudo-decor-rotate:check": "tsx extract/computed/pseudo-decor-rotate-check.ts",
     "extract:computed:font-slant:check": "tsx extract/computed/font-slant-check.ts",
@@ -206,6 +207,7 @@
     "child-wider": "node scripts/child-wider.mjs",
     "figma:fresh": "node scripts/figma-scripts-fresh.mjs",
     "generated:fresh": "node scripts/generated-surfaces-fresh.mjs",
+    "bundle:fresh": "node scripts/library-bundles-fresh.mjs",
     "conformance:canvas": "tsx extract/figma/conformance/run.ts",
     "catalog:visual:check": "tsx extract/figma/catalog-visual/run.ts",
     "extract:figma:roundtrip:uui": "tsx extract/figma/roundtrip-uui/run.ts",
@@ -233,6 +235,7 @@
     "code-only-facts:check": "tsx core/code-only-facts-check.ts",
     "conformance:roundtrip": "tsx conformance/canvas.ts",
     "root-text:check": "tsx core/root-text-check.ts",
+    "placeholder-ink:check": "tsx core/placeholder-ink-check.ts",
     "first-party-bundle:check": "tsx core/first-party-bundle-check.ts",
     "prop-collision:check": "tsx core/prop-collision-check.ts",
     "parity:snapshot:rest": "tsx parity/snapshot-rest.ts",
@@ -251,6 +254,7 @@
     "door-register:rederive": "tsx scripts/door-register-check.ts --rederive",
     "door-census": "tsx scripts/door-census.ts",
     "census:render": "tsx extract/figma/census/render.ts",
+    "census:ref": "tsx extract/figma/census/ref-render.ts",
     "census:d2c:record": "tsx extract/figma/census/design-to-code.ts --write",
     "census:d2c:render": "tsx extract/figma/census/d2c-render.ts",
     "required-facts:check": "tsx scripts/required-facts-check.ts",
@@ -258,7 +262,8 @@
     "corpus:reproducible:check": "tsx scripts/corpus-reproducible-check.ts",
     "bundles:fresh": "node scripts/bundles-fresh.mjs",
     "host-placement:check": "tsx core/host-placement-check.ts",
-    "eval-reds:self-test": "node scripts/eval-red-ledger-self-test.mjs"
+    "eval-reds:self-test": "node scripts/eval-red-ledger-self-test.mjs",
+    "curated-facts:self-test": "node scripts/curated-fact-guard-self-test.mjs"
   },
   "engines": {
     "node": ">=20"
