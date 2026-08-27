@@ -265,6 +265,13 @@
 > Do not invent a variable. Do not restart v22 attempt 2 as-is. The next
 > lineage must not patch hashed v22 scene-readback bytes. Cleanup
 > accepted; owned Input pages are gone; no captures; no live success.
+> V23 is the replacement lineage: it copies the v22 stack and teaches host
+> scene-readback to place aliased `layout.width.value` at the recipe
+> compile index (after `layout.itemSpacing`, before `layout.minWidth`)
+> instead of appending it. Variant width role only. V16 writer, restore,
+> runtime, and extract bytes stay frozen. Hashed v22 scene-readback stays
+> frozen. Do not teach FIXED. Do not invent a variable. **Draft prepared**
+> on top of `033c94d7`. Authorization is a later separate commit.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -570,7 +577,8 @@ lineage; do not patch hashed bytes in place.
 | A5al | PREPARE INPUT V22. Copy the v21 stack. Do not patch hashed v21 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface the existing width/height FLOAT onto the recipe field without leaving a duplicate `width.value` / `height.value` binding that collapse treats as a structural edit. Do not invent variables. Do not teach FIXED. | **Done** at `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Antecedent index SHA-256 `10bac5a8b65db4c6618132818eadf7345c6045bcf3e48e29c2b2e547e0692c7f`. |
 | A5am | AUTHORIZE INPUT V22 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `d29a41ee155fb6645d0ccd40a136933530f91b4b6f90bc1dcdc377be5fa5b0e3`; SPKI SHA-256 `020c28eb8a67e123d0c4b5965a92a2968716fedfc2f02b0875e272fe4c32598c`. Do not patch hashed v21 or v22 bytes. | **Done** at `281bb2594408ebbfef6b332c2f8b7b05a56bd7b9`. |
 | A5an | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `bindings.length`, then refused variant `$.children[0].bindings[1].field` (alias dropped `width.value` and appended `layout.width.value`; compile wants `layout.width.value` at index 1 before `layout.minWidth`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v22 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5ao | PREPARE INPUT V23. Copy the v22 stack. Do not patch hashed v22 scene-readback, extract, restore, writer, or runtime bytes. Teach host to place the aliased `layout.width.value` at the recipe compile index rather than appending it. Do not invent variables. Do not teach FIXED. | Open only after RECORD. If a hashed v23 file later fails closed, open v24. |
+| A5ao | PREPARE INPUT V23. Copy the v22 stack. Do not patch hashed v22 scene-readback, extract, restore, writer, or runtime bytes. Teach host to place the aliased `layout.width.value` at the recipe compile index rather than appending it. Do not invent variables. Do not teach FIXED. | **Draft prepared** on top of `033c94d7`. Antecedent index SHA-256 `d332815baade80b48e8caa1182296058403cb55fa3a7b7f4b893da7be4a2e305`. |
+| A5ap | AUTHORIZE INPUT V23 as a **separate** commit. New prepare-era Ed25519 signer. Auth lifecycle stays out of the hash set. Do not patch hashed v22 or v23 bytes. | Open after PREPARE. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1993,7 +2001,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, and v22 attempt 1 failed closed; false** | PREPARE INPUT V23 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, and v22 attempt 1 failed closed; v23 draft antecedent pending separate authorization; false** | AUTHORIZE INPUT V23 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
