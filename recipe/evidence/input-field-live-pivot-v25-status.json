@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v25-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused content/placeholder bindings[0].field; cleanup complete",
   "baseCommit": "316a81051cdc9f95e28d9410e03eb56e1bad57b5",
   "antecedent": {
     "commit": "5dcdd4fca890713d6378f8491f442761dab1837e",
@@ -125,12 +125,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v25-attempt-1.json",
+  "attempt1Sha256": "ff0a44ba5fd9e1bcb920ebc3b42f013471025aaeffefe86213c38026c276d6d6",
+  "restartAsV25Attempt2WithoutContentPlaceholderBindingsFieldForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }

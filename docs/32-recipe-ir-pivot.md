@@ -311,10 +311,23 @@
 > field order after extras are dropped. Surface role only. V16 writer,
 > restore, runtime, and extract bytes stay frozen. Hashed v24
 > scene-readback stays frozen. Do not teach FIXED. Do not invent a
-> variable. Authorization pins
-> antecedent `5dcdd4fca890713d6378f8491f442761dab1837e`. Live execution
-> remains forbidden until runtime security prerequisites pass. Do not
-> restart v24 attempt 2 as-is.
+> variable. Authorization is
+> published at `dcbeaabf15405006489ed6d2ec6aa3eb5b4ffe8f`. V25 attempt 1
+> ran Scratch-only: writer accepted (2317 created nodes), cleanup
+> persisted, hashed measure-while-visible restore accepted
+> (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0),
+> then extract issued (8436213 bytes). Host did not refuse surface
+> `bindings[0].field`. Host collapse then refused
+> `$.children[0].children[0].children[0].children[0].bindings[0].field`.
+> After scene-readback-v25 the MUI first-variant first child is
+> `input-field/surface` with 12 host bindings in compile order starting
+> at `layout.padding.right`. The refused node is MUI
+> `input-field/content/placeholder`: host remaining order starts at
+> `fills.0.color` (4 bindings including a duplicate mapped color) while
+> compile starts at `type.fontSize` (3 bindings). Do not teach FIXED.
+> Do not invent a variable. Do not restart v25 attempt 2 as-is. The next
+> lineage must not patch hashed v25 scene-readback bytes. Cleanup
+> accepted; owned Input pages are gone; no captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -627,7 +640,9 @@ lineage; do not patch hashed bytes in place.
 | A5as | AUTHORIZE INPUT V24 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `753eef85aa026561542e45f492bf25b9ac84b599`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `da1d1a73d96be48173d83e04a20cc0f3b65bc94de6d678c3a79b7730b50fdc7b`; SPKI SHA-256 `afe03ed60ef54cca0989f6d760184dbef2deb5ff2eed3cdc239c55c42be196b9`. Do not patch hashed v23 or v24 bytes. | **Done** at `5530ad3d4040faa45a0d03943b6da48c618daaf4`. |
 | A5at | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse surface `bindings.length` (extras dropped to 12 host vs 12 compile), then refused surface `$.children[0].children[0].bindings[0].field` (host remaining order starts at `cornerRadius.bottomLeft`; compile starts at `layout.padding.right`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v24 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
 | A5au | PREPARE INPUT V25. Copy the v24 stack. Do not patch hashed v24 scene-readback, extract, restore, writer, or runtime bytes. Teach host to place remaining surface bindings at the recipe compile field order rather than leaving extract/alias encounter order. Do not invent variables. Do not teach FIXED. | **Done** at `5dcdd4fca890713d6378f8491f442761dab1837e`. Antecedent index SHA-256 `232e19729f42c08cd6a00713d377d0798190dd4bf31548bbfcc76782d5cec76c`. |
-| A5av | AUTHORIZE INPUT V25 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `5dcdd4fca890713d6378f8491f442761dab1837e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c274c71b272072d47087498c442c63f750bcba1cdc39ba1dcf031dc663d2d662`; SPKI SHA-256 `a15336a1c85f3fc7f3f5a669f2173fecca8c957377511e9c3f1b8466202562ae`. Do not patch hashed v24 or v25 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v25 file fails closed, open v26. |
+| A5av | AUTHORIZE INPUT V25 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `5dcdd4fca890713d6378f8491f442761dab1837e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c274c71b272072d47087498c442c63f750bcba1cdc39ba1dcf031dc663d2d662`; SPKI SHA-256 `a15336a1c85f3fc7f3f5a669f2173fecca8c957377511e9c3f1b8466202562ae`. Do not patch hashed v24 or v25 bytes. | **Done** at `dcbeaabf15405006489ed6d2ec6aa3eb5b4ffe8f`. |
+| A5aw | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse surface `bindings[0].field` (remaining surface bindings now match compile field order), then refused `$.children[0].children[0].children[0].children[0].bindings[0].field` (MUI `input-field/content/placeholder` host has 4 bindings starting at `fills.0.color` including a duplicate mapped color; compile emits 3 starting at `type.fontSize`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v25 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ax | PREPARE INPUT V26. Copy the v25 stack. Do not patch hashed v25 scene-readback, extract, restore, writer, or runtime bytes. Teach host to drop extra content/placeholder bindings that collapse treats as a structural edit and place remaining text bindings at the recipe compile field order. Do not invent variables. Do not teach FIXED. | Open only after RECORD. If a hashed v26 file later fails closed, open v27. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -2050,7 +2065,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, and v24 attempt 1 failed closed; v25 authorization declared; false** | attestation + Scratch-only live v25 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, and v25 attempt 1 failed closed; false** | PREPARE INPUT V26 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

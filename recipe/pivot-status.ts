@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -676,7 +676,11 @@ const V25_AUTHORIZATION_TEMPLATE_SHA256 =
 const V25_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v25-status.json";
 const V25_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused content/placeholder bindings[0].field; cleanup complete";
+const V25_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v25-attempt-1.json";
+const V25_ATTEMPT_1_SHA256 =
+  "ff0a44ba5fd9e1bcb920ebc3b42f013471025aaeffefe86213c38026c276d6d6";
 const V25_BASE_COMMIT = "316a81051cdc9f95e28d9410e03eb56e1bad57b5";
 const V25_ANTECEDENT_COMMIT = "5dcdd4fca890713d6378f8491f442761dab1837e";
 const V25_AUTHORIZATION_PATH = `${V25_ROOT}/capture-authorization.json`;
@@ -2174,11 +2178,17 @@ export function validatePivotStatus(
     status.input?.liveV25?.hostPhases !== 3 ||
     status.input?.liveV25?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV25?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV25?.attemptsExecuted !== 0 ||
-    status.input?.liveV25?.nextAttempt !== 1 ||
-    status.input?.liveV25?.liveExecutionOccurred !== false ||
-    status.input?.liveV25?.figmaWrites !== 0 ||
+    status.input?.liveV25?.attemptsExecuted !== 1 ||
+    status.input?.liveV25?.nextAttempt !== 2 ||
+    status.input?.liveV25?.liveExecutionOccurred !== true ||
+    status.input?.liveV25?.figmaWrites !== 4 ||
     status.input?.liveV25?.figmaCaptures !== 0 ||
+    status.input?.liveV25?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV25?.attempt1Path !== V25_ATTEMPT_1_PATH ||
+    status.input?.liveV25?.attempt1Sha256 !== V25_ATTEMPT_1_SHA256 ||
+    status.input?.liveV25
+      ?.restartAsV25Attempt2WithoutContentPlaceholderBindingsFieldForbidden !==
+      true ||
     status.input?.liveV25?.humanSignoff !== "pending" ||
     status.input?.liveV25?.overallInputSuccess !== false
   )
@@ -4588,9 +4598,18 @@ export function verifyPivotStatus(): void {
       true ||
     v25Status.smallestHonestDelta?.v24SceneReadbackUnchanged !== true ||
     v25Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v25Status.attemptsExecuted !== 0 ||
-    v25Status.liveExecutionOccurred !== false ||
-    v25Status.figmaWrites !== 0 ||
+    v25Status.attemptsExecuted !== 1 ||
+    v25Status.nextAttempt !== 2 ||
+    v25Status.liveExecutionOccurred !== true ||
+    v25Status.figmaWrites !== 4 ||
+    v25Status.figmaCaptures !== 0 ||
+    v25Status.createdNodesThenRemoved !== 2317 ||
+    v25Status.attempt1Path !== V25_ATTEMPT_1_PATH ||
+    v25Status.attempt1Sha256 !== V25_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V25_ATTEMPT_1_PATH)) !==
+      V25_ATTEMPT_1_SHA256 ||
+    v25Status.restartAsV25Attempt2WithoutContentPlaceholderBindingsFieldForbidden !==
+      true ||
     v25Status.overallInputSuccess !== false
   )
     failures.push("v25 draft antecedent/status mismatch");
