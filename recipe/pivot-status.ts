@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -798,8 +798,14 @@ const V29_AUTHORIZATION_TEMPLATE_SHA256 =
 const V29_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v29-status.json";
 const V29_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V29_BASE_COMMIT = "fbdc29e8247daaf2a1fb1c3a155a34f033dcf9fe";
+const V29_ANTECEDENT_COMMIT = "b54a2ea24a7172cb0caa9a9072ed2fd40f661ad0";
+const V29_AUTHORIZATION_PATH = `${V29_ROOT}/capture-authorization.json`;
+const V29_AUTHORIZATION_SHA256 =
+  "5d4850eaed7f8ab57d36040e23dd66b1f4eaec78ca43cb292575fdaec06c4a01";
+const V29_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "29af345ee115b69609c97c301a4732259a63ee3a4313c4445d08662b3c4cf130";
 const V28_SCENE_READBACK_SHA256_PIN =
   "44540881e24bd2e28f40917a4d6c289462f5ada0c9a30d8c565e18aad2521ac2";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
@@ -2504,9 +2510,16 @@ export function validatePivotStatus(
     status.input?.liveV29?.antecedentHashSetSha256 !== V29_HASH_SET_SHA256 ||
     status.input?.liveV29?.authorizationTemplateSha256 !==
       V29_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV29?.authorizationPresent !== false ||
-    status.input?.liveV29?.authorizationCommitted !== false ||
+    status.input?.liveV29?.antecedentCommit !== V29_ANTECEDENT_COMMIT ||
+    status.input?.liveV29?.authorizationPresent !== true ||
+    status.input?.liveV29?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV29?.authorizationEffective !== false ||
+    status.input?.liveV29?.authorizationPath !== V29_AUTHORIZATION_PATH ||
+    status.input?.liveV29?.authorizationSha256 !== V29_AUTHORIZATION_SHA256 ||
+    status.input?.liveV29?.signingPublicKeySpkiSha256 !==
+      V29_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV29?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV29?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV29?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -5264,9 +5277,16 @@ export function verifyPivotStatus(): void {
     v29Status.artifactVersion !== "input-live-v29-status-v1" ||
     v29Status.status !== V29_STATUS ||
     v29Status.baseCommit !== V29_BASE_COMMIT ||
-    v29Status.authorization?.present !== false ||
-    v29Status.authorization?.committed !== false ||
+    v29Status.antecedent?.commit !== V29_ANTECEDENT_COMMIT ||
+    v29Status.authorization?.present !== true ||
+    v29Status.authorization?.commitStateDerivedByHistory !== true ||
     v29Status.authorization?.effective !== false ||
+    v29Status.authorization?.path !== V29_AUTHORIZATION_PATH ||
+    v29Status.authorization?.sha256 !== V29_AUTHORIZATION_SHA256 ||
+    v29Status.authorization?.signingPublicKeySpkiSha256 !==
+      V29_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V29_AUTHORIZATION_PATH)) !==
+      V29_AUTHORIZATION_SHA256 ||
     v29Status.authorization?.v28AuthorizationReusable !== false ||
     v29Status.smallestHonestDelta?.taughtContentTextCaseOmitted !== true ||
     v29Status.smallestHonestDelta?.taughtContentLetterSpacingOmitted !==
