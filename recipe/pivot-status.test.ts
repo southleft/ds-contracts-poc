@@ -143,8 +143,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV9.attemptsExecuted = 0;
     },
     (value) => {
-      value.status.input.liveV9.restartAsV9Attempt3WithoutCarriedV3VerifierForbidden =
-        false;
+      value.status.input.liveV9.restartAsV9Attempt3WithoutCarriedV3VerifierForbidden = false;
     },
     (value) => {
       value.status.input.liveV10.authorizationPresent = false;
@@ -156,12 +155,10 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV10.liveHostDoesNotImportSceneReadbackTs = false;
     },
     (value) => {
-      value.status.input.liveV10.restartAsV10Attempt2WithoutAxisOrderTeachingForbidden =
-        false;
+      value.status.input.liveV10.restartAsV10Attempt2WithoutAxisOrderTeachingForbidden = false;
     },
     (value) => {
-      value.status.input.liveV10.restartAsV10Attempt3WithoutCarriedFirstSegmentRoleForbidden =
-        false;
+      value.status.input.liveV10.restartAsV10Attempt3WithoutCarriedFirstSegmentRoleForbidden = false;
     },
     (value) => {
       value.status.input.liveV11.authorizationPresent = false;
@@ -173,8 +170,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV11.taughtFirstSegmentRoleRecovery = false;
     },
     (value) => {
-      value.status.input.liveV11.restartAsV11Attempt2WithoutContentFillFixForbidden =
-        false;
+      value.status.input.liveV11.restartAsV11Attempt2WithoutContentFillFixForbidden = false;
     },
     (value) => {
       value.status.input.liveV12.authorizationPresent = false;
@@ -186,8 +182,22 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV12.taughtPostSettleContentFillRestore = false;
     },
     (value) => {
-      value.status.input.liveV12.restartAsV12Attempt2WithoutPostWriterFillRestoreForbidden =
-        false;
+      value.status.input.liveV12.restartAsV12Attempt2WithoutPostWriterFillRestoreForbidden = false;
+    },
+    (value) => {
+      value.status.input.liveV13.authorizationPresent = true;
+    },
+    (value) => {
+      value.status.input.liveV13.overallInputSuccess = true;
+    },
+    (value) => {
+      value.status.input.liveV13.taughtPostWriterContentFillRestore = false;
+    },
+    (value) => {
+      value.status.input.liveV13.v12WriterBytesUnchanged = false;
+    },
+    (value) => {
+      value.status.input.liveV13.remoteRequests = 132;
     },
   ];
   for (const plant of plants) {
