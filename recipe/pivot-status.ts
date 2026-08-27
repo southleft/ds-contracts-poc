@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -560,7 +560,11 @@ const V21_AUTHORIZATION_TEMPLATE_SHA256 =
 const V21_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v21-status.json";
 const V21_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused variant bindings.length; cleanup complete";
+const V21_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v21-attempt-1.json";
+const V21_ATTEMPT_1_SHA256 =
+  "6bbd0f6dccce3c4b83c87b2f9793d50d46ba0fc3d5c994236ce7f934b9594f57";
 const V21_BASE_COMMIT = "1cc5177e6d76e92f4950a674d3370959557f03c8";
 const V21_ANTECEDENT_COMMIT = "21fd65bb5a1f9874b96de05547dc092298738f59";
 const V21_AUTHORIZATION_PATH = `${V21_ROOT}/capture-authorization.json`;
@@ -1804,11 +1808,16 @@ export function validatePivotStatus(
     status.input?.liveV21?.hostPhases !== 3 ||
     status.input?.liveV21?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV21?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV21?.attemptsExecuted !== 0 ||
-    status.input?.liveV21?.nextAttempt !== 1 ||
-    status.input?.liveV21?.liveExecutionOccurred !== false ||
-    status.input?.liveV21?.figmaWrites !== 0 ||
+    status.input?.liveV21?.attemptsExecuted !== 1 ||
+    status.input?.liveV21?.nextAttempt !== 2 ||
+    status.input?.liveV21?.liveExecutionOccurred !== true ||
+    status.input?.liveV21?.figmaWrites !== 4 ||
     status.input?.liveV21?.figmaCaptures !== 0 ||
+    status.input?.liveV21?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV21?.attempt1Path !== V21_ATTEMPT_1_PATH ||
+    status.input?.liveV21?.attempt1Sha256 !== V21_ATTEMPT_1_SHA256 ||
+    status.input?.liveV21
+      ?.restartAsV21Attempt2WithoutVariantBindingsLengthForbidden !== true ||
     status.input?.liveV21?.humanSignoff !== "pending" ||
     status.input?.liveV21?.overallInputSuccess !== false
   )
@@ -3732,9 +3741,18 @@ export function verifyPivotStatus(): void {
       true ||
     v21Status.smallestHonestDelta?.v20SceneReadbackUnchanged !== true ||
     v21Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v21Status.attemptsExecuted !== 0 ||
-    v21Status.liveExecutionOccurred !== false ||
-    v21Status.figmaWrites !== 0 ||
+    v21Status.attemptsExecuted !== 1 ||
+    v21Status.nextAttempt !== 2 ||
+    v21Status.liveExecutionOccurred !== true ||
+    v21Status.figmaWrites !== 4 ||
+    v21Status.figmaCaptures !== 0 ||
+    v21Status.createdNodesThenRemoved !== 2317 ||
+    v21Status.attempt1Path !== V21_ATTEMPT_1_PATH ||
+    v21Status.attempt1Sha256 !== V21_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V21_ATTEMPT_1_PATH)) !==
+      V21_ATTEMPT_1_SHA256 ||
+    v21Status.restartAsV21Attempt2WithoutVariantBindingsLengthForbidden !==
+      true ||
     v21Status.overallInputSuccess !== false
   )
     failures.push("v21 draft antecedent/status mismatch");
