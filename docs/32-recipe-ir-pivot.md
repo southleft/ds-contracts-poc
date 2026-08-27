@@ -174,10 +174,20 @@
 > adornment-content child's existing COLOR binding when the slot node's
 > own bindings lack it. V16 writer, restore, runtime, and extract bytes
 > stay frozen. Hashed v17 scene-readback stays frozen. Do not teach FIXED.
-> Do not invent a variable. Authorization pins antecedent
-> `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Live execution remains
-> forbidden until runtime security prerequisites pass. Do not restart v17
-> attempt 2 as-is.
+> Do not invent a variable. V18 prepare is published at
+> `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Authorization is published at
+> `829f7c5217e3f4f5342cb2111112b6abb448a29a`. V18 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402443 bytes). Slot-color teaching surfaced `fills.0.color` so host no
+> longer refused the v17 slot-binding gate. Host collapse then refused the
+> surface `strokes.0.weight` token binding. All 128+128 surface nodes bind
+> the four per-side stroke weights to the same FLOAT and bind no
+> `strokeWeight` / `strokes.0.weight`. Do not teach FIXED. Do not invent a
+> binding. Do not restart v18 attempt 2 as-is. The next lineage must not
+> patch hashed v18 scene-readback bytes. Cleanup accepted; owned Input pages
+> are gone; no captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -469,7 +479,9 @@ lineage; do not patch hashed bytes in place.
 | A5x | AUTHORIZE INPUT V17 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `2a764e90d7683afd39ab08ad5b8cbf3e639c56a2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `2f2a7fdb89b983f566f78da5bf0fc52f037cb8f33818941207b6854fe3e88b73`; SPKI SHA-256 `66cbff883845e854f6d1fa03e478db12554ef8986d39dd347c90543c57661da3`. Do not patch hashed v16 or v17 bytes. | **Done** at `36dfcad20ecd04d9ff5eddcbe476a60ec66bc940`. |
 | A5y | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host surfaced slot SOLID, then refused leading-slot `fills.0.color` binding (slot nodes bind only height/width; COLOR is on the adornment-content child). Do **not** teach FIXED. Do **not** invent a binding. Do **not** restart v17 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
 | A5z | PREPARE INPUT V18. Copy the v17 stack. Do not patch hashed v17 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface leading-slot `fills.0.color` from the adornment-content child's bindings when the slot node's own bindings lack it. Do not invent variables. Do not teach FIXED. | **Done** at `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Antecedent index SHA-256 `7eadba3d0bdf170d6569c5e69087528b8667b669225a91016091033dacebfa75`. |
-| A5aa | AUTHORIZE INPUT V18 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `7a95ddb633dbad6c8bf10110af41d18acfc11719dabc28044b28dead846671e0`; SPKI SHA-256 `8d2c69e5310eb77f4c0bbb9f42d0bb23d01df03318d73705cf0ff40f33a70cb8`. Do not patch hashed v17 or v18 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v18 file fails closed, open v19. |
+| A5aa | AUTHORIZE INPUT V18 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `7a95ddb633dbad6c8bf10110af41d18acfc11719dabc28044b28dead846671e0`; SPKI SHA-256 `8d2c69e5310eb77f4c0bbb9f42d0bb23d01df03318d73705cf0ff40f33a70cb8`. Do not patch hashed v17 or v18 bytes. | **Done** at `829f7c5217e3f4f5342cb2111112b6abb448a29a`. |
+| A5ab | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host surfaced slot `fills.0.color`, then refused surface `strokes.0.weight` (surfaces bind four per-side stroke weights to the same FLOAT; no `strokeWeight`). Do **not** teach FIXED. Do **not** invent a binding. Do **not** restart v18 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ac | PREPARE INPUT V19. Copy the v18 stack. Do not patch hashed v18 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface `strokes.0.weight` from the existing uniform per-side stroke-weight bindings when the surface node's own `strokeWeight` is absent. Do not invent variables. Do not teach FIXED. | Open only after RECORD. If a hashed v19 file later fails closed, open v20. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1892,7 +1904,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, and v17 attempt 1 failed closed; v18 authorization declared; false** | attestation + Scratch-only live v18 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, and v18 attempt 1 failed closed; false** | PREPARE INPUT V19 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

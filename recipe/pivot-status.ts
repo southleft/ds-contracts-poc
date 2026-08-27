@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -470,7 +470,11 @@ const V18_AUTHORIZATION_TEMPLATE_SHA256 =
 const V18_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v18-status.json";
 const V18_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused surface strokes.0.weight; cleanup complete";
+const V18_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v18-attempt-1.json";
+const V18_ATTEMPT_1_SHA256 =
+  "e68dea24d839da6e8002658123b7e5ce21abf8a609c29122dfb461a2bc72672c";
 const V18_BASE_COMMIT = "cd247ebbe050b74232dd4ad24602d733a7c1bb48";
 const V18_ANTECEDENT_COMMIT = "cfdc6a7cff19b619640dc9dcea0d79a79f1ade75";
 const V18_AUTHORIZATION_PATH = `${V18_ROOT}/capture-authorization.json`;
@@ -1527,11 +1531,16 @@ export function validatePivotStatus(
     status.input?.liveV18?.hostPhases !== 3 ||
     status.input?.liveV18?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV18?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV18?.attemptsExecuted !== 0 ||
-    status.input?.liveV18?.nextAttempt !== 1 ||
-    status.input?.liveV18?.liveExecutionOccurred !== false ||
-    status.input?.liveV18?.figmaWrites !== 0 ||
+    status.input?.liveV18?.attemptsExecuted !== 1 ||
+    status.input?.liveV18?.nextAttempt !== 2 ||
+    status.input?.liveV18?.liveExecutionOccurred !== true ||
+    status.input?.liveV18?.figmaWrites !== 4 ||
     status.input?.liveV18?.figmaCaptures !== 0 ||
+    status.input?.liveV18?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV18?.attempt1Path !== V18_ATTEMPT_1_PATH ||
+    status.input?.liveV18?.attempt1Sha256 !== V18_ATTEMPT_1_SHA256 ||
+    status.input?.liveV18
+      ?.restartAsV18Attempt2WithoutSurfaceStrokeWeightForbidden !== true ||
     status.input?.liveV18?.humanSignoff !== "pending" ||
     status.input?.liveV18?.overallInputSuccess !== false
   )
@@ -3112,9 +3121,18 @@ export function verifyPivotStatus(): void {
     v18Status.smallestHonestDelta?.v17SceneReadbackUnchanged !== true ||
     v18Status.smallestHonestDelta?.v16RestoreBytesUnchanged !== true ||
     v18Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v18Status.attemptsExecuted !== 0 ||
-    v18Status.liveExecutionOccurred !== false ||
-    v18Status.figmaWrites !== 0 ||
+    v18Status.attemptsExecuted !== 1 ||
+    v18Status.nextAttempt !== 2 ||
+    v18Status.liveExecutionOccurred !== true ||
+    v18Status.figmaWrites !== 4 ||
+    v18Status.figmaCaptures !== 0 ||
+    v18Status.createdNodesThenRemoved !== 2317 ||
+    v18Status.attempt1Path !== V18_ATTEMPT_1_PATH ||
+    v18Status.attempt1Sha256 !== V18_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V18_ATTEMPT_1_PATH)) !==
+      V18_ATTEMPT_1_SHA256 ||
+    v18Status.restartAsV18Attempt2WithoutSurfaceStrokeWeightForbidden !==
+      true ||
     v18Status.overallInputSuccess !== false
   )
     failures.push("v18 draft antecedent/status mismatch");

@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v18-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused surface strokes.0.weight; cleanup complete",
   "baseCommit": "cd247ebbe050b74232dd4ad24602d733a7c1bb48",
   "antecedent": {
     "commit": "cfdc6a7cff19b619640dc9dcea0d79a79f1ade75",
@@ -97,12 +97,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v18-attempt-1.json",
+  "attempt1Sha256": "e68dea24d839da6e8002658123b7e5ce21abf8a609c29122dfb461a2bc72672c",
+  "restartAsV18Attempt2WithoutSurfaceStrokeWeightForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }
