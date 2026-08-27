@@ -99,8 +99,9 @@
 > diagnosis, proof, complete capture, cleanup, and packet are indexed at
 > `recipe/evidence/input-field-live-pivot-v2/index.json`.
 > Exhausted v3 evidence and all 128 attempt-3 screenshots are indexed at
-> `recipe/evidence/input-field-live-pivot-v3/index.json`; the unauthorized v4
-> draft is `recipe/evidence/input-field-live-pivot-v4/protocol.json`.
+> `recipe/evidence/input-field-live-pivot-v3/index.json`; the v4 protocol and
+> pending-uncommitted authorization are indexed at
+> `recipe/evidence/input-field-live-pivot-v4/index.json`.
 > The source-neutral calibration corpus, captures, result, exact-byte attempts,
 > and cleanup receipt are indexed at
 > `recipe/evidence/raster-calibration-v1/index.json`.
@@ -1388,7 +1389,7 @@ samples rather than this two-package, 128-cell paired denominator.
 | live v1        | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                 | live validation failed; artifacts cleaned               | **failed**  | live 14,064/14,064 accounted                            | **false**             |
 | live v2        | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**         | historical structure/usability metrics retained         | **failed**  | historical self-referential account is not re-certified | **false**             |
 | live v3        | failed                 | attempt 3 retained 128 unscored captures after host normalization failure           | writer/runtime returned; all downstream gates unavailable | **failed** | no measured account; v3 permanently exhausted           | **false**             |
-| live v4 draft  | offline architecture   | no capture; no objective values                                                     | generic normalization and transactional journal drafted | not authorized | prospective occurrence-preserving account            | **false**             |
+| live v4 authorization | offline architecture | no capture; no objective values                                                | pinned normalization and transactional journal           | pending parent commit and push | prospective occurrence-preserving account       | **false**             |
 
 Input/Field v1 remains a failed historical result. V2's internally reliable
 consensus meets the within-batch arithmetic criterion without a denominator
@@ -1411,7 +1412,7 @@ recognisability remains pending.
 | archetype   | progress                                                                                           | next evidence boundary                                                                                   |
 | ----------- | -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------- |
 | Button      | **technical mint retained; overall false/pending**                                                 | attributable human signoff plus fresh scene-derived inversion/accounting                                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted and cleaned; v4 draft not authorized; false** | commit the v4 draft antecedent, then create a separate authorization commit before any future clean-descendant attempt |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted and cleaned; v4 authorization pending commit; false** | parent commits the separate authorization, pushes it, and runs the history/upstream preflight before attempt 1 |
 | Combobox    | not claimed                                                                                        | detached listbox/popover structure                                                                       |
 | Data Table  | not claimed                                                                                        | row/column templates and matched matrix                                                                  |
 | Calendar    | not claimed                                                                                        | new archetype plus absolute acceptance                                                                   |
@@ -1707,7 +1708,7 @@ geometry and perceptual/ink error must improve overall; and no source, state, or
 adornment stratum may materially regress. Exact pixel difference is diagnostic
 only. Attributable human signoff is mandatory.
 
-### Input live v3 exhaustion and v4 draft architecture
+### Input live v3 exhaustion and v4 pending authorization
 
 Attempt 3 used the final v3 slot from clean committed descendant
 `6903d31eb015933a6796722d25f6155fb13332ce`. Exact-byte transport decoded
@@ -1748,13 +1749,33 @@ section, collection, and node IDs from the persisted writer phase. Capture is
 unreachable until accounting, fixed point, usability, restoration,
 clipping/overlap, adornment content, and state gates all pass.
 
-The v4 protocol status is **draft committed antecedent pending authorization**.
-It permits at most three future attempts, each from a clean published
-descendant, and targets only Scratch file key
+The v4 protocol/architecture antecedent is committed and published at
+`25b820868104be65194f83e154f59b70aacf2bae`. Its committed protocol bytes have
+SHA-256
+`e65584d1d52178cd80dddbe42458a58b0a1ade4f24e41fb53fa4b9cdb97105d6`;
+the runner, generic normalizer, transactional journal, verifier, writer,
+evidence reader, and normalization fixtures are separately pinned by hashes in
+`capture-authorization.json`. The full v3 evidence Git tree remains
+`705fbd0c5be0f66a8945bd9a7bde89b99d02b106`, so no v3 byte is reused or
+rewritten.
+
+The separate v4 authorization artifact is prepared with SHA-256
+`6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b`
+but is **pending-uncommitted authorization**. It embeds no authorization commit;
+the verifier discovers the unique first commit that adds the artifact, requires
+that commit to strictly descend from the antecedent, and requires future
+`codeCommit` to equal or descend from both. A clean worktree and exact upstream
+equality are mandatory, so the current uncommitted artifact authorizes nothing.
+
+The pinned protocol permits at most three future attempts, each from a clean
+published descendant, and targets only Scratch file key
 `byMp6lt0Ij9b2QbkDGFwBh` with page-scoped ownership. No source/library file is
 writable, no live execution has occurred, no target values are added, and
-attributable human signoff remains pending. A separate authorization commit must
-follow the draft antecedent before any v4 write or capture.
+attributable human signoff remains pending. Attempt 1 may be handed off only
+after the parent commits and pushes this layer and both authorization and
+preflight verifiers pass; capture remains ordered after every transactional,
+normalization, scene-derived, fixed-point, usability, restoration, content,
+state, font, clipping, and overlap gate.
 
 ### Browser↔Figma raster calibration v1 — held-out rejection, cleaned, 2026-08-27
 

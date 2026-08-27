@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 draft not authorized; Button false/pending; Input false",
+  "status": "Input live v3 exhausted; v4 authorization pending parent commit; Button false/pending; Input false",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -131,14 +131,21 @@
       "sceneDerivedLiveVerificationCompleted": false
     },
     "liveV4": {
-      "status": "draft committed antecedent pending authorization",
+      "status": "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden",
+      "protocolStatus": "draft committed antecedent pending authorization",
+      "antecedentCommit": "25b820868104be65194f83e154f59b70aacf2bae",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v4/protocol.json",
       "protocolSha256": "e65584d1d52178cd80dddbe42458a58b0a1ade4f24e41fb53fa4b9cdb97105d6",
       "normalizationFixturesPath": "recipe/evidence/input-field-live-pivot-v4/normalization-fixtures.json",
       "normalizationFixturesSha256": "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13",
-      "authorizationPath": null,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v4/capture-authorization.json",
+      "authorizationSha256": "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b",
+      "authorizationState": "pending-uncommitted-authorization",
+      "authorizationEstablishedOnlyByHistoryVerifier": true,
       "authorized": false,
       "liveExecutionOccurred": false,
+      "attemptsExecuted": 0,
+      "nextAttempt": 1,
       "maximumFutureAttempts": 3,
       "cleanPublishedDescendantsOnly": true,
       "humanSignoff": "pending"

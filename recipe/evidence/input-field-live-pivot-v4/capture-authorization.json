@@ -1,0 +1,109 @@
+{
+  "artifactVersion": "input-live-v4-capture-authorization-v1",
+  "authorizationId": "input-live-v4",
+  "status": "prepared; pending unique first-add commit and upstream publication; capture forbidden",
+  "antecedent": {
+    "commit": "25b820868104be65194f83e154f59b70aacf2bae",
+    "protocol": {
+      "semanticVersion": "input-live-v4-protocol-draft-v1",
+      "path": "recipe/evidence/input-field-live-pivot-v4/protocol.json",
+      "sha256": "e65584d1d52178cd80dddbe42458a58b0a1ade4f24e41fb53fa4b9cdb97105d6"
+    },
+    "dependencies": {
+      "recipe/run-input-field-live-v4.ts": "5ac591fd39b0d83e773f9ae4b0c348d7334c6357fb0ce12f53da61e21bb7ddd6",
+      "recipe/figma-property-normalizer.ts": "7a92fab6779d9b3243b397a4e6ed8c8622a52a244933fb2b2a0a1e2e8ebce54b",
+      "recipe/input-field-live-v4-journal.ts": "7b93314068eb3b99212725db2e62d19834ba8305f576020264e300eef383aa7a",
+      "recipe/input-field-live-v4-verifier.ts": "417d849f40edf39b5073bd26e938212888476cbabc89a4c09e4cf305b5811cd1",
+      "recipe/input-field-live-v4-writer.ts": "d993131980f0ab3cf00791614e6ffb74fe0ed35203eb812e86f459df7221b713",
+      "recipe/input-field-live-v4-evidence.ts": "0e72e9ba6cb6a81b44c76083278715a7bdc2aef072e4451260dfe729ecbf4631",
+      "recipe/evidence/input-field-live-pivot-v4/normalization-fixtures.json": "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13"
+    }
+  },
+  "authorizationCommitDiscovery": {
+    "rule": "the authorization commit is the unique first commit that adds this artifact",
+    "command": "git log --reverse --diff-filter=A --format=%H <codeCommit> -- recipe/evidence/input-field-live-pivot-v4/capture-authorization.json",
+    "commitNotEmbeddedInArtifact": true,
+    "mustStrictlyDescendFromAntecedent": true,
+    "artifactBytesMustRemainEqualToFirstAddition": true
+  },
+  "capture": {
+    "status": "capture may occur only after authorization and preflight verifiers pass from a clean published codeCommit",
+    "codeCommitRule": "codeCommit must equal the discovered authorization commit or descend from it and from the antecedent",
+    "cleanWorktreeRequired": true,
+    "upstreamEqualityRequired": true,
+    "authorizedWritableFigmaFileKeys": ["byMp6lt0Ij9b2QbkDGFwBh"],
+    "maximumAttempts": 3,
+    "attemptChronology": "attempt must equal completed v4 attempts plus one",
+    "evidenceRoot": "recipe/evidence/input-field-live-pivot-v4",
+    "v3EvidenceReuseForbidden": true
+  },
+  "requiredGates": {
+    "transactionalPhases": [
+      "preflight",
+      "writer-result",
+      "raw-scene-and-variable-table",
+      "host-normalization",
+      "accounting-and-fixed-point",
+      "usability-and-restoration",
+      "captures-and-objective",
+      "retention-and-cleanup"
+    ],
+    "transactionalJournal": {
+      "hashChained": true,
+      "persistImmediatelyAfterPhaseReturn": true,
+      "cleanupUsesPersistedWriterOwnership": true,
+      "captureAfterAllTechnicalGatesOnly": true
+    },
+    "normalization": {
+      "fixturePath": "recipe/evidence/input-field-live-pivot-v4/normalization-fixtures.json",
+      "fixtureSha256": "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13",
+      "localVariableTableRequired": true,
+      "bindingAliasesResolvedOnlyThroughCapturedTable": true,
+      "typedUnitsPreserved": true,
+      "namedRefusalsRequired": true
+    },
+    "sceneDerived": {
+      "occurrencePreservingMultisetAccounting": true,
+      "silentCountDerived": true,
+      "sourceIrReadbackForbidden": true,
+      "twoCycleFixedPointRequired": true
+    },
+    "beforeCapture": [
+      "raw scene and local-variable table persisted",
+      "host binding and unit normalization passed",
+      "occurrence-preserving accounting passed",
+      "two-cycle scene-derived fixed point passed",
+      "all-axis usability and exact restoration passed",
+      "clipping and overlap passed",
+      "actual adornment content and accessibility payload passed",
+      "state semantics and typed bindings passed",
+      "font provenance or named refusal passed"
+    ],
+    "cleanup": {
+      "freshOwnedPagePerAttempt": true,
+      "exactPersistedIdsRequired": true,
+      "remainingOwnedNodes": 0,
+      "remainingOwnedCollections": 0
+    },
+    "objective": {
+      "strata": ["source", "state", "adornment"],
+      "recipeWinsMustExceedLegacyLosses": true,
+      "aggregateRecipeErrorsMustBeLower": true,
+      "catastrophicCellRuleInheritedOnlyFromPinnedProtocol": true,
+      "exactPixelDifferenceDiagnosticOnly": true
+    },
+    "humanSignoff": {
+      "mandatory": true,
+      "status": "pending",
+      "attributableReviewerRequired": true,
+      "builderOrAnonymousSignoffAccepted": false,
+      "overallSuccessBeforeSignoff": false
+    }
+  },
+  "criterionPolicy": {
+    "onlyPinnedProtocolDefinesAcceptance": true,
+    "protocolCriteriaAltered": false,
+    "posthocFieldsForbidden": true,
+    "captureDataPresent": false
+  }
+}

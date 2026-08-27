@@ -5,6 +5,7 @@ import {
   INPUT_LIVE_V3_PROTOCOL_PATH,
   INPUT_LIVE_V3_PROTOCOL_SHA256,
   PIVOT_STATUS_PATH,
+  validateInputLiveV4PendingStatus,
   validatePivotStatus,
 } from "./pivot-status.js";
 import { readRepositoryJson } from "./evidence-path.js";
@@ -19,7 +20,7 @@ const fixtures = () => ({
   ),
 });
 
-test("v3 remains exhausted and v4 remains an unauthorized draft", () => {
+test("v3 remains exhausted and v4 authorization remains pending-uncommitted", () => {
   const value = fixtures();
   assert.deepEqual(
     validatePivotStatus(
@@ -49,6 +50,42 @@ test("v3 remains exhausted and v4 remains an unauthorized draft", () => {
     ),
     [],
   );
+});
+
+test("v4 index cannot claim authorization, capture, signoff, or criteria changes", () => {
+  const index = readRepositoryJson<Record<string, any>>(
+    "recipe/evidence/input-field-live-pivot-v4/index.json",
+  );
+  assert.deepEqual(
+    validateInputLiveV4PendingStatus(
+      index,
+      "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b",
+    ),
+    [],
+  );
+  for (const mutate of [
+    (value: Record<string, any>) => {
+      value.authorization.authorized = true;
+    },
+    (value: Record<string, any>) => {
+      value.liveExecutionOccurred = true;
+    },
+    (value: Record<string, any>) => {
+      value.protocolCriteriaAltered = true;
+    },
+    (value: Record<string, any>) => {
+      value.humanSignoff = "passed";
+    },
+  ]) {
+    const value = structuredClone(index);
+    mutate(value);
+    assert.ok(
+      validateInputLiveV4PendingStatus(
+        value,
+        "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b",
+      ).length > 0,
+    );
+  }
 });
 
 test("status gate rejects chronology, success, capture, hash, and criterion lies", () => {

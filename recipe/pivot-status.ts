@@ -10,6 +10,10 @@ import {
   readInputLiveV3Attempt3HardFailure,
 } from "./input-field-live-v3-evidence.js";
 import {
+  INPUT_LIVE_V4_ANTECEDENT_COMMIT,
+  INPUT_LIVE_V4_AUTHORIZATION_PATH,
+} from "./input-field-live-v4-authorization.js";
+import {
   INPUT_LIVE_V4_PROTOCOL_SHA256,
   INPUT_LIVE_V4_STATUS,
   readInputLiveV4Protocol,
@@ -29,9 +33,13 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 draft not authorized; Button false/pending; Input false";
-const V3_INDEX_STATUS =
-  "attempt 3 hard failure; v3 permanently exhausted";
+  "Input live v3 exhausted; v4 authorization pending parent commit; Button false/pending; Input false";
+const V4_PENDING_STATUS =
+  "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
+const V4_AUTHORIZATION_SHA256 =
+  "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b";
+const V4_INDEX_PATH = "recipe/evidence/input-field-live-pivot-v4/index.json";
+const V3_INDEX_STATUS = "attempt 3 hard failure; v3 permanently exhausted";
 const V3_PREPARED_FILES = [
   "capture-authorization.json",
   "conformance-report.json",
@@ -143,13 +151,24 @@ export function validatePivotStatus(
     status.input?.liveV3?.attempt3?.exactFigmaIdsAvailable !== false ||
     status.input?.liveV3?.attempt3?.remainingOwnedNodes !== 0 ||
     status.input?.liveV3?.attempt3?.remainingOwnedCollections !== 0 ||
-    status.input?.liveV4?.status !== INPUT_LIVE_V4_STATUS ||
-    status.input?.liveV4?.protocolSha256 !==
-      INPUT_LIVE_V4_PROTOCOL_SHA256 ||
+    status.input?.liveV4?.status !== V4_PENDING_STATUS ||
+    status.input?.liveV4?.protocolStatus !== INPUT_LIVE_V4_STATUS ||
+    status.input?.liveV4?.antecedentCommit !==
+      INPUT_LIVE_V4_ANTECEDENT_COMMIT ||
+    status.input?.liveV4?.protocolSha256 !== INPUT_LIVE_V4_PROTOCOL_SHA256 ||
     status.input?.liveV4?.normalizationFixturesSha256 !==
       "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13" ||
+    status.input?.liveV4?.authorizationPath !==
+      INPUT_LIVE_V4_AUTHORIZATION_PATH ||
+    status.input?.liveV4?.authorizationSha256 !== V4_AUTHORIZATION_SHA256 ||
+    status.input?.liveV4?.authorizationState !==
+      "pending-uncommitted-authorization" ||
+    status.input?.liveV4?.authorizationEstablishedOnlyByHistoryVerifier !==
+      true ||
     status.input?.liveV4?.authorized !== false ||
     status.input?.liveV4?.liveExecutionOccurred !== false ||
+    status.input?.liveV4?.attemptsExecuted !== 0 ||
+    status.input?.liveV4?.nextAttempt !== 1 ||
     status.input?.liveV4?.humanSignoff !== "pending"
   )
     fail("v3 exhausted/v4 draft status");
@@ -162,6 +181,46 @@ export function validatePivotStatus(
   return failures;
 }
 
+export function validateInputLiveV4PendingStatus(
+  index: Record<string, any>,
+  authorizationHash: string,
+): string[] {
+  const failures: string[] = [];
+  if (
+    index.artifactVersion !== "input-live-v4-index-v1" ||
+    index.status !== V4_PENDING_STATUS ||
+    index.antecedent?.commit !== INPUT_LIVE_V4_ANTECEDENT_COMMIT ||
+    index.antecedent?.protocolPath !==
+      "recipe/evidence/input-field-live-pivot-v4/protocol.json" ||
+    index.antecedent?.protocolSha256 !== INPUT_LIVE_V4_PROTOCOL_SHA256
+  )
+    failures.push("v4 pending index identity/antecedent");
+  if (
+    authorizationHash !== V4_AUTHORIZATION_SHA256 ||
+    index.authorization?.path !== INPUT_LIVE_V4_AUTHORIZATION_PATH ||
+    index.authorization?.sha256 !== authorizationHash ||
+    index.authorization?.firstAddCommit !== null ||
+    index.authorization?.committed !== false ||
+    index.authorization?.upstreamPublished !== false ||
+    index.authorization?.authorized !== false ||
+    index.authorization?.discoveredAfterCommit !== true
+  )
+    failures.push("v4 pending-uncommitted authorization status");
+  if (
+    index.attempts?.executed !== 0 ||
+    index.attempts?.next !== 1 ||
+    index.attempts?.maximum !== 3 ||
+    index.attempts?.v3AttemptsDoNotCarryForward !== true ||
+    index.liveExecutionOccurred !== false ||
+    index.captureArtifactsPresent !== false ||
+    index.protocolCriteriaAltered !== false ||
+    index.humanSignoff !== "pending" ||
+    index.overallInputSuccess !== false
+  )
+    failures.push("v4 pending attempts/results/signoff status");
+  return failures;
+}
+
 export function verifyPivotStatus(): void {
   const status = readRepositoryJson<Record<string, any>>(PIVOT_STATUS_PATH);
   const protocol = readRepositoryJson<Record<string, any>>(
@@ -170,6 +229,7 @@ export function verifyPivotStatus(): void {
   const index = readRepositoryJson<Record<string, any>>(
     `${V3_ROOT}/index.json`,
   );
+  const v4Index = readRepositoryJson<Record<string, any>>(V4_INDEX_PATH);
   const protocolHash = sha256(
     readRepositoryEvidence(INPUT_LIVE_V3_PROTOCOL_PATH),
   );
@@ -180,6 +240,12 @@ export function verifyPivotStatus(): void {
     index,
     files,
     protocolHash,
+  );
+  failures.push(
+    ...validateInputLiveV4PendingStatus(
+      v4Index,
+      sha256(readRepositoryEvidence(INPUT_LIVE_V4_AUTHORIZATION_PATH)),
+    ),
   );
   for (const [dependencyPath, dependencyHash] of Object.entries(
     protocol.implementationDependencies?.sha256 ?? {},
@@ -263,8 +329,7 @@ export function verifyPivotStatus(): void {
       readRepositoryEvidence(
         "recipe/evidence/input-field-live-pivot-v4/normalization-fixtures.json",
       ),
-    ) !==
-    "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13"
+    ) !== "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13"
   )
     failures.push("v4 normalization fixture hash mismatch");
   for (const artifact of [
@@ -277,9 +342,7 @@ export function verifyPivotStatus(): void {
   }
   if (failures.length > 0)
     throw new Error(`recipe pivot status invalid:\n${failures.join("\n")}`);
-  process.stdout.write(
-    `Recipe pivot status: ${STATUS_INDEX_STATUS}\n`,
-  );
+  process.stdout.write(`Recipe pivot status: ${STATUS_INDEX_STATUS}\n`);
 }
 
 if (import.meta.url === `file://${path.resolve(process.argv[1] ?? "")}`) {
