@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -320,7 +320,11 @@ const V13_AUTHORIZATION_TEMPLATE_SHA256 =
 const V13_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v13-status.json";
 const V13_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer accepted; hashed post-writer restore threw INPUT-V13-RESTORE-NOT-FILL; extract not issued; cleanup complete";
+const V13_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v13-attempt-1.json";
+const V13_ATTEMPT_1_SHA256 =
+  "436bfe32562fc392942253cc9320ffc1f54fcd81a76c54496eeaffb80a7db653";
 const V13_BASE_COMMIT = "685131cc33b56f40b4f520ed16d0998c5fd93164";
 const V13_ANTECEDENT_COMMIT = "4c0710109f4e8a2eba701afe96ba4af9f4924dad";
 const V13_AUTHORIZATION_PATH = `${V13_ROOT}/capture-authorization.json`;
@@ -1056,11 +1060,16 @@ export function validatePivotStatus(
     status.input?.liveV13?.hostPhases !== 3 ||
     status.input?.liveV13?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV13?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV13?.attemptsExecuted !== 0 ||
-    status.input?.liveV13?.nextAttempt !== 1 ||
-    status.input?.liveV13?.liveExecutionOccurred !== false ||
-    status.input?.liveV13?.figmaWrites !== 0 ||
+    status.input?.liveV13?.attemptsExecuted !== 1 ||
+    status.input?.liveV13?.nextAttempt !== 2 ||
+    status.input?.liveV13?.liveExecutionOccurred !== true ||
+    status.input?.liveV13?.figmaWrites !== 2 ||
     status.input?.liveV13?.figmaCaptures !== 0 ||
+    status.input?.liveV13?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV13?.attempt1Path !== V13_ATTEMPT_1_PATH ||
+    status.input?.liveV13?.attempt1Sha256 !== V13_ATTEMPT_1_SHA256 ||
+    status.input?.liveV13
+      ?.restartAsV13Attempt2WithoutHashedRestoreChangeForbidden !== true ||
     status.input?.liveV13?.humanSignoff !== "pending" ||
     status.input?.liveV13?.overallInputSuccess !== false
   )
@@ -2042,9 +2051,18 @@ export function verifyPivotStatus(): void {
     v13Status.smallestHonestDelta?.carriedV3Verifier !==
       "recipe/input-field-live-v3-verifier-v13.ts" ||
     v13Status.denominator?.remoteRequests !== 133 ||
-    v13Status.attemptsExecuted !== 0 ||
-    v13Status.liveExecutionOccurred !== false ||
-    v13Status.figmaWrites !== 0 ||
+    v13Status.attemptsExecuted !== 1 ||
+    v13Status.nextAttempt !== 2 ||
+    v13Status.liveExecutionOccurred !== true ||
+    v13Status.figmaWrites !== 2 ||
+    v13Status.figmaCaptures !== 0 ||
+    v13Status.createdNodesThenRemoved !== 2317 ||
+    v13Status.attempt1Path !== V13_ATTEMPT_1_PATH ||
+    v13Status.attempt1Sha256 !== V13_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V13_ATTEMPT_1_PATH)) !==
+      V13_ATTEMPT_1_SHA256 ||
+    v13Status.restartAsV13Attempt2WithoutHashedRestoreChangeForbidden !==
+      true ||
     v13Status.overallInputSuccess !== false
   )
     failures.push("v13 draft antecedent/status mismatch");

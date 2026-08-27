@@ -199,6 +199,10 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
     (value) => {
       value.status.input.liveV13.remoteRequests = 132;
     },
+    (value) => {
+      value.status.input.liveV13.restartAsV13Attempt2WithoutHashedRestoreChangeForbidden =
+        false;
+    },
   ];
   for (const plant of plants) {
     const value = fixtures();
