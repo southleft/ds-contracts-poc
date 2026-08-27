@@ -122,7 +122,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Checked=Unchecked, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN"
           },
@@ -135,45 +135,6 @@ const COMPONENTS = [
             "varName": "imported/switch/root/width/above"
           },
           "children": [
-            {
-              "type": "frame",
-              "name": "indicator",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/unchecked",
-                  "iconSize": 18
-                }
-              ],
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-10000",
-                "bottomRightRadius": "imported/shared/size-10000",
-                "strokeBottomWeight": "imported/shared/size-1",
-                "strokeLeftWeight": "imported/shared/size-1",
-                "strokeRightWeight": "imported/shared/size-1",
-                "topLeftRadius": "imported/shared/size-10000",
-                "topRightRadius": "imported/shared/size-10000",
-                "strokeTopWeight": "imported/shared/size-1"
-              },
-              "margins": {
-                "bottom": 8,
-                "left": 8,
-                "top": 0
-              },
-              "fixedWidth": {
-                "px": 40,
-                "varName": "imported/switch/indicator/width"
-              },
-              "fill": "imported/switch/indicator/background-color/unchecked",
-              "stroke": "imported/switch/indicator/border-top-color/unchecked"
-            },
             {
               "type": "frame",
               "name": "label",
@@ -204,34 +165,7 @@ const COMPONENTS = [
                 "paddingRight": "imported/switch/label/padding-right/above",
                 "paddingTop": "imported/switch/label/padding-top/above"
               }
-            }
-          ],
-          "bindings": {
-            "itemSpacing": "imported/shared/size-8"
-          }
-        }
-      },
-      {
-        "name": "Checked=Unchecked, Label Position=Before",
-        "row": 0,
-        "col": 2,
-        "spec": {
-          "type": "root",
-          "name": "Checked=Unchecked, Label Position=Before",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "fixedHeight": {
-            "px": 36,
-            "varName": "imported/switch/root/height/before"
-          },
-          "fixedWidth": {
-            "px": 111.375,
-            "varName": "imported/switch/root/width/before"
-          },
-          "children": [
+            },
             {
               "type": "frame",
               "name": "indicator",
@@ -262,7 +196,8 @@ const COMPONENTS = [
               "margins": {
                 "bottom": 8,
                 "left": 8,
-                "top": 8
+                "right": 8,
+                "top": 0
               },
               "fixedWidth": {
                 "px": 40,
@@ -270,7 +205,31 @@ const COMPONENTS = [
               },
               "fill": "imported/switch/indicator/background-color/unchecked",
               "stroke": "imported/switch/indicator/border-top-color/unchecked"
-            },
+            }
+          ]
+        }
+      },
+      {
+        "name": "Checked=Unchecked, Label Position=Before",
+        "row": 0,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Checked=Unchecked, Label Position=Before",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/switch/root/height/before"
+          },
+          "fixedWidth": {
+            "px": 111.375,
+            "varName": "imported/switch/root/width/before"
+          },
+          "children": [
             {
               "type": "frame",
               "name": "label",
@@ -301,6 +260,45 @@ const COMPONENTS = [
                 "paddingRight": "imported/switch/label/padding-right/before",
                 "paddingTop": "imported/switch/label/padding-top/before"
               }
+            },
+            {
+              "type": "frame",
+              "name": "indicator",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "indicator-icon",
+                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#616161\"/></svg>",
+                  "svgPaintVar": "imported/switch/indicator/fill/unchecked",
+                  "iconSize": 18
+                }
+              ],
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-10000",
+                "bottomRightRadius": "imported/shared/size-10000",
+                "strokeBottomWeight": "imported/shared/size-1",
+                "strokeLeftWeight": "imported/shared/size-1",
+                "strokeRightWeight": "imported/shared/size-1",
+                "topLeftRadius": "imported/shared/size-10000",
+                "topRightRadius": "imported/shared/size-10000",
+                "strokeTopWeight": "imported/shared/size-1"
+              },
+              "margins": {
+                "bottom": 8,
+                "right": 8,
+                "top": 8
+              },
+              "fixedWidth": {
+                "px": 40,
+                "varName": "imported/switch/indicator/width"
+              },
+              "fill": "imported/switch/indicator/background-color/unchecked",
+              "stroke": "imported/switch/indicator/border-top-color/unchecked"
             }
           ],
           "bindings": {
@@ -413,7 +411,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Checked=Checked, Label Position=Above",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN"
           },
@@ -426,45 +424,6 @@ const COMPONENTS = [
             "varName": "imported/switch/root/width/above"
           },
           "children": [
-            {
-              "type": "frame",
-              "name": "indicator",
-              "layout": {
-                "mode": "HORIZONTAL",
-                "primary": "CENTER",
-                "counter": "CENTER"
-              },
-              "children": [
-                {
-                  "type": "svg",
-                  "name": "indicator-icon",
-                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
-                  "svgPaintVar": "imported/switch/indicator/fill/checked",
-                  "iconSize": 18
-                }
-              ],
-              "bindings": {
-                "bottomLeftRadius": "imported/shared/size-10000",
-                "bottomRightRadius": "imported/shared/size-10000",
-                "strokeBottomWeight": "imported/shared/size-1",
-                "strokeLeftWeight": "imported/shared/size-1",
-                "strokeRightWeight": "imported/shared/size-1",
-                "topLeftRadius": "imported/shared/size-10000",
-                "topRightRadius": "imported/shared/size-10000",
-                "strokeTopWeight": "imported/shared/size-1"
-              },
-              "margins": {
-                "bottom": 8,
-                "left": 8,
-                "top": 0
-              },
-              "fixedWidth": {
-                "px": 40,
-                "varName": "imported/switch/indicator/width"
-              },
-              "fill": "imported/switch/indicator/background-color/checked",
-              "stroke": "imported/switch/indicator/border-top-color/checked"
-            },
             {
               "type": "frame",
               "name": "label",
@@ -495,34 +454,7 @@ const COMPONENTS = [
                 "paddingRight": "imported/switch/label/padding-right/above",
                 "paddingTop": "imported/switch/label/padding-top/above"
               }
-            }
-          ],
-          "bindings": {
-            "itemSpacing": "imported/shared/size-8"
-          }
-        }
-      },
-      {
-        "name": "Checked=Checked, Label Position=Before",
-        "row": 1,
-        "col": 2,
-        "spec": {
-          "type": "root",
-          "name": "Checked=Checked, Label Position=Before",
-          "layout": {
-            "mode": "HORIZONTAL",
-            "primary": "MIN",
-            "counter": "MIN"
-          },
-          "fixedHeight": {
-            "px": 36,
-            "varName": "imported/switch/root/height/before"
-          },
-          "fixedWidth": {
-            "px": 111.375,
-            "varName": "imported/switch/root/width/before"
-          },
-          "children": [
+            },
             {
               "type": "frame",
               "name": "indicator",
@@ -553,7 +485,8 @@ const COMPONENTS = [
               "margins": {
                 "bottom": 8,
                 "left": 8,
-                "top": 8
+                "right": 8,
+                "top": 0
               },
               "fixedWidth": {
                 "px": 40,
@@ -561,7 +494,31 @@ const COMPONENTS = [
               },
               "fill": "imported/switch/indicator/background-color/checked",
               "stroke": "imported/switch/indicator/border-top-color/checked"
-            },
+            }
+          ]
+        }
+      },
+      {
+        "name": "Checked=Checked, Label Position=Before",
+        "row": 1,
+        "col": 2,
+        "spec": {
+          "type": "root",
+          "name": "Checked=Checked, Label Position=Before",
+          "layout": {
+            "mode": "HORIZONTAL",
+            "primary": "MIN",
+            "counter": "MIN"
+          },
+          "fixedHeight": {
+            "px": 36,
+            "varName": "imported/switch/root/height/before"
+          },
+          "fixedWidth": {
+            "px": 111.375,
+            "varName": "imported/switch/root/width/before"
+          },
+          "children": [
             {
               "type": "frame",
               "name": "label",
@@ -592,6 +549,45 @@ const COMPONENTS = [
                 "paddingRight": "imported/switch/label/padding-right/before",
                 "paddingTop": "imported/switch/label/padding-top/before"
               }
+            },
+            {
+              "type": "frame",
+              "name": "indicator",
+              "layout": {
+                "mode": "HORIZONTAL",
+                "primary": "CENTER",
+                "counter": "CENTER"
+              },
+              "children": [
+                {
+                  "type": "svg",
+                  "name": "indicator-icon",
+                  "svg": "<svg viewBox=\"0 0 18 18\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 10 2 A 8 8 0 1 0 10 18 A 8 8 0 0 0 10 2\" fill=\"#ffffff\"/></svg>",
+                  "svgPaintVar": "imported/switch/indicator/fill/checked",
+                  "iconSize": 18
+                }
+              ],
+              "bindings": {
+                "bottomLeftRadius": "imported/shared/size-10000",
+                "bottomRightRadius": "imported/shared/size-10000",
+                "strokeBottomWeight": "imported/shared/size-1",
+                "strokeLeftWeight": "imported/shared/size-1",
+                "strokeRightWeight": "imported/shared/size-1",
+                "topLeftRadius": "imported/shared/size-10000",
+                "topRightRadius": "imported/shared/size-10000",
+                "strokeTopWeight": "imported/shared/size-1"
+              },
+              "margins": {
+                "bottom": 8,
+                "right": 8,
+                "top": 8
+              },
+              "fixedWidth": {
+                "px": 40,
+                "varName": "imported/switch/indicator/width"
+              },
+              "fill": "imported/switch/indicator/background-color/checked",
+              "stroke": "imported/switch/indicator/border-top-color/checked"
             }
           ],
           "bindings": {

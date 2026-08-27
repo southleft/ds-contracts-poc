@@ -157,6 +157,7 @@
               "declared": {
                 "display": "block",
                 "cursor": "pointer",
+                "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
                 "text-align": "center",
@@ -396,6 +397,14 @@
               "outline-color": "{imported.button.root.outline-color.secondary}"
             }
           }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "transform",
+          "value": "matrix(0.98, 0, 0, 0.98, 0, 0)",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
         }
       ]
     }

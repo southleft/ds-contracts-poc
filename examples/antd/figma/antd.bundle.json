@@ -7953,6 +7953,10 @@
                 "$type": "dimension"
               }
             },
+            "placeholder-color": {
+              "$value": "#00000040",
+              "$type": "color"
+            },
             "width": {
               "$value": "288px",
               "$type": "dimension"
@@ -12181,7 +12185,8 @@
       "anatomy": {
         "root": {
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "align": "baseline"
           },
           "parts": {
             "checkbox": {
@@ -12824,6 +12829,7 @@
             "left": "{imported.shared.size-0}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
+            "placeholder-color": "{imported.input.root.placeholder-color}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
             "width": "{imported.input.root.width}"
@@ -13493,7 +13499,8 @@
       "anatomy": {
         "root": {
           "layout": {
-            "display": "flex"
+            "display": "flex",
+            "align": "baseline"
           },
           "parts": {
             "radio": {

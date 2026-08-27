@@ -1,0 +1,50 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "all max-width variants: canvas body copy renders sans-serif; ref renders serif fallback (font substrate; walls[] empty so unnamed)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
+ "notes": "canvas draws the gray scrim behind the paper; code render shows the paper alone",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17141",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.dialog.dump.json",
+  "matched": 13,
+  "diverged": [
+   "prop maxWidth type \u2014 {\"enum\":[\"xs\",\"sm\",\"md\",\"lg\",\"xl\"]} vs {\"enum\":[\"sm\",\"xs\",\"md\",\"lg\",\"xl\"]}",
+   "prop maxWidth bindings.figma.values \u2014 {\"xs\":\"Xs\",\"sm\":\"Sm\",\"md\":\"Md\",\"lg\":\"Lg\",\"xl\":\"Xl\"} vs {\"sm\":\"Sm\",\"xs\":\"Xs\",\"md\":\"Md\",\"lg\":\"Lg\",\"xl\":\"Xl\"}",
+   "part root/dialog-container/dialog-paper \u2014 missing from proposal",
+   "part root/dialog-container/dialog-paper/label \u2014 missing from proposal",
+   "part root/dialog-container/dialogPapermarginBox \u2014 proposal has a part the contract does not",
+   "part root/dialog-container/dialogPapermarginBox/dialog-paper \u2014 proposal has a part the contract does not",
+   "part root/dialog-container/dialogPapermarginBox/dialog-paper/label \u2014 proposal has a part the contract does not",
+   "part root/dialog-container/dialogPapermarginBox/dialog-paper/label/label-text \u2014 proposal has a part the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root width \u2014 {imported.dialog.root.width} missing from proposal",
+   "part root z-index \u2014 {imported.dialog.root.z-index} missing from proposal",
+   "part root/backdrop-root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root/backdrop-root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/backdrop-root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/backdrop-root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/backdrop-root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/dialog-container outline-width \u2014 {imported.shared.size-0} missing from proposal"
+  ],
+  "lost": [
+   "`part root/dialog-container/dialog-paper color` \u2014 {imported.dialog.dialog-paper.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/dialog-container/dialog-paper/label color` \u2014 {imported.dialog.label.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/dialog-container/dialog-paper/label font-size` \u2014 {imported.dialog.label.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/dialog-container/dialog-paper/label font-weight` \u2014 {imported.dialog.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Dialog:root/dialog-container/dialog-paper (margin box)/dialog-paper` effects = `0px 11px 15px -7px #00000033, 0px 24px 38px 3px #00000024, 0px 9px 46px 8px #0000001f` \u2014 nearest tokens: `{radius.banner.section}`, `{radiu"
+  ]
+ }
+}

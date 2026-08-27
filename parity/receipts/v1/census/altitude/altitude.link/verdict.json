@@ -1,0 +1,36 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "xs state-focus-visible: canvas shows a plain underlined blue link with NO focus ring \u2014 its blue pixel coverage (210 px of #4375ff) is essentially identical to the default cell \u2014 while ref shows the link enclosed in a prominent rectangular blue focus outline (1089 px of #4375ff). The state preview is missing its defining affordance and is indistinguishable from the default cell; material, and not a named wall (walls array is empty).",
+  "xs state-hover: canvas hover blue is #6b93ff (the same blue the canvas uses for button hover) vs ref hover #5683ff \u2014 canvas lightens further than the library does; minor but visible side by side, not a named wall."
+ ],
+ "defectClasses": [
+  "missing ink",
+  "other"
+ ],
+ "notes": "underlined link across sizes + focus/hover previews match",
+ "reviewedAt": "6804cb8f",
+ "setNodeId": "39:6823",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-altitude-altitude.link.dump.json",
+  "matched": 9,
+  "diverged": [
+   "prop variant default \u2014 undefined vs \"xs\"",
+   "part root column-gap \u2014 {imported.link.root.column-gap} missing from proposal",
+   "part root line-height \u2014 {imported.link.root.line-height.unset} vs {imported.link.root.line-height.{variant}}",
+   "part root row-gap \u2014 {imported.link.root.row-gap} missing from proposal",
+   "part root gap \u2014 proposal has {imported.link.root.column-gap}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root font-size (effective) \u2014 {imported.link.root.font-size.unset} vs {imported.link.root.font-size.{variant}}"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)"
+  ]
+ }
+}

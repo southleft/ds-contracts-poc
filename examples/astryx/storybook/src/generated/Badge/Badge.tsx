@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/badge.contract.json (astryx.badge v0.3.1)
+ * Source of truth: contracts/badge.contract.json (astryx.badge v0.3.0)
  * Regenerate with: npm run generate
  */
 import { forwardRef } from 'react';

@@ -1189,6 +1189,11 @@
         "part": "button-2",
         "field": "justify",
         "value": "center"
+      },
+      {
+        "part": "buttongroup",
+        "field": "wrap",
+        "value": true
       }
     ],
     "contradictions": [],
@@ -2460,6 +2465,7 @@
     ]
   },
   "enrichmentNotes": [
+    "layout enriched: buttongroup.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: blockstack.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: blockstack.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: inlinestack.layout.align = center (uniform computed keyword — the schema's own vocabulary)",

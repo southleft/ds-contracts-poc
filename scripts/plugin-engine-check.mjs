@@ -1868,34 +1868,54 @@ const badge = JSON.parse(read('contracts/badge.contract.json'));
   // bundle was last built (1427b77d), and that bundle could not be rebuilt by
   // its own recipe once Banner promoted its status glyphs (`--icons` became
   // required) — so this pin measured a stale artifact for weeks. The bundle
-  // is a pure function of its inputs; the minted tree carries 80 alias
+  // is a pure function of its inputs; the minted tree carries 50 alias
   // leaves today (count them: every `$value` of the form `{…}`).
-  assert(astryx.aliases === 80, `astryx bundle carries the 80 re-anchored minted aliases (got ${astryx.aliases})`);
+  // REJECTED-SETS ROUND: 80 → 50. The re-promotion re-applied the reanchor
+  // ledger and 7 acked rows / 28 leaves did NOT re-apply (FC-THEME-BASE —
+  // the capture plane and the DTCG base plane are different themes); those
+  // leaves ship as measured literals, named row-by-row in
+  // examples/astryx/tokens/REANCHOR-STALE.md, and closing them is a HUMAN
+  // decision. 29/36 rows still alias → 50 alias leaves.
+  assert(astryx.aliases === 50, `astryx bundle carries the 50 re-anchored minted aliases (got ${astryx.aliases}) — see examples/astryx/tokens/REANCHOR-STALE.md for the 7 named stale rows`);
   const hex2 = (x) => Math.round((x || 0) * 255).toString(16).padStart(2, '0');
   // One pin per DECISION ARM, so a mis-targeted arm cannot hide behind a count:
   // three of the original tone rules, plus one leaf from each of the reviewed
   // round's five value groups.
-  for (const [leaf, want] of [
-    // 2026-08-22: the four `row-rule-color` tone leaves this block pinned were
-    // pruned from the minted tree by the row-rule ledger (task #43) after the
-    // bundle was last built; the badge tone arms are pinned on the leaves the
-    // tree carries today (light values read from astryx.light.dtcg.json).
-    ['imported/badge/root/color/blue', '#00458c'],
-    ['imported/badge/root/color/red', '#89001a'],
-    ['imported/badge/root/color/yellow', '#584400'],
-    ['imported/badge/root/color/warning', '#171717'],
-    ['imported/button/label/color/primary', '#ffffff'],
-    ['imported/button/label/color/destructive', '#ffffff'],
-    ['imported/button/label/color/ghost', '#171717'],
-    ['imported/card/root/border-top-color/default', '#d4d4d4'],
-    ['imported/slider/slider-track/background-color', '#ccd3db'],
-    ['imported/shared/color-0064e0', '#262626'],
-    ['imported/slider/label/color', '#737373'],
+  // REJECTED-SETS ROUND: the re-promotion re-applied the reanchor ledger
+  // against the freshly re-fused mint. 29/36 rows alias; the FC-THEME-BASE
+  // rows (examples/astryx/tokens/REANCHOR-STALE.md) ship as the MEASURED
+  // LITERALS the capture drew, so the arms below split by disposition —
+  // every stale arm names its receipt instead of pretending to alias.
+  // (`imported/shared/color-0064e0` left the tree entirely — its value group
+  // is pinned on the badge info leaf the tree carries today.)
+  for (const [leaf, want, disposition] of [
+    ['imported/badge/root/color/blue', '#00458c', 'alias'],
+    ['imported/badge/root/color/red', '#89001a', 'alias'],
+    ['imported/badge/root/color/yellow', '#584400', 'alias'],
+    ['imported/badge/root/color/warning', '#171717', 'alias'],
+    ['imported/button/label/color/primary', '#ffffff', 'alias'],
+    // RA-ffffff did not re-apply: the destructive label measured #a50c25
+    // under @astryxdesign/theme-neutral while the ledger acked #ffffff —
+    // FC-THEME-BASE, REANCHOR-STALE.md row 1. The measured literal ships.
+    ['imported/button/label/color/destructive', '#a50c25', 'literal'],
+    // Same theme split: the ghost label ships its measured #171717 literal.
+    ['imported/button/label/color/ghost', '#171717', 'literal'],
+    ['imported/card/root/border-top-color/default', '#d4d4d4', 'alias'],
+    ['imported/slider/slider-track/background-color', '#ccd3db', 'alias'],
+    // RA-262626/RA-0064e0's value group: the shared 0064e0 leaf is gone; the
+    // badge info background measured #0074e2 and the acked #262626 target
+    // could not join (REANCHOR-STALE.md) — the measured literal ships.
+    ['imported/badge/root/background-color/info', '#0074e2', 'literal'],
+    ['imported/slider/label/color', '#737373', 'alias'],
   ]) {
     const v = astryx.byName.get(leaf);
     assert(v, `astryx bundle emits ${leaf}`);
     const first = v.valuesByMode[Object.keys(v.valuesByMode)[0]];
-    assert(first && first.type === 'VARIABLE_ALIAS', `${leaf} is a VARIABLE_ALIAS, not a frozen literal`);
+    if (disposition === 'alias') {
+      assert(first && first.type === 'VARIABLE_ALIAS', `${leaf} is a VARIABLE_ALIAS, not a frozen literal`);
+    } else {
+      assert(first && first.type !== 'VARIABLE_ALIAS', `${leaf} is the MEASURED LITERAL (FC-THEME-BASE, REANCHOR-STALE.md), not an alias`);
+    }
     const r = v.resolveForConsumer();
     const got = r && r.value ? `#${hex2(r.value.r)}${hex2(r.value.g)}${hex2(r.value.b)}` : '(unresolved)';
     assert(got === want, `${leaf} resolves the unchanged neutral light value ${want} (got ${got})`);

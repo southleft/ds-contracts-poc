@@ -1,0 +1,175 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "conformance.overlay-text-fill-pinned-size",
+  "name": "CaseOverlayTextFillPinnedSize",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the CSS/DOM conformance fixture case \"overlay-text-fill-pinned-size\" (geometry). The fixture varies CSS CONSTRUCTS, not prop spaces, so the prop space is deliberately EMPTY: every axis the capture would enumerate is held at nothing, and the whole measurement is the computed truth of one mounted rendering. Construct: a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @ds-contracts/conformance@0.1.0 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "default",
+          "lg"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "default": "Default",
+            "lg": "Lg"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex"
+      },
+      "parts": {
+        "a": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|a — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-overlay-text-fill-pinned-size.a.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "bottom": "{imported.shared.size-0}",
+            "font-size": "{imported.shared.size-12}",
+            "height": "{imported.case-overlay-text-fill-pinned-size.a.height}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "width": "{imported.case-overlay-text-fill-pinned-size.a.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "left": "{imported.case-overlay-text-fill-pinned-size.a.left.default}",
+                  "top": "{imported.case-overlay-text-fill-pinned-size.a.top.default}"
+                },
+                "lg": {
+                  "left": "{imported.case-overlay-text-fill-pinned-size.a.left.lg}",
+                  "top": "{imported.case-overlay-text-fill-pinned-size.a.top.lg}"
+                }
+              }
+            }
+          ]
+        },
+        "label": {
+          "text": "CN",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|b — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "grow": true,
+            "align": "center",
+            "justify": "center"
+          },
+          "declared": {
+            "aspect-ratio": "1 / 1",
+            "box-sizing": "border-box",
+            "font-family": "monospace"
+          },
+          "tokens": {
+            "background-color": "{imported.case-overlay-text-fill-pinned-size.label.background-color}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "color": "{imported.case-overlay-text-fill-pinned-size.label.color}",
+            "font-size": "{imported.shared.size-12}",
+            "font-weight": "{imported.case-overlay-text-fill-pinned-size.label.font-weight}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "default": {
+                  "height": "{imported.case-overlay-text-fill-pinned-size.label.height.default}",
+                  "width": "{imported.case-overlay-text-fill-pinned-size.label.width.default}"
+                },
+                "lg": {
+                  "height": "{imported.case-overlay-text-fill-pinned-size.label.height.lg}",
+                  "width": "{imported.case-overlay-text-fill-pinned-size.label.width.lg}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "box-sizing": "border-box",
+        "font-family": "monospace",
+        "position": "relative"
+      },
+      "tokens": {
+        "background-color": "{imported.case-overlay-text-fill-pinned-size.root.background-color}",
+        "border-bottom-left-radius": "{imported.shared.size-9999}",
+        "border-bottom-right-radius": "{imported.shared.size-9999}",
+        "border-top-left-radius": "{imported.shared.size-9999}",
+        "border-top-right-radius": "{imported.shared.size-9999}",
+        "bottom": "{imported.shared.size-0}",
+        "font-size": "{imported.shared.size-12}",
+        "left": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.shared.size-4}",
+        "padding-left": "{imported.shared.size-4}",
+        "padding-right": "{imported.shared.size-4}",
+        "padding-top": "{imported.shared.size-4}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "default": {
+              "height": "{imported.case-overlay-text-fill-pinned-size.root.height.default}",
+              "width": "{imported.case-overlay-text-fill-pinned-size.root.width.default}"
+            },
+            "lg": {
+              "height": "{imported.case-overlay-text-fill-pinned-size.root.height.lg}",
+              "width": "{imported.case-overlay-text-fill-pinned-size.root.width.lg}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@ds-contracts/conformance",
+        "export": "CaseOverlayTextFillPinnedSize"
+      }
+    }
+  }
+}

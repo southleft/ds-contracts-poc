@@ -3,6 +3,7 @@
   "component": "Progress",
   "config": "extract/computed/configs/antd.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -133,6 +134,8 @@
     "component": "Progress",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 4,
     "interactions": 4,
@@ -161,12 +164,12 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 19,
-      "mintedLeavesUnfolded": 59,
+      "mintedLeaves": 23,
+      "mintedLeavesUnfolded": 103,
       "baseBindings": 53,
       "stateBindings": 0,
       "codeOnlyChannels": 9,
-      "overflowBindings": 1,
+      "overflowBindings": 0,
       "folds": 80
     },
     "worstRows": [
@@ -272,7 +275,6 @@
     "namedLosses": [
       "promotion: pseudo-decor-outside-grammar: progress-bg::before drawn with a non-carryable transform (matrix(0, 0, 0, 1, -101.594, 0)) — the bounded decor grammar carries translate + orthonormal rotate only; named refusal",
       "promotion: pseudo-decor-outside-grammar: progress-bg::after paints at position:static (265.969x8, opacity 1) — the bounded decor grammar reads position:absolute boxes only; an in-flow decor box is NOT promoted and NOT on the canvas",
-      "overflow: anticon.color — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: progress-outer.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: progress-inner.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -289,7 +291,7 @@
     },
     "shippedMinted": {
       "path": "examples/antd/tokens/antd-minted.dtcg.json",
-      "leavesAdded": 1260,
+      "leavesAdded": 1261,
       "divergent": [
         {
           "token": "imported.progress.label.color.exception",

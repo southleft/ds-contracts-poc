@@ -82,6 +82,20 @@ export function checkHugCeiling({ contract, entry, mockRoot, name }) {
       if (!parts.includes(partName)) continue;
       const ceiling = node.maxWidth;
       if (typeof ceiling !== 'number' || !Number.isFinite(ceiling)) continue;
+      // REJECTED-SETS ROUND — content that GENUINELY exceeds the ceiling.
+      // The Carbon defect this pin exists for is a baked width around SHORT
+      // content (a 320px box hugging a 125px label). Fluent's Tooltip now
+      // draws its bubble copy as real canvas text, and the mock's own text
+      // model (chars × fontSize × 0.6 — plugin-engine-mock-figma.mjs) makes
+      // that copy WIDER than the 240px ceiling, so the box sits AT the
+      // ceiling because the text WRAPS there — the CSS truth of
+      // max-width, not the baked-width defect. The estimate below mirrors
+      // the mock's model exactly; a cell whose text could never reach the
+      // ceiling (every Carbon Button label) keeps the strict assertion.
+      const textEstimate = descend(node)
+        .filter((t) => t.type === 'TEXT')
+        .reduce((m, t) => Math.max(m, String(t.characters ?? '').length * (typeof t.fontSize === 'number' ? t.fontSize : 14) * 0.6), 0);
+      if (textEstimate >= ceiling - 0.01) continue;
       if (node.width >= ceiling - 0.01) {
         failures.push(
           `${name} D7 hug-ceiling pin: "${partName}" in variant "${cell.name}" is ${Math.round(node.width * 100) / 100}px against a ${ceiling}px ceiling — a box that was MEASURED hugging beneath its max-width must never render AT it (this is the 320-wide Carbon Button, exactly)`,

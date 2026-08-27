@@ -39,6 +39,9 @@
     ],
     "contentSlots": [],
     "tokenRefs": [
+      "imported.checkbox.part-0.color.checked",
+      "imported.checkbox.part-0.color.indeterminate",
+      "imported.checkbox.part-0.color.unchecked",
       "imported.checkbox.root.background-color.checked",
       "imported.checkbox.root.background-color.indeterminate",
       "imported.checkbox.root.background-color.unchecked",

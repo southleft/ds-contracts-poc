@@ -1,0 +1,137 @@
+{
+  "id": "flowbite.button",
+  "library": "tailwind",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "flowbite-react",
+    "version": "0.12.17",
+    "recipe": "examples/tailwind sandbox (.tw-sandbox; examples/tailwind/README) mounted per extract/computed/configs/tailwind.json"
+  },
+  "configPath": "extract/computed/configs/tailwind.json",
+  "component": "Button",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "color-default__size-md",
+      "status": "rendered",
+      "png": "ref-color-default__size-md.png",
+      "props": {
+        "color": "default",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-xs",
+      "status": "rendered",
+      "png": "ref-color-default__size-xs.png",
+      "props": {
+        "color": "default",
+        "size": "xs"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-sm",
+      "status": "rendered",
+      "png": "ref-color-default__size-sm.png",
+      "props": {
+        "color": "default",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-lg",
+      "status": "rendered",
+      "png": "ref-color-default__size-lg.png",
+      "props": {
+        "color": "default",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-xl",
+      "status": "rendered",
+      "png": "ref-color-default__size-xl.png",
+      "props": {
+        "color": "default",
+        "size": "xl"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-alternative__size-md",
+      "status": "rendered",
+      "png": "ref-color-alternative__size-md.png",
+      "props": {
+        "color": "alternative",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-dark__size-md",
+      "status": "rendered",
+      "png": "ref-color-dark__size-md.png",
+      "props": {
+        "color": "dark",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-green__size-md",
+      "status": "rendered",
+      "png": "ref-color-green__size-md.png",
+      "props": {
+        "color": "green",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-red__size-md",
+      "status": "rendered",
+      "png": "ref-color-red__size-md.png",
+      "props": {
+        "color": "red",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-md__state-active",
+      "status": "rendered",
+      "png": "ref-color-default__size-md__state-active.png",
+      "props": {
+        "color": "default",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-md__state-focus-visible",
+      "status": "rendered",
+      "png": "ref-color-default__size-md__state-focus-visible.png",
+      "props": {
+        "color": "default",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "color-default__size-md__state-hover",
+      "status": "rendered",
+      "png": "ref-color-default__size-md__state-hover.png",
+      "props": {
+        "color": "default",
+        "size": "md"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 12,
+  "unmappable": 0
+}

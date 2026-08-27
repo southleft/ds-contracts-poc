@@ -158,6 +158,7 @@
               "declared": {
                 "display": "block",
                 "cursor": "pointer",
+                "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                 "overflow-x": "hidden",
                 "overflow-y": "hidden",
                 "text-align": "center",
@@ -310,7 +311,7 @@
         "position": "relative",
         "text-wrap-mode": "nowrap",
         "transform": "matrix(1, 0, 0, 1, 0, 0)",
-        "transition-duration": "0.175s",
+        "transition-duration": "0.125s",
         "transition-property": "background-image, background-color, color, opacity, transform",
         "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
       },
@@ -323,10 +324,10 @@
         }
       },
       "tokens": {
-        "border-bottom-left-radius": "{imported.shared.size-8}",
-        "border-bottom-right-radius": "{imported.shared.size-8}",
-        "border-top-left-radius": "{imported.shared.size-8}",
-        "border-top-right-radius": "{imported.shared.size-8}",
+        "border-bottom-left-radius": "{imported.shared.size-10}",
+        "border-bottom-right-radius": "{imported.shared.size-10}",
+        "border-top-left-radius": "{imported.shared.size-10}",
+        "border-top-right-radius": "{imported.shared.size-10}",
         "bottom": "{imported.shared.size-0}",
         "column-gap": "{imported.shared.size-8}",
         "font-size": "{font-size-base}",
@@ -402,6 +403,14 @@
               "outline-color": "{imported.button.root.outline-color.secondary}"
             }
           }
+        }
+      ],
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "transform",
+          "value": "matrix(0.98, 0, 0, 0.98, 0, 0)",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
         }
       ]
     }

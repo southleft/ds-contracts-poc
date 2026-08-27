@@ -1,0 +1,33 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "canvas is a bare 1280x38 white strip with no visible chrome at all; ref (116x132) renders a small gray-bordered container. Empty slot-only scaffold, and the ref's visible border does not appear on canvas. Unrecognisable as a top nav."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "slot-only nav bar renders as an empty bar in both halves",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24379",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.top-nav.dump.json",
+  "matched": 11,
+  "diverged": [
+   "prop label \u2014 missing from proposal",
+   "part root/heading \u2014 missing from proposal",
+   "part root/startContent \u2014 missing from proposal",
+   "part root/endContent \u2014 missing from proposal",
+   "part root/Heading \u2014 proposal has a part the contract does not",
+   "part root/StartContent \u2014 proposal has a part the contract does not",
+   "part root/EndContent \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface"
+  ]
+ }
+}

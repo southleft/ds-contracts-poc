@@ -1,0 +1,39 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "all variants: canvas 'Paper content' sans-serif vs ref serif fallback (font substrate; walls[] empty so unnamed)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17344",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.paper.dump.json",
+  "matched": 11,
+  "diverged": [
+   "prop elevation type \u2014 {\"enum\":[\"0\",\"1\",\"3\",\"8\"]} vs {\"enum\":[\"1\",\"0\",\"3\",\"8\"]}",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root box-shadow \u2014 {imported.paper.root.box-shadow.{elevation}.{variant}} missing from proposal",
+   "part root width \u2014 {imported.paper.root.width} missing from proposal",
+   "part root border-color \u2014 proposal has {imported.paper.root.border-top-color.{variant}}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-4}, contract has nothing",
+   "part root border-top-width \u2014 proposal has {imported.paper.root.border-top-width.{variant}}, contract has nothing",
+   "part root border-right-width \u2014 proposal has {imported.paper.root.border-right-width.{variant}}, contract has nothing",
+   "part root border-bottom-width \u2014 proposal has {imported.paper.root.border-bottom-width.{variant}}, contract has nothing",
+   "part root border-left-width \u2014 proposal has {imported.paper.root.border-left-width.{variant}}, contract has nothing",
+   "part root max-width \u2014 proposal has {imported.paper.root.width}, contract has nothing",
+   "part root content \u2014 {\"prop\":\"children\"} vs undefined"
+  ],
+  "lost": []
+ }
+}

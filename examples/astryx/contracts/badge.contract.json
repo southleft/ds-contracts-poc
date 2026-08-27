@@ -2,7 +2,7 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.badge",
   "name": "Badge",
-  "version": "0.3.1",
+  "version": "0.3.0",
   "status": "draft",
   "description": "Astryx Badge — a small status/category label. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Badge/Badge.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). API surface (variant) is verbatim; the label is materialized as a text content part (Astryx types it as a ReactNode child slot, dropped as a `node` prop in extraction — see DEV-JOURNEY.md). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): resolved.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/badge/decisions.md); extension sidecar carries the named overflow.",
   "archetype": "badge / tag / chip",
@@ -82,6 +82,7 @@
         "align": "center",
         "justify": "center"
       },
+      "text": "New",
       "declared": {
         "text-wrap-mode": "nowrap"
       },
@@ -112,20 +113,20 @@
               "color": "{imported.badge.root.color.cyan}"
             },
             "error": {
-              "background-color": "{imported.badge.root.background-color.error}",
-              "color": "{imported.badge.root.color.error}"
+              "background-color": "{color-error}",
+              "color": "{color-on-accent}"
             },
             "green": {
               "background-color": "{imported.badge.root.background-color.green}",
               "color": "{imported.badge.root.color.green}"
             },
             "info": {
-              "background-color": "{imported.badge.root.background-color.info}",
-              "color": "{imported.badge.root.color.info}"
+              "background-color": "{color-accent}",
+              "color": "{color-on-accent}"
             },
             "neutral": {
-              "background-color": "{imported.badge.root.background-color.neutral}",
-              "color": "{color-text-primary}"
+              "background-color": "{color-neutral}",
+              "color": "{imported.badge.root.color.neutral}"
             },
             "orange": {
               "background-color": "{imported.badge.root.background-color.orange}",
@@ -144,16 +145,16 @@
               "color": "{imported.badge.root.color.red}"
             },
             "success": {
-              "background-color": "{imported.badge.root.background-color.success}",
-              "color": "{imported.badge.root.color.success}"
+              "background-color": "{color-success}",
+              "color": "{color-on-accent}"
             },
             "teal": {
               "background-color": "{imported.badge.root.background-color.teal}",
               "color": "{imported.badge.root.color.teal}"
             },
             "warning": {
-              "background-color": "{imported.badge.root.background-color.warning}",
-              "color": "{imported.badge.root.color.warning}"
+              "background-color": "{color-warning}",
+              "color": "{color-on-warning}"
             },
             "yellow": {
               "background-color": "{imported.badge.root.background-color.yellow}",

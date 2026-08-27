@@ -87,13 +87,17 @@
     },
     "astryx": {
       "astryx.badge": 1,
+      "astryx.banner": 1,
       "astryx.button": 1,
       "astryx.card": 1,
+      "astryx.checkbox-input": 1,
       "astryx.dropdown-menu": 1,
       "astryx.progress-bar": 1,
       "astryx.slider": 1,
       "astryx.switch": 1,
-      "astryx.toast": 1
+      "astryx.text-input": 1,
+      "astryx.toast": 1,
+      "astryx.token": 1
     },
     "shadcn": {
       "shadcn.alert": 1,
@@ -195,11 +199,11 @@
       "carbon.button": 29,
       "carbon.checkbox": 32,
       "carbon.iconbutton": 28,
-      "carbon.inlinenotification": 34,
+      "carbon.inlinenotification": 31,
       "carbon.modal": 113,
       "carbon.tabs": 135,
       "carbon.tag": 42,
-      "carbon.textinput": 27,
+      "carbon.textinput": 42,
       "carbon.toggle": 37
     },
     "altitude": {
@@ -224,23 +228,27 @@
     },
     "astryx": {
       "astryx.badge": 2,
-      "astryx.button": 45,
-      "astryx.card": 1,
+      "astryx.banner": 7,
+      "astryx.button": 46,
+      "astryx.card": 6,
+      "astryx.checkbox-input": 33,
       "astryx.dropdown-menu": 1,
-      "astryx.progress-bar": 1,
-      "astryx.slider": 45,
+      "astryx.progress-bar": 7,
+      "astryx.slider": 57,
       "astryx.switch": 42,
-      "astryx.toast": 1
+      "astryx.text-input": 34,
+      "astryx.toast": 1,
+      "astryx.token": 9
     },
     "shadcn": {
-      "shadcn.alert": 13,
+      "shadcn.alert": 11,
       "shadcn.avatar": 9,
       "shadcn.badge": 9,
       "shadcn.button": 17,
       "shadcn.card": 9,
-      "shadcn.checkbox": 22,
-      "shadcn.input": 17,
-      "shadcn.select": 29,
+      "shadcn.checkbox": 24,
+      "shadcn.input": 20,
+      "shadcn.select": 30,
       "shadcn.switch": 27,
       "shadcn.tabs": 48,
       "shadcn.tooltip": 9
@@ -263,13 +271,13 @@
       "polaris.avatar": 11,
       "polaris.badge": 13,
       "polaris.banner": 66,
-      "polaris.button": 37,
-      "polaris.checkbox": 67,
+      "polaris.button": 78,
+      "polaris.checkbox": 117,
       "polaris.progress-bar": 13,
-      "polaris.radio-button": 51,
+      "polaris.radio-button": 100,
       "polaris.spinner": 1,
       "polaris.tag": 61,
-      "polaris.text-field": 91,
+      "polaris.text-field": 193,
       "polaris.text": 7,
       "polaris.thumbnail": 13
     }

@@ -15,9 +15,9 @@ never waivable.
 
 | | |
 |---|---|
-| cases (CARRIED + LOWERED) | **73** |
-| 🟢 round-tripped | **55** |
-| 🟢 named (dropped, and a receipt says so) | **16** |
+| cases (CARRIED + LOWERED) | **83** |
+| 🟢 round-tripped | **64** |
+| 🟢 named (dropped, and a receipt says so) | **17** |
 | 🟡 refused by name (the canvas cannot host the seed, and says so) | **1** |
 | ⚪ seed-absent (nothing to round-trip) | **0** |
 | 🔴 red | **1** — SILENT 1 · DRIFTED 0 · HARMFUL 0 |
@@ -38,7 +38,7 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 |---|---|---|---|---|---|---|---|---|
 | `margin-top-in-flow` | box | margin-top: 12px on the SECOND child of a flex column whose parent declares no gap | `margin-top` | CARRIED | — |  |  |  |
 
-## 🟢 NAMED — 16
+## 🟢 NAMED — 17
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
@@ -48,13 +48,14 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `antd-overlay-digit-depth-three` | anatomy | sup(absolute, translate(50%,-50%)) > bdi > span > span — a count digit THREE levels deep in an absolutely positioned overlay, the deepest span carrying NO identity class (antd's rc-scroll-number `current` is transient and dropped by classAllow; the fixture spells the same absence with a bare span — the frontier eval refuses any non-neutral class in a case) | `__text` | CARRIED | — |  |  | code-only channel label-2.border-bottom-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `antd-part-transition-channel` | motion | .cf-a { transition: background-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1) } — a transition declared on a CHILD PART, not the root (antd's `motionDurationMid` on every interactive part) | `transition-duration` | CARRIED | — |  |  | code-only declared label.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame. |
 | `aspect-ratio` | geometry | aspect-ratio: 2 / 1 | `aspect-ratio` | CARRIED | — |  |  | code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads… |
-| `combobox-option-highlighted` | combobox | 5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four | `border-left-color` | CARRIED | — |  |  | code-only channel label.border-left-color = {imported.shared.color-00000000} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
+| `combobox-option-highlighted` | combobox | 5 sibling options where ONE is HIGHLIGHTED (active descendant) by a single-SIDE border - `border-left: 3px solid rgb(37, 99, 235)` against a transparent left border on the other four | `border-left-color` | CARRIED | #663399, #cbd5e1 |  |  | value came back as #663399, #cbd5e1 (seed #2563eb) — code-only channel label.border-left-color = {imported.shared.color-00000000} — a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour d… |
 | `display-block` | display | display: block | `display` | CARRIED | flex |  |  | value came back as flex (seed block) — code-only declared root.display = block — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-lev… |
 | `grid-area-empty-slot` | grid-areas | a declared grid area with NO children (empty slot) | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 2 grid child(ren) (a, b) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through a p… |
 | `grid-child-text-hug` | grid-sizing | a TEXT child hugging its content inside a grid cell | `__text` | CARRIED | — |  |  | code-only channel label.border-bottom-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
 | `grid-named-area-slots` | grid-areas | grid-template-areas: 'header header' 'nav content' + grid-area: header on children | `grid-template-areas` | CARRIED | — |  |  | «self»:root: 3 grid child(ren) (a, b, c) carry EXPLICIT placement rects, not named areas — Figma has no native area names (G4: the CONTRACT owns them, the canvas carries only the rect), so an area name survives the round trip ONLY through… |
 | `nonpainting-text-display-none` | invariant | a NON-PAINTING element carrying text (display: none) | `__text` | CARRIED | — |  |  | code-only declared label-2.display = none — CSS display modes outside auto-layout flex (inline, block, list-item) have no direct Figma equivalent; the canvas approximates with frame nesting (a block-level box lowers to a vertical stack). |
-| `page-global-star-rule` | cascade | * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule | `border-top-color` | CARRIED | — |  |  | code-only channel root.border-top-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides. |
+| `overlay-text-fill-pinned-size` | geometry | a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape | `width` | CARRIED | 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} |  |  | value came back as 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} (seed 24px) — «self»:root: root width binding {«self».root.width.{size}} carries as **max-width**, not width — a component's outer size is fluid-up-to… |
+| `presence-hidden-axis-geometry` | tokens | an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked) | `top` | CARRIED | {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} |  |  | value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (… |
 | `text-indent-off-box` | text | text-indent: 9999px on a box pinned to 8px (the status-pip idiom: the label is pushed out of the box and only the dot shows) | `text-indent` | LOWERED | — |  |  | code-only channel root.text-indent = {«self».root.text-indent} — Figma text nodes have no first-line indent. Where the MEASURED indent lays the first line entirely outside the content box (Part.textOutOfBox), the canvas draws NO text child… |
 | `text-overflow-ellipsis` | text | text-overflow: ellipsis + overflow hidden + nowrap | `text-overflow` | CARRIED | — |  |  | degradation text-channel-unsupported @ «self»:«self»/label: text channel(s) with no dump v1 projection: textTruncation ENDING (the canvas twin of CSS text-overflow: ellipsis — drawn, not read back) — typography carries (fontSize, fontStyle… |
 | `transition-channel` | motion | transition: background-color 200ms ease | `transition-duration` | CARRIED | — |  |  | code-only declared root.transition-duration = 0.2s — Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame. |
@@ -65,16 +66,19 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 |---|---|---|---|---|---|---|---|---|
 | `grid-instance-child` | grid-composition | a component INSTANCE placed in a cell with position + FILL | `grid-column-start` | CARRIED | — |  |  | mock figma (component step): Error: grid-placement-cycle-no-spare: the declared 1x2 grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script |
 
-## 🟢 ROUND-TRIPPED — 55
+## 🟢 ROUND-TRIPPED — 64
 
 | case | feature | construct | channel | expect | came back | ref | as | note |
 |---|---|---|---|---|---|---|---|---|
+| `align-items-baseline` | layout | uniform align-items: baseline on a flex row of two differing font sizes | `align-items` | CARRIED | baseline | same |  |  |
 | `antd-component-scoped-custom-property` | tokens | .cf-root { --cf-scoped-pad: 15px } .cf-root .cf-a { padding-inline: var(--cf-scoped-pad) } — a token DECLARED ON THE COMPONENT ROOT (not :root) and consumed by a descendant (antd cssVar component tokens on `.antd.ant-btn`) | `padding-left` | CARRIED | 15px | same |  |  |
 | `antd-forwarded-root-attrs` | anatomy | label > [input.sr-only + span.box] + span.text — the component forwards className/data-* to the HIDDEN input, not the visible label root (antd Checkbox/Radio) | `background-color` | CARRIED | #1677ff | same |  |  |
 | `antd-presence-times-axis-glyph` | anatomy | a child part whose PRESENCE is one prop (showIcon) and whose paint is ANOTHER (type) — the base (default) combo mounts without it (antd Alert) | `color` | CARRIED | #000000e0 | same |  |  |
+| `border-color-control-equal` | paint | a border-color EQUAL to the bare control element's (a library global like shadcn's `* { border-color: var(--border) }` styles the control too) on a part that draws a real border | `border-top-color` | CARRIED | #000000 | same |  |  |
 | `border-radius-px` | geometry | border-radius: 6px | `border-top-left-radius` | CARRIED | 6px | same | `border-radius` | channel respelled: border-top-left-radius → border-radius |
 | `box-shadow-single` | effects | box-shadow: 0 1px 3px rgba(0,0,0,0.2) | `box-shadow` | CARRIED | rgba(0, 0, 0, 0.2) 0px 1px 3px 0px | same |  |  |
 | `calc-var` | custom-properties | padding-left: calc(var(--cf-space-2) * 2) | `padding-left` | LOWERED | 16px | same |  |  |
+| `child-order-reversed-by-axis` | layout | CHILD ORDER that varies on one enum axis — the container's flex-direction keyword is `row` for BOTH values and the DOM order of the two children is reversed instead (the fluent.switch / fluent.spinner labelPosition shape) | `__child-order` | CARRIED | span\|a>span\|b, span\|b>span\|a | same |  |  |
 | `color-hex` | color | color: #1976d2 (authored as hex) | `color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgb-solid` | color | background-color: rgb(25, 118, 210) | `background-color` | CARRIED | #1976d2 | same |  |  |
 | `color-rgba-alpha` | color | background-color: rgba(25, 118, 210, 0.5) | `background-color` | CARRIED | #1976d280 | same |  |  |
@@ -86,8 +90,11 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `display-inline-flex` | display | display: inline-flex | `display` | CARRIED | flex | same |  |  |
 | `em-relative-padding` | units | padding: 1.5em against a 12px font-size | `padding-left` | CARRIED | 18px | same | `padding-inline` | channel respelled: padding-left → padding-inline |
 | `flex-align-items-center` | layout-flex | display: flex; align-items: center — cross-axis centring of two children of DIFFERENT heights | `align-items` | CARRIED | center | same |  |  |
+| `flex-direction-by-axis` | layout | flex-direction that VARIES on one enum axis (column at the default value, row on the other) — the fluent.card orientation shape | `flex-direction` | CARRIED | column, row | same |  |  |
 | `flex-direction-column` | layout-flex | display: flex; flex-direction: column — the main axis turned vertical | `flex-direction` | CARRIED | column | same |  |  |
+| `flex-direction-reverse-by-axis` | layout | flex-direction: row-reverse at the DEFAULT axis value and row at the other (the carbon.accordion `align` shape, whose default IS the reversed one) | `flex-direction` | CARRIED | row, row-reverse | same |  |  |
 | `flex-gap` | layout | column-gap / row-gap in px | `column-gap` | CARRIED | 12px | same | `gap` | channel respelled: column-gap → gap |
+| `flex-wrap-wrap` | layout | uniform flex-wrap: wrap on a flex row narrow enough to wrap | `flex-wrap` | CARRIED | wrap | same |  |  |
 | `grid-2d` | layout | display: grid + grid-template-columns: 1fr 1fr (children AUTO-PLACED) | `display` | CARRIED | grid | same |  |  |
 | `grid-absolute-overlay` | grid-composition | Part.overlay (layoutPositioning ABSOLUTE) inside a grid parent | `position` | CARRIED | absolute, relative | same |  |  |
 | `grid-area-nonrectangular` | grid-areas | area occupancy that cannot tile grid-template-areas (gapped or non-rectangular per CSS rules) | `grid-column-end` | LOWERED | 1, span 2 | same |  |  |
@@ -107,12 +114,15 @@ name · **DRIFTED** a different value came back and nothing named the lowering �
 | `grid-track-fit-content` | grid-tracks | grid-template-columns: fit-content(100%) 1fr | `grid-template-columns` | CARRIED | fit-content(100%) 1fr | same |  |  |
 | `grid-tracks-mixed-fractional` | grid-tracks | grid-template-columns: 33.5px 2.5fr 1fr (mixed list, fractional values) | `grid-template-columns` | CARRIED | 33.5px 2.5fr 1fr | same |  |  |
 | `grid-two-column` | grid-tracks | display: grid; grid-template-columns: 1fr 1fr | `grid-template-columns` | CARRIED | 1fr 1fr | same |  |  |
+| `grid-zero-track-collapse` | grid-tracks | a computed grid track list containing a 0px track — the resolved width of an EMPTY slot column (min-content with no occupant) | `grid-template-columns` | CARRIED | 288px | same |  |  |
 | `min-max-width` | geometry | min-width / max-width in px | `min-width` | CARRIED | 96px | same |  |  |
 | `oklch-color` | color | background-color: oklch(0.6 0.15 250) | `background-color` | CARRIED | #2784d5 | same |  |  |
 | `padding-asymmetric-block` | box | padding: 10px 4px 20px 4px — four sides, top and bottom DIFFERENT | `padding-top` | CARRIED | 10px, 20px, 4px | same |  |  |
+| `page-global-star-rule` | cascade | * { border-color: var(--cf-color-secondary) } — a PAGE-GLOBAL authored declaration, with the element's border-width and border-style declared locally and its colour reaching it only through the universal rule | `border-top-color` | CARRIED | #663399 | same |  |  |
 | `page-inherited-ink` | cascade | body { color: var(--cf-color-primary) } — the document's ink, inherited by a text-bearing part that declares no colour of its own | `color` | CARRIED | #1976d2 | same |  |  |
 | `percentage-padding` | units | padding-left: 10% (resolved against the PARENT width) | `padding-left` | CARRIED | 28.7969px | same |  |  |
 | `position-absolute-insets` | position | position: absolute + top/left insets | `top` | CARRIED | 4px, 6px | same |  |  |
+| `pseudo-placeholder` | pseudo-elements | input::placeholder { color } | `placeholder-color` | CARRIED | #969696 | same |  |  |
 | `repeat-grid-month` | repetition | a 7-column CSS grid of 35 auto-placed cells (5 weeks), the LAST carrying a distinct paint (rgb(160, 32, 160)) | `background-color` | CARRIED | #a020a0, #d2dce6, #eeeeee | same |  |  |
 | `repeat-siblings-seven` | repetition | 7 adjacent same-shape siblings, the LAST carrying a distinct paint (rgb(64, 128, 191)) | `background-color` | CARRIED | #4080bf, #d2dce6, #eeeeee | same |  |  |
 | `repeat-siblings-thirtyone` | repetition | 31 adjacent same-shape siblings (a wrapping flex run), the LAST carrying a distinct paint (rgb(32, 160, 96)) | `background-color` | CARRIED | #20a060, #d2dce6, #eeeeee | same |  |  |

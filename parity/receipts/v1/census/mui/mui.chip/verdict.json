@@ -1,0 +1,45 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17094",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.chip.dump.json",
+  "matched": 9,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"small\",\"medium\"]} vs {\"enum\":[\"medium\",\"small\"]}",
+   "prop size bindings.figma.values \u2014 {\"small\":\"Small\",\"medium\":\"Medium\"} vs {\"medium\":\"Medium\",\"small\":\"Small\"}",
+   "part root/label/label-text \u2014 proposal has a part the contract does not",
+   "part root background-color \u2014 {imported.chip.root.background-color.{variant}.{color}} missing from proposal",
+   "part root border-bottom-color \u2014 {imported.chip.root.border-bottom-color.{variant}.{color}} missing from proposal",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root border-left-color \u2014 {imported.chip.root.border-left-color.{variant}.{color}} missing from proposal",
+   "part root border-right-color \u2014 {imported.chip.root.border-right-color.{variant}.{color}} missing from proposal",
+   "part root border-top-color \u2014 {imported.chip.root.border-top-color.{variant}.{color}} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-16} missing from proposal",
+   "part root line-height \u2014 {imported.chip.root.line-height} missing from proposal",
+   "part root outline-width \u2014 {imported.chip.root.outline-width} missing from proposal",
+   "part root border-radius \u2014 proposal has {imported.shared.size-16}, contract has nothing",
+   "part root border-top-width \u2014 proposal has {imported.chip.root.border-top-width.{variant}}, contract has nothing",
+   "part root border-right-width \u2014 proposal has {imported.chip.root.border-right-width.{variant}}, contract has nothing",
+   "part root border-bottom-width \u2014 proposal has {imported.chip.root.border-bottom-width.{variant}}, contract has nothing",
+   "part root border-left-width \u2014 proposal has {imported.chip.root.border-left-width.{variant}}, contract has nothing",
+   "part root/label line-height \u2014 {imported.chip.label.line-height} missing from proposal",
+   "part root/label content \u2014 {\"prop\":\"label\"} vs undefined",
+   "text root/label color (effective) \u2014 {imported.chip.root.color.{variant}.{color}} missing from proposal",
+   "text root/label font-size (effective) \u2014 {imported.chip.label.font-size} missing from proposal",
+   "text root/label font-weight (effective) \u2014 {imported.chip.label.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`part root font-size` \u2014 {imported.chip.root.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

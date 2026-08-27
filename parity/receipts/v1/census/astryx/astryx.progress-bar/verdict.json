@@ -1,0 +1,43 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "variant-accent: canvas fill bar is near-black #262626 vs ref bright blue #0074E2 \u2014 accent reads as neutral/dark",
+  "variant-error: canvas fill #A50C25 dark crimson vs ref #E33F4A bright red",
+  "variant-warning: canvas fill #745B00 dark olive vs ref #FFCE2F yellow",
+  "variant-neutral: canvas fill #C0C7CE is nearly indistinguishable from its own track #CCD3DB \u2014 bar almost invisible; ref fill #A3A3A3 is clearly visible against #D4D4D4 track",
+  "variant-success: canvas #007004 vs ref #198100 \u2014 minor shade shift",
+  "all variants: canvas 'Uploading' label is gray #737373 vs ref near-black #171717",
+  "all variants: canvas track has a bluish tint #CCD3DB vs ref neutral gray #D4D4D4"
+ ],
+ "defectClasses": [
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other",
+  "other"
+ ],
+ "notes": "label + track/fill across 5 variants match",
+ "reviewedAt": "796581f0",
+ "setNodeId": "39:14168",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-astryx-astryx.progress-bar.dump.json",
+  "matched": 23,
+  "diverged": [
+   "prop value \u2014 missing from proposal",
+   "prop max \u2014 missing from proposal"
+  ],
+  "lost": [
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/label element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`part root/track element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`part root/track/fill element` \u2014 host element (\"div\") is not drawn on the canvas",
+   "`text root/label font-family (effective)` \u2014 {font-family-body} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

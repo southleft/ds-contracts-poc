@@ -1,0 +1,47 @@
+{
+  "id": "fluent.dialog",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Dialog",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "modal-type-modal",
+      "status": "rendered",
+      "png": "ref-modal-type-modal.png",
+      "props": {
+        "modalType": "modal",
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "modal-type-non-modal",
+      "status": "rendered",
+      "png": "ref-modal-type-non-modal.png",
+      "props": {
+        "modalType": "non-modal",
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "modal-type-alert",
+      "status": "rendered",
+      "png": "ref-modal-type-alert.png",
+      "props": {
+        "modalType": "alert",
+        "open": true
+      },
+      "capture": "portal"
+    }
+  ],
+  "rendered": 3,
+  "unmappable": 0
+}

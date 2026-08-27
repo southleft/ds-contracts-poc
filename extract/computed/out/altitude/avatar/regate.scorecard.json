@@ -3,6 +3,7 @@
   "component": "Avatar",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -58,6 +59,7 @@
     "component": "Avatar",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 4,
     "interactions": 4,
@@ -215,6 +217,18 @@
           "resolvedEqual": true
         },
         {
+          "token": "imported.avatar.root.height.sm",
+          "fresh": "32px",
+          "shipped": "{theme-icon-xl}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.height.unset",
+          "fresh": "40px",
+          "shipped": "{theme-icon-xxxl}",
+          "resolvedEqual": true
+        },
+        {
           "token": "imported.avatar.root.line-height.sm",
           "fresh": "32px",
           "shipped": "{theme-icon-xl}",
@@ -222,6 +236,18 @@
         },
         {
           "token": "imported.avatar.root.line-height.unset",
+          "fresh": "40px",
+          "shipped": "{theme-icon-xxxl}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.sm",
+          "fresh": "32px",
+          "shipped": "{theme-icon-xl}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.avatar.root.width.unset",
           "fresh": "40px",
           "shipped": "{theme-icon-xxxl}",
           "resolvedEqual": true

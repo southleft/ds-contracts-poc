@@ -321,6 +321,19 @@ async function main() {
     // from committed truth. Same bytes pathway as run.ts (2-space JSON +
     // trailing newline) — guarded by the replay-sufficiency assertion above.
     if (WRITE_ENRICHED) {
+      // REJECTED-SETS ROUND: the re-promotion recomputes the svg assets from
+      // the committed truth (promoteAnatomy above) but the files stayed the
+      // harness run's — so an asset-reconstruction fix (shadcn's stroke-glyph
+      // fill="none") could never reach the committed asset bytes offline.
+      // Written under the same replay-sufficiency guard as the contract.
+      if (promotion.assets.size > 0) {
+        const assetsDir = path.join(outDir, 'assets');
+        mkdirSync(assetsDir, { recursive: true });
+        for (const [assetName, svg] of [...promotion.assets].sort()) {
+          writeFileSync(path.join(assetsDir, `${assetName}.svg`), svg + '\n');
+        }
+        console.log(`  ✔ ${comp.name}: ${promotion.assets.size} reconstructed svg asset(s) REWRITTEN from committed truth`);
+      }
       /** ALTITUDE LINK ROUND — THE RE-FUSE USED TO DELETE THE FRONTIER
        *  RECEIPTS, WHILE CLAIMING IT HAD NOT.
        *
@@ -346,9 +359,31 @@ async function main() {
         ? (JSON.parse(readFileSync(priorExtPath, 'utf8')) as Record<string, unknown>)
         : null;
       const carriedFrontier = Array.isArray(prior?.frontierReceipts) ? (prior!.frontierReceipts as unknown[]) : null;
+      /** RC7 ROUND — THE SAME HOLE, ONE KEY OVER: `structureReceipts`.
+       *
+       *  The frontier block above was written because an offline re-fuse
+       *  DELETED five committed receipts while asserting completeness. The
+       *  identical thing happens to `structureReceipts`, and it is worse
+       *  because the key is written unconditionally so nothing looks absent.
+       *  MEASURED on antd/Input, at the BASE engine and at this one alike:
+       *  the committed extension carries 144 `root-signature-varies`
+       *  receipts (the underlined variant's root really does change element
+       *  signature per combo) and `alignSweep` over the RECONSTRUCTED
+       *  captures recomputes ZERO of them — the reconstruction does not
+       *  restore the per-combo element signature those receipts were read
+       *  from. So a re-fuse for ANY reason silently dropped 144 committed
+       *  receipts about a real structural fact.
+       *
+       *  They are capture-time measurements of the capture being re-fused,
+       *  exactly like the frontier receipts, so they are CARRIED FORWARD and
+       *  UNIONED with whatever this re-fuse did recompute (recomputed first,
+       *  so a receipt the current engine states in its own words wins the
+       *  ordering). A receipt this re-fuse can reproduce is therefore never
+       *  duplicated, and one it cannot is never lost. */
+      const carriedStructure = Array.isArray(prior?.structureReceipts) ? (prior!.structureReceipts as string[]) : [];
       const extension: Record<string, unknown> = {
         _marker: 'NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).',
-        generatedBy: `extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (${carriedFrontier ? `${carriedFrontier.length} receipt(s)` : 'none present — no prior extension beside this truth'}); every other receipt is recomputed from the same truth.`,
+        generatedBy: `extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (${carriedFrontier ? `${carriedFrontier.length} receipt(s)` : 'none present — no prior extension beside this truth'}); the structure receipts are capture-time too and are CARRIED FORWARD and unioned with whatever this re-fuse recomputed (${carriedStructure.length} carried); every other receipt is recomputed from the same truth.`,
         library: `${cfg.library.package}@${cfg.library.version}`,
         // The capture browser, spelled exactly as run.ts spells it — this
         // field documents the browser that CAPTURED the truth, which an
@@ -389,7 +424,7 @@ async function main() {
       // that discards it.
       interactionOnlyPlaneDrops: prep.planeAbsentDrops.slice(0, 20),
       interactionOnlyPlaneDropCount: prep.planeAbsentDrops.length,
-        structureReceipts: [...new Set(aligned.structureReceipts)],
+        structureReceipts: [...new Set([...aligned.structureReceipts, ...carriedStructure])],
         styledChannelReceipts: styledReceipts,
         ...(carriedFrontier ? { frontierReceipts: carriedFrontier } : {}),
         anatomyJoin: { computed: aligned.anatomyJoin, staticOnly: aligned.staticOnlyParts },
@@ -438,6 +473,16 @@ async function main() {
         throw new Error(`${comp.name}: decision-applied contract fails validateContract:\n${resolvedErrs.slice(0, 8).map((e) => `  - ${e}`).join('\n')}`);
       }
       gated = resolved;
+      // REJECTED-SETS ROUND: an offline re-fuse used to leave the decision-
+      // applied resolved.contract.json STALE, and every promote-floor prefers
+      // resolved over enriched — so a fusion fix could never reach a
+      // component with a decisions ledger (astryx.card) without a full
+      // recapture. The decisions are re-applied above by the same referee the
+      // harness uses; the write rides the same --write-enriched intent.
+      if (WRITE_ENRICHED) {
+        writeFileSync(path.join(outDir, 'resolved.contract.json'), JSON.stringify(resolved, null, 2) + '\n');
+        console.log(`  ✔ ${comp.name}: resolved.contract.json REWRITTEN (decisions ledger re-applied offline)`);
+      }
     }
 
     // @door regate.named-losses-rollup

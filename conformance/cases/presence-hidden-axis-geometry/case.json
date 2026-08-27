@@ -1,0 +1,29 @@
+{
+  "id": "presence-hidden-axis-geometry",
+  "feature": "tokens",
+  "construct": "an absolute part's inset that is a clean function of ONE enum axis, with the part NOT RENDERED at one axis value (polaris.checkbox icon: top/left 0px when checked, -2px when indeterminate, absent when unchecked)",
+  "why": "The mint's single-axis fit refused the map because the presence-hidden value has no observation, and the refusal claimed the values 'differ without correlating to any variant axis' \u2014 a false receipt: they correlate exactly; the hole is a presence-gated missing cell. The canvas then drew polaris.checkbox's check icon with NO insets (it fell to static position below the box). The undrawn plane fills from the base-most observed value \u2014 ink-invisible there, closing only the dangling-ref hole. (The case's DEFAULT combo renders the part so the observable is measurable; the presence-hidden plane is the non-default 'unchecked' value, exactly the polaris shape.)",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.a \u2014 the checked-keyed per-axis carriage of the inset",
+  "observable": {
+    "part": "a",
+    "channel": "top",
+    "capturedValue": "3px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the badge pins to the declared inset on the rendered variants; the hidden variant draws nothing"
+  },
+  "axes": [
+    {
+      "prop": "checked",
+      "values": [
+        "checked",
+        "indeterminate",
+        "unchecked"
+      ],
+      "default": "checked"
+    }
+  ]
+}

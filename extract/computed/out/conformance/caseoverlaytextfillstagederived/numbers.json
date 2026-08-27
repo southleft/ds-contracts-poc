@@ -1,0 +1,200 @@
+{
+  "component": "CaseOverlayTextFillStageDerived",
+  "browser": "151.0.7922.34",
+  "captures": 8,
+  "combos": 2,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 479,
+  "elementsPerCapture": 3,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 14,
+    "a": 13,
+    "label": 19
+  },
+  "folds": {
+    "count": 10,
+    "receipts": [
+      {
+        "part": "label",
+        "channel": "border-bottom-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "caret-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "column-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "outline-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "row-rule-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-decoration-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      },
+      {
+        "part": "label",
+        "channel": "text-emphasis-color",
+        "foldedInto": "color",
+        "class": "currentColor"
+      }
+    ],
+    "mintedLeavesUnfolded": 17,
+    "mintedLeavesFolded": 17
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 17,
+    "baseBindings": 29,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 27,
+      "perAxis": 2,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 6,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 0,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 3,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 11448,
+    "cellsMatched": 11448,
+    "pct": 100,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": []
+  },
+  "pixel": {
+    "pairs": 8,
+    "measured": 8,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 8
+    },
+    "worst": [
+      {
+        "key": "wide__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "wide__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "wide__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "wide__active",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__focus-visible",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "none__active",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 100,
+    "rowsFullyEqual": 8,
+    "rows": 8,
+    "pixelPerfectExact": 8,
+    "pixelPerfectAA": 8,
+    "pairs": 8
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 2
+}

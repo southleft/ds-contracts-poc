@@ -1,10 +1,56 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (29 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@shopify/polaris@13.9.5",
   "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
+      "shared": {
+        "color-303030": {
+          "$value": "#303030",
+          "$type": "color"
+        },
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "num-0": {
+          "$value": "0",
+          "$type": "number"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-18": {
+          "$value": "18px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-00000000": {
+          "$value": "#00000000",
+          "$type": "color"
+        },
+        "color-b5b5b5": {
+          "$value": "#b5b5b5",
+          "$type": "color"
+        }
+      },
       "checkbox": {
         "root": {
           "height": {
@@ -240,6 +286,148 @@
             }
           }
         },
+        "icon-3": {
+          "bottom": {
+            "checked": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "checked": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "14px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "checked": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-bottom": {
+            "checked": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "checked": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "checked": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "checked": {
+              "$value": "2px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "2px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "checked": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "checked": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "checked": {
+              "$value": "14px",
+              "$type": "dimension"
+            },
+            "indeterminate": {
+              "$value": "22px",
+              "$type": "dimension"
+            },
+            "unchecked": {
+              "$value": "14px",
+              "$type": "dimension"
+            }
+          }
+        },
         "icon-6": {
           "color": {
             "$value": "#ffffff",
@@ -265,52 +453,6 @@
             "$value": "450",
             "$type": "number"
           }
-        }
-      },
-      "shared": {
-        "size-4": {
-          "$value": "4px",
-          "$type": "dimension"
-        },
-        "num-0": {
-          "$value": "0",
-          "$type": "number"
-        },
-        "size-20": {
-          "$value": "20px",
-          "$type": "dimension"
-        },
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        },
-        "size-18": {
-          "$value": "18px",
-          "$type": "dimension"
-        },
-        "size-1": {
-          "$value": "1px",
-          "$type": "dimension"
-        },
-        "color-303030": {
-          "$value": "#303030",
-          "$type": "color"
-        },
-        "size-14": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "size-2": {
-          "$value": "2px",
-          "$type": "dimension"
-        },
-        "color-00000000": {
-          "$value": "#00000000",
-          "$type": "color"
-        },
-        "color-b5b5b5": {
-          "$value": "#b5b5b5",
-          "$type": "color"
         }
       }
     }
@@ -951,6 +1093,11 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
       }
     ],
     "state": [
@@ -1008,7 +1155,7 @@
     {
       "part": "input",
       "channel": "line-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "normal",
       "distinctValues": 1
     },
@@ -1057,14 +1204,14 @@
     {
       "part": "icon-6",
       "channel": "overflow-clip-margin",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "content-box",
       "distinctValues": 1
     },
     {
       "part": "icon-6",
       "channel": "shape-rendering",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <svg>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <svg> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "geometricprecision",
       "distinctValues": 1
     }
@@ -1100,56 +1247,6 @@
     }
   ],
   "overflowBindings": [
-    {
-      "part": "icon-3",
-      "channel": "bottom",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "height",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "left",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "margin-bottom",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "margin-left",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "margin-right",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "margin-top",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "right",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "top",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
-    {
-      "part": "icon-3",
-      "channel": "width",
-      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
-    },
     {
       "part": "backdrop",
       "channel": "background-color",
@@ -1607,6 +1704,21 @@
     }
   ],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "icon-3: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-3: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-3: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-4: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-4: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-4: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-6: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-6: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon-6: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "icon: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 12,
   "structureReceipts": [
     "union-part-added: checked.enabled__default @0.0.2 (span|Checkbox__Icon)",
     "union-part-added: checked.enabled__default @0.0.2.0 (svg|)",
@@ -1681,34 +1793,59 @@
     "absolute-geometry-admitted: part-0-0-2-0-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: choice__label — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <label> — span control used (part root)",
+    "page-inherited-ink-admitted: root.color = rgba(48, 48, 48, 1) — EQUAL to the <label> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: choice__control.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: checkbox.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <input> — span control used (part input)",
-    "svg-host-color-carried: icon-3 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
-    "svg-host-color-carried: icon-4 — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "page-inherited-ink-admitted: backdrop.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: icon-3.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: icon-4.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <svg> — span control used (part icon-5)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0-0)",
     "control-fallback: no control for <svg> — span control used (part icon-6)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0-2)",
     "translate-door-generalized: part-0-0-2-0-0-2 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
-    "svg-host-color-carried: icon — color carried even though equal to the control baseline (the hosted glyph rides the color chain; generated surfaces have no Polaris body context — round 5c)",
+    "page-inherited-ink-admitted: icon.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <svg> — span control used (part icon-2)",
     "control-fallback: no control for <path> — span control used (part part-0-0-2-0-0)",
     "translate-door-generalized: part-0-0-2-0-0 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "page-inherited-ink-admitted: choice__label.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: label.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "geometry-excluded: backdrop — block-size 18px, inline-size 18px, perspective-origin 9px 9px, transform-origin 9px 9px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: checkbox — block-size 18px, inline-size 18px, perspective-origin 9px 9px, transform-origin 9px 9px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: choice__control — inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: choice__label — inline-size 108.359px, perspective-origin 54.1719px 10px, transform-origin 54.1797px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon — block-size 14px, inline-size 14px, perspective-origin 7px 7px, transform-origin 7px 7px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-2 — block-size 14px, inline-size 14px, perspective-origin 7px 7px, transform-origin 7px 7px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-3 — block-size 14px, inline-size 14px, perspective-origin 7px 7px, transform-origin 7px 7px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-4 — inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-5 — block-size 22px, inline-size 22px, perspective-origin 11px 11px, transform-origin 11px 11px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: icon-6 — block-size 14px, inline-size 14px, perspective-origin 7px 7px, transform-origin 7px 7px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: input — block-size 18px, inline-size 18px, perspective-origin 9px 9px, transform-origin 9px 9px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-2-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-2-0-0-0 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0-0-2-0-0-2 — block-size auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 28px, inline-size 136.359px, perspective-origin 68.1719px 14px, transform-origin 68.1797px 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (icon-2, icon-5, icon-6, input, part-0-0-2-0-0, part-0-0-2-0-0-0, part-0-0-2-0-0-2); -webkit-text-stroke-color (icon-2, icon-5, icon-6, input, part-0-0-2-0-0, part-0-0-2-0-0-0, part-0-0-2-0-0-2)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
-    "inheritance-check-rejected: icon-3.color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: icon-6.caret-color — values track ancestor \"icon-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: icon-6.fill — values track ancestor \"icon-3\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: icon.color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.caret-color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: input.color — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.font-size — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.font-weight — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.line-height — values track ancestor \"checkbox\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-only: icon-4.color equals ancestor \"icon-3\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
+    "inheritance-only: backdrop.color equals ancestor \"checkbox\" on all 24 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: checkbox.color equals ancestor \"choice__control\" on all 24 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: choice__control.color equals ancestor \"root\" on all 24 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: icon-3.color equals ancestor \"checkbox\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: icon-4.color equals ancestor \"icon-3\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: icon.color equals ancestor \"checkbox\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"choice__label\" on all 24 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-suspected: Checkbox:checked.disabled__active>span>span>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 8x6 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
@@ -1832,8 +1969,10 @@
     ],
     "receipts": [
       "svg-viewbox-reconstructed: Checkbox.icon-4@indeterminate.enabled — 0 0 22 22 from computed size 22×22 (path extent 15.0; viewBox is not a computed style — named reconstruction)",
+      "svg-stroke-glyph-fill-none: Checkbox.icon-6@checked.enabled — path fill 'none' PRESERVED on a stroke-drawn glyph (SVG's initial fill is BLACK, so an absent fill attribute would fill the open path into a blob when the asset renders standalone or through the canvas importer; the stroke channels above carry the paint)",
       "svg-dash-channels-dropped: Checkbox.icon-6@checked.enabled — stroke-dasharray 2px / stroke-dashoffset 0px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.icon-6@checked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
+      "svg-stroke-glyph-fill-none: Checkbox.icon@unchecked.enabled — path fill 'none' PRESERVED on a stroke-drawn glyph (SVG's initial fill is BLACK, so an absent fill attribute would fill the open path into a blob when the asset renders standalone or through the canvas importer; the stroke channels above carry the paint)",
       "svg-dash-channels-dropped: Checkbox.icon@unchecked.enabled — stroke-dasharray 2px / stroke-dashoffset 2px are pathLength-relative and pathLength is not a computed style (draw-on animation idiom); continuous stroke carried (named reconstruction)",
       "svg-viewbox-reconstructed: Checkbox.icon@unchecked.enabled — 0 0 14 14 from computed size 14×14 (path extent 10.5; viewBox is not a computed style — named reconstruction)",
       "root-display-carried: flex",
@@ -1880,8 +2019,8 @@
     "declared fact carried: icon-4.max-width = 100% (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-4.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-6.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-6.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: icon-6.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: icon-6.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: icon-6.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: icon-6.pointer-events = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon-6.text-rendering = geometricprecision (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: icon.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1889,6 +2028,7 @@
     "declared fact carried: icon.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: choice__label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared state fact carried: [disabled] backdrop.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] checkbox.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] choice__control.cursor = default (v15 declared vocabulary)",
@@ -1896,9 +2036,6 @@
     "declared state fact carried: [disabled] label.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [disabled] root.cursor = default (v15 declared vocabulary)",
     "declared state fact carried: [focus-visible] backdrop.outline-style = solid (v15 declared vocabulary)",
-    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)",
-    "hug-evidence-unmeasurable: icon-4.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
-    "hug-evidence-unmeasurable: icon-5.max-width = 100% — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
-    "hug-evidence-absent: icon-4 carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
+    "declared state fact carried: [focus-visible] input.outline-style = auto (v15 declared vocabulary)"
   ]
 }

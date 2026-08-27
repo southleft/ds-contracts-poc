@@ -1,0 +1,136 @@
+{
+  "id": "fluent.tab-list",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "TabList",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "appearance-transparent__size-medium__orientation-horizontal",
+      "status": "rendered",
+      "png": "ref-appearance-transparent__size-medium__orientation-horizontal.png",
+      "props": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false,
+        "appearance": "transparent",
+        "size": "medium",
+        "vertical": false,
+        "onTabSelect": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-transparent__size-medium__orientation-vertical",
+      "status": "rendered",
+      "png": "ref-appearance-transparent__size-medium__orientation-vertical.png",
+      "props": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false,
+        "appearance": "transparent",
+        "size": "medium",
+        "vertical": true,
+        "onTabSelect": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-transparent__size-small__orientation-horizontal",
+      "status": "rendered",
+      "png": "ref-appearance-transparent__size-small__orientation-horizontal.png",
+      "props": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false,
+        "appearance": "transparent",
+        "size": "small",
+        "vertical": false,
+        "onTabSelect": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-transparent__size-large__orientation-horizontal",
+      "status": "rendered",
+      "png": "ref-appearance-transparent__size-large__orientation-horizontal.png",
+      "props": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false,
+        "appearance": "transparent",
+        "size": "large",
+        "vertical": false,
+        "onTabSelect": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-subtle__size-medium__orientation-horizontal",
+      "status": "rendered",
+      "png": "ref-appearance-subtle__size-medium__orientation-horizontal.png",
+      "props": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false,
+        "appearance": "subtle",
+        "size": "medium",
+        "vertical": false,
+        "onTabSelect": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-subtle-circular__size-medium__orientation-horizontal",
+      "status": "rendered",
+      "png": "ref-appearance-subtle-circular__size-medium__orientation-horizontal.png",
+      "props": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false,
+        "appearance": "subtle-circular",
+        "size": "medium",
+        "vertical": false,
+        "onTabSelect": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "appearance-filled-circular__size-medium__orientation-horizontal",
+      "status": "rendered",
+      "png": "ref-appearance-filled-circular__size-medium__orientation-horizontal.png",
+      "props": {
+        "selectedValue": "tab-1",
+        "reserveSelectedTabSpace": true,
+        "selectTabOnFocus": false,
+        "appearance": "filled-circular",
+        "size": "medium",
+        "vertical": false,
+        "onTabSelect": {
+          "$callback": true
+        }
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 7,
+  "unmappable": 0
+}

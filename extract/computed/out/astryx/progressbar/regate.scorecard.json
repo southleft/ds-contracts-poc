@@ -3,6 +3,7 @@
   "component": "ProgressBar",
   "config": "extract/computed/configs/astryx.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -188,13 +189,15 @@
     "component": "ProgressBar",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 5,
     "interactions": 4,
     "computed": {
       "cellsCompared": 3160,
-      "cellsEqual": 2440,
-      "pctEqual": 77.21518987341773,
+      "cellsEqual": 2460,
+      "pctEqual": 77.84810126582279,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -220,7 +223,7 @@
       "mintedLeavesUnfolded": 18,
       "baseBindings": 34,
       "stateBindings": 0,
-      "codeOnlyChannels": 36,
+      "codeOnlyChannels": 35,
       "overflowBindings": 0,
       "folds": 50
     },
@@ -229,56 +232,56 @@
         "key": "accent__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "accent__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "accent__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "accent__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "success__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "success__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "success__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       },
       {
         "key": "success__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 36,
+        "channelsMismatched": 35,
         "unscorable": "no-original"
       }
     ],
@@ -332,15 +335,15 @@
         20
       ],
       [
-        "part-0.align-items",
-        20
-      ],
-      [
         "part-0.color-scheme",
         20
       ],
       [
         "part-0.text-size-adjust",
+        20
+      ],
+      [
+        "label.--color-accent",
         20
       ]
     ],
@@ -357,7 +360,6 @@
       "code-only: part-0.--color-error — CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.--color-success — CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: part-0.--color-warning — CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
-      "code-only: part-0.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.color-scheme — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label.--color-accent — CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#0074e2`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
@@ -388,14 +390,14 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 318,
+      "leavesAdded": 550,
       "divergent": []
     },
     "rows": [
       {
         "key": "accent__default",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -471,12 +473,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -622,7 +618,7 @@
       {
         "key": "accent__hover",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -698,12 +694,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -849,7 +839,7 @@
       {
         "key": "accent__focus-visible",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -925,12 +915,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -1076,7 +1060,7 @@
       {
         "key": "accent__active",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1152,12 +1136,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -1303,7 +1281,7 @@
       {
         "key": "success__default",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1379,12 +1357,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -1530,7 +1502,7 @@
       {
         "key": "success__hover",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1606,12 +1578,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -1757,7 +1723,7 @@
       {
         "key": "success__focus-visible",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1833,12 +1799,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -1984,7 +1944,7 @@
       {
         "key": "success__active",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2060,12 +2020,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -2211,7 +2165,7 @@
       {
         "key": "warning__default",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2287,12 +2241,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -2438,7 +2386,7 @@
       {
         "key": "warning__hover",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2514,12 +2462,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -2665,7 +2607,7 @@
       {
         "key": "warning__focus-visible",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2741,12 +2683,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -2892,7 +2828,7 @@
       {
         "key": "warning__active",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2968,12 +2904,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "#ffce2f"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -3119,7 +3049,7 @@
       {
         "key": "neutral__default",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3195,12 +3125,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -3346,7 +3270,7 @@
       {
         "key": "neutral__hover",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3422,12 +3346,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -3573,7 +3491,7 @@
       {
         "key": "neutral__focus-visible",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3649,12 +3567,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -3800,7 +3712,7 @@
       {
         "key": "neutral__active",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3876,12 +3788,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -4027,7 +3933,7 @@
       {
         "key": "error__default",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4103,12 +4009,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -4254,7 +4154,7 @@
       {
         "key": "error__hover",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4330,12 +4230,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -4481,7 +4375,7 @@
       {
         "key": "error__focus-visible",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4557,12 +4451,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",
@@ -4708,7 +4596,7 @@
       {
         "key": "error__active",
         "channelsCompared": 158,
-        "channelsEqual": 122,
+        "channelsEqual": 123,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4784,12 +4672,6 @@
             "channel": "--color-warning",
             "ours": "#745b00",
             "theirs": "light-dark(#745b00, #fdcf4f)"
-          },
-          {
-            "part": "part-0",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "part-0",

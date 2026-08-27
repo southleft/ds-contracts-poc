@@ -43,6 +43,7 @@
     ],
     "contentSlots": [],
     "tokenRefs": [
+      "imported.shared.color-161616",
       "imported.shared.color-16161640",
       "imported.shared.size-0",
       "imported.shared.size-0-16",
@@ -90,7 +91,8 @@
       "imported.text-input.text-input.height.xs",
       "imported.text-input.text-input.outline-color",
       "imported.text-input.text-input.outline-offset",
-      "imported.text-input.text-input.outline-width"
+      "imported.text-input.text-input.outline-width",
+      "imported.text-input.text-input.placeholder-color"
     ],
     "icons": [],
     "events": []

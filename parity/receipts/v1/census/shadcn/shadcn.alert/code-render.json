@@ -46,13 +46,11 @@
       "imported.alert.root.background-color",
       "imported.alert.root.color.default",
       "imported.alert.root.color.destructive",
-      "imported.alert.root.column-gap",
-      "imported.alert.root.grid-template-columns",
       "imported.alert.root.padding-bottom",
       "imported.alert.root.padding-left",
       "imported.alert.root.padding-right",
       "imported.alert.root.padding-top",
-      "imported.alert.root.row-gap",
+      "imported.shared.color-e5e5e5",
       "imported.shared.size-0",
       "imported.shared.size-1",
       "imported.shared.size-10",
@@ -75,8 +73,8 @@
       "status": "rendered",
       "png": "code-variant-default.png",
       "contentBox": {
-        "width": 304.05,
-        "height": 68
+        "width": 288,
+        "height": 88
       }
     },
     {
@@ -91,8 +89,8 @@
       "status": "rendered",
       "png": "code-variant-destructive.png",
       "contentBox": {
-        "width": 304.05,
-        "height": 68
+        "width": 288,
+        "height": 88
       }
     }
   ],

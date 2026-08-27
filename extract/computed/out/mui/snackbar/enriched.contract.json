@@ -48,7 +48,8 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy div|Paper-root.SnackbarContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
-            "align": "center"
+            "align": "center",
+            "wrap": true
           },
           "parts": {
             "label": {

@@ -1,0 +1,95 @@
+{
+  "id": "fluent.avatar",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Avatar",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "shape-circular__active-none__size-24",
+      "status": "rendered",
+      "png": "ref-shape-circular__active-none__size-24.png",
+      "props": {
+        "name": "Fluent Two",
+        "activeAppearance": "ring",
+        "shape": "circular",
+        "active": "unset",
+        "size": 24
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "shape-circular__active-none__size-48",
+      "status": "rendered",
+      "png": "ref-shape-circular__active-none__size-48.png",
+      "props": {
+        "name": "Fluent Two",
+        "activeAppearance": "ring",
+        "shape": "circular",
+        "active": "unset",
+        "size": 48
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "shape-circular__active-none__size-96",
+      "status": "rendered",
+      "png": "ref-shape-circular__active-none__size-96.png",
+      "props": {
+        "name": "Fluent Two",
+        "activeAppearance": "ring",
+        "shape": "circular",
+        "active": "unset",
+        "size": 96
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "shape-circular__active-active__size-24",
+      "status": "rendered",
+      "png": "ref-shape-circular__active-active__size-24.png",
+      "props": {
+        "name": "Fluent Two",
+        "activeAppearance": "ring",
+        "shape": "circular",
+        "active": "active",
+        "size": 24
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "shape-circular__active-inactive__size-24",
+      "status": "rendered",
+      "png": "ref-shape-circular__active-inactive__size-24.png",
+      "props": {
+        "name": "Fluent Two",
+        "activeAppearance": "ring",
+        "shape": "circular",
+        "active": "inactive",
+        "size": 24
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "shape-square__active-none__size-24",
+      "status": "rendered",
+      "png": "ref-shape-square__active-none__size-24.png",
+      "props": {
+        "name": "Fluent Two",
+        "activeAppearance": "ring",
+        "shape": "square",
+        "active": "unset",
+        "size": 24
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 6,
+  "unmappable": 0
+}

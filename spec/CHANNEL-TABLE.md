@@ -17,13 +17,13 @@ Every property is in **exactly one** class:
 
 | class | properties |
 |---|---|
-| CARRIED | 82 |
+| CARRIED | 83 |
 | LEDGERED | 80 |
 | REFUSED | 271 |
 | INERT | 54 |
-| **total** | **487** |
+| **total** | **488** |
 
-**Bottom-up debt:** 272 of 487 properties had no prior classification anywhere in the engine (no schema channel, no layout vocabulary, no conformance case, no named exclusion) and were decided fresh by this table. Until now each of them fell to the generic per-channel refusal in `extract/computed/fuse.ts` at runtime — named, but never *decided*.
+**Bottom-up debt:** 273 of 488 properties had no prior classification anywhere in the engine (no schema channel, no layout vocabulary, no conformance case, no named exclusion) and were decided fresh by this table. Until now each of them fell to the generic per-channel refusal in `extract/computed/fuse.ts` at runtime — named, but never *decided*.
 
 ## How to read a row
 

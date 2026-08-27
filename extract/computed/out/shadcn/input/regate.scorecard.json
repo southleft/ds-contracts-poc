@@ -3,6 +3,7 @@
   "component": "Input",
   "config": "extract/computed/configs/shadcn.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -91,13 +92,15 @@
     "component": "Input",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 2,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 352,
+      "cellsCompared": 360,
       "cellsEqual": 240,
-      "pctEqual": 68.18181818181819,
+      "pctEqual": 66.66666666666667,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -119,9 +122,9 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 22,
-      "mintedLeavesUnfolded": 20,
-      "baseBindings": 25,
+      "mintedLeaves": 23,
+      "mintedLeavesUnfolded": 21,
+      "baseBindings": 26,
       "stateBindings": 13,
       "codeOnlyChannels": 5,
       "overflowBindings": 0,
@@ -132,56 +135,56 @@
         "key": "enabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "enabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       },
       {
         "key": "disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 14,
+        "channelsMismatched": 15,
         "unscorable": "no-original"
       }
     ],
@@ -227,6 +230,10 @@
         8
       ],
       [
+        "root.placeholder-color",
+        8
+      ],
+      [
         "root.row-rule-color",
         8
       ],
@@ -256,13 +263,13 @@
     },
     "shippedMinted": {
       "path": "examples/shadcn/tokens/shadcn-minted.dtcg.json",
-      "leavesAdded": 348,
+      "leavesAdded": 358,
       "divergent": []
     },
     "rows": [
       {
         "key": "enabled__default",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -327,6 +334,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",
@@ -357,7 +370,7 @@
       },
       {
         "key": "enabled__hover",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -422,6 +435,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",
@@ -452,7 +471,7 @@
       },
       {
         "key": "enabled__focus-visible",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -517,6 +536,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",
@@ -547,7 +572,7 @@
       },
       {
         "key": "enabled__active",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -612,6 +637,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",
@@ -642,7 +673,7 @@
       },
       {
         "key": "disabled__default",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -707,6 +738,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",
@@ -737,7 +774,7 @@
       },
       {
         "key": "disabled__hover",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -802,6 +839,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",
@@ -832,7 +875,7 @@
       },
       {
         "key": "disabled__focus-visible",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -897,6 +940,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",
@@ -927,7 +976,7 @@
       },
       {
         "key": "disabled__active",
-        "channelsCompared": 44,
+        "channelsCompared": 45,
         "channelsEqual": 30,
         "pctExact": null,
         "pctAA": null,
@@ -992,6 +1041,12 @@
             "channel": "outline-color",
             "ours": "rgba(161, 161, 161, 0.5)",
             "theirs": "oklab(0.708 0 0 / 0.5)"
+          },
+          {
+            "part": "root",
+            "channel": "placeholder-color",
+            "ours": "rgba(115, 115, 115, 1)",
+            "theirs": "oklch(0.556 0 0)"
           },
           {
             "part": "root",

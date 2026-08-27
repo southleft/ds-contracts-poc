@@ -3,7 +3,7 @@
   "name": "CheckboxInput",
   "library": "astryx",
   "contractPath": "examples/astryx/contracts/checkbox-input.contract.json",
-  "contractVersion": "0.1.0",
+  "contractVersion": "0.3.0",
   "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
   "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
   "platform": "darwin/arm64",
@@ -49,10 +49,20 @@
         "default": false
       }
     ],
-    "states": [],
+    "states": [
+      "focus-visible"
+    ],
     "parts": [
       "root",
-      "control",
+      "part-0",
+      "part-0-0",
+      "part-0-0-0",
+      "checkbox",
+      "icon",
+      "icon-sm",
+      "icon-md",
+      "part-0-0-1-1",
+      "part-0-1",
       "label"
     ],
     "contentSlots": [
@@ -62,17 +72,58 @@
       }
     ],
     "tokenRefs": [
-      "border-width",
-      "color-background-surface",
-      "color-border-emphasized",
-      "color-text-primary",
-      "font-family-body",
-      "font-size-sm",
-      "radius-inner",
-      "size-element-sm",
-      "spacing-2"
+      "imported.checkbox-input.checkbox.color",
+      "imported.checkbox-input.checkbox.height.md",
+      "imported.checkbox-input.checkbox.height.sm",
+      "imported.checkbox-input.checkbox.width.md",
+      "imported.checkbox-input.checkbox.width.sm",
+      "imported.checkbox-input.icon.height.md",
+      "imported.checkbox-input.icon.height.sm",
+      "imported.checkbox-input.icon.width.md",
+      "imported.checkbox-input.icon.width.sm",
+      "imported.checkbox-input.label.color",
+      "imported.checkbox-input.label.column-gap",
+      "imported.checkbox-input.label.font-size",
+      "imported.checkbox-input.label.font-weight",
+      "imported.checkbox-input.label.line-height",
+      "imported.checkbox-input.label.row-gap",
+      "imported.checkbox-input.part-0-0-0.height.md",
+      "imported.checkbox-input.part-0-0-0.height.sm",
+      "imported.checkbox-input.part-0-0-0.opacity",
+      "imported.checkbox-input.part-0-0-0.width.md",
+      "imported.checkbox-input.part-0-0-0.width.sm",
+      "imported.checkbox-input.part-0-0-0.z-index",
+      "imported.checkbox-input.part-0-0-1-1.color",
+      "imported.checkbox-input.part-0-0-1-1.width.md",
+      "imported.checkbox-input.part-0-0-1-1.width.sm",
+      "imported.checkbox-input.part-0-0.flex-shrink",
+      "imported.checkbox-input.part-0-0.height.md",
+      "imported.checkbox-input.part-0-0.height.sm",
+      "imported.checkbox-input.part-0-0.width.md",
+      "imported.checkbox-input.part-0-0.width.sm",
+      "imported.checkbox-input.part-0-1.height",
+      "imported.checkbox-input.part-0-1.width",
+      "imported.checkbox-input.part-0.column-gap",
+      "imported.checkbox-input.part-0.height.md",
+      "imported.checkbox-input.part-0.height.sm",
+      "imported.checkbox-input.part-0.row-gap",
+      "imported.checkbox-input.part-0.width.md",
+      "imported.checkbox-input.part-0.width.sm",
+      "imported.checkbox-input.root.height.md",
+      "imported.checkbox-input.root.height.sm",
+      "imported.checkbox-input.root.width.md",
+      "imported.checkbox-input.root.width.sm",
+      "imported.shared.color-d4d4d4",
+      "imported.shared.color-ffffff",
+      "imported.shared.size-0",
+      "imported.shared.size-1",
+      "imported.shared.size-2",
+      "imported.shared.size-6"
     ],
-    "icons": [],
+    "icons": [
+      "checkbox-input-icon-md",
+      "checkbox-input-icon-sm"
+    ],
     "events": []
   },
   "variants": [
@@ -88,8 +139,8 @@
       "status": "rendered",
       "png": "code-size-md.png",
       "contentBox": {
-        "width": 111.63,
-        "height": 32
+        "width": 117.88,
+        "height": 24
       }
     },
     {
@@ -104,8 +155,8 @@
       "status": "rendered",
       "png": "code-size-sm.png",
       "contentBox": {
-        "width": 111.63,
-        "height": 32
+        "width": 113.88,
+        "height": 20
       }
     }
   ],

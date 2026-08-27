@@ -1,7 +1,7 @@
 {
-  "passed": 230,
+  "passed": 227,
   "total": 230,
-  "commit": "0bf4ac2bb36990055dae483783d69dd299e5b08a",
+  "commit": "181d0ab2e260130a03af38bcb6fb415ef038beda",
   "dirty": false,
   "recordedAt": "2026-08-26",
   "results": [
@@ -918,7 +918,8 @@
     {
       "id": "astryx-reanchor-minted",
       "claim": "C1-determinism",
-      "pass": true
+      "pass": false,
+      "error": "Error: --propose failed:\nREFUSED: STALE LITERAL RECEIPT — RA-nomatch-0536591a: leaf imported.badge.root.background-color.neutral is #e5e5e5, but the refusal was acked against #0536591a. Re-run --propose and re-review.\n"
     },
     {
       "id": "checked-axis-projection",
@@ -1033,7 +1034,8 @@
     {
       "id": "minted-leaves-bind-to-something",
       "claim": "C2-refusal",
-      "pass": true
+      "pass": false,
+      "error": "Error: the shipped token sets grew variables nothing binds (task #42):\n  astryx: 8 → 21 unreferenced minted leaves (GREW)\n  carbon: 92 → 94 unreferenced minted leaves (GREW)"
     },
     {
       "id": "live-figma-evidence-receipt",
@@ -1078,7 +1080,8 @@
     {
       "id": "console-loop-canvas-drift-probe",
       "claim": "C3-detection",
-      "pass": true
+      "pass": false,
+      "error": "Error: astryx: expected 12 in-sync / 0 cell-pending, got 3 / 0"
     },
     {
       "id": "console-loop-mui-evidence-receipt",

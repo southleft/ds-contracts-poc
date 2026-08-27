@@ -36,17 +36,13 @@
   "states": [],
   "anatomy": {
     "root": {
-      "layout": {
-        "display": "flex",
-        "direction": "column",
-        "align": "stretch"
-      },
       "parts": {
         "label": {
           "text": "Alert title",
           "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "font-family": "\"Inter Variable\", sans-serif",
             "text-align": "left"
           },
           "tokens": {
@@ -73,6 +69,7 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
+            "font-family": "\"Inter Variable\", sans-serif",
             "text-align": "left"
           },
           "tokens": {
@@ -95,6 +92,22 @@
           ]
         }
       },
+      "layout": {
+        "display": "grid",
+        "columns": [
+          {
+            "px": 254
+          }
+        ],
+        "gap": {
+          "row": 2,
+          "column": 2
+        },
+        "flow": "row"
+      },
+      "literals": {
+        "width": "288px"
+      },
       "declared": {
         "border-bottom-style": "solid",
         "border-left-style": "solid",
@@ -105,18 +118,20 @@
       },
       "tokens": {
         "background-color": "{imported.alert.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-e5e5e5}",
         "border-bottom-left-radius": "{imported.shared.size-10}",
         "border-bottom-right-radius": "{imported.shared.size-10}",
         "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-e5e5e5}",
         "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-e5e5e5}",
         "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-e5e5e5}",
         "border-top-left-radius": "{imported.shared.size-10}",
         "border-top-right-radius": "{imported.shared.size-10}",
         "border-top-width": "{imported.shared.size-1}",
         "bottom": "{imported.shared.size-0}",
-        "column-gap": "{imported.alert.root.column-gap}",
         "font-size": "{imported.shared.size-14}",
-        "grid-template-columns": "{imported.alert.root.grid-template-columns}",
         "left": "{imported.shared.size-0}",
         "line-height": "{imported.shared.size-20}",
         "padding-bottom": "{imported.alert.root.padding-bottom}",
@@ -124,7 +139,6 @@
         "padding-right": "{imported.alert.root.padding-right}",
         "padding-top": "{imported.alert.root.padding-top}",
         "right": "{imported.shared.size-0}",
-        "row-gap": "{imported.alert.root.row-gap}",
         "top": "{imported.shared.size-0}"
       },
       "tokensByProp": [

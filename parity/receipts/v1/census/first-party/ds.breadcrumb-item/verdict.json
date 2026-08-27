@@ -1,0 +1,37 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "link text 'Page' has no underline on canvas; ref renders it underlined (link affordance dropped)."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23506",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.breadcrumb-item.dump.json",
+  "matched": 12,
+  "diverged": [
+   "prop hasSeparator \u2014 missing from proposal",
+   "prop href \u2014 missing from proposal",
+   "prop separator \u2014 proposal has a prop the contract does not",
+   "part root/separatorIcon/Vector \u2014 proposal has a part the contract does not",
+   "part root/separatorIcon visibleWhen \u2014 {\"prop\":\"hasSeparator\"} vs {\"prop\":\"separator\"}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop label required` \u2014 requiredness is not drawn on the canvas",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root/link element` \u2014 host element (\"a\") is not drawn on the canvas",
+   "`part root/link attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`text root/link font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root/separatorIcon color` \u2014 {color.text.secondary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`BreadcrumbItem:root/separatorIcon/Vector` strokeWeight = `0.9000000357627869` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

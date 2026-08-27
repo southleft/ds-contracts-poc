@@ -3,7 +3,7 @@
   "name": "Slider",
   "library": "astryx",
   "contractPath": "examples/astryx/contracts/slider.contract.json",
-  "contractVersion": "0.4.0",
+  "contractVersion": "0.3.0",
   "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
   "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
   "platform": "darwin/arm64",
@@ -58,6 +58,8 @@
       "slider-track",
       "part-1-0-1",
       "slider-thumb-2",
+      "part-1-0-2",
+      "slider-thumb",
       "tooltip",
       "label-2",
       "label-3"
@@ -69,25 +71,71 @@
       }
     ],
     "tokenRefs": [
-      "color-accent",
       "color-on-light",
+      "imported.shared.color-262626",
       "imported.shared.num-1",
       "imported.shared.size-0",
       "imported.shared.size-12",
       "imported.shared.size-14",
+      "imported.shared.size-20",
       "imported.shared.size-20-0004",
       "imported.shared.size-4",
       "imported.shared.size-8",
+      "imported.shared.size-9999",
       "imported.slider.label-2.color",
       "imported.slider.label-2.font-weight",
       "imported.slider.label-2.max-width",
-      "imported.slider.label-3.color",
       "imported.slider.label-3.flex-shrink",
       "imported.slider.label-3.font-weight",
       "imported.slider.label-3.line-height",
       "imported.slider.label.color",
       "imported.slider.label.font-weight",
+      "imported.slider.part-1-0-1.bottom.horizontal",
+      "imported.slider.part-1-0-1.bottom.vertical",
+      "imported.slider.part-1-0-1.height.horizontal",
+      "imported.slider.part-1-0-1.height.vertical",
+      "imported.slider.part-1-0-1.top.horizontal",
+      "imported.slider.part-1-0-1.top.vertical",
+      "imported.slider.part-1-0-1.translate-x.horizontal",
+      "imported.slider.part-1-0-1.translate-x.vertical",
+      "imported.slider.part-1-0-1.translate-y.horizontal",
+      "imported.slider.part-1-0-1.translate-y.vertical",
+      "imported.slider.part-1-0.height.horizontal",
+      "imported.slider.part-1-0.height.vertical",
+      "imported.slider.part-1-0.width.none",
+      "imported.slider.part-1-0.width.text",
+      "imported.slider.part-1-0.width.tooltip",
+      "imported.slider.root.width",
+      "imported.slider.slider-thumb-2.bottom.horizontal",
+      "imported.slider.slider-thumb-2.bottom.vertical",
+      "imported.slider.slider-thumb-2.top.horizontal",
+      "imported.slider.slider-thumb-2.top.vertical",
+      "imported.slider.slider-thumb-2.translate-x",
+      "imported.slider.slider-thumb-2.translate-y.horizontal",
+      "imported.slider.slider-thumb-2.translate-y.vertical",
+      "imported.slider.slider-thumb.bottom.horizontal",
+      "imported.slider.slider-thumb.bottom.vertical",
+      "imported.slider.slider-thumb.left.horizontal",
+      "imported.slider.slider-thumb.left.vertical",
+      "imported.slider.slider-thumb.right.horizontal",
+      "imported.slider.slider-thumb.right.vertical",
+      "imported.slider.slider-thumb.top.horizontal",
+      "imported.slider.slider-thumb.top.vertical",
+      "imported.slider.slider-thumb.translate-x",
+      "imported.slider.slider-thumb.translate-y.horizontal",
+      "imported.slider.slider-thumb.translate-y.vertical",
       "imported.slider.slider-track.background-color",
+      "imported.slider.slider-track.bottom.horizontal",
+      "imported.slider.slider-track.bottom.vertical",
+      "imported.slider.slider-track.height.horizontal",
+      "imported.slider.slider-track.height.vertical",
+      "imported.slider.slider-track.top.horizontal",
+      "imported.slider.slider-track.top.vertical",
+      "imported.slider.slider-track.translate-x.horizontal",
+      "imported.slider.slider-track.translate-x.vertical",
+      "imported.slider.slider-track.translate-y.horizontal",
+      "imported.slider.slider-track.translate-y.vertical",
+      "imported.slider.slider.width",
       "imported.slider.tooltip.background-color",
       "imported.slider.tooltip.color",
       "imported.slider.tooltip.margin-bottom.horizontal",
@@ -98,7 +146,6 @@
       "imported.slider.tooltip.margin-right.vertical",
       "imported.slider.tooltip.margin-top.horizontal",
       "imported.slider.tooltip.margin-top.vertical",
-      "radius-full",
       "spacing-1"
     ],
     "icons": [],
@@ -119,7 +166,7 @@
       "png": "code-orientation-horizontal__value-display-tooltip.png",
       "contentBox": {
         "width": 240,
-        "height": 52
+        "height": 54
       }
     },
     {
@@ -136,7 +183,7 @@
       "png": "code-orientation-horizontal__value-display-text.png",
       "contentBox": {
         "width": 240,
-        "height": 45
+        "height": 54.5
       }
     },
     {
@@ -153,7 +200,7 @@
       "png": "code-orientation-horizontal__value-display-none.png",
       "contentBox": {
         "width": 240,
-        "height": 44
+        "height": 54
       }
     },
     {
@@ -169,7 +216,7 @@
       "status": "rendered",
       "png": "code-orientation-vertical__value-display-tooltip.png",
       "contentBox": {
-        "width": 92,
+        "width": 240,
         "height": 184
       }
     }

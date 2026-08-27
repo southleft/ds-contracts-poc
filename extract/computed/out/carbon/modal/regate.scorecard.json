@@ -3,6 +3,7 @@
   "component": "Modal",
   "config": "extract/computed/configs/carbon.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -573,13 +574,14 @@
     "component": "Modal",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 5,
     "interactions": 4,
     "computed": {
       "cellsCompared": 2220,
-      "cellsEqual": 2060,
-      "pctEqual": 92.7927927927928,
+      "cellsEqual": 2070,
+      "pctEqual": 93.24324324324324,
       "rowsFullyEqual": 0,
       "rows": 20
     },
@@ -605,7 +607,7 @@
       "mintedLeavesUnfolded": 75,
       "baseBindings": 196,
       "stateBindings": 0,
-      "codeOnlyChannels": 50,
+      "codeOnlyChannels": 48,
       "overflowBindings": 0,
       "folds": 183
     },
@@ -614,35 +616,35 @@
         "key": "unset__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "xs__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "sm__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "md__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
         "key": "lg__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 32,
+        "channelsMismatched": 30,
         "unscorable": "no-original"
       },
       {
@@ -742,10 +744,10 @@
       "code-only: modal-container.display — declared-channel value outside the bounded grammar — named residue (v15)",
       "code-only: modal-container.grid-template-rows — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: modal-container.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: modal-header.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: modal-header.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: modal-header.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: modal-header.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: modal-header.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: modal-header.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: modal-header.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: modal-header.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: modal-header.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
@@ -761,22 +763,20 @@
       "code-only: label-5.--cds-field — CSS custom property, not a styled channel — `--cds-field` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#ffffff`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-5.--cds-layer — CSS custom property, not a styled channel — `--cds-layer` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#ffffff`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
       "code-only: label-5.--cds-layer-background — CSS custom property, not a styled channel — `--cds-layer-background` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#f4f4f4`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
-      "code-only: label-5.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-5.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-5.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: label-5.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: label-5.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: label-5.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: btn-set.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: btn-set.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: btn-set.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
-      "code-only: btn-set.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — computed grid-template-rows \"71.9844px 75.9844px 0px 64px\" yields no carriageable track list; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: btn-set.grid-column-end — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: btn-set.grid-column-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: btn-set.grid-row-end — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
+      "code-only: btn-set.grid-row-start — grid placement not carried: parent modal-container declined structured grid promotion — child \"modal-header\" grid-column \"1 / -1\": grid-negative-line: negative line indexes are refused — the anchor API has no negative-index concept (gridRow/ColumnAnchorIndex are 0-based cells, P3); proposers lower RESOLVABLE negatives to absolute indexes (LOWERED) and refuse unresolvable ones; an anchor/span of a grid the contract does not carry is a dead fact and is refused, not minted",
       "code-only: btn-set.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-6.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-6.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-7.align-items — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-7.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -790,14 +790,14 @@
     },
     "shippedMinted": {
       "path": "examples/carbon/tokens/carbon-minted.dtcg.json",
-      "leavesAdded": 801,
+      "leavesAdded": 804,
       "divergent": []
     },
     "rows": [
       {
         "key": "unset__default",
         "channelsCompared": 444,
-        "channelsEqual": 412,
+        "channelsEqual": 414,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -942,12 +942,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -963,12 +957,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -1030,7 +1018,7 @@
       {
         "key": "xs__default",
         "channelsCompared": 444,
-        "channelsEqual": 412,
+        "channelsEqual": 414,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1175,12 +1163,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -1196,12 +1178,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -1263,7 +1239,7 @@
       {
         "key": "sm__default",
         "channelsCompared": 444,
-        "channelsEqual": 412,
+        "channelsEqual": 414,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1408,12 +1384,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -1429,12 +1399,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -1496,7 +1460,7 @@
       {
         "key": "md__default",
         "channelsCompared": 444,
-        "channelsEqual": 412,
+        "channelsEqual": 414,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1641,12 +1605,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -1662,12 +1620,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",
@@ -1729,7 +1681,7 @@
       {
         "key": "lg__default",
         "channelsCompared": 444,
-        "channelsEqual": 412,
+        "channelsEqual": 414,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1874,12 +1826,6 @@
           },
           {
             "part": "label-6",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
-          },
-          {
-            "part": "label-6",
             "channel": "flex-basis",
             "ours": "auto",
             "theirs": "50%"
@@ -1895,12 +1841,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "label-7",
-            "channel": "align-items",
-            "ours": "normal",
-            "theirs": "baseline"
           },
           {
             "part": "label-7",

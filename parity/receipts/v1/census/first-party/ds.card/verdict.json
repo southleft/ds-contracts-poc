@@ -1,0 +1,38 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "card body slot is empty on canvas \u2014 only the avatar + 'Card title' header row renders (640x116); ref (718x246) shows the body line 'The quick brown fox jumps over the lazy dog.' below the header. Child/slot content not minted."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23528",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.card.dump.json",
+  "matched": 22,
+  "diverged": [
+   "part root/body \u2014 missing from proposal",
+   "part root/footer \u2014 missing from proposal",
+   "part root/Body \u2014 proposal has a part the contract does not",
+   "part root/Actions \u2014 proposal has a part the contract does not",
+   "part root/header/avatar component id \u2014 ds.avatar vs ds.avatar-ds-avatar",
+   "part root/header/avatar component props \u2014 {\"size\":\"sm\"} vs {\"initials\":\"AB\",\"size\":\"small\"}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop title required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/header element` \u2014 host element (\"header\") is not drawn on the canvas",
+   "`part root/header/title element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/header/title font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root/body color` \u2014 {color.surface.foreground} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/body font-family` \u2014 {font.control.family} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/body font-size` \u2014 {font.control.size.sm} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

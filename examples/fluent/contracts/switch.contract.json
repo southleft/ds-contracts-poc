@@ -67,7 +67,19 @@
     "root": {
       "layout": {
         "display": "flex",
+        "direction": "row",
         "align": "start"
+      },
+      "layoutByProp": {
+        "prop": "labelPosition",
+        "map": {
+          "above": {
+            "direction": "column-reverse"
+          },
+          "before": {
+            "direction": "row-reverse"
+          }
+        }
       },
       "parts": {
         "input": {

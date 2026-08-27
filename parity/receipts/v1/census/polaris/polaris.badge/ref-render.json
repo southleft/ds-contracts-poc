@@ -1,0 +1,187 @@
+{
+  "id": "polaris.badge",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "Badge",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "tone-info__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-info__progress-none.png",
+      "props": {
+        "tone": "info",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-info__progress-incomplete",
+      "status": "rendered",
+      "png": "ref-tone-info__progress-incomplete.png",
+      "props": {
+        "tone": "info",
+        "progress": "incomplete"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-info__progress-partiallycomplete",
+      "status": "rendered",
+      "png": "ref-tone-info__progress-partiallycomplete.png",
+      "props": {
+        "tone": "info",
+        "progress": "partiallyComplete"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-info__progress-complete",
+      "status": "rendered",
+      "png": "ref-tone-info__progress-complete.png",
+      "props": {
+        "tone": "info",
+        "progress": "complete"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-success__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-success__progress-none.png",
+      "props": {
+        "tone": "success",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-warning__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-warning__progress-none.png",
+      "props": {
+        "tone": "warning",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-critical__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-critical__progress-none.png",
+      "props": {
+        "tone": "critical",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-attention__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-attention__progress-none.png",
+      "props": {
+        "tone": "attention",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-new__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-new__progress-none.png",
+      "props": {
+        "tone": "new",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-magic__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-magic__progress-none.png",
+      "props": {
+        "tone": "magic",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-info-strong__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-info-strong__progress-none.png",
+      "props": {
+        "tone": "info-strong",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-success-strong__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-success-strong__progress-none.png",
+      "props": {
+        "tone": "success-strong",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-warning-strong__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-warning-strong__progress-none.png",
+      "props": {
+        "tone": "warning-strong",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-critical-strong__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-critical-strong__progress-none.png",
+      "props": {
+        "tone": "critical-strong",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-attention-strong__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-attention-strong__progress-none.png",
+      "props": {
+        "tone": "attention-strong",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-read-only__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-read-only__progress-none.png",
+      "props": {
+        "tone": "read-only",
+        "progress": "none"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "tone-enabled__progress-none",
+      "status": "rendered",
+      "png": "ref-tone-enabled__progress-none.png",
+      "props": {
+        "tone": "enabled",
+        "progress": "none"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 17,
+  "unmappable": 0
+}

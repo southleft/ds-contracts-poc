@@ -3,6 +3,7 @@
   "component": "Autocomplete",
   "config": "extract/computed/configs/mui.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -513,13 +514,14 @@
     "component": "Autocomplete",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 2,
     "interactions": 4,
     "computed": {
       "cellsCompared": 2632,
-      "cellsEqual": 2508,
-      "pctEqual": 95.2887537993921,
+      "cellsEqual": 2516,
+      "pctEqual": 95.59270516717325,
       "rowsFullyEqual": 0,
       "rows": 8
     },
@@ -545,7 +547,7 @@
       "mintedLeavesUnfolded": 185,
       "baseBindings": 185,
       "stateBindings": 26,
-      "codeOnlyChannels": 31,
+      "codeOnlyChannels": 30,
       "overflowBindings": 26,
       "folds": 204
     },
@@ -554,66 +556,62 @@
         "key": "small__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 19,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "small__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 19,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "medium__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 19,
+        "channelsMismatched": 18,
         "unscorable": "no-original"
       },
       {
         "key": "small__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "medium__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "medium__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 15,
+        "channelsMismatched": 14,
         "unscorable": "no-original"
       },
       {
         "key": "small__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 11,
+        "channelsMismatched": 10,
         "unscorable": "no-original"
       },
       {
         "key": "medium__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 11,
+        "channelsMismatched": 10,
         "unscorable": "no-original"
       }
     ],
     "topMismatchedChannels": [
       [
         "formcontrol-fullwidth.vertical-align",
-        8
-      ],
-      [
-        "autocomplete-inputroot.flex-wrap",
         8
       ],
       [
@@ -667,6 +665,10 @@
       [
         "outlinedinput-notchedoutline.border-top-color",
         6
+      ],
+      [
+        "outlinedinput-notchedoutline.border-bottom-width",
+        3
       ]
     ],
     "namedLosses": [
@@ -701,7 +703,6 @@
       "code-only: root.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: formcontrol-fullwidth.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: formcontrol-fullwidth.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: autocomplete-inputroot.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-inputroot.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: autocomplete-tag.max-width — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
       "code-only: autocomplete-tag.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -743,7 +744,7 @@
       {
         "key": "small__default",
         "channelsCompared": 329,
-        "channelsEqual": 318,
+        "channelsEqual": 319,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -753,12 +754,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",
@@ -820,7 +815,7 @@
       {
         "key": "small__hover",
         "channelsCompared": 329,
-        "channelsEqual": 314,
+        "channelsEqual": 315,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -830,12 +825,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",
@@ -921,7 +910,7 @@
       {
         "key": "small__focus-visible",
         "channelsCompared": 329,
-        "channelsEqual": 310,
+        "channelsEqual": 311,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -931,12 +920,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",
@@ -1046,7 +1029,7 @@
       {
         "key": "small__active",
         "channelsCompared": 329,
-        "channelsEqual": 310,
+        "channelsEqual": 311,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1056,12 +1039,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",
@@ -1171,7 +1148,7 @@
       {
         "key": "medium__default",
         "channelsCompared": 329,
-        "channelsEqual": 318,
+        "channelsEqual": 319,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1181,12 +1158,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",
@@ -1248,7 +1219,7 @@
       {
         "key": "medium__hover",
         "channelsCompared": 329,
-        "channelsEqual": 314,
+        "channelsEqual": 315,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1258,12 +1229,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",
@@ -1349,7 +1314,7 @@
       {
         "key": "medium__focus-visible",
         "channelsCompared": 329,
-        "channelsEqual": 310,
+        "channelsEqual": 311,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1359,12 +1324,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",
@@ -1474,7 +1433,7 @@
       {
         "key": "medium__active",
         "channelsCompared": 329,
-        "channelsEqual": 314,
+        "channelsEqual": 315,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1484,12 +1443,6 @@
             "channel": "vertical-align",
             "ours": "baseline",
             "theirs": "top"
-          },
-          {
-            "part": "autocomplete-inputroot",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "autocomplete-tag",

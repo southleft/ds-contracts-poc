@@ -85,7 +85,44 @@
     "contentSlots": [],
     "tokenRefs": [
       "imported.checkbox.backdrop.background-color-state-disabled",
+      "imported.checkbox.backdrop.background-color.checked",
+      "imported.checkbox.backdrop.background-color.indeterminate",
+      "imported.checkbox.backdrop.background-color.unchecked",
+      "imported.checkbox.backdrop.box-shadow.checked",
+      "imported.checkbox.backdrop.box-shadow.indeterminate",
+      "imported.checkbox.backdrop.box-shadow.unchecked",
       "imported.checkbox.choice-control.margin-right",
+      "imported.checkbox.choice-label.width",
+      "imported.checkbox.icon-3.bottom.checked",
+      "imported.checkbox.icon-3.bottom.indeterminate",
+      "imported.checkbox.icon-3.bottom.unchecked",
+      "imported.checkbox.icon-3.height.checked",
+      "imported.checkbox.icon-3.height.indeterminate",
+      "imported.checkbox.icon-3.height.unchecked",
+      "imported.checkbox.icon-3.left.checked",
+      "imported.checkbox.icon-3.left.indeterminate",
+      "imported.checkbox.icon-3.left.unchecked",
+      "imported.checkbox.icon-3.margin-bottom.checked",
+      "imported.checkbox.icon-3.margin-bottom.indeterminate",
+      "imported.checkbox.icon-3.margin-bottom.unchecked",
+      "imported.checkbox.icon-3.margin-left.checked",
+      "imported.checkbox.icon-3.margin-left.indeterminate",
+      "imported.checkbox.icon-3.margin-left.unchecked",
+      "imported.checkbox.icon-3.margin-right.checked",
+      "imported.checkbox.icon-3.margin-right.indeterminate",
+      "imported.checkbox.icon-3.margin-right.unchecked",
+      "imported.checkbox.icon-3.margin-top.checked",
+      "imported.checkbox.icon-3.margin-top.indeterminate",
+      "imported.checkbox.icon-3.margin-top.unchecked",
+      "imported.checkbox.icon-3.right.checked",
+      "imported.checkbox.icon-3.right.indeterminate",
+      "imported.checkbox.icon-3.right.unchecked",
+      "imported.checkbox.icon-3.top.checked",
+      "imported.checkbox.icon-3.top.indeterminate",
+      "imported.checkbox.icon-3.top.unchecked",
+      "imported.checkbox.icon-3.width.checked",
+      "imported.checkbox.icon-3.width.indeterminate",
+      "imported.checkbox.icon-3.width.unchecked",
       "imported.checkbox.icon-6.color",
       "imported.checkbox.icon-6.fill",
       "imported.checkbox.input.color",
@@ -97,6 +134,7 @@
       "imported.checkbox.label.font-size",
       "imported.checkbox.label.font-weight",
       "imported.checkbox.root.height",
+      "imported.checkbox.root.width",
       "imported.shared.color-303030",
       "imported.shared.color-b5b5b5",
       "imported.shared.num-0",
@@ -108,6 +146,7 @@
       "imported.shared.size-20",
       "imported.shared.size-4",
       "name",
+      "p.border-width-0",
       "p.color-input-border-hover",
       "value"
     ],
@@ -130,7 +169,7 @@
       "status": "rendered",
       "png": "code-checked-unchecked.png",
       "contentBox": {
-        "width": 149.41,
+        "width": 136.36,
         "height": 28
       }
     },
@@ -146,8 +185,8 @@
       "status": "rendered",
       "png": "code-checked-checked.png",
       "contentBox": {
-        "width": 149.41,
-        "height": 37
+        "width": 136.36,
+        "height": 28
       }
     },
     {
@@ -162,8 +201,8 @@
       "status": "rendered",
       "png": "code-checked-indeterminate.png",
       "contentBox": {
-        "width": 149.41,
-        "height": 45
+        "width": 137.36,
+        "height": 28
       }
     }
   ],

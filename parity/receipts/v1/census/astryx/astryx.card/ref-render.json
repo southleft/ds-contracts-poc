@@ -1,0 +1,134 @@
+{
+  "id": "astryx.card",
+  "library": "astryx",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "recipe": "examples/astryx sandbox (.astryx-sandbox; examples/astryx/README) mounted per extract/computed/configs/astryx.json"
+  },
+  "configPath": "extract/computed/configs/astryx.json",
+  "component": "Card",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-default",
+      "status": "rendered",
+      "png": "ref-variant-default.png",
+      "props": {
+        "variant": "default"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-transparent",
+      "status": "rendered",
+      "png": "ref-variant-transparent.png",
+      "props": {
+        "variant": "transparent"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-muted",
+      "status": "rendered",
+      "png": "ref-variant-muted.png",
+      "props": {
+        "variant": "muted"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-blue",
+      "status": "rendered",
+      "png": "ref-variant-blue.png",
+      "props": {
+        "variant": "blue"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-cyan",
+      "status": "rendered",
+      "png": "ref-variant-cyan.png",
+      "props": {
+        "variant": "cyan"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-gray",
+      "status": "rendered",
+      "png": "ref-variant-gray.png",
+      "props": {
+        "variant": "gray"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-green",
+      "status": "rendered",
+      "png": "ref-variant-green.png",
+      "props": {
+        "variant": "green"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-orange",
+      "status": "rendered",
+      "png": "ref-variant-orange.png",
+      "props": {
+        "variant": "orange"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-pink",
+      "status": "rendered",
+      "png": "ref-variant-pink.png",
+      "props": {
+        "variant": "pink"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-purple",
+      "status": "rendered",
+      "png": "ref-variant-purple.png",
+      "props": {
+        "variant": "purple"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-red",
+      "status": "rendered",
+      "png": "ref-variant-red.png",
+      "props": {
+        "variant": "red"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-teal",
+      "status": "rendered",
+      "png": "ref-variant-teal.png",
+      "props": {
+        "variant": "teal"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-yellow",
+      "status": "rendered",
+      "png": "ref-variant-yellow.png",
+      "props": {
+        "variant": "yellow"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 13,
+  "unmappable": 0
+}

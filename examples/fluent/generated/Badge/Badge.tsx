@@ -2,12 +2,16 @@
  * GENERATED FILE — DO NOT EDIT.
  * Source of truth: contracts/badge.contract.json (fluent.badge v0.2.0)
  * Regenerate with: npm run generate
+ *
+ * DOM attrs OMITTED from HTMLAttributes<HTMLDivElement> — the contract's own props claim these
+ * names, so the HTML attribute of the same name cannot be passed through ...rest:
+ *   color
  */
 import { forwardRef } from 'react';
 import type { HTMLAttributes } from 'react';
 import styles from './Badge.module.css';
 
-export interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
+export interface BadgeProps extends Omit<HTMLAttributes<HTMLDivElement>, 'color'> {
   appearance?: 'filled' | 'ghost' | 'outline' | 'tint';
   color?:
     'brand' | 'danger' | 'important' | 'informative' | 'severe' | 'subtle' | 'success' | 'warning';

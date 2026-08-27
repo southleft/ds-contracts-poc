@@ -3,6 +3,7 @@
   "component": "Checkbox",
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -439,13 +440,15 @@
     "component": "Checkbox",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 6,
     "interactions": 4,
     "computed": {
       "cellsCompared": 5344,
-      "cellsEqual": 4360,
-      "pctEqual": 81.58682634730539,
+      "cellsEqual": 4440,
+      "pctEqual": 83.08383233532935,
       "rowsFullyEqual": 0,
       "rows": 24
     },
@@ -467,12 +470,12 @@
       "boundConfirmed": 0,
       "boundCells": 12,
       "contradictions": 12,
-      "mintedLeaves": 65,
-      "mintedLeavesUnfolded": 58,
+      "mintedLeaves": 95,
+      "mintedLeavesUnfolded": 88,
       "baseBindings": 125,
       "stateBindings": 38,
       "codeOnlyChannels": 34,
-      "overflowBindings": 44,
+      "overflowBindings": 34,
       "folds": 145
     },
     "worstRows": [
@@ -480,56 +483,56 @@
         "key": "indeterminate.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 61,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "indeterminate.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 61,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "indeterminate.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 61,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
         "key": "indeterminate.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 61,
+        "channelsMismatched": 57,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.disabled__default",
+        "key": "unchecked.disabled__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 58,
+        "channelsMismatched": 52,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.disabled__hover",
+        "key": "unchecked.disabled__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 58,
+        "channelsMismatched": 52,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.disabled__focus-visible",
+        "key": "unchecked.disabled__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 58,
+        "channelsMismatched": 52,
         "unscorable": "no-original"
       },
       {
-        "key": "checked.disabled__active",
+        "key": "unchecked.disabled__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 58,
+        "channelsMismatched": 52,
         "unscorable": "no-original"
       }
     ],
@@ -596,16 +599,6 @@
       ]
     ],
     "namedLosses": [
-      "overflow: icon-3.bottom — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.height — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.left — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.margin-bottom — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.margin-left — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.margin-right — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.margin-top — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.right — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.top — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
-      "overflow: icon-3.width — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
       "overflow: backdrop.background-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
       "overflow: backdrop.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
@@ -681,7 +674,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1245,
+      "leavesAdded": 1255,
       "divergent": [
         {
           "token": "imported.checkbox.backdrop.background-color-state-active.checked",
@@ -717,6 +710,24 @@
           "token": "imported.checkbox.backdrop.background-color-state-hover.indeterminate",
           "fresh": "#303030",
           "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.backdrop.background-color.checked",
+          "fresh": "#303030",
+          "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.backdrop.background-color.indeterminate",
+          "fresh": "#303030",
+          "shipped": "{p.color-bg-fill-brand-selected}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.checkbox.backdrop.background-color.unchecked",
+          "fresh": "#ffffff",
+          "shipped": "{p.color-bg-surface}",
           "resolvedEqual": true
         },
         {
@@ -2589,7 +2600,7 @@
       {
         "key": "checked.enabled__default",
         "channelsCompared": 224,
-        "channelsEqual": 201,
+        "channelsEqual": 207,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2662,36 +2673,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -2701,12 +2682,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -2738,7 +2713,7 @@
       {
         "key": "checked.enabled__hover",
         "channelsCompared": 224,
-        "channelsEqual": 197,
+        "channelsEqual": 203,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2835,36 +2810,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -2874,12 +2819,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -2911,7 +2850,7 @@
       {
         "key": "checked.enabled__focus-visible",
         "channelsCompared": 224,
-        "channelsEqual": 200,
+        "channelsEqual": 206,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2990,36 +2929,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -3029,12 +2938,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -3066,7 +2969,7 @@
       {
         "key": "checked.enabled__active",
         "channelsCompared": 224,
-        "channelsEqual": 197,
+        "channelsEqual": 203,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3163,36 +3066,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -3202,12 +3075,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -3239,7 +3106,7 @@
       {
         "key": "checked.disabled__default",
         "channelsCompared": 224,
-        "channelsEqual": 166,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3378,36 +3245,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -3417,12 +3254,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -3598,7 +3429,7 @@
       {
         "key": "checked.disabled__hover",
         "channelsCompared": 224,
-        "channelsEqual": 166,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3737,36 +3568,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -3776,12 +3577,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -3957,7 +3752,7 @@
       {
         "key": "checked.disabled__focus-visible",
         "channelsCompared": 224,
-        "channelsEqual": 166,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4096,36 +3891,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -4135,12 +3900,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -4316,7 +4075,7 @@
       {
         "key": "checked.disabled__active",
         "channelsCompared": 224,
-        "channelsEqual": 166,
+        "channelsEqual": 172,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4455,36 +4214,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "margin-bottom",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-left",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-right",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "margin-top",
-            "ours": "0px",
-            "theirs": "2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "18px",
-            "theirs": "0px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -4494,12 +4223,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "0px"
           },
           {
             "part": "choice__label",
@@ -4675,7 +4398,7 @@
       {
         "key": "indeterminate.enabled__default",
         "channelsCompared": 224,
-        "channelsEqual": 198,
+        "channelsEqual": 202,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4748,24 +4471,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -4775,12 +4480,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -4842,7 +4541,7 @@
       {
         "key": "indeterminate.enabled__hover",
         "channelsCompared": 224,
-        "channelsEqual": 194,
+        "channelsEqual": 198,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4939,24 +4638,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -4966,12 +4647,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -5033,7 +4708,7 @@
       {
         "key": "indeterminate.enabled__focus-visible",
         "channelsCompared": 224,
-        "channelsEqual": 197,
+        "channelsEqual": 201,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5112,24 +4787,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -5139,12 +4796,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -5206,7 +4857,7 @@
       {
         "key": "indeterminate.enabled__active",
         "channelsCompared": 224,
-        "channelsEqual": 194,
+        "channelsEqual": 198,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5303,24 +4954,6 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -5330,12 +4963,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -5397,7 +5024,7 @@
       {
         "key": "indeterminate.disabled__default",
         "channelsCompared": 224,
-        "channelsEqual": 163,
+        "channelsEqual": 167,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5530,27 +5157,9 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -5563,12 +5172,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -5774,7 +5377,7 @@
       {
         "key": "indeterminate.disabled__hover",
         "channelsCompared": 224,
-        "channelsEqual": 163,
+        "channelsEqual": 167,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5907,27 +5510,9 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -5940,12 +5525,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -6151,7 +5730,7 @@
       {
         "key": "indeterminate.disabled__focus-visible",
         "channelsCompared": 224,
-        "channelsEqual": 163,
+        "channelsEqual": 167,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6284,27 +5863,9 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -6317,12 +5878,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -6528,7 +6083,7 @@
       {
         "key": "indeterminate.disabled__active",
         "channelsCompared": 224,
-        "channelsEqual": 163,
+        "channelsEqual": 167,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6661,27 +6216,9 @@
           },
           {
             "part": "icon-3",
-            "channel": "bottom",
-            "ours": "-22px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
             "channel": "cursor",
             "ours": "pointer",
             "theirs": "default"
-          },
-          {
-            "part": "icon-3",
-            "channel": "left",
-            "ours": "0px",
-            "theirs": "-2px"
-          },
-          {
-            "part": "icon-3",
-            "channel": "right",
-            "ours": "-4px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",
@@ -6694,12 +6231,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "icon-3",
-            "channel": "top",
-            "ours": "18px",
-            "theirs": "-2px"
           },
           {
             "part": "icon-3",

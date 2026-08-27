@@ -1,10 +1,10 @@
 {
   "_marker": "REQUIRED-FACTS BASELINE — the archetype required-facts referee (@ds-contracts/core required-facts.ts) run over every committed contract in every corpus library. Each row pins the REQUIRED facts that contract does NOT carry today, by fact id. A missing fact this file does not pin is a NEW red and fails the gate; a pinned red that stops reproducing must be re-recorded with its cause named. NOT a list of acceptable defects — it is the burn-down queue, written up in parity/receipts/v1/REQUIRED-FACTS.md. Re-record deliberately with `npm run required-facts:check -- --write` and say what moved. Verified in the fast lane by `npm run required-facts:check`.",
-  "recordedAt": "2026-08-25",
+  "recordedAt": "2026-08-26",
   "totals": {
     "contracts": 172,
-    "red": 22,
-    "missingFacts": 31,
+    "red": 20,
+    "missingFacts": 29,
     "declaredArchetype": 134,
     "undeclaredArchetype": 38
   },
@@ -610,9 +610,7 @@
       "id": "astryx.checkbox-input",
       "archetype": "checkbox / radio",
       "source": "declared",
-      "missing": [
-        "checkbox/glyph"
-      ],
+      "missing": [],
       "cause": "(ii) extraction loss — Phase-A code extraction landed only the resting `control` span (w/h/border/bg); there is no checked prop, no state and no icon part, so the check mark was never extracted."
     },
     {
@@ -775,9 +773,7 @@
       "id": "fluent.card",
       "archetype": "card",
       "source": "declared",
-      "missing": [
-        "card/interior-stack"
-      ],
+      "missing": [],
       "cause": "(ii) lowering gap — root layout is {display:\"flex\"} with no direction, and NO fluent contract in the library carries a `direction` key at all: the Griffel lowering never emitted flex-direction despite the orientation enum. Flex with no direction IS a row, so this mints as one."
     },
     {

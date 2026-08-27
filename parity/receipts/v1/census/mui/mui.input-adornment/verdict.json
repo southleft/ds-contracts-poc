@@ -1,0 +1,27 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17206",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.input-adornment.dump.json",
+  "matched": 6,
+  "diverged": [
+   "part root/label \u2014 missing from proposal",
+   "part root max-height \u2014 {imported.input-adornment.root.max-height} missing from proposal",
+   "part root line-height \u2014 proposal has {imported.input-adornment.label.line-height}, contract has nothing"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.input-adornment.root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label color` \u2014 {imported.input-adornment.label.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-size` \u2014 {imported.input-adornment.label.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-weight` \u2014 {imported.input-adornment.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

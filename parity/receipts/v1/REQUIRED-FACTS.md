@@ -31,14 +31,14 @@ either way.
 | first-party | 8 / 56 | 14 | 31 | 25 |
 | altitude | 0 / 8 | 0 | 4 | 4 |
 | antd | 1 / 12 | 1 | 12 | 0 |
-| astryx | 3 / 13 | 4 | 12 | 1 |
+| astryx | 2 / 13 | 3 | 12 | 1 |
 | carbon | 1 / 10 | 2 | 10 | 0 |
-| fluent | 2 / 11 | 2 | 11 | 0 |
+| fluent | 1 / 11 | 1 | 11 | 0 |
 | mui | 6 / 31 | 7 | 28 | 3 |
 | polaris | 0 / 12 | 0 | 10 | 2 |
 | shadcn | 1 / 11 | 1 | 11 | 0 |
 | tailwind | 0 / 8 | 0 | 5 | 3 |
-| **total** | **22 / 172** | **31** | **134** | **38** |
+| **total** | **20 / 172** | **29** | **134** | **38** |
 
 Two libraries are clean on every archetype they carry: **altitude (0/8)** and
 **tailwind (0/8)**. **polaris (0/12)** joined them in this round — its avatar
@@ -102,7 +102,31 @@ Every class the owner rejected by eye reproduces here as a named absence:
 `checkbox/glyph` (astryx — "checked" as a filled rectangle),
 `menu/column-stack` ×2 (astryx, mui).
 
-## 4. The 22 reds, with the cause of each
+## 4. The 20 reds, with the cause of each
+
+### Closed by the census/stack-to-main merge (22 -> 20)
+
+Two rows this receipt pinned as red are FIXED on the merged tree. The gate
+found them itself (`FIXED — the baseline pins X but the contract now carries
+it`); the baseline was re-recorded with `--write` only after each fix was read
+back out of the contract by hand.
+
+- **astryx/astryx.checkbox-input** — was *(ii) extraction loss*: "Phase-A code
+  extraction landed only the resting `control` span … the check mark was never
+  extracted." The merged contract is the FLOOR-PROMOTED one (v0.1.0 -> v0.3.0,
+  computed-enriched from the headless capture rather than the Phase-A code
+  read), and it carries `part-0/part-0-0/checkbox/icon/icon-sm` and
+  `icon-md`, both with a real `icon`. The glyph exists.
+- **fluent/fluent.card** — was *(ii) lowering gap*: "root layout is
+  {display:\"flex\"} with no direction, and NO fluent contract in the library
+  carries a `direction` key at all." The merged contract's root layout is
+  `{display: "flex", direction: "column"}`. The column is declared.
+
+`fluent/fluent.dialog` below still cites fluent.card's lowering gap as "the
+same" — that citation is now historical: the gap is closed for Card and the
+Dialog's own row is still open on its own evidence (no captured display or
+direction on dialogsurface/dialogbody).
+
 
 Category codes: **(i)** the fact does not exist in the source component — a
 re-capture will not help, it needs a ledgered substitute or the contract is a
@@ -143,17 +167,11 @@ deliberately with the argument written down.
 **astryx/astryx.card** — *card* — missing `card/interior-stack`  
 (i) absent in the source — the anatomy is a single root div with display:block and NO parts; Astryx Card is one padded surface whose header/body/footer are consumer children. THE PILL: this is the reject that started the round.
 
-**astryx/astryx.checkbox-input** — *checkbox / radio* — missing `checkbox/glyph`  
-(ii) extraction loss — Phase-A code extraction landed only the resting `control` span (w/h/border/bg); there is no checked prop, no state and no icon part, so the check mark was never extracted.
-
 **astryx/astryx.dropdown-menu-item** — *menu / dropdown* — missing `menu/column-stack`, `menu/surface`  
 (iii) fragment — its own description calls it "the repeated item of astryx.dropdown-menu", and that sibling's `menu` part carries direction:column and background-color {color-background-surface}.
 
 **carbon/carbon.iconbutton** — *button* — missing `button/row-layout`, `button/surface-ink`  
 (ii) capture loss — the anatomy is rooted at the Tooltip WRAPPER (declared display:block, position:relative); the flex row and the background/border ink sit two levels down on `btn`, and both facts are root-scoped. Re-root the capture at `btn`.
-
-**fluent/fluent.card** — *card* — missing `card/interior-stack`  
-(ii) lowering gap — root layout is {display:"flex"} with no direction, and NO fluent contract in the library carries a `direction` key at all: the Griffel lowering never emitted flex-direction despite the orientation enum. Flex with no direction IS a row, so this mints as one.
 
 **fluent/fluent.dialog** — *modal / dialog* — missing `dialog/panel-stack`  
 (ii) same lowering gap as fluent.card — dialogsurface/dialogbody carry row-gap/column-gap (Griffel's grid) but no captured display or direction, so no part declares the column. THE ONE-ROW DIALOG.

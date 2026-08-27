@@ -1,6 +1,6 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@shadcn-sandbox/ui@0.0.1",
   "browser": "151.0.7922.34",
   "mintedTokens": {
@@ -17,6 +17,10 @@
       },
       "avatar": {
         "root": {
+          "color": {
+            "$value": "#0a0a0a",
+            "$type": "color"
+          },
           "flex-shrink": {
             "$value": "0",
             "$type": "number"
@@ -77,6 +81,20 @@
             "$value": "400",
             "$type": "number"
           },
+          "height": {
+            "default": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "40px",
+              "$type": "dimension"
+            }
+          },
           "line-height": {
             "default": {
               "$value": "20px",
@@ -88,6 +106,20 @@
             },
             "lg": {
               "$value": "20px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "default": {
+              "$value": "32px",
+              "$type": "dimension"
+            },
+            "sm": {
+              "$value": "24px",
+              "$type": "dimension"
+            },
+            "lg": {
+              "$value": "40px",
               "$type": "dimension"
             }
           }
@@ -160,6 +192,11 @@
       },
       {
         "part": "label",
+        "channel": "font-family",
+        "value": "\"Inter Variable\", sans-serif"
+      },
+      {
+        "part": "label",
         "channel": "user-select",
         "value": "none"
       }
@@ -209,13 +246,18 @@
   "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
-    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "text-fill-pinned-geometry-admitted: label.width — the overlay-cluster geometry exclusion is LIFTED for this one axis. The part's own reported box equals its ancestor root's CONTENT box in every enabled default-plane combo (default: label 32px == root content box 32px), and that content box takes 3 distinct values spanning 16px (≥ one em of this part's 14px font): a box that moved WITH a parent that moved is filling it, not measuring its own glyphs. No box on the chain label → root measures the browser viewport (900px) or the capture stage content box (288px) on this axis, and none of them is viewport-refused — the number is the library's, not the harness's.",
+    "text-fill-pinned-geometry-admitted: label.height — the overlay-cluster geometry exclusion is LIFTED for this one axis. The part's own reported box equals its ancestor root's CONTENT box in every enabled default-plane combo (default: label 32px == root content box 32px), and that content box takes 3 distinct values spanning 16px (≥ one em of this part's 14px font): a box that moved WITH a parent that moved is filling it, not measuring its own glyphs. No box on the chain label → root measures the browser viewport (1000px) or the capture stage content box (64px) on this axis, and none of them is viewport-refused — the number is the library's, not the harness's.",
     "absolute-geometry-admitted: root — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "text-part-typography-carried: label — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "token-named-geometry-admitted: root.width — the library's own stylesheet binds it to --spacing (0.25rem) at `.size-8`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)",
+    "token-named-geometry-admitted: root.height — the library's own stylesheet binds it to --spacing (0.25rem) at `.size-8`; a dimension named by a token is a design value, not an environment measurement, so it joins fusion with its name (the absolute-cluster / table / block-root doors are unchanged)",
+    "page-inherited-ink-admitted: root.color = oklch(0.145 0 0) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label — font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "geometry-excluded: label — block-size 32px, inline-size 32px, perspective-origin 16px 16px, transform-origin 16px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 32px, inline-size 32px, perspective-origin 16px 16px, transform-origin 16px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (label); -webkit-text-stroke-color (label)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
@@ -262,6 +304,7 @@
     "layout enriched: label.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = \"Inter Variable\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)"
   ]
 }

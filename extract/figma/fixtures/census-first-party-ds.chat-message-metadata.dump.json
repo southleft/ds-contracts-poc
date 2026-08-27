@@ -1,0 +1,3117 @@
+{
+ "_provenance": {
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "extractedAt": "2026-08-24",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design\u2192contract proposal.",
+  "dumpVersion": "1.32",
+  "sets": [
+   "ChatMessageMetadata"
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "AccordionItem:State=Closed/trigger/chevron/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "AccordionItem:State=Closed/trigger/chevron/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "AccordionItem:State=Open/trigger/chevron/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "AccordionItem:State=Open/trigger/chevron/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Small, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Large, State=Default/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Hover/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Focus Visible/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Primary, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Secondary, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Danger, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Button (ds.button):Variant=Ghost, Size=Medium, State=Disabled/loadingSpinner/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Info, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Success, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Warning, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Card/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/endArea/close/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Banner (ds.banner):Status=Error, Container=Section/endArea/close/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "stroke-weights-nonuniform",
+   "nodePath": "Blockquote:Blockquote",
+   "message": "per-side stroke weights [0, 0, 0, 2] (CSS border-top-width / border-right-width / border-bottom-width / border-left-width) \u2014 dump v1 carries a uniform border-width (strokeWeight) only"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "BreadcrumbItem:BreadcrumbItem/separatorIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "BreadcrumbItem:BreadcrumbItem/separatorIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Sent/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Sent/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Sending/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Sending/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Sending/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Sending/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Delivered/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Delivered/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Delivered/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Delivered/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Read/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Read/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Read/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Read/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Error/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Error/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Error/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Error/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Error/statusIcon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "ChatMessageMetadata:Status=Error/statusIcon/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Checked, Size=Medium/box/checkGlyph/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Checked, Size=Medium/box/checkGlyph/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Checked, Size=Small/box/checkGlyph/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Checked, Size=Small/box/checkGlyph/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Indeterminate, Size=Medium/box/dashGlyph/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Indeterminate, Size=Medium/box/dashGlyph/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Indeterminate, Size=Small/box/dashGlyph/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Checkbox (ds.checkbox):Value=Indeterminate, Size=Small/box/dashGlyph/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Field:Field/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Field:Field/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Field:Field/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Field:Field/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Field:Field/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Field:Field/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Pagination:Variant=Pages/prevButton/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Pagination:Variant=Pages/prevButton/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Pagination:Variant=Pages/nextButton/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Pagination:Variant=Pages/nextButton/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Pagination:Variant=Compact/prevButton/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Pagination:Variant=Compact/prevButton/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Pagination:Variant=Compact/nextButton/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Pagination:Variant=Compact/nextButton/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Pagination:Variant=Dots/prevButton/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Pagination:Variant=Dots/prevButton/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Pagination:Variant=Dots/nextButton/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Pagination:Variant=Dots/nextButton/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Spinner (ds.spinner):Spinner (ds.spinner)/arc/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "Spinner (ds.spinner):Spinner (ds.spinner)/arc/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Medium/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Medium/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Medium/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Medium/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Medium/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Medium/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Small/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Small/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Small/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Small/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Small/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Small/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Large/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Large/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Large/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Large/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextArea:Size=Large/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextArea:Size=Large/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Medium/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Medium/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Medium/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Medium/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Medium/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Medium/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Small/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Small/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Small/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Small/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Small/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Small/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Large/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Large/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Large/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Large/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Large/labelRow/requiredMark/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "stroke-align-unsupported",
+   "nodePath": "TextField (ds.text-field):Size=Large/labelRow/requiredMark/Vector",
+   "message": "strokeAlign CENTER \u2014 a centred stroke draws half its weight inside the box and half outside; CSS border draws wholly inward and outline wholly outward, so neither carries it exactly. The alignment is CAPTURED (dump v1.11) and the LOWERING is refused: the node renders an INSIDE border"
+  }
+ ],
+ "_variables": {
+  "size/card/width": {
+   "type": "FLOAT",
+   "value": 320,
+   "modes": {
+    "Light": 320,
+    "Dark": 320
+   }
+  },
+  "radius/card": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "border-width/100": {
+   "type": "FLOAT",
+   "value": 1
+  },
+  "color/surface/raised": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#374151"
+   }
+  },
+  "color/border/subtle": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#4b5563"
+   }
+  },
+  "space/gap/sm": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "space/inset-x/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "space/inset-y/md": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "color/text/secondary": {
+   "type": "COLOR",
+   "value": "#4b5563",
+   "modes": {
+    "Light": "#4b5563",
+    "Dark": "#d1d5db"
+   }
+  },
+  "color/surface/foreground": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "size/avatar/sm": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "radius/avatar": {
+   "type": "FLOAT",
+   "value": 999,
+   "modes": {
+    "Light": 999,
+    "Dark": 999
+   }
+  },
+  "color/identity/background": {
+   "type": "COLOR",
+   "value": "#dbeafe",
+   "modes": {
+    "Light": "#dbeafe",
+    "Dark": "#1e3a8a"
+   }
+  },
+  "color/identity/foreground": {
+   "type": "COLOR",
+   "value": "#1d4ed8",
+   "modes": {
+    "Light": "#1d4ed8",
+    "Dark": "#dbeafe"
+   }
+  },
+  "size/avatar/md": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "space/avatarGroup/overlap": {
+   "type": "FLOAT",
+   "value": -8,
+   "modes": {
+    "Light": -8,
+    "Dark": -8
+   }
+  },
+  "radius/pill": {
+   "type": "FLOAT",
+   "value": 999
+  },
+  "color/action/secondary/background": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#374151"
+   }
+  },
+  "space/inset-y/sm": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "radius/badge": {
+   "type": "FLOAT",
+   "value": 999,
+   "modes": {
+    "Light": 999,
+    "Dark": 999
+   }
+  },
+  "color/feedback/info/background": {
+   "type": "COLOR",
+   "value": "#dbeafe",
+   "modes": {
+    "Light": "#dbeafe",
+    "Dark": "#1e3a8a"
+   }
+  },
+  "color/feedback/info/foreground": {
+   "type": "COLOR",
+   "value": "#1d4ed8",
+   "modes": {
+    "Light": "#1d4ed8",
+    "Dark": "#dbeafe"
+   }
+  },
+  "color/feedback/success/background": {
+   "type": "COLOR",
+   "value": "#dcfce7",
+   "modes": {
+    "Light": "#dcfce7",
+    "Dark": "#14532d"
+   }
+  },
+  "color/feedback/success/foreground": {
+   "type": "COLOR",
+   "value": "#15803d",
+   "modes": {
+    "Light": "#15803d",
+    "Dark": "#dcfce7"
+   }
+  },
+  "color/feedback/warning/background": {
+   "type": "COLOR",
+   "value": "#fef3c7",
+   "modes": {
+    "Light": "#fef3c7",
+    "Dark": "#78350f"
+   }
+  },
+  "color/feedback/warning/foreground": {
+   "type": "COLOR",
+   "value": "#b45309",
+   "modes": {
+    "Light": "#b45309",
+    "Dark": "#fef3c7"
+   }
+  },
+  "color/feedback/danger/background": {
+   "type": "COLOR",
+   "value": "#fee2e2",
+   "modes": {
+    "Light": "#fee2e2",
+    "Dark": "#7f1d1d"
+   }
+  },
+  "color/feedback/danger/foreground": {
+   "type": "COLOR",
+   "value": "#b91c1c",
+   "modes": {
+    "Light": "#b91c1c",
+    "Dark": "#fee2e2"
+   }
+  },
+  "color/feedback/error/background": {
+   "type": "COLOR",
+   "value": "#fee2e2",
+   "modes": {
+    "Light": "#fee2e2",
+    "Dark": "#7f1d1d"
+   }
+  },
+  "color/feedback/error/foreground": {
+   "type": "COLOR",
+   "value": "#b91c1c",
+   "modes": {
+    "Light": "#b91c1c",
+    "Dark": "#fee2e2"
+   }
+  },
+  "space/gap/control": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "space/inset-x/md": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "radius/control": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "color/action/primary/background": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#3b82f6"
+   }
+  },
+  "color/action/primary/foreground": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "space/inset-x/lg": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "space/inset-y/lg": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "color/action/secondary/foreground": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "color/action/danger/background": {
+   "type": "COLOR",
+   "value": "#dc2626",
+   "modes": {
+    "Light": "#dc2626",
+    "Dark": "#ef4444"
+   }
+  },
+  "color/action/danger/foreground": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "color/action/ghost/background": {
+   "type": "COLOR",
+   "value": "#f9fafb",
+   "modes": {
+    "Light": "#f9fafb",
+    "Dark": "#1f2937"
+   }
+  },
+  "color/action/ghost/foreground": {
+   "type": "COLOR",
+   "value": "#374151",
+   "modes": {
+    "Light": "#374151",
+    "Dark": "#e5e7eb"
+   }
+  },
+  "color/action/primary/background-hover": {
+   "type": "COLOR",
+   "value": "#1d4ed8",
+   "modes": {
+    "Light": "#1d4ed8",
+    "Dark": "#60a5fa"
+   }
+  },
+  "color/action/secondary/background-hover": {
+   "type": "COLOR",
+   "value": "#d1d5db",
+   "modes": {
+    "Light": "#d1d5db",
+    "Dark": "#4b5563"
+   }
+  },
+  "color/action/danger/background-hover": {
+   "type": "COLOR",
+   "value": "#b91c1c",
+   "modes": {
+    "Light": "#b91c1c",
+    "Dark": "#f87171"
+   }
+  },
+  "color/action/ghost/background-hover": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#374151"
+   }
+  },
+  "border/width/focus": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "color/border/focus": {
+   "type": "COLOR",
+   "value": "#3b82f6",
+   "modes": {
+    "Light": "#3b82f6",
+    "Dark": "#93c5fd"
+   }
+  },
+  "size/banner/width": {
+   "type": "FLOAT",
+   "value": 640,
+   "modes": {
+    "Light": 640,
+    "Dark": 640
+   }
+  },
+  "radius/banner/card": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "font/control/size/md": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "font/control/size/sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "radius/banner/section": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "border/width/divider/strong": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "color/divider/strong": {
+   "type": "COLOR",
+   "value": "#9ca3af",
+   "modes": {
+    "Light": "#9ca3af",
+    "Dark": "#6b7280"
+   }
+  },
+  "font/badge/size": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "color/chat/assistant/background": {
+   "type": "COLOR",
+   "value": "#f3f4f6",
+   "modes": {
+    "Light": "#f3f4f6",
+    "Dark": "#374151"
+   }
+  },
+  "color/chat/user/background": {
+   "type": "COLOR",
+   "value": "#dbeafe",
+   "modes": {
+    "Light": "#dbeafe",
+    "Dark": "#1e3a8a"
+   }
+  },
+  "color/chat/system/background": {
+   "type": "COLOR",
+   "value": "#f9fafb",
+   "modes": {
+    "Light": "#f9fafb",
+    "Dark": "#1f2937"
+   }
+  },
+  "border/width/divider/subtle": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "color/divider/subtle": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#4b5563"
+   }
+  },
+  "size/checkbox/md": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "radius/100": {
+   "type": "FLOAT",
+   "value": 4
+  },
+  "color/checkbox/unchecked/background": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#374151"
+   }
+  },
+  "color/checkbox/unchecked/border": {
+   "type": "COLOR",
+   "value": "#9ca3af",
+   "modes": {
+    "Light": "#9ca3af",
+    "Dark": "#6b7280"
+   }
+  },
+  "space/inset-y/xs": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "size/checkbox/sm": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "color/checkbox/checked/background": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#3b82f6"
+   }
+  },
+  "color/checkbox/checked/border": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#3b82f6"
+   }
+  },
+  "color/checkbox/icon": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "color/checkbox/indeterminate/background": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#3b82f6"
+   }
+  },
+  "color/checkbox/indeterminate/border": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#3b82f6"
+   }
+  },
+  "space/inset-x/xs": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "color/surface/sunken": {
+   "type": "COLOR",
+   "value": "#f3f4f6",
+   "modes": {
+    "Light": "#f3f4f6",
+    "Dark": "#1f2937"
+   }
+  },
+  "size/divider/length": {
+   "type": "FLOAT",
+   "value": 320,
+   "modes": {
+    "Light": 320,
+    "Dark": 320
+   }
+  },
+  "font/control/size/lg": {
+   "type": "FLOAT",
+   "value": 18,
+   "modes": {
+    "Light": 18,
+    "Dark": 18
+   }
+  },
+  "size/icon-button/md": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "size/icon-button/sm": {
+   "type": "FLOAT",
+   "value": 28,
+   "modes": {
+    "Light": 28,
+    "Dark": 28
+   }
+  },
+  "size/icon-button/lg": {
+   "type": "FLOAT",
+   "value": 44,
+   "modes": {
+    "Light": 44,
+    "Dark": 44
+   }
+  },
+  "color/action/destructive/background": {
+   "type": "COLOR",
+   "value": "#dc2626",
+   "modes": {
+    "Light": "#dc2626",
+    "Dark": "#ef4444"
+   }
+  },
+  "space/list/balanced": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "space/list/compact": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "space/list/spacious": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "space/gap/md": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "container/xs": {
+   "type": "FLOAT",
+   "value": 120
+  },
+  "color/nav/selected/background": {
+   "type": "COLOR",
+   "value": "#dbeafe",
+   "modes": {
+    "Light": "#dbeafe",
+    "Dark": "#1e3a8a"
+   }
+  },
+  "color/nav/selected/foreground": {
+   "type": "COLOR",
+   "value": "#1d4ed8",
+   "modes": {
+    "Light": "#1d4ed8",
+    "Dark": "#dbeafe"
+   }
+  },
+  "size/dot": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "color/status/accent": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#60a5fa"
+   }
+  },
+  "color/status/neutral": {
+   "type": "COLOR",
+   "value": "#9ca3af",
+   "modes": {
+    "Light": "#9ca3af",
+    "Dark": "#6b7280"
+   }
+  },
+  "size/progress/width": {
+   "type": "FLOAT",
+   "value": 320,
+   "modes": {
+    "Light": 320,
+    "Dark": 320
+   }
+  },
+  "size/progress/height": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "color/progress/track": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#4b5563"
+   }
+  },
+  "color/progress/accent": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#60a5fa"
+   }
+  },
+  "color/progress/success": {
+   "type": "COLOR",
+   "value": "#16a34a",
+   "modes": {
+    "Light": "#16a34a",
+    "Dark": "#22c55e"
+   }
+  },
+  "color/progress/warning": {
+   "type": "COLOR",
+   "value": "#f59e0b",
+   "modes": {
+    "Light": "#f59e0b",
+    "Dark": "#f59e0b"
+   }
+  },
+  "color/progress/error": {
+   "type": "COLOR",
+   "value": "#dc2626",
+   "modes": {
+    "Light": "#dc2626",
+    "Dark": "#ef4444"
+   }
+  },
+  "color/progress/neutral": {
+   "type": "COLOR",
+   "value": "#6b7280",
+   "modes": {
+    "Light": "#6b7280",
+    "Dark": "#9ca3af"
+   }
+  },
+  "color/section/section": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#374151"
+   }
+  },
+  "color/section/muted": {
+   "type": "COLOR",
+   "value": "#f3f4f6",
+   "modes": {
+    "Light": "#f3f4f6",
+    "Dark": "#1f2937"
+   }
+  },
+  "color/nav/default/background": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#374151"
+   }
+  },
+  "color/nav/default/foreground": {
+   "type": "COLOR",
+   "value": "#374151",
+   "modes": {
+    "Light": "#374151",
+    "Dark": "#e5e7eb"
+   }
+  },
+  "size/skeleton/text/width": {
+   "type": "FLOAT",
+   "value": 120,
+   "modes": {
+    "Light": 120,
+    "Dark": 120
+   }
+  },
+  "size/skeleton/text/height": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "radius/skeleton/text": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "color/skeleton": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#4b5563"
+   }
+  },
+  "size/skeleton/rect/width": {
+   "type": "FLOAT",
+   "value": 320,
+   "modes": {
+    "Light": 320,
+    "Dark": 320
+   }
+  },
+  "size/skeleton/rect/height": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "radius/skeleton/rect": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "size/skeleton/circle/width": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "size/skeleton/circle/height": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "radius/skeleton/circle": {
+   "type": "FLOAT",
+   "value": 999,
+   "modes": {
+    "Light": 999,
+    "Dark": 999
+   }
+  },
+  "size/slider/width": {
+   "type": "FLOAT",
+   "value": 320,
+   "modes": {
+    "Light": 320,
+    "Dark": 320
+   }
+  },
+  "size/slider/track": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "size/slider/thumb": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "border-width/200": {
+   "type": "FLOAT",
+   "value": 2
+  },
+  "color/switch/thumb": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "color/status/success": {
+   "type": "COLOR",
+   "value": "#16a34a",
+   "modes": {
+    "Light": "#16a34a",
+    "Dark": "#22c55e"
+   }
+  },
+  "color/status/warning": {
+   "type": "COLOR",
+   "value": "#f59e0b",
+   "modes": {
+    "Light": "#f59e0b",
+    "Dark": "#f59e0b"
+   }
+  },
+  "color/status/error": {
+   "type": "COLOR",
+   "value": "#dc2626",
+   "modes": {
+    "Light": "#dc2626",
+    "Dark": "#ef4444"
+   }
+  },
+  "size/switch/width": {
+   "type": "FLOAT",
+   "value": 32,
+   "modes": {
+    "Light": 32,
+    "Dark": 32
+   }
+  },
+  "size/switch/height": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "color/switch/off/track": {
+   "type": "COLOR",
+   "value": "#d1d5db",
+   "modes": {
+    "Light": "#d1d5db",
+    "Dark": "#6b7280"
+   }
+  },
+  "size/switch/thumb": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "color/switch/on/track": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#3b82f6"
+   }
+  },
+  "color/surface/background": {
+   "type": "COLOR",
+   "value": "#f9fafb",
+   "modes": {
+    "Light": "#f9fafb",
+    "Dark": "#1f2937"
+   }
+  },
+  "color/tab/default/foreground": {
+   "type": "COLOR",
+   "value": "#4b5563",
+   "modes": {
+    "Light": "#4b5563",
+    "Dark": "#d1d5db"
+   }
+  },
+  "color/tab/selected/foreground": {
+   "type": "COLOR",
+   "value": "#2563eb",
+   "modes": {
+    "Light": "#2563eb",
+    "Dark": "#60a5fa"
+   }
+  },
+  "space/table/cell-y/comfortable": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "size/table/cell-width": {
+   "type": "FLOAT",
+   "value": 120,
+   "modes": {
+    "Light": 120,
+    "Dark": 120
+   }
+  },
+  "space/table/cell-y/compact": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "color/table/row/default": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#374151"
+   }
+  },
+  "color/table/row/selected": {
+   "type": "COLOR",
+   "value": "#dbeafe",
+   "modes": {
+    "Light": "#dbeafe",
+    "Dark": "#1e3a8a"
+   }
+  },
+  "size/table/width": {
+   "type": "FLOAT",
+   "value": 480,
+   "modes": {
+    "Light": 480,
+    "Dark": 480
+   }
+  },
+  "color/input/background": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#374151"
+   }
+  },
+  "color/toast/info/background": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "color/toast/error/background": {
+   "type": "COLOR",
+   "value": "#dc2626",
+   "modes": {
+    "Light": "#dc2626",
+    "Dark": "#ef4444"
+   }
+  },
+  "color/token/default/background": {
+   "type": "COLOR",
+   "value": "#f3f4f6",
+   "modes": {
+    "Light": "#f3f4f6",
+    "Dark": "#374151"
+   }
+  },
+  "color/token/default/foreground": {
+   "type": "COLOR",
+   "value": "#374151",
+   "modes": {
+    "Light": "#374151",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "color/token/red/background": {
+   "type": "COLOR",
+   "value": "#fee2e2",
+   "modes": {
+    "Light": "#fee2e2",
+    "Dark": "#7f1d1d"
+   }
+  },
+  "color/token/red/foreground": {
+   "type": "COLOR",
+   "value": "#b91c1c",
+   "modes": {
+    "Light": "#b91c1c",
+    "Dark": "#fee2e2"
+   }
+  },
+  "color/token/orange/background": {
+   "type": "COLOR",
+   "value": "#ffedd5",
+   "modes": {
+    "Light": "#ffedd5",
+    "Dark": "#7c2d12"
+   }
+  },
+  "color/token/orange/foreground": {
+   "type": "COLOR",
+   "value": "#c2410c",
+   "modes": {
+    "Light": "#c2410c",
+    "Dark": "#ffedd5"
+   }
+  },
+  "color/token/yellow/background": {
+   "type": "COLOR",
+   "value": "#fef9c3",
+   "modes": {
+    "Light": "#fef9c3",
+    "Dark": "#713f12"
+   }
+  },
+  "color/token/yellow/foreground": {
+   "type": "COLOR",
+   "value": "#a16207",
+   "modes": {
+    "Light": "#a16207",
+    "Dark": "#fef9c3"
+   }
+  },
+  "color/token/green/background": {
+   "type": "COLOR",
+   "value": "#dcfce7",
+   "modes": {
+    "Light": "#dcfce7",
+    "Dark": "#14532d"
+   }
+  },
+  "color/token/green/foreground": {
+   "type": "COLOR",
+   "value": "#15803d",
+   "modes": {
+    "Light": "#15803d",
+    "Dark": "#dcfce7"
+   }
+  },
+  "color/token/teal/background": {
+   "type": "COLOR",
+   "value": "#ccfbf1",
+   "modes": {
+    "Light": "#ccfbf1",
+    "Dark": "#134e4a"
+   }
+  },
+  "color/token/teal/foreground": {
+   "type": "COLOR",
+   "value": "#0f766e",
+   "modes": {
+    "Light": "#0f766e",
+    "Dark": "#ccfbf1"
+   }
+  },
+  "color/token/cyan/background": {
+   "type": "COLOR",
+   "value": "#cffafe",
+   "modes": {
+    "Light": "#cffafe",
+    "Dark": "#164e63"
+   }
+  },
+  "color/token/cyan/foreground": {
+   "type": "COLOR",
+   "value": "#0e7490",
+   "modes": {
+    "Light": "#0e7490",
+    "Dark": "#cffafe"
+   }
+  },
+  "color/token/blue/background": {
+   "type": "COLOR",
+   "value": "#dbeafe",
+   "modes": {
+    "Light": "#dbeafe",
+    "Dark": "#1e3a8a"
+   }
+  },
+  "color/token/blue/foreground": {
+   "type": "COLOR",
+   "value": "#1d4ed8",
+   "modes": {
+    "Light": "#1d4ed8",
+    "Dark": "#dbeafe"
+   }
+  },
+  "color/token/purple/background": {
+   "type": "COLOR",
+   "value": "#f3e8ff",
+   "modes": {
+    "Light": "#f3e8ff",
+    "Dark": "#581c87"
+   }
+  },
+  "color/token/purple/foreground": {
+   "type": "COLOR",
+   "value": "#7e22ce",
+   "modes": {
+    "Light": "#7e22ce",
+    "Dark": "#f3e8ff"
+   }
+  },
+  "color/token/pink/background": {
+   "type": "COLOR",
+   "value": "#fce7f3",
+   "modes": {
+    "Light": "#fce7f3",
+    "Dark": "#831843"
+   }
+  },
+  "color/token/pink/foreground": {
+   "type": "COLOR",
+   "value": "#be185d",
+   "modes": {
+    "Light": "#be185d",
+    "Dark": "#fce7f3"
+   }
+  },
+  "color/token/gray/background": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#4b5563"
+   }
+  },
+  "color/token/gray/foreground": {
+   "type": "COLOR",
+   "value": "#374151",
+   "modes": {
+    "Light": "#374151",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "size/toolbar/md": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "size/toolbar/sm": {
+   "type": "FLOAT",
+   "value": 28,
+   "modes": {
+    "Light": 28,
+    "Dark": 28
+   }
+  },
+  "size/toolbar/lg": {
+   "type": "FLOAT",
+   "value": 44,
+   "modes": {
+    "Light": 44,
+    "Dark": 44
+   }
+  }
+ },
+ "ChatMessageMetadata": {
+  "setName": "ChatMessageMetadata",
+  "description": "ChatMessageMetadata \u2014 generated from contract ds.chat-message-metadata v1.0.0",
+  "contractId": "ds.chat-message-metadata",
+  "specHash": "3531958447",
+  "version": "1.0.0",
+  "propNames": {
+   "Status": "status",
+   "Timestamp": "timestamp"
+  },
+  "semantics": {
+   "element": "div"
+  },
+  "type": "COMPONENT_SET",
+  "nodeId": "39:23567",
+  "key": "9ab4ff480b11973d93644438d60efbf4355dfd90",
+  "variants": [
+   {
+    "name": "Status=Sent",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Status": "Sent"
+    },
+    "bbox": {
+     "width": 62,
+     "height": 15
+    },
+    "abs": {
+     "x": 40,
+     "y": 40,
+     "right": 40,
+     "bottom": 260,
+     "width": 62,
+     "height": 15,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "space/inset-y/sm"
+    },
+    "children": [
+     {
+      "name": "statusIcon",
+      "type": "FRAME",
+      "fixedSize": {
+       "width": 12,
+       "height": 12
+      },
+      "children": [
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 2.76,
+         "y": 3.84,
+         "right": 2.76,
+         "bottom": 3.6,
+         "width": 6.48,
+         "height": 4.56,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       }
+      ]
+     },
+     {
+      "name": "timestampText",
+      "type": "TEXT",
+      "text": {
+       "characters": "2:14 PM",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "fontFamily": "Inter",
+       "style": "badge",
+       "styleKey": "d0c49c60e6346d8663d1f7b5d66da355dfcd0011",
+       "fillVar": "color/text/secondary"
+      },
+      "fill": {
+       "var": "color/text/secondary"
+      },
+      "propRefs": {
+       "characters": "Timestamp"
+      }
+     },
+     {
+      "name": "Footer",
+      "type": "SLOT",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "space/inset-y/sm"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "Show Footer",
+       "slotContentId": "Footer"
+      },
+      "slotKey": "Footer#39:5302",
+      "children": []
+     }
+    ]
+   },
+   {
+    "name": "Status=Sending",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Status": "Sending"
+    },
+    "bbox": {
+     "width": 62,
+     "height": 15
+    },
+    "abs": {
+     "x": 40,
+     "y": 95,
+     "right": 40,
+     "bottom": 205,
+     "width": 62,
+     "height": 15,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "space/inset-y/sm"
+    },
+    "children": [
+     {
+      "name": "statusIcon",
+      "type": "FRAME",
+      "fixedSize": {
+       "width": 12,
+       "height": 12
+      },
+      "children": [
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 1.5,
+         "y": 1.5,
+         "right": 1.5,
+         "bottom": 1.5,
+         "width": 9,
+         "height": 9,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       },
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 6,
+         "y": 3.48,
+         "right": 4.2,
+         "bottom": 4.8,
+         "width": 1.8,
+         "height": 3.72,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       }
+      ]
+     },
+     {
+      "name": "timestampText",
+      "type": "TEXT",
+      "text": {
+       "characters": "2:14 PM",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "fontFamily": "Inter",
+       "style": "badge",
+       "styleKey": "d0c49c60e6346d8663d1f7b5d66da355dfcd0011",
+       "fillVar": "color/text/secondary"
+      },
+      "fill": {
+       "var": "color/text/secondary"
+      },
+      "propRefs": {
+       "characters": "Timestamp"
+      }
+     },
+     {
+      "name": "Footer",
+      "type": "SLOT",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "space/inset-y/sm"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "Show Footer",
+       "slotContentId": "Footer"
+      },
+      "slotKey": "Footer#39:5302",
+      "children": []
+     }
+    ]
+   },
+   {
+    "name": "Status=Delivered",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Status": "Delivered"
+    },
+    "bbox": {
+     "width": 62,
+     "height": 15
+    },
+    "abs": {
+     "x": 40,
+     "y": 150,
+     "right": 40,
+     "bottom": 150,
+     "width": 62,
+     "height": 15,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "space/inset-y/sm"
+    },
+    "children": [
+     {
+      "name": "statusIcon",
+      "type": "FRAME",
+      "fixedSize": {
+       "width": 12,
+       "height": 12
+      },
+      "children": [
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 1.56,
+         "y": 3.96,
+         "right": 4.8,
+         "bottom": 3.72,
+         "width": 5.64,
+         "height": 4.32,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       },
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 5.64,
+         "y": 3.96,
+         "right": 1.56,
+         "bottom": 3.72,
+         "width": 4.8,
+         "height": 4.32,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       }
+      ]
+     },
+     {
+      "name": "timestampText",
+      "type": "TEXT",
+      "text": {
+       "characters": "2:14 PM",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "fontFamily": "Inter",
+       "style": "badge",
+       "styleKey": "d0c49c60e6346d8663d1f7b5d66da355dfcd0011",
+       "fillVar": "color/text/secondary"
+      },
+      "fill": {
+       "var": "color/text/secondary"
+      },
+      "propRefs": {
+       "characters": "Timestamp"
+      }
+     },
+     {
+      "name": "Footer",
+      "type": "SLOT",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "space/inset-y/sm"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "Show Footer",
+       "slotContentId": "Footer"
+      },
+      "slotKey": "Footer#39:5302",
+      "children": []
+     }
+    ]
+   },
+   {
+    "name": "Status=Read",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Status": "Read"
+    },
+    "bbox": {
+     "width": 62,
+     "height": 15
+    },
+    "abs": {
+     "x": 40,
+     "y": 205,
+     "right": 40,
+     "bottom": 95,
+     "width": 62,
+     "height": 15,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "space/inset-y/sm"
+    },
+    "children": [
+     {
+      "name": "statusIcon",
+      "type": "FRAME",
+      "fixedSize": {
+       "width": 12,
+       "height": 12
+      },
+      "children": [
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 1.56,
+         "y": 3.96,
+         "right": 4.8,
+         "bottom": 3.72,
+         "width": 5.64,
+         "height": 4.32,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       },
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 5.64,
+         "y": 3.96,
+         "right": 1.56,
+         "bottom": 3.72,
+         "width": 4.8,
+         "height": 4.32,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       }
+      ]
+     },
+     {
+      "name": "timestampText",
+      "type": "TEXT",
+      "text": {
+       "characters": "2:14 PM",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "fontFamily": "Inter",
+       "style": "badge",
+       "styleKey": "d0c49c60e6346d8663d1f7b5d66da355dfcd0011",
+       "fillVar": "color/text/secondary"
+      },
+      "fill": {
+       "var": "color/text/secondary"
+      },
+      "propRefs": {
+       "characters": "Timestamp"
+      }
+     },
+     {
+      "name": "Footer",
+      "type": "SLOT",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "space/inset-y/sm"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "Show Footer",
+       "slotContentId": "Footer"
+      },
+      "slotKey": "Footer#39:5302",
+      "children": []
+     }
+    ]
+   },
+   {
+    "name": "Status=Error",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Status": "Error"
+    },
+    "bbox": {
+     "width": 62,
+     "height": 15
+    },
+    "abs": {
+     "x": 40,
+     "y": 260,
+     "right": 40,
+     "bottom": 40,
+     "width": 62,
+     "height": 15,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "HORIZONTAL",
+     "primary": "MIN",
+     "counter": "CENTER",
+     "spacing": 4,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "AUTO"
+    },
+    "bound": {
+     "itemSpacing": "space/inset-y/sm"
+    },
+    "children": [
+     {
+      "name": "statusIcon",
+      "type": "FRAME",
+      "fixedSize": {
+       "width": 12,
+       "height": 12
+      },
+      "children": [
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 1.5,
+         "y": 1.5,
+         "right": 1.5,
+         "bottom": 1.5,
+         "width": 9,
+         "height": 9,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       },
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 4.32,
+         "y": 4.32,
+         "right": 4.32,
+         "bottom": 4.32,
+         "width": 3.36,
+         "height": 3.36,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       },
+       {
+        "name": "Vector",
+        "type": "VECTOR",
+        "abs": {
+         "x": 4.32,
+         "y": 4.32,
+         "right": 4.32,
+         "bottom": 4.32,
+         "width": 3.36,
+         "height": 3.36,
+         "constraints": {
+          "horizontal": "SCALE",
+          "vertical": "SCALE"
+         }
+        },
+        "stroke": {
+         "var": "color/text/secondary"
+        },
+        "strokeWeight": 0.9000000357627869,
+        "strokeAlign": "CENTER"
+       }
+      ]
+     },
+     {
+      "name": "timestampText",
+      "type": "TEXT",
+      "text": {
+       "characters": "2:14 PM",
+       "fontSize": 12,
+       "fontStyle": "Medium",
+       "fontFamily": "Inter",
+       "style": "badge",
+       "styleKey": "d0c49c60e6346d8663d1f7b5d66da355dfcd0011",
+       "fillVar": "color/text/secondary"
+      },
+      "fill": {
+       "var": "color/text/secondary"
+      },
+      "propRefs": {
+       "characters": "Timestamp"
+      }
+     },
+     {
+      "name": "Footer",
+      "type": "SLOT",
+      "layout": {
+       "mode": "HORIZONTAL",
+       "primary": "MIN",
+       "counter": "CENTER",
+       "spacing": 4,
+       "padding": [
+        0,
+        0,
+        0,
+        0
+       ],
+       "primarySizing": "AUTO",
+       "counterSizing": "AUTO"
+      },
+      "bound": {
+       "itemSpacing": "space/inset-y/sm"
+      },
+      "hidden": true,
+      "propRefs": {
+       "visible": "Show Footer",
+       "slotContentId": "Footer"
+      },
+      "slotKey": "Footer#39:5302",
+      "children": []
+     }
+    ]
+   }
+  ],
+  "propertyDefinitions": {
+   "Footer#39:5302": {
+    "type": "SLOT"
+   },
+   "Timestamp#39:5303": {
+    "type": "TEXT",
+    "defaultValue": "2:14 PM"
+   },
+   "Show Footer#39:5309": {
+    "type": "BOOLEAN",
+    "defaultValue": false
+   },
+   "Status": {
+    "type": "VARIANT",
+    "defaultValue": "Sent",
+    "variantOptions": [
+     "Sent",
+     "Sending",
+     "Delivered",
+     "Read",
+     "Error"
+    ]
+   }
+  },
+  "boolDefaults": {
+   "Show Footer": false
+  }
+ }
+}

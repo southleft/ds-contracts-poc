@@ -1,0 +1,1232 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "151.0.7922.34",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        }
+      },
+      "banner": {
+        "banner": {
+          "background-color": {
+            "info": {
+              "$value": "#c4ddfb",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#f8da9d",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#facecb",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#c5e5c0",
+              "$type": "color"
+            }
+          },
+          "border-bottom-left-radius": {
+            "card": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "section": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-bottom-right-radius": {
+            "card": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "section": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-left-radius": {
+            "card": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "section": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "border-top-right-radius": {
+            "card": {
+              "$value": "12px",
+              "$type": "dimension"
+            },
+            "section": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "column-gap": {
+            "$value": "8px",
+            "$type": "dimension"
+          },
+          "padding-left": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "padding-right": {
+            "$value": "16px",
+            "$type": "dimension"
+          },
+          "row-gap": {
+            "$value": "8px",
+            "$type": "dimension"
+          }
+        },
+        "banner-icon": {
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          }
+        },
+        "icon": {
+          "color": {
+            "info": {
+              "$value": "#00458c",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#584400",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#89001a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0c5700",
+              "$type": "color"
+            }
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-size": {
+            "$value": "20px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "30px",
+            "$type": "dimension"
+          }
+        },
+        "part-0-1": {
+          "flex-grow": {
+            "$value": "1",
+            "$type": "number"
+          }
+        },
+        "label": {
+          "color": {
+            "info": {
+              "$value": "#00458c",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#584400",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#89001a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0c5700",
+              "$type": "color"
+            }
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "600",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20.0004px",
+            "$type": "dimension"
+          }
+        },
+        "label-2": {
+          "color": {
+            "info": {
+              "$value": "#00458c",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#584400",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#89001a",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0c5700",
+              "$type": "color"
+            }
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20.0004px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "icon",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "icon-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-0",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-1",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "part-0-0-0-0-2-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "banner",
+        "field": "align",
+        "value": "start"
+      },
+      {
+        "part": "banner-icon",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "icon",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "icon",
+        "field": "justify",
+        "value": "center"
+      },
+      {
+        "part": "part-0-1",
+        "field": "direction",
+        "value": "column"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "banner",
+      "channel": "--color-accent",
+      "reason": "CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner",
+      "channel": "--color-accent-muted",
+      "reason": "CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "transparent",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner",
+      "channel": "--color-error",
+      "reason": "CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#a50c25, #ffc6c1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner",
+      "channel": "--color-success",
+      "reason": "CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#007004, #9fe59b)",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner",
+      "channel": "--color-text-primary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "banner",
+      "channel": "--color-text-secondary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "banner",
+      "channel": "--color-warning",
+      "reason": "CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#745b00, #fdcf4f)",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner-icon",
+      "channel": "--color-accent",
+      "reason": "CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner-icon",
+      "channel": "--color-accent-muted",
+      "reason": "CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "transparent",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner-icon",
+      "channel": "--color-error",
+      "reason": "CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#a50c25, #ffc6c1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner-icon",
+      "channel": "--color-success",
+      "reason": "CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#007004, #9fe59b)",
+      "distinctValues": 2
+    },
+    {
+      "part": "banner-icon",
+      "channel": "--color-text-primary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "banner-icon",
+      "channel": "--color-text-secondary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "banner-icon",
+      "channel": "--color-warning",
+      "reason": "CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#745b00, #fdcf4f)",
+      "distinctValues": 2
+    },
+    {
+      "part": "icon",
+      "channel": "--color-accent",
+      "reason": "CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 2
+    },
+    {
+      "part": "icon",
+      "channel": "--color-accent-muted",
+      "reason": "CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "transparent",
+      "distinctValues": 2
+    },
+    {
+      "part": "icon",
+      "channel": "--color-error",
+      "reason": "CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#a50c25, #ffc6c1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "icon",
+      "channel": "--color-success",
+      "reason": "CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#007004, #9fe59b)",
+      "distinctValues": 2
+    },
+    {
+      "part": "icon",
+      "channel": "--color-text-primary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "icon",
+      "channel": "--color-text-secondary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "icon",
+      "channel": "--color-warning",
+      "reason": "CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#745b00, #fdcf4f)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "--color-accent",
+      "reason": "CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "--color-accent-muted",
+      "reason": "CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "transparent",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "--color-error",
+      "reason": "CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#a50c25, #ffc6c1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "--color-success",
+      "reason": "CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#007004, #9fe59b)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "--color-text-primary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "part-0-1",
+      "channel": "--color-text-secondary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "part-0-1",
+      "channel": "--color-warning",
+      "reason": "CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#745b00, #fdcf4f)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-0-1",
+      "channel": "flex-basis",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "--color-accent",
+      "reason": "CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "--color-accent-muted",
+      "reason": "CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "transparent",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "--color-error",
+      "reason": "CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#a50c25, #ffc6c1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "--color-success",
+      "reason": "CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#007004, #9fe59b)",
+      "distinctValues": 2
+    },
+    {
+      "part": "label",
+      "channel": "--color-text-primary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "label",
+      "channel": "--color-text-secondary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "label",
+      "channel": "--color-warning",
+      "reason": "CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#745b00, #fdcf4f)",
+      "distinctValues": 2
+    },
+    {
+      "part": "label-2",
+      "channel": "--color-accent",
+      "reason": "CSS custom property, not a styled channel — `--color-accent` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 2
+    },
+    {
+      "part": "label-2",
+      "channel": "--color-accent-muted",
+      "reason": "CSS custom property, not a styled channel — `--color-accent-muted` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `transparent`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "transparent",
+      "distinctValues": 2
+    },
+    {
+      "part": "label-2",
+      "channel": "--color-error",
+      "reason": "CSS custom property, not a styled channel — `--color-error` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#a50c25, #ffc6c1)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#a50c25, #ffc6c1)",
+      "distinctValues": 2
+    },
+    {
+      "part": "label-2",
+      "channel": "--color-success",
+      "reason": "CSS custom property, not a styled channel — `--color-success` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#007004, #9fe59b)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#007004, #9fe59b)",
+      "distinctValues": 2
+    },
+    {
+      "part": "label-2",
+      "channel": "--color-text-primary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-primary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "label-2",
+      "channel": "--color-text-secondary",
+      "reason": "CSS custom property, not a styled channel — `--color-text-secondary` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#00458c, #c7d3ff)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#00458c, #c7d3ff)",
+      "distinctValues": 4
+    },
+    {
+      "part": "label-2",
+      "channel": "--color-warning",
+      "reason": "CSS custom property, not a styled channel — `--color-warning` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `light-dark(#745b00, #fdcf4f)`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "sample": "light-dark(#745b00, #fdcf4f)",
+      "distinctValues": 2
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [
+    "union-part-added: warning.card__default @0.0.0.0.2 (path|)",
+    "part-missing: warning.card__default part-0-0-0-0-0",
+    "part-missing: warning.card__hover part-0-0-0-0-0",
+    "part-missing: warning.card__focus-visible part-0-0-0-0-0",
+    "part-missing: warning.card__active part-0-0-0-0-0",
+    "part-missing: warning.section__default part-0-0-0-0-0",
+    "part-missing: warning.section__hover part-0-0-0-0-0",
+    "part-missing: warning.section__focus-visible part-0-0-0-0-0",
+    "part-missing: warning.section__active part-0-0-0-0-0",
+    "part-missing: success.card__default part-0-0-0-0-0",
+    "part-missing: success.card__hover part-0-0-0-0-0",
+    "part-missing: success.card__focus-visible part-0-0-0-0-0",
+    "part-missing: success.card__active part-0-0-0-0-0",
+    "part-missing: success.section__default part-0-0-0-0-0",
+    "part-missing: success.section__hover part-0-0-0-0-0",
+    "part-missing: success.section__focus-visible part-0-0-0-0-0",
+    "part-missing: success.section__active part-0-0-0-0-0"
+  ],
+  "styledChannelReceipts": [
+    "control-fallback: no control for <svg> — span control used (part icon-2)",
+    "control-fallback: no control for <circle> — span control used (part part-0-0-0-0-0)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-1)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-2)",
+    "control-fallback: no control for <path> — span control used (part part-0-0-0-0-2-2)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (icon, icon-2, label, label-2, part-0-0-0-0-0, part-0-0-0-0-1, part-0-0-0-0-2, part-0-0-0-0-2-2); -webkit-text-stroke-color (icon, icon-2, label, label-2, part-0-0-0-0-0, part-0-0-0-0-1, part-0-0-0-0-2, part-0-0-0-0-2-2)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: icon.caret-color — values track ancestor \"banner-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon.color — values track ancestor \"banner-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon.font-size — values track ancestor \"banner-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: icon.line-height — values track ancestor \"banner-icon\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.caret-color — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.color — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.line-height — values track ancestor \"part-0-1\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-suspected: Banner:error.card__active>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.card__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.card__default>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.card__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.card__focus-visible>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.card__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.card__hover>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.card__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__active>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__default>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__focus-visible>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__hover>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:error.section__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 5x5 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.card__active>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.card__default>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.card__focus-visible>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.card__hover>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.section__active>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.section__default>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.section__focus-visible>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:info.section__hover>div>div>span>svg>circle <circle> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.card__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 11x8 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:success.section__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x17 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.card__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.card__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.card__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.card__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.section__active>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.section__default>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.section__focus-visible>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-suspected: Banner:warning.section__hover>div>div>span>svg>path <path> — a non-replaced display:inline element with NO child nodes and no ::before/::after, whose CONTENT box is nevertheless non-zero — by CSS that is impossible unless something is rendering inside it that no walker can reach and a painted 17x15 box. A closed shadow root is undetectable by definition; this signature is its ABSENCE, and it is a NAMED REFUSAL rather than a silently-captured empty leaf. Nothing about this element's interior is captured or carried — the whole rendered box is unreachable from script",
+    "closed-shadow-root-limit: 48 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "banner",
+        "join": "computed-only"
+      },
+      {
+        "part": "banner-icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon",
+        "join": "computed-only"
+      },
+      {
+        "part": "icon-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-0-0-0-2-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "banner",
+      "banner-icon",
+      "icon",
+      "part-0-1",
+      "label",
+      "label-2"
+    ],
+    "svgAssets": [
+      "banner-icon-error",
+      "banner-icon-info",
+      "banner-icon-success",
+      "banner-icon-warning"
+    ],
+    "receipts": [
+      "svg-viewbox-bumped: Banner.icon@info.card — computed size 20 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@info.section — computed size 20 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@warning.card — computed size 20 < path extent 21.73; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@warning.section — computed size 20 < path extent 21.73; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@error.card — computed size 20 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@error.section — computed size 20 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@success.card — computed size 20 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "svg-viewbox-bumped: Banner.icon@success.section — computed size 20 < path extent 22; viewBox reconstructed as 0 0 22 22 (named reconstruction)",
+      "root-display-carried: flex",
+      "full-width-carried: icon spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: banner.layout.align = start (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: banner-icon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: icon.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: icon.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-0-1.layout.direction = column (uniform computed keyword — the schema's own vocabulary)"
+  ]
+}

@@ -1,10 +1,36 @@
 {
   "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
-  "generatedBy": "extract/computed/run.ts",
+  "generatedBy": "extract/computed/regate.ts --write-enriched (OFFLINE RE-FUSE of the committed captured truth; no library recapture). Differences vs the harness path, NAMED: portal receipts are a capture-time artifact and are absent here; the frontier receipts are capture-time too and are CARRIED FORWARD unchanged from the extension this re-fuse overwrote (5 receipt(s)); every other receipt is recomputed from the same truth.",
   "library": "@shopify/polaris@13.9.5",
   "browser": "151.0.7922.34",
   "mintedTokens": {
     "imported": {
+      "shared": {
+        "color-303030": {
+          "$value": "#303030",
+          "$type": "color"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "size-18": {
+          "$value": "18px",
+          "$type": "dimension"
+        },
+        "size-1": {
+          "$value": "1px",
+          "$type": "dimension"
+        },
+        "size-2": {
+          "$value": "2px",
+          "$type": "dimension"
+        },
+        "color-b5b5b5": {
+          "$value": "#b5b5b5",
+          "$type": "color"
+        }
+      },
       "radio-button": {
         "root": {
           "height": {
@@ -224,32 +250,6 @@
             "$type": "dimension"
           }
         }
-      },
-      "shared": {
-        "size-0": {
-          "$value": "0px",
-          "$type": "dimension"
-        },
-        "size-18": {
-          "$value": "18px",
-          "$type": "dimension"
-        },
-        "size-1": {
-          "$value": "1px",
-          "$type": "dimension"
-        },
-        "color-303030": {
-          "$value": "#303030",
-          "$type": "color"
-        },
-        "size-2": {
-          "$value": "2px",
-          "$type": "dimension"
-        },
-        "color-b5b5b5": {
-          "$value": "#b5b5b5",
-          "$type": "color"
-        }
       }
     }
   },
@@ -464,6 +464,11 @@
         "part": "label",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif"
       }
     ],
     "state": [
@@ -545,14 +550,14 @@
     {
       "part": "input",
       "channel": "clip-path",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "inset(50%)",
       "distinctValues": 1
     },
     {
       "part": "input",
       "channel": "line-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
       "sample": "normal",
       "distinctValues": 1
     }
@@ -1044,6 +1049,8 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
@@ -1054,18 +1061,34 @@
     "absolute-geometry-admitted: backdrop — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: choice__label — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "control-fallback: no control for <label> — span control used (part root)",
+    "page-inherited-ink-admitted: root.color = rgba(48, 48, 48, 1) — EQUAL to the <label> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: choice__control.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: radiobutton.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
     "control-fallback: no control for <input> — span control used (part input)",
-    "text-part-typography-carried: label — font-size/line-height/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no Polaris body context, and the canvas otherwise draws its own 14px/500 defaults — round 5c)",
+    "page-inherited-ink-admitted: backdrop.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: choice__label.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "page-inherited-ink-admitted: label.color = rgba(48, 48, 48, 1) — EQUAL to the <span> control, so the styled-channel door would normally drop it. Admitted anyway because the control's own ink is NOT the UA default black: the library's GLOBAL CSS inked the page (Polaris's --p-color-text on the body and its equivalents), the control is polluted by the same rule, and equality proves library authorship — without this the canvas draws default #000000 text while the CSS surface renders the library ink (rejected-sets round, polaris.checkbox label).",
+    "text-part-typography-carried: label — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "geometry-excluded: backdrop — block-size 18px, inline-size 18px, perspective-origin 9px 9px, transform-origin 9px 9px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: choice__control — inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: choice__label — inline-size 138.328px, perspective-origin 69.1562px 10px, transform-origin 69.1641px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: input — block-size 1px, inline-size 1px, perspective-origin 0.5px 0.5px, transform-origin 0.5px 0.5px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size auto, height auto, inline-size auto, perspective-origin 0px 0px, transform-origin 0px 0px, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: radiobutton — block-size 18px, inline-size 18px, perspective-origin 9px 9px, transform-origin 9px 9px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 28px, inline-size 166.328px, perspective-origin 83.1562px 14px, transform-origin 83.1641px 14px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "webkit-prefixed-channels-refused: 2 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-text-fill-color (input); -webkit-text-stroke-color (input)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: input.caret-color — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: input.color — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.font-size — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.font-weight — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: input.line-height — values track ancestor \"radiobutton\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label.line-height — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)"
+    "inheritance-check-rejected: label.line-height — values track ancestor \"choice__label\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: backdrop.color equals ancestor \"radiobutton\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: choice__control.color equals ancestor \"root\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label.color equals ancestor \"choice__label\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: radiobutton.color equals ancestor \"choice__control\" on all 16 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
   ],
   "frontierReceipts": [
     "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
@@ -1123,7 +1146,7 @@
       "root-display-carried: flex",
       "sr-only-carried-as-hidden: input is visually hidden in the real component (clip-path/1px box) — promoted with declared display:none (visual parity exact; AT semantics ride the contract's own semantics — NAMED downgrade)",
       "shape-geometry-recarried: backdrop — reviewed shape 20×20 contradicts the captured computed box 18×18 (uniform across every enabled combo); computed truth wins geometry, the curated numbers retire (round 5c; kind \"rect\" stays the reviewed call)",
-      "pseudo-decor-carried: backdrop::before → shape part \"backdrop-before\" (ellipse 10×10 at 4,4, fill rgba(255, 255, 255, 1); drawn in 2/4 default-interaction combos, hidden-when checked=unchecked; translate + host border folded into top/left; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted) — round 5c S5)",
+      "pseudo-decor-carried: backdrop::before → shape part \"backdrop-before\" (ellipse 10×10 at 4,4, fill rgba(255, 255, 255, 1); drawn in 2/4 default-interaction combos, hidden-when checked=unchecked; size uniform; rotation 0; translate + host border folded into top/left; BUBBLED to the host parent (shape leaves cannot nest children; parent content box == host border box, asserted) — round 5c S5 + Wave B.2)",
       "literal-text-carried: label = \"Accounts are disabled\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": [
@@ -1142,8 +1165,8 @@
     "declared fact carried: input.cursor = default (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.font-family = Arial (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: input.font-feature-settings = normal (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: input.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: input.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: input.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: input.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: input.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.text-rendering = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: input.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1158,6 +1181,7 @@
     "declared fact carried: backdrop.transition-timing-function = cubic-bezier(0.19, 0.91, 0.38, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: choice__label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = Inter, -apple-system, \"system-ui\", \"San Francisco\", \"Segoe UI\", Roboto, \"Helvetica Neue\", sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared state fact carried: [disabled] backdrop.border-bottom-style = none (v15 declared vocabulary)",
     "declared state fact carried: [disabled] backdrop.border-left-style = none (v15 declared vocabulary)",
     "declared state fact carried: [disabled] backdrop.border-right-style = none (v15 declared vocabulary)",

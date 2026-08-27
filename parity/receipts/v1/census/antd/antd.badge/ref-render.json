@@ -1,0 +1,57 @@
+{
+  "id": "antd.badge",
+  "library": "antd",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "antd",
+    "version": "5.29.3",
+    "recipe": "examples/antd sandbox (.antd-sandbox; examples/antd/README) mounted per extract/computed/configs/antd.json"
+  },
+  "configPath": "extract/computed/configs/antd.json",
+  "component": "Badge",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "mode-count__color-blue",
+      "status": "rendered",
+      "png": "ref-mode-count__color-blue.png",
+      "props": {
+        "count": 5,
+        "color": "blue"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "mode-count__color-green",
+      "status": "rendered",
+      "png": "ref-mode-count__color-green.png",
+      "props": {
+        "count": 5,
+        "color": "green"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "mode-count__color-purple",
+      "status": "rendered",
+      "png": "ref-mode-count__color-purple.png",
+      "props": {
+        "count": 5,
+        "color": "purple"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "mode-dot__color-blue",
+      "status": "rendered",
+      "png": "ref-mode-dot__color-blue.png",
+      "props": {
+        "dot": true,
+        "color": "blue"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

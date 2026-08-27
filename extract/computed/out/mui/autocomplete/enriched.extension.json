@@ -1968,6 +1968,11 @@
         "part": "autocomplete-popupindicator",
         "field": "justify",
         "value": "center"
+      },
+      {
+        "part": "autocomplete-inputroot",
+        "field": "wrap",
+        "value": true
       }
     ],
     "contradictions": [],
@@ -3050,6 +3055,7 @@
     ]
   },
   "enrichmentNotes": [
+    "layout enriched: autocomplete-inputroot.layout.wrap = true (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: formcontrol-fullwidth.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-inputroot.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: autocomplete-tag.layout.align = center (uniform computed keyword — the schema's own vocabulary)",

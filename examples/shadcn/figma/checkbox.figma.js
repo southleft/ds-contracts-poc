@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "shadcn.checkbox",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (22 code-only facts — see plugin report)",
+    "description": "Checkbox — generated from contract shadcn.checkbox v0.2.0 † (24 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -201,8 +201,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg fill=\"#fafafa\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-              "svgPaintVar": "imported/checkbox/root/color/checked",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
           ]
@@ -301,8 +301,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg fill=\"#0a0a0a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-              "svgPaintVar": "imported/checkbox/root/color/indeterminate",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
           ]
@@ -503,8 +503,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg fill=\"#fafafa\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-              "svgPaintVar": "imported/checkbox/root/color/checked",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
           ]
@@ -604,8 +604,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg fill=\"#0a0a0a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-              "svgPaintVar": "imported/checkbox/root/color/indeterminate",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
           ]
@@ -796,8 +796,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg fill=\"#fafafa\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-              "svgPaintVar": "imported/checkbox/root/color/checked",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#fafafa\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "imported/checkbox/part-0/color/checked",
               "iconSize": 14
             }
           ]
@@ -896,8 +896,8 @@ const COMPONENTS = [
             {
               "type": "svg",
               "name": "part-0",
-              "svg": "<svg fill=\"#0a0a0a\" viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
-              "svgPaintVar": "imported/checkbox/root/color/indeterminate",
+              "svg": "<svg viewBox=\"0 0 20 20\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M 20 6 L 9 17 L 4 12\" fill=\"none\" stroke=\"#0a0a0a\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>",
+              "svgPaintVar": "imported/checkbox/part-0/color/indeterminate",
               "iconSize": 14
             }
           ]
@@ -915,6 +915,17 @@ const COMPONENTS = [
       "pinned": {}
     },
     "codeOnlyFacts": [
+      {
+        "part": "part-0",
+        "kind": "capture",
+        "channel": "cursor [disabled]",
+        "value": "not-allowed",
+        "reason": "observed by the computed capture and refused by the contract grammar — declared-channel state delta on 2/3 combos — partial coverage cannot carry as a state selector (v15); named residue",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
       {
         "part": "part-0",
         "kind": "declared",
@@ -943,6 +954,17 @@ const COMPONENTS = [
         "channel": "transition-property",
         "value": "none",
         "reason": "Motion (spin, pulse, easing) runs only in the coded component; the canvas shows one still frame.",
+        "variants": {
+          "count": 9,
+          "of": 9
+        }
+      },
+      {
+        "part": "root",
+        "kind": "capture",
+        "channel": "--tw-ring-shadow [focus-visible]",
+        "value": "0 0 0 calc(3px + 0px) color-mix(in oklab, oklch(0.708 0 0) 50%, transparent)",
+        "reason": "observed by the computed capture and refused by the contract grammar — CSS custom property, not a styled channel — the same door the base plane applies: a custom property is a token DECLARATION the library sets on this element (its plumbing), never a rendered fact; the rendered state delta rides the consuming channel",
         "variants": {
           "count": 9,
           "of": 9

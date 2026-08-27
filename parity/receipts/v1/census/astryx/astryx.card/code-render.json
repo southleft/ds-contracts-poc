@@ -217,7 +217,6 @@
       "imported.card.root.padding-top.teal",
       "imported.card.root.padding-top.transparent",
       "imported.card.root.padding-top.yellow",
-      "imported.card.root.width",
       "imported.shared.size-12"
     ],
     "icons": [],
@@ -236,8 +235,8 @@
       "status": "rendered",
       "png": "code-variant-default.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 78
+        "width": 126.45,
+        "height": 56
       }
     },
     {
@@ -252,8 +251,8 @@
       "status": "rendered",
       "png": "code-variant-transparent.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -268,8 +267,8 @@
       "status": "rendered",
       "png": "code-variant-muted.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -284,8 +283,8 @@
       "status": "rendered",
       "png": "code-variant-blue.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -300,8 +299,8 @@
       "status": "rendered",
       "png": "code-variant-cyan.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -316,8 +315,8 @@
       "status": "rendered",
       "png": "code-variant-gray.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -332,8 +331,8 @@
       "status": "rendered",
       "png": "code-variant-green.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -348,8 +347,8 @@
       "status": "rendered",
       "png": "code-variant-orange.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -364,8 +363,8 @@
       "status": "rendered",
       "png": "code-variant-pink.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -380,8 +379,8 @@
       "status": "rendered",
       "png": "code-variant-purple.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -396,8 +395,8 @@
       "status": "rendered",
       "png": "code-variant-red.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -412,8 +411,8 @@
       "status": "rendered",
       "png": "code-variant-teal.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     },
     {
@@ -428,8 +427,8 @@
       "status": "rendered",
       "png": "code-variant-yellow.png",
       "contentBox": {
-        "width": 114.19,
-        "height": 80
+        "width": 118.45,
+        "height": 48
       }
     }
   ],

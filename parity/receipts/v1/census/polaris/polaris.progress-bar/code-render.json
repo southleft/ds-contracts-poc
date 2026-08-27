@@ -26,7 +26,7 @@
       {
         "name": "progress",
         "type": "number",
-        "default": 40
+        "default": 0
       },
       {
         "name": "size",
@@ -61,6 +61,7 @@
       "imported.progress-bar.indicator.height.large",
       "imported.progress-bar.indicator.height.medium",
       "imported.progress-bar.indicator.height.small",
+      "imported.progress-bar.indicator.width",
       "imported.progress-bar.label.bottom.large",
       "imported.progress-bar.label.bottom.medium",
       "imported.progress-bar.label.bottom.small",

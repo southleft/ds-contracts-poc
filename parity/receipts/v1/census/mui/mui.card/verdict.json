@@ -1,0 +1,42 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "all elevations: canvas 'Card content' renders sans-serif; ref renders serif fallback (font substrate difference; walls[] empty so unnamed)"
+ ],
+ "defectClasses": [
+  "other"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:16992",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.card.dump.json",
+  "matched": 13,
+  "diverged": [
+   "prop elevation type \u2014 {\"enum\":[\"0\",\"1\",\"3\",\"8\"]} vs {\"enum\":[\"1\",\"0\",\"3\",\"8\"]}",
+   "part root/label/label-text \u2014 proposal has a part the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":true}",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-4} missing from proposal",
+   "part root width \u2014 {imported.card.root.width} missing from proposal",
+   "part root border-radius \u2014 proposal has {imported.shared.size-4}, contract has nothing",
+   "part root max-width \u2014 proposal has {imported.card.root.width}, contract has nothing",
+   "part root/label padding-left \u2014 {imported.shared.size-16} missing from proposal",
+   "part root/label padding-right \u2014 {imported.shared.size-16} missing from proposal",
+   "part root/label padding-inline \u2014 proposal has {imported.shared.size-16}, contract has nothing",
+   "part root/label content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root/label color (effective) \u2014 {imported.card.label.color} missing from proposal",
+   "text root/label font-size (effective) \u2014 {imported.shared.size-16} missing from proposal",
+   "text root/label font-weight (effective) \u2014 {imported.card.label.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`part root color` \u2014 {imported.card.root.color} \u2014 text-cascade token with no bound text node beneath it on the canvas"
+  ]
+ }
+}

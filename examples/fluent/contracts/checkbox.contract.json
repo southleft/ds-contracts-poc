@@ -145,6 +145,32 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "outline-color",
+              "value": "#545454",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         },
         "indicator": {
@@ -222,6 +248,50 @@
                         }
                       }
                     }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "color",
+                      "value": "rgba(15, 84, 140, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "fill",
+                      "value": "rgba(15, 84, 140, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "color",
+                      "value": "rgba(189, 189, 189, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "default",
+                      "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "fill",
+                      "value": "rgba(189, 189, 189, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "color",
+                      "value": "rgba(17, 94, 163, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "fill",
+                      "value": "rgba(17, 94, 163, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    }
                   ]
                 }
               },
@@ -239,6 +309,50 @@
                       "font-size": "{imported.checkbox.icon.font-size.medium}"
                     }
                   }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "color",
+                  "value": "rgba(15, 84, 140, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "active",
+                  "channel": "fill",
+                  "value": "rgba(15, 84, 140, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "color",
+                  "value": "rgba(189, 189, 189, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "cursor",
+                  "value": "default",
+                  "reason": "declared-channel state delta on 8/12 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "fill",
+                  "value": "rgba(189, 189, 189, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "hover",
+                  "channel": "color",
+                  "value": "rgba(17, 94, 163, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                },
+                {
+                  "state": "hover",
+                  "channel": "fill",
+                  "value": "rgba(17, 94, 163, 1)",
+                  "reason": "default-state values not kind-compatible for padding — cannot correlate"
                 }
               ]
             }
@@ -330,6 +444,122 @@
                 }
               }
             }
+          ],
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "background-color",
+              "value": "{imported.checkbox.indicator.background-color-state-active.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-bottom-color",
+              "value": "{imported.checkbox.indicator.border-bottom-color-state-active.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-left-color",
+              "value": "{imported.checkbox.indicator.border-left-color-state-active.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-right-color",
+              "value": "{imported.checkbox.indicator.border-right-color-state-active.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "border-top-color",
+              "value": "{imported.checkbox.indicator.border-top-color-state-active.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "color",
+              "value": "{imported.checkbox.indicator.color-state-active.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "active",
+              "channel": "fill",
+              "value": "{imported.checkbox.indicator.fill-state-active.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-bottom-color",
+              "value": "#e0e0e0",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-left-color",
+              "value": "#e0e0e0",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-right-color",
+              "value": "#e0e0e0",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "border-top-color",
+              "value": "#e0e0e0",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "disabled",
+              "channel": "fill",
+              "value": "#bdbdbd",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "background-color",
+              "value": "{imported.checkbox.indicator.background-color-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-bottom-color",
+              "value": "{imported.checkbox.indicator.border-bottom-color-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-left-color",
+              "value": "{imported.checkbox.indicator.border-left-color-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-right-color",
+              "value": "{imported.checkbox.indicator.border-right-color-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "border-top-color",
+              "value": "{imported.checkbox.indicator.border-top-color-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "{imported.checkbox.indicator.color-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "hover",
+              "channel": "fill",
+              "value": "{imported.checkbox.indicator.fill-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
           ]
         },
         "label": {
@@ -338,7 +568,8 @@
           "description": "Promoted from the computed floor (round 4): rendered anatomy label|Checkbox__label.Label — this element exists in the real component's DOM; the static layer had no part for it.",
           "declared": {
             "display": "block",
-            "cursor": "pointer"
+            "cursor": "pointer",
+            "font-family": "\"Segoe UI\", \"Segoe UI Web (West European)\", -apple-system, \"system-ui\", Roboto, \"Helvetica Neue\", sans-serif"
           },
           "declaredStates": {
             "disabled": {
@@ -389,6 +620,14 @@
                   "margin-top": "{imported.checkbox.label.margin-top.medium}"
                 }
               }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "hover",
+              "channel": "color",
+              "value": "{imported.checkbox.label.color-state-hover.{checked}}",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
             }
           ]
         }

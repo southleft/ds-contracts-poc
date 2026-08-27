@@ -2,8 +2,8 @@
   "_marker": "THE MEASURED ROUND TRIP — contract → Figma (mock) → dump → propose ≡ contract, per conformance case, on the case's own channel. Every SILENT entry is an OPEN DEFECT the engine must name or carry; it is never waivable and leaves this file only by being fixed. The gate refuses drift in EITHER direction: a regression is red, and an improvement must be re-recorded here so a fix can never be absorbed silently.",
   "measuredAt": "extract/computed/out/conformance/<case>/enriched.contract.json through figma-sync/plugin/engine (mock figma) and core/propose-figma (npx tsx conformance/canvas.ts)",
   "counts": {
-    "ROUND-TRIPPED": 55,
-    "NAMED": 16,
+    "ROUND-TRIPPED": 64,
+    "NAMED": 17,
     "DRIFTED": 0,
     "HARMFUL": 0,
     "SILENT": 1,
@@ -11,6 +11,18 @@
     "SEED-ABSENT": 0
   },
   "cases": {
+    "align-items-baseline": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "align-items",
+      "seed": [
+        "baseline"
+      ],
+      "proposed": [
+        "baseline"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "antd-component-scoped-custom-property": {
       "classification": "ROUND-TRIPPED",
       "channel": "padding-left",
@@ -101,6 +113,18 @@
       "proposed": [],
       "note": "code-only channel root.aspect-ratio = 2 / 1 — the canvas has no aspect-ratio field — LOWERED to a fixed height of 40px (bound width 80px ÷ 2); the ratio does not reach the canvas, a width change there will not follow it, and the dump reads back a fixed height"
     },
+    "border-color-control-equal": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "border-top-color",
+      "seed": [
+        "#000000"
+      ],
+      "proposed": [
+        "#000000"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "border-radius-px": {
       "classification": "ROUND-TRIPPED",
       "channel": "border-top-left-radius",
@@ -134,6 +158,19 @@
       ],
       "proposed": [
         "16px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "child-order-reversed-by-axis": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "__child-order",
+      "seed": [
+        "span|b>span|a"
+      ],
+      "proposed": [
+        "span|a>span|b",
+        "span|b>span|a"
       ],
       "refIdentical": true,
       "note": ""
@@ -192,8 +229,11 @@
       "seed": [
         "#2563eb"
       ],
-      "proposed": [],
-      "note": "code-only channel label.border-left-color = {imported.shared.color-00000000} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides."
+      "proposed": [
+        "#663399",
+        "#cbd5e1"
+      ],
+      "note": "value came back as #663399, #cbd5e1 (seed #2563eb) — code-only channel label.border-left-color = {imported.shared.color-00000000} — a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour disagrees and stays code-only (the one-paint limit, named per side)."
     },
     "combobox-option-selected": {
       "classification": "ROUND-TRIPPED",
@@ -293,6 +333,19 @@
       "refIdentical": true,
       "note": ""
     },
+    "flex-direction-by-axis": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "flex-direction",
+      "seed": [
+        "column"
+      ],
+      "proposed": [
+        "column",
+        "row"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "flex-direction-column": {
       "classification": "ROUND-TRIPPED",
       "channel": "flex-direction",
@@ -301,6 +354,19 @@
       ],
       "proposed": [
         "column"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "flex-direction-reverse-by-axis": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "flex-direction",
+      "seed": [
+        "row-reverse"
+      ],
+      "proposed": [
+        "row",
+        "row-reverse"
       ],
       "refIdentical": true,
       "note": ""
@@ -317,6 +383,18 @@
       "refIdentical": true,
       "channelAs": "gap",
       "note": "channel respelled: column-gap → gap"
+    },
+    "flex-wrap-wrap": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "flex-wrap",
+      "seed": [
+        "wrap"
+      ],
+      "proposed": [
+        "wrap"
+      ],
+      "refIdentical": true,
+      "note": ""
     },
     "grid-2d": {
       "classification": "ROUND-TRIPPED",
@@ -592,6 +670,18 @@
       "refIdentical": true,
       "note": ""
     },
+    "grid-zero-track-collapse": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "grid-template-columns",
+      "seed": [
+        "288px"
+      ],
+      "proposed": [
+        "288px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
     "margin-top-in-flow": {
       "classification": "SILENT",
       "channel": "margin-top",
@@ -634,6 +724,18 @@
       "refIdentical": true,
       "note": ""
     },
+    "overlay-text-fill-pinned-size": {
+      "classification": "NAMED",
+      "channel": "width",
+      "seed": [
+        "24px"
+      ],
+      "proposed": [
+        "8px",
+        "{imported.case-overlay-text-fill-pinned-size.label.width.{size}}"
+      ],
+      "note": "value came back as 8px, {imported.case-overlay-text-fill-pinned-size.label.width.{size}} (seed 24px) — «self»:root: root width binding {«self».root.width.{size}} carries as **max-width**, not width — a component's outer size is fluid-up-to in code and the canvas draws the max. Same token, translated channel; nothing dropped"
+    },
     "padding-asymmetric-block": {
       "classification": "ROUND-TRIPPED",
       "channel": "padding-top",
@@ -649,13 +751,16 @@
       "note": ""
     },
     "page-global-star-rule": {
-      "classification": "NAMED",
+      "classification": "ROUND-TRIPPED",
       "channel": "border-top-color",
       "seed": [
         "#663399"
       ],
-      "proposed": [],
-      "note": "code-only channel root.border-top-color = {imported.shared.color-663399} — per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides."
+      "proposed": [
+        "#663399"
+      ],
+      "refIdentical": true,
+      "note": ""
     },
     "page-inherited-ink": {
       "classification": "ROUND-TRIPPED",
@@ -690,6 +795,30 @@
       "proposed": [
         "4px",
         "6px"
+      ],
+      "refIdentical": true,
+      "note": ""
+    },
+    "presence-hidden-axis-geometry": {
+      "classification": "NAMED",
+      "channel": "top",
+      "seed": [
+        "3px"
+      ],
+      "proposed": [
+        "{imported.case-presence-hidden-axis-geometry.a.left.{checked}}",
+        "{imported.case-presence-hidden-axis-geometry.a.top.{checked}}"
+      ],
+      "note": "value came back as {imported.case-presence-hidden-axis-geometry.a.left.{checked}}, {imported.case-presence-hidden-axis-geometry.a.top.{checked}} (seed 3px) — code-only channel root.top = {imported.shared.size-0} — bound on an in-flow box (position: relative) — Figma lowers offsets only for absolutely-placed, inset-overlay and full-bleed parts, and has no offset field for a child in auto-layout, so this binding draws nothing and cannot be read back"
+    },
+    "pseudo-placeholder": {
+      "classification": "ROUND-TRIPPED",
+      "channel": "placeholder-color",
+      "seed": [
+        "#969696"
+      ],
+      "proposed": [
+        "#969696"
       ],
       "refIdentical": true,
       "note": ""

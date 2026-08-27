@@ -16,14 +16,6 @@
             "$type": "color"
           }
         },
-        "column-gap": {
-          "$value": "2px",
-          "$type": "dimension"
-        },
-        "grid-template-columns": {
-          "$value": "254px",
-          "$type": "dimension"
-        },
         "padding-bottom": {
           "$value": "12px",
           "$type": "dimension"
@@ -38,10 +30,6 @@
         },
         "padding-top": {
           "$value": "12px",
-          "$type": "dimension"
-        },
-        "row-gap": {
-          "$value": "2px",
           "$type": "dimension"
         }
       },
@@ -79,6 +67,10 @@
       }
     },
     "shared": {
+      "color-e5e5e5": {
+        "$value": "#e5e5e5",
+        "$type": "color"
+      },
       "size-10": {
         "$value": "10px",
         "$type": "dimension"
@@ -174,6 +166,10 @@
     },
     "avatar": {
       "root": {
+        "color": {
+          "$value": "#0a0a0a",
+          "$type": "color"
+        },
         "flex-shrink": {
           "$value": "0",
           "$type": "number"
@@ -234,6 +230,20 @@
           "$value": "400",
           "$type": "number"
         },
+        "height": {
+          "default": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "lg": {
+            "$value": "40px",
+            "$type": "dimension"
+          }
+        },
         "line-height": {
           "default": {
             "$value": "20px",
@@ -245,6 +255,20 @@
           },
           "lg": {
             "$value": "20px",
+            "$type": "dimension"
+          }
+        },
+        "width": {
+          "default": {
+            "$value": "32px",
+            "$type": "dimension"
+          },
+          "sm": {
+            "$value": "24px",
+            "$type": "dimension"
+          },
+          "lg": {
+            "$value": "40px",
             "$type": "dimension"
           }
         }
@@ -1340,6 +1364,22 @@
           "$value": "1px",
           "$type": "dimension"
         }
+      },
+      "part-0": {
+        "color": {
+          "checked": {
+            "$value": "#fafafa",
+            "$type": "color"
+          },
+          "indeterminate": {
+            "$value": "#0a0a0a",
+            "$type": "color"
+          },
+          "unchecked": {
+            "$value": "#fafafa",
+            "$type": "color"
+          }
+        }
       }
     },
     "input": {
@@ -1348,8 +1388,16 @@
           "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
           "$type": "shadow"
         },
+        "color": {
+          "$value": "#0a0a0a",
+          "$type": "color"
+        },
         "font-size": {
           "$value": "14px",
+          "$type": "dimension"
+        },
+        "height": {
+          "$value": "36px",
           "$type": "dimension"
         },
         "line-height": {
@@ -1375,6 +1423,10 @@
         "padding-top": {
           "$value": "4px",
           "$type": "dimension"
+        },
+        "placeholder-color": {
+          "$value": "#737373",
+          "$type": "color"
         },
         "width": {
           "$value": "288px",
@@ -1408,6 +1460,10 @@
           "$value": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 1px 2px 0px",
           "$type": "shadow"
         },
+        "height": {
+          "$value": "36px",
+          "$type": "dimension"
+        },
         "padding-left": {
           "$value": "10px",
           "$type": "dimension"
@@ -1436,8 +1492,16 @@
           "$value": "0",
           "$type": "number"
         },
+        "height": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
         "stroke-width": {
           "$value": "2px",
+          "$type": "dimension"
+        },
+        "width": {
+          "$value": "16px",
           "$type": "dimension"
         }
       }

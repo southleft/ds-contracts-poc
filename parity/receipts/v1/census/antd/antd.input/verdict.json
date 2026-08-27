@@ -1,0 +1,62 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [
+  "CODE-RENDER-BLANK:input"
+ ],
+ "defects": [
+  "ALL sampled cells: canvas renders the text 'Input' as a filled value in near-black #1f1f1f (and in red #ff4d4f on the filled and borderless variant cells) \u2014 ref shows a gray #bfbfbf placeholder in every cell; text color/role is wrong across the whole set",
+  "size-middle__status-error__variant-underlined: canvas contains ZERO underline ink (pixel scan finds 0 red pixels in the entire 576x60 PNG \u2014 only floating text); ref shows a red bottom border line; this cell does not read as an input at all",
+  "state-active and state-focus-visible: canvas draws a pale-BLUE outer focus ring (rgb 230,244,255, with a saturated blue stroke) around the red border \u2014 ref shows antd's error focus treatment: red border with a pale-RED glow (rgb 255,242,240); focus ring hue is wrong for status=error",
+  "state-active, state-hover, state-focus-visible, state-disabled: canvas centers the text horizontally (dark-text bbox center within 1px of image center) while the base cells and every ref cell are left-aligned (base text starts at x=26); state previews change the text alignment",
+  "state-hover: canvas border stays full red #ff4d4f (mean 255,79,81) \u2014 ref hover border lightens to ~#ffa39e (mean 255,163,158); hover state color not applied"
+ ],
+ "defectClasses": [
+  "other",
+  "missing ink",
+  "other",
+  "interior layout",
+  "other"
+ ],
+ "notes": "canvas draws the sampled default (error-status outlined field with red border, per the contract's defaultless status axis); the committed code render PNG is blank for this cell",
+ "reviewedAt": "ef10d9b1",
+ "setNodeId": "33:5197",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-antd-antd.input.dump.json",
+  "matched": 7,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"small\",\"middle\",\"large\"]} vs {\"enum\":[\"middle\",\"small\",\"large\"]}",
+   "prop size bindings.figma.values \u2014 {\"small\":\"Small\",\"middle\":\"Middle\",\"large\":\"Large\"} vs {\"middle\":\"Middle\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "prop status default \u2014 undefined vs \"error\"",
+   "prop placeholder \u2014 missing from proposal",
+   "prop children \u2014 proposal has a prop the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false}",
+   "part root border-bottom-left-radius \u2014 {imported.input.root.border-bottom-left-radius.{size}.{variant}} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.input.root.border-bottom-right-radius.{size}.{variant}} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.input.root.border-top-left-radius.{size}.{variant}} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.input.root.border-top-right-radius.{size}.{variant}} missing from proposal",
+   "part root bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root width \u2014 {imported.input.root.width} missing from proposal",
+   "part root padding-left \u2014 proposal has {imported.input.root.padding-left.{size}}, contract has nothing",
+   "part root padding-right \u2014 proposal has {imported.input.root.padding-right.{size}}, contract has nothing",
+   "part root padding-top \u2014 proposal has {imported.input.root.padding-top.{size}}, contract has nothing",
+   "part root padding-bottom \u2014 proposal has {imported.input.root.padding-bottom.{size}}, contract has nothing",
+   "part root border-top-width \u2014 proposal has {imported.input.root.border-top-width.{variant}}, contract has nothing",
+   "part root border-right-width \u2014 proposal has {imported.input.root.border-right-width.{variant}}, contract has nothing",
+   "part root border-bottom-width \u2014 proposal has {imported.input.root.border-bottom-width.{variant}}, contract has nothing",
+   "part root border-left-width \u2014 proposal has {imported.input.root.border-left-width.{variant}}, contract has nothing",
+   "part root max-width \u2014 proposal has {imported.input.root.width}, contract has nothing",
+   "part root line-height \u2014 proposal has {imported.input.root.line-height.{size}}, contract has nothing"
+  ],
+  "lost": [
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`Input:root/label` fontWeight = `500` \u2014 nearest tokens: `{font.control.weight}`, `{font.tab.default.weight}`, `{font.weight.medium}`"
+  ]
+ }
+}

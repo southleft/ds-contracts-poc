@@ -130,6 +130,15 @@ export interface MintObservation {
    *  text=false); the placeholder=true×text=true combination is never
    *  drawn). Absent (every existing caller) — coverage rules unchanged. */
   sparse?: string;
+  /** REJECTED-SETS ROUND — enabled combos where THIS PART did not render
+   *  (presence-hidden planes), as axis-value records. Lets the single-axis
+   *  fit fill a missing axis value whose EVERY combo is provably part-absent
+   *  (the polaris.checkbox icon: top/left = f(checked), part absent at
+   *  unchecked — the old refusal claimed the values "differ without
+   *  correlating to any variant axis", a false receipt). The fill is the
+   *  base-most DRAWN value — ink-invisible on the absent plane (the part
+   *  draws nothing there); named on the binding, never silent. */
+  partAbsentCombos?: Array<Record<string, string>>;
 }
 
 export interface MintAxis {
@@ -293,7 +302,14 @@ const sharedName = (kind: MintKind, value: string | number): string =>
 
 type Classified =
   | { kind: 'uniform'; value: string | number }
-  | { kind: 'variant'; axis: MintAxis; byValue: Map<string, string | number> }
+  | {
+      kind: 'variant';
+      axis: MintAxis;
+      byValue: Map<string, string | number>;
+      /** Axis values the PART never renders at, filled from the base-most
+       *  drawn value (see partAbsentCombos). Named on the binding. */
+      undrawn?: string[];
+    }
   | {
       kind: 'variant2';
       axes: [MintAxis, MintAxis];
@@ -354,6 +370,30 @@ function classify(
       if (obs.sparse !== undefined && missing.length < axis.values.length) {
         for (const v of missing) byValue.set(v, obs.sparse);
         return { kind: 'variant', axis, byValue };
+      }
+      // REJECTED-SETS ROUND — PRESENCE-RAGGED single axis: the missing axis
+      // value(s) are exactly the planes the PART never renders (the caller
+      // proves it via partAbsentCombos — polaris.checkbox's icon exists only
+      // at checked/indeterminate). The fit is real; the hole is not
+      // non-correlation. Filled from the base-most DRAWN value (declared
+      // axis order, the variant2 ragged-matrix rule) so the substituted ref
+      // resolves everywhere; ink-invisible on the absent plane and NAMED on
+      // the binding (undrawn).
+      if (
+        obs.partAbsentCombos !== undefined &&
+        missing.length < axis.values.length &&
+        missing.every((v) => obs.partAbsentCombos!.some((c) => c[axis.propName] === v))
+      ) {
+        const rank = (o: MintOccurrence): string =>
+          allAxes
+            .map((ax) => {
+              const idx = ax.values.indexOf(o.axisValues[ax.propName] ?? '');
+              return String(idx < 0 ? ax.values.length : idx).padStart(4, '0');
+            })
+            .join('.');
+        const base = [...obs.occurrences].sort((x, y) => (rank(x) < rank(y) ? -1 : rank(x) > rank(y) ? 1 : 0))[0].value;
+        for (const v of missing) byValue.set(v, base);
+        return { kind: 'variant', axis, byValue, undrawn: missing };
       }
     }
   }
@@ -787,7 +827,7 @@ export function mintTokens(
       // A ragged-matrix fill is not a usage SITE — no variant renders it. Say
       // so on the leaf, so a reader renaming these tokens against a real
       // system can see which cells the design never drew.
-      const undrawnKeys = new Set(c.kind === 'variant2' ? (c.undrawn ?? []) : []);
+      const undrawnKeys = new Set(c.kind === 'variant2' || c.kind === 'variant' ? (c.undrawn ?? []) : []);
       const textStyleForKey = (
         // @door mint.per-key-textstyle-fallback
         key: string,
@@ -839,6 +879,15 @@ export function mintTokens(
             'generated component still RENDERS them if it is called with that prop combination (the emitted prop types ' +
             'permit every combination; the Figma variant set does not have every combination). Give them a reviewed ' +
             'value or constrain the props — the drawn cells are the contract.',
+        );
+      }
+      if (c.kind === 'variant' && c.undrawn !== undefined && c.undrawn.length > 0) {
+        const supplied = c.byValue.get(c.undrawn[0])!;
+        caveats.push(
+          `the axis "${axisProps[0]}" is PRESENCE-RAGGED — the part is NOT RENDERED at ${c.undrawn.length} of its ${c.axis.values.length} value(s) ` +
+            `(${c.undrawn.map((k) => siteSuffix(k)).join('; ')}); those leaves carry ${formatValue(obs.kind, supplied)} — the base-most DRAWN value — ` +
+            'so the substituted ref resolves at every value the prop type allows. Ink-invisible there: the part is absent on that plane, so nothing draws the supplied value ' +
+            '(rejected-sets round — the polaris.checkbox icon insets, whose old refusal claimed non-correlation).',
         );
       }
       if (c.kind === 'variant2' && c.unwitnessed) {

@@ -1,0 +1,97 @@
+{
+  "id": "carbon.modal",
+  "library": "carbon",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@carbon/react",
+    "version": "1.112.0",
+    "recipe": "examples/carbon sandbox (.carbon-sandbox; examples/carbon/README) mounted per extract/computed/configs/carbon.json"
+  },
+  "configPath": "extract/computed/configs/carbon.json",
+  "component": "Modal",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-xs",
+      "status": "rendered",
+      "png": "ref-size-xs.png",
+      "props": {
+        "modalHeading": "Modal heading",
+        "modalLabel": "Label",
+        "primaryButtonText": "Save",
+        "secondaryButtonText": "Cancel",
+        "size": "xs",
+        "onRequestClose": {
+          "$callback": true
+        },
+        "onRequestSubmit": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "size-sm",
+      "status": "rendered",
+      "png": "ref-size-sm.png",
+      "props": {
+        "modalHeading": "Modal heading",
+        "modalLabel": "Label",
+        "primaryButtonText": "Save",
+        "secondaryButtonText": "Cancel",
+        "size": "sm",
+        "onRequestClose": {
+          "$callback": true
+        },
+        "onRequestSubmit": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "size-md",
+      "status": "rendered",
+      "png": "ref-size-md.png",
+      "props": {
+        "modalHeading": "Modal heading",
+        "modalLabel": "Label",
+        "primaryButtonText": "Save",
+        "secondaryButtonText": "Cancel",
+        "size": "md",
+        "onRequestClose": {
+          "$callback": true
+        },
+        "onRequestSubmit": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    },
+    {
+      "slug": "size-lg",
+      "status": "rendered",
+      "png": "ref-size-lg.png",
+      "props": {
+        "modalHeading": "Modal heading",
+        "modalLabel": "Label",
+        "primaryButtonText": "Save",
+        "secondaryButtonText": "Cancel",
+        "size": "lg",
+        "onRequestClose": {
+          "$callback": true
+        },
+        "onRequestSubmit": {
+          "$callback": true
+        },
+        "open": true
+      },
+      "capture": "portal"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

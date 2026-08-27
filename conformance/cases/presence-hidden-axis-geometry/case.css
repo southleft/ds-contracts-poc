@@ -1,0 +1,5 @@
+[data-cf="presence-hidden-axis-geometry"] { display: block; position: relative; height: 24px; }
+[data-cf="presence-hidden-axis-geometry"] .cf-a { position: absolute; width: 8px; height: 8px; background: rgb(30, 90, 200); }
+[data-cf="presence-hidden-axis-geometry"] .cf-a[data-kind="checked"] { top: 3px; left: 3px; }
+[data-cf="presence-hidden-axis-geometry"] .cf-a[data-kind="indeterminate"] { top: 6px; left: 6px; }
+[data-cf="presence-hidden-axis-geometry"] .cf-b { display: inline-block; }

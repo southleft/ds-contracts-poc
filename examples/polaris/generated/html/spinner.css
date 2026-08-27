@@ -5,8 +5,7 @@
 }
 
 .spinner {
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   border: 0;

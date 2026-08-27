@@ -1,0 +1,21 @@
+{
+  "id": "overlay-text-fill-pinned-size",
+  "feature": "geometry",
+  "construct": "a TEXT-bearing part that fills a PINNED ancestor box (width/height: 100% inside a sized root) in an overlay anatomy — the shadcn.Avatar fallback shape",
+  "why": "The overlay-cluster geometry admission drops every text-bearing part with one sentence, 'font-metric-dependent widths'. That is true of a shrink-to-fit box and FALSE of a box the layout pinned: shadcn's `size-full` fallback inside a `size-8` root IS the root's 32x32 box, and losing it minted a 17x20 hug pinned to the top-left corner of a 32x32 transparent frame — the census verdict's 'circle offset, large empty area, glyphs overflow the circle'. The part's own reported box equals the ancestor's CONTENT box in every combo, and that content box MOVES with the size axis, so the number is the library's.",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.parts.b.tokens.width / .height",
+  "observable": {
+    "part": "b",
+    "channel": "width",
+    "capturedValue": "24px"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "the filled child draws concentric and full-size inside the root instead of hugging its sample string in a corner"
+  },
+  "axes": [
+    { "prop": "size", "values": ["default", "lg"], "default": "default" }
+  ]
+}

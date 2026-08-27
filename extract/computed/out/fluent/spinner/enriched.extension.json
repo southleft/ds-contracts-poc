@@ -799,11 +799,25 @@
         "part": "root",
         "field": "justify",
         "value": "center"
+      },
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "row",
+        "byProp": {
+          "prop": "labelPosition",
+          "overrides": {
+            "above": "column-reverse",
+            "below": "column",
+            "before": "row-reverse"
+          }
+        }
       }
     ],
     "contradictions": [],
     "receipts": [
-      "layout-not-uniform: root.flex-direction varies across combos — stays code-only"
+      "layout-factored-on-axis: root.flex-direction varies across combos but factors on enum axis \"labelPosition\" — base (labelPosition=after) carries layout.direction = row; deviating value(s) labelPosition=above → column, labelPosition=below → column ride layoutByProp (schema v7; resolveLayout merges per compiled variant)",
+      "child-order-carried-as-reversed-axis: root's children are re-ordered across combos and every deviating order is the EXACT REVERSE of the contract's part order — carried as layout.direction = row with labelPosition=above → column-reverse, labelPosition=below → column, labelPosition=before → row-reverse via layoutByProp (the schema's documented spelling: code writes the keyword, the canvas compiles the children in reversed order)"
     ],
     "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
   },
@@ -1251,6 +1265,7 @@
     ]
   },
   "enrichmentNotes": [
+    "layout enriched per axis: root.layout.direction = row at base; labelPosition=above → column-reverse, labelPosition=below → column, labelPosition=before → row-reverse via layoutByProp (schema v7 — resolveLayout merges per compiled variant)",
     "layout enriched: root.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: root.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
     "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",

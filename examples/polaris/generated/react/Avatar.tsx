@@ -20,7 +20,7 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   size?: 'xs' | 'sm' | 'md' | 'lg' | 'xl';
   /** The name of the person */
   name?: string;
-  /** Initials of person to display. Default TP matches developed receipt (examples/polaris/receipts/avatar/default.png); without a string default, contentFallsThrough kept only the silhouette SVG children. */
+  /** Initials of person to display */
   initials?: string;
   /** Whether the avatar is for a customer */
   customer?: boolean;
@@ -28,7 +28,7 @@ export interface AvatarProps extends HTMLAttributes<HTMLSpanElement> {
   source?: string;
   /** Accessible label for the avatar image */
   accessibilityLabel?: string;
-  /** Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `initials` ("TP"); the created subtree is carried as parts gated on this prop. Default true so canvas showcase matches developed initials receipt (silhouette remains via Show WithInitials=false + icon assets once gated). */
+  /** Structure-creating optional prop promoted by the computed floor (round 4): ON mounts the library's `initials` ("TP"); the created subtree is carried as parts gated on this prop. */
   withInitials?: boolean;
 }
 

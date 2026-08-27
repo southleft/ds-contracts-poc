@@ -1,0 +1,62 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "sizing-md unchecked (and visible across cells): gap between switch track and the 'Toggle' label is slightly wider on canvas than ref; admitted in verdict notes but walls array is empty so not excused; track/thumb geometry, checked blue fill, and size steps otherwise match \u2014 non-material"
+ ],
+ "defectClasses": [
+  "interior layout"
+ ],
+ "notes": "track/thumb geometry + checked fill match; label gap slightly wider on canvas",
+ "reviewedAt": "ad1e0fbb",
+ "setNodeId": "39:6030",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-tailwind-flowbite.toggleswitch.dump.json",
+  "matched": 8,
+  "diverged": [
+   "name \u2014 ToggleSwitch vs Toggleswitch",
+   "prop sizing type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"md\",\"sm\",\"lg\"]}",
+   "prop sizing bindings.figma.values \u2014 {\"sm\":\"Sm\",\"md\":\"Md\",\"lg\":\"Lg\"} vs {\"md\":\"Md\",\"sm\":\"Sm\",\"lg\":\"Lg\"}",
+   "part root/label \u2014 missing from proposal",
+   "part root/labelmarginBox \u2014 proposal has a part the contract does not",
+   "part root/labelmarginBox/label \u2014 proposal has a part the contract does not",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-8} missing from proposal",
+   "part root border-radius \u2014 proposal has {imported.shared.size-8}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.toggle-switch.label.margin-left}, contract has nothing",
+   "part root max-width \u2014 proposal has {imported.toggle-switch.root.width.{sizing}}, contract has nothing",
+   "part root height \u2014 proposal has {imported.toggle-switch.root.height.{sizing}}, contract has nothing",
+   "part root/part-0 border-bottom-left-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root/part-0 border-bottom-right-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root/part-0 border-top-left-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root/part-0 border-top-right-radius \u2014 {imported.shared.size-9999} missing from proposal",
+   "part root/part-0 bottom \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 left \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 right \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 top \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/part-0 background-color \u2014 proposal has {imported.toggle-switch.part-0.background-color.{checked}}, contract has nothing",
+   "part root/part-0 border-radius \u2014 proposal has {imported.shared.size-9999}, contract has nothing",
+   "part root/part-0 width \u2014 proposal has {imported.toggle-switch.part-0.width.{sizing}}, contract has nothing",
+   "part root/part-0 height \u2014 proposal has {imported.toggle-switch.part-0.height.{sizing}}, contract has nothing",
+   "part root/part-0 min-width \u2014 proposal has {imported.toggle-switch.part-0.min-width.{sizing}}, contract has nothing"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"button\",\"role\":\"switch\",\"roleException\":\"Flowbite ToggleSwitch is a <button role=\\\"switch\\\">; the library has no native checkbox in the DOM.\"})",
+   "`events` \u2014 the canvas cannot run behavior \u2014 toggle not recoverable",
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/label color` \u2014 {imported.toggle-switch.label.color} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-size` \u2014 {imported.toggle-switch.label.font-size} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/label font-weight` \u2014 {imported.toggle-switch.label.font-weight} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Toggleswitch:root/part-0/part-0-after` fill = `#ffffff` \u2014 nearest tokens: `{color.surface.raised}`, `{color.action.primary.foreground}`, `{color.action.danger.foreground}`, `{color.action.destructive.foreground}`, `{col",
+   "`Toggleswitch:root/part-0/part-0-after` stroke = `#d1d5db` \u2014 nearest tokens: `{color.action.secondary.background-hover}`, `{color.switch.off.track}`, `{color.gray.300}`",
+   "`Toggleswitch:root/part-0/part-0-after` strokeWeight = `1` \u2014 nearest tokens: `{border.width.divider.subtle}`, `{border-width.100}`"
+  ],
+  "identicalToCommittedBaseline": true
+ }
+}

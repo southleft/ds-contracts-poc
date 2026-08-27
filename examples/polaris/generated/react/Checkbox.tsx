@@ -57,7 +57,7 @@ export const Checkbox = forwardRef<HTMLSpanElement, CheckboxProps>(function Chec
 </span>
 </span>
 <span className={styles.choice__label}>
-<span className={styles.label}>Save this information</span>
+<span className={styles.label}>Save this product</span>
 </span>
     </span>
   );

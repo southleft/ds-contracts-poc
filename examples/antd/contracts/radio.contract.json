@@ -71,7 +71,8 @@
   "anatomy": {
     "root": {
       "layout": {
-        "display": "flex"
+        "display": "flex",
+        "align": "baseline"
       },
       "parts": {
         "radio": {

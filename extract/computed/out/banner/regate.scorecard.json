@@ -3,6 +3,7 @@
   "component": "Banner",
   "config": "extract/computed/configs/polaris.json",
   "capturedBrowser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
       {
@@ -608,13 +609,15 @@
     "component": "Banner",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 151.0.7922.34 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "browserMismatch": "RENDERED ON A DIFFERENT BROWSER THAN THE CAPTURE — these numbers were produced by Chromium 149.0.7827.55, but the captured truth they are scored against was recorded on Chromium 151.0.7922.34. Computed styles differ between Chromium versions, so cells can be UNEQUAL for that reason alone and this scorecard is not comparable to one recorded on the capture's own browser. Measured 2026-08-25: `position-anchor` computes `none` in 149 and `normal` in 151, and on a raw all-channel replay `flex-line-count`, `ruby-overhang` and `text-fit` move too. Re-run with PLAYWRIGHT_CHROMIUM_PATH set to the capture's browser, or re-capture.",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 16,
     "interactions": 4,
     "computed": {
       "cellsCompared": 27520,
-      "cellsEqual": 25028,
-      "pctEqual": 90.94476744186046,
+      "cellsEqual": 25060,
+      "pctEqual": 91.06104651162791,
       "rowsFullyEqual": 0,
       "rows": 64
     },
@@ -640,7 +643,7 @@
       "mintedLeavesUnfolded": 319,
       "baseBindings": 208,
       "stateBindings": 2,
-      "codeOnlyChannels": 47,
+      "codeOnlyChannels": 46,
       "overflowBindings": 7,
       "folds": 269
     },
@@ -649,56 +652,56 @@
         "key": "success.on.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 52,
+        "channelsMismatched": 51,
         "unscorable": "no-original"
       },
       {
         "key": "info.on.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 52,
+        "channelsMismatched": 51,
         "unscorable": "no-original"
       },
       {
         "key": "warning.on.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 52,
+        "channelsMismatched": 51,
         "unscorable": "no-original"
       },
       {
         "key": "critical.on.on__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 52,
+        "channelsMismatched": 51,
         "unscorable": "no-original"
       },
       {
         "key": "success.on.on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 50,
+        "channelsMismatched": 49,
         "unscorable": "no-original"
       },
       {
         "key": "success.on.on__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 50,
+        "channelsMismatched": 49,
         "unscorable": "no-original"
       },
       {
         "key": "success.on.on__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 50,
+        "channelsMismatched": 49,
         "unscorable": "no-original"
       },
       {
         "key": "info.on.on__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 50,
+        "channelsMismatched": 49,
         "unscorable": "no-original"
       }
     ],
@@ -812,7 +815,6 @@
       "code-only: part-0-0-1-0-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: buttongroup.flex-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: buttongroup.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: buttongroup.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: buttongroup__item.scrollbar-color — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
@@ -828,7 +830,7 @@
     },
     "shippedMinted": {
       "path": "examples/polaris/tokens/polaris-minted.dtcg.json",
-      "leavesAdded": 1218,
+      "leavesAdded": 1266,
       "divergent": [
         {
           "token": "imported.banner.label-3.font-weight",
@@ -1540,7 +1542,7 @@
       {
         "key": "success.off.on__default",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1706,12 +1708,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -1791,7 +1787,7 @@
       {
         "key": "success.off.on__hover",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1960,12 +1956,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -2042,7 +2032,7 @@
       {
         "key": "success.off.on__focus-visible",
         "channelsCompared": 438,
-        "channelsEqual": 396,
+        "channelsEqual": 397,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2217,12 +2207,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -2305,7 +2289,7 @@
       {
         "key": "success.off.on__active",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2471,12 +2455,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -3500,7 +3478,7 @@
       {
         "key": "success.on.on__default",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -3726,12 +3704,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -3811,7 +3783,7 @@
       {
         "key": "success.on.on__hover",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4040,12 +4012,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -4122,7 +4088,7 @@
       {
         "key": "success.on.on__focus-visible",
         "channelsCompared": 545,
-        "channelsEqual": 493,
+        "channelsEqual": 494,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4363,12 +4329,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -4445,7 +4405,7 @@
       {
         "key": "success.on.on__active",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -4671,12 +4631,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -5454,7 +5408,7 @@
       {
         "key": "info.off.on__default",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5620,12 +5574,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -5705,7 +5653,7 @@
       {
         "key": "info.off.on__hover",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -5874,12 +5822,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -5956,7 +5898,7 @@
       {
         "key": "info.off.on__focus-visible",
         "channelsCompared": 438,
-        "channelsEqual": 396,
+        "channelsEqual": 397,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6131,12 +6073,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -6219,7 +6155,7 @@
       {
         "key": "info.off.on__active",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -6385,12 +6321,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -7414,7 +7344,7 @@
       {
         "key": "info.on.on__default",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7640,12 +7570,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -7725,7 +7649,7 @@
       {
         "key": "info.on.on__hover",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -7954,12 +7878,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -8036,7 +7954,7 @@
       {
         "key": "info.on.on__focus-visible",
         "channelsCompared": 545,
-        "channelsEqual": 493,
+        "channelsEqual": 494,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8277,12 +8195,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -8359,7 +8271,7 @@
       {
         "key": "info.on.on__active",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -8585,12 +8497,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -9368,7 +9274,7 @@
       {
         "key": "warning.off.on__default",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9534,12 +9440,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -9619,7 +9519,7 @@
       {
         "key": "warning.off.on__hover",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -9788,12 +9688,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -9870,7 +9764,7 @@
       {
         "key": "warning.off.on__focus-visible",
         "channelsCompared": 438,
-        "channelsEqual": 396,
+        "channelsEqual": 397,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10045,12 +9939,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -10133,7 +10021,7 @@
       {
         "key": "warning.off.on__active",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -10299,12 +10187,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -11328,7 +11210,7 @@
       {
         "key": "warning.on.on__default",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11554,12 +11436,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -11639,7 +11515,7 @@
       {
         "key": "warning.on.on__hover",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -11868,12 +11744,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -11950,7 +11820,7 @@
       {
         "key": "warning.on.on__focus-visible",
         "channelsCompared": 545,
-        "channelsEqual": 493,
+        "channelsEqual": 494,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12191,12 +12061,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -12273,7 +12137,7 @@
       {
         "key": "warning.on.on__active",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -12499,12 +12363,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -13282,7 +13140,7 @@
       {
         "key": "critical.off.on__default",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13448,12 +13306,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -13533,7 +13385,7 @@
       {
         "key": "critical.off.on__hover",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13702,12 +13554,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -13784,7 +13630,7 @@
       {
         "key": "critical.off.on__focus-visible",
         "channelsCompared": 438,
-        "channelsEqual": 396,
+        "channelsEqual": 397,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -13959,12 +13805,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -14047,7 +13887,7 @@
       {
         "key": "critical.off.on__active",
         "channelsCompared": 438,
-        "channelsEqual": 398,
+        "channelsEqual": 399,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -14213,12 +14053,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -15242,7 +15076,7 @@
       {
         "key": "critical.on.on__default",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15468,12 +15302,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",
@@ -15553,7 +15381,7 @@
       {
         "key": "critical.on.on__hover",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -15782,12 +15610,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -15864,7 +15686,7 @@
       {
         "key": "critical.on.on__focus-visible",
         "channelsCompared": 545,
-        "channelsEqual": 493,
+        "channelsEqual": 494,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16105,12 +15927,6 @@
           },
           {
             "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
-          },
-          {
-            "part": "buttongroup",
             "channel": "scrollbar-color",
             "ours": "auto",
             "theirs": "rgba(138, 138, 138, 1) rgba(0, 0, 0, 0)"
@@ -16187,7 +16003,7 @@
       {
         "key": "critical.on.on__active",
         "channelsCompared": 545,
-        "channelsEqual": 495,
+        "channelsEqual": 496,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -16413,12 +16229,6 @@
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
-          },
-          {
-            "part": "buttongroup",
-            "channel": "flex-wrap",
-            "ours": "nowrap",
-            "theirs": "wrap"
           },
           {
             "part": "buttongroup",

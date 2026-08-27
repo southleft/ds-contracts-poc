@@ -3,8 +3,45 @@
   "component": "Chip",
   "config": "extract/computed/configs/altitude.json",
   "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
   "declared": {
     "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "secondary"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "secondary"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "secondary"
+        }
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid",
+        "when": {
+          "prop": "variant",
+          "equals": "secondary"
+        }
+      },
       {
         "part": "root",
         "channel": "cursor",
@@ -35,13 +72,14 @@
     "component": "Chip",
     "generatedBy": "extract/computed/gate.ts",
     "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
     "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
     "combos": 12,
     "interactions": 4,
     "computed": {
       "cellsCompared": 2016,
-      "cellsEqual": 1904,
-      "pctEqual": 94.44444444444444,
+      "cellsEqual": 1968,
+      "pctEqual": 97.61904761904762,
       "rowsFullyEqual": 0,
       "rows": 48
     },
@@ -73,59 +111,59 @@
     },
     "worstRows": [
       {
-        "key": "secondary.unset__default",
+        "key": "unset.unset__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
-        "key": "secondary.unset__hover",
+        "key": "unset.unset__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
-        "key": "secondary.unset__focus-visible",
+        "key": "unset.unset__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
-        "key": "secondary.unset__active",
+        "key": "unset.unset__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
-        "key": "secondary.squared__default",
+        "key": "unset.squared__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
-        "key": "secondary.squared__hover",
+        "key": "unset.squared__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
-        "key": "secondary.squared__focus-visible",
+        "key": "unset.squared__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       },
       {
-        "key": "secondary.squared__active",
+        "key": "unset.squared__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 9,
+        "channelsMismatched": 1,
         "unscorable": "no-original"
       }
     ],
@@ -133,38 +171,6 @@
       [
         "root.display",
         48
-      ],
-      [
-        "root.border-bottom-style",
-        8
-      ],
-      [
-        "root.border-bottom-width",
-        8
-      ],
-      [
-        "root.border-left-style",
-        8
-      ],
-      [
-        "root.border-left-width",
-        8
-      ],
-      [
-        "root.border-right-style",
-        8
-      ],
-      [
-        "root.border-right-width",
-        8
-      ],
-      [
-        "root.border-top-style",
-        8
-      ],
-      [
-        "root.border-top-width",
-        8
       ]
     ],
     "namedLosses": [
@@ -176,7 +182,7 @@
     },
     "shippedMinted": {
       "path": "examples/altitude/tokens/altitude-minted.dtcg.json",
-      "leavesAdded": 227,
+      "leavesAdded": 232,
       "divergent": [
         {
           "token": "imported.chip.root.background-color.danger",
@@ -392,59 +398,11 @@
       {
         "key": "secondary.unset__default",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -457,59 +415,11 @@
       {
         "key": "secondary.unset__hover",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -522,59 +432,11 @@
       {
         "key": "secondary.unset__focus-visible",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -587,59 +449,11 @@
       {
         "key": "secondary.unset__active",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -652,59 +466,11 @@
       {
         "key": "secondary.squared__default",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -717,59 +483,11 @@
       {
         "key": "secondary.squared__hover",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -782,59 +500,11 @@
       {
         "key": "secondary.squared__focus-visible",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",
@@ -847,59 +517,11 @@
       {
         "key": "secondary.squared__active",
         "channelsCompared": 42,
-        "channelsEqual": 33,
+        "channelsEqual": 41,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
         "mismatches": [
-          {
-            "part": "root",
-            "channel": "border-bottom-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-bottom-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-left-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-right-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-style",
-            "ours": "none",
-            "theirs": "solid"
-          },
-          {
-            "part": "root",
-            "channel": "border-top-width",
-            "ours": "0px",
-            "theirs": "1px"
-          },
           {
             "part": "root",
             "channel": "display",

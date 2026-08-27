@@ -1,0 +1,62 @@
+[
+  {
+    "key": "checked__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "checked__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "indeterminate__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "unchecked__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

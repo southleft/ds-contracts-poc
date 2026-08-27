@@ -11,23 +11,27 @@
 }
 
 .root {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: 254px;
+  grid-auto-flow: row;
+  row-gap: 2px;
+  column-gap: 2px;
   border: 0;
   background-color: var(--imported-alert-root-background-color);
+  border-bottom-color: var(--imported-shared-color-e5e5e5);
   border-bottom-left-radius: var(--imported-shared-size-10);
   border-bottom-right-radius: var(--imported-shared-size-10);
   border-bottom-width: var(--imported-shared-size-1);
+  border-left-color: var(--imported-shared-color-e5e5e5);
   border-left-width: var(--imported-shared-size-1);
+  border-right-color: var(--imported-shared-color-e5e5e5);
   border-right-width: var(--imported-shared-size-1);
+  border-top-color: var(--imported-shared-color-e5e5e5);
   border-top-left-radius: var(--imported-shared-size-10);
   border-top-right-radius: var(--imported-shared-size-10);
   border-top-width: var(--imported-shared-size-1);
   bottom: var(--imported-shared-size-0);
-  column-gap: var(--imported-alert-root-column-gap);
   font-size: var(--imported-shared-size-14);
-  grid-template-columns: var(--imported-alert-root-grid-template-columns);
   left: var(--imported-shared-size-0);
   line-height: var(--imported-shared-size-20);
   padding-bottom: var(--imported-alert-root-padding-bottom);
@@ -35,8 +39,8 @@
   padding-right: var(--imported-alert-root-padding-right);
   padding-top: var(--imported-alert-root-padding-top);
   right: var(--imported-shared-size-0);
-  row-gap: var(--imported-alert-root-row-gap);
   top: var(--imported-shared-size-0);
+  width: 288px;
   border-bottom-style: solid;
   border-left-style: solid;
   border-right-style: solid;
@@ -58,6 +62,7 @@
   font-weight: var(--imported-alert-label-font-weight);
   line-height: var(--imported-shared-size-20);
   display: block;
+  font-family: 'Inter Variable', sans-serif;
   text-align: left;
 }
 
@@ -74,6 +79,7 @@
   font-weight: var(--imported-alert-label-2-font-weight);
   line-height: var(--imported-shared-size-20);
   display: block;
+  font-family: 'Inter Variable', sans-serif;
   text-align: left;
 }
 

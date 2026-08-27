@@ -1,0 +1,67 @@
+{
+  "id": "ds.banner",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "status-info__container-card",
+      "status": "rendered",
+      "png": "ref-status-info__container-card.png",
+      "props": {
+        "status": "info",
+        "container": "card"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-info__container-section",
+      "status": "rendered",
+      "png": "ref-status-info__container-section.png",
+      "props": {
+        "status": "info",
+        "container": "section"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-success__container-card",
+      "status": "rendered",
+      "png": "ref-status-success__container-card.png",
+      "props": {
+        "status": "success",
+        "container": "card"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-warning__container-card",
+      "status": "rendered",
+      "png": "ref-status-warning__container-card.png",
+      "props": {
+        "status": "warning",
+        "container": "card"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "status-error__container-card",
+      "status": "rendered",
+      "png": "ref-status-error__container-card.png",
+      "props": {
+        "status": "error",
+        "container": "card"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 5,
+  "unmappable": 0
+}

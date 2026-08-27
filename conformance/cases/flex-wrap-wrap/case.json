@@ -1,0 +1,18 @@
+{
+  "id": "flex-wrap-wrap",
+  "feature": "layout",
+  "construct": "uniform flex-wrap: wrap on a flex row narrow enough to wrap",
+  "why": "LayoutSchema.wrap is a first-class v15/S4 fact with a real lowering on both halves (css.ts writes flex-wrap: wrap; emit-figma-script writes native layoutWrap 'WRAP'), and LAYOUT_CHANNEL_TO_FIELD had NO entry for the channel at all — so the fact could only ever arrive from a hand-authored static contract and never from a captured library (carbon.inlinenotification's text wrapper, mui.autocomplete / badge / breadcrumbs / snackbar).",
+  "expect": "CARRIED",
+  "expectName": "",
+  "expectWhere": "anatomy.root.layout.wrap = true",
+  "observable": {
+    "part": "root",
+    "channel": "flex-wrap",
+    "capturedValue": "wrap"
+  },
+  "canvas": {
+    "expect": "PRESENT",
+    "note": "native layoutWrap 'WRAP' on the auto-layout frame"
+  }
+}

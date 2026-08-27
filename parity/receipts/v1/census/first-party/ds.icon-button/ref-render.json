@@ -1,0 +1,77 @@
+{
+  "id": "ds.icon-button",
+  "library": "first-party",
+  "renderer": "REAL IMPLEMENTATION render — generated React catalog (src/components) via its Storybook meta, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
+  "harness": {
+    "package": "src/components (generated catalog — npm run generate)",
+    "version": "committed tree",
+    "recipe": "the repo's own generated React components ARE the real first-party implementation; mounted through each component's generated Storybook meta (canonical args/render), esbuild-bundled with src/components/tokens.css"
+  },
+  "configPath": null,
+  "component": null,
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-secondary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-medium.png",
+      "props": {
+        "variant": "secondary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__size-small",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-small.png",
+      "props": {
+        "variant": "secondary",
+        "size": "sm"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-secondary__size-large",
+      "status": "rendered",
+      "png": "ref-variant-secondary__size-large.png",
+      "props": {
+        "variant": "secondary",
+        "size": "lg"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-primary__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-primary__size-medium.png",
+      "props": {
+        "variant": "primary",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-ghost__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-ghost__size-medium.png",
+      "props": {
+        "variant": "ghost",
+        "size": "md"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-destructive__size-medium",
+      "status": "rendered",
+      "png": "ref-variant-destructive__size-medium.png",
+      "props": {
+        "variant": "destructive",
+        "size": "md"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 6,
+  "unmappable": 0
+}

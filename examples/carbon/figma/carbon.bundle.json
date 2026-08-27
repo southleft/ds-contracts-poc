@@ -5596,6 +5596,10 @@
             "$value": "#1010104d",
             "$type": "color"
           },
+          "color-161616": {
+            "$value": "#161616",
+            "$type": "color"
+          },
           "size-288": {
             "$value": "288px",
             "$type": "dimension"
@@ -5642,10 +5646,6 @@
           },
           "color-525252": {
             "$value": "#525252",
-            "$type": "color"
-          },
-          "color-161616": {
-            "$value": "#161616",
             "$type": "color"
           },
           "size-500-5": {
@@ -6461,9 +6461,17 @@
               "$value": "2px",
               "$type": "dimension"
             },
+            "placeholder-color": {
+              "$value": "#16161666",
+              "$type": "color"
+            },
             "outline-color-state-active": {
               "$value": "#0f62fe",
               "$type": "color"
+            },
+            "outline-width-state-active": {
+              "$value": "2px",
+              "$type": "dimension"
             },
             "border-bottom-color-state-disabled": {
               "$value": "#00000000",
@@ -6472,6 +6480,10 @@
             "outline-color-state-focus-visible": {
               "$value": "#0f62fe",
               "$type": "color"
+            },
+            "outline-width-state-focus-visible": {
+              "$value": "2px",
+              "$type": "dimension"
             }
           },
           "text-input-counter-alert": {
@@ -8194,8 +8206,17 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy button|accordion__heading — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
                     "display": "flex",
+                    "direction": "row-reverse",
                     "align": "center",
                     "justify": "start"
+                  },
+                  "layoutByProp": {
+                    "prop": "align",
+                    "map": {
+                      "start": {
+                        "direction": "row"
+                      }
+                    }
                   },
                   "parts": {
                     "icon": {
@@ -9606,7 +9627,8 @@
                 "inline-notification__text-wrapper": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|inline-notification__text-wrapper — this element exists in the real component's DOM; the static layer had no part for it.",
                   "layout": {
-                    "display": "flex"
+                    "display": "flex",
+                    "wrap": true
                   },
                   "parts": {
                     "label": {
@@ -10163,6 +10185,7 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Save.",
                       "layout": {
                         "display": "flex",
+                        "align": "baseline",
                         "justify": "space-between",
                         "grow": true
                       },
@@ -10211,6 +10234,7 @@
                       "description": "Promoted from the computed floor (round 4): rendered anatomy button|btn — this element exists in the real component's DOM; the static layer had no part for it. Wave climb: flex-basis 50% was refused (FC-FLEX-BASIS); layout.grow shares the footer strip equally with Cancel.",
                       "layout": {
                         "display": "flex",
+                        "align": "baseline",
                         "justify": "space-between",
                         "grow": true
                       },
@@ -11329,7 +11353,8 @@
                   "description": "Promoted from the computed floor (round 4): rendered anatomy label|label — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
-                    "cursor": "default"
+                    "cursor": "default",
+                    "font-family": "\"IBM Plex Sans\", system-ui, -apple-system, \"system-ui\", \".SFNSText-Regular\", sans-serif"
                   },
                   "tokens": {
                     "color": "{imported.text-input.label.color}",
@@ -11347,6 +11372,7 @@
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-161616}",
                 "font-size": "{imported.shared.size-14}",
                 "height": "{imported.text-input.text-input-label-wrapper.height}",
                 "letter-spacing": "{imported.shared.size-0-16}",
@@ -11401,9 +11427,7 @@
                         "background-color": "{imported.text-input.text-input.background-color}",
                         "border-bottom-color": "{imported.text-input.text-input.border-bottom-color}",
                         "border-bottom-width": "{imported.shared.size-1}",
-                        "border-left-width": "{imported.shared.size-0}",
-                        "border-right-width": "{imported.shared.size-0}",
-                        "border-top-width": "{imported.shared.size-0}",
+                        "color": "{imported.shared.color-161616}",
                         "font-size": "{imported.shared.size-14}",
                         "height": "{imported.text-input.text-input.height.unset}",
                         "letter-spacing": "{imported.shared.size-0-16}",
@@ -11413,6 +11437,7 @@
                         "outline-width": "{imported.text-input.text-input.outline-width}",
                         "padding-left": "{imported.shared.size-16}",
                         "padding-right": "{imported.shared.size-16}",
+                        "placeholder-color": "{imported.text-input.text-input.placeholder-color}",
                         "width": "{imported.shared.size-288}"
                       },
                       "states": {
@@ -11438,6 +11463,86 @@
                             }
                           }
                         }
+                      ],
+                      "codeOnly": [
+                        {
+                          "state": "active",
+                          "channel": "outline-color",
+                          "value": "#0f62fe",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "active",
+                          "channel": "outline-width",
+                          "value": "2px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-bottom-color",
+                          "value": "#00000000",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-left-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-right-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "border-top-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "caret-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "column-rule-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "row-rule-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-decoration-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "disabled",
+                          "channel": "text-emphasis-color",
+                          "value": "#16161640",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "outline-color",
+                          "value": "#0f62fe",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        },
+                        {
+                          "state": "focus-visible",
+                          "channel": "outline-width",
+                          "value": "2px",
+                          "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                        }
                       ]
                     },
                     "text-input__counter-alert": {
@@ -11451,6 +11556,7 @@
                       },
                       "tokens": {
                         "bottom": "{imported.text-input.text-input-counter-alert.bottom.unset}",
+                        "color": "{imported.shared.color-161616}",
                         "font-size": "{imported.shared.size-14}",
                         "height": "{imported.shared.size-1}",
                         "left": "{imported.shared.size-0}",
@@ -11492,6 +11598,7 @@
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-161616}",
                     "font-size": "{imported.shared.size-14}",
                     "height": "{imported.text-input.text-input-field-wrapper.height.unset}",
                     "left": "{imported.shared.size-0}",
@@ -11523,6 +11630,7 @@
                 }
               },
               "tokens": {
+                "color": "{imported.shared.color-161616}",
                 "flex-grow": "{imported.text-input.text-input-field-outer-wrapper.flex-grow}",
                 "font-size": "{imported.shared.size-14}",
                 "height": "{imported.text-input.text-input-field-outer-wrapper.height.unset}",
@@ -11552,6 +11660,7 @@
             }
           },
           "tokens": {
+            "color": "{imported.shared.color-161616}",
             "flex-grow": "{imported.text-input.root.flex-grow}",
             "font-size": "{imported.shared.size-14}",
             "height": "{imported.text-input.root.height.unset}",
@@ -13801,45 +13910,20 @@
         {
           "part": "root",
           "kind": "channel",
-          "channel": "border-bottom-color",
-          "value": "{imported.inline-notification.root.border-bottom-color.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
           "channel": "border-left-color",
           "value": "{imported.inline-notification.root.border-left-color.{kind}.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
+          "reason": "a Figma node carries ONE strokes paint and the majority of the DRAWN sides claims it — this side's colour disagrees and stays code-only (the one-paint limit, named per side).",
           "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-right-color",
-          "value": "{imported.inline-notification.root.border-right-color.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 12,
-            "of": 12
-          }
-        },
-        {
-          "part": "root",
-          "kind": "channel",
-          "channel": "border-top-color",
-          "value": "{imported.inline-notification.root.border-top-color.{contrast}}",
-          "reason": "per-side border COLOURS disagree (or no border width is carried) — one Figma strokes paint list serves all four sides.",
-          "variants": {
-            "count": 12,
-            "of": 12
+            "count": 6,
+            "of": 12,
+            "names": [
+              "Kind=Error, Contrast=Low",
+              "Kind=Info, Contrast=Low",
+              "Kind=Info Square, Contrast=Low",
+              "Kind=Success, Contrast=Low",
+              "Kind=Warning, Contrast=Low",
+              "Kind=Warning Alt, Contrast=Low"
+            ]
           }
         },
         {
@@ -17389,6 +17473,183 @@
           "variants": {
             "count": 8,
             "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-bottom-color [disabled]",
+          "value": "#00000000",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-left-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-right-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "border-top-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "caret-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "column-rule-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "outline-color [active]",
+          "value": "#0f62fe",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "outline-color [focus-visible]",
+          "value": "#0f62fe",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "outline-width [active]",
+          "value": "2px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "outline-width [focus-visible]",
+          "value": "2px",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "row-rule-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "text-decoration-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "capture",
+          "channel": "text-emphasis-color [disabled]",
+          "value": "#16161640",
+          "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+          "variants": {
+            "count": 8,
+            "of": 8
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "channel",
+          "channel": "color",
+          "value": "{imported.shared.color-16161640}",
+          "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+          "variants": {
+            "count": 4,
+            "of": 8,
+            "names": [
+              "Size=Xs, State=Disabled",
+              "Size=Sm, State=Disabled",
+              "Size=Md, State=Disabled",
+              "Size=Lg, State=Disabled"
+            ]
+          }
+        },
+        {
+          "part": "text-input",
+          "kind": "channel",
+          "channel": "color",
+          "value": "{imported.shared.color-161616}",
+          "reason": "this control paints its placeholder in `placeholder-color`, so its own `color` — the ink the field would draw a TYPED VALUE in — is on no node. An EMPTY field has no value text, and Figma has no second text plane to hold the ink of text that is not there. Carried by the CSS surfaces (`color` on the control), NAMED here rather than painted over the placeholder (which is the RC7 defect this class exists to close).",
+          "variants": {
+            "count": 4,
+            "of": 8,
+            "names": [
+              "Size=Xs",
+              "Size=Sm",
+              "Size=Md",
+              "Size=Lg"
+            ]
           }
         },
         {

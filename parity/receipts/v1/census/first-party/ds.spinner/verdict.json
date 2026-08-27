@@ -1,0 +1,33 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "arc rotation phase differs (canvas arc sits top-right, ref arc bottom-left) \u2014 same arc length and color; animation-frame difference only."
+ ],
+ "defectClasses": [
+  "glyph geometry"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23964",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.spinner.dump.json",
+  "matched": 5,
+  "diverged": [
+   "prop label \u2014 missing from proposal",
+   "part root/arc/Vector \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"span\",\"role\":\"status\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root attrs` \u2014 HTML/ARIA attributes are code-side surface",
+   "`part root/arc animation` \u2014 motion is not canvas-representable (documented fidelity scope)",
+   "`part root color` \u2014 {color.action.primary.background} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Spinner:root/arc/Vector` strokeWeight = `2` \u2014 nearest tokens: `{space.inset-y.xs}`, `{border.width.focus}`, `{border.width.divider.strong}`, `{space.25}`, `{border-width.200}`"
+  ]
+ }
+}

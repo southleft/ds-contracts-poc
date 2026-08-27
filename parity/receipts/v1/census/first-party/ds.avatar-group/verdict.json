@@ -1,0 +1,32 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23257",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.avatar-group.dump.json",
+  "matched": 12,
+  "diverged": [
+   "part root/stack \u2014 missing from proposal",
+   "part root/Children \u2014 proposal has a part the contract does not",
+   "part root/overflowText/part \u2014 proposal has a part the contract does not",
+   "part root/overflowText content \u2014 {\"prop\":\"overflowLabel\"} vs undefined",
+   "text root/overflowText color (effective) \u2014 {color.text.secondary} missing from proposal",
+   "text root/overflowText font-size (effective) \u2014 {font.avatar.size.md} missing from proposal"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root/overflowText layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root/overflowText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/overflowText font-weight (effective)` \u2014 {font.control.weight} resolves to the runtime text default (Medium) \u2014 canvas-indistinguishable from no weight token",
+   "`text root/overflowText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

@@ -1,0 +1,83 @@
+{
+  "id": "polaris.progress-bar",
+  "library": "polaris",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@shopify/polaris",
+    "version": "13.9.5",
+    "recipe": "examples/polaris sandbox (.polaris-sandbox; examples/polaris/README) mounted per extract/computed/configs/polaris.json"
+  },
+  "configPath": "extract/computed/configs/polaris.json",
+  "component": "ProgressBar",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-medium__tone-highlight",
+      "status": "rendered",
+      "png": "ref-size-medium__tone-highlight.png",
+      "props": {
+        "progress": 25,
+        "size": "medium",
+        "tone": "highlight"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-medium__tone-primary",
+      "status": "rendered",
+      "png": "ref-size-medium__tone-primary.png",
+      "props": {
+        "progress": 25,
+        "size": "medium",
+        "tone": "primary"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-medium__tone-success",
+      "status": "rendered",
+      "png": "ref-size-medium__tone-success.png",
+      "props": {
+        "progress": 25,
+        "size": "medium",
+        "tone": "success"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-medium__tone-critical",
+      "status": "rendered",
+      "png": "ref-size-medium__tone-critical.png",
+      "props": {
+        "progress": 25,
+        "size": "medium",
+        "tone": "critical"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small__tone-highlight",
+      "status": "rendered",
+      "png": "ref-size-small__tone-highlight.png",
+      "props": {
+        "progress": 25,
+        "size": "small",
+        "tone": "highlight"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-large__tone-highlight",
+      "status": "rendered",
+      "png": "ref-size-large__tone-highlight.png",
+      "props": {
+        "progress": 25,
+        "size": "large",
+        "tone": "highlight"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 6,
+  "unmappable": 0
+}

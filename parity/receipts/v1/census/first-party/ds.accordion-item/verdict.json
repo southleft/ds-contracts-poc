@@ -1,0 +1,38 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "state-open: canvas renders the trigger row plus a thin EMPTY region \u2014 the content area carries no body text; ref shows 'The quick brown fox jumps over the lazy dog.' inside the open bordered card. The open state is only distinguishable from closed by the chevron rotation and ~30px of blank space."
+ ],
+ "defectClasses": [
+  "missing ink"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23247",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.accordion-item.dump.json",
+  "matched": 22,
+  "diverged": [
+   "part root/contentArea \u2014 missing from proposal",
+   "part root/trigger/chevron/Vector \u2014 proposal has a part the contract does not",
+   "part root/Children \u2014 proposal has a part the contract does not",
+   "part root/trigger/titleText layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":true,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`events` \u2014 the canvas cannot run behavior \u2014 toggle not recoverable",
+   "`prop title required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/trigger element` \u2014 host element (\"button\") is not drawn on the canvas",
+   "`part root/trigger/titleText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/trigger/titleText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`part root/trigger/chevron color` \u2014 {color.text.secondary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/contentArea font-size` \u2014 {font.control.size.sm} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`part root/contentArea color` \u2014 {color.text.secondary} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`AccordionItem:root/trigger/chevron/Vector` strokeWeight = `1.0499999523162842` \u2014 nearest tokens: (none)"
+  ]
+ }
+}

@@ -1,6 +1,6 @@
 {
   "_marker": "CHILD-WIDER-THAN-PARENT BASELINE — a committed per-library defect count that may only DECREASE. `overflows` counts in-flow children wider than their parent with a non-text cause; `textCaused` counts the exempted class (the corpus-wide text-wrapping gap, docs/22) separately so it can never flatter the first number. Both ratchet TWO-SIDED: an increase is a new defect, a decrease is a fix that must be re-recorded here with its cause named. Re-record deliberately with `node scripts/child-wider.mjs --write` and say what moved.",
-  "recordedAt": "2026-08-23",
+  "recordedAt": "2026-08-26",
   "rows": [
     {
       "library": "altitude",
@@ -24,9 +24,9 @@
       "library": "astryx",
       "scripts": 13,
       "overflows": 0,
-      "textCaused": 33,
+      "textCaused": 6,
       "marginBox": 0,
-      "cause": "textCaused(33): the corpus-wide text-wrapping gap (docs/22 §\"Text wrapping is not implemented\") — grew 6→33 at the exact-conversion wave (feat/exact-conversion-wave0): Banner's promoted title/description rows, TextInput's label/helper runs and the source-geometry Slider labels are real hugging text runs the earlier harness-floor geometry hid. The five ProgressBar percent-width overflows the previous baseline named are FIXED — the wave carries the fill as a source-derived literal inside the track — so the non-text class is ZERO.",
+      "cause": "textCaused(6): 33 -> 6 on the census/stack-to-main merge — an IMPROVEMENT, re-recorded so the number cannot regrow into the slack. The old 33 was the exact-conversion wave's Banner title/description rows, TextInput label/helper runs and the source-geometry Slider labels. MEASURED per script into one shared mock (scripts are identity-dependent, so per-script isolation is not a valid instrument here): checkbox-input +2, switch +4, and EVERY OTHER astryx script is now zero — banner, text-input, slider and progress-bar all closed. The merged engine is the cause: RC1's layout-axis door plus the stack's re-derived corpus (cb13a56f) give those runs a real direction and width instead of the harness-floor geometry that made them hug. overflows stays a HARD ZERO.",
       "detail": []
     },
     {
@@ -43,8 +43,8 @@
       "scripts": 11,
       "overflows": 2,
       "textCaused": 34,
-      "marginBox": 43,
-      "cause": "overflows(2): 18 -> 2 on 2026-08-16, and the DEFECT DID NOT GET FIXED — it stopped MANIFESTING. 16 of the old 18 were one class: Checkbox's `indicator > icon` is an element:\"svg\" promoted from the computed floor with NO asset (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg — there is still no checkbox glyph), so the mock handed it Figma's 100px birth box inside a 16px indicator, +84 per variant. c27e3fe0 (2026-08-10, AFTER the 2026-08-09 baseline) stopped the mock modelling the birth box on plain FRAMEs — the live canvas refutes it there — so an assetless svg part now measures its own box instead of 100. The missing glyph is unchanged and still named here; only the instrument stopped inflating it. The remaining 2 are Switch's `label` at 66px inside a 59px parent (+7) on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width — unchanged. textCaused(32) and marginBox(43) are the corpus-wide exempt classes (docs/22), counted separately and never folded in. textCaused 33 → 34 on 2026-08-22: Tooltip's root copy is DRAWN for the first time (root-level text lowering, R6) and joins the named text-wrapping class — a fact that was silently absent is now counted, not a regression.",
+      "marginBox": 41,
+      "cause": "overflows(2) unchanged — Switch's `label` at 66px inside a 59px parent on the two `Label Position=Above` cells, where the stacked layout gives the label a narrower column than its own hug width. The Checkbox glyph is STILL missing (examples/fluent/assets/icons ships only dialog-part-0-1-0.svg and switch-indicator.svg) and is still named here; only the instrument stopped inflating it at c27e3fe0. textCaused(34) unchanged. marginBox(41): 43 -> 41 on the census/stack-to-main merge — an IMPROVEMENT, re-recorded. MEASURED per script: card 40, dialog 1, and nothing else. The two that closed are on the grid-lowered parts main's grid work re-derived (cardheader.display / grid-template-rows leave fluent/Card's mismatch table by 192 cells in the same round). All are NEGATIVE-MARGIN paint-outside, not overflows — the margin-box wrapper reserving less layout space than its child paints is what a negative margin is for.",
       "detail": [
         "\"label\" 66 > parent \"Checked=Unchecked, Label Position=Above, State=Default\" 59 (Checked=Unchecked, Label Position=Above, State=Default)",
         "\"label\" 66 > parent \"Checked=Checked, Label Position=Above, State=Default\" 59 (Checked=Checked, Label Position=Above, State=Default)"
@@ -66,18 +66,18 @@
       "library": "polaris",
       "scripts": 12,
       "overflows": 0,
-      "textCaused": 26,
+      "textCaused": 29,
       "marginBox": 58,
-      "cause": "marginBox(58): every one is a NEGATIVE-MARGIN paint-outside, not an overflow — the margin-box wrapper reserves less layout space than its child paints, which is what a negative margin is for. 42→58 at the exact-conversion wave: the checkbox/radio-button canvas-geometry rework (literal border+fill replacing the inset box-shadow tokens, per the console-loop visual fix) added 16 wrappers of the same class. Polaris keeps ZERO real child-wider overflows. textCaused(26): the corpus-wide text-wrapping gap (docs/22), 29→26 — three runs stopped overflowing under the wave's geometry edits; the wrapping fix remains its own corpus-wide round.",
+      "cause": "textCaused(29): 26 -> 29 on the census/stack-to-main merge — GREW by 3, and it is a fact that was SILENTLY ABSENT now being COUNTED, the same pattern this baseline already records for fluent's Tooltip. MEASURED per script: banner 8, checkbox 3, radio-button 2, tag 8, text-field 8. checkbox and radio-button are exactly the rows the rejected-sets round (#39) fixed: `fuse.page-inherited-ink-admitted` now admits the label's ink where the styled-channel door used to drop it for equalling a page-inked control, so the label text run is DRAWN for the first time and joins the corpus-wide text-wrapping class (docs/22). A drawn run that hugs is visible; an undrawn one was invisible AND uncounted. marginBox(58) unchanged — all negative-margin paint-outside. Polaris keeps ZERO real child-wider overflows.",
       "detail": []
     },
     {
       "library": "shadcn",
       "scripts": 11,
       "overflows": 0,
-      "textCaused": 0,
+      "textCaused": 2,
       "marginBox": 0,
-      "cause": "INSTRUMENT-GAP NAMED, NOT EXPLOITED: the per-component compile-receipt run (fresh mock per script) witnessed ONE real overflow this row does not carry — Tooltip's arrow \"part-0-0-0-0\" (a lucide <polygon>) at the mock's default 100px inside its 10px icon frame. Root cause is the svg-asset v1 grammar (path/g/circle; polygon refused by name → svg-child-outside-grammar), so the arrow ships as an unsized box part. countChildWider scans set-parented cells whenever ANY COMPONENT_SET exists in the mock, and shadcn's Tooltip builds as a STANDALONE component beside 8 sets — structurally outside this instrument's denominator. Widening the scan moves every library's committed number (standalone components exist corpus-wide) and is its own instrument round; until then this row's zero UNDERSTATES by exactly that one named overflow. See examples/shadcn/PROVENANCE.md.",
+      "cause": "textCaused(2): 0 -> 2 on the census/stack-to-main merge — GREW by 2, both in ALERT and both the same not-a-regression shape as polaris above. MEASURED per script: alert +2, every other shadcn script zero. shadcn.alert is one of the rows the rejected-sets round moved (`fuse.reset-supplied-border-color-admitted` — shadcn's `* { border-color: var(--border) }` reset), so the Alert now draws a real bordered surface and its title/description runs are measured against the interior rather than the old border-less box. The INSTRUMENT-GAP this row carried before still stands and is repeated here because re-recording must not quietly drop it: the per-component compile-receipt run witnesses ONE real overflow this row does not carry — Tooltip's arrow `part-0-0-0-0` (a lucide <polygon>) at the mock's default 100px inside its 10px icon frame, refused by name as svg-child-outside-grammar. countChildWider only scans set-parented cells, and shadcn's Tooltip builds as a STANDALONE component beside 8 sets, so it is structurally outside this instrument's denominator. This row's overflows zero UNDERSTATES by exactly that one named overflow. See examples/shadcn/PROVENANCE.md.",
       "detail": []
     },
     {

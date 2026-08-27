@@ -391,7 +391,18 @@ export const LayoutSchema = z
   .strictObject({
     /** "grid" joins the flex spellings (G1) — declared-track grids only. */
     display: z.enum(["flex", "inline-flex", "grid"]).optional(),
-    direction: z.enum(["row", "column"]).optional(),
+    /** The REVERSED spellings are here for the same reason they are in
+     *  VariantLayoutSchema, and they mean the same thing on both surfaces:
+     *  code writes the keyword verbatim, the canvas (which has no reverse)
+     *  compiles the children in reversed order. They belong on the BASE
+     *  layout because a library's DEFAULT combo can be the reversed one —
+     *  Carbon's Accordion `align` prop defaults to `end`, i.e.
+     *  `flex-direction: row-reverse`, so a base restricted to row|column had
+     *  no slot for the measured keyword at all and dropped the whole
+     *  channel. */
+    direction: z
+      .enum(["row", "column", "row-reverse", "column-reverse"])
+      .optional(),
     /** Cross-axis alignment. `baseline` is CARRY-BOTH like the rest: CSS
      *  `align-items: baseline`, canvas `counterAxisAlignItems: 'BASELINE'`
      *  (native on HORIZONTAL auto-layout — on a column the canvas falls back
@@ -1170,13 +1181,27 @@ export const DECLARED_CHANNELS: Record<string, DeclaredChannelSpec> = {
  *                             code emitters refuse it BY NAME in the emitted
  *                             stylesheet instead of writing an invalid
  *                             declaration (see foldTranslateDecls).
+ *                'pseudo-element' the channel is real CSS, but it lives on a
+ *                             PSEUDO-ELEMENT rule rather than on the element:
+ *                             `placeholder-color` is not a property any UA
+ *                             has ever had — the authored fact is
+ *                             `<sel>::placeholder { color: … }`. Every
+ *                             STYLESHEET surface lowers it to that rule
+ *                             (finishStylesheet, applied to the finished CSS
+ *                             text so no `decls.push` site can route around
+ *                             it); the INLINE-STYLE surface, which has no
+ *                             selector to hang a pseudo on, refuses it BY
+ *                             NAME. `pseudo` below carries the two halves.
  *
  *  An unregistered channel is REFUSED BY NAME by validateContract. Adding a
  *  channel is a deliberate act: you must say what each surface does with it.
  */
 export interface TokenChannelSpec {
   canvas: "draw" | "annotate" | "state-only";
-  css: "verbatim" | "canvas-only";
+  css: "verbatim" | "canvas-only" | "pseudo-element";
+  /** REQUIRED when css === 'pseudo-element': the pseudo-element the rule
+   *  hangs off, and the CSS property the channel becomes inside it. */
+  pseudo?: { selector: string; property: string };
   /** Why this verdict — quoted into the channelMiss note / the refusal. */
   note: string;
 }
@@ -1314,6 +1339,29 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
     css: "canvas-only",
     note: "SYNTHETIC (decomposeTranslate) — folded into absolute y placement on canvas; CSS has no translate-y longhand.",
   },
+  // -- SYNTHETIC: minted by foldPlaceholderInk, lives on ::placeholder -------
+  //  RC7 (census 2026-08-24). `::placeholder` has been READ since R7
+  //  (extract/computed/lib.ts READ_PSEUDOS — "real ink a designer notices")
+  //  and there was NOWHERE TO PUT IT: extract/computed/run.ts states the
+  //  policy outright, "Reading is not carrying". So every leaf form control
+  //  minted its placeholder text in the control's own `color` — the VALUE
+  //  ink — and an empty field read as a filled one on canvas (antd #1f1f1f
+  //  against the library's #bfbfbf; Carbon near-black against #a8a8a8).
+  //
+  //  The channel is SYNTHETIC because a computed-style read enumerates
+  //  element properties and `::placeholder`'s plane is a different one; the
+  //  fold at the read boundary hoists it onto the element under this name,
+  //  exactly as decomposeTranslate hoists the translate components — and,
+  //  like `-webkit-text-fill-color`, ONLY when it differs from the ink the
+  //  element already carries (where the two agree the existing `color`
+  //  already paints the right pixel and no channel is minted).
+  "placeholder-color": {
+    canvas: "draw",
+    css: "pseudo-element",
+    pseudo: { selector: "::placeholder", property: "color" },
+    note:
+      "SYNTHETIC (foldPlaceholderInk) — the placeholder TEXT node's fill on canvas; in CSS it is a `::placeholder { color: … }` RULE, never a `placeholder-color:` declaration (no UA has such a property, so a verbatim declaration would be dropped in silence).",
+  },
   // -- type ------------------------------------------------------------------
   "font-family": drawn(
     "the text node family (falls back to Inter when unavailable — named limit).",
@@ -1423,6 +1471,26 @@ export const TOKEN_CHANNELS: Record<string, TokenChannelSpec> = {
   ),
   "text-emphasis-color": annotated("Figma has no text-emphasis marks."),
 };
+
+/** THE PSEUDO-ELEMENT PLANE, in ONE place.
+ *
+ *  Every `css: 'pseudo-element'` channel, with the selector and property it
+ *  lowers to. `finishStylesheet` (packages/core/src/css.ts) reads THIS — no
+ *  emitter carries its own copy — and the assertion below makes an entry
+ *  without its `pseudo` halves a load-time failure rather than a channel that
+ *  reaches a stylesheet as an invalid declaration. */
+export const PSEUDO_ELEMENT_CHANNELS: ReadonlyArray<
+  readonly [channel: string, selector: string, property: string]
+> = Object.entries(TOKEN_CHANNELS)
+  .filter(([, spec]) => spec.css === "pseudo-element")
+  .map(([channel, spec]) => {
+    if (!spec.pseudo) {
+      throw new Error(
+        `TOKEN_CHANNELS["${channel}"] declares css: 'pseudo-element' but no \`pseudo\` selector/property — a pseudo-element channel with no rule to lower to would reach every stylesheet as an invalid \`${channel}:\` declaration that every UA drops in silence. Declare it or pick another disposition.`,
+      );
+    }
+    return [channel, spec.pseudo.selector, spec.pseudo.property] as const;
+  });
 
 /** PER-INSTANCE OVERRIDE CHANNELS (round 2 iteration 9) — THE REGISTRY.
  *

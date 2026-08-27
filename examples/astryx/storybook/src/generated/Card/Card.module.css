@@ -19,12 +19,24 @@
   border-bottom-right-radius: var(--imported-shared-size-12);
   border-top-left-radius: var(--imported-shared-size-12);
   border-top-right-radius: var(--imported-shared-size-12);
+  color: var(--color-on-light);
   font-weight: var(--imported-card-root-font-weight);
   line-height: var(--imported-card-root-line-height);
-  width: var(--imported-card-root-width);
-  color: var(--color-on-light);
   font-size: 16px;
   display: block;
+  border-bottom-style: solid;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-top-style: solid;
+  font-family:
+    Figtree,
+    -apple-system,
+    'system-ui',
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
   overflow-x: clip;
   overflow-y: clip;
 }

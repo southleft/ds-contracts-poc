@@ -1,0 +1,57 @@
+{
+  "id": "antd.avatar",
+  "library": "antd",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "antd",
+    "version": "5.29.3",
+    "recipe": "examples/antd sandbox (.antd-sandbox; examples/antd/README) mounted per extract/computed/configs/antd.json"
+  },
+  "configPath": "extract/computed/configs/antd.json",
+  "component": "Avatar",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-default__shape-circle",
+      "status": "rendered",
+      "png": "ref-size-default__shape-circle.png",
+      "props": {
+        "size": "default",
+        "shape": "circle"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-default__shape-square",
+      "status": "rendered",
+      "png": "ref-size-default__shape-square.png",
+      "props": {
+        "size": "default",
+        "shape": "square"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small__shape-circle",
+      "status": "rendered",
+      "png": "ref-size-small__shape-circle.png",
+      "props": {
+        "size": "small",
+        "shape": "circle"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-large__shape-circle",
+      "status": "rendered",
+      "png": "ref-size-large__shape-circle.png",
+      "props": {
+        "size": "large",
+        "shape": "circle"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 4,
+  "unmappable": 0
+}

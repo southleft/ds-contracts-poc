@@ -1,0 +1,30 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "variant-divider: canvas draws full-width horizontal rules flanking 'Today' (640px fill cell); the ref render (148px hug-width crop) shows no rules at all \u2014 most likely a ref-harness hug artifact rather than an engine loss, but it is an unverifiable visible difference."
+ ],
+ "defectClasses": [
+  "other"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23599",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.chat-system-message.dump.json",
+  "matched": 21,
+  "diverged": [
+   "part root/iconSlot \u2014 missing from proposal",
+   "part root/Icon \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`prop message required` \u2014 requiredness is not drawn on the canvas",
+   "`part root/messageText element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/messageText font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)"
+  ]
+ }
+}

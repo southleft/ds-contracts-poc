@@ -1,0 +1,1733 @@
+{
+ "_provenance": {
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "extractedAt": "2026-08-24",
+  "note": "Node-tree dump (extract/figma/dump.plugin.js, dump v1.31) for design\u2192contract proposal.",
+  "dumpVersion": "1.32",
+  "sets": [
+   "HelperText"
+  ]
+ },
+ "_degradations": [
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (flowbite.badge):Color=Info, Size=Xs, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (flowbite.badge):Color=Failure, Size=Xs, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (flowbite.badge):Color=Success, Size=Xs, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (flowbite.badge):Color=Warning, Size=Xs, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (flowbite.badge):Color=Indigo, Size=Xs, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Badge (flowbite.badge):Color=Pink, Size=Xs, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Info/part-0/alert-icon/alert-icon-info/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Info/part-0/dismiss/dismiss-icon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Failure/part-0/alert-icon/alert-icon-failure/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Failure/part-0/dismiss/dismiss-icon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Success/part-0/alert-icon/alert-icon-success/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Success/part-0/dismiss/dismiss-icon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Warning/part-0/alert-icon/alert-icon-warning/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "vector-geometry-unsupported",
+   "nodePath": "Alert (flowbite.alert):Color=Warning/part-0/dismiss/dismiss-icon/Vector",
+   "message": "VECTOR geometry (arbitrary paths) is not captured \u2014 parametric decor (REGULAR_POLYGON/ELLIPSE/rotated RECTANGLE) IS carried since dump v1.3; this node carries paints only and renders as a box (#42 residue)"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (flowbite.button):Color=Default, Size=Md, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (flowbite.button):Color=Alternative, Size=Md, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (flowbite.button):Color=Dark, Size=Md, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (flowbite.button):Color=Green, Size=Md, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  },
+  {
+   "code": "prototype-reactions-unsupported",
+   "nodePath": "Button (flowbite.button):Color=Red, Size=Md, State=Default",
+   "message": "prototype reaction(s) ON_HOVER\u2192CHANGE_TO; ON_PRESS\u2192CHANGE_TO \u2014 dump names CHANGE_TO state-preview wiring; State axis + statePreviewAxis recover the matrix; dump does not invent onClick"
+  }
+ ],
+ "_variables": {
+  "imported/shared/size-8": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/kbd/root/padding-top": {
+   "type": "FLOAT",
+   "value": 6,
+   "modes": {
+    "Light": 6,
+    "Dark": 6
+   }
+  },
+  "imported/kbd/root/padding-bottom": {
+   "type": "FLOAT",
+   "value": 6,
+   "modes": {
+    "Light": 6,
+    "Dark": 6
+   }
+  },
+  "imported/kbd/root/width": {
+   "type": "FLOAT",
+   "value": 39.92190170288086,
+   "modes": {
+    "Light": 39.92190170288086,
+    "Dark": 39.92190170288086
+   }
+  },
+  "imported/shared/size-1": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/kbd/root/background-color": {
+   "type": "COLOR",
+   "value": "#f3f4f6",
+   "modes": {
+    "Light": "#f3f4f6",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "imported/shared/color-e5e7eb": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#e5e7eb"
+   }
+  },
+  "imported/kbd/root/font-size": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/kbd/root/color": {
+   "type": "COLOR",
+   "value": "#1f2937",
+   "modes": {
+    "Light": "#1f2937",
+    "Dark": "#1f2937"
+   }
+  },
+  "imported/label/root/width": {
+   "type": "FLOAT",
+   "value": 64.9531021118164,
+   "modes": {
+    "Light": 64.9531021118164,
+    "Dark": 64.9531021118164
+   }
+  },
+  "imported/label/root/font-size": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/label/root/color/default": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#111827"
+   }
+  },
+  "imported/label/root/color/info": {
+   "type": "COLOR",
+   "value": "#00b8db",
+   "modes": {
+    "Light": "#00b8db",
+    "Dark": "#00b8db"
+   }
+  },
+  "imported/label/root/color/failure": {
+   "type": "COLOR",
+   "value": "#c81e1e",
+   "modes": {
+    "Light": "#c81e1e",
+    "Dark": "#c81e1e"
+   }
+  },
+  "imported/label/root/color/success": {
+   "type": "COLOR",
+   "value": "#046c4e",
+   "modes": {
+    "Light": "#046c4e",
+    "Dark": "#046c4e"
+   }
+  },
+  "imported/label/root/color/warning": {
+   "type": "COLOR",
+   "value": "#c27803",
+   "modes": {
+    "Light": "#c27803",
+    "Dark": "#c27803"
+   }
+  },
+  "imported/helper-text/root/width": {
+   "type": "FLOAT",
+   "value": 71.2343978881836,
+   "modes": {
+    "Light": 71.2343978881836,
+    "Dark": 71.2343978881836
+   }
+  },
+  "imported/helper-text/root/font-size": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/helper-text/root/color/gray": {
+   "type": "COLOR",
+   "value": "#6b7280",
+   "modes": {
+    "Light": "#6b7280",
+    "Dark": "#6b7280"
+   }
+  },
+  "imported/helper-text/root/color/info": {
+   "type": "COLOR",
+   "value": "#007595",
+   "modes": {
+    "Light": "#007595",
+    "Dark": "#007595"
+   }
+  },
+  "imported/helper-text/root/color/failure": {
+   "type": "COLOR",
+   "value": "#e02424",
+   "modes": {
+    "Light": "#e02424",
+    "Dark": "#e02424"
+   }
+  },
+  "imported/helper-text/root/color/success": {
+   "type": "COLOR",
+   "value": "#057a55",
+   "modes": {
+    "Light": "#057a55",
+    "Dark": "#057a55"
+   }
+  },
+  "imported/helper-text/root/color/warning": {
+   "type": "COLOR",
+   "value": "#c27803",
+   "modes": {
+    "Light": "#c27803",
+    "Dark": "#c27803"
+   }
+  },
+  "imported/toggle-switch/label/margin-left": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/toggle-switch/root/width/md": {
+   "type": "FLOAT",
+   "value": 100.43800354003906,
+   "modes": {
+    "Light": 100.43800354003906,
+    "Dark": 100.43800354003906
+   }
+  },
+  "imported/toggle-switch/root/height/md": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/toggle-switch/part-0/width/md": {
+   "type": "FLOAT",
+   "value": 44,
+   "modes": {
+    "Light": 44,
+    "Dark": 44
+   }
+  },
+  "imported/toggle-switch/part-0/height/md": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/shared/size-9999": {
+   "type": "FLOAT",
+   "value": 9999,
+   "modes": {
+    "Light": 9999,
+    "Dark": 9999
+   }
+  },
+  "imported/toggle-switch/part-0/min-width/md": {
+   "type": "FLOAT",
+   "value": 44,
+   "modes": {
+    "Light": 44,
+    "Dark": 44
+   }
+  },
+  "imported/toggle-switch/part-0/background-color/unchecked": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#e5e7eb"
+   }
+  },
+  "imported/toggle-switch/label/font-size": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/toggle-switch/label/color": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#111827"
+   }
+  },
+  "imported/toggle-switch/part-0/background-color/checked": {
+   "type": "COLOR",
+   "value": "#1a56db",
+   "modes": {
+    "Light": "#1a56db",
+    "Dark": "#1a56db"
+   }
+  },
+  "imported/toggle-switch/root/width/sm": {
+   "type": "FLOAT",
+   "value": 92.4375,
+   "modes": {
+    "Light": 92.4375,
+    "Dark": 92.4375
+   }
+  },
+  "imported/toggle-switch/root/height/sm": {
+   "type": "FLOAT",
+   "value": 22,
+   "modes": {
+    "Light": 22,
+    "Dark": 22
+   }
+  },
+  "imported/toggle-switch/part-0/width/sm": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "imported/toggle-switch/part-0/height/sm": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/toggle-switch/part-0/min-width/sm": {
+   "type": "FLOAT",
+   "value": 36,
+   "modes": {
+    "Light": 36,
+    "Dark": 36
+   }
+  },
+  "imported/toggle-switch/root/width/lg": {
+   "type": "FLOAT",
+   "value": 108.43800354003906,
+   "modes": {
+    "Light": 108.43800354003906,
+    "Dark": 108.43800354003906
+   }
+  },
+  "imported/toggle-switch/root/height/lg": {
+   "type": "FLOAT",
+   "value": 28,
+   "modes": {
+    "Light": 28,
+    "Dark": 28
+   }
+  },
+  "imported/toggle-switch/part-0/width/lg": {
+   "type": "FLOAT",
+   "value": 52,
+   "modes": {
+    "Light": 52,
+    "Dark": 52
+   }
+  },
+  "imported/toggle-switch/part-0/height/lg": {
+   "type": "FLOAT",
+   "value": 28,
+   "modes": {
+    "Light": 28,
+    "Dark": 28
+   }
+  },
+  "imported/toggle-switch/part-0/min-width/lg": {
+   "type": "FLOAT",
+   "value": 52,
+   "modes": {
+    "Light": 52,
+    "Dark": 52
+   }
+  },
+  "imported/shared/size-4": {
+   "type": "FLOAT",
+   "value": 4,
+   "modes": {
+    "Light": 4,
+    "Dark": 4
+   }
+  },
+  "imported/badge/root/padding-left": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/padding-top": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/badge/root/padding-right": {
+   "type": "FLOAT",
+   "value": 8,
+   "modes": {
+    "Light": 8,
+    "Dark": 8
+   }
+  },
+  "imported/badge/root/padding-bottom": {
+   "type": "FLOAT",
+   "value": 2,
+   "modes": {
+    "Light": 2,
+    "Dark": 2
+   }
+  },
+  "imported/badge/root/background-color/info": {
+   "type": "COLOR",
+   "value": "#cefafe",
+   "modes": {
+    "Light": "#cefafe",
+    "Dark": "#cefafe"
+   }
+  },
+  "imported/badge/label/font-size/xs": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/badge/label/color/info": {
+   "type": "COLOR",
+   "value": "#005f78",
+   "modes": {
+    "Light": "#005f78",
+    "Dark": "#005f78"
+   }
+  },
+  "imported/badge/label/font-size/sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/badge/root/background-color/failure": {
+   "type": "COLOR",
+   "value": "#fde8e8",
+   "modes": {
+    "Light": "#fde8e8",
+    "Dark": "#fde8e8"
+   }
+  },
+  "imported/badge/label/color/failure": {
+   "type": "COLOR",
+   "value": "#9b1c1c",
+   "modes": {
+    "Light": "#9b1c1c",
+    "Dark": "#9b1c1c"
+   }
+  },
+  "imported/badge/root/background-color/success": {
+   "type": "COLOR",
+   "value": "#def7ec",
+   "modes": {
+    "Light": "#def7ec",
+    "Dark": "#def7ec"
+   }
+  },
+  "imported/badge/label/color/success": {
+   "type": "COLOR",
+   "value": "#03543f",
+   "modes": {
+    "Light": "#03543f",
+    "Dark": "#03543f"
+   }
+  },
+  "imported/badge/root/background-color/warning": {
+   "type": "COLOR",
+   "value": "#fdf6b2",
+   "modes": {
+    "Light": "#fdf6b2",
+    "Dark": "#fdf6b2"
+   }
+  },
+  "imported/badge/label/color/warning": {
+   "type": "COLOR",
+   "value": "#723b13",
+   "modes": {
+    "Light": "#723b13",
+    "Dark": "#723b13"
+   }
+  },
+  "imported/badge/root/background-color/indigo": {
+   "type": "COLOR",
+   "value": "#e5edff",
+   "modes": {
+    "Light": "#e5edff",
+    "Dark": "#e5edff"
+   }
+  },
+  "imported/badge/label/color/indigo": {
+   "type": "COLOR",
+   "value": "#42389d",
+   "modes": {
+    "Light": "#42389d",
+    "Dark": "#42389d"
+   }
+  },
+  "imported/badge/root/background-color/pink": {
+   "type": "COLOR",
+   "value": "#fce8f3",
+   "modes": {
+    "Light": "#fce8f3",
+    "Dark": "#fce8f3"
+   }
+  },
+  "imported/badge/label/color/pink": {
+   "type": "COLOR",
+   "value": "#99154b",
+   "modes": {
+    "Light": "#99154b",
+    "Dark": "#99154b"
+   }
+  },
+  "imported/badge/root/background-color-state-active/info": {
+   "type": "COLOR",
+   "value": "#a2f4fd",
+   "modes": {
+    "Light": "#a2f4fd",
+    "Dark": "#a2f4fd"
+   }
+  },
+  "imported/badge/root/background-color-state-active/failure": {
+   "type": "COLOR",
+   "value": "#fbd5d5",
+   "modes": {
+    "Light": "#fbd5d5",
+    "Dark": "#fbd5d5"
+   }
+  },
+  "imported/badge/root/background-color-state-active/success": {
+   "type": "COLOR",
+   "value": "#bcf0da",
+   "modes": {
+    "Light": "#bcf0da",
+    "Dark": "#bcf0da"
+   }
+  },
+  "imported/badge/root/background-color-state-active/warning": {
+   "type": "COLOR",
+   "value": "#fce96a",
+   "modes": {
+    "Light": "#fce96a",
+    "Dark": "#fce96a"
+   }
+  },
+  "imported/badge/root/background-color-state-active/indigo": {
+   "type": "COLOR",
+   "value": "#cddbfe",
+   "modes": {
+    "Light": "#cddbfe",
+    "Dark": "#cddbfe"
+   }
+  },
+  "imported/badge/root/background-color-state-active/pink": {
+   "type": "COLOR",
+   "value": "#fad1e8",
+   "modes": {
+    "Light": "#fad1e8",
+    "Dark": "#fad1e8"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/info": {
+   "type": "COLOR",
+   "value": "#a2f4fd",
+   "modes": {
+    "Light": "#a2f4fd",
+    "Dark": "#a2f4fd"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/failure": {
+   "type": "COLOR",
+   "value": "#fbd5d5",
+   "modes": {
+    "Light": "#fbd5d5",
+    "Dark": "#fbd5d5"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/success": {
+   "type": "COLOR",
+   "value": "#bcf0da",
+   "modes": {
+    "Light": "#bcf0da",
+    "Dark": "#bcf0da"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/warning": {
+   "type": "COLOR",
+   "value": "#fce96a",
+   "modes": {
+    "Light": "#fce96a",
+    "Dark": "#fce96a"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/indigo": {
+   "type": "COLOR",
+   "value": "#cddbfe",
+   "modes": {
+    "Light": "#cddbfe",
+    "Dark": "#cddbfe"
+   }
+  },
+  "imported/badge/root/background-color-state-hover/pink": {
+   "type": "COLOR",
+   "value": "#fad1e8",
+   "modes": {
+    "Light": "#fad1e8",
+    "Dark": "#fad1e8"
+   }
+  },
+  "imported/shared/size-16": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/alert/root/background-color/info": {
+   "type": "COLOR",
+   "value": "#cefafe",
+   "modes": {
+    "Light": "#cefafe",
+    "Dark": "#cefafe"
+   }
+  },
+  "imported/alert/label/color/info": {
+   "type": "COLOR",
+   "value": "#007595",
+   "modes": {
+    "Light": "#007595",
+    "Dark": "#007595"
+   }
+  },
+  "imported/shared/size-14": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/alert/root/background-color/failure": {
+   "type": "COLOR",
+   "value": "#fde8e8",
+   "modes": {
+    "Light": "#fde8e8",
+    "Dark": "#fde8e8"
+   }
+  },
+  "imported/alert/label/color/failure": {
+   "type": "COLOR",
+   "value": "#c81e1e",
+   "modes": {
+    "Light": "#c81e1e",
+    "Dark": "#c81e1e"
+   }
+  },
+  "imported/alert/root/background-color/success": {
+   "type": "COLOR",
+   "value": "#def7ec",
+   "modes": {
+    "Light": "#def7ec",
+    "Dark": "#def7ec"
+   }
+  },
+  "imported/alert/label/color/success": {
+   "type": "COLOR",
+   "value": "#046c4e",
+   "modes": {
+    "Light": "#046c4e",
+    "Dark": "#046c4e"
+   }
+  },
+  "imported/alert/root/background-color/warning": {
+   "type": "COLOR",
+   "value": "#fdf6b2",
+   "modes": {
+    "Light": "#fdf6b2",
+    "Dark": "#fdf6b2"
+   }
+  },
+  "imported/alert/label/color/warning": {
+   "type": "COLOR",
+   "value": "#8e4b10",
+   "modes": {
+    "Light": "#8e4b10",
+    "Dark": "#8e4b10"
+   }
+  },
+  "imported/button/root/padding-left/md": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/button/root/padding-right/md": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/button/root/border-top-width/default": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-bottom-width/default": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-left-width/default": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-right-width/default": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/background-color/default": {
+   "type": "COLOR",
+   "value": "#1a56db",
+   "modes": {
+    "Light": "#1a56db",
+    "Dark": "#1a56db"
+   }
+  },
+  "imported/button/root/border-top-color/default": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/font-size/md": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/color/default": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/padding-left/xs": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/button/root/padding-right/xs": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/button/root/font-size/xs": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/button/root/padding-left/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/button/root/padding-right/sm": {
+   "type": "FLOAT",
+   "value": 12,
+   "modes": {
+    "Light": 12,
+    "Dark": 12
+   }
+  },
+  "imported/button/root/font-size/sm": {
+   "type": "FLOAT",
+   "value": 14,
+   "modes": {
+    "Light": 14,
+    "Dark": 14
+   }
+  },
+  "imported/button/root/padding-left/lg": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/button/root/padding-right/lg": {
+   "type": "FLOAT",
+   "value": 20,
+   "modes": {
+    "Light": 20,
+    "Dark": 20
+   }
+  },
+  "imported/button/root/font-size/lg": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/button/root/padding-left/xl": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/button/root/padding-right/xl": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  },
+  "imported/button/root/font-size/xl": {
+   "type": "FLOAT",
+   "value": 16,
+   "modes": {
+    "Light": 16,
+    "Dark": 16
+   }
+  },
+  "imported/button/root/border-top-width/alternative": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/border-bottom-width/alternative": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/border-left-width/alternative": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/border-right-width/alternative": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/background-color/alternative": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/border-top-color/alternative": {
+   "type": "COLOR",
+   "value": "#e5e7eb",
+   "modes": {
+    "Light": "#e5e7eb",
+    "Dark": "#e5e7eb"
+   }
+  },
+  "imported/button/root/color/alternative": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#111827"
+   }
+  },
+  "imported/button/root/border-top-width/dark": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-bottom-width/dark": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-left-width/dark": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-right-width/dark": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/background-color/dark": {
+   "type": "COLOR",
+   "value": "#1f2937",
+   "modes": {
+    "Light": "#1f2937",
+    "Dark": "#1f2937"
+   }
+  },
+  "imported/button/root/border-top-color/dark": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/color/dark": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/border-top-width/green": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-bottom-width/green": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-left-width/green": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-right-width/green": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/background-color/green": {
+   "type": "COLOR",
+   "value": "#046c4e",
+   "modes": {
+    "Light": "#046c4e",
+    "Dark": "#046c4e"
+   }
+  },
+  "imported/button/root/border-top-color/green": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/color/green": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/border-top-width/red": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-bottom-width/red": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-left-width/red": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/border-right-width/red": {
+   "type": "FLOAT",
+   "value": 0,
+   "modes": {
+    "Light": 0,
+    "Dark": 0
+   }
+  },
+  "imported/button/root/background-color/red": {
+   "type": "COLOR",
+   "value": "#c81e1e",
+   "modes": {
+    "Light": "#c81e1e",
+    "Dark": "#c81e1e"
+   }
+  },
+  "imported/button/root/border-top-color/red": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/color/red": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/background-color-state-active/default": {
+   "type": "COLOR",
+   "value": "#1e429f",
+   "modes": {
+    "Light": "#1e429f",
+    "Dark": "#1e429f"
+   }
+  },
+  "imported/button/root/color-state-active/default": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/background-color-state-active/alternative": {
+   "type": "COLOR",
+   "value": "#f3f4f6",
+   "modes": {
+    "Light": "#f3f4f6",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "imported/button/root/color-state-active/alternative": {
+   "type": "COLOR",
+   "value": "#1a56db",
+   "modes": {
+    "Light": "#1a56db",
+    "Dark": "#1a56db"
+   }
+  },
+  "imported/button/root/background-color-state-active/dark": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#111827"
+   }
+  },
+  "imported/button/root/color-state-active/dark": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/background-color-state-active/green": {
+   "type": "COLOR",
+   "value": "#03543f",
+   "modes": {
+    "Light": "#03543f",
+    "Dark": "#03543f"
+   }
+  },
+  "imported/button/root/color-state-active/green": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/background-color-state-active/red": {
+   "type": "COLOR",
+   "value": "#9b1c1c",
+   "modes": {
+    "Light": "#9b1c1c",
+    "Dark": "#9b1c1c"
+   }
+  },
+  "imported/button/root/color-state-active/red": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/outline-width-state-focus-visible": {
+   "type": "FLOAT",
+   "value": 1,
+   "modes": {
+    "Light": 1,
+    "Dark": 1
+   }
+  },
+  "imported/button/root/outline-color-state-focus-visible": {
+   "type": "COLOR",
+   "value": "#005fcc",
+   "modes": {
+    "Light": "#005fcc",
+    "Dark": "#005fcc"
+   }
+  },
+  "imported/button/root/background-color-state-hover/default": {
+   "type": "COLOR",
+   "value": "#1e429f",
+   "modes": {
+    "Light": "#1e429f",
+    "Dark": "#1e429f"
+   }
+  },
+  "imported/button/root/color-state-hover/default": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/background-color-state-hover/alternative": {
+   "type": "COLOR",
+   "value": "#f3f4f6",
+   "modes": {
+    "Light": "#f3f4f6",
+    "Dark": "#f3f4f6"
+   }
+  },
+  "imported/button/root/color-state-hover/alternative": {
+   "type": "COLOR",
+   "value": "#1a56db",
+   "modes": {
+    "Light": "#1a56db",
+    "Dark": "#1a56db"
+   }
+  },
+  "imported/button/root/background-color-state-hover/dark": {
+   "type": "COLOR",
+   "value": "#111827",
+   "modes": {
+    "Light": "#111827",
+    "Dark": "#111827"
+   }
+  },
+  "imported/button/root/color-state-hover/dark": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/background-color-state-hover/green": {
+   "type": "COLOR",
+   "value": "#03543f",
+   "modes": {
+    "Light": "#03543f",
+    "Dark": "#03543f"
+   }
+  },
+  "imported/button/root/color-state-hover/green": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/button/root/background-color-state-hover/red": {
+   "type": "COLOR",
+   "value": "#9b1c1c",
+   "modes": {
+    "Light": "#9b1c1c",
+    "Dark": "#9b1c1c"
+   }
+  },
+  "imported/button/root/color-state-hover/red": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/card/root/background-color": {
+   "type": "COLOR",
+   "value": "#ffffff",
+   "modes": {
+    "Light": "#ffffff",
+    "Dark": "#ffffff"
+   }
+  },
+  "imported/shared/size-24": {
+   "type": "FLOAT",
+   "value": 24,
+   "modes": {
+    "Light": 24,
+    "Dark": 24
+   }
+  }
+ },
+ "HelperText": {
+  "setName": "HelperText",
+  "description": "HelperText \u2014 generated from contract flowbite.helpertext v0.2.0 \u2020 (2 code-only facts \u2014 see plugin report)",
+  "contractId": "flowbite.helpertext",
+  "specHash": "3254299829",
+  "version": "0.2.0",
+  "propNames": {
+   "Color": "color",
+   "Content": "children"
+  },
+  "semantics": {
+   "element": "div"
+  },
+  "type": "COMPONENT_SET",
+  "nodeId": "39:5997",
+  "key": "8c647f480e2abf29a8f550600eae11c16764e377",
+  "variants": [
+   {
+    "name": "Color=Gray",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Color": "Gray"
+    },
+    "bbox": {
+     "width": 71.23,
+     "height": 20
+    },
+    "abs": {
+     "x": 40,
+     "y": 40,
+     "right": 40,
+     "bottom": 280,
+     "width": 71.23,
+     "height": 20,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/helper-text/root/width"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Helper text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/helper-text/root/font-size",
+       "fontWeightVar": "imported/helper-text/root/font-weight",
+       "lineHeightVar": "imported/helper-text/root/line-height",
+       "fillVar": "imported/helper-text/root/color/gray"
+      },
+      "fill": {
+       "var": "imported/helper-text/root/color/gray"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Color=Info",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Color": "Info"
+    },
+    "bbox": {
+     "width": 71.23,
+     "height": 20
+    },
+    "abs": {
+     "x": 40,
+     "y": 100,
+     "right": 40,
+     "bottom": 220,
+     "width": 71.23,
+     "height": 20,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/helper-text/root/width"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Helper text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/helper-text/root/font-size",
+       "fontWeightVar": "imported/helper-text/root/font-weight",
+       "lineHeightVar": "imported/helper-text/root/line-height",
+       "fillVar": "imported/helper-text/root/color/info"
+      },
+      "fill": {
+       "var": "imported/helper-text/root/color/info"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Color=Failure",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Color": "Failure"
+    },
+    "bbox": {
+     "width": 71.23,
+     "height": 20
+    },
+    "abs": {
+     "x": 40,
+     "y": 160,
+     "right": 40,
+     "bottom": 160,
+     "width": 71.23,
+     "height": 20,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/helper-text/root/width"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Helper text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/helper-text/root/font-size",
+       "fontWeightVar": "imported/helper-text/root/font-weight",
+       "lineHeightVar": "imported/helper-text/root/line-height",
+       "fillVar": "imported/helper-text/root/color/failure"
+      },
+      "fill": {
+       "var": "imported/helper-text/root/color/failure"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Color=Success",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Color": "Success"
+    },
+    "bbox": {
+     "width": 71.23,
+     "height": 20
+    },
+    "abs": {
+     "x": 40,
+     "y": 220,
+     "right": 40,
+     "bottom": 100,
+     "width": 71.23,
+     "height": 20,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/helper-text/root/width"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Helper text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/helper-text/root/font-size",
+       "fontWeightVar": "imported/helper-text/root/font-weight",
+       "lineHeightVar": "imported/helper-text/root/line-height",
+       "fillVar": "imported/helper-text/root/color/success"
+      },
+      "fill": {
+       "var": "imported/helper-text/root/color/success"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   },
+   {
+    "name": "Color=Warning",
+    "type": "COMPONENT",
+    "variantProperties": {
+     "Color": "Warning"
+    },
+    "bbox": {
+     "width": 71.23,
+     "height": 20
+    },
+    "abs": {
+     "x": 40,
+     "y": 280,
+     "right": 40,
+     "bottom": 40,
+     "width": 71.23,
+     "height": 20,
+     "constraints": {
+      "horizontal": "LEFT",
+      "vertical": "TOP"
+     }
+    },
+    "layout": {
+     "mode": "VERTICAL",
+     "primary": "MIN",
+     "counter": "MIN",
+     "spacing": 0,
+     "padding": [
+      0,
+      0,
+      0,
+      0
+     ],
+     "primarySizing": "AUTO",
+     "counterSizing": "FIXED"
+    },
+    "bound": {
+     "width": "imported/helper-text/root/width"
+    },
+    "children": [
+     {
+      "name": "label",
+      "type": "TEXT",
+      "text": {
+       "characters": "Helper text",
+       "fontSize": 14,
+       "fontStyle": "Regular",
+       "lineHeight": 20,
+       "fontFamily": "Inter",
+       "fontSizeVar": "imported/helper-text/root/font-size",
+       "fontWeightVar": "imported/helper-text/root/font-weight",
+       "lineHeightVar": "imported/helper-text/root/line-height",
+       "fillVar": "imported/helper-text/root/color/warning"
+      },
+      "fill": {
+       "var": "imported/helper-text/root/color/warning"
+      },
+      "propRefs": {
+       "characters": "Content"
+      }
+     }
+    ]
+   }
+  ],
+  "propertyDefinitions": {
+   "Content#39:1669": {
+    "type": "TEXT",
+    "defaultValue": "Helper text"
+   },
+   "Color": {
+    "type": "VARIANT",
+    "defaultValue": "Gray",
+    "variantOptions": [
+     "Gray",
+     "Info",
+     "Failure",
+     "Success",
+     "Warning"
+    ]
+   }
+  }
+ }
+}

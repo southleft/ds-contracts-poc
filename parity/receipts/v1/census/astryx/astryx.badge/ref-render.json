@@ -1,0 +1,157 @@
+{
+  "id": "astryx.badge",
+  "library": "astryx",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "recipe": "examples/astryx sandbox (.astryx-sandbox; examples/astryx/README) mounted per extract/computed/configs/astryx.json"
+  },
+  "configPath": "extract/computed/configs/astryx.json",
+  "component": "Badge",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "variant-neutral",
+      "status": "rendered",
+      "png": "ref-variant-neutral.png",
+      "props": {
+        "label": "New",
+        "variant": "neutral"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-info",
+      "status": "rendered",
+      "png": "ref-variant-info.png",
+      "props": {
+        "label": "New",
+        "variant": "info"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-success",
+      "status": "rendered",
+      "png": "ref-variant-success.png",
+      "props": {
+        "label": "New",
+        "variant": "success"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-warning",
+      "status": "rendered",
+      "png": "ref-variant-warning.png",
+      "props": {
+        "label": "New",
+        "variant": "warning"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-error",
+      "status": "rendered",
+      "png": "ref-variant-error.png",
+      "props": {
+        "label": "New",
+        "variant": "error"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-blue",
+      "status": "rendered",
+      "png": "ref-variant-blue.png",
+      "props": {
+        "label": "New",
+        "variant": "blue"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-cyan",
+      "status": "rendered",
+      "png": "ref-variant-cyan.png",
+      "props": {
+        "label": "New",
+        "variant": "cyan"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-green",
+      "status": "rendered",
+      "png": "ref-variant-green.png",
+      "props": {
+        "label": "New",
+        "variant": "green"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-orange",
+      "status": "rendered",
+      "png": "ref-variant-orange.png",
+      "props": {
+        "label": "New",
+        "variant": "orange"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-pink",
+      "status": "rendered",
+      "png": "ref-variant-pink.png",
+      "props": {
+        "label": "New",
+        "variant": "pink"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-purple",
+      "status": "rendered",
+      "png": "ref-variant-purple.png",
+      "props": {
+        "label": "New",
+        "variant": "purple"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-red",
+      "status": "rendered",
+      "png": "ref-variant-red.png",
+      "props": {
+        "label": "New",
+        "variant": "red"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-teal",
+      "status": "rendered",
+      "png": "ref-variant-teal.png",
+      "props": {
+        "label": "New",
+        "variant": "teal"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "variant-yellow",
+      "status": "rendered",
+      "png": "ref-variant-yellow.png",
+      "props": {
+        "label": "New",
+        "variant": "yellow"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 14,
+  "unmappable": 0
+}

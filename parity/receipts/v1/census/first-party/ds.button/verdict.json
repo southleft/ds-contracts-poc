@@ -1,0 +1,42 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "state-focus-visible: canvas draws the focus ring as a tight darker-blue border directly on the button edge; ref shows a white offset gap plus a separate outer blue ring. The two-part offset focus ring is lost. All other 8 sampled cells match."
+ ],
+ "defectClasses": [
+  "other"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:23381",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.button.dump.json",
+  "matched": 17,
+  "diverged": [
+   "prop size type \u2014 {\"enum\":[\"sm\",\"md\",\"lg\"]} vs {\"enum\":[\"medium\",\"small\",\"large\"]}",
+   "prop size default \u2014 \"md\" vs \"medium\"",
+   "prop size bindings.figma.values \u2014 {\"sm\":\"Small\",\"md\":\"Medium\",\"lg\":\"Large\"} vs {\"medium\":\"Medium\",\"small\":\"Small\",\"large\":\"Large\"}",
+   "part root/loadingSpinner/Vector \u2014 proposal has a part the contract does not",
+   "part root padding-inline \u2014 {space.inset-x.{size}} vs {space.inset-x.md}",
+   "part root padding-block \u2014 {space.inset-y.{size}} vs {space.inset-y.md}",
+   "text root/label font-size (effective) \u2014 {font.control.size.{size}} missing from proposal"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"button\",\"role\":\"button\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable",
+   "`states` \u2014 interaction states are code-side (CSS pseudo-classes)",
+   "`part root layout.display` \u2014 inline vs block flex has no canvas projection",
+   "`part root states` \u2014 interaction-state token overrides are code-side (CSS)",
+   "`part root/loadingSpinner animation` \u2014 motion is not canvas-representable (documented fidelity scope)",
+   "`part root/label element` \u2014 host element (\"span\") is not drawn on the canvas",
+   "`text root/label font-family (effective)` \u2014 {font.control.family} \u2014 the canvas renders Inter regardless (documented fidelity scope)",
+   "`Button:root/loadingSpinner/Vector` strokeWeight = `1.399999976158142` \u2014 nearest tokens: (none)",
+   "`Button:root/label` fontSize = `16` \u2014 nearest tokens: `{space.inset-x.md}`, `{space.gap.md}`, `{size.checkbox.sm}`, `{size.slider.thumb}`, `{size.switch.thumb}`",
+   "`Button:root (state disabled)` opacity = `0.5` \u2014 nearest tokens: `{opacity.disabled}`"
+  ]
+ }
+}

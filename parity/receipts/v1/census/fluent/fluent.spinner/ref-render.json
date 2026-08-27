@@ -1,0 +1,173 @@
+{
+  "id": "fluent.spinner",
+  "library": "fluent",
+  "renderer": "REAL LIBRARY render — the library's own npm package in its documented sandbox, mounted per the capture config, captured by extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light); portal cells captured as stage+portal union",
+  "harness": {
+    "package": "@fluentui/react-components",
+    "version": "9.74.5",
+    "recipe": "examples/fluent sandbox (.fluent-sandbox; examples/fluent/README) mounted per extract/computed/configs/fluent.json"
+  },
+  "configPath": "extract/computed/configs/fluent.json",
+  "component": "Spinner",
+  "platform": "darwin/arm64",
+  "refs": [
+    {
+      "slug": "size-medium__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-medium__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-medium__appearance-primary__label-position-above",
+      "status": "rendered",
+      "png": "ref-size-medium__appearance-primary__label-position-above.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "above"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-medium__appearance-primary__label-position-below",
+      "status": "rendered",
+      "png": "ref-size-medium__appearance-primary__label-position-below.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "below"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-medium__appearance-primary__label-position-before",
+      "status": "rendered",
+      "png": "ref-size-medium__appearance-primary__label-position-before.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "medium",
+        "appearance": "primary",
+        "labelPosition": "before"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-medium__appearance-inverted__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-medium__appearance-inverted__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "medium",
+        "appearance": "inverted",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-extra-tiny__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-extra-tiny__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "extra-tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-tiny__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-tiny__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "tiny",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-extra-small__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-extra-small__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "extra-small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-small__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-small__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "small",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-large__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-large__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-extra-large__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-extra-large__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "extra-large",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    },
+    {
+      "slug": "size-huge__appearance-primary__label-position-after",
+      "status": "rendered",
+      "png": "ref-size-huge__appearance-primary__label-position-after.png",
+      "props": {
+        "label": "Loading",
+        "delay": 0,
+        "size": "huge",
+        "appearance": "primary",
+        "labelPosition": "after"
+      },
+      "capture": "cell"
+    }
+  ],
+  "rendered": 12,
+  "unmappable": 0
+}

@@ -1,0 +1,21 @@
+{
+  "id": "child-order-permuted-by-axis",
+  "feature": "layout",
+  "construct": "CHILD ORDER that varies on one enum axis by a ROTATION (A,B,C -> B,C,A) — a permutation that is neither the identity nor a reversal",
+  "why": "The only per-variant child-order spelling either target system has is a reversed main axis (CSS row-reverse / Figma children.reverse()); an arbitrary permutation has no contract spelling and no canvas lowering. It must be REFUSED BY NAME rather than flattened onto the base order — the honest refusal this class exists to protect, and the guard that keeps the reversal door from being widened into a guess.",
+  "expect": "REFUSED",
+  "expectName": "child-order-varies-unreversible",
+  "expectWhere": "enriched.extension.json receipts",
+  "observable": {
+    "part": "root",
+    "channel": "__child-order",
+    "capturedValue": "span|b>span|c>span|a"
+  },
+  "canvas": {
+    "expect": "ABSENT",
+    "note": "no canvas spelling for an arbitrary per-variant child permutation"
+  },
+  "axes": [
+    { "prop": "rotation", "values": ["none", "once"], "default": "none" }
+  ]
+}

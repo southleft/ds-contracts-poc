@@ -8,7 +8,7 @@ const COMPONENTS = [
     "contractId": "fluent.card",
     "version": "0.2.0",
     "anchorKey": null,
-    "description": "Card — generated from contract fluent.card v0.2.0 † (52 code-only facts — see plugin report)",
+    "description": "Card — generated from contract fluent.card v0.2.0 † (99 code-only facts — see plugin report)",
     "isSet": true,
     "boolProps": [],
     "textProps": [],
@@ -25,7 +25,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled, Size=Medium, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -40,11 +40,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -92,26 +92,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -123,9 +139,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -137,12 +159,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -222,26 +251,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 353.281,
-                "varName": "imported/card/cardheader/width/medium/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -253,9 +298,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -267,9 +318,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -285,7 +342,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled, Size=Small, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -300,11 +357,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/small",
             "topLeftRadius": "imported/card/root/border-top-left-radius/small",
             "topRightRadius": "imported/card/root/border-top-right-radius/small",
-            "itemSpacing": "imported/card/root/column-gap/small",
             "paddingBottom": "imported/card/root/padding-bottom/small",
             "paddingLeft": "imported/card/root/padding-left/small",
             "paddingRight": "imported/card/root/padding-right/small",
-            "paddingTop": "imported/card/root/padding-top/small"
+            "paddingTop": "imported/card/root/padding-top/small",
+            "itemSpacing": "imported/card/root/row-gap/small"
           },
           "fixedWidth": {
             "px": 428,
@@ -352,26 +409,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 412,
-                "varName": "imported/card/cardheader/width/small/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -383,9 +456,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -397,12 +476,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -482,26 +568,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 361.281,
-                "varName": "imported/card/cardheader/width/small/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -513,9 +615,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -527,9 +635,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -545,7 +659,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled, Size=Large, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -560,11 +674,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/large",
             "topLeftRadius": "imported/card/root/border-top-left-radius/large",
             "topRightRadius": "imported/card/root/border-top-right-radius/large",
-            "itemSpacing": "imported/card/root/column-gap/large",
             "paddingBottom": "imported/card/root/padding-bottom/large",
             "paddingLeft": "imported/card/root/padding-left/large",
             "paddingRight": "imported/card/root/padding-right/large",
-            "paddingTop": "imported/card/root/padding-top/large"
+            "paddingTop": "imported/card/root/padding-top/large",
+            "itemSpacing": "imported/card/root/row-gap/large"
           },
           "fixedWidth": {
             "px": 428,
@@ -612,26 +726,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 396,
-                "varName": "imported/card/cardheader/width/large/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -643,9 +773,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -657,12 +793,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -742,26 +885,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 345.281,
-                "varName": "imported/card/cardheader/width/large/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -773,9 +932,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -787,9 +952,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -805,7 +976,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -820,11 +991,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -872,26 +1043,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -903,9 +1090,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -917,12 +1110,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -1002,26 +1202,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 353.281,
-                "varName": "imported/card/cardheader/width/medium/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1033,9 +1249,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1047,9 +1269,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -1065,7 +1293,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -1080,11 +1308,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/small",
             "topLeftRadius": "imported/card/root/border-top-left-radius/small",
             "topRightRadius": "imported/card/root/border-top-right-radius/small",
-            "itemSpacing": "imported/card/root/column-gap/small",
             "paddingBottom": "imported/card/root/padding-bottom/small",
             "paddingLeft": "imported/card/root/padding-left/small",
             "paddingRight": "imported/card/root/padding-right/small",
-            "paddingTop": "imported/card/root/padding-top/small"
+            "paddingTop": "imported/card/root/padding-top/small",
+            "itemSpacing": "imported/card/root/row-gap/small"
           },
           "fixedWidth": {
             "px": 428,
@@ -1132,26 +1360,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 412,
-                "varName": "imported/card/cardheader/width/small/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1163,9 +1407,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1177,12 +1427,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -1262,26 +1519,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 361.281,
-                "varName": "imported/card/cardheader/width/small/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1293,9 +1566,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1307,9 +1586,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -1325,7 +1610,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -1340,11 +1625,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/large",
             "topLeftRadius": "imported/card/root/border-top-left-radius/large",
             "topRightRadius": "imported/card/root/border-top-right-radius/large",
-            "itemSpacing": "imported/card/root/column-gap/large",
             "paddingBottom": "imported/card/root/padding-bottom/large",
             "paddingLeft": "imported/card/root/padding-left/large",
             "paddingRight": "imported/card/root/padding-right/large",
-            "paddingTop": "imported/card/root/padding-top/large"
+            "paddingTop": "imported/card/root/padding-top/large",
+            "itemSpacing": "imported/card/root/row-gap/large"
           },
           "fixedWidth": {
             "px": 428,
@@ -1392,26 +1677,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 396,
-                "varName": "imported/card/cardheader/width/large/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1423,9 +1724,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1437,12 +1744,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -1522,26 +1836,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 345.281,
-                "varName": "imported/card/cardheader/width/large/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1553,9 +1883,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1567,9 +1903,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -1585,7 +1927,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Outline, Size=Medium, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -1600,11 +1942,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -1629,26 +1971,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1660,9 +2018,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1674,12 +2038,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -1736,26 +2107,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 353.281,
-                "varName": "imported/card/cardheader/width/medium/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1767,9 +2154,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1781,9 +2174,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -1799,7 +2198,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Outline, Size=Small, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -1814,11 +2213,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/small",
             "topLeftRadius": "imported/card/root/border-top-left-radius/small",
             "topRightRadius": "imported/card/root/border-top-right-radius/small",
-            "itemSpacing": "imported/card/root/column-gap/small",
             "paddingBottom": "imported/card/root/padding-bottom/small",
             "paddingLeft": "imported/card/root/padding-left/small",
             "paddingRight": "imported/card/root/padding-right/small",
-            "paddingTop": "imported/card/root/padding-top/small"
+            "paddingTop": "imported/card/root/padding-top/small",
+            "itemSpacing": "imported/card/root/row-gap/small"
           },
           "fixedWidth": {
             "px": 428,
@@ -1843,26 +2242,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 412,
-                "varName": "imported/card/cardheader/width/small/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1874,9 +2289,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1888,12 +2309,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -1950,26 +2378,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 361.281,
-                "varName": "imported/card/cardheader/width/small/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -1981,9 +2425,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -1995,9 +2445,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -2013,7 +2469,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Outline, Size=Large, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -2028,11 +2484,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/large",
             "topLeftRadius": "imported/card/root/border-top-left-radius/large",
             "topRightRadius": "imported/card/root/border-top-right-radius/large",
-            "itemSpacing": "imported/card/root/column-gap/large",
             "paddingBottom": "imported/card/root/padding-bottom/large",
             "paddingLeft": "imported/card/root/padding-left/large",
             "paddingRight": "imported/card/root/padding-right/large",
-            "paddingTop": "imported/card/root/padding-top/large"
+            "paddingTop": "imported/card/root/padding-top/large",
+            "itemSpacing": "imported/card/root/row-gap/large"
           },
           "fixedWidth": {
             "px": 428,
@@ -2057,26 +2513,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 396,
-                "varName": "imported/card/cardheader/width/large/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2088,9 +2560,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2102,12 +2580,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -2164,26 +2649,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 345.281,
-                "varName": "imported/card/cardheader/width/large/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2195,9 +2696,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2209,9 +2716,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -2227,7 +2740,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Subtle, Size=Medium, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -2242,11 +2755,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -2271,26 +2784,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2302,9 +2831,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2316,12 +2851,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -2378,26 +2920,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 353.281,
-                "varName": "imported/card/cardheader/width/medium/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2409,9 +2967,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2423,9 +2987,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -2441,7 +3011,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Subtle, Size=Small, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -2456,11 +3026,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/small",
             "topLeftRadius": "imported/card/root/border-top-left-radius/small",
             "topRightRadius": "imported/card/root/border-top-right-radius/small",
-            "itemSpacing": "imported/card/root/column-gap/small",
             "paddingBottom": "imported/card/root/padding-bottom/small",
             "paddingLeft": "imported/card/root/padding-left/small",
             "paddingRight": "imported/card/root/padding-right/small",
-            "paddingTop": "imported/card/root/padding-top/small"
+            "paddingTop": "imported/card/root/padding-top/small",
+            "itemSpacing": "imported/card/root/row-gap/small"
           },
           "fixedWidth": {
             "px": 428,
@@ -2485,26 +3055,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 412,
-                "varName": "imported/card/cardheader/width/small/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2516,9 +3102,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2530,12 +3122,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -2592,26 +3191,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 361.281,
-                "varName": "imported/card/cardheader/width/small/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2623,9 +3238,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2637,9 +3258,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -2655,7 +3282,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Subtle, Size=Large, Orientation=Vertical",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -2670,11 +3297,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/large",
             "topLeftRadius": "imported/card/root/border-top-left-radius/large",
             "topRightRadius": "imported/card/root/border-top-right-radius/large",
-            "itemSpacing": "imported/card/root/column-gap/large",
             "paddingBottom": "imported/card/root/padding-bottom/large",
             "paddingLeft": "imported/card/root/padding-left/large",
             "paddingRight": "imported/card/root/padding-right/large",
-            "paddingTop": "imported/card/root/padding-top/large"
+            "paddingTop": "imported/card/root/padding-top/large",
+            "itemSpacing": "imported/card/root/row-gap/large"
           },
           "fixedWidth": {
             "px": 428,
@@ -2699,26 +3326,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 396,
-                "varName": "imported/card/cardheader/width/large/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2730,9 +3373,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2744,12 +3393,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -2806,26 +3462,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 345.281,
-                "varName": "imported/card/cardheader/width/large/horizontal"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2837,9 +3509,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2851,9 +3529,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
               ]
@@ -2879,7 +3563,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -2894,11 +3578,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -2950,23 +3634,38 @@ const COMPONENTS = [
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -2982,6 +3681,11 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -2997,9 +3701,15 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3012,7 +3722,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3027,11 +3737,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3083,23 +3793,38 @@ const COMPONENTS = [
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3115,6 +3840,11 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3130,9 +3860,15 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3145,7 +3881,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3160,11 +3896,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3193,23 +3929,38 @@ const COMPONENTS = [
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3225,6 +3976,11 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3240,9 +3996,15 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3255,7 +4017,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3270,11 +4032,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3326,23 +4088,38 @@ const COMPONENTS = [
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3358,6 +4135,11 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3373,9 +4155,15 @@ const COMPONENTS = [
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3388,7 +4176,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3403,11 +4191,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3455,26 +4243,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3486,9 +4290,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3500,12 +4310,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3518,7 +4335,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3533,11 +4350,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3585,26 +4402,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3616,9 +4449,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3630,12 +4469,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3648,7 +4494,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3663,11 +4509,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3692,26 +4538,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3723,9 +4585,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3737,12 +4605,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3755,7 +4630,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3770,11 +4645,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3799,26 +4674,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3830,9 +4721,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3844,12 +4741,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3862,7 +4766,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -3877,11 +4781,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -3929,26 +4833,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -3960,9 +4880,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -3974,12 +4900,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -3992,7 +4925,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -4007,11 +4940,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -4059,26 +4992,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -4090,9 +5039,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -4104,12 +5059,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -4122,7 +5084,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -4137,11 +5099,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -4166,26 +5128,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -4197,9 +5175,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -4211,12 +5195,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -4229,7 +5220,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -4244,11 +5235,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -4273,26 +5264,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -4304,9 +5311,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -4318,12 +5331,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -4336,7 +5356,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -4351,11 +5371,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -4403,26 +5423,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -4434,9 +5470,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -4448,12 +5490,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -4466,7 +5515,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -4481,11 +5530,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -4533,26 +5582,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -4564,9 +5629,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -4578,12 +5649,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -4596,7 +5674,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -4611,11 +5689,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -4640,26 +5718,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -4671,9 +5765,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -4685,12 +5785,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -4703,7 +5810,7 @@ const COMPONENTS = [
           "type": "root",
           "name": "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover",
           "layout": {
-            "mode": "HORIZONTAL",
+            "mode": "VERTICAL",
             "primary": "MIN",
             "counter": "MIN",
             "stretchChildren": true
@@ -4718,11 +5825,11 @@ const COMPONENTS = [
             "bottomRightRadius": "imported/card/root/border-bottom-right-radius/medium",
             "topLeftRadius": "imported/card/root/border-top-left-radius/medium",
             "topRightRadius": "imported/card/root/border-top-right-radius/medium",
-            "itemSpacing": "imported/card/root/column-gap/medium",
             "paddingBottom": "imported/card/root/padding-bottom/medium",
             "paddingLeft": "imported/card/root/padding-left/medium",
             "paddingRight": "imported/card/root/padding-right/medium",
-            "paddingTop": "imported/card/root/padding-top/medium"
+            "paddingTop": "imported/card/root/padding-top/medium",
+            "itemSpacing": "imported/card/root/row-gap/medium"
           },
           "fixedWidth": {
             "px": 428,
@@ -4747,26 +5854,42 @@ const COMPONENTS = [
               "fontSizeVar": "imported/shared/size-14",
               "fontWeightVar": "imported/shared/num-400",
               "lineHeightVar": "imported/shared/size-20",
+              "textFill": "imported/shared/color-242424",
               "lineHeight": {
                 "value": 20,
                 "unit": "PIXELS"
-              }
+              },
+              "fontFamily": "Segoe UI"
             },
             {
               "type": "frame",
               "name": "cardheader",
               "layout": {
-                "mode": "HORIZONTAL",
+                "mode": "GRID",
                 "primary": "MIN",
-                "counter": "MIN"
-              },
-              "fixedHeight": {
-                "px": 40,
-                "varName": "imported/card/cardheader/height"
-              },
-              "fixedWidth": {
-                "px": 404,
-                "varName": "imported/card/cardheader/width/medium/vertical"
+                "counter": "MIN",
+                "grid": {
+                  "rows": [
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    },
+                    {
+                      "type": "FIXED",
+                      "value": 20
+                    }
+                  ],
+                  "columns": [
+                    {
+                      "type": "FIXED",
+                      "value": 404
+                    }
+                  ],
+                  "rowGap": 0,
+                  "columnGap": 0,
+                  "hugWidth": true,
+                  "hugHeight": true
+                }
               },
               "children": [
                 {
@@ -4778,9 +5901,15 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 0,
+                    "column": 0
                   }
                 },
                 {
@@ -4792,12 +5921,19 @@ const COMPONENTS = [
                   "fontSizeVar": "imported/shared/size-14",
                   "fontWeightVar": "imported/shared/num-400",
                   "lineHeightVar": "imported/shared/size-20",
+                  "textFill": "imported/shared/color-242424",
                   "lineHeight": {
                     "value": 20,
                     "unit": "PIXELS"
+                  },
+                  "fontFamily": "Segoe UI",
+                  "cell": {
+                    "row": 1,
+                    "column": 0
                   }
                 }
-              ]
+              ],
+              "fillW": true
             }
           ]
         }
@@ -4861,6 +5997,116 @@ const COMPONENTS = [
       }
     ],
     "codeOnlyFacts": [
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "caret-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "column-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "row-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "text-decoration-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "cardheader",
+        "kind": "capture",
+        "channel": "text-emphasis-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
       {
         "part": "cardheader",
         "kind": "channel",
@@ -4970,6 +6216,50 @@ const COMPONENTS = [
       },
       {
         "part": "checkbox",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#545454",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "capture",
+        "channel": "outline-color [focus-visible]",
+        "value": "#005fcc",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "capture",
+        "channel": "outline-offset [focus-visible]",
+        "value": "2px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
+        "kind": "capture",
+        "channel": "outline-width [focus-visible]",
+        "value": "1px",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "checkbox",
         "kind": "declared",
         "channel": "appearance",
         "value": "auto",
@@ -5040,6 +6330,116 @@ const COMPONENTS = [
         "channel": "user-select",
         "value": "none",
         "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "caret-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "column-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "row-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "text-decoration-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label",
+        "kind": "capture",
+        "channel": "text-emphasis-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
           "count": 40,
           "of": 40
@@ -5146,6 +6546,116 @@ const COMPONENTS = [
       },
       {
         "part": "label-2",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "caret-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "column-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "row-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "text-decoration-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
+        "kind": "capture",
+        "channel": "text-emphasis-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-2",
         "kind": "declared",
         "channel": "cursor",
         "value": "not-allowed",
@@ -5172,6 +6682,116 @@ const COMPONENTS = [
         "channel": "user-select",
         "value": "none",
         "reason": "declared for the disabled state — state previews do not draw declared facts (a named limit)",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "border-bottom-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "border-left-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "border-right-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "border-top-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "caret-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "column-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "outline-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "row-rule-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "text-decoration-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
+        "variants": {
+          "count": 40,
+          "of": 40
+        }
+      },
+      {
+        "part": "label-3",
+        "kind": "capture",
+        "channel": "text-emphasis-color [disabled]",
+        "value": "#bdbdbd",
+        "reason": "observed by the computed capture and refused by the contract grammar — v13 Part.states carries plain color-kind refs only on non-root parts",
         "variants": {
           "count": 40,
           "of": 40
@@ -5377,6 +6997,73 @@ const COMPONENTS = [
       {
         "part": "root",
         "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.card.root.column-gap.large}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Large, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
+            "Appearance=Outline, Size=Large, Orientation=Vertical",
+            "Appearance=Subtle, Size=Large, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.card.root.column-gap.medium}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 20,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
+            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
+            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
+        "channel": "column-gap",
+        "value": "{imported.card.root.column-gap.small}",
+        "reason": "the cross axis of a VERTICAL stack — Figma has one itemSpacing and it is the main axis.",
+        "variants": {
+          "count": 4,
+          "of": 40,
+          "names": [
+            "Appearance=Filled, Size=Small, Orientation=Vertical",
+            "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
+            "Appearance=Outline, Size=Small, Orientation=Vertical",
+            "Appearance=Subtle, Size=Small, Orientation=Vertical"
+          ]
+        }
+      },
+      {
+        "part": "root",
+        "kind": "channel",
         "channel": "column-rule-color",
         "value": "{imported.shared.color-bdbdbd}",
         "reason": "a column-rule longhand the computed sweep enumerates; the canvas has no column rules.",
@@ -5420,16 +7107,12 @@ const COMPONENTS = [
         "value": "{imported.card.root.row-gap.large}",
         "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
         "variants": {
-          "count": 8,
+          "count": 4,
           "of": 40,
           "names": [
-            "Appearance=Filled, Size=Large, Orientation=Vertical",
             "Appearance=Filled, Size=Large, Orientation=Horizontal",
-            "Appearance=Filled Alternative, Size=Large, Orientation=Vertical",
             "Appearance=Filled Alternative, Size=Large, Orientation=Horizontal",
-            "Appearance=Outline, Size=Large, Orientation=Vertical",
             "Appearance=Outline, Size=Large, Orientation=Horizontal",
-            "Appearance=Subtle, Size=Large, Orientation=Vertical",
             "Appearance=Subtle, Size=Large, Orientation=Horizontal"
           ]
         }
@@ -5441,33 +7124,13 @@ const COMPONENTS = [
         "value": "{imported.card.root.row-gap.medium}",
         "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
         "variants": {
-          "count": 24,
+          "count": 4,
           "of": 40,
           "names": [
-            "Appearance=Filled, Size=Medium, Orientation=Vertical",
             "Appearance=Filled, Size=Medium, Orientation=Horizontal",
-            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical",
             "Appearance=Filled Alternative, Size=Medium, Orientation=Horizontal",
-            "Appearance=Outline, Size=Medium, Orientation=Vertical",
             "Appearance=Outline, Size=Medium, Orientation=Horizontal",
-            "Appearance=Subtle, Size=Medium, Orientation=Vertical",
-            "Appearance=Subtle, Size=Medium, Orientation=Horizontal",
-            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Disabled",
-            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Disabled",
-            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Disabled",
-            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Disabled",
-            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Focus Visible",
-            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Focus Visible",
-            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Focus Visible",
-            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Focus Visible",
-            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Active",
-            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Active",
-            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Active",
-            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Active",
-            "Appearance=Filled, Size=Medium, Orientation=Vertical, State=Hover",
-            "Appearance=Filled Alternative, Size=Medium, Orientation=Vertical, State=Hover",
-            "Appearance=Outline, Size=Medium, Orientation=Vertical, State=Hover",
-            "Appearance=Subtle, Size=Medium, Orientation=Vertical, State=Hover"
+            "Appearance=Subtle, Size=Medium, Orientation=Horizontal"
           ]
         }
       },
@@ -5478,16 +7141,12 @@ const COMPONENTS = [
         "value": "{imported.card.root.row-gap.small}",
         "reason": "the cross axis of a HORIZONTAL stack — Figma has one itemSpacing and it is the main axis.",
         "variants": {
-          "count": 8,
+          "count": 4,
           "of": 40,
           "names": [
-            "Appearance=Filled, Size=Small, Orientation=Vertical",
             "Appearance=Filled, Size=Small, Orientation=Horizontal",
-            "Appearance=Filled Alternative, Size=Small, Orientation=Vertical",
             "Appearance=Filled Alternative, Size=Small, Orientation=Horizontal",
-            "Appearance=Outline, Size=Small, Orientation=Vertical",
             "Appearance=Outline, Size=Small, Orientation=Horizontal",
-            "Appearance=Subtle, Size=Small, Orientation=Vertical",
             "Appearance=Subtle, Size=Small, Orientation=Horizontal"
           ]
         }
@@ -6037,9 +7696,13 @@ function dsDeclaredClipStops(n) {
 }
 function applyFrameSpec(node, spec) {
   const l = spec.layout || { mode: 'HORIZONTAL', primary: 'MIN', counter: 'MIN' };
+  // A2 grid: GRID frames take the declaration path — the flex fields below
+  // (axis aligns, layoutWrap) are not grid facts and are never written.
+  if (l.mode === 'GRID') { applyGridFrame(node, l); } else {
   node.layoutMode = l.mode;
   node.primaryAxisAlignItems = l.primary;
   node.counterAxisAlignItems = l.counter;
+  }
   node.primaryAxisSizingMode = 'AUTO';
   node.counterAxisSizingMode = 'AUTO';
   // FC-FIGMA-CLIP-DEFAULT: createFrame/createComponent default clipsContent=true,
@@ -6181,6 +7844,216 @@ function applyMarginBox(parent, childNode, childSpec, registry) {
   }
 }
 
+// A2 grid: declaration order is API-pinned (P2: sizes must match the CURRENT
+// count — "Grid track sizes must be the same length as the grid column
+// count"), so counts are written FIRST, then sizes, then gaps, then flow.
+// P10 hazard guard (mode-switch destroys tracks): entering GRID resets the
+// canvas to a default 2×2 — safe ONLY because the full declaration is
+// rewritten here every time, and applyGridChildren re-verifies the canvas
+// holds EXACTLY the declared lists before any placement. Nothing ever relies
+// on tracks surviving a mode switch.
+function applyGridFrame(node, l) {
+  const g = l.grid;
+  node.layoutMode = 'GRID';
+  node.gridRowCount = g.rows.length;
+  node.gridColumnCount = g.columns.length;
+  // FC-GRID-HUG-VALUE. READ and WRITE are not symmetric here. P2b observed a
+  // HUG track reading back as {type:'HUG', value:1} and this emitter mirrored
+  // that shape into the WRITE — but writing {type:'HUG', value:1} makes the
+  // API reinterpret the entry as FIXED at that value, so every "fit" track
+  // silently became a 1px fixed track (live probe: {type:'HUG'} round-trips
+  // as HUG; {type:'HUG', value:1} reads back FIXED, and re-setting it with a
+  // value can never recover). HUG is written as the bare type, never valued.
+  const trackWrite = (t) => (t.type === 'HUG' ? { type: 'HUG' } : { type: t.type, value: t.value });
+  node.gridRowSizes = g.rows.map(trackWrite);
+  node.gridColumnSizes = g.columns.map(trackWrite);
+  node.gridRowGap = g.rowGap;
+  node.gridColumnGap = g.columnGap;
+  if (g.flow) node.gridItemsPositioning = g.flow;
+  // FC-GRID-ROOT-VSIZE — CLOSED by G8 (2026-08-08). NOT here: see applyGridHug,
+  // which runs LAST. primaryAxisSizingMode/counterAxisSizingMode = 'AUTO' (the
+  // flex spelling of hug, applied by the caller) are INERT on a GRID frame
+  // (GP1b/GP8: they read back HUG while the frame keeps its FIXED size), so a
+  // grid frame kept createFrame's FIXED 100 on any unpinned axis. The contract
+  // now states the fact — literals width/height "fit-content" — and the ONLY
+  // faithful lowering is layoutSizing{Horizontal,Vertical}='HUG', written after
+  // resize() and after every child (GP4b: a later resize of a hugged axis
+  // silently reverts BOTH the sizing mode and the track list).
+}
+
+// G8 — the LAST write on a grid frame. Deliberately separate from
+// applyGridFrame: hug must follow resize() and every child append (GP4b), so
+// applyGridChildren calls it at its own tail. Hugging an axis that carries an
+// {fr} track destroys the ratio silently (GP1/GP5/GP12), so the schema refuses
+// that combination BY NAME (grid-hug-flex-axis) and this function asserts it
+// rather than trusting the compile step.
+function applyGridHug(node, l) {
+  const g = l.grid;
+  if (!g) return;
+  if (g.hugWidth) {
+    if (g.columns.some(function (t) { return t.type === 'FLEX'; }))
+      throw new Error('grid-hug-flex-axis: refusing to hug the width of a grid whose column tracks contain FLEX — the ratio would be silently normalized to HUG (GP1/GP12)');
+    node.layoutSizingHorizontal = 'HUG';
+  }
+  if (g.hugHeight) {
+    if (g.rows.some(function (t) { return t.type === 'FLEX'; }))
+      throw new Error('grid-hug-flex-axis: refusing to hug the height of a grid whose row tracks contain FLEX — the ratio would be silently normalized to HUG (GP1/GP5)');
+    node.layoutSizingVertical = 'HUG';
+  }
+}
+
+// A2 grid: children were appended by the caller — now the probe-pinned tail:
+// place ALL children (child.setGridChildPosition, the child-side setter, P3)
+// BEFORE any span (the occupancy throw) — but placement is a PERMUTATION,
+// not a loop, because appendChild already auto-placed every child row-major
+// (FC-GRID-APPEND-AUTOPLACE, see below) — then FILL (G3: a placed part fills
+// both axes of its cell; fixed channels keep their box; TEXT hugs — the flex
+// fence re-proved under grid, P4), then per-child aligns (P3's four-value
+// fence). Out-of-flow children are skipped throughout (P13).
+function applyGridChildren(parent, spec, built) {
+  const l = spec.layout;
+  if (!l || l.mode !== 'GRID' || !l.grid) return;
+  // P9/P10 declaration guard: Figma absorbs placement overflow by REWRITING
+  // gridRowCount (P9) and destroys tracks on mode switch (P10). A mismatch
+  // here means the canvas holds a declaration the contract did not make —
+  // refuse loudly, never carry the rewrite.
+  if (parent.gridRowSizes.length !== l.grid.rows.length || parent.gridColumnSizes.length !== l.grid.columns.length) {
+    throw new Error(
+      'grid-declaration-rewritten: canvas holds ' + parent.gridRowSizes.length + 'x' + parent.gridColumnSizes.length +
+      ' tracks but the contract declared ' + l.grid.rows.length + 'x' + l.grid.columns.length +
+      ' (P9 overflow absorption / P10 mode-switch loss) — refusing to carry a write the contract did not make'
+    );
+  }
+  // REJECTED-SETS ROUND (fluent.dialog): a grid child with margins is built
+  // INSIDE its "(margin box)" wrapper — the WRAPPER is the node the grid
+  // actually parents, and the child-side placement setter throws 'Node is
+  // not a grid child' on the inner node. Every placement/sizing/align write
+  // below therefore targets the outermost ancestor whose parent IS the grid
+  // frame (the wrapper when one exists, the node itself otherwise).
+  const gridChildOf = (n) => { let m = n; while (m.parent && m.parent !== parent) m = m.parent; return m; };
+  const inFlow = built
+    .filter((p) => !p[0].overlay && !p[0].insetOverlay && !p[0].absolute && p[1].layoutPositioning !== 'ABSOLUTE')
+    .map((p) => [p[0], gridChildOf(p[1])]);
+  const placed = inFlow.filter((p) => p[0].cell);
+  if (!l.grid.flow) {
+    // FC-GRID-APPEND-AUTOPLACE. appendChild does not park a grid child
+    // nowhere — the canvas AUTO-PLACES it row-major into the next free cell
+    // (live probe: five appends land (0,0)(0,1)(0,2)(0,3)(1,0)). So by the
+    // time this runs every child already OCCUPIES a cell, and a naive
+    // one-pass "place them all in contract order" throws P3's occupancy
+    // error the moment a target cell is still held by a sibling that has not
+    // been moved yet — which the canonical bento hits on its SECOND child.
+    // Placement is therefore a PERMUTATION problem, not a loop: repeatedly
+    // place every child whose target is free, and when only cycles remain,
+    // park one child in a spare cell to break the cycle. Spans stay in the
+    // second pass (all children at span 1 while the permutation resolves —
+    // the probe-pinned place-before-span rule is what makes that sound).
+    const rowCount = l.grid.rows.length;
+    const colCount = l.grid.columns.length;
+    const cellKey = (r, c) => r + ',' + c;
+    const liveOccupancy = () => {
+      const m = {};
+      for (const p of placed) m[cellKey(p[1].gridRowAnchorIndex, p[1].gridColumnAnchorIndex)] = p;
+      return m;
+    };
+    const moveTo = (p, r, c) => { p[1].setGridChildPosition(r, c); };
+    const remaining = placed.slice();
+    let guard = remaining.length * remaining.length + remaining.length + 8;
+    while (remaining.length > 0) {
+      if (guard-- <= 0) {
+        throw new Error(
+          'grid-placement-unresolvable: could not sequence ' + remaining.length +
+          ' grid placement(s) without an occupancy collision (FC-GRID-APPEND-AUTOPLACE guard)'
+        );
+      }
+      const occ = liveOccupancy();
+      let moved = false;
+      for (let i = remaining.length - 1; i >= 0; i--) {
+        const p = remaining[i];
+        const t = cellKey(p[0].cell.row, p[0].cell.column);
+        const holder = occ[t];
+        if (holder && holder !== p) continue; // still blocked by a sibling
+        moveTo(p, p[0].cell.row, p[0].cell.column);
+        remaining.splice(i, 1);
+        moved = true;
+      }
+      if (moved || remaining.length === 0) continue;
+      // Every remaining target is blocked by another remaining child — a
+      // permutation CYCLE. Park one of them in a cell nobody wants and that
+      // nobody currently holds; the next pass then has a free target.
+      const occ2 = liveOccupancy();
+      const wanted = {};
+      for (const p of remaining) wanted[cellKey(p[0].cell.row, p[0].cell.column)] = true;
+      let spare = null;
+      for (let r = 0; r < rowCount && !spare; r++) {
+        for (let c = 0; c < colCount && !spare; c++) {
+          const k = cellKey(r, c);
+          if (!occ2[k] && !wanted[k]) spare = { r: r, c: c };
+        }
+      }
+      if (!spare) {
+        throw new Error(
+          'grid-placement-cycle-no-spare: the declared ' + rowCount + 'x' + colCount +
+          ' grid has no free cell to break a placement cycle through — refusing rather than throwing P3 mid-script'
+        );
+      }
+      moveTo(remaining[0], spare.r, spare.c);
+    }
+    for (const p of placed) {
+      if (p[0].cell.rowSpan) p[1].gridRowSpan = p[0].cell.rowSpan;
+      if (p[0].cell.columnSpan) p[1].gridColumnSpan = p[0].cell.columnSpan;
+    }
+  }
+  for (const p of inFlow) {
+    const cs = p[0], cn = p[1];
+    if (cs.type === 'text') continue; // text hugs its glyphs (P4's fence)
+    // G8: a child that declares its OWN intrinsic axis keeps it — FILL would
+    // silently overwrite the hug applied by that child's own applyGridHug.
+    const childGrid = cs.layout && cs.layout.grid ? cs.layout.grid : null;
+    // G3′ (2026-08-08, probe GP14) — FILL AND HUG ON THE SAME AXIS IS CIRCULAR.
+    // G3's default is that a placed part fills both axes of its cell. On an axis
+    // the PARENT hugs, that makes the track's size a function of the child and
+    // the child's size a function of the track: Figma resolves the loop by
+    // FREEZING whatever box the node already had. Measured live: a hugging
+    // two-column root with two FILL slots reported layoutSizingVertical 'HUG'
+    // and stayed 640x100; the instant its children stopped filling, the root
+    // collapsed to the real content height, and restoring FILL did not undo it.
+    // A frozen box is worse than a wrong one — it is a stale box that reads as
+    // a measurement. So on a hugged axis the child HUGS (its own content is what
+    // the track must measure) and never fills. CSS agrees: against a
+    // fit-content track, align-self:stretch resolves to the content size — the
+    // track is sized first and the child stretches into the RESULT.
+    // A non-auto-layout frame refuses HUG (P4) and keeps its drawn box, which is
+    // exactly the right contribution.
+    const hugW = !!(l.grid.hugWidth || (childGrid && childGrid.hugWidth));
+    const hugH = !!(l.grid.hugHeight || (childGrid && childGrid.hugHeight));
+    // REJECTED-SETS ROUND (fluent.dialog actions): G3's FILL is stretch-by-
+    // ABSENCE — a child that CARRIES an alignment on an axis resolves to its
+    // content size there (CSS: justify-self/align-self beat the stretch
+    // default), so an aligned axis HUGS and never fills. Filling it drew the
+    // dialog's Close button 267px wide (modal) and collapsed it to 0 inside
+    // the hugging non-modal grid (the FILL-in-HUG degenerate cycle).
+    const alignedW = !!(cs.cell && cs.cell.hAlign);
+    const alignedH = !!(cs.cell && cs.cell.vAlign);
+    if (!cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined) && !hugW && !alignedW) {
+      try { cn.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal FILL refused; the grid child keeps its drawn width', e); }
+    } else if ((l.grid.hugWidth || alignedW) && !cs.fixedWidth && !(cs.lits && cs.lits.width !== undefined)) {
+      try { cn.layoutSizingHorizontal = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingHorizontal HUG refused; the grid child keeps its drawn width', e); }
+    }
+    if (!cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined) && !hugH && !alignedH) {
+      try { cn.layoutSizingVertical = 'FILL'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical FILL refused; the grid child keeps its drawn height', e); }
+    } else if ((l.grid.hugHeight || alignedH) && !cs.fixedHeight && !(cs.lits && cs.lits.height !== undefined)) {
+      try { cn.layoutSizingVertical = 'HUG'; } catch (e) { degrade('FC-RT-GRID-SIZING-REFUSED', cn, 'layoutSizingVertical HUG refused; the grid child keeps its drawn height', e); }
+    }
+  }
+  for (const p of placed) {
+    if (p[0].cell.hAlign) p[1].gridChildHorizontalAlign = p[0].cell.hAlign;
+    if (p[0].cell.vAlign) p[1].gridChildVerticalAlign = p[0].cell.vAlign;
+  }
+  // G8 — LAST, after resize and after every child (GP4b).
+  applyGridHug(parent, spec.layout);
+}
+
 async function buildNode(spec, registry) {
   let node;
   if (spec.type === 'svg') {
@@ -6199,6 +8072,55 @@ async function buildNode(spec, registry) {
     else if (spec.lineHeight && typeof spec.lineHeight === 'object' && typeof spec.lineHeight.value === 'number') {
       node.lineHeight = { unit: spec.lineHeight.unit === 'PERCENT' ? 'PERCENT' : 'PIXELS', value: spec.lineHeight.value };
     }
+    if (spec.fontFamily) {
+      // PER-FAMILY STYLE SPELLING. The compiled style name comes from
+      // FONT_STYLE_BY_WEIGHT, which is spelled Inter's way ("Semi Bold",
+      // "Extra Light"). Other families spell the same face WITHOUT the space
+      // — IBM Plex Sans ships "SemiBold", "ExtraLight" — so the Inter-spelled
+      // load THROWS and the node silently keeps the Inter fallback assigned
+      // above. That is a SUBSTITUTION, not a failure: nothing was logged,
+      // nothing was refused, and the canvas rendered a different typeface at
+      // different advance widths (altitude heading 194px of Inter Semi Bold
+      // where IBM Plex Sans SemiBold is 185px).
+      //
+      // A space-free retry was tried on 2026-08-08 and REVERTED because the
+      // then-pinned references were CONTRACT renders made by a harness that
+      // loaded no @font-face, so the truer canvas font scored WORSE. That
+      // premise is dead: the references are now the real library renders
+      // (extract/computed/out/<lane>/<comp>/orig-shots/, committed by
+      // run.ts --keep-originals) and the capture harness loads the library's
+      // own faces (cfg.fonts). Truer is now also closer.
+      //
+      // The fallback is kept — a family Figma does not have at all must still
+      // draw something — but it is no longer SILENT: an unresolved style is
+      // named on the console with a stable code.
+      const wantStyle = spec.fontStyle || 'Medium';
+      const styleCandidates = [wantStyle];
+      const tightStyle = wantStyle.split(' ').join('');
+      if (tightStyle !== wantStyle) styleCandidates.push(tightStyle);
+      let fontResolved = false;
+      for (let i = 0; i < styleCandidates.length; i++) {
+        try {
+          await figma.loadFontAsync({ family: spec.fontFamily, style: styleCandidates[i] });
+          node.fontName = { family: spec.fontFamily, style: styleCandidates[i] };
+          fontResolved = true;
+          break;
+        } catch (e) { /* a RETRY, not a swallow: the next candidate is this family's own spelling of the same face; the final outcome is named below */ }
+      }
+      if (!fontResolved) {
+        console.warn(
+          'FC-FONT-STYLE-UNRESOLVED: ' + spec.fontFamily + ' / ' + wantStyle +
+          ' is not available in this file (tried ' + styleCandidates.join(', ') +
+          ') — Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones',
+        );
+        degrade('FC-FONT-STYLE-UNRESOLVED', node, spec.fontFamily + ' / ' + wantStyle + ' is not available in this file (tried ' + styleCandidates.join(', ') + '); Inter ' + wantStyle + ' stands in, so the glyph metrics are NOT the library ones');
+      }
+    }
+    if (typeof spec.letterSpacing === 'number') node.letterSpacing = { unit: 'PIXELS', value: spec.letterSpacing };
+    if (spec.textCase) node.textCase = spec.textCase;
+    if (spec.textDecoration) node.textDecoration = spec.textDecoration;
+    if (spec.textAlignH) node.textAlignHorizontal = spec.textAlignH;
+    if (spec.textTruncation) { try { node.textTruncation = 'ENDING'; } catch (e) { degrade('FC-RT-TRUNCATION-REFUSED', node, 'textTruncation ENDING refused (older Plugin API); the declared ellipsis does not draw', e); } }
     if (spec.textStyle) {
       // Exact-definition match compiled in: ride the named style. Text
       // styles own typography only — the bound fill paint below coexists.
@@ -6371,6 +8293,7 @@ async function buildNode(spec, registry) {
     }
     applyMarginBox(node, childNode, child, registry);
   }
+  applyGridChildren(node, spec, built);
   if (spec.type === 'root') {
     // meters: re-apply each stamped fraction against its track's LAID-OUT width
     for (const m of node.findAll((x) => x.getPluginData && x.getPluginData('ds_meter') !== '')) {
@@ -6771,6 +8694,7 @@ async function amendSet(set, C) {
         }
     applyMarginBox(comp, childNode, childSpec, registry);
       }
+  applyGridChildren(comp, v.spec, built);
       report.rebuiltVariants++;
     }
     for (const t of registry.texts) {
@@ -6969,6 +8893,7 @@ async function amendComponent(comp, C) {
       try { childNode.layoutSizingHorizontal = 'FILL'; } catch (e) { degrade('FC-RT-FILL-SIZING-REFUSED', childNode, 'the compiled FILL width was refused (layoutSizingHorizontal FILL); the child keeps its drawn width', e); }
     }
   }
+  applyGridChildren(comp, v.spec, built);
   for (const t of registry.texts) {
     let k = defKey(t.prop);
     if (!k) { k = comp.addComponentProperty(t.prop, 'TEXT', t.default); newKeys[t.prop] = k; report.addedProps.push(t.prop); }

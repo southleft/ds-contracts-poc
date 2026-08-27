@@ -1,0 +1,56 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "borderline",
+ "priorSelfGrade": true,
+ "walls": [
+  "CODE-CANVAS-DISAGREE:root.border-color-unspecified"
+ ],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "title/description/content stack matches; same border-color gap as alert \u2014 canvas draws no box stroke",
+ "reviewedAt": "60793cc0",
+ "setNodeId": "39:9533",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-shadcn-shadcn.card.dump.json",
+  "matched": 19,
+  "diverged": [
+   "part root/label-3/label-3-text \u2014 proposal has a part the contract does not",
+   "part root border-bottom-left-radius \u2014 {imported.shared.size-14} missing from proposal",
+   "part root border-bottom-right-radius \u2014 {imported.shared.size-14} missing from proposal",
+   "part root border-top-left-radius \u2014 {imported.shared.size-14} missing from proposal",
+   "part root border-top-right-radius \u2014 {imported.shared.size-14} missing from proposal",
+   "part root box-shadow \u2014 {imported.card.root.box-shadow} missing from proposal",
+   "part root line-height \u2014 {imported.shared.size-20} missing from proposal",
+   "part root padding-top \u2014 proposal has {imported.card.root.padding-top.{size}}, contract has nothing",
+   "part root padding-bottom \u2014 proposal has {imported.card.root.padding-bottom.{size}}, contract has nothing",
+   "part root border-radius \u2014 proposal has {imported.shared.size-14}, contract has nothing",
+   "part root gap \u2014 proposal has {imported.card.root.row-gap.{size}}, contract has nothing",
+   "part root/part-0 border-top-left-radius \u2014 {imported.shared.size-14} missing from proposal",
+   "part root/part-0 border-top-right-radius \u2014 {imported.shared.size-14} missing from proposal",
+   "part root/part-0 column-gap \u2014 {imported.card.part-0.column-gap} missing from proposal",
+   "part root/part-0 line-height \u2014 {imported.shared.size-20} missing from proposal",
+   "part root/part-0 row-gap \u2014 {imported.card.part-0.row-gap} missing from proposal",
+   "part root/part-0 padding-left \u2014 proposal has {imported.card.part-0.padding-left.{size}}, contract has nothing",
+   "part root/part-0 padding-right \u2014 proposal has {imported.card.part-0.padding-right.{size}}, contract has nothing",
+   "part root/part-0 gap \u2014 proposal has {imported.card.part-0.row-gap}, contract has nothing",
+   "part root/part-0/label line-height \u2014 proposal has {imported.shared.size-20}, contract has nothing",
+   "part root/label-3 column-gap \u2014 {imported.card.label-3.column-gap} missing from proposal",
+   "part root/label-3 line-height \u2014 {imported.shared.size-20} missing from proposal",
+   "part root/label-3 row-gap \u2014 {imported.card.label-3.row-gap} missing from proposal",
+   "part root/label-3 padding-left \u2014 proposal has {imported.card.label-3.padding-left.{size}}, contract has nothing",
+   "part root/label-3 padding-right \u2014 proposal has {imported.card.label-3.padding-right.{size}}, contract has nothing",
+   "part root/label-3 gap \u2014 proposal has {imported.card.label-3.row-gap}, contract has nothing",
+   "part root/label-3 text \u2014 \"Card content copy for the shadcn round.\" vs undefined",
+   "text root/part-0/label font-size (effective) \u2014 {imported.shared.size-14} vs {imported.card.label.font-size.{size}}",
+   "text root/label-3 font-size (effective) \u2014 {imported.shared.size-14} missing from proposal",
+   "text root/label-3 font-weight (effective) \u2014 {imported.card.label-3.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`part root/part-0 layout align:stretch` \u2014 stretch leaves no artifact here (children are instances/slots \u2014 excluded from the generator fill-width path)",
+   "`part root font-size` \u2014 {imported.shared.size-14} \u2014 text-cascade token with no bound text node beneath it on the canvas",
+   "`Card:root/part-0/label` text fill = `#000000` \u2014 nearest tokens: `{color.black}`",
+   "`Card:root/label-3/label-3-text` text fill = `#000000` \u2014 nearest tokens: `{color.black}`"
+  ]
+ }
+}

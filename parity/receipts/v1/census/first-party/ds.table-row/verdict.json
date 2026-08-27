@@ -1,0 +1,24 @@
+{
+ "recognisable": true,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [],
+ "defectClasses": [],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "66580a14",
+ "setNodeId": "39:24056",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-first-party-ds.table-row.dump.json",
+  "matched": 5,
+  "diverged": [
+   "part root/cells \u2014 missing from proposal",
+   "part root/Cells \u2014 proposal has a part the contract does not"
+  ],
+  "lost": [
+   "`semantics` \u2014 element/role are not drawn on the canvas ({\"element\":\"div\",\"role\":\"row\"})",
+   "`a11y` \u2014 accessibility requirements are not canvas-recoverable"
+  ]
+ }
+}

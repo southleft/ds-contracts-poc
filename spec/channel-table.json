@@ -7,7 +7,7 @@
       "extract/computed/fuse.ts (styledChannels, buildBaseObs, enrichLayout)",
       "extract/computed/lib.ts (isFusable, GEOMETRY_CHANNELS, LOGICAL_ALIASES, SYNTHETIC_CHANNELS, kindOf)",
       "core/emit-figma-script.ts (applyTokens / applyLiterals / applyDeclared / layoutSpec)",
-      "conformance/MANIFEST.json (112 css-dom cases)",
+      "conformance/MANIFEST.json (126 css-dom cases)",
       "extract/figma/conformance/MANIFEST.json (157 canvas cases)",
       "extract/figma/channel-closure.json (draw-read closure)"
     ]
@@ -18,14 +18,14 @@
     "REFUSED": "a named wall — the row names the code (conformance expectName, FC-*, or the code-only fallback receipt)",
     "INERT": "provably no independent visual effect at computed level — the row carries the justification"
   },
-  "propertyCount": 487,
+  "propertyCount": 488,
   "totals": {
-    "CARRIED": 82,
+    "CARRIED": 83,
     "LEDGERED": 80,
     "REFUSED": 271,
     "INERT": 54
   },
-  "unclassifiedBeforeThisTable": 272,
+  "unclassifiedBeforeThisTable": 273,
   "properties": [
     {
       "property": "-webkit-border-horizontal-spacing",
@@ -298,6 +298,7 @@
       "valueNotes": "flex-start | center | flex-end | stretch carry; baseline carries via the canvas layout-align-baseline path; other keywords fall to the code-only ledger",
       "evidence": "measured",
       "conformance": [
+        "align-items-baseline",
         "flex-align-items-center"
       ]
     },
@@ -981,6 +982,7 @@
       ],
       "evidence": "measured",
       "conformance": [
+        "border-color-control-equal",
         "page-global-star-rule"
       ]
     },
@@ -1228,7 +1230,6 @@
         "custom-prop-two-hop",
         "page-inherited-ink",
         "pseudo-marker",
-        "pseudo-placeholder",
         "shadow-part",
         "var-fallback-chain",
         "webkit-text-fill-color"
@@ -1638,7 +1639,10 @@
           "symbol": "function applyTokens("
         }
       ],
-      "evidence": "code-cited"
+      "evidence": "measured",
+      "conformance": [
+        "svg-stroke-glyph-fill-none"
+      ]
     },
     {
       "property": "fill-opacity",
@@ -1688,7 +1692,9 @@
       "valueNotes": "row | column carry (LAYOUT_CHANNEL_TO_FIELD); row-reverse/column-reverse are outside the map and fall to the code-only ledger",
       "evidence": "measured",
       "conformance": [
-        "flex-direction-column"
+        "flex-direction-by-axis",
+        "flex-direction-column",
+        "flex-direction-reverse-by-axis"
       ]
     },
     {
@@ -2135,7 +2141,8 @@
         "grid-track-percent",
         "grid-track-zero-value",
         "grid-tracks-mixed-fractional",
-        "grid-two-column"
+        "grid-two-column",
+        "grid-zero-track-collapse"
       ],
       "evidence": "measured"
     },
@@ -2176,7 +2183,10 @@
         }
       ],
       "valueNotes": "same admission doors as width; table cells read their row height; aspect-ratio bakes a height (see aspect-ratio)",
-      "evidence": "code-cited"
+      "evidence": "measured",
+      "conformance": [
+        "overlay-text-hug-excluded"
+      ]
     },
     {
       "property": "hyphenate-character",
@@ -3067,6 +3077,32 @@
       "class": "LEDGERED",
       "prior": "geometry exclusion",
       "receipt": "the geometry-excluded ledger (extract/computed/fuse.ts `geometryExcluded`, surfaced as FC-GEOMETRY-EXCLUDED receipts) — recorded when styled, never minted"
+    },
+    {
+      "property": "placeholder-color",
+      "class": "CARRIED",
+      "prior": "none",
+      "synthetic": true,
+      "projection": "the placeholder TEXT node's own fill on canvas; on every stylesheet surface it is LOWERED back to a real `::placeholder { color: … }` rule, never emitted as a `placeholder-color:` declaration (no UA has such a property, so a verbatim declaration would be dropped in silence).",
+      "engine": [
+        {
+          "file": "extract/computed/lib.ts",
+          "symbol": "foldPlaceholderInk"
+        },
+        {
+          "file": "extract/computed/lib.ts",
+          "symbol": "PSEUDO_PLANE_OWN_INK"
+        },
+        {
+          "file": "core/emit-figma-script.ts",
+          "symbol": "function placeholderInkCtx("
+        }
+      ],
+      "conformance": [
+        "pseudo-placeholder"
+      ],
+      "valueNotes": "SYNTHETIC (RC7): the ::placeholder plane's `color`, folded onto the HOST at both read boundaries (capture + replay). ABSENT is not 'unobserved' — foldPlaceholderInk writes the key ONLY where the placeholder ink DIFFERS from the element's own `color`, so an absent key is the positive statement 'the hint ink IS the element's own' (extract/computed/lib.ts planeChannelValue states that identity once, for the gate and the mint alike).",
+      "evidence": "measured"
     },
     {
       "property": "pointer-events",
@@ -3979,7 +4015,8 @@
       ],
       "conformance": [
         "combobox-popover-overlay-inset",
-        "position-absolute-insets"
+        "position-absolute-insets",
+        "presence-hidden-axis-geometry"
       ],
       "evidence": "measured"
     },
@@ -4258,6 +4295,9 @@
       ],
       "valueNotes": "admitted through named doors only: absolute-cluster, table cell, block-root and token-named geometry (extract/computed/fuse.ts styledChannels); viewport-derived boxes refuse (FC-GEOMETRY-EXCLUDED); a plain flow width stays excluded as environment geometry — the receipt names it",
       "conformance": [
+        "block-root-shrink-to-fit",
+        "overlay-text-fill-pinned-size",
+        "overlay-text-fill-stage-derived",
         "stage-box-equal"
       ],
       "evidence": "measured"

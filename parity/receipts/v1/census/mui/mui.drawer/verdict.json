@@ -1,0 +1,42 @@
+{
+ "recognisable": false,
+ "gradedBy": "blind-adversarial-2026-08-24",
+ "confidence": "certain",
+ "priorSelfGrade": true,
+ "walls": [],
+ "defects": [
+  "variant-permanent: canvas is a 118x19pt text-sized box containing only 'Drawer content' with a sliver of right border; ref is a full-viewport-height left panel with a right edge divider \u2014 the panel geometry is collapsed to hug the text",
+  "variant-temporary: canvas is the same collapsed text-sized box and has NO scrim; ref shows the full-height white panel over a gray modal scrim covering the rest of the viewport"
+ ],
+ "defectClasses": [
+  "min-size collapse",
+  "missing ink"
+ ],
+ "notes": "default cell and sampled variants match",
+ "reviewedAt": "16fac1ee",
+ "setNodeId": "39:17157",
+ "roundTrip": {
+  "dumpPath": "extract/figma/fixtures/census-mui-mui.drawer.dump.json",
+  "matched": 12,
+  "diverged": [
+   "part root/label/drawerContent \u2014 proposal has a part the contract does not",
+   "part root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root/backdrop-root layout \u2014 {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false}",
+   "part root/backdrop-root visibleWhen \u2014 undefined vs {\"prop\":\"variant\",\"equals\":\"temporary\"}",
+   "part root/label layout \u2014 {\"mode\":\"VERTICAL\",\"primary\":\"MIN\",\"counter\":\"MIN\",\"grow\":false,\"stretch\":false} vs {\"mode\":\"HORIZONTAL\",\"primary\":\"CENTER\",\"counter\":\"CENTER\",\"grow\":false,\"stretch\":false}",
+   "part root/label flex-grow \u2014 {imported.drawer.label.flex-grow} missing from proposal",
+   "part root/label flex-shrink \u2014 {imported.drawer.label.flex-shrink} missing from proposal",
+   "part root/label outline-width \u2014 {imported.shared.size-0} missing from proposal",
+   "part root/label z-index \u2014 {imported.drawer.label.z-index} missing from proposal",
+   "part root/label border-color \u2014 proposal has {imported.drawer.label.border-right-color.{variant}}, contract has nothing",
+   "part root/label border-right-width \u2014 proposal has {imported.drawer.label.border-right-width.{variant}}, contract has nothing",
+   "part root/label content \u2014 {\"prop\":\"children\"} vs undefined",
+   "text root/label color (effective) \u2014 {imported.drawer.label.color} missing from proposal",
+   "text root/label font-size (effective) \u2014 {imported.drawer.label.font-size} missing from proposal",
+   "text root/label font-weight (effective) \u2014 {imported.drawer.label.font-weight} missing from proposal"
+  ],
+  "lost": [
+   "`part root/backdrop-root stylesWhen` \u2014 conditional literal styles are code-side (declared canvas limit)"
+  ]
+ }
+}

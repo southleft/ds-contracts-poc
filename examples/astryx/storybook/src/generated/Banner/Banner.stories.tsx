@@ -1,6 +1,6 @@
 /**
  * GENERATED FILE — DO NOT EDIT.
- * Source of truth: contracts/banner.contract.json (astryx.banner v0.2.0)
+ * Source of truth: contracts/banner.contract.json (astryx.banner v0.3.0)
  * Regenerate with: npm run generate
  */
 import type { Meta, StoryObj } from '@storybook/react-vite';
@@ -15,7 +15,7 @@ const meta = {
     docs: {
       description: {
         component:
-          'Astryx Banner — promoted from @astryxdesign/core@0.1.6 (src/Banner/Banner.tsx). Two-part structure: a status header (muted background, status icon, semibold title, supporting description) and an optional collapsible content area (out of scope for the default exhibit). Status backgrounds use accent/warning/error/success *-muted tokens; icons use the vendor defaultIconNames mapping at md (20px).',
+          'Astryx Banner — a status surface with title, description and optional dismiss. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). status/container/isDismissable are verbatim; title and description are materialized text slots (Astryx types both as ReactNode). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/banner/decisions.md); extension sidecar carries the named overflow.',
       },
     },
   },

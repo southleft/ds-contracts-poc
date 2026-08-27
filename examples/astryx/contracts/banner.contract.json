@@ -2,9 +2,9 @@
   "$schema": "../../../contracts/contract.schema.json",
   "id": "astryx.banner",
   "name": "Banner",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "status": "draft",
-  "description": "Astryx Banner — promoted from @astryxdesign/core@0.1.6 (src/Banner/Banner.tsx). Two-part structure: a status header (muted background, status icon, semibold title, supporting description) and an optional collapsible content area (out of scope for the default exhibit). Status backgrounds use accent/warning/error/success *-muted tokens; icons use the vendor defaultIconNames mapping at md (20px).",
+  "description": "Astryx Banner — a status surface with title, description and optional dismiss. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). status/container/isDismissable are verbatim; title and description are materialized text slots (Astryx types both as ReactNode). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file. FLOOR-PROMOTED (examples/astryx/scripts/promote-floor.ts): enriched.contract.json — computed-capture truth with the decisions ledger applied (extract/computed/out/astryx/banner/decisions.md); extension sidecar carries the named overflow.",
   "archetype": "banner / alert / toast",
   "semantics": {
     "element": "div"
@@ -116,168 +116,236 @@
         "direction": "column"
       },
       "parts": {
-        "header": {
-          "element": "div",
+        "banner": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|banner — this element exists in the real component's DOM; the static layer had no part for it.",
           "layout": {
             "display": "flex",
-            "direction": "row",
             "align": "start"
           },
-          "tokens": {
-            "gap": "{spacing-2}",
-            "padding-block": "{spacing-3}",
-            "padding-inline": "{spacing-4}"
-          },
-          "tokensByProp": [
-            {
-              "prop": "status",
-              "map": {
-                "info": {
-                  "background-color": "{color-background-blue}"
-                },
-                "warning": {
-                  "background-color": "{color-warning-muted}"
-                },
-                "error": {
-                  "background-color": "{color-error-muted}"
-                },
-                "success": {
-                  "background-color": "{color-success-muted}"
-                }
-              }
-            }
-          ],
-          "literalsByProp": [
-            {
-              "prop": "container",
-              "map": {
-                "card": {
-                  "border-radius": "12px"
-                },
-                "section": {
-                  "border-radius": "0"
-                }
-              }
-            }
-          ],
           "parts": {
-            "iconWrapper": {
+            "banner-icon": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|banner-icon — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
                 "align": "center"
               },
               "parts": {
-                "iconInfo": {
-                  "icon": {
-                    "asset": "banner-info",
-                    "size": 20
+                "icon": {
+                  "element": "span",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center",
+                    "justify": "center"
                   },
-                  "visibleWhen": {
-                    "prop": "status",
-                    "equals": "info"
+                  "parts": {
+                    "icon-info": {
+                      "icon": {
+                        "asset": "banner-icon-info",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "info"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=info."
+                    },
+                    "icon-warning": {
+                      "icon": {
+                        "asset": "banner-icon-warning",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "warning"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=warning."
+                    },
+                    "icon-error": {
+                      "icon": {
+                        "asset": "banner-icon-error",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "error"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=error."
+                    },
+                    "icon-success": {
+                      "icon": {
+                        "asset": "banner-icon-success",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "success"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=success."
+                    }
                   },
                   "tokens": {
-                    "color": "{color-text-blue}"
-                  }
-                },
-                "iconWarning": {
-                  "icon": {
-                    "asset": "banner-warning",
-                    "size": 20
+                    "flex-shrink": "{imported.banner.icon.flex-shrink}",
+                    "font-size": "{imported.banner.icon.font-size}",
+                    "line-height": "{imported.banner.icon.line-height}"
                   },
-                  "visibleWhen": {
-                    "prop": "status",
-                    "equals": "warning"
-                  },
-                  "tokens": {
-                    "color": "{color-text-yellow}"
-                  }
-                },
-                "iconError": {
-                  "icon": {
-                    "asset": "banner-error",
-                    "size": 20
-                  },
-                  "visibleWhen": {
-                    "prop": "status",
-                    "equals": "error"
-                  },
-                  "tokens": {
-                    "color": "{color-text-red}"
-                  }
-                },
-                "iconSuccess": {
-                  "icon": {
-                    "asset": "banner-success",
-                    "size": 20
-                  },
-                  "visibleWhen": {
-                    "prop": "status",
-                    "equals": "success"
-                  },
-                  "tokens": {
-                    "color": "{color-text-green}"
-                  }
+                  "tokensByProp": [
+                    {
+                      "prop": "status",
+                      "map": {
+                        "error": {
+                          "color": "{imported.banner.icon.color.error}"
+                        },
+                        "info": {
+                          "color": "{imported.banner.icon.color.info}"
+                        },
+                        "success": {
+                          "color": "{imported.banner.icon.color.success}"
+                        },
+                        "warning": {
+                          "color": "{imported.banner.icon.color.warning}"
+                        }
+                      }
+                    }
+                  ]
                 }
+              },
+              "tokens": {
+                "flex-shrink": "{imported.banner.banner-icon.flex-shrink}"
               }
             },
-            "headerContent": {
+            "part-0-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
               "layout": {
                 "display": "flex",
-                "direction": "column",
-                "grow": true
+                "direction": "column"
               },
               "parts": {
-                "title": {
-                  "element": "div",
+                "label": {
                   "content": {
                     "prop": "title"
                   },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
                   "tokens": {
-                    "color": "{color-text-primary}",
-                    "font-size": "{text-label-size}",
-                    "font-weight": "{font-weight-semibold}",
-                    "line-height": "{text-label-leading}"
+                    "font-size": "{imported.banner.label.font-size}",
+                    "font-weight": "{imported.banner.label.font-weight}",
+                    "line-height": "{imported.banner.label.line-height}"
                   },
                   "tokensByProp": [
                     {
                       "prop": "status",
                       "map": {
-                        "info": { "color": "{color-text-blue}" },
-                        "warning": { "color": "{color-text-yellow}" },
-                        "error": { "color": "{color-text-red}" },
-                        "success": { "color": "{color-text-green}" }
+                        "error": {
+                          "color": "{imported.banner.label.color.error}"
+                        },
+                        "info": {
+                          "color": "{imported.banner.label.color.info}"
+                        },
+                        "success": {
+                          "color": "{imported.banner.label.color.success}"
+                        },
+                        "warning": {
+                          "color": "{imported.banner.label.color.warning}"
+                        }
                       }
                     }
                   ]
                 },
-                "description": {
-                  "element": "div",
+                "label-2": {
                   "content": {
                     "prop": "description"
                   },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block"
+                  },
                   "tokens": {
-                    "color": "{color-text-secondary}",
-                    "font-size": "{text-supporting-size}",
-                    "font-weight": "{text-supporting-weight}",
-                    "line-height": "{text-supporting-leading}"
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.banner.label-2.font-weight}",
+                    "line-height": "{imported.banner.label-2.line-height}"
                   },
                   "tokensByProp": [
                     {
                       "prop": "status",
                       "map": {
-                        "info": { "color": "{color-text-blue}" },
-                        "warning": { "color": "{color-text-yellow}" },
-                        "error": { "color": "{color-text-red}" },
-                        "success": { "color": "{color-text-green}" }
+                        "error": {
+                          "color": "{imported.banner.label-2.color.error}"
+                        },
+                        "info": {
+                          "color": "{imported.banner.label-2.color.info}"
+                        },
+                        "success": {
+                          "color": "{imported.banner.label-2.color.success}"
+                        },
+                        "warning": {
+                          "color": "{imported.banner.label-2.color.warning}"
+                        }
                       }
                     }
                   ]
                 }
+              },
+              "tokens": {
+                "column-gap": "{imported.shared.size-0}",
+                "flex-grow": "{imported.banner.part-0-1.flex-grow}",
+                "min-width": "{imported.shared.size-0}",
+                "row-gap": "{imported.shared.size-0}"
               }
             }
-          }
+          },
+          "tokens": {
+            "column-gap": "{imported.banner.banner.column-gap}",
+            "padding-bottom": "{imported.shared.size-12}",
+            "padding-left": "{imported.banner.banner.padding-left}",
+            "padding-right": "{imported.banner.banner.padding-right}",
+            "padding-top": "{imported.shared.size-12}",
+            "row-gap": "{imported.banner.banner.row-gap}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "container",
+              "map": {
+                "card": {
+                  "border-bottom-left-radius": "{imported.banner.banner.border-bottom-left-radius.card}",
+                  "border-bottom-right-radius": "{imported.banner.banner.border-bottom-right-radius.card}",
+                  "border-top-left-radius": "{imported.banner.banner.border-top-left-radius.card}",
+                  "border-top-right-radius": "{imported.banner.banner.border-top-right-radius.card}"
+                },
+                "section": {
+                  "border-bottom-left-radius": "{imported.banner.banner.border-bottom-left-radius.section}",
+                  "border-bottom-right-radius": "{imported.banner.banner.border-bottom-right-radius.section}",
+                  "border-top-left-radius": "{imported.banner.banner.border-top-left-radius.section}",
+                  "border-top-right-radius": "{imported.banner.banner.border-top-right-radius.section}"
+                }
+              }
+            },
+            {
+              "prop": "status",
+              "map": {
+                "error": {
+                  "background-color": "{imported.banner.banner.background-color.error}"
+                },
+                "info": {
+                  "background-color": "{imported.banner.banner.background-color.info}"
+                },
+                "success": {
+                  "background-color": "{imported.banner.banner.background-color.success}"
+                },
+                "warning": {
+                  "background-color": "{imported.banner.banner.background-color.warning}"
+                }
+              }
+            }
+          ]
         }
+      },
+      "tokens": {
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}"
       }
     }
   },

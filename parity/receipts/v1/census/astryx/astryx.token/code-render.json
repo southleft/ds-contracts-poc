@@ -3,7 +3,7 @@
   "name": "Token",
   "library": "astryx",
   "contractPath": "examples/astryx/contracts/token.contract.json",
-  "contractVersion": "0.1.0",
+  "contractVersion": "0.3.0",
   "renderer": "core/emit-html.ts via extract/figma/catalog-visual/css-doc.ts buildCssCellDoc + extract/figma/canvas-gate/shots.ts captureCell (600×800, dpr 2, light)",
   "tokenSource": "examples/astryx/figma/astryx.bundle.json tokenSet (flat base + minted + light mode)",
   "platform": "darwin/arm64",
@@ -56,39 +56,51 @@
       }
     ],
     "tokenRefs": [
-      "color-background-blue",
-      "color-background-cyan",
-      "color-background-gray",
-      "color-background-green",
-      "color-background-muted",
-      "color-background-orange",
-      "color-background-pink",
-      "color-background-purple",
-      "color-background-red",
-      "color-background-teal",
-      "color-background-yellow",
-      "color-text-blue",
-      "color-text-cyan",
-      "color-text-gray",
-      "color-text-green",
-      "color-text-orange",
-      "color-text-pink",
-      "color-text-primary",
-      "color-text-purple",
-      "color-text-red",
-      "color-text-teal",
-      "color-text-yellow",
-      "font-family-body",
-      "font-size-2xs",
-      "font-size-sm",
-      "font-size-xs",
-      "font-weight-medium",
-      "radius-full",
-      "spacing-0-5",
-      "spacing-1",
-      "spacing-1-5",
-      "spacing-2",
-      "spacing-3"
+      "imported.shared.size-6",
+      "imported.token.label.color.blue",
+      "imported.token.label.color.cyan",
+      "imported.token.label.color.default",
+      "imported.token.label.color.gray",
+      "imported.token.label.color.green",
+      "imported.token.label.color.orange",
+      "imported.token.label.color.pink",
+      "imported.token.label.color.purple",
+      "imported.token.label.color.red",
+      "imported.token.label.color.teal",
+      "imported.token.label.color.yellow",
+      "imported.token.label.font-size",
+      "imported.token.label.font-weight",
+      "imported.token.label.line-height",
+      "imported.token.label.min-width",
+      "imported.token.root.background-color.blue",
+      "imported.token.root.background-color.cyan",
+      "imported.token.root.background-color.default",
+      "imported.token.root.background-color.gray",
+      "imported.token.root.background-color.green",
+      "imported.token.root.background-color.orange",
+      "imported.token.root.background-color.pink",
+      "imported.token.root.background-color.purple",
+      "imported.token.root.background-color.red",
+      "imported.token.root.background-color.teal",
+      "imported.token.root.background-color.yellow",
+      "imported.token.root.color.blue",
+      "imported.token.root.color.cyan",
+      "imported.token.root.color.default",
+      "imported.token.root.color.gray",
+      "imported.token.root.color.green",
+      "imported.token.root.color.orange",
+      "imported.token.root.color.pink",
+      "imported.token.root.color.purple",
+      "imported.token.root.color.red",
+      "imported.token.root.color.teal",
+      "imported.token.root.color.yellow",
+      "imported.token.root.column-gap",
+      "imported.token.root.font-size",
+      "imported.token.root.font-weight",
+      "imported.token.root.line-height",
+      "imported.token.root.padding-left",
+      "imported.token.root.padding-right",
+      "imported.token.root.row-gap"
     ],
     "icons": [],
     "events": []
@@ -107,8 +119,8 @@
       "status": "rendered",
       "png": "code-size-md__color-default.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -124,8 +136,8 @@
       "status": "rendered",
       "png": "code-size-md__color-red.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -141,8 +153,8 @@
       "status": "rendered",
       "png": "code-size-md__color-orange.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -158,8 +170,8 @@
       "status": "rendered",
       "png": "code-size-md__color-yellow.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -175,8 +187,8 @@
       "status": "rendered",
       "png": "code-size-md__color-green.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -192,8 +204,8 @@
       "status": "rendered",
       "png": "code-size-md__color-teal.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -209,8 +221,8 @@
       "status": "rendered",
       "png": "code-size-md__color-cyan.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -226,8 +238,8 @@
       "status": "rendered",
       "png": "code-size-md__color-blue.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -243,8 +255,8 @@
       "status": "rendered",
       "png": "code-size-md__color-purple.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -260,8 +272,8 @@
       "status": "rendered",
       "png": "code-size-md__color-pink.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -277,8 +289,8 @@
       "status": "rendered",
       "png": "code-size-md__color-gray.png",
       "contentBox": {
-        "width": 33.66,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -294,8 +306,8 @@
       "status": "rendered",
       "png": "code-size-sm__color-default.png",
       "contentBox": {
-        "width": 26.45,
-        "height": 18
+        "width": 35.36,
+        "height": 20
       }
     },
     {
@@ -311,8 +323,8 @@
       "status": "rendered",
       "png": "code-size-lg__color-default.png",
       "contentBox": {
-        "width": 44.77,
-        "height": 23
+        "width": 35.36,
+        "height": 20
       }
     }
   ],
