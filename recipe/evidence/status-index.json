@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 authorization declared; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -718,7 +718,7 @@
       "overallInputSuccess": false
     },
     "liveV12": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and extract accepted; host refused MUI content fill after in-writer restore; cleanup complete",
       "baseCommit": "f36968a7426201961bc50fd1534b8a113a6cb700",
       "antecedentCommit": "8570f3e8c318977a51f5f41a7474dcc535b53b26",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v12/protocol.json",
@@ -795,13 +795,17 @@
         "tokenValuesForbidden": true,
         "liveExecutionForbidden": true
       },
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
       "maximumFutureAttempts": 3,
       "humanSignoff": "pending",
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 2,
       "figmaCaptures": 0,
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v12-attempt-1.json",
+      "attempt1Sha256": "33267b5761dbe57a4d74765492bafea2dc79ff1520099c35091f3bdaabbcdb6f",
+      "restartAsV12Attempt2WithoutPostWriterFillRestoreForbidden": true,
       "overallInputSuccess": false
     }
   }

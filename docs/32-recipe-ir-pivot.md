@@ -83,9 +83,17 @@
 > captures; no live success. V12 is the replacement lineage: it copies the
 > v11 stack and carries a writer that re-asserts placeholder/value FILL
 > after the component set settles, using the first name segment and
-> `textAutoResize=HEIGHT`. V11 writer bytes stay frozen. Live execution
-> Authorization pins antecedent `8570f3e8c318977a51f5f41a7474dcc535b53b26`.
-> Live execution remains forbidden until runtime security prerequisites pass.
+> `textAutoResize=HEIGHT`. V11 writer bytes stay frozen. V12 prepare is
+> published at `8570f3e8c318977a51f5f41a7474dcc535b53b26`. Authorization is
+> published at `aec7918a6e211be4832e72a3cb6ebfb1cd350869`. V12 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), extract raw returned
+> (8402407 bytes), then host collapse refused the same MUI content-fill
+> check. Extract still shows MUI 104/128 FILL and 24/128 FIXED; Polaris
+> 128/128 FILL. In-writer restore did not change the live scene. Do not
+> teach the recipe to accept FIXED. Do not restart v12 attempt 2 as-is. The
+> next lineage must restore FILL in a signed request after the writer
+> plugin returns. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -359,7 +367,9 @@ lineage; do not patch hashed bytes in place.
 | A5f | AUTHORIZE INPUT V11 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c681d7178be473943f4863d59bd30af9de435c23189a9392d2cbc0be3bc0a818`; SPKI SHA-256 `d4b38596d2015c2c732c304071946fe7b9a8fe2827813415165ceeb416a76a02`. | **Done** at `41fc8c77e01a670a38d5cdfb97feba80b638f72e`. |
 | A5g | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8402407-byte extract). First-segment role recovery cleared. Host collapse refused MUI content fill: 24 placeholder texts extract as FIXED (Adornments none/trailing); Polaris 128/128 FILL. Frozen writer already set FILL after bind. Do **not** teach the recipe to accept FIXED. Do **not** restart v11 attempt 2 as-is. |
 | A5h | PREPARE INPUT V12. Copy the v11 stack. Carry a writer that re-asserts placeholder/value `layoutSizingHorizontal=FILL` after the component set settles, using first-segment role and `textAutoResize=HEIGHT`. Keep v11 hashed bytes frozen, including the v11 writer payload. | **Done** at `8570f3e8c318977a51f5f41a7474dcc535b53b26`. Antecedent index SHA-256 `b2225989a92599fd8dbc1daf3d1f91c3f787cb2169547f8c1e640189bd7f45ef`. |
-| A5i | AUTHORIZE INPUT V12 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `8570f3e8c318977a51f5f41a7474dcc535b53b26`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `124b04ff2daae9d62ecd1167014fefbdf6c231578e3f966b545972af4a2b8a03`; SPKI SHA-256 `649580fc43fa90a541d4ad4f3c7882e1854c1e15776a1aec698eb7623f325687`. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v12 file fails closed, open v13. |
+| A5i | AUTHORIZE INPUT V12 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `8570f3e8c318977a51f5f41a7474dcc535b53b26`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `124b04ff2daae9d62ecd1167014fefbdf6c231578e3f966b545972af4a2b8a03`; SPKI SHA-256 `649580fc43fa90a541d4ad4f3c7882e1854c1e15776a1aec698eb7623f325687`. | **Done** at `aec7918a6e211be4832e72a3cb6ebfb1cd350869`. |
+| A5j | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8402407-byte extract). In-writer FILL/HEIGHT restore did not change the live extract: MUI still 104/128 FILL and 24/128 FIXED placeholders; Polaris 128/128 FILL. Do **not** teach the recipe to accept FIXED. Do **not** restart v12 attempt 2 as-is. Cleanup accepted. |
+| A5k | PREPARE INPUT V13. Copy the v12 stack. Add a signed post-writer restore request that re-asserts content FILL on the minted Scratch page **after** the writer plugin returns and **before** extract. Keep v12 hashed bytes frozen. This is a protocol denominator change (remote request count). | Open only after RECORD INPUT V12 ATTEMPT 1. If a hashed v13 file later fails closed, open v14. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1782,7 +1792,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, and v11 attempt 1 failed closed; v12 authorization declared; false** | attestation + Scratch-only live v12 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, and v12 attempt 1 failed closed; false** | RECORD v12 attempt 1, then PREPARE INPUT V13 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
