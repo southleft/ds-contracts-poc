@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 draft antecedent prepared; authorization pending; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -258,8 +258,14 @@ const V11_AUTHORIZATION_TEMPLATE_SHA256 =
   "79720598df9a44363ec447cc014a4ebb2010e95ab1b39e79e9767ee4e1c0e270";
 const V11_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v11-status.json";
 const V11_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V11_BASE_COMMIT = "93df43839e974870630a227562851a86eb0fa8ce";
+const V11_ANTECEDENT_COMMIT = "f1861d527dd09345c56ee862de7776fbc4d0a7a2";
+const V11_AUTHORIZATION_PATH = `${V11_ROOT}/capture-authorization.json`;
+const V11_AUTHORIZATION_SHA256 =
+  "c681d7178be473943f4863d59bd30af9de435c23189a9392d2cbc0be3bc0a818";
+const V11_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "d4b38596d2015c2c732c304071946fe7b9a8fe2827813415165ceeb416a76a02";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
   "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b";
@@ -835,9 +841,16 @@ export function validatePivotStatus(
     status.input?.liveV11?.antecedentHashSetSha256 !== V11_HASH_SET_SHA256 ||
     status.input?.liveV11?.authorizationTemplateSha256 !==
       V11_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV11?.authorizationPresent !== false ||
-    status.input?.liveV11?.authorizationCommitted !== false ||
+    status.input?.liveV11?.antecedentCommit !== V11_ANTECEDENT_COMMIT ||
+    status.input?.liveV11?.authorizationPresent !== true ||
+    status.input?.liveV11?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV11?.authorizationEffective !== false ||
+    status.input?.liveV11?.authorizationPath !== V11_AUTHORIZATION_PATH ||
+    status.input?.liveV11?.authorizationSha256 !== V11_AUTHORIZATION_SHA256 ||
+    status.input?.liveV11?.signingPublicKeySpkiSha256 !==
+      V11_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV11?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV11?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV11?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -1614,9 +1627,16 @@ export function verifyPivotStatus(): void {
     v11Status.artifactVersion !== "input-live-v11-status-v1" ||
     v11Status.status !== V11_STATUS ||
     v11Status.baseCommit !== V11_BASE_COMMIT ||
-    v11Status.authorization?.present !== false ||
-    v11Status.authorization?.committed !== false ||
+    v11Status.antecedent?.commit !== V11_ANTECEDENT_COMMIT ||
+    v11Status.authorization?.present !== true ||
+    v11Status.authorization?.commitStateDerivedByHistory !== true ||
     v11Status.authorization?.effective !== false ||
+    v11Status.authorization?.path !== V11_AUTHORIZATION_PATH ||
+    v11Status.authorization?.sha256 !== V11_AUTHORIZATION_SHA256 ||
+    v11Status.authorization?.signingPublicKeySpkiSha256 !==
+      V11_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V11_AUTHORIZATION_PATH)) !==
+      V11_AUTHORIZATION_SHA256 ||
     v11Status.authorization?.v10AuthorizationReusable !== false ||
     v11Status.smallestHonestDelta?.taughtFirstSegmentRoleRecovery !== true ||
     v11Status.smallestHonestDelta?.carriedV3Verifier !==
