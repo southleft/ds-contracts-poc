@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 authorization lineage non-executable; v5 authorization prepared uncommitted and capture forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 semantically retired; v6 complete offline antecedent and unauthorized; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -44,16 +44,50 @@ const V4_FAILURE_SHA256 =
   "43161312f76b50cb1bd392b0ca55d8892f3af4f5bfd809ec94b944ed0e7a48ee";
 const V5_ROOT = "recipe/evidence/input-field-live-pivot-v5";
 const V5_STATUS =
-  "authorization prepared uncommitted; capture forbidden";
+  "authorization lineage published; execution blocked by reviewed transaction-contract defects; capture forbidden";
+const V5_INDEX_STATUS = "authorization prepared uncommitted; capture forbidden";
 const V5_ANTECEDENT_COMMIT = "a29d034b746d0831ce93f88f1aeb5630ad4b0453";
-const V5_PROTOCOL_FIRST_ADD_COMMIT =
-  "e9f9712a55147a4329f51cfd4bf024866dfd489f";
+const V5_AUTHORIZATION_COMMIT = "7c240e7862ee4b97d9da5002c7f2a02827477413";
+const V5_PROTOCOL_FIRST_ADD_COMMIT = "e9f9712a55147a4329f51cfd4bf024866dfd489f";
 const V5_PROTOCOL_SHA256 =
   "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf";
 const V5_PLAN_SHA256 =
   "09fbdda142727a0238bb0f30721e30015cdfb714c24314d0b33d6b7b53081b10";
 const V5_AUTHORIZATION_SHA256 =
   "acb54eda9a4994c9f1d7502b79d21adcaf28cca06b0566f344a9647219ff39e6";
+const V6_PROTOCOL_PATH =
+  "recipe/evidence/input-field-live-pivot-v6/protocol.json";
+const V6_PROTOCOL_SHA256 =
+  "0d79c50a4a21763eae067ff18f2ad65bc071f2fca5af7cfd4335f775c9d5e296";
+const V6_BROKER_PATH = "recipe/input-field-live-v6-broker.ts";
+const V6_BROKER_SHA256 =
+  "3c8cf2b50ba055a86fc1118723c091f21748541b4a76bde01d1e653012457f1a";
+const V6_CONTRACT_PATH = "recipe/input-field-live-v6-contract.ts";
+const V6_CONTRACT_SHA256 =
+  "11741375907f0dd69678a6ba652a9a1b00b685ae47994ee88ae34e753e52144a";
+const V6_RUNNER_PATH = "recipe/run-input-field-live-v6.ts";
+const V6_RUNNER_SHA256 =
+  "0d9871ef268a2253045b13f637b4a71a0853a0d124a13484c25a4e6d5f4bfcf3";
+const V6_TEST_PATH = "recipe/input-field-live-v6-broker.test.ts";
+const V6_TEST_SHA256 =
+  "4ac6123d06aba5356f1d48789c05a25c51db147cd2e2b21cf1894ec243b6f67d";
+const V6_INDEX_PATH = "recipe/evidence/input-field-live-pivot-v6/index.json";
+const V6_INDEX_SHA256 =
+  "95c050af82d7eb5497487eb3099dbf471039c7afaeef4c9dee60dbd5f1837657";
+const V6_PLAN_SHA256 =
+  "28c22a4b86fe98e558c48278c624a229da6417b5abcbdd6587cb533197fdf199";
+const V6_CAPTURE_MANIFEST_SHA256 =
+  "b58506dd5bc238cafc7b346ddad6fa5d1c1178e5ec6e566f0cc799e4c43e9571";
+const V6_REQUEST_MANIFEST_SHA256 =
+  "03126813dfe8a9e7fa9c18db8f906d3e65c33e162bbdc768341802cddeb634b2";
+const V5_SUPERSEDING_PATH =
+  "recipe/evidence/input-field-live-pivot-v5-superseding-status.json";
+const V5_SUPERSEDING_SHA256 =
+  "df74b9d8971e1fab57c96926ccb0a65b9254861fa20b0d53107edd3a8589e8ba";
+const V6_STATUS =
+  "complete offline signed external-operator antecedent; uncommitted; authorization absent; live write and capture forbidden";
+const V6_PROTOCOL_STATUS =
+  "draft uncommitted; pending separate authorization; live write and capture forbidden";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
   "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b";
@@ -211,18 +245,64 @@ export function validatePivotStatus(
     status.input?.liveV5?.writerPlanSha256 !== V5_PLAN_SHA256 ||
     status.input?.liveV5?.authorizationSha256 !== V5_AUTHORIZATION_SHA256 ||
     status.input?.liveV5?.authorizationPresent !== true ||
-    status.input?.liveV5?.authorizationCommitted !== false ||
-    status.input?.liveV5?.authorized !== false ||
+    status.input?.liveV5?.authorizationCommitted !== true ||
+    status.input?.liveV5?.authorizationCommit !== V5_AUTHORIZATION_COMMIT ||
+    status.input?.liveV5?.authorizationLineageValidAtCommit !== true ||
+    status.input?.liveV5?.executionReady !== false ||
+    status.input?.liveV5?.executionBlockers?.length !== 4 ||
     status.input?.liveV5?.v4AuthorizationReused !== false ||
     status.input?.liveV5?.attemptsExecuted !== 0 ||
-    status.input?.liveV5?.nextAttempt !== 1 ||
+    status.input?.liveV5?.nextAttempt !== null ||
     status.input?.liveV5?.maximumFutureAttempts !== 3 ||
     status.input?.liveV5?.liveExecutionOccurred !== false ||
     status.input?.liveV5?.captureArtifactsPresent !== false ||
     status.input?.liveV5?.outcomes !== null ||
-    status.input?.liveV5?.humanSignoff !== "pending"
+    status.input?.liveV5?.humanSignoff !== "pending" ||
+    status.input?.liveV5?.supersedingStatusPath !== V5_SUPERSEDING_PATH ||
+    status.input?.liveV5?.supersedingStatusSha256 !== V5_SUPERSEDING_SHA256 ||
+    status.input?.liveV5?.semanticallyRetired !== true ||
+    status.input?.liveV5?.authorizationAuthorizesAttemptNow !== false ||
+    status.input?.liveV6?.status !== V6_STATUS ||
+    status.input?.liveV6?.protocolPath !== V6_PROTOCOL_PATH ||
+    status.input?.liveV6?.protocolSha256 !== V6_PROTOCOL_SHA256 ||
+    status.input?.liveV6?.brokerPath !== V6_BROKER_PATH ||
+    status.input?.liveV6?.brokerSha256 !== V6_BROKER_SHA256 ||
+    status.input?.liveV6?.contractPath !== V6_CONTRACT_PATH ||
+    status.input?.liveV6?.contractSha256 !== V6_CONTRACT_SHA256 ||
+    status.input?.liveV6?.runnerPath !== V6_RUNNER_PATH ||
+    status.input?.liveV6?.runnerSha256 !== V6_RUNNER_SHA256 ||
+    status.input?.liveV6?.testPath !== V6_TEST_PATH ||
+    status.input?.liveV6?.testSha256 !== V6_TEST_SHA256 ||
+    status.input?.liveV6?.evidenceIndexPath !== V6_INDEX_PATH ||
+    status.input?.liveV6?.evidenceIndexSha256 !== V6_INDEX_SHA256 ||
+    status.input?.liveV6?.proofPlanSha256 !== V6_PLAN_SHA256 ||
+    status.input?.liveV6?.captureManifestSha256 !==
+      V6_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV6?.requestManifestSha256 !==
+      V6_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV6?.supportedSeparateStdioMcpClientTransport !== true ||
+    status.input?.liveV6?.cursorDynamicToolDirectlyCallableFromNode !== false ||
+    status.input?.liveV6?.externalOperatorOnly !== true ||
+    status.input?.liveV6?.sourceRoots !== 2 ||
+    status.input?.liveV6?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV6?.variantProbes !== 256 ||
+    status.input?.liveV6?.captureCells !== 128 ||
+    status.input?.liveV6?.remoteRequests !== 132 ||
+    status.input?.liveV6?.hostPhases !== 3 ||
+    status.input?.liveV6?.cleanupRequestPersistedAfterWriter !== true ||
+    status.input?.liveV6?.authorizationPresent !== false ||
+    status.input?.liveV6?.authorized !== false ||
+    status.input?.liveV6?.attemptsExecuted !== 0 ||
+    status.input?.liveV6?.nextAttempt !== 1 ||
+    status.input?.liveV6?.maximumAttempts !== 3 ||
+    status.input?.liveV6?.humanSignoff !== "pending" ||
+    status.input?.liveV6?.liveExecutionOccurred !== false ||
+    status.input?.liveV6?.figmaWrites !== 0 ||
+    status.input?.liveV6?.figmaCaptures !== 0 ||
+    status.input?.liveV6?.outcomes !== null ||
+    status.input?.liveV6?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4 draft status");
+    fail("v3 exhausted/v4-v6 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -284,6 +364,10 @@ export function verifyPivotStatus(): void {
   const v5Index = readRepositoryJson<Record<string, any>>(
     `${V5_ROOT}/index.json`,
   );
+  const v6Protocol = readRepositoryJson<Record<string, any>>(V6_PROTOCOL_PATH);
+  const v6Index = readRepositoryJson<Record<string, any>>(V6_INDEX_PATH);
+  const v5Superseding =
+    readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
     readRepositoryEvidence(INPUT_LIVE_V3_PROTOCOL_PATH),
   );
@@ -312,8 +396,63 @@ export function verifyPivotStatus(): void {
   )
     failures.push("v4 failure or v5 draft evidence hash mismatch");
   if (
+    sha256(readRepositoryEvidence(V6_PROTOCOL_PATH)) !== V6_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(V6_BROKER_PATH)) !== V6_BROKER_SHA256 ||
+    sha256(readRepositoryEvidence(V6_TEST_PATH)) !== V6_TEST_SHA256 ||
+    sha256(readRepositoryEvidence(V6_CONTRACT_PATH)) !== V6_CONTRACT_SHA256 ||
+    sha256(readRepositoryEvidence(V6_RUNNER_PATH)) !== V6_RUNNER_SHA256 ||
+    sha256(readRepositoryEvidence(V6_INDEX_PATH)) !== V6_INDEX_SHA256 ||
+    sha256(readRepositoryEvidence(V5_SUPERSEDING_PATH)) !==
+      V5_SUPERSEDING_SHA256 ||
+    v6Protocol.artifactVersion !==
+      "input-live-v6-external-operator-protocol-draft-v1" ||
+    v6Protocol.status !== V6_PROTOCOL_STATUS ||
+    v6Protocol.authorization?.authorized !== false ||
+    v6Protocol.authorization?.liveExecutionPermitted !== false ||
+    v6Protocol.authorization?.maximumAttempts !== 3 ||
+    v6Protocol.operatorBoundary?.expectedDynamicTool?.namespace !==
+      "user-Figma Console" ||
+    v6Protocol.operatorBoundary?.expectedDynamicTool?.tool !==
+      "figma_execute" ||
+    v6Protocol.authorization?.exactScratchOnly?.fileKey !==
+      "byMp6lt0Ij9b2QbkDGFwBh" ||
+    v6Protocol.execution?.remoteRequests !== 132 ||
+    v6Protocol.execution?.hostPhases !== 3 ||
+    v6Protocol.hostNormalizationAndAccounting?.perSource !== true ||
+    v6Protocol.captureObjective?.plannedCells !== 128 ||
+    v6Protocol.captureObjective?.capturesPerformedByThisAntecedentTask !== 0 ||
+    v6Protocol.offlineSimulation?.figmaCalls !== 0 ||
+    v6Protocol.outcomes !== null ||
+    v6Protocol.overallInputSuccess !== false ||
+    v6Index.artifactVersion !== "input-live-v6-evidence-index-v1" ||
+    v6Index.counts?.sources !== 2 ||
+    v6Index.counts?.expectedSceneFacts !== 43_726 ||
+    v6Index.counts?.captureCells !== 128 ||
+    v6Index.counts?.remoteRequests !== 132 ||
+    v6Index.counts?.hostPhases !== 3 ||
+    v6Index.authorizationPresent !== false ||
+    v6Index.outcomes !== null ||
+    v5Superseding.artifactVersion !== "input-live-v5-superseding-status-v1" ||
+    v5Superseding.authorization?.bytesChanged !== false ||
+    v5Superseding.authorization?.authorizesAttemptNow !== false ||
+    v5Superseding.blockers?.length !== 4 ||
+    v5Superseding.attemptsExecuted !== 0 ||
+    v5Superseding.outcomes !== null
+  )
+    failures.push("v6 broker protocol/status overclaim or hash mismatch");
+  for (const [artifactPath, metadata] of Object.entries(
+    v6Index.artifacts ?? {},
+  ) as Array<[string, { bytes: number; sha256: string }]>) {
+    const artifact = readRepositoryEvidence(artifactPath);
+    if (
+      artifact.byteLength !== metadata.bytes ||
+      sha256(artifact) !== metadata.sha256
+    )
+      failures.push(`v6 indexed artifact hash mismatch: ${artifactPath}`);
+  }
+  if (
     v5Index.artifactVersion !== "input-live-v5-index-v1" ||
-    v5Index.status !== V5_STATUS ||
+    v5Index.status !== V5_INDEX_STATUS ||
     v5Index.antecedent?.executableCommit !== V5_ANTECEDENT_COMMIT ||
     v5Index.antecedent?.protocolFirstAddCommit !==
       V5_PROTOCOL_FIRST_ADD_COMMIT ||

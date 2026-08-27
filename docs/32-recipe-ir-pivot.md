@@ -45,20 +45,52 @@
 > `10ba6b57da3cfa97`; they are not new v4 observations because no bridge call
 > occurred.
 >
-> V5 is the replacement executable antecedent. It retains every v4 product criterion
-> and threshold and adds a generated 2×128 writer, exact-byte transport,
-> complete expected scene plans, authorization-aware executable orchestration,
-> immediate hash-chained journals, and a strict offline bridge smoke through
-> the live orchestration functions. The green executable antecedent is the
-> published commit `a29d034b746d0831ce93f88f1aeb5630ad4b0453`; its protocol was
-> first added by parent `e9f9712a55147a4329f51cfd4bf024866dfd489f`. The
-> separate v5 authorization artifact is prepared but uncommitted, so capture
-> remains forbidden. No v5 attempt, live write, capture, outcome, or target
-> metric exists. V4 authorization is not reusable. At most three future v5
-> attempts may run, each from a clean upstream-equal descendant after the
-> authorization is committed separately and published. A technically
-> successful mint is not a proven bidirectional round trip until scene-derived
-> inversion and accounting pass.**
+> V5 is the replacement executable antecedent. It retains every v4 product
+> criterion and threshold and adds a generated 2×128 writer, exact-byte
+> transport, expected scene plans, authorization-aware orchestration, and
+> immediate hash-chained journals. The green executable antecedent is
+> `a29d034b746d0831ce93f88f1aeb5630ad4b0453`; its protocol was first added by
+> `e9f9712a55147a4329f51cfd4bf024866dfd489f`. The separate authorization was
+> first committed and published at
+> `7c240e7862ee4b97d9da5002c7f2a02827477413`.
+>
+> A boundary review after authorization found that v5 still cannot run
+> honestly. Cursor owns the local MCP stdio session; its HTTP listener exposes
+> health only, and its WebSocket listener is the server side used by Desktop
+> Bridge plugin clients, not a repository RPC endpoint. The installed MCP does
+> support a separate standard MCP stdio client launching another local server,
+> and a read-only exact-target probe proved that route against Scratch. That
+> transport finding does not repair the v5 transaction contract: its raw phase
+> returns one scene although the writer creates two independent set roots, its
+> accounting hashes a normalization of itself instead of comparing both pinned
+> expected plans, and its writer plan has no objective-cell/reference manifest.
+> A v5 adapter that returned success would therefore fake required semantics.
+>
+> V6 now provides the complete offline external-operator antecedent:
+> `recipe/input-field-live-v6-broker.ts`,
+> `recipe/input-field-live-v6-contract.ts`,
+> `recipe/run-input-field-live-v6.ts`, and
+> `recipe/evidence/input-field-live-pivot-v6/protocol.json`. Its durable state
+> machine emits one active main-lane request, stops for external execution,
+> accepts one complete persisted raw response, and resumes after restart. Every
+> request is Ed25519-signed and pins the transaction, sequence/predecessor,
+> exact `user-Figma Console` / `figma_execute` tool, exact Scratch target,
+> program and arguments, response schema/cardinality, generated plans, and
+> authorized commits. A recovery cleanup request is persisted immediately after
+> writer acceptance and remains separately available after a host crash.
+>
+> Extraction returns both independent source roots plus the local-variable table
+> and ownership/instance lineage. Host accounting compares MUI and Polaris
+> separately to their own 22,811- and 20,915-fact precommitted occurrence
+> multisets, then runs two collapse/recompile cycles per root. Usability covers
+> all 256 variants. Capture is 128 ordered, one-cell bounded responses, each
+> pinned to its independent reference and source/state/adornment strata; no
+> sample reduction is allowed, and no capture request can be issued before the
+> hash-bound technical gates. The fake operator exercises all 132 remote
+> requests offline. V6 still has no authorization, live attempt, Figma write,
+> screenshot, outcome, or target metric. V5 protocol and authorization bytes
+> remain unchanged but are semantically retired by the separate superseding
+> status artifact. Input remains false.**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
@@ -121,10 +153,14 @@
 > `recipe/evidence/input-field-live-pivot-v3/index.json`; the v4 protocol and
 > historical authorization declaration are indexed at
 > `recipe/evidence/input-field-live-pivot-v4/index.json`; the v4 entrypoint
-> failure is separate. The executable v5 antecedent, prepared-uncommitted
-> authorization, and generated hashes are indexed at
-> `recipe/evidence/input-field-live-pivot-v5/index.json`; capture remains
-> forbidden until the separate authorization commit is published.
+> failure is separate. V5 protocol and authorization bytes remain preserved at
+> `recipe/evidence/input-field-live-pivot-v5/index.json`; its semantic retirement
+> is recorded separately at
+> `recipe/evidence/input-field-live-pivot-v5-superseding-status.json`. The v6
+> protocol, two-root expected plans, exact 128-cell manifest, 132-request
+> manifest, source-neutral programs, and pending authorization template are
+> indexed at `recipe/evidence/input-field-live-pivot-v6/index.json`. V6 live
+> execution remains forbidden pending a distinct published authorization.
 > The source-neutral calibration corpus, captures, result, exact-byte attempts,
 > and cleanup receipt are indexed at
 > `recipe/evidence/raster-calibration-v1/index.json`.

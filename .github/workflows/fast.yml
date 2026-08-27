@@ -252,7 +252,7 @@ jobs:
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check
-      - name: recipe:pivot-status:check (Button/Input false, v3 exhausted, v4 non-executable, v5 unauthorized)
+      - name: recipe:pivot-status:check (Button/Input false, v5 retired, v6 offline and unauthorized)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:pivot-status:check
       - name: recipe:input-field:live:v3:authorization:self-test (chronology and no-posthoc guard)
@@ -270,6 +270,9 @@ jobs:
       - name: recipe:input-field:live:v5:check (generated writer, exact transport, authorization gates, offline smoke)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v5:check
+      - name: recipe:input-field:live:v6:check (signed external operator, two roots, bounded 128-cell capture, crash cleanup)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v6:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
