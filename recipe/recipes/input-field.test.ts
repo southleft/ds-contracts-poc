@@ -230,6 +230,19 @@ test("inconsistent generic label and notch combinations refuse by name", () => {
   }
 });
 
+test("live Figma Size axis order medium,small still collapses", () => {
+  const envelope = compileInputFieldRecipe(canonicalInputFieldRecipeInstance);
+  const root = rootOf(envelope);
+  const size = root.variantAxes.find((axis) => axis.name === "Size");
+  assert.ok(size);
+  size.values = ["medium", "small"];
+  const collapsed = collapseInputFieldRecipe(resign(envelope), selection);
+  assert.deepEqual(
+    collapsed,
+    normalizeInputFieldRecipeInstance(canonicalInputFieldRecipeInstance),
+  );
+});
+
 test("selection is explicit and hand-built trees are never guessed", () => {
   const missing = structuredClone(canonicalInputFieldRecipeInstance) as {
     provenance: { selection?: unknown };

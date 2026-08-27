@@ -50,7 +50,13 @@
 > `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. The separate authorization
 > artifact pins that antecedent; commit state is derived from Git history.
 > Live execution remains forbidden until runtime security prerequisites pass.
-> Writer bytes stay frozen from v8/v9.
+> Writer bytes stay frozen from v8/v9. V10 attempt 1 ran Scratch-only: writer
+> accepted (2317 created nodes), extract raw returned (~8.3MB), hashed
+> `scene-readback.ts` was no longer on the host path, then collapse refused
+> Size axis order `medium,small` versus declared `small,medium` in unhashed
+> `recipe/recipes/input-field.ts`. Cleanup accepted; owned Input pages are
+> gone; no captures; no live success. Axis-value order is taught as
+> non-structural for attempt 2.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -314,7 +320,9 @@ lineage; do not patch hashed bytes in place.
 | A3 | Attempt 1 Scratch-only live. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364325-byte extract); host IR refused component-set `strokes`/`effects`/`cornerRadius`. Cleanup accepted. Taught unhashed `figma-ir.ts`. RECORD `1c80badc`. |
 | A4 | Attempt 2 Scratch-only live after that IR teaching. | **Failed closed.** Writer + extract accepted again; component-set fields cleared; host still ran hashed `input-field-live-v3-verifier.ts` → v8 `scene-readback.ts` and refused `payload.fills.0.kind`. Cleanup accepted. Do **not** restart v9 attempt 3 as-is. |
 | A5 | PREPARE INPUT V10. Copy the v9 stack. Carry scene-readback-v10 **and** `input-field-live-v3-verifier-v10.ts` so live host does not invoke v8 `scene-readback.ts`. Keep v9 hashed bytes frozen. Writer bytes frozen from v8/v9. | **Done** at `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Antecedent index SHA-256 `4a054aadf5902fed939da30c1b54833bcc7a54f88b145f5348c4d9b3108524bc`. |
-| A5b | AUTHORIZE INPUT V10 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `393996857f730419f9f92b1d2d30abaa9b5e896866e2694d50e3999c4e7b5e57`; SPKI SHA-256 `d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d`. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3 attempts. Same transport facts. Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed v10 file fails closed, open v11. |
+| A5b | AUTHORIZE INPUT V10 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `393996857f730419f9f92b1d2d30abaa9b5e896866e2694d50e3999c4e7b5e57`; SPKI SHA-256 `d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d`. | **Done** at `68b8366013aaf531b9c4f519f043e4cdd1b4e3a2`. |
+| A5c | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364327-byte extract). Hashed `scene-readback.ts` path cleared. Host collapse refused Size axis order `medium,small` vs declared `small,medium` in unhashed `recipes/input-field.ts`. Cleanup accepted. Teach axis-value order as non-structural, then attempt 2. |
+| A5d | Attempts 2–3 Scratch-only live after that teaching. Max 3. Same transport facts. | Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed v10 file fails closed, open v11. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1737,7 +1745,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, and v9 attempts 1-2 failed closed; v10 authorization declared; false** | attestation + Scratch-only live v10 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, and v9 attempts 1-2 failed closed; v10 attempt 1 failed closed; false** | v10 attempt 2 after teaching Size axis order (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

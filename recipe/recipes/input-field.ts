@@ -1184,7 +1184,11 @@ function validateInputFieldStructure(root: ComponentSetNode): void {
         `missing required axis ${name}`,
       ]);
     }
-    if (canonicalJson(actual) !== canonicalJson(values)) {
+    const sameMembers =
+      actual.length === values.length &&
+      values.every((value) => actual.includes(value)) &&
+      actual.every((value) => (values as readonly string[]).includes(value));
+    if (!sameMembers) {
       throw new RecipeRefusal(INPUT_FIELD_RECIPE_REF, [
         `axis ${name} has unsupported values; expected ${values.join(", ")}`,
       ]);
@@ -1582,6 +1586,22 @@ const firstDifference = (
   }
   const leftRecord = left as Record<string, unknown>;
   const rightRecord = right as Record<string, unknown>;
+  if (
+    typeof leftRecord.name === "string" &&
+    typeof rightRecord.name === "string" &&
+    Array.isArray(leftRecord.values) &&
+    Array.isArray(rightRecord.values) &&
+    Object.keys(leftRecord).length === 2 &&
+    Object.keys(rightRecord).length === 2
+  ) {
+    if (leftRecord.name !== rightRecord.name) return `${path}.name`;
+    const leftValues = leftRecord.values.map(String);
+    const rightValues = rightRecord.values.map(String);
+    const sameMembers =
+      leftValues.length === rightValues.length &&
+      leftValues.every((value) => rightValues.includes(value));
+    return sameMembers ? undefined : `${path}.values`;
+  }
   const keys = [
     ...new Set([...Object.keys(leftRecord), ...Object.keys(rightRecord)]),
   ].sort(compareText);

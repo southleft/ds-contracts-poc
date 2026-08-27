@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -231,8 +231,12 @@ const V10_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d";
 const V10_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v10-status.json";
 const V10_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and extract accepted; host refused Size axis order; cleanup complete";
 const V10_BASE_COMMIT = "2618e4e15cd88ad9f3428f1a8026a0fee2ede04f";
+const V10_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v10-attempt-1.json";
+const V10_ATTEMPT_1_SHA256 =
+  "a3acc3dda0e8dedd616a53a7129db08bf4ed8ff839cd65c5919b286440ba320a";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
   "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b";
@@ -779,12 +783,17 @@ export function validatePivotStatus(
       ?.cursorReadMustNotIngestSignedWriter !== true ||
     status.input?.liveV10?.security?.liveExecutionForbidden !== true ||
     status.input?.liveV10?.security?.tokenValuesForbidden !== true ||
-    status.input?.liveV10?.attemptsExecuted !== 0 ||
-    status.input?.liveV10?.nextAttempt !== 1 ||
+    status.input?.liveV10?.attemptsExecuted !== 1 ||
+    status.input?.liveV10?.nextAttempt !== 2 ||
     status.input?.liveV10?.maximumFutureAttempts !== 3 ||
-    status.input?.liveV10?.liveExecutionOccurred !== false ||
-    status.input?.liveV10?.figmaWrites !== 0 ||
+    status.input?.liveV10?.liveExecutionOccurred !== true ||
+    status.input?.liveV10?.figmaWrites !== 2 ||
     status.input?.liveV10?.figmaCaptures !== 0 ||
+    status.input?.liveV10?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV10?.attempt1Path !== V10_ATTEMPT_1_PATH ||
+    status.input?.liveV10?.attempt1Sha256 !== V10_ATTEMPT_1_SHA256 ||
+    status.input?.liveV10
+      ?.restartAsV10Attempt2WithoutAxisOrderTeachingForbidden !== true ||
     status.input?.liveV10?.humanSignoff !== "pending" ||
     status.input?.liveV10?.overallInputSuccess !== false
   )
@@ -1451,11 +1460,17 @@ export function verifyPivotStatus(): void {
     v10Status.smallestHonestDelta?.liveHostDoesNotImportSceneReadbackTs !==
       true ||
     v10Status.smallestHonestDelta?.v9AntecedentBytesUnchanged !== true ||
-    v10Status.attemptsExecuted !== 0 ||
-    v10Status.nextAttempt !== 1 ||
-    v10Status.liveExecutionOccurred !== false ||
-    v10Status.figmaWrites !== 0 ||
+    v10Status.attemptsExecuted !== 1 ||
+    v10Status.nextAttempt !== 2 ||
+    v10Status.liveExecutionOccurred !== true ||
+    v10Status.figmaWrites !== 2 ||
     v10Status.figmaCaptures !== 0 ||
+    v10Status.createdNodesThenRemoved !== 2317 ||
+    v10Status.attempt1Path !== V10_ATTEMPT_1_PATH ||
+    v10Status.attempt1Sha256 !== V10_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V10_ATTEMPT_1_PATH)) !==
+      V10_ATTEMPT_1_SHA256 ||
+    v10Status.restartAsV10Attempt2WithoutAxisOrderTeachingForbidden !== true ||
     v10Status.overallInputSuccess !== false
   )
     failures.push("v10 authorization/status mismatch");
