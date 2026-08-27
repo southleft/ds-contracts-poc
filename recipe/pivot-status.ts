@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 replacement authorization prepared and post-commit attestation pending; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -136,6 +136,31 @@ const V7_AUTHORIZATION_SHA256 =
 const V7_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "8eb7c6f6fcd2bd497997028f8e026abc30d8af8507bc2b903347da892403dbcf";
 const V7_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v7-status.json";
+const V7_SUPERSEDING_PATH =
+  "recipe/evidence/input-field-live-pivot-v7-superseding-status.json";
+const V7_SUPERSEDING_SHA256 =
+  "bbfebd3c186ffec4acb91fe488003a3e5f4c7ec195f1b437dd4ece576799e794";
+const V7_LIVE_STATUS =
+  "attempt 1 failed closed; writer and extract accepted; host normalize refused strokeBottomWeight; cleanup complete; superseded by v8";
+const V8_ROOT = "recipe/evidence/input-field-live-pivot-v8";
+const V8_PROTOCOL_SHA256 =
+  "a4f4665e3cd5a3a552306f4e515e78bb5f874bdfe371603a3aaf50533ed6da96";
+const V8_PLAN_SHA256 =
+  "773db93f3a5180f64836c8198cbbcc58d9ccc7097eec6010612cec4974122435";
+const V8_CAPTURE_MANIFEST_SHA256 =
+  "199c7ac28649dbf1e5aba9efc7770d623cd74615333713089feb237586a2c890";
+const V8_REQUEST_MANIFEST_SHA256 =
+  "defc1561c86f206301ad91015c28bf361bfaf92881dcef5b1712ab8adb793b12";
+const V8_INDEX_SHA256 =
+  "d89e2db1df68921b1957f11f0ce0cd2a97d38a63f9808bc00ef5ce518ea95b07";
+const V8_HASH_SET_SHA256 =
+  "9f80320703587f1308615bce0e38fbca6c734fb7eb1fd5dae12b3280523eeafd";
+const V8_AUTHORIZATION_TEMPLATE_SHA256 =
+  "218822d276f3a657fbe9cf638044da3792636813ca1f53379f875539562e61bf";
+const V8_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v8-status.json";
+const V8_STATUS =
+  "draft antecedent; pending separate authorization; live execution forbidden";
+const V8_BASE_COMMIT = "5adac899b1dcde25c4c533d9686cfd665430f2f9";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
   "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b";
@@ -411,8 +436,7 @@ export function validatePivotStatus(
     status.input?.liveV6?.figmaCaptures !== 0 ||
     status.input?.liveV6?.outcomes !== null ||
     status.input?.liveV6?.overallInputSuccess !== false ||
-    status.input?.liveV7?.status !==
-      "replacement authorization prepared; post-commit attestation pending; live execution forbidden" ||
+    status.input?.liveV7?.status !== V7_LIVE_STATUS ||
     status.input?.liveV7?.baseCommit !==
       "41e34588ec78fa0b1cb5a75c3b77b96b82680576" ||
     status.input?.liveV7?.antecedentCommit !== V7_ANTECEDENT_COMMIT ||
@@ -475,16 +499,70 @@ export function validatePivotStatus(
     status.input?.liveV7?.security?.exactScratchRestProbePassed !== true ||
     status.input?.liveV7?.security?.tokenValuesForbidden !== true ||
     status.input?.liveV7?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV7?.attemptsExecuted !== 0 ||
-    status.input?.liveV7?.nextAttempt !== 1 ||
+    status.input?.liveV7?.attemptsExecuted !== 1 ||
+    status.input?.liveV7?.nextAttempt !== null ||
     status.input?.liveV7?.maximumFutureAttempts !== 3 ||
-    status.input?.liveV7?.liveExecutionOccurred !== false ||
-    status.input?.liveV7?.figmaWrites !== 0 ||
+    status.input?.liveV7?.liveExecutionOccurred !== true ||
     status.input?.liveV7?.figmaCaptures !== 0 ||
     status.input?.liveV7?.humanSignoff !== "pending" ||
-    status.input?.liveV7?.overallInputSuccess !== false
+    status.input?.liveV7?.overallInputSuccess !== false ||
+    status.input?.liveV7?.semanticallyRetired !== true ||
+    status.input?.liveV7?.authorizationAuthorizesAttemptNow !== false ||
+    status.input?.liveV7?.supersedingStatusPath !== V7_SUPERSEDING_PATH ||
+    status.input?.liveV7?.supersedingStatusSha256 !== V7_SUPERSEDING_SHA256 ||
+    status.input?.liveV8?.status !== V8_STATUS ||
+    status.input?.liveV8?.baseCommit !== V8_BASE_COMMIT ||
+    status.input?.liveV8?.protocolSha256 !== V8_PROTOCOL_SHA256 ||
+    status.input?.liveV8?.proofPlanSha256 !== V8_PLAN_SHA256 ||
+    status.input?.liveV8?.captureManifestSha256 !==
+      V8_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV8?.requestManifestSha256 !==
+      V8_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV8?.antecedentIndexSha256 !== V8_INDEX_SHA256 ||
+    status.input?.liveV8?.antecedentHashSetSha256 !== V8_HASH_SET_SHA256 ||
+    status.input?.liveV8?.authorizationTemplateSha256 !==
+      V8_AUTHORIZATION_TEMPLATE_SHA256 ||
+    status.input?.liveV8?.authorizationPresent !== false ||
+    status.input?.liveV8?.authorizationCommitted !== false ||
+    status.input?.liveV8?.authorizationEffective !== false ||
+    status.input?.liveV8?.authorizationLifecycleExcludedFromAntecedentHash !==
+      true ||
+    status.input?.liveV8?.authorizationCanBeAddedWithoutAntecedentRebuild !==
+      true ||
+    status.input?.liveV8?.v7AuthorizationReusable !== false ||
+    status.input?.liveV8?.v7AntecedentBytesUnchanged !== true ||
+    status.input?.liveV8?.sourceRoots !== 2 ||
+    status.input?.liveV8?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV8?.captureCells !== 128 ||
+    status.input?.liveV8?.remoteRequests !== 132 ||
+    status.input?.liveV8?.hostPhases !== 3 ||
+    status.input?.liveV8?.requestSignature !== "Ed25519" ||
+    status.input?.liveV8?.captureBeforeTechnicalGates !== false ||
+    status.input?.liveV8?.perSideStrokeWeightFields?.length !== 4 ||
+    !status.input?.liveV8?.perSideStrokeWeightFields?.includes(
+      "strokeBottomWeight",
+    ) ||
+    status.input?.liveV8?.transportFacts?.oneCallDiskOperatorRequired !==
+      true ||
+    status.input?.liveV8?.transportFacts?.honorSignedTimeoutRequired !== true ||
+    status.input?.liveV8?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
+    status.input?.liveV8?.transportFacts
+      ?.fileContextEditorTypeReconstructedFromExactScratchTarget !== true ||
+    status.input?.liveV8?.transportFacts?.emptyCodeEnvelopeRefused !== true ||
+    status.input?.liveV8?.transportFacts
+      ?.cursorReadMustNotIngestSignedWriter !== true ||
+    status.input?.liveV8?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV8?.security?.tokenValuesForbidden !== true ||
+    status.input?.liveV8?.attemptsExecuted !== 0 ||
+    status.input?.liveV8?.nextAttempt !== 1 ||
+    status.input?.liveV8?.maximumFutureAttempts !== 3 ||
+    status.input?.liveV8?.liveExecutionOccurred !== false ||
+    status.input?.liveV8?.figmaWrites !== 0 ||
+    status.input?.liveV8?.figmaCaptures !== 0 ||
+    status.input?.liveV8?.humanSignoff !== "pending" ||
+    status.input?.liveV8?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4-v7 current status");
+    fail("v3 exhausted/v4-v8 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -557,6 +635,15 @@ export function verifyPivotStatus(): void {
     `${V7_ROOT}/antecedent-index.json`,
   );
   const v7Status = readRepositoryJson<Record<string, any>>(V7_STATUS_PATH);
+  const v7Superseding =
+    readRepositoryJson<Record<string, any>>(V7_SUPERSEDING_PATH);
+  const v8Protocol = readRepositoryJson<Record<string, any>>(
+    `${V8_ROOT}/protocol.json`,
+  );
+  const v8Index = readRepositoryJson<Record<string, any>>(
+    `${V8_ROOT}/antecedent-index.json`,
+  );
+  const v8Status = readRepositoryJson<Record<string, any>>(V8_STATUS_PATH);
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -808,6 +895,83 @@ export function verifyPivotStatus(): void {
       artifactPath.endsWith("status-index.json")
     )
       failures.push(`v7 authorization lifecycle indexed: ${artifactPath}`);
+  }
+  if (
+    sha256(readRepositoryEvidence(V7_SUPERSEDING_PATH)) !==
+      V7_SUPERSEDING_SHA256 ||
+    v7Superseding.artifactVersion !== "input-live-v7-superseding-status-v1" ||
+    v7Superseding.supersededBy !== "input-live-v8" ||
+    v7Superseding.authorizationReusableForV8 !== false ||
+    v7Superseding.preserved?.antecedent?.bytesChanged !== false ||
+    v7Superseding.preserved?.replacementAuthorization?.bytesChanged !== false ||
+    v7Superseding.attempt1?.closed !== true ||
+    v7Superseding.attempt1?.writerAccepted !== true ||
+    v7Superseding.attempt1?.extractAccepted !== true ||
+    v7Superseding.attempt1?.hostNormalizeFailed !== true ||
+    v7Superseding.attempt1?.unsupportedField !== "strokeBottomWeight" ||
+    v7Superseding.attempt1?.inPlacePatchForbidden !== true ||
+    v7Superseding.attempt1?.cleanupComplete !== true ||
+    v7Superseding.attempt1?.capturesPersisted !== 0 ||
+    v7Superseding.attemptsExecuted !== 1 ||
+    v7Superseding.nextAttempt !== null ||
+    v7Superseding.liveSuccess !== false ||
+    sha256(readRepositoryEvidence(`${V8_ROOT}/protocol.json`)) !==
+      V8_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V8_ROOT}/proof-plan.json`)) !==
+      V8_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V8_ROOT}/capture-manifest.json`)) !==
+      V8_CAPTURE_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V8_ROOT}/request-manifest.json`)) !==
+      V8_REQUEST_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V8_ROOT}/antecedent-index.json`)) !==
+      V8_INDEX_SHA256 ||
+    sha256(readRepositoryEvidence(`${V8_ROOT}/authorization-template.json`)) !==
+      V8_AUTHORIZATION_TEMPLATE_SHA256 ||
+    v8Protocol.artifactVersion !==
+      "input-live-v8-external-operator-protocol-v1" ||
+    v8Protocol.lifecycle?.v7AuthorizationReusable !== false ||
+    v8Protocol.transportFacts?.oneCallDiskOperatorRequired !== true ||
+    v8Protocol.transportFacts?.honorSignedTimeoutRequired !== true ||
+    v8Protocol.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
+    v8Protocol.transportFacts
+      ?.fileContextEditorTypeReconstructedFromExactScratchTarget !== true ||
+    v8Protocol.transportFacts?.emptyCodeEnvelopeRefused !== true ||
+    v8Protocol.hostNormalization?.uniformStrokeWeightSibling !==
+      "strokeWeight" ||
+    !v8Protocol.hostNormalization?.perSideStrokeWeightFields?.includes(
+      "strokeBottomWeight",
+    ) ||
+    v8Protocol.execution?.attemptsExecuted !== 0 ||
+    v8Index.artifactVersion !== "input-live-v8-antecedent-index-v1" ||
+    v8Index.hashSetSha256 !== V8_HASH_SET_SHA256 ||
+    v8Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
+    v8Status.artifactVersion !== "input-live-v8-status-v1" ||
+    v8Status.status !== V8_STATUS ||
+    v8Status.baseCommit !== V8_BASE_COMMIT ||
+    v8Status.authorization?.present !== false ||
+    v8Status.authorization?.v7AuthorizationReusable !== false ||
+    v8Status.attemptsExecuted !== 0 ||
+    v8Status.liveExecutionOccurred !== false ||
+    v8Status.overallInputSuccess !== false
+  )
+    failures.push("v7 supersession or v8 draft antecedent/status mismatch");
+  for (const [artifactPath, metadata] of Object.entries(
+    v8Index.artifacts ?? {},
+  ) as Array<[string, { bytes: number; sha256: string }]>) {
+    const artifact = readRepositoryEvidence(artifactPath);
+    if (
+      artifact.byteLength !== metadata.bytes ||
+      sha256(artifact) !== metadata.sha256
+    )
+      failures.push(`v8 indexed artifact hash mismatch: ${artifactPath}`);
+    if (
+      artifactPath.includes("input-field-live-v8-authorization") ||
+      artifactPath.includes("input-field-live-v8-preflight") ||
+      artifactPath.includes("input-field-live-v8-authorized") ||
+      artifactPath.endsWith("capture-authorization.json") ||
+      artifactPath.endsWith("status-index.json")
+    )
+      failures.push(`v8 authorization lifecycle indexed: ${artifactPath}`);
   }
   if (
     v5Index.artifactVersion !== "input-live-v5-index-v1" ||

@@ -121,6 +121,12 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
     (value) => {
       value.status.input.liveV7.security.tokenValuesForbidden = false;
     },
+    (value) => {
+      value.status.input.liveV8.authorizationPresent = true;
+    },
+    (value) => {
+      value.status.input.liveV8.transportFacts.honorSignedTimeoutRequired = false;
+    },
   ];
   for (const plant of plants) {
     const value = fixtures();

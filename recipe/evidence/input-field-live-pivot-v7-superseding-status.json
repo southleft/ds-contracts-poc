@@ -1,0 +1,53 @@
+{
+  "artifactVersion": "input-live-v7-superseding-status-v1",
+  "status": "attempt 1 failed closed; writer and extract accepted; host normalize refused strokeBottomWeight; cleanup complete; superseded by v8",
+  "supersededBy": "input-live-v8",
+  "authorizationReusableForV8": false,
+  "preserved": {
+    "antecedent": {
+      "commit": "117f1cddce797393b1b705da62323615e584d54b",
+      "indexPath": "recipe/evidence/input-field-live-pivot-v7/antecedent-index.json",
+      "indexSha256": "3fa459844440098aae47432ba58108eff51edc332086b2d93de795d5f192f069",
+      "hashSetSha256": "09437c70458cda74a774dfa056cd91d0ac836d73d2e1d6a8567e6fe631df5be7",
+      "bytesChanged": false
+    },
+    "firstAuthorization": {
+      "path": "recipe/evidence/input-field-live-pivot-v7/capture-authorization.json",
+      "sha256": "43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda",
+      "bytesChanged": false,
+      "usableForExecution": false
+    },
+    "replacementAuthorization": {
+      "path": "recipe/evidence/input-field-live-pivot-v7/capture-authorization-v2.json",
+      "sha256": "de501693a52b0d050fc1b7048a355ca9195c3ca2ab982a28fd1b9509c397e76d",
+      "bytesChanged": false,
+      "usableForExecution": false
+    }
+  },
+  "attempt1": {
+    "closed": true,
+    "writerAccepted": true,
+    "extractAccepted": true,
+    "sources": 2,
+    "variants": 128,
+    "createdNodes": 2316,
+    "hostNormalizeFailed": true,
+    "unsupportedField": "strokeBottomWeight",
+    "unsupportedPath": "boundVariables.strokeBottomWeight",
+    "normalizerPath": "recipe/figma-property-normalizer.ts",
+    "normalizerInAntecedentHashSet": true,
+    "inPlacePatchForbidden": true,
+    "cleanupComplete": true,
+    "ownedPagesRemaining": 0,
+    "ownedCollectionsRemaining": 0,
+    "capturesPersisted": 0
+  },
+  "attemptsExecuted": 1,
+  "nextAttempt": null,
+  "maximumAttempts": 3,
+  "liveExecutionOccurred": true,
+  "figmaCaptures": 0,
+  "liveSuccess": false,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

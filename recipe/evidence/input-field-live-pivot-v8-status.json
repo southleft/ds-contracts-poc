@@ -1,0 +1,63 @@
+{
+  "artifactVersion": "input-live-v8-status-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "baseCommit": "5adac899b1dcde25c4c533d9686cfd665430f2f9",
+  "antecedent": {
+    "indexPath": "recipe/evidence/input-field-live-pivot-v8/antecedent-index.json",
+    "indexSha256": "d89e2db1df68921b1957f11f0ce0cd2a97d38a63f9808bc00ef5ce518ea95b07",
+    "hashSetSha256": "9f80320703587f1308615bce0e38fbca6c734fb7eb1fd5dae12b3280523eeafd",
+    "authorizationLifecycleExcluded": true,
+    "byteStableAcrossLaterAuthorization": true
+  },
+  "authorization": {
+    "present": false,
+    "committed": false,
+    "effective": false,
+    "templatePath": "recipe/evidence/input-field-live-pivot-v8/authorization-template.json",
+    "templateSha256": "218822d276f3a657fbe9cf638044da3792636813ca1f53379f875539562e61bf",
+    "expectedHistoryModeAfterAntecedentCommit": "--expect-pending",
+    "v7AuthorizationReusable": false
+  },
+  "smallestHonestDelta": {
+    "perSideStrokeWeightFields": [
+      "strokeTopWeight",
+      "strokeRightWeight",
+      "strokeBottomWeight",
+      "strokeLeftWeight"
+    ],
+    "uniformStrokeWeightSibling": "strokeWeight",
+    "v7NormalizerBytesUnchanged": true
+  },
+  "transportFacts": {
+    "oneCallDiskOperatorRequired": true,
+    "honorSignedTimeoutRequired": true,
+    "signedWriterTimeoutMs": 300000,
+    "fileContextEditorTypeReconstructedFromExactScratchTarget": true,
+    "emptyCodeEnvelopeRefused": true,
+    "cursorReadMustNotIngestSignedWriter": true
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "expectedSceneFacts": 43726,
+    "variants": 256,
+    "captureCells": 128,
+    "remoteRequests": 132,
+    "hostPhases": 3
+  },
+  "securityPrerequisites": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "attemptsExecuted": 0,
+  "nextAttempt": 1,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}
