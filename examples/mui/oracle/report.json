@@ -4,7 +4,7 @@
   "version": 1,
   "runId": "exact-conversion-finish-wave2",
   "library": "mui",
-  "scoredAt": "2026-08-08T07:17:19.353Z",
+  "scoredAt": "2026-08-27T00:17:49.575Z",
   "accuracyDenominatorsUntouched": true,
   "summary": {
     "match": 32,
@@ -333,7 +333,7 @@
         "dump": false,
         "promoted": true,
         "variantAxisCount": 1,
-        "namedReceiptCount": 244
+        "namedReceiptCount": 245
       },
       "facts": [
         {
