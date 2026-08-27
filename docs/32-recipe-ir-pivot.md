@@ -63,7 +63,12 @@
 > text is present on all 256 variants and recoverable from the first ` :: `
 > segment. `scene-readback-v10.ts` is in the v10 antecedent hash set and must
 > not be patched in place. Cleanup accepted; owned Input pages are gone; no
-> captures; no live success. Do not restart v10 attempt 3 as-is.
+> captures; no live success. Do not restart v10 attempt 3 as-is. V11 is the
+> replacement lineage: it copies the v10 stack and recovers text roles from
+> the first \` :: \` name segment even when a later \`font-provenance=\`
+> segment is present. Writer bytes stay frozen from v8/v9/v10. Live
+> execution remains forbidden until a separate AUTHORIZE commit and runtime
+> security prerequisites pass.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -330,7 +335,7 @@ lineage; do not patch hashed bytes in place.
 | A5b | AUTHORIZE INPUT V10 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `393996857f730419f9f92b1d2d30abaa9b5e896866e2694d50e3999c4e7b5e57`; SPKI SHA-256 `d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d`. | **Done** at `68b8366013aaf531b9c4f519f043e4cdd1b4e3a2`. |
 | A5c | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364327-byte extract). Hashed `scene-readback.ts` path cleared. Host collapse refused Size axis order `medium,small` vs declared `small,medium` in unhashed `recipes/input-field.ts`. Cleanup accepted. Teach axis-value order as non-structural, then attempt 2. |
 | A5d | Attempt 2 Scratch-only live after Size-axis teaching. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364327-byte extract). Size axis order cleared. Host collapse refused `input-field/message/helper` because hashed `sceneRole` drops roles when `font-provenance=` is in the name. Helper text present on 256/256 variants; first-segment role recoverable. Cleanup accepted. Do **not** restart v10 attempt 3 as-is. |
-| A5e | PREPARE INPUT V11. Copy the v10 stack. Carry scene-readback-v11 + runtime that recover role/label from the first ` :: ` segment even when later segments contain `font-provenance=`. Keep v10 hashed bytes frozen. Writer bytes frozen from v8/v9/v10. | Antecedent published; `--expect-pending`; live forbidden. Then AUTHORIZE as a separate commit and Scratch-only live. Max 3. Same transport facts. Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed v11 file fails closed, open v12. |
+| A5e | PREPARE INPUT V11. Copy the v10 stack. Carry scene-readback-v11 + runtime that recover role/label from the first ` :: ` segment even when later segments contain `font-provenance=`. Keep v10 hashed bytes frozen. Writer bytes frozen from v8/v9/v10. | Antecedent published with this commit; `--expect-pending`; live forbidden. Then AUTHORIZE as a separate commit and Scratch-only live. Max 3. Same transport facts. Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed v11 file fails closed, open v12. |
 | A6 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
 
 ### B · Button closeout
@@ -1753,7 +1758,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, and v10 attempts 1-2 failed closed; false** | PREPARE INPUT V11 — first-segment role recovery (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, and v10 attempts 1-2 failed closed; v11 draft prepared; false** | AUTHORIZE INPUT V11 then Scratch-only live (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |

@@ -1,0 +1,67 @@
+{
+  "artifactVersion": "input-live-v11-status-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "baseCommit": "93df43839e974870630a227562851a86eb0fa8ce",
+  "antecedent": {
+    "indexPath": "recipe/evidence/input-field-live-pivot-v11/antecedent-index.json",
+    "indexSha256": "65ca9866da8fc90f354ceb53d57dc383f64d9f39d9b9f9ad3752df499c9628c7",
+    "hashSetSha256": "46f4e656cc97f18ddc21510fa9d1c787f0bbcac2b6cd276e7ccfb87e10c57a76",
+    "authorizationLifecycleExcluded": true,
+    "byteStableAcrossLaterAuthorization": true
+  },
+  "authorization": {
+    "present": false,
+    "committed": false,
+    "effective": false,
+    "templatePath": "recipe/evidence/input-field-live-pivot-v11/authorization-template.json",
+    "templateSha256": "79720598df9a44363ec447cc014a4ebb2010e95ab1b39e79e9767ee4e1c0e270",
+    "expectedHistoryModeAfterAntecedentCommit": "--expect-pending",
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false,
+    "v9AuthorizationReusable": false,
+    "v10AuthorizationReusable": false
+  },
+  "smallestHonestDelta": {
+    "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
+    "taughtFirstSegmentRoleRecovery": true,
+    "carriedSceneReadback": "recipe/scene-readback-v11.ts",
+    "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v11.ts",
+    "carriedV3Verifier": "recipe/input-field-live-v3-verifier-v11.ts",
+    "liveHostDoesNotImportSceneReadbackTs": true,
+    "v8SceneReadbackUnchanged": true,
+    "v9AntecedentBytesUnchanged": true,
+    "v10AntecedentBytesUnchanged": true
+  },
+  "transportFacts": {
+    "oneCallDiskOperatorRequired": true,
+    "honorSignedTimeoutRequired": true,
+    "signedWriterTimeoutMs": 300000,
+    "fileContextEditorTypeReconstructedFromExactScratchTarget": true,
+    "emptyCodeEnvelopeRefused": true,
+    "cursorReadMustNotIngestSignedWriter": true
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "expectedSceneFacts": 43726,
+    "variants": 256,
+    "captureCells": 128,
+    "remoteRequests": 132,
+    "hostPhases": 3
+  },
+  "securityPrerequisites": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "attemptsExecuted": 0,
+  "nextAttempt": 1,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

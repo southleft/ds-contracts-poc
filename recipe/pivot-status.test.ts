@@ -163,6 +163,15 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV10.restartAsV10Attempt3WithoutCarriedFirstSegmentRoleForbidden =
         false;
     },
+    (value) => {
+      value.status.input.liveV11.authorizationPresent = true;
+    },
+    (value) => {
+      value.status.input.liveV11.overallInputSuccess = true;
+    },
+    (value) => {
+      value.status.input.liveV11.taughtFirstSegmentRoleRecovery = false;
+    },
   ];
   for (const plant of plants) {
     const value = fixtures();

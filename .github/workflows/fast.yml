@@ -285,6 +285,9 @@ jobs:
       - name: recipe:input-field:live:v10:check (carried v3 verifier uses scene-readback-v10, not hashed scene-readback.ts)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v10:check
+      - name: recipe:input-field:live:v11:check (first-segment role recovery when font-provenance= is present)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v11:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
