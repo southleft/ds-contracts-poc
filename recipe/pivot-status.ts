@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -650,8 +650,14 @@ const V24_AUTHORIZATION_TEMPLATE_SHA256 =
 const V24_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v24-status.json";
 const V24_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V24_BASE_COMMIT = "824cdd6a2bffe4bd67ee6757cd1a86c8bfac21aa";
+const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
+const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
+const V24_AUTHORIZATION_SHA256 =
+  "da1d1a73d96be48173d83e04a20cc0f3b65bc94de6d678c3a79b7730b50fdc7b";
+const V24_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "afe03ed60ef54cca0989f6d760184dbef2deb5ff2eed3cdc239c55c42be196b9";
 const V23_SCENE_READBACK_SHA256 =
   "346ebdc5630010553ac44b57afc852aaea6e4a5dcac18d2bba5a94542e40c256";
 const V22_SCENE_READBACK_SHA256 =
@@ -2039,9 +2045,16 @@ export function validatePivotStatus(
     status.input?.liveV24?.antecedentHashSetSha256 !== V24_HASH_SET_SHA256 ||
     status.input?.liveV24?.authorizationTemplateSha256 !==
       V24_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV24?.authorizationPresent !== false ||
-    status.input?.liveV24?.authorizationCommitted !== false ||
+    status.input?.liveV24?.antecedentCommit !== V24_ANTECEDENT_COMMIT ||
+    status.input?.liveV24?.authorizationPresent !== true ||
+    status.input?.liveV24?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV24?.authorizationEffective !== false ||
+    status.input?.liveV24?.authorizationPath !== V24_AUTHORIZATION_PATH ||
+    status.input?.liveV24?.authorizationSha256 !== V24_AUTHORIZATION_SHA256 ||
+    status.input?.liveV24?.signingPublicKeySpkiSha256 !==
+      V24_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV24?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV24?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV24?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -4341,9 +4354,16 @@ export function verifyPivotStatus(): void {
     v24Status.artifactVersion !== "input-live-v24-status-v1" ||
     v24Status.status !== V24_STATUS ||
     v24Status.baseCommit !== V24_BASE_COMMIT ||
-    v24Status.authorization?.present !== false ||
-    v24Status.authorization?.committed !== false ||
+    v24Status.antecedent?.commit !== V24_ANTECEDENT_COMMIT ||
+    v24Status.authorization?.present !== true ||
+    v24Status.authorization?.commitStateDerivedByHistory !== true ||
     v24Status.authorization?.effective !== false ||
+    v24Status.authorization?.path !== V24_AUTHORIZATION_PATH ||
+    v24Status.authorization?.sha256 !== V24_AUTHORIZATION_SHA256 ||
+    v24Status.authorization?.signingPublicKeySpkiSha256 !==
+      V24_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V24_AUTHORIZATION_PATH)) !==
+      V24_AUTHORIZATION_SHA256 ||
     v24Status.authorization?.v23AuthorizationReusable !== false ||
     v24Status.smallestHonestDelta?.taughtSurfaceBindingExtrasDropped !==
       true ||
