@@ -1,0 +1,46 @@
+{
+  "artifactVersion": "input-live-v9-attempt-2-v1",
+  "status": "failed closed",
+  "authorizationCommit": "58cd5c6ac08ebedc4c5a505b6f59e38efe91ac1b",
+  "codeCommit": "1c80badc06dd099bbbee2e567b1e0ddcb87baf52",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "extract": {
+    "operatorSuccess": true,
+    "rawResponseBytes": 8364325,
+    "hostNormalizeAccount": false
+  },
+  "attempt1FailureCleared": {
+    "componentSetStrokesEffectsCornerRadius": true
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/scene-readback.ts:1001 via recipe/input-field-live-v3-verifier.ts:433",
+    "messages": [
+      "payload.fills.0.kind: Invalid discriminator value. Expected 'solid' | 'linear-gradient' | 'radial-gradient' | 'image' | 'variable-alias' | 'bound-variable'"
+    ],
+    "sceneReadbackTsInV9AntecedentHashSet": false,
+    "v3VerifierInV9AntecedentHashSet": true,
+    "v9SceneReadbackInV9AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v9AntecedentBytesUnchanged": true,
+  "v9AuthorizationBytesUnchanged": true,
+  "nextAttempt": 3,
+  "restartAsV9Attempt3WithoutCarriedV3VerifierForbidden": true
+}

@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -201,8 +201,12 @@ const V9_ATTEMPT_1_PATH =
   "recipe/evidence/input-field-live-pivot-v9-attempt-1.json";
 const V9_ATTEMPT_1_SHA256 =
   "aad14b8a83c8b91935e24c06c1432d846e8d3322e66514c76acc36b9ef3c36fc";
+const V9_ATTEMPT_2_PATH =
+  "recipe/evidence/input-field-live-pivot-v9-attempt-2.json";
+const V9_ATTEMPT_2_SHA256 =
+  "af5099944f2260400bceb6aa47f3ca375dd67b6d9a80d02cc2337d4efa7db20a";
 const V9_STATUS =
-  "attempt 1 failed closed; writer and extract accepted; host IR refused component-set strokes/effects/cornerRadius; cleanup complete";
+  "attempt 2 failed closed; host normalize used hashed v3 verifier scene-readback.ts; cleanup complete; do not restart v9 as-is";
 const V9_BASE_COMMIT = "1d49f4db6db14eca0c4185326153c972d50b7127";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
@@ -672,18 +676,22 @@ export function validatePivotStatus(
       ?.cursorReadMustNotIngestSignedWriter !== true ||
     status.input?.liveV9?.security?.liveExecutionForbidden !== true ||
     status.input?.liveV9?.security?.tokenValuesForbidden !== true ||
-    status.input?.liveV9?.attemptsExecuted !== 1 ||
-    status.input?.liveV9?.nextAttempt !== 2 ||
+    status.input?.liveV9?.attemptsExecuted !== 2 ||
+    status.input?.liveV9?.nextAttempt !== 3 ||
     status.input?.liveV9?.maximumFutureAttempts !== 3 ||
     status.input?.liveV9?.liveExecutionOccurred !== true ||
-    status.input?.liveV9?.figmaWrites !== 2 ||
+    status.input?.liveV9?.figmaWrites !== 4 ||
     status.input?.liveV9?.figmaCaptures !== 0 ||
     status.input?.liveV9?.createdNodesThenRemoved !== 2317 ||
     status.input?.liveV9?.attempt1Path !== V9_ATTEMPT_1_PATH ||
     status.input?.liveV9?.attempt1Sha256 !== V9_ATTEMPT_1_SHA256 ||
+    status.input?.liveV9?.attempt2Path !== V9_ATTEMPT_2_PATH ||
+    status.input?.liveV9?.attempt2Sha256 !== V9_ATTEMPT_2_SHA256 ||
     status.input?.liveV9
       ?.restartAsV9Attempt2WithoutComponentSetStrokeTeachingForbidden !==
       true ||
+    status.input?.liveV9
+      ?.restartAsV9Attempt3WithoutCarriedV3VerifierForbidden !== true ||
     status.input?.liveV9?.humanSignoff !== "pending" ||
     status.input?.liveV9?.overallInputSuccess !== false
   )
@@ -1205,15 +1213,19 @@ export function verifyPivotStatus(): void {
     v9Status.authorization?.v7AuthorizationReusable !== false ||
     v9Status.authorization?.v8AuthorizationReusable !== false ||
     v9Status.smallestHonestDelta?.v8SceneReadbackUnchanged !== true ||
-    v9Status.attemptsExecuted !== 1 ||
-    v9Status.nextAttempt !== 2 ||
+    v9Status.attemptsExecuted !== 2 ||
+    v9Status.nextAttempt !== 3 ||
     v9Status.liveExecutionOccurred !== true ||
-    v9Status.figmaWrites !== 2 ||
+    v9Status.figmaWrites !== 4 ||
     v9Status.figmaCaptures !== 0 ||
     v9Status.createdNodesThenRemoved !== 2317 ||
     v9Status.attempt1Path !== V9_ATTEMPT_1_PATH ||
     v9Status.attempt1Sha256 !== V9_ATTEMPT_1_SHA256 ||
     sha256(readRepositoryEvidence(V9_ATTEMPT_1_PATH)) !== V9_ATTEMPT_1_SHA256 ||
+    v9Status.attempt2Path !== V9_ATTEMPT_2_PATH ||
+    v9Status.attempt2Sha256 !== V9_ATTEMPT_2_SHA256 ||
+    sha256(readRepositoryEvidence(V9_ATTEMPT_2_PATH)) !== V9_ATTEMPT_2_SHA256 ||
+    v9Status.restartAsV9Attempt3WithoutCarriedV3VerifierForbidden !== true ||
     v9Status.overallInputSuccess !== false ||
     sha256(readRepositoryEvidence(V9_AUTHORIZATION_PATH)) !==
       V9_AUTHORIZATION_SHA256 ||
