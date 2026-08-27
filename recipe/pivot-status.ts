@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 authorization declared pending attestation; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -157,9 +157,15 @@ const V8_HASH_SET_SHA256 =
   "9f80320703587f1308615bce0e38fbca6c734fb7eb1fd5dae12b3280523eeafd";
 const V8_AUTHORIZATION_TEMPLATE_SHA256 =
   "218822d276f3a657fbe9cf638044da3792636813ca1f53379f875539562e61bf";
+const V8_ANTECEDENT_COMMIT = "9e34ee653b07e705ef6309cc3d900add81fba47b";
+const V8_AUTHORIZATION_PATH = `${V8_ROOT}/capture-authorization.json`;
+const V8_AUTHORIZATION_SHA256 =
+  "fb82f474f1d4f07fd3c3ebf780ea982cdb87f3f431c3e6525fadc9b3c0ddcc5f";
+const V8_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "324bde931b04fccdb405ad23c4cbc0cb2a8c4fdac98b5efefd9bd0fc595481aa";
 const V8_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v8-status.json";
 const V8_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V8_BASE_COMMIT = "5adac899b1dcde25c4c533d9686cfd665430f2f9";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
@@ -522,9 +528,16 @@ export function validatePivotStatus(
     status.input?.liveV8?.antecedentHashSetSha256 !== V8_HASH_SET_SHA256 ||
     status.input?.liveV8?.authorizationTemplateSha256 !==
       V8_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV8?.authorizationPresent !== false ||
-    status.input?.liveV8?.authorizationCommitted !== false ||
+    status.input?.liveV8?.antecedentCommit !== V8_ANTECEDENT_COMMIT ||
+    status.input?.liveV8?.authorizationPresent !== true ||
+    status.input?.liveV8?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV8?.authorizationEffective !== false ||
+    status.input?.liveV8?.authorizationPath !== V8_AUTHORIZATION_PATH ||
+    status.input?.liveV8?.authorizationSha256 !== V8_AUTHORIZATION_SHA256 ||
+    status.input?.liveV8?.signingPublicKeySpkiSha256 !==
+      V8_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV8?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV8?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV8?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -644,6 +657,9 @@ export function verifyPivotStatus(): void {
     `${V8_ROOT}/antecedent-index.json`,
   );
   const v8Status = readRepositoryJson<Record<string, any>>(V8_STATUS_PATH);
+  const v8Authorization = readRepositoryJson<Record<string, any>>(
+    V8_AUTHORIZATION_PATH,
+  );
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -948,13 +964,39 @@ export function verifyPivotStatus(): void {
     v8Status.artifactVersion !== "input-live-v8-status-v1" ||
     v8Status.status !== V8_STATUS ||
     v8Status.baseCommit !== V8_BASE_COMMIT ||
-    v8Status.authorization?.present !== false ||
+    v8Status.antecedent?.commit !== V8_ANTECEDENT_COMMIT ||
+    v8Status.authorization?.present !== true ||
+    v8Status.authorization?.commitStateDerivedByHistory !== true ||
+    v8Status.authorization?.effective !== false ||
+    v8Status.authorization?.path !== V8_AUTHORIZATION_PATH ||
+    v8Status.authorization?.sha256 !== V8_AUTHORIZATION_SHA256 ||
+    v8Status.authorization?.signingPublicKeySpkiSha256 !==
+      V8_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v8Status.authorization?.precommitHistoryState !==
+      "pending-uncommitted-authorization" ||
+    v8Status.authorization?.expectedHistoryModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     v8Status.authorization?.v7AuthorizationReusable !== false ||
     v8Status.attemptsExecuted !== 0 ||
     v8Status.liveExecutionOccurred !== false ||
-    v8Status.overallInputSuccess !== false
+    v8Status.overallInputSuccess !== false ||
+    sha256(readRepositoryEvidence(V8_AUTHORIZATION_PATH)) !==
+      V8_AUTHORIZATION_SHA256 ||
+    v8Authorization.artifactVersion !==
+      "input-live-v8-capture-authorization-v1" ||
+    v8Authorization.authorizationId !== "input-live-v8" ||
+    v8Authorization.authorizationIntent !== true ||
+    v8Authorization.antecedent?.commit !== V8_ANTECEDENT_COMMIT ||
+    v8Authorization.antecedent?.indexSha256 !== V8_INDEX_SHA256 ||
+    v8Authorization.antecedent?.hashSetSha256 !== V8_HASH_SET_SHA256 ||
+    v8Authorization.signingPublicKey?.spkiSha256 !==
+      V8_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v8Authorization.signingPublicKey?.privateKeyStoredInRepository !== false ||
+    v8Authorization.execution?.v7AuthorizationReusable !== false ||
+    v8Authorization.execution?.attemptsExecuted !== 0 ||
+    v8Authorization.humanSignoff?.status !== "pending"
   )
-    failures.push("v7 supersession or v8 draft antecedent/status mismatch");
+    failures.push("v7 supersession or v8 authorization/status mismatch");
   for (const [artifactPath, metadata] of Object.entries(
     v8Index.artifacts ?? {},
   ) as Array<[string, { bytes: number; sha256: string }]>) {

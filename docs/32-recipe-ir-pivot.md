@@ -7,14 +7,16 @@
 > `boundVariables.strokeBottomWeight: unsupported field strokeBottomWeight`.
 > That normalizer is in the v7 antecedent hash set and was not patched in
 > place. Persisted cleanup completed; owned Input page/collections are gone;
-> no captures; no live success. V8 is the replacement draft antecedent: it
-> teaches per-side stroke-weight bindings (`strokeTopWeight`,
-> `strokeRightWeight`, `strokeBottomWeight`, `strokeLeftWeight`, plus the
-> uniform `strokeWeight` sibling) and names the transport facts (one-call disk
-> operator, honor signed 300000ms timeout, reconstruct
-> `fileContext.editorType` from the exact Scratch target). V8 authorization,
-> attestation, preflight, and live execution are still pending. Button overall
-> success is false/pending.
+> no captures; no live success. V8 is the replacement lineage: it teaches
+> per-side stroke-weight bindings (`strokeTopWeight`, `strokeRightWeight`,
+> `strokeBottomWeight`, `strokeLeftWeight`, plus the uniform `strokeWeight`
+> sibling) and names the transport facts (one-call disk operator, honor signed
+> 300000ms timeout, reconstruct `fileContext.editorType` from the exact Scratch
+> target). V8 prepare is published at
+> `9e34ee653b07e705ef6309cc3d900add81fba47b`. The separate authorization
+> artifact is present and pins that antecedent; commit state is derived from
+> Git history. Runtime security attestation, preflight, and live execution are
+> still pending. Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
 > inversion/accounting was self-referential. Input overall success is false and
@@ -137,8 +139,14 @@
 > the completed untracked attestation belongs at
 > `private/input-live-v7-security-attestation.json`. Create it post-commit with
 > `npm run recipe:input-field:live:v7:attestation:create -- --facts private/input-live-v7-post-restart-security-facts.json`.
-> V7 attempt 1 is closed as recorded above; Input remains false. V8 is the
-> replacement draft and is not yet authorized.**
+> V7 attempt 1 is closed as recorded above; Input remains false. V8 prepare is
+> published at `9e34ee653b07e705ef6309cc3d900add81fba47b`. The v8
+> authorization artifact is present at
+> `recipe/evidence/input-field-live-pivot-v8/capture-authorization.json`;
+> verify pending-uncommitted with `--expect-pending` until the later
+> authorization commit is published, then `--expect-authorized`. Attestation,
+> preflight, and live execution remain pending. V7 authorization is not
+> reusable.**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
@@ -1588,7 +1596,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                         | next evidence boundary                                                   |
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                               | attributable human signoff plus fresh scene-derived inversion/accounting |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 failed closed; v8 draft pending authorization; false** | publish v8, authorize, attest, preflight, then Scratch-only live         |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 failed closed; v8 authorization declared pending attestation; false** | publish v8 authorize, attest, preflight, then Scratch-only live          |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                       | matched 24-cell source/legacy benchmark, then independent human grade    |
 | Data Table  | not claimed                                                                                                                      | row/column templates and matched matrix                                  |
 | Calendar    | not claimed                                                                                                                      | new archetype plus absolute acceptance                                   |
