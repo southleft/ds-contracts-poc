@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 authorization declared pending attestation; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -190,9 +190,15 @@ const V9_HASH_SET_SHA256 =
   "6111066edba80ab6494f6d2b412754a060519621bd586086f5db8f1abed97138";
 const V9_AUTHORIZATION_TEMPLATE_SHA256 =
   "1c6e0d698f20b0eee59eeb65e550647ad71def6c191613869ac35dc3ed809fa7";
+const V9_ANTECEDENT_COMMIT = "1a16642bddbb8c8a3fb44cd0e086a7ff8328e294";
+const V9_AUTHORIZATION_PATH = `${V9_ROOT}/capture-authorization.json`;
+const V9_AUTHORIZATION_SHA256 =
+  "56930e91dd321695f3e3343ddd5a9c0d0dbc3c51f0ff8305ab998d0d8f2269c7";
+const V9_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "c98c4cf0b1deef2b2d71c9f7e7f550e602ac334a620142516f4537f47ea9c686";
 const V9_STATUS_PATH = "recipe/evidence/input-field-live-pivot-v9-status.json";
 const V9_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V9_BASE_COMMIT = "1d49f4db6db14eca0c4185326153c972d50b7127";
 const V4_AUTHORIZATION_COMMIT = "bd343680b446a828190f176e525e5616752f9e5f";
 const V4_AUTHORIZATION_SHA256 =
@@ -620,9 +626,16 @@ export function validatePivotStatus(
     status.input?.liveV9?.antecedentHashSetSha256 !== V9_HASH_SET_SHA256 ||
     status.input?.liveV9?.authorizationTemplateSha256 !==
       V9_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV9?.authorizationPresent !== false ||
-    status.input?.liveV9?.authorizationCommitted !== false ||
+    status.input?.liveV9?.antecedentCommit !== V9_ANTECEDENT_COMMIT ||
+    status.input?.liveV9?.authorizationPresent !== true ||
+    status.input?.liveV9?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV9?.authorizationEffective !== false ||
+    status.input?.liveV9?.authorizationPath !== V9_AUTHORIZATION_PATH ||
+    status.input?.liveV9?.authorizationSha256 !== V9_AUTHORIZATION_SHA256 ||
+    status.input?.liveV9?.signingPublicKeySpkiSha256 !==
+      V9_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV9?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV9?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV9?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -756,6 +769,9 @@ export function verifyPivotStatus(): void {
     `${V9_ROOT}/antecedent-index.json`,
   );
   const v9Status = readRepositoryJson<Record<string, any>>(V9_STATUS_PATH);
+  const v9Authorization = readRepositoryJson<Record<string, any>>(
+    V9_AUTHORIZATION_PATH,
+  );
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -1164,15 +1180,42 @@ export function verifyPivotStatus(): void {
     v9Status.artifactVersion !== "input-live-v9-status-v1" ||
     v9Status.status !== V9_STATUS ||
     v9Status.baseCommit !== V9_BASE_COMMIT ||
-    v9Status.authorization?.present !== false ||
+    v9Status.antecedent?.commit !== V9_ANTECEDENT_COMMIT ||
+    v9Status.authorization?.present !== true ||
+    v9Status.authorization?.commitStateDerivedByHistory !== true ||
+    v9Status.authorization?.effective !== false ||
+    v9Status.authorization?.path !== V9_AUTHORIZATION_PATH ||
+    v9Status.authorization?.sha256 !== V9_AUTHORIZATION_SHA256 ||
+    v9Status.authorization?.signingPublicKeySpkiSha256 !==
+      V9_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v9Status.authorization?.precommitHistoryState !==
+      "pending-uncommitted-authorization" ||
+    v9Status.authorization?.expectedHistoryModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     v9Status.authorization?.v7AuthorizationReusable !== false ||
     v9Status.authorization?.v8AuthorizationReusable !== false ||
     v9Status.smallestHonestDelta?.v8SceneReadbackUnchanged !== true ||
     v9Status.attemptsExecuted !== 0 ||
     v9Status.liveExecutionOccurred !== false ||
-    v9Status.overallInputSuccess !== false
+    v9Status.overallInputSuccess !== false ||
+    sha256(readRepositoryEvidence(V9_AUTHORIZATION_PATH)) !==
+      V9_AUTHORIZATION_SHA256 ||
+    v9Authorization.artifactVersion !==
+      "input-live-v9-capture-authorization-v1" ||
+    v9Authorization.authorizationId !== "input-live-v9" ||
+    v9Authorization.authorizationIntent !== true ||
+    v9Authorization.antecedent?.commit !== V9_ANTECEDENT_COMMIT ||
+    v9Authorization.antecedent?.indexSha256 !== V9_INDEX_SHA256 ||
+    v9Authorization.antecedent?.hashSetSha256 !== V9_HASH_SET_SHA256 ||
+    v9Authorization.signingPublicKey?.spkiSha256 !==
+      V9_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    v9Authorization.signingPublicKey?.privateKeyStoredInRepository !== false ||
+    v9Authorization.execution?.v7AuthorizationReusable !== false ||
+    v9Authorization.execution?.v8AuthorizationReusable !== false ||
+    v9Authorization.execution?.attemptsExecuted !== 0 ||
+    v9Authorization.humanSignoff?.status !== "pending"
   )
-    failures.push("v9 draft antecedent/status mismatch");
+    failures.push("v9 authorization/status mismatch");
   for (const [artifactPath, metadata] of Object.entries(
     v9Index.artifacts ?? {},
   ) as Array<[string, { bytes: number; sha256: string }]>) {

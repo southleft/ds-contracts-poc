@@ -28,8 +28,11 @@
 > attempt 3 as-is. V9 is the replacement lineage: it copies the v8 stack and
 > teaches `VARIABLE_ALIAS` and bound-variable-only fills in a carried
 > `scene-readback-v9.ts` / `scene-readback-runtime-v9.ts` without restamping
-> v8 antecedent bytes. V9 prepare is a draft antecedent; live execution is
-> forbidden until a later authorization commit. Button overall success is false/pending.
+> v8 antecedent bytes. V9 prepare is published at
+> `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. The separate authorization
+> artifact is present and pins that antecedent; commit state is derived from
+> Git history. Runtime security attestation, preflight, and live execution are
+> still pending. Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
 > inversion/accounting was self-referential. Input overall success is false and
@@ -159,10 +162,14 @@
 > for per-side stroke weights; attempt 2 cleared that and failed closed on
 > VARIABLE_ALIAS / bound-variable-only fills in hashed scene-readback.
 > Cleanup completed both times. V7 authorization is not reusable. V9 prepare
-> is published at `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. It carries a
-> taught scene-readback for those live fill kinds; authorization is still
-> pending and live execution is forbidden. The ordered remaining-work plan to
-> an honest v1 proof is in [Remaining work to v1 proof](#remaining-work-to-v1-proof-2026-08-27).**
+> is published at `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. The v9
+> authorization artifact is present at
+> `recipe/evidence/input-field-live-pivot-v9/capture-authorization.json`;
+> verify pending-uncommitted with `--expect-pending` until the later
+> authorization commit is published, then `--expect-authorized`. Attestation,
+> preflight, and live execution remain pending. V7 and v8 authorization are
+> not reusable. The ordered remaining-work plan to an honest v1 proof is in
+> [Remaining work to v1 proof](#remaining-work-to-v1-proof-2026-08-27).**
 >
 > Historical implementation record: **Input/Field has an offline
 > `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
@@ -280,7 +287,7 @@ patch hashed bytes in place.
 
 | step | action | exit criterion |
 | --- | --- | --- |
-| A1 | AUTHORIZE INPUT V9 as a **separate** commit. Pin a prepare-era Ed25519 operator signer. Antecedent `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. Authorization lifecycle stays out of the antecedent hash set. | `npm run recipe:input-field:live:v9:history:verify -- --expect-authorized` after publish; `--expect-pending` is stale. Antecedent index SHA-256 remains `ef6a72fd392d2866d06136e8200d2cff750585705eafacdc41e20b95cfac2942`. Live still forbidden. |
+| A1 | AUTHORIZE INPUT V9 as a **separate** commit. Pin a prepare-era Ed25519 operator signer. Antecedent `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. Authorization lifecycle stays out of the antecedent hash set. Artifact SHA-256 `56930e91dd321695f3e3343ddd5a9c0d0dbc3c51f0ff8305ab998d0d8f2269c7`; SPKI SHA-256 `c98c4cf0b1deef2b2d71c9f7e7f550e602ac334a620142516f4537f47ea9c686`. | `npm run recipe:input-field:live:v9:history:verify -- --expect-authorized` after publish; `--expect-pending` is stale. Antecedent index SHA-256 remains `ef6a72fd392d2866d06136e8200d2cff750585705eafacdc41e20b95cfac2942`. Live still forbidden. |
 | A2 | Fresh private attestation only: replacement PAT + `oldTokenRevoked=false` + `ownerRiskAcceptance=true`; env files mode 0600; MCP restarted; zero-result secret scan bound to the authorize commit; Scratch-only read-only probe. Never commit `private/`. Never print tokens. | Attestation at `private/input-live-v9-security-attestation.json` validates; token values absent. |
 | A3 | Preflight, then Scratch-only live. Max 3 attempts. Transport: one-call disk operator (`private/input-live-v7-mcp-operator.mjs` or v8/v9 equivalent); `callTool(params, undefined, { timeout, maxTotalTimeout })`; honor signed writer timeout 300000; reconstruct `fileContext.editorType` from exact Scratch target; refuse empty-code envelope; do not Cursor-Read the writer or extract. Persist signed cleanup immediately after writer acceptance. | Writer + extract + host normalize/account **both** roots + gates + 128 captures + cleanup. Scene-derived verification independent of stamped IR. Zero silent losses. If a hashed file fails closed, stop that lineage and open v10. |
 | A4 | Attributable human signoff on Input. | **Human gate.** Record pending and continue other work. Do not invent a grade. Overall Input stays **false** until signed. |
@@ -344,9 +351,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
+After the v9 authorization commit is published:
+
 ```
-git pull --ff-only
-# then AUTHORIZE INPUT V9 against antecedent 1a16642b
+npm run recipe:input-field:live:v9:history:verify -- --expect-authorized
+# then private attestation + Scratch-only preflight; live remains forbidden until those pass
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -1703,7 +1712,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 and v8 attempts 1-2 failed closed; v9 draft antecedent pending authorization; false** | authorize v9, Scratch-only live, then human signoff (see Remaining work §A)                      |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 and v8 attempts 1-2 failed closed; v9 authorization declared pending attestation; false** | publish v9 authorize, attest, preflight, then Scratch-only live (see Remaining work §A)          |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
