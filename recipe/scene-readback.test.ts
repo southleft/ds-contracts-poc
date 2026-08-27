@@ -77,7 +77,7 @@ const sceneBindingField = (field: string): string =>
     "strokes.0.weight": "strokeWeight",
     "type.fontSize": "fontSize",
     "type.lineHeight.value": "lineHeight",
-    "type.letterSpacing": "letterSpacing",
+    "type.letterSpacing.value": "letterSpacing",
     "width.value": "width",
     "height.value": "height",
   })[field] ?? field;
@@ -244,7 +244,14 @@ const mockScene = (
             unit: node.type.lineHeight.unit === "px" ? "PIXELS" : "PERCENT",
             value: node.type.lineHeight.value,
           };
-    scene.letterSpacing = node.type.letterSpacing;
+    scene.letterSpacing =
+      node.type.letterSpacing === undefined
+        ? undefined
+        : {
+            unit:
+              node.type.letterSpacing.unit === "px" ? "PIXELS" : "PERCENT",
+            value: node.type.letterSpacing.value,
+          };
     scene.textCase = node.type.textCase?.toUpperCase() as
       "ORIGINAL" | "UPPER" | "LOWER" | "TITLE" | undefined;
     scene.textDecoration = node.type.textDecoration?.toUpperCase() as

@@ -14,6 +14,10 @@ import type {
   InputLiveV3SceneProof,
   InputLiveV3VisualRow,
 } from "./input-field-live-v3-verifier.js";
+import {
+  buildInputLiveV3ScreenshotManifest,
+  validateInputLiveV3ScreenshotManifest,
+} from "./input-field-live-v3-screenshot-evidence.js";
 
 export const INPUT_LIVE_V3_RECEIPT_VERSION = "input-live-v3-receipt-v1";
 export const INPUT_LIVE_V3_ATTEMPT_1_CODE_COMMIT =
@@ -29,6 +33,12 @@ export const INPUT_LIVE_V3_ATTEMPT_2_WRITER_SHA256 =
   "92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811";
 export const INPUT_LIVE_V3_ATTEMPT_2_WRAPPER_SHA256 =
   "ad2ea3b369c86880f59897442cf006268ec6a98badebb1a40de74fad19330ec0";
+export const INPUT_LIVE_V3_ATTEMPT_3_CODE_COMMIT =
+  "6903d31eb015933a6796722d25f6155fb13332ce";
+export const INPUT_LIVE_V3_ATTEMPT_3_WRITER_SHA256 =
+  "c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc";
+export const INPUT_LIVE_V3_ATTEMPT_3_WRAPPER_SHA256 =
+  "f378d76d33e3e59a44cf09430f1b0a2dc02078ad1c1531b01bc236b9642501be";
 export const INPUT_LIVE_V3_INDEX_PATH =
   "recipe/evidence/input-field-live-pivot-v3/index.json";
 
@@ -266,7 +276,7 @@ export function readInputLiveV3Attempt1HardFailure(): InputLiveV3HardFailureEvid
   if (
     !Array.isArray(history) ||
     history.length < 1 ||
-    history.length > 2 ||
+    history.length > 3 ||
     history[0]?.attempt !== 1
   )
     throw new Error("Input live v3 attempt history must begin with attempt 1");
@@ -474,7 +484,8 @@ export function readInputLiveV3Attempt2HardFailure(): InputLiveV3HardFailureEvid
   const history = index.attemptHistory;
   if (
     !Array.isArray(history) ||
-    history.length !== 2 ||
+    history.length < 2 ||
+    history.length > 3 ||
     history[0]?.attempt !== 1 ||
     history[1]?.attempt !== 2
   )
@@ -538,6 +549,217 @@ export function buildInputLiveV3Attempt2ReceiptEvidence(): InputLiveV3AttemptEvi
       artifact: evidence.cleanupArtifact,
     },
   };
+}
+
+export function validateInputLiveV3Attempt3HardFailure(
+  attempt: Record<string, any>,
+  cleanup: Record<string, any>,
+): string[] {
+  const failures: string[] = [];
+  if (
+    attempt.artifactVersion !== "input-live-v3-attempt-v1" ||
+    attempt.attempt !== 3 ||
+    attempt.outcome !== "hard-failure" ||
+    attempt.exhausted !== true ||
+    attempt.fourthAttemptAuthorized !== false
+  )
+    failures.push("attempt 3 exhausted hard-failure identity");
+  if (
+    attempt.chronology?.antecedentCommit !== INPUT_LIVE_V3_ANTECEDENT_COMMIT ||
+    attempt.chronology?.authorizationCommit !==
+      "ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b" ||
+    attempt.chronology?.codeCommit !== INPUT_LIVE_V3_ATTEMPT_3_CODE_COMMIT
+  )
+    failures.push("attempt 3 exact chronology");
+  if (
+    attempt.target?.fileKey !== "byMp6lt0Ij9b2QbkDGFwBh" ||
+    attempt.target?.fileName !== "Scratch Project" ||
+    attempt.target?.editorType !== "figma"
+  )
+    failures.push("attempt 3 exact Scratch target");
+  if (
+    attempt.transport?.payloadBytes !== 2_453_320 ||
+    attempt.transport?.expectedSha256 !==
+      INPUT_LIVE_V3_ATTEMPT_3_WRITER_SHA256 ||
+    attempt.transport?.decodedBytes !== 2_453_320 ||
+    attempt.transport?.decodedSha256 !==
+      INPUT_LIVE_V3_ATTEMPT_3_WRITER_SHA256 ||
+    attempt.transport?.wrapperSha256 !==
+      INPUT_LIVE_V3_ATTEMPT_3_WRAPPER_SHA256 ||
+    attempt.transport?.evalBegan !== true ||
+    attempt.transport?.evalCompleted !== true ||
+    attempt.transport?.bridgeExecutionSucceeded !== true
+  )
+    failures.push("attempt 3 exact writer transport");
+  if (
+    attempt.writerResult?.status !== "succeeded" ||
+    attempt.writerResult?.resultReturnedToRunner !== true ||
+    attempt.writerResult?.resultPersistedBeforeHostFailure !== false ||
+    attempt.writerResult?.plannedVariants !== 256 ||
+    attempt.writerResult?.exactPageId !== null ||
+    attempt.writerResult?.exactSetIds !== null ||
+    attempt.writerResult?.exactCollectionIds !== null ||
+    attempt.writerResult?.exactCreatedNodeIds !== null
+  )
+    failures.push("attempt 3 nontransactional writer result/IDs");
+  const issues = attempt.error?.issues;
+  const expectedIssues = [
+    { path: ["bindings", 1], message: "fills.0 is not compatible with COLOR" },
+    {
+      path: ["bindings", 2],
+      message: "fontSize.0 is not compatible with FLOAT",
+    },
+    {
+      path: ["bindings", 3],
+      message: "lineHeight.0 is not compatible with FLOAT",
+    },
+    {
+      path: ["type", "letterSpacing"],
+      message: "Invalid input: expected number, received object",
+    },
+  ];
+  if (
+    attempt.error?.name !== "ZodError" ||
+    attempt.error?.failureStage !==
+      "host-scene-normalization-before-occurrence-accounting" ||
+    attempt.error?.sourceLocation !== "recipe/scene-readback.ts:982" ||
+    JSON.stringify(issues) !== JSON.stringify(expectedIssues)
+  )
+    failures.push("attempt 3 exact host normalization failure");
+  const verification = attempt.verification;
+  if (
+    verification?.status !== "hard-failure" ||
+    verification?.completed !== false ||
+    verification?.expectedSceneFacts !== 43_726 ||
+    verification?.sceneFactsMeasured !== null ||
+    verification?.sceneAccounting?.missing !== null ||
+    verification?.sceneAccounting?.extra !== null ||
+    verification?.sceneAccounting?.mismatched !== null ||
+    verification?.sceneAccounting?.duplicateCollapsed !== null ||
+    verification?.sceneAccounting?.unobserved !== null ||
+    verification?.sceneAccounting?.silent !== null ||
+    verification?.fixedPointCyclesMeasured !== null ||
+    verification?.usability !== null ||
+    verification?.restoration !== null ||
+    verification?.capturedCells !== 128 ||
+    verification?.objectiveRowsMeasured !== null ||
+    verification?.objectiveMetrics !== null ||
+    verification?.objectiveStrata !== null
+  )
+    failures.push("attempt 3 unavailable gates and unscored captures");
+  if (
+    attempt.artifacts?.successReceipt !== null ||
+    attempt.artifacts?.sceneDerivedFacts !== null ||
+    attempt.artifacts?.objectiveResult !== null ||
+    attempt.artifacts?.humanReviewPacket !== null ||
+    attempt.artifacts?.captures?.count !== 128 ||
+    attempt.artifacts?.captures?.unsampled !== true ||
+    attempt.artifacts?.captures?.scored !== undefined
+  )
+    failures.push("attempt 3 absent result artifacts/capture denominator");
+  if (
+    cleanup.artifactVersion !== "input-live-v3-cleanup-v1" ||
+    cleanup.attempt !== 3 ||
+    cleanup.runIdentity !== "4a074b24-e8503dd5-input-v2" ||
+    cleanup.runnerCleanup?.resultPersistedBeforeHostFailure !== false ||
+    cleanup.runnerCleanup?.requestedNodeIds !== null ||
+    cleanup.runnerCleanup?.removedNodeIds !== null ||
+    cleanup.runnerCleanup?.requestedCollectionIds !== null ||
+    cleanup.runnerCleanup?.removedCollectionIds !== null
+  )
+    failures.push("attempt 3 lost cleanup IDs");
+  const post = cleanup.postCleanupVerification;
+  const fingerprint = post?.unrelatedScratchFingerprint;
+  if (
+    post?.ownershipVerified !== true ||
+    post?.remainingOwnedNodes !== 0 ||
+    post?.remainingOwnedCollections !== 0 ||
+    post?.complete !== true ||
+    fingerprint?.before !== INPUT_LIVE_V3_ATTEMPT_1_FINGERPRINT ||
+    fingerprint?.after !== INPUT_LIVE_V3_ATTEMPT_1_FINGERPRINT ||
+    fingerprint?.exact !== true ||
+    fingerprint?.pageCount !== 13 ||
+    fingerprint?.collectionCount !== 14 ||
+    fingerprint?.variableCount !== 11_163 ||
+    fingerprint?.censusPagesUnchanged !== true ||
+    fingerprint?.retainedButtonProofUnchanged !== true
+  )
+    failures.push("attempt 3 exact cleanup restoration");
+  return failures;
+}
+
+export function readInputLiveV3Attempt3HardFailure(): InputLiveV3HardFailureEvidence {
+  const index = JSON.parse(
+    readFileSync(
+      resolveRepositoryEvidencePath(INPUT_LIVE_V3_INDEX_PATH),
+      "utf8",
+    ),
+  ) as Record<string, any>;
+  const history = index.attemptHistory;
+  if (
+    !Array.isArray(history) ||
+    history.length !== 3 ||
+    history.some((entry, index) => entry?.attempt !== index + 1)
+  )
+    throw new Error("Input live v3 history must contain exhausted attempts 1..3");
+  const entry = history[2];
+  const attemptArtifact = entry?.artifacts?.attempt as
+    | InputLiveV3Artifact
+    | undefined;
+  const cleanupArtifact = entry?.artifacts?.cleanup as
+    | InputLiveV3Artifact
+    | undefined;
+  const screenshotArtifact = entry?.artifacts?.screenshots as
+    | InputLiveV3Artifact
+    | undefined;
+  const artifactValidation = [
+    ...artifactFailures(attemptArtifact, "attempt 3 result"),
+    ...artifactFailures(cleanupArtifact, "attempt 3 cleanup"),
+    ...artifactFailures(screenshotArtifact, "attempt 3 screenshots"),
+  ];
+  if (
+    !attemptArtifact ||
+    !cleanupArtifact ||
+    !screenshotArtifact ||
+    artifactValidation.length > 0
+  )
+    throw new Error(
+      `Input live v3 attempt 3 artifact invalid:\n${artifactValidation.join("\n")}`,
+    );
+  const attempt = JSON.parse(
+    readFileSync(resolveRepositoryEvidencePath(attemptArtifact.path), "utf8"),
+  );
+  const cleanup = JSON.parse(
+    readFileSync(resolveRepositoryEvidencePath(cleanupArtifact.path), "utf8"),
+  );
+  const screenshotManifest = JSON.parse(
+    readFileSync(
+      resolveRepositoryEvidencePath(screenshotArtifact.path),
+      "utf8",
+    ),
+  );
+  const rebuiltManifest = buildInputLiveV3ScreenshotManifest();
+  const failures = [
+    ...validateInputLiveV3Attempt3HardFailure(attempt, cleanup),
+    ...validateInputLiveV3ScreenshotManifest(screenshotManifest),
+    ...(JSON.stringify(screenshotManifest) === JSON.stringify(rebuiltManifest)
+      ? []
+      : ["attempt 3 screenshot bytes/hash/count drift"]),
+    ...(entry.captures?.count === screenshotManifest.count &&
+    entry.captures?.totalBytes === screenshotManifest.totalBytes &&
+    entry.captures?.orderedBundleSha256 ===
+      screenshotManifest.orderedBundleSha256 &&
+    entry.captures?.scored === false
+      ? []
+      : ["attempt 3 screenshot index mismatch"]),
+  ];
+  if (failures.length > 0)
+    throw new Error(
+      `Input live v3 attempt 3 hard-failure evidence invalid:\n${failures.join("\n")}`,
+    );
+  if (existsSync(resolveRepositoryEvidencePath(INPUT_LIVE_V3_RECEIPT_PATH)))
+    throw new Error("exhausted Input live v3 must not have a success receipt");
+  return { attempt, cleanup, attemptArtifact, cleanupArtifact };
 }
 
 export function validateInputLiveV3Evidence(

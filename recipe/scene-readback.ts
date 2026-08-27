@@ -12,6 +12,7 @@ import {
   type Sizing,
   type VariableBinding,
 } from "./figma-ir.js";
+import { normalizeFigmaUnit } from "./figma-property-normalizer.js";
 
 export const SCENE_READBACK_VERSION = 1;
 
@@ -105,7 +106,7 @@ export interface SceneNodeSnapshot {
   fontProvenance?: Extract<IRNode, { kind: "text" }>["type"]["fontProvenance"];
   fontSize?: number;
   lineHeight?: { unit: "PIXELS" | "PERCENT" | "AUTO"; value?: number };
-  letterSpacing?: number;
+  letterSpacing?: { unit: "PIXELS" | "PERCENT"; value: number };
   textCase?: "ORIGINAL" | "UPPER" | "LOWER" | "TITLE";
   textDecoration?: "NONE" | "UNDERLINE" | "STRIKETHROUGH";
   textAlignHorizontal?: "LEFT" | "CENTER" | "RIGHT" | "JUSTIFIED";
@@ -721,11 +722,21 @@ const irFieldForSceneBinding = (field: string): string =>
     bottomLeftRadius: "cornerRadius.bottomLeft",
     strokeWeight: "strokes.0.weight",
     fontSize: "type.fontSize",
+    "fontSize.0": "type.fontSize",
     lineHeight: "type.lineHeight.value",
-    letterSpacing: "type.letterSpacing",
+    "lineHeight.0": "type.lineHeight.value",
+    letterSpacing: "type.letterSpacing.value",
+    "letterSpacing.0": "type.letterSpacing.value",
     width: "width.value",
     height: "height.value",
-  })[field] ?? field;
+  })[field] ??
+  (field.match(/^fills\.(\d+)$/)
+    ? `fills.${field.split(".")[1]}.color`
+    : field.match(/^strokes\.(\d+)$/)
+      ? `strokes.${field.split(".")[1]}.paint.color`
+      : field.match(/^effects\.(\d+)$/)
+        ? `effects.${field.split(".")[1]}.color`
+        : field);
 
 const sceneBindings = (scene: SceneNodeSnapshot): VariableBinding[] =>
   scene.boundVariables.map((binding) => ({
@@ -878,6 +889,16 @@ export function sceneToNormalizedIr(scene: SceneNodeSnapshot): IRNode {
       } as ComponentSetNode;
     }
   } else if (scene.type === "TEXT") {
+    const letterSpacing =
+      scene.letterSpacing === undefined
+        ? undefined
+        : normalizeFigmaUnit("letterSpacing", scene.letterSpacing, {
+            allowAuto: false,
+            allowPercent: true,
+            allowPixels: true,
+          });
+    if (letterSpacing?.unit === "auto")
+      throw new TypeError("letterSpacing: AUTO unit unsupported");
     result = {
       kind: "text",
       ...common,
@@ -895,9 +916,7 @@ export function sceneToNormalizedIr(scene: SceneNodeSnapshot): IRNode {
             : scene.lineHeight?.unit === "PERCENT"
               ? { unit: "percent", value: scene.lineHeight.value ?? 0 }
               : { unit: "px", value: scene.lineHeight?.value ?? 0 },
-        ...(scene.letterSpacing === undefined
-          ? {}
-          : { letterSpacing: scene.letterSpacing }),
+        ...(letterSpacing === undefined ? {} : { letterSpacing }),
         ...(scene.textCase === undefined
           ? {}
           : { textCase: scene.textCase.toLowerCase() as "original" }),

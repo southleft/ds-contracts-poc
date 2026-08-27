@@ -252,7 +252,7 @@ jobs:
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check
-      - name: recipe:pivot-status:check (Button false, Input blocked, v3 criterion committed, no capture)
+      - name: recipe:pivot-status:check (Button false/pending, Input false, v3 exhausted, v4 unauthorized)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:pivot-status:check
       - name: recipe:input-field:live:v3:authorization:self-test (chronology and no-posthoc guard)
@@ -264,9 +264,9 @@ jobs:
       - name: recipe:input-field:live:v3:offline:check (deterministic plan, scene proof, hard-gate falsifications)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v3:offline:check
-      - name: recipe:input-field:live:v3:preflight (clean authorized descendant and exact offline execution bytes)
+      - name: recipe:input-field:live:v4:self-test (normalization, journaling, order, and historical failure gates)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v3:preflight -- --file-key byMp6lt0Ij9b2QbkDGFwBh --bridge-exact-count 1
+        run: npm run recipe:input-field:live:v4:self-test
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check

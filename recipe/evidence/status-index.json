@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending",
+  "status": "Input live v3 exhausted; v4 draft not authorized; Button false/pending; Input false",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -58,7 +58,7 @@
       ]
     },
     "liveV3": {
-      "status": "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending",
+      "status": "attempt 3 hard failure; v3 permanently exhausted",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
       "protocolSha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23",
       "antecedentCommit": "be6b01300ad99d8a29ea4c11508d192dec84bbea",
@@ -68,7 +68,7 @@
       "offlineCorrectionTask2Implemented": true,
       "runnerPrepared": true,
       "runnerCommitted": true,
-      "attemptsExecuted": 2,
+      "attemptsExecuted": 3,
       "maximumAttempts": 3,
       "attempt1": {
         "outcome": "hard-failure",
@@ -98,15 +98,50 @@
         "manualCleanupComplete": true,
         "unrelatedScratchFingerprintRestored": true
       },
+      "attempt3": {
+        "outcome": "hard-failure",
+        "codeCommit": "6903d31eb015933a6796722d25f6155fb13332ce",
+        "writerExecutionSucceeded": true,
+        "writerResultReturned": true,
+        "rootCause": "host normalization rejected actual Figma alias-array fields fills.0, fontSize.0, lineHeight.0 and object-valued letterSpacing at recipe/scene-readback.ts:982",
+        "sceneFactsExpected": 43726,
+        "sceneFactsMeasured": null,
+        "sceneAccounting": null,
+        "fixedPointCyclesMeasured": null,
+        "usability": null,
+        "restoration": null,
+        "capturedCells": 128,
+        "capturesScored": false,
+        "objectiveRowsMeasured": null,
+        "successReceiptWritten": false,
+        "exactFigmaIdsAvailable": false,
+        "runnerCleanupComplete": true,
+        "remainingOwnedNodes": 0,
+        "remainingOwnedCollections": 0,
+        "unrelatedScratchFingerprintRestored": true
+      },
       "runtimeCorrection": {
-        "status": "prepared-uncommitted",
-        "newAuthorizationArtifactRequired": false,
-        "nextAttempt": 3,
+        "status": "superseded by v4 draft architecture",
+        "newAuthorizationArtifactRequired": true,
+        "nextAttempt": null,
         "finalAttempt": true,
         "mustRunFromCleanPublishedDescendant": true
       },
       "sceneDerivedLiveVerificationRun": true,
       "sceneDerivedLiveVerificationCompleted": false
+    },
+    "liveV4": {
+      "status": "draft committed antecedent pending authorization",
+      "protocolPath": "recipe/evidence/input-field-live-pivot-v4/protocol.json",
+      "protocolSha256": "e65584d1d52178cd80dddbe42458a58b0a1ade4f24e41fb53fa4b9cdb97105d6",
+      "normalizationFixturesPath": "recipe/evidence/input-field-live-pivot-v4/normalization-fixtures.json",
+      "normalizationFixturesSha256": "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13",
+      "authorizationPath": null,
+      "authorized": false,
+      "liveExecutionOccurred": false,
+      "maximumFutureAttempts": 3,
+      "cleanPublishedDescendantsOnly": true,
+      "humanSignoff": "pending"
     }
   }
 }

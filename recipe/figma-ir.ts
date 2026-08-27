@@ -269,7 +269,16 @@ export const TypeFactsSchema = z.strictObject({
     z.strictObject({ unit: z.literal("percent"), value: z.number().finite() }),
     z.strictObject({ unit: z.literal("auto") }),
   ]),
-  letterSpacing: SignedDimensionSchema.optional(),
+  /** Figma retains the unit; flattening percent to a number is lossy. */
+  letterSpacing: z
+    .discriminatedUnion("unit", [
+      z.strictObject({ unit: z.literal("px"), value: SignedDimensionSchema }),
+      z.strictObject({
+        unit: z.literal("percent"),
+        value: SignedDimensionSchema,
+      }),
+    ])
+    .optional(),
   textCase: z.enum(["original", "upper", "lower", "title"]).optional(),
   textDecoration: z.enum(["none", "underline", "strikethrough"]).optional(),
 });
@@ -287,7 +296,7 @@ export type TypeFacts = z.infer<typeof TypeFactsSchema>;
 const COLOR_BINDING_PATH =
   /^(?:fills\.\d+\.color|strokes\.\d+\.paint\.color|effects\.\d+\.color)$/;
 const FLOAT_BINDING_PATH =
-  /^(?:width\.value|height\.value|layout\.(?:itemSpacing|minWidth|minHeight|width\.value|height\.value|padding\.(?:top|right|bottom|left))|cornerRadius\.(?:topLeft|topRight|bottomRight|bottomLeft)|strokes\.\d+\.weight|type\.(?:fontSize|lineHeight\.value|letterSpacing))$/;
+  /^(?:width\.value|height\.value|layout\.(?:itemSpacing|minWidth|minHeight|width\.value|height\.value|padding\.(?:top|right|bottom|left))|cornerRadius\.(?:topLeft|topRight|bottomRight|bottomLeft)|strokes\.\d+\.weight|type\.(?:fontSize|lineHeight\.value|letterSpacing\.value))$/;
 const STRING_BINDING_PATH = /^(?:characters|type\.(?:fontFamily|fontStyle))$/;
 const BOOLEAN_BINDING_PATH = /^(?:clipsContent|visible)$/;
 

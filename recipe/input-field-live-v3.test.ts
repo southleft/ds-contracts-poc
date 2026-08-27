@@ -5,10 +5,16 @@ import test from "node:test";
 import {
   readInputLiveV3Attempt1HardFailure,
   readInputLiveV3Attempt2HardFailure,
+  readInputLiveV3Attempt3HardFailure,
   validateInputLiveV3Attempt1HardFailure,
   validateInputLiveV3Attempt2HardFailure,
+  validateInputLiveV3Attempt3HardFailure,
   validateInputLiveV3Evidence,
 } from "./input-field-live-v3-evidence.js";
+import {
+  buildInputLiveV3ScreenshotManifest,
+  validateInputLiveV3ScreenshotManifest,
+} from "./input-field-live-v3-screenshot-evidence.js";
 import {
   validateInputLiveV3Preflight,
   type InputLiveV3PreflightState,
@@ -640,6 +646,74 @@ test("attempt 2 tamper and success claims refuse", () => {
     plant.mutate(attempt, cleanup);
     assert.match(
       validateInputLiveV3Attempt2HardFailure(attempt, cleanup).join("\n"),
+      plant.pattern,
+    );
+  }
+});
+
+test("attempt 3 exact failure and all 128 unscored captures validate", () => {
+  const evidence = readInputLiveV3Attempt3HardFailure();
+  assert.equal(evidence.attempt.verification.sceneFactsMeasured, null);
+  assert.equal(evidence.attempt.verification.fixedPointCyclesMeasured, null);
+  assert.equal(evidence.attempt.verification.usability, null);
+  assert.equal(evidence.attempt.verification.objectiveRowsMeasured, null);
+  assert.equal(evidence.attempt.verification.capturedCells, 128);
+  assert.equal(evidence.attempt.writerResult.exactPageId, null);
+  assert.equal(evidence.cleanup.postCleanupVerification.complete, true);
+  assert.equal(
+    evidence.cleanup.postCleanupVerification.unrelatedScratchFingerprint.before,
+    evidence.cleanup.postCleanupVerification.unrelatedScratchFingerprint.after,
+  );
+  const manifest = buildInputLiveV3ScreenshotManifest();
+  assert.deepEqual(validateInputLiveV3ScreenshotManifest(manifest), []);
+  assert.equal(manifest.count, 128);
+  assert.equal(manifest.totalBytes, 1_065_965);
+  assert.equal(
+    manifest.orderedBundleSha256,
+    "f75fbbdf6e28c0d265f44de758128fc707e76da331345b4eb603638bbfbd528d",
+  );
+});
+
+test("attempt 3 rejects inferred outcomes, recovered IDs, and cleanup drift", () => {
+  const evidence = readInputLiveV3Attempt3HardFailure();
+  const plants: Array<{
+    pattern: RegExp;
+    mutate: (
+      attempt: Record<string, any>,
+      cleanup: Record<string, any>,
+    ) => void;
+  }> = [
+    {
+      pattern: /unavailable gates/,
+      mutate: (attempt) => {
+        attempt.verification.sceneFactsMeasured = 0;
+      },
+    },
+    {
+      pattern: /nontransactional writer result/,
+      mutate: (attempt) => {
+        attempt.writerResult.exactPageId = "invented";
+      },
+    },
+    {
+      pattern: /capture denominator/,
+      mutate: (attempt) => {
+        attempt.artifacts.captures.scored = true;
+      },
+    },
+    {
+      pattern: /exact cleanup restoration/,
+      mutate: (_attempt, cleanup) => {
+        cleanup.postCleanupVerification.remainingOwnedNodes = 1;
+      },
+    },
+  ];
+  for (const plant of plants) {
+    const attempt = structuredClone(evidence.attempt);
+    const cleanup = structuredClone(evidence.cleanup);
+    plant.mutate(attempt, cleanup);
+    assert.match(
+      validateInputLiveV3Attempt3HardFailure(attempt, cleanup).join("\n"),
       plant.pattern,
     );
   }

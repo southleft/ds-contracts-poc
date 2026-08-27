@@ -7,7 +7,13 @@ import {
   INPUT_LIVE_V3_ATTEMPT_1_CODE_COMMIT,
   readInputLiveV3Attempt1HardFailure,
   readInputLiveV3Attempt2HardFailure,
+  readInputLiveV3Attempt3HardFailure,
 } from "./input-field-live-v3-evidence.js";
+import {
+  INPUT_LIVE_V4_PROTOCOL_SHA256,
+  INPUT_LIVE_V4_STATUS,
+  readInputLiveV4Protocol,
+} from "./input-field-live-v4-evidence.js";
 import {
   readRepositoryEvidence,
   readRepositoryJson,
@@ -23,24 +29,27 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending";
+  "Input live v3 exhausted; v4 draft not authorized; Button false/pending; Input false";
 const V3_INDEX_STATUS =
-  "attempt 2 hard failure; committed descendant-ownership and cleanup correction pending";
+  "attempt 3 hard failure; v3 permanently exhausted";
 const V3_PREPARED_FILES = [
   "capture-authorization.json",
   "conformance-report.json",
   "cleanup-attempt-1.json",
   "cleanup-attempt-2.json",
+  "cleanup-attempt-3.json",
   "expected-scene-plan-mui.json.gz",
   "expected-scene-plan-polaris.json.gz",
   "index.json",
   "live-attempt-1.json",
   "live-attempt-2.json",
+  "live-attempt-3.json",
   "protocol.json",
   "transport-envelope.json",
   "writer-plan.json",
   "writer-wrapper.txt",
   "writer.js",
+  "screenshots",
 ] as const;
 const sha256 = (bytes: Uint8Array): string =>
   createHash("sha256").update(bytes).digest("hex");
@@ -107,23 +116,43 @@ export function validatePivotStatus(
     fail("protocol hash");
   if (
     index.result?.status !== "hard-failure" ||
-    index.result?.attempt !== 2 ||
+    index.result?.attempt !== 3 ||
     index.result?.writerExecutionSucceeded !== true ||
-    index.result?.mintedVariants !== 256 ||
+    index.result?.mintedVariants !== null ||
     index.result?.verifierCompleted !== false ||
     index.result?.sceneFactsExpected !== 43_726 ||
-    index.result?.sceneFactsMeasured !== 0 ||
-    index.result?.objectiveRowsMeasured !== 0 ||
-    index.result?.capturedCells !== 0 ||
+    index.result?.sceneFactsMeasured !== null ||
+    index.result?.sceneAccounting !== null ||
+    index.result?.fixedPointCyclesMeasured !== null ||
+    index.result?.usability !== null ||
+    index.result?.restoration !== null ||
+    index.result?.objectiveRowsMeasured !== null ||
+    index.result?.capturedCells !== 128 ||
+    index.result?.capturesScored !== false ||
     index.result?.successReceiptWritten !== false ||
     index.overallInputSuccess !== false ||
     !Array.isArray(index.captureArtifacts) ||
-    index.captureArtifacts.length !== 4 ||
-    status.input?.liveV3?.attemptsExecuted !== 2 ||
+    index.captureArtifacts.length !== 7 ||
+    status.input?.liveV3?.attemptsExecuted !== 3 ||
     status.input?.liveV3?.attempt2?.sceneFactsMeasured !== 0 ||
-    status.input?.liveV3?.attempt2?.successReceiptWritten !== false
+    status.input?.liveV3?.attempt2?.successReceiptWritten !== false ||
+    status.input?.liveV3?.attempt3?.sceneFactsMeasured !== null ||
+    status.input?.liveV3?.attempt3?.capturedCells !== 128 ||
+    status.input?.liveV3?.attempt3?.capturesScored !== false ||
+    status.input?.liveV3?.attempt3?.objectiveRowsMeasured !== null ||
+    status.input?.liveV3?.attempt3?.exactFigmaIdsAvailable !== false ||
+    status.input?.liveV3?.attempt3?.remainingOwnedNodes !== 0 ||
+    status.input?.liveV3?.attempt3?.remainingOwnedCollections !== 0 ||
+    status.input?.liveV4?.status !== INPUT_LIVE_V4_STATUS ||
+    status.input?.liveV4?.protocolSha256 !==
+      INPUT_LIVE_V4_PROTOCOL_SHA256 ||
+    status.input?.liveV4?.normalizationFixturesSha256 !==
+      "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13" ||
+    status.input?.liveV4?.authorized !== false ||
+    status.input?.liveV4?.liveExecutionOccurred !== false ||
+    status.input?.liveV4?.humanSignoff !== "pending"
   )
-    fail("v3 attempt 2 hard-failure result");
+    fail("v3 exhausted/v4 draft status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -178,7 +207,16 @@ export function verifyPivotStatus(): void {
   )) {
     if (
       typeof dependencyHash !== "string" ||
-      sha256(readRepositoryEvidence(dependencyPath)) !== dependencyHash
+      sha256(
+        execFileSync(
+          "git",
+          [
+            "show",
+            `6903d31eb015933a6796722d25f6155fb13332ce:${dependencyPath}`,
+          ],
+          { encoding: "buffer" },
+        ),
+      ) !== dependencyHash
     )
       failures.push(
         `v3 correction dependency hash mismatch: ${dependencyPath}`,
@@ -186,10 +224,10 @@ export function verifyPivotStatus(): void {
   }
   if (
     Object.keys(index.runtimeCorrection?.dependencies ?? {}).length === 0 ||
-    index.runtimeCorrection?.nextAttempt !== 3 ||
+    index.runtimeCorrection?.nextAttempt !== null ||
     index.runtimeCorrection?.maximumAttempts !== 3 ||
-    index.runtimeCorrection?.authorizationReusable !== true ||
-    index.runtimeCorrection?.newAuthorizationArtifactRequired !== false
+    index.runtimeCorrection?.authorizationReusable !== false ||
+    index.runtimeCorrection?.newAuthorizationArtifactRequired !== true
   )
     failures.push("v3 correction dependency/attempt status");
   try {
@@ -206,6 +244,29 @@ export function verifyPivotStatus(): void {
       `v3 attempt 2 hard-failure evidence: ${error instanceof Error ? error.message : String(error)}`,
     );
   }
+  try {
+    readInputLiveV3Attempt3HardFailure();
+  } catch (error) {
+    failures.push(
+      `v3 attempt 3 hard-failure evidence: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  try {
+    readInputLiveV4Protocol();
+  } catch (error) {
+    failures.push(
+      `v4 draft protocol: ${error instanceof Error ? error.message : String(error)}`,
+    );
+  }
+  if (
+    sha256(
+      readRepositoryEvidence(
+        "recipe/evidence/input-field-live-pivot-v4/normalization-fixtures.json",
+      ),
+    ) !==
+    "2b1fd08205b8049ad2b83ae7aa76009aa922d16ef4c01c52b52f312484964c13"
+  )
+    failures.push("v4 normalization fixture hash mismatch");
   for (const artifact of [
     ...status.button.supersededHistoricalArtifacts,
     ...status.input.liveV2.historicalArtifacts,
@@ -217,7 +278,7 @@ export function verifyPivotStatus(): void {
   if (failures.length > 0)
     throw new Error(`recipe pivot status invalid:\n${failures.join("\n")}`);
   process.stdout.write(
-    `Recipe pivot status: Button false/pending; Input blocked; ${STATUS_INDEX_STATUS}\n`,
+    `Recipe pivot status: ${STATUS_INDEX_STATUS}\n`,
   );
 }
 

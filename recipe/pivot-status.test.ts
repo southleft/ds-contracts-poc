@@ -19,7 +19,7 @@ const fixtures = () => ({
   ),
 });
 
-test("attempts 1 and 2 remain hard failures with authorization separated", () => {
+test("v3 remains exhausted and v4 remains an unauthorized draft", () => {
   const value = fixtures();
   assert.deepEqual(
     validatePivotStatus(
@@ -30,17 +30,20 @@ test("attempts 1 and 2 remain hard failures with authorization separated", () =>
         "capture-authorization.json",
         "cleanup-attempt-1.json",
         "cleanup-attempt-2.json",
+        "cleanup-attempt-3.json",
         "conformance-report.json",
         "expected-scene-plan-mui.json.gz",
         "expected-scene-plan-polaris.json.gz",
         "index.json",
         "live-attempt-1.json",
         "live-attempt-2.json",
+        "live-attempt-3.json",
         "protocol.json",
         "transport-envelope.json",
         "writer-plan.json",
         "writer-wrapper.txt",
         "writer.js",
+        "screenshots",
       ],
       INPUT_LIVE_V3_PROTOCOL_SHA256,
     ),
@@ -82,17 +85,20 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
           "capture-authorization.json",
           "cleanup-attempt-1.json",
           "cleanup-attempt-2.json",
+          "cleanup-attempt-3.json",
           "conformance-report.json",
           "expected-scene-plan-mui.json.gz",
           "expected-scene-plan-polaris.json.gz",
           "index.json",
           "live-attempt-1.json",
           "live-attempt-2.json",
+          "live-attempt-3.json",
           "protocol.json",
           "transport-envelope.json",
           "writer-plan.json",
           "writer-wrapper.txt",
           "writer.js",
+          "screenshots",
         ],
         INPUT_LIVE_V3_PROTOCOL_SHA256,
       ).length > 0,

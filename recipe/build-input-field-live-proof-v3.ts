@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
 
@@ -33,6 +34,17 @@ const ENVELOPE_PATH = `${INPUT_LIVE_V3_ROOT}/transport-envelope.json`;
 const WRAPPER_PATH = `${INPUT_LIVE_V3_ROOT}/writer-wrapper.txt`;
 const PLAN_PATH = `${INPUT_LIVE_V3_ROOT}/writer-plan.json`;
 const CONFORMANCE_PATH = `${INPUT_LIVE_V3_ROOT}/conformance-report.json`;
+const EXHAUSTED_CODE_COMMIT =
+  "6903d31eb015933a6796722d25f6155fb13332ce";
+const HISTORICAL_GENERATED_PATHS = [
+  WRITER_PATH,
+  ENVELOPE_PATH,
+  WRAPPER_PATH,
+  PLAN_PATH,
+  CONFORMANCE_PATH,
+  `${INPUT_LIVE_V3_ROOT}/expected-scene-plan-mui.json.gz`,
+  `${INPUT_LIVE_V3_ROOT}/expected-scene-plan-polaris.json.gz`,
+] as const;
 
 const sha256 = (value: Uint8Array): string =>
   createHash("sha256").update(value).digest("hex");
@@ -75,6 +87,25 @@ const sourceInputs = () =>
   });
 
 export async function buildInputLiveV3Proof(): Promise<Record<string, any>> {
+  if (
+    process.argv.includes("--check") &&
+    json(`${INPUT_LIVE_V3_ROOT}/index.json`).status ===
+      "attempt 3 hard failure; v3 permanently exhausted"
+  ) {
+    const drift = HISTORICAL_GENERATED_PATHS.filter((artifactPath) => {
+      const committed = execFileSync(
+        "git",
+        ["show", `${EXHAUSTED_CODE_COMMIT}:${artifactPath}`],
+        { encoding: "buffer", maxBuffer: 8 * 1024 * 1024 },
+      );
+      return !existsSync(artifactPath) || !bytes(artifactPath).equals(committed);
+    });
+    if (drift.length > 0)
+      throw new Error(
+        `Input live v3 exhausted generated artifact drift:\n${drift.join("\n")}`,
+      );
+    return json(PLAN_PATH);
+  }
   const protocolBytes = bytes(INPUT_LIVE_V3_PROTOCOL_PATH);
   if (sha256(protocolBytes) !== INPUT_LIVE_V3_PROTOCOL_SHA256)
     throw new Error("Input live v3 locked protocol byte drift");
