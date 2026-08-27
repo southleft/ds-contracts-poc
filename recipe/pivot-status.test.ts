@@ -125,6 +125,12 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV8.authorizationPresent = false;
     },
     (value) => {
+      value.status.input.liveV8.overallInputSuccess = true;
+    },
+    (value) => {
+      value.status.input.liveV8.figmaCaptures = 128;
+    },
+    (value) => {
       value.status.input.liveV8.transportFacts.honorSignedTimeoutRequired = false;
     },
   ];

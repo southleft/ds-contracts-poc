@@ -104,6 +104,32 @@ test("variable bindings accept only typed compatible node paths", () => {
     }).success,
     true,
   );
+  for (const field of [
+    "strokes.0.weight",
+    "strokes.0.weight.top",
+    "strokes.0.weight.right",
+    "strokes.0.weight.bottom",
+    "strokes.0.weight.left",
+  ]) {
+    assert.equal(
+      VariableBindingSchema.safeParse({
+        field,
+        type: "FLOAT",
+        variable: "field.border-width",
+      }).success,
+      true,
+      field,
+    );
+    assert.equal(
+      VariableBindingSchema.safeParse({
+        field,
+        type: "COLOR",
+        variable: "wrong.type",
+      }).success,
+      false,
+      `${field} COLOR`,
+    );
+  }
   for (const binding of [
     {
       field: "fills.0.color",

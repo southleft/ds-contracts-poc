@@ -1,0 +1,43 @@
+{
+  "artifactVersion": "input-live-v8-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "e163d85787c4449de269ca4314bda9c75a289395",
+  "codeCommit": "e163d85787c4449de269ca4314bda9c75a289395",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "extract": {
+    "operatorSuccess": true,
+    "rawResponseBytes": 8364325,
+    "hostNormalizeAccount": false
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/figma-ir.ts VariableBindingSchema via recipe/scene-readback.ts:1001",
+    "messages": [
+      "strokes.0.weight.bottom is not compatible with FLOAT",
+      "strokes.0.weight.left is not compatible with FLOAT",
+      "strokes.0.weight.right is not compatible with FLOAT",
+      "strokes.0.weight.top is not compatible with FLOAT"
+    ]
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v8AntecedentBytesUnchanged": true,
+  "v8AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV8Attempt1Forbidden": true
+}

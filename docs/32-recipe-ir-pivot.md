@@ -13,10 +13,15 @@
 > sibling) and names the transport facts (one-call disk operator, honor signed
 > 300000ms timeout, reconstruct `fileContext.editorType` from the exact Scratch
 > target). V8 prepare is published at
-> `9e34ee653b07e705ef6309cc3d900add81fba47b`. The separate authorization
-> artifact is present and pins that antecedent; commit state is derived from
-> Git history. Runtime security attestation, preflight, and live execution are
-> still pending. Button overall success is false/pending.
+> `9e34ee653b07e705ef6309cc3d900add81fba47b`. Authorization was first
+> committed at `e163d85787c4449de269ca4314bda9c75a289395`. V8 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), extract raw returned
+> (~8.3MB), then host normalize/account refused
+> `strokes.0.weight.{top,right,bottom,left} is not compatible with FLOAT` in
+> `recipe/figma-ir.ts` via `scene-readback.ts`. That IR file is not in the v8
+> antecedent hash set. Cleanup accepted; owned Input page/collections are gone;
+> no captures; no live success. Attempt 2 requires a fresh attestation after
+> the IR FLOAT teaching lands. Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
 > inversion/accounting was self-referential. Input overall success is false and
@@ -140,12 +145,10 @@
 > `private/input-live-v7-security-attestation.json`. Create it post-commit with
 > `npm run recipe:input-field:live:v7:attestation:create -- --facts private/input-live-v7-post-restart-security-facts.json`.
 > V7 attempt 1 is closed as recorded above; Input remains false. V8 prepare is
-> published at `9e34ee653b07e705ef6309cc3d900add81fba47b`. The v8
-> authorization artifact is present at
-> `recipe/evidence/input-field-live-pivot-v8/capture-authorization.json`;
-> verify pending-uncommitted with `--expect-pending` until the later
-> authorization commit is published, then `--expect-authorized`. Attestation,
-> preflight, and live execution remain pending. V7 authorization is not
+> published at `9e34ee653b07e705ef6309cc3d900add81fba47b`. Authorization is
+> published at `e163d85787c4449de269ca4314bda9c75a289395`; verify with
+> `--expect-authorized`. V8 attempt 1 failed closed on IR FLOAT compatibility
+> for per-side stroke weights; cleanup completed. V7 authorization is not
 > reusable.**
 >
 > Historical implementation record: **Input/Field has an offline
@@ -1593,13 +1596,13 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 
 #### Pivot progress
 
-| archetype   | progress                                                                                                                         | next evidence boundary                                                   |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| Button      | **technical mint retained; overall false/pending**                                                                               | attributable human signoff plus fresh scene-derived inversion/accounting |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1 failed closed; v8 authorization declared pending attestation; false** | publish v8 authorize, attest, preflight, then Scratch-only live          |
-| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                       | matched 24-cell source/legacy benchmark, then independent human grade    |
-| Data Table  | not claimed                                                                                                                      | row/column templates and matched matrix                                  |
-| Calendar    | not claimed                                                                                                                      | new archetype plus absolute acceptance                                   |
+| archetype   | progress                                                                                            | next evidence boundary                                                   |
+| ----------- | --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| Button      | **technical mint retained; overall false/pending**                                                  | attributable human signoff plus fresh scene-derived inversion/accounting |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7/v8 attempt 1 failed closed; false** | attest v8 attempt 2 after IR FLOAT teaching, then Scratch-only live      |
+| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                          | matched 24-cell source/legacy benchmark, then independent human grade    |
+| Data Table  | not claimed                                                                                         | row/column templates and matched matrix                                  |
+| Calendar    | not claimed                                                                                         | new archetype plus absolute acceptance                                   |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
 
