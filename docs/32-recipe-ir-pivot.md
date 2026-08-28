@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~18:10 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~18:12 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -63,12 +63,18 @@
 > `Option state`; collapse requires `Label` string, `Value` string, and
 > `Disabled` boolean). Cleanup accepted; that Combobox page is gone.
 > Input `115:295378` stayed. Do not restart v7 attempt 2 as-is. Combobox
-> live v8 PREPARE copies the v7 stack and teaches that the writer stamps
-> option-instance `Label`, `Value`, and `Disabled` component properties
-> named from source so live extract carries the recipe ARIA/data model,
-> not only `Size` and `Option state`. Keep v2–v7 teachings. Combobox is
-> **not live**. Do not invent a Combobox human grade. Product **v1 is
-> incomplete**.
+> live v8 PREPARE `dac6891f` and AUTHORIZE `17d0ba19` landed. Attempt 1
+> minted page `135:314782`; restore held 144 owned FILL texts. Writer
+> ARIA stamp teaching cleared; extract walk accepted. Live option
+> instances carry source `Label` / `Value` (`ada`) / `Disabled` under
+> hashed Figma keys. Collapse then refused `invalid ARIA/data model at
+> option occurrence 0` because host copies `Label#id` keys and collapse
+> looks for unsuffixed `Label` / `Value` / `Disabled`. Cleanup accepted;
+> that Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v8 attempt 2 as-is. Next teaching: host must recover those three
+> properties from live Figma keys by the name before `#`. Keep v2–v8
+> teachings. Combobox is **not live**. Do not invent a Combobox human
+> grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
