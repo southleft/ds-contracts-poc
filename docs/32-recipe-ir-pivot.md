@@ -830,8 +830,8 @@ lineage; do not patch hashed bytes in place.
 | A5cb | PREPARE INPUT V36. Copy the v35 stack. Do not patch hashed v35 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label `letterSpacing` that compile never emits. Label role only. Do not invent variables. Do not invent a letterSpacing value. Do not teach FIXED as a fill. | **Done** at `7f7b53c1c5cb954c9b27d42cf9ecd2285834d330`. Antecedent index SHA-256 `fb5ce6613db4711041df2d750507ca1961e1f3bdcc368a67c741c30029ce8d3d`. |
 | A5cc | AUTHORIZE INPUT V36 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `7f7b53c1c5cb954c9b27d42cf9ecd2285834d330`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `380133132ac908be9d922b18e209b2f63f69a15bcc309b5346d7f25696bea55d`; SPKI SHA-256 `959fe2c8a939f6389e08d2e74fcae6aea13a8c98d38f666cc40d5da90334a617`. Do not patch hashed v35 or v36 bytes. | **Done** at `a948115d4461b0d841a0068929beb674dcf8b3f5`. |
 | A5cd | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label `type.letterSpacing` or content-row `clipsContent` / `cornerRadius` / `effects` / `strokes`. Host then refused `$.children[0].children[0].children[1].children[0].type.textCase` (MUI `input-field/label` host emits `original`; compile omits textCase). Polar has 0 content-row nodes. Do **not** invent a textCase value. Do **not** restart v36 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5ce | PREPARE INPUT V37. Copy the v36 stack. Do not patch hashed v36 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label `textCase` that compile never emits. Label role only. Do not invent variables. Do not invent a textCase value. Do not teach FIXED as a fill. | **Draft prepared** on top of `88605275`. Do not self-hash this prepare commit. |
-| A5cf | AUTHORIZE INPUT V37 as a **separate** later commit. New prepare-era Ed25519 signer. Pin the PREPARE SHA. Auth lifecycle stays out of the antecedent hash set. | Open after PREPARE. Then attestation + Scratch-only live. Max 3. If a hashed v37 file fails closed, open v38. |
+| A5ce | PREPARE INPUT V37. Copy the v36 stack. Do not patch hashed v36 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label `textCase` that compile never emits. Label role only. Do not invent variables. Do not invent a textCase value. Do not teach FIXED as a fill. | **Done** at `5f50cd9b0931926c4b57c9e033643f82b7af643d`. Antecedent index SHA-256 `773f4add78533aa5dd68aa04873b94e2e45e1db9d9a6cf6c47d9a2a43d231f07`. |
+| A5cf | AUTHORIZE INPUT V37 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `5f50cd9b0931926c4b57c9e033643f82b7af643d`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `6b5b72811ffe1215ceb557d5314e21c5b30931eb04e2f01935a596a43f612db0`; SPKI SHA-256 `476ce4a0f89fbc2a9ac59ac4b0c37e6b4a7e4bc0ff7bae7c6421598873dac892`. Do not patch hashed v36 or v37 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v37 file fails closed, open v38. |
 
 ### B · Button closeout
 
@@ -892,11 +892,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After PREPARE INPUT V37 is published:
+After AUTHORIZE INPUT V37 is published:
 
 ```
-# AUTHORIZE INPUT V37 as a separate commit. New prepare-era Ed25519 signer.
-# Pin the PREPARE SHA. Auth lifecycle stays out of the antecedent hash set.
+npm run recipe:input-field:live:v37:history:verify -- --expect-authorized
+# then private attestation + Scratch-only preflight; live remains forbidden until those pass
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -2253,7 +2253,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, and v36 attempt 1 failed closed; v37 draft prepared; false** | AUTHORIZE INPUT V37 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, and v36 attempt 1 failed closed; v37 authorization declared; false** | attestation + Scratch-only live v37 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
