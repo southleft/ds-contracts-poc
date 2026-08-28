@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 draft antecedent; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -2484,8 +2484,14 @@ const V83_AUTHORIZATION_TEMPLATE_SHA256 =
 const V83_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v83-status.json";
 const V83_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V83_BASE_COMMIT = "737fe2d046f7fb9b832a9440b33554084a75daf8";
+const V83_ANTECEDENT_COMMIT = "aeae9942afd29442da341d304466d94a973de0b4";
+const V83_AUTHORIZATION_PATH = `${V83_ROOT}/capture-authorization.json`;
+const V83_AUTHORIZATION_SHA256 =
+  "259b21bc2a848f72bdfee3d01ca2b6fc7c1ad98052dd9f55c7eff89ae7ecc45d";
+const V83_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "6e8412ab4a94965693529db9e34d83c1dd54d11be96001d53ee98219d5a1b2cd";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -7543,9 +7549,16 @@ export function validatePivotStatus(
     status.input?.liveV83?.antecedentHashSetSha256 !== V83_HASH_SET_SHA256 ||
     status.input?.liveV83?.authorizationTemplateSha256 !==
       V83_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV83?.authorizationPresent !== false ||
-    status.input?.liveV83?.authorizationCommitted !== false ||
+    status.input?.liveV83?.antecedentCommit !== V83_ANTECEDENT_COMMIT ||
+    status.input?.liveV83?.authorizationPresent !== true ||
+    status.input?.liveV83?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV83?.authorizationEffective !== false ||
+    status.input?.liveV83?.authorizationPath !== V83_AUTHORIZATION_PATH ||
+    status.input?.liveV83?.authorizationSha256 !== V83_AUTHORIZATION_SHA256 ||
+    status.input?.liveV83?.signingPublicKeySpkiSha256 !==
+      V83_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV83?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV83?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV83?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -13930,10 +13943,16 @@ export function verifyPivotStatus(): void {
     v83Status.artifactVersion !== "input-live-v83-status-v1" ||
     v83Status.status !== V83_STATUS ||
     v83Status.baseCommit !== V83_BASE_COMMIT ||
-    v83Status.antecedent?.commit !== null ||
-    v83Status.authorization?.present !== false ||
-    v83Status.authorization?.committed !== false ||
+    v83Status.antecedent?.commit !== V83_ANTECEDENT_COMMIT ||
+    v83Status.authorization?.present !== true ||
+    v83Status.authorization?.commitStateDerivedByHistory !== true ||
     v83Status.authorization?.effective !== false ||
+    v83Status.authorization?.path !== V83_AUTHORIZATION_PATH ||
+    v83Status.authorization?.sha256 !== V83_AUTHORIZATION_SHA256 ||
+    v83Status.authorization?.signingPublicKeySpkiSha256 !==
+      V83_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V83_AUTHORIZATION_PATH)) !==
+      V83_AUTHORIZATION_SHA256 ||
     v83Status.smallestHonestDelta?.taughtCollapseOmitInventedContentTextOpacity !==
       true ||
     v83Status.smallestHonestDelta?.taughtCompileCarryLiveOpacity !== true ||
