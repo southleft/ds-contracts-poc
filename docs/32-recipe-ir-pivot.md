@@ -954,6 +954,8 @@ lineage; do not patch hashed bytes in place.
 | A5gv | PREPARE INPUT V76. Copy the v75 stack. Do not patch hashed v16/v17 writer or hashed v75 scene-readback `49810949…a2c1`. Mint an unfrozen v18 writer that binds TEXT component properties by first-segment role (split ` :: ` before testing `=`), the same class as V74 `role()`. Keep v17 files frozen (`05a06546…c2e2` / `f5e1294a…7ce9`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 first-segment `role()` + V75 Polar predicates. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not teach FIXED. Do not teach contentFill or clip in this prepare. | **Done** at `046342fb5a53cb5a0a8fd4a7769141b6b157912e`. Antecedent index SHA-256 `2fe97436ae8dca0b97bd7f95dc052ab0911bf7ae05f6dfdebfebb17a71edd606`. |
 | A5gw | AUTHORIZE INPUT V76 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `046342fb5a53cb5a0a8fd4a7769141b6b157912e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c0fb1c451536d8f6e8d1586530be64a7875ef35e489f010bf24d6ecb4c785349`; SPKI SHA-256 `a2db82fbf07c8aa2f8226b3677508b0e453aa10ec02c44882e1c607ea4ee1d6e`. Do not patch hashed v16, v17, or v75 bytes. | **Done** at `95621752b504ccc1663344d2b527f800996b95c6`. |
 | A5gx | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:257814`, not `111:252766`; v18 program `9653ecd2…81ac`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `0fdcdacb7e8fef97242668187203b123865331b901ffbee803c45b29f6b0f00b`). Writer first-segment Label bind **held**: `textPropertiesRestored` true both. Polar reflow/contentFill still held; Polar content-row still 0. Role 256/256. Accounting silent 0/0 both. Probe issued, then host accept refused `validateInputLiveV76ProbePayload` (`contract.ts:584`). Remaining: MUI `contentFillPassed` still false (hidden default FILL; extract FILL 128); MUI clip 104/128 and overlap 12/128 unchanged. Do **not** invent 9/30/0 or a Polar content-row. Do **not** teach FIXED. Do **not** restart V76 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; page `111:257814` removed; mint cleaned. |
+| A5gy | Diagnose V76 remaining classes from on-disk probe + extract before any V77. | **Measured.** See V76 remaining-class diagnosis below. Hidden-default contentFill is the first single-class teaching. |
+| A5gz | PREPARE INPUT V77. Copy the v76 stack. Do not patch hashed v16/v17/v18 writer or hashed v76 scene-readback `13c210f1…2d27`. Teach the probe to reveal-then-measure hidden content FILL (same class as extract), then restore visibility. Do not write `layoutSizingHorizontal` onto the node. Do not teach FIXED. Keep v18 writer bytes (`9653ecd2…81ac` / `07a5124f…12de`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 `role()` + V75 Polar predicates + V76 bind. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not invent overlap-zero. Do not teach clip in this prepare. | |
 
 ### V74 probe-refuse diagnosis (measured 2026-08-28)
 
@@ -1073,9 +1075,21 @@ Probe payload sha256 `662799c3…391e` (69354 B). Extract sha256 `11344f08…065
 
 One teaching per PREPARE. V76 is class A only.
 
+### V76 remaining-class diagnosis (measured 2026-08-28, required before V77)
+
+Probe payload sha256 `db87e783…9c2a` (69352 B). Extract sha256 `0fdcdacb…f00b` (8436209 B). Page `111:257814` was removed after probe.
+
+| Class | Lying layer | Measured | Teaching? |
+| --- | --- | --- | --- |
+| **A. Label bind** | Writer v18 first-segment. | **Held.** `textPropertiesRestored` true both. | Done at V76. Do not remint the writer. |
+| **B. MUI `contentFillPassed` still false** | **Probe predicate** (defaultVariant-only sample), not writer FIXED. | Extract MUI content texts FILL 128/128 (0 FIXED). MUI default placeholder is hidden FILL (one of 24 restore-hidden). Probe checked live `layoutSizingHorizontal==="FILL"` with no reveal. Polar default placeholder is visible FILL — probe already true. Extract already reveals hidden content TEXT before reading FILL, then hides again. | **V77.** Probe reveal-then-measure (same class as extract). Do **not** invent plugin `layoutSizingHorizontal`. Do not teach FIXED. |
+| **C. MUI clip 104 + overlap 12** | **Mixed.** Unchanged. Out of scope for V77. | Clip 104/128 max 0.529 (overlay label AABB). Overlap 12/128 max 20 (trailing slot + label). Polar 0/0. | Do **not** invent overlap-zero. Do not bundle with V77. Clip-only later only as overlay-label probe classification if measured. |
+
+One teaching per PREPARE. V77 is class B only.
+
 ### Immediate next command
 
-V76 Label bind held. Remaining measured classes: MUI `contentFillPassed` still false (probe samples hidden default FILL without extract reveal; extract FILL 128/128); MUI clip 104/128 and trailing-placeholder overlap 12/128. Polar reflow/contentFill held. Accounting silent 0/0 both. One teaching cannot clear the conjunction. V77 may teach the one measured contentFill probe class (treat hidden FILL as FILL, or sample a visible content node). Do **not** invent plugin `layoutSizingHorizontal`. Do **not** invent 9/30/0 or a Polar content-row. Do **not** teach FIXED. Do **not** invent overlap-zero. Do **not** restart V76 attempt 2 as-is. Do **not** claim v1 complete. Mint was cleaned — not review-worthy. Cleanup-on-failure-only remains a named later teaching if a mint must stay.
+AUTHORIZE INPUT V77 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent is the V77 PREPARE commit. Auth lifecycle stays out of the hash set. Do not patch hashed v16, v17, v18, or v76 bytes. Do not invent Polar 9/30/0 or a Polar content-row. Do not teach FIXED. Do not claim v1 complete.
 
 ## Correction task 2 — offline implementation, 2026-08-27
 
