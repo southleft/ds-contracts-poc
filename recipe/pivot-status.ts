@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 draft antecedent; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -1772,6 +1772,28 @@ const V59_AUTHORIZATION_SHA256 =
   "da9e763ba3815daf2d98e8f9665a549e3ac282bde9b0cb240ea6d3775f362f9a";
 const V59_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "42cb6cb1e0d28993946e64a3c2bf173354acdd96c33ced65f1373cd7f37461df";
+const V59_SCENE_READBACK_SHA256_PIN =
+  "2c4592161da30d317ef6e84613c95d041ddca0edaa7fba80a7376c57c9bcd2f9";
+const V60_ROOT = "recipe/evidence/input-field-live-pivot-v60";
+const V60_PROTOCOL_SHA256 =
+  "eee3bf02f51c8ee72c776936e6a4b963f145fc665b21c3314517cc427ae51115";
+const V60_PLAN_SHA256 =
+  "0be685e00add49a4fda1b836d4128f517fea8c560dbdbceadef58d9075959454";
+const V60_CAPTURE_MANIFEST_SHA256 =
+  "8762cc94f62c48dc769f346de2c13adad8cae597d89704275f046d2225831823";
+const V60_REQUEST_MANIFEST_SHA256 =
+  "865f21c4992f26534ee8abb764e1a87f45c0a7a686c3f13e1ffff59d3c9f3a48";
+const V60_INDEX_SHA256 =
+  "ae063073e0cd93ebc4a46b514ab00208708567b758da5681354e60c99da905fb";
+const V60_HASH_SET_SHA256 =
+  "2f71d2f0a0d514c90467596d213254f6bcefad31166c052c35ef62c942f140c4";
+const V60_AUTHORIZATION_TEMPLATE_SHA256 =
+  "d7fef773072575446acd50fbeb2bf085440198f058c677dcbe6c6db0a537042a";
+const V60_STATUS_PATH =
+  "recipe/evidence/input-field-live-pivot-v60-status.json";
+const V60_STATUS =
+  "draft antecedent; pending separate authorization; live execution forbidden";
+const V60_BASE_COMMIT = "554d994da97966181fddd39fbde54b611eb17b6a";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -5452,9 +5474,50 @@ export function validatePivotStatus(
       ?.restartAsV59Attempt2WithoutRequiredIndicatorTextDecorationOmitForbidden !==
       true ||
     status.input?.liveV59?.humanSignoff !== "pending" ||
-    status.input?.liveV59?.overallInputSuccess !== false
+    status.input?.liveV59?.overallInputSuccess !== false ||
+    status.input?.liveV60?.status !== V60_STATUS ||
+    status.input?.liveV60?.baseCommit !== V60_BASE_COMMIT ||
+    status.input?.liveV60?.protocolSha256 !== V60_PROTOCOL_SHA256 ||
+    status.input?.liveV60?.proofPlanSha256 !== V60_PLAN_SHA256 ||
+    status.input?.liveV60?.captureManifestSha256 !==
+      V60_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV60?.requestManifestSha256 !==
+      V60_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV60?.antecedentIndexSha256 !== V60_INDEX_SHA256 ||
+    status.input?.liveV60?.antecedentHashSetSha256 !== V60_HASH_SET_SHA256 ||
+    status.input?.liveV60?.authorizationTemplateSha256 !==
+      V60_AUTHORIZATION_TEMPLATE_SHA256 ||
+    status.input?.liveV60?.authorizationPresent !== false ||
+    status.input?.liveV60?.authorizationCommitted !== false ||
+    status.input?.liveV60?.authorizationEffective !== false ||
+    status.input?.liveV60?.authorizationLifecycleExcludedFromAntecedentHash !==
+      true ||
+    status.input?.liveV60?.authorizationCanBeAddedWithoutAntecedentRebuild !==
+      true ||
+    status.input?.liveV60?.v59AuthorizationReusable !== false ||
+    status.input?.liveV60?.v59AntecedentBytesUnchanged !== true ||
+    status.input?.liveV60?.v59SceneReadbackUnchanged !== true ||
+    status.input?.liveV60?.taughtRequiredIndicatorTextDecorationOmitted !==
+      true ||
+    status.input?.liveV60?.taughtRequiredIndicatorTextCaseOmitted !== true ||
+    status.input?.liveV60?.v16WriterBytesUnchanged !== true ||
+    status.input?.liveV60?.v16RestoreBytesUnchanged !== true ||
+    status.input?.liveV60?.v16RuntimeBytesUnchanged !== true ||
+    status.input?.liveV60?.v16ExtractBytesUnchanged !== true ||
+    status.input?.liveV60?.sceneReadbackCarried !== true ||
+    status.input?.liveV60?.carriedSceneReadback !==
+      "recipe/scene-readback-v60.ts" ||
+    status.input?.liveV60?.sourceRoots !== 2 ||
+    status.input?.liveV60?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV60?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV60?.attemptsExecuted !== 0 ||
+    status.input?.liveV60?.nextAttempt !== 1 ||
+    status.input?.liveV60?.liveExecutionOccurred !== false ||
+    status.input?.liveV60?.figmaWrites !== 0 ||
+    status.input?.liveV60?.humanSignoff !== "pending" ||
+    status.input?.liveV60?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4-v59 current status");
+    fail("v3 exhausted/v4-v60 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -5902,6 +5965,13 @@ export function verifyPivotStatus(): void {
     `${V59_ROOT}/antecedent-index.json`,
   );
   const v59Status = readRepositoryJson<Record<string, any>>(V59_STATUS_PATH);
+  const v60Protocol = readRepositoryJson<Record<string, any>>(
+    `${V60_ROOT}/protocol.json`,
+  );
+  const v60Index = readRepositoryJson<Record<string, any>>(
+    `${V60_ROOT}/antecedent-index.json`,
+  );
+  const v60Status = readRepositoryJson<Record<string, any>>(V60_STATUS_PATH);
 
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
@@ -10192,6 +10262,41 @@ export function verifyPivotStatus(): void {
     v59Status.overallInputSuccess !== false
   )
     failures.push("v59 draft antecedent/status mismatch");
+  if (
+    sha256(readRepositoryEvidence(`${V60_ROOT}/protocol.json`)) !==
+      V60_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V60_ROOT}/proof-plan.json`)) !==
+      V60_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V60_ROOT}/capture-manifest.json`)) !==
+      V60_CAPTURE_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V60_ROOT}/request-manifest.json`)) !==
+      V60_REQUEST_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V60_ROOT}/antecedent-index.json`)) !==
+      V60_INDEX_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V60_ROOT}/authorization-template.json`),
+    ) !== V60_AUTHORIZATION_TEMPLATE_SHA256 ||
+    v60Protocol.hostNormalization?.carriedSceneReadback !==
+      "recipe/scene-readback-v60.ts" ||
+    v60Protocol.hostNormalization?.taughtRequiredIndicatorTextDecorationOmitted !==
+      true ||
+    v60Protocol.hostNormalization?.v59SceneReadbackUnchanged !== true ||
+    v60Index.hashSetSha256 !== V60_HASH_SET_SHA256 ||
+    v60Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
+    v60Status.artifactVersion !== "input-live-v60-status-v1" ||
+    v60Status.status !== V60_STATUS ||
+    v60Status.baseCommit !== V60_BASE_COMMIT ||
+    v60Status.antecedent?.commit !== null ||
+    v60Status.authorization?.present !== false ||
+    v60Status.authorization?.committed !== false ||
+    v60Status.smallestHonestDelta?.taughtRequiredIndicatorTextDecorationOmitted !==
+      true ||
+    v60Status.smallestHonestDelta?.v59SceneReadbackUnchanged !== true ||
+    v60Status.attemptsExecuted !== 0 ||
+    v60Status.liveExecutionOccurred !== false ||
+    v60Status.overallInputSuccess !== false
+  )
+    failures.push("v60 draft antecedent/status mismatch");
   for (const [artifactPath, metadata] of Object.entries(
     v26Index.artifacts ?? {},
   ) as Array<[string, { bytes: number; sha256: string }]>) {
