@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v47-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused message-container clipsContent; cleanup complete",
   "baseCommit": "59af9ac2b328d6b09fdaade6dc72fb8b20ae2210",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v47/antecedent-index.json",
@@ -216,12 +216,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v47-attempt-1.json",
+  "attempt1Sha256": "882a411c04e584023dece06869566c83b03bbe806f3733417cf8028d2853bf95",
+  "restartAsV47Attempt2WithoutMessageContainerClipsContentOmitForbidden": true
 }
