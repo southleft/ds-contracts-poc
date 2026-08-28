@@ -1688,10 +1688,16 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV85.v19WriterMinted = false;
     },
     (value) => {
-      value.status.input.liveV85.liveExecutionOccurred = true;
+      value.status.input.liveV85.liveExecutionOccurred = false;
     },
     (value) => {
       value.status.input.liveV85.figmaWrites = 133;
+    },
+    (value) => {
+      value.status.input.liveV85.mintStayed = false;
+    },
+    (value) => {
+      value.status.input.liveV85.taughtCleanupOnFailureOnlyHeld = false;
     },
   ];
   for (const plant of plants) {
