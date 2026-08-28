@@ -450,6 +450,9 @@ jobs:
       - name: recipe:input-field:live:v65:check (carry set layout.padding 32; hashed v64 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v65:check
+      - name: recipe:input-field:live:v66:check (unfrozen v17 writer set layoutSizingHorizontal HUG; hashed v65 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v66:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
