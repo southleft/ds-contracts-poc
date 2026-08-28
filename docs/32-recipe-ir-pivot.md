@@ -845,7 +845,8 @@ lineage; do not patch hashed bytes in place.
 | A5cq | PREPARE INPUT V41. Copy the v40 stack. Do not patch hashed v40 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `effects` that compile never emits. Label-row role only. Do not invent variables. Do not invent an effects value. Do not omit label-row strokes yet. Do not teach FIXED as a fill. | **Done** at `774eea2d24d21308594eba61d0ceb2ca4243b589`. Antecedent index SHA-256 `5c7e46c1ce10f7c28c1c6a823dc969ed228d731b5fb83e9f1a0d9a7f14849922`. |
 | A5cr | AUTHORIZE INPUT V41 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `774eea2d24d21308594eba61d0ceb2ca4243b589`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `46ff0dc094444ab71eb692517cbbb01d75b86247e49c525521b4b4b9564bb2bb`; SPKI SHA-256 `44015abb112d8f04fa2403e3fd52efa46b8607a82f9f38cdd1f1dad5a5a87a72`. Do not patch hashed v40 or v41 bytes. | **Done** at `b21477f8180088486b3adaefbaa6dad4a6471eb7`. |
 | A5cs | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label-row `effects`. Host then refused `$.children[0].children[0].children[1].strokes` (MUI `input-field/label-row` host still emits `[]`; content-row omit does not apply). Polar has 0 content-row nodes. Do **not** invent a strokes value. Do **not** restart v41 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5ct | PREPARE INPUT V42. Copy the v41 stack. Do not patch hashed v41 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `strokes` that compile never emits. Label-row role only. Do not invent variables. Do not invent a strokes value. Do not teach FIXED as a fill. | Open after RECORD. |
+| A5ct | PREPARE INPUT V42. Copy the v41 stack. Do not patch hashed v41 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `strokes` that compile never emits. Label-row role only. Do not invent variables. Do not invent a strokes value. Do not teach FIXED as a fill. | **Draft prepared** on `b802dfe51a68eb2a197c56db089c4eb03816035b`. Antecedent index SHA-256 `2a861eb4f670abf8a60ae2f344473deda5d83c2338e916cf70e95252c4022056`. |
+| A5cu | AUTHORIZE INPUT V42 as a **separate** later commit. New prepare-era Ed25519 signer. Pin the PREPARE SHA. Auth lifecycle stays out of the hash set. Do not patch hashed v41 or v42 bytes. | Open after PREPARE. |
 
 ### B · Button closeout
 
@@ -906,11 +907,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After RECORD INPUT V41 is published:
+After PREPARE INPUT V42 is published:
 
 ```
-# PREPARE INPUT V42 — copy v41; omit label-row strokes compile never emits
-# do not patch hashed v41; do not restart v41 attempt 2 as-is
+# AUTHORIZE INPUT V42 — pin prepare-era operator signer
+npm run recipe:input-field:live:v42:history:verify
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -2267,7 +2268,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, and v41 attempt 1 failed closed; false** | PREPARE INPUT V42 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, and v41 attempt 1 failed closed; v42 draft prepared; false** | AUTHORIZE INPUT V42 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
