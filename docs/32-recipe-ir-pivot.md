@@ -21,11 +21,15 @@
 > `126:302679` then restore refused `COMBOBOX-V1-RESTORE-COUNT:240` (128
 > inputs + 16 option-set labels + 96 nested open-listbox option labels).
 > Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
-> Do not restart v1 attempt 2 as-is. Combobox live v2 PREPARE teaches restore
-> `option/label` only from `option-set` and restore `input` only from
-> `combobox/set` (144 owned FILL texts; nested open-listbox labels are not
-> owned). Combobox is **not live**. Do not invent a Combobox human grade.
-> Product **v1 is incomplete**.
+> Do not restart v1 attempt 2 as-is. Combobox live v2 PREPARE `809b30dc` and
+> AUTHORIZE `bf031026` landed. Attempt 1 minted page `126:304408`; restore
+> held 144 owned FILL texts. Extract refused
+> `SCENE-DIRECT-OWNERSHIP-METADATA:126:304503:envelopeHash` (option-set root
+> lacks `envelopeHash`; writer stamps it on tagged descendants only).
+> Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
+> Do not restart v2 attempt 2 as-is. Next teaching: extract must not require
+> `envelopeHash` on owned component-set roots. Combobox is **not live**. Do
+> not invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
