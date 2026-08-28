@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 draft antecedent pending separate authorization; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -4067,7 +4067,7 @@
       "restartAsV34Attempt2WithoutLabelBindingFieldForbidden": true
     },
     "liveV35": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "b19f3d16cdb845fb275450ad9a4fd5a9383a88cc",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v35/protocol.json",
       "protocolSha256": "36aba71c1c55702d8d9c77d00e9e7bc98df04cc75b5f91916f87389d2d524b43",
@@ -4082,7 +4082,7 @@
       "antecedentHashSetSha256": "0e4d41c5ffef4bf7f7611def14796811cb89ecc1a7852f51da35119525b2e678",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v35/authorization-template.json",
       "authorizationTemplateSha256": "f010e5b2cec4983268c5cf07c895a7bfdb984febe005a05b572ca89a0bc903d3",
-      "authorizationPresent": false,
+      "authorizationPresent": true,
       "authorizationEffective": false,
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
@@ -4246,12 +4246,17 @@
       "liveExecutionOccurred": false,
       "figmaWrites": 0,
       "figmaCaptures": 0,
-      "authorizationCommitted": false,
       "taughtLabelBindingExtrasDropped": true,
       "taughtLabelBindingCompileOrder": true,
       "v34AuthorizationReusable": false,
       "v34AntecedentBytesUnchanged": true,
-      "v34SceneReadbackUnchanged": true
+      "v34SceneReadbackUnchanged": true,
+      "antecedentCommit": "341e690a223d598dd93d3680333adcb89fab07a8",
+      "authorizationCommitStateDerivedByHistory": true,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v35/capture-authorization.json",
+      "authorizationSha256": "1fb2e51a2eb7f4abc56a518c1b00ad9c876d0ac7f172d48e1656ddfd92198436",
+      "signingPublicKeySpkiSha256": "9d552892da07d207717d5c59a37c2fd4e4929c93d9eba5ecd3e1242f800dfc42",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
     }
   }
 }

@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 draft antecedent pending separate authorization; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -992,8 +992,14 @@ const V35_AUTHORIZATION_TEMPLATE_SHA256 =
 const V35_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v35-status.json";
 const V35_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V35_BASE_COMMIT = "b19f3d16cdb845fb275450ad9a4fd5a9383a88cc";
+const V35_ANTECEDENT_COMMIT = "341e690a223d598dd93d3680333adcb89fab07a8";
+const V35_AUTHORIZATION_PATH = `${V35_ROOT}/capture-authorization.json`;
+const V35_AUTHORIZATION_SHA256 =
+  "1fb2e51a2eb7f4abc56a518c1b00ad9c876d0ac7f172d48e1656ddfd92198436";
+const V35_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "9d552892da07d207717d5c59a37c2fd4e4929c93d9eba5ecd3e1242f800dfc42";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -3078,9 +3084,16 @@ export function validatePivotStatus(
     status.input?.liveV35?.antecedentHashSetSha256 !== V35_HASH_SET_SHA256 ||
     status.input?.liveV35?.authorizationTemplateSha256 !==
       V35_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV35?.authorizationPresent !== false ||
-    status.input?.liveV35?.authorizationCommitted !== false ||
+    status.input?.liveV35?.antecedentCommit !== V35_ANTECEDENT_COMMIT ||
+    status.input?.liveV35?.authorizationPresent !== true ||
+    status.input?.liveV35?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV35?.authorizationEffective !== false ||
+    status.input?.liveV35?.authorizationPath !== V35_AUTHORIZATION_PATH ||
+    status.input?.liveV35?.authorizationSha256 !== V35_AUTHORIZATION_SHA256 ||
+    status.input?.liveV35?.signingPublicKeySpkiSha256 !==
+      V35_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV35?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV35?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV35?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -6262,9 +6275,16 @@ export function verifyPivotStatus(): void {
     v35Status.artifactVersion !== "input-live-v35-status-v1" ||
     v35Status.status !== V35_STATUS ||
     v35Status.baseCommit !== V35_BASE_COMMIT ||
-    v35Status.authorization?.present !== false ||
-    v35Status.authorization?.committed !== false ||
+    v35Status.antecedent?.commit !== V35_ANTECEDENT_COMMIT ||
+    v35Status.authorization?.present !== true ||
+    v35Status.authorization?.commitStateDerivedByHistory !== true ||
     v35Status.authorization?.effective !== false ||
+    v35Status.authorization?.path !== V35_AUTHORIZATION_PATH ||
+    v35Status.authorization?.sha256 !== V35_AUTHORIZATION_SHA256 ||
+    v35Status.authorization?.signingPublicKeySpkiSha256 !==
+      V35_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V35_AUTHORIZATION_PATH)) !==
+      V35_AUTHORIZATION_SHA256 ||
     v35Status.authorization?.v34AuthorizationReusable !== false ||
     v35Status.smallestHonestDelta?.taughtLabelBindingExtrasDropped !==
       true ||
