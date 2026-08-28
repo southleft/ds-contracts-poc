@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 authorization declared; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -3506,7 +3506,7 @@
       "restartAsV31Attempt2WithoutContentRowCornerRadiusForbidden": true
     },
     "liveV32": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused content-row effects; cleanup complete",
       "baseCommit": "c3f623cad90d60c4df38c2907d65ed2e447a3250",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v32/protocol.json",
       "protocolSha256": "7db70b361dd596f92b18e502e9b7af261ecd6c2a57fe3f30c67f7ccbaece7a58",
@@ -3649,12 +3649,12 @@
         "tokenValuesForbidden": true,
         "liveExecutionForbidden": true
       },
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
       "maximumFutureAttempts": 3,
       "humanSignoff": "pending",
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 4,
       "figmaCaptures": 0,
       "overallInputSuccess": false,
       "v27AuthorizationReusable": false,
@@ -3682,7 +3682,11 @@
       "authorizationPath": "recipe/evidence/input-field-live-pivot-v32/capture-authorization.json",
       "authorizationSha256": "38c4194338cc6dd44cd6b0f56515e4d73c82aace1119b396f372f6368dc8f566",
       "signingPublicKeySpkiSha256": "23d17df323f7f07709eb8bc4242dabd6751bb6c9d4bc6a5ec4d7e7bc2b992aa0",
-      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized",
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v32-attempt-1.json",
+      "attempt1Sha256": "8cfb209f92fcc84be3eeb0b26bece9b72cb46d4e2d36fa4292a3c02f9444445d",
+      "restartAsV32Attempt2WithoutContentRowEffectsForbidden": true
     }
   }
 }

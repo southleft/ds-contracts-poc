@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v32-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused content-row effects; cleanup complete",
   "baseCommit": "c3f623cad90d60c4df38c2907d65ed2e447a3250",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v32/antecedent-index.json",
@@ -156,12 +156,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v32-attempt-1.json",
+  "attempt1Sha256": "8cfb209f92fcc84be3eeb0b26bece9b72cb46d4e2d36fa4292a3c02f9444445d",
+  "restartAsV32Attempt2WithoutContentRowEffectsForbidden": true
 }
