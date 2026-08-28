@@ -17,9 +17,13 @@
 > is a recovered incident; the page id stayed. Safe restore: checkpoint
 > `2392869719628549246` (`V85 Input grids OK`). Never restore
 > `2392877528965054592`. Do not rearrange Input. Combobox live v1 PREPARE
-> is landing on this branch: new identity, new page, Input `115:295378`
-> untouched. Combobox is **not live** until attempt 1 stays. Do not invent
-> a Combobox human grade. Product **v1 is incomplete**.
+> `a82913ae` and AUTHORIZE `3b5f3ad4` landed. Attempt 1 minted page
+> `126:302679` then restore refused `COMBOBOX-V1-RESTORE-COUNT:240` (128
+> inputs + 16 option-set labels + 96 nested open-listbox option labels).
+> Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
+> Do not restart v1 attempt 2 as-is. Next teaching: restore `option/label`
+> only from `option-set`. Combobox is **not live**. Do not invent a
+> Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
