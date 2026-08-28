@@ -351,6 +351,9 @@ jobs:
       - name: recipe:input-field:live:v32:check (omit content-row cornerRadius; hashed v31 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v32:check
+      - name: recipe:input-field:live:v33:check (omit content-row effects; hashed v32 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v33:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
