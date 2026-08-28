@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -1376,8 +1376,14 @@ const V47_AUTHORIZATION_TEMPLATE_SHA256 =
 const V47_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v47-status.json";
 const V47_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V47_BASE_COMMIT = "59af9ac2b328d6b09fdaade6dc72fb8b20ae2210";
+const V47_ANTECEDENT_COMMIT = "6f54b8485aeab163764fb9dee17a85dd34e2a205";
+const V47_AUTHORIZATION_PATH = `${V47_ROOT}/capture-authorization.json`;
+const V47_AUTHORIZATION_SHA256 =
+  "ec849b01af1a9c3f0dfeab908eb4c4e121ef0168e7e80c4193ca50ed04e245f6";
+const V47_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "66cdf310038c25480ebb0b0f03f00a581dea826227f3533b9308ce7295365f13";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -4232,9 +4238,16 @@ export function validatePivotStatus(
     status.input?.liveV47?.antecedentHashSetSha256 !== V47_HASH_SET_SHA256 ||
     status.input?.liveV47?.authorizationTemplateSha256 !==
       V47_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV47?.authorizationPresent !== false ||
-    status.input?.liveV47?.authorizationCommitted !== false ||
+    status.input?.liveV47?.antecedentCommit !== V47_ANTECEDENT_COMMIT ||
+    status.input?.liveV47?.authorizationPresent !== true ||
+    status.input?.liveV47?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV47?.authorizationEffective !== false ||
+    status.input?.liveV47?.authorizationPath !== V47_AUTHORIZATION_PATH ||
+    status.input?.liveV47?.authorizationSha256 !== V47_AUTHORIZATION_SHA256 ||
+    status.input?.liveV47?.signingPublicKeySpkiSha256 !==
+      V47_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV47?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV47?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV47?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -8199,10 +8212,16 @@ export function verifyPivotStatus(): void {
     v47Status.artifactVersion !== "input-live-v47-status-v1" ||
     v47Status.status !== V47_STATUS ||
     v47Status.baseCommit !== V47_BASE_COMMIT ||
-    v47Status.antecedent?.commit !== null ||
-    v47Status.authorization?.present !== false ||
-    v47Status.authorization?.committed !== false ||
+    v47Status.antecedent?.commit !== V47_ANTECEDENT_COMMIT ||
+    v47Status.authorization?.present !== true ||
+    v47Status.authorization?.commitStateDerivedByHistory !== true ||
     v47Status.authorization?.effective !== false ||
+    v47Status.authorization?.path !== V47_AUTHORIZATION_PATH ||
+    v47Status.authorization?.sha256 !== V47_AUTHORIZATION_SHA256 ||
+    v47Status.authorization?.signingPublicKeySpkiSha256 !==
+      V47_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V47_AUTHORIZATION_PATH)) !==
+      V47_AUTHORIZATION_SHA256 ||
     v47Status.authorization?.v46AuthorizationReusable !== false ||
     v47Status.smallestHonestDelta?.taughtMessageTextDecorationOmitted !==
       true ||
