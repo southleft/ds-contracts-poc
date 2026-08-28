@@ -1,0 +1,160 @@
+{
+  "artifactVersion": "combobox-live-v11-attempt-1-v1",
+  "status": "failed closed at collapse unsupported structural edit; host leading-slot binding compile-order teaching cleared; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "fa3097ccdff5190a9dcad3db9b021a670efb34e1",
+  "codeCommit": "fa3097ccdff5190a9dcad3db9b021a670efb34e1",
+  "antecedentCommit": "f83b729e8267c53d9ea83a391189e26ea2c4c478",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host must order combobox/control/leading bindings to compile field order so width.value precedes height.value precedes fills.0.color, not live extract order or the inherited fills-first slot list",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true,
+    "heldHostTriggerBindingCompileOrder": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "135:319969",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["135:320833", "135:320064", "135:321697", "135:320928"],
+    "muiOptionSetId": "135:320064",
+    "muiComboboxSetId": "135:320833",
+    "antdOptionSetId": "135:320928",
+    "antdComboboxSetId": "135:321697",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true,
+    "stampedOptionAriaProperties": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "4224eb71644b832791be319b76016bc78ec2dd44d56320578f21c6dce5966f53",
+    "hostLeadingSlotBindingCompileOrderTeachingCleared": true,
+    "hostTriggerBindingCompileOrderTeachingHeld": true,
+    "hostPropertyNameBeforeHashTeachingHeld": true,
+    "invalidAriaDidNotRecur": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[1].children[0].visible",
+    "refusedAt": "recipe/recipes/combobox.ts:1738",
+    "hostRecoversComponentRefAs": "combobox@1/option",
+    "hostRecoversHashedPropertyNames": true,
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveExtractHashedKeys": {
+      "0": {
+        "Disabled#135:176600": false,
+        "Label#135:176582": "Ada Lovelace",
+        "Option state": "selected",
+        "Size": "small",
+        "Value#135:176591": "ada"
+      }
+    },
+    "hostRecoveredUnsuffixedProperties": {
+      "Label": "Ada Lovelace",
+      "Value": "ada",
+      "Disabled": false
+    },
+    "valueNamedFromSourceNotInventedFromLabel": true,
+    "measuredLeadingBindings": {
+      "role": "combobox/control/leading",
+      "path": "$.children[0].children[0].children[1].children[0]",
+      "liveFieldOrder": [
+        "fills.0.color",
+        "height.value",
+        "width.value"
+      ],
+      "hostFieldOrder": [
+        "width.value",
+        "height.value",
+        "fills.0.color"
+      ],
+      "compileFieldOrder": [
+        "width.value",
+        "height.value",
+        "fills.0.color"
+      ],
+      "hostMatchesCompile": true
+    },
+    "measuredLeadingVisible": {
+      "role": "combobox/control/leading",
+      "path": "$.children[0].children[0].children[1].children[0]",
+      "liveVisible": true,
+      "liveOpacity": 1,
+      "liveLeadingVisibleOpacityCensus": {
+        "true/1": 128
+      },
+      "hostHasVisible": false,
+      "compileHasVisible": true,
+      "compileVisible": true
+    },
+    "namedFromSource": "v11 host leading-slot binding teaching cleared; host leading bindings now match compile width.value then height.value then fills.0.color; live extract still carries source Label Ada Lovelace, Value ada, Disabled false under Figma keys Label#135:176582 / Value#135:176591 / Disabled#135:176600; host recovers unsuffixed Label / Value / Disabled and collapse passes ARIA; collapse then refuses unsupported structural edit at combobox/control/leading .visible because host omits default-true visible while compile controlInstance carries visible: true; live extract visible is true and opacity is 1 on all 128 leading slots; do not invent ada from Ada Lovelace"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "d35da7a630202c2e1c42ba60f86c970c0f1fe7f299c2151fc300c10056fb41e4",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "135:319969",
+    "removedCollectionIds": [
+      "VariableCollectionId:135:319971",
+      "VariableCollectionId:135:320835"
+    ]
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "doNotInventOptionGlyphText": true,
+    "doNotInventValueFromLabel": true,
+    "restartV11Attempt2AsIs": false,
+    "prepareV12": "host must emit compile-carried visible: true on leading-slot instances instead of omitting the default-true visible flag"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}
