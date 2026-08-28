@@ -926,7 +926,7 @@ function compileInputFieldIr(
       { name: "Adornments", values: [...INPUT_FIELD_ADORNMENTS] },
     ],
     layout: {
-      mode: "vertical",
+      mode: "horizontal",
       primaryAxisAlign: "min",
       counterAxisAlign: "min",
       itemSpacing: 24,

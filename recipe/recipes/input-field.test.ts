@@ -75,6 +75,7 @@ test("input-field@1 is deterministic and compiles the complete edit surface", ()
 
   const root = rootOf(first);
   assert.equal(root.role, "input-field/set");
+  assert.equal(root.layout.mode, "horizontal");
   assert.deepEqual(
     root.variantAxes.map((axis) => [axis.name, axis.values]),
     [
