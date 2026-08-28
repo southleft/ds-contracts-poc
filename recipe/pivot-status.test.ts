@@ -1534,10 +1534,22 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV81.inventOverlapZeroForbidden = false;
     },
     (value) => {
-      value.status.input.liveV81.liveExecutionOccurred = true;
+      value.status.input.liveV81.liveExecutionOccurred = false;
     },
     (value) => {
       value.status.input.liveV81.taughtContentOpacityOmitted = false;
+    },
+    (value) => {
+      value.status.input.liveV81.taughtCompileCarryLiveVisibleHeld = false;
+    },
+    (value) => {
+      value.status.input.liveV81.accountingRefusedOpacity = false;
+    },
+    (value) => {
+      value.status.input.liveV81.probeIssued = true;
+    },
+    (value) => {
+      value.status.input.liveV81.mintStayed = true;
     },
   ];
   for (const plant of plants) {

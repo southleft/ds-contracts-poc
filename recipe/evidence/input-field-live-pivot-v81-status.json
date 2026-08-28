@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v81-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; hidden FILL occupancy held on canvas (trailing x=165 not 0); compile-carry live visible held; host omit content opacity held; independent root accounting refused opacity 1 vs live 0; probe not issued; cleanup complete",
   "baseCommit": "11ca5e2e6af42c57235e1931e33dfeae0d06a404",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v81/antecedent-index.json",
@@ -362,16 +362,28 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
   "overallInputSuccess": false,
   "inventPolarPixelOrSpreadValuesForbidden": true,
   "inventPolarContentRowForbidden": true,
   "inventOverlapZeroForbidden": true,
-  "doNotClaimV1Complete": true
+  "doNotClaimV1Complete": true,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v81-attempt-1.json",
+  "attempt1Sha256": "506a1a369fc266b5cffefb42658e2669f57b736a726e013490f960592c302013",
+  "restartAsV81Attempt2WithoutNewTeachingForbidden": true,
+  "taughtWriterHiddenFillOccupancyHeld": true,
+  "taughtContentOpacityOmittedHeld": true,
+  "taughtCompileCarryLiveVisibleHeld": true,
+  "inventHostVisibleFalseForbidden": true,
+  "accountingRefusedOpacity": true,
+  "probeIssued": false,
+  "mintCleaned": true,
+  "mintStayed": false
 }
