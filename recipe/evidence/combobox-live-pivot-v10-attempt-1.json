@@ -1,0 +1,188 @@
+{
+  "artifactVersion": "combobox-live-v10-attempt-1-v1",
+  "status": "failed closed at collapse unsupported structural edit; host trigger binding compile-order teaching cleared; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "c066f579aed6bf311ef62a65cd369bbc5b9fc2dc",
+  "codeCommit": "c066f579aed6bf311ef62a65cd369bbc5b9fc2dc",
+  "antecedentCommit": "7c686fde6eef78409650f8eb8e887aed257f0a88",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host must order combobox/trigger bindings to compile field order so layout.padding.left precedes layout.padding.right, not live extract order or the inherited Input surface list that ranks padding.right first",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "135:318240",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["135:319104", "135:318335", "135:319968", "135:319199"],
+    "muiOptionSetId": "135:318335",
+    "muiComboboxSetId": "135:319104",
+    "antdOptionSetId": "135:319199",
+    "antdComboboxSetId": "135:319968",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true,
+    "stampedOptionAriaProperties": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "16ac222eed03bbff86662dafd282c3d02d77cc1c709603261c211c020fcde575",
+    "hostTriggerBindingCompileOrderTeachingCleared": true,
+    "hostPropertyNameBeforeHashTeachingHeld": true,
+    "invalidAriaDidNotRecur": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[1].children[0].bindings[0].field",
+    "refusedAt": "recipe/recipes/combobox.ts:1738",
+    "hostRecoversComponentRefAs": "combobox@1/option",
+    "hostRecoversHashedPropertyNames": true,
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveExtractHashedKeys": {
+      "0": {
+        "Disabled#135:175988": false,
+        "Label#135:175970": "Ada Lovelace",
+        "Option state": "selected",
+        "Size": "small",
+        "Value#135:175979": "ada"
+      }
+    },
+    "hostRecoveredUnsuffixedProperties": {
+      "Label": "Ada Lovelace",
+      "Value": "ada",
+      "Disabled": false
+    },
+    "valueNamedFromSourceNotInventedFromLabel": true,
+    "measuredTriggerBindings": {
+      "role": "combobox/trigger",
+      "liveFieldOrder": [
+        "cornerRadius.bottomLeft",
+        "cornerRadius.bottomRight",
+        "cornerRadius.topLeft",
+        "cornerRadius.topRight",
+        "fills.0.color",
+        "height.value",
+        "layout.itemSpacing",
+        "layout.padding.left",
+        "layout.padding.right",
+        "strokes.0.paint.color"
+      ],
+      "hostFieldOrder": [
+        "layout.itemSpacing",
+        "layout.padding.left",
+        "layout.padding.right",
+        "layout.height.value",
+        "fills.0.color",
+        "strokes.0.paint.color",
+        "cornerRadius.topLeft",
+        "cornerRadius.topRight",
+        "cornerRadius.bottomRight",
+        "cornerRadius.bottomLeft"
+      ],
+      "compileFieldOrder": [
+        "layout.itemSpacing",
+        "layout.padding.left",
+        "layout.padding.right",
+        "layout.height.value",
+        "fills.0.color",
+        "strokes.0.paint.color",
+        "cornerRadius.topLeft",
+        "cornerRadius.topRight",
+        "cornerRadius.bottomRight",
+        "cornerRadius.bottomLeft"
+      ],
+      "hostMatchesCompile": true
+    },
+    "measuredLeadingBindings": {
+      "role": "combobox/control/leading",
+      "path": "$.children[0].children[0].children[1].children[0]",
+      "liveFieldOrder": [
+        "fills.0.color",
+        "height.value",
+        "width.value"
+      ],
+      "hostFieldOrder": [
+        "fills.0.color",
+        "width.value",
+        "height.value"
+      ],
+      "compileFieldOrder": [
+        "width.value",
+        "height.value",
+        "fills.0.color"
+      ],
+      "inheritedSlotCompileListRanksFillsFirst": true,
+      "bindings0FieldHost": "fills.0.color",
+      "bindings0FieldCompile": "width.value"
+    },
+    "namedFromSource": "v10 host trigger teaching cleared; host trigger bindings now match compile left-then-right; live extract still carries source Label Ada Lovelace, Value ada, Disabled false under Figma keys Label#135:175970 / Value#135:175979 / Disabled#135:175988; host recovers unsuffixed Label / Value / Disabled and collapse passes ARIA; collapse then refuses unsupported structural edit at combobox/control/leading bindings[0].field because host/inherited slot list ranks fills.0.color first while compile emits width.value then height.value then fills.0.color; live extract order is fills then height then width; do not invent ada from Ada Lovelace"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "ce80d73b393affa9adf4d06afc7c87450a1c79f5727ab69d16fc65471527a3c9",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "135:318240",
+    "removedCollectionIds": [
+      "VariableCollectionId:135:318242",
+      "VariableCollectionId:135:319106"
+    ]
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "doNotInventOptionGlyphText": true,
+    "doNotInventValueFromLabel": true,
+    "restartV10Attempt2AsIs": false,
+    "prepareV11": "host must order combobox/control/leading bindings to compile field order so width.value precedes height.value precedes fills.0.color, not live extract order or the inherited fills-first slot list"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}
