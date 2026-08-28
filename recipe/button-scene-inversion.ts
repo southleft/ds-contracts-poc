@@ -317,6 +317,27 @@ export function normalizeButtonObserveScene(
   };
 }
 
+export function canonicalizeButtonVariantAxisOrder(
+  properties: SceneNodeSnapshot["variantGroupProperties"],
+  compileAxes: ReadonlyArray<{ name: string; values: readonly string[] }>,
+): SceneNodeSnapshot["variantGroupProperties"] {
+  if (properties === undefined) return properties;
+  const compileByName = new Map(
+    compileAxes.map((axis) => [axis.name, [...axis.values]]),
+  );
+  return Object.fromEntries(
+    Object.entries(properties).map(([name, axis]) => {
+      const compile = compileByName.get(name);
+      if (compile === undefined) return [name, axis];
+      const observed = axis.values.map(String);
+      if ([...observed].sort().join("\0") !== [...compile].sort().join("\0")) {
+        return [name, axis];
+      }
+      return [name, { ...axis, values: compile }];
+    }),
+  );
+}
+
 export function assignButtonSceneOwnership(
   raw: SceneNodeSnapshot,
   compileRoot: ComponentSetNode,
@@ -343,6 +364,10 @@ export function assignButtonSceneOwnership(
     ...raw,
     ownershipKey: "root",
     semanticRole: raw.semanticRole ?? sceneRoleFromName(raw.name, raw.variantProperties),
+    variantGroupProperties: canonicalizeButtonVariantAxisOrder(
+      raw.variantGroupProperties,
+      compileRoot.variantAxes,
+    ),
     children,
   };
 }
@@ -575,6 +600,7 @@ export function serializeButtonInversionReport(
       "observe role() takes the first :: name segment before testing =, and recovers button/variant/... from live Variant=/Size=/State=/Icons= properties (Input V74 class); live names still have no button/variant/ first segment",
       "live token/{type}/{sanitized} names canonicalize to compile identities only when the v4 writer sanitizer is unique for the same key; collisions are left live",
       "name compare takes the first :: segment (Input V74 / font-provenance class); 300 label/slot/loading names match; set name Button / button@1 proof vs button/set is not first-segment-equal and was carried live",
+      "variantAxis values canonicalize to compile order when the value set matches (Input V72 Size-axis class); order only, no invented values",
       "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
       "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",

@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "edd2de391a283502e79090156cdaa880b9c7c39662f5ef35bb1af74a8649635d",
+    "sha256": "5792f2766e658a8eadb4a7a77b9988ac779b1cf43b2158dbcee5e0c409e70e9f",
     "ok": false,
     "roots": [
       {
@@ -51,11 +51,11 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 8255,
-        "silent": 451,
+        "matched": 8257,
+        "silent": 449,
         "missing": 0,
         "extra": 291,
-        "mismatched": 451,
+        "mismatched": 449,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
@@ -118,12 +118,6 @@
             "mismatched": 144
           },
           {
-            "channel": "variantAxis",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 2
-          },
-          {
             "channel": "width.mode",
             "missing": 0,
             "extra": 0,
@@ -157,11 +151,11 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 8327,
-        "silent": 451,
+        "matched": 8329,
+        "silent": 449,
         "missing": 0,
         "extra": 267,
-        "mismatched": 451,
+        "mismatched": 449,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
@@ -224,12 +218,6 @@
             "mismatched": 144
           },
           {
-            "channel": "variantAxis",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 2
-          },
-          {
             "channel": "width.mode",
             "missing": 0,
             "extra": 0,
@@ -265,6 +253,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "95fafcda614e41a9462c4f6a6088e47dde0df44b663eedb0b417b1575c3d2f0e"
+    "sha256": "b22b54a4aa6abb07ed75a5d8bbbebf5b4b0a20706b287efc9334353e2089f32f"
   }
 }

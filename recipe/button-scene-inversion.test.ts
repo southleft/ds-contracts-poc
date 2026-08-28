@@ -7,6 +7,7 @@ import {
   canonicalizeButtonObserveTokenName,
   compileButtonExpectedScenePlans,
   compileButtonTokenIdentityMap,
+  canonicalizeButtonVariantAxisOrder,
   firstSegmentButtonName,
   forbiddenObserveKeys,
   refuseHistoricalReadbackAsObserve,
@@ -274,6 +275,30 @@ test("name compare takes the first :: segment and does not invent the set name",
   const setName = names.find((fact) => fact.nodeOwnershipKey === "root");
   assert.equal(setName?.value, "button/set");
   assert.notEqual(setName?.value, "Button / button@1 proof");
+});
+
+test("variantAxis order canonicalizes only when the value set matches compile", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const compileAxes = altitude.compileRoot.variantAxes;
+  const size = compileAxes.find((axis) => axis.name === "Size");
+  const variant = compileAxes.find((axis) => axis.name === "Variant");
+  assert.ok(size);
+  assert.ok(variant);
+  const ordered = canonicalizeButtonVariantAxisOrder(
+    {
+      Size: { values: ["medium", "small", "large"] },
+      Variant: { values: ["secondary", "primary"] },
+    },
+    compileAxes,
+  );
+  assert.deepEqual(ordered?.Size.values, [...size.values]);
+  assert.deepEqual(ordered?.Variant.values, [...variant.values]);
+  const drifted = canonicalizeButtonVariantAxisOrder(
+    { Size: { values: ["medium", "xlarge"] } },
+    compileAxes,
+  );
+  assert.deepEqual(drifted?.Size.values, ["medium", "xlarge"]);
 });
 
 test("token name canonicalization is unique same-key sanitization only", () => {

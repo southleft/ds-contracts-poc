@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Button name first-segment teach landed (silent derived, Altitude 451/8706, Fluent 451/8778, not zero); Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Button variant-axis order teach landed (silent derived, Altitude 449/8706, Fluent 449/8778, not zero); Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -29,37 +29,37 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "b8b3934f53f9d07328d838e750fe0bea3dd4588d229b3284e7f3f5d50fcf29da",
+      "indexSha256": "494369da43b5f5c90e80a87bf7e8c399b05cae54dea1fe44478cb6b91e08a42c",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "edd2de391a283502e79090156cdaa880b9c7c39662f5ef35bb1af74a8649635d",
+      "inversionSha256": "5792f2766e658a8eadb4a7a77b9988ac779b1cf43b2158dbcee5e0c409e70e9f",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "95fafcda614e41a9462c4f6a6088e47dde0df44b663eedb0b417b1575c3d2f0e",
+      "receiptSha256": "b22b54a4aa6abb07ed75a5d8bbbebf5b4b0a20706b287efc9334353e2089f32f",
       "roots": {
         "altitude": {
           "setId": "85:7406",
           "expectedFacts": 8706,
-          "matched": 8255,
-          "silent": 451,
+          "matched": 8257,
+          "silent": 449,
           "missing": 0,
           "extra": 291,
-          "mismatched": 451,
+          "mismatched": 449,
           "fixedPointStable": false
         },
         "fluent": {
           "setId": "85:8054",
           "expectedFacts": 8778,
-          "matched": 8327,
-          "silent": 451,
+          "matched": 8329,
+          "silent": 449,
           "missing": 0,
           "extra": 267,
-          "mismatched": 451,
+          "mismatched": 449,
           "fixedPointStable": false
         }
       }
     },
     "blockers": [
       "no attributable human signoff",
-      "scene-derived inversion ran; silent is derived (Altitude 451/8706, Fluent 451/8778) and is not zero",
+      "scene-derived inversion ran; silent is derived (Altitude 449/8706, Fluent 449/8778) and is not zero",
       "scene-derived fixed point is not stable (live set name lacks compile role button/set)",
       "remaining silent is font/set/componentRef/value drift; set name was not first-segment-equal; Roboto/SemiBold were not invented as compile fonts"
     ],
