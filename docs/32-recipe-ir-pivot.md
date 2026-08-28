@@ -854,7 +854,8 @@ lineage; do not patch hashed bytes in place.
 | A5cz | PREPARE INPUT V44. Copy the v43 stack. Do not patch hashed v43 scene-readback, extract, restore, writer, or runtime bytes. Teach host to restore compile binding order on `input-field/message/helper` and `input-field/message/error` (same three compile fields; extract proved both). Do not invent variables. Do not teach FIXED as a fill. | **Done** at `1f1e3f8dbdd14daace494187abf2ca93ac3747db`. Antecedent index SHA-256 `0ad2ab3500e76112f9f5a2b2e68568ef7e2e061427859e0bcbc9fd8421bdc690`. |
 | A5da | AUTHORIZE INPUT V44 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `1f1e3f8dbdd14daace494187abf2ca93ac3747db`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ef435279b3822e80098d120f13277ced8a2bc98c515fd3920460e2a1f93f13c4`; SPKI SHA-256 `2eacc22723b5ea4b15e4a8b0f4bef442e0e09d9721490891975b25d38d128240`. Do not patch hashed v43 or v44 bytes. | **Done** at `e5cd0b502013a596df94168912b6920fb9d92cc3`. |
 | A5db | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:163529`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message helper binding order. Host then refused `$.children[0].children[1].children[0].type.letterSpacing` (MUI `input-field/message/helper` host emits `{unit: percent, value: 0}`; compile omits letterSpacing). Polar has 0 content-row nodes. Do **not** invent a letterSpacing value. Do **not** restart v44 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5dc | PREPARE INPUT V45. Copy the v44 stack. Do not patch hashed v44 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.letterSpacing` on `input-field/message/helper` and `input-field/message/error` that compile never emits (extract proved both). Do not invent variables. Do not invent a letterSpacing value. Do not teach FIXED as a fill. | Open after RECORD. |
+| A5dc | PREPARE INPUT V45. Copy the v44 stack. Do not patch hashed v44 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.letterSpacing` on `input-field/message/helper` and `input-field/message/error` that compile never emits (extract proved both). Do not invent variables. Do not invent a letterSpacing value. Do not teach FIXED as a fill. | **Draft prepared** on top of `03bc86822ad76b7e761bd94796ee95631cc77a55`. |
+| A5dd | AUTHORIZE INPUT V45 as a **separate** later commit. New prepare-era Ed25519 signer. Auth lifecycle stays out of the hash set. Do not patch hashed v44 or v45 bytes. | Open after PREPARE. |
 
 ### B · Button closeout
 
@@ -915,11 +916,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After RECORD INPUT V44 is published:
+After PREPARE INPUT V45 is published:
 
 ```
-# PREPARE INPUT V45 — copy v44; omit message helper/error letterSpacing compile never emits
-# do not patch hashed v44; do not restart v44 attempt 2 as-is
+# AUTHORIZE INPUT V45 — pin prepare-era operator signer
+# then private attestation + Scratch-only preflight; live remains forbidden until those pass
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -2276,7 +2277,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, and v44 attempt 1 failed closed; false** | PREPARE INPUT V45 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, and v44 attempt 1 failed closed; V45 draft prepared; false** | AUTHORIZE INPUT V45 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
