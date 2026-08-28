@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~16:55 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~17:15 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -40,11 +40,16 @@
 > `payload.fills`) on childless owned control/indicator instances such as
 > `131:307949` `combobox/option/selected-indicator`. Cleanup accepted; that
 > Combobox page is gone. Input `115:295378` stayed. Do not restart v4
-> attempt 2 as-is. Combobox live v5 PREPARE copies the v4 stack and teaches
-> that host must omit instance payload when extract `instancePayload` has
-> empty text and empty fills. Keep v2–v4 teachings. Combobox is **not
-> live**. Do not invent a Combobox human grade. Product **v1 is
-> incomplete**.
+> attempt 2 as-is. Combobox live v5 PREPARE `fe8adb06` and AUTHORIZE
+> `1ebe4169` landed. Attempt 1 minted page `131:309595`; restore held 144
+> owned FILL texts. Empty-payload teaching cleared; extract walk accepted.
+> Host `observeSceneFacts` then refused `scene projection lost root`
+> (projected plan defaults to ownershipKey `root`; live extract roots are
+> `combobox` / `option`). Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v5 attempt 2 as-is. Next
+> teaching: host `observeSceneFacts` must project with the live scene root
+> ownershipKey, not default `root`. Combobox is **not live**. Do not invent
+> a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host

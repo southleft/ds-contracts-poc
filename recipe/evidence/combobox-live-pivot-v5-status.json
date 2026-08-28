@@ -1,0 +1,33 @@
+{
+  "artifactVersion": "combobox-live-v5-status-v1",
+  "status": "attempt 1 failed closed at host observeSceneFacts scene projection lost root; empty-payload teaching cleared; extract walk cleared; restore 144 held; writer accepted on new page 131:309595; cleanup accepted; Input 115:295378 stayed; mint did not stay; no Combobox human grade",
+  "antecedent": {
+    "commit": "fe8adb0678c63ee1a08168f1aad6a3e86d732486",
+    "indexPath": "recipe/evidence/combobox-live-pivot-v5/antecedent-index.json",
+    "indexSha256": "faf81c10ab6c71c13bdce77c688232bf4ef436092e81b451de5f435e8b80fe69",
+    "hashSetSha256": "49b332fe59ff52fce2dd6a49cd1f2beaeec61ccdfcf8d7357cd57dbe8b0547e6"
+  },
+  "authorization": {
+    "commit": "1ebe4169ebd6d5f34b297587d6aae19c13d7e8db",
+    "path": "recipe/evidence/combobox-live-pivot-v5/capture-authorization.json",
+    "sha256": "9543fd6bb013d3d2fe9ebc37516d02b1ae93c10dbbd25c4590efe8d6cb79160b",
+    "signingPublicKeySpkiSha256": "0aea5716bd608ca81b971048b7021dbe7e0bdf057dd953012531beceaf8dd235"
+  },
+  "attempt1": {
+    "pageId": "131:309595",
+    "pageRemoved": true,
+    "restoreAccepted": true,
+    "restoredCount": 144,
+    "extractWalkCleared": true,
+    "emptyPayloadTeachingCleared": true,
+    "hostNormalizeRefused": "scene projection lost root",
+    "cleanupAccepted": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}
