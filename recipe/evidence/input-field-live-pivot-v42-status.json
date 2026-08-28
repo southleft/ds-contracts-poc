@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v42-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused surface stroke dashPattern; cleanup complete",
   "baseCommit": "b802dfe51a68eb2a197c56db089c4eb03816035b",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v42/antecedent-index.json",
@@ -196,12 +196,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v42-attempt-1.json",
+  "attempt1Sha256": "4b22e4836cb43ec8c402050de1b6cf773eb9e68a7da706233973733368ae9e17",
+  "restartAsV42Attempt2WithoutSurfaceStrokeDashPatternForbidden": true
 }
