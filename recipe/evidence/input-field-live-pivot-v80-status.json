@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v80-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; hidden FILL occupancy held on canvas (trailing x=165 not 0); host omit content opacity held; recipe collapse refused visible; probe not issued; cleanup complete",
   "baseCommit": "cb03fc893cc13c03caeccaedbb618bb973819857",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v80/antecedent-index.json",
@@ -357,16 +357,26 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
   "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v80-attempt-1.json",
+  "attempt1Sha256": "caff0b43aa96f1b57d8a40d894c22e61ccc88b05e29dd1ef9035bd923f6969d7",
+  "restartAsV80Attempt2WithoutNewTeachingForbidden": true,
   "inventPolarPixelOrSpreadValuesForbidden": true,
   "inventPolarContentRowForbidden": true,
   "inventOverlapZeroForbidden": true,
+  "taughtWriterHiddenFillOccupancyHeld": true,
+  "taughtContentOpacityOmittedHeld": true,
+  "recipeCollapseRefusedVisible": true,
+  "probeIssued": false,
+  "mintCleaned": true,
+  "mintStayed": false,
   "doNotClaimV1Complete": true
 }
