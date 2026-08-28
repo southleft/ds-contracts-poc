@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "59526880c28cb08d6297cb08f6759a8b563ee3e7e8bfd03ba9fb1da6bd724898",
+    "sha256": "6914f603f50e01b358d64293e0cacacb78e4b478693aee8fa2e65ce79fd186b4",
     "ok": false,
     "roots": [
       {
@@ -54,7 +54,7 @@
         "matched": 8557,
         "silent": 149,
         "missing": 0,
-        "extra": 435,
+        "extra": 1,
         "mismatched": 149,
         "duplicateCollapsed": 0,
         "unobserved": 0,
@@ -63,24 +63,6 @@
         "fixedPointStable": false,
         "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
         "channelDrift": [
-          {
-            "channel": "binding",
-            "missing": 0,
-            "extra": 432,
-            "mismatched": 0
-          },
-          {
-            "channel": "cornerRadius",
-            "missing": 0,
-            "extra": 1,
-            "mismatched": 0
-          },
-          {
-            "channel": "fill",
-            "missing": 0,
-            "extra": 1,
-            "mismatched": 0
-          },
           {
             "channel": "layout.mode",
             "missing": 0,
@@ -125,18 +107,18 @@
           }
         ],
         "sampleFailures": [
-          "extra root/children/0#binding@0003",
-          "extra root/children/0#binding@0010",
-          "extra root/children/0/children/0#binding@0001",
-          "extra root/children/1#binding@0003",
-          "extra root/children/1#binding@0010",
-          "extra root/children/1/children/1#binding@0001",
-          "extra root/children/2#binding@0003",
-          "extra root/children/2#binding@0010",
-          "extra root/children/2/children/0#binding@0001",
-          "extra root/children/3#binding@0003",
-          "extra root/children/3#binding@0010",
-          "extra root/children/3/children/1#binding@0001"
+          "extra root#width.value@0000",
+          "mismatched root#name@0000",
+          "mismatched root#role@0000",
+          "mismatched root#layout.mode@0000",
+          "mismatched root#layout.padding@0000",
+          "mismatched root#width.mode@0000",
+          "mismatched root/children/0/children/0#type@0000",
+          "mismatched root/children/1/children/1#type@0000",
+          "mismatched root/children/2/children/0#type@0000",
+          "mismatched root/children/3/children/1#type@0000",
+          "mismatched root/children/4/children/0#type@0000",
+          "mismatched root/children/5/children/1#type@0000"
         ]
       },
       {
@@ -148,7 +130,7 @@
         "matched": 8629,
         "silent": 149,
         "missing": 0,
-        "extra": 411,
+        "extra": 1,
         "mismatched": 149,
         "duplicateCollapsed": 0,
         "unobserved": 0,
@@ -157,24 +139,6 @@
         "fixedPointStable": false,
         "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
         "channelDrift": [
-          {
-            "channel": "binding",
-            "missing": 0,
-            "extra": 408,
-            "mismatched": 0
-          },
-          {
-            "channel": "cornerRadius",
-            "missing": 0,
-            "extra": 1,
-            "mismatched": 0
-          },
-          {
-            "channel": "fill",
-            "missing": 0,
-            "extra": 1,
-            "mismatched": 0
-          },
           {
             "channel": "layout.mode",
             "missing": 0,
@@ -219,18 +183,18 @@
           }
         ],
         "sampleFailures": [
-          "extra root/children/0#binding@0003",
-          "extra root/children/0#binding@0010",
-          "extra root/children/0/children/0#binding@0001",
-          "extra root/children/1#binding@0003",
-          "extra root/children/1#binding@0010",
-          "extra root/children/1/children/1#binding@0001",
-          "extra root/children/2#binding@0003",
-          "extra root/children/2#binding@0010",
-          "extra root/children/2/children/0#binding@0001",
-          "extra root/children/3#binding@0003",
-          "extra root/children/3#binding@0010",
-          "extra root/children/3/children/1#binding@0001"
+          "extra root#width.value@0000",
+          "mismatched root#name@0000",
+          "mismatched root#role@0000",
+          "mismatched root#layout.mode@0000",
+          "mismatched root#layout.padding@0000",
+          "mismatched root#width.mode@0000",
+          "mismatched root/children/0/children/0#type@0000",
+          "mismatched root/children/1/children/1#type@0000",
+          "mismatched root/children/2/children/0#type@0000",
+          "mismatched root/children/3/children/1#type@0000",
+          "mismatched root/children/4/children/0#type@0000",
+          "mismatched root/children/5/children/1#type@0000"
         ]
       }
     ]
@@ -241,6 +205,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "1e5575cf44f926c779aa1949f1a2f32f492fc1c2b7ce4a6e7c4681ba7a2875c2"
+    "sha256": "bdabbccb51df1dc265fb3aeebd4de893c800ee41f15d861a02f99a198d76caa4"
   }
 }

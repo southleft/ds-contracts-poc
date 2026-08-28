@@ -15,7 +15,7 @@
       "matched": 8557,
       "silent": 149,
       "missing": 0,
-      "extra": 435,
+      "extra": 1,
       "mismatched": 149,
       "duplicateCollapsed": 0,
       "unobserved": 0,
@@ -24,24 +24,6 @@
       "fixedPointStable": false,
       "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
       "channelDrift": [
-        {
-          "channel": "binding",
-          "missing": 0,
-          "extra": 432,
-          "mismatched": 0
-        },
-        {
-          "channel": "cornerRadius",
-          "missing": 0,
-          "extra": 1,
-          "mismatched": 0
-        },
-        {
-          "channel": "fill",
-          "missing": 0,
-          "extra": 1,
-          "mismatched": 0
-        },
         {
           "channel": "layout.mode",
           "missing": 0,
@@ -86,18 +68,18 @@
         }
       ],
       "sampleFailures": [
-        "extra root/children/0#binding@0003",
-        "extra root/children/0#binding@0010",
-        "extra root/children/0/children/0#binding@0001",
-        "extra root/children/1#binding@0003",
-        "extra root/children/1#binding@0010",
-        "extra root/children/1/children/1#binding@0001",
-        "extra root/children/2#binding@0003",
-        "extra root/children/2#binding@0010",
-        "extra root/children/2/children/0#binding@0001",
-        "extra root/children/3#binding@0003",
-        "extra root/children/3#binding@0010",
-        "extra root/children/3/children/1#binding@0001"
+        "extra root#width.value@0000",
+        "mismatched root#name@0000",
+        "mismatched root#role@0000",
+        "mismatched root#layout.mode@0000",
+        "mismatched root#layout.padding@0000",
+        "mismatched root#width.mode@0000",
+        "mismatched root/children/0/children/0#type@0000",
+        "mismatched root/children/1/children/1#type@0000",
+        "mismatched root/children/2/children/0#type@0000",
+        "mismatched root/children/3/children/1#type@0000",
+        "mismatched root/children/4/children/0#type@0000",
+        "mismatched root/children/5/children/1#type@0000"
       ]
     },
     {
@@ -109,7 +91,7 @@
       "matched": 8629,
       "silent": 149,
       "missing": 0,
-      "extra": 411,
+      "extra": 1,
       "mismatched": 149,
       "duplicateCollapsed": 0,
       "unobserved": 0,
@@ -118,24 +100,6 @@
       "fixedPointStable": false,
       "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
       "channelDrift": [
-        {
-          "channel": "binding",
-          "missing": 0,
-          "extra": 408,
-          "mismatched": 0
-        },
-        {
-          "channel": "cornerRadius",
-          "missing": 0,
-          "extra": 1,
-          "mismatched": 0
-        },
-        {
-          "channel": "fill",
-          "missing": 0,
-          "extra": 1,
-          "mismatched": 0
-        },
         {
           "channel": "layout.mode",
           "missing": 0,
@@ -180,18 +144,18 @@
         }
       ],
       "sampleFailures": [
-        "extra root/children/0#binding@0003",
-        "extra root/children/0#binding@0010",
-        "extra root/children/0/children/0#binding@0001",
-        "extra root/children/1#binding@0003",
-        "extra root/children/1#binding@0010",
-        "extra root/children/1/children/1#binding@0001",
-        "extra root/children/2#binding@0003",
-        "extra root/children/2#binding@0010",
-        "extra root/children/2/children/0#binding@0001",
-        "extra root/children/3#binding@0003",
-        "extra root/children/3#binding@0010",
-        "extra root/children/3/children/1#binding@0001"
+        "extra root#width.value@0000",
+        "mismatched root#name@0000",
+        "mismatched root#role@0000",
+        "mismatched root#layout.mode@0000",
+        "mismatched root#layout.padding@0000",
+        "mismatched root#width.mode@0000",
+        "mismatched root/children/0/children/0#type@0000",
+        "mismatched root/children/1/children/1#type@0000",
+        "mismatched root/children/2/children/0#type@0000",
+        "mismatched root/children/3/children/1#type@0000",
+        "mismatched root/children/4/children/0#type@0000",
+        "mismatched root/children/5/children/1#type@0000"
       ]
     }
   ],
@@ -207,6 +171,7 @@
     "variantAxis values canonicalize to compile order when the value set matches (Input V72 Size-axis class); order only, no invented values",
     "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
     "strokes.0.weight is surfaced from uniform per-side stroke-weight FLOATs when strokeWeight is absent (Input v18/v19 class); mixed or missing sides are left live; no invented weight",
+    "duplicate mapped fills.N / strokes.N host aliases drop when the paint-color sibling is present with the same variable (Input V24 class); set fills and cornerRadius that compile omits are dropped, not restamped",
     "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
     "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
     "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan"

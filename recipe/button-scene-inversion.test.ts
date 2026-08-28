@@ -10,6 +10,7 @@ import {
   compileButtonExpectedScenePlans,
   compileButtonTokenIdentityMap,
   canonicalizeButtonVariantAxisOrder,
+  dropButtonDuplicateMappedBindings,
   firstSegmentButtonName,
   surfaceButtonUniformStrokeWeight,
   forbiddenObserveKeys,
@@ -302,6 +303,40 @@ test("variantAxis order canonicalizes only when the value set matches compile", 
     compileAxes,
   );
   assert.deepEqual(drifted?.Size.values, ["medium", "xlarge"]);
+});
+
+test("duplicate mapped fills.0 / strokes.0 host aliases drop when the paint sibling matches", () => {
+  const dropped = dropButtonDuplicateMappedBindings([
+    {
+      field: "fills.0",
+      variableName: "imported.button.root.color.secondary",
+      resolvedType: "COLOR",
+    },
+    {
+      field: "fills.0.color",
+      variableName: "imported.button.root.color.secondary",
+      resolvedType: "COLOR",
+    },
+    {
+      field: "strokes.0",
+      variableName: "imported.button.root.border-top-color.secondary",
+      resolvedType: "COLOR",
+    },
+    {
+      field: "strokes.0.paint.color",
+      variableName: "imported.button.root.border-top-color.secondary",
+      resolvedType: "COLOR",
+    },
+    {
+      field: "fills.0",
+      variableName: "some-other-color",
+      resolvedType: "COLOR",
+    },
+  ]);
+  assert.deepEqual(
+    dropped.map((binding) => binding.field),
+    ["fills.0.color", "strokes.0.paint.color", "fills.0"],
+  );
 });
 
 test("strokes.0.weight surfaces only from uniform per-side FLOAT bindings", () => {

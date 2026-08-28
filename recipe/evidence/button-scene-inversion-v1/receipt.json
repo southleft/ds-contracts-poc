@@ -57,7 +57,7 @@
       "matched": 8557,
       "silent": 149,
       "missing": 0,
-      "extra": 435,
+      "extra": 1,
       "mismatched": 149,
       "fixedPointStable": false,
       "ok": false
@@ -69,7 +69,7 @@
       "matched": 8629,
       "silent": 149,
       "missing": 0,
-      "extra": 411,
+      "extra": 1,
       "mismatched": 149,
       "fixedPointStable": false,
       "ok": false
@@ -100,7 +100,7 @@
     },
     "inversion": {
       "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "sha256": "59526880c28cb08d6297cb08f6759a8b563ee3e7e8bfd03ba9fb1da6bd724898"
+      "sha256": "6914f603f50e01b358d64293e0cacacb78e4b478693aee8fa2e65ce79fd186b4"
     },
     "census": {
       "path": "recipe/evidence/button-scene-inversion-v1/census.json",

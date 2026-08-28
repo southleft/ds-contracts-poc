@@ -380,14 +380,36 @@ export function surfaceButtonUniformStrokeWeight(
   ];
 }
 
+export function dropButtonDuplicateMappedBindings(
+  bindings: SceneNodeSnapshot["boundVariables"],
+): SceneNodeSnapshot["boundVariables"] {
+  return bindings.filter((binding) => {
+    const alias = binding.field.match(/^fills\.(\d+)$/)
+      ? `fills.${binding.field.split(".")[1]}.color`
+      : binding.field.match(/^strokes\.(\d+)$/)
+        ? `strokes.${binding.field.split(".")[1]}.paint.color`
+        : undefined;
+    if (alias === undefined) return true;
+    return !bindings.some(
+      (other) =>
+        other !== binding &&
+        other.field === alias &&
+        other.variableName === binding.variableName &&
+        other.resolvedType === binding.resolvedType,
+    );
+  });
+}
+
 export function normalizeButtonObserveScene(
   scene: SceneNodeSnapshot,
   identityByLiveName?: ReadonlyMap<string, string>,
   componentRefByLastSegment?: ReadonlyMap<string, string>,
 ): SceneNodeSnapshot {
+  const isSet = scene.type === "COMPONENT_SET";
   return {
     ...scene,
     name: firstSegmentButtonName(scene.name),
+    ...(isSet ? { fills: undefined, cornerRadius: undefined } : {}),
     ...(scene.componentRef === undefined ||
     scene.componentRef === null ||
     componentRefByLastSegment === undefined
@@ -399,7 +421,7 @@ export function normalizeButtonObserveScene(
           ),
         }),
     boundVariables: surfaceButtonUniformStrokeWeight(
-      scene.boundVariables,
+      dropButtonDuplicateMappedBindings(scene.boundVariables),
       identityByLiveName,
     )
       .filter((binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field))
@@ -711,6 +733,7 @@ export function serializeButtonInversionReport(
       "variantAxis values canonicalize to compile order when the value set matches (Input V72 Size-axis class); order only, no invented values",
       "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
       "strokes.0.weight is surfaced from uniform per-side stroke-weight FLOATs when strokeWeight is absent (Input v18/v19 class); mixed or missing sides are left live; no invented weight",
+      "duplicate mapped fills.N / strokes.N host aliases drop when the paint-color sibling is present with the same variable (Input V24 class); set fills and cornerRadius that compile omits are dropped, not restamped",
       "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
       "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
