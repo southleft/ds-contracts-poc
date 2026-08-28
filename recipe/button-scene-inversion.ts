@@ -334,6 +334,52 @@ const COMPILE_ABSENT_STROKE_SIDE_FIELDS = new Set([
   "strokeLeftWeight",
 ]);
 
+const STROKE_SIDE_FIELDS = [
+  "strokeTopWeight",
+  "strokeRightWeight",
+  "strokeBottomWeight",
+  "strokeLeftWeight",
+] as const;
+
+export function surfaceButtonUniformStrokeWeight(
+  bindings: SceneNodeSnapshot["boundVariables"],
+  identityByLiveName?: ReadonlyMap<string, string>,
+): SceneNodeSnapshot["boundVariables"] {
+  if (
+    bindings.some(
+      (binding) =>
+        binding.field === "strokes.0.weight" || binding.field === "strokeWeight",
+    )
+  ) {
+    return bindings;
+  }
+  const sides = STROKE_SIDE_FIELDS.map((field) =>
+    bindings.find(
+      (binding) => binding.field === field && binding.resolvedType === "FLOAT",
+    ),
+  );
+  if (sides.some((binding) => binding === undefined)) return bindings;
+  const names = sides.map((binding) =>
+    identityByLiveName === undefined
+      ? binding!.variableName
+      : canonicalizeButtonObserveTokenName(
+          binding!.variableName,
+          identityByLiveName,
+        ),
+  );
+  if (names.some((name) => name.length === 0 || name !== names[0])) {
+    return bindings;
+  }
+  return [
+    ...bindings,
+    {
+      field: "strokes.0.weight",
+      variableName: names[0]!,
+      resolvedType: "FLOAT",
+    },
+  ];
+}
+
 export function normalizeButtonObserveScene(
   scene: SceneNodeSnapshot,
   identityByLiveName?: ReadonlyMap<string, string>,
@@ -352,7 +398,10 @@ export function normalizeButtonObserveScene(
             componentRefByLastSegment,
           ),
         }),
-    boundVariables: scene.boundVariables
+    boundVariables: surfaceButtonUniformStrokeWeight(
+      scene.boundVariables,
+      identityByLiveName,
+    )
       .filter((binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field))
       .map((binding) =>
         identityByLiveName === undefined
@@ -661,6 +710,7 @@ export function serializeButtonInversionReport(
       "name compare takes the first :: segment (Input V74 / font-provenance class); 300 label/slot/loading names match; set name Button / button@1 proof vs button/set is not first-segment-equal and was carried live",
       "variantAxis values canonicalize to compile order when the value set matches (Input V72 Size-axis class); order only, no invented values",
       "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
+      "strokes.0.weight is surfaced from uniform per-side stroke-weight FLOATs when strokeWeight is absent (Input v18/v19 class); mixed or missing sides are left live; no invented weight",
       "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
       "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",

@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "28fffbd903e54ecd8feab83ab3f2bb4fef0fb0addca265b5660c5efdffcf6000",
+    "sha256": "59526880c28cb08d6297cb08f6759a8b563ee3e7e8bfd03ba9fb1da6bd724898",
     "ok": false,
     "roots": [
       {
@@ -51,11 +51,11 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 8413,
-        "silent": 293,
+        "matched": 8557,
+        "silent": 149,
         "missing": 0,
-        "extra": 291,
-        "mismatched": 293,
+        "extra": 435,
+        "mismatched": 149,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
@@ -66,8 +66,8 @@
           {
             "channel": "binding",
             "missing": 0,
-            "extra": 288,
-            "mismatched": 144
+            "extra": 432,
+            "mismatched": 0
           },
           {
             "channel": "cornerRadius",
@@ -125,18 +125,18 @@
           }
         ],
         "sampleFailures": [
+          "extra root/children/0#binding@0003",
           "extra root/children/0#binding@0010",
           "extra root/children/0/children/0#binding@0001",
+          "extra root/children/1#binding@0003",
           "extra root/children/1#binding@0010",
           "extra root/children/1/children/1#binding@0001",
+          "extra root/children/2#binding@0003",
           "extra root/children/2#binding@0010",
           "extra root/children/2/children/0#binding@0001",
+          "extra root/children/3#binding@0003",
           "extra root/children/3#binding@0010",
-          "extra root/children/3/children/1#binding@0001",
-          "extra root/children/4#binding@0010",
-          "extra root/children/4/children/0#binding@0001",
-          "extra root/children/5#binding@0010",
-          "extra root/children/5/children/1#binding@0001"
+          "extra root/children/3/children/1#binding@0001"
         ]
       },
       {
@@ -145,11 +145,11 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 8485,
-        "silent": 293,
+        "matched": 8629,
+        "silent": 149,
         "missing": 0,
-        "extra": 267,
-        "mismatched": 293,
+        "extra": 411,
+        "mismatched": 149,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
@@ -160,8 +160,8 @@
           {
             "channel": "binding",
             "missing": 0,
-            "extra": 264,
-            "mismatched": 144
+            "extra": 408,
+            "mismatched": 0
           },
           {
             "channel": "cornerRadius",
@@ -219,18 +219,18 @@
           }
         ],
         "sampleFailures": [
+          "extra root/children/0#binding@0003",
           "extra root/children/0#binding@0010",
           "extra root/children/0/children/0#binding@0001",
+          "extra root/children/1#binding@0003",
           "extra root/children/1#binding@0010",
           "extra root/children/1/children/1#binding@0001",
+          "extra root/children/2#binding@0003",
           "extra root/children/2#binding@0010",
           "extra root/children/2/children/0#binding@0001",
+          "extra root/children/3#binding@0003",
           "extra root/children/3#binding@0010",
-          "extra root/children/3/children/1#binding@0001",
-          "extra root/children/4#binding@0010",
-          "extra root/children/4/children/0#binding@0001",
-          "extra root/children/5#binding@0010",
-          "extra root/children/5/children/1#binding@0001"
+          "extra root/children/3/children/1#binding@0001"
         ]
       }
     ]
@@ -241,6 +241,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "98b0275341ae523537994a06aaa5feb53b66b87f642a79bfa457bf9c7c35e873"
+    "sha256": "1e5575cf44f926c779aa1949f1a2f32f492fc1c2b7ce4a6e7c4681ba7a2875c2"
   }
 }

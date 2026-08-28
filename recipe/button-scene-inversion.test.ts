@@ -11,6 +11,7 @@ import {
   compileButtonTokenIdentityMap,
   canonicalizeButtonVariantAxisOrder,
   firstSegmentButtonName,
+  surfaceButtonUniformStrokeWeight,
   forbiddenObserveKeys,
   refuseHistoricalReadbackAsObserve,
   sceneRoleFromName,
@@ -301,6 +302,74 @@ test("variantAxis order canonicalizes only when the value set matches compile", 
     compileAxes,
   );
   assert.deepEqual(drifted?.Size.values, ["medium", "xlarge"]);
+});
+
+test("strokes.0.weight surfaces only from uniform per-side FLOAT bindings", () => {
+  const sides = [
+    "strokeTopWeight",
+    "strokeRightWeight",
+    "strokeBottomWeight",
+    "strokeLeftWeight",
+  ] as const;
+  const uniform = surfaceButtonUniformStrokeWeight(
+    sides.map((field) => ({
+      field,
+      variableName: "imported.shared.size-1",
+      resolvedType: "FLOAT" as const,
+    })),
+  );
+  assert.deepEqual(
+    uniform.filter((binding) => binding.field === "strokes.0.weight"),
+    [
+      {
+        field: "strokes.0.weight",
+        variableName: "imported.shared.size-1",
+        resolvedType: "FLOAT",
+      },
+    ],
+  );
+  const mixed = surfaceButtonUniformStrokeWeight([
+    {
+      field: "strokeTopWeight",
+      variableName: "imported.shared.size-1",
+      resolvedType: "FLOAT",
+    },
+    {
+      field: "strokeRightWeight",
+      variableName: "imported.shared.size-2",
+      resolvedType: "FLOAT",
+    },
+    {
+      field: "strokeBottomWeight",
+      variableName: "imported.shared.size-1",
+      resolvedType: "FLOAT",
+    },
+    {
+      field: "strokeLeftWeight",
+      variableName: "imported.shared.size-1",
+      resolvedType: "FLOAT",
+    },
+  ]);
+  assert.equal(
+    mixed.some((binding) => binding.field === "strokes.0.weight"),
+    false,
+  );
+  const already = surfaceButtonUniformStrokeWeight([
+    {
+      field: "strokes.0.weight",
+      variableName: "imported.shared.size-1",
+      resolvedType: "FLOAT",
+    },
+    ...sides.map((field) => ({
+      field,
+      variableName: "imported.shared.size-1",
+      resolvedType: "FLOAT" as const,
+    })),
+  ]);
+  assert.equal(
+    already.filter((binding) => binding.field === "strokes.0.weight").length,
+    1,
+  );
 });
 
 test("componentRef canonicalization is unique last-segment same-key only", () => {
