@@ -1388,6 +1388,28 @@ const V47_AUTHORIZATION_SHA256 =
   "ec849b01af1a9c3f0dfeab908eb4c4e121ef0168e7e80c4193ca50ed04e245f6";
 const V47_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "66cdf310038c25480ebb0b0f03f00a581dea826227f3533b9308ce7295365f13";
+const V47_SCENE_READBACK_SHA256_PIN =
+  "8696c4a047e0f6ec8a8a49c78db8ff725a5e4e61afe0e452ad5cd835bf11b49c";
+const V48_ROOT = "recipe/evidence/input-field-live-pivot-v48";
+const V48_PROTOCOL_SHA256 =
+  "dcd15e579d79d6e190c045b31d2cc4ef0b4c75ed1037d3a2bf0d5066b04e3883";
+const V48_PLAN_SHA256 =
+  "63cc096da1b50e443acfa860c38ed681def37cc814898f22e5eb59471cdf6bdc";
+const V48_CAPTURE_MANIFEST_SHA256 =
+  "8e2c742e7e4d631a18563912fef27da9fb92c34e5e91ebbd2ace92b4b2069ede";
+const V48_REQUEST_MANIFEST_SHA256 =
+  "d4ff630050ec246ed100e89a7703cbb2a7d15fe01527b943f08403e49908aabe";
+const V48_INDEX_SHA256 =
+  "02d7172e47b4cb2a465fdc4d1618f2ae1a9b27c24f901dd2a6d55e7d8ce4562c";
+const V48_HASH_SET_SHA256 =
+  "32b57338e4a8bbfcb15adb47190230c780d7040078693c8a9d07354130d1a69c";
+const V48_AUTHORIZATION_TEMPLATE_SHA256 =
+  "8bf76877e81b8324b81ba1dd8eacd370031cf937438f78f0b14a24bf1cad9b52";
+const V48_STATUS_PATH =
+  "recipe/evidence/input-field-live-pivot-v48-status.json";
+const V48_STATUS =
+  "draft antecedent; pending separate authorization; live execution forbidden";
+const V48_BASE_COMMIT = "f37a99bf97ae6547d3cdf8bb5ca7ee29f4fe269c";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -4294,9 +4316,60 @@ export function validatePivotStatus(
       ?.restartAsV47Attempt2WithoutMessageContainerClipsContentOmitForbidden !==
       true ||
     status.input?.liveV47?.humanSignoff !== "pending" ||
-    status.input?.liveV47?.overallInputSuccess !== false
+    status.input?.liveV47?.overallInputSuccess !== false ||
+    status.input?.liveV48?.status !== V48_STATUS ||
+    status.input?.liveV48?.baseCommit !== V48_BASE_COMMIT ||
+    status.input?.liveV48?.protocolSha256 !== V48_PROTOCOL_SHA256 ||
+    status.input?.liveV48?.proofPlanSha256 !== V48_PLAN_SHA256 ||
+    status.input?.liveV48?.captureManifestSha256 !==
+      V48_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV48?.requestManifestSha256 !==
+      V48_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV48?.antecedentIndexSha256 !== V48_INDEX_SHA256 ||
+    status.input?.liveV48?.antecedentHashSetSha256 !== V48_HASH_SET_SHA256 ||
+    status.input?.liveV48?.authorizationTemplateSha256 !==
+      V48_AUTHORIZATION_TEMPLATE_SHA256 ||
+    status.input?.liveV48?.authorizationPresent !== false ||
+    status.input?.liveV48?.authorizationCommitted !== false ||
+    status.input?.liveV48?.authorizationEffective !== false ||
+    status.input?.liveV48?.authorizationLifecycleExcludedFromAntecedentHash !==
+      true ||
+    status.input?.liveV48?.authorizationCanBeAddedWithoutAntecedentRebuild !==
+      true ||
+    status.input?.liveV48?.v47AuthorizationReusable !== false ||
+    status.input?.liveV48?.v47AntecedentBytesUnchanged !== true ||
+    status.input?.liveV48?.v47SceneReadbackUnchanged !== true ||
+    status.input?.liveV48?.v46SceneReadbackUnchanged !== true ||
+    status.input?.liveV48?.taughtMessageContainerClipsContentOmitted !== true ||
+    status.input?.liveV48?.taughtMessageTextDecorationOmitted !== true ||
+    status.input?.liveV48?.taughtMessageTextCaseOmitted !== true ||
+    status.input?.liveV48?.v16WriterBytesUnchanged !== true ||
+    status.input?.liveV48?.v16RestoreBytesUnchanged !== true ||
+    status.input?.liveV48?.v16RuntimeBytesUnchanged !== true ||
+    status.input?.liveV48?.v16ExtractBytesUnchanged !== true ||
+    status.input?.liveV48?.sceneReadbackCarried !== true ||
+    status.input?.liveV48?.carriedV3Verifier !== true ||
+    status.input?.liveV48?.liveHostDoesNotImportSceneReadbackTs !== true ||
+    status.input?.liveV48?.carriedSceneReadback !==
+      "recipe/scene-readback-v48.ts" ||
+    status.input?.liveV48?.carriedV3VerifierPath !==
+      "recipe/input-field-live-v3-verifier-v48.ts" ||
+    status.input?.liveV48?.sourceRoots !== 2 ||
+    status.input?.liveV48?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV48?.captureCells !== 128 ||
+    status.input?.liveV48?.remoteRequests !== 133 ||
+    status.input?.liveV48?.hostPhases !== 3 ||
+    status.input?.liveV48?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
+    status.input?.liveV48?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV48?.attemptsExecuted !== 0 ||
+    status.input?.liveV48?.nextAttempt !== 1 ||
+    status.input?.liveV48?.liveExecutionOccurred !== false ||
+    status.input?.liveV48?.figmaWrites !== 0 ||
+    status.input?.liveV48?.figmaCaptures !== 0 ||
+    status.input?.liveV48?.humanSignoff !== "pending" ||
+    status.input?.liveV48?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4-v47 current status");
+    fail("v3 exhausted/v4-v48 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -4660,6 +4733,13 @@ export function verifyPivotStatus(): void {
     `${V47_ROOT}/antecedent-index.json`,
   );
   const v47Status = readRepositoryJson<Record<string, any>>(V47_STATUS_PATH);
+  const v48Protocol = readRepositoryJson<Record<string, any>>(
+    `${V48_ROOT}/protocol.json`,
+  );
+  const v48Index = readRepositoryJson<Record<string, any>>(
+    `${V48_ROOT}/antecedent-index.json`,
+  );
+  const v48Status = readRepositoryJson<Record<string, any>>(V48_STATUS_PATH);
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -8252,6 +8332,49 @@ export function verifyPivotStatus(): void {
     v47Status.overallInputSuccess !== false
   )
     failures.push("v47 draft antecedent/status mismatch");
+  if (
+    sha256(readRepositoryEvidence(`${V48_ROOT}/protocol.json`)) !==
+      V48_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V48_ROOT}/proof-plan.json`)) !==
+      V48_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V48_ROOT}/capture-manifest.json`)) !==
+      V48_CAPTURE_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V48_ROOT}/request-manifest.json`)) !==
+      V48_REQUEST_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V48_ROOT}/antecedent-index.json`)) !==
+      V48_INDEX_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V48_ROOT}/authorization-template.json`),
+    ) !== V48_AUTHORIZATION_TEMPLATE_SHA256 ||
+    v48Protocol.hostNormalization?.carriedSceneReadback !==
+      "recipe/scene-readback-v48.ts" ||
+    v48Protocol.hostNormalization?.taughtMessageContainerClipsContentOmitted !==
+      true ||
+    v48Protocol.hostNormalization?.taughtMessageTextDecorationOmitted !==
+      true ||
+    v48Protocol.hostNormalization?.v47SceneReadbackUnchanged !== true ||
+    v48Protocol.hostNormalization?.v16ExtractBytesUnchanged !== true ||
+    v48Protocol.execution?.remoteRequests !== 133 ||
+    v48Index.hashSetSha256 !== V48_HASH_SET_SHA256 ||
+    v48Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
+    v48Status.artifactVersion !== "input-live-v48-status-v1" ||
+    v48Status.status !== V48_STATUS ||
+    v48Status.baseCommit !== V48_BASE_COMMIT ||
+    v48Status.antecedent?.commit !== null ||
+    v48Status.authorization?.present !== false ||
+    v48Status.authorization?.committed !== false ||
+    v48Status.authorization?.effective !== false ||
+    v48Status.authorization?.v47AuthorizationReusable !== false ||
+    v48Status.smallestHonestDelta?.taughtMessageContainerClipsContentOmitted !==
+      true ||
+    v48Status.smallestHonestDelta?.v47SceneReadbackUnchanged !== true ||
+    v48Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
+    v48Status.attemptsExecuted !== 0 ||
+    v48Status.liveExecutionOccurred !== false ||
+    v48Status.figmaWrites !== 0 ||
+    v48Status.overallInputSuccess !== false
+  )
+    failures.push("v48 draft antecedent/status mismatch");
   for (const [artifactPath, metadata] of Object.entries(
     v26Index.artifacts ?? {},
   ) as Array<[string, { bytes: number; sha256: string }]>) {
@@ -9095,6 +9218,45 @@ export function verifyPivotStatus(): void {
     V46_SCENE_READBACK_SHA256_PIN
   )
     failures.push("hashed v46 scene-readback restamped while preparing v47");
+  for (const [artifactPath, metadata] of Object.entries(
+    v48Index.artifacts ?? {},
+  ) as Array<[string, { bytes: number; sha256: string }]>) {
+    const artifact = readRepositoryEvidence(artifactPath);
+    if (
+      artifact.byteLength !== metadata.bytes ||
+      sha256(artifact) !== metadata.sha256
+    )
+      failures.push(`v48 indexed artifact hash mismatch: ${artifactPath}`);
+    if (
+      artifactPath.includes("input-field-live-v48-authorization") ||
+      artifactPath.includes("input-field-live-v48-preflight") ||
+      artifactPath.includes("input-field-live-v48-authorized") ||
+      artifactPath.endsWith("capture-authorization.json") ||
+      artifactPath.endsWith("status-index.json")
+    )
+      failures.push(`v48 authorization lifecycle indexed: ${artifactPath}`);
+  }
+  if (
+    !v48Index.artifacts?.["recipe/scene-readback-v48.ts"] ||
+    !v48Index.artifacts?.["recipe/scene-readback-runtime-v48.ts"] ||
+    !v48Index.artifacts?.["recipe/input-field-live-v3-verifier-v48.ts"] ||
+    !v48Index.artifacts?.["recipe/input-field-live-v48-restore.ts"] ||
+    !v48Index.artifacts?.[`${V48_ROOT}/programs/restore-blueprint.js`] ||
+    !v48Index.artifacts?.[`${V48_ROOT}/programs/writer-payload.js`] ||
+    v48Index.artifacts?.["recipe/scene-readback.ts"] ||
+    v48Index.artifacts?.["recipe/scene-readback-v47.ts"] ||
+    v48Index.artifacts?.["recipe/input-field-live-v3-verifier.ts"] ||
+    v48Index.artifacts?.["recipe/input-field-live-v3-verifier-v47.ts"] ||
+    v48Index.artifacts?.["recipe/input-field-live-v47-restore.ts"]
+  )
+    failures.push(
+      "v48 must hash carried scene-readback-v48 and leave hashed v47 restore/runtime out",
+    );
+  if (
+    sha256(readRepositoryEvidence("recipe/scene-readback-v47.ts")) !==
+    V47_SCENE_READBACK_SHA256_PIN
+  )
+    failures.push("hashed v47 scene-readback restamped while preparing v48");
   if (
     sha256(readRepositoryEvidence("recipe/scene-readback-v25.ts")) !==
       V25_SCENE_READBACK_SHA256_PIN ||
