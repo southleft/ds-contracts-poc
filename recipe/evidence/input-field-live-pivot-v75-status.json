@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v75-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; independent root accounting silent-zero; probe Polar reflow/contentFill held; MUI contentFill newly false; probe/usability/restoration failed; cleanup complete",
   "baseCommit": "57867ac50e3a4264d543f8feac6b2ce8f2c0976a",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v75/antecedent-index.json",
@@ -331,12 +331,25 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 5,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v75-attempt-1.json",
+  "attempt1Sha256": "f2f42334e56b92a88837c01285bb55dcc8f1de290c4be43811119c859ed28d61",
+  "restartAsV75Attempt2WithoutRemainingProbeDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "inventPolarContentRowForbidden": true,
+  "taughtProbePolarReflowAgainstContentTextHeld": true,
+  "taughtProbeFirstSegmentRoleHeld": true,
+  "muiContentFillNewlyFalseAfterSplit": true,
+  "accountingSilentZeroBoth": true,
+  "mintCleaned": true,
+  "mintStayed": false,
+  "doNotClaimV1Complete": true
 }
