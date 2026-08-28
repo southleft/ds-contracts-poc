@@ -6544,6 +6544,16 @@ export function validatePivotStatus(
     status.input?.liveV72?.remainingPolarIntrinsicSizeWidthValueDrift !==
       true ||
     status.input?.liveV72?.remainingPolarEffectSpreadValueDrift !== true ||
+    status.input?.liveV72?.polarWidthAndSpreadNamedRequiredFacts !== true ||
+    status.input?.liveV72?.v73ClassificationRequiredCompareDropForbidden !==
+      true ||
+    status.input?.liveV72?.muiSilentZeroBecauseExtractMatchesExpected !==
+      true ||
+    status.input?.liveV72?.writerV17AskedPolar8And2578125AndSpread1And3 !==
+      true ||
+    status.input?.liveV72?.extractV72PolarLeading9Trailing30FocusSpread0 !==
+      true ||
+    status.input?.liveV72?.v73NotOpened !== true ||
     status.input?.liveV72?.humanSignoff !== "pending" ||
     status.input?.liveV72?.overallInputSuccess !== false
   )
@@ -12080,6 +12090,12 @@ export function verifyPivotStatus(): void {
     v72Status.doNotOpenV73ForPolarWidthOrSpreadValues !== true ||
     v72Status.remainingPolarIntrinsicSizeWidthValueDrift !== true ||
     v72Status.remainingPolarEffectSpreadValueDrift !== true ||
+    v72Status.polarWidthAndSpreadNamedRequiredFacts !== true ||
+    v72Status.v73ClassificationRequiredCompareDropForbidden !== true ||
+    v72Status.muiSilentZeroBecauseExtractMatchesExpected !== true ||
+    v72Status.writerV17AskedPolar8And2578125AndSpread1And3 !== true ||
+    v72Status.extractV72PolarLeading9Trailing30FocusSpread0 !== true ||
+    v72Status.v73NotOpened !== true ||
     v72Status.overallInputSuccess !== false
   )
     failures.push("v72 authorization/status mismatch");

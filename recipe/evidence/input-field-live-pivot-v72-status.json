@@ -337,5 +337,11 @@
   "inventPolarPixelOrSpreadValuesForbidden": true,
   "doNotOpenV73ForPolarWidthOrSpreadValues": true,
   "remainingPolarIntrinsicSizeWidthValueDrift": true,
-  "remainingPolarEffectSpreadValueDrift": true
+  "remainingPolarEffectSpreadValueDrift": true,
+  "polarWidthAndSpreadNamedRequiredFacts": true,
+  "v73ClassificationRequiredCompareDropForbidden": true,
+  "muiSilentZeroBecauseExtractMatchesExpected": true,
+  "writerV17AskedPolar8And2578125AndSpread1And3": true,
+  "extractV72PolarLeading9Trailing30FocusSpread0": true,
+  "v73NotOpened": true
 }
