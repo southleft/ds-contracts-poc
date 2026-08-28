@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v67-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused Polar label-row bindings[1].field; cleanup complete",
   "baseCommit": "0ec36dec9aed15dd11b230c5fa373bbe102360a6",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v67/antecedent-index.json",
@@ -300,12 +300,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v67-attempt-1.json",
+  "attempt1Sha256": "c80357afa2fc1802f5b9e2b1a2410ed53e0d375c6dce041d645ed47d479e7436",
+  "restartAsV67Attempt2WithoutLabelRowBindingOrderForbidden": true
 }

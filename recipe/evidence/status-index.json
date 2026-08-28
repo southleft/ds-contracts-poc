@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 authorization declared; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -12346,7 +12346,7 @@
       "restartAsV66Attempt2WithoutSetStrokesOmitForbidden": true
     },
     "liveV67": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused Polar label-row bindings[1].field; cleanup complete",
       "baseCommit": "0ec36dec9aed15dd11b230c5fa373bbe102360a6",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v67/protocol.json",
       "protocolSha256": "004629b0e96461e227f84c660801011b48ea54a17c143f33f649e4225e5b9dfb",
@@ -12525,10 +12525,10 @@
       "carriedSceneReadback": "recipe/scene-readback-v67.ts",
       "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v67.ts",
       "carriedV3VerifierPath": "recipe/input-field-live-v3-verifier-v67.ts",
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 4,
       "figmaCaptures": 0,
       "taughtLabelLetterSpacingOmitted": true,
       "v35AuthorizationReusable": false,
@@ -12667,7 +12667,11 @@
       "authorizationPath": "recipe/evidence/input-field-live-pivot-v67/capture-authorization.json",
       "authorizationSha256": "62288d19db1fd59b51e15077ae0782f46146f6eec2b0d94a54dcf8d69d112294",
       "signingPublicKeySpkiSha256": "0126571b64968a906002cce76976da9435267c714a875788b46b84500b50ebf1",
-      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized",
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v67-attempt-1.json",
+      "attempt1Sha256": "c80357afa2fc1802f5b9e2b1a2410ed53e0d375c6dce041d645ed47d479e7436",
+      "restartAsV67Attempt2WithoutLabelRowBindingOrderForbidden": true
     }
   }
 }
