@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~18:15 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~18:30 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -79,10 +79,12 @@
 > (`combobox/trigger`: live/host `layout.padding.right` then
 > `layout.padding.left`; compile emits left then right). Cleanup
 > accepted; that Combobox page is gone. Input `115:295378` stayed. Do
-> not restart v9 attempt 2 as-is. Next teaching: host must order
-> trigger bindings to compile field order (left before right). Keep
-> v2–v9 teachings. Combobox is **not live**. Do not invent a Combobox
-> human grade. Product **v1 is incomplete**.
+> not restart v9 attempt 2 as-is. Combobox live v10 PREPARE copies the
+> v9 stack and teaches that host must order `combobox/trigger` bindings
+> to compile field order so `layout.padding.left` precedes
+> `layout.padding.right`, not live extract order or the inherited Input
+> surface list. Keep v2–v9 teachings. Combobox is **not live**. Do not
+> invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
