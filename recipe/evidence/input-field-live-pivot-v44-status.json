@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v44-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused message/helper type.letterSpacing; cleanup complete",
   "baseCommit": "81b916f84b9f099eecb03b22d4ce880d11112f2a",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v44/antecedent-index.json",
@@ -204,12 +204,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v44-attempt-1.json",
+  "attempt1Sha256": "a06188219c6ec99ed7f203a86f0b7ef3babd2830441095cb33616510947262e0",
+  "restartAsV44Attempt2WithoutMessageLetterSpacingOmitForbidden": true
 }
