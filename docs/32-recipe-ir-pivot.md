@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~18:20 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~18:15 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -71,12 +71,18 @@
 > option occurrence 0` because host copies `Label#id` keys and collapse
 > looks for unsuffixed `Label` / `Value` / `Disabled`. Cleanup accepted;
 > that Combobox page is gone. Input `115:295378` stayed. Do not restart
-> v8 attempt 2 as-is. Combobox live v9 PREPARE copies the v8 stack and
-> teaches that host `sceneToNormalizedIr` recovers option-instance
-> `Label`, `Value`, and `Disabled` from live Figma component-property
-> keys by the name before `#`, carrying the already-stamped source
-> values. Keep v2–v8 teachings. Combobox is **not live**. Do not invent
-> a Combobox human grade. Product **v1 is incomplete**.
+> v8 attempt 2 as-is. Combobox live v9 PREPARE `9c7d3024` and AUTHORIZE
+> `6e91b90d` landed. Attempt 1 minted page `135:316511`; restore held
+> 144 owned FILL texts. Host name-before-`#` teaching cleared; extract
+> walk accepted. Collapse then refused `unsupported structural edit at
+> $.children[0].children[0].children[1].bindings[1].field`
+> (`combobox/trigger`: live/host `layout.padding.right` then
+> `layout.padding.left`; compile emits left then right). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v9 attempt 2 as-is. Next teaching: host must order
+> trigger bindings to compile field order (left before right). Keep
+> v2–v9 teachings. Combobox is **not live**. Do not invent a Combobox
+> human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
