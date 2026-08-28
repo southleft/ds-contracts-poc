@@ -492,6 +492,9 @@ jobs:
       - name: recipe:input-field:live:v79:check (writer hidden FILL occupancy; hashed v78 scene-readback and v18 writer frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v79:check
+      - name: recipe:input-field:live:v80:check (host omit content opacity; hashed v79 scene-readback and v19 writer frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v80:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
