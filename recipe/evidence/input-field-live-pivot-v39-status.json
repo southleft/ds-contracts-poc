@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v39-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused label-row cornerRadius; cleanup complete",
   "baseCommit": "b487b6c538e8da184db3adbf8f440df81545b226",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v39/antecedent-index.json",
@@ -184,12 +184,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v39-attempt-1.json",
+  "attempt1Sha256": "5dabd78be0179502d726a62e4685aaa1eb3fffbf0a17b5e51e8c11f6fd131904",
+  "restartAsV39Attempt2WithoutLabelRowCornerRadiusForbidden": true
 }

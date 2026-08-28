@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 authorization declared; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -4875,7 +4875,7 @@
       "restartAsV38Attempt2WithoutLabelRowClipsContentForbidden": true
     },
     "liveV39": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused label-row cornerRadius; cleanup complete",
       "baseCommit": "b487b6c538e8da184db3adbf8f440df81545b226",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v39/protocol.json",
       "protocolSha256": "e91f2ec8ef9866b7c59db41635c20f8af8c9556a26bf1456128d98353c9597b9",
@@ -5054,10 +5054,10 @@
       "carriedSceneReadback": "recipe/scene-readback-v39.ts",
       "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v39.ts",
       "carriedV3VerifierPath": "recipe/input-field-live-v3-verifier-v39.ts",
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 4,
       "figmaCaptures": 0,
       "taughtLabelLetterSpacingOmitted": true,
       "v35AuthorizationReusable": false,
@@ -5080,7 +5080,11 @@
       "authorizationPath": "recipe/evidence/input-field-live-pivot-v39/capture-authorization.json",
       "authorizationSha256": "6a22f47efe5e16ec483c2187b43ff6435b49b48cc76e68bdc936409877d26288",
       "signingPublicKeySpkiSha256": "497106364fd559b1ad31dd03b7ced1d4e1efc963dabaad3853b4cecb7ee7ea47",
-      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized",
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v39-attempt-1.json",
+      "attempt1Sha256": "5dabd78be0179502d726a62e4685aaa1eb3fffbf0a17b5e51e8c11f6fd131904",
+      "restartAsV39Attempt2WithoutLabelRowCornerRadiusForbidden": true
     }
   }
 }
