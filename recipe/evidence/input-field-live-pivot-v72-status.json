@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v72-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; independent root accounting silent-mismatched; cleanup complete",
   "baseCommit": "4e1c203dafd8989b513b74efde340f370ebb9812",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v72/antecedent-index.json",
@@ -322,12 +322,20 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v72-attempt-1.json",
+  "attempt1Sha256": "77c2197668f04e45c1811a70750a763cff276a108713dcd01248dee98ba286c0",
+  "restartAsV72Attempt2WithoutPolarValueDriftDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "doNotOpenV73ForPolarWidthOrSpreadValues": true,
+  "remainingPolarIntrinsicSizeWidthValueDrift": true,
+  "remainingPolarEffectSpreadValueDrift": true
 }
