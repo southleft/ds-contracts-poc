@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~16:30 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~16:40 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -27,11 +27,16 @@
 > `SCENE-DIRECT-OWNERSHIP-METADATA:126:304503:envelopeHash` (option-set root
 > lacks `envelopeHash`; writer stamps it on tagged descendants only).
 > Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
-> Do not restart v2 attempt 2 as-is. Combobox live v3 PREPARE teaches extract
-> must not require `envelopeHash` on owned component-set roots (writer
-> `mintSet` already stamps `runIdentity` / `adapterIdentity` / `recipeHash` /
-> `ownershipKey` there). Combobox is **not live**. Do not invent a Combobox
-> human grade. Product **v1 is incomplete**.
+> Do not restart v2 attempt 2 as-is. Combobox live v3 PREPARE `68da7ceb` and
+> AUTHORIZE `9dafd534` landed. Attempt 1 minted page `131:306137`; restore
+> held 144 owned FILL texts. Set-root `envelopeHash` teaching cleared. Extract
+> refused `SCENE-GENERATED-DESCENDANT-DIRECT-KEY:I131:306316;131:306219` (Figma
+> copied option-main `ownershipKey` onto an instance-internal option/label).
+> Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
+> Do not restart v3 attempt 2 as-is. Next teaching: extract must ignore
+> Figma-copied `ownershipKey` on descendants inside an owned INSTANCE.
+> Combobox is **not live**. Do not invent a Combobox human grade. Product
+> **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
