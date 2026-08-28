@@ -40,9 +40,10 @@
 > `payload.fills`) on childless owned control/indicator instances such as
 > `131:307949` `combobox/option/selected-indicator`. Cleanup accepted; that
 > Combobox page is gone. Input `115:295378` stayed. Do not restart v4
-> attempt 2 as-is. Next teaching: host must omit instance payload when
-> extract `instancePayload` has empty text and empty fills. Combobox is
-> **not live**. Do not invent a Combobox human grade. Product **v1 is
+> attempt 2 as-is. Combobox live v5 PREPARE copies the v4 stack and teaches
+> that host must omit instance payload when extract `instancePayload` has
+> empty text and empty fills. Keep v2–v4 teachings. Combobox is **not
+> live**. Do not invent a Combobox human grade. Product **v1 is
 > incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
