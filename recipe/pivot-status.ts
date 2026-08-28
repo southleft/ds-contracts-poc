@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 draft antecedent; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -1854,8 +1854,14 @@ const V62_AUTHORIZATION_TEMPLATE_SHA256 =
 const V62_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v62-status.json";
 const V62_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V62_BASE_COMMIT = "40a22952789673aea76ce4d961a40ada8209011f";
+const V62_ANTECEDENT_COMMIT = "0f6b3f0fe7aa6204a88b99ea5b823d2179ed2cb4";
+const V62_AUTHORIZATION_PATH = `${V62_ROOT}/capture-authorization.json`;
+const V62_AUTHORIZATION_SHA256 =
+  "bd887c496b95c0fe7638b2ff321a437ca7c03c48975abed259ca57e36fcfb3ba";
+const V62_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "b7422fa3bebef2a6482e5ba158cb73a9450c9e8c2ba78afbc15a0c2cf9414ae5";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -5657,9 +5663,16 @@ export function validatePivotStatus(
     status.input?.liveV62?.antecedentHashSetSha256 !== V62_HASH_SET_SHA256 ||
     status.input?.liveV62?.authorizationTemplateSha256 !==
       V62_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV62?.authorizationPresent !== false ||
-    status.input?.liveV62?.authorizationCommitted !== false ||
+    status.input?.liveV62?.antecedentCommit !== V62_ANTECEDENT_COMMIT ||
+    status.input?.liveV62?.authorizationPresent !== true ||
+    status.input?.liveV62?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV62?.authorizationEffective !== false ||
+    status.input?.liveV62?.authorizationPath !== V62_AUTHORIZATION_PATH ||
+    status.input?.liveV62?.authorizationSha256 !== V62_AUTHORIZATION_SHA256 ||
+    status.input?.liveV62?.signingPublicKeySpkiSha256 !==
+      V62_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV62?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV62?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV62?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -10570,9 +10583,16 @@ export function verifyPivotStatus(): void {
     v62Status.artifactVersion !== "input-live-v62-status-v1" ||
     v62Status.status !== V62_STATUS ||
     v62Status.baseCommit !== V62_BASE_COMMIT ||
-    v62Status.antecedent?.commit !== null ||
-    v62Status.authorization?.present !== false ||
-    v62Status.authorization?.committed !== false ||
+    v62Status.antecedent?.commit !== V62_ANTECEDENT_COMMIT ||
+    v62Status.authorization?.present !== true ||
+    v62Status.authorization?.commitStateDerivedByHistory !== true ||
+    v62Status.authorization?.effective !== false ||
+    v62Status.authorization?.path !== V62_AUTHORIZATION_PATH ||
+    v62Status.authorization?.sha256 !== V62_AUTHORIZATION_SHA256 ||
+    v62Status.authorization?.signingPublicKeySpkiSha256 !==
+      V62_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V62_AUTHORIZATION_PATH)) !==
+      V62_AUTHORIZATION_SHA256 ||
     v62Status.smallestHonestDelta?.taughtSetEffectsOmitted !== true ||
     v62Status.smallestHonestDelta?.v61SceneReadbackUnchanged !== true ||
     v62Status.attemptsExecuted !== 0 ||
