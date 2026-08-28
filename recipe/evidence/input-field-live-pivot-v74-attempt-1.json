@@ -1,0 +1,185 @@
+{
+  "artifactVersion": "input-live-v74-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "ac5187720071d454cdefa173d4c2f455bacf53f9",
+  "codeCommit": "ac5187720071d454cdefa173d4c2f455bacf53f9",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "111:247718",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "05a0654618f46df22152870410362bbd44339f767139013ff219bb717488c2e2",
+    "payloadSha256": "f5e1294a09074cf4dfe7509e4a27531a288d8ffb93828664b2b9e92fe7137ce9"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436209,
+    "sha256": "03f9f0d6d73fb0eb8d97108f4d7182b9821e7c45c707a00c12625293dde2e694",
+    "hostNormalizeAccount": true,
+    "payloadKeys": ["pageId", "roots", "variableTable"],
+    "pageId": "111:247718",
+    "marker": null
+  },
+  "v73FailureCleared": {
+    "taughtProbeFirstSegmentRole": true,
+    "rolesExact": 256,
+    "stateSemanticsExact": 256,
+    "stateSemanticsPassedBoth": true
+  },
+  "observedIndependentRootAccounting": {
+    "mui": {
+      "ok": true,
+      "denominator": 23074,
+      "matched": 22811,
+      "codeOnly": 262,
+      "refused": 1,
+      "silent": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "extra": 0
+    },
+    "polaris": {
+      "ok": true,
+      "denominator": 20922,
+      "matched": 20915,
+      "codeOnly": 6,
+      "refused": 1,
+      "silent": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "extra": 0
+    },
+    "fixedPointStableBoth": true,
+    "recipeRefusalDidNotFire": true,
+    "hostNormalizeAccountJournaled": true,
+    "probeIssuedBecauseAccountingPassed": true
+  },
+  "probe": {
+    "issued": true,
+    "operatorSuccess": true,
+    "accepted": false,
+    "rawResponseBytes": 69355,
+    "sha256": "7d940189ee18c3f2a907ab19b7db659a3d7a772d97070a24a8c8e304767656f4",
+    "pageId": "111:247718",
+    "sources": 2,
+    "cells": 256,
+    "sourceFailures": {
+      "mui": {
+        "textPropertiesRestored": false
+      },
+      "polaris": {
+        "reflowPassed": false,
+        "contentFillPassed": false,
+        "textPropertiesRestored": false
+      }
+    },
+    "sourcePasses": {
+      "mui": {
+        "reflowPassed": true,
+        "contentFillPassed": true,
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "adornmentPayloadPassed": true,
+        "stateSemanticsPassed": true,
+        "switchingRestored": true,
+        "exactSceneRestoration": true,
+        "variants": 128,
+        "visitedVariants": 128
+      },
+      "polaris": {
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "adornmentPayloadPassed": true,
+        "stateSemanticsPassed": true,
+        "switchingRestored": true,
+        "exactSceneRestoration": true,
+        "variants": 128,
+        "visitedVariants": 128
+      }
+    },
+    "cellFailures": {
+      "rolesExactFalse": 0,
+      "stateSemanticsExactFalse": 0,
+      "adornmentPayloadExactFalse": 0,
+      "noFakeLayoutFalse": 0,
+      "visibleAreaLossGt0_05": 104,
+      "overlapPixelsGt2": 12,
+      "visibleAreaLossMax": 0.5294117647058824,
+      "overlapPixelsMax": 20,
+      "visibleAreaLossBySource": {
+        "muiOver05": 104,
+        "polarisOver05": 0
+      },
+      "overlapBySource": {
+        "muiOver2": 12,
+        "polarisOver2": 0
+      }
+    },
+    "extractRoles": {
+      "muiContentRow": 128,
+      "polarisContentRow": 0,
+      "muiContentTextFill": 128,
+      "polarisContentTextFill": 128,
+      "muiContentTextFixed": 0,
+      "polarisContentTextFixed": 0
+    },
+    "locus": "recipe/input-field-live-v74-contract.ts:584"
+  },
+  "failure": {
+    "phase": "probe-usability-restoration",
+    "locus": "recipe/input-field-live-v74-contract.ts:584",
+    "messages": [
+      "Input live v12 probe/usability/restoration failed"
+    ],
+    "cause": "Probe first-segment role teaching held: all 256 cells rolesExact=true and stateSemanticsExact=true; both sources stateSemanticsPassed=true. Independent root accounting silent-zero both (MUI matched 22811 silent 0; Polar matched 20915 silent 0). Probe operator succeeded on page 111:247718, then host accept refused validateInputLiveV74ProbePayload. Remaining measured classes: (1) textPropertiesRestored false both sources — Label component-property write/read on the default-variant instance did not change input-field/label TEXT to the probe string; (2) Polar reflowPassed/contentFillPassed false — extract Polar content-row count 0, Polar content texts FILL 128/FIXED 0, not a FIXED leftover; (3) MUI visibleAreaLoss>0.05 on 104/128 (max 0.529; 52 small + 52 medium) and overlapPixels>2 on 12/128 (max 20, all mui/*/placeholder/*/trailing). V73 area/overlap 0 was vacuous because role() dropped every TEXT. Writer accepted 2317 nodes on new page 111:247718 (not 111:242670). Restore accepted (restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0). Extract issued (8436209 bytes, sha256 03f9f0d6d73fb0eb8d97108f4d7182b9821e7c45c707a00c12625293dde2e694). One teaching cannot clear the validator conjunction. Do not invent 9/30/0. Do not restart V74 attempt 2 as-is. Do not claim v1 complete. Cleanup accepted; remainingOwnedNodes 0; Scratch page 111:247718 removed. Mint did not stay. Protocol requestOrder includes cleanup after captures, so a green probe would also have deleted the mint."
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "111:247718",
+    "removedPageNodeId": "111:247718",
+    "complete": true,
+    "scratchPage111_247718PresentAfterCleanup": false
+  },
+  "captures": 0,
+  "figmaWrites": 5,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "mintStayed": false,
+  "mintCleaned": true,
+  "v16AntecedentBytesUnchanged": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterMinted": true,
+  "v73SceneReadbackUnchanged": true,
+  "taughtProbeFirstSegmentRoleHeld": true,
+  "unnamedSourcePxCarriedTeachingHeld": true,
+  "nextAttempt": 2,
+  "restartAsV74Attempt2WithoutRemainingProbeDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "doNotClaimV1Complete": true
+}

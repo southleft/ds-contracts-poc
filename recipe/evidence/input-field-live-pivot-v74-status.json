@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v74-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; independent root accounting silent-zero; probe first-segment role held; probe/usability/restoration failed; cleanup complete",
   "baseCommit": "99211d3f819a109817743a489995cb63a9292331",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v74/antecedent-index.json",
@@ -328,12 +328,22 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 5,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v74-attempt-1.json",
+  "attempt1Sha256": "bfb7d5670c052cca764b4fa3d057920835af5db45ebd99f72a84e64cba67fda4",
+  "restartAsV74Attempt2WithoutRemainingProbeDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "taughtProbeFirstSegmentRoleHeld": true,
+  "accountingSilentZeroBoth": true,
+  "mintCleaned": true,
+  "mintStayed": false,
+  "doNotClaimV1Complete": true
 }
