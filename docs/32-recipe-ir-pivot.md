@@ -951,7 +951,8 @@ lineage; do not patch hashed bytes in place.
 | A5gs | AUTHORIZE INPUT V75 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `f12bf40ba9c81b65f34d25e0c4155be6e29238ce`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ea17c49752ad42bf9e83d197d973ed5ff1b7afeef3998b358006db5e62ea2acd`; SPKI SHA-256 `2748d17cf71e07d7509ffca3fa1983b8067ceb7089e4d4fa63d4f6e914be9924`. Do not patch hashed v16, v17, or v74 bytes. | **Done** at `a4cdca454a193820cfd56a5d17041fa5c8937d1d`. |
 | A5gt | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:252766`, not `111:247718`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `11344f083830cb9e9ab7aa62fe60a7f2481f1c67af173cf9155b3880a33e0651`). Polar teaching held: `reflowPassed`/`contentFillPassed` true; Polar content-row still 0; Polar content texts FILL 128. First-segment role held 256/256. Accounting silent 0/0 both. Probe issued, then host accept refused `validateInputLiveV75ProbePayload` (`contract.ts:584`). Remaining: `textPropertiesRestored` false both; **MUI `contentFillPassed` newly false** (extract MUI content texts FILL 128; probe samples defaultVariant; MUI default placeholder hidden FILL / 24 restore-hidden); MUI clip 104/128 and overlap 12/128 unchanged. Do **not** invent 9/30/0 or a Polar content-row. Do **not** restart V75 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; page `111:252766` removed; mint cleaned. |
 | A5gu | Diagnose V75 remaining classes from on-disk probe + extract before any V76. | **Measured.** See V75 remaining-class diagnosis below. Label bind is the first single-class teaching. |
-| A5gv | PREPARE INPUT V76. Copy the v75 stack. Do not patch hashed v16/v17 writer or hashed v75 scene-readback `49810949…a2c1`. Mint an unfrozen v18 writer that binds TEXT component properties by first-segment role (split ` :: ` before testing `=`), the same class as V74 `role()`. Keep v17 files frozen (`05a06546…c2e2` / `f5e1294a…7ce9`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 first-segment `role()` + V75 Polar predicates. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not teach FIXED. Do not teach contentFill or clip in this prepare. | |
+| A5gv | PREPARE INPUT V76. Copy the v75 stack. Do not patch hashed v16/v17 writer or hashed v75 scene-readback `49810949…a2c1`. Mint an unfrozen v18 writer that binds TEXT component properties by first-segment role (split ` :: ` before testing `=`), the same class as V74 `role()`. Keep v17 files frozen (`05a06546…c2e2` / `f5e1294a…7ce9`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 first-segment `role()` + V75 Polar predicates. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not teach FIXED. Do not teach contentFill or clip in this prepare. | **Done** at `046342fb5a53cb5a0a8fd4a7769141b6b157912e`. Antecedent index SHA-256 `2fe97436ae8dca0b97bd7f95dc052ab0911bf7ae05f6dfdebfebb17a71edd606`. |
+| A5gw | AUTHORIZE INPUT V76 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `046342fb5a53cb5a0a8fd4a7769141b6b157912e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c0fb1c451536d8f6e8d1586530be64a7875ef35e489f010bf24d6ecb4c785349`; SPKI SHA-256 `a2db82fbf07c8aa2f8226b3677508b0e453aa10ec02c44882e1c607ea4ee1d6e`. Do not patch hashed v16, v17, or v75 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. |
 
 ### V74 probe-refuse diagnosis (measured 2026-08-28)
 
@@ -1073,7 +1074,13 @@ One teaching per PREPARE. V76 is class A only.
 
 ### Immediate next command
 
-AUTHORIZE INPUT V76 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent is the V76 PREPARE commit. Auth lifecycle stays out of the hash set. Do not patch hashed v16, v17, or v75 bytes. Do not invent Polar 9/30/0 or a Polar content-row. Do not teach FIXED. Do not claim v1 complete.
+After AUTHORIZE INPUT V76 is published:
+
+```
+npm run recipe:input-field:live:v76:history:verify -- --expect-authorized
+```
+
+Then attestation (private 0600) + Scratch-only live attempt 1. New txn `private/input-live-v76-transaction`. Writer v18 first-segment Label bind only. Keep V73 classification + V74 `role()` + V75 Polar predicates. Do **not** invent 9/30/0 or a Polar content-row. Do **not** teach FIXED. Do **not** restart V75. Do **not** reuse page `111:252766` or `private/input-live-v75-transaction`.
 
 ## Correction task 2 — offline implementation, 2026-08-27
 
