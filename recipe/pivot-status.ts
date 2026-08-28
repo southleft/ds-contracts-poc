@@ -1484,6 +1484,28 @@ const V50_AUTHORIZATION_SHA256 =
   "52eee8c911ca08798a26aaf76d314f3bc92cef213b154228ddc9638213cc0574";
 const V50_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "92fb1475f58d9ca85f327001c03b0ae4bc46bc0bb6db5254da67b12f80ef93ee";
+const V50_SCENE_READBACK_SHA256_PIN =
+  "60920dfdc6bc7ecf292f61f53c35ab2e5c9ef855c141ed40789e3b7a3815797e";
+const V51_ROOT = "recipe/evidence/input-field-live-pivot-v51";
+const V51_PROTOCOL_SHA256 =
+  "6fd3c438b65a030a31be5e23292f08620cb3d5b6d07dc7b3a6ef47e168acdb37";
+const V51_PLAN_SHA256 =
+  "5d95c5eb56cc4c26924a189579453fcb04ffcaa85ba288a449f86324bb6f419c";
+const V51_CAPTURE_MANIFEST_SHA256 =
+  "8cb1c616a305efe9f57df061e4161c6a4663f5d459499852bc7af9335ca8ff53";
+const V51_REQUEST_MANIFEST_SHA256 =
+  "6ffe39ddece0f7b3d7548edd0564c82cc1696520fd449fd7c452dd470b031847";
+const V51_INDEX_SHA256 =
+  "a8ea2199a911f4e5f411efb07741053b11d0ffd4938098d40411e6870a8051cd";
+const V51_HASH_SET_SHA256 =
+  "03d327ea780fa395de4fa79be2d78b47671b3e929f851c1948b0e757807dbfd5";
+const V51_AUTHORIZATION_TEMPLATE_SHA256 =
+  "96dcb9b6971cf94ca53ee8c58652e53844ed8873646296e1baea4f13f819e964";
+const V51_STATUS_PATH =
+  "recipe/evidence/input-field-live-pivot-v51-status.json";
+const V51_STATUS =
+  "draft antecedent; pending separate authorization; live execution forbidden";
+const V51_BASE_COMMIT = "9b5c487f39784cb00bfd88d38a9b03835ede9b66";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -4582,9 +4604,61 @@ export function validatePivotStatus(
       ?.restartAsV50Attempt2WithoutMessageContainerStrokesOmitForbidden !==
       true ||
     status.input?.liveV50?.humanSignoff !== "pending" ||
-    status.input?.liveV50?.overallInputSuccess !== false
+    status.input?.liveV50?.overallInputSuccess !== false ||
+    status.input?.liveV51?.status !== V51_STATUS ||
+    status.input?.liveV51?.baseCommit !== V51_BASE_COMMIT ||
+    status.input?.liveV51?.protocolSha256 !== V51_PROTOCOL_SHA256 ||
+    status.input?.liveV51?.proofPlanSha256 !== V51_PLAN_SHA256 ||
+    status.input?.liveV51?.captureManifestSha256 !==
+      V51_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV51?.requestManifestSha256 !==
+      V51_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV51?.antecedentIndexSha256 !== V51_INDEX_SHA256 ||
+    status.input?.liveV51?.antecedentHashSetSha256 !== V51_HASH_SET_SHA256 ||
+    status.input?.liveV51?.authorizationTemplateSha256 !==
+      V51_AUTHORIZATION_TEMPLATE_SHA256 ||
+    status.input?.liveV51?.authorizationPresent !== false ||
+    status.input?.liveV51?.authorizationCommitted !== false ||
+    status.input?.liveV51?.authorizationEffective !== false ||
+    status.input?.liveV51?.authorizationLifecycleExcludedFromAntecedentHash !==
+      true ||
+    status.input?.liveV51?.authorizationCanBeAddedWithoutAntecedentRebuild !==
+      true ||
+    status.input?.liveV51?.v50AuthorizationReusable !== false ||
+    status.input?.liveV51?.v50AntecedentBytesUnchanged !== true ||
+    status.input?.liveV51?.v50SceneReadbackUnchanged !== true ||
+    status.input?.liveV51?.v49SceneReadbackUnchanged !== true ||
+    status.input?.liveV51?.taughtMessageContainerStrokesOmitted !== true ||
+    status.input?.liveV51?.taughtMessageContainerEffectsOmitted !== true ||
+    status.input?.liveV51?.taughtMessageContainerCornerRadiusOmitted !== true ||
+    status.input?.liveV51?.taughtMessageContainerClipsContentOmitted !== true ||
+    status.input?.liveV51?.v16WriterBytesUnchanged !== true ||
+    status.input?.liveV51?.v16RestoreBytesUnchanged !== true ||
+    status.input?.liveV51?.v16RuntimeBytesUnchanged !== true ||
+    status.input?.liveV51?.v16ExtractBytesUnchanged !== true ||
+    status.input?.liveV51?.sceneReadbackCarried !== true ||
+    status.input?.liveV51?.carriedV3Verifier !== true ||
+    status.input?.liveV51?.liveHostDoesNotImportSceneReadbackTs !== true ||
+    status.input?.liveV51?.carriedSceneReadback !==
+      "recipe/scene-readback-v51.ts" ||
+    status.input?.liveV51?.carriedV3VerifierPath !==
+      "recipe/input-field-live-v3-verifier-v51.ts" ||
+    status.input?.liveV51?.sourceRoots !== 2 ||
+    status.input?.liveV51?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV51?.captureCells !== 128 ||
+    status.input?.liveV51?.remoteRequests !== 133 ||
+    status.input?.liveV51?.hostPhases !== 3 ||
+    status.input?.liveV51?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
+    status.input?.liveV51?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV51?.attemptsExecuted !== 0 ||
+    status.input?.liveV51?.nextAttempt !== 1 ||
+    status.input?.liveV51?.liveExecutionOccurred !== false ||
+    status.input?.liveV51?.figmaWrites !== 0 ||
+    status.input?.liveV51?.figmaCaptures !== 0 ||
+    status.input?.liveV51?.humanSignoff !== "pending" ||
+    status.input?.liveV51?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4-v50 current status");
+    fail("v3 exhausted/v4-v51 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -4969,6 +5043,13 @@ export function verifyPivotStatus(): void {
     `${V50_ROOT}/antecedent-index.json`,
   );
   const v50Status = readRepositoryJson<Record<string, any>>(V50_STATUS_PATH);
+  const v51Protocol = readRepositoryJson<Record<string, any>>(
+    `${V51_ROOT}/protocol.json`,
+  );
+  const v51Index = readRepositoryJson<Record<string, any>>(
+    `${V51_ROOT}/antecedent-index.json`,
+  );
+  const v51Status = readRepositoryJson<Record<string, any>>(V51_STATUS_PATH);
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
   const protocolHash = sha256(
@@ -8735,6 +8816,49 @@ export function verifyPivotStatus(): void {
     v50Status.overallInputSuccess !== false
   )
     failures.push("v50 draft antecedent/status mismatch");
+  if (
+    sha256(readRepositoryEvidence(`${V51_ROOT}/protocol.json`)) !==
+      V51_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V51_ROOT}/proof-plan.json`)) !==
+      V51_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V51_ROOT}/capture-manifest.json`)) !==
+      V51_CAPTURE_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V51_ROOT}/request-manifest.json`)) !==
+      V51_REQUEST_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V51_ROOT}/antecedent-index.json`)) !==
+      V51_INDEX_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V51_ROOT}/authorization-template.json`),
+    ) !== V51_AUTHORIZATION_TEMPLATE_SHA256 ||
+    v51Protocol.hostNormalization?.carriedSceneReadback !==
+      "recipe/scene-readback-v51.ts" ||
+    v51Protocol.hostNormalization?.taughtMessageContainerStrokesOmitted !==
+      true ||
+    v51Protocol.hostNormalization?.taughtMessageContainerEffectsOmitted !==
+      true ||
+    v51Protocol.hostNormalization?.v50SceneReadbackUnchanged !== true ||
+    v51Protocol.hostNormalization?.v16ExtractBytesUnchanged !== true ||
+    v51Protocol.execution?.remoteRequests !== 133 ||
+    v51Index.hashSetSha256 !== V51_HASH_SET_SHA256 ||
+    v51Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
+    v51Status.artifactVersion !== "input-live-v51-status-v1" ||
+    v51Status.status !== V51_STATUS ||
+    v51Status.baseCommit !== V51_BASE_COMMIT ||
+    v51Status.antecedent?.commit !== null ||
+    v51Status.authorization?.present !== false ||
+    v51Status.authorization?.committed !== false ||
+    v51Status.authorization?.effective !== false ||
+    v51Status.authorization?.v50AuthorizationReusable !== false ||
+    v51Status.smallestHonestDelta?.taughtMessageContainerStrokesOmitted !==
+      true ||
+    v51Status.smallestHonestDelta?.v50SceneReadbackUnchanged !== true ||
+    v51Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
+    v51Status.attemptsExecuted !== 0 ||
+    v51Status.liveExecutionOccurred !== false ||
+    v51Status.figmaWrites !== 0 ||
+    v51Status.overallInputSuccess !== false
+  )
+    failures.push("v51 draft antecedent/status mismatch");
   for (const [artifactPath, metadata] of Object.entries(
     v26Index.artifacts ?? {},
   ) as Array<[string, { bytes: number; sha256: string }]>) {
