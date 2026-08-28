@@ -1083,8 +1083,9 @@ Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Aut
 | step | action | exit criterion |
 | --- | --- | --- |
 | C1 | Matched source/legacy benchmark over the frozen 24-cell matrix if still required by this document's comparison contract. Keep the legacy 4/4 over six variants as weak context only. | Source references rendered; legacy comparator re-derived on the same matrix; recipe and legacy reported together. |
-| C2 | Scratch-only live mint on the same recipe-IR + receipts bar, two real libraries. Separate authorize lineage; no Input page collision. | Writer + extract + host normalize/account + gates + captures + cleanup; named or carried; zero silent losses. |
-| C3 | Independent human grade. | **Human gate.** Combobox overall stays false/ungraded until signed. |
+| C1a | Combobox Figma writer inheriting Input host-normalize methods. Combobox identity only. Do not reuse Input `ds.contracts.input.recipe.v5` / `4a074b24-e8503dd5-input-v5`. Do not write page `115:295378`. | **Offline hermetic.** `recipe/combobox-figma-writer.ts` plans and mock-mints 2×(64+8)=144 variants. First-segment bind, hidden-FILL occupancy method, overlay absolute, compile-named set layout, no invented letterSpacing/textCase/textDecoration. `npm run recipe:combobox:check` includes the writer tests. No live mint. |
+| C2 | Scratch-only live mint on the same recipe-IR + receipts bar, two real libraries. Separate authorize lineage; no Input page collision. | Writer exists; live PREPARE/AUTHORIZE/RECORD is **not** opened. Next: inherit Input V85 host-normalize stack on a new page. |
+| C3 | Independent human grade. | **Human gate.** Combobox overall stays false/ungraded until signed. Do not invent a Combobox human grade. |
 
 ### D · Data Table and Calendar
 
@@ -1210,7 +1211,7 @@ V83 extract sha256 `5be43bb66439927d7d051cbc1491e21b6005417a76f01c4ff0ff6c62821a
 
 ### Immediate next command
 
-Input V85 live human grade **passed** (2026-08-28 ~15:37 UTC-5, TJ Pitre, page `115:295378`). Next hill is **Combobox live**: inherit Input host-normalize; new Scratch page; Combobox identity. Do **not** write Input page `115:295378` / sets `115:296805` + `115:298106`. Do **not** call `figma_arrange_component_set` on Input. Safe restore if anything goes wrong: checkpoint `2392869719628549246` (`V85 Input grids OK`). Never restore `2392877528965054592`. Button extras-drop teach landed; silent is still **149/8706** and **149/8778**, extras 1/1. Do **not** ping TJ for Button review. **B3 remains: attributable human signoff on Button**. Stopped on fonts and invented set chrome — do not invent Roboto/SemiBold as compile fonts. Do not invent a Button human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
+Input V85 live human grade **passed** (2026-08-28 ~15:37 UTC-5, TJ Pitre, page `115:295378`). Combobox writer is offline-hermetic (`recipe/combobox-figma-writer.ts`, 144 mock-minted variants). Next hill is **PREPARE Combobox live**: inherit Input host-normalize; new Scratch page; Combobox identity. Do not mint until PREPARE+AUTHORIZE exist. Do **not** write Input page `115:295378` / sets `115:296805` + `115:298106`. Do **not** call `figma_arrange_component_set` on Input. Safe restore if anything goes wrong: checkpoint `2392869719628549246` (`V85 Input grids OK`). Never restore `2392877528965054592`. Button extras-drop teach landed; silent is still **149/8706** and **149/8778**, extras 1/1. Do **not** ping TJ for Button review. **B3 remains: attributable human signoff on Button**. Stopped on fonts and invented set chrome — do not invent Roboto/SemiBold as compile fonts. Do not invent a Button human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
 
 ### Input V85 human signoff and arrange incident (2026-08-28)
 
@@ -2634,10 +2635,12 @@ widget library.
 No source reference was rendered or graded, no Figma/MCP call occurred, and no
 live artifact exists. The old 4/4 recognisable legacy census result over only
 six variants is retained verbatim as weak context, not accepted as the target.
-Combobox overall success remains **false/ungraded/no-live**. Input V85 live
-human grade is now passed; that does not grade Combobox. The next handoff is
-Scratch-only Combobox live on a new page, inheriting Input host-normalize,
-with a Combobox writer identity. Do not invent a Combobox human grade.
+Combobox overall success remains **false/ungraded/no-live**. The Figma writer
+is now offline-hermetic (`recipe/combobox-figma-writer.ts`) and does not reuse
+the Input identity. Input V85 live human grade does not grade Combobox. The
+next handoff is PREPARE/AUTHORIZE/RECORD for Scratch-only Combobox live on a
+new page, inheriting Input host-normalize. Do not invent a Combobox human
+grade.
 
 #### Pivot progress
 
@@ -2645,7 +2648,7 @@ with a Combobox writer identity. Do not invent a Combobox human grade.
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Stopped on fonts and invented set chrome. Do not invent Roboto/SemiBold. |
 | Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28; product v1 incomplete; overall false** | Combobox live next (inherit Input host-normalize; new page). Button leftover still pending (149 silent / fonts + set chrome). Do not invent a Button human grade. Do not claim v1 complete. |
-| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | Scratch-only live inheriting Input host-normalize, then human grade (see Remaining work §C). Do not invent a Combobox human grade. |
+| Combobox    | **offline technical proof passes; writer offline-hermetic; false/ungraded/no-live**                                                                              | Scratch-only live inheriting Input host-normalize, then human grade (see Remaining work §C). Do not invent a Combobox human grade. |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
 
