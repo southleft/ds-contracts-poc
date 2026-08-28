@@ -1,0 +1,4240 @@
+{
+  "artifactVersion": "input-live-v69-capture-manifest-v1",
+  "status": "planned only; authorization and capture pending",
+  "transport": {
+    "encoding": "one PNG base64 payload per signed response",
+    "cellsPerRequest": 1,
+    "requests": 128,
+    "maximumPngBytesPerResponse": 1500000,
+    "maximumRawResponseBytes": 2100000,
+    "rejectTruncationDuplicatesMissing": true,
+    "sampleReduction": false
+  },
+  "cells": [
+    {
+      "index": 0,
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-5f8248559a93c093fa08.png",
+        "sha256": "aefcc710833dd60c4206a22667ee7724293b54f3b48ffff6309f6b786ac6bcc8",
+        "width": 486,
+        "height": 232,
+        "contentBox": {
+          "width": 195,
+          "height": 68.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.2197669298218354,
+        "perceptual": 0.11154858647604134,
+        "pixelInk": 0.11154858647604134
+      }
+    },
+    {
+      "index": 1,
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-35e242e96d81475cea3b.png",
+        "sha256": "0eee71646b24a4a8d18a10f1f8f75a59b7aab548abb4ed1f154ded8dd20dd289",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.11965435225729563,
+        "pixelInk": 0.11965435225729563
+      }
+    },
+    {
+      "index": 2,
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-95a3b7010d163df8e4d8.png",
+        "sha256": "2a15d1285d7002c6fdfeca24a93c8b0cbb89ee8de2aa29214bec939c69110b0c",
+        "width": 486,
+        "height": 232,
+        "contentBox": {
+          "width": 195,
+          "height": 68.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.2197669298218354,
+        "perceptual": 0.10938229379997133,
+        "pixelInk": 0.10938229379997133
+      }
+    },
+    {
+      "index": 3,
+      "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-1458b7721afce10b68e7.png",
+        "sha256": "7d7691f8de414a777c26bf47a427e9c4ebf64fc9642606766442e4ca65e29398",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.12021836995304801,
+        "pixelInk": 0.12021836995304801
+      }
+    },
+    {
+      "index": 4,
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7c913b3df4aa0c8f9ed7.png",
+        "sha256": "54913f6424d935e6b283800350dc7295e3229e6261395575893fc7686d41532b",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.10208951181240448,
+        "pixelInk": 0.10208951181240448
+      }
+    },
+    {
+      "index": 5,
+      "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-78ff0689b1c7722daa9f.png",
+        "sha256": "47446a7cdb765d5b1f39839bb759eabce0860e8dd54cc635a659ac677bb08ad5",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.09536015694282539,
+        "pixelInk": 0.09536015694282539
+      }
+    },
+    {
+      "index": 6,
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-191be0b1242da28e3f5c.png",
+        "sha256": "4e937da0e5a305e74564f8154a0d98f765fa3cb0eff022453d6101814558f823",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.10141052658097519,
+        "pixelInk": 0.10141052658097519
+      }
+    },
+    {
+      "index": 7,
+      "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-d05d3b4cf0d8e9ff8e6c.png",
+        "sha256": "f9c9423f6086c8b00438805b3c7865fe2b953694e0a2f1ff07a6f39ef3afba27",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.09607931490256005,
+        "pixelInk": 0.09607931490256005
+      }
+    },
+    {
+      "index": 8,
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-785ff143213d1d7f8339.png",
+        "sha256": "245665f5195a653d28aee1d635806de78ce083a6da2f3ac6023c123e58f0bb02",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.130692245576381,
+        "pixelInk": 0.130692245576381
+      }
+    },
+    {
+      "index": 9,
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-28e7ed44819ca1cfc4ca.png",
+        "sha256": "98b68ff6a8a8404b962933d435ac626a6cb372b561462ba4947d8bae25b2604b",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.15371765156936557,
+        "pixelInk": 0.15371765156936557
+      }
+    },
+    {
+      "index": 10,
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-808692efccf39f86e383.png",
+        "sha256": "83ba22e1f730b90fe278dc4bed727f69848bb3670767532837ca97808ce837ae",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.13065706187852696,
+        "pixelInk": 0.13065706187852696
+      }
+    },
+    {
+      "index": 11,
+      "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-dfe9b87cb416d8e8034a.png",
+        "sha256": "211a409ccf77497c768623351db20d08b76c6b21ef9c2440358ee849fb67416d",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.1536604400226862,
+        "pixelInk": 0.1536604400226862
+      }
+    },
+    {
+      "index": 12,
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-ffb8a30ceff427298f25.png",
+        "sha256": "8df74459a49bfb9b2eef475dfdbe656d1caca61c71e9467d69a2b93ab2e4fd45",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.1698270324067262,
+        "pixelInk": 0.1698270324067262
+      }
+    },
+    {
+      "index": 13,
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-b4039f05d23308ec639d.png",
+        "sha256": "3c4f6ffb3a6732c09f23192ac8c94072df1152880ccf11da455bec6e7be12ce7",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.18718902745889252,
+        "pixelInk": 0.18718902745889252
+      }
+    },
+    {
+      "index": 14,
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f2fd614809d87a5fcd9a.png",
+        "sha256": "aa6824ed7033dde50ab8ee54cbce37f6dd9c8b47e14d167aaca606718ac3aa41",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.16977035205566215,
+        "pixelInk": 0.16977035205566215
+      }
+    },
+    {
+      "index": 15,
+      "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-ff7263906428f8ed4dfe.png",
+        "sha256": "7fb7adfa6f3a4dd960df2ce21e83ecba1229def617dea1d623a2a7117fce22a0",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.1871212862967661,
+        "pixelInk": 0.1871212862967661
+      }
+    },
+    {
+      "index": 16,
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-b39a1b43065be811c1f3.png",
+        "sha256": "83867811659cc6966b25addc0c4ee33362f8eea74b4803358a94f201f96afd53",
+        "width": 486,
+        "height": 232,
+        "contentBox": {
+          "width": 195,
+          "height": 68.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.2197669298218354,
+        "perceptual": 0.11687705323045294,
+        "pixelInk": 0.11687705323045294
+      }
+    },
+    {
+      "index": 17,
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-fbcf36ad94c08bb933ce.png",
+        "sha256": "b862ca1d678f4f97aa9dc8bf9d60ea967edc85206880c51047f7304832a10972",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.11448334494181775,
+        "pixelInk": 0.11448334494181775
+      }
+    },
+    {
+      "index": 18,
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7b16f3feb40256ce65ed.png",
+        "sha256": "fc5e1f10dbee10831bc00fde4c4d9b0a29086fc6ef54ad3a1690baed64874cba",
+        "width": 486,
+        "height": 232,
+        "contentBox": {
+          "width": 195,
+          "height": 68.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.2197669298218354,
+        "perceptual": 0.11427354663883901,
+        "pixelInk": 0.11427354663883901
+      }
+    },
+    {
+      "index": 19,
+      "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-cf52d032698652aec4e9.png",
+        "sha256": "bc5866037650b3a8d50598c287063036214c9d6c78f1d2b06a3cbb3e81eaf4ad",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.1150848467066712,
+        "pixelInk": 0.1150848467066712
+      }
+    },
+    {
+      "index": 20,
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-a79eb8582c48ebc037fa.png",
+        "sha256": "4b49dd2dcde912e019c92987f13739b0eda3323f9083802d68569544499f605e",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.10596004275026481,
+        "pixelInk": 0.10596004275026481
+      }
+    },
+    {
+      "index": 21,
+      "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f00adb312d0f9ae336db.png",
+        "sha256": "87d1bb317674afa08928b7f32dff4c71317854e533edcb1c8762b3b6d782ea5c",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.08904822401577674,
+        "pixelInk": 0.08904822401577674
+      }
+    },
+    {
+      "index": 22,
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-9d2a3ec9dc6c077f3877.png",
+        "sha256": "b90f9615cedea245b837109dd49a0171f8e4149561f09e10b858ec3e4faf5c4b",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.10516174347247478,
+        "pixelInk": 0.10516174347247478
+      }
+    },
+    {
+      "index": 23,
+      "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-ef9176e62a6a55a2ddd3.png",
+        "sha256": "7a0d24bd12ba82a36ad4a8b7571d69df30017f9a2e0f21e4186c86e485f84c6c",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.08982784642635683,
+        "pixelInk": 0.08982784642635683
+      }
+    },
+    {
+      "index": 24,
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f6082e07a1c4ad98cc73.png",
+        "sha256": "b6c60e381acca382f08f6279ab94bc392ad9bdbeaa894752d414b883d0c72cd4",
+        "width": 486,
+        "height": 232,
+        "contentBox": {
+          "width": 195,
+          "height": 68.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.2197669298218354,
+        "perceptual": 0.11319626421780533,
+        "pixelInk": 0.11319626421780533
+      }
+    },
+    {
+      "index": 25,
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-4ca3be9a08508ec870eb.png",
+        "sha256": "1e944bc0f9a9e4217fe45c1f1f2fa093a9ded460c99d69ee565eec425e3a5333",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.1181920381230898,
+        "pixelInk": 0.1181920381230898
+      }
+    },
+    {
+      "index": 26,
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-3146bae79eb6d7c97214.png",
+        "sha256": "8415e643a23ac2ece9e8386ea4bcc090cad0dd3e4d8e14d9308e47f8926aeb57",
+        "width": 486,
+        "height": 232,
+        "contentBox": {
+          "width": 195,
+          "height": 68.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.2197669298218354,
+        "perceptual": 0.11099656058165176,
+        "pixelInk": 0.11099656058165176
+      }
+    },
+    {
+      "index": 27,
+      "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-1c40a08b85891f331d7c.png",
+        "sha256": "67c792067f73d6f124e55aeb304a594e0c9371d80b18d9306779ed204c5af546",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.11877340053972044,
+        "pixelInk": 0.11877340053972044
+      }
+    },
+    {
+      "index": 28,
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-c3da130f908ae8647b58.png",
+        "sha256": "20032b850f3bde59d047359f299f6e29e491e7feb4143c32f343d71b36f37248",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.10330401260821946,
+        "pixelInk": 0.10330401260821946
+      }
+    },
+    {
+      "index": 29,
+      "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-3bb289e238824b0a3f12.png",
+        "sha256": "d4927e52fa3f0a3b794c488c767167e1a901887c410307d03f5e736481de444e",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.09429492349622146,
+        "pixelInk": 0.09429492349622146
+      }
+    },
+    {
+      "index": 30,
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-c7764f90c73bef74b3c8.png",
+        "sha256": "b9757dccbbe9db6a5aa35d611e4a6be5aa3ad3fb59b6a46edadd565fb3b2cd15",
+        "width": 486,
+        "height": 240,
+        "contentBox": {
+          "width": 195,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.19365080555362202,
+        "perceptual": 0.10257676182510227,
+        "pixelInk": 0.10257676182510227
+      }
+    },
+    {
+      "index": 31,
+      "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7ec37356c14ce86c15e8.png",
+        "sha256": "adc3b93b1d49ca7afef27f13b58486b66a1e0290fc3d10b0ba6c8edc186b298d",
+        "width": 596,
+        "height": 240,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 72.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.06434436450590025,
+        "perceptual": 0.09503422042420209,
+        "pixelInk": 0.09503422042420209
+      }
+    },
+    {
+      "index": 32,
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-674bf6e79e6146ddccdd.png",
+        "sha256": "81e1728c049774586f8dffddb5a66561afe74050076605096bc9167d4a7c9e02",
+        "width": 486,
+        "height": 262,
+        "contentBox": {
+          "width": 195,
+          "height": 83.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.1330074404998753,
+        "perceptual": 0.09837804780659172,
+        "pixelInk": 0.09837804780659172
+      }
+    },
+    {
+      "index": 33,
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-2a0e6bc5d9bb4b8a05dc.png",
+        "sha256": "f389a97a4a80a044bb01f5f465ac282d8208dbec2d44de646f28c5fe60d49cd8",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.11715860479029395,
+        "pixelInk": 0.11715860479029395
+      }
+    },
+    {
+      "index": 34,
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-5f174b286d867288aa48.png",
+        "sha256": "bfa1b4ff562461707991b12ec82e7846725d1fe59506081ad8e073db02208679",
+        "width": 486,
+        "height": 262,
+        "contentBox": {
+          "width": 195,
+          "height": 83.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.1330074404998753,
+        "perceptual": 0.09636400234226322,
+        "pixelInk": 0.09636400234226322
+      }
+    },
+    {
+      "index": 35,
+      "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-fd2a3d06c51444546ddc.png",
+        "sha256": "fd53e751d1b2fe07f2590d43f66b914daf9e58428c08ec3dc807db15a868f8b8",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.11770349242027126,
+        "pixelInk": 0.11770349242027126
+      }
+    },
+    {
+      "index": 36,
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-c5ec62ece92fafa68877.png",
+        "sha256": "adc83a441ef297d916e0fe46b387a61d6427f6d8fff68d50b50d1acd8805e769",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.09539614415635991,
+        "pixelInk": 0.09539614415635991
+      }
+    },
+    {
+      "index": 37,
+      "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-4afed7268e5eae862f82.png",
+        "sha256": "caebb71ef67dd8cb9247d6f88b1c966adceb76aa7b5ec1e94a906704500bd0a2",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.0937424528824448,
+        "pixelInk": 0.0937424528824448
+      }
+    },
+    {
+      "index": 38,
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-9beb0ccef5cbc40e8993.png",
+        "sha256": "dc942e272c2aed05aafc5341716d418ab1d14ad0840141c0f65ea10f408c277b",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.09475127170630454,
+        "pixelInk": 0.09475127170630454
+      }
+    },
+    {
+      "index": 39,
+      "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-8575ba81e101a34afbb7.png",
+        "sha256": "dc645c6d096293e049a8d1a1fb031e62efdd226fb72771a910cda4a2a177a178",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.0944344147491846,
+        "pixelInk": 0.0944344147491846
+      }
+    },
+    {
+      "index": 40,
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f21b2dabea155452acb0.png",
+        "sha256": "03c051b9e1736452a85f52c7dacccf26ad170a48bd5492fbb83f76ad4402855b",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.12938954328887325,
+        "pixelInk": 0.12938954328887325
+      }
+    },
+    {
+      "index": 41,
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-a227d463950f39012551.png",
+        "sha256": "0c472eb464827adb3d8fa8be66dd2b035c84124451a4082b03beee6cdd884555",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.15181108614430175,
+        "pixelInk": 0.15181108614430175
+      }
+    },
+    {
+      "index": 42,
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-cd5a8375cfbb3bff5a98.png",
+        "sha256": "9769bf3f90f1ac2055ec97d06d96dcfeba1c117505e1e07403bdac88615c52a9",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.1293541847412638,
+        "pixelInk": 0.1293541847412638
+      }
+    },
+    {
+      "index": 43,
+      "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-82a8034b27f02c5b32bf.png",
+        "sha256": "bc6ac44d7785d8da40b3aee1d4d7b6551ba658366d50a620f8b491518b27f46b",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.15175551051543532,
+        "pixelInk": 0.15175551051543532
+      }
+    },
+    {
+      "index": 44,
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7b814052ad5b330492bf.png",
+        "sha256": "e79638b516c0eadab342ff24e8275cccf2f584bc2f601a70f0bffa4eac464b2b",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.16676224730005895,
+        "pixelInk": 0.16676224730005895
+      }
+    },
+    {
+      "index": 45,
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7ac214abafc22f26aa69.png",
+        "sha256": "9a40a59da91d32a658c3cfb29f04565f8c3782d44fecf3c0f8655aabc3fd344f",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.1839240908472251,
+        "pixelInk": 0.1839240908472251
+      }
+    },
+    {
+      "index": 46,
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-8da454ef1d0d2ef9deb9.png",
+        "sha256": "3eeaf785db102e606d3116bc0e3462ff98aa6ae9f790df721e18ab7b00bbd30d",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.16670733194416923,
+        "pixelInk": 0.16670733194416923
+      }
+    },
+    {
+      "index": 47,
+      "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-258113e63792f81e430d.png",
+        "sha256": "255349dbfc1171b90e7104abb63deadea8196edab5df6023cb06a20d4c031b9f",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.18385884005677655,
+        "pixelInk": 0.18385884005677655
+      }
+    },
+    {
+      "index": 48,
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-510546d798892412cc16.png",
+        "sha256": "774b8125b6a2054647f18406762da1d7442f278501da2a869ee622e21d06442a",
+        "width": 486,
+        "height": 262,
+        "contentBox": {
+          "width": 195,
+          "height": 83.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.1330074404998753,
+        "perceptual": 0.0958545982751359,
+        "pixelInk": 0.0958545982751359
+      }
+    },
+    {
+      "index": 49,
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-4e97ddecd253c3ccf4af.png",
+        "sha256": "494d912d62aafd57119acbaeaf7f9bd70c1adddccf7d1ff517cc20c64ee214d8",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.11348514184904046,
+        "pixelInk": 0.11348514184904046
+      }
+    },
+    {
+      "index": 50,
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7a4fd93f3207760bed98.png",
+        "sha256": "1c67027bf48918429afa2a4ee1980a0812ab6b37ec0bbfed0b05e93f54ae99e8",
+        "width": 486,
+        "height": 262,
+        "contentBox": {
+          "width": 195,
+          "height": 83.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.1330074404998753,
+        "perceptual": 0.0934354034460742,
+        "pixelInk": 0.0934354034460742
+      }
+    },
+    {
+      "index": 51,
+      "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7eb4c5828d8ef7409d73.png",
+        "sha256": "7d9153b2459d3269954c6da44351f38c53fad1ecf5bf14391cd38b1a3474da23",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.11406586380073463,
+        "pixelInk": 0.11406586380073463
+      }
+    },
+    {
+      "index": 52,
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-d014b82f610f496c28af.png",
+        "sha256": "749d83fbc4fb14ab75eece3dca22a77412d4ace431e7dd88b4f9d70285362de3",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.09877637355102745,
+        "pixelInk": 0.09877637355102745
+      }
+    },
+    {
+      "index": 53,
+      "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-b31bfe66439f90d0b204.png",
+        "sha256": "d470fa578ffbda89719c871ae4b62e336ae36fe8a51b72eca6572dcacaef26e5",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.0889886517713816,
+        "pixelInk": 0.0889886517713816
+      }
+    },
+    {
+      "index": 54,
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-349d7f3a4997557c8cf9.png",
+        "sha256": "8002899441fe70fca2a72c9f2b2f404a83997d5115f229d738895c93e894a8bb",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.0980202585750304,
+        "pixelInk": 0.0980202585750304
+      }
+    },
+    {
+      "index": 55,
+      "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-26c5de171a4c0a5295b9.png",
+        "sha256": "e4d7d279d6808adb5170aaa26f7e26602d1f9ea5d10c48c603f932d144b49d3c",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.08973789022900389,
+        "pixelInk": 0.08973789022900389
+      }
+    },
+    {
+      "index": 56,
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-38bcc54e872cea72fc87.png",
+        "sha256": "ff8f021380a4d27eb0d81412f0a0e0cbb5c2dde40913b32bba3221fe8569acd5",
+        "width": 486,
+        "height": 262,
+        "contentBox": {
+          "width": 195,
+          "height": 83.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.1330074404998753,
+        "perceptual": 0.0999432328314736,
+        "pixelInk": 0.0999432328314736
+      }
+    },
+    {
+      "index": 57,
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-9906f7a8a8c5fdbce633.png",
+        "sha256": "81ddfcaa23ed8382ca0088ef0247003c761b24fc51b8a86611ebd5cd5d479c7d",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.11571863471882868,
+        "pixelInk": 0.11571863471882868
+      }
+    },
+    {
+      "index": 58,
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-a39869a054a48b4fb43a.png",
+        "sha256": "6112e442bfb0a587b27c6296d3cec2121e344ce842a1ba1c7d6892fb9c293d48",
+        "width": 486,
+        "height": 262,
+        "contentBox": {
+          "width": 195,
+          "height": 83.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.1330074404998753,
+        "perceptual": 0.09789930977798583,
+        "pixelInk": 0.09789930977798583
+      }
+    },
+    {
+      "index": 59,
+      "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-3e4b4b5fe7e5c13d90e2.png",
+        "sha256": "23b6fa536e1335f3c19d46947860d037cfcd61540525ea59e4d2da392669d6b9",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.11628014627258468,
+        "pixelInk": 0.11628014627258468
+      }
+    },
+    {
+      "index": 60,
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-d0e1f258d714d450c0f5.png",
+        "sha256": "ee8988ac2d45fba32468b1d2105a69e85ed2b77521d4f573dbc2b2a9fa834294",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.0965701890429844,
+        "pixelInk": 0.0965701890429844
+      }
+    },
+    {
+      "index": 61,
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-288925e994671496b0d4.png",
+        "sha256": "aca24c6b3a27eb0db7c7d4a28e347d9da8290f35e463a363ee6a89df587ff244",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.09269152888041188,
+        "pixelInk": 0.09269152888041188
+      }
+    },
+    {
+      "index": 62,
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-a88e4dd5a034d22048fb.png",
+        "sha256": "5485004c8b02a32ae3c69161c15f5ef501d431623b5ebf4e4142ce29235de6ab",
+        "width": 486,
+        "height": 270,
+        "contentBox": {
+          "width": 195,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.15169961184910377,
+        "perceptual": 0.0958797847643608,
+        "pixelInk": 0.0958797847643608
+      }
+    },
+    {
+      "index": 63,
+      "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "mui",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-805c37fbdc4cdc4acc87.png",
+        "sha256": "bf3c84500f2a380d3c9e7be2487cc2574c88e2a0a9f7bbb3c21d84317e07fc5f",
+        "width": 596,
+        "height": 270,
+        "contentBox": {
+          "width": 250.984375,
+          "height": 87.90625
+        }
+      },
+      "legacy": {
+        "geometry": 0.02239317080138202,
+        "perceptual": 0.09340266604447381,
+        "pixelInk": 0.09340266604447381
+      }
+    },
+    {
+      "index": 64,
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7b9ffecf85594b52dba9.png",
+        "sha256": "72194d0640c5c86e8a1373e79958b40eb628fa0296e6bd56a2ac76f6f2f28399",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.5821324641511164,
+        "pixelInk": 0.5821324641511164
+      }
+    },
+    {
+      "index": 65,
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-287a0252574ba1a111dc.png",
+        "sha256": "f0ee65ef2d594ff73484a90f6e31cfd15a1d9d943b9978ec3b5ca95ec89b146e",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.5883127532306296,
+        "pixelInk": 0.5883127532306296
+      }
+    },
+    {
+      "index": 66,
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-2a6a6d51266c456461a1.png",
+        "sha256": "3202013a7cb27f5aadf13e317e087c64c499db5bed2ce23b5fdee7c64458b3c4",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.5822538989499706,
+        "pixelInk": 0.5822538989499706
+      }
+    },
+    {
+      "index": 67,
+      "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-c4214f1d417c79141444.png",
+        "sha256": "286799e6ec36709b9808f968815311302b2df7b149bea07d9e1d7f6a7e3b31fe",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.5884162124836008,
+        "pixelInk": 0.5884162124836008
+      }
+    },
+    {
+      "index": 68,
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-d67052c5a42889d7e2be.png",
+        "sha256": "26c88f37f76a86ba9cb18dff32396497c5a109ea6767b049730f3946d63f4e37",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.5745006760790876,
+        "pixelInk": 0.5745006760790876
+      }
+    },
+    {
+      "index": 69,
+      "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-9c9f891b32f95122b96d.png",
+        "sha256": "d26df25224b5979cb795c6edca3ba03153e2fafea81d871ec1b827fbc77a94e3",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.5829519669372187,
+        "pixelInk": 0.5829519669372187
+      }
+    },
+    {
+      "index": 70,
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-1b16afed810008ba1e6f.png",
+        "sha256": "6d875b2747a44b3a03a96eafe7df1d376b688681b41a95348ef6065043feece1",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.5746221108779418,
+        "pixelInk": 0.5746221108779418
+      }
+    },
+    {
+      "index": 71,
+      "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-5391c95401cb34396f91.png",
+        "sha256": "670dfb3749c33c64a3e709dffbdd1e9b95f872ce32fc554e3b5ec99a9c51f73b",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.5830554261901899,
+        "pixelInk": 0.5830554261901899
+      }
+    },
+    {
+      "index": 72,
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-a666456ec217d2ac06ba.png",
+        "sha256": "8e0ec81edc25c409e989b370b6a34aaa4a72ed7d73fb9cc588420a6ce57bf2ef",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6289123801220575,
+        "pixelInk": 0.6289123801220575
+      }
+    },
+    {
+      "index": 73,
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f5c34c99ccc47a2ef047.png",
+        "sha256": "706ad9bac1d587367d411a22cbe625babaa2c670b3d2cf3bdd33604ff3de7e27",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.628533531409168,
+        "pixelInk": 0.628533531409168
+      }
+    },
+    {
+      "index": 74,
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-d4b04a5b4c14d09a7199.png",
+        "sha256": "0b4c7044fa40c57d0dc4a7a6bb90afd4e1301259519a2bc2b0bbbc7870d23bd6",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6290338149209117,
+        "pixelInk": 0.6290338149209117
+      }
+    },
+    {
+      "index": 75,
+      "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-37c2144db3e7ca3e140a.png",
+        "sha256": "4804c93668ee77a64422c765a04d14a6f81cfb3a6eefd92073eb4488472cea1b",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.6286369906621392,
+        "pixelInk": 0.6286369906621392
+      }
+    },
+    {
+      "index": 76,
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-50cdbce6549665d1c8d4.png",
+        "sha256": "10f6053721a740c23ac88808763001e178914dec66cbbb1937d5c6b43bc2b5dd",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6370492900734837,
+        "pixelInk": 0.6370492900734837
+      }
+    },
+    {
+      "index": 77,
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7d3f842f6c70ae09d4dc.png",
+        "sha256": "eaf25d27607ff56667c6771564b6d4d3384b8acc2292a2543888a95c2fff612a",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.6399651156621392,
+        "pixelInk": 0.6399651156621392
+      }
+    },
+    {
+      "index": 78,
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-48638ba7397ec6304c20.png",
+        "sha256": "5cc52e8e8a32aeb63beda6840dc38e08110b09d9813278a188374b973b23808e",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6371707248723378,
+        "pixelInk": 0.6371707248723378
+      }
+    },
+    {
+      "index": 79,
+      "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f44d18d33cd909c554e8.png",
+        "sha256": "7dec63441dcbb31ffd9057f54aea31c3116f5dcda1dfd0c8f3e2fe166ea89658",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.6400685749151104,
+        "pixelInk": 0.6400685749151104
+      }
+    },
+    {
+      "index": 80,
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-ba89d604915c8cbfbdbe.png",
+        "sha256": "9c4172e848f61c5938e1b9244b888e7d07bff8c644c2c7bc63c8626095fd8449",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 215,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.13198562798594385,
+        "perceptual": 0.6193774131274131,
+        "pixelInk": 0.6193774131274131
+      }
+    },
+    {
+      "index": 81,
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-ec7a2dfdb0ded23f6fd6.png",
+        "sha256": "daad7ea160db6a2d461197c01d1e6bb58ca557d77b95e463bbab1f4273f45087",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.21206423168006217,
+        "perceptual": 0.6185271646859083,
+        "pixelInk": 0.6185271646859083
+      }
+    },
+    {
+      "index": 82,
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-2c6599d4d42fed889db7.png",
+        "sha256": "82c1220ecf0e6407ff3e94939f306a1499283c5d35f4f7103a01531e936bb8d8",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 215,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.13198562798594385,
+        "perceptual": 0.6194988479262673,
+        "pixelInk": 0.6194988479262673
+      }
+    },
+    {
+      "index": 83,
+      "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-52bad4a7f3706ad5c6db.png",
+        "sha256": "717def74e6a7c5e20f1ae7192d4820fe35f508a43298393aee44e66f03ad0bac",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.21206423168006217,
+        "perceptual": 0.6186306239388795,
+        "pixelInk": 0.6186306239388795
+      }
+    },
+    {
+      "index": 84,
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-8d4f127fc750fda21cb4.png",
+        "sha256": "49a54ab6a4dd625a2319affdeebc0bed37ec7fa97041d08282b9ee3db6d14a85",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 215,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.13198562798594385,
+        "perceptual": 0.6175667891393698,
+        "pixelInk": 0.6175667891393698
+      }
+    },
+    {
+      "index": 85,
+      "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-803b479d70de1e2580b6.png",
+        "sha256": "a057d803fc3f113f6ef4107bc330c228931d44572f74ef0e49656ad47662ba1d",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.21206423168006217,
+        "perceptual": 0.6171477079796266,
+        "pixelInk": 0.6171477079796266
+      }
+    },
+    {
+      "index": 86,
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-dc9f58544360eae39426.png",
+        "sha256": "2e86426f069965960287834b1826cbb9469a1c9352ce6d0b6f9a1d5ba6384928",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 215,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.13198562798594385,
+        "perceptual": 0.617688223938224,
+        "pixelInk": 0.617688223938224
+      }
+    },
+    {
+      "index": 87,
+      "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-e950efea4aba7b7e53e1.png",
+        "sha256": "73ab4b5713829eb2ea93fbeeec25775054e5f0f53efc86dd1362c02dfcbb2203",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.21206423168006217,
+        "perceptual": 0.6172511672325975,
+        "pixelInk": 0.6172511672325975
+      }
+    },
+    {
+      "index": 88,
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-abf8a4eec59a71bc1e4b.png",
+        "sha256": "15225364e2ccbbb6351b7d356fb8b64b47fa83848d10afc55297d8680df06941",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6146889400921659,
+        "pixelInk": 0.6146889400921659
+      }
+    },
+    {
+      "index": 89,
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-42a9195d9c67764951cc.png",
+        "sha256": "4ec85d9f40c6107afaa3f8e054748a69cef4f5ea0fd1884e1ac67c3570e72da8",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.6132560483870968,
+        "pixelInk": 0.6132560483870968
+      }
+    },
+    {
+      "index": 90,
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-31b071adcb120218ab6d.png",
+        "sha256": "41ddacd3fc0af2b86313d9045ce5c3b8d774804ed20f7f98cd3efc850f37c96f",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6148103748910201,
+        "pixelInk": 0.6148103748910201
+      }
+    },
+    {
+      "index": 91,
+      "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-37631c2398028ab8fff0.png",
+        "sha256": "12cdc7f1b4f1f086034d734d9ebe0da969e314b243dbfc3579a6eee9907c6c40",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.613359507640068,
+        "pixelInk": 0.613359507640068
+      }
+    },
+    {
+      "index": 92,
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-c458c0b567fb26e60cd2.png",
+        "sha256": "6f7ae7ef3837fa6df093b439ec25bc2b300fb81406d4a345a466ba4c51964dbf",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6125934113837339,
+        "pixelInk": 0.6125934113837339
+      }
+    },
+    {
+      "index": 93,
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-28bca3eaf576b2e9112c.png",
+        "sha256": "7c04e91c281da9f6738831d277fbe8ba466e4214f3c2efb9120b7ad7bf808f03",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.6115032098896435,
+        "pixelInk": 0.6115032098896435
+      }
+    },
+    {
+      "index": 94,
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-b778157d42fd761f5b86.png",
+        "sha256": "b265ff2c6c5a3676708c6b23784e8123a4bb6c48333881155904366469f7d9a2",
+        "width": 518,
+        "height": 248,
+        "contentBox": {
+          "width": 211,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.12733446519524616,
+        "perceptual": 0.6127148461825881,
+        "pixelInk": 0.6127148461825881
+      }
+    },
+    {
+      "index": 95,
+      "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "small",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-555bb004342c1877fa88.png",
+        "sha256": "471a270a12f753af04094b2f0e6e8c28e99d3c52d625ab5e7475c0d543d37baa",
+        "width": 608,
+        "height": 248,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 76
+        }
+      },
+      "legacy": {
+        "geometry": 0.20891327244978267,
+        "perceptual": 0.6116066691426145,
+        "pixelInk": 0.6116066691426145
+      }
+    },
+    {
+      "index": 96,
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-6dbb810c28929b974210.png",
+        "sha256": "4e01db31bff1ebbcc0c47b01d449c060615f8d119a08f13a89cc66dcefcaa357",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.5623240707455585,
+        "pixelInk": 0.5623240707455585
+      }
+    },
+    {
+      "index": 97,
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-c2945f71e9c3b23d1668.png",
+        "sha256": "b3bb74ae1db307be4695a86c21ea1580c83e22d06a2e48dba2eb8cf755a4bc13",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.5723166678855143,
+        "pixelInk": 0.5723166678855143
+      }
+    },
+    {
+      "index": 98,
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-523732d7b4a63b792b14.png",
+        "sha256": "f610505148d248935bc440ac0aaa882b890838b73958c024bd01fa4d34025d73",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.5624381458596336,
+        "pixelInk": 0.5624381458596336
+      }
+    },
+    {
+      "index": 99,
+      "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-69674cc0462b020dc967.png",
+        "sha256": "31a709a52196009471e80dd903f570f5fdc7b54171907da9d8b18fe07fbdbf21",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.5724138568807295,
+        "pixelInk": 0.5724138568807295
+      }
+    },
+    {
+      "index": 100,
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-5d6a9d3404d7d2dd8def.png",
+        "sha256": "af6b151a7fd62568a9eb5e7eb49b1a91e1c881fdbb22fdca4b9e4d1f752a6f48",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.553898166725504,
+        "pixelInk": 0.553898166725504
+      }
+    },
+    {
+      "index": 101,
+      "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-438015a9154cfc242ca8.png",
+        "sha256": "62c342f1e3dd7acddc2548217e3b4591bfdc1d210cf1f0b3970178e9255fcb6e",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.5664956014876907,
+        "pixelInk": 0.5664956014876907
+      }
+    },
+    {
+      "index": 102,
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-ca5b6da7683ad98f9b37.png",
+        "sha256": "fef166345ce4e5d3f883199928ffe115e053068f68f023803d86e3e79467a313",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.5540122418395791,
+        "pixelInk": 0.5540122418395791
+      }
+    },
+    {
+      "index": 103,
+      "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "default",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "default",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-2e9c222d4cc8eb0249cc.png",
+        "sha256": "6a83e925b899db9c28df1e00b3bcfe263ec49a57f5b07f5655ca6fd56156a5a0",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.566592790482906,
+        "pixelInk": 0.566592790482906
+      }
+    },
+    {
+      "index": 104,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7a0560f2fdc690781e8a.png",
+        "sha256": "5ad28305223d10251939913d088b251c065b8356b8cd563253b00566a74ef2ef",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.62877106002106,
+        "pixelInk": 0.62877106002106
+      }
+    },
+    {
+      "index": 105,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-5dddbee0192f29e66c30.png",
+        "sha256": "0b56317b0b875800208aa7988751a2eb2135dcb2851fdd662d6d33caeb9af39a",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6285287081339713,
+        "pixelInk": 0.6285287081339713
+      }
+    },
+    {
+      "index": 106,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f027c90cc7da0bd0df6e.png",
+        "sha256": "2f9e0713d1b9ceebc76a2a68438e61f3c57e0fb3f7b16e81be2b2674ec16b59d",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.6288851351351351,
+        "pixelInk": 0.6288851351351351
+      }
+    },
+    {
+      "index": 107,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-d886382c6a9cd29dca17.png",
+        "sha256": "4c193d5c4002ca13753e318dbe39ea0b8989dc89575d0e212901440b8dc943db",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6286258971291866,
+        "pixelInk": 0.6286258971291866
+      }
+    },
+    {
+      "index": 108,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-d3c384ca4c161fb09ed4.png",
+        "sha256": "fefafe26c9683447cde2615b49b632a75cc3830c1e76143dea394faa689bce5b",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.6376323563823563,
+        "pixelInk": 0.6376323563823563
+      }
+    },
+    {
+      "index": 109,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-f303d93296adfcd04916.png",
+        "sha256": "d80d9ca81d89485f155c633b574edf226164300a17718206c4041a8651d5f034",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6404187848883574,
+        "pixelInk": 0.6404187848883574
+      }
+    },
+    {
+      "index": 110,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-18f0d07106936ea63ffb.png",
+        "sha256": "b920db6c6c6ca25a469fdcb0fc5c606c1bbfeac4313e1152a720ff24cb6f95e3",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.6377464314964314,
+        "pixelInk": 0.6377464314964314
+      }
+    },
+    {
+      "index": 111,
+      "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "focus-visible",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "focus-visible",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-58749ace7e6a3c50d735.png",
+        "sha256": "34f4cf97b9391139d61df84b0e95d538aeeadef1feccd7fa2eb2c15d0b111b99",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6405159738835726,
+        "pixelInk": 0.6405159738835726
+      }
+    },
+    {
+      "index": 112,
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-59073bd99cfaecd81842.png",
+        "sha256": "6389ce73c26a317ab3f1a3ad14fab0d6683fbb5d79a56c33e703bc39eba3f3bf",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 215,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.12153427967381455,
+        "perceptual": 0.6194541944541944,
+        "pixelInk": 0.6194541944541944
+      }
+    },
+    {
+      "index": 113,
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-da8654e75628628f19db.png",
+        "sha256": "c9cfd530aeb3ff3681b133d28e5d85322640bc01f7ceec459640d5d48383657c",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.20161288336793287,
+        "perceptual": 0.6188073165869219,
+        "pixelInk": 0.6188073165869219
+      }
+    },
+    {
+      "index": 114,
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-e957794d83fc7f0bf886.png",
+        "sha256": "2f2490a4fc83128b0bf6fd8985188f241e07146663e31698a659806138c92a40",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 215,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.12153427967381455,
+        "perceptual": 0.6195682695682695,
+        "pixelInk": 0.6195682695682695
+      }
+    },
+    {
+      "index": 115,
+      "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-c925059896fc53ef2c72.png",
+        "sha256": "d5e05d24374ddd48a3f9d1e72a555a1aaa91f0c1854c42cb681207bd7d0a4417",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.20161288336793287,
+        "perceptual": 0.6189045055821372,
+        "pixelInk": 0.6189045055821372
+      }
+    },
+    {
+      "index": 116,
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-901eb1d271b23ac8ff4b.png",
+        "sha256": "e283802266112d88c48109271684eab36b696a04dcf182132182f46447e8cf9a",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 215,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.12153427967381455,
+        "perceptual": 0.6174856674856675,
+        "pixelInk": 0.6174856674856675
+      }
+    },
+    {
+      "index": 117,
+      "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-00d0a539042876cc29f5.png",
+        "sha256": "85e48947dfaa5df338cc30d19d590145083d19dd4b7a34a41daa7827eef001bf",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.20161288336793287,
+        "perceptual": 0.6173725328947368,
+        "pixelInk": 0.6173725328947368
+      }
+    },
+    {
+      "index": 118,
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-1f719add48c5f93413fe.png",
+        "sha256": "49d12648475adfb3146692f101ee28c558ec80ac2c3d476bee4185151292b4bf",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 215,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.12153427967381455,
+        "perceptual": 0.6175997425997426,
+        "pixelInk": 0.6175997425997426
+      }
+    },
+    {
+      "index": 119,
+      "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "error",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "error",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-e13abbc02be056644a3c.png",
+        "sha256": "dc454bf2552e5145f9eca1109427b23322ae6586a678a8f585963b91bb889371",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 260.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.20161288336793287,
+        "perceptual": 0.6174697218899522,
+        "pixelInk": 0.6174697218899522
+      }
+    },
+    {
+      "index": 120,
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-8b22386d9df88469ff45.png",
+        "sha256": "c82e4605a80c7246f84c0afa193794d61acd0c926fd71b9da5407b9d91dc8d09",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.614051714051714,
+        "pixelInk": 0.614051714051714
+      }
+    },
+    {
+      "index": 121,
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-7cffa7d70ca82dbb80c0.png",
+        "sha256": "b0561252a96058242e37711c1de19965949af0f066dc36970c572bfc9074104b",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6126825408692185,
+        "pixelInk": 0.6126825408692185
+      }
+    },
+    {
+      "index": 122,
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-643cf7651b8589be2c16.png",
+        "sha256": "5d0dd7531ab905d42c1bd0f05c9520ba15cc55015fa094bd92c86b5551012bdc",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.6141657891657891,
+        "pixelInk": 0.6141657891657891
+      }
+    },
+    {
+      "index": 123,
+      "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "placeholder",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-254293a1a95bb0f88317.png",
+        "sha256": "26f19958972b0841ea7aecad1bb1d4d9407afd956c1ee7e7704b1462a8cf0ae4",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6127797298644337,
+        "pixelInk": 0.6127797298644337
+      }
+    },
+    {
+      "index": 124,
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-129810521974fa4058a6.png",
+        "sha256": "9574dbd5cc0864ba0a56b727c0697002e18979fedc696fcf0baa60d2f1f6a6ed",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.6121606996606996,
+        "pixelInk": 0.6121606996606996
+      }
+    },
+    {
+      "index": 125,
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "false",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-23496aa807748552afe4.png",
+        "sha256": "518f8f2b9468d48292a7905040a5c21d2abea34565295d31e0cbbce3ccedab75",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6110895135566188,
+        "pixelInk": 0.6110895135566188
+      }
+    },
+    {
+      "index": 126,
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "none"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "none"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-347ceba1d31ffeeb403c.png",
+        "sha256": "2073defe23b4ec9a4326a52bc80ea39bf131786ca6f47a24f061dac51ff0a50b",
+        "width": 518,
+        "height": 264,
+        "contentBox": {
+          "width": 211,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.11688311688311688,
+        "perceptual": 0.6122747747747748,
+        "pixelInk": 0.6122747747747748
+      }
+    },
+    {
+      "index": 127,
+      "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "axes": {
+        "size": "medium",
+        "state": "disabled",
+        "content": "value",
+        "required": "true",
+        "adornments": "both"
+      },
+      "strata": {
+        "source": "polaris",
+        "state": "disabled",
+        "adornment": "both"
+      },
+      "reference": {
+        "path": "recipe/evidence/input-field-comparison-v3/source-reference/cell-a175254523aabc6f4d3c.png",
+        "sha256": "c32deed253d855c6d7f48d1a6b686cef21ae893a0b559e0463e6739fc2b4cdd3",
+        "width": 608,
+        "height": 264,
+        "contentBox": {
+          "width": 256.78125,
+          "height": 84
+        }
+      },
+      "legacy": {
+        "geometry": 0.19846192413765337,
+        "perceptual": 0.6111867025518342,
+        "pixelInk": 0.6111867025518342
+      }
+    }
+  ],
+  "cellsSha256": "d3b89283cc9aef81363cc598222b2f8acb98f2136d73b1489a3dc6453b150fed"
+}
