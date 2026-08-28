@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 draft antecedent; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -11391,7 +11391,7 @@
       "restartAsV63Attempt2WithoutSetLayoutModeRewriteForbidden": true
     },
     "liveV64": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "5aad4d905912bea70f4704109b9b27e4c0764e11",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v64/protocol.json",
       "protocolSha256": "257c23c25e6083d7e8fd4f9c05271c8e18043c990425ef5325c8fb1df1e29261",
@@ -11406,7 +11406,7 @@
       "antecedentHashSetSha256": "86956d80d0d3da748692831a72840f4ba47efc0e500520d27112f7c7b953fd7a",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v64/authorization-template.json",
       "authorizationTemplateSha256": "5bec15ba35421e02e89eaec70d8767391090bee59c6a3636b3063603e0ad6de4",
-      "authorizationPresent": false,
+      "authorizationPresent": true,
       "authorizationEffective": false,
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
@@ -11692,7 +11692,13 @@
       "taughtSetLayoutModeHorizontal": true,
       "v63AuthorizationReusable": false,
       "v63AntecedentBytesUnchanged": true,
-      "v63SceneReadbackUnchanged": true
+      "v63SceneReadbackUnchanged": true,
+      "antecedentCommit": "efcc7cf17dbd06f108dbe5edbcbee119067ca91d",
+      "authorizationCommitStateDerivedByHistory": true,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v64/capture-authorization.json",
+      "authorizationSha256": "bf69bca502af34653721726d153480c4b7be9f3639adf6c4b3924f9f53ccc2cf",
+      "signingPublicKeySpkiSha256": "00d3469d4b98e5bc80422104ac796a3b5bd6b96b8ad141b4ab425631e58efe6a",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
     }
   }
 }
