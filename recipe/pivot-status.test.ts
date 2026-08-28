@@ -1014,6 +1014,22 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV56.restartAsV56Attempt2WithoutRequiredIndicatorBindingCompileOrderForbidden =
         false;
     },
+    (value) => {
+      value.status.input.liveV57.authorizationPresent = true;
+    },
+    (value) => {
+      value.status.input.liveV57.overallInputSuccess = true;
+    },
+    (value) => {
+      value.status.input.liveV57.taughtRequiredIndicatorBindingCompileOrder =
+        false;
+    },
+    (value) => {
+      value.status.input.liveV57.v56SceneReadbackUnchanged = false;
+    },
+    (value) => {
+      value.status.input.liveV57.v16ExtractBytesUnchanged = false;
+    },
   ];
   for (const plant of plants) {
     const value = fixtures();
