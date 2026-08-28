@@ -1,0 +1,166 @@
+{
+  "artifactVersion": "input-live-v73-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "a82b7add1df00cf58ae6372d558590831225e7a2",
+  "codeCommit": "a82b7add1df00cf58ae6372d558590831225e7a2",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "111:242670",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "05a0654618f46df22152870410362bbd44339f767139013ff219bb717488c2e2",
+    "payloadSha256": "f5e1294a09074cf4dfe7509e4a27531a288d8ffb93828664b2b9e92fe7137ce9"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436209,
+    "sha256": "eaf6f0367463c5231f27ae4d862713ea7cb6e408ec12d03cbed79d6d6fb57319",
+    "hostNormalizeAccount": true,
+    "payloadKeys": ["pageId", "roots", "variableTable"],
+    "pageId": "111:242670",
+    "marker": null
+  },
+  "v72FailureCleared": {
+    "unnamedSourcePxCarriedNotRequiredEquals": true,
+    "polarIntrinsicSizeWidthNotRequiredEquals": true,
+    "polarEffectSpreadNotRequiredEquals": true
+  },
+  "observedIndependentRootAccounting": {
+    "mui": {
+      "ok": true,
+      "denominator": 23074,
+      "matched": 22811,
+      "codeOnly": 262,
+      "refused": 1,
+      "silent": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "extra": 0
+    },
+    "polaris": {
+      "ok": true,
+      "denominator": 20922,
+      "matched": 20915,
+      "codeOnly": 6,
+      "refused": 1,
+      "silent": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "extra": 0
+    },
+    "fixedPointStableBoth": true,
+    "recipeRefusalDidNotFire": true,
+    "hostNormalizeAccountJournaled": true,
+    "probeIssuedBecauseAccountingPassed": true
+  },
+  "probe": {
+    "issued": true,
+    "operatorSuccess": true,
+    "accepted": false,
+    "rawResponseBytes": 68089,
+    "pageId": "111:242670",
+    "sources": 2,
+    "cells": 256,
+    "sourceFailures": {
+      "mui": {
+        "stateSemanticsPassed": false,
+        "textPropertiesRestored": false
+      },
+      "polaris": {
+        "reflowPassed": false,
+        "contentFillPassed": false,
+        "stateSemanticsPassed": false,
+        "textPropertiesRestored": false
+      }
+    },
+    "sourcePasses": {
+      "mui": {
+        "reflowPassed": true,
+        "contentFillPassed": true,
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "adornmentPayloadPassed": true,
+        "switchingRestored": true,
+        "exactSceneRestoration": true,
+        "variants": 128,
+        "visitedVariants": 128
+      },
+      "polaris": {
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "adornmentPayloadPassed": true,
+        "switchingRestored": true,
+        "exactSceneRestoration": true,
+        "variants": 128,
+        "visitedVariants": 128
+      }
+    },
+    "cellFailures": {
+      "rolesExactFalse": 256,
+      "stateSemanticsExactFalse": 256,
+      "adornmentPayloadExactFalse": 0,
+      "noFakeLayoutFalse": 0,
+      "visibleAreaLossGt0_05": 0,
+      "overlapPixelsGt2": 0,
+      "visibleAreaLossMax": 0,
+      "overlapPixelsMax": 0
+    },
+    "locus": "recipe/input-field-live-v73-contract.ts:584"
+  },
+  "failure": {
+    "phase": "probe-usability-restoration",
+    "locus": "recipe/input-field-live-v73-contract.ts:584",
+    "messages": [
+      "Input live v12 probe/usability/restoration failed"
+    ],
+    "cause": "Unnamed-source width/spread teaching held. Independent root accounting silent-zero both (MUI matched 22811 silent 0; Polar matched 20915 silent 0). Probe was issued and the operator succeeded, then host accept refused validateInputLiveV73ProbePayload. Measured probe: all 256 cells rolesExact=false and stateSemanticsExact=false; adornmentPayloadExact and noFakeLayout true; visibleAreaLoss max 0; overlapPixels max 0. MUI source stateSemanticsPassed=false and textPropertiesRestored=false. Polar source those plus reflowPassed=false and contentFillPassed=false. Writer accepted 2317 nodes on new page 111:242670 (not 110:239941). Restore accepted (restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0). Extract issued (8436209 bytes, sha256 eaf6f0367463c5231f27ae4d862713ea7cb6e408ec12d03cbed79d6d6fb57319). Cleanup accepted; remainingOwnedNodes 0; Scratch page 111:242670 absent after cleanup. Do not invent 9/30/0. Do not restart V73 attempt 2 as-is. Do not claim v1 complete. Mint did not stay."
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "111:242670",
+    "removedPageNodeId": "111:242670",
+    "complete": true,
+    "scratchPage111_242670PresentAfterCleanup": false
+  },
+  "captures": 0,
+  "figmaWrites": 5,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "mintStayed": false,
+  "mintCleaned": true,
+  "v16AntecedentBytesUnchanged": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterMinted": true,
+  "v72SceneReadbackUnchanged": true,
+  "v73SceneReadbackTaughtUnnamedSourcePxCarried": true,
+  "nextAttempt": 2,
+  "restartAsV73Attempt2WithoutProbeDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "doNotClaimV1Complete": true
+}

@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v73-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; independent root accounting silent-zero; probe/usability/restoration failed; cleanup complete",
   "baseCommit": "b7ca64184884bdddc9393056de87a0ae248d6501",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v73/antecedent-index.json",
@@ -325,12 +325,22 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 5,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v73-attempt-1.json",
+  "attempt1Sha256": "3f75d932b1a73b334aaf37ff588789f81c1d5a187441ba800ed539639426e9ff",
+  "restartAsV73Attempt2WithoutProbeDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "unnamedSourcePxCarriedTeachingHeld": true,
+  "accountingSilentZeroBoth": true,
+  "mintCleaned": true,
+  "mintStayed": false,
+  "doNotClaimV1Complete": true
 }

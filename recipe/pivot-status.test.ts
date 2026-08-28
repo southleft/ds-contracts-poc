@@ -1317,6 +1317,16 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV73.authorizationPresent = false;
     },
     (value) => {
+      value.status.input.liveV73.accountingSilentZeroBoth = false;
+    },
+    (value) => {
+      value.status.input.liveV73.mintStayed = true;
+    },
+    (value) => {
+      value.status.input.liveV73.restartAsV73Attempt2WithoutProbeDiagnosisForbidden =
+        false;
+    },
+    (value) => {
       value.status.input.liveV73.inventPolarPixelOrSpreadValuesForbidden = false;
     },
   ];
