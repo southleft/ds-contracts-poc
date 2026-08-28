@@ -474,6 +474,9 @@ jobs:
       - name: recipe:input-field:live:v73:check (carry unnamed source px; hashed v72 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v73:check
+      - name: recipe:input-field:live:v74:check (probe first-segment role; hashed v73 scene-readback and v17 writer frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v74:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
