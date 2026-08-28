@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~18:40 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~18:50 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -88,11 +88,13 @@
 > (`combobox/control/leading`: host/inherited slot list ranks
 > `fills.0.color` first; compile emits `width.value` then `height.value`
 > then `fills.0.color`). Cleanup accepted; that Combobox page is gone.
-> Input `115:295378` stayed. Do not restart v10 attempt 2 as-is. Next
-> teaching: host must order leading-slot bindings to compile field order
-> (width then height then fill). Keep v2–v10 teachings. Combobox is
-> **not live**. Do not invent a Combobox human grade. Product **v1 is
-> incomplete**.
+> Input `115:295378` stayed. Do not restart v10 attempt 2 as-is.
+> Combobox live v11 PREPARE copies the v10 stack and teaches that host
+> must order `combobox/control/leading` bindings to compile field order
+> so `width.value` precedes `height.value` precedes `fills.0.color`,
+> not live extract order or the inherited fills-first slot list. Keep
+> v2–v10 teachings. Combobox is **not live**. Do not invent a Combobox
+> human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
