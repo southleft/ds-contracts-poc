@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v30-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused content-row clipsContent; cleanup complete",
   "baseCommit": "0bde28a6429369d0f6c612d831ea0c14374ba732",
   "antecedent": {
     "commit": "fdad5d7bb2920b8688946b8a5d735b337a843551",
@@ -148,12 +148,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v30-attempt-1.json",
+  "attempt1Sha256": "73e6e05ac51b71b391ee9d0e49bbf00fa9017b9c566bbc9a22abe15774aaaed9",
+  "restartAsV30Attempt2WithoutContentRowClipsContentForbidden": true,
   "humanSignoff": "pending",
   "overallInputSuccess": false
 }

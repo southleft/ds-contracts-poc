@@ -423,10 +423,24 @@
 > only. Do not invent a textDecoration value. Do not invent a variable.
 > Do not teach FIXED as a fill. V16 writer, restore, runtime, and
 > extract bytes stay frozen. Hashed v29 scene-readback stays frozen.
-> Authorization pins antecedent
-> `fdad5d7bb2920b8688946b8a5d735b337a843551`. Live execution remains
-> forbidden until runtime security prerequisites pass. Do not restart
-> v29 attempt 2 as-is.
+> Authorization is published at
+> `babb6e5db745e7eb36037b069dce8a54983f2dec`. V30 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), cleanup persisted,
+> hashed measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse `type.textDecoration`. Host
+> collapse then refused
+> `$.children[0].children[0].children[0].clipsContent`. After
+> scene-readback-v30 the MUI first-variant content placeholder has 3
+> host bindings in compile order starting at `type.fontSize`, host
+> `height.mode` hug, no `type.letterSpacing`, no `type.textCase`, and no
+> `type.textDecoration`. Host emits content-row `clipsContent` true;
+> compile omits clipsContent on content-row. Content width stayed MUI
+> 128/128 FILL and Polaris 128/128 FILL. Polar has 0 content-row nodes.
+> Do not teach FIXED as a fill. Do not invent a variable. Do not invent
+> a clipsContent value. Do not restart v30 attempt 2 as-is. The next
+> lineage must not patch hashed v30 scene-readback bytes. Cleanup
+> accepted; owned Input pages are gone; no captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
 > retained, but the human grade is not attributable and the historical live
@@ -754,7 +768,9 @@ lineage; do not patch hashed bytes in place.
 | A5bh | AUTHORIZE INPUT V29 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `b54a2ea24a7172cb0caa9a9072ed2fd40f661ad0`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `5d4850eaed7f8ab57d36040e23dd66b1f4eaec78ca43cb292575fdaec06c4a01`; SPKI SHA-256 `29af345ee115b69609c97c301a4732259a63ee3a4313c4445d08662b3c4cf130`. Do not patch hashed v28 or v29 bytes. | **Done** at `a19285e26afed6121b7e6987838e434d1881ebca`. |
 | A5bi | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `type.textCase` (content textCase now omitted). Host then refused `$.children[0].children[0].children[0].children[0].type.textDecoration` (MUI hidden `input-field/content/placeholder` host emits none; compile omits textDecoration). Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** invent a textDecoration value. Do **not** restart v29 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
 | A5bj | PREPARE INPUT V30. Copy the v29 stack. Do not patch hashed v29 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content/placeholder and content/value `type.textDecoration` that compile never emits. Do not invent variables. Do not invent a textDecoration value. Do not teach FIXED as a fill. | **Done** at `fdad5d7bb2920b8688946b8a5d735b337a843551`. Antecedent index SHA-256 `2d571d91900c421993e46c0ecceb251b576dcba78ebefd3132f4bc175e67909b`. |
-| A5bk | AUTHORIZE INPUT V30 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `fdad5d7bb2920b8688946b8a5d735b337a843551`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `5c489d305e69f1a850874c8962bba1dbf053eeab19ba3ba3e8781052ec63c8a5`; SPKI SHA-256 `52b157be09d08c7296c062267663c604e152ee7c368e0620a26490a5a872fc60`. Do not patch hashed v29 or v30 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v30 file fails closed, open v31. |
+| A5bk | AUTHORIZE INPUT V30 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `fdad5d7bb2920b8688946b8a5d735b337a843551`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `5c489d305e69f1a850874c8962bba1dbf053eeab19ba3ba3e8781052ec63c8a5`; SPKI SHA-256 `52b157be09d08c7296c062267663c604e152ee7c368e0620a26490a5a872fc60`. Do not patch hashed v29 or v30 bytes. | **Done** at `babb6e5db745e7eb36037b069dce8a54983f2dec`. |
+| A5bl | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `type.textDecoration` (content textDecoration now omitted). Host then refused `$.children[0].children[0].children[0].clipsContent` (MUI `input-field/content-row` host emits true; compile omits clipsContent). Polar has 0 content-row nodes. Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** invent a clipsContent value. Do **not** restart v30 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bm | PREPARE INPUT V31. Copy the v30 stack. Do not patch hashed v30 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `clipsContent` that compile never emits. Do not invent variables. Do not invent a clipsContent value. Do not teach FIXED as a fill. | Open only after RECORD. If a hashed v31 file later fails closed, open v32. |
 
 ### B · Button closeout
 
@@ -815,11 +831,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After AUTHORIZE INPUT V30 is published:
+After RECORD INPUT V30 ATTEMPT 1 is published:
 
 ```
-npm run recipe:input-field:live:v30:history:verify -- --expect-authorized
-# then private attestation + Scratch-only preflight; live remains forbidden until those pass
+# PREPARE INPUT V31 as a separate commit. Do not patch hashed v30.
+# Copy the v30 stack. Omit content-row clipsContent that compile never emits.
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -2176,7 +2192,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, and v29 attempt 1 failed closed; v30 authorization declared; false** | attestation + Scratch-only live v30 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, and v30 attempt 1 failed closed; false** | PREPARE INPUT V31 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
