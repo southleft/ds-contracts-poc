@@ -125,6 +125,23 @@ export function sceneRoleFromName(
   return undefined;
 }
 
+export function firstSegmentButtonName(name: string): string {
+  return name.split(" :: ", 1)[0] ?? name;
+}
+
+export function canonicalizeButtonExpectedPlanNames(
+  plan: ExpectedScenePlan,
+): ExpectedScenePlan {
+  return {
+    ...plan,
+    facts: plan.facts.map((fact) =>
+      fact.channel === "name" && typeof fact.value === "string"
+        ? { ...fact, value: firstSegmentButtonName(fact.value) }
+        : fact,
+    ),
+  };
+}
+
 const collectCompileTokenIdentities = (
   node: { bindings?: Array<{ variable: string; type: string }>; children?: readonly unknown[] },
 ): Array<{ variable: string; type: string }> => [
@@ -280,6 +297,7 @@ export function normalizeButtonObserveScene(
 ): SceneNodeSnapshot {
   return {
     ...scene,
+    name: firstSegmentButtonName(scene.name),
     boundVariables: scene.boundVariables
       .filter((binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field))
       .map((binding) =>
@@ -449,7 +467,7 @@ export function compareButtonSceneInversion(
     );
     const envelope = compileButtonRecipe(instance);
     const accounting = compareSceneToExpectedPlan(
-      plan.expectedScenePlan,
+      canonicalizeButtonExpectedPlanNames(plan.expectedScenePlan),
       scene,
     );
     let fixedPoint: SceneFixedPointReport;
@@ -556,6 +574,7 @@ export function serializeButtonInversionReport(
     measuredClasses: [
       "observe role() takes the first :: name segment before testing =, and recovers button/variant/... from live Variant=/Size=/State=/Icons= properties (Input V74 class); live names still have no button/variant/ first segment",
       "live token/{type}/{sanitized} names canonicalize to compile identities only when the v4 writer sanitizer is unique for the same key; collisions are left live",
+      "name compare takes the first :: segment (Input V74 / font-provenance class); 300 label/slot/loading names match; set name Button / button@1 proof vs button/set is not first-segment-equal and was carried live",
       "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
       "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",

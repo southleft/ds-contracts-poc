@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "075dee07ae0c37be12a067cc8a4fa65dbe0adff9ae030406884cb6d0e62d8f0c",
+    "sha256": "edd2de391a283502e79090156cdaa880b9c7c39662f5ef35bb1af74a8649635d",
     "ok": false,
     "roots": [
       {
@@ -51,11 +51,11 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 7955,
-        "silent": 751,
+        "matched": 8255,
+        "silent": 451,
         "missing": 0,
         "extra": 291,
-        "mismatched": 751,
+        "mismatched": 451,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
@@ -103,7 +103,7 @@
             "channel": "name",
             "missing": 0,
             "extra": 0,
-            "mismatched": 301
+            "mismatched": 1
           },
           {
             "channel": "role",
@@ -157,11 +157,11 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 8027,
-        "silent": 751,
+        "matched": 8327,
+        "silent": 451,
         "missing": 0,
         "extra": 267,
-        "mismatched": 751,
+        "mismatched": 451,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
@@ -209,7 +209,7 @@
             "channel": "name",
             "missing": 0,
             "extra": 0,
-            "mismatched": 301
+            "mismatched": 1
           },
           {
             "channel": "role",
@@ -265,6 +265,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "b977692eaa64b88f549cd87be313168808bec0f65a4fe2b8f7cdc26fb1c3d8dd"
+    "sha256": "95fafcda614e41a9462c4f6a6088e47dde0df44b663eedb0b417b1575c3d2f0e"
   }
 }

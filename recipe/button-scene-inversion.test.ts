@@ -3,9 +3,11 @@ import test from "node:test";
 
 import {
   buttonV4LiveTokenName,
+  canonicalizeButtonExpectedPlanNames,
   canonicalizeButtonObserveTokenName,
   compileButtonExpectedScenePlans,
   compileButtonTokenIdentityMap,
+  firstSegmentButtonName,
   forbiddenObserveKeys,
   refuseHistoricalReadbackAsObserve,
   sceneRoleFromName,
@@ -236,6 +238,42 @@ test("observe role() takes the first :: segment before testing = and recovers bu
     "Button / button@1 proof",
   );
   assert.equal(sceneRoleFromName("plain"), undefined);
+});
+
+test("name compare takes the first :: segment and does not invent the set name", () => {
+  assert.equal(firstSegmentButtonName("button/label :: Label"), "button/label");
+  assert.equal(
+    firstSegmentButtonName("button/label :: Label :: font-provenance=%7B%7D"),
+    "button/label",
+  );
+  assert.equal(
+    firstSegmentButtonName("button/slot/trailing :: Trailing icon"),
+    "button/slot/trailing",
+  );
+  assert.equal(
+    firstSegmentButtonName("Button / button@1 proof"),
+    "Button / button@1 proof",
+  );
+  assert.equal(
+    firstSegmentButtonName("button/set :: Button / button@1 proof"),
+    "button/set",
+  );
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const names = canonicalizeButtonExpectedPlanNames(
+    altitude.expectedScenePlan,
+  ).facts.filter((fact) => fact.channel === "name");
+  assert.equal(
+    names.some((fact) => fact.value === "button/label"),
+    true,
+  );
+  assert.equal(
+    names.some((fact) => fact.value === "button/label :: Label"),
+    false,
+  );
+  const setName = names.find((fact) => fact.nodeOwnershipKey === "root");
+  assert.equal(setName?.value, "button/set");
+  assert.notEqual(setName?.value, "Button / button@1 proof");
 });
 
 test("token name canonicalization is unique same-key sanitization only", () => {
