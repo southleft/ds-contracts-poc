@@ -955,7 +955,8 @@ lineage; do not patch hashed bytes in place.
 | A5gw | AUTHORIZE INPUT V76 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `046342fb5a53cb5a0a8fd4a7769141b6b157912e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c0fb1c451536d8f6e8d1586530be64a7875ef35e489f010bf24d6ecb4c785349`; SPKI SHA-256 `a2db82fbf07c8aa2f8226b3677508b0e453aa10ec02c44882e1c607ea4ee1d6e`. Do not patch hashed v16, v17, or v75 bytes. | **Done** at `95621752b504ccc1663344d2b527f800996b95c6`. |
 | A5gx | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:257814`, not `111:252766`; v18 program `9653ecd2…81ac`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `0fdcdacb7e8fef97242668187203b123865331b901ffbee803c45b29f6b0f00b`). Writer first-segment Label bind **held**: `textPropertiesRestored` true both. Polar reflow/contentFill still held; Polar content-row still 0. Role 256/256. Accounting silent 0/0 both. Probe issued, then host accept refused `validateInputLiveV76ProbePayload` (`contract.ts:584`). Remaining: MUI `contentFillPassed` still false (hidden default FILL; extract FILL 128); MUI clip 104/128 and overlap 12/128 unchanged. Do **not** invent 9/30/0 or a Polar content-row. Do **not** teach FIXED. Do **not** restart V76 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; page `111:257814` removed; mint cleaned. |
 | A5gy | Diagnose V76 remaining classes from on-disk probe + extract before any V77. | **Measured.** See V76 remaining-class diagnosis below. Hidden-default contentFill is the first single-class teaching. |
-| A5gz | PREPARE INPUT V77. Copy the v76 stack. Do not patch hashed v16/v17/v18 writer or hashed v76 scene-readback `13c210f1…2d27`. Teach the probe to reveal-then-measure hidden content FILL (same class as extract), then restore visibility. Do not write `layoutSizingHorizontal` onto the node. Do not teach FIXED. Keep v18 writer bytes (`9653ecd2…81ac` / `07a5124f…12de`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 `role()` + V75 Polar predicates + V76 bind. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not invent overlap-zero. Do not teach clip in this prepare. | |
+| A5gz | PREPARE INPUT V77. Copy the v76 stack. Do not patch hashed v16/v17/v18 writer or hashed v76 scene-readback `13c210f1…2d27`. Teach the probe to reveal-then-measure hidden content FILL (same class as extract), then restore visibility. Do not write `layoutSizingHorizontal` onto the node. Do not teach FIXED. Keep v18 writer bytes (`9653ecd2…81ac` / `07a5124f…12de`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 `role()` + V75 Polar predicates + V76 bind. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not invent overlap-zero. Do not teach clip in this prepare. | **Done** at `ea2ec61599478a990914c009b639c5d1078c7b36`. Antecedent index SHA-256 `bf120c82c5c0386bf42ff6d043083badbb019484d638632dd4b671795fccbe49`. |
+| A5ha | AUTHORIZE INPUT V77 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `ea2ec61599478a990914c009b639c5d1078c7b36`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `29dbdc6a…6429`; SPKI SHA-256 `8a5d96fb…24c7`. Do not patch hashed v16, v17, v18, or v76 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. |
 
 ### V74 probe-refuse diagnosis (measured 2026-08-28)
 
@@ -1089,7 +1090,13 @@ One teaching per PREPARE. V77 is class B only.
 
 ### Immediate next command
 
-AUTHORIZE INPUT V77 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent is the V77 PREPARE commit. Auth lifecycle stays out of the hash set. Do not patch hashed v16, v17, v18, or v76 bytes. Do not invent Polar 9/30/0 or a Polar content-row. Do not teach FIXED. Do not claim v1 complete.
+After AUTHORIZE INPUT V77 is published:
+
+```
+npm run recipe:input-field:live:v77:history:verify -- --expect-authorized
+```
+
+Then attestation (private 0600) + Scratch-only live attempt 1. New txn `private/input-live-v77-transaction`. File `byMp6lt0Ij9b2QbkDGFwBh` only. Keep v18 writer. Keep V73 classification + V74 `role()` + V75 Polar predicates + V76 bind. Probe reveal-then-measure hidden content FILL only. Do **not** invent 9/30/0 or a Polar content-row. Do **not** teach FIXED. Do **not** invent plugin `layoutSizingHorizontal`. Do **not** restart V76. Do **not** reuse page `111:257814` or `private/input-live-v76-transaction`.
 
 ## Correction task 2 — offline implementation, 2026-08-27
 
