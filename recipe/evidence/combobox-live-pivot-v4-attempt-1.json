@@ -1,0 +1,113 @@
+{
+  "artifactVersion": "combobox-live-v4-attempt-1-v1",
+  "status": "failed closed at host normalize payload.content.text; extract walk cleared; restore 144 held; cleanup accepted; mint did not stay",
+  "authorizationCommit": "7cd82de2352f8c833da5719236caa68a64839828",
+  "codeCommit": "7cd82de2352f8c833da5719236caa68a64839828",
+  "antecedentCommit": "98bd78c6ac28c0b11b36e70a1909b1c959ac6c04",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "extract must ignore Figma-copied ownershipKey on descendants inside an owned INSTANCE",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "131:307866",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["131:308730", "131:307961", "131:309594", "131:308825"],
+    "muiOptionSetId": "131:307961",
+    "muiComboboxSetId": "131:308730",
+    "antdOptionSetId": "131:308825",
+    "antdComboboxSetId": "131:309594",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "38f30c1d60a0414f29a833878a8c684ae6b60d4fb7ce822383d885370e7da34b",
+    "hostNormalizeAccepted": false,
+    "refusedClass": "payload.content.text",
+    "refused": "payload.content.text; payload.fills",
+    "zodPath": [
+      ["payload", "content", "text"],
+      ["payload", "fills"]
+    ],
+    "emptyInstancePayloadCount": 412,
+    "emptyInstanceRoles": [
+      "combobox/option/selected-indicator",
+      "combobox/control/leading",
+      "combobox/control/clear",
+      "combobox/control/popup"
+    ],
+    "measuredNodeId": "131:307949",
+    "measuredNodeKind": "INSTANCE combobox/option/selected-indicator",
+    "measuredOwnershipKey": "option/children/2/children/1",
+    "measuredChildCount": 0,
+    "measuredInstanceFillsCount": 1,
+    "measuredMainId": "131:307939",
+    "measuredMainName": "__Combobox control / source/mui-autocomplete/selected",
+    "measuredMainChildCount": 0,
+    "measuredInstancePayload": {
+      "contentKind": "text",
+      "contentText": "",
+      "fillsCount": 0,
+      "source": "scene-description-missing"
+    },
+    "namedFromSource": "v4 copied-ownershipKey teaching cleared; extract walk returned two roots; host sceneToNormalizedIr then refused IR instance payload because childless owned control/indicator instances have no visible text and no glyph assets, so extract emitted empty text/fills while compile omits payload"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "131:307866",
+    "removedCollectionIds": [
+      "VariableCollectionId:131:307868",
+      "VariableCollectionId:131:308732"
+    ]
+  },
+  "nextTeaching": {
+    "class": "payload.content.text",
+    "doNotInvent": true,
+    "restartV4Attempt2AsIs": false,
+    "prepareV5": "host must omit instance payload when extract instancePayload has empty text and empty fills"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}
