@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v43-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused message/helper bindings field order; cleanup complete",
   "baseCommit": "ef594ad743547ceda32bfae0c1d18ef94072206c",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v43/antecedent-index.json",
@@ -200,12 +200,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v43-attempt-1.json",
+  "attempt1Sha256": "a33054277c652af5db1fc6514a800fd6cc1b797a50dcd29164710d7302fe6e26",
+  "restartAsV43Attempt2WithoutMessageHelperBindingOrderForbidden": true
 }
