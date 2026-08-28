@@ -1,7 +1,25 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (supersedes status claims below; historical
-> evidence bytes are not rewritten): V7 attempt 1 is closed. The signed writer
+> **Current correction status (2026-08-28 ~15:37 UTC-5; supersedes status
+> claims below; historical evidence bytes are not rewritten):** Input V85
+> live human grade **passed**. TJ Pitre reviewed the restored+gridded page
+> `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
+> `115:298106`; runIdentity `4a074b24-e8503dd5-input-v5`). Verbatim quote
+> and implications are in
+> `recipe/evidence/input-field-live-v85-human-signoff.json`. Methods
+> (recipe-IR, one-teaching-per-PREPARE, named-or-carried, host-normalize,
+> occupancy placeholders, compile-carry live set facts) are blessed for
+> reuse. Product **v1 is incomplete**. Remaining: Combobox live, Data Table,
+> Calendar, Button leftover inversion (149 silent / fonts + set chrome).
+> Do not invent a Button human grade. Do not claim v1 complete. V85 RECORD
+> `c35bae60` still carries RECORD-time `humanSignoff: pending` and is not
+> restamped. The arrange accident that briefly deleted page `115:295378`
+> is a recovered incident; the page id stayed. Safe restore: checkpoint
+> `2392869719628549246` (`V85 Input grids OK`). Never restore
+> `2392877528965054592`. Do not rearrange Input. Next hill: Combobox live
+> on a new Scratch page with a Combobox identity.
+>
+> Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
 > normalize/account then refused
 > `boundVariables.strokeBottomWeight: unsupported field strokeBottomWeight`.
@@ -992,6 +1010,7 @@ lineage; do not patch hashed bytes in place.
 | A5ia | PREPARE INPUT V85. Copy the v84 stack. Do not patch hashed v19 writer (`0ed357db…59e0` / `5d0f2323…1681`) or hashed v84 scene-readback (`b784e275…6c32`). One teaching: **cleanup-on-failure-only**. Do not execute page-deleting cleanup when probe (and captures, if still issued) are green. Still persist the recovery cleanup request after writer accept (seq 2). Still run cleanup on failure/abort. Change only the success path. Keep V73–V84. Do not restart V84 attempt 2. Do not reuse page `112:288922` or `private/input-live-v84-transaction`. | **Done** at `4084b2cfb71784413bfae8dd8604810b972bf5bf`. Antecedent index SHA-256 `b3b7df6d5c27abb97ba3f46e9554ad1442a25522cebaa10a7890243b2dd79bad`. |
 | A5ib | AUTHORIZE INPUT V85 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `4084b2cfb71784413bfae8dd8604810b972bf5bf`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `06c007a1…3863`; SPKI SHA-256 `80b92e1b…17f3`. Do not patch hashed v16, v17, v18, v19, or v84 bytes. | **Done** at `3056956b20deae7993bcc8addd8739edddf94934`. |
 | A5ic | Attempt 1 Scratch-only live after attestation and preflight. New txn `private/input-live-v85-transaction`. Scratch `byMp6lt0Ij9b2QbkDGFwBh` only. Never reuse page `112:288922` or the v84 txn. If probe is green, cleanup must not execute; mint must stay. | **Mint stayed.** Writer accepted (2317 nodes, new page `115:295378`, not `112:288922`; runIdentity `4a074b24-e8503dd5-input-v5`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged; hashed v84 scene-readback unchanged). Cleanup persisted after writer and was **not** executed. Restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `92339876…3ab5`). Occupancy **held on canvas**: 128 placeholders `visible:true` (24 `opacity:0` FILL, 0 FIXED); the 12 V78 overlap-class keys have trailing **x=165**. Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Accounting 0/0 both. Collapse omit **held**; fixed-point **stable** both. Probe **issued and accepted**. All required source booleans true both, including `textPropertiesRestored`, Polar reflow, and `contentFillPassed`. Role/clip fail 0. Probe overlap **0/0**. Polar overlapFail 0. 128 captures `technicalPassed` true. Residuals geometry 16 / perceptual 0 / pixelInk 27 are comparison residuals, not gate refuses. Host finished `main-complete`; `cleanupExecuted` false; `figmaWrites` 132. Read-only Figma check: page `115:295378` still present; `remainingOwnedNodes` 1. **First review-worthy Input canvas.** Open Scratch at https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh and the page `Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5`. Do **not** claim v1 complete (Button signoff + inversion still pending). Do **not** invent overlap-zero — 0 was measured. |
+| A5id | Record attributable human signoff on the restored+gridded V85 Input page. Do not restamp hashed V85 RECORD (`c35bae60`) or expected-plans. Do not invent a Button human grade. Do not claim v1 complete. | **Passed 2026-08-28 ~15:37 UTC-5.** TJ Pitre reviewed page `115:295378` (sets `115:296805`, `115:298106`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh`. Verbatim + implications: `recipe/evidence/input-field-live-v85-human-signoff.json`. RECORD-time `humanSignoff: pending` in `input-field-live-pivot-v85-status.json` is unchanged. Arrange accident remains a recovered incident; checkpoint `2392869719628549246` (`V85 Input grids OK`) is the safe restore. Never restore `2392877528965054592`. Do not rearrange Input. |
 
 ### V74 probe-refuse diagnosis (measured 2026-08-28)
 
@@ -1059,7 +1078,7 @@ One teaching per PREPARE. V75 is class B only.
 
 ### C · Combobox
 
-Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Autocomplete`, `antd@5.29.3#Select`; 24 paired cells; 72 components / 242 instances). `npm run recipe:combobox:check` is the offline gate.
+Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Autocomplete`, `antd@5.29.3#Select`; 24 paired cells; 72 components / 242 instances). `npm run recipe:combobox:check` is the offline gate. Input V85 human grade passed; Combobox is the next live hill. Inherit Input host-normalize. Do not invent a Combobox human grade.
 
 | step | action | exit criterion |
 | --- | --- | --- |
@@ -1101,7 +1120,7 @@ v1 is complete only when every row is actually true:
 
 ### Human-only work (do not block the rest)
 
-- Attributable human signoff on Button and Input; later Combobox, Data Table, and Calendar.
+- Attributable human signoff on Input V85 **passed** (2026-08-28, TJ Pitre, page `115:295378`). Button remains pending. Later Combobox, Data Table, and Calendar.
 - Old PAT still cannot be revoked (other apps). Keep the replacement PAT and residual-risk acceptance (`oldTokenRevoked=false`, `ownerRiskAcceptance=true`).
 - Recipe acquisition review for Data Table / Calendar adapters before live if a human-authored adapter is required.
 - Final designer recognisability grades; AI raters are retired for architecture progression.
@@ -1191,7 +1210,30 @@ V83 extract sha256 `5be43bb66439927d7d051cbc1491e21b6005417a76f01c4ff0ff6c62821a
 
 ### Immediate next command
 
-V85 attempt 1 mint stayed. Page `115:295378` is still on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (runIdentity `4a074b24-e8503dd5-input-v5`). This is the first review-worthy Input canvas — ping TJ to open https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh and review that page. Button extras-drop teach landed; silent is still **149/8706** and **149/8778**, extras 1/1. Do **not** ping TJ for Button review (Input canvas is the review ping). **B3 remains: attributable human signoff on Button**. Stopped on fonts and invented set chrome — do not invent Roboto/SemiBold as compile fonts. Do not invent a Button or Input human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
+Input V85 live human grade **passed** (2026-08-28 ~15:37 UTC-5, TJ Pitre, page `115:295378`). Next hill is **Combobox live**: inherit Input host-normalize; new Scratch page; Combobox identity. Do **not** write Input page `115:295378` / sets `115:296805` + `115:298106`. Do **not** call `figma_arrange_component_set` on Input. Safe restore if anything goes wrong: checkpoint `2392869719628549246` (`V85 Input grids OK`). Never restore `2392877528965054592`. Button extras-drop teach landed; silent is still **149/8706** and **149/8778**, extras 1/1. Do **not** ping TJ for Button review. **B3 remains: attributable human signoff on Button**. Stopped on fonts and invented set chrome — do not invent Roboto/SemiBold as compile fonts. Do not invent a Button human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
+
+### Input V85 human signoff and arrange incident (2026-08-28)
+
+TJ reviewed the restored+gridded V85 Input page (`115:295378` on Scratch
+`byMp6lt0Ij9b2QbkDGFwBh`) and said:
+
+> Now I see why it's been taking so long. What you just showed me here is literal perfection. Everything here is bounded to tokens. You have nearly every single variant, state, and instance. I fully support the methods that you took to build this input field, and you have my blessing to continue on forever because what you did here is literally impeccable. It is some of the best craftsmanship I've ever seen in creating an input field. Thank you, and let's continue hill climbing.
+
+Implications (do not inflate): Input live human grade = **passed**. The
+methods (recipe-IR, one-teaching-per-PREPARE, named-or-carried,
+host-normalize, occupancy placeholders, compile-carry live set facts) are
+blessed for reuse. Product **v1 is still incomplete**. Remaining: Combobox
+live, Data Table, Calendar, Button leftover inversion. Do not invent a
+Button human grade. Do not restamp expected-plans to hide fonts.
+
+The arrange accident is a **recovered incident**, not a rewrite of V85.
+`figma_arrange_component_set` deletes every page-level frame named
+`Component Container`. A second arrange plus overshooting undo briefly
+removed page `115:295378`; the page was restored and both sets were
+re-gridded as State 32×4. Page id stayed `115:295378`. Checkpoint
+`2392869719628549246` (`V85 Input grids OK`) is the safe restore point.
+Never restore `2392877528965054592`. Do not rearrange Input. V85 RECORD
+`c35bae60` is not restamped.
 
 ## Correction task 2 — offline implementation, 2026-08-27
 
@@ -2592,17 +2634,18 @@ widget library.
 No source reference was rendered or graded, no Figma/MCP call occurred, and no
 live artifact exists. The old 4/4 recognisable legacy census result over only
 six variants is retained verbatim as weak context, not accepted as the target.
-Combobox overall success remains **false/ungraded/no-live**. The next handoff
-is a separately authorized matched benchmark that renders both source
-references and re-derives a legacy comparator over the frozen 24-cell matrix.
+Combobox overall success remains **false/ungraded/no-live**. Input V85 live
+human grade is now passed; that does not grade Combobox. The next handoff is
+Scratch-only Combobox live on a new page, inheriting Input host-normalize,
+with a Combobox writer identity. Do not invent a Combobox human grade.
 
 #### Pivot progress
 
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Stopped on fonts and invented set chrome. Do not invent Roboto/SemiBold. |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; review-worthy Input canvas; false** | V85 mint stayed on Scratch page `115:295378`. First Input review ping. Button extras-drop teach landed (silent 149/149, extras 1, not zero); Button signoff still pending. Do not claim v1 complete. |
-| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28; product v1 incomplete; overall false** | Combobox live next (inherit Input host-normalize; new page). Button leftover still pending (149 silent / fonts + set chrome). Do not invent a Button human grade. Do not claim v1 complete. |
+| Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | Scratch-only live inheriting Input host-normalize, then human grade (see Remaining work §C). Do not invent a Combobox human grade. |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
 
