@@ -399,6 +399,9 @@ jobs:
       - name: recipe:input-field:live:v48:check (omit message-container clipsContent; hashed v47 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v48:check
+      - name: recipe:input-field:live:v49:check (omit message-container cornerRadius; hashed v48 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v49:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
