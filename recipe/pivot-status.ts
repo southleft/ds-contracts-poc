@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -1536,8 +1536,14 @@ const V52_AUTHORIZATION_TEMPLATE_SHA256 =
 const V52_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v52-status.json";
 const V52_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V52_BASE_COMMIT = "cd38d41524a9b3c9582cbf529a0f1a9ebbfaf98f";
+const V52_ANTECEDENT_COMMIT = "4646704cfbd743630aff50e954dab0db8dda15c1";
+const V52_AUTHORIZATION_PATH = `${V52_ROOT}/capture-authorization.json`;
+const V52_AUTHORIZATION_SHA256 =
+  "3c3d00cd825bd23cf7afa347b21b6ac7792045de0fbce1b44dde1f195779d744";
+const V52_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "d0e74db72349b9d640561832cf4bf47e4068f9f3d4a07959e4c3ad94c791d49f";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -4714,9 +4720,16 @@ export function validatePivotStatus(
     status.input?.liveV52?.antecedentHashSetSha256 !== V52_HASH_SET_SHA256 ||
     status.input?.liveV52?.authorizationTemplateSha256 !==
       V52_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV52?.authorizationPresent !== false ||
-    status.input?.liveV52?.authorizationCommitted !== false ||
+    status.input?.liveV52?.antecedentCommit !== V52_ANTECEDENT_COMMIT ||
+    status.input?.liveV52?.authorizationPresent !== true ||
+    status.input?.liveV52?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV52?.authorizationEffective !== false ||
+    status.input?.liveV52?.authorizationPath !== V52_AUTHORIZATION_PATH ||
+    status.input?.liveV52?.authorizationSha256 !== V52_AUTHORIZATION_SHA256 ||
+    status.input?.liveV52?.signingPublicKeySpkiSha256 !==
+      V52_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV52?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV52?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV52?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -9007,10 +9020,16 @@ export function verifyPivotStatus(): void {
     v52Status.artifactVersion !== "input-live-v52-status-v1" ||
     v52Status.status !== V52_STATUS ||
     v52Status.baseCommit !== V52_BASE_COMMIT ||
-    v52Status.antecedent?.commit !== null ||
-    v52Status.authorization?.present !== false ||
-    v52Status.authorization?.committed !== false ||
+    v52Status.antecedent?.commit !== V52_ANTECEDENT_COMMIT ||
+    v52Status.authorization?.present !== true ||
+    v52Status.authorization?.commitStateDerivedByHistory !== true ||
     v52Status.authorization?.effective !== false ||
+    v52Status.authorization?.path !== V52_AUTHORIZATION_PATH ||
+    v52Status.authorization?.sha256 !== V52_AUTHORIZATION_SHA256 ||
+    v52Status.authorization?.signingPublicKeySpkiSha256 !==
+      V52_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V52_AUTHORIZATION_PATH)) !==
+      V52_AUTHORIZATION_SHA256 ||
     v52Status.authorization?.v51AuthorizationReusable !== false ||
     v52Status.smallestHonestDelta?.taughtVariantCornerRadiusOmitted !==
       true ||
