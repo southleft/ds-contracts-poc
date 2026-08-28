@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -2334,7 +2334,7 @@ const V78_AUTHORIZATION_TEMPLATE_SHA256 =
 const V78_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v78-status.json";
 const V78_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; independent root accounting silent-zero; probe exclude overlay-label AABB held; MUI clip 0; overlap 12 remain; probe/usability/restoration failed; cleanup complete";
 const V78_BASE_COMMIT = "da30631885c9141dbec5d171e278ad3afa7a6d29";
 const V78_ANTECEDENT_COMMIT = "d17d9b450b51d650aed01140e5d63dc0d4a1fb77";
 const V78_AUTHORIZATION_PATH = `${V78_ROOT}/capture-authorization.json`;
@@ -2342,6 +2342,10 @@ const V78_AUTHORIZATION_SHA256 =
   "26ab82447c0af00b2c900a068ac5ca14da34676e8150e3fe5e8ea3101c0e1309";
 const V78_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "bdefb90d153faab15a38bbd687674c07c7e56d98496b8e6d4f9894a4e8e3288c";
+const V78_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v78-attempt-1.json";
+const V78_ATTEMPT_1_SHA256 =
+  "fd6060fc8e70adc4bb652a292712faf10982d82601c624a063331c0ea72abba8";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -7083,10 +7087,19 @@ export function validatePivotStatus(
     status.input?.liveV78?.sourceRoots !== 2 ||
     status.input?.liveV78?.expectedSceneFacts !== 43_726 ||
     status.input?.liveV78?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV78?.attemptsExecuted !== 0 ||
-    status.input?.liveV78?.nextAttempt !== 1 ||
-    status.input?.liveV78?.liveExecutionOccurred !== false ||
-    status.input?.liveV78?.figmaWrites !== 0 ||
+    status.input?.liveV78?.attemptsExecuted !== 1 ||
+    status.input?.liveV78?.nextAttempt !== 2 ||
+    status.input?.liveV78?.liveExecutionOccurred !== true ||
+    status.input?.liveV78?.figmaWrites !== 5 ||
+    status.input?.liveV78?.attempt1Path !== V78_ATTEMPT_1_PATH ||
+    status.input?.liveV78?.attempt1Sha256 !== V78_ATTEMPT_1_SHA256 ||
+    status.input?.liveV78?.taughtProbeExcludeOverlayLabelAabbHeld !== true ||
+    status.input?.liveV78?.contentFillPassedBoth !== true ||
+    status.input?.liveV78?.muiClipClearedOverlap12Remain !== true ||
+    status.input?.liveV78?.taughtWriterFirstSegmentBindHeld !== true ||
+    status.input?.liveV78?.accountingSilentZeroBoth !== true ||
+    status.input?.liveV78?.mintCleaned !== true ||
+    status.input?.liveV78?.mintStayed !== false ||
     status.input?.liveV78?.doNotClaimV1Complete !== true ||
     status.input?.liveV78?.humanSignoff !== "pending" ||
     status.input?.liveV78?.overallInputSuccess !== false
@@ -13017,9 +13030,17 @@ export function verifyPivotStatus(): void {
     v78Status.smallestHonestDelta?.v77SceneReadbackUnchanged !== true ||
     v78Status.smallestHonestDelta?.v18WriterMinted !== true ||
     v78Status.smallestHonestDelta?.v18WriterProgramUnchanged !== true ||
-    v78Status.attemptsExecuted !== 0 ||
-    v78Status.liveExecutionOccurred !== false ||
-    v78Status.figmaWrites !== 0 ||
+    v78Status.attemptsExecuted !== 1 ||
+    v78Status.liveExecutionOccurred !== true ||
+    v78Status.figmaWrites !== 5 ||
+    v78Status.attempt1Path !== V78_ATTEMPT_1_PATH ||
+    v78Status.attempt1Sha256 !== V78_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V78_ATTEMPT_1_PATH)) !==
+      V78_ATTEMPT_1_SHA256 ||
+    v78Status.taughtProbeExcludeOverlayLabelAabbHeld !== true ||
+    v78Status.contentFillPassedBoth !== true ||
+    v78Status.muiClipClearedOverlap12Remain !== true ||
+    v78Status.mintCleaned !== true ||
     v78Status.overallInputSuccess !== false
   )
     failures.push("v78 authorization/status mismatch");

@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v78-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; independent root accounting silent-zero; probe exclude overlay-label AABB held; MUI clip 0; overlap 12 remain; probe/usability/restoration failed; cleanup complete",
   "baseCommit": "da30631885c9141dbec5d171e278ad3afa7a6d29",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v78/antecedent-index.json",
@@ -348,12 +348,30 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 5,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v78-attempt-1.json",
+  "attempt1Sha256": "fd6060fc8e70adc4bb652a292712faf10982d82601c624a063331c0ea72abba8",
+  "restartAsV78Attempt2WithoutNewTeachingForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "inventPolarContentRowForbidden": true,
+  "inventOverlapZeroForbidden": true,
+  "taughtWriterFirstSegmentBindHeld": true,
+  "taughtProbePolarReflowAgainstContentTextHeld": true,
+  "taughtProbeFirstSegmentRoleHeld": true,
+  "taughtProbeRevealThenMeasureHiddenContentFillHeld": true,
+  "taughtProbeExcludeOverlayLabelAabbHeld": true,
+  "contentFillPassedBoth": true,
+  "muiClipClearedOverlap12Remain": true,
+  "accountingSilentZeroBoth": true,
+  "mintCleaned": true,
+  "mintStayed": false,
+  "doNotClaimV1Complete": true
 }
