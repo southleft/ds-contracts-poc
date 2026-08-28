@@ -1,0 +1,270 @@
+{
+  "artifactVersion": "button-scene-inversion-v1",
+  "method": "expected-plan-vs-observe",
+  "sourceIrRead": false,
+  "silentAssigned": false,
+  "silentDerived": true,
+  "historicalReadbackRefusedAsObserve": true,
+  "figmaWrites": 0,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageId": "85:6781",
+    "pageName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4"
+  },
+  "expectedScenePlans": {
+    "altitude": {
+      "path": "recipe/evidence/button-scene-inversion-v1/expected-scene-plan-altitude.json.gz",
+      "sha256": "40461487c6eb6a2251bfe1aea51546c80aa4c0f9870dd4960e10c15e2631c3b8",
+      "uncompressedSha256": "9347623664be74de0c7aa29d6646dea3698e53f49502bb9c5a84e9f902f956b8",
+      "bytes": 106922,
+      "facts": 8706
+    },
+    "fluent": {
+      "path": "recipe/evidence/button-scene-inversion-v1/expected-scene-plan-fluent.json.gz",
+      "sha256": "30da6c464fa32f05dfe010e990976cc63b928d654de0b831f8cd9da7be667892",
+      "uncompressedSha256": "6eee721429911702d54fc57bd7b06efc90667c584e7d96350f579c56a3afd124",
+      "bytes": 109225,
+      "facts": 8778
+    }
+  },
+  "observe": {
+    "altitude": {
+      "path": "recipe/evidence/button-scene-inversion-v1/observe-altitude.json.gz",
+      "sha256": "841d05e3a9f91209f1af0048a6361be3cca4a24bd66cfcf61895414ef6d0cae4"
+    },
+    "fluent": {
+      "path": "recipe/evidence/button-scene-inversion-v1/observe-fluent.json.gz",
+      "sha256": "dce1a58e649ece50bf25cd47b803e5c08b1e08d2ede730f7ebcfc75c965a13c0"
+    }
+  },
+  "observePresent": true,
+  "overallButtonSuccess": false,
+  "humanSignoff": "pending",
+  "inversion": {
+    "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
+    "sha256": "7e1b5b3354f62e7ae3eeff717f627abe4ae54d59c35edb66fe4f70eee3da4a51",
+    "ok": false,
+    "roots": [
+      {
+        "source": "altitude",
+        "adapterIdentity": "altitude-button-reviewed-v2",
+        "setId": "85:7406",
+        "variants": 144,
+        "expectedFacts": 8706,
+        "matched": 5795,
+        "silent": 2911,
+        "missing": 144,
+        "extra": 291,
+        "mismatched": 2767,
+        "duplicateCollapsed": 0,
+        "unobserved": 0,
+        "denominator": 8706,
+        "ok": false,
+        "fixedPointStable": false,
+        "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
+        "channelDrift": [
+          {
+            "channel": "binding",
+            "missing": 0,
+            "extra": 288,
+            "mismatched": 2160
+          },
+          {
+            "channel": "componentRef",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 156
+          },
+          {
+            "channel": "cornerRadius",
+            "missing": 0,
+            "extra": 1,
+            "mismatched": 0
+          },
+          {
+            "channel": "fill",
+            "missing": 0,
+            "extra": 1,
+            "mismatched": 0
+          },
+          {
+            "channel": "layout.mode",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "layout.padding",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "name",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 301
+          },
+          {
+            "channel": "role",
+            "missing": 144,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "type",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 144
+          },
+          {
+            "channel": "variantAxis",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 2
+          },
+          {
+            "channel": "width.mode",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "width.value",
+            "missing": 0,
+            "extra": 1,
+            "mismatched": 0
+          }
+        ],
+        "sampleFailures": [
+          "missing root/children/0#role@0000",
+          "missing root/children/1#role@0000",
+          "missing root/children/2#role@0000",
+          "missing root/children/3#role@0000",
+          "missing root/children/4#role@0000",
+          "missing root/children/5#role@0000",
+          "missing root/children/6#role@0000",
+          "missing root/children/7#role@0000",
+          "missing root/children/8#role@0000",
+          "missing root/children/9#role@0000",
+          "missing root/children/10#role@0000",
+          "missing root/children/11#role@0000"
+        ]
+      },
+      {
+        "source": "fluent",
+        "adapterIdentity": "fluent-button-reviewed-v2",
+        "setId": "85:8054",
+        "variants": 144,
+        "expectedFacts": 8778,
+        "matched": 5891,
+        "silent": 2887,
+        "missing": 144,
+        "extra": 267,
+        "mismatched": 2743,
+        "duplicateCollapsed": 0,
+        "unobserved": 0,
+        "denominator": 8778,
+        "ok": false,
+        "fixedPointStable": false,
+        "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
+        "channelDrift": [
+          {
+            "channel": "binding",
+            "missing": 0,
+            "extra": 264,
+            "mismatched": 2136
+          },
+          {
+            "channel": "componentRef",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 156
+          },
+          {
+            "channel": "cornerRadius",
+            "missing": 0,
+            "extra": 1,
+            "mismatched": 0
+          },
+          {
+            "channel": "fill",
+            "missing": 0,
+            "extra": 1,
+            "mismatched": 0
+          },
+          {
+            "channel": "layout.mode",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "layout.padding",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "name",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 301
+          },
+          {
+            "channel": "role",
+            "missing": 144,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "type",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 144
+          },
+          {
+            "channel": "variantAxis",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 2
+          },
+          {
+            "channel": "width.mode",
+            "missing": 0,
+            "extra": 0,
+            "mismatched": 1
+          },
+          {
+            "channel": "width.value",
+            "missing": 0,
+            "extra": 1,
+            "mismatched": 0
+          }
+        ],
+        "sampleFailures": [
+          "missing root/children/0#role@0000",
+          "missing root/children/1#role@0000",
+          "missing root/children/2#role@0000",
+          "missing root/children/3#role@0000",
+          "missing root/children/4#role@0000",
+          "missing root/children/5#role@0000",
+          "missing root/children/6#role@0000",
+          "missing root/children/7#role@0000",
+          "missing root/children/8#role@0000",
+          "missing root/children/9#role@0000",
+          "missing root/children/10#role@0000",
+          "missing root/children/11#role@0000"
+        ]
+      }
+    ]
+  },
+  "census": {
+    "path": "recipe/evidence/button-scene-inversion-v1/census.json",
+    "sha256": "21481e237f0f711dba7bcd53db7e2be8b2e28c665d05612529f7243066c4fddb"
+  },
+  "receipt": {
+    "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
+    "sha256": "90bbf49d14f6bd483bf36642015df0f70726787375151486d08cdf0ebb595479"
+  }
+}

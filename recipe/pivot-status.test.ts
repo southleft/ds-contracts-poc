@@ -97,6 +97,18 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.button.overallSuccess = true;
     },
     (value) => {
+      value.status.button.humanSignoff = "passed";
+    },
+    (value) => {
+      value.status.button.sceneDerivedInversion.ok = true;
+    },
+    (value) => {
+      value.status.button.sceneDerivedInversion.silentAssigned = true;
+    },
+    (value) => {
+      value.status.button.sceneDerivedInversion.roots.altitude.silent = 0;
+    },
+    (value) => {
       value.status.input.liveV2.result = "passed";
     },
     (value) => {

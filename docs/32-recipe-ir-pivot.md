@@ -485,8 +485,8 @@
 > captures; no live success.
 > Button overall success is false/pending.
 > Its technical mint, usability, restoration, and 12/12 adjudication bytes are
-> retained, but the human grade is not attributable and the historical live
-> inversion/accounting was self-referential. Input overall success is false and
+> retained. Scene-derived inversion has now run (expected-plan vs 0-write observe;
+> silent derived, not zero). The human grade is still not attributable. Input overall success is false and
 > blocked: live v2 improved aggregate geometry and pixel/ink versus legacy but
 > still fails adornment-content and MUI-stratum safeguards. Commit
 > `be6b01300ad99d8a29ea4c11508d192dec84bbea` now fixes the exact prospective
@@ -709,8 +709,8 @@
 > V1 Button comparison remains red and retained;
 > corrected v2 passes the offline paired recognisability control; live v1-v3
 > remain historical failures; and v4 preserves the technical Scratch mint plus
-> 12/12 grade bytes, without proving attributable human signoff or independent
-> scene-derived inversion/accounting.** The canonical IR,
+> 12/12 grade bytes. Scene-derived inversion has now run and is not silent-zero.
+> Attributable human signoff is still unproven.** The canonical IR,
 > envelope, explicitly selected `button@1` compiler, inverse validator/collapse
 > path, React/Web Component outputs, and offline gates exist. On the frozen
 > paired v1 slice, legacy scored 9/12 and recipe React 0/12. The separately
@@ -1040,7 +1040,7 @@ One teaching per PREPARE. V75 is class B only.
 | step | action | exit criterion |
 | --- | --- | --- |
 | B1 | Keep the technical mint, usability, restoration, and 12/12 adjudication bytes. Do not restamp them. | Existing Button technical measurements remain byte-stable. |
-| B2 | Fresh scene-derived inversion/accounting from the live Button page, not stamped/self-selected IR. Do not collide with or rewrite that page except as an explicit later proof if required. | Silent losses derived from a prospective multiset denominator; inversion is scene-derived. |
+| B2 | Fresh scene-derived inversion/accounting from the live Button page, not stamped/self-selected IR. Do not collide with or rewrite that page except as an explicit later proof if required. | **Measured 2026-08-28.** Method ran: compile expected-plan vs 0-write live observe; silent = expectedFacts − matched. Historical v4 readback refused as observe. Stamped `ir*` / `cells` / `comparedIrFacts` not read. Altitude 8706 expected / 5795 matched / **2911 silent**; Fluent 8778 / 5891 / **2887 silent**. Fixed point not stable (`button/set` role missing on live set name). Page `85:6781` unread-write; Input page `115:295378` untouched. Not silent-zero. |
 | B3 | Attributable human signoff on Button. | **Human gate.** Overall Button stays **false** until signed. |
 
 ### C · Combobox
@@ -1177,7 +1177,7 @@ V83 extract sha256 `5be43bb66439927d7d051cbc1491e21b6005417a76f01c4ff0ff6c62821a
 
 ### Immediate next command
 
-V85 attempt 1 mint stayed. Page `115:295378` is still on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (runIdentity `4a074b24-e8503dd5-input-v5`). This is the first review-worthy Input canvas — ping TJ to open https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh and review that page. Button signoff and inversion remain pending. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching.
+V85 attempt 1 mint stayed. Page `115:295378` is still on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (runIdentity `4a074b24-e8503dd5-input-v5`). This is the first review-worthy Input canvas — ping TJ to open https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh and review that page. Button scene-derived inversion has now run and is not silent-zero; **B3 remains: attributable human signoff on Button**. Do not invent a Button or Input human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
 
 ## Correction task 2 — offline implementation, 2026-08-27
 
@@ -1869,11 +1869,11 @@ decision uses only the v2 pair.
 | live Figma mint                           | **pass**            | 2 sets, 288 variants, 57 variables, 4,296 bindings                                                |
 | live usability                            | **pass**            | reflow, switching, binding, and no-fake-layout each 2/2; 288/288 labels                           |
 | exact probe restoration                   | **pass**            | 2/2 before/after geometry hashes identical                                                        |
-| live readback fixed point                 | **revoked/pending** | historical canonicalization read a self-selected denominator; a scene-derived inverse has not run |
-| zero-silent accounting                    | **revoked/pending** | historical `silent=0` was assigned rather than derived from expected-plan multiset reconciliation |
+| live readback fixed point                 | **measured / not stable** | scene-derived inverse ran; both roots fail `button/set` role on the live set name `Button / button@1 proof` |
+| zero-silent accounting                    | **measured / not zero** | silent derived as expectedFacts − matched: Altitude **2911/8706**, Fluent **2887/8778** |
 | attributable human live canvas signoff    | **pending**         | 12/12 grade bytes retained, but no reviewer identity/signature/timestamp proves independence      |
 | independent original-source references    | **pass**            | 12 external-library source renders; neither path under test supplied a reference                  |
-| **overall Button success**                | **false**           | pending attributable human signoff plus fresh scene-derived inversion/accounting                  |
+| **overall Button success**                | **false**           | human signoff pending; scene-derived inversion is not silent-zero and not fixed-point stable |
 
 The historical adjudication artifact is
 `recipe/evidence/button-live-pivot-v4/final-adjudication.json`. It recomputes
@@ -1882,6 +1882,32 @@ evidence bytes, duplicate mappings, impossible arithmetic, implementation
 guesses, and missing columns within that historical protocol. The superseding
 status artifact preserves its hash and revokes its overall PASS rather than
 rewriting those bytes.
+
+#### Button scene-derived inversion — measured 2026-08-28
+
+Evidence: `recipe/evidence/button-scene-inversion-v1/`. Method is
+expected-plan vs observe, the same honesty bar as Input V70–V84.
+
+- Compile two 144-variant expected-plans from the reviewed Altitude and Fluent
+  recipes. Do not read stamped plugin-data IR (`ir*`, `cells`,
+  `comparedIrFacts`) or the historical v4 axes/cells readback as observe.
+- Join live variants by `Variant`/`Size`/`State`/`Icons` properties, not by
+  plugin-data ownership keys (the live mint has none).
+- Silent is `expectedFacts − matched`. It is derived, not assigned. Measured
+  Altitude **2911/8706**, Fluent **2887/8778**.
+- Observe was a 0-write Scratch extract of existing sets `85:7406` and
+  `85:8054` on page `85:6781`. Current page stayed `115:295378`. Input mint
+  untouched. `Y8Jhw6R49wTLuXZ0is2GmV` was not written.
+- Host-omit only the four compile-absent per-side stroke weight bindings
+  (`strokeTopWeight` / `Right` / `Bottom` / `Left`). No restamp of the
+  expected-plan. No invented uniform `strokes.0.weight`.
+- Drift classes (not taught, not restamped): live variable names
+  `token/{type}/{sanitized}` vs compile source-token identity; live component
+  names `Variant=...` so `button/variant/...` roles are missing; live set
+  name `Button / button@1 proof` vs compile `button/set :: …`; live text
+  type uses resolved family/style (Fluent **Roboto**, `SemiBold`) vs compile
+  stacks / `Semi Bold`.
+- `ok: false`. Human signoff **pending**. Overall Button **false**.
 
 #### Input/Field offline boundary — adjudicated failure
 
@@ -2532,8 +2558,8 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; review-worthy Input canvas; false** | V85 mint stayed on Scratch page `115:295378`. First Input review ping. Button signoff and inversion still pending. Do not claim v1 complete. |
+| Button      | **technical mint retained; scene-derived inversion measured (silent derived, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Silent-zero would be a later teaching, not this measurement. |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; review-worthy Input canvas; false** | V85 mint stayed on Scratch page `115:295378`. First Input review ping. Button inversion measured (not silent-zero); Button signoff still pending. Do not claim v1 complete. |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
@@ -2695,9 +2721,10 @@ plants stale-grade, changed-key, duplicate-mapping, impossible
 arithmetic, implementation-guess, required-field, provenance, and
 missing-column failures within that superseded protocol. Its grader bytes carry
 no attributable reviewer identity/signature/timestamp, and its readback did not
-invert actual scene properties. Current Button success is therefore
-**false/pending** until a future scene-derived run passes and an attributable
-human signs off.
+invert actual scene properties. A later scene-derived inverse has now run
+(`recipe/evidence/button-scene-inversion-v1/`); silent is derived and not
+zero, and the two-cycle fixed point is not stable. Current Button success is
+therefore **false/pending** until an attributable human signs off.
 
 This proves one Button archetype over the two unrelated Altitude and Fluent
 libraries on the one fixed `medium` / `none`-icons, primary/secondary ×
@@ -3010,6 +3037,7 @@ or a network.
 | `recipe:normalize:check`                                        | normalization is not idempotent/key-order-insensitive, changes array order, or accepts a value JSON would coerce.                                                                                                                                                                                                                |
 | `recipe:hash:check`                                             | key insertion order changes the hash, or a meaningful tree/value/domain mutation does not.                                                                                                                                                                                                                                       |
 | `recipe:button:check`                                           | Button compilation drifts, its fixed point breaks, an axis/role/binding edit passes, or a planted defect is missed.                                                                                                                                                                                                              |
+| `recipe:button-scene-inversion:check`                          | Button expected-plan vs observe drifts, silent is assigned or claimed zero, stamped IR is read, or overall/signoff is overclaimed.                                                                                                                                                                                              |
 | `recipe:input-field:check`                                      | Input/Field compilation, two-cycle fixed point, fact accounting, source-boundary gate, semantic output, or a planted refusal drifts.                                                                                                                                                                                             |
 | `recipe:acquisition:check`                                      | a selected Button source fact lacks a by-field landing, a measured literal invents a token, or source identity enters generic logic.                                                                                                                                                                                             |
 | `recipe:receipts:check`                                         | a receipt cites evidence that does not exist, or an `inert` row cites a row that is not INERT in the channel table.                                                                                                                                                                                                              |

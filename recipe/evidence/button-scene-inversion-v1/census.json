@@ -1,0 +1,31 @@
+{
+  "writes": 0,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "currentPageUnchanged": true,
+  "currentPageId": "115:295378",
+  "currentPageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+  "inputPagePresent": true,
+  "buttonPage": {
+    "id": "85:6781",
+    "name": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+    "childCount": 4
+  },
+  "sets": [
+    {
+      "id": "85:7406",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "runIdentity": "e6a61d04-b04f4059-v4",
+      "variants": 144,
+      "ownershipKey": null
+    },
+    {
+      "id": "85:8054",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "runIdentity": "e6a61d04-b04f4059-v4",
+      "variants": 144,
+      "ownershipKey": null
+    }
+  ],
+  "pluginDataNote": "Sets carry adapterIdentity and runIdentity. ownershipKey is absent. Stamped ir*/cells/comparedIrFacts keys exist and were not read as observe values."
+}
