@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 draft antecedent pending separate authorization; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -3876,7 +3876,7 @@
       "restartAsV33Attempt2WithoutContentRowStrokesForbidden": true
     },
     "liveV34": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "e729ab475f0617288b162576b702a0148ceb98a3",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v34/protocol.json",
       "protocolSha256": "2451fb785864163a432df63b38a9758378ac39987775f958090f3f7133efd104",
@@ -3891,7 +3891,7 @@
       "antecedentHashSetSha256": "834998d57066141a7749bf2e801311cd73d808215b25591d677c3a8a639cf093",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v34/authorization-template.json",
       "authorizationTemplateSha256": "0aa114dba0f62d896b91992d3931cfd68acb637c2056b286d62c1ffec0d060c3",
-      "authorizationPresent": false,
+      "authorizationPresent": true,
       "authorizationEffective": false,
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
@@ -4051,11 +4051,16 @@
       "v32AuthorizationReusable": false,
       "v32AntecedentBytesUnchanged": true,
       "v32SceneReadbackUnchanged": true,
-      "authorizationCommitted": false,
       "taughtContentRowStrokesOmitted": true,
       "v33AuthorizationReusable": false,
       "v33AntecedentBytesUnchanged": true,
-      "v33SceneReadbackUnchanged": true
+      "v33SceneReadbackUnchanged": true,
+      "antecedentCommit": "8db64d02a3d87f4b34f9cf64ff7cbeac3a060d41",
+      "authorizationCommitStateDerivedByHistory": true,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v34/capture-authorization.json",
+      "authorizationSha256": "6995d6670392925d57baafd886e1ca84b57514766368af1a77e41606b4ff3673",
+      "signingPublicKeySpkiSha256": "bd3cde85208f02733c951cb18009d9617813b36ec67906c1b91c275e2207b7cf",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
     }
   }
 }
