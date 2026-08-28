@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 draft antecedent pending separate authorization; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -3689,7 +3689,7 @@
       "restartAsV32Attempt2WithoutContentRowEffectsForbidden": true
     },
     "liveV33": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "081133af75dfd99356608fb9ba7aed89d349df8d",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v33/protocol.json",
       "protocolSha256": "d4125e2aba6fc1553efc2873b8f4724b2dd89ece8eb2d74e5a8ccd0a7837340a",
@@ -3704,7 +3704,7 @@
       "antecedentHashSetSha256": "4e7a73438174dfc00e251d15955d07e3c60a8fa19fdbdfb50e0b1840a6b35d61",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v33/authorization-template.json",
       "authorizationTemplateSha256": "cfcd361b72e6aba08046a9b7f4c67ff85f2a8a7501826aabeccedbe45e0add10",
-      "authorizationPresent": false,
+      "authorizationPresent": true,
       "authorizationEffective": false,
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
@@ -3860,11 +3860,16 @@
       "v31AuthorizationReusable": false,
       "v31AntecedentBytesUnchanged": true,
       "v31SceneReadbackUnchanged": true,
-      "authorizationCommitted": false,
       "taughtContentRowEffectsOmitted": true,
       "v32AuthorizationReusable": false,
       "v32AntecedentBytesUnchanged": true,
-      "v32SceneReadbackUnchanged": true
+      "v32SceneReadbackUnchanged": true,
+      "antecedentCommit": "dc0c7fa0a51973e894c286ad6f4be48fd12b5a0a",
+      "authorizationCommitStateDerivedByHistory": true,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v33/capture-authorization.json",
+      "authorizationSha256": "0b37e33f7ff5c9eb96e078d76ee649a16ddd5196809319e21a0c89e029968657",
+      "signingPublicKeySpkiSha256": "0db7e3ec14cfae5a55d3cd9fcd8e4542b00844020c3a82bdc4157b0d09b6ea8a",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
     }
   }
 }
