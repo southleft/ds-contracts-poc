@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~17:20 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~17:30 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -47,10 +47,18 @@
 > (projected plan defaults to ownershipKey `root`; live extract roots are
 > `combobox` / `option`). Cleanup accepted; that Combobox page is gone.
 > Input `115:295378` stayed. Do not restart v5 attempt 2 as-is. Combobox
-> live v6 PREPARE copies the v5 stack and teaches that host
-> `observeSceneFacts` must project with the live scene root ownershipKey,
-> not default `root`. Keep v2–v5 teachings. Combobox is **not live**. Do
-> not invent a Combobox human grade. Product **v1 is incomplete**.
+> live v6 PREPARE `3dff88b4` and AUTHORIZE `525f829d` landed. Attempt 1
+> minted page `131:311324`; restore held 144 owned FILL texts. Live-root
+> `observeSceneFacts` teaching cleared; extract walk accepted. Collapse
+> then refused `non-instance repetition` on
+> `combobox/variant/small/outlined/true/default/options` (live extract has
+> four option INSTANCE children whose `componentRef` is the Figma
+> main-component name, not recipe `combobox@1/option`). Cleanup accepted;
+> that Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v6 attempt 2 as-is. Next teaching: host `sceneToNormalizedIr` must
+> recover option-instance `componentRef` as `combobox@1/option`, not the
+> live Figma main-component name. Combobox is **not live**. Do not invent
+> a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
