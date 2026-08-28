@@ -1,0 +1,154 @@
+{
+  "artifactVersion": "input-live-v46-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "fd6a3c88db69af8f57deb96847164d9e7719efdb",
+  "codeCommit": "fd6a3c88db69af8f57deb96847164d9e7719efdb",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "106:168987",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "sha256": "1b6c142d2aaee1fb255abac93c582f31a3cc7c1c7108d2505a2ce940b27a6fd2",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v43FailureCleared": {
+    "messageHelperBindingsFieldOrderNotTheRefusalLocus": true
+  },
+  "v44FailureCleared": {
+    "messageHelperLetterSpacingNotTheRefusalLocus": true
+  },
+  "v45FailureCleared": {
+    "messageHelperTextCaseNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "mui": { "FILL": 0, "FIXED": 24, "HUG": 104, "total": 128 },
+    "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedHostNormalizedFirstMessageHelper": {
+    "path": "$.children[0].children[1].children[0]",
+    "mui": {
+      "role": "input-field/message/helper",
+      "bindingFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "letterSpacing": null,
+      "textCase": null,
+      "textDecoration": "none"
+    },
+    "compile": {
+      "role": "input-field/message/helper",
+      "bindingFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "letterSpacing": null,
+      "textCase": null,
+      "textDecoration": null
+    }
+  },
+  "observedMessageHelperLetterSpacing": {
+    "hostAbsent": { "mui": 96, "polaris": 96 },
+    "compileAbsent": { "mui": 96, "polaris": 96 }
+  },
+  "observedMessageHelperTextCase": {
+    "hostAbsent": { "mui": 96, "polaris": 96 },
+    "compileAbsent": { "mui": 96, "polaris": 96 },
+    "hashedV45HostPresent": { "mui": 96, "polaris": 96, "value": "original" }
+  },
+  "observedMessageErrorTextCase": {
+    "hostAbsent": { "mui": 32, "polaris": 32 },
+    "compileAbsent": { "mui": 32, "polaris": 32 }
+  },
+  "observedMessageHelperTextDecoration": {
+    "hostPresent": { "mui": 96, "polaris": 96, "value": "none" },
+    "compileAbsent": { "mui": 96, "polaris": 96 },
+    "hashedV45HostPresent": { "mui": 96, "polaris": 96, "value": "none" }
+  },
+  "observedMessageErrorTextDecoration": {
+    "hostPresent": { "mui": 32, "polaris": 32, "value": "none" },
+    "compileAbsent": { "mui": 32, "polaris": 32 }
+  },
+  "observedMessageHelperBindings": {
+    "mui": {
+      "total": 96,
+      "hostFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 96
+    },
+    "polaris": {
+      "total": 96,
+      "hostFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 96
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v46.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[0].children[1].children[0].type.textDecoration; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v46 scene-readback omitted type.textCase on input-field/message/helper and input-field/message/error. Host did not refuse message helper textCase. Host helper textCase omitted 96/96 MUI and 96/96 Polar; compile absent 96/96 both. Error textCase omitted 32/32 both. Hashed v45 still emits helper textCase original 96/96 both. Helper letterSpacing remains omitted 96/96 both; error letterSpacing omitted 32/32 both. Helper bindings stay compile order type.fontSize|type.lineHeight.value|fills.0.color 96/96 both. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes, sha256 1b6c142d2aaee1fb255abac93c582f31a3cc7c1c7108d2505a2ce940b27a6fd2). Content-width census remains MUI 128/128 FILL and Polar 128/128 FILL. Content-height census on the extract scene remains MUI 24 FIXED / 104 HUG (the 24 FIXED are hidden floating placeholders) and Polar 128/128 HUG. Host collapse then refused unsupported structural edit at $.children[0].children[1].children[0].type.textDecoration. $.children[0] is the first variant (Size=medium, State=default, Content=placeholder, Required=false, Adornments=none). $.children[0].children[1] is the MUI first-variant second child (input-field/message-container). $.children[0].children[1].children[0] is input-field/message/helper. Host-normalized helper type.textDecoration is none; compile omits textDecoration. Host helper textDecoration none 96/96 MUI and 96/96 Polar. Compile absent 96/96 both. input-field/message/error has the same host textDecoration none 32/32 both and compile-absent 32/32 both; it was not the first-difference locus. Hashed v45 still emits helper textDecoration none 96/96 both. Polar has 0 content-row nodes; Polar first nested child is input-field/label-row. Polar first-variant children are label-row, surface, message-container. Do not invent a textDecoration value. Do not invent a variable. Do not teach the recipe to accept host message textDecoration. Do not teach FIXED as a fill. Do not restart v46 attempt 2 as-is. Scene-readback-v46 bytes are in the v46 hash set.",
+    "inputFieldRecipeInV46AntecedentHashSet": false,
+    "writerInV46AntecedentHashSet": true,
+    "restoreInV46AntecedentHashSet": true,
+    "extractRuntimeInV46AntecedentHashSet": true,
+    "sceneReadbackInV46AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "106:168987",
+    "removedPageNodeId": "106:168987"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v43SceneReadbackUnchanged": true,
+  "v43Attempt1BytesUnchanged": true,
+  "v44SceneReadbackUnchanged": true,
+  "v44Attempt1BytesUnchanged": true,
+  "v45SceneReadbackUnchanged": true,
+  "v45Attempt1BytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV46Attempt2WithoutMessageTextDecorationOmitForbidden": true
+}
