@@ -98,10 +98,10 @@
 > (`combobox/control/leading`: host omits default-true `visible`; compile
 > `controlInstance` carries `visible: true`). Cleanup accepted; that
 > Combobox page is gone. Input `115:295378` stayed. Do not restart v11
-> attempt 2 as-is. Next teaching: host must emit compile-carried
-> `visible: true` on leading-slot instances instead of omitting the
-> default-true visible flag. Keep v2–v11 teachings. Combobox is **not
-> live**. Do not invent a Combobox human grade. Product **v1 is
+> attempt 2 as-is. Combobox live v12 PREPARE teaches host to emit
+> compile-carried `visible: true` on leading-slot instances instead of
+> omitting the default-true visible flag. Keep v2–v11 teachings. Combobox
+> is **not live**. Do not invent a Combobox human grade. Product **v1 is
 > incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
