@@ -248,6 +248,10 @@ test("compile carries live visible on floating inactive placeholders", () => {
           assert.ok(placeholder);
           assert.notEqual(placeholder.visible, false);
           assert.equal(placeholder.visible, undefined);
+          assert.equal(
+            (placeholder as { opacity?: number }).opacity,
+            undefined,
+          );
           carried += 1;
         }
       }
