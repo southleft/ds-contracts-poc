@@ -821,7 +821,8 @@ lineage; do not patch hashed bytes in place.
 | A5bs | PREPARE INPUT V33. Copy the v32 stack. Do not patch hashed v32 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `effects` that compile never emits. Do not invent variables. Do not invent an effects value. Do not teach FIXED as a fill. | **Done** at `dc0c7fa0a51973e894c286ad6f4be48fd12b5a0a`. Antecedent index SHA-256 `26eca04b916de5737702d5a7cf2c642d84a2e3457fac17521b30b8b1c7694ea5`. |
 | A5bt | AUTHORIZE INPUT V33 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `dc0c7fa0a51973e894c286ad6f4be48fd12b5a0a`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `0b37e33f7ff5c9eb96e078d76ee649a16ddd5196809319e21a0c89e029968657`; SPKI SHA-256 `0db7e3ec14cfae5a55d3cd9fcd8e4542b00844020c3a82bdc4157b0d09b6ea8a`. Do not patch hashed v32 or v33 bytes. | **Done** at `f9a4ef0de155b0ef92417958335c8fff83dc74d4`. |
 | A5bu | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse content-row `clipsContent`, `cornerRadius`, or `effects`. Host then refused `$.children[0].children[0].children[0].strokes` (MUI `input-field/content-row` host emits `[]`; compile omits strokes). Polar has 0 content-row nodes. Do **not** invent a strokes value. Do **not** restart v33 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5bv | PREPARE INPUT V34. Copy the v33 stack. Do not patch hashed v33 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `strokes` that compile never emits. Do not invent variables. Do not invent a strokes value. Do not teach FIXED as a fill. | Open only after RECORD. If a hashed v34 file later fails closed, open v35. |
+| A5bv | PREPARE INPUT V34. Copy the v33 stack. Do not patch hashed v33 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `strokes` that compile never emits. Do not invent variables. Do not invent a strokes value. Do not teach FIXED as a fill. | **Draft prepared** on top of `e729ab47`. Do not self-hash this prepare commit. |
+| A5bw | AUTHORIZE INPUT V34 as a **separate** later commit. New prepare-era Ed25519 signer. Pin the PREPARE SHA. Auth lifecycle stays out of the antecedent hash set. | Open after PREPARE. Then attestation + Scratch-only live. Max 3. If a hashed v34 file fails closed, open v35. |
 
 ### B · Button closeout
 
@@ -882,11 +883,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After RECORD INPUT V33 ATTEMPT 1 is published:
+After PREPARE INPUT V34 is published:
 
 ```
-# PREPARE INPUT V34 as a separate commit. Do not patch hashed v33.
-# Copy the v33 stack. Omit content-row strokes that compile never emits.
+# AUTHORIZE INPUT V34 as a separate commit. New prepare-era Ed25519 signer.
+# Pin the PREPARE SHA. Auth lifecycle stays out of the antecedent hash set.
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -2243,7 +2244,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, and v33 attempt 1 failed closed; false** | PREPARE INPUT V34 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, and v33 attempt 1 failed closed; v34 draft prepared; false** | AUTHORIZE INPUT V34 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
