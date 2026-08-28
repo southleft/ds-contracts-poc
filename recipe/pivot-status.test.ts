@@ -1613,13 +1613,35 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV83.inventOverlapZeroForbidden = false;
     },
     (value) => {
-      value.status.input.liveV83.liveExecutionOccurred = true;
+      value.status.input.liveV83.liveExecutionOccurred = false;
     },
     (value) => {
       value.status.input.liveV83.taughtContentOpacityOmitted = false;
     },
     (value) => {
       value.status.input.liveV83.taughtCompileCarryLiveOpacity = false;
+    },
+    (value) => {
+      value.status.input.liveV83.taughtCollapseOmitInventedContentTextOpacityHeld =
+        false;
+    },
+    (value) => {
+      value.status.input.liveV83.taughtCompileCarryLiveOpacityHeld = false;
+    },
+    (value) => {
+      value.status.input.liveV83.independentRootAccountingPassed = false;
+    },
+    (value) => {
+      value.status.input.liveV83.recipeCollapseFixedPointStable = false;
+    },
+    (value) => {
+      value.status.input.liveV83.probeIssued = false;
+    },
+    (value) => {
+      value.status.input.liveV83.mintStayed = true;
+    },
+    (value) => {
+      value.status.input.liveV83.probeOtherwiseGreen = true;
     },
   ];
   for (const plant of plants) {
