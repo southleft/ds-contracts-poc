@@ -16,8 +16,10 @@
 > restamped. The arrange accident that briefly deleted page `115:295378`
 > is a recovered incident; the page id stayed. Safe restore: checkpoint
 > `2392869719628549246` (`V85 Input grids OK`). Never restore
-> `2392877528965054592`. Do not rearrange Input. Next hill: Combobox live
-> on a new Scratch page with a Combobox identity.
+> `2392877528965054592`. Do not rearrange Input. Combobox live v1 PREPARE
+> is landing on this branch: new identity, new page, Input `115:295378`
+> untouched. Combobox is **not live** until attempt 1 stays. Do not invent
+> a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
