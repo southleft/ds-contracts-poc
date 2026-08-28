@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v54-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused leading-slot binding field order; cleanup complete",
   "baseCommit": "88770e6adc4120e53372fc554e502dad49b57bfb",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v54/antecedent-index.json",
@@ -244,12 +244,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v54-attempt-1.json",
+  "attempt1Sha256": "2ae88a0fc29e97910f57f049690fe64b532e1e2fb85b1e8160acf26d0c35cdf6",
+  "restartAsV54Attempt2WithoutLeadingSlotBindingCompileOrderForbidden": true
 }
