@@ -1,0 +1,178 @@
+{
+  "artifactVersion": "input-live-v59-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "d835ad4fff7185c6e45d20a2ef3799781d9e487c",
+  "codeCommit": "d835ad4fff7185c6e45d20a2ef3799781d9e487c",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "107:204464",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "sha256": "6bd528b02a09e7d52eb5c7b59b1cf373e096d879c433cf53e35af52d9d0fc176",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v54FailureCleared": {
+    "leadingSlotBindingOrderNotTheRefusalLocus": true
+  },
+  "v55FailureCleared": {
+    "trailingSlotBindingOrderNotTheRefusalLocus": true
+  },
+  "v56FailureCleared": {
+    "requiredIndicatorBindingExtrasAndOrderNotTheRefusalLocus": true
+  },
+  "v57FailureCleared": {
+    "requiredIndicatorLetterSpacingNotTheRefusalLocus": true
+  },
+  "v58FailureCleared": {
+    "requiredIndicatorTextCaseNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "mui": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "muiHiddenPlaceholderFixed": 0
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedMessageContainerClipsContent": {
+    "hostAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedVariantClipsContent": {
+    "hostPresent": { "mui": 128, "polaris": 128 },
+    "compileEmits": true
+  },
+  "observedLeadingSlotBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    }
+  },
+  "observedTrailingSlotBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    }
+  },
+  "observedRequiredIndicatorBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    }
+  },
+  "observedRequiredIndicatorType": {
+    "mui": {
+      "total": 64,
+      "letterSpacingPresent": 0,
+      "letterSpacingAbsent": 64,
+      "textCasePresent": 0,
+      "textCaseAbsent": 64,
+      "textDecorationPresent": 64,
+      "textDecoration": "none"
+    },
+    "polaris": {
+      "total": 64,
+      "letterSpacingPresent": 0,
+      "letterSpacingAbsent": 64,
+      "textCasePresent": 0,
+      "textCaseAbsent": 64,
+      "textDecorationPresent": 64,
+      "textDecoration": "none"
+    },
+    "compileMuiTypeKeys": ["fontFamily", "fontStyle", "fontProvenance", "fontSize", "lineHeight"],
+    "compileOmitsLetterSpacing": true,
+    "compileOmitsTextCase": true,
+    "compileOmitsTextDecoration": true
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v59.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[4].children[0].children[1].children[1].type.textDecoration; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v59 scene-readback omitted type.textCase on input-field/required-indicator, keeping v17-v58 teachings including required-indicator letterSpacing omit and binding extras-drop/compile order. Host did not refuse required-indicator textCase; textCase is now absent 64/64 MUI and 64/64 Polar. Host then refused unsupported structural edit at $.children[4].children[0].children[1].children[1].type.textDecoration. $.children[4] is the fifth MUI variant (Size=medium, State=default, Content=placeholder, Required=true, Adornments=none), role input-field/variant/medium/default/placeholder/true/none. The locus node is input-field/required-indicator. Host type.textDecoration is none on 64/64 MUI and 64/64 Polar. Compile type at the same MUI node is fontFamily, fontStyle, fontProvenance, fontSize, lineHeight and omits textDecoration. Do not invent a textDecoration value. Do not invent a variable. Do not invent a binding field. Do not lift onto label. Hashed v58 still emits required-indicator textCase original at this locus. Message-container clipsContent remains omitted 128/128 both. Variant clipsContent remains present 128/128 both; compile still emits it. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes, sha256 6bd528b02a09e7d52eb5c7b59b1cf373e096d879c433cf53e35af52d9d0fc176). Content-width census remains MUI 128/128 FILL and Polar 128/128 FILL. Content-height census is MUI 128/128 HUG and Polar 128/128 HUG; hiddenPlaceholderFixed 0. Polar has 0 content-row nodes; Polar first nested child is input-field/label-row. Do not invent a FILL or FIXED. Do not teach FIXED as a fill. Do not restart v59 attempt 2 as-is. Scene-readback-v59 bytes are in the v59 hash set.",
+    "inputFieldRecipeInV59AntecedentHashSet": false,
+    "writerInV59AntecedentHashSet": true,
+    "restoreInV59AntecedentHashSet": true,
+    "extractRuntimeInV59AntecedentHashSet": true,
+    "sceneReadbackInV59AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "107:204464",
+    "removedPageNodeId": "107:204464"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v54SceneReadbackUnchanged": true,
+  "v55SceneReadbackUnchanged": true,
+  "v56SceneReadbackUnchanged": true,
+  "v56Attempt1BytesUnchanged": true,
+  "v57SceneReadbackUnchanged": true,
+  "v57Attempt1BytesUnchanged": true,
+  "v58SceneReadbackUnchanged": true,
+  "v58Attempt1BytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV59Attempt2WithoutRequiredIndicatorTextDecorationOmitForbidden": true
+}
