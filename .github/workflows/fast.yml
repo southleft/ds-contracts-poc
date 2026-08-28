@@ -420,6 +420,9 @@ jobs:
       - name: recipe:input-field:live:v55:check (order leading-slot bindings; hashed v54 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v55:check
+      - name: recipe:input-field:live:v56:check (order trailing-slot bindings; hashed v55 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v56:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
