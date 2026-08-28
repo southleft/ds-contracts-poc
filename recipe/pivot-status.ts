@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -798,8 +798,12 @@ const V29_AUTHORIZATION_TEMPLATE_SHA256 =
 const V29_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v29-status.json";
 const V29_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused content/placeholder type.textDecoration; cleanup complete";
 const V29_BASE_COMMIT = "fbdc29e8247daaf2a1fb1c3a155a34f033dcf9fe";
+const V29_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v29-attempt-1.json";
+const V29_ATTEMPT_1_SHA256 =
+  "8e2bb26cf23dd2dacf5ab8d1ed5e49a8f2b2129c28ccf1029c73fe8617328328";
 const V29_ANTECEDENT_COMMIT = "b54a2ea24a7172cb0caa9a9072ed2fd40f661ad0";
 const V29_AUTHORIZATION_PATH = `${V29_ROOT}/capture-authorization.json`;
 const V29_AUTHORIZATION_SHA256 =
@@ -2548,11 +2552,17 @@ export function validatePivotStatus(
     status.input?.liveV29?.hostPhases !== 3 ||
     status.input?.liveV29?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV29?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV29?.attemptsExecuted !== 0 ||
-    status.input?.liveV29?.nextAttempt !== 1 ||
-    status.input?.liveV29?.liveExecutionOccurred !== false ||
-    status.input?.liveV29?.figmaWrites !== 0 ||
+    status.input?.liveV29?.attemptsExecuted !== 1 ||
+    status.input?.liveV29?.nextAttempt !== 2 ||
+    status.input?.liveV29?.liveExecutionOccurred !== true ||
+    status.input?.liveV29?.figmaWrites !== 4 ||
     status.input?.liveV29?.figmaCaptures !== 0 ||
+    status.input?.liveV29?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV29?.attempt1Path !== V29_ATTEMPT_1_PATH ||
+    status.input?.liveV29?.attempt1Sha256 !== V29_ATTEMPT_1_SHA256 ||
+    status.input?.liveV29
+      ?.restartAsV29Attempt2WithoutContentPlaceholderTextDecorationForbidden !==
+      true ||
     status.input?.liveV29?.humanSignoff !== "pending" ||
     status.input?.liveV29?.overallInputSuccess !== false
   )
@@ -5295,9 +5305,18 @@ export function verifyPivotStatus(): void {
       true ||
     v29Status.smallestHonestDelta?.v28SceneReadbackUnchanged !== true ||
     v29Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v29Status.attemptsExecuted !== 0 ||
-    v29Status.liveExecutionOccurred !== false ||
-    v29Status.figmaWrites !== 0 ||
+    v29Status.attemptsExecuted !== 1 ||
+    v29Status.nextAttempt !== 2 ||
+    v29Status.liveExecutionOccurred !== true ||
+    v29Status.figmaWrites !== 4 ||
+    v29Status.figmaCaptures !== 0 ||
+    v29Status.createdNodesThenRemoved !== 2317 ||
+    v29Status.attempt1Path !== V29_ATTEMPT_1_PATH ||
+    v29Status.attempt1Sha256 !== V29_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V29_ATTEMPT_1_PATH)) !==
+      V29_ATTEMPT_1_SHA256 ||
+    v29Status.restartAsV29Attempt2WithoutContentPlaceholderTextDecorationForbidden !==
+      true ||
     v29Status.overallInputSuccess !== false
   )
     failures.push("v29 draft antecedent/status mismatch");
