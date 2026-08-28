@@ -1675,6 +1675,24 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
     (value) => {
       value.status.input.liveV84.taughtWriterHiddenFillOccupancy = false;
     },
+    (value) => {
+      value.status.input.liveV85.taughtCleanupOnFailureOnly = false;
+    },
+    (value) => {
+      value.status.input.liveV85.v84SceneReadbackUnchanged = false;
+    },
+    (value) => {
+      value.status.input.liveV85.authorizationPresent = true;
+    },
+    (value) => {
+      value.status.input.liveV85.v19WriterMinted = false;
+    },
+    (value) => {
+      value.status.input.liveV85.liveExecutionOccurred = true;
+    },
+    (value) => {
+      value.status.input.liveV85.figmaWrites = 133;
+    },
   ];
   for (const plant of plants) {
     const value = fixtures();

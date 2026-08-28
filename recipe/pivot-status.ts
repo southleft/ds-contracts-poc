@@ -2526,6 +2526,26 @@ const V84_AUTHORIZATION_SHA256 =
   "77ee88f1e5b975cf245bb911bc324b3da450c442ba64b682e7a30a729dfeadee";
 const V84_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
   "ddac8401271684c50733127bd6a349de2c10a96babb58a47d6f019b0de4a56b0";
+const V85_ROOT = "recipe/evidence/input-field-live-pivot-v85";
+const V85_PROTOCOL_SHA256 =
+  "1cae4b0a01e36b9a5404375af65e77f3ad4c166e86f22e1bdb04e65d7e34d93b";
+const V85_PLAN_SHA256 =
+  "b987cd06a95b213ee3f39207446de904827bdd29ab4cdb7c1d61c9822f4bed52";
+const V85_CAPTURE_MANIFEST_SHA256 =
+  "e21a036862bb1e77b8e60c6802ce276adaec2e007a223eba9edf953e97634506";
+const V85_REQUEST_MANIFEST_SHA256 =
+  "2b8db37b81deb6713349bd41edaa18e06ad2d40e5638906d01b6a3f4e2716408";
+const V85_INDEX_SHA256 =
+  "b3b7df6d5c27abb97ba3f46e9554ad1442a25522cebaa10a7890243b2dd79bad";
+const V85_HASH_SET_SHA256 =
+  "8c97bc73accc20f1977d9dfc14126476c349e389c7e7cce9a2340b6309cdebb7";
+const V85_AUTHORIZATION_TEMPLATE_SHA256 =
+  "fd736e3121b109c64a3bec0c2a59a5cacb2569ca4012ca38e01a19099df688f7";
+const V85_STATUS_PATH =
+  "recipe/evidence/input-field-live-pivot-v85-status.json";
+const V85_STATUS =
+  "draft antecedent; pending separate authorization; live execution forbidden";
+const V85_BASE_COMMIT = "da51ea5e92908e0dac154776c79ec8f6729132f5";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -7746,9 +7766,75 @@ export function validatePivotStatus(
     status.input?.liveV84?.mintStayed !== false ||
     status.input?.liveV84?.doNotClaimV1Complete !== true ||
     status.input?.liveV84?.humanSignoff !== "pending" ||
-    status.input?.liveV84?.overallInputSuccess !== false
+    status.input?.liveV84?.overallInputSuccess !== false ||
+    status.input?.liveV85?.status !== V85_STATUS ||
+    status.input?.liveV85?.baseCommit !== V85_BASE_COMMIT ||
+    status.input?.liveV85?.protocolSha256 !== V85_PROTOCOL_SHA256 ||
+    status.input?.liveV85?.proofPlanSha256 !== V85_PLAN_SHA256 ||
+    status.input?.liveV85?.captureManifestSha256 !==
+      V85_CAPTURE_MANIFEST_SHA256 ||
+    status.input?.liveV85?.requestManifestSha256 !==
+      V85_REQUEST_MANIFEST_SHA256 ||
+    status.input?.liveV85?.antecedentIndexSha256 !== V85_INDEX_SHA256 ||
+    status.input?.liveV85?.antecedentHashSetSha256 !== V85_HASH_SET_SHA256 ||
+    status.input?.liveV85?.authorizationTemplateSha256 !==
+      V85_AUTHORIZATION_TEMPLATE_SHA256 ||
+    status.input?.liveV85?.authorizationPresent !== false ||
+    status.input?.liveV85?.authorizationCommitted !== false ||
+    status.input?.liveV85?.authorizationEffective !== false ||
+    status.input?.liveV85?.authorizationLifecycleExcludedFromAntecedentHash !==
+      true ||
+    status.input?.liveV85?.authorizationCanBeAddedWithoutAntecedentRebuild !==
+      true ||
+    status.input?.liveV85?.taughtCleanupOnFailureOnly !== true ||
+    status.input?.liveV85?.taughtProbeExcludeOpacityZeroOccupancyOverlap !==
+      true ||
+    status.input?.liveV85?.taughtCollapseOmitInventedContentTextOpacity !==
+      true ||
+    status.input?.liveV85?.taughtCompileCarryLiveOpacity !== true ||
+    status.input?.liveV85?.inventOpacityVariableForbidden !== true ||
+    status.input?.liveV85?.inventCompileTextOpacityForbidden !== true ||
+    status.input?.liveV85?.taughtCompileCarryLiveVisible !== true ||
+    status.input?.liveV85?.inventHostVisibleFalseForbidden !== true ||
+    status.input?.liveV85?.taughtContentOpacityOmitted !== true ||
+    status.input?.liveV85?.taughtWriterHiddenFillOccupancy !== true ||
+    status.input?.liveV85?.taughtProbeExcludeOverlayLabelAabb !== true ||
+    status.input?.liveV85?.taughtProbeRevealThenMeasureHiddenContentFill !==
+      true ||
+    status.input?.liveV85?.taughtWriterFirstSegmentBind !== true ||
+    status.input?.liveV85?.taughtProbePolarReflowAgainstContentText !== true ||
+    status.input?.liveV85?.taughtProbeFirstSegmentRole !== true ||
+    status.input?.liveV85?.taughtUnnamedSourcePxCarriedNotRequiredEquals !==
+      true ||
+    status.input?.liveV85?.v16WriterBytesUnchanged !== true ||
+    status.input?.liveV85?.v17WriterProgramUnchanged !== true ||
+    status.input?.liveV85?.v18WriterMinted !== true ||
+    status.input?.liveV85?.v18WriterProgramUnchanged !== true ||
+    status.input?.liveV85?.v18WriterPayloadUnchanged !== true ||
+    status.input?.liveV85?.v19WriterMinted !== true ||
+    status.input?.liveV85?.v84SceneReadbackUnchanged !== true ||
+    status.input?.liveV85?.v83SceneReadbackUnchanged !== true ||
+    status.input?.liveV85?.v82SceneReadbackUnchanged !== true ||
+    status.input?.liveV85?.v84AuthorizationReusable !== false ||
+    status.input?.liveV85?.v83AuthorizationReusable !== false ||
+    status.input?.liveV85?.inventPolarPixelOrSpreadValuesForbidden !== true ||
+    status.input?.liveV85?.inventPolarContentRowForbidden !== true ||
+    status.input?.liveV85?.inventOverlapZeroForbidden !== true ||
+    status.input?.liveV85?.sceneReadbackCarried !== true ||
+    status.input?.liveV85?.carriedSceneReadback !==
+      "recipe/scene-readback-v85.ts" ||
+    status.input?.liveV85?.sourceRoots !== 2 ||
+    status.input?.liveV85?.expectedSceneFacts !== 43_726 ||
+    status.input?.liveV85?.security?.liveExecutionForbidden !== true ||
+    status.input?.liveV85?.attemptsExecuted !== 0 ||
+    status.input?.liveV85?.nextAttempt !== 1 ||
+    status.input?.liveV85?.liveExecutionOccurred !== false ||
+    status.input?.liveV85?.figmaWrites !== 0 ||
+    status.input?.liveV85?.doNotClaimV1Complete !== true ||
+    status.input?.liveV85?.humanSignoff !== "pending" ||
+    status.input?.liveV85?.overallInputSuccess !== false
   )
-    fail("v3 exhausted/v4-v84 current status");
+    fail("v3 exhausted/v4-v85 current status");
   const unexpected = v3Files.filter(
     (file) =>
       !V3_PREPARED_FILES.includes(file as (typeof V3_PREPARED_FILES)[number]),
@@ -8371,6 +8457,13 @@ export function verifyPivotStatus(): void {
     `${V84_ROOT}/antecedent-index.json`,
   );
   const v84Status = readRepositoryJson<Record<string, any>>(V84_STATUS_PATH);
+  const v85Protocol = readRepositoryJson<Record<string, any>>(
+    `${V85_ROOT}/protocol.json`,
+  );
+  const v85Index = readRepositoryJson<Record<string, any>>(
+    `${V85_ROOT}/antecedent-index.json`,
+  );
+  const v85Status = readRepositoryJson<Record<string, any>>(V85_STATUS_PATH);
 
   const v5Superseding =
     readRepositoryJson<Record<string, any>>(V5_SUPERSEDING_PATH);
@@ -14250,6 +14343,58 @@ export function verifyPivotStatus(): void {
     v84Status.overallInputSuccess !== false
   )
     failures.push("v84 authorization/status mismatch");
+  if (
+    sha256(readRepositoryEvidence(`${V85_ROOT}/protocol.json`)) !==
+      V85_PROTOCOL_SHA256 ||
+    sha256(readRepositoryEvidence(`${V85_ROOT}/proof-plan.json`)) !==
+      V85_PLAN_SHA256 ||
+    sha256(readRepositoryEvidence(`${V85_ROOT}/capture-manifest.json`)) !==
+      V85_CAPTURE_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V85_ROOT}/request-manifest.json`)) !==
+      V85_REQUEST_MANIFEST_SHA256 ||
+    sha256(readRepositoryEvidence(`${V85_ROOT}/antecedent-index.json`)) !==
+      V85_INDEX_SHA256 ||
+    sha256(
+      readRepositoryEvidence(`${V85_ROOT}/authorization-template.json`),
+    ) !== V85_AUTHORIZATION_TEMPLATE_SHA256 ||
+    v85Protocol.hostNormalization?.carriedSceneReadback !==
+      "recipe/scene-readback-v85.ts" ||
+    v85Protocol.hostNormalization?.taughtCleanupOnFailureOnly !== true ||
+    v85Protocol.execution?.cleanupOnFailureOnly !== true ||
+    v85Protocol.execution?.cleanupMustNotExecuteOnMainComplete !== true ||
+    v85Protocol.execution?.requestOrder?.at(-1) === "cleanup" ||
+    !v85Protocol.execution?.requestOrder?.includes(
+      "persist signed cleanup recovery request",
+    ) ||
+    v85Protocol.hostNormalization
+      ?.taughtProbeExcludeOpacityZeroOccupancyOverlap !== true ||
+    v85Protocol.hostNormalization?.taughtCollapseOmitInventedContentTextOpacity !==
+      true ||
+    v85Protocol.hostNormalization?.v84SceneReadbackUnchanged !== true ||
+    v85Protocol.hostNormalization?.v83SceneReadbackUnchanged !== true ||
+    v85Protocol.hostNormalization?.v19WriterMinted !== true ||
+    v85Index.hashSetSha256 !== V85_HASH_SET_SHA256 ||
+    v85Index.authorizationCanBeAddedWithoutAntecedentRebuild !== true ||
+    v85Status.artifactVersion !== "input-live-v85-status-v1" ||
+    v85Status.status !== V85_STATUS ||
+    v85Status.baseCommit !== V85_BASE_COMMIT ||
+    v85Status.antecedent?.commit !== null ||
+    v85Status.authorization?.present !== false ||
+    v85Status.authorization?.committed !== false ||
+    v85Status.authorization?.effective !== false ||
+    v85Status.smallestHonestDelta?.taughtCleanupOnFailureOnly !== true ||
+    v85Status.smallestHonestDelta
+      ?.taughtProbeExcludeOpacityZeroOccupancyOverlap !== true ||
+    v85Status.smallestHonestDelta?.v84SceneReadbackUnchanged !== true ||
+    v85Status.smallestHonestDelta?.v83SceneReadbackUnchanged !== true ||
+    v85Status.smallestHonestDelta?.v19WriterMinted !== true ||
+    v85Status.attemptsExecuted !== 0 ||
+    v85Status.liveExecutionOccurred !== false ||
+    v85Status.figmaWrites !== 0 ||
+    v85Status.doNotClaimV1Complete !== true ||
+    v85Status.overallInputSuccess !== false
+  )
+    failures.push("v85 authorization/status mismatch");
   for (const [artifactPath, metadata] of Object.entries(
     v26Index.artifacts ?? {},
   ) as Array<[string, { bytes: number; sha256: string }]>) {

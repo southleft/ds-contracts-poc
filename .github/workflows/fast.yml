@@ -507,6 +507,9 @@ jobs:
       - name: recipe:input-field:live:v84:check (probe exclude opacity-0 occupancy overlap; hashed v83 scene-readback and v19 writer frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v84:check
+      - name: recipe:input-field:live:v85:check (cleanup-on-failure-only; hashed v84 scene-readback and v19 writer frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v85:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
