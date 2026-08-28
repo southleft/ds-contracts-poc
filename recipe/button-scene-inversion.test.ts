@@ -4,7 +4,9 @@ import test from "node:test";
 import {
   buttonV4LiveTokenName,
   canonicalizeButtonExpectedPlanNames,
+  canonicalizeButtonObserveComponentRef,
   canonicalizeButtonObserveTokenName,
+  compileButtonComponentRefMap,
   compileButtonExpectedScenePlans,
   compileButtonTokenIdentityMap,
   canonicalizeButtonVariantAxisOrder,
@@ -299,6 +301,33 @@ test("variantAxis order canonicalizes only when the value set matches compile", 
     compileAxes,
   );
   assert.deepEqual(drifted?.Size.values, ["medium", "xlarge"]);
+});
+
+test("componentRef canonicalization is unique last-segment same-key only", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const map = compileButtonComponentRefMap(altitude.compileRoot);
+  assert.equal(
+    canonicalizeButtonObserveComponentRef(
+      "__button/helper/leading / icon@1",
+      map,
+    ),
+    "icon@1",
+  );
+  assert.equal(
+    canonicalizeButtonObserveComponentRef(
+      "__button/helper/loading / spinner@1",
+      map,
+    ),
+    "spinner@1",
+  );
+  assert.equal(
+    canonicalizeButtonObserveComponentRef(
+      "__button/helper/leading / not-a-compile-ref",
+      map,
+    ),
+    "__button/helper/leading / not-a-compile-ref",
+  );
 });
 
 test("token name canonicalization is unique same-key sanitization only", () => {

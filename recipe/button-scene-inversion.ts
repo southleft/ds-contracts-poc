@@ -194,6 +194,49 @@ export function canonicalizeButtonObserveTokenName(
   return liveName;
 }
 
+const collectCompileComponentRefs = (
+  node: { componentRef?: string; children?: readonly unknown[] },
+): string[] => [
+  ...(typeof node.componentRef === "string" && node.componentRef.length > 0
+    ? [node.componentRef]
+    : []),
+  ...(node.children ?? []).flatMap((child) =>
+    collectCompileComponentRefs(
+      child as { componentRef?: string; children?: readonly unknown[] },
+    ),
+  ),
+];
+
+export function compileButtonComponentRefMap(
+  compileRoot: ComponentSetNode,
+): Map<string, string> {
+  const unique = new Map<string, string>();
+  const collisions = new Set<string>();
+  const add = (key: string, ref: string): void => {
+    if (collisions.has(key)) return;
+    const previous = unique.get(key);
+    if (previous !== undefined && previous !== ref) {
+      collisions.add(key);
+      unique.delete(key);
+      return;
+    }
+    unique.set(key, ref);
+  };
+  for (const ref of collectCompileComponentRefs(compileRoot)) {
+    add(ref, ref);
+    add(ref.split(" / ").at(-1) ?? ref, ref);
+  }
+  return unique;
+}
+
+export function canonicalizeButtonObserveComponentRef(
+  liveRef: string,
+  identityByLastSegment: ReadonlyMap<string, string>,
+): string {
+  const last = liveRef.split(" / ").at(-1) ?? liveRef;
+  return identityByLastSegment.get(last) ?? liveRef;
+}
+
 export function refuseHistoricalReadbackAsObserve(value: unknown): string[] {
   const failures: string[] = [];
   if (!Array.isArray(value)) {
@@ -294,10 +337,21 @@ const COMPILE_ABSENT_STROKE_SIDE_FIELDS = new Set([
 export function normalizeButtonObserveScene(
   scene: SceneNodeSnapshot,
   identityByLiveName?: ReadonlyMap<string, string>,
+  componentRefByLastSegment?: ReadonlyMap<string, string>,
 ): SceneNodeSnapshot {
   return {
     ...scene,
     name: firstSegmentButtonName(scene.name),
+    ...(scene.componentRef === undefined ||
+    scene.componentRef === null ||
+    componentRefByLastSegment === undefined
+      ? {}
+      : {
+          componentRef: canonicalizeButtonObserveComponentRef(
+            scene.componentRef,
+            componentRefByLastSegment,
+          ),
+        }),
     boundVariables: scene.boundVariables
       .filter((binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field))
       .map((binding) =>
@@ -312,7 +366,11 @@ export function normalizeButtonObserveScene(
             },
       ),
     children: scene.children.map((child) =>
-      normalizeButtonObserveScene(child, identityByLiveName),
+      normalizeButtonObserveScene(
+        child,
+        identityByLiveName,
+        componentRefByLastSegment,
+      ),
     ),
   };
 }
@@ -471,6 +529,7 @@ export function compareButtonSceneInversion(
       options.canonicalizeTokens === false
         ? undefined
         : compileButtonTokenIdentityMap(plan.compileRoot),
+      compileButtonComponentRefMap(plan.compileRoot),
     );
     const stamped = forbiddenObserveKeys(scene);
     if (stamped.length > 0) {
@@ -601,6 +660,7 @@ export function serializeButtonInversionReport(
       "live token/{type}/{sanitized} names canonicalize to compile identities only when the v4 writer sanitizer is unique for the same key; collisions are left live",
       "name compare takes the first :: segment (Input V74 / font-provenance class); 300 label/slot/loading names match; set name Button / button@1 proof vs button/set is not first-segment-equal and was carried live",
       "variantAxis values canonicalize to compile order when the value set matches (Input V72 Size-axis class); order only, no invented values",
+      "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
       "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
       "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",

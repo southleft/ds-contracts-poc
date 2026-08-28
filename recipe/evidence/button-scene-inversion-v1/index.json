@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "5792f2766e658a8eadb4a7a77b9988ac779b1cf43b2158dbcee5e0c409e70e9f",
+    "sha256": "28fffbd903e54ecd8feab83ab3f2bb4fef0fb0addca265b5660c5efdffcf6000",
     "ok": false,
     "roots": [
       {
@@ -51,11 +51,11 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 8257,
-        "silent": 449,
+        "matched": 8413,
+        "silent": 293,
         "missing": 0,
         "extra": 291,
-        "mismatched": 449,
+        "mismatched": 293,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
@@ -68,12 +68,6 @@
             "missing": 0,
             "extra": 288,
             "mismatched": 144
-          },
-          {
-            "channel": "componentRef",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 156
           },
           {
             "channel": "cornerRadius",
@@ -151,11 +145,11 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 8329,
-        "silent": 449,
+        "matched": 8485,
+        "silent": 293,
         "missing": 0,
         "extra": 267,
-        "mismatched": 449,
+        "mismatched": 293,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
@@ -168,12 +162,6 @@
             "missing": 0,
             "extra": 264,
             "mismatched": 144
-          },
-          {
-            "channel": "componentRef",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 156
           },
           {
             "channel": "cornerRadius",
@@ -253,6 +241,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "b22b54a4aa6abb07ed75a5d8bbbebf5b4b0a20706b287efc9334353e2089f32f"
+    "sha256": "98b0275341ae523537994a06aaa5feb53b66b87f642a79bfa457bf9c7c35e873"
   }
 }

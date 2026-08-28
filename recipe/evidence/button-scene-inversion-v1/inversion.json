@@ -12,11 +12,11 @@
       "setId": "85:7406",
       "variants": 144,
       "expectedFacts": 8706,
-      "matched": 8257,
-      "silent": 449,
+      "matched": 8413,
+      "silent": 293,
       "missing": 0,
       "extra": 291,
-      "mismatched": 449,
+      "mismatched": 293,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8706,
@@ -29,12 +29,6 @@
           "missing": 0,
           "extra": 288,
           "mismatched": 144
-        },
-        {
-          "channel": "componentRef",
-          "missing": 0,
-          "extra": 0,
-          "mismatched": 156
         },
         {
           "channel": "cornerRadius",
@@ -112,11 +106,11 @@
       "setId": "85:8054",
       "variants": 144,
       "expectedFacts": 8778,
-      "matched": 8329,
-      "silent": 449,
+      "matched": 8485,
+      "silent": 293,
       "missing": 0,
       "extra": 267,
-      "mismatched": 449,
+      "mismatched": 293,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8778,
@@ -129,12 +123,6 @@
           "missing": 0,
           "extra": 264,
           "mismatched": 144
-        },
-        {
-          "channel": "componentRef",
-          "missing": 0,
-          "extra": 0,
-          "mismatched": 156
         },
         {
           "channel": "cornerRadius",
@@ -217,6 +205,7 @@
     "live token/{type}/{sanitized} names canonicalize to compile identities only when the v4 writer sanitizer is unique for the same key; collisions are left live",
     "name compare takes the first :: segment (Input V74 / font-provenance class); 300 label/slot/loading names match; set name Button / button@1 proof vs button/set is not first-segment-equal and was carried live",
     "variantAxis values canonicalize to compile order when the value set matches (Input V72 Size-axis class); order only, no invented values",
+    "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
     "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
     "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
     "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan"

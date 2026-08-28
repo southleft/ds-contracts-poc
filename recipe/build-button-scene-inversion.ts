@@ -4,6 +4,7 @@ import { gzipSync, gunzipSync } from "node:zlib";
 
 import {
   assignButtonSceneOwnership,
+  compileButtonComponentRefMap,
   compileButtonTokenIdentityMap,
   normalizeButtonObserveScene,
   BUTTON_SCENE_INVERSION_ROOT,
@@ -44,6 +45,7 @@ const readObserve = (
   return normalizeButtonObserveScene(
     assignButtonSceneOwnership(raw, plan.compileRoot),
     compileButtonTokenIdentityMap(plan.compileRoot),
+    compileButtonComponentRefMap(plan.compileRoot),
   );
 };
 

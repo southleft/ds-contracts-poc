@@ -488,9 +488,9 @@
 > retained. Scene-derived inversion has now run (expected-plan vs 0-write observe;
 > silent derived, not zero). Observe role first-segment + unique same-key token
 > sanitization taught; name first-segment then held (300/301); variant-axis
-> order then held (V72 class). Silent is now Altitude **449/8706**, Fluent
-> **449/8778**. Remaining is font/set/componentRef/value drift. Roboto/SemiBold
-> were not
+> order then held (V72 class); unique last-segment componentRef then held.
+> Silent is now Altitude **293/8706**, Fluent **293/8778**. Remaining is
+> font/set/value drift. Roboto/SemiBold were not
 > invented as compile fonts. The human grade is still not attributable. Input overall success is false and
 > blocked: live v2 improved aggregate geometry and pixel/ink versus legacy but
 > still fails adornment-content and MUI-stratum safeguards. Commit
@@ -1045,11 +1045,12 @@ One teaching per PREPARE. V75 is class B only.
 | step | action | exit criterion |
 | --- | --- | --- |
 | B1 | Keep the technical mint, usability, restoration, and 12/12 adjudication bytes. Do not restamp them. | Existing Button technical measurements remain byte-stable. |
-| B2 | Fresh scene-derived inversion/accounting from the live Button page, not stamped/self-selected IR. Do not collide with or rewrite that page except as an explicit later proof if required. | **Measured 2026-08-28.** First run: Altitude 8706 / 5795 / **2911 silent**; Fluent 8778 / 5891 / **2887 silent**. Then role, unique same-key token sanitize, and name first-segment. After those plus variant-axis order: Altitude 8706 / 8257 / **449 silent**; Fluent 8778 / 8329 / **449 silent**. Fixed point still not stable (`button/set` on live set name `Button / button@1 proof`). Page `85:6781` unread-write; Input page `115:295378` untouched. Not silent-zero. |
+| B2 | Fresh scene-derived inversion/accounting from the live Button page, not stamped/self-selected IR. Do not collide with or rewrite that page except as an explicit later proof if required. | **Measured 2026-08-28.** First run: Altitude 8706 / 5795 / **2911 silent**; Fluent 8778 / 5891 / **2887 silent**. Then role, unique same-key token sanitize, and name first-segment. After those plus variant-axis order and unique componentRef: Altitude 8706 / 8413 / **293 silent**; Fluent 8778 / 8485 / **293 silent**. Fixed point still not stable (`button/set` on live set name `Button / button@1 proof`). Page `85:6781` unread-write; Input page `115:295378` untouched. Not silent-zero. |
 | B2a | One teaching: observe `role()` / name first-segment so `Variant=` and ` :: ` do not drop `button/variant/…` (Input V74 class). 0-write live re-observe. | **Held.** Live names are still `Variant=…` with no `button/variant/` first segment. Role is recovered from the live `Variant=`/`Size=`/`State=`/`Icons=` property string (same four axes). Silent 2911→2767 / 2887→2743 (−144/−144 missing variant roles). Set role `Button / button@1 proof` vs `button/set` remains. |
 | B2b | One teaching: token name canonicalization if order/sanitization-only (same keys). Do not invent identities. | **Held.** Live `token/{type}/{sanitized}` names are the v4 writer slug of the compile identity (dots→hyphens), not hex `id-…`. Unique same-key map only; collisions left live. Silent 2767→**751** / 2743→**751** (−2016/−1992). Expected-plans not restamped. |
 | B2c | One teaching: name compare takes the first ` :: ` segment (Input V74 / font-provenance class). 0-write live re-observe. Do not invent the set name. | **Held.** Compile `button/label :: Label` (and slot/loading siblings) vs live first-segment `button/label`: 300/301 first-segment-equal. Set name `Button / button@1 proof` vs `button/set` is not first-segment-equal; live name carried. Silent 751→**451** both. Expected-plans not restamped. 0-write re-observe byte-identical; Input page `115:295378` still current. |
 | B2d | One teaching: variant-axis order (Input V72 Size-axis class). Order only when the value set matches compile. 0-write live re-observe. | **Held.** Live Size `[medium,small,large]` and Variant `[secondary,primary]` share compile value sets. Order canonicalized; no invented values. Silent 451→**449** both. Expected-plans not restamped. 0-write census; Input page `115:295378` still current. |
+| B2e | One teaching: componentRef last-segment sanitize if unique same-key. Do not invent refs. 0-write live re-observe. | **Held.** Live `__button/helper/leading / icon@1` and `__button/helper/loading / spinner@1` last-segment to compile `icon@1` / `spinner@1`. Unique reverse only. Silent 449→**293** both (−156/−156). Expected-plans not restamped. 0-write census; Input page `115:295378` still current. |
 | B3 | Attributable human signoff on Button. | **Human gate.** Overall Button stays **false** until signed. |
 
 ### C · Combobox
@@ -1186,7 +1187,7 @@ V83 extract sha256 `5be43bb66439927d7d051cbc1491e21b6005417a76f01c4ff0ff6c62821a
 
 ### Immediate next command
 
-V85 attempt 1 mint stayed. Page `115:295378` is still on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (runIdentity `4a074b24-e8503dd5-input-v5`). This is the first review-worthy Input canvas — ping TJ to open https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh and review that page. Button variant-axis order teach landed; silent is now **449/8706** and **449/8778**, still not zero. Do **not** ping TJ for Button review (Input canvas is the review ping). **B3 remains: attributable human signoff on Button**. Remaining Button silent is font/set/componentRef/value drift — do not invent Roboto/SemiBold as compile fonts. Do not invent a Button or Input human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
+V85 attempt 1 mint stayed. Page `115:295378` is still on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (runIdentity `4a074b24-e8503dd5-input-v5`). This is the first review-worthy Input canvas — ping TJ to open https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh and review that page. Button unique componentRef teach landed; silent is now **293/8706** and **293/8778**, still not zero. Do **not** ping TJ for Button review (Input canvas is the review ping). **B3 remains: attributable human signoff on Button**. Remaining Button silent is font/set/value drift — do not invent Roboto/SemiBold as compile fonts. Do not invent a Button or Input human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
 
 ## Correction task 2 — offline implementation, 2026-08-27
 
@@ -1879,7 +1880,7 @@ decision uses only the v2 pair.
 | live usability                            | **pass**            | reflow, switching, binding, and no-fake-layout each 2/2; 288/288 labels                           |
 | exact probe restoration                   | **pass**            | 2/2 before/after geometry hashes identical                                                        |
 | live readback fixed point                 | **measured / not stable** | scene-derived inverse ran; both roots fail `button/set` role on the live set name `Button / button@1 proof` |
-| zero-silent accounting                    | **measured / not zero** | silent derived as expectedFacts − matched: Altitude **449/8706**, Fluent **449/8778** after role+token+name+variant-axis teachings |
+| zero-silent accounting                    | **measured / not zero** | silent derived as expectedFacts − matched: Altitude **293/8706**, Fluent **293/8778** after role+token+name+variant-axis+componentRef teachings |
 | attributable human live canvas signoff    | **pending**         | 12/12 grade bytes retained, but no reviewer identity/signature/timestamp proves independence      |
 | independent original-source references    | **pass**            | 12 external-library source renders; neither path under test supplied a reference                  |
 | **overall Button success**                | **false**           | human signoff pending; scene-derived inversion is not silent-zero and not fixed-point stable |
@@ -1923,15 +1924,20 @@ expected-plan vs observe, the same honesty bar as Input V70–V84.
   4. **Variant-axis order (V72 Size-axis class).** Live Size
      `[medium,small,large]` and Variant `[secondary,primary]` match compile
      value sets. Order only; no invented values. Silent −2/−2.
-- After those: Altitude **449/8706** (8257 matched), Fluent **449/8778**
-  (8329 matched). Name leftover 1 (set). Binding leftover 144/144 (compile
-  `strokes.0.weight` still absent live). Extras 291/267 remain (duplicate
-  `fills.0` / `strokes.0` plus set chrome).
+  5. **componentRef last-segment (unique same-key).** Live
+     `__button/helper/leading / icon@1` and
+     `__button/helper/loading / spinner@1` last-segment to compile `icon@1`
+     / `spinner@1`. Unique reverse only; unknown last segments left live.
+     Silent −156/−156.
+- After those: Altitude **293/8706** (8413 matched), Fluent **293/8778**
+  (8485 matched). Name leftover 1 (set). Binding leftover 144/144 (compile
+  `strokes.0.weight` still absent live; live has four per-side stroke
+  weights). Extras 291/267 remain (duplicate `fills.0` / `strokes.0` plus
+  set chrome).
 - Remaining silent includes **value-invent / not same-class**: live
   resolved fonts (Fluent **Roboto**, `SemiBold` vs compile stacks /
   `Semi Bold`); live set name/role `Button / button@1 proof` vs
-  `button/set :: …`; live `componentRef` `__button/helper/… / icon@1` vs
-  `icon@1`. Do **not** invent Roboto/SemiBold as compile fonts.
+  `button/set :: …`. Do **not** invent Roboto/SemiBold as compile fonts.
 - `ok: false`. Human signoff **pending**. Overall Button **false**.
 
 #### Input/Field offline boundary — adjudicated failure
@@ -2583,8 +2589,8 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| Button      | **technical mint retained; variant-axis order teach landed (silent derived, Altitude 449/8706, Fluent 449/8778, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Remaining silent is font/set/componentRef/value drift. Do not invent Roboto/SemiBold. |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; review-worthy Input canvas; false** | V85 mint stayed on Scratch page `115:295378`. First Input review ping. Button variant-axis order teach landed (silent 449/449, not zero); Button signoff still pending. Do not claim v1 complete. |
+| Button      | **technical mint retained; unique componentRef teach landed (silent derived, Altitude 293/8706, Fluent 293/8778, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Remaining silent is font/set/value drift. Do not invent Roboto/SemiBold. |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; review-worthy Input canvas; false** | V85 mint stayed on Scratch page `115:295378`. First Input review ping. Button unique componentRef teach landed (silent 293/293, not zero); Button signoff still pending. Do not claim v1 complete. |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
@@ -2748,7 +2754,7 @@ missing-column failures within that superseded protocol. Its grader bytes carry
 no attributable reviewer identity/signature/timestamp, and its readback did not
 invert actual scene properties. A later scene-derived inverse has now run
 (`recipe/evidence/button-scene-inversion-v1/`); silent is derived and not
-zero (Altitude **449/8706**, Fluent **449/8778** after role+token+name+variant-axis teachings),
+zero (Altitude **293/8706**, Fluent **293/8778** after role+token+name+variant-axis+componentRef teachings),
 and the two-cycle fixed point is not stable. Current Button success is
 therefore **false/pending** until an attributable human signs off.
 
