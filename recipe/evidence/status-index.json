@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 draft prepared; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -5525,7 +5525,7 @@
       "restartAsV41Attempt2WithoutLabelRowStrokesForbidden": true
     },
     "liveV42": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "b802dfe51a68eb2a197c56db089c4eb03816035b",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v42/protocol.json",
       "protocolSha256": "fc9bf1083a771b10782f85ead4cb59a58197b7efe0698c7fd176171fbc0eacbe",
@@ -5540,7 +5540,7 @@
       "antecedentHashSetSha256": "7456bcab32ea416b71954c74f733b105dac94ad2664508f824f730a2ff3ad9f8",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v42/authorization-template.json",
       "authorizationTemplateSha256": "e5b643fdd1884bd63a19ab1c003c0c4987a83984b4405c3e0225d11f2c0683c7",
-      "authorizationPresent": false,
+      "authorizationPresent": true,
       "authorizationEffective": false,
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
@@ -5737,7 +5737,13 @@
       "taughtLabelRowStrokesOmitted": true,
       "v41AuthorizationReusable": false,
       "v41AntecedentBytesUnchanged": true,
-      "v41SceneReadbackUnchanged": true
+      "v41SceneReadbackUnchanged": true,
+      "antecedentCommit": "773d61beeb7da56a8c32dd0fbe35ca43863b5496",
+      "authorizationCommitStateDerivedByHistory": true,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v42/capture-authorization.json",
+      "authorizationSha256": "af25c244914df2fd76e44f036257dd34f8e114dc60f0ffb77d3b04051fc3f52f",
+      "signingPublicKeySpkiSha256": "9abcb0dd7859fd9210b378a328d7def05a2dcb9c15df67e79fd14e80ad352d22",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
     }
   }
 }
