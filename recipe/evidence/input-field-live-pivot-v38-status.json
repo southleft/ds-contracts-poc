@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v38-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused label-row clipsContent; cleanup complete",
   "baseCommit": "1cd6c01021d4da206d86b0e931d6edb5c3269883",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v38/antecedent-index.json",
@@ -180,12 +180,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v38-attempt-1.json",
+  "attempt1Sha256": "0ce81cd9be9f6fff07b3fc4932e32c7f5182e5f4ea8999150d3f2df89ae9cde7",
+  "restartAsV38Attempt2WithoutLabelRowClipsContentForbidden": true
 }
