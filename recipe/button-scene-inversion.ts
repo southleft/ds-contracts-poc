@@ -89,10 +89,93 @@ const parseVariantName = (name: string): Record<string, string> =>
       }),
   );
 
-const sceneRoleFromName = (name: string): string | undefined =>
-  name.includes("/") && !name.includes("=")
-    ? name.split(" :: ", 1)[0]
-    : undefined;
+export function buttonV4LiveTokenName(
+  tokenIdentity: string,
+  type: "COLOR" | "FLOAT" | "STRING" | "BOOLEAN",
+): string {
+  const segment = tokenIdentity
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9_-]+/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^[-_]+|[-_]+$/g, "");
+  return `token/${type.toLowerCase()}/${segment}`;
+}
+
+export function decodeButtonHexTokenName(name: string): string | undefined {
+  const match = name.match(
+    /^token\/(?:color|float|string|boolean)\/id-([0-9a-f]+)$/,
+  );
+  if (!match || (match[1] ?? "").length % 2 !== 0) return undefined;
+  const decoded = Buffer.from(match[1]!, "hex").toString("utf8");
+  if (Buffer.from(decoded, "utf8").toString("hex") !== match[1]) return undefined;
+  return decoded;
+}
+
+export function sceneRoleFromName(
+  name: string,
+  variantProperties?: Record<string, string>,
+): string | undefined {
+  const head = name.split(" :: ", 1)[0] ?? "";
+  if (head.includes("/") && !head.includes("=")) return head;
+  const props = variantProperties ?? parseVariantName(name);
+  if (props.Variant && props.Size && props.State && props.Icons) {
+    return `button/variant/${props.Variant}/${props.Size}/${props.State}/${props.Icons}`;
+  }
+  return undefined;
+}
+
+const collectCompileTokenIdentities = (
+  node: { bindings?: Array<{ variable: string; type: string }>; children?: readonly unknown[] },
+): Array<{ variable: string; type: string }> => [
+  ...(node.bindings ?? []),
+  ...(node.children ?? []).flatMap((child) =>
+    collectCompileTokenIdentities(
+      child as {
+        bindings?: Array<{ variable: string; type: string }>;
+        children?: readonly unknown[];
+      },
+    ),
+  ),
+];
+
+export function compileButtonTokenIdentityMap(
+  compileRoot: ComponentSetNode,
+): Map<string, string> {
+  const unique = new Map<string, string>();
+  const collisions = new Set<string>();
+  for (const binding of collectCompileTokenIdentities(compileRoot)) {
+    const type = binding.type as "COLOR" | "FLOAT" | "STRING" | "BOOLEAN";
+    const live = buttonV4LiveTokenName(binding.variable, type);
+    const hex = `token/${type.toLowerCase()}/id-${Buffer.from(binding.variable, "utf8").toString("hex")}`;
+    for (const key of [live, hex]) {
+      const previous = unique.get(key);
+      if (previous !== undefined && previous !== binding.variable) {
+        collisions.add(key);
+        unique.delete(key);
+        continue;
+      }
+      if (!collisions.has(key)) unique.set(key, binding.variable);
+    }
+  }
+  return unique;
+}
+
+export function canonicalizeButtonObserveTokenName(
+  liveName: string,
+  identityByLiveName: ReadonlyMap<string, string>,
+): string {
+  const mapped = identityByLiveName.get(liveName);
+  if (mapped !== undefined) return mapped;
+  const decoded = decodeButtonHexTokenName(liveName);
+  if (
+    decoded !== undefined &&
+    [...identityByLiveName.values()].includes(decoded)
+  ) {
+    return decoded;
+  }
+  return liveName;
+}
 
 export function refuseHistoricalReadbackAsObserve(value: unknown): string[] {
   const failures: string[] = [];
@@ -193,13 +276,26 @@ const COMPILE_ABSENT_STROKE_SIDE_FIELDS = new Set([
 
 export function normalizeButtonObserveScene(
   scene: SceneNodeSnapshot,
+  identityByLiveName?: ReadonlyMap<string, string>,
 ): SceneNodeSnapshot {
   return {
     ...scene,
-    boundVariables: scene.boundVariables.filter(
-      (binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field),
+    boundVariables: scene.boundVariables
+      .filter((binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field))
+      .map((binding) =>
+        identityByLiveName === undefined
+          ? binding
+          : {
+              ...binding,
+              variableName: canonicalizeButtonObserveTokenName(
+                binding.variableName,
+                identityByLiveName,
+              ),
+            },
+      ),
+    children: scene.children.map((child) =>
+      normalizeButtonObserveScene(child, identityByLiveName),
     ),
-    children: scene.children.map(normalizeButtonObserveScene),
   };
 }
 
@@ -228,6 +324,7 @@ export function assignButtonSceneOwnership(
   return {
     ...raw,
     ownershipKey: "root",
+    semanticRole: raw.semanticRole ?? sceneRoleFromName(raw.name, raw.variantProperties),
     children,
   };
 }
@@ -238,7 +335,7 @@ const stampOwnership = (
 ): SceneNodeSnapshot => ({
   ...node,
   ownershipKey: key,
-  semanticRole: node.semanticRole ?? sceneRoleFromName(node.name),
+  semanticRole: node.semanticRole ?? sceneRoleFromName(node.name, node.variantProperties),
   children: node.children.map((child, index) =>
     stampOwnership(child, `${key}/children/${index}`),
   ),
@@ -310,6 +407,7 @@ export function compareButtonSceneInversion(
     source: "altitude" | "fluent";
     scene: SceneNodeSnapshot;
   }[],
+  options: { canonicalizeTokens?: boolean } = {},
 ): ButtonInversionReport {
   const historical = refuseHistoricalReadbackAsObserve(
     readRepositoryJson<unknown>(HISTORICAL_BUTTON_READBACK_PATH),
@@ -325,7 +423,12 @@ export function compareButtonSceneInversion(
   const roots = plans.map((plan) => {
     const observe = observes.find((row) => row.source === plan.source);
     if (!observe) throw new TypeError(`Button observe omitted ${plan.source}`);
-    const scene = normalizeButtonObserveScene(observe.scene);
+    const scene = normalizeButtonObserveScene(
+      observe.scene,
+      options.canonicalizeTokens === false
+        ? undefined
+        : compileButtonTokenIdentityMap(plan.compileRoot),
+    );
     const stamped = forbiddenObserveKeys(scene);
     if (stamped.length > 0) {
       throw new TypeError(
@@ -451,10 +554,10 @@ export function serializeButtonInversionReport(
     figmaWrites: report.figmaWrites,
     inputPageUntouched: report.inputPageUntouched,
     measuredClasses: [
-      "live variable names are token/{type}/{sanitized}; compile names the source token identity",
-      "live component names are Variant=... and do not carry compile roles button/variant/...",
+      "observe role() takes the first :: name segment before testing =, and recovers button/variant/... from live Variant=/Size=/State=/Icons= properties (Input V74 class); live names still have no button/variant/ first segment",
+      "live token/{type}/{sanitized} names canonicalize to compile identities only when the v4 writer sanitizer is unique for the same key; collisions are left live",
       "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
-      "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack",
+      "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
     ],
     roots: report.roots.map((root) => ({
@@ -651,7 +754,11 @@ const role=node=>{
   const description=typeof node.description==="string"?node.description:"";
   const match=description.match(/(?:^|\\n)recipe-role:([^\\n]+)/);
   if(match)return match[1];
-  return node.name.includes("/")&&!node.name.includes("=")?node.name.split(" :: ",1)[0]:undefined;
+  const head=(node.name||"").split(" :: ",1)[0]||"";
+  if(head.includes("/")&&!head.includes("="))return head;
+  const props=node.variantProperties||Object.fromEntries((node.name||"").split(",").map(part=>part.trim()).filter(part=>part.includes("=")).map(part=>{const at=part.indexOf("=");return[part.slice(0,at),part.slice(at+1)];}));
+  if(props.Variant&&props.Size&&props.State&&props.Icons)return "button/variant/"+props.Variant+"/"+props.Size+"/"+props.State+"/"+props.Icons;
+  return undefined;
 };
 const snapshot=async(node,walkChildren)=>{
   const row={

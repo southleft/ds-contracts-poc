@@ -2,9 +2,13 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  buttonV4LiveTokenName,
+  canonicalizeButtonObserveTokenName,
   compileButtonExpectedScenePlans,
+  compileButtonTokenIdentityMap,
   forbiddenObserveKeys,
   refuseHistoricalReadbackAsObserve,
+  sceneRoleFromName,
   validateButtonSceneInversionEvidence,
 } from "./button-scene-inversion.js";
 import { readRepositoryJson } from "./evidence-path.js";
@@ -212,6 +216,50 @@ test("silent is derived from expected-plan vs observe, not assigned", () => {
   );
   assert.equal(comparison.ok, false);
   assert.ok(comparison.mismatched.length + comparison.missing.length > 0);
+});
+
+test("observe role() takes the first :: segment before testing = and recovers button/variant from Variant= names", () => {
+  assert.equal(
+    sceneRoleFromName(
+      "button/label :: Label :: font-provenance=%7B%7D",
+    ),
+    "button/label",
+  );
+  assert.equal(
+    sceneRoleFromName(
+      "Variant=secondary, Size=medium, State=default, Icons=none",
+    ),
+    "button/variant/secondary/medium/default/none",
+  );
+  assert.equal(
+    sceneRoleFromName("Button / button@1 proof"),
+    "Button / button@1 proof",
+  );
+  assert.equal(sceneRoleFromName("plain"), undefined);
+});
+
+test("token name canonicalization is unique same-key sanitization only", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const map = compileButtonTokenIdentityMap(altitude.compileRoot);
+  assert.equal(
+    canonicalizeButtonObserveTokenName(
+      "token/float/imported-shared-size-4",
+      map,
+    ),
+    "imported.shared.size-4",
+  );
+  assert.equal(
+    canonicalizeButtonObserveTokenName(
+      buttonV4LiveTokenName("imported.button.root.color.secondary", "COLOR"),
+      map,
+    ),
+    "imported.button.root.color.secondary",
+  );
+  assert.equal(
+    canonicalizeButtonObserveTokenName("token/float/not-a-compile-key", map),
+    "token/float/not-a-compile-key",
+  );
 });
 
 test("recorded Button inversion evidence stays derived and overall false", () => {

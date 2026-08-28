@@ -54,11 +54,11 @@
       "source": "altitude",
       "setId": "85:7406",
       "expectedFacts": 8706,
-      "matched": 5795,
-      "silent": 2911,
-      "missing": 144,
+      "matched": 7955,
+      "silent": 751,
+      "missing": 0,
       "extra": 291,
-      "mismatched": 2767,
+      "mismatched": 751,
       "fixedPointStable": false,
       "ok": false
     },
@@ -66,11 +66,11 @@
       "source": "fluent",
       "setId": "85:8054",
       "expectedFacts": 8778,
-      "matched": 5891,
-      "silent": 2887,
-      "missing": 144,
+      "matched": 8027,
+      "silent": 751,
+      "missing": 0,
       "extra": 267,
-      "mismatched": 2743,
+      "mismatched": 751,
       "fixedPointStable": false,
       "ok": false
     }
@@ -92,15 +92,15 @@
     },
     "observeAltitude": {
       "path": "recipe/evidence/button-scene-inversion-v1/observe-altitude.json.gz",
-      "sha256": "841d05e3a9f91209f1af0048a6361be3cca4a24bd66cfcf61895414ef6d0cae4"
+      "sha256": "5b04738cfaa91218f87548f651c4efed350a8ea2706fb245423934526282aa3b"
     },
     "observeFluent": {
       "path": "recipe/evidence/button-scene-inversion-v1/observe-fluent.json.gz",
-      "sha256": "dce1a58e649ece50bf25cd47b803e5c08b1e08d2ede730f7ebcfc75c965a13c0"
+      "sha256": "7dee4463c1c158ee1e22598762bb52a4e899ff16da9532575c85f343a7f0ba31"
     },
     "inversion": {
       "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "sha256": "7e1b5b3354f62e7ae3eeff717f627abe4ae54d59c35edb66fe4f70eee3da4a51"
+      "sha256": "075dee07ae0c37be12a067cc8a4fa65dbe0adff9ae030406884cb6d0e62d8f0c"
     },
     "census": {
       "path": "recipe/evidence/button-scene-inversion-v1/census.json",

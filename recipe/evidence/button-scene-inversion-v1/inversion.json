@@ -12,11 +12,11 @@
       "setId": "85:7406",
       "variants": 144,
       "expectedFacts": 8706,
-      "matched": 5795,
-      "silent": 2911,
-      "missing": 144,
+      "matched": 7955,
+      "silent": 751,
+      "missing": 0,
       "extra": 291,
-      "mismatched": 2767,
+      "mismatched": 751,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8706,
@@ -28,7 +28,7 @@
           "channel": "binding",
           "missing": 0,
           "extra": 288,
-          "mismatched": 2160
+          "mismatched": 144
         },
         {
           "channel": "componentRef",
@@ -68,7 +68,7 @@
         },
         {
           "channel": "role",
-          "missing": 144,
+          "missing": 0,
           "extra": 0,
           "mismatched": 1
         },
@@ -98,18 +98,18 @@
         }
       ],
       "sampleFailures": [
-        "missing root/children/0#role@0000",
-        "missing root/children/1#role@0000",
-        "missing root/children/2#role@0000",
-        "missing root/children/3#role@0000",
-        "missing root/children/4#role@0000",
-        "missing root/children/5#role@0000",
-        "missing root/children/6#role@0000",
-        "missing root/children/7#role@0000",
-        "missing root/children/8#role@0000",
-        "missing root/children/9#role@0000",
-        "missing root/children/10#role@0000",
-        "missing root/children/11#role@0000"
+        "extra root/children/0#binding@0010",
+        "extra root/children/0/children/0#binding@0001",
+        "extra root/children/1#binding@0010",
+        "extra root/children/1/children/1#binding@0001",
+        "extra root/children/2#binding@0010",
+        "extra root/children/2/children/0#binding@0001",
+        "extra root/children/3#binding@0010",
+        "extra root/children/3/children/1#binding@0001",
+        "extra root/children/4#binding@0010",
+        "extra root/children/4/children/0#binding@0001",
+        "extra root/children/5#binding@0010",
+        "extra root/children/5/children/1#binding@0001"
       ]
     },
     {
@@ -118,11 +118,11 @@
       "setId": "85:8054",
       "variants": 144,
       "expectedFacts": 8778,
-      "matched": 5891,
-      "silent": 2887,
-      "missing": 144,
+      "matched": 8027,
+      "silent": 751,
+      "missing": 0,
       "extra": 267,
-      "mismatched": 2743,
+      "mismatched": 751,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8778,
@@ -134,7 +134,7 @@
           "channel": "binding",
           "missing": 0,
           "extra": 264,
-          "mismatched": 2136
+          "mismatched": 144
         },
         {
           "channel": "componentRef",
@@ -174,7 +174,7 @@
         },
         {
           "channel": "role",
-          "missing": 144,
+          "missing": 0,
           "extra": 0,
           "mismatched": 1
         },
@@ -204,18 +204,18 @@
         }
       ],
       "sampleFailures": [
-        "missing root/children/0#role@0000",
-        "missing root/children/1#role@0000",
-        "missing root/children/2#role@0000",
-        "missing root/children/3#role@0000",
-        "missing root/children/4#role@0000",
-        "missing root/children/5#role@0000",
-        "missing root/children/6#role@0000",
-        "missing root/children/7#role@0000",
-        "missing root/children/8#role@0000",
-        "missing root/children/9#role@0000",
-        "missing root/children/10#role@0000",
-        "missing root/children/11#role@0000"
+        "extra root/children/0#binding@0010",
+        "extra root/children/0/children/0#binding@0001",
+        "extra root/children/1#binding@0010",
+        "extra root/children/1/children/1#binding@0001",
+        "extra root/children/2#binding@0010",
+        "extra root/children/2/children/0#binding@0001",
+        "extra root/children/3#binding@0010",
+        "extra root/children/3/children/1#binding@0001",
+        "extra root/children/4#binding@0010",
+        "extra root/children/4/children/0#binding@0001",
+        "extra root/children/5#binding@0010",
+        "extra root/children/5/children/1#binding@0001"
       ]
     }
   ],
@@ -225,10 +225,10 @@
   "figmaWrites": 0,
   "inputPageUntouched": true,
   "measuredClasses": [
-    "live variable names are token/{type}/{sanitized}; compile names the source token identity",
-    "live component names are Variant=... and do not carry compile roles button/variant/...",
+    "observe role() takes the first :: name segment before testing =, and recovers button/variant/... from live Variant=/Size=/State=/Icons= properties (Input V74 class); live names still have no button/variant/ first segment",
+    "live token/{type}/{sanitized} names canonicalize to compile identities only when the v4 writer sanitizer is unique for the same key; collisions are left live",
     "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
-    "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack",
+    "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
     "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan"
   ]
 }

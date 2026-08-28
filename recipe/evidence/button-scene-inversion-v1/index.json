@@ -30,11 +30,11 @@
   "observe": {
     "altitude": {
       "path": "recipe/evidence/button-scene-inversion-v1/observe-altitude.json.gz",
-      "sha256": "841d05e3a9f91209f1af0048a6361be3cca4a24bd66cfcf61895414ef6d0cae4"
+      "sha256": "5b04738cfaa91218f87548f651c4efed350a8ea2706fb245423934526282aa3b"
     },
     "fluent": {
       "path": "recipe/evidence/button-scene-inversion-v1/observe-fluent.json.gz",
-      "sha256": "dce1a58e649ece50bf25cd47b803e5c08b1e08d2ede730f7ebcfc75c965a13c0"
+      "sha256": "7dee4463c1c158ee1e22598762bb52a4e899ff16da9532575c85f343a7f0ba31"
     }
   },
   "observePresent": true,
@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "7e1b5b3354f62e7ae3eeff717f627abe4ae54d59c35edb66fe4f70eee3da4a51",
+    "sha256": "075dee07ae0c37be12a067cc8a4fa65dbe0adff9ae030406884cb6d0e62d8f0c",
     "ok": false,
     "roots": [
       {
@@ -51,11 +51,11 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 5795,
-        "silent": 2911,
-        "missing": 144,
+        "matched": 7955,
+        "silent": 751,
+        "missing": 0,
         "extra": 291,
-        "mismatched": 2767,
+        "mismatched": 751,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
@@ -67,7 +67,7 @@
             "channel": "binding",
             "missing": 0,
             "extra": 288,
-            "mismatched": 2160
+            "mismatched": 144
           },
           {
             "channel": "componentRef",
@@ -107,7 +107,7 @@
           },
           {
             "channel": "role",
-            "missing": 144,
+            "missing": 0,
             "extra": 0,
             "mismatched": 1
           },
@@ -137,18 +137,18 @@
           }
         ],
         "sampleFailures": [
-          "missing root/children/0#role@0000",
-          "missing root/children/1#role@0000",
-          "missing root/children/2#role@0000",
-          "missing root/children/3#role@0000",
-          "missing root/children/4#role@0000",
-          "missing root/children/5#role@0000",
-          "missing root/children/6#role@0000",
-          "missing root/children/7#role@0000",
-          "missing root/children/8#role@0000",
-          "missing root/children/9#role@0000",
-          "missing root/children/10#role@0000",
-          "missing root/children/11#role@0000"
+          "extra root/children/0#binding@0010",
+          "extra root/children/0/children/0#binding@0001",
+          "extra root/children/1#binding@0010",
+          "extra root/children/1/children/1#binding@0001",
+          "extra root/children/2#binding@0010",
+          "extra root/children/2/children/0#binding@0001",
+          "extra root/children/3#binding@0010",
+          "extra root/children/3/children/1#binding@0001",
+          "extra root/children/4#binding@0010",
+          "extra root/children/4/children/0#binding@0001",
+          "extra root/children/5#binding@0010",
+          "extra root/children/5/children/1#binding@0001"
         ]
       },
       {
@@ -157,11 +157,11 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 5891,
-        "silent": 2887,
-        "missing": 144,
+        "matched": 8027,
+        "silent": 751,
+        "missing": 0,
         "extra": 267,
-        "mismatched": 2743,
+        "mismatched": 751,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
@@ -173,7 +173,7 @@
             "channel": "binding",
             "missing": 0,
             "extra": 264,
-            "mismatched": 2136
+            "mismatched": 144
           },
           {
             "channel": "componentRef",
@@ -213,7 +213,7 @@
           },
           {
             "channel": "role",
-            "missing": 144,
+            "missing": 0,
             "extra": 0,
             "mismatched": 1
           },
@@ -243,18 +243,18 @@
           }
         ],
         "sampleFailures": [
-          "missing root/children/0#role@0000",
-          "missing root/children/1#role@0000",
-          "missing root/children/2#role@0000",
-          "missing root/children/3#role@0000",
-          "missing root/children/4#role@0000",
-          "missing root/children/5#role@0000",
-          "missing root/children/6#role@0000",
-          "missing root/children/7#role@0000",
-          "missing root/children/8#role@0000",
-          "missing root/children/9#role@0000",
-          "missing root/children/10#role@0000",
-          "missing root/children/11#role@0000"
+          "extra root/children/0#binding@0010",
+          "extra root/children/0/children/0#binding@0001",
+          "extra root/children/1#binding@0010",
+          "extra root/children/1/children/1#binding@0001",
+          "extra root/children/2#binding@0010",
+          "extra root/children/2/children/0#binding@0001",
+          "extra root/children/3#binding@0010",
+          "extra root/children/3/children/1#binding@0001",
+          "extra root/children/4#binding@0010",
+          "extra root/children/4/children/0#binding@0001",
+          "extra root/children/5#binding@0010",
+          "extra root/children/5/children/1#binding@0001"
         ]
       }
     ]
@@ -265,6 +265,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "90bbf49d14f6bd483bf36642015df0f70726787375151486d08cdf0ebb595479"
+    "sha256": "b977692eaa64b88f549cd87be313168808bec0f65a4fe2b8f7cdc26fb1c3d8dd"
   }
 }
