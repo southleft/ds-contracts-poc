@@ -1,0 +1,222 @@
+{
+  "artifactVersion": "input-live-v65-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "aeb0efa7e540b7c88bc66698ef4a210611c781e6",
+  "codeCommit": "aeb0efa7e540b7c88bc66698ef4a210611c781e6",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "108:220838",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "sha256": "34fc4bfb6f655e56a19940ebfd2f90bfa3326c7b78bb64787972f726017fc722",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v63FailureCleared": {
+    "setLayoutModeNotTheRefusalLocus": true
+  },
+  "v64FailureCleared": {
+    "setLayoutPaddingNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "hostIr": {
+      "mui": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+      "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 }
+    },
+    "extractScene": {
+      "mui": { "FILL": 0, "FIXED": 24, "HUG": 104, "total": 128 },
+      "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 }
+    },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedVariantClipsContent": {
+    "hostPresent": { "mui": 128, "polaris": 128 },
+    "compileEmits": true
+  },
+  "observedVariantCornerRadius": {
+    "hostAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedSetCornerRadius": {
+    "hostAbsent": { "mui": 1, "polaris": 1 },
+    "compileOmits": true
+  },
+  "observedSetEffects": {
+    "hostAbsent": { "mui": 1, "polaris": 1 },
+    "compileOmits": true
+  },
+  "observedSetFills": {
+    "mui": {
+      "present": true,
+      "value": []
+    },
+    "polaris": {
+      "present": true,
+      "value": []
+    },
+    "compileOmits": true,
+    "schemaRequiresFillsArray": true
+  },
+  "observedSetStrokes": {
+    "mui": {
+      "present": true,
+      "value": []
+    },
+    "polaris": {
+      "present": true,
+      "value": []
+    },
+    "compileOmits": true
+  },
+  "observedSetClipsContent": {
+    "mui": false,
+    "polaris": false,
+    "compileEmits": false
+  },
+  "observedSetLayoutMode": {
+    "extractScene": {
+      "mui": "HORIZONTAL",
+      "polaris": "HORIZONTAL"
+    },
+    "hostIr": {
+      "mui": "horizontal",
+      "polaris": "horizontal"
+    },
+    "compileEmits": "horizontal",
+    "compileOmits": false,
+    "v64TeachingHeld": true
+  },
+  "observedSetLayoutPadding": {
+    "extractScene": {
+      "mui": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 },
+      "polaris": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 }
+    },
+    "hostIr": {
+      "mui": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+      "polaris": { "top": 32, "right": 32, "bottom": 32, "left": 32 }
+    },
+    "compileEmits": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+    "compileOmits": false,
+    "v65TeachingHeld": true
+  },
+  "observedSetLayoutWidth": {
+    "extractScene": {
+      "mui": { "layoutSizingHorizontal": "FIXED", "width": 31656 },
+      "polaris": { "layoutSizingHorizontal": "FIXED", "width": 33050 }
+    },
+    "hostIr": {
+      "mui": { "mode": "fixed", "value": 31656 },
+      "polaris": { "mode": "fixed", "value": 33050 }
+    },
+    "compileEmits": { "mode": "hug" },
+    "compileOmits": false,
+    "payloadIr": { "mode": "hug" },
+    "writerProgramLayoutSizingHorizontalAssignments": 0
+  },
+  "observedRequiredIndicatorBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    }
+  },
+  "observedRequiredIndicatorType": {
+    "mui": {
+      "total": 64,
+      "letterSpacingPresent": 0,
+      "letterSpacingAbsent": 64,
+      "textCasePresent": 0,
+      "textCaseAbsent": 64,
+      "textDecorationPresent": 0,
+      "textDecorationAbsent": 64
+    },
+    "polaris": {
+      "total": 64,
+      "letterSpacingPresent": 0,
+      "letterSpacingAbsent": 64,
+      "textCasePresent": 0,
+      "textCaseAbsent": 64,
+      "textDecorationPresent": 0,
+      "textDecorationAbsent": 64
+    },
+    "compileOmitsLetterSpacing": true,
+    "compileOmitsTextCase": true,
+    "compileOmitsTextDecoration": true
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v65.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.layout.width.mode; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried compile set layout.padding {32,32,32,32}. Host did not refuse $.layout.padding.bottom; extract 32/32/32/32 / host IR {32,32,32,32} / compile {32,32,32,32} both. Host then refused unsupported structural edit at $.layout.width.mode. $ is the extracted component-set root, role input-field/set, kind component-set. Extract scene layoutSizingHorizontal is FIXED both (MUI width 31656, Polar width 33050). Host IR layout.width is {mode:fixed,value:31656} / {mode:fixed,value:33050}. Compile root emits layout.width {mode:hug} both. Expected-plan root width.mode is hug. This is value disagreement, not a compile-absent omit. Do not invent hug onto host readback. Do not omit layout.width.mode. Do not teach FIXED. Do not compile-carry one fixed width: the libraries disagree (31656 vs 33050). Frozen v16 payload IR said width hug; writer program has 0 layoutSizingHorizontal assignments. Figma minted FIXED both. Set hug is the named recipe canvas fact; writer never applied it. Next prepare is not a scene-readback omit and not a compile-carry. Either a new unfrozen writer lane that mints set layoutSizingHorizontal HUG without patching hashed v16 writer bytes, or stop. Do not invent a fill, radius, variable, or binding field. Do not lift onto variants. Do not omit set clipsContent (host false; compile emits false). Do not omit set strokes in the same prepare (host [] both). Set cornerRadius and effects remain absent both. Variant clipsContent remains present 128/128 both; compile still emits it. Variant cornerRadius remains absent 128/128 both. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes, sha256 34fc4bfb6f655e56a19940ebfd2f90bfa3326c7b78bb64787972f726017fc722). Host content-width census remains MUI 128/128 FILL and Polar 128/128 FILL. Host content-height census is MUI 128/128 HUG and Polar 128/128 HUG; extract still shows MUI 24 FIXED / 104 HUG on content nodes. Polar has 0 content-row nodes. Do not invent a FILL or FIXED. Do not teach FIXED as a fill. Do not restart v65 attempt 2 as-is. Scene-readback-v65 bytes are in the v65 hash set.",
+    "inputFieldRecipeInV65AntecedentHashSet": false,
+    "writerInV65AntecedentHashSet": true,
+    "restoreInV65AntecedentHashSet": true,
+    "extractRuntimeInV65AntecedentHashSet": true,
+    "sceneReadbackInV65AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "108:220838",
+    "removedPageNodeId": "108:220838"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v64SceneReadbackUnchanged": true,
+  "v64AuthorizationReusable": false,
+  "v64AntecedentBytesUnchanged": true,
+  "v64Attempt1BytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV65Attempt2WithoutWriterSetHugForbidden": true
+}
