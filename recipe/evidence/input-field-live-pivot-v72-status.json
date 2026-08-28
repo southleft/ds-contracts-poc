@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v72-status-v1",
-  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
   "baseCommit": "4e1c203dafd8989b513b74efde340f370ebb9812",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v72/antecedent-index.json",
@@ -8,11 +8,10 @@
     "hashSetSha256": "76ea7fb9cbea9ac2dbe7386c40c7ca45346da2460c695012edd4a3abbb8121ba",
     "authorizationLifecycleExcluded": true,
     "byteStableAcrossLaterAuthorization": true,
-    "commit": null
+    "commit": "a2dcad5c04a79c6a5ce6d6859395eb4dce0eb26a"
   },
   "authorization": {
-    "present": false,
-    "committed": false,
+    "present": true,
     "effective": false,
     "templatePath": "recipe/evidence/input-field-live-pivot-v72/authorization-template.json",
     "templateSha256": "2bb04dc4a02da2a31f60019bf21a2758528e2187eba2b46856aaf5307f3d66c8",
@@ -81,7 +80,11 @@
     "v68AuthorizationReusable": false,
     "v69AuthorizationReusable": false,
     "v70AuthorizationReusable": false,
-    "v71AuthorizationReusable": false
+    "v71AuthorizationReusable": false,
+    "commitStateDerivedByHistory": true,
+    "path": "recipe/evidence/input-field-live-pivot-v72/capture-authorization.json",
+    "sha256": "029131405e4873a2455d98ffc113a978c896759bfa342d7a0d9c16d0c3050496",
+    "signingPublicKeySpkiSha256": "936cfd3f56cefa41ba9fe33494ac78e1ec2646ec4f82e33af39fd6c4931796fe"
   },
   "smallestHonestDelta": {
     "taughtLiveFillKinds": [

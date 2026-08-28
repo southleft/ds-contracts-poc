@@ -935,7 +935,8 @@ lineage; do not patch hashed bytes in place.
 | A5gc | PREPARE INPUT V71. Copy the v70 stack. Do not patch hashed v16/v17 writer or hashed v70 scene-readback `f775aaef…7141`. Teach the accounting observer to canonicalize instancePayload fill `type:"SOLID"` to compile `{kind:"solid"}`. Same paint only; do not rewrite `intrinsicSize`, Polar widths, or effect spread. Do not include Size axis in this prepare. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar pixels or spreads. Do not teach FIXED. | **Done** at `01c3b92ab24642b187cfb441aa621452b22cc4e3`. Antecedent index SHA-256 `46f4e75e41461c13315771c1b03fabc20c938b56a04947d754dc7d308433930e`. |
 | A5gd | AUTHORIZE INPUT V71 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `01c3b92ab24642b187cfb441aa621452b22cc4e3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `1de20ef035c0b67ad84972cda9b6672e87d31521d8db85c64db2dff95d88aacf`; SPKI SHA-256 `945cf2f238f40218f1bf601079edf7f9a294105a77a9797c0a066b03c5361d69`. Do not patch hashed v16, v17, or v70 bytes. | **Done** at `68349870953c6865a100f6c00100e2a7fac0700e`. |
 | A5ge | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `110:237212`, not `110:234483`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `595c9939…1f8d`). Fill-kind alias held and stayed paint-scoped: MUI silent 129 → 1 (Size axis only). Polar fill now matches `{kind:solid}`; Polar silent stayed 193 because `intrinsicSize.width` remained in the same instancePayload fact (128 width-only) plus spreads 32+32 plus Size axis 1. Polar facts did not split. Measured width pairs 8→9 / 25.78125→30 and spreads 1→0 / 3→0. Size axis still order-only 1+1. Do **not** invent Polar pixels/spreads. Do **not** teach FIXED. Do **not** restart v71 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5gf | PREPARE INPUT V72. Copy the v71 stack. Do not patch hashed v16/v17 writer or hashed v71 scene-readback `5443512b…d388c`. Teach the accounting observer to canonicalize Size variantAxis values to compile `[small,medium]` when the set matches. Order only. Do not rewrite `intrinsicSize`, Polar widths, or effect spread. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar pixels or spreads. Do not teach FIXED. | Antecedent index SHA-256 `3409911929ca248fcdf1284943bc97e9b3d6f79ff366e051af2b6e7927ff3757`. |
+| A5gf | PREPARE INPUT V72. Copy the v71 stack. Do not patch hashed v16/v17 writer or hashed v71 scene-readback `5443512b…d388c`. Teach the accounting observer to canonicalize Size variantAxis values to compile `[small,medium]` when the set matches. Order only. Do not rewrite `intrinsicSize`, Polar widths, or effect spread. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar pixels or spreads. Do not teach FIXED. | **Done** at `a2dcad5c04a79c6a5ce6d6859395eb4dce0eb26a`. Antecedent index SHA-256 `3409911929ca248fcdf1284943bc97e9b3d6f79ff366e051af2b6e7927ff3757`. |
+| A5gg | AUTHORIZE INPUT V72 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `a2dcad5c04a79c6a5ce6d6859395eb4dce0eb26a`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `029131405e4873a2455d98ffc113a978c896759bfa342d7a0d9c16d0c3050496`; SPKI SHA-256 `936cfd3f56cefa41ba9fe33494ac78e1ec2646ec4f82e33af39fd6c4931796fe`. Do not patch hashed v16, v17, or v71 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. |
 
 ### B · Button closeout
 
@@ -996,10 +997,10 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After PREPARE INPUT V72 is published:
+After AUTHORIZE INPUT V72 is published:
 
 ```
-npm run recipe:input-field:live:v72:history:verify -- --expect-pending
+npm run recipe:input-field:live:v72:history:verify -- --expect-authorized
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
