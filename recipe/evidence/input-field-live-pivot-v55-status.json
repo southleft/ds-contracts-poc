@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v55-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused trailing-slot binding field order; cleanup complete",
   "baseCommit": "fd75454c6b5e8c5021f9ac7906e634363ea4cf5a",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v55/antecedent-index.json",
@@ -248,12 +248,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v55-attempt-1.json",
+  "attempt1Sha256": "3e8fee7754f21993ffdf4868afbe3659499eb0b49b2fcdd2e9a3acd6f8d3d435",
+  "restartAsV55Attempt2WithoutTrailingSlotBindingCompileOrderForbidden": true
 }

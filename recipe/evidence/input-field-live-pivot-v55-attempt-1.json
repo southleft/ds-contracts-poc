@@ -1,0 +1,180 @@
+{
+  "artifactVersion": "input-live-v55-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "7f18c36dbc77cec412d6f29893b78a74e46bb05a",
+  "codeCommit": "7f18c36dbc77cec412d6f29893b78a74e46bb05a",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "106:193548",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "sha256": "0875ebf11b316f6e22a7d7200beffa5303d7962c0b8f481a03db31523f57f69e",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v47FailureCleared": {
+    "messageContainerClipsContentNotTheRefusalLocus": true
+  },
+  "v48FailureCleared": {
+    "messageContainerCornerRadiusNotTheRefusalLocus": true
+  },
+  "v49FailureCleared": {
+    "messageContainerEffectsNotTheRefusalLocus": true
+  },
+  "v50FailureCleared": {
+    "messageContainerStrokesNotTheRefusalLocus": true
+  },
+  "v51FailureCleared": {
+    "variantCornerRadiusNotTheRefusalLocus": true
+  },
+  "v52FailureCleared": {
+    "variantEffectsNotTheRefusalLocus": true
+  },
+  "v53FailureCleared": {
+    "variantStrokesNotTheRefusalLocus": true
+  },
+  "v54FailureCleared": {
+    "leadingSlotBindingOrderNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "mui": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "muiHiddenPlaceholderFixed": 0
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedMessageContainerClipsContent": {
+    "hostAbsent": { "mui": 128, "polaris": 128 },
+    "compileAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedMessageContainerCornerRadius": {
+    "hostAbsent": { "mui": 128, "polaris": 128 },
+    "compileAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedMessageContainerEffects": {
+    "hostAbsent": { "mui": 128, "polaris": 128 },
+    "compileAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedMessageContainerStrokes": {
+    "hostAbsent": { "mui": 128, "polaris": 128 },
+    "compileAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedVariantCornerRadius": {
+    "hostAbsent": { "mui": 128, "polaris": 128 },
+    "compileAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedVariantEffects": {
+    "hostAbsent": { "mui": 128, "polaris": 128 },
+    "compileAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedVariantStrokes": {
+    "hostAbsent": { "mui": 128, "polaris": 128 },
+    "compileAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedVariantClipsContent": {
+    "hostPresent": { "mui": 128, "polaris": 128, "value": false },
+    "compileEmits": true
+  },
+  "observedLeadingSlotBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    },
+    "compileMuiFieldSequence": ["fills.0.color", "width.value", "height.value"],
+    "hashedV54HostFieldSequence": ["height.value", "width.value", "fills.0.color"]
+  },
+  "observedTrailingSlotBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["height.value", "width.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["height.value", "width.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    },
+    "compileMuiFieldSequence": ["fills.0.color", "width.value", "height.value"],
+    "compilePolarisFieldSequence": ["fills.0.color", "width.value", "height.value"]
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v55.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[2].children[0].children[0].children[1].bindings[0].field; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v55 scene-readback ordered input-field/slot/leading bindings to compile field order fills.0.color, width.value, height.value and kept v17-v54 teachings. Host did not refuse leading-slot binding order. Host leading-slot sequence is fills.0.color, width.value, height.value on 64/64 MUI and 64/64 Polar; compile MUI sequence at the leading slot is the same. Hashed v54 still emits leading-slot height.value, width.value, fills.0.color 64/64 MUI. Host then refused unsupported structural edit at $.children[2].children[0].children[0].children[1].bindings[0].field. $.children[2] is the third MUI variant (Size=medium, State=default, Content=placeholder, Required=false, Adornments=trailing), role input-field/variant/medium/default/placeholder/false/trailing. The locus node is input-field/slot/trailing. Host bindings[0].field is height.value; compile bindings[0].field is fills.0.color. Host trailing-slot field sequence is height.value, width.value, fills.0.color on 64/64 MUI and 64/64 Polar. Compile MUI sequence at the same node is fills.0.color, width.value, height.value. Compile Polar sequence at Polar trailing ownership root/children/2/children/1/children/1 is fills.0.color, width.value, height.value. Same three fields; order differs. Do not invent a binding field. Do not invent a variable. Do not invent layout.width.value. Hashed v54 emits the same host trailing-slot sequence. Message-container clipsContent, cornerRadius, effects, and strokes remain omitted 128/128 both. Variant clipsContent remains present false 128/128 both; compile still emits it. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes, sha256 0875ebf11b316f6e22a7d7200beffa5303d7962c0b8f481a03db31523f57f69e). Content-width census remains MUI 128/128 FILL and Polar 128/128 FILL. Content-height census is MUI 128/128 HUG and Polar 128/128 HUG; hiddenPlaceholderFixed 0. Polar has 0 content-row nodes; Polar first nested child is input-field/label-row. Do not invent a FILL or FIXED. Do not lift onto leading slot. Do not teach FIXED as a fill. Do not restart v55 attempt 2 as-is. Scene-readback-v55 bytes are in the v55 hash set.",
+    "inputFieldRecipeInV55AntecedentHashSet": false,
+    "writerInV55AntecedentHashSet": true,
+    "restoreInV55AntecedentHashSet": true,
+    "extractRuntimeInV55AntecedentHashSet": true,
+    "sceneReadbackInV55AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "106:193548",
+    "removedPageNodeId": "106:193548"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v48SceneReadbackUnchanged": true,
+  "v48Attempt1BytesUnchanged": true,
+  "v52SceneReadbackUnchanged": true,
+  "v52Attempt1BytesUnchanged": true,
+  "v53SceneReadbackUnchanged": true,
+  "v53Attempt1BytesUnchanged": true,
+  "v54SceneReadbackUnchanged": true,
+  "v54Attempt1BytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV55Attempt2WithoutTrailingSlotBindingCompileOrderForbidden": true
+}
