@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -1568,8 +1568,12 @@ const V53_AUTHORIZATION_TEMPLATE_SHA256 =
 const V53_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v53-status.json";
 const V53_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused variant strokes; cleanup complete";
 const V53_BASE_COMMIT = "50e024b8b546e4701213e5e71c2bb174579e2953";
+const V53_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v53-attempt-1.json";
+const V53_ATTEMPT_1_SHA256 =
+  "58f73567abd17dda411aa1903bcc158f564a15c495e29863b6ab9146b174204d";
 const V53_ANTECEDENT_COMMIT = "34f5b20a738770c073d8b2ebffc236293066ddbb";
 const V53_AUTHORIZATION_PATH = `${V53_ROOT}/capture-authorization.json`;
 const V53_AUTHORIZATION_SHA256 =
@@ -4860,11 +4864,17 @@ export function validatePivotStatus(
     status.input?.liveV53?.hostPhases !== 3 ||
     status.input?.liveV53?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV53?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV53?.attemptsExecuted !== 0 ||
-    status.input?.liveV53?.nextAttempt !== 1 ||
-    status.input?.liveV53?.liveExecutionOccurred !== false ||
-    status.input?.liveV53?.figmaWrites !== 0 ||
+    status.input?.liveV53?.attemptsExecuted !== 1 ||
+    status.input?.liveV53?.nextAttempt !== 2 ||
+    status.input?.liveV53?.liveExecutionOccurred !== true ||
+    status.input?.liveV53?.figmaWrites !== 4 ||
     status.input?.liveV53?.figmaCaptures !== 0 ||
+    status.input?.liveV53?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV53?.attempt1Path !== V53_ATTEMPT_1_PATH ||
+    status.input?.liveV53?.attempt1Sha256 !== V53_ATTEMPT_1_SHA256 ||
+    status.input?.liveV53
+      ?.restartAsV53Attempt2WithoutVariantStrokesOmitForbidden !==
+      true ||
     status.input?.liveV53?.humanSignoff !== "pending" ||
     status.input?.liveV53?.overallInputSuccess !== false
   )
@@ -9199,9 +9209,18 @@ export function verifyPivotStatus(): void {
       true ||
     v53Status.smallestHonestDelta?.v52SceneReadbackUnchanged !== true ||
     v53Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v53Status.attemptsExecuted !== 0 ||
-    v53Status.liveExecutionOccurred !== false ||
-    v53Status.figmaWrites !== 0 ||
+    v53Status.attemptsExecuted !== 1 ||
+    v53Status.nextAttempt !== 2 ||
+    v53Status.liveExecutionOccurred !== true ||
+    v53Status.figmaWrites !== 4 ||
+    v53Status.figmaCaptures !== 0 ||
+    v53Status.createdNodesThenRemoved !== 2317 ||
+    v53Status.attempt1Path !== V53_ATTEMPT_1_PATH ||
+    v53Status.attempt1Sha256 !== V53_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V53_ATTEMPT_1_PATH)) !==
+      V53_ATTEMPT_1_SHA256 ||
+    v53Status.restartAsV53Attempt2WithoutVariantStrokesOmitForbidden !==
+      true ||
     v53Status.overallInputSuccess !== false
   )
     failures.push("v53 draft antecedent/status mismatch");
