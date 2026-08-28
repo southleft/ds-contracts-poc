@@ -486,6 +486,9 @@ jobs:
       - name: recipe:input-field:live:v77:check (probe reveal-then-measure hidden content FILL; hashed v76 scene-readback and v18 writer frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v77:check
+      - name: recipe:input-field:live:v78:check (probe exclude overlay-label AABB; hashed v77 scene-readback and v18 writer frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v78:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
