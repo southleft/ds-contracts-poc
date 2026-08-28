@@ -393,6 +393,9 @@ jobs:
       - name: recipe:input-field:live:v46:check (omit message helper/error textCase; hashed v45 scene-readback frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v46:check
+      - name: recipe:input-field:live:v47:check (omit message helper/error textDecoration; hashed v46 scene-readback frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v47:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
