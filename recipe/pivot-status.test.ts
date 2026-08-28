@@ -1492,7 +1492,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV80.v79SceneReadbackUnchanged = false;
     },
     (value) => {
-      value.status.input.liveV80.authorizationPresent = true;
+      value.status.input.liveV80.authorizationPresent = false;
     },
     (value) => {
       value.status.input.liveV80.v19WriterMinted = false;
