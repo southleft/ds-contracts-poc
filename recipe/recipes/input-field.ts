@@ -685,12 +685,6 @@ const variantComponent = (
         ? appearance.placeholderText
         : appearance.inputText,
       fill,
-      !(
-        instance.structure.labelPlacement === "floating" &&
-        content === "placeholder" &&
-        state !== "focus-visible" &&
-        (adornments === "none" || adornments === "trailing")
-      ),
     ),
   );
   if (hasTrailing) {

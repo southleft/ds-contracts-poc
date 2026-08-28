@@ -211,6 +211,51 @@ test("floating generic fields compile nested label and content rows", () => {
   assert.ok(labelRow.layout.offset);
 });
 
+test("compile carries live visible on floating inactive placeholders", () => {
+  const floating = structuredClone(
+    canonicalInputFieldRecipeInstance,
+  ) as InputFieldRecipeInstance;
+  floating.structure = {
+    ...floating.structure,
+    labelPlacement: "floating",
+    floatingActivation: "focus-value-or-leading-adornment",
+    outlineTreatment: "notched",
+  };
+  const root = rootOf(compileInputFieldRecipe(floating));
+  let carried = 0;
+  for (const size of INPUT_FIELD_SIZES) {
+    for (const state of INPUT_FIELD_STATES) {
+      if (state === "focus-visible") continue;
+      for (const required of INPUT_FIELD_REQUIRED) {
+        for (const adornments of ["none", "trailing"] as const) {
+          const component = componentFor(root, {
+            Size: size,
+            State: state,
+            Content: "placeholder",
+            Required: required,
+            Adornments: adornments,
+          });
+          const surface = surfaceOf(component);
+          const contentRow = surface.children.find(
+            (child) => child.role === "input-field/content-row",
+          );
+          assert.equal(contentRow?.kind, "frame");
+          if (contentRow?.kind !== "frame")
+            throw new Error("content row absent");
+          const placeholder = contentRow.children.find(
+            (child) => child.role === "input-field/content/placeholder",
+          );
+          assert.ok(placeholder);
+          assert.notEqual(placeholder.visible, false);
+          assert.equal(placeholder.visible, undefined);
+          carried += 1;
+        }
+      }
+    }
+  }
+  assert.equal(carried, 24);
+});
+
 test("inconsistent generic label and notch combinations refuse by name", () => {
   for (const structure of [
     {
