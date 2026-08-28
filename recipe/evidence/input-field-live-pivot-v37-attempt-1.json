@@ -1,0 +1,363 @@
+{
+  "artifactVersion": "input-live-v37-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "82a61703c572dd0b0846cae3df8af03162c16539",
+  "codeCommit": "82a61703c572dd0b0846cae3df8af03162c16539",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "sha256": "0bae24d47e6b760f2dfd70a233ea9d16767e200091fad58825e7eefe8e1af288",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v16FailureCleared": {
+    "leadingSlotSolidPaintSurfacedFromPayloadOrChild": true
+  },
+  "v17FailureCleared": {
+    "leadingSlotColorBindingSurfacedFromChild": true
+  },
+  "v19FailureCleared": {
+    "variantLayoutWidthValueNotTheRefusalLocus": true
+  },
+  "v20FailureCleared": {
+    "surfaceLayoutHeightValueNotTheRefusalLocus": true
+  },
+  "v21FailureCleared": {
+    "variantBindingsLengthNotTheRefusalLocus": true
+  },
+  "v22FailureCleared": {
+    "variantBindingsFieldOrderNotTheRefusalLocus": true
+  },
+  "v23FailureCleared": {
+    "surfaceBindingsLengthNotTheRefusalLocus": true
+  },
+  "v24FailureCleared": {
+    "surfaceBindingsFieldOrderNotTheRefusalLocus": true
+  },
+  "v25FailureCleared": {
+    "contentPlaceholderBindingsFieldOrderNotTheRefusalLocus": true
+  },
+  "v26FailureCleared": {
+    "contentPlaceholderHeightModeNotTheRefusalLocus": true
+  },
+  "v27FailureCleared": {
+    "contentPlaceholderLetterSpacingNotTheRefusalLocus": true
+  },
+  "v28FailureCleared": {
+    "contentPlaceholderTextCaseNotTheRefusalLocus": true
+  },
+  "v29FailureCleared": {
+    "contentPlaceholderTextDecorationNotTheRefusalLocus": true
+  },
+  "v30FailureCleared": {
+    "contentRowClipsContentNotTheRefusalLocus": true
+  },
+  "v31FailureCleared": {
+    "contentRowCornerRadiusNotTheRefusalLocus": true
+  },
+  "v32FailureCleared": {
+    "contentRowEffectsNotTheRefusalLocus": true
+  },
+  "v33FailureCleared": {
+    "contentRowStrokesNotTheRefusalLocus": true
+  },
+  "v34FailureCleared": {
+    "labelBindingsFieldOrderNotTheRefusalLocus": true
+  },
+  "v35FailureCleared": {
+    "labelLetterSpacingNotTheRefusalLocus": true
+  },
+  "v36FailureCleared": {
+    "labelTextCaseNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": {
+      "FILL": 128,
+      "FIXED": 0,
+      "HUG": 0,
+      "total": 128
+    },
+    "polaris": {
+      "FILL": 128,
+      "FIXED": 0,
+      "HUG": 0,
+      "total": 128
+    }
+  },
+  "observedContentHeightMode": {
+    "mui": {
+      "FILL": 0,
+      "FIXED": 24,
+      "HUG": 104,
+      "total": 128
+    },
+    "polaris": {
+      "FILL": 0,
+      "FIXED": 0,
+      "HUG": 128,
+      "total": 128
+    },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": {
+      "role": "input-field/surface",
+      "bindingCount": 17
+    },
+    "polaris": {
+      "role": "input-field/label-row",
+      "bindingFields": [
+        "itemSpacing",
+        "paddingLeft",
+        "paddingTop"
+      ],
+      "bindingCount": 3,
+      "clipsContent": true,
+      "cornerRadius": {
+        "topLeft": 0,
+        "topRight": 0,
+        "bottomRight": 0,
+        "bottomLeft": 0
+      },
+      "effects": [],
+      "strokes": []
+    }
+  },
+  "observedHostNormalizedFirstContentRow": {
+    "path": "$.children[0].children[0].children[0]",
+    "mui": {
+      "role": "input-field/content-row",
+      "clipsContent": null,
+      "cornerRadius": null,
+      "effects": null,
+      "strokes": null
+    }
+  },
+  "observedHostNormalizedFirstContentPlaceholder": {
+    "path": "$.children[0].children[0].children[0].children[0]",
+    "mui": {
+      "role": "input-field/content/placeholder",
+      "bindingFields": [
+        "type.fontSize",
+        "type.lineHeight.value",
+        "fills.0.color"
+      ],
+      "bindingCount": 3,
+      "height": {
+        "mode": "hug"
+      },
+      "width": {
+        "mode": "fill"
+      },
+      "letterSpacing": null,
+      "textCase": null,
+      "textDecoration": null
+    }
+  },
+  "observedExtractFirstLabel": {
+    "path": "$.children[0].children[0].children[1].children[0]",
+    "mui": {
+      "role": "input-field/label",
+      "type": "TEXT",
+      "visible": true,
+      "letterSpacing": {
+        "unit": "PERCENT",
+        "value": 0
+      },
+      "textCase": "ORIGINAL",
+      "textDecoration": "NONE",
+      "bindingFields": [
+        "fills.0.color",
+        "fills.0",
+        "fontSize.0",
+        "lineHeight.0"
+      ],
+      "bindingCount": 4
+    }
+  },
+  "observedHostNormalizedFirstLabel": {
+    "path": "$.children[0].children[0].children[1].children[0]",
+    "mui": {
+      "role": "input-field/label",
+      "bindingFields": [
+        "type.fontSize",
+        "type.lineHeight.value",
+        "fills.0.color"
+      ],
+      "bindingCount": 3,
+      "hostFirstField": "type.fontSize",
+      "letterSpacing": null,
+      "textCase": null,
+      "textDecoration": "none",
+      "recipeCompileTextNodeBindings": [
+        "type.fontSize",
+        "type.lineHeight.value",
+        "fills.0.color"
+      ],
+      "recipeCompileFirstField": "type.fontSize",
+      "recipeCompileTextLetterSpacing": null,
+      "recipeCompileTextCase": null,
+      "recipeCompileTextDecoration": null
+    }
+  },
+  "observedLabelBindings": {
+    "mui": {
+      "total": 128,
+      "hostFields": [
+        "type.fontSize",
+        "type.lineHeight.value",
+        "fills.0.color"
+      ],
+      "hostFieldSequenceCount": 128,
+      "hostFirstField": "type.fontSize"
+    },
+    "polaris": {
+      "total": 128,
+      "hostFields": [
+        "type.fontSize",
+        "type.lineHeight.value",
+        "fills.0.color"
+      ],
+      "hostFieldSequenceCount": 128,
+      "hostFirstField": "type.fontSize"
+    },
+    "recipeCompileTextNodeBindings": [
+      "type.fontSize",
+      "type.lineHeight.value",
+      "fills.0.color"
+    ]
+  },
+  "observedLabelLetterSpacing": {
+    "mui": {
+      "percentZero": 128,
+      "absent": 0,
+      "total": 128
+    },
+    "polaris": {
+      "percentZero": 128,
+      "absent": 0,
+      "total": 128
+    },
+    "hostPresent": {
+      "mui": 0,
+      "polaris": 0
+    },
+    "hostAbsent": {
+      "mui": 128,
+      "polaris": 128
+    }
+  },
+  "observedLabelTextCase": {
+    "mui": {
+      "ORIGINAL": 128,
+      "absent": 0,
+      "total": 128
+    },
+    "polaris": {
+      "ORIGINAL": 128,
+      "absent": 0,
+      "total": 128
+    },
+    "hostPresent": {
+      "mui": 0,
+      "polaris": 0
+    },
+    "hostAbsent": {
+      "mui": 128,
+      "polaris": 128
+    },
+    "hashedV36HostPresent": {
+      "mui": 128,
+      "polaris": 128,
+      "sample": "original"
+    }
+  },
+  "observedLabelTextDecoration": {
+    "mui": {
+      "NONE": 128,
+      "absent": 0,
+      "total": 128
+    },
+    "polaris": {
+      "NONE": 128,
+      "absent": 0,
+      "total": 128
+    },
+    "hostPresent": {
+      "mui": 128,
+      "polaris": 128,
+      "sample": "none"
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v37.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[0].children[0].children[1].children[0].type.textDecoration; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v37 scene-readback omitted input-field/label textCase that compile never emits. Host did not refuse label type.textCase. All 128 MUI and 128 Polar host-normalized labels now omit textCase. Hashed v36 still emits label type.textCase original. Host also still did not refuse label type.letterSpacing, label bindings[0].field, or content-row clipsContent, cornerRadius, effects, or strokes. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes, sha256 0bae24d47e6b760f2dfd70a233ea9d16767e200091fad58825e7eefe8e1af288). Content-width census remains MUI 128/128 FILL and Polaris 128/128 FILL. Content-height census remains MUI 24 FIXED / 104 HUG (the 24 FIXED are hidden floating placeholders) and Polaris 128/128 HUG. Host collapse then refused unsupported structural edit at $.children[0].children[0].children[1].children[0].type.textDecoration. $.children[0] is the first variant (Size=medium, State=default, Content=placeholder, Required=false, Adornments=none). $.children[0].children[0] is the MUI first-variant first child (input-field/surface). $.children[0].children[0].children[1] is input-field/label-row. $.children[0].children[0].children[1].children[0] is input-field/label. Extract textDecoration on all 128 MUI labels and all 128 Polar labels is NONE. Host-normalized label type.textDecoration on all 128 MUI and 128 Polar labels is none. Recipe compile omits text textDecoration. Content textDecoration omit is role-limited to content/placeholder and content/value and does not apply to input-field/label. Polar has 0 content-row nodes; Polar first nested child is input-field/label-row with 3 bindings (itemSpacing, paddingLeft, paddingTop). Do not invent a textDecoration value. Do not invent a variable. Do not lift the content textDecoration omit onto surfaces. Do not teach FIXED as a fill. Do not restart v37 attempt 2 as-is. Scene-readback-v37 bytes are in the v37 hash set.",
+    "inputFieldRecipeInV37AntecedentHashSet": false,
+    "writerInV37AntecedentHashSet": true,
+    "restoreInV37AntecedentHashSet": true,
+    "extractRuntimeInV37AntecedentHashSet": true,
+    "sceneReadbackInV37AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "106:144426",
+    "removedPageNodeId": "106:144426"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v33SceneReadbackUnchanged": true,
+  "v33Attempt1BytesUnchanged": true,
+  "v34SceneReadbackUnchanged": true,
+  "v34Attempt1BytesUnchanged": true,
+  "v35SceneReadbackUnchanged": true,
+  "v35Attempt1BytesUnchanged": true,
+  "v36SceneReadbackUnchanged": true,
+  "v36Attempt1BytesUnchanged": true,
+  "v37SceneReadbackUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV37Attempt2WithoutLabelTextDecorationForbidden": true
+}
