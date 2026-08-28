@@ -1415,6 +1415,19 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
     (value) => {
       value.status.input.liveV77.inventPolarPixelOrSpreadValuesForbidden = false;
     },
+    (value) => {
+      value.status.input.liveV77.mintStayed = true;
+    },
+    (value) => {
+      value.status.input.liveV77.taughtProbeRevealThenMeasureHiddenContentFillHeld =
+        false;
+    },
+    (value) => {
+      value.status.input.liveV77.contentFillPassedBoth = false;
+    },
+    (value) => {
+      value.status.input.liveV77.muiClip104AndOverlap12Remain = false;
+    },
   ];
   for (const plant of plants) {
     const value = fixtures();
