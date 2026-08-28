@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v48-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused message-container cornerRadius; cleanup complete",
   "baseCommit": "f37a99bf97ae6547d3cdf8bb5ca7ee29f4fe269c",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v48/antecedent-index.json",
@@ -220,12 +220,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v48-attempt-1.json",
+  "attempt1Sha256": "571be348582a7ca3f839e1fa1185d1bea62d0be2673857a73dde51f825218070",
+  "restartAsV48Attempt2WithoutMessageContainerCornerRadiusOmitForbidden": true
 }

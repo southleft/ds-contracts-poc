@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 authorization declared; live forbidden; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -1408,8 +1408,12 @@ const V48_AUTHORIZATION_TEMPLATE_SHA256 =
 const V48_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v48-status.json";
 const V48_STATUS =
-  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
+  "attempt 1 failed closed; writer and restore accepted; extract issued; host refused message-container cornerRadius; cleanup complete";
 const V48_BASE_COMMIT = "f37a99bf97ae6547d3cdf8bb5ca7ee29f4fe269c";
+const V48_ATTEMPT_1_PATH =
+  "recipe/evidence/input-field-live-pivot-v48-attempt-1.json";
+const V48_ATTEMPT_1_SHA256 =
+  "571be348582a7ca3f839e1fa1185d1bea62d0be2673857a73dde51f825218070";
 const V48_ANTECEDENT_COMMIT = "bdb000e3ae75863594aa40f5dc6318af53af2000";
 const V48_AUTHORIZATION_PATH = `${V48_ROOT}/capture-authorization.json`;
 const V48_AUTHORIZATION_SHA256 =
@@ -4374,11 +4378,17 @@ export function validatePivotStatus(
     status.input?.liveV48?.hostPhases !== 3 ||
     status.input?.liveV48?.transportFacts?.signedWriterTimeoutMs !== 300_000 ||
     status.input?.liveV48?.security?.liveExecutionForbidden !== true ||
-    status.input?.liveV48?.attemptsExecuted !== 0 ||
-    status.input?.liveV48?.nextAttempt !== 1 ||
-    status.input?.liveV48?.liveExecutionOccurred !== false ||
-    status.input?.liveV48?.figmaWrites !== 0 ||
+    status.input?.liveV48?.attemptsExecuted !== 1 ||
+    status.input?.liveV48?.nextAttempt !== 2 ||
+    status.input?.liveV48?.liveExecutionOccurred !== true ||
+    status.input?.liveV48?.figmaWrites !== 4 ||
     status.input?.liveV48?.figmaCaptures !== 0 ||
+    status.input?.liveV48?.createdNodesThenRemoved !== 2317 ||
+    status.input?.liveV48?.attempt1Path !== V48_ATTEMPT_1_PATH ||
+    status.input?.liveV48?.attempt1Sha256 !== V48_ATTEMPT_1_SHA256 ||
+    status.input?.liveV48
+      ?.restartAsV48Attempt2WithoutMessageContainerCornerRadiusOmitForbidden !==
+      true ||
     status.input?.liveV48?.humanSignoff !== "pending" ||
     status.input?.liveV48?.overallInputSuccess !== false
   )
@@ -8388,9 +8398,18 @@ export function verifyPivotStatus(): void {
       true ||
     v48Status.smallestHonestDelta?.v47SceneReadbackUnchanged !== true ||
     v48Status.smallestHonestDelta?.v16ExtractBytesUnchanged !== true ||
-    v48Status.attemptsExecuted !== 0 ||
-    v48Status.liveExecutionOccurred !== false ||
-    v48Status.figmaWrites !== 0 ||
+    v48Status.attemptsExecuted !== 1 ||
+    v48Status.nextAttempt !== 2 ||
+    v48Status.liveExecutionOccurred !== true ||
+    v48Status.figmaWrites !== 4 ||
+    v48Status.figmaCaptures !== 0 ||
+    v48Status.createdNodesThenRemoved !== 2317 ||
+    v48Status.attempt1Path !== V48_ATTEMPT_1_PATH ||
+    v48Status.attempt1Sha256 !== V48_ATTEMPT_1_SHA256 ||
+    sha256(readRepositoryEvidence(V48_ATTEMPT_1_PATH)) !==
+      V48_ATTEMPT_1_SHA256 ||
+    v48Status.restartAsV48Attempt2WithoutMessageContainerCornerRadiusOmitForbidden !==
+      true ||
     v48Status.overallInputSuccess !== false
   )
     failures.push("v48 draft antecedent/status mismatch");
