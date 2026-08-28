@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 draft antecedent pending separate authorization; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 authorization declared; live forbidden; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -3327,7 +3327,7 @@
       "taughtContentTextDecorationOmitted": true
     },
     "liveV31": {
-      "status": "draft antecedent; pending separate authorization; live execution forbidden",
+      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
       "baseCommit": "5bbbd79ff2b58c0297f3cfcc35bbcde2c13635f8",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v31/protocol.json",
       "protocolSha256": "efcb0b75df93257b0e03fd9df96c646c52bea4a79d570cc98dc9c576f5477218",
@@ -3342,8 +3342,7 @@
       "antecedentHashSetSha256": "0de5c2e038d642091d49c191e77d357b26c21194a857272be6d72ed892c9e98d",
       "authorizationTemplatePath": "recipe/evidence/input-field-live-pivot-v31/authorization-template.json",
       "authorizationTemplateSha256": "9e94693fb1bd37bf04ec2d75d1f4a6430d026e22aa0a0b2bc4f746d06e1261ad",
-      "authorizationPresent": false,
-      "authorizationCommitted": false,
+      "authorizationPresent": true,
       "authorizationEffective": false,
       "authorizationLifecycleExcludedFromAntecedentHash": true,
       "authorizationCanBeAddedWithoutAntecedentRebuild": true,
@@ -3494,7 +3493,13 @@
       "taughtContentRowClipsContentOmitted": true,
       "v30AuthorizationReusable": false,
       "v30AntecedentBytesUnchanged": true,
-      "v30SceneReadbackUnchanged": true
+      "v30SceneReadbackUnchanged": true,
+      "antecedentCommit": "d5c7aa643f6f69a6fccd2377e23d749d90c07547",
+      "authorizationCommitStateDerivedByHistory": true,
+      "authorizationPath": "recipe/evidence/input-field-live-pivot-v31/capture-authorization.json",
+      "authorizationSha256": "c52dc7e5ff2f8bc5a7096b2dd9bf5abd3834cc298486e02818537e9ce92dd0e7",
+      "signingPublicKeySpkiSha256": "a9afe8aa161c81ce584765a9a2fb02945b84c4ddf1760af5c72e356e445300d6",
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
     }
   }
 }

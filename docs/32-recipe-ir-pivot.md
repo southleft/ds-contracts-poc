@@ -779,8 +779,8 @@ lineage; do not patch hashed bytes in place.
 | A5bj | PREPARE INPUT V30. Copy the v29 stack. Do not patch hashed v29 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content/placeholder and content/value `type.textDecoration` that compile never emits. Do not invent variables. Do not invent a textDecoration value. Do not teach FIXED as a fill. | **Done** at `fdad5d7bb2920b8688946b8a5d735b337a843551`. Antecedent index SHA-256 `2d571d91900c421993e46c0ecceb251b576dcba78ebefd3132f4bc175e67909b`. |
 | A5bk | AUTHORIZE INPUT V30 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `fdad5d7bb2920b8688946b8a5d735b337a843551`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `5c489d305e69f1a850874c8962bba1dbf053eeab19ba3ba3e8781052ec63c8a5`; SPKI SHA-256 `52b157be09d08c7296c062267663c604e152ee7c368e0620a26490a5a872fc60`. Do not patch hashed v29 or v30 bytes. | **Done** at `babb6e5db745e7eb36037b069dce8a54983f2dec`. |
 | A5bl | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `type.textDecoration` (content textDecoration now omitted). Host then refused `$.children[0].children[0].children[0].clipsContent` (MUI `input-field/content-row` host emits true; compile omits clipsContent). Polar has 0 content-row nodes. Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** invent a clipsContent value. Do **not** restart v30 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5bm | PREPARE INPUT V31. Copy the v30 stack. Do not patch hashed v30 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `clipsContent` that compile never emits. Do not invent variables. Do not invent a clipsContent value. Do not teach FIXED as a fill. | **Draft prepared** on top of `5bbbd79f`. Do not self-hash this prepare commit. |
-| A5bn | AUTHORIZE INPUT V31 as a **separate** later commit. New prepare-era Ed25519 signer. Pin the PREPARE SHA. Auth lifecycle stays out of the antecedent hash set. | Open after PREPARE. Then attestation + Scratch-only live. Max 3. If a hashed v31 file fails closed, open v32. |
+| A5bm | PREPARE INPUT V31. Copy the v30 stack. Do not patch hashed v30 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `clipsContent` that compile never emits. Do not invent variables. Do not invent a clipsContent value. Do not teach FIXED as a fill. | **Done** at `d5c7aa643f6f69a6fccd2377e23d749d90c07547`. Antecedent index SHA-256 `84d6ae0831e158cf14dbdd123defd1ccd0da50290a260c4b26893e20ac69f6e8`. |
+| A5bn | AUTHORIZE INPUT V31 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `d5c7aa643f6f69a6fccd2377e23d749d90c07547`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c52dc7e5ff2f8bc5a7096b2dd9bf5abd3834cc298486e02818537e9ce92dd0e7`; SPKI SHA-256 `a9afe8aa161c81ce584765a9a2fb02945b84c4ddf1760af5c72e356e445300d6`. Do not patch hashed v30 or v31 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. Max 3. If a hashed v31 file fails closed, open v32. |
 
 ### B · Button closeout
 
@@ -841,11 +841,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After PREPARE INPUT V31 is published:
+After AUTHORIZE INPUT V31 is published:
 
 ```
-# AUTHORIZE INPUT V31 as a separate commit. New prepare-era Ed25519 signer.
-# Pin the PREPARE SHA. Auth lifecycle stays out of the antecedent hash set.
+npm run recipe:input-field:live:v31:history:verify -- --expect-authorized
+# then private attestation + Scratch-only preflight; live remains forbidden until those pass
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -2202,7 +2202,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, and v30 attempt 1 failed closed; v31 draft prepared; false** | AUTHORIZE INPUT V31 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, and v30 attempt 1 failed closed; v31 authorization declared; false** | attestation + Scratch-only live v31 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
