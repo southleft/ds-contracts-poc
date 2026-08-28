@@ -480,6 +480,9 @@ jobs:
       - name: recipe:input-field:live:v75:check (probe Polar reflow/contentFill vs content text; hashed v74 scene-readback and v17 writer frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v75:check
+      - name: recipe:input-field:live:v76:check (writer first-segment Label bind; hashed v75 scene-readback and v17 writer frozen)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:input-field:live:v76:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:comparison:check
