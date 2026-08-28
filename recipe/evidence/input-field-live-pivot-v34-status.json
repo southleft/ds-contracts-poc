@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v34-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused label bindings[0].field; cleanup complete",
   "baseCommit": "e729ab475f0617288b162576b702a0148ceb98a3",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v34/antecedent-index.json",
@@ -163,12 +163,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v34-attempt-1.json",
+  "attempt1Sha256": "d503daa1a3e2eabdf7cc815e852fbc2bcb08768128609df0ef0acf7b9f87fa4a",
+  "restartAsV34Attempt2WithoutLabelBindingFieldForbidden": true
 }
