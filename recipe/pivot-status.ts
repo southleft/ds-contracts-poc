@@ -33,7 +33,7 @@ const V3_ROOT = "recipe/evidence/input-field-live-pivot-v3";
 const DRAFT_STATUS =
   "draft-uncommitted; chronology unproven; capture forbidden";
 const STATUS_INDEX_STATUS =
-  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; Button/Input false; human signoff pending";
+  "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 authorization declared; live forbidden; Button/Input false; human signoff pending";
 const V4_PENDING_STATUS =
   "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden";
 const V4_FAILURE_STATUS =
@@ -1280,8 +1280,14 @@ const V44_AUTHORIZATION_TEMPLATE_SHA256 =
 const V44_STATUS_PATH =
   "recipe/evidence/input-field-live-pivot-v44-status.json";
 const V44_STATUS =
-  "draft antecedent; pending separate authorization; live execution forbidden";
+  "authorization declared; runtime security prerequisites still mandatory; live execution forbidden";
 const V44_BASE_COMMIT = "81b916f84b9f099eecb03b22d4ce880d11112f2a";
+const V44_ANTECEDENT_COMMIT = "1f1e3f8dbdd14daace494187abf2ca93ac3747db";
+const V44_AUTHORIZATION_PATH = `${V44_ROOT}/capture-authorization.json`;
+const V44_AUTHORIZATION_SHA256 =
+  "ef435279b3822e80098d120f13277ced8a2bc98c515fd3920460e2a1f93f13c4";
+const V44_SIGNING_PUBLIC_KEY_SPKI_SHA256 =
+  "2eacc22723b5ea4b15e4a8b0f4bef442e0e09d9721490891975b25d38d128240";
 const V24_ANTECEDENT_COMMIT = "753eef85aa026561542e45f492bf25b9ac84b599";
 const V24_AUTHORIZATION_PATH = `${V24_ROOT}/capture-authorization.json`;
 const V24_AUTHORIZATION_SHA256 =
@@ -3947,9 +3953,16 @@ export function validatePivotStatus(
     status.input?.liveV44?.antecedentHashSetSha256 !== V44_HASH_SET_SHA256 ||
     status.input?.liveV44?.authorizationTemplateSha256 !==
       V44_AUTHORIZATION_TEMPLATE_SHA256 ||
-    status.input?.liveV44?.authorizationPresent !== false ||
-    status.input?.liveV44?.authorizationCommitted !== false ||
+    status.input?.liveV44?.antecedentCommit !== V44_ANTECEDENT_COMMIT ||
+    status.input?.liveV44?.authorizationPresent !== true ||
+    status.input?.liveV44?.authorizationCommitStateDerivedByHistory !== true ||
     status.input?.liveV44?.authorizationEffective !== false ||
+    status.input?.liveV44?.authorizationPath !== V44_AUTHORIZATION_PATH ||
+    status.input?.liveV44?.authorizationSha256 !== V44_AUTHORIZATION_SHA256 ||
+    status.input?.liveV44?.signingPublicKeySpkiSha256 !==
+      V44_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    status.input?.liveV44?.historyExpectedModeAfterAuthorizationCommit !==
+      "--expect-authorized" ||
     status.input?.liveV44?.authorizationLifecycleExcludedFromAntecedentHash !==
       true ||
     status.input?.liveV44?.authorizationCanBeAddedWithoutAntecedentRebuild !==
@@ -7714,10 +7727,16 @@ export function verifyPivotStatus(): void {
     v44Status.artifactVersion !== "input-live-v44-status-v1" ||
     v44Status.status !== V44_STATUS ||
     v44Status.baseCommit !== V44_BASE_COMMIT ||
-    v44Status.antecedent?.commit !== null ||
-    v44Status.authorization?.present !== false ||
-    v44Status.authorization?.committed !== false ||
+    v44Status.antecedent?.commit !== V44_ANTECEDENT_COMMIT ||
+    v44Status.authorization?.present !== true ||
+    v44Status.authorization?.commitStateDerivedByHistory !== true ||
     v44Status.authorization?.effective !== false ||
+    v44Status.authorization?.path !== V44_AUTHORIZATION_PATH ||
+    v44Status.authorization?.sha256 !== V44_AUTHORIZATION_SHA256 ||
+    v44Status.authorization?.signingPublicKeySpkiSha256 !==
+      V44_SIGNING_PUBLIC_KEY_SPKI_SHA256 ||
+    sha256(readRepositoryEvidence(V44_AUTHORIZATION_PATH)) !==
+      V44_AUTHORIZATION_SHA256 ||
     v44Status.authorization?.v43AuthorizationReusable !== false ||
     v44Status.smallestHonestDelta?.taughtMessageBindingCompileOrder !==
       true ||
