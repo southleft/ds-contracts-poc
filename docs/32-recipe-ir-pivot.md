@@ -851,7 +851,8 @@ lineage; do not patch hashed bytes in place.
 | A5cw | PREPARE INPUT V43. Copy the v42 stack. Do not patch hashed v42 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit surface stroke `dashPattern` that compile never emits. Surface stroke only. Do not invent variables. Do not invent a dashPattern value. Do not teach FIXED as a fill. | **Done** at `34f42760a0f38e3d7b253d6ccd3d2905eb90e341`. Antecedent index SHA-256 `92182006293e6fc003492f98651f898b55bea63a0272a7619d22139e11135d3b`. |
 | A5cx | AUTHORIZE INPUT V43 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `34f42760a0f38e3d7b253d6ccd3d2905eb90e341`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `8cfcd36604c9d3b996d2a5de678bbcc2ef0f6d32c16cf00062b5c25be1f0546a`; SPKI SHA-256 `cec298e708d912be31cd7126c6abc823e4300bdd252c40627b3b566f49fecf37`. Do not patch hashed v42 or v43 bytes. | **Done** at `d567aeeee77637cf05a96058379283578fc04655`. |
 | A5cy | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:160800`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse surface stroke `dashPattern`. Host then refused `$.children[0].children[1].children[0].bindings[0].field` (MUI `input-field/message/helper` host starts at `fills.0.color`; compile starts at `type.fontSize`). Polar has 0 content-row nodes. Do **not** invent a binding field. Do **not** restart v43 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5cz | PREPARE INPUT V44. Copy the v43 stack. Do not patch hashed v43 scene-readback, extract, restore, writer, or runtime bytes. Teach host to restore compile binding order on `input-field/message/helper`. Helper role only unless the same prepare's measured family already includes `message/error`. Do not invent variables. Do not teach FIXED as a fill. | Open after RECORD. |
+| A5cz | PREPARE INPUT V44. Copy the v43 stack. Do not patch hashed v43 scene-readback, extract, restore, writer, or runtime bytes. Teach host to restore compile binding order on `input-field/message/helper` and `input-field/message/error` (same three compile fields; extract proved both). Do not invent variables. Do not teach FIXED as a fill. | **Draft prepared** on top of `81b916f84b9f099eecb03b22d4ce880d11112f2a`. |
+| A5da | AUTHORIZE INPUT V44 as a **separate** later commit. New prepare-era Ed25519 signer. Auth lifecycle stays out of the hash set. Do not patch hashed v43 or v44 bytes. | Open after PREPARE. |
 
 ### B · Button closeout
 
@@ -912,11 +913,11 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After RECORD INPUT V43 is published:
+After PREPARE INPUT V44 is published:
 
 ```
-# PREPARE INPUT V44 — copy v43; restore message/helper binding compile order
-# do not patch hashed v43; do not restart v43 attempt 2 as-is
+# AUTHORIZE INPUT V44 — pin prepare-era operator signer
+# then private attestation + Scratch-only preflight; live remains forbidden until those pass
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
