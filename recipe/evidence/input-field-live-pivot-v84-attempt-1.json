@@ -1,0 +1,280 @@
+{
+  "artifactVersion": "input-live-v84-attempt-1-v1",
+  "status": "cleaned after green technical gates; mint did not stay",
+  "authorizationCommit": "8fe018963e6bfd541b1be509f67fcdefc55846e4",
+  "codeCommit": "8fe018963e6bfd541b1be509f67fcdefc55846e4",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "112:288922",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "0ed357dbe2acb272d1348d90cf689510f7b967e82f6c0cf834ad1a315ed759e0",
+    "payloadSha256": "5d0f232375dbe83cb865bf27abb5321d871e0a16ddf1d8ee7628d14be6261681",
+    "v18WriterProgramUnchanged": true,
+    "v18WriterPayloadUnchanged": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 980,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436161,
+    "sha256": "2171f6033259b08463c3d0e18c18952aa7e1c2fd95a8548f78d775f76cfdb4e1",
+    "hostNormalizeAccount": true,
+    "payloadKeys": ["pageId", "roots", "variableTable"],
+    "pageId": "112:288922",
+    "marker": null
+  },
+  "v19WriterTeaching": {
+    "taughtWriterHiddenFillOccupancy": true,
+    "marker": "INPUT-WRITER-HIDDEN-FILL-OCCUPANCY",
+    "citedMechanism": "recipe CSS ::placeholder { opacity: 0 } plus restore visible=true for FILL measure",
+    "extractPlaceholderVisibleTrue": 128,
+    "extractPlaceholderVisibleFalse": 0,
+    "extractPlaceholderOpacity0": 24,
+    "extractPlaceholderOpacity1": 104,
+    "extractPlaceholderFill": 128,
+    "extractPlaceholderFixed": 0,
+    "hiddenRevealedForFill": 0,
+    "muiOverlapClassTrailingX": [165],
+    "muiOverlapClassTrailingXWasZeroOnV78": true,
+    "sampleKey": "mui/medium/default/placeholder/false/trailing",
+    "sampleTrailingX": 165,
+    "samplePlaceholderWidth": 157,
+    "sampleContentRowWidth": 204,
+    "addedSpacer": false,
+    "setPixelWidth": false,
+    "setPrimaryAxisAlignMax": false
+  },
+  "v80HostTeaching": {
+    "taughtContentOpacityOmitted": true,
+    "sceneContentOpacityKeys": 0,
+    "compileContentOpacityKeys": 0
+  },
+  "v81CompileCarryTeaching": {
+    "taughtCompileCarryLiveVisible": true,
+    "inventHostVisibleFalseForbidden": true,
+    "compileContentVisibleKeys": 0,
+    "compileContentVisibleFalseKeys": 0,
+    "sceneContentVisibleKeys": 0,
+    "extractPlaceholderVisibleTrue": 128,
+    "extractPlaceholderVisibleFalse": 0
+  },
+  "v82CompileCarryTeaching": {
+    "taughtCompileCarryLiveOpacity": true,
+    "inventOpacityVariableForbidden": true,
+    "inventCompileTextOpacityForbidden": true,
+    "expectedPlanMuiOpacity0": 24,
+    "expectedPlanMuiOpacity1": 1193,
+    "expectedPlanPolarOpacity0": 0,
+    "expectedPlanPolarOpacity1": 1089,
+    "independentRootAccountingMui": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "independentRootAccountingPolar": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    }
+  },
+  "v83CollapseTeaching": {
+    "taughtCollapseOmitInventedContentTextOpacity": true,
+    "inventCompileTextOpacityForbidden": true,
+    "compileContentOpacityKeys": 0,
+    "recompileDidNotInventDefault1": true,
+    "muiCycle1SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+    "muiCycle2SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+    "muiCycle1CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+    "muiCycle2CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+    "polarCycle1SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+    "polarCycle2SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+    "polarCycle1CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+    "polarCycle2CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+    "compiledShaUnchangedFromV82RefusedCycle": true
+  },
+  "v84ProbeTeaching": {
+    "taughtProbeExcludeOpacityZeroOccupancyOverlap": true,
+    "marker": "INPUT-PROBE-EXCLUDE-OPACITY-ZERO-OCCUPANCY-OVERLAP",
+    "occupancySpacersNotOverlapPartners": true,
+    "paintedTrailingStillAtEnd": true
+  },
+  "probe": {
+    "issued": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "rawResponseBytes": 67571,
+    "sha256": "5fabf4548d3131553334785cca727a2b66e6bc64af566cea3e1a4d99c13debde",
+    "cells": 256,
+    "muiSourceBooleansAllTrue": true,
+    "polarSourceBooleansAllTrue": true,
+    "textPropertiesRestoredBoth": true,
+    "polarReflowPassed": true,
+    "roleFail": 0,
+    "clipFail": 0,
+    "clipMax": 0,
+    "overlapFail": 0,
+    "overlapMax": 0,
+    "polarOverlapFail": 0,
+    "polarClipFail": 0,
+    "v78OverlapClassKeys": 12,
+    "v78OverlapPixels": 0,
+    "v78TrailingX": 165,
+    "overlapAlsoFailedOnMuiPlaceholderNone": false,
+    "inventOverlapZero": false
+  },
+  "observedIndependentRootAccounting": {
+    "reached": true,
+    "mui": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "polaris": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "recipeCollapseReached": true,
+    "recipeCollapsePassed": true,
+    "probeIssuedBecauseAccountingAndCollapsePassed": true
+  },
+  "observedFixedPoint": {
+    "mui": {
+      "stable": true,
+      "sourceIrRead": false,
+      "cycle1SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+      "cycle2SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+      "cycle1CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+      "cycle2CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+      "cycle1Ok": true,
+      "cycle2Ok": true,
+      "cycle1Silent": 0,
+      "cycle1Mismatch": 0
+    },
+    "polaris": {
+      "stable": true,
+      "sourceIrRead": false,
+      "cycle1SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+      "cycle2SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+      "cycle1CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+      "cycle2CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+      "cycle1Ok": true,
+      "cycle2Ok": true,
+      "cycle1Silent": 0,
+      "cycle1Mismatch": 0
+    }
+  },
+  "hostTechnicalGates": {
+    "sceneExtraction": true,
+    "hostNormalization": true,
+    "accounting": true,
+    "fixedPoint": true,
+    "usability": true,
+    "restoration": true,
+    "clipping": true,
+    "overlap": true,
+    "adornmentContent": true,
+    "stateSemantics": true
+  },
+  "objective": {
+    "denominator": 128,
+    "technicalPassed": true,
+    "failures": 0,
+    "catastrophicCells": 0,
+    "stratumRegressions": 0,
+    "wins": {
+      "geometry": 112,
+      "perceptual": 128,
+      "pixelInk": 101
+    },
+    "losses": {
+      "geometry": 16,
+      "perceptual": 0,
+      "pixelInk": 27
+    }
+  },
+  "closure": {
+    "phase": "required-cleanup-after-main-complete",
+    "locus": "private/input-live-v84-host-loop.mjs",
+    "messages": [
+      "Input live v84 main lane completed; required cleanup removed the mint"
+    ],
+    "cause": "V84 probe teaching held: opacity-0 occupancy spacers (content placeholder/value layout FILL, visible:true) are not overlap partners. Probe overlapFail 0 / overlapMax 0 on 256 cells (MUI and Polar). Painted trailing stayed at x=165 on all 12 V78-class MUI placeholder/trailing keys (sample mui/medium/default/placeholder/false/trailing trailingX=165 placeholderWidth=157 content-row 204). Occupancy held: 128 placeholders visible=true (24 opacity=0 FILL, 0 FIXED). Restore hiddenRevealedForFill=0. Independent-root accounting 0/0 both. Recipe-collapse fixed-point stable both; MUI compiled SHA unchanged from the V82 refused cycle (cf660e07…8740). All required source booleans true both, including textPropertiesRestored and Polar reflow. Role/clip fail 0. Probe accepted; 128 captures ran; objective technicalPassed true (geometry losses 16 / perceptual 0 / pixelInk 27 are comparison residuals, not gate refuses). Writer accepted 2317 nodes on new page 112:288922 (not 111:283874); v19 program 0ed357db…59e0 / payload 5d0f2323…1681; hashed v18 unchanged; hashed v83 scene-readback unchanged. Did not revert v19. Did not invent host visible:false. Did not invent an opacity variable. Did not invent overlap-zero — overlap 0 was measured after excluding opacity-0 occupancy spacers. Cleanup accepted; remainingOwnedNodes 0; requested and removed page 112:288922. Mint did not stay because this lineage still cleans after main-complete. Probe was otherwise green (overlap 0, trailing still at end), so V85 cleanup-on-failure-only is named. Do not restart V84 attempt 2 without a new teaching. Do not restart V83 attempt 2. Do not claim v1 complete."
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "requestedPageNodeId": "112:288922",
+    "removedPageNodeId": "112:288922",
+    "complete": true
+  },
+  "captures": 128,
+  "figmaWrites": 133,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "mintStayed": false,
+  "mintCleaned": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterProgramUnchanged": true,
+  "v17WriterPayloadUnchanged": true,
+  "v18WriterMinted": true,
+  "v18WriterProgramUnchanged": true,
+  "v18WriterPayloadUnchanged": true,
+  "v19WriterMinted": true,
+  "v83SceneReadbackUnchanged": true,
+  "v82SceneReadbackUnchanged": true,
+  "v81SceneReadbackUnchanged": true,
+  "v80SceneReadbackUnchanged": true,
+  "taughtWriterHiddenFillOccupancyHeld": true,
+  "taughtContentOpacityOmittedHeld": true,
+  "taughtCompileCarryLiveVisibleHeld": true,
+  "taughtCompileCarryLiveOpacityHeld": true,
+  "taughtCollapseOmitInventedContentTextOpacityHeld": true,
+  "taughtProbeExcludeOpacityZeroOccupancyOverlapHeld": true,
+  "inventHostVisibleFalseForbidden": true,
+  "inventOpacityVariableForbidden": true,
+  "inventCompileTextOpacityForbidden": true,
+  "independentRootAccountingPassed": true,
+  "recipeCollapseFixedPointStable": true,
+  "recipeCollapseRefusedFixedPoint": false,
+  "probeIssued": true,
+  "probeOtherwiseGreen": true,
+  "inventOverlapZeroForbidden": true,
+  "unnamedSourcePxCarriedTeachingHeld": true,
+  "nextAttempt": 2,
+  "restartAsV84Attempt2WithoutNewTeachingForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "inventPolarContentRowForbidden": true,
+  "doNotClaimV1Complete": true
+}

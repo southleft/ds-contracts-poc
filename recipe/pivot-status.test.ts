@@ -1660,7 +1660,13 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV84.inventOverlapZeroForbidden = false;
     },
     (value) => {
-      value.status.input.liveV84.liveExecutionOccurred = true;
+      value.status.input.liveV84.liveExecutionOccurred = false;
+    },
+    (value) => {
+      value.status.input.liveV84.mintStayed = true;
+    },
+    (value) => {
+      value.status.input.liveV84.probeOtherwiseGreen = false;
     },
     (value) => {
       value.status.input.liveV84.taughtCollapseOmitInventedContentTextOpacity =
