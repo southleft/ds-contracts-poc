@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 authorization declared; live forbidden; Button/Input false; human signoff pending",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; Button/Input false; human signoff pending",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -4067,7 +4067,7 @@
       "restartAsV34Attempt2WithoutLabelBindingFieldForbidden": true
     },
     "liveV35": {
-      "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+      "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused label type.letterSpacing; cleanup complete",
       "baseCommit": "b19f3d16cdb845fb275450ad9a4fd5a9383a88cc",
       "protocolPath": "recipe/evidence/input-field-live-pivot-v35/protocol.json",
       "protocolSha256": "36aba71c1c55702d8d9c77d00e9e7bc98df04cc75b5f91916f87389d2d524b43",
@@ -4241,10 +4241,10 @@
       "carriedSceneReadback": "recipe/scene-readback-v35.ts",
       "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v35.ts",
       "carriedV3VerifierPath": "recipe/input-field-live-v3-verifier-v35.ts",
-      "attemptsExecuted": 0,
-      "nextAttempt": 1,
-      "liveExecutionOccurred": false,
-      "figmaWrites": 0,
+      "attemptsExecuted": 1,
+      "nextAttempt": 2,
+      "liveExecutionOccurred": true,
+      "figmaWrites": 4,
       "figmaCaptures": 0,
       "taughtLabelBindingExtrasDropped": true,
       "taughtLabelBindingCompileOrder": true,
@@ -4256,7 +4256,11 @@
       "authorizationPath": "recipe/evidence/input-field-live-pivot-v35/capture-authorization.json",
       "authorizationSha256": "1fb2e51a2eb7f4abc56a518c1b00ad9c876d0ac7f172d48e1656ddfd92198436",
       "signingPublicKeySpkiSha256": "9d552892da07d207717d5c59a37c2fd4e4929c93d9eba5ecd3e1242f800dfc42",
-      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized"
+      "historyExpectedModeAfterAuthorizationCommit": "--expect-authorized",
+      "createdNodesThenRemoved": 2317,
+      "attempt1Path": "recipe/evidence/input-field-live-pivot-v35-attempt-1.json",
+      "attempt1Sha256": "bcdbc4b0a0c81a6161b00830337834acbdd4c6c4e0bbe8d0867194b817ec2e01",
+      "restartAsV35Attempt2WithoutLabelLetterSpacingForbidden": true
     }
   }
 }
