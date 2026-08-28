@@ -90,6 +90,21 @@ test("Combobox writer plans two complete 64+8 primitive-IR sets without source b
   }
   assert.match(writer.code, /COMBOBOX-WRITER-FIRST-SEGMENT-BIND/);
   assert.match(writer.code, /COMBOBOX-WRITER-HIDDEN-FILL-OCCUPANCY/);
+  assert.match(writer.code, /COMBOBOX-WRITER-OPTION-ARIA-PROPERTIES/);
+  assert.match(writer.code, /addComponentProperty\("Label","TEXT"/);
+  assert.match(writer.code, /addComponentProperty\("Value","TEXT"/);
+  assert.match(writer.code, /addComponentProperty\("Disabled","BOOLEAN"/);
+  assert.match(writer.code, /COMBOBOX-OPTION-ARIA-SOURCE-ABSENT/);
+  assert.equal(
+    writer.sourcePlans.every(
+      (source) =>
+        source.optionAriaDefaults.Label === "Ada Lovelace" &&
+        source.optionAriaDefaults.Value === "ada" &&
+        source.optionAriaDefaults.Disabled === false,
+    ),
+    true,
+  );
+  assert.equal(writer.code.includes("Ada Lovelace".toLowerCase()), false);
   assert.match(writer.code, /COMBOBOX-OVERLAY-DECLARATION-INCOMPLETE/);
   assert.equal(writer.code.includes("node.letterSpacing"), false);
   assert.equal(writer.code.includes("node.textCase"), false);
@@ -136,6 +151,7 @@ test("Combobox writer mock-mints 144 variants under a Combobox identity", async 
       "COMBOBOX-FAKE-LAYOUT",
       "COMBOBOX-WRITER-FIRST-SEGMENT-BIND",
       "COMBOBOX-WRITER-HIDDEN-FILL-OCCUPANCY",
+      "COMBOBOX-WRITER-OPTION-ARIA-PROPERTIES",
     ],
   });
   assert.equal(conformance.ok, true, conformance.failures.join("\n"));

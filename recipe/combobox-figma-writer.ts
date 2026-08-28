@@ -60,6 +60,11 @@ export interface ComboboxFigmaSourcePlan {
   optionSet: ComponentSetNode;
   variables: VariablePlan[];
   contentDefaults: Record<string, string>;
+  optionAriaDefaults: {
+    Label: string;
+    Value: string;
+    Disabled: boolean;
+  };
   comparedIrFacts: number;
 }
 
@@ -112,6 +117,26 @@ const countComparedFacts = (root: IRNode): number => {
     count += Object.keys(node).filter((key) => key !== "label").length;
   });
   return count;
+};
+
+const optionAriaFromInstance = (
+  node: IRNode,
+): ComboboxFigmaSourcePlan["optionAriaDefaults"] | undefined => {
+  if (node.kind !== "instance" || node.componentRef !== "combobox@1/option")
+    return undefined;
+  const label = node.properties.Label;
+  const value = node.properties.Value;
+  const disabled = node.properties.Disabled;
+  if (
+    typeof label !== "string" ||
+    typeof value !== "string" ||
+    typeof disabled !== "boolean"
+  ) {
+    throw new TypeError(
+      "combobox live writer: option instance missing source Label/Value/Disabled",
+    );
+  }
+  return { Label: label, Value: value, Disabled: disabled };
 };
 
 const requireSet = (root: IRNode, role: string): ComponentSetNode => {
@@ -229,6 +254,18 @@ const planSource = (
   if (registry.size === 0) {
     throw new TypeError("combobox live writer: zero planned variables");
   }
+  const optionAriaOccurrences: ComboboxFigmaSourcePlan["optionAriaDefaults"][] =
+    [];
+  walk(comboboxSet, (node) => {
+    const aria = optionAriaFromInstance(node);
+    if (aria) optionAriaOccurrences.push(aria);
+  });
+  if (optionAriaOccurrences.length === 0) {
+    throw new TypeError(
+      "combobox live writer: no option instances carrying source Label/Value/Disabled",
+    );
+  }
+  const optionAriaDefaults = optionAriaOccurrences[0]!;
   return {
     adapterIdentity: input.adapterIdentity,
     displayName: input.displayName,
@@ -249,6 +286,7 @@ const planSource = (
       ),
     ),
     contentDefaults,
+    optionAriaDefaults,
     comparedIrFacts: countComparedFacts(input.envelope.ir),
   };
 };
@@ -277,6 +315,16 @@ export function validateComboboxFigmaSourcePlans(
     if (source.comparedIrFacts <= 0) {
       failures.push(
         `${source.adapterIdentity}: compared facts denominator is zero`,
+      );
+    }
+    if (
+      typeof source.optionAriaDefaults.Label !== "string" ||
+      typeof source.optionAriaDefaults.Value !== "string" ||
+      typeof source.optionAriaDefaults.Disabled !== "boolean" ||
+      source.optionAriaDefaults.Value.length === 0
+    ) {
+      failures.push(
+        `${source.adapterIdentity}: option ARIA defaults missing source Label/Value/Disabled`,
       );
     }
     const roles = new Set<string>();
@@ -475,6 +523,7 @@ for(const source of PLAN.sources){
   };
   const firstSegment=name=>name.split(" :: ",1)[0];
   const sceneRole=name=>{const role=firstSegment(name);return role.includes("=")?"":role;};
+  const propertyKey=(instance,name)=>Object.keys(instance.componentProperties||{}).find(key=>key.split("#")[0]===name);
   void "COMBOBOX-WRITER-FIRST-SEGMENT-BIND";
   const optionByKey=new Map();
   const render=async(ir,parent,ownershipKey)=>{
@@ -487,6 +536,14 @@ for(const source of PLAN.sources){
         const key=(ir.properties.Size||"")+"|"+(ir.properties["Option state"]||"");
         const main=optionByKey.get(key);if(!main)throw new Error("COMBOBOX-OPTION-MAIN-ABSENT:"+key);
         node=main.createInstance();
+        const updates={};
+        for(const name of ["Label","Value","Disabled"]){
+          const property=propertyKey(node,name);if(!property)throw new Error("COMBOBOX-OPTION-ARIA-PROPERTY-ABSENT:"+name);
+          const value=ir.properties[name];
+          if(name==="Disabled"?typeof value!=="boolean":typeof value!=="string")throw new Error("COMBOBOX-OPTION-ARIA-SOURCE-ABSENT:"+name);
+          updates[property]=value;
+        }
+        node.setProperties(updates);
       }else{
         const helper=helperByRef.get(ir.componentRef);if(!helper)throw new Error("COMBOBOX-HELPER-ABSENT:"+ir.componentRef);
         node=helper.createInstance();
@@ -528,7 +585,14 @@ for(const source of PLAN.sources){
     return set;
   };
   const optionSet=await mintSet(source.optionSet,"option");
+  void "COMBOBOX-WRITER-OPTION-ARIA-PROPERTIES";
+  const optionLabelProperty=optionSet.addComponentProperty("Label","TEXT",source.optionAriaDefaults.Label);
+  optionSet.addComponentProperty("Value","TEXT",source.optionAriaDefaults.Value);
+  optionSet.addComponentProperty("Disabled","BOOLEAN",source.optionAriaDefaults.Disabled);
   for(const component of optionSet.children){
+    for(const descendant of component.findAllWithCriteria({types:["TEXT"]})){
+      if(sceneRole(descendant.name)==="combobox/option/label")descendant.componentPropertyReferences={characters:optionLabelProperty};
+    }
     const props=Object.fromEntries(component.name.split(", ").map(part=>{const index=part.indexOf("=");return [part.slice(0,index),part.slice(index+1)];}));
     optionByKey.set((props.Size||"")+"|"+(props["Option state"]||""),component);
   }

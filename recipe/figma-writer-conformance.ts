@@ -295,6 +295,7 @@ const createLiveMock = (
     type: string,
     interfaceName: string,
     withChildren = false,
+    extras: { componentProperties?: Record<string, { type: string; value: string | boolean }> } = {},
   ): any => {
     const pluginData = new Map<string, string>();
     const target: Record<string, any> = {
@@ -366,11 +367,47 @@ const createLiveMock = (
         return child;
       };
     }
+    if (type === "INSTANCE") {
+      target.componentProperties = extras.componentProperties ?? {};
+      target.setProperties = (updates: Record<string, string | boolean>) => {
+        for (const [key, value] of Object.entries(updates)) {
+          if (!target.componentProperties[key]) {
+            throw new Error(`setProperties unknown key ${key}`);
+          }
+          target.componentProperties[key] = {
+            ...target.componentProperties[key],
+            value,
+          };
+        }
+      };
+    }
     if (type === "COMPONENT") {
-      target.createInstance = () => makeNode("INSTANCE", "InstanceNode", true);
+      target.createInstance = () => {
+        const defs = target.parent?._componentPropertyDefinitions ?? {};
+        return makeNode("INSTANCE", "InstanceNode", true, {
+          componentProperties: Object.fromEntries(
+            Object.entries(defs).map(([key, def]) => [
+              key,
+              { type: (def as { type: string }).type, value: (def as { defaultValue: string | boolean }).defaultValue },
+            ]),
+          ),
+        });
+      };
     }
     if (type === "COMPONENT_SET") {
-      target.addComponentProperty = (name: string) => `${name}#mock`;
+      target._componentPropertyDefinitions = {};
+      target.addComponentProperty = (
+        name: string,
+        typeName?: string,
+        defaultValue?: string | boolean,
+      ) => {
+        const key = `${name}#mock`;
+        target._componentPropertyDefinitions[key] = {
+          type: typeName,
+          defaultValue,
+        };
+        return key;
+      };
     }
     const writable = inheritedMembers(interfaces, interfaceName, "writable");
     const methods = inheritedMembers(interfaces, interfaceName, "methods");
