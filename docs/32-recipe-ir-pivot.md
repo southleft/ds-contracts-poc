@@ -932,7 +932,8 @@ lineage; do not patch hashed bytes in place.
 | A5fz | PREPARE INPUT V70. Copy the v69 stack. Do not patch hashed v16/v17 writer or hashed v69 scene-readback `1f3a98e5…3be3`. Teach the accounting observer to canonicalize `name` font-provenance JSON key order to compile/expected `canonicalJson` (`fallbackChain`-first). Same 7 keys, order-only, 448/448 both. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not include fill discriminator or Size axis in this prepare. Do not invent Polar widths or spreads. Do not teach FIXED. | **Done** at `7dec097c890d1fb888024b43ecddeec880321083`. Antecedent index SHA-256 `d5d3d68fdc90954862f467c889a8a0b68fcd4e62b6316cb8abdb066aaaa9a2de`. |
 | A5ga | AUTHORIZE INPUT V70 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `7dec097c890d1fb888024b43ecddeec880321083`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `64567c9f95c68d8f03fd784b2cf28f3f1f8ce26004421d06f35d82d629588073`; SPKI SHA-256 `4cec0fd5afe392a52618fdcfa80f17ebb7703657594785b35da62a9bed50a97b`. Do not patch hashed v16, v17, or v69 bytes. | **Done** at `12fb32700ef53ee2bdcc06dcc6bb064560a97815`. |
 | A5gb | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `110:234483`, not `108:231754`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `33907f7c…2917`). Font-provenance name key-order teaching held (name silent 448+448 → 0). Polar surface/label-row compile order held. Set strokes omitted; width remains HUG both. Independent root accounting then silent-mismatched (MUI 129 / Polar 193). MUI instancePayload is `kind:solid` vs `type:SOLID` only (128). Polar every payload also drifts `intrinsicSize.width` 8→9 / 25.78125→30 (128). Polar effect drop-shadow spread 1→0 / 3→0 (32+32). Size axis order-only 1+1. Fill is **not** kind/type-only on both libraries. Do **not** invent Polar pixels/spreads. Do **not** teach FIXED. Do **not** restart v70 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5gc | PREPARE INPUT V71. Copy the v70 stack. Do not patch hashed v16/v17 writer or hashed v70 scene-readback `f775aaef…7141`. Teach the accounting observer to canonicalize instancePayload fill `type:"SOLID"` to compile `{kind:"solid"}`. Same paint only; do not rewrite `intrinsicSize`, Polar widths, or effect spread. Do not include Size axis in this prepare. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar pixels or spreads. Do not teach FIXED. | **Done.** Antecedent index SHA-256 `46f4e75e41461c13315771c1b03fabc20c938b56a04947d754dc7d308433930e`. |
+| A5gc | PREPARE INPUT V71. Copy the v70 stack. Do not patch hashed v16/v17 writer or hashed v70 scene-readback `f775aaef…7141`. Teach the accounting observer to canonicalize instancePayload fill `type:"SOLID"` to compile `{kind:"solid"}`. Same paint only; do not rewrite `intrinsicSize`, Polar widths, or effect spread. Do not include Size axis in this prepare. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar pixels or spreads. Do not teach FIXED. | **Done** at `01c3b92ab24642b187cfb441aa621452b22cc4e3`. Antecedent index SHA-256 `46f4e75e41461c13315771c1b03fabc20c938b56a04947d754dc7d308433930e`. |
+| A5gd | AUTHORIZE INPUT V71 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `01c3b92ab24642b187cfb441aa621452b22cc4e3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `1de20ef035c0b67ad84972cda9b6672e87d31521d8db85c64db2dff95d88aacf`; SPKI SHA-256 `945cf2f238f40218f1bf601079edf7f9a294105a77a9797c0a066b03c5361d69`. Do not patch hashed v16, v17, or v70 bytes. | `--expect-authorized` after publish. Then attestation + Scratch-only live. |
 
 ### B · Button closeout
 
@@ -993,10 +994,10 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After PREPARE INPUT V71 is published:
+After AUTHORIZE INPUT V71 is published:
 
 ```
-npm run recipe:input-field:live:v71:history:verify -- --expect-pending
+npm run recipe:input-field:live:v71:history:verify -- --expect-authorized
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27

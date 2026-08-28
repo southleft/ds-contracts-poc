@@ -1269,7 +1269,7 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.input.liveV71.v16WriterBytesUnchanged = false;
     },
     (value) => {
-      value.status.input.liveV71.authorizationPresent = true;
+      value.status.input.liveV71.authorizationPresent = false;
     },
   ];
   for (const plant of plants) {
