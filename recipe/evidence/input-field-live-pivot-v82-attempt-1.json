@@ -1,0 +1,204 @@
+{
+  "artifactVersion": "input-live-v82-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "0535571899681513e149031978851d4b6307ef68",
+  "codeCommit": "0535571899681513e149031978851d4b6307ef68",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "111:281145",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "0ed357dbe2acb272d1348d90cf689510f7b967e82f6c0cf834ad1a315ed759e0",
+    "payloadSha256": "5d0f232375dbe83cb865bf27abb5321d871e0a16ddf1d8ee7628d14be6261681",
+    "v18WriterProgramUnchanged": true,
+    "v18WriterPayloadUnchanged": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 980,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436161,
+    "sha256": "c97ef448b043416f17fae69fee29420246e449cc67c55843cc70ec3a178ae00e",
+    "hostNormalizeAccount": false,
+    "payloadKeys": ["pageId", "roots", "variableTable"],
+    "pageId": "111:281145",
+    "marker": null
+  },
+  "v19WriterTeaching": {
+    "taughtWriterHiddenFillOccupancy": true,
+    "marker": "INPUT-WRITER-HIDDEN-FILL-OCCUPANCY",
+    "citedMechanism": "recipe CSS ::placeholder { opacity: 0 } plus restore visible=true for FILL measure",
+    "extractPlaceholderVisibleTrue": 128,
+    "extractPlaceholderVisibleFalse": 0,
+    "extractPlaceholderOpacity0": 24,
+    "extractPlaceholderOpacity1": 104,
+    "extractPlaceholderFill": 128,
+    "extractPlaceholderFixed": 0,
+    "hiddenRevealedForFill": 0,
+    "muiOverlapClassTrailingX": [165],
+    "muiOverlapClassTrailingXWasZeroOnV78": true,
+    "sampleKey": "mui/medium/default/placeholder/false/trailing",
+    "sampleTrailingX": 165,
+    "samplePlaceholderWidth": 157,
+    "sampleContentRowWidth": 204,
+    "addedSpacer": false,
+    "setPixelWidth": false,
+    "setPrimaryAxisAlignMax": false
+  },
+  "v80HostTeaching": {
+    "taughtContentOpacityOmitted": true,
+    "sceneContentOpacityKeys": 0,
+    "compileContentOpacityKeys": 0
+  },
+  "v81CompileCarryTeaching": {
+    "taughtCompileCarryLiveVisible": true,
+    "inventHostVisibleFalseForbidden": true,
+    "compileContentVisibleKeys": 0,
+    "compileContentVisibleFalseKeys": 0,
+    "sceneContentVisibleKeys": 0,
+    "extractPlaceholderVisibleTrue": 128,
+    "extractPlaceholderVisibleFalse": 0
+  },
+  "v82CompileCarryTeaching": {
+    "taughtCompileCarryLiveOpacity": true,
+    "inventOpacityVariableForbidden": true,
+    "inventCompileTextOpacityForbidden": true,
+    "expectedPlanMuiOpacity0": 24,
+    "expectedPlanMuiOpacity1": 1193,
+    "expectedPlanPolarOpacity0": 0,
+    "expectedPlanPolarOpacity1": 1089,
+    "independentRootAccountingMui": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "independentRootAccountingPolar": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    }
+  },
+  "probe": {
+    "issued": false,
+    "operatorSuccess": false,
+    "accepted": false,
+    "overlapCensus": null,
+    "inventOverlapZero": false
+  },
+  "observedIndependentRootAccounting": {
+    "reached": true,
+    "mui": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "polaris": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "recipeCollapseReached": true,
+    "recipeCollapsePassed": false,
+    "probeIssuedBecauseAccountingPassed": false
+  },
+  "observedFixedPoint": {
+    "mui": {
+      "stable": false,
+      "sourceIrRead": false,
+      "cycle1SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+      "cycle2SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+      "cycle1CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+      "cycle2CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+      "cycle1Ok": false,
+      "cycle2Ok": false,
+      "cycle1Silent": 24,
+      "cycle1Mismatch": 24
+    },
+    "polaris": {
+      "stable": true,
+      "sourceIrRead": false,
+      "cycle1Ok": true,
+      "cycle2Ok": true,
+      "cycle1Silent": 0,
+      "cycle1Mismatch": 0
+    }
+  },
+  "failure": {
+    "phase": "extract-host-fixed-point",
+    "locus": "recipe/input-field-live-v82-contract.ts:487",
+    "messages": [
+      "Input live v12 independent root accounting failed: mui:fixed-point"
+    ],
+    "cause": "V82 compile-carry live occupancy opacity 0 held on the frozen expected-plan/observe pair: MUI plan now has 24 occupancy opacity facts at 0 (1193 other opacity stay 1); Polar plan unchanged (0 opacity-0 facts). Independent-root accounting passed 0/0 both (MUI silent 0 mismatch 0; Polar silent 0 mismatch 0). Did not demand plan 1 while extract is 0. Occupancy held on canvas: 128 placeholders visible=true (24 opacity=0 FILL, 0 FIXED); the 12 V78 overlap-class MUI keys have trailing x=165 (content-row width 204), not x=0. Sample mui/medium/default/placeholder/false/trailing trailingX=165 placeholderWidth=157. Restore hiddenRevealedForFill=0. Host omit content opacity held (scene IR 0 content opacity keys; compile 0). Compile still omits TEXT opacity. Host extract operator succeeded, accounting passed, then refused MUI recipe-collapse fixed-point: cycle comparison not ok (24 silent + 24 mismatch) even though cycle1/cycle2 scene and compiled SHAs are byte-identical. Polar fixed-point stable 0/0. Probe was not issued. Probe overlap census was not measured and must not be invented as 0. Writer accepted 2317 nodes on new page 111:281145 (not 111:278416); v19 program 0ed357db…59e0 / payload 5d0f2323…1681; hashed v18 unchanged; hashed v81 scene-readback unchanged. Did not invent host visible:false. Did not invent an opacity variable. Did not invent compile TEXT opacity. Cleanup accepted; remainingOwnedNodes 0; requested and removed page 111:281145. Mint did not stay. Do not revert v19 to visible:false. Do not invent overlap-zero. Do not probe-hide. Do not invent 9/30/0 or a Polar content-row. Do not teach FIXED. Do not restart V81 attempt 2. Do not restart V82 attempt 2 without a new teaching. Do not claim v1 complete. Next teaching is not cleanup-on-failure-only: probe was not otherwise green. Collapse still compares the recompiled plan (compile omits TEXT opacity) against live 0."
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "requestedPageNodeId": "111:281145",
+    "removedPageNodeId": "111:281145",
+    "complete": true
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "mintStayed": false,
+  "mintCleaned": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterProgramUnchanged": true,
+  "v17WriterPayloadUnchanged": true,
+  "v18WriterMinted": true,
+  "v18WriterProgramUnchanged": true,
+  "v18WriterPayloadUnchanged": true,
+  "v19WriterMinted": true,
+  "v81SceneReadbackUnchanged": true,
+  "v80SceneReadbackUnchanged": true,
+  "v79SceneReadbackUnchanged": true,
+  "taughtWriterHiddenFillOccupancyHeld": true,
+  "taughtContentOpacityOmittedHeld": true,
+  "taughtCompileCarryLiveVisibleHeld": true,
+  "taughtCompileCarryLiveOpacityHeld": true,
+  "inventHostVisibleFalseForbidden": true,
+  "inventOpacityVariableForbidden": true,
+  "inventCompileTextOpacityForbidden": true,
+  "independentRootAccountingPassed": true,
+  "recipeCollapseRefusedFixedPoint": true,
+  "probeIssued": false,
+  "inventOverlapZeroForbidden": true,
+  "unnamedSourcePxCarriedTeachingHeld": true,
+  "nextAttempt": 2,
+  "restartAsV82Attempt2WithoutNewTeachingForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "inventPolarContentRowForbidden": true,
+  "doNotClaimV1Complete": true
+}
