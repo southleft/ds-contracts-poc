@@ -839,7 +839,8 @@ lineage; do not patch hashed bytes in place.
 | A5ck | PREPARE INPUT V39. Copy the v38 stack. Do not patch hashed v38 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `clipsContent` that compile never emits. Label-row role only. Do not invent variables. Do not invent a clipsContent value. Do not teach FIXED as a fill. | **Done** at `0498e173b1f449fdbb95c9bea43f9c63a941ae60`. Antecedent index SHA-256 `8a3bc4dd584731709d4ebc9c9e03f1b38884ad9f4dece586901bf08a2f0d525d`. |
 | A5cl | AUTHORIZE INPUT V39 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `0498e173b1f449fdbb95c9bea43f9c63a941ae60`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `6a22f47efe5e16ec483c2187b43ff6435b49b48cc76e68bdc936409877d26288`; SPKI SHA-256 `497106364fd559b1ad31dd03b7ced1d4e1efc963dabaad3853b4cecb7ee7ea47`. Do not patch hashed v38 or v39 bytes. | **Done** at `ddc093d8471c1e7bf236d5f239d5fc72e76d3ef7`. |
 | A5cm | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label-row `clipsContent`. Host then refused `$.children[0].children[0].children[1].cornerRadius` (MUI `input-field/label-row` host still emits all-zero radii; content-row omit does not apply). Polar has 0 content-row nodes. Do **not** invent a cornerRadius value. Do **not** restart v39 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
-| A5cn | PREPARE INPUT V40. Copy the v39 stack. Do not patch hashed v39 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `cornerRadius` that compile never emits. Label-row role only. Do not invent variables. Do not invent a cornerRadius value. Do not omit label-row effects or strokes yet. Do not teach FIXED as a fill. | Open after RECORD. |
+| A5cn | PREPARE INPUT V40. Copy the v39 stack. Do not patch hashed v39 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `cornerRadius` that compile never emits. Label-row role only. Do not invent variables. Do not invent a cornerRadius value. Do not omit label-row effects or strokes yet. Do not teach FIXED as a fill. | **Draft prepared** on `bc3d55551f8ff6e048a3bfc2b3b62a1e4c6d9707`. Antecedent index SHA-256 `057edcea2a24f56ebfa54d7da7b213ada80ba163829950746fefde378ed8be92`. |
+| A5co | AUTHORIZE INPUT V40 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent is the PREPARE SHA. Auth lifecycle stays out of the hash set. Do not patch hashed v39 or v40 bytes. | Open after PREPARE. |
 
 ### B · Button closeout
 
@@ -900,11 +901,10 @@ v1 is complete only when every row is actually true:
 
 ### Immediate next command
 
-After RECORD INPUT V39 is published:
+After PREPARE INPUT V40 is published:
 
 ```
-# PREPARE INPUT V40 — copy v39; omit label-row cornerRadius compile never emits
-# do not patch hashed v39; do not restart v39 attempt 2 as-is
+# AUTHORIZE INPUT V40 — pin prepare-era operator signer
 ```
 
 ## Correction task 2 — offline implementation, 2026-08-27
@@ -2261,7 +2261,7 @@ references and re-derives a legacy comparator over the frozen 24-cell matrix.
 | archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; overall false/pending**                                                                                                              | scene-derived inversion/accounting, then attributable human signoff (human gate)                 |
-| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, and v39 attempt 1 failed closed; false** | PREPARE INPUT V40 (see Remaining work §A) |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, and v39 attempt 1 failed closed; v40 draft prepared; false** | AUTHORIZE INPUT V40 (see Remaining work §A) |
 | Combobox    | **offline technical proof passes; false/ungraded/no-live**                                                                                                      | matched 24-cell benchmark, Scratch-only live, then human grade (see Remaining work §C)           |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
