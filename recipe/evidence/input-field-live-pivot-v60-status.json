@@ -1,6 +1,6 @@
 {
   "artifactVersion": "input-live-v60-status-v1",
-  "status": "authorization declared; runtime security prerequisites still mandatory; live execution forbidden",
+  "status": "attempt 1 failed closed; writer and restore accepted; extract issued; host refused set cornerRadius; cleanup complete",
   "baseCommit": "554d994da97966181fddd39fbde54b611eb17b6a",
   "antecedent": {
     "indexPath": "recipe/evidence/input-field-live-pivot-v60/antecedent-index.json",
@@ -269,12 +269,16 @@
     "exactScratchReadOnlyProbeRequired": true,
     "tokenValuesForbidden": true
   },
-  "attemptsExecuted": 0,
-  "nextAttempt": 1,
+  "attemptsExecuted": 1,
+  "nextAttempt": 2,
   "maximumFutureAttempts": 3,
-  "liveExecutionOccurred": false,
-  "figmaWrites": 0,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
   "figmaCaptures": 0,
   "humanSignoff": "pending",
-  "overallInputSuccess": false
+  "overallInputSuccess": false,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v60-attempt-1.json",
+  "attempt1Sha256": "3914795cde011c63c974f31e8acb14cedbdcb8f50bea8f608882dc5ed5fc65e0",
+  "restartAsV60Attempt2WithoutSetCornerRadiusOmitForbidden": true
 }
