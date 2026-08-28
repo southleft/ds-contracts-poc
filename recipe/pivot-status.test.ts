@@ -1131,6 +1131,10 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
     (value) => {
       value.status.input.liveV63.v62SceneReadbackUnchanged = false;
     },
+    (value) => {
+      value.status.input.liveV63.restartAsV63Attempt2WithoutSetLayoutModeRewriteForbidden =
+        false;
+    },
   ];
   for (const plant of plants) {
     const value = fixtures();
