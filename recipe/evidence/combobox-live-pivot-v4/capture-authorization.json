@@ -1,0 +1,95 @@
+{
+  "artifactVersion": "combobox-live-v4-capture-authorization-v1",
+  "authorizationId": "combobox-live-v4",
+  "status": "authorization declared; runtime security prerequisites still mandatory",
+  "authorizationIntent": true,
+  "antecedent": {
+    "commit": "98bd78c6ac28c0b11b36e70a1909b1c959ac6c04",
+    "indexPath": "recipe/evidence/combobox-live-pivot-v4/antecedent-index.json",
+    "indexSha256": "b9d3a4f29dbc683bd8f176c758faa7acbe657f0adc3435a229c8baacc2da299c",
+    "hashSetSha256": "36351d7a6b98b6c81b93aa6fc9a9031172773ede0ef96a11e81b18093e9c7755"
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAkIiUupcy5MDY9qF3WaDubM2VKDNaZK4riuaGdNot4uc=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "899c2106f0a15376c853d1da968e4e9c20f48cd6610b958d197e924df27a56f9",
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 77,
+    "hostPhases": 3,
+    "captures": 72,
+    "sourceRoots": 2,
+    "expectedFacts": 26614
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "attemptsExecuted": 0,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "taughtCleanupOnFailureOnly": true,
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false,
+    "v9AuthorizationReusable": false,
+    "v10AuthorizationReusable": false,
+    "v11AuthorizationReusable": false,
+    "v12AuthorizationReusable": false,
+    "v13AuthorizationReusable": false,
+    "v14AuthorizationReusable": false,
+    "v15AuthorizationReusable": false,
+    "v16AuthorizationReusable": false,
+    "v17AuthorizationReusable": false,
+    "v18AuthorizationReusable": false,
+    "v19AuthorizationReusable": false,
+    "v20AuthorizationReusable": false,
+    "v21AuthorizationReusable": false,
+    "v22AuthorizationReusable": false,
+    "v23AuthorizationReusable": false,
+    "v24AuthorizationReusable": false,
+    "v25AuthorizationReusable": false,
+    "v26AuthorizationReusable": false,
+    "v27AuthorizationReusable": false,
+    "v28AuthorizationReusable": false,
+    "v29AuthorizationReusable": false,
+    "v30AuthorizationReusable": false,
+    "v31AuthorizationReusable": false,
+    "v32AuthorizationReusable": false,
+    "v33AuthorizationReusable": false,
+    "v34AuthorizationReusable": false,
+    "v35AuthorizationReusable": false,
+    "v36AuthorizationReusable": false,
+    "v85AuthorizationReusable": false,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "comboboxLiveV2AuthorizationReusable": false,
+    "comboboxLiveV3AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending"
+  }
+}
