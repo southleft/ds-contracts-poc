@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~20:00 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~20:30 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -127,10 +127,13 @@
 > host emits `effects: []`; compile omits effects). Overlay must keep
 > its compile-carried drop-shadow. Cleanup accepted; that Combobox page
 > is gone. Input `115:295378` stayed. Do not restart v14 attempt 2
-> as-is. Next teaching: host must omit empty `effects` on
-> `combobox/trigger` that compile never emits. Keep v2–v14 teachings.
-> Combobox is **not live**. Do not invent a Combobox human grade.
-> Product **v1 is incomplete**.
+> as-is. Combobox live v15 PREPARE teaches host to omit empty
+> `effects` on `combobox/trigger` that compile never emits. Same
+> class as Input variant effects omit / surface dashPattern omit.
+> Overlay must keep its compile-carried drop-shadow. Do not also
+> teach listbox empty effects in this PREPARE. Keep v2–v14
+> teachings. Combobox is **not live**. Do not invent a Combobox
+> human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
