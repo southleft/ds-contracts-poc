@@ -5071,7 +5071,18 @@ export function validatePivotStatus(
     status.combobox?.liveV40
       ?.hostProbeKeepsExactSceneRestorationAfterOpenVariantWalk !== true ||
     status.combobox?.liveV40?.runIdentity !==
-      "70c24cbd-d27f2e85-combobox-v1"
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV40?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV40?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV40?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV40?.attempt1
+      ?.hostProbeKeepsExactSceneRestorationAfterOpenVariantWalkTeachingCleared !==
+      true ||
+    status.combobox?.liveV40?.attempt1?.refusedClass !==
+      "probe/usability/restoration" ||
+    status.combobox?.liveV40?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV40?.nextTeaching !==
+      "measure the live overlapping node pairs on the 24 Open=true Content=options cells (antd medium 9, mui medium 7, both small 5) after overlay/listbox/option-instance/occupancy exclusions, then teach that measured pair class; do not invent Polar 9/30/0 or overlap-zero"
   )
     fail("combobox live v40 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))

@@ -1836,7 +1836,19 @@
       "hostObserveRecoversCompileCarriedOptionSetNameUnchangedFromV38": true,
       "hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrderUnchangedFromV39": true,
       "hostProbeKeepsExactSceneRestorationAfterOpenVariantWalk": true,
-      "runIdentity": "70c24cbd-d27f2e85-combobox-v1"
+      "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+      "attempt1": {
+        "status": "failed-closed",
+        "restoreAccepted": true,
+        "restoredCount": 144,
+        "extractWalkCleared": true,
+        "hostProbeKeepsExactSceneRestorationAfterOpenVariantWalkTeachingCleared": true,
+        "refusedClass": "probe/usability/restoration",
+        "refused": "probe/usability/restoration exactSceneRestoration=true both sources; 24 open-options cells overlapPixels 5-9",
+        "mintStayed": false,
+        "cleanedPageId": "163:32804"
+      },
+      "nextTeaching": "measure the live overlapping node pairs on the 24 Open=true Content=options cells (antd medium 9, mui medium 7, both small 5) after overlay/listbox/option-instance/occupancy exclusions, then teach that measured pair class; do not invent Polar 9/30/0 or overlap-zero"
     },
     "blockers": [
       "Combobox live v1 attempt 1 failed closed at restore 240 vs 144",
@@ -1878,6 +1890,7 @@
       "Combobox live v37 attempt 1 failed closed at independent root accounting mismatches; host observe compile-carried trigger characters teaching cleared",
       "Combobox live v38 attempt 1 failed closed at two-cycle scene-derived fixed-point; host observe compile-carried option-set name teaching cleared",
       "Combobox live v39 attempt 1 failed closed at probe/usability/restoration; host sceneToNormalizedIr trigger-slot sibling-order teaching cleared",
+      "Combobox live v40 attempt 1 failed closed at probe/usability/restoration; host probe exactSceneRestoration-after-open-variant-walk teaching cleared",
       "no Combobox human grade",
       "product v1 incomplete"
     ]

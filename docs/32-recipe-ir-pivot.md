@@ -474,11 +474,32 @@
 > overlapping node pairs before inventing
 > exclusion; do not invent Polar 9/30/0. Keep
 > v2–v39 teachings. Combobox live v40 PREPARE
-> teaches host probe must keep
-> exactSceneRestoration after the open-variant
-> walk, not refuse both sources when resize and
-> property restore already pass. Keep v2–v39
-> teachings. Combobox is **not live**. Do
+> `2f240fc9` and AUTHORIZE `545b360d` landed.
+> Attempt 1 minted page `163:32804`; restore held
+> 144 owned FILL texts. Host probe
+> exactSceneRestoration-after-open-variant-walk
+> teaching cleared; both sources now report
+> `exactSceneRestoration` true with resize,
+> property restore, switching, and text restore
+> already passing. Original-plan independent root
+> accounting is extra=0 mismatch=0 silent=0 and
+> 13307/13307 on both roots (combobox
+> 12915/12915). Two-cycle scene-derived
+> fixed-point is stable. Host then refused
+> probe/usability/restoration solely on the 24
+> Open=true Content=options cells whose
+> overlapPixels are 5–9 against the >2 threshold
+> (antd medium 9, mui medium 7, both small 5).
+> Overlay, listbox, option-instances, and
+> opacity-0 occupancy spacers are already
+> excluded. Extract local x/y replay found 0
+> pairs. Cleanup accepted; that Combobox page is
+> gone. Input `115:295378` stayed. Do not restart
+> v40 attempt 2 as-is. Next teaching: measure the
+> live overlapping node pairs on those 24 cells,
+> then teach that measured pair class; do not
+> invent Polar 9/30/0 or overlap-zero. Keep
+> v2–v40 teachings. Combobox is **not live**. Do
 > not invent a Combobox human grade. Product **v1
 > is incomplete**.
 >
