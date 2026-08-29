@@ -2002,7 +2002,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "offline-recipe-v1; product v1 incomplete",
+    "status": "offline-recipe-v1-writer; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2017,7 +2017,8 @@
       "sourceReferencesRendered": false,
       "aiGraded": false,
       "liveFigma": false,
-      "writer": false
+      "writer": true,
+      "writerIdentity": "ds.contracts.table.recipe.v1"
     },
     "offlineProof": {
       "pairedCellsPlanned": 8,
@@ -2036,7 +2037,6 @@
       "forbiddenComboboxPageId": "163:35981"
     },
     "blockers": [
-      "no Figma writer",
       "no live PREPARE",
       "no human grade",
       "Calendar not started",
