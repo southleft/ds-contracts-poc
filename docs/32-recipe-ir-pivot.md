@@ -136,13 +136,13 @@
 > (`combobox/overlay`: host starts at `cornerRadius.bottomLeft`;
 > compile starts at `layout.width.value`). Overlay drop-shadow stayed.
 > Cleanup accepted; that Combobox page is gone. Input `115:295378`
-> stayed. Do not restart v15 attempt 2 as-is. Next teaching: host
-> must order combobox/overlay bindings to compile field order so
-> `layout.width.value` precedes `fills.0.color` precedes
-> `strokes.0.paint.color` precedes `effects.0.color` precedes
-> cornerRadius corners, not live extract order. Keep v2–v15
-> teachings. Combobox is **not live**. Do not invent a Combobox
-> human grade. Product **v1 is incomplete**.
+> stayed. Do not restart v15 attempt 2 as-is. Combobox live v16
+> PREPARE teaches host must order combobox/overlay bindings to
+> compile field order so `layout.width.value` precedes
+> `fills.0.color` precedes `strokes.0.paint.color` precedes
+> `effects.0.color` precedes cornerRadius corners, not live
+> extract order. Keep v2–v15 teachings. Combobox is **not live**.
+> Do not invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
