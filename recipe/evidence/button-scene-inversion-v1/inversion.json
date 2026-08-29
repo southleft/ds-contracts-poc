@@ -12,11 +12,11 @@
       "setId": "85:7406",
       "variants": 144,
       "expectedFacts": 8706,
-      "matched": 8557,
-      "silent": 149,
+      "matched": 8701,
+      "silent": 5,
       "missing": 0,
       "extra": 1,
-      "mismatched": 149,
+      "mismatched": 5,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8706,
@@ -49,12 +49,6 @@
           "mismatched": 1
         },
         {
-          "channel": "type",
-          "missing": 0,
-          "extra": 0,
-          "mismatched": 144
-        },
-        {
           "channel": "width.mode",
           "missing": 0,
           "extra": 0,
@@ -73,13 +67,7 @@
         "mismatched root#role@0000",
         "mismatched root#layout.mode@0000",
         "mismatched root#layout.padding@0000",
-        "mismatched root#width.mode@0000",
-        "mismatched root/children/0/children/0#type@0000",
-        "mismatched root/children/1/children/1#type@0000",
-        "mismatched root/children/2/children/0#type@0000",
-        "mismatched root/children/3/children/1#type@0000",
-        "mismatched root/children/4/children/0#type@0000",
-        "mismatched root/children/5/children/1#type@0000"
+        "mismatched root#width.mode@0000"
       ]
     },
     {
@@ -88,11 +76,11 @@
       "setId": "85:8054",
       "variants": 144,
       "expectedFacts": 8778,
-      "matched": 8629,
-      "silent": 149,
+      "matched": 8773,
+      "silent": 5,
       "missing": 0,
       "extra": 1,
-      "mismatched": 149,
+      "mismatched": 5,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8778,
@@ -125,12 +113,6 @@
           "mismatched": 1
         },
         {
-          "channel": "type",
-          "missing": 0,
-          "extra": 0,
-          "mismatched": 144
-        },
-        {
           "channel": "width.mode",
           "missing": 0,
           "extra": 0,
@@ -149,13 +131,7 @@
         "mismatched root#role@0000",
         "mismatched root#layout.mode@0000",
         "mismatched root#layout.padding@0000",
-        "mismatched root#width.mode@0000",
-        "mismatched root/children/0/children/0#type@0000",
-        "mismatched root/children/1/children/1#type@0000",
-        "mismatched root/children/2/children/0#type@0000",
-        "mismatched root/children/3/children/1#type@0000",
-        "mismatched root/children/4/children/0#type@0000",
-        "mismatched root/children/5/children/1#type@0000"
+        "mismatched root#width.mode@0000"
       ]
     }
   ],
@@ -172,8 +148,8 @@
     "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
     "strokes.0.weight is surfaced from uniform per-side stroke-weight FLOATs when strokeWeight is absent (Input v18/v19 class); mixed or missing sides are left live; no invented weight",
     "duplicate mapped fills.N / strokes.N host aliases drop when the paint-color sibling is present with the same variable (Input V24 class); set fills and cornerRadius that compile omits are dropped, not restamped",
-    "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
-    "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
+    "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof. This single writer naming defect is the WHOLE remaining Button leftover: root name, role, layout.mode, layout.padding, width.mode and the one extra width.value all descend from it. The same defect was measured and FIXED writer-side for Table at live v26 (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL); closing it for Button needs a fresh mint of page 85:6781, which is a decision, not a teaching.",
+    "TAUGHT 2026-08-29 (B2h, font substrate): compile names the SOURCE font stack; Figma reports the face it RESOLVED. The observed face canonicalises onto the compile stack ONLY when the resolved family is a member of that stack and the styles agree once Figma spelling is normalised (SemiBold <-> Semi Bold). altitude resolved its first choice, IBM Plex Sans. fluent FELL BACK to Roboto, the 5th entry of its Segoe UI chain -- a named fallback, not an equality. A resolved family absent from the stack is left live because that would be a real substitution. No font invented, no expected plan restamped. Silent 149 -> 5 on both roots.",
     "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan"
   ]
 }

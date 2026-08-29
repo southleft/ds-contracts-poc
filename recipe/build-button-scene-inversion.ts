@@ -4,6 +4,8 @@ import { gzipSync, gunzipSync } from "node:zlib";
 
 import {
   assignButtonSceneOwnership,
+  buttonFontByOwnershipKey,
+  type ButtonFontResolution,
   compileButtonComponentRefMap,
   compileButtonTokenIdentityMap,
   normalizeButtonObserveScene,
@@ -24,7 +26,10 @@ import type { SceneNodeSnapshot } from "./scene-readback.js";
 const sha256 = (value: string | Uint8Array): string =>
   createHash("sha256").update(value).digest("hex");
 
-const writeGzip = (path: string, value: unknown): { sha256: string; uncompressedSha256: string; bytes: number } => {
+const writeGzip = (
+  path: string,
+  value: unknown,
+): { sha256: string; uncompressedSha256: string; bytes: number } => {
   const uncompressed = Buffer.from(`${canonicalJson(value)}\n`, "utf8");
   const compressed = gzipSync(uncompressed);
   writeFileSync(path, compressed);
@@ -38,6 +43,7 @@ const writeGzip = (path: string, value: unknown): { sha256: string; uncompressed
 const readObserve = (
   path: string,
   plan: ButtonExpectedPlanSource,
+  fontResolutions?: ButtonFontResolution[],
 ): SceneNodeSnapshot => {
   const raw = JSON.parse(
     gunzipSync(readFileSync(path)).toString("utf8"),
@@ -46,6 +52,8 @@ const readObserve = (
     assignButtonSceneOwnership(raw, plan.compileRoot),
     compileButtonTokenIdentityMap(plan.compileRoot),
     compileButtonComponentRefMap(plan.compileRoot),
+    buttonFontByOwnershipKey(plan.expectedScenePlan),
+    fontResolutions,
   );
 };
 
@@ -58,7 +66,8 @@ export function writeButtonExpectedPlans(): {
   const plans = compileButtonExpectedScenePlans();
   const altitude = plans.find((plan) => plan.source === "altitude");
   const fluent = plans.find((plan) => plan.source === "fluent");
-  if (!altitude || !fluent) throw new Error("Button expected-plans missing a root");
+  if (!altitude || !fluent)
+    throw new Error("Button expected-plans missing a root");
   return {
     altitude: writeGzip(
       `${BUTTON_SCENE_INVERSION_ROOT}/expected-scene-plan-altitude.json.gz`,
@@ -169,10 +178,7 @@ export function writeButtonInversionEvidence(): void {
       target: index.target,
       observeGuard: existsSync(`${BUTTON_SCENE_INVERSION_ROOT}/census.json`)
         ? JSON.parse(
-            readFileSync(
-              `${BUTTON_SCENE_INVERSION_ROOT}/census.json`,
-              "utf8",
-            ),
+            readFileSync(`${BUTTON_SCENE_INVERSION_ROOT}/census.json`, "utf8"),
           )
         : null,
       roots: serialized.roots.map((root) => ({
@@ -275,9 +281,14 @@ export function checkButtonInversionEvidence(): void {
       failures.push(`${plan.source} expected-scene-plan hash drifted`);
     }
   }
-  if (index.observe?.altitude?.sha256 !== sha256(readFileSync(observePaths.altitude)))
+  if (
+    index.observe?.altitude?.sha256 !==
+    sha256(readFileSync(observePaths.altitude))
+  )
     failures.push("observe-altitude hash drifted");
-  if (index.observe?.fluent?.sha256 !== sha256(readFileSync(observePaths.fluent)))
+  if (
+    index.observe?.fluent?.sha256 !== sha256(readFileSync(observePaths.fluent))
+  )
     failures.push("observe-fluent hash drifted");
   if (
     index.inversion?.sha256 !==
@@ -287,7 +298,9 @@ export function checkButtonInversionEvidence(): void {
   if (index.overallButtonSuccess !== false || index.humanSignoff !== "pending")
     failures.push("index must keep Button overall false and signoff pending");
   if (failures.length > 0) {
-    throw new Error(`Button scene inversion check failed:\n${failures.join("\n")}`);
+    throw new Error(
+      `Button scene inversion check failed:\n${failures.join("\n")}`,
+    );
   }
   process.stdout.write(
     "Button scene-derived inversion check: derived, not silent-zero, overall false\n",

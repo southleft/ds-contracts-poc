@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "6914f603f50e01b358d64293e0cacacb78e4b478693aee8fa2e65ce79fd186b4",
+    "sha256": "1c43df0c3764b703a450bffc1caaee70d65748d3ed3cfb238f052e9c648b667b",
     "ok": false,
     "roots": [
       {
@@ -51,11 +51,11 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 8557,
-        "silent": 149,
+        "matched": 8701,
+        "silent": 5,
         "missing": 0,
         "extra": 1,
-        "mismatched": 149,
+        "mismatched": 5,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
@@ -88,12 +88,6 @@
             "mismatched": 1
           },
           {
-            "channel": "type",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 144
-          },
-          {
             "channel": "width.mode",
             "missing": 0,
             "extra": 0,
@@ -112,13 +106,7 @@
           "mismatched root#role@0000",
           "mismatched root#layout.mode@0000",
           "mismatched root#layout.padding@0000",
-          "mismatched root#width.mode@0000",
-          "mismatched root/children/0/children/0#type@0000",
-          "mismatched root/children/1/children/1#type@0000",
-          "mismatched root/children/2/children/0#type@0000",
-          "mismatched root/children/3/children/1#type@0000",
-          "mismatched root/children/4/children/0#type@0000",
-          "mismatched root/children/5/children/1#type@0000"
+          "mismatched root#width.mode@0000"
         ]
       },
       {
@@ -127,11 +115,11 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 8629,
-        "silent": 149,
+        "matched": 8773,
+        "silent": 5,
         "missing": 0,
         "extra": 1,
-        "mismatched": 149,
+        "mismatched": 5,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
@@ -164,12 +152,6 @@
             "mismatched": 1
           },
           {
-            "channel": "type",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 144
-          },
-          {
             "channel": "width.mode",
             "missing": 0,
             "extra": 0,
@@ -188,13 +170,7 @@
           "mismatched root#role@0000",
           "mismatched root#layout.mode@0000",
           "mismatched root#layout.padding@0000",
-          "mismatched root#width.mode@0000",
-          "mismatched root/children/0/children/0#type@0000",
-          "mismatched root/children/1/children/1#type@0000",
-          "mismatched root/children/2/children/0#type@0000",
-          "mismatched root/children/3/children/1#type@0000",
-          "mismatched root/children/4/children/0#type@0000",
-          "mismatched root/children/5/children/1#type@0000"
+          "mismatched root#width.mode@0000"
         ]
       }
     ]
@@ -205,6 +181,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "bdabbccb51df1dc265fb3aeebd4de893c800ee41f15d861a02f99a198d76caa4"
+    "sha256": "b39395c9a3ca205debfaedf6bfd50c08fba2867f31523205fc4cf8a257045b76"
   }
 }

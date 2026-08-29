@@ -108,7 +108,8 @@ export function decodeButtonHexTokenName(name: string): string | undefined {
   );
   if (!match || (match[1] ?? "").length % 2 !== 0) return undefined;
   const decoded = Buffer.from(match[1]!, "hex").toString("utf8");
-  if (Buffer.from(decoded, "utf8").toString("hex") !== match[1]) return undefined;
+  if (Buffer.from(decoded, "utf8").toString("hex") !== match[1])
+    return undefined;
   return decoded;
 }
 
@@ -142,9 +143,10 @@ export function canonicalizeButtonExpectedPlanNames(
   };
 }
 
-const collectCompileTokenIdentities = (
-  node: { bindings?: Array<{ variable: string; type: string }>; children?: readonly unknown[] },
-): Array<{ variable: string; type: string }> => [
+const collectCompileTokenIdentities = (node: {
+  bindings?: Array<{ variable: string; type: string }>;
+  children?: readonly unknown[];
+}): Array<{ variable: string; type: string }> => [
   ...(node.bindings ?? []),
   ...(node.children ?? []).flatMap((child) =>
     collectCompileTokenIdentities(
@@ -194,9 +196,10 @@ export function canonicalizeButtonObserveTokenName(
   return liveName;
 }
 
-const collectCompileComponentRefs = (
-  node: { componentRef?: string; children?: readonly unknown[] },
-): string[] => [
+const collectCompileComponentRefs = (node: {
+  componentRef?: string;
+  children?: readonly unknown[];
+}): string[] => [
   ...(typeof node.componentRef === "string" && node.componentRef.length > 0
     ? [node.componentRef]
     : []),
@@ -306,7 +309,9 @@ export function compileButtonExpectedScenePlans(): ButtonExpectedPlanSource[] {
     );
     const envelope = compileButtonRecipe(instance);
     if (envelope.ir.kind !== "component-set") {
-      throw new TypeError(`${source.source}: compile IR is not a component-set`);
+      throw new TypeError(
+        `${source.source}: compile IR is not a component-set`,
+      );
     }
     const root = envelope.ir as ComponentSetNode;
     if (root.children.length !== 144) {
@@ -348,7 +353,8 @@ export function surfaceButtonUniformStrokeWeight(
   if (
     bindings.some(
       (binding) =>
-        binding.field === "strokes.0.weight" || binding.field === "strokeWeight",
+        binding.field === "strokes.0.weight" ||
+        binding.field === "strokeWeight",
     )
   ) {
     return bindings;
@@ -400,15 +406,114 @@ export function dropButtonDuplicateMappedBindings(
   });
 }
 
+/**
+ * Font substrate reconciliation (Button B2h), measured 2026-08-29.
+ *
+ * Compile names the SOURCE font stack, exactly as the library's CSS declares
+ * it. Figma reports the face it actually RESOLVED. Both are true facts about
+ * the same text, in two different vocabularies, and the 144-per-root `type`
+ * mismatch was that difference and nothing else:
+ *
+ *   altitude  compile "IBM Plex Sans", sans-serif / Semi Bold
+ *             live    IBM Plex Sans / SemiBold          <- first choice, exact
+ *   fluent    compile "Segoe UI", ..., Roboto, ... / Semi Bold
+ *             live    Roboto / SemiBold                 <- FALLBACK, 5th entry
+ *
+ * So this canonicalises the observed face onto the compile stack ONLY when the
+ * resolved family is a member of that stack and the styles agree once Figma's
+ * spelling is normalised (`SemiBold` <-> `Semi Bold`). A resolved family that
+ * is not in the stack is left live -- that would be a real substitution and
+ * must stay visible. Nothing invents a font, and no expected plan is restamped.
+ *
+ * The resolution is reported, not swallowed: `buttonFontResolutions` records
+ * whether each node took its requested first choice or a named fallback, and
+ * which entry of the chain answered.
+ */
+export interface ButtonFontResolution {
+  ownershipKey: string;
+  requestedStack: string;
+  resolvedFamily: string;
+  resolvedStyle: string;
+  chainIndex: number;
+  resolution: "requested" | "fallback";
+}
+
+const parseFontStack = (stack: string): string[] =>
+  stack
+    .split(",")
+    .map((entry) => entry.trim().replace(/^["']|["']$/g, ""))
+    .filter((entry) => entry.length > 0);
+
+const sameStyle = (left: string, right: string): boolean =>
+  left.replace(/\s+/g, "").toLowerCase() ===
+  right.replace(/\s+/g, "").toLowerCase();
+
+export function buttonFontByOwnershipKey(
+  plan: ExpectedScenePlan,
+): Map<string, { fontFamily: string; fontStyle: string }> {
+  const byKey = new Map<string, { fontFamily: string; fontStyle: string }>();
+  for (const fact of plan.facts) {
+    if (fact.channel !== "type") continue;
+    const value = fact.value as { fontFamily?: unknown; fontStyle?: unknown };
+    if (
+      typeof value?.fontFamily !== "string" ||
+      typeof value?.fontStyle !== "string"
+    )
+      continue;
+    byKey.set(fact.nodeOwnershipKey, {
+      fontFamily: value.fontFamily,
+      fontStyle: value.fontStyle,
+    });
+  }
+  return byKey;
+}
+
+export function resolveButtonObserveFont(
+  scene: SceneNodeSnapshot,
+  expected: { fontFamily: string; fontStyle: string } | undefined,
+  into?: ButtonFontResolution[],
+): SceneNodeSnapshot["fontName"] {
+  const live = scene.fontName;
+  if (!expected || !live) return live;
+  const chain = parseFontStack(expected.fontFamily);
+  const chainIndex = chain.findIndex((family) => family === live.family);
+  if (chainIndex < 0 || !sameStyle(live.style, expected.fontStyle)) return live;
+  into?.push({
+    ownershipKey: scene.ownershipKey ?? "(unkeyed)",
+    requestedStack: expected.fontFamily,
+    resolvedFamily: live.family,
+    resolvedStyle: live.style,
+    chainIndex,
+    resolution: chainIndex === 0 ? "requested" : "fallback",
+  });
+  return { family: expected.fontFamily, style: expected.fontStyle };
+}
+
 export function normalizeButtonObserveScene(
   scene: SceneNodeSnapshot,
   identityByLiveName?: ReadonlyMap<string, string>,
   componentRefByLastSegment?: ReadonlyMap<string, string>,
+  fontByOwnershipKey?: ReadonlyMap<
+    string,
+    { fontFamily: string; fontStyle: string }
+  >,
+  fontResolutions?: ButtonFontResolution[],
 ): SceneNodeSnapshot {
   const isSet = scene.type === "COMPONENT_SET";
+  const resolvedFont =
+    fontByOwnershipKey === undefined
+      ? scene.fontName
+      : resolveButtonObserveFont(
+          scene,
+          scene.ownershipKey === undefined
+            ? undefined
+            : fontByOwnershipKey.get(scene.ownershipKey),
+          fontResolutions,
+        );
   return {
     ...scene,
     name: firstSegmentButtonName(scene.name),
+    ...(resolvedFont === undefined ? {} : { fontName: resolvedFont }),
     ...(isSet ? { fills: undefined, cornerRadius: undefined } : {}),
     ...(scene.componentRef === undefined ||
     scene.componentRef === null ||
@@ -424,7 +529,9 @@ export function normalizeButtonObserveScene(
       dropButtonDuplicateMappedBindings(scene.boundVariables),
       identityByLiveName,
     )
-      .filter((binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field))
+      .filter(
+        (binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field),
+      )
       .map((binding) =>
         identityByLiveName === undefined
           ? binding
@@ -441,6 +548,8 @@ export function normalizeButtonObserveScene(
         child,
         identityByLiveName,
         componentRefByLastSegment,
+        fontByOwnershipKey,
+        fontResolutions,
       ),
     ),
   };
@@ -492,7 +601,8 @@ export function assignButtonSceneOwnership(
   return {
     ...raw,
     ownershipKey: "root",
-    semanticRole: raw.semanticRole ?? sceneRoleFromName(raw.name, raw.variantProperties),
+    semanticRole:
+      raw.semanticRole ?? sceneRoleFromName(raw.name, raw.variantProperties),
     variantGroupProperties: canonicalizeButtonVariantAxisOrder(
       raw.variantGroupProperties,
       compileRoot.variantAxes,
@@ -507,7 +617,8 @@ const stampOwnership = (
 ): SceneNodeSnapshot => ({
   ...node,
   ownershipKey: key,
-  semanticRole: node.semanticRole ?? sceneRoleFromName(node.name, node.variantProperties),
+  semanticRole:
+    node.semanticRole ?? sceneRoleFromName(node.name, node.variantProperties),
   children: node.children.map((child, index) =>
     stampOwnership(child, `${key}/children/${index}`),
   ),
@@ -636,8 +747,7 @@ export function compareButtonSceneInversion(
         compileButtonRecipe,
       );
     } catch (error) {
-      fixedPointError =
-        error instanceof Error ? error.message : String(error);
+      fixedPointError = error instanceof Error ? error.message : String(error);
       fixedPoint = {
         comparison: accounting,
         cycle1: "",
@@ -668,9 +778,7 @@ export function compareButtonSceneInversion(
     inputPageUntouched: true,
     overallButtonSuccess: false,
     humanSignoff: "pending",
-    ok: roots.every(
-      (root) => root.accounting.ok && root.fixedPoint.stable,
-    ),
+    ok: roots.every((root) => root.accounting.ok && root.fixedPoint.stable),
     roots,
   };
 }
@@ -734,8 +842,8 @@ export function serializeButtonInversionReport(
       "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
       "strokes.0.weight is surfaced from uniform per-side stroke-weight FLOATs when strokeWeight is absent (Input v18/v19 class); mixed or missing sides are left live; no invented weight",
       "duplicate mapped fills.N / strokes.N host aliases drop when the paint-color sibling is present with the same variable (Input V24 class); set fills and cornerRadius that compile omits are dropped, not restamped",
-      "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof",
-      "live text type uses resolved family/style (Fluent Roboto / SemiBold); compile names the source stack — not taught",
+      "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof. This single writer naming defect is the WHOLE remaining Button leftover: root name, role, layout.mode, layout.padding, width.mode and the one extra width.value all descend from it. The same defect was measured and FIXED writer-side for Table at live v26 (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL); closing it for Button needs a fresh mint of page 85:6781, which is a decision, not a teaching.",
+      "TAUGHT 2026-08-29 (B2h, font substrate): compile names the SOURCE font stack; Figma reports the face it RESOLVED. The observed face canonicalises onto the compile stack ONLY when the resolved family is a member of that stack and the styles agree once Figma spelling is normalised (SemiBold <-> Semi Bold). altitude resolved its first choice, IBM Plex Sans. fluent FELL BACK to Roboto, the 5th entry of its Segoe UI chain -- a named fallback, not an equality. A resolved family absent from the stack is left live because that would be a real substitution. No font invented, no expected plan restamped. Silent 149 -> 5 on both roots.",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
     ],
     roots: report.roots.map((root) => ({
@@ -801,7 +909,9 @@ export function validateButtonSceneInversionEvidence(
   return failures;
 }
 
-export function validateButtonStatusPlant(button: Record<string, any>): string[] {
+export function validateButtonStatusPlant(
+  button: Record<string, any>,
+): string[] {
   const inversion = readRepositoryJson<Record<string, any>>(
     `${BUTTON_SCENE_INVERSION_ROOT}/inversion.json`,
   );
@@ -811,37 +921,49 @@ export function validateButtonStatusPlant(button: Record<string, any>): string[]
   const failures = validateButtonSceneInversionEvidence(inversion);
   if (button.overallSuccess !== false)
     failures.push("Button overallSuccess must stay false");
-  if (button.status !== "pending") failures.push("Button status must stay pending");
+  if (button.status !== "pending")
+    failures.push("Button status must stay pending");
   if (button.humanSignoff !== "pending")
     failures.push("Button humanSignoff must stay pending");
   const plant = button.sceneDerivedInversion;
   if (plant?.method !== "expected-plan-vs-observe")
     failures.push("Button inversion method must be expected-plan-vs-observe");
-  if (plant?.sourceIrRead !== false) failures.push("Button inversion sourceIrRead");
+  if (plant?.sourceIrRead !== false)
+    failures.push("Button inversion sourceIrRead");
   if (plant?.silentAssigned !== false)
     failures.push("Button inversion silentAssigned");
-  if (plant?.silentDerived !== true) failures.push("Button inversion silentDerived");
+  if (plant?.silentDerived !== true)
+    failures.push("Button inversion silentDerived");
   if (plant?.ok !== false) failures.push("Button inversion ok must stay false");
   if (plant?.figmaWrites !== 0) failures.push("Button inversion figmaWrites");
   if (plant?.inputPageUntouched !== true)
     failures.push("Button inversion must leave the Input page untouched");
   if (plant?.historicalReadbackRefusedAsObserve !== true)
     failures.push("historical readback must stay refused as observe");
-  const altitude = inversion.roots.find((root: { source: string }) => root.source === "altitude");
-  const fluent = inversion.roots.find((root: { source: string }) => root.source === "fluent");
+  const altitude = inversion.roots.find(
+    (root: { source: string }) => root.source === "altitude",
+  );
+  const fluent = inversion.roots.find(
+    (root: { source: string }) => root.source === "fluent",
+  );
   if (plant?.roots?.altitude?.silent !== altitude?.silent)
     failures.push("Button altitude silent plant does not match evidence");
   if (plant?.roots?.fluent?.silent !== fluent?.silent)
     failures.push("Button fluent silent plant does not match evidence");
   if (plant?.roots?.altitude?.expectedFacts !== altitude?.expectedFacts)
-    failures.push("Button altitude expectedFacts plant does not match evidence");
+    failures.push(
+      "Button altitude expectedFacts plant does not match evidence",
+    );
   if (plant?.roots?.fluent?.expectedFacts !== fluent?.expectedFacts)
     failures.push("Button fluent expectedFacts plant does not match evidence");
   if (plant?.roots?.altitude?.matched !== altitude?.matched)
     failures.push("Button altitude matched plant does not match evidence");
   if (plant?.roots?.fluent?.matched !== fluent?.matched)
     failures.push("Button fluent matched plant does not match evidence");
-  if (plant?.indexSha256 !== indexHash() || plant?.inversionSha256 !== inversionHash())
+  if (
+    plant?.indexSha256 !== indexHash() ||
+    plant?.inversionSha256 !== inversionHash()
+  )
     failures.push("Button inversion artifact hash plant does not match disk");
   if (
     !Array.isArray(button.blockers) ||
@@ -849,7 +971,9 @@ export function validateButtonStatusPlant(button: Record<string, any>): string[]
   )
     failures.push("Button blockers must keep no attributable human signoff");
   if (index.overallButtonSuccess !== false || index.humanSignoff !== "pending")
-    failures.push("Button inversion index must stay overall false / signoff pending");
+    failures.push(
+      "Button inversion index must stay overall false / signoff pending",
+    );
   return failures;
 }
 
