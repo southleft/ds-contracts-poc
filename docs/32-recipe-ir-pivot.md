@@ -9,7 +9,7 @@
 > `recipe/evidence/input-field-live-v85-human-signoff.json`. Methods
 > (recipe-IR, one-teaching-per-PREPARE, named-or-carried, host-normalize,
 > occupancy placeholders, compile-carry live set facts) are blessed for
-> reuse. Product **v1 is incomplete**. Remaining: Combobox live, Data Table,
+> reuse. Product **v1 is incomplete**. Remaining: Combobox human grade, Data Table,
 > Calendar, Button leftover inversion (149 silent / fonts + set chrome).
 > Do not invent a Button human grade. Do not claim v1 complete. V85 RECORD
 > `c35bae60` still carries RECORD-time `humanSignoff: pending` and is not
@@ -511,9 +511,25 @@
 > dropdown covering helper; same overlay-clip
 > class as Input V78). Do not invent Polar
 > 9/30/0 or overlap-zero. Keep v2–v40
-> teachings. Combobox is **not live**. Do not
-> invent a Combobox human grade. Product **v1
-> is incomplete**.
+> teachings. Combobox live v41 AUTHORIZE
+> `663ed03d` landed. Attempt 1 minted page
+> `163:35981` (sets `163:36845`, `163:36076`,
+> `163:37709`, `163:36940`). Restore held 144.
+> Host probe measured 48 live pairs on the 24
+> Open=true Content=options cells after existing
+> exclusions: option/label and selected-indicator
+> against in-flow helper/error (3–9px). That is
+> the designed dropdown covering helper, not a
+> trigger/input painted collision. Probe then did
+> not score that pair class; scored
+> `overlapPixels` is 0 on all 144 cells.
+> `exactSceneRestoration` stayed true. Original-plan
+> accounting 0/0 and 13307/13307; fixed-point
+> stable. 72 captures technical-passed. Cleanup
+> persisted, not executed. Input `115:295378`
+> stayed. Combobox is **live on Scratch** pending
+> human grade. Do not invent a Combobox human
+> grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
@@ -3144,7 +3160,7 @@ grade.
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Stopped on fonts and invented set chrome. Do not invent Roboto/SemiBold. |
 | Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28; product v1 incomplete; overall false** | Combobox live next (inherit Input host-normalize; new page). Button leftover still pending (149 silent / fonts + set chrome). Do not invent a Button human grade. Do not claim v1 complete. |
-| Combobox    | **offline technical proof passes; writer offline-hermetic; false/ungraded/no-live**                                                                              | Scratch-only live inheriting Input host-normalize, then human grade (see Remaining work §C). Do not invent a Combobox human grade. |
+| Combobox    | **live v41 attempt 1 mint stayed on `163:35981`; probe/accounting/72 captures passed; human grade pending; overall false**                                                                              | Attributable human signoff on Scratch page `163:35981` (not Input `115:295378`). Do not invent a Combobox human grade. |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
 
