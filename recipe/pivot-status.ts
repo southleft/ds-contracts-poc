@@ -4297,6 +4297,78 @@ export function validatePivotStatus(
     status.combobox?.liveV32?.attempt1?.mintStayed !== false ||
     status.combobox?.liveV32?.nextTeaching !==
       "host must emit compile-carried label Combobox option on combobox/option-set instead of the live display name after ::" ||
+    status.combobox?.liveV33?.prepared !== true ||
+    status.combobox?.liveV33?.liveFigma !== false ||
+    status.combobox?.liveV33?.humanSignoff !== "pending" ||
+    status.combobox?.liveV33?.pageId !== null ||
+    status.combobox?.liveV33?.forbiddenInputPageId !== "115:295378" ||
+    status.combobox?.liveV33?.namespace !== "ds.contracts.combobox.recipe.v1" ||
+    status.combobox?.liveV33?.evidenceRoot !==
+      "recipe/evidence/combobox-live-pivot-v33" ||
+    status.combobox?.liveV33?.teaching !==
+      "host must emit compile-carried label Combobox option on combobox/option-set instead of the live display name after ::" ||
+    status.combobox?.liveV33?.ownedFillTexts !== 144 ||
+    status.combobox?.liveV33?.writerUnchangedFromV1 !== false ||
+    status.combobox?.liveV33?.restoreUnchangedFromV2 !== true ||
+    status.combobox?.liveV33?.extractSetRootEnvelopeHashUnchangedFromV3 !==
+      true ||
+    status.combobox?.liveV33?.extractCopiedOwnershipKeyUnchangedFromV4 !==
+      true ||
+    status.combobox?.liveV33?.hostOmitsEmptyInstancePayloadUnchangedFromV5 !==
+      true ||
+    status.combobox?.liveV33?.hostProjectsLiveRootOwnershipKeyUnchangedFromV6 !==
+      true ||
+    status.combobox?.liveV33?.hostRecoversRecipeComponentRefUnchangedFromV7 !==
+      true ||
+    status.combobox?.liveV33?.writerAriaStampUnchangedFromV8 !== true ||
+    status.combobox?.liveV33?.hostRecoversComponentPropertyNameUnchangedFromV9 !==
+      true ||
+    status.combobox?.liveV33?.hostTriggerBindingCompileOrderUnchangedFromV10 !==
+      true ||
+    status.combobox?.liveV33?.hostLeadingSlotBindingCompileOrderUnchangedFromV11 !==
+      true ||
+    status.combobox?.liveV33?.hostLeadingSlotCompileCarryVisibleUnchangedFromV12 !==
+      true ||
+    status.combobox?.liveV33?.hostTrailingSlotBindingCompileOrderUnchangedFromV13 !==
+      true ||
+    status.combobox?.liveV33?.hostTrailingSlotCompileCarryVisibleUnchangedFromV14 !==
+      true ||
+    status.combobox?.liveV33?.hostTriggerEmptyEffectsUnchangedFromV15 !==
+      true ||
+    status.combobox?.liveV33?.hostOverlayBindingCompileOrderUnchangedFromV16 !==
+      true ||
+    status.combobox?.liveV33?.hostOverlayWidthAliasUnchangedFromV17 !== true ||
+    status.combobox?.liveV33?.hostListboxBindingCompileOrderUnchangedFromV18 !==
+      true ||
+    status.combobox?.liveV33?.hostOptionInstanceBindingExtrasUnchangedFromV19 !==
+      true ||
+    status.combobox?.liveV33?.hostOptionInstanceFillsOmitUnchangedFromV20 !==
+      true ||
+    status.combobox?.liveV33?.hostOptionInstancePayloadOmitUnchangedFromV21 !==
+      true ||
+    status.combobox?.liveV33?.hostListboxClipsContentOmitUnchangedFromV22 !==
+      true ||
+    status.combobox?.liveV33?.hostListboxCornerRadiusOmitUnchangedFromV23 !==
+      true ||
+    status.combobox?.liveV33?.hostListboxEmptyEffectsOmitUnchangedFromV24 !==
+      true ||
+    status.combobox?.liveV33?.hostListboxEmptyStrokesOmitUnchangedFromV25 !==
+      true ||
+    status.combobox?.liveV33?.hostOverlayEmptyDashPatternOmitUnchangedFromV26 !==
+      true ||
+    status.combobox?.liveV33?.hostSetRootClipsContentOmitUnchangedFromV27 !==
+      true ||
+    status.combobox?.liveV33?.hostOptionBindingCompileOrderUnchangedFromV28 !==
+      true ||
+    status.combobox?.liveV33?.hostOptionHeightAliasUnchangedFromV29 !== true ||
+    status.combobox?.liveV33?.hostOptionClipsContentOmitUnchangedFromV30 !==
+      true ||
+    status.combobox?.liveV33
+      ?.hostSelectedIndicatorBindingCompileOrderUnchangedFromV31 !== true ||
+    status.combobox?.liveV33
+      ?.hostSelectedIndicatorCompileCarryVisibleUnchangedFromV32 !== true ||
+    status.combobox?.liveV33?.runIdentity !==
+      "70c24cbd-d27f2e85-combobox-v1" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||

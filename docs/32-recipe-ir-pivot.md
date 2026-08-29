@@ -354,8 +354,12 @@
 > as-is. Next teaching: host must emit compile-carried
 > label `Combobox option` on `combobox/option-set` instead
 > of the live display name after ` :: `. Keep v2–v32
-> teachings. Combobox is **not live**. Do not invent a
-> Combobox human grade. Product **v1 is incomplete**.
+> teachings. Combobox live v33 PREPARE teaches host must
+> emit compile-carried label `Combobox option` on
+> `combobox/option-set` instead of the live display name
+> after ` :: `. Keep v2–v32 teachings. Combobox is
+> **not live**. Do not invent a Combobox human grade.
+> Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
