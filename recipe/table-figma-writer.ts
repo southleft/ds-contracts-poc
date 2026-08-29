@@ -13,9 +13,10 @@ import {
 
 export const TABLE_FIGMA_NAMESPACE = "ds.contracts.table.recipe.v1";
 export const TABLE_FIGMA_WRITER_VERSION = 1;
-export const TABLE_FIGMA_RUN_SUFFIX = "table-v3";
+export const TABLE_FIGMA_RUN_SUFFIX = "table-v4";
 export const FORBIDDEN_TABLE_V1_RUN_IDENTITY = "83a27edf-82d19508-table-v1";
 export const FORBIDDEN_TABLE_V2_RUN_IDENTITY = "cc811f47-82d19508-table-v2";
+export const FORBIDDEN_TABLE_V3_RUN_IDENTITY = "cc811f47-82d19508-table-v3";
 export const TABLE_FIGMA_VARIANTS_PER_SOURCE = 10;
 export const TABLE_FIGMA_VARIANT_COUNT = 20;
 export const TABLE_FIGMA_INSTANCES_PER_SOURCE = 22;
@@ -449,6 +450,7 @@ if(NS==="ds.contracts.input.recipe.v5"||PLAN.runIdentity==="4a074b24-e8503dd5-in
 if(NS==="ds.contracts.combobox.recipe.v1"||PLAN.runIdentity==="70c24cbd-d27f2e85-combobox-v1")throw new Error("TABLE-COMBOBOX-IDENTITY-REUSE");
 if(PLAN.runIdentity==="83a27edf-82d19508-table-v1")throw new Error("TABLE-V1-IDENTITY-REUSE");
 if(PLAN.runIdentity==="cc811f47-82d19508-table-v2")throw new Error("TABLE-V2-IDENTITY-REUSE");
+if(PLAN.runIdentity==="cc811f47-82d19508-table-v3")throw new Error("TABLE-V3-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -680,7 +682,8 @@ for(const source of PLAN.sources){
   const rowCell0Property=rowSet.addComponentProperty("Cell 0","TEXT",source.rowDefaults["Cell 0"]);
   const rowCell1Property=rowSet.addComponentProperty("Cell 1","TEXT",source.rowDefaults["Cell 1"]);
   const rowCell2Property=rowSet.addComponentProperty("Cell 2","TEXT",source.rowDefaults["Cell 2"]);
-  void "TABLE-WRITER-ROW-CELL-LABEL-CHARACTERS";
+  void "TABLE-WRITER-ROW-OWNED-TEXT-CHARACTERS";
+  const instanceSublayer=node=>{for(let current=node.parent;current;current=current.parent)if(current.type==="INSTANCE")return true;return false;};
   for(const component of rowSet.children){
     for(const descendant of component.findAllWithCriteria({types:["INSTANCE"]})){
       const role=sceneRole(descendant.name);
@@ -688,7 +691,23 @@ for(const source of PLAN.sources){
       if(!cellProperty)continue;
       const labels=descendant.findAllWithCriteria({types:["TEXT"]}).filter(node=>sceneRole(node.name)==="table/cell/label");
       if(labels.length!==1)throw new Error("TABLE-ROW-CELL-LABEL-ABSENT:"+role);
-      labels[0].componentPropertyReferences={characters:cellProperty};
+      const template=labels[0];
+      const owned=figma.createText();
+      await figma.loadFontAsync(template.fontName);
+      owned.fontName=template.fontName;
+      owned.characters=template.characters;
+      owned.fontSize=template.fontSize;
+      owned.lineHeight=template.lineHeight;
+      owned.textAlignHorizontal=template.textAlignHorizontal;
+      owned.textAlignVertical=template.textAlignVertical;
+      owned.textAutoResize=template.textAutoResize;
+      owned.blendMode="NORMAL";
+      owned.visible=false;
+      owned.name="table/row/owned-cell-label/"+role.slice("table/cell-instance/".length);
+      component.appendChild(owned);
+      if(instanceSublayer(owned))throw new Error("TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER:"+role);
+      if(owned.characters.trim().length===0)throw new Error("TABLE-ROW-OWNED-TEXT-ABSENT:"+role);
+      owned.componentPropertyReferences={characters:cellProperty};
     }
     const props=Object.fromEntries(component.name.split(", ").map(part=>{const index=part.indexOf("=");return [part.slice(0,index),part.slice(index+1)];}));
     rowByKey.set((props.Density||"")+"|"+(props.State||""),component);
@@ -717,9 +736,10 @@ export function emitTableFigmaWriter(
     runIdentity === FORBIDDEN_INPUT_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_COMBOBOX_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V1_RUN_IDENTITY ||
-    runIdentity === FORBIDDEN_TABLE_V2_RUN_IDENTITY
+    runIdentity === FORBIDDEN_TABLE_V2_RUN_IDENTITY ||
+    runIdentity === FORBIDDEN_TABLE_V3_RUN_IDENTITY
   ) {
-    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v2 identity");
+    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v3 identity");
   }
   const pageName = `Recipe Pivot / Table / ${runIdentity}`;
   const plan = {
@@ -753,17 +773,21 @@ export function emitTableFigmaWriter(
   }
   if (
     runtime.includes("componentPropertyReferences={[labelKey]") ||
-    /componentPropertyReferences=\{\[/.test(runtime)
+    /componentPropertyReferences=\{\[/.test(runtime) ||
+    runtime.includes("labels[0].componentPropertyReferences")
   ) {
     throw new TypeError(
-      "table writer must bind row Cell N through nested TEXT characters, not a Label# key",
+      "table writer must bind row Cell N on original row TEXT characters, not a Label# key or instance-sublayer TEXT",
     );
   }
   if (
-    runtime.includes("TABLE-WRITER-ROW-CELL-LABEL-CHARACTERS") === false ||
-    runtime.includes("TABLE-ROW-CELL-LABEL-ABSENT") === false
+    runtime.includes("TABLE-WRITER-ROW-OWNED-TEXT-CHARACTERS") === false ||
+    runtime.includes("TABLE-ROW-OWNED-TEXT-ABSENT") === false ||
+    runtime.includes("TABLE-ROW-CELL-LABEL-ABSENT") === false ||
+    runtime.includes("TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER") ===
+      false
   ) {
-    throw new TypeError("table writer missing row cell-label characters bind");
+    throw new TypeError("table writer missing row owned-TEXT characters bind");
   }
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   if (

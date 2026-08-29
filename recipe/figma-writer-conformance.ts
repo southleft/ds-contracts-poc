@@ -320,6 +320,16 @@ const createLiveMock = (
     if (source.visible !== undefined) cloned.visible = source.visible;
     if (source.opacity !== undefined) cloned.opacity = source.opacity;
     if (source.characters !== undefined) cloned.characters = source.characters;
+    if (source.fontName !== undefined) cloned.fontName = source.fontName;
+    if (source.fontSize !== undefined) cloned.fontSize = source.fontSize;
+    if (source.lineHeight !== undefined) cloned.lineHeight = source.lineHeight;
+    if (source.textAlignHorizontal !== undefined)
+      cloned.textAlignHorizontal = source.textAlignHorizontal;
+    if (source.textAlignVertical !== undefined)
+      cloned.textAlignVertical = source.textAlignVertical;
+    if (source.textAutoResize !== undefined)
+      cloned.textAutoResize = source.textAutoResize;
+    if (source.blendMode !== undefined) cloned.blendMode = source.blendMode;
     if (source.componentPropertyReferences) {
       cloned.componentPropertyReferences = {
         ...source.componentPropertyReferences,
@@ -477,6 +487,15 @@ const createLiveMock = (
           );
         }
         if (property === "componentPropertyReferences") {
+          let ancestor = object.parent;
+          while (ancestor) {
+            if (ancestor.type === "INSTANCE") {
+              throw new Error(
+                "in set_componentPropertyReferences: Cannot set component property references on instance sublayer",
+              );
+            }
+            ancestor = ancestor.parent;
+          }
           const keys =
             value && typeof value === "object" ? Object.keys(value) : [];
           const allowed =
