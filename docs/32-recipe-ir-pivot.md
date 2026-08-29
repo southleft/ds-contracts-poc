@@ -268,13 +268,22 @@
 > `layout.padding.right` precedes `layout.width.value` precedes
 > `layout.height.value` precedes `fills.0.color`, not live
 > extract order starting at `fills.0.color`. Keep v2–v27
-> teachings. Combobox live v28 PREPARE teaches host to order
-> `combobox/option` bindings to that compile field order, not
-> live extract order starting at `fills.0.color`. Reuse the
-> overlay / trigger / listbox / slot compile-order sort. Do
-> not invent `if (combobox)`. Do not also change the writer
-> unless measurement proves host already emits compile order.
-> Keep v2–v27 teachings. Combobox is **not live**. Do not invent a Combobox
+> teachings. Combobox live v28 PREPARE `98f5a633` and AUTHORIZE
+> `0bc29e37` landed. Attempt 1 minted page `163:10608`; restore
+> held 144 owned FILL texts. Host option compile-order teaching
+> cleared; extract walk accepted. Host now starts all 16 option
+> components at `layout.itemSpacing` (hashed v27 still starts at
+> `fills.0.color`). Collapse then refused `unsupported structural
+> edit at $.children[1].children[0].bindings[4].field`
+> (`combobox/option/small/default`: host `fills.0.color` at
+> `[4]` with `height.value` last as unknown; compile
+> `layout.height.value`). Cleanup accepted; that Combobox page
+> is gone. Input `115:295378` stayed. Do not restart v28
+> attempt 2 as-is. Next teaching: host must alias
+> `combobox/option` `height.value` to `layout.height.value` so
+> compile-order ranks it before `fills.0.color`, not leave
+> `height.value` unknown after the option sort. Keep v2–v28
+> teachings. Combobox is **not live**. Do not invent a Combobox
 > human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
