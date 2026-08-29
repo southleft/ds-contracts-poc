@@ -1815,13 +1815,17 @@ closed at writer (`TABLE-MIN-WIDTH-ZERO`); the partial page `165:40763`
 was cleaned. Table live v5 attempt 1 failed closed at extract
 (`SCENE-OWNERSHIP-KEY-ABSENT`); the page `165:40914` was cleaned. Table
 live v6 attempt 1 failed closed at extract (`REQUIRED-BINDING-ABSENT`);
-the page `165:41173` was cleaned. No
+the page `165:41173` was cleaned. The climb continued one teaching per PREPARE
+through v24; every attempt failed closed and every mint was cleaned. As of v24
+the remaining extract-side tail is **measured offline** (D2a) rather than
+discovered one live cycle at a time. No
 Data Table live mint and no Data Table human grade.
 
 | step | action | exit criterion |
 | --- | --- | --- |
 | D1 | Explicit Data Table recipe + reviewed adapters for two unrelated real libraries. Offline cross-library proof first: row/column templates, declared column axis, required-facts / door / lowering / grammar coverage. | **Offline recipe authored 2026-08-29.** `table@1` + adapters + writer `ds.contracts.table.recipe.v1`. `npm run recipe:table:check` green (2 densities × 2 row states; 10 components / 22 instances; hermetic mock-mint 20 variants). Door/lowering/grammar corpus coverage and live are not claimed. |
-| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v6 attempt 1 failed closed 2026-08-29.** Writer accepted; restore 8 held; extract walk cleared owned-cell-label skip; collapse refused `REQUIRED-BINDING-ABSENT:strokes.0.weight:table/variant/comfortable`. Signed cleanup removed `165:41173`. Do not restart v6 attempt 2 as-is. Not live. |
+| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v24 attempt 1 failed closed 2026-08-29.** Writer accepted; restore 8 held; extract walk cleared; the v24 row-set compile-carry label teaching cleared (host raw `table/row-set :: Table` now normalizes to compile-carried `Table row`, closing the v23 refusal); collapse then refused `unsupported structural edit at $.children[2].children[0].children[0].label`. Signed cleanup removed `172:46324`; Input `115:295378`, Combobox `163:35981`, and Button `85:6781` stayed. Do not restart v24 attempt 2 as-is. Not live. **The remaining extract-side tail is now measured, not unknown** — see D2a. |
+| D2a | Offline tail census so the remaining climb depth is measured rather than discovered one live cycle at a time. | **Landed 2026-08-29** (`9a5a1dd75`, prediction `ee3afa077`). `collapseTableRecipe` refuses on the FIRST divergence (`firstDifference`), so each live cycle could only ever reveal one `(role, property)` gap. That comparator runs Node-side over a persisted response, and every attempt already persists its raw extract, so the tail is measurable offline with **zero Figma writes**. `recipe/table-tail-census.ts` replays `private/table-live-vNN-transaction/004-extract.raw.json` through the current host-normalize and collects every difference. **Validated:** reverting only the v24 teaching makes the census reproduce the exact v23 live refusal `$.children[1].label`; restoring it closes that class. It then predicted the v24 live refusal path **before** the run and the prediction **held exactly**. Remaining first-party extract-side tail: **23 differences in 6 classes** — 4× `clipsContent`, 4× `cornerRadius`, 4× `effects`, 4× `strokes.dashPattern` (all `absent-left` on the four `table/cell` variants), 5× `label` (`table/cell-set` + `table/cell/label`), 2× `characters` (`table/cell/label`). The mui root stops **before** the diff on `table/cell/compact/body: required binding layout.minWidth must appear exactly once` — the already-named v5 unset-null secondary, now measured. **Honest limit:** the substrate is captured under its version's writer and teachings v9–v24 are read-side only, so the census predicts the **extract-side** tail only; writer-side refusals (the class that stopped v1–v4) still surface only in a live run. |
 | D3 | Calendar archetype addition is a reviewed minor contract change (`ARCHETYPES` in `packages/schema/src/archetype.ts` plus required-facts). Then the same offline-then-live sequence. | Calendar is no longer “undefined (0 contracts)” by proof, not by deleting the bar. |
 | D4 | Human review of Table/Calendar adapters before live if a human-authored adapter is required. | **Human gate** for adapter authorship/review only. Live still Scratch-only. |
 
@@ -1998,6 +2002,33 @@ not invent a Data Table or Button human grade. Do not overwrite Input
 
 Open Combobox (not Input, not Table):
 `https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=163-35981`
+
+### Table live v24 attempt 1 and the tail census (2026-08-29)
+
+The v24 teaching **cleared**: host raw `table/row-set :: Table` now
+host-normalizes to the compile-carried label `Table row` on both roots, closing
+the v23 refusal at `$.children[1].label`.
+
+The attempt was run as a **falsifiable predicted-vs-actual test** of the new
+offline census. The prediction was committed before AUTHORIZE:
+
+| | path |
+| --- | --- |
+| predicted (`ee3afa077`, before the run) | `$.children[2].children[0].children[0].label` |
+| actual live refusal | `$.children[2].children[0].children[0].label` |
+
+The refused class: the cell-label TEXT node is named
+`table/cell/label :: font-provenance=%7B...`, and host-normalize takes the
+segment after `::`, so it derives the font-provenance blob where compile carries
+`table/cell/label`. This is the same family as the v24 row-set label teaching and
+as the Button B2c name-first-segment class.
+
+**v25 teaching (one, not bundled):** when extract host-normalizes
+`table/cell/label`, emit the compile-carried label `table/cell/label` instead of
+the live TEXT name after `::`. Do **not** bundle the cell-set label, the four
+cell-variant omit classes, the cell-label `characters` class, or the mui
+`layout.minWidth` pre-diff blocker — all are measured in the census and each is
+its own PREPARE.
 
 ### Immediate next command
 

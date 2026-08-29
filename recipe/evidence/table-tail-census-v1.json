@@ -1,9 +1,9 @@
 {
   "artifactVersion": "table-tail-census-v1",
   "substrate": {
-    "transactionDir": "private/table-live-v23-transaction",
+    "transactionDir": "private/table-live-v24-transaction",
     "extractRawBytes": 2703877,
-    "pageId": "172:46065",
+    "pageId": "172:46324",
     "variableTableEntries": 11489
   },
   "predicts": "extract-side tail only",
@@ -21,7 +21,10 @@
       "property": "label",
       "reason": "value",
       "count": 5,
-      "roles": ["table/cell-set", "table/cell/label"]
+      "roles": [
+        "table/cell-set",
+        "table/cell/label"
+      ]
     },
     {
       "property": "clipsContent",
@@ -71,7 +74,9 @@
       "property": "characters",
       "reason": "value",
       "count": 2,
-      "roles": ["table/cell/label"]
+      "roles": [
+        "table/cell/label"
+      ]
     }
   ],
   "roots": [

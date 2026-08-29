@@ -1,6 +1,6 @@
 {
   "artifactVersion": "recipe-pivot-current-status-v1",
-  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28 (TJ Pitre; page 115:295378); Button extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); stopped on fonts/set chrome; Button human signoff pending; Combobox live v1 attempt 1 failed closed at restore 240 vs 144; mint cleaned; Combobox live v2 attempt 1 failed closed at extract SCENE-DIRECT-OWNERSHIP-METADATA envelopeHash; restore 144 held; mint cleaned; Combobox live v3 attempt 1 failed closed at extract SCENE-GENERATED-DESCENDANT-DIRECT-KEY; restore 144 held; mint cleaned; Combobox live v4 attempt 1 failed closed at host normalize payload.content.text; extract walk cleared; restore 144 held; mint cleaned; Combobox live v5 attempt 1 failed closed at host observeSceneFacts scene projection lost root; empty-payload teaching cleared; restore 144 held; mint cleaned; Combobox live v6 attempt 1 failed closed at collapse non-instance repetition; observeSceneFacts live-root teaching cleared; restore 144 held; mint cleaned; Combobox live v7 attempt 1 failed closed at collapse invalid ARIA/data model; componentRef teaching cleared; restore 144 held; mint cleaned; Combobox live v8 attempt 1 failed closed at collapse invalid ARIA/data model; writer ARIA stamp teaching cleared; restore 144 held; mint cleaned; Combobox live v9 attempt 1 failed closed at collapse unsupported structural edit; host property-name-before-# teaching cleared; restore 144 held; mint cleaned; Combobox live v10 attempt 1 failed closed at collapse unsupported structural edit; host trigger binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v11 attempt 1 failed closed at collapse unsupported structural edit; host leading-slot binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v12 attempt 1 failed closed at collapse unsupported structural edit; host leading-slot compile-carry visible teaching cleared; restore 144 held; mint cleaned; Combobox live v13 attempt 1 failed closed at collapse unsupported structural edit; host trailing-slot binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v14 attempt 1 failed closed at collapse unsupported structural edit; host trailing-slot compile-carry visible teaching cleared; restore 144 held; mint cleaned; Combobox live v15 attempt 1 failed closed at collapse unsupported structural edit; host trigger empty-effects teaching cleared; restore 144 held; mint cleaned; Combobox live v16 attempt 1 failed closed at collapse unsupported structural edit; host overlay binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v17 attempt 1 failed closed at collapse unsupported structural edit; host overlay width-alias teaching cleared; restore 144 held; mint cleaned; Combobox live v18 attempt 1 failed closed at collapse unsupported structural edit; host listbox binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v19 attempt 1 failed closed at collapse unsupported structural edit; host option-instance binding extras-drop teaching cleared; restore 144 held; mint cleaned; Combobox live v20 attempt 1 failed closed at collapse unsupported structural edit; host option-instance inherited-fills omit teaching cleared; restore 144 held; mint cleaned; Combobox live v21 attempt 1 failed closed at collapse unsupported structural edit; host option-instance payload omit teaching cleared; restore 144 held; mint cleaned; Combobox live v22 attempt 1 failed closed at collapse unsupported structural edit; host listbox clipsContent omit teaching cleared; restore 144 held; mint cleaned; Combobox live v23 attempt 1 failed closed at collapse unsupported structural edit; host listbox cornerRadius omit teaching cleared; restore 144 held; mint cleaned; Combobox live v24 attempt 1 failed closed at collapse unsupported structural edit; host listbox empty-effects omit teaching cleared; restore 144 held; mint cleaned; Combobox live v25 attempt 1 failed closed at collapse unsupported structural edit; host listbox empty-strokes omit teaching cleared; restore 144 held; mint cleaned; Combobox live v26 attempt 1 failed closed at collapse unsupported structural edit; host overlay empty-dashPattern omit teaching cleared; restore 144 held; mint cleaned; Combobox live v27 attempt 1 failed closed at collapse unsupported structural edit; host set-root clipsContent omit teaching cleared; restore 144 held; mint cleaned; Combobox live v28 attempt 1 failed closed at collapse unsupported structural edit; host option binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v29 attempt 1 failed closed at collapse unsupported structural edit; host option height-alias teaching cleared; restore 144 held; mint cleaned; Combobox live v30 attempt 1 failed closed at collapse unsupported structural edit; host option clipsContent omit teaching cleared; restore 144 held; mint cleaned; Input 115:295378 stayed; Combobox live v41 attempt 1 mint stayed on page 163:35981; probe and 72 captures passed; cleanup persisted not executed; TJ named feedback 2026-08-29 empty/loading listbox padding not a miss (listPadding 4/0/4/0 survived); no remint; Combobox live human grade passed 2026-08-29 (TJ Pitre; page 163:35981); RECORD f330a082 humanSignoff stays pending; Table live v1 PREPARE f42aaa461 and AUTHORIZE fd3d20e98 landed; attempt 1 failed closed at writer TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold; host lists Inter Semi Bold; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; Table live v2 PREPARE ccc0e8975 and AUTHORIZE 4272b14ec landed; attempt 1 failed closed at writer TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507; header Inter Semi Bold teaching cleared; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v2 attempt 2 as-is; Table live v3 PREPARE 868ec9b0a and AUTHORIZE 1c03d3665 landed; attempt 1 failed closed at writer TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER; nested cell-label TEXT characters teaching cleared; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v3 attempt 2 as-is; Table live v4 PREPARE 145fd0518 and AUTHORIZE 41ed34e85 landed; attempt 1 failed closed at writer TABLE-MIN-WIDTH-ZERO; row-owned TEXT characters teaching cleared; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v4 attempt 2 as-is; Table live v5 PREPARE f82f2098c and AUTHORIZE b18bd39e7 landed; attempt 1 failed closed at extract SCENE-OWNERSHIP-KEY-ABSENT; minWidth 0-null teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v5 attempt 2 as-is; Table live v6 PREPARE 13fa406d6 and AUTHORIZE 8b86b5c1a landed; attempt 1 failed closed at extract REQUIRED-BINDING-ABSENT; row owned-cell-label skip teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v6 attempt 2 as-is; Table live v7 PREPARE d7a034486 and AUTHORIZE cf0ae2a46 landed; attempt 1 failed closed at extract unsupported structural edit; per-side stroke-weight fold teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v7 attempt 2 as-is; Table live v8 PREPARE 2c3513d5b and AUTHORIZE c6169da72 landed; attempt 1 failed closed at extract unsupported structural edit; cell-instance extras-drop teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v8 attempt 2 as-is; Table live v9 PREPARE 296c8acee and AUTHORIZE 240e4bf3a landed; attempt 1 failed closed at extract unsupported structural edit; header/body clipsContent omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v9 attempt 2 as-is; Table live v10 PREPARE d79c3d12b and AUTHORIZE 816fb9156 landed; attempt 1 failed closed at extract unsupported structural edit; header/body cornerRadius omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v10 attempt 2 as-is; Table live v11 PREPARE 01ef7cfa8 and AUTHORIZE c2934b4df landed; attempt 1 failed closed at extract unsupported structural edit; header/body effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v11 attempt 2 as-is; Table live v12 PREPARE 8334502b6 and AUTHORIZE 820fa53eb landed; attempt 1 failed closed at extract unsupported structural edit; header/body strokes omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v12 attempt 2 as-is; Table live v13 PREPARE cac4b88e5 and AUTHORIZE d75971dd0 landed; attempt 1 failed closed at extract unsupported structural edit; row-instance bindings omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v13 attempt 2 as-is; Table live v14 PREPARE 595174913 and AUTHORIZE a149d0f30 landed; attempt 1 failed closed at extract unsupported structural edit; variant clipsContent omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v14 attempt 2 as-is; Table live v15 PREPARE 602909277 and AUTHORIZE 60bd98de9 landed; attempt 1 failed closed at extract unsupported structural edit; variant effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v15 attempt 2 as-is; Table live v16 PREPARE cfad55554 and AUTHORIZE 94f76479c landed; attempt 1 failed closed at extract unsupported structural edit; variant empty stroke dashPattern omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v16 attempt 2 as-is; Table live v17 PREPARE b13a04b1f and AUTHORIZE b366b61a7 landed; attempt 1 failed closed at extract unsupported structural edit; set cornerRadius omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v17 attempt 2 as-is; Table live v18 PREPARE 263394027 and AUTHORIZE d1a3dc122 landed; attempt 1 failed closed at extract unsupported structural edit; set effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v18 attempt 2 as-is; Table live v19 PREPARE db66bd7b2 and AUTHORIZE 268295d60 landed; attempt 1 failed closed at extract unsupported structural edit; set strokes omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v19 attempt 2 as-is; Table live v20 PREPARE 9838aa402 and AUTHORIZE 0599eddfd landed; attempt 1 failed closed at extract unsupported structural edit; row-variant clipsContent omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v20 attempt 2 as-is; Table live v21 PREPARE b3da90ed1 and AUTHORIZE f6d718f82 landed; attempt 1 failed closed at extract unsupported structural edit; row-variant cornerRadius omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v21 attempt 2 as-is; Table live v22 PREPARE a7319aaaa and AUTHORIZE c76b7b75d landed; attempt 1 failed closed at extract unsupported structural edit; row-variant effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v22 attempt 2 as-is; Table live v23 PREPARE 6def9472e and AUTHORIZE c80bdb0fb landed; attempt 1 failed closed at extract unsupported structural edit; row-variant strokes omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v23 attempt 2 as-is; Table live v24 PREPARE prepared (row-set compile-carry label Table row); remaining Data Table, Calendar, Button leftover inversion; product v1 incomplete",
+  "status": "Input live v3 exhausted; v4 non-executable; v5 and v6 retired; v7 attempt 1 failed closed; v8 attempts 1-2 failed closed; v9 attempts 1-2 failed closed; v10 attempts 1-2 failed closed; v11 attempt 1 failed closed; v12 attempt 1 failed closed; v13 attempt 1 failed closed; v14 attempt 1 failed closed; v15 attempt 1 failed closed; v16 attempt 1 failed closed; v17 attempt 1 failed closed; v18 attempt 1 failed closed; v19 attempt 1 failed closed; v20 attempt 1 failed closed; v21 attempt 1 failed closed; v22 attempt 1 failed closed; v23 attempt 1 failed closed; v24 attempt 1 failed closed; v25 attempt 1 failed closed; v26 attempt 1 failed closed; v27 attempt 1 failed closed; v28 attempt 1 failed closed; v29 attempt 1 failed closed; v30 attempt 1 failed closed; v31 attempt 1 failed closed; v32 attempt 1 failed closed; v33 attempt 1 failed closed; v34 attempt 1 failed closed; v35 attempt 1 failed closed; v36 attempt 1 failed closed; v37 attempt 1 failed closed; v38 attempt 1 failed closed; v39 attempt 1 failed closed; v40 attempt 1 failed closed; v41 attempt 1 failed closed; v42 attempt 1 failed closed; v43 attempt 1 failed closed; v44 attempt 1 failed closed; v45 attempt 1 failed closed; v46 attempt 1 failed closed; v47 attempt 1 failed closed; v48 attempt 1 failed closed; v49 attempt 1 failed closed; v50 attempt 1 failed closed; v51 attempt 1 failed closed; v52 attempt 1 failed closed; v53 attempt 1 failed closed; v54 attempt 1 failed closed; v55 attempt 1 failed closed; v56 attempt 1 failed closed; v57 attempt 1 failed closed; v58 attempt 1 failed closed; v59 attempt 1 failed closed; v60 attempt 1 failed closed; v61 attempt 1 failed closed; v62 attempt 1 failed closed; v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28 (TJ Pitre; page 115:295378); Button extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); stopped on fonts/set chrome; Button human signoff pending; Combobox live v1 attempt 1 failed closed at restore 240 vs 144; mint cleaned; Combobox live v2 attempt 1 failed closed at extract SCENE-DIRECT-OWNERSHIP-METADATA envelopeHash; restore 144 held; mint cleaned; Combobox live v3 attempt 1 failed closed at extract SCENE-GENERATED-DESCENDANT-DIRECT-KEY; restore 144 held; mint cleaned; Combobox live v4 attempt 1 failed closed at host normalize payload.content.text; extract walk cleared; restore 144 held; mint cleaned; Combobox live v5 attempt 1 failed closed at host observeSceneFacts scene projection lost root; empty-payload teaching cleared; restore 144 held; mint cleaned; Combobox live v6 attempt 1 failed closed at collapse non-instance repetition; observeSceneFacts live-root teaching cleared; restore 144 held; mint cleaned; Combobox live v7 attempt 1 failed closed at collapse invalid ARIA/data model; componentRef teaching cleared; restore 144 held; mint cleaned; Combobox live v8 attempt 1 failed closed at collapse invalid ARIA/data model; writer ARIA stamp teaching cleared; restore 144 held; mint cleaned; Combobox live v9 attempt 1 failed closed at collapse unsupported structural edit; host property-name-before-# teaching cleared; restore 144 held; mint cleaned; Combobox live v10 attempt 1 failed closed at collapse unsupported structural edit; host trigger binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v11 attempt 1 failed closed at collapse unsupported structural edit; host leading-slot binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v12 attempt 1 failed closed at collapse unsupported structural edit; host leading-slot compile-carry visible teaching cleared; restore 144 held; mint cleaned; Combobox live v13 attempt 1 failed closed at collapse unsupported structural edit; host trailing-slot binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v14 attempt 1 failed closed at collapse unsupported structural edit; host trailing-slot compile-carry visible teaching cleared; restore 144 held; mint cleaned; Combobox live v15 attempt 1 failed closed at collapse unsupported structural edit; host trigger empty-effects teaching cleared; restore 144 held; mint cleaned; Combobox live v16 attempt 1 failed closed at collapse unsupported structural edit; host overlay binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v17 attempt 1 failed closed at collapse unsupported structural edit; host overlay width-alias teaching cleared; restore 144 held; mint cleaned; Combobox live v18 attempt 1 failed closed at collapse unsupported structural edit; host listbox binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v19 attempt 1 failed closed at collapse unsupported structural edit; host option-instance binding extras-drop teaching cleared; restore 144 held; mint cleaned; Combobox live v20 attempt 1 failed closed at collapse unsupported structural edit; host option-instance inherited-fills omit teaching cleared; restore 144 held; mint cleaned; Combobox live v21 attempt 1 failed closed at collapse unsupported structural edit; host option-instance payload omit teaching cleared; restore 144 held; mint cleaned; Combobox live v22 attempt 1 failed closed at collapse unsupported structural edit; host listbox clipsContent omit teaching cleared; restore 144 held; mint cleaned; Combobox live v23 attempt 1 failed closed at collapse unsupported structural edit; host listbox cornerRadius omit teaching cleared; restore 144 held; mint cleaned; Combobox live v24 attempt 1 failed closed at collapse unsupported structural edit; host listbox empty-effects omit teaching cleared; restore 144 held; mint cleaned; Combobox live v25 attempt 1 failed closed at collapse unsupported structural edit; host listbox empty-strokes omit teaching cleared; restore 144 held; mint cleaned; Combobox live v26 attempt 1 failed closed at collapse unsupported structural edit; host overlay empty-dashPattern omit teaching cleared; restore 144 held; mint cleaned; Combobox live v27 attempt 1 failed closed at collapse unsupported structural edit; host set-root clipsContent omit teaching cleared; restore 144 held; mint cleaned; Combobox live v28 attempt 1 failed closed at collapse unsupported structural edit; host option binding compile-order teaching cleared; restore 144 held; mint cleaned; Combobox live v29 attempt 1 failed closed at collapse unsupported structural edit; host option height-alias teaching cleared; restore 144 held; mint cleaned; Combobox live v30 attempt 1 failed closed at collapse unsupported structural edit; host option clipsContent omit teaching cleared; restore 144 held; mint cleaned; Input 115:295378 stayed; Combobox live v41 attempt 1 mint stayed on page 163:35981; probe and 72 captures passed; cleanup persisted not executed; TJ named feedback 2026-08-29 empty/loading listbox padding not a miss (listPadding 4/0/4/0 survived); no remint; Combobox live human grade passed 2026-08-29 (TJ Pitre; page 163:35981); RECORD f330a082 humanSignoff stays pending; Table live v1 PREPARE f42aaa461 and AUTHORIZE fd3d20e98 landed; attempt 1 failed closed at writer TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold; host lists Inter Semi Bold; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; Table live v2 PREPARE ccc0e8975 and AUTHORIZE 4272b14ec landed; attempt 1 failed closed at writer TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507; header Inter Semi Bold teaching cleared; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v2 attempt 2 as-is; Table live v3 PREPARE 868ec9b0a and AUTHORIZE 1c03d3665 landed; attempt 1 failed closed at writer TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER; nested cell-label TEXT characters teaching cleared; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v3 attempt 2 as-is; Table live v4 PREPARE 145fd0518 and AUTHORIZE 41ed34e85 landed; attempt 1 failed closed at writer TABLE-MIN-WIDTH-ZERO; row-owned TEXT characters teaching cleared; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v4 attempt 2 as-is; Table live v5 PREPARE f82f2098c and AUTHORIZE b18bd39e7 landed; attempt 1 failed closed at extract SCENE-OWNERSHIP-KEY-ABSENT; minWidth 0-null teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v5 attempt 2 as-is; Table live v6 PREPARE 13fa406d6 and AUTHORIZE 8b86b5c1a landed; attempt 1 failed closed at extract REQUIRED-BINDING-ABSENT; row owned-cell-label skip teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v6 attempt 2 as-is; Table live v7 PREPARE d7a034486 and AUTHORIZE cf0ae2a46 landed; attempt 1 failed closed at extract unsupported structural edit; per-side stroke-weight fold teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v7 attempt 2 as-is; Table live v8 PREPARE 2c3513d5b and AUTHORIZE c6169da72 landed; attempt 1 failed closed at extract unsupported structural edit; cell-instance extras-drop teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v8 attempt 2 as-is; Table live v9 PREPARE 296c8acee and AUTHORIZE 240e4bf3a landed; attempt 1 failed closed at extract unsupported structural edit; header/body clipsContent omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v9 attempt 2 as-is; Table live v10 PREPARE d79c3d12b and AUTHORIZE 816fb9156 landed; attempt 1 failed closed at extract unsupported structural edit; header/body cornerRadius omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v10 attempt 2 as-is; Table live v11 PREPARE 01ef7cfa8 and AUTHORIZE c2934b4df landed; attempt 1 failed closed at extract unsupported structural edit; header/body effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v11 attempt 2 as-is; Table live v12 PREPARE 8334502b6 and AUTHORIZE 820fa53eb landed; attempt 1 failed closed at extract unsupported structural edit; header/body strokes omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v12 attempt 2 as-is; Table live v13 PREPARE cac4b88e5 and AUTHORIZE d75971dd0 landed; attempt 1 failed closed at extract unsupported structural edit; row-instance bindings omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v13 attempt 2 as-is; Table live v14 PREPARE 595174913 and AUTHORIZE a149d0f30 landed; attempt 1 failed closed at extract unsupported structural edit; variant clipsContent omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v14 attempt 2 as-is; Table live v15 PREPARE 602909277 and AUTHORIZE 60bd98de9 landed; attempt 1 failed closed at extract unsupported structural edit; variant effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v15 attempt 2 as-is; Table live v16 PREPARE cfad55554 and AUTHORIZE 94f76479c landed; attempt 1 failed closed at extract unsupported structural edit; variant empty stroke dashPattern omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v16 attempt 2 as-is; Table live v17 PREPARE b13a04b1f and AUTHORIZE b366b61a7 landed; attempt 1 failed closed at extract unsupported structural edit; set cornerRadius omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v17 attempt 2 as-is; Table live v18 PREPARE 263394027 and AUTHORIZE d1a3dc122 landed; attempt 1 failed closed at extract unsupported structural edit; set effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v18 attempt 2 as-is; Table live v19 PREPARE db66bd7b2 and AUTHORIZE 268295d60 landed; attempt 1 failed closed at extract unsupported structural edit; set strokes omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v19 attempt 2 as-is; Table live v20 PREPARE 9838aa402 and AUTHORIZE 0599eddfd landed; attempt 1 failed closed at extract unsupported structural edit; row-variant clipsContent omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v20 attempt 2 as-is; Table live v21 PREPARE b3da90ed1 and AUTHORIZE f6d718f82 landed; attempt 1 failed closed at extract unsupported structural edit; row-variant cornerRadius omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v21 attempt 2 as-is; Table live v22 PREPARE a7319aaaa and AUTHORIZE c76b7b75d landed; attempt 1 failed closed at extract unsupported structural edit; row-variant effects omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v22 attempt 2 as-is; Table live v23 PREPARE 6def9472e and AUTHORIZE c80bdb0fb landed; attempt 1 failed closed at extract unsupported structural edit; row-variant strokes omit teaching cleared; restore 8 held; mint cleaned; Input 115:295378 and Combobox 163:35981 stayed; do not restart v23 attempt 2 as-is; Table live v24 PREPARE 228960d29 and AUTHORIZE 81d6491a7 landed; attempt 1 failed closed at extract unsupported structural edit at $.children[2].children[0].children[0].label; row-set compile-carry label teaching cleared (host raw table/row-set :: Table now normalizes to compile-carried Table row); restore 8 held; mint cleaned; Input 115:295378, Combobox 163:35981, and Button 85:6781 stayed; do not restart v24 attempt 2 as-is; offline tail census 9a5a1dd75 predicted that exact refusal path before the run (ee3afa077) and the prediction held; remaining extract-side tail measured at 23 differences in 6 classes on the first-party root, mui root stops before the diff on the v5 minWidth unset-null secondary; remaining Data Table, Calendar, Button leftover inversion; product v1 incomplete",
   "supersedesStatusClaimsOnly": true,
   "historicalEvidenceRewritten": false,
   "chronology": {
@@ -93,10 +93,7 @@
       "id": "combobox",
       "version": 1,
       "selection": "explicit-reviewed-config",
-      "sources": [
-        "@mui/material@9.2.0#Autocomplete",
-        "antd@5.29.3#Select"
-      ],
+      "sources": ["@mui/material@9.2.0#Autocomplete", "antd@5.29.3#Select"],
       "sourceReferencesRendered": false,
       "aiGraded": false,
       "liveFigma": false
@@ -1937,12 +1934,7 @@
       "reviewedAt": "2026-08-29T09:17:00-05:00",
       "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
       "pageId": "163:35981",
-      "setIds": [
-        "163:36845",
-        "163:36076",
-        "163:37709",
-        "163:36940"
-      ],
+      "setIds": ["163:36845", "163:36076", "163:37709", "163:36940"],
       "recordCommit": "f330a0821a5c442662c9df755c9f65e825fe5baa",
       "evidencePath": "recipe/evidence/combobox-live-v41-human-signoff.json",
       "diagnosisPath": "recipe/evidence/combobox-v41-empty-listbox-diagnosis.json",
@@ -2002,7 +1994,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v19-attempt-1-failed-closed; product v1 incomplete",
+    "status": "live-v24-attempt-1-failed-closed at extract unsupported structural edit ($.children[2].children[0].children[0].label); row-set compile-carry label teaching cleared; remaining extract-side tail measured at 23 differences in 6 classes; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2597,17 +2589,9 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v17 attempt 1 failed closed at extract unsupported structural edit; do not restart v17 attempt 2 as-is",
-      "Table live v16 attempt 1 failed closed at extract unsupported structural edit; do not restart v16 attempt 2 as-is",
-      "do not restart v15 attempt 2 as-is",
-      "do not restart v14 attempt 2 as-is",
-      "do not restart v13 attempt 2 as-is",
-      "do not restart v12 attempt 2 as-is",
-      "do not restart v11 attempt 2 as-is",
-      "do not restart v10 attempt 2 as-is",
-      "do not restart v9 attempt 2 as-is",
-      "do not restart v8 attempt 2 as-is",
-      "do not restart v7 attempt 2 as-is",
+      "Table live v24 attempt 1 failed closed at extract unsupported structural edit; do not restart v24 attempt 2 as-is",
+      "remaining extract-side tail measured: 6 classes / 23 differences on the first-party root",
+      "mui root stops before the diff on the v5 minWidth unset-null secondary",
       "no live mint",
       "no human grade",
       "Calendar not started",
@@ -3464,7 +3448,47 @@
       "hostOmitsRowVariantEffectsUnchangedFromV22": true,
       "hostOmitsRowVariantStrokesUnchangedFromV23": true,
       "hostEmitsRowSetCompileCarryLabel": true,
-      "doNotRestartV24Attempt2": true
+      "doNotRestartV24Attempt2": true,
+      "attempt1": {
+        "status": "failed-closed",
+        "writerAccepted": true,
+        "restoreAccepted": true,
+        "restoredCount": 8,
+        "extractAccepted": false,
+        "refusedClass": "unsupported structural edit",
+        "refused": "unsupported structural edit at $.children[2].children[0].children[0].label",
+        "rowSetCompileCarryLabelTeachingCleared": true,
+        "probeIssued": false,
+        "capturesIssued": 0,
+        "mintStayed": false,
+        "cleanedPageId": "172:46324",
+        "cleanedCollectionIds": [
+          "VariableCollectionId:172:46326",
+          "VariableCollectionId:172:46455"
+        ],
+        "cleanupExecuted": true,
+        "signedCleanupIssued": true,
+        "signedCleanupAccepted": true,
+        "censusPredictedRefusal": "$.children[2].children[0].children[0].label",
+        "censusPredictionHeld": true
+      },
+      "nextTeaching": "when extract host-normalizes table/cell/label, emit the compile-carried label table/cell/label instead of the live TEXT name after ::"
+    },
+    "staleStatusCorrectedAt": "2026-08-29",
+    "staleStatusPreviousValue": "live-v19-attempt-1-failed-closed; product v1 incomplete",
+    "tailCensus": {
+      "artifact": "recipe/evidence/table-tail-census-v1.json",
+      "measuredAt": "2026-08-29",
+      "substrates": [
+        "private/table-live-v23-transaction",
+        "private/table-live-v24-transaction"
+      ],
+      "substratesAgree": true,
+      "remainingExtractSideTailFirstParty": 23,
+      "remainingClassCount": 6,
+      "predictsExtractSideOnly": true,
+      "doesNotPredictWriterSideRefusals": true,
+      "muiRootBlockedBeforeDiff": "table/cell/compact/body: required binding layout.minWidth must appear exactly once"
     }
   },
   "input": {
@@ -3476,10 +3500,7 @@
       "reviewedAt": "2026-08-28T15:37:00-05:00",
       "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
       "pageId": "115:295378",
-      "setIds": [
-        "115:296805",
-        "115:298106"
-      ],
+      "setIds": ["115:296805", "115:298106"],
       "recordCommit": "c35bae604bbc901a13861c9db9ed79c17a31d909",
       "evidencePath": "recipe/evidence/input-field-live-v85-human-signoff.json",
       "recordTimeHumanSignoffUnchanged": "pending",
@@ -3909,10 +3930,7 @@
       "v8AuthorizationReusable": false,
       "v8AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "carriedSceneReadback": "recipe/scene-readback-v9.ts",
       "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v9.ts",
       "sourceRoots": 2,
@@ -3997,10 +4015,7 @@
       "v9AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "carriedSceneReadback": "recipe/scene-readback-v10.ts",
       "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v10.ts",
       "carriedV3VerifierPath": "recipe/input-field-live-v3-verifier-v10.ts",
@@ -4089,10 +4104,7 @@
       "v10AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "carriedSceneReadback": "recipe/scene-readback-v11.ts",
       "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v11.ts",
@@ -4181,10 +4193,7 @@
       "v11AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "v11WriterBytesUnchanged": false,
@@ -4277,10 +4286,7 @@
       "v12AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -4377,10 +4383,7 @@
       "v13AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -4483,10 +4486,7 @@
       "v14AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -4594,10 +4594,7 @@
       "v15AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -4711,10 +4708,7 @@
       "v16AntecedentBytesUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -4836,10 +4830,7 @@
       "v17SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -4965,10 +4956,7 @@
       "v18SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -5098,10 +5086,7 @@
       "v19SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -5235,10 +5220,7 @@
       "v20SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -5376,10 +5358,7 @@
       "v21SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -5521,10 +5500,7 @@
       "v22SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -5670,10 +5646,7 @@
       "v23SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -5823,10 +5796,7 @@
       "v24SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -5980,10 +5950,7 @@
       "v25SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -6142,10 +6109,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -6305,10 +6269,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -6472,10 +6433,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -6643,10 +6601,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -6812,10 +6767,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -6991,10 +6943,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -7174,10 +7123,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -7361,10 +7307,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -7552,10 +7495,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -7748,10 +7688,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -7948,10 +7885,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -8152,10 +8086,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -8360,10 +8291,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -8572,10 +8500,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -8789,10 +8714,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -9010,10 +8932,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -9235,10 +9154,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -9464,10 +9380,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -9697,10 +9610,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -9934,10 +9844,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -10175,10 +10082,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -10420,10 +10324,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -10669,10 +10570,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -10921,10 +10819,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -11177,10 +11072,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -11437,10 +11329,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -11701,10 +11590,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -11969,10 +11855,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -12241,10 +12124,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -12517,10 +12397,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -12797,10 +12674,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -13082,10 +12956,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -13371,10 +13242,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -13664,10 +13532,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -13961,10 +13826,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -14262,10 +14124,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -14567,10 +14426,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -14876,10 +14732,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -15190,10 +15043,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -15507,10 +15357,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -15831,10 +15678,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -16159,10 +16003,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -16491,10 +16332,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -16827,10 +16665,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -17169,10 +17004,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -17514,10 +17346,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -17870,10 +17699,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -18227,10 +18053,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -18587,10 +18410,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -18952,10 +18772,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -19325,10 +19142,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -19706,10 +19520,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -20091,10 +19902,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -20475,10 +20283,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -20863,10 +20668,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -21262,10 +21064,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -21662,10 +21461,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -22068,10 +21864,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
@@ -22478,10 +22271,7 @@
       "v26SceneReadbackUnchanged": true,
       "sceneReadbackCarried": true,
       "carriedV3Verifier": true,
-      "taughtLiveFillKinds": [
-        "VARIABLE_ALIAS",
-        "boundVariablesOnly"
-      ],
+      "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
       "taughtFirstSegmentRoleRecovery": true,
       "taughtPostSettleContentFillRestore": true,
       "taughtPostWriterContentFillRestore": true,
