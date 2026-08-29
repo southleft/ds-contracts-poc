@@ -29,6 +29,7 @@ import {
   TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER,
   TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER,
+  TABLE_LIVE_V1_SET_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
@@ -61,6 +62,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
     host,
     new RegExp(TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER),
   );
+  assert.match(host, new RegExp(TABLE_LIVE_V1_SET_CORNER_RADIUS_OMITTED_MARKER));
   assert.match(host, /table@1\/cell/);
   assert.match(host, /table@1\/row/);
   assert.match(host, /rootOwnershipKey/);
@@ -402,6 +404,74 @@ const byRole = (node: IRNode, role: string): IRNode[] => {
   }
   return matches;
 };
+
+const hostDefaultSetCornerRadius = {
+  topLeft: 5,
+  topRight: 5,
+  bottomRight: 5,
+  bottomLeft: 5,
+} as const;
+
+const setScene = (
+  role: "table/set" | "table/row-set" | "table/cell-set",
+): SceneNodeSnapshot => ({
+  ownershipKey: role,
+  type: "COMPONENT_SET",
+  name: role,
+  semanticRole: role,
+  width: 320,
+  height: 120,
+  visible: true,
+  opacity: 1,
+  cornerRadius: { ...hostDefaultSetCornerRadius },
+  variantGroupProperties: {
+    Density: { values: ["compact", "comfortable"] },
+  },
+  boundVariables: [],
+  children: [
+    {
+      ...tableVariantScene([]),
+      ownershipKey: `${role}/variant`,
+    },
+  ],
+});
+
+test("host omits cornerRadius on table/set, table/row-set, and table/cell-set that compile never emits and keeps variant cornerRadius", () => {
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const compileTableSet = byRole(compile.ir, "table/set")[0];
+  const compileRowSet = byRole(compile.ir, "table/row-set")[0];
+  const compileCellSet = byRole(compile.ir, "table/cell-set")[0];
+  const compileVariant = byRole(compile.ir, "table/variant/comfortable")[0];
+  assert.equal(compileTableSet !== undefined, true);
+  assert.equal(compileRowSet !== undefined, true);
+  assert.equal(compileCellSet !== undefined, true);
+  assert.equal(compileVariant !== undefined, true);
+  assert.equal("cornerRadius" in (compileTableSet ?? {}), false);
+  assert.equal("cornerRadius" in (compileRowSet ?? {}), false);
+  assert.equal("cornerRadius" in (compileCellSet ?? {}), false);
+  assert.equal("cornerRadius" in (compileVariant ?? {}), true);
+  assert.deepEqual(
+    (compileVariant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  );
+  for (const role of ["table/set", "table/row-set", "table/cell-set"] as const) {
+    const set = sceneToNormalizedIr(setScene(role));
+    assert.equal(set.kind, "component-set");
+    assert.equal("cornerRadius" in set, false);
+  }
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    cornerRadius: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("cornerRadius" in variant, true);
+  assert.deepEqual(
+    (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  );
+});
 
 test("host omits cornerRadius on table/header and table/body that compile never emits", () => {
   const header = sceneToNormalizedIr({
