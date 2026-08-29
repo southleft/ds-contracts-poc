@@ -5085,6 +5085,105 @@ export function validatePivotStatus(
       "measure the live overlapping node pairs on the 24 Open=true Content=options cells (antd medium 9, mui medium 7, both small 5) after overlay/listbox/option-instance/occupancy exclusions, then teach that measured pair class; do not invent Polar 9/30/0 or overlap-zero"
   )
     fail("combobox live v40 prepare");
+  if (
+    status.combobox?.liveV41?.prepared !== true ||
+    status.combobox?.liveV41?.liveFigma !== false ||
+    status.combobox?.liveV41?.humanSignoff !== "pending" ||
+    status.combobox?.liveV41?.pageId !== null ||
+    status.combobox?.liveV41?.forbiddenInputPageId !== "115:295378" ||
+    status.combobox?.liveV41?.namespace !== "ds.contracts.combobox.recipe.v1" ||
+    status.combobox?.liveV41?.evidenceRoot !==
+      "recipe/evidence/combobox-live-pivot-v41" ||
+    status.combobox?.liveV41?.teaching !==
+      "probe must measure live overlapping node pairs on the 24 Open=true Content=options cells after existing overlay/listbox/option-instance/occupancy exclusions, then not score the measured overlay-nested option/label and selected-indicator against in-flow message/helper and message/error" ||
+    status.combobox?.liveV41?.ownedFillTexts !== 144 ||
+    status.combobox?.liveV41?.writerUnchangedFromV1 !== false ||
+    status.combobox?.liveV41?.restoreUnchangedFromV2 !== true ||
+    status.combobox?.liveV41?.extractSetRootEnvelopeHashUnchangedFromV3 !==
+      true ||
+    status.combobox?.liveV41?.extractCopiedOwnershipKeyUnchangedFromV4 !==
+      true ||
+    status.combobox?.liveV41?.hostOmitsEmptyInstancePayloadUnchangedFromV5 !==
+      true ||
+    status.combobox?.liveV41?.hostProjectsLiveRootOwnershipKeyUnchangedFromV6 !==
+      true ||
+    status.combobox?.liveV41?.hostRecoversRecipeComponentRefUnchangedFromV7 !==
+      true ||
+    status.combobox?.liveV41?.writerAriaStampUnchangedFromV8 !== true ||
+    status.combobox?.liveV41?.hostRecoversComponentPropertyNameUnchangedFromV9 !==
+      true ||
+    status.combobox?.liveV41?.hostTriggerBindingCompileOrderUnchangedFromV10 !==
+      true ||
+    status.combobox?.liveV41?.hostLeadingSlotBindingCompileOrderUnchangedFromV11 !==
+      true ||
+    status.combobox?.liveV41?.hostLeadingSlotCompileCarryVisibleUnchangedFromV12 !==
+      true ||
+    status.combobox?.liveV41?.hostTrailingSlotBindingCompileOrderUnchangedFromV13 !==
+      true ||
+    status.combobox?.liveV41?.hostTrailingSlotCompileCarryVisibleUnchangedFromV14 !==
+      true ||
+    status.combobox?.liveV41?.hostTriggerEmptyEffectsUnchangedFromV15 !==
+      true ||
+    status.combobox?.liveV41?.hostOverlayBindingCompileOrderUnchangedFromV16 !==
+      true ||
+    status.combobox?.liveV41?.hostOverlayWidthAliasUnchangedFromV17 !== true ||
+    status.combobox?.liveV41?.hostListboxBindingCompileOrderUnchangedFromV18 !==
+      true ||
+    status.combobox?.liveV41?.hostOptionInstanceBindingExtrasUnchangedFromV19 !==
+      true ||
+    status.combobox?.liveV41?.hostOptionInstanceFillsOmitUnchangedFromV20 !==
+      true ||
+    status.combobox?.liveV41?.hostOptionInstancePayloadOmitUnchangedFromV21 !==
+      true ||
+    status.combobox?.liveV41?.hostListboxClipsContentOmitUnchangedFromV22 !==
+      true ||
+    status.combobox?.liveV41?.hostListboxCornerRadiusOmitUnchangedFromV23 !==
+      true ||
+    status.combobox?.liveV41?.hostListboxEmptyEffectsOmitUnchangedFromV24 !==
+      true ||
+    status.combobox?.liveV41?.hostListboxEmptyStrokesOmitUnchangedFromV25 !==
+      true ||
+    status.combobox?.liveV41?.hostOverlayEmptyDashPatternOmitUnchangedFromV26 !==
+      true ||
+    status.combobox?.liveV41?.hostSetRootClipsContentOmitUnchangedFromV27 !==
+      true ||
+    status.combobox?.liveV41?.hostOptionBindingCompileOrderUnchangedFromV28 !==
+      true ||
+    status.combobox?.liveV41?.hostOptionHeightAliasUnchangedFromV29 !== true ||
+    status.combobox?.liveV41?.hostOptionClipsContentOmitUnchangedFromV30 !==
+      true ||
+    status.combobox?.liveV41
+      ?.hostSelectedIndicatorBindingCompileOrderUnchangedFromV31 !== true ||
+    status.combobox?.liveV41
+      ?.hostSelectedIndicatorCompileCarryVisibleUnchangedFromV32 !== true ||
+    status.combobox?.liveV41
+      ?.hostOptionSetCompileCarryLabelUnchangedFromV33 !== true ||
+    status.combobox?.liveV41
+      ?.hostObserveOmitsEmptySlotInstancePayloadUnchangedFromV34 !== true ||
+    status.combobox?.liveV41
+      ?.hostObserveOmitsOptionInstanceInstancePayloadUnchangedFromV35 !==
+      true ||
+    status.combobox?.liveV41
+      ?.hostRecoversTriggerSlotComponentRefCompileSiblingOrderUnchangedFromV36 !==
+      true ||
+    status.combobox?.liveV41
+      ?.hostRecoversCompileCarriedTriggerCharactersUnchangedFromV37 !==
+      true ||
+    status.combobox?.liveV41
+      ?.hostObserveRecoversCompileCarriedOptionSetNameUnchangedFromV38 !==
+      true ||
+    status.combobox?.liveV41
+      ?.hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrderUnchangedFromV39 !==
+      true ||
+    status.combobox?.liveV41
+      ?.hostProbeKeepsExactSceneRestorationAfterOpenVariantWalkUnchangedFromV40 !==
+      true ||
+    status.combobox?.liveV41
+      ?.hostProbeExcludesOverlayOptionLabelMessageOverlap !== true ||
+    status.combobox?.liveV41?.runIdentity !==
+      "70c24cbd-d27f2e85-combobox-v1"
+  )
+    fail("combobox live v41 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))
     fail(message);
   if (

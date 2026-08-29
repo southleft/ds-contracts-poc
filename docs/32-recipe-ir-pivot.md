@@ -499,8 +499,20 @@
 > live overlapping node pairs on those 24 cells,
 > then teach that measured pair class; do not
 > invent Polar 9/30/0 or overlap-zero. Keep
-> v2–v40 teachings. Combobox is **not live**. Do
-> not invent a Combobox human grade. Product **v1
+> v2–v40 teachings. Combobox live v41 PREPARE
+> teaches the probe to measure live overlapping
+> node pairs on those 24 Open=true
+> Content=options cells after existing
+> overlay/listbox/option-instance/occupancy
+> exclusions, then not score the measured
+> overlay-nested option/label and
+> selected-indicator against in-flow
+> message/helper and message/error (designed
+> dropdown covering helper; same overlay-clip
+> class as Input V78). Do not invent Polar
+> 9/30/0 or overlap-zero. Keep v2–v40
+> teachings. Combobox is **not live**. Do not
+> invent a Combobox human grade. Product **v1
 > is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
