@@ -28,6 +28,7 @@ import {
   TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER,
+  TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
@@ -56,6 +57,10 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER));
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER),
+  );
   assert.match(host, /table@1\/cell/);
   assert.match(host, /table@1\/row/);
   assert.match(host, /rootOwnershipKey/);
@@ -524,6 +529,88 @@ test("host omits effects on table/variant that compile never emits and keeps cor
       compileStrokes,
     );
   }
+});
+
+test("host omits empty dashPattern on table/variant strokes that compile never emits and keeps strokes and cornerRadius", () => {
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const compileComfortable = byRole(compile.ir, "table/variant/comfortable")[0];
+  const compileCompact = byRole(compile.ir, "table/variant/compact")[0];
+  assert.equal(compileComfortable !== undefined, true);
+  assert.equal(compileCompact !== undefined, true);
+  const compileStrokes = (
+    compileComfortable as {
+      strokes?: Array<{
+        weight: number;
+        align: "inside" | "outside" | "center";
+        paint: { kind: string; color?: string };
+        dashPattern?: number[];
+      }>;
+    }
+  ).strokes;
+  assert.equal(Array.isArray(compileStrokes), true);
+  assert.equal((compileStrokes?.length ?? 0) > 0, true);
+  assert.equal("dashPattern" in (compileStrokes?.[0] ?? {}), false);
+  assert.equal("cornerRadius" in (compileComfortable ?? {}), true);
+  assert.equal("strokes" in (compileComfortable ?? {}), true);
+  const compileStroke = compileStrokes?.[0];
+  for (const role of [
+    "table/variant/compact",
+    "table/variant/comfortable",
+  ] as const) {
+    const variant = sceneToNormalizedIr({
+      ...tableVariantScene([], role),
+      dashPattern: [],
+      cornerRadius: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+      strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
+      strokeWeight: compileStroke?.weight,
+      strokeAlign: compileStroke?.align.toUpperCase() as
+        | "INSIDE"
+        | "OUTSIDE"
+        | "CENTER",
+      effects: [],
+    });
+    assert.equal(variant.kind, "component");
+    assert.equal("strokes" in variant, true);
+    assert.equal("cornerRadius" in variant, true);
+    assert.deepEqual(
+      (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+      { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+    );
+    const observedStrokes = (
+      variant as {
+        strokes?: Array<{
+          weight: number;
+          align: string;
+          paint: unknown;
+          dashPattern?: number[];
+        }>;
+      }
+    ).strokes;
+    assert.equal(Array.isArray(observedStrokes), true);
+    assert.equal((observedStrokes?.length ?? 0) > 0, true);
+    assert.equal("dashPattern" in (observedStrokes?.[0] ?? {}), false);
+    assert.deepEqual(observedStrokes, compileStrokes);
+  }
+  const nonempty = sceneToNormalizedIr({
+    ...tableVariantScene([], "table/variant/comfortable"),
+    dashPattern: [2, 2],
+    strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
+    strokeWeight: compileStroke?.weight,
+    strokeAlign: compileStroke?.align.toUpperCase() as
+      | "INSIDE"
+      | "OUTSIDE"
+      | "CENTER",
+  });
+  assert.deepEqual(
+    (
+      nonempty as {
+        strokes?: Array<{ dashPattern?: number[] }>;
+      }
+    ).strokes?.[0]?.dashPattern,
+    [2, 2],
+  );
 });
 
 test("host omits strokes on table/header and table/body that compile never emits", () => {

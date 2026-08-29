@@ -123,7 +123,9 @@
 > cleared; restore 8 held. Signed cleanup removed page
 > `171:43856`. Mint did not stay. Input `115:295378` and
 > Combobox `163:35981` stayed. Do not restart v15 attempt 2
-> as-is. Product **v1 is
+> as-is. Table live v16
+> PREPARE prepared (variant empty stroke dashPattern omit). AUTHORIZE
+> and live attempt pending. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD

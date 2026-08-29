@@ -30,14 +30,18 @@ import {
  * because compile header/body frames omit `cornerRadius`, omit `effects`
  * on `table/header` and `table/body` because compile header/body frames
  * omit `effects`, omit `effects` on `table/variant` because compile
- * variants omit `effects`, and omit `strokes` on `table/header` and
- * `table/body` because compile header/body frames omit `strokes`.
- * Reuses the extras-drop path and the Combobox listbox / set /
- * option clipsContent omit path plus `HEADER_BODY_ROLES` and
- * `TABLE_VARIANT_ROLE`. Row
+ * variants omit `effects`, omit `strokes` on `table/header` and
+ * `table/body` because compile header/body frames omit `strokes`, and
+ * omit empty `dashPattern` on `table/variant` strokes because compile
+ * variant strokes omit `dashPattern`. Host copies the node-level empty
+ * `dashPattern: []` onto `strokes[0]`; drop only that empty key and
+ * keep the stroke (`weight` / `align` / `paint`). Reuses the extras-drop
+ * path and the Combobox listbox / set / option clipsContent omit path
+ * plus `HEADER_BODY_ROLES` and `TABLE_VARIANT_ROLE`. Row
  * components still compile-carry `fills.0.color`. Does not
  * omit `table/variant` cornerRadius or `table/variant` strokes. Does
- * not copy Combobox overlay/option/listbox roles.
+ * not invent `dashPattern` onto compile. Does not copy Combobox
+ * overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -82,6 +86,8 @@ export const TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER =
   "TABLE-HOST-VARIANT-EFFECTS-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-STROKES-OMITTED";
+export const TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
+  "TABLE-HOST-VARIANT-EMPTY-STROKE-DASH-PATTERN-OMITTED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -1007,6 +1013,32 @@ const omitHeaderBodyStrokes = <T extends { strokes?: unknown }>(
   return rest as T;
 };
 
+const omitVariantEmptyStrokeDashPattern = <
+  T extends { dashPattern?: unknown },
+>(
+  scene: SceneNodeSnapshot,
+  strokes: T[] | undefined,
+): T[] | undefined => {
+  void TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (
+    !role ||
+    !TABLE_VARIANT_ROLE.test(role) ||
+    scene.type !== "COMPONENT" ||
+    strokes === undefined
+  )
+    return strokes;
+  return strokes.map((stroke) => {
+    if (
+      !Array.isArray(stroke.dashPattern) ||
+      stroke.dashPattern.length !== 0
+    )
+      return stroke;
+    const { dashPattern: _omitted, ...rest } = stroke;
+    return rest as T;
+  });
+};
+
 const omitTableTextExtras = <
   T extends {
     letterSpacing?: unknown;
@@ -1044,7 +1076,8 @@ export function sceneToNormalizedIr(
         : { opacity: scene.opacity }),
   };
   const fills = (scene.fills ?? []).map(scenePaintToIr);
-  const strokes =
+  const strokes = omitVariantEmptyStrokeDashPattern(
+    scene,
     scene.strokes === undefined
       ? undefined
       : scene.strokes.map((paint) => ({
@@ -1057,7 +1090,8 @@ export function sceneToNormalizedIr(
           ...(scene.dashPattern === undefined
             ? {}
             : { dashPattern: scene.dashPattern }),
-        }));
+        })),
+  );
   const effects = scene.effects
     ?.filter((effect) => effect.visible)
     .map(sceneEffectToIr);
