@@ -2,6 +2,12 @@ import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";
 
+import { adaptReviewedTable } from "./adapters/table.js";
+import {
+  firstPartyTableAdapterConfig,
+  firstPartyTableSource,
+} from "./fixtures/library-tables.js";
+import { compileTableRecipe } from "./recipes/table.js";
 import {
   TABLE_LIVE_V1_BINDING_COMPILE_ORDER_MARKER,
   TABLE_LIVE_V1_COLLAPSE_OMIT_INVENTED_OPACITY_MARKER,
@@ -16,10 +22,12 @@ import {
   TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER,
   TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER,
+  TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
 } from "./scene-readback-table-v1.js";
+import type { IRNode } from "./figma-ir.js";
 
 test("table host-normalize is table-shaped and does not copy Combobox roles", () => {
   const host = readFileSync("recipe/scene-readback-table-v1.ts", "utf8");
@@ -37,6 +45,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
   assert.match(host, /table@1\/cell/);
   assert.match(host, /table@1\/row/);
   assert.match(host, /rootOwnershipKey/);
@@ -244,6 +253,66 @@ test("host omits clipsContent on table/header and table/body that compile never 
   assert.equal(
     (variant as { clipsContent?: boolean }).clipsContent,
     false,
+  );
+});
+
+const zeroCornerRadius = {
+  topLeft: 0,
+  topRight: 0,
+  bottomRight: 0,
+  bottomLeft: 0,
+} as const;
+
+const byRole = (node: IRNode, role: string): IRNode[] => {
+  const matches = node.role === role ? [node] : [];
+  if (
+    node.kind === "frame" ||
+    node.kind === "component" ||
+    node.kind === "component-set"
+  ) {
+    for (const child of node.children) matches.push(...byRole(child, role));
+  }
+  return matches;
+};
+
+test("host omits cornerRadius on table/header and table/body that compile never emits", () => {
+  const header = sceneToNormalizedIr({
+    ...headerBodyFrameScene("table/header", true),
+    cornerRadius: { ...zeroCornerRadius },
+  });
+  const body = sceneToNormalizedIr({
+    ...headerBodyFrameScene("table/body", true),
+    cornerRadius: { ...zeroCornerRadius },
+  });
+  assert.equal(header.kind, "frame");
+  assert.equal(body.kind, "frame");
+  assert.equal("cornerRadius" in header, false);
+  assert.equal("cornerRadius" in body, false);
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const compileHeader = byRole(compile.ir, "table/header")[0];
+  const compileBody = byRole(compile.ir, "table/body")[0];
+  const compileVariant = byRole(compile.ir, "table/variant/comfortable")[0];
+  assert.equal(compileHeader !== undefined, true);
+  assert.equal(compileBody !== undefined, true);
+  assert.equal(compileVariant !== undefined, true);
+  assert.equal("cornerRadius" in (compileHeader ?? {}), false);
+  assert.equal("cornerRadius" in (compileBody ?? {}), false);
+  assert.equal("cornerRadius" in (compileVariant ?? {}), true);
+  assert.deepEqual(
+    (compileVariant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  );
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    cornerRadius: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("cornerRadius" in variant, true);
+  assert.deepEqual(
+    (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
   );
 });
 
