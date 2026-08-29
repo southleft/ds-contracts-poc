@@ -2034,7 +2034,31 @@ cell-variant omit classes, the cell-label `characters` class, or the mui
 `layout.minWidth` pre-diff blocker — all are measured in the census and each is
 its own PREPARE.
 
-### Immediate next command
+### Immediate next command (2026-08-29, end of the Table v24-v27 round)
+
+**Table is blocked on you, not on a teaching.** Live v27 reached the probe with
+7 of 8 per-source checks green on both roots and all 20 cells green. The only
+failing check is `reflowPassed`, and it is a real disagreement between two
+things that cannot both be right:
+
+- `recipe/fixtures/table.ts:102-105` declares `resize.root: "hug-contents"`.
+- The probe widens an instance by 64px and requires that width to stick.
+
+Coupled to it: `table@1` has **no per-column width model**, so MUI (which
+declares no cell min-width) mints visibly ragged columns, and first-party aligns
+only because its `minWidth: 120` happens to exceed its content. The probe does
+not catch that — roles, no-fake-layout, state semantics, visible-area loss and
+overlap all pass on a ragged table. Both questions are docs/32 D4 adapter
+authoring, and picking a width without a reviewed source fact is the forbidden
+invented FILL/FIXED teaching. **Do not guess either one.**
+
+Everything else this round is landed and green. Do **not** write Input page
+`115:295378`, Combobox `163:35981`, or Button `85:6781`. Do **not** call
+`figma_arrange_component_set` on any of them. Safe Input restore: checkpoint
+`2392869719628549246`. Combobox spaced checkpoint `2393104521192557663`. Never
+restore `2392877528965054592`. Do not claim v1 complete.
+
+### Earlier: Combobox
 
 Combobox live human grade **passed** 2026-08-29 ~09:17 UTC-5 (TJ Pitre;
 page `163:35981`; RECORD `f330a082` `humanSignoff` stays pending). Next
