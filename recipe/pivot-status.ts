@@ -4369,6 +4369,16 @@ export function validatePivotStatus(
       ?.hostSelectedIndicatorCompileCarryVisibleUnchangedFromV32 !== true ||
     status.combobox?.liveV33?.runIdentity !==
       "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV33?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV33?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV33?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV33?.attempt1
+      ?.hostOptionSetCompileCarryLabelTeachingCleared !== true ||
+    status.combobox?.liveV33?.attempt1?.refusedClass !==
+      "independent root accounting" ||
+    status.combobox?.liveV33?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV33?.nextTeaching !==
+      "host observe must omit empty instancePayload facts on slot instances instead of re-injecting live instance descendant payloads that IR and compile omit" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||

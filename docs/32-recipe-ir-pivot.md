@@ -357,9 +357,25 @@
 > teachings. Combobox live v33 PREPARE teaches host must
 > emit compile-carried label `Combobox option` on
 > `combobox/option-set` instead of the live display name
-> after ` :: `. Keep v2–v32 teachings. Combobox is
-> **not live**. Do not invent a Combobox human grade.
-> Product **v1 is incomplete**.
+> after ` :: `. Keep v2–v32 teachings. Combobox live v33
+> PREPARE `6bc08a3e` and AUTHORIZE `a56f5c21` landed.
+> Attempt 1 minted page `163:19253`; restore held 144
+> owned FILL texts. Host option-set compile-carry label
+> teaching cleared for collapse; host IR now emits
+> `Combobox option` on both option-sets matching compile,
+> while hashed v32 still emits the live display name after
+> ` :: `. Collapse accepted. Independent root accounting
+> then refused extra=242 mismatch=225 silent=225 on both
+> roots. All 242 extras are `instancePayload` facts observe
+> re-injects from live slot-instance descendant payloads
+> that IR already omits and compile never emits. Cleanup
+> accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v33 attempt 2 as-is. Next teaching:
+> host observe must omit empty `instancePayload` facts on
+> slot instances instead of re-injecting live instance
+> descendant payloads that IR and compile omit. Keep
+> v2–v33 teachings. Combobox is **not live**. Do not invent
+> a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
