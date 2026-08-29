@@ -1,0 +1,37 @@
+{
+  "artifactVersion": "table-live-v4-status-v1",
+  "status": "attempt 1 failed closed at writer TABLE-MIN-WIDTH-ZERO; host refuses minWidth 0 and requires null to unset; writer not accepted; cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "145fd0518b0ce67d93a045c5b64da0f31e78521f",
+    "indexPath": "recipe/evidence/table-live-pivot-v4/antecedent-index.json",
+    "indexSha256": "4f7a2f9ed805c624b2efc128d3c9e95ce586b1825d5b988d09b713d4db6018cb",
+    "hashSetSha256": "8571daae08a6ef65dcb307a12c70c05843cf3358c681c74358010f945edd6140"
+  },
+  "authorization": {
+    "commit": "41ed34e856dfdf5bf200e7e43cf3465c23e4f33d",
+    "path": "recipe/evidence/table-live-pivot-v4/capture-authorization.json",
+    "sha256": "d4d34fb524de0b8294d7808ea9bbc3128d1bb44021a723165924e125f9c0c4f4",
+    "signingPublicKeySpkiSha256": "88d1a5f861a6c2103d7a772dc878da656987133ef51713c2b71b9716b82b5675"
+  },
+  "attempt1": {
+    "pageId": "165:40763",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "TABLE-MIN-WIDTH-ZERO",
+    "ownedRowTextCharactersTeachingCleared": true,
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "when host minWidth is 0, unset with null rather than assigning 0",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}
