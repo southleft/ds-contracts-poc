@@ -15,6 +15,7 @@ import {
   TABLE_LIVE_V1_SET_LAYOUT_COMPILE_CARRY_MARKER,
   TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER,
   TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER,
+  TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
@@ -35,6 +36,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, /table@1\/cell/);
   assert.match(host, /table@1\/row/);
   assert.match(host, /rootOwnershipKey/);
@@ -207,6 +209,42 @@ test("host omits Figma-copied bindings on header-cell-instance and cell-instance
   assert.equal("bindings" in body, false);
   assert.equal(header.componentRef, "table@1/cell");
   assert.equal(body.componentRef, "table@1/cell");
+});
+
+const headerBodyFrameScene = (
+  role: "table/header" | "table/body",
+  clipsContent: boolean,
+): SceneNodeSnapshot => ({
+  ownershipKey: role,
+  type: "FRAME",
+  name: role === "table/header" ? "Header" : "Body",
+  semanticRole: role,
+  width: 320,
+  height: 40,
+  visible: true,
+  opacity: 1,
+  clipsContent,
+  boundVariables: [],
+  children: [],
+});
+
+test("host omits clipsContent on table/header and table/body that compile never emits", () => {
+  const header = sceneToNormalizedIr(headerBodyFrameScene("table/header", true));
+  const body = sceneToNormalizedIr(headerBodyFrameScene("table/body", true));
+  assert.equal(header.kind, "frame");
+  assert.equal(body.kind, "frame");
+  assert.equal("clipsContent" in header, false);
+  assert.equal("clipsContent" in body, false);
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    clipsContent: false,
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("clipsContent" in variant, true);
+  assert.equal(
+    (variant as { clipsContent?: boolean }).clipsContent,
+    false,
+  );
 });
 
 test("table probe is table-shaped: header/body/label, HUG, no overlay AABB", () => {

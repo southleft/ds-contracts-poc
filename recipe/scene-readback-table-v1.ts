@@ -19,10 +19,13 @@ import {
  * omit, binding compile-order / extras-drop, width/height layout aliases,
  * occupancy opacity 0, omit TEXT extras table@1 does not carry, fold
  * uniform per-side stroke-weight binds into `strokes.0.weight` on table
- * and cell variants, and omit Figma-copied bindings on
+ * and cell variants, omit Figma-copied bindings on
  * `table/header-cell-instance` and `table/cell-instance` because compile
- * cell instances carry none. Reuses the extras-drop path: keep only
- * compile fields, drop extras. Does not copy Combobox
+ * cell instances carry none, and omit `clipsContent` on `table/header`
+ * and `table/body` because compile header/body frames omit
+ * `clipsContent`. Reuses the extras-drop path and the Combobox
+ * listbox / set / option clipsContent omit path. Does not omit
+ * `table/variant` clipsContent. Does not copy Combobox
  * overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
@@ -54,6 +57,8 @@ export const TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "TABLE-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "TABLE-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
+export const TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER =
+  "TABLE-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -243,6 +248,7 @@ const CELL_COMPONENT_ROLE = /^table\/cell\/(?:compact|comfortable)\/(?:header|bo
 const ROW_COMPONENT_ROLE = /^table\/row\/(?:compact|comfortable)\/(?:default|selected)$/;
 const TABLE_VARIANT_ROLE = /^table\/variant\/(?:compact|comfortable)$/;
 const SET_ROLES = new Set(["table/set", "table/row-set", "table/cell-set"]);
+const HEADER_BODY_ROLES = new Set(["table/header", "table/body"]);
 
 const CELL_COMPILE_BINDING_FIELDS = [
   "layout.padding.left",
@@ -914,6 +920,19 @@ const omitSetClipsContent = <T extends { clipsContent?: unknown }>(
   return rest as T;
 };
 
+const omitHeaderBodyClipsContent = <T extends { clipsContent?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (!role || !HEADER_BODY_ROLES.has(role) || scene.type !== "FRAME")
+    return frame;
+  if (frame.clipsContent === undefined) return frame;
+  const { clipsContent: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitTableTextExtras = <
   T extends {
     letterSpacing?: unknown;
@@ -977,18 +996,21 @@ export function sceneToNormalizedIr(
     scene.type === "COMPONENT" ||
     scene.type === "COMPONENT_SET"
   ) {
-    const frame = omitSetClipsContent(scene, {
-      ...common,
-      layout: sceneLayout(scene),
-      fills,
-      ...(strokes === undefined ? {} : { strokes }),
-      ...(effects === undefined ? {} : { effects }),
-      ...(scene.cornerRadius === undefined
-        ? {}
-        : { cornerRadius: scene.cornerRadius }),
-      clipsContent: scene.clipsContent ?? false,
-      children,
-    });
+    const frame = omitHeaderBodyClipsContent(
+      scene,
+      omitSetClipsContent(scene, {
+        ...common,
+        layout: sceneLayout(scene),
+        fills,
+        ...(strokes === undefined ? {} : { strokes }),
+        ...(effects === undefined ? {} : { effects }),
+        ...(scene.cornerRadius === undefined
+          ? {}
+          : { cornerRadius: scene.cornerRadius }),
+        clipsContent: scene.clipsContent ?? false,
+        children,
+      }),
+    );
     if (scene.type === "FRAME") result = { kind: "frame", ...frame };
     else if (scene.type === "COMPONENT") {
       result = {
