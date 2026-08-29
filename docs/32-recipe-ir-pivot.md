@@ -317,6 +317,11 @@
 > combobox/option/selected-indicator bindings to compile field
 > order so `width.value` precedes `height.value` precedes
 > `fills.0.color`, not live extract order starting at
+> `fills.0.color`. Keep v2–v30 teachings. Combobox live
+> v31 PREPARE teaches host must order
+> combobox/option/selected-indicator bindings to compile field
+> order so `width.value` precedes `height.value` precedes
+> `fills.0.color`, not live extract order starting at
 > `fills.0.color`. Keep v2–v30 teachings. Combobox is
 > **not live**. Do not invent a Combobox human grade. Product
 > **v1 is incomplete**.

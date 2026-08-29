@@ -4139,6 +4139,74 @@ export function validatePivotStatus(
     status.combobox?.liveV30?.attempt1?.mintStayed !== false ||
     status.combobox?.liveV30?.nextTeaching !==
       "host must order combobox/option/selected-indicator bindings to compile field order so width.value precedes height.value precedes fills.0.color, not live extract order starting at fills.0.color" ||
+    status.combobox?.liveV31?.prepared !== true ||
+    status.combobox?.liveV31?.liveFigma !== false ||
+    status.combobox?.liveV31?.humanSignoff !== "pending" ||
+    status.combobox?.liveV31?.pageId !== null ||
+    status.combobox?.liveV31?.forbiddenInputPageId !== "115:295378" ||
+    status.combobox?.liveV31?.namespace !== "ds.contracts.combobox.recipe.v1" ||
+    status.combobox?.liveV31?.evidenceRoot !==
+      "recipe/evidence/combobox-live-pivot-v31" ||
+    status.combobox?.liveV31?.teaching !==
+      "host must order combobox/option/selected-indicator bindings to compile field order so width.value precedes height.value precedes fills.0.color, not live extract order starting at fills.0.color" ||
+    status.combobox?.liveV31?.ownedFillTexts !== 144 ||
+    status.combobox?.liveV31?.writerUnchangedFromV1 !== false ||
+    status.combobox?.liveV31?.restoreUnchangedFromV2 !== true ||
+    status.combobox?.liveV31?.extractSetRootEnvelopeHashUnchangedFromV3 !==
+      true ||
+    status.combobox?.liveV31?.extractCopiedOwnershipKeyUnchangedFromV4 !==
+      true ||
+    status.combobox?.liveV31?.hostOmitsEmptyInstancePayloadUnchangedFromV5 !==
+      true ||
+    status.combobox?.liveV31?.hostProjectsLiveRootOwnershipKeyUnchangedFromV6 !==
+      true ||
+    status.combobox?.liveV31?.hostRecoversRecipeComponentRefUnchangedFromV7 !==
+      true ||
+    status.combobox?.liveV31?.writerAriaStampUnchangedFromV8 !== true ||
+    status.combobox?.liveV31?.hostRecoversComponentPropertyNameUnchangedFromV9 !==
+      true ||
+    status.combobox?.liveV31?.hostTriggerBindingCompileOrderUnchangedFromV10 !==
+      true ||
+    status.combobox?.liveV31?.hostLeadingSlotBindingCompileOrderUnchangedFromV11 !==
+      true ||
+    status.combobox?.liveV31?.hostLeadingSlotCompileCarryVisibleUnchangedFromV12 !==
+      true ||
+    status.combobox?.liveV31?.hostTrailingSlotBindingCompileOrderUnchangedFromV13 !==
+      true ||
+    status.combobox?.liveV31?.hostTrailingSlotCompileCarryVisibleUnchangedFromV14 !==
+      true ||
+    status.combobox?.liveV31?.hostTriggerEmptyEffectsUnchangedFromV15 !==
+      true ||
+    status.combobox?.liveV31?.hostOverlayBindingCompileOrderUnchangedFromV16 !==
+      true ||
+    status.combobox?.liveV31?.hostOverlayWidthAliasUnchangedFromV17 !== true ||
+    status.combobox?.liveV31?.hostListboxBindingCompileOrderUnchangedFromV18 !==
+      true ||
+    status.combobox?.liveV31?.hostOptionInstanceBindingExtrasUnchangedFromV19 !==
+      true ||
+    status.combobox?.liveV31?.hostOptionInstanceFillsOmitUnchangedFromV20 !==
+      true ||
+    status.combobox?.liveV31?.hostOptionInstancePayloadOmitUnchangedFromV21 !==
+      true ||
+    status.combobox?.liveV31?.hostListboxClipsContentOmitUnchangedFromV22 !==
+      true ||
+    status.combobox?.liveV31?.hostListboxCornerRadiusOmitUnchangedFromV23 !==
+      true ||
+    status.combobox?.liveV31?.hostListboxEmptyEffectsOmitUnchangedFromV24 !==
+      true ||
+    status.combobox?.liveV31?.hostListboxEmptyStrokesOmitUnchangedFromV25 !==
+      true ||
+    status.combobox?.liveV31?.hostOverlayEmptyDashPatternOmitUnchangedFromV26 !==
+      true ||
+    status.combobox?.liveV31?.hostSetRootClipsContentOmitUnchangedFromV27 !==
+      true ||
+    status.combobox?.liveV31?.hostOptionBindingCompileOrderUnchangedFromV28 !==
+      true ||
+    status.combobox?.liveV31?.hostOptionHeightAliasUnchangedFromV29 !== true ||
+    status.combobox?.liveV31?.hostOptionClipsContentOmitUnchangedFromV30 !==
+      true ||
+    status.combobox?.liveV31?.runIdentity !==
+      "70c24cbd-d27f2e85-combobox-v1" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||
