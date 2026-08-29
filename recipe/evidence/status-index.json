@@ -88,9 +88,11 @@
       "fluentResolution": "fallback (Roboto, 5th entry of the Segoe UI chain) — named, not equated",
       "remainingClass": "one writer set-naming defect: live set name Button / button@1 proof lacks the button/set :: prefix; root name, role, layout.mode, layout.padding, width.mode and the extra width.value all descend from it",
       "remainingRequiresFreshMint": true,
-      "sameDefectFixedWriterSideForTableAt": "live v26 (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL)",
       "figmaWrites": 0,
-      "buttonPageUntouched": true
+      "buttonPageUntouched": true,
+      "remainingRequiresCodeChange": false,
+      "writerAlreadyCorrect": "recipe/interpret.ts:959-962 emits \"button/set :: \" + source.labels.root, and both expected plans want button/set :: Button / button@1 proof — verified 2026-08-29. Page 85:6781 was minted by the older v4 writer, before that line.",
+      "sameClassCostTableALiveCycleAt": "table live v26, where the writer did still carry it"
     }
   },
   "combobox": {
