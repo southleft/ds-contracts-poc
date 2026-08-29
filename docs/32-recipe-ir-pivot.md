@@ -406,8 +406,10 @@
 > `componentRef`s in compile sibling order (prefix then
 > clear then popup), not the live selected-first order
 > (selected then prefix then clear). Keep v2–v35
-> teachings. Combobox is **not live**. Do not invent a
-> Combobox human grade. Product **v1 is incomplete**.
+> teachings. Combobox live v36 PREPARE teaches that
+> one observe sibling-order recovery. Combobox is
+> **not live**. Do not invent a Combobox human grade.
+> Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
