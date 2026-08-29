@@ -24,6 +24,7 @@ import {
   TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER,
+  TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER,
@@ -56,6 +57,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER));
@@ -388,6 +390,48 @@ test("host omits clipsContent on table/variant that compile never emits and keep
     );
     assert.equal("effects" in variant, false);
   }
+});
+
+test("host omits clipsContent on table/row variants that compile never emits and keeps cell-variant clipsContent", () => {
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const rowRoles = [
+    "table/row/compact/default",
+    "table/row/compact/selected",
+    "table/row/comfortable/default",
+    "table/row/comfortable/selected",
+  ] as const;
+  for (const role of rowRoles) {
+    const compiled = byRole(compile.ir, role)[0];
+    assert.equal(compiled !== undefined, true);
+    assert.equal("clipsContent" in (compiled ?? {}), false);
+    const observed = sceneToNormalizedIr({
+      ...rowComponentScene(),
+      ownershipKey: role,
+      name: role,
+      semanticRole: role,
+      clipsContent: false,
+    });
+    assert.equal(observed.kind, "component");
+    assert.equal("clipsContent" in observed, false);
+  }
+  const cell = sceneToNormalizedIr({
+    ownershipKey: "table/cell/compact/body",
+    type: "COMPONENT",
+    name: "table/cell/compact/body",
+    semanticRole: "table/cell/compact/body",
+    width: 80,
+    height: 32,
+    visible: true,
+    opacity: 1,
+    clipsContent: false,
+    boundVariables: [],
+    children: [],
+  });
+  assert.equal(cell.kind, "component");
+  assert.equal("clipsContent" in cell, true);
+  assert.equal((cell as { clipsContent?: boolean }).clipsContent, false);
 });
 
 const zeroCornerRadius = {

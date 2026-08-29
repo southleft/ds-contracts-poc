@@ -26,7 +26,8 @@ import {
  * `clipsContent` on `table/header` and
  * `table/body` because compile header/body frames omit `clipsContent`,
  * omit `clipsContent` on `table/variant` because compile variants omit
- * `clipsContent`, omit `cornerRadius` on `table/header` and `table/body`
+ * `clipsContent`, omit `clipsContent` on `table/row` variants because
+ * compile row variants omit `clipsContent`, omit `cornerRadius` on `table/header` and `table/body`
  * because compile header/body frames omit `cornerRadius`, omit `effects`
  * on `table/header` and `table/body` because compile header/body frames
  * omit `effects`, omit `effects` on `table/variant` because compile
@@ -43,13 +44,14 @@ import {
  * file-default `5/5/5/5` onto those sets and emits extract
  * `effects` `[]` and extract `strokes` `[]`; drop those keys. Reuses the
  * extras-drop path and the Combobox listbox / set / option clipsContent
- * omit path plus `SET_ROLES`, `HEADER_BODY_ROLES`, and
- * `TABLE_VARIANT_ROLE`. Row components still compile-carry
- * `fills.0.color`. Does not omit `table/variant` cornerRadius or
- * `table/variant` strokes. Does not invent `cornerRadius`,
- * `effects`, or `strokes` onto compile sets. Does not invent
- * `dashPattern` onto compile. Does not copy Combobox
- * overlay/option/listbox roles.
+ * omit path plus `SET_ROLES`, `HEADER_BODY_ROLES`,
+ * `TABLE_VARIANT_ROLE`, and `ROW_COMPONENT_ROLE`. Row components still
+ * compile-carry `fills.0.color`. Does not omit `table/variant`
+ * cornerRadius or `table/variant` strokes. Does not omit cell-variant
+ * `clipsContent`. Does not invent `clipsContent` onto compile row
+ * variants. Does not invent `cornerRadius`, `effects`, or `strokes`
+ * onto compile sets. Does not invent `dashPattern` onto compile. Does
+ * not copy Combobox overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -86,6 +88,8 @@ export const TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED";
 export const TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER =
   "TABLE-HOST-VARIANT-CLIPS-CONTENT-OMITTED";
+export const TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER =
+  "TABLE-HOST-ROW-VARIANT-CLIPS-CONTENT-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER =
@@ -1012,12 +1016,15 @@ const omitHeaderBodyClipsContent = <T extends { clipsContent?: unknown }>(
 ): T => {
   void TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER;
   void TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER;
+  void TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER;
   const role = sceneRole(scene);
   const headerBody =
     !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
   const tableVariant =
     !!role && TABLE_VARIANT_ROLE.test(role) && scene.type === "COMPONENT";
-  if (!headerBody && !tableVariant) return frame;
+  const rowVariant =
+    !!role && ROW_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
+  if (!headerBody && !tableVariant && !rowVariant) return frame;
   if (frame.clipsContent === undefined) return frame;
   const { clipsContent: _omitted, ...rest } = frame;
   return rest as T;
