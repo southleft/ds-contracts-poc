@@ -21,7 +21,9 @@ import {
  * uniform per-side stroke-weight binds into `strokes.0.weight` on table
  * and cell variants, omit Figma-copied bindings on
  * `table/header-cell-instance` and `table/cell-instance` because compile
- * cell instances carry none, omit `clipsContent` on `table/header` and
+ * cell instances carry none, omit Figma-copied bindings on
+ * `table/row-instance` because compile row-instances carry none, omit
+ * `clipsContent` on `table/header` and
  * `table/body` because compile header/body frames omit `clipsContent`,
  * omit `cornerRadius` on `table/header` and `table/body` because
  * compile header/body frames omit `cornerRadius`, omit `effects`
@@ -29,7 +31,8 @@ import {
  * omit `effects`, and omit `strokes` on `table/header` and
  * `table/body` because compile header/body frames omit `strokes`.
  * Reuses the extras-drop path and the Combobox listbox / set /
- * option clipsContent omit path plus `HEADER_BODY_ROLES`. Does not
+ * option clipsContent omit path plus `HEADER_BODY_ROLES`. Row
+ * components still compile-carry `fills.0.color`. Does not
  * omit `table/variant` clipsContent, `table/variant` cornerRadius,
  * `table/variant` empty effects, or `table/variant` strokes. Does
  * not copy Combobox overlay/option/listbox roles.
@@ -63,6 +66,8 @@ export const TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "TABLE-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "TABLE-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
+export const TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
+  "TABLE-HOST-ROW-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER =
@@ -276,6 +281,7 @@ const CELL_LABEL_COMPILE_BINDING_FIELDS = [
   "type.fontSize",
   "fills.0.color",
 ] as const;
+const ROW_INSTANCE_COMPILE_BINDING_FIELDS = [] as const;
 const ROW_COMPILE_BINDING_FIELDS = ["fills.0.color"] as const;
 const TABLE_VARIANT_COMPILE_BINDING_FIELDS = [
   "fills.0.color",
@@ -645,12 +651,15 @@ export function shouldOmitObservedInstancePayload(
 const compileBindingFieldsFor = (role: string | undefined): string[] | null => {
   void TABLE_LIVE_V1_BINDING_COMPILE_ORDER_MARKER;
   void TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER;
+  void TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER;
   if (role === "table/cell/label")
     return [...CELL_LABEL_COMPILE_BINDING_FIELDS];
   if (role && CELL_INSTANCE_ROLE.test(role))
     return [...CELL_INSTANCE_COMPILE_BINDING_FIELDS];
   if (role && CELL_COMPONENT_ROLE.test(role))
     return [...CELL_COMPILE_BINDING_FIELDS];
+  if (role && ROW_INSTANCE_ROLE.test(role))
+    return [...ROW_INSTANCE_COMPILE_BINDING_FIELDS];
   if (role && ROW_COMPONENT_ROLE.test(role))
     return [...ROW_COMPILE_BINDING_FIELDS];
   if (role && TABLE_VARIANT_ROLE.test(role))

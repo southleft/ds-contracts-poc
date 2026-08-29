@@ -21,6 +21,7 @@ import {
   TABLE_LIVE_V1_SET_LAYOUT_COMPILE_CARRY_MARKER,
   TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER,
   TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER,
+  TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER,
@@ -46,6 +47,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
@@ -222,6 +224,73 @@ test("host omits Figma-copied bindings on header-cell-instance and cell-instance
   assert.equal("bindings" in body, false);
   assert.equal(header.componentRef, "table@1/cell");
   assert.equal(body.componentRef, "table@1/cell");
+});
+
+const copiedRowInstanceBindings = (): SceneNodeSnapshot["boundVariables"] => [
+  {
+    field: "fills.0",
+    variableName: "ds.table.rowStates-default-background",
+    resolvedType: "COLOR",
+  },
+];
+
+const rowInstanceScene = (): SceneNodeSnapshot => ({
+  ownershipKey: "table/row-instance/0",
+  type: "INSTANCE",
+  name: "table/row-instance/0",
+  semanticRole: "table/row-instance/0",
+  width: 320,
+  height: 32,
+  visible: true,
+  opacity: 1,
+  componentRef: "Row",
+  componentProperties: {
+    Density: "comfortable",
+    State: "default",
+  },
+  boundVariables: copiedRowInstanceBindings(),
+  children: [],
+});
+
+const rowComponentScene = (): SceneNodeSnapshot => ({
+  ownershipKey: "table/row/comfortable/default",
+  type: "COMPONENT",
+  name: "table/row/comfortable/default",
+  semanticRole: "table/row/comfortable/default",
+  width: 320,
+  height: 32,
+  visible: true,
+  opacity: 1,
+  boundVariables: copiedRowInstanceBindings(),
+  children: [],
+});
+
+test("host omits Figma-copied bindings on row-instance; row components keep fills.0.color", () => {
+  const instance = sceneToNormalizedIr(rowInstanceScene());
+  const component = sceneToNormalizedIr(rowComponentScene());
+  assert.equal(instance.kind, "instance");
+  assert.equal(component.kind, "component");
+  assert.equal("bindings" in instance, false);
+  assert.equal(instance.componentRef, "table@1/row");
+  const fill = (component.bindings ?? []).find(
+    (binding) => binding.field === "fills.0.color",
+  );
+  assert.equal(fill?.variable, "ds.table.rowStates-default-background");
+  assert.equal(fill?.type, "COLOR");
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const compileRowInstance = byRole(compile.ir, "table/row-instance/0")[0];
+  const compileRow = byRole(compile.ir, "table/row/comfortable/default")[0];
+  assert.equal(compileRowInstance !== undefined, true);
+  assert.equal(compileRow !== undefined, true);
+  assert.equal("bindings" in (compileRowInstance ?? {}), false);
+  assert.equal(
+    ((compileRow as { bindings?: Array<{ field: string }> } | undefined)
+      ?.bindings ?? []
+    ).some((binding) => binding.field === "fills.0.color"),
+    true,
+  );
 });
 
 const headerBodyFrameScene = (
