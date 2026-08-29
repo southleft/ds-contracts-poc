@@ -33,17 +33,20 @@ import {
  * variants omit `effects`, omit `strokes` on `table/header` and
  * `table/body` because compile header/body frames omit `strokes`, and
  * omit empty `dashPattern` on `table/variant` strokes because compile
- * variant strokes omit `dashPattern`, and omit `cornerRadius` on
+ * variant strokes omit `dashPattern`, omit `cornerRadius` on
  * `table/set`, `table/row-set`, and `table/cell-set` because compile
- * component-sets omit `cornerRadius`. Host copies the Figma
- * file-default `5/5/5/5` onto those sets; drop the key. Reuses the
+ * component-sets omit `cornerRadius`, and omit `effects` on
+ * `table/set`, `table/row-set`, and `table/cell-set` because compile
+ * component-sets omit `effects`. Host copies the Figma
+ * file-default `5/5/5/5` onto those sets and emits extract
+ * `effects` `[]`; drop those keys. Reuses the
  * extras-drop path and the Combobox listbox / set / option clipsContent
  * omit path plus `SET_ROLES`, `HEADER_BODY_ROLES`, and
  * `TABLE_VARIANT_ROLE`. Row components still compile-carry
  * `fills.0.color`. Does not omit `table/variant` cornerRadius or
- * `table/variant` strokes. Does not invent `cornerRadius` onto compile
- * sets. Does not invent `dashPattern` onto compile. Does not copy
- * Combobox overlay/option/listbox roles.
+ * `table/variant` strokes. Does not invent `cornerRadius` or
+ * `effects` onto compile sets. Does not invent `dashPattern` onto
+ * compile. Does not copy Combobox overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -92,6 +95,8 @@ export const TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
   "TABLE-HOST-VARIANT-EMPTY-STROKE-DASH-PATTERN-OMITTED";
 export const TABLE_LIVE_V1_SET_CORNER_RADIUS_OMITTED_MARKER =
   "TABLE-HOST-SET-CORNER-RADIUS-OMITTED";
+export const TABLE_LIVE_V1_SET_EFFECTS_OMITTED_MARKER =
+  "TABLE-HOST-SET-EFFECTS-OMITTED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -970,6 +975,19 @@ const omitSetCornerRadius = <T extends { cornerRadius?: unknown }>(
   return rest as T;
 };
 
+const omitSetEffects = <T extends { effects?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void TABLE_LIVE_V1_SET_EFFECTS_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (!role || !SET_ROLES.has(role) || scene.type !== "COMPONENT_SET")
+    return frame;
+  if (frame.effects === undefined) return frame;
+  const { effects: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitHeaderBodyClipsContent = <T extends { clipsContent?: unknown }>(
   scene: SceneNodeSnapshot,
   frame: T,
@@ -1129,9 +1147,11 @@ export function sceneToNormalizedIr(
           scene,
           omitHeaderBodyClipsContent(
             scene,
-            omitSetCornerRadius(
+            omitSetEffects(
               scene,
-              omitSetClipsContent(scene, {
+              omitSetCornerRadius(
+                scene,
+                omitSetClipsContent(scene, {
                 ...common,
                 layout: sceneLayout(scene),
                 fills,
@@ -1143,6 +1163,7 @@ export function sceneToNormalizedIr(
                 clipsContent: scene.clipsContent ?? false,
                 children,
               }),
+              ),
             ),
           ),
         ),
