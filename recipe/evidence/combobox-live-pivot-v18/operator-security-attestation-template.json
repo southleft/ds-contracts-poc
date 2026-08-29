@@ -1,0 +1,6 @@
+{
+  "artifactVersion": "combobox-live-v18-operator-security-attestation-template-v1",
+  "status": "template only; complete privately after PREPARE+AUTHORIZE",
+  "tokenValuesForbidden": true,
+  "privateDirectory": "private/combobox-live-v18-security-attestation.json"
+}

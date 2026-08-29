@@ -3295,6 +3295,49 @@ export function validatePivotStatus(
     status.combobox?.liveV17?.attempt1?.mintStayed !== false ||
     status.combobox?.liveV17?.nextTeaching !==
       "host must order combobox/listbox bindings to compile field order so layout.padding.top precedes layout.padding.bottom, not start at layout.padding.bottom" ||
+    status.combobox?.liveV18?.prepared !== true ||
+    status.combobox?.liveV18?.liveFigma !== false ||
+    status.combobox?.liveV18?.humanSignoff !== "pending" ||
+    status.combobox?.liveV18?.pageId !== null ||
+    status.combobox?.liveV18?.forbiddenInputPageId !== "115:295378" ||
+    status.combobox?.liveV18?.namespace !== "ds.contracts.combobox.recipe.v1" ||
+    status.combobox?.liveV18?.evidenceRoot !==
+      "recipe/evidence/combobox-live-pivot-v18" ||
+    status.combobox?.liveV18?.teaching !==
+      "host must order combobox/listbox bindings to compile field order so layout.padding.top precedes layout.padding.bottom, not start at layout.padding.bottom" ||
+    status.combobox?.liveV18?.ownedFillTexts !== 144 ||
+    status.combobox?.liveV18?.writerUnchangedFromV1 !== false ||
+    status.combobox?.liveV18?.restoreUnchangedFromV2 !== true ||
+    status.combobox?.liveV18?.extractSetRootEnvelopeHashUnchangedFromV3 !==
+      true ||
+    status.combobox?.liveV18?.extractCopiedOwnershipKeyUnchangedFromV4 !==
+      true ||
+    status.combobox?.liveV18?.hostOmitsEmptyInstancePayloadUnchangedFromV5 !==
+      true ||
+    status.combobox?.liveV18?.hostProjectsLiveRootOwnershipKeyUnchangedFromV6 !==
+      true ||
+    status.combobox?.liveV18?.hostRecoversRecipeComponentRefUnchangedFromV7 !==
+      true ||
+    status.combobox?.liveV18?.writerAriaStampUnchangedFromV8 !== true ||
+    status.combobox?.liveV18?.hostRecoversComponentPropertyNameUnchangedFromV9 !==
+      true ||
+    status.combobox?.liveV18?.hostTriggerBindingCompileOrderUnchangedFromV10 !==
+      true ||
+    status.combobox?.liveV18?.hostLeadingSlotBindingCompileOrderUnchangedFromV11 !==
+      true ||
+    status.combobox?.liveV18?.hostLeadingSlotCompileCarryVisibleUnchangedFromV12 !==
+      true ||
+    status.combobox?.liveV18?.hostTrailingSlotBindingCompileOrderUnchangedFromV13 !==
+      true ||
+    status.combobox?.liveV18?.hostTrailingSlotCompileCarryVisibleUnchangedFromV14 !==
+      true ||
+    status.combobox?.liveV18?.hostTriggerEmptyEffectsUnchangedFromV15 !==
+      true ||
+    status.combobox?.liveV18?.hostOverlayBindingCompileOrderUnchangedFromV16 !==
+      true ||
+    status.combobox?.liveV18?.hostOverlayWidthAliasUnchangedFromV17 !== true ||
+    status.combobox?.liveV18?.runIdentity !==
+      "70c24cbd-d27f2e85-combobox-v1" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||
