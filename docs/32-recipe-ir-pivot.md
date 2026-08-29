@@ -452,6 +452,11 @@
 > recover trigger-slot componentRefs in compile sibling
 > order (prefix then clear then popup), not the live
 > selected-first order. Keep v2–v38 teachings.
+> Combobox live v39 PREPARE teaches host
+> sceneToNormalizedIr must recover trigger-slot
+> componentRefs in compile sibling order (prefix
+> then clear then popup), not the live
+> selected-first order. Keep v2–v38 teachings.
 > Combobox is **not live**. Do not invent a Combobox
 > human grade. Product **v1 is incomplete**.
 >

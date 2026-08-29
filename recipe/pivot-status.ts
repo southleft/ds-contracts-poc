@@ -4873,6 +4873,100 @@ export function validatePivotStatus(
       "host sceneToNormalizedIr must recover trigger-slot componentRefs in compile sibling order (prefix then clear then popup), not the live selected-first order"
   )
     fail("combobox live v38 prepare");
+  if (
+    status.combobox?.liveV39?.prepared !== true ||
+    status.combobox?.liveV39?.liveFigma !== false ||
+    status.combobox?.liveV39?.humanSignoff !== "pending" ||
+    status.combobox?.liveV39?.pageId !== null ||
+    status.combobox?.liveV39?.forbiddenInputPageId !== "115:295378" ||
+    status.combobox?.liveV39?.namespace !== "ds.contracts.combobox.recipe.v1" ||
+    status.combobox?.liveV39?.evidenceRoot !==
+      "recipe/evidence/combobox-live-pivot-v39" ||
+    status.combobox?.liveV39?.teaching !==
+      "host sceneToNormalizedIr must recover trigger-slot componentRefs in compile sibling order (prefix then clear then popup), not the live selected-first order" ||
+    status.combobox?.liveV39?.ownedFillTexts !== 144 ||
+    status.combobox?.liveV39?.writerUnchangedFromV1 !== false ||
+    status.combobox?.liveV39?.restoreUnchangedFromV2 !== true ||
+    status.combobox?.liveV39?.extractSetRootEnvelopeHashUnchangedFromV3 !==
+      true ||
+    status.combobox?.liveV39?.extractCopiedOwnershipKeyUnchangedFromV4 !==
+      true ||
+    status.combobox?.liveV39?.hostOmitsEmptyInstancePayloadUnchangedFromV5 !==
+      true ||
+    status.combobox?.liveV39?.hostProjectsLiveRootOwnershipKeyUnchangedFromV6 !==
+      true ||
+    status.combobox?.liveV39?.hostRecoversRecipeComponentRefUnchangedFromV7 !==
+      true ||
+    status.combobox?.liveV39?.writerAriaStampUnchangedFromV8 !== true ||
+    status.combobox?.liveV39?.hostRecoversComponentPropertyNameUnchangedFromV9 !==
+      true ||
+    status.combobox?.liveV39?.hostTriggerBindingCompileOrderUnchangedFromV10 !==
+      true ||
+    status.combobox?.liveV39?.hostLeadingSlotBindingCompileOrderUnchangedFromV11 !==
+      true ||
+    status.combobox?.liveV39?.hostLeadingSlotCompileCarryVisibleUnchangedFromV12 !==
+      true ||
+    status.combobox?.liveV39?.hostTrailingSlotBindingCompileOrderUnchangedFromV13 !==
+      true ||
+    status.combobox?.liveV39?.hostTrailingSlotCompileCarryVisibleUnchangedFromV14 !==
+      true ||
+    status.combobox?.liveV39?.hostTriggerEmptyEffectsUnchangedFromV15 !==
+      true ||
+    status.combobox?.liveV39?.hostOverlayBindingCompileOrderUnchangedFromV16 !==
+      true ||
+    status.combobox?.liveV39?.hostOverlayWidthAliasUnchangedFromV17 !== true ||
+    status.combobox?.liveV39?.hostListboxBindingCompileOrderUnchangedFromV18 !==
+      true ||
+    status.combobox?.liveV39?.hostOptionInstanceBindingExtrasUnchangedFromV19 !==
+      true ||
+    status.combobox?.liveV39?.hostOptionInstanceFillsOmitUnchangedFromV20 !==
+      true ||
+    status.combobox?.liveV39?.hostOptionInstancePayloadOmitUnchangedFromV21 !==
+      true ||
+    status.combobox?.liveV39?.hostListboxClipsContentOmitUnchangedFromV22 !==
+      true ||
+    status.combobox?.liveV39?.hostListboxCornerRadiusOmitUnchangedFromV23 !==
+      true ||
+    status.combobox?.liveV39?.hostListboxEmptyEffectsOmitUnchangedFromV24 !==
+      true ||
+    status.combobox?.liveV39?.hostListboxEmptyStrokesOmitUnchangedFromV25 !==
+      true ||
+    status.combobox?.liveV39?.hostOverlayEmptyDashPatternOmitUnchangedFromV26 !==
+      true ||
+    status.combobox?.liveV39?.hostSetRootClipsContentOmitUnchangedFromV27 !==
+      true ||
+    status.combobox?.liveV39?.hostOptionBindingCompileOrderUnchangedFromV28 !==
+      true ||
+    status.combobox?.liveV39?.hostOptionHeightAliasUnchangedFromV29 !== true ||
+    status.combobox?.liveV39?.hostOptionClipsContentOmitUnchangedFromV30 !==
+      true ||
+    status.combobox?.liveV39
+      ?.hostSelectedIndicatorBindingCompileOrderUnchangedFromV31 !== true ||
+    status.combobox?.liveV39
+      ?.hostSelectedIndicatorCompileCarryVisibleUnchangedFromV32 !== true ||
+    status.combobox?.liveV39
+      ?.hostOptionSetCompileCarryLabelUnchangedFromV33 !== true ||
+    status.combobox?.liveV39
+      ?.hostObserveOmitsEmptySlotInstancePayloadUnchangedFromV34 !== true ||
+    status.combobox?.liveV39
+      ?.hostObserveOmitsOptionInstanceInstancePayloadUnchangedFromV35 !==
+      true ||
+    status.combobox?.liveV39
+      ?.hostRecoversTriggerSlotComponentRefCompileSiblingOrderUnchangedFromV36 !==
+      true ||
+    status.combobox?.liveV39
+      ?.hostRecoversCompileCarriedTriggerCharactersUnchangedFromV37 !==
+      true ||
+    status.combobox?.liveV39
+      ?.hostObserveRecoversCompileCarriedOptionSetNameUnchangedFromV38 !==
+      true ||
+    status.combobox?.liveV39
+      ?.hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrder !==
+      true ||
+    status.combobox?.liveV39?.runIdentity !==
+      "70c24cbd-d27f2e85-combobox-v1"
+  )
+    fail("combobox live v39 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))
     fail(message);
   if (
