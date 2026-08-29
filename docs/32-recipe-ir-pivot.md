@@ -389,7 +389,11 @@
 > attempt 2 as-is. Next teaching: host observe must omit
 > extra nonempty option-instance `instancePayload` facts
 > that IR and compile omit, not only empty slot-instance
-> payloads. Keep v2–v34 teachings. Combobox is **not
+> payloads. Keep v2–v34 teachings. Combobox live v35
+> PREPARE teaches host observe must omit extra nonempty
+> option-instance `instancePayload` facts that IR and
+> compile omit, not only empty slot-instance payloads.
+> Keep v2–v34 teachings. Combobox is **not
 > live**. Do not invent a Combobox human grade. Product
 > **v1 is incomplete**.
 >
