@@ -1,0 +1,125 @@
+{
+  "artifactVersion": "table-live-v23-attempt-1-v1",
+  "status": "failed closed at extract collapse; writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "c80bdb0fbb5c3e2c9561758b4bcce54b5a9e2d7f",
+  "codeCommit": "c80bdb0fbb5c3e2c9561758b4bcce54b5a9e2d7f",
+  "antecedentCommit": "6def9472e22529058ddf92f687590dc61b868abd",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-82d19508-table-v23",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenTableV22RunIdentity": "cc811f47-82d19508-table-v22"
+  },
+  "transaction": {
+    "transactionId": "2a1b7e01-a612-4d11-a55c-1dcd0209dcf6",
+    "attempt": 1,
+    "authorizationSha256": "f5f8ff8ead829f74e63958964b679d0381dffc420e1bc890c572201fd5a663fa",
+    "signingPublicKeySpkiSha256": "5fd42674c39943399f2c2245355ad1616e09e90f69a35e986c3ef8753cbc1ee1",
+    "programSha256": "7175e2d5cfec8f6680c1082f2762e0c3162ec46be5c7ac445c99b67dff26cd0a",
+    "bindingSha256": "9360f1798e6b2fc66738c6a843fff63bf9030e54398f13137c108bbf4bd0d8c6",
+    "requestSha256": "2cfc1cf1e8822ab2f197b7a75bb8a45e1d3d35bc5c0115bfdf54dcc431d09f95"
+  },
+  "writer": {
+    "accepted": true,
+    "firstSignedCallAccepted": true,
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v23",
+    "pageId": "172:46065",
+    "sectionIds": ["172:46066", "172:46195"],
+    "collectionIds": [
+      "VariableCollectionId:172:46067",
+      "VariableCollectionId:172:46196"
+    ],
+    "firstParty": {
+      "sectionId": "172:46066",
+      "cellSetId": "172:46094",
+      "rowSetId": "172:46123",
+      "tableSetId": "172:46194",
+      "collectionId": "VariableCollectionId:172:46067"
+    },
+    "mui": {
+      "sectionId": "172:46195",
+      "cellSetId": "172:46223",
+      "rowSetId": "172:46252",
+      "tableSetId": "172:46323",
+      "collectionId": "VariableCollectionId:172:46196"
+    },
+    "runIdentity": "cc811f47-82d19508-table-v23",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "createdNodeIds": 83,
+    "rowVariantStrokesOmitTeachingCleared": true,
+    "rowVariantEffectsOmitTeachingUnchangedFromV22": true,
+    "namedFromSourceFamily": "Inter",
+    "carriedHostStyle": "Semi Bold",
+    "resolutionDeclared": "requested",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "pageId": "172:46065",
+    "restoredCount": 8,
+    "fixedBefore": 0,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": false,
+    "rowVariantStrokesOmittedByHostNormalize": true,
+    "compileRowVariantHasStrokes": false,
+    "hostNormalizedRowVariantHasStrokes": false,
+    "hostRawRowVariantHasStrokes": true,
+    "hostRawRowVariantStrokes": [],
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[1].label",
+    "failedOn": "first-party library-frame table/row-set; RecipeRefusal table@1: unsupported structural edit at $.children[1].label",
+    "adapterIdentity": "first-party-table-reviewed-v1",
+    "role": "table/row-set",
+    "parentRole": "library frame",
+    "hostRowSetName": "table/row-set :: Table",
+    "hostDerivedLabelFromNameAfterSeparator": "Table",
+    "compileRowSetLabel": "Table row",
+    "compileCellSetLabel": "Table cell",
+    "compileTableSetLabel": "identity.name (Table)",
+    "sameClassLikelyOnCellSetLabel": true
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "172:46065",
+    "removedCollectionIds": [
+      "VariableCollectionId:172:46067",
+      "VariableCollectionId:172:46196"
+    ],
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "restartV23Attempt2AsIs": false,
+    "prepareV24": "when extract host-normalizes table/row-set, emit compile-carried label Table row instead of the live display name after ::"
+  },
+  "secondaryNoteNotTheRefusedClass": "v23 teaching cleared as stated: extract host-normalize omitted strokes on all four first-party and MUI table/row variants; compile row variants omit strokes; host raw row variants still emit strokes []. Row-variant effects/clipsContent/cornerRadius stayed omitted. Set strokes/effects/cornerRadius stayed omitted. Variant strokes and cornerRadius stayed. Writer first signed call accepted. Restore held 8 hug labels. Extract walk accepted. Collapse then refused label on table/row-set (library-frame path $.children[1]) because host derives label Table from the live name after :: while compile carries label Table row. Cell-set likely has the same class (compile Table cell vs host Table); firstDifference stopped at row-set. Do not invent label onto compile. Do not change table/variant labels in this next teaching. Do not omit table/variant strokes or cornerRadius.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

@@ -1,0 +1,39 @@
+{
+  "artifactVersion": "table-live-v23-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit; writer accepted; restore 8 held; row-variant strokes omit teaching cleared; signed cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "6def9472e22529058ddf92f687590dc61b868abd",
+    "indexPath": "recipe/evidence/table-live-pivot-v23/antecedent-index.json"
+  },
+  "authorization": {
+    "commit": "c80bdb0fbb5c3e2c9561758b4bcce54b5a9e2d7f",
+    "path": "recipe/evidence/table-live-pivot-v23/capture-authorization.json",
+    "sha256": "f5f8ff8ead829f74e63958964b679d0381dffc420e1bc890c572201fd5a663fa",
+    "signingPublicKeySpkiSha256": "5fd42674c39943399f2c2245355ad1616e09e90f69a35e986c3ef8753cbc1ee1"
+  },
+  "attempt1": {
+    "pageId": "172:46065",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "restoredCount": 8,
+    "extractAccepted": false,
+    "extractRefused": "unsupported structural edit",
+    "rowVariantStrokesOmitTeachingCleared": true,
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "when extract host-normalizes table/row-set, emit compile-carried label Table row instead of the live display name after ::",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}
