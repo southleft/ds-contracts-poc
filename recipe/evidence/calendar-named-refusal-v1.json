@@ -27,7 +27,7 @@
       "path": "recipe/recipes/calendar.ts",
       "gate": "npm run recipe:calendar:check",
       "gateGreen": true,
-      "tests": 11,
+      "tests": 21,
       "components": 10,
       "sets": {
         "calendar/set": 4,
@@ -75,6 +75,31 @@
     "dateGrammarProblemSolved": {
       "problem": "examples/day-picker/PROVENANCE.md records that the capture grammar cannot spell a Date, so a calendar driven by a live clock has a today ring and a visible month that move between captures and never byte-compare",
       "resolution": "calendar@1 carries the month that was RENDERED as content (caption, weekdays, weeks of labelled day states), not a Date to re-render from. Determinism comes from the content being data. No $date marker was invented."
+    },
+    "figmaWriter": {
+      "path": "recipe/calendar-figma-writer.ts",
+      "hermetic": true,
+      "figmaWrites": 0,
+      "emittedProgramBytes": 95787,
+      "variantsPerSource": 10,
+      "dayInstancesPerSource": 98,
+      "plannedVariables": 19,
+      "inheritsTableWriterHardening": [
+        "exact file identity guard",
+        "page ownership",
+        "owned variable collections",
+        "font provenance tamper refusal",
+        "first-segment naming"
+      ],
+      "carriesTableV25Lesson": "the set name carries the compile label from the start (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL class), so the accounting failure that cost Table a live cycle cannot happen here",
+      "onlyDayIsInstantiable": "a week cannot be an instance; the grid owns day instances",
+      "refusesUnmeasuredDayCell": "CALENDAR-DAY-CELL-NOT-MEASURED",
+      "refusesOtherArchetypePages": [
+        "115:295378 Input",
+        "163:35981 Combobox",
+        "85:6781 Button"
+      ],
+      "instanceCountConstantEarnedItsPlace": "the first draft said 91 and the writer refused with \"requires 91 day instances; found 98\" rather than minting a wrong page — the week template has a variant per WeekNumbers, so it contributes 2x7, not 7"
     }
   },
   "refusal": {
@@ -83,11 +108,10 @@
       "statement": "No Calendar live Figma mint was attempted and no Calendar human grade exists or is claimed.",
       "whyNotAttempted": "The measured cost basis of a live climb in this lineage: Input needed 78 recorded attempt-1 cycles to a staying mint, Combobox 41, and Data Table is at 27 and still has not stayed. docs/32 §7 additionally names Calendar as the densest grid the pipeline has faced with almost all of its behaviour code-only. Opening that climb was not in this round's scope.",
       "whatWouldBeNeeded": [
-        "recipe/calendar-figma-writer.ts, following table-figma-writer.ts",
         "the PREPARE / AUTHORIZE / attempt / RECORD scaffold per version",
         "an attributable human grade from the owner on a mint that stays"
       ],
-      "actionableBecause": "the offline gate is green and the writer is the only missing offline artifact, so the live climb can start from a known-good compile rather than from nothing"
+      "actionableBecause": "the offline gate is green AND the writer now exists, so the live climb can start from a known-good compile and a hardened writer rather than from nothing. What is left is the per-version lineage scaffold and the owner’s grade."
     },
     "crossLibraryLegNotProven": {
       "refused": true,

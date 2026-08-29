@@ -32,7 +32,7 @@
     "recipe:input-field:browser:check": "node --import tsx --test recipe/input-field-browser.test.ts",
     "recipe:combobox:check": "node --import tsx --test recipe/combobox-proof.test.ts recipe/combobox-browser.test.ts recipe/combobox-figma-writer.test.ts",
     "recipe:table:check": "node --import tsx --test recipe/table-proof.test.ts recipe/table-figma-writer.test.ts && npm run recipe:table:tail-census:check",
-    "recipe:calendar:check": "node --import tsx --test recipe/calendar-proof.test.ts",
+    "recipe:calendar:check": "node --import tsx --test recipe/calendar-proof.test.ts recipe/calendar-figma-writer.test.ts",
     "recipe:table:tail-census": "tsx recipe/table-tail-census.ts",
     "recipe:table:tail-census:check": "node --import tsx --test recipe/table-tail-census.test.ts",
     "recipe:table:live:v1:prepare": "tsx recipe/build-table-live-proof-v1.ts",

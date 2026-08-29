@@ -22745,7 +22745,7 @@
       "gate": "recipe:calendar:check",
       "gateGreen": true,
       "components": 10,
-      "tests": 10,
+      "tests": 21,
       "fixedPointStable": true
     },
     "reviewedSources": 1,
@@ -22755,7 +22755,14 @@
     "blockers": [
       "no live mint; no human grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "no calendar-figma-writer.ts yet"
-    ]
+      "live lineage scaffold (PREPARE/AUTHORIZE/attempt/RECORD) not opened"
+    ],
+    "figmaWriter": {
+      "path": "recipe/calendar-figma-writer.ts",
+      "hermetic": true,
+      "figmaWrites": 0,
+      "variantsPerSource": 10,
+      "dayInstancesPerSource": 98
+    }
   }
 }
