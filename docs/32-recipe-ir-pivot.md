@@ -174,8 +174,8 @@
 > (`combobox/option-instance/0`: host emits five inherited bindings;
 > compile emits only `height.value`). Overlay drop-shadow stayed.
 > Cleanup accepted; that Combobox page is gone. Input `115:295378`
-> stayed. Do not restart v18 attempt 2 as-is. Next teaching: host
-> must drop extra `combobox/option-instance` bindings that compile
+> stayed. Do not restart v18 attempt 2 as-is. Combobox live v19 PREPARE teaches
+> host must drop extra `combobox/option-instance` bindings that compile
 > never emits, keeping only `height.value`, not also emit inherited
 > `fills.0.color`, `layout.itemSpacing`, `layout.padding.left`, and
 > `layout.padding.right`. Keep v2–v18 teachings. Combobox is **not live**.
