@@ -2000,6 +2000,49 @@
       "product v1 incomplete"
     ]
   },
+  "table": {
+    "overallSuccess": false,
+    "status": "offline-recipe-v1; product v1 incomplete",
+    "humanSignoff": "pending",
+    "liveFigma": false,
+    "humanGradeInvented": false,
+    "recipe": {
+      "id": "table",
+      "version": 1,
+      "selection": "explicit-reviewed-config",
+      "sources": [
+        "ds-contracts-poc@1.0.0-rc.1#Table",
+        "@mui/material@9.2.0#Table"
+      ],
+      "sourceReferencesRendered": false,
+      "aiGraded": false,
+      "liveFigma": false,
+      "writer": false
+    },
+    "offlineProof": {
+      "pairedCellsPlanned": 8,
+      "tableVariants": 2,
+      "rowVariants": 4,
+      "cellVariants": 4,
+      "components": 10,
+      "instances": 22,
+      "canonicalCycles": 2,
+      "gate": "recipe:table:check"
+    },
+    "live": {
+      "prepared": false,
+      "pageId": null,
+      "forbiddenInputPageId": "115:295378",
+      "forbiddenComboboxPageId": "163:35981"
+    },
+    "blockers": [
+      "no Figma writer",
+      "no live PREPARE",
+      "no human grade",
+      "Calendar not started",
+      "product v1 incomplete"
+    ]
+  },
   "input": {
     "overallSuccess": false,
     "status": "v85-live-human-grade-passed; product v1 incomplete",

@@ -5243,6 +5243,28 @@ export function validatePivotStatus(
     status.combobox?.liveHumanGrade?.nextHill !== "Data Table"
   )
     fail("combobox live v41 prepare");
+  if (
+    status.table?.overallSuccess !== false ||
+    status.table?.status !== "offline-recipe-v1; product v1 incomplete" ||
+    status.table?.humanSignoff !== "pending" ||
+    status.table?.liveFigma !== false ||
+    status.table?.humanGradeInvented !== false ||
+    status.table?.recipe?.id !== "table" ||
+    status.table?.recipe?.version !== 1 ||
+    status.table?.recipe?.liveFigma !== false ||
+    status.table?.recipe?.writer !== false ||
+    status.table?.recipe?.sourceReferencesRendered !== false ||
+    status.table?.recipe?.aiGraded !== false ||
+    status.table?.offlineProof?.pairedCellsPlanned !== 8 ||
+    status.table?.offlineProof?.components !== 10 ||
+    status.table?.offlineProof?.instances !== 22 ||
+    status.table?.offlineProof?.gate !== "recipe:table:check" ||
+    status.table?.live?.prepared !== false ||
+    status.table?.live?.pageId !== null ||
+    status.table?.live?.forbiddenInputPageId !== "115:295378" ||
+    status.table?.live?.forbiddenComboboxPageId !== "163:35981"
+  )
+    fail("table offline recipe v1");
   for (const message of validateButtonStatusPlant(status.button ?? {}))
     fail(message);
   if (

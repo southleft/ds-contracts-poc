@@ -14,6 +14,10 @@ import {
   collapseComboboxRecipe,
   type ComboboxRecipeInstance,
 } from "./recipes/combobox.js";
+import {
+  collapseTableRecipe,
+  type TableRecipeInstance,
+} from "./recipes/table.js";
 
 export type FactDisposition = "carried" | "extension" | "receipt";
 
@@ -36,6 +40,7 @@ export interface ButtonAccountingReport {
 
 export type InputFieldAccountingReport = ButtonAccountingReport;
 export type ComboboxAccountingReport = ButtonAccountingReport;
+export type TableAccountingReport = ButtonAccountingReport;
 
 const walk = (node: IRNode, visit: (candidate: IRNode) => void): void => {
   visit(node);
@@ -779,6 +784,167 @@ export function auditComboboxAccounting(
   const measuredLandings = rows.filter((row) => row.measured).length;
   if (rows.length === 0 || measuredLandings === 0)
     failures.push("combobox accounting denominator is zero");
+  return {
+    factsCompared: rows.length,
+    measuredLandings,
+    carried: rows.filter((row) => row.disposition === "carried").length,
+    extensions: rows.filter((row) => row.disposition === "extension").length,
+    receipts: rows.filter((row) => row.disposition === "receipt").length,
+    rows,
+    failures,
+  };
+}
+
+export function auditTableAccounting(
+  source: TableRecipeInstance,
+  envelope: RecipeEnvelope,
+): TableAccountingReport {
+  const failures: string[] = [];
+  const recovered = collapseTableRecipe(
+    envelope,
+    source.provenance.selection,
+  );
+  const rows: MeasuredFactLanding[] = [];
+  const seen = new Set<string>();
+  const baseMeasures: Record<string, Omit<MeasuredFactLanding, "fact">> = {
+    structure: {
+      disposition: "carried",
+      landing: "table/set 2 variants + row-set 4 + cell-set 4",
+      measured:
+        envelope.ir.kind === "frame" &&
+        envelope.ir.children.some(
+          (node) =>
+            node.kind === "component-set" &&
+            node.role === "table/set" &&
+            node.children.length === 2,
+        ) &&
+        envelope.ir.children.some(
+          (node) =>
+            node.kind === "component-set" &&
+            node.role === "table/row-set" &&
+            node.children.length === 4,
+        ) &&
+        envelope.ir.children.some(
+          (node) =>
+            node.kind === "component-set" &&
+            node.role === "table/cell-set" &&
+            node.children.length === 4,
+        ),
+    },
+    columns: {
+      disposition: "carried",
+      landing: "declared three-column axis recovered from header instances",
+      measured:
+        canonicalJson(source.content.columns) ===
+        canonicalJson(recovered.content.columns),
+    },
+    rows: {
+      disposition: "carried",
+      landing: "two body row instances with typed cell properties",
+      measured:
+        canonicalJson(source.content.rows) ===
+        canonicalJson(recovered.content.rows),
+    },
+    tokens: {
+      disposition: "carried",
+      landing: "bound primitive IR fields",
+      measured:
+        canonicalJson(source.tokens) === canonicalJson(recovered.tokens),
+    },
+    "designer-edit-surface": {
+      disposition: "carried",
+      landing: "declared axes, column axis, row collection, and resize policy",
+      measured:
+        canonicalJson(source.designerEditSurface) ===
+        canonicalJson(recovered.designerEditSurface),
+    },
+    "aria-model": {
+      disposition: "extension",
+      landing: "extensions[table/aria]",
+      measured: extensionHas(envelope, "aria-model", "table/aria"),
+    },
+    events: {
+      disposition: "extension",
+      landing: "extensions[table/events]",
+      measured: extensionHas(envelope, "events", "table/events"),
+    },
+    keyboard: {
+      disposition: "extension",
+      landing: "extensions[table/keyboard]",
+      measured: extensionHas(envelope, "keyboard", "table/keyboard"),
+    },
+    "recipe-selection": {
+      disposition: "extension",
+      landing: "provenance.selection + extensions[table/recipe-selection]",
+      measured:
+        source.provenance.selection.manualCost.value > 0 &&
+        extensionHas(envelope, "recipe-selection", "table/recipe-selection"),
+    },
+  };
+  for (const fact of source.inputFacts) {
+    const id = factId(fact);
+    if (seen.has(id)) failures.push(`${id}: duplicated source occurrence`);
+    seen.add(id);
+    const measure = fact.channel.startsWith("parameter:")
+      ? {
+          disposition: "carried" as const,
+          landing: fact.channel.slice("parameter:".length),
+          measured:
+            canonicalJson(
+              atLanding(source, fact.channel.slice("parameter:".length)),
+            ) ===
+            canonicalJson(
+              atLanding(recovered, fact.channel.slice("parameter:".length)),
+            ),
+        }
+      : fact.channel.startsWith("extension:")
+        ? {
+            disposition: "extension" as const,
+            landing: `extensions[${fact.channel.slice("extension:".length)}]`,
+            measured: envelope.extensions.some(
+              (extension) =>
+                extension.id === fact.channel.slice("extension:".length) &&
+                extension.absorbs.some((candidate) => factId(candidate) === id),
+            ),
+          }
+        : fact.channel.startsWith("refusal:")
+          ? {
+              disposition: "receipt" as const,
+              landing: `receipts[${fact.channel.slice("refusal:".length)}]`,
+              measured: envelope.receipts.some(
+                (receipt) =>
+                  factId(receipt.fact) === id &&
+                  receipt.reason === "refused-by-recipe",
+              ),
+            }
+          : baseMeasures[fact.channel];
+    if (!measure) {
+      failures.push(`${id}: no independent landing measurement`);
+      continue;
+    }
+    rows.push({ fact: id, ...measure });
+    if (!measure.measured)
+      failures.push(
+        `${id}: claimed ${measure.disposition} has no measured landing at ${measure.landing}`,
+      );
+    const declared = [
+      envelope.accounting.carried.some(
+        (candidate) => factId(candidate) === id,
+      ) && "carried",
+      envelope.extensions.some((extension) =>
+        extension.absorbs.some((candidate) => factId(candidate) === id),
+      ) && "extension",
+      envelope.receipts.some((receipt) => factId(receipt.fact) === id) &&
+        "receipt",
+    ].filter(Boolean);
+    if (declared.length !== 1 || declared[0] !== measure.disposition)
+      failures.push(
+        `${id}: declared ${declared.join("+") || "none"} disagrees with ${measure.disposition}`,
+      );
+  }
+  const measuredLandings = rows.filter((row) => row.measured).length;
+  if (rows.length === 0 || measuredLandings === 0)
+    failures.push("table accounting denominator is zero");
   return {
     factsCompared: rows.length,
     measuredLandings,

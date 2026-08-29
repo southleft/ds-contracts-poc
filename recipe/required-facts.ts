@@ -495,3 +495,113 @@ export function measureComboboxRequiredFacts(
     landing: mapping.landing,
   }));
 }
+
+const tableSet = (root: FrameNode): ComponentSetNode | undefined => {
+  const node = root.children.find((child) => child.role === "table/set");
+  return node?.kind === "component-set" ? node : undefined;
+};
+const tableRowSet = (root: FrameNode): ComponentSetNode | undefined => {
+  const node = root.children.find((child) => child.role === "table/row-set");
+  return node?.kind === "component-set" ? node : undefined;
+};
+const tableCellSet = (root: FrameNode): ComponentSetNode | undefined => {
+  const node = root.children.find((child) => child.role === "table/cell-set");
+  return node?.kind === "component-set" ? node : undefined;
+};
+
+const tableMappings = [
+  {
+    id: "table/column-stack",
+    landing: "every table variant is a vertical header-plus-body stack",
+    measure: (root: FrameNode) =>
+      tableSet(root)?.children.every(
+        (component) =>
+          component.layout.mode === "vertical" &&
+          component.children.some((child) => child.role === "table/body"),
+      ) === true,
+  },
+  {
+    id: "table/cell-padding",
+    landing:
+      "every table/cell carries positive bound padding on all four sides",
+    measure: (root: FrameNode) =>
+      tableCellSet(root)?.children.every(
+        (component) =>
+          component.layout.padding.left > 0 &&
+          component.layout.padding.right > 0 &&
+          component.layout.padding.top > 0 &&
+          component.layout.padding.bottom > 0 &&
+          component.bindings?.some(
+            (binding) => binding.field === "layout.padding.left",
+          ) &&
+          component.bindings.some(
+            (binding) => binding.field === "layout.padding.right",
+          ),
+      ) === true,
+  },
+  {
+    id: "table/row-rule",
+    landing:
+      "the table frame or every cell carries a named top/bottom stroke",
+    measure: (root: FrameNode) => {
+      const frameRule =
+        tableSet(root)?.children.some(
+          (component) => (component.strokes?.[0]?.weight ?? 0) > 0,
+        ) === true;
+      const cellRule =
+        tableCellSet(root)?.children.some(
+          (component) => (component.strokes?.[0]?.weight ?? 0) > 0,
+        ) === true;
+      return frameRule || cellRule;
+    },
+  },
+  {
+    id: "table/header-type",
+    landing: "every header cell label uses a non-Regular font style",
+    measure: (root: FrameNode) =>
+      tableCellSet(root)?.children
+        .filter((component) => component.variantProperties.Kind === "header")
+        .every((component) => {
+          const label = component.children.find(
+            (child) => child.role === "table/cell/label",
+          );
+          return (
+            label?.kind === "text" &&
+            label.type.fontStyle !== "Regular" &&
+            label.type.fontProvenance !== undefined
+          );
+        }) === true,
+  },
+] as const;
+
+const tableRecipeMappings = [
+  {
+    id: "table/cell-instance-repetition",
+    landing: "every row template instantiates three table@1/cell instances",
+    measure: (root: FrameNode) =>
+      tableRowSet(root)?.children.every((component) => {
+        const cells = component.children.filter(
+          (child) =>
+            child.kind === "instance" && child.componentRef === "table@1/cell",
+        );
+        return cells.length === 3;
+      }) === true,
+  },
+] as const;
+
+export function measureTableRequiredFacts(
+  root: FrameNode,
+): RecipeRequiredFactLanding[] {
+  const seeded = new Set(
+    [
+      ...ARCHETYPE_REQUIRED_FACTS["table / data-grid"].required,
+      ...ARCHETYPE_REQUIRED_FACTS["table / data-grid"].expected,
+    ].map((fact) => fact.id),
+  );
+  assertCompleteRequiredFactMapping("table@1", seeded, tableMappings);
+  return [...tableMappings, ...tableRecipeMappings].map((mapping) => ({
+    requiredFactId: mapping.id,
+    status: mapping.measure(root) ? "measured" : "missing",
+    landing: mapping.landing,
+  }));
+}
