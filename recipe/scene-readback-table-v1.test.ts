@@ -23,6 +23,7 @@ import {
   TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER,
   TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER,
+  TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER,
@@ -49,6 +50,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER));
@@ -317,16 +319,63 @@ test("host omits clipsContent on table/header and table/body that compile never 
   assert.equal(body.kind, "frame");
   assert.equal("clipsContent" in header, false);
   assert.equal("clipsContent" in body, false);
-  const variant = sceneToNormalizedIr({
-    ...tableVariantScene([]),
-    clipsContent: false,
-  });
-  assert.equal(variant.kind, "component");
-  assert.equal("clipsContent" in variant, true);
-  assert.equal(
-    (variant as { clipsContent?: boolean }).clipsContent,
-    false,
+});
+
+test("host omits clipsContent on table/variant that compile never emits and keeps cornerRadius and strokes", () => {
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
   );
+  const compileComfortable = byRole(compile.ir, "table/variant/comfortable")[0];
+  const compileCompact = byRole(compile.ir, "table/variant/compact")[0];
+  assert.equal(compileComfortable !== undefined, true);
+  assert.equal(compileCompact !== undefined, true);
+  assert.equal("clipsContent" in (compileComfortable ?? {}), false);
+  assert.equal("clipsContent" in (compileCompact ?? {}), false);
+  assert.equal("cornerRadius" in (compileComfortable ?? {}), true);
+  assert.equal("strokes" in (compileComfortable ?? {}), true);
+  const compileStrokes = (
+    compileComfortable as {
+      strokes?: Array<{
+        weight: number;
+        align: "inside" | "outside" | "center";
+        paint: { kind: string; color?: string };
+      }>;
+    }
+  ).strokes;
+  assert.equal(Array.isArray(compileStrokes), true);
+  assert.equal((compileStrokes?.length ?? 0) > 0, true);
+  const compileStroke = compileStrokes?.[0];
+  for (const role of [
+    "table/variant/compact",
+    "table/variant/comfortable",
+  ] as const) {
+    const variant = sceneToNormalizedIr({
+      ...tableVariantScene([], role),
+      clipsContent: false,
+      cornerRadius: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+      strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
+      strokeWeight: compileStroke?.weight,
+      strokeAlign: compileStroke?.align.toUpperCase() as
+        | "INSIDE"
+        | "OUTSIDE"
+        | "CENTER",
+      effects: [],
+    });
+    assert.equal(variant.kind, "component");
+    assert.equal("clipsContent" in variant, false);
+    assert.equal("cornerRadius" in variant, true);
+    assert.deepEqual(
+      (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+      { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+    );
+    assert.equal("strokes" in variant, true);
+    assert.deepEqual(
+      (variant as { strokes?: unknown[] }).strokes,
+      compileStrokes,
+    );
+    assert.equal("effects" in variant, true);
+    assert.deepEqual((variant as { effects?: unknown[] }).effects, []);
+  }
 });
 
 const zeroCornerRadius = {
