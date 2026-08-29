@@ -219,11 +219,11 @@
 > (`combobox/listbox`: host emits `effects: []` on all 64
 > open-variant listboxes; compile omits `effects`). Cleanup
 > accepted; that Combobox page is gone. Input `115:295378` stayed. Do
-> not restart v23 attempt 2 as-is. Next teaching: host must omit
-> empty `effects` on `combobox/listbox` that compile never emits, not
-> also emit the live listbox empty effects array. Keep v2–v23
-> teachings. Combobox is **not live**. Do not invent a Combobox human
-> grade. Product **v1 is incomplete**.
+> not restart v23 attempt 2 as-is. Combobox live v24 PREPARE teaches
+> host must omit empty `effects` on `combobox/listbox` that compile
+> never emits, not also emit the live listbox empty effects array.
+> Keep v2–v23 teachings. Combobox is **not live**. Do not invent a
+> Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
