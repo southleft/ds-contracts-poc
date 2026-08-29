@@ -78,10 +78,23 @@ test(
       null,
       "first-party must reach the IR diff, as it did live at v23",
     );
-    assert.ok(
-      firstParty.differences > 0,
-      "the tail is not empty; a mint has not yet stayed",
+    // The measured extract-side tail is CLOSED on both roots as of the
+    // post-v24 teachings. If this ever goes non-zero again, a teaching
+    // regressed or the live scene changed -- either way, report it.
+    assert.equal(
+      firstParty.differences,
+      0,
+      "first-party extract-side tail must stay closed",
     );
+    const mui = census.roots.find((root) => root.source === "mui");
+    assert.ok(mui, "census must cover the mui root");
+    assert.equal(
+      mui.preDiffRefusal,
+      null,
+      "mui must reach the IR diff now that minWidth is optional",
+    );
+    assert.equal(mui.differences, 0, "mui extract-side tail must stay closed");
+    assert.equal(census.totalDifferences, 0);
 
     // HEAD carries the v24 teaching (`hostEmitsRowSetCompileCarryLabel`), which
     // exists precisely to close the v23 refusal. So the census must NOT still

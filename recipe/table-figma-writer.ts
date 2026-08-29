@@ -37,6 +37,7 @@ export const FORBIDDEN_TABLE_V20_RUN_IDENTITY = "cc811f47-82d19508-table-v20";
 export const FORBIDDEN_TABLE_V21_RUN_IDENTITY = "cc811f47-82d19508-table-v21";
 export const FORBIDDEN_TABLE_V22_RUN_IDENTITY = "cc811f47-82d19508-table-v22";
 export const FORBIDDEN_TABLE_V23_RUN_IDENTITY = "cc811f47-82d19508-table-v23";
+export const FORBIDDEN_TABLE_V24_RUN_IDENTITY = "cc811f47-82d19508-table-v24";
 export const TABLE_FIGMA_VARIANTS_PER_SOURCE = 10;
 export const TABLE_FIGMA_VARIANT_COUNT = 20;
 export const TABLE_FIGMA_INSTANCES_PER_SOURCE = 22;
@@ -218,7 +219,10 @@ const axisValues = (
 };
 
 const planSource = (input: TableFigmaWriterInput): TableFigmaSourcePlan => {
-  if (input.envelope.recipe.id !== "table" || input.envelope.recipe.version !== 1) {
+  if (
+    input.envelope.recipe.id !== "table" ||
+    input.envelope.recipe.version !== 1
+  ) {
     throw new TypeError("table live writer requires table@1");
   }
   const tableSet = requireSet(input.envelope.ir, "table/set");
@@ -395,10 +399,16 @@ export function validateTableFigmaSourcePlans(
     if (source.tableCells.length !== TABLE_DENSITIES.length) {
       failures.push(`${source.adapterIdentity}: expected 2 table cells`);
     }
-    if (source.rowCells.length !== TABLE_DENSITIES.length * TABLE_ROW_STATES.length) {
+    if (
+      source.rowCells.length !==
+      TABLE_DENSITIES.length * TABLE_ROW_STATES.length
+    ) {
       failures.push(`${source.adapterIdentity}: expected 4 row cells`);
     }
-    if (source.cellCells.length !== TABLE_DENSITIES.length * TABLE_CELL_KINDS.length) {
+    if (
+      source.cellCells.length !==
+      TABLE_DENSITIES.length * TABLE_CELL_KINDS.length
+    ) {
       failures.push(`${source.adapterIdentity}: expected 4 cell cells`);
     }
     if (source.instanceCount !== TABLE_FIGMA_INSTANCES_PER_SOURCE) {
@@ -799,22 +809,23 @@ export function emitTableFigmaWriter(
     runIdentity === FORBIDDEN_TABLE_V20_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V21_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V22_RUN_IDENTITY ||
-    runIdentity === FORBIDDEN_TABLE_V23_RUN_IDENTITY
+    runIdentity === FORBIDDEN_TABLE_V23_RUN_IDENTITY ||
+    runIdentity === FORBIDDEN_TABLE_V24_RUN_IDENTITY
   ) {
-    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v23 identity");
+    throw new TypeError(
+      "table writer must not reuse Input, Combobox, or Table v1–v23 identity",
+    );
   }
   const pageName = `Recipe Pivot / Table / ${runIdentity}`;
   const plan = {
     pageName,
     runIdentity,
-    sources: sourcePlans.map(
-      ({ tableSet, rowSet, cellSet, ...source }) => ({
-        ...source,
-        tableSet,
-        rowSet,
-        cellSet,
-      }),
-    ),
+    sources: sourcePlans.map(({ tableSet, rowSet, cellSet, ...source }) => ({
+      ...source,
+      tableSet,
+      rowSet,
+      cellSet,
+    })),
   };
   const runtime = writerRuntime(
     TABLE_FIGMA_NAMESPACE,
@@ -831,7 +842,9 @@ export function emitTableFigmaWriter(
     runtime.includes("figma.combineAsVariants") === false ||
     runtime.includes("figma_arrange_component_set")
   ) {
-    throw new TypeError("table writer must mint sets without arranging Input or Combobox");
+    throw new TypeError(
+      "table writer must mint sets without arranging Input or Combobox",
+    );
   }
   if (
     runtime.includes("componentPropertyReferences={[labelKey]") ||
@@ -846,15 +859,17 @@ export function emitTableFigmaWriter(
     runtime.includes("TABLE-WRITER-ROW-OWNED-TEXT-CHARACTERS") === false ||
     runtime.includes("TABLE-ROW-OWNED-TEXT-ABSENT") === false ||
     runtime.includes("TABLE-ROW-CELL-LABEL-ABSENT") === false ||
-    runtime.includes("TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER") ===
-      false
+    runtime.includes(
+      "TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER",
+    ) === false
   ) {
     throw new TypeError("table writer missing row owned-TEXT characters bind");
   }
   if (
     runtime.includes("TABLE-WRITER-MIN-WIDTH-ZERO-UNSET") === false ||
-    runtime.includes("node.minWidth=layout.minWidth===0?null:layout.minWidth") ===
-      false
+    runtime.includes(
+      "node.minWidth=layout.minWidth===0?null:layout.minWidth",
+    ) === false
   ) {
     throw new TypeError(
       "table writer must unset host minWidth 0 with null rather than assigning 0",

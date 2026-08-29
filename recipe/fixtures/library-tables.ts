@@ -15,12 +15,14 @@ export const firstPartyTableSource: ReviewedTableSource = {
   sourceRoot: "src/components/Table",
   anatomy: {
     root: "contracts/table.contract.json anatomy.root flex column + src/components/Table/Table.tsx role=table",
-    header: "contracts/table.contract.json anatomy.root.parts.header row of ds.table-header-cell",
+    header:
+      "contracts/table.contract.json anatomy.root.parts.header row of ds.table-header-cell",
     body: "contracts/table.contract.json anatomy.root.parts.body column slot of ds.table-row",
     row: "contracts/table-row.contract.json flex row + state default|selected",
     headerCell: "contracts/table-header-cell.contract.json role=columnheader",
     bodyCell: "contracts/table-cell.contract.json role=cell",
-    columnAxis: "contracts/table.contract.json header nameHeader/roleHeader/statusHeader — three declared columns",
+    columnAxis:
+      "contracts/table.contract.json header nameHeader/roleHeader/statusHeader — three declared columns",
   },
   api: {
     density: "density comfortable|compact",
@@ -52,19 +54,24 @@ export const muiTableSource: ReviewedTableSource = {
   sourceRoot: "recipe/sandboxes/input-field-mui/node_modules/@mui/material",
   anatomy: {
     root: "extract/computed/out/mui/table/LEDGER.md table-lowering root table → flex column",
-    header: "extract/computed/out/mui/table/LEDGER.md thead → rowgroup, header row → row of th",
+    header:
+      "extract/computed/out/mui/table/LEDGER.md thead → rowgroup, header row → row of th",
     body: "extract/computed/out/mui/table/LEDGER.md tbody → rowgroup of tr",
     row: "extract/computed/out/mui/table/LEDGER.md tablerow-root table-row → flex row; tablerow-root-2 is the selected body row",
-    headerCell: "extract/computed/out/mui/table/enriched.contract.json tablecell-head-2 / label-2 text columnheader",
-    bodyCell: "extract/computed/out/mui/table/enriched.contract.json tablecell-body text cell",
-    columnAxis: "extract/computed/out/mui/table/LEDGER.md Name / Role / Team / Actions plus a checkbox column — recipe keeps the three text columns",
+    headerCell:
+      "extract/computed/out/mui/table/enriched.contract.json tablecell-head-2 / label-2 text columnheader",
+    bodyCell:
+      "extract/computed/out/mui/table/enriched.contract.json tablecell-body text cell",
+    columnAxis:
+      "extract/computed/out/mui/table/LEDGER.md Name / Role / Team / Actions plus a checkbox column — recipe keeps the three text columns",
   },
   api: {
     size: "Table size small|medium",
     rowState: "TableRow selected; hover is interaction-only",
     padding: "TableCell padding / paddingCheckbox / size",
     stickyHeader: "stickyHeader named exclusion in enriched.contract.json",
-    selection: "TableRow selected is declared; no controlled selectedRowId API in the extract",
+    selection:
+      "TableRow selected is declared; no controlled selectedRowId API in the extract",
     keyboard: "no table keyboard handler in the MUI extract",
     extras: "checkbox column, TableSortLabel, actions cell, TablePagination",
   },
@@ -166,11 +173,17 @@ const cloneTokens = (
 const firstPartyTokens = cloneTokens("ds.table", (_path, fallback) => fallback);
 
 const muiTokens = cloneTokens("mui.table", (path, fallback) => {
-  if (path.endsWith("compact.paddingX") || path.endsWith("comfortable.paddingX"))
+  if (
+    path.endsWith("compact.paddingX") ||
+    path.endsWith("comfortable.paddingX")
+  )
     return 16;
   if (path.endsWith("compact.paddingY")) return 6;
   if (path.endsWith("comfortable.paddingY")) return 16;
-  if (path.endsWith("compact.minWidth") || path.endsWith("comfortable.minWidth"))
+  if (
+    path.endsWith("compact.minWidth") ||
+    path.endsWith("comfortable.minWidth")
+  )
     return 0;
   if (path.includes("rowStates.selected.background")) return "#1976d214";
   if (path === "headerBackground") return "#ffffffff";
@@ -182,6 +195,14 @@ const muiTokens = cloneTokens("mui.table", (path, fallback) => {
   if (path === "radius") return 0;
   return fallback;
 });
+// MUI Table cells declare no min-width. The cloned canonical tokens carry a
+// `minWidth` slot, so drop it rather than synthesise `mui.table.densities-*-minWidth`
+// for a constraint the source does not have. Measured live at table live v24:
+// Figma stores a zero min-width as `null` and drops the bound variable, so the
+// live scene has no binding to compare against.
+delete (muiTokens.densities.compact as { minWidth?: unknown }).minWidth;
+delete (muiTokens.densities.comfortable as { minWidth?: unknown }).minWidth;
+
 muiTokens.typography = {
   header: {
     requestedFamily: "Roboto",
@@ -376,7 +397,8 @@ export const TABLE_PAIRED_PROOF_PROTOCOL = {
     adaptCompileCollapseTwoCyclesPerSource: 4000,
   },
   comparison: {
-    legacyContext: "first-party ds.table density×row plus MUI Table size extract; no live grade",
+    legacyContext:
+      "first-party ds.table density×row plus MUI Table size extract; no live grade",
     sourceReferencesRendered: false,
     aiGrading: false,
     liveFigma: false,

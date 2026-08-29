@@ -125,6 +125,20 @@ export const TABLE_LIVE_V1_SET_STROKES_OMITTED_MARKER =
 export const TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER =
   "TABLE-HOST-ROW-SET-COMPILE-CARRY-LABEL";
 export const TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL = "Table row";
+export const TABLE_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL_MARKER =
+  "TABLE-HOST-CELL-SET-COMPILE-CARRY-LABEL";
+export const TABLE_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL = "Table cell";
+export const TABLE_LIVE_V1_FONT_PROVENANCE_LABEL_MARKER =
+  "TABLE-HOST-FONT-PROVENANCE-SUFFIX-IS-NOT-THE-LABEL";
+const FONT_PROVENANCE_SUFFIX = "font-provenance=";
+export const TABLE_LIVE_V1_CELL_VARIANT_CLIPS_CONTENT_OMITTED_MARKER =
+  "TABLE-HOST-CELL-VARIANT-CLIPS-CONTENT-OMITTED";
+export const TABLE_LIVE_V1_CELL_VARIANT_CORNER_RADIUS_OMITTED_MARKER =
+  "TABLE-HOST-CELL-VARIANT-CORNER-RADIUS-OMITTED";
+export const TABLE_LIVE_V1_CELL_VARIANT_EFFECTS_OMITTED_MARKER =
+  "TABLE-HOST-CELL-VARIANT-EFFECTS-OMITTED";
+export const TABLE_LIVE_V1_CELL_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
+  "TABLE-HOST-CELL-VARIANT-EMPTY-STROKE-DASH-PATTERN-OMITTED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -310,8 +324,10 @@ type FactSeed = Omit<SceneFact, "id" | "baseId" | "occurrence">;
 
 const CELL_INSTANCE_ROLE = /^table\/(?:header-)?cell-instance\/\d+$/;
 const ROW_INSTANCE_ROLE = /^table\/row-instance\/\d+$/;
-const CELL_COMPONENT_ROLE = /^table\/cell\/(?:compact|comfortable)\/(?:header|body)$/;
-const ROW_COMPONENT_ROLE = /^table\/row\/(?:compact|comfortable)\/(?:default|selected)$/;
+const CELL_COMPONENT_ROLE =
+  /^table\/cell\/(?:compact|comfortable)\/(?:header|body)$/;
+const ROW_COMPONENT_ROLE =
+  /^table\/row\/(?:compact|comfortable)\/(?:default|selected)$/;
 const TABLE_VARIANT_ROLE = /^table\/variant\/(?:compact|comfortable)$/;
 const SET_ROLES = new Set(["table/set", "table/row-set", "table/cell-set"]);
 const HEADER_BODY_ROLES = new Set(["table/header", "table/body"]);
@@ -630,6 +646,28 @@ const compileCarriedLabel = (scene: SceneNodeSnapshot): string => {
   void TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER;
   if (sceneRole(scene) === "table/row-set")
     return TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL;
+  // Same class as the row-set label, measured at table live v24: the live
+  // display name is `table/cell-set :: Table`, so the after-`::` rule derives
+  // `Table` where compile carries `Table cell`. Does not change `table/set`.
+  void TABLE_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL_MARKER;
+  if (sceneRole(scene) === "table/cell-set")
+    return TABLE_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL;
+  // Font-provenance class. `sceneLabel` takes the segment AFTER the first
+  // " :: ", which is right when that segment is a display name. On the cell
+  // label TEXT the live name is `table/cell/label :: font-provenance=%7B...`,
+  // so that rule derives the provenance payload where compile carries the
+  // segment BEFORE the separator. Measured on both roots at table live v24
+  // (refusal $.children[2].children[0].children[0].label): compile carries
+  // `table/cell/label`, host derived `font-provenance=%7B...`.
+  // Scoped to the provenance suffix only. Does not invent a label, does not
+  // change row-set, cell-set, or table/set labels.
+  void TABLE_LIVE_V1_FONT_PROVENANCE_LABEL_MARKER;
+  const separator = scene.name.indexOf(" :: ");
+  if (
+    separator >= 0 &&
+    scene.name.slice(separator + 4).startsWith(FONT_PROVENANCE_SUFFIX)
+  )
+    return scene.name.slice(0, separator);
   return sceneLabel(scene);
 };
 
@@ -699,7 +737,10 @@ export function shouldOmitObservedInstancePayload(
 ): boolean {
   void TABLE_LIVE_V1_OBSERVE_OMIT_INSTANCE_PAYLOAD_MARKER;
   if (node.kind !== "instance") return payload === undefined;
-  if (node.componentRef === "table@1/cell" || node.componentRef === "table@1/row")
+  if (
+    node.componentRef === "table@1/cell" ||
+    node.componentRef === "table@1/row"
+  )
     return true;
   return shouldOmitEmptyInstancePayload(payload);
 }
@@ -872,7 +913,12 @@ const sceneLayout = (scene: SceneNodeSnapshot): FrameLayout => {
       } as const
     )[scene.primaryAxisAlignItems ?? "MIN"],
     counterAxisAlign: (
-      { MIN: "min", CENTER: "center", MAX: "max", BASELINE: "baseline" } as const
+      {
+        MIN: "min",
+        CENTER: "center",
+        MAX: "max",
+        BASELINE: "baseline",
+      } as const
     )[scene.counterAxisAlignItems ?? "MIN"],
     itemSpacing: scene.itemSpacing ?? 0,
     padding: {
@@ -928,7 +974,10 @@ const scenePaintToIr = (paint: ScenePaint): Paint => {
       throw new TypeError("scene solid paint has no color");
     return { kind: "solid", color: paint.color };
   }
-  if (discriminator === "variable-alias" || discriminator === "VARIABLE_ALIAS") {
+  if (
+    discriminator === "variable-alias" ||
+    discriminator === "VARIABLE_ALIAS"
+  ) {
     return {
       kind: "variable-alias",
       variable: paint.variable ?? paint.id ?? "",
@@ -946,24 +995,27 @@ const scenePaintToIr = (paint: ScenePaint): Paint => {
       ...(typeof paint.color === "string" ? { color: paint.color } : {}),
     };
   }
-  if (discriminator === "linear-gradient" || discriminator === "GRADIENT_LINEAR") {
+  if (
+    discriminator === "linear-gradient" ||
+    discriminator === "GRADIENT_LINEAR"
+  ) {
     return {
       kind: "linear-gradient",
       angle: paint.angle ?? 0,
       stops: paint.gradientStops ?? [],
     };
   }
-  if (discriminator === "radial-gradient" || discriminator === "GRADIENT_RADIAL") {
+  if (
+    discriminator === "radial-gradient" ||
+    discriminator === "GRADIENT_RADIAL"
+  ) {
     return { kind: "radial-gradient", stops: paint.gradientStops ?? [] };
   }
   return {
     kind: "image",
     assetRef: paint.assetRef ?? "unresolved-image",
     scaleMode: (paint.scaleMode ?? "FILL").toLowerCase() as
-      | "fill"
-      | "fit"
-      | "tile"
-      | "stretch",
+      "fill" | "fit" | "tile" | "stretch",
   };
 };
 
@@ -1043,6 +1095,7 @@ const omitHeaderBodyClipsContent = <T extends { clipsContent?: unknown }>(
   void TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER;
   void TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER;
   void TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER;
+  void TABLE_LIVE_V1_CELL_VARIANT_CLIPS_CONTENT_OMITTED_MARKER;
   const role = sceneRole(scene);
   const headerBody =
     !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
@@ -1050,7 +1103,9 @@ const omitHeaderBodyClipsContent = <T extends { clipsContent?: unknown }>(
     !!role && TABLE_VARIANT_ROLE.test(role) && scene.type === "COMPONENT";
   const rowVariant =
     !!role && ROW_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
-  if (!headerBody && !tableVariant && !rowVariant) return frame;
+  const cellVariant =
+    !!role && CELL_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
+  if (!headerBody && !tableVariant && !rowVariant && !cellVariant) return frame;
   if (frame.clipsContent === undefined) return frame;
   const { clipsContent: _omitted, ...rest } = frame;
   return rest as T;
@@ -1062,12 +1117,15 @@ const omitHeaderBodyCornerRadius = <T extends { cornerRadius?: unknown }>(
 ): T => {
   void TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER;
   void TABLE_LIVE_V1_ROW_VARIANT_CORNER_RADIUS_OMITTED_MARKER;
+  void TABLE_LIVE_V1_CELL_VARIANT_CORNER_RADIUS_OMITTED_MARKER;
   const role = sceneRole(scene);
   const headerBody =
     !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
   const rowVariant =
     !!role && ROW_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
-  if (!headerBody && !rowVariant) return frame;
+  const cellVariant =
+    !!role && CELL_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
+  if (!headerBody && !rowVariant && !cellVariant) return frame;
   if (frame.cornerRadius === undefined) return frame;
   const { cornerRadius: _omitted, ...rest } = frame;
   return rest as T;
@@ -1080,6 +1138,7 @@ const omitHeaderBodyEffects = <T extends { effects?: unknown }>(
   void TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER;
   void TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER;
   void TABLE_LIVE_V1_ROW_VARIANT_EFFECTS_OMITTED_MARKER;
+  void TABLE_LIVE_V1_CELL_VARIANT_EFFECTS_OMITTED_MARKER;
   const role = sceneRole(scene);
   const headerBody =
     !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
@@ -1087,7 +1146,9 @@ const omitHeaderBodyEffects = <T extends { effects?: unknown }>(
     !!role && TABLE_VARIANT_ROLE.test(role) && scene.type === "COMPONENT";
   const rowVariant =
     !!role && ROW_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
-  if (!headerBody && !tableVariant && !rowVariant) return frame;
+  const cellVariant =
+    !!role && CELL_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
+  if (!headerBody && !tableVariant && !rowVariant && !cellVariant) return frame;
   if (frame.effects === undefined) return frame;
   const { effects: _omitted, ...rest } = frame;
   return rest as T;
@@ -1110,26 +1171,22 @@ const omitHeaderBodyStrokes = <T extends { strokes?: unknown }>(
   return rest as T;
 };
 
-const omitVariantEmptyStrokeDashPattern = <
-  T extends { dashPattern?: unknown },
->(
+const omitVariantEmptyStrokeDashPattern = <T extends { dashPattern?: unknown }>(
   scene: SceneNodeSnapshot,
   strokes: T[] | undefined,
 ): T[] | undefined => {
   void TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER;
+  void TABLE_LIVE_V1_CELL_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER;
   const role = sceneRole(scene);
   if (
     !role ||
-    !TABLE_VARIANT_ROLE.test(role) ||
+    (!TABLE_VARIANT_ROLE.test(role) && !CELL_COMPONENT_ROLE.test(role)) ||
     scene.type !== "COMPONENT" ||
     strokes === undefined
   )
     return strokes;
   return strokes.map((stroke) => {
-    if (
-      !Array.isArray(stroke.dashPattern) ||
-      stroke.dashPattern.length !== 0
-    )
+    if (!Array.isArray(stroke.dashPattern) || stroke.dashPattern.length !== 0)
       return stroke;
     const { dashPattern: _omitted, ...rest } = stroke;
     return rest as T;
@@ -1180,9 +1237,7 @@ export function sceneToNormalizedIr(
       : scene.strokes.map((paint) => ({
           weight: scene.strokeWeight ?? 0,
           align: (scene.strokeAlign ?? "INSIDE").toLowerCase() as
-            | "inside"
-            | "outside"
-            | "center",
+            "inside" | "outside" | "center",
           paint: scenePaintToIr(paint),
           ...(scene.dashPattern === undefined
             ? {}
@@ -1216,17 +1271,17 @@ export function sceneToNormalizedIr(
                 omitSetCornerRadius(
                   scene,
                   omitSetClipsContent(scene, {
-                ...common,
-                layout: sceneLayout(scene),
-                fills,
-                ...(strokes === undefined ? {} : { strokes }),
-                ...(effects === undefined ? {} : { effects }),
-                ...(scene.cornerRadius === undefined
-                  ? {}
-                  : { cornerRadius: scene.cornerRadius }),
-                clipsContent: scene.clipsContent ?? false,
-                children,
-              }),
+                    ...common,
+                    layout: sceneLayout(scene),
+                    fills,
+                    ...(strokes === undefined ? {} : { strokes }),
+                    ...(effects === undefined ? {} : { effects }),
+                    ...(scene.cornerRadius === undefined
+                      ? {}
+                      : { cornerRadius: scene.cornerRadius }),
+                    clipsContent: scene.clipsContent ?? false,
+                    children,
+                  }),
                 ),
               ),
             ),
@@ -1550,7 +1605,8 @@ export function compareSceneToExpectedPlan(
     for (const fact of wanted) {
       const match = found.findIndex(
         (candidate, index) =>
-          !used.has(index) && valueKey(candidate.value) === valueKey(fact.value),
+          !used.has(index) &&
+          valueKey(candidate.value) === valueKey(fact.value),
       );
       if (match >= 0) {
         used.add(match);

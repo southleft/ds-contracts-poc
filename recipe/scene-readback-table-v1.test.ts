@@ -44,33 +44,87 @@ import type { IRNode } from "./figma-ir.js";
 
 test("table host-normalize is table-shaped and does not copy Combobox roles", () => {
   const host = readFileSync("recipe/scene-readback-table-v1.ts", "utf8");
-  assert.match(host, new RegExp(TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_RECOVER_RECIPE_COMPONENT_REF_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_RECOVER_COMPONENT_PROPERTY_NAME_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_OMIT_EMPTY_INSTANCE_PAYLOAD_MARKER));
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_RECOVER_RECIPE_COMPONENT_REF_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_RECOVER_COMPONENT_PROPERTY_NAME_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_OMIT_EMPTY_INSTANCE_PAYLOAD_MARKER),
+  );
   assert.match(host, new RegExp(TABLE_LIVE_V1_BINDING_COMPILE_ORDER_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER));
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER),
+  );
   assert.match(host, new RegExp(TABLE_LIVE_V1_OMIT_TEXT_EXTRAS_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_OCCUPANCY_OPACITY_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_COLLAPSE_OMIT_INVENTED_OPACITY_MARKER));
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_COLLAPSE_OMIT_INVENTED_OPACITY_MARKER),
+  );
   assert.match(host, new RegExp(TABLE_LIVE_V1_SET_LAYOUT_COMPILE_CARRY_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_VARIANT_CORNER_RADIUS_OMITTED_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_ROW_VARIANT_CORNER_RADIUS_OMITTED_MARKER),
+  );
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER),
+  );
   assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER));
-  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER));
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER),
+  );
   assert.match(
     host,
     new RegExp(TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER),
   );
-  assert.match(host, new RegExp(TABLE_LIVE_V1_SET_CORNER_RADIUS_OMITTED_MARKER));
+  assert.match(
+    host,
+    new RegExp(TABLE_LIVE_V1_SET_CORNER_RADIUS_OMITTED_MARKER),
+  );
   assert.match(host, new RegExp(TABLE_LIVE_V1_SET_EFFECTS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_SET_STROKES_OMITTED_MARKER));
   assert.match(host, /table@1\/cell/);
@@ -140,8 +194,9 @@ test("host folds uniform per-side stroke weight binds into strokes.0.weight", ()
     ),
   );
   assert.equal(
-    (cell.bindings ?? []).find((binding) => binding.field === "strokes.0.weight")
-      ?.variable,
+    (cell.bindings ?? []).find(
+      (binding) => binding.field === "strokes.0.weight",
+    )?.variable,
     "ds.table.cellRuleWidth",
   );
 });
@@ -211,9 +266,7 @@ const copiedCellInstanceBindings = (): SceneNodeSnapshot["boundVariables"] => [
   ...uniformFigmaPerSideStrokeBindings("ds.table.cellRuleWidth"),
 ];
 
-const cellInstanceScene = (
-  role: string,
-): SceneNodeSnapshot => ({
+const cellInstanceScene = (role: string): SceneNodeSnapshot => ({
   ownershipKey: role,
   type: "INSTANCE",
   name: role,
@@ -307,8 +360,9 @@ test("host omits Figma-copied bindings on row-instance; row components keep fill
   assert.equal(compileRow !== undefined, true);
   assert.equal("bindings" in (compileRowInstance ?? {}), false);
   assert.equal(
-    ((compileRow as { bindings?: Array<{ field: string }> } | undefined)
-      ?.bindings ?? []
+    (
+      (compileRow as { bindings?: Array<{ field: string }> } | undefined)
+        ?.bindings ?? []
     ).some((binding) => binding.field === "fills.0.color"),
     true,
   );
@@ -332,7 +386,9 @@ const headerBodyFrameScene = (
 });
 
 test("host omits clipsContent on table/header and table/body that compile never emits", () => {
-  const header = sceneToNormalizedIr(headerBodyFrameScene("table/header", true));
+  const header = sceneToNormalizedIr(
+    headerBodyFrameScene("table/header", true),
+  );
   const body = sceneToNormalizedIr(headerBodyFrameScene("table/body", true));
   assert.equal(header.kind, "frame");
   assert.equal(body.kind, "frame");
@@ -375,9 +431,7 @@ test("host omits clipsContent on table/variant that compile never emits and keep
       strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
       strokeWeight: compileStroke?.weight,
       strokeAlign: compileStroke?.align.toUpperCase() as
-        | "INSIDE"
-        | "OUTSIDE"
-        | "CENTER",
+        "INSIDE" | "OUTSIDE" | "CENTER",
       effects: [],
     });
     assert.equal(variant.kind, "component");
@@ -434,8 +488,13 @@ test("host omits clipsContent on table/row variants that compile never emits and
     children: [],
   });
   assert.equal(cell.kind, "component");
-  assert.equal("clipsContent" in cell, true);
-  assert.equal((cell as { clipsContent?: boolean }).clipsContent, false);
+  // Taught after the v24 census measured compile omitting clipsContent on all
+  // four table/cell variants (4 absent-left differences, both roots).
+  assert.equal(
+    "clipsContent" in cell,
+    false,
+    "cell variants omit clipsContent because compile omits it",
+  );
 });
 
 const zeroCornerRadius = {
@@ -508,7 +567,11 @@ test("host omits effects on table/set, table/row-set, and table/cell-set that co
     (compileVariant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
     { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
   );
-  for (const role of ["table/set", "table/row-set", "table/cell-set"] as const) {
+  for (const role of [
+    "table/set",
+    "table/row-set",
+    "table/cell-set",
+  ] as const) {
     const set = sceneToNormalizedIr({
       ...setScene(role),
       effects: [],
@@ -560,7 +623,11 @@ test("host omits strokes on table/set, table/row-set, and table/cell-set that co
   assert.equal(Array.isArray(compileStrokes), true);
   assert.equal((compileStrokes?.length ?? 0) > 0, true);
   const compileStroke = compileStrokes?.[0];
-  for (const role of ["table/set", "table/row-set", "table/cell-set"] as const) {
+  for (const role of [
+    "table/set",
+    "table/row-set",
+    "table/cell-set",
+  ] as const) {
     const set = sceneToNormalizedIr({
       ...setScene(role),
       strokes: [],
@@ -575,14 +642,15 @@ test("host omits strokes on table/set, table/row-set, and table/cell-set that co
     strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
     strokeWeight: compileStroke?.weight,
     strokeAlign: compileStroke?.align.toUpperCase() as
-      | "INSIDE"
-      | "OUTSIDE"
-      | "CENTER",
+      "INSIDE" | "OUTSIDE" | "CENTER",
     cornerRadius: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
   });
   assert.equal(variant.kind, "component");
   assert.equal("strokes" in variant, true);
-  assert.deepEqual((variant as { strokes?: unknown[] }).strokes, compileStrokes);
+  assert.deepEqual(
+    (variant as { strokes?: unknown[] }).strokes,
+    compileStrokes,
+  );
   assert.equal("cornerRadius" in variant, true);
   assert.deepEqual(
     (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
@@ -610,7 +678,11 @@ test("host omits cornerRadius on table/set, table/row-set, and table/cell-set th
     (compileVariant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
     { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
   );
-  for (const role of ["table/set", "table/row-set", "table/cell-set"] as const) {
+  for (const role of [
+    "table/set",
+    "table/row-set",
+    "table/cell-set",
+  ] as const) {
     const set = sceneToNormalizedIr(setScene(role));
     assert.equal(set.kind, "component-set");
     assert.equal("cornerRadius" in set, false);
@@ -808,9 +880,18 @@ test("host emits compile-carried label Table row on table/row-set instead of the
   const compileCellSet = byRole(compile.ir, "table/cell-set")[0];
   const compileTableSet = byRole(compile.ir, "table/set")[0];
   assert.equal(compileRowSet !== undefined, true);
-  assert.equal((compileRowSet as { label?: string } | undefined)?.label, "Table row");
-  assert.equal((compileCellSet as { label?: string } | undefined)?.label, "Table cell");
-  assert.equal((compileTableSet as { label?: string } | undefined)?.label, "Table");
+  assert.equal(
+    (compileRowSet as { label?: string } | undefined)?.label,
+    "Table row",
+  );
+  assert.equal(
+    (compileCellSet as { label?: string } | undefined)?.label,
+    "Table cell",
+  );
+  assert.equal(
+    (compileTableSet as { label?: string } | undefined)?.label,
+    "Table",
+  );
   const live = sceneToNormalizedIr({
     ...setScene("table/row-set"),
     name: "table/row-set :: Table",
@@ -824,15 +905,19 @@ test("host emits compile-carried label Table row on table/row-set instead of the
   assert.equal(cellLive.kind, "component-set");
   assert.equal(
     cellLive.label,
-    "Table",
-    "this teaching is row-set only; cell-set still derives the live display name",
+    "Table cell",
+    "cell-set carries the compile label, measured as the same class as row-set",
   );
   const tableLive = sceneToNormalizedIr({
     ...setScene("table/set"),
     name: "table/set :: Table",
   });
   assert.equal(tableLive.kind, "component-set");
-  assert.equal(tableLive.label, "Table");
+  assert.equal(
+    tableLive.label,
+    "Table",
+    "table/set is NOT part of the compile-carry label teaching; compile and the live display name already agree there, so nothing is carried",
+  );
 });
 
 test("host omits effects on table/header and table/body that compile never emits", () => {
@@ -903,9 +988,7 @@ test("host omits effects on table/variant that compile never emits and keeps cor
       strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
       strokeWeight: compileStroke?.weight,
       strokeAlign: compileStroke?.align.toUpperCase() as
-        | "INSIDE"
-        | "OUTSIDE"
-        | "CENTER",
+        "INSIDE" | "OUTSIDE" | "CENTER",
     });
     assert.equal(variant.kind, "component");
     assert.equal("effects" in variant, false);
@@ -957,9 +1040,7 @@ test("host omits empty dashPattern on table/variant strokes that compile never e
       strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
       strokeWeight: compileStroke?.weight,
       strokeAlign: compileStroke?.align.toUpperCase() as
-        | "INSIDE"
-        | "OUTSIDE"
-        | "CENTER",
+        "INSIDE" | "OUTSIDE" | "CENTER",
       effects: [],
     });
     assert.equal(variant.kind, "component");
@@ -990,9 +1071,7 @@ test("host omits empty dashPattern on table/variant strokes that compile never e
     strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
     strokeWeight: compileStroke?.weight,
     strokeAlign: compileStroke?.align.toUpperCase() as
-      | "INSIDE"
-      | "OUTSIDE"
-      | "CENTER",
+      "INSIDE" | "OUTSIDE" | "CENTER",
   });
   assert.deepEqual(
     (
@@ -1047,13 +1126,14 @@ test("host omits strokes on table/header and table/body that compile never emits
     strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
     strokeWeight: compileStroke?.weight,
     strokeAlign: compileStroke?.align.toUpperCase() as
-      | "INSIDE"
-      | "OUTSIDE"
-      | "CENTER",
+      "INSIDE" | "OUTSIDE" | "CENTER",
   });
   assert.equal(variant.kind, "component");
   assert.equal("strokes" in variant, true);
-  assert.deepEqual((variant as { strokes?: unknown[] }).strokes, compileStrokes);
+  assert.deepEqual(
+    (variant as { strokes?: unknown[] }).strokes,
+    compileStrokes,
+  );
 });
 
 test("table probe is table-shaped: header/body/label, HUG, no overlay AABB", () => {
@@ -1063,7 +1143,10 @@ test("table probe is table-shaped: header/body/label, HUG, no overlay AABB", () 
   assert.match(contract, /table\/cell\/label/);
   assert.match(contract, /contentHugPassed/);
   assert.match(contract, /TABLE-PROBE-EXCLUDE-OPACITY-ZERO-OCCUPANCY-OVERLAP/);
-  assert.match(contract, /TABLE-PROBE-KEEP-EXACT-SCENE-RESTORATION-AFTER-DENSITY-WALK/);
+  assert.match(
+    contract,
+    /TABLE-PROBE-KEEP-EXACT-SCENE-RESTORATION-AFTER-DENSITY-WALK/,
+  );
   assert.doesNotMatch(contract, /contentFillPassed/);
   assert.doesNotMatch(contract, /combobox\/overlay/);
   assert.doesNotMatch(contract, /listbox/);

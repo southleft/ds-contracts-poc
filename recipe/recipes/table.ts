@@ -79,7 +79,17 @@ interface DensityTokens {
   paddingX: TableNumberParameter;
   paddingY: TableNumberParameter;
   fontSize: TableNumberParameter;
-  minWidth: TableNumberParameter;
+  /**
+   * Optional. A cell min-width is a real constraint some sources simply do not
+   * have -- MUI Table cells have none. Figma agrees that "no min-width" is not
+   * a bindable zero: assigning `minWidth = 0` stores `null` AND drops the bound
+   * variable, so a bound zero is not expressible (measured live at table live
+   * v24; the writer has unset zero as null since v5,
+   * `table-figma-writer.ts:610,615`). A source without a min-width therefore
+   * declares no token rather than synthesising a variable for a constraint it
+   * does not have.
+   */
+  minWidth?: TableNumberParameter;
 }
 interface RowStateTokens {
   background: TableColorParameter;
@@ -260,7 +270,8 @@ export const TableRecipeInstanceSchema = z
         !numberParameter(tokens?.paddingX) ||
         !numberParameter(tokens?.paddingY) ||
         !numberParameter(tokens?.fontSize) ||
-        !numberParameter(tokens?.minWidth, true)
+        (tokens?.minWidth !== undefined &&
+          !numberParameter(tokens?.minWidth, true))
       )
         fail(`${density} density token is invalid`);
     }
@@ -420,10 +431,20 @@ const cellComponent = (
     kind === "header"
       ? instance.tokens.typography.header
       : instance.tokens.typography.body;
-  const label =
-    kind === "header"
-      ? instance.content.columns[0]!.label
-      : instance.content.rows[0]!.cells[0];
+  // The cell component set exposes a single `Label` TEXT component property and
+  // every variant's label TEXT is bound to it (`table-figma-writer.ts`, the
+  // `Label` property added on the cell set and referenced by every
+  // `table/cell/label` descendant). A shared Figma component property has ONE
+  // default, so variants cannot carry different characters while bound to it --
+  // Figma renders the property default on all of them. Measured live at table
+  // live v24: all four minted cell variants read `characters: "Name"` while
+  // compile expected `"Ada Lovelace"` on the two body variants.
+  //
+  // The cell set is a template whose text is a property, so the label default is
+  // shared across kinds. No fact is lost: the body sample values still live on
+  // the row set, which carries `Cell 0/1/2` per row occurrence. Typography still
+  // differs per kind through `font` above.
+  const label = instance.content.columns[0]!.label;
   const strokes = [
     {
       weight: instance.tokens.cellRuleWidth.fallback,
@@ -436,7 +457,9 @@ const cellComponent = (
     bind("layout.padding.right", density.paddingX),
     bind("layout.padding.top", density.paddingY),
     bind("layout.padding.bottom", density.paddingY),
-    bind("layout.minWidth", density.minWidth),
+    ...(density.minWidth === undefined
+      ? []
+      : [bind("layout.minWidth", density.minWidth)]),
     bind("strokes.0.paint.color", instance.tokens.cellRule),
     bind("strokes.0.weight", instance.tokens.cellRuleWidth),
   ];
@@ -458,7 +481,9 @@ const cellComponent = (
       },
       width: hug,
       height: hug,
-      minWidth: density.minWidth.fallback,
+      ...(density.minWidth === undefined
+        ? {}
+        : { minWidth: density.minWidth.fallback }),
     },
     fills: [],
     strokes,
@@ -1106,7 +1131,17 @@ export function collapseTableRecipe(
       "type.fontSize",
       direct(cell, "table/cell/label", "text").type.fontSize,
     ),
-    minWidth: numberFrom(cell, "layout.minWidth", cell.layout.minWidth ?? 0),
+    // Absent when the source declares no min-width. Recovering a binding that
+    // is not on the node would invent one; see DensityTokens.minWidth.
+    ...((cell.bindings ?? []).some((entry) => entry.field === "layout.minWidth")
+      ? {
+          minWidth: numberFrom(
+            cell,
+            "layout.minWidth",
+            cell.layout.minWidth ?? 0,
+          ),
+        }
+      : {}),
   });
   const instance = normalizeTableRecipeInstance({
     identity: { id: envelope.id, name: envelope.name },

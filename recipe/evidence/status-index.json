@@ -2589,9 +2589,8 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v24 attempt 1 failed closed at extract unsupported structural edit; do not restart v24 attempt 2 as-is",
-      "remaining extract-side tail measured: 6 classes / 23 differences on the first-party root",
-      "mui root stops before the diff on the v5 minWidth unset-null secondary",
+      "Table live v25 PREPARE landed; not authorized; no attempt run",
+      "measured extract-side tail is 0 on both roots; writer-side refusals are not predicted by the census",
       "no live mint",
       "no human grade",
       "Calendar not started",
@@ -3489,6 +3488,35 @@
       "predictsExtractSideOnly": true,
       "doesNotPredictWriterSideRefusals": true,
       "muiRootBlockedBeforeDiff": "table/cell/compact/body: required binding layout.minWidth must appear exactly once"
+    },
+    "liveV25": {
+      "prepared": true,
+      "liveFigma": false,
+      "humanSignoff": "pending",
+      "pageId": null,
+      "forbiddenInputPageId": "115:295378",
+      "forbiddenComboboxPageId": "163:35981",
+      "runIdentity": "cc811f47-82d19508-table-v25",
+      "namespace": "ds.contracts.table.recipe.v1",
+      "evidenceRoot": "recipe/evidence/table-live-pivot-v25",
+      "teaching": "post-v24 measured teaching set: cell-label compile-carry label (not the font-provenance suffix), cell-variant clipsContent/cornerRadius/effects/empty-stroke-dashPattern omits, cell-set compile-carry label, compile cell-template label default shared across kinds, compile omits an absent cell minWidth",
+      "teachingCount": 8,
+      "teachingsIndividuallyVerifiedOffline": true,
+      "censusDeltaLedger": [
+        "23 -> 19  cell-label compile-carry label (not the font-provenance suffix)",
+        "19 -> 15  cell-variant clipsContent omit",
+        "15 -> 11  cell-variant cornerRadius omit",
+        "11 ->  7  cell-variant effects omit",
+        " 7 ->  3  cell-variant empty-stroke dashPattern omit",
+        " 3 ->  2  cell-set compile-carry label",
+        " 2 ->  0  compile cell-template label default shared across kinds",
+        "mui pre-diff blocker cleared: compile omits an absent cell minWidth"
+      ],
+      "measuredExtractSideTailAfterTeachings": 0,
+      "namedFromSourceFamily": "Inter",
+      "carriedHostStyle": "Semi Bold",
+      "resolution": "requested",
+      "doNotRestartV24Attempt2": true
     }
   },
   "input": {
