@@ -3460,6 +3460,55 @@ export function validatePivotStatus(
     status.combobox?.liveV20?.attempt1?.mintStayed !== false ||
     status.combobox?.liveV20?.nextTeaching !==
       "host must omit extra payload on combobox/option-instance that compile never emits, not also emit the extract instance payload" ||
+    status.combobox?.liveV21?.prepared !== true ||
+    status.combobox?.liveV21?.liveFigma !== false ||
+    status.combobox?.liveV21?.humanSignoff !== "pending" ||
+    status.combobox?.liveV21?.pageId !== null ||
+    status.combobox?.liveV21?.forbiddenInputPageId !== "115:295378" ||
+    status.combobox?.liveV21?.namespace !== "ds.contracts.combobox.recipe.v1" ||
+    status.combobox?.liveV21?.evidenceRoot !==
+      "recipe/evidence/combobox-live-pivot-v21" ||
+    status.combobox?.liveV21?.teaching !==
+      "host must omit extra payload on combobox/option-instance that compile never emits, not also emit the extract instance payload" ||
+    status.combobox?.liveV21?.ownedFillTexts !== 144 ||
+    status.combobox?.liveV21?.writerUnchangedFromV1 !== false ||
+    status.combobox?.liveV21?.restoreUnchangedFromV2 !== true ||
+    status.combobox?.liveV21?.extractSetRootEnvelopeHashUnchangedFromV3 !==
+      true ||
+    status.combobox?.liveV21?.extractCopiedOwnershipKeyUnchangedFromV4 !==
+      true ||
+    status.combobox?.liveV21?.hostOmitsEmptyInstancePayloadUnchangedFromV5 !==
+      true ||
+    status.combobox?.liveV21?.hostProjectsLiveRootOwnershipKeyUnchangedFromV6 !==
+      true ||
+    status.combobox?.liveV21?.hostRecoversRecipeComponentRefUnchangedFromV7 !==
+      true ||
+    status.combobox?.liveV21?.writerAriaStampUnchangedFromV8 !== true ||
+    status.combobox?.liveV21?.hostRecoversComponentPropertyNameUnchangedFromV9 !==
+      true ||
+    status.combobox?.liveV21?.hostTriggerBindingCompileOrderUnchangedFromV10 !==
+      true ||
+    status.combobox?.liveV21?.hostLeadingSlotBindingCompileOrderUnchangedFromV11 !==
+      true ||
+    status.combobox?.liveV21?.hostLeadingSlotCompileCarryVisibleUnchangedFromV12 !==
+      true ||
+    status.combobox?.liveV21?.hostTrailingSlotBindingCompileOrderUnchangedFromV13 !==
+      true ||
+    status.combobox?.liveV21?.hostTrailingSlotCompileCarryVisibleUnchangedFromV14 !==
+      true ||
+    status.combobox?.liveV21?.hostTriggerEmptyEffectsUnchangedFromV15 !==
+      true ||
+    status.combobox?.liveV21?.hostOverlayBindingCompileOrderUnchangedFromV16 !==
+      true ||
+    status.combobox?.liveV21?.hostOverlayWidthAliasUnchangedFromV17 !== true ||
+    status.combobox?.liveV21?.hostListboxBindingCompileOrderUnchangedFromV18 !==
+      true ||
+    status.combobox?.liveV21?.hostOptionInstanceBindingExtrasUnchangedFromV19 !==
+      true ||
+    status.combobox?.liveV21?.hostOptionInstanceFillsOmitUnchangedFromV20 !==
+      true ||
+    status.combobox?.liveV21?.runIdentity !==
+      "70c24cbd-d27f2e85-combobox-v1" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||

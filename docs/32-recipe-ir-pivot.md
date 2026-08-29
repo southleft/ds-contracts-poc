@@ -192,11 +192,11 @@
 > (`combobox/option-instance/0`: host emits a nonempty extract instance
 > payload; compile omits `payload`). Cleanup accepted; that Combobox
 > page is gone. Input `115:295378` stayed. Do not restart v20 attempt 2
-> as-is. Next teaching: host must omit extra `payload` on
-> `combobox/option-instance` that compile never emits, not also emit
-> the extract instance payload. Keep v2–v20 teachings. Combobox is
-> **not live**. Do not invent a Combobox human grade. Product **v1
-> is incomplete**.
+> as-is. Combobox live v21 PREPARE teaches host must omit extra
+> `payload` on `combobox/option-instance` that compile never emits, not
+> also emit the extract instance payload. Keep v2–v20 teachings.
+> Combobox is **not live**. Do not invent a Combobox human grade.
+> Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
