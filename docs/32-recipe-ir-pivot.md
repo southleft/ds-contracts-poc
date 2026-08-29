@@ -141,7 +141,20 @@
 > compile field order so `layout.width.value` precedes
 > `fills.0.color` precedes `strokes.0.paint.color` precedes
 > `effects.0.color` precedes cornerRadius corners, not live
-> extract order. Keep v2–v15 teachings. Combobox is **not live**.
+> extract order. Keep v2–v15 teachings. Combobox live v16 PREPARE
+> `b2d4f276` and AUTHORIZE `f4f6d9dd` landed. Attempt 1 minted page
+> `154:328614`; restore held 144 owned FILL texts. Host overlay
+> binding compile-order teaching cleared; extract walk accepted.
+> Collapse then refused `unsupported structural edit at
+> $.children[0].children[8].children[3].bindings[0].field`
+> (`combobox/overlay`: host starts at `fills.0.color`; compile
+> starts at `layout.width.value`; host still ranks `width.value`
+> last). Overlay drop-shadow stayed. Cleanup accepted; that
+> Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v16 attempt 2 as-is. Next teaching: host must alias
+> `combobox/overlay` `width.value` to `layout.width.value` so that
+> field precedes `fills.0.color`, same class as variant layout
+> width alias. Combobox is **not live**.
 > Do not invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
