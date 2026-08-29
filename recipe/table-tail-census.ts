@@ -37,7 +37,11 @@ import {
   type TableIrDifference,
 } from "./recipes/table.js";
 import { hashRecipeEnvelope } from "./hash.js";
-import { sceneToNormalizedIr } from "./scene-readback-table-v1.js";
+import {
+  compareSceneToExpectedPlan,
+  compileExpectedScenePlan,
+  sceneToNormalizedIr,
+} from "./scene-readback-table-v1.js";
 import {
   validateTableLiveV24ExtractPayload,
   type TableLiveV24WriterOwnership,
@@ -48,6 +52,14 @@ export const TABLE_TAIL_CENSUS_VERSION = "table-tail-census-v1";
 
 /** The refusal v23 actually reported. The census must re-derive it. */
 export const TABLE_TAIL_CENSUS_KNOWN_V23_REFUSAL = "$.children[1].label";
+
+/**
+ * Newest captured live extract. A substrate is only valid for the WRITER that
+ * produced it: a writer change (node names, structure) invalidates it, and only
+ * a fresh live run restores it. Point `--transaction` elsewhere to compare.
+ */
+export const TABLE_TAIL_CENSUS_DEFAULT_SUBSTRATE =
+  "private/table-live-v25-transaction";
 
 export interface TableTailCensusEntry {
   path: string;
@@ -72,6 +84,28 @@ export interface TableTailCensusRoot {
    * the blocker instead. Reported, never silently swallowed.
    */
   preDiffRefusal: string | null;
+  /**
+   * The extract gate has TWO comparisons, and the fixed-point IR diff is only
+   * the first. `assertTableLiveVNRootProofs` then runs independent root
+   * accounting (`compareSceneToExpectedPlan`) over the expected scene plan.
+   * Table live v25 failed there with 2 mismatches per root AFTER the IR diff
+   * reached zero, so a census that measured only the IR diff was incomplete.
+   * Both are measured here now.
+   */
+  accounting: Array<{
+    kind: "table" | "row" | "cell";
+    missing: number;
+    extra: number;
+    mismatched: number;
+    entries: Array<{
+      class: "missing" | "extra" | "mismatched";
+      ownershipKey: string;
+      channel: string;
+      expected?: unknown;
+      observed?: unknown;
+    }>;
+  }>;
+  accountingProblems: number;
   differences: number;
   entries: TableTailCensusEntry[];
   classes: Array<{ role: string | null; property: string; count: number }>;
@@ -88,6 +122,7 @@ export interface TableTailCensus {
   predicts: "extract-side tail only";
   doesNotPredict: string;
   reproducesKnownV23Refusal: boolean;
+  totalAccountingProblems: number;
   /**
    * `firstDifference` walks depth-first with sorted keys and returns on the
    * first hit, and `allDifferences` walks identically while collecting. So the
@@ -179,7 +214,7 @@ const resolveRoles = (
 };
 
 export function buildTableTailCensus(
-  transactionDir = "private/table-live-v23-transaction",
+  transactionDir = TABLE_TAIL_CENSUS_DEFAULT_SUBSTRATE,
 ): TableTailCensus {
   const rawText = readFileSync(
     `${transactionDir}/004-extract.raw.json`,
@@ -225,6 +260,51 @@ export function buildTableTailCensus(
     observed.ir = { ...observed.ir, children: [tableIr, rowIr, cellIr] };
     observed.integrity.canonicalHash = hashRecipeEnvelope(observed);
 
+    const accounting: TableTailCensusRoot["accounting"] = [];
+    for (const [kind, compiledRole, scene] of [
+      ["table", "table/set", root.tableScene],
+      ["row", "table/row-set", root.rowScene],
+      ["cell", "table/cell-set", root.cellScene],
+    ] as const) {
+      const compiledSet = (source.envelope.ir as any).children.find(
+        (child: any) => child.role === compiledRole,
+      );
+      if (!compiledSet) continue;
+      const comparison: any = compareSceneToExpectedPlan(
+        compileExpectedScenePlan(compiledSet, { rootOwnershipKey: kind }),
+        normalizeTableLiveV24Scene(scene, extract.variableTable).scene,
+      );
+      const entries: TableTailCensusRoot["accounting"][number]["entries"] = [];
+      for (const group of ["missing", "extra", "mismatched"] as const)
+        for (const entry of comparison[group] ?? [])
+          entries.push({
+            class: group,
+            ownershipKey:
+              entry.expected?.nodeOwnershipKey ??
+              entry.observed?.nodeOwnershipKey ??
+              entry.nodeOwnershipKey ??
+              "(unknown)",
+            channel:
+              entry.expected?.channel ??
+              entry.observed?.channel ??
+              entry.channel ??
+              "(unknown)",
+            ...(entry.expected?.value === undefined
+              ? {}
+              : { expected: entry.expected.value }),
+            ...(entry.observed?.value === undefined
+              ? {}
+              : { observed: entry.observed.value }),
+          });
+      accounting.push({
+        kind,
+        missing: comparison.missing?.length ?? 0,
+        extra: comparison.extra?.length ?? 0,
+        mismatched: comparison.mismatched?.length ?? 0,
+        entries,
+      });
+    }
+
     const sink: TableIrDifference[] = [];
     let preDiffRefusal: string | null = null;
     try {
@@ -269,6 +349,11 @@ export function buildTableTailCensus(
       source: source.source,
       adapterIdentity: source.adapterIdentity,
       preDiffRefusal,
+      accounting,
+      accountingProblems: accounting.reduce(
+        (total, row) => total + row.missing + row.extra + row.mismatched,
+        0,
+      ),
       differences: entries.length,
       entries,
       classes: [...grouped.values()].sort(
@@ -333,6 +418,10 @@ export function buildTableTailCensus(
         property: first.property,
       };
     })(),
+    totalAccountingProblems: roots.reduce(
+      (total, root) => total + root.accountingProblems,
+      0,
+    ),
     totalDifferences: allPaths.length,
     classFamilies: [...families.values()]
       .map((family) => ({
@@ -357,7 +446,16 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   console.log(
     `  reproduces known v23 refusal ${TABLE_TAIL_CENSUS_KNOWN_V23_REFUSAL}: ${census.reproducesKnownV23Refusal}`,
   );
-  console.log(`  total differences: ${census.totalDifferences}`);
+  console.log(`  total IR differences: ${census.totalDifferences}`);
+  console.log(`  total accounting problems: ${census.totalAccountingProblems}`);
+  for (const root of census.roots)
+    for (const row of root.accounting)
+      for (const entry of row.entries)
+        console.log(
+          `    ${root.source}/${row.kind} ${entry.class} ${entry.ownershipKey}#${entry.channel}` +
+            `\n       expected ${JSON.stringify(entry.expected)}` +
+            `\n       observed ${JSON.stringify(entry.observed)}`,
+        );
   if (census.predictedNextLiveRefusal)
     console.log(
       `  predicted next live refusal: ${census.predictedNextLiveRefusal.path} (${census.predictedNextLiveRefusal.role} . ${census.predictedNextLiveRefusal.property})`,

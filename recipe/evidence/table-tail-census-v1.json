@@ -1,33 +1,186 @@
 {
   "artifactVersion": "table-tail-census-v1",
   "substrate": {
-    "transactionDir": "private/table-live-v24-transaction",
-    "extractRawBytes": 2703877,
-    "pageId": "172:46324",
-    "variableTableEntries": 11489
+    "transactionDir": "private/table-live-v25-transaction",
+    "extractRawBytes": 2703261,
+    "pageId": "173:46583",
+    "variableTableEntries": 11487
   },
   "predicts": "extract-side tail only",
   "doesNotPredict": "writer-side refusals (the class that stopped v1-v4). The substrate was captured under its own version's writer; teachings v9-v24 are read-side only.",
-  "reproducesKnownV23Refusal": false,
-  "predictedNextLiveRefusal": null,
-  "totalDifferences": 0,
-  "classFamilies": [],
+  "reproducesKnownV23Refusal": true,
+  "predictedNextLiveRefusal": {
+    "source": "first-party",
+    "path": "$.children[1].label",
+    "role": "table/row-set",
+    "property": "label"
+  },
+  "totalAccountingProblems": 4,
+  "totalDifferences": 4,
+  "classFamilies": [
+    {
+      "property": "label",
+      "reason": "value",
+      "count": 4,
+      "roles": ["table/cell-set", "table/row-set"]
+    }
+  ],
   "roots": [
     {
       "source": "first-party",
       "adapterIdentity": "first-party-table-reviewed-v1",
       "preDiffRefusal": null,
-      "differences": 0,
-      "entries": [],
-      "classes": []
+      "accounting": [
+        {
+          "kind": "table",
+          "missing": 0,
+          "extra": 0,
+          "mismatched": 0,
+          "entries": []
+        },
+        {
+          "kind": "row",
+          "missing": 0,
+          "extra": 0,
+          "mismatched": 1,
+          "entries": [
+            {
+              "class": "mismatched",
+              "ownershipKey": "row",
+              "channel": "name",
+              "expected": "table/row-set :: Table row",
+              "observed": "table/row-set :: Table"
+            }
+          ]
+        },
+        {
+          "kind": "cell",
+          "missing": 0,
+          "extra": 0,
+          "mismatched": 1,
+          "entries": [
+            {
+              "class": "mismatched",
+              "ownershipKey": "cell",
+              "channel": "name",
+              "expected": "table/cell-set :: Table cell",
+              "observed": "table/cell-set :: Table"
+            }
+          ]
+        }
+      ],
+      "accountingProblems": 2,
+      "differences": 2,
+      "entries": [
+        {
+          "path": "$.children[1].label",
+          "reason": "value",
+          "role": "table/row-set",
+          "parentRole": "table/library",
+          "property": "label",
+          "compiled": "Table row",
+          "observed": "Table"
+        },
+        {
+          "path": "$.children[2].label",
+          "reason": "value",
+          "role": "table/cell-set",
+          "parentRole": "table/library",
+          "property": "label",
+          "compiled": "Table cell",
+          "observed": "Table"
+        }
+      ],
+      "classes": [
+        {
+          "role": "table/cell-set",
+          "property": "label",
+          "count": 1
+        },
+        {
+          "role": "table/row-set",
+          "property": "label",
+          "count": 1
+        }
+      ]
     },
     {
       "source": "mui",
       "adapterIdentity": "material-table-reviewed-v1",
       "preDiffRefusal": null,
-      "differences": 0,
-      "entries": [],
-      "classes": []
+      "accounting": [
+        {
+          "kind": "table",
+          "missing": 0,
+          "extra": 0,
+          "mismatched": 0,
+          "entries": []
+        },
+        {
+          "kind": "row",
+          "missing": 0,
+          "extra": 0,
+          "mismatched": 1,
+          "entries": [
+            {
+              "class": "mismatched",
+              "ownershipKey": "row",
+              "channel": "name",
+              "expected": "table/row-set :: Table row",
+              "observed": "table/row-set :: Table"
+            }
+          ]
+        },
+        {
+          "kind": "cell",
+          "missing": 0,
+          "extra": 0,
+          "mismatched": 1,
+          "entries": [
+            {
+              "class": "mismatched",
+              "ownershipKey": "cell",
+              "channel": "name",
+              "expected": "table/cell-set :: Table cell",
+              "observed": "table/cell-set :: Table"
+            }
+          ]
+        }
+      ],
+      "accountingProblems": 2,
+      "differences": 2,
+      "entries": [
+        {
+          "path": "$.children[1].label",
+          "reason": "value",
+          "role": "table/row-set",
+          "parentRole": "table/library",
+          "property": "label",
+          "compiled": "Table row",
+          "observed": "Table"
+        },
+        {
+          "path": "$.children[2].label",
+          "reason": "value",
+          "role": "table/cell-set",
+          "parentRole": "table/library",
+          "property": "label",
+          "compiled": "Table cell",
+          "observed": "Table"
+        }
+      ],
+      "classes": [
+        {
+          "role": "table/cell-set",
+          "property": "label",
+          "count": 1
+        },
+        {
+          "role": "table/row-set",
+          "property": "label",
+          "count": 1
+        }
+      ]
     }
   ]
 }

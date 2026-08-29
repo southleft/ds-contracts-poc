@@ -1,0 +1,154 @@
+{
+  "artifactVersion": "table-live-v25-attempt-1-v1",
+  "status": "failed closed at extract independent root accounting; the fixed-point IR diff PASSED for the first time in 25 versions; writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "db61a72d1fa139f07c6460b16e4d2265a9718f60",
+  "codeCommit": "db61a72d1fa139f07c6460b16e4d2265a9718f60",
+  "antecedentCommit": "e719afe99904f53d2e49ccccf83d5192977b88ff",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-9cd3c67b-table-v24",
+    "runIdentitySuffixWasStale": true,
+    "runIdentitySuffixNote": "TABLE_FIGMA_RUN_SUFFIX in the shared writer still read 'table-v24' during this attempt; the hash prefix differs from every forbidden identity (the mui envelope changed when the invented minWidth token was removed), so no identity was reused. The suffix is corrected in the v26 PREPARE.",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981"
+  },
+  "transaction": {
+    "transactionId": "c31e8af3-60c2-4c25-8923-612f5ce71785",
+    "attempt": 1,
+    "authorizationSha256": "31c62b72da9b46d71a0fc7f0ec10f7aa462bd3d1987d4c058e58b2913b117579",
+    "programSha256": "590a4f51851f220e3ddda1a1f2f5110007f2becab909088a1536d3f48eac61fe",
+    "bindingSha256": "e0eea3c0a1fcbed9c39c260ec115c703bc06318f9e20073713bb3de755d7a5cc",
+    "requestSha256": "c04704ffd8fae8797f1a023ad61d8d02a80a5522ad66f12ad8283bd1224cfafe"
+  },
+  "writer": {
+    "accepted": true,
+    "firstSignedCallAccepted": true,
+    "pageId": "173:46583",
+    "pageName": "Recipe Pivot / Table / cc811f47-9cd3c67b-table-v24",
+    "sectionIds": ["173:46584", "173:46713"],
+    "collectionIds": [
+      "VariableCollectionId:173:46585",
+      "VariableCollectionId:173:46714"
+    ],
+    "firstParty": {
+      "sectionId": "173:46584",
+      "cellSetId": "173:46612",
+      "rowSetId": "173:46641",
+      "tableSetId": "173:46712",
+      "variableCount": 18,
+      "envelopeHash": "495d58702bad337a72ea4b7548eb9db4559a3d8a60a7c64d34e7322761ef9876"
+    },
+    "mui": {
+      "sectionId": "173:46713",
+      "cellSetId": "173:46739",
+      "rowSetId": "173:46768",
+      "tableSetId": "173:46839",
+      "variableCount": 16,
+      "envelopeHash": "032b23cfeaf5f559a7b98d0a768ae6dbee181bccaedf3900f5385eadba798370",
+      "variableCountDroppedFrom18": true,
+      "variableCountDropNote": "the two invented mui.table.densities-*-minWidth variables are gone; MUI Table cells declare no min-width"
+    },
+    "sourceRoots": 2,
+    "createdNodeIds": 83,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "pageId": "173:46583",
+    "restoredCount": 8,
+    "fixedBefore": 0,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": false,
+    "fixedPointIrDiffPassed": true,
+    "fixedPointIrDiffPassedFirstTimeInLineage": true,
+    "collapseRefused": false,
+    "refusedClass": "independent root accounting",
+    "refused": "Table live v25 independent root accounting failed: first-party:missing=0,extra=0,mismatch=2,duplicate=0,unobserved=0,silent=2;mui:missing=0,extra=0,mismatch=2,duplicate=0,unobserved=0,silent=2",
+    "refusedGate": "assertTableLiveV25RootProofs / compareSceneToExpectedPlan",
+    "mismatches": [
+      {
+        "root": "first-party",
+        "kind": "row",
+        "ownershipKey": "row",
+        "channel": "name",
+        "expected": "table/row-set :: Table row",
+        "observed": "table/row-set :: Table"
+      },
+      {
+        "root": "first-party",
+        "kind": "cell",
+        "ownershipKey": "cell",
+        "channel": "name",
+        "expected": "table/cell-set :: Table cell",
+        "observed": "table/cell-set :: Table"
+      },
+      {
+        "root": "mui",
+        "kind": "row",
+        "ownershipKey": "row",
+        "channel": "name",
+        "expected": "table/row-set :: Table row",
+        "observed": "table/row-set :: Table"
+      },
+      {
+        "root": "mui",
+        "kind": "cell",
+        "ownershipKey": "cell",
+        "channel": "name",
+        "expected": "table/cell-set :: Table cell",
+        "observed": "table/cell-set :: Table"
+      }
+    ],
+    "rootCause": "writer-side, not host-normalize. table-figma-writer.ts named every component set `<role> :: <source display name>`, so the live node name carried `Table` where compile carries `Table row` / `Table cell`."
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "173:46583",
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "currentPageAfterCleanup": "0:1",
+    "independentlyVerifiedByReadOnlyProbe": true
+  },
+  "censusVerdict": {
+    "predictedIrDiffZero": true,
+    "actualIrDiffZero": true,
+    "irDiffPredictionHeld": true,
+    "predictedAccountingProblems": "NOT MEASURED — the census only compared the fixed-point IR diff",
+    "actualAccountingProblems": 4,
+    "instrumentWasIncomplete": true,
+    "instrumentGapClosed": true,
+    "instrumentGapNote": "The extract gate runs TWO comparisons and the census only measured the first. `recipe/table-tail-census.ts` now also runs compareSceneToExpectedPlan per root and kind, and reproduces this exact 4-mismatch failure offline from the persisted v25 extract. The census's own recorded limit -- that it predicts the extract-side tail only and that writer-side defects surface only live -- is what this attempt demonstrated."
+  },
+  "fixLandedForV26": {
+    "writerCarriesCompileLabelInSetName": true,
+    "marker": "TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL",
+    "hostLabelOverridesRemoved": [
+      "row-set compile-carry label (landed v24)",
+      "cell-set compile-carry label (landed in the v25 teaching set)"
+    ],
+    "rationale": "Both overrides patched the derived label while leaving the live node name wrong. Naming the set from the compile label fixes the cause and lets the generic after-`::` rule derive the label with no special case. Two host special cases removed in favour of one writer fix.",
+    "simulatedPrediction": "Rewriting the captured v25 set names the way the new writer would have written them yields 0 IR differences and 0 accounting problems on both roots. A simulated substrate is a prediction, not evidence; the v26 live run is the test."
+  },
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

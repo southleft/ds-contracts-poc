@@ -13,7 +13,7 @@ import {
 
 export const TABLE_FIGMA_NAMESPACE = "ds.contracts.table.recipe.v1";
 export const TABLE_FIGMA_WRITER_VERSION = 1;
-export const TABLE_FIGMA_RUN_SUFFIX = "table-v24";
+export const TABLE_FIGMA_RUN_SUFFIX = "table-v26";
 export const FORBIDDEN_TABLE_V1_RUN_IDENTITY = "83a27edf-82d19508-table-v1";
 export const FORBIDDEN_TABLE_V2_RUN_IDENTITY = "cc811f47-82d19508-table-v2";
 export const FORBIDDEN_TABLE_V3_RUN_IDENTITY = "cc811f47-82d19508-table-v3";
@@ -711,7 +711,8 @@ for(const source of PLAN.sources){
       components.push(component);createdNodeIds.push(component.id);
     }
     const set=figma.combineAsVariants(components,section);
-    set.name=setIr.role+" :: "+source.sourceName;
+    void "TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL";
+    set.name=setIr.role+" :: "+(setIr.label||source.sourceName);
     set.description="Experimental table@1 primitive-IR mint. Recipe "+source.recipeHash+"; source adapter "+source.adapterIdentity+".";
     applySetLayout(set,setIr);
     setSharedData(set,"runIdentity",PLAN.runIdentity);setSharedData(set,"adapterIdentity",source.adapterIdentity);setSharedData(set,"recipeHash",source.recipeHash);setSharedData(set,"ownershipKey",kind);

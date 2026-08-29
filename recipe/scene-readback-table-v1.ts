@@ -643,15 +643,19 @@ const sceneLabel = (scene: SceneNodeSnapshot): string => {
 };
 
 const compileCarriedLabel = (scene: SceneNodeSnapshot): string => {
+  // The row-set and cell-set label overrides that landed at v24 are GONE, and
+  // deliberately so. They treated the symptom: the writer named every set
+  // `<role> :: <source display name>`, so the after-`::` rule derived `Table`
+  // where compile carried `Table row` / `Table cell`, and the override patched
+  // the label back. Table live v25 showed that was not enough -- the IR diff
+  // went to zero but independent root accounting still refused with 2 name
+  // mismatches per root, because the live NODE NAME was still wrong. The writer
+  // now carries the compile label into the set name
+  // (`table-figma-writer.ts`, TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL), so
+  // the generic after-`::` rule derives the right label with no special case.
+  // Two host special cases removed in favour of one writer fix.
   void TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER;
-  if (sceneRole(scene) === "table/row-set")
-    return TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL;
-  // Same class as the row-set label, measured at table live v24: the live
-  // display name is `table/cell-set :: Table`, so the after-`::` rule derives
-  // `Table` where compile carries `Table cell`. Does not change `table/set`.
   void TABLE_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL_MARKER;
-  if (sceneRole(scene) === "table/cell-set")
-    return TABLE_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL;
   // Font-provenance class. `sceneLabel` takes the segment AFTER the first
   // " :: ", which is right when that segment is a display name. On the cell
   // label TEXT the live name is `table/cell/label :: font-provenance=%7B...`,

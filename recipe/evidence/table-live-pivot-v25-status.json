@@ -1,0 +1,44 @@
+{
+  "artifactVersion": "table-live-v25-status-v1",
+  "status": "attempt 1 failed closed at extract independent root accounting; the fixed-point IR diff passed for the first time in the lineage; writer accepted; restore 8 held; signed cleanup executed on failure; Input 115:295378, Combobox 163:35981, and Button 85:6781 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "e719afe99904f53d2e49ccccf83d5192977b88ff",
+    "indexPath": "recipe/evidence/table-live-pivot-v25/antecedent-index.json"
+  },
+  "authorization": {
+    "commit": "db61a72d1fa139f07c6460b16e4d2265a9718f60",
+    "path": "recipe/evidence/table-live-pivot-v25/capture-authorization.json",
+    "sha256": "31c62b72da9b46d71a0fc7f0ec10f7aa462bd3d1987d4c058e58b2913b117579"
+  },
+  "attempt1": {
+    "pageId": "173:46583",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "restoredCount": 8,
+    "extractAccepted": false,
+    "fixedPointIrDiffPassed": true,
+    "extractRefused": "independent root accounting",
+    "accountingMismatches": 4,
+    "accountingClass": "component set node name carried the source display name, not the compile label",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true
+  },
+  "census": {
+    "irDiffPredictionHeld": true,
+    "accountingNotMeasuredAtThatTime": true,
+    "instrumentGapClosed": true,
+    "artifact": "recipe/evidence/table-tail-census-v1.json"
+  },
+  "inputPageUntouched": { "pageId": "115:295378", "presentAfterCleanup": true },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": { "pageId": "85:6781", "presentAfterCleanup": true },
+  "nextTeaching": "writer names each component set <role> :: <compile label>; the two host label overrides are removed because the generic after-:: rule then derives the right label",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

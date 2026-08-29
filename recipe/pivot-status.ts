@@ -5438,7 +5438,7 @@ export function validatePivotStatus(
   if (
     status.table?.overallSuccess !== false ||
     status.table?.status !==
-      "live-v24-attempt-1-failed-closed at extract unsupported structural edit ($.children[2].children[0].children[0].label); row-set compile-carry label teaching cleared; remaining extract-side tail measured at 23 differences in 6 classes; product v1 incomplete" ||
+      "live-v25-attempt-1-failed-closed at extract independent root accounting (4 name mismatches, 2 per root); the fixed-point IR diff passed for the first time in the lineage; writer set-name fix prepared as v26; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
     status.table?.liveFigma !== false ||
     status.table?.humanGradeInvented !== false ||

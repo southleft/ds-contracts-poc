@@ -1994,7 +1994,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v24-attempt-1-failed-closed at extract unsupported structural edit ($.children[2].children[0].children[0].label); row-set compile-carry label teaching cleared; remaining extract-side tail measured at 23 differences in 6 classes; product v1 incomplete",
+    "status": "live-v25-attempt-1-failed-closed at extract independent root accounting (4 name mismatches, 2 per root); the fixed-point IR diff passed for the first time in the lineage; writer set-name fix prepared as v26; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2589,8 +2589,8 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v25 PREPARE landed; not authorized; no attempt run",
-      "measured extract-side tail is 0 on both roots; writer-side refusals are not predicted by the census",
+      "Table live v25 attempt 1 failed closed at extract independent root accounting; do not restart v25 attempt 2 as-is",
+      "v26 PREPARE landed with the writer set-name fix; not authorized; no attempt run",
       "no live mint",
       "no human grade",
       "Calendar not started",
@@ -3516,7 +3516,44 @@
       "namedFromSourceFamily": "Inter",
       "carriedHostStyle": "Semi Bold",
       "resolution": "requested",
-      "doNotRestartV24Attempt2": true
+      "doNotRestartV24Attempt2": true,
+      "attempt1": {
+        "status": "failed-closed",
+        "writerAccepted": true,
+        "restoreAccepted": true,
+        "restoredCount": 8,
+        "extractAccepted": false,
+        "fixedPointIrDiffPassed": true,
+        "refusedClass": "independent root accounting",
+        "accountingMismatches": 4,
+        "refused": "component set node name carried the source display name, not the compile label",
+        "probeIssued": false,
+        "capturesIssued": 0,
+        "mintStayed": false,
+        "cleanedPageId": "173:46583",
+        "cleanupExecuted": true,
+        "signedCleanupIssued": true,
+        "signedCleanupAccepted": true,
+        "censusIrDiffPredictionHeld": true,
+        "censusDidNotYetMeasureAccounting": true
+      },
+      "nextTeaching": "writer names each component set <role> :: <compile label>; the two host label overrides are removed because the generic after-:: rule then derives the right label"
+    },
+    "liveV26": {
+      "prepared": true,
+      "liveFigma": false,
+      "humanSignoff": "pending",
+      "pageId": null,
+      "forbiddenInputPageId": "115:295378",
+      "forbiddenComboboxPageId": "163:35981",
+      "namespace": "ds.contracts.table.recipe.v1",
+      "evidenceRoot": "recipe/evidence/table-live-pivot-v26",
+      "teaching": "writer carries the compile label into each component set name (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL); the row-set and cell-set host label overrides are removed",
+      "removesHostSpecialCases": 2,
+      "simulatedPredictionIrDifferences": 0,
+      "simulatedPredictionAccountingProblems": 0,
+      "simulationIsNotEvidence": true,
+      "doNotRestartV25Attempt2": true
     }
   },
   "input": {

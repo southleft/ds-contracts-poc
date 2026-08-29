@@ -863,23 +863,13 @@ test("host omits strokes on table/row variants that compile never emits and keep
   assert.equal("strokes" in variant, true);
 });
 
-test("host emits compile-carried label Table row on table/row-set instead of the live display name after ::", () => {
-  assert.equal(
-    TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER,
-    "TABLE-HOST-ROW-SET-COMPILE-CARRY-LABEL",
-  );
-  assert.equal(
-    TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL,
-    "Table row",
-    "must carry compile's row-set label, not invent a name or parse the live display string",
-  );
+test("set names carry the compile label, so the generic after-:: rule derives it", () => {
   const compile = compileTableRecipe(
     adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
   );
   const compileRowSet = byRole(compile.ir, "table/row-set")[0];
   const compileCellSet = byRole(compile.ir, "table/cell-set")[0];
   const compileTableSet = byRole(compile.ir, "table/set")[0];
-  assert.equal(compileRowSet !== undefined, true);
   assert.equal(
     (compileRowSet as { label?: string } | undefined)?.label,
     "Table row",
@@ -892,31 +882,40 @@ test("host emits compile-carried label Table row on table/row-set instead of the
     (compileTableSet as { label?: string } | undefined)?.label,
     "Table",
   );
-  const live = sceneToNormalizedIr({
+
+  // The writer now names each set `<role> :: <compile label>`
+  // (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL), so host-normalize needs no
+  // per-role label override: the generic after-`::` rule already agrees with
+  // compile. Table live v25 proved the override alone was not enough -- the IR
+  // diff went to zero while independent root accounting still refused on the
+  // live node NAME, twice per root.
+  const rowLive = sceneToNormalizedIr({
     ...setScene("table/row-set"),
-    name: "table/row-set :: Table",
+    name: "table/row-set :: Table row",
   });
-  assert.equal(live.kind, "component-set");
-  assert.equal(live.label, "Table row");
+  assert.equal(rowLive.label, "Table row");
   const cellLive = sceneToNormalizedIr({
     ...setScene("table/cell-set"),
-    name: "table/cell-set :: Table",
+    name: "table/cell-set :: Table cell",
   });
-  assert.equal(cellLive.kind, "component-set");
-  assert.equal(
-    cellLive.label,
-    "Table cell",
-    "cell-set carries the compile label, measured as the same class as row-set",
-  );
+  assert.equal(cellLive.label, "Table cell");
   const tableLive = sceneToNormalizedIr({
     ...setScene("table/set"),
     name: "table/set :: Table",
   });
-  assert.equal(tableLive.kind, "component-set");
+  assert.equal(tableLive.label, "Table");
+
+  // No override remains: a set named with the OLD writer's source display name
+  // now derives that name verbatim rather than being silently patched. That is
+  // what makes the writer defect visible instead of hidden.
+  const staleRowLive = sceneToNormalizedIr({
+    ...setScene("table/row-set"),
+    name: "table/row-set :: Table",
+  });
   assert.equal(
-    tableLive.label,
+    staleRowLive.label,
     "Table",
-    "table/set is NOT part of the compile-carry label teaching; compile and the live display name already agree there, so nothing is carried",
+    "an old-writer name must NOT be silently patched to the compile label",
   );
 });
 

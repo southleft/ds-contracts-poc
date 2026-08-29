@@ -8,7 +8,7 @@ import {
   buildTableTailCensus,
 } from "./table-tail-census.js";
 
-const SUBSTRATE = "private/table-live-v23-transaction/004-extract.raw.json";
+const SUBSTRATE = "private/table-live-v25-transaction/004-extract.raw.json";
 
 test("allDifferences agrees with firstDifference on the leading path", () => {
   // firstDifference is not exported; collapseTableRecipe surfaces it in the
@@ -54,7 +54,7 @@ test("a difference sink suppresses the refusal; two-arg callers still refuse", (
 });
 
 test(
-  "census enumerates the remaining tail from the persisted v23 extract",
+  "census reproduces the v25 live failure the writer fix targets",
   {
     skip: existsSync(SUBSTRATE)
       ? false
@@ -67,54 +67,33 @@ test(
     assert.equal(census.predicts, "extract-side tail only");
     assert.equal(census.roots.length, 2);
 
-    const firstParty = census.roots.find(
-      (root) => root.source === "first-party",
-    );
-    assert.ok(firstParty, "census must cover the first-party root");
+    for (const root of census.roots) {
+      assert.equal(
+        root.preDiffRefusal,
+        null,
+        `${root.source} must reach the IR diff`,
+      );
+    }
 
-    // The v23 live attempt refused on first-party, so its tail must be readable.
-    assert.equal(
-      firstParty.preDiffRefusal,
-      null,
-      "first-party must reach the IR diff, as it did live at v23",
-    );
-    // The measured extract-side tail is CLOSED on both roots as of the
-    // post-v24 teachings. If this ever goes non-zero again, a teaching
-    // regressed or the live scene changed -- either way, report it.
-    assert.equal(
-      firstParty.differences,
-      0,
-      "first-party extract-side tail must stay closed",
-    );
-    const mui = census.roots.find((root) => root.source === "mui");
-    assert.ok(mui, "census must cover the mui root");
-    assert.equal(
-      mui.preDiffRefusal,
-      null,
-      "mui must reach the IR diff now that minWidth is optional",
-    );
-    assert.equal(mui.differences, 0, "mui extract-side tail must stay closed");
-    assert.equal(census.totalDifferences, 0);
-
-    // HEAD carries the v24 teaching (`hostEmitsRowSetCompileCarryLabel`), which
-    // exists precisely to close the v23 refusal. So the census must NOT still
-    // report it. Reverting that one line reintroduces it -- verified 2026-08-29.
-    assert.equal(
-      census.reproducesKnownV23Refusal,
-      false,
-      `v24 teaching should have closed ${TABLE_TAIL_CENSUS_KNOWN_V23_REFUSAL}`,
-    );
-    assert.ok(
-      !firstParty.classes.some(
-        (entry) => entry.role === "table/row-set" && entry.property === "label",
-      ),
-      "row-set label must be closed by the v24 teaching",
-    );
-
-    // Every reported entry must name a role and a property, or the rollup lies.
-    for (const entry of firstParty.entries) {
-      assert.ok(entry.path.startsWith("$"), "path must be a JSON pointer");
-      assert.ok(entry.property.length > 0, "entry must name a property");
+    // The v25 substrate was minted by the OLD writer, which named every set
+    // `<role> :: <source display name>`. The writer now carries the compile
+    // label into the set name, and the two host label overrides that patched
+    // the symptom were removed. So against THIS substrate the census must show
+    // exactly the four name mismatches the writer fix targets -- two per root,
+    // on table/row-set and table/cell-set. A live run under the new writer is
+    // what turns these to zero; simulating the rename offline predicts zero.
+    assert.equal(census.totalAccountingProblems, 4);
+    const names = census.roots
+      .flatMap((root) => root.accounting.flatMap((row) => row.entries))
+      .map((entry) => `${entry.ownershipKey}#${entry.channel}`)
+      .sort();
+    assert.deepEqual(names, ["cell#name", "cell#name", "row#name", "row#name"]);
+    for (const entry of census.roots.flatMap((root) =>
+      root.accounting.flatMap((row) => row.entries),
+    )) {
+      assert.equal(entry.class, "mismatched");
+      assert.match(String(entry.expected), /:: Table (row|cell)$/);
+      assert.equal(String(entry.observed).endsWith(":: Table"), true);
     }
 
     assert.equal(
