@@ -24,13 +24,15 @@ import {
  * cell instances carry none, omit `clipsContent` on `table/header` and
  * `table/body` because compile header/body frames omit `clipsContent`,
  * omit `cornerRadius` on `table/header` and `table/body` because
- * compile header/body frames omit `cornerRadius`, and omit `effects`
+ * compile header/body frames omit `cornerRadius`, omit `effects`
  * on `table/header` and `table/body` because compile header/body frames
- * omit `effects`. Reuses the extras-drop path and the Combobox listbox
- * / set / option clipsContent omit path plus `HEADER_BODY_ROLES`. Does
- * not omit `table/variant` clipsContent, `table/variant` cornerRadius,
- * or `table/variant` empty effects. Does not copy Combobox
- * overlay/option/listbox roles.
+ * omit `effects`, and omit `strokes` on `table/header` and
+ * `table/body` because compile header/body frames omit `strokes`.
+ * Reuses the extras-drop path and the Combobox listbox / set /
+ * option clipsContent omit path plus `HEADER_BODY_ROLES`. Does not
+ * omit `table/variant` clipsContent, `table/variant` cornerRadius,
+ * `table/variant` empty effects, or `table/variant` strokes. Does
+ * not copy Combobox overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -67,6 +69,8 @@ export const TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-EFFECTS-OMITTED";
+export const TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER =
+  "TABLE-HOST-HEADER-BODY-STROKES-OMITTED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -967,6 +971,19 @@ const omitHeaderBodyEffects = <T extends { effects?: unknown }>(
   return rest as T;
 };
 
+const omitHeaderBodyStrokes = <T extends { strokes?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (!role || !HEADER_BODY_ROLES.has(role) || scene.type !== "FRAME")
+    return frame;
+  if (frame.strokes === undefined) return frame;
+  const { strokes: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitTableTextExtras = <
   T extends {
     letterSpacing?: unknown;
@@ -1030,24 +1047,27 @@ export function sceneToNormalizedIr(
     scene.type === "COMPONENT" ||
     scene.type === "COMPONENT_SET"
   ) {
-    const frame = omitHeaderBodyEffects(
+    const frame = omitHeaderBodyStrokes(
       scene,
-      omitHeaderBodyCornerRadius(
+      omitHeaderBodyEffects(
         scene,
-        omitHeaderBodyClipsContent(
+        omitHeaderBodyCornerRadius(
           scene,
-          omitSetClipsContent(scene, {
-          ...common,
-          layout: sceneLayout(scene),
-          fills,
-          ...(strokes === undefined ? {} : { strokes }),
-          ...(effects === undefined ? {} : { effects }),
-          ...(scene.cornerRadius === undefined
-            ? {}
-            : { cornerRadius: scene.cornerRadius }),
-          clipsContent: scene.clipsContent ?? false,
-          children,
-        }),
+          omitHeaderBodyClipsContent(
+            scene,
+            omitSetClipsContent(scene, {
+              ...common,
+              layout: sceneLayout(scene),
+              fills,
+              ...(strokes === undefined ? {} : { strokes }),
+              ...(effects === undefined ? {} : { effects }),
+              ...(scene.cornerRadius === undefined
+                ? {}
+                : { cornerRadius: scene.cornerRadius }),
+              clipsContent: scene.clipsContent ?? false,
+              children,
+            }),
+          ),
         ),
       ),
     );

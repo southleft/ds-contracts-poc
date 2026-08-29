@@ -32,6 +32,7 @@ import {
   FORBIDDEN_TABLE_V8_RUN_IDENTITY,
   FORBIDDEN_TABLE_V9_RUN_IDENTITY,
   FORBIDDEN_TABLE_V10_RUN_IDENTITY,
+  FORBIDDEN_TABLE_V11_RUN_IDENTITY,
   TABLE_FIGMA_INSTANCES_PER_SOURCE,
   TABLE_FIGMA_NAMESPACE,
   TABLE_FIGMA_RUN_SUFFIX,
@@ -94,6 +95,7 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
   assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V8_RUN_IDENTITY);
   assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V9_RUN_IDENTITY);
   assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V10_RUN_IDENTITY);
+  assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V11_RUN_IDENTITY);
   assert.match(writer.code, /TABLE-V1-IDENTITY-REUSE/);
   assert.match(writer.code, /TABLE-V2-IDENTITY-REUSE/);
   assert.match(writer.code, /TABLE-V3-IDENTITY-REUSE/);
@@ -104,6 +106,7 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
   assert.match(writer.code, /TABLE-V8-IDENTITY-REUSE/);
   assert.match(writer.code, /TABLE-V9-IDENTITY-REUSE/);
   assert.match(writer.code, /TABLE-V10-IDENTITY-REUSE/);
+  assert.match(writer.code, /TABLE-V11-IDENTITY-REUSE/);
   assert.match(writer.code, /TABLE-WRITER-MIN-WIDTH-ZERO-UNSET/);
   assert.match(
     writer.code,

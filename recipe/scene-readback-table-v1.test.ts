@@ -24,6 +24,7 @@ import {
   TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER,
+  TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
@@ -48,6 +49,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER));
   assert.match(host, /table@1\/cell/);
   assert.match(host, /table@1\/row/);
   assert.match(host, /rootOwnershipKey/);
@@ -349,6 +351,58 @@ test("host omits effects on table/header and table/body that compile never emits
   assert.equal(variant.kind, "component");
   assert.equal("effects" in variant, true);
   assert.deepEqual((variant as { effects?: unknown[] }).effects, []);
+});
+
+test("host omits strokes on table/header and table/body that compile never emits", () => {
+  const header = sceneToNormalizedIr({
+    ...headerBodyFrameScene("table/header", true),
+    strokes: [],
+  });
+  const body = sceneToNormalizedIr({
+    ...headerBodyFrameScene("table/body", true),
+    strokes: [],
+  });
+  assert.equal(header.kind, "frame");
+  assert.equal(body.kind, "frame");
+  assert.equal("strokes" in header, false);
+  assert.equal("strokes" in body, false);
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const compileHeader = byRole(compile.ir, "table/header")[0];
+  const compileBody = byRole(compile.ir, "table/body")[0];
+  const compileVariant = byRole(compile.ir, "table/variant/comfortable")[0];
+  assert.equal(compileHeader !== undefined, true);
+  assert.equal(compileBody !== undefined, true);
+  assert.equal(compileVariant !== undefined, true);
+  assert.equal("strokes" in (compileHeader ?? {}), false);
+  assert.equal("strokes" in (compileBody ?? {}), false);
+  assert.equal("strokes" in (compileVariant ?? {}), true);
+  const compileStrokes = (
+    compileVariant as {
+      strokes?: Array<{
+        weight: number;
+        align: "inside" | "outside" | "center";
+        paint: { kind: string; color?: string };
+      }>;
+    }
+  ).strokes;
+  assert.equal(Array.isArray(compileStrokes), true);
+  assert.equal((compileStrokes?.length ?? 0) > 0, true);
+  const compileStroke = compileStrokes?.[0];
+  assert.equal(compileStroke?.paint.kind, "solid");
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    strokes: [{ type: "SOLID", color: compileStroke?.paint.color }],
+    strokeWeight: compileStroke?.weight,
+    strokeAlign: compileStroke?.align.toUpperCase() as
+      | "INSIDE"
+      | "OUTSIDE"
+      | "CENTER",
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("strokes" in variant, true);
+  assert.deepEqual((variant as { strokes?: unknown[] }).strokes, compileStrokes);
 });
 
 test("table probe is table-shaped: header/body/label, HUG, no overlay AABB", () => {
