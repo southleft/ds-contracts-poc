@@ -299,9 +299,25 @@
 > as-is. Next teaching: host must omit `clipsContent` on
 > `combobox/option` that compile never emits, not also emit the
 > live option clip flag. Keep v2–v29 teachings. Combobox live
-> v30 PREPARE teaches host must omit `clipsContent` on
-> `combobox/option` that compile never emits, not also emit the
-> live option clip flag. Keep v2–v29 teachings. Combobox is
+> v30 PREPARE `f0b4168a` and AUTHORIZE `4f503539` landed.
+> Attempt 1 minted page `163:14066`; restore held 144 owned
+> FILL texts. Host option clipsContent omit teaching cleared;
+> extract walk accepted. Host now omits `clipsContent` on all
+> 16 option components (hashed v29 still emits
+> `clipsContent: false`). Overlay `clipsContent: true` and
+> listbox/set/option-set omits stayed. Collapse then refused
+> `unsupported structural edit at
+> $.children[1].children[2].children[1].bindings[0].field`
+> (`combobox/option/selected-indicator`: host starts at
+> `fills.0.color` then `height.value` then `width.value`;
+> compile starts at `width.value` then `height.value` then
+> `fills.0.color`). Cleanup accepted; that Combobox page is
+> gone. Input `115:295378` stayed. Do not restart v30 attempt 2
+> as-is. Next teaching: host must order
+> combobox/option/selected-indicator bindings to compile field
+> order so `width.value` precedes `height.value` precedes
+> `fills.0.color`, not live extract order starting at
+> `fills.0.color`. Keep v2–v30 teachings. Combobox is
 > **not live**. Do not invent a Combobox human grade. Product
 > **v1 is incomplete**.
 >
