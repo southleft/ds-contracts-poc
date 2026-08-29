@@ -68,9 +68,14 @@
 > extras-drop teaching cleared; restore 8 held. Signed cleanup
 > removed page `165:41691`. Mint did not stay. Input `115:295378`
 > and Combobox `163:35981` stayed. Do not restart v8 attempt 2
-> as-is. Table live v9 PREPARE teaches host to omit
-> `clipsContent` on `table/header` and `table/body` because compile
-> header/body frames omit `clipsContent`. Product **v1 is
+> as-is. Table live v9 PREPARE `296c8acee` and AUTHORIZE
+> `240e4bf3a` landed. Attempt 1 failed closed at extract
+> `unsupported structural edit` (`table/header` `cornerRadius`;
+> compile header/body frames omit the key; host emits extract
+> `cornerRadius` zeros). Header/body `clipsContent` omit teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:41950`.
+> Mint did not stay. Input `115:295378` and Combobox `163:35981`
+> stayed. Do not restart v9 attempt 2 as-is. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
