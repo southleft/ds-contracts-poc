@@ -4287,6 +4287,16 @@ export function validatePivotStatus(
       ?.hostSelectedIndicatorBindingCompileOrderUnchangedFromV31 !== true ||
     status.combobox?.liveV32?.runIdentity !==
       "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV32?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV32?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV32?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV32?.attempt1
+      ?.hostSelectedIndicatorCompileCarryVisibleTeachingCleared !== true ||
+    status.combobox?.liveV32?.attempt1?.refusedClass !==
+      "unsupported structural edit" ||
+    status.combobox?.liveV32?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV32?.nextTeaching !==
+      "host must emit compile-carried label Combobox option on combobox/option-set instead of the live display name after ::" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||

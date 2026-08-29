@@ -339,8 +339,23 @@
 > compile-carried `visible: true` on
 > `combobox/option/selected-indicator` instead of omitting
 > the default-true visible flag. Keep v2–v31 teachings.
-> Combobox is **not live**. Do not invent a Combobox human
-> grade. Product **v1 is incomplete**.
+> Combobox live v32 PREPARE `e747b440` and AUTHORIZE
+> `3f62decc` landed. Attempt 1 minted page `163:17524`;
+> restore held 144 owned FILL texts. Host selected-indicator
+> compile-carry visible teaching cleared; extract walk
+> accepted. Host now emits `visible: true` on all 4
+> selected-indicators matching compile, while hashed v31
+> still omits default-true. Collapse then refused
+> `unsupported structural edit at $.children[1].label`
+> (`combobox/option-set`: compile emits `Combobox option`;
+> host and hashed v31 emit the live display name after
+> ` :: `). Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v32 attempt 2
+> as-is. Next teaching: host must emit compile-carried
+> label `Combobox option` on `combobox/option-set` instead
+> of the live display name after ` :: `. Keep v2–v32
+> teachings. Combobox is **not live**. Do not invent a
+> Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
