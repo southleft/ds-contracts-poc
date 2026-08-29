@@ -13,11 +13,12 @@ import {
 
 export const TABLE_FIGMA_NAMESPACE = "ds.contracts.table.recipe.v1";
 export const TABLE_FIGMA_WRITER_VERSION = 1;
-export const TABLE_FIGMA_RUN_SUFFIX = "table-v5";
+export const TABLE_FIGMA_RUN_SUFFIX = "table-v6";
 export const FORBIDDEN_TABLE_V1_RUN_IDENTITY = "83a27edf-82d19508-table-v1";
 export const FORBIDDEN_TABLE_V2_RUN_IDENTITY = "cc811f47-82d19508-table-v2";
 export const FORBIDDEN_TABLE_V3_RUN_IDENTITY = "cc811f47-82d19508-table-v3";
 export const FORBIDDEN_TABLE_V4_RUN_IDENTITY = "cc811f47-82d19508-table-v4";
+export const FORBIDDEN_TABLE_V5_RUN_IDENTITY = "cc811f47-82d19508-table-v5";
 export const TABLE_FIGMA_VARIANTS_PER_SOURCE = 10;
 export const TABLE_FIGMA_VARIANT_COUNT = 20;
 export const TABLE_FIGMA_INSTANCES_PER_SOURCE = 22;
@@ -453,6 +454,7 @@ if(PLAN.runIdentity==="83a27edf-82d19508-table-v1")throw new Error("TABLE-V1-IDE
 if(PLAN.runIdentity==="cc811f47-82d19508-table-v2")throw new Error("TABLE-V2-IDENTITY-REUSE");
 if(PLAN.runIdentity==="cc811f47-82d19508-table-v3")throw new Error("TABLE-V3-IDENTITY-REUSE");
 if(PLAN.runIdentity==="cc811f47-82d19508-table-v4")throw new Error("TABLE-V4-IDENTITY-REUSE");
+if(PLAN.runIdentity==="cc811f47-82d19508-table-v5")throw new Error("TABLE-V5-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -742,9 +744,10 @@ export function emitTableFigmaWriter(
     runIdentity === FORBIDDEN_TABLE_V1_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V2_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V3_RUN_IDENTITY ||
-    runIdentity === FORBIDDEN_TABLE_V4_RUN_IDENTITY
+    runIdentity === FORBIDDEN_TABLE_V4_RUN_IDENTITY ||
+    runIdentity === FORBIDDEN_TABLE_V5_RUN_IDENTITY
   ) {
-    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v4 identity");
+    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v5 identity");
   }
   const pageName = `Recipe Pivot / Table / ${runIdentity}`;
   const plan = {

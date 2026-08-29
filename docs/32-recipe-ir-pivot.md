@@ -46,7 +46,10 @@
 > `table/row/owned-cell-label` TEXT bind host). MinWidth 0→null teaching
 > cleared; restore 8 held. Signed cleanup removed page `165:40914`. Mint
 > did not stay. Input `115:295378` and Combobox `163:35981` stayed. Do
-> not restart v5 attempt 2 as-is. Product **v1 is
+> not restart v5 attempt 2 as-is. Table live v6 PREPARE lands the one
+> teaching: when extract walks a row COMPONENT, skip untagged
+> writer-created `table/row/owned-cell-label` TEXT nodes that exist only
+> as host-listed `characters` bind targets. Not live. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
