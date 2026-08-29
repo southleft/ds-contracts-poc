@@ -151,10 +151,12 @@
 > starts at `layout.width.value`; host still ranks `width.value`
 > last). Overlay drop-shadow stayed. Cleanup accepted; that
 > Combobox page is gone. Input `115:295378` stayed. Do not restart
-> v16 attempt 2 as-is. Next teaching: host must alias
-> `combobox/overlay` `width.value` to `layout.width.value` so that
-> field precedes `fills.0.color`, same class as variant layout
-> width alias. Combobox is **not live**.
+> v16 attempt 2 as-is. Combobox live v17 PREPARE teaches host
+> must alias `combobox/overlay` `width.value` to
+> `layout.width.value` so that field precedes `fills.0.color`,
+> same class as variant layout width alias, not leave
+> `width.value` last as an unknown extract field. Keep v2–v16
+> teachings. Combobox is **not live**.
 > Do not invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
