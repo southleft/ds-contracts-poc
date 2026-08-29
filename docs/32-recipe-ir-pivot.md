@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~20:50 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~20:55 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -183,10 +183,19 @@
 > (`combobox/option-instance/0`: host emits a nonempty inherited solid
 > paint; compile omits `fills`). Cleanup accepted; that Combobox page
 > is gone. Input `115:295378` stayed. Do not restart v19 attempt 2
-> as-is. Combobox live v20 PREPARE teaches host must omit inherited
-> `fills` on `combobox/option-instance` that compile never emits, not
-> also emit the inherited solid paint. Keep v2–v19 teachings. Combobox
-> is **not live**. Do not invent a Combobox human grade. Product **v1
+> as-is. Combobox live v20 PREPARE `857369b6` and AUTHORIZE `10be652e`
+> landed. Attempt 1 minted page `159:335530`; restore held 144 owned
+> FILL texts. Host option-instance inherited-fills omit teaching
+> cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].children[0].payload`
+> (`combobox/option-instance/0`: host emits a nonempty extract instance
+> payload; compile omits `payload`). Cleanup accepted; that Combobox
+> page is gone. Input `115:295378` stayed. Do not restart v20 attempt 2
+> as-is. Next teaching: host must omit extra `payload` on
+> `combobox/option-instance` that compile never emits, not also emit
+> the extract instance payload. Keep v2–v20 teachings. Combobox is
+> **not live**. Do not invent a Combobox human grade. Product **v1
 > is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
