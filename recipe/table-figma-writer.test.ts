@@ -23,6 +23,7 @@ import {
   FORBIDDEN_INPUT_PAGE_ID,
   FORBIDDEN_INPUT_RUN_IDENTITY,
   FORBIDDEN_TABLE_V1_RUN_IDENTITY,
+  FORBIDDEN_TABLE_V2_RUN_IDENTITY,
   TABLE_FIGMA_INSTANCES_PER_SOURCE,
   TABLE_FIGMA_NAMESPACE,
   TABLE_FIGMA_RUN_SUFFIX,
@@ -76,7 +77,9 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
   assert.notEqual(writer.runIdentity, FORBIDDEN_INPUT_RUN_IDENTITY);
   assert.notEqual(writer.runIdentity, FORBIDDEN_COMBOBOX_RUN_IDENTITY);
   assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V1_RUN_IDENTITY);
+  assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V2_RUN_IDENTITY);
   assert.match(writer.code, /TABLE-V1-IDENTITY-REUSE/);
+  assert.match(writer.code, /TABLE-V2-IDENTITY-REUSE/);
   assert.match(writer.code, /"requestedFamily":"Inter"/);
   assert.match(writer.code, /"requestedStyle":"Semi Bold"/);
   assert.match(writer.code, /"resolvedFamily":"Inter"/);
@@ -124,6 +127,10 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
   assert.match(writer.code, /TABLE-WRITER-HIDDEN-FILL-OCCUPANCY/);
   assert.match(writer.code, /TABLE-WRITER-CELL-PROPERTIES/);
   assert.match(writer.code, /TABLE-WRITER-ROW-PROPERTIES/);
+  assert.match(writer.code, /TABLE-WRITER-ROW-CELL-LABEL-CHARACTERS/);
+  assert.match(writer.code, /TABLE-ROW-CELL-LABEL-ABSENT/);
+  assert.equal(writer.code.includes("componentPropertyReferences={[labelKey]"), false);
+  assert.equal(/componentPropertyReferences=\{\[/.test(writer.code), false);
   assert.match(writer.code, /addComponentProperty\("Label","TEXT"/);
   assert.match(writer.code, /addComponentProperty\("Column","TEXT"/);
   assert.match(writer.code, /addComponentProperty\("Align","TEXT"/);
@@ -182,6 +189,8 @@ test("Table writer mock-mints 20 variants under a Table identity", async () => {
       "TABLE-WRITER-HIDDEN-FILL-OCCUPANCY",
       "TABLE-WRITER-CELL-PROPERTIES",
       "TABLE-WRITER-ROW-PROPERTIES",
+      "TABLE-WRITER-ROW-CELL-LABEL-CHARACTERS",
+      "TABLE-ROW-CELL-LABEL-ABSENT",
     ],
   });
   assert.equal(conformance.ok, true, conformance.failures.join("\n"));

@@ -290,6 +290,46 @@ const createLiveMock = (
   };
   const collections: any[] = [];
   const variables: any[] = [];
+  const interfaceForType: Record<string, string> = {
+    DOCUMENT: "DocumentNode",
+    PAGE: "PageNode",
+    SECTION: "SectionNode",
+    FRAME: "FrameNode",
+    COMPONENT: "ComponentNode",
+    COMPONENT_SET: "ComponentSetNode",
+    INSTANCE: "InstanceNode",
+    TEXT: "TextNode",
+    RECTANGLE: "RectangleNode",
+    ELLIPSE: "EllipseNode",
+  };
+
+  const cloneSceneNode = (source: any): any => {
+    const cloned = makeNode(
+      source.type,
+      interfaceForType[source.type] ?? "SceneNode",
+      Array.isArray(source.children),
+      source.componentProperties
+        ? { componentProperties: structuredClone(source.componentProperties) }
+        : {},
+    );
+    cloned.name = source.name;
+    cloned.width = source.width;
+    cloned.height = source.height;
+    cloned.x = source.x;
+    cloned.y = source.y;
+    if (source.visible !== undefined) cloned.visible = source.visible;
+    if (source.opacity !== undefined) cloned.opacity = source.opacity;
+    if (source.characters !== undefined) cloned.characters = source.characters;
+    if (source.componentPropertyReferences) {
+      cloned.componentPropertyReferences = {
+        ...source.componentPropertyReferences,
+      };
+    }
+    for (const child of source.children ?? []) {
+      cloned.appendChild(cloneSceneNode(child));
+    }
+    return cloned;
+  };
 
   const makeNode = (
     type: string,
@@ -384,7 +424,7 @@ const createLiveMock = (
     if (type === "COMPONENT") {
       target.createInstance = () => {
         const defs = target.parent?._componentPropertyDefinitions ?? {};
-        return makeNode("INSTANCE", "InstanceNode", true, {
+        const instance = makeNode("INSTANCE", "InstanceNode", true, {
           componentProperties: Object.fromEntries(
             Object.entries(defs).map(([key, def]) => [
               key,
@@ -392,6 +432,10 @@ const createLiveMock = (
             ]),
           ),
         });
+        for (const child of target.children ?? []) {
+          instance.appendChild(cloneSceneNode(child));
+        }
+        return instance;
       };
     }
     if (type === "COMPONENT_SET") {
@@ -431,6 +475,22 @@ const createLiveMock = (
           throw new Error(
             `${interfaceName} live mock rejects unsupported writable property ${property}`,
           );
+        }
+        if (property === "componentPropertyReferences") {
+          const keys =
+            value && typeof value === "object" ? Object.keys(value) : [];
+          const allowed =
+            type === "TEXT"
+              ? ["characters", "visible"]
+              : type === "INSTANCE"
+                ? ["mainComponent", "visible"]
+                : ["visible"];
+          const unrecognized = keys.filter((key) => !allowed.includes(key));
+          if (unrecognized.length) {
+            throw new Error(
+              `in set_componentPropertyReferences: Property "node.componentPropertyReferences.value" failed validation: Unrecognized key(s) in object: '${unrecognized[0]}'`,
+            );
+          }
         }
         object[property as any] = value;
         if (

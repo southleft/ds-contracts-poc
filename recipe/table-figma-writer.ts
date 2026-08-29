@@ -13,8 +13,9 @@ import {
 
 export const TABLE_FIGMA_NAMESPACE = "ds.contracts.table.recipe.v1";
 export const TABLE_FIGMA_WRITER_VERSION = 1;
-export const TABLE_FIGMA_RUN_SUFFIX = "table-v2";
+export const TABLE_FIGMA_RUN_SUFFIX = "table-v3";
 export const FORBIDDEN_TABLE_V1_RUN_IDENTITY = "83a27edf-82d19508-table-v1";
+export const FORBIDDEN_TABLE_V2_RUN_IDENTITY = "cc811f47-82d19508-table-v2";
 export const TABLE_FIGMA_VARIANTS_PER_SOURCE = 10;
 export const TABLE_FIGMA_VARIANT_COUNT = 20;
 export const TABLE_FIGMA_INSTANCES_PER_SOURCE = 22;
@@ -447,6 +448,7 @@ const PAGE_OWNER="recipe/table/"+PLAN.runIdentity;
 if(NS==="ds.contracts.input.recipe.v5"||PLAN.runIdentity==="4a074b24-e8503dd5-input-v5")throw new Error("TABLE-INPUT-IDENTITY-REUSE");
 if(NS==="ds.contracts.combobox.recipe.v1"||PLAN.runIdentity==="70c24cbd-d27f2e85-combobox-v1")throw new Error("TABLE-COMBOBOX-IDENTITY-REUSE");
 if(PLAN.runIdentity==="83a27edf-82d19508-table-v1")throw new Error("TABLE-V1-IDENTITY-REUSE");
+if(PLAN.runIdentity==="cc811f47-82d19508-table-v2")throw new Error("TABLE-V2-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -678,13 +680,15 @@ for(const source of PLAN.sources){
   const rowCell0Property=rowSet.addComponentProperty("Cell 0","TEXT",source.rowDefaults["Cell 0"]);
   const rowCell1Property=rowSet.addComponentProperty("Cell 1","TEXT",source.rowDefaults["Cell 1"]);
   const rowCell2Property=rowSet.addComponentProperty("Cell 2","TEXT",source.rowDefaults["Cell 2"]);
+  void "TABLE-WRITER-ROW-CELL-LABEL-CHARACTERS";
   for(const component of rowSet.children){
     for(const descendant of component.findAllWithCriteria({types:["INSTANCE"]})){
       const role=sceneRole(descendant.name);
-      const labelKey=propertyKey(descendant,"Label");
-      if(role==="table/cell-instance/0"&&labelKey)descendant.componentPropertyReferences={[labelKey]:rowCell0Property};
-      if(role==="table/cell-instance/1"&&labelKey)descendant.componentPropertyReferences={[labelKey]:rowCell1Property};
-      if(role==="table/cell-instance/2"&&labelKey)descendant.componentPropertyReferences={[labelKey]:rowCell2Property};
+      const cellProperty=role==="table/cell-instance/0"?rowCell0Property:role==="table/cell-instance/1"?rowCell1Property:role==="table/cell-instance/2"?rowCell2Property:null;
+      if(!cellProperty)continue;
+      const labels=descendant.findAllWithCriteria({types:["TEXT"]}).filter(node=>sceneRole(node.name)==="table/cell/label");
+      if(labels.length!==1)throw new Error("TABLE-ROW-CELL-LABEL-ABSENT:"+role);
+      labels[0].componentPropertyReferences={characters:cellProperty};
     }
     const props=Object.fromEntries(component.name.split(", ").map(part=>{const index=part.indexOf("=");return [part.slice(0,index),part.slice(index+1)];}));
     rowByKey.set((props.Density||"")+"|"+(props.State||""),component);
@@ -712,9 +716,10 @@ export function emitTableFigmaWriter(
     TABLE_FIGMA_NAMESPACE === FORBIDDEN_COMBOBOX_NAMESPACE ||
     runIdentity === FORBIDDEN_INPUT_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_COMBOBOX_RUN_IDENTITY ||
-    runIdentity === FORBIDDEN_TABLE_V1_RUN_IDENTITY
+    runIdentity === FORBIDDEN_TABLE_V1_RUN_IDENTITY ||
+    runIdentity === FORBIDDEN_TABLE_V2_RUN_IDENTITY
   ) {
-    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1 identity");
+    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v2 identity");
   }
   const pageName = `Recipe Pivot / Table / ${runIdentity}`;
   const plan = {
@@ -745,6 +750,20 @@ export function emitTableFigmaWriter(
     runtime.includes("figma_arrange_component_set")
   ) {
     throw new TypeError("table writer must mint sets without arranging Input or Combobox");
+  }
+  if (
+    runtime.includes("componentPropertyReferences={[labelKey]") ||
+    /componentPropertyReferences=\{\[/.test(runtime)
+  ) {
+    throw new TypeError(
+      "table writer must bind row Cell N through nested TEXT characters, not a Label# key",
+    );
+  }
+  if (
+    runtime.includes("TABLE-WRITER-ROW-CELL-LABEL-CHARACTERS") === false ||
+    runtime.includes("TABLE-ROW-CELL-LABEL-ABSENT") === false
+  ) {
+    throw new TypeError("table writer missing row cell-label characters bind");
   }
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   if (
