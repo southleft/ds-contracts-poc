@@ -1994,7 +1994,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v26-attempt-1 extract ACCEPTED (fixed-point IR diff and independent root accounting both passed for the first time in the lineage); failed closed at probe usability/restoration on reflowPassed and overlapPixels; overlap traced to a probe measurement defect fixed in v27; reflow is an open human authoring gate; product v1 incomplete",
+    "status": "live-v27-attempt-1 reached probe with ONLY reflowPassed failing; writer, restore and extract all accepted; probe containment fix held with max overlap 0 across all 20 cells; blocked on an open human authoring gate (table root resize semantics; per-column width model); product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2589,9 +2589,9 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v26 attempt 1 failed closed at probe; do not restart v26 attempt 2 as-is",
-      "v27 PREPARE landed with the probe containment fix; not authorized",
-      "OPEN HUMAN GATE: table root resize semantics (fixture declares hug-contents; the probe asserts a forced width must stick) and whether table@1 gains a per-column width model (MUI columns are ragged because MUI declares no cell min-width)",
+      "Table live v27 attempt 1 failed closed at probe on reflowPassed only; do not restart v27 attempt 2 as-is",
+      "OPEN HUMAN GATE 1: table root resize semantics. The fixture declares resize.root hug-contents; the probe requires a forced +64px width to stick. One of the two is wrong. Turning hug into fill/fixed without a reviewed source fact is a forbidden invented FILL/FIXED teaching.",
+      "OPEN HUMAN GATE 2: table@1 has no per-column width model. MUI declares no cell min-width so MUI columns are ragged. The probe does not catch it.",
       "no live mint",
       "no human grade",
       "Calendar not started",
@@ -3583,7 +3583,23 @@
       "namespace": "ds.contracts.table.recipe.v1",
       "evidenceRoot": "recipe/evidence/table-live-pivot-v27",
       "teaching": "probe overlap must skip ancestor/descendant pairs (TABLE-PROBE-CONTAINMENT-IS-NOT-OVERLAP); a parent box containing its child is not an overlap",
-      "doNotRestartV26Attempt2": true
+      "doNotRestartV26Attempt2": true,
+      "attempt1": {
+        "status": "failed-closed-at-probe-reflow-only",
+        "writerAccepted": true,
+        "restoreAccepted": true,
+        "restoredCount": 8,
+        "extractAccepted": true,
+        "probeAccepted": false,
+        "probeFailures": ["reflowPassed"],
+        "maximumOverlapPixels": 0,
+        "containmentFixHeld": true,
+        "mintStayed": false,
+        "cleanedPageId": "173:47351",
+        "cleanupExecuted": true,
+        "signedCleanupAccepted": true
+      },
+      "nextTeaching": "OPEN HUMAN GATE: table root resize semantics and a per-column width model. No teaching invented."
     }
   },
   "input": {

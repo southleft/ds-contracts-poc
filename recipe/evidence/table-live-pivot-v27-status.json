@@ -1,0 +1,20 @@
+{
+  "artifactVersion": "table-live-v27-status-v1",
+  "status": "attempt 1 failed closed at probe on reflowPassed ONLY; probe containment fix held (max overlap 0 across all 20 cells); writer, restore and extract accepted; signed cleanup executed; Input, Combobox and Button pages stayed; mint did not stay; no Table human grade",
+  "attempt1": {
+    "pageId": "173:47351",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "restoredCount": 8,
+    "extractAccepted": true,
+    "probeAccepted": false,
+    "probeFailures": ["reflowPassed"],
+    "maximumOverlapPixels": 0,
+    "cleanupExecuted": true
+  },
+  "nextTeaching": "OPEN HUMAN GATE: table root resize semantics, and whether table@1 gains a per-column width model. No teaching invented.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}
