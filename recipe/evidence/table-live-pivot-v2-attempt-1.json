@@ -1,0 +1,82 @@
+{
+  "artifactVersion": "table-live-v2-attempt-1-v1",
+  "status": "failed closed at writer; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "4272b14ecc6cbdac956abd0f35a43a24afb74e4e",
+  "codeCommit": "4272b14ecc6cbdac956abd0f35a43a24afb74e4e",
+  "antecedentCommit": "ccc0e89751c926676072536ba35e74dd47a49560",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-82d19508-table-v2",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1"
+  },
+  "transaction": {
+    "transactionId": "c076c925-e585-4a45-b2aa-4dca8003a9a6",
+    "attempt": 1,
+    "authorizationSha256": "25719aa88a3ec36d4f87a212022487d66d7dacea05083439a0924108f08dc342",
+    "signingPublicKeySpkiSha256": "2416ce875afac664c110887be0a3c55256865d944eb9bfaf1b3654d895eb8778",
+    "programSha256": "7a33ae24d858b45c5e7840b82fbe5ce9a0504ecb8930d05d60fb2dde14016ef8",
+    "bindingSha256": "5420815aca9fff04f4b7b4eb57dc1e68a0907a9694168176a5c80264e8d18057",
+    "requestSha256": "0328a72a7ed7228ef469f944e2dd69186aeca9f912121cb8c6a8d73d8de30fda"
+  },
+  "writer": {
+    "accepted": false,
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v2",
+    "pageId": "165:40645",
+    "sectionId": "165:40646",
+    "collectionId": "VariableCollectionId:165:40647",
+    "cellSetId": "165:40674",
+    "rowSetId": "165:40703",
+    "tableSetId": null,
+    "runIdentity": "cc811f47-82d19508-table-v2",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 1,
+    "muiSectionCreated": false,
+    "refusedClass": "TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY",
+    "refused": "TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507",
+    "hostError": "in set_componentPropertyReferences: Property \"node.componentPropertyReferences.value\" failed validation: Unrecognized key(s) in object: 'Label#165:24507'",
+    "writerUsedKey": "Label#165:24507",
+    "hostListedKeys": ["characters", "mainComponent"],
+    "cellCharactersBindSucceeded": true,
+    "headerFontTeachingCleared": true,
+    "namedFromSourceFamily": "Inter",
+    "carriedHostStyle": "Semi Bold",
+    "resolutionDeclared": "requested",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": false,
+    "signedCleanupAccepted": false,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "165:40645",
+    "removedCollectionIds": ["VariableCollectionId:165:40647"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY",
+    "doNotInvent": true,
+    "restartV2Attempt2AsIs": false,
+    "prepareV3": "bind row Cell N through the nested cell-label TEXT characters field (host-listed), not through the instance Label# property id as a componentPropertyReferences key"
+  },
+  "secondaryNoteNotTheRefusedClass": "font teaching cleared: Inter Semi Bold resolved requested; cell TEXT characters bind succeeded; refuse happened on row instance Label# key; table set and MUI section were never created",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

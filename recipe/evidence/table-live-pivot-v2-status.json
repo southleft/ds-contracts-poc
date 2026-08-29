@@ -1,0 +1,37 @@
+{
+  "artifactVersion": "table-live-v2-status-v1",
+  "status": "attempt 1 failed closed at writer TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507; host lists characters/mainComponent; writer not accepted; cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "ccc0e89751c926676072536ba35e74dd47a49560",
+    "indexPath": "recipe/evidence/table-live-pivot-v2/antecedent-index.json",
+    "indexSha256": "8601f4fa0db0d6668928081c92537210d3518f9bd52b190d74080dc6503a6e5f",
+    "hashSetSha256": "9d4fd438948dd603ae5f010a76ffd4d8f70051742f4b650d4091cb53be3cd584"
+  },
+  "authorization": {
+    "commit": "4272b14ecc6cbdac956abd0f35a43a24afb74e4e",
+    "path": "recipe/evidence/table-live-pivot-v2/capture-authorization.json",
+    "sha256": "25719aa88a3ec36d4f87a212022487d66d7dacea05083439a0924108f08dc342",
+    "signingPublicKeySpkiSha256": "2416ce875afac664c110887be0a3c55256865d944eb9bfaf1b3654d895eb8778"
+  },
+  "attempt1": {
+    "pageId": "165:40645",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507",
+    "headerFontTeachingCleared": true,
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "bind row Cell N through the nested cell-label TEXT characters field (host-listed), not through the instance Label# property id as a componentPropertyReferences key",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

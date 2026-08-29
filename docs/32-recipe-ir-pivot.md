@@ -21,9 +21,14 @@
 > `SemiBold`; Scratch lists Inter `Semi Bold`). Failure-path cleanup
 > removed page `165:40622`. Mint did not stay. Input `115:295378` and
 > Combobox `163:35981` stayed. Do not restart v1 attempt 2 as-is. Table
-> live v2 PREPARE landed with one teaching: name first-party header font
-> as the host-listed Inter `Semi Bold`. Run identity
-> `cc811f47-82d19508-table-v2`. Product **v1 is incomplete**. Remaining: Data Table,
+> live v2 PREPARE `ccc0e8975` and AUTHORIZE `4272b14ec` landed. Attempt 1
+> failed closed at writer
+> `TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507`
+> (row instance used `Label#` as a `componentPropertyReferences` key;
+> host lists `characters` / `mainComponent`). Header Inter `Semi Bold`
+> teaching cleared. Failure-path cleanup removed page `165:40645`. Mint
+> did not stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v2 attempt 2 as-is. Product **v1 is incomplete**. Remaining: Data Table,
 > Calendar, Button leftover inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
 > `c35bae60` still carries RECORD-time `humanSignoff: pending` and is not
@@ -1630,15 +1635,16 @@ Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Aut
 Data Table has an offline recipe path (`table@1`) with two reviewed
 sources (first-party `ds.table` and `@mui/material@9.2.0#Table`). Calendar
 still has no recipe path. Acquisition stays human-authored or
-human-reviewed adapters, not inferred rectangles. Table live v1 attempt 1
-failed closed at writer (`TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold`); the
-partial page was cleaned. No Data Table live mint and no Data Table
-human grade.
+human-reviewed adapters, not inferred rectangles. Table live v2 attempt 1
+failed closed at writer
+(`TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507`);
+the partial page `165:40645` was cleaned. No Data Table live mint and no
+Data Table human grade.
 
 | step | action | exit criterion |
 | --- | --- | --- |
 | D1 | Explicit Data Table recipe + reviewed adapters for two unrelated real libraries. Offline cross-library proof first: row/column templates, declared column axis, required-facts / door / lowering / grammar coverage. | **Offline recipe authored 2026-08-29.** `table@1` + adapters + writer `ds.contracts.table.recipe.v1`. `npm run recipe:table:check` green (2 densities × 2 row states; 10 components / 22 instances; hermetic mock-mint 20 variants). Door/lowering/grammar corpus coverage and live are not claimed. |
-| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v2 PREPARE landed 2026-08-29.** One teaching: name first-party header font as host-listed Inter `Semi Bold`. Do not restart v1 attempt 2 as-is. Not live yet. |
+| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v2 attempt 1 failed closed 2026-08-29.** Writer refused `TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507`. Header Inter `Semi Bold` teaching cleared. Page `165:40645` cleaned. Do not restart v2 attempt 2 as-is. Not live. |
 | D3 | Calendar archetype addition is a reviewed minor contract change (`ARCHETYPES` in `packages/schema/src/archetype.ts` plus required-facts). Then the same offline-then-live sequence. | Calendar is no longer “undefined (0 contracts)” by proof, not by deleting the bar. |
 | D4 | Human review of Table/Calendar adapters before live if a human-authored adapter is required. | **Human gate** for adapter authorship/review only. Live still Scratch-only. |
 
