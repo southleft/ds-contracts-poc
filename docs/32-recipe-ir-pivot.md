@@ -374,12 +374,24 @@
 > host observe must omit empty `instancePayload` facts on
 > slot instances instead of re-injecting live instance
 > descendant payloads that IR and compile omit. Keep
-> v2–v33 teachings. Combobox live v34 PREPARE teaches host
-> observe must omit empty `instancePayload` facts on slot
-> instances instead of re-injecting live instance descendant
-> payloads that IR and compile omit. Keep v2–v33 teachings.
-> Combobox is **not live**. Do not invent a Combobox human
-> grade. Product **v1 is incomplete**.
+> v2–v33 teachings. Combobox live v34 PREPARE `ffd80f4b`
+> and AUTHORIZE `7cf07c2c` landed. Attempt 1 minted page
+> `163:20982`; restore held 144 owned FILL texts. Host
+> observe empty slot `instancePayload` teaching cleared;
+> extras fell from 242 to 48. Independent root accounting
+> then refused extra=48 mismatch=225 silent=225 on both
+> roots. The remaining 48 extras are nonempty
+> option-instance `instancePayload` facts observe still
+> re-injects (Ada Lovelace / Grace Hopper / Linus Torvalds
+> / Margaret Hamilton) that IR already omits and compile
+> never emits. Cleanup accepted; that Combobox page is
+> gone. Input `115:295378` stayed. Do not restart v34
+> attempt 2 as-is. Next teaching: host observe must omit
+> extra nonempty option-instance `instancePayload` facts
+> that IR and compile omit, not only empty slot-instance
+> payloads. Keep v2–v34 teachings. Combobox is **not
+> live**. Do not invent a Combobox human grade. Product
+> **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host

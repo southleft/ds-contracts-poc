@@ -1467,7 +1467,19 @@
       "hostSelectedIndicatorCompileCarryVisibleUnchangedFromV32": true,
       "hostOptionSetCompileCarryLabelUnchangedFromV33": true,
       "hostObserveOmitsEmptySlotInstancePayload": true,
-      "runIdentity": "70c24cbd-d27f2e85-combobox-v1"
+      "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+      "attempt1": {
+        "status": "failed-closed",
+        "restoreAccepted": true,
+        "restoredCount": 144,
+        "extractWalkCleared": true,
+        "hostObserveEmptySlotInstancePayloadTeachingCleared": true,
+        "refusedClass": "independent root accounting",
+        "refused": "independent root accounting extra=48 mismatch=225 silent=225",
+        "mintStayed": false,
+        "cleanedPageId": "163:20982"
+      },
+      "nextTeaching": "host observe must omit extra nonempty option-instance instancePayload facts that IR and compile omit, not only empty slot-instance payloads"
     },
     "blockers": [
       "Combobox live v1 attempt 1 failed closed at restore 240 vs 144",
@@ -1503,6 +1515,7 @@
       "Combobox live v31 attempt 1 failed closed at collapse unsupported structural edit; host selected-indicator binding compile-order teaching cleared",
       "Combobox live v32 attempt 1 failed closed at collapse unsupported structural edit; host selected-indicator compile-carry visible teaching cleared",
       "Combobox live v33 attempt 1 failed closed at independent root accounting extras and mismatches; host option-set compile-carry label teaching cleared for collapse",
+      "Combobox live v34 attempt 1 failed closed at independent root accounting extras and mismatches; host observe empty slot instancePayload teaching cleared",
       "no Combobox human grade",
       "product v1 incomplete"
     ]
@@ -1516,7 +1529,10 @@
       "reviewedAt": "2026-08-28T15:37:00-05:00",
       "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
       "pageId": "115:295378",
-      "setIds": ["115:296805", "115:298106"],
+      "setIds": [
+        "115:296805",
+        "115:298106"
+      ],
       "recordCommit": "c35bae604bbc901a13861c9db9ed79c17a31d909",
       "evidencePath": "recipe/evidence/input-field-live-v85-human-signoff.json",
       "recordTimeHumanSignoffUnchanged": "pending",

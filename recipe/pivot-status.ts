@@ -4474,7 +4474,17 @@ export function validatePivotStatus(
     status.combobox?.liveV34?.hostObserveOmitsEmptySlotInstancePayload !==
       true ||
     status.combobox?.liveV34?.runIdentity !==
-      "70c24cbd-d27f2e85-combobox-v1"
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV34?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV34?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV34?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV34?.attempt1
+      ?.hostObserveEmptySlotInstancePayloadTeachingCleared !== true ||
+    status.combobox?.liveV34?.attempt1?.refusedClass !==
+      "independent root accounting" ||
+    status.combobox?.liveV34?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV34?.nextTeaching !==
+      "host observe must omit extra nonempty option-instance instancePayload facts that IR and compile omit, not only empty slot-instance payloads"
   )
     fail("combobox live v34 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))

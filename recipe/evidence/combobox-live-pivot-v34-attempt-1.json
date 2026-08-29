@@ -1,0 +1,183 @@
+{
+  "artifactVersion": "combobox-live-v34-attempt-1-v1",
+  "status": "failed closed at independent root accounting extras and mismatches; host observe empty slot instancePayload teaching cleared; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "7cf07c2ce374c708e7a6f1d8063d63e40ad76bef",
+  "codeCommit": "7cf07c2ce374c708e7a6f1d8063d63e40ad76bef",
+  "antecedentCommit": "ffd80f4b830e01eba0dedd944b9561f93d81ed82",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host observe must omit empty instancePayload facts on slot instances instead of re-injecting live instance descendant payloads that IR and compile omit",
+    "cleared": true,
+    "clearedFor": "independent root accounting empty slot instancePayload extras",
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true,
+    "heldHostTriggerBindingCompileOrder": true,
+    "heldHostLeadingSlotBindingCompileOrder": true,
+    "heldHostLeadingSlotCompileCarryVisible": true,
+    "heldHostTrailingSlotBindingCompileOrder": true,
+    "heldHostTrailingSlotCompileCarryVisible": true,
+    "heldHostTriggerEmptyEffects": true,
+    "heldHostOverlayBindingCompileOrder": true,
+    "heldHostOverlayWidthAlias": true,
+    "heldHostListboxBindingCompileOrder": true,
+    "heldHostOptionInstanceBindingExtras": true,
+    "heldHostOptionInstanceFillsOmit": true,
+    "heldHostOptionInstancePayloadOmit": true,
+    "heldHostListboxClipsContentOmit": true,
+    "heldHostListboxCornerRadiusOmit": true,
+    "heldHostListboxEmptyEffectsOmit": true,
+    "heldHostListboxEmptyStrokesOmit": true,
+    "heldHostOverlayEmptyDashPatternOmit": true,
+    "heldHostSetRootClipsContentOmit": true,
+    "heldHostOptionBindingCompileOrder": true,
+    "heldHostOptionHeightAlias": true,
+    "heldHostOptionClipsContentOmit": true,
+    "heldHostSelectedIndicatorBindingCompileOrder": true,
+    "heldHostSelectedIndicatorCompileCarryVisible": true,
+    "heldHostOptionSetCompileCarryLabel": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "163:20982",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": [
+      "163:21846",
+      "163:21077",
+      "163:22710",
+      "163:21941"
+    ],
+    "muiComboboxSetId": "163:21846",
+    "muiOptionSetId": "163:21077",
+    "antdComboboxSetId": "163:22710",
+    "antdOptionSetId": "163:21941",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "inputPageUntouched": true,
+    "operationalRetriesBeforeAccept": "none; first signed writer accepted",
+    "receiptSha256": "9f618ae69564d19e5a83b81f801f388fa08d0b4ba4794d32113bb51ffaa657ed"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true,
+    "receiptSha256": "a3eed1940e6c4c68301f3d38e150bd86b2db03140d36853a4ecd32905739083f"
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "84a36901665cf935cb1fdffec589b9e26a80c3437a362117dd3bcfabe4c839d2",
+    "rawResponseBytes": 5710830,
+    "hostObserveEmptySlotInstancePayloadTeachingCleared": true,
+    "liveOptionSetNames": [
+      "combobox/option-set :: MUI Autocomplete / combobox@1 offline fixture",
+      "combobox/option-set :: AntD Select / combobox@1 offline fixture"
+    ],
+    "hostOptionSetLabels": [
+      "Combobox option",
+      "Combobox option"
+    ],
+    "compileOptionSetLabel": "Combobox option",
+    "hostComboboxSetLabelsMatchCompileIdentityName": true,
+    "hostCollapseRefused": false,
+    "hostCollapseAccepted": true,
+    "hostAccountingRefused": true,
+    "refusedClass": "independent root accounting",
+    "refused": "Combobox live v34 independent root accounting failed: mui:missing=0,extra=48,mismatch=225,duplicate=0,unobserved=0,silent=225;antd:missing=0,extra=48,mismatch=225,duplicate=0,unobserved=0,silent=225",
+    "refusedAt": "recipe/combobox-live-v34-contract.ts:601",
+    "accountingMui": {
+      "extra": 48,
+      "mismatch": 225,
+      "missing": 0,
+      "silent": 225,
+      "matched": 13082,
+      "denominator": 13307,
+      "comboboxExtra": 48,
+      "comboboxMismatch": 224,
+      "optionExtra": 0,
+      "optionMismatch": 1
+    },
+    "emptySlotInstancePayloadExtrasCleared": true,
+    "priorEmptySlotExtras": 242,
+    "remainingExtraChannel": "instancePayload",
+    "remainingExtraCount": 48,
+    "remainingExtraObservedProperty": "instance descendant text/assets",
+    "remainingExtraPayloadNonemptyOptionLabels": true,
+    "remainingExtraSampleTexts": [
+      "Ada Lovelace",
+      "Grace Hopper",
+      "Linus Torvalds",
+      "Margaret Hamilton"
+    ],
+    "remainingExtraOwnershipPrefix": "combobox/children/{8,10,12,24,26,28,40,42,44,56,58,60}/children/3/children/0/children/{0-3}",
+    "mismatchByChannel": {
+      "componentRef": 192,
+      "characters": 32,
+      "name": 1
+    },
+    "optionSetNameFactExpected": "combobox/option-set :: Combobox option",
+    "optionSetNameFactObserved": "combobox/option-set :: MUI Autocomplete / combobox@1 offline fixture",
+    "observeStillOverlaysLiveOptionSetName": true,
+    "namedFromSource": "v34 host observe empty slot instancePayload teaching cleared; extras fell from 242 empty slot-instance payloads to 48 nonempty option-instance payloads. Independent root accounting then refused extra=48 mismatch=225 silent=225 on both mui and antd. All 48 extras are nonempty instancePayload facts observe re-injects from nested open-listbox option instances (Ada Lovelace, Grace Hopper, Linus Torvalds, Margaret Hamilton) that IR already omits via the v21 option-instance payload omit and compile never emits. The 225 mismatches are unchanged from v33: 192 componentRef (expected prefix/clear/popup vs observed selected/prefix/clear), 32 characters (expected Choose a person vs observed Ada Lovelace), and 1 option-set name fact (observe still overlays the live display name). Do not invent occupancy or Polar; do not teach FIXED; do not change the writer; do not restart v34 attempt 2 as-is"
+  },
+  "probe": {
+    "issued": false
+  },
+  "captures": {
+    "issued": 0
+  },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "20d2204151cf931730cd7a6fd9d527f4165afa87af8388b53f9bf549d1837aa5",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "163:20982",
+    "removedCollectionIds": [
+      "VariableCollectionId:163:20984",
+      "VariableCollectionId:163:21848"
+    ]
+  },
+  "nextTeaching": {
+    "class": "independent root accounting",
+    "doNotInvent": true,
+    "doNotInventOccupancy": true,
+    "doNotInventPolar": true,
+    "doNotTeachFixed": true,
+    "doNotRestartV34Attempt2AsIs": true,
+    "doNotChangeWriter": true,
+    "prepareV35": "host observe must omit extra nonempty option-instance instancePayload facts that IR and compile omit, not only empty slot-instance payloads"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}
