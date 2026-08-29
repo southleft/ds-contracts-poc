@@ -25,6 +25,7 @@ import {
   FORBIDDEN_TABLE_V1_RUN_IDENTITY,
   FORBIDDEN_TABLE_V2_RUN_IDENTITY,
   FORBIDDEN_TABLE_V3_RUN_IDENTITY,
+  FORBIDDEN_TABLE_V4_RUN_IDENTITY,
   TABLE_FIGMA_INSTANCES_PER_SOURCE,
   TABLE_FIGMA_NAMESPACE,
   TABLE_FIGMA_RUN_SUFFIX,
@@ -80,9 +81,17 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
   assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V1_RUN_IDENTITY);
   assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V2_RUN_IDENTITY);
   assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V3_RUN_IDENTITY);
+  assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V4_RUN_IDENTITY);
   assert.match(writer.code, /TABLE-V1-IDENTITY-REUSE/);
   assert.match(writer.code, /TABLE-V2-IDENTITY-REUSE/);
   assert.match(writer.code, /TABLE-V3-IDENTITY-REUSE/);
+  assert.match(writer.code, /TABLE-V4-IDENTITY-REUSE/);
+  assert.match(writer.code, /TABLE-WRITER-MIN-WIDTH-ZERO-UNSET/);
+  assert.match(
+    writer.code,
+    /node\.minWidth=layout\.minWidth===0\?null:layout\.minWidth/,
+  );
+  assert.equal(writer.code.includes("if(layout.minWidth!==undefined)node.minWidth=layout.minWidth;"), false);
   assert.match(writer.code, /"requestedFamily":"Inter"/);
   assert.match(writer.code, /"requestedStyle":"Semi Bold"/);
   assert.match(writer.code, /"resolvedFamily":"Inter"/);
@@ -202,6 +211,7 @@ test("Table writer mock-mints 20 variants under a Table identity", async () => {
       "TABLE-ROW-OWNED-TEXT-ABSENT",
       "TABLE-ROW-CELL-LABEL-ABSENT",
       "TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER",
+      "TABLE-WRITER-MIN-WIDTH-ZERO-UNSET",
     ],
   });
   assert.equal(conformance.ok, true, conformance.failures.join("\n"));

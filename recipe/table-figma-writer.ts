@@ -13,10 +13,11 @@ import {
 
 export const TABLE_FIGMA_NAMESPACE = "ds.contracts.table.recipe.v1";
 export const TABLE_FIGMA_WRITER_VERSION = 1;
-export const TABLE_FIGMA_RUN_SUFFIX = "table-v4";
+export const TABLE_FIGMA_RUN_SUFFIX = "table-v5";
 export const FORBIDDEN_TABLE_V1_RUN_IDENTITY = "83a27edf-82d19508-table-v1";
 export const FORBIDDEN_TABLE_V2_RUN_IDENTITY = "cc811f47-82d19508-table-v2";
 export const FORBIDDEN_TABLE_V3_RUN_IDENTITY = "cc811f47-82d19508-table-v3";
+export const FORBIDDEN_TABLE_V4_RUN_IDENTITY = "cc811f47-82d19508-table-v4";
 export const TABLE_FIGMA_VARIANTS_PER_SOURCE = 10;
 export const TABLE_FIGMA_VARIANT_COUNT = 20;
 export const TABLE_FIGMA_INSTANCES_PER_SOURCE = 22;
@@ -451,6 +452,7 @@ if(NS==="ds.contracts.combobox.recipe.v1"||PLAN.runIdentity==="70c24cbd-d27f2e85
 if(PLAN.runIdentity==="83a27edf-82d19508-table-v1")throw new Error("TABLE-V1-IDENTITY-REUSE");
 if(PLAN.runIdentity==="cc811f47-82d19508-table-v2")throw new Error("TABLE-V2-IDENTITY-REUSE");
 if(PLAN.runIdentity==="cc811f47-82d19508-table-v3")throw new Error("TABLE-V3-IDENTITY-REUSE");
+if(PLAN.runIdentity==="cc811f47-82d19508-table-v4")throw new Error("TABLE-V4-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -566,12 +568,14 @@ for(const source of PLAN.sources){
     node.counterAxisAlignItems=align[layout.counterAxisAlign];
     node.itemSpacing=layout.itemSpacing;
     node.paddingTop=Math.max(0,layout.padding.top);node.paddingRight=Math.max(0,layout.padding.right);node.paddingBottom=Math.max(0,layout.padding.bottom);node.paddingLeft=Math.max(0,layout.padding.left);
-    if(layout.minWidth!==undefined)node.minWidth=layout.minWidth;
-    if(layout.minHeight!==undefined)node.minHeight=layout.minHeight;
+    void "TABLE-WRITER-MIN-WIDTH-ZERO-UNSET";
+    if(layout.minWidth!==undefined)node.minWidth=layout.minWidth===0?null:layout.minWidth;
+    if(layout.minHeight!==undefined)node.minHeight=layout.minHeight===0?null:layout.minHeight;
     if(ir.clipsContent!==undefined)node.clipsContent=ir.clipsContent;
     bindFloat(node,"itemSpacing",bindingFor(ir,"layout.itemSpacing"));
     for(const [key,field] of [["paddingTop","top"],["paddingRight","right"],["paddingBottom","bottom"],["paddingLeft","left"]])bindFloat(node,key,bindingFor(ir,"layout.padding."+field));
-    bindFloat(node,"minWidth",bindingFor(ir,"layout.minWidth"));bindFloat(node,"minHeight",bindingFor(ir,"layout.minHeight"));
+    if(layout.minWidth)bindFloat(node,"minWidth",bindingFor(ir,"layout.minWidth"));
+    if(layout.minHeight)bindFloat(node,"minHeight",bindingFor(ir,"layout.minHeight"));
   };
   const applySizing=(node,ir)=>{
     const width=ir.layout?ir.layout.width:ir.width,height=ir.layout?ir.layout.height:ir.height;
@@ -737,9 +741,10 @@ export function emitTableFigmaWriter(
     runIdentity === FORBIDDEN_COMBOBOX_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V1_RUN_IDENTITY ||
     runIdentity === FORBIDDEN_TABLE_V2_RUN_IDENTITY ||
-    runIdentity === FORBIDDEN_TABLE_V3_RUN_IDENTITY
+    runIdentity === FORBIDDEN_TABLE_V3_RUN_IDENTITY ||
+    runIdentity === FORBIDDEN_TABLE_V4_RUN_IDENTITY
   ) {
-    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v3 identity");
+    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1–v4 identity");
   }
   const pageName = `Recipe Pivot / Table / ${runIdentity}`;
   const plan = {
@@ -788,6 +793,15 @@ export function emitTableFigmaWriter(
       false
   ) {
     throw new TypeError("table writer missing row owned-TEXT characters bind");
+  }
+  if (
+    runtime.includes("TABLE-WRITER-MIN-WIDTH-ZERO-UNSET") === false ||
+    runtime.includes("node.minWidth=layout.minWidth===0?null:layout.minWidth") ===
+      false
+  ) {
+    throw new TypeError(
+      "table writer must unset host minWidth 0 with null rather than assigning 0",
+    );
   }
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   if (
