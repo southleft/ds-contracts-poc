@@ -23,11 +23,13 @@ import {
  * `table/header-cell-instance` and `table/cell-instance` because compile
  * cell instances carry none, omit `clipsContent` on `table/header` and
  * `table/body` because compile header/body frames omit `clipsContent`,
- * and omit `cornerRadius` on `table/header` and `table/body` because
- * compile header/body frames omit `cornerRadius`. Reuses the extras-drop
- * path and the Combobox listbox / set / option clipsContent omit path
- * plus `HEADER_BODY_ROLES`. Does not omit `table/variant` clipsContent
- * or `table/variant` cornerRadius. Does not copy Combobox
+ * omit `cornerRadius` on `table/header` and `table/body` because
+ * compile header/body frames omit `cornerRadius`, and omit `effects`
+ * on `table/header` and `table/body` because compile header/body frames
+ * omit `effects`. Reuses the extras-drop path and the Combobox listbox
+ * / set / option clipsContent omit path plus `HEADER_BODY_ROLES`. Does
+ * not omit `table/variant` clipsContent, `table/variant` cornerRadius,
+ * or `table/variant` empty effects. Does not copy Combobox
  * overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
@@ -63,6 +65,8 @@ export const TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED";
+export const TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER =
+  "TABLE-HOST-HEADER-BODY-EFFECTS-OMITTED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -950,6 +954,19 @@ const omitHeaderBodyCornerRadius = <T extends { cornerRadius?: unknown }>(
   return rest as T;
 };
 
+const omitHeaderBodyEffects = <T extends { effects?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (!role || !HEADER_BODY_ROLES.has(role) || scene.type !== "FRAME")
+    return frame;
+  if (frame.effects === undefined) return frame;
+  const { effects: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitTableTextExtras = <
   T extends {
     letterSpacing?: unknown;
@@ -1013,11 +1030,13 @@ export function sceneToNormalizedIr(
     scene.type === "COMPONENT" ||
     scene.type === "COMPONENT_SET"
   ) {
-    const frame = omitHeaderBodyCornerRadius(
+    const frame = omitHeaderBodyEffects(
       scene,
-      omitHeaderBodyClipsContent(
+      omitHeaderBodyCornerRadius(
         scene,
-        omitSetClipsContent(scene, {
+        omitHeaderBodyClipsContent(
+          scene,
+          omitSetClipsContent(scene, {
           ...common,
           layout: sceneLayout(scene),
           fills,
@@ -1029,6 +1048,7 @@ export function sceneToNormalizedIr(
           clipsContent: scene.clipsContent ?? false,
           children,
         }),
+        ),
       ),
     );
     if (scene.type === "FRAME") result = { kind: "frame", ...frame };

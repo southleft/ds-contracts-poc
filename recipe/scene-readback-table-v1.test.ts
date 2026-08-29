@@ -23,6 +23,7 @@ import {
   TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER,
+  TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
@@ -46,6 +47,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
   assert.match(host, /table@1\/cell/);
   assert.match(host, /table@1\/row/);
   assert.match(host, /rootOwnershipKey/);
@@ -314,6 +316,39 @@ test("host omits cornerRadius on table/header and table/body that compile never 
     (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
     { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
   );
+});
+
+test("host omits effects on table/header and table/body that compile never emits", () => {
+  const header = sceneToNormalizedIr({
+    ...headerBodyFrameScene("table/header", true),
+    effects: [],
+  });
+  const body = sceneToNormalizedIr({
+    ...headerBodyFrameScene("table/body", true),
+    effects: [],
+  });
+  assert.equal(header.kind, "frame");
+  assert.equal(body.kind, "frame");
+  assert.equal("effects" in header, false);
+  assert.equal("effects" in body, false);
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const compileHeader = byRole(compile.ir, "table/header")[0];
+  const compileBody = byRole(compile.ir, "table/body")[0];
+  const compileVariant = byRole(compile.ir, "table/variant/comfortable")[0];
+  assert.equal(compileHeader !== undefined, true);
+  assert.equal(compileBody !== undefined, true);
+  assert.equal(compileVariant !== undefined, true);
+  assert.equal("effects" in (compileHeader ?? {}), false);
+  assert.equal("effects" in (compileBody ?? {}), false);
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    effects: [],
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("effects" in variant, true);
+  assert.deepEqual((variant as { effects?: unknown[] }).effects, []);
 });
 
 test("table probe is table-shaped: header/body/label, HUG, no overlay AABB", () => {
