@@ -1,0 +1,65 @@
+{
+  "artifactVersion": "table-live-v4-capture-authorization-v1",
+  "authorizationId": "table-live-v4",
+  "status": "authorization declared; runtime security prerequisites still mandatory",
+  "authorizationIntent": true,
+  "antecedent": {
+    "commit": "145fd0518b0ce67d93a045c5b64da0f31e78521f",
+    "indexPath": "recipe/evidence/table-live-pivot-v4/antecedent-index.json",
+    "indexSha256": "4f7a2f9ed805c624b2efc128d3c9e95ce586b1825d5b988d09b713d4db6018cb",
+    "hashSetSha256": "8571daae08a6ef65dcb307a12c70c05843cf3358c681c74358010f945edd6140"
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEApvVO1+/rx9LEf45cAnsHguHjcbYfzq6j58yIvL/J55g=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "88d1a5f861a6c2103d7a772dc878da656987133ef51713c2b71b9716b82b5675",
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 25,
+    "hostPhases": 3,
+    "captures": 20,
+    "sourceRoots": 2,
+    "expectedFacts": 1230
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "attemptsExecuted": 0,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "taughtCleanupOnFailureOnly": true,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV41AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "tableLiveV1AuthorizationReusable": false,
+    "tableLiveV2AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending"
+  }
+}
