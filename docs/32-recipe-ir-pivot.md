@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~23:00 UTC-5; supersedes status
+> **Current correction status (2026-08-29 ~09:20 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -528,8 +528,15 @@
 > stable. 72 captures technical-passed. Cleanup
 > persisted, not executed. Input `115:295378`
 > stayed. Combobox is **live on Scratch** pending
-> human grade. Do not invent a Combobox human
-> grade. Product **v1 is incomplete**.
+> human grade. TJ named feedback 2026-08-29
+> (~09:00 UTC-5) on empty/loading listbox
+> padding is **not a miss**: compile and live
+> both carry `listPadding` 4/0/4/0 on every
+> open listbox including empty/loading. No
+> remint. Do not invent a Combobox human
+> grade. Product **v1 is incomplete**. Next
+> hill is Data Table once TJ has seen that
+> conclusion.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
@@ -1721,9 +1728,54 @@ V83 extract sha256 `5be43bb66439927d7d051cbc1491e21b6005417a76f01c4ff0ff6c62821a
 
 **Decision named:** PREPARE V84, one **probe** teaching. Do not score `opacity === 0` occupancy nodes (content placeholder/value layout spacers, not painted) as overlap partners. Polar stay 0. Do **not** revert v19. Do **not** nudge nodes. Do **not** invent overlap-zero. A probe hide of a real painted hit is not named — painted trailing at the end does not cover glyphs.
 
+### Combobox v41 named feedback — empty/loading listbox padding (2026-08-29)
+
+TJ reviewed Combobox v41 on Scratch page `163:35981` and said (named
+feedback, not a human grade):
+
+> Overall pretty good. Hill-climbing rate is good. Recommendation: review
+> this issue, adjust if it is a miss, re-review, then move on.
+
+Two items: (1) MUI/AntD open dropdown **No options** / **Loading…** look
+flush top-left vs the populated option list. (2) MUI and AntD “almost look
+identical.”
+
+**A. Empty/loading listbox padding — not a miss.** Recipe compile emits the
+same `combobox/listbox` padding for `Content=options`, `Content=empty`, and
+`Field state=loading`: `listPadding` top/bottom (adapter fallback **4**),
+left/right **0**, bound to `sizes.*.listPadding`. Empty/loading children are
+text nodes with no own padding. Populated inset comes from option-item
+`optionPaddingX` (10 small / 12 medium). Live page `163:35981` matches:
+32/32 MUI and 32/32 AntD open listboxes are `4/0/4/0`; empty text is
+`x=0, y=4`; option items kept `0/12/0/12`. The flush-left look is
+recipe-accurate. The 4px top is present and easy to miss.
+
+Raw library CSS differs and was **not** a carried compile fact: MUI
+`AutocompleteNoOptions` / `AutocompleteLoading` use `padding: '14px 16px'`
+on a status wrapper and listbox `padding: '8px 0'`; AntD empty uses
+`genItemStyle` → named `optionPadding`, plus dropdown `paddingXXS`. Adapter
+`cloneTokens` kept fixture `listPadding=4` and never mapped those extras
+onto empty/loading text. Teaching 8/14/16 or inventing empty-item
+`optionPadding` would invent padding. No remint.
+
+**B. Library lookalike — informational.** Distinct adapter facts that
+**survived** mint: trigger heights (MUI 40/56 vs AntD 24/32), option height
+(36 vs 32), default/error borders (`#8a8a8a` / `#d32f2f` vs `#d9d9d9` /
+`#ff4d4f`), filled background, selected option fill, loading control blue
+(`#1976d2` vs `#1677ff`). Shared fixture chrome that makes them look alike:
+overlay fill/border/radius/shadow, `listPadding` 4, `optionPaddingX`,
+Roboto, grey/blue occupancy squares, same copy. Do not invent library
+icons. Evidence:
+`recipe/evidence/combobox-v41-empty-listbox-diagnosis.json`. Hashed v41
+RECORD `f330a082` is not restamped. Combobox human grade remains
+**pending**. Product v1 incomplete.
+
+Open Combobox (not Input):
+`https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=163-35981`
+
 ### Immediate next command
 
-Input V85 live human grade **passed** (2026-08-28 ~15:37 UTC-5, TJ Pitre, page `115:295378`). Combobox writer is offline-hermetic (`recipe/combobox-figma-writer.ts`, 144 mock-minted variants). Next hill is **PREPARE Combobox live**: inherit Input host-normalize; new Scratch page; Combobox identity. Do not mint until PREPARE+AUTHORIZE exist. Do **not** write Input page `115:295378` / sets `115:296805` + `115:298106`. Do **not** call `figma_arrange_component_set` on Input. Safe restore if anything goes wrong: checkpoint `2392869719628549246` (`V85 Input grids OK`). Never restore `2392877528965054592`. Button extras-drop teach landed; silent is still **149/8706** and **149/8778**, extras 1/1. Do **not** ping TJ for Button review. **B3 remains: attributable human signoff on Button**. Stopped on fonts and invented set chrome — do not invent Roboto/SemiBold as compile fonts. Do not invent a Button human grade. Do not claim v1 complete. Do not revert v19. Do not invent overlap-zero. Do not restart V85 or V84 attempt 2 without a new teaching. Do not cleanup-delete page `115:295378`.
+Combobox v41 TJ named feedback (2026-08-29 ~09:00 UTC-5) diagnosed: empty/loading listbox padding is **not a miss**; no remint. Combobox human grade is still **pending** — do not invent one. Next hill is **Data Table** once TJ has seen the empty/loading conclusion on page `163:35981`. Do **not** start Data Table / Calendar / Button remint until he has. Do **not** write Input page `115:295378` / sets `115:296805` + `115:298106`. Do **not** call `figma_arrange_component_set` on Input. Safe Input restore: checkpoint `2392869719628549246` (`V85 Input grids OK`). Never restore `2392877528965054592`. Combobox spaced checkpoint `2393104521192557663`. Button extras-drop teach landed; silent is still **149/8706** and **149/8778**, extras 1/1. Do **not** ping TJ for Button review. **B3 remains: attributable human signoff on Button**. Do not invent a Button or Combobox human grade. Do not claim v1 complete.
 
 ### Input V85 human signoff and arrange incident (2026-08-28)
 
@@ -3160,7 +3212,7 @@ grade.
 | ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
 | Button      | **technical mint retained; extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Stopped on fonts and invented set chrome. Do not invent Roboto/SemiBold. |
 | Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28; product v1 incomplete; overall false** | Combobox live next (inherit Input host-normalize; new page). Button leftover still pending (149 silent / fonts + set chrome). Do not invent a Button human grade. Do not claim v1 complete. |
-| Combobox    | **live v41 attempt 1 mint stayed on `163:35981`; probe/accounting/72 captures passed; human grade pending; overall false**                                                                              | Attributable human signoff on Scratch page `163:35981` (not Input `115:295378`). Do not invent a Combobox human grade. |
+| Combobox    | **live v41 attempt 1 mint stayed on `163:35981`; TJ named feedback 2026-08-29 empty/loading listbox padding not a miss; no remint; human grade pending; overall false**                                                                              | Attributable human signoff still pending on Scratch page `163:35981` (not Input `115:295378`). Do not invent a Combobox human grade. Next hill is Data Table after TJ sees the empty/loading conclusion. |
 | Data Table  | not claimed                                                                                                                                                     | human-reviewed adapters, offline cross-library proof, then Scratch-only live                     |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
 
