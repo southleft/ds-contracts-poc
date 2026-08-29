@@ -1772,7 +1772,19 @@
       "hostRecoversCompileCarriedTriggerCharactersUnchangedFromV37": true,
       "hostObserveRecoversCompileCarriedOptionSetNameUnchangedFromV38": true,
       "hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrder": true,
-      "runIdentity": "70c24cbd-d27f2e85-combobox-v1"
+      "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+      "attempt1": {
+        "status": "failed-closed",
+        "restoreAccepted": true,
+        "restoredCount": 144,
+        "extractWalkCleared": true,
+        "hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrderTeachingCleared": true,
+        "refusedClass": "probe/usability/restoration",
+        "refused": "probe/usability/restoration exactSceneRestoration=false both sources; 24 open-options cells overlapPixels 5-9",
+        "mintStayed": false,
+        "cleanedPageId": "163:29627"
+      },
+      "nextTeaching": "host probe must keep exactSceneRestoration after the open-variant walk, not refuse both sources when resize and property restore already pass"
     },
     "blockers": [
       "Combobox live v1 attempt 1 failed closed at restore 240 vs 144",
@@ -1813,6 +1825,7 @@
       "Combobox live v36 attempt 1 failed closed at independent root accounting mismatches; host observe trigger-slot componentRef compile sibling-order teaching cleared",
       "Combobox live v37 attempt 1 failed closed at independent root accounting mismatches; host observe compile-carried trigger characters teaching cleared",
       "Combobox live v38 attempt 1 failed closed at two-cycle scene-derived fixed-point; host observe compile-carried option-set name teaching cleared",
+      "Combobox live v39 attempt 1 failed closed at probe/usability/restoration; host sceneToNormalizedIr trigger-slot sibling-order teaching cleared",
       "no Combobox human grade",
       "product v1 incomplete"
     ]

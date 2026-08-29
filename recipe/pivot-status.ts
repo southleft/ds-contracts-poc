@@ -4964,7 +4964,18 @@ export function validatePivotStatus(
       ?.hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrder !==
       true ||
     status.combobox?.liveV39?.runIdentity !==
-      "70c24cbd-d27f2e85-combobox-v1"
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV39?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV39?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV39?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV39?.attempt1
+      ?.hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrderTeachingCleared !==
+      true ||
+    status.combobox?.liveV39?.attempt1?.refusedClass !==
+      "probe/usability/restoration" ||
+    status.combobox?.liveV39?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV39?.nextTeaching !==
+      "host probe must keep exactSceneRestoration after the open-variant walk, not refuse both sources when resize and property restore already pass"
   )
     fail("combobox live v39 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))

@@ -452,13 +452,30 @@
 > recover trigger-slot componentRefs in compile sibling
 > order (prefix then clear then popup), not the live
 > selected-first order. Keep v2–v38 teachings.
-> Combobox live v39 PREPARE teaches host
-> sceneToNormalizedIr must recover trigger-slot
-> componentRefs in compile sibling order (prefix
-> then clear then popup), not the live
-> selected-first order. Keep v2–v38 teachings.
-> Combobox is **not live**. Do not invent a Combobox
-> human grade. Product **v1 is incomplete**.
+> Combobox live v39 PREPARE `35330811` and AUTHORIZE
+> `9d136bf0` landed. Attempt 1 minted page `163:29627`;
+> restore held 144 owned FILL texts. Host
+> sceneToNormalizedIr trigger-slot compile
+> sibling-order teaching cleared; original-plan
+> independent root accounting is extra=0 mismatch=0
+> silent=0 and 13307/13307 on both roots (combobox
+> 12915/12915). Two-cycle scene-derived fixed-point
+> is stable. Host then refused
+> probe/usability/restoration
+> (`exactSceneRestoration` false on both sources
+> after the open-variant walk; 24 open-options
+> cells measure overlapPixels 5–9 against the >2
+> threshold). Cleanup accepted; that Combobox page
+> is gone. Input `115:295378` stayed. Do not
+> restart v39 attempt 2 as-is. Next teaching: host
+> probe must keep exactSceneRestoration after the
+> open-variant walk, not refuse both sources when
+> resize and property restore already pass. Measure
+> overlapping node pairs before inventing
+> exclusion; do not invent Polar 9/30/0. Keep
+> v2–v39 teachings. Combobox is **not live**. Do
+> not invent a Combobox human grade. Product **v1
+> is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
