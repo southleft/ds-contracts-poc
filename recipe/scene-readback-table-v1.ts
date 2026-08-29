@@ -35,7 +35,8 @@ import {
  * omit `effects`, omit `effects` on `table/variant` because compile
  * variants omit `effects`, omit `effects` on `table/row` variants
  * because compile row variants omit `effects`, omit `strokes` on
- * `table/header` and
+ * `table/row` variants because compile row variants omit `strokes`,
+ * omit `strokes` on `table/header` and
  * `table/body` because compile header/body frames omit `strokes`, and
  * omit empty `dashPattern` on `table/variant` strokes because compile
  * variant strokes omit `dashPattern`, omit `cornerRadius` on
@@ -52,9 +53,9 @@ import {
  * `TABLE_VARIANT_ROLE`, and `ROW_COMPONENT_ROLE`. Row components still
  * compile-carry `fills.0.color`. Does not omit `table/variant`
  * cornerRadius or `table/variant` strokes. Does not omit cell-variant
- * `clipsContent` or `cornerRadius`. Does not invent `clipsContent`,
- * `cornerRadius`, or `effects` onto compile row variants. Does not invent
- * `cornerRadius`, `effects`, or `strokes`
+ * `clipsContent`, `cornerRadius`, or empty `strokes`. Does not invent
+ * `clipsContent`, `cornerRadius`, `effects`, or `strokes` onto compile
+ * row variants. Does not invent `cornerRadius`, `effects`, or `strokes`
  * onto compile sets. Does not invent `dashPattern` onto compile. Does
  * not copy Combobox overlay/option/listbox roles.
  */
@@ -107,6 +108,8 @@ export const TABLE_LIVE_V1_ROW_VARIANT_EFFECTS_OMITTED_MARKER =
   "TABLE-HOST-ROW-VARIANT-EFFECTS-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-STROKES-OMITTED";
+export const TABLE_LIVE_V1_ROW_VARIANT_STROKES_OMITTED_MARKER =
+  "TABLE-HOST-ROW-VARIANT-STROKES-OMITTED";
 export const TABLE_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
   "TABLE-HOST-VARIANT-EMPTY-STROKE-DASH-PATTERN-OMITTED";
 export const TABLE_LIVE_V1_SET_CORNER_RADIUS_OMITTED_MARKER =
@@ -1081,9 +1084,13 @@ const omitHeaderBodyStrokes = <T extends { strokes?: unknown }>(
   frame: T,
 ): T => {
   void TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER;
+  void TABLE_LIVE_V1_ROW_VARIANT_STROKES_OMITTED_MARKER;
   const role = sceneRole(scene);
-  if (!role || !HEADER_BODY_ROLES.has(role) || scene.type !== "FRAME")
-    return frame;
+  const headerBody =
+    !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
+  const rowVariant =
+    !!role && ROW_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
+  if (!headerBody && !rowVariant) return frame;
   if (frame.strokes === undefined) return frame;
   const { strokes: _omitted, ...rest } = frame;
   return rest as T;

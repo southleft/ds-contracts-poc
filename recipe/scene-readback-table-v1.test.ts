@@ -754,6 +754,41 @@ test("host omits effects on table/row variants that compile never emits and keep
   assert.equal("effects" in variant, false);
 });
 
+test("host omits strokes on table/row variants that compile never emits and keeps table/variant strokes", () => {
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const rowRoles = [
+    "table/row/compact/default",
+    "table/row/compact/selected",
+    "table/row/comfortable/default",
+    "table/row/comfortable/selected",
+  ] as const;
+  for (const role of rowRoles) {
+    const compiled = byRole(compile.ir, role)[0];
+    assert.equal(compiled !== undefined, true);
+    assert.equal("strokes" in (compiled ?? {}), false);
+    const observed = sceneToNormalizedIr({
+      ...rowComponentScene(),
+      ownershipKey: role,
+      name: role,
+      semanticRole: role,
+      strokes: [],
+    });
+    assert.equal(observed.kind, "component");
+    assert.equal("strokes" in observed, false);
+  }
+  const compileVariant = byRole(compile.ir, "table/variant/comfortable")[0];
+  assert.equal(compileVariant !== undefined, true);
+  assert.equal("strokes" in (compileVariant ?? {}), true);
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    strokes: [{ type: "SOLID", color: "#e5e7ebff" }],
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("strokes" in variant, true);
+});
+
 test("host omits effects on table/header and table/body that compile never emits", () => {
   const header = sceneToNormalizedIr({
     ...headerBodyFrameScene("table/header", true),
