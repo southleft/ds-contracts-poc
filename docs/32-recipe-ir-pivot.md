@@ -46,10 +46,14 @@
 > `table/row/owned-cell-label` TEXT bind host). MinWidth 0→null teaching
 > cleared; restore 8 held. Signed cleanup removed page `165:40914`. Mint
 > did not stay. Input `115:295378` and Combobox `163:35981` stayed. Do
-> not restart v5 attempt 2 as-is. Table live v6 PREPARE lands the one
-> teaching: when extract walks a row COMPONENT, skip untagged
-> writer-created `table/row/owned-cell-label` TEXT nodes that exist only
-> as host-listed `characters` bind targets. Not live. Product **v1 is
+> not restart v5 attempt 2 as-is. Table live v6 PREPARE `13fa406d6`
+> and AUTHORIZE `8b86b5c1a` landed. Attempt 1 failed closed at extract
+> `REQUIRED-BINDING-ABSENT` (`strokes.0.weight` on
+> `table/variant/comfortable`; host emits four per-side stroke-weight
+> binds). Row owned-cell-label skip teaching cleared; restore 8 held.
+> Signed cleanup removed page `165:41173`. Mint did not stay. Input
+> `115:295378` and Combobox `163:35981` stayed. Do not restart v6
+> attempt 2 as-is. Not live. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
@@ -1665,13 +1669,15 @@ closed at writer (`TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER`);
 the partial page `165:40704` was cleaned. Table live v4 attempt 1 failed
 closed at writer (`TABLE-MIN-WIDTH-ZERO`); the partial page `165:40763`
 was cleaned. Table live v5 attempt 1 failed closed at extract
-(`SCENE-OWNERSHIP-KEY-ABSENT`); the page `165:40914` was cleaned. No
+(`SCENE-OWNERSHIP-KEY-ABSENT`); the page `165:40914` was cleaned. Table
+live v6 attempt 1 failed closed at extract (`REQUIRED-BINDING-ABSENT`);
+the page `165:41173` was cleaned. No
 Data Table live mint and no Data Table human grade.
 
 | step | action | exit criterion |
 | --- | --- | --- |
 | D1 | Explicit Data Table recipe + reviewed adapters for two unrelated real libraries. Offline cross-library proof first: row/column templates, declared column axis, required-facts / door / lowering / grammar coverage. | **Offline recipe authored 2026-08-29.** `table@1` + adapters + writer `ds.contracts.table.recipe.v1`. `npm run recipe:table:check` green (2 densities × 2 row states; 10 components / 22 instances; hermetic mock-mint 20 variants). Door/lowering/grammar corpus coverage and live are not claimed. |
-| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v5 attempt 1 failed closed 2026-08-29.** Writer accepted; restore 8 held; extract refused `SCENE-OWNERSHIP-KEY-ABSENT:165:40973`. MinWidth 0→null teaching cleared. Signed cleanup removed `165:40914`. Do not restart v5 attempt 2 as-is. Not live. |
+| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v6 attempt 1 failed closed 2026-08-29.** Writer accepted; restore 8 held; extract walk cleared owned-cell-label skip; collapse refused `REQUIRED-BINDING-ABSENT:strokes.0.weight:table/variant/comfortable`. Signed cleanup removed `165:41173`. Do not restart v6 attempt 2 as-is. Not live. |
 | D3 | Calendar archetype addition is a reviewed minor contract change (`ARCHETYPES` in `packages/schema/src/archetype.ts` plus required-facts). Then the same offline-then-live sequence. | Calendar is no longer “undefined (0 contracts)” by proof, not by deleting the bar. |
 | D4 | Human review of Table/Calendar adapters before live if a human-authored adapter is required. | **Human gate** for adapter authorship/review only. Live still Scratch-only. |
 

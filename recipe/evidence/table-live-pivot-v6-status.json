@@ -1,0 +1,42 @@
+{
+  "artifactVersion": "table-live-v6-status-v1",
+  "status": "attempt 1 failed closed at extract REQUIRED-BINDING-ABSENT; writer accepted; restore 8 held; row owned-cell-label skip teaching cleared; signed cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "13fa406d6cad0f1255515f4aececdbd61b848f5a",
+    "indexPath": "recipe/evidence/table-live-pivot-v6/antecedent-index.json",
+    "indexSha256": "5754593a2ba417bf5db8319a670fd75fb8754d4c36750f744bed458bdd23e038",
+    "hashSetSha256": "2d831ecb12816369580881ca34680859b95a095a981d49990afbcaa9ecc1979e"
+  },
+  "authorization": {
+    "commit": "8b86b5c1a43f4bef04d4aa4952a82e1692de0c89",
+    "path": "recipe/evidence/table-live-pivot-v6/capture-authorization.json",
+    "sha256": "1291b28d0325c7e3e73cb8401240d987c03948a71c603a74b5215bcc831c3b02",
+    "signingPublicKeySpkiSha256": "396881982adc1c456fb674c2700b81e4e54221c494070e672903b785df713656"
+  },
+  "attempt1": {
+    "pageId": "165:41173",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "restoredCount": 8,
+    "extractAccepted": false,
+    "writerRefused": null,
+    "extractRefused": "REQUIRED-BINDING-ABSENT",
+    "rowOwnedCellLabelSkipTeachingCleared": true,
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "when extract host-normalizes table and cell variants, fold Figma per-side strokeTopWeight/strokeRightWeight/strokeBottomWeight/strokeLeftWeight binds that share one variable into compile field strokes.0.weight",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}
