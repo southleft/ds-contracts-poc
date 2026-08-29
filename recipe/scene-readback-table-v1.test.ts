@@ -709,6 +709,51 @@ test("host omits cornerRadius on table/row variants that compile never emits and
   );
 });
 
+test("host omits effects on table/row variants that compile never emits and keeps table/variant cornerRadius", () => {
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const rowRoles = [
+    "table/row/compact/default",
+    "table/row/compact/selected",
+    "table/row/comfortable/default",
+    "table/row/comfortable/selected",
+  ] as const;
+  for (const role of rowRoles) {
+    const compiled = byRole(compile.ir, role)[0];
+    assert.equal(compiled !== undefined, true);
+    assert.equal("effects" in (compiled ?? {}), false);
+    const observed = sceneToNormalizedIr({
+      ...rowComponentScene(),
+      ownershipKey: role,
+      name: role,
+      semanticRole: role,
+      effects: [],
+    });
+    assert.equal(observed.kind, "component");
+    assert.equal("effects" in observed, false);
+  }
+  const compileVariant = byRole(compile.ir, "table/variant/comfortable")[0];
+  assert.equal(compileVariant !== undefined, true);
+  assert.equal("cornerRadius" in (compileVariant ?? {}), true);
+  assert.deepEqual(
+    (compileVariant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  );
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    cornerRadius: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+    effects: [],
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("cornerRadius" in variant, true);
+  assert.deepEqual(
+    (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  );
+  assert.equal("effects" in variant, false);
+});
+
 test("host omits effects on table/header and table/body that compile never emits", () => {
   const header = sceneToNormalizedIr({
     ...headerBodyFrameScene("table/header", true),
