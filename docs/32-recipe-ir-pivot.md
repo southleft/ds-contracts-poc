@@ -99,8 +99,14 @@
 > cleared; restore 8 held. Signed cleanup removed page `165:42936`.
 > Mint did not stay. Input `115:295378` and Combobox `163:35981`
 > stayed. Do not restart v12 attempt 2 as-is. Table live v13
-> PREPARE prepared (row-instance bindings omit). AUTHORIZE
-> and live attempt pending. Product **v1 is
+> PREPARE `cac4b88e5` and AUTHORIZE `d75971dd0` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/variant` `clipsContent`; compile variants omit the
+> key; host emits extract `clipsContent` false). Row-instance
+> bindings omit teaching cleared; restore 8 held. Signed
+> cleanup removed page `165:43271`. Mint did not stay. Input
+> `115:295378` and Combobox `163:35981` stayed. Do not restart
+> v13 attempt 2 as-is. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
