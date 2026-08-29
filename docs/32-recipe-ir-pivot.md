@@ -107,12 +107,14 @@
 > (`combobox/control/clear`: host/inherited trailing-slot list ranks
 > `fills.0.color` first; compile emits `width.value` then `height.value`
 > then `fills.0.color`). Cleanup accepted; that Combobox page is gone.
-> Input `115:295378` stayed. Do not restart v12 attempt 2 as-is. Next
-> teaching: host must order `combobox/control/clear` bindings to compile
-> field order so `width.value` precedes `height.value` precedes
-> `fills.0.color`, not live extract order or the inherited fills-first
-> trailing-slot list. Keep v2–v12 teachings. Combobox is **not live**.
-> Do not invent a Combobox human grade. Product **v1 is incomplete**.
+> Input `115:295378` stayed. Do not restart v12 attempt 2 as-is. Combobox
+> live v13 PREPARE teaches host to order `combobox/control/clear`
+> bindings to compile field order so `width.value` precedes
+> `height.value` precedes `fills.0.color`, not live extract order or the
+> inherited fills-first trailing-slot list. Sibling
+> `combobox/control/popup` shares that same list. Keep v2–v12 teachings.
+> Combobox is **not live**. Do not invent a Combobox human grade. Product
+> **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
