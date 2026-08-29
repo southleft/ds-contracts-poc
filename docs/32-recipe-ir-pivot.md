@@ -420,8 +420,11 @@
 > 2 as-is. Next teaching: host observe must recover
 > compile-carried trigger characters, not the live
 > selected-option characters. Keep v2–v36 teachings.
-> Combobox is **not live**. Do not invent a Combobox
-> human grade. Product **v1 is incomplete**.
+> Combobox live v37 PREPARE teaches host observe must
+> recover compile-carried trigger characters, not the
+> live selected-option characters. Keep v2–v36
+> teachings. Combobox is **not live**. Do not invent a
+> Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
