@@ -92,8 +92,13 @@
 > cleanup removed page `165:42677`. Mint did not stay. Input
 > `115:295378` and Combobox `163:35981` stayed. Do not restart
 > v11 attempt 2 as-is. Table live v12
-> PREPARE prepared (header/body `strokes` omit). AUTHORIZE
-> and live attempt pending. Product **v1 is
+> PREPARE `8334502b6` and AUTHORIZE `820fa53eb` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row-instance` copied `fills.0.color` bindings; compile
+> row-instances carry none). Header/body `strokes` omit teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:42936`.
+> Mint did not stay. Input `115:295378` and Combobox `163:35981`
+> stayed. Do not restart v12 attempt 2 as-is. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
