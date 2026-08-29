@@ -1,0 +1,104 @@
+{
+  "artifactVersion": "calendar-named-refusal-v1",
+  "recordedAt": "2026-08-29",
+  "archetype": "calendar / date-picker",
+  "recipe": { "id": "calendar", "version": 1 },
+  "posture": "docs/32 §F item 4 second branch — a named refusal a reader can act on, not a claim of proof",
+  "whatIsProven": {
+    "archetypeDeclared": {
+      "change": "calendar / date-picker added to ARCHETYPES (twenty -> twenty-one) with a required-facts table",
+      "classification": "minor under docs/26 V1-COMPAT-02 — a widening; no field repurposed, no value removed or renamed",
+      "files": [
+        "packages/schema/src/archetype.ts",
+        "packages/core/src/required-facts.ts"
+      ],
+      "requiredFacts": [
+        "calendar/day-grid",
+        "calendar/day-cell-box",
+        "calendar/selected-day"
+      ],
+      "expectedFacts": ["calendar/weekday-header", "calendar/outside-day"],
+      "schemaProjectionsRegenerated": true
+    },
+    "offlineRecipe": {
+      "path": "recipe/recipes/calendar.ts",
+      "gate": "npm run recipe:calendar:check",
+      "gateGreen": true,
+      "tests": 10,
+      "components": 10,
+      "sets": {
+        "calendar/set": 4,
+        "calendar/week-set": 2,
+        "calendar/day-set": 4
+      },
+      "denominatorMatchesTable": true,
+      "fixedPointStable": "compile(collapse(compile(x))) === compile(x) on every source",
+      "refusesUnsupportedStructuralEdit": true,
+      "refusesHuggedDayCell": true,
+      "refusesShortWeek": true
+    },
+    "reviewedSource": {
+      "library": "@astryxdesign/core Calendar",
+      "vendoredAt": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar",
+      "everyValueReadFromSource": true,
+      "resolvedTokens": {
+        "dayCellSize": "--size-element-md = 32px",
+        "gridGap": "--spacing-2 = 8px",
+        "dayCellPadding": "--spacing-1 = 4px",
+        "dayCellRadius": "--radius-inner = 4px",
+        "dayFontSize": "--text-supporting-size -> --font-size-sm = 0.75rem = 12px",
+        "textPrimary": "--color-text-primary #0A1317",
+        "textSecondary": "--color-text-secondary #4E606F",
+        "accent": "--color-accent #0064E0",
+        "onAccent": "--color-on-accent #FFFFFF",
+        "todayRing": "--color-border-emphasized #CCD3DB, inset 0 0 0 1px",
+        "surface": "--color-background-surface #FFFFFF"
+      },
+      "todayRingCarriedNotDropped": "astryx marks TODAY with an inset 1px ring and NO background, and SELECTED with a background and no ring. A background+text model would have lost the today marker entirely, so DayStateTokens gained an optional ring and calendar@1 emits it as an inside stroke.",
+      "receipts": [
+        {
+          "reason": "lowered",
+          "what": "the dark half of every astryx light-dark() colour pair",
+          "why": "calendar@1 carries one colour mode; the dark half is a second Figma variable mode, not a missing colour"
+        }
+      ]
+    },
+    "dateGrammarProblemSolved": {
+      "problem": "examples/day-picker/PROVENANCE.md records that the capture grammar cannot spell a Date, so a calendar driven by a live clock has a today ring and a visible month that move between captures and never byte-compare",
+      "resolution": "calendar@1 carries the month that was RENDERED as content (caption, weekdays, weeks of labelled day states), not a Date to re-render from. Determinism comes from the content being data. No $date marker was invented."
+    }
+  },
+  "refusal": {
+    "liveMintNotAttempted": {
+      "refused": true,
+      "statement": "No Calendar live Figma mint was attempted and no Calendar human grade exists or is claimed.",
+      "whyNotAttempted": "The measured cost basis of a live climb in this lineage: Input needed 78 recorded attempt-1 cycles to a staying mint, Combobox 41, and Data Table is at 27 and still has not stayed. docs/32 §7 additionally names Calendar as the densest grid the pipeline has faced with almost all of its behaviour code-only. Opening that climb was not in this round's scope.",
+      "whatWouldBeNeeded": [
+        "recipe/calendar-figma-writer.ts, following table-figma-writer.ts",
+        "the PREPARE / AUTHORIZE / attempt / RECORD scaffold per version",
+        "an attributable human grade from the owner on a mint that stays"
+      ],
+      "actionableBecause": "the offline gate is green and the writer is the only missing offline artifact, so the live climb can start from a known-good compile rather than from nothing"
+    },
+    "crossLibraryLegNotProven": {
+      "refused": true,
+      "statement": "The Calendar offline proof is SINGLE-LIBRARY. Every other archetype in this pivot carries two unrelated real libraries; Calendar carries one.",
+      "why": [
+        "react-day-picker@10.0.1 is the obvious second library and is DELIBERATELY unused. examples/day-picker/PROVENANCE.md states a blindness rule: no stage of this repo's pipeline has ever been run against it, so it can serve as the unseen-library exam. Authoring an adapter now would spend an asset worth more than this proof.",
+        "extract/pilots/eventz/out/contracts/date-picker.contract.json exists but carries props: [] and anatomy: { root: {} } — an empty shell, not a source.",
+        "No other calendar or date-picker appears in the captured corpus."
+      ],
+      "doesNotClaim": "cross-library honesty for Calendar. docs/32 §E1 is not satisfied for this archetype.",
+      "actionableBecause": "the blind react-day-picker leg is exactly the first-pass-on-an-unseen-library test docs/32 wants; running it is a decision about when to spend it, not a missing capability"
+    }
+  },
+  "doesNotClaim": [
+    "a Calendar live mint",
+    "a Calendar human grade",
+    "cross-library proof for Calendar",
+    "that product v1 is complete"
+  ],
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

@@ -22730,5 +22730,32 @@
       "mintStayed": true,
       "reviewWorthyInputCanvas": true
     }
+  },
+  "calendar": {
+    "overallSuccess": false,
+    "status": "offline recipe proven single-library; live mint and cross-library leg are named refusals",
+    "humanSignoff": "pending",
+    "liveFigma": false,
+    "humanGradeInvented": false,
+    "archetypeDeclared": true,
+    "archetypeChange": "calendar / date-picker added to ARCHETYPES with required facts; minor under docs/26 V1-COMPAT-02",
+    "recipe": {
+      "id": "calendar",
+      "version": 1,
+      "gate": "recipe:calendar:check",
+      "gateGreen": true,
+      "components": 10,
+      "tests": 10,
+      "fixedPointStable": true
+    },
+    "reviewedSources": 1,
+    "reviewedSourceNames": ["@astryxdesign/core Calendar"],
+    "crossLibraryProven": false,
+    "namedRefusal": "recipe/evidence/calendar-named-refusal-v1.json",
+    "blockers": [
+      "no live mint; no human grade",
+      "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
+      "no calendar-figma-writer.ts yet"
+    ]
   }
 }

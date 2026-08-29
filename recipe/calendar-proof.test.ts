@@ -1,0 +1,195 @@
+import assert from "node:assert/strict";
+import test from "node:test";
+
+import { canonicalCalendarRecipeInstance } from "./fixtures/calendar.js";
+import { astryxCalendarInstance } from "./fixtures/library-calendars.js";
+import {
+  CALENDAR_DAY_COUNT,
+  CALENDAR_DAY_STATES,
+  CALENDAR_OUTSIDE_DAYS,
+  CALENDAR_WEEK_COUNT,
+  CALENDAR_WEEK_NUMBERS,
+  collapseCalendarRecipe,
+  compileCalendarRecipe,
+  validateCalendarStructure,
+} from "./recipes/calendar.js";
+import { RecipeRefusal } from "./recipe.js";
+
+const INSTANCES = [
+  ["canonical", canonicalCalendarRecipeInstance],
+  ["astryx", astryxCalendarInstance],
+] as const;
+
+const setOf = (envelope: any, role: string) =>
+  envelope.ir.children.find((child: any) => child.role === role);
+
+test("calendar@1 compiles the declared set shape for every source", () => {
+  for (const [name, instance] of INSTANCES) {
+    const envelope: any = compileCalendarRecipe(instance);
+    assert.equal(envelope.archetype, "calendar / date-picker", name);
+    assert.equal(envelope.recipe.id, "calendar");
+    assert.equal(envelope.ir.role, "calendar/library");
+
+    const calendarSet = setOf(envelope, "calendar/set");
+    const weekSet = setOf(envelope, "calendar/week-set");
+    const daySet = setOf(envelope, "calendar/day-set");
+    assert.equal(
+      calendarSet.children.length,
+      CALENDAR_OUTSIDE_DAYS.length * CALENDAR_WEEK_NUMBERS.length,
+      `${name}: every OutsideDays x WeekNumbers variant`,
+    );
+    assert.equal(weekSet.children.length, CALENDAR_WEEK_NUMBERS.length);
+    assert.equal(daySet.children.length, CALENDAR_DAY_STATES.length);
+    assert.equal(
+      calendarSet.children.length +
+        weekSet.children.length +
+        daySet.children.length,
+      10,
+      `${name}: ten components, the same denominator table@1 carries`,
+    );
+  }
+});
+
+test("a week carries exactly seven days and a grid exactly the declared weeks", () => {
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const weekSet = setOf(envelope, "calendar/week-set");
+  for (const week of weekSet.children) {
+    const days = week.children.filter((child: any) =>
+      String(child.role).startsWith("calendar/day-instance/"),
+    );
+    assert.equal(
+      days.length,
+      CALENDAR_DAY_COUNT,
+      "seven days is what a week is",
+    );
+  }
+  const variant = setOf(envelope, "calendar/set").children[0];
+  const grid = variant.children.find(
+    (child: any) => child.role === "calendar/grid",
+  );
+  assert.equal(grid.children.length, CALENDAR_WEEK_COUNT);
+});
+
+test("every day cell carries a measured box — calendar/day-cell-box", () => {
+  // This is the required fact the Table climb ran into live: a grid whose cells
+  // hug their own content cannot align into columns. Enforced here, not hoped for.
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  for (const day of setOf(envelope, "calendar/day-set").children) {
+    assert.equal(day.layout.width.mode, "fixed", `${day.role} width`);
+    assert.equal(day.layout.height.mode, "fixed", `${day.role} height`);
+    assert.equal(
+      day.layout.width.value,
+      day.layout.height.value,
+      "square cell",
+    );
+  }
+});
+
+test("collapse is a fixed point for every source", () => {
+  for (const [name, instance] of INSTANCES) {
+    const envelope: any = compileCalendarRecipe(instance);
+    const collapsed = collapseCalendarRecipe(
+      envelope,
+      (instance as any).provenance.selection,
+    );
+    const again: any = compileCalendarRecipe(collapsed);
+    assert.equal(
+      again.integrity.canonicalHash,
+      envelope.integrity.canonicalHash,
+      `${name}: compile(collapse(compile(x))) === compile(x)`,
+    );
+  }
+});
+
+test("astryx carries the today ring rather than dropping it", () => {
+  // @astryxdesign/core marks TODAY with an inset 1px ring and NO background.
+  // A model of background+text alone would have lost the today marker; Figma
+  // expresses a ring as an inside stroke, so it is carried.
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const daySet = setOf(envelope, "calendar/day-set");
+  const today = daySet.children.find(
+    (child: any) => child.role === "calendar/day/today",
+  );
+  const selected = daySet.children.find(
+    (child: any) => child.role === "calendar/day/selected",
+  );
+  assert.equal(today.strokes?.length, 1, "today carries a ring");
+  assert.equal(today.strokes[0].weight, 1);
+  assert.equal(today.strokes[0].align, "inside");
+  assert.equal(today.fills[0].color, "#00000000", "today has no background");
+  assert.equal(selected.strokes, undefined, "selected carries no ring");
+  assert.equal(
+    selected.fills[0].color,
+    "#0064e0ff",
+    "selected carries the accent background",
+  );
+});
+
+test("the dark half of every light-dark() colour is receipted, not dropped", () => {
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  assert.equal(envelope.receipts.length, 1);
+  assert.equal(envelope.receipts[0].reason, "lowered");
+  assert.match(envelope.receipts[0].evidence, /light-dark/);
+});
+
+test("a hugged day cell is refused — the ragged-column defect cannot compile", () => {
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const broken = structuredClone(envelope);
+  const daySet = broken.ir.children.find(
+    (child: any) => child.role === "calendar/day-set",
+  );
+  daySet.children[0].layout.width = { mode: "hug" };
+  assert.throws(
+    () => validateCalendarStructure(broken.ir),
+    (error: unknown) =>
+      error instanceof RecipeRefusal &&
+      error.findings.some((line) => line.includes("calendar/day-cell-box")),
+    "a day cell without a measured box must refuse",
+  );
+});
+
+test("a short week is refused", () => {
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const broken = structuredClone(envelope);
+  const weekSet = broken.ir.children.find(
+    (child: any) => child.role === "calendar/week-set",
+  );
+  weekSet.children[0].children.pop();
+  assert.throws(
+    () => validateCalendarStructure(broken.ir),
+    (error: unknown) => error instanceof RecipeRefusal,
+    "a week that is not seven days must refuse",
+  );
+});
+
+test("an unsupported structural edit is refused on collapse", () => {
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const edited = structuredClone(envelope);
+  const daySet = edited.ir.children.find(
+    (child: any) => child.role === "calendar/day-set",
+  );
+  daySet.children[0].cornerRadius.topLeft = 999;
+  assert.throws(
+    () =>
+      collapseCalendarRecipe(
+        edited,
+        (astryxCalendarInstance as any).provenance.selection,
+      ),
+    (error: unknown) => error instanceof RecipeRefusal,
+    "calendar@1 accepts only the declared designer edit surface",
+  );
+});
+
+test("a foreign envelope is refused", () => {
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const foreign = structuredClone(envelope);
+  foreign.recipe = { id: "table", version: 1 };
+  assert.throws(
+    () =>
+      collapseCalendarRecipe(
+        foreign,
+        (astryxCalendarInstance as any).provenance.selection,
+      ),
+    (error: unknown) => error instanceof RecipeRefusal,
+  );
+});
