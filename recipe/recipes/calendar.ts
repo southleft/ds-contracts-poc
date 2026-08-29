@@ -489,22 +489,59 @@ const weekComponent = (
   };
 };
 
-const weekInstance = (
-  role: string,
+/**
+ * A week INSIDE the calendar grid is a frame of day instances, not an instance
+ * of `calendar/week-set`.
+ *
+ * A week instance cannot carry this month. Day state varies WITHIN a week --
+ * one day is `today`, another is `selected`, the leading days are `outside` --
+ * and a component instance picks ONE variant for the whole component. Table
+ * gets away with row instances because a row is selected or not as a unit; a
+ * week is not. Instantiating weeks made every week in the grid render week
+ * one's seven days and week one's states, three times over. That compiled, held
+ * its fixed point, and was not a calendar.
+ *
+ * So the grid owns day instances directly: each one picks its own State variant
+ * and carries its own Label. `calendar/week-set` stays as the published week
+ * template, exactly as `calendar/day-set` is the published day template.
+ */
+const weekFrame = (
+  instance: CalendarRecipeInstance,
   week: CalendarWeek,
+  index: number,
   weekNumbers: CalendarWeekNumbers,
-) => ({
-  kind: "instance" as const,
-  role,
-  label: week.id,
-  componentRef: "calendar@1/week",
-  properties: {
-    WeekNumbers: weekNumbers,
-    "Week number": week.weekNumber,
-  },
-  width: hug,
-  height: hug,
-});
+): FrameNode => {
+  const children: IRNode[] = [];
+  if (weekNumbers === "on")
+    children.push(
+      text(
+        `calendar/week/${index}/number`,
+        week.weekNumber,
+        instance.tokens.typography.weekday,
+        instance.tokens.dayCell.fontSize,
+        instance.tokens.weekNumberText,
+      ),
+    );
+  for (const [dayIndex, day] of week.days.entries())
+    children.push(dayInstance(`calendar/week/${index}/day/${dayIndex}`, day));
+  return {
+    kind: "frame",
+    role: `calendar/week/${index}`,
+    label: week.id,
+    layout: {
+      mode: "horizontal",
+      primaryAxisAlign: "min",
+      counterAxisAlign: "center",
+      itemSpacing: instance.tokens.gridGap.fallback,
+      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      width: hug,
+      height: hug,
+    },
+    fills: [],
+    bindings: [bind("layout.itemSpacing", instance.tokens.gridGap)],
+    children,
+  };
+};
 
 const weekdayRow = (
   instance: CalendarRecipeInstance,
@@ -572,7 +609,7 @@ const calendarComponent = (
     fills: [],
     bindings: [bind("layout.itemSpacing", gap)],
     children: instance.content.weeks.map((week, index) =>
-      weekInstance(`calendar/week-instance/${index}`, week, weekNumbers),
+      weekFrame(instance, week, index, weekNumbers),
     ),
   };
   return {
@@ -984,38 +1021,45 @@ export function collapseCalendarRecipe(
   };
 
   const weeks = (gridFrame.children ?? []).map((child, index): CalendarWeek => {
-    if (child.kind !== "instance")
+    if (child.kind !== "frame")
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-        `week occurrence ${index} is not an instance`,
+        `week ${index} must be a frame of day instances, not an instance`,
       ]);
-    const weekNumber = child.properties["Week number"];
-    if (typeof weekNumber !== "string")
+    const numberText = (child.children ?? []).find(
+      (node) => node.role === `calendar/week/${index}/number`,
+    );
+    if (!numberText || numberText.kind !== "text")
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-        `week occurrence ${index} carries no week number`,
+        `week ${index} carries no week number`,
+      ]);
+    const days = (child.children ?? [])
+      .filter((day) =>
+        String(day.role ?? "").startsWith(`calendar/week/${index}/day/`),
+      )
+      .map((day): CalendarDay => {
+        if (day.kind !== "instance")
+          throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+            "day is not an instance",
+          ]);
+        const label = day.properties.Label;
+        const state = day.properties.State;
+        if (
+          typeof label !== "string" ||
+          !CALENDAR_DAY_STATES.includes(state as CalendarDayState)
+        )
+          throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+            "invalid ARIA/data model on a day cell",
+          ]);
+        return { label, state: state as CalendarDayState };
+      });
+    if (days.length !== CALENDAR_DAY_COUNT)
+      throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+        `week ${index} carries exactly ${CALENDAR_DAY_COUNT} days`,
       ]);
     return {
       id: typeof child.label === "string" ? child.label : `week-${index}`,
-      weekNumber,
-      days: (weekOn.children ?? [])
-        .filter((day) =>
-          String(day.role ?? "").startsWith("calendar/day-instance/"),
-        )
-        .map((day): CalendarDay => {
-          if (day.kind !== "instance")
-            throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-              "day is not an instance",
-            ]);
-          const label = day.properties.Label;
-          const state = day.properties.State;
-          if (
-            typeof label !== "string" ||
-            !CALENDAR_DAY_STATES.includes(state as CalendarDayState)
-          )
-            throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-              "invalid ARIA/data model on a day cell",
-            ]);
-          return { label, state: state as CalendarDayState };
-        }),
+      weekNumber: numberText.characters,
+      days,
     };
   });
 

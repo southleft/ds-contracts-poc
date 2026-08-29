@@ -2,7 +2,10 @@
   "artifactVersion": "calendar-named-refusal-v1",
   "recordedAt": "2026-08-29",
   "archetype": "calendar / date-picker",
-  "recipe": { "id": "calendar", "version": 1 },
+  "recipe": {
+    "id": "calendar",
+    "version": 1
+  },
   "posture": "docs/32 §F item 4 second branch — a named refusal a reader can act on, not a claim of proof",
   "whatIsProven": {
     "archetypeDeclared": {
@@ -24,7 +27,7 @@
       "path": "recipe/recipes/calendar.ts",
       "gate": "npm run recipe:calendar:check",
       "gateGreen": true,
-      "tests": 10,
+      "tests": 11,
       "components": 10,
       "sets": {
         "calendar/set": 4,
@@ -35,7 +38,13 @@
       "fixedPointStable": "compile(collapse(compile(x))) === compile(x) on every source",
       "refusesUnsupportedStructuralEdit": true,
       "refusesHuggedDayCell": true,
-      "refusesShortWeek": true
+      "refusesShortWeek": true,
+      "gridOwnsDayInstances": {
+        "defectFoundAndFixed": "the grid first held week INSTANCES carrying only a week number, so every week rendered week one seven days and week one states — the same seven days three times. It compiled and held its fixed point and was not a calendar.",
+        "whyAnInstanceCannotCarryIt": "day state varies WITHIN a week (one today, one selected, leading days outside) while a component instance picks ONE variant for the whole component. Table gets away with row instances because a row is selected or not as a unit; a week is not.",
+        "resolution": "the calendar grid owns day instances directly, each picking its own State variant and carrying its own Label. calendar/week-set stays as the published week template.",
+        "regressionTest": "each week in the grid carries its OWN days and states"
+      }
     },
     "reviewedSource": {
       "library": "@astryxdesign/core Calendar",

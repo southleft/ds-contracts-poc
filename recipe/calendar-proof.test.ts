@@ -85,6 +85,56 @@ test("every day cell carries a measured box — calendar/day-cell-box", () => {
   }
 });
 
+test("each week in the grid carries its OWN days and states", () => {
+  // The defect this pins: the grid first held week INSTANCES carrying only a
+  // week number, so every week rendered week one's seven days and week one's
+  // states -- the same seven days three times. It compiled and held its fixed
+  // point and was not a calendar. A week instance cannot express this month
+  // because day state varies WITHIN a week (one today, one selected, leading
+  // days outside) while an instance picks one variant for the whole component.
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const variant = setOf(envelope, "calendar/set").children[0];
+  const grid = variant.children.find(
+    (child: any) => child.role === "calendar/grid",
+  );
+
+  const rendered = grid.children.map((week: any) =>
+    week.children
+      .filter((child: any) => String(child.role).includes("/day/"))
+      .map((day: any) => `${day.properties.Label}:${day.properties.State}`)
+      .join(" "),
+  );
+  assert.equal(rendered.length, CALENDAR_WEEK_COUNT);
+  assert.equal(
+    new Set(rendered).size,
+    CALENDAR_WEEK_COUNT,
+    "every week must render a different set of days",
+  );
+
+  for (const week of grid.children) {
+    assert.equal(
+      week.kind,
+      "frame",
+      "a week in the grid is a frame, not an instance",
+    );
+    const days = week.children.filter((child: any) =>
+      String(child.role).includes("/day/"),
+    );
+    assert.equal(days.length, CALENDAR_DAY_COUNT);
+    for (const day of days) assert.equal(day.kind, "instance");
+  }
+
+  // The month the fixture pins: outside days lead, today lands, selection lands.
+  const states = grid.children.flatMap((week: any) =>
+    week.children
+      .filter((child: any) => String(child.role).includes("/day/"))
+      .map((day: any) => day.properties.State),
+  );
+  assert.equal(states.filter((s: string) => s === "outside").length, 5);
+  assert.equal(states.filter((s: string) => s === "today").length, 1);
+  assert.equal(states.filter((s: string) => s === "selected").length, 1);
+});
+
 test("collapse is a fixed point for every source", () => {
   for (const [name, instance] of INSTANCES) {
     const envelope: any = compileCalendarRecipe(instance);
