@@ -160,8 +160,15 @@
 > held. Signed cleanup removed page `172:45029`. Mint did not
 > stay. Input `115:295378` and Combobox `163:35981` stayed. Do
 > not restart v19 attempt 2 as-is. Table live v20
-> PREPARE prepared (row-variant clipsContent omit). AUTHORIZE
-> and live attempt pending. Product **v1 is
+> PREPARE `9838aa402` and AUTHORIZE `0599eddfd` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row/compact/default` `cornerRadius`; compile row
+> variants omit `cornerRadius`; host emits extract
+> `cornerRadius` `0/0/0/0` on `table/row` variants). Row-variant
+> `clipsContent` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:45288`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v20 attempt 2 as-is. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
