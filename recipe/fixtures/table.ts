@@ -23,7 +23,10 @@ const font = (
   requestSource: `recipe/fixtures/table.ts#${role}`,
   fallbackChain: [
     { family, style },
-    { family: "Arial", style: style === "SemiBold" ? "Bold" : "Regular" },
+    {
+      family: "Arial",
+      style: style.replaceAll(/\s+/g, "") === "SemiBold" ? "Bold" : "Regular",
+    },
   ],
   resolvedFamily: family,
   resolvedStyle: style,
@@ -141,7 +144,7 @@ export const canonicalTableRecipeInstance = {
     cellRuleWidth: number("table.cell-rule-width", 0),
     radius: number("table.radius", 8),
     typography: {
-      header: font("header", "Inter", "SemiBold"),
+      header: font("header", "Inter", "Semi Bold"),
       body: font("body", "Inter", "Regular"),
     },
   },

@@ -22,6 +22,7 @@ import {
   FORBIDDEN_INPUT_NAMESPACE,
   FORBIDDEN_INPUT_PAGE_ID,
   FORBIDDEN_INPUT_RUN_IDENTITY,
+  FORBIDDEN_TABLE_V1_RUN_IDENTITY,
   TABLE_FIGMA_INSTANCES_PER_SOURCE,
   TABLE_FIGMA_NAMESPACE,
   TABLE_FIGMA_RUN_SUFFIX,
@@ -74,6 +75,15 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
   assert.notEqual(writer.namespace, FORBIDDEN_COMBOBOX_NAMESPACE);
   assert.notEqual(writer.runIdentity, FORBIDDEN_INPUT_RUN_IDENTITY);
   assert.notEqual(writer.runIdentity, FORBIDDEN_COMBOBOX_RUN_IDENTITY);
+  assert.notEqual(writer.runIdentity, FORBIDDEN_TABLE_V1_RUN_IDENTITY);
+  assert.match(writer.code, /TABLE-V1-IDENTITY-REUSE/);
+  assert.match(writer.code, /"requestedFamily":"Inter"/);
+  assert.match(writer.code, /"requestedStyle":"Semi Bold"/);
+  assert.match(writer.code, /"resolvedFamily":"Inter"/);
+  assert.match(writer.code, /"resolvedStyle":"Semi Bold"/);
+  assert.match(writer.code, /"resolution":"requested"/);
+  assert.equal(writer.code.includes('"requestedStyle":"SemiBold"'), false);
+  assert.equal(writer.code.includes('"resolvedStyle":"SemiBold"'), false);
   assert.equal(writer.pageName.includes(FORBIDDEN_INPUT_PAGE_ID), false);
   assert.equal(writer.pageName.includes(FORBIDDEN_COMBOBOX_PAGE_ID), false);
   assert.equal(

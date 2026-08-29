@@ -13,7 +13,8 @@ import {
 
 export const TABLE_FIGMA_NAMESPACE = "ds.contracts.table.recipe.v1";
 export const TABLE_FIGMA_WRITER_VERSION = 1;
-export const TABLE_FIGMA_RUN_SUFFIX = "table-v1";
+export const TABLE_FIGMA_RUN_SUFFIX = "table-v2";
+export const FORBIDDEN_TABLE_V1_RUN_IDENTITY = "83a27edf-82d19508-table-v1";
 export const TABLE_FIGMA_VARIANTS_PER_SOURCE = 10;
 export const TABLE_FIGMA_VARIANT_COUNT = 20;
 export const TABLE_FIGMA_INSTANCES_PER_SOURCE = 22;
@@ -445,6 +446,7 @@ const WRITER_VERSION=${JSON.stringify(String(version))};
 const PAGE_OWNER="recipe/table/"+PLAN.runIdentity;
 if(NS==="ds.contracts.input.recipe.v5"||PLAN.runIdentity==="4a074b24-e8503dd5-input-v5")throw new Error("TABLE-INPUT-IDENTITY-REUSE");
 if(NS==="ds.contracts.combobox.recipe.v1"||PLAN.runIdentity==="70c24cbd-d27f2e85-combobox-v1")throw new Error("TABLE-COMBOBOX-IDENTITY-REUSE");
+if(PLAN.runIdentity==="83a27edf-82d19508-table-v1")throw new Error("TABLE-V1-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -709,9 +711,10 @@ export function emitTableFigmaWriter(
     TABLE_FIGMA_NAMESPACE === FORBIDDEN_INPUT_NAMESPACE ||
     TABLE_FIGMA_NAMESPACE === FORBIDDEN_COMBOBOX_NAMESPACE ||
     runIdentity === FORBIDDEN_INPUT_RUN_IDENTITY ||
-    runIdentity === FORBIDDEN_COMBOBOX_RUN_IDENTITY
+    runIdentity === FORBIDDEN_COMBOBOX_RUN_IDENTITY ||
+    runIdentity === FORBIDDEN_TABLE_V1_RUN_IDENTITY
   ) {
-    throw new TypeError("table writer must not reuse Input or Combobox identity");
+    throw new TypeError("table writer must not reuse Input, Combobox, or Table v1 identity");
   }
   const pageName = `Recipe Pivot / Table / ${runIdentity}`;
   const plan = {
