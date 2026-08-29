@@ -201,11 +201,11 @@
 > (`combobox/listbox`: host emits `clipsContent: true` on all 64
 > open-variant listboxes; compile omits `clipsContent`). Cleanup
 > accepted; that Combobox page is gone. Input `115:295378` stayed. Do
-> not restart v21 attempt 2 as-is. Next teaching: host must omit
-> `clipsContent` on `combobox/listbox` that compile never emits, not
-> also emit the live listbox clip flag. Keep v2–v21 teachings.
-> Combobox is **not live**. Do not invent a Combobox human grade.
-> Product **v1 is incomplete**.
+> not restart v21 attempt 2 as-is. Combobox live v22 PREPARE teaches
+> host must omit `clipsContent` on `combobox/listbox` that compile
+> never emits, not also emit the live listbox clip flag. Keep v2–v21
+> teachings. Combobox is **not live**. Do not invent a Combobox human
+> grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host

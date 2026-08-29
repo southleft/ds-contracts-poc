@@ -1,0 +1,121 @@
+{
+  "artifactVersion": "combobox-live-v22-external-operator-protocol-v1",
+  "protocolId": "combobox-live-v22",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "lifecycle": {
+    "executionAntecedentImmutable": true,
+    "authorizationAddedOnlyAfterAntecedentCommit": true,
+    "authorizationExcludedFromAntecedentFreshness": true,
+    "laterAuthorizationDoesNotRecomputeAntecedent": true,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "comboboxLiveV2AuthorizationReusable": false,
+    "comboboxLiveV3AuthorizationReusable": false,
+    "comboboxLiveV4AuthorizationReusable": false,
+    "comboboxLiveV5AuthorizationReusable": false,
+    "comboboxLiveV6AuthorizationReusable": false,
+    "comboboxLiveV7AuthorizationReusable": false,
+    "comboboxLiveV8AuthorizationReusable": false,
+    "comboboxLiveV9AuthorizationReusable": false,
+    "comboboxLiveV10AuthorizationReusable": false,
+    "comboboxLiveV11AuthorizationReusable": false,
+    "comboboxLiveV12AuthorizationReusable": false,
+    "comboboxLiveV13AuthorizationReusable": false,
+    "comboboxLiveV14AuthorizationReusable": false,
+    "comboboxLiveV15AuthorizationReusable": false,
+    "comboboxLiveV16AuthorizationReusable": false,
+    "comboboxLiveV17AuthorizationReusable": false,
+    "comboboxLiveV18AuthorizationReusable": false,
+    "comboboxLiveV19AuthorizationReusable": false,
+    "inputRunIdentityForbidden": true,
+    "inputPage115295378Forbidden": true
+  },
+  "teaching": {
+    "restoreInputOnlyFromComboboxSet": true,
+    "restoreOptionLabelOnlyFromOptionSet": true,
+    "ownedFillTexts": 144,
+    "nestedOpenListboxOptionLabelsAreNotOwned": true,
+    "extractSetRootOmitsEnvelopeHash": true,
+    "ignoreCopiedOwnershipKeyInsideOwnedInstance": true,
+    "hostOmitsEmptyInstancePayload": true,
+    "observeSceneFactsProjectsLiveRootOwnershipKey": true,
+    "hostRecoversRecipeComponentRef": true,
+    "writerStampsOptionInstanceAriaProperties": true,
+    "hostRecoversComponentPropertyNameBeforeHash": true,
+    "hostOrdersTriggerBindingsToCompileFieldOrder": true,
+    "hostOrdersLeadingSlotBindingsToCompileFieldOrder": true,
+    "hostEmitsCompileCarriedLeadingSlotVisibleTrue": true,
+    "hostOrdersTrailingSlotBindingsToCompileFieldOrder": true,
+    "hostEmitsCompileCarriedTrailingSlotVisibleTrue": true,
+    "hostOmitsEmptyTriggerEffects": true,
+    "hostOrdersOverlayBindingsToCompileFieldOrder": true,
+    "hostAliasesOverlayWidthValueToLayoutWidthValue": true,
+    "hostOrdersListboxBindingsToCompileFieldOrder": true,
+    "hostDropsExtraOptionInstanceBindings": true,
+    "hostOmitsInheritedOptionInstanceFills": true
+  },
+  "inheritedFromInput": {
+    "roleFirstSegment": true,
+    "uniformPerSideStrokeWeight": true,
+    "slotSolidFills0Color": true,
+    "hiddenFillOccupancyVisibleTrueOpacity0": true,
+    "compileOmitsVisibleFalseOnOccupancyPlaceholders": true,
+    "expectedPlanOccupancyOpacity0": true,
+    "collapseMustNotInventDefaultOpacity1": true,
+    "probeExcludesOpacityZeroOccupancyOverlap": true,
+    "overlayExcludedFromVariantAabb": true,
+    "omitTextExtrasUnlessSourceHasThem": true,
+    "setLayoutCompileCarryAfterFirstMeasure": true,
+    "inventSetHugFixedPadding0Forbidden": true,
+    "surfaceDashPatternOmit": true,
+    "variantEffectsStrokesOmitAsTaught": true,
+    "cleanupOnFailureOnly": true,
+    "inventPolar9300Forbidden": true,
+    "inventPolarContentRowForbidden": true,
+    "inventOverlapZeroForbidden": true
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "writerPath": "recipe/combobox-figma-writer.ts",
+    "forbiddenNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenRunIdentity": "4a074b24-e8503dd5-input-v5",
+    "forbiddenPageId": "115:295378"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "expectedDynamicTool": {
+    "namespace": "user-Figma Console",
+    "tool": "figma_execute"
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "captureCells": 72,
+    "remoteRequests": 77,
+    "hostPhases": 3,
+    "expectedSceneFacts": 26614
+  },
+  "execution": {
+    "requestOrder": [
+      "writer",
+      "persist signed cleanup recovery request",
+      "restore",
+      "extract",
+      "host-normalize-account",
+      "probe",
+      "captures"
+    ],
+    "cleanupOnFailureOnly": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "maximumAttempts": 3
+  },
+  "proof": {
+    "cleanupOnFailureOnly": true,
+    "independentRootAccounting": true,
+    "compileCarryLiveSetFactsAfterFirstMeasure": true
+  }
+}
