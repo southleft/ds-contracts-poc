@@ -434,6 +434,9 @@
 > not restart v37 attempt 2 as-is. Next teaching: host
 > observe must recover compile-carried option-set name,
 > not the live display name. Keep v2–v37 teachings.
+> Combobox live v38 PREPARE teaches host observe must
+> recover compile-carried option-set name, not the
+> live display name. Keep v2–v37 teachings.
 > Combobox is **not live**. Do not invent a Combobox
 > human grade. Product **v1 is incomplete**.
 >
