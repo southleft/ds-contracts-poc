@@ -268,7 +268,13 @@
 > `layout.padding.right` precedes `layout.width.value` precedes
 > `layout.height.value` precedes `fills.0.color`, not live
 > extract order starting at `fills.0.color`. Keep v2–v27
-> teachings. Combobox is **not live**. Do not invent a Combobox
+> teachings. Combobox live v28 PREPARE teaches host to order
+> `combobox/option` bindings to that compile field order, not
+> live extract order starting at `fills.0.color`. Reuse the
+> overlay / trigger / listbox / slot compile-order sort. Do
+> not invent `if (combobox)`. Do not also change the writer
+> unless measurement proves host already emits compile order.
+> Keep v2–v27 teachings. Combobox is **not live**. Do not invent a Combobox
 > human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
