@@ -1,0 +1,109 @@
+{
+  "artifactVersion": "combobox-live-v18-capture-authorization-v1",
+  "authorizationId": "combobox-live-v18",
+  "status": "authorization declared; runtime security prerequisites still mandatory",
+  "authorizationIntent": true,
+  "antecedent": {
+    "commit": "fc5c3d1eabdadb8d422b2ef13bc392ae86937856",
+    "indexPath": "recipe/evidence/combobox-live-pivot-v18/antecedent-index.json",
+    "indexSha256": "0c5f530f31cec73af35866560eb2f64ebc560da043da20fe3a21689af0311ded",
+    "hashSetSha256": "a768208a3641fc0b44823c09afc2cae4d78b1321a32a6f9836dadc678bbcddf8"
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEASkzmFIPUFYDTCSZCcuqHtqqXoEKSN9FkLK9I7UY6nrg=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "b8dbc406fb9297417c8d258654dd190519e27df68b82583d322f6534d36a80a2",
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 77,
+    "hostPhases": 3,
+    "captures": 72,
+    "sourceRoots": 2,
+    "expectedFacts": 26614
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "attemptsExecuted": 0,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "taughtCleanupOnFailureOnly": true,
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false,
+    "v9AuthorizationReusable": false,
+    "v10AuthorizationReusable": false,
+    "v11AuthorizationReusable": false,
+    "v12AuthorizationReusable": false,
+    "v13AuthorizationReusable": false,
+    "v14AuthorizationReusable": false,
+    "v15AuthorizationReusable": false,
+    "v16AuthorizationReusable": false,
+    "v17AuthorizationReusable": false,
+    "v18AuthorizationReusable": false,
+    "v19AuthorizationReusable": false,
+    "v20AuthorizationReusable": false,
+    "v21AuthorizationReusable": false,
+    "v22AuthorizationReusable": false,
+    "v23AuthorizationReusable": false,
+    "v24AuthorizationReusable": false,
+    "v25AuthorizationReusable": false,
+    "v26AuthorizationReusable": false,
+    "v27AuthorizationReusable": false,
+    "v28AuthorizationReusable": false,
+    "v29AuthorizationReusable": false,
+    "v30AuthorizationReusable": false,
+    "v31AuthorizationReusable": false,
+    "v32AuthorizationReusable": false,
+    "v33AuthorizationReusable": false,
+    "v34AuthorizationReusable": false,
+    "v35AuthorizationReusable": false,
+    "v36AuthorizationReusable": false,
+    "v85AuthorizationReusable": false,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "comboboxLiveV2AuthorizationReusable": false,
+    "comboboxLiveV3AuthorizationReusable": false,
+    "comboboxLiveV4AuthorizationReusable": false,
+    "comboboxLiveV5AuthorizationReusable": false,
+    "comboboxLiveV6AuthorizationReusable": false,
+    "comboboxLiveV7AuthorizationReusable": false,
+    "comboboxLiveV8AuthorizationReusable": false,
+    "comboboxLiveV9AuthorizationReusable": false,
+    "comboboxLiveV10AuthorizationReusable": false,
+    "comboboxLiveV11AuthorizationReusable": false,
+    "comboboxLiveV12AuthorizationReusable": false,
+    "comboboxLiveV13AuthorizationReusable": false,
+    "comboboxLiveV14AuthorizationReusable": false,
+    "comboboxLiveV15AuthorizationReusable": false,
+    "comboboxLiveV16AuthorizationReusable": false,
+    "comboboxLiveV17AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending"
+  }
+}
