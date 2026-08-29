@@ -390,12 +390,24 @@
 > extra nonempty option-instance `instancePayload` facts
 > that IR and compile omit, not only empty slot-instance
 > payloads. Keep v2–v34 teachings. Combobox live v35
-> PREPARE teaches host observe must omit extra nonempty
-> option-instance `instancePayload` facts that IR and
-> compile omit, not only empty slot-instance payloads.
-> Keep v2–v34 teachings. Combobox is **not
-> live**. Do not invent a Combobox human grade. Product
-> **v1 is incomplete**.
+> PREPARE `112e8dac` and AUTHORIZE `0e5140a2` landed.
+> Attempt 1 minted page `163:22711`; restore held 144
+> owned FILL texts. Host observe nonempty option-instance
+> `instancePayload` teaching cleared; extras fell from 48
+> to 0. Independent root accounting then refused extra=0
+> mismatch=225 silent=225 on both roots. The 225
+> mismatches are 192 `componentRef` (expected
+> prefix/clear/popup vs observed selected/prefix/clear),
+> 32 `characters` (expected Choose a person vs observed
+> Ada Lovelace), and 1 option-set name fact. Cleanup
+> accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v35 attempt 2 as-is. Next
+> teaching: host observe must recover trigger-slot
+> `componentRef`s in compile sibling order (prefix then
+> clear then popup), not the live selected-first order
+> (selected then prefix then clear). Keep v2–v35
+> teachings. Combobox is **not live**. Do not invent a
+> Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host

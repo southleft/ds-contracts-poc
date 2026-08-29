@@ -4565,7 +4565,18 @@ export function validatePivotStatus(
     status.combobox?.liveV35?.hostObserveOmitsOptionInstanceInstancePayload !==
       true ||
     status.combobox?.liveV35?.runIdentity !==
-      "70c24cbd-d27f2e85-combobox-v1"
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV35?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV35?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV35?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV35?.attempt1
+      ?.hostObserveNonemptyOptionInstanceInstancePayloadTeachingCleared !==
+      true ||
+    status.combobox?.liveV35?.attempt1?.refusedClass !==
+      "independent root accounting" ||
+    status.combobox?.liveV35?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV35?.nextTeaching !==
+      "host observe must recover trigger-slot componentRefs in compile sibling order (prefix then clear then popup), not the live selected-first order (selected then prefix then clear)"
   )
     fail("combobox live v35 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))
