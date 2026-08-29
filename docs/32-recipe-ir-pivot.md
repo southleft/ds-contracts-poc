@@ -406,10 +406,22 @@
 > `componentRef`s in compile sibling order (prefix then
 > clear then popup), not the live selected-first order
 > (selected then prefix then clear). Keep v2–v35
-> teachings. Combobox live v36 PREPARE teaches that
-> one observe sibling-order recovery. Combobox is
-> **not live**. Do not invent a Combobox human grade.
-> Product **v1 is incomplete**.
+> teachings. Combobox live v36 PREPARE `6b713fad` and
+> AUTHORIZE `01f7016f` landed. Attempt 1 minted page
+> `163:24440`; restore held 144 owned FILL texts. Host
+> observe trigger-slot `componentRef` compile sibling-order
+> teaching cleared; `componentRef` mismatches fell from
+> 192 to 0. Independent root accounting then refused
+> extra=0 mismatch=33 silent=33 on both roots. The 33
+> mismatches are 32 `characters` (expected Choose a
+> person vs observed Ada Lovelace) and 1 option-set name
+> fact. Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v36 attempt
+> 2 as-is. Next teaching: host observe must recover
+> compile-carried trigger characters, not the live
+> selected-option characters. Keep v2–v36 teachings.
+> Combobox is **not live**. Do not invent a Combobox
+> human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host

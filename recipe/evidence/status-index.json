@@ -1586,7 +1586,19 @@
       "hostObserveOmitsEmptySlotInstancePayloadUnchangedFromV34": true,
       "hostObserveOmitsOptionInstanceInstancePayloadUnchangedFromV35": true,
       "hostRecoversTriggerSlotComponentRefCompileSiblingOrder": true,
-      "runIdentity": "70c24cbd-d27f2e85-combobox-v1"
+      "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+      "attempt1": {
+        "status": "failed-closed",
+        "restoreAccepted": true,
+        "restoredCount": 144,
+        "extractWalkCleared": true,
+        "hostRecoversTriggerSlotComponentRefCompileSiblingOrderTeachingCleared": true,
+        "refusedClass": "independent root accounting",
+        "refused": "independent root accounting extra=0 mismatch=33 silent=33",
+        "mintStayed": false,
+        "cleanedPageId": "163:24440"
+      },
+      "nextTeaching": "host observe must recover compile-carried trigger characters, not the live selected-option characters"
     },
     "blockers": [
       "Combobox live v1 attempt 1 failed closed at restore 240 vs 144",
@@ -1624,6 +1636,7 @@
       "Combobox live v33 attempt 1 failed closed at independent root accounting extras and mismatches; host option-set compile-carry label teaching cleared for collapse",
       "Combobox live v34 attempt 1 failed closed at independent root accounting extras and mismatches; host observe empty slot instancePayload teaching cleared",
       "Combobox live v35 attempt 1 failed closed at independent root accounting mismatches; host observe nonempty option-instance instancePayload teaching cleared",
+      "Combobox live v36 attempt 1 failed closed at independent root accounting mismatches; host observe trigger-slot componentRef compile sibling-order teaching cleared",
       "no Combobox human grade",
       "product v1 incomplete"
     ]

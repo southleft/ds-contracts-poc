@@ -4660,7 +4660,18 @@ export function validatePivotStatus(
     status.combobox?.liveV36
       ?.hostRecoversTriggerSlotComponentRefCompileSiblingOrder !== true ||
     status.combobox?.liveV36?.runIdentity !==
-      "70c24cbd-d27f2e85-combobox-v1"
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV36?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV36?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV36?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV36?.attempt1
+      ?.hostRecoversTriggerSlotComponentRefCompileSiblingOrderTeachingCleared !==
+      true ||
+    status.combobox?.liveV36?.attempt1?.refusedClass !==
+      "independent root accounting" ||
+    status.combobox?.liveV36?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV36?.nextTeaching !==
+      "host observe must recover compile-carried trigger characters, not the live selected-option characters"
   )
     fail("combobox live v36 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))
