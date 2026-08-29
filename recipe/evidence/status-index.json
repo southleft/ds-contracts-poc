@@ -3617,6 +3617,16 @@
         "signedCleanupAccepted": true
       },
       "nextTeaching": "OPEN HUMAN GATE: table root resize semantics and a per-column width model. No teaching invented."
+    },
+    "columnAlignmentMeasured": {
+      "artifact": "recipe/evidence/table-column-alignment-v27.json",
+      "firstPartyAligned": true,
+      "firstPartyAlignedByAccident": "every cell binds minWidth 120 and all content is narrower, so all land on 120",
+      "muiAligned": false,
+      "muiWorstDivergencePx": 32,
+      "muiWorstColumn": "col0 127 vs 159",
+      "probeDoesNotMeasureIt": true,
+      "figmaWrites": 0
     }
   },
   "input": {
