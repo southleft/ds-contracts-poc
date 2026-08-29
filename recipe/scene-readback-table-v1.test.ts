@@ -26,6 +26,7 @@ import {
   TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER,
+  TABLE_LIVE_V1_ROW_VARIANT_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER,
@@ -59,6 +60,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_ROW_VARIANT_CORNER_RADIUS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER));
@@ -647,6 +649,49 @@ test("host omits cornerRadius on table/header and table/body that compile never 
   assert.equal(compileVariant !== undefined, true);
   assert.equal("cornerRadius" in (compileHeader ?? {}), false);
   assert.equal("cornerRadius" in (compileBody ?? {}), false);
+  assert.equal("cornerRadius" in (compileVariant ?? {}), true);
+  assert.deepEqual(
+    (compileVariant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  );
+  const variant = sceneToNormalizedIr({
+    ...tableVariantScene([]),
+    cornerRadius: { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  });
+  assert.equal(variant.kind, "component");
+  assert.equal("cornerRadius" in variant, true);
+  assert.deepEqual(
+    (variant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
+    { topLeft: 8, topRight: 8, bottomRight: 8, bottomLeft: 8 },
+  );
+});
+
+test("host omits cornerRadius on table/row variants that compile never emits and keeps table/variant cornerRadius", () => {
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const rowRoles = [
+    "table/row/compact/default",
+    "table/row/compact/selected",
+    "table/row/comfortable/default",
+    "table/row/comfortable/selected",
+  ] as const;
+  for (const role of rowRoles) {
+    const compiled = byRole(compile.ir, role)[0];
+    assert.equal(compiled !== undefined, true);
+    assert.equal("cornerRadius" in (compiled ?? {}), false);
+    const observed = sceneToNormalizedIr({
+      ...rowComponentScene(),
+      ownershipKey: role,
+      name: role,
+      semanticRole: role,
+      cornerRadius: { ...zeroCornerRadius },
+    });
+    assert.equal(observed.kind, "component");
+    assert.equal("cornerRadius" in observed, false);
+  }
+  const compileVariant = byRole(compile.ir, "table/variant/comfortable")[0];
+  assert.equal(compileVariant !== undefined, true);
   assert.equal("cornerRadius" in (compileVariant ?? {}), true);
   assert.deepEqual(
     (compileVariant as { cornerRadius?: typeof zeroCornerRadius }).cornerRadius,
