@@ -473,7 +473,12 @@
 > resize and property restore already pass. Measure
 > overlapping node pairs before inventing
 > exclusion; do not invent Polar 9/30/0. Keep
-> v2–v39 teachings. Combobox is **not live**. Do
+> v2–v39 teachings. Combobox live v40 PREPARE
+> teaches host probe must keep
+> exactSceneRestoration after the open-variant
+> walk, not refuse both sources when resize and
+> property restore already pass. Keep v2–v39
+> teachings. Combobox is **not live**. Do
 > not invent a Combobox human grade. Product **v1
 > is incomplete**.
 >
