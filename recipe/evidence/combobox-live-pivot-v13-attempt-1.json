@@ -1,0 +1,189 @@
+{
+  "artifactVersion": "combobox-live-v13-attempt-1-v1",
+  "status": "failed closed at collapse unsupported structural edit; host trailing-slot binding compile-order teaching cleared; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "0fd161afe6750364dd022d86b270e510939e25ce",
+  "codeCommit": "0fd161afe6750364dd022d86b270e510939e25ce",
+  "antecedentCommit": "b9e0e12abb7b8925042842a2cfa80a008d8be17d",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host must order combobox/control/clear bindings to compile field order so width.value precedes height.value precedes fills.0.color, not live extract order or the inherited fills-first trailing-slot list",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true,
+    "heldHostTriggerBindingCompileOrder": true,
+    "heldHostLeadingSlotBindingCompileOrder": true,
+    "heldHostLeadingSlotCompileCarryVisible": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "154:323427",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["154:324291", "154:323522", "154:325155", "154:324386"],
+    "muiOptionSetId": "154:323522",
+    "muiComboboxSetId": "154:324291",
+    "antdOptionSetId": "154:324386",
+    "antdComboboxSetId": "154:325155",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "inputPageUntouched": true,
+    "stampedOptionAriaProperties": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "f659e22650ad5b1520b632006e734243a43cb4a164ab290a11a04d68affa7429",
+    "hostTrailingSlotBindingCompileOrderTeachingCleared": true,
+    "hostLeadingSlotCompileCarryVisibleTeachingHeld": true,
+    "hostLeadingSlotBindingCompileOrderTeachingHeld": true,
+    "hostTriggerBindingCompileOrderTeachingHeld": true,
+    "hostPropertyNameBeforeHashTeachingHeld": true,
+    "invalidAriaDidNotRecur": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[1].children[2].children[0].visible",
+    "refusedAt": "recipe/recipes/combobox.ts:1738",
+    "hostRecoversComponentRefAs": "combobox@1/option",
+    "hostRecoversHashedPropertyNames": true,
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveExtractHashedKeys": {
+      "0": {
+        "Disabled#154:179048": false,
+        "Label#154:179030": "Ada Lovelace",
+        "Option state": "selected",
+        "Size": "small",
+        "Value#154:179039": "ada"
+      }
+    },
+    "hostRecoveredUnsuffixedProperties": {
+      "Label": "Ada Lovelace",
+      "Value": "ada",
+      "Disabled": false
+    },
+    "valueNamedFromSourceNotInventedFromLabel": true,
+    "measuredLeadingVisible": {
+      "role": "combobox/control/leading",
+      "path": "$.children[0].children[0].children[1].children[0]",
+      "liveVisible": true,
+      "liveOpacity": 1,
+      "hostHasVisible": true,
+      "hostVisible": true,
+      "compileHasVisible": true,
+      "compileVisible": true
+    },
+    "measuredClearBindings": {
+      "role": "combobox/control/clear",
+      "path": "$.children[0].children[0].children[1].children[2].children[0]",
+      "liveFieldOrder": [
+        "fills.0.color",
+        "fills.0",
+        "height",
+        "width"
+      ],
+      "hostFieldOrder": [
+        "width.value",
+        "height.value",
+        "fills.0.color",
+        "fills.0.color"
+      ],
+      "compileFieldOrder": [
+        "width.value",
+        "height.value",
+        "fills.0.color"
+      ],
+      "hashedV12FieldOrder": [
+        "fills.0.color",
+        "fills.0.color",
+        "width.value",
+        "height.value"
+      ],
+      "hostMatchesCompile": true,
+      "siblingPopupHostMatchesCompile": true
+    },
+    "measuredClearVisible": {
+      "role": "combobox/control/clear",
+      "path": "$.children[0].children[0].children[1].children[2].children[0]",
+      "liveVisible": true,
+      "liveOpacity": 1,
+      "liveClearVisibleOpacityCensus": {
+        "true/1": 48,
+        "false/1": 16
+      },
+      "hostHasVisible": false,
+      "hashedV12HasVisible": false,
+      "compileHasVisible": true,
+      "compileVisible": true,
+      "siblingPopupLiveVisible": true,
+      "siblingPopupHostHasVisible": false,
+      "siblingPopupCompileHasVisible": true,
+      "siblingPopupCompileVisible": true
+    },
+    "namedFromSource": "v13 host trailing-slot binding compile-order teaching cleared; host now emits width.value then height.value then fills.0.color on combobox/control/clear and sibling combobox/control/popup matching compile controlInstance; hashed v12 still ranks fills.0.color first; live extract still carries fills-first boundVariables; collapse then refuses unsupported structural edit at combobox/control/clear visible because host omits default-true visible on trailing-slot instances while compile controlInstance carries visible: true; sibling combobox/control/popup has the same omit-default-true host path; live extract still carries source Label Ada Lovelace, Value ada, Disabled false under Figma keys Label#154:179030 / Value#154:179039 / Disabled#154:179048; do not invent ada from Ada Lovelace; do not invent visible: false as the teaching"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "1c356e4b3935c942c93e4b3ffc7bece8d42e6f42a1ef00cb57796ca82e4ac578",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "154:323427",
+    "removedCollectionIds": [
+      "VariableCollectionId:154:323429",
+      "VariableCollectionId:154:324293"
+    ]
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "doNotInventOptionGlyphText": true,
+    "doNotInventValueFromLabel": true,
+    "doNotInventVisibleFalse": true,
+    "restartV13Attempt2AsIs": false,
+    "prepareV14": "host must emit compile-carried visible: true on trailing-slot instances instead of omitting the default-true visible flag"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

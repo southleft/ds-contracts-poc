@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~19:15 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~19:30 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -108,13 +108,21 @@
 > `fills.0.color` first; compile emits `width.value` then `height.value`
 > then `fills.0.color`). Cleanup accepted; that Combobox page is gone.
 > Input `115:295378` stayed. Do not restart v12 attempt 2 as-is. Combobox
-> live v13 PREPARE teaches host to order `combobox/control/clear`
-> bindings to compile field order so `width.value` precedes
-> `height.value` precedes `fills.0.color`, not live extract order or the
-> inherited fills-first trailing-slot list. Sibling
-> `combobox/control/popup` shares that same list. Keep v2–v12 teachings.
-> Combobox is **not live**. Do not invent a Combobox human grade. Product
-> **v1 is incomplete**.
+> live v13 PREPARE `b9e0e12a` and AUTHORIZE `0fd161af` landed. Attempt 1
+> minted page `154:323427`; restore held 144 owned FILL texts. Host
+> trailing-slot binding compile-order teaching cleared; extract walk
+> accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[0].children[1].children[2].children[0].visible`
+> (`combobox/control/clear`: host omits default-true `visible`; compile
+> `controlInstance` carries `visible: true`). Sibling
+> `combobox/control/popup` shares that same omit path. Cleanup accepted;
+> that Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v13 attempt 2 as-is. Next teaching: host must emit compile-carried
+> `visible: true` on trailing-slot instances instead of omitting the
+> default-true visible flag. Keep v2–v13 teachings. Combobox is **not
+> live**. Do not invent a Combobox human grade. Product **v1 is
+> incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
