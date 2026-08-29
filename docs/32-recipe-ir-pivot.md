@@ -156,7 +156,19 @@
 > `layout.width.value` so that field precedes `fills.0.color`,
 > same class as variant layout width alias, not leave
 > `width.value` last as an unknown extract field. Keep v2–v16
-> teachings. Combobox is **not live**.
+> teachings. Combobox live v17 PREPARE `b3dbbe43` and AUTHORIZE
+> `7d20aa68` landed. Attempt 1 minted page `154:330343`; restore held 144
+> owned FILL texts. Host overlay width-alias teaching cleared;
+> extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].bindings[0].field`
+> (`combobox/listbox`: host starts at `layout.padding.bottom`;
+> compile starts at `layout.padding.top`). Overlay drop-shadow stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v17 attempt 2 as-is. Next teaching: host
+> must order `combobox/listbox` bindings to compile field order so
+> `layout.padding.top` precedes `layout.padding.bottom`, not start
+> at `layout.padding.bottom`. Keep v2–v17 teachings. Combobox is **not live**.
 > Do not invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
