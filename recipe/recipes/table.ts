@@ -282,7 +282,10 @@ export const TableRecipeInstanceSchema = z
       !numberParameter(instance.tokens?.radius, true)
     )
       fail("border or radius token is invalid");
-    if (!instance.tokens?.typography?.header || !instance.tokens.typography.body)
+    if (
+      !instance.tokens?.typography?.header ||
+      !instance.tokens.typography.body
+    )
       fail("typography tokens are required");
     if (!Array.isArray(instance.inputFacts)) fail("inputFacts are required");
     if (!Array.isArray(instance.accounting?.carried))
@@ -391,11 +394,7 @@ const cellInstance = (
   width: hug,
   height: hug,
 });
-const rowInstance = (
-  role: string,
-  density: TableDensity,
-  row: TableRow,
-) => ({
+const rowInstance = (role: string, density: TableDensity, row: TableRow) => ({
   kind: "instance" as const,
   role,
   label: row.id,
@@ -465,7 +464,13 @@ const cellComponent = (
     strokes,
     bindings,
     children: [
-      text("table/cell/label", label, font, density.fontSize, instance.tokens.text),
+      text(
+        "table/cell/label",
+        label,
+        font,
+        density.fontSize,
+        instance.tokens.text,
+      ),
     ],
   };
 };
@@ -782,9 +787,15 @@ const validateTableStructure = (root: FrameNode): void => {
   const cellSet = setByRole(root, "table/cell-set");
   if (tableSet.children.length !== TABLE_DENSITIES.length)
     throw new RecipeRefusal(TABLE_RECIPE_REF, ["table/set variant count"]);
-  if (rowSet.children.length !== TABLE_DENSITIES.length * TABLE_ROW_STATES.length)
+  if (
+    rowSet.children.length !==
+    TABLE_DENSITIES.length * TABLE_ROW_STATES.length
+  )
     throw new RecipeRefusal(TABLE_RECIPE_REF, ["table/row-set variant count"]);
-  if (cellSet.children.length !== TABLE_DENSITIES.length * TABLE_CELL_KINDS.length)
+  if (
+    cellSet.children.length !==
+    TABLE_DENSITIES.length * TABLE_CELL_KINDS.length
+  )
     throw new RecipeRefusal(TABLE_RECIPE_REF, ["table/cell-set variant count"]);
   for (const table of tableSet.children) {
     if (table.layout.mode !== "vertical")
@@ -873,7 +884,11 @@ const firstDifference = (
     if (!Array.isArray(left) || !Array.isArray(right)) return path;
     const length = Math.max(left.length, right.length);
     for (let index = 0; index < length; index += 1) {
-      const found = firstDifference(left[index], right[index], `${path}[${index}]`);
+      const found = firstDifference(
+        left[index],
+        right[index],
+        `${path}[${index}]`,
+      );
       if (found) return found;
     }
     return path;
@@ -890,9 +905,103 @@ const firstDifference = (
   return undefined;
 };
 
+/**
+ * Measurement-only sibling of `firstDifference`. Same recursion and the same
+ * notion of "different", but it collects every divergence instead of returning
+ * on the first one. `firstDifference` and `collapseTableRecipe` keep their
+ * refusal behaviour untouched: nothing in the live path calls this.
+ *
+ * Used by `recipe/table-tail-census.ts` to enumerate the remaining
+ * extract-side teaching tail offline, from a persisted extract response,
+ * without spending a live Figma cycle per gap.
+ */
+export interface TableIrDifference {
+  path: string;
+  reason: "absent-left" | "absent-right" | "type" | "value";
+  left?: unknown;
+  right?: unknown;
+}
+
+export const allDifferences = (
+  left: unknown,
+  right: unknown,
+  path = "$",
+  into: TableIrDifference[] = [],
+): TableIrDifference[] => {
+  if (canonicalJson(left) === canonicalJson(right)) return into;
+  if (
+    left === null ||
+    right === null ||
+    typeof left !== "object" ||
+    typeof right !== "object"
+  ) {
+    into.push({ path, reason: "value", left, right });
+    return into;
+  }
+  if (Array.isArray(left) || Array.isArray(right)) {
+    if (!Array.isArray(left) || !Array.isArray(right)) {
+      into.push({ path, reason: "type", left, right });
+      return into;
+    }
+    const length = Math.max(left.length, right.length);
+    for (let index = 0; index < length; index += 1) {
+      if (index >= left.length) {
+        into.push({
+          path: `${path}[${index}]`,
+          reason: "absent-left",
+          right: right[index],
+        });
+        continue;
+      }
+      if (index >= right.length) {
+        into.push({
+          path: `${path}[${index}]`,
+          reason: "absent-right",
+          left: left[index],
+        });
+        continue;
+      }
+      allDifferences(left[index], right[index], `${path}[${index}]`, into);
+    }
+    return into;
+  }
+  const l = left as Record<string, unknown>;
+  const r = right as Record<string, unknown>;
+  for (const key of [
+    ...new Set([...Object.keys(l), ...Object.keys(r)]),
+  ].sort()) {
+    if (!(key in l)) {
+      into.push({
+        path: `${path}.${key}`,
+        reason: "absent-left",
+        right: r[key],
+      });
+      continue;
+    }
+    if (!(key in r)) {
+      into.push({
+        path: `${path}.${key}`,
+        reason: "absent-right",
+        left: l[key],
+      });
+      continue;
+    }
+    allDifferences(l[key], r[key], `${path}.${key}`, into);
+  }
+  return into;
+};
+
 export function collapseTableRecipe(
   envelopeInput: unknown,
   selectionInput: unknown,
+  /**
+   * Measurement-only escape hatch used by `recipe/table-tail-census.ts`.
+   * When a sink is supplied, the refusal is not thrown: every remaining
+   * difference is collected into it and the derived instance is returned.
+   * Two-argument callers -- every live and test caller -- are unaffected and
+   * still refuse on the first difference.
+   */
+  differenceSink?: TableIrDifference[],
 ): TableRecipeInstance {
   requireExactRecipeSelection(selectionInput, TABLE_RECIPE_REF);
   const envelope = RecipeEnvelopeSchema.parse(envelopeInput);
@@ -909,9 +1018,7 @@ export function collapseTableRecipe(
       "integrity.canonicalHash does not match the selected envelope",
     ]);
   if (envelope.ir.kind !== "frame")
-    throw new RecipeRefusal(TABLE_RECIPE_REF, [
-      "missing table/library frame",
-    ]);
+    throw new RecipeRefusal(TABLE_RECIPE_REF, ["missing table/library frame"]);
   const root = envelope.ir;
   validateTableStructure(root);
   const tableSet = setByRole(root, "table/set");
@@ -1035,13 +1142,7 @@ export function collapseTableRecipe(
       selectedRowId: selected.id,
     },
     designerEditSurface: {
-      textProperties: [
-        "Label",
-        "Column",
-        "Cell 0",
-        "Cell 1",
-        "Cell 2",
-      ],
+      textProperties: ["Label", "Column", "Cell 0", "Cell 1", "Cell 2"],
       variantProperties: ["Density", "State", "Kind"],
       instanceSwapProperties: [],
       columnAxis: {
@@ -1152,6 +1253,10 @@ export function collapseTableRecipe(
     provenance: envelope.provenance,
   });
   const recompiled = compileTableRecipe(instance);
+  if (differenceSink) {
+    allDifferences(recompiled.ir, envelope.ir, "$", differenceSink);
+    return instance;
+  }
   const difference = firstDifference(recompiled.ir, envelope.ir);
   if (difference)
     throw new RecipeRefusal(TABLE_RECIPE_REF, [
