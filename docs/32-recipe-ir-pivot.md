@@ -434,9 +434,24 @@
 > not restart v37 attempt 2 as-is. Next teaching: host
 > observe must recover compile-carried option-set name,
 > not the live display name. Keep v2–v37 teachings.
-> Combobox live v38 PREPARE teaches host observe must
-> recover compile-carried option-set name, not the
-> live display name. Keep v2–v37 teachings.
+> Combobox live v38 PREPARE `00558b48` and AUTHORIZE
+> `1c124c18` landed. Attempt 1 minted page `163:27898`;
+> restore held 144 owned FILL texts. Host observe
+> compile-carried option-set name teaching cleared;
+> original-plan independent root accounting is extra=0
+> mismatch=0 silent=0 and 13307/13307 on both roots
+> (combobox 12915/12915). Host then refused two-cycle
+> scene-derived fixed-point (`mui:fixed-point;antd:fixed-point`).
+> Collapse+recompile vs live is extra=0 mismatch=192
+> silent=192, all trigger-slot `componentRef`, the live
+> selected-first rotation against observe's compile
+> sibling order (prefix then clear then popup). Cleanup
+> accepted; that Combobox page is gone. Input
+> `115:295378` stayed. Do not restart v38 attempt 2
+> as-is. Next teaching: host sceneToNormalizedIr must
+> recover trigger-slot componentRefs in compile sibling
+> order (prefix then clear then popup), not the live
+> selected-first order. Keep v2–v38 teachings.
 > Combobox is **not live**. Do not invent a Combobox
 > human grade. Product **v1 is incomplete**.
 >

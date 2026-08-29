@@ -1,0 +1,224 @@
+{
+  "artifactVersion": "combobox-live-v38-attempt-1-v1",
+  "status": "failed closed at two-cycle scene-derived fixed-point; host observe compile-carried option-set name teaching cleared; original-plan accounting 0/0 and 13307/13307; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "1c124c18585f16503aaf819193abf2ecbeec5648",
+  "codeCommit": "1c124c18585f16503aaf819193abf2ecbeec5648",
+  "antecedentCommit": "00558b48040545b9f6968ad563bab83af6d04227",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host observe must recover the compile-carried option-set name, not the live display name",
+    "cleared": true,
+    "clearedFor": "independent root accounting option-set name mismatches",
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true,
+    "heldHostTriggerBindingCompileOrder": true,
+    "heldHostLeadingSlotBindingCompileOrder": true,
+    "heldHostLeadingSlotCompileCarryVisible": true,
+    "heldHostTrailingSlotBindingCompileOrder": true,
+    "heldHostTrailingSlotCompileCarryVisible": true,
+    "heldHostTriggerEmptyEffects": true,
+    "heldHostOverlayBindingCompileOrder": true,
+    "heldHostOverlayWidthAlias": true,
+    "heldHostListboxBindingCompileOrder": true,
+    "heldHostOptionInstanceBindingExtras": true,
+    "heldHostOptionInstanceFillsOmit": true,
+    "heldHostOptionInstancePayloadOmit": true,
+    "heldHostListboxClipsContentOmit": true,
+    "heldHostListboxCornerRadiusOmit": true,
+    "heldHostListboxEmptyEffectsOmit": true,
+    "heldHostListboxEmptyStrokesOmit": true,
+    "heldHostOverlayEmptyDashPatternOmit": true,
+    "heldHostSetRootClipsContentOmit": true,
+    "heldHostOptionBindingCompileOrder": true,
+    "heldHostOptionHeightAlias": true,
+    "heldHostOptionClipsContentOmit": true,
+    "heldHostSelectedIndicatorBindingCompileOrder": true,
+    "heldHostSelectedIndicatorCompileCarryVisible": true,
+    "heldHostOptionSetCompileCarryLabel": true,
+    "heldHostObserveOmitsEmptySlotInstancePayload": true,
+    "heldHostObserveOmitsOptionInstanceInstancePayload": true,
+    "heldHostRecoversTriggerSlotComponentRefCompileSiblingOrder": true,
+    "heldHostRecoversCompileCarriedTriggerCharacters": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "163:27898",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": [
+      "163:28762",
+      "163:27993",
+      "163:29626",
+      "163:28857"
+    ],
+    "muiComboboxSetId": "163:28762",
+    "muiOptionSetId": "163:27993",
+    "antdComboboxSetId": "163:29626",
+    "antdOptionSetId": "163:28857",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "inputPageUntouched": true,
+    "operationalRetriesBeforeAccept": "none; first signed writer accepted",
+    "receiptSha256": "3314a0a32986bc729a497241cfccc1842fbe71e51163acb1e0b7338cfcd4f3e3"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true,
+    "receiptSha256": "cf745b335d2401a9bca91bd1daa947dc60b0ceaddab3ac5a1313999e734dd9ae"
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "2fc51d9bab9acb87522be290eff58398259385a5ee478f2353b0d35d01d05660",
+    "rawResponseBytes": 5710830,
+    "hostObserveRecoversCompileCarriedOptionSetNameTeachingCleared": true,
+    "liveOptionSetNames": [
+      "combobox/option-set :: AntD Select / combobox@1 offline fixture",
+      "combobox/option-set :: MUI Autocomplete / combobox@1 offline fixture"
+    ],
+    "hostOptionSetLabels": [
+      "Combobox option",
+      "Combobox option"
+    ],
+    "compileOptionSetName": "combobox/option-set :: Combobox option",
+    "compileOptionSetLabel": "Combobox option",
+    "hostComboboxSetLabelsMatchCompileIdentityName": true,
+    "hostCollapseRefused": false,
+    "hostCollapseAccepted": true,
+    "originalPlanAccountingOk": true,
+    "originalPlanMatched": 13307,
+    "originalPlanDenominator": 13307,
+    "comboboxRootsMatched": "12915/12915",
+    "optionRootsMatched": "392/392",
+    "hostAccountingRefused": true,
+    "refusedClass": "two-cycle scene-derived fixed-point",
+    "refused": "Combobox live v38 independent root accounting failed: mui:fixed-point;antd:fixed-point",
+    "refusedAt": "recipe/combobox-live-v38-contract.ts:601",
+    "accountingMui": {
+      "extra": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "silent": 0,
+      "matched": 13307,
+      "denominator": 13307,
+      "comboboxExtra": 0,
+      "comboboxMismatch": 0,
+      "optionExtra": 0,
+      "optionMismatch": 0
+    },
+    "accountingAntd": {
+      "extra": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "silent": 0,
+      "matched": 13307,
+      "denominator": 13307,
+      "comboboxExtra": 0,
+      "comboboxMismatch": 0,
+      "optionExtra": 0,
+      "optionMismatch": 0
+    },
+    "optionSetNameMismatchesCleared": true,
+    "priorOptionSetNameMismatches": 1,
+    "remainingOptionSetNameCount": 0,
+    "fixedPointStable": false,
+    "fixedPointSceneIrEqualAcrossCycles": true,
+    "fixedPointCompiledIrEqualAcrossCycles": true,
+    "cycleAccountingMui": {
+      "extra": 0,
+      "mismatch": 192,
+      "missing": 0,
+      "silent": 192,
+      "comboboxMismatch": 192,
+      "optionMismatch": 0
+    },
+    "cycleAccountingAntd": {
+      "extra": 0,
+      "mismatch": 192,
+      "missing": 0,
+      "silent": 192,
+      "comboboxMismatch": 192,
+      "optionMismatch": 0
+    },
+    "cycleMismatchByChannel": {
+      "componentRef": 192
+    },
+    "cycleComponentRefPairsMui": {
+      "source/mui-autocomplete/selected => source/mui-autocomplete/prefix": 64,
+      "source/mui-autocomplete/prefix => source/mui-autocomplete/clear": 64,
+      "source/mui-autocomplete/clear => source/mui-autocomplete/popup": 64
+    },
+    "cycleFirstMismatch": {
+      "ownership": "combobox/children/0/children/1/children/0",
+      "channel": "componentRef",
+      "expected": "source/mui-autocomplete/selected",
+      "observed": "source/mui-autocomplete/prefix"
+    },
+    "sceneToNormalizedIrStillEmitsLiveSelectedFirstTriggerSlotRefs": true,
+    "observeStillRecoversCompileSiblingOrderPrefixClearPopup": true,
+    "namedFromSource": "v38 host observe compile-carried option-set name teaching cleared; original-plan independent root accounting is extra=0 mismatch=0 silent=0 and 13307/13307 on both roots (combobox 12915/12915, option 392/392). Host then refused two-cycle scene-derived fixed-point (mui:fixed-point;antd:fixed-point). Collapse+recompile vs live is extra=0 mismatch=192 silent=192, all trigger-slot componentRef, the live selected-first rotation (selected then prefix then clear) against observe's compile sibling order (prefix then clear then popup). sceneToNormalizedIr still emits the live selected-first refs into collapse. Do not invent occupancy or Polar; do not teach FIXED; do not change the writer; do not invent if (combobox); do not restart v38 attempt 2 as-is"
+  },
+  "probe": {
+    "issued": false
+  },
+  "captures": {
+    "issued": 0
+  },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "f02f246792f388a6600e814d8438616672fb4b26effdb55c7c7cb4c88af225fa",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "163:27898",
+    "removedCollectionIds": [
+      "VariableCollectionId:163:27900",
+      "VariableCollectionId:163:28764"
+    ]
+  },
+  "nextTeaching": {
+    "class": "two-cycle scene-derived fixed-point",
+    "doNotInvent": true,
+    "doNotInventOccupancy": true,
+    "doNotInventPolar": true,
+    "doNotTeachFixed": true,
+    "doNotInventIfCombobox": true,
+    "doNotRestartV38Attempt2AsIs": true,
+    "doNotChangeWriter": true,
+    "reuseV36ObserveSiblingOrderPath": true,
+    "prepareV39": "host sceneToNormalizedIr must recover trigger-slot componentRefs in compile sibling order (prefix then clear then popup), not the live selected-first order"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

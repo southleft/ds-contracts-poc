@@ -4859,7 +4859,18 @@ export function validatePivotStatus(
     status.combobox?.liveV38?.hostObserveRecoversCompileCarriedOptionSetName !==
       true ||
     status.combobox?.liveV38?.runIdentity !==
-      "70c24cbd-d27f2e85-combobox-v1"
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV38?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV38?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV38?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV38?.attempt1
+      ?.hostObserveRecoversCompileCarriedOptionSetNameTeachingCleared !==
+      true ||
+    status.combobox?.liveV38?.attempt1?.refusedClass !==
+      "two-cycle scene-derived fixed-point" ||
+    status.combobox?.liveV38?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV38?.nextTeaching !==
+      "host sceneToNormalizedIr must recover trigger-slot componentRefs in compile sibling order (prefix then clear then popup), not the live selected-first order"
   )
     fail("combobox live v38 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))

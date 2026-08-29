@@ -1709,7 +1709,19 @@
       "hostRecoversTriggerSlotComponentRefCompileSiblingOrderUnchangedFromV36": true,
       "hostRecoversCompileCarriedTriggerCharactersUnchangedFromV37": true,
       "hostObserveRecoversCompileCarriedOptionSetName": true,
-      "runIdentity": "70c24cbd-d27f2e85-combobox-v1"
+      "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+      "attempt1": {
+        "status": "failed-closed",
+        "restoreAccepted": true,
+        "restoredCount": 144,
+        "extractWalkCleared": true,
+        "hostObserveRecoversCompileCarriedOptionSetNameTeachingCleared": true,
+        "refusedClass": "two-cycle scene-derived fixed-point",
+        "refused": "two-cycle scene-derived fixed-point extra=0 mismatch=192 silent=192 componentRef",
+        "mintStayed": false,
+        "cleanedPageId": "163:27898"
+      },
+      "nextTeaching": "host sceneToNormalizedIr must recover trigger-slot componentRefs in compile sibling order (prefix then clear then popup), not the live selected-first order"
     },
     "blockers": [
       "Combobox live v1 attempt 1 failed closed at restore 240 vs 144",
@@ -1749,6 +1761,7 @@
       "Combobox live v35 attempt 1 failed closed at independent root accounting mismatches; host observe nonempty option-instance instancePayload teaching cleared",
       "Combobox live v36 attempt 1 failed closed at independent root accounting mismatches; host observe trigger-slot componentRef compile sibling-order teaching cleared",
       "Combobox live v37 attempt 1 failed closed at independent root accounting mismatches; host observe compile-carried trigger characters teaching cleared",
+      "Combobox live v38 attempt 1 failed closed at two-cycle scene-derived fixed-point; host observe compile-carried option-set name teaching cleared",
       "no Combobox human grade",
       "product v1 incomplete"
     ]
