@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~20:30 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~20:45 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -127,11 +127,20 @@
 > host emits `effects: []`; compile omits effects). Overlay must keep
 > its compile-carried drop-shadow. Cleanup accepted; that Combobox page
 > is gone. Input `115:295378` stayed. Do not restart v14 attempt 2
-> as-is. Combobox live v15 PREPARE teaches host to omit empty
-> `effects` on `combobox/trigger` that compile never emits. Same
-> class as Input variant effects omit / surface dashPattern omit.
-> Overlay must keep its compile-carried drop-shadow. Do not also
-> teach listbox empty effects in this PREPARE. Keep v2–v14
+> as-is. Combobox live v15 PREPARE `ef395604` and AUTHORIZE
+> `5951d00a` landed. Attempt 1 minted page `154:326885`; restore held 144
+> owned FILL texts. Host trigger empty-effects teaching cleared;
+> extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].bindings[0].field`
+> (`combobox/overlay`: host starts at `cornerRadius.bottomLeft`;
+> compile starts at `layout.width.value`). Overlay drop-shadow stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v15 attempt 2 as-is. Next teaching: host
+> must order combobox/overlay bindings to compile field order so
+> `layout.width.value` precedes `fills.0.color` precedes
+> `strokes.0.paint.color` precedes `effects.0.color` precedes
+> cornerRadius corners, not live extract order. Keep v2–v15
 > teachings. Combobox is **not live**. Do not invent a Combobox
 > human grade. Product **v1 is incomplete**.
 >
