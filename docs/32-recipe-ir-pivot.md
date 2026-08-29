@@ -151,8 +151,15 @@
 > held. Signed cleanup removed page `172:44770`. Mint did not
 > stay. Input `115:295378` and Combobox `163:35981` stayed. Do
 > not restart v18 attempt 2 as-is. Table live v19
-> PREPARE prepared (set strokes omit). AUTHORIZE
-> and live attempt pending. Product **v1 is
+> PREPARE `db66bd7b2` and AUTHORIZE `268295d60` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row/compact/default` `clipsContent`; compile row
+> variants omit `clipsContent`; host emits extract
+> `clipsContent` `false` on `table/row` variants). Set
+> `strokes` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:45029`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v19 attempt 2 as-is. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
