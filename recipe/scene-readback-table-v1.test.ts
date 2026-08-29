@@ -34,6 +34,8 @@ import {
   TABLE_LIVE_V1_SET_CORNER_RADIUS_OMITTED_MARKER,
   TABLE_LIVE_V1_SET_EFFECTS_OMITTED_MARKER,
   TABLE_LIVE_V1_SET_STROKES_OMITTED_MARKER,
+  TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER,
+  TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
@@ -787,6 +789,50 @@ test("host omits strokes on table/row variants that compile never emits and keep
   });
   assert.equal(variant.kind, "component");
   assert.equal("strokes" in variant, true);
+});
+
+test("host emits compile-carried label Table row on table/row-set instead of the live display name after ::", () => {
+  assert.equal(
+    TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER,
+    "TABLE-HOST-ROW-SET-COMPILE-CARRY-LABEL",
+  );
+  assert.equal(
+    TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL,
+    "Table row",
+    "must carry compile's row-set label, not invent a name or parse the live display string",
+  );
+  const compile = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const compileRowSet = byRole(compile.ir, "table/row-set")[0];
+  const compileCellSet = byRole(compile.ir, "table/cell-set")[0];
+  const compileTableSet = byRole(compile.ir, "table/set")[0];
+  assert.equal(compileRowSet !== undefined, true);
+  assert.equal((compileRowSet as { label?: string } | undefined)?.label, "Table row");
+  assert.equal((compileCellSet as { label?: string } | undefined)?.label, "Table cell");
+  assert.equal((compileTableSet as { label?: string } | undefined)?.label, "Table");
+  const live = sceneToNormalizedIr({
+    ...setScene("table/row-set"),
+    name: "table/row-set :: Table",
+  });
+  assert.equal(live.kind, "component-set");
+  assert.equal(live.label, "Table row");
+  const cellLive = sceneToNormalizedIr({
+    ...setScene("table/cell-set"),
+    name: "table/cell-set :: Table",
+  });
+  assert.equal(cellLive.kind, "component-set");
+  assert.equal(
+    cellLive.label,
+    "Table",
+    "this teaching is row-set only; cell-set still derives the live display name",
+  );
+  const tableLive = sceneToNormalizedIr({
+    ...setScene("table/set"),
+    name: "table/set :: Table",
+  });
+  assert.equal(tableLive.kind, "component-set");
+  assert.equal(tableLive.label, "Table");
 });
 
 test("host omits effects on table/header and table/body that compile never emits", () => {

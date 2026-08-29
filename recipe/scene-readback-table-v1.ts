@@ -45,7 +45,9 @@ import {
  * `table/set`, `table/row-set`, and `table/cell-set` because compile
  * component-sets omit `effects`, and omit `strokes` on
  * `table/set`, `table/row-set`, and `table/cell-set` because compile
- * component-sets omit `strokes`. Host copies the Figma
+ * component-sets omit `strokes`, and emit compile-carried label
+ * `Table row` on `table/row-set` instead of the live display name after
+ * `::`. Host copies the Figma
  * file-default `5/5/5/5` onto those sets and emits extract
  * `effects` `[]` and extract `strokes` `[]`; drop those keys. Reuses the
  * extras-drop path and the Combobox listbox / set / option clipsContent
@@ -57,7 +59,9 @@ import {
  * `clipsContent`, `cornerRadius`, `effects`, or `strokes` onto compile
  * row variants. Does not invent `cornerRadius`, `effects`, or `strokes`
  * onto compile sets. Does not invent `dashPattern` onto compile. Does
- * not copy Combobox overlay/option/listbox roles.
+ * not invent a different row-set label. Does not change cell-set or
+ * table/set labels in this teaching. Does not copy Combobox
+ * overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -118,6 +122,9 @@ export const TABLE_LIVE_V1_SET_EFFECTS_OMITTED_MARKER =
   "TABLE-HOST-SET-EFFECTS-OMITTED";
 export const TABLE_LIVE_V1_SET_STROKES_OMITTED_MARKER =
   "TABLE-HOST-SET-STROKES-OMITTED";
+export const TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER =
+  "TABLE-HOST-ROW-SET-COMPILE-CARRY-LABEL";
+export const TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL = "Table row";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -617,6 +624,13 @@ const sceneLabel = (scene: SceneNodeSnapshot): string => {
   const separator = scene.name.indexOf(" :: ");
   const label = separator < 0 ? scene.name : scene.name.slice(separator + 4);
   return label.split(" :: font-provenance=", 1)[0]!;
+};
+
+const compileCarriedLabel = (scene: SceneNodeSnapshot): string => {
+  void TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL_MARKER;
+  if (sceneRole(scene) === "table/row-set")
+    return TABLE_LIVE_V1_ROW_SET_COMPILE_CARRY_LABEL;
+  return sceneLabel(scene);
 };
 
 const isHiddenFillOccupancy = (scene: SceneNodeSnapshot): boolean => {
@@ -1148,7 +1162,7 @@ export function sceneToNormalizedIr(
   const occupancy = isHiddenFillOccupancy(scene);
   const bindings = sceneBindings(scene);
   const common = {
-    label: sceneLabel(scene),
+    label: compileCarriedLabel(scene),
     ...(sceneRole(scene) === undefined ? {} : { role: sceneRole(scene) }),
     ...(bindings.length === 0 ? {} : { bindings }),
     ...(occupancy || scene.visible ? {} : { visible: false }),
