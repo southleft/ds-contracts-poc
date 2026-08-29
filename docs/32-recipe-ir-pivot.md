@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~22:50 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~22:55 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -251,9 +251,13 @@
 > stayed. Do not restart v26 attempt 2 as-is. Next teaching: host
 > must omit `clipsContent` on `combobox/set` and
 > `combobox/option-set` that compile never emits, not also emit the
-> live set clip flag. Keep v2–v26 teachings. Combobox is **not
-> live**. Do not invent a Combobox human grade. Product **v1 is
-> incomplete**.
+> live set clip flag. Keep v2–v26 teachings. Combobox live v27
+> PREPARE teaches host must omit `clipsContent` on
+> `combobox/set` and `combobox/option-set` that compile never
+> emits, not also emit the live set clip flag. Overlay
+> `clipsContent: true` and variant `clipsContent: false` stay.
+> Keep v2–v26 teachings. Combobox is **not live**. Do not invent
+> a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
