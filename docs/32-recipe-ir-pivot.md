@@ -283,12 +283,24 @@
 > `combobox/option` `height.value` to `layout.height.value` so
 > compile-order ranks it before `fills.0.color`, not leave
 > `height.value` unknown after the option sort. Keep v2–v28
-> teachings. Combobox live v29 PREPARE teaches host must alias
-> `combobox/option` `height.value` to `layout.height.value` so
-> compile-order ranks it before `fills.0.color`, not leave
-> `height.value` unknown after the option sort. Keep v2–v28
-> teachings. Combobox is **not live**. Do not invent a Combobox
-> human grade. Product **v1 is incomplete**.
+> teachings. Combobox live v29 PREPARE `b540ffb7` and AUTHORIZE
+> `e66df35e` landed. Attempt 1 minted page `163:12337`; restore
+> held 144 owned FILL texts. Host option height-alias teaching
+> cleared; extract walk accepted. Host now ranks
+> `layout.height.value` at option `bindings[4]` on all 16 option
+> components (hashed v28 still leaves `height.value` unknown
+> last). Collapse then refused `unsupported structural edit at
+> $.children[1].children[0].clipsContent`
+> (`combobox/option/small/default`: host emits
+> `clipsContent: false` on all 16 option components; compile
+> omits the key). Overlay `clipsContent: true` and listbox/set
+> omits stayed. Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v29 attempt 2
+> as-is. Next teaching: host must omit `clipsContent` on
+> `combobox/option` that compile never emits, not also emit the
+> live option clip flag. Keep v2–v29 teachings. Combobox is
+> **not live**. Do not invent a Combobox human grade. Product
+> **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
