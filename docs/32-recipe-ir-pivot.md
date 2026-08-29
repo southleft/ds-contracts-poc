@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~22:40 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~22:50 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -237,11 +237,23 @@
 > (`combobox/overlay`: host emits empty `dashPattern` on all 64
 > open-variant overlay strokes; compile omits `dashPattern`). Cleanup
 > accepted; that Combobox page is gone. Input `115:295378` stayed. Do
-> not restart v25 attempt 2 as-is. Combobox live v26 PREPARE teaches
-> host must omit empty `dashPattern` on overlay strokes that compile
-> never emits, not also emit the live overlay empty dashPattern.
-> Keep v2–v25 teachings. Combobox is **not live**. Do not invent a
-> Combobox human grade. Product **v1 is incomplete**.
+> not restart v25 attempt 2 as-is. Combobox live v26 PREPARE
+> `3665cd2a` and AUTHORIZE `c0a1df22` landed. Attempt 1 minted page
+> `163:7150`; restore held 144 owned FILL texts. Host overlay
+> empty-dashPattern omit teaching cleared; extract walk accepted.
+> Collapse then refused `unsupported structural edit at
+> $.children[0].clipsContent` (`combobox/set`: host emits
+> `clipsContent: true` on both set roots; compile omits
+> `clipsContent`). Option-set also emits `clipsContent: true`.
+> Variant `clipsContent: false` already matches compile. Overlay
+> border strokes, drop-shadow, and `clipsContent: true` stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v26 attempt 2 as-is. Next teaching: host
+> must omit `clipsContent` on `combobox/set` and
+> `combobox/option-set` that compile never emits, not also emit the
+> live set clip flag. Keep v2–v26 teachings. Combobox is **not
+> live**. Do not invent a Combobox human grade. Product **v1 is
+> incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
