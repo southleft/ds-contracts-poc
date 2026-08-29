@@ -183,10 +183,10 @@
 > (`combobox/option-instance/0`: host emits a nonempty inherited solid
 > paint; compile omits `fills`). Cleanup accepted; that Combobox page
 > is gone. Input `115:295378` stayed. Do not restart v19 attempt 2
-> as-is. Next teaching: host must omit inherited `fills` on
-> `combobox/option-instance` that compile never emits, not also emit
-> the inherited solid paint. Keep v2–v19 teachings. Combobox is
-> **not live**. Do not invent a Combobox human grade. Product **v1
+> as-is. Combobox live v20 PREPARE teaches host must omit inherited
+> `fills` on `combobox/option-instance` that compile never emits, not
+> also emit the inherited solid paint. Keep v2–v19 teachings. Combobox
+> is **not live**. Do not invent a Combobox human grade. Product **v1
 > is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
