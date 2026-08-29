@@ -5438,7 +5438,7 @@ export function validatePivotStatus(
   if (
     status.table?.overallSuccess !== false ||
     status.table?.status !==
-      "live-v25-attempt-1-failed-closed at extract independent root accounting (4 name mismatches, 2 per root); the fixed-point IR diff passed for the first time in the lineage; writer set-name fix prepared as v26; product v1 incomplete" ||
+      "live-v26-attempt-1 extract ACCEPTED (fixed-point IR diff and independent root accounting both passed for the first time in the lineage); failed closed at probe usability/restoration on reflowPassed and overlapPixels; overlap traced to a probe measurement defect fixed in v27; reflow is an open human authoring gate; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
     status.table?.liveFigma !== false ||
     status.table?.humanGradeInvented !== false ||

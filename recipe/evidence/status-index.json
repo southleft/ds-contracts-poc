@@ -1994,7 +1994,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v25-attempt-1-failed-closed at extract independent root accounting (4 name mismatches, 2 per root); the fixed-point IR diff passed for the first time in the lineage; writer set-name fix prepared as v26; product v1 incomplete",
+    "status": "live-v26-attempt-1 extract ACCEPTED (fixed-point IR diff and independent root accounting both passed for the first time in the lineage); failed closed at probe usability/restoration on reflowPassed and overlapPixels; overlap traced to a probe measurement defect fixed in v27; reflow is an open human authoring gate; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2589,8 +2589,9 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v25 attempt 1 failed closed at extract independent root accounting; do not restart v25 attempt 2 as-is",
-      "v26 PREPARE landed with the writer set-name fix; not authorized; no attempt run",
+      "Table live v26 attempt 1 failed closed at probe; do not restart v26 attempt 2 as-is",
+      "v27 PREPARE landed with the probe containment fix; not authorized",
+      "OPEN HUMAN GATE: table root resize semantics (fixture declares hug-contents; the probe asserts a forced width must stick) and whether table@1 gains a per-column width model (MUI columns are ragged because MUI declares no cell min-width)",
       "no live mint",
       "no human grade",
       "Calendar not started",
@@ -3553,7 +3554,36 @@
       "simulatedPredictionIrDifferences": 0,
       "simulatedPredictionAccountingProblems": 0,
       "simulationIsNotEvidence": true,
-      "doNotRestartV25Attempt2": true
+      "doNotRestartV25Attempt2": true,
+      "attempt1": {
+        "status": "failed-closed-at-probe",
+        "writerAccepted": true,
+        "restoreAccepted": true,
+        "restoredCount": 8,
+        "extractAccepted": true,
+        "fixedPointIrDiffPassed": true,
+        "independentRootAccountingPassed": true,
+        "probeAccepted": false,
+        "probeFailures": ["reflowPassed", "overlapPixels"],
+        "mintStayed": false,
+        "cleanedPageId": "173:46840",
+        "cleanupExecuted": true,
+        "signedCleanupIssued": true,
+        "signedCleanupAccepted": true
+      },
+      "nextTeaching": "probe: containment is not overlap"
+    },
+    "liveV27": {
+      "prepared": true,
+      "liveFigma": false,
+      "humanSignoff": "pending",
+      "pageId": null,
+      "forbiddenInputPageId": "115:295378",
+      "forbiddenComboboxPageId": "163:35981",
+      "namespace": "ds.contracts.table.recipe.v1",
+      "evidenceRoot": "recipe/evidence/table-live-pivot-v27",
+      "teaching": "probe overlap must skip ancestor/descendant pairs (TABLE-PROBE-CONTAINMENT-IS-NOT-OVERLAP); a parent box containing its child is not an overlap",
+      "doNotRestartV26Attempt2": true
     }
   },
   "input": {
