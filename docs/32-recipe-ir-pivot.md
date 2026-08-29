@@ -283,6 +283,10 @@
 > `combobox/option` `height.value` to `layout.height.value` so
 > compile-order ranks it before `fills.0.color`, not leave
 > `height.value` unknown after the option sort. Keep v2–v28
+> teachings. Combobox live v29 PREPARE teaches host must alias
+> `combobox/option` `height.value` to `layout.height.value` so
+> compile-order ranks it before `fills.0.color`, not leave
+> `height.value` unknown after the option sort. Keep v2–v28
 > teachings. Combobox is **not live**. Do not invent a Combobox
 > human grade. Product **v1 is incomplete**.
 >
