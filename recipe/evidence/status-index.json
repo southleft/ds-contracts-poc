@@ -941,7 +941,19 @@
       "hostOptionInstancePayloadOmitUnchangedFromV21": true,
       "hostListboxClipsContentOmitUnchangedFromV22": true,
       "hostListboxCornerRadiusOmitUnchangedFromV23": true,
-      "runIdentity": "70c24cbd-d27f2e85-combobox-v1"
+      "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+      "attempt1": {
+        "status": "failed-closed",
+        "restoreAccepted": true,
+        "restoredCount": 144,
+        "extractWalkCleared": true,
+        "hostListboxEmptyEffectsOmitTeachingCleared": true,
+        "refusedClass": "unsupported structural edit",
+        "refused": "unsupported structural edit at $.children[0].children[8].children[3].children[0].strokes",
+        "mintStayed": false,
+        "cleanedPageId": "163:3692"
+      },
+      "nextTeaching": "host must omit empty strokes on combobox/listbox that compile never emits, not also emit the live listbox empty strokes array"
     },
     "blockers": [
       "Combobox live v1 attempt 1 failed closed at restore 240 vs 144",
@@ -967,7 +979,7 @@
       "Combobox live v21 attempt 1 failed closed at collapse unsupported structural edit; host option-instance payload omit teaching cleared",
       "Combobox live v22 attempt 1 failed closed at collapse unsupported structural edit; host listbox clipsContent omit teaching cleared",
       "Combobox live v23 attempt 1 failed closed at collapse unsupported structural edit; host listbox cornerRadius omit teaching cleared",
-      "Combobox live v24 prepared; listbox empty-effects omit taught; not live",
+      "Combobox live v24 attempt 1 failed closed at collapse unsupported structural edit; host listbox empty-effects omit teaching cleared",
       "no Combobox human grade",
       "product v1 incomplete"
     ]

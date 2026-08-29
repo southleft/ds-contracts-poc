@@ -3698,6 +3698,16 @@ export function validatePivotStatus(
       true ||
     status.combobox?.liveV24?.runIdentity !==
       "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV24?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV24?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV24?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV24?.attempt1?.hostListboxEmptyEffectsOmitTeachingCleared !==
+      true ||
+    status.combobox?.liveV24?.attempt1?.refusedClass !==
+      "unsupported structural edit" ||
+    status.combobox?.liveV24?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV24?.nextTeaching !==
+      "host must omit empty strokes on combobox/listbox that compile never emits, not also emit the live listbox empty strokes array" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||
