@@ -4758,7 +4758,18 @@ export function validatePivotStatus(
     status.combobox?.liveV37?.hostRecoversCompileCarriedTriggerCharacters !==
       true ||
     status.combobox?.liveV37?.runIdentity !==
-      "70c24cbd-d27f2e85-combobox-v1"
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV37?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV37?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV37?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV37?.attempt1
+      ?.hostRecoversCompileCarriedTriggerCharactersTeachingCleared !==
+      true ||
+    status.combobox?.liveV37?.attempt1?.refusedClass !==
+      "independent root accounting" ||
+    status.combobox?.liveV37?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV37?.nextTeaching !==
+      "host observe must recover compile-carried option-set name, not the live display name"
   )
     fail("combobox live v37 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))

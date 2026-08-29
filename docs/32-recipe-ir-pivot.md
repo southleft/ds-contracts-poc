@@ -420,11 +420,22 @@
 > 2 as-is. Next teaching: host observe must recover
 > compile-carried trigger characters, not the live
 > selected-option characters. Keep v2–v36 teachings.
-> Combobox live v37 PREPARE teaches host observe must
-> recover compile-carried trigger characters, not the
-> live selected-option characters. Keep v2–v36
-> teachings. Combobox is **not live**. Do not invent a
-> Combobox human grade. Product **v1 is incomplete**.
+> Combobox live v37 PREPARE `c5df3408` and AUTHORIZE
+> `94845d8c` landed. Attempt 1 minted page `163:26169`;
+> restore held 144 owned FILL texts. Host observe
+> compile-carried trigger characters teaching cleared;
+> empty-content `combobox/input` `characters` mismatches
+> fell from 32 to 0. Independent root accounting then
+> refused extra=0 mismatch=1 silent=1 on both roots. The
+> remaining mismatch is 1 option-set name fact (expected
+> compile-carried `combobox/option-set :: Combobox option`
+> vs observed live display name). Cleanup accepted; that
+> Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v37 attempt 2 as-is. Next teaching: host
+> observe must recover compile-carried option-set name,
+> not the live display name. Keep v2–v37 teachings.
+> Combobox is **not live**. Do not invent a Combobox
+> human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
