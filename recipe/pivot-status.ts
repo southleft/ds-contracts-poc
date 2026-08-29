@@ -5245,7 +5245,7 @@ export function validatePivotStatus(
     fail("combobox live v41 prepare");
   if (
     status.table?.overallSuccess !== false ||
-    status.table?.status !== "offline-recipe-v1-writer; product v1 incomplete" ||
+    status.table?.status !== "live-v1-prepared; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
     status.table?.liveFigma !== false ||
     status.table?.humanGradeInvented !== false ||
@@ -5260,12 +5260,14 @@ export function validatePivotStatus(
     status.table?.offlineProof?.components !== 10 ||
     status.table?.offlineProof?.instances !== 22 ||
     status.table?.offlineProof?.gate !== "recipe:table:check" ||
-    status.table?.live?.prepared !== false ||
+    status.table?.live?.prepared !== true ||
     status.table?.live?.pageId !== null ||
     status.table?.live?.forbiddenInputPageId !== "115:295378" ||
-    status.table?.live?.forbiddenComboboxPageId !== "163:35981"
+    status.table?.live?.forbiddenComboboxPageId !== "163:35981" ||
+    status.table?.live?.runIdentity !== "83a27edf-82d19508-table-v1" ||
+    status.table?.live?.namespace !== "ds.contracts.table.recipe.v1"
   )
-    fail("table offline recipe v1");
+    fail("table live v1 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))
     fail(message);
   if (

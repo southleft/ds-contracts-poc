@@ -2002,7 +2002,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "offline-recipe-v1-writer; product v1 incomplete",
+    "status": "live-v1-prepared; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2031,13 +2031,15 @@
       "gate": "recipe:table:check"
     },
     "live": {
-      "prepared": false,
+      "prepared": true,
       "pageId": null,
       "forbiddenInputPageId": "115:295378",
-      "forbiddenComboboxPageId": "163:35981"
+      "forbiddenComboboxPageId": "163:35981",
+      "runIdentity": "83a27edf-82d19508-table-v1",
+      "namespace": "ds.contracts.table.recipe.v1"
     },
     "blockers": [
-      "no live PREPARE",
+      "no live mint",
       "no human grade",
       "Calendar not started",
       "product v1 incomplete"
