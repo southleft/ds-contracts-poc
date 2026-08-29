@@ -318,13 +318,25 @@
 > order so `width.value` precedes `height.value` precedes
 > `fills.0.color`, not live extract order starting at
 > `fills.0.color`. Keep v2–v30 teachings. Combobox live
-> v31 PREPARE teaches host must order
-> combobox/option/selected-indicator bindings to compile field
-> order so `width.value` precedes `height.value` precedes
-> `fills.0.color`, not live extract order starting at
-> `fills.0.color`. Keep v2–v30 teachings. Combobox is
-> **not live**. Do not invent a Combobox human grade. Product
-> **v1 is incomplete**.
+> v31 PREPARE `2afcfd23` and AUTHORIZE `b24de1ef` landed.
+> Attempt 1 minted page `163:15795`; restore held 144 owned
+> FILL texts. Host selected-indicator binding compile-order
+> teaching cleared; extract walk accepted. Host now starts
+> selected-indicator bindings at `width.value` then
+> `height.value` then `fills.0.color` on all 4 indicators
+> (hashed v30 still starts at `fills.0.color`). Option
+> `clipsContent` omit 16/16 and overlay `clipsContent: true`
+> stayed. Collapse then refused `unsupported structural edit at
+> $.children[1].children[2].children[1].visible`
+> (`combobox/option/selected-indicator`: compile emits
+> `visible: true`; host and hashed v30 omit default-true).
+> Cleanup accepted; that Combobox page is gone. Input
+> `115:295378` stayed. Do not restart v31 attempt 2 as-is.
+> Next teaching: host must emit compile-carried `visible: true`
+> on `combobox/option/selected-indicator` instead of omitting
+> the default-true visible flag. Keep v2–v31 teachings.
+> Combobox is **not live**. Do not invent a Combobox human
+> grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host

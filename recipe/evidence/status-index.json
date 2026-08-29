@@ -1298,7 +1298,19 @@
       "hostOptionBindingCompileOrderUnchangedFromV28": true,
       "hostOptionHeightAliasUnchangedFromV29": true,
       "hostOptionClipsContentOmitUnchangedFromV30": true,
-      "runIdentity": "70c24cbd-d27f2e85-combobox-v1"
+      "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+      "attempt1": {
+        "status": "failed-closed",
+        "restoreAccepted": true,
+        "restoredCount": 144,
+        "extractWalkCleared": true,
+        "hostSelectedIndicatorBindingCompileOrderTeachingCleared": true,
+        "refusedClass": "unsupported structural edit",
+        "refused": "unsupported structural edit at $.children[1].children[2].children[1].visible",
+        "mintStayed": false,
+        "cleanedPageId": "163:15795"
+      },
+      "nextTeaching": "host must emit compile-carried visible: true on combobox/option/selected-indicator instead of omitting the default-true visible flag"
     },
     "blockers": [
       "Combobox live v1 attempt 1 failed closed at restore 240 vs 144",
@@ -1331,6 +1343,7 @@
       "Combobox live v28 attempt 1 failed closed at collapse unsupported structural edit; host option binding compile-order teaching cleared",
       "Combobox live v29 attempt 1 failed closed at collapse unsupported structural edit; host option height-alias teaching cleared",
       "Combobox live v30 attempt 1 failed closed at collapse unsupported structural edit; host option clipsContent omit teaching cleared",
+      "Combobox live v31 attempt 1 failed closed at collapse unsupported structural edit; host selected-indicator binding compile-order teaching cleared",
       "no Combobox human grade",
       "product v1 incomplete"
     ]

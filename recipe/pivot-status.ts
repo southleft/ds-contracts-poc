@@ -4207,6 +4207,16 @@ export function validatePivotStatus(
       true ||
     status.combobox?.liveV31?.runIdentity !==
       "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV31?.attempt1?.status !== "failed-closed" ||
+    status.combobox?.liveV31?.attempt1?.restoreAccepted !== true ||
+    status.combobox?.liveV31?.attempt1?.restoredCount !== 144 ||
+    status.combobox?.liveV31?.attempt1
+      ?.hostSelectedIndicatorBindingCompileOrderTeachingCleared !== true ||
+    status.combobox?.liveV31?.attempt1?.refusedClass !==
+      "unsupported structural edit" ||
+    status.combobox?.liveV31?.attempt1?.mintStayed !== false ||
+    status.combobox?.liveV31?.nextTeaching !==
+      "host must emit compile-carried visible: true on combobox/option/selected-indicator instead of omitting the default-true visible flag" ||
     status.input?.overallSuccess !== false ||
     status.input?.status !==
       "v85-live-human-grade-passed; product v1 incomplete" ||
