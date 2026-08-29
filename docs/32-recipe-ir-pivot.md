@@ -298,6 +298,9 @@
 > Input `115:295378` stayed. Do not restart v29 attempt 2
 > as-is. Next teaching: host must omit `clipsContent` on
 > `combobox/option` that compile never emits, not also emit the
+> live option clip flag. Keep v2–v29 teachings. Combobox live
+> v30 PREPARE teaches host must omit `clipsContent` on
+> `combobox/option` that compile never emits, not also emit the
 > live option clip flag. Keep v2–v29 teachings. Combobox is
 > **not live**. Do not invent a Combobox human grade. Product
 > **v1 is incomplete**.

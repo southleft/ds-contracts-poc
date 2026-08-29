@@ -1,0 +1,1647 @@
+{
+  "artifactVersion": "combobox-live-v30-capture-manifest-v1",
+  "status": "planned only; authorization and capture pending",
+  "transport": {
+    "encoding": "one PNG base64 payload per signed response",
+    "cellsPerRequest": 1,
+    "requests": 72,
+    "rejectTruncationDuplicatesMissing": true,
+    "sampleReduction": false,
+    "legacyVisualComparison": false
+  },
+  "cells": [
+    {
+      "index": 0,
+      "cellKey": "mui/combobox/small/outlined/false/default/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 1,
+      "cellKey": "mui/combobox/small/outlined/false/default/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 2,
+      "cellKey": "mui/combobox/small/outlined/false/disabled/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 3,
+      "cellKey": "mui/combobox/small/outlined/false/disabled/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 4,
+      "cellKey": "mui/combobox/small/outlined/false/error/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 5,
+      "cellKey": "mui/combobox/small/outlined/false/error/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 6,
+      "cellKey": "mui/combobox/small/outlined/false/loading/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 7,
+      "cellKey": "mui/combobox/small/outlined/false/loading/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 8,
+      "cellKey": "mui/combobox/small/filled/false/default/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 9,
+      "cellKey": "mui/combobox/small/filled/false/default/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 10,
+      "cellKey": "mui/combobox/small/filled/false/disabled/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 11,
+      "cellKey": "mui/combobox/small/filled/false/disabled/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 12,
+      "cellKey": "mui/combobox/small/filled/false/error/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 13,
+      "cellKey": "mui/combobox/small/filled/false/error/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 14,
+      "cellKey": "mui/combobox/small/filled/false/loading/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 15,
+      "cellKey": "mui/combobox/small/filled/false/loading/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 16,
+      "cellKey": "mui/combobox/medium/outlined/false/default/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 17,
+      "cellKey": "mui/combobox/medium/outlined/false/default/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 18,
+      "cellKey": "mui/combobox/medium/outlined/false/disabled/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 19,
+      "cellKey": "mui/combobox/medium/outlined/false/disabled/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 20,
+      "cellKey": "mui/combobox/medium/outlined/false/error/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 21,
+      "cellKey": "mui/combobox/medium/outlined/false/error/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 22,
+      "cellKey": "mui/combobox/medium/outlined/false/loading/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 23,
+      "cellKey": "mui/combobox/medium/outlined/false/loading/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 24,
+      "cellKey": "mui/combobox/medium/filled/false/default/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 25,
+      "cellKey": "mui/combobox/medium/filled/false/default/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 26,
+      "cellKey": "mui/combobox/medium/filled/false/disabled/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 27,
+      "cellKey": "mui/combobox/medium/filled/false/disabled/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 28,
+      "cellKey": "mui/combobox/medium/filled/false/error/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 29,
+      "cellKey": "mui/combobox/medium/filled/false/error/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 30,
+      "cellKey": "mui/combobox/medium/filled/false/loading/options",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 31,
+      "cellKey": "mui/combobox/medium/filled/false/loading/empty",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 152
+      }
+    },
+    {
+      "index": 32,
+      "cellKey": "mui/option/small/default",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "small",
+        "Option state": "default"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "option",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 80
+      }
+    },
+    {
+      "index": 33,
+      "cellKey": "mui/option/small/selected",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "small",
+        "Option state": "selected"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "option",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 80
+      }
+    },
+    {
+      "index": 34,
+      "cellKey": "mui/option/medium/default",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "medium",
+        "Option state": "default"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "option",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 84
+      }
+    },
+    {
+      "index": 35,
+      "cellKey": "mui/option/medium/selected",
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "medium",
+        "Option state": "selected"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "option",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 84
+      }
+    },
+    {
+      "index": 36,
+      "cellKey": "antd/combobox/small/outlined/false/default/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 37,
+      "cellKey": "antd/combobox/small/outlined/false/default/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 38,
+      "cellKey": "antd/combobox/small/outlined/false/disabled/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 39,
+      "cellKey": "antd/combobox/small/outlined/false/disabled/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 40,
+      "cellKey": "antd/combobox/small/outlined/false/error/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 41,
+      "cellKey": "antd/combobox/small/outlined/false/error/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 42,
+      "cellKey": "antd/combobox/small/outlined/false/loading/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 43,
+      "cellKey": "antd/combobox/small/outlined/false/loading/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 44,
+      "cellKey": "antd/combobox/small/filled/false/default/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 45,
+      "cellKey": "antd/combobox/small/filled/false/default/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 46,
+      "cellKey": "antd/combobox/small/filled/false/disabled/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 47,
+      "cellKey": "antd/combobox/small/filled/false/disabled/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 48,
+      "cellKey": "antd/combobox/small/filled/false/error/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 49,
+      "cellKey": "antd/combobox/small/filled/false/error/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 50,
+      "cellKey": "antd/combobox/small/filled/false/loading/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 51,
+      "cellKey": "antd/combobox/small/filled/false/loading/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "small",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 112
+      }
+    },
+    {
+      "index": 52,
+      "cellKey": "antd/combobox/medium/outlined/false/default/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 53,
+      "cellKey": "antd/combobox/medium/outlined/false/default/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 54,
+      "cellKey": "antd/combobox/medium/outlined/false/disabled/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 55,
+      "cellKey": "antd/combobox/medium/outlined/false/disabled/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 56,
+      "cellKey": "antd/combobox/medium/outlined/false/error/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 57,
+      "cellKey": "antd/combobox/medium/outlined/false/error/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 58,
+      "cellKey": "antd/combobox/medium/outlined/false/loading/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 59,
+      "cellKey": "antd/combobox/medium/outlined/false/loading/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "outlined",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 60,
+      "cellKey": "antd/combobox/medium/filled/false/default/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 61,
+      "cellKey": "antd/combobox/medium/filled/false/default/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "default",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 62,
+      "cellKey": "antd/combobox/medium/filled/false/disabled/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 63,
+      "cellKey": "antd/combobox/medium/filled/false/disabled/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "disabled",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 64,
+      "cellKey": "antd/combobox/medium/filled/false/error/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 65,
+      "cellKey": "antd/combobox/medium/filled/false/error/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "error",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 66,
+      "cellKey": "antd/combobox/medium/filled/false/loading/options",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "options"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 67,
+      "cellKey": "antd/combobox/medium/filled/false/loading/empty",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "combobox",
+      "axes": {
+        "Size": "medium",
+        "Appearance": "filled",
+        "Open": "false",
+        "Field state": "loading",
+        "Content": "empty"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "combobox",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 128
+      }
+    },
+    {
+      "index": 68,
+      "cellKey": "antd/option/small/default",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "small",
+        "Option state": "default"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "option",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 80
+      }
+    },
+    {
+      "index": 69,
+      "cellKey": "antd/option/small/selected",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "small",
+        "Option state": "selected"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "option",
+        "size": "small"
+      },
+      "frame": {
+        "width": 380,
+        "height": 80
+      }
+    },
+    {
+      "index": 70,
+      "cellKey": "antd/option/medium/default",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "medium",
+        "Option state": "default"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "option",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 80
+      }
+    },
+    {
+      "index": 71,
+      "cellKey": "antd/option/medium/selected",
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "kind": "option",
+      "axes": {
+        "Size": "medium",
+        "Option state": "selected"
+      },
+      "strata": {
+        "source": "antd",
+        "kind": "option",
+        "size": "medium"
+      },
+      "frame": {
+        "width": 380,
+        "height": 80
+      }
+    }
+  ],
+  "cellsSha256": "7bbd9e7b31369a26b993d53582ec76e5ff1f1039bed05542aa4f5dffc2892721"
+}
