@@ -53,11 +53,14 @@
 > binds). Row owned-cell-label skip teaching cleared; restore 8 held.
 > Signed cleanup removed page `165:41173`. Mint did not stay. Input
 > `115:295378` and Combobox `163:35981` stayed. Do not restart v6
-> attempt 2 as-is. Table live v7 PREPARE lands the one teaching: when
-> extract host-normalizes table and cell variants, fold Figma per-side
-> `strokeTopWeight` / `strokeRightWeight` / `strokeBottomWeight` /
-> `strokeLeftWeight` binds that share one variable into compile field
-> `strokes.0.weight`. Not live. Product **v1 is
+> attempt 2 as-is. Table live v7 PREPARE `d7a034486` and AUTHORIZE
+> `cf0ae2a46` landed. Attempt 1 failed closed at extract
+> `unsupported structural edit` (`table/header-cell-instance/0`
+> bindings; compile cell instances carry none; host keeps Figma-copied
+> padding/minWidth/stroke binds). Per-side stroke-weight fold teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:41432`.
+> Mint did not stay. Input `115:295378` and Combobox `163:35981`
+> stayed. Do not restart v7 attempt 2 as-is. Not live. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
