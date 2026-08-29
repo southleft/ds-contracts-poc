@@ -29,15 +29,15 @@ import {
  * `clipsContent`, omit `cornerRadius` on `table/header` and `table/body`
  * because compile header/body frames omit `cornerRadius`, omit `effects`
  * on `table/header` and `table/body` because compile header/body frames
- * omit `effects`, and omit `strokes` on `table/header` and
+ * omit `effects`, omit `effects` on `table/variant` because compile
+ * variants omit `effects`, and omit `strokes` on `table/header` and
  * `table/body` because compile header/body frames omit `strokes`.
  * Reuses the extras-drop path and the Combobox listbox / set /
  * option clipsContent omit path plus `HEADER_BODY_ROLES` and
  * `TABLE_VARIANT_ROLE`. Row
  * components still compile-carry `fills.0.color`. Does not
- * omit `table/variant` cornerRadius, `table/variant` empty effects, or
- * `table/variant` strokes. Does not copy Combobox overlay/option/listbox
- * roles.
+ * omit `table/variant` cornerRadius or `table/variant` strokes. Does
+ * not copy Combobox overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -78,6 +78,8 @@ export const TABLE_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-EFFECTS-OMITTED";
+export const TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER =
+  "TABLE-HOST-VARIANT-EFFECTS-OMITTED";
 export const TABLE_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER =
   "TABLE-HOST-HEADER-BODY-STROKES-OMITTED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
@@ -980,9 +982,13 @@ const omitHeaderBodyEffects = <T extends { effects?: unknown }>(
   frame: T,
 ): T => {
   void TABLE_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER;
+  void TABLE_LIVE_V1_VARIANT_EFFECTS_OMITTED_MARKER;
   const role = sceneRole(scene);
-  if (!role || !HEADER_BODY_ROLES.has(role) || scene.type !== "FRAME")
-    return frame;
+  const headerBody =
+    !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
+  const tableVariant =
+    !!role && TABLE_VARIANT_ROLE.test(role) && scene.type === "COMPONENT";
+  if (!headerBody && !tableVariant) return frame;
   if (frame.effects === undefined) return frame;
   const { effects: _omitted, ...rest } = frame;
   return rest as T;
