@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~19:30 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~19:45 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -118,11 +118,12 @@
 > `controlInstance` carries `visible: true`). Sibling
 > `combobox/control/popup` shares that same omit path. Cleanup accepted;
 > that Combobox page is gone. Input `115:295378` stayed. Do not restart
-> v13 attempt 2 as-is. Next teaching: host must emit compile-carried
-> `visible: true` on trailing-slot instances instead of omitting the
-> default-true visible flag. Keep v2–v13 teachings. Combobox is **not
-> live**. Do not invent a Combobox human grade. Product **v1 is
-> incomplete**.
+> v13 attempt 2 as-is. Combobox live v14 PREPARE teaches host to emit
+> compile-carried `visible: true` on trailing-slot instances instead of
+> omitting the default-true visible flag. Same class as v12 leading-slot
+> compile-carry visible; one emit covers clear and popup because they
+> share the omit path. Keep v2–v13 teachings. Combobox is **not live**.
+> Do not invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
