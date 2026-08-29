@@ -9,6 +9,12 @@
   "predicts": "extract-side tail only",
   "doesNotPredict": "writer-side refusals (the class that stopped v1-v4). The substrate was captured under its own version's writer; teachings v9-v24 are read-side only.",
   "reproducesKnownV23Refusal": false,
+  "predictedNextLiveRefusal": {
+    "source": "first-party",
+    "path": "$.children[2].children[0].children[0].label",
+    "role": "table/cell/label",
+    "property": "label"
+  },
   "totalDifferences": 23,
   "classFamilies": [
     {

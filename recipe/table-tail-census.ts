@@ -88,6 +88,20 @@ export interface TableTailCensus {
   predicts: "extract-side tail only";
   doesNotPredict: string;
   reproducesKnownV23Refusal: boolean;
+  /**
+   * `firstDifference` walks depth-first with sorted keys and returns on the
+   * first hit, and `allDifferences` walks identically while collecting. So the
+   * first entry of the first root that reaches the diff is the path the NEXT
+   * live attempt should refuse at. Recorded before the run so the attempt is a
+   * falsifiable predicted-vs-actual test of this instrument, not a narrative
+   * written afterwards.
+   */
+  predictedNextLiveRefusal: {
+    source: string;
+    path: string;
+    role: string | null;
+    property: string;
+  } | null;
   totalDifferences: number;
   /**
    * Measured rollup across roots: one row per `(property, reason)` with the
@@ -306,6 +320,19 @@ export function buildTableTailCensus(
     reproducesKnownV23Refusal: allPaths.includes(
       TABLE_TAIL_CENSUS_KNOWN_V23_REFUSAL,
     ),
+    predictedNextLiveRefusal: (() => {
+      const reached = roots.find(
+        (root) => root.preDiffRefusal === null && root.entries.length > 0,
+      );
+      if (!reached) return null;
+      const first = reached.entries[0]!;
+      return {
+        source: reached.source,
+        path: first.path,
+        role: first.role,
+        property: first.property,
+      };
+    })(),
     totalDifferences: allPaths.length,
     classFamilies: [...families.values()]
       .map((family) => ({
@@ -331,6 +358,10 @@ if (import.meta.url === `file://${process.argv[1]}`) {
     `  reproduces known v23 refusal ${TABLE_TAIL_CENSUS_KNOWN_V23_REFUSAL}: ${census.reproducesKnownV23Refusal}`,
   );
   console.log(`  total differences: ${census.totalDifferences}`);
+  if (census.predictedNextLiveRefusal)
+    console.log(
+      `  predicted next live refusal: ${census.predictedNextLiveRefusal.path} (${census.predictedNextLiveRefusal.role} . ${census.predictedNextLiveRefusal.property})`,
+    );
   for (const root of census.roots) {
     if (root.preDiffRefusal) {
       console.log(
