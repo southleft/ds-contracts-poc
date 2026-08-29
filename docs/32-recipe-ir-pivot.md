@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-28 ~21:20 UTC-5; supersedes status
+> **Current correction status (2026-08-28 ~21:45 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -201,11 +201,20 @@
 > (`combobox/listbox`: host emits `clipsContent: true` on all 64
 > open-variant listboxes; compile omits `clipsContent`). Cleanup
 > accepted; that Combobox page is gone. Input `115:295378` stayed. Do
-> not restart v21 attempt 2 as-is. Combobox live v22 PREPARE teaches
-> host must omit `clipsContent` on `combobox/listbox` that compile
-> never emits, not also emit the live listbox clip flag. Keep v2–v21
-> teachings. Combobox is **not live**. Do not invent a Combobox human
-> grade. Product **v1 is incomplete**.
+> not restart v21 attempt 2 as-is. Combobox live v22 PREPARE `e70e726a`
+> and AUTHORIZE `8a46e6ec` landed. Attempt 1 minted page `163:234`;
+> restore held 144 owned FILL texts. Host listbox clipsContent omit
+> teaching cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].cornerRadius`
+> (`combobox/listbox`: host emits zero `cornerRadius` on all 64
+> open-variant listboxes; compile omits `cornerRadius`). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v22 attempt 2 as-is. Next teaching: host must omit
+> `cornerRadius` on `combobox/listbox` that compile never emits, not
+> also emit the live listbox zero radii. Keep v2–v22 teachings.
+> Combobox is **not live**. Do not invent a Combobox human grade.
+> Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
 > and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
