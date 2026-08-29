@@ -335,6 +335,10 @@
 > Next teaching: host must emit compile-carried `visible: true`
 > on `combobox/option/selected-indicator` instead of omitting
 > the default-true visible flag. Keep v2–v31 teachings.
+> Combobox live v32 PREPARE teaches host must emit
+> compile-carried `visible: true` on
+> `combobox/option/selected-indicator` instead of omitting
+> the default-true visible flag. Keep v2–v31 teachings.
 > Combobox is **not live**. Do not invent a Combobox human
 > grade. Product **v1 is incomplete**.
 >
