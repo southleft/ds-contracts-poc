@@ -40,9 +40,13 @@
 > to 0, use null to unset`). Row-owned TEXT `characters` teaching
 > cleared on first-party. Failure-path cleanup removed page `165:40763`.
 > Mint did not stay. Input `115:295378` and Combobox `163:35981` stayed.
-> Do not restart v4 attempt 2 as-is. Table live v5 PREPARE lands the one
-> teaching: when host `minWidth` is `0`, unset with `null` rather than
-> assigning `0`. Not live. Product **v1 is
+> Do not restart v4 attempt 2 as-is. Table live v5 PREPARE `f82f2098c`
+> and AUTHORIZE `b18bd39e7` landed. Attempt 1 failed closed at extract
+> `SCENE-OWNERSHIP-KEY-ABSENT` (untagged writer-created
+> `table/row/owned-cell-label` TEXT bind host). MinWidth 0→null teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:40914`. Mint
+> did not stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v5 attempt 2 as-is. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
@@ -1657,13 +1661,14 @@ the partial page `165:40645` was cleaned. Table live v3 attempt 1 failed
 closed at writer (`TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER`);
 the partial page `165:40704` was cleaned. Table live v4 attempt 1 failed
 closed at writer (`TABLE-MIN-WIDTH-ZERO`); the partial page `165:40763`
-was cleaned. Table live v5 PREPARE lands the one host `minWidth` 0 →
-`null` unset teaching. No Data Table live mint and no Data Table human grade.
+was cleaned. Table live v5 attempt 1 failed closed at extract
+(`SCENE-OWNERSHIP-KEY-ABSENT`); the page `165:40914` was cleaned. No
+Data Table live mint and no Data Table human grade.
 
 | step | action | exit criterion |
 | --- | --- | --- |
 | D1 | Explicit Data Table recipe + reviewed adapters for two unrelated real libraries. Offline cross-library proof first: row/column templates, declared column axis, required-facts / door / lowering / grammar coverage. | **Offline recipe authored 2026-08-29.** `table@1` + adapters + writer `ds.contracts.table.recipe.v1`. `npm run recipe:table:check` green (2 densities × 2 row states; 10 components / 22 instances; hermetic mock-mint 20 variants). Door/lowering/grammar corpus coverage and live are not claimed. |
-| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v5 prepared 2026-08-29.** One teaching: when host `minWidth` is `0`, unset with `null` rather than assigning `0`. v4 RECORD `60173040b` stands. Do not restart v4 attempt 2 as-is. Not live. |
+| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v5 attempt 1 failed closed 2026-08-29.** Writer accepted; restore 8 held; extract refused `SCENE-OWNERSHIP-KEY-ABSENT:165:40973`. MinWidth 0→null teaching cleared. Signed cleanup removed `165:40914`. Do not restart v5 attempt 2 as-is. Not live. |
 | D3 | Calendar archetype addition is a reviewed minor contract change (`ARCHETYPES` in `packages/schema/src/archetype.ts` plus required-facts). Then the same offline-then-live sequence. | Calendar is no longer “undefined (0 contracts)” by proof, not by deleting the bar. |
 | D4 | Human review of Table/Calendar adapters before live if a human-authored adapter is required. | **Human gate** for adapter authorship/review only. Live still Scratch-only. |
 
@@ -3294,7 +3299,7 @@ grade.
 | Button      | **technical mint retained; extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Stopped on fonts and invented set chrome. Do not invent Roboto/SemiBold. |
 | Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28; product v1 incomplete; overall false** | Data Table next. Combobox v41 live human grade passed 2026-08-29. Button leftover still pending (149 silent / fonts + set chrome). Do not invent a Button or Data Table human grade. Do not claim v1 complete. |
 | Combobox    | **live v41 attempt 1 mint stayed on `163:35981`; TJ named feedback 2026-08-29 empty/loading listbox padding not a miss; no remint; live human grade passed 2026-08-29 ~09:17 UTC-5; RECORD `f330a082` humanSignoff stays pending; overall false**                                                                              | Combobox live human grade recorded in `recipe/evidence/combobox-live-v41-human-signoff.json`. Do not overwrite page `163:35981`. Next hill is Data Table. Do not invent a Data Table human grade. |
-| Data Table  | **live v5 prepared; one teaching when host minWidth is 0, unset with null rather than assigning 0; v4 attempt 1 failed closed; not live; no human grade; overall false**                                                     | Do not restart v4 attempt 2 as-is. Do not invent a Data Table human grade. Do not write Input `115:295378` or Combobox `163:35981`. |
+| Data Table  | **live v5 attempt 1 failed closed at extract SCENE-OWNERSHIP-KEY-ABSENT; minWidth teaching cleared; restore 8 held; mint cleaned; not live; no human grade; overall false**                                                     | Do not restart v5 attempt 2 as-is. Do not invent a Data Table human grade. Do not write Input `115:295378` or Combobox `163:35981`. |
 | Calendar    | not claimed                                                                                                                                                     | reviewed archetype addition, then the same offline-then-live sequence                            |
 
 ### First page-scoped live writer run — blocked, 2026-08-26
