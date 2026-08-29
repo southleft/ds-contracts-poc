@@ -1,0 +1,41 @@
+{
+  "artifactVersion": "table-live-v17-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit; writer accepted; restore 8 held; set cornerRadius omit teaching cleared; signed cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "b13a04b1fc8ea3420e14f43c5df9ea673bbbff7e",
+    "indexPath": "recipe/evidence/table-live-pivot-v17/antecedent-index.json",
+    "indexSha256": "4749480369512eed0ba4607758f134b312ffd83b02cf3818fc13cc2947bffb32",
+    "hashSetSha256": "0e3fa93b89d8213c1f38c2908d3eec9a6c19873e7cc82e4aa833d506379d5c86"
+  },
+  "authorization": {
+    "commit": "b366b61a782f327e9f3ce66475726307bc018e38",
+    "path": "recipe/evidence/table-live-pivot-v17/capture-authorization.json",
+    "sha256": "f1761d1689790757015c406ba68ea79c2bc6733687d0f0b7d4d35341b951ff19",
+    "signingPublicKeySpkiSha256": "ebb873c312ab9767487e125077f04076a5aaf71ac0ed0484297a9ccf8a15e0e5"
+  },
+  "attempt1": {
+    "pageId": "172:44511",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "restoredCount": 8,
+    "extractAccepted": false,
+    "extractRefused": "unsupported structural edit",
+    "setCornerRadiusOmitTeachingCleared": true,
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "when extract host-normalizes table/set, table/row-set, and table/cell-set, omit effects because compile component-sets omit effects",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}
