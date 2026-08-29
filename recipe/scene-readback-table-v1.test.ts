@@ -14,6 +14,7 @@ import {
   TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER,
   TABLE_LIVE_V1_SET_LAYOUT_COMPILE_CARRY_MARKER,
   TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER,
+  TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER,
   TABLE_LIVE_V1_WIDTH_HEIGHT_LAYOUT_ALIAS_MARKER,
   sceneToNormalizedIr,
   type SceneNodeSnapshot,
@@ -33,6 +34,7 @@ test("table host-normalize is table-shaped and does not copy Combobox roles", ()
   assert.match(host, new RegExp(TABLE_LIVE_V1_SET_LAYOUT_COMPILE_CARRY_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER));
   assert.match(host, new RegExp(TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER));
+  assert.match(host, new RegExp(TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER));
   assert.match(host, /table@1\/cell/);
   assert.match(host, /table@1\/row/);
   assert.match(host, /rootOwnershipKey/);
@@ -135,6 +137,76 @@ test("host does not invent strokes.0.weight when per-side variables differ", () 
     (ir.bindings ?? []).some((binding) => binding.field === "strokes.0.weight"),
     false,
   );
+});
+
+const copiedCellInstanceBindings = (): SceneNodeSnapshot["boundVariables"] => [
+  {
+    field: "minWidth",
+    variableName: "ds.table.cellMinWidthComfortable",
+    resolvedType: "FLOAT",
+  },
+  {
+    field: "paddingBottom",
+    variableName: "ds.table.cellPaddingYComfortable",
+    resolvedType: "FLOAT",
+  },
+  {
+    field: "paddingLeft",
+    variableName: "ds.table.cellPaddingXComfortable",
+    resolvedType: "FLOAT",
+  },
+  {
+    field: "paddingRight",
+    variableName: "ds.table.cellPaddingXComfortable",
+    resolvedType: "FLOAT",
+  },
+  {
+    field: "paddingTop",
+    variableName: "ds.table.cellPaddingYComfortable",
+    resolvedType: "FLOAT",
+  },
+  {
+    field: "strokes.0",
+    variableName: "ds.table.cellRule",
+    resolvedType: "COLOR",
+  },
+  ...uniformFigmaPerSideStrokeBindings("ds.table.cellRuleWidth"),
+];
+
+const cellInstanceScene = (
+  role: string,
+): SceneNodeSnapshot => ({
+  ownershipKey: role,
+  type: "INSTANCE",
+  name: role,
+  semanticRole: role,
+  width: 80,
+  height: 32,
+  visible: true,
+  opacity: 1,
+  componentRef: "Cell",
+  componentProperties: {
+    Density: "comfortable",
+    Kind: role.includes("header") ? "header" : "body",
+    Label: "Name",
+    Column: "name",
+    Align: "start",
+  },
+  boundVariables: copiedCellInstanceBindings(),
+  children: [],
+});
+
+test("host omits Figma-copied bindings on header-cell-instance and cell-instance", () => {
+  const header = sceneToNormalizedIr(
+    cellInstanceScene("table/header-cell-instance/0"),
+  );
+  const body = sceneToNormalizedIr(cellInstanceScene("table/cell-instance/0"));
+  assert.equal(header.kind, "instance");
+  assert.equal(body.kind, "instance");
+  assert.equal("bindings" in header, false);
+  assert.equal("bindings" in body, false);
+  assert.equal(header.componentRef, "table@1/cell");
+  assert.equal(body.componentRef, "table@1/cell");
 });
 
 test("table probe is table-shaped: header/body/label, HUG, no overlay AABB", () => {

@@ -5650,9 +5650,40 @@ export function validatePivotStatus(
     sha256(readRepositoryEvidence(TABLE_LIVE_V7_ATTEMPT_1_PATH)) !==
       TABLE_LIVE_V7_ATTEMPT_1_SHA256 ||
     sha256(readRepositoryEvidence(TABLE_LIVE_V7_STATUS_PATH)) !==
-      TABLE_LIVE_V7_STATUS_SHA256
+      TABLE_LIVE_V7_STATUS_SHA256 ||
+    status.table?.liveV8?.prepared !== true ||
+    status.table?.liveV8?.liveFigma !== false ||
+    status.table?.liveV8?.humanSignoff !== "pending" ||
+    status.table?.liveV8?.pageId !== null ||
+    status.table?.liveV8?.forbiddenInputPageId !== "115:295378" ||
+    status.table?.liveV8?.forbiddenComboboxPageId !== "163:35981" ||
+    status.table?.liveV8?.runIdentity !== "cc811f47-82d19508-table-v8" ||
+    status.table?.liveV8?.namespace !== "ds.contracts.table.recipe.v1" ||
+    status.table?.liveV8?.evidenceRoot !==
+      "recipe/evidence/table-live-pivot-v8" ||
+    status.table?.liveV8?.teaching !==
+      "when extract host-normalizes table/header-cell-instance and table/cell-instance, omit Figma-copied bindings because compile cell instances carry none" ||
+    status.table?.liveV8?.namedFromSourceFamily !== "Inter" ||
+    status.table?.liveV8?.carriedHostStyle !== "Semi Bold" ||
+    status.table?.liveV8?.resolution !== "requested" ||
+    status.table?.liveV8?.doNotRestartV1Attempt2 !== true ||
+    status.table?.liveV8?.doNotRestartV2Attempt2 !== true ||
+    status.table?.liveV8?.doNotRestartV3Attempt2 !== true ||
+    status.table?.liveV8?.doNotRestartV4Attempt2 !== true ||
+    status.table?.liveV8?.doNotRestartV5Attempt2 !== true ||
+    status.table?.liveV8?.doNotRestartV6Attempt2 !== true ||
+    status.table?.liveV8?.doNotRestartV7Attempt2 !== true ||
+    status.table?.liveV8?.headerFontTeachingUnchangedFromV2 !== true ||
+    status.table?.liveV8?.ownedRowTextCharactersTeachingUnchangedFromV4 !==
+      true ||
+    status.table?.liveV8?.minWidthZeroUnsetTeachingUnchangedFromV5 !== true ||
+    status.table?.liveV8?.rowOwnedCellLabelSkipTeachingUnchangedFromV6 !==
+      true ||
+    status.table?.liveV8?.hostFoldsUniformPerSideStrokeWeightBindsUnchangedFromV7 !==
+      true ||
+    status.table?.liveV8?.hostOmitsCopiedCellInstanceBindings !== true
   )
-    fail("table live v1 attempt 1 / v2 attempt 1 / v3 attempt 1 / v4 attempt 1 / v5 attempt 1 / v6 attempt 1 / v7 attempt 1");
+    fail("table live v1 attempt 1 / v2 attempt 1 / v3 attempt 1 / v4 attempt 1 / v5 attempt 1 / v6 attempt 1 / v7 attempt 1 / v8 prepare");
   for (const message of validateButtonStatusPlant(status.button ?? {}))
     fail(message);
   if (

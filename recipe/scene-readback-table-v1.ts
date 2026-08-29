@@ -17,9 +17,13 @@ import {
  * Table live v1 scene-readback. Table-shaped host-normalize: table/row/cell
  * ownership, recipe componentRefs, name-before-`#` properties, empty-payload
  * omit, binding compile-order / extras-drop, width/height layout aliases,
- * occupancy opacity 0, omit TEXT extras table@1 does not carry, and fold
+ * occupancy opacity 0, omit TEXT extras table@1 does not carry, fold
  * uniform per-side stroke-weight binds into `strokes.0.weight` on table
- * and cell variants. Does not copy Combobox overlay/option/listbox roles.
+ * and cell variants, and omit Figma-copied bindings on
+ * `table/header-cell-instance` and `table/cell-instance` because compile
+ * cell instances carry none. Reuses the extras-drop path: keep only
+ * compile fields, drop extras. Does not copy Combobox
+ * overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -48,6 +52,8 @@ export const TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER =
   "TABLE-HOST-SET-CLIPS-CONTENT-OMITTED";
 export const TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "TABLE-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
+export const TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
+  "TABLE-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -247,6 +253,7 @@ const CELL_COMPILE_BINDING_FIELDS = [
   "strokes.0.paint.color",
   "strokes.0.weight",
 ] as const;
+const CELL_INSTANCE_COMPILE_BINDING_FIELDS = [] as const;
 const CELL_LABEL_COMPILE_BINDING_FIELDS = [
   "type.fontSize",
   "fills.0.color",
@@ -619,8 +626,11 @@ export function shouldOmitObservedInstancePayload(
 
 const compileBindingFieldsFor = (role: string | undefined): string[] | null => {
   void TABLE_LIVE_V1_BINDING_COMPILE_ORDER_MARKER;
+  void TABLE_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER;
   if (role === "table/cell/label")
     return [...CELL_LABEL_COMPILE_BINDING_FIELDS];
+  if (role && CELL_INSTANCE_ROLE.test(role))
+    return [...CELL_INSTANCE_COMPILE_BINDING_FIELDS];
   if (role && CELL_COMPONENT_ROLE.test(role))
     return [...CELL_COMPILE_BINDING_FIELDS];
   if (role && ROW_COMPONENT_ROLE.test(role))

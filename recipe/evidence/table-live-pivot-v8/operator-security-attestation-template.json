@@ -1,0 +1,6 @@
+{
+  "artifactVersion": "table-live-v8-operator-security-attestation-template-v1",
+  "status": "template only; complete privately after PREPARE+AUTHORIZE",
+  "tokenValuesForbidden": true,
+  "privateDirectory": "private/table-live-v8-security-attestation.json"
+}
