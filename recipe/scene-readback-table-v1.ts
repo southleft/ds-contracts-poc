@@ -17,8 +17,9 @@ import {
  * Table live v1 scene-readback. Table-shaped host-normalize: table/row/cell
  * ownership, recipe componentRefs, name-before-`#` properties, empty-payload
  * omit, binding compile-order / extras-drop, width/height layout aliases,
- * occupancy opacity 0, and omit TEXT extras table@1 does not carry.
- * Does not copy Combobox overlay/option/listbox roles.
+ * occupancy opacity 0, omit TEXT extras table@1 does not carry, and fold
+ * uniform per-side stroke-weight binds into `strokes.0.weight` on table
+ * and cell variants. Does not copy Combobox overlay/option/listbox roles.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const TABLE_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -45,6 +46,8 @@ export const TABLE_LIVE_V1_SET_LAYOUT_COMPILE_CARRY_MARKER =
   "TABLE-HOST-SET-LAYOUT-COMPILE-CARRY";
 export const TABLE_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER =
   "TABLE-HOST-SET-CLIPS-CONTENT-OMITTED";
+export const TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
+  "TABLE-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const TABLE_LIVE_V1_CONTENT_ROLES = ["table/cell/label"] as const;
 
 export type SceneNodeType =
@@ -646,6 +649,10 @@ const irFieldForSceneBinding = (
     bottomRightRadius: "cornerRadius.bottomRight",
     bottomLeftRadius: "cornerRadius.bottomLeft",
     strokeWeight: "strokes.0.weight",
+    strokeTopWeight: "strokes.0.weight.top",
+    strokeRightWeight: "strokes.0.weight.right",
+    strokeBottomWeight: "strokes.0.weight.bottom",
+    strokeLeftWeight: "strokes.0.weight.left",
     fontSize: "type.fontSize",
     "fontSize.0": "type.fontSize",
     lineHeight: "type.lineHeight.value",
@@ -662,12 +669,61 @@ const irFieldForSceneBinding = (
   return field;
 };
 
+const PER_SIDE_STROKE_WEIGHT_FIELDS = new Set([
+  "strokes.0.weight.top",
+  "strokes.0.weight.right",
+  "strokes.0.weight.bottom",
+  "strokes.0.weight.left",
+]);
+
+const isTableOrCellVariantRole = (role: string | undefined): boolean =>
+  role !== undefined &&
+  (TABLE_VARIANT_ROLE.test(role) || CELL_COMPONENT_ROLE.test(role));
+
+const foldUniformPerSideStrokeWeight = (
+  scene: SceneNodeSnapshot,
+  own: VariableBinding[],
+): VariableBinding[] => {
+  void TABLE_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER;
+  if (!isTableOrCellVariantRole(sceneRole(scene))) return own;
+  if (own.some((binding) => binding.field === "strokes.0.weight"))
+    return own.filter(
+      (binding) => !PER_SIDE_STROKE_WEIGHT_FIELDS.has(binding.field),
+    );
+  const perSide = (
+    [
+      "strokes.0.weight.top",
+      "strokes.0.weight.right",
+      "strokes.0.weight.bottom",
+      "strokes.0.weight.left",
+    ] as const
+  ).map((field) =>
+    own.find((binding) => binding.field === field && binding.type === "FLOAT"),
+  );
+  if (perSide.some((binding) => binding === undefined)) return own;
+  const variable = perSide[0]!.variable;
+  if (
+    variable.length === 0 ||
+    perSide.some((binding) => binding!.variable !== variable)
+  )
+    return own;
+  return [
+    ...own.filter(
+      (binding) => !PER_SIDE_STROKE_WEIGHT_FIELDS.has(binding.field),
+    ),
+    { field: "strokes.0.weight", type: "FLOAT", variable },
+  ];
+};
+
 const sceneBindings = (scene: SceneNodeSnapshot): VariableBinding[] => {
-  const raw = scene.boundVariables.map((binding) => ({
-    field: irFieldForSceneBinding(binding.field, scene),
-    type: binding.resolvedType,
-    variable: binding.variableName,
-  }));
+  const raw = foldUniformPerSideStrokeWeight(
+    scene,
+    scene.boundVariables.map((binding) => ({
+      field: irFieldForSceneBinding(binding.field, scene),
+      type: binding.resolvedType,
+      variable: binding.variableName,
+    })),
+  );
   const fields = compileBindingFieldsFor(sceneRole(scene));
   if (!fields) return raw;
   const byField = new Map(raw.map((binding) => [binding.field, binding]));

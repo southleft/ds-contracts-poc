@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-29 ~11:05 UTC-5; supersedes status
+> **Current correction status (2026-08-29 ~11:40 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -53,7 +53,11 @@
 > binds). Row owned-cell-label skip teaching cleared; restore 8 held.
 > Signed cleanup removed page `165:41173`. Mint did not stay. Input
 > `115:295378` and Combobox `163:35981` stayed. Do not restart v6
-> attempt 2 as-is. Not live. Product **v1 is
+> attempt 2 as-is. Table live v7 PREPARE lands the one teaching: when
+> extract host-normalizes table and cell variants, fold Figma per-side
+> `strokeTopWeight` / `strokeRightWeight` / `strokeBottomWeight` /
+> `strokeLeftWeight` binds that share one variable into compile field
+> `strokes.0.weight`. Not live. Product **v1 is
 > incomplete**. Remaining: Data Table, Calendar, Button leftover
 > inversion (149 silent / fonts + set chrome).
 > Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
