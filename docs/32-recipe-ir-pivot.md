@@ -165,10 +165,20 @@
 > (`combobox/listbox`: host starts at `layout.padding.bottom`;
 > compile starts at `layout.padding.top`). Overlay drop-shadow stayed.
 > Cleanup accepted; that Combobox page is gone. Input `115:295378`
-> stayed. Do not restart v17 attempt 2 as-is. Combobox live v18 PREPARE teaches
-> host must order `combobox/listbox` bindings to compile field order so
-> `layout.padding.top` precedes `layout.padding.bottom`, not start
-> at `layout.padding.bottom`. Keep v2–v17 teachings. Combobox is **not live**.
+> stayed. Do not restart v17 attempt 2 as-is. Combobox live v18 PREPARE
+> `fc5c3d1e` and AUTHORIZE `14cb547b` landed. Attempt 1 minted page
+> `159:332072`; restore held 144 owned FILL texts. Host listbox
+> compile-order teaching cleared; extract walk accepted. Collapse
+> then refused `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].children[0].bindings.length`
+> (`combobox/option-instance/0`: host emits five inherited bindings;
+> compile emits only `height.value`). Overlay drop-shadow stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v18 attempt 2 as-is. Next teaching: host
+> must drop extra `combobox/option-instance` bindings that compile
+> never emits, keeping only `height.value`, not also emit inherited
+> `fills.0.color`, `layout.itemSpacing`, `layout.padding.left`, and
+> `layout.padding.right`. Keep v2–v18 teachings. Combobox is **not live**.
 > Do not invent a Combobox human grade. Product **v1 is incomplete**.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
