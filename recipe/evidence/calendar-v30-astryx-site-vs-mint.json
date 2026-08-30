@@ -1,0 +1,350 @@
+{
+  "artifactVersion": "calendar-v30-astryx-site-vs-mint-v1",
+  "measuredAt": "2026-08-30T10:35:00-05:00",
+  "record": "diagnosis-only",
+  "didNotRemint": true,
+  "didNotInventCalendarGrade": true,
+  "didNotInventPolarMuiFluentCalendars": true,
+  "productV1Complete": false,
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "question": "What did we review, and why does page 180:56126 not look like https://astryx.atmeta.com/components/Calendar ?",
+  "howTjOpensMint": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-56126",
+  "howTjOpensSite": "https://astryx.atmeta.com/components/Calendar",
+  "siblingsUntouched": {
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "screenshots": {
+    "tjAttachedSite": "recipe/evidence/calendar-v30-astryx-site-vs-mint/tj-attached-astryx-site.png",
+    "sitePageLight": "recipe/evidence/calendar-v30-astryx-site-vs-mint/astryx-docs-page-light.png",
+    "sitePageDark": "recipe/evidence/calendar-v30-astryx-site-vs-mint/astryx-docs-page-dark.png",
+    "siteComponentDark": "recipe/evidence/calendar-v30-astryx-site-vs-mint/astryx-calendar-component-dark.png",
+    "mintPage": "figma page 180:56126 captured 2026-08-30 via Desktop Bridge; arranged Month Grid 180:56711 is a white 730×401 wrapper around the calendar set",
+    "mintMonthGrid": "figma node 180:56711 — August 2026, 3-week slice, WeekNumbers on|off, selected 12 blue square, today 5 ring"
+  },
+  "whatWeCompiled": {
+    "adapterIdentity": "astryx-calendar-reviewed-v1",
+    "recipeIdentity": { "id": "astryx.calendar", "name": "Astryx Calendar" },
+    "sourceId": "astryx",
+    "onlyReviewedCalendarAdapter": true,
+    "files": [
+      "recipe/adapters/calendar.ts",
+      "recipe/fixtures/library-calendars.ts#astryxCalendarAdapterConfig",
+      "recipe/fixtures/library-calendars.ts#astryxCalendarSource",
+      "recipe/fixtures/library-calendars.ts#astryxCalendarInstance",
+      "recipe/fixtures/calendar.ts (canonical 3-week August scaffold; Astryx overlay replaces tokens/content)",
+      "recipe/recipes/calendar.ts (CALENDAR_WEEK_COUNT=3; WeekNumbers on|off; day states default/today/selected/outside)",
+      "recipe/build-calendar-live-proof-v30.ts (adapterIdentity astryx-calendar-reviewed-v1)",
+      "recipe/calendar-live-v30-contract.ts CALENDAR_LIVE_V30_ADAPTERS",
+      "recipe/evidence/calendar-live-pivot-v30-attempt-1.json",
+      "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar/Calendar.tsx",
+      "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar/styles.ts",
+      "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts",
+      "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar/Calendar.doc.mjs",
+      "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/dist/astryx.css"
+    ],
+    "vendoredPackage": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.0.0-vendored",
+      "sourceRoot": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar",
+      "note": "July 22 2026 vendor tree. Not the docs site's published @astryxdesign/core v0.5.1."
+    },
+    "fixture": {
+      "caption": "August 2026",
+      "weekdays": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+      "weekStartsOn": 0,
+      "weekCount": 3,
+      "weeks": [
+        { "id": "week-1", "weekNumber": "31", "days": "26-31 outside + 1 default" },
+        { "id": "week-2", "weekNumber": "31", "days": "2-8; 5 today" },
+        { "id": "week-3", "weekNumber": "32", "days": "9-15; 12 selected" }
+      ],
+      "selectedDayLabel": "12",
+      "todayDayLabel": "5",
+      "whyPinned": "examples/day-picker/PROVENANCE.md — capture grammar cannot spell a live Date; fixture is the rendered month, not today"
+    },
+    "themeCarried": "light half of vendored dist/astryx.css light-dark() pairs",
+    "carriedTokens": {
+      "dayCell.size": { "fallback": 32, "named": "--size-element-md" },
+      "dayCell.padding": { "fallback": 0, "named": "day button padding 0" },
+      "dayCell.fontSize": { "fallback": 14, "named": "--text-body-size / --font-size-base" },
+      "dayCell.radius": { "fallback": 0, "named": "md slot; inner circle receipted" },
+      "gridGap": { "fallback": 0, "named": "daysGrid has no gap" },
+      "captionGap": { "fallback": 8, "named": "header.marginBottom --spacing-2" },
+      "surface": { "fallback": "#00000000", "named": "Calendar.tsx paints no background" },
+      "captionText": "#0a1317ff",
+      "weekdayText": "#4e606fff",
+      "selected.background": "#0064e0ff",
+      "selected.text": "#ffffffff",
+      "today.ring": "#ccd3dbff",
+      "today.ringWidth": 1
+    },
+    "liveMintMeasured": {
+      "pageId": "180:56126",
+      "pageName": "Recipe Pivot / Calendar / da4456d8-calendar-v30",
+      "calendarSetId": "180:56306",
+      "monthGridId": "180:56711",
+      "monthGridFill": "solid white — arranged wrapper chrome, not the calendar variant surface",
+      "variants": {
+        "WeekNumbers=on": { "id": "180:56190", "w": 256, "h": 144, "itemSpacing": 8, "fillOpacity": 0 },
+        "WeekNumbers=off": { "id": "180:56250", "w": 224, "h": 144, "itemSpacing": 8, "fillOpacity": 0 }
+      },
+      "daySet": {
+        "id": "180:56157",
+        "default": { "id": "180:56149", "w": 32, "h": 32, "radius": 0, "fill": "transparent" },
+        "today": { "id": "180:56151", "w": 32, "h": 32, "radius": 0, "stroke": "#ccd3db inside 1" },
+        "selected": { "id": "180:56153", "w": 32, "h": 32, "radius": 0, "fill": "#0064e0" },
+        "outside": { "id": "180:56155", "w": 32, "h": 32, "radius": 0, "fill": "transparent" }
+      },
+      "weekRows": 3,
+      "navChevrons": false,
+      "caption": "August 2026"
+    },
+    "receiptedAbsentFromMint": [
+      {
+        "occurrenceId": "astryx-refusal-six-row-default",
+        "pointer": "@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts#/hasVariableRowCount",
+        "value": "default false → fixed 6-row grid",
+        "reason": "lowered",
+        "recipe": "CALENDAR_WEEK_COUNT=3"
+      },
+      {
+        "occurrenceId": "astryx-refusal-nav-chevrons",
+        "pointer": "@astryxdesign/core/src/Calendar/Calendar.tsx#/header/nav",
+        "value": "Previous/Next month Button+Icon chevrons",
+        "reason": "no-figma-primitive"
+      },
+      {
+        "occurrenceId": "astryx-refusal-inner-circle",
+        "pointer": "@astryxdesign/core/src/Calendar/styles.ts#/dayCellStyles/day",
+        "value": "width/height --size-element-sm 28px; borderRadius 50%; padding 0",
+        "reason": "no-figma-primitive",
+        "carriedInstead": "32px md slot radius 0"
+      },
+      {
+        "occurrenceId": "astryx-refusal-dark-mode",
+        "pointer": "@astryxdesign/core/dist/astryx.css#/color-tokens",
+        "value": "dark half of every light-dark() pair",
+        "reason": "lowered"
+      },
+      {
+        "occurrenceId": "astryx-refusal-unpainted-surface",
+        "pointer": "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar/background",
+        "value": "Calendar.tsx paints no background",
+        "reason": "refused-by-recipe"
+      },
+      {
+        "occurrenceId": "astryx-refusal-root-chrome",
+        "pointer": "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar",
+        "value": "padding --spacing-3 12px; minWidth 220px",
+        "reason": "lowered"
+      },
+      {
+        "occurrenceId": "astryx-refusal-outside-opacity",
+        "value": "dayOutside opacity 0.5 plus --color-text-secondary",
+        "reason": "no-figma-primitive"
+      },
+      {
+        "occurrenceId": "astryx-refusal-weekday-12",
+        "value": "weekday --text-supporting-size 12px collapsed onto dayCell.fontSize 14",
+        "reason": "lowered"
+      }
+    ]
+  },
+  "whatTheWebsiteDeclares": {
+    "url": "https://astryx.atmeta.com/components/Calendar",
+    "title": "Calendar · Astryx",
+    "publishedPackage": "@astryxdesign/core v0.5.1 · Calendar",
+    "html": {
+      "data-astryx-theme": "astryx",
+      "data-themeLightDefault": "light",
+      "data-themeAfterToggle": "dark",
+      "color-schemeLight": "light",
+      "color-schemeDark": "dark"
+    },
+    "showcaseSourceFromHtml": "CalendarShowcase useState<ISODateString | undefined>('2026-04-15'); return <Calendar mode=\"single\" value={value} onChange={setValue} />",
+    "dom": {
+      "rootClass": "astryx-calendar single",
+      "gridRole": "grid",
+      "gridCountOnPage": 6,
+      "firstGridRows": 7,
+      "firstGridCells": 42,
+      "weekdays": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+      "weekStartsOn": 0,
+      "hasWeekNumbersDefault": false,
+      "hasVariableRowCountDefault": false,
+      "hasOutsideDaysDefault": true,
+      "prevNext": ["Previous month", "Next month"],
+      "caption": "April 2026",
+      "selectedDataDate": "2026-04-15",
+      "todayInAprilView": false,
+      "calendarBackground": "rgba(0, 0, 0, 0)",
+      "calendarPadding": "12px",
+      "headerMarginBottom": "8px",
+      "headerGap": "8px",
+      "daysGridGap": "normal",
+      "gridTemplateColumns": "32px 32px 32px 32px 32px 32px 32px",
+      "rootBox": { "w": 248, "h": 292 }
+    },
+    "sourceDefaultsNamedInCalendarDocAndTsx": {
+      "hasWeekNumbers": false,
+      "hasVariableRowCount": false,
+      "hasOutsideDays": true,
+      "weekStartsOn": 0,
+      "focusDateIfUnset": "selected value or plainDateToday()",
+      "anatomyMonthHeader": "The month name and year with navigation arrows"
+    },
+    "april2026Grid": {
+      "leadingOutside": ["2026-03-29", "2026-03-30", "2026-03-31"],
+      "month": "1-30",
+      "trailingOutside": ["2026-05-01", "2026-05-02", "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-09"],
+      "matchesTjScreenshot": "29-31 + 1-9 ghosted in a 6-row Sunday-start April 2026"
+    },
+    "computedSelectedLight": {
+      "color": "rgb(255, 255, 255)",
+      "background": "rgb(38, 38, 38)",
+      "radius": "9999px",
+      "width": "28px",
+      "height": "28px",
+      "padding": "0px"
+    },
+    "computedSelectedDark": {
+      "color": "rgb(23, 23, 23)",
+      "background": "rgb(235, 235, 235)",
+      "radius": "9999px",
+      "width": "28px",
+      "height": "28px",
+      "matchesTjPng": "near-white circle, dark knockout 15"
+    },
+    "siteThemeTokensOnTheButton": {
+      "--color-accent": "light-dark(#262626,#ebebeb)",
+      "--color-on-accent": "light-dark(#ffffff,#171717)",
+      "--color-text-primary": "light-dark(#171717,#fafafa)",
+      "--color-text-secondary": "light-dark(#525252,#a3a3a3)",
+      "--color-background-surface": "light-dark(#ffffff,#262626)"
+    },
+    "vendoredAstryxCssWeReviewed": {
+      "--color-accent": "light-dark(#0064E0,#2694FE)",
+      "--color-on-accent": "light-dark(#FFFFFF,#FFFFFF)",
+      "--color-text-primary": "light-dark(#0A1317,#DFE2E5)",
+      "--color-text-secondary": "light-dark(#4E606F,#AAAFB5)",
+      "--color-background-surface": "light-dark(#FFFFFF,#1F1F22)",
+      "--size-element-sm": "28px",
+      "--size-element-md": "32px",
+      "--spacing-2": "8px",
+      "--spacing-3": "12px"
+    },
+    "calendarPaintsNoSurface": true,
+    "darkCanvasIsDocsChrome": "html data-theme=dark + transparent .astryx-calendar; not a Calendar.tsx fill"
+  },
+  "divergence": [
+    {
+      "fact": "month / selected day",
+      "site": "April 2026, selected 15 (showcase value='2026-04-15')",
+      "mint": "August 2026, selected 12, today 5",
+      "class": "fixture-choice",
+      "inRecipe": "content.caption / selectedDayLabel / todayDayLabel are carried content, not source CSS",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "week rows",
+      "site": "6 rows / 42 cells (hasVariableRowCount default false)",
+      "mint": "3 weeks (CALENDAR_WEEK_COUNT=3)",
+      "class": "named-miss-receipted",
+      "receipt": "astryx-refusal-six-row-default",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "header nav chevrons",
+      "site": "Previous/Next month Button+Icon present",
+      "mint": "caption text only",
+      "class": "named-miss-receipted",
+      "receipt": "astryx-refusal-nav-chevrons",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "selected shape",
+      "site": "28px circle border-radius 9999px (day button --size-element-sm)",
+      "mint": "32×32 square radius 0 (md slot)",
+      "class": "named-miss-receipted",
+      "receipt": "astryx-refusal-inner-circle",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "selected fill",
+      "siteDark": "#ebebeb / #171717 from site theme --color-accent / --color-on-accent",
+      "siteLight": "#262626 / #ffffff",
+      "mint": "#0064E0 / #FFFFFF from vendored astryx.css light accent",
+      "class": "different-astryx-surface",
+      "note": "Same Calendar.tsx selected rule (accent / on-accent). Docs site theme tokens are not the vendored dist/astryx.css blue pair. Do not invent #262626/#ebebeb into compile.",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "theme / canvas",
+      "site": "docs chrome data-theme light|dark; calendar root transparent; TJ PNG is dark mode",
+      "mint": "light vendored tokens on a white arranged Month Grid wrapper; variant surface transparent",
+      "class": "docs-chrome-vs-component plus receipted-dark-half",
+      "receipt": "astryx-refusal-dark-mode + astryx-refusal-unpainted-surface",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "week numbers",
+      "site": "hasWeekNumbers default false — no axis on the showcase",
+      "mint": "WeekNumbers on|off axis; default on; both variants published",
+      "class": "fixture-and-axis-default",
+      "note": "Source default is off. Recipe axis default is on. Off variant exists on the mint.",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "today ring",
+      "siteAprilView": "no aria-current=date — today is 2026-08-30, not in April",
+      "mint": "today=5 ring in the August slice",
+      "class": "fixture-choice",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "outside days",
+      "site": "shown, ghosted; measured outside 2026-03-29 color rgb(82,82,82) in light",
+      "mint": "July 26-31 outside in the 3-week window; no May trailing row",
+      "class": "fixture-slice plus receipted-opacity",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "root padding 12px",
+      "site": "measured padding 12px",
+      "mint": "day-slot padding 0; root --spacing-3 receipted",
+      "class": "named-miss-receipted",
+      "receipt": "astryx-refusal-root-chrome",
+      "doNotInventThisTurn": true
+    },
+    {
+      "fact": "caption gap 8",
+      "site": "header.marginBottom 8px",
+      "mint": "variant itemSpacing 8 (V30 captionGap carry)",
+      "class": "named-and-carried",
+      "notAMiss": true
+    }
+  ],
+  "verdict": {
+    "websiteIsTheTrueAstryxComponent": true,
+    "adapterIsReducedFixture": true,
+    "notASecondLibrary": true,
+    "weReviewed": "vendored @astryxdesign/core Calendar + human-reviewed astryx-calendar-reviewed-v1 August 3-week fixture",
+    "tjCompared": "live docs showcase of @astryxdesign/core v0.5.1 Calendar with pinned 2026-04-15, default 6-row month, nav chrome, site theme tokens, dark docs chrome",
+    "websiteFactsNotInRecipeCompile": [
+      "full 6-row month (receipted, not compiled)",
+      "nav chevrons (receipted, not compiled)",
+      "dark theme / site-theme accent pair (dark half receipted; site #262626/#ebebeb not in vendored CSS we carried)",
+      "circular 28px selected (receipted, not compiled)",
+      "April 2026 / selected 15 (docs showcase fixture, not our August fixture)"
+    ],
+    "nextPrepare": {
+      "justified": false,
+      "reason": "Not one compile miss. The PNG gap is fixture slice + named receipts + a different Astryx surface (docs v0.5.1 + site theme + dark chrome) versus the reviewed vendored August fixture. TJ must pick: keep the 3-week fixture or expand the adapter from the live component. Do not remint to match the PNG."
+    }
+  },
+  "statusNote": "Calendar V30 mint on 180:56126 compiled astryx-calendar-reviewed-v1 (August 2026, 3 weeks, light vendored #0064E0 square selected, week-numbers axis). The Astryx docs page is the same Calendar component with a showcase value 2026-04-15, default 6-row month, nav chevrons, and site theme tokens; TJ's PNG is that page in dark mode. No remint. No grade. Product v1 incomplete."
+}
