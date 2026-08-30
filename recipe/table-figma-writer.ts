@@ -636,7 +636,14 @@ for(const source of PLAN.sources){
     // a set's variants are parented to the SECTION until combineAsVariants runs.
     // Defer those and apply them once the set exists and has its layout.
     const wantsFill=width.mode==="fill"||height.mode==="fill";
-    if(wantsFill&&!autoLayoutParent(node)){deferredFill.push([node,ir]);}
+    if(wantsFill&&!autoLayoutParent(node)){
+      // Record the width the node has while it is still content-sized. A set
+      // that HUGS children which FILL it is degenerate -- Figma resolves it to
+      // its own default (100px) and the content spills out. The set is sized to
+      // the widest variant's own content, which is measured here, not invented.
+      void "TABLE-WRITER-RECORD-CONTENT-WIDTH-BEFORE-FILL";
+      deferredFill.push([node,ir,node.width]);
+    }
     else{
     if(width.mode==="fill")node.layoutSizingHorizontal="FILL";
     else if(width.mode==="hug")node.layoutSizingHorizontal="HUG";
@@ -726,6 +733,14 @@ for(const source of PLAN.sources){
     set.description="Experimental table@1 primitive-IR mint. Recipe "+source.recipeHash+"; source adapter "+source.adapterIdentity+".";
     applySetLayout(set,setIr);
     void "TABLE-WRITER-APPLY-DEFERRED-FILL";
+    void "TABLE-WRITER-SET-FIXED-WHEN-CHILDREN-FILL";
+    const setFillChildren=deferredFill.filter(([node])=>node.parent===set);
+    if(setFillChildren.length>0){
+      const widest=Math.max(...setFillChildren.map(([,,contentWidth])=>contentWidth));
+      if(!(widest>0))throw new Error("TABLE-SET-CONTENT-WIDTH-UNMEASURED");
+      set.resizeWithoutConstraints(widest+set.paddingLeft+set.paddingRight,Math.max(set.height,1));
+      set.counterAxisSizingMode="FIXED";
+    }
     while(deferredFill.length>0){
       const [node,ir]=deferredFill.shift();
       if(!autoLayoutParent(node))throw new Error("TABLE-FILL-PARENT-NOT-AUTOLAYOUT:"+(ir.role||node.name));

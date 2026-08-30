@@ -5438,7 +5438,7 @@ export function validatePivotStatus(
   if (
     status.table?.overallSuccess !== false ||
     status.table?.status !==
-      "live-v28 attempt 1 failed closed at the WRITER: Figma refuses FILL on a node whose parent is not an auto-layout frame, and variants are parented to the section until combineAsVariants; partial page removed under ownership check; writer deferred-fill fix landed for v29; product v1 incomplete" ||
+      "live-v29 attempt 1: writer, restore and extract ALL accepted and every per-source usability boolean green on both roots including reflow — refused at the probe on visibleAreaLoss 1 for the four table variants, because a component set that HUGS children which FILL it is degenerate: Figma resolves the set to its 100px default, the variants collapse to it and the content spills outside the component box; writer now sizes the set to the widest variant content before applying deferred fill, for v30; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
     status.table?.liveFigma !== false ||
     status.table?.humanGradeInvented !== false ||

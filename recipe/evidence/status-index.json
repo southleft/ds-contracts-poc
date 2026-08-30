@@ -2011,7 +2011,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v28 attempt 1 failed closed at the WRITER: Figma refuses FILL on a node whose parent is not an auto-layout frame, and variants are parented to the section until combineAsVariants; partial page removed under ownership check; writer deferred-fill fix landed for v29; product v1 incomplete",
+    "status": "live-v29 attempt 1: writer, restore and extract ALL accepted and every per-source usability boolean green on both roots including reflow — refused at the probe on visibleAreaLoss 1 for the four table variants, because a component set that HUGS children which FILL it is degenerate: Figma resolves the set to its 100px default, the variants collapse to it and the content spills outside the component box; writer now sizes the set to the widest variant content before applying deferred fill, for v30; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2606,7 +2606,7 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v28 attempt 1 failed closed at writer; do not restart v28 attempt 2 as-is",
+      "Table live v29 attempt 1 failed closed at the probe on visibleAreaLoss; do not restart v29 attempt 2 as-is",
       "OPEN HUMAN GATE: table@1 has no per-column width model (Gate 2). Gate 1 (hug vs fill) is ANSWERED by both sources declaring width:100%.",
       "no live mint",
       "no human grade",
@@ -3671,6 +3671,42 @@
         "doNotRestartV28Attempt2": true
       },
       "nextTeaching": "writer defers FILL sizing until the node has an auto-layout parent, then applies it after combineAsVariants and applySetLayout"
+    },
+    "liveV29": {
+      "attempt1": {
+        "status": "failed-closed-at-probe",
+        "writerAccepted": true,
+        "restoreAccepted": true,
+        "extractAccepted": true,
+        "perSourceUsabilityAllGreen": true,
+        "perSourceBooleansGreen": [
+          "reflowPassed",
+          "contentHugPassed",
+          "bindingCompatibilityPassed",
+          "noFakeLayoutPassed",
+          "stateSemanticsPassed",
+          "switchingRestored",
+          "textPropertiesRestored",
+          "exactSceneRestoration"
+        ],
+        "reflowPassedClosedTheV27Blocker": true,
+        "cellsMeasured": 20,
+        "cellsFailing": 4,
+        "maxOverlapPixels": 0,
+        "failingCells": [
+          "first-party/table/comfortable",
+          "first-party/table/compact",
+          "mui/table/comfortable",
+          "mui/table/compact"
+        ],
+        "failingCriterion": "visibleAreaLoss = 1 on all four; rolesExact, stateSemanticsExact, noFakeLayout and overlapPixels passed on every one of the twenty",
+        "cause": "the minted table/set measured 100px wide with both variants at FILL. A set that HUGS children which FILL it is degenerate: Figma resolves the set to its own 100px default, the FILL variants collapse to it, header and body sit at 98px, and the cells inside them fall entirely outside the component box.",
+        "measuredLive": "set 100x226; Density=compact 100x77 FILL/HUG; Density=comfortable 100x125 FILL/HUG; table/header and table/body 98px wide inside each",
+        "cleanup": "signed cleanup executed, status cleanup-complete",
+        "mintStayed": false,
+        "doNotRestartV29Attempt2": true
+      },
+      "nextTeaching": "the writer records each deferred node's content width before FILL is applied, and when a set has FILL children it sizes the set to the widest variant's own content plus the set padding and pins counterAxisSizingMode FIXED — the width is measured from the content, never chosen"
     }
   },
   "input": {
