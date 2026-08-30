@@ -9,6 +9,7 @@ import {
   carryButtonV4SetLayoutPadding,
   carryButtonV4SetWidthMode,
   compileButtonBindingsByOwnershipKey,
+  omitButtonLiveEmptyChrome,
   orderButtonObserveBindingsToCompile,
   canonicalizeButtonObserveComponentRef,
   canonicalizeButtonObserveTokenName,
@@ -505,6 +506,53 @@ test("binding order carries onto compile order only when the multiset matches", 
   assert.deepEqual(
     orderButtonObserveBindingsToCompile(renamed, compileBindings),
     renamed,
+  );
+});
+
+test("live-empty chrome omits are empty-only and type-gated", () => {
+  const base = {
+    ownershipKey: "root/children/1/children/0",
+    name: "button/slot/leading :: Leading icon",
+    visible: true,
+    opacity: 1,
+    boundVariables: [],
+    width: 16,
+    height: 16,
+    children: [],
+  };
+  // instance empty fills omit
+  assert.deepEqual(
+    omitButtonLiveEmptyChrome({
+      ...base,
+      type: "INSTANCE",
+      fills: [],
+    }),
+    { fills: undefined },
+  );
+  // a non-empty live fill stays visible
+  assert.deepEqual(
+    omitButtonLiveEmptyChrome({
+      ...base,
+      type: "INSTANCE",
+      fills: [{ type: "SOLID", color: "#ff0000ff" }],
+    }),
+    {},
+  );
+  // set empty strokes/effects omit
+  assert.deepEqual(
+    omitButtonLiveEmptyChrome({
+      ...base,
+      ownershipKey: "root",
+      type: "COMPONENT_SET",
+      strokes: [],
+      effects: [],
+    }),
+    { strokes: undefined, effects: undefined },
+  );
+  // a TEXT node never omits through this class
+  assert.deepEqual(
+    omitButtonLiveEmptyChrome({ ...base, type: "TEXT", fills: [] }),
+    {},
   );
 });
 

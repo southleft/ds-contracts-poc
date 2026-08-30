@@ -382,6 +382,42 @@ export function orderButtonObserveBindingsToCompile(
   return [...ordered, ...remaining];
 }
 
+/**
+ * Live-empty chrome omit (Button B2o), measured 2026-08-30.
+ *
+ * The observe program records every array Figma reports, so live nodes carry
+ * EMPTY fills/strokes/effects where compile omits the key entirely: instance
+ * slots report `fills: []`; the set reports `strokes: []` and `effects: []`.
+ * An empty array is Figma's report of ABSENCE, not a drawn fact -- the class
+ * Input taught as omitSetFills/omitSetEffects and Calendar walked field by
+ * field at V44-V47 (empty effects/strokes/dashPattern omits, empty-only so a
+ * compile-carried ring stroke stays). The omits here are empty-only and
+ * type-gated the same way: a non-empty live paint always stays visible.
+ */
+export function omitButtonLiveEmptyChrome(scene: SceneNodeSnapshot): {
+  fills?: undefined;
+  strokes?: undefined;
+  effects?: undefined;
+} {
+  return {
+    ...(scene.type === "INSTANCE" &&
+    Array.isArray(scene.fills) &&
+    scene.fills.length === 0
+      ? { fills: undefined }
+      : {}),
+    ...(scene.type === "COMPONENT_SET" &&
+    Array.isArray(scene.strokes) &&
+    scene.strokes.length === 0
+      ? { strokes: undefined }
+      : {}),
+    ...(scene.type === "COMPONENT_SET" &&
+    Array.isArray(scene.effects) &&
+    scene.effects.length === 0
+      ? { effects: undefined }
+      : {}),
+  };
+}
+
 export function carryButtonV4SetWidthMode(
   scene: SceneNodeSnapshot,
   chrome: ButtonPlanRootChrome | undefined,
@@ -818,6 +854,7 @@ export function normalizeButtonObserveScene(
       : { layoutSizingHorizontal: carriedWidthMode }),
     ...(resolvedFont === undefined ? {} : { fontName: resolvedFont }),
     ...(isSet ? { fills: undefined, cornerRadius: undefined } : {}),
+    ...omitButtonLiveEmptyChrome(scene),
     ...(scene.componentRef === undefined ||
     scene.componentRef === null ||
     componentRefByLastSegment === undefined
@@ -1165,6 +1202,7 @@ export function serializeButtonInversionReport(
       "TAUGHT 2026-08-30 (B2l, set layout.padding carry): compile plans padding 0 on the proof sheet; every writer era mints uniform 32 (interpret.ts paddingTop/Right/Bottom/Left = 32). Same class as Input V65 (carry set layout.padding 32). Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set; any other padding stays live. Silent 2 -> 1 on both roots.",
       "TAUGHT 2026-08-30 (B2m, set width.mode carry + width.value extras drop): compile plans a hug proof sheet; the v4 writer left the set FIXED at its arrangement width (19192 / 17648 -- a measurement of the sheet, not a source fact), and the current interpret.ts still mints primaryAxisSizingMode FIXED. Same class as Input V66 (set width sizing) plus the hug-set width.value extras drop. Observed FIXED canonicalises to compile hug ONLY on the root set; the width.value extra retires with it because a hug set emits no width fact. No px invented. Silent 1 -> 0 and extras 1 -> 0 on both roots; the accounting is closed and the remaining gap is fixed-point binding order.",
       "TAUGHT 2026-08-30 (B2n, binding compile-order carry): the observe program sorts boundVariables by Figma field name, so the live page reports bindings alphabetically while compile carries semantic order; the binding SETS were already fact-equal. Same class as Input taughtSurfaceBindingCompileOrder / taughtContentBindingCompileOrder / taughtLabelBindingCompileOrder and Calendar V35/V36/V42-43 (host keeps compile-carried bind order). Order-only: bindings reorder onto compile order ONLY when the mapped (field, variable, type) multiset equals the compile multiset for the same ownership key; any set difference leaves the live order visible.",
+      "TAUGHT 2026-08-30 (B2o, live-empty chrome omit): live instance slots report fills [] and the live set reports strokes [] / effects [] where compile omits the key; an empty array is Figma reporting absence, not a drawn fact. Same class as Input omitSetFills/omitSetEffects and Calendar V44-V47 (empty effects/strokes/dashPattern omits, empty-only). The omits are empty-only and type-gated; any non-empty live paint stays visible.",
     ],
     roots: report.roots.map((root) => ({
       source: root.source,

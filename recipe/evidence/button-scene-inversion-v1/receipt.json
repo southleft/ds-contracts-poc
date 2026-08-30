@@ -100,7 +100,7 @@
     },
     "inversion": {
       "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "sha256": "49703576ae731e74ce9aa3e801fba91144b8c7217dd081a46d00d741e6b22b74"
+      "sha256": "dc16f87223fc6e8c894c11ceec906086054c5146819710b5d4cee927cbdd8ea3"
     },
     "census": {
       "path": "recipe/evidence/button-scene-inversion-v1/census.json",

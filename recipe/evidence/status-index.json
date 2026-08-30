@@ -29,11 +29,11 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "880bf61eeba77d22f28e65ea7dd312d34b177e878e2e8d574221454246efe653",
+      "indexSha256": "d218278efb4d8f64d64964c769e36d27c542ed55c22064380d35b56ab4624207",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "49703576ae731e74ce9aa3e801fba91144b8c7217dd081a46d00d741e6b22b74",
+      "inversionSha256": "dc16f87223fc6e8c894c11ceec906086054c5146819710b5d4cee927cbdd8ea3",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "f00cadc07793709464707907101ff4e2c4b715010c734a0102762793d108a3ae",
+      "receiptSha256": "2844fad5bb4050be312382d5bfcc3f48a44fee0f1b3831995838424ae9d8d3d0",
       "roots": {
         "altitude": {
           "setId": "85:7406",
