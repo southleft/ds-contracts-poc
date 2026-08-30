@@ -22918,7 +22918,7 @@
   },
   "calendar": {
     "overallSuccess": false,
-    "status": "offline recipe proven single-library; Table live human grade passed; Calendar adapters next; live mint and cross-library leg remain named refusals until D4 adapter review",
+    "status": "offline recipe proven single-library; adapter honesty pass 2026-08-29 (named/carried Astryx only; Inter/Monday-start/invented gap-radius-padding withdrawn); Table live human grade passed; D4 cleared; Calendar live v1 PREPARE opening (Astryx only, 8 variants, 13 remote); no Calendar mint yet; react-day-picker remains a named refusal",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -22930,7 +22930,7 @@
       "gate": "recipe:calendar:check",
       "gateGreen": true,
       "components": 8,
-      "tests": 24,
+      "tests": 25,
       "fixedPointStable": true
     },
     "reviewedSources": 1,
@@ -22940,8 +22940,7 @@
     "blockers": [
       "no live mint; no Calendar human grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "D4: human review of Calendar adapters before any live mint",
-      "live lineage scaffold (PREPARE/AUTHORIZE/attempt/RECORD) not opened"
+      "Calendar live v1 PREPARE opening; AUTHORIZE and attempt 1 still ahead"
     ],
     "figmaWriter": {
       "path": "recipe/calendar-figma-writer.ts",

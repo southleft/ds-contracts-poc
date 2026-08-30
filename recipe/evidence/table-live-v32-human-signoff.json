@@ -37,7 +37,8 @@
     "recordCommit": "8fab2dff63fab66368f45cd224112b6f61552b66",
     "doNotRestampHead": "85bf214d2"
   },
-  "verbatim": "I suppose this is a pass",
+  "verbatim": "I'll take your word for it. If it's like-for-like, then you've got my pass.",
+  "priorVerbatim": "I suppose this is a pass",
   "tjNotes": {
     "propertiesLookRight": true,
     "askedWhetherAdjacentCellLeftRightStrokesLooking2pxAreDesignSystemOrSourceAccurate": true,

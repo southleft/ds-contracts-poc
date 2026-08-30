@@ -58,30 +58,41 @@ const cloneTokens = (
 
 /**
  * Values read from `@astryxdesign/core/src/Calendar/styles.ts` and resolved
- * through `dist/astryx.css`:
+ * through `dist/astryx.css` / `src/theme/tokens.stylex.ts`. Named or carried
+ * only — a previous draft invented Inter, Monday-start, an 8px day-grid gap,
+ * `--radius-inner` 4px, and `--spacing-1` day padding. Those tokens are real
+ * in the theme and unused by the day grid; they are not minted here.
  *
- *   day cell w/h   --size-element-md            32px
- *   grid gap       --spacing-2                   8px
- *   cell padding   --spacing-1                   4px
- *   cell radius    --radius-inner                4px
- *   day font size  --text-supporting-size -> --font-size-sm   0.75rem = 12px
- *   text primary   --color-text-primary         #0A1317
- *   text secondary --color-text-secondary       #4E606F
- *   accent         --color-accent               #0064E0
- *   on accent      --color-on-accent            #FFFFFF
- *   today ring     --color-border-emphasized    #CCD3DB, inset 0 0 0 1px
- *   surface        --color-background-surface   #FFFFFF
+ * Carried:
+ *   column / cell slot   --size-element-md                         32px
+ *   day + caption size   --text-body-size / --text-label-size
+ *                        → --font-size-base                        0.875rem = 14px
+ *   text primary         --color-text-primary                      #0A1317
+ *   text secondary       --color-text-secondary                    #4E606F
+ *   accent / on-accent   --color-accent / --color-on-accent        #0064E0 / #FFFFFF
+ *   today ring           --color-border-emphasized inset 0 0 0 1px #CCD3DB
  *
- * Light mode is taken from each `light-dark(...)` pair; the dark half is a mode
- * this recipe does not yet carry, and that is a receipt, not a silent drop.
+ * Receipted (see astryxCalendarInstance.receipts):
+ *   daysGrid has no gap (header gap --spacing-2 is not the day grid)
+ *   day button padding is 0; calendar root padding is --spacing-3 12px
+ *   day button is --size-element-sm 28px circle (borderRadius 50%); the
+ *     carried box is the md slot, radius 0
+ *   weekday size is --text-supporting-size 12px; calendar@1 has one fontSize
+ *   Calendar.tsx paints no surface; --color-background-surface is not applied
+ *   dayOutside also sets opacity 0.5
+ *   default weekStartsOn is 0 (Sunday); content carries that default
+ *   default grid is 6 rows; calendar@1 template depth is 3 weeks
+ *   month nav chevrons are Button+Icon, not caption
+ *   dark half of every light-dark() pair
+ *   hasOutsideDays / showOutsideDays
  */
 const astryxTokens = cloneTokens("astryx.calendar", (path, fallback) => {
   if (path === "dayCell.size") return 32;
-  if (path === "dayCell.padding") return 4;
-  if (path === "dayCell.fontSize") return 12;
-  if (path === "dayCell.radius") return 4;
-  if (path === "gridGap") return 8;
-  if (path === "surface") return "#ffffffff";
+  if (path === "dayCell.padding") return 0;
+  if (path === "dayCell.fontSize") return 14;
+  if (path === "dayCell.radius") return 0;
+  if (path === "gridGap") return 0;
+  if (path === "surface") return "#00000000";
   if (path === "captionText") return "#0a1317ff";
   if (path === "weekdayText") return "#4e606fff";
   if (path === "weekNumberText") return "#4e606fff";
@@ -106,46 +117,42 @@ astryxTokens.dayStates.today.ringWidth = {
   variable: "astryx.calendar.dayStates-today-ringWidth",
   fallback: 1,
 };
+const ASTRYX_BODY_STACK =
+  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif';
+const astryxFont = (
+  role: "caption" | "weekday" | "day",
+  requestedStyle: string,
+  resolvedStyle: string,
+): CalendarRecipeInstance["tokens"]["typography"]["caption"] => ({
+  requestedFamily: "-apple-system",
+  requestedStyle,
+  requestSource: `@astryxdesign/core/src/theme/tokens.stylex.ts --font-family-body ${role}; Calendar inherits the body stack and names no first-party face`,
+  fallbackChain: [
+    { family: "-apple-system", style: requestedStyle },
+    { family: "SF Pro", style: resolvedStyle },
+    { family: "Segoe UI", style: resolvedStyle },
+    {
+      family: "Roboto",
+      style: requestedStyle === "Semi Bold" ? "Medium" : "Regular",
+    },
+    {
+      family: "Helvetica",
+      style: requestedStyle === "Semi Bold" ? "Bold" : "Regular",
+    },
+    {
+      family: "Arial",
+      style: requestedStyle === "Semi Bold" ? "Bold" : "Regular",
+    },
+  ],
+  resolvedFamily: "SF Pro",
+  resolvedStyle,
+  resolution: "fallback",
+  degradation: `source ${ASTRYX_BODY_STACK}; Figma cannot load a CSS stack; first named host font is SF Pro ${resolvedStyle}`,
+});
 astryxTokens.typography = {
-  caption: {
-    requestedFamily: "Inter",
-    requestedStyle: "Semi Bold",
-    requestSource:
-      "@astryxdesign/core/src/Calendar/styles.ts caption fontWeight --font-weight-semibold",
-    fallbackChain: [
-      { family: "Inter", style: "Semi Bold" },
-      { family: "Arial", style: "Bold" },
-    ],
-    resolvedFamily: "Inter",
-    resolvedStyle: "Semi Bold",
-    resolution: "requested",
-  },
-  weekday: {
-    requestedFamily: "Inter",
-    requestedStyle: "Regular",
-    requestSource:
-      "@astryxdesign/core/src/Calendar/styles.ts weekday fontWeight --font-weight-normal",
-    fallbackChain: [
-      { family: "Inter", style: "Regular" },
-      { family: "Arial", style: "Regular" },
-    ],
-    resolvedFamily: "Inter",
-    resolvedStyle: "Regular",
-    resolution: "requested",
-  },
-  day: {
-    requestedFamily: "Inter",
-    requestedStyle: "Regular",
-    requestSource:
-      "@astryxdesign/core/src/Calendar/styles.ts day fontSize --text-supporting-size",
-    fallbackChain: [
-      { family: "Inter", style: "Regular" },
-      { family: "Arial", style: "Regular" },
-    ],
-    resolvedFamily: "Inter",
-    resolvedStyle: "Regular",
-    resolution: "requested",
-  },
+  caption: astryxFont("caption", "Semi Bold", "Semibold"),
+  weekday: astryxFont("weekday", "Regular", "Regular"),
+  day: astryxFont("day", "Regular", "Regular"),
 };
 
 export const astryxCalendarSource: ReviewedCalendarSource = {
@@ -158,9 +165,10 @@ export const astryxCalendarSource: ReviewedCalendarSource = {
   anatomy: {
     root: "@astryxdesign/core/src/Calendar/Calendar.tsx caption + weekday row + week grid",
     grid: "weeks of seven day cells; day state varies within a week",
-    weekdayRow: "Mo–Su labels, measured to the day column",
-    week: "seven day cells; week number optional",
-    day: "fixed 32px box; default / today / selected / outside",
+    weekdayRow:
+      "Su–Sa labels (weekStartsOn default 0), measured to the --size-element-md column",
+    week: "seven day cells; week number optional; ISO week from first in-month day",
+    day: "grid slot --size-element-md 32px; inner day button --size-element-sm 28px circle is receipted; default / today / selected / outside",
     dayAxis:
       "seven declared day columns; calendar@1 refuses hug cells in a column-bearing row",
   },
@@ -172,11 +180,11 @@ export const astryxCalendarSource: ReviewedCalendarSource = {
     extras: "no range, no dropdown month, no time, no react-day-picker adapter",
   },
   styleSources: [
-    "@astryxdesign/core/src/Calendar/styles.ts --size-element-md 32, --spacing-2 8, --spacing-1 4, --radius-inner 4",
+    "@astryxdesign/core/src/Calendar/styles.ts cell height --size-element-md 32; day button --size-element-sm 28 circle; daysGrid has no gap",
     "@astryxdesign/core/dist/astryx.css light-dark color pairs; light half carried",
   ],
   fontSources: [
-    "@astryxdesign/core/src/Calendar/styles.ts caption semibold, weekday/day normal, --font-size-sm 12",
+    "@astryxdesign/core/src/theme/tokens.stylex.ts --font-family-body system stack; caption --font-weight-semibold; weekday/day normal; day --text-body-size 14; weekday --text-supporting-size 12 receipted",
   ],
 };
 
@@ -277,6 +285,53 @@ export const CALENDAR_SINGLE_LIBRARY_PROOF_PROTOCOL = {
 export const astryxCalendarInstance = {
   ...structuredClone(canonicalCalendarRecipeInstance),
   identity: { id: "astryx.calendar", name: "Astryx Calendar" },
+  content: {
+    caption: "August 2026",
+    weekdays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    weeks: [
+      {
+        id: "week-1",
+        weekNumber: "31",
+        days: [
+          { label: "26", state: "outside" },
+          { label: "27", state: "outside" },
+          { label: "28", state: "outside" },
+          { label: "29", state: "outside" },
+          { label: "30", state: "outside" },
+          { label: "31", state: "outside" },
+          { label: "1", state: "default" },
+        ],
+      },
+      {
+        id: "week-2",
+        weekNumber: "31",
+        days: [
+          { label: "2", state: "default" },
+          { label: "3", state: "default" },
+          { label: "4", state: "default" },
+          { label: "5", state: "today" },
+          { label: "6", state: "default" },
+          { label: "7", state: "default" },
+          { label: "8", state: "default" },
+        ],
+      },
+      {
+        id: "week-3",
+        weekNumber: "32",
+        days: [
+          { label: "9", state: "default" },
+          { label: "10", state: "default" },
+          { label: "11", state: "default" },
+          { label: "12", state: "selected" },
+          { label: "13", state: "default" },
+          { label: "14", state: "default" },
+          { label: "15", state: "default" },
+        ],
+      },
+    ],
+    selectedDayLabel: "12",
+    todayDayLabel: "5",
+  },
   tokens: astryxTokens,
   receipts: [
     {
@@ -300,6 +355,87 @@ export const astryxCalendarInstance = {
       evidence:
         "@astryxdesign/core resolves every colour through CSS light-dark() pairs. calendar@1 carries one mode, so the light half is carried and the dark half is dropped here. Named so a reader can act on it: the dark half is a second Figma variable mode, not a missing colour. docs/32 §5.",
     },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/daysGrid",
+        channel: "geometry",
+      },
+      value: "display:grid; gridTemplateColumns:repeat(7, 1fr); no gap",
+      reason: "refused-by-recipe",
+      evidence:
+        "daysGrid declares no gap. A previous adapter minted gridGap=8 from header gap --spacing-2. That token is real on the header, not on the day grid. Carried gridGap is 0.",
+    },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/styles.ts#/dayCellStyles/day",
+        channel: "geometry",
+      },
+      value:
+        "width/height --size-element-sm 28px; borderRadius 50%; padding 0",
+      reason: "no-figma-primitive",
+      evidence:
+        "The visual day is a 28px circle inside a --size-element-md 32px slot. calendar@1 has one measured box; it carries the md column slot (weekday width + cell height) with radius 0 and padding 0. Inventing --radius-inner 4px would mint a token Calendar.tsx does not use.",
+    },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar",
+        channel: "geometry",
+      },
+      value: "padding --spacing-3 12px; minWidth 220px",
+      reason: "lowered",
+      evidence:
+        "calendar@1 has one padding token and uses it for both the day slot and the root. The day slot padding is 0, so that value is carried. Root chrome --spacing-3 12px and minWidth 220px are named here.",
+    },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/fontSize",
+        channel: "typography",
+      },
+      value: "--text-supporting-size 12px",
+      reason: "lowered",
+      evidence:
+        "Weekday and week-number text are --text-supporting-size 12px. Caption and day are --font-size-base 14px. calendar@1 has one dayCell.fontSize; it carries 14 (the day required fact). Weekday 12 is named.",
+    },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/styles.ts#/dayCellStyles/dayOutside",
+        channel: "state",
+      },
+      value: "opacity 0.5 plus --color-text-secondary",
+      reason: "no-figma-primitive",
+      evidence:
+        "Outside days set color to --color-text-secondary AND opacity 0.5. calendar@1 dayStates carry colour only; the 0.5 opacity is named rather than invented as a fill.",
+    },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar/background",
+        channel: "fill",
+      },
+      value: "Calendar.tsx paints no background",
+      reason: "refused-by-recipe",
+      evidence:
+        "--color-background-surface exists on the theme and is not applied by Calendar.tsx. Carried surface is transparent. Minting #FFFFFF would invent a fill.",
+    },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts#/hasVariableRowCount",
+        channel: "template-depth",
+      },
+      value: "default false → fixed 6-row grid",
+      reason: "lowered",
+      evidence:
+        "Source default is a fixed 6-row month. calendar@1 template depth is 3 weeks — a shape, not a claim about August 2026. The extra three empty-or-trailing rows are named.",
+    },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/Calendar.tsx#/header/nav",
+        channel: "anatomy",
+      },
+      value: "Previous/Next month Button+Icon chevrons",
+      reason: "no-figma-primitive",
+      evidence:
+        "The source header is chevron buttons plus a month-year label. calendar@1 carries the rendered caption as content and has no Button primitive for the nav chrome.",
+    },
   ],
   inputFacts: [
     {
@@ -309,6 +445,38 @@ export const astryxCalendarInstance = {
     {
       path: "@astryxdesign/core/dist/astryx.css#/color-tokens",
       channel: "color-scheme",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/daysGrid",
+      channel: "geometry",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/styles.ts#/dayCellStyles/day",
+      channel: "geometry",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar",
+      channel: "geometry",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/fontSize",
+      channel: "typography",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/styles.ts#/dayCellStyles/dayOutside",
+      channel: "state",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar/background",
+      channel: "fill",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts#/hasVariableRowCount",
+      channel: "template-depth",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/Calendar.tsx#/header/nav",
+      channel: "anatomy",
     },
   ],
   provenance: {
@@ -396,6 +564,101 @@ const astryxSourceFacts = (): ReviewedCalendarSourceFact[] => {
       target:
         "react-day-picker@10.0.1 held blind; no second-library adapter authored",
       receiptReason: "refused-by-recipe",
+    },
+    {
+      occurrenceId: "astryx-refusal-day-grid-gap",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "styles.ts daysGrid has no gap; header --spacing-2 is not the day grid",
+      },
+      disposition: "refusal",
+      target: "invented 8px day-grid gap from header --spacing-2",
+      receiptReason: "refused-by-recipe",
+    },
+    {
+      occurrenceId: "astryx-refusal-inner-circle",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "day button is --size-element-sm 28px borderRadius 50%; --radius-inner is unused",
+      },
+      disposition: "refusal",
+      target: "inner 28px circle; carried box is the 32px md slot radius 0",
+      receiptReason: "no-figma-primitive",
+    },
+    {
+      occurrenceId: "astryx-refusal-root-chrome",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "calendar root padding --spacing-3 12px and minWidth 220px; day slot padding 0",
+      },
+      disposition: "refusal",
+      target: "root --spacing-3 12px and minWidth 220 collapsed onto one padding token",
+      receiptReason: "lowered",
+    },
+    {
+      occurrenceId: "astryx-refusal-weekday-12",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "weekday --text-supporting-size 12px; day/caption --font-size-base 14px",
+      },
+      disposition: "refusal",
+      target: "weekday 12px collapsed onto dayCell.fontSize 14",
+      receiptReason: "lowered",
+    },
+    {
+      occurrenceId: "astryx-refusal-outside-opacity",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence: "dayOutside opacity 0.5 plus --color-text-secondary",
+      },
+      disposition: "refusal",
+      target: "outside-day opacity 0.5",
+      receiptReason: "no-figma-primitive",
+    },
+    {
+      occurrenceId: "astryx-refusal-unpainted-surface",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "Calendar.tsx paints no background; --color-background-surface is not applied",
+      },
+      disposition: "refusal",
+      target: "unpainted surface; #FFFFFF would invent a fill",
+      receiptReason: "refused-by-recipe",
+    },
+    {
+      occurrenceId: "astryx-refusal-six-row-default",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "hasVariableRowCount default false is a fixed 6-row grid; template depth is 3 weeks",
+      },
+      disposition: "refusal",
+      target: "source default 6-row month vs calendar@1 3-week template",
+      receiptReason: "lowered",
+    },
+    {
+      occurrenceId: "astryx-refusal-nav-chevrons",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "header Previous/Next month are Button+Icon; calendar@1 carries caption only",
+      },
+      disposition: "refusal",
+      target: "month navigation chevrons",
+      receiptReason: "no-figma-primitive",
     },
   );
   return facts;

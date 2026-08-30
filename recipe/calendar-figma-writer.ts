@@ -563,7 +563,7 @@ for(const source of PLAN.sources){
   daySet.x=80;daySet.y=96;weekSet.x=80;weekSet.y=daySet.y+daySet.height+96;calendarSet.x=80;calendarSet.y=weekSet.y+weekSet.height+96;
   section.resizeWithoutConstraints(Math.max(daySet.width,weekSet.width,calendarSet.width)+160,calendarSet.y+calendarSet.height+80);
   nextSectionX+=section.width+240;
-  summaries.push({adapterIdentity:source.adapterIdentity,sectionId:section.id,calendarSetId:calendarSet.id,weekSetId:weekSet.id,daySetId:daySet.id,collectionId:collection.id,variableCount:variables.size,variantCount:calendarSet.children.length+weekSet.children.length+daySet.children.length,instanceCount:source.instanceCount,recipeHash:source.recipeHash,envelopeHash:source.envelopeHash,comparedIrFacts:source.comparedIrFacts});
+  summaries.push({adapterIdentity:source.adapterIdentity,sectionId:section.id,calendarSetId:calendarSet.id,weekSetId:weekSet.id,daySetId:daySet.id,collectionId:collection.id,variableCount:variables.size,variantCount:calendarSet.children.length+weekSet.children.length+daySet.children.length,calendarCells:calendarSet.children.length,weekCells:weekSet.children.length,dayCells:daySet.children.length,instanceCount:source.instanceCount,recipeHash:source.recipeHash,envelopeHash:source.envelopeHash,comparedIrFacts:source.comparedIrFacts});
 }
 return{writerVersion:Number(WRITER_VERSION),fileKey:figma.fileKey,fileName:figma.root.name,pageId:page.id,pageName:page.name,runIdentity:PLAN.runIdentity,namespace:NS,createdNodeIds:[...new Set(createdNodeIds)],mutatedNodeIds:[...new Set(mutatedNodeIds)],sources:summaries};
 `;

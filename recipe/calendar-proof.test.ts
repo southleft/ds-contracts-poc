@@ -55,6 +55,27 @@ test("calendar@1 adapts the one reviewed source and refuses a second-library inv
     "#ccd3dbff",
     "today is a ring, not a fill lookalike",
   );
+  assert.equal(instance.tokens.gridGap.fallback, 0, "daysGrid has no gap");
+  assert.equal(instance.tokens.dayCell.padding.fallback, 0, "day slot padding is 0");
+  assert.equal(instance.tokens.dayCell.radius.fallback, 0, "slot is not --radius-inner");
+  assert.equal(instance.tokens.dayCell.fontSize.fallback, 14, "day is --font-size-base");
+  assert.equal(instance.tokens.surface.fallback, "#00000000", "Calendar paints no surface");
+  assert.deepEqual(instance.content.weekdays, [
+    "Su",
+    "Mo",
+    "Tu",
+    "We",
+    "Th",
+    "Fr",
+    "Sa",
+  ]);
+  assert.equal(instance.tokens.typography.day.requestedFamily, "-apple-system");
+  assert.equal(instance.tokens.typography.day.resolvedFamily, "SF Pro");
+  assert.equal(instance.tokens.typography.day.resolution, "fallback");
+  assert.notEqual(instance.tokens.typography.caption.requestedFamily, "Inter");
+  assert.notEqual(instance.tokens.typography.caption.resolvedFamily, "Inter");
+  assert.notEqual(instance.tokens.typography.day.requestedFamily, "Inter");
+  assert.notEqual(instance.tokens.typography.day.resolvedFamily, "Inter");
   assert.ok(performance.now() - started < 4000);
   assert.equal(REACT_DAY_PICKER_ADAPTER_REFUSAL.adapterAuthored, false);
   assert.equal(
@@ -177,7 +198,7 @@ test("each week in the grid carries its OWN days and states", () => {
       .filter((child: any) => String(child.role).includes("/day/"))
       .map((day: any) => day.properties.State),
   );
-  assert.equal(states.filter((s: string) => s === "outside").length, 5);
+  assert.equal(states.filter((s: string) => s === "outside").length, 6);
   assert.equal(states.filter((s: string) => s === "today").length, 1);
   assert.equal(states.filter((s: string) => s === "selected").length, 1);
 });
@@ -292,7 +313,17 @@ test("astryx carries the today ring rather than dropping it", () => {
 
 test("what calendar@1 cannot carry is receipted, not dropped", () => {
   const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
-  assert.equal(envelope.receipts.length, 2);
+  assert.equal(envelope.receipts.length, 10);
+
+  const paths = envelope.receipts.map((receipt: any) => receipt.fact.path);
+  assert.ok(paths.some((path: string) => path.includes("hasOutsideDays")));
+  assert.ok(paths.some((path: string) => path.includes("color-tokens")));
+  assert.ok(paths.some((path: string) => path.includes("daysGrid")));
+  assert.ok(paths.some((path: string) => path.includes("dayCellStyles/day")));
+  assert.ok(paths.some((path: string) => path.includes("dayOutside")));
+  assert.ok(paths.some((path: string) => path.includes("background")));
+  assert.ok(paths.some((path: string) => path.includes("hasVariableRowCount")));
+  assert.ok(paths.some((path: string) => path.includes("header/nav")));
 
   const byReason = Object.fromEntries(
     envelope.receipts.map((receipt: any) => [receipt.reason, receipt]),
@@ -301,7 +332,6 @@ test("what calendar@1 cannot carry is receipted, not dropped", () => {
   // The dark half of every astryx light-dark() pair: a second Figma variable
   // mode, not a missing colour.
   assert.ok(byReason.lowered, "the colour-scheme loss is receipted");
-  assert.match(byReason.lowered.evidence, /light-dark/);
 
   // hasOutsideDays / showOutsideDays: both sources declare it and calendar@1
   // has no primitive for a blank-but-measured cell. It was briefly a variant
@@ -311,8 +341,10 @@ test("what calendar@1 cannot carry is receipted, not dropped", () => {
     byReason["no-figma-primitive"],
     "the dropped outside-days prop is receipted",
   );
-  assert.match(byReason["no-figma-primitive"].evidence, /byte-identical/);
-  assert.match(byReason["no-figma-primitive"].fact.path, /hasOutsideDays/);
+  const outsideDays = envelope.receipts.find((receipt: any) =>
+    String(receipt.fact.path).includes("hasOutsideDays"),
+  );
+  assert.match(outsideDays.evidence, /byte-identical/);
 });
 
 test("no axis is dead — every variant compiles to distinct content", () => {

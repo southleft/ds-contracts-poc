@@ -2572,7 +2572,7 @@ const COMBOBOX_V41_HUMAN_SIGNOFF_SHA256 =
 const TABLE_V32_HUMAN_SIGNOFF_PATH =
   "recipe/evidence/table-live-v32-human-signoff.json";
 const TABLE_V32_HUMAN_SIGNOFF_SHA256 =
-  "b9c6499bf4826ab3694e889bd7d7b65ca48a64085f942f9af94db73bb6dbe993";
+  "c17f69df32f2afe518e2caaa5509fdb4a7ceafb3e3129ae5b4e75b2c16443cbd";
 const TABLE_LIVE_V1_ATTEMPT_1_PATH =
   "recipe/evidence/table-live-pivot-v1-attempt-1.json";
 const TABLE_LIVE_V1_ATTEMPT_1_SHA256 =
