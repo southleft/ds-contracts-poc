@@ -170,6 +170,65 @@ export function buttonPlanNamesByOwnershipKey(
   return byKey;
 }
 
+/**
+ * v4 proof-sheet set chrome carry (Button B2k-B2m), measured 2026-08-30.
+ *
+ * The component set is the proof sheet, not a component fact: nothing in
+ * either source contract names its layout. Compile plans its own arrangement
+ * (vertical / padding 0 / hug) and the writer has ALWAYS overridden it with
+ * proof-sheet chrome on canvas -- the current `recipe/interpret.ts` still
+ * mints `HORIZONTAL` / padding 32 / FIXED width, so a fresh mint would not
+ * reconcile these channels either. Both vocabularies are true statements
+ * about the same sheet, exactly the class Input measured at V64 (set
+ * layout.mode horizontal carry), V65 (set layout.padding 32 carry), and V66
+ * (set width sizing; the pre-V66 writer left FIXED). Input closed the class
+ * by moving its compile plans onto the writer chrome; Button closes it
+ * observe-side because its expected plans are committed evidence that must
+ * not be restamped.
+ *
+ * Each channel canonicalises ONLY between the two measured vocabularies, on
+ * the root set alone: HORIZONTAL -> vertical (B2k), uniform padding 32 -> 0
+ * (B2l), FIXED width -> hug (B2m, which also retires the width.value extra
+ * because a hug set has no width fact). Any other observed value stays live.
+ */
+export interface ButtonPlanRootChrome {
+  layoutMode?: string;
+  padding?: { top: number; right: number; bottom: number; left: number };
+  widthMode?: string;
+}
+
+export function buttonPlanRootChrome(
+  plan: ExpectedScenePlan,
+): ButtonPlanRootChrome {
+  const chrome: ButtonPlanRootChrome = {};
+  for (const fact of plan.facts) {
+    if (fact.nodeOwnershipKey !== "root") continue;
+    if (fact.channel === "layout.mode" && typeof fact.value === "string")
+      chrome.layoutMode = fact.value;
+    if (fact.channel === "layout.padding")
+      chrome.padding = fact.value as ButtonPlanRootChrome["padding"];
+    if (fact.channel === "width.mode" && typeof fact.value === "string")
+      chrome.widthMode = fact.value;
+  }
+  return chrome;
+}
+
+export function carryButtonV4SetLayoutMode(
+  scene: SceneNodeSnapshot,
+  chrome: ButtonPlanRootChrome | undefined,
+): SceneNodeSnapshot["layoutMode"] {
+  if (
+    chrome === undefined ||
+    scene.type !== "COMPONENT_SET" ||
+    scene.ownershipKey !== "root"
+  )
+    return scene.layoutMode;
+  if (scene.layoutMode === "HORIZONTAL" && chrome.layoutMode === "vertical") {
+    return "VERTICAL";
+  }
+  return scene.layoutMode;
+}
+
 export function recoverButtonV4RoleOnlyName(
   scene: SceneNodeSnapshot,
   entry: ButtonPlanNameEntry | undefined,
@@ -545,8 +604,10 @@ export function normalizeButtonObserveScene(
   >,
   fontResolutions?: ButtonFontResolution[],
   planNamesByOwnershipKey?: ReadonlyMap<string, ButtonPlanNameEntry>,
+  planRootChrome?: ButtonPlanRootChrome,
 ): SceneNodeSnapshot {
   const isSet = scene.type === "COMPONENT_SET";
+  const carriedLayoutMode = carryButtonV4SetLayoutMode(scene, planRootChrome);
   const resolvedFont =
     fontByOwnershipKey === undefined
       ? scene.fontName
@@ -570,6 +631,9 @@ export function normalizeButtonObserveScene(
     ...(recoveredName?.semanticRole === undefined
       ? {}
       : { semanticRole: recoveredName.semanticRole }),
+    ...(carriedLayoutMode === undefined
+      ? {}
+      : { layoutMode: carriedLayoutMode }),
     ...(resolvedFont === undefined ? {} : { fontName: resolvedFont }),
     ...(isSet ? { fills: undefined, cornerRadius: undefined } : {}),
     ...(scene.componentRef === undefined ||
@@ -608,6 +672,7 @@ export function normalizeButtonObserveScene(
         fontByOwnershipKey,
         fontResolutions,
         planNamesByOwnershipKey,
+        planRootChrome,
       ),
     ),
   };
@@ -773,6 +838,7 @@ export function compareButtonSceneInversion(
       undefined,
       undefined,
       buttonPlanNamesByOwnershipKey(plan.expectedScenePlan),
+      buttonPlanRootChrome(plan.expectedScenePlan),
     );
     const stamped = forbiddenObserveKeys(scene);
     if (stamped.length > 0) {
@@ -906,6 +972,7 @@ export function serializeButtonInversionReport(
       "CORRECTED 2026-08-30: the remaining leftover was NOT one naming defect needing a mint. The name/role pair is the v4 writer naming class (closed by B2j); layout.mode, layout.padding, width.mode and the width.value extra are the SET CHROME class -- the current writer (interpret.ts) still mints HORIZONTAL / padding 32 / FIXED-width proof-sheet chrome, so a fresh mint would NOT have closed them. They are the Input V64-V66 set-layout carry family, taught observe-side one channel per step (B2k-B2m).",
       "TAUGHT 2026-08-29 (B2h, font substrate): compile names the SOURCE font stack; Figma reports the face it RESOLVED. The observed face canonicalises onto the compile stack ONLY when the resolved family is a member of that stack and the styles agree once Figma spelling is normalised (SemiBold <-> Semi Bold). altitude resolved its first choice, IBM Plex Sans. fluent FELL BACK to Roboto, the 5th entry of its Segoe UI chain -- a named fallback, not an equality. A resolved family absent from the stack is left live because that would be a real substitution. No font invented, no expected plan restamped. Silent 149 -> 5 on both roots.",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
+      "TAUGHT 2026-08-30 (B2k, set layout.mode carry): the component set is the proof sheet, not a component fact -- neither source contract names its layout. Compile plans vertical; every writer era (v4 AND current interpret.ts) mints HORIZONTAL on canvas, so a fresh mint would not reconcile it. Same class as Input V64 (carry set layout.mode horizontal). Observed HORIZONTAL canonicalises to compile vertical ONLY on the root set and ONLY between those two measured vocabularies; anything else stays live. Silent 3 -> 2 on both roots.",
     ],
     roots: report.roots.map((root) => ({
       source: root.source,

@@ -3,7 +3,9 @@ import test from "node:test";
 
 import {
   buttonPlanNamesByOwnershipKey,
+  buttonPlanRootChrome,
   buttonV4LiveTokenName,
+  carryButtonV4SetLayoutMode,
   canonicalizeButtonObserveComponentRef,
   canonicalizeButtonObserveTokenName,
   compileButtonComponentRefMap,
@@ -332,6 +334,41 @@ test("v4 role-only name recovery carries the compile name and never invents one"
     ),
     undefined,
   );
+});
+
+test("set layout.mode carries HORIZONTAL onto compile vertical only on the root set", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const chrome = buttonPlanRootChrome(altitude.expectedScenePlan);
+  assert.equal(chrome.layoutMode, "vertical");
+  const setScene = {
+    ownershipKey: "root",
+    type: "COMPONENT_SET" as const,
+    name: "button/set :: Button / button@1 proof",
+    visible: true,
+    opacity: 1,
+    boundVariables: [],
+    width: 0,
+    height: 0,
+    layoutMode: "HORIZONTAL" as const,
+    children: [],
+  };
+  assert.equal(carryButtonV4SetLayoutMode(setScene, chrome), "VERTICAL");
+  // a non-root node never carries
+  assert.equal(
+    carryButtonV4SetLayoutMode(
+      { ...setScene, ownershipKey: "root/children/0" },
+      chrome,
+    ),
+    "HORIZONTAL",
+  );
+  // an observed mode outside the measured pair stays live
+  assert.equal(
+    carryButtonV4SetLayoutMode({ ...setScene, layoutMode: "NONE" }, chrome),
+    "NONE",
+  );
+  // absent compile chrome never carries
+  assert.equal(carryButtonV4SetLayoutMode(setScene, undefined), "HORIZONTAL");
 });
 
 test("variantAxis order canonicalizes only when the value set matches compile", () => {
