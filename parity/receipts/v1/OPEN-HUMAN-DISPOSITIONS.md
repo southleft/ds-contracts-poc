@@ -5,15 +5,17 @@ Prepared 2026-08-29.
 > **Correction, same day.** This page first said these two rows "are the whole of
 > `V1-REL-01` being RED". **That was wrong**, and it was wrong because I read the
 > committed `audit-ledger.json` instead of re-running the gate. A full
-> `v1:readiness` on the current commit reports **9 of 22 rows RED**, and
-> `V1-REL-01` names twelve audit rows, not two: AUD-V06, V07, V08, V09, U19,
-> U21, U29, U33, U37, U44 all RED, plus AUD-U17 and AUD-U22 open-human. The
-> committed ledger marks every one of those ten `closed` — they were closed at
-> some earlier commit and have regressed since. Two of them (**AUD-V08** and
-> **AUD-U21**, both the plugin engine bundle going stale vs core) were defects I
-> introduced in this session by adding the calendar archetype, and are fixed in
-> `cef8e4e9a`. The rest are pre-existing: typecheck and the CI lanes were already
-> red at `228960d29`, verified in a scratch worktree.
+> `v1:readiness` on the current commit reports **GREEN 17 · RED 5**, not 20/2 —
+> and `V1-REL-01` names nine audit rows, not two: AUD-V06, V07, V09, U19, U29,
+> U33, U37 RED, plus AUD-U17 and AUD-U22 open-human. The committed ledger marks
+> the RED ones `closed`; they regressed after it was written.
+>
+> The first honest run found 9 rows RED. Four were one defect of mine — the
+> plugin engine bundle going stale vs core after the calendar archetype was
+> added — and fixing it in `cef8e4e9a` closed V1-JOURNEY-02, V1-COMPAT-04,
+> V1-SEC-01 and V1-CI-02, and cleared AUD-V08, AUD-U21 and AUD-U44. The rest are
+> pre-existing: typecheck and the CI lanes were already red at `228960d29`,
+> verified in a scratch worktree.
 >
 > The two rows below are still exactly right about themselves — they are
 > human-only and no automation closes them. What was wrong was the claim that
@@ -107,9 +109,9 @@ decision.
 
 ## What this unblocks, and what it does not
 
-Closing both rows does **not** turn `V1-REL-01` green — ten other audit rows are
-red on the current commit (see the correction at the top). And it does not make
-v1 releasable either:
+Closing both rows does **not** turn `V1-REL-01` green — seven other audit rows
+are red on the current commit (see the correction at the top). And it does not
+make v1 releasable either:
 the recipe-IR archetypes are the substance of v1 and they are still open —
 Data Table is blocked on an authoring decision, Calendar carries two named
 refusals, and Button's signoff is pending. These two rows are simply the part of
