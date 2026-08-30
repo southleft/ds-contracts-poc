@@ -16,12 +16,12 @@
     "humanSignoff": "pending",
     "technicalMintAndUsabilityMetricsPreserved": true,
     "sceneDerivedInversion": {
-      "status": "measured-not-silent-zero",
+      "status": "closed-derived; accounting 0/0/0 and fixed point stable on both roots; human signoff pending",
       "method": "expected-plan-vs-observe",
       "sourceIrRead": false,
       "silentAssigned": false,
       "silentDerived": true,
-      "ok": false,
+      "ok": true,
       "figmaWrites": 0,
       "inputPageUntouched": true,
       "historicalReadbackRefusedAsObserve": true,
@@ -29,11 +29,11 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "4d3b04b01232cbfd1920def7163c1433fef4253b94b0a7ce65c6ba0b56b610f6",
+      "indexSha256": "35393e12fd210afa3fc19e658474af99b0031db4789a0ca69471b1c19cbd3a1b",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "6cb3ec440459d11eae7d8bc8259c179c4c4c08aeff6dcf908f199e0673d4e9fc",
+      "inversionSha256": "7f3d9a72f80eaaf0bae73587e1b0887fa283adfe1eebfaabe356f87be6bc9ed8",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "63d3dd1230b22d56938f454cb3d37045197809cf1e7a95abe1cb0af46fc55404",
+      "receiptSha256": "084f62f1e13a26d7878c56d0d809732909984db1fffc1df1c31e733c46e9b923",
       "roots": {
         "altitude": {
           "setId": "85:7406",
@@ -43,7 +43,7 @@
           "missing": 0,
           "extra": 0,
           "mismatched": 0,
-          "fixedPointStable": false
+          "fixedPointStable": true
         },
         "fluent": {
           "setId": "85:8054",
@@ -53,14 +53,14 @@
           "missing": 0,
           "extra": 0,
           "mismatched": 0,
-          "fixedPointStable": false
+          "fixedPointStable": true
         }
       }
     },
     "blockers": [
       "no attributable human signoff",
-      "scene-derived accounting is CLOSED: silent 0 / missing 0 / extra 0 / mismatched 0 on both roots (Altitude 8706/8706, Fluent 8778/8778), derived not assigned",
-      "scene-derived fixed point is not yet stable: the observed variantGroupProperties axis LIST is Figma-alphabetical (Icons/Size/State/Variant) while compile carries Variant/Size/State/Icons (Input V72 order class; last teaching)"
+      "scene-derived inversion CLOSED 2026-08-30 (B2h-B2q): silent 0 / missing 0 / extra 0 / mismatched 0 on both roots (Altitude 8706/8706, Fluent 8778/8778) AND the collapse-compile fixed point is two-cycle byte-stable; derived, not assigned; 0 Figma writes; expected plans and observes byte-identical throughout",
+      "overall Button success remains false until B3 attributable human signoff"
     ],
     "supersededHistoricalArtifacts": [
       {
@@ -85,7 +85,7 @@
       "fontSubstrateFacts": 144,
       "altitudeResolution": "requested (IBM Plex Sans, first entry of its own stack)",
       "fluentResolution": "fallback (Roboto, 5th entry of the Segoe UI chain) — named, not equated",
-      "remainingClass": "accounting closed (B2j-B2m); binding order carried (B2n); remaining gap is fixed-point representation empties and axis-list order (Calendar V44-V47 / Input omit classes, Input V72 order class)",
+      "remainingClass": "none — inversion closed (B2h fonts, B2j names, B2k-B2m set chrome, B2n bind order, B2o/B2p representation empties, B2q axis-list order); every teaching same-class with a measured Input/Table/Calendar precedent; nothing invented, nothing restamped",
       "remainingRequiresFreshMint": false,
       "setChromeClassClosed": {
         "teachings": "B2k layout.mode (Input V64), B2l layout.padding (Input V65), B2m width.mode + width.value extras drop (Input V66)",

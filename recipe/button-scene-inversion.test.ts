@@ -17,6 +17,7 @@ import {
   compileButtonComponentRefMap,
   compileButtonExpectedScenePlans,
   compileButtonTokenIdentityMap,
+  canonicalizeButtonVariantAxisListOrder,
   canonicalizeButtonVariantAxisOrder,
   dropButtonDuplicateMappedBindings,
   recoverButtonV4RoleOnlyName,
@@ -780,6 +781,53 @@ test("token name canonicalization is unique same-key sanitization only", () => {
   assert.equal(
     canonicalizeButtonObserveTokenName("token/float/not-a-compile-key", map),
     "token/float/not-a-compile-key",
+  );
+});
+
+test("variant-axis LIST order canonicalizes only when the axis-name set matches compile", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const compileAxes = altitude.compileRoot.variantAxes;
+  assert.deepEqual(
+    compileAxes.map((axis) => axis.name),
+    ["Variant", "Size", "State", "Icons"],
+  );
+  const alphabetical = {
+    Icons: { values: ["none", "leading", "trailing", "both"] },
+    Size: { values: ["small", "medium", "large"] },
+    State: {
+      values: [
+        "default",
+        "hover",
+        "pressed",
+        "focus-visible",
+        "disabled",
+        "loading",
+      ],
+    },
+    Variant: { values: ["primary", "secondary"] },
+  };
+  assert.deepEqual(
+    Object.keys(
+      canonicalizeButtonVariantAxisListOrder(alphabetical, compileAxes) ?? {},
+    ),
+    ["Variant", "Size", "State", "Icons"],
+  );
+  // a missing axis leaves the live order visible
+  const { Icons: _icons, ...missingAxis } = alphabetical;
+  assert.deepEqual(
+    Object.keys(
+      canonicalizeButtonVariantAxisListOrder(missingAxis, compileAxes) ?? {},
+    ),
+    ["Size", "State", "Variant"],
+  );
+  // an extra axis leaves the live order visible
+  const extraAxis = { ...alphabetical, Extra: { values: ["x"] } };
+  assert.deepEqual(
+    Object.keys(
+      canonicalizeButtonVariantAxisListOrder(extraAxis, compileAxes) ?? {},
+    ),
+    ["Icons", "Size", "State", "Variant", "Extra"],
   );
 });
 

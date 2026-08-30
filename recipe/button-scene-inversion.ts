@@ -987,6 +987,36 @@ export function canonicalizeButtonVariantAxisOrder(
   );
 }
 
+/**
+ * Variant-axis LIST order canonicalization (Button B2q), measured 2026-08-30.
+ *
+ * The observe program builds variantGroupProperties from Figma's own object,
+ * whose keys come back alphabetically (Icons, Size, State, Variant); compile
+ * carries the declared axis order (Variant, Size, State, Icons). The VALUES
+ * inside each axis were canonicalised at B2e (Input V72 Size-axis class);
+ * this is the same order-only class applied to the axis list itself. The key
+ * order reorders onto compile ONLY when the axis-name sets are equal; a
+ * missing or extra axis leaves the live order visible.
+ */
+export function canonicalizeButtonVariantAxisListOrder(
+  properties: SceneNodeSnapshot["variantGroupProperties"],
+  compileAxes: ReadonlyArray<{ name: string }>,
+): SceneNodeSnapshot["variantGroupProperties"] {
+  if (properties === undefined) return properties;
+  const observedNames = Object.keys(properties);
+  const compileNames = compileAxes.map((axis) => axis.name);
+  if (
+    observedNames.length !== compileNames.length ||
+    [...observedNames].sort().join("\0") !==
+      [...compileNames].sort().join("\0")
+  ) {
+    return properties;
+  }
+  return Object.fromEntries(
+    compileNames.map((name) => [name, properties[name]!]),
+  );
+}
+
 export function assignButtonSceneOwnership(
   raw: SceneNodeSnapshot,
   compileRoot: ComponentSetNode,
@@ -1014,8 +1044,11 @@ export function assignButtonSceneOwnership(
     ownershipKey: "root",
     semanticRole:
       raw.semanticRole ?? sceneRoleFromName(raw.name, raw.variantProperties),
-    variantGroupProperties: canonicalizeButtonVariantAxisOrder(
-      raw.variantGroupProperties,
+    variantGroupProperties: canonicalizeButtonVariantAxisListOrder(
+      canonicalizeButtonVariantAxisOrder(
+        raw.variantGroupProperties,
+        compileRoot.variantAxes,
+      ),
       compileRoot.variantAxes,
     ),
     children,
@@ -1267,6 +1300,7 @@ export function serializeButtonInversionReport(
       "TAUGHT 2026-08-30 (B2n, binding compile-order carry): the observe program sorts boundVariables by Figma field name, so the live page reports bindings alphabetically while compile carries semantic order; the binding SETS were already fact-equal. Same class as Input taughtSurfaceBindingCompileOrder / taughtContentBindingCompileOrder / taughtLabelBindingCompileOrder and Calendar V35/V36/V42-43 (host keeps compile-carried bind order). Order-only: bindings reorder onto compile order ONLY when the mapped (field, variable, type) multiset equals the compile multiset for the same ownership key; any set difference leaves the live order visible.",
       "TAUGHT 2026-08-30 (B2o, live-empty chrome omit): live instance slots report fills [] and the live set reports strokes [] / effects [] where compile omits the key; an empty array is Figma reporting absence, not a drawn fact. Same class as Input omitSetFills/omitSetEffects and Calendar V44-V47 (empty effects/strokes/dashPattern omits, empty-only). The omits are empty-only and type-gated; any non-empty live paint stays visible.",
       "TAUGHT 2026-08-30 (B2p, instance compile-empty bindings representation): compile carries bindings [] explicitly on instance slots while the scene-derived IR omits the empty key; both spell the same fact and the fixed-point structural diff was refusing the spelling. The scene-derived envelope canonicalises onto compile's spelling before collapse (instance nodes with no bindings gain bindings []; the envelope hash is recomputed over the same facts). Same representation-empties family as B2o, opposite direction.",
+      "TAUGHT 2026-08-30 (B2q, variant-axis LIST order): Figma returns variantGroupProperties keys alphabetically (Icons/Size/State/Variant); compile carries the declared order (Variant/Size/State/Icons). The values inside each axis were canonicalised at B2e (Input V72 class); this applies the same order-only class to the axis list. Key order reorders onto compile ONLY when the axis-name sets are equal; a missing or extra axis leaves the live order visible. WITH THIS, THE SCENE-DERIVED FIXED POINT IS STABLE ON BOTH ROOTS and the inversion is closed: silent 0 / missing 0 / extra 0 / mismatched 0, collapse-compile two-cycle byte-stable. Human signoff (B3) remains pending; overall Button success remains false until TJ signs.",
     ],
     roots: report.roots.map((root) => ({
       source: root.source,
