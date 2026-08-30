@@ -2,45 +2,105 @@
 
 Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their commands and their evidence references are parsed from docs/26-v1-definition.md — nothing here is listed by hand. Seconds are measured and move run to run; nothing else in this file should.
 
-- **commit:** `98860fde0276567378d14b3bc993676dd6edfa16`
+- **commit:** `cef8e4e9a189a5ff977cbf3f7c8b1a7d2b106b75`
 - **tree dirty at start:** no
 - **definition:** docs/26-v1-definition.md sha256 `e5d8eec9f151d493`
 - **flags:** (none)
 - **lane map:** catalog-visual, deploy-check, fast, full, publish-rc, release-candidate, security, sync-spine (from .github/workflows via .github/scripts/lane-map.ts)
 - **prep:** ✔ `npm --prefix packages/schema run build` 1s · ✔ `npm --prefix packages/core run build` 1s · ✔ `npm --prefix packages/cli run build` 1s · ✔ `npm --prefix packages/emitter-web-components run build` 0s · ✔ `npm run build:lib` 1s · ✔ `npm run plugin:zip` 0s
 
-**Tally.** GREEN 20 · RED 2 — 22 rows.
+**Tally.** GREEN 17 · RED 5 — 22 rows.
 
 | row | state | command | seconds | evidence |
 |---|---|---|---|---|
 | V1-SCOPE-01 | **GREEN** | ✔ `npm run docs:check` | 0 | ✔ 23-known-limitations.md#a4-out-of-scope-by-decision--not-gaps<br>human: Known Limitations §A.4 remains linked from the release notes |
-| V1-JOURNEY-01 | **GREEN** | ✔ `npm run plugin:ui-check` && ✔ `npm run extract:figma:roundtrip:uui` && ✔ `npm run ledger:fresh` && ✔ `npm run conformance:canvas` | 18 | ✔ parity/receipts/phase-2/FIGMA-DS-EXAM.md |
-| V1-JOURNEY-02 | **GREEN** | ✔ `npm run test:onboarding` && ✔ `npm run paste:check` && ✔ `npm run plugin:check` && ✔ `npm run first-party-bundle:check` && ✔ `npm run maintain` | 79 | — |
+| V1-JOURNEY-01 | **GREEN** | ✔ `npm run plugin:ui-check` && ✔ `npm run extract:figma:roundtrip:uui` && ✔ `npm run ledger:fresh` && ✔ `npm run conformance:canvas` | 13 | ✔ parity/receipts/phase-2/FIGMA-DS-EXAM.md |
+| V1-JOURNEY-02 | **GREEN** | ✔ `npm run test:onboarding` && ✔ `npm run paste:check` && ✔ `npm run plugin:check` && ✔ `npm run first-party-bundle:check` && ✔ `npm run maintain` | 71 | — |
 | V1-JOURNEY-03 | **GREEN** | ✔ `npm run reconcile` && ✔ `npm run diagnose` && ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 2 | ✔ 23-known-limitations.md#b11-adopting-a-hand-built-figma-set-is-not-a-verb-this-tool-has<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed<br>mentions (not run): `npm run reconcile && npm run diagnose`<br>mentions (not run): `npm run parity:snapshot:rest` |
 | V1-CLASS-01 | **GREEN** | ✔ `npm run capability:fresh` && ✔ `npm run extract:computed:drift` | 0 | ✔ 23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed |
 | V1-CLASS-02 | **GREEN** | ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut<br>human: the release notes reproduce or link the bounds in Known Limitations §C.1.1 |
 | V1-COMPAT-01 | **GREEN** | ✔ `node -e "const r=require('./package.json'),c=require('./packages/cli/package.json');if(r.engines.node!=='>=20'\|\|c.engines.node!=='>=20'\|\|r.peerDependencies.react!=='>=18'\|\|r.peerDependencies['react-dom']!=='>=18')process.exit(1)"` | 0 | — |
-| V1-COMPAT-02 | **GREEN** | ✔ `npm run schema` && ✔ `npm run schema:fresh` && ✔ `npm run contracts:migrate:check` && ✔ `npm run slot-constraints:check` | 2 | ✔ ../CONTRIBUTING.md#contract-change-policy<br>human: release PR includes a contract-change classification using CONTRIBUTING § Contract change policy |
-| V1-COMPAT-03 | **GREEN** | ✔ `npm run eval` && ✔ `npm run eval:record:check` && ✔ `npm run generation:atomic:check` && ✔ `npm run provenance:check` && ✔ `npm run figma:fresh` && ✔ `npm run verify:catalog` | 1332 | — |
+| V1-COMPAT-02 | **GREEN** | ✔ `npm run schema` && ✔ `npm run schema:fresh` && ✔ `npm run contracts:migrate:check` && ✔ `npm run slot-constraints:check` | 6 | ✔ ../CONTRIBUTING.md#contract-change-policy<br>human: release PR includes a contract-change classification using CONTRIBUTING § Contract change policy |
+| V1-COMPAT-03 | **RED** | ✖ `npm run eval` && · `npm run eval:record:check` && · `npm run generation:atomic:check` && · `npm run provenance:check` && · `npm run figma:fresh` && · `npm run verify:catalog` | 2545 | — |
 | V1-COMPAT-04 | **GREEN** | ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run plugin:ui-check` ⟨reused V1-JOURNEY-01⟩ | 0 | ✔ 23-known-limitations.md#a3-the-architecture-the-plugin-cannot-run-your-code<br>human: Known Limitations §§A.3–A.4 remains linked from release notes |
-| V1-EVID-01 | **GREEN** | ✔ `npm run eval` ⟨reused V1-COMPAT-03⟩ && ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ && ✔ `npm run capability:fresh` ⟨reused V1-CLASS-01⟩ && ✔ `npm run generation:atomic:check` ⟨reused V1-COMPAT-03⟩ && ✔ `npm run static:empty-content:check` && ✔ `npm run code-only-facts:check` | 1 | — |
+| V1-EVID-01 | **RED** | ✖ `npm run eval` ⟨reused V1-COMPAT-03⟩ && · `npm run docs:check` && · `npm run capability:fresh` && · `npm run generation:atomic:check` && · `npm run static:empty-content:check` && · `npm run code-only-facts:check` | 0 | — |
 | V1-EVID-02 | **GREEN** | ✔ `npm run capability:fresh` ⟨reused V1-CLASS-01⟩ && ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md#c1-coverage--how-much-of-a-library-is-actually-captured |
-| V1-EVID-03 | **GREEN** | ✔ `npm run conformance` && ✔ `npm run conformance:roundtrip` && ✔ `npm run conformance:canvas` ⟨reused V1-JOURNEY-01⟩ && ✔ `npm run dagger:census` && ✔ `npm run closure:check` | 38 | — |
-| V1-EVID-04 | **GREEN** | ✔ `npm run snapshot:schema:check` && ✔ `npm run canvas:binding:check` && ✔ `npm run variant-drift:check` | 21 | ✔ ../parity/receipts/live-figma-variant-drift.md |
-| V1-EVID-05 | **GREEN** | ✔ `npm run catalog:visual:check` && ✔ `npm run maintain:visual` | 36 | — |
-| V1-SEC-01 | **GREEN** | ✔ `npm run test:worker` && ✔ `npm run test:playground` && ✔ `npm run typecheck:worker` && ✔ `npm run plugin:check` ⟨reused V1-JOURNEY-02⟩ && ✔ `npm run plugin:ui-check` ⟨reused V1-JOURNEY-01⟩ | 3 | ✔ 23-known-limitations.md#b14-the-standing-cifigma-channel-is-half-a-channel<br>human: release security review records a clean secret scan and links Known Limitations §B.14. |
-| V1-SEC-02 | **GREEN** | ✔ `npm audit --omit=dev --audit-level=high` | 1 | — |
-| V1-CI-01 | **GREEN** | ✔ `npm run ci:lanes` && ✔ `npm run ci:lane fast` && ✔ `npm run ci:lane full` && ✔ `npm run ci:lane catalog-visual` && ✔ `npm run test:v1-definition` && ✔ `npm run v1:definition:check` && ✔ `npm run provenance:check` ⟨reused V1-COMPAT-03⟩ && ✔ `npm run eval:record:check` ⟨reused V1-COMPAT-03⟩ | 3910 | — |
-| V1-CI-02 | **GREEN** | ✔ `npm run prep:core` && ✔ `npm --prefix packages/schema run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/emitter-web-components run build` ⟨reused prep⟩ && ✔ `npm run build:lib` ⟨reused prep⟩ && ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` && ✔ `npm run site:build` && ✔ `npm run publish:check` && ✔ `npm run verify:package` && ✔ `npm run verify:published` && ✔ `npm run schema:fresh` ⟨reused V1-COMPAT-02⟩ && ✔ `npm run figma:fresh` ⟨reused V1-COMPAT-03⟩ && ✔ `npm run generated:fresh` && ✔ `npm run verify:catalog` ⟨reused V1-COMPAT-03⟩ && ✔ `npm run catalog:visual:check` ⟨reused V1-EVID-05⟩ | 13 | — |
-| V1-REL-01 | **RED** | — (evidence only) | 19 | human: the release PR contains a complete P0/P1 audit ledger with task ID, closing commit, acceptance command, and result<br>ledger: 60 rows — closed 55, refuted 2, open-human 2, red 1 ([AUDIT-LEDGER.md](AUDIT-LEDGER.md))<br>audit ledger: AUD-U17 OPEN-HUMAN, AUD-U22 OPEN-HUMAN, AUD-U25 RED |
+| V1-EVID-03 | **GREEN** | ✔ `npm run conformance` && ✔ `npm run conformance:roundtrip` && ✔ `npm run conformance:canvas` ⟨reused V1-JOURNEY-01⟩ && ✔ `npm run dagger:census` && ✔ `npm run closure:check` | 37 | — |
+| V1-EVID-04 | **GREEN** | ✔ `npm run snapshot:schema:check` && ✔ `npm run canvas:binding:check` && ✔ `npm run variant-drift:check` | 11 | ✔ ../parity/receipts/live-figma-variant-drift.md |
+| V1-EVID-05 | **GREEN** | ✔ `npm run catalog:visual:check` && ✔ `npm run maintain:visual` | 25 | — |
+| V1-SEC-01 | **GREEN** | ✔ `npm run test:worker` && ✔ `npm run test:playground` && ✔ `npm run typecheck:worker` && ✔ `npm run plugin:check` ⟨reused V1-JOURNEY-02⟩ && ✔ `npm run plugin:ui-check` ⟨reused V1-JOURNEY-01⟩ | 2 | ✔ 23-known-limitations.md#b14-the-standing-cifigma-channel-is-half-a-channel<br>human: release security review records a clean secret scan and links Known Limitations §B.14. |
+| V1-SEC-02 | **GREEN** | ✔ `npm audit --omit=dev --audit-level=high` | 0 | — |
+| V1-CI-01 | **RED** | ✖ `npm run ci:lanes` && · `npm run ci:lane fast` && · `npm run ci:lane full` && · `npm run ci:lane catalog-visual` && · `npm run test:v1-definition` && · `npm run v1:definition:check` && · `npm run provenance:check` && · `npm run eval:record:check` | 1 | — |
+| V1-CI-02 | **GREEN** | ✔ `npm run prep:core` && ✔ `npm --prefix packages/schema run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/emitter-web-components run build` ⟨reused prep⟩ && ✔ `npm run build:lib` ⟨reused prep⟩ && ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` && ✔ `npm run site:build` && ✔ `npm run publish:check` && ✔ `npm run verify:package` && ✔ `npm run verify:published` && ✔ `npm run schema:fresh` ⟨reused V1-COMPAT-02⟩ && ✔ `npm run figma:fresh` && ✔ `npm run generated:fresh` && ✔ `npm run verify:catalog` && ✔ `npm run catalog:visual:check` ⟨reused V1-EVID-05⟩ | 23 | — |
+| V1-REL-01 | **RED** | — (evidence only) | 25 | human: the release PR contains a complete P0/P1 audit ledger with task ID, closing commit, acceptance command, and result<br>ledger: 60 rows — closed 49, refuted 2, open-human 2, red 7 ([AUDIT-LEDGER.md](AUDIT-LEDGER.md))<br>audit ledger: AUD-V06 RED, AUD-V07 RED, AUD-V09 RED, AUD-U17 OPEN-HUMAN, AUD-U19 RED, AUD-U22 OPEN-HUMAN, AUD-U29 RED, AUD-U33 RED, AUD-U37 RED |
 | V1-REL-02 | **RED** | ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm run publish:check` ⟨reused V1-CI-02⟩ && ✔ `npm run verify:published` ⟨reused V1-CI-02⟩<br>after publish: ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` ⟨reused V1-CI-02⟩ && ✔ `npm run site:build` ⟨reused V1-CI-02⟩ && ✖ `npm run deploy:check` | 730 | — |
 | V1-REL-03 | **GREEN** | ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md<br>human: release PR checklist links every deferred audit task to one item below and links the complete Known Limitations |
 
 ## Tracked files a command rewrote
 
 - V1-COMPAT-03: `npm run eval` changed M evals/results.json
+- V1-REL-02: `npm run deploy:check` changed M parity/receipts/v1/CI-LANE-COVERAGE-GAP.md, M recipe/recipes/table.ts
 
 ## Red and unrun commands — captured tail
+
+### V1-COMPAT-03 — `npm run eval` (exit 1, 2545s)
+
+```
+e stroke, FC-PSEUDO-STROKE-GLYPH L→SVG, FC-VARIANT-BOOL-LBP, FC-CARBON-TABS-LABEL, FC-FIGMA-CLIP-DEFAULT, FC-ASTRYX-SLIDER-TOOLTIP, FC-SVG-VIEWBOX, FC-FLEX-BASIS, FC-SVG-ROTATION, FC-WIDTH-TOKEN, FC-CONTRAST-ICON, FC-ENUM-HOLE chip, FC-PSEUDO-OVERFLOW, FC-STATE-PREVIEW-NOISE — all green
+  ✔ C3-detection  code-to-canvas-wave-a-emit-pins
+trap-corpus-check: frozen adversarial stems structural/compile markers green
+  ✔ C3-detection  trap-corpus-check
+sync-ledger-lockfile: canvas-edit→canvas-ahead, hash-bump→code-ahead, both→conflict, recorded-amend echo→in-sync (unrecorded amend raises the named false alarm); a foreign-grammar or untagged baseline is incomparable, never drift; serialization deterministic; offline gate green over the committed ledger
+  ✔ C3-detection  sync-ledger-lockfile
+sync-spine-drift: canvas-ahead fixture → plan carries proposal+diff+classification+marker PR body; in-sync scope plans nothing; cursor skips the already-PR-d drift by name (conflict sibling still pulls); decided-pending rows do not red the lane (Verdict: drift-decided, WARN + PENDING.md), an undecided row still does, a stale decision is undecided again, an untracked set is always red
+  ✔ C3-detection  sync-spine-drift
+rollup-only-package-refused-by-name: a package publishing only api-extractor `.d.ts` rollups (Fluent 2: 0 .tsx / 0 non-.d.ts .ts across 65 packages) walked ZERO candidate files and reported `No components found — check code.root` — a refusal naming nothing, indistinguishable from an empty directory and blaming the config for a fact about the package. The walker now keeps a skip ledger and refuses BY NAME: how many files, which rule dropped each, the files themselves, the ROLLUP-ONLY classification, and the next step. An empty tree names its OWN cause, and a tree whose files were opened but whose every component was skipped still carries the component-level ledger (which the old path discarded, proposals.md never being written).
+  ✔ C2-refusal  rollup-only-package-refused-by-name
+jsdoc-default-carried-and-disagreement-receipted: `@default` / `@defaultvalue` (both spellings ship in Fluent 2, 80 + 5 tags across the 12 probed rollups) are read into prop.default, so an axis documenting a default is no longer defaultless. Verified against the pinned sandbox: Badge.size documents `@defaultvalue medium` while the drafter pinned `tiny`, Avatar.active documents `@default unset` while the drafter pinned `active` — two of twelve components would have captured their whole variant grid around a base combo the library never renders, silently. An initializer that disagrees with the JSDoc WINS and the disagreement is receipted; a default outside its own enum, or written as prose, is refused by name rather than guessed; `@default undefined` documents the absence. The drafter now pins baseCombo only for the axis that is genuinely defaultless.
+  ✔ C5-extraction  jsdoc-default-carried-and-disagreement-receipted
+local-var-hop-recovers-token-name: with `varPrefix: "--"` the reader's one-hop `defs` branch was dead code — every custom property starts with a bare `--`, so a channel reading a component-local variable (`border-color: var(--fui-Checkbox__indicator--borderColor)`) offered only that variable, which names no DTCG leaf, and the theme token behind it was never a candidate. Measured on Fluent: 31 rules across 11 local variables, including ALL of Checkbox's indicator colours on all four interaction planes — a silent NAME loss with the pixels still right. A second half the recon did not name: the var-ident regex omitted `_`, so the name truncated at `--fui-Checkbox` and the hop key never matched, which also broke the branch for ORDINARY prefixes (the control fails pre-fix too). Hop targets are now offered as ADDITIONAL candidates flagged `1` and sorted after every direct candidate, so a recovered name can only fill a channel that bound nothing — it can never demote a semantic alias to the primitive behind it. Committed captures carry no 4th element and normalize byte-identically.
+  ✔ C2-refusal  local-var-hop-recovers-token-name
+painted-decoration-survives-control-equality: altitude Link's underline EQUALS the <a> control (`<a href="#c">`, :any-link) and was therefore dropped as "the emitted element inherits it for free" — false twice over, because core/emit-html writes the root <a> with no href (library ink 34x16 vs contract render 32x14 at Variant=Lg) and because Figma has no user agent at all. The library authors it outright (`.al-c-link { text-decoration: var(--al-link-text-decoration, underline) }`), so the equality was coincidence, not provenance. The door now re-admits a PAINTED decoration and still drops `none` (falsified here: forcing the capture to `none` carries nothing), font-family joins the round-5c clause that FC-FONT-SUBSTRATE needs, and the fact reaches the committed contract and 9 canvas node(s) — replacing two hand-edits (26f1a279 text-decoration-line, ac5e6181 Plex families) that promote() could not reproduce and the next re-promote would have erased.
+  ✔ C2-refusal  painted-decoration-survives-control-equality
+astryx-token-plane-is-the-render-substrate: 177 of 186 committed astryx tokens are comparable against the 10 committed capture(s)' own raw custom-property declarations, and ALL 177 agree (87 disagreed before the theme-neutral re-base — the DTCG was @astryxdesign/core's UNTHEMED defaults while every reference render was made under @astryxdesign/theme-neutral). CSS-keyword font families across 72 fontFamily declaration(s): 0 (allowance 0, was 148) — ZERO remain. The token-plane ones died with the re-base; the 28 that survived it were contract LITERALS and died to one missing alternation in firstFamily(), whose denylist covered the generic families but not the system-font keywords. The allowance was tightened 28 -> 0 in the same change, so the gain cannot be given back.
+  ✔ C3-detection  astryx-token-plane-is-the-render-substrate
+
+227/230 evals passed — evals/results.json (commit de7cd603)
+```
+
+### V1-CI-01 — `npm run ci:lanes` (exit 1, 1s)
+
+```
+w runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:combobox:live:v9:lifecycle:simulate` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:combobox:live:v9:smoke` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v1:authorization-template:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v1:authorization:self-test` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v1:generated:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v1:lifecycle:simulate` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v1:smoke` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v10:authorization-template:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v10:authorization:self-test` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v10:generated:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v10:lifecycle:simulate` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v10:smoke` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v11:authorization-template:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v11:authorization:self-test` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v11:generated:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v11:lifecycle:simulate` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v11:smoke` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v12:authorization-template:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v12:authorization:self-test` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v12:generated:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v12:lifecycle:simulate` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v12:smoke` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v13:authorization-template:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v13:authorization:self-test` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v13:generated:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v13:lifecycle:simulate` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v13:smoke` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+    `root:recipe:table:live:v14:authorization-template:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+```
 
 ### V1-REL-02 — `npm run deploy:check` (exit 1, 730s)
 
@@ -70,9 +130,9 @@ Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their com
     … spec site: still serving the previous deployment, re-checking (240s)
 
 ✘ 3 deployed surface(s) DIVERGE from the local build:
-  - plugin zip STALE: live is 942148 bytes (sha af19cc985469…), local build is 1062580 bytes (sha 30af2532b82e…) — a designer downloading today gets a different engine than this repo builds
-  - playground STALE: live index references [/assets/index-C1ojNmZG.js, /assets/index-oTRYTN6T.css, /assets/rolldown-runtime-aKtaBQYM.js], local build references [/assets/index-BzXvwWyP.js, /assets/index-oTRYTN6T.css, /assets/rolldown-runtime-aKtaBQYM.js] — vite renames every chunk on any content change, so these are different builds
-  - spec site STALE: /get-started/ live is 40276 bytes (sha fdf98969ffe6…), local build is 40276 bytes (sha e7ee8033e470…)
+  - plugin zip STALE: live is 942148 bytes (sha af19cc985469…), local build is 1117430 bytes (sha 514d2263ec30…) — a designer downloading today gets a different engine than this repo builds
+  - playground STALE: live index references [/assets/index-C1ojNmZG.js, /assets/index-oTRYTN6T.css, /assets/rolldown-runtime-aKtaBQYM.js], local build references [/assets/index-B9DJZKu5.js, /assets/index-CMpMqC3E.css, /assets/rolldown-runtime-aKtaBQYM.js] — vite renames every chunk on any content change, so these are different builds
+  - spec site STALE: /get-started/ live is 40276 bytes (sha fdf98969ffe6…), local build is 40918 bytes (sha 5a06dd0326de…)
 
 Redeploy with: npm run deploy   (builds, publishes both Pages projects, then re-runs this check)
 ```

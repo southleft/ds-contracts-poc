@@ -74,3 +74,34 @@ with `--stack-size=16000`.
 Fixing the duplication — parameterising the version instead of copying it —
 would close `V1-CI-01`, `AUD-V06`/`AUD-U37` (typecheck) and this page at once.
 That is a much larger change and is named here, not attempted.
+
+### What `typecheck` actually reports, measured 2026-08-29
+
+`npm run typecheck` does **not** fail on a stack limit alone. At
+`--stack-size=16000` it completes and reports **8,608 errors**:
+
+| file family                                                      | errors        |
+| ---------------------------------------------------------------- | ------------- |
+| `recipe/scene-readback-combobox-vN.ts`                           | 1,324         |
+| `recipe/scene-readback-vN.ts`                                    | 1,303         |
+| `recipe/scene-readback-vNN.test.ts` (one per version, ~103 each) | ~2,800        |
+| `recipe/build-table-live-proof-vN.ts`                            | 105           |
+| everything else                                                  | the remainder |
+
+By code: 5,043 × `TS2339`, 1,860 × `TS2345`, 1,032 × `TS7006`, 196 × `TS2367`.
+The `TS2367`s are the forbidden-identity guards — every writer compares its own
+namespace literal against another archetype's, which is statically always false
+and deliberately so at runtime.
+
+Nearly every error is one of a handful of patterns, copied once per version.
+
+**A focused config does not work.** Excluding the per-version families and
+typechecking only the hand-written core was tried and abandoned: `exclude` only
+affects root discovery, not imports, and the core genuinely imports the
+versioned modules — `recipe/table-tail-census.ts` imports
+`table-live-v24-contract.js` on purpose, to reuse that version's validator
+rather than reimplement it. The focused run pulls in the same graph and still
+times out past 10 minutes.
+
+So there is currently **no working typecheck of any scope**, and the only fix
+that reaches it is removing the duplication.

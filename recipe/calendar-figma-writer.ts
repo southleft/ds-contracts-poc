@@ -574,12 +574,20 @@ export function emitCalendarFigmaWriter(
   const runIdentity =
     sourcePlans.map((source) => source.recipeHash.slice(0, 8)).join("-") +
     `-${CALENDAR_FIGMA_RUN_SUFFIX}`;
+  // Compared through a `string` local on purpose. These are defence-in-depth
+  // guards against a future edit pointing this writer at another archetype's
+  // namespace; comparing the literal constants directly is statically always
+  // false, which is what TS2367 says and why every other writer in this repo
+  // carries that error. The runtime guard is the point, so keep it and let the
+  // type system see it as a real comparison.
+  const namespace: string = CALENDAR_FIGMA_NAMESPACE;
+  const identity: string = runIdentity;
   if (
-    CALENDAR_FIGMA_NAMESPACE === FORBIDDEN_INPUT_NAMESPACE ||
-    CALENDAR_FIGMA_NAMESPACE === FORBIDDEN_COMBOBOX_NAMESPACE ||
-    CALENDAR_FIGMA_NAMESPACE === FORBIDDEN_TABLE_NAMESPACE ||
-    runIdentity === FORBIDDEN_INPUT_RUN_IDENTITY ||
-    runIdentity === FORBIDDEN_COMBOBOX_RUN_IDENTITY
+    namespace === FORBIDDEN_INPUT_NAMESPACE ||
+    namespace === FORBIDDEN_COMBOBOX_NAMESPACE ||
+    namespace === FORBIDDEN_TABLE_NAMESPACE ||
+    identity === FORBIDDEN_INPUT_RUN_IDENTITY ||
+    identity === FORBIDDEN_COMBOBOX_RUN_IDENTITY
   )
     throw new TypeError(
       "calendar writer must not reuse Input, Combobox, or Table identity",

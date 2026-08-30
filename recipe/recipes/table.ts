@@ -820,7 +820,10 @@ const validateTableStructure = (root: FrameNode): void => {
   for (const set of [tableSet, rowSet, cellSet]) {
     const rendered = new Set(
       set.children.map((child) => {
-        const stripped = structuredClone(child) as Record<string, unknown>;
+        const stripped = structuredClone(child) as unknown as Record<
+          string,
+          unknown
+        >;
         delete stripped.role;
         delete stripped.label;
         delete stripped.variantProperties;

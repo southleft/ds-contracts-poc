@@ -1,7 +1,9 @@
 import * as z from "zod";
 
 import {
+  CodeOnlyExtensionSchema,
   ENVELOPE_VERSION,
+  LossReceiptSchema,
   RecipeEnvelopeSchema,
   checkTotality,
   factId,
@@ -189,6 +191,9 @@ export interface CalendarRecipeInstance {
   extensions: CodeOnlyExtension[];
   receipts: LossReceipt[];
   provenance: {
+    source: string;
+    tool: string;
+    generatedAt: string;
     selection: RecipeSelection;
     [key: string]: unknown;
   };
@@ -298,8 +303,11 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
   }),
   inputFacts: z.array(FactRefSchema),
   accounting: z.strictObject({ carried: z.array(FactRefSchema) }),
-  extensions: z.array(z.any()),
-  receipts: z.array(z.any()),
+  // The real schemas, not z.any(). A receipt that does not parse is a receipt
+  // nobody can act on, and `z.any()` would have accepted one — it also made the
+  // compiled envelope untypeable against RecipeEnvelopeHashInput.
+  extensions: z.array(CodeOnlyExtensionSchema),
+  receipts: z.array(LossReceiptSchema),
   provenance: z.looseObject({
     source: z.string().min(1),
     tool: z.string().min(1),
@@ -902,7 +910,10 @@ export function validateCalendarStructure(root: FrameNode): void {
     for (const axis of set.variantAxes) {
       const rendered = new Set(
         set.children.map((child) => {
-          const stripped = structuredClone(child) as Record<string, unknown>;
+          const stripped = structuredClone(child) as unknown as Record<
+            string,
+            unknown
+          >;
           delete stripped.role;
           delete stripped.label;
           delete stripped.variantProperties;
