@@ -1,0 +1,81 @@
+{
+  "artifactVersion": "signed-archetype-source-audit-v1",
+  "auditedAt": "2026-08-30T13:30:00-05:00",
+  "auditor": {
+    "name": "agent",
+    "role": "read-only-source-fidelity-audit",
+    "mandate": "TJ Pitre 2026-08-30: after the Calendar V30 fixture lesson, determine whether any already-passed archetype compiled from a reduced/hand-built fixture overlay rather than the real component source. Do not relitigate or invalidate signoffs; flag Calendar-V30-class misrepresentations clearly for TJ."
+  },
+  "question": "TJ: 'I wonder if anything in the past that I've already said was right was actually wrong and needs to be reassessed.'",
+  "theV30Class": "Calendar V30 compiled the reduced astryx-calendar-reviewed-v1 August 2026 3-week fixture — wrong structure (3 weeks vs the source-named 6-row/42-cell default, no nav chrome, square selected day) presented as the component. That is the class this audit screens for: fixture facts presented as component truth.",
+  "archetypes": {
+    "inputField": {
+      "signoff": "recipe/evidence/input-field-live-v85-human-signoff.json (passed 2026-08-28)",
+      "verdict": "CLEAR — real component sources",
+      "compiledFrom": {
+        "mui": "examples/mui/contracts/text-field.contract.json — COMPUTED-ENRICHED contract: computed-style capture of the real @mui/material@9.2.0 rendered in headless Chromium 151, floor-promoted with source-aliased CSS-variable bindings; plus review facts citing the package's own source files (OutlinedInput.js, InputAdornment.js, FormLabel.js, InputBase.js) read from the pinned sandbox node_modules",
+        "polaris": "examples/polaris/contracts/text-field.contract.json — same computed-capture pipeline against the real @shopify/polaris@13.9.5"
+      },
+      "fixtureOverlay": "none — recipe/fixtures/library-input-fields.ts does NOT use the cloneTokens canonical-clone mechanism; every state/size/typography token is specified per library with contract pointers or source-file citations, and MUI vs Polaris values are distinct throughout (e.g. border #0000003b vs #8a8a8a, heights 40/56 vs Polaris, radius 4 vs Polaris)",
+      "sliceHonesty": "the 128 cells per source are the OUTLINED variant surface (2 sizes x 4 states x content x required x adornments). MUI filled/standard variants, multiline/select/native input types, and hover/pressed are excluded — but as NAMED unsupportedCells in the adapter benchmark, not silently. What TJ saw is a truthful rendering of the real outlined TextField; it is not the whole TextField prop surface and never claimed to be.",
+      "knownFixtureArtifacts": "none identified; fixture content strings (Amount / 125.00 / $ / USD) are declared sample content, not styling claims",
+      "reassessmentNeeded": false
+    },
+    "combobox": {
+      "signoff": "recipe/evidence/combobox-live-v41-human-signoff.json (passed 2026-08-29, conditional phrasing: 'if the two design system combo boxes look similar and the lack of padding on the No option and Loading option is accurate, then I call this a pass')",
+      "verdict": "FLAG FOR TJ — real component skeleton, but a canonical-fixture chrome overlay is carried under library-scoped variable names",
+      "compiledFrom": {
+        "mui": "real @mui/material@9.2.0 Autocomplete source read from the pinned sandbox node_modules (anatomy/API/style citations to Autocomplete.js line ranges) — real for anatomy, states, and the overridden identity facts",
+        "antd": "real antd@5.29.3 package tarball (rc-select anatomy, es/select/index.js citations) — real for anatomy, states, and the overridden identity facts"
+      },
+      "fixtureOverlay": {
+        "mechanism": "recipe/fixtures/library-comboboxes.ts cloneTokens copies the CANONICAL fixture token tree (recipe/fixtures/combobox.ts) and renames every variable under mui.autocomplete.* / antd.select.*, mutating only ~8 paths per library (widths, trigger/option heights, highlighted/selected fills, error border, loading control, filled background). Every other channel keeps the canonical fallback while wearing a library-scoped name.",
+        "channelsThatAreCanonicalNotLibraryNamed": [
+          "overlay chrome: fill #ffffff, border #d1d5db, radius 6, shadow 12px #00000026 — shared verbatim by both minted libraries; the v41 diagnosis itself classifies this chrome as 'shared by this fixture'",
+          "listPadding 4/0/4/0 — canonical fixture value; MUI's own source names listbox padding '8px 0' and noOptions/loading status padding '14px 16px' (diagnosis rawLibrarySource), which were never carried compile facts",
+          "optionPaddingX 10/12 — canonical formula 10+scale*2; MUI's own option padding is 16 horizontal per the diagnosis",
+          "occupancy placeholder squares and content strings (Assignee / Ada Lovelace / No options / Loading…) — declared fixture chrome"
+        ],
+        "notAnArtifact": "Roboto on AntD is NOT fixture invention — extract/computed/configs/antd.json documents Roboto as the 4th entry of AntD's OWN declared font stack and the pin as choosing one of the library's own faces (FC-FONT-SUBSTRATE closure). Roboto on MUI is MUI's own first-choice stack."
+      },
+      "whyThisIsMilderThanCalendarV30": "V30 misrepresented the component's STRUCTURE (3-week month, no nav). Combobox structure — trigger/input/popup/listbox/option anatomy, open/empty/loading states, trigger heights 40/56 vs 24/32, borders, selected fills, loading blues — is source-named and survived distinctly. The fixture layer is the decorative overlay chrome. It was also NOT hidden: the v41 diagnosis named it before TJ's pass ('TJ's identical look is fixture-accurate for that chrome') and TJ passed after reading it.",
+      "whatTjShouldKnow": "TJ's pass was conditioned on the empty/loading padding being 'accurate'. It is accurate to the COMPILE (no mint loss) and fixture-consistent, but it is NOT MUI-named: MUI's own source puts 8px vertical padding on the listbox and 14/16 on the No-options/Loading status slots. Under the new Astryx-source doctrine, the combobox overlay chrome is the one place in a passed archetype where a fixture overlay shaped what TJ saw.",
+      "remintScopeIfTjWantsIt": "teach the adapters to land library-named overlay/list chrome instead of canonical fallbacks — MUI: Paper radius/shadow, listbox '8px 0', status-slot 14/16, option paddingX 16; AntD: dropdown paddingXXS, borderRadiusLG, its own shadow token, empty-item optionPadding — one teaching class per PREPARE, then a fresh mint on a new Scratch page and a fresh human grade. The existing V41 page and signoff stay untouched either way.",
+      "reassessmentNeeded": "TJ's call — the facts were named to him pre-pass; the doctrine now says compile from the component, so a remint is the doctrine-clean path if he wants the chrome library-true"
+    },
+    "table": {
+      "signoff": "recipe/evidence/table-live-v32-human-signoff.json (passed 2026-08-29)",
+      "verdict": "CLEAR — real component sources, measured confirmation already on file",
+      "compiledFrom": {
+        "firstParty": "the repo's own real ds.table component — src/components/Table/Table.module.css, TableCell.module.css, TableHeaderCell.module.css, TableRow.module.css plus contracts/table*.contract.json; the canonical fixture IS this component's values (cloneTokens identity for ds.table)",
+        "mui": "extract/computed/out/mui/table/enriched.contract.json — computed capture of the real @mui/material@9.2.0 Table"
+      },
+      "fixtureOverlay": "table uses the same cloneTokens mechanism as combobox, but the MUI override list covers the load-bearing visible channels (paddings 6/16 and 16/16, minWidth DELETED to match MUI's no-min-width truth, selected #1976d214, white header, frame border 0, cellRule #e0e0e0 x1, radius 0, Roboto typography from the extract). The v32 signoff's measuredConfirmations verified live values against the MUI extract and first-party CSS channel by channel — including the two things TJ questioned (2px gutters = compile-named uniform 1px strokes; ragged columns = Gate 2, MUI names no cell min-width).",
+      "sliceHonesty": "2 densities x 2 row states, 3 columns / 2 body rows of declared sample content (first-party: Name/Role/Status roster; MUI: the dessert copy). stickyHeader and sorting are named exclusions in the adapter. Gate 2 (per-column width model) is an OPEN owner decision, named in the signoff, visible in the mint.",
+      "knownFixtureArtifacts": "none identified beyond declared sample content; residual un-overridden canonical fallbacks under mui.table.* names exist mechanically but the visible channels were measured against source at signoff time",
+      "reassessmentNeeded": false
+    },
+    "buttonOffline": {
+      "signoff": "none — Button human grade is PENDING (not invented); nothing passed to reassess",
+      "verdict": "CLEAR on sources; no grade exists to reassess",
+      "compiledFrom": {
+        "altitude": "examples/altitude/contracts/button.contract.json — real published altitude-web-components@1.0.2 (Lit 3, shadow DOM), anatomy promoted from captured DOM truth, pinned sandbox",
+        "fluent": "examples/fluent/contracts/button.contract.json — real @fluentui/react-components@9.74.5 (Griffel), lockfile-pinned, defaults hand-transcribed from the package's own JSDoc @default tags"
+      },
+      "state": "scene-derived inversion measured 2026-08-29: silent 149 -> 5 per root with extras 1; the remaining 5+1 are one writer set-naming defect on page 85:6781 that needs a fresh mint. That leftover is in progress separately (another agent); this audit did not touch Button code or evidence beyond reading.",
+      "reassessmentNeeded": false
+    },
+    "calendar": {
+      "signoff": "recipe/evidence/calendar-live-v50-human-signoff.json (passed 2026-08-30, full pass)",
+      "verdict": "CLEAR — V31-V50 is the doctrine case itself",
+      "compiledFrom": "the vendored real @astryxdesign/core 0.1.6 (the exact npm-shipped artifact per examples/astryx/PROVENANCE.md — Meta's Astryx, ships its TSX source): src/Calendar/Calendar.tsx structure, styles.ts values, dist/astryx.css light-dark() tokens. The V30-era reduced 3-week fixture and docs-site chrome (#262626/#ebebeb dark canvas, site accent) were named, refused, and replaced from V31 on.",
+      "reassessmentNeeded": false
+    }
+  },
+  "summary": {
+    "clear": ["inputField", "table", "buttonOffline (no grade exists)", "calendar V50"],
+    "flaggedForTj": ["combobox — canonical-fixture overlay chrome (overlay fill/border/radius/shadow, listPadding, optionPaddingX, occupancy chrome) carried under library-scoped variable names; named to TJ pre-pass in the v41 diagnosis, but not library-named; remint scope stated above"],
+    "noSignoffInvalidatedByThisAudit": true,
+    "doctrine": "future work compiles from the actual vendored component source, never a reduced fixture overlay (docs/32 Calendar V50 signoff section)"
+  }
+}

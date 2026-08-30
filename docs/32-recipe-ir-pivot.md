@@ -2060,6 +2060,51 @@ full pass. TJ 2026-08-30: "If we do any more Astryx work, let's make sure
 that we're working off of the actual Astryx project and not whatever you
 were using before."
 
+### Source-fidelity audit of the passed archetypes (2026-08-30)
+
+TJ asked whether anything already graded "right" was actually wrong given
+the V30 fixture lesson. Read-only audit of every signed-off archetype's
+compile source: `recipe/evidence/signed-archetype-source-audit.json`.
+Verdicts (no signoff is invalidated by this audit):
+
+- **Input V85 — clear.** Compiled from computed-style captures of the
+  real `@mui/material@9.2.0` / `@shopify/polaris@13.9.5` rendered in
+  headless Chromium plus review facts citing the packages' own source
+  files. No canonical-clone mechanism; every token per-library. The 128
+  cells per source are the outlined-variant surface with the exclusions
+  (filled/standard, multiline, hover/pressed) **named**, not silent.
+- **Combobox V41 — flagged for TJ, milder than V30.** Anatomy, states,
+  and the distinct identity facts (trigger heights 40/56 vs 24/32,
+  borders, selected fills, loading blues) are named from the real MUI
+  Autocomplete source and the real antd 5.29.3 tarball. But
+  `cloneTokens` carries the **canonical fixture's overlay chrome**
+  (overlay fill/border/radius/shadow, `listPadding` 4, `optionPaddingX`
+  10/12, occupancy squares) under `mui.autocomplete.*` /
+  `antd.select.*` names — MUI's own source names listbox `8px 0`,
+  status slots `14px 16px`, option paddingX 16, none carried. This was
+  **named to TJ before his pass** (the v41 lookalike diagnosis:
+  "fixture-accurate for that chrome"), and his pass was conditional on
+  that padding being "accurate" — accurate to the compile, not
+  MUI-named. Under the new doctrine a remint (library-named overlay/list
+  chrome, one teaching per PREPARE, fresh page, fresh grade) is the
+  doctrine-clean path **if TJ wants it**; the V41 page and signoff stay
+  untouched either way. Roboto-on-AntD is NOT an artifact — it is the
+  4th entry of AntD's own declared stack, a named substrate pin.
+- **Table V32 — clear.** First-party is the repo's real `ds.table` CSS
+  modules; MUI is the computed extract of the real Table. The
+  `cloneTokens` override list covers the load-bearing channels
+  (including deleting `minWidth` to match MUI truth) and the signoff's
+  `measuredConfirmations` verified live vs extract/CSS channel by
+  channel, including both things TJ questioned.
+- **Button (offline) — clear on sources; no grade exists to reassess.**
+  Real published `altitude-web-components@1.0.2` and
+  `@fluentui/react-components@9.74.5`, anatomy from captured DOM truth.
+  Leftover inversion (5+1 set-naming defect on `85:6781`) in progress
+  separately.
+- **Calendar V50 — clear**; V31–V50 is the doctrine case itself
+  (vendored real `@astryxdesign/core` 0.1.6, the exact npm-shipped
+  artifact).
+
 ### Combobox v41 named feedback — empty/loading listbox padding (2026-08-29)
 
 TJ reviewed Combobox v41 on Scratch page `163:35981` and said (named
