@@ -31,7 +31,7 @@
   },
   "humanGrades": {
     "input": "passed (V85, 2026-08-28)",
-    "combobox": "passed (V41, 2026-08-29) — source-fidelity audit flags fixture overlay chrome for TJ (recipe/evidence/signed-archetype-source-audit.json); signoff not invalidated",
+    "combobox": "passed (V41, 2026-08-29) — source-fidelity audit flagged fixture overlay chrome; TJ decided 2026-08-30 to keep the signoff and remint from MUI/AntD-named chrome post-merge (recipe/evidence/signed-archetype-source-audit.json); signoff not invalidated",
     "table": "passed (V32, 2026-08-29)",
     "calendar": "passed (V50, 2026-08-30, full pass)",
     "button": "PENDING — leftover inversion (5+1 set-naming defect on 85:6781) in progress separately; do not invent a grade"
@@ -51,9 +51,9 @@
     },
     {
       "item": "Combobox fixture-chrome flag",
-      "status": "open TJ decision",
+      "status": "DECIDED 2026-08-30 by TJ Pitre — keep the V41 signoff; remint from real MUI/AntD-named overlay chrome as a named POST-MERGE work item (pre-merge remint and permanent acceptance both declined)",
       "blocking": false,
-      "why": "signed-archetype-source-audit.json flags canonical overlay chrome under library-scoped names; TJ decides accept-as-named vs remint before or after merge; the V41 signoff stands either way"
+      "why": "signed-archetype-source-audit.json flags canonical overlay chrome under library-scoped names; decision recorded in that file (archetypes.combobox.tjDecision20260830). Scope: overlay fill/border/radius/shadow, listPadding, optionPaddingX renamed from canonical-fixture values to real MUI/AntD-named values; V41 page 163:35981 and the signoff stay valid until the remint lands"
     },
     {
       "item": "CI fast/full lanes on the branch head",
@@ -84,13 +84,13 @@
     "executeAfter": "Button leftover closes AND TJ approves the merge",
     "ordered": [
       "1. Button leftover inversion closes with evidence; Button gets an attributable human grade or a named refusal per docs/32 F4 (other agent's line of work — do not duplicate).",
-      "2. TJ decides the Combobox fixture-chrome flag: accept as named (record the decision in evidence) or schedule a remint (does not block merge if explicitly accepted).",
+      "2. DONE 2026-08-30 — TJ decided the Combobox fixture-chrome flag: keep the V41 signoff and schedule the remint post-merge (recorded in signed-archetype-source-audit.json, archetypes.combobox.tjDecision20260830); does not block the merge.",
       "3. Apply the docs/26 <-> docs/32 reconciliation (E4): move select/combobox, table/data-grid, and calendar/date-picker rows citing the green gates and signoff evidence paths on a named commit; run npm run docs:check.",
       "4. Re-run all recipe:*:check gates at the intended merge commit; require 149/149 (or the then-current denominator) green.",
       "5. Run npm run ci:lanes (fast) and the full lane locally on the branch head; require the named-red-only profile (parity by design, deploy:check pre-deploy) with zero unnamed reds.",
       "6. Verify hygiene at the merge commit: git ls-files private/ empty, no PEMs tracked, no FIGMA_TOKEN in any tracked file.",
       "7. Open a PR pivot/recipe-ir-v1 -> main (branch is 674 ahead / 0 behind; repo convention is PR merges). TJ approves and merges.",
-      "8. Post-merge: npm publish stays deferred; schedule the dedicated signed cleanup of older Calendar Scratch pages; keep Scratch checkpoints (V50 Calendar signed off = 2393545747493203926) as restore points."
+      "8. Post-merge: remint Combobox from real MUI/AntD-named overlay chrome per TJ's 2026-08-30 decision (scope: overlay fill/border/radius/shadow, listPadding, optionPaddingX from canonical-fixture values to library-named values; fresh mint on a new Scratch page, fresh human grade; V41 page 163:35981 and signoff stay valid until then); npm publish stays deferred; schedule the dedicated signed cleanup of older Calendar Scratch pages; keep Scratch checkpoints (V50 Calendar signed off = 2393545747493203926) as restore points."
     ]
   },
   "productV1Complete": false,

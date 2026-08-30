@@ -41,7 +41,15 @@
       "whyThisIsMilderThanCalendarV30": "V30 misrepresented the component's STRUCTURE (3-week month, no nav). Combobox structure — trigger/input/popup/listbox/option anatomy, open/empty/loading states, trigger heights 40/56 vs 24/32, borders, selected fills, loading blues — is source-named and survived distinctly. The fixture layer is the decorative overlay chrome. It was also NOT hidden: the v41 diagnosis named it before TJ's pass ('TJ's identical look is fixture-accurate for that chrome') and TJ passed after reading it.",
       "whatTjShouldKnow": "TJ's pass was conditioned on the empty/loading padding being 'accurate'. It is accurate to the COMPILE (no mint loss) and fixture-consistent, but it is NOT MUI-named: MUI's own source puts 8px vertical padding on the listbox and 14/16 on the No-options/Loading status slots. Under the new Astryx-source doctrine, the combobox overlay chrome is the one place in a passed archetype where a fixture overlay shaped what TJ saw.",
       "remintScopeIfTjWantsIt": "teach the adapters to land library-named overlay/list chrome instead of canonical fallbacks — MUI: Paper radius/shadow, listbox '8px 0', status-slot 14/16, option paddingX 16; AntD: dropdown paddingXXS, borderRadiusLG, its own shadow token, empty-item optionPadding — one teaching class per PREPARE, then a fresh mint on a new Scratch page and a fresh human grade. The existing V41 page and signoff stay untouched either way.",
-      "reassessmentNeeded": "TJ's call — the facts were named to him pre-pass; the doctrine now says compile from the component, so a remint is the doctrine-clean path if he wants the chrome library-true"
+      "reassessmentNeeded": "DECIDED — see tjDecision20260830",
+      "tjDecision20260830": {
+        "decider": "TJ Pitre",
+        "decidedAt": "2026-08-30T13:16:00-05:00 (approximate)",
+        "decision": "keep the V41 signoff; remint Combobox from real MUI/AntD-named overlay chrome as a NAMED work item AFTER the v1 merge",
+        "explicitlyDeclined": ["pre-merge remint", "permanent acceptance of the fixture chrome"],
+        "scope": "overlay fill/border/radius/shadow, listPadding, and optionPaddingX renamed from canonical-fixture values to real MUI/AntD-named values (per remintScopeIfTjWantsIt above: MUI Paper radius/shadow, listbox '8px 0', status-slot 14/16, option paddingX 16; AntD dropdown paddingXXS, borderRadiusLG, its own shadow token, empty-item optionPadding)",
+        "v41Standing": "V41 page 163:35981 and the human signoff stay valid until the post-merge remint lands and earns its own fresh grade"
+      }
     },
     "table": {
       "signoff": "recipe/evidence/table-live-v32-human-signoff.json (passed 2026-08-29)",
@@ -75,6 +83,7 @@
   "summary": {
     "clear": ["inputField", "table", "buttonOffline (no grade exists)", "calendar V50"],
     "flaggedForTj": ["combobox — canonical-fixture overlay chrome (overlay fill/border/radius/shadow, listPadding, optionPaddingX, occupancy chrome) carried under library-scoped variable names; named to TJ pre-pass in the v41 diagnosis, but not library-named; remint scope stated above"],
+    "flagResolution20260830": "TJ Pitre decided 2026-08-30: keep the V41 signoff; remint Combobox from real MUI/AntD-named overlay chrome as a named post-merge work item (pre-merge remint and permanent acceptance both declined) — see archetypes.combobox.tjDecision20260830",
     "noSignoffInvalidatedByThisAudit": true,
     "doctrine": "future work compiles from the actual vendored component source, never a reduced fixture overlay (docs/32 Calendar V50 signoff section)"
   }

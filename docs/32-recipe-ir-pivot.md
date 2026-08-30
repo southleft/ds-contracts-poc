@@ -2105,6 +2105,18 @@ Verdicts (no signoff is invalidated by this audit):
   (vendored real `@astryxdesign/core` 0.1.6, the exact npm-shipped
   artifact).
 
+**Combobox flag decided (2026-08-30, TJ Pitre):** keep the V41 signoff;
+remint Combobox from real MUI/AntD-named overlay chrome as a **named
+work item after the v1 merge** (pre-merge remint and permanent
+acceptance both explicitly declined). Scope: overlay
+fill/border/radius/shadow, `listPadding`, and `optionPaddingX` renamed
+from canonical-fixture values to real MUI/AntD-named values. The V41
+page `163:35981` and its signoff stay valid until the remint lands and
+earns its own fresh grade. Recorded in
+`recipe/evidence/signed-archetype-source-audit.json`
+(`tjDecision20260830`) and in the post-merge checklist of
+`recipe/evidence/merge-readiness-v1.json`.
+
 ### Merge-readiness assessment for `pivot/recipe-ir-v1` (2026-08-30)
 
 Read-only assessment at `79ea90dde`; no merge performed, no PR opened.
