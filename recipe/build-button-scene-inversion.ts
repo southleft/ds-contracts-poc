@@ -5,6 +5,7 @@ import { gzipSync, gunzipSync } from "node:zlib";
 import {
   assignButtonSceneOwnership,
   buttonFontByOwnershipKey,
+  buttonPlanNamesByOwnershipKey,
   type ButtonFontResolution,
   compileButtonComponentRefMap,
   compileButtonTokenIdentityMap,
@@ -54,6 +55,7 @@ const readObserve = (
     compileButtonComponentRefMap(plan.compileRoot),
     buttonFontByOwnershipKey(plan.expectedScenePlan),
     fontResolutions,
+    buttonPlanNamesByOwnershipKey(plan.expectedScenePlan),
   );
 };
 

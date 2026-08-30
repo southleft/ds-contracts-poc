@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "1c43df0c3764b703a450bffc1caaee70d65748d3ed3cfb238f052e9c648b667b",
+    "sha256": "71f9edffb9c653349e23641224c10c1cf29022d25d138ed9ff55ed0287cd24fb",
     "ok": false,
     "roots": [
       {
@@ -51,17 +51,17 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 8701,
-        "silent": 5,
+        "matched": 8703,
+        "silent": 3,
         "missing": 0,
         "extra": 1,
-        "mismatched": 5,
+        "mismatched": 3,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
         "ok": false,
         "fixedPointStable": false,
-        "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
+        "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
         "channelDrift": [
           {
             "channel": "layout.mode",
@@ -71,18 +71,6 @@
           },
           {
             "channel": "layout.padding",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 1
-          },
-          {
-            "channel": "name",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 1
-          },
-          {
-            "channel": "role",
             "missing": 0,
             "extra": 0,
             "mismatched": 1
@@ -102,8 +90,6 @@
         ],
         "sampleFailures": [
           "extra root#width.value@0000",
-          "mismatched root#name@0000",
-          "mismatched root#role@0000",
           "mismatched root#layout.mode@0000",
           "mismatched root#layout.padding@0000",
           "mismatched root#width.mode@0000"
@@ -115,17 +101,17 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 8773,
-        "silent": 5,
+        "matched": 8775,
+        "silent": 3,
         "missing": 0,
         "extra": 1,
-        "mismatched": 5,
+        "mismatched": 3,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
         "ok": false,
         "fixedPointStable": false,
-        "fixedPointError": "button@1: missing required role button/set; found Button / button@1 proof",
+        "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
         "channelDrift": [
           {
             "channel": "layout.mode",
@@ -135,18 +121,6 @@
           },
           {
             "channel": "layout.padding",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 1
-          },
-          {
-            "channel": "name",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 1
-          },
-          {
-            "channel": "role",
             "missing": 0,
             "extra": 0,
             "mismatched": 1
@@ -166,8 +140,6 @@
         ],
         "sampleFailures": [
           "extra root#width.value@0000",
-          "mismatched root#name@0000",
-          "mismatched root#role@0000",
           "mismatched root#layout.mode@0000",
           "mismatched root#layout.padding@0000",
           "mismatched root#width.mode@0000"
@@ -181,6 +153,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "b39395c9a3ca205debfaedf6bfd50c08fba2867f31523205fc4cf8a257045b76"
+    "sha256": "a4d1d499afb935e8ab19365467c14df1b6c23c269bb9a1df508dd15edfe25021"
   }
 }

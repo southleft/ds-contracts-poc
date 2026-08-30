@@ -2,8 +2,8 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  buttonPlanNamesByOwnershipKey,
   buttonV4LiveTokenName,
-  canonicalizeButtonExpectedPlanNames,
   canonicalizeButtonObserveComponentRef,
   canonicalizeButtonObserveTokenName,
   compileButtonComponentRefMap,
@@ -11,7 +11,7 @@ import {
   compileButtonTokenIdentityMap,
   canonicalizeButtonVariantAxisOrder,
   dropButtonDuplicateMappedBindings,
-  firstSegmentButtonName,
+  recoverButtonV4RoleOnlyName,
   surfaceButtonUniformStrokeWeight,
   forbiddenObserveKeys,
   refuseHistoricalReadbackAsObserve,
@@ -245,40 +245,93 @@ test("observe role() takes the first :: segment before testing = and recovers bu
   assert.equal(sceneRoleFromName("plain"), undefined);
 });
 
-test("name compare takes the first :: segment and does not invent the set name", () => {
-  assert.equal(firstSegmentButtonName("button/label :: Label"), "button/label");
-  assert.equal(
-    firstSegmentButtonName("button/label :: Label :: font-provenance=%7B%7D"),
-    "button/label",
-  );
-  assert.equal(
-    firstSegmentButtonName("button/slot/trailing :: Trailing icon"),
-    "button/slot/trailing",
-  );
-  assert.equal(
-    firstSegmentButtonName("Button / button@1 proof"),
-    "Button / button@1 proof",
-  );
-  assert.equal(
-    firstSegmentButtonName("button/set :: Button / button@1 proof"),
-    "button/set",
-  );
+test("v4 role-only name recovery carries the compile name and never invents one", () => {
   const [altitude] = compileButtonExpectedScenePlans();
   assert.ok(altitude);
-  const names = canonicalizeButtonExpectedPlanNames(
-    altitude.expectedScenePlan,
-  ).facts.filter((fact) => fact.channel === "name");
-  assert.equal(
-    names.some((fact) => fact.value === "button/label"),
-    true,
+  const planNames = buttonPlanNamesByOwnershipKey(altitude.expectedScenePlan);
+  const rootEntry = planNames.get("root");
+  assert.equal(rootEntry?.name, "button/set :: Button / button@1 proof");
+  assert.equal(rootEntry?.role, "button/set");
+  // set: live name equals the label segment of the compile name -> recovered
+  assert.deepEqual(
+    recoverButtonV4RoleOnlyName(
+      {
+        ownershipKey: "root",
+        type: "COMPONENT_SET",
+        name: "Button / button@1 proof",
+        visible: true,
+        opacity: 1,
+        boundVariables: [],
+        width: 0,
+        height: 0,
+        children: [],
+      },
+      rootEntry,
+    ),
+    {
+      name: "button/set :: Button / button@1 proof",
+      semanticRole: "button/set",
+    },
   );
+  // a live set name that is NOT the compile label segment stays live
   assert.equal(
-    names.some((fact) => fact.value === "button/label :: Label"),
-    false,
+    recoverButtonV4RoleOnlyName(
+      {
+        ownershipKey: "root",
+        type: "COMPONENT_SET",
+        name: "Some Other Sheet",
+        visible: true,
+        opacity: 1,
+        boundVariables: [],
+        width: 0,
+        height: 0,
+        children: [],
+      },
+      rootEntry,
+    ),
+    undefined,
   );
-  const setName = names.find((fact) => fact.nodeOwnershipKey === "root");
-  assert.equal(setName?.value, "button/set");
-  assert.notEqual(setName?.value, "Button / button@1 proof");
+  // text: live role-only name recovers the compile role :: label name
+  const labelEntry = [...planNames.entries()].find(
+    ([, entry]) => entry.role === "button/label",
+  )?.[1];
+  assert.ok(labelEntry);
+  assert.deepEqual(
+    recoverButtonV4RoleOnlyName(
+      {
+        ownershipKey: "root/children/0/children/0",
+        type: "TEXT",
+        name: "button/label",
+        visible: true,
+        opacity: 1,
+        boundVariables: [],
+        width: 0,
+        height: 0,
+        children: [],
+      },
+      labelEntry,
+    ),
+    { name: labelEntry.name, semanticRole: "button/label" },
+  );
+  assert.ok(labelEntry.name.startsWith("button/label :: "));
+  // a live name that is neither the role nor the set label segment stays live
+  assert.equal(
+    recoverButtonV4RoleOnlyName(
+      {
+        ownershipKey: "root/children/0/children/0",
+        type: "TEXT",
+        name: "not-the-role",
+        visible: true,
+        opacity: 1,
+        boundVariables: [],
+        width: 0,
+        height: 0,
+        children: [],
+      },
+      labelEntry,
+    ),
+    undefined,
+  );
 });
 
 test("variantAxis order canonicalizes only when the value set matches compile", () => {

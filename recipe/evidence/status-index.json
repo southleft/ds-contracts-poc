@@ -29,39 +29,39 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "5acd8ad32efd954998d10d5a59887536a8c374c1b013ab01e3251b7f5da8eaeb",
+      "indexSha256": "5aacc79724e5f8d378359a2736325e2f7ee631c339d15fa0d1ee6d4a222df183",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "1c43df0c3764b703a450bffc1caaee70d65748d3ed3cfb238f052e9c648b667b",
+      "inversionSha256": "71f9edffb9c653349e23641224c10c1cf29022d25d138ed9ff55ed0287cd24fb",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "bdabbccb51df1dc265fb3aeebd4de893c800ee41f15d861a02f99a198d76caa4",
+      "receiptSha256": "a4d1d499afb935e8ab19365467c14df1b6c23c269bb9a1df508dd15edfe25021",
       "roots": {
         "altitude": {
           "setId": "85:7406",
           "expectedFacts": 8706,
-          "matched": 8701,
-          "silent": 5,
+          "matched": 8703,
+          "silent": 3,
           "missing": 0,
           "extra": 1,
-          "mismatched": 5,
+          "mismatched": 3,
           "fixedPointStable": false
         },
         "fluent": {
           "setId": "85:8054",
           "expectedFacts": 8778,
-          "matched": 8773,
-          "silent": 5,
+          "matched": 8775,
+          "silent": 3,
           "missing": 0,
           "extra": 1,
-          "mismatched": 5,
+          "mismatched": 3,
           "fixedPointStable": false
         }
       }
     },
     "blockers": [
       "no attributable human signoff",
-      "scene-derived inversion ran; silent is derived (Altitude 149/8706, Fluent 149/8778) and is not zero",
-      "scene-derived fixed point is not stable (live set name lacks compile role button/set)",
-      "stopped on fonts and invented set chrome; Roboto/SemiBold were not invented as compile fonts"
+      "scene-derived inversion ran; silent is derived (Altitude 3/8706, Fluent 3/8778) and is not zero",
+      "scene-derived fixed point is not stable (observed bindings keep Figma alphabetical order; compile carries semantic order)",
+      "remaining silent is the Input V64-V66 set-layout carry family: layout.mode, layout.padding, width.mode + the width.value extra"
     ],
     "supersededHistoricalArtifacts": [
       {
@@ -80,14 +80,18 @@
     "leftoverInversion": {
       "measuredAt": "2026-08-29",
       "silentBefore": 149,
-      "silentAfter": 5,
+      "silentAfter": 3,
       "extra": 1,
       "fontSubstrateClassClosed": true,
       "fontSubstrateFacts": 144,
       "altitudeResolution": "requested (IBM Plex Sans, first entry of its own stack)",
       "fluentResolution": "fallback (Roboto, 5th entry of the Segoe UI chain) — named, not equated",
-      "remainingClass": "one writer set-naming defect: live set name Button / button@1 proof lacks the button/set :: prefix; root name, role, layout.mode, layout.padding, width.mode and the extra width.value all descend from it",
-      "remainingRequiresFreshMint": true,
+      "remainingClass": "set chrome (Input V64-V66 carry family): compile vertical/hug/padding-0 vs live horizontal/fixed/padding-32; measured 2026-08-30 that the current writer (interpret.ts) still mints the live chrome, so a fresh mint would NOT close these channels",
+      "remainingRequiresFreshMint": false,
+      "nameClassClosed": {
+        "teaching": "B2j v4 role-only name recovery (Table v24 compile-carry label / v26 writer set-name class)",
+        "factsClosed": "root#name and root#role on both roots; names now compare in FULL on both sides, superseding the B2c first-segment compare"
+      },
       "figmaWrites": 0,
       "buttonPageUntouched": true,
       "remainingRequiresCodeChange": false,

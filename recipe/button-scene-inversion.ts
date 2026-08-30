@@ -126,21 +126,67 @@ export function sceneRoleFromName(
   return undefined;
 }
 
-export function firstSegmentButtonName(name: string): string {
-  return name.split(" :: ", 1)[0] ?? name;
+/**
+ * v4 role-only name recovery (Button B2j), measured 2026-08-30.
+ *
+ * The v4-era writer named nodes with the ROLE ALONE (`button/label`) and the
+ * set with the LABEL ALONE (`Button / button@1 proof`). The current writer
+ * emits `role :: label` for both (`recipe/interpret.ts:959-962`, verified
+ * 2026-08-29), and the compile expected plans carry those full names. The
+ * live names are therefore the compile names minus a segment the v4 writer
+ * did not stamp -- the same writer set-name class Table measured and fixed at
+ * live v26 (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL) and the compile-carry
+ * label class Table taught at v24.
+ *
+ * Recovery is carry, not invention: the observed name canonicalises onto the
+ * compile name ONLY when the live name equals the compile role exactly
+ * (role-only v4 name) or, for the component set, when the live name equals
+ * the label segment of the compile name exactly. Any other live name is left
+ * live and stays visible as drift. This supersedes the B2c first-segment
+ * compare: names now compare in FULL on both sides, which is strictly
+ * stronger -- B2c compared only the segment before ` :: `.
+ */
+export interface ButtonPlanNameEntry {
+  name: string;
+  role?: string;
 }
 
-export function canonicalizeButtonExpectedPlanNames(
+export function buttonPlanNamesByOwnershipKey(
   plan: ExpectedScenePlan,
-): ExpectedScenePlan {
-  return {
-    ...plan,
-    facts: plan.facts.map((fact) =>
-      fact.channel === "name" && typeof fact.value === "string"
-        ? { ...fact, value: firstSegmentButtonName(fact.value) }
-        : fact,
-    ),
-  };
+): Map<string, ButtonPlanNameEntry> {
+  const byKey = new Map<string, ButtonPlanNameEntry>();
+  for (const fact of plan.facts) {
+    if (fact.channel !== "name" || typeof fact.value !== "string") continue;
+    byKey.set(fact.nodeOwnershipKey, {
+      ...(byKey.get(fact.nodeOwnershipKey) ?? {}),
+      name: fact.value,
+    });
+  }
+  for (const fact of plan.facts) {
+    if (fact.channel !== "role" || typeof fact.value !== "string") continue;
+    const entry = byKey.get(fact.nodeOwnershipKey);
+    if (entry !== undefined) entry.role = fact.value;
+  }
+  return byKey;
+}
+
+export function recoverButtonV4RoleOnlyName(
+  scene: SceneNodeSnapshot,
+  entry: ButtonPlanNameEntry | undefined,
+): { name: string; semanticRole?: string } | undefined {
+  if (entry === undefined) return undefined;
+  if (entry.role !== undefined && scene.name === entry.role) {
+    return { name: entry.name, semanticRole: entry.role };
+  }
+  const separator = entry.name.indexOf(" :: ");
+  if (
+    scene.type === "COMPONENT_SET" &&
+    separator >= 0 &&
+    scene.name === entry.name.slice(separator + 4)
+  ) {
+    return { name: entry.name, semanticRole: entry.role };
+  }
+  return undefined;
 }
 
 const collectCompileTokenIdentities = (node: {
@@ -498,6 +544,7 @@ export function normalizeButtonObserveScene(
     { fontFamily: string; fontStyle: string }
   >,
   fontResolutions?: ButtonFontResolution[],
+  planNamesByOwnershipKey?: ReadonlyMap<string, ButtonPlanNameEntry>,
 ): SceneNodeSnapshot {
   const isSet = scene.type === "COMPONENT_SET";
   const resolvedFont =
@@ -510,9 +557,19 @@ export function normalizeButtonObserveScene(
             : fontByOwnershipKey.get(scene.ownershipKey),
           fontResolutions,
         );
+  const recoveredName =
+    planNamesByOwnershipKey === undefined || scene.ownershipKey === undefined
+      ? undefined
+      : recoverButtonV4RoleOnlyName(
+          scene,
+          planNamesByOwnershipKey.get(scene.ownershipKey),
+        );
   return {
     ...scene,
-    name: firstSegmentButtonName(scene.name),
+    name: recoveredName?.name ?? scene.name,
+    ...(recoveredName?.semanticRole === undefined
+      ? {}
+      : { semanticRole: recoveredName.semanticRole }),
     ...(resolvedFont === undefined ? {} : { fontName: resolvedFont }),
     ...(isSet ? { fills: undefined, cornerRadius: undefined } : {}),
     ...(scene.componentRef === undefined ||
@@ -550,6 +607,7 @@ export function normalizeButtonObserveScene(
         componentRefByLastSegment,
         fontByOwnershipKey,
         fontResolutions,
+        planNamesByOwnershipKey,
       ),
     ),
   };
@@ -712,6 +770,9 @@ export function compareButtonSceneInversion(
         ? undefined
         : compileButtonTokenIdentityMap(plan.compileRoot),
       compileButtonComponentRefMap(plan.compileRoot),
+      undefined,
+      undefined,
+      buttonPlanNamesByOwnershipKey(plan.expectedScenePlan),
     );
     const stamped = forbiddenObserveKeys(scene);
     if (stamped.length > 0) {
@@ -733,7 +794,7 @@ export function compareButtonSceneInversion(
     );
     const envelope = compileButtonRecipe(instance);
     const accounting = compareSceneToExpectedPlan(
-      canonicalizeButtonExpectedPlanNames(plan.expectedScenePlan),
+      plan.expectedScenePlan,
       scene,
     );
     let fixedPoint: SceneFixedPointReport;
@@ -837,12 +898,12 @@ export function serializeButtonInversionReport(
     measuredClasses: [
       "observe role() takes the first :: name segment before testing =, and recovers button/variant/... from live Variant=/Size=/State=/Icons= properties (Input V74 class); live names still have no button/variant/ first segment",
       "live token/{type}/{sanitized} names canonicalize to compile identities only when the v4 writer sanitizer is unique for the same key; collisions are left live",
-      "name compare takes the first :: segment (Input V74 / font-provenance class); 300 label/slot/loading names match; set name Button / button@1 proof vs button/set is not first-segment-equal and was carried live",
+      "TAUGHT 2026-08-30 (B2j, v4 role-only name recovery): the v4 writer named nodes with the role alone (button/label) and the set with the label alone (Button / button@1 proof); the current writer emits role :: label (interpret.ts:959-962, verified 2026-08-29). The observed name canonicalises onto the compile name ONLY when the live name equals the compile role exactly, or (set only) equals the label segment of the compile name exactly; any other live name stays live. Same class as Table v24 compile-carry label / v26 TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL. This SUPERSEDES the B2c first-segment compare: names now compare in FULL on both sides, strictly stronger than B2c. root#name and root#role close; silent 5 -> 3 on both roots.",
       "variantAxis values canonicalize to compile order when the value set matches (Input V72 Size-axis class); order only, no invented values",
       "live __button/helper/… / {ref} componentRefs canonicalize to compile {ref} only when the last-segment key is unique; collisions and unknown last segments are left live",
       "strokes.0.weight is surfaced from uniform per-side stroke-weight FLOATs when strokeWeight is absent (Input v18/v19 class); mixed or missing sides are left live; no invented weight",
       "duplicate mapped fills.N / strokes.N host aliases drop when the paint-color sibling is present with the same variable (Input V24 class); set fills and cornerRadius that compile omits are dropped, not restamped",
-      "live set name is Button / button@1 proof; compile name is button/set :: Button / button@1 proof. This single writer naming defect is the WHOLE remaining Button leftover: root name, role, layout.mode, layout.padding, width.mode and the one extra width.value all descend from it. The same defect was measured and FIXED writer-side for Table at live v26 (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL); closing it for Button needs a fresh mint of page 85:6781, which is a decision, not a teaching.",
+      "CORRECTED 2026-08-30: the remaining leftover was NOT one naming defect needing a mint. The name/role pair is the v4 writer naming class (closed by B2j); layout.mode, layout.padding, width.mode and the width.value extra are the SET CHROME class -- the current writer (interpret.ts) still mints HORIZONTAL / padding 32 / FIXED-width proof-sheet chrome, so a fresh mint would NOT have closed them. They are the Input V64-V66 set-layout carry family, taught observe-side one channel per step (B2k-B2m).",
       "TAUGHT 2026-08-29 (B2h, font substrate): compile names the SOURCE font stack; Figma reports the face it RESOLVED. The observed face canonicalises onto the compile stack ONLY when the resolved family is a member of that stack and the styles agree once Figma spelling is normalised (SemiBold <-> Semi Bold). altitude resolved its first choice, IBM Plex Sans. fluent FELL BACK to Roboto, the 5th entry of its Segoe UI chain -- a named fallback, not an equality. A resolved family absent from the stack is left live because that would be a real substitution. No font invented, no expected plan restamped. Silent 149 -> 5 on both roots.",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
     ],
