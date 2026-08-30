@@ -1,0 +1,109 @@
+{
+  "purpose": "Make Button page 85:6781 reviewable for TJ's B3 attributable signoff. The two component sets rendered as ~19,000px-wide single-row slivers; each was arranged into a labeled 6x24 grid. Arrangement and presentation wrappers only; no variant internals modified. B3 grade is TJ's, not granted here.",
+  "date": "2026-08-30",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "pageId": "85:6781",
+  "pageName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+  "reviewUrl": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=85-6781",
+  "checkpoints": {
+    "preArrange": {
+      "name": "pre-B3 Button arrange",
+      "versionId": "2393601750629251593"
+    },
+    "postArrange": {
+      "name": "Button arranged for B3",
+      "versionId": "2393582311634703734"
+    }
+  },
+  "gateSafetyVerdict": {
+    "reObservesLiveScene": false,
+    "detail": "recipe:button:check runs build-button-scene-inversion.ts --check plus recipe/recipes/button tests; all reads are readFileSync/gunzipSync of committed files under recipe/evidence/button-scene-inversion-v1 (observe-altitude.json.gz, observe-fluent.json.gz, inversion.json, census.json, receipt.json). recipe:button-live-v4:check runs recipe/pivot-status.ts, which validates committed evidence JSON only. No fetch/http/MCP/live-scene read exists in either gate path, so arranging the live scene cannot change any gate input byte."
+  },
+  "arrangement": {
+    "tool": "figma_arrange_component_set (figma-console-mcp, precedent: Combobox/Table/Calendar arrangements)",
+    "options": { "columnProperty": "State", "gap": 32, "cellPadding": 24 },
+    "grid": {
+      "columns": [
+        "default",
+        "hover",
+        "pressed",
+        "focus-visible",
+        "disabled",
+        "loading"
+      ],
+      "rowAxes": ["Variant", "Size", "Icons"],
+      "rows": 24,
+      "variantsPerSet": 144
+    },
+    "sequence": [
+      "Arranged Altitude set 85:7406 -> container 181:66141; renamed 'Component Container' to 'Button Altitude Grid' immediately; verified Fluent set (144 children) and all sibling pages before proceeding",
+      "Arranged Fluent set 85:8054 -> container 181:66232; renamed 'Component Container' to 'Button Fluent Grid' immediately; verified Altitude grid, both sets (144 children each), and all sibling pages",
+      "No page-level frame named 'Component Container' existed before either call and none remains; arrange calls were never stacked on an unrenamed container"
+    ],
+    "renamed": {
+      "181:66141": "Button Altitude Grid",
+      "181:66232": "Button Fluent Grid"
+    },
+    "moved": [
+      "Button Altitude Grid 181:66141 placed at (0, 2000)",
+      "Button Fluent Grid 181:66232 placed at (1600, 2000)",
+      "Emptied presentation sections 85:6782 (Altitude) and 85:7407 (Fluent) resized from ~19,352x312 slivers to 232x120 hugging their __Recipe helpers frames; 85:7407 repositioned to (280, 0). Both sections carry no ownership plugin data; their ids (referenced by raster-calibration-v1 receipt) are preserved; the __Recipe helpers frames inside were not touched",
+      "Sections 85:8089 (Live proof) and 85:8090 (Paired cells) untouched"
+    ],
+    "legibility": "V50 lesson applied via the arrange tool's white presentation container (fill on tool-created wrapper frames 181:66141/181:66232 only, never on writer-owned nodes); light-token Fluent secondary buttons read clearly on the white background"
+  },
+  "ownedNodeHonesty": {
+    "variantInternalsUntouched": "Sample-verified live after arrange: variant width/height match committed observe facts (Altitude 83x40, Fluent 96x32), variant layoutMode still HORIZONTAL, fills still variable-bound and unmodified, child counts intact; no fills/strokes/text/layout of any variant were changed",
+    "variantXYMoved": "Arrange repositions each of the 144 variants inside its set container. x/y is NOT in the committed fact set: sceneToNormalizedIr records offset only when layoutPositioning === 'ABSOLUTE', and post-arrange variants report layoutPositioning 'AUTO'; the committed observe snapshots contain no x/y on any node. A re-observe would not diff on position.",
+    "setLevelFactsPerturbed": {
+      "note": "Honest finding: three set-level facts in the committed observe snapshots WERE changed on the live scene by the grid arrangement. No gate re-observes, so no gate input changed and all gates remain green from committed evidence. A future re-observe of the live page would diff on these facts.",
+      "85:7406": {
+        "layoutMode": { "committed": "HORIZONTAL", "liveAfterArrange": "NONE" },
+        "width": { "committed": 19192, "liveAfterArrange": 1138 },
+        "height": { "committed": 104, "liveAfterArrange": 2320 },
+        "unchanged": { "itemSpacing": 24, "padding": [32, 32, 32, 32] }
+      },
+      "85:8054": {
+        "layoutMode": { "committed": "HORIZONTAL", "liveAfterArrange": "NONE" },
+        "width": { "committed": 17648, "liveAfterArrange": 1180 },
+        "height": { "committed": 106, "liveAfterArrange": 2368 },
+        "unchanged": { "itemSpacing": 24, "padding": [32, 32, 32, 32] }
+      },
+      "parentChange": "Both sets were reparented from their presentation SECTION into the tool's 'Component Set Wrapper' inside the renamed grid frames; parentage is not a committed fact (snapshot roots are the sets themselves)"
+    },
+    "restorePath": "Version checkpoint 'pre-B3 Button arrange' (2393601750629251593) restores the byte-identical pre-arrange scene if the inversion state must be re-observed"
+  },
+  "siblingPagesVerifiedAfterEveryArrangeCall": {
+    "input": "115:295378 present",
+    "combobox": "163:35981 present",
+    "table": "173:48924 present",
+    "calendarV50": "181:64873 present",
+    "olderCalendarPages": [
+      "173:53929",
+      "179:54747",
+      "180:55345",
+      "180:55528",
+      "180:56126"
+    ]
+  },
+  "screenshotVerdict": {
+    "reviewable": true,
+    "detail": "Whole page plus each grid screenshotted post-arrange. Both grids show all 144 variants distinctly on white with row labels (Variant/Size/Icons) and column headers (State): Altitude secondary tan vs primary blue, Fluent outline secondary vs filled primary; hover/pressed tone shifts, focus-visible rings, disabled dimming, and loading spinners are all visibly distinct and labels legible. No collisions at gap 32 / cellPadding 24."
+  },
+  "gatesAfterArrange": {
+    "recipe:button:check": {
+      "exitCode": 0,
+      "suites": [
+        { "tests": 20, "pass": 20, "fail": 0 },
+        { "tests": 19, "pass": 19, "fail": 0 }
+      ],
+      "includes": "build-button-scene-inversion.ts --check passed"
+    },
+    "recipe:button-live-v4:check": {
+      "exitCode": 0,
+      "detail": "pivot-status.ts validated committed evidence; status narrative printed with Button B3 signoff pending"
+    }
+  },
+  "figmaWrites": "This arrange pass intentionally wrote to the live scene (arrangement + presentation only) after the B-series closed with 0 writes; the pre-arrange checkpoint preserves the verified byte-identical state",
+  "b3Grade": "not granted here; pending TJ"
+}
