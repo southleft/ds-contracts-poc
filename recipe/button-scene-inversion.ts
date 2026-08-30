@@ -1408,10 +1408,14 @@ export function validateButtonStatusPlant(
   const failures = validateButtonSceneInversionEvidence(inversion);
   if (button.overallSuccess !== false)
     failures.push("Button overallSuccess must stay false");
-  if (button.status !== "pending")
-    failures.push("Button status must stay pending");
+  if (button.status !== "b3-v5-live-human-grade-passed")
+    failures.push(
+      "Button status must record the B3 v5 live human grade pass",
+    );
   if (button.humanSignoff !== "pending")
-    failures.push("Button humanSignoff must stay pending");
+    failures.push(
+      "Button RECORD-time humanSignoff must stay pending (the attributable grade lives in liveHumanGrade; 6d58f4c2b is not restamped)",
+    );
   const plant = button.sceneDerivedInversion;
   if (plant?.method !== "expected-plan-vs-observe")
     failures.push("Button inversion method must be expected-plan-vs-observe");
@@ -1455,9 +1459,14 @@ export function validateButtonStatusPlant(
     failures.push("Button inversion artifact hash plant does not match disk");
   if (
     !Array.isArray(button.blockers) ||
-    !button.blockers.includes("no attributable human signoff")
+    button.blockers.includes("no attributable human signoff") ||
+    !button.blockers.includes(
+      "B3 attributable human signoff PASSED 2026-08-30 (TJ Pitre; full pass; recipe/evidence/button-live-v5-human-signoff.json); no Button-archetype blocker remains",
+    )
   )
-    failures.push("Button blockers must keep no attributable human signoff");
+    failures.push(
+      "Button blockers must record the B3 signoff pass and drop the resolved no-signoff blocker",
+    );
   if (index.overallButtonSuccess !== false || index.humanSignoff !== "pending")
     failures.push(
       "Button inversion index must stay overall false / signoff pending",

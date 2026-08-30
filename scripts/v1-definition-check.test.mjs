@@ -49,7 +49,7 @@ function expectFailure(markdown, pattern) {
 }
 
 test('the real v1 definition is a valid baseline', () => {
-  assert.equal(parseRequirementTables(BASELINE).length, 22);
+  assert.equal(parseRequirementTables(BASELINE).length, 23);
   assert.equal(parsePostV1Entries(BASELINE).length, 5);
   assert.deepEqual(validateV1Definition(BASELINE, CONTEXT), []);
 });

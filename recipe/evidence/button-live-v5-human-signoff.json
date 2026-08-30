@@ -1,0 +1,105 @@
+{
+  "artifactVersion": "button-live-v5-human-signoff-v1",
+  "grade": "passed",
+  "gradeKind": "B3 full pass",
+  "reviewedAt": "2026-08-30T15:56:00-05:00",
+  "reviewer": {
+    "name": "TJ Pitre",
+    "role": "owner",
+    "independentOfAgent": true
+  },
+  "verbatim": "Okay, yes, this is accurate and passes. You have my full permission to move forward.",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "183:69150",
+    "pageName": "Recipe Pivot / Button / 6857935c-b04f4059-v4",
+    "reviewUrl": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=183-69150",
+    "sets": [
+      {
+        "id": "183:69776",
+        "name": "button/set :: Button / button@1 proof",
+        "adapter": "altitude-button-reviewed-v2"
+      },
+      {
+        "id": "183:70424",
+        "name": "button/set :: Button / button@1 proof",
+        "adapter": "fluent-button-reviewed-v2"
+      }
+    ],
+    "runIdentity": "6857935c-b04f4059-v4",
+    "recordCommit": "6d58f4c2bc63304d47f5d7a4b101c42587b2c6d8",
+    "arrangement": "recipe/evidence/button-b3a-arrange-pass.json"
+  },
+  "whatWasReviewed": {
+    "bothSets": true,
+    "sceneInversion": {
+      "version": "button-scene-inversion-v2",
+      "evidenceRoot": "recipe/evidence/button-scene-inversion-v2",
+      "altitude": {
+        "expectedFacts": 8730,
+        "matched": 8730,
+        "silent": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0
+      },
+      "fluent": {
+        "expectedFacts": 8778,
+        "matched": 8778,
+        "silent": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0
+      },
+      "fixedPointTwoCycleByteStable": true,
+      "derivedNotAssigned": true
+    },
+    "focusRingCorrection": {
+      "story": "TJ's first B3 round flagged the Altitude focus states against Altitude's own Figma. The three-way diagnosis (recipe/evidence/altitude-focus-ring-diagnosis/receipt.json) proved the v4-era mint ring literal #000b29 was an invented fact from a mid-transition capture artifact (al-button's shadow-DOM transition frozen roughly a quarter of the way from currentColor to its settled value), while the captured contract token and Altitude's own Figma agree on a 2px #4375ff ring at 2px offset. The B3a teaching carries imported.button.root.outline-color-state-focus-visible into the fixture; the v5 remint renders the carried token.",
+      "carriedToken": "imported.button.root.outline-color-state-focus-visible",
+      "settledRing": "2 CSS px #4375ff at a 2 CSS px page-background offset",
+      "diagnosisPath": "recipe/evidence/altitude-focus-ring-diagnosis/receipt.json"
+    },
+    "offsetGapNote": {
+      "presented": "the 2px offset gap is rendered as a page-background shadow listed AFTER the ring in the effect list (Figma paints later entries on top), matching the settled code render and Altitude's own Figma",
+      "acceptance": "implicit — TJ's verbatim 'this is accurate' covers the presented rendering; recorded as an implicit acceptance, not restated as a separate quote"
+    }
+  },
+  "implications": {
+    "buttonLiveHumanGrade": "passed",
+    "allFiveArchetypesHumanSigned": true,
+    "priorSignoffs": [
+      "recipe/evidence/input-field-live-v85-human-signoff.json",
+      "recipe/evidence/combobox-live-v41-human-signoff.json",
+      "recipe/evidence/table-live-v32-human-signoff.json",
+      "recipe/evidence/calendar-live-v50-human-signoff.json"
+    ],
+    "productV1CompleteAtReviewTime": false,
+    "remainingAtReviewTime": [
+      "docs/26 <-> docs/32 E4 reconciliation (applied in the same change set that records this grade)",
+      "fast/full CI lane measurement at the merge head (docs/32 F-checklist row F6)",
+      "post-merge named work: Combobox fixture-chrome remint from MUI/AntD-named overlay chrome (TJ decision), signed cleanup of older Calendar Scratch pages, npm publish deferred"
+    ],
+    "authorizedNextSteps": "TJ authorized executing the recorded merge checklist (recipe/evidence/merge-readiness-v1.json) to its endpoint. Endpoint amended 2026-08-30 by TJ, verbatim: 'No need for a PR URL. We're the only ones working on this. You can just merge.' The merge to main is therefore a direct owner-authorized --no-ff merge, not a PR."
+  },
+  "recordTimeArtifactsUnchanged": {
+    "paths": [
+      "recipe/evidence/button-scene-inversion-v2/index.json",
+      "recipe/evidence/button-scene-inversion-v2/inversion.json",
+      "recipe/evidence/button-live-pivot-v5/live-verification.json"
+    ],
+    "humanSignoff": "pending",
+    "overallButtonSuccess": false,
+    "note": "RECORD 6d58f4c2b is not restamped. The v2 inversion index/inversion keep their RECORD-time humanSignoff: pending and overallButtonSuccess: false. This file is the later attributable human grade — the same pattern as Input V85, Combobox V41, Table V32, and Calendar V50."
+  },
+  "doNotOverwritePages": {
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "calendar": "181:64873",
+    "buttonV5": "183:69150",
+    "buttonHistoricalV4": "85:6781"
+  },
+  "doNotRestampHashedRecords": true
+}

@@ -1,6 +1,6 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
-> **Current correction status (2026-08-30 ~13:00 UTC-5; supersedes status
+> **Current correction status (2026-08-30 ~16:10 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page
 > `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
@@ -33,8 +33,21 @@
 > doctrine: future Astryx work compiles from the actual vendored Astryx
 > component source (`Calendar.tsx` + `astryx.css` tokens, or the real
 > component for other archetypes) — never a reduced fixture overlay (the
-> V30→V50 lesson). Remaining: Button leftover inversion (in progress
-> separately). Table live v1 PREPARE `f42aaa461` and AUTHORIZE `fd3d20e98`
+> V30→V50 lesson). Button live human grade **passed** (B3 full pass,
+> 2026-08-30 ~15:56 UTC-5). TJ Pitre reviewed the B3a v5 remint page
+> `183:69150` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `183:69776`
+> Altitude, `183:70424` Fluent; runIdentity `6857935c-b04f4059-v4`) after
+> the focus-ring correction (capture-transition defect → carried token
+> `#4375ff`) and said "Okay, yes, this is accurate and passes. You have my
+> full permission to move forward." Verbatim quote and implications are in
+> `recipe/evidence/button-live-v5-human-signoff.json`. RECORD `6d58f4c2b`
+> is not restamped. **All five archetypes now carry attributable human
+> grades.** TJ amended the merge endpoint 2026-08-30: direct owner-
+> authorized merge to main, not a PR ("No need for a PR URL. We're the only
+> ones working on this. You can just merge."). Remaining before the merge:
+> the F6 fast/full lane measurement at the merge head and the v1-completion
+> record. Historical narrative: Table live v1 PREPARE `f42aaa461` and
+> AUTHORIZE `fd3d20e98`
 > landed. Attempt 1 failed closed at writer
 > `TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold` (recipe requested Inter
 > `SemiBold`; Scratch lists Inter `Semi Bold`). Failure-path cleanup
@@ -1817,7 +1830,7 @@ One teaching per PREPARE. V75 is class B only.
 | B2o | One teaching: live-empty chrome omit. Live instance slots report `fills: []` and the live set reports `strokes: []` / `effects: []` where compile omits the key — Figma reporting absence, not a drawn fact. Empty-only and type-gated (a non-empty live paint stays visible). Input `omitSetFills`/`omitSetEffects`; Calendar V44–V47 empty-omit family. 0-write re-measure. | **Held, measured 2026-08-30.** Accounting unchanged (0/0/0 both roots — empty arrays emit no facts). Fixed point still refuses at `$.children[1].children[0].bindings` — the compile-empty `bindings: []` representation on instance slots (B2p), which sorts before fills in the diff walk. |
 | B2p | One teaching: instance compile-empty `bindings: []` representation. Compile carries `bindings: []` explicitly on instance slots; the scene-derived IR omits the empty key; the fixed-point diff was refusing the spelling, not a fact. The scene-derived envelope canonicalises onto compile's spelling before collapse (hash recomputed over the same facts). Representation-empties family, opposite direction from B2o. 0-write re-measure. | **Held, measured 2026-08-30.** Plain collapse refuses the omitted spelling; the scene-derived collapse round-trips to the byte-identical compile IR (tested). Fixed point advances to its LAST refusal: `$.variantAxes[0].name` — the axis LIST is Figma-alphabetical (Icons/Size/State/Variant) vs compile `Variant/Size/State/Icons` (Input V72 order class, B2q). |
 | B2q | One teaching: variant-axis LIST order (Input V72 class, applied to the axis list; values inside each axis were canonicalised at B2e). Figma returns `variantGroupProperties` keys alphabetically; compile carries `Variant/Size/State/Icons`. Key order reorders onto compile ONLY when the axis-name sets are equal. 0-write re-measure. | **Held, measured 2026-08-30 — THE INVERSION IS CLOSED.** Both roots: Altitude 8706/8706 and Fluent 8778/8778 matched, **0 silent / 0 missing / 0 extra / 0 mismatched**, and the collapse↔compile **fixed point is two-cycle byte-stable**. Derived, not assigned; historical readback stays refused as observe; `figmaWrites: 0` across the whole B-series; page `85:6781` and its technical mint untouched; expected plans and observes byte-identical since committed. Per-class ledger of the 149+1: 144 fonts (B2h), 2 name/role (B2j), 1 layout.mode (B2k), 1 layout.padding (B2l), 1 width.mode + the 1 extra width.value (B2m); fixed-point-only classes: bind order (B2n), representation empties (B2o/B2p), axis-list order (B2q). Every teaching same-class with a measured Input/Table/Calendar precedent; nothing invented, nothing restamped. |
-| B3 | Attributable human signoff on Button. | **Human gate, NOW UNBLOCKED** — the inversion is honestly closed, so Button is ready for TJ's B3 attributable signoff on page `85:6781` (sets `85:7406`, `85:8054`). Overall Button stays **false** until signed. |
+| B3 | Attributable human signoff on Button. | **PASSED (full pass) 2026-08-30 ~15:56 UTC-5** on the B3a v5 remint page `183:69150` (sets `183:69776` Altitude, `183:70424` Fluent) — TJ's first B3 round flagged the Altitude focus states, the three-way diagnosis named the capture-transition defect, B3a carried the token, and the v5 remint plus inversion v2 (0/0/0/0 both roots) earned the pass. Verbatim quote and implications: `recipe/evidence/button-live-v5-human-signoff.json`. RECORD `6d58f4c2b` is not restamped; the archetype-level `overallSuccess` flips only in the v1-completion record. |
 
 ### C · Combobox
 
@@ -1928,6 +1941,26 @@ named in docs/26 at all — it is covered by the "never-attempted or absent"
 catch-all and by the post-v1 limitations register entry naming date pickers, and
 both stay accurate while its live mint is a named refusal.
 
+#### E4 APPLIED (2026-08-30)
+
+The `V1-CLASS-03` row was added to docs/26 exactly as drafted above, additively
+(`V1-CLASS-01` and `V1-CLASS-02` text untouched), together with the matching
+pinned-ID update in `scripts/v1-definition-check.mjs`. The qualification table,
+re-measured 2026-08-30 after the Button B3 full pass:
+
+| archetype | (a) offline gate | (b) mint stayed | (c) human grade | (d) `overallSuccess` |
+| --- | --- | --- | --- | --- |
+| Button | green | **yes**, `183:69150` (v5 remint) | **passed** (B3 full pass) | flips in the v1-completion record |
+| Input / Field | green | **yes**, `115:295378` | **passed** | flips in the v1-completion record |
+| Combobox | green | **yes**, `163:35981` | **passed** | flips in the v1-completion record |
+| Data Table | green | **yes**, `173:48924` (v32) | **passed** | already true (v32 record) |
+| Calendar | green | **yes**, `181:64873` (v50) | **passed** | flips in the v1-completion record |
+
+All five satisfy (a), (b) and (c). Flipping (d) is the owner call this
+proposal named; TJ's B3 authorization ("You have my full permission to move
+forward") plus his direct-merge amendment execute it. The flip lands in the
+v1-completion record together with the F6 lane measurement — see the merge
+execution section — never before the lanes are measured.
 
 ### F · v1 binary checklist
 
@@ -1942,7 +1975,7 @@ v1 is complete only when every row is actually true:
 
 ### Human-only work (do not block the rest)
 
-- Attributable human signoff on Input V85 **passed** (2026-08-28, TJ Pitre, page `115:295378`). Combobox v41 live human grade **passed** (2026-08-29, TJ Pitre, page `163:35981`). Table v32 live human grade **passed** (2026-08-29, TJ Pitre, page `173:48924`). Calendar v50 live human grade **passed** (2026-08-30, TJ Pitre, page `181:64873`). Button remains pending.
+- Attributable human signoff on Input V85 **passed** (2026-08-28, TJ Pitre, page `115:295378`). Combobox v41 live human grade **passed** (2026-08-29, TJ Pitre, page `163:35981`). Table v32 live human grade **passed** (2026-08-29, TJ Pitre, page `173:48924`). Calendar v50 live human grade **passed** (2026-08-30, TJ Pitre, page `181:64873`). Button B3 **passed in full** (2026-08-30, TJ Pitre, v5 remint page `183:69150`; `recipe/evidence/button-live-v5-human-signoff.json`). All five archetypes carry attributable human grades.
 - Old PAT still cannot be revoked (other apps). Keep the replacement PAT and residual-risk acceptance (`oldTokenRevoked=false`, `ownerRiskAcceptance=true`).
 - Recipe acquisition review for Data Table / Calendar adapters before live if a human-authored adapter is required.
 - Final designer recognisability grades; AI raters are retired for architecture progression.
@@ -2067,6 +2100,48 @@ cell default, nav chrome, 28×28 circular day button, root `--spacing-3`
 full pass. TJ 2026-08-30: "If we do any more Astryx work, let's make sure
 that we're working off of the actual Astryx project and not whatever you
 were using before."
+
+### Button live v5 human signoff — B3 full pass (2026-08-30 ~15:56 UTC-5)
+
+After the focus-ring correction and the v5 remint (the B3a section above),
+TJ Pitre reviewed the v5 page `183:69150` on Scratch `byMp6lt0Ij9b2QbkDGFwBh`
+(sets `183:69776` Altitude / `183:70424` Fluent; runIdentity
+`6857935c-b04f4059-v4`; RECORD commit `6d58f4c2b`) and gave Button its
+**B3 full pass**:
+
+> Okay, yes, this is accurate and passes. You have my full permission to
+> move forward.
+
+What the pass covers, and what it closes:
+
+- **Both sets**, arranged per `recipe/evidence/button-b3a-arrange-pass.json`.
+- **The focus-ring correction story end to end**: his first B3 round
+  flagged the Altitude focus states against Altitude's own Figma; the
+  three-way diagnosis proved the v4-era ring literal `#000b29` was an
+  invented fact from a mid-transition capture artifact; the B3a teaching
+  carries `imported.button.root.outline-color-state-focus-visible`
+  (settled `#4375ff`), and the v5 remint renders the carried token.
+- **The 2px offset-gap note** (page-background shadow listed after the
+  ring so Figma paints the gap) was presented in the review packet; his
+  "this is accurate" is an **implicit acceptance** of that rendering,
+  recorded as such in the evidence file rather than restated as a quote.
+- **Inversion v2** on the reviewed page: 0 silent / 0 missing / 0 extra /
+  0 mismatched on both roots (Altitude `8730/8730`, Fluent `8778/8778`),
+  collapse-compile fixed point two-cycle byte-stable, derived not assigned.
+
+Evidence: `recipe/evidence/button-live-v5-human-signoff.json` (pinned by
+`recipe:pivot-status:check`). RECORD `6d58f4c2b` and the v2 inversion
+index/inversion keep their RECORD-time `humanSignoff: pending` /
+`overallButtonSuccess: false` bytes — the same later-attributable-grade
+pattern as Input V85 / Combobox V41 / Table V32 / Calendar V50. The
+archetype-level `overallSuccess` flips only in the v1-completion record.
+**All five archetypes now carry attributable human grades.** TJ authorized
+executing the recorded merge checklist to its endpoint and amended the
+endpoint the same day: a direct owner-authorized merge to main, not a PR
+("No need for a PR URL. We're the only ones working on this. You can just
+merge."). Do not overwrite Input `115:295378`, Combobox `163:35981`,
+Table `173:48924`, Calendar `181:64873`, Button v5 `183:69150`, or the
+preserved historical Button page `85:6781`.
 
 ### Source-fidelity audit of the passed archetypes (2026-08-30)
 
