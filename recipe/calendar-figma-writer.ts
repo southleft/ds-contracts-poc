@@ -27,6 +27,11 @@
  *     FIXED 32px box ran after children. Hug text also records its intrinsic
  *     size before a 0-width parent can collapse it.
  *
+ *  4. LOAD THE INSTANCE FONT BEFORE setProperties. Calendar live v2 refused
+ *     because `createInstance` then `setProperties(Label)` ran without loading
+ *     the instance TEXT font; Figma will not update a TEXT property whose
+ *     component font is not loaded in the plugin sandbox.
+ *
  * No live write happens here. This module builds a program string; executing it
  * requires a separate PREPARE / AUTHORIZE / attempt lineage.
  */
@@ -46,8 +51,9 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v2";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v3";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
+export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -353,6 +359,7 @@ if(NS==="ds.contracts.input.recipe.v5"||PLAN.runIdentity==="4a074b24-e8503dd5-in
 if(NS==="ds.contracts.combobox.recipe.v1"||PLAN.runIdentity==="70c24cbd-d27f2e85-combobox-v1")throw new Error("CALENDAR-COMBOBOX-IDENTITY-REUSE");
 if(NS==="ds.contracts.table.recipe.v1")throw new Error("CALENDAR-TABLE-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v1")throw new Error("CALENDAR-V1-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v2")throw new Error("CALENDAR-V2-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -517,6 +524,10 @@ for(const source of PLAN.sources){
       const property=propertyKey(node,"Label");
       if(!property)throw new Error("CALENDAR-DAY-PROPERTY-ABSENT:Label");
       if(typeof ir.properties.Label!=="string")throw new Error("CALENDAR-DAY-SOURCE-ABSENT:Label");
+      void "CALENDAR-WRITER-LOAD-INSTANCE-FONT-BEFORE-SET-PROPERTIES";
+      for(const text of node.findAllWithCriteria({types:["TEXT"]})){
+        if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
+      }
       node.setProperties({[property]:ir.properties.Label});
     }else throw new Error("UNSUPPORTED-CHILD-KIND:"+ir.kind);
     node.visible=ir.visible!==false;node.opacity=ir.opacity===undefined?1:ir.opacity;
@@ -678,6 +689,16 @@ export function emitCalendarFigmaWriter(
     );
   if (runtime.includes("CALENDAR-V1-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v1 run identity");
+  if (runtime.includes("CALENDAR-V2-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v2 run identity");
+  if (
+    runtime.includes(
+      "CALENDAR-WRITER-LOAD-INSTANCE-FONT-BEFORE-SET-PROPERTIES",
+    ) === false
+  )
+    throw new TypeError(
+      "calendar writer must load the instance TEXT font before setProperties(Label)",
+    );
   if (
     runtime.includes("CALENDAR-MUST-NOT-WRITE-INPUT-PAGE") === false ||
     runtime.includes("CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE") === false ||
