@@ -95,7 +95,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v31";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v32";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -127,6 +127,7 @@ export const FORBIDDEN_CALENDAR_V28_RUN_IDENTITY = "19be1c96-calendar-v28";
 export const FORBIDDEN_CALENDAR_V29_RUN_IDENTITY = "19be1c96-calendar-v29";
 export const FORBIDDEN_CALENDAR_V30_RUN_IDENTITY = "da4456d8-calendar-v30";
 export const FORBIDDEN_CALENDAR_V30_PAGE_ID = "180:56126";
+export const FORBIDDEN_CALENDAR_V31_RUN_IDENTITY = "4604bbfe-calendar-v31";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -461,6 +462,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v27")throw new Error("CALENDAR-V27-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v28")throw new Error("CALENDAR-V28-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v29")throw new Error("CALENDAR-V29-IDENTITY-REUSE");
 if(PLAN.runIdentity==="da4456d8-calendar-v30")throw new Error("CALENDAR-V30-IDENTITY-REUSE");
+if(PLAN.runIdentity==="4604bbfe-calendar-v31")throw new Error("CALENDAR-V31-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -623,7 +625,8 @@ for(const source of PLAN.sources){
       label.textAutoResize=ir.width.mode==="fill"?"HEIGHT":"WIDTH_AND_HEIGHT";label.blendMode="NORMAL";
       void "CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC";
       void "CALENDAR-WRITER-NAMED-FALLBACK-AFTER-ZERO-GLYPH";
-      if(label.characters.trim().length>0&&(label.width<=0||label.absoluteRenderBounds===null)){
+      void "CALENDAR-WRITER-FILL-TEXT-SKIPS-PRE-PARENT-INTRINSIC";
+      if(ir.width.mode!=="fill"&&label.characters.trim().length>0&&(label.width<=0||label.absoluteRenderBounds===null)){
         const chain=ir.type.fontProvenance.fallbackChain||[];
         const resolvedFamily=ir.type.fontProvenance.resolvedFamily;
         const resolvedStyle=ir.type.fontProvenance.resolvedStyle;
@@ -694,7 +697,7 @@ for(const source of PLAN.sources){
     if(ir.kind==="text"){
       bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
       if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
-      if(node.characters.trim().length===0||node.width<=0||node.height<=0)throw new Error("CALENDAR-TEXT-GEOMETRY:"+ir.role);
+      if(ir.width.mode!=="fill"&&(node.characters.trim().length===0||node.width<=0||node.height<=0))throw new Error("CALENDAR-TEXT-GEOMETRY:"+ir.role);
     }
     createdNodeIds.push(node.id);return node;
   };
@@ -915,6 +918,15 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v28 run identity");
   if (runtime.includes("CALENDAR-V29-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v29 run identity");
+  if (runtime.includes("CALENDAR-V31-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v31 run identity");
+  if (
+    runtime.includes("CALENDAR-WRITER-FILL-TEXT-SKIPS-PRE-PARENT-INTRINSIC") ===
+      false
+  )
+    throw new TypeError(
+      "calendar writer must not refuse FILL text for pre-parent intrinsic",
+    );
   if (
     runtime.includes("CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE") ===
       false ||

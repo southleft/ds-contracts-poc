@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v31$/);
+  assert.match(writer.runIdentity, /-calendar-v32$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -234,6 +234,28 @@ test("the writer carries the named dayCell-size box on day instances — the Cal
   );
   assert.match(writer.code, /CALENDAR-V27-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v27/);
+});
+
+test("the writer does not refuse FILL text for pre-parent intrinsic — the Calendar live v31 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(
+    writer.code,
+    /CALENDAR-WRITER-FILL-TEXT-SKIPS-PRE-PARENT-INTRINSIC/,
+  );
+  assert.match(writer.code, /CALENDAR-V31-IDENTITY-REUSE/);
+  assert.match(writer.code, /4604bbfe-calendar-v31/);
+  const zeroIntrinsic = writer.code.slice(
+    writer.code.indexOf("CALENDAR-WRITER-FILL-TEXT-SKIPS-PRE-PARENT-INTRINSIC"),
+    writer.code.indexOf("CALENDAR-FONT-ZERO-INTRINSIC"),
+  );
+  assert.match(zeroIntrinsic, /ir\.width\.mode!=="fill"/);
+  const geometry = writer.code.slice(
+    writer.code.lastIndexOf("CALENDAR-WRITER-HUG-FROM-POST-CHARACTER-INTRINSIC"),
+  );
+  assert.match(
+    geometry,
+    /if\(ir\.width\.mode!=="fill"&&\(node\.characters\.trim\(\)\.length===0/,
+  );
 });
 
 test("the writer hugs from post-character intrinsic and walks a zero-glyph named fallback — the Calendar live v23 class", () => {
