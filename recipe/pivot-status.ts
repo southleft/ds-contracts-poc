@@ -2576,7 +2576,7 @@ const TABLE_V32_HUMAN_SIGNOFF_SHA256 =
 const CALENDAR_V50_HUMAN_SIGNOFF_PATH =
   "recipe/evidence/calendar-live-v50-human-signoff.json";
 const CALENDAR_V50_HUMAN_SIGNOFF_SHA256 =
-  "9e2e1a5143f1c9d9e97cdc3664150bbc14886e092221bed4271a57fec71bec83";
+  "814a150b5dde288dcd692238b2d243c97331ce32bd64518768737f628ecafee5";
 const TABLE_LIVE_V1_ATTEMPT_1_PATH =
   "recipe/evidence/table-live-pivot-v1-attempt-1.json";
 const TABLE_LIVE_V1_ATTEMPT_1_SHA256 =

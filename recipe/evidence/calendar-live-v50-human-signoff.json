@@ -80,6 +80,24 @@
     "buttonPageId": "85:6781",
     "calendarPageId": "181:64873"
   },
+  "safeCheckpoints": {
+    "calendarSignedOff": {
+      "id": "2393545747493203926",
+      "name": "V50 Calendar signed off"
+    },
+    "input": {
+      "id": "2392869719628549246",
+      "name": "V85 Input grids OK"
+    },
+    "comboboxSpaced": {
+      "id": "2393104521192557663",
+      "name": "V41 Combobox grids spaced"
+    },
+    "doNotRestore": {
+      "id": "2392877528965054592",
+      "name": "DO NOT RESTORE — V85 Input page 115 deleted"
+    }
+  },
   "doNotClaimV1Complete": true,
   "doNotInventButtonHumanGrade": true,
   "doNotRemintCalendar": true,
