@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v26$/);
+  assert.match(writer.runIdentity, /-calendar-v27$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -155,6 +155,8 @@ test("the writer applies instance Label via characters — the Calendar live v3 
   assert.match(writer.code, /19be1c96-calendar-v24/);
   assert.match(writer.code, /CALENDAR-V25-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v25/);
+  assert.match(writer.code, /CALENDAR-V26-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v26/);
 });
 
 test("the writer writes instance Label through the set-issued property after a painted fallback — the Calendar live v24 class", () => {
@@ -169,20 +171,42 @@ test("the writer writes instance Label through the set-issued property after a p
   );
   assert.match(
     writer.code,
-    /node\.setProperties\(\{\[dayLabelProperty\]:ir\.properties\.Label\}\)/,
+    /entry\.node\.setProperties\(\{\[dayLabelProperty\]:entry\.label\}\)/,
   );
-  const afterAppend = writer.code.slice(
-    writer.code.indexOf("CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND"),
+  const afterBind = writer.code.slice(
+    writer.code.indexOf("CALENDAR-WRITER-BIND-LABEL-AFTER-WEEK-AND-MONTH"),
   );
   assert.match(
-    afterAppend,
-    /node\.setProperties\(\{\[dayLabelProperty\]:ir\.properties\.Label\}\)/,
-    "setProperties before append is the V25 refused class",
+    afterBind,
+    /entry\.node\.setProperties\(\{\[dayLabelProperty\]:entry\.label\}\)/,
+    "setProperties before the post-instance bind is the V26 refused class",
   );
   assert.equal(
     writer.code.includes("node.setProperties({[property]:ir.properties.Label})"),
     false,
     "fresh instance propertyKey(Label) is still the refused class",
+  );
+});
+
+test("the writer binds day Label after instance characters — the Calendar live v26 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(
+    writer.code,
+    /CALENDAR-WRITER-BIND-LABEL-AFTER-INSTANCE-CHARACTERS/,
+  );
+  assert.match(writer.code, /CALENDAR-WRITER-BIND-LABEL-AFTER-WEEK-AND-MONTH/);
+  assert.match(writer.code, /CALENDAR-WRITER-INSTANCE-CHARACTERS-BEFORE-LABEL-BIND/);
+  const calendarMint = writer.code.indexOf("const calendarSet=await mintSet");
+  const bind = writer.code.indexOf(
+    "descendant.componentPropertyReferences={characters:dayLabelProperty}",
+  );
+  assert.ok(calendarMint >= 0 && bind >= 0 && calendarMint < bind);
+  const afterBind = writer.code.slice(bind);
+  assert.equal(
+    afterBind.includes("text.characters=ir.properties.Label") ||
+      afterBind.includes("text.characters=entry.label"),
+    false,
+    "characters-assign after bind reverts the issued Label property",
   );
 });
 

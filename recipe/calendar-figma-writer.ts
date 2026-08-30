@@ -58,6 +58,16 @@
  *     `loadFontAsync` writes the override; then verify `text.characters`.
  *     Do not invent a font. Do not invent FIXED. Probe stays characters-only.
  *
+ *  8. BIND LABEL AFTER INSTANCE CHARACTERS. Calendar live v26 issued and
+ *     bound Label before week mint. Instance/1 named 27 stayed Label=26
+ *     after setProperties and characters in the same tick as the bind.
+ *     After leftover sat, the same setProperties wrote 27. Issue the
+ *     property, write instance characters while the day-label TEXT is
+ *     still unbound, then bind the mains and setProperties each
+ *     already-appended instance to the same source Label. Do not
+ *     characters-assign after the bind (that can revert the override
+ *     to the default). Do not invent FIXED. Probe stays characters-only.
+ *
  * No live write happens here. This module builds a program string; executing it
  * requires a separate PREPARE / AUTHORIZE / attempt lineage.
  */
@@ -77,7 +87,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v26";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v27";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -103,6 +113,7 @@ export const FORBIDDEN_CALENDAR_V22_RUN_IDENTITY = "19be1c96-calendar-v22";
 export const FORBIDDEN_CALENDAR_V23_RUN_IDENTITY = "19be1c96-calendar-v23";
 export const FORBIDDEN_CALENDAR_V24_RUN_IDENTITY = "19be1c96-calendar-v24";
 export const FORBIDDEN_CALENDAR_V25_RUN_IDENTITY = "19be1c96-calendar-v25";
+export const FORBIDDEN_CALENDAR_V26_RUN_IDENTITY = "19be1c96-calendar-v26";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -432,6 +443,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v22")throw new Error("CALENDAR-V22-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v23")throw new Error("CALENDAR-V23-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v24")throw new Error("CALENDAR-V24-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v25")throw new Error("CALENDAR-V25-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v26")throw new Error("CALENDAR-V26-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -577,6 +589,8 @@ for(const source of PLAN.sources){
   void "CALENDAR-WRITER-FIRST-SEGMENT-BIND";
   const dayByState=new Map();
   let dayLabelProperty="";
+  const instanceLabelWrites=[];
+  void "CALENDAR-WRITER-BIND-LABEL-AFTER-INSTANCE-CHARACTERS";
   const render=async(ir,parent,ownershipKey)=>{
     let node;
     if(ir.kind==="frame")node=figma.createFrame();
@@ -637,19 +651,15 @@ for(const source of PLAN.sources){
     else applySizing(node,ir);
     if(ir.kind==="instance"){
       void "CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND";
-      void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-APPEND";
-      void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-PAINTED-FALLBACK";
-      for(const text of node.findAllWithCriteria({types:["TEXT"]})){
-        if(sceneRole(text.name)!=="calendar/day/label")continue;
-        if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
-      }
-      node.setProperties({[dayLabelProperty]:ir.properties.Label});
+      void "CALENDAR-WRITER-INSTANCE-CHARACTERS-BEFORE-LABEL-BIND";
       void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-CHARACTERS";
       for(const text of node.findAllWithCriteria({types:["TEXT"]})){
         if(sceneRole(text.name)!=="calendar/day/label")continue;
+        if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
         if(text.characters!==ir.properties.Label)text.characters=ir.properties.Label;
         if(text.characters!==ir.properties.Label)throw new Error("CALENDAR-DAY-LABEL-MISMATCH:"+ir.role);
       }
+      instanceLabelWrites.push({node,label:ir.properties.Label});
     }
     if(ir.kind==="text"){
       bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
@@ -691,14 +701,31 @@ for(const source of PLAN.sources){
   void "CALENDAR-WRITER-DAY-PROPERTIES";
   dayLabelProperty=daySet.addComponentProperty("Label","TEXT",source.dayDefaults.Label);
   for(const component of daySet.children){
-    for(const descendant of component.findAllWithCriteria({types:["TEXT"]})){
-      if(sceneRole(descendant.name)==="calendar/day/label")descendant.componentPropertyReferences={characters:dayLabelProperty};
-    }
     const props=Object.fromEntries(component.name.split(", ").map(part=>{const index=part.indexOf("=");return [part.slice(0,index),part.slice(index+1)];}));
     dayByState.set(props.State,component);
   }
   const weekSet=await mintSet(source.weekSet,"week");
   const calendarSet=await mintSet(source.calendarSet,"calendar");
+  void "CALENDAR-WRITER-BIND-LABEL-AFTER-WEEK-AND-MONTH";
+  for(const component of daySet.children){
+    for(const descendant of component.findAllWithCriteria({types:["TEXT"]})){
+      if(sceneRole(descendant.name)==="calendar/day/label")descendant.componentPropertyReferences={characters:dayLabelProperty};
+    }
+  }
+  void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-BIND";
+  void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-APPEND";
+  void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-PAINTED-FALLBACK";
+  for(const entry of instanceLabelWrites){
+    for(const text of entry.node.findAllWithCriteria({types:["TEXT"]})){
+      if(sceneRole(text.name)!=="calendar/day/label")continue;
+      if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
+    }
+    entry.node.setProperties({[dayLabelProperty]:entry.label});
+    for(const text of entry.node.findAllWithCriteria({types:["TEXT"]})){
+      if(sceneRole(text.name)!=="calendar/day/label")continue;
+      if(text.characters!==entry.label)throw new Error("CALENDAR-DAY-LABEL-MISMATCH:"+entry.node.name);
+    }
+  }
   daySet.x=80;daySet.y=96;weekSet.x=80;weekSet.y=daySet.y+daySet.height+96;calendarSet.x=80;calendarSet.y=weekSet.y+weekSet.height+96;
   section.resizeWithoutConstraints(Math.max(daySet.width,weekSet.width,calendarSet.width)+160,calendarSet.y+calendarSet.height+80);
   nextSectionX+=section.width+240;
@@ -846,6 +873,8 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v24 run identity");
   if (runtime.includes("CALENDAR-V25-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v25 run identity");
+  if (runtime.includes("CALENDAR-V26-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v26 run identity");
   if (
     runtime.includes("CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC") ===
       false ||
@@ -896,11 +925,34 @@ export function emitCalendarFigmaWriter(
       "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-APPEND",
     ) === false ||
     runtime.includes(
-      "node.setProperties({[dayLabelProperty]:ir.properties.Label})",
+      "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-BIND",
+    ) === false ||
+    runtime.includes(
+      "entry.node.setProperties({[dayLabelProperty]:entry.label})",
     ) === false
   )
     throw new TypeError(
       "calendar writer must write instance Label through the set-issued property after a painted fallback",
+    );
+  if (
+    runtime.includes("CALENDAR-WRITER-BIND-LABEL-AFTER-INSTANCE-CHARACTERS") ===
+      false ||
+    runtime.includes("CALENDAR-WRITER-BIND-LABEL-AFTER-WEEK-AND-MONTH") ===
+      false ||
+    runtime.includes("CALENDAR-WRITER-INSTANCE-CHARACTERS-BEFORE-LABEL-BIND") ===
+      false
+  )
+    throw new TypeError(
+      "calendar writer must bind day Label after instance characters are already written",
+    );
+  if (
+    runtime.indexOf("const calendarSet=await mintSet") >
+    runtime.indexOf(
+      "descendant.componentPropertyReferences={characters:dayLabelProperty}",
+    )
+  )
+    throw new TypeError(
+      "calendar writer must not bind day Label before week and month instances exist",
     );
   if (runtime.includes("node.setProperties({[property]:ir.properties.Label})"))
     throw new TypeError(
