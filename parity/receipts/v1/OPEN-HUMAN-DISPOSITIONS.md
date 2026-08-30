@@ -1,9 +1,27 @@
 # Open-human audit rows — what each one needs from the owner
 
-Prepared 2026-08-29. Two P1 rows in `parity/receipts/v1/audit-ledger.json` are
-`open-human`. Together they are the whole of `V1-REL-01` being RED, and
-`V1-REL-01` RED is a v1 blocker under docs/26's own blocker list. Neither can be
-closed by automation — both are recorded human approvals under `V1-REL-02`.
+Prepared 2026-08-29.
+
+> **Correction, same day.** This page first said these two rows "are the whole of
+> `V1-REL-01` being RED". **That was wrong**, and it was wrong because I read the
+> committed `audit-ledger.json` instead of re-running the gate. A full
+> `v1:readiness` on the current commit reports **9 of 22 rows RED**, and
+> `V1-REL-01` names twelve audit rows, not two: AUD-V06, V07, V08, V09, U19,
+> U21, U29, U33, U37, U44 all RED, plus AUD-U17 and AUD-U22 open-human. The
+> committed ledger marks every one of those ten `closed` — they were closed at
+> some earlier commit and have regressed since. Two of them (**AUD-V08** and
+> **AUD-U21**, both the plugin engine bundle going stale vs core) were defects I
+> introduced in this session by adding the calendar archetype, and are fixed in
+> `cef8e4e9a`. The rest are pre-existing: typecheck and the CI lanes were already
+> red at `228960d29`, verified in a scratch worktree.
+>
+> The two rows below are still exactly right about themselves — they are
+> human-only and no automation closes them. What was wrong was the claim that
+> closing them turns `V1-REL-01` green. It does not.
+
+Two P1 rows in `parity/receipts/v1/audit-ledger.json` are `open-human`. Neither
+can be closed by automation — both are recorded human approvals under
+`V1-REL-02`.
 
 This page states what was verified, what the choice is, and what I recommend. It
 does not take either action.
@@ -12,20 +30,20 @@ does not take either action.
 
 ## AUD-U17 — the premature `v1.0.0-rc.1` tag
 
-**Ledger title.** *"v1.0.0-rc.1 tag exists on origin (34d92c08, unsigned) while
-the checklist's 'Signed RC tag approved' row is empty."*
+**Ledger title.** _"v1.0.0-rc.1 tag exists on origin (34d92c08, unsigned) while
+the checklist's 'Signed RC tag approved' row is empty."_
 
 **Verified 2026-08-29, on this branch:**
 
-| fact | value |
-| --- | --- |
-| tag object | `e3bd2f5205926d93004bdc2ed40bb6116107d10b` (annotated) |
-| tagged commit | `34d92c0800d1316a5eeca609af0e7bd8ccfdb72d` |
-| tagged on | 2026-08-08 |
-| commits from the tag to HEAD | **1054** |
-| ancestor of HEAD | yes |
-| signed | **no** — `git tag -v` finds no signature |
-| present on origin | yes |
+| fact                         | value                                                  |
+| ---------------------------- | ------------------------------------------------------ |
+| tag object                   | `e3bd2f5205926d93004bdc2ed40bb6116107d10b` (annotated) |
+| tagged commit                | `34d92c0800d1316a5eeca609af0e7bd8ccfdb72d`             |
+| tagged on                    | 2026-08-08                                             |
+| commits from the tag to HEAD | **1054**                                               |
+| ancestor of HEAD             | yes                                                    |
+| signed                       | **no** — `git tag -v` finds no signature               |
+| present on origin            | yes                                                    |
 
 The tag predates the recipe-IR pivot entirely. Everything this project now calls
 its architecture — the archetype recipes, the canonical Figma-capability IR, the
@@ -57,14 +75,14 @@ and irreversible for anyone who already fetched it. I have not touched the tag.
 
 ## AUD-U22 — the hosted plugin zip's engine
 
-**Ledger title.** *"Hosted no-clone plugin zip carries a third engine (3de67ce4 ·
-716832B) matching neither HEAD's receipt nor the working tree."*
+**Ledger title.** _"Hosted no-clone plugin zip carries a third engine (3de67ce4 ·
+716832B) matching neither HEAD's receipt nor the working tree."_
 
-**What the ledger says the close is.** *"The hosted zip is a deployment; a
+**What the ledger says the close is.** _"The hosted zip is a deployment; a
 deployment is a recorded human approval (V1-REL-02) and `npm run deploy:check` is
 red by construction until it happens. docs/00 offers the hosted zip as the
 no-clone path without saying which engine it carries — the deploy (or a pinned
-engine stamp on that page) is the close."*
+engine stamp on that page) is the close."_
 
 **The choice, and it is genuinely two options:**
 
@@ -89,7 +107,9 @@ decision.
 
 ## What this unblocks, and what it does not
 
-Closing both rows turns `V1-REL-01` green. It does **not** make v1 releasable:
+Closing both rows does **not** turn `V1-REL-01` green — ten other audit rows are
+red on the current commit (see the correction at the top). And it does not make
+v1 releasable either:
 the recipe-IR archetypes are the substance of v1 and they are still open —
 Data Table is blocked on an authoring decision, Calendar carries two named
 refusals, and Button's signoff is pending. These two rows are simply the part of
