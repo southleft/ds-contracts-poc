@@ -1,6 +1,5 @@
 import {
   CALENDAR_DAY_STATES,
-  CALENDAR_OUTSIDE_DAYS,
   CALENDAR_WEEK_NUMBERS,
   type CalendarColorParameter,
   type CalendarFontSpec,
@@ -67,11 +66,6 @@ export const canonicalCalendarRecipeInstance = {
     dayAxis: "declared",
   },
   axes: {
-    outsideDays: {
-      name: "OutsideDays",
-      values: [...CALENDAR_OUTSIDE_DAYS],
-      default: "show",
-    },
     weekNumbers: {
       name: "WeekNumbers",
       values: [...CALENDAR_WEEK_NUMBERS],

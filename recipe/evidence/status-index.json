@@ -22769,8 +22769,8 @@
       "version": 1,
       "gate": "recipe:calendar:check",
       "gateGreen": true,
-      "components": 10,
-      "tests": 21,
+      "components": 8,
+      "tests": 24,
       "fixedPointStable": true
     },
     "reviewedSources": 1,
@@ -22786,8 +22786,8 @@
       "path": "recipe/calendar-figma-writer.ts",
       "hermetic": true,
       "figmaWrites": 0,
-      "variantsPerSource": 10,
-      "dayInstancesPerSource": 98
+      "variantsPerSource": 8,
+      "dayInstancesPerSource": 56
     }
   }
 }

@@ -27,14 +27,13 @@
       "path": "recipe/recipes/calendar.ts",
       "gate": "npm run recipe:calendar:check",
       "gateGreen": true,
-      "tests": 23,
-      "components": 10,
+      "tests": 24,
+      "components": 8,
       "sets": {
-        "calendar/set": 4,
+        "calendar/set": 2,
         "calendar/week-set": 2,
         "calendar/day-set": 4
       },
-      "denominatorMatchesTable": true,
       "fixedPointStable": "compile(collapse(compile(x))) === compile(x) on every source",
       "refusesUnsupportedStructuralEdit": true,
       "refusesHuggedDayCell": true,
@@ -53,7 +52,15 @@
         "regressionTest": "the weekday header lines up with the day columns — computes the column x-positions of the header and every week and requires them to agree",
         "classClosedNotJustInstance": "validateCalendarStructure now refuses ANY hug text cell in a column-bearing row, so the class cannot recur one row up again."
       },
-      "refusesUnmeasuredColumnCell": true
+      "refusesUnmeasuredColumnCell": true,
+      "refusesDeadAxis": true,
+      "deadAxisFoundAndFixed": {
+        "defect": "OutsideDays was modelled as a variant axis and its two values compiled to byte-identical content — the axis decided nothing while a designer could still click it.",
+        "resolution": "the prop is dropped and receipted as no-figma-primitive (calendar@1 has no primitive for a blank-but-measured cell), and validateCalendarStructure now refuses ANY axis whose variants compile to identical content.",
+        "componentsWentFrom": 10,
+        "componentsWentTo": 8,
+        "note": "eight honest components beat ten with a dead axis."
+      }
     },
     "reviewedSource": {
       "library": "@astryxdesign/core Calendar",
@@ -78,6 +85,11 @@
           "reason": "lowered",
           "what": "the dark half of every astryx light-dark() colour pair",
           "why": "calendar@1 carries one colour mode; the dark half is a second Figma variable mode, not a missing colour"
+        },
+        {
+          "reason": "no-figma-primitive",
+          "what": "hasOutsideDays / showOutsideDays, declared by BOTH sources",
+          "why": "hiding an outside day means the cell renders nothing while the grid keeps its shape, and calendar@1 has no primitive for present-measured-and-showing-no-text"
         }
       ]
     },

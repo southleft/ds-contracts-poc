@@ -30,7 +30,6 @@ import { canonicalJson } from "./normalize.js";
 import {
   CALENDAR_DAY_COUNT,
   CALENDAR_DAY_STATES,
-  CALENDAR_OUTSIDE_DAYS,
   CALENDAR_WEEK_COUNT,
   CALENDAR_WEEK_NUMBERS,
 } from "./recipes/calendar.js";
@@ -54,7 +53,7 @@ export const FORBIDDEN_BUTTON_PAGE_ID = "85:6781";
 export const FORBIDDEN_TABLE_NAMESPACE = "ds.contracts.table.recipe.v1";
 
 export const CALENDAR_FIGMA_VARIANTS_PER_SOURCE =
-  CALENDAR_OUTSIDE_DAYS.length * CALENDAR_WEEK_NUMBERS.length +
+  CALENDAR_WEEK_NUMBERS.length +
   CALENDAR_WEEK_NUMBERS.length +
   CALENDAR_DAY_STATES.length;
 
@@ -74,10 +73,7 @@ export const CALENDAR_FIGMA_VARIANTS_PER_SOURCE =
  */
 export const CALENDAR_FIGMA_INSTANCES_PER_SOURCE =
   CALENDAR_WEEK_NUMBERS.length * CALENDAR_DAY_COUNT +
-  CALENDAR_OUTSIDE_DAYS.length *
-    CALENDAR_WEEK_NUMBERS.length *
-    CALENDAR_WEEK_COUNT *
-    CALENDAR_DAY_COUNT;
+  CALENDAR_WEEK_NUMBERS.length * CALENDAR_WEEK_COUNT * CALENDAR_DAY_COUNT;
 
 export interface CalendarVariablePlan {
   identity: string;
@@ -199,18 +195,13 @@ const planSource = (
   const weekSet = requireSet(input.envelope.ir, "calendar/week-set");
   const daySet = requireSet(input.envelope.ir, "calendar/day-set");
 
-  const calendarAxes = {
-    OutsideDays: axisValues(calendarSet, "OutsideDays"),
-    WeekNumbers: axisValues(calendarSet, "WeekNumbers"),
-  };
+  const calendarAxes = { WeekNumbers: axisValues(calendarSet, "WeekNumbers") };
   const weekAxes = { WeekNumbers: axisValues(weekSet, "WeekNumbers") };
   const dayAxes = { State: axisValues(daySet, "State") };
 
   if (
-    canonicalJson(calendarAxes.OutsideDays) !==
-      canonicalJson(CALENDAR_OUTSIDE_DAYS) ||
     canonicalJson(calendarAxes.WeekNumbers) !==
-      canonicalJson(CALENDAR_WEEK_NUMBERS)
+    canonicalJson(CALENDAR_WEEK_NUMBERS)
   )
     throw new TypeError("calendar live writer: incomplete calendar axes");
   if (
@@ -221,8 +212,7 @@ const planSource = (
     throw new TypeError("calendar live writer: incomplete day State axis");
 
   if (
-    calendarSet.children.length !==
-      CALENDAR_OUTSIDE_DAYS.length * CALENDAR_WEEK_NUMBERS.length ||
+    calendarSet.children.length !== CALENDAR_WEEK_NUMBERS.length ||
     weekSet.children.length !== CALENDAR_WEEK_NUMBERS.length ||
     daySet.children.length !== CALENDAR_DAY_STATES.length
   )

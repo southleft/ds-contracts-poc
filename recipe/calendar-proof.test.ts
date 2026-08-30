@@ -6,7 +6,6 @@ import { astryxCalendarInstance } from "./fixtures/library-calendars.js";
 import {
   CALENDAR_DAY_COUNT,
   CALENDAR_DAY_STATES,
-  CALENDAR_OUTSIDE_DAYS,
   CALENDAR_WEEK_COUNT,
   CALENDAR_WEEK_NUMBERS,
   collapseCalendarRecipe,
@@ -35,8 +34,8 @@ test("calendar@1 compiles the declared set shape for every source", () => {
     const daySet = setOf(envelope, "calendar/day-set");
     assert.equal(
       calendarSet.children.length,
-      CALENDAR_OUTSIDE_DAYS.length * CALENDAR_WEEK_NUMBERS.length,
-      `${name}: every OutsideDays x WeekNumbers variant`,
+      CALENDAR_WEEK_NUMBERS.length,
+      `${name}: every WeekNumbers variant`,
     );
     assert.equal(weekSet.children.length, CALENDAR_WEEK_NUMBERS.length);
     assert.equal(daySet.children.length, CALENDAR_DAY_STATES.length);
@@ -44,8 +43,8 @@ test("calendar@1 compiles the declared set shape for every source", () => {
       calendarSet.children.length +
         weekSet.children.length +
         daySet.children.length,
-      10,
-      `${name}: ten components, the same denominator table@1 carries`,
+      8,
+      `${name}: eight components — two calendar, two week, four day`,
     );
   }
 });
@@ -146,7 +145,7 @@ test("the weekday header lines up with the day columns", () => {
   assert.equal(daySize.mode, "fixed");
 
   const variant = setOf(envelope, "calendar/set").children.find(
-    (child: any) => child.label === "OutsideDays=show, WeekNumbers=on",
+    (child: any) => child.label === "WeekNumbers=on",
   );
   const header = variant.children.find(
     (child: any) => child.role === "calendar/weekday-row",
@@ -243,11 +242,49 @@ test("astryx carries the today ring rather than dropping it", () => {
   );
 });
 
-test("the dark half of every light-dark() colour is receipted, not dropped", () => {
+test("what calendar@1 cannot carry is receipted, not dropped", () => {
   const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
-  assert.equal(envelope.receipts.length, 1);
-  assert.equal(envelope.receipts[0].reason, "lowered");
-  assert.match(envelope.receipts[0].evidence, /light-dark/);
+  assert.equal(envelope.receipts.length, 2);
+
+  const byReason = Object.fromEntries(
+    envelope.receipts.map((receipt: any) => [receipt.reason, receipt]),
+  );
+
+  // The dark half of every astryx light-dark() pair: a second Figma variable
+  // mode, not a missing colour.
+  assert.ok(byReason.lowered, "the colour-scheme loss is receipted");
+  assert.match(byReason.lowered.evidence, /light-dark/);
+
+  // hasOutsideDays / showOutsideDays: both sources declare it and calendar@1
+  // has no primitive for a blank-but-measured cell. It was briefly a variant
+  // axis whose two values compiled to identical content -- a dead axis is worse
+  // than an honest refusal, so it is dropped and named.
+  assert.ok(
+    byReason["no-figma-primitive"],
+    "the dropped outside-days prop is receipted",
+  );
+  assert.match(byReason["no-figma-primitive"].evidence, /byte-identical/);
+  assert.match(byReason["no-figma-primitive"].fact.path, /hasOutsideDays/);
+});
+
+test("no axis is dead — every variant compiles to distinct content", () => {
+  // A dead axis is a lie a designer can click on. OutsideDays was exactly that
+  // before it was dropped: show and hide produced byte-identical content.
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  for (const set of envelope.ir.children) {
+    const rendered = set.children.map((child: any) => {
+      const stripped = structuredClone(child);
+      delete stripped.role;
+      delete stripped.label;
+      delete stripped.variantProperties;
+      return JSON.stringify(stripped);
+    });
+    assert.equal(
+      new Set(rendered).size,
+      set.children.length,
+      `${set.role}: every variant must compile to distinct content`,
+    );
+  }
 });
 
 test("a hugged day cell is refused — the ragged-column defect cannot compile", () => {
@@ -274,9 +311,7 @@ test("a hug text cell in a column-bearing row is refused", () => {
   const broken = structuredClone(envelope);
   const variant = broken.ir.children
     .find((child: any) => child.role === "calendar/set")
-    .children.find(
-      (child: any) => child.label === "OutsideDays=show, WeekNumbers=on",
-    );
+    .children.find((child: any) => child.label === "WeekNumbers=on");
   const header = variant.children.find(
     (child: any) => child.role === "calendar/weekday-row",
   );

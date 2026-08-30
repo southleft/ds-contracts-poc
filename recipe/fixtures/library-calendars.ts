@@ -149,6 +149,17 @@ export const astryxCalendarInstance = {
   receipts: [
     {
       fact: {
+        path: "@astryxdesign/core/src/Calendar/Calendar.tsx#/props/hasOutsideDays",
+        channel: "variant-axis",
+      },
+      value:
+        "hasOutsideDays: boolean (default true) — show days from adjacent months",
+      reason: "no-figma-primitive",
+      evidence:
+        "Hiding an outside day means the cell renders nothing while the grid keeps its shape, and calendar@1 has no primitive for 'present, measured, and showing no text'. It was briefly modelled as a variant axis and that was worse: OutsideDays=show and OutsideDays=hide compiled to byte-identical content, so the axis decided nothing while a designer could still click it. Dropped and named rather than faked. react-day-picker declares the same prop as showOutsideDays. docs/32 §5.",
+    },
+    {
+      fact: {
         path: "@astryxdesign/core/dist/astryx.css#/color-tokens",
         channel: "color-scheme",
       },
@@ -159,6 +170,10 @@ export const astryxCalendarInstance = {
     },
   ],
   inputFacts: [
+    {
+      path: "@astryxdesign/core/src/Calendar/Calendar.tsx#/props/hasOutsideDays",
+      channel: "variant-axis",
+    },
     {
       path: "@astryxdesign/core/dist/astryx.css#/color-tokens",
       channel: "color-scheme",

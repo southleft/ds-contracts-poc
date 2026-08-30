@@ -43,7 +43,25 @@ export const CALENDAR_RECIPE_REF = {
  * lineage agreeing on the same two switches is why these are the axes and not
  * something richer.
  */
-export const CALENDAR_OUTSIDE_DAYS = ["show", "hide"] as const;
+/**
+ * NOT an axis. `@astryxdesign/core` declares `hasOutsideDays` and
+ * `react-day-picker` declares `showOutsideDays`, so the prop is real in both
+ * sources -- but `calendar@1` has no way to express a BLANK day cell. Hiding an
+ * outside day means the cell renders nothing while the grid keeps its shape,
+ * and there is no primitive here for "present, measured, and showing no text"
+ * that does not invent one.
+ *
+ * It was briefly modelled as a variant axis. That was worse than not modelling
+ * it: `OutsideDays=show` and `OutsideDays=hide` compiled to byte-identical
+ * content, so the set carried four variants of which two were duplicates and
+ * the axis decided nothing. A dead axis is a lie a designer can click on.
+ *
+ * So the prop is DROPPED and receipted (see the astryx fixture), and
+ * `validateCalendarStructure` refuses any axis whose values compile to the same
+ * thing, so this cannot come back as a decoration.
+ */
+export const CALENDAR_OUTSIDE_DAYS_NOT_CARRIED =
+  "hasOutsideDays / showOutsideDays";
 export const CALENDAR_WEEK_NUMBERS = ["on", "off"] as const;
 export const CALENDAR_DAY_STATES = [
   "default",
@@ -61,7 +79,6 @@ export const CALENDAR_DAY_STATES = [
 export const CALENDAR_DAY_COUNT = 7;
 export const CALENDAR_WEEK_COUNT = 3;
 
-export type CalendarOutsideDays = (typeof CALENDAR_OUTSIDE_DAYS)[number];
 export type CalendarWeekNumbers = (typeof CALENDAR_WEEK_NUMBERS)[number];
 export type CalendarDayState = (typeof CALENDAR_DAY_STATES)[number];
 
@@ -120,11 +137,6 @@ export interface CalendarRecipeInstance {
     dayAxis: "declared";
   };
   axes: {
-    outsideDays: {
-      name: "OutsideDays";
-      values: CalendarOutsideDays[];
-      default: CalendarOutsideDays;
-    };
     weekNumbers: {
       name: "WeekNumbers";
       values: CalendarWeekNumbers[];
@@ -227,11 +239,6 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
     dayAxis: z.literal("declared"),
   }),
   axes: z.strictObject({
-    outsideDays: z.strictObject({
-      name: z.literal("OutsideDays"),
-      values: z.array(z.enum(CALENDAR_OUTSIDE_DAYS)).min(1),
-      default: z.enum(CALENDAR_OUTSIDE_DAYS),
-    }),
     weekNumbers: z.strictObject({
       name: z.literal("WeekNumbers"),
       values: z.array(z.enum(CALENDAR_WEEK_NUMBERS)).min(1),
@@ -608,7 +615,6 @@ const weekdayRow = (
 
 const calendarComponent = (
   instance: CalendarRecipeInstance,
-  outsideDays: CalendarOutsideDays,
   weekNumbers: CalendarWeekNumbers,
 ): ComponentNode => {
   const gap = instance.tokens.gridGap;
@@ -633,9 +639,9 @@ const calendarComponent = (
   };
   return {
     kind: "component",
-    role: `calendar/variant/${outsideDays}/${weekNumbers}`,
-    label: `OutsideDays=${outsideDays}, WeekNumbers=${weekNumbers}`,
-    variantProperties: { OutsideDays: outsideDays, WeekNumbers: weekNumbers },
+    role: `calendar/variant/${weekNumbers}`,
+    label: `WeekNumbers=${weekNumbers}`,
+    variantProperties: { WeekNumbers: weekNumbers },
     layout: {
       mode: "vertical",
       primaryAxisAlign: "min",
@@ -715,15 +721,10 @@ export function compileCalendarIr(instance: CalendarRecipeInstance): FrameNode {
   const calendarSet = setNode(
     "calendar/set",
     instance.identity.name,
-    CALENDAR_OUTSIDE_DAYS.flatMap((outsideDays) =>
-      CALENDAR_WEEK_NUMBERS.map((weekNumbers) =>
-        calendarComponent(instance, outsideDays, weekNumbers),
-      ),
+    CALENDAR_WEEK_NUMBERS.map((weekNumbers) =>
+      calendarComponent(instance, weekNumbers),
     ),
-    {
-      OutsideDays: [...CALENDAR_OUTSIDE_DAYS],
-      WeekNumbers: [...CALENDAR_WEEK_NUMBERS],
-    },
+    { WeekNumbers: [...CALENDAR_WEEK_NUMBERS] },
   );
   return {
     kind: "frame",
@@ -857,12 +858,9 @@ export function validateCalendarStructure(root: FrameNode): void {
   const calendarSet = setByRole(root, "calendar/set");
   const weekSet = setByRole(root, "calendar/week-set");
   const daySet = setByRole(root, "calendar/day-set");
-  if (
-    calendarSet.children.length !==
-    CALENDAR_OUTSIDE_DAYS.length * CALENDAR_WEEK_NUMBERS.length
-  )
+  if (calendarSet.children.length !== CALENDAR_WEEK_NUMBERS.length)
     throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
-      "calendar/set must carry every OutsideDays x WeekNumbers variant",
+      "calendar/set must carry every WeekNumbers variant",
     ]);
   if (weekSet.children.length !== CALENDAR_WEEK_NUMBERS.length)
     throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
@@ -896,6 +894,27 @@ export function validateCalendarStructure(root: FrameNode): void {
         `${week.role}: a week carries exactly ${CALENDAR_DAY_COUNT} days`,
       ]);
   }
+  // No dead axis. An axis whose values compile to the same thing decides
+  // nothing, and a designer can still click it -- which is worse than not
+  // offering it. `OutsideDays` was exactly that before it was dropped:
+  // `show` and `hide` produced byte-identical content.
+  for (const set of [calendarSet, weekSet, daySet])
+    for (const axis of set.variantAxes) {
+      const rendered = new Set(
+        set.children.map((child) => {
+          const stripped = structuredClone(child) as Record<string, unknown>;
+          delete stripped.role;
+          delete stripped.label;
+          delete stripped.variantProperties;
+          return canonicalJson(stripped);
+        }),
+      );
+      if (rendered.size < set.children.length)
+        throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+          `${set.role}: axis ${axis.name} is dead — two or more variants compile to identical content`,
+        ]);
+    }
+
   for (const variant of calendarSet.children) {
     if (variant.kind !== "component" || variant.layout.mode !== "vertical")
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
@@ -1002,10 +1021,7 @@ export function collapseCalendarRecipe(
   const calendarSet = setByRole(root, "calendar/set");
   const weekSet = setByRole(root, "calendar/week-set");
   const daySet = setByRole(root, "calendar/day-set");
-  const baseline = componentFor(calendarSet, {
-    OutsideDays: "show",
-    WeekNumbers: "on",
-  });
+  const baseline = componentFor(calendarSet, { WeekNumbers: "on" });
   const captionText = direct(baseline, "calendar/caption", "text");
   const weekdayRowFrame = direct(baseline, "calendar/weekday-row", "frame");
   const gridFrame = direct(baseline, "calendar/grid", "frame");
@@ -1119,11 +1135,6 @@ export function collapseCalendarRecipe(
       dayAxis: "declared",
     },
     axes: {
-      outsideDays: {
-        name: "OutsideDays",
-        values: [...CALENDAR_OUTSIDE_DAYS],
-        default: "show",
-      },
       weekNumbers: {
         name: "WeekNumbers",
         values: [...CALENDAR_WEEK_NUMBERS],
