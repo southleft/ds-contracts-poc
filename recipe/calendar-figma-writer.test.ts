@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v1$/);
+  assert.match(writer.runIdentity, /-calendar-v2$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -69,6 +69,24 @@ test("the writer refuses a day cell that is not a measured box", () => {
   const writer = emitCalendarFigmaWriter([input()]);
   assert.match(writer.code, /CALENDAR-WRITER-DAY-CELL-BOX/);
   assert.match(writer.code, /CALENDAR-DAY-CELL-NOT-MEASURED/);
+});
+
+test("the day-cell box is applied before children — the Calendar live v1 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(writer.code, /CALENDAR-WRITER-DAY-CELL-BOX-BEFORE-CHILDREN/);
+  assert.match(
+    writer.code,
+    /CALENDAR-WRITER-HUG-TEXT-INTRINSIC-BEFORE-PARENT-COLLAPSE/,
+  );
+  assert.match(writer.code, /CALENDAR-V1-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v1/);
+  const dayBefore = writer.code.indexOf(
+    "CALENDAR-WRITER-DAY-CELL-BOX-BEFORE-CHILDREN",
+  );
+  const childrenLoop = writer.code.indexOf(
+    "for(const [childIndex,child] of ir.children.entries())await render(child,component",
+  );
+  assert.ok(dayBefore >= 0 && childrenLoop >= 0 && dayBefore < childrenLoop);
 });
 
 test("the writer refuses every other archetype's page", () => {

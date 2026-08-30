@@ -22918,7 +22918,7 @@
   },
   "calendar": {
     "overallSuccess": false,
-    "status": "Calendar live v1 attempt 1 failed closed at writer CALENDAR-TEXT-GEOMETRY:calendar/day/label; hug label width collapsed to 0 inside an unsized day component; cleanup executed; Input/Combobox/Button/Table stayed; no Calendar mint; react-day-picker remains a named refusal",
+    "status": "Calendar live v1 attempt 1 failed closed; v2 PREPARE opening (day-box-before-children + hug-text intrinsic; Astryx only; run 19be1c96-calendar-v2); AUTHORIZE and attempt 1 still ahead; no Calendar mint; react-day-picker remains a named refusal",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -22930,7 +22930,7 @@
       "gate": "recipe:calendar:check",
       "gateGreen": true,
       "components": 8,
-      "tests": 25,
+      "tests": 26,
       "fixedPointStable": true
     },
     "reviewedSources": 1,
@@ -22940,7 +22940,7 @@
     "blockers": [
       "no live mint; no Calendar human grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "Calendar live v1 attempt 1 failed closed; do not restart attempt 2 as-is; next teaching is day-box-before-children plus hug-text intrinsic before parent collapse"
+      "Calendar live v2 PREPARE opening; AUTHORIZE and attempt 1 still ahead; do not restart v1 attempt 2 as-is"
     ],
     "figmaWriter": {
       "path": "recipe/calendar-figma-writer.ts",

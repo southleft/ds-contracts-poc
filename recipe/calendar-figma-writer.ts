@@ -21,6 +21,12 @@
  *     So the calendar variant's weeks are frames of day instances, and only
  *     `calendar@1/day` is ever instantiated.
  *
+ *  3. THE DAY BOX EXISTS BEFORE ITS CHILDREN. Calendar live v1 refused
+ *     `CALENDAR-TEXT-GEOMETRY:calendar/day/label` because the hug label `26`
+ *     was appended into a still-HUG 0-wide day component; `applySizing` of the
+ *     FIXED 32px box ran after children. Hug text also records its intrinsic
+ *     size before a 0-width parent can collapse it.
+ *
  * No live write happens here. This module builds a program string; executing it
  * requires a separate PREPARE / AUTHORIZE / attempt lineage.
  */
@@ -40,7 +46,8 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v1";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v2";
+export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -345,6 +352,7 @@ const PAGE_OWNER="recipe/calendar/"+PLAN.runIdentity;
 if(NS==="ds.contracts.input.recipe.v5"||PLAN.runIdentity==="4a074b24-e8503dd5-input-v5")throw new Error("CALENDAR-INPUT-IDENTITY-REUSE");
 if(NS==="ds.contracts.combobox.recipe.v1"||PLAN.runIdentity==="70c24cbd-d27f2e85-combobox-v1")throw new Error("CALENDAR-COMBOBOX-IDENTITY-REUSE");
 if(NS==="ds.contracts.table.recipe.v1")throw new Error("CALENDAR-TABLE-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v1")throw new Error("CALENDAR-V1-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -514,11 +522,18 @@ for(const source of PLAN.sources){
     node.visible=ir.visible!==false;node.opacity=ir.opacity===undefined?1:ir.opacity;
     node.name=ir.role&&ir.label&&ir.role!==ir.label?ir.role+" :: "+ir.label:(ir.label||ir.role||ir.kind);
     if(ir.kind==="text"&&ir.type.fontProvenance)node.name+=" :: font-provenance="+encodeURIComponent(JSON.stringify(ir.type.fontProvenance));
+    let hugTextIntrinsic=null;
+    if(ir.kind==="text"&&ir.width.mode!=="fill"){
+      void "CALENDAR-WRITER-HUG-TEXT-INTRINSIC-BEFORE-PARENT-COLLAPSE";
+      hugTextIntrinsic={width:Math.max(node.width,1),height:Math.max(node.height,1)};
+    }
     tag(node,ir,ownershipKey);if(ir.kind!=="instance")applyPaints(node,ir);parent.appendChild(node);
+    if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
     if(ir.kind==="frame"){applyLayout(node,ir);for(const [childIndex,child] of ir.children.entries())await render(child,node,ownershipKey+"/children/"+childIndex);applySizing(node,ir);}
     else applySizing(node,ir);
     if(ir.kind==="text"){
       bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
+      if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
       if(node.characters.trim().length===0||node.width<=0||node.height<=0)throw new Error("CALENDAR-TEXT-GEOMETRY:"+ir.role);
     }
     createdNodeIds.push(node.id);return node;
@@ -531,6 +546,10 @@ for(const source of PLAN.sources){
       component.description="recipe-role:"+(ir.role||"");
       tag(component,ir,kind+"/children/"+componentIndex);applyLayout(component,ir);applyPaints(component,ir);
       section.appendChild(component);
+      if(kind==="day"){
+        void "CALENDAR-WRITER-DAY-CELL-BOX-BEFORE-CHILDREN";
+        applySizing(component,ir);
+      }
       for(const [childIndex,child] of ir.children.entries())await render(child,component,kind+"/children/"+componentIndex+"/children/"+childIndex);
       applySizing(component,ir);
       if(kind==="calendar"&&component.layoutMode!=="VERTICAL")throw new Error("CALENDAR-FAKE-LAYOUT:"+component.name);
@@ -643,6 +662,22 @@ export function emitCalendarFigmaWriter(
     throw new TypeError(
       "calendar writer must refuse a day cell that is not a measured box",
     );
+  if (
+    runtime.includes("CALENDAR-WRITER-DAY-CELL-BOX-BEFORE-CHILDREN") === false
+  )
+    throw new TypeError(
+      "calendar writer must size the day cell before minting its hug label",
+    );
+  if (
+    runtime.includes(
+      "CALENDAR-WRITER-HUG-TEXT-INTRINSIC-BEFORE-PARENT-COLLAPSE",
+    ) === false
+  )
+    throw new TypeError(
+      "calendar writer must keep hug-text intrinsic size before a 0-width parent can collapse it",
+    );
+  if (runtime.includes("CALENDAR-V1-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v1 run identity");
   if (
     runtime.includes("CALENDAR-MUST-NOT-WRITE-INPUT-PAGE") === false ||
     runtime.includes("CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE") === false ||
