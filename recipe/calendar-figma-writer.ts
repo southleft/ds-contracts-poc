@@ -56,7 +56,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v20";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v21";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -76,6 +76,7 @@ export const FORBIDDEN_CALENDAR_V16_RUN_IDENTITY = "19be1c96-calendar-v16";
 export const FORBIDDEN_CALENDAR_V17_RUN_IDENTITY = "19be1c96-calendar-v17";
 export const FORBIDDEN_CALENDAR_V18_RUN_IDENTITY = "19be1c96-calendar-v18";
 export const FORBIDDEN_CALENDAR_V19_RUN_IDENTITY = "19be1c96-calendar-v19";
+export const FORBIDDEN_CALENDAR_V20_RUN_IDENTITY = "19be1c96-calendar-v20";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -399,6 +400,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v16")throw new Error("CALENDAR-V16-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v17")throw new Error("CALENDAR-V17-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v18")throw new Error("CALENDAR-V18-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v19")throw new Error("CALENDAR-V19-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v20")throw new Error("CALENDAR-V20-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -583,6 +585,15 @@ for(const source of PLAN.sources){
     if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
     if(ir.kind==="frame"){applyLayout(node,ir);for(const [childIndex,child] of ir.children.entries())await render(child,node,ownershipKey+"/children/"+childIndex);applySizing(node,ir);}
     else applySizing(node,ir);
+    if(ir.kind==="instance"){
+      void "CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND";
+      for(const text of node.findAllWithCriteria({types:["TEXT"]})){
+        if(sceneRole(text.name)!=="calendar/day/label")continue;
+        if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
+        text.characters=ir.properties.Label;
+        if(text.characters!==ir.properties.Label)throw new Error("CALENDAR-DAY-LABEL-MISMATCH:"+ir.role);
+      }
+    }
     if(ir.kind==="text"){
       bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
       if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
@@ -766,6 +777,12 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v18 run identity");
   if (runtime.includes("CALENDAR-V19-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v19 run identity");
+  if (runtime.includes("CALENDAR-V20-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v20 run identity");
+  if (runtime.includes("CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND") === false)
+    throw new TypeError(
+      "calendar writer must re-apply instance Label after appendChild",
+    );
   if (runtime.includes("CALENDAR-WRITER-DAY-LABEL-FROM-SET") === false)
     throw new TypeError(
       "calendar writer must take day Label presence from the set-issued key",
