@@ -129,6 +129,8 @@ export const CALENDAR_LIVE_V1_NAV_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-NAV-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_HEADER_JOINS_HEADER_BODY_ROLES_MARKER =
   "CALENDAR-HOST-HEADER-JOINS-HEADER-BODY-ROLES";
+export const CALENDAR_LIVE_V1_DAY_BUTTON_BINDING_COMPILE_ORDER_MARKER =
+  "CALENDAR-HOST-DAY-BUTTON-BINDING-COMPILE-ORDER";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -443,6 +445,14 @@ const NAV_ICON_ROLE = /^calendar\/nav\/(?:previous|next)\/icon$/;
 const NAV_ICON_COMPILE_BINDING_FIELDS = [
   "type.fontSize",
   "fills.0.color",
+] as const;
+const DAY_BUTTON_COMPILE_BINDING_FIELDS = [
+  "layout.width.value",
+  "layout.height.value",
+  "cornerRadius.topLeft",
+  "fills.0.color",
+  "strokes.0.paint.color",
+  "strokes.0.weight",
 ] as const;
 
 const withStableOccurrences = (seeds: readonly FactSeed[]): SceneFact[] => {
@@ -841,7 +851,10 @@ const compileBindingFieldsFor = (
   void CALENDAR_LIVE_V1_WEEK_SET_NUMBER_BINDING_COMPILE_ORDER_MARKER;
   void CALENDAR_LIVE_V1_NAV_BINDING_COMPILE_ORDER_MARKER;
   void CALENDAR_LIVE_V1_NAV_ICON_BINDING_COMPILE_ORDER_MARKER;
+  void CALENDAR_LIVE_V1_DAY_BUTTON_BINDING_COMPILE_ORDER_MARKER;
   if (role === "calendar/caption") return [...CAPTION_COMPILE_BINDING_FIELDS];
+  if (role === "calendar/day/button")
+    return [...DAY_BUTTON_COMPILE_BINDING_FIELDS];
   if (role && NAV_ICON_ROLE.test(role))
     return [...NAV_ICON_COMPILE_BINDING_FIELDS];
   if (role && NAV_BUTTON_ROLE.test(role)) return [...NAV_COMPILE_BINDING_FIELDS];
