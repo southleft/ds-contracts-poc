@@ -51,6 +51,7 @@ export const FORBIDDEN_COMBOBOX_RUN_IDENTITY = "70c24cbd-d27f2e85-combobox-v1";
 export const FORBIDDEN_COMBOBOX_PAGE_ID = "163:35981";
 export const FORBIDDEN_BUTTON_PAGE_ID = "85:6781";
 export const FORBIDDEN_TABLE_NAMESPACE = "ds.contracts.table.recipe.v1";
+export const FORBIDDEN_TABLE_PAGE_ID = "173:48924";
 
 export const CALENDAR_FIGMA_VARIANTS_PER_SOURCE =
   CALENDAR_WEEK_NUMBERS.length +
@@ -350,9 +351,11 @@ if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
 void "CALENDAR-MUST-NOT-WRITE-INPUT-PAGE";
 void "CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE";
 void "CALENDAR-MUST-NOT-WRITE-BUTTON-PAGE";
+void "CALENDAR-MUST-NOT-WRITE-TABLE-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("CALENDAR-MUST-NOT-WRITE-INPUT-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="85:6781")throw new Error("CALENDAR-MUST-NOT-WRITE-BUTTON-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="173:48924")throw new Error("CALENDAR-MUST-NOT-WRITE-TABLE-PAGE");
 await figma.loadAllPagesAsync();
 const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
 const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
@@ -363,6 +366,7 @@ else if(getSharedData(page,"pageOwner")!==PAGE_OWNER)throw new Error("CALENDAR-P
 if(page.id==="115:295378")throw new Error("CALENDAR-MUST-NOT-WRITE-INPUT-PAGE");
 if(page.id==="163:35981")throw new Error("CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(page.id==="85:6781")throw new Error("CALENDAR-MUST-NOT-WRITE-BUTTON-PAGE");
+if(page.id==="173:48924")throw new Error("CALENDAR-MUST-NOT-WRITE-TABLE-PAGE");
 await figma.setCurrentPageAsync(page);
 setSharedData(page,"pageOwner",PAGE_OWNER);
 setSharedData(page,"runIdentity",PLAN.runIdentity);
@@ -642,10 +646,11 @@ export function emitCalendarFigmaWriter(
   if (
     runtime.includes("CALENDAR-MUST-NOT-WRITE-INPUT-PAGE") === false ||
     runtime.includes("CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE") === false ||
-    runtime.includes("CALENDAR-MUST-NOT-WRITE-BUTTON-PAGE") === false
+    runtime.includes("CALENDAR-MUST-NOT-WRITE-BUTTON-PAGE") === false ||
+    runtime.includes("CALENDAR-MUST-NOT-WRITE-TABLE-PAGE") === false
   )
     throw new TypeError(
-      "calendar writer must refuse the Input, Combobox and Button pages",
+      "calendar writer must refuse the Input, Combobox, Button and Table pages",
     );
   if (runtime.includes("CALENDAR-FONT-PROVENANCE-TAMPER") === false)
     throw new TypeError(

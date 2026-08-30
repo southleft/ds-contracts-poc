@@ -1,3 +1,9 @@
+import type {
+  ReviewedCalendarAdapterConfig,
+  ReviewedCalendarSource,
+  ReviewedCalendarSourceFact,
+  CalendarFactCategory,
+} from "../adapters/calendar.js";
 import { canonicalCalendarRecipeInstance } from "./calendar.js";
 import type { CalendarRecipeInstance } from "../recipes/calendar.js";
 
@@ -142,6 +148,132 @@ astryxTokens.typography = {
   },
 };
 
+export const astryxCalendarSource: ReviewedCalendarSource = {
+  packageName: "@astryxdesign/core",
+  version: "0.0.0-vendored",
+  exportName: "Calendar",
+  framework: "react",
+  sourceRoot:
+    "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar",
+  anatomy: {
+    root: "@astryxdesign/core/src/Calendar/Calendar.tsx caption + weekday row + week grid",
+    grid: "weeks of seven day cells; day state varies within a week",
+    weekdayRow: "Mo–Su labels, measured to the day column",
+    week: "seven day cells; week number optional",
+    day: "fixed 32px box; default / today / selected / outside",
+    dayAxis:
+      "seven declared day columns; calendar@1 refuses hug cells in a column-bearing row",
+  },
+  api: {
+    hasWeekNumbers: "hasWeekNumbers boolean — WeekNumbers on|off",
+    hasOutsideDays:
+      "hasOutsideDays boolean — receipted; calendar@1 has no blank-but-measured cell",
+    selected: "selected day is content, not a live Date",
+    extras: "no range, no dropdown month, no time, no react-day-picker adapter",
+  },
+  styleSources: [
+    "@astryxdesign/core/src/Calendar/styles.ts --size-element-md 32, --spacing-2 8, --spacing-1 4, --radius-inner 4",
+    "@astryxdesign/core/dist/astryx.css light-dark color pairs; light half carried",
+  ],
+  fontSources: [
+    "@astryxdesign/core/src/Calendar/styles.ts caption semibold, weekday/day normal, --font-size-sm 12",
+  ],
+};
+
+/**
+ * react-day-picker is the obvious second library and is DELIBERATELY not an
+ * adapter. examples/day-picker/PROVENANCE.md holds it blind as the unseen-library
+ * exam. Authoring it here would spend that asset. This is a named refusal, not
+ * a missing file.
+ */
+export const REACT_DAY_PICKER_ADAPTER_REFUSAL = {
+  packageName: "react-day-picker",
+  version: "10.0.1",
+  adapterAuthored: false,
+  reason:
+    "examples/day-picker/PROVENANCE.md blindness rule — unseen-library exam; do not spend it on this proof",
+  eventzDatePicker:
+    "extract/pilots/eventz/out/contracts/date-picker.contract.json is props: [] / anatomy: { root: {} }",
+} as const;
+
+const categoryForToken = (path: string): CalendarFactCategory => {
+  if (path.includes("typography")) return "typography";
+  if (path.includes("dayStates")) return "state";
+  if (
+    path.includes("background") ||
+    path.includes("surface") ||
+    path.includes("Text") ||
+    path.includes(".text")
+  )
+    return "fill";
+  return "geometry";
+};
+
+const tokenFacts = (
+  sourceSlug: string,
+  evidence: string,
+  value: unknown,
+  path = "tokens",
+  facts: ReviewedCalendarSourceFact[] = [],
+): ReviewedCalendarSourceFact[] => {
+  if (value === null || typeof value !== "object") {
+    if (path.startsWith("tokens.typography")) {
+      facts.push({
+        occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
+        category: "typography",
+        source: {
+          kind: "review",
+          evidence: `${evidence}; reviewed font provenance field ${path}=${String(value)}`,
+        },
+        disposition: "ir",
+        target: path,
+      });
+    }
+    return facts;
+  }
+  const record = value as Record<string, unknown>;
+  if (
+    typeof record.variable === "string" &&
+    (typeof record.fallback === "string" || typeof record.fallback === "number")
+  ) {
+    facts.push({
+      occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
+      category: categoryForToken(path),
+      source: {
+        kind: "review",
+        evidence: `${evidence}; reviewed ${record.variable}=${record.fallback}`,
+      },
+      disposition: "ir",
+      target: path,
+    });
+    return facts;
+  }
+  for (const [key, child] of Object.entries(record))
+    tokenFacts(sourceSlug, evidence, child, `${path}.${key}`, facts);
+  return facts;
+};
+
+export const CALENDAR_SINGLE_LIBRARY_PROOF_PROTOCOL = {
+  artifactVersion: "calendar-single-library-proof-protocol-v1",
+  frozenBeforeResults: true,
+  resultStatus: "not-run",
+  cellsPerSource: 4,
+  totalCells: 4,
+  cells: ["week-numbers-on", "week-numbers-off", "today", "selected"],
+  expected: {
+    calendarVariants: 2,
+    weekVariants: 2,
+    dayVariants: 4,
+    components: 8,
+  },
+  comparison: {
+    sourceReferencesRendered: false,
+    aiGrading: false,
+    liveFigma: false,
+    secondLibrary: "named-refusal",
+  },
+} as const;
+
 export const astryxCalendarInstance = {
   ...structuredClone(canonicalCalendarRecipeInstance),
   identity: { id: "astryx.calendar", name: "Astryx Calendar" },
@@ -198,3 +330,125 @@ export const astryxCalendarInstance = {
     },
   },
 } as unknown as CalendarRecipeInstance;
+
+const astryxSourceFacts = (): ReviewedCalendarSourceFact[] => {
+  const facts = tokenFacts(
+    "astryx",
+    "@astryxdesign/core Calendar source/style review",
+    astryxCalendarInstance.tokens,
+  );
+  facts.push(
+    {
+      occurrenceId: "astryx-anatomy-days",
+      category: "anatomy",
+      source: {
+        kind: "pointer",
+        pointer: "/anatomy/dayAxis",
+        expected: astryxCalendarSource.anatomy.dayAxis,
+      },
+      disposition: "ir",
+      target: "content.weeks",
+    },
+    {
+      occurrenceId: "astryx-anatomy-grid",
+      category: "anatomy",
+      source: {
+        kind: "pointer",
+        pointer: "/anatomy/grid",
+        expected: astryxCalendarSource.anatomy.grid,
+      },
+      disposition: "ir",
+      target: "content.weekdays",
+    },
+    {
+      occurrenceId: "astryx-refusal-outside-days",
+      category: "refusal",
+      source: {
+        kind: "pointer",
+        pointer: "/api/hasOutsideDays",
+        expected: astryxCalendarSource.api.hasOutsideDays,
+      },
+      disposition: "refusal",
+      target:
+        "hasOutsideDays / showOutsideDays dropped; calendar@1 has no blank-but-measured cell",
+      receiptReason: "no-figma-primitive",
+    },
+    {
+      occurrenceId: "astryx-refusal-dark-mode",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "@astryxdesign/core/dist/astryx.css light-dark pairs; calendar@1 carries one mode",
+      },
+      disposition: "refusal",
+      target: "dark half of every light-dark() colour pair",
+      receiptReason: "lowered",
+    },
+    {
+      occurrenceId: "astryx-refusal-day-picker",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence: REACT_DAY_PICKER_ADAPTER_REFUSAL.reason,
+      },
+      disposition: "refusal",
+      target:
+        "react-day-picker@10.0.1 held blind; no second-library adapter authored",
+      receiptReason: "refused-by-recipe",
+    },
+  );
+  return facts;
+};
+
+export const astryxCalendarAdapterConfig = ((): ReviewedCalendarAdapterConfig => {
+  const sourceFacts = astryxSourceFacts();
+  const manualMappings = sourceFacts.map(
+    (fact) => `${fact.occurrenceId}→${fact.disposition}:${fact.target}`,
+  );
+  return {
+    sourcePath: "recipe/fixtures/library-calendars.ts#astryxCalendarAdapterConfig",
+    generatedAt: "2026-08-29T00:00:00.000Z",
+    selection: {
+      candidates: [{ id: "calendar", version: 1 }],
+      selectedBy: "recipe-pivot-calendar-review",
+      mechanism: "reviewed-config",
+      source: "recipe/fixtures/library-calendars.ts#astryx",
+      reviewedAt: "2026-08-29T00:00:00.000Z",
+      manualCost: {
+        value: manualMappings.length,
+        unit: "reviewed-mapping",
+        note: `${manualMappings.length} explicit occurrence mappings plus source setup; no source-name inference; no react-day-picker adapter`,
+      },
+    },
+    identity: { id: "astryx.calendar", name: "Astryx Calendar" },
+    content: structuredClone(astryxCalendarInstance.content),
+    tokens: structuredClone(astryxCalendarInstance.tokens),
+    sourceFacts,
+    manualMappings,
+    receipts: structuredClone(astryxCalendarInstance.receipts),
+    benchmark: {
+      packageName: astryxCalendarSource.packageName,
+      version: astryxCalendarSource.version,
+      exportName: astryxCalendarSource.exportName,
+      importPath: astryxCalendarSource.packageName,
+      wrapper: "astryx Calendar caption + weekday row + day grid",
+      setupSeconds: 16,
+      sourceHarness: astryxCalendarSource.sourceRoot,
+      sourceMatrixCells: CALENDAR_SINGLE_LIBRARY_PROOF_PROTOCOL.cellsPerSource,
+      unsupportedCells: [
+        "range-selection",
+        "dropdown-month",
+        "time",
+        "react-day-picker",
+        "antd-datepicker",
+        "mui-datepicker",
+      ],
+      captureCommand:
+        "deferred: source references must be rendered in a separately authorized matched-benchmark task",
+      renderedReferences: false,
+      graded: false,
+    },
+  };
+})();
+

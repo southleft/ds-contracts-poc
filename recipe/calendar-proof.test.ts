@@ -1,8 +1,17 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { readFileSync } from "node:fs";
+
+import { adaptReviewedCalendar } from "./adapters/calendar.js";
 import { canonicalCalendarRecipeInstance } from "./fixtures/calendar.js";
-import { astryxCalendarInstance } from "./fixtures/library-calendars.js";
+import {
+  CALENDAR_SINGLE_LIBRARY_PROOF_PROTOCOL,
+  REACT_DAY_PICKER_ADAPTER_REFUSAL,
+  astryxCalendarAdapterConfig,
+  astryxCalendarInstance,
+  astryxCalendarSource,
+} from "./fixtures/library-calendars.js";
 import {
   CALENDAR_DAY_COUNT,
   CALENDAR_DAY_STATES,
@@ -21,6 +30,45 @@ const INSTANCES = [
 
 const setOf = (envelope: any, role: string) =>
   envelope.ir.children.find((child: any) => child.role === role);
+
+test("calendar@1 adapts the one reviewed source and refuses a second-library invention", () => {
+  const started = performance.now();
+  const instance = adaptReviewedCalendar(
+    astryxCalendarSource,
+    astryxCalendarAdapterConfig,
+  );
+  const first = compileCalendarRecipe(instance);
+  const collapsed = collapseCalendarRecipe(
+    first,
+    instance.provenance.selection,
+  );
+  const second = compileCalendarRecipe(collapsed);
+  assert.equal(first.integrity.canonicalHash, second.integrity.canonicalHash);
+  assert.equal(instance.identity.id, "astryx.calendar");
+  assert.equal(
+    instance.tokens.dayCell.size.fallback,
+    32,
+    "astryx --size-element-md",
+  );
+  assert.equal(
+    instance.tokens.dayStates.today.ring?.fallback,
+    "#ccd3dbff",
+    "today is a ring, not a fill lookalike",
+  );
+  assert.ok(performance.now() - started < 4000);
+  assert.equal(REACT_DAY_PICKER_ADAPTER_REFUSAL.adapterAuthored, false);
+  assert.equal(
+    CALENDAR_SINGLE_LIBRARY_PROOF_PROTOCOL.comparison.secondLibrary,
+    "named-refusal",
+  );
+  const adapter = readFileSync("recipe/adapters/calendar.ts", "utf8").toLowerCase();
+  for (const forbidden of ["@mui", "antd", "ant-design", "react-day-picker"])
+    assert.equal(
+      adapter.includes(forbidden),
+      false,
+      `${forbidden} must remain fixture/refusal data, not adapter cosmetics`,
+    );
+});
 
 test("calendar@1 compiles the declared set shape for every source", () => {
   for (const [name, instance] of INSTANCES) {

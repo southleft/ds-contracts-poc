@@ -27,7 +27,7 @@
       "path": "recipe/recipes/calendar.ts",
       "gate": "npm run recipe:calendar:check",
       "gateGreen": true,
-      "tests": 24,
+      "tests": 25,
       "components": 8,
       "sets": {
         "calendar/set": 2,
@@ -118,7 +118,8 @@
       "refusesOtherArchetypePages": [
         "115:295378 Input",
         "163:35981 Combobox",
-        "85:6781 Button"
+        "85:6781 Button",
+        "173:48924 Table"
       ],
       "instanceCountConstantEarnedItsPlace": "the first draft said 91 and the writer refused with \"requires 91 day instances; found 98\" rather than minting a wrong page — the week template has a variant per WeekNumbers, so it contributes 2x7, not 7"
     }
@@ -127,12 +128,13 @@
     "liveMintNotAttempted": {
       "refused": true,
       "statement": "No Calendar live Figma mint was attempted and no Calendar human grade exists or is claimed.",
-      "whyNotAttempted": "The measured cost basis of a live climb in this lineage: Input needed 78 recorded attempt-1 cycles to a staying mint, Combobox 41, and Data Table is at 27 and still has not stayed. docs/32 §7 additionally names Calendar as the densest grid the pipeline has faced with almost all of its behaviour code-only. Opening that climb was not in this round's scope.",
+      "whyNotAttempted": "Table live v32 stayed and received a human grade on 2026-08-29. Calendar still has no live mint. docs/32 D4 requires human review of Calendar adapters before any live write. The reviewed adapter is recipe/adapters/calendar.ts + astryxCalendarAdapterConfig; react-day-picker remains a named refusal, not an authored second library.",
       "whatWouldBeNeeded": [
+        "D4 human review of the Astryx Calendar adapter (no invented AntD/MUI/day-picker cosmetics)",
         "the PREPARE / AUTHORIZE / attempt / RECORD scaffold per version",
         "an attributable human grade from the owner on a mint that stays"
       ],
-      "actionableBecause": "the offline gate is green AND the writer now exists, so the live climb can start from a known-good compile and a hardened writer rather than from nothing. What is left is the per-version lineage scaffold and the owner’s grade."
+      "actionableBecause": "the offline gate is green, the writer exists, and a reviewed single-library adapter now exists. Live PREPARE is blocked on D4 adapter review, not on a missing recipe."
     },
     "crossLibraryLegNotProven": {
       "refused": true,

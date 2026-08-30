@@ -77,9 +77,10 @@ test("the writer refuses every other archetype's page", () => {
     "CALENDAR-MUST-NOT-WRITE-INPUT-PAGE",
     "CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE",
     "CALENDAR-MUST-NOT-WRITE-BUTTON-PAGE",
+    "CALENDAR-MUST-NOT-WRITE-TABLE-PAGE",
   ])
     assert.match(writer.code, new RegExp(marker));
-  for (const pageId of ["115:295378", "163:35981", "85:6781"])
+  for (const pageId of ["115:295378", "163:35981", "85:6781", "173:48924"])
     assert.equal(
       writer.code.includes(pageId),
       true,
