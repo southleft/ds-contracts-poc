@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "calendar-live-v11-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit at $.children[0].children[0].children[2].children[0].cornerRadius; writer accepted; restore 4 held; week-frame clipsContent omit held; host emitted week-frame cornerRadius vs compile omit; mint cleaned; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "c9591a63377c6875f3e300b5696c0761567d6bb6",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v11/antecedent-index.json",
+    "indexSha256": "2c209bf69ceae28e36d8d9c096aa5195db57d50f919d49a59aa3f8973e3c432e",
+    "hashSetSha256": "07d0fb081762dd3da2182256db551f2157294b962cced030da5e201db1db6c14"
+  },
+  "authorization": {
+    "commit": "cc89c18e0ef9c0f2eeeb67e1d7935f08687e3892",
+    "path": "recipe/evidence/calendar-live-pivot-v11/capture-authorization.json",
+    "sha256": "40424dbeab085969dc0475e4582758c82090f1fdebe5e6b0bb416ddade13d9c6",
+    "signingPublicKeySpkiSha256": "5fc8ea851e992625b5fd07fa54ad66ff2d9330d922a9c2279fd309f78663ac5e"
+  },
+  "attempt1": {
+    "pageId": "173:51082",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "extractRefused": "unsupported structural edit at $.children[0].children[0].children[2].children[0].cornerRadius",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "host-omit cornerRadius on calendar/week/${n} frames",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}
