@@ -22918,7 +22918,7 @@
   },
   "calendar": {
     "overallSuccess": true,
-    "status": "Calendar live v23 attempt 1 SUCCEEDED and THE MINT STAYS: writer, restore, extract, probe and all 8 captures accepted; one Astryx root 1373/1373; 8 of 8 cells passing with overlap 0; page 173:53929 on Scratch; cleanup persisted not executed; humanSignoff pending; do not invent a Calendar grade; react-day-picker remains a named refusal; product v1 incomplete",
+    "status": "Calendar live v23 attempt 1 SUCCEEDED and THE MINT STAYS: writer, restore, extract, probe and all 8 captures accepted; one Astryx root 1373/1373; 8 of 8 cells passing with overlap 0; page 173:53929 on Scratch; cleanup persisted not executed; 2026-08-30 canvas review mixed A+B — wrappers spaced (month-height gap 77), hug labels still 1×15 compile-faithful; humanSignoff pending; do not invent a Calendar grade; react-day-picker remains a named refusal; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": true,
     "humanGradeInvented": false,
@@ -22938,7 +22938,7 @@
     "crossLibraryProven": false,
     "namedRefusal": "recipe/evidence/calendar-named-refusal-v1.json",
     "blockers": [
-      "live mint stayed on 173:53929; Calendar human grade still pending; do not invent a grade",
+      "live mint stayed on 173:53929; canvas review mixed: frames spaced, hug day labels 1×15 (compile width.mode hug, no width.value); Calendar human grade still pending; do not invent a grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
       "product v1 incomplete until Calendar signoff plus Button leftover; do not start Button leftover remint"
     ],
