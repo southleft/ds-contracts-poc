@@ -77,7 +77,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v25";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v26";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -102,6 +102,7 @@ export const FORBIDDEN_CALENDAR_V21_RUN_IDENTITY = "19be1c96-calendar-v21";
 export const FORBIDDEN_CALENDAR_V22_RUN_IDENTITY = "19be1c96-calendar-v22";
 export const FORBIDDEN_CALENDAR_V23_RUN_IDENTITY = "19be1c96-calendar-v23";
 export const FORBIDDEN_CALENDAR_V24_RUN_IDENTITY = "19be1c96-calendar-v24";
+export const FORBIDDEN_CALENDAR_V25_RUN_IDENTITY = "19be1c96-calendar-v25";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -430,6 +431,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v21")throw new Error("CALENDAR-V21-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v22")throw new Error("CALENDAR-V22-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v23")throw new Error("CALENDAR-V23-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v24")throw new Error("CALENDAR-V24-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v25")throw new Error("CALENDAR-V25-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -614,12 +616,10 @@ for(const source of PLAN.sources){
       if(!dayLabelProperty)throw new Error("CALENDAR-DAY-PROPERTY-ABSENT:Label");
       if(typeof ir.properties.Label!=="string")throw new Error("CALENDAR-DAY-SOURCE-ABSENT:Label");
       void "CALENDAR-WRITER-LOAD-INSTANCE-FONT-BEFORE-SET-PROPERTIES";
-      void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-PAINTED-FALLBACK";
       for(const text of node.findAllWithCriteria({types:["TEXT"]})){
         if(sceneRole(text.name)!=="calendar/day/label")continue;
         if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
       }
-      node.setProperties({[dayLabelProperty]:ir.properties.Label});
     }else throw new Error("UNSUPPORTED-CHILD-KIND:"+ir.kind);
     node.visible=ir.visible!==false;node.opacity=ir.opacity===undefined?1:ir.opacity;
     node.name=ir.role&&ir.label&&ir.role!==ir.label?ir.role+" :: "+ir.label:(ir.label||ir.role||ir.kind);
@@ -637,10 +637,16 @@ for(const source of PLAN.sources){
     else applySizing(node,ir);
     if(ir.kind==="instance"){
       void "CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND";
-      void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-CHARACTERS";
+      void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-APPEND";
+      void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-PAINTED-FALLBACK";
       for(const text of node.findAllWithCriteria({types:["TEXT"]})){
         if(sceneRole(text.name)!=="calendar/day/label")continue;
         if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
+      }
+      node.setProperties({[dayLabelProperty]:ir.properties.Label});
+      void "CALENDAR-WRITER-INSTANCE-LABEL-VIA-CHARACTERS";
+      for(const text of node.findAllWithCriteria({types:["TEXT"]})){
+        if(sceneRole(text.name)!=="calendar/day/label")continue;
         if(text.characters!==ir.properties.Label)text.characters=ir.properties.Label;
         if(text.characters!==ir.properties.Label)throw new Error("CALENDAR-DAY-LABEL-MISMATCH:"+ir.role);
       }
@@ -838,6 +844,8 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v23 run identity");
   if (runtime.includes("CALENDAR-V24-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v24 run identity");
+  if (runtime.includes("CALENDAR-V25-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v25 run identity");
   if (
     runtime.includes("CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC") ===
       false ||
@@ -883,6 +891,9 @@ export function emitCalendarFigmaWriter(
   if (
     runtime.includes(
       "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-PAINTED-FALLBACK",
+    ) === false ||
+    runtime.includes(
+      "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-APPEND",
     ) === false ||
     runtime.includes(
       "node.setProperties({[dayLabelProperty]:ir.properties.Label})",
