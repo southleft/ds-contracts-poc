@@ -3627,6 +3627,19 @@
       "muiWorstColumn": "col0 127 vs 159",
       "probeDoesNotMeasureIt": true,
       "figmaWrites": 0
+    },
+    "columnModelSourceFacts": {
+      "artifact": "recipe/evidence/table-column-model-source-facts.json",
+      "correction": "the source is NOT ragged — the captured MUI table renders 5 columns x 3 rows with ONE width per column. Our mint loses that alignment, so it is an unreceipted silent loss, not a source property.",
+      "muiRootWidthPx": 688,
+      "muiRowsFillRoot": true,
+      "muiTableLayout": "auto",
+      "figmaHasNoColumnAwareAlgorithm": true,
+      "twoNamedLowerings": [
+        "explicit per-column widths measured from the rendered source",
+        "a no-figma-primitive receipt for table-layout:auto"
+      ],
+      "decidedHere": false
     }
   },
   "input": {

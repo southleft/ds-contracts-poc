@@ -1,0 +1,57 @@
+{
+  "artifactVersion": "table-column-model-source-facts-v1",
+  "measuredAt": "2026-08-29",
+  "substrate": "extract/computed/out/mui/table/captured-truth.json",
+  "figmaWrites": 0,
+  "why": "The v27 decision brief framed the ragged MUI mint as 'MUI declares no cell min-width, so its columns do not align'. That was wrong about the source. This is what the captured MUI Table actually renders.",
+  "measuredSourceFacts": {
+    "tableRoot": {
+      "display": "table",
+      "table-layout": "auto",
+      "width": "688px",
+      "min-width": "0px",
+      "box-sizing": "border-box"
+    },
+    "rows": {
+      "display": "table-row",
+      "width": "688px",
+      "note": "every row is EXACTLY the table root's width — rows fill, they do not hug"
+    },
+    "cells": {
+      "count": 15,
+      "shape": "5 columns x 3 rows",
+      "distinctWidths": [
+        "48px",
+        "208.125px",
+        "100.969px",
+        "110.484px",
+        "88.4219px"
+      ],
+      "occurrencesEach": 3,
+      "note": "each distinct width appears exactly three times — once per row. Every column has ONE width across all rows. The source's columns are ALIGNED."
+    }
+  },
+  "whatThisChanges": {
+    "previousFraming": "MUI has no column model, so a ragged mint reflects the source.",
+    "correctedFraming": "MUI's rendered table has perfectly aligned columns. The CSS table layout algorithm (table-layout: auto) computes one width per column across all rows. Our Figma mint produces two widths for the same column (127 and 159). The mint LOSES a property the source has.",
+    "consequence": "This is a loss, and it currently carries no receipt. docs/32's bar is 'named or carried; zero silent losses'. A ragged mint of an aligned source is a SILENT LOSS — the exact class this project exists to refuse."
+  },
+  "bearingOnGate1": {
+    "question": "does the table root hug its contents or fill its container?",
+    "measuredFact": "the captured root computes to 688px and every row computes to 688px — the rows fill the table and the table fills its container",
+    "fixtureDeclares": "recipe/fixtures/table.ts:102-105 declares resize.root/row/cell all hug-contents",
+    "status": "the fixture's hug-contents is NOT a source fact and is contradicted by the captured truth. Still an authoring decision to change, but no longer a coin flip."
+  },
+  "bearingOnGate2": {
+    "question": "does table@1 gain a per-column width model, and where do the widths come from?",
+    "measuredFact": "the widths exist in the captured source: one per column, measured from the rendered table",
+    "figmaPrimitive": "Figma auto-layout has no column-aware algorithm. Each row is an independent flex row, so nothing computes a shared column width. CSS table-layout has no Figma primitive.",
+    "twoNamedLowerings": [
+      "LOWER: compute one width per column from the rendered source and emit it as an explicit per-column width in Figma. Inputs are measured, not invented. This is the 'CSS->Figma gaps are decisions to author, with declared inverses' shape.",
+      "RECEIPT: declare table-layout:auto a no-figma-primitive loss and carry a receipt naming it, accepting that minted tables are ragged wherever content exceeds any declared minimum."
+    ],
+    "notDecidedHere": "Choosing between them is an authoring decision and belongs to the owner. What has changed is that it is now a choice between two grounded options rather than a request to invent a number."
+  },
+  "firstPartyNote": "There is no captured first-party ds.table under extract/computed/out, so the same measurement cannot be made for that source. first-party's mint aligns only because every cell binds minWidth 120 and all its fixture content is narrower.",
+  "productV1Complete": false
+}
