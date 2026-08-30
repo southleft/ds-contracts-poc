@@ -170,6 +170,32 @@ const cloneTokens = (
   return tokens;
 };
 
+/**
+ * Where the full-width lowering comes from, per source. `table@1` stays
+ * library-agnostic, so the citations live here.
+ *
+ *   root fills its container
+ *     @mui/material Table.js:43                     width: '100%'
+ *     ds.table src/components/Table/Table.module.css `.root { width: 100% }`
+ *
+ *   rows fill the table rather than hugging their content
+ *     @mui/material TableRow.js:46                  display: 'table-row'
+ *                                                   (a row always spans its table)
+ *     ds.table Table.module.css                      `.root { align-items: stretch }`
+ *                                                   so `.header` / `.body` stretch,
+ *                                                   and `.body { align-items: stretch }`
+ *                                                   so `.row` stretches too
+ *
+ *   cells do NOT fill — this is the open column-model question
+ *     ds.table TableCell.module.css                  min-width: var(--size-table-cell-width),
+ *                                                    no width
+ *     @mui/material TableCell.js                     display: 'table-cell', no min-width
+ *
+ * The captured truth cannot answer the root question on its own: a row always
+ * spans its table, and the columns tile the root exactly once their own padding
+ * is added (687.9999 of 688) under fill and shrink-to-fit alike. The source
+ * declarations above are what answer it.
+ */
 const firstPartyTokens = cloneTokens("ds.table", (_path, fallback) => fallback);
 
 const muiTokens = cloneTokens("mui.table", (path, fallback) => {

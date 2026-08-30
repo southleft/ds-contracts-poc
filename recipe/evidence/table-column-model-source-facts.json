@@ -15,7 +15,7 @@
     "rows": {
       "display": "table-row",
       "width": "688px",
-      "note": "every row is EXACTLY the table root's width — rows fill, they do not hug"
+      "note": "every row is EXACTLY the table root's width \u2014 rows fill, they do not hug"
     },
     "cells": {
       "count": 15,
@@ -28,19 +28,24 @@
         "88.4219px"
       ],
       "occurrencesEach": 3,
-      "note": "each distinct width appears exactly three times — once per row. Every column has ONE width across all rows. The source's columns are ALIGNED."
+      "note": "each distinct width appears exactly three times \u2014 once per row. Every column has ONE width across all rows. The source's columns are ALIGNED.",
+      "boxSizing": "content-box \u2014 the reported widths EXCLUDE padding",
+      "borderBoxWidths": ["52", "240.125", "132.969", "142.484", "120.4219"],
+      "borderBoxSum": "687.9999px \u2014 the columns tile the 688px root exactly"
     }
   },
   "whatThisChanges": {
     "previousFraming": "MUI has no column model, so a ragged mint reflects the source.",
     "correctedFraming": "MUI's rendered table has perfectly aligned columns. The CSS table layout algorithm (table-layout: auto) computes one width per column across all rows. Our Figma mint produces two widths for the same column (127 and 159). The mint LOSES a property the source has.",
-    "consequence": "This is a loss, and it currently carries no receipt. docs/32's bar is 'named or carried; zero silent losses'. A ragged mint of an aligned source is a SILENT LOSS — the exact class this project exists to refuse."
+    "consequence": "This is a loss, and it currently carries no receipt. docs/32's bar is 'named or carried; zero silent losses'. A ragged mint of an aligned source is a SILENT LOSS \u2014 the exact class this project exists to refuse."
   },
   "bearingOnGate1": {
     "question": "does the table root hug its contents or fill its container?",
-    "measuredFact": "the captured root computes to 688px and every row computes to 688px — the rows fill the table and the table fills its container",
-    "fixtureDeclares": "recipe/fixtures/table.ts:102-105 declares resize.root/row/cell all hug-contents",
-    "status": "the fixture's hug-contents is NOT a source fact and is contradicted by the captured truth. Still an authoring decision to change, but no longer a coin flip."
+    "answer": "THE CAPTURE DOES NOT ANSWER THIS. Corrected 2026-08-29.",
+    "whatWasClaimedAndWhyItWasWrong": "An earlier version of this file said the captured root computing to 688px while every row also computes to 688px contradicted the fixture's hug-contents. Both halves are worthless for this question. A row ALWAYS spans its table \u2014 that is what a table row is \u2014 so 'rows are 688 like the root' is true of every table ever rendered and distinguishes nothing. And the inference that the root was stretched came from comparing the columns' CONTENT-box widths (summing to 556) against the root's BORDER-box width (688); adding the cells' own padding brings the columns to 687.9999, which tiles the root exactly. Columns always tile their table, under fill and under shrink-to-fit alike.",
+    "whatWouldAnswerIt": "The table root's PARENT width. If the parent is wider than the table, the table shrank to fit; if they are equal, it filled. The capture does not include any ancestor of the table root, so the fact is simply not in this artifact.",
+    "viewportNote": "The capture viewport is 900x1000 and the root is 688, so the root is not filling the window. That gap is a wrapper this capture does not record, and 688 must not be carried as a source fact either way \u2014 the capture window has been minted as a token in this repo before.",
+    "status": "Gate 1 remains an open authoring decision with NO measured support in either direction."
   },
   "bearingOnGate2": {
     "question": "does table@1 gain a per-column width model, and where do the widths come from?",
@@ -53,5 +58,6 @@
     "notDecidedHere": "Choosing between them is an authoring decision and belongs to the owner. What has changed is that it is now a choice between two grounded options rather than a request to invent a number."
   },
   "firstPartyNote": "There is no captured first-party ds.table under extract/computed/out, so the same measurement cannot be made for that source. first-party's mint aligns only because every cell binds minWidth 120 and all its fixture content is narrower.",
-  "productV1Complete": false
+  "productV1Complete": false,
+  "conclusion": "table@1 has no per-column width model, and the source has one. That part is measured and stands. Whether a table root hugs or fills is NOT answered by this capture, and an earlier version of this file wrongly claimed it was."
 }

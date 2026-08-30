@@ -147,8 +147,8 @@ export interface TableRecipeInstance {
       editableProperties: ["Label", "Column", "Kind"];
     };
     resize: {
-      root: "hug-contents";
-      row: "hug-contents";
+      root: "fill-container";
+      row: "fill-container";
       cell: "hug-contents";
     };
     structuralEdits: "refuse";
@@ -343,6 +343,21 @@ export function normalizeTableRecipeInstance(
 }
 
 const hug = { mode: "hug" } as const;
+/**
+ * The lowering of a root that declares a full-width box.
+ *
+ * Both reviewed sources declare the table root and its rows as full-width, and
+ * the rows stretch to the root rather than sizing to their own content. The
+ * per-library citations live with the sources in `fixtures/library-tables.ts`,
+ * where library facts belong -- this recipe stays library-agnostic.
+ *
+ * The fixture previously declared `resize.root/row/cell` all `hug-contents`.
+ * That was an authoring choice, not a source fact, and the sources contradict it
+ * on the root and the row. Cells are NOT changed: one source declares a cell
+ * min-width and no width, the other declares neither, which is the open
+ * column-model question and is receipted rather than guessed.
+ */
+const fill = { mode: "fill" } as const;
 const solid = (color: string) => ({ kind: "solid" as const, color });
 const bind = (
   field: string,
@@ -417,7 +432,7 @@ const rowInstance = (role: string, density: TableDensity, row: TableRow) => ({
     "Cell 1": row.cells[1],
     "Cell 2": row.cells[2],
   },
-  width: hug,
+  width: fill,
   height: hug,
 });
 
@@ -520,7 +535,7 @@ const rowComponent = (
       counterAxisAlign: "center",
       itemSpacing: 0,
       padding: { top: 0, right: 0, bottom: 0, left: 0 },
-      width: hug,
+      width: fill,
       height: hug,
     },
     fills: [solid(colors.background.fallback)],
@@ -567,7 +582,7 @@ const tableVariant = (
       counterAxisAlign: "center",
       itemSpacing: 0,
       padding: { top: 0, right: 0, bottom: 0, left: 0 },
-      width: hug,
+      width: fill,
       height: hug,
     },
     fills: [solid(instance.tokens.headerBackground.fallback)],
@@ -592,7 +607,7 @@ const tableVariant = (
       counterAxisAlign: "min",
       itemSpacing: 0,
       padding: { top: 0, right: 0, bottom: 0, left: 0 },
-      width: hug,
+      width: fill,
       height: hug,
     },
     fills: [],
@@ -611,7 +626,7 @@ const tableVariant = (
       counterAxisAlign: "min",
       itemSpacing: 0,
       padding: { top: 0, right: 0, bottom: 0, left: 0 },
-      width: hug,
+      width: fill,
       height: hug,
     },
     fills: [solid(instance.tokens.surface.fallback)],
@@ -1220,8 +1235,8 @@ export function collapseTableRecipe(
         editableProperties: ["Label", "Column", "Kind"],
       },
       resize: {
-        root: "hug-contents",
-        row: "hug-contents",
+        root: "fill-container",
+        row: "fill-container",
         cell: "hug-contents",
       },
       structuralEdits: "refuse",

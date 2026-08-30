@@ -140,8 +140,11 @@ test("canonical IR has exact useful component and instance structure", () => {
       editableProperties: ["Label", "Column", "Kind"],
     },
     resize: {
-      root: "hug-contents",
-      row: "hug-contents",
+      // Both reviewed sources declare the root full-width and the rows
+      // stretching to it; only the cell hugs. Citations live in
+      // fixtures/library-tables.ts.
+      root: "fill-container",
+      row: "fill-container",
       cell: "hug-contents",
     },
     structuralEdits: "refuse",

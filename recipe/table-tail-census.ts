@@ -59,7 +59,7 @@ export const TABLE_TAIL_CENSUS_KNOWN_V23_REFUSAL = "$.children[1].label";
  * a fresh live run restores it. Point `--transaction` elsewhere to compare.
  */
 export const TABLE_TAIL_CENSUS_DEFAULT_SUBSTRATE =
-  "private/table-live-v25-transaction";
+  "private/table-live-v27-transaction";
 
 export interface TableTailCensusEntry {
   path: string;

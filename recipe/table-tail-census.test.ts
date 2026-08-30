@@ -54,7 +54,7 @@ test("a difference sink suppresses the refusal; two-arg callers still refuse", (
 });
 
 test(
-  "census reproduces the v25 live failure the writer fix targets",
+  "census reports the compile changes the substrate predates",
   {
     skip: existsSync(SUBSTRATE)
       ? false
@@ -66,40 +66,33 @@ test(
     assert.equal(census.artifactVersion, "table-tail-census-v1");
     assert.equal(census.predicts, "extract-side tail only");
     assert.equal(census.roots.length, 2);
-
-    for (const root of census.roots) {
+    for (const root of census.roots)
       assert.equal(
         root.preDiffRefusal,
         null,
         `${root.source} must reach the IR diff`,
       );
-    }
 
-    // The v25 substrate was minted by the OLD writer, which named every set
-    // `<role> :: <source display name>`. The writer now carries the compile
-    // label into the set name, and the two host label overrides that patched
-    // the symptom were removed. So against THIS substrate the census must show
-    // exactly the four name mismatches the writer fix targets -- two per root,
-    // on table/row-set and table/cell-set. A live run under the new writer is
-    // what turns these to zero; simulating the rename offline predicts zero.
-    assert.equal(census.totalAccountingProblems, 4);
-    const names = census.roots
-      .flatMap((root) => root.accounting.flatMap((row) => row.entries))
-      .map((entry) => `${entry.ownershipKey}#${entry.channel}`)
-      .sort();
-    assert.deepEqual(names, ["cell#name", "cell#name", "row#name", "row#name"]);
-    for (const entry of census.roots.flatMap((root) =>
-      root.accounting.flatMap((row) => row.entries),
-    )) {
-      assert.equal(entry.class, "mismatched");
-      assert.match(String(entry.expected), /:: Table (row|cell)$/);
-      assert.equal(String(entry.observed).endsWith(":: Table"), true);
-    }
-
+    // A substrate is only valid for the writer AND the compile that produced it.
+    // The v27 scene was minted before the full-width lowering, so every
+    // remaining difference must be a width-mode class -- the five nodes whose
+    // `width: 100%` is now lowered to fill (table root, header, body, row
+    // variant, row instance), across both sources. If anything else shows up
+    // here, the lowering touched something it should not have.
+    const families = new Set(census.classFamilies.map((f) => f.property));
+    assert.deepEqual(
+      [...families].sort(),
+      ["layout.width.mode", "width.mode"],
+      "only width-mode classes may differ against a pre-fill substrate",
+    );
+    assert.ok(census.totalDifferences > 0);
     assert.equal(
-      census.classFamilies.reduce((total, family) => total + family.count, 0),
+      census.classFamilies.reduce((total, f) => total + f.count, 0),
       census.totalDifferences,
       "class rollup must account for every difference",
     );
+
+    // The v24 teaching still holds: the row-set label class stays closed.
+    assert.equal(census.reproducesKnownV23Refusal, false);
   },
 );

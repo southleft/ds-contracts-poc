@@ -5,10 +5,10 @@ import type {
   TableRecipeInstance,
 } from "../recipes/table.js";
 
-const number = (
-  variable: string,
-  fallback: number,
-): TableNumberParameter => ({ variable, fallback });
+const number = (variable: string, fallback: number): TableNumberParameter => ({
+  variable,
+  fallback,
+});
 const color = (
   variable: string,
   fallback: `#${string}`,
@@ -100,8 +100,12 @@ export const canonicalTableRecipeInstance = {
       editableProperties: ["Label", "Column", "Kind"],
     },
     resize: {
-      root: "hug-contents",
-      row: "hug-contents",
+      // Both reviewed sources declare the root full-width and the rows
+      // stretching to it; only the cell hugs. See fixtures/library-tables.ts for
+      // the per-source citations. This previously read hug-contents on all
+      // three, which was an authoring choice the sources contradict.
+      root: "fill-container",
+      row: "fill-container",
       cell: "hug-contents",
     },
     structuralEdits: "refuse",

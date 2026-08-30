@@ -3631,15 +3631,14 @@
     "columnModelSourceFacts": {
       "artifact": "recipe/evidence/table-column-model-source-facts.json",
       "correction": "the source is NOT ragged — the captured MUI table renders 5 columns x 3 rows with ONE width per column. Our mint loses that alignment, so it is an unreceipted silent loss, not a source property.",
-      "muiRootWidthPx": 688,
-      "muiRowsFillRoot": true,
       "muiTableLayout": "auto",
       "figmaHasNoColumnAwareAlgorithm": true,
       "twoNamedLowerings": [
         "explicit per-column widths measured from the rendered source",
         "a no-figma-primitive receipt for table-layout:auto"
       ],
-      "decidedHere": false
+      "decidedHere": false,
+      "gate1NotAnsweredByTheCapture": "Corrected 2026-08-29: an earlier claim that the capture contradicted the fixture hug-contents was wrong. Rows always span their table, and the columns tile the root exactly once their own padding is added (687.9999 of 688) — true under fill and shrink-to-fit alike. The table root has no captured ancestor, so the fact is not in the artifact."
     }
   },
   "input": {

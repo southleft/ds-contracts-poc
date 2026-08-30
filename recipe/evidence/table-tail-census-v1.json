@@ -1,28 +1,43 @@
 {
   "artifactVersion": "table-tail-census-v1",
   "substrate": {
-    "transactionDir": "private/table-live-v25-transaction",
-    "extractRawBytes": 2703261,
-    "pageId": "173:46583",
+    "transactionDir": "private/table-live-v27-transaction",
+    "extractRawBytes": 2703279,
+    "pageId": "173:47351",
     "variableTableEntries": 11487
   },
   "predicts": "extract-side tail only",
   "doesNotPredict": "writer-side refusals (the class that stopped v1-v4). The substrate was captured under its own version's writer; teachings v9-v24 are read-side only.",
-  "reproducesKnownV23Refusal": true,
+  "reproducesKnownV23Refusal": false,
   "predictedNextLiveRefusal": {
     "source": "first-party",
-    "path": "$.children[1].label",
-    "role": "table/row-set",
-    "property": "label"
+    "path": "$.children[0].children[0].children[0].layout.width.mode",
+    "role": "table/header",
+    "property": "layout.width.mode"
   },
-  "totalAccountingProblems": 4,
-  "totalDifferences": 4,
+  "totalAccountingProblems": 28,
+  "totalDifferences": 28,
   "classFamilies": [
     {
-      "property": "label",
+      "property": "layout.width.mode",
       "reason": "value",
-      "count": 4,
-      "roles": ["table/cell-set", "table/row-set"]
+      "count": 20,
+      "roles": [
+        "table/body",
+        "table/header",
+        "table/row/comfortable/default",
+        "table/row/comfortable/selected",
+        "table/row/compact/default",
+        "table/row/compact/selected",
+        "table/variant/comfortable",
+        "table/variant/compact"
+      ]
+    },
+    {
+      "property": "width.mode",
+      "reason": "value",
+      "count": 8,
+      "roles": ["table/row-instance/0", "table/row-instance/1"]
     }
   ],
   "roots": [
@@ -35,21 +50,113 @@
           "kind": "table",
           "missing": 0,
           "extra": 0,
-          "mismatched": 0,
-          "entries": []
+          "mismatched": 10,
+          "entries": [
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/1/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/1/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/1/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/1/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            }
+          ]
         },
         {
           "kind": "row",
           "missing": 0,
           "extra": 0,
-          "mismatched": 1,
+          "mismatched": 4,
           "entries": [
             {
               "class": "mismatched",
-              "ownershipKey": "row",
-              "channel": "name",
-              "expected": "table/row-set :: Table row",
-              "observed": "table/row-set :: Table"
+              "ownershipKey": "row/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "row/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "row/children/2",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "row/children/3",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
             }
           ]
         },
@@ -57,49 +164,189 @@
           "kind": "cell",
           "missing": 0,
           "extra": 0,
-          "mismatched": 1,
-          "entries": [
-            {
-              "class": "mismatched",
-              "ownershipKey": "cell",
-              "channel": "name",
-              "expected": "table/cell-set :: Table cell",
-              "observed": "table/cell-set :: Table"
-            }
-          ]
+          "mismatched": 0,
+          "entries": []
         }
       ],
-      "accountingProblems": 2,
-      "differences": 2,
+      "accountingProblems": 14,
+      "differences": 14,
       "entries": [
         {
-          "path": "$.children[1].label",
+          "path": "$.children[0].children[0].children[0].layout.width.mode",
           "reason": "value",
-          "role": "table/row-set",
-          "parentRole": "table/library",
-          "property": "label",
-          "compiled": "Table row",
-          "observed": "Table"
+          "role": "table/header",
+          "parentRole": "table/variant/compact",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
         },
         {
-          "path": "$.children[2].label",
+          "path": "$.children[0].children[0].children[1].children[0].width.mode",
           "reason": "value",
-          "role": "table/cell-set",
-          "parentRole": "table/library",
-          "property": "label",
-          "compiled": "Table cell",
-          "observed": "Table"
+          "role": "table/row-instance/0",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[0].children[1].children[1].width.mode",
+          "reason": "value",
+          "role": "table/row-instance/1",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[0].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/body",
+          "parentRole": "table/variant/compact",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[0].layout.width.mode",
+          "reason": "value",
+          "role": "table/variant/compact",
+          "parentRole": "table/set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[0].layout.width.mode",
+          "reason": "value",
+          "role": "table/header",
+          "parentRole": "table/variant/comfortable",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[1].children[0].width.mode",
+          "reason": "value",
+          "role": "table/row-instance/0",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[1].children[1].width.mode",
+          "reason": "value",
+          "role": "table/row-instance/1",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/body",
+          "parentRole": "table/variant/comfortable",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/variant/comfortable",
+          "parentRole": "table/set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[0].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/compact/default",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/compact/selected",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[2].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/comfortable/default",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[3].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/comfortable/selected",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
         }
       ],
       "classes": [
         {
-          "role": "table/cell-set",
-          "property": "label",
+          "role": "table/body",
+          "property": "layout.width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/header",
+          "property": "layout.width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/row-instance/0",
+          "property": "width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/row-instance/1",
+          "property": "width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/row/comfortable/default",
+          "property": "layout.width.mode",
           "count": 1
         },
         {
-          "role": "table/row-set",
-          "property": "label",
+          "role": "table/row/comfortable/selected",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/row/compact/default",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/row/compact/selected",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/variant/comfortable",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/variant/compact",
+          "property": "layout.width.mode",
           "count": 1
         }
       ]
@@ -113,21 +360,113 @@
           "kind": "table",
           "missing": 0,
           "extra": 0,
-          "mismatched": 0,
-          "entries": []
+          "mismatched": 10,
+          "entries": [
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/1/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/0/children/1/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/1/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "table/children/1/children/1/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            }
+          ]
         },
         {
           "kind": "row",
           "missing": 0,
           "extra": 0,
-          "mismatched": 1,
+          "mismatched": 4,
           "entries": [
             {
               "class": "mismatched",
-              "ownershipKey": "row",
-              "channel": "name",
-              "expected": "table/row-set :: Table row",
-              "observed": "table/row-set :: Table"
+              "ownershipKey": "row/children/0",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "row/children/1",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "row/children/2",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
+            },
+            {
+              "class": "mismatched",
+              "ownershipKey": "row/children/3",
+              "channel": "width.mode",
+              "expected": "fill",
+              "observed": "hug"
             }
           ]
         },
@@ -135,49 +474,189 @@
           "kind": "cell",
           "missing": 0,
           "extra": 0,
-          "mismatched": 1,
-          "entries": [
-            {
-              "class": "mismatched",
-              "ownershipKey": "cell",
-              "channel": "name",
-              "expected": "table/cell-set :: Table cell",
-              "observed": "table/cell-set :: Table"
-            }
-          ]
+          "mismatched": 0,
+          "entries": []
         }
       ],
-      "accountingProblems": 2,
-      "differences": 2,
+      "accountingProblems": 14,
+      "differences": 14,
       "entries": [
         {
-          "path": "$.children[1].label",
+          "path": "$.children[0].children[0].children[0].layout.width.mode",
           "reason": "value",
-          "role": "table/row-set",
-          "parentRole": "table/library",
-          "property": "label",
-          "compiled": "Table row",
-          "observed": "Table"
+          "role": "table/header",
+          "parentRole": "table/variant/compact",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
         },
         {
-          "path": "$.children[2].label",
+          "path": "$.children[0].children[0].children[1].children[0].width.mode",
           "reason": "value",
-          "role": "table/cell-set",
-          "parentRole": "table/library",
-          "property": "label",
-          "compiled": "Table cell",
-          "observed": "Table"
+          "role": "table/row-instance/0",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[0].children[1].children[1].width.mode",
+          "reason": "value",
+          "role": "table/row-instance/1",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[0].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/body",
+          "parentRole": "table/variant/compact",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[0].layout.width.mode",
+          "reason": "value",
+          "role": "table/variant/compact",
+          "parentRole": "table/set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[0].layout.width.mode",
+          "reason": "value",
+          "role": "table/header",
+          "parentRole": "table/variant/comfortable",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[1].children[0].width.mode",
+          "reason": "value",
+          "role": "table/row-instance/0",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[1].children[1].width.mode",
+          "reason": "value",
+          "role": "table/row-instance/1",
+          "parentRole": "table/body",
+          "property": "width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/body",
+          "parentRole": "table/variant/comfortable",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[0].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/variant/comfortable",
+          "parentRole": "table/set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[0].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/compact/default",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[1].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/compact/selected",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[2].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/comfortable/default",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
+        },
+        {
+          "path": "$.children[1].children[3].layout.width.mode",
+          "reason": "value",
+          "role": "table/row/comfortable/selected",
+          "parentRole": "table/row-set",
+          "property": "layout.width.mode",
+          "compiled": "fill",
+          "observed": "hug"
         }
       ],
       "classes": [
         {
-          "role": "table/cell-set",
-          "property": "label",
+          "role": "table/body",
+          "property": "layout.width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/header",
+          "property": "layout.width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/row-instance/0",
+          "property": "width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/row-instance/1",
+          "property": "width.mode",
+          "count": 2
+        },
+        {
+          "role": "table/row/comfortable/default",
+          "property": "layout.width.mode",
           "count": 1
         },
         {
-          "role": "table/row-set",
-          "property": "label",
+          "role": "table/row/comfortable/selected",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/row/compact/default",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/row/compact/selected",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/variant/comfortable",
+          "property": "layout.width.mode",
+          "count": 1
+        },
+        {
+          "role": "table/variant/compact",
+          "property": "layout.width.mode",
           "count": 1
         }
       ]
