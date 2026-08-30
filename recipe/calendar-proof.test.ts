@@ -138,6 +138,36 @@ test("a week carries exactly seven days and a grid exactly the declared weeks", 
   assert.equal(grid.children.length, CALENDAR_WEEK_COUNT);
 });
 
+test("day instances compile the already-named dayCell-size box — the Calendar live v28 class", () => {
+  // V28 host wrote FIXED 32×32. Compile still emitted hug; firstDifference
+  // hit height.mode (keys sort height before width). Carry the named box.
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const daySize = setOf(envelope, "calendar/day-set").children[0].layout.width;
+  assert.equal(daySize.mode, "fixed");
+  assert.equal(daySize.value, 32, "astryx --size-element-md");
+
+  const weekDays = setOf(envelope, "calendar/week-set").children.flatMap(
+    (week: any) =>
+      week.children.filter((child: any) => child.kind === "instance"),
+  );
+  const gridDays = setOf(envelope, "calendar/set")
+    .children.flatMap((variant: any) => {
+      const grid = variant.children.find(
+        (child: any) => child.role === "calendar/grid",
+      );
+      return (grid?.children ?? []).flatMap((week: any) =>
+        week.children.filter((child: any) => child.kind === "instance"),
+      );
+    });
+  assert.ok(weekDays.length > 0 && gridDays.length > 0);
+  for (const day of [...weekDays, ...gridDays]) {
+    assert.equal(day.width.mode, "fixed", `${day.role} width`);
+    assert.equal(day.height.mode, "fixed", `${day.role} height`);
+    assert.equal(day.width.value, daySize.value, `${day.role} named width`);
+    assert.equal(day.height.value, daySize.value, `${day.role} named height`);
+  }
+});
+
 test("every day cell carries a measured box — calendar/day-cell-box", () => {
   // This is the required fact the Table climb ran into live: a grid whose cells
   // hug their own content cannot align into columns. Enforced here, not hoped for.

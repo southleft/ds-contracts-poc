@@ -470,14 +470,28 @@ const dayComponent = (
   };
 };
 
-const dayInstance = (role: string, day: CalendarDay) => ({
+/**
+ * A day instance carries the already-named `dayCell-size` box.
+ *
+ * Calendar live v28 host wrote FIXED 32×32 (writer teaching). Compile still
+ * emitted hug. Extract firstDifference hit `height.mode` — keys sort `height`
+ * before `width` — on the first month-grid day instance
+ * (`$.children[0].children[0].children[2].children[0].children[1]`). Emit the
+ * named FIXED box. Do not invent a px. Do not emit hug. Do not teach FIXED as
+ * a fill. Day-label hug stays.
+ */
+const dayInstance = (
+  role: string,
+  day: CalendarDay,
+  size: CalendarNumberParameter,
+) => ({
   kind: "instance" as const,
   role,
   label: day.label,
   componentRef: "calendar@1/day",
   properties: { State: day.state, Label: day.label },
-  width: hug,
-  height: hug,
+  width: fixed(size.fallback),
+  height: fixed(size.fallback),
 });
 
 /** One week row: seven day instances, optionally preceded by a week number. */
@@ -499,7 +513,13 @@ const weekComponent = (
       ),
     );
   for (const [index, day] of week.days.entries())
-    children.push(dayInstance(`calendar/day-instance/${index}`, day));
+    children.push(
+      dayInstance(
+        `calendar/day-instance/${index}`,
+        day,
+        instance.tokens.dayCell.size,
+      ),
+    );
   return {
     kind: "component",
     role: `calendar/week/${weekNumbers}`,
@@ -555,7 +575,13 @@ const weekFrame = (
       ),
     );
   for (const [dayIndex, day] of week.days.entries())
-    children.push(dayInstance(`calendar/week/${index}/day/${dayIndex}`, day));
+    children.push(
+      dayInstance(
+        `calendar/week/${index}/day/${dayIndex}`,
+        day,
+        instance.tokens.dayCell.size,
+      ),
+    );
   return {
     kind: "frame",
     role: `calendar/week/${index}`,
