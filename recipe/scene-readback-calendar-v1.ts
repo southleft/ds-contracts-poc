@@ -115,6 +115,8 @@ export const CALENDAR_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "CALENDAR-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const CALENDAR_LIVE_V1_DAY_BUTTON_FOLD_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
+export const CALENDAR_LIVE_V1_NAV_BINDING_COMPILE_ORDER_MARKER =
+  "CALENDAR-HOST-NAV-BINDING-COMPILE-ORDER";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -414,6 +416,11 @@ const TABLE_VARIANT_COMPILE_BINDING_FIELDS = [
   "fills.0.color",
 ] as const;
 const HEADER_COMPILE_BINDING_FIELDS = ["layout.itemSpacing"] as const;
+const NAV_BUTTON_ROLE = /^calendar\/nav\/(?:previous|next)$/;
+const NAV_COMPILE_BINDING_FIELDS = [
+  "layout.width.value",
+  "layout.height.value",
+] as const;
 
 const withStableOccurrences = (seeds: readonly FactSeed[]): SceneFact[] => {
   const counts = new Map<string, number>();
@@ -809,7 +816,9 @@ const compileBindingFieldsFor = (
   void CALENDAR_LIVE_V1_WEEK_FRAME_ITEM_SPACING_MARKER;
   void CALENDAR_LIVE_V1_WEEK_NUMBER_BINDING_COMPILE_ORDER_MARKER;
   void CALENDAR_LIVE_V1_WEEK_SET_NUMBER_BINDING_COMPILE_ORDER_MARKER;
+  void CALENDAR_LIVE_V1_NAV_BINDING_COMPILE_ORDER_MARKER;
   if (role === "calendar/caption") return [...CAPTION_COMPILE_BINDING_FIELDS];
+  if (role && NAV_BUTTON_ROLE.test(role)) return [...NAV_COMPILE_BINDING_FIELDS];
   if (role && WEEKDAY_TEXT_ROLE.test(role))
     return [...WEEKDAY_COMPILE_BINDING_FIELDS];
   if (role === "calendar/week/number")
