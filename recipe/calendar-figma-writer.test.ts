@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v18$/);
+  assert.match(writer.runIdentity, /-calendar-v19$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -139,6 +139,8 @@ test("the writer applies instance Label via characters — the Calendar live v3 
   assert.match(writer.code, /19be1c96-calendar-v16/);
   assert.match(writer.code, /CALENDAR-V17-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v17/);
+  assert.match(writer.code, /CALENDAR-V18-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v18/);
 });
 
 test("the writer takes day Label presence from the set — the Calendar live v7 class", () => {

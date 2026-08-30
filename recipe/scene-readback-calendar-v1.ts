@@ -139,6 +139,8 @@ export const CALENDAR_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-HEADER-BODY-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_VARIANT_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-VARIANT-STROKES-OMITTED";
+export const CALENDAR_LIVE_V1_DAY_VARIANT_STROKES_OMITTED_MARKER =
+  "CALENDAR-HOST-DAY-VARIANT-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_ROW_VARIANT_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-ROW-VARIANT-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
@@ -1268,6 +1270,23 @@ const omitWeekFrameStrokes = <T extends { strokes?: unknown }>(
   return rest as T;
 };
 
+const omitDayVariantStrokes = <T extends { strokes?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void CALENDAR_LIVE_V1_DAY_VARIANT_STROKES_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (
+    !role ||
+    !/^calendar\/day\/(?:default|selected|outside)$/.test(role) ||
+    scene.type !== "COMPONENT"
+  )
+    return frame;
+  if (frame.strokes === undefined) return frame;
+  const { strokes: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitHeaderBodyStrokes = <T extends { strokes?: unknown }>(
   scene: SceneNodeSnapshot,
   frame: T,
@@ -1377,40 +1396,43 @@ export function sceneToNormalizedIr(
     scene.type === "COMPONENT" ||
     scene.type === "COMPONENT_SET"
   ) {
-    const frame = omitWeekFrameStrokes(
+    const frame = omitDayVariantStrokes(
       scene,
-      omitHeaderBodyStrokes(
+      omitWeekFrameStrokes(
         scene,
-        omitWeekFrameEffects(
+        omitHeaderBodyStrokes(
           scene,
-          omitHeaderBodyEffects(
+          omitWeekFrameEffects(
             scene,
-            omitWeekFrameCornerRadius(
+            omitHeaderBodyEffects(
               scene,
-              omitHeaderBodyCornerRadius(
+              omitWeekFrameCornerRadius(
                 scene,
-                omitWeekFrameClipsContent(
+                omitHeaderBodyCornerRadius(
                   scene,
-                  omitHeaderBodyClipsContent(
+                  omitWeekFrameClipsContent(
                     scene,
-                    omitSetStrokes(
+                    omitHeaderBodyClipsContent(
                       scene,
-                      omitSetEffects(
+                      omitSetStrokes(
                         scene,
-                        omitSetCornerRadius(
+                        omitSetEffects(
                           scene,
-                          omitSetClipsContent(scene, {
-                            ...common,
-                            layout: sceneLayout(scene),
-                            fills,
-                            ...(strokes === undefined ? {} : { strokes }),
-                            ...(effects === undefined ? {} : { effects }),
-                            ...(scene.cornerRadius === undefined
-                              ? {}
-                              : { cornerRadius: scene.cornerRadius }),
-                            clipsContent: scene.clipsContent ?? false,
-                            children,
-                          }),
+                          omitSetCornerRadius(
+                            scene,
+                            omitSetClipsContent(scene, {
+                              ...common,
+                              layout: sceneLayout(scene),
+                              fills,
+                              ...(strokes === undefined ? {} : { strokes }),
+                              ...(effects === undefined ? {} : { effects }),
+                              ...(scene.cornerRadius === undefined
+                                ? {}
+                                : { cornerRadius: scene.cornerRadius }),
+                              clipsContent: scene.clipsContent ?? false,
+                              children,
+                            }),
+                          ),
                         ),
                       ),
                     ),
