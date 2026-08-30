@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v3$/);
+  assert.match(writer.runIdentity, /-calendar-v4$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -82,6 +82,7 @@ test("the day-cell box is applied before children — the Calendar live v1 class
   assert.match(writer.code, /19be1c96-calendar-v1/);
   assert.match(writer.code, /CALENDAR-V2-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v2/);
+  assert.match(writer.code, /CALENDAR-V3-IDENTITY-REUSE/);
   const dayBefore = writer.code.indexOf(
     "CALENDAR-WRITER-DAY-CELL-BOX-BEFORE-CHILDREN",
   );
@@ -91,19 +92,25 @@ test("the day-cell box is applied before children — the Calendar live v1 class
   assert.ok(dayBefore >= 0 && childrenLoop >= 0 && dayBefore < childrenLoop);
 });
 
-test("the writer loads the instance font before setProperties — the Calendar live v2 class", () => {
+test("the writer loads the instance font before writing Label — the Calendar live v2 class", () => {
   const writer = emitCalendarFigmaWriter([input()]);
   assert.match(
     writer.code,
     /CALENDAR-WRITER-LOAD-INSTANCE-FONT-BEFORE-SET-PROPERTIES/,
   );
-  const loadFont = writer.code.indexOf(
-    "CALENDAR-WRITER-LOAD-INSTANCE-FONT-BEFORE-SET-PROPERTIES",
+});
+
+test("the writer applies instance Label via characters — the Calendar live v3 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(writer.code, /CALENDAR-WRITER-INSTANCE-LABEL-VIA-CHARACTERS/);
+  assert.equal(
+    writer.code.includes("node.setProperties({[property]:ir.properties.Label})"),
+    false,
+    "setProperties(Label) is the refused class; do not call it",
   );
-  const setProperties = writer.code.indexOf(
-    "node.setProperties({[property]:ir.properties.Label})",
-  );
-  assert.ok(loadFont >= 0 && setProperties >= 0 && loadFont < setProperties);
+  assert.match(writer.code, /text\.characters=ir\.properties\.Label/);
+  assert.match(writer.code, /CALENDAR-V3-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v3/);
 });
 
 test("the writer refuses every other archetype's page", () => {

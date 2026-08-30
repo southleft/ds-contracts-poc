@@ -1,0 +1,6 @@
+{
+  "artifactVersion": "calendar-live-v4-operator-security-attestation-template-v1",
+  "status": "template only; complete privately after PREPARE+AUTHORIZE",
+  "tokenValuesForbidden": true,
+  "privateDirectory": "private/calendar-live-v4-security-attestation.json"
+}
