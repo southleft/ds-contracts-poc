@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "af898f861ff3fde735d3ba85ace732d6e5ccfac79dd15dea8e9304e52af07577",
+    "sha256": "ceab87ada80efe10caa3c2b5f6eb849481f7995d69460e957dd70ca25d0af419",
     "ok": false,
     "roots": [
       {
@@ -51,11 +51,11 @@
         "setId": "85:7406",
         "variants": 144,
         "expectedFacts": 8706,
-        "matched": 8704,
-        "silent": 2,
+        "matched": 8705,
+        "silent": 1,
         "missing": 0,
         "extra": 1,
-        "mismatched": 2,
+        "mismatched": 1,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8706,
@@ -63,12 +63,6 @@
         "fixedPointStable": false,
         "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
         "channelDrift": [
-          {
-            "channel": "layout.padding",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 1
-          },
           {
             "channel": "width.mode",
             "missing": 0,
@@ -84,7 +78,6 @@
         ],
         "sampleFailures": [
           "extra root#width.value@0000",
-          "mismatched root#layout.padding@0000",
           "mismatched root#width.mode@0000"
         ]
       },
@@ -94,11 +87,11 @@
         "setId": "85:8054",
         "variants": 144,
         "expectedFacts": 8778,
-        "matched": 8776,
-        "silent": 2,
+        "matched": 8777,
+        "silent": 1,
         "missing": 0,
         "extra": 1,
-        "mismatched": 2,
+        "mismatched": 1,
         "duplicateCollapsed": 0,
         "unobserved": 0,
         "denominator": 8778,
@@ -106,12 +99,6 @@
         "fixedPointStable": false,
         "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
         "channelDrift": [
-          {
-            "channel": "layout.padding",
-            "missing": 0,
-            "extra": 0,
-            "mismatched": 1
-          },
           {
             "channel": "width.mode",
             "missing": 0,
@@ -127,7 +114,6 @@
         ],
         "sampleFailures": [
           "extra root#width.value@0000",
-          "mismatched root#layout.padding@0000",
           "mismatched root#width.mode@0000"
         ]
       }
@@ -139,6 +125,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "5f73ca064cd008c22d7123b5862f52590c7fbdf52987987142ad422fd5564705"
+    "sha256": "d42ee744d1a861f0aa85871d84a5109d06f9858e90867998993bf6d3b9cddeeb"
   }
 }

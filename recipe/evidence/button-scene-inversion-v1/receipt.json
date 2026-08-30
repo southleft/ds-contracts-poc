@@ -54,11 +54,11 @@
       "source": "altitude",
       "setId": "85:7406",
       "expectedFacts": 8706,
-      "matched": 8704,
-      "silent": 2,
+      "matched": 8705,
+      "silent": 1,
       "missing": 0,
       "extra": 1,
-      "mismatched": 2,
+      "mismatched": 1,
       "fixedPointStable": false,
       "ok": false
     },
@@ -66,11 +66,11 @@
       "source": "fluent",
       "setId": "85:8054",
       "expectedFacts": 8778,
-      "matched": 8776,
-      "silent": 2,
+      "matched": 8777,
+      "silent": 1,
       "missing": 0,
       "extra": 1,
-      "mismatched": 2,
+      "mismatched": 1,
       "fixedPointStable": false,
       "ok": false
     }
@@ -100,7 +100,7 @@
     },
     "inversion": {
       "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "sha256": "af898f861ff3fde735d3ba85ace732d6e5ccfac79dd15dea8e9304e52af07577"
+      "sha256": "ceab87ada80efe10caa3c2b5f6eb849481f7995d69460e957dd70ca25d0af419"
     },
     "census": {
       "path": "recipe/evidence/button-scene-inversion-v1/census.json",

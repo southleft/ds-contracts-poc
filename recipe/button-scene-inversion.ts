@@ -229,6 +229,37 @@ export function carryButtonV4SetLayoutMode(
   return scene.layoutMode;
 }
 
+export function carryButtonV4SetLayoutPadding(
+  scene: SceneNodeSnapshot,
+  chrome: ButtonPlanRootChrome | undefined,
+):
+  | {
+      paddingTop: number;
+      paddingRight: number;
+      paddingBottom: number;
+      paddingLeft: number;
+    }
+  | undefined {
+  if (
+    chrome?.padding === undefined ||
+    scene.type !== "COMPONENT_SET" ||
+    scene.ownershipKey !== "root"
+  )
+    return undefined;
+  const observedUniform32 =
+    scene.paddingTop === 32 &&
+    scene.paddingRight === 32 &&
+    scene.paddingBottom === 32 &&
+    scene.paddingLeft === 32;
+  const compileUniform0 =
+    chrome.padding.top === 0 &&
+    chrome.padding.right === 0 &&
+    chrome.padding.bottom === 0 &&
+    chrome.padding.left === 0;
+  if (!observedUniform32 || !compileUniform0) return undefined;
+  return { paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0 };
+}
+
 export function recoverButtonV4RoleOnlyName(
   scene: SceneNodeSnapshot,
   entry: ButtonPlanNameEntry | undefined,
@@ -608,6 +639,7 @@ export function normalizeButtonObserveScene(
 ): SceneNodeSnapshot {
   const isSet = scene.type === "COMPONENT_SET";
   const carriedLayoutMode = carryButtonV4SetLayoutMode(scene, planRootChrome);
+  const carriedPadding = carryButtonV4SetLayoutPadding(scene, planRootChrome);
   const resolvedFont =
     fontByOwnershipKey === undefined
       ? scene.fontName
@@ -634,6 +666,7 @@ export function normalizeButtonObserveScene(
     ...(carriedLayoutMode === undefined
       ? {}
       : { layoutMode: carriedLayoutMode }),
+    ...(carriedPadding ?? {}),
     ...(resolvedFont === undefined ? {} : { fontName: resolvedFont }),
     ...(isSet ? { fills: undefined, cornerRadius: undefined } : {}),
     ...(scene.componentRef === undefined ||
@@ -973,6 +1006,7 @@ export function serializeButtonInversionReport(
       "TAUGHT 2026-08-29 (B2h, font substrate): compile names the SOURCE font stack; Figma reports the face it RESOLVED. The observed face canonicalises onto the compile stack ONLY when the resolved family is a member of that stack and the styles agree once Figma spelling is normalised (SemiBold <-> Semi Bold). altitude resolved its first choice, IBM Plex Sans. fluent FELL BACK to Roboto, the 5th entry of its Segoe UI chain -- a named fallback, not an equality. A resolved family absent from the stack is left live because that would be a real substitution. No font invented, no expected plan restamped. Silent 149 -> 5 on both roots.",
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
       "TAUGHT 2026-08-30 (B2k, set layout.mode carry): the component set is the proof sheet, not a component fact -- neither source contract names its layout. Compile plans vertical; every writer era (v4 AND current interpret.ts) mints HORIZONTAL on canvas, so a fresh mint would not reconcile it. Same class as Input V64 (carry set layout.mode horizontal). Observed HORIZONTAL canonicalises to compile vertical ONLY on the root set and ONLY between those two measured vocabularies; anything else stays live. Silent 3 -> 2 on both roots.",
+      "TAUGHT 2026-08-30 (B2l, set layout.padding carry): compile plans padding 0 on the proof sheet; every writer era mints uniform 32 (interpret.ts paddingTop/Right/Bottom/Left = 32). Same class as Input V65 (carry set layout.padding 32). Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set; any other padding stays live. Silent 2 -> 1 on both roots.",
     ],
     roots: report.roots.map((root) => ({
       source: root.source,

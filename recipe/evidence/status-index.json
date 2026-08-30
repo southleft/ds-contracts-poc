@@ -29,39 +29,39 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "85089cff51771aa4871d774c82360532d0d380e533043818f28e086cc8a9c34c",
+      "indexSha256": "19393ef48f4c3568f5797b6bd65959fcad0647ab9d288ede58a9f136bc631ace",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "af898f861ff3fde735d3ba85ace732d6e5ccfac79dd15dea8e9304e52af07577",
+      "inversionSha256": "ceab87ada80efe10caa3c2b5f6eb849481f7995d69460e957dd70ca25d0af419",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "5f73ca064cd008c22d7123b5862f52590c7fbdf52987987142ad422fd5564705",
+      "receiptSha256": "d42ee744d1a861f0aa85871d84a5109d06f9858e90867998993bf6d3b9cddeeb",
       "roots": {
         "altitude": {
           "setId": "85:7406",
           "expectedFacts": 8706,
-          "matched": 8704,
-          "silent": 2,
+          "matched": 8705,
+          "silent": 1,
           "missing": 0,
           "extra": 1,
-          "mismatched": 2,
+          "mismatched": 1,
           "fixedPointStable": false
         },
         "fluent": {
           "setId": "85:8054",
           "expectedFacts": 8778,
-          "matched": 8776,
-          "silent": 2,
+          "matched": 8777,
+          "silent": 1,
           "missing": 0,
           "extra": 1,
-          "mismatched": 2,
+          "mismatched": 1,
           "fixedPointStable": false
         }
       }
     },
     "blockers": [
       "no attributable human signoff",
-      "scene-derived inversion ran; silent is derived (Altitude 2/8706, Fluent 2/8778) and is not zero",
+      "scene-derived inversion ran; silent is derived (Altitude 1/8706, Fluent 1/8778) and is not zero",
       "scene-derived fixed point is not stable (observed bindings keep Figma alphabetical order; compile carries semantic order)",
-      "remaining silent is the Input V65/V66 set-layout carry family: layout.padding, width.mode + the width.value extra (layout.mode closed by B2k)"
+      "remaining silent is the Input V66 set-width carry class: width.mode + the width.value extra (layout.mode closed by B2k, layout.padding by B2l)"
     ],
     "supersededHistoricalArtifacts": [
       {
@@ -80,7 +80,7 @@
     "leftoverInversion": {
       "measuredAt": "2026-08-29",
       "silentBefore": 149,
-      "silentAfter": 2,
+      "silentAfter": 1,
       "extra": 1,
       "fontSubstrateClassClosed": true,
       "fontSubstrateFacts": 144,

@@ -6,6 +6,7 @@ import {
   buttonPlanRootChrome,
   buttonV4LiveTokenName,
   carryButtonV4SetLayoutMode,
+  carryButtonV4SetLayoutPadding,
   canonicalizeButtonObserveComponentRef,
   canonicalizeButtonObserveTokenName,
   compileButtonComponentRefMap,
@@ -369,6 +370,49 @@ test("set layout.mode carries HORIZONTAL onto compile vertical only on the root 
   );
   // absent compile chrome never carries
   assert.equal(carryButtonV4SetLayoutMode(setScene, undefined), "HORIZONTAL");
+});
+
+test("set padding carries uniform 32 onto compile uniform 0 only on the root set", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const chrome = buttonPlanRootChrome(altitude.expectedScenePlan);
+  assert.deepEqual(chrome.padding, { top: 0, right: 0, bottom: 0, left: 0 });
+  const setScene = {
+    ownershipKey: "root",
+    type: "COMPONENT_SET" as const,
+    name: "button/set :: Button / button@1 proof",
+    visible: true,
+    opacity: 1,
+    boundVariables: [],
+    width: 0,
+    height: 0,
+    paddingTop: 32,
+    paddingRight: 32,
+    paddingBottom: 32,
+    paddingLeft: 32,
+    children: [],
+  };
+  assert.deepEqual(carryButtonV4SetLayoutPadding(setScene, chrome), {
+    paddingTop: 0,
+    paddingRight: 0,
+    paddingBottom: 0,
+    paddingLeft: 0,
+  });
+  // non-uniform or non-32 padding stays live
+  assert.equal(
+    carryButtonV4SetLayoutPadding({ ...setScene, paddingLeft: 16 }, chrome),
+    undefined,
+  );
+  // non-root nodes never carry
+  assert.equal(
+    carryButtonV4SetLayoutPadding(
+      { ...setScene, ownershipKey: "root/children/0" },
+      chrome,
+    ),
+    undefined,
+  );
+  // absent compile chrome never carries
+  assert.equal(carryButtonV4SetLayoutPadding(setScene, undefined), undefined);
 });
 
 test("variantAxis order canonicalizes only when the value set matches compile", () => {
