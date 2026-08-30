@@ -1,0 +1,142 @@
+{
+  "artifactVersion": "calendar-live-v23-attempt-1-v1",
+  "status": "THE MINT STAYS. Writer, restore, extract, probe and all 8 captures accepted; one Astryx root; every source usability boolean green; 8 of 8 cells pass. Cleanup was NOT executed — this is the green path. Calendar has a live Figma mint for the first time. Human signoff is pending and is TJ's. Do not invent a Calendar grade.",
+  "authorizationCommit": "97bf05cb9934716766ad195006d845b619fe522b",
+  "codeCommit": "97bf05cb9934716766ad195006d845b619fe522b",
+  "antecedentCommit": "37b2f1504ebe3b64fc103d349c74ebf34f770d47",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=173-53929",
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v23",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "27aa5775-1744-465b-a545-20c5e4ac14cc",
+    "attempt": 1,
+    "authorizationSha256": "92b8890ef98f6ace37ac973a25fd7a4ff522d7f61dee14fb2035548f4596efe9",
+    "signingPublicKeySpkiSha256": "5a6aa5a6853987584acc60b5f63572b08cc1cc22614b2f212ead4cd959da6833",
+    "programSha256": "588a3b2537051952a6b1f39be3b5f0c798f045b5407175063bc81d3cf8547627",
+    "requestBindingSha256": "9601c684e983bc5dddb25940a37863b9530f84548f52e1aeceb813fd14f76ee0",
+    "requestSha256": "c344f937d87a318e65222b8e259125d01d5413b4b1df341a806eb978de153675"
+  },
+  "teaching": {
+    "one": "CALENDAR-HOST-GATES-ONE-ASTRYX-ROOT",
+    "cleared": true,
+    "namedCauseCleared": "validateCalendarLiveTechnicalGates now requires roots.length === CALENDAR_LIVE_V23_SOURCE_ROOTS (1). Do not invent a second library. react-day-picker stays a named refusal."
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v23",
+    "pageId": "173:53929",
+    "sectionId": "173:53930",
+    "collectionId": "VariableCollectionId:173:53931",
+    "daySetId": "173:53959",
+    "weekSetId": "173:53991",
+    "calendarSetId": "173:54108",
+    "runIdentity": "19be1c96-calendar-v23",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "receiptSha256": "262084fb7318e2233f887e45e2438d26462cf29339657c975d7a489f0f8138c0",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true,
+    "receiptSha256": "3051ffa0e2b0ec5a8f9caa4d40101316c86c339905b4c6449a3978875d0e9478"
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "accepted": true,
+    "receiptSha256": "746e726bd629a7638a3fe4416c5f676b58536d5148d9215875400082e937c71e",
+    "rawResponseBytes": 2748495,
+    "roots": ["astryx"],
+    "fixedPointReached": true
+  },
+  "probe": {
+    "issued": true,
+    "accepted": true,
+    "passed": true,
+    "receiptSha256": "60b9a2cbe2786820129441c3d632afae1b5337df6534e751d7f67c2b9393ac08",
+    "pageId": "173:53929",
+    "reflowPassed": true,
+    "contentHugPassed": true,
+    "bindingCompatibilityPassed": true,
+    "noFakeLayoutPassed": true,
+    "stateSemanticsPassed": true,
+    "switchingRestored": true,
+    "textPropertiesRestored": true,
+    "exactSceneRestoration": true,
+    "cellsPassing": 8,
+    "visibleAreaLoss": 0,
+    "overlapPixels": 0,
+    "visitedVariants": 8
+  },
+  "gates": {
+    "persisted": true,
+    "validated": true,
+    "roots": 1,
+    "expectedDenominator": 1373,
+    "matched": 1373,
+    "fixedPoint": true,
+    "artifactSha256": "a5b30f5c75a336c2ce16a72f4872d4d3e982c1f18572bbefa6ff818c5021b9be"
+  },
+  "captures": {
+    "issued": 8,
+    "accepted": 8,
+    "allAccepted": true
+  },
+  "cleanup": {
+    "executedBecauseFailure": false,
+    "notExecutedBecauseGreenPath": "the orchestrator reports main-complete and instructs that cleanup remains persisted for failure/abort recovery only; do not execute it on this green path",
+    "signedCleanupIssued": false,
+    "signedCleanupAccepted": false,
+    "cleanupRequestPersisted": true,
+    "cleanupRequestPath": "private/calendar-live-v23-transaction/requests/002-cleanup/request.json",
+    "mintStayed": true,
+    "calendarPagePresent": true,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true
+  },
+  "arrange": {
+    "calendarOnly": true,
+    "oneSetAtATime": true,
+    "componentContainerRenamedImmediately": true,
+    "leftoverComponentContainerOnCalendarPage": [],
+    "sets": {
+      "day": { "id": "173:53959", "name": "calendar/day-set :: Calendar day", "grid": "173:54481", "gridName": "Calendar Day Grid" },
+      "week": { "id": "173:53991", "name": "calendar/week-set :: Calendar week", "grid": "173:54499", "gridName": "Calendar Week Grid" },
+      "calendar": { "id": "173:54108", "name": "calendar/set :: Astryx Calendar", "grid": "173:54513", "gridName": "Calendar Month Grid" }
+    },
+    "didNotArrange": ["115:295378", "163:35981", "85:6781", "173:48924"]
+  },
+  "nextTeaching": {
+    "doNotInvent": true,
+    "doNotInventHumanGrade": true,
+    "noFurtherVersionNeededForTheMint": true,
+    "humanReviewStop": "Calendar page 173:53929. Do not open Input, Combobox, Table, or Button as Calendar. Do not start Button leftover remint."
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": true,
+  "productV1Complete": false
+}

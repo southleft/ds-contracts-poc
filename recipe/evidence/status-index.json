@@ -22917,10 +22917,10 @@
     }
   },
   "calendar": {
-    "overallSuccess": false,
-    "status": "Calendar live v22 attempt 1 failed closed at gates 2-root leftover after green probe; writer accepted; restore 4 held; extract accepted; probe accepted; hug-root reflow held; mint cleaned; v23 PREPARE opening (gates one Astryx root; Astryx only; run 19be1c96-calendar-v23); no Calendar mint; react-day-picker remains a named refusal",
+    "overallSuccess": true,
+    "status": "Calendar live v23 attempt 1 SUCCEEDED and THE MINT STAYS: writer, restore, extract, probe and all 8 captures accepted; one Astryx root 1373/1373; 8 of 8 cells passing with overlap 0; page 173:53929 on Scratch; cleanup persisted not executed; humanSignoff pending; do not invent a Calendar grade; react-day-picker remains a named refusal; product v1 incomplete",
     "humanSignoff": "pending",
-    "liveFigma": false,
+    "liveFigma": true,
     "humanGradeInvented": false,
     "archetypeDeclared": true,
     "archetypeChange": "calendar / date-picker added to ARCHETYPES with required facts; minor under docs/26 V1-COMPAT-02",
@@ -22930,7 +22930,7 @@
       "gate": "recipe:calendar:check",
       "gateGreen": true,
       "components": 8,
-      "tests": 29,
+      "tests": 30,
       "fixedPointStable": true
     },
     "reviewedSources": 1,
@@ -22938,9 +22938,9 @@
     "crossLibraryProven": false,
     "namedRefusal": "recipe/evidence/calendar-named-refusal-v1.json",
     "blockers": [
-      "no live mint; no Calendar human grade",
+      "live mint stayed on 173:53929; Calendar human grade still pending; do not invent a grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "Calendar live v22 attempt 1 failed closed at gates 2-root leftover; probe accepted; v23 PREPARE opening; do not restart v22 attempt 2 as-is"
+      "product v1 incomplete until Calendar signoff plus Button leftover; do not start Button leftover remint"
     ],
     "figmaWriter": {
       "path": "recipe/calendar-figma-writer.ts",
