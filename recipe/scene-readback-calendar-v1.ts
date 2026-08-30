@@ -139,6 +139,8 @@ export const CALENDAR_LIVE_V1_DAY_BUTTON_EMPTY_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_DAY_BUTTON_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKE-DASH-PATTERN-OMITTED";
+export const CALENDAR_LIVE_V1_TODAY_CELL_STROKES_OMITTED_MARKER =
+  "CALENDAR-HOST-TODAY-CELL-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1434,10 +1436,11 @@ const omitDayVariantStrokes = <T extends { strokes?: unknown }>(
   frame: T,
 ): T => {
   void CALENDAR_LIVE_V1_DAY_VARIANT_STROKES_OMITTED_MARKER;
+  void CALENDAR_LIVE_V1_TODAY_CELL_STROKES_OMITTED_MARKER;
   const role = sceneRole(scene);
   if (
     !role ||
-    !/^calendar\/day\/(?:default|selected|outside)$/.test(role) ||
+    !/^calendar\/day\/(?:default|today|selected|outside)$/.test(role) ||
     scene.type !== "COMPONENT"
   )
     return frame;
