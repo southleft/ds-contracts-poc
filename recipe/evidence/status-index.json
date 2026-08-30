@@ -22918,7 +22918,7 @@
   },
   "calendar": {
     "overallSuccess": false,
-    "status": "Calendar live v16 attempt 1 failed closed at extract week/number binding order; writer accepted; restore 4 held; variant strokes omit held; mint cleaned; v17 PREPARE opening (host-order week-set number bindings; Astryx only; run 19be1c96-calendar-v17); no Calendar mint; react-day-picker remains a named refusal",
+    "status": "Calendar live v17 attempt 1 failed closed at extract day/default cornerRadius over-omit; writer accepted; restore 4 held; week-set number order held; mint cleaned; v18 PREPARE opening (host-carry day-variant cornerRadius; Astryx only; run 19be1c96-calendar-v18); no Calendar mint; react-day-picker remains a named refusal",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -22940,7 +22940,7 @@
     "blockers": [
       "no live mint; no Calendar human grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "Calendar live v16 attempt 1 failed closed; v17 PREPARE opening; do not restart v16 attempt 2 as-is"
+      "Calendar live v17 attempt 1 failed closed; v18 PREPARE opening; do not restart v17 attempt 2 as-is"
     ],
     "figmaWriter": {
       "path": "recipe/calendar-figma-writer.ts",
