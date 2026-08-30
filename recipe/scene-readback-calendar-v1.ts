@@ -135,6 +135,8 @@ export const CALENDAR_LIVE_V1_ROW_VARIANT_EFFECTS_OMITTED_MARKER =
   "CALENDAR-HOST-ROW-VARIANT-EFFECTS-OMITTED";
 export const CALENDAR_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-HEADER-BODY-STROKES-OMITTED";
+export const CALENDAR_LIVE_V1_VARIANT_STROKES_OMITTED_MARKER =
+  "CALENDAR-HOST-VARIANT-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_ROW_VARIANT_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-ROW-VARIANT-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
@@ -1266,13 +1268,16 @@ const omitHeaderBodyStrokes = <T extends { strokes?: unknown }>(
   frame: T,
 ): T => {
   void CALENDAR_LIVE_V1_HEADER_BODY_STROKES_OMITTED_MARKER;
+  void CALENDAR_LIVE_V1_VARIANT_STROKES_OMITTED_MARKER;
   void CALENDAR_LIVE_V1_ROW_VARIANT_STROKES_OMITTED_MARKER;
   const role = sceneRole(scene);
   const headerBody =
     !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
+  const tableVariant =
+    !!role && TABLE_VARIANT_ROLE.test(role) && scene.type === "COMPONENT";
   const rowVariant =
     !!role && ROW_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
-  if (!headerBody && !rowVariant) return frame;
+  if (!headerBody && !tableVariant && !rowVariant) return frame;
   if (frame.strokes === undefined) return frame;
   const { strokes: _omitted, ...rest } = frame;
   return rest as T;

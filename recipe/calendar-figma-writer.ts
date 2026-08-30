@@ -56,7 +56,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v15";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v16";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -71,6 +71,7 @@ export const FORBIDDEN_CALENDAR_V11_RUN_IDENTITY = "19be1c96-calendar-v11";
 export const FORBIDDEN_CALENDAR_V12_RUN_IDENTITY = "19be1c96-calendar-v12";
 export const FORBIDDEN_CALENDAR_V13_RUN_IDENTITY = "19be1c96-calendar-v13";
 export const FORBIDDEN_CALENDAR_V14_RUN_IDENTITY = "19be1c96-calendar-v14";
+export const FORBIDDEN_CALENDAR_V15_RUN_IDENTITY = "19be1c96-calendar-v15";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -389,6 +390,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v11")throw new Error("CALENDAR-V11-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v12")throw new Error("CALENDAR-V12-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v13")throw new Error("CALENDAR-V13-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v14")throw new Error("CALENDAR-V14-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v15")throw new Error("CALENDAR-V15-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -746,6 +748,8 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v13 run identity");
   if (runtime.includes("CALENDAR-V14-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v14 run identity");
+  if (runtime.includes("CALENDAR-V15-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v15 run identity");
   if (runtime.includes("CALENDAR-WRITER-DAY-LABEL-FROM-SET") === false)
     throw new TypeError(
       "calendar writer must take day Label presence from the set-issued key",
