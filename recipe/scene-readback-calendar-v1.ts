@@ -125,6 +125,8 @@ export const CALENDAR_LIVE_V1_NAV_CORNER_RADIUS_OMITTED_MARKER =
   "CALENDAR-HOST-NAV-CORNER-RADIUS-OMITTED";
 export const CALENDAR_LIVE_V1_NAV_EFFECTS_OMITTED_MARKER =
   "CALENDAR-HOST-NAV-EFFECTS-OMITTED";
+export const CALENDAR_LIVE_V1_NAV_STROKES_OMITTED_MARKER =
+  "CALENDAR-HOST-NAV-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1266,6 +1268,19 @@ const omitNavEffects = <T extends { effects?: unknown }>(
   return rest as T;
 };
 
+const omitNavStrokes = <T extends { strokes?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void CALENDAR_LIVE_V1_NAV_STROKES_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (!role || !NAV_BUTTON_ROLE.test(role) || scene.type !== "FRAME")
+    return frame;
+  if (frame.strokes === undefined) return frame;
+  const { strokes: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitHeaderBodyCornerRadius = <T extends { cornerRadius?: unknown }>(
   scene: SceneNodeSnapshot,
   frame: T,
@@ -1501,6 +1516,7 @@ export function sceneToNormalizedIr(
     frame = omitNavEffects(scene, frame);
     frame = omitHeaderBodyStrokes(scene, frame);
     frame = omitWeekFrameStrokes(scene, frame);
+    frame = omitNavStrokes(scene, frame);
     frame = omitDayVariantStrokes(scene, frame);
     if (scene.type === "FRAME") result = { kind: "frame", ...frame };
     else if (scene.type === "COMPONENT") {
