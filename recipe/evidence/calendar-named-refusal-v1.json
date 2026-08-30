@@ -27,7 +27,7 @@
       "path": "recipe/recipes/calendar.ts",
       "gate": "npm run recipe:calendar:check",
       "gateGreen": true,
-      "tests": 22,
+      "tests": 23,
       "components": 10,
       "sets": {
         "calendar/set": 4,
@@ -50,8 +50,10 @@
         "whyTheGatesMissedIt": "calendar/day-cell-box only measures the day cells. The header row is not a day cell, so a required fact about day cells could not see it.",
         "sameClassAs": "the ragged columns the Table climb hit live, in a header row instead of a body row",
         "resolution": "every cell in a column-bearing row is measured to the day column: text() takes a columnWidth and binds width.value to the dayCell size token.",
-        "regressionTest": "the weekday header lines up with the day columns — computes the column x-positions of the header and every week and requires them to agree"
-      }
+        "regressionTest": "the weekday header lines up with the day columns — computes the column x-positions of the header and every week and requires them to agree",
+        "classClosedNotJustInstance": "validateCalendarStructure now refuses ANY hug text cell in a column-bearing row, so the class cannot recur one row up again."
+      },
+      "refusesUnmeasuredColumnCell": true
     },
     "reviewedSource": {
       "library": "@astryxdesign/core Calendar",

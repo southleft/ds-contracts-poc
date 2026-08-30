@@ -915,6 +915,24 @@ export function validateCalendarStructure(root: FrameNode): void {
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
         `${variant.role}: the grid carries exactly ${CALENDAR_WEEK_COUNT} weeks`,
       ]);
+
+    // Every cell that sits in a column must be measured to the column.
+    //
+    // A required fact scoped to one role cannot see a defect one row above it:
+    // `calendar/day-cell-box` measures day cells, and it did not stop the
+    // weekday header shipping as `hug`, where "Mo" is about 18px against a 32px
+    // day cell. That is the ragged-column defect the Table climb hit live. This
+    // refuses the whole class rather than that one instance -- a text child of a
+    // column-bearing row is either measured, or it is not a column.
+    const columnRows = [weekdays, ...(grid.children ?? [])];
+    for (const row of columnRows)
+      for (const cell of (row as { children?: IRNode[] }).children ?? []) {
+        if (cell.kind !== "text") continue;
+        if (cell.width.mode !== "fixed")
+          throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+            `${cell.role}: a text cell in a column-bearing row must be measured to the column, not hug — calendar/day-cell-box applies to every column, not only day cells`,
+          ]);
+      }
   }
 }
 

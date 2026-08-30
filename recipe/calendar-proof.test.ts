@@ -266,6 +266,31 @@ test("a hugged day cell is refused — the ragged-column defect cannot compile",
   );
 });
 
+test("a hug text cell in a column-bearing row is refused", () => {
+  // The class-level refusal, not just the instance. If a weekday label or a
+  // week-number gutter ever goes back to hug, the recipe refuses rather than
+  // compiling a header that does not line up with its columns.
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const broken = structuredClone(envelope);
+  const variant = broken.ir.children
+    .find((child: any) => child.role === "calendar/set")
+    .children.find(
+      (child: any) => child.label === "OutsideDays=show, WeekNumbers=on",
+    );
+  const header = variant.children.find(
+    (child: any) => child.role === "calendar/weekday-row",
+  );
+  header.children[1].width = { mode: "hug" };
+
+  assert.throws(
+    () => validateCalendarStructure(broken.ir),
+    (error: unknown) =>
+      error instanceof RecipeRefusal &&
+      error.findings.some((line) => line.includes("measured to the column")),
+    "an unmeasured column cell must refuse",
+  );
+});
+
 test("a short week is refused", () => {
   const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
   const broken = structuredClone(envelope);
