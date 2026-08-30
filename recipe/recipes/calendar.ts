@@ -353,12 +353,23 @@ const fontFacts = (font: CalendarFontSpec, size: CalendarNumberParameter) => ({
   fontSize: size.fallback,
   lineHeight: { unit: "auto" as const },
 });
+/**
+ * `columnWidth` makes a text span exactly one grid column.
+ *
+ * Without it a weekday label hugs its own glyphs -- "Mo" is about 18px while a
+ * day cell is 32 -- and the header does not line up with the days beneath it.
+ * That is the same ragged-column defect the Table climb hit live, in a header
+ * row instead of a body row, and `calendar/day-cell-box` does not catch it
+ * because it only measures the day cells. A calendar is a grid; everything that
+ * sits in a column is measured to the column.
+ */
 const text = (
   role: string,
   characters: string,
   font: CalendarFontSpec,
   size: CalendarNumberParameter,
   color: CalendarColorParameter,
+  columnWidth?: CalendarNumberParameter,
 ): TextNode => ({
   kind: "text",
   role,
@@ -368,9 +379,13 @@ const text = (
   align: "center",
   verticalAlign: "center",
   fills: [solid(color.fallback)],
-  width: hug,
+  width: columnWidth === undefined ? hug : fixed(columnWidth.fallback),
   height: hug,
-  bindings: [bind("type.fontSize", size), bind("fills.0.color", color)],
+  bindings: [
+    bind("type.fontSize", size),
+    bind("fills.0.color", color),
+    ...(columnWidth === undefined ? [] : [bind("width.value", columnWidth)]),
+  ],
 });
 
 /** One day cell: the measured box `calendar/day-cell-box` requires. */
@@ -465,6 +480,7 @@ const weekComponent = (
         instance.tokens.typography.weekday,
         instance.tokens.dayCell.fontSize,
         instance.tokens.weekNumberText,
+        instance.tokens.dayCell.size,
       ),
     );
   for (const [index, day] of week.days.entries())
@@ -520,6 +536,7 @@ const weekFrame = (
         instance.tokens.typography.weekday,
         instance.tokens.dayCell.fontSize,
         instance.tokens.weekNumberText,
+        instance.tokens.dayCell.size,
       ),
     );
   for (const [dayIndex, day] of week.days.entries())
@@ -556,6 +573,7 @@ const weekdayRow = (
         instance.tokens.typography.weekday,
         instance.tokens.dayCell.fontSize,
         instance.tokens.weekNumberText,
+        instance.tokens.dayCell.size,
       ),
     );
   for (const [index, weekday] of instance.content.weekdays.entries())
@@ -566,6 +584,7 @@ const weekdayRow = (
         instance.tokens.typography.weekday,
         instance.tokens.dayCell.fontSize,
         instance.tokens.weekdayText,
+        instance.tokens.dayCell.size,
       ),
     );
   return {

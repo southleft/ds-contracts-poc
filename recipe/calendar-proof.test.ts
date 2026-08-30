@@ -135,6 +135,74 @@ test("each week in the grid carries its OWN days and states", () => {
   assert.equal(states.filter((s: string) => s === "selected").length, 1);
 });
 
+test("the weekday header lines up with the day columns", () => {
+  // The defect this pins: weekday labels were `hug`, so "Mo" was about 18px
+  // while a day cell renders 32. The header did not line up with the days
+  // beneath it -- the same ragged-column defect the Table climb hit live, in a
+  // header row instead of a body row. `calendar/day-cell-box` does not catch it,
+  // because it only measures the day cells.
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const daySize = setOf(envelope, "calendar/day-set").children[0].layout.width;
+  assert.equal(daySize.mode, "fixed");
+
+  const variant = setOf(envelope, "calendar/set").children.find(
+    (child: any) => child.label === "OutsideDays=show, WeekNumbers=on",
+  );
+  const header = variant.children.find(
+    (child: any) => child.role === "calendar/weekday-row",
+  );
+  const grid = variant.children.find(
+    (child: any) => child.role === "calendar/grid",
+  );
+
+  // Every cell in a column-bearing row is measured to the day column.
+  for (const cell of header.children) {
+    assert.equal(cell.width.mode, "fixed", `${cell.role} must be measured`);
+    assert.equal(
+      cell.width.value,
+      daySize.value,
+      `${cell.role} spans one column`,
+    );
+  }
+
+  // Same gutter width and same gap, so the two rows share a column grid.
+  assert.equal(header.layout.itemSpacing, grid.children[0].layout.itemSpacing);
+  for (const week of grid.children) {
+    const gutter = week.children[0];
+    assert.equal(
+      gutter.width.mode,
+      "fixed",
+      "the week-number gutter is measured",
+    );
+    assert.equal(gutter.width.value, daySize.value);
+    assert.equal(
+      week.children.length,
+      header.children.length,
+      "header and week carry the same number of columns",
+    );
+  }
+
+  // Compute the column x-positions of both rows and require them to agree.
+  const positions = (row: any): number[] => {
+    let x = 0;
+    const xs: number[] = [];
+    for (const child of row.children) {
+      xs.push(x);
+      const width =
+        child.kind === "instance" ? daySize.value : child.width.value;
+      x += width + row.layout.itemSpacing;
+    }
+    return xs;
+  };
+  const headerX = positions(header);
+  for (const week of grid.children)
+    assert.deepEqual(
+      positions(week),
+      headerX,
+      "every week's columns land on the header's columns",
+    );
+});
+
 test("collapse is a fixed point for every source", () => {
   for (const [name, instance] of INSTANCES) {
     const envelope: any = compileCalendarRecipe(instance);
