@@ -137,6 +137,8 @@ export const CALENDAR_LIVE_V1_DAY_BUTTON_EFFECTS_OMITTED_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-EFFECTS-OMITTED";
 export const CALENDAR_LIVE_V1_DAY_BUTTON_EMPTY_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKES-OMITTED";
+export const CALENDAR_LIVE_V1_DAY_BUTTON_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER =
+  "CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKE-DASH-PATTERN-OMITTED";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1470,14 +1472,15 @@ const omitVariantEmptyStrokeDashPattern = <T extends { dashPattern?: unknown }>(
 ): T[] | undefined => {
   void CALENDAR_LIVE_V1_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER;
   void CALENDAR_LIVE_V1_CELL_VARIANT_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER;
+  void CALENDAR_LIVE_V1_DAY_BUTTON_EMPTY_STROKE_DASH_PATTERN_OMITTED_MARKER;
   const role = sceneRole(scene);
-  if (
-    !role ||
-    (!TABLE_VARIANT_ROLE.test(role) && !CELL_COMPONENT_ROLE.test(role)) ||
-    scene.type !== "COMPONENT" ||
-    strokes === undefined
-  )
-    return strokes;
+  const variant =
+    !!role &&
+    (TABLE_VARIANT_ROLE.test(role) || CELL_COMPONENT_ROLE.test(role)) &&
+    scene.type === "COMPONENT";
+  const dayButton =
+    role === "calendar/day/button" && scene.type === "FRAME";
+  if ((!variant && !dayButton) || strokes === undefined) return strokes;
   return strokes.map((stroke) => {
     if (!Array.isArray(stroke.dashPattern) || stroke.dashPattern.length !== 0)
       return stroke;
