@@ -2010,10 +2010,10 @@
     ]
   },
   "table": {
-    "overallSuccess": false,
-    "status": "live-v31 attempt 1 failed closed at the WRITER STEP on ordering: the set was resized while it still hugged, so Figma undid the resize and the later counterAxisSizingMode=FIXED pinned the 100px default it had all along; the walk down to the hug cells was correct and measures 570px on the canvas; the writer now pins the axis first and READS BACK its own resize, refusing TABLE-SET-WIDTH-NOT-APPLIED rather than minting a table whose cells fall outside the box; product v1 incomplete",
+    "overallSuccess": true,
+    "status": "live-v32 attempt 1 SUCCEEDED and THE MINT STAYS: writer, restore, extract, probe and all 20 captures accepted, every per-source usability boolean green on both roots, 20 of 20 cells passing with max visible-area loss 0.0083 and zero overlap; page 173:48924 on Scratch; human signoff is pending and is TJs; Gate 2 (the per-column width model) is now VISIBLE in the MUI root and remains an open owner decision; product v1 incomplete",
     "humanSignoff": "pending",
-    "liveFigma": false,
+    "liveFigma": true,
     "humanGradeInvented": false,
     "recipe": {
       "id": "table",
@@ -2606,10 +2606,8 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v31 attempt 1 failed closed before the probe; do not restart v31 attempt 2 as-is",
-      "OPEN HUMAN GATE: table@1 has no per-column width model (Gate 2). Gate 1 (hug vs fill) is ANSWERED by both sources declaring width:100%.",
-      "no live mint",
-      "no human grade",
+      "human signoff pending: TJ has not graded the Table mint; I must not invent one",
+      "OPEN HUMAN GATE 2: table@1 has no per-column width model. MUI declares no cell min-width, so its columns are ragged by 32px and it is visible on the canvas. The probe passes the mint because every cell is inside its box, correctly roled and non-overlapping; raggedness is a different defect from the ones it measures.",
       "Calendar not started live",
       "product v1 incomplete"
     ],
@@ -3742,6 +3740,51 @@
         "mockDidNotCatchIt": "the writer mock reported a 300px set even with the wrong ordering, because it does not re-hug after a resize; the gate that works on both is the writer reading back its own resize"
       },
       "nextTeaching": "pin counterAxisSizingMode FIXED before resizing, then read set.width back and throw TABLE-SET-WIDTH-NOT-APPLIED if the resize did not stick"
+    },
+    "liveV32": {
+      "attempt1": {
+        "status": "succeeded-mint-stays",
+        "writerAccepted": true,
+        "restoreAccepted": true,
+        "extractAccepted": true,
+        "probeAccepted": true,
+        "probePassed": true,
+        "capturesAccepted": 20,
+        "orchestratorStatus": "main-complete",
+        "cleanupExecuted": false,
+        "cleanupNotExecutedBecause": "green path; the orchestrator instructs that cleanup remains persisted for failure/abort recovery only",
+        "pageId": "173:48924",
+        "pageName": "Recipe Pivot / Table / 2f9b764f-82a04258-table-v32",
+        "firstPartyTableSetId": "173:49053",
+        "muiTableSetId": "173:49180",
+        "tableSetWidths": {
+          "first-party": 360,
+          "mui": 343
+        },
+        "perSourceUsabilityAllGreen": true,
+        "cellsMeasured": 20,
+        "cellsFailing": 0,
+        "maxVisibleAreaLoss": 0.008333333333333304,
+        "maxOverlapPixels": 0,
+        "mintStayed": true,
+        "columnAlignment": {
+          "first-party": {
+            "aligned": true,
+            "worstDivergencePx": 0
+          },
+          "mui": {
+            "aligned": false,
+            "worstDivergencePx": 32,
+            "columns": [
+              [127, 159],
+              [89, 90],
+              [89, 95]
+            ]
+          }
+        },
+        "humanSignoff": "pending",
+        "humanGradeInvented": false
+      }
     }
   },
   "input": {

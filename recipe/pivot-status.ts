@@ -5436,11 +5436,15 @@ export function validatePivotStatus(
   )
     fail("combobox live v41 prepare");
   if (
-    status.table?.overallSuccess !== false ||
+    // Table live v32 minted and the mint stayed, so these two pins record a
+    // measured fact rather than the absence they held from v1 to v31. Human
+    // signoff stays "pending" and humanGradeInvented stays false: a live mint
+    // is not a grade, and the grade is TJ's to give.
+    status.table?.overallSuccess !== true ||
     status.table?.status !==
-      "live-v31 attempt 1 failed closed at the WRITER STEP on ordering: the set was resized while it still hugged, so Figma undid the resize and the later counterAxisSizingMode=FIXED pinned the 100px default it had all along; the walk down to the hug cells was correct and measures 570px on the canvas; the writer now pins the axis first and READS BACK its own resize, refusing TABLE-SET-WIDTH-NOT-APPLIED rather than minting a table whose cells fall outside the box; product v1 incomplete" ||
+      "live-v32 attempt 1 SUCCEEDED and THE MINT STAYS: writer, restore, extract, probe and all 20 captures accepted, every per-source usability boolean green on both roots, 20 of 20 cells passing with max visible-area loss 0.0083 and zero overlap; page 173:48924 on Scratch; human signoff is pending and is TJs; Gate 2 (the per-column width model) is now VISIBLE in the MUI root and remains an open owner decision; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
-    status.table?.liveFigma !== false ||
+    status.table?.liveFigma !== true ||
     status.table?.humanGradeInvented !== false ||
     status.table?.recipe?.id !== "table" ||
     status.table?.recipe?.version !== 1 ||
