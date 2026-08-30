@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v7$/);
+  assert.match(writer.runIdentity, /-calendar-v8$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -117,6 +117,19 @@ test("the writer applies instance Label via characters — the Calendar live v3 
   assert.match(writer.code, /19be1c96-calendar-v5/);
   assert.match(writer.code, /CALENDAR-V6-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v6/);
+  assert.match(writer.code, /CALENDAR-V7-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v7/);
+});
+
+test("the writer takes day Label presence from the set — the Calendar live v7 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(writer.code, /CALENDAR-WRITER-DAY-LABEL-FROM-SET/);
+  assert.equal(
+    writer.code.includes('propertyKey(node,"Label")'),
+    false,
+    "fresh instance componentProperties is the refused class",
+  );
+  assert.match(writer.code, /if\(!dayLabelProperty\)throw new Error\("CALENDAR-DAY-PROPERTY-ABSENT:Label"\)/);
 });
 
 test("the writer refuses every other archetype's page", () => {
