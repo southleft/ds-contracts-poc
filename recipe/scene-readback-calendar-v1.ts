@@ -123,6 +123,8 @@ export const CALENDAR_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-ROW-VARIANT-CLIPS-CONTENT-OMITTED";
 export const CALENDAR_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER =
   "CALENDAR-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED";
+export const CALENDAR_LIVE_V1_VARIANT_CORNER_RADIUS_OMITTED_MARKER =
+  "CALENDAR-HOST-VARIANT-CORNER-RADIUS-OMITTED";
 export const CALENDAR_LIVE_V1_ROW_VARIANT_CORNER_RADIUS_OMITTED_MARKER =
   "CALENDAR-HOST-ROW-VARIANT-CORNER-RADIUS-OMITTED";
 export const CALENDAR_LIVE_V1_HEADER_BODY_EFFECTS_OMITTED_MARKER =
@@ -1179,16 +1181,19 @@ const omitHeaderBodyCornerRadius = <T extends { cornerRadius?: unknown }>(
   frame: T,
 ): T => {
   void CALENDAR_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER;
+  void CALENDAR_LIVE_V1_VARIANT_CORNER_RADIUS_OMITTED_MARKER;
   void CALENDAR_LIVE_V1_ROW_VARIANT_CORNER_RADIUS_OMITTED_MARKER;
   void CALENDAR_LIVE_V1_CELL_VARIANT_CORNER_RADIUS_OMITTED_MARKER;
   const role = sceneRole(scene);
   const headerBody =
     !!role && HEADER_BODY_ROLES.has(role) && scene.type === "FRAME";
+  const tableVariant =
+    !!role && TABLE_VARIANT_ROLE.test(role) && scene.type === "COMPONENT";
   const rowVariant =
     !!role && ROW_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
   const cellVariant =
     !!role && CELL_COMPONENT_ROLE.test(role) && scene.type === "COMPONENT";
-  if (!headerBody && !rowVariant && !cellVariant) return frame;
+  if (!headerBody && !tableVariant && !rowVariant && !cellVariant) return frame;
   if (frame.cornerRadius === undefined) return frame;
   const { cornerRadius: _omitted, ...rest } = frame;
   return rest as T;
