@@ -1,0 +1,43 @@
+{
+  "purpose": "Make the B3a remint page 183:69150 reviewable for TJ's Button B3 signoff, mirroring the 85:6781 arrange (recipe/evidence/button-b3-arrange-pass.json). Arrangement and presentation wrappers only; no variant internals modified; the scene-derived observes for the v2 inversion were captured BEFORE this arrange, so no committed gate input reads the arranged scene.",
+  "date": "2026-08-30",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "pageId": "183:69150",
+  "pageName": "Recipe Pivot / Button / 6857935c-b04f4059-v4",
+  "reviewUrl": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=183-69150",
+  "checkpoints": {
+    "preArrange": {
+      "name": "pre-B3a Button arrange (v5 remint page 183:69150)",
+      "versionId": "2393578290451357103"
+    },
+    "postArrange": {
+      "name": "Button B3a arranged for review (page 183:69150)",
+      "versionId": "2393589070840152542"
+    }
+  },
+  "arrangement": {
+    "tool": "figma_arrange_component_set (figma-console-mcp; same options as the 85:6781 B3 arrange)",
+    "options": { "columnProperty": "State", "gap": 32, "cellPadding": 24 },
+    "grid": {
+      "columns": ["default", "hover", "pressed", "focus-visible", "disabled", "loading"],
+      "rowAxes": ["Variant", "Size", "Icons"],
+      "rows": 24,
+      "variantsPerSet": 144
+    },
+    "renamed": {
+      "183:70459": "Button Altitude Grid (set 183:69776; placed at 0,2600)",
+      "183:70550": "Button Fluent Grid (set 183:70424; placed at 1600,2600)"
+    },
+    "untouched": [
+      "Sections 183:69151 / 183:69777 (writer source sections)",
+      "Sections 183:70425 (Live proof / v5) and 183:70426 (Paired cells / v5)",
+      "Old Button page 85:6781 and its arranged grids",
+      "Input 115:295378, Combobox 163:35981, Table 173:48924, Calendar 181:64873"
+    ],
+    "setChildrenVerified": { "altitude": 144, "fluent": 144 }
+  },
+  "focusRenderProof": {
+    "cells": "recipe/evidence/button-live-pivot-v5/screenshots/cells/altitude-button-reviewed-v2__variant-{primary,secondary}__state-focus-visible.png",
+    "measured": "midrow pixel runs: ring #4375ff 4 device px (2 CSS px), page-background gap 4 device px (2 CSS px), then the button — matching the captured code truth (outline 2px solid #4375ff at 2px offset) and Altitude's own Figma ring color/weight (2px OUTSIDE #4375ff stroke)"
+  }
+}

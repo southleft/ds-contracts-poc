@@ -3071,6 +3071,66 @@ expected-plan vs observe, the same honesty bar as Input V70–V84.
   vs `button/set`; set layout.mode / padding / width.mode. Do **not**
   invent Roboto/SemiBold as compile fonts. Do not invent hug or padding 0.
 - `ok: false`. Human signoff **pending**. Overall Button **false**.
+- 2026-08-30: the B2h–B2q teachings closed the v1 inversion at 0/0/0 with a
+  stable fixed point on the preserved page `85:6781` (see the status
+  narrative and `recipe/evidence/button-scene-inversion-v1/`).
+
+#### Button B3a focus-ring correction and v5 remint — measured 2026-08-30
+
+TJ's B3 review flagged the Altitude focus states against Altitude's own
+Figma. The three-way diagnosis
+(`recipe/evidence/altitude-focus-ring-diagnosis/receipt.json`) measured all
+three legs: the **mint** painted a `#000b29` ring; the **captured code
+truth** (contract token `outline-color-state-focus-visible`, the shipped
+CSS fallback chain, and a settled re-render in the pinned Chromium) says
+`outline: 2px solid #4375ff` at 2px offset; **Altitude's own Figma**
+(read-only REST read of `y83n4o9LOGs74oAoguFcGS`) paints the same 2px
+OUTSIDE `#4375ff` stroke. The class is a **capture/adapter defect**: the
+fixture ring literal was authored from source-reference screenshots that
+froze `al-button`'s shadow-DOM `transition: all 0.2s` mid-flight (the
+capture harness's light-DOM `transition: none !important` cannot pierce the
+shadow root; the sealed ring pixels measure ≈25% of the way from
+currentColor `#000b29` to `#4375ff`). Not Altitude design-code drift, and
+not a mint defect — the closed inversion correctly proved mint == compile;
+the wrong fact entered upstream of compile.
+
+- **B3a teaching (one class):** `altitudeFocus` now CARRIES
+  `imported.button.root.outline-color-state-focus-visible` (fallback
+  `#4375ffff`) instead of the invented literal, and the `focus-ring` source
+  fact moved from a measured-literal receipt to the contract pointer
+  `/anatomy/root/states/focus-visible/outline-color`.
+- **v5 remint** (`recipe/evidence/button-live-pivot-v5/`): attempts 1–5
+  failed closed and were cleaned; each failure taught a measured writer or
+  transport fact — the plugin sandbox has **no TextEncoder** (portable
+  UTF-8 emitter restores the declared portability truth); large
+  single-message evals through the script-hosted bridge crawl while staged
+  small chunks run at full speed; `setBoundVariableForEffect` **resets
+  drop-shadow geometry** (compile-planned offset/radius/spread carried back
+  over the bound effect); Figma paints **later effect-list entries on
+  top**, so the white offset-gap shadow must list AFTER the ring (the
+  v4-era order buried the gap in every mint). Attempt 6 mint stayed:
+  page `183:69150`, run `6857935c-b04f4059-v4`, Altitude set `183:69776`,
+  Fluent set `183:70424`, 58 variables, all usability probes green
+  (144/144 labels on both roots).
+- **Inversion v2** (`recipe/evidence/button-scene-inversion-v2/`):
+  re-derived expected plans vs fresh 0-write observes of the new page —
+  silent 0 / missing 0 / extra 0 / mismatched 0 on both roots (Altitude
+  **8730/8730** — 24 new effect-binding facts; Fluent **8778/8778**) and
+  the collapse-compile fixed point is two-cycle byte-stable. Two observe
+  defects were taught on the way: the observe `role()` regex was
+  double-escaped inside `String.raw` (truncated `button/…` at the first
+  `n`; never exercised before because the v4-era mint had no descriptions),
+  and the effect-color binding surfaced the same Input V24 host-alias
+  duplicate on the `effects.N` channel.
+- **Focus render, measured:** ring `#4375ff` 2 CSS px at a 2 CSS px
+  page-background offset on both variants
+  (`recipe/evidence/button-live-pivot-v5/screenshots/cells/`), matching the
+  settled code render and Altitude's own Figma ring.
+- The v1 evidence and page `85:6781` stay preserved. `ok: true` on v2 is
+  derived, not assigned. Human signoff (B3) **pending on the new page**
+  (`https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=183-69150`,
+  arranged into labeled 6×24 grids per
+  `recipe/evidence/button-b3a-arrange-pass.json`). Overall Button **false**.
 
 #### Input/Field offline boundary — adjudicated failure
 

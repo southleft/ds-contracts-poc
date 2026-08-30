@@ -278,6 +278,30 @@ const ALTITUDE_REFERENCE_RECEIPT =
 const FLUENT_REFERENCE_RECEIPT =
   "recipe/evidence/button-comparison/receipt.json#references";
 
+/**
+ * CORRECTED 2026-08-30 (B3a, focus-ring carried token). The ring color was a
+ * literal #000b29ff citing the pinned render screenshots — but those focus
+ * cells caught al-button's shadow-DOM `transition: all 0.2s` MID-FLIGHT (the
+ * harness's light-DOM `transition: none !important` cannot pierce the shadow
+ * root), freezing the outline ~25% of the way from its currentColor start
+ * (#000b29) to its settled value. The SETTLED painted truth, re-measured in
+ * the same pinned Chromium after the 0.2s transition completes
+ * (recipe/evidence/altitude-focus-ring-diagnosis/receipt.json), is
+ * `outline: 2px solid #4375ff` at 2px offset — exactly the captured contract
+ * tokens (outline-color/width/offset-state-focus-visible). The ring now
+ * CARRIES that captured token instead of the transient-contaminated literal.
+ * Geometry (spread 2 gap, spread 4 ring = offset 2px + width 2px) already
+ * matched the captured tokens and is unchanged. Altitude's own Figma
+ * (State=Focus variants) paints the same 2px OUTSIDE stroke in #4375ff.
+ *
+ * EFFECT ORDER (measured live 2026-08-30, v5 attempts 4-5 vs the v4 render):
+ * Figma paints drop shadows with LATER list entries ON TOP, so the old order
+ * [gap, ring] buried the white offset-gap shadow under the ring in every
+ * mint (v4 rendered a 4px ring hugging the button, not the captured
+ * offset-2px + width-2px outline). The ring spread-4 shadow now comes FIRST
+ * and the white spread-2 gap LAST, which renders exactly the captured
+ * geometry: 2px page-background gap, then a 2px #4375ff ring.
+ */
 const altitudeFocus = (
   backgroundVariable: string,
   background: `#${string}`,
@@ -296,16 +320,19 @@ const altitudeFocus = (
       offsetX: 0,
       offsetY: 0,
       blur: 0,
-      spread: 2,
-      color: literal("#ffffffff", ALTITUDE_REFERENCE_RECEIPT),
+      spread: 4,
+      color: token(
+        "imported.button.root.outline-color-state-focus-visible",
+        "#4375ffff",
+      ),
     },
     {
       kind: "drop-shadow",
       offsetX: 0,
       offsetY: 0,
       blur: 0,
-      spread: 4,
-      color: literal("#000b29ff", ALTITUDE_REFERENCE_RECEIPT),
+      spread: 2,
+      color: literal("#ffffffff", ALTITUDE_REFERENCE_RECEIPT),
     },
   ],
 });
@@ -533,13 +560,14 @@ const altitudeFacts = [
     "state",
     "focus-gap",
     ALTITUDE_REFERENCE_RECEIPT,
-    "tokens.appearance.primary.focusVisible.effects.0.color",
+    "tokens.appearance.primary.focusVisible.effects.1.color",
   ),
-  measuredFact(
+  fact(
     "state",
     "focus-ring",
-    ALTITUDE_REFERENCE_RECEIPT,
-    "tokens.appearance.primary.focusVisible.effects.1.color",
+    "/anatomy/root/states/focus-visible/outline-color",
+    "{imported.button.root.outline-color-state-focus-visible}",
+    "tokens.appearance.primary.focusVisible.effects.0.color",
   ),
 ] as const;
 

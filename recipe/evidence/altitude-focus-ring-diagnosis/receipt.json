@@ -1,0 +1,70 @@
+{
+  "kind": "altitude-button-focus-ring-three-way-diagnosis",
+  "version": "b3a-focus-ring-v1",
+  "date": "2026-08-30",
+  "trigger": "TJ's B3 review of arranged Button page 85:6781: 'the Altitude focus states don't look accurate', with Altitude's own Figma as reference (y83n4o9LOGs74oAoguFcGS node 6543-36648)",
+  "threeWayFacts": {
+    "mint": {
+      "where": "Scratch byMp6lt0Ij9b2QbkDGFwBh, Altitude set 85:7406, focus-visible variants (read live 2026-08-30, 0 writes, via figma_execute_across_files scoped to the Scratch fileKey)",
+      "primaryFocusVisible": {
+        "fills": ["#4375ffff"],
+        "strokes": ["#000b29ff (strokeWeight 0 — not painted)"],
+        "effects": [
+          { "type": "DROP_SHADOW", "color": "#ffffffff", "spread": 2, "radius": 0, "offset": { "x": 0, "y": 0 } },
+          { "type": "DROP_SHADOW", "color": "#000b29ff", "spread": 4, "radius": 0, "offset": { "x": 0, "y": 0 } }
+        ]
+      },
+      "secondaryFocusVisible": {
+        "fills": ["#a49981ff"],
+        "effects": [
+          { "type": "DROP_SHADOW", "color": "#ffffffff", "spread": 2 },
+          { "type": "DROP_SHADOW", "color": "#000b29ff", "spread": 4 }
+        ]
+      },
+      "mintEqualsCompile": "true — effects byte-match the v4 writer plan (recipe/evidence/button-live-pivot-v4/writer-plan.json); the closed inversion holds; the wrong fact entered UPSTREAM of compile"
+    },
+    "codeCapture": {
+      "contractTokens": {
+        "source": "examples/altitude/contracts/button.contract.json /anatomy/root/states/focus-visible + examples/altitude/tokens/altitude-minted.dtcg.json",
+        "outline-color-state-focus-visible": "#4375ff",
+        "outline-width-state-focus-visible": "2px",
+        "outline-offset-state-focus-visible": "2px",
+        "outline-style": "solid",
+        "capturedLive": "extract/computed/out/altitude/button/captured-truth.json captures[1] (unset__focus-visible) delta: outline-color rgba(67,117,255,1), outline-offset 2px, outline-style solid, outline-width 2px"
+      },
+      "shippedCss": ".al-c-button:focus-visible{outline:var(--al-theme-border-width-md) solid var(--al-theme-color-focus-ring, var(--al-theme-color-border-primary-default));outline-offset:var(--al-focus-outline-offset, var(--al-theme-border-width-md))} — --al-theme-color-focus-ring is undefined in the shipped theme, the fallback chain resolves --al-theme-color-border-primary-default → --al-color-brand-blue-500 = #4375ff; --al-theme-border-width-md → --al-border-width-2 = 2px (altitude-web-components@1.0.2 pinned sandbox)",
+      "settledPaintedTruth": "scripts/probe-altitude-focus-ring.mts, same pinned Chromium/harness as the sealed comparison capture, sampled AFTER al-button's 0.2s shadow-DOM transition settles: inner button computed outline = solid rgb(67,117,255) 2px, offset 2px; painted ring pixels pure #4375ff, 2 CSS px at 2 CSS px offset (settled-focus-render.png, sha256 a591c5ff5d67b6b95a29ed805efecc84e2e9814a928a0003d84eb103de7a46ea)"
+    },
+    "altitudeOwnFigma": {
+      "where": "y83n4o9LOGs74oAoguFcGS (READ-ONLY, Figma REST GET /v1/files/.../nodes, 2026-08-30; never navigated, never locked, never written)",
+      "primaryFocus": {
+        "node": "3538:36610 State=Focus, Variant=Primary",
+        "fill": "#4375ff (variable-bound)",
+        "stroke": "#4375ff (variable-bound VariableID:3518:9257)",
+        "strokeWeight": 2,
+        "strokeAlign": "OUTSIDE"
+      },
+      "secondaryFocus": {
+        "node": "3538:36625 State=Focus, Variant=Secondary",
+        "fill": "#a49981 (variable-bound)",
+        "stroke": "#4375ff (variable-bound VariableID:3518:9257)",
+        "strokeWeight": 2,
+        "strokeAlign": "OUTSIDE"
+      },
+      "note": "their Figma does not depict the 2px outline-offset gap (plain OUTSIDE stroke hugging the box); ring color and width match the settled code truth"
+    }
+  },
+  "whichDiverged": "the mint (and only its focus RING COLOR). Code capture and Altitude's own Figma agree: 2px #4375ff ring.",
+  "class": "capture/adapter defect — an invented literal, not Altitude design-code drift and not a mint defect",
+  "rootCause": {
+    "contaminatedMeasurement": "the sealed source-reference focus screenshots (recipe/evidence/button-comparison/source-reference/altitude__variant-{primary,secondary}__state-focus-visible.png, sha256 1130a287... / dbbd0cea...) caught al-button's shadow-DOM `transition: all 0.2s cubic-bezier(0.15,0.99,0.18,0.99)` MID-FLIGHT: the capture harness's light-DOM `transition: none !important` and document.getAnimations() pinning cannot pierce the shadow root, so the outline was frozen ~25% of the way from its pre-focus computed start (outline-color: currentColor = #000b29, width medium 3px, offset 0) toward its settled target (#4375ff, 2px, 2px). Measured ring pixels in the sealed screenshot: #112761 ≈ 25% #4375ff + 75% #000b29. Re-measured live: pre-settle computed outline = solid rgb(0,11,41) 3px 0px; post-settle = solid rgb(67,117,255) 2px 2px.",
+    "inventedLiteral": "recipe/fixtures/library-buttons.ts altitudeFocus hard-coded the ring drop-shadow color as literal #000b29ff citing that screenshot — overriding the honestly captured contract token {imported.button.root.outline-color-state-focus-visible} = #4375ff, which extract/computed had sampled correctly (after settle) all along."
+  },
+  "teaching": {
+    "id": "B3a",
+    "oneClass": "focus-ring carried token: altitudeFocus effects[1].color literal #000b29ff → token(imported.button.root.outline-color-state-focus-visible, #4375ffff); the focus-ring source fact moves from a measured-literal receipt to the contract pointer /anatomy/root/states/focus-visible/outline-color. The white gap effect (page background showing through the 2px outline offset) and the spread geometry (2 = offset, 4 = offset+width) already matched the captured tokens and are unchanged.",
+    "notTouched": "the sealed comparison evidence (v1/v2) stays byte-preserved as committed history; the capture harness (extract/figma/canvas-gate/shots.ts) is not modified in this step — its shadow-DOM transition blind spot is named here and left for its own measured teaching"
+  },
+  "figmaWrites": 0,
+  "connectedFilesUntouched": ["y83n4o9LOGs74oAoguFcGS", "Y8Jhw6R49wTLuXZ0is2GmV", "59mLQlOMiD5w5za6SUcoO5", "BMjUA2ue5CaZXU4kufxL0z"]
+}

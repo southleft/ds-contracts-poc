@@ -833,7 +833,7 @@ test("variant-axis LIST order canonicalizes only when the axis-name set matches 
 
 test("recorded Button inversion evidence stays derived and overall false", () => {
   const inversion = readRepositoryJson<Record<string, any>>(
-    "recipe/evidence/button-scene-inversion-v1/inversion.json",
+    "recipe/evidence/button-scene-inversion-v2/inversion.json",
   );
   assert.deepEqual(validateButtonSceneInversionEvidence(inversion), []);
   for (const mutate of [

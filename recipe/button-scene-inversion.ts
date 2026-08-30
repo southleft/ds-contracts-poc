@@ -25,15 +25,26 @@ import {
   type SceneNodeSnapshot,
 } from "./scene-readback.js";
 
-export const BUTTON_SCENE_INVERSION_VERSION = "button-scene-inversion-v1";
+/**
+ * V2 LINEAGE (B3a focus-ring remint, 2026-08-30). The v1 inversion closed
+ * against page 85:6781, whose Altitude focus ring carried an invented
+ * literal (#000b29 — a mid-transition capture artifact; see
+ * recipe/evidence/altitude-focus-ring-diagnosis/receipt.json). The fixture
+ * teaching that corrected the ring to the captured contract token changed
+ * the Altitude recipe hash, so the expected plans re-derive differently and
+ * the inversion moves to the freshly minted v5 page. The v1 evidence dir
+ * (recipe/evidence/button-scene-inversion-v1) stays committed as history;
+ * page 85:6781 stays preserved on canvas.
+ */
+export const BUTTON_SCENE_INVERSION_VERSION = "button-scene-inversion-v2";
 export const BUTTON_SCENE_INVERSION_ROOT =
-  "recipe/evidence/button-scene-inversion-v1";
+  "recipe/evidence/button-scene-inversion-v2";
 export const BUTTON_V4_FILE_KEY = "byMp6lt0Ij9b2QbkDGFwBh";
 export const BUTTON_V4_FILE_NAME = "Scratch Project";
-export const BUTTON_V4_PAGE_ID = "85:6781";
+export const BUTTON_V4_PAGE_ID = "183:69150";
 export const BUTTON_V4_PAGE_NAME =
-  "Recipe Pivot / Button / e6a61d04-b04f4059-v4";
-export const BUTTON_V4_RUN_IDENTITY = "e6a61d04-b04f4059-v4";
+  "Recipe Pivot / Button / 6857935c-b04f4059-v4";
+export const BUTTON_V4_RUN_IDENTITY = "6857935c-b04f4059-v4";
 export const BUTTON_V4_NAMESPACE = "ds.contracts.recipe.v4";
 export const INPUT_V85_PAGE_ID = "115:295378";
 export const HISTORICAL_BUTTON_READBACK_PATH =
@@ -43,14 +54,14 @@ export const BUTTON_INVERSION_SOURCES = [
   {
     source: "altitude",
     adapterIdentity: "altitude-button-reviewed-v2",
-    setId: "85:7406",
+    setId: "183:69776",
     contractPath: "examples/altitude/contracts/button.contract.json",
     config: altitudeButtonAdapterConfig,
   },
   {
     source: "fluent",
     adapterIdentity: "fluent-button-reviewed-v2",
-    setId: "85:8054",
+    setId: "183:70424",
     contractPath: "examples/fluent/contracts/button.contract.json",
     config: fluentButtonAdapterConfig,
   },
@@ -765,12 +776,19 @@ export function surfaceButtonUniformStrokeWeight(
 export function dropButtonDuplicateMappedBindings(
   bindings: SceneNodeSnapshot["boundVariables"],
 ): SceneNodeSnapshot["boundVariables"] {
+  // effects.N added 2026-08-30 (B3a v5 remint): the first mint that BINDS an
+  // effect color surfaced the same Input V24 host-alias duplicate on the
+  // effects channel — Figma reports both boundVariables["effects.N"] and the
+  // effect paint's own color binding. Empty-only, same-variable-only, exactly
+  // like the fills.N / strokes.N aliases.
   return bindings.filter((binding) => {
     const alias = binding.field.match(/^fills\.(\d+)$/)
       ? `fills.${binding.field.split(".")[1]}.color`
       : binding.field.match(/^strokes\.(\d+)$/)
         ? `strokes.${binding.field.split(".")[1]}.paint.color`
-        : undefined;
+        : binding.field.match(/^effects\.(\d+)$/)
+          ? `effects.${binding.field.split(".")[1]}.color`
+          : undefined;
     if (alias === undefined) return true;
     return !bindings.some(
       (other) =>
@@ -1300,7 +1318,8 @@ export function serializeButtonInversionReport(
       "TAUGHT 2026-08-30 (B2n, binding compile-order carry): the observe program sorts boundVariables by Figma field name, so the live page reports bindings alphabetically while compile carries semantic order; the binding SETS were already fact-equal. Same class as Input taughtSurfaceBindingCompileOrder / taughtContentBindingCompileOrder / taughtLabelBindingCompileOrder and Calendar V35/V36/V42-43 (host keeps compile-carried bind order). Order-only: bindings reorder onto compile order ONLY when the mapped (field, variable, type) multiset equals the compile multiset for the same ownership key; any set difference leaves the live order visible.",
       "TAUGHT 2026-08-30 (B2o, live-empty chrome omit): live instance slots report fills [] and the live set reports strokes [] / effects [] where compile omits the key; an empty array is Figma reporting absence, not a drawn fact. Same class as Input omitSetFills/omitSetEffects and Calendar V44-V47 (empty effects/strokes/dashPattern omits, empty-only). The omits are empty-only and type-gated; any non-empty live paint stays visible.",
       "TAUGHT 2026-08-30 (B2p, instance compile-empty bindings representation): compile carries bindings [] explicitly on instance slots while the scene-derived IR omits the empty key; both spell the same fact and the fixed-point structural diff was refusing the spelling. The scene-derived envelope canonicalises onto compile's spelling before collapse (instance nodes with no bindings gain bindings []; the envelope hash is recomputed over the same facts). Same representation-empties family as B2o, opposite direction.",
-      "TAUGHT 2026-08-30 (B2q, variant-axis LIST order): Figma returns variantGroupProperties keys alphabetically (Icons/Size/State/Variant); compile carries the declared order (Variant/Size/State/Icons). The values inside each axis were canonicalised at B2e (Input V72 class); this applies the same order-only class to the axis list. Key order reorders onto compile ONLY when the axis-name sets are equal; a missing or extra axis leaves the live order visible. WITH THIS, THE SCENE-DERIVED FIXED POINT IS STABLE ON BOTH ROOTS and the inversion is closed: silent 0 / missing 0 / extra 0 / mismatched 0, collapse-compile two-cycle byte-stable. Human signoff (B3) remains pending; overall Button success remains false until TJ signs.",
+      "TAUGHT 2026-08-30 (B2q, variant-axis LIST order): Figma returns variantGroupProperties keys alphabetically (Icons/Size/State/Variant); compile carries the declared order (Variant/Size/State/Icons). The values inside each axis were canonicalised at B2e (Input V72 class); this applies the same order-only class to the axis list. Key order reorders onto compile ONLY when the axis-name sets are equal; a missing or extra axis leaves the live order visible. WITH THIS, THE SCENE-DERIVED FIXED POINT IS STABLE ON BOTH ROOTS and the v1 inversion closed: silent 0 / missing 0 / extra 0 / mismatched 0, collapse-compile two-cycle byte-stable.",
+      "TAUGHT 2026-08-30 (B3a, focus-ring carried token + v5 remint): TJ's B3 review flagged the Altitude focus states against Altitude's own Figma. Three-way measurement (recipe/evidence/altitude-focus-ring-diagnosis/receipt.json) named the class: the v4 mint's ring literal #000b29 was authored from a source-reference screenshot that froze al-button's shadow-DOM transition mid-flight; the honestly captured contract token (outline-color-state-focus-visible = #4375ff, 2px width, 2px offset) and Altitude's own Figma (2px OUTSIDE #4375ff stroke) agree. The fixture now CARRIES the captured token; the v5 remint (page 183:69150, run 6857935c-b04f4059-v4) also measured and corrected two writer defects live (TextEncoder absent from the plugin sandbox; setBoundVariableForEffect resets shadow geometry) and one representation defect (Figma paints later effect entries on top, so the offset-gap shadow must LIST AFTER the ring). This v2 inversion re-derives expected plans and observes against the remint; the v1 evidence and page 85:6781 stay preserved.",
     ],
     roots: report.roots.map((root) => ({
       source: root.source,
@@ -1523,7 +1542,7 @@ const bindings=async node=>{
 };
 const role=node=>{
   const description=typeof node.description==="string"?node.description:"";
-  const match=description.match(/(?:^|\\n)recipe-role:([^\\n]+)/);
+  const match=description.match(/(?:^|\n)recipe-role:([^\n]+)/);
   if(match)return match[1];
   const head=(node.name||"").split(" :: ",1)[0]||"";
   if(head.includes("/")&&!head.includes("="))return head;

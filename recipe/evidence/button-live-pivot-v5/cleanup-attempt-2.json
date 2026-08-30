@@ -1,0 +1,30 @@
+{
+  "version": 5,
+  "attempt": 2,
+  "kind": "cleanup-on-failure",
+  "date": "2026-08-30",
+  "failure": "writer eval timed out at 45000ms and the plugin-side execution halted mid-write: page created with 10 of 288 components and 1 of 2 variable collections. Root cause class: the Scratch tab was BACKGROUNDED in the Figma desktop (the Altitude reference file was the active tab) and Figma throttles background-tab plugin execution; the v4 mint ran with Scratch active. Attempt 3 activates the Scratch tab and raises the eval timeout.",
+  "removed": {
+    "pages": [
+      {
+        "id": "181:66323",
+        "name": "Recipe Pivot / Button / 4063ba55-b04f4059-v4",
+        "children": 11
+      }
+    ],
+    "collections": [
+      {
+        "id": "VariableCollectionId:181:66325",
+        "name": "Recipe Pivot / 4063ba55-b04f4059-v4 / altitude-button-reviewed-v2"
+      }
+    ]
+  },
+  "after": {
+    "proofPageMatches": 0,
+    "matchingCollections": 0,
+    "pageCount": 22,
+    "oldButtonPagePresent": true,
+    "inputPagePresent": true
+  },
+  "transport": "figma_execute_across_files scoped to fileKey byMp6lt0Ij9b2QbkDGFwBh (exact file guard in the cleanup program); connected read-only files untouched"
+}

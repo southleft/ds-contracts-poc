@@ -1,0 +1,27 @@
+{
+  "version": 5,
+  "attempt": 5,
+  "kind": "cleanup-before-corrected-remint",
+  "date": "2026-08-30",
+  "reason": "Attempt 5 minted byte-exact with the spread carry and all probes green, and the ring painted #4375ff spread 4 correctly — but the paired-cell exports measured that Figma paints LATER effect-list entries ON TOP: the white spread-2 offset-gap shadow (listed first) was buried under the spread-4 ring in every mint era (v4's export shows the same 8-device-px ring hugging the button with no gap). The captured code truth paints outline-offset 2px THEN a 2px ring. The fixture's altitudeFocus effect ORDER was corrected (ring spread-4 first, white gap spread-2 last) so the Figma render matches the captured geometry; this changes the Altitude recipe hash and run identity, so the 4063ba55 page and collections were cleaned before the corrected remint.",
+  "removed": {
+    "pages": [{ "id": "183:67841", "children": 4 }],
+    "collections": [
+      {
+        "id": "VariableCollectionId:183:67843",
+        "name": "Recipe Pivot / 4063ba55-b04f4059-v4 / altitude-button-reviewed-v2"
+      },
+      {
+        "id": "VariableCollectionId:183:68469",
+        "name": "Recipe Pivot / 4063ba55-b04f4059-v4 / fluent-button-reviewed-v2"
+      }
+    ]
+  },
+  "after": {
+    "proofPageMatches": 0,
+    "matchingCollections": 0,
+    "oldButtonPagePresent": true,
+    "inputPagePresent": true
+  },
+  "transport": "figma_execute_across_files scoped to fileKey byMp6lt0Ij9b2QbkDGFwBh; connected read-only files untouched"
+}

@@ -1,0 +1,29 @@
+{
+  "writes": 0,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "buttonPage": {
+    "id": "183:69150",
+    "name": "Recipe Pivot / Button / 6857935c-b04f4059-v4"
+  },
+  "sets": [
+    {
+      "id": "183:69776",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "runIdentity": "6857935c-b04f4059-v4",
+      "variants": 144,
+      "ownershipKey": "root"
+    },
+    {
+      "id": "183:70424",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "runIdentity": "6857935c-b04f4059-v4",
+      "variants": 144,
+      "ownershipKey": "root"
+    }
+  ],
+  "pluginDataNote": "Sets carry adapterIdentity, runIdentity, and ownershipKey=root (the v5 writer stamps ownership). Stamped ir*/cells keys were not read as observe values.",
+  "currentPageUnchanged": false,
+  "inputPagePresent": true,
+  "currentPageId": "183:69150"
+}

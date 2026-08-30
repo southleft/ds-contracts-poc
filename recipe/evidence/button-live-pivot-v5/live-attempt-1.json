@@ -1,0 +1,30 @@
+{
+  "version": 5,
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "wrapperPath": "recipe/evidence/button-live-pivot-v5/writer-wrapper.txt",
+  "wrapperBytes": 56028,
+  "wrapperSha256": "19c45c90eb146149e91f93442e997ee93565bff124364bded994f365b3fd63d9",
+  "evalBegan": false,
+  "before": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "pageCount": 22,
+    "totalTopLevelNodes": 213,
+    "proofPageMatches": 0,
+    "collectionCount": 26,
+    "totalLocalVariables": 11608,
+    "matchingCollections": 0
+  },
+  "bridgeResult": {
+    "success": false,
+    "error": "TypeError: TextEncoder is not a constructor"
+  },
+  "evalCompleted": false,
+  "error": "TypeError: TextEncoder is not a constructor"
+}

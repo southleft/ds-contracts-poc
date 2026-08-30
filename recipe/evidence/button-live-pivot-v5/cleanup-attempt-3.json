@@ -1,0 +1,23 @@
+{
+  "version": 5,
+  "attempt": 3,
+  "kind": "cleanup-on-failure",
+  "date": "2026-08-30",
+  "failure": "writer eval timed out at 600000ms through the script-hosted ephemeral bridge (port 9229). Measured while the eval crawled: plugin primitives were millisecond-fast through the interactive MCP path (10 realistic components with pluginData + variable bindings in 44ms), while the ephemeral-bridge eval advanced ~1 component/min with the Scratch tab both backgrounded AND active. The slowness is a property of the ephemeral-bridge eval delivery, not of the plugin, the writer, or tab visibility. Attempt 4 delivers the SAME wrapper bytes through the interactive MCP server's execute path.",
+  "removed": {
+    "pages": [{ "id": "182:66376", "children": 22 }],
+    "collections": [
+      {
+        "id": "VariableCollectionId:182:66378",
+        "name": "Recipe Pivot / 4063ba55-b04f4059-v4 / altitude-button-reviewed-v2"
+      }
+    ]
+  },
+  "after": {
+    "proofPageMatches": 0,
+    "matchingCollections": 0,
+    "oldButtonPagePresent": true,
+    "inputPagePresent": true
+  },
+  "transport": "figma_execute_across_files scoped to fileKey byMp6lt0Ij9b2QbkDGFwBh; connected read-only files untouched; the transient bench-collection from the timing benchmark was removed in the same pass"
+}

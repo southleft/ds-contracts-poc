@@ -1,0 +1,457 @@
+{
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:69150",
+  "pageName": "Recipe Pivot / Button / 6857935c-b04f4059-v4",
+  "createdNodeIds": [
+    "183:70425",
+    "183:70426",
+    "183:70427",
+    "183:70431",
+    "183:70433",
+    "183:70435",
+    "183:70437",
+    "183:70439",
+    "183:70441",
+    "183:70443",
+    "183:70447",
+    "183:70449",
+    "183:70451",
+    "183:70453",
+    "183:70455",
+    "183:70457"
+  ],
+  "mutatedPreExistingNodeIds": [],
+  "proofSectionId": "183:70425",
+  "pairedSectionId": "183:70426",
+  "sets": [
+    {
+      "id": "183:69776",
+      "name": "button/set :: Button / button@1 proof",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variants": 144
+    },
+    {
+      "id": "183:70424",
+      "name": "button/set :: Button / button@1 proof",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variants": 144
+    }
+  ],
+  "instances": [
+    {
+      "id": "183:70427",
+      "setId": "183:69776",
+      "adapterIdentity": "altitude-button-reviewed-v2"
+    },
+    {
+      "id": "183:70443",
+      "setId": "183:70424",
+      "adapterIdentity": "fluent-button-reviewed-v2"
+    }
+  ],
+  "cellRecords": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "183:70431",
+      "componentId": "183:69470"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "183:70433",
+      "componentId": "183:69489"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "183:70435",
+      "componentId": "183:69524"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "183:70437",
+      "componentId": "183:69158"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "183:70439",
+      "componentId": "183:69182"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "183:70441",
+      "componentId": "183:69217"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "183:70447",
+      "componentId": "183:70113"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "183:70449",
+      "componentId": "183:70132"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "183:70451",
+      "componentId": "183:70170"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "183:70453",
+      "componentId": "183:69784"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "183:70455",
+      "componentId": "183:69810"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "183:70457",
+      "componentId": "183:69848"
+    }
+  ],
+  "images": [
+    {
+      "kind": "representative",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "nodeId": "183:70427",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/altitude-button-reviewed-v2.png",
+      "bytes": 1926,
+      "sha256": "52658cb274a817479cc9eb3937206af92a4dbcbaa6a253e7189a7b3c381448c9"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "183:70431",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-default.png",
+      "bytes": 1884,
+      "sha256": "1dee591b4c3d8df989f738499fa457ad2ef930a3f3302b0f9e9cedd6c50db911"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "183:70433",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-hover.png",
+      "bytes": 1848,
+      "sha256": "e89fec3dd2aaae4e7304f5cd5510d5fceb28b3d3b4bcfb05520228d91231587d"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "183:70435",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-focus-visible.png",
+      "bytes": 2736,
+      "sha256": "ff13af25ca93c7836e2a69affe0534f97bb2691814649cef60d69ab3b52021b4"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "183:70437",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-default.png",
+      "bytes": 1926,
+      "sha256": "52658cb274a817479cc9eb3937206af92a4dbcbaa6a253e7189a7b3c381448c9"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "183:70439",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-hover.png",
+      "bytes": 1861,
+      "sha256": "60ab9c6a768cfec98a4e5a77e494f6871039f0399d21b134aec80aceab1e4398"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "183:70441",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-focus-visible.png",
+      "bytes": 2828,
+      "sha256": "0fd460a588a3e1fa07424f4dd28f85fff4055f56577513237e4ae5fb112565ea"
+    },
+    {
+      "kind": "representative",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "nodeId": "183:70443",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/fluent-button-reviewed-v2.png",
+      "bytes": 1695,
+      "sha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "183:70447",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-default.png",
+      "bytes": 1656,
+      "sha256": "ed675c367b1eccd6eab7e49c8e3f4f54cfa7ed51a71abad1d8fdcba8c8bfe806"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "183:70449",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-hover.png",
+      "bytes": 1716,
+      "sha256": "1a5aa90466656d0fa718e49264dff5667c54677417b6e38b95fcda3459daa554"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "183:70451",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-focus-visible.png",
+      "bytes": 1656,
+      "sha256": "ed675c367b1eccd6eab7e49c8e3f4f54cfa7ed51a71abad1d8fdcba8c8bfe806"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "183:70453",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-default.png",
+      "bytes": 1695,
+      "sha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "183:70455",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-hover.png",
+      "bytes": 1713,
+      "sha256": "7d6bab82374569e08eb8a3d155736c178727ad1c3e14db06b2832f67187a89e9"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "183:70457",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-focus-visible.png",
+      "bytes": 1695,
+      "sha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    }
+  ],
+  "setImages": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "nodeId": "183:69776",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/sets/altitude-button-reviewed-v2.png",
+      "bytes": 9542,
+      "sha256": "cd18e3a6ff6746dfe9abc24acbaac282583921d6b18553e8baa376b277232982"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "nodeId": "183:70424",
+      "path": "recipe/evidence/button-live-pivot-v5/screenshots/sets/fluent-button-reviewed-v2.png",
+      "bytes": 10123,
+      "sha256": "331503b25002ce2898e70f742da87127a79e8f2f449ce492fee04225c3ae3069"
+    }
+  ],
+  "probes": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "resize": {
+        "sourceIntent": "HUG",
+        "before": {
+          "width": 83,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "IBM Plex Sans",
+            "fontStyle": "SemiBold",
+            "fontSize": 16,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 51,
+            "height": 24,
+            "x": 16,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "grown": {
+          "width": 147,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "IBM Plex Sans",
+            "fontStyle": "SemiBold",
+            "fontSize": 16,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 51,
+            "height": 24,
+            "x": 48,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restored": {
+          "width": 83,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "IBM Plex Sans",
+            "fontStyle": "SemiBold",
+            "fontSize": 16,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 51,
+            "height": 24,
+            "x": 16,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restorationBeforeSha256": "d31a1b1bb0958dfa782ff8bea4168e47724b4624433960fd09a46b3b1e23db66",
+        "restorationAfterSha256": "d31a1b1bb0958dfa782ff8bea4168e47724b4624433960fd09a46b3b1e23db66",
+        "failures": [],
+        "passed": true
+      },
+      "variantSwitching": {
+        "passed": true,
+        "beforeMain": "183:69158",
+        "afterMain": "183:69470"
+      },
+      "tokenBinding": {
+        "passed": true,
+        "bindingFacts": 2616
+      },
+      "noFakeLayout": {
+        "passed": true,
+        "components": 144,
+        "layoutChildren": 300,
+        "nonAbsoluteChildren": 300
+      },
+      "labelValidation": {
+        "denominator": 144,
+        "passed": 144
+      },
+      "restored": true
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "resize": {
+        "sourceIntent": "HUG",
+        "before": {
+          "width": 96,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "Roboto",
+            "fontStyle": "SemiBold",
+            "fontSize": 14,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 42,
+            "height": 20,
+            "x": 27,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "grown": {
+          "width": 160,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "Roboto",
+            "fontStyle": "SemiBold",
+            "fontSize": 14,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 42,
+            "height": 20,
+            "x": 59,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restored": {
+          "width": 96,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "Roboto",
+            "fontStyle": "SemiBold",
+            "fontSize": 14,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 42,
+            "height": 20,
+            "x": 27,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restorationBeforeSha256": "909e288e6b75ca7c5156252a6da9271545acb49c208d3983faa2bd4e40d52302",
+        "restorationAfterSha256": "909e288e6b75ca7c5156252a6da9271545acb49c208d3983faa2bd4e40d52302",
+        "failures": [],
+        "passed": true
+      },
+      "variantSwitching": {
+        "passed": true,
+        "beforeMain": "183:69784",
+        "afterMain": "183:70113"
+      },
+      "tokenBinding": {
+        "passed": true,
+        "bindingFacts": 2568
+      },
+      "noFakeLayout": {
+        "passed": true,
+        "components": 144,
+        "layoutChildren": 300,
+        "nonAbsoluteChildren": 300
+      },
+      "labelValidation": {
+        "denominator": 144,
+        "passed": 144
+      },
+      "restored": true
+    }
+  ],
+  "after": {
+    "pageCount": 23,
+    "totalTopLevelNodes": 217,
+    "proofPageMatches": 1,
+    "collectionCount": 28,
+    "totalLocalVariables": 11666,
+    "matchingCollections": 2
+  },
+  "sceneAccounting": {
+    "carriedBy": "recipe/evidence/button-scene-inversion-v2 (B-series observe program; accounting and collapse-compile fixed point live there)",
+    "inlineReadback": false
+  }
+}
