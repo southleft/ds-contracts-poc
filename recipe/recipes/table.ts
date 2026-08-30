@@ -810,6 +810,28 @@ const validateTableStructure = (root: FrameNode): void => {
   const tableSet = setByRole(root, "table/set");
   const rowSet = setByRole(root, "table/row-set");
   const cellSet = setByRole(root, "table/cell-set");
+
+  // No dead axis. An axis whose values compile to identical content decides
+  // nothing, and a designer can still click it -- which is worse than not
+  // offering it. calendar@1 shipped exactly that this session (`OutsideDays`
+  // show/hide were byte-identical), so the class is closed here too rather than
+  // only where it happened to be found. Both table sources pass today; this
+  // keeps them honest.
+  for (const set of [tableSet, rowSet, cellSet]) {
+    const rendered = new Set(
+      set.children.map((child) => {
+        const stripped = structuredClone(child) as Record<string, unknown>;
+        delete stripped.role;
+        delete stripped.label;
+        delete stripped.variantProperties;
+        return canonicalJson(stripped);
+      }),
+    );
+    if (rendered.size < set.children.length)
+      throw new RecipeRefusal(TABLE_RECIPE_REF, [
+        `${set.role}: dead axis — two or more variants compile to identical content`,
+      ]);
+  }
   if (tableSet.children.length !== TABLE_DENSITIES.length)
     throw new RecipeRefusal(TABLE_RECIPE_REF, ["table/set variant count"]);
   if (

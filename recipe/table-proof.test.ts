@@ -18,7 +18,7 @@ import {
   muiTableSource,
 } from "./fixtures/library-tables.js";
 import type { FrameNode, IRNode } from "./figma-ir.js";
-import { deriveRecipeIntegrity } from "./hash.js";
+import { deriveRecipeIntegrity, hashRecipeEnvelope } from "./hash.js";
 import { emitTableOutputs } from "./output/table.js";
 import { assertSafeOutputFiles } from "./output-safety.js";
 import {
@@ -26,6 +26,7 @@ import {
   compileTableRecipe,
   type TableRecipeInstance,
 } from "./recipes/table.js";
+import { RecipeRefusal } from "./recipe.js";
 import { measureTableRequiredFacts } from "./required-facts.js";
 
 const sources = [
@@ -402,10 +403,7 @@ test("React/WC output is deterministic, semantic, and injection-safe", () => {
     "Inter; } body{display:none}/*";
   assert.throws(
     () =>
-      emitTableOutputs(
-        compileTableRecipe(attack),
-        attack.provenance.selection,
-      ),
+      emitTableOutputs(compileTableRecipe(attack), attack.provenance.selection),
     /unsafe font-family/,
   );
   const collision = structuredClone(
@@ -424,5 +422,37 @@ test("React/WC output is deterministic, semantic, and injection-safe", () => {
   assert.throws(
     () => assertSafeOutputFiles([{ path: "react/../../escape.ts" }], "react"),
     /escapes react/,
+  );
+});
+
+test("a dead axis is refused — two variants that compile identically", () => {
+  // calendar@1 shipped exactly this class in the same session: an axis whose
+  // values produced byte-identical content, so it decided nothing while a
+  // designer could still click it. Closed here too, not only where it was found.
+  const envelope: any = compileTableRecipe(
+    adaptReviewedTable(firstPartyTableSource, firstPartyTableAdapterConfig),
+  );
+  const broken = structuredClone(envelope);
+  const cellSet = broken.ir.children.find(
+    (child: any) => child.role === "table/cell-set",
+  );
+  // Make two cell variants identical apart from their variant identity.
+  const [first, second] = cellSet.children;
+  const keep = {
+    role: second.role,
+    label: second.label,
+    variantProperties: second.variantProperties,
+  };
+  cellSet.children[1] = { ...structuredClone(first), ...keep };
+  // Re-sign, or collapse refuses on the integrity hash before it ever reaches
+  // the structural check this test is about.
+  broken.integrity.canonicalHash = hashRecipeEnvelope(broken);
+
+  assert.throws(
+    () => collapseTableRecipe(broken, (envelope as any).provenance.selection),
+    (error: unknown) =>
+      error instanceof RecipeRefusal &&
+      error.findings.some((line) => line.includes("dead axis")),
+    "an axis whose variants compile identically must refuse",
   );
 });
