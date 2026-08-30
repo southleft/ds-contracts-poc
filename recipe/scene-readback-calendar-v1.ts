@@ -121,6 +121,8 @@ export const CALENDAR_LIVE_V1_HEADER_BODY_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED";
 export const CALENDAR_LIVE_V1_VARIANT_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-VARIANT-CLIPS-CONTENT-OMITTED";
+export const CALENDAR_LIVE_V1_VARIANT_MIN_WIDTH_BINDING_COMPILE_ORDER_MARKER =
+  "CALENDAR-HOST-VARIANT-MIN-WIDTH-BINDING-COMPILE-ORDER";
 export const CALENDAR_LIVE_V1_ROW_VARIANT_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-ROW-VARIANT-CLIPS-CONTENT-OMITTED";
 export const CALENDAR_LIVE_V1_HEADER_BODY_CORNER_RADIUS_OMITTED_MARKER =
@@ -406,6 +408,7 @@ const TABLE_VARIANT_COMPILE_BINDING_FIELDS = [
   "layout.padding.right",
   "layout.padding.top",
   "layout.padding.bottom",
+  "layout.minWidth",
   "fills.0.color",
 ] as const;
 const HEADER_COMPILE_BINDING_FIELDS = ["layout.itemSpacing"] as const;
@@ -823,8 +826,10 @@ const compileBindingFieldsFor = (
     return [...ROW_COMPILE_BINDING_FIELDS];
   if (role && ROW_COMPONENT_ROLE.test(role))
     return [...ROW_COMPILE_BINDING_FIELDS];
-  if (role && TABLE_VARIANT_ROLE.test(role))
+  if (role && TABLE_VARIANT_ROLE.test(role)) {
+    void CALENDAR_LIVE_V1_VARIANT_MIN_WIDTH_BINDING_COMPILE_ORDER_MARKER;
     return [...TABLE_VARIANT_COMPILE_BINDING_FIELDS];
+  }
   if (role === "calendar/weekday-row" || role === "calendar/grid")
     return [...HEADER_COMPILE_BINDING_FIELDS];
   return null;
