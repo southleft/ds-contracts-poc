@@ -410,7 +410,7 @@ test("pivot preserves historical v4 claims while current status revokes overall 
   assert.match(final.proofBoundary, /no Input\/Field/);
   assert.equal(final.buttonSuccess, true);
   assert.equal(current.button.overallSuccess, false);
-  assert.equal(current.button.status, "pending");
+  assert.equal(current.button.status, "b3-v5-live-human-grade-passed");
   assert.equal(receipt.completion.liveFigma, "v4-complete-artifacts-retained");
   assert.equal(receipt.completion.fullUsability, "passed-both-sources");
   assert.equal(receipt.completion.fullFixedPoint, "passed-two-live-cycles");

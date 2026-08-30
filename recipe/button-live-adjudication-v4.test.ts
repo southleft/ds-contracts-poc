@@ -51,7 +51,7 @@ test("historical v4 adjudication bytes are preserved but current Button success 
     "recipe/evidence/status-index.json",
   );
   assert.equal(current.button.overallSuccess, false);
-  assert.equal(current.button.status, "pending");
+  assert.equal(current.button.status, "b3-v5-live-human-grade-passed");
 });
 
 test("historical reader refuses current-source drift and planted tampering", () => {

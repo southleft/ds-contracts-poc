@@ -261,9 +261,12 @@ jobs:
       - name: recipe:combobox:live:v41:check (the CURRENT combobox lineage — generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:combobox:live:v41:check
-      - name: recipe:table:live:v27:check (the CURRENT table lineage — probe containment fix, generated freshness, authorization self-test, smoke, lifecycle simulation)
+      - name: recipe:table:live:v32:check (the CURRENT table lineage — the one Table V32 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:table:live:v27:check
+        run: npm run recipe:table:live:v32:check
+      - name: recipe:calendar:live:v50:check (the CURRENT calendar lineage — the one Calendar V50 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:calendar:live:v50:check
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check
@@ -282,9 +285,6 @@ jobs:
       - name: recipe:input-field:live:v4:self-test (authorization, preflight, normalization, journaling, and order)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v4:self-test
-      - name: recipe:input-field:live:v5:check (generated writer, exact transport, authorization gates, offline smoke)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v5:check
       - name: recipe:input-field:live:v7:check (phase-stable signed broker, hermetic lifecycle, two roots, crash cleanup)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v7:check

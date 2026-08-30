@@ -164,6 +164,91 @@ const {
   scriptKey,
 } = map;
 
+/**
+ * Retired live-lineage versions, excluded as FAMILIES with the same deliberate
+ * reason. Each archetype's live lineage advances one version at a time
+ * (v(N+1) freezes v(N)'s receipts); once a later version is minted and — for
+ * the five signed archetypes — human-signed, the superseded lifecycles are
+ * retired from CI on purpose: a retired version's generated:check regenerates
+ * its frozen receipts from the evolved shared writer/probe sources, so its
+ * freshness drifts BY DESIGN as the lineage moves on
+ * (recipe:table:live:v27:check demonstrated the class at the v32 head). The
+ * committed evidence bytes stay on disk, later records hold the antecedent
+ * hashes they pin, and the CURRENT lineage version stays wired in the fast
+ * lane. Every generated entry still names a real script, and a version that a
+ * lane runs is never excluded (wired wins), so checks (1)/(3)/(5) keep their
+ * teeth. The input-field lineage keeps its full v4–v85 chain wired (minus the
+ * v5/v6 retirements named here and above); table/combobox/calendar wire their
+ * signed current version.
+ */
+const RETIRED_LIVE_LINEAGES: Array<{
+  archetype: string;
+  scriptPrefix: string;
+  testPrefixes: RegExp[];
+  retired: (version: number) => boolean;
+  current: string;
+}> = [
+  {
+    archetype: "table",
+    scriptPrefix: "recipe:table:live:v",
+    testPrefixes: [/^recipe\/table-live-v(\d+)-[a-z-]+\.test\.ts$/],
+    retired: (v) => v <= 31,
+    current: "recipe:table:live:v32:check",
+  },
+  {
+    archetype: "combobox",
+    scriptPrefix: "recipe:combobox:live:v",
+    testPrefixes: [
+      /^recipe\/combobox-live-v(\d+)-[a-z-]+\.test\.ts$/,
+      /^recipe\/scene-readback-combobox-v(\d+)\.test\.ts$/,
+    ],
+    retired: (v) => v <= 40,
+    current: "recipe:combobox:live:v41:check",
+  },
+  {
+    archetype: "calendar",
+    scriptPrefix: "recipe:calendar:live:v",
+    testPrefixes: [
+      /^recipe\/calendar-live-v(\d+)-[a-z-]+\.test\.ts$/,
+      /^recipe\/scene-readback-calendar-v(\d+)\.test\.ts$/,
+    ],
+    retired: (v) => v <= 49,
+    current: "recipe:calendar:live:v50:check",
+  },
+  {
+    archetype: "input-field",
+    scriptPrefix: "recipe:input-field:live:v",
+    testPrefixes: [/^recipe\/input-field-live-v(\d+)-[a-z-]+\.test\.ts$/],
+    retired: (v) => v === 5,
+    current: "recipe:input-field:live:v85:check",
+  },
+];
+const retiredLineageReason = (
+  lineage: (typeof RETIRED_LIVE_LINEAGES)[number],
+  version: string,
+) =>
+  `Retired ${lineage.archetype} live lineage v${version}, superseded by ${lineage.current} ` +
+  `(wired in the fast lane). Deliberate retirement, not an oversight: a superseded version's ` +
+  `generated:check regenerates its frozen receipts from the evolved shared writer/probe sources ` +
+  `and drifts by design once the lineage moves on (recipe:table:live:v27:check demonstrated the ` +
+  `class at the v32 head). The committed evidence bytes stay on disk and later records hold the ` +
+  `antecedent hashes they pin.`;
+
+// Expand the retired-lineage families into concrete EXCLUDED entries. Only
+// real scripts are named (they come from the manifest scan) and a wired
+// version is never excluded, so checks (1)/(3)/(5) below judge these entries
+// exactly like the hand-written ones.
+for (const lineage of RETIRED_LIVE_LINEAGES) {
+  const prefix = `root:${lineage.scriptPrefix}`;
+  for (const key of allScripts.keys()) {
+    if (!key.startsWith(prefix)) continue;
+    const versionMatch = key.slice(prefix.length).match(/^(\d+)(?::|$)/);
+    if (!versionMatch || !lineage.retired(Number(versionMatch[1]))) continue;
+    if (invocations.has(key) || key in EXCLUDED) continue;
+    EXCLUDED[key] = retiredLineageReason(lineage, versionMatch[1]!);
+  }
+}
+
 const CHECKOUT_ACTION =
   "actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1";
 const SETUP_NODE_ACTION =
@@ -572,7 +657,10 @@ for (const invocation of ciInvocations) {
   const command = readManifest(invocation.dir).scripts?.[invocation.name] ?? "";
   if (
     /(?:^|:)(?:test|coverage)(?::|$)/.test(invocation.name) ||
-    /\b--test\b/.test(command)
+    // `\b--test\b` can never match: `-` is a non-word character, so there is
+    // no word boundary between the leading space and `--`. Anchor on
+    // whitespace instead so `node --import tsx --test a.test.ts` is seen.
+    /(?:^|\s)--test(?:\s|$)/.test(command)
   ) {
     visitTestScript(
       invocation.dir,
@@ -596,6 +684,25 @@ const trackedTests = execFileSync(
   .split("\0")
   .filter((file) => /\.(?:test|spec)\.(?:[cm]?[jt]sx?)$/.test(file))
   .sort();
+
+// Retired-lineage lifecycle tests are excluded as the same families as their
+// scripts: each file below runs only inside a retired `recipe:*:live:vN:*`
+// script that EXCLUDED names above, and its version's successor lifecycle is
+// wired. Only present files are named (the scan walks the same trackedTests
+// list the coverage loop uses).
+for (const file of trackedTests) {
+  if (file in TEST_EXCLUDED) continue;
+  for (const lineage of RETIRED_LIVE_LINEAGES) {
+    for (const pattern of lineage.testPrefixes) {
+      const match = file.match(pattern);
+      if (!match || !lineage.retired(Number(match[1]))) continue;
+      TEST_EXCLUDED[file] =
+        `Retired ${lineage.archetype} live lineage v${match[1]} lifecycle test — it is invoked only by ` +
+        `the retired ${lineage.scriptPrefix}${match[1]} scripts (EXCLUDED above with the family reason) ` +
+        `and its lifecycle is superseded by ${lineage.current}, which stays wired in the fast lane.`;
+    }
+  }
+}
 
 console.log(
   `\nTEST COVERAGE — ${trackedTests.length} present test/spec file(s)\n`,
