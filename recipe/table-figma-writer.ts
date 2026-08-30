@@ -627,6 +627,36 @@ for(const source of PLAN.sources){
   };
   const deferredFill=[];
   const autoLayoutParent=node=>!!node.parent&&"layoutMode" in node.parent&&node.parent.layoutMode!=="NONE";
+
+/**
+ * The width a FILL subtree would occupy if something anchored it.
+ *
+ * A table's whole vertical chain is full-width by declaration -- variant,
+ * header, body and row all FILL -- so no node in it carries a width of its own.
+ * The measurement lives at the bottom, in the cells, which hug their contents.
+ * Figma cannot resolve that chain against a component set that hugs it back, so
+ * the set is given the width the content actually needs.
+ *
+ * Recursion stops at the first node that is not FILL: that node's width is a
+ * real measurement. Above it, a horizontal row sums its children and a vertical
+ * stack takes the widest, each plus its own padding -- the same arithmetic
+ * Figma would do. Nothing here chooses a number.
+ */
+void "TABLE-WRITER-NATURAL-WIDTH-OF-A-FILL-SUBTREE";
+const contentWidth=node=>{
+  const children="children" in node?node.children.filter(child=>child.visible!==false):[];
+  if(!("layoutMode" in node)||node.layoutMode==="NONE"||children.length===0)
+    throw new Error("TABLE-SET-CONTENT-WIDTH-UNMEASURED:"+node.name);
+  const padding=node.paddingLeft+node.paddingRight;
+  if(node.layoutMode==="HORIZONTAL")
+    return children.reduce((total,child)=>total+naturalWidth(child),0)
+      +node.itemSpacing*(children.length-1)+padding;
+  return Math.max(...children.map(child=>naturalWidth(child)))+padding;
+};
+// A deferred variant has not been given FILL yet, so it still reports the frame
+// default. Measure its contents directly rather than the width it is about to
+// stop having.
+const naturalWidth=node=>node.layoutSizingHorizontal==="FILL"?contentWidth(node):node.width;
   void "TABLE-WRITER-DEFER-FILL-UNTIL-AUTOLAYOUT-PARENT";
   const applySizing=(node,ir)=>{
     const width=ir.layout?ir.layout.width:ir.width,height=ir.layout?ir.layout.height:ir.height;
@@ -637,12 +667,7 @@ for(const source of PLAN.sources){
     // Defer those and apply them once the set exists and has its layout.
     const wantsFill=width.mode==="fill"||height.mode==="fill";
     if(wantsFill&&!autoLayoutParent(node)){
-      // Record the width the node has while it is still content-sized. A set
-      // that HUGS children which FILL it is degenerate -- Figma resolves it to
-      // its own default (100px) and the content spills out. The set is sized to
-      // the widest variant's own content, which is measured here, not invented.
-      void "TABLE-WRITER-RECORD-CONTENT-WIDTH-BEFORE-FILL";
-      deferredFill.push([node,ir,node.width]);
+      deferredFill.push([node,ir]);
     }
     else{
     if(width.mode==="fill")node.layoutSizingHorizontal="FILL";
@@ -736,7 +761,7 @@ for(const source of PLAN.sources){
     void "TABLE-WRITER-SET-FIXED-WHEN-CHILDREN-FILL";
     const setFillChildren=deferredFill.filter(([node])=>node.parent===set);
     if(setFillChildren.length>0){
-      const widest=Math.max(...setFillChildren.map(([,,contentWidth])=>contentWidth));
+      const widest=Math.max(...setFillChildren.map(([node])=>contentWidth(node)));
       if(!(widest>0))throw new Error("TABLE-SET-CONTENT-WIDTH-UNMEASURED");
       set.resizeWithoutConstraints(widest+set.paddingLeft+set.paddingRight,Math.max(set.height,1));
       set.counterAxisSizingMode="FIXED";
@@ -806,7 +831,7 @@ for(const source of PLAN.sources){
   cellSet.x=80;cellSet.y=96;rowSet.x=80;rowSet.y=cellSet.y+cellSet.height+96;tableSet.x=80;tableSet.y=rowSet.y+rowSet.height+96;
   section.resizeWithoutConstraints(Math.max(cellSet.width,rowSet.width,tableSet.width)+160,tableSet.y+tableSet.height+80);
   nextSectionX+=section.width+240;
-  summaries.push({adapterIdentity:source.adapterIdentity,sectionId:section.id,tableSetId:tableSet.id,rowSetId:rowSet.id,cellSetId:cellSet.id,collectionId:collection.id,variableCount:variables.size,variantCount:tableSet.children.length+rowSet.children.length+cellSet.children.length,tableCells:source.tableCells.length,rowCells:source.rowCells.length,cellCells:source.cellCells.length,instanceCount:source.instanceCount,recipeHash:source.recipeHash,envelopeHash:source.envelopeHash,comparedIrFacts:source.comparedIrFacts});
+  summaries.push({adapterIdentity:source.adapterIdentity,sectionId:section.id,tableSetId:tableSet.id,tableSetWidth:Math.round(tableSet.width),rowSetId:rowSet.id,cellSetId:cellSet.id,collectionId:collection.id,variableCount:variables.size,variantCount:tableSet.children.length+rowSet.children.length+cellSet.children.length,tableCells:source.tableCells.length,rowCells:source.rowCells.length,cellCells:source.cellCells.length,instanceCount:source.instanceCount,recipeHash:source.recipeHash,envelopeHash:source.envelopeHash,comparedIrFacts:source.comparedIrFacts});
 }
 return{writerVersion:Number(WRITER_VERSION),fileKey:figma.fileKey,fileName:figma.root.name,pageId:page.id,pageName:page.name,runIdentity:PLAN.runIdentity,namespace:NS,createdNodeIds:[...new Set(createdNodeIds)],mutatedNodeIds:[...new Set(mutatedNodeIds)],sources:summaries};
 `;

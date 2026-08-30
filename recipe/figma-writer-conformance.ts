@@ -345,7 +345,12 @@ const createLiveMock = (
     type: string,
     interfaceName: string,
     withChildren = false,
-    extras: { componentProperties?: Record<string, { type: string; value: string | boolean }> } = {},
+    extras: {
+      componentProperties?: Record<
+        string,
+        { type: string; value: string | boolean }
+      >;
+    } = {},
   ): any => {
     const pluginData = new Map<string, string>();
     const target: Record<string, any> = {
@@ -438,13 +443,34 @@ const createLiveMock = (
           componentProperties: Object.fromEntries(
             Object.entries(defs).map(([key, def]) => [
               key,
-              { type: (def as { type: string }).type, value: (def as { defaultValue: string | boolean }).defaultValue },
+              {
+                type: (def as { type: string }).type,
+                value: (def as { defaultValue: string | boolean }).defaultValue,
+              },
             ]),
           ),
         });
         for (const child of target.children ?? []) {
           instance.appendChild(cloneSceneNode(child));
         }
+        // A real instance inherits its main component's auto-layout, which is
+        // why measuring through an instance works on the canvas. Without this
+        // the mock reports layoutMode "NONE" on every instance and any writer
+        // that walks a subtree's geometry sees a shape Figma never produces.
+        for (const property of [
+          "layoutMode",
+          "layoutSizingHorizontal",
+          "layoutSizingVertical",
+          "itemSpacing",
+          "paddingLeft",
+          "paddingRight",
+          "paddingTop",
+          "paddingBottom",
+          "primaryAxisSizingMode",
+          "counterAxisSizingMode",
+        ])
+          if (target[property] !== undefined)
+            instance[property] = target[property];
         return instance;
       };
     }

@@ -2011,7 +2011,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v29 attempt 1: writer, restore and extract ALL accepted and every per-source usability boolean green on both roots including reflow — refused at the probe on visibleAreaLoss 1 for the four table variants, because a component set that HUGS children which FILL it is degenerate: Figma resolves the set to its 100px default, the variants collapse to it and the content spills outside the component box; writer now sizes the set to the widest variant content before applying deferred fill, for v30; product v1 incomplete",
+    "status": "live-v30 attempt 1 failed closed at the WRITER STEP by my own measurement defect: the set-sizing fix read each variants width at defer time, when the variant had no content yet, so the set was still minted at Figmas 100px default; the width now comes from walking the FILL subtree down to the hug cells that actually carry a measurement, gated in the mock at 300px; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2606,7 +2606,7 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v29 attempt 1 failed closed at the probe on visibleAreaLoss; do not restart v29 attempt 2 as-is",
+      "Table live v30 attempt 1 failed closed before the probe; do not restart v30 attempt 2 as-is",
       "OPEN HUMAN GATE: table@1 has no per-column width model (Gate 2). Gate 1 (hug vs fill) is ANSWERED by both sources declaring width:100%.",
       "no live mint",
       "no human grade",
@@ -3707,6 +3707,23 @@
         "doNotRestartV29Attempt2": true
       },
       "nextTeaching": "the writer records each deferred node's content width before FILL is applied, and when a set has FILL children it sizes the set to the widest variant's own content plus the set padding and pins counterAxisSizingMode FIXED — the width is measured from the content, never chosen"
+    },
+    "liveV30": {
+      "attempt1": {
+        "status": "failed-closed-at-writer-measurement",
+        "writerAccepted": true,
+        "restoreRun": false,
+        "extractRun": false,
+        "probeRun": false,
+        "mintStayed": false,
+        "doNotRestartV30Attempt2": true,
+        "defect": "mine, not Figma's: applySizing recorded node.width at the moment it deferred the FILL, but a variant is created before its children are rendered, so the recorded width was the 100px frame default",
+        "measuredLive": "both minted table/set nodes still 100px wide with FILL variants, identical to v29",
+        "cause": "a table's whole vertical chain is full-width by declaration (variant, header, body, row all FILL), so no node in it carries a width of its own; the only real measurement is at the bottom, in the cells, which hug their contents",
+        "cleanup": "signed cleanup executed, status cleanup-complete",
+        "caughtOfflineAfterwards": "the writer mock refused TABLE-SET-CONTENT-WIDTH-UNMEASURED on table/row-instance/0, which exposed a second defect -- mock instances did not inherit their main component's auto-layout the way real instances do"
+      },
+      "nextTeaching": "the set width is computed by walking the FILL subtree to the first node that is not FILL: a horizontal row sums its children plus gaps and padding, a vertical stack takes the widest plus padding, and the recursion bottoms out on the hug cells"
     }
   },
   "input": {

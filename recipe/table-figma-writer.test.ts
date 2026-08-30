@@ -148,7 +148,12 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
     writer.code,
     /node\.minWidth=layout\.minWidth===0\?null:layout\.minWidth/,
   );
-  assert.equal(writer.code.includes("if(layout.minWidth!==undefined)node.minWidth=layout.minWidth;"), false);
+  assert.equal(
+    writer.code.includes(
+      "if(layout.minWidth!==undefined)node.minWidth=layout.minWidth;",
+    ),
+    false,
+  );
   assert.match(writer.code, /"requestedFamily":"Inter"/);
   assert.match(writer.code, /"requestedStyle":"Semi Bold"/);
   assert.match(writer.code, /"resolvedFamily":"Inter"/);
@@ -188,7 +193,10 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
     ),
     true,
   );
-  const generic = readFileSync("recipe/table-figma-writer.ts", "utf8").toLowerCase();
+  const generic = readFileSync(
+    "recipe/table-figma-writer.ts",
+    "utf8",
+  ).toLowerCase();
   for (const identity of ["@mui", "mui.", "antd", "ant-design", "material"]) {
     assert.equal(generic.includes(identity), false, identity);
   }
@@ -203,8 +211,14 @@ test("Table writer plans two complete 2+4+4 primitive-IR sets without source bra
     writer.code,
     /TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER/,
   );
-  assert.equal(writer.code.includes("labels[0].componentPropertyReferences"), false);
-  assert.equal(writer.code.includes("componentPropertyReferences={[labelKey]"), false);
+  assert.equal(
+    writer.code.includes("labels[0].componentPropertyReferences"),
+    false,
+  );
+  assert.equal(
+    writer.code.includes("componentPropertyReferences={[labelKey]"),
+    false,
+  );
   assert.equal(/componentPropertyReferences=\{\[/.test(writer.code), false);
   assert.match(writer.code, /addComponentProperty\("Label","TEXT"/);
   assert.match(writer.code, /addComponentProperty\("Column","TEXT"/);
@@ -278,7 +292,10 @@ test("Table writer mock-mints 20 variants under a Table identity", async () => {
     true,
   );
   assert.equal(conformance.result?.pageId === FORBIDDEN_INPUT_PAGE_ID, false);
-  assert.equal(conformance.result?.pageId === FORBIDDEN_COMBOBOX_PAGE_ID, false);
+  assert.equal(
+    conformance.result?.pageId === FORBIDDEN_COMBOBOX_PAGE_ID,
+    false,
+  );
   assert.equal(
     Array.isArray(conformance.result?.sources) &&
       conformance.result.sources.every(
@@ -288,4 +305,25 @@ test("Table writer mock-mints 20 variants under a Table identity", async () => {
       ),
     true,
   );
+
+  // Table live v29 minted a set 100px wide -- Figma's default frame width --
+  // because the set hugged variants that filled it, and every cell then landed
+  // outside the component box (visibleAreaLoss 1 on all four table variants).
+  // The set now takes the width its content actually needs, so a set still
+  // sitting at the default is that defect coming back.
+  for (const source of conformance.result!.sources as Array<{
+    adapterIdentity: string;
+    tableSetWidth?: number;
+  }>) {
+    assert.equal(
+      typeof source.tableSetWidth,
+      "number",
+      `${source.adapterIdentity} must report the minted set width`,
+    );
+    assert.equal(
+      source.tableSetWidth! > 100,
+      true,
+      `${source.adapterIdentity} minted a ${source.tableSetWidth}px set -- a hug-of-fill set collapses to Figma's 100px default`,
+    );
+  }
 });
