@@ -1,0 +1,86 @@
+{
+  "artifactVersion": "calendar-live-v2-attempt-1-v1",
+  "status": "failed closed at writer; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "4e2e3e7e4fdf3548ea3f9ed2fe7884db9b71b342",
+  "codeCommit": "4e2e3e7e4fdf3548ea3f9ed2fe7884db9b71b342",
+  "antecedentCommit": "33ec75ead051f895e361b9fbdc3774b37132c200",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v2",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "842458e2-b6f6-4b4f-abe6-42fd09102f22",
+    "attempt": 1,
+    "authorizationSha256": "3494956604e9c4190f478e85d4834b50681175460eaa20c3bd1e4253ceadbdc5",
+    "signingPublicKeySpkiSha256": "f5395611739553e3097b6b530e2c0cd46751070d3d35a8c18a30f72d473b0a10",
+    "programSha256": "c1e326eef6a62001665f65d4b846f53a55dfedf2f3a8ca7d69f22524da9ac7d6",
+    "requestBindingSha256": "594602f45888105cf20cfc02b314f477fa7c0cf128fffa096c4dd0ac9afaa600",
+    "requestSha256": "01b993a281faa14027419b3d55918aa33c7f26b8fe5873e960743116eb267677"
+  },
+  "writer": {
+    "accepted": false,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v2",
+    "pageId": "173:49787",
+    "sectionId": "173:49788",
+    "collectionId": "VariableCollectionId:173:49789",
+    "runIdentity": "19be1c96-calendar-v2",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "refusedClass": "CALENDAR-SET-PROPERTIES-FONT-UNAVAILABLE",
+    "refused": "Error: in setProperties: Unable to update this text property because the component uses a font that isn't available.",
+    "observed": {
+      "dayBoxTeachingHeld": true,
+      "dayComponents": "32x32 FIXED",
+      "dayLabelCharacters": "26",
+      "dayLabelFont": { "family": "SF Pro", "style": "Regular" },
+      "failedAt": "first calendar@1/day instance setProperties(Label) while minting week WeekNumbers=on",
+      "instanceId": "173:49820",
+      "labelProperty": "Label#173:26412"
+    },
+    "namedCause": "createInstance then setProperties(Label) without loading the instance text font; Figma refuses to update a TEXT property whose component font is not loaded in the plugin sandbox",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": false,
+    "signedCleanupAccepted": false,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:49787",
+    "removedCollectionIds": ["VariableCollectionId:173:49789"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-SET-PROPERTIES-FONT-UNAVAILABLE",
+    "doNotInvent": true,
+    "restartV2Attempt2AsIs": false,
+    "prepareV3": "load each day-instance TEXT font before setProperties(Label)"
+  },
+  "secondaryNoteNotTheRefusedClass": "day-box-before-children held (32x32 FIXED). Hug-label width was 1 not 0 because intrinsic was captured before append, when width was still 0; that is not this refusal.",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}
