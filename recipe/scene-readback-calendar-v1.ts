@@ -61,7 +61,10 @@ import {
  * onto compile sets. Does not invent `dashPattern` onto compile. Does
  * not invent a different row-set label. Does not change cell-set or
  * table/set labels in this teaching. Does not copy Combobox
- * overlay/option/listbox roles.
+ * overlay/option/listbox roles. Calendar live v4 refused
+ * `$.children[0].bindings` because compile set nodes carry `bindings: []`
+ * and host omitted the key; emit those empty arrays. Do not invent
+ * bindings the compile does not carry.
  */
 export const SCENE_READBACK_VERSION = 1;
 export const CALENDAR_LIVE_V1_PROJECT_LIVE_ROOT_OWNERSHIP_KEY_MARKER =
@@ -88,6 +91,8 @@ export const CALENDAR_LIVE_V1_SET_LAYOUT_COMPILE_CARRY_MARKER =
   "CALENDAR-HOST-SET-LAYOUT-COMPILE-CARRY";
 export const CALENDAR_LIVE_V1_SET_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-SET-CLIPS-CONTENT-OMITTED";
+export const CALENDAR_LIVE_V1_SET_EMPTY_BINDINGS_MARKER =
+  "CALENDAR-HOST-SET-EMPTY-BINDINGS";
 export const CALENDAR_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "CALENDAR-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1217,10 +1222,14 @@ export function sceneToNormalizedIr(
 ): IRNode {
   const occupancy = isHiddenFillOccupancy(scene);
   const bindings = sceneBindings(scene);
+  const role = sceneRole(scene);
+  void CALENDAR_LIVE_V1_SET_EMPTY_BINDINGS_MARKER;
   const common = {
     label: compileCarriedLabel(scene),
-    ...(sceneRole(scene) === undefined ? {} : { role: sceneRole(scene) }),
-    ...(bindings.length === 0 ? {} : { bindings }),
+    ...(role === undefined ? {} : { role }),
+    ...(SET_ROLES.has(role ?? "") || bindings.length > 0
+      ? { bindings }
+      : {}),
     ...(occupancy || scene.visible ? {} : { visible: false }),
     ...(occupancy
       ? { opacity: 0 }

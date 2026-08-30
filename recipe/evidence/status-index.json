@@ -22918,7 +22918,7 @@
   },
   "calendar": {
     "overallSuccess": false,
-    "status": "Calendar live v4 attempt 1 failed closed at extract $.children[0].bindings; writer accepted; restore 4 held; host omitted empty set bindings compile carries as []; cleanup executed; Input/Combobox/Button/Table stayed; no Calendar mint; react-day-picker remains a named refusal",
+    "status": "Calendar live v4 attempt 1 failed closed; v5 PREPARE opening (host-emit empty bindings on calendar/week/day sets; Astryx only; run 19be1c96-calendar-v5); AUTHORIZE and attempt 1 still ahead; no Calendar mint; react-day-picker remains a named refusal",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -22940,7 +22940,7 @@
     "blockers": [
       "no live mint; no Calendar human grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "Calendar live v4 attempt 1 failed closed; do not restart attempt 2 as-is; next teaching is host-emit empty bindings on calendar/week/day sets"
+      "Calendar live v5 PREPARE opening; AUTHORIZE and attempt 1 still ahead; do not restart v4 attempt 2 as-is"
     ],
     "figmaWriter": {
       "path": "recipe/calendar-figma-writer.ts",
