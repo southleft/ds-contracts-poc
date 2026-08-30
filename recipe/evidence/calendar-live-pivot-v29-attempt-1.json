@@ -1,0 +1,154 @@
+{
+  "artifactVersion": "calendar-live-v29-attempt-1-v1",
+  "status": "THE MINT STAYS. Writer, restore, extract, probe and all 8 captures accepted; one Astryx root; gates 1485/1485; usability booleans green; 8 of 8 cells pass. Cleanup persisted, not executed. Screenshots show a recognizable calendar: day numbers paint; week/month instances carry the named dayCell-size 32x32 box (week-on 256x32, month grid 256x96). Product v1 incomplete. Do not invent a Calendar grade.",
+  "authorizationCommit": "09dbc13c1",
+  "codeCommit": "09dbc13c1",
+  "antecedentCommit": "66c65c5a308f935863d0ee6959e68a6b5257b698",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-55528",
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v29",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "593cd4c0-0890-4da6-9b78-1aa11961a507",
+    "attempt": 1,
+    "authorizationSha256": "6613d80d8b00f034051f6dbd6935f80af745819c2dafb361f4b6317306b5bf03",
+    "programSha256": "7e0bb20a0ee295b39ea8e39bc198d69c73dc08f3f3aeb28dac6a109021edea3b",
+    "requestBindingSha256": "cb9e3d43f18197c6490aa5332d0d2c831e7879fe4e019dcc4021e565f4587323",
+    "requestSha256": "bb22fe87793f8df2346021132d9034413bfe1e12eb0b30051305932953de309b"
+  },
+  "teaching": {
+    "one": "CALENDAR-COMPILE-CARRIES-DAY-CELL-SIZE",
+    "cleared": true,
+    "namedCauseCleared": "V28 extract firstDifference was $.children[0].children[0].children[2].children[0].children[1].height.mode — host instance FIXED dayCell-size 32x32 vs compile hug. V29 compile dayInstance emits the already-named FIXED box (width and height). Writer instance-carry stays. No new px. No instance bindings. Not FIXED-as-fill."
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v29",
+    "pageId": "180:55528",
+    "sectionId": "180:55529",
+    "collectionId": "VariableCollectionId:180:55530",
+    "daySetId": "180:55558",
+    "weekSetId": "180:55590",
+    "calendarSetId": "180:55707",
+    "runIdentity": "19be1c96-calendar-v29",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "createdNodeIds": 101,
+    "receiptSha256": "da315e02286143d1912f34c7ebe81e62a9d8f2c283c85b1af976a08b12dcf661",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true,
+    "v23PageUntouched": true,
+    "v27PageUntouched": true,
+    "v28PageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true,
+    "receiptSha256": "53be1f1412e3f7c0971742b164d3a111cc99bc1f1d93970b5bb02d295efeda2c"
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "accepted": true,
+    "receiptSha256": "dae3935a6f4e1d53149b333d3323230f0190c5e98583949cc77b263caaec40b3",
+    "rawResponseBytes": 2782718,
+    "roots": ["astryx"],
+    "matched": 1485,
+    "expectedDenominator": 1485,
+    "fixedPointReached": true
+  },
+  "probe": {
+    "issued": true,
+    "accepted": true,
+    "passed": true,
+    "receiptSha256": "0d5bbedeaafb2777be2e52ee1fe13c22a0a40606dea7db97377717135c6d60d2",
+    "pageId": "180:55528",
+    "reflowPassed": true,
+    "contentHugPassed": true,
+    "bindingCompatibilityPassed": true,
+    "noFakeLayoutPassed": true,
+    "stateSemanticsPassed": true,
+    "switchingRestored": true,
+    "textPropertiesRestored": true,
+    "exactSceneRestoration": true,
+    "cellsPassing": 8,
+    "visibleAreaLoss": 0,
+    "overlapPixels": 0,
+    "visitedVariants": 8
+  },
+  "gates": {
+    "persisted": true,
+    "validated": true,
+    "roots": 1,
+    "expectedDenominator": 1485,
+    "matched": 1485,
+    "fixedPoint": true,
+    "artifactSha256": "848db62c35af240754a59eae8cbd9ac4f91dd908da5248211cbe3a9e2339b0ba"
+  },
+  "captures": {
+    "issued": 8,
+    "accepted": 8,
+    "allAccepted": true,
+    "technicalPassed": true
+  },
+  "arranged": {
+    "oneSetAtATime": true,
+    "dayGrid": { "id": "180:56080", "name": "Calendar Day Grid" },
+    "weekGrid": { "id": "180:56098", "name": "Calendar Week Grid" },
+    "monthGrid": { "id": "180:56112", "name": "Calendar Month Grid" },
+    "leftoverGenericComponentContainer": [],
+    "wrapperOverlapAfterSpacing": { "dayWeek": 0, "weekMonth": 0, "dayMonth": 0 },
+    "emptySectionMovedNotDeleted": "180:55529"
+  },
+  "screenshots": {
+    "v29DayGrid": "readable 26 in default / today ring / selected blue / outside 32x32 cells; numbers visible: yes",
+    "v29WeekGrid": "instance Labels 26-31-1 paint; instances 32x32 FIXED so the row is 256x32 (week-on) / 224x32 (week-off); source gridGap 0 so digits sit in adjacent 32px cells",
+    "v29MonthGrid": "August 2026 and Su-Sa visible; today 5 ring and selected 12 blue square; grid 256x96 / 224x96 (3x32 rows); recognizable calendar"
+  },
+  "product": {
+    "onePxSliverClassCleared": true,
+    "instanceLabelMismatchClassCleared": true,
+    "compileInstanceHugClassCleared": true,
+    "dayNumbersVisible": true,
+    "weekdayHeadersVisible": true,
+    "monthCaptionVisible": true,
+    "weekMonthThirtyTwoGrid": true,
+    "instanceCarriesDayCellSize": true,
+    "compileCarriesDayCellSize": true,
+    "measuredInstance": { "w": 32, "h": 32, "sizing": "FIXED/FIXED", "main": "32x32 FIXED dayCell-size" },
+    "measuredWeekOn": { "w": 256, "h": 32 },
+    "measuredMonthGrid": { "w": 256, "h": 96 }
+  },
+  "cleanup": {
+    "signedCleanupIssued": true,
+    "executed": false,
+    "reason": "green path; cleanup-on-failure-only"
+  },
+  "v23PageLeft": "173:53929",
+  "v27PageLeft": "179:54747",
+  "v28PageLeft": "180:55345",
+  "doNotInventCalendarGrade": true,
+  "productV1Complete": false,
+  "humanSignoff": "pending",
+  "nextTeaching": {
+    "doNotInvent": true,
+    "doNotInventHumanGrade": true,
+    "noFurtherVersionNeededForCompileCarry": true,
+    "humanReviewStop": "Calendar page 180:55528. Do not open Input, Combobox, Table, or Button as Calendar. Do not restart V28. Do not revert the writer to hug."
+  }
+}
