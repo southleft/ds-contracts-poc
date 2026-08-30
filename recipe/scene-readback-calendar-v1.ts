@@ -113,6 +113,8 @@ export const CALENDAR_LIVE_V1_WEEK_FRAME_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-WEEK-FRAME-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "CALENDAR-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
+export const CALENDAR_LIVE_V1_DAY_BUTTON_FOLD_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
+  "CALENDAR-HOST-DAY-BUTTON-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -880,9 +882,15 @@ const PER_SIDE_STROKE_WEIGHT_FIELDS = new Set([
   "strokes.0.weight.left",
 ]);
 
-const isTableOrCellVariantRole = (role: string | undefined): boolean =>
-  role !== undefined &&
-  (TABLE_VARIANT_ROLE.test(role) || CELL_COMPONENT_ROLE.test(role));
+const isTableOrCellVariantRole = (role: string | undefined): boolean => {
+  void CALENDAR_LIVE_V1_DAY_BUTTON_FOLD_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER;
+  return (
+    role !== undefined &&
+    (TABLE_VARIANT_ROLE.test(role) ||
+      CELL_COMPONENT_ROLE.test(role) ||
+      role === "calendar/day/button")
+  );
+};
 
 const foldUniformPerSideStrokeWeight = (
   scene: SceneNodeSnapshot,
