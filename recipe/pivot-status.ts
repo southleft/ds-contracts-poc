@@ -5438,7 +5438,7 @@ export function validatePivotStatus(
   if (
     status.table?.overallSuccess !== false ||
     status.table?.status !==
-      "live-v28 PREPARE landed: compile lowers the sources declared full-width root and rows to fill, answering the hug-vs-fill question from the source declarations rather than a decision; the per-column width model stays open; not authorized; product v1 incomplete" ||
+      "live-v28 attempt 1 failed closed at the WRITER: Figma refuses FILL on a node whose parent is not an auto-layout frame, and variants are parented to the section until combineAsVariants; partial page removed under ownership check; writer deferred-fill fix landed for v29; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
     status.table?.liveFigma !== false ||
     status.table?.humanGradeInvented !== false ||

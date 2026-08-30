@@ -625,16 +625,26 @@ for(const source of PLAN.sources){
     if(layout.minWidth)bindFloat(node,"minWidth",bindingFor(ir,"layout.minWidth"));
     if(layout.minHeight)bindFloat(node,"minHeight",bindingFor(ir,"layout.minHeight"));
   };
+  const deferredFill=[];
+  const autoLayoutParent=node=>!!node.parent&&"layoutMode" in node.parent&&node.parent.layoutMode!=="NONE";
+  void "TABLE-WRITER-DEFER-FILL-UNTIL-AUTOLAYOUT-PARENT";
   const applySizing=(node,ir)=>{
     const width=ir.layout?ir.layout.width:ir.width,height=ir.layout?ir.layout.height:ir.height;
     const fixedWidth=width.mode==="fixed"?width.value:Math.max(node.width,1),fixedHeight=height.mode==="fixed"?height.value:Math.max(node.height,1);
     if(width.mode==="fixed"||height.mode==="fixed")node.resizeWithoutConstraints(fixedWidth,fixedHeight);
+    // Figma refuses FILL on a node whose parent is not an auto-layout frame, and
+    // a set's variants are parented to the SECTION until combineAsVariants runs.
+    // Defer those and apply them once the set exists and has its layout.
+    const wantsFill=width.mode==="fill"||height.mode==="fill";
+    if(wantsFill&&!autoLayoutParent(node)){deferredFill.push([node,ir]);}
+    else{
     if(width.mode==="fill")node.layoutSizingHorizontal="FILL";
     else if(width.mode==="hug")node.layoutSizingHorizontal="HUG";
     else node.layoutSizingHorizontal="FIXED";
     if(height.mode==="fill")node.layoutSizingVertical="FILL";
     else if(height.mode==="hug")node.layoutSizingVertical="HUG";
     else node.layoutSizingVertical="FIXED";
+    }
     if(ir.layout){
       node.primaryAxisSizingMode=(ir.layout.mode==="horizontal"?width:height).mode==="hug"?"AUTO":"FIXED";
       node.counterAxisSizingMode=(ir.layout.mode==="horizontal"?height:width).mode==="hug"?"AUTO":"FIXED";
@@ -715,6 +725,18 @@ for(const source of PLAN.sources){
     set.name=setIr.role+" :: "+(setIr.label||source.sourceName);
     set.description="Experimental table@1 primitive-IR mint. Recipe "+source.recipeHash+"; source adapter "+source.adapterIdentity+".";
     applySetLayout(set,setIr);
+    void "TABLE-WRITER-APPLY-DEFERRED-FILL";
+    while(deferredFill.length>0){
+      const [node,ir]=deferredFill.shift();
+      if(!autoLayoutParent(node))throw new Error("TABLE-FILL-PARENT-NOT-AUTOLAYOUT:"+(ir.role||node.name));
+      const width=ir.layout?ir.layout.width:ir.width,height=ir.layout?ir.layout.height:ir.height;
+      if(width.mode==="fill")node.layoutSizingHorizontal="FILL";
+      else if(width.mode==="hug")node.layoutSizingHorizontal="HUG";
+      else node.layoutSizingHorizontal="FIXED";
+      if(height.mode==="fill")node.layoutSizingVertical="FILL";
+      else if(height.mode==="hug")node.layoutSizingVertical="HUG";
+      else node.layoutSizingVertical="FIXED";
+    }
     setSharedData(set,"runIdentity",PLAN.runIdentity);setSharedData(set,"adapterIdentity",source.adapterIdentity);setSharedData(set,"recipeHash",source.recipeHash);setSharedData(set,"ownershipKey",kind);
     return set;
   };

@@ -2011,7 +2011,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v28 PREPARE landed: compile lowers the sources declared full-width root and rows to fill, answering the hug-vs-fill question from the source declarations rather than a decision; the per-column width model stays open; not authorized; product v1 incomplete",
+    "status": "live-v28 attempt 1 failed closed at the WRITER: Figma refuses FILL on a node whose parent is not an auto-layout frame, and variants are parented to the section until combineAsVariants; partial page removed under ownership check; writer deferred-fill fix landed for v29; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2606,12 +2606,11 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v27 attempt 1 failed closed at probe on reflowPassed only; do not restart v27 attempt 2 as-is",
-      "OPEN HUMAN GATE 1: table root resize semantics. The fixture declares resize.root hug-contents; the probe requires a forced +64px width to stick. One of the two is wrong. Turning hug into fill/fixed without a reviewed source fact is a forbidden invented FILL/FIXED teaching.",
-      "OPEN HUMAN GATE 2: table@1 has no per-column width model. MUI declares no cell min-width so MUI columns are ragged. The probe does not catch it.",
+      "Table live v28 attempt 1 failed closed at writer; do not restart v28 attempt 2 as-is",
+      "OPEN HUMAN GATE: table@1 has no per-column width model (Gate 2). Gate 1 (hug vs fill) is ANSWERED by both sources declaring width:100%.",
       "no live mint",
       "no human grade",
-      "Calendar not started",
+      "Calendar not started live",
       "product v1 incomplete"
     ],
     "liveV13": {
@@ -3658,7 +3657,20 @@
       ],
       "gate1AnsweredBySources": true,
       "gate2StillOpen": true,
-      "doNotRestartV27Attempt2": true
+      "doNotRestartV27Attempt2": true,
+      "attempt1": {
+        "status": "failed-closed-at-writer",
+        "writerAccepted": false,
+        "refused": "Figma API: in set_layoutSizingHorizontal: FILL can only be set on children of auto-layout frames",
+        "cause": "the writer applies a variant sizing while the component is still parented to the SECTION; combineAsVariants runs afterwards, so the set that would make FILL legal does not exist yet",
+        "partialPageCreated": "173:47862",
+        "partialPageRemoved": true,
+        "signedCleanupNotIssued": "the orchestrator issues cleanup only after writer acceptance, and the writer was refused, so no signed cleanup existed",
+        "removalMethod": "targeted figma_execute that verified pageOwner and runIdentity before removing, refused the three protected page ids, and re-verified Input/Combobox/Button afterwards",
+        "mintStayed": false,
+        "doNotRestartV28Attempt2": true
+      },
+      "nextTeaching": "writer defers FILL sizing until the node has an auto-layout parent, then applies it after combineAsVariants and applySetLayout"
     }
   },
   "input": {
