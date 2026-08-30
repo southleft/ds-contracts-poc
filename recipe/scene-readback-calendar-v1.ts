@@ -127,6 +127,8 @@ export const CALENDAR_LIVE_V1_NAV_EFFECTS_OMITTED_MARKER =
   "CALENDAR-HOST-NAV-EFFECTS-OMITTED";
 export const CALENDAR_LIVE_V1_NAV_STROKES_OMITTED_MARKER =
   "CALENDAR-HOST-NAV-STROKES-OMITTED";
+export const CALENDAR_LIVE_V1_HEADER_JOINS_HEADER_BODY_ROLES_MARKER =
+  "CALENDAR-HOST-HEADER-JOINS-HEADER-BODY-ROLES";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -379,7 +381,13 @@ const ROW_COMPONENT_ROLE =
   /^calendar\/week\/(?:on|off)$/;
 const TABLE_VARIANT_ROLE = /^calendar\/variant\/(?:on|off)$/;
 const SET_ROLES = new Set(["calendar/set", "calendar/week-set", "calendar/day-set"]);
-const HEADER_BODY_ROLES = new Set(["calendar/weekday-row", "calendar/grid"]);
+/** calendar/header joined with the V42 teaching; see the marker constant. */
+const HEADER_BODY_ROLES = new Set([
+  "calendar/weekday-row",
+  "calendar/grid",
+  "calendar/header",
+]);
+void CALENDAR_LIVE_V1_HEADER_JOINS_HEADER_BODY_ROLES_MARKER;
 
 const CELL_COMPILE_BINDING_FIELDS = [
   "layout.width.value",
