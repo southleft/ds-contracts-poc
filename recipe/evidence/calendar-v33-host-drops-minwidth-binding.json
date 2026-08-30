@@ -1,0 +1,66 @@
+{
+  "artifactVersion": "calendar-v33-host-drops-minwidth-binding-v1",
+  "status": "failed closed; mint did not stay",
+  "antecedent": {
+    "prepare": "0c97f8c26a9fee045ae230e89b7dbd0315371f8e",
+    "authorize": "dc0fa2fdc6ffb7067161c5c04b4300307724f1da"
+  },
+  "runIdentity": "4604bbfe-calendar-v33",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "pageId": "180:57208",
+    "collectionId": "VariableCollectionId:180:57210",
+    "cleaned": true,
+    "teachingHeld": "both calendar variants had numeric minWidth 220 and boundVariables.minWidth VariableID:180:57234"
+  },
+  "restore": {
+    "accepted": true
+  },
+  "extract": {
+    "mcpSucceeded": true,
+    "collapseRefused": "calendar/variant/on: required binding layout.minWidth must appear exactly once"
+  },
+  "measured": {
+    "writerBoundMinWidth": true,
+    "hostCompileOrderOmitsLayoutMinWidth": true,
+    "tableVariantCompileBindingFields": [
+      "layout.itemSpacing",
+      "layout.padding.left",
+      "layout.padding.right",
+      "layout.padding.top",
+      "layout.padding.bottom",
+      "fills.0.color"
+    ],
+    "compileBindingOrder": [
+      "layout.itemSpacing",
+      "layout.padding.left",
+      "layout.padding.right",
+      "layout.padding.top",
+      "layout.padding.bottom",
+      "layout.minWidth",
+      "fills.0.color"
+    ]
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "tokens": {
+    "selectedAccent": "#0064E0",
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false
+  },
+  "doNotRestartAttempt2AsIs": true,
+  "nextTeaching": "host keeps compile-carried layout.minWidth on calendar/variant binding compile-order",
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}
