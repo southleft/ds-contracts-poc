@@ -131,6 +131,8 @@ export const CALENDAR_LIVE_V1_HEADER_JOINS_HEADER_BODY_ROLES_MARKER =
   "CALENDAR-HOST-HEADER-JOINS-HEADER-BODY-ROLES";
 export const CALENDAR_LIVE_V1_DAY_BUTTON_BINDING_COMPILE_ORDER_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-BINDING-COMPILE-ORDER";
+export const CALENDAR_LIVE_V1_DAY_BUTTON_CLIPS_CONTENT_OMITTED_MARKER =
+  "CALENDAR-HOST-DAY-BUTTON-CLIPS-CONTENT-OMITTED";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1302,6 +1304,18 @@ const omitNavStrokes = <T extends { strokes?: unknown }>(
   return rest as T;
 };
 
+const omitDayButtonClipsContent = <T extends { clipsContent?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void CALENDAR_LIVE_V1_DAY_BUTTON_CLIPS_CONTENT_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (role !== "calendar/day/button" || scene.type !== "FRAME") return frame;
+  if (frame.clipsContent === undefined) return frame;
+  const { clipsContent: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitHeaderBodyCornerRadius = <T extends { cornerRadius?: unknown }>(
   scene: SceneNodeSnapshot,
   frame: T,
@@ -1529,6 +1543,7 @@ export function sceneToNormalizedIr(
     frame = omitHeaderBodyClipsContent(scene, frame);
     frame = omitWeekFrameClipsContent(scene, frame);
     frame = omitNavClipsContent(scene, frame);
+    frame = omitDayButtonClipsContent(scene, frame);
     frame = omitHeaderBodyCornerRadius(scene, frame);
     frame = omitWeekFrameCornerRadius(scene, frame);
     frame = omitNavCornerRadius(scene, frame);
