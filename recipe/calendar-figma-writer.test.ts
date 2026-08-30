@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v24$/);
+  assert.match(writer.runIdentity, /-calendar-v25$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -151,6 +151,25 @@ test("the writer applies instance Label via characters — the Calendar live v3 
   assert.match(writer.code, /19be1c96-calendar-v22/);
   assert.match(writer.code, /CALENDAR-V23-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v23/);
+  assert.match(writer.code, /CALENDAR-V24-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v24/);
+});
+
+test("the writer writes instance Label through the set-issued property after a painted fallback — the Calendar live v24 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(
+    writer.code,
+    /CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-PAINTED-FALLBACK/,
+  );
+  assert.match(
+    writer.code,
+    /node\.setProperties\(\{\[dayLabelProperty\]:ir\.properties\.Label\}\)/,
+  );
+  assert.equal(
+    writer.code.includes("node.setProperties({[property]:ir.properties.Label})"),
+    false,
+    "fresh instance propertyKey(Label) is still the refused class",
+  );
 });
 
 test("the writer hugs from post-character intrinsic and walks a zero-glyph named fallback — the Calendar live v23 class", () => {
