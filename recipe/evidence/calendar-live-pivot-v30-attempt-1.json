@@ -1,0 +1,192 @@
+{
+  "artifactVersion": "calendar-live-v30-attempt-1-v1",
+  "status": "THE MINT STAYS. Writer, restore, extract, probe and all 8 captures accepted; one Astryx root; gates 1485/1485; usability booleans green; 8 of 8 cells pass. Cleanup persisted, not executed. Screenshots show a recognizable calendar: day numbers paint; week/month instances carry the named dayCell-size 32x32 box; calendar variant itemSpacing is the named header.marginBottom 8 (captionGap), not gridGap 0. Three week rows are fixture-complete. Astryx only — no other human-reviewed calendar adapter exists. Product v1 incomplete. Do not invent a Calendar grade.",
+  "authorizationCommit": "a3949be38",
+  "codeCommit": "a3949be38",
+  "antecedentCommit": "241891e6e5f32cc38c68a13f89e587fd0950a2c0",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-56126",
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "da4456d8-calendar-v30",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "69f1f29a-5028-4c81-8500-58242612bb66",
+    "attempt": 1,
+    "authorizationSha256": "2895def7982850c695edd300a19dcce7ffd51e071f42f98444e492c54bcbd6ea",
+    "programSha256": "026efd3f79f702199a653777ddd83521cf8389e3a24d8b34f705ed56433e310b",
+    "requestBindingSha256": "9f9be0b522f1b85cbd2691a8b3ce74fab55a23c5475ddeceac7d1761e848be89",
+    "requestSha256": "3b3b60fb52a93853426c033b435b3a19c44d37db1293df0b37a04ba56bfe0cae"
+  },
+  "teaching": {
+    "one": "CALENDAR-COMPILE-CARRIES-HEADER-MARGIN-BOTTOM",
+    "cleared": true,
+    "namedCauseCleared": "V29 live calendar variant itemSpacing was 0 because compile bound it to tokens.gridGap (Astryx daysGrid has no gap). Astryx names header.marginBottom: --spacing-2 (8px) as the vertical caption-to-month-body gap. V30 compile-carries that named fact as tokens.captionGap on the calendar variant itemSpacing. Day-grid / weekday-row / week frames still use gridGap 0. No invented 8px. Not a second teaching for dayName.paddingBottom --spacing-1 (4px); that named fact stays receipted as lowered onto the one caption-stack gap."
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / da4456d8-calendar-v30",
+    "pageId": "180:56126",
+    "sectionId": "180:56127",
+    "collectionId": "VariableCollectionId:180:56128",
+    "daySetId": "180:56157",
+    "weekSetId": "180:56189",
+    "calendarSetId": "180:56306",
+    "runIdentity": "da4456d8-calendar-v30",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "createdNodeIds": 101,
+    "receiptSha256": "2333b8fb0f2b3004e75045b4b1ff0deecf31145d8454caa752e907930368e5c5",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true,
+    "v23PageUntouched": true,
+    "v27PageUntouched": true,
+    "v28PageUntouched": true,
+    "v29PageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true,
+    "receiptSha256": "6587168c7c9e62f46d718580020e046c4ad4727e33f8a953a5194da6683dcefe"
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "accepted": true,
+    "receiptSha256": "22fa6bda9a7b1842fb22989cfef651094dd3f2a554b55e5eec4d45c6dd5eeacf",
+    "rawResponseBytes": 2788684,
+    "roots": ["astryx"],
+    "matched": 1485,
+    "expectedDenominator": 1485,
+    "fixedPointReached": true
+  },
+  "probe": {
+    "issued": true,
+    "accepted": true,
+    "passed": true,
+    "receiptSha256": "24755ad6c59aab1d7940d341562545c78151be9f021b03689d0284bd0ab82bf3",
+    "pageId": "180:56126",
+    "reflowPassed": true,
+    "contentHugPassed": true,
+    "bindingCompatibilityPassed": true,
+    "noFakeLayoutPassed": true,
+    "stateSemanticsPassed": true,
+    "switchingRestored": true,
+    "textPropertiesRestored": true,
+    "exactSceneRestoration": true,
+    "cellsPassing": 8,
+    "visibleAreaLoss": 0,
+    "overlapPixels": 0,
+    "visitedVariants": 8
+  },
+  "gates": {
+    "persisted": true,
+    "validated": true,
+    "roots": 1,
+    "expectedDenominator": 1485,
+    "matched": 1485,
+    "fixedPoint": true,
+    "artifactSha256": "0c2ece00581ae9f7b6a39c5a93bd100471107daecb80e767716bdaab2ad357ef"
+  },
+  "captures": {
+    "issued": 8,
+    "accepted": 8,
+    "allAccepted": true,
+    "technicalPassed": true
+  },
+  "arranged": {
+    "oneSetAtATime": true,
+    "dayGrid": { "id": "180:56679", "name": "Calendar Day Grid" },
+    "weekGrid": { "id": "180:56697", "name": "Calendar Week Grid" },
+    "monthGrid": { "id": "180:56711", "name": "Calendar Month Grid" },
+    "leftoverGenericComponentContainer": [],
+    "wrapperOverlapAfterSpacing": { "dayWeek": 0, "weekMonth": 0, "dayMonth": 0 },
+    "emptySectionMovedNotDeleted": "180:56127"
+  },
+  "screenshots": {
+    "v30DayGrid": "readable 26 in default / today ring / selected blue / outside 32x32 cells; numbers visible: yes",
+    "v30WeekGrid": "instance Labels 26-31-1 paint; instances 32x32 FIXED so the row is 256x32 (week-on) / 224x32 (week-off); source gridGap 0 so digits sit in adjacent 32px cells",
+    "v30MonthGrid": "August 2026 and Su-Sa visible; today 5 ring and selected 12 blue square; grid 256x96 / 224x96 (3x32 rows); caption-to-weekday live 8; recognizable calendar"
+  },
+  "product": {
+    "onePxSliverClassCleared": true,
+    "instanceLabelMismatchClassCleared": true,
+    "compileInstanceHugClassCleared": true,
+    "captionGapCompileCarryCleared": true,
+    "dayNumbersVisible": true,
+    "weekdayHeadersVisible": true,
+    "monthCaptionVisible": true,
+    "weekMonthThirtyTwoGrid": true,
+    "instanceCarriesDayCellSize": true,
+    "compileCarriesDayCellSize": true,
+    "measuredInstance": { "w": 32, "h": 32, "sizing": "FIXED/FIXED", "main": "32x32 FIXED dayCell-size" },
+    "measuredWeekOn": { "w": 256, "h": 32 },
+    "measuredMonthGrid": { "w": 256, "h": 96 },
+    "measuredCaptionGap": { "variantItemSpacing": 8, "captionToWeekday": 8, "token": "tokens.captionGap", "source": "header.marginBottom --spacing-2" },
+    "measuredGridGap": { "gridItemSpacing": 0, "token": "tokens.gridGap", "source": "daysGrid has no gap" },
+    "measuredWeekRows": 3
+  },
+  "namedVsInvented": {
+    "captionGap": {
+      "named": "Astryx header.marginBottom: --spacing-2 (8px)",
+      "invented": false,
+      "action": "V30 compile-carried the named landing as tokens.captionGap; live itemSpacing 8"
+    },
+    "weekCount": {
+      "named": "recipe CALENDAR_WEEK_COUNT=3; Astryx August 2026 fixture 26-31+1 / 2-8 / 9-15",
+      "sourceDefaultSixRowReceipted": "@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts#/hasVariableRowCount",
+      "invented": false,
+      "silentLoss": false,
+      "action": "did not remint extra weeks; did not invent January vs February cosmetics"
+    },
+    "otherLibraries": {
+      "reviewedCalendarAdapters": ["astryx-calendar-reviewed-v1"],
+      "namedRefusals": [
+        "react-day-picker@10.0.1 held blind by examples/day-picker/PROVENANCE.md",
+        "extract/pilots/eventz/out/contracts/date-picker.contract.json is props: [] / anatomy: { root: {} }",
+        "unsupportedCells include antd-datepicker and mui-datepicker"
+      ],
+      "searchedNotReviewed": [
+        "no Fluent calendar adapter",
+        "no MUI calendar adapter",
+        "Polaris DatePicker exists only as examples/polaris/extraction/proposals.md — not a human-reviewed calendar@1 adapter"
+      ],
+      "invented": false,
+      "action": "did not mint a second library; Astryx only because no other human-reviewed calendar source exists"
+    }
+  },
+  "cleanup": {
+    "signedCleanupIssued": true,
+    "executed": false,
+    "reason": "green path; cleanup-on-failure-only"
+  },
+  "v23PageLeft": "173:53929",
+  "v27PageLeft": "179:54747",
+  "v28PageLeft": "180:55345",
+  "v29PageLeft": "180:55528",
+  "doNotInventCalendarGrade": true,
+  "productV1Complete": false,
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "nextTeaching": {
+    "doNotInvent": true,
+    "doNotInventHumanGrade": true,
+    "doNotInventWeeksOrMonthCosmetics": true,
+    "doNotInventSecondCalendarLibrary": true,
+    "noFurtherVersionNeededForCaptionGapCarry": true,
+    "humanReviewStop": "Calendar page 180:56126. Do not open Input, Combobox, Table, or Button as Calendar. Do not restart V29. Do not invent extra caption padding beyond the named --spacing-2 landing."
+  }
+}
