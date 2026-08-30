@@ -22918,7 +22918,7 @@
   },
   "calendar": {
     "overallSuccess": false,
-    "status": "Calendar live v8 attempt 1 failed closed; v9 PREPARE opening (host-emit week-frame layout.itemSpacing; Astryx only; run 19be1c96-calendar-v9); AUTHORIZE and attempt 1 still ahead; no Calendar mint; react-day-picker remains a named refusal",
+    "status": "Calendar live v9 attempt 1 failed closed at extract $.children[0].children[0].children[2].children[0].children[0].bindings[0].field; writer accepted; restore 4 held; week-frame itemSpacing held; host emitted week-number fills first; cleanup executed; Input/Combobox/Button/Table stayed; no Calendar mint; react-day-picker remains a named refusal",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -22940,7 +22940,7 @@
     "blockers": [
       "no live mint; no Calendar human grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "Calendar live v9 PREPARE opening; AUTHORIZE and attempt 1 still ahead; do not restart v8 attempt 2 as-is"
+      "Calendar live v9 attempt 1 failed closed; do not restart attempt 2 as-is; next teaching is host-order week-number TEXT bindings"
     ],
     "figmaWriter": {
       "path": "recipe/calendar-figma-writer.ts",
