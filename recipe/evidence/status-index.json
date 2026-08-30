@@ -22918,7 +22918,7 @@
   },
   "calendar": {
     "overallSuccess": false,
-    "status": "Calendar live v21 attempt 1 failed closed at probe reflowPassed on hug root; writer accepted; restore 4 held; extract accepted; Label after-append and probe Label-via-characters held; mint cleaned; v22 PREPARE opening (probe hug-root reflow is content width; Astryx only; run 19be1c96-calendar-v22); no Calendar mint; react-day-picker remains a named refusal",
+    "status": "Calendar live v22 attempt 1 failed closed at gates 2-root leftover after green probe; writer accepted; restore 4 held; extract accepted; probe accepted; hug-root reflow held; mint cleaned; v23 PREPARE opening (gates one Astryx root; Astryx only; run 19be1c96-calendar-v23); no Calendar mint; react-day-picker remains a named refusal",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -22940,7 +22940,7 @@
     "blockers": [
       "no live mint; no Calendar human grade",
       "single-library only: react-day-picker is held blind by examples/day-picker/PROVENANCE.md and the eventz date-picker contract is an empty shell",
-      "Calendar live v21 attempt 1 failed closed at probe reflow; extract accepted; v22 PREPARE opening; do not restart v21 attempt 2 as-is"
+      "Calendar live v22 attempt 1 failed closed at gates 2-root leftover; probe accepted; v23 PREPARE opening; do not restart v22 attempt 2 as-is"
     ],
     "figmaWriter": {
       "path": "recipe/calendar-figma-writer.ts",
