@@ -5438,7 +5438,7 @@ export function validatePivotStatus(
   if (
     status.table?.overallSuccess !== false ||
     status.table?.status !==
-      "live-v27-attempt-1 reached probe with ONLY reflowPassed failing; writer, restore and extract all accepted; probe containment fix held with max overlap 0 across all 20 cells; blocked on an open human authoring gate (table root resize semantics; per-column width model); product v1 incomplete" ||
+      "live-v28 PREPARE landed: compile lowers the sources declared full-width root and rows to fill, answering the hug-vs-fill question from the source declarations rather than a decision; the per-column width model stays open; not authorized; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
     status.table?.liveFigma !== false ||
     status.table?.humanGradeInvented !== false ||

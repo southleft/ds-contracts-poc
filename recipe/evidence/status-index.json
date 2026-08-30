@@ -2011,7 +2011,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v27-attempt-1 reached probe with ONLY reflowPassed failing; writer, restore and extract all accepted; probe containment fix held with max overlap 0 across all 20 cells; blocked on an open human authoring gate (table root resize semantics; per-column width model); product v1 incomplete",
+    "status": "live-v28 PREPARE landed: compile lowers the sources declared full-width root and rows to fill, answering the hug-vs-fill question from the source declarations rather than a decision; the per-column width model stays open; not authorized; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -3639,6 +3639,26 @@
       ],
       "decidedHere": false,
       "gate1NotAnsweredByTheCapture": "Corrected 2026-08-29: an earlier claim that the capture contradicted the fixture hug-contents was wrong. Rows always span their table, and the columns tile the root exactly once their own padding is added (687.9999 of 688) — true under fill and shrink-to-fit alike. The table root has no captured ancestor, so the fact is not in the artifact."
+    },
+    "liveV28": {
+      "prepared": true,
+      "liveFigma": false,
+      "humanSignoff": "pending",
+      "pageId": null,
+      "forbiddenInputPageId": "115:295378",
+      "forbiddenComboboxPageId": "163:35981",
+      "namespace": "ds.contracts.table.recipe.v1",
+      "evidenceRoot": "recipe/evidence/table-live-pivot-v28",
+      "teaching": "compile lowers the sources declared width:100% on the table root, header, body, row variant and row instance to fill; the CELL is unchanged and still hugs because the per-column width model is the open question",
+      "sourceCitations": [
+        "@mui/material Table.js:43 width: 100%",
+        "@mui/material TableRow.js:46 display: table-row",
+        "ds.table Table.module.css .root width:100% align-items:stretch",
+        "ds.table Table.module.css .body align-items:stretch"
+      ],
+      "gate1AnsweredBySources": true,
+      "gate2StillOpen": true,
+      "doNotRestartV27Attempt2": true
     }
   },
   "input": {
