@@ -97,6 +97,8 @@ export const CALENDAR_LIVE_V1_CAPTION_BINDING_COMPILE_ORDER_MARKER =
   "CALENDAR-HOST-CAPTION-BINDING-COMPILE-ORDER";
 export const CALENDAR_LIVE_V1_WEEKDAY_BINDING_COMPILE_ORDER_MARKER =
   "CALENDAR-HOST-WEEKDAY-BINDING-COMPILE-ORDER";
+export const CALENDAR_LIVE_V1_WEEK_FRAME_ITEM_SPACING_MARKER =
+  "CALENDAR-HOST-WEEK-FRAME-ITEM-SPACING";
 export const CALENDAR_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "CALENDAR-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -762,12 +764,16 @@ export function shouldOmitObservedInstancePayload(
   return shouldOmitEmptyInstancePayload(payload);
 }
 
-const compileBindingFieldsFor = (role: string | undefined): string[] | null => {
+const compileBindingFieldsFor = (
+  role: string | undefined,
+  scene: SceneNodeSnapshot,
+): string[] | null => {
   void CALENDAR_LIVE_V1_BINDING_COMPILE_ORDER_MARKER;
   void CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER;
   void CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER;
   void CALENDAR_LIVE_V1_CAPTION_BINDING_COMPILE_ORDER_MARKER;
   void CALENDAR_LIVE_V1_WEEKDAY_BINDING_COMPILE_ORDER_MARKER;
+  void CALENDAR_LIVE_V1_WEEK_FRAME_ITEM_SPACING_MARKER;
   if (role === "calendar/caption") return [...CAPTION_COMPILE_BINDING_FIELDS];
   if (role && WEEKDAY_TEXT_ROLE.test(role))
     return [...WEEKDAY_COMPILE_BINDING_FIELDS];
@@ -777,8 +783,10 @@ const compileBindingFieldsFor = (role: string | undefined): string[] | null => {
     return [...CELL_INSTANCE_COMPILE_BINDING_FIELDS];
   if (role && CELL_COMPONENT_ROLE.test(role))
     return [...CELL_COMPILE_BINDING_FIELDS];
-  if (role && ROW_INSTANCE_ROLE.test(role))
+  if (role && ROW_INSTANCE_ROLE.test(role) && scene.type === "INSTANCE")
     return [...ROW_INSTANCE_COMPILE_BINDING_FIELDS];
+  if (role && ROW_INSTANCE_ROLE.test(role))
+    return [...ROW_COMPILE_BINDING_FIELDS];
   if (role && ROW_COMPONENT_ROLE.test(role))
     return [...ROW_COMPILE_BINDING_FIELDS];
   if (role && TABLE_VARIANT_ROLE.test(role))
@@ -881,7 +889,7 @@ const sceneBindings = (scene: SceneNodeSnapshot): VariableBinding[] => {
       variable: binding.variableName,
     })),
   );
-  const fields = compileBindingFieldsFor(sceneRole(scene));
+  const fields = compileBindingFieldsFor(sceneRole(scene), scene);
   if (!fields) return raw;
   const byField = new Map(raw.map((binding) => [binding.field, binding]));
   return fields
