@@ -71,9 +71,12 @@ const cloneTokens = (
  *   text secondary       --color-text-secondary                    #4E606F
  *   accent / on-accent   --color-accent / --color-on-accent        #0064E0 / #FFFFFF
  *   today ring           --color-border-emphasized inset 0 0 0 1px #CCD3DB
+ *   caption stack gap     header.marginBottom --spacing-2          8px
+ *                         (not header.gap; that is horizontal chrome)
  *
  * Receipted (see astryxCalendarInstance.receipts):
- *   daysGrid has no gap (header gap --spacing-2 is not the day grid)
+ *   daysGrid has no gap (header.gap --spacing-2 is not the day grid)
+ *   dayName paddingBottom --spacing-1 4px is not a second stack-gap token
  *   day button padding is 0; calendar root padding is --spacing-3 12px
  *   day button is --size-element-sm 28px circle (borderRadius 50%); the
  *     carried box is the md slot, radius 0
@@ -92,6 +95,7 @@ const astryxTokens = cloneTokens("astryx.calendar", (path, fallback) => {
   if (path === "dayCell.fontSize") return 14;
   if (path === "dayCell.radius") return 0;
   if (path === "gridGap") return 0;
+  if (path === "captionGap") return 8;
   if (path === "surface") return "#00000000";
   if (path === "captionText") return "#0a1317ff";
   if (path === "weekdayText") return "#4e606fff";
@@ -180,7 +184,7 @@ export const astryxCalendarSource: ReviewedCalendarSource = {
     extras: "no range, no dropdown month, no time, no react-day-picker adapter",
   },
   styleSources: [
-    "@astryxdesign/core/src/Calendar/styles.ts cell height --size-element-md 32; day button --size-element-sm 28 circle; daysGrid has no gap",
+    "@astryxdesign/core/src/Calendar/styles.ts cell height --size-element-md 32; day button --size-element-sm 28 circle; daysGrid has no gap; header.marginBottom --spacing-2",
     "@astryxdesign/core/dist/astryx.css light-dark color pairs; light half carried",
   ],
   fontSources: [
@@ -436,6 +440,17 @@ export const astryxCalendarInstance = {
       evidence:
         "The source header is chevron buttons plus a month-year label. calendar@1 carries the rendered caption as content and has no Button primitive for the nav chrome.",
     },
+    {
+      fact: {
+        path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/paddingBottom",
+        channel: "geometry",
+      },
+      value:
+        "height calc(--size-element-md + --spacing-1); paddingBottom --spacing-1 4px",
+      reason: "lowered",
+      evidence:
+        "calendar@1 has one caption-stack gap. This PREPARE carries header.marginBottom --spacing-2 as variant itemSpacing. dayName extra 4px below weekdays is named here, not minted as a second gap token. Applying the stack gap also spaces weekday-row from the day grid.",
+    },
   ],
   inputFacts: [
     {
@@ -477,6 +492,10 @@ export const astryxCalendarInstance = {
     {
       path: "@astryxdesign/core/src/Calendar/Calendar.tsx#/header/nav",
       channel: "anatomy",
+    },
+    {
+      path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/paddingBottom",
+      channel: "geometry",
     },
   ],
   provenance: {
@@ -659,6 +678,19 @@ const astryxSourceFacts = (): ReviewedCalendarSourceFact[] => {
       disposition: "refusal",
       target: "month navigation chevrons",
       receiptReason: "no-figma-primitive",
+    },
+    {
+      occurrenceId: "astryx-refusal-dayname-padding",
+      category: "refusal",
+      source: {
+        kind: "review",
+        evidence:
+          "styles.ts dayName paddingBottom --spacing-1 4px; calendar@1 has one caption-stack gap",
+      },
+      disposition: "refusal",
+      target:
+        "dayName paddingBottom --spacing-1 collapsed onto one caption-stack gap",
+      receiptReason: "lowered",
     },
   );
   return facts;

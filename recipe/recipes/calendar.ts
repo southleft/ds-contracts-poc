@@ -175,6 +175,18 @@ export interface CalendarRecipeInstance {
       radius: CalendarNumberParameter;
     };
     gridGap: CalendarNumberParameter;
+    /**
+     * Vertical stack gap between caption and the weekday/grid body.
+     *
+     * `@astryxdesign/core` names this as `header.marginBottom: --spacing-2`.
+     * It is not `gridGap`: daysGrid declares no gap, and a previous adapter
+     * that minted `--spacing-2` as the day-grid gutter was refused. calendar@1
+     * had one gap token and compiled the caption stack onto `gridGap`, so a
+     * 0-gap day grid also collapsed the named header margin. Carry the header
+     * margin here. One stack gap also spaces weekday-row from the day grid;
+     * source `dayName.paddingBottom: --spacing-1` is not a second token.
+     */
+    captionGap: CalendarNumberParameter;
     surface: CalendarColorParameter;
     captionText: CalendarColorParameter;
     weekdayText: CalendarColorParameter;
@@ -285,6 +297,7 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
       radius: NumberParameterSchema,
     }),
     gridGap: NumberParameterSchema,
+    captionGap: NumberParameterSchema,
     surface: ColorParameterSchema,
     captionText: ColorParameterSchema,
     weekdayText: ColorParameterSchema,
@@ -652,6 +665,12 @@ const calendarComponent = (
   weekNumbers: CalendarWeekNumbers,
 ): ComponentNode => {
   const gap = instance.tokens.gridGap;
+  /**
+   * Caption-stack gap is the named header.marginBottom, not daysGrid gap.
+   * CALENDAR-COMPILE-CARRIES-HEADER-MARGIN-BOTTOM. Do not bind this to
+   * gridGap. Do not invent a px. Do not teach FIXED as a fill.
+   */
+  const stackGap = instance.tokens.captionGap;
   const grid: FrameNode = {
     kind: "frame",
     role: "calendar/grid",
@@ -680,7 +699,7 @@ const calendarComponent = (
       mode: "vertical",
       primaryAxisAlign: "min",
       counterAxisAlign: "min",
-      itemSpacing: gap.fallback,
+      itemSpacing: stackGap.fallback,
       padding: {
         top: instance.tokens.dayCell.padding.fallback,
         right: instance.tokens.dayCell.padding.fallback,
@@ -692,7 +711,7 @@ const calendarComponent = (
     },
     fills: [solid(instance.tokens.surface.fallback)],
     bindings: [
-      bind("layout.itemSpacing", gap),
+      bind("layout.itemSpacing", stackGap),
       bind("layout.padding.left", instance.tokens.dayCell.padding),
       bind("layout.padding.right", instance.tokens.dayCell.padding),
       bind("layout.padding.top", instance.tokens.dayCell.padding),
@@ -1215,6 +1234,11 @@ export function collapseCalendarRecipe(
         gridFrame,
         "layout.itemSpacing",
         gridFrame.layout.itemSpacing,
+      ),
+      captionGap: numberFrom(
+        baseline,
+        "layout.itemSpacing",
+        baseline.layout.itemSpacing,
       ),
       surface: colorFrom(
         baseline,

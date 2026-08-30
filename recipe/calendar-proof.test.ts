@@ -56,6 +56,11 @@ test("calendar@1 adapts the one reviewed source and refuses a second-library inv
     "today is a ring, not a fill lookalike",
   );
   assert.equal(instance.tokens.gridGap.fallback, 0, "daysGrid has no gap");
+  assert.equal(
+    instance.tokens.captionGap.fallback,
+    8,
+    "header.marginBottom --spacing-2",
+  );
   assert.equal(instance.tokens.dayCell.padding.fallback, 0, "day slot padding is 0");
   assert.equal(instance.tokens.dayCell.radius.fallback, 0, "slot is not --radius-inner");
   assert.equal(instance.tokens.dayCell.fontSize.fallback, 14, "day is --font-size-base");
@@ -136,6 +141,31 @@ test("a week carries exactly seven days and a grid exactly the declared weeks", 
     (child: any) => child.role === "calendar/grid",
   );
   assert.equal(grid.children.length, CALENDAR_WEEK_COUNT);
+});
+
+test("the calendar stack carries header.marginBottom, not daysGrid gap — the Calendar live v29 class", () => {
+  // V29 live itemSpacing was 0 because compile bound the caption stack to
+  // gridGap. Astryx daysGrid has no gap; header.marginBottom is --spacing-2.
+  // Carry that named margin as captionGap. Do not invent 8px. Do not bind it
+  // as the day-grid gutter (that landing was already refused).
+  const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
+  const variant = setOf(envelope, "calendar/set").children[0];
+  const grid = variant.children.find(
+    (child: any) => child.role === "calendar/grid",
+  );
+  assert.equal(variant.layout.itemSpacing, 8, "header.marginBottom --spacing-2");
+  assert.equal(
+    variant.bindings.find((entry: any) => entry.field === "layout.itemSpacing")
+      ?.variable,
+    "astryx.calendar.captionGap",
+  );
+  assert.equal(grid.layout.itemSpacing, 0, "daysGrid still has no gap");
+  assert.equal(
+    grid.bindings.find((entry: any) => entry.field === "layout.itemSpacing")
+      ?.variable,
+    "astryx.calendar.gridGap",
+  );
+  assert.equal(grid.children.length, CALENDAR_WEEK_COUNT, "fixture is 3 weeks");
 });
 
 test("day instances compile the already-named dayCell-size box — the Calendar live v28 class", () => {
@@ -343,7 +373,7 @@ test("astryx carries the today ring rather than dropping it", () => {
 
 test("what calendar@1 cannot carry is receipted, not dropped", () => {
   const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
-  assert.equal(envelope.receipts.length, 10);
+  assert.equal(envelope.receipts.length, 11);
 
   const paths = envelope.receipts.map((receipt: any) => receipt.fact.path);
   assert.ok(paths.some((path: string) => path.includes("hasOutsideDays")));
@@ -354,6 +384,7 @@ test("what calendar@1 cannot carry is receipted, not dropped", () => {
   assert.ok(paths.some((path: string) => path.includes("background")));
   assert.ok(paths.some((path: string) => path.includes("hasVariableRowCount")));
   assert.ok(paths.some((path: string) => path.includes("header/nav")));
+  assert.ok(paths.some((path: string) => path.includes("dayName/paddingBottom")));
 
   const byReason = Object.fromEntries(
     envelope.receipts.map((receipt: any) => [receipt.reason, receipt]),

@@ -120,6 +120,7 @@ export const canonicalCalendarRecipeInstance = {
       radius: number("ds.calendar.dayCell-radius", 6),
     },
     gridGap: number("ds.calendar.gridGap", 4),
+    captionGap: number("ds.calendar.captionGap", 4),
     surface: color("ds.calendar.surface", "#ffffffff"),
     captionText: color("ds.calendar.captionText", "#111827ff"),
     weekdayText: color("ds.calendar.weekdayText", "#6b7280ff"),
