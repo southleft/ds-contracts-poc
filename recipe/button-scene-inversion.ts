@@ -17,7 +17,6 @@ import {
 import {
   compareSceneToExpectedPlan,
   compileExpectedScenePlan,
-  irFieldForSceneBinding,
   verifySceneDerivedFixedPoint,
   type ExpectedScenePlan,
   type SceneComparison,
@@ -297,6 +296,47 @@ export function compileButtonBindingsByOwnershipKey(
   walk(compileRoot, "root");
   return byKey;
 }
+
+/**
+ * Local replica of scene-readback's private irFieldForSceneBinding.
+ * scene-readback.ts is hash-pinned by the frozen v7/v8 Input evidence
+ * indexes, so it cannot gain an export without restamping pinned bytes
+ * (measured 2026-08-30: the pivot-status gate refuses exactly that).
+ * The scene-derived fixed point cross-checks this replica on every
+ * re-measure -- a divergence would surface as a binding mismatch.
+ */
+const BUTTON_IR_FIELD_FOR_SCENE_BINDING: Record<string, string> = {
+  paddingTop: "layout.padding.top",
+  paddingRight: "layout.padding.right",
+  paddingBottom: "layout.padding.bottom",
+  paddingLeft: "layout.padding.left",
+  itemSpacing: "layout.itemSpacing",
+  minWidth: "layout.minWidth",
+  minHeight: "layout.minHeight",
+  topLeftRadius: "cornerRadius.topLeft",
+  topRightRadius: "cornerRadius.topRight",
+  bottomRightRadius: "cornerRadius.bottomRight",
+  bottomLeftRadius: "cornerRadius.bottomLeft",
+  strokeWeight: "strokes.0.weight",
+  fontSize: "type.fontSize",
+  "fontSize.0": "type.fontSize",
+  lineHeight: "type.lineHeight.value",
+  "lineHeight.0": "type.lineHeight.value",
+  letterSpacing: "type.letterSpacing.value",
+  "letterSpacing.0": "type.letterSpacing.value",
+  width: "width.value",
+  height: "height.value",
+};
+
+const irFieldForSceneBinding = (field: string): string =>
+  BUTTON_IR_FIELD_FOR_SCENE_BINDING[field] ??
+  (field.match(/^fills\.(\d+)$/)
+    ? `fills.${field.split(".")[1]}.color`
+    : field.match(/^strokes\.(\d+)$/)
+      ? `strokes.${field.split(".")[1]}.paint.color`
+      : field.match(/^effects\.(\d+)$/)
+        ? `effects.${field.split(".")[1]}.color`
+        : field);
 
 const buttonBindingIdentity = (
   field: string,
