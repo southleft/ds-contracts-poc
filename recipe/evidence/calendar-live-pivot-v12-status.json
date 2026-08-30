@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "calendar-live-v12-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit at $.children[0].children[0].children[2].children[0].effects; writer accepted; restore 4 held; week-frame cornerRadius omit held; host emitted week-frame effects vs compile omit; mint cleaned; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "2c657e760bf3766e54aaeb7109aea9844bd60031",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v12/antecedent-index.json",
+    "indexSha256": "f0691f930f2d95d1e045fa8dc8ad325c582bb8842366aeb92c0df97761563aa0",
+    "hashSetSha256": "adcdd05ea78d7f57ff91fa0a4c0d5e52ce768095feb02fb2332c458b151337a8"
+  },
+  "authorization": {
+    "commit": "1d01a8d9c496e8c38305ed21c552a489f377b4ab",
+    "path": "recipe/evidence/calendar-live-pivot-v12/capture-authorization.json",
+    "sha256": "debf15eb49d54cd466a8ed970997d8942abee86f83a3fe637fef4eb543d3aa38",
+    "signingPublicKeySpkiSha256": "5b55e017e0a4d2e5fc377619a79334cc4af08d2a764fcab4f608b81d0bf9f528"
+  },
+  "attempt1": {
+    "pageId": "173:51262",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "extractRefused": "unsupported structural edit at $.children[0].children[0].children[2].children[0].effects",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "host-omit effects on calendar/week/${n} frames",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}
