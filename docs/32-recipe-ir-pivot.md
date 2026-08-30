@@ -15,7 +15,15 @@
 > review. Verbatim quote and implications are in
 > `recipe/evidence/combobox-live-v41-human-signoff.json`. RECORD
 > `f330a082` still carries RECORD-time `humanSignoff: pending` and is not
-> restamped. Table live v1 PREPARE `f42aaa461` and AUTHORIZE `fd3d20e98`
+> restamped. Table live v32 mint **stayed** on page `173:48924` (sets
+> `173:49053` first-party, `173:49180` MUI). Table live human grade
+> **passed** (2026-08-29 ~22:00 UTC-5). TJ said “I suppose this is a
+> pass”; measured confirmation is in
+> `recipe/evidence/table-live-v32-human-signoff.json`. 2px gutters are
+> compile-named MUI per-cell 1px strokes, not a mint defect; first-party
+> cells are stroke 0. MUI ragged columns are Gate 2 (no cell min-width).
+> RECORD `8fab2dff6` / HEAD `85bf214d2` are not restamped. Next hill is
+> Calendar. Table live v1 PREPARE `f42aaa461` and AUTHORIZE `fd3d20e98`
 > landed. Attempt 1 failed closed at writer
 > `TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold` (recipe requested Inter
 > `SemiBold`; Scratch lists Inter `Semi Bold`). Failure-path cleanup
@@ -728,8 +736,9 @@
 > lookalike (fixture chrome + survived distinct
 > heights/borders/selected fills). RECORD
 > `f330a082` `humanSignoff` stays pending.
-> Product **v1 is incomplete**. Next hill is
-> Data Table. Do not invent a Data Table or
+> Product **v1 is incomplete**. Table live v32
+> later stayed and received a human grade; next
+> hill is Calendar. Do not invent a Calendar or
 > Button human grade.
 >
 > Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
@@ -1793,21 +1802,25 @@ One teaching per PREPARE. V75 is class B only.
 
 ### C · Combobox
 
-Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Autocomplete`, `antd@5.29.3#Select`; 24 paired cells; 72 components / 242 instances). `npm run recipe:combobox:check` is the offline gate. Input V85 and Combobox v41 live human grades passed. Data Table is the next hill. Inherit Input host-normalize. Do not invent a Data Table human grade.
+Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Autocomplete`, `antd@5.29.3#Select`; 24 paired cells; 72 components / 242 instances). `npm run recipe:combobox:check` is the offline gate. Input V85, Combobox v41, and Table v32 live human grades passed. Calendar is the next hill. Inherit Input host-normalize. Do not invent a Calendar human grade.
 
 | step | action | exit criterion |
 | --- | --- | --- |
 | C1 | Matched source/legacy benchmark over the frozen 24-cell matrix if still required by this document's comparison contract. Keep the legacy 4/4 over six variants as weak context only. | Source references rendered; legacy comparator re-derived on the same matrix; recipe and legacy reported together. |
 | C1a | Combobox Figma writer inheriting Input host-normalize methods. Combobox identity only. Do not reuse Input `ds.contracts.input.recipe.v5` / `4a074b24-e8503dd5-input-v5`. Do not write page `115:295378`. | **Offline hermetic.** `recipe/combobox-figma-writer.ts` plans and mock-mints 2×(64+8)=144 variants. First-segment bind, hidden-FILL occupancy method, overlay absolute, compile-named set layout, no invented letterSpacing/textCase/textDecoration. `npm run recipe:combobox:check` includes the writer tests. No live mint. |
 | C2 | Scratch-only live mint on the same recipe-IR + receipts bar, two real libraries. Separate authorize lineage; no Input page collision. | Writer exists; live PREPARE/AUTHORIZE/RECORD is **not** opened. Next: inherit Input V85 host-normalize stack on a new page. |
-| C3 | Independent human grade. | **Passed 2026-08-29 ~09:17 UTC-5.** TJ Pitre reviewed page `163:35981` (sets `163:36845`, `163:36076`, `163:37709`, `163:36940`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh`. Verbatim + implications: `recipe/evidence/combobox-live-v41-human-signoff.json`. RECORD-time `humanSignoff: pending` in `combobox-live-pivot-v41-status.json` / RECORD `f330a082` is unchanged. Combobox `overallSuccess` stays **false**. Product v1 incomplete. Do not invent a Data Table or Button human grade. |
+| C3 | Independent human grade. | **Passed 2026-08-29 ~09:17 UTC-5.** TJ Pitre reviewed page `163:35981` (sets `163:36845`, `163:36076`, `163:37709`, `163:36940`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh`. Verbatim + implications: `recipe/evidence/combobox-live-v41-human-signoff.json`. RECORD-time `humanSignoff: pending` in `combobox-live-pivot-v41-status.json` / RECORD `f330a082` is unchanged. Combobox `overallSuccess` stays **false**. Product v1 incomplete. Do not invent a Calendar or Button human grade. |
 
 ### D · Data Table and Calendar
 
 Data Table has an offline recipe path (`table@1`) with two reviewed
 sources (first-party `ds.table` and `@mui/material@9.2.0#Table`). Calendar
-still has no recipe path. Acquisition stays human-authored or
-human-reviewed adapters, not inferred rectangles. Table live v2 attempt 1
+has an offline recipe path (`calendar@1`, one reviewed source).
+Acquisition stays human-authored or
+human-reviewed adapters, not inferred rectangles. Table live v32 attempt 1
+**stayed** on page `173:48924`; Table live human grade **passed**
+2026-08-29 (`recipe/evidence/table-live-v32-human-signoff.json`). RECORD
+`8fab2dff6` `humanSignoff` stays pending. Table live v2 attempt 1
 failed closed at writer
 (`TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507`);
 the partial page `165:40645` was cleaned. Table live v3 attempt 1 failed
@@ -1820,14 +1833,15 @@ live v6 attempt 1 failed closed at extract (`REQUIRED-BINDING-ABSENT`);
 the page `165:41173` was cleaned. The climb continued one teaching per PREPARE
 through v24; every attempt failed closed and every mint was cleaned. As of v24
 the remaining extract-side tail is **measured offline** (D2a) rather than
-discovered one live cycle at a time. No
-Data Table live mint and no Data Table human grade.
+discovered one live cycle at a time. Table live v32 later stayed;
+human grade passed 2026-08-29. See D2b.
 
 | step | action | exit criterion |
 | --- | --- | --- |
 | D1 | Explicit Data Table recipe + reviewed adapters for two unrelated real libraries. Offline cross-library proof first: row/column templates, declared column axis, required-facts / door / lowering / grammar coverage. | **Offline recipe authored 2026-08-29.** `table@1` + adapters + writer `ds.contracts.table.recipe.v1`. `npm run recipe:table:check` green (2 densities × 2 row states; 10 components / 22 instances; hermetic mock-mint 20 variants). Door/lowering/grammar corpus coverage and live are not claimed. |
 | D2 | Scratch-only Data Table live, same receipts bar. | **Table live v24 attempt 1 failed closed 2026-08-29.** Writer accepted; restore 8 held; extract walk cleared; the v24 row-set compile-carry label teaching cleared (host raw `table/row-set :: Table` now normalizes to compile-carried `Table row`, closing the v23 refusal); collapse then refused `unsupported structural edit at $.children[2].children[0].children[0].label`. Signed cleanup removed `172:46324`; Input `115:295378`, Combobox `163:35981`, and Button `85:6781` stayed. Do not restart v24 attempt 2 as-is. Not live. **The remaining extract-side tail is now measured, not unknown** — see D2a. |
 | D2a | Offline tail census so the remaining climb depth is measured rather than discovered one live cycle at a time. | **Landed 2026-08-29** (`9a5a1dd75`, prediction `ee3afa077`). `collapseTableRecipe` refuses on the FIRST divergence (`firstDifference`), so each live cycle could only ever reveal one `(role, property)` gap. That comparator runs Node-side over a persisted response, and every attempt already persists its raw extract, so the tail is measurable offline with **zero Figma writes**. `recipe/table-tail-census.ts` replays `private/table-live-vNN-transaction/004-extract.raw.json` through the current host-normalize and collects every difference. **Validated:** reverting only the v24 teaching makes the census reproduce the exact v23 live refusal `$.children[1].label`; restoring it closes that class. It then predicted the v24 live refusal path **before** the run and the prediction **held exactly**. Remaining first-party extract-side tail: **23 differences in 6 classes** — 4× `clipsContent`, 4× `cornerRadius`, 4× `effects`, 4× `strokes.dashPattern` (all `absent-left` on the four `table/cell` variants), 5× `label` (`table/cell-set` + `table/cell/label`), 2× `characters` (`table/cell/label`). The mui root stops **before** the diff on `table/cell/compact/body: required binding layout.minWidth must appear exactly once` — the already-named v5 unset-null secondary, now measured. **Honest limit:** the substrate is captured under its version's writer and teachings v9–v24 are read-side only, so the census predicts the **extract-side** tail only; writer-side refusals (the class that stopped v1–v4) still surface only in a live run. |
+| D2b | Independent Table human grade on the stayed v32 mint. Do not restamp RECORD `8fab2dff6`. | **Passed 2026-08-29 ~22:00 UTC-5.** TJ Pitre reviewed page `173:48924` (sets `173:49053`, `173:49180`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh` and said “I suppose this is a pass.” Measured confirmation: first-party cells stroke 0 / columns 120 aligned; MUI 2px gutters are compile `cellRuleWidth=1` uniform strokes (source is border-bottom); MUI ragged columns are Gate 2. Evidence: `recipe/evidence/table-live-v32-human-signoff.json`. RECORD-time `humanSignoff: pending` unchanged. Table `overallSuccess` stays the mint-stayed pin; signoff `overallTableSuccess` is false. Product v1 incomplete. Next hill is Calendar. |
 | D3 | Calendar archetype addition is a reviewed minor contract change (`ARCHETYPES` in `packages/schema/src/archetype.ts` plus required-facts). Then the same offline-then-live sequence. | **Landed 2026-08-29.** `calendar / date-picker` is the twenty-first declarable row, with required facts `calendar/day-grid`, `calendar/day-cell-box`, `calendar/selected-day` and expected facts `calendar/weekday-header`, `calendar/outside-day`. Minor under docs/26 `V1-COMPAT-02`; both JSON Schema projections regenerated and byte-verified. Calendar is no longer “undefined (0 contracts)”. |
 | D3a | Offline `calendar@1` recipe. | **Green 2026-08-29.** `npm run recipe:calendar:check`, 10 tests. Ten components in three sets (`calendar/set` 4, `calendar/week-set` 2, `calendar/day-set` 4) — the same denominator `table@1` carries. Fixed point stable on every source; refuses an unsupported structural edit, a hugged day cell, and a short week. One reviewed source, `@astryxdesign/core` Calendar, every value read out of its own `styles.ts` and `astryx.css`. astryx marks TODAY with an inset 1px ring and no background, so `DayStateTokens` gained a ring rather than losing the marker; the dark half of every `light-dark()` pair is a `lowered` receipt. The **Date-in-grammar problem** `examples/day-picker/PROVENANCE.md` names is solved by carrying the RENDERED month as content instead of a `Date` — no `$date` marker invented. |
 | D3b | Calendar named refusal (docs/32 §F item 4, second branch). | **Recorded 2026-08-29** at `recipe/evidence/calendar-named-refusal-v1.json`. Two refusals, both actionable: (1) **no live mint and no human grade** — the measured cost basis is Input 78 attempt-1 cycles, Combobox 41, Table 27-and-still-open, and only `calendar-figma-writer.ts` is missing offline, so the climb can start from a known-good compile; (2) **the cross-library leg is NOT proven** — `react-day-picker@10.0.1` is held blind by its own PROVENANCE blindness rule so it can serve as the unseen-library exam, and the eventz `date-picker.contract.json` carries `props: []` / `anatomy: { root: {} }`. Calendar does **not** satisfy §E1. |
