@@ -29,11 +29,11 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "d218278efb4d8f64d64964c769e36d27c542ed55c22064380d35b56ab4624207",
+      "indexSha256": "4d3b04b01232cbfd1920def7163c1433fef4253b94b0a7ce65c6ba0b56b610f6",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "dc16f87223fc6e8c894c11ceec906086054c5146819710b5d4cee927cbdd8ea3",
+      "inversionSha256": "6cb3ec440459d11eae7d8bc8259c179c4c4c08aeff6dcf908f199e0673d4e9fc",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "2844fad5bb4050be312382d5bfcc3f48a44fee0f1b3831995838424ae9d8d3d0",
+      "receiptSha256": "63d3dd1230b22d56938f454cb3d37045197809cf1e7a95abe1cb0af46fc55404",
       "roots": {
         "altitude": {
           "setId": "85:7406",
@@ -60,7 +60,7 @@
     "blockers": [
       "no attributable human signoff",
       "scene-derived accounting is CLOSED: silent 0 / missing 0 / extra 0 / mismatched 0 on both roots (Altitude 8706/8706, Fluent 8778/8778), derived not assigned",
-      "scene-derived fixed point is not yet stable: compile carries bindings [] explicitly on instance slots while the scene-derived IR omits the empty key (representation empties family, Calendar V44-V47 / Input omit classes; next teachings)"
+      "scene-derived fixed point is not yet stable: the observed variantGroupProperties axis LIST is Figma-alphabetical (Icons/Size/State/Variant) while compile carries Variant/Size/State/Icons (Input V72 order class; last teaching)"
     ],
     "supersededHistoricalArtifacts": [
       {

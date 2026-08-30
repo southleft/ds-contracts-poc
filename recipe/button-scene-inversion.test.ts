@@ -8,6 +8,7 @@ import {
   carryButtonV4SetLayoutMode,
   carryButtonV4SetLayoutPadding,
   carryButtonV4SetWidthMode,
+  collapseButtonSceneDerivedEnvelope,
   compileButtonBindingsByOwnershipKey,
   omitButtonLiveEmptyChrome,
   orderButtonObserveBindingsToCompile,
@@ -25,7 +26,16 @@ import {
   sceneRoleFromName,
   validateButtonSceneInversionEvidence,
 } from "./button-scene-inversion.js";
+import { readFileSync } from "node:fs";
+
+import { adaptReviewedButton } from "./adapters/button.js";
 import { readRepositoryJson } from "./evidence-path.js";
+import { altitudeButtonAdapterConfig } from "./fixtures/library-buttons.js";
+import { hashRecipeEnvelope } from "./hash.js";
+import {
+  collapseButtonRecipe,
+  compileButtonRecipe,
+} from "./recipes/button.js";
 import {
   compareSceneToExpectedPlan,
   type SceneNodeSnapshot,
@@ -553,6 +563,46 @@ test("live-empty chrome omits are empty-only and type-gated", () => {
   assert.deepEqual(
     omitButtonLiveEmptyChrome({ ...base, type: "TEXT", fills: [] }),
     {},
+  );
+});
+
+test("scene-derived collapse accepts omitted instance-empty bindings as compile's [] spelling", () => {
+  const instance = adaptReviewedButton(
+    JSON.parse(
+      readFileSync("examples/altitude/contracts/button.contract.json", "utf8"),
+    ),
+    altitudeButtonAdapterConfig,
+  );
+  const envelope = compileButtonRecipe(instance);
+  const stripInstanceEmptyBindings = (node: any): any => ({
+    ...node,
+    ...(node.kind === "instance" &&
+    Array.isArray(node.bindings) &&
+    node.bindings.length === 0
+      ? { bindings: undefined }
+      : {}),
+    ...(node.children === undefined
+      ? {}
+      : { children: node.children.map(stripInstanceEmptyBindings) }),
+  });
+  const observedSpelling = structuredClone(envelope) as any;
+  observedSpelling.ir = JSON.parse(
+    JSON.stringify(stripInstanceEmptyBindings(observedSpelling.ir)),
+  );
+  observedSpelling.integrity.canonicalHash =
+    hashRecipeEnvelope(observedSpelling);
+  // the plain collapse refuses the omitted spelling as a structural edit
+  assert.throws(() =>
+    collapseButtonRecipe(observedSpelling, instance.provenance.selection),
+  );
+  // the scene-derived collapse canonicalises the spelling and round-trips
+  const collapsed = collapseButtonSceneDerivedEnvelope(
+    observedSpelling,
+    instance.provenance.selection,
+  );
+  assert.deepEqual(
+    compileButtonRecipe(collapsed).ir,
+    envelope.ir,
   );
 });
 
