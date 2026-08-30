@@ -159,6 +159,8 @@ export const CALENDAR_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL_MARKER =
 export const CALENDAR_LIVE_V1_CELL_SET_COMPILE_CARRY_LABEL = "Calendar day";
 export const CALENDAR_LIVE_V1_FONT_PROVENANCE_LABEL_MARKER =
   "CALENDAR-HOST-FONT-PROVENANCE-SUFFIX-IS-NOT-THE-LABEL";
+export const CALENDAR_LIVE_V24_TYPE_FONT_FROM_PROVENANCE_MARKER =
+  "CALENDAR-HOST-TYPE-FONT-FROM-PROVENANCE-NOT-LIVE-FACE";
 const FONT_PROVENANCE_SUFFIX = "font-provenance=";
 export const CALENDAR_LIVE_V1_CELL_VARIANT_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-CELL-VARIANT-CLIPS-CONTENT-OMITTED";
@@ -1462,13 +1464,16 @@ export function sceneToNormalizedIr(
       } as ComponentSetNode;
     }
   } else if (scene.type === "TEXT") {
+    void CALENDAR_LIVE_V24_TYPE_FONT_FROM_PROVENANCE_MARKER;
     result = {
       kind: "text",
       ...common,
       characters: scene.characters ?? "",
       type: omitTableTextExtras({
-        fontFamily: scene.fontName?.family ?? "",
-        fontStyle: scene.fontName?.style ?? "",
+        fontFamily:
+          scene.fontProvenance?.resolvedFamily ?? scene.fontName?.family ?? "",
+        fontStyle:
+          scene.fontProvenance?.resolvedStyle ?? scene.fontName?.style ?? "",
         ...(scene.fontProvenance === undefined
           ? {}
           : { fontProvenance: scene.fontProvenance }),

@@ -37,6 +37,17 @@
  *     still refuses, and `text.characters` writes. Do not invent a different
  *     font to make the TEXT property API happy.
  *
+ *  6. HUG FROM POST-CHARACTER INTRINSIC; WALK A ZERO-GLYPH NAMED FALLBACK.
+ *     Calendar live v23 painted day/caption TEXT at 1×15 with characters
+ *     present (`26`, `August 2026`) and weekday FIXED 32×15 with `Su`..`Sa`
+ *     but null render bounds. SF Pro is listed and `loadFontAsync` succeeds,
+ *     then `width` stays 0 after characters. The 1px sliver is
+ *     `Math.max(emptyWidth, 1)`, not a source-named 1px glyph. After setting
+ *     characters, if intrinsic width is 0, walk the remaining *named*
+ *     fallback chain (Segoe UI → Roboto → Helvetica → Arial). Do not invent
+ *     Inter. Do not stamp hug from an empty-glyph measure. Do not invent
+ *     FIXED text px.
+ *
  * No live write happens here. This module builds a program string; executing it
  * requires a separate PREPARE / AUTHORIZE / attempt lineage.
  */
@@ -56,7 +67,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v23";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v24";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -79,6 +90,7 @@ export const FORBIDDEN_CALENDAR_V19_RUN_IDENTITY = "19be1c96-calendar-v19";
 export const FORBIDDEN_CALENDAR_V20_RUN_IDENTITY = "19be1c96-calendar-v20";
 export const FORBIDDEN_CALENDAR_V21_RUN_IDENTITY = "19be1c96-calendar-v21";
 export const FORBIDDEN_CALENDAR_V22_RUN_IDENTITY = "19be1c96-calendar-v22";
+export const FORBIDDEN_CALENDAR_V23_RUN_IDENTITY = "19be1c96-calendar-v23";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -405,6 +417,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v19")throw new Error("CALENDAR-V19-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v20")throw new Error("CALENDAR-V20-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v21")throw new Error("CALENDAR-V21-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v22")throw new Error("CALENDAR-V22-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v23")throw new Error("CALENDAR-V23-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -559,7 +572,26 @@ for(const source of PLAN.sources){
       label.fontName=font;label.characters=ir.characters;label.fontSize=ir.type.fontSize;
       label.lineHeight=ir.type.lineHeight.unit==="px"?{unit:"PIXELS",value:ir.type.lineHeight.value}:{unit:"AUTO"};
       label.textAlignHorizontal=ir.align.toUpperCase();label.textAlignVertical=ir.verticalAlign.toUpperCase();
-      label.textAutoResize=ir.width.mode==="fill"?"HEIGHT":"WIDTH_AND_HEIGHT";label.blendMode="NORMAL";node=label;
+      label.textAutoResize=ir.width.mode==="fill"?"HEIGHT":"WIDTH_AND_HEIGHT";label.blendMode="NORMAL";
+      void "CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC";
+      void "CALENDAR-WRITER-NAMED-FALLBACK-AFTER-ZERO-GLYPH";
+      if(label.characters.trim().length>0&&(label.width<=0||label.absoluteRenderBounds===null)){
+        const chain=ir.type.fontProvenance.fallbackChain||[];
+        const resolvedFamily=ir.type.fontProvenance.resolvedFamily;
+        const resolvedStyle=ir.type.fontProvenance.resolvedStyle;
+        let painted=false;
+        for(const candidate of chain){
+          if(candidate.family===resolvedFamily&&candidate.style===resolvedStyle)continue;
+          const found=allFonts.find(entry=>entry.fontName.family===candidate.family&&entry.fontName.style===candidate.style);
+          if(!found)continue;
+          await figma.loadFontAsync(found.fontName);
+          label.fontName=found.fontName;
+          label.characters=ir.characters;
+          if(label.width>0&&label.absoluteRenderBounds){painted=true;break;}
+        }
+        if(!painted&&(label.width<=0||label.absoluteRenderBounds===null))throw new Error("CALENDAR-FONT-ZERO-INTRINSIC:"+ir.role);
+      }
+      node=label;
     }else if(ir.kind==="instance"){
       void "CALENDAR-WRITER-ONLY-DAY-IS-INSTANTIABLE";
       if(ir.componentRef!=="calendar@1/day")throw new Error("CALENDAR-UNKNOWN-INSTANCE:"+ir.componentRef);
@@ -583,7 +615,9 @@ for(const source of PLAN.sources){
     let hugTextIntrinsic=null;
     if(ir.kind==="text"&&ir.width.mode!=="fill"){
       void "CALENDAR-WRITER-HUG-TEXT-INTRINSIC-BEFORE-PARENT-COLLAPSE";
-      hugTextIntrinsic={width:Math.max(node.width,1),height:Math.max(node.height,1)};
+      void "CALENDAR-WRITER-HUG-FROM-POST-CHARACTER-INTRINSIC";
+      if(node.width<=0||node.height<=0)throw new Error("CALENDAR-TEXT-GEOMETRY:"+ir.role);
+      hugTextIntrinsic={width:node.width,height:node.height};
     }
     tag(node,ir,ownershipKey);if(ir.kind!=="instance")applyPaints(node,ir);parent.appendChild(node);
     if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
@@ -787,6 +821,24 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v21 run identity");
   if (runtime.includes("CALENDAR-V22-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v22 run identity");
+  if (runtime.includes("CALENDAR-V23-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v23 run identity");
+  if (
+    runtime.includes("CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC") ===
+      false ||
+    runtime.includes("CALENDAR-WRITER-NAMED-FALLBACK-AFTER-ZERO-GLYPH") ===
+      false ||
+    runtime.includes("CALENDAR-WRITER-HUG-FROM-POST-CHARACTER-INTRINSIC") ===
+      false ||
+    runtime.includes("CALENDAR-FONT-ZERO-INTRINSIC") === false
+  )
+    throw new TypeError(
+      "calendar writer must hug from post-character intrinsic and walk a zero-glyph named fallback",
+    );
+  if (runtime.includes("Math.max(node.width,1)") && runtime.includes("hugTextIntrinsic={width:Math.max(node.width,1)"))
+    throw new TypeError(
+      "calendar writer must not stamp hug from a 1px empty-glyph measure",
+    );
   if (runtime.includes("CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND") === false)
     throw new TypeError(
       "calendar writer must re-apply instance Label after appendChild",

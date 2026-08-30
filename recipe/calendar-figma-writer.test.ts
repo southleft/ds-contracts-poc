@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v23$/);
+  assert.match(writer.runIdentity, /-calendar-v24$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -149,6 +149,23 @@ test("the writer applies instance Label via characters — the Calendar live v3 
   assert.match(writer.code, /19be1c96-calendar-v21/);
   assert.match(writer.code, /CALENDAR-V22-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v22/);
+  assert.match(writer.code, /CALENDAR-V23-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v23/);
+});
+
+test("the writer hugs from post-character intrinsic and walks a zero-glyph named fallback — the Calendar live v23 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(writer.code, /CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC/);
+  assert.match(writer.code, /CALENDAR-WRITER-NAMED-FALLBACK-AFTER-ZERO-GLYPH/);
+  assert.match(writer.code, /CALENDAR-WRITER-HUG-FROM-POST-CHARACTER-INTRINSIC/);
+  assert.match(writer.code, /CALENDAR-FONT-ZERO-INTRINSIC/);
+  assert.equal(
+    writer.code.includes("hugTextIntrinsic={width:Math.max(node.width,1)"),
+    false,
+    "stamping hug from Math.max(emptyWidth, 1) is the 1px sliver class",
+  );
+  assert.match(writer.code, /fallbackChain/);
+  assert.doesNotMatch(writer.code, /family==="Inter"/);
 });
 
 test("the writer re-applies instance Label after append — the Calendar live v20 class", () => {
