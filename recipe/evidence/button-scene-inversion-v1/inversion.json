@@ -22,7 +22,7 @@
       "denominator": 8706,
       "ok": false,
       "fixedPointStable": false,
-      "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
+      "fixedPointError": "button@1: unsupported structural edit at $.children[1].children[0].bindings; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
       "channelDrift": [],
       "sampleFailures": []
     },
@@ -42,7 +42,7 @@
       "denominator": 8778,
       "ok": false,
       "fixedPointStable": false,
-      "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
+      "fixedPointError": "button@1: unsupported structural edit at $.children[1].children[0].bindings; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
       "channelDrift": [],
       "sampleFailures": []
     }
@@ -65,6 +65,7 @@
     "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
     "TAUGHT 2026-08-30 (B2k, set layout.mode carry): the component set is the proof sheet, not a component fact -- neither source contract names its layout. Compile plans vertical; every writer era (v4 AND current interpret.ts) mints HORIZONTAL on canvas, so a fresh mint would not reconcile it. Same class as Input V64 (carry set layout.mode horizontal). Observed HORIZONTAL canonicalises to compile vertical ONLY on the root set and ONLY between those two measured vocabularies; anything else stays live. Silent 3 -> 2 on both roots.",
     "TAUGHT 2026-08-30 (B2l, set layout.padding carry): compile plans padding 0 on the proof sheet; every writer era mints uniform 32 (interpret.ts paddingTop/Right/Bottom/Left = 32). Same class as Input V65 (carry set layout.padding 32). Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set; any other padding stays live. Silent 2 -> 1 on both roots.",
-    "TAUGHT 2026-08-30 (B2m, set width.mode carry + width.value extras drop): compile plans a hug proof sheet; the v4 writer left the set FIXED at its arrangement width (19192 / 17648 -- a measurement of the sheet, not a source fact), and the current interpret.ts still mints primaryAxisSizingMode FIXED. Same class as Input V66 (set width sizing) plus the hug-set width.value extras drop. Observed FIXED canonicalises to compile hug ONLY on the root set; the width.value extra retires with it because a hug set emits no width fact. No px invented. Silent 1 -> 0 and extras 1 -> 0 on both roots; the accounting is closed and the remaining gap is fixed-point binding order."
+    "TAUGHT 2026-08-30 (B2m, set width.mode carry + width.value extras drop): compile plans a hug proof sheet; the v4 writer left the set FIXED at its arrangement width (19192 / 17648 -- a measurement of the sheet, not a source fact), and the current interpret.ts still mints primaryAxisSizingMode FIXED. Same class as Input V66 (set width sizing) plus the hug-set width.value extras drop. Observed FIXED canonicalises to compile hug ONLY on the root set; the width.value extra retires with it because a hug set emits no width fact. No px invented. Silent 1 -> 0 and extras 1 -> 0 on both roots; the accounting is closed and the remaining gap is fixed-point binding order.",
+    "TAUGHT 2026-08-30 (B2n, binding compile-order carry): the observe program sorts boundVariables by Figma field name, so the live page reports bindings alphabetically while compile carries semantic order; the binding SETS were already fact-equal. Same class as Input taughtSurfaceBindingCompileOrder / taughtContentBindingCompileOrder / taughtLabelBindingCompileOrder and Calendar V35/V36/V42-43 (host keeps compile-carried bind order). Order-only: bindings reorder onto compile order ONLY when the mapped (field, variable, type) multiset equals the compile multiset for the same ownership key; any set difference leaves the live order visible."
   ]
 }

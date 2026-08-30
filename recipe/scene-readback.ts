@@ -707,7 +707,7 @@ const sceneEffectToIr = (effect: SceneEffect): Effect => {
   };
 };
 
-const irFieldForSceneBinding = (field: string): string =>
+export const irFieldForSceneBinding = (field: string): string =>
   ({
     paddingTop: "layout.padding.top",
     paddingRight: "layout.padding.right",

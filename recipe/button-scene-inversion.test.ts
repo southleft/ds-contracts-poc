@@ -8,6 +8,8 @@ import {
   carryButtonV4SetLayoutMode,
   carryButtonV4SetLayoutPadding,
   carryButtonV4SetWidthMode,
+  compileButtonBindingsByOwnershipKey,
+  orderButtonObserveBindingsToCompile,
   canonicalizeButtonObserveComponentRef,
   canonicalizeButtonObserveTokenName,
   compileButtonComponentRefMap,
@@ -452,6 +454,58 @@ test("set width.mode carries FIXED onto compile hug only on the root set, and ne
   );
   // absent compile chrome never carries
   assert.equal(carryButtonV4SetWidthMode(setScene, undefined), "FIXED");
+});
+
+test("binding order carries onto compile order only when the multiset matches", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const byKey = compileButtonBindingsByOwnershipKey(altitude.compileRoot);
+  const compileBindings = byKey.get("root/children/0");
+  assert.ok(compileBindings && compileBindings.length > 0);
+  // live Figma-alphabetical spelling of the same bindings
+  const live = [...compileBindings]
+    .map((binding) => {
+      const figmaField =
+        {
+          "layout.itemSpacing": "itemSpacing",
+          "layout.padding.top": "paddingTop",
+          "layout.padding.right": "paddingRight",
+          "layout.padding.bottom": "paddingBottom",
+          "layout.padding.left": "paddingLeft",
+          "cornerRadius.topLeft": "topLeftRadius",
+          "cornerRadius.topRight": "topRightRadius",
+          "cornerRadius.bottomRight": "bottomRightRadius",
+          "cornerRadius.bottomLeft": "bottomLeftRadius",
+          "strokes.0.weight": "strokes.0.weight",
+          "strokes.0.paint.color": "strokes.0.paint.color",
+          "fills.0.color": "fills.0.color",
+        }[binding.field] ?? binding.field;
+      return {
+        field: figmaField,
+        variableName: binding.variable,
+        resolvedType: binding.type,
+      };
+    })
+    .sort((left, right) => left.field.localeCompare(right.field));
+  const ordered = orderButtonObserveBindingsToCompile(live, compileBindings);
+  assert.deepEqual(
+    ordered.map((binding) => binding.variableName),
+    compileBindings.map((binding) => binding.variable),
+  );
+  // a set difference (dropped binding) leaves the live order untouched
+  const short = live.slice(1);
+  assert.deepEqual(
+    orderButtonObserveBindingsToCompile(short, compileBindings),
+    short,
+  );
+  // a renamed variable leaves the live order untouched
+  const renamed = live.map((binding, index) =>
+    index === 0 ? { ...binding, variableName: "not-the-compile-name" } : binding,
+  );
+  assert.deepEqual(
+    orderButtonObserveBindingsToCompile(renamed, compileBindings),
+    renamed,
+  );
 });
 
 test("variantAxis order canonicalizes only when the value set matches compile", () => {

@@ -42,7 +42,7 @@
   "humanSignoff": "pending",
   "inversion": {
     "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-    "sha256": "92124300d2048ae7aa49f25ccac79649f0d6ab162b7a10d3473832d504fca878",
+    "sha256": "49703576ae731e74ce9aa3e801fba91144b8c7217dd081a46d00d741e6b22b74",
     "ok": false,
     "roots": [
       {
@@ -61,7 +61,7 @@
         "denominator": 8706,
         "ok": false,
         "fixedPointStable": false,
-        "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
+        "fixedPointError": "button@1: unsupported structural edit at $.children[1].children[0].bindings; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
         "channelDrift": [],
         "sampleFailures": []
       },
@@ -81,7 +81,7 @@
         "denominator": 8778,
         "ok": false,
         "fixedPointStable": false,
-        "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
+        "fixedPointError": "button@1: unsupported structural edit at $.children[1].children[0].bindings; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
         "channelDrift": [],
         "sampleFailures": []
       }
@@ -93,6 +93,6 @@
   },
   "receipt": {
     "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-    "sha256": "7de3411512b077270da8e36727bcaea5a6f25f18b1ccd7f60dbf4a14cf4d9883"
+    "sha256": "f00cadc07793709464707907101ff4e2c4b715010c734a0102762793d108a3ae"
   }
 }

@@ -8,6 +8,7 @@ import {
   buttonPlanNamesByOwnershipKey,
   buttonPlanRootChrome,
   type ButtonFontResolution,
+  compileButtonBindingsByOwnershipKey,
   compileButtonComponentRefMap,
   compileButtonTokenIdentityMap,
   normalizeButtonObserveScene,
@@ -58,6 +59,7 @@ const readObserve = (
     fontResolutions,
     buttonPlanNamesByOwnershipKey(plan.expectedScenePlan),
     buttonPlanRootChrome(plan.expectedScenePlan),
+    compileButtonBindingsByOwnershipKey(plan.compileRoot),
   );
 };
 

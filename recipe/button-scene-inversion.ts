@@ -7,7 +7,7 @@ import {
   altitudeButtonAdapterConfig,
   fluentButtonAdapterConfig,
 } from "./fixtures/library-buttons.js";
-import type { ComponentSetNode } from "./figma-ir.js";
+import type { ComponentSetNode, VariableBinding } from "./figma-ir.js";
 import { hashRecipeInstance } from "./recipe.js";
 import {
   buttonRecipe,
@@ -17,6 +17,7 @@ import {
 import {
   compareSceneToExpectedPlan,
   compileExpectedScenePlan,
+  irFieldForSceneBinding,
   verifySceneDerivedFixedPoint,
   type ExpectedScenePlan,
   type SceneComparison,
@@ -258,6 +259,87 @@ export function carryButtonV4SetLayoutPadding(
     chrome.padding.left === 0;
   if (!observedUniform32 || !compileUniform0) return undefined;
   return { paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0 };
+}
+
+/**
+ * Binding compile-order carry (Button B2n), measured 2026-08-30.
+ *
+ * The observe program sorts boundVariables by Figma field name, so the live
+ * page reports bindings ALPHABETICALLY while compile carries them in semantic
+ * order. The binding SETS are identical (the accounting matched every binding
+ * fact); only the order differs, and only the scene-derived fixed point can
+ * see it. Input taught this exact class per part (taughtSurfaceBinding-
+ * CompileOrder, taughtContentBindingCompileOrder, taughtLabelBinding-
+ * CompileOrder, ...); Calendar taught it at V35/V36/V42-43 ("host keeps
+ * compile-carried bind order").
+ *
+ * Order-only: bindings reorder onto the compile order ONLY when the mapped
+ * multiset (field, variable, type) equals the compile multiset for the same
+ * ownership key. A missing, extra, or renamed binding leaves the live order
+ * untouched and stays visible.
+ */
+export function compileButtonBindingsByOwnershipKey(
+  compileRoot: ComponentSetNode,
+): Map<string, readonly VariableBinding[]> {
+  const byKey = new Map<string, readonly VariableBinding[]>();
+  const walk = (
+    node: { bindings?: VariableBinding[]; children?: readonly unknown[] },
+    key: string,
+  ): void => {
+    byKey.set(key, node.bindings ?? []);
+    (node.children ?? []).forEach((child, index) =>
+      walk(
+        child as { bindings?: VariableBinding[]; children?: readonly unknown[] },
+        `${key}/children/${index}`,
+      ),
+    );
+  };
+  walk(compileRoot, "root");
+  return byKey;
+}
+
+const buttonBindingIdentity = (
+  field: string,
+  variable: string,
+  type: string,
+): string => `${field}\u0000${variable}\u0000${type}`;
+
+export function orderButtonObserveBindingsToCompile(
+  bindings: SceneNodeSnapshot["boundVariables"],
+  compileBindings: readonly VariableBinding[] | undefined,
+): SceneNodeSnapshot["boundVariables"] {
+  if (compileBindings === undefined) return bindings;
+  if (bindings.length !== compileBindings.length) return bindings;
+  if (bindings.length === 0) return bindings;
+  const mapped = bindings
+    .map((binding) =>
+      buttonBindingIdentity(
+        irFieldForSceneBinding(binding.field),
+        binding.variableName,
+        binding.resolvedType,
+      ),
+    )
+    .sort()
+    .join("\n");
+  const compiled = compileBindings
+    .map((binding) =>
+      buttonBindingIdentity(binding.field, binding.variable, binding.type),
+    )
+    .sort()
+    .join("\n");
+  if (mapped !== compiled) return bindings;
+  const remaining = [...bindings];
+  const ordered: SceneNodeSnapshot["boundVariables"] = [];
+  for (const compileBinding of compileBindings) {
+    const at = remaining.findIndex(
+      (binding) =>
+        irFieldForSceneBinding(binding.field) === compileBinding.field &&
+        binding.variableName === compileBinding.variable &&
+        binding.resolvedType === compileBinding.type,
+    );
+    if (at >= 0) ordered.push(...remaining.splice(at, 1));
+  }
+  return [...ordered, ...remaining];
 }
 
 export function carryButtonV4SetWidthMode(
@@ -655,6 +737,10 @@ export function normalizeButtonObserveScene(
   fontResolutions?: ButtonFontResolution[],
   planNamesByOwnershipKey?: ReadonlyMap<string, ButtonPlanNameEntry>,
   planRootChrome?: ButtonPlanRootChrome,
+  compileBindingsByOwnershipKey?: ReadonlyMap<
+    string,
+    readonly VariableBinding[]
+  >,
 ): SceneNodeSnapshot {
   const isSet = scene.type === "COMPONENT_SET";
   const carriedLayoutMode = carryButtonV4SetLayoutMode(scene, planRootChrome);
@@ -702,24 +788,29 @@ export function normalizeButtonObserveScene(
             componentRefByLastSegment,
           ),
         }),
-    boundVariables: surfaceButtonUniformStrokeWeight(
-      dropButtonDuplicateMappedBindings(scene.boundVariables),
-      identityByLiveName,
-    )
-      .filter(
-        (binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field),
+    boundVariables: orderButtonObserveBindingsToCompile(
+      surfaceButtonUniformStrokeWeight(
+        dropButtonDuplicateMappedBindings(scene.boundVariables),
+        identityByLiveName,
       )
-      .map((binding) =>
-        identityByLiveName === undefined
-          ? binding
-          : {
-              ...binding,
-              variableName: canonicalizeButtonObserveTokenName(
-                binding.variableName,
-                identityByLiveName,
-              ),
-            },
-      ),
+        .filter(
+          (binding) => !COMPILE_ABSENT_STROKE_SIDE_FIELDS.has(binding.field),
+        )
+        .map((binding) =>
+          identityByLiveName === undefined
+            ? binding
+            : {
+                ...binding,
+                variableName: canonicalizeButtonObserveTokenName(
+                  binding.variableName,
+                  identityByLiveName,
+                ),
+              },
+        ),
+      scene.ownershipKey === undefined
+        ? undefined
+        : compileBindingsByOwnershipKey?.get(scene.ownershipKey),
+    ),
     children: scene.children.map((child) =>
       normalizeButtonObserveScene(
         child,
@@ -729,6 +820,7 @@ export function normalizeButtonObserveScene(
         fontResolutions,
         planNamesByOwnershipKey,
         planRootChrome,
+        compileBindingsByOwnershipKey,
       ),
     ),
   };
@@ -895,6 +987,7 @@ export function compareButtonSceneInversion(
       undefined,
       buttonPlanNamesByOwnershipKey(plan.expectedScenePlan),
       buttonPlanRootChrome(plan.expectedScenePlan),
+      compileButtonBindingsByOwnershipKey(plan.compileRoot),
     );
     const stamped = forbiddenObserveKeys(scene);
     if (stamped.length > 0) {
@@ -1031,6 +1124,7 @@ export function serializeButtonInversionReport(
       "TAUGHT 2026-08-30 (B2k, set layout.mode carry): the component set is the proof sheet, not a component fact -- neither source contract names its layout. Compile plans vertical; every writer era (v4 AND current interpret.ts) mints HORIZONTAL on canvas, so a fresh mint would not reconcile it. Same class as Input V64 (carry set layout.mode horizontal). Observed HORIZONTAL canonicalises to compile vertical ONLY on the root set and ONLY between those two measured vocabularies; anything else stays live. Silent 3 -> 2 on both roots.",
       "TAUGHT 2026-08-30 (B2l, set layout.padding carry): compile plans padding 0 on the proof sheet; every writer era mints uniform 32 (interpret.ts paddingTop/Right/Bottom/Left = 32). Same class as Input V65 (carry set layout.padding 32). Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set; any other padding stays live. Silent 2 -> 1 on both roots.",
       "TAUGHT 2026-08-30 (B2m, set width.mode carry + width.value extras drop): compile plans a hug proof sheet; the v4 writer left the set FIXED at its arrangement width (19192 / 17648 -- a measurement of the sheet, not a source fact), and the current interpret.ts still mints primaryAxisSizingMode FIXED. Same class as Input V66 (set width sizing) plus the hug-set width.value extras drop. Observed FIXED canonicalises to compile hug ONLY on the root set; the width.value extra retires with it because a hug set emits no width fact. No px invented. Silent 1 -> 0 and extras 1 -> 0 on both roots; the accounting is closed and the remaining gap is fixed-point binding order.",
+      "TAUGHT 2026-08-30 (B2n, binding compile-order carry): the observe program sorts boundVariables by Figma field name, so the live page reports bindings alphabetically while compile carries semantic order; the binding SETS were already fact-equal. Same class as Input taughtSurfaceBindingCompileOrder / taughtContentBindingCompileOrder / taughtLabelBindingCompileOrder and Calendar V35/V36/V42-43 (host keeps compile-carried bind order). Order-only: bindings reorder onto compile order ONLY when the mapped (field, variable, type) multiset equals the compile multiset for the same ownership key; any set difference leaves the live order visible.",
     ],
     roots: report.roots.map((root) => ({
       source: root.source,

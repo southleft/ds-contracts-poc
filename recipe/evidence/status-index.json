@@ -29,11 +29,11 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "834515fe2246e702a697b7cceba32a824ed2332cc73ba98819b0ccfb7b8a44ad",
+      "indexSha256": "880bf61eeba77d22f28e65ea7dd312d34b177e878e2e8d574221454246efe653",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "92124300d2048ae7aa49f25ccac79649f0d6ab162b7a10d3473832d504fca878",
+      "inversionSha256": "49703576ae731e74ce9aa3e801fba91144b8c7217dd081a46d00d741e6b22b74",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "7de3411512b077270da8e36727bcaea5a6f25f18b1ccd7f60dbf4a14cf4d9883",
+      "receiptSha256": "f00cadc07793709464707907101ff4e2c4b715010c734a0102762793d108a3ae",
       "roots": {
         "altitude": {
           "setId": "85:7406",
@@ -60,7 +60,7 @@
     "blockers": [
       "no attributable human signoff",
       "scene-derived accounting is CLOSED: silent 0 / missing 0 / extra 0 / mismatched 0 on both roots (Altitude 8706/8706, Fluent 8778/8778), derived not assigned",
-      "scene-derived fixed point is not yet stable: observed bindings keep Figma alphabetical order while compile carries semantic order (Input taughtSurfaceBindingCompileOrder / Calendar V36 class, next teaching)"
+      "scene-derived fixed point is not yet stable: compile carries bindings [] explicitly on instance slots while the scene-derived IR omits the empty key (representation empties family, Calendar V44-V47 / Input omit classes; next teachings)"
     ],
     "supersededHistoricalArtifacts": [
       {
@@ -85,7 +85,7 @@
       "fontSubstrateFacts": 144,
       "altitudeResolution": "requested (IBM Plex Sans, first entry of its own stack)",
       "fluentResolution": "fallback (Roboto, 5th entry of the Segoe UI chain) — named, not equated",
-      "remainingClass": "accounting closed (B2j-B2m); remaining gap is fixed-point only: observed binding order is Figma-alphabetical while compile carries semantic order (Input taughtSurfaceBindingCompileOrder / Calendar V36 class)",
+      "remainingClass": "accounting closed (B2j-B2m); binding order carried (B2n); remaining gap is fixed-point representation empties and axis-list order (Calendar V44-V47 / Input omit classes, Input V72 order class)",
       "remainingRequiresFreshMint": false,
       "setChromeClassClosed": {
         "teachings": "B2k layout.mode (Input V64), B2l layout.padding (Input V65), B2m width.mode + width.value extras drop (Input V66)",
