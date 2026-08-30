@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "calendar-live-v6-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit at $.children[0].children[0].children[1].children[0].bindings[0].field; writer accepted; restore 4 held; caption order held; host emitted calendar/weekday/spacer fills.0.color before type.fontSize; mint cleaned; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "e287305d31fb8ef9707e67cdf9229bf79bfadd20",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v6/antecedent-index.json",
+    "indexSha256": "848f2a1b2f253bce618b80efe2b0b394c6439a7a913e56094d0b5f64ae7c2105",
+    "hashSetSha256": "9af63b2b86e8715f6c8388e45523a1e69db92bb4171adc0dbd550582e5a4a3f4"
+  },
+  "authorization": {
+    "commit": "82faa3dae8148c7081dbf1e00d768dec124e350a",
+    "path": "recipe/evidence/calendar-live-pivot-v6/capture-authorization.json",
+    "sha256": "4af35f85210b14a6c97c3637ce10a2d103ed4005e4fef9a62ac99f322a80ca1c",
+    "signingPublicKeySpkiSha256": "62b22cf0818126b677b964f7c26d1a3f9682c43cac37c2676ea86ca5a5242c06"
+  },
+  "attempt1": {
+    "pageId": "173:50217",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "extractRefused": "unsupported structural edit at $.children[0].children[0].children[1].children[0].bindings[0].field",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "host-order calendar/weekday TEXT bindings to compile field order type.fontSize, fills.0.color, width.value",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}
