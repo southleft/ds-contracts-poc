@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "calendar-live-v5-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit at $.children[0].children[0].children[0].bindings[0].field; writer accepted; restore 4 held; empty set bindings held; host emitted calendar/caption fills.0.color before type.fontSize; mint cleaned; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "246e887dd32136211c884d060f5f9263a5a8f495",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v5/antecedent-index.json",
+    "indexSha256": "bc23c4cbe3cfcc2fc518c07d1fd39209a0844f3d349b59222c831f0f7f70fb75",
+    "hashSetSha256": "d05c433089b43829f212a794cc6b77020494d3cb79a7f9601e5c40513372f64a"
+  },
+  "authorization": {
+    "commit": "fbb2e5d39ffc4170717ede949b37ab286a129a92",
+    "path": "recipe/evidence/calendar-live-pivot-v5/capture-authorization.json",
+    "sha256": "29b77b3063297687fb77c26e3fef439319143b33da275fa5b6f343b001478198",
+    "signingPublicKeySpkiSha256": "d51678fdab9f1c0f7739df1311ac16a7c135f8283e894d19d9a83b9114ee53f4"
+  },
+  "attempt1": {
+    "pageId": "173:50037",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "extractRefused": "unsupported structural edit at $.children[0].children[0].children[0].bindings[0].field",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "host-order calendar/caption bindings to compile field order type.fontSize then fills.0.color",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}
