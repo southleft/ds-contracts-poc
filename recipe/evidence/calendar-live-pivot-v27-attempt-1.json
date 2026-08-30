@@ -1,0 +1,109 @@
+{
+  "artifactVersion": "calendar-live-v27-attempt-1-v1",
+  "status": "THE MINT STAYS. Writer, restore, extract, probe and all 8 captures accepted; one Astryx root; gates 1373/1373; usability booleans green. Cleanup persisted, not executed. Human signoff is pending and is TJ's. Do not invent a Calendar grade. Product screenshots: day numbers visible; week/month not a 32x32 grid.",
+  "authorizationCommit": "ba65d7889",
+  "codeCommit": "ba65d7889",
+  "antecedentCommit": "efcdb91cd00b237b18234805ab74fdb4b992c343",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=179-54747",
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v27",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "166b8e40-9227-402a-a844-8a020cc71ef9",
+    "attempt": 1,
+    "programSha256": "63e0be2441ceb1e3aba7966653a7cf63a5ce406d7afb386dc76f98042d1654dd"
+  },
+  "teaching": {
+    "one": "CALENDAR-WRITER-BIND-LABEL-AFTER-INSTANCE-CHARACTERS",
+    "cleared": true,
+    "namedCauseCleared": "V24-V26 failed CALENDAR-DAY-LABEL-MISMATCH on instance/1 because Label was bound before week/month instances existed; setProperties and characters in that same tick left Label=26. Issuing the property, writing instance characters while day-label TEXT is unbound, then binding mains and setProperties on already-appended instances writes 27, 28, … and paints. Do not characters-assign after the bind. Do not invent FIXED. Probe stays characters-only."
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v27",
+    "pageId": "179:54747",
+    "sectionId": "179:54748",
+    "collectionId": "VariableCollectionId:179:54749",
+    "daySetId": "179:54777",
+    "weekSetId": "179:54809",
+    "calendarSetId": "179:54926",
+    "runIdentity": "19be1c96-calendar-v27",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "receiptSha256": "9087fa43dfa275c25c32521a0a328418668bde0b4700330c4811c221237d3cd6",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true,
+    "v23PageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "receiptSha256": "7c5a1c5f78c9058d3def59798f235ff0cb5f39dee4000c399edc943a010965d3"
+  },
+  "extract": {
+    "issued": true,
+    "accepted": true,
+    "receiptSha256": "031f090d792e10609298edaaddf382f3bebbb8909a618adb8f6af8c17770c18b",
+    "roots": ["astryx"],
+    "matched": 1373,
+    "fixedPointReached": true
+  },
+  "probe": {
+    "issued": true,
+    "accepted": true,
+    "passed": true,
+    "receiptSha256": "e7db1dce1b1947fc5e252a63fafaf736bd9607951d96c4b758411a653688a507"
+  },
+  "captures": {
+    "issued": 8,
+    "accepted": 8,
+    "technicalPassed": true
+  },
+  "arranged": {
+    "oneSetAtATime": true,
+    "dayGrid": { "id": "179:55299", "name": "Calendar Day Grid" },
+    "weekGrid": { "id": "179:55317", "name": "Calendar Week Grid" },
+    "monthGrid": { "id": "179:55331", "name": "Calendar Month Grid" },
+    "leftoverGenericComponentContainer": [],
+    "wrapperOverlapAfterSpacing": { "dayWeek": 0, "weekMonth": 0, "dayMonth": 0 },
+    "emptySectionMovedNotDeleted": "179:54748"
+  },
+  "screenshots": {
+    "v23Page": "empty shells / 1px slivers; numbers visible: no",
+    "v27DayGrid": "readable 26 in default / today ring / selected blue / outside 32x32 cells; numbers visible: yes",
+    "v27WeekGrid": "instance Labels 26-31-1 paint; instances 16x16 HUG so digits smash (2627282930311); not a 32x32 week row",
+    "v27MonthGrid": "August 2026 and Su-Sa visible; day instances hug-collapsed; selected 12 and today 5 paint; not a 32x32 month grid"
+  },
+  "product": {
+    "onePxSliverClassCleared": true,
+    "instanceLabelMismatchClassCleared": true,
+    "dayNumbersVisible": true,
+    "weekdayHeadersVisible": true,
+    "monthCaptionVisible": true,
+    "weekMonthThirtyTwoGrid": false,
+    "instanceHugCollapsesCarriedDayCellSize": true,
+    "measuredInstance": { "w": 16, "h": 16, "sizing": "HUG/HUG", "main": "32x32 FIXED dayCell-size" }
+  },
+  "cleanup": {
+    "signedCleanupIssued": true,
+    "executed": false,
+    "reason": "green path; cleanup-on-failure-only"
+  },
+  "v23PageLeft": "173:53929",
+  "doNotInventCalendarGrade": true,
+  "productV1Complete": false,
+  "nextTeaching": "Do not apply hug sizing to a day instance of a FIXED dayCell-size 32x32 main. Instance hug collapses the carried 32x32 box to the painted glyph (16x16; single-digit 8x16) and smashes the week/month grid. Keep the instance at the already-named dayCell-size box. Do not invent a new px. Do not invent Polar/FILL/fonts."
+}
