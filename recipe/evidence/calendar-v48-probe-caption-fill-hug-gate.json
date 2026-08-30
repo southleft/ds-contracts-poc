@@ -1,0 +1,71 @@
+{
+  "artifactVersion": "calendar-v48-probe-caption-fill-hug-gate-v1",
+  "status": "failed closed; mint did not stay",
+  "antecedent": {
+    "prepare": "6c2d0001144c5566cd30d9f840880fdb35baec5f",
+    "authorize": "e8f4294c5"
+  },
+  "runIdentity": "4604bbfe-calendar-v48",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": { "accepted": true, "pageId": "180:63073", "collectionId": "VariableCollectionId:180:63075", "cleaned": true },
+  "restore": { "accepted": true },
+  "extract": {
+    "accepted": true,
+    "firstGreenExtractSinceV30": true,
+    "todayCellStrokesOmitHeld": true,
+    "allNavAndDayButtonAndHeaderClassesHeld": true
+  },
+  "probe": {
+    "mcpSucceeded": true,
+    "refused": "contentHugPassed false; broker ingest refused the probe payload",
+    "measuredPayload": {
+      "reflowPassed": true,
+      "contentHugPassed": false,
+      "bindingCompatibilityPassed": true,
+      "noFakeLayoutPassed": true,
+      "stateSemanticsPassed": true,
+      "switchingRestored": true,
+      "textPropertiesRestored": true,
+      "exactSceneRestoration": true,
+      "visitedVariants": 8
+    }
+  },
+  "measured": {
+    "probeGate": "measureContentHug requires the caption TEXT layoutSizingHorizontal === HUG; since the V31 expansion the source names monthYearLabel.flex 1 so compile, writer, and host all carry FILL",
+    "liveCaption": {
+      "characters": "April 2026",
+      "width": 0,
+      "sizingH": "FILL",
+      "layoutGrow": 1,
+      "textAutoResize": "HEIGHT",
+      "absoluteRenderBounds": null,
+      "headerWidth": 256,
+      "headerAlign": "SPACE_BETWEEN"
+    },
+    "captionZeroWidthCause": "the V24 named-fallback-after-zero-glyph walk in the writer is guarded by ir.width.mode !== fill, so the FILL caption never walks to a painting face; it stays on the zero-intrinsic resolved font with null render bounds — the writer FILL skip is over-broad exactly as hypothesized",
+    "twoRemainingClasses": [
+      "probe contentHug gate must accept the source-named FILL caption sizing",
+      "writer runs the named fallback walk for FILL text so the caption face paints"
+    ],
+    "captureMonth": "April 2026",
+    "grids": { "on": 6, "off": 6 },
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "doNotRestartAttempt2AsIs": true,
+  "nextTeaching": "probe content sizing accepts the source-named FILL caption (monthYearLabel.flex 1); no invented px",
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}
