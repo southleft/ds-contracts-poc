@@ -258,6 +258,12 @@ jobs:
       - name: recipe:calendar:check (calendar@1 grid proof, per-week days, today ring, and the hermetic Figma writer)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:calendar:check
+      - name: recipe:combobox:live:v41:check (the CURRENT combobox lineage — generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:combobox:live:v41:check
+      - name: recipe:table:live:v27:check (the CURRENT table lineage — probe containment fix, generated freshness, authorization self-test, smoke, lifecycle simulation)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:table:live:v27:check
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check
