@@ -105,6 +105,8 @@ export const CALENDAR_LIVE_V1_WEEK_FRAME_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-WEEK-FRAME-CLIPS-CONTENT-OMITTED";
 export const CALENDAR_LIVE_V1_WEEK_FRAME_CORNER_RADIUS_OMITTED_MARKER =
   "CALENDAR-HOST-WEEK-FRAME-CORNER-RADIUS-OMITTED";
+export const CALENDAR_LIVE_V1_WEEK_FRAME_EFFECTS_OMITTED_MARKER =
+  "CALENDAR-HOST-WEEK-FRAME-EFFECTS-OMITTED";
 export const CALENDAR_LIVE_V1_UNIFORM_PER_SIDE_STROKE_WEIGHT_MARKER =
   "CALENDAR-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1226,6 +1228,19 @@ const omitHeaderBodyEffects = <T extends { effects?: unknown }>(
   return rest as T;
 };
 
+const omitWeekFrameEffects = <T extends { effects?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void CALENDAR_LIVE_V1_WEEK_FRAME_EFFECTS_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (!role || !ROW_INSTANCE_ROLE.test(role) || scene.type !== "FRAME")
+    return frame;
+  if (frame.effects === undefined) return frame;
+  const { effects: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitHeaderBodyStrokes = <T extends { strokes?: unknown }>(
   scene: SceneNodeSnapshot,
   frame: T,
@@ -1334,34 +1349,37 @@ export function sceneToNormalizedIr(
   ) {
     const frame = omitHeaderBodyStrokes(
       scene,
-      omitHeaderBodyEffects(
+      omitWeekFrameEffects(
         scene,
-        omitWeekFrameCornerRadius(
+        omitHeaderBodyEffects(
           scene,
-          omitHeaderBodyCornerRadius(
+          omitWeekFrameCornerRadius(
             scene,
-            omitWeekFrameClipsContent(
+            omitHeaderBodyCornerRadius(
               scene,
-              omitHeaderBodyClipsContent(
+              omitWeekFrameClipsContent(
                 scene,
-                omitSetStrokes(
+                omitHeaderBodyClipsContent(
                   scene,
-                  omitSetEffects(
+                  omitSetStrokes(
                     scene,
-                    omitSetCornerRadius(
+                    omitSetEffects(
                       scene,
-                      omitSetClipsContent(scene, {
-                        ...common,
-                        layout: sceneLayout(scene),
-                        fills,
-                        ...(strokes === undefined ? {} : { strokes }),
-                        ...(effects === undefined ? {} : { effects }),
-                        ...(scene.cornerRadius === undefined
-                          ? {}
-                          : { cornerRadius: scene.cornerRadius }),
-                        clipsContent: scene.clipsContent ?? false,
-                        children,
-                      }),
+                      omitSetCornerRadius(
+                        scene,
+                        omitSetClipsContent(scene, {
+                          ...common,
+                          layout: sceneLayout(scene),
+                          fills,
+                          ...(strokes === undefined ? {} : { strokes }),
+                          ...(effects === undefined ? {} : { effects }),
+                          ...(scene.cornerRadius === undefined
+                            ? {}
+                            : { cornerRadius: scene.cornerRadius }),
+                          clipsContent: scene.clipsContent ?? false,
+                          children,
+                        }),
+                      ),
                     ),
                   ),
                 ),

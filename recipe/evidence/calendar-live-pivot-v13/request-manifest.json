@@ -1,0 +1,98 @@
+{
+  "artifactVersion": "calendar-live-v13-request-manifest-v1",
+  "expectedDynamicTool": {
+    "namespace": "user-Figma Console",
+    "tool": "figma_execute"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "signedAtRuntime": true,
+  "requestCount": 13,
+  "requests": [
+    {
+      "requestId": "writer",
+      "sequence": 1,
+      "phase": "writer"
+    },
+    {
+      "requestId": "cleanup",
+      "sequence": 2,
+      "phase": "cleanup",
+      "availability": "persisted immediately after writer acceptance"
+    },
+    {
+      "requestId": "restore",
+      "sequence": 3,
+      "phase": "restore"
+    },
+    {
+      "requestId": "extract",
+      "sequence": 4,
+      "phase": "extract"
+    },
+    {
+      "requestId": "probe",
+      "sequence": 5,
+      "phase": "probe"
+    },
+    {
+      "requestId": "capture-000",
+      "sequence": 6,
+      "phase": "capture",
+      "captureIndex": 0,
+      "cellKey": "astryx/calendar/on"
+    },
+    {
+      "requestId": "capture-001",
+      "sequence": 7,
+      "phase": "capture",
+      "captureIndex": 1,
+      "cellKey": "astryx/calendar/off"
+    },
+    {
+      "requestId": "capture-002",
+      "sequence": 8,
+      "phase": "capture",
+      "captureIndex": 2,
+      "cellKey": "astryx/week/on"
+    },
+    {
+      "requestId": "capture-003",
+      "sequence": 9,
+      "phase": "capture",
+      "captureIndex": 3,
+      "cellKey": "astryx/week/off"
+    },
+    {
+      "requestId": "capture-004",
+      "sequence": 10,
+      "phase": "capture",
+      "captureIndex": 4,
+      "cellKey": "astryx/day/default"
+    },
+    {
+      "requestId": "capture-005",
+      "sequence": 11,
+      "phase": "capture",
+      "captureIndex": 5,
+      "cellKey": "astryx/day/today"
+    },
+    {
+      "requestId": "capture-006",
+      "sequence": 12,
+      "phase": "capture",
+      "captureIndex": 6,
+      "cellKey": "astryx/day/selected"
+    },
+    {
+      "requestId": "capture-007",
+      "sequence": 13,
+      "phase": "capture",
+      "captureIndex": 7,
+      "cellKey": "astryx/day/outside"
+    }
+  ]
+}
