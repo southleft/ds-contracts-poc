@@ -252,6 +252,12 @@ jobs:
       - name: recipe:combobox:check (two-source detached-listbox IR, fixed point, accounting, and behavior)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:combobox:check
+      - name: recipe:table:check (table@1 two-source proof, hermetic writer, offline tail census, column alignment)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:table:check
+      - name: recipe:calendar:check (calendar@1 grid proof, per-week days, today ring, and the hermetic Figma writer)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:calendar:check
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:scene-readback:check
