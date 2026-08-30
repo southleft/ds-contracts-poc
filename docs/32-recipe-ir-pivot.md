@@ -2105,6 +2105,41 @@ Verdicts (no signoff is invalidated by this audit):
   (vendored real `@astryxdesign/core` 0.1.6, the exact npm-shipped
   artifact).
 
+### Merge-readiness assessment for `pivot/recipe-ir-v1` (2026-08-30)
+
+Read-only assessment at `79ea90dde`; no merge performed, no PR opened.
+Full detail: `recipe/evidence/merge-readiness-v1.json`.
+
+- **Gates:** all 11 `recipe:*:check` gates green — **149 tests, 149
+  pass, 0 fail** (normalize 10, hash 7, scene-readback 10, figma-writer
+  8, acquisition 6, button 12, input-field 24, combobox 12, table 19,
+  calendar 38, pivot-status 3). The repository fast/full CI lanes have
+  **not** been run on this branch head; main's last local full-lane
+  record was 83 pass / 2 named fails (parity by design, deploy:check
+  pre-deploy) and the merge requires the same named-red-only profile.
+- **Branch vs main:** 674 ahead / **0 behind** `origin/main`
+  (fast-forward possible; repo convention is PR merges).
+- **Blocking:** (1) Button leftover inversion (in progress separately);
+  (2) docs/26 ↔ docs/32 reconciliation — E4 proposal drafted, NOT
+  applied; docs/26 `V1-CLASS-02` still lists combobox and table as
+  not-v1-supported while both now carry green gates and passed human
+  grades; (3) CI lanes on the branch head.
+- **Non-blocking, named:** Combobox fixture-chrome flag (TJ decision);
+  npm publish stays deferred (F6); open PRs #61/#56/#54/#15/#14 and
+  dependabot bumps are independent lines (branch is 0 behind, no
+  conflict); older Calendar Scratch pages await a dedicated signed
+  cleanup (Figma-side, not repo). `private/` and PEMs verified
+  untracked.
+- **Ordered checklist** (execute after Button leftover closes and TJ
+  approves) is in the evidence file: Button close → Combobox flag
+  decision → apply E4 docs/26 reconciliation + `docs:check` → re-run
+  recipe gates at the merge commit → fast/full lanes → hygiene check →
+  PR to main → post-merge (publish stays deferred; signed Scratch
+  cleanup).
+
+Product **v1 is incomplete** until Button leftover closes. Do not claim
+otherwise.
+
 ### Combobox v41 named feedback — empty/loading listbox padding (2026-08-29)
 
 TJ reviewed Combobox v41 on Scratch page `163:35981` and said (named
