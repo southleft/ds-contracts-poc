@@ -74,12 +74,14 @@ export const CALENDAR_DAY_STATES = [
 
 /**
  * Declared template counts, the same device `table@1` uses for its column and
- * body-row counts. Seven days is what a week IS. The week count is a template
- * depth, not a claim about any particular month: a recipe compiles a shape, and
- * the month that fills it is content.
+ * body-row counts. Seven days is what a week IS. The week count is the source
+ * default grid: `@astryxdesign/core` `hasVariableRowCount` defaults false, so
+ * `useCalendarDays` always emits 6 rows × 7 = 42 cells, filling unused slots
+ * with adjacent-month outside days. Variable-row months are a different prop
+ * and are not this template.
  */
 export const CALENDAR_DAY_COUNT = 7;
-export const CALENDAR_WEEK_COUNT = 3;
+export const CALENDAR_WEEK_COUNT = 6;
 
 export type CalendarWeekNumbers = (typeof CALENDAR_WEEK_NUMBERS)[number];
 export type CalendarDayState = (typeof CALENDAR_DAY_STATES)[number];
@@ -174,6 +176,17 @@ export interface CalendarRecipeInstance {
       fontSize: CalendarNumberParameter;
       radius: CalendarNumberParameter;
     };
+    /**
+     * The painted day control. `@astryxdesign/core` `dayCellStyles.day` is
+     * `--size-element-sm` 28 with `borderRadius: '50%'` (14 on that box).
+     * The column slot stays `dayCell.size` (`--size-element-md` 32). Do not
+     * collapse these onto one box. Do not invent `--radius-inner` or 9999
+     * — source names 50%, not `--radius-full`.
+     */
+    dayButton: {
+      size: CalendarNumberParameter;
+      radius: CalendarNumberParameter;
+    };
     gridGap: CalendarNumberParameter;
     /**
      * Vertical stack gap between caption and the weekday/grid body.
@@ -185,8 +198,23 @@ export interface CalendarRecipeInstance {
      * 0-gap day grid also collapsed the named header margin. Carry the header
      * margin here. One stack gap also spaces weekday-row from the day grid;
      * source `dayName.paddingBottom: --spacing-1` is not a second token.
+     * Header row `gap` is the same `--spacing-2` token.
      */
     captionGap: CalendarNumberParameter;
+    /**
+     * Calendar root padding. Source `calendarStyles.calendar` is
+     * `--spacing-3` 12px. Distinct from the day-slot padding (0).
+     */
+    rootPadding: CalendarNumberParameter;
+    /**
+     * Calendar root `minWidth`. Source names `220px`.
+     */
+    rootMinWidth: CalendarNumberParameter;
+    /**
+     * Icon-only ghost Button chevron. Source `Button` `iconSizeStyles` sm/md
+     * is 16×16 inside a `--size-element-md` 32 icon-only control.
+     */
+    navIconSize: CalendarNumberParameter;
     surface: CalendarColorParameter;
     captionText: CalendarColorParameter;
     weekdayText: CalendarColorParameter;
@@ -296,8 +324,15 @@ export const CalendarRecipeInstanceSchema = z.strictObject({
       fontSize: NumberParameterSchema,
       radius: NumberParameterSchema,
     }),
+    dayButton: z.strictObject({
+      size: NumberParameterSchema,
+      radius: NumberParameterSchema,
+    }),
     gridGap: NumberParameterSchema,
     captionGap: NumberParameterSchema,
+    rootPadding: NumberParameterSchema,
+    rootMinWidth: NumberParameterSchema,
+    navIconSize: NumberParameterSchema,
     surface: ColorParameterSchema,
     captionText: ColorParameterSchema,
     weekdayText: ColorParameterSchema,
@@ -358,6 +393,7 @@ export function normalizeCalendarRecipeInstance(
 }
 
 const hug = { mode: "hug" } as const;
+const fill = { mode: "fill" } as const;
 const fixed = (value: number) => ({ mode: "fixed" as const, value });
 const solid = (color: string) => ({ kind: "solid" as const, color });
 const bind = (
@@ -416,13 +452,65 @@ const text = (
   ],
 });
 
-/** One day cell: the measured box `calendar/day-cell-box` requires. */
+/**
+ * One day cell: the measured `--size-element-md` slot `calendar/day-cell-box`
+ * requires, wrapping the painted `--size-element-sm` 50% day button.
+ */
 const dayComponent = (
   instance: CalendarRecipeInstance,
   state: CalendarDayState,
 ): ComponentNode => {
   const cell = instance.tokens.dayCell;
+  const button = instance.tokens.dayButton;
   const stateTokens = instance.tokens.dayStates[state];
+  const dayButton: FrameNode = {
+    kind: "frame",
+    role: "calendar/day/button",
+    label: "calendar/day/button",
+    layout: {
+      mode: "horizontal",
+      primaryAxisAlign: "center",
+      counterAxisAlign: "center",
+      itemSpacing: 0,
+      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      width: fixed(button.size.fallback),
+      height: fixed(button.size.fallback),
+    },
+    fills: [solid(stateTokens.background.fallback)],
+    ...(stateTokens.ring === undefined || stateTokens.ringWidth === undefined
+      ? {}
+      : {
+          strokes: [
+            {
+              weight: stateTokens.ringWidth.fallback,
+              align: "inside" as const,
+              paint: solid(stateTokens.ring.fallback),
+            },
+          ],
+        }),
+    cornerRadius: corners(button.radius.fallback),
+    bindings: [
+      bind("layout.width.value", button.size),
+      bind("layout.height.value", button.size),
+      bind("cornerRadius.topLeft", button.radius),
+      bind("fills.0.color", stateTokens.background),
+      ...(stateTokens.ring === undefined || stateTokens.ringWidth === undefined
+        ? []
+        : [
+            bind("strokes.0.paint.color", stateTokens.ring),
+            bind("strokes.0.weight", stateTokens.ringWidth),
+          ]),
+    ],
+    children: [
+      text(
+        "calendar/day/label",
+        instance.content.weeks[0]!.days[0]!.label,
+        instance.tokens.typography.day,
+        cell.fontSize,
+        stateTokens.text,
+      ),
+    ],
+  };
   return {
     kind: "component",
     role: `calendar/day/${state}`,
@@ -442,18 +530,7 @@ const dayComponent = (
       width: fixed(cell.size.fallback),
       height: fixed(cell.size.fallback),
     },
-    fills: [solid(stateTokens.background.fallback)],
-    ...(stateTokens.ring === undefined || stateTokens.ringWidth === undefined
-      ? {}
-      : {
-          strokes: [
-            {
-              weight: stateTokens.ringWidth.fallback,
-              align: "inside" as const,
-              paint: solid(stateTokens.ring.fallback),
-            },
-          ],
-        }),
+    fills: [],
     cornerRadius: corners(cell.radius.fallback),
     bindings: [
       bind("layout.width.value", cell.size),
@@ -463,23 +540,8 @@ const dayComponent = (
       bind("layout.padding.top", cell.padding),
       bind("layout.padding.bottom", cell.padding),
       bind("cornerRadius.topLeft", cell.radius),
-      bind("fills.0.color", stateTokens.background),
-      ...(stateTokens.ring === undefined || stateTokens.ringWidth === undefined
-        ? []
-        : [
-            bind("strokes.0.paint.color", stateTokens.ring),
-            bind("strokes.0.weight", stateTokens.ringWidth),
-          ]),
     ],
-    children: [
-      text(
-        "calendar/day/label",
-        instance.content.weeks[0]!.days[0]!.label,
-        instance.tokens.typography.day,
-        cell.fontSize,
-        stateTokens.text,
-      ),
-    ],
+    children: [dayButton],
   };
 };
 
@@ -660,6 +722,91 @@ const weekdayRow = (
   };
 };
 
+/**
+ * Month nav is Button+Icon in source (`ghost`, `isIconOnly`, default `md`
+ * 32, `Icon` `chevronLeft`/`chevronRight` size `sm`). calendar@1 has no
+ * Button primitive; it carries the rendered chrome: a 32 slot and the
+ * glyphs `defaultIcons.tsx` names for those icons (`‹` / `›`).
+ */
+const navButton = (
+  instance: CalendarRecipeInstance,
+  role: "calendar/nav/previous" | "calendar/nav/next",
+  label: "Previous month" | "Next month",
+  glyph: "‹" | "›",
+): FrameNode => ({
+  kind: "frame",
+  role,
+  label,
+  layout: {
+    mode: "horizontal",
+    primaryAxisAlign: "center",
+    counterAxisAlign: "center",
+    itemSpacing: 0,
+    padding: { top: 0, right: 0, bottom: 0, left: 0 },
+    width: fixed(instance.tokens.dayCell.size.fallback),
+    height: fixed(instance.tokens.dayCell.size.fallback),
+  },
+  fills: [],
+  bindings: [
+    bind("layout.width.value", instance.tokens.dayCell.size),
+    bind("layout.height.value", instance.tokens.dayCell.size),
+  ],
+  children: [
+    text(
+      `${role}/icon`,
+      glyph,
+      instance.tokens.typography.caption,
+      instance.tokens.navIconSize,
+      instance.tokens.captionText,
+    ),
+  ],
+});
+
+const captionInHeader = (instance: CalendarRecipeInstance): TextNode => ({
+  kind: "text",
+  role: "calendar/caption",
+  label: "calendar/caption",
+  characters: instance.content.caption,
+  type: fontFacts(
+    instance.tokens.typography.caption,
+    instance.tokens.dayCell.fontSize,
+  ),
+  align: "center",
+  verticalAlign: "center",
+  fills: [solid(instance.tokens.captionText.fallback)],
+  width: fill,
+  height: hug,
+  bindings: [
+    bind("type.fontSize", instance.tokens.dayCell.fontSize),
+    bind("fills.0.color", instance.tokens.captionText),
+  ],
+});
+
+const headerRow = (instance: CalendarRecipeInstance): FrameNode => {
+  const headerGap = instance.tokens.captionGap;
+  return {
+    kind: "frame",
+    role: "calendar/header",
+    label: "calendar/header",
+    layout: {
+      mode: "horizontal",
+      primaryAxisAlign: "space-between",
+      counterAxisAlign: "center",
+      itemSpacing: headerGap.fallback,
+      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      width: fill,
+      height: hug,
+    },
+    fills: [],
+    bindings: [bind("layout.itemSpacing", headerGap)],
+    children: [
+      navButton(instance, "calendar/nav/previous", "Previous month", "‹"),
+      captionInHeader(instance),
+      navButton(instance, "calendar/nav/next", "Next month", "›"),
+    ],
+  };
+};
+
 const calendarComponent = (
   instance: CalendarRecipeInstance,
   weekNumbers: CalendarWeekNumbers,
@@ -669,8 +816,11 @@ const calendarComponent = (
    * Caption-stack gap is the named header.marginBottom, not daysGrid gap.
    * CALENDAR-COMPILE-CARRIES-HEADER-MARGIN-BOTTOM. Do not bind this to
    * gridGap. Do not invent a px. Do not teach FIXED as a fill.
+   * CALENDAR-COMPILE-CARRIES-SOURCE-NAMED-MONTH: 6-row default, Button+Icon
+   * nav chrome, 28 circle day button, root --spacing-3 / minWidth 220.
    */
   const stackGap = instance.tokens.captionGap;
+  const rootPad = instance.tokens.rootPadding;
   const grid: FrameNode = {
     kind: "frame",
     role: "calendar/grid",
@@ -701,34 +851,26 @@ const calendarComponent = (
       counterAxisAlign: "min",
       itemSpacing: stackGap.fallback,
       padding: {
-        top: instance.tokens.dayCell.padding.fallback,
-        right: instance.tokens.dayCell.padding.fallback,
-        bottom: instance.tokens.dayCell.padding.fallback,
-        left: instance.tokens.dayCell.padding.fallback,
+        top: rootPad.fallback,
+        right: rootPad.fallback,
+        bottom: rootPad.fallback,
+        left: rootPad.fallback,
       },
       width: hug,
       height: hug,
+      minWidth: instance.tokens.rootMinWidth.fallback,
     },
     fills: [solid(instance.tokens.surface.fallback)],
     bindings: [
       bind("layout.itemSpacing", stackGap),
-      bind("layout.padding.left", instance.tokens.dayCell.padding),
-      bind("layout.padding.right", instance.tokens.dayCell.padding),
-      bind("layout.padding.top", instance.tokens.dayCell.padding),
-      bind("layout.padding.bottom", instance.tokens.dayCell.padding),
+      bind("layout.padding.left", rootPad),
+      bind("layout.padding.right", rootPad),
+      bind("layout.padding.top", rootPad),
+      bind("layout.padding.bottom", rootPad),
+      bind("layout.minWidth", instance.tokens.rootMinWidth),
       bind("fills.0.color", instance.tokens.surface),
     ],
-    children: [
-      text(
-        "calendar/caption",
-        instance.content.caption,
-        instance.tokens.typography.caption,
-        instance.tokens.dayCell.fontSize,
-        instance.tokens.captionText,
-      ),
-      weekdayRow(instance, weekNumbers),
-      grid,
-    ],
+    children: [headerRow(instance), weekdayRow(instance, weekNumbers), grid],
   };
 };
 
@@ -932,7 +1074,15 @@ export function validateCalendarStructure(root: FrameNode): void {
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
         `${day.role}: a day cell must carry a measured box, not hug — calendar/day-cell-box`,
       ]);
-    direct(day, "calendar/day/label", "text");
+    const dayButton = direct(day, "calendar/day/button", "frame");
+    if (
+      dayButton.layout.width.mode !== "fixed" ||
+      dayButton.layout.height.mode !== "fixed"
+    )
+      throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
+        `${day.role}: the day button must carry the named --size-element-sm box`,
+      ]);
+    direct(dayButton, "calendar/day/label", "text");
   }
   for (const week of weekSet.children) {
     if (week.kind !== "component" || week.layout.mode !== "horizontal")
@@ -976,7 +1126,10 @@ export function validateCalendarStructure(root: FrameNode): void {
       throw new RecipeRefusal(CALENDAR_RECIPE_REF, [
         "a calendar variant stacks caption, weekdays and grid",
       ]);
-    direct(variant, "calendar/caption", "text");
+    const header = direct(variant, "calendar/header", "frame");
+    direct(header, "calendar/nav/previous", "frame");
+    direct(header, "calendar/caption", "text");
+    direct(header, "calendar/nav/next", "frame");
     const weekdays = direct(variant, "calendar/weekday-row", "frame");
     const labels = (weekdays.children ?? []).filter((child) =>
       String(child.role ?? "").startsWith("calendar/weekday/"),
@@ -1078,12 +1231,14 @@ export function collapseCalendarRecipe(
   const weekSet = setByRole(root, "calendar/week-set");
   const daySet = setByRole(root, "calendar/day-set");
   const baseline = componentFor(calendarSet, { WeekNumbers: "on" });
-  const captionText = direct(baseline, "calendar/caption", "text");
+  const header = direct(baseline, "calendar/header", "frame");
+  const captionText = direct(header, "calendar/caption", "text");
   const weekdayRowFrame = direct(baseline, "calendar/weekday-row", "frame");
   const gridFrame = direct(baseline, "calendar/grid", "frame");
   const weekOn = componentFor(weekSet, { WeekNumbers: "on" });
   const dayDefault = componentFor(daySet, { State: "default" });
-  const dayLabel = direct(dayDefault, "calendar/day/label", "text");
+  const dayButton = direct(dayDefault, "calendar/day/button", "frame");
+  const dayLabel = direct(dayButton, "calendar/day/label", "text");
   const weekNumberText = direct(weekOn, "calendar/week/number", "text");
 
   const weekdays = (weekdayRowFrame.children ?? [])
@@ -1097,15 +1252,16 @@ export function collapseCalendarRecipe(
 
   const dayStateFor = (state: CalendarDayState): DayStateTokens => {
     const component = componentFor(daySet, { State: state });
-    const label = direct(component, "calendar/day/label", "text");
-    const hasRing = (component.bindings ?? []).some(
+    const button = direct(component, "calendar/day/button", "frame");
+    const label = direct(button, "calendar/day/label", "text");
+    const hasRing = (button.bindings ?? []).some(
       (entry) => entry.field === "strokes.0.paint.color",
     );
     return {
       background: colorFrom(
-        component,
+        button,
         "fills.0.color",
-        solidColor(component.fills[0], component.role!),
+        solidColor(button.fills[0], button.role!),
       ),
       text: colorFrom(
         label,
@@ -1115,14 +1271,14 @@ export function collapseCalendarRecipe(
       ...(hasRing
         ? {
             ring: colorFrom(
-              component,
+              button,
               "strokes.0.paint.color",
-              solidColor(component.strokes?.[0]?.paint, component.role!),
+              solidColor(button.strokes?.[0]?.paint, button.role!),
             ),
             ringWidth: numberFrom(
-              component,
+              button,
               "strokes.0.weight",
-              component.strokes?.[0]?.weight ?? 0,
+              button.strokes?.[0]?.weight ?? 0,
             ),
           }
         : {}),
@@ -1230,6 +1386,20 @@ export function collapseCalendarRecipe(
           dayDefault.cornerRadius?.topLeft ?? 0,
         ),
       },
+      dayButton: {
+        size: numberFrom(
+          dayButton,
+          "layout.width.value",
+          dayButton.layout.width.mode === "fixed"
+            ? dayButton.layout.width.value
+            : 0,
+        ),
+        radius: numberFrom(
+          dayButton,
+          "cornerRadius.topLeft",
+          dayButton.cornerRadius?.topLeft ?? 0,
+        ),
+      },
       gridGap: numberFrom(
         gridFrame,
         "layout.itemSpacing",
@@ -1240,6 +1410,24 @@ export function collapseCalendarRecipe(
         "layout.itemSpacing",
         baseline.layout.itemSpacing,
       ),
+      rootPadding: numberFrom(
+        baseline,
+        "layout.padding.left",
+        baseline.layout.padding.left,
+      ),
+      rootMinWidth: numberFrom(
+        baseline,
+        "layout.minWidth",
+        baseline.layout.minWidth ?? 0,
+      ),
+      navIconSize: (() => {
+        const icon = direct(
+          direct(header, "calendar/nav/previous", "frame"),
+          "calendar/nav/previous/icon",
+          "text",
+        );
+        return numberFrom(icon, "type.fontSize", icon.type.fontSize);
+      })(),
       surface: colorFrom(
         baseline,
         "fills.0.color",

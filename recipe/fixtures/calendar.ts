@@ -41,8 +41,9 @@ const font = (
  * `examples/day-picker/PROVENANCE.md` records why: the capture grammar cannot
  * spell a `Date`, so a calendar driven by a live clock has a "today" ring and a
  * visible month that move between captures and never byte-compare. The contract
- * therefore carries the month that was RENDERED. These are three weeks of a
- * fixed August 2026, with the leading days belonging to July.
+ * therefore carries the month that was RENDERED. These are six weeks of a
+ * pinned August 2026 capture month (Monday-start scaffold), with the leading
+ * days belonging to July. Not the only month — a capture.
  */
 const week = (
   id: string,
@@ -108,6 +109,33 @@ export const canonicalCalendarRecipeInstance = {
         ["15", "default"],
         ["16", "default"],
       ]),
+      week("week-34", "34", [
+        ["17", "default"],
+        ["18", "default"],
+        ["19", "default"],
+        ["20", "default"],
+        ["21", "default"],
+        ["22", "default"],
+        ["23", "default"],
+      ]),
+      week("week-35", "35", [
+        ["24", "default"],
+        ["25", "default"],
+        ["26", "default"],
+        ["27", "default"],
+        ["28", "default"],
+        ["29", "default"],
+        ["30", "default"],
+      ]),
+      week("week-36", "36", [
+        ["31", "default"],
+        ["1", "outside"],
+        ["2", "outside"],
+        ["3", "outside"],
+        ["4", "outside"],
+        ["5", "outside"],
+        ["6", "outside"],
+      ]),
     ],
     selectedDayLabel: "12",
     todayDayLabel: "5",
@@ -119,8 +147,15 @@ export const canonicalCalendarRecipeInstance = {
       fontSize: number("ds.calendar.dayCell-fontSize", 14),
       radius: number("ds.calendar.dayCell-radius", 6),
     },
+    dayButton: {
+      size: number("ds.calendar.dayButton-size", 36),
+      radius: number("ds.calendar.dayButton-radius", 6),
+    },
     gridGap: number("ds.calendar.gridGap", 4),
     captionGap: number("ds.calendar.captionGap", 4),
+    rootPadding: number("ds.calendar.rootPadding", 4),
+    rootMinWidth: number("ds.calendar.rootMinWidth", 0),
+    navIconSize: number("ds.calendar.navIconSize", 16),
     surface: color("ds.calendar.surface", "#ffffffff"),
     captionText: color("ds.calendar.captionText", "#111827ff"),
     weekdayText: color("ds.calendar.weekdayText", "#6b7280ff"),

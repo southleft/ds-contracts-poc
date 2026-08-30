@@ -72,20 +72,20 @@ const cloneTokens = (
  *   accent / on-accent   --color-accent / --color-on-accent        #0064E0 / #FFFFFF
  *   today ring           --color-border-emphasized inset 0 0 0 1px #CCD3DB
  *   caption stack gap     header.marginBottom --spacing-2          8px
- *                         (not header.gap; that is horizontal chrome)
+ *                         (header.gap is the same --spacing-2 token)
+ *   day button            --size-element-sm 28 circle (50% → 14)
+ *   root padding          --spacing-3                              12px
+ *   root minWidth         220px
+ *   nav icon              Button iconSizeStyles sm/md              16px
+ *   default grid          6 rows / 42 cells (hasVariableRowCount false)
  *
  * Receipted (see astryxCalendarInstance.receipts):
  *   daysGrid has no gap (header.gap --spacing-2 is not the day grid)
  *   dayName paddingBottom --spacing-1 4px is not a second stack-gap token
- *   day button padding is 0; calendar root padding is --spacing-3 12px
- *   day button is --size-element-sm 28px circle (borderRadius 50%); the
- *     carried box is the md slot, radius 0
  *   weekday size is --text-supporting-size 12px; calendar@1 has one fontSize
  *   Calendar.tsx paints no surface; --color-background-surface is not applied
  *   dayOutside also sets opacity 0.5
  *   default weekStartsOn is 0 (Sunday); content carries that default
- *   default grid is 6 rows; calendar@1 template depth is 3 weeks
- *   month nav chevrons are Button+Icon, not caption
  *   dark half of every light-dark() pair
  *   hasOutsideDays / showOutsideDays
  */
@@ -94,8 +94,13 @@ const astryxTokens = cloneTokens("astryx.calendar", (path, fallback) => {
   if (path === "dayCell.padding") return 0;
   if (path === "dayCell.fontSize") return 14;
   if (path === "dayCell.radius") return 0;
+  if (path === "dayButton.size") return 28;
+  if (path === "dayButton.radius") return 14;
   if (path === "gridGap") return 0;
   if (path === "captionGap") return 8;
+  if (path === "rootPadding") return 12;
+  if (path === "rootMinWidth") return 220;
+  if (path === "navIconSize") return 16;
   if (path === "surface") return "#00000000";
   if (path === "captionText") return "#0a1317ff";
   if (path === "weekdayText") return "#4e606fff";
@@ -167,24 +172,24 @@ export const astryxCalendarSource: ReviewedCalendarSource = {
   sourceRoot:
     "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar",
   anatomy: {
-    root: "@astryxdesign/core/src/Calendar/Calendar.tsx caption + weekday row + week grid",
-    grid: "weeks of seven day cells; day state varies within a week",
+    root: "@astryxdesign/core/src/Calendar/Calendar.tsx header (nav+caption) + weekday row + week grid",
+    grid: "default 6 weeks of seven day cells (42); day state varies within a week",
     weekdayRow:
       "Su–Sa labels (weekStartsOn default 0), measured to the --size-element-md column",
     week: "seven day cells; week number optional; ISO week from first in-month day",
-    day: "grid slot --size-element-md 32px; inner day button --size-element-sm 28px circle is receipted; default / today / selected / outside",
+    day: "grid slot --size-element-md 32px; inner day button --size-element-sm 28px circle (borderRadius 50%); default / today / selected / outside",
     dayAxis:
       "seven declared day columns; calendar@1 refuses hug cells in a column-bearing row",
   },
   api: {
-    hasWeekNumbers: "hasWeekNumbers boolean — WeekNumbers on|off",
+    hasWeekNumbers: "hasWeekNumbers boolean — WeekNumbers on|off; source default false",
     hasOutsideDays:
       "hasOutsideDays boolean — receipted; calendar@1 has no blank-but-measured cell",
     selected: "selected day is content, not a live Date",
     extras: "no range, no dropdown month, no time, no react-day-picker adapter",
   },
   styleSources: [
-    "@astryxdesign/core/src/Calendar/styles.ts cell height --size-element-md 32; day button --size-element-sm 28 circle; daysGrid has no gap; header.marginBottom --spacing-2",
+    "@astryxdesign/core/src/Calendar/styles.ts cell height --size-element-md 32; day button --size-element-sm 28 circle; daysGrid has no gap; header.marginBottom --spacing-2; root padding --spacing-3 12; minWidth 220",
     "@astryxdesign/core/dist/astryx.css light-dark color pairs; light half carried",
   ],
   fontSources: [
@@ -289,52 +294,106 @@ export const CALENDAR_SINGLE_LIBRARY_PROOF_PROTOCOL = {
 export const astryxCalendarInstance = {
   ...structuredClone(canonicalCalendarRecipeInstance),
   identity: { id: "astryx.calendar", name: "Astryx Calendar" },
+  axes: {
+    ...structuredClone(canonicalCalendarRecipeInstance.axes),
+    weekNumbers: {
+      ...canonicalCalendarRecipeInstance.axes.weekNumbers,
+      default: "off",
+    },
+  },
   content: {
-    caption: "August 2026",
+    /**
+     * Pinned capture month, not the only month.
+     * Vendored Calendar.doc.mjs / stories do not pin a date. Calendar.test.tsx
+     * uses 2026-01-15. The docs showcase (cross-check only) pins 2026-04-15.
+     * This capture uses that April 2026 month so the 6-row default, selected
+     * 15, and Sunday-start grid match the live component people look at —
+     * tokens stay vendored light-dark(), not the docs site theme.
+     */
+    caption: "April 2026",
     weekdays: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
     weeks: [
       {
         id: "week-1",
-        weekNumber: "31",
+        weekNumber: "14",
         days: [
-          { label: "26", state: "outside" },
-          { label: "27", state: "outside" },
-          { label: "28", state: "outside" },
           { label: "29", state: "outside" },
           { label: "30", state: "outside" },
           { label: "31", state: "outside" },
           { label: "1", state: "default" },
+          { label: "2", state: "default" },
+          { label: "3", state: "default" },
+          { label: "4", state: "default" },
         ],
       },
       {
         id: "week-2",
-        weekNumber: "31",
+        weekNumber: "14",
         days: [
-          { label: "2", state: "default" },
-          { label: "3", state: "default" },
-          { label: "4", state: "default" },
-          { label: "5", state: "today" },
+          { label: "5", state: "default" },
           { label: "6", state: "default" },
           { label: "7", state: "default" },
           { label: "8", state: "default" },
+          { label: "9", state: "default" },
+          { label: "10", state: "default" },
+          { label: "11", state: "default" },
         ],
       },
       {
         id: "week-3",
-        weekNumber: "32",
+        weekNumber: "15",
         days: [
-          { label: "9", state: "default" },
-          { label: "10", state: "default" },
-          { label: "11", state: "default" },
-          { label: "12", state: "selected" },
+          { label: "12", state: "default" },
           { label: "13", state: "default" },
           { label: "14", state: "default" },
-          { label: "15", state: "default" },
+          { label: "15", state: "selected" },
+          { label: "16", state: "default" },
+          { label: "17", state: "default" },
+          { label: "18", state: "default" },
+        ],
+      },
+      {
+        id: "week-4",
+        weekNumber: "16",
+        days: [
+          { label: "19", state: "default" },
+          { label: "20", state: "default" },
+          { label: "21", state: "default" },
+          { label: "22", state: "default" },
+          { label: "23", state: "default" },
+          { label: "24", state: "default" },
+          { label: "25", state: "default" },
+        ],
+      },
+      {
+        id: "week-5",
+        weekNumber: "17",
+        days: [
+          { label: "26", state: "default" },
+          { label: "27", state: "default" },
+          { label: "28", state: "default" },
+          { label: "29", state: "default" },
+          { label: "30", state: "default" },
+          { label: "1", state: "outside" },
+          { label: "2", state: "outside" },
+        ],
+      },
+      {
+        id: "week-6",
+        weekNumber: "18",
+        days: [
+          { label: "3", state: "outside" },
+          { label: "4", state: "outside" },
+          { label: "5", state: "outside" },
+          { label: "6", state: "outside" },
+          { label: "7", state: "outside" },
+          { label: "8", state: "outside" },
+          { label: "9", state: "outside" },
         ],
       },
     ],
-    selectedDayLabel: "12",
-    todayDayLabel: "5",
+    selectedDayLabel: "15",
+    todayDayLabel: "1",
   },
   tokens: astryxTokens,
   receipts: [
@@ -371,27 +430,6 @@ export const astryxCalendarInstance = {
     },
     {
       fact: {
-        path: "@astryxdesign/core/src/Calendar/styles.ts#/dayCellStyles/day",
-        channel: "geometry",
-      },
-      value:
-        "width/height --size-element-sm 28px; borderRadius 50%; padding 0",
-      reason: "no-figma-primitive",
-      evidence:
-        "The visual day is a 28px circle inside a --size-element-md 32px slot. calendar@1 has one measured box; it carries the md column slot (weekday width + cell height) with radius 0 and padding 0. Inventing --radius-inner 4px would mint a token Calendar.tsx does not use.",
-    },
-    {
-      fact: {
-        path: "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar",
-        channel: "geometry",
-      },
-      value: "padding --spacing-3 12px; minWidth 220px",
-      reason: "lowered",
-      evidence:
-        "calendar@1 has one padding token and uses it for both the day slot and the root. The day slot padding is 0, so that value is carried. Root chrome --spacing-3 12px and minWidth 220px are named here.",
-    },
-    {
-      fact: {
         path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/fontSize",
         channel: "typography",
       },
@@ -422,26 +460,6 @@ export const astryxCalendarInstance = {
     },
     {
       fact: {
-        path: "@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts#/hasVariableRowCount",
-        channel: "template-depth",
-      },
-      value: "default false → fixed 6-row grid",
-      reason: "lowered",
-      evidence:
-        "Source default is a fixed 6-row month. calendar@1 template depth is 3 weeks — a shape, not a claim about August 2026. The extra three empty-or-trailing rows are named.",
-    },
-    {
-      fact: {
-        path: "@astryxdesign/core/src/Calendar/Calendar.tsx#/header/nav",
-        channel: "anatomy",
-      },
-      value: "Previous/Next month Button+Icon chevrons",
-      reason: "no-figma-primitive",
-      evidence:
-        "The source header is chevron buttons plus a month-year label. calendar@1 carries the rendered caption as content and has no Button primitive for the nav chrome.",
-    },
-    {
-      fact: {
         path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/paddingBottom",
         channel: "geometry",
       },
@@ -466,14 +484,6 @@ export const astryxCalendarInstance = {
       channel: "geometry",
     },
     {
-      path: "@astryxdesign/core/src/Calendar/styles.ts#/dayCellStyles/day",
-      channel: "geometry",
-    },
-    {
-      path: "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar",
-      channel: "geometry",
-    },
-    {
       path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/fontSize",
       channel: "typography",
     },
@@ -484,14 +494,6 @@ export const astryxCalendarInstance = {
     {
       path: "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/calendar/background",
       channel: "fill",
-    },
-    {
-      path: "@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts#/hasVariableRowCount",
-      channel: "template-depth",
-    },
-    {
-      path: "@astryxdesign/core/src/Calendar/Calendar.tsx#/header/nav",
-      channel: "anatomy",
     },
     {
       path: "@astryxdesign/core/src/Calendar/styles.ts#/monthGridStyles/dayName/paddingBottom",
@@ -597,30 +599,6 @@ const astryxSourceFacts = (): ReviewedCalendarSourceFact[] => {
       receiptReason: "refused-by-recipe",
     },
     {
-      occurrenceId: "astryx-refusal-inner-circle",
-      category: "refusal",
-      source: {
-        kind: "review",
-        evidence:
-          "day button is --size-element-sm 28px borderRadius 50%; --radius-inner is unused",
-      },
-      disposition: "refusal",
-      target: "inner 28px circle; carried box is the 32px md slot radius 0",
-      receiptReason: "no-figma-primitive",
-    },
-    {
-      occurrenceId: "astryx-refusal-root-chrome",
-      category: "refusal",
-      source: {
-        kind: "review",
-        evidence:
-          "calendar root padding --spacing-3 12px and minWidth 220px; day slot padding 0",
-      },
-      disposition: "refusal",
-      target: "root --spacing-3 12px and minWidth 220 collapsed onto one padding token",
-      receiptReason: "lowered",
-    },
-    {
       occurrenceId: "astryx-refusal-weekday-12",
       category: "refusal",
       source: {
@@ -654,30 +632,6 @@ const astryxSourceFacts = (): ReviewedCalendarSourceFact[] => {
       disposition: "refusal",
       target: "unpainted surface; #FFFFFF would invent a fill",
       receiptReason: "refused-by-recipe",
-    },
-    {
-      occurrenceId: "astryx-refusal-six-row-default",
-      category: "refusal",
-      source: {
-        kind: "review",
-        evidence:
-          "hasVariableRowCount default false is a fixed 6-row grid; template depth is 3 weeks",
-      },
-      disposition: "refusal",
-      target: "source default 6-row month vs calendar@1 3-week template",
-      receiptReason: "lowered",
-    },
-    {
-      occurrenceId: "astryx-refusal-nav-chevrons",
-      category: "refusal",
-      source: {
-        kind: "review",
-        evidence:
-          "header Previous/Next month are Button+Icon; calendar@1 carries caption only",
-      },
-      disposition: "refusal",
-      target: "month navigation chevrons",
-      receiptReason: "no-figma-primitive",
     },
     {
       occurrenceId: "astryx-refusal-dayname-padding",
@@ -719,6 +673,7 @@ export const astryxCalendarAdapterConfig = ((): ReviewedCalendarAdapterConfig =>
     identity: { id: "astryx.calendar", name: "Astryx Calendar" },
     content: structuredClone(astryxCalendarInstance.content),
     tokens: structuredClone(astryxCalendarInstance.tokens),
+    axes: structuredClone(astryxCalendarInstance.axes),
     sourceFacts,
     manualMappings,
     receipts: structuredClone(astryxCalendarInstance.receipts),

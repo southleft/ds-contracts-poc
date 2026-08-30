@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v30$/);
+  assert.match(writer.runIdentity, /-calendar-v31$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -163,6 +163,8 @@ test("the writer applies instance Label via characters — the Calendar live v3 
   assert.match(writer.code, /19be1c96-calendar-v28/);
   assert.match(writer.code, /CALENDAR-V29-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v29/);
+  assert.match(writer.code, /CALENDAR-V30-IDENTITY-REUSE/);
+  assert.match(writer.code, /da4456d8-calendar-v30/);
 });
 
 test("the writer writes instance Label through the set-issued property after a painted fallback — the Calendar live v24 class", () => {
@@ -278,9 +280,10 @@ test("the writer refuses every other archetype's page", () => {
     "CALENDAR-MUST-NOT-WRITE-COMBOBOX-PAGE",
     "CALENDAR-MUST-NOT-WRITE-BUTTON-PAGE",
     "CALENDAR-MUST-NOT-WRITE-TABLE-PAGE",
+    "CALENDAR-MUST-NOT-WRITE-V30-PAGE",
   ])
     assert.match(writer.code, new RegExp(marker));
-  for (const pageId of ["115:295378", "163:35981", "85:6781", "173:48924"])
+  for (const pageId of ["115:295378", "163:35981", "85:6781", "173:48924", "180:56126"])
     assert.equal(
       writer.code.includes(pageId),
       true,

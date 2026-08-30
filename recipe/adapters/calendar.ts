@@ -70,6 +70,7 @@ export interface ReviewedCalendarAdapterConfig {
   identity: { id: string; name: string };
   content: CalendarRecipeInstance["content"];
   tokens: CalendarRecipeInstance["tokens"];
+  axes?: CalendarRecipeInstance["axes"];
   sourceFacts: ReviewedCalendarSourceFact[];
   manualMappings: string[];
   receipts: CalendarRecipeInstance["receipts"];
@@ -263,6 +264,7 @@ export function adaptReviewedCalendar(
   instance.identity = structuredClone(config.identity);
   instance.content = structuredClone(config.content);
   instance.tokens = structuredClone(config.tokens);
+  if (config.axes) instance.axes = structuredClone(config.axes);
   instance.provenance = {
     source: config.sourcePath,
     tool: "calendar@1",

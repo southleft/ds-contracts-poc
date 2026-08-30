@@ -63,8 +63,20 @@ test("calendar@1 adapts the one reviewed source and refuses a second-library inv
   );
   assert.equal(instance.tokens.dayCell.padding.fallback, 0, "day slot padding is 0");
   assert.equal(instance.tokens.dayCell.radius.fallback, 0, "slot is not --radius-inner");
+  assert.equal(instance.tokens.dayButton.size.fallback, 28, "day button --size-element-sm");
+  assert.equal(
+    instance.tokens.dayButton.radius.fallback,
+    14,
+    "day button borderRadius 50% of 28",
+  );
+  assert.equal(instance.tokens.rootPadding.fallback, 12, "root --spacing-3");
+  assert.equal(instance.tokens.rootMinWidth.fallback, 220, "root minWidth 220");
+  assert.equal(instance.tokens.navIconSize.fallback, 16, "Button iconSizeStyles sm/md");
   assert.equal(instance.tokens.dayCell.fontSize.fallback, 14, "day is --font-size-base");
   assert.equal(instance.tokens.surface.fallback, "#00000000", "Calendar paints no surface");
+  assert.equal(instance.content.caption, "April 2026", "pinned capture month");
+  assert.equal(instance.content.weeks.length, 6, "source default 6-row month");
+  assert.equal(instance.axes.weekNumbers.default, "off", "hasWeekNumbers default false");
   assert.deepEqual(instance.content.weekdays, [
     "Su",
     "Mo",
@@ -165,7 +177,20 @@ test("the calendar stack carries header.marginBottom, not daysGrid gap — the C
       ?.variable,
     "astryx.calendar.gridGap",
   );
-  assert.equal(grid.children.length, CALENDAR_WEEK_COUNT, "fixture is 3 weeks");
+  assert.equal(grid.children.length, CALENDAR_WEEK_COUNT, "source default is 6 weeks");
+  const header = variant.children.find(
+    (child: any) => child.role === "calendar/header",
+  );
+  assert.ok(header, "header carries nav + caption");
+  assert.equal(header.layout.primaryAxisAlign, "space-between");
+  assert.equal(
+    header.children.some((child: any) => child.role === "calendar/nav/previous"),
+    true,
+  );
+  assert.equal(
+    header.children.some((child: any) => child.role === "calendar/nav/next"),
+    true,
+  );
 });
 
 test("day instances compile the already-named dayCell-size box — the Calendar live v28 class", () => {
@@ -252,14 +277,16 @@ test("each week in the grid carries its OWN days and states", () => {
     for (const day of days) assert.equal(day.kind, "instance");
   }
 
-  // The month the fixture pins: outside days lead, today lands, selection lands.
+  // April 2026 capture: outside days lead and trail, selected 15 lands.
+  // Today is not in this capture month (source would not paint a today ring).
   const states = grid.children.flatMap((week: any) =>
     week.children
       .filter((child: any) => String(child.role).includes("/day/"))
       .map((day: any) => day.properties.State),
   );
-  assert.equal(states.filter((s: string) => s === "outside").length, 6);
-  assert.equal(states.filter((s: string) => s === "today").length, 1);
+  assert.equal(states.length, 42, "6×7 source default cells");
+  assert.equal(states.filter((s: string) => s === "outside").length, 12);
+  assert.equal(states.filter((s: string) => s === "today").length, 0);
   assert.equal(states.filter((s: string) => s === "selected").length, 1);
 });
 
@@ -359,32 +386,66 @@ test("astryx carries the today ring rather than dropping it", () => {
   const selected = daySet.children.find(
     (child: any) => child.role === "calendar/day/selected",
   );
-  assert.equal(today.strokes?.length, 1, "today carries a ring");
-  assert.equal(today.strokes[0].weight, 1);
-  assert.equal(today.strokes[0].align, "inside");
-  assert.equal(today.fills[0].color, "#00000000", "today has no background");
-  assert.equal(selected.strokes, undefined, "selected carries no ring");
+  const todayButton = today.children.find(
+    (child: any) => child.role === "calendar/day/button",
+  );
+  const selectedButton = selected.children.find(
+    (child: any) => child.role === "calendar/day/button",
+  );
+  assert.equal(todayButton.strokes?.length, 1, "today carries a ring");
+  assert.equal(todayButton.strokes[0].weight, 1);
+  assert.equal(todayButton.strokes[0].align, "inside");
+  assert.equal(todayButton.fills[0].color, "#00000000", "today has no background");
+  assert.equal(todayButton.layout.width.value, 28);
+  assert.equal(todayButton.cornerRadius.topLeft, 14);
+  assert.equal(selectedButton.strokes, undefined, "selected carries no ring");
   assert.equal(
-    selected.fills[0].color,
+    selectedButton.fills[0].color,
     "#0064e0ff",
-    "selected carries the accent background",
+    "selected carries the vendored accent background",
+  );
+  assert.notEqual(
+    selectedButton.fills[0].color,
+    "#262626ff",
+    "must not use docs-site theme accent",
   );
 });
 
 test("what calendar@1 cannot carry is receipted, not dropped", () => {
   const envelope: any = compileCalendarRecipe(astryxCalendarInstance);
-  assert.equal(envelope.receipts.length, 11);
+  assert.equal(envelope.receipts.length, 7);
 
   const paths = envelope.receipts.map((receipt: any) => receipt.fact.path);
   assert.ok(paths.some((path: string) => path.includes("hasOutsideDays")));
   assert.ok(paths.some((path: string) => path.includes("color-tokens")));
   assert.ok(paths.some((path: string) => path.includes("daysGrid")));
-  assert.ok(paths.some((path: string) => path.includes("dayCellStyles/day")));
   assert.ok(paths.some((path: string) => path.includes("dayOutside")));
   assert.ok(paths.some((path: string) => path.includes("background")));
-  assert.ok(paths.some((path: string) => path.includes("hasVariableRowCount")));
-  assert.ok(paths.some((path: string) => path.includes("header/nav")));
   assert.ok(paths.some((path: string) => path.includes("dayName/paddingBottom")));
+  assert.equal(
+    paths.some((path: string) => path.includes("hasVariableRowCount")),
+    false,
+    "6-row default is now carried",
+  );
+  assert.equal(
+    paths.some((path: string) => path.includes("header/nav")),
+    false,
+    "nav chevrons are now carried",
+  );
+  assert.equal(
+    paths.some((path: string) => path.includes("dayCellStyles/day#")),
+    false,
+    "28px circle is now carried",
+  );
+  assert.equal(
+    paths.some(
+      (path: string) =>
+        path.endsWith("dayCellStyles/day") ||
+        path.includes("dayCellStyles/day/"),
+    ),
+    false,
+    "28px circle path is not receipted",
+  );
 
   const byReason = Object.fromEntries(
     envelope.receipts.map((receipt: any) => [receipt.reason, receipt]),
