@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v32$/);
+  assert.match(writer.runIdentity, /-calendar-v33$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -255,6 +255,17 @@ test("the writer does not refuse FILL text for pre-parent intrinsic — the Cale
   assert.match(
     geometry,
     /if\(ir\.width\.mode!=="fill"&&\(node\.characters\.trim\(\)\.length===0/,
+  );
+});
+
+test("the writer binds compile-carried layout.minWidth — the Calendar live v32 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(writer.code, /CALENDAR-WRITER-BIND-LAYOUT-MIN-WIDTH/);
+  assert.match(writer.code, /CALENDAR-V32-IDENTITY-REUSE/);
+  assert.match(writer.code, /4604bbfe-calendar-v32/);
+  assert.match(
+    writer.code,
+    /bindFloat\(node,"minWidth",bindingFor\(ir,"layout.minWidth"\)\)/,
   );
 });
 
