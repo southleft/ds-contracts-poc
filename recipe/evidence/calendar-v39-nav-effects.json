@@ -1,0 +1,48 @@
+{
+  "artifactVersion": "calendar-v39-nav-effects-v1",
+  "status": "failed closed; mint did not stay",
+  "antecedent": {
+    "prepare": "8128b343480e648f9f5c5b797e5feefa9a237a0e",
+    "authorize": "44013f556"
+  },
+  "runIdentity": "4604bbfe-calendar-v39",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": { "accepted": true, "pageId": "180:59554", "collectionId": "VariableCollectionId:180:59556", "cleaned": true },
+  "restore": { "accepted": true },
+  "extract": {
+    "mcpSucceeded": true,
+    "navCornerRadiusOmitHeld": true,
+    "navClipsContentOmitHeld": true,
+    "navIconCompileOrderHeld": true,
+    "collapseRefused": "unsupported structural edit at $.children[0].children[0].children[0].children[0].effects; calendar@1 accepts only the declared designer edit surface",
+    "brokerCleanupAccepted": true
+  },
+  "measured": {
+    "collapseNode": "calendar/nav/previous",
+    "refusedField": "effects",
+    "compileNavEffects": "absent",
+    "liveNavEffects": [],
+    "liveNavStrokes": [],
+    "captureMonth": "April 2026",
+    "grids": { "on": 6, "off": 6 },
+    "captionFillWidth": 0,
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "doNotRestartAttempt2AsIs": true,
+  "nextTeaching": "extract host omits observed empty effects on calendar/nav/previous and calendar/nav/next frames because compile nav frames omit effects",
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}
