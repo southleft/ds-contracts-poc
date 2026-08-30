@@ -121,6 +121,8 @@ export const CALENDAR_LIVE_V1_NAV_ICON_BINDING_COMPILE_ORDER_MARKER =
   "CALENDAR-HOST-NAV-ICON-BINDING-COMPILE-ORDER";
 export const CALENDAR_LIVE_V1_NAV_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-NAV-CLIPS-CONTENT-OMITTED";
+export const CALENDAR_LIVE_V1_NAV_CORNER_RADIUS_OMITTED_MARKER =
+  "CALENDAR-HOST-NAV-CORNER-RADIUS-OMITTED";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1236,6 +1238,19 @@ const omitNavClipsContent = <T extends { clipsContent?: unknown }>(
   return rest as T;
 };
 
+const omitNavCornerRadius = <T extends { cornerRadius?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void CALENDAR_LIVE_V1_NAV_CORNER_RADIUS_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (!role || !NAV_BUTTON_ROLE.test(role) || scene.type !== "FRAME")
+    return frame;
+  if (frame.cornerRadius === undefined) return frame;
+  const { cornerRadius: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitHeaderBodyCornerRadius = <T extends { cornerRadius?: unknown }>(
   scene: SceneNodeSnapshot,
   frame: T,
@@ -1455,34 +1470,37 @@ export function sceneToNormalizedIr(
             scene,
             omitHeaderBodyEffects(
               scene,
-              omitWeekFrameCornerRadius(
+              omitNavCornerRadius(
                 scene,
-                omitHeaderBodyCornerRadius(
+                omitWeekFrameCornerRadius(
                   scene,
-                  omitNavClipsContent(
+                  omitHeaderBodyCornerRadius(
                     scene,
-                    omitWeekFrameClipsContent(
+                    omitNavClipsContent(
                       scene,
-                      omitHeaderBodyClipsContent(
+                      omitWeekFrameClipsContent(
                         scene,
-                        omitSetStrokes(
+                        omitHeaderBodyClipsContent(
                           scene,
-                          omitSetEffects(
+                          omitSetStrokes(
                             scene,
-                            omitSetCornerRadius(
+                            omitSetEffects(
                               scene,
-                              omitSetClipsContent(scene, {
-                                ...common,
-                                layout: sceneLayout(scene),
-                                fills,
-                                ...(strokes === undefined ? {} : { strokes }),
-                                ...(effects === undefined ? {} : { effects }),
-                                ...(scene.cornerRadius === undefined
-                                  ? {}
-                                  : { cornerRadius: scene.cornerRadius }),
-                                clipsContent: scene.clipsContent ?? false,
-                                children,
-                              }),
+                              omitSetCornerRadius(
+                                scene,
+                                omitSetClipsContent(scene, {
+                                  ...common,
+                                  layout: sceneLayout(scene),
+                                  fills,
+                                  ...(strokes === undefined ? {} : { strokes }),
+                                  ...(effects === undefined ? {} : { effects }),
+                                  ...(scene.cornerRadius === undefined
+                                    ? {}
+                                    : { cornerRadius: scene.cornerRadius }),
+                                  clipsContent: scene.clipsContent ?? false,
+                                  children,
+                                }),
+                              ),
                             ),
                           ),
                         ),
