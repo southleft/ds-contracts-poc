@@ -1,0 +1,95 @@
+{
+  "artifactVersion": "calendar-live-v26-attempt-1-v1",
+  "status": "failed closed at writer; leftover page 179:54639 deleted; mint did not stay; V23 page 173:53929 left; siblings left",
+  "authorizationCommit": "40b98f8b546cf1f2988cfe21187a1455d454c40e",
+  "codeCommit": "40b98f8b546cf1f2988cfe21187a1455d454c40e",
+  "antecedentCommit": "9c598d7b1f92a035b71ad192393f590501e2e69d",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v26",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "4ca9c82a-58e8-454e-8526-32cd04002d89",
+    "attempt": 1,
+    "authorizationSha256": "50e06659ce90b79ad6ba84b05e69b7e84ad7bbf9c7c758141b0419c31294fd9f",
+    "programSha256": "840ef6b8c84c7c1fcf4593c337d9db992b33c3c942064ddc306ae2c563ec162a",
+    "requestBindingSha256": "f29abf53339fdd681c5a7f5f06ea33a0d199a1fec1b40b58215478d8bc962823",
+    "requestSha256": "22b792830b3f17f3a660bb94254b5ba3dec905498937def59710b599f6a09b39"
+  },
+  "teaching": {
+    "one": "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-APPEND",
+    "cleared": false,
+    "blockedOn": "CALENDAR-DAY-LABEL-MISMATCH:calendar/day-instance/1",
+    "namedCause": "Day Label is issued and bound before week/month instances exist. Instance/0 Label=26 matches the set default and passes. Instance/1 is named 27 but Label property and characters stay 26 after setProperties({[dayLabelProperty]: Label}) and text.characters = Label in the same tick as the bind. After the leftover sat, the same setProperties wrote 27 and painted. Assigning characters on a bound Label TEXT can revert the issued property to the default (set 42, assign 26 → property 26). Do not invent a font. Do not invent FIXED."
+  },
+  "writer": {
+    "accepted": false,
+    "refusedClass": "CALENDAR-DAY-LABEL-MISMATCH:calendar/day-instance/1",
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v26",
+    "pageId": "179:54639",
+    "leftoverDeleted": true,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true,
+    "v23PageUntouched": true
+  },
+  "measuredBeforeCleanup": {
+    "daySetId": "179:54669",
+    "ownedDayLabels": {
+      "font": { "family": "Roboto", "style": "Regular" },
+      "chars": "26",
+      "w": 16,
+      "h": 16,
+      "readable": true,
+      "cell": "32x32 default / today ring / selected blue / outside"
+    },
+    "weekNumber": {
+      "chars": "31",
+      "w": 32,
+      "h": 16,
+      "font": { "family": "Roboto", "style": "Regular" }
+    },
+    "dayInstance1": {
+      "name": "calendar/day-instance/1 :: 27",
+      "labelPropertyValue": "26",
+      "textCharacters": "26",
+      "setPropertiesAfterAppendInSameTickAsBind": false,
+      "setPropertiesAfterLeftoverSat": true
+    }
+  },
+  "screenshots": {
+    "v23Page": "empty shells / 1px slivers; matches TJ hard-fail; numbers visible: no",
+    "v26LeftoverDaySet": "readable 26 in default / today / selected / outside 32x32 cells; numbers visible: yes",
+    "v26LeftoverPage": "week mint incomplete; week number 31 painted; no month grid"
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "signedCleanupIssued": false,
+    "leftoverPageDeleted": true,
+    "leftoverPageId": "179:54639",
+    "leftoverCollectionDeleted": "Recipe Calendar / 19be1c96-calendar-v26 / astryx-calendar-reviewed-v1",
+    "v23PagePresent": true,
+    "siblingsPresent": {
+      "input": "115:295378",
+      "combobox": "163:35981",
+      "table": "173:48924",
+      "button": "85:6781"
+    }
+  },
+  "nextTeaching": "Issue the day Label property but do not bind day-label TEXT until after week/month instances already carry source characters. Then bind the mains and setProperties each already-appended instance to the same source Label so the bind does not snap them to the default. Do not characters-assign after the bind. Do not invent a font. Do not invent FIXED. Probe stays characters-only.",
+  "doNotInventCalendarGrade": true,
+  "productV1Complete": false
+}
