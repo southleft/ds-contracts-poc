@@ -1842,6 +1842,58 @@ Data Table live mint and no Data Table human grade.
 | E3 | Keep publishing 117/170 recognisable and 39/170 usable-on-all-four comparisons. Recipe four vs the same measurement. Do not drop legacy numbers. | `recipe:regression:census` / census recount still report both denominators. |
 | E4 | Reconcile `docs/26-v1-definition.md` `V1-CLASS-01` / `V1-CLASS-02` with recipe capability. Docs/26 currently lists combobox/table/calendar as not v1-supported. User demand is that they **are** in v1. Resolve by proving them and then citing the green gates; do not delete or weaken the bar first. | Docs/26 rows change only when the named gate is green on a commit. |
 
+#### E4 proposal — an additive class, not a reshuffle (drafted 2026-08-29, NOT applied)
+
+`docs/26` has not been edited and must not be until a named gate is green on a
+commit (§12). This is the proposal for when that day comes.
+
+**The problem with simply moving names.** `V1-CLASS-01` admits an archetype on
+the strength of the committed coverage table plus
+`npm run capability:fresh && npm run extract:computed:drift`. That is the
+*pre-pivot* proof regime: capture, promote, computed-drift. The recipe-IR
+archetypes are not proven that way at all. Moving `select / combobox` or
+`table / data-grid` from `V1-CLASS-02` into `V1-CLASS-01` would cite a gate that
+never measured them — a silent reclassification, the exact thing §F item 5
+forbids — even though the archetype may genuinely be proven.
+
+**The proposal.** Add a *new* requirement row rather than editing either list:
+
+> **V1-CLASS-03** — An archetype may additionally be claimed as v1-supported on
+> the **recipe path** when all four are true on the release commit: (a) its
+> offline recipe gate is green (`npm run recipe:<archetype>:check`); (b) a live
+> Scratch mint **stayed**, with the RECORD naming its page and set node ids;
+> (c) an **attributable human grade** from the owner cites that page; and (d)
+> the archetype's entry in `recipe/evidence/status-index.json` reports
+> `overallSuccess: true`. An archetype meeting `V1-CLASS-03` is listed with the
+> gate and the commit that proved it. Failing any of the four, it stays in
+> `V1-CLASS-02`.
+
+This is **additive**: `V1-CLASS-01` and `V1-CLASS-02` keep their current text and
+their current regime, nothing is weakened, and the bar goes *up* — `V1-CLASS-03`
+demands a live mint and a human grade, neither of which `V1-CLASS-01` requires.
+
+**Who qualifies today: nobody.** Measured 2026-08-29 —
+
+| archetype | (a) offline gate | (b) mint stayed | (c) human grade | (d) `overallSuccess` |
+| --- | --- | --- | --- | --- |
+| Button | green | historical page `85:6781` | **pending** | false |
+| Input / Field | green | **yes**, `115:295378` | **passed** | false |
+| Combobox | green | **yes**, `163:35981` | **passed** | false |
+| Data Table | green | no | none | false |
+| Calendar | green | no (named refusal) | none | false |
+
+Input and Combobox satisfy (a), (b) and (c) and fail only (d) — and (d) is false
+because `overallSuccess` has deliberately never been flipped for any archetype.
+So the first real work this proposal unlocks is deciding what flipping
+`overallSuccess` requires, which is an owner call rather than a gate.
+
+**What must NOT happen:** editing `V1-CLASS-02` to delete `select/combobox` or
+`table/data-grid` before `V1-CLASS-03` exists and is satisfied. Calendar is not
+named in docs/26 at all — it is covered by the "never-attempted or absent"
+catch-all and by the post-v1 limitations register entry naming date pickers, and
+both stay accurate while its live mint is a named refusal.
+
+
 ### F · v1 binary checklist
 
 v1 is complete only when every row is actually true:
