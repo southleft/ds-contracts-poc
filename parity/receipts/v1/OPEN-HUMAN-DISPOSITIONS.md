@@ -2,7 +2,21 @@
 
 Prepared 2026-08-29.
 
-> **Correction, same day.** This page first said these two rows "are the whole of
+> **Second update, same day — and this one is good news.** Data Table minted
+> live at **v32** and the mint **stayed** (page `173:48924` on Scratch), which
+> closed the four remaining archetype rows. `v1:readiness` on commit `8fab2dff`
+> now reports **21 of 22 rows green**, and the single RED row is `V1-REL-01` —
+> whose only remaining causes are the two rows on this page. So the claim the
+> correction below retracted is now, at last, true: **closing AUD-U17 and
+> AUD-U22 turns `V1-REL-01` green, and with it the whole 22-row table.**
+>
+> That does not by itself make v1 releasable — Table's human signoff is still
+> yours to give, Calendar has an offline proof and a named refusal rather than a
+> live mint, and Gate 2 (the per-column width model) is an open authoring
+> decision now plainly visible in the MUI root. But these two rows are no longer
+> sitting underneath a pile of other blockers. They are the last automated gate.
+
+> **Correction, earlier the same day.** This page first said these two rows "are the whole of
 > `V1-REL-01` being RED". **That was wrong**, and it was wrong because I read the
 > committed `audit-ledger.json` instead of re-running the gate. A full
 > `v1:readiness` on the current commit reports **GREEN 17 · RED 5**, not 20/2 —
@@ -109,11 +123,21 @@ decision.
 
 ## What this unblocks, and what it does not
 
-Closing both rows does **not** turn `V1-REL-01` green — seven other audit rows
-are red on the current commit (see the correction at the top). And it does not
-make v1 releasable either:
-the recipe-IR archetypes are the substance of v1 and they are still open —
-Data Table is blocked on an authoring decision, Calendar carries two named
-refusals, and Button's signoff is pending. These two rows are simply the part of
-the blocker list that has nothing to do with the pivot and has been sitting RED
-underneath it.
+Closing both rows **does** now turn `V1-REL-01` green, and it is the last row
+that is not: readiness on `8fab2dff` is 21 of 22. That was not true when this
+page was written — seven other audit rows were red then — and the Table live
+mint at v32 is what changed it.
+
+It still does not make v1 releasable. Three things are open and none of them is
+automatable:
+
+- **Table's human signoff.** The mint stays and the probe passes 20 of 20 cells,
+  but a live mint is not a grade. `humanSignoff` is `pending` and I have not
+  invented one.
+- **Gate 2, the per-column width model.** MUI declares no cell min-width, so its
+  columns are ragged by 32px, and at v32 that is visible on the canvas rather
+  than only in a measurement. Choosing a column model is authoring.
+- **Calendar** has an offline proof and a named refusal, not a live mint.
+
+These two rows are simply the part of the blocker list that has nothing to do
+with the pivot, and they are now the only part still holding the gate.
