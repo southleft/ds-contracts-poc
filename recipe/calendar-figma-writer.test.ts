@@ -25,7 +25,7 @@ test("the writer plans a complete calendar source without touching Figma", () =>
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Calendar \//);
-  assert.match(writer.runIdentity, /-calendar-v27$/);
+  assert.match(writer.runIdentity, /-calendar-v28$/);
 
   const plan = writer.sourcePlans[0]!;
   assert.equal(plan.instanceCount, CALENDAR_FIGMA_INSTANCES_PER_SOURCE);
@@ -157,6 +157,8 @@ test("the writer applies instance Label via characters — the Calendar live v3 
   assert.match(writer.code, /19be1c96-calendar-v25/);
   assert.match(writer.code, /CALENDAR-V26-IDENTITY-REUSE/);
   assert.match(writer.code, /19be1c96-calendar-v26/);
+  assert.match(writer.code, /CALENDAR-V27-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v27/);
 });
 
 test("the writer writes instance Label through the set-issued property after a painted fallback — the Calendar live v24 class", () => {
@@ -210,6 +212,24 @@ test("the writer binds day Label after instance characters — the Calendar live
   );
 });
 
+test("the writer carries the named dayCell-size box on day instances — the Calendar live v27 class", () => {
+  const writer = emitCalendarFigmaWriter([input()]);
+  assert.match(writer.code, /CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE/);
+  assert.match(writer.code, /CALENDAR-DAY-INSTANCE-HUG/);
+  const instanceSizing = writer.code.slice(
+    writer.code.indexOf("CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE"),
+    writer.code.indexOf("CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND"),
+  );
+  assert.match(instanceSizing, /layoutSizingHorizontal="FIXED"/);
+  assert.equal(
+    instanceSizing.includes('layoutSizingHorizontal="HUG"'),
+    false,
+    "stamping hug onto a FIXED dayCell-size instance is the V27 smashed-grid class",
+  );
+  assert.match(writer.code, /CALENDAR-V27-IDENTITY-REUSE/);
+  assert.match(writer.code, /19be1c96-calendar-v27/);
+});
+
 test("the writer hugs from post-character intrinsic and walks a zero-glyph named fallback — the Calendar live v23 class", () => {
   const writer = emitCalendarFigmaWriter([input()]);
   assert.match(writer.code, /CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC/);
@@ -230,7 +250,7 @@ test("the writer re-applies instance Label after append — the Calendar live v2
   assert.match(writer.code, /CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND/);
   assert.match(writer.code, /CALENDAR-DAY-LABEL-MISMATCH/);
   const afterAppend = writer.code.slice(
-    writer.code.indexOf("else applySizing(node,ir);"),
+    writer.code.indexOf("CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND"),
   );
   assert.match(afterAppend, /CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND/);
   assert.match(afterAppend, /text\.characters=ir\.properties\.Label/);

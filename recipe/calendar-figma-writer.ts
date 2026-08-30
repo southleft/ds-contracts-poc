@@ -68,6 +68,14 @@
  *     characters-assign after the bind (that can revert the override
  *     to the default). Do not invent FIXED. Probe stays characters-only.
  *
+ *  9. INSTANCE CARRIES THE NAMED DAY-CELL BOX. Calendar live v27 painted
+ *     day numbers, then week/month instances hug-collapsed to 16×16
+ *     (single-digit 8×16) because applySizing stamped compile hug onto
+ *     an instance whose main is already FIXED `dayCell-size` 32×32.
+ *     When instancing that main, do not stamp hug — carry the main's
+ *     already-named box. Do not invent a new px. Do not change day
+ *     label hug. Do not teach FIXED as a fill.
+ *
  * No live write happens here. This module builds a program string; executing it
  * requires a separate PREPARE / AUTHORIZE / attempt lineage.
  */
@@ -87,7 +95,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v27";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v28";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -114,6 +122,7 @@ export const FORBIDDEN_CALENDAR_V23_RUN_IDENTITY = "19be1c96-calendar-v23";
 export const FORBIDDEN_CALENDAR_V24_RUN_IDENTITY = "19be1c96-calendar-v24";
 export const FORBIDDEN_CALENDAR_V25_RUN_IDENTITY = "19be1c96-calendar-v25";
 export const FORBIDDEN_CALENDAR_V26_RUN_IDENTITY = "19be1c96-calendar-v26";
+export const FORBIDDEN_CALENDAR_V27_RUN_IDENTITY = "19be1c96-calendar-v27";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -444,6 +453,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v23")throw new Error("CALENDAR-V23-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v24")throw new Error("CALENDAR-V24-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v25")throw new Error("CALENDAR-V25-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v26")throw new Error("CALENDAR-V26-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v27")throw new Error("CALENDAR-V27-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -648,7 +658,16 @@ for(const source of PLAN.sources){
     tag(node,ir,ownershipKey);if(ir.kind!=="instance")applyPaints(node,ir);parent.appendChild(node);
     if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
     if(ir.kind==="frame"){applyLayout(node,ir);for(const [childIndex,child] of ir.children.entries())await render(child,node,ownershipKey+"/children/"+childIndex);applySizing(node,ir);}
-    else applySizing(node,ir);
+    else if(ir.kind==="instance"){
+      void "CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE";
+      const main=dayByState.get(ir.properties.State);
+      if(!main)throw new Error("CALENDAR-DAY-MAIN-ABSENT:"+ir.properties.State);
+      if(main.layoutSizingHorizontal!=="FIXED"||main.layoutSizingVertical!=="FIXED")throw new Error("CALENDAR-DAY-CELL-NOT-MEASURED:"+main.name);
+      node.resizeWithoutConstraints(main.width,main.height);
+      node.layoutSizingHorizontal="FIXED";
+      node.layoutSizingVertical="FIXED";
+      if(node.layoutSizingHorizontal!=="FIXED"||node.layoutSizingVertical!=="FIXED"||node.width!==main.width||node.height!==main.height)throw new Error("CALENDAR-DAY-INSTANCE-HUG:"+ir.role);
+    }else applySizing(node,ir);
     if(ir.kind==="instance"){
       void "CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND";
       void "CALENDAR-WRITER-INSTANCE-CHARACTERS-BEFORE-LABEL-BIND";
@@ -659,7 +678,8 @@ for(const source of PLAN.sources){
         if(text.characters!==ir.properties.Label)text.characters=ir.properties.Label;
         if(text.characters!==ir.properties.Label)throw new Error("CALENDAR-DAY-LABEL-MISMATCH:"+ir.role);
       }
-      instanceLabelWrites.push({node,label:ir.properties.Label});
+      const main=dayByState.get(ir.properties.State);
+      instanceLabelWrites.push({node,label:ir.properties.Label,boxWidth:main.width,boxHeight:main.height});
     }
     if(ir.kind==="text"){
       bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
@@ -721,6 +741,10 @@ for(const source of PLAN.sources){
       if(text.fontName!==figma.mixed)await figma.loadFontAsync(text.fontName);
     }
     entry.node.setProperties({[dayLabelProperty]:entry.label});
+    void "CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE";
+    entry.node.resizeWithoutConstraints(entry.boxWidth,entry.boxHeight);
+    entry.node.layoutSizingHorizontal="FIXED";
+    entry.node.layoutSizingVertical="FIXED";
     for(const text of entry.node.findAllWithCriteria({types:["TEXT"]})){
       if(sceneRole(text.name)!=="calendar/day/label")continue;
       if(text.characters!==entry.label)throw new Error("CALENDAR-DAY-LABEL-MISMATCH:"+entry.node.name);
@@ -875,6 +899,16 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v25 run identity");
   if (runtime.includes("CALENDAR-V26-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v26 run identity");
+  if (runtime.includes("CALENDAR-V27-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v27 run identity");
+  if (
+    runtime.includes("CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE") ===
+      false ||
+    runtime.includes("CALENDAR-DAY-INSTANCE-HUG") === false
+  )
+    throw new TypeError(
+      "calendar writer must carry the named dayCell-size box on day instances instead of stamping hug",
+    );
   if (
     runtime.includes("CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC") ===
       false ||
