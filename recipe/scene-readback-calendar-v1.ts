@@ -135,6 +135,8 @@ export const CALENDAR_LIVE_V1_DAY_BUTTON_CLIPS_CONTENT_OMITTED_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-CLIPS-CONTENT-OMITTED";
 export const CALENDAR_LIVE_V1_DAY_BUTTON_EFFECTS_OMITTED_MARKER =
   "CALENDAR-HOST-DAY-BUTTON-EFFECTS-OMITTED";
+export const CALENDAR_LIVE_V1_DAY_BUTTON_EMPTY_STROKES_OMITTED_MARKER =
+  "CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKES-OMITTED";
 export const CALENDAR_LIVE_V1_CELL_INSTANCE_BINDING_EXTRAS_MARKER =
   "CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED";
 export const CALENDAR_LIVE_V1_ROW_INSTANCE_BINDING_EXTRAS_MARKER =
@@ -1330,6 +1332,18 @@ const omitDayButtonEffects = <T extends { effects?: unknown }>(
   return rest as T;
 };
 
+const omitDayButtonEmptyStrokes = <T extends { strokes?: unknown }>(
+  scene: SceneNodeSnapshot,
+  frame: T,
+): T => {
+  void CALENDAR_LIVE_V1_DAY_BUTTON_EMPTY_STROKES_OMITTED_MARKER;
+  const role = sceneRole(scene);
+  if (role !== "calendar/day/button" || scene.type !== "FRAME") return frame;
+  if (!Array.isArray(frame.strokes) || frame.strokes.length > 0) return frame;
+  const { strokes: _omitted, ...rest } = frame;
+  return rest as T;
+};
+
 const omitHeaderBodyCornerRadius = <T extends { cornerRadius?: unknown }>(
   scene: SceneNodeSnapshot,
   frame: T,
@@ -1568,6 +1582,7 @@ export function sceneToNormalizedIr(
     frame = omitHeaderBodyStrokes(scene, frame);
     frame = omitWeekFrameStrokes(scene, frame);
     frame = omitNavStrokes(scene, frame);
+    frame = omitDayButtonEmptyStrokes(scene, frame);
     frame = omitDayVariantStrokes(scene, frame);
     if (scene.type === "FRAME") result = { kind: "frame", ...frame };
     else if (scene.type === "COMPONENT") {

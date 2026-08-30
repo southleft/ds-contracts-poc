@@ -95,7 +95,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v45";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v46";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -141,6 +141,7 @@ export const FORBIDDEN_CALENDAR_V41_RUN_IDENTITY = "4604bbfe-calendar-v41";
 export const FORBIDDEN_CALENDAR_V42_RUN_IDENTITY = "4604bbfe-calendar-v42";
 export const FORBIDDEN_CALENDAR_V43_RUN_IDENTITY = "4604bbfe-calendar-v43";
 export const FORBIDDEN_CALENDAR_V44_RUN_IDENTITY = "4604bbfe-calendar-v44";
+export const FORBIDDEN_CALENDAR_V45_RUN_IDENTITY = "4604bbfe-calendar-v45";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -489,6 +490,7 @@ if(PLAN.runIdentity==="4604bbfe-calendar-v41")throw new Error("CALENDAR-V41-IDEN
 if(PLAN.runIdentity==="4604bbfe-calendar-v42")throw new Error("CALENDAR-V42-IDENTITY-REUSE");
 if(PLAN.runIdentity==="4604bbfe-calendar-v43")throw new Error("CALENDAR-V43-IDENTITY-REUSE");
 if(PLAN.runIdentity==="4604bbfe-calendar-v44")throw new Error("CALENDAR-V44-IDENTITY-REUSE");
+if(PLAN.runIdentity==="4604bbfe-calendar-v45")throw new Error("CALENDAR-V45-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -974,6 +976,8 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v43 run identity");
   if (runtime.includes("CALENDAR-V44-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v44 run identity");
+  if (runtime.includes("CALENDAR-V45-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v45 run identity");
   if (runtime.includes("CALENDAR-WRITER-BIND-LAYOUT-MIN-WIDTH") === false)
     throw new TypeError(
       "calendar writer must bind compile-carried layout.minWidth",
