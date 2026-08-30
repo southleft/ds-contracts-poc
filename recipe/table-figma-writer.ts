@@ -13,7 +13,7 @@ import {
 
 export const TABLE_FIGMA_NAMESPACE = "ds.contracts.table.recipe.v1";
 export const TABLE_FIGMA_WRITER_VERSION = 1;
-export const TABLE_FIGMA_RUN_SUFFIX = "table-v30";
+export const TABLE_FIGMA_RUN_SUFFIX = "table-v31";
 export const FORBIDDEN_TABLE_V1_RUN_IDENTITY = "83a27edf-82d19508-table-v1";
 export const FORBIDDEN_TABLE_V2_RUN_IDENTITY = "cc811f47-82d19508-table-v2";
 export const FORBIDDEN_TABLE_V3_RUN_IDENTITY = "cc811f47-82d19508-table-v3";

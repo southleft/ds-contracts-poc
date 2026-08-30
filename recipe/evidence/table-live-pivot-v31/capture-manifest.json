@@ -1,0 +1,411 @@
+{
+  "artifactVersion": "table-live-v31-capture-manifest-v1",
+  "status": "planned only; authorization and capture pending",
+  "transport": {
+    "encoding": "one PNG base64 payload per signed response",
+    "cellsPerRequest": 1,
+    "requests": 20,
+    "rejectTruncationDuplicatesMissing": true,
+    "sampleReduction": false,
+    "legacyVisualComparison": false
+  },
+  "cells": [
+    {
+      "index": 0,
+      "cellKey": "first-party/table/compact",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "table",
+      "axes": {
+        "Density": "compact"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "table",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 464,
+        "height": 290
+      }
+    },
+    {
+      "index": 1,
+      "cellKey": "first-party/table/comfortable",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "table",
+      "axes": {
+        "Density": "comfortable"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "table",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 464,
+        "height": 338
+      }
+    },
+    {
+      "index": 2,
+      "cellKey": "first-party/row/compact/default",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "compact",
+        "State": "default"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "row",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 464,
+        "height": 70
+      }
+    },
+    {
+      "index": 3,
+      "cellKey": "first-party/row/compact/selected",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "compact",
+        "State": "selected"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "row",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 464,
+        "height": 70
+      }
+    },
+    {
+      "index": 4,
+      "cellKey": "first-party/row/comfortable/default",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "comfortable",
+        "State": "default"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "row",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 464,
+        "height": 86
+      }
+    },
+    {
+      "index": 5,
+      "cellKey": "first-party/row/comfortable/selected",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "comfortable",
+        "State": "selected"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "row",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 464,
+        "height": 86
+      }
+    },
+    {
+      "index": 6,
+      "cellKey": "first-party/cell/compact/header",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "compact",
+        "Kind": "header"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "cell",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 224,
+        "height": 70
+      }
+    },
+    {
+      "index": 7,
+      "cellKey": "first-party/cell/compact/body",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "compact",
+        "Kind": "body"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "cell",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 224,
+        "height": 70
+      }
+    },
+    {
+      "index": 8,
+      "cellKey": "first-party/cell/comfortable/header",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "comfortable",
+        "Kind": "header"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "cell",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 224,
+        "height": 86
+      }
+    },
+    {
+      "index": 9,
+      "cellKey": "first-party/cell/comfortable/body",
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "comfortable",
+        "Kind": "body"
+      },
+      "strata": {
+        "source": "first-party",
+        "kind": "cell",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 224,
+        "height": 86
+      }
+    },
+    {
+      "index": 10,
+      "cellKey": "mui/table/compact",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "table",
+      "axes": {
+        "Density": "compact"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "table",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 112,
+        "height": 302
+      }
+    },
+    {
+      "index": 11,
+      "cellKey": "mui/table/comfortable",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "table",
+      "axes": {
+        "Density": "comfortable"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "table",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 112,
+        "height": 362
+      }
+    },
+    {
+      "index": 12,
+      "cellKey": "mui/row/compact/default",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "compact",
+        "State": "default"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "row",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 112,
+        "height": 74
+      }
+    },
+    {
+      "index": 13,
+      "cellKey": "mui/row/compact/selected",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "compact",
+        "State": "selected"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "row",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 112,
+        "height": 74
+      }
+    },
+    {
+      "index": 14,
+      "cellKey": "mui/row/comfortable/default",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "comfortable",
+        "State": "default"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "row",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 112,
+        "height": 94
+      }
+    },
+    {
+      "index": 15,
+      "cellKey": "mui/row/comfortable/selected",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "row",
+      "axes": {
+        "Density": "comfortable",
+        "State": "selected"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "row",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 112,
+        "height": 94
+      }
+    },
+    {
+      "index": 16,
+      "cellKey": "mui/cell/compact/header",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "compact",
+        "Kind": "header"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "cell",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 112,
+        "height": 74
+      }
+    },
+    {
+      "index": 17,
+      "cellKey": "mui/cell/compact/body",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "compact",
+        "Kind": "body"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "cell",
+        "density": "compact"
+      },
+      "frame": {
+        "width": 112,
+        "height": 74
+      }
+    },
+    {
+      "index": 18,
+      "cellKey": "mui/cell/comfortable/header",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "comfortable",
+        "Kind": "header"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "cell",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 112,
+        "height": 94
+      }
+    },
+    {
+      "index": 19,
+      "cellKey": "mui/cell/comfortable/body",
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "kind": "cell",
+      "axes": {
+        "Density": "comfortable",
+        "Kind": "body"
+      },
+      "strata": {
+        "source": "mui",
+        "kind": "cell",
+        "density": "comfortable"
+      },
+      "frame": {
+        "width": 112,
+        "height": 94
+      }
+    }
+  ],
+  "cellsSha256": "e5b8c7139003901827abbae91df0599374dd4f5a04ddac699911c34a3c086f18"
+}
