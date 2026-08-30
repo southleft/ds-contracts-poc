@@ -2011,7 +2011,7 @@
   },
   "table": {
     "overallSuccess": false,
-    "status": "live-v30 attempt 1 failed closed at the WRITER STEP by my own measurement defect: the set-sizing fix read each variants width at defer time, when the variant had no content yet, so the set was still minted at Figmas 100px default; the width now comes from walking the FILL subtree down to the hug cells that actually carry a measurement, gated in the mock at 300px; product v1 incomplete",
+    "status": "live-v31 attempt 1 failed closed at the WRITER STEP on ordering: the set was resized while it still hugged, so Figma undid the resize and the later counterAxisSizingMode=FIXED pinned the 100px default it had all along; the walk down to the hug cells was correct and measures 570px on the canvas; the writer now pins the axis first and READS BACK its own resize, refusing TABLE-SET-WIDTH-NOT-APPLIED rather than minting a table whose cells fall outside the box; product v1 incomplete",
     "humanSignoff": "pending",
     "liveFigma": false,
     "humanGradeInvented": false,
@@ -2606,7 +2606,7 @@
       "nextTeaching": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
     },
     "blockers": [
-      "Table live v30 attempt 1 failed closed before the probe; do not restart v30 attempt 2 as-is",
+      "Table live v31 attempt 1 failed closed before the probe; do not restart v31 attempt 2 as-is",
       "OPEN HUMAN GATE: table@1 has no per-column width model (Gate 2). Gate 1 (hug vs fill) is ANSWERED by both sources declaring width:100%.",
       "no live mint",
       "no human grade",
@@ -3724,6 +3724,24 @@
         "caughtOfflineAfterwards": "the writer mock refused TABLE-SET-CONTENT-WIDTH-UNMEASURED on table/row-instance/0, which exposed a second defect -- mock instances did not inherit their main component's auto-layout the way real instances do"
       },
       "nextTeaching": "the set width is computed by walking the FILL subtree to the first node that is not FILL: a horizontal row sums its children plus gaps and padding, a vertical stack takes the widest plus padding, and the recursion bottoms out on the hug cells"
+    },
+    "liveV31": {
+      "attempt1": {
+        "status": "failed-closed-at-writer-ordering",
+        "writerAccepted": true,
+        "restoreRun": false,
+        "extractRun": false,
+        "probeRun": false,
+        "mintStayed": false,
+        "doNotRestartV31Attempt2": true,
+        "defect": "mine: set.resizeWithoutConstraints ran while the set still hugged its children, so Figma undid it immediately; counterAxisSizingMode was pinned FIXED afterwards, which fixed the width the hug had produced",
+        "measuredLive": "set 100px and counterAxisSizingMode already FIXED, proving the new code ran and the resize alone was the part that did not stick",
+        "walkVerifiedCorrect": "the descent to the hug cells is right: header is HORIZONTAL over three 120px hug cell instances, and a row adds three 120px cells plus three flow-positioned owned labels at 89/79/42, so a row measures 570px and a variant 570px",
+        "ownedLabelsAreFlowChildren": "table/row/owned-cell-label/0..2 report layoutPositioning AUTO, so Figma counts them in the row's width; they are not absolute overlays",
+        "cleanup": "signed cleanup executed, status cleanup-complete",
+        "mockDidNotCatchIt": "the writer mock reported a 300px set even with the wrong ordering, because it does not re-hug after a resize; the gate that works on both is the writer reading back its own resize"
+      },
+      "nextTeaching": "pin counterAxisSizingMode FIXED before resizing, then read set.width back and throw TABLE-SET-WIDTH-NOT-APPLIED if the resize did not stick"
     }
   },
   "input": {

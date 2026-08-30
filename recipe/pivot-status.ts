@@ -5438,7 +5438,7 @@ export function validatePivotStatus(
   if (
     status.table?.overallSuccess !== false ||
     status.table?.status !==
-      "live-v30 attempt 1 failed closed at the WRITER STEP by my own measurement defect: the set-sizing fix read each variants width at defer time, when the variant had no content yet, so the set was still minted at Figmas 100px default; the width now comes from walking the FILL subtree down to the hug cells that actually carry a measurement, gated in the mock at 300px; product v1 incomplete" ||
+      "live-v31 attempt 1 failed closed at the WRITER STEP on ordering: the set was resized while it still hugged, so Figma undid the resize and the later counterAxisSizingMode=FIXED pinned the 100px default it had all along; the walk down to the hug cells was correct and measures 570px on the canvas; the writer now pins the axis first and READS BACK its own resize, refusing TABLE-SET-WIDTH-NOT-APPLIED rather than minting a table whose cells fall outside the box; product v1 incomplete" ||
     status.table?.humanSignoff !== "pending" ||
     status.table?.liveFigma !== false ||
     status.table?.humanGradeInvented !== false ||

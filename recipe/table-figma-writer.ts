@@ -763,8 +763,19 @@ const naturalWidth=node=>node.layoutSizingHorizontal==="FILL"?contentWidth(node)
     if(setFillChildren.length>0){
       const widest=Math.max(...setFillChildren.map(([node])=>contentWidth(node)));
       if(!(widest>0))throw new Error("TABLE-SET-CONTENT-WIDTH-UNMEASURED");
-      set.resizeWithoutConstraints(widest+set.paddingLeft+set.paddingRight,Math.max(set.height,1));
+      // Pin the counter axis BEFORE resizing. While the set still hugs, a resize
+      // is immediately undone by the hug, and pinning afterwards just fixes the
+      // width the hug produced -- which is the 100px default this is here to fix.
       set.counterAxisSizingMode="FIXED";
+      const target=widest+set.paddingLeft+set.paddingRight;
+      set.resizeWithoutConstraints(target,Math.max(set.height,1));
+      // Read back rather than assume. A set that is still hugging silently undoes
+      // this resize and reports the default it already had, which mints a table
+      // whose every cell falls outside the component box -- a defect that reaches
+      // the canvas looking like a successful write. Refuse instead.
+      void "TABLE-WRITER-SET-WIDTH-READ-BACK";
+      if(Math.abs(set.width-target)>0.5)
+        throw new Error("TABLE-SET-WIDTH-NOT-APPLIED:wanted "+target+" got "+set.width);
     }
     while(deferredFill.length>0){
       const [node,ir]=deferredFill.shift();

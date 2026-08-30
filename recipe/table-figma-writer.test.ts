@@ -283,6 +283,7 @@ test("Table writer mock-mints 20 variants under a Table identity", async () => {
       "TABLE-ROW-CELL-LABEL-ABSENT",
       "TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER",
       "TABLE-WRITER-MIN-WIDTH-ZERO-UNSET",
+      "TABLE-WRITER-SET-WIDTH-READ-BACK",
     ],
   });
   assert.equal(conformance.ok, true, conformance.failures.join("\n"));
