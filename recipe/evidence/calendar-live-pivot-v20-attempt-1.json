@@ -1,0 +1,91 @@
+{
+  "artifactVersion": "calendar-live-v20-attempt-1-v1",
+  "status": "failed closed at extract; writer and restore accepted; probe Label-via-characters held unreached; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "d0b7f2c462e8bd62780d7171b0e30ecdd6149d18",
+  "codeCommit": "d0b7f2c462e8bd62780d7171b0e30ecdd6149d18",
+  "antecedentCommit": "eefc228bbfa6e0af220f2b76579bab0e76a02455",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v20",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "e5807e43-f0db-4e47-bd29-5f5860f190d4",
+    "attempt": 1,
+    "authorizationSha256": "18eb94ffa7bfeee272952ec22053388c57820f81c5cc486d3c2398d9594b2b6b",
+    "signingPublicKeySpkiSha256": "e9af735a469a501bf9996c3b38f2778856ccd0c668e4b53fbbbf738a4a8e0e9a",
+    "programSha256": "6f17fd3c4e99a3f4ea188b3e9063be18736759882e625ed623cf0f9e1bce614d",
+    "requestBindingSha256": "598c4b3afb832cf7aab2ac8424a9e1c24007b8c7b60b50ff73ff1aa2cfcd53eb",
+    "requestSha256": "af93ca4fab5b9c69c876996ab9140a2c5f9fa1b682f04d7af054867d765761ae"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v20",
+    "pageId": "173:52911",
+    "sectionId": "173:52912",
+    "collectionId": "VariableCollectionId:173:52913",
+    "daySetId": "173:52941",
+    "weekSetId": "173:52973",
+    "calendarSetId": "173:53090",
+    "runIdentity": "19be1c96-calendar-v20",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "refusedClass": "CALENDAR-UNSUPPORTED-STRUCTURAL-EDIT",
+    "refused": "unsupported structural edit at $.children[1].children[0].children[7].properties.Label",
+    "namedCause": "host calendar/week-set week/on calendar/day-instance/6 carries Label 26 and characters 26; compile carries Label 1. That instance is the first State=default day whose Label is not the set default 26. Writer v3 writes characters before appendChild; the write did not persist. week/off and calendar-set default/1 instances persisted. Do not invent a host Label rewrite. Do not retry setProperties."
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:52911",
+    "removedCollectionIds": ["VariableCollectionId:173:52913"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-UNSUPPORTED-STRUCTURAL-EDIT",
+    "path": "$.children[1].children[0].children[7].properties.Label",
+    "role": "calendar/day-instance/6",
+    "doNotInvent": true,
+    "restartV20Attempt2AsIs": false,
+    "prepareV21": "writer re-apply instance Label via characters after appendChild; refuse if characters still mismatch"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}
