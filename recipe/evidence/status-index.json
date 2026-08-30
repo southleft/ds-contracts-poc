@@ -29,39 +29,38 @@
       "pageId": "85:6781",
       "observeCurrentPage": "115:295378",
       "indexPath": "recipe/evidence/button-scene-inversion-v1/index.json",
-      "indexSha256": "19393ef48f4c3568f5797b6bd65959fcad0647ab9d288ede58a9f136bc631ace",
+      "indexSha256": "834515fe2246e702a697b7cceba32a824ed2332cc73ba98819b0ccfb7b8a44ad",
       "inversionPath": "recipe/evidence/button-scene-inversion-v1/inversion.json",
-      "inversionSha256": "ceab87ada80efe10caa3c2b5f6eb849481f7995d69460e957dd70ca25d0af419",
+      "inversionSha256": "92124300d2048ae7aa49f25ccac79649f0d6ab162b7a10d3473832d504fca878",
       "receiptPath": "recipe/evidence/button-scene-inversion-v1/receipt.json",
-      "receiptSha256": "d42ee744d1a861f0aa85871d84a5109d06f9858e90867998993bf6d3b9cddeeb",
+      "receiptSha256": "7de3411512b077270da8e36727bcaea5a6f25f18b1ccd7f60dbf4a14cf4d9883",
       "roots": {
         "altitude": {
           "setId": "85:7406",
           "expectedFacts": 8706,
-          "matched": 8705,
-          "silent": 1,
+          "matched": 8706,
+          "silent": 0,
           "missing": 0,
-          "extra": 1,
-          "mismatched": 1,
+          "extra": 0,
+          "mismatched": 0,
           "fixedPointStable": false
         },
         "fluent": {
           "setId": "85:8054",
           "expectedFacts": 8778,
-          "matched": 8777,
-          "silent": 1,
+          "matched": 8778,
+          "silent": 0,
           "missing": 0,
-          "extra": 1,
-          "mismatched": 1,
+          "extra": 0,
+          "mismatched": 0,
           "fixedPointStable": false
         }
       }
     },
     "blockers": [
       "no attributable human signoff",
-      "scene-derived inversion ran; silent is derived (Altitude 1/8706, Fluent 1/8778) and is not zero",
-      "scene-derived fixed point is not stable (observed bindings keep Figma alphabetical order; compile carries semantic order)",
-      "remaining silent is the Input V66 set-width carry class: width.mode + the width.value extra (layout.mode closed by B2k, layout.padding by B2l)"
+      "scene-derived accounting is CLOSED: silent 0 / missing 0 / extra 0 / mismatched 0 on both roots (Altitude 8706/8706, Fluent 8778/8778), derived not assigned",
+      "scene-derived fixed point is not yet stable: observed bindings keep Figma alphabetical order while compile carries semantic order (Input taughtSurfaceBindingCompileOrder / Calendar V36 class, next teaching)"
     ],
     "supersededHistoricalArtifacts": [
       {
@@ -80,14 +79,18 @@
     "leftoverInversion": {
       "measuredAt": "2026-08-29",
       "silentBefore": 149,
-      "silentAfter": 1,
-      "extra": 1,
+      "silentAfter": 0,
+      "extra": 0,
       "fontSubstrateClassClosed": true,
       "fontSubstrateFacts": 144,
       "altitudeResolution": "requested (IBM Plex Sans, first entry of its own stack)",
       "fluentResolution": "fallback (Roboto, 5th entry of the Segoe UI chain) — named, not equated",
-      "remainingClass": "set chrome (Input V64-V66 carry family): compile vertical/hug/padding-0 vs live horizontal/fixed/padding-32; measured 2026-08-30 that the current writer (interpret.ts) still mints the live chrome, so a fresh mint would NOT close these channels",
+      "remainingClass": "accounting closed (B2j-B2m); remaining gap is fixed-point only: observed binding order is Figma-alphabetical while compile carries semantic order (Input taughtSurfaceBindingCompileOrder / Calendar V36 class)",
       "remainingRequiresFreshMint": false,
+      "setChromeClassClosed": {
+        "teachings": "B2k layout.mode (Input V64), B2l layout.padding (Input V65), B2m width.mode + width.value extras drop (Input V66)",
+        "measured": "the current writer (interpret.ts) still mints HORIZONTAL / padding 32 / FIXED, so a fresh mint would NOT have closed these channels; closed observe-side between the two measured vocabularies only"
+      },
       "nameClassClosed": {
         "teaching": "B2j v4 role-only name recovery (Table v24 compile-carry label / v26 writer set-name class)",
         "factsClosed": "root#name and root#role on both roots; names now compare in FULL on both sides, superseding the B2c first-segment compare"

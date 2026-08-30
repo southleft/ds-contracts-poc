@@ -7,6 +7,7 @@ import {
   buttonV4LiveTokenName,
   carryButtonV4SetLayoutMode,
   carryButtonV4SetLayoutPadding,
+  carryButtonV4SetWidthMode,
   canonicalizeButtonObserveComponentRef,
   canonicalizeButtonObserveTokenName,
   compileButtonComponentRefMap,
@@ -415,6 +416,44 @@ test("set padding carries uniform 32 onto compile uniform 0 only on the root set
   assert.equal(carryButtonV4SetLayoutPadding(setScene, undefined), undefined);
 });
 
+test("set width.mode carries FIXED onto compile hug only on the root set, and never invents px", () => {
+  const [altitude] = compileButtonExpectedScenePlans();
+  assert.ok(altitude);
+  const chrome = buttonPlanRootChrome(altitude.expectedScenePlan);
+  assert.equal(chrome.widthMode, "hug");
+  const setScene = {
+    ownershipKey: "root",
+    type: "COMPONENT_SET" as const,
+    name: "button/set :: Button / button@1 proof",
+    visible: true,
+    opacity: 1,
+    boundVariables: [],
+    width: 19192,
+    height: 104,
+    layoutSizingHorizontal: "FIXED" as const,
+    children: [],
+  };
+  assert.equal(carryButtonV4SetWidthMode(setScene, chrome), "HUG");
+  // non-root nodes never carry
+  assert.equal(
+    carryButtonV4SetWidthMode(
+      { ...setScene, ownershipKey: "root/children/0" },
+      chrome,
+    ),
+    "FIXED",
+  );
+  // FILL is not the measured pair; it stays live
+  assert.equal(
+    carryButtonV4SetWidthMode(
+      { ...setScene, layoutSizingHorizontal: "FILL" },
+      chrome,
+    ),
+    "FILL",
+  );
+  // absent compile chrome never carries
+  assert.equal(carryButtonV4SetWidthMode(setScene, undefined), "FIXED");
+});
+
 test("variantAxis order canonicalizes only when the value set matches compile", () => {
   const [altitude] = compileButtonExpectedScenePlans();
   assert.ok(altitude);
@@ -599,7 +638,8 @@ test("recorded Button inversion evidence stays derived and overall false", () =>
   assert.deepEqual(validateButtonSceneInversionEvidence(inversion), []);
   for (const mutate of [
     (value: Record<string, any>) => {
-      value.ok = true;
+      // assigning the overall verdict away from the derived roots is refused
+      value.ok = !value.ok;
     },
     (value: Record<string, any>) => {
       value.overallButtonSuccess = true;
@@ -611,8 +651,13 @@ test("recorded Button inversion evidence stays derived and overall false", () =>
       value.silentAssigned = true;
     },
     (value: Record<string, any>) => {
-      value.roots[0].silent = 0;
-      value.roots[0].ok = true;
+      // silent must stay expectedFacts - matched; assigning it is refused
+      value.roots[0].silent = value.roots[0].silent + 1;
+    },
+    (value: Record<string, any>) => {
+      // a root verdict must equal its measured parts
+      value.roots[0].ok = !value.roots[0].ok;
+      value.ok = value.roots.every((root: { ok: boolean }) => root.ok);
     },
   ]) {
     const value = structuredClone(inversion);

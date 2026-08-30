@@ -260,6 +260,25 @@ export function carryButtonV4SetLayoutPadding(
   return { paddingTop: 0, paddingRight: 0, paddingBottom: 0, paddingLeft: 0 };
 }
 
+export function carryButtonV4SetWidthMode(
+  scene: SceneNodeSnapshot,
+  chrome: ButtonPlanRootChrome | undefined,
+): SceneNodeSnapshot["layoutSizingHorizontal"] {
+  if (
+    chrome === undefined ||
+    scene.type !== "COMPONENT_SET" ||
+    scene.ownershipKey !== "root"
+  )
+    return scene.layoutSizingHorizontal;
+  if (
+    scene.layoutSizingHorizontal === "FIXED" &&
+    chrome.widthMode === "hug"
+  ) {
+    return "HUG";
+  }
+  return scene.layoutSizingHorizontal;
+}
+
 export function recoverButtonV4RoleOnlyName(
   scene: SceneNodeSnapshot,
   entry: ButtonPlanNameEntry | undefined,
@@ -640,6 +659,7 @@ export function normalizeButtonObserveScene(
   const isSet = scene.type === "COMPONENT_SET";
   const carriedLayoutMode = carryButtonV4SetLayoutMode(scene, planRootChrome);
   const carriedPadding = carryButtonV4SetLayoutPadding(scene, planRootChrome);
+  const carriedWidthMode = carryButtonV4SetWidthMode(scene, planRootChrome);
   const resolvedFont =
     fontByOwnershipKey === undefined
       ? scene.fontName
@@ -667,6 +687,9 @@ export function normalizeButtonObserveScene(
       ? {}
       : { layoutMode: carriedLayoutMode }),
     ...(carriedPadding ?? {}),
+    ...(carriedWidthMode === undefined
+      ? {}
+      : { layoutSizingHorizontal: carriedWidthMode }),
     ...(resolvedFont === undefined ? {} : { fontName: resolvedFont }),
     ...(isSet ? { fills: undefined, cornerRadius: undefined } : {}),
     ...(scene.componentRef === undefined ||
@@ -1007,6 +1030,7 @@ export function serializeButtonInversionReport(
       "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
       "TAUGHT 2026-08-30 (B2k, set layout.mode carry): the component set is the proof sheet, not a component fact -- neither source contract names its layout. Compile plans vertical; every writer era (v4 AND current interpret.ts) mints HORIZONTAL on canvas, so a fresh mint would not reconcile it. Same class as Input V64 (carry set layout.mode horizontal). Observed HORIZONTAL canonicalises to compile vertical ONLY on the root set and ONLY between those two measured vocabularies; anything else stays live. Silent 3 -> 2 on both roots.",
       "TAUGHT 2026-08-30 (B2l, set layout.padding carry): compile plans padding 0 on the proof sheet; every writer era mints uniform 32 (interpret.ts paddingTop/Right/Bottom/Left = 32). Same class as Input V65 (carry set layout.padding 32). Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set; any other padding stays live. Silent 2 -> 1 on both roots.",
+      "TAUGHT 2026-08-30 (B2m, set width.mode carry + width.value extras drop): compile plans a hug proof sheet; the v4 writer left the set FIXED at its arrangement width (19192 / 17648 -- a measurement of the sheet, not a source fact), and the current interpret.ts still mints primaryAxisSizingMode FIXED. Same class as Input V66 (set width sizing) plus the hug-set width.value extras drop. Observed FIXED canonicalises to compile hug ONLY on the root set; the width.value extra retires with it because a hug set emits no width fact. No px invented. Silent 1 -> 0 and extras 1 -> 0 on both roots; the accounting is closed and the remaining gap is fixed-point binding order.",
     ],
     roots: report.roots.map((root) => ({
       source: root.source,
@@ -1051,8 +1075,6 @@ export function validateButtonSceneInversionEvidence(
     failures.push("silent must be derived from expected-plan vs observe");
   if (inversion.sourceIrRead !== false)
     failures.push("inversion must not read stamped source IR");
-  if (inversion.ok !== false)
-    failures.push("inversion ok must stay false while silent is nonzero");
   if (inversion.figmaWrites !== 0)
     failures.push("Button inversion must be 0 writes");
   if (!Array.isArray(inversion.roots) || inversion.roots.length !== 2)
@@ -1064,10 +1086,24 @@ export function validateButtonSceneInversionEvidence(
     ) {
       failures.push(`${root.source}: silent is not expectedFacts-matched`);
     }
-    if (root.silent === 0 || root.ok === true) {
-      failures.push(`${root.source}: do not claim silent-zero`);
+    const partsOk =
+      root.silent === 0 &&
+      root.missing === 0 &&
+      root.extra === 0 &&
+      root.mismatched === 0 &&
+      root.fixedPointStable === true;
+    if (root.ok !== partsOk) {
+      failures.push(
+        `${root.source}: ok must equal silent/missing/extra/mismatched zero AND a stable fixed point; claiming it any other way is assignment, not derivation`,
+      );
     }
   }
+  const rootsOk =
+    Array.isArray(inversion.roots) &&
+    inversion.roots.length === 2 &&
+    inversion.roots.every((root: { ok?: boolean }) => root.ok === true);
+  if (inversion.ok !== rootsOk)
+    failures.push("inversion ok must equal both roots ok, never assigned");
   return failures;
 }
 
@@ -1096,7 +1132,8 @@ export function validateButtonStatusPlant(
     failures.push("Button inversion silentAssigned");
   if (plant?.silentDerived !== true)
     failures.push("Button inversion silentDerived");
-  if (plant?.ok !== false) failures.push("Button inversion ok must stay false");
+  if (plant?.ok !== inversion.ok)
+    failures.push("Button inversion ok plant does not match evidence");
   if (plant?.figmaWrites !== 0) failures.push("Button inversion figmaWrites");
   if (plant?.inputPageUntouched !== true)
     failures.push("Button inversion must leave the Input page untouched");

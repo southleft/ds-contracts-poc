@@ -12,35 +12,19 @@
       "setId": "85:7406",
       "variants": 144,
       "expectedFacts": 8706,
-      "matched": 8705,
-      "silent": 1,
+      "matched": 8706,
+      "silent": 0,
       "missing": 0,
-      "extra": 1,
-      "mismatched": 1,
+      "extra": 0,
+      "mismatched": 0,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8706,
       "ok": false,
       "fixedPointStable": false,
       "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
-      "channelDrift": [
-        {
-          "channel": "width.mode",
-          "missing": 0,
-          "extra": 0,
-          "mismatched": 1
-        },
-        {
-          "channel": "width.value",
-          "missing": 0,
-          "extra": 1,
-          "mismatched": 0
-        }
-      ],
-      "sampleFailures": [
-        "extra root#width.value@0000",
-        "mismatched root#width.mode@0000"
-      ]
+      "channelDrift": [],
+      "sampleFailures": []
     },
     {
       "source": "fluent",
@@ -48,35 +32,19 @@
       "setId": "85:8054",
       "variants": 144,
       "expectedFacts": 8778,
-      "matched": 8777,
-      "silent": 1,
+      "matched": 8778,
+      "silent": 0,
       "missing": 0,
-      "extra": 1,
-      "mismatched": 1,
+      "extra": 0,
+      "mismatched": 0,
       "duplicateCollapsed": 0,
       "unobserved": 0,
       "denominator": 8778,
       "ok": false,
       "fixedPointStable": false,
       "fixedPointError": "button@1: unsupported structural edit at $.children[0].bindings[0].field; button@1 accepts only its declared axes, content, slots, loading behavior, and token parameters",
-      "channelDrift": [
-        {
-          "channel": "width.mode",
-          "missing": 0,
-          "extra": 0,
-          "mismatched": 1
-        },
-        {
-          "channel": "width.value",
-          "missing": 0,
-          "extra": 1,
-          "mismatched": 0
-        }
-      ],
-      "sampleFailures": [
-        "extra root#width.value@0000",
-        "mismatched root#width.mode@0000"
-      ]
+      "channelDrift": [],
+      "sampleFailures": []
     }
   ],
   "version": "button-scene-inversion-v1",
@@ -96,6 +64,7 @@
     "TAUGHT 2026-08-29 (B2h, font substrate): compile names the SOURCE font stack; Figma reports the face it RESOLVED. The observed face canonicalises onto the compile stack ONLY when the resolved family is a member of that stack and the styles agree once Figma spelling is normalised (SemiBold <-> Semi Bold). altitude resolved its first choice, IBM Plex Sans. fluent FELL BACK to Roboto, the 5th entry of its Segoe UI chain -- a named fallback, not an equality. A resolved family absent from the stack is left live because that would be a real substitution. No font invented, no expected plan restamped. Silent 149 -> 5 on both roots.",
     "per-side stroke weight bindings are compile-absent host extras and were omitted from observe, not restamped onto the plan",
     "TAUGHT 2026-08-30 (B2k, set layout.mode carry): the component set is the proof sheet, not a component fact -- neither source contract names its layout. Compile plans vertical; every writer era (v4 AND current interpret.ts) mints HORIZONTAL on canvas, so a fresh mint would not reconcile it. Same class as Input V64 (carry set layout.mode horizontal). Observed HORIZONTAL canonicalises to compile vertical ONLY on the root set and ONLY between those two measured vocabularies; anything else stays live. Silent 3 -> 2 on both roots.",
-    "TAUGHT 2026-08-30 (B2l, set layout.padding carry): compile plans padding 0 on the proof sheet; every writer era mints uniform 32 (interpret.ts paddingTop/Right/Bottom/Left = 32). Same class as Input V65 (carry set layout.padding 32). Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set; any other padding stays live. Silent 2 -> 1 on both roots."
+    "TAUGHT 2026-08-30 (B2l, set layout.padding carry): compile plans padding 0 on the proof sheet; every writer era mints uniform 32 (interpret.ts paddingTop/Right/Bottom/Left = 32). Same class as Input V65 (carry set layout.padding 32). Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set; any other padding stays live. Silent 2 -> 1 on both roots.",
+    "TAUGHT 2026-08-30 (B2m, set width.mode carry + width.value extras drop): compile plans a hug proof sheet; the v4 writer left the set FIXED at its arrangement width (19192 / 17648 -- a measurement of the sheet, not a source fact), and the current interpret.ts still mints primaryAxisSizingMode FIXED. Same class as Input V66 (set width sizing) plus the hug-set width.value extras drop. Observed FIXED canonicalises to compile hug ONLY on the root set; the width.value extra retires with it because a hug set emits no width fact. No px invented. Silent 1 -> 0 and extras 1 -> 0 on both roots; the accounting is closed and the remaining gap is fixed-point binding order."
   ]
 }

@@ -100,13 +100,19 @@ test("status gate rejects chronology, success, capture, hash, and criterion lies
       value.status.button.humanSignoff = "passed";
     },
     (value) => {
-      value.status.button.sceneDerivedInversion.ok = true;
+      // assigning the verdict away from the derived evidence is a lie in
+      // either direction (B2m gate restructure: ok must MATCH evidence)
+      value.status.button.sceneDerivedInversion.ok =
+        !value.status.button.sceneDerivedInversion.ok;
     },
     (value) => {
       value.status.button.sceneDerivedInversion.silentAssigned = true;
     },
     (value) => {
-      value.status.button.sceneDerivedInversion.roots.altitude.silent = 0;
+      // silent is derived; planting any other number than the evidence is
+      // refused (0 stopped being a lie when B2j-B2m closed the accounting)
+      value.status.button.sceneDerivedInversion.roots.altitude.silent =
+        value.status.button.sceneDerivedInversion.roots.altitude.silent + 1;
     },
     (value) => {
       value.status.input.liveV2.result = "passed";

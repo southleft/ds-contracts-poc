@@ -172,7 +172,7 @@ export function writeButtonInversionEvidence(): void {
         sourceIrRead: false,
         silentAssigned: false,
         silentDerived: true,
-        ok: false,
+        ok: report.ok,
         figmaWrites: 0,
         inputPageUntouched: true,
         historicalReadbackRefusedAsObserve: true,
@@ -307,7 +307,11 @@ export function checkButtonInversionEvidence(): void {
     );
   }
   process.stdout.write(
-    "Button scene-derived inversion check: derived, not silent-zero, overall false\n",
+    `Button scene-derived inversion check: derived, ${
+      inversion.ok === true
+        ? "accounting and fixed point green"
+        : "not silent-zero"
+    }, overall false pending human signoff\n`,
   );
 }
 
