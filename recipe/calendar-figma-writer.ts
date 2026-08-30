@@ -56,7 +56,7 @@ import {
 
 export const CALENDAR_FIGMA_NAMESPACE = "ds.contracts.calendar.recipe.v1";
 export const CALENDAR_FIGMA_WRITER_VERSION = 1;
-export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v22";
+export const CALENDAR_FIGMA_RUN_SUFFIX = "calendar-v23";
 export const FORBIDDEN_CALENDAR_V1_RUN_IDENTITY = "19be1c96-calendar-v1";
 export const FORBIDDEN_CALENDAR_V2_RUN_IDENTITY = "19be1c96-calendar-v2";
 export const FORBIDDEN_CALENDAR_V3_RUN_IDENTITY = "19be1c96-calendar-v3";
@@ -78,6 +78,7 @@ export const FORBIDDEN_CALENDAR_V18_RUN_IDENTITY = "19be1c96-calendar-v18";
 export const FORBIDDEN_CALENDAR_V19_RUN_IDENTITY = "19be1c96-calendar-v19";
 export const FORBIDDEN_CALENDAR_V20_RUN_IDENTITY = "19be1c96-calendar-v20";
 export const FORBIDDEN_CALENDAR_V21_RUN_IDENTITY = "19be1c96-calendar-v21";
+export const FORBIDDEN_CALENDAR_V22_RUN_IDENTITY = "19be1c96-calendar-v22";
 
 /** Never reuse another archetype's identity or write another archetype's page. */
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -403,6 +404,7 @@ if(PLAN.runIdentity==="19be1c96-calendar-v18")throw new Error("CALENDAR-V18-IDEN
 if(PLAN.runIdentity==="19be1c96-calendar-v19")throw new Error("CALENDAR-V19-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v20")throw new Error("CALENDAR-V20-IDENTITY-REUSE");
 if(PLAN.runIdentity==="19be1c96-calendar-v21")throw new Error("CALENDAR-V21-IDENTITY-REUSE");
+if(PLAN.runIdentity==="19be1c96-calendar-v22")throw new Error("CALENDAR-V22-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
@@ -783,6 +785,8 @@ export function emitCalendarFigmaWriter(
     throw new TypeError("calendar writer must refuse the v20 run identity");
   if (runtime.includes("CALENDAR-V21-IDENTITY-REUSE") === false)
     throw new TypeError("calendar writer must refuse the v21 run identity");
+  if (runtime.includes("CALENDAR-V22-IDENTITY-REUSE") === false)
+    throw new TypeError("calendar writer must refuse the v22 run identity");
   if (runtime.includes("CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND") === false)
     throw new TypeError(
       "calendar writer must re-apply instance Label after appendChild",
