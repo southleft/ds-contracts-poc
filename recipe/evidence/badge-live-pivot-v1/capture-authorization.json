@@ -48,7 +48,7 @@
   },
   "execution": {
     "maximumAttempts": 1,
-    "attemptsExecuted": 0,
+    "attemptsExecuted": 1,
     "newTxnPerVersion": true,
     "doNotRestartFailedAttemptAsIs": true
   },

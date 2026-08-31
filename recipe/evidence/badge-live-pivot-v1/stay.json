@@ -1,0 +1,27 @@
+{
+  "artifactVersion": "badge-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:76022",
+  "pageName": "Recipe Pivot / Badge / cd44cf69-5db99b22-badge-v1",
+  "runIdentity": "cd44cf69-5db99b22-badge-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76022",
+  "components": {
+    "MUI Badge": "183:76038",
+    "Ant Design Badge": "183:76058"
+  },
+  "containers": {
+    "MUI": "183:76042",
+    "Ant Design": "183:76062"
+  },
+  "astryxOverlayRefusal": "Astryx Badge is an inline status label; overlay not compiled. Do not invent an Astryx pip.",
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "anchored overlay from MUI+AntD only; host is a named Avatar-default placeholder circle; count 5; color/dot/status/Ribbon are not axes"
+}
