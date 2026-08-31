@@ -44,7 +44,7 @@ test("the writer plans two overlay badge sources without touching Figma", () => 
   const writer = emitBadgeFigmaWriter(sources);
   assert.equal(writer.namespace, BADGE_FIGMA_NAMESPACE);
   assert.match(writer.pageName, /^Recipe Pivot \/ Badge \//);
-  assert.match(writer.runIdentity, /-badge-v1$/);
+  assert.match(writer.runIdentity, /-badge-v2$/);
   assert.equal(writer.sourcePlans.length, 2);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.badge.kind, "component");

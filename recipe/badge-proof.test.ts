@@ -29,7 +29,16 @@ test("badge@1 adapts MUI and AntD overlay from named package facts", () => {
   assert.equal(mui.identity.id, "mui.badge");
   assert.equal(mui.tokens.indicator.height.fallback, 20);
   assert.equal(mui.tokens.indicator.paddingX.fallback, 6);
-  assert.equal(mui.tokens.indicator.fill.fallback, "#00000000");
+  assert.equal(
+    mui.tokens.indicator.fill.fallback,
+    "#d32f2fff",
+    "docs Color demo error — palette.error.main",
+  );
+  assert.equal(
+    mui.tokens.label.fallback,
+    "#ffffffff",
+    "palette.error.contrastText",
+  );
   assert.equal(mui.tokens.host.size.fallback, 40);
   assert.equal(antd.tokens.indicator.height.fallback, 20);
   assert.equal(antd.tokens.indicator.fill.fallback, "#ff4d4fff");

@@ -79,12 +79,12 @@ const muiTokens = cloneTokens("mui.badge", (path, fallback) => {
   if (path === "indicator.borderWidth") return 0;
   if (path === "indicator.translateX") return 10;
   if (path === "indicator.translateY") return -10;
-  if (path === "indicator.fill") return "#00000000";
+  if (path === "indicator.fill") return "#d32f2fff";
   if (path === "indicator.border") return "#00000000";
   if (path === "indicator.opacity") return 1;
   if (path === "labelFontSize") return 12;
   if (path === "labelLineHeight") return 12;
-  if (path === "label") return "#000000de";
+  if (path === "label") return "#ffffffff";
   return fallback;
 });
 muiTokens.strokeAlign = "inside";
@@ -123,17 +123,17 @@ export const muiBadgeSource: ReviewedBadgeSource = {
     root: "Badge.js BadgeRoot relative inline-flex. BadgeBadge absolute.",
     host: "Avatar.js default circular 40 — the child Badge proofs mount. Avatar stay compiles the real Avatar.",
     indicator:
-      "RADIUS_STANDARD 10 → height/minWidth 20, radius 10, padding 0 6. color=default has no palette.main — fill unset. translate 50%,-50% = ±10. Do not invent error.",
+      "RADIUS_STANDARD 10 → height/minWidth 20, radius 10, padding 0 6. Docs Color demo people see is color=error (palette.error.main #d32f2f / contrast #fff). color=default has no palette.main — receipted, not the proof cell. translate 50%,-50% = ±10.",
     label:
       "pxToRem(12) Medium lineHeight 1. Visible content 5 — AntD seed; both hide when count is null.",
   },
   api: {
     variant: "standard default; dot receipted",
-    color: "default; primary…warning receipted — default has no palette fill",
+    color: "docs Color demo error; color=default has no palette fill and is receipted",
     extras: "overlap circular, max 99, invisible, showZero receipted",
   },
   styleSources: [
-    "Badge/Badge.js RADIUS_STANDARD 10, anchor top-right rectangular, color default",
+    "Badge/Badge.js RADIUS_STANDARD 10, anchor top-right rectangular, color error from the documented Color demo (palette.error.main). color=default has no backgroundColor.",
     "Avatar/Avatar.js width/height 40 circular grey[400]",
   ],
   fontSources: ["Badge.js pxToRem(12) Roboto Medium"],
@@ -258,10 +258,10 @@ const muiRefusals = makeRefusals("mui", [
     reason: "refused-by-recipe",
   },
   {
-    id: "refusal-error-default",
+    id: "refusal-color-default",
     evidence:
-      "color=default has no palette.main in Badge.js; do not invent error as the shared default",
-    target: "MUI color=error as default",
+      "Badge.js styles backgroundColor only when color !== 'default'. color=default is unfilled — that is why the prior stay looked like a bare 5. Proof cell is the documented Color demo color=error (#d32f2f / #fff). Do not paint a fake pill on color=default.",
+    target: "MUI color=default unfilled badge",
     reason: "refused-by-recipe",
   },
   {

@@ -1,0 +1,39 @@
+{
+  "artifactVersion": "badge-prepare-v2-source-notes",
+  "status": "prepare-landed",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "oldStayPageId": "183:76022",
+  "doNotDeleteOldStay": true,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "shapeDecisionToCarry": "MUI proof cell is the documented Color demo color=error. color=default has no palette fill — do not paint a fake pill on that axis. Astryx overlay remains refused. No invented #f00.",
+  "taught": {
+    "MUI": {
+      "file": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Badge/Badge.js",
+      "lines": "89-96 backgroundColor + contrastText only when color !== default (palette filter requires contrastText)",
+      "docs": "https://mui.com/material-ui/react-badge/ Color demo people see is color=error",
+      "palette": "examples/mui/tokens/mui.vars.css:70 --palette-error-contrast-text #fff; :73 --palette-error-main #d32f2f",
+      "compiled": "proof fill #d32f2fff label #ffffffff; color=default receipted"
+    },
+    "Ant Design": "stay already has token.colorError #ff4d4f + stroke — remint only if MUI compile changes; AntD facts unchanged",
+    "Astryx": "overlay remains a named refusal"
+  },
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022"
+  ]
+}
