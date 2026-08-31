@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "switch-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:75302",
+  "pageName": "Recipe Pivot / Switch / a8686d63-3d086535-f55e4ace-switch-v1",
+  "runIdentity": "a8686d63-3d086535-f55e4ace-switch-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75302",
+  "sets": {
+    "Astryx": "183:75349",
+    "MUI": "183:75396",
+    "Ant Design": "183:75443"
+  },
+  "arrange": {
+    "Astryx": "183:75444",
+    "MUI": "183:75461",
+    "Ant Design": "183:75478"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "standalone control + label; size is not an axis; MUI sibling overlay / baked track opacity receipted"
+}

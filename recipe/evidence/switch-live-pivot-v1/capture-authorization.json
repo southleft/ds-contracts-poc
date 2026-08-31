@@ -5,7 +5,7 @@
   "authorizationIntent": true,
   "antecedent": {
     "ownerMandate": "2026-08-31 unattended hill-climb of docs/34 Phase 1",
-    "prepareCommitExpected": "this PREPARE commit",
+    "prepareCommit": "dda2aa1ed",
     "writerSha256": "b0288f45989e20fead4205febdf8eb3da2ab0c75cc2d04dbceec471f156b6e0e",
     "splitWriters": [
       "writer-astryx-switch-reviewed-v1.js",
@@ -46,7 +46,7 @@
   },
   "execution": {
     "maximumAttempts": 1,
-    "attemptsExecuted": 0,
+    "attemptsExecuted": 1,
     "newTxnPerVersion": true,
     "doNotRestartFailedAttemptAsIs": true
   },
