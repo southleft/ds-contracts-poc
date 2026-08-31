@@ -23,8 +23,9 @@ import {
 } from "./interpret.js";
 
 export const TEXTAREA_FIGMA_NAMESPACE = "ds.contracts.textarea.recipe.v1";
-export const TEXTAREA_FIGMA_WRITER_VERSION = 1;
-export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v1";
+export const TEXTAREA_FIGMA_WRITER_VERSION = 2;
+export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v2";
+export const FORBIDDEN_TEXTAREA_V1_PAGE_ID = "183:75495";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -269,6 +270,7 @@ void "TEXTAREA-MUST-NOT-WRITE-CALENDAR-PAGE";
 void "TEXTAREA-MUST-NOT-WRITE-CHECKBOX-PAGE";
 void "TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE";
 void "TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE";
+void "TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("TEXTAREA-MUST-NOT-WRITE-INPUT-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("TEXTAREA-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("TEXTAREA-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
@@ -279,6 +281,7 @@ if(figma.currentPage&&figma.currentPage.id==="181:64873")throw new Error("TEXTAR
 if(figma.currentPage&&figma.currentPage.id==="183:74742")throw new Error("TEXTAREA-MUST-NOT-WRITE-CHECKBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:75031")throw new Error("TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:75302")throw new Error("TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75495")throw new Error("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE");
 await figma.loadAllPagesAsync();
 const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
 const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
@@ -300,6 +303,7 @@ if(page.id==="181:64873")throw new Error("TEXTAREA-MUST-NOT-WRITE-CALENDAR-PAGE"
 if(page.id==="183:74742")throw new Error("TEXTAREA-MUST-NOT-WRITE-CHECKBOX-PAGE");
 if(page.id==="183:75031")throw new Error("TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE");
 if(page.id==="183:75302")throw new Error("TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE");
+if(page.id==="183:75495")throw new Error("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE");
 await figma.setCurrentPageAsync(page);
 setSharedData(page,"pageOwner",PAGE_OWNER);
 setSharedData(page,"runIdentity",PLAN.runIdentity);
@@ -393,6 +397,13 @@ for(const source of PLAN.sources){
     node.itemSpacing=layout.itemSpacing;
     node.paddingTop=Math.max(0,layout.padding.top);node.paddingRight=Math.max(0,layout.padding.right);node.paddingBottom=Math.max(0,layout.padding.bottom);node.paddingLeft=Math.max(0,layout.padding.left);
     if(ir.clipsContent!==undefined)node.clipsContent=ir.clipsContent;
+    if(ir.layout&&ir.layout.positioning==="absolute"){
+      if(!ir.layout.offset||!ir.layout.constraints)throw new Error("TEXTAREA-OVERLAY-DECLARATION-INCOMPLETE:"+ir.role);
+      node.layoutPositioning="ABSOLUTE";
+      node.x=ir.layout.offset.x;node.y=ir.layout.offset.y;
+      const constraintValue=value=>({left:"MIN",right:"MAX",top:"MIN",bottom:"MAX",center:"CENTER",scale:"SCALE",stretch:"STRETCH"})[value];
+      node.constraints={horizontal:constraintValue(ir.layout.constraints.horizontal),vertical:constraintValue(ir.layout.constraints.vertical)};
+    }
     bindFloat(node,"itemSpacing",bindingFor(ir,"layout.itemSpacing"));
     for(const [key,field] of [["paddingTop","top"],["paddingRight","right"],["paddingBottom","bottom"],["paddingLeft","left"]])bindFloat(node,key,bindingFor(ir,"layout.padding."+field));
   };
@@ -580,7 +591,8 @@ export function emitTextareaFigmaWriter(
     runtime.includes("TEXTAREA-MUST-NOT-WRITE-CALENDAR-PAGE") === false ||
     runtime.includes("TEXTAREA-MUST-NOT-WRITE-CHECKBOX-PAGE") === false ||
     runtime.includes("TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE") === false ||
-    runtime.includes("TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE") === false
+    runtime.includes("TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE") === false ||
+    runtime.includes("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE") === false
   )
     throw new TypeError(
       "textarea writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, and Switch pages",

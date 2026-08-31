@@ -121,6 +121,17 @@ export interface TextareaRecipeInstance {
     labelFontSize: TextareaNumberParameter;
     valueFontSize: TextareaNumberParameter;
     /**
+     * Astryx/AntD Field label is stacked. Official MUI outlined
+     * TextField uses InputLabel floating + NotchedOutline.
+     */
+    labelPlacement: "stacked" | "floating";
+    outlineTreatment: "plain" | "notched";
+    labelInsetX: TextareaNumberParameter;
+    labelInactiveOffsetY: TextareaNumberParameter;
+    labelFloatingOffsetY: TextareaNumberParameter;
+    floatingLabelFontSize: TextareaNumberParameter;
+    notchFill: TextareaColorParameter;
+    /**
      * Astryx/AntD border-box → inside. MUI NotchedOutline is an overlay
      * on the padding box → outside so the 56-tall root keeps a 23px row.
      */
@@ -219,6 +230,13 @@ export const TextareaRecipeInstanceSchema = z.strictObject({
     labelGap: NumberParameterSchema,
     labelFontSize: NumberParameterSchema,
     valueFontSize: NumberParameterSchema,
+    labelPlacement: z.enum(["stacked", "floating"]),
+    outlineTreatment: z.enum(["plain", "notched"]),
+    labelInsetX: NumberParameterSchema,
+    labelInactiveOffsetY: NumberParameterSchema,
+    labelFloatingOffsetY: NumberParameterSchema,
+    floatingLabelFontSize: NumberParameterSchema,
+    notchFill: ColorParameterSchema,
     strokeAlign: z.enum(["inside", "outside"]),
     boxClips: z.boolean(),
     states: z.strictObject({
@@ -311,6 +329,7 @@ const cellOf = (
 const labelText = (
   instance: TextareaRecipeInstance,
   cell: StateCell,
+  fontSize: TextareaNumberParameter,
 ): TextNode => ({
   kind: "text",
   role: "textarea/label",
@@ -320,7 +339,7 @@ const labelText = (
     fontFamily: instance.tokens.typography.label.resolvedFamily,
     fontStyle: instance.tokens.typography.label.resolvedStyle,
     fontProvenance: instance.tokens.typography.label,
-    fontSize: instance.tokens.labelFontSize.fallback,
+    fontSize: fontSize.fallback,
     lineHeight: { unit: "auto" },
   },
   align: "left",
@@ -329,7 +348,7 @@ const labelText = (
   width: hug,
   height: hug,
   bindings: [
-    bind("type.fontSize", instance.tokens.labelFontSize),
+    bind("type.fontSize", fontSize),
     bind("fills.0.color", cell.label),
   ],
 });
@@ -422,6 +441,44 @@ const variantComponent = (
   content: TextareaContent,
 ): ComponentNode => {
   const cell = cellOf(instance, content, disabled);
+  const floating = instance.tokens.labelPlacement === "floating";
+  const shrunk = floating && content === "value";
+  const labelFont = shrunk
+    ? instance.tokens.floatingLabelFontSize
+    : instance.tokens.labelFontSize;
+  const label = labelText(instance, cell, labelFont);
+  const box = boxNode(instance, content, cell);
+  const labelRow: FrameNode = {
+    kind: "frame",
+    role: "textarea/label-row",
+    label: "textarea/label-row",
+    layout: {
+      mode: "horizontal",
+      primaryAxisAlign: "min",
+      counterAxisAlign: "center",
+      itemSpacing: 0,
+      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      width: hug,
+      height: hug,
+      positioning: "absolute",
+      offset: {
+        x: instance.tokens.labelInsetX.fallback,
+        y: shrunk
+          ? instance.tokens.labelFloatingOffsetY.fallback
+          : instance.tokens.labelInactiveOffsetY.fallback,
+      },
+      constraints: { horizontal: "left", vertical: "top" },
+    },
+    fills:
+      shrunk && instance.tokens.outlineTreatment === "notched"
+        ? [solid(instance.tokens.notchFill.fallback)]
+        : [],
+    bindings:
+      shrunk && instance.tokens.outlineTreatment === "notched"
+        ? [bind("fills.0.color", instance.tokens.notchFill)]
+        : [],
+    children: [label],
+  };
   return {
     kind: "component",
     role: `textarea/variant/${disabled}/${content}`,
@@ -440,8 +497,9 @@ const variantComponent = (
       height: hug,
     },
     fills: [],
+    ...(floating ? { clipsContent: false } : {}),
     bindings: [bind("layout.itemSpacing", instance.tokens.labelGap)],
-    children: [labelText(instance, cell), boxNode(instance, content, cell)],
+    children: floating ? [box, labelRow] : [label, box],
   };
 };
 
@@ -606,7 +664,22 @@ export function validateTextareaStructure(root: IRNode): void {
         throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
           `${variant.role}: box width hugs content — no invented default px width`,
         ]);
-      direct(variant, "textarea/label", "text");
+      const labelRow = (variant.children ?? []).find(
+        (child) => child.role === "textarea/label-row",
+      );
+      if (labelRow) {
+        if (labelRow.kind !== "frame")
+          throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
+            `${variant.role}: label-row must be a frame`,
+          ]);
+        if (labelRow.layout.positioning !== "absolute")
+          throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
+            `${variant.role}: floating label-row must be absolute`,
+          ]);
+        direct(labelRow, "textarea/label", "text");
+      } else {
+        direct(variant, "textarea/label", "text");
+      }
       direct(box, "textarea/value", "text");
     }
   }
@@ -658,8 +731,17 @@ const firstDifference = (
   return undefined;
 };
 
+const labelFromVariant = (variant: ComponentNode): TextNode => {
+  const labelRow = (variant.children ?? []).find(
+    (child) => child.role === "textarea/label-row" && child.kind === "frame",
+  );
+  if (labelRow && labelRow.kind === "frame")
+    return direct(labelRow, "textarea/label", "text");
+  return direct(variant, "textarea/label", "text");
+};
+
 const cellFromVariant = (variant: ComponentNode): StateCell => {
-  const label = direct(variant, "textarea/label", "text");
+  const label = labelFromVariant(variant);
   const box = direct(variant, "textarea/box", "frame");
   const value = direct(box, "textarea/value", "text");
   return {
@@ -703,7 +785,17 @@ export function collapseTextareaRecipe(
   const empty = componentFor(set, { Disabled: "false", Content: "empty" });
   const filled = componentFor(set, { Disabled: "false", Content: "value" });
   const box = direct(empty, "textarea/box", "frame");
-  const label = direct(empty, "textarea/label", "text");
+  const label = labelFromVariant(empty);
+  const filledLabel = labelFromVariant(filled);
+  const emptyRow = (empty.children ?? []).find(
+    (child) => child.role === "textarea/label-row" && child.kind === "frame",
+  );
+  const filledRow = (filled.children ?? []).find(
+    (child) => child.role === "textarea/label-row" && child.kind === "frame",
+  );
+  const floating = Boolean(emptyRow && emptyRow.kind === "frame");
+  const notched =
+    Boolean(filledRow && filledRow.kind === "frame" && filledRow.fills[0]);
   const value = direct(box, "textarea/value", "text");
   const strokeAlign = box.strokes?.[0]?.align;
   if (strokeAlign !== "inside" && strokeAlign !== "outside")
@@ -767,6 +859,54 @@ export function collapseTextareaRecipe(
       ),
       labelFontSize: numberFrom(label, "type.fontSize", label.type.fontSize),
       valueFontSize: numberFrom(value, "type.fontSize", value.type.fontSize),
+      labelPlacement: floating ? "floating" : "stacked",
+      outlineTreatment: notched ? "notched" : "plain",
+      labelInsetX:
+        emptyRow && emptyRow.kind === "frame" && emptyRow.layout.offset
+          ? {
+              variable: `${envelope.id}.labelInsetX`,
+              fallback: emptyRow.layout.offset.x,
+            }
+          : {
+              variable: `${envelope.id}.labelInsetX`,
+              fallback: 0,
+            },
+      labelInactiveOffsetY:
+        emptyRow && emptyRow.kind === "frame" && emptyRow.layout.offset
+          ? {
+              variable: `${envelope.id}.labelInactiveOffsetY`,
+              fallback: emptyRow.layout.offset.y,
+            }
+          : {
+              variable: `${envelope.id}.labelInactiveOffsetY`,
+              fallback: 0,
+            },
+      labelFloatingOffsetY:
+        filledRow && filledRow.kind === "frame" && filledRow.layout.offset
+          ? {
+              variable: `${envelope.id}.labelFloatingOffsetY`,
+              fallback: filledRow.layout.offset.y,
+            }
+          : {
+              variable: `${envelope.id}.labelFloatingOffsetY`,
+              fallback: 0,
+            },
+      floatingLabelFontSize: numberFrom(
+        filledLabel,
+        "type.fontSize",
+        filledLabel.type.fontSize,
+      ),
+      notchFill:
+        filledRow && filledRow.kind === "frame" && filledRow.fills[0]
+          ? colorFrom(
+              filledRow,
+              "fills.0.color",
+              solidColor(filledRow.fills[0], filledRow.role!),
+            )
+          : {
+              variable: `${envelope.id}.notchFill`,
+              fallback: "#00000000",
+            },
       strokeAlign,
       boxClips: box.clipsContent === true,
       states: {

@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Textarea / c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "runIdentity": "c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "textarea@1 MUI outlined InputLabel floating/notched from named translate(14px, 16px) rest and translate(14px, -9px) scale(0.75) shrink. Astryx/AntD stay stacked. Do not remint Input 115:295378. Old stay 183:75495 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-textarea-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "c45888d1f4f84823eb58c6df1200639d27e9b1ecc62c66776dc50470aa08228e",
+      "envelopeHash": "3b79228c1732f69a0f0ba51278ccaf1822ad36c31660ac3b72b99ff9f1ffdb1a",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    },
+    {
+      "adapterIdentity": "mui-textarea-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "b36722e29b59ad6aded9caa4fbffa3d74f5d40fda8c9c43c9bac0e32552d88a5",
+      "envelopeHash": "f8b82b2de680ba44f3aeb56491ece3bcd01629397bce93fa569a5038ff9f79a8",
+      "variantCount": 4,
+      "variableCount": 27,
+      "comparedIrFacts": 95
+    },
+    {
+      "adapterIdentity": "antd-textarea-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "ecdda45dfdded460e364619f504aaea07b6cbcd9eff1016e429e4c1b2d17dc7b",
+      "envelopeHash": "5a97be9ac66eeceb8e91894fef9faead0832600431e5bbaac218711c3aa55c1f",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    }
+  ]
+}

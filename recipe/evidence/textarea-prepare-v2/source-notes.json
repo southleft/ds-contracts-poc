@@ -1,0 +1,37 @@
+{
+  "artifactVersion": "textarea-prepare-v2-source-notes",
+  "status": "prepare-landed",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "oldStayPageId": "183:75495",
+  "doNotDeleteOldStay": true,
+  "doNotRemintInput": "115:295378",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "shapeDecisionToCarry": "MUI outlined TextField is floating/notched InputLabel, not a cramped label-above. Astryx/AntD stay stacked. No invented extra padding.",
+  "taught": {
+    "MUI": {
+      "file": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/InputLabel/InputLabel.js",
+      "rest": "148-156 outlined transform translate(14px, 16px) scale(1)",
+      "shrink": "166-176 outlined shrink translate(14px, -9px) scale(0.75)",
+      "notchFill": "examples/mui/tokens/mui.vars.css:66 --palette-background-paper #fff",
+      "compiled": "labelPlacement floating; empty label at (14, 16) font 16; value shrink (14, -9) font 12; notch #ffffffff; clipsContent false only when floating"
+    },
+    "Astryx": "labelPlacement stacked; named labelGap 4",
+    "Ant Design": "labelPlacement stacked; named labelGap 8"
+  },
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495"
+  ]
+}

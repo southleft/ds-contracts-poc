@@ -125,6 +125,11 @@ const astryxTokens = cloneTokens("astryx.textarea", (path, fallback) => {
   if (path === "labelGap") return 4;
   if (path === "labelFontSize") return 14;
   if (path === "valueFontSize") return 14;
+  if (path === "labelInsetX") return 0;
+  if (path === "labelInactiveOffsetY") return 0;
+  if (path === "labelFloatingOffsetY") return 0;
+  if (path === "floatingLabelFontSize") return 14;
+  if (path === "notchFill") return "#00000000";
   if (path === "states.empty.enabled.boxFill") return "#ffffffff";
   if (path === "states.empty.enabled.boxBorder") return "#ccd3dbff";
   if (path === "states.empty.enabled.boxOpacity") return 1;
@@ -149,6 +154,8 @@ const astryxTokens = cloneTokens("astryx.textarea", (path, fallback) => {
 });
 astryxTokens.strokeAlign = "inside";
 astryxTokens.boxClips = true;
+astryxTokens.labelPlacement = "stacked";
+astryxTokens.outlineTreatment = "plain";
 astryxTokens.typography = { label: astryxLabelFont(), value: astryxValueFont() };
 
 /**
@@ -168,6 +175,11 @@ const muiTokens = cloneTokens("mui.textarea", (path, fallback) => {
   if (path === "labelGap") return 0;
   if (path === "labelFontSize") return 16;
   if (path === "valueFontSize") return 16;
+  if (path === "labelInsetX") return 14;
+  if (path === "labelInactiveOffsetY") return 16;
+  if (path === "labelFloatingOffsetY") return -9;
+  if (path === "floatingLabelFontSize") return 12;
+  if (path === "notchFill") return "#ffffffff";
   if (path === "states.empty.enabled.boxFill") return "#00000000";
   if (path === "states.empty.enabled.boxBorder") return "#0000003b";
   if (path === "states.empty.enabled.boxOpacity") return 1;
@@ -192,6 +204,8 @@ const muiTokens = cloneTokens("mui.textarea", (path, fallback) => {
 });
 muiTokens.strokeAlign = "outside";
 muiTokens.boxClips = true;
+muiTokens.labelPlacement = "floating";
+muiTokens.outlineTreatment = "notched";
 muiTokens.typography = { label: muiFont(), value: muiFont() };
 
 /**
@@ -211,6 +225,11 @@ const antdTokens = cloneTokens("antd.textarea", (path, fallback) => {
   if (path === "labelGap") return 8;
   if (path === "labelFontSize") return 14;
   if (path === "valueFontSize") return 14;
+  if (path === "labelInsetX") return 0;
+  if (path === "labelInactiveOffsetY") return 0;
+  if (path === "labelFloatingOffsetY") return 0;
+  if (path === "floatingLabelFontSize") return 14;
+  if (path === "notchFill") return "#00000000";
   if (path === "states.empty.enabled.boxFill") return "#ffffffff";
   if (path === "states.empty.enabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.empty.enabled.boxOpacity") return 1;
@@ -235,6 +254,8 @@ const antdTokens = cloneTokens("antd.textarea", (path, fallback) => {
 });
 antdTokens.strokeAlign = "inside";
 antdTokens.boxClips = true;
+antdTokens.labelPlacement = "stacked";
+antdTokens.outlineTreatment = "plain";
 antdTokens.typography = { label: antdFont(), value: antdFont() };
 
 export const astryxTextareaSource: ReviewedTextareaSource = {
@@ -276,13 +297,13 @@ export const muiTextareaSource: ReviewedTextareaSource = {
   sourceRoot:
     "recipe/sandboxes/input-field-mui/node_modules/@mui/material/TextField",
   anatomy: {
-    root: "No Textarea.js. TextField.js variant outlined default, multiline forwarded to OutlinedInput. InputLabel floating + notched outline receipted; label sits above as a named lowering",
+    root: "No Textarea.js. TextField.js variant outlined default, multiline forwarded to OutlinedInput. InputLabel outlined rest translate(14px, 16px) scale(1); shrink translate(14px, -9px) scale(0.75). NotchedOutline knockout is --palette-background-paper.",
     control:
       "OutlinedInput.js multiline root padding 16.5px 14px; input padding 0. TextareaAutosize.js minRows=1. InputBase.js lineHeight 1.4375em 23px. Height 23+33=56. shape.borderRadius 4 from @mui/system/createTheme/shape.js",
     value:
       "palette.text.primary #000000de; placeholder currentColor opacity 0.42 → #0000005d; disabled palette.text.disabled #00000061. Outline rgba(0,0,0,0.23) / action.disabled",
     label:
-      "InputLabel pairing; body1 16 Roboto Regular; palette.text.secondary #00000099 resting; shrink-to-notch receipted",
+      "InputLabel.js outlined rest 16 / shrink 12 (16×0.75); palette.text.secondary #00000099; notch fill --palette-background-paper #fff",
   },
   api: {
     multiline: "true for this compile",
@@ -335,6 +356,7 @@ const categoryForToken = (path: string): TextareaFactCategory => {
   if (
     path.includes("boxFill") ||
     path.includes("boxBorder") ||
+    path.includes("notchFill") ||
     path.endsWith(".label") ||
     path.endsWith(".value") ||
     path.includes("states")
@@ -354,12 +376,17 @@ const tokenFacts = (
     if (
       path.startsWith("tokens.typography") ||
       path === "tokens.strokeAlign" ||
-      path === "tokens.boxClips"
+      path === "tokens.boxClips" ||
+      path === "tokens.labelPlacement" ||
+      path === "tokens.outlineTreatment"
     ) {
       facts.push({
         occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
         category:
-          path === "tokens.strokeAlign" || path === "tokens.boxClips"
+          path === "tokens.strokeAlign" ||
+          path === "tokens.boxClips" ||
+          path === "tokens.labelPlacement" ||
+          path === "tokens.outlineTreatment"
             ? "anatomy"
             : "typography",
         source: {
@@ -474,10 +501,10 @@ const muiRefusals = makeRefusals("mui", [
     reason: "refused-by-recipe",
   },
   {
-    id: "refusal-floating-notch",
+    id: "refusal-fieldset-legend",
     evidence:
-      "OutlinedInput NotchedOutline + InputLabel shrink is a named lowering vs a label above the box; do not remint Input stay 115:295378",
-    target: "MUI floating label + notched outline",
+      "OutlinedInput NotchedOutline is a fieldset/legend gap; compile uses the Input-stay label-row knockout (paper fill) rather than a fieldset primitive. Do not remint Input stay 115:295378",
+    target: "MUI NotchedOutline fieldset/legend",
     reason: "lowered",
   },
   {

@@ -83,6 +83,13 @@ export const canonicalTextareaRecipeInstance = {
     labelGap: number("ds.textarea.labelGap", 4),
     labelFontSize: number("ds.textarea.labelFontSize", 14),
     valueFontSize: number("ds.textarea.valueFontSize", 14),
+    labelPlacement: "stacked",
+    outlineTreatment: "plain",
+    labelInsetX: number("ds.textarea.labelInsetX", 0),
+    labelInactiveOffsetY: number("ds.textarea.labelInactiveOffsetY", 0),
+    labelFloatingOffsetY: number("ds.textarea.labelFloatingOffsetY", 0),
+    floatingLabelFontSize: number("ds.textarea.floatingLabelFontSize", 14),
+    notchFill: color("ds.textarea.notchFill", "#00000000"),
     strokeAlign: "inside",
     boxClips: true,
     states: {

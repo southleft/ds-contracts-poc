@@ -55,6 +55,13 @@ test("textarea@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   assert.equal(mui.tokens.box.radius.fallback, 4, "shape.borderRadius");
   assert.equal(mui.tokens.box.lineHeight.fallback, 23, "1.4375em");
   assert.equal(mui.tokens.strokeAlign, "outside");
+  assert.equal(mui.tokens.labelPlacement, "floating");
+  assert.equal(mui.tokens.outlineTreatment, "notched");
+  assert.equal(mui.tokens.labelInsetX.fallback, 14);
+  assert.equal(mui.tokens.labelInactiveOffsetY.fallback, 16);
+  assert.equal(mui.tokens.labelFloatingOffsetY.fallback, -9);
+  assert.equal(mui.tokens.floatingLabelFontSize.fallback, 12);
+  assert.equal(mui.tokens.notchFill.fallback, "#ffffffff");
   assert.equal(mui.tokens.typography.label.resolvedFamily, "Roboto");
   assert.equal(antd.tokens.box.rows.fallback, 2, "HTML textarea rows default");
   assert.equal(antd.tokens.box.height.fallback, 54, "2*22+8+2");

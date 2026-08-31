@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "textarea-live-pivot-v2-prepare",
+  "teaching": "MUI TextField multiline compiles the named floating InputLabel + notch fill palette.background.paper; stacked Astryx/AntD unchanged",
+  "runIdentity": "c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "pageName": "Recipe Pivot / Textarea / c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "c45888d1f4f84823eb58c6df1200639d27e9b1ecc62c66776dc50470aa08228e",
+    "MUI": "b36722e29b59ad6aded9caa4fbffa3d74f5d40fda8c9c43c9bac0e32552d88a5",
+    "Ant Design": "ecdda45dfdded460e364619f504aaea07b6cbcd9eff1016e429e4c1b2d17dc7b"
+  },
+  "writerSha256": "84dde15946f1556675431203a7392bf1d9bfe90fef993d0881ee390b8496306a",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

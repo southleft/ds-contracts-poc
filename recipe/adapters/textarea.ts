@@ -107,8 +107,14 @@ const atLanding = (value: unknown, landing: string): unknown =>
 
 const expectedCategory = (target: string): TextareaFactCategory => {
   if (target.startsWith("tokens.typography")) return "typography";
-  if (target.endsWith("strokeAlign") || target.endsWith("boxClips"))
+  if (
+    target.endsWith("strokeAlign") ||
+    target.endsWith("boxClips") ||
+    target.endsWith("labelPlacement") ||
+    target.endsWith("outlineTreatment")
+  )
     return "anatomy";
+  if (target.includes("notchFill")) return "fill";
   if (target.includes("boxOpacity")) return "state";
   if (
     target.includes("boxFill") ||
