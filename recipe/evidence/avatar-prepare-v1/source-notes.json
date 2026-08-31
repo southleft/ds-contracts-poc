@@ -1,0 +1,124 @@
+{
+  "artifactVersion": "avatar-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022"
+  ],
+  "shapeDecisionToCarry": "Avatar is a circle-clipped initials fallback. Astryx default size is named small → 36, not medium 48. MUI Avatar is 40 circular with no size prop. AntD default size is controlHeight 32. Size is not a shared axis. Shape circular is the named default on all three — do not invent a rounded/square axis. Status, Group, src image, and the person-icon fallback are named refusals. Shared visible content is initials JD (Astryx getInitials('John Doe'); MUI children/alt; AntD children).",
+  "libraries": {
+    "Astryx": {
+      "export": "Avatar",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Avatar/Avatar.tsx",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/theme/tokens.stylex.ts"
+      ],
+      "shape": "circle-clipped initials fallback",
+      "namedSoFar": {
+        "sizeDefault": "small → resolveSize 36",
+        "radius": "--radius-full 9999",
+        "overflow": "hidden on content (wrapper stays relative so status is not clipped)",
+        "fill": "--color-neutral light rgba(5,54,89,0.1) = #0536591a",
+        "text": "--color-text-secondary light #4E606F",
+        "font": "size * INITIALS_FONT_SIZE_RATIO 0.4 → 14.4 / --font-weight-medium / --font-family-body stack",
+        "initials": "getInitials('John Doe') → JD",
+        "example": "<Avatar name=\"John Doe\" />"
+      },
+      "receipt": [
+        "status overlay (CIRCLE_EDGE_OFFSET_RATIO) — Badge already taught overlay",
+        "AvatarGroup ring/overlap",
+        "src / fallbackSrc image",
+        "DefaultIcon when name is absent",
+        "named sizes tiny…large and numeric sizes"
+      ]
+    },
+    "MUI": {
+      "export": "Avatar",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Avatar/Avatar.js"
+      ],
+      "shape": "circle-clipped initials fallback",
+      "namedSoFar": {
+        "variantDefault": "circular",
+        "size": "width/height 40 (no size prop)",
+        "radius": "50% → 20",
+        "overflow": "hidden",
+        "fillWhenColorDefault": "palette.grey[400] #bdbdbd",
+        "textWhenColorDefault": "palette.background.default #ffffff",
+        "fontSize": "pxToRem(20) → 20",
+        "lineHeight": 1,
+        "initials": "children string or alt[0] when image fails; compile children JD"
+      },
+      "receipt": [
+        "variant rounded/square",
+        "Person fallback 75% when no src/children/alt",
+        "src / srcSet image",
+        "dark-mode grey[600]"
+      ]
+    },
+    "Ant Design": {
+      "export": "Avatar",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/avatar/Avatar.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/avatar/style/index.js"
+      ],
+      "shape": "circle-clipped initials fallback",
+      "namedSoFar": {
+        "sizeDefault": "'default' → containerSize = controlHeight 32",
+        "shapeDefault": "circle → borderRadius 50%",
+        "overflow": "hidden",
+        "fill": "avatarBg = colorTextPlaceholder = colorTextQuaternary #00000040",
+        "text": "avatarColor = colorTextLightSolid = colorWhite #ffffffff",
+        "textFontSize": "fontSize 14 (prepareComponentToken textFontSize)",
+        "lineHeight": "resetComponent token.lineHeight × fontSize → 14 × 1.5714 → 22",
+        "border": "lineWidth 1 lineType solid transparent",
+        "initials": "children string JD",
+        "gap": 4
+      },
+      "receipt": [
+        "shape square",
+        "size large/small and numeric/responsive size",
+        "src image",
+        "icon slot",
+        "Avatar.Group overlap",
+        "gap scale of overflowing initials"
+      ]
+    }
+  },
+  "proposedAxesToConfirm": {
+    "Size": "not shared — Astryx small 36, MUI 40, AntD 32. Do not invent a shared size.",
+    "Shape": "circular/circle is the named default on all three. rounded/square are not a 3-way axis.",
+    "notAnAxisUntilShared": [
+      "status overlay",
+      "AvatarGroup",
+      "src image",
+      "person-icon fallback",
+      "MUI rounded/square",
+      "AntD lg/sm",
+      "Astryx named/numeric sizes"
+    ]
+  },
+  "sharedContentProposal": [
+    "initials JD — Astryx getInitials('John Doe'); MUI children; AntD children. The teaching class is the initials fallback, not a reminted Badge host circle and not a live image."
+  ],
+  "note": "Writer class to teach is circle-clipped content (clipsContent true + radius-full) and the initials fallback. Do not remint the Badge placeholder host as Avatar. Do not invent an image fill."
+}
