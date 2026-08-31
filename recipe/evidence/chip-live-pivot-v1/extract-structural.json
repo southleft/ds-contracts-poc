@@ -1,0 +1,59 @@
+{
+  "artifactVersion": "chip-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:75976",
+  "pageName": "Recipe Pivot / Chip / 932f13fe-d960c0d4-908fd120-chip-v1",
+  "runIdentity": "932f13fe-d960c0d4-908fd120-chip-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75976",
+  "taughtHostClass": "SF Pro Medium/Regular listed and loadable but zero-glyph (Calendar v23 class); painted named fallback Roboto Medium/Regular. Do not invent Inter.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "chip@1 is one named default component, not a set. Component Container was created inside each library Section; figma_arrange_component_set was not used.",
+  "components": [
+    {
+      "library": "Astryx",
+      "export": "Token",
+      "componentId": "183:75989",
+      "sectionId": "183:75988",
+      "containerId": "183:75991",
+      "adapterIdentity": "astryx-chip-reviewed-v1",
+      "recipeHash": "932f13fefdd27eb4dd2b5fb64e01bcb803ee1f4f6418109114faf414894738b6",
+      "variantCount": 1,
+      "box": { "w": 36, "h": 24, "radius": 4, "stroke": 0, "align": "INSIDE", "padX": 8, "padY": 0 },
+      "label": "Tag",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Medium" } }
+    },
+    {
+      "library": "MUI",
+      "export": "Chip",
+      "componentId": "183:76004",
+      "sectionId": "183:76003",
+      "containerId": "183:76006",
+      "adapterIdentity": "mui-chip-reviewed-v1",
+      "recipeHash": "d960c0d44fe096083e7d434c72bc33f7b1126fef178f7686abb9216a0f4fcdd3",
+      "variantCount": 1,
+      "box": { "w": 46, "h": 32, "radius": 16, "stroke": 0, "align": "INSIDE", "padX": 12, "padY": 0 },
+      "label": "Tag",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Tag",
+      "componentId": "183:76019",
+      "sectionId": "183:76018",
+      "containerId": "183:76021",
+      "adapterIdentity": "antd-chip-reviewed-v1",
+      "recipeHash": "908fd120d4b84efeb619230a15e1001d009d3f980d44dc13efcc275631855038",
+      "variantCount": 1,
+      "box": { "w": 36, "h": 22, "radius": 4, "stroke": 1, "align": "INSIDE", "padX": 7, "padY": 0 },
+      "label": "Tag",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

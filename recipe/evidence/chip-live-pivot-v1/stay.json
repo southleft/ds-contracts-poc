@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "chip-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:75976",
+  "pageName": "Recipe Pivot / Chip / 932f13fe-d960c0d4-908fd120-chip-v1",
+  "runIdentity": "932f13fe-d960c0d4-908fd120-chip-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75976",
+  "components": {
+    "Astryx Token": "183:75989",
+    "MUI Chip": "183:76004",
+    "Ant Design Tag": "183:76019"
+  },
+  "containers": {
+    "Astryx": "183:75991",
+    "MUI": "183:76006",
+    "Ant Design": "183:76021"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "in-page Token/Chip/Tag; one named default cell; no Color/Size/Closable axis; Astryx compiles Token (no Chip export)"
+}
