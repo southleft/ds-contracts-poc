@@ -1,0 +1,92 @@
+{
+  "artifactVersion": "link-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022",
+    "183:76063"
+  ],
+  "shapeDecisionToCarry": "Link is inline text decoration. AntD has no top-level Link export — that absence is named against Typography.Link (docs/34 Phase 3). Compile Typography.Link as the AntD cell; do not invent antd/es/link. Astryx hasUnderline default false (underline on hover only). MUI underline default always. Underline-at-rest is not a shared axis — do not invent a hover variant matrix. Color palettes are not a shared axis.",
+  "libraries": {
+    "Astryx": {
+      "export": "Link",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Link/Link.tsx",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/theme/tokens.stylex.ts"
+      ],
+      "shape": "inline text; decoration none at rest, underline on hover",
+      "namedSoFar": {
+        "hasUnderlineDefault": false,
+        "colorDefault": "accent → --color-accent light #0064E0",
+        "display": "inline-flex align center; gap --spacing-0-5 2",
+        "font": "inherit; standalone uses --text-body-size 14 / leading 1.4286 → 20",
+        "hover": "underline + color-mix 15% tint",
+        "example": "<Link href=\"#\">Link</Link>"
+      },
+      "receipt": ["hasUnderline always", "isExternalLink icon", "isDisabled 0.5", "button reset when href undefined", "color primary/secondary/…"]
+    },
+    "MUI": {
+      "export": "Link",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Link/Link.js"
+      ],
+      "shape": "inline text; decoration underline at rest (underline=always)",
+      "namedSoFar": {
+        "underlineDefault": "always",
+        "colorDefault": "primary",
+        "variantDefault": "inherit",
+        "componentDefault": "a"
+      },
+      "receipt": ["underline hover/none", "color secondary…warning", "component=button", "focusVisible"]
+    },
+    "Ant Design": {
+      "export": "Typography.Link",
+      "package": "antd@5.29.3",
+      "namedAbsence": "no top-level Link — carried against Typography.Link",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/typography/Link.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/typography/Base.js"
+      ],
+      "shape": "inline <a> via Typography Base",
+      "namedSoFar": {
+        "component": "a",
+        "color": "colorLink → colorPrimary #1677ff when seed colorLink is empty",
+        "ellipsis": "boolean only"
+      },
+      "receipt": ["ellipsis", "copyable/editable Typography extras", "target=_blank rel default"]
+    }
+  },
+  "proposedAxesToConfirm": {
+    "UnderlineAtRest": "not shared — Astryx none, MUI always. Hover underline is a state, not a rest cell.",
+    "Color": "not shared — Astryx accent, MUI primary, AntD colorLink/primary",
+    "notAnAxisUntilShared": [
+      "hasUnderline / underline hover/none",
+      "external icon",
+      "disabled",
+      "ellipsis",
+      "color palettes"
+    ]
+  },
+  "sharedContentProposal": [
+    "visible label Link — inline text only; no invented icon, no hover variant"
+  ],
+  "note": "Writer class to teach is inline text decoration. AntD compiles Typography.Link. Do not invent a top-level AntD Link. Do not compile hover as a second cell just to form a set."
+}
