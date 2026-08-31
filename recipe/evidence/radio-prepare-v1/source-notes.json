@@ -1,0 +1,62 @@
+{
+  "artifactVersion": "radio-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "shapeDecisionToCarry": "Astryx has no standalone Radio. RadioList + RadioListItem is the unit. Recipe anatomy must be list-shaped or Astryx is a named refusal. Do not invent a standalone Astryx Radio.",
+  "libraries": {
+    "Astryx": {
+      "export": "RadioList + RadioListItem",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/RadioList/RadioList.tsx",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/RadioList/RadioListItem.tsx"
+      ],
+      "defaultOrientation": "vertical",
+      "groupGapVertical": "--spacing-2 (8, same as Checkbox row gap)",
+      "groupGapHorizontal": "--spacing-5",
+      "item": {
+        "wrapperMd": 24,
+        "circleMd": 22,
+        "dotMd": 10,
+        "wrapperSm": 20,
+        "circleSm": 18,
+        "dotSm": 8,
+        "borderWidth": "--border-width 1",
+        "circleRadius": "50%",
+        "checkedFill": "--color-accent #0064e0",
+        "dotFill": "--color-on-accent",
+        "disabledOpacity": 0.5
+      },
+      "sizeIsNotAnAxis": true
+    },
+    "MUI": {
+      "export": "Radio + RadioGroup",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Radio/Radio.js",
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Radio/RadioButtonIcon.js",
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/RadioGroup"
+      ],
+      "notes": "SwitchBase + SvgIcon like Checkbox. Default size medium, color primary. RadioGroup default column. Inner radio glyph is SVG — receipt or lower like Checkbox check path. Label is FormControlLabel pairing."
+    },
+    "Ant Design": {
+      "export": "Radio + Radio.Group",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/radio/radio.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/radio/group.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/radio/style/index.js"
+      ],
+      "notes": "wrapper is inline-flex align baseline, marginInlineEnd wrapperMarginInlineEnd. radioSize from token (controlInteractiveSize 16). Inner dot padding 4 → disabled-dot calc(radioSize - 8). Group is inline-block (horizontal siblings) unless block."
+    }
+  },
+  "proposedAxes": {
+    "Selected": ["a", "b"],
+    "Disabled": ["false", "true"],
+    "notAnAxis": ["size", "orientation — carry each library default"]
+  },
+  "sharedContentProposal": ["Email", "Phone"]
+}
