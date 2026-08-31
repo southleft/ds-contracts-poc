@@ -10,7 +10,9 @@
     "Ant Design": "8714d3a89a343e139b8bf5053aac8362ccd42a888744e0ae9992f88a760a4fd6"
   },
   "writerSha256": "1aededae97245f660d6e64b89009899632c31e020ac6587eb71844bbb912a610",
-  "liveFigma": false,
+  "liveFigma": true,
+  "pageId": "183:76063",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76063",
   "humanGrade": "queued-for-TJ",
   "overallSuccess": false,
   "productV1": "INCOMPLETE"

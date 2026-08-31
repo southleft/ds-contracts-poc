@@ -1,0 +1,59 @@
+{
+  "artifactVersion": "avatar-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:76063",
+  "pageName": "Recipe Pivot / Avatar / 8b6f943a-0b73c85a-8714d3a8-avatar-v1",
+  "runIdentity": "8b6f943a-0b73c85a-8714d3a8-avatar-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76063",
+  "taughtHostClass": "SF Pro listed but zero-glyph; painted named fallback Roboto Medium/Regular. Auto-layout collapsed FIXED squares to hug-text until resizeWithoutConstraints was re-asserted after the label append. Do not invent Inter.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "avatar@1 is one named default component per library, not a set. Component Container was created inside each library Section; figma_arrange_component_set was not used.",
+  "components": [
+    {
+      "library": "Astryx",
+      "export": "Avatar",
+      "componentId": "183:76076",
+      "sectionId": "183:76075",
+      "containerId": "183:76078",
+      "adapterIdentity": "astryx-avatar-reviewed-v1",
+      "recipeHash": "8b6f943a530d5004a52c12d8bc3b2743c04790d28bf16ac35ef4a50a15b834fe",
+      "variantCount": 1,
+      "box": { "w": 36, "h": 36, "radius": 9999, "stroke": 0, "fill": "#0536591a" },
+      "label": "JD",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Medium" } }
+    },
+    {
+      "library": "MUI",
+      "export": "Avatar",
+      "componentId": "183:76091",
+      "sectionId": "183:76090",
+      "containerId": "183:76093",
+      "adapterIdentity": "mui-avatar-reviewed-v1",
+      "recipeHash": "0b73c85a12e030b2036500d8a3ae401d9a2774611b30a83a9eedb1dd1e07832f",
+      "variantCount": 1,
+      "box": { "w": 40, "h": 40, "radius": 20, "stroke": 0, "fill": "#bdbdbdff" },
+      "label": "JD",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Avatar",
+      "componentId": "183:76106",
+      "sectionId": "183:76105",
+      "containerId": "183:76108",
+      "adapterIdentity": "antd-avatar-reviewed-v1",
+      "recipeHash": "8714d3a89a343e139b8bf5053aac8362ccd42a888744e0ae9992f88a760a4fd6",
+      "variantCount": 1,
+      "box": { "w": 32, "h": 32, "radius": 16, "stroke": 1, "fill": "#00000040" },
+      "label": "JD",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

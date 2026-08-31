@@ -314,6 +314,7 @@ bindFloat(label, "fontSize", prefix + ".labelFontSize");
 bindFloat(label, "lineHeight", prefix + ".labelLineHeight");
 component.appendChild(label);
 
+component.resizeWithoutConstraints(geom.box.height, geom.box.height);
 component.layoutSizingHorizontal = "FIXED";
 component.layoutSizingVertical = "FIXED";
 if (component.layoutMode !== "HORIZONTAL") throw new Error("AVATAR-FAKE-LAYOUT:" + component.name);

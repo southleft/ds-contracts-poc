@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "avatar-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:76063",
+  "pageName": "Recipe Pivot / Avatar / 8b6f943a-0b73c85a-8714d3a8-avatar-v1",
+  "runIdentity": "8b6f943a-0b73c85a-8714d3a8-avatar-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76063",
+  "components": {
+    "Astryx Avatar": "183:76076",
+    "MUI Avatar": "183:76091",
+    "Ant Design Avatar": "183:76106"
+  },
+  "containers": {
+    "Astryx": "183:76078",
+    "MUI": "183:76093",
+    "Ant Design": "183:76108"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "circle-clipped initials JD; Astryx small 36 / MUI 40 / AntD 32; size and shape are not axes"
+}
