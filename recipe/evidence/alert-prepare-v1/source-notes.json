@@ -1,0 +1,69 @@
+{
+  "artifactVersion": "alert-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495"
+  ],
+  "shapeDecisionToCarry": "Astryx ships Banner (not a standalone Alert). MUI ships Alert. AntD ships Alert. Astryx AlertDialog is a dialog — save for Dialog last. Compile the in-page banner/alert, not a toast overlay.",
+  "libraries": {
+    "Astryx": {
+      "export": "Banner",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Banner/Banner.tsx"
+      ],
+      "namedSoFar": {
+        "statusRequired": ["info", "warning", "error", "success"],
+        "example": "<Banner status=\"info\" title=\"New update available\" />",
+        "noStandaloneAlert": true
+      },
+      "receipt": ["isDismissable", "collapsible children", "container card|section", "AlertDialog (Dialog last)", "Toast overlay"]
+    },
+    "MUI": {
+      "export": "Alert",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Alert/Alert.js"
+      ],
+      "namedSoFar": {
+        "severityDefault": "success",
+        "variantDefault": "standard",
+        "severity": ["error", "info", "success", "warning"]
+      },
+      "open": "standard vs outlined vs filled colours from Alert.js; icon mapping; do not invent padding"
+    },
+    "Ant Design": {
+      "export": "Alert",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/alert/Alert.js"
+      ],
+      "namedSoFar": {
+        "typeDefault": "info",
+        "bannerModeDefaultsTo": "warning",
+        "types": ["success", "info", "error", "warning"]
+      },
+      "open": "style tokens for padding, radius, status colours; banner prop is not the shared axis"
+    }
+  },
+  "proposedAxesToConfirm": {
+    "Status": ["info", "success", "warning", "error"],
+    "notAnAxisUntilShared": ["variant standard/outlined/filled", "banner mode", "closable", "Toast/Snackbar"]
+  },
+  "sharedContentProposal": ["title from Astryx example — lock after reading all three message defaults"],
+  "note": "MUI default severity is success, AntD default type is info, Astryx status is required. Do not invent a fourth default. Status as an axis can carry all four named values; the default variant is per-library."
+}
