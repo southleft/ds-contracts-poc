@@ -1,0 +1,63 @@
+{
+  "artifactVersion": "textarea-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302"
+  ],
+  "shapeDecisionToCarry": "All three libraries ship a multi-line text control. Astryx is TextArea (Field + rows default 3). AntD is Input.TextArea (rc-textarea). MUI has no standalone Textarea export — the unit is TextField multiline / InputBase. Do not invent a MUI Textarea. Do not invent minRows/padding until InputBase.js is opened. Input stay 115:295378 is signed — do not remint Input as Textarea.",
+  "libraries": {
+    "Astryx": {
+      "export": "TextArea",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/TextArea/TextArea.tsx"
+      ],
+      "namedSoFar": {
+        "rowsDefault": 3,
+        "heightFrom": "rows, not size",
+        "sizeDefault": "md — padding only; size is not a shared axis with AntD/MUI",
+        "paddingBlockMd": "--spacing-1 (wrapper) / --spacing-2 also present",
+        "uses": "Field + inputWrapperStyles / inputStatusBorderStyles",
+        "exampleLabel": "Notes"
+      },
+      "receipt": ["character counter", "startIcon", "status", "isLoading", "disabledMessage tooltip"]
+    },
+    "MUI": {
+      "export": "TextField multiline / InputBase",
+      "package": "@mui/material@9.2.0",
+      "sourceStatus": "No Textarea.js in @mui/material. Next PREPARE must open InputBase.js + TextField.js for minRows default, padding, and outlined vs standard. Do not invent.",
+      "notes": "Same InputBase family as the signed Input stay. Textarea is multiline of that control, not a remint of 115:295378."
+    },
+    "Ant Design": {
+      "export": "Input.TextArea",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/input/TextArea.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/input/style/textarea.js"
+      ],
+      "namedSoFar": {
+        "wraps": "rc-textarea",
+        "style": "useStyle from ./style/textarea plus shared Input style"
+      },
+      "open": "default rows from rc-textarea; minHeight from fontSize*lineHeight*rows — read before compile"
+    }
+  },
+  "proposedAxesToConfirm": {
+    "Disabled": ["false", "true"],
+    "notAnAxisUntilShared": ["rows", "size", "status", "variant", "allowClear", "showCount"]
+  },
+  "sharedContentProposal": ["Notes"]
+}
