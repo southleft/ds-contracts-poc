@@ -1,0 +1,67 @@
+{
+  "artifactVersion": "tabs-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:76193",
+  "pageName": "Recipe Pivot / Tabs / 34d1e257-b5d949f6-20e72946-tabs-v1",
+  "runIdentity": "34d1e257-b5d949f6-20e72946-tabs-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76193",
+  "taughtHostClass": "SF Pro listed but zero-glyph; painted named fallback Roboto Regular / Medium. MUI FLOAT-bound lineHeight became 125px; rebound as PERCENT 125 (named 1.25). Overlay ink-bar offsets were receipted — indicator is a child of the selected tab.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "tabs@1 is one named default rail per library, not a set. Component Container was created inside each library Section; figma_arrange_component_set was not used.",
+  "components": [
+    {
+      "library": "Astryx",
+      "export": "TabList",
+      "componentId": "183:76208",
+      "sectionId": "183:76207",
+      "containerId": "183:76214",
+      "rail": { "gap": 2, "w": 165, "h": 22 },
+      "selected": { "padX": 12, "padY": 0, "label": "Item One", "fill": "#0a1317ff" },
+      "rest": { "label": "Item Two", "fill": "#4e606fff" },
+      "indicator": { "h": 2, "fill": "#0064e0ff", "boundTo": "selected-child" },
+      "fontPainted": {
+        "selected": { "family": "Roboto", "style": "Medium" },
+        "rest": { "family": "Roboto", "style": "Regular" }
+      }
+    },
+    {
+      "library": "MUI",
+      "export": "Tabs",
+      "componentId": "183:76231",
+      "sectionId": "183:76230",
+      "containerId": "183:76237",
+      "rail": { "gap": 0, "w": 195, "h": 48 },
+      "selected": { "padX": 16, "padY": 12, "minW": 90, "minH": 48, "label": "Item One", "fill": "#1976d2ff", "textCase": "UPPER" },
+      "rest": { "label": "Item Two", "fill": "#00000099" },
+      "indicator": { "h": 2, "fill": "#1976d2ff", "boundTo": "selected-child" },
+      "type": { "fontSize": 14, "lineHeight": "percent-125" },
+      "fontPainted": {
+        "selected": { "family": "Roboto", "style": "Medium" },
+        "rest": { "family": "Roboto", "style": "Medium" }
+      }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Tabs",
+      "componentId": "183:76252",
+      "sectionId": "183:76251",
+      "containerId": "183:76258",
+      "rail": { "gap": 32, "w": 147, "h": 48 },
+      "selected": { "padX": 0, "padY": 12, "label": "Item One", "fill": "#1677ffff" },
+      "rest": { "label": "Item Two", "fill": "#000000e0" },
+      "indicator": { "h": 2, "fill": "#1677ffff", "boundTo": "selected-child" },
+      "type": { "fontSize": 14, "lineHeight": 22 },
+      "fontPainted": {
+        "selected": { "family": "Roboto", "style": "Regular" },
+        "rest": { "family": "Roboto", "style": "Regular" }
+      }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}
