@@ -1,0 +1,53 @@
+{
+  "artifactVersion": "f1-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "phase": "docs/34 Phase 5 — F1 held-out exam",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "liveDayPickerWrite": false,
+  "inventedF1Pass": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022",
+    "183:76063",
+    "183:76109",
+    "183:76151",
+    "183:76193",
+    "183:76259",
+    "183:76315"
+  ],
+  "examOptionsNamedNotChosen": [
+    {
+      "id": "react-day-picker-calendar",
+      "status": "held-blind",
+      "note": "Spending the blindness is a TJ decision per docs/33 Phase 4. No live day-picker write in this PREPARE."
+    },
+    {
+      "id": "fourth-library-boilerplate",
+      "status": "available-only-because-phases-1-4-signed",
+      "note": "A fourth-library exam over signed boilerplate archetypes is named as the stronger F1 argument. Not run. Not scored."
+    }
+  ],
+  "proofBar": "A pre-registered prediction, recorded before the run, scored after — the day-picker pattern. This PREPARE records the exam names only. It does not register a prediction, does not spend blindness, and does not invent an F1 pass.",
+  "phase1CompleteStructurally": {
+    "tabs": "183:76193",
+    "menu": "183:76259",
+    "dialog": "183:76315"
+  },
+  "blockedOn": "TJ chooses which F1 exam to spend, then a live write is a separate AUTHORIZE."
+}

@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "dialog-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:76315",
+  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-dialog-v1",
+  "runIdentity": "e482eb49-b275da16-d479cda5-dialog-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76315",
+  "components": {
+    "Astryx Dialog": "183:76330",
+    "MUI Dialog": "183:76348",
+    "Ant Design Modal": "183:76366"
+  },
+  "containers": {
+    "Astryx": "183:76333",
+    "MUI": "183:76351",
+    "Ant Design": "183:76369"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "open paper chrome plus title and body; Polar full-bleed scrim size, centering, and shadows receipted"
+}

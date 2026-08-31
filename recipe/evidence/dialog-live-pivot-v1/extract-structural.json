@@ -1,0 +1,62 @@
+{
+  "artifactVersion": "dialog-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:76315",
+  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-dialog-v1",
+  "runIdentity": "e482eb49-b275da16-d479cda5-dialog-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76315",
+  "taughtHostClass": "SF Pro listed but zero-glyph; painted named fallback Roboto Medium / Regular. Full-bleed scrim fill is named in receipts; Polar viewport size and centering were not invented.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "dialog@1 is one named default paper per library, not a set. Component Container was created inside each library Section; figma_arrange_component_set was not used.",
+  "components": [
+    {
+      "library": "Astryx",
+      "export": "Dialog",
+      "componentId": "183:76330",
+      "sectionId": "183:76329",
+      "containerId": "183:76333",
+      "paper": { "paddingX": 16, "paddingY": 16, "radius": 12, "minWidth": 400, "w": 400, "h": 80, "fill": "#ffffffff" },
+      "title": { "label": "Dialog title", "fontSize": 20, "lineHeight": 28, "fill": "#0a1317ff" },
+      "body": { "label": "Dialog body", "fontSize": 14, "lineHeight": 20, "fill": "#0a1317ff" },
+      "fontPainted": {
+        "title": { "family": "Roboto", "style": "Medium" },
+        "body": { "family": "Roboto", "style": "Regular" }
+      }
+    },
+    {
+      "library": "MUI",
+      "export": "Dialog",
+      "componentId": "183:76348",
+      "sectionId": "183:76347",
+      "containerId": "183:76351",
+      "paper": { "paddingX": 24, "paddingY": 16, "radius": 4, "minWidth": 600, "w": 600, "h": 88, "fill": "#ffffffff" },
+      "title": { "label": "Dialog title", "fontSize": 20, "lineHeight": 32, "fill": "#000000de" },
+      "body": { "label": "Dialog body", "fontSize": 16, "lineHeight": 24, "fill": "#000000de" },
+      "fontPainted": {
+        "title": { "family": "Roboto", "style": "Medium" },
+        "body": { "family": "Roboto", "style": "Regular" }
+      }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Modal",
+      "componentId": "183:76366",
+      "sectionId": "183:76365",
+      "containerId": "183:76369",
+      "paper": { "paddingX": 24, "paddingY": 20, "radius": 8, "gap": 8, "minWidth": 520, "w": 520, "h": 94, "fill": "#ffffffff" },
+      "title": { "label": "Dialog title", "fontSize": 16, "lineHeight": 24, "fill": "#000000e0" },
+      "body": { "label": "Dialog body", "fontSize": 14, "lineHeight": 22, "fill": "#000000e0" },
+      "fontPainted": {
+        "title": { "family": "Roboto", "style": "Medium" },
+        "body": { "family": "Roboto", "style": "Regular" }
+      }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

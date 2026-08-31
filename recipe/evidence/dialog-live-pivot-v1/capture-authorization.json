@@ -1,0 +1,68 @@
+{
+  "artifactVersion": "dialog-live-v1-capture-authorization-v1",
+  "authorizationId": "dialog-live-v1",
+  "status": "owner-authorized hill-climb window; one new Scratch page; cryptographic broker packet not reused",
+  "authorizationIntent": true,
+  "antecedent": {
+    "ownerMandate": "2026-08-31 unattended hill-climb of docs/34 Phase 1",
+    "writerSha256": "8929373e610807e79a7a4115076b9c62b43ab24b020a568abcd13bfe8e56cbf3",
+    "splitWriters": [
+      "writer-astryx-dialog-reviewed-v1.js",
+      "writer-mui-dialog-reviewed-v1.js",
+      "writer-antd-dialog-reviewed-v1.js"
+    ],
+    "compactHosts": [
+      "compact-astryx.js",
+      "compact-mui.js",
+      "compact-antd.js"
+    ],
+    "runIdentity": "e482eb49-b275da16-d479cda5-dialog-v1",
+    "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-dialog-v1"
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "oneNewPage": true,
+    "signedPagesForbidden": [
+      "115:295378",
+      "163:35981",
+      "183:70641",
+      "173:48924",
+      "181:64873",
+      "183:69150",
+      "85:6781",
+      "183:74742",
+      "183:75031",
+      "183:75302",
+      "183:75495",
+      "183:75801",
+      "183:75976",
+      "183:76022",
+      "183:76063",
+      "183:76109",
+      "183:76151",
+      "183:76193",
+      "183:76259"
+    ],
+    "cleanupOnFailureOnly": true
+  },
+  "execution": {
+    "maximumAttempts": 1,
+    "attemptsExecuted": 1,
+    "newTxnPerVersion": true,
+    "doNotRestartFailedAttemptAsIs": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "queued-for-TJ",
+    "overallSuccess": false,
+    "productV1": "INCOMPLETE",
+    "inventedGradeForbidden": true
+  }
+}
