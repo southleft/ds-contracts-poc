@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "radio-live-pivot-v1-prepare",
+  "teaching": "list-shaped Selected × Disabled group compiled from named Astryx RadioList, MUI Radio+RadioGroup, and AntD Radio.Group facts; standalone Astryx Radio refused",
+  "runIdentity": "98044e9d-4c17efd5-3dd31d13-radio-v1",
+  "pageName": "Recipe Pivot / Radio / 98044e9d-4c17efd5-3dd31d13-radio-v1",
+  "namespace": "ds.contracts.radio.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "98044e9df4fddb9b835af5dc800072386276caa735f246a037d12b7fbea59640",
+    "MUI": "4c17efd5ed8881da9e776179f3ffea8d5f73d8a2664dac64c99e24d76b5b5581",
+    "Ant Design": "3dd31d135507a8c847d3d0c35221d46cbfe466d0a38c8f215fe3e5d111b20db5"
+  },
+  "writerSha256": "0b2e7eaf53e1dff86a642090bd41f456d36bb59e2d48df129d759bd8a3f5bac1",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

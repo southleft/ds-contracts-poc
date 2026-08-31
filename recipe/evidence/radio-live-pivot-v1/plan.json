@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Radio / 98044e9d-4c17efd5-3dd31d13-radio-v1",
+  "runIdentity": "98044e9d-4c17efd5-3dd31d13-radio-v1",
+  "namespace": "ds.contracts.radio.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "radio@1 list-shaped RadioList / RadioGroup / Radio.Group from named package tokens; no standalone Astryx Radio; MUI SVG disc and AntD ::after scale receipted",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-radio-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "98044e9df4fddb9b835af5dc800072386276caa735f246a037d12b7fbea59640",
+      "envelopeHash": "b325076bbb464fc6842d17b15a7da1e4e834b918e1bc05c634feb5c8c9de10c8",
+      "variantCount": 4,
+      "variableCount": 26,
+      "comparedIrFacts": 249
+    },
+    {
+      "adapterIdentity": "mui-radio-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "4c17efd5ed8881da9e776179f3ffea8d5f73d8a2664dac64c99e24d76b5b5581",
+      "envelopeHash": "c2393d4fc09f677f219c596e74d7976d516868cf6d8a9ac15ae41ee6b1fa3921",
+      "variantCount": 4,
+      "variableCount": 26,
+      "comparedIrFacts": 249
+    },
+    {
+      "adapterIdentity": "antd-radio-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "3dd31d135507a8c847d3d0c35221d46cbfe466d0a38c8f215fe3e5d111b20db5",
+      "envelopeHash": "b6e371f2799768c1657f50147d72fd9fb148ea99595397ea0b1a9c69e837ba59",
+      "variantCount": 4,
+      "variableCount": 26,
+      "comparedIrFacts": 249
+    }
+  ]
+}
