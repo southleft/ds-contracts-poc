@@ -1,0 +1,194 @@
+{
+  "artifactVersion": "combobox-live-v42-attempt-1-v1",
+  "status": "attempt 1 mint stayed; library-named overlay chrome held; original-plan accounting 0/0 and 13307/13307 on both roots; two-cycle scene-derived fixed-point stable; restore 144 held; extract walk cleared; probe usability/restoration green on both roots; 72 captures technical-passed; cleanup persisted not executed",
+  "authorizationCommit": "4209be6467b3331f6ca583ca520bf5a4f2da44de",
+  "codeCommit": "4209be6467b3331f6ca583ca520bf5a4f2da44de",
+  "antecedentCommit": "36e56e83176ec944dde9e5a9c54ba37b65d78a9d",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "58ef8274-85b2f4a0-combobox-v1",
+    "forbiddenRunIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenV41PageId": "163:35981"
+  },
+  "teaching": {
+    "one": "adapters land library-named overlay chrome (MUI Paper fill/radius 4, listbox 8px 0, option paddingX 16, elevation Paper borderless; AntD colorBgElevated/colorBorder/borderRadiusLG 8/paddingXXS 4/controlPaddingHorizontal 8/12) instead of canonical-fixture clones; multi-layer Paper shadows-1 / box-shadow-secondary not expressible on combobox@1 single drop-shadow — named receipt; status-slot 14/16 and AntD empty-item optionPadding deferred (no own padding channel)",
+    "cleared": true,
+    "clearedFor": "canonical-fixture overlay chrome clones on combobox@1",
+    "v41PageUntouched": true,
+    "v41IdentityNotReused": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 58ef8274-85b2f4a0-combobox-v1",
+    "pageId": "183:70641",
+    "runIdentity": "58ef8274-85b2f4a0-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": [
+      "183:71505",
+      "183:70736",
+      "183:72369",
+      "183:71600"
+    ],
+    "muiComboboxSetId": "183:71505",
+    "muiOptionSetId": "183:70736",
+    "antdComboboxSetId": "183:72369",
+    "antdOptionSetId": "183:71600",
+    "muiCollectionId": "VariableCollectionId:183:70643",
+    "antdCollectionId": "VariableCollectionId:183:71507",
+    "inputPageUntouched": true,
+    "v41PageUntouched": true,
+    "operationalRetriesBeforeAccept": "none; first signed writer accepted",
+    "receiptSha256": "5fde8c3e393529e9cd8a87153efd914c4aff9b2a17ef70e2cbe573b36b532a2c"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true,
+    "receiptSha256": "561bcbdd0e73a510a0c2d1627880ac347bac47b97a23d6667f000f5c7099136e"
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "191483c3ca3918a1334df16cbb6f83f09cbed1e679e62484b85595734b48d65e",
+    "rawResponseBytes": 5818749,
+    "hostCollapseRefused": false,
+    "hostCollapseAccepted": true,
+    "originalPlanAccountingOk": true,
+    "originalPlanMatched": 13307,
+    "originalPlanDenominator": 13307,
+    "comboboxRootsMatched": "12915/12915",
+    "optionRootsMatched": "392/392",
+    "hostAccountingRefused": false,
+    "fixedPointStable": true,
+    "fixedPointSceneIrEqualAcrossCycles": true,
+    "fixedPointCompiledIrEqualAcrossCycles": true,
+    "accountingMui": {
+      "extra": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "silent": 0,
+      "matched": 13307,
+      "denominator": 13307
+    },
+    "accountingAntd": {
+      "extra": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "silent": 0,
+      "matched": 13307,
+      "denominator": 13307
+    },
+    "muiFixedPoint": {
+      "cycle1SceneIrSha256": "9cb749deb404a53e5d02cb96a831826a39a6eba3247317a481f42023805d99da",
+      "cycle2SceneIrSha256": "9cb749deb404a53e5d02cb96a831826a39a6eba3247317a481f42023805d99da",
+      "cycle1CompiledIrSha256": "1a86e0122a91a72a2653f441fd435a0efc7da5397048fde38a7bf8e0b1b578db",
+      "cycle2CompiledIrSha256": "1a86e0122a91a72a2653f441fd435a0efc7da5397048fde38a7bf8e0b1b578db"
+    },
+    "antdFixedPoint": {
+      "cycle1SceneIrSha256": "614ae1f3082e2a95565f3eb2b9a1a97a7ae15301f5290e581d3ec028163e43ff",
+      "cycle2SceneIrSha256": "614ae1f3082e2a95565f3eb2b9a1a97a7ae15301f5290e581d3ec028163e43ff",
+      "cycle1CompiledIrSha256": "7d4b15ce4fcb5120f7a7c7e8276ff0864ab879a33394f7440217506d666b0170",
+      "cycle2CompiledIrSha256": "7d4b15ce4fcb5120f7a7c7e8276ff0864ab879a33394f7440217506d666b0170"
+    }
+  },
+  "probe": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "refusedClass": null,
+    "receiptSha256": "40843871a24d2db1ca1311e7c1372a6ec485e079e372cda0332368c725fc7b7c",
+    "rawResponseBytes": 43701,
+    "exactSceneRestorationMui": true,
+    "exactSceneRestorationAntd": true,
+    "reflowPassed": true,
+    "contentFillPassed": true,
+    "bindingCompatibilityPassed": true,
+    "noFakeLayoutPassed": true,
+    "stateSemanticsPassed": true,
+    "switchingRestored": true,
+    "textPropertiesRestored": true,
+    "visitedVariantsMui": 72,
+    "visitedVariantsAntd": 72
+  },
+  "captures": {
+    "issued": 72,
+    "accepted": 72,
+    "technicalPassed": true,
+    "legacyVisualComparison": false,
+    "failures": 0
+  },
+  "technicalGates": {
+    "sceneExtraction": true,
+    "hostNormalization": true,
+    "accounting": true,
+    "fixedPoint": true,
+    "usability": true,
+    "restoration": true,
+    "clipping": true,
+    "overlap": true,
+    "adornmentContent": true,
+    "stateSemantics": true,
+    "artifactSha256": "b62034b15f762aef91461515efb196acb335e40263a1c344a962be55084bf393"
+  },
+  "cleanup": {
+    "executedBecauseFailure": false,
+    "accepted": false,
+    "persistedForFailureRecoveryOnly": true,
+    "comboboxPageRemoved": false,
+    "comboboxCollectionsRemoved": false,
+    "inputPage115295378Present": true,
+    "v41Page16335981Present": true,
+    "stayedPageId": "183:70641",
+    "stayedCollectionIds": [
+      "VariableCollectionId:183:70643",
+      "VariableCollectionId:183:71507"
+    ]
+  },
+  "arrange": {
+    "tool": "figma_arrange_component_set",
+    "oneSetAtATime": true,
+    "renamedImmediately": true,
+    "grids": {
+      "MUI Option Grid": "183:74486",
+      "MUI Combobox Grid": "183:74507",
+      "AntD Option Grid": "183:74614",
+      "AntD Combobox Grid": "183:74635"
+    },
+    "comboboxSets": {
+      "gap": 180,
+      "cellPadding": 20,
+      "columnProperty": "Open"
+    },
+    "optionSets": {
+      "gap": 24,
+      "cellPadding": 20,
+      "columnProperty": "Option state"
+    },
+    "pageLevelOverlapAfterPlace": 0
+  },
+  "reviewUrl": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=183-70641",
+  "nextTeaching": null,
+  "humanSignoff": "pending",
+  "remintHumanGradeInvented": false,
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

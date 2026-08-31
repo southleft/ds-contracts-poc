@@ -1,0 +1,46 @@
+{
+  "when": "after-arrange",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=183-70641",
+  "pageId": "183:70641",
+  "pageName": "Recipe Pivot / Combobox / 58ef8274-85b2f4a0-combobox-v1",
+  "runIdentity": "58ef8274-85b2f4a0-combobox-v1",
+  "inputPresent": true,
+  "inputPageId": "115:295378",
+  "v41Present": true,
+  "v41PageId": "163:35981",
+  "signedPagesUntouched": [
+    "115:295378",
+    "163:35981",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781"
+  ],
+  "arrange": {
+    "comboboxSets": {
+      "gap": 180,
+      "cellPadding": 20,
+      "columnProperty": "Open"
+    },
+    "optionSets": {
+      "gap": 24,
+      "cellPadding": 20,
+      "columnProperty": "Option state"
+    },
+    "pageLevelOverlapAfterPlace": 0
+  },
+  "liveContainers": {
+    "MUI Option Grid": "183:74486",
+    "MUI Combobox Grid": "183:74507",
+    "AntD Option Grid": "183:74614",
+    "AntD Combobox Grid": "183:74635"
+  },
+  "sets": {
+    "MUI option": "183:70736",
+    "MUI combobox": "183:71505",
+    "AntD option": "183:71600",
+    "AntD combobox": "183:72369"
+  },
+  "humanGrade": "pending"
+}
