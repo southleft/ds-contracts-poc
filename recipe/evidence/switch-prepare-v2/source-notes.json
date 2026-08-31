@@ -1,0 +1,33 @@
+{
+  "artifactVersion": "switch-prepare-v2-source-notes",
+  "status": "prepare-landed",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "oldStayPageId": "183:75302",
+  "doNotDeleteOldStay": true,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "shapeDecisionToCarry": "AntD thumb.travel is the ON minus OFF delta, not the CSS ON inset. No Polar.",
+  "taught": {
+    "Ant Design": {
+      "file": "examples/antd/.antd-sandbox/node_modules/antd/es/switch/style/index.js",
+      "off": "117-121 insetInlineStart trackPadding 2; handleSize 18; track 44×22",
+      "on": "136-137 insetInlineStart calc(100% - handleSize - trackPadding) = 44 - 18 - 2 = 24",
+      "travel": "compile left = inset + travel. Travel must be 24 - 2 = 22 (trackWidth - handleSize - 2*padding). Prior stay used travel 24 so ON landed at 26 and the thumb kissed/overlapped the track end."
+    },
+    "Astryx": "thumb.travel 14 unchanged (Switch.tsx TRACK_PADDING / ON_RIGHT_PADDING)"
+  },
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302"
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "switch-live-pivot-v2-prepare",
+  "teaching": "AntD Switch ON inset matches OFF: compile travel 22 from named handle travel calc(100% - handleSize - trackPadding)",
+  "runIdentity": "a8686d63-3d086535-0720db18-switch-v2",
+  "pageName": "Recipe Pivot / Switch / a8686d63-3d086535-0720db18-switch-v2",
+  "namespace": "ds.contracts.switch.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "a8686d63bbcec90bc7f3c3916a1c75c257d1629c7e7b86d8f4da9e2b85a0fd96",
+    "MUI": "3d086535652c5e04f6745d2edfb6eeee5601a01c8891a1fe3aca2ddade7a20c7",
+    "Ant Design": "0720db18b3adc4f736a5444aff4a7f2e7de30fded087d4f58342a3bc55ddb85c"
+  },
+  "writerSha256": "e119146ec04aa8f87ac44df2ef32e7e743a57414ad9ca9451b6becb66a0c1229",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

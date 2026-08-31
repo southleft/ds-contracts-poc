@@ -24,8 +24,9 @@ import {
 } from "./interpret.js";
 
 export const SWITCH_FIGMA_NAMESPACE = "ds.contracts.switch.recipe.v1";
-export const SWITCH_FIGMA_WRITER_VERSION = 1;
-export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v1";
+export const SWITCH_FIGMA_WRITER_VERSION = 2;
+export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v2";
+export const FORBIDDEN_SWITCH_V1_PAGE_ID = "183:75302";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -266,6 +267,7 @@ void "SWITCH-MUST-NOT-WRITE-TABLE-PAGE";
 void "SWITCH-MUST-NOT-WRITE-CALENDAR-PAGE";
 void "SWITCH-MUST-NOT-WRITE-CHECKBOX-PAGE";
 void "SWITCH-MUST-NOT-WRITE-RADIO-PAGE";
+void "SWITCH-MUST-NOT-WRITE-SWITCH-V1-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("SWITCH-MUST-NOT-WRITE-INPUT-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("SWITCH-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("SWITCH-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
@@ -275,6 +277,7 @@ if(figma.currentPage&&figma.currentPage.id==="173:48924")throw new Error("SWITCH
 if(figma.currentPage&&figma.currentPage.id==="181:64873")throw new Error("SWITCH-MUST-NOT-WRITE-CALENDAR-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:74742")throw new Error("SWITCH-MUST-NOT-WRITE-CHECKBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:75031")throw new Error("SWITCH-MUST-NOT-WRITE-RADIO-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75302")throw new Error("SWITCH-MUST-NOT-WRITE-SWITCH-V1-PAGE");
 await figma.loadAllPagesAsync();
 const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
 const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
@@ -295,6 +298,7 @@ if(page.id==="173:48924")throw new Error("SWITCH-MUST-NOT-WRITE-TABLE-PAGE");
 if(page.id==="181:64873")throw new Error("SWITCH-MUST-NOT-WRITE-CALENDAR-PAGE");
 if(page.id==="183:74742")throw new Error("SWITCH-MUST-NOT-WRITE-CHECKBOX-PAGE");
 if(page.id==="183:75031")throw new Error("SWITCH-MUST-NOT-WRITE-RADIO-PAGE");
+if(page.id==="183:75302")throw new Error("SWITCH-MUST-NOT-WRITE-SWITCH-V1-PAGE");
 await figma.setCurrentPageAsync(page);
 setSharedData(page,"pageOwner",PAGE_OWNER);
 setSharedData(page,"runIdentity",PLAN.runIdentity);
@@ -573,7 +577,8 @@ export function emitSwitchFigmaWriter(
     runtime.includes("SWITCH-MUST-NOT-WRITE-TABLE-PAGE") === false ||
     runtime.includes("SWITCH-MUST-NOT-WRITE-CALENDAR-PAGE") === false ||
     runtime.includes("SWITCH-MUST-NOT-WRITE-CHECKBOX-PAGE") === false ||
-    runtime.includes("SWITCH-MUST-NOT-WRITE-RADIO-PAGE") === false
+    runtime.includes("SWITCH-MUST-NOT-WRITE-RADIO-PAGE") === false ||
+    runtime.includes("SWITCH-MUST-NOT-WRITE-SWITCH-V1-PAGE") === false
   )
     throw new TypeError(
       "switch writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, and Radio pages",

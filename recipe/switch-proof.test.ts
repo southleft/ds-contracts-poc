@@ -78,7 +78,11 @@ test("switch@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   assert.equal(antd.tokens.track.height.fallback, 22, "fontSize * lineHeight");
   assert.equal(antd.tokens.thumb.offSize.fallback, 18, "handleSize");
   assert.equal(antd.tokens.track.width.fallback, 44, "trackMinWidth");
-  assert.equal(antd.tokens.thumb.travel.fallback, 24);
+  assert.equal(
+    antd.tokens.thumb.travel.fallback,
+    22,
+    "ON inset 24 minus OFF inset 2",
+  );
   assert.equal(
     antd.tokens.states.true.enabled.trackFill.fallback,
     "#1677ffff",

@@ -57,7 +57,7 @@ test("the writer plans three switch sources without touching Figma", () => {
   assert.notEqual(writer.namespace, "ds.contracts.checkbox.recipe.v1");
   assert.notEqual(writer.namespace, "ds.contracts.radio.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Switch \//);
-  assert.match(writer.runIdentity, /-switch-v1$/);
+  assert.match(writer.runIdentity, /-switch-v2$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.switchSet.children.length, SWITCH_FIGMA_VARIANTS_PER_SOURCE);

@@ -186,7 +186,7 @@ const antdTokens = cloneTokens("antd.switch", (path, fallback) => {
   if (path === "track.padding") return 2;
   if (path === "thumb.offSize") return 18;
   if (path === "thumb.onSize") return 18;
-  if (path === "thumb.travel") return 24;
+  if (path === "thumb.travel") return 22;
   if (path === "row.gap") return 8;
   if (path === "labelFontSize") return 14;
   if (path === "states.false.enabled.trackFill") return "#00000040";
@@ -283,7 +283,7 @@ export const antdSwitchSource: ReviewedSwitchSource = {
     control:
       "prepareComponentToken height fontSize*lineHeight 22; padding 2; handleSize 18; trackMinWidth handleSize*2+padding*4 44",
     glyph:
-      "handle absolute top/insetInlineStart trackPadding; handleBg colorWhite; checked insetInlineStart 100%-handleSize-trackPadding travel 24",
+      "handle absolute top/insetInlineStart trackPadding 2; handleBg colorWhite; checked insetInlineStart calc(100% - handleSize - trackPadding) = 24. Compile travel is the delta 24-2 = 22 (trackWidth - handleSize - 2*padding)",
     label:
       "no required children; reviewed pairing like Checkbox uses --padding-xs 8 and --color-text; inner ON/OFF text receipted",
   },
