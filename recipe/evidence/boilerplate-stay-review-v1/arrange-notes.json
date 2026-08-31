@@ -1,0 +1,126 @@
+{
+  "artifactVersion": "boilerplate-stay-review-v1-arrange",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781"
+  ],
+  "figmaArrangeComponentSet": "not called this run — that tool deletes page-level frames named Component Container",
+  "whatWasWrong": {
+    "Checkbox Radio Switch": "empty library Sections sat on top of page-level white arrange grids (leftover after figma_arrange_component_set reparent). Switch MUI/Ant arrange frames also overlapped 2px.",
+    "Textarea Alert": "Component Container still named Component Container, overflowed its Section (x far outside section bounds). Alert sections were staggered in Y so grids stacked.",
+    "Chip through Dialog": "100x100 transparent Component Containers clipped Tabs/Dialog and vanished on #444444 sections. Badge overlay and Dialog paper overflowed the 100 box."
+  },
+  "whatWasDone": {
+    "Checkbox Radio Switch": "reparented each renamed arrange frame into its library Section, padded 40, hugged the section, packed sections in a row with 80px gap",
+    "Textarea": "renamed Component Container uniquely, reset to 40,40 inside section, hugged, packed row gap 80",
+    "Alert": "renamed uniquely, reset inside section, hugged, packed as a column gap 80 (each arrange is ~1080 wide)",
+    "Chip through Dialog": "resized wraps to visual bounds + 40 pad, clipsContent false, unique names, white fill + radius 8 (same class as arranged white wrappers), hugged sections, packed row gap 80"
+  },
+  "pages": [
+    {
+      "archetype": "Checkbox",
+      "pageId": "183:74742",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-74742",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Radio",
+      "pageId": "183:75031",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75031",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Switch",
+      "pageId": "183:75302",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75302",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Textarea",
+      "pageId": "183:75495",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75495",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Alert/Banner",
+      "pageId": "183:75801",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75801",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Chip/Tag",
+      "pageId": "183:75976",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75976",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Badge",
+      "pageId": "183:76022",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76022",
+      "viewable": true,
+      "overlapCountAfter": 0,
+      "note": "Astryx Badge overlay remains a named refusal — page has MUI + AntD only"
+    },
+    {
+      "archetype": "Avatar",
+      "pageId": "183:76063",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76063",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Link",
+      "pageId": "183:76109",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76109",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Tooltip",
+      "pageId": "183:76151",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76151",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Tabs",
+      "pageId": "183:76193",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76193",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Menu",
+      "pageId": "183:76259",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76259",
+      "viewable": true,
+      "overlapCountAfter": 0
+    },
+    {
+      "archetype": "Dialog",
+      "pageId": "183:76315",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76315",
+      "viewable": true,
+      "overlapCountAfter": 0
+    }
+  ],
+  "blocked": [],
+  "reminted": [],
+  "signedPagesUntouched": true
+}

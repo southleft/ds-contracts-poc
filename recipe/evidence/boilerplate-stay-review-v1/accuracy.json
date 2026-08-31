@@ -1,0 +1,371 @@
+{
+  "artifactVersion": "boilerplate-stay-review-v1-accuracy",
+  "status": "screenshot-vs-official-source",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "doNotInventHumanGrade": true,
+  "sources": {
+    "Astryx": "@astryxdesign/core@0.1.6",
+    "MUI": "@mui/material@9.2.0",
+    "Ant Design": "antd@5.29.3",
+    "docs": [
+      "https://mui.com/material-ui/react-checkbox/",
+      "https://ant.design/components/checkbox",
+      "astryx.atmeta.com/components (named exports in recipe fixtures)"
+    ]
+  },
+  "movieCheckbox": {
+    "whatTjCalled": "the movie checkbox",
+    "inspected": "Checkbox page 183:74742 hard — labels, boxes, dash children, official SVG paths",
+    "notAMovieLabel": "every label is Accept terms; no Autocomplete movie-option control on this page",
+    "whatItIs": "checked cells are solid filled squares with no tick — a poster tile. That is the receipted missing SVG check / AntD rotated L-stroke, not a Polar miss and not a compile-wrong mint.",
+    "measured": {
+      "Astryx": {
+        "checked": "22×22 r4 fill #0064e0, no VECTOR check. Official CheckboxInput.md SVG is stroke path M8.5 2.5 L4 7.5 L1.5 5 — receipted no-figma-primitive.",
+        "indeterminate": "white 12×2 dash visible — matches named indeterminateMark",
+        "label": "Accept terms Roboto Medium 14 #4E606F"
+      },
+      "MUI": {
+        "checked": "24×24 r2 fill #1976d2, no check hole. Official internal/svg-icons/CheckBox.js path includes the even-odd tick (M19 3H5… zm-9 14l-5-5…). Box+stroke was a named lowering; check path and even-odd hole receipted.",
+        "indeterminate": "10×2 dash visible but fill transparent-hole-receipted, so the cell looks identical to checked — a second solid tile. Official IndeterminateCheckBox.js is box + inner bar as even-odd hole.",
+        "hit": "42 (SwitchBase padding 9) — matches package"
+      },
+      "Ant Design": {
+        "checked enabled": "16×16 r4 fill #1677ff, no L-tick. Official inner::after rotate(45deg) L-stroke receipted.",
+        "checked disabled": "same chrome as unchecked disabled (#0000000a / #d9d9d9) because the tick is receipted — looks unchecked. Official disabled+checked still shows a faded tick.",
+        "indeterminate": "white 16 box + visible 8×8 #1677ff inner square — matches named fontSizeLG/2 colorPrimary after, not a bar"
+      }
+    },
+    "didNotInventPolarCheck": true,
+    "didNotRemint": true,
+    "reasonNoRemint": "compile is structurally green and the missing tick is an existing named receipt, not a writer defect. VECTOR even-odd from the official MUI/Astryx paths would be a future teaching, not a Polar check invented on this stay."
+  },
+  "archetypes": [
+    {
+      "archetype": "Checkbox",
+      "pageId": "183:74742",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "named-delta",
+          "match": ["22 box / 24 hit / r4 / #0064e0 checked / #ccd3db unchecked / 8 gap / Roboto Medium 14 fallback / indeterminate white dash"],
+          "delta": ["checked has no stroke-check glyph — looks like a solid blue tile"],
+          "receipt": ["SVG check path M8.5 2.5L4 7.5L1.5 5"]
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["42 hit / 24 box / r2 / 2px #00000099 unchecked stroke / #1976d2 checked / FormControlLabel pairing / Roboto Regular 16"],
+          "delta": ["checked and indeterminate both read as solid tiles (no tick, transparent dash hole)"],
+          "receipt": ["CheckBox / IndeterminateCheckBox even-odd SVG holes"]
+        },
+        "Ant Design": {
+          "verdict": "named-delta",
+          "match": ["16 controlInteractiveSize / r4 / #1677ff checked enabled / indeterminate 8×8 primary square / baseline row / Roboto Regular 14 fallback"],
+          "delta": ["checked enabled is a solid blue tile; checked disabled looks unchecked"],
+          "receipt": ["::after rotate(45deg) L-stroke"]
+        }
+      }
+    },
+    {
+      "archetype": "Radio",
+      "pageId": "183:75031",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "honesty-fork",
+          "match": ["RadioList of Email/Phone, 22 circle r11, selected #0064e0 ring + 10 white-ish dot, vertical list"],
+          "delta": ["no standalone Radio export — compiled RadioList"],
+          "receipt": ["Astryx RadioList fork"]
+        },
+        "MUI": {
+          "verdict": "match",
+          "match": ["Radio + RadioGroup, 42 hit / 24 circle, selected ring + #1976d2 inner dot (not a filled disc), vertical"],
+          "delta": [],
+          "receipt": []
+        },
+        "Ant Design": {
+          "verdict": "match",
+          "match": ["Radio.Group horizontal Email/Phone, 16 circle, selected #1677ff disc + white 6 dot"],
+          "delta": [],
+          "receipt": []
+        }
+      }
+    },
+    {
+      "archetype": "Switch",
+      "pageId": "183:75302",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "match",
+          "match": ["pill + white thumb, off grey / on #0064e0, disabled desaturated, label Enable notifications"],
+          "delta": [],
+          "receipt": []
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["track + circular thumb, on thumb #1976d2 / light blue track — MUI sibling overlay class"],
+          "delta": ["thumb sits on the track rather than MUI's measured overlay offset"],
+          "receipt": ["MUI sibling overlay / baked track opacity"]
+        },
+        "Ant Design": {
+          "verdict": "named-delta",
+          "match": ["pill, on #1677ff, white thumb, no inner check/x"],
+          "delta": ["no inner children text"],
+          "receipt": ["AntD optional inner text"]
+        }
+      }
+    },
+    {
+      "archetype": "Textarea",
+      "pageId": "183:75495",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "match",
+          "match": ["TextArea, label Notes above, placeholder Add a note / value Meeting notes for Tuesday., disabled faded, r rounded, no counter"],
+          "delta": [],
+          "receipt": ["counter, startIcon, status, isLoading"]
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["TextField multiline outlined, label above, same copy, disabled faded"],
+          "delta": ["label sits above as a named lowering — not the floating/notched InputLabel"],
+          "receipt": ["InputLabel floating + notched outline"]
+        },
+        "Ant Design": {
+          "verdict": "match",
+          "match": ["Input.TextArea, disabled grey fill, 1px #d9d9d9, placeholder/value pair"],
+          "delta": [],
+          "receipt": ["showCount, allowClear, autoSize, status, resize"]
+        }
+      }
+    },
+    {
+      "archetype": "Alert/Banner",
+      "pageId": "183:75801",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "named-delta",
+          "match": ["Banner, Status info/success/warning/error, title New update available, r12 h44 pad 12/16, info default first"],
+          "delta": ["icons are occupancy circles, no info/check/exclaim glyphs"],
+          "receipt": ["defaultIcons SVGs — colour + 20 box compiled"]
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["Alert standard, four severities, r4 h48, text tinted per severity, default severity in recipe is success — axis shows all four"],
+          "delta": ["occupancy circles not severity SVGs"],
+          "receipt": ["severity SVG icons"]
+        },
+        "Ant Design": {
+          "verdict": "named-delta",
+          "match": ["Alert, 1px border, r8 h38, info default, four types"],
+          "delta": ["occupancy circles not @ant-design/icons"],
+          "receipt": ["icon SVGs"]
+        }
+      }
+    },
+    {
+      "archetype": "Chip/Tag",
+      "pageId": "183:75976",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "honesty-fork",
+          "match": ["Token 36×24 r4 fill #0536591a label Tag 12 Medium #0A1317"],
+          "delta": ["compiled Token, not a Chip export"],
+          "receipt": ["Astryx Token fork"]
+        },
+        "MUI": {
+          "verdict": "match",
+          "match": ["Chip filled 46×32 r16 (pill) fill #00000014 label Tag 13 Regular"],
+          "delta": [],
+          "receipt": []
+        },
+        "Ant Design": {
+          "verdict": "match",
+          "match": ["Tag 36×22 r4 fill #fafafa stroke 1 #d9d9d9 label Tag 12"],
+          "delta": [],
+          "receipt": []
+        }
+      }
+    },
+    {
+      "archetype": "Badge",
+      "pageId": "183:76022",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "receipt",
+          "match": [],
+          "delta": ["no overlay cell on the page"],
+          "receipt": ["Astryx Badge is an inline label — overlay refused"]
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["40 host, 20 indicator top-right translate, count 5, 12 Medium"],
+          "delta": ["color=default indicator fill is transparent — the 5 sits as bare text, not a coloured pill. Official docs demos usually show error/primary."],
+          "receipt": ["default has no palette fill — do not invent error"]
+        },
+        "Ant Design": {
+          "verdict": "match",
+          "match": ["32 host, 20 #ff4d4f indicator, 1 white stroke, count 5 white 12"],
+          "delta": [],
+          "receipt": []
+        }
+      }
+    },
+    {
+      "archetype": "Avatar",
+      "pageId": "183:76063",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "match",
+          "match": ["36 circle, fill #0536591a, JD 14.4 Medium #4E606F"],
+          "delta": [],
+          "receipt": []
+        },
+        "MUI": {
+          "verdict": "match",
+          "match": ["40 circle #bdbdbd, JD 20 white — default letter avatar"],
+          "delta": [],
+          "receipt": []
+        },
+        "Ant Design": {
+          "verdict": "match",
+          "match": ["32 circle fill #00000040, JD 14 white"],
+          "delta": [],
+          "receipt": []
+        }
+      }
+    },
+    {
+      "archetype": "Link",
+      "pageId": "183:76109",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "honesty-fork",
+          "match": ["Link 14 #0064e0, textDecoration NONE at rest"],
+          "delta": ["underline is hover-only — not a shared axis"],
+          "receipt": ["underline-at-rest is not a shared axis"]
+        },
+        "MUI": {
+          "verdict": "match",
+          "match": ["Link 14 #1976d2, textDecoration UNDERLINE (underline=always)"],
+          "delta": [],
+          "receipt": []
+        },
+        "Ant Design": {
+          "verdict": "honesty-fork",
+          "match": ["Typography.Link 14 #1677ff, textDecoration NONE"],
+          "delta": ["no top-level Link export"],
+          "receipt": ["AntD Typography.Link"]
+        }
+      }
+    },
+    {
+      "archetype": "Tooltip",
+      "pageId": "183:76151",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "named-delta",
+          "match": ["bubble 59×28 fill #0A1317 r12 label Tooltip 14 white"],
+          "delta": ["no arrow, no trigger, no Polar placement"],
+          "receipt": ["placement / arrow / delays"]
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["50×21 fill #616161eb r4 label 11 white — MUI default arrow false"],
+          "delta": ["no trigger attachment"],
+          "receipt": ["Polar placement"]
+        },
+        "Ant Design": {
+          "verdict": "named-delta",
+          "match": ["59×34 fill #000000d9 r6 label 14 white"],
+          "delta": ["official Tooltip default has an arrow — arrow receipted, not compiled"],
+          "receipt": ["AntD arrow default true"]
+        }
+      }
+    },
+    {
+      "archetype": "Tabs",
+      "pageId": "183:76193",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "honesty-fork",
+          "match": ["TabList, Item One / Item Two, selected ink 2 #0064e0 under text, rest #4E606F"],
+          "delta": ["no Tabs export — compiled TabList"],
+          "receipt": ["Astryx TabList fork"]
+        },
+        "MUI": {
+          "verdict": "match",
+          "match": ["ITEM ONE / ITEM TWO uppercase Medium 14, selected #1976d2 + 2px indicator, rest #00000099, 48 tall"],
+          "delta": [],
+          "receipt": []
+        },
+        "Ant Design": {
+          "verdict": "match",
+          "match": ["Item One selected #1677ff + 2 ink bar, Item Two rest #000000e0, 14/22"],
+          "delta": [],
+          "receipt": []
+        }
+      }
+    },
+    {
+      "archetype": "Menu",
+      "pageId": "183:76259",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "honesty-fork",
+          "match": ["DropdownMenu paper 82×74 r12 #fff, two items 14 #0A1317"],
+          "delta": ["no Menu export; no trigger/chevron; no shadow-low"],
+          "receipt": ["Polar placement, shadow-low, trigger"]
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["Menu paper 99×96 r4 #fff, items 16 Regular min-height-ish 48"],
+          "delta": ["no elevation shadow"],
+          "receipt": ["elevation shadow, Polar Popover placement"]
+        },
+        "Ant Design": {
+          "verdict": "honesty-fork",
+          "match": ["Dropdown panel 90×72 r8 #fff, items 14"],
+          "delta": ["compiled Dropdown not Menu; no arrow; no boxShadowSecondary"],
+          "receipt": ["AntD Dropdown / arrow / boxShadowSecondary"]
+        }
+      }
+    },
+    {
+      "archetype": "Dialog",
+      "pageId": "183:76315",
+      "reminted": false,
+      "libraries": {
+        "Astryx": {
+          "verdict": "named-delta",
+          "match": ["Dialog paper 400×80 r12 #fff, title 20 / body 14 #0A1317 pad 16"],
+          "delta": ["no scrim, close, shadow-high, footer"],
+          "receipt": ["Polar ::backdrop viewport, shadow-high, close"]
+        },
+        "MUI": {
+          "verdict": "named-delta",
+          "match": ["Dialog paper 600×88 r4 #fff, title 20 Medium / body 16, pad 24/16"],
+          "delta": ["no Backdrop, DialogActions, elevation"],
+          "receipt": ["scrim size Polar"]
+        },
+        "Ant Design": {
+          "verdict": "honesty-fork",
+          "match": ["Modal paper 520×94 r8 #fff, title 16 Semibold-fallback / body 14"],
+          "delta": ["compiled Modal; no mask, close X, OK/Cancel footer"],
+          "receipt": ["AntD Modal mask / footer / Polar viewport"]
+        }
+      }
+    }
+  ]
+}
