@@ -1,0 +1,16 @@
+if(figma.fileKey!=="byMp6lt0Ij9b2QbkDGFwBh")throw new Error("WRONG-FILE");
+const signed=["115:295378","163:35981","183:70641","173:48924","181:64873","183:69150","85:6781","183:74742","183:75031","183:75302","183:75495","196:76370","197:76679","197:76903"];
+await figma.loadAllPagesAsync();
+const pageName="Recipe Pivot / Textarea / c45888d1-b36722e2-ecdda45d-textarea-v2";
+const NS="ds.contracts.textarea.recipe.v1";
+const runIdentity="c45888d1-b36722e2-ecdda45d-textarea-v2";
+let page=figma.root.children.find(p=>p.name===pageName);
+if(page)return{pageId:page.id,created:false};
+const safe=figma.root.children.find(p=>!signed.includes(p.id));
+if(safe)await figma.setCurrentPageAsync(safe);
+page=figma.createPage();
+page.name=pageName;
+page.setSharedPluginData(NS,"pageOwner","recipe/textarea/"+runIdentity);
+page.setSharedPluginData(NS,"runIdentity",runIdentity);
+page.setSharedPluginData(NS,"writerVersion","2");
+return{pageId:page.id,created:true};

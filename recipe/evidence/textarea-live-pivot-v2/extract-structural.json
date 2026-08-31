@@ -1,0 +1,49 @@
+{
+  "artifactVersion": "textarea-live-v2-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "pageId": "198:77048",
+  "pageName": "Recipe Pivot / Textarea / c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "runIdentity": "c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77048",
+  "oldStayPageId": "183:75495",
+  "doNotRemintInput": "115:295378",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "Manual uniquely named white wraps inside each library Section. figma_arrange_component_set was not used.",
+  "sets": [
+    {
+      "library": "Astryx",
+      "setId": "198:77137",
+      "sectionId": "198:77120",
+      "arrangeId": "198:77174",
+      "labelPlacement": "stacked",
+      "labelGap": 4,
+      "fontPainted": { "label": { "family": "Roboto", "style": "Medium" }, "value": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "MUI",
+      "setId": "198:77101",
+      "sectionId": "198:77080",
+      "arrangeId": "198:77175",
+      "labelPlacement": "floating",
+      "outlineTreatment": "notched",
+      "empty": { "x": 14, "y": 16, "font": 16, "notch": false },
+      "value": { "x": 14, "y": -9, "font": 12, "notch": "#ffffffff" },
+      "fontPainted": { "family": "Roboto", "style": "Regular" }
+    },
+    {
+      "library": "Ant Design",
+      "setId": "198:77173",
+      "sectionId": "198:77156",
+      "arrangeId": "198:77176",
+      "labelPlacement": "stacked",
+      "labelGap": 8,
+      "fontPainted": { "family": "Roboto", "style": "Regular" }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

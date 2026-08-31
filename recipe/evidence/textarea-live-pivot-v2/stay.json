@@ -1,0 +1,40 @@
+{
+  "artifactVersion": "textarea-live-pivot-v2-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "198:77048",
+  "pageName": "Recipe Pivot / Textarea / c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "runIdentity": "c45888d1-b36722e2-ecdda45d-textarea-v2",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77048",
+  "oldStayPageId": "183:75495",
+  "doNotDeleteOldStay": true,
+  "doNotRemintInput": "115:295378",
+  "sets": {
+    "Astryx": "198:77137",
+    "MUI": "198:77101",
+    "Ant Design": "198:77173"
+  },
+  "sections": {
+    "Astryx": "198:77120",
+    "MUI": "198:77080",
+    "Ant Design": "198:77156"
+  },
+  "arrange": {
+    "Astryx": "198:77174",
+    "MUI": "198:77175",
+    "Ant Design": "198:77176"
+  },
+  "accuracyLoop": {
+    "MUI": "empty label-row at (14,16) font 16 no notch — named rest. value label-row at (14,-9) font 12 notch #fff — named shrink. Not a cramped label-above."
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "figmaArrangeComponentSet": false,
+  "leftoverComponentContainer": []
+}
