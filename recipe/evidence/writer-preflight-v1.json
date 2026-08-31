@@ -1,0 +1,38 @@
+{
+  "artifactVersion": "writer-preflight-v1",
+  "ledgerVersion": "measured-host-ledger-v1",
+  "evidencePinFailures": [],
+  "buttonV5Attempt1": {
+    "source": "recipe/evidence/button-live-pivot-v5/writer-attempt-1.js",
+    "findings": [
+      {
+        "classId": "plugin-sandbox-no-textencoder",
+        "message": "writer calls TextEncoder (plugin sandbox has none; recipe/evidence/button-live-pivot-v5/live-attempt-1.json)"
+      },
+      {
+        "classId": "setBoundVariableForEffect-resets-shadow-geometry",
+        "message": "setBoundVariableForEffect result is returned without carrying compile-planned offset/radius/spread (Button v5 attempt 4)"
+      },
+      {
+        "classId": "later-effect-entries-paint-on-top",
+        "message": "altitude-button-reviewed-v2 primary/focus-visible: white spread-2 gap is listed before the outline ring; Figma will bury the gap (Button v5 attempt 5)"
+      },
+      {
+        "classId": "later-effect-entries-paint-on-top",
+        "message": "altitude-button-reviewed-v2 secondary/focus-visible: white spread-2 gap is listed before the outline ring; Figma will bury the gap (Button v5 attempt 5)"
+      }
+    ],
+    "classIds": [
+      "plugin-sandbox-no-textencoder",
+      "setBoundVariableForEffect-resets-shadow-geometry",
+      "later-effect-entries-paint-on-top"
+    ]
+  },
+  "currentCommittedWriter": {
+    "source": "recipe/evidence/button-live-pivot-v5/writer.js",
+    "findings": [],
+    "classIds": []
+  },
+  "catchesButtonV5WriterClasses": true,
+  "currentWriterClean": true
+}

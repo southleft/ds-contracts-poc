@@ -40,6 +40,8 @@
     "recipe:replay-census:table": "tsx recipe/replay-census.ts table",
     "recipe:replay-census:calendar": "tsx recipe/replay-census.ts calendar",
     "recipe:replay-census:button": "tsx recipe/replay-census.ts button",
+    "recipe:writer-preflight": "tsx recipe/writer-preflight.ts",
+    "recipe:writer-preflight:check": "node --import tsx --test recipe/writer-preflight.test.ts",
     "recipe:table:live:v1:prepare": "tsx recipe/build-table-live-proof-v1.ts",
     "recipe:table:live:v1:generated:check": "tsx recipe/build-table-live-proof-v1.ts --check",
     "recipe:table:live:v1:authorization-template:check": "tsx recipe/build-table-live-proof-v1.ts --check --check-authorization-template",
