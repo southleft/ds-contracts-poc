@@ -54,6 +54,37 @@ const byRole = (root: IRNode, role: string): IRNode[] => {
   return matches;
 };
 
+test("library combobox adapters land named overlay chrome instead of canonical fixture clones", () => {
+  const mui = adaptReviewedCombobox(muiComboboxSource, muiComboboxAdapterConfig);
+  const antd = adaptReviewedCombobox(
+    antdComboboxSource,
+    antdComboboxAdapterConfig,
+  );
+  assert.equal(mui.tokens.sizes.small.listPadding.fallback, 8);
+  assert.equal(mui.tokens.sizes.medium.listPadding.fallback, 8);
+  assert.equal(mui.tokens.sizes.small.optionPaddingX.fallback, 16);
+  assert.equal(mui.tokens.sizes.medium.optionPaddingX.fallback, 16);
+  assert.equal(mui.tokens.overlayRadius.fallback, 4);
+  assert.equal(mui.tokens.overlay.background.fallback, "#ffffffff");
+  assert.equal(mui.tokens.overlay.border.fallback, "#00000000");
+  assert.equal(antd.tokens.sizes.small.listPadding.fallback, 4);
+  assert.equal(antd.tokens.sizes.medium.listPadding.fallback, 4);
+  assert.equal(antd.tokens.sizes.small.optionPaddingX.fallback, 8);
+  assert.equal(antd.tokens.sizes.medium.optionPaddingX.fallback, 12);
+  assert.equal(antd.tokens.overlayRadius.fallback, 8);
+  assert.equal(antd.tokens.overlay.background.fallback, "#ffffffff");
+  assert.equal(antd.tokens.overlay.border.fallback, "#d9d9d9ff");
+  assert.equal(mui.tokens.overlay.shadow.fallback, "#00000026");
+  assert.equal(antd.tokens.overlay.shadow.fallback, "#00000026");
+  const receipt = JSON.parse(
+    readFileSync(
+      new URL("./evidence/combobox-v42-chrome-remint-receipt.json", import.meta.url),
+      "utf8",
+    ),
+  ) as { gradeInvented?: boolean; v41Standing: { gradeInvented: boolean } };
+  assert.equal(receipt.v41Standing.gradeInvented, false);
+});
+
 test("combobox@1 compiles two reviewed real sources through one generic recipe", () => {
   for (const [source, config] of sources) {
     const started = performance.now();

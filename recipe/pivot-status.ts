@@ -5448,6 +5448,36 @@ export function validatePivotStatus(
   )
     fail("combobox live v41 prepare");
   if (
+    status.combobox?.liveV42?.prepared !== true ||
+    status.combobox?.liveV42?.liveFigma !== false ||
+    status.combobox?.liveV42?.humanSignoff !== "pending" ||
+    status.combobox?.liveV42?.pageId !== "" ||
+    status.combobox?.liveV42?.forbiddenInputPageId !== "115:295378" ||
+    status.combobox?.liveV42?.forbiddenV41PageId !== "163:35981" ||
+    status.combobox?.liveV42?.namespace !== "ds.contracts.combobox.recipe.v1" ||
+    status.combobox?.liveV42?.evidenceRoot !==
+      "recipe/evidence/combobox-live-pivot-v42" ||
+    status.combobox?.liveV42?.teaching !==
+      "adapters land library-named overlay chrome (MUI Paper fill/radius 4, listbox 8px 0, option paddingX 16, elevation Paper borderless; AntD colorBgElevated/colorBorder/borderRadiusLG 8/paddingXXS 4/controlPaddingHorizontal 8/12) instead of canonical-fixture clones; multi-layer Paper shadows-1 / box-shadow-secondary not expressible on combobox@1 single drop-shadow — named receipt; status-slot 14/16 and AntD empty-item optionPadding deferred (no own padding channel)" ||
+    status.combobox?.liveV42?.ownedFillTexts !== 144 ||
+    status.combobox?.liveV42?.writerUnchangedFromV1 !== false ||
+    status.combobox?.liveV42?.restoreUnchangedFromV2 !== true ||
+    status.combobox?.liveV42
+      ?.hostProbeExcludesOverlayOptionLabelMessageOverlapUnchangedFromV41 !==
+      true ||
+    status.combobox?.liveV42?.libraryNamedOverlayChrome !== true ||
+    status.combobox?.liveV42?.v41PageUntouched !== true ||
+    status.combobox?.liveV42?.v41IdentityReusable !== false ||
+    status.combobox?.liveV42?.runIdentityForbidden !==
+      "70c24cbd-d27f2e85-combobox-v1" ||
+    status.combobox?.liveV42?.runIdentity !==
+      "58ef8274-85b2f4a0-combobox-v1" ||
+    status.combobox?.liveV42?.pageName !==
+      "Recipe Pivot / Combobox / 58ef8274-85b2f4a0-combobox-v1" ||
+    status.combobox?.liveV42?.attempt1?.status !== "not-run"
+  )
+    fail("combobox live v42 prepare");
+  if (
     // Table live v32 minted and the mint stayed. RECORD-time humanSignoff
     // stays pending (8fab2dff6 is not restamped). The later attributable
     // grade is table.liveHumanGrade, same pattern as Input V85 / Combobox V41.

@@ -1,0 +1,84 @@
+{
+  "artifactVersion": "combobox-live-v42-proof-plan-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "namespace": "ds.contracts.combobox.recipe.v1",
+  "writer": {
+    "programPath": "recipe/evidence/combobox-live-pivot-v42/programs/writer.txt",
+    "programBytes": 1248818,
+    "programSha256": "f848f6eb08b63683d9bb20981b0b58f550679080e8fb18d193b1488c24dbf44e",
+    "runIdentity": "58ef8274-85b2f4a0-combobox-v1",
+    "pageName": "Recipe Pivot / Combobox / 58ef8274-85b2f4a0-combobox-v1"
+  },
+  "sources": [
+    {
+      "source": "mui",
+      "adapterIdentity": "material-combobox-reviewed-v1",
+      "recipeHash": "58ef8274fb6f7b6e7d8d453bc8bfbda7b6102ac3cfbfe09a29982ae499b28392",
+      "envelopeHash": "b020281990d3f31fc3e15b7d863343b6af3dace72c92b215407c04d349b7c157",
+      "comboboxExpectedScenePlan": {
+        "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-mui-combobox.json.gz",
+        "bytes": 234399,
+        "sha256": "e980f45b30c94d97ecfb92f66eed39e0a62978cd888e58c48fb6ceb9d770d2d4",
+        "uncompressedBytes": 4112009,
+        "uncompressedSha256": "d6dc001077b2fc726322a5aa8dbdf4f93251e4d5ea267a8ab0da72fcfc98b6c4",
+        "facts": 12915
+      },
+      "optionExpectedScenePlan": {
+        "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-mui-option.json.gz",
+        "bytes": 6827,
+        "sha256": "c45110d64bb607702a1a7921df469d0a84eff904e8c4489f52f1e76e497b8e1b",
+        "uncompressedBytes": 107444,
+        "uncompressedSha256": "d4d4390720c57e3dbb290884b9eed815f2e3e69aaec82d4a1e6fe803d8cba156",
+        "facts": 392
+      }
+    },
+    {
+      "source": "antd",
+      "adapterIdentity": "commerce-combobox-reviewed-v1",
+      "recipeHash": "85b2f4a0020c978e1d9b44f1f753cfb9e088259d0d2fc86b1347bbd97cbadc57",
+      "envelopeHash": "eaa072838a1396194e91cf7f1425f7dcb32000d88ae1341bee02ddd2956cca95",
+      "comboboxExpectedScenePlan": {
+        "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-antd-combobox.json.gz",
+        "bytes": 233509,
+        "sha256": "2621a7c97ae884739560a3137dcaa4d486c7a1aebd630899175fc6940727497d",
+        "uncompressedBytes": 4076936,
+        "uncompressedSha256": "0ce69353efff357197b17d77fd5d94e38095df90e809a14c7f004e837fd766e8",
+        "facts": 12915
+      },
+      "optionExpectedScenePlan": {
+        "path": "recipe/evidence/combobox-live-pivot-v42/expected-scene-plan-antd-option.json.gz",
+        "bytes": 6746,
+        "sha256": "32d507d711f94aefc4ef88066e0e9d29921ed418dee538c93d00e8376f4baf81",
+        "uncompressedBytes": 106204,
+        "uncompressedSha256": "100fdfd67d547fc1b5d3ce0ca0af59651612bce064166fb98f3fe8f2e43bda19",
+        "facts": 392
+      }
+    }
+  ],
+  "captureManifest": {
+    "path": "recipe/evidence/combobox-live-pivot-v42/capture-manifest.json",
+    "cells": 72,
+    "requests": 72,
+    "cellsPerRequest": 1,
+    "sha256": "7fa96853309cbbf2d64faab453e0d568a1e8ab1c798fbb0bf7e694b4962c7cc2"
+  },
+  "requests": {
+    "remote": 77,
+    "mainLane": 76,
+    "recoveryCleanup": 1,
+    "hostPhases": 3
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3,
+    "cleanPublishedDescendantsOnly": true
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false
+}

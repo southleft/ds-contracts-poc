@@ -359,10 +359,12 @@ const NS = ${JSON.stringify(namespace)};
 const WRITER_VERSION=${JSON.stringify(String(version))};
 const PAGE_OWNER="recipe/combobox/"+PLAN.runIdentity;
 if(NS==="ds.contracts.input.recipe.v5"||PLAN.runIdentity==="4a074b24-e8503dd5-input-v5")throw new Error("COMBOBOX-INPUT-IDENTITY-REUSE");
+if(PLAN.runIdentity==="70c24cbd-d27f2e85-combobox-v1")throw new Error("COMBOBOX-V41-IDENTITY-REUSE");
 if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey);
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("COMBOBOX-MUST-NOT-WRITE-INPUT-PAGE");
+if(figma.currentPage&&(figma.currentPage.id==="163:35981"||figma.currentPage.id==="173:48924"||figma.currentPage.id==="181:64873"||figma.currentPage.id==="183:69150"||figma.currentPage.id==="85:6781"))throw new Error("COMBOBOX-MUST-NOT-WRITE-SIGNED-PAGE:"+figma.currentPage.id);
 await figma.loadAllPagesAsync();
 const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
 const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
@@ -371,6 +373,7 @@ const createdNodeIds=[],mutatedNodeIds=[];
 if(!page){page=figma.createPage();page.name=PLAN.pageName;createdNodeIds.push(page.id);}
 else if(getSharedData(page,"pageOwner")!==PAGE_OWNER)throw new Error("COMBOBOX-PAGE-OWNERSHIP-COLLISION:"+page.id);
 if(page.id==="115:295378")throw new Error("COMBOBOX-MUST-NOT-WRITE-INPUT-PAGE");
+if(page.id==="163:35981"||page.id==="173:48924"||page.id==="181:64873"||page.id==="183:69150"||page.id==="85:6781")throw new Error("COMBOBOX-MUST-NOT-WRITE-SIGNED-PAGE:"+page.id);
 await figma.setCurrentPageAsync(page);
 setSharedData(page,"pageOwner",PAGE_OWNER);
 setSharedData(page,"runIdentity",PLAN.runIdentity);
@@ -640,6 +643,9 @@ export function emitComboboxFigmaWriter(
     runIdentity === FORBIDDEN_INPUT_RUN_IDENTITY
   ) {
     throw new TypeError("combobox writer must not reuse Input identity");
+  }
+  if (runIdentity === "70c24cbd-d27f2e85-combobox-v1") {
+    throw new TypeError("combobox writer must not reuse V41 identity");
   }
   const pageName = `Recipe Pivot / Combobox / ${runIdentity}`;
   const plan = {

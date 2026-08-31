@@ -258,9 +258,9 @@ jobs:
       - name: recipe:calendar:check (calendar@1 grid proof, per-week days, today ring, and the hermetic Figma writer)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:calendar:check
-      - name: recipe:combobox:live:v41:check (the CURRENT combobox lineage — generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
+      - name: recipe:combobox:live:v42:check (the CURRENT combobox lineage — library-named overlay chrome remint; generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:combobox:live:v41:check
+        run: npm run recipe:combobox:live:v42:check
       - name: recipe:table:live:v32:check (the CURRENT table lineage — the one Table V32 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:table:live:v32:check

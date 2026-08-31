@@ -36,6 +36,10 @@ export const muiComboboxSource: ReviewedComboboxSource = {
   },
   styleSources: [
     "Autocomplete.js:330-379 listbox/option padding and option states",
+    "Autocomplete.js:308-315 AutocompletePaper styled(Paper) typography+overflow only",
+    "Paper/Paper.js:48-70 elevation Paper fill palette.background.paper, no border; default elevation=1",
+    "Paper/Paper.js:84 elevation default 1; theme.shadows[1] is three-layer — not a combobox@1 single drop-shadow",
+    "examples/mui/tokens/mui.dtcg.json palette-background-paper #fff, shape-border-radius 4px, shadows-1",
     "OutlinedInput/OutlinedInput.js and FilledInput/FilledInput.js via renderInput",
   ],
   fontSources: [
@@ -72,6 +76,8 @@ export const antdComboboxSource: ReviewedComboboxSource = {
   },
   styleSources: [
     "antd/es/select/style/token.js:39-59 option and selector component tokens",
+    "antd/es/select/style/dropdown padding token.paddingXXS; empty item uses genItemStyle optionPadding",
+    "examples/antd/tokens/antd.dtcg.json color-bg-elevated, color-border, border-radius-lg, padding-xxs, control-padding-horizontal, control-padding-horizontal-sm, box-shadow-secondary",
     "antd/es/select/style/variants.js outlined/filled state rules",
   ],
   fontSources: [
@@ -111,6 +117,24 @@ const muiTokens = cloneTokens("mui.autocomplete", (path, fallback) => {
   if (path.endsWith("small.width") || path.endsWith("medium.width")) return 300;
   if (path.endsWith("small.triggerHeight")) return 40;
   if (path.endsWith("medium.triggerHeight")) return 56;
+  // Autocomplete.js:342 AutocompleteListbox padding: '8px 0'
+  if (path.endsWith("small.listPadding") || path.endsWith("medium.listPadding"))
+    return 8;
+  // Autocomplete.js:360-361 option paddingLeft/Right 16
+  if (
+    path.endsWith("small.optionPaddingX") ||
+    path.endsWith("medium.optionPaddingX")
+  )
+    return 16;
+  // Paper.js:56 theme.shape.borderRadius; mui.dtcg.json shape-border-radius 4px
+  if (path === "overlayRadius") return 4;
+  // Paper.js:48 palette.background.paper; mui.dtcg.json palette-background-paper #fff
+  if (path === "overlay.background") return "#ffffffff";
+  // Paper elevation variant has no border (outlined variant only). Named: unpainted.
+  if (path === "overlay.border") return "#00000000";
+  // overlay.shadow stays fixture #00000026 — Paper elevation 1 uses theme.shadows[1]
+  // (three layers). combobox@1 overlay is one drop-shadow, color-bound,
+  // geometry hardcoded offsetY:4 blur:12. Do not invent a collapse.
   if (path.includes("optionStates.highlighted.background")) return "#0000000a";
   if (path.includes("optionStates.selected.background")) return "#1976d214";
   if (path.includes("fieldStates.error.border")) return "#d32f2fff";
@@ -143,6 +167,21 @@ const antdTokens = cloneTokens("antd.select", (path, fallback) => {
     path.endsWith("medium.optionHeight")
   )
     return 32;
+  // antd.dtcg.json padding-xxs 4px — Select dropdown padding
+  if (path.endsWith("small.listPadding") || path.endsWith("medium.listPadding"))
+    return 4;
+  // antd.dtcg.json control-padding-horizontal-sm 8px / control-padding-horizontal 12px
+  // Empty-item optionPadding is a computed formula; do not teach that px.
+  // Horizontal named tokens land on optionPaddingX. Status-slot 14/16 deferred.
+  if (path.endsWith("small.optionPaddingX")) return 8;
+  if (path.endsWith("medium.optionPaddingX")) return 12;
+  // antd.dtcg.json border-radius-lg 8px
+  if (path === "overlayRadius") return 8;
+  // antd.dtcg.json color-bg-elevated #ffffff
+  if (path === "overlay.background") return "#ffffffff";
+  // antd.dtcg.json color-border #d9d9d9
+  if (path === "overlay.border") return "#d9d9d9ff";
+  // overlay.shadow stays fixture #00000026 — box-shadow-secondary is three-layer.
   if (path.includes("optionStates.highlighted.background")) return "#0000000a";
   if (path.includes("optionStates.selected.background")) return "#e6f4ffff";
   if (path.includes("optionStates.selected.text")) return "#000000e0";

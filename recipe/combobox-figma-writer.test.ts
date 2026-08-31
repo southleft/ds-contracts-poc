@@ -66,7 +66,10 @@ test("Combobox writer plans two complete 64+8 primitive-IR sets without source b
   assert.match(writer.pageName, /^Recipe Pivot \/ Combobox \/ /);
   assert.notEqual(writer.namespace, FORBIDDEN_INPUT_NAMESPACE);
   assert.notEqual(writer.runIdentity, FORBIDDEN_INPUT_RUN_IDENTITY);
+  assert.notEqual(writer.runIdentity, "70c24cbd-d27f2e85-combobox-v1");
   assert.equal(writer.pageName.includes(FORBIDDEN_INPUT_PAGE_ID), false);
+  assert.match(writer.code, /COMBOBOX-V41-IDENTITY-REUSE/);
+  assert.match(writer.code, /163:35981/);
   assert.equal(
     writer.sourcePlans.reduce(
       (sum, source) => sum + source.comboboxCells.length + source.optionCells.length,

@@ -202,8 +202,8 @@ const RETIRED_LIVE_LINEAGES: Array<{
       /^recipe\/combobox-live-v(\d+)-[a-z-]+\.test\.ts$/,
       /^recipe\/scene-readback-combobox-v(\d+)\.test\.ts$/,
     ],
-    retired: (v) => v <= 40,
-    current: "recipe:combobox:live:v41:check",
+    retired: (v) => v <= 41,
+    current: "recipe:combobox:live:v42:check",
   },
   {
     archetype: "calendar",

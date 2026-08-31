@@ -1,0 +1,100 @@
+{
+  "artifactVersion": "combobox-v42-chrome-remint-receipt-v1",
+  "kind": "named-source-teaching-not-human-grade",
+  "preparedAt": "2026-08-30T22:00:00-05:00",
+  "decision": "recipe/evidence/signed-archetype-source-audit.json#archetypes.combobox.tjDecision20260830",
+  "v41Standing": {
+    "pageId": "163:35981",
+    "signoff": "recipe/evidence/combobox-live-v41-human-signoff.json",
+    "untouched": true,
+    "freshGradeRequired": true,
+    "gradeInvented": false
+  },
+  "teaching": "one PREPARE: existing compile channels only — overlay fill/border/radius, listPadding, optionPaddingX — landed from library-named tokens instead of canonical-fixture clones",
+  "carried": {
+    "mui": {
+      "listPadding": {
+        "value": 8,
+        "source": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Autocomplete/Autocomplete.js:342",
+        "named": "AutocompleteListbox padding: '8px 0'"
+      },
+      "optionPaddingX": {
+        "value": 16,
+        "source": "Autocomplete.js:360-361",
+        "named": "option paddingLeft/Right 16"
+      },
+      "overlayRadius": {
+        "value": 4,
+        "source": "Paper/Paper.js:56 + examples/mui/tokens/mui.dtcg.json shape-border-radius",
+        "named": "theme.shape.borderRadius = 4px"
+      },
+      "overlay.background": {
+        "value": "#ffffffff",
+        "source": "Paper/Paper.js:48 + mui.dtcg.json palette-background-paper",
+        "named": "palette.background.paper #fff"
+      },
+      "overlay.border": {
+        "value": "#00000000",
+        "source": "Paper/Paper.js:58-72 elevation variant has no border",
+        "named": "elevation Paper is borderless; outlined-only divider border is not Autocomplete default"
+      }
+    },
+    "antd": {
+      "listPadding": {
+        "value": 4,
+        "source": "examples/antd/tokens/antd.dtcg.json padding-xxs",
+        "named": "Select dropdown padding token.paddingXXS 4px"
+      },
+      "optionPaddingX": {
+        "small": 8,
+        "medium": 12,
+        "source": "antd.dtcg.json control-padding-horizontal-sm / control-padding-horizontal",
+        "named": "horizontal part of optionPadding; vertical half of (controlHeight - fontSize * lineHeight) is computed — not taught"
+      },
+      "overlayRadius": {
+        "value": 8,
+        "source": "antd.dtcg.json border-radius-lg",
+        "named": "8px"
+      },
+      "overlay.background": {
+        "value": "#ffffffff",
+        "source": "antd.dtcg.json color-bg-elevated",
+        "named": "#ffffff"
+      },
+      "overlay.border": {
+        "value": "#d9d9d9ff",
+        "source": "antd.dtcg.json color-border",
+        "named": "#d9d9d9"
+      }
+    }
+  },
+  "receipts": [
+    {
+      "channel": "overlay.shadow",
+      "why": "combobox@1 overlay.effects[0] is one drop-shadow, color-bound, geometry hardcoded offsetY:4 blur:12 in recipe/recipes/combobox.ts. MUI Paper elevation 1 uses theme.shadows[1] (three layers). AntD box-shadow-secondary is three layers. Collapsing either to one hex would invent a layer. Fixture color #00000026 stays; multi-shadow is not expressible on this recipe.",
+      "muiNamed": "examples/mui/tokens/mui.dtcg.json shadows-1",
+      "antdNamed": "examples/antd/tokens/antd.dtcg.json box-shadow-secondary"
+    },
+    {
+      "channel": "status-slot padding 14/16",
+      "why": "MUI AutocompleteNoOptions/AutocompleteLoading padding '14px 16px' is a Paper-level status slot. combobox@1 empty/loading TEXT has no own padding channel. New IR channel — later PREPARE. Not invented here.",
+      "source": "Autocomplete.js:316-333"
+    },
+    {
+      "channel": "antd empty-item optionPadding",
+      "why": "AntD &-empty uses genItemStyle optionPadding, a computed formula. Diagnosis already forbade teaching a computed px. Horizontal named tokens already land on optionPaddingX. Empty TEXT still has no own padding channel.",
+      "source": "combobox-v41-empty-listbox-diagnosis.json A.rawLibrarySource.antdSelect"
+    }
+  ],
+  "writerGuards": {
+    "v41IdentityReuse": "70c24cbd-d27f2e85-combobox-v1",
+    "signedPagesForbidden": [
+      "115:295378",
+      "163:35981",
+      "173:48924",
+      "181:64873",
+      "183:69150",
+      "85:6781"
+    ]
+  }
+}
