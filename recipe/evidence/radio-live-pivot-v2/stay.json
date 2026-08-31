@@ -1,0 +1,40 @@
+{
+  "artifactVersion": "radio-live-pivot-v2-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "197:76679",
+  "pageName": "Recipe Pivot / Radio / 0b0ee218-7e6bbd32-6c11de88-radio-v2",
+  "runIdentity": "0b0ee218-7e6bbd32-6c11de88-radio-v2",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=197-76679",
+  "oldStayPageId": "183:75031",
+  "doNotDeleteOldStay": true,
+  "sets": {
+    "Astryx": "197:76752",
+    "MUI": "197:76825",
+    "Ant Design": "197:76899"
+  },
+  "sections": {
+    "Astryx": "197:76707",
+    "MUI": "197:76780",
+    "Ant Design": "197:76854"
+  },
+  "arrange": {
+    "Astryx": "197:76900",
+    "MUI": "197:76901",
+    "Ant Design": "197:76902"
+  },
+  "accuracyLoop": {
+    "Ant Design": "itemAlign CENTER + label lineHeight 22px; hit/label vertical centers delta 0; item.gap 8. Wrapper baseline + \\a0 strut remains receipted."
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "figmaArrangeComponentSet": false,
+  "leftoverComponentContainer": [],
+  "shape": "list-shaped RadioList / RadioGroup / Radio.Group; no standalone Astryx Radio"
+}
