@@ -1,0 +1,54 @@
+{
+  "artifactVersion": "radio-live-v1-capture-authorization-v1",
+  "authorizationId": "radio-live-v1",
+  "status": "owner-authorized hill-climb window; one new Scratch page; cryptographic broker packet not reused",
+  "authorizationIntent": true,
+  "antecedent": {
+    "ownerMandate": "2026-08-31 unattended hill-climb of docs/34 Phase 1",
+    "prepareCommit": "196962be0",
+    "writerSha256": "0b2e7eaf53e1dff86a642090bd41f456d36bb59e2d48df129d759bd8a3f5bac1",
+    "splitWriters": [
+      "writer-astryx-radio-reviewed-v1.js",
+      "writer-mui-radio-reviewed-v1.js",
+      "writer-antd-radio-reviewed-v1.js"
+    ],
+    "runIdentity": "98044e9d-4c17efd5-3dd31d13-radio-v1",
+    "pageName": "Recipe Pivot / Radio / 98044e9d-4c17efd5-3dd31d13-radio-v1"
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "oneNewPage": true,
+    "signedPagesForbidden": [
+      "115:295378",
+      "163:35981",
+      "183:70641",
+      "173:48924",
+      "181:64873",
+      "183:69150",
+      "85:6781",
+      "183:74742"
+    ],
+    "cleanupOnFailureOnly": true
+  },
+  "execution": {
+    "maximumAttempts": 1,
+    "attemptsExecuted": 1,
+    "newTxnPerVersion": true,
+    "doNotRestartFailedAttemptAsIs": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "queued-for-TJ",
+    "overallSuccess": false,
+    "productV1": "INCOMPLETE",
+    "inventedGradeForbidden": true
+  }
+}

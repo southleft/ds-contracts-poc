@@ -9,8 +9,10 @@
     "MUI": "4c17efd5ed8881da9e776179f3ffea8d5f73d8a2664dac64c99e24d76b5b5581",
     "Ant Design": "3dd31d135507a8c847d3d0c35221d46cbfe466d0a38c8f215fe3e5d111b20db5"
   },
-  "writerSha256": "0b2e7eaf53e1dff86a642090bd41f456d36bb59e2d48df129d759bd8a3f5bac1",
-  "liveFigma": false,
+      "writerSha256": "0b2e7eaf53e1dff86a642090bd41f456d36bb59e2d48df129d759bd8a3f5bac1",
+      "liveFigma": true,
+      "pageId": "183:75031",
+      "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75031",
   "humanGrade": "queued-for-TJ",
   "overallSuccess": false,
   "productV1": "INCOMPLETE"
