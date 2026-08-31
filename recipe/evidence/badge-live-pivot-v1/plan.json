@@ -1,0 +1,27 @@
+{
+  "pageName": "Recipe Pivot / Badge / cd44cf69-5db99b22-badge-v1",
+  "runIdentity": "cd44cf69-5db99b22-badge-v1",
+  "namespace": "ds.contracts.badge.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "badge@1 anchored overlay from MUI Badge and AntD Badge; Astryx overlay is a named refusal; do not invent an Astryx pip or remint Token",
+  "sources": [
+    {
+      "adapterIdentity": "mui-badge-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "cd44cf693b98f6206d5c66eaadbf7bed576ff35d6d84989b7aca70afd4ba0366",
+      "envelopeHash": "4eb410032c3621485ca6f294f5d35271de0147423517c31795e6b47fada1e119",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 25
+    },
+    {
+      "adapterIdentity": "antd-badge-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "5db99b22905d0296a757db8cd6fe04f51bbeeb6f6d586854cf4b35ee1ef8839d",
+      "envelopeHash": "0a223fe7dc9223f870622ac7037f31757dc9667b43d01968694a863f85f35c1d",
+      "variantCount": 1,
+      "variableCount": 13,
+      "comparedIrFacts": 25
+    }
+  ]
+}

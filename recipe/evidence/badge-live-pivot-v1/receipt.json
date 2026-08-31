@@ -1,0 +1,16 @@
+{
+  "artifactVersion": "badge-live-pivot-v1-prepare",
+  "teaching": "Two overlay cells (MUI+AntD). Astryx Badge is an inline label — overlay refused.",
+  "runIdentity": "cd44cf69-5db99b22-badge-v1",
+  "pageName": "Recipe Pivot / Badge / cd44cf69-5db99b22-badge-v1",
+  "namespace": "ds.contracts.badge.recipe.v1",
+  "recipeHashes": {
+    "MUI": "cd44cf693b98f6206d5c66eaadbf7bed576ff35d6d84989b7aca70afd4ba0366",
+    "Ant Design": "5db99b22905d0296a757db8cd6fe04f51bbeeb6f6d586854cf4b35ee1ef8839d"
+  },
+  "writerSha256": "22f355ca277f3a4240b3a8e3d1a92827f98dd5b5aceccf267bc8567bd2cacdd7",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}
