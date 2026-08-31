@@ -1,0 +1,73 @@
+{
+  "artifactVersion": "switch-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031"
+  ],
+  "shapeDecisionToCarry": "All three libraries ship a standalone Switch. Recipe can be a single control + label row (Checkbox-shaped), not a list. Size is not a shared axis.",
+  "libraries": {
+    "Astryx": {
+      "export": "Switch",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Switch/Switch.tsx"
+      ],
+      "geometryNamedInSource": {
+        "SWITCH_WIDTH": 40,
+        "SWITCH_HEIGHT": 24,
+        "THUMB_SIZE_OFF": 16,
+        "THUMB_SIZE_ON": 20,
+        "TRACK_PADDING": 4,
+        "ON_RIGHT_PADDING": 2,
+        "THUMB_TRAVEL_ON": "40 - 4 - 20 - 2 = 14"
+      },
+      "trackOff": "--color-background-gray",
+      "trackOn": "--color-accent",
+      "thumb": "--color-background-surface",
+      "disabled": "trackDisabled opacity 0.5",
+      "label": "FieldLabel pairing; gap --spacing-2",
+      "sizeIsNotAnAxis": true,
+      "receipt": ["hover color-mix", "focus-visible ring", "isLoading spinner", "thumb on/off size change is named geometry not an axis"]
+    },
+    "MUI": {
+      "export": "Switch",
+      "package": "@mui/material@9.2.0",
+      "sourceStatus": "Switch.js is not present in recipe/sandboxes/input-field-mui/node_modules/@mui/material. Do not invent medium thumb/track sizes. Next PREPARE must open the installed Switch source or add it to a sandbox.",
+      "notes": "Same SwitchBase family as Checkbox/Radio. Label is FormControlLabel pairing."
+    },
+    "Ant Design": {
+      "export": "Switch",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/switch/style/index.js"
+      ],
+      "prepareComponentToken": {
+        "height": "fontSize * lineHeight = 14 * 1.5714285714285714 = 22",
+        "heightSM": "controlHeight / 2 = 32 / 2 = 16 (receipted, not an axis)",
+        "padding": 2,
+        "handleSize": "height - 4 = 18",
+        "trackMinWidth": "handleSize * 2 + padding * 4 = 44",
+        "handleBg": "colorWhite",
+        "checked": "colorPrimary"
+      }
+    }
+  },
+  "proposedAxes": {
+    "Checked": ["false", "true"],
+    "Disabled": ["false", "true"],
+    "notAnAxis": ["size", "thumb on/off size change", "loading"]
+  },
+  "sharedContentProposal": ["Enable notifications"]
+}
