@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "switch-live-pivot-v1-prepare",
+  "teaching": "Checked × Disabled switch compiled from named Astryx, MUI Switch.js @9.2.0, and AntD Switch facts; MUI source was present in the input-field sandbox",
+  "runIdentity": "a8686d63-3d086535-f55e4ace-switch-v1",
+  "pageName": "Recipe Pivot / Switch / a8686d63-3d086535-f55e4ace-switch-v1",
+  "namespace": "ds.contracts.switch.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "a8686d63bbcec90bc7f3c3916a1c75c257d1629c7e7b86d8f4da9e2b85a0fd96",
+    "MUI": "3d086535652c5e04f6745d2edfb6eeee5601a01c8891a1fe3aca2ddade7a20c7",
+    "Ant Design": "f55e4ace9eb990c26fb6c8d145a122111dc098ee6dfcb7d02317b6314732d067"
+  },
+  "writerSha256": "b0288f45989e20fead4205febdf8eb3da2ab0c75cc2d04dbceec471f156b6e0e",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

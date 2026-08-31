@@ -1,7 +1,7 @@
 {
   "artifactVersion": "switch-prepare-v1-source-notes",
-  "status": "offline-notes-only",
-  "recipeLanded": false,
+  "status": "recipe-landed-hermetic-green",
+  "recipeLanded": true,
   "liveFigma": false,
   "overallSuccess": false,
   "productV1": "INCOMPLETE",
@@ -16,13 +16,15 @@
     "183:74742",
     "183:75031"
   ],
-  "shapeDecisionToCarry": "All three libraries ship a standalone Switch. Recipe can be a single control + label row (Checkbox-shaped), not a list. Size is not a shared axis.",
+  "shapeDecisionToCarry": "All three libraries ship a standalone Switch. Recipe is a single control + label row (Checkbox-shaped), not a list. Size is not a shared axis.",
+  "muiSourceCorrection": "Earlier notes said Switch.js was absent from the input-field sandbox. That was a false negative: glob skips gitignored node_modules. File is recipe/sandboxes/input-field-mui/node_modules/@mui/material/Switch/Switch.js at @mui/material@9.2.0. MUI leg compiled from that source, not invented.",
   "libraries": {
     "Astryx": {
       "export": "Switch",
       "package": "@astryxdesign/core@0.1.6",
       "sources": [
-        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Switch/Switch.tsx"
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Switch/Switch.tsx",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/theme/tokens.stylex.ts"
       ],
       "geometryNamedInSource": {
         "SWITCH_WIDTH": 40,
@@ -31,21 +33,41 @@
         "THUMB_SIZE_ON": 20,
         "TRACK_PADDING": 4,
         "ON_RIGHT_PADDING": 2,
-        "THUMB_TRAVEL_ON": "40 - 4 - 20 - 2 = 14"
+        "THUMB_TRAVEL_ON": 14
       },
-      "trackOff": "--color-background-gray",
-      "trackOn": "--color-accent",
-      "thumb": "--color-background-surface",
+      "trackOff": "--color-background-gray light #0A131733",
+      "trackOn": "--color-accent light #0064E0",
+      "thumb": "--color-background-surface light #FFFFFF",
       "disabled": "trackDisabled opacity 0.5",
-      "label": "FieldLabel pairing; gap --spacing-2",
-      "sizeIsNotAnAxis": true,
-      "receipt": ["hover color-mix", "focus-visible ring", "isLoading spinner", "thumb on/off size change is named geometry not an axis"]
+      "label": "FieldLabel pairing; gap --spacing-2 8",
+      "sizeIsNotAnAxis": true
     },
     "MUI": {
       "export": "Switch",
       "package": "@mui/material@9.2.0",
-      "sourceStatus": "Switch.js is not present in recipe/sandboxes/input-field-mui/node_modules/@mui/material. Do not invent medium thumb/track sizes. Next PREPARE must open the installed Switch source or add it to a sandbox.",
-      "notes": "Same SwitchBase family as Checkbox/Radio. Label is FormControlLabel pairing."
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Switch/Switch.js",
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/internal/SwitchBase.js"
+      ],
+      "geometryNamedInSource": {
+        "root": "width 34+12*2=58, height 14+12*2=38, padding 12, overflow hidden",
+        "track": "content box 34×14, borderRadius 7",
+        "thumb": "20×20",
+        "switchBasePadding": 9,
+        "checkedTranslateX": 20
+      },
+      "trackUnchecked": "common.black opacity 0.38 baked #00000061",
+      "trackChecked": "primary.main #1976d2 opacity 0.5 baked #1976d280",
+      "trackDisabledOpacity": "0.12 baked into fill",
+      "thumbCheckedDisabled": "lighten(#1976d2, 0.62) = #a7caed",
+      "label": "FormControlLabel pairing",
+      "receipt": [
+        "sibling SwitchBase/track overlay lowered to nested thumb",
+        "3px overhang from padding 9 vs 12",
+        "size small",
+        "ripple",
+        "thumb shadow"
+      ]
     },
     "Ant Design": {
       "export": "Switch",
@@ -54,13 +76,14 @@
         "examples/antd/.antd-sandbox/node_modules/antd/es/switch/style/index.js"
       ],
       "prepareComponentToken": {
-        "height": "fontSize * lineHeight = 14 * 1.5714285714285714 = 22",
-        "heightSM": "controlHeight / 2 = 32 / 2 = 16 (receipted, not an axis)",
+        "height": 22,
         "padding": 2,
-        "handleSize": "height - 4 = 18",
-        "trackMinWidth": "handleSize * 2 + padding * 4 = 44",
+        "handleSize": 18,
+        "trackMinWidth": 44,
+        "travel": 24,
         "handleBg": "colorWhite",
-        "checked": "colorPrimary"
+        "checked": "colorPrimary #1677ff",
+        "disabledOpacity": 0.65
       }
     }
   },
@@ -69,5 +92,6 @@
     "Disabled": ["false", "true"],
     "notAnAxis": ["size", "thumb on/off size change", "loading"]
   },
-  "sharedContentProposal": ["Enable notifications"]
+  "sharedContentProposal": ["Enable notifications"],
+  "runIdentity": "a8686d63-3d086535-f55e4ace-switch-v1"
 }
