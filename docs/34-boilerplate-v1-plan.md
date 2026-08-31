@@ -1,19 +1,39 @@
 # 34 · The boilerplate hill-climb — a corpus plan for a releasable v1
 
-> **Status: PROPOSED, not approved.** This is a plan document. Nothing here
-> mints, grades, flips `overallSuccess`, or closes an open owner decision.
-> Product **v1 remains INCOMPLETE** — F1 (whole-corpus / unseen-library on
-> the recipe path) is unproven and this plan does not by itself prove it.
-> Written against `main` head `e295517a8`. Supersedes only one line of
-> [docs/33](33-post-v1-plan.md): "No sixth archetype this cycle."
+> **Status: ACTIVE — adopted 2026-08-31.** This is the climb, not a draft.
+> Nothing here mints, grades, or flips `overallSuccess`. Product **v1
+> remains INCOMPLETE** — F1 (whole-corpus / unseen-library on the recipe
+> path) is unproven and this plan does not by itself prove it. Written
+> against `main` head `e295517a8`; adoption recorded on `main` after
+> `dd3bc0afe`. Supersedes only one line of [docs/33](33-post-v1-plan.md):
+> "No sixth archetype this cycle."
+>
+> **Owner decisions adopted 2026-08-31 (do not invent more):**
+>
+> 1. **Plan is active.** Astryx = “asterisks” unless later corrected.
+> 2. **Combobox / Select = fork A.** Proof target stays Combobox
+>    (Autocomplete-family). V41 human signoff stands. Do not restamp V41
+>    (`f330a082`). Do not remint Combobox now. Human reference pages: MUI
+>    Autocomplete + AntD Select-with-search. Select is a *future* Phase 2
+>    archetype if/when we get there — not a retarget of signed Combobox.
+>    Remint closed: accepted as source-faithful continuation of V41;
+>    visual mismatch with Select docs was the wrong official page. Do not
+>    invent a new visual grade of v42.
+> 3. **F1 stays the v1 gate.** Do not redefine v1 as the three-library
+>    matrix. `overallSuccess` stays false until F1 is honestly proven.
+>    Finishing boilerplate is necessary corpus, not a silent ship.
+> 4. **Start Phase 1 now:** Checkbox → then Radio → Switch, each across
+>    Astryx + MUI + Ant Design when the library ships that component. Do
+>    not wait for another planning round.
 
 ---
 
 ## 0 · The assumption you should correct in one line if it is wrong
 
-**"Asterisks" is read as Astryx** — `@astryxdesign/core@0.1.6`, the StyleX
-library documented at `astryx.atmeta.com/components`, which already backs the
-Calendar recipe (page `181:64873`).
+**"Asterisks" is Astryx** — adopted 2026-08-31 unless later corrected.
+`@astryxdesign/core@0.1.6`, the StyleX library documented at
+`astryx.atmeta.com/components`, which already backs the Calendar recipe
+(page `181:64873`).
 
 The repo evidence for that reading:
 
@@ -41,9 +61,12 @@ message of 2026-08-30 that asked to hill-climb boilerplate.
 **Does not change:**
 
 - The Combobox `Select`-vs-`Autocomplete` fork in
-  [docs/33](33-post-v1-plan.md#open-owner-decision-2026-08-30--combobox-human-reference)
-  stays **open**. V41 signoff stands. V42 stay page `183:70641` stays. No grade
-  is invented here.
+  [docs/33](33-post-v1-plan.md#adopted-2026-08-31--combobox-human-reference--fork-a)
+  is **closed as fork A** (adopted 2026-08-31). V41 signoff stands. V42 stay
+  page `183:70641` stays. No new visual grade of v42 is invented. Remint is
+  accepted as a source-faithful continuation of V41; the Select-docs mismatch
+  was the wrong official page. Select is a future Phase 2 archetype, not a
+  retarget.
 - npm publish stays deferred.
 - Recipe acquisition stays human-authored and human-reviewed. Nothing in this
   plan infers a recipe from a library.
@@ -51,8 +74,9 @@ message of 2026-08-30 that asked to hill-climb boilerplate.
   (`recipe:replay-census`, evidence for button and calendar), H2 writer
   preflight (`recipe:writer-preflight`), and the Button perturbation exam
   (`recipe:button:perturbation:check`).
-- F1 stays a named gate unless TJ explicitly redefines v1 — see
-  [§8 Question 2](#question-2--f1-or-a-redefined-v1).
+- F1 stays the v1 gate (adopted 2026-08-31). See
+  [§8 Question 2](#question-2--f1-or-a-redefined-v1). Do not redefine v1 as
+  the three-library matrix.
 
 ---
 
@@ -151,7 +175,7 @@ attributable owner grade citing that page. It does **not** mean
 |---|---|---|---|---|
 | **Button** | not-started (`Button`) | not-started (`Button`) | not-started (`Button`) | **signed** — Altitude + Fluent, `183:69150` |
 | **Input / Field** | not-started (`TextInput`) | **signed** (`TextField`), `115:295378` | not-started (`Input`) | signed — Polaris |
-| **Combobox** | not-started (`Typeahead`) | **signed, reference OPEN** (`Autocomplete`) | **signed, reference OPEN** (`Select`) | v42 stay `183:70641`, fork open |
+| **Combobox** | not-started (`Typeahead`) | **signed, fork A** (`Autocomplete`) | **signed, fork A** (`Select` with search) | v42 stay `183:70641`; remint accepted, no new v42 grade |
 | **Table** | **blocked** (`Table`, census 0/0 hollow) | **signed**, `173:48924` | not-started (`Table`) | signed — first-party |
 | **Calendar** | **signed**, `181:64873` | **N/A** — not in `@mui/material@9.2.0`; would need `@mui/x-date-pickers` | not-started (`DatePicker`) | second leg = named refusal (react-day-picker, held blind for F1) |
 
@@ -159,7 +183,7 @@ attributable owner grade citing that page. It does **not** mean
 
 | archetype | Astryx | MUI | AntD |
 |---|---|---|---|
-| **Checkbox** | not-started (`CheckboxInput`) | not-started (`Checkbox`) | not-started (`Checkbox`) |
+| **Checkbox** | PREPARE (`CheckboxInput`) | PREPARE (`Checkbox`) | PREPARE (`Checkbox`) |
 | **Radio** | not-started (`RadioList` + `RadioListItem` — list-shaped) | not-started (`Radio` + `RadioGroup`) | not-started (`Radio` + `Radio.Group`) |
 | **Switch** | not-started (`Switch`) | not-started (`Switch`) | not-started (`Switch`) |
 | **Textarea** | not-started (`TextArea`) | not-started (`TextField multiline` / `TextareaAutosize` — no standalone Textarea) | not-started (`Input.TextArea`) |
@@ -215,10 +239,10 @@ grid/column alignment (Table, Calendar).
 
 **Deliberately not in the climb order, each for a named reason:**
 
-- **Select** — blocked on [Question 1](#question-1--select-or-combobox), and
-  its Astryx leg starts from an existing named skip. It is on the boilerplate
-  list because it is genuinely more common than Combobox; it is not scheduled
-  until the fork closes.
+- **Select** — fork A (adopted 2026-08-31) keeps Combobox on the
+  Autocomplete-family. Select is a future Phase 2 archetype if/when we get
+  there, not a retarget of signed Combobox. Its Astryx leg still starts from
+  an existing named skip.
 - **Slider, Pagination, Progress, Divider** — all three libraries ship them
   and they are cheap, but they teach nothing new. They are backfill for
   whenever the climb has spare capacity, not hill-climb targets.
@@ -250,19 +274,20 @@ And one shared **proof bar**, which is docs/26 `V1-CLASS-03` unchanged:
 
 ### Phase 0 — Close the Combobox / Select reference fork
 
+- **Status: closed adopted 2026-08-31 as fork A.**
 - **Goal:** turn an open fork into a chosen reference. Nothing else.
-- **Archetypes:** Combobox (and, downstream, whether Select enters the climb).
-- **Work:** none by this plan. Another agent is analyzing the fork; its
-  four options (A keep Autocomplete-family / B retarget to Select / C
-  re-vendor and remint / D named fail) are recorded in
-  [docs/33](33-post-v1-plan.md#open-owner-decision-2026-08-30--combobox-human-reference)
-  with evidence at
-  `recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json`.
-- **Proof bar:** an owner sentence choosing A, B, C, or D. Not a grade.
-- **What would stop the climb:** choosing **B** retargets the proof to Select
-  and makes Select a Phase 2 blocker rather than a Phase 2 option; choosing
-  **D** would mean a signed archetype was misdescribed, which is a
-  stop-everything result and should be treated as one.
+- **Decision:** Keep Autocomplete-family. Human reference pages are
+  [MUI Autocomplete](https://mui.com/material-ui/react-autocomplete/) and
+  AntD Select-with-search. V41 signoff stands. Do not restamp V41
+  (`f330a082`). Do not remint Combobox now. Remint accepted as
+  source-faithful continuation of V41; visual mismatch with Select docs
+  was the wrong official page. Do not invent a new visual grade of v42.
+  Select is a future Phase 2 archetype if/when we get there — not a
+  retarget of signed Combobox.
+- **Evidence:**
+  `recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json`
+  (historical open-fork record; the close lives in this document and
+  [docs/33](33-post-v1-plan.md#adopted-2026-08-31--combobox-human-reference--fork-a)).
 
 ### Phase H — Finish hardening before spending hills (runs alongside Phase 0)
 
@@ -282,10 +307,13 @@ And one shared **proof bar**, which is docs/26 `V1-CLASS-03` unchanged:
   the record, and this plan spends far more hills than any previous one.
 - **What would stop the climb:** if the census cannot reproduce a known
   refusal for a new archetype, the census is not general and the cost model
-  in §7 is wrong — re-plan before Phase 1.
+  in §7 is wrong — name that and re-plan the remaining hills. Adopted
+  2026-08-31: Phase H is not a gate in front of Phase 1.
 
 ### Phase 1 — Selection controls
 
+- **Status: starts now (adopted 2026-08-31).** Checkbox first, then Radio,
+  then Switch. Do not wait for another planning round.
 - **Goal:** three archetypes, three libraries each, and the first
   three-library-per-page mints in the corpus.
 - **Archetypes:** Checkbox, Radio, Switch.
@@ -307,7 +335,7 @@ And one shared **proof bar**, which is docs/26 `V1-CLASS-03` unchanged:
   multiline class.
 - **Archetypes:** Textarea; MUI input variants (`OutlinedInput` /
   `FilledInput` / `Input`, all three present in the vendored package); Select
-  **only if Question 1 resolves to a Select target**.
+  **as a new archetype under fork A** (not a Combobox retarget).
 - **Libraries:** Astryx `TextArea`, MUI `TextField multiline`, AntD
   `Input.TextArea`. Plus the Input/Field AntD and Astryx legs from §4a, which
   are cheaper here than anywhere else because the recipe already exists.
@@ -339,9 +367,9 @@ And one shared **proof bar**, which is docs/26 `V1-CLASS-03` unchanged:
 - **Libraries:** all three throughout (AntD `Modal` for Dialog, AntD
   `Dropdown` for Menu).
 - **Why Dialog is last:** overlays and portals are entry 2 of docs/26's
-  approved post-v1 limitations register, and the Combobox overlay chrome is
-  *currently the subject of an open owner decision*. Dialog is the biggest bet
-  in this plan against the weakest evidence.
+  approved post-v1 limitations register. Combobox overlay chrome is now a
+  closed remint (fork A, adopted 2026-08-31); Dialog remains the biggest
+  portal bet and stays last.
 - **What would stop the climb:** Tooltip — the smallest portal there is —
   costing more than a handful of hills. If the cheapest portal is expensive,
   Menu and Dialog should be cut and named, not attempted.
@@ -357,10 +385,9 @@ And one shared **proof bar**, which is docs/26 `V1-CLASS-03` unchanged:
   because Phases 1–4 happened.
 - **Proof bar:** a pre-registered prediction, recorded before the run, scored
   after — the day-picker pattern.
-- **This phase does not get dropped** unless TJ answers
-  [Question 2](#question-2--f1-or-a-redefined-v1) by redefining v1. Dropping
-  it silently would be the exact failure mode docs/32's F-checklist exists to
-  prevent.
+- **This phase does not get dropped.** Question 2 closed adopted
+  2026-08-31: F1 stays the v1 gate. Dropping Phase 5 silently would be the
+  exact failure mode docs/32's F-checklist exists to prevent.
 
 ---
 
@@ -392,18 +419,15 @@ not a lower proof bar.**
 
 ### Question 1 — Select or Combobox?
 
-Is the Combobox proof supposed to look like official **Select**
-([MUI](https://mui.com/material-ui/react-select/),
-[AntD](https://ant.design/components/select?theme=light)), or like official
-**Autocomplete / Select-with-search**?
-
-This is the fork already recorded in
-[docs/33](33-post-v1-plan.md#open-owner-decision-2026-08-30--combobox-human-reference).
-It stays open here. What this plan adds is the consequence for the roadmap:
-Select is genuinely more common boilerplate than Combobox, so the answer
-decides whether Select is a **new Phase 2 archetype** (answer A: keep
-Autocomplete-family, add Select alongside it) or a **retarget of existing
-signed work** (answer B). Phase 2 cannot be scheduled until this is answered.
+**Adopted 2026-08-31: fork A.** The Combobox proof stays Combobox
+(Autocomplete-family). Human reference pages are
+[MUI Autocomplete](https://mui.com/material-ui/react-autocomplete/) and AntD
+Select-with-search. Select is a future Phase 2 archetype if/when we get
+there — not a retarget of signed Combobox. V41 human signoff stands. Do not
+restamp V41 (`f330a082`). Do not remint Combobox now. Remint closed:
+accepted as source-faithful continuation of V41; visual mismatch with
+Select docs was the wrong official page. Do not invent a new visual grade
+of v42.
 
 ### Question 2 — F1, or a redefined v1?
 
@@ -413,29 +437,31 @@ clause is *unseen* libraries, and these three are all seen. Adding a fourth
 library to the corpus makes the corpus bigger; it does not make the corpus
 unseen.
 
-So one of two things has to be true, and only TJ can pick:
+**Adopted 2026-08-31: keep F1 as the v1 gate.** Do not redefine v1 as the
+three-library matrix. Phases 1–4 are corpus foundation. Phase 5 is the
+gate. `overallSuccess` stays false until F1 is honestly proven. Finishing
+boilerplate is necessary corpus, not a silent ship.
 
-- **Keep F1 as the v1 gate.** Phases 1–4 are then a foundation, Phase 5 is the
-  gate, and v1 is not claimed until a held-out library run scores against a
-  pre-registered prediction. This is the current definition, unchanged.
-- **Redefine v1 explicitly.** "v1 = the common component set across these
-  three libraries, owner-graded; F1 becomes v1.1." That is a legitimate
-  product call. It requires editing docs/26 and docs/32's F-checklist **in
-  the open**, with the redefinition recorded and dated.
+The rejected alternative remains named so it cannot happen quietly:
+redefining v1 as "the common component set across these three libraries,
+owner-graded; F1 becomes v1.1" would require editing docs/26 and docs/32's
+F-checklist **in the open**. That edit was not authorized.
 
-What must not happen is finishing the matrix and letting v1 quietly become
-"the matrix is done." Under the current definition, completing every phase in
-this document still leaves **product v1 INCOMPLETE**.
+Completing every phase in this document still leaves **product v1
+INCOMPLETE** until Phase 5 scores.
 
 ---
 
 ## 9 · What this plan explicitly does not claim
 
-- It does not claim any archetype in §4b is started. None are.
+- It does not claim Checkbox is signed. Phase 1 PREPARE is offline compile
+  from named package facts; no live page, no human grade, no
+  `overallSuccess` flip.
 - It does not claim finishing the matrix produces `1.0.0`, an npm publish, or
   a satisfied F1.
 - It does not flip `overallSuccess` for any archetype.
-- It does not close, grade, or pre-judge the Combobox fork.
+- It does not invent a Combobox v42 grade. Fork A closed the reference
+  question; it did not mint a new human visual grade.
 - It does not invent library facts. Every component name in §3 and §4 is read
   from vendored source under `recipe/sandboxes/`, from
   `examples/*/contracts/`, or from the committed Astryx extraction census.
@@ -444,9 +470,13 @@ this document still leaves **product v1 INCOMPLETE**.
 
 ## Next concrete action
 
-Answer Question 1 and Question 2. Both are one sentence each, and Phase 1
-cannot be scoped without them — Question 1 sets Phase 2's contents, and
-Question 2 decides whether Phase 5 is the gate or a follow-on.
+**Phase 1 starts now** (adopted 2026-08-31). Checkbox first, then Radio,
+then Switch — each across Astryx + MUI + Ant Design when the library ships
+that component. Do not wait for another planning round. Do not start
+day-picker / F1 until Phase 5. Do not publish npm. Do not flip
+`overallSuccess`.
 
-While those are open, Phase H is unblocked, offline, zero Figma writes, and
-strictly reduces the cost of everything after it.
+H2 writer preflight and the Button perturbation exam are already on `main`
+— use them, do not redo them. Phase H's remaining offline work (H1 Input/
+Combobox census, H3) may run alongside the climb; it is not a gate in
+front of Checkbox.

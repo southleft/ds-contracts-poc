@@ -8,11 +8,11 @@
 > **Direction change (2026-08-30, later the same day).** TJ asked to
 > hill-climb the **common/boilerplate** component set across Astryx, MUI and
 > Ant Design. That supersedes exactly one line of this document — TJ decision
-> **#5, "No sixth archetype this cycle."** Everything else here stands,
-> including the open Combobox fork below. The proposed (not yet approved)
-> boilerplate roadmap, its three-library coverage matrix, and the two owner
-> questions it depends on are in
-> [docs/34 — The boilerplate hill-climb](34-boilerplate-v1-plan.md).
+> **#5, "No sixth archetype this cycle."** Everything else here stands
+> except the Combobox fork, which closed **adopted 2026-08-31** as fork A
+> (see below). The climb itself is
+> [docs/34 — The boilerplate hill-climb](34-boilerplate-v1-plan.md),
+> **ACTIVE as of 2026-08-31** — not a draft.
 
 **Status:** approved by TJ, 2026-08-30. Written against merge head `4caebfc5b`; nothing here restamps evidence or invents a grade. Doctrine unchanged: named or carried, receipts for refusals, human gates where a human is the instrument.
 
@@ -84,7 +84,11 @@ this section was warning about.
 
 1. **CI lanes green on main** (merge checklist; F6).
 2. **Scratch signed cleanup** of older Calendar pages — batch with the next live session.
-3. **Combobox chrome remint** — after hardening phase; fresh mint, fresh human grade.
+3. **Combobox chrome remint** — **closed adopted 2026-08-31.** Accepted as
+   a source-faithful continuation of V41. V41 signoff stands (`163:35981`,
+   RECORD `f330a082` not restamped). V42 stay page `183:70641` remains; do
+   not invent a new visual grade of v42. Do not remint Combobox now. The
+   Select-docs mismatch was the wrong official page.
 4. **npm publish — keep deferred** through Phase 4.
 
 ---
@@ -107,7 +111,7 @@ All offline, zero Figma writes, zero hills.
 |---|---|---|---|---|
 | **0 — Land v1** | Merge completes; lanes green on main | F6 lane profile; completion record committed | 0 hills (done) | — |
 | **1 — Harden** | H1 replay census generic; H2 writer preflight; H3 class consolidation | Census reproduces ≥1 named historical refusal per archetype; preflight retro-catches Button-v5 writer classes | 0 hills, ~days offline | 0 |
-| **2 — Combobox remint + Scratch cleanup** | TJ-decided chrome remint; batch Calendar page cleanup | Mint stays; zero-silent; **[TJ] fresh grade** | 1–4 hills | 1 |
+| **2 — Combobox remint + Scratch cleanup** | Remint **closed adopted 2026-08-31** (accepted as V41 continuation; no new v42 grade). Remaining: batch Calendar page cleanup | Cleanup only; do not remint Combobox now | leftover cleanup | 1 |
 | **3 — Design→code** | Button perturbation exam; emission surface; extend inversion to other four | N/N edits named; **[TJ] grades emission**; fixed point per archetype | 0 hills for observes | 1 |
 | **4 — Held-out exam** | react-day-picker calendar adapter (spends blindness — **[TJ] decision**) | Mint stays + grade, or named refusal; prediction scored | est. 5–15 hills | 1 |
 | **5 — Decide** | Sixth archetype vs adapters vs npm vs productization | **[TJ] decision** | — | 3, 4 |
@@ -116,7 +120,9 @@ All offline, zero Figma writes, zero hills.
 
 1. **Approve the perturbation-exam protocol** — emission target is a *proposed reviewed-input diff*, never automatic code write.
 2. **Authorize spending the day-picker blindness** in Phase 4 (recommendation: yes, this phase).
-3. **Combobox remint slots after hardening**, not immediately.
+3. **Combobox remint slots after hardening**, not immediately. **Closed
+   adopted 2026-08-31:** remint accepted as source-faithful continuation of
+   V41; no new v42 grade; do not remint now.
 4. **npm publish stays deferred** through Phase 4.
 5. ~~**No sixth archetype this cycle.**~~ — **superseded 2026-08-30** by TJ's
    boilerplate direction change; see [docs/34](34-boilerplate-v1-plan.md).
@@ -125,32 +131,31 @@ All offline, zero Figma writes, zero hills.
 
 **Product v1:** remains **INCOMPLETE** — F1's whole-corpus/unseen-library clause is not proven on the recipe path (what is proven is zero-silent inversion per archetype on its measured two-library pair).
 
-### OPEN owner decision (2026-08-30) — Combobox human reference
+### ADOPTED 2026-08-31 — Combobox human reference — fork A
 
-Not a remint pass. V41 signoff stands (`163:35981`). V42 stay page `183:70641` remains. `overallSuccess` stays false. Day-picker was **not** started.
+Closed. Not a remint pass. Not a new visual grade of v42. V41 signoff
+stands (`163:35981`). Do not restamp V41 (`f330a082`). V42 stay page
+`183:70641` remains. `overallSuccess` stays false. Day-picker was **not**
+started and stays Phase 5 per [docs/34](34-boilerplate-v1-plan.md).
 
-TJ opened official **Select** docs ([MUI Select](https://mui.com/material-ui/react-select/), [AntD Select](https://ant.design/components/select?theme=light)) and said the minted comboboxes do not look like those pages. That is an open fork, not a grade:
+**Choice: A.** Proof target stays Combobox (Autocomplete-family). Human
+reference pages: [MUI Autocomplete](https://mui.com/material-ui/react-autocomplete/)
+and AntD Select-with-search. Select is a future Phase 2 archetype if/when
+we get there — not a retarget of signed Combobox.
 
-- **What we claimed:** Combobox (`combobox@1`).
-- **What v42 compiled:** `@mui/material@9.2.0` **Autocomplete** (sandbox `node_modules`) + `antd@5.29.3` **Select** (tarball), wearing shared fixture content (Assignee / Ada Lovelace / occupancy squares / overlay “No options” / “Loading…”).
-- **Why the Select tabs don’t match:** primarily the **wrong official page for MUI** (MUI’s own Select page sends combobox seekers to Autocomplete). AntD is the right component name but not the official Basic Usage chrome. Not a silent Select loss, and not a leftover-only compile — overlay tokens were reminted from named package values; occupancy/content/label-above are still recipe fixture anatomy.
-- **Does it look like official Autocomplete?** Closer family, named deltas (occupancy squares vs flags/none; label-above vs floating InputLabel; overlay loading text vs MUI 14/16 status slot or AntD in-field spinner; recipe square popup slot vs caret/chevron).
+**Remint:** accepted as source-faithful continuation of V41. Visual
+mismatch with Select docs was the wrong official page. Do not remint
+Combobox now. Do not invent a new visual grade of v42.
 
-**Fork (only TJ chooses):**
-
-| | Choice |
-|---|---|
-| **A** (recommended default if the proof stays Combobox) | Keep Autocomplete-family; change the human reference to [MUI Autocomplete](https://mui.com/material-ui/react-autocomplete/) and AntD Select-with-search. Remint only if compile ≠ that source. |
-| **B** | Change the proof target to Select (different recipe; the pages TJ just opened). |
-| **C** | Re-vendor current MUI/AntD and remint — later, after A or B. Not first. |
-| **D** | Named fail for compiling fixtures / the wrong component. Not the honest complete description. |
-
-**Question only TJ can answer:** is the Combobox proof supposed to look like official **Select**, or like official **Autocomplete / Select-with-search**?
-
-Evidence: [`recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json`](../recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json). Phase 2 remint grade and Phase 4 day-picker stay blocked on this fork.
+The open-fork evidence file stays historical:
+[`recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json`](../recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json).
+The close lives here and in [docs/34](34-boilerplate-v1-plan.md).
 
 ---
 
 ## Next concrete action
 
-Generalize `recipe/table-tail-census.ts` into an archetype-generic offline replay census (H1), validated by reproducing at least one named historical live refusal per archetype from its persisted substrate — the exact validation pattern the Table census already proved. Zero Figma writes.
+**Phase 1 of [docs/34](34-boilerplate-v1-plan.md) starts now** (adopted
+2026-08-31): Checkbox across Astryx + MUI + Ant Design. H1 remaining work
+may run alongside; it is not a gate in front of Checkbox. F1 / day-picker
+stay Phase 5. Product v1 remains **INCOMPLETE**.
