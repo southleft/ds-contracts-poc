@@ -1950,17 +1950,22 @@ re-measured 2026-08-30 after the Button B3 full pass:
 
 | archetype | (a) offline gate | (b) mint stayed | (c) human grade | (d) `overallSuccess` |
 | --- | --- | --- | --- | --- |
-| Button | green | **yes**, `183:69150` (v5 remint) | **passed** (B3 full pass) | flips in the v1-completion record |
-| Input / Field | green | **yes**, `115:295378` | **passed** | flips in the v1-completion record |
-| Combobox | green | **yes**, `163:35981` | **passed** | flips in the v1-completion record |
+| Button | green | **yes**, `183:69150` (v5 remint) | **passed** (B3 full pass) | **stays false** — F1 unmet, no v1-completion record yet |
+| Input / Field | green | **yes**, `115:295378` | **passed** | **stays false** — F1 unmet, no v1-completion record yet |
+| Combobox | green | **yes**, `163:35981` | **passed** | **stays false** — F1 unmet, no v1-completion record yet |
 | Data Table | green | **yes**, `173:48924` (v32) | **passed** | already true (v32 record) |
-| Calendar | green | **yes**, `181:64873` (v50) | **passed** | flips in the v1-completion record |
+| Calendar | green | **yes**, `181:64873` (v50) | **passed** | **stays false** — F1 unmet, no v1-completion record yet |
 
 All five satisfy (a), (b) and (c). Flipping (d) is the owner call this
-proposal named; TJ's B3 authorization ("You have my full permission to move
-forward") plus his direct-merge amendment execute it. The flip lands in the
-v1-completion record together with the F6 lane measurement — see the merge
-execution section — never before the lanes are measured.
+proposal named, and it can only ride a **true** v1-completion record. The
+lanes were then measured at the branch head and the F checklist below was
+walked honestly (see the [merge execution record](#merge-execution-2026-08-30)):
+F1's whole-corpus / unseen-library clause is **not** proven on the recipe
+path — what is proven is zero-silent inversion per archetype on its measured
+two-library pair. No v1-completion record therefore lands in this change set;
+(d) stays false for Button, Input, Combobox and Calendar (Table keeps its
+v32-record value), and the merge to main proceeds under TJ's direct
+authorization with v1 honestly INCOMPLETE and the remaining work named.
 
 ### F · v1 binary checklist
 
@@ -1972,6 +1977,81 @@ v1 is complete only when every row is actually true:
 4. Button, Input, Combobox, Data Table, and Calendar each have recipe-path proof plus attributable human signoff, or a named refusal a reader can act on.
 5. Docs/26 rows and this document agree; no silent reclassification.
 6. CI lanes required for release are green. npm publish remains deferred and is not a v1-proof substitute.
+
+#### Merge execution (2026-08-30)
+
+TJ's endpoint amendment (verbatim): "No need for a PR URL. We're the only
+ones working on this. You can just merge." The recorded checklist
+(`recipe/evidence/merge-readiness-v1.json`) was executed to that amended
+endpoint; the machine-readable record of this walk is
+`recipe/evidence/merge-execution-v1.json`.
+
+**Lanes, measured once at the branch head `47a14aae5`** (the lane-repair
+commit; the two commits after it touch only docs and this evidence record):
+
+- **fast:** 237/240 locally. All 3 reds are the census gates
+  (`census:check --phase full`, `--self-test`, `--phase design-to-code`),
+  and the cause was proven environmental, not code: the gitignored local
+  seed directory `examples/flowbite-react/` (`.gitignore:78`) sits in the
+  filesystem scan and stales the committed denominator manifest. Re-run
+  with that directory parked outside the repo: all three gates exit 0.
+  On the committed tree the fast lane is green — effectively 240/240.
+- **full:** 45/48 steps green as measured (2.8 h wall clock). The 3 reds
+  share two named causes, neither a code defect. (1) The lane's eval step
+  scored 226/230: three of the four failing cases are the reds already
+  named and caused in `parity/receipts/v1/eval-reds.json` (the committed
+  suite result is 227/230), and the single unnamed red
+  (`refuse-schema-invalid-contract`, ENOENT on
+  `evals/.scratch/contracts/button.contract.json`) was a shared-scratch
+  race with a fast-lane rerun running concurrently in another shell — the
+  readiness-internal eval re-run 40 minutes later, after that shell
+  finished, scored exactly the committed 227/230. The
+  `eval-record-check` red was downstream of that same race. (2)
+  `v1:readiness --trust-lanes --pre-release` went 20/23 rows green
+  against the then-DIRTY tree (this change set in progress):
+  V1-COMPAT-03 and V1-EVID-01 both carry the eval verdict above plus the
+  dirty-tree refusal ("this record cannot be committed as the suite
+  result"), and V1-CI-01's nested fast lane failed 1/240 with the gate
+  name outside the captured tail. Its audit-ledger walk improved on the
+  committed receipt — red audit rows 7 → 0, the typecheck and ci:lanes
+  acceptance commands now exit 0 after the lane repair. `v1:readiness`
+  was re-run once at this commit's clean tree; the regenerated receipts
+  land in the follow-up receipts commit with the result.
+
+**Gates:** all 11 `recipe:*:check` gates green at the head, re-run green on
+merged main as the post-merge confirmation.
+
+**F-checklist walk (honest, row by row):**
+
+| row | verdict |
+| --- | --- |
+| F1 zero silent losses, whole corpus + unseen libraries | **PARTIAL — this is the row that blocks v1.** Zero-silent inversion (0 silent / 0 missing / 0 mismatched, byte-stable fixed point) is proven per archetype on its measured two-library pair — ten library-root proofs across the five archetypes. The whole-corpus and unseen-library clauses are **not** proven on the recipe path; the 170-set census and the unseen-library evals measure the capture path, not recipe mints. |
+| F2 minted sets usable | **true** for the five minted sets — reflow/variant/binding probes measured green per archetype, and the owner's five human grades reviewed the live sets. |
+| F3 journeys restated honestly | **true** — this document restates A (Figma→code), B (code→Figma, the five proofs), and C (reconcile) with opens named. |
+| F4 five archetypes proof + signoff | **true** — all five carry recipe-path proof plus an attributable owner grade (Input V85, Combobox V41, Table V32, Calendar V50, Button B3/v5). |
+| F5 docs/26 agrees | **true** — `V1-CLASS-03` landed additively (E4 applied) and docs/26 itself states the (d) honesty: criterion (d) true today only for table/data-grid. `docs:check` and the v1-definition gate are green. |
+| F6 CI lanes green | **measured** — numbers above; the 3 local fast reds are proven environmental. npm publish stays deferred and is not claimed as proof. |
+
+**Verdict: v1 is INCOMPLETE.** F1's whole-corpus / unseen-library clause is
+the named blocker. `overallSuccess` therefore flips for **no** archetype in
+this change set — Button, Input, Combobox and Calendar stay `false` in
+`recipe/evidence/status-index.json` exactly as their blockers state, and
+Table keeps the `true` its v32 record set. Remaining named work: (1) F1
+whole-corpus / unseen-library proof on the recipe path; (2) Combobox
+fixture-chrome remint from MUI/AntD-named overlay chrome (TJ decision);
+(3) signed cleanup of the older Calendar Scratch pages; (4) npm publish,
+deferred; (5) restoring `recipe/pivot-status.ts` to the static `tsc`
+surface (excluded from the root tsconfig for the measured stack-overflow
+on its boolean chains; it stays runtime-validated via `tsx` on every gate
+run).
+
+**Merge reasoning (approved trade):** `origin/main` is 0 commits ahead of
+this branch and the branch is 690 ahead — main has not moved since the
+pivot began. A `--no-ff` merge therefore produces a merged tree
+byte-identical to the branch head, so the lanes measured here are the
+lanes of the merged tree; re-running the multi-hour full lane on main
+would re-measure the same bytes. TJ approved running the 11 recipe gates
+on merged main as the confirmation instead.
 
 ### Human-only work (do not block the rest)
 
