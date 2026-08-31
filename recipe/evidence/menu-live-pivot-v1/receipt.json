@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "menu-live-pivot-v1-prepare",
+  "teaching": "One named default Menu panel; two items; placement is receipted",
+  "runIdentity": "49334e8e-9f1933de-af4cca86-menu-v1",
+  "pageName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v1",
+  "namespace": "ds.contracts.menu.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "49334e8eea7e74038a7e34b9b18c4a55dba1181784a613725d66088c18463316",
+    "MUI": "9f1933de429f55ce16a333c2a31974995ceeac34e62a475511969932c9af24db",
+    "Ant Design": "af4cca860add835b7d038e263ffba07bae0c4995c9bbd4fb98bcdedc3db2663d"
+  },
+  "writerSha256": "9816200c2083da3b4d426ebbb4841aba49f4da92761e0165f8fb485e21f5ea9b",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

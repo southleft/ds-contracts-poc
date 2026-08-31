@@ -1,0 +1,63 @@
+{
+  "artifactVersion": "menu-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022",
+    "183:76063",
+    "183:76109",
+    "183:76151",
+    "183:76193"
+  ],
+  "shapeDecisionToCarry": "Menu teaching is the open panel chrome plus two items. Astryx has no Menu export — compile DropdownMenu. AntD is Dropdown. Polar placement and arrows are receipted; do not invent overlay offsets.",
+  "libraries": {
+    "Astryx": {
+      "export": "DropdownMenu",
+      "namedAbsence": "no Menu export — compile DropdownMenu",
+      "package": "@astryxdesign/core@0.1.6",
+      "namedSoFar": {
+        "placementDefault": "below — Polar receipted",
+        "panel": "padding --spacing-1 4; gap --spacing-0-5 2; radius --radius-container 12; fill --color-background-popover #FFFFFF",
+        "item": "size md from button default; padY --spacing-1-5 6; padX --spacing-2 8; label 14/20 Regular --color-text-primary #0A1317"
+      },
+      "receipt": ["Polar placement below", "shadow-low", "trigger button", "chevron", "icons"]
+    },
+    "MUI": {
+      "export": "Menu",
+      "package": "@mui/material@9.2.0",
+      "namedSoFar": {
+        "variantDefault": "selectedMenu",
+        "paper": "inherits Popover Paper; background paper #fff; shape.borderRadius 4",
+        "item": "MenuItem body1 16 Regular lineHeight 1.5 → 24; minHeight 48; padY 6; padX 16 gutters"
+      },
+      "receipt": ["Polar Popover placement", "elevation shadow", "dense", "selected fill"]
+    },
+    "Ant Design": {
+      "export": "Dropdown",
+      "package": "antd@5.29.3",
+      "namedSoFar": {
+        "panel": "colorBgElevated #fff; borderRadiusLG 8; dropdownEdgeChildPadding paddingXXS 4",
+        "item": "paddingBlock (32-22)/2=5; controlPaddingHorizontal 12; fontSize 14 / lineHeight 22; colorText #000000e0"
+      },
+      "receipt": ["Polar placement", "arrow", "boxShadowSecondary"]
+    }
+  },
+  "sharedContentProposal": ["two items — Item One / Item Two; no selected-child indicator"],
+  "note": "Do not remint Tabs 183:76193. After stay: Dialog last (AntD Modal)."
+}

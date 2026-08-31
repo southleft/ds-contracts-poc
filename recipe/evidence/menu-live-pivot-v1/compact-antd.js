@@ -1,0 +1,145 @@
+if (figma.fileKey !== "byMp6lt0Ij9b2QbkDGFwBh") throw new Error("WRONG-FILE:" + figma.fileKey);
+if (figma.root.name !== "Scratch Project") throw new Error("WRONG-FILE-NAME:" + figma.root.name);
+const NS = "ds.contracts.menu.recipe.v1";
+const runIdentity = "49334e8e-9f1933de-af4cca86-menu-v1";
+const pageName = "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v1";
+const adapterIdentity = "antd-menu-reviewed-v1";
+const recipeHash = "af4cca860add835b7d038e263ffba07bae0c4995c9bbd4fb98bcdedc3db2663d";
+const envelopeHash = "d5d8926d5721131f1a072e349c27ddcb922df8b188693b8acfd37f8f183df0ea";
+const signed = ["115:295378","163:35981","183:70641","183:69150","85:6781","173:48924","181:64873","183:74742","183:75031","183:75302","183:75495","183:75801","183:75976","183:76022","183:76063","183:76109","183:76151","183:76193"];
+await figma.loadAllPagesAsync();
+const page = figma.root.children.find((c) => c.name === pageName);
+if (!page) throw new Error("MENU-PAGE-MISSING");
+if (signed.includes(page.id)) throw new Error("MENU-MUST-NOT-WRITE-SIGNED-PAGE:" + page.id);
+if (page.getSharedPluginData(NS, "runIdentity") !== runIdentity) throw new Error("MENU-PAGE-IDENTITY-MISMATCH:" + page.id);
+await figma.setCurrentPageAsync(page);
+if (page.children.some((n) => n.type === "SECTION" && n.getSharedPluginData(NS, "adapterIdentity") === adapterIdentity))
+  throw new Error("MENU-SECTION-EXISTS:" + adapterIdentity);
+const hex = (v) => ({ r: parseInt(v.slice(1, 3), 16) / 255, g: parseInt(v.slice(3, 5), 16) / 255, b: parseInt(v.slice(5, 7), 16) / 255, a: parseInt(v.slice(7, 9), 16) / 255 });
+const paint = (v) => { const c = hex(v); return { type: "SOLID", color: { r: c.r, g: c.g, b: c.b }, opacity: c.a }; };
+const allFonts = await figma.listAvailableFontsAsync();
+const spec = {"requestedFamily":"-apple-system","requestedStyle":"Regular","resolvedFamily":"SF Pro","resolvedStyle":"Regular","resolution":"fallback","fallbackChain":[{"family":"-apple-system","style":"Regular"},{"family":"SF Pro","style":"Regular"},{"family":"Segoe UI","style":"Regular"},{"family":"Roboto","style":"Regular"},{"family":"Helvetica Neue","style":"Regular"},{"family":"Arial","style":"Regular"}],"degradation":"antd --font-family is a CSS stack; Figma cannot load it; first named host font is SF Pro Regular"};
+const found = spec.fallbackChain.map((c) => allFonts.find((f) => f.fontName.family === c.family && f.fontName.style === c.style)).find(Boolean);
+if (!found) throw new Error("MENU-FONT-UNAVAILABLE");
+if (found.fontName.family !== spec.resolvedFamily || found.fontName.style !== spec.resolvedStyle)
+  throw new Error("MENU-FONT-PROVENANCE-TAMPER:" + found.fontName.family + ":" + found.fontName.style);
+await figma.loadFontAsync(found.fontName);
+const painted = { spec, painted: found.fontName };
+const collection = figma.variables.createVariableCollection("Recipe Menu / " + runIdentity + " / " + adapterIdentity);
+collection.renameMode(collection.modes[0].modeId, "Default");
+collection.hiddenFromPublishing = true;
+const modeId = collection.modes[0].modeId;
+const planned = [["FLOAT","antd.menu.panel-padding",4],["FLOAT","antd.menu.panel-radius",8],["FLOAT","antd.menu.panel-itemSpacing",0],["COLOR","antd.menu.panel-fill","#ffffffff"],["FLOAT","antd.menu.item-paddingX",12],["FLOAT","antd.menu.item-paddingY",5],["COLOR","antd.menu.item-fill","#00000000"],["FLOAT","antd.menu.labelFontSize",14],["FLOAT","antd.menu.labelLineHeight",22],["COLOR","antd.menu.label","#000000e0"]];
+const vars = new Map();
+for (const [type, identity, value] of planned) {
+  const name = "token/" + (type === "COLOR" ? "color" : "float") + "/id-" + Array.from(identity).map((ch) => ch.charCodeAt(0).toString(16).padStart(2, "0")).join("");
+  const variable = figma.variables.createVariable(name, collection, type);
+  variable.scopes = ["ALL_SCOPES"];
+  variable.setValueForMode(modeId, type === "COLOR" ? hex(value) : value);
+  vars.set(type + ":" + identity, variable);
+}
+const bindColor = (base, identity) => figma.variables.setBoundVariableForPaint(base, "color", vars.get("COLOR:" + identity));
+const bindFloat = (node, field, identity) => node.setBoundVariable(field, vars.get("FLOAT:" + identity));
+const prefix = "antd.menu";
+const geom = {"adapterIdentity":"antd-menu-reviewed-v1","displayName":"Ant Design","componentLabel":"Ant Design Dropdown","prefix":"antd.menu","recipeHash":"af4cca860add835b7d038e263ffba07bae0c4995c9bbd4fb98bcdedc3db2663d","envelopeHash":"d5d8926d5721131f1a072e349c27ddcb922df8b188693b8acfd37f8f183df0ea","fontSize":14,"lineHeight":22,"label":"#000000e0","panel":{"padding":4,"radius":8,"gap":0,"fill":"#ffffffff"},"item":{"paddingX":12,"paddingY":5,"minHeight":0,"fill":"#00000000"}};
+const paintText = async (characters) => {
+  const node = figma.createText();
+  node.fontName = painted.painted;
+  node.characters = characters;
+  node.fontSize = geom.fontSize;
+  node.lineHeight = { unit: "PIXELS", value: geom.lineHeight };
+  node.textAlignHorizontal = "LEFT";
+  node.textAlignVertical = "CENTER";
+  node.textAutoResize = "WIDTH_AND_HEIGHT";
+  if (node.characters.trim().length > 0 && (node.width <= 0 || node.absoluteRenderBounds === null)) {
+    for (const candidate of painted.spec.fallbackChain) {
+      if (candidate.family === painted.spec.resolvedFamily && candidate.style === painted.spec.resolvedStyle) continue;
+      const next = allFonts.find((e) => e.fontName.family === candidate.family && e.fontName.style === candidate.style);
+      if (!next) continue;
+      await figma.loadFontAsync(next.fontName);
+      node.fontName = next.fontName;
+      node.characters = characters;
+      if (node.width > 0 && node.absoluteRenderBounds) { painted.painted = next.fontName; break; }
+    }
+  }
+  if (node.width <= 0 || node.height <= 0) throw new Error("MENU-TEXT-GEOMETRY");
+  node.fills = [bindColor(paint(geom.label), prefix + ".label")];
+  bindFloat(node, "fontSize", prefix + ".labelFontSize");
+  bindFloat(node, "lineHeight", prefix + ".labelLineHeight");
+  node.name = "menu/label :: font-provenance=" + encodeURIComponent(JSON.stringify(painted.spec));
+  return node;
+};
+let nextX = 0;
+for (const child of page.children) if (child.type === "SECTION") nextX = Math.max(nextX, child.x + child.width + 240);
+const section = figma.createSection();
+section.name = "Recipe Pivot / Ant Design / " + recipeHash.slice(0, 8);
+section.x = nextX; section.y = 0; page.appendChild(section);
+section.setSharedPluginData(NS, "adapterIdentity", adapterIdentity);
+section.setSharedPluginData(NS, "recipeHash", recipeHash);
+const component = figma.createComponent();
+component.clipsContent = false;
+component.name = "menu/variant/default :: " + geom.componentLabel;
+component.layoutMode = "VERTICAL";
+component.primaryAxisAlignItems = "MIN";
+component.counterAxisAlignItems = "MIN";
+component.itemSpacing = geom.panel.gap;
+component.paddingTop = geom.panel.padding;
+component.paddingRight = geom.panel.padding;
+component.paddingBottom = geom.panel.padding;
+component.paddingLeft = geom.panel.padding;
+component.fills = [bindColor(paint(geom.panel.fill), prefix + ".panel-fill")];
+component.topLeftRadius = geom.panel.radius;
+component.topRightRadius = geom.panel.radius;
+component.bottomRightRadius = geom.panel.radius;
+component.bottomLeftRadius = geom.panel.radius;
+bindFloat(component, "itemSpacing", prefix + ".panel-itemSpacing");
+bindFloat(component, "paddingTop", prefix + ".panel-padding");
+bindFloat(component, "paddingRight", prefix + ".panel-padding");
+bindFloat(component, "paddingBottom", prefix + ".panel-padding");
+bindFloat(component, "paddingLeft", prefix + ".panel-padding");
+bindFloat(component, "topLeftRadius", prefix + ".panel-radius");
+bindFloat(component, "topRightRadius", prefix + ".panel-radius");
+bindFloat(component, "bottomRightRadius", prefix + ".panel-radius");
+bindFloat(component, "bottomLeftRadius", prefix + ".panel-radius");
+section.appendChild(component);
+for (const characters of ["Item One", "Item Two"]) {
+  const item = figma.createFrame();
+  item.name = "menu/item";
+  item.layoutMode = "HORIZONTAL";
+  item.primaryAxisAlignItems = "MIN";
+  item.counterAxisAlignItems = "CENTER";
+  item.paddingTop = geom.item.paddingY;
+  item.paddingRight = geom.item.paddingX;
+  item.paddingBottom = geom.item.paddingY;
+  item.paddingLeft = geom.item.paddingX;
+  item.fills = [bindColor(paint(geom.item.fill), prefix + ".item-fill")];
+  bindFloat(item, "paddingTop", prefix + ".item-paddingY");
+  bindFloat(item, "paddingRight", prefix + ".item-paddingX");
+  bindFloat(item, "paddingBottom", prefix + ".item-paddingY");
+  bindFloat(item, "paddingLeft", prefix + ".item-paddingX");
+  if (geom.item.minHeight > 0) { item.minHeight = geom.item.minHeight; bindFloat(item, "minHeight", prefix + ".item-minHeight"); }
+  component.appendChild(item);
+  item.appendChild(await paintText(characters));
+  item.layoutSizingHorizontal = "HUG";
+  item.layoutSizingVertical = "HUG";
+}
+component.layoutSizingHorizontal = "HUG";
+component.layoutSizingVertical = "HUG";
+const container = figma.createFrame();
+container.name = "Component Container";
+container.layoutMode = "NONE";
+container.fills = [];
+container.x = 80; container.y = 96;
+section.appendChild(container);
+container.appendChild(component);
+container.setSharedPluginData(NS, "runIdentity", runIdentity);
+container.setSharedPluginData(NS, "adapterIdentity", adapterIdentity);
+container.setSharedPluginData(NS, "recipeHash", recipeHash);
+container.setSharedPluginData(NS, "ownershipKey", "menu/container");
+component.setSharedPluginData(NS, "runIdentity", runIdentity);
+component.setSharedPluginData(NS, "adapterIdentity", adapterIdentity);
+component.setSharedPluginData(NS, "recipeHash", recipeHash);
+component.setSharedPluginData(NS, "envelopeHash", envelopeHash);
+component.setSharedPluginData(NS, "ownershipKey", "menu");
+section.resizeWithoutConstraints(container.width + 160, container.y + container.height + 80);
+return { pageId: page.id, sectionId: section.id, componentId: component.id, containerId: container.id, adapterIdentity, paintedFont: painted.painted };
