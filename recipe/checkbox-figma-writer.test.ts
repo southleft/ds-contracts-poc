@@ -58,7 +58,7 @@ test("the writer plans three checkbox sources without touching Figma", () => {
   assert.notEqual(writer.namespace, "ds.contracts.input.recipe.v5");
   assert.notEqual(writer.namespace, "ds.contracts.combobox.recipe.v1");
   assert.match(writer.pageName, /^Recipe Pivot \/ Checkbox \//);
-  assert.match(writer.runIdentity, /-checkbox-v1$/);
+  assert.match(writer.runIdentity, /-checkbox-v2$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.checkboxSet.children.length, CHECKBOX_FIGMA_VARIANTS_PER_SOURCE);

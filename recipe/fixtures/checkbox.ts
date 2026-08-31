@@ -38,12 +38,14 @@ const cell = (
   boxOpacity: number,
   label: `#${string}`,
   dashFill: `#${string}`,
+  checkFill: `#${string}`,
 ) => ({
   boxFill: color(`${prefix}.states-${checked}-${arm}-boxFill`, boxFill),
   boxBorder: color(`${prefix}.states-${checked}-${arm}-boxBorder`, boxBorder),
   boxOpacity: number(`${prefix}.states-${checked}-${arm}-boxOpacity`, boxOpacity),
   label: color(`${prefix}.states-${checked}-${arm}-label`, label),
   dashFill: color(`${prefix}.states-${checked}-${arm}-dashFill`, dashFill),
+  checkFill: color(`${prefix}.states-${checked}-${arm}-checkFill`, checkFill),
 });
 
 /**
@@ -81,6 +83,20 @@ export const canonicalCheckboxRecipeInstance = {
       height: number("ds.checkbox.dash-height", 2),
       radius: number("ds.checkbox.dash-radius", 1),
     },
+    check: {
+      path: "M11.9 3.5 L5.6 10.5 L2.1 7",
+      width: number("ds.checkbox.check-width", 14),
+      height: number("ds.checkbox.check-height", 14),
+      strokeWidth: number("ds.checkbox.check-strokeWidth", 2.1),
+      winding: "nonzero",
+      paint: "stroke",
+      strokeCap: "round",
+      strokeJoin: "round",
+      rotation: 0,
+      offsetX: number("ds.checkbox.check-offsetX", 0),
+      offsetY: number("ds.checkbox.check-offsetY", 0),
+      placement: "center",
+    },
     states: {
       unchecked: {
         enabled: cell(
@@ -92,6 +108,7 @@ export const canonicalCheckboxRecipeInstance = {
           1,
           "#4e606fff",
           "#00000000",
+          "#ffffffff",
         ),
         disabled: cell(
           "ds.checkbox",
@@ -102,6 +119,7 @@ export const canonicalCheckboxRecipeInstance = {
           0.5,
           "#a4b0bcff",
           "#00000000",
+          "#ffffffff",
         ),
       },
       checked: {
@@ -114,6 +132,7 @@ export const canonicalCheckboxRecipeInstance = {
           1,
           "#4e606fff",
           "#00000000",
+          "#ffffffff",
         ),
         disabled: cell(
           "ds.checkbox",
@@ -124,6 +143,7 @@ export const canonicalCheckboxRecipeInstance = {
           0.5,
           "#a4b0bcff",
           "#00000000",
+          "#ffffffff",
         ),
       },
       indeterminate: {
@@ -136,6 +156,7 @@ export const canonicalCheckboxRecipeInstance = {
           1,
           "#4e606fff",
           "#ffffffff",
+          "#ffffffff",
         ),
         disabled: cell(
           "ds.checkbox",
@@ -145,6 +166,7 @@ export const canonicalCheckboxRecipeInstance = {
           "#05365919",
           0.5,
           "#a4b0bcff",
+          "#ffffffff",
           "#ffffffff",
         ),
       },

@@ -108,11 +108,17 @@ const atLanding = (value: unknown, landing: string): unknown =>
 const expectedCategory = (target: string): CheckboxFactCategory => {
   if (target.startsWith("tokens.typography")) return "typography";
   if (target.endsWith("rowAlign")) return "anatomy";
+  if (
+    target.startsWith("tokens.check.") &&
+    !/width|height|strokeWidth|offset/.test(target)
+  )
+    return "anatomy";
   if (target.includes("boxOpacity")) return "state";
   if (
     target.includes("boxFill") ||
     target.includes("boxBorder") ||
     target.includes("dashFill") ||
+    target.includes("checkFill") ||
     target.includes("rowSurface") ||
     target.endsWith(".label") ||
     target.includes("states")

@@ -103,40 +103,61 @@ const astryxTokens = cloneTokens("astryx.checkbox", (path, fallback) => {
   if (path === "dash.width") return 12;
   if (path === "dash.height") return 2;
   if (path === "dash.radius") return 1;
+  if (path === "check.width") return 14;
+  if (path === "check.height") return 14;
+  if (path === "check.strokeWidth") return 2.1;
+  if (path === "check.offsetX") return 0;
+  if (path === "check.offsetY") return 0;
   if (path === "labelFontSize") return 14;
   if (path === "states.unchecked.enabled.boxFill") return "#ffffffff";
   if (path === "states.unchecked.enabled.boxBorder") return "#ccd3dbff";
   if (path === "states.unchecked.enabled.boxOpacity") return 1;
   if (path === "states.unchecked.enabled.label") return "#4e606fff";
   if (path === "states.unchecked.enabled.dashFill") return "#00000000";
+  if (path === "states.unchecked.enabled.checkFill") return "#ffffffff";
   if (path === "states.unchecked.disabled.boxFill") return "#0536590c";
   if (path === "states.unchecked.disabled.boxBorder") return "#05365919";
   if (path === "states.unchecked.disabled.boxOpacity") return 0.5;
   if (path === "states.unchecked.disabled.label") return "#a4b0bcff";
   if (path === "states.unchecked.disabled.dashFill") return "#00000000";
+  if (path === "states.unchecked.disabled.checkFill") return "#ffffffff";
   if (path === "states.checked.enabled.boxFill") return "#0064e0ff";
   if (path === "states.checked.enabled.boxBorder") return "#0064e0ff";
   if (path === "states.checked.enabled.boxOpacity") return 1;
   if (path === "states.checked.enabled.label") return "#4e606fff";
   if (path === "states.checked.enabled.dashFill") return "#00000000";
+  if (path === "states.checked.enabled.checkFill") return "#ffffffff";
   if (path === "states.checked.disabled.boxFill") return "#0064e0ff";
   if (path === "states.checked.disabled.boxBorder") return "#05365919";
   if (path === "states.checked.disabled.boxOpacity") return 0.5;
   if (path === "states.checked.disabled.label") return "#a4b0bcff";
   if (path === "states.checked.disabled.dashFill") return "#00000000";
+  if (path === "states.checked.disabled.checkFill") return "#ffffffff";
   if (path === "states.indeterminate.enabled.boxFill") return "#0064e0ff";
   if (path === "states.indeterminate.enabled.boxBorder") return "#0064e0ff";
   if (path === "states.indeterminate.enabled.boxOpacity") return 1;
   if (path === "states.indeterminate.enabled.label") return "#4e606fff";
   if (path === "states.indeterminate.enabled.dashFill") return "#ffffffff";
+  if (path === "states.indeterminate.enabled.checkFill") return "#ffffffff";
   if (path === "states.indeterminate.disabled.boxFill") return "#0064e0ff";
   if (path === "states.indeterminate.disabled.boxBorder") return "#05365919";
   if (path === "states.indeterminate.disabled.boxOpacity") return 0.5;
   if (path === "states.indeterminate.disabled.label") return "#a4b0bcff";
   if (path === "states.indeterminate.disabled.dashFill") return "#ffffffff";
+  if (path === "states.indeterminate.disabled.checkFill") return "#ffffffff";
   return fallback;
 });
 astryxTokens.rowAlign = "center";
+astryxTokens.check = {
+  ...astryxTokens.check,
+  path: "M11.9 3.5 L5.6 10.5 L2.1 7",
+  winding: "nonzero",
+  paint: "stroke",
+  strokeCap: "round",
+  strokeJoin: "round",
+  rotation: 0,
+  placement: "center",
+};
 astryxTokens.typography = { label: astryxFont() };
 
 /**
@@ -154,47 +175,73 @@ const muiTokens = cloneTokens("mui.checkbox", (path, fallback) => {
   if (path === "dash.width") return 10;
   if (path === "dash.height") return 2;
   if (path === "dash.radius") return 0;
+  if (path === "check.width") return 24;
+  if (path === "check.height") return 24;
+  if (path === "check.strokeWidth") return 0;
+  if (path === "check.offsetX") return 0;
+  if (path === "check.offsetY") return 0;
   if (path === "labelFontSize") return 16;
   if (path === "states.unchecked.enabled.boxFill") return "#00000000";
   if (path === "states.unchecked.enabled.boxBorder") return "#00000099";
   if (path === "states.unchecked.enabled.boxOpacity") return 1;
   if (path === "states.unchecked.enabled.label") return "#000000de";
   if (path === "states.unchecked.enabled.dashFill") return "#00000000";
+  if (path === "states.unchecked.enabled.checkFill") return "#ffffffff";
   if (path === "states.unchecked.disabled.boxFill") return "#00000000";
   if (path === "states.unchecked.disabled.boxBorder") return "#00000042";
   if (path === "states.unchecked.disabled.boxOpacity") return 1;
   if (path === "states.unchecked.disabled.label") return "#00000061";
   if (path === "states.unchecked.disabled.dashFill") return "#00000000";
+  if (path === "states.unchecked.disabled.checkFill") return "#ffffffff";
   if (path === "states.checked.enabled.boxFill") return "#1976d2ff";
   if (path === "states.checked.enabled.boxBorder") return "#1976d2ff";
   if (path === "states.checked.enabled.boxOpacity") return 1;
   if (path === "states.checked.enabled.label") return "#000000de";
   if (path === "states.checked.enabled.dashFill") return "#00000000";
+  if (path === "states.checked.enabled.checkFill") return "#ffffffff";
   if (path === "states.checked.disabled.boxFill") return "#00000042";
   if (path === "states.checked.disabled.boxBorder") return "#00000042";
   if (path === "states.checked.disabled.boxOpacity") return 1;
   if (path === "states.checked.disabled.label") return "#00000061";
   if (path === "states.checked.disabled.dashFill") return "#00000000";
+  if (path === "states.checked.disabled.checkFill") return "#ffffffff";
   if (path === "states.indeterminate.enabled.boxFill") return "#1976d2ff";
   if (path === "states.indeterminate.enabled.boxBorder") return "#1976d2ff";
   if (path === "states.indeterminate.enabled.boxOpacity") return 1;
   if (path === "states.indeterminate.enabled.label") return "#000000de";
-  if (path === "states.indeterminate.enabled.dashFill") return "#00000000";
+  if (path === "states.indeterminate.enabled.dashFill") return "#ffffffff";
+  if (path === "states.indeterminate.enabled.checkFill") return "#ffffffff";
   if (path === "states.indeterminate.disabled.boxFill") return "#00000042";
   if (path === "states.indeterminate.disabled.boxBorder") return "#00000042";
   if (path === "states.indeterminate.disabled.boxOpacity") return 1;
   if (path === "states.indeterminate.disabled.label") return "#00000061";
-  if (path === "states.indeterminate.disabled.dashFill") return "#00000000";
+  if (path === "states.indeterminate.disabled.dashFill") return "#ffffffff";
+  if (path === "states.indeterminate.disabled.checkFill") return "#ffffffff";
   return fallback;
 });
 muiTokens.rowAlign = "center";
+muiTokens.check = {
+  ...muiTokens.check,
+  path: "M10 17 L5 12 L6.41 10.59 L10 14.17 L17.59 6.58 L19 8 Z",
+  winding: "nonzero",
+  paint: "fill",
+  strokeCap: "none",
+  strokeJoin: "miter",
+  rotation: 0,
+  placement: "center",
+};
 muiTokens.typography = { label: muiFont() };
 
 /**
- * AntD Checkbox inner is controlInteractiveSize 16. Tick is a CSS ::after
- * rotate(45deg) L-stroke — receipted. Indeterminate after is fontSizeLG/2
- * = 8 square of colorPrimary.
+ * AntD Checkbox inner is controlInteractiveSize 16. Tick is inner::after
+ * L-stroke (checkboxSize/14*5 × checkboxSize/14*8, lineWidthBold 2,
+ * rotate(45deg), top 50% / inset-inline-start 25%, translate(-50%,-50%)).
+ * Indeterminate after is fontSizeLG/2 = 8 square of colorPrimary.
  */
+const ANTD_CHECKBOX_SIZE = 16;
+const ANTD_AFTER_W = (ANTD_CHECKBOX_SIZE / 14) * 5;
+const ANTD_AFTER_H = (ANTD_CHECKBOX_SIZE / 14) * 8;
+const ANTD_LINE_BOLD = 2;
 const antdTokens = cloneTokens("antd.checkbox", (path, fallback) => {
   if (path === "wrapper.size") return 16;
   if (path === "box.size") return 16;
@@ -205,40 +252,61 @@ const antdTokens = cloneTokens("antd.checkbox", (path, fallback) => {
   if (path === "dash.width") return 8;
   if (path === "dash.height") return 8;
   if (path === "dash.radius") return 0;
+  if (path === "check.width") return ANTD_AFTER_W;
+  if (path === "check.height") return ANTD_AFTER_H;
+  if (path === "check.strokeWidth") return ANTD_LINE_BOLD;
+  if (path === "check.offsetX") return ANTD_CHECKBOX_SIZE * 0.25 - ANTD_AFTER_W / 2;
+  if (path === "check.offsetY") return ANTD_CHECKBOX_SIZE * 0.5 - ANTD_AFTER_H / 2;
   if (path === "labelFontSize") return 14;
   if (path === "states.unchecked.enabled.boxFill") return "#ffffffff";
   if (path === "states.unchecked.enabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.unchecked.enabled.boxOpacity") return 1;
   if (path === "states.unchecked.enabled.label") return "#000000e0";
   if (path === "states.unchecked.enabled.dashFill") return "#00000000";
+  if (path === "states.unchecked.enabled.checkFill") return "#ffffffff";
   if (path === "states.unchecked.disabled.boxFill") return "#0000000a";
   if (path === "states.unchecked.disabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.unchecked.disabled.boxOpacity") return 1;
   if (path === "states.unchecked.disabled.label") return "#00000040";
   if (path === "states.unchecked.disabled.dashFill") return "#00000000";
+  if (path === "states.unchecked.disabled.checkFill") return "#00000040";
   if (path === "states.checked.enabled.boxFill") return "#1677ffff";
   if (path === "states.checked.enabled.boxBorder") return "#1677ffff";
   if (path === "states.checked.enabled.boxOpacity") return 1;
   if (path === "states.checked.enabled.label") return "#000000e0";
   if (path === "states.checked.enabled.dashFill") return "#00000000";
+  if (path === "states.checked.enabled.checkFill") return "#ffffffff";
   if (path === "states.checked.disabled.boxFill") return "#0000000a";
   if (path === "states.checked.disabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.checked.disabled.boxOpacity") return 1;
   if (path === "states.checked.disabled.label") return "#00000040";
   if (path === "states.checked.disabled.dashFill") return "#00000000";
+  if (path === "states.checked.disabled.checkFill") return "#00000040";
   if (path === "states.indeterminate.enabled.boxFill") return "#ffffffff";
   if (path === "states.indeterminate.enabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.indeterminate.enabled.boxOpacity") return 1;
   if (path === "states.indeterminate.enabled.label") return "#000000e0";
   if (path === "states.indeterminate.enabled.dashFill") return "#1677ffff";
+  if (path === "states.indeterminate.enabled.checkFill") return "#ffffffff";
   if (path === "states.indeterminate.disabled.boxFill") return "#0000000a";
   if (path === "states.indeterminate.disabled.boxBorder") return "#d9d9d9ff";
   if (path === "states.indeterminate.disabled.boxOpacity") return 1;
   if (path === "states.indeterminate.disabled.label") return "#00000040";
   if (path === "states.indeterminate.disabled.dashFill") return "#00000040";
+  if (path === "states.indeterminate.disabled.checkFill") return "#00000040";
   return fallback;
 });
 antdTokens.rowAlign = "baseline";
+antdTokens.check = {
+  ...antdTokens.check,
+  path: `M ${ANTD_AFTER_W - ANTD_LINE_BOLD} 0 L ${ANTD_AFTER_W - ANTD_LINE_BOLD} ${ANTD_AFTER_H - ANTD_LINE_BOLD} L 0 ${ANTD_AFTER_H - ANTD_LINE_BOLD}`,
+  winding: "nonzero",
+  paint: "stroke",
+  strokeCap: "none",
+  strokeJoin: "miter",
+  rotation: 45,
+  placement: "absolute",
+};
 antdTokens.typography = { label: antdFont() };
 
 export const astryxCheckboxSource: ReviewedCheckboxSource = {
@@ -253,7 +321,7 @@ export const astryxCheckboxSource: ReviewedCheckboxSource = {
     control:
       "wrapperSizeStyles.md 24 + checkboxSizeStyles.md 22; border --border-width 1; radius --radius-inner 4",
     glyph:
-      "SVG check path M8.5 2.5L4 7.5L1.5 5 (receipted); indeterminateMark 12×2 radius 1 --color-on-accent",
+      "SVG check path M8.5 2.5L4 7.5L1.5 5 in viewBox 0 0 10 10, stroke 1.5 currentColor round, checkmarkSizeStyles.md 14×14 (path × 1.4 → stroke 2.1); indeterminateMark 12×2 radius 1 --color-on-accent",
     label:
       "FieldLabel required; --text-label-size 14 / --font-weight-medium / --color-text-secondary",
   },
@@ -284,7 +352,7 @@ export const muiCheckboxSource: ReviewedCheckboxSource = {
     control:
       "SvgIcon medium 24×24 inside SwitchBase.js padding 9; hit 42; icon corner from CheckBoxOutlineBlank path c-1.1 → 2",
     glyph:
-      "CheckBox / CheckBoxOutlineBlank / IndeterminateCheckBox SVG paths — box+stroke is a named lowering; check path and even-odd hole receipted",
+      "CheckBox.js even-odd hole lowered to a white filled check overlay (M10 17 L5 12 L6.41 10.59 L10 14.17 L17.59 6.58 L19 8 Z in 24 viewBox). IndeterminateCheckBox hole is the 10×2 bar at (7,11) — dashFill --white",
     label:
       "FormControlLabel.js + Typography body1 16 / Roboto Regular / palette.text.primary",
   },
@@ -319,7 +387,7 @@ export const antdCheckboxSource: ReviewedCheckboxSource = {
     control:
       "style/index.js checkboxSize token.controlInteractiveSize 16; border token.lineWidth + colorBorder; radius borderRadiusSM 4",
     glyph:
-      "inner::after rotate(45deg) L-stroke receipted; indeterminate after fontSizeLG/2 8 square colorPrimary",
+      "inner::after L-stroke width checkboxSize/14*5 height checkboxSize/14*8, lineWidthBold 2, rotate(45deg), top 50% inset-inline-start 25% translate(-50%,-50%); indeterminate after fontSizeLG/2 8 square colorPrimary",
     label: "& + span paddingInlineStart/End paddingXS 8; colorText 14",
   },
   api: {
@@ -344,6 +412,7 @@ const categoryForToken = (path: string): CheckboxFactCategory => {
     path.includes("boxFill") ||
     path.includes("boxBorder") ||
     path.includes("dashFill") ||
+    path.includes("checkFill") ||
     path.endsWith(".label") ||
     path.includes("states")
   )
@@ -359,10 +428,17 @@ const tokenFacts = (
   facts: ReviewedCheckboxSourceFact[] = [],
 ): ReviewedCheckboxSourceFact[] => {
   if (value === null || typeof value !== "object") {
-    if (path.startsWith("tokens.typography") || path === "tokens.rowAlign") {
+    if (
+      path.startsWith("tokens.typography") ||
+      path === "tokens.rowAlign" ||
+      path.startsWith("tokens.check.")
+    ) {
       facts.push({
         occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
-        category: path === "tokens.rowAlign" ? "anatomy" : "typography",
+        category:
+          path === "tokens.rowAlign" || path.startsWith("tokens.check.")
+            ? "anatomy"
+            : "typography",
         source: {
           kind: "review",
           evidence: `${evidence}; reviewed ${path}=${String(value)}`,
@@ -417,13 +493,6 @@ const makeRefusals = (
 
 const astryxRefusals = makeRefusals("astryx", [
   {
-    id: "refusal-check-path",
-    evidence:
-      "CheckboxInput.tsx SVG path M8.5 2.5L4 7.5L1.5 5 stroke currentColor — interpret.ts has no vector write; checkbox@1 receipts the check path",
-    target: "Astryx SVG check path",
-    reason: "no-figma-primitive",
-  },
-  {
     id: "refusal-hover-mix",
     evidence:
       "CheckboxInput.tsx checkboxUnchecked/Checked hover color-mix — not this teaching",
@@ -460,10 +529,10 @@ const astryxRefusals = makeRefusals("astryx", [
 
 const muiRefusals = makeRefusals("mui", [
   {
-    id: "refusal-icon-path",
+    id: "refusal-evenodd-hole",
     evidence:
-      "CheckBox.js / CheckBoxOutlineBlank.js / IndeterminateCheckBox.js SVG paths — box fill/stroke is a named lowering of SvgIcon currentColor; the check path and even-odd hole are not IR vectors",
-    target: "MUI SvgIcon path (check + even-odd hole)",
+      "CheckBox.js even-odd path is box+hole in one fill; compile keeps the named box frame and paints the hole as a white overlay vector (same visual on a white page)",
+    target: "MUI SvgIcon even-odd winding as a single icon",
     reason: "lowered",
   },
   {
@@ -495,13 +564,6 @@ const muiRefusals = makeRefusals("mui", [
 ]);
 
 const antdRefusals = makeRefusals("antd", [
-  {
-    id: "refusal-after-tick",
-    evidence:
-      "antd/es/checkbox/style/index.js inner::after rotate(45deg) scale L-stroke — no IR path primitive",
-    target: "AntD ::after rotate(45deg) check tick",
-    reason: "no-figma-primitive",
-  },
   {
     id: "refusal-group",
     evidence: "Checkbox.Group is a list, not the standalone control",
@@ -616,7 +678,7 @@ export const antdCheckboxAdapterConfig = buildConfig(
   { id: "antd.checkbox", name: "Ant Design Checkbox" },
   antdRefusals,
   anatomyFacts("antd", antdCheckboxSource),
-  ["Checkbox.Group", "hover", "focus-visible", "::after-tick"],
+  ["Checkbox.Group", "hover", "focus-visible"],
 );
 
 export const CHECKBOX_THREE_LIBRARY_PROOF_PROTOCOL = {

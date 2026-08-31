@@ -8,8 +8,9 @@
  * then children then sizing.
  *
  * Checkbox has no instances and no nested sets. One component set per
- * source: Checked × Disabled (6 variants). The check SVG path is
- * receipted (`no-figma-primitive`); the dash is a real child.
+ * source: Checked × Disabled (6 variants). The check glyph is a VECTOR
+ * from the named package path (Astryx stroke, MUI hole overlay, AntD
+ * rotated L). The dash is a real child for indeterminate.
  *
  * No live write happens here. Executing the program requires a separate
  * PREPARE / AUTHORIZE / attempt lineage.
@@ -24,8 +25,9 @@ import {
 } from "./interpret.js";
 
 export const CHECKBOX_FIGMA_NAMESPACE = "ds.contracts.checkbox.recipe.v1";
-export const CHECKBOX_FIGMA_WRITER_VERSION = 1;
-export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v1";
+export const CHECKBOX_FIGMA_WRITER_VERSION = 2;
+export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v2";
+export const FORBIDDEN_CHECKBOX_V1_PAGE_ID = "183:74742";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -258,6 +260,7 @@ void "CHECKBOX-MUST-NOT-WRITE-BUTTON-PAGE";
 void "CHECKBOX-MUST-NOT-WRITE-PRESERVED-BUTTON-PAGE";
 void "CHECKBOX-MUST-NOT-WRITE-TABLE-PAGE";
 void "CHECKBOX-MUST-NOT-WRITE-CALENDAR-PAGE";
+void "CHECKBOX-MUST-NOT-WRITE-CHECKBOX-V1-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("CHECKBOX-MUST-NOT-WRITE-INPUT-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("CHECKBOX-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("CHECKBOX-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
@@ -265,6 +268,7 @@ if(figma.currentPage&&figma.currentPage.id==="183:69150")throw new Error("CHECKB
 if(figma.currentPage&&figma.currentPage.id==="85:6781")throw new Error("CHECKBOX-MUST-NOT-WRITE-PRESERVED-BUTTON-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="173:48924")throw new Error("CHECKBOX-MUST-NOT-WRITE-TABLE-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="181:64873")throw new Error("CHECKBOX-MUST-NOT-WRITE-CALENDAR-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:74742")throw new Error("CHECKBOX-MUST-NOT-WRITE-CHECKBOX-V1-PAGE");
 await figma.loadAllPagesAsync();
 const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
 const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
@@ -283,6 +287,7 @@ if(page.id==="183:69150")throw new Error("CHECKBOX-MUST-NOT-WRITE-BUTTON-PAGE");
 if(page.id==="85:6781")throw new Error("CHECKBOX-MUST-NOT-WRITE-PRESERVED-BUTTON-PAGE");
 if(page.id==="173:48924")throw new Error("CHECKBOX-MUST-NOT-WRITE-TABLE-PAGE");
 if(page.id==="181:64873")throw new Error("CHECKBOX-MUST-NOT-WRITE-CALENDAR-PAGE");
+if(page.id==="183:74742")throw new Error("CHECKBOX-MUST-NOT-WRITE-CHECKBOX-V1-PAGE");
 await figma.setCurrentPageAsync(page);
 setSharedData(page,"pageOwner",PAGE_OWNER);
 setSharedData(page,"runIdentity",PLAN.runIdentity);
@@ -376,6 +381,13 @@ for(const source of PLAN.sources){
     node.itemSpacing=layout.itemSpacing;
     node.paddingTop=Math.max(0,layout.padding.top);node.paddingRight=Math.max(0,layout.padding.right);node.paddingBottom=Math.max(0,layout.padding.bottom);node.paddingLeft=Math.max(0,layout.padding.left);
     if(ir.clipsContent!==undefined)node.clipsContent=ir.clipsContent;
+    if(ir.layout&&ir.layout.positioning==="absolute"){
+      if(!ir.layout.offset||!ir.layout.constraints)throw new Error("CHECKBOX-OVERLAY-DECLARATION-INCOMPLETE:"+ir.role);
+      node.layoutPositioning="ABSOLUTE";
+      node.x=ir.layout.offset.x;node.y=ir.layout.offset.y;
+      const constraintValue=value=>({left:"MIN",right:"MAX",top:"MIN",bottom:"MAX",center:"CENTER",scale:"SCALE",stretch:"STRETCH"})[value];
+      node.constraints={horizontal:constraintValue(ir.layout.constraints.horizontal),vertical:constraintValue(ir.layout.constraints.vertical)};
+    }
     bindFloat(node,"itemSpacing",bindingFor(ir,"layout.itemSpacing"));
     for(const [key,field] of [["paddingTop","top"],["paddingRight","right"],["paddingBottom","bottom"],["paddingLeft","left"]])bindFloat(node,key,bindingFor(ir,"layout.padding."+field));
   };
@@ -428,6 +440,14 @@ for(const source of PLAN.sources){
         if(!painted&&(label.width<=0||label.absoluteRenderBounds===null))throw new Error("CHECKBOX-FONT-ZERO-INTRINSIC:"+ir.role);
       }
       node=label;
+    }else if(ir.kind==="vector"){
+      void "CHECKBOX-WRITER-VECTOR-PATH";
+      const vector=figma.createVector();
+      vector.vectorPaths=[{windingRule:ir.windingRule==="evenodd"?"EVENODD":"NONZERO",data:ir.assetRef}];
+      if(ir.strokeCap)vector.strokeCap=ir.strokeCap.toUpperCase();
+      if(ir.strokeJoin)vector.strokeJoin=ir.strokeJoin.toUpperCase();
+      if(ir.rotation)vector.rotation=ir.rotation;
+      node=vector;
     }else throw new Error("UNSUPPORTED-CHILD-KIND:"+ir.kind);
     node.visible=ir.visible!==false;node.opacity=ir.opacity===undefined?1:ir.opacity;
     node.name=ir.role&&ir.label&&ir.role!==ir.label?ir.role+" :: "+ir.label:(ir.label||ir.role||ir.kind);
@@ -551,16 +571,21 @@ export function emitCheckboxFigmaWriter(
     throw new TypeError(
       "checkbox writer must refuse font provenance tampering",
     );
-  if (
+    if (
     runtime.includes("CHECKBOX-MUST-NOT-WRITE-INPUT-PAGE") === false ||
     runtime.includes("CHECKBOX-MUST-NOT-WRITE-COMBOBOX-PAGE") === false ||
     runtime.includes("CHECKBOX-MUST-NOT-WRITE-COMBOBOX-V42-PAGE") === false ||
     runtime.includes("CHECKBOX-MUST-NOT-WRITE-BUTTON-PAGE") === false ||
     runtime.includes("CHECKBOX-MUST-NOT-WRITE-TABLE-PAGE") === false ||
-    runtime.includes("CHECKBOX-MUST-NOT-WRITE-CALENDAR-PAGE") === false
+    runtime.includes("CHECKBOX-MUST-NOT-WRITE-CALENDAR-PAGE") === false ||
+    runtime.includes("CHECKBOX-MUST-NOT-WRITE-CHECKBOX-V1-PAGE") === false
   )
     throw new TypeError(
-      "checkbox writer must refuse signed Input, Combobox, Button, Table, and Calendar pages",
+      "checkbox writer must refuse signed Input, Combobox, Button, Table, Calendar, and old Checkbox pages",
+    );
+  if (runtime.includes("CHECKBOX-WRITER-VECTOR-PATH") === false)
+    throw new TypeError(
+      "checkbox writer must emit createVector for named package glyphs",
     );
 
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;

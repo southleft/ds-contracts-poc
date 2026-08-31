@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "checkbox-live-pivot-v2-prepare",
+  "teaching": "Visible check from named package SVG/CSS; MUI indeterminate dashFill white so checked ≠ indeterminate; AntD L-stroke compiled",
+  "runIdentity": "548cf953-c8ce9a83-7856869a-checkbox-v2",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-c8ce9a83-7856869a-checkbox-v2",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "548cf95362cf7ea99fd42cf4b4d21c6a7fe01495bce805029cf3a85a1267f51b",
+    "MUI": "c8ce9a831bd396fb1c35768c3d901b762d58cd075db602d6c5fd83b4c3e0e010",
+    "Ant Design": "7856869a8f994e39b339328063eca38f3df41862b7ae11ea20981c6af3822225"
+  },
+  "writerSha256": "1b4cfc90164432fa9adb214af43514e49bcebdcdd1d2bc0f426221320ca12dca",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

@@ -414,11 +414,23 @@ export type ShapeNode = z.infer<typeof ShapeNodeSchema>;
 export const VectorNodeSchema = z.strictObject({
   ...nodeBase,
   kind: z.literal("vector"),
-  /** An asset the interpreter already holds — an SVG string or a keyed ref. */
+  /**
+   * SVG path `d` (or a keyed asset the interpreter already holds).
+   * Maps to `VectorNode.vectorPaths[].data`.
+   */
   assetRef: z.string().min(1),
   width: SizingSchema,
   height: SizingSchema,
   fills: z.array(PaintSchema),
+  strokes: z.array(StrokeSchema).optional(),
+  /** Maps to `VectorPath.windingRule`. */
+  windingRule: z.enum(["nonzero", "evenodd"]).optional(),
+  /** Maps to `VectorNode.strokeCap`. */
+  strokeCap: z.enum(["none", "round", "square"]).optional(),
+  /** Maps to `VectorNode.strokeJoin`. */
+  strokeJoin: z.enum(["miter", "bevel", "round"]).optional(),
+  /** Degrees clockwise. Maps to `SceneNode.rotation`. */
+  rotation: z.number().finite().optional(),
 });
 export type VectorNode = z.infer<typeof VectorNodeSchema>;
 

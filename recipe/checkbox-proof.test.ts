@@ -60,6 +60,25 @@ test("checkbox@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   );
   assert.equal(mui.tokens.typography.label.resolvedFamily, "Roboto");
   assert.equal(antd.tokens.box.size.fallback, 16, "controlInteractiveSize");
+  assert.equal(
+    astryx.tokens.check.path,
+    "M11.9 3.5 L5.6 10.5 L2.1 7",
+    "Astryx md check path scaled from viewBox 10 to 14",
+  );
+  assert.equal(astryx.tokens.check.paint, "stroke");
+  assert.equal(
+    mui.tokens.check.path.startsWith("M10 17"),
+    true,
+    "MUI CheckBox.js hole overlay",
+  );
+  assert.equal(mui.tokens.check.paint, "fill");
+  assert.equal(
+    mui.tokens.states.indeterminate.enabled.dashFill.fallback,
+    "#ffffffff",
+    "IndeterminateCheckBox hole is a white bar, not a poster tile",
+  );
+  assert.equal(antd.tokens.check.rotation, 45, "inner::after rotate(45deg)");
+  assert.equal(antd.tokens.check.placement, "absolute");
   assert.equal(antd.tokens.rowAlign, "baseline", "wrapper alignItems baseline");
   assert.equal(
     antd.tokens.states.checked.enabled.boxFill.fallback,
@@ -97,6 +116,26 @@ test("checkbox@1 compile is two-cycle fixed-point on every library", () => {
       CHECKBOX_CHECKED.length * CHECKBOX_DISABLED.length,
       name,
     );
+    const checked = envelope.ir.children.find(
+      (child) =>
+        child.kind === "component" &&
+        child.variantProperties?.Checked === "checked" &&
+        child.variantProperties?.Disabled === "false",
+    );
+    assert.ok(checked && checked.kind === "component", name);
+    const walk = (
+      node: { kind?: string; role?: string; visible?: boolean; children?: unknown[] },
+      found: Array<{ role?: string; visible?: boolean; kind?: string }>,
+    ) => {
+      found.push(node);
+      for (const child of node.children ?? [])
+        walk(child as { kind?: string; role?: string; visible?: boolean; children?: unknown[] }, found);
+    };
+    const nodes: Array<{ role?: string; visible?: boolean; kind?: string }> = [];
+    walk(checked, nodes);
+    const check = nodes.find((node) => node.role === "checkbox/glyph/check");
+    assert.equal(check?.kind, "vector", `${name} check is a vector`);
+    assert.notEqual(check?.visible, false, `${name} checked glyph is visible`);
   }
 });
 

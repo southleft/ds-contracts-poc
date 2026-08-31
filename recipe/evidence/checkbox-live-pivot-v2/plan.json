@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-c8ce9a83-7856869a-checkbox-v2",
+  "runIdentity": "548cf953-c8ce9a83-7856869a-checkbox-v2",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "checkbox@1 VECTOR glyphs from named package paths: Astryx stroke check, MUI even-odd hole overlay, AntD ::after rotate(45deg) L. Writer v2 createVector. Old stay 183:74742 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-checkbox-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "548cf95362cf7ea99fd42cf4b4d21c6a7fe01495bce805029cf3a85a1267f51b",
+      "envelopeHash": "6691e51fa506878b43f6928ba31f430d1071a69126e998f40cdd54f3150c42f4",
+      "variantCount": 6,
+      "variableCount": 43,
+      "comparedIrFacts": 211
+    },
+    {
+      "adapterIdentity": "mui-checkbox-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "c8ce9a831bd396fb1c35768c3d901b762d58cd075db602d6c5fd83b4c3e0e010",
+      "envelopeHash": "94a94c369f53c07fca3a17d00976f0097986d509bf6e0ac9406e8ea81fc10bd5",
+      "variantCount": 6,
+      "variableCount": 42,
+      "comparedIrFacts": 205
+    },
+    {
+      "adapterIdentity": "antd-checkbox-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "7856869a8f994e39b339328063eca38f3df41862b7ae11ea20981c6af3822225",
+      "envelopeHash": "3ba1a62135a2852fa83b85a664970d945fbdaa072e77cf95a1a754c6d6d7bf7d",
+      "variantCount": 6,
+      "variableCount": 43,
+      "comparedIrFacts": 229
+    }
+  ]
+}

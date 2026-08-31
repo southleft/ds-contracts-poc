@@ -1,0 +1,46 @@
+{
+  "artifactVersion": "checkbox-prepare-v2-source-notes",
+  "status": "prepare-landed",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "oldStayPageId": "183:74742",
+  "doNotDeleteOldStay": true,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "shapeDecisionToCarry": "VECTOR glyphs from named package paths. Writer v2 createVector. No Polar check, no emoji, no Inter.",
+  "taught": {
+    "ir": "recipe/figma-ir.ts VectorNodeSchema: optional strokes, windingRule, strokeCap, strokeJoin, rotation; assetRef is the SVG path d",
+    "writer": "recipe/checkbox-figma-writer.ts createVector + vectorPaths + named strokes. CHECKBOX_FIGMA_WRITER_VERSION 2. Refuses 183:74742.",
+    "Astryx": {
+      "file": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/CheckboxInput/CheckboxInput.tsx",
+      "lines": "562-576 path M8.5 2.5L4 7.5L1.5 5 viewBox 0 0 10 10 stroke 1.5 round; 210-218 checkmarkSizeStyles.md 14×14 (path × 1.4 → stroke 2.1)",
+      "compiled": "centered stroke VECTOR M11.9 3.5 L5.6 10.5 L2.1 7 stroke 2.1 --color-on-accent when checked"
+    },
+    "MUI": {
+      "file": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/internal/svg-icons/CheckBox.js",
+      "lines": "14-16 even-odd filled path; hole overlay M10 17 L5 12 L6.41 10.59 L10 14.17 L17.59 6.58 L19 8 Z in 24 viewBox",
+      "indeterminate": "IndeterminateCheckBox.js:14-16 hole is 10×2 bar at (7,11); dashFill --white so checked ≠ indeterminate",
+      "compiled": "white filled check overlay 24×24 centered; dash visible only on indeterminate"
+    },
+    "Ant Design": {
+      "file": "examples/antd/.antd-sandbox/node_modules/antd/es/checkbox/style/index.js",
+      "lines": "82-97 ::after L-stroke width checkboxSize/14*5 height checkboxSize/14*8 lineWidthBold 2 (antd.vars.css:279) rotate(45deg) top 50% inset-inline-start 25%; 130-137 checked opacity 1 scale 1; 160-168 indeterminate 8×8 primary square; 200-202 disabled after colorTextDisabled",
+      "compiled": "absolute host at 25%/50% minus half size; path L; rotation 45; clipsContent false"
+    }
+  },
+  "receipted": [
+    "MUI even-odd compound icon lowered to a white hole overlay (writer paints the hole, not the full even-odd SVG)",
+    "AntD wrapper hover / motion"
+  ],
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742"
+  ]
+}

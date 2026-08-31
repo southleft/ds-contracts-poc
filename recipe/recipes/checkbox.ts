@@ -21,6 +21,7 @@ import {
   type IRNode,
   type TextNode,
   type VariableBinding,
+  type VectorNode,
 } from "../figma-ir.js";
 import { deriveRecipeIntegrity } from "../hash.js";
 import { canonicalJson } from "../normalize.js";
@@ -79,6 +80,7 @@ interface StateCell {
   boxOpacity: CheckboxNumberParameter;
   label: CheckboxColorParameter;
   dashFill: CheckboxColorParameter;
+  checkFill: CheckboxColorParameter;
 }
 
 export interface CheckboxRecipeInstance {
@@ -127,6 +129,26 @@ export interface CheckboxRecipeInstance {
       width: CheckboxNumberParameter;
       height: CheckboxNumberParameter;
       radius: CheckboxNumberParameter;
+    };
+    /**
+     * Named glyph from package SVG / CSS. `path` is SVG `d` in the
+     * vector's local space. `placement` `absolute` is the AntD
+     * `::after` 25%/50% + translate(-50%,-50%); `center` is auto-layout
+     * centering (Astryx/MUI).
+     */
+    check: {
+      path: string;
+      width: CheckboxNumberParameter;
+      height: CheckboxNumberParameter;
+      strokeWidth: CheckboxNumberParameter;
+      winding: "nonzero" | "evenodd";
+      paint: "stroke" | "fill";
+      strokeCap: "none" | "round" | "square";
+      strokeJoin: "miter" | "bevel" | "round";
+      rotation: number;
+      offsetX: CheckboxNumberParameter;
+      offsetY: CheckboxNumberParameter;
+      placement: "center" | "absolute";
     };
     states: Record<CheckboxChecked, Record<"enabled" | "disabled", StateCell>>;
     labelFontSize: CheckboxNumberParameter;
@@ -177,6 +199,7 @@ const StateCellSchema = z.strictObject({
   boxOpacity: NumberParameterSchema,
   label: ColorParameterSchema,
   dashFill: ColorParameterSchema,
+  checkFill: ColorParameterSchema,
 });
 
 export const CheckboxRecipeInstanceSchema = z.strictObject({
@@ -215,6 +238,20 @@ export const CheckboxRecipeInstanceSchema = z.strictObject({
       width: NumberParameterSchema,
       height: NumberParameterSchema,
       radius: NumberParameterSchema,
+    }),
+    check: z.strictObject({
+      path: z.string().min(1),
+      width: NumberParameterSchema,
+      height: NumberParameterSchema,
+      strokeWidth: NumberParameterSchema,
+      winding: z.enum(["nonzero", "evenodd"]),
+      paint: z.enum(["stroke", "fill"]),
+      strokeCap: z.enum(["none", "round", "square"]),
+      strokeJoin: z.enum(["miter", "bevel", "round"]),
+      rotation: z.number().finite(),
+      offsetX: NumberParameterSchema,
+      offsetY: NumberParameterSchema,
+      placement: z.enum(["center", "absolute"]),
     }),
     states: z.strictObject({
       unchecked: z.strictObject({
@@ -363,12 +400,92 @@ const dashNode = (
   children: [],
 });
 
+const checkVector = (
+  instance: CheckboxRecipeInstance,
+  cell: StateCell,
+  visible: boolean,
+): VectorNode => {
+  const check = instance.tokens.check;
+  const strokePaint = check.paint === "stroke";
+  return {
+    kind: "vector",
+    role: "checkbox/glyph/check",
+    label: "checkbox/glyph/check",
+    visible,
+    assetRef: check.path,
+    width: fixed(check.width.fallback),
+    height: fixed(check.height.fallback),
+    fills: strokePaint ? [] : [solid(cell.checkFill.fallback)],
+    ...(strokePaint
+      ? {
+          strokes: [
+            {
+              weight: check.strokeWidth.fallback,
+              align: "center" as const,
+              paint: solid(cell.checkFill.fallback),
+            },
+          ],
+        }
+      : {}),
+    windingRule: check.winding,
+    strokeCap: check.strokeCap,
+    strokeJoin: check.strokeJoin,
+    rotation: check.rotation,
+    bindings: [
+      bind("width.value", check.width),
+      bind("height.value", check.height),
+      ...(strokePaint
+        ? [
+            bind("strokes.0.weight", check.strokeWidth),
+            bind("strokes.0.paint.color", cell.checkFill),
+          ]
+        : [bind("fills.0.color", cell.checkFill)]),
+    ],
+  };
+};
+
+const checkChild = (
+  instance: CheckboxRecipeInstance,
+  cell: StateCell,
+  visible: boolean,
+): FrameNode | VectorNode => {
+  const vector = checkVector(instance, cell, visible);
+  const check = instance.tokens.check;
+  if (check.placement !== "absolute") return vector;
+  return {
+    kind: "frame",
+    role: "checkbox/glyph/check-host",
+    label: "checkbox/glyph/check-host",
+    layout: {
+      mode: "horizontal",
+      primaryAxisAlign: "center",
+      counterAxisAlign: "center",
+      itemSpacing: 0,
+      padding: { top: 0, right: 0, bottom: 0, left: 0 },
+      width: fixed(check.width.fallback),
+      height: fixed(check.height.fallback),
+      positioning: "absolute",
+      offset: {
+        x: check.offsetX.fallback,
+        y: check.offsetY.fallback,
+      },
+      constraints: { horizontal: "left", vertical: "top" },
+    },
+    fills: [],
+    clipsContent: false,
+    bindings: [
+      bind("layout.width.value", check.width),
+      bind("layout.height.value", check.height),
+    ],
+    children: [vector],
+  };
+};
+
 const boxNode = (
   instance: CheckboxRecipeInstance,
   checked: CheckboxChecked,
   cell: StateCell,
 ): FrameNode => {
-  const pad = instance.tokens.box.padding.fallback;
   return {
     kind: "frame",
     role: "checkbox/box",
@@ -391,6 +508,7 @@ const boxNode = (
         paint: solid(cell.boxBorder.fallback),
       },
     ],
+    clipsContent: instance.tokens.check.placement !== "absolute",
     cornerRadius: corners(instance.tokens.box.radius.fallback),
     bindings: [
       bind("layout.width.value", instance.tokens.box.size),
@@ -403,7 +521,10 @@ const boxNode = (
       bind("cornerRadius.bottomRight", instance.tokens.box.radius),
       bind("cornerRadius.bottomLeft", instance.tokens.box.radius),
     ],
-    children: [dashNode(instance, cell, checked === "indeterminate")],
+    children: [
+      dashNode(instance, cell, checked === "indeterminate"),
+      checkChild(instance, cell, checked === "checked"),
+    ],
   };
 };
 
@@ -562,6 +683,20 @@ const direct = <Kind extends IRNode["kind"]>(
     ]);
   return found[0] as Extract<IRNode, { kind: Kind }>;
 };
+const checkVectorFrom = (box: FrameNode): VectorNode => {
+  const host = (box.children ?? []).find(
+    (child) => child.role === "checkbox/glyph/check-host" && child.kind === "frame",
+  );
+  if (host && host.kind === "frame")
+    return direct(host, "checkbox/glyph/check", "vector");
+  return direct(box, "checkbox/glyph/check", "vector");
+};
+const checkHostFrom = (box: FrameNode): FrameNode | undefined => {
+  const host = (box.children ?? []).find(
+    (child) => child.role === "checkbox/glyph/check-host" && child.kind === "frame",
+  );
+  return host && host.kind === "frame" ? host : undefined;
+};
 const binding = (
   node: { role?: string; bindings?: VariableBinding[] },
   field: string,
@@ -637,6 +772,15 @@ export function validateCheckboxStructure(root: IRNode): void {
         throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
           `${variant.role}: dash is only for indeterminate`,
         ]);
+      const check = checkVectorFrom(box);
+      if (checked === "checked" && check.visible === false)
+        throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
+          `${variant.role}: checked must show the check glyph`,
+        ]);
+      if (checked !== "checked" && check.visible !== false)
+        throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
+          `${variant.role}: check glyph is only for checked`,
+        ]);
       direct(variant, "checkbox/label", "text");
     }
   }
@@ -689,11 +833,19 @@ const cellFromVariant = (variant: ComponentNode): StateCell => {
   const hit = direct(variant, "checkbox/hit", "frame");
   const box = direct(hit, "checkbox/box", "frame");
   const dash = direct(box, "checkbox/glyph/dash", "frame");
+  const check = checkVectorFrom(box);
   const stroke = box.strokes?.[0];
   if (!stroke)
     throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
       `${variant.role}: box stroke missing`,
     ]);
+  const checkStroke = check.strokes?.[0];
+  const checkFillFallback = checkStroke
+    ? solidColor(checkStroke.paint, `${check.role} stroke`)
+    : solidColor(check.fills[0], check.role!);
+  const checkFillField = checkStroke
+    ? "strokes.0.paint.color"
+    : "fills.0.color";
   return {
     boxFill: colorFrom(box, "fills.0.color", solidColor(box.fills[0], box.role!)),
     boxBorder: colorFrom(
@@ -715,6 +867,7 @@ const cellFromVariant = (variant: ComponentNode): StateCell => {
       "fills.0.color",
       solidColor(dash.fills[0], dash.role!),
     ),
+    checkFill: colorFrom(check, checkFillField, checkFillFallback),
   };
 };
 
@@ -735,6 +888,18 @@ export function collapseCheckboxRecipe(
   const hit = direct(baseline, "checkbox/hit", "frame");
   const box = direct(hit, "checkbox/box", "frame");
   const dash = direct(box, "checkbox/glyph/dash", "frame");
+  const checkedBox = direct(
+    direct(
+      componentFor(set, { Checked: "checked", Disabled: "false" }),
+      "checkbox/hit",
+      "frame",
+    ),
+    "checkbox/box",
+    "frame",
+  );
+  const check = checkVectorFrom(checkedBox);
+  const checkHost = checkHostFrom(checkedBox);
+  const checkStroke = check.strokes?.[0];
   const label = direct(baseline, "checkbox/label", "text");
   const stateOf = (checked: CheckboxChecked, disabled: CheckboxDisabled) =>
     cellFromVariant(componentFor(set, { Checked: checked, Disabled: disabled }));
@@ -806,6 +971,49 @@ export function collapseCheckboxRecipe(
           "cornerRadius.topLeft",
           dash.cornerRadius?.topLeft ?? 0,
         ),
+      },
+      check: {
+        path: check.assetRef,
+        width: numberFrom(
+          check,
+          "width.value",
+          check.width.mode === "fixed" ? check.width.value : 0,
+        ),
+        height: numberFrom(
+          check,
+          "height.value",
+          check.height.mode === "fixed" ? check.height.value : 0,
+        ),
+        strokeWidth: checkStroke
+          ? numberFrom(check, "strokes.0.weight", checkStroke.weight)
+          : {
+              variable: `${envelope.id}.check-strokeWidth`,
+              fallback: 0,
+            },
+        winding: check.windingRule === "evenodd" ? "evenodd" : "nonzero",
+        paint: checkStroke ? "stroke" : "fill",
+        strokeCap: check.strokeCap ?? "none",
+        strokeJoin: check.strokeJoin ?? "miter",
+        rotation: check.rotation ?? 0,
+        offsetX: checkHost?.layout.offset
+          ? {
+              variable: `${envelope.id}.check-offsetX`,
+              fallback: checkHost.layout.offset.x,
+            }
+          : {
+              variable: `${envelope.id}.check-offsetX`,
+              fallback: 0,
+            },
+        offsetY: checkHost?.layout.offset
+          ? {
+              variable: `${envelope.id}.check-offsetY`,
+              fallback: checkHost.layout.offset.y,
+            }
+          : {
+              variable: `${envelope.id}.check-offsetY`,
+              fallback: 0,
+            },
+        placement: checkHost ? "absolute" : "center",
       },
       states: {
         unchecked: {
