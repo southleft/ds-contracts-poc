@@ -1,0 +1,53 @@
+{
+  "artifactVersion": "menu-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:76259",
+  "pageName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v1",
+  "runIdentity": "49334e8e-9f1933de-af4cca86-menu-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76259",
+  "taughtHostClass": "SF Pro listed but zero-glyph; painted named fallback Roboto Regular. Polar placement, arrows, shadows, and triggers were receipted — no invented overlay offsets. AntD envelopeHash typo 922df8f1 was corrected to the prepared 922df8b1 on the live node.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "menu@1 is one named default open panel per library, not a set. Component Container was created inside each library Section; figma_arrange_component_set was not used.",
+  "components": [
+    {
+      "library": "Astryx",
+      "export": "DropdownMenu",
+      "componentId": "183:76272",
+      "sectionId": "183:76271",
+      "containerId": "183:76277",
+      "panel": { "padding": 4, "gap": 2, "radius": 12, "fill": "#ffffffff", "w": 82, "h": 74 },
+      "item": { "paddingX": 8, "paddingY": 6, "labels": ["Item One", "Item Two"] },
+      "type": { "fontSize": 14, "lineHeight": 20, "fill": "#0a1317ff" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "MUI",
+      "export": "Menu",
+      "componentId": "183:76291",
+      "sectionId": "183:76290",
+      "containerId": "183:76296",
+      "panel": { "padding": 0, "gap": 0, "radius": 4, "fill": "#ffffffff", "w": 99, "h": 96 },
+      "item": { "paddingX": 16, "paddingY": 6, "minHeight": 48, "labels": ["Item One", "Item Two"] },
+      "type": { "fontSize": 16, "lineHeight": 24, "fill": "#000000de" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Dropdown",
+      "componentId": "183:76309",
+      "sectionId": "183:76308",
+      "containerId": "183:76314",
+      "panel": { "padding": 4, "gap": 0, "radius": 8, "fill": "#ffffffff", "w": 90, "h": 72 },
+      "item": { "paddingX": 12, "paddingY": 5, "labels": ["Item One", "Item Two"] },
+      "type": { "fontSize": 14, "lineHeight": 22, "fill": "#000000e0" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

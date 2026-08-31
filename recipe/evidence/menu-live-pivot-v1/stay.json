@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "menu-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:76259",
+  "pageName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v1",
+  "runIdentity": "49334e8e-9f1933de-af4cca86-menu-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76259",
+  "components": {
+    "Astryx DropdownMenu": "183:76272",
+    "MUI Menu": "183:76291",
+    "Ant Design Dropdown": "183:76309"
+  },
+  "containers": {
+    "Astryx": "183:76277",
+    "MUI": "183:76296",
+    "Ant Design": "183:76314"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "open panel chrome plus two items; Polar placement, arrows, shadows, and triggers receipted"
+}

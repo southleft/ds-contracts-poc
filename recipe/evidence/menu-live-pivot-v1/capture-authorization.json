@@ -1,0 +1,67 @@
+{
+  "artifactVersion": "menu-live-v1-capture-authorization-v1",
+  "authorizationId": "menu-live-v1",
+  "status": "owner-authorized hill-climb window; one new Scratch page; cryptographic broker packet not reused",
+  "authorizationIntent": true,
+  "antecedent": {
+    "ownerMandate": "2026-08-31 unattended hill-climb of docs/34 Phase 1",
+    "writerSha256": "9816200c2083da3b4d426ebbb4841aba49f4da92761e0165f8fb485e21f5ea9b",
+    "splitWriters": [
+      "writer-astryx-menu-reviewed-v1.js",
+      "writer-mui-menu-reviewed-v1.js",
+      "writer-antd-menu-reviewed-v1.js"
+    ],
+    "compactHosts": [
+      "compact-astryx.js",
+      "compact-mui.js",
+      "compact-antd.js"
+    ],
+    "runIdentity": "49334e8e-9f1933de-af4cca86-menu-v1",
+    "pageName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v1"
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "oneNewPage": true,
+    "signedPagesForbidden": [
+      "115:295378",
+      "163:35981",
+      "183:70641",
+      "173:48924",
+      "181:64873",
+      "183:69150",
+      "85:6781",
+      "183:74742",
+      "183:75031",
+      "183:75302",
+      "183:75495",
+      "183:75801",
+      "183:75976",
+      "183:76022",
+      "183:76063",
+      "183:76109",
+      "183:76151",
+      "183:76193"
+    ],
+    "cleanupOnFailureOnly": true
+  },
+  "execution": {
+    "maximumAttempts": 1,
+    "attemptsExecuted": 1,
+    "newTxnPerVersion": true,
+    "doNotRestartFailedAttemptAsIs": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "queued-for-TJ",
+    "overallSuccess": false,
+    "productV1": "INCOMPLETE",
+    "inventedGradeForbidden": true
+  }
+}
