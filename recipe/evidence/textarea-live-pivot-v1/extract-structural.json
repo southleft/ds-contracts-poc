@@ -1,0 +1,59 @@
+{
+  "artifactVersion": "textarea-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:75495",
+  "pageName": "Recipe Pivot / Textarea / 830c90b5-e9c10699-09726acb-textarea-v1",
+  "runIdentity": "830c90b5-e9c10699-09726acb-textarea-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75495",
+  "taughtHostClass": "SF Pro Medium/Regular listed and loadable but zero-glyph (Calendar v23 class); painted named fallback Roboto Medium/Regular. Do not invent Inter.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "figma_arrange_component_set reparents the set onto the page and can destroy sibling arranged sets. After each arrange, the Component Container was renamed and moved back into its library section.",
+  "sets": [
+    {
+      "library": "Astryx",
+      "setId": "183:75722",
+      "sectionId": "183:75705",
+      "arrangeId": "183:75723",
+      "adapterIdentity": "astryx-textarea-reviewed-v1",
+      "recipeHash": "830c90b5322b162c6852d998b3255fbd61d319d913554ed520c1064f5b075817",
+      "variantCount": 4,
+      "box": { "w": 86, "h": 70, "radius": 8, "stroke": 1, "align": "INSIDE", "padX": 8, "padY": 4 },
+      "label": "Notes",
+      "valueSample": "Add a note",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Medium" }, "value": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "MUI",
+      "setId": "183:75783",
+      "sectionId": "183:75766",
+      "arrangeId": "183:75784",
+      "adapterIdentity": "mui-textarea-reviewed-v1",
+      "recipeHash": "e9c106994deb956629444768a10f6321bf0059961959514a305c43dbadcbd250",
+      "variantCount": 4,
+      "box": { "w": 105, "h": 56, "radius": 4, "stroke": 1, "align": "OUTSIDE", "padX": 14, "padY": 16.5 },
+      "label": "Notes",
+      "valueSample": "Add a note",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" }, "value": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "Ant Design",
+      "setId": "183:75627",
+      "sectionId": "183:75610",
+      "arrangeId": "183:75662",
+      "adapterIdentity": "antd-textarea-reviewed-v1",
+      "recipeHash": "09726acba383e0192d51866cb3e0d2a8f0a95254990139e25edd915c79e4010e",
+      "variantCount": 4,
+      "box": { "w": 92, "h": 54, "radius": 6, "stroke": 1, "align": "INSIDE", "padX": 11, "padY": 4 },
+      "label": "Notes",
+      "valueSample": "Add a note",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" }, "value": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}
