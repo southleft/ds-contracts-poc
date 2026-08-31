@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "alert-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:75801",
+  "pageName": "Recipe Pivot / Alert / dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+  "runIdentity": "dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75801",
+  "sets": {
+    "Astryx": "183:75841",
+    "MUI": "183:75899",
+    "Ant Design": "183:75957"
+  },
+  "arrange": {
+    "Astryx": "183:75842",
+    "MUI": "183:75900",
+    "Ant Design": "183:75958"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "in-page banner/alert; Status info|success|warning|error; per-library default (Astryx info, MUI success, AntD info); SVG glyphs receipted as colour+size boxes; AlertDialog waits for Dialog last"
+}

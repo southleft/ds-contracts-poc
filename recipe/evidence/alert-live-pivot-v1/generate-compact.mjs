@@ -24,7 +24,7 @@ const astryxTitleFont = {
   requestedFamily: "-apple-system",
   requestedStyle: "Semibold",
   resolvedFamily: "SF Pro",
-  resolvedStyle: "Medium",
+  resolvedStyle: "Semibold",
   resolution: "fallback",
   fallbackChain: [
     { family: "-apple-system", style: "Semibold" },
@@ -36,7 +36,7 @@ const astryxTitleFont = {
     { family: "Arial", style: "Bold" },
   ],
   degradation:
-    "source -apple-system Semibold 600; Figma cannot load a CSS stack; first named host font that painted Switch/Textarea is SF Pro Medium",
+    "source -apple-system Semibold 600; Figma cannot load a CSS stack; first named host font is SF Pro Semibold (zero-glyph; painted Roboto Medium)",
 };
 
 const muiTitleFont = {

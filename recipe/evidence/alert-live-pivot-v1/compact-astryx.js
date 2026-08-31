@@ -39,7 +39,7 @@ const resolvePainted = async (spec) => {
   await figma.loadFontAsync(found.fontName);
   return { spec, found: found.fontName, painted: found.fontName };
 };
-const titleResolved = await resolvePainted({"requestedFamily":"-apple-system","requestedStyle":"Semibold","resolvedFamily":"SF Pro","resolvedStyle":"Medium","resolution":"fallback","fallbackChain":[{"family":"-apple-system","style":"Semibold"},{"family":"SF Pro","style":"Semibold"},{"family":"SF Pro","style":"Medium"},{"family":"Segoe UI","style":"Semibold"},{"family":"Roboto","style":"Medium"},{"family":"Helvetica","style":"Bold"},{"family":"Arial","style":"Bold"}],"degradation":"source -apple-system Semibold 600; Figma cannot load a CSS stack; first named host font that painted Switch/Textarea is SF Pro Medium"});
+const titleResolved = await resolvePainted({"requestedFamily":"-apple-system","requestedStyle":"Semibold","resolvedFamily":"SF Pro","resolvedStyle":"Semibold","resolution":"fallback","fallbackChain":[{"family":"-apple-system","style":"Semibold"},{"family":"SF Pro","style":"Semibold"},{"family":"SF Pro","style":"Medium"},{"family":"Segoe UI","style":"Semibold"},{"family":"Roboto","style":"Medium"},{"family":"Helvetica","style":"Bold"},{"family":"Arial","style":"Bold"}],"degradation":"source -apple-system Semibold 600; Figma cannot load a CSS stack; first named host font is SF Pro Semibold"});
 
 const collectionName = "Recipe Alert / " + runIdentity + " / " + adapterIdentity;
 const locals = figma.variables.getLocalVariableCollectionsAsync

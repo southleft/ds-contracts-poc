@@ -1,0 +1,59 @@
+{
+  "artifactVersion": "alert-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:75801",
+  "pageName": "Recipe Pivot / Alert / dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+  "runIdentity": "dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-75801",
+  "taughtHostClass": "SF Pro Semibold/Regular listed and loadable but zero-glyph (Calendar v23 class); painted named fallback Roboto Medium/Regular. Do not invent Inter.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "figma_arrange_component_set reparents the set onto the page and can destroy sibling arranged sets. After each arrange, the Component Container was renamed and moved back into its library section.",
+  "sets": [
+    {
+      "library": "Astryx",
+      "setId": "183:75841",
+      "sectionId": "183:75828",
+      "arrangeId": "183:75842",
+      "adapterIdentity": "astryx-alert-reviewed-v1",
+      "recipeHash": "dfe6ebb7ac2f6c285e328f16a826fe64b046550c0387cf47dea99afb9f04ad82",
+      "variantCount": 4,
+      "box": { "w": 194, "h": 44, "radius": 12, "stroke": 0, "align": "INSIDE", "padX": 16, "padY": 12, "gap": 8, "icon": 20 },
+      "title": "New update available",
+      "statusDefault": "info",
+      "fontPainted": { "title": { "family": "Roboto", "style": "Medium" } }
+    },
+    {
+      "library": "MUI",
+      "setId": "183:75899",
+      "sectionId": "183:75886",
+      "arrangeId": "183:75900",
+      "adapterIdentity": "mui-alert-reviewed-v1",
+      "recipeHash": "72aeb8dc0adc7ba0fa3cc6c11d306fe5b265bf45ea5f936618d859dfbeb68c3a",
+      "variantCount": 4,
+      "box": { "w": 199, "h": 48, "radius": 4, "stroke": 0, "align": "INSIDE", "padX": 16, "padY": 6, "gap": 12, "icon": 22 },
+      "title": "New update available",
+      "statusDefault": "success",
+      "fontPainted": { "title": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "Ant Design",
+      "setId": "183:75957",
+      "sectionId": "183:75944",
+      "arrangeId": "183:75958",
+      "adapterIdentity": "antd-alert-reviewed-v1",
+      "recipeHash": "f5f066f43d207c5ca0569fc569835c2ec353b4a4acbd551ef5d0cc87682ed924",
+      "variantCount": 4,
+      "box": { "w": 181, "h": 38, "radius": 8, "stroke": 1, "align": "INSIDE", "padX": 12, "padY": 8, "gap": 8, "icon": 14 },
+      "title": "New update available",
+      "statusDefault": "info",
+      "fontPainted": { "title": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}
