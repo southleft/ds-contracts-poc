@@ -4,6 +4,15 @@
 > **not** mean product v1 shipped. Recipe-IR proved five live-minted,
 > owner-signed archetypes; F1 is still unmet. See
 > [docs/32](32-recipe-ir-pivot.md).
+>
+> **Direction change (2026-08-30, later the same day).** TJ asked to
+> hill-climb the **common/boilerplate** component set across Astryx, MUI and
+> Ant Design. That supersedes exactly one line of this document — TJ decision
+> **#5, "No sixth archetype this cycle."** Everything else here stands,
+> including the open Combobox fork below. The proposed (not yet approved)
+> boilerplate roadmap, its three-library coverage matrix, and the two owner
+> questions it depends on are in
+> [docs/34 — The boilerplate hill-climb](34-boilerplate-v1-plan.md).
 
 **Status:** approved by TJ, 2026-08-30. Written against merge head `4caebfc5b`; nothing here restamps evidence or invents a grade. Doctrine unchanged: named or carried, receipts for refusals, human gates where a human is the instrument.
 
@@ -63,6 +72,12 @@ Current coverage: no archetype has more than two libraries; Calendar has one. Th
 
 The five were chosen because each broke a different assumption. A sixth archetype would re-prove machinery while the differentiating claim sits unproven. Revisit only after design→code exists.
 
+**Superseded 2026-08-30.** TJ reopened new archetypes, deliberately, as a
+*corpus* strategy: common/boilerplate components across Astryx, MUI and Ant
+Design. The reasoning above is not withdrawn — it is outranked by the owner's
+call. See [docs/34](34-boilerplate-v1-plan.md), which also records the cost
+this section was warning about.
+
 ---
 
 ## 4 · Post-merge named debts — sequence
@@ -103,7 +118,8 @@ All offline, zero Figma writes, zero hills.
 2. **Authorize spending the day-picker blindness** in Phase 4 (recommendation: yes, this phase).
 3. **Combobox remint slots after hardening**, not immediately.
 4. **npm publish stays deferred** through Phase 4.
-5. **No sixth archetype this cycle.**
+5. ~~**No sixth archetype this cycle.**~~ — **superseded 2026-08-30** by TJ's
+   boilerplate direction change; see [docs/34](34-boilerplate-v1-plan.md).
 
 **Explicitly out of scope:** Nathan Curtis / component-specifications lane (docs/01). Nothing edits signed evidence or claims a grade that wasn't given.
 

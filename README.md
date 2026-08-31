@@ -566,6 +566,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 31. [First-pass](docs/31-first-pass.md) · does the documented chain work on the FIRST try, untouched — the no-retry exam, the graded-pair packet, and why first-pass quality is not the same claim as end-state quality
 32. [**The recipe/IR pivot**](docs/32-recipe-ir-pivot.md) · current v1 proof surface: archetype recipes, Figma-capability IR, named-or-carried receipts, five live-minted owner-signed archetypes; product v1 still incomplete (F1)
 33. [Post-v1 plan](docs/33-post-v1-plan.md) · approved next work (design→code perturbation, day-picker F1 exam, lifecycle hardening). Not a claim that v1 shipped.
+34. [The boilerplate hill-climb](docs/34-boilerplate-v1-plan.md) · **proposed, not approved** · the common-component corpus plan across Astryx / MUI / Ant Design: three-library coverage matrix, hill-climb order, measured cost, and the two owner questions it waits on. F1 stays the named v1 gate; product v1 still incomplete
 
 ## Honesty as a design principle
 
