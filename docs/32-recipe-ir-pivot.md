@@ -2014,9 +2014,24 @@ commit; the two commits after it touch only docs and this evidence record):
   result"), and V1-CI-01's nested fast lane failed 1/240 with the gate
   name outside the captured tail. Its audit-ledger walk improved on the
   committed receipt — red audit rows 7 → 0, the typecheck and ci:lanes
-  acceptance commands now exit 0 after the lane repair. `v1:readiness`
-  was re-run once at this commit's clean tree; the regenerated receipts
-  land in the follow-up receipts commit with the result.
+  acceptance commands now exit 0 after the lane repair.
+
+  **Clean-tree re-measurement (at this commit, no concurrent runs):**
+  the eval scored **227/230 — exactly the committed record, row for
+  row** (`eval:record:check` green; the race case
+  `refuse-schema-invalid-contract` passes), and the fast lane inside a
+  readiness re-run measured **green end-to-end, 240/240** (925 s,
+  census gates included with the local seed directory parked) — closing
+  the 1/240 mystery. Two structural facts remain, both named, neither a
+  defect: `evals/run.ts` exits 1 whenever any case fails
+  (`process.exit(passed === results.length ? 0 : 1)`), so the lane's
+  raw eval step stays red **by design** while the three
+  `eval-reds.json` ledger rows are carried — the actual gate is
+  `eval:record:check`, which is green; and completing `v1:readiness`
+  requires its internal `ci:lane full` re-run (~2.8 h), which was
+  deliberately not spent a second time under the approved trade —
+  regenerating the READINESS receipts at a merged-main head is added to
+  the post-merge work list.
 
 **Gates:** all 11 `recipe:*:check` gates green at the head, re-run green on
 merged main as the post-merge confirmation.

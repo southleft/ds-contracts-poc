@@ -40,7 +40,15 @@
         "evalRecordCheck": "downstream of the same race: it refused the 226/230 record because refuse-schema-invalid-contract was a red not named in eval-reds.json — the correct refusal for a contaminated run.",
         "v1Readiness": "20/23 rows green against the then-DIRTY tree (this change set in progress). V1-COMPAT-03 and V1-EVID-01 carry the eval verdict plus the dirty-tree refusal ('this record cannot be committed as the suite result'); V1-CI-01's nested ci:lane fast failed 1/240 with the failing gate name outside the captured output tail. The run's audit-ledger walk improved on the committed receipt: red audit rows 7 -> 0 (typecheck and ci:lanes acceptance commands exit 0 after the lane repair)."
       },
-      "cleanRerun": "v1:readiness re-run once at the clean tree of the commit that carries this file; regenerated receipts and the result land in the follow-up receipts commit."
+      "cleanRerun": {
+        "atCommit": "c2e37147c (clean tree, no concurrent runs)",
+        "eval": "227/230 — exactly the committed record, row for row; eval:record:check GREEN ('CI measurement matches the committed record row for row'); the race case refuse-schema-invalid-contract passes",
+        "fastLaneInsideReadiness": "green end-to-end 240/240 (925s), census gates included with the local seed directory parked — the dirty-run 1/240 mystery gate cleared",
+        "structuralFactsNamed": [
+          "evals/run.ts exits 1 whenever any case fails (process.exit(passed === results.length ? 0 : 1)), so the lane's raw eval step is red BY DESIGN while the three eval-reds.json ledger rows are carried; the actual gate is eval:record:check, which is green",
+          "completing v1:readiness requires its internal ci:lane full re-run (~2.8h); deliberately not spent a second time under the approved trade — READINESS receipt regeneration at a merged-main head is post-merge named work"
+        ]
+      }
     }
   },
   "recipeGates": {
@@ -69,7 +77,8 @@
       "Combobox fixture-chrome remint from MUI/AntD-named overlay chrome (TJ decision)",
       "signed cleanup of the older Calendar Scratch pages",
       "npm publish (deferred; not a v1-proof substitute)",
-      "restore recipe/pivot-status.ts to the static tsc surface (excluded from root tsconfig for the measured stack-overflow on its boolean chains; runtime-validated via tsx on every gate run)"
+      "restore recipe/pivot-status.ts to the static tsc surface (excluded from root tsconfig for the measured stack-overflow on its boolean chains; runtime-validated via tsx on every gate run)",
+      "regenerate parity/receipts/v1/READINESS receipts via a completed clean v1:readiness run at a merged-main head (requires its internal ci:lane full re-run)"
     ]
   },
   "mergeReasoning": {
