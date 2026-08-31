@@ -62,7 +62,8 @@ export function cliPage(): { route: string; html: string } {
 <p class="eyebrow">Reference</p>
 <h1>The CLI — <code>@ds-contracts/cli</code></h1>
 <p class="lede">Every verb is a thin shell over the same engine the reference repository runs — esbuild-bundled, zero required runtime dependencies, Node ≥ 20. Install it globally or run it with <code>npx</code>; the three paths on <a href="/get-started/">Get started</a> are built from these verbs.</p>
-${codeBlock(`npm i -g @ds-contracts/cli     # or: npx --yes @ds-contracts/cli@${cli.latest} <command>`, 'bash', `published stable v${cli.latest}; the release candidate on the next tag is v${cli.next}`)}
+<p class="section-note"><strong>Current state (2026-08-30).</strong> This CLI is the <em>universal-contract</em> envelope (extract / generate / bundle / onboard). It is <strong>not</strong> the recipe-IR v1 proof. Recipe-IR never shipped as an npm RC; publish of a recipe surface is deferred. Product v1 is incomplete (F1). Published <code>latest</code> / <code>next</code> tags below are registry truth for that older envelope. See <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a>.</p>
+${codeBlock(`npm i -g @ds-contracts/cli     # or: npx --yes @ds-contracts/cli@${cli.latest} <command>`, 'bash', `published stable v${cli.latest} (universal-contract); the pre-pivot RC on the next tag is v${cli.next}`)}
 
 <h2 id="usage">Usage ${badge('generated', 'Extracted verbatim from packages/cli/src/cli.ts at build time — the CLI names this block its own reference.')}</h2>
 ${codeBlock(usage.trimEnd(), 'text', `packages/cli/src/cli.ts — the usage block, extracted from source at build time; published stable is v${cli.latest}`)}

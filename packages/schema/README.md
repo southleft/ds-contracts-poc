@@ -26,7 +26,9 @@ Versioning: the package major tracks the spec version (`17.x.y` = spec v17). 17.
 
 ## Release status
 
-This source tree stages `@ds-contracts/schema@17.0.0-rc.1`. It is source-only
+This source tree stages `@ds-contracts/schema@17.0.0-rc.1` — the
+**universal-contract** schema, not recipe-IR. Recipe-IR never shipped as an
+npm RC; publish of a recipe surface is deferred. This file is source-only
 until a release owner publishes it. The npm registry check on 2026-08-04
 reported `16.0.0` as `latest`; installing without an exact version therefore
 installs `16.0.0`, not this RC.

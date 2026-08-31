@@ -1,8 +1,18 @@
 # 27 · Coordinated release process
 
-This is the runbook for a coordinated release candidate. It separates source,
-package, registry, GitHub, Figma, and deployment evidence so a green build is
-never mistaken for a published release.
+> **Current state (2026-08-30).** This runbook is for the
+> **universal-contract** packages (`@ds-contracts/cli`, `schema`,
+> `emitter-web-components`, `core`). Recipe-IR never shipped as an npm RC;
+> publish of a recipe surface is **deferred**. GitHub releases
+> `v1.0.0-rc.1` and earlier **predate** the pivot and are not the v1 proof.
+> Product v1 is incomplete (F1). Do not invent a new semver from this page.
+> See [docs/32](32-recipe-ir-pivot.md) and the README
+> [What's released vs what's proven](../README.md#whats-released-vs-whats-proven).
+
+This is the runbook for a coordinated release candidate of that older
+envelope. It separates source, package, registry, GitHub, Figma, and
+deployment evidence so a green build is never mistaken for a published
+release.
 
 ## Candidate inventory
 

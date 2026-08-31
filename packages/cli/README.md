@@ -44,10 +44,12 @@ ds-contracts propose-pr <file> --repo owner/name [--dry-run]
 
 ## Release status
 
-The npm `next` tag carries `@ds-contracts/cli@0.5.0-rc.1`. This source tree is
-ahead at `0.5.0-rc.2` and remains unpublished until the conversion program has
-new release evidence. npm `latest` remains on the stable line; installing
-without an exact version does not install this source.
+These versions are the **universal-contract** envelope. Recipe-IR is not
+exported here and never shipped as an npm RC; publish of a recipe surface is
+deferred. The npm `next` tag carries `@ds-contracts/cli@0.5.0-rc.1` (pre-pivot).
+This source tree is ahead at `0.5.0-rc.2` and remains unpublished. npm
+`latest` remains on the stable line; installing without an exact version does
+not install this source.
 
 Evaluate the published candidate without moving the stable tag:
 

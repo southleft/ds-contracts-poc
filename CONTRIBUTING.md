@@ -20,7 +20,7 @@ The claims rule is the first of seven. The others are what make it hold:
 4. **Defect-first reporting.** Lead with what is broken, then the green numbers. A commit message, a PROVENANCE file, and a PR description all put the named residuals *before* the wins. Green gates are not "it works" — they are "these specific things were checked."
 5. **Byte-identity as a proof technique.** When you change the engine, prove the change is inert everywhere it should be inert: re-run an unrelated library's capture through the changed engine and compare artifacts byte-for-byte. Comparing against a *committed* artifact is not a valid proof if that artifact is stale — the valid proof is A/B on the same engine, changing only the one expression ([`examples/carbon/PROVENANCE.md` § "Byte-identity proof"](examples/carbon/PROVENANCE.md)).
 6. **Documented limits live where the capability is claimed**, not in a footnote elsewhere.
-7. **Docs describe what a person does, not what the machinery is.** The owner's own review (2026-07-27) found the docs explained the pipeline accurately and left a reader unable to say what they should type. A capability page that cannot be followed by someone who has never read this repo is not finished. Where a step can fail, name the failure and the fix; where a verb does not exist yet (`promote` is a copied script, not a CLI command), say so instead of implying it.
+7. **Docs describe what a person does, not what the machinery is.** The owner's own review (2026-07-27) found the docs explained the pipeline accurately and left a reader unable to say what they should type. A capability page that cannot be followed by someone who has never read this repo is not finished. Where a step can fail, name the failure and the fix; where a verb does not exist yet, say so instead of implying it.
 
 ## The gates
 
@@ -62,9 +62,13 @@ hashed RECORDs.** Product v1 is incomplete (F1) until a true v1-completion
 record says otherwise. The playground still drives the pre-pivot
 universal-contract path — do not treat a playground run as recipe-IR proof.
 
-Release candidates have a separate, approval-gated procedure. Follow
-[docs/27 — Release Process](docs/27-release-process.md) and record each result
-in [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). A manifest version is not
+Published `@ds-contracts/*` packages and GitHub releases `v1.0.0-rc.1` (and
+earlier) are the **pre-pivot universal-contract** envelope. Recipe-IR never
+shipped as an npm RC; publish of a recipe surface is deferred. The
+universal-contract release runbook is still
+[docs/27 — Release Process](docs/27-release-process.md) — it is not a claim
+that a recipe-IR RC is in flight. Record each result in
+[RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). A manifest version is not
 evidence that npm, a GitHub release, a tag, or the deployed sites contain that
 version. Contributors may prepare packs and evidence; only the designated
 owners approve tags, GitHub releases, npm publication, dist-tag changes, and

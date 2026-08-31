@@ -43,7 +43,7 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               they still match.
             </p>
             <p>
-              This page runs the real engine in your browser so you can see that happen. Load a
+              This page runs the real pre-pivot engine in your browser so you can see that happen. Load a
               contract, change it, watch every output move together — and watch the engine
               refuse, by name, when you ask for something it cannot honestly do.
             </p>
@@ -69,8 +69,9 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
             <p>
               Open <b>Examples</b>, load the Badge, then break its contract on purpose — point a
               token binding at a name that doesn&rsquo;t exist, or delete a required field. The
-              named refusal that appears is the entire product. Everything else here is
-              plumbing around that behaviour.
+              named refusal that appears is the idea of this older loop — not the
+              recipe-IR v1 proof. Everything else here is plumbing around that
+              behaviour.
             </p>
           </section>
           <section>

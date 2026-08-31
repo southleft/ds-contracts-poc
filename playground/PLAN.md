@@ -11,7 +11,7 @@
 where anyone can experience the contract loop without cloning the repo:
 import a design or code, watch a contract be proposed, edit it under schema
 governance, and generate output for multiple targets — running the **actual
-engine**, not a demo copy.
+pre-pivot `core/` engine**, not a demo copy and not recipe-IR.
 
 **Live URL**: Cloudflare Pages (deployed via Wrangler). Everything runs
 client-side; user secrets (Figma token, Anthropic key) never leave the

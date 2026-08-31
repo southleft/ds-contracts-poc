@@ -25,6 +25,12 @@ Short version — four phases, each with a falsifiable exit criterion:
 
 ## Where it actually stands (2026-08-23)
 
+> **Dated snapshot.** The registry and source versions below are the
+> **universal-contract** envelope as of 2026-08-23. They **predate** the
+> recipe-IR pivot (`4caebfc5b`). Those published RCs are not the v1 proof;
+> recipe-IR never shipped as an npm RC. Current proof/status is the box at
+> the top of this file.
+
 Updated against source, registry, CI and the committed receipts separately,
 rather than treating a manifest edit as a release. Repository `1.0.0-rc.1`,
 CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, and emitter `0.4.0-rc.1` were

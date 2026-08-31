@@ -18,12 +18,13 @@ export function Landing() {
         continuously checked against it.
       </p>
       <p className="landing__pitch">
-        This page runs the real engine — the same code behind a{" "}
-        {contractsById.size}-component library — right in your browser. Load a
-        contract, change it, and watch what happens: the React, the HTML, the
-        Figma sync script and the canvas preview all move together, and anything
-        the engine can&rsquo;t do it says out loud instead of guessing.{" "}
-        <b>Nothing you paste leaves your browser</b>, and there are no accounts.
+        This page runs the real <b>pre-pivot</b> <code>core/</code> engine —
+        the same code behind a {contractsById.size}-component library — right
+        in your browser. Load a contract, change it, and watch what happens:
+        the React, the HTML, the Figma sync script and the canvas preview all
+        move together, and anything the engine can&rsquo;t do it says out loud
+        instead of guessing. <b>Nothing you paste leaves your browser</b>, and
+        there are no accounts.
       </p>
       <p className="landing__pitch">
         <b>Start here:</b> open an example, then break its contract on purpose —
@@ -112,9 +113,10 @@ export function Landing() {
       </div>
 
       <p className="landing__foot">
-        Same engine, no demo copy: the code emitting here generates the
-        repo&rsquo;s {contractsById.size} shipping components, byte-guarded by
-        its evals.{" "}
+        Same pre-pivot engine, no demo copy: the code emitting here generates
+        the repo&rsquo;s {contractsById.size} shipping{" "}
+        <code>*.contract.json</code> components, byte-guarded by its evals.
+        That is not recipe-IR.{" "}
         <a href={REPO_URL} target="_blank" rel="noreferrer">
           Source on GitHub
         </a>{" "}

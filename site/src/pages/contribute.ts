@@ -18,6 +18,7 @@ export function contributePage(): { route: string; html: string } {
 <p class="eyebrow">Contribute</p>
 <h1>An open spec, governed in the open</h1>
 <p class="lede">100% open source and community-supported: the schema, the engine, and every instrument that verifies them are in one repository under one permissive license, with no gated tier. Here is how changes happen.</p>
+<p class="section-note"><strong>Current state (2026-08-30).</strong> Recipe-IR is the v1 proof surface; product v1 is incomplete (F1). Do not flip <code>overallSuccess</code>. Do not restamp hashed RECORDs. The published packages and this site's spec pages are the universal-contract envelope. See <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a> and <a href="${REPO_URL}/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a>.</p>
 
 <h2 id="claims-rule">The claims rule</h2>
 <p>The repository's credibility rests on one norm above all others: <strong>no capability claim without an eval behind it</strong>. A statement of capability does not enter the docs until an adversarial check backs it in the eval suite. If you're adding a capability: <em>fixture first, eval second, claim last.</em> Every change must leave the gates green:</p>

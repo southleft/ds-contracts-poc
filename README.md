@@ -32,27 +32,30 @@ This repository is the working proof, and the candidate reference implementation
 
 **→ The spec site: [ds-contracts-spec.pages.dev](https://ds-contracts-spec.pages.dev)** · **The playground: [ds-contracts-playground.pages.dev](https://ds-contracts-playground.pages.dev)** · **New here? [Which journey are you on?](#which-journey-are-you-on)**
 
-## Release-candidate status
+## What's released vs what's proven
 
-The coordinated release candidate is repository `1.0.0-rc.1`, schema
-`17.0.0-rc.1` (a MAJOR: the contract-level `bindings` hoist, with a
-`ds-contracts migrate` codemod), web-components emitter `0.4.0-rc.2`, and a
-new fourth package, `@ds-contracts/core` `0.1.0-rc.1` (the emitter surface
-and the contract-analysis layer, so an emitter can be built outside this
-repository — unpublished). The previous package
-RCs (schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`) were published under npm's
-`next` tag. The current conversion work advances the CLI source to
-`0.5.0-rc.2` and the schema and emitter sources to their `rc.2` versions; all
-three are source-ahead and unpublished. npm's `latest` tags remain on the
-stable line. Use an exact version when evaluating an RC; do not assume
-`latest` or `next` points to the current source tree.
+<a id="release-candidate-status"></a>
 
-Publication, tagging, the GitHub release, and deployment remain explicit human
-approvals. The repeatable procedure, verification matrix, migration notes, and
-rollback plan are in [docs/27 — Release Process](docs/27-release-process.md);
-the sign-off record is [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md).
+**The RC heading is retired.** Recipe-IR never shipped as an npm release
+candidate. Product **v1 is incomplete** (F1: whole-corpus / unseen-library
+zero-silent on the recipe path). A version string, a GitHub prerelease, or
+`npm i @ds-contracts/cli` is not v1-complete. No new semver is invented
+here.
 
-**Evaluating this? There are two documents, and neither is honest alone.**
+| Surface | What it is | What it is not |
+|---|---|---|
+| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five archetypes have stayed live Scratch mints and owner-signed human grades — Button (`183:69150`), Input (`115:295378`), Combobox (`163:35981`), Table (`173:48924`), Calendar (`181:64873`). Gates: `npm run recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`. Chronology: [docs/32](docs/32-recipe-ir-pivot.md). Release bar: [docs/26](docs/26-v1-definition.md). | Product v1. `overallSuccess` stays false except Table's existing v32 pin. F1 is unmet. Combobox chrome remint is *after hardening*; V41 is not restamped. |
+| **Published npm (`@ds-contracts/*`)** | The **universal-contract** envelope (extract / generate / bundle / onboard). `latest` is the stable line (CLI `0.4.0`, schema `16.0.0`, emitter `0.3.0`). npm `next` still carries older package RCs (CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`). Use an exact version; do not assume `latest` or `next` is this tree. | Recipe-IR. A v1 proof. A complete product. |
+| **This source tree** | Root `package.json` still reads `1.0.0-rc.1`. CLI source is `0.5.0-rc.2`, schema `17.0.0-rc.1` (the `bindings` hoist), emitter `0.4.0-rc.2`, and `@ds-contracts/core` `0.1.0-rc.1` — source-ahead and unpublished. npm publish of a recipe surface is **deferred**. | A published recipe-IR RC. |
+| **GitHub releases** | Tags such as `v1.0.0-rc.1` exist. | The recipe-IR pivot. They **predate** merge `4caebfc5b` and still describe the universal-contract RC. |
+| **Playground** | The pre-pivot `core/` propose/emit loop, in the browser. | The v1 proof. A recipe-IR demo. |
+
+Publication, tagging, and deploy remain explicit human approvals. The
+universal-contract release runbook is still [docs/27 — Release Process](docs/27-release-process.md);
+it is **not** a claim that a recipe-IR RC is in flight. Sign-off record:
+[RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md).
+
+**Evaluating the still-shipping universal-contract path? Two documents, and neither is honest alone.**
 
 - **What it does — [docs/24 — What Works](docs/24-what-works.md).** Generated from committed artifacts, every number carrying the file it was read from. The headline: **86.7% mean computed-style equality** for 116 third-party components measured against the original npm package rendering in the same pinned Chromium — exact string match, no tolerance, over 718018 style cells; **92.70% visual fidelity** in the other direction, over the 537 statically scorable variants of a 599-variant Figma kit; and generation that is **deterministic** — the same contract produces byte-identical output on any machine, with 291 generated files hashed against a golden manifest and no model anywhere in the path.
 - **What it costs — [docs/23 — Known Limitations](docs/23-known-limitations.md).** The complete inventory of what this tool does *not* do: measured coverage per library, the component classes captured nowhere, what a captured component fails to reproduce, which examples are frozen, and what each gate does and does not measure. It is the longer of the two, deliberately the least flattering document here, and it is the one worth your time before you invest any.
@@ -187,7 +190,7 @@ The goal: your real Button, with its real padding, its real colors, and its real
 `acme`, and none of them exist in this repo.
 
 ```bash
-npm i -g @ds-contracts/cli   # installs the stable 0.4.0; the 0.5.0 RC line is on the `next` tag
+npm i -g @ds-contracts/cli   # published stable 0.4.0 — universal-contract envelope, not recipe-IR
 
 # ONE command, TWO phases, with a human acknowledgement between them.
 ds-contracts onboard @acme/ui          # detect · sandbox · seed · draft · STOP
@@ -380,11 +383,12 @@ Code import (a public GitHub file URL, or pasted TSX + CSS Module), your own DTC
 
 **One route is off, and the playground says so on the button:** live relay from the Figma plugin. The plugin's *Send to Playground* tab was removed when its seven tabs were re-housed into Build / Changes / Send, so nothing can answer a pairing code today. Use the figma.com URL route, or paste a dump into the JSON tab. Both credential-gated paths — Figma URL import and prompt-to-contract — are live-verified against real endpoints ([MILESTONES.md](MILESTONES.md)).
 
-Prefer a terminal? The engine also ships as npm packages. For the currently
-published stable CLI, use `npm exec --package=@ds-contracts/cli@0.4.0 --
-ds-contracts init`. npm `next` carries CLI `0.5.0-rc.1`; the source tree is
-ahead at CLI `0.5.0-rc.2`. Every CLI verb is eval-pinned by a consumer-style
-smoke test.
+Prefer a terminal? The **universal-contract** engine also ships as npm
+packages — not recipe-IR; recipe-IR never published as an npm RC. For the
+currently published stable CLI, use `npm exec --package=@ds-contracts/cli@0.4.0 --
+ds-contracts init`. npm `next` carries CLI `0.5.0-rc.1` (still the pre-pivot
+envelope); the source tree is ahead at CLI `0.5.0-rc.2` and unpublished.
+Every CLI verb is eval-pinned by a consumer-style smoke test.
 
 ## The model
 
@@ -556,7 +560,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 24. [**What Works**](docs/24-what-works.md) · the other half — what it does: the denominator first, then computed-style equality per library and per component (all 116, worst first), canvas→code fidelity, the round-trip fact accounting, and the pins that make each number re-derivable. Generated by `npm run capability:report`; `npm run capability:fresh` refuses if it has gone stale, and one of the 230 evals runs that refusal
 25. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 26. [Definition of v1](docs/26-v1-definition.md) · the pinned release contract and its exact evidence
-27. [Release Process](docs/27-release-process.md) · coordinated RC build, pack, verify, publish, deploy, and rollback mechanics
+27. [Release Process](docs/27-release-process.md) · pre-pivot envelope runbook (coordinated RC build, pack, verify); recipe-IR never shipped as an npm RC
 28. [Beta Tester Runbook](docs/28-beta-runbook.md) · the three journeys packaged for someone who has never seen this repo — prerequisites, exact commands, what success looks like, the named limitations each track WILL hit, honest time budgets, and the structured issue forms for reporting
 29. [How It Flows](docs/29-how-it-flows.md) · what crosses each of the five hops between Figma and code, carried / named / refused, the six adjudication instruments, and three facts traced both ways
 31. [First-pass](docs/31-first-pass.md) · does the documented chain work on the FIRST try, untouched — the no-retry exam, the graded-pair packet, and why first-pass quality is not the same claim as end-state quality
@@ -575,7 +579,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 **Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** Five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live Scratch mints and owner-signed grades; F1 (whole-corpus / unseen-library on the recipe path) is the named blocker. `overallSuccess` is not flipped except Table's existing v32 pin. npm publish of a recipe surface is deferred. The playground and the published CLI still run the pre-pivot universal-contract path.
 
-The older model is still validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 230/230 evals — the two long-standing named reds (`mui-figma-genesis`, `child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16, stable schema and CLI releases on the public npm registry, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same `core/` engine — with a companion Figma plugin (Build / Changes / Send) that applies contract bundles to the canvas. Live relay from the plugin into the playground is off; use a figma.com URL or paste a dump. The coordinated RC in this tree is not a published release until the human steps in [docs/27](docs/27-release-process.md) are complete. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
+The older model is still validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 230/230 evals — the two long-standing named reds (`mui-figma-genesis`, `child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16, stable schema and CLI releases on the public npm registry, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same `core/` engine — with a companion Figma plugin (Build / Changes / Send) that applies contract bundles to the canvas. Live relay from the plugin into the playground is off; use a figma.com URL or paste a dump. GitHub releases `v1.0.0-rc.1` and earlier **predate the pivot**. npm publish of a recipe surface is deferred. [docs/27](docs/27-release-process.md) remains the universal-contract release runbook, not a claim that a recipe-IR RC is in flight. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 
 - **What has been proven, dated, with receipts:** [MILESTONES.md](MILESTONES.md)
 - **What it DOES do, measured — read with the next line, never instead of it:** [docs/24 — What Works](docs/24-what-works.md)

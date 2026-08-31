@@ -13,6 +13,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Honesty pass — retired RC framing (2026-08-30)
+
+- README **What's released vs what's proven** replaces **Release-candidate
+  status**. Recipe-IR never shipped as an npm RC; published `@ds-contracts/*`
+  and GitHub `v1.0.0-rc.1` are the pre-pivot envelope; product v1 stays
+  incomplete (F1). Playground, spec site, package READMEs, docs/27, ROADMAP,
+  and CONTRIBUTING now say the same thing in the places a reader hits first.
+
 ### Recipe-IR pivot landed on main (2026-08-30)
 
 - Merge `4caebfc5b`: archetype recipes + canonical Figma-capability IR +
@@ -336,6 +344,10 @@ is the Figma-rendered catalog gate (pixels AND geometry) and runs in the
 catalog-visual lane.
 
 ### Coordinated release candidate
+
+> Historical (pre-pivot). These source versions describe the
+> **universal-contract** envelope. Recipe-IR never shipped as an npm RC;
+> GitHub `v1.0.0-rc.1` predates merge `4caebfc5b`. See [Unreleased](#unreleased).
 
 The source tree stages repository `1.0.0-rc.1`,
 `@ds-contracts/cli@0.5.0-rc.2`, `@ds-contracts/schema@17.0.0-rc.1` (the

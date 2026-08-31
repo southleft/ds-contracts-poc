@@ -100,7 +100,7 @@ export function homePage(
   <h2>Three doors in</h2>
   <div class="cards">
     <a class="card" href="/spec/"><h3>Read the Spec</h3><p>Every schema branch, with constraints, refusal rules, and real shipping contracts as examples.</p><span class="card__meta">generated from the schema</span></a>
-    <a class="card" href="${PLAYGROUND_URL}"><h3>Try the Playground</h3><p>The actual engine in your browser: import from Figma or code, edit under governance, watch refusals by name.</p><span class="card__meta">no accounts, no backend</span></a>
+    <a class="card" href="${PLAYGROUND_URL}"><h3>Try the Playground</h3><p>The <em>pre-pivot</em> <code>core/</code> engine in your browser: import from Figma or code, edit under governance, watch refusals by name. Not the recipe-IR v1 proof.</p><span class="card__meta">universal-contract loop · no accounts</span></a>
     <a class="card" href="/get-started/"><h3>Get started</h3><p>Organised by what you want to do: canvas into code, code into Figma, or both-already-exist reconciled. Real commands, and the structural limits stated up front.</p><span class="card__meta">commands rendered from the tested manifest</span></a>
   </div>
 </section>
