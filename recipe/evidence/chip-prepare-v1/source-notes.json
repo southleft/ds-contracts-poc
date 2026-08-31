@@ -1,0 +1,94 @@
+{
+  "artifactVersion": "chip-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801"
+  ],
+  "shapeDecisionToCarry": "Astryx ships Token (not Chip/Tag). MUI ships Chip. AntD ships Tag. Compile the in-page chip/tag, not Tokenizer and not CheckableTag. Badge waits for the next stay.",
+  "libraries": {
+    "Astryx": {
+      "export": "Token",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Token/Token.tsx"
+      ],
+      "namedSoFar": {
+        "sizeDefault": "md",
+        "colorDefault": "default",
+        "height": "calc(--size-element-md 32 - 8) = 24",
+        "paddingInline": "--spacing-2 8",
+        "paddingBlock": 0,
+        "radius": "--radius-inner 4",
+        "borderWidth": 0,
+        "gap": "--spacing-1 4",
+        "font": "--text-supporting-size 12 / --text-supporting-leading 1.6667 → 20 / --font-weight-medium",
+        "fill": "--color-neutral rgba(5,54,89,0.1) = #0536591a",
+        "text": "--color-text-primary #0A1317"
+      },
+      "receipt": ["onRemove close control", "icon", "href/onClick", "size sm/lg", "color red…pink", "Tokenizer"]
+    },
+    "MUI": {
+      "export": "Chip",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Chip/Chip.js"
+      ],
+      "namedSoFar": {
+        "variantDefault": "filled",
+        "colorDefault": "default",
+        "sizeDefault": "medium",
+        "height": 32,
+        "radius": 16,
+        "borderWidth": 0,
+        "labelPaddingInline": 12,
+        "fontSize": "pxToRem(13)",
+        "lineHeight": 1.5,
+        "fill": "palette.action.selected rgba(0,0,0,0.08) = #00000014",
+        "text": "palette.text.primary rgba(0,0,0,0.87) = #000000de",
+        "disabledOpacity": 0.38
+      },
+      "open": "ChipLabel small-size padding; do not invent outlined as the shared default"
+    },
+    "Ant Design": {
+      "export": "Tag",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/tag/index.js"
+      ],
+      "namedSoFar": {
+        "borderedDefault": true,
+        "closableDefault": false,
+        "paddingInline": "tagPaddingHorizontal 8 - lineWidth 1 = 7",
+        "fontSize": "--font-size-sm 12",
+        "lineHeight": "1.6666666666666667 * 12 = 20",
+        "radius": "--border-radius-sm 4",
+        "borderWidth": 1,
+        "defaultBg": "colorFillQuaternary on colorBgContainer = #fafafa",
+        "defaultColor": "--color-text rgba(0,0,0,0.88) = #000000e0",
+        "border": "--color-border #d9d9d9"
+      },
+      "receipt": ["closable", "borderless", "CheckableTag", "preset colors", "icon"]
+    }
+  },
+  "proposedAxesToConfirm": {
+    "Disabled": "Astryx isDisabled and MUI disabled are named. AntD Tag has no disabled — do not invent a shared Disabled axis.",
+    "notAnAxisUntilShared": ["color palettes", "size sm/md/lg vs small/medium", "variant filled/outlined", "closable/onRemove", "CheckableTag", "Tokenizer"]
+  },
+  "sharedContentProposal": ["label from Astryx Token example — Tag"],
+  "note": "No shared Status/Color/Size default across the three. Compile the named default cell per library. Do not invent a fourth Chip export for Astryx."
+}
