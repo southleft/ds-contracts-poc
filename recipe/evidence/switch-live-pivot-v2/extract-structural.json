@@ -1,0 +1,58 @@
+{
+  "artifactVersion": "switch-live-v2-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "pageId": "197:76903",
+  "pageName": "Recipe Pivot / Switch / a8686d63-3d086535-0720db18-switch-v2",
+  "runIdentity": "a8686d63-3d086535-0720db18-switch-v2",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=197-76903",
+  "oldStayPageId": "183:75302",
+  "taughtHostClass": "SF Pro listed and loadable but zero-glyph; painted named fallback Roboto. Do not invent Inter.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "Manual uniquely named white wraps inside each library Section (pad 40, radius 8, clipsContent false). figma_arrange_component_set was not used.",
+  "sets": [
+    {
+      "library": "Astryx",
+      "setId": "197:76997",
+      "sectionId": "197:76976",
+      "arrangeId": "198:77045",
+      "adapterIdentity": "astryx-switch-reviewed-v1",
+      "recipeHash": "a8686d63bbcec90bc7f3c3916a1c75c257d1629c7e7b86d8f4da9e2b85a0fd96",
+      "variantCount": 4,
+      "travel": 14,
+      "fontPainted": { "family": "Roboto", "style": "Medium" }
+    },
+    {
+      "library": "MUI",
+      "setId": "198:77044",
+      "sectionId": "198:77023",
+      "arrangeId": "198:77046",
+      "adapterIdentity": "mui-switch-reviewed-v1",
+      "recipeHash": "3d086535652c5e04f6745d2edfb6eeee5601a01c8891a1fe3aca2ddade7a20c7",
+      "variantCount": 4,
+      "travel": 20,
+      "fontPainted": { "family": "Roboto", "style": "Regular" }
+    },
+    {
+      "library": "Ant Design",
+      "setId": "197:76950",
+      "sectionId": "197:76929",
+      "arrangeId": "198:77047",
+      "adapterIdentity": "antd-switch-reviewed-v1",
+      "recipeHash": "0720db18b3adc4f736a5444aff4a7f2e7de30fded087d4f58342a3bc55ddb85c",
+      "variantCount": 4,
+      "track": { "w": 44, "h": 22, "padding": 2 },
+      "thumb": 18,
+      "travel": 22,
+      "offPadL": 2,
+      "onPadL": 24,
+      "onRightRemain": 2,
+      "fontPainted": { "family": "Roboto", "style": "Regular" }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

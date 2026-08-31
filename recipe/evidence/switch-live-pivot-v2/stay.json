@@ -1,0 +1,39 @@
+{
+  "artifactVersion": "switch-live-pivot-v2-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "197:76903",
+  "pageName": "Recipe Pivot / Switch / a8686d63-3d086535-0720db18-switch-v2",
+  "runIdentity": "a8686d63-3d086535-0720db18-switch-v2",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=197-76903",
+  "oldStayPageId": "183:75302",
+  "doNotDeleteOldStay": true,
+  "sets": {
+    "Astryx": "197:76997",
+    "MUI": "198:77044",
+    "Ant Design": "197:76950"
+  },
+  "sections": {
+    "Astryx": "197:76976",
+    "MUI": "198:77023",
+    "Ant Design": "197:76929"
+  },
+  "arrange": {
+    "Astryx": "198:77045",
+    "MUI": "198:77046",
+    "Ant Design": "198:77047"
+  },
+  "accuracyLoop": {
+    "Ant Design": "OFF padL=2; ON padL=24 padR=2 rightRemain=2. ON inset matches OFF. travel 22 = 44-18-2*2."
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "figmaArrangeComponentSet": false,
+  "leftoverComponentContainer": []
+}
