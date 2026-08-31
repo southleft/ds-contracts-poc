@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "replay-census-v1",
+  "archetype": "calendar",
+  "substrate": {
+    "kind": "extract-transaction",
+    "path": "private/calendar-live-v42-transaction",
+    "pageId": "180:60727"
+  },
+  "predicts": "read-side tail only",
+  "doesNotPredict": "writer-side refusals (TextEncoder, effect paint order, setBoundVariableForEffect geometry). Substrate captured under its version's writer.",
+  "knownHistoricalRefusal": "$.children[2].children[0].children[0].bindings[0].field",
+  "reproducesKnownHistoricalRefusal": false,
+  "predictedNextLiveRefusal": null,
+  "totalAccountingProblems": 0,
+  "totalDifferences": 0,
+  "classFamilies": [],
+  "roots": [
+    {
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "preDiffRefusal": null,
+      "accountingProblems": 0,
+      "accounting": [],
+      "differences": 0,
+      "entries": []
+    }
+  ]
+}

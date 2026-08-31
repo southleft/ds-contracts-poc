@@ -1,0 +1,547 @@
+{
+  "artifactVersion": "replay-census-v1",
+  "archetype": "button",
+  "substrate": {
+    "kind": "observe-evidence",
+    "path": "recipe/evidence/button-scene-inversion-v1"
+  },
+  "predicts": "read-side tail only",
+  "doesNotPredict": "writer-side refusals and live observe transport. Substrate is a committed 0-write observe snapshot, not an extract transaction.",
+  "knownHistoricalRefusal": "root#name (B2j v4 role-only name recovery)",
+  "reproducesKnownHistoricalRefusal": false,
+  "predictedNextLiveRefusal": null,
+  "totalAccountingProblems": 24,
+  "totalDifferences": 0,
+  "classFamilies": [
+    {
+      "property": "effect",
+      "reason": "value",
+      "count": 24
+    }
+  ],
+  "roots": [
+    {
+      "source": "altitude",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "preDiffRefusal": null,
+      "accountingProblems": 24,
+      "accounting": [
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/12",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/13",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/14",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/15",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/36",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/37",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/38",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/39",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/60",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/61",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/62",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/63",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/84",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/85",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/86",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/87",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/108",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/109",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/110",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/111",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/132",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/133",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/134",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        },
+        {
+          "class": "mismatched",
+          "ownershipKey": "root/children/135",
+          "channel": "effect",
+          "expected": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#4375ffff"
+          },
+          "observed": {
+            "kind": "drop-shadow",
+            "offsetX": 0,
+            "offsetY": 0,
+            "blur": 0,
+            "spread": 4,
+            "color": "#000b29ff"
+          }
+        }
+      ],
+      "differences": 0,
+      "entries": []
+    },
+    {
+      "source": "fluent",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "preDiffRefusal": null,
+      "accountingProblems": 0,
+      "accounting": [],
+      "differences": 0,
+      "entries": []
+    }
+  ]
+}
