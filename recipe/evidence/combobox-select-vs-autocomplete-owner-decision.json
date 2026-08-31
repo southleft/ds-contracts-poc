@@ -1,0 +1,179 @@
+{
+  "artifactVersion": "combobox-select-vs-autocomplete-owner-decision-v1",
+  "kind": "open-owner-decision-not-a-grade",
+  "recordedAt": "2026-08-30T23:50:00-05:00",
+  "decider": "TJ Pitre — decision OPEN; this file does not invent one",
+  "gradeInvented": false,
+  "v41Restamped": false,
+  "overallSuccessFlipped": false,
+  "dayPickerStarted": false,
+  "liveFigmaWrites": 0,
+  "productV1": "INCOMPLETE",
+  "f1": "unproven",
+  "standingPages": {
+    "v41": "163:35981",
+    "v42": "183:70641",
+    "doNotDelete": true
+  },
+  "trigger": {
+    "whatTjSaid": "He opened official Select docs and said almost neither minted combobox looks like the actual Material or Ant designs. The generated sets look good, but they do not look like those pages. He does not know if that is a pass, a fail, or whether we must reconsider what we are testing against. He suggested maybe a code refresh.",
+    "pagesHeOpened": [
+      "https://mui.com/material-ui/react-select/",
+      "https://ant.design/components/select?theme=light"
+    ],
+    "screenshotsHeAttached": [
+      "assets/image-1d9126f7-ebbb-4f91-877e-d39156c333b6.png — MUI Select: Outlined/Standard/Filled Age, floating label, triangle caret, menu None/Ten/Twenty/Thirty",
+      "assets/image-4e693571-4c19-b259-bc3eea607055.png — AntD Select Examples: Lucy, in-field spinner, blue focus glow, Select with search"
+    ]
+  },
+  "claimedArchetype": {
+    "id": "combobox",
+    "recipe": "combobox@1",
+    "statusIndexSources": [
+      "@mui/material@9.2.0#Autocomplete",
+      "antd@5.29.3#Select"
+    ],
+    "protocol": "recipe/fixtures/library-comboboxes.ts#COMBOBOX_PAIRED_PROOF_PROTOCOL",
+    "note": "The recipe-path proof is Combobox, not Select. V41 human grade language was 'combo boxes'."
+  },
+  "v42CompileSource": {
+    "mui": {
+      "package": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Autocomplete",
+      "not": "Select",
+      "sourceRoot": "recipe/sandboxes/input-field-mui/node_modules/@mui/material",
+      "identity": "mui.autocomplete.recipe-combobox",
+      "citations": {
+        "anatomy": "recipe/fixtures/library-comboboxes.ts muiComboboxSource — Autocomplete.js:730-768 renderInput, Autocomplete.js:772-791 Popper>Paper>Listbox",
+        "listPadding": "Autocomplete.js:342 AutocompleteListbox padding: '8px 0'",
+        "optionPaddingX": "Autocomplete.js:360-361 option paddingLeft/Right 16",
+        "emptyLoadingSlot": "Autocomplete.js:330-332 AutocompleteLoading/AutocompleteNoOptions padding: '14px 16px' — named receipt on remint, not a compile channel"
+      }
+    },
+    "antd": {
+      "package": "antd",
+      "version": "5.29.3",
+      "exportName": "Select",
+      "not": "AutoComplete",
+      "sourceRoot": "antd@5.29.3 package tarball, inspected under temporary npm prefix",
+      "identity": "antd.select.recipe-combobox",
+      "citations": {
+        "anatomy": "recipe/fixtures/library-comboboxes.ts antdComboboxSource — antd/es/select/index.js RcSelect, rc-select OptionList",
+        "listPadding": "examples/antd/tokens/antd.dtcg.json padding-xxs 4px",
+        "optionPaddingX": "antd.dtcg.json control-padding-horizontal-sm 8 / control-padding-horizontal 12"
+      }
+    },
+    "sharedFixtureChrome": {
+      "mechanism": "cloneTokens from recipe/fixtures/combobox.ts, then mutate a short library-named list (v42 remint added overlay fill/border/radius, listPadding, optionPaddingX)",
+      "content": "Assignee / Choose a person / Ada Lovelace / Grace Hopper / Linus Torvalds / Margaret Hamilton / No options / Loading…",
+      "occupancy": "recipe always emits combobox/control/leading as a filled square (controlSize × controlSize) — not a library avatar or startAdornment",
+      "source": "recipe/fixtures/combobox.ts content + recipe/recipes/combobox.ts controlInstance"
+    },
+    "honesty": "Not leftover-only. Overlay chrome reminted from named package tokens. Content, leading occupancy squares, label-above, and empty/loading overlay TEXT are still canonical-fixture / recipe anatomy, applied to both libraries."
+  },
+  "officialPagesFetched": {
+    "muiSelect": {
+      "url": "https://mui.com/material-ui/react-select/",
+      "component": "Select",
+      "visualFacts": [
+        "Age label as InputLabel — outlined variant floats and breaks the top border",
+        "Triangle caret (ArrowDropDown), not a chevron",
+        "Menu items are plain text: None / Ten / Twenty / Thirty",
+        "No typing field in the basic demo, no avatars, no occupancy squares, no Loading… overlay",
+        "Variants: Outlined / Standard / Filled"
+      ],
+      "muiOwnRedirect": "The Select page itself says: if you want combobox, multiselect, autocomplete, async or creatable support, use Autocomplete — it is meant as an improved react-select/downshift."
+    },
+    "muiAutocomplete": {
+      "url": "https://mui.com/material-ui/react-autocomplete/",
+      "component": "Autocomplete",
+      "visualFacts": [
+        "Official combo-box demo uses a Movie TextField — editable input + suggestion panel",
+        "Country select uses real flag startAdornment, not a generic occupancy square",
+        "Asynchronous demo shows a progress/loading state on the field",
+        "Default options are text (movies) unless renderOption/startAdornment is supplied",
+        "Empty/loading listbox slots use AutocompleteNoOptions / AutocompleteLoading padding 14px 16px"
+      ]
+    },
+    "antdSelect": {
+      "url": "https://ant.design/components/select?theme=light",
+      "component": "Select",
+      "visualFacts": [
+        "Basic Usage: Lucy selected, thin grey border, light grey downward chevron",
+        "Loading replaces the chevron with an in-field spinner — not overlay text 'Loading…'",
+        "Focus is a soft blue outer glow",
+        "Open menu highlights Lucy with a light blue row",
+        "Select with search uses placeholder 'Select a person' — still no Assignee label-above, no occupancy squares"
+      ]
+    },
+    "antdAutoComplete": {
+      "url": "https://ant.design/components/auto-complete?theme=light",
+      "component": "AutoComplete",
+      "visualFacts": [
+        "AntD names this a different component from Select",
+        "Docs: AutoComplete is an input box with text hints; users can type freely",
+        "Docs: Select is selecting among given choices",
+        "v42 did not compile this export"
+      ]
+    }
+  },
+  "sideBySide": {
+    "muiSelectVsOurMint": "Different official component. He compared MUI Select (Age, floating label, caret, Ten/Twenty/Thirty) to our MUI Autocomplete compile wearing Assignee / Ada Lovelace / occupancy squares / No options overlay.",
+    "antdSelectVsOurMint": "Same official component name (Select), different chrome. Official Basic Usage is Lucy + chevron + in-field spinner. Our AntD mint uses the shared Combobox recipe: Assignee label-above, occupancy squares, overlay 'No options' / 'Loading…'.",
+    "muiAutocompleteVsOurMint": "Same family, named deltas — not a silent Select loss.",
+    "antdAutoCompleteVsOurMint": "We did not compile AutoComplete. Comparing to that page is a different target."
+  },
+  "whyTjSelectTabsDoNotMatch": {
+    "primary": "wrong-official-page-for-mui",
+    "also": [
+      "mixed-family compile: MUI Autocomplete + AntD Select under one Combobox recipe",
+      "shared fixture content and occupancy squares on both libraries",
+      "empty/loading as overlay TEXT (recipe) vs AntD in-field spinner / MUI AutocompleteLoading 14/16 slot",
+      "label-above (recipe semantic explicit-id) vs MUI floating InputLabel on Select"
+    ],
+    "notPrimary": [
+      "stale compile of a different package version — pins are @mui/material@9.2.0 and antd@5.29.3",
+      "silent visual loss of MUI Select chrome we claimed to mint — we claimed Autocomplete",
+      "token/theme drift as the whole explanation — v42 did remint named overlay fill/border/radius/listPadding/optionPaddingX"
+    ]
+  },
+  "doesMintLookLikeOfficialAutocomplete": {
+    "closerThanSelect": true,
+    "match": false,
+    "namedDeltas": [
+      "leading occupancy squares vs official Autocomplete default (no startAdornment) or Country-select flags",
+      "fixture copy Assignee / Ada Lovelace vs official Movie / country names",
+      "label-above vs MUI TextField/InputLabel (often floating on outlined)",
+      "overlay 'Loading…' / 'No options' TEXT vs MUI AutocompleteLoading 14px 16px slot (named remint receipt) and vs AntD Select in-field spinner",
+      "AntD leg is Select, not AutoComplete — recipe still applies Autocomplete-family anatomy (leading, overlay empty/loading text) onto Select tokens",
+      "popup control is a recipe square slot, not the official MUI caret or AntD chevron glyph"
+    ]
+  },
+  "fork": {
+    "A": {
+      "title": "Keep Combobox as Autocomplete-family; change the human reference to official Autocomplete / Select-with-search pages; remint only if compile ≠ that source",
+      "when": "The proof target stays Combobox — what we claimed, what MUI compiled, what V41 graded as combo boxes"
+    },
+    "B": {
+      "title": "Change the proof target to Select",
+      "when": "TJ's visual standard is the Select pages he just opened — that is a different recipe (MUI Select, not Autocomplete; AntD Select without Autocomplete-family leading/overlay-text anatomy)"
+    },
+    "C": {
+      "title": "Code refresh: re-vendor current MUI/AntD and remint against the pages he sent",
+      "when": "Later tactic after A or B. Doing C first against Select pages would remint Autocomplete as if it were Select."
+    },
+    "D": {
+      "title": "Named fail: we compiled fixtures / wrong component and the remint is not source-faithful",
+      "when": "Not the honest complete description. We compiled named packages (Autocomplete + Select). Fixture occupancy/content and mixed family are a named honesty gap, already flagged in signed-archetype-source-audit.json — not a silent wrong-component fail stamp."
+    },
+    "recommendedDefault": "A",
+    "why": "The claimed archetype is Combobox. MUI's own Select page redirects combobox/autocomplete seekers to Autocomplete. v42 compiled that export. AntD compiled Select, so A still requires TJ to accept Select-with-search (not Basic Lucy, not AutoComplete) as the AntD human reference — or to pick B and split the AntD target.",
+    "questionOnlyTjCanAnswer": "Is the Combobox proof supposed to look like official Select (the pages you just opened), or like official Autocomplete / Select-with-search (what the recipe actually compiled)?"
+  },
+  "blockedUntilDecision": [
+    "v42 remint acceptance writeup",
+    "react-day-picker F1 exam",
+    "any Combobox live remint PREPARE"
+  ]
+}

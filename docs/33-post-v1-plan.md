@@ -109,6 +109,30 @@ All offline, zero Figma writes, zero hills.
 
 **Product v1:** remains **INCOMPLETE** — F1's whole-corpus/unseen-library clause is not proven on the recipe path (what is proven is zero-silent inversion per archetype on its measured two-library pair).
 
+### OPEN owner decision (2026-08-30) — Combobox human reference
+
+Not a remint pass. V41 signoff stands (`163:35981`). V42 stay page `183:70641` remains. `overallSuccess` stays false. Day-picker was **not** started.
+
+TJ opened official **Select** docs ([MUI Select](https://mui.com/material-ui/react-select/), [AntD Select](https://ant.design/components/select?theme=light)) and said the minted comboboxes do not look like those pages. That is an open fork, not a grade:
+
+- **What we claimed:** Combobox (`combobox@1`).
+- **What v42 compiled:** `@mui/material@9.2.0` **Autocomplete** (sandbox `node_modules`) + `antd@5.29.3` **Select** (tarball), wearing shared fixture content (Assignee / Ada Lovelace / occupancy squares / overlay “No options” / “Loading…”).
+- **Why the Select tabs don’t match:** primarily the **wrong official page for MUI** (MUI’s own Select page sends combobox seekers to Autocomplete). AntD is the right component name but not the official Basic Usage chrome. Not a silent Select loss, and not a leftover-only compile — overlay tokens were reminted from named package values; occupancy/content/label-above are still recipe fixture anatomy.
+- **Does it look like official Autocomplete?** Closer family, named deltas (occupancy squares vs flags/none; label-above vs floating InputLabel; overlay loading text vs MUI 14/16 status slot or AntD in-field spinner; recipe square popup slot vs caret/chevron).
+
+**Fork (only TJ chooses):**
+
+| | Choice |
+|---|---|
+| **A** (recommended default if the proof stays Combobox) | Keep Autocomplete-family; change the human reference to [MUI Autocomplete](https://mui.com/material-ui/react-autocomplete/) and AntD Select-with-search. Remint only if compile ≠ that source. |
+| **B** | Change the proof target to Select (different recipe; the pages TJ just opened). |
+| **C** | Re-vendor current MUI/AntD and remint — later, after A or B. Not first. |
+| **D** | Named fail for compiling fixtures / the wrong component. Not the honest complete description. |
+
+**Question only TJ can answer:** is the Combobox proof supposed to look like official **Select**, or like official **Autocomplete / Select-with-search**?
+
+Evidence: [`recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json`](../recipe/evidence/combobox-select-vs-autocomplete-owner-decision.json). Phase 2 remint grade and Phase 4 day-picker stay blocked on this fork.
+
 ---
 
 ## Next concrete action
