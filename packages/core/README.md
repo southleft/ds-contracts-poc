@@ -1,5 +1,9 @@
 # @ds-contracts/core
 
+> **Not the v1 proof surface.** This package is the universal-contract
+> emitter surface. Recipe-IR is not exported from it. Product v1 is
+> incomplete (F1). See the repo README and `docs/32-recipe-ir-pivot.md`.
+
 What an emitter needs from the ds-contracts engine, published. A contract is
 the single source of truth; an emitter is one projection of it — a pure
 function `(contract, ctx) → files`. This package is the contract for that

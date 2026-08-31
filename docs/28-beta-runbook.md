@@ -1,5 +1,10 @@
 # 28 — Beta Tester Runbook
 
+> **Current state (2026-08-30).** Tracks A–C below are the
+> universal-contract beta. They are not the recipe-IR v1 proof. Combobox,
+> table, and calendar are live-proven on the recipe path; product v1 is
+> still incomplete (F1). See [docs/32](32-recipe-ir-pivot.md).
+
 *You have never seen this repo. This page gets you through one full journey,
 tells you exactly what you are supposed to see, names the walls you WILL hit
 before you hit them, and gives you a structured place to file what you find.*

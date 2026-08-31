@@ -1,6 +1,12 @@
 # BETA — the one journey that is supported end-to-end
 
-*Read this first if you just cloned the repo and want to see it work.*
+> **Current state (2026-08-30).** This page is the **Flowbite capture-path**
+> golden journey (path B). It is supported and receipted. It is **not** the
+> v1 proof. Recipe-IR proved five archetypes live with owner grades;
+> product v1 is incomplete (F1). The playground still runs this page's
+> envelope. See [docs/32](32-recipe-ir-pivot.md).
+
+*Read this first if you just cloned the repo and want to see the capture-path journey work.*
 
 ## What this product guarantees (and what it does not)
 

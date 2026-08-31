@@ -54,6 +54,14 @@ justification, so the exclusion itself cannot rot silently).
 
 Depending on what you touched, also: `npm run plugin:check` (the plugin engine against the mocked canvas), `npm run core:browser-check` (the engine stays browser-safe), `npm run verify:package`, `npm run test:onboarding`.
 
+If you touched `recipe/` or recipe-path docs: `npm run recipe:pivot-status:check`
+and the archetype gate you changed (`recipe:button:check`,
+`recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`,
+`recipe:calendar:check`). **Do not flip `overallSuccess`.** **Do not restamp
+hashed RECORDs.** Product v1 is incomplete (F1) until a true v1-completion
+record says otherwise. The playground still drives the pre-pivot
+universal-contract path — do not treat a playground run as recipe-IR proof.
+
 Release candidates have a separate, approval-gated procedure. Follow
 [docs/27 — Release Process](docs/27-release-process.md) and record each result
 in [RELEASE_CHECKLIST.md](RELEASE_CHECKLIST.md). A manifest version is not

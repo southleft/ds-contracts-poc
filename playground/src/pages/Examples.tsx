@@ -27,8 +27,9 @@ export function Examples() {
     <div className="examples">
       <h1>Examples</h1>
       <p className="examples__sub">
-        Every card is rendered live by the same emitter you get in the playground — pick one to
-        open it there, contract and all.
+        Every card is rendered live by the same <b>pre-pivot</b> emitter you get
+        in the playground — pick one to open it there, contract and all. These
+        are universal-contract examples, not recipe-IR v1 proof.
       </p>
       <div className="examples__grid">
         {examples.map((e) => (

@@ -1,5 +1,14 @@
 # Choose Your Path — one truth, three situations
 
+> **Current state (2026-08-30).** Journeys A–C below are the
+> **universal-contract** adoption paths (plugin Send / `onboard` / reconcile).
+> They still run. They are **not** the v1 proof. Recipe-IR proved five
+> archetypes live with owner grades; product v1 is incomplete (F1). See
+> [docs/32](32-recipe-ir-pivot.md). Combobox, table, and calendar are
+> live-proven on the recipe path — do not read the capture-path
+> “ATTEMPTED — BOUNDED” table in [docs/23 §C.1.1](23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut)
+> as “those archetypes have no proof.”
+
 **This page is the canonical statement of the adoption paths.** Every other
 document that mentions "the journeys" links here; if another page appears to
 disagree with this one about how many paths there are or what a path is

@@ -1452,6 +1452,25 @@ label {
 
 /* chunk-failure banner — one calm strip, never a raw red error */
 
+.pivot-banner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 8px 16px;
+  border-bottom: 1px solid var(--pg-border);
+  background: var(--pg-surface);
+  color: var(--pg-fg);
+  font-size: 12.5px;
+  line-height: 1.45;
+  flex-shrink: 0;
+  text-align: center;
+}
+
+.pivot-banner a {
+  color: var(--pg-accent);
+}
+
 .chunk-banner {
   display: flex;
   align-items: center;

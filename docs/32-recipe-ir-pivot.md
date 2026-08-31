@@ -1,5 +1,23 @@
 # 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
 
+> **Current state (2026-08-30, merge `4caebfc5b` and later) — read this
+> first.** The product is recipe-IR: archetype recipes compile to a
+> canonical Figma-capability IR; every fact is named or carried. Five
+> archetypes have stayed live Scratch mints and owner-signed human grades
+> — Button (`183:69150`), Input (`115:295378`), Combobox (`163:35981`),
+> Table (`173:48924`), Calendar (`181:64873`). Product **v1 is
+> incomplete**: F1 (whole-corpus / unseen-library on the recipe path) is
+> unmet; `overallSuccess` stays false for Button, Input, Combobox, and
+> Calendar (Table keeps the `true` its v32 record already set). Named
+> leftover work: Combobox chrome remint after hardening; signed cleanup
+> of older Calendar Scratch pages; npm publish deferred. Checks:
+> `npm run recipe:button:check`, `recipe:input-field:check`,
+> `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`,
+> `recipe:pivot-status:check`. Do not flip `overallSuccess`. Do not
+> restamp hashed RECORDs. The rest of this file is the climb chronology;
+> later status sentences are superseded by this box, [§E4 applied](#e4-applied-2026-08-30),
+> and the [merge execution record](#merge-execution-2026-08-30).
+
 > **Current correction status (2026-08-30 ~16:10 UTC-5; supersedes status
 > claims below; historical evidence bytes are not rewritten):** Input V85
 > live human grade **passed**. TJ Pitre reviewed the restored+gridded page

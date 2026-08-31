@@ -1,5 +1,10 @@
 # @ds-contracts/schema
 
+> **Not the v1 proof surface.** This package is the universal-contract
+> schema (spec v17). Recipe-IR is a separate envelope under `recipe/` and
+> is not published here. Product v1 is incomplete (F1). See the repo
+> README and `docs/32-recipe-ir-pivot.md`.
+
 The ds-contracts component contract schema, as a package:
 
 - **The Zod document** (`src/contract-schema.ts`) — the single live schema (spec v17) that validates every contract, types the generators, and emits the JSON Schema. The reference repo's `scripts/contract-schema.ts` is a re-export shim over this source, so repo and package cannot drift.

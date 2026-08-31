@@ -11,6 +11,11 @@ related: [10-history, 11-roadmap]
 
 # What does NOT work (yet)
 
+> **Historical (2026-07-21).** Live status after the recipe-IR pivot:
+> [docs/32](../32-recipe-ir-pivot.md). Product v1 is incomplete (F1).
+> Combobox, table, and calendar are no longer “unproven” on the recipe
+> path; they are live-minted and owner-signed.
+
 This is the most useful document for continuing the work. It is deliberately
 blunt. Do not treat any of these as solved.
 

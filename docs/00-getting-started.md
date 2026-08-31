@@ -1,6 +1,16 @@
 # Getting Started — What, Why, and How
 
-New here? This page is the five-minute orientation. Everything else in the docs assumes you've read it. (Prefer to see it before reading about it? The [public playground](https://ds-contracts-playground.pages.dev) runs the same engine in your browser — no clone, no setup.)
+> **Current state (2026-08-30).** This page orients the **universal-contract**
+> path (`contracts/*.contract.json` → generate / bundle / differ). That path
+> still ships. The **v1 proof surface** is recipe-IR: five archetypes
+> (Button, Input, Combobox, Table, Calendar) have stayed live mints and
+> owner-signed grades; product v1 is incomplete (F1 whole-corpus /
+> unseen-library). The [playground](https://ds-contracts-playground.pages.dev)
+> still runs this page's engine, not recipe-IR. Start with
+> [docs/32](32-recipe-ir-pivot.md) and [docs/26](26-v1-definition.md) if you
+> need to know what v1 actually proved.
+
+New here? This page is the five-minute orientation for the still-shipping contract loop. Everything else in the docs assumes you've read it. (Prefer to see that older loop before reading about it? The [public playground](https://ds-contracts-playground.pages.dev) runs `core/` in your browser — no clone, no setup — and is **not** the v1 proof surface.)
 
 ## What is this?
 

@@ -1,5 +1,11 @@
 # Archetype cases — SEALED EXPECTATIONS vs. MEASURED OUTCOME
 
+> **Historical capture-path exam.** The “not proven” sentence for table and
+> combobox below is the **capture** cut in docs/23 §C.1.1. On the recipe-IR
+> path (2026-08-30) Combobox, Table, and Calendar have stayed live mints
+> and owner-signed grades; product v1 is still incomplete (F1). Do not
+> restamp this sealed exam. See `docs/32-recipe-ir-pivot.md`.
+
 *Hand-authored. Not generated — `EXPECTATIONS.md` is the generated capability
 matrix; this file is the adjudication of a set of predictions that were written
 down before the cases were run, and it is the only place the misses are counted.*

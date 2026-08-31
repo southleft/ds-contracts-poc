@@ -1,5 +1,12 @@
 # The Bridge — Why This Exists
 
+> **Current state (2026-08-30).** This is the narrative case for a
+> machine-readable contract between design and code. The **v1 proof** of that
+> idea is now recipe-IR (archetype recipes + Figma-capability IR + receipts),
+> not the universal `*.contract.json` envelope this page describes. Five
+> archetypes are live-minted and owner-signed; product v1 is still incomplete
+> (F1). See [docs/32](32-recipe-ir-pivot.md).
+
 Every organization that takes design systems seriously eventually splits into two camps, usually without noticing.
 
 Some organizations come in from the **code side**. Their design system is an npm package. The components are real, tested, and shipped — and the design files are an approximation of them, redrawn by hand, aging from the moment they're published. Designers work against a picture of the product, not the product. When an engineer adds a prop or changes a default, no one redraws anything, and the picture quietly becomes fiction.

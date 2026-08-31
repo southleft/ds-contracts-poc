@@ -12,6 +12,11 @@ related: [08-status-what-doesnt-work, 09-testing-and-gates]
 # What works
 
 > **Currency (2026-08-17):** this status page was verified on 2026-07-21. The live first-party corpus is now **56 component contracts** and 230/230 evals. The "51 repo contracts" line below is the July 21 snapshot.
+>
+> **2026-08-30:** recipe-IR is the v1 proof surface (five live-minted,
+> owner-signed archetypes). Product v1 is incomplete (F1). This page
+> remains a July snapshot of the universal-contract path. Live status:
+> [docs/32](../32-recipe-ir-pivot.md).
 
 Read this together with `08-status-what-doesnt-work.md`. Green gates are **not**
 "it works" — they are "these checks pass." Each item below states its evidence

@@ -1310,6 +1310,7 @@ function specIndex(receipt: CoverageReceipt): { route: string; html: string } {
 <p class="eyebrow">The specification</p>
 <h1>The contract, field by field</h1>
 <p class="lede">This reference is <strong>generated from the schema</strong> — <code>scripts/contract-schema.ts</code>, the same Zod document that validates every contract, typed the generators, and emits the JSON Schema. Docs that are rendered from the spec cannot drift from it.</p>
+<p class="section-note"><strong>Current state (2026-08-30).</strong> This is the universal-contract schema (v17). Recipe-IR is a separate envelope and the v1 proof surface; product v1 is incomplete (F1). See <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a>.</p>
 
 ${section(
   "coverage",

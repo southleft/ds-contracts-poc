@@ -1,5 +1,12 @@
 # Contract Playground — Plan
 
+> **Current state (2026-08-30).** This playground still imports `core/` and
+> drives the **pre-pivot universal-contract** path. It was **not** rewritten
+> onto recipe-IR. It is not the v1 proof surface. A playground mint or
+> refusal is not recipe-IR evidence. Product v1 is incomplete (F1). See
+> `docs/32-recipe-ir-pivot.md` and `recipe/README.md`. The banner in
+> `src/App.tsx` is the reader-facing disclosure.
+
 **Goal**: a public, browser-only playground (in the spirit of json-render.dev/playground)
 where anyone can experience the contract loop without cloning the repo:
 import a design or code, watch a contract be proposed, edit it under schema

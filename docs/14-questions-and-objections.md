@@ -1,5 +1,11 @@
 # 14 · Questions & Objections
 
+> **Current state (2026-08-30).** Answers below cite the universal-contract
+> path. Recipe-IR is the v1 proof surface; product v1 is incomplete (F1).
+> Combobox, table, and calendar are live-proven on that path — an objection
+> that “those classes are only experimental” is stale. See
+> [docs/32](32-recipe-ir-pivot.md).
+
 Every hard question this project should expect, asked the way a skeptic would ask it, answered with receipts. If you're evaluating the concept, start here; if you find a hard question missing, that's a contribution.
 
 ---

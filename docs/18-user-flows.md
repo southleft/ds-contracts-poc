@@ -1,5 +1,10 @@
 # 18 — User Flows
 
+> **Current state (2026-08-30).** Personas below live on the
+> **universal-contract** path. Recipe-IR is the v1 proof surface (five
+> live-minted, owner-signed archetypes); product v1 is incomplete (F1).
+> See [docs/32](32-recipe-ir-pivot.md).
+
 > **Path:** this page cuts by **persona** (designer / engineer / lead), not by journey — for the path-shaped cut, see [Choose Your Path](00-choose-your-path.md).
 
 *The code↔design loop as two people actually live it: every step named,

@@ -1,5 +1,12 @@
 # Handoff — the steps a human has to take
 
+> **Current state (2026-08-30).** Recipe-IR landed on main. Product v1 is
+> incomplete (F1). The human-only leftovers that matter for the pivot are
+> listed in [docs/32's merge execution](32-recipe-ir-pivot.md#merge-execution-2026-08-30)
+> (Combobox chrome remint, Calendar page cleanup, npm deferred). The
+> snapshot-refresh item below is the capture-path parity loop and is
+> unchanged.
+
 Everything in this repository is built and gated so that development never
 waits on a person. This file is the exception list: the things that **cannot**
 be done from CI or an agent session, why, and what already stands in for them

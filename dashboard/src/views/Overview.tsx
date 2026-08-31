@@ -46,6 +46,8 @@ export function Overview() {
         <p className="text-muted-foreground mt-2 max-w-3xl text-sm">
           A machine-readable contract is the single source of truth between the Figma library and the React codebase.
           Everything on this page is read live from the governed artifacts — nothing is typed in by hand.
+          This hub visualizes the <strong>universal-contract</strong> corpus. Recipe-IR is the v1
+          proof surface (five live-minted, owner-signed archetypes); product v1 is incomplete (F1).
         </p>
       </div>
 

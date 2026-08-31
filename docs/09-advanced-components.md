@@ -1,5 +1,13 @@
 # 9 · Advanced Components — the DataTable Round
 
+> **Current state (2026-08-30).** This page is the **July 2026** DataTable
+> composition round on the universal-contract path (hand-authored
+> `ds.table` family). It is historical. Table and Calendar are now
+> live-proven on the **recipe-IR** path (Table page `173:48924`, Calendar
+> page `181:64873`, both owner-signed). Product v1 is still incomplete
+> (F1). See [docs/32](32-recipe-ir-pivot.md). Do not read this round as
+> “table/calendar are only experimental.”
+
 Round 5 (July 3, 2026) pushed composition to compound, data-shaped components — the class that includes data tables and date pickers — and packaged the system as a real npm library. Eight components now generate from contracts to both surfaces; 24/24 evals pass. <!-- docs-check:ignore -->
 
 ## The table family

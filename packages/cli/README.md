@@ -1,5 +1,11 @@
 # @ds-contracts/cli
 
+> **Not the v1 proof surface.** This package is the **universal-contract**
+> CLI (extract / generate / bundle / onboard). Recipe-IR lives under
+> `recipe/` in the reference repo, is not exported here, and npm publish
+> of a recipe surface is deferred. Product v1 is incomplete (F1). See the
+> repo README and `docs/32-recipe-ir-pivot.md`.
+
 `ds-contracts` — contracts as the deterministic bridge between design and code. Every verb is a thin shell over the same engine the reference repo's npm scripts run, esbuild-bundled so an install has **zero required runtime dependencies** (`playwright-core` is optional, loaded lazily by `extract --computed` only).
 
 ```

@@ -1,5 +1,10 @@
 # Design System Contracts — Spec draft v0.1
 
+> **Current state (2026-08-30).** This directory is the **universal-contract**
+> spec draft (schema 17, conformance kit). The v1 proof surface is
+> recipe-IR in the reference repo (`docs/32-recipe-ir-pivot.md`); product
+> v1 is incomplete (F1). This draft is not rewritten as recipe-IR.
+
 **Status:** Draft (Phase 3 groundwork). Not yet a multi-vendor standard.  
 **Implements against:** this repository's tooling and `@ds-contracts/schema`.  
 **Normative companion:** [docs/02-contract-spec.md](../docs/02-contract-spec.md) (working prose) + emitted JSON Schema via `npm run schema`.

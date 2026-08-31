@@ -10,7 +10,7 @@ import { CODE_TO_FIGMA, FIGMA_TO_CODE, HOPS } from '../engine/tours';
 export function Flow() {
   return (
     <div className="landing flowpage">
-      <p className="landing__kicker">How it flows</p>
+      <p className="landing__kicker">How it flows — pre-pivot envelope</p>
       <h1>Figma ↔ code, through the contract.</h1>
       <p className="landing__pitch">
         There is no Figma-to-code converter here and no code-to-Figma converter. There is one pure
@@ -27,7 +27,7 @@ export function Flow() {
         walkthroughs below run the engine in your browser over committed inputs and show the
         receipts as they are produced; anything that cannot run here (bundle assembly, the
         round-trip comparator, the canvas itself) is labelled as a preview or a replay of a committed
-        receipt.
+        receipt. These tours are the pre-pivot envelope, not recipe-IR v1 proof.
       </p>
 
       <div className="flowpage__hops" aria-label="The five hops">

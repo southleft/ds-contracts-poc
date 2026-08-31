@@ -11,6 +11,9 @@ related: [03-determinism, 09-testing-and-gates]
 
 # Roadmap
 
+> **Historical (2026-07-21).** Live status after the recipe-IR pivot:
+> [docs/32](../32-recipe-ir-pivot.md). Product v1 is incomplete (F1).
+
 Ordered by impact toward the North Star (`02`). Every item preserves determinism
 (`03`) — none introduces AI into the conversion.
 

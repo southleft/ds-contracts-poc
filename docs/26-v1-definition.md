@@ -1,5 +1,15 @@
 # 26 · Definition of v1
 
+> **Current state (2026-08-30).** Recipe-IR landed. The capture-path class
+> rows in the table below are not rewritten. The additive recipe-path row
+> is the one that names a live mint plus an owner grade: five archetypes
+> satisfy offline gate, stayed mint, and owner human grade;
+> `overallSuccess: true` holds today only for table/data-grid. Product
+> **v1 is incomplete** because F1 (whole-corpus / unseen-library on the
+> recipe path) is unmet. Do not flip `overallSuccess`. Do not restamp
+> hashed RECORDs. See [docs/32 §E4 applied](32-recipe-ir-pivot.md#e4-applied-2026-08-30)
+> and the [merge execution record](32-recipe-ir-pivot.md#merge-execution-2026-08-30).
+
 This document is the release contract for v1. It turns the release audit into
 binary requirements: v1 is ready only when every requirement below has the
 named evidence and every audit task ranked P0 or P1 is closed. A feature being
@@ -122,6 +132,11 @@ at the point of the related claim:
 5. **Coverage beyond the measured slice:** no whole-library, primitives-only,
    or exhaustive-correctness promise. The unmeasured long tail remains post-v1
    research ([Known Limitations §C.1](23-known-limitations.md#c1-coverage--how-much-of-a-library-is-actually-captured)).
+
+Entry 2 is the **capture-path** register and stays pinned. On the recipe
+path, Combobox, Table, and Calendar have stayed live mints and owner-signed
+grades ([docs/32](32-recipe-ir-pivot.md)) but are **not** product-v1: F1 is
+unmet and `overallSuccess` is not flipped except Table's existing v32 pin.
 
 An item leaves this register only when its new capability has an adversarial
 check or committed receipt, the relevant docs are updated, and the release

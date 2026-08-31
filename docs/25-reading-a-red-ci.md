@@ -1,5 +1,11 @@
 # Reading a red CI
 
+> **Current state (2026-08-30).** Recipe-IR gates run in the fast lane:
+> `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`,
+> `recipe:table:check`, `recipe:calendar:check`, `recipe:pivot-status:check`.
+> Product v1 is incomplete (F1). Do not flip `overallSuccess` to make a
+> gate green.
+
 Until 2026-08-04 this repository had no `.github/` directory. In that historical
 snapshot, thirty-three gate scripts existed and every one of them fired only
 when a human typed it — which

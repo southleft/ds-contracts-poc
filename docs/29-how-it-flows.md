@@ -1,5 +1,11 @@
 # 29 — How It Flows: Figma ↔ code through contracts
 
+> **Current state (2026-08-30).** This page walks the five hops of the
+> **universal-contract** path. That path still ships. The v1 proof is
+> recipe-IR ([docs/32](32-recipe-ir-pivot.md)); the playground's
+> “How it flows” tours replay *this* envelope, not recipe-IR. Product v1
+> is incomplete (F1).
+
 This is the one document that explains, verb by verb and file by file, how a
 fact travels from Figma to code and from code to Figma — and why it always
 travels *through the contract* and never directly between the two surfaces.

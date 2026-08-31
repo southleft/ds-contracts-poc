@@ -11,13 +11,16 @@ related: [01-concept, 02-thesis-and-north-star, 03-determinism]
 
 # ds-contracts-poc — read me first
 
-> **⚠️ DATED SNAPSHOT — frozen 2026-07-21 (banner added 2026-07-29).** This
-> package describes the project as it stood on 2026-07-21; its status numbers
-> (the 146-check suite, the broken composite Modal) are two generations stale
-> and are NOT updated. Live status is `ROADMAP.md`, `docs/23-known-limitations.md`
-> and `MILESTONES.md` at the repo root. What stays durable here are the
-> architectural constraints — agent-driven emitter delivery is a dead end, and
-> the mock-fidelity discipline — not the numbers.
+> **⚠️ DATED SNAPSHOT — frozen 2026-07-21 (banner added 2026-07-29; pivot
+> pointer 2026-08-30).** This package describes the project as it stood on
+> 2026-07-21; its status numbers (the 146-check suite, the broken composite
+> Modal) are stale and are NOT updated. **Live status after the recipe-IR
+> pivot is [docs/32](../32-recipe-ir-pivot.md)** (five archetypes
+> live-minted and owner-signed; product v1 incomplete, F1 unmet), plus
+> `ROADMAP.md`, `docs/26-v1-definition.md`, `docs/23-known-limitations.md`
+> and `MILESTONES.md`. What stays durable here are the architectural
+> constraints — agent-driven emitter delivery is a dead end, and the
+> mock-fidelity discipline — not the numbers.
 
 You are being handed a proof-of-concept called **ds-contracts-poc** (repo:
 `github.com/southleft/ds-contracts-poc`, PUBLIC, MIT). This directory is a

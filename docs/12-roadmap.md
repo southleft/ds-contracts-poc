@@ -1,5 +1,13 @@
 # 12 · Roadmap
 
+> **Current state (2026-08-30).** The recipe-IR pivot landed on main
+> (`4caebfc5b`). Five archetypes are live-minted and owner-signed. Product
+> **v1 is incomplete** (F1 whole-corpus / unseen-library). This page's four
+> phases still describe the *spec* roadmap (harden → brownfield → spec
+> candidacy → governance). They do not restate the pivot. See
+> [docs/32](32-recipe-ir-pivot.md) and the current-state box on
+> [ROADMAP.md](../ROADMAP.md).
+
 Where this project intends to go, in public. Each phase has a **falsifiable exit criterion** — the same standard the rest of the repo holds itself to. Phases overlap in practice; the exit criteria don't move.
 
 **The end state this roadmap points at:** a vendor-neutral, independently implementable **component contract specification** — doing for the component API layer what the DTCG spec did for tokens — with this repository as its reference implementation and conformance suite. Whether the spec ultimately lives here or graduates to a community-governed home, this is the candidate.

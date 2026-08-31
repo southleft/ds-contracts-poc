@@ -1158,3 +1158,24 @@ message; docs/23 §D.12–D.28 register every closure with its gate.
   name with the `ds-contracts migrate` codemod; 812 committed JSON files
   rewritten; `contracts:migrate:check` in the fast lane. BREAKING.
 
+## 2026-08-30 — Recipe-IR pivot merged to main
+
+The universal-contract envelope is no longer the v1 proof surface.
+`pivot/recipe-ir-v1` merged at `4caebfc5b`: archetype recipes compile to a
+canonical Figma-capability IR; every fact is named or carried.
+
+- **Five archetypes live-minted and owner-signed:** Button (`183:69150`),
+  Input (`115:295378`), Combobox (`163:35981`), Table (`173:48924`),
+  Calendar (`181:64873`). Offline `recipe:<archetype>:check` gates green;
+  `recipe:pivot-status:check` green.
+- **Product v1 is incomplete.** F1 (whole-corpus / unseen-library on the
+  recipe path) is the named blocker. `overallSuccess` stays false for
+  Button, Input, Combobox, and Calendar; Table keeps the `true` its v32
+  record already set. Hashed RECORDs are not restamped.
+- **Named leftover work:** Combobox chrome remint after hardening; signed
+  cleanup of older Calendar Scratch pages; npm publish deferred.
+- Receipts: [docs/32](docs/32-recipe-ir-pivot.md),
+  [docs/26 V1-CLASS-03](docs/26-v1-definition.md),
+  `recipe/evidence/*-human-signoff.json`,
+  `recipe/evidence/merge-execution-v1.json`.
+

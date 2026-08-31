@@ -1,5 +1,14 @@
 # 23 — Known Limitations
 
+> **Current state (2026-08-30).** This inventory is the **capture /
+> universal-contract** cost sheet. It still applies to Journeys A–C,
+> `extract --computed`, and the numbers in [docs/24](24-what-works.md).
+> It is **not** a claim that Combobox, Table, or Calendar have no proof:
+> those three (plus Button and Input) have stayed live recipe-IR mints and
+> owner-signed grades. Product v1 is still incomplete (F1). See
+> [docs/32](32-recipe-ir-pivot.md). §C.1.1 below remains the capture-path
+> cut; do not silently reclassify those rows as recipe-IR evidence.
+
 *Written for someone deciding whether to adopt this. It is the complete
 inventory of what this tool does **not** do.*
 
@@ -1512,6 +1521,16 @@ pipeline, with engine-change cost per library trending toward zero
 evidence supports it. **It is not a claim that your library can be captured.**
 
 ### C.1.1 Which component archetypes are proven — the actionable cut
+
+> **This table is the capture path.** `ATTEMPTED — BOUNDED` for
+> select/combobox and table/data-grid, and the “date picker appears in
+> zero committed contracts” sentence later in this section, describe
+> `extract --computed` / committed `contracts/`. On the **recipe-IR**
+> path, Combobox (`163:35981`), Table (`173:48924`), and Calendar
+> (`181:64873`) have stayed live mints and owner-signed grades. That
+> does not move these rows, and it does not make product v1 complete
+> (F1 unmet). See [docs/26 V1-CLASS-03](26-v1-definition.md) and
+> [docs/32 §E4](32-recipe-ir-pivot.md#e4-applied-2026-08-30).
 
 A single "6.9%" answers the wrong question. The question an adopter actually
 has is *"has this tool ever done the kind of component I need?"* Every row

@@ -1,5 +1,9 @@
 # @ds-contracts/emitter-web-components
 
+> **Not the v1 proof surface.** This emitter projects the universal
+> contract. Recipe-IR is not exported here. Product v1 is incomplete
+> (F1). See the repo README and `docs/32-recipe-ir-pivot.md`.
+
 A ds-contracts **emitter plugin**: contract → vanilla Custom Elements. Zero
 runtime dependencies, no framework — shadow DOM, constructable stylesheets,
 real `<slot>`s, real events.

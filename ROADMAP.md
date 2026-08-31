@@ -1,5 +1,14 @@
 # Roadmap
 
+> **Current state (2026-08-30).** Recipe-IR landed on main (`4caebfc5b`):
+> archetype recipes + Figma-capability IR + receipts. Five archetypes
+> (Button, Input, Combobox, Table, Calendar) have stayed live mints and
+> owner-signed grades. Product **v1 is incomplete** — F1 (whole-corpus /
+> unseen-library on the recipe path) is unmet; `overallSuccess` is not
+> flipped except Table's existing v32 pin. npm publish deferred. The phases
+> below are the *spec* roadmap and still stand; they are not a claim that
+> v1 shipped. See [docs/32](docs/32-recipe-ir-pivot.md).
+
 *Looking for how to **use** this rather than where it's going? Start at [Choose Your Path](docs/00-choose-your-path.md) — design-first (canvas into code), code-first (code into Figma), or a brownfield pair reconciled. Deciding whether to **adopt** it? Start at [Known Limitations](docs/23-known-limitations.md) instead — it is the honest counterweight to this page.*
 
 The public roadmap lives in the documentation: **[docs/12-roadmap.md](docs/12-roadmap.md)**.
@@ -82,7 +91,14 @@ published core and schema 17 (Phase 3 slices). `npm run maintain` is fifteen
 steps and every one of them is a lane step; the committed eval record is the
 one CI reproduces.
 
-**Next, in order:** the exam SLOT's interior auto-layout and the Card's slot
+**Next, in order (recipe-IR, 2026-08-30):** (1) F1 whole-corpus /
+unseen-library proof on the recipe path — the named v1 blocker;
+(2) Combobox fixture-chrome remint from MUI/AntD-named overlay chrome;
+(3) signed cleanup of older Calendar Scratch pages; (4) npm publish,
+deferred and not a v1-proof substitute. The capture-path leftovers below
+still stand and are not a substitute for those four.
+
+**Still open on the capture path:** the exam SLOT's interior auto-layout and the Card's slot
 content (docs/23 §B.24, §B.26); a read-only drift compare so `extract:computed:drift`
 can be release evidence (§B.28); the first-party snapshot re-capture behind
 `npm run diagnose` (§B.28); then the human/release gates on

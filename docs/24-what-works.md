@@ -4,6 +4,8 @@
 
 > **This file is generated. Do not edit it.** `npm run capability:report` rebuilds it; `npm run capability:fresh` refuses if the committed bytes differ from a rebuild, and one of the 230 evals runs that refusal.
 
+> **Current state (2026-08-30).** This report measures the **capture / universal-contract** path — computed-style floors, kit fidelity, and the evals that pin them. It is **not** the recipe-IR v1 proof. Five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live mints and owner-signed grades on the recipe path; product v1 is still incomplete (F1 unseen-library / whole-corpus). See [docs/32](32-recipe-ir-pivot.md) and [docs/26](26-v1-definition.md).
+
 This is the most dangerous document in the repository, because its output is
 flattering numbers, and it is built to be read with that in mind. Every number
 below is **read from a committed artifact** and carries the path it came from.

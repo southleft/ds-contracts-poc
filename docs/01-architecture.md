@@ -1,5 +1,13 @@
 # 1 · Architecture & the Contract Model
 
+> **Current state (2026-08-30).** This page describes the **universal
+> contract** architecture (one JSON file → both surfaces, three-way differ).
+> That architecture still exists. The **v1 proof surface** is recipe-IR:
+> archetype recipes compile to a canonical Figma-capability IR with
+> named-or-carried receipts. Five archetypes live-proven and owner-signed;
+> product v1 incomplete (F1). See [docs/32](32-recipe-ir-pivot.md). Do not
+> treat the contract excerpt below as the thing v1 proved.
+
 ## The problem this PoC exists to settle
 
 Every design system team eventually argues about where the canonical source of truth lives: the canvas library or the code library. Both answers are wrong in the same way — each leaves the other side as a hand-maintained copy that drifts. Developers outnumber designers, so code accumulates decisions design never signed off on; design files freeze into snapshots of intent that stop being true.

@@ -48,9 +48,12 @@ export function HelpDrawer({ open, onClose }: { open: boolean; onClose: () => vo
               refuse, by name, when you ask for something it cannot honestly do.
             </p>
             <p className="drawer__subnote">
-              <b>What it is not:</b> this is not how you build your library into Figma. That is
-              the <code>ds-contracts</code> CLI plus the Sync Runner plugin — the CLI packages
-              your contracts and tokens into one bundle, the plugin builds it onto the canvas.{' '}
+              <b>What it is not:</b> this is not the recipe-IR v1 proof, and it
+              is not how you build your library into Figma. The playground still
+              drives the pre-pivot universal-contract engine. v1 proof is five
+              live-minted archetypes under <code>recipe/</code>; product v1 is
+              incomplete (F1). Building a library on this older path is the{' '}
+              <code>ds-contracts</code> CLI plus the Sync Runner plugin.{' '}
               <a
                 href="https://ds-contracts-spec.pages.dev/get-started/"
                 target="_blank"

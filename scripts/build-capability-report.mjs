@@ -519,6 +519,7 @@ const COVERAGE_CAVEAT =
 P('# 24 — What Works');
 P('*The success-side counterpart to [23 — Known Limitations](23-known-limitations.md). Written for a design engineer deciding whether to adopt this: what is **proven**, and **how it was measured**.*');
 P(`> **This file is generated. Do not edit it.** \`${BUILD_CMD}\` rebuilds it; \`npm run capability:fresh\` refuses if the committed bytes differ from a rebuild, and one of the ${fmt(evals.total)} evals runs that refusal.`);
+P('> **Current state (2026-08-30).** This report measures the **capture / universal-contract** path — computed-style floors, kit fidelity, and the evals that pin them. It is **not** the recipe-IR v1 proof. Five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live mints and owner-signed grades on the recipe path; product v1 is still incomplete (F1 unseen-library / whole-corpus). See [docs/32](32-recipe-ir-pivot.md) and [docs/26](26-v1-definition.md).');
 
 P(
   'This is the most dangerous document in the repository, because its output is',

@@ -1,5 +1,11 @@
 # react-day-picker — held-out exam subject #3, the COMPLEX-ARCHETYPE probe
 
+> **Current state (2026-08-30).** This directory is the **held-out capture
+> exam** for F1 (unseen library). Keep the blindness rule below. Calendar
+> is separately **live-proven on the recipe-IR path** (page `181:64873`,
+> owner-signed). Do not read §5 as “calendar has no proof” — it names
+> why the *capture* path cannot treat a month grid as a proven archetype.
+
 > ## THE BLINDNESS RULE
 >
 > **This directory was authored blind, and it must stay blind until the exam

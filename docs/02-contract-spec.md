@@ -1,5 +1,10 @@
 # 2 · Contract Specification
 
+> **Current state (2026-08-30).** This is the **universal-contract** field
+> reference (`*.contract.json`). It still ships. The v1 proof envelope is
+> recipe-IR ([docs/32](32-recipe-ir-pivot.md)), which is not this schema.
+> Product v1 is incomplete (F1).
+
 One contract per component, at `contracts/<component>.contract.json`. The authoritative schema is defined in Zod at `scripts/contract-schema.ts`; `npm run schema` emits `contracts/contract.schema.json` so editors validate contracts inline (every contract's `$schema` field points at it).
 
 ## Top-level fields

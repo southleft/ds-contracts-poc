@@ -1,5 +1,10 @@
 # Post-v1 plan — the next phase of the proof of concept
 
+> **Current state (2026-08-30).** This is the approved *next* plan. It does
+> **not** mean product v1 shipped. Recipe-IR proved five live-minted,
+> owner-signed archetypes; F1 is still unmet. See
+> [docs/32](32-recipe-ir-pivot.md).
+
 **Status:** approved by TJ, 2026-08-30. Written against merge head `4caebfc5b`; nothing here restamps evidence or invents a grade. Doctrine unchanged: named or carried, receipts for refusals, human gates where a human is the instrument.
 
 ---

@@ -13,6 +13,26 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Recipe-IR pivot landed on main (2026-08-30)
+
+- Merge `4caebfc5b`: archetype recipes + canonical Figma-capability IR +
+  named-or-carried receipts replace the universal-contract envelope as the
+  **v1 proof surface**. The `*.contract.json` path still ships (CLI,
+  playground, Journeys A–C); it is not what v1 proved.
+- Five archetypes have stayed live Scratch mints and owner-signed human
+  grades: Button (`183:69150`), Input (`115:295378`), Combobox
+  (`163:35981`), Table (`173:48924`), Calendar (`181:64873`).
+- Product **v1 remains incomplete**. F1 (whole-corpus / unseen-library on
+  the recipe path) is unmet. `overallSuccess` is not flipped for Button,
+  Input, Combobox, or Calendar (Table keeps the `true` its v32 record
+  already set). Hashed RECORDs are not restamped.
+- Named leftover work: Combobox chrome remint after hardening; signed
+  cleanup of older Calendar Scratch pages; npm publish deferred and not a
+  v1-proof substitute.
+- **No semver bump. No npm publish.** Published GitHub releases
+  (`v1.0.0-rc.1` and earlier) predate this pivot and still describe the
+  universal-contract RC.
+
 ### Phase 2 closed out — every exam construct carried or named (152/152)
 
 - **The held-out kit's last two silences are closed** (docs/23 §D.29). The
