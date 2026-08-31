@@ -243,6 +243,9 @@ jobs:
       - name: recipe:button:check (button@1 compiles and collapses as a two-cycle fixed point)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:button:check
+      - name: recipe:button:perturbation:check (scripted designer-class edits on a Button observe duplicate; proposals are review-before-write)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:button:perturbation:check
       - name: recipe:input-field:check (input-field@1 is offline-only, total, semantic, and adversarially falsified)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:check
