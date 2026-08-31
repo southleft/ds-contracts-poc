@@ -1,7 +1,7 @@
 {
   "artifactVersion": "chip-prepare-v1-source-notes",
-  "status": "offline-notes-only",
-  "recipeLanded": false,
+  "status": "prepare-landed",
+  "recipeLanded": true,
   "liveFigma": false,
   "overallSuccess": false,
   "productV1": "INCOMPLETE",
