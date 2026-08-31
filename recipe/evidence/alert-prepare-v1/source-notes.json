@@ -1,10 +1,12 @@
 {
   "artifactVersion": "alert-prepare-v1-source-notes",
-  "status": "offline-notes-only",
-  "recipeLanded": false,
+  "status": "recipe-landed",
+  "recipeLanded": true,
   "liveFigma": false,
   "overallSuccess": false,
   "productV1": "INCOMPLETE",
+  "runIdentity": "dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+  "pageName": "Recipe Pivot / Alert / dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
   "doNotTouchSignedPages": [
     "115:295378",
     "163:35981",
@@ -19,51 +21,64 @@
     "183:75495"
   ],
   "shapeDecisionToCarry": "Astryx ships Banner (not a standalone Alert). MUI ships Alert. AntD ships Alert. Astryx AlertDialog is a dialog — save for Dialog last. Compile the in-page banner/alert, not a toast overlay.",
+  "axes": {
+    "Status": ["info", "success", "warning", "error"],
+    "defaultsPerLibrary": {
+      "Astryx": "info",
+      "MUI": "success",
+      "Ant Design": "info"
+    },
+    "sharedDefaultInvented": false,
+    "notAnAxis": ["variant standard/outlined/filled", "banner mode", "closable", "Toast/Snackbar", "AlertDialog"]
+  },
+  "sharedContent": {
+    "title": "New update available"
+  },
+  "namedGeometry": {
+    "Astryx": {
+      "height": 44,
+      "padding": "12 / 16",
+      "radius": 12,
+      "gap": 8,
+      "icon": 20,
+      "borderWidth": 0
+    },
+    "MUI": {
+      "height": 48,
+      "padding": "6 / 16",
+      "radius": 4,
+      "gap": 12,
+      "icon": 22,
+      "iconOpacity": 0.9,
+      "borderWidth": 0
+    },
+    "Ant Design": {
+      "height": 38,
+      "padding": "8 / 12",
+      "radius": 8,
+      "gap": 8,
+      "icon": 14,
+      "borderWidth": 1
+    }
+  },
   "libraries": {
     "Astryx": {
       "export": "Banner",
       "package": "@astryxdesign/core@0.1.6",
-      "sources": [
-        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Banner/Banner.tsx"
-      ],
-      "namedSoFar": {
-        "statusRequired": ["info", "warning", "error", "success"],
-        "example": "<Banner status=\"info\" title=\"New update available\" />",
-        "noStandaloneAlert": true
-      },
-      "receipt": ["isDismissable", "collapsible children", "container card|section", "AlertDialog (Dialog last)", "Toast overlay"]
+      "statusRequired": true,
+      "exampleDefault": "info"
     },
     "MUI": {
       "export": "Alert",
       "package": "@mui/material@9.2.0",
-      "sources": [
-        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Alert/Alert.js"
-      ],
-      "namedSoFar": {
-        "severityDefault": "success",
-        "variantDefault": "standard",
-        "severity": ["error", "info", "success", "warning"]
-      },
-      "open": "standard vs outlined vs filled colours from Alert.js; icon mapping; do not invent padding"
+      "severityDefault": "success",
+      "variantDefault": "standard"
     },
     "Ant Design": {
       "export": "Alert",
       "package": "antd@5.29.3",
-      "sources": [
-        "examples/antd/.antd-sandbox/node_modules/antd/es/alert/Alert.js"
-      ],
-      "namedSoFar": {
-        "typeDefault": "info",
-        "bannerModeDefaultsTo": "warning",
-        "types": ["success", "info", "error", "warning"]
-      },
-      "open": "style tokens for padding, radius, status colours; banner prop is not the shared axis"
+      "typeDefault": "info",
+      "bannerModeDefaultsTo": "warning"
     }
-  },
-  "proposedAxesToConfirm": {
-    "Status": ["info", "success", "warning", "error"],
-    "notAnAxisUntilShared": ["variant standard/outlined/filled", "banner mode", "closable", "Toast/Snackbar"]
-  },
-  "sharedContentProposal": ["title from Astryx example — lock after reading all three message defaults"],
-  "note": "MUI default severity is success, AntD default type is info, Astryx status is required. Do not invent a fourth default. Status as an axis can carry all four named values; the default variant is per-library."
+  }
 }

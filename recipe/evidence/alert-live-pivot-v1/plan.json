@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Alert / dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+  "runIdentity": "dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+  "namespace": "ds.contracts.alert.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "alert@1 in-page banner from named Astryx Banner, MUI Alert standard, and AntD Alert; Status is the only shared axis; defaults stay per-library (Astryx info / MUI success / AntD info); AlertDialog waits",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-alert-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "dfe6ebb7ac2f6c285e328f16a826fe64b046550c0387cf47dea99afb9f04ad82",
+      "envelopeHash": "858b7d587919d343f13b1dd9d110e21a2b304ed4fecc04fb7bc61862bc3409e1",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    },
+    {
+      "adapterIdentity": "mui-alert-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "72aeb8dc0adc7ba0fa3cc6c11d306fe5b265bf45ea5f936618d859dfbeb68c3a",
+      "envelopeHash": "93ffe2f7320ffcbe9b775fd2bb4cbc9bb005883ee4b96ef5aba3c6a70c5b552a",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    },
+    {
+      "adapterIdentity": "antd-alert-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "f5f066f43d207c5ca0569fc569835c2ec353b4a4acbd551ef5d0cc87682ed924",
+      "envelopeHash": "e569ee1cf5a01e645dd341c35574ea0831b61704ec7c72cb4a6ebc51aa69cff5",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    }
+  ]
+}
