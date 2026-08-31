@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "tooltip-live-pivot-v1-prepare",
+  "teaching": "One named default Tooltip bubble; no shared placement or arrow axis; attachment is receipted",
+  "runIdentity": "3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+  "pageName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+  "namespace": "ds.contracts.tooltip.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "3a63b6dc7436c4c074cf66ad055216512d393e53eb0629553d19158c0cefdb1b",
+    "MUI": "7f1ebbdc3c09befc332e12a761c36d5baaf68d93f72e4a81b28b4ab3b8ba4b0d",
+    "Ant Design": "d4c3859c8e0e58e0c169dfe961531a2f3391de53b3c67746fa3e86c691a434d2"
+  },
+  "writerSha256": "479ce4df15bf60e0f9115715299a5b03bae69c86d8fb572fe08b24f78143efd3",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

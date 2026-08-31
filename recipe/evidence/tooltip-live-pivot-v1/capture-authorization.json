@@ -1,0 +1,65 @@
+{
+  "artifactVersion": "tooltip-live-v1-capture-authorization-v1",
+  "authorizationId": "tooltip-live-v1",
+  "status": "owner-authorized hill-climb window; one new Scratch page; cryptographic broker packet not reused",
+  "authorizationIntent": true,
+  "antecedent": {
+    "ownerMandate": "2026-08-31 unattended hill-climb of docs/34 Phase 1",
+    "writerSha256": "479ce4df15bf60e0f9115715299a5b03bae69c86d8fb572fe08b24f78143efd3",
+    "splitWriters": [
+      "writer-astryx-tooltip-reviewed-v1.js",
+      "writer-mui-tooltip-reviewed-v1.js",
+      "writer-antd-tooltip-reviewed-v1.js"
+    ],
+    "compactHosts": [
+      "compact-astryx.js",
+      "compact-mui.js",
+      "compact-antd.js"
+    ],
+    "runIdentity": "3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+    "pageName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1"
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "oneNewPage": true,
+    "signedPagesForbidden": [
+      "115:295378",
+      "163:35981",
+      "183:70641",
+      "173:48924",
+      "181:64873",
+      "183:69150",
+      "85:6781",
+      "183:74742",
+      "183:75031",
+      "183:75302",
+      "183:75495",
+      "183:75801",
+      "183:75976",
+      "183:76022",
+      "183:76063",
+      "183:76109"
+    ],
+    "cleanupOnFailureOnly": true
+  },
+  "execution": {
+    "maximumAttempts": 1,
+    "attemptsExecuted": 0,
+    "newTxnPerVersion": true,
+    "doNotRestartFailedAttemptAsIs": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "queued-for-TJ",
+    "overallSuccess": false,
+    "productV1": "INCOMPLETE",
+    "inventedGradeForbidden": true
+  }
+}

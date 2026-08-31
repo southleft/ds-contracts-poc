@@ -1,0 +1,94 @@
+{
+  "artifactVersion": "tooltip-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022",
+    "183:76063",
+    "183:76109"
+  ],
+  "shapeDecisionToCarry": "Tooltip teaching is the open bubble chrome — padding, radius, inverted fill, label. Placement is not shared (Astryx above, MUI bottom, AntD top). Do not invent Polar attachment to a trigger. Arrow is not shared (MUI default false, AntD default true, Astryx has no named arrow). Compile a lone hug bubble; receipt Polar, placement, arrow, delays, hover indication.",
+  "libraries": {
+    "Astryx": {
+      "export": "Tooltip",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Tooltip/useTooltip.tsx",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/theme/tokens.stylex.ts"
+      ],
+      "namedSoFar": {
+        "placementDefault": "above",
+        "alignmentDefault": "center",
+        "bubbleFill": "--color-text-primary light #0A1317",
+        "label": "--color-background-surface light #FFFFFF",
+        "radius": "--radius-container 12",
+        "paddingBlock": "--spacing-1 4",
+        "paddingInline": "--spacing-2 8",
+        "font": "--text-body-size 14 / leading 1.4286 → 20 Regular"
+      },
+      "receipt": ["placement/alignment Polar", "hover indication dashed underline", "delay 200", "HOVER_BRIDGE_DELAY 100"]
+    },
+    "MUI": {
+      "export": "Tooltip",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Tooltip/Tooltip.js"
+      ],
+      "namedSoFar": {
+        "placementDefault": "bottom",
+        "arrowDefault": false,
+        "padding": "4px 8px",
+        "fontSize": "pxToRem(11)",
+        "fontWeight": "fontWeightMedium 500",
+        "radius": "shape.borderRadius 4",
+        "fill": "alpha(grey[700], 0.92) #616161eb",
+        "label": "common.white #fff"
+      },
+      "receipt": ["placement Polar + 14px margin", "arrow (default false)", "touch padding 8/16", "maxWidth 300"]
+    },
+    "Ant Design": {
+      "export": "Tooltip",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/tooltip/index.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/tooltip/style/index.js"
+      ],
+      "namedSoFar": {
+        "placementDefault": "top",
+        "arrowDefault": true,
+        "padding": "paddingSM/2=6 × paddingXS=8",
+        "radius": "borderRadius 6",
+        "fill": "colorBgSpotlight getAlphaColor(colorTextBase, 0.85) #000000d9",
+        "label": "colorTextLightSolid #fff",
+        "font": "resetComponent fontSize 14 / lineHeight 22",
+        "minHeight": "controlHeight 32 — satisfied by 6+22+6 hug; do not invent a FIXED 32"
+      },
+      "receipt": ["placement Polar", "arrow (default true) Polar", "boxShadowSecondary", "minWidth from arrow math"]
+    }
+  },
+  "proposedAxesToConfirm": {
+    "Placement": "not shared — Astryx above, MUI bottom, AntD top. Polar attachment is a host fact we do not invent.",
+    "Arrow": "not shared — MUI false, AntD true, Astryx unnamed",
+    "notAnAxisUntilShared": ["placement", "arrow", "delay", "color palettes", "touch"]
+  },
+  "sharedContentProposal": [
+    "visible label Tooltip — open bubble only; no trigger, no Polar, no arrow"
+  ],
+  "note": "Writer class to teach is the smallest portal chrome. Do not invent Polar positions. If a host attachment fact is missing, receipt it."
+}
