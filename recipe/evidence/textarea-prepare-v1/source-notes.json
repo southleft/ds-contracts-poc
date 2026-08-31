@@ -1,7 +1,7 @@
 {
   "artifactVersion": "textarea-prepare-v1-source-notes",
-  "status": "offline-notes-only",
-  "recipeLanded": false,
+  "status": "recipe-landed-hermetic-green",
+  "recipeLanded": true,
   "liveFigma": false,
   "overallSuccess": false,
   "productV1": "INCOMPLETE",
@@ -17,47 +17,80 @@
     "183:75031",
     "183:75302"
   ],
-  "shapeDecisionToCarry": "All three libraries ship a multi-line text control. Astryx is TextArea (Field + rows default 3). AntD is Input.TextArea (rc-textarea). MUI has no standalone Textarea export — the unit is TextField multiline / InputBase. Do not invent a MUI Textarea. Do not invent minRows/padding until InputBase.js is opened. Input stay 115:295378 is signed — do not remint Input as Textarea.",
+  "shapeDecisionToCarry": "Standalone label + multi-line box. Do not remint Input 115:295378. MUI has no Textarea export — compiled TextField outlined multiline / InputBase / TextareaAutosize. Width hugs content; no invented default px width.",
   "libraries": {
     "Astryx": {
       "export": "TextArea",
       "package": "@astryxdesign/core@0.1.6",
       "sources": [
-        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/TextArea/TextArea.tsx"
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/TextArea/TextArea.tsx",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Field/inputStyles.stylex.ts",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/theme/tokens.stylex.ts"
       ],
-      "namedSoFar": {
+      "named": {
         "rowsDefault": 3,
-        "heightFrom": "rows, not size",
-        "sizeDefault": "md — padding only; size is not a shared axis with AntD/MUI",
-        "paddingBlockMd": "--spacing-1 (wrapper) / --spacing-2 also present",
-        "uses": "Field + inputWrapperStyles / inputStatusBorderStyles",
-        "exampleLabel": "Notes"
-      },
-      "receipt": ["character counter", "startIcon", "status", "isLoading", "disabledMessage tooltip"]
+        "lineBox": "14 * 1.4286 = 20",
+        "paddingBlock": 4,
+        "paddingInline": 8,
+        "border": 1,
+        "radius": 8,
+        "height": 70,
+        "labelGap": 4,
+        "disabled": "wrapper opacity 0.5"
+      }
     },
     "MUI": {
-      "export": "TextField multiline / InputBase",
+      "export": "TextField multiline / InputBase / TextareaAutosize",
       "package": "@mui/material@9.2.0",
-      "sourceStatus": "No Textarea.js in @mui/material. Next PREPARE must open InputBase.js + TextField.js for minRows default, padding, and outlined vs standard. Do not invent.",
-      "notes": "Same InputBase family as the signed Input stay. Textarea is multiline of that control, not a remint of 115:295378."
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/TextField/TextField.js",
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/InputBase/InputBase.js",
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/OutlinedInput/OutlinedInput.js",
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/TextareaAutosize/TextareaAutosize.js",
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/system/createTheme/shape.js"
+      ],
+      "named": {
+        "minRowsDefault": 1,
+        "lineHeight": "1.4375em = 23",
+        "outlinedMultilinePadding": "16.5px 14px",
+        "height": 56,
+        "borderRadius": 4,
+        "noStandaloneTextarea": true
+      },
+      "receipt": [
+        "floating InputLabel + notched outline lowered to a label above the box",
+        "minRows 3 invented to match Astryx refused"
+      ]
     },
     "Ant Design": {
       "export": "Input.TextArea",
       "package": "antd@5.29.3",
       "sources": [
         "examples/antd/.antd-sandbox/node_modules/antd/es/input/TextArea.js",
-        "examples/antd/.antd-sandbox/node_modules/antd/es/input/style/textarea.js"
+        "examples/antd/.antd-sandbox/node_modules/antd/es/input/style/textarea.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/input/style/token.js",
+        "examples/antd/tokens/antd.vars.css"
       ],
-      "namedSoFar": {
-        "wraps": "rc-textarea",
-        "style": "useStyle from ./style/textarea plus shared Input style"
-      },
-      "open": "default rows from rc-textarea; minHeight from fontSize*lineHeight*rows — read before compile"
+      "named": {
+        "rows": "HTML textarea default 2 — rc-textarea and AntD wrapper set none",
+        "paddingBlock": 4,
+        "paddingInline": 11,
+        "lineBox": 22,
+        "height": 54,
+        "radius": 6,
+        "minHeight": 32
+      }
     }
   },
-  "proposedAxesToConfirm": {
+  "axes": {
     "Disabled": ["false", "true"],
-    "notAnAxisUntilShared": ["rows", "size", "status", "variant", "allowClear", "showCount"]
+    "Content": ["empty", "value"],
+    "notAnAxis": ["rows", "size", "status", "variant", "allowClear", "showCount", "resize"]
   },
-  "sharedContentProposal": ["Notes"]
+  "sharedContent": {
+    "label": "Notes",
+    "placeholder": "Add a note",
+    "value": "Meeting notes for Tuesday."
+  },
+  "runIdentity": "830c90b5-e9c10699-09726acb-textarea-v1"
 }

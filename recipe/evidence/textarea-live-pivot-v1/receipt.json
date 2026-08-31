@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "textarea-live-pivot-v1-prepare",
+  "teaching": "Disabled × Content textarea compiled from named Astryx TextArea rows=3, MUI TextareaAutosize minRows=1, and AntD/HTML rows=2; MUI has no standalone Textarea export",
+  "runIdentity": "830c90b5-e9c10699-09726acb-textarea-v1",
+  "pageName": "Recipe Pivot / Textarea / 830c90b5-e9c10699-09726acb-textarea-v1",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "830c90b5322b162c6852d998b3255fbd61d319d913554ed520c1064f5b075817",
+    "MUI": "e9c106994deb956629444768a10f6321bf0059961959514a305c43dbadcbd250",
+    "Ant Design": "09726acba383e0192d51866cb3e0d2a8f0a95254990139e25edd915c79e4010e"
+  },
+  "writerSha256": "0511295f4b1e28c158042d949acdce7bcb83ca436289f6f7b870cd798080c369",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

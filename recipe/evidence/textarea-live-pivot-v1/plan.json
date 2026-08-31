@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Textarea / 830c90b5-e9c10699-09726acb-textarea-v1",
+  "runIdentity": "830c90b5-e9c10699-09726acb-textarea-v1",
+  "namespace": "ds.contracts.textarea.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "textarea@1 label + multi-line box from named Astryx TextArea, MUI TextField multiline / InputBase / TextareaAutosize, and AntD Input.TextArea; do not remint Input; rows is not an axis",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-textarea-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "830c90b5322b162c6852d998b3255fbd61d319d913554ed520c1064f5b075817",
+      "envelopeHash": "0aff1a96a28b40c65b14205ec53439c84263a31d5b1b33bcba235a59b8793435",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    },
+    {
+      "adapterIdentity": "mui-textarea-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "e9c106994deb956629444768a10f6321bf0059961959514a305c43dbadcbd250",
+      "envelopeHash": "e0bc18807e2b384497dc489748e0333b66890d6fdeb62cd9b9ef455a1e4b5ac6",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    },
+    {
+      "adapterIdentity": "antd-textarea-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "09726acba383e0192d51866cb3e0d2a8f0a95254990139e25edd915c79e4010e",
+      "envelopeHash": "01927db3f4fccea94bcf1c60edfa33812614123b97faedf78770d401023acb22",
+      "variantCount": 4,
+      "variableCount": 25,
+      "comparedIrFacts": 89
+    }
+  ]
+}
