@@ -1,0 +1,53 @@
+{
+  "artifactVersion": "tooltip-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:76151",
+  "pageName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+  "runIdentity": "3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76151",
+  "taughtHostClass": "SF Pro listed but zero-glyph; painted named fallback Roboto Regular. MUI Roboto Medium requested and painted. Placement and arrow attachment were receipted — no Polar invented.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "tooltip@1 is one named default bubble per library, not a set. Component Container was created inside each library Section; figma_arrange_component_set was not used.",
+  "components": [
+    {
+      "library": "Astryx",
+      "export": "Tooltip",
+      "componentId": "183:76164",
+      "sectionId": "183:76163",
+      "containerId": "183:76165",
+      "box": { "paddingX": 8, "paddingY": 4, "radius": 12, "fill": "#0a1317ff", "w": 59, "h": 28 },
+      "label": "Tooltip",
+      "type": { "fontSize": 14, "lineHeight": 20, "fill": "#ffffffff" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "MUI",
+      "export": "Tooltip",
+      "componentId": "183:76177",
+      "sectionId": "183:76176",
+      "containerId": "183:76178",
+      "box": { "paddingX": 8, "paddingY": 4, "radius": 4, "fill": "#616161eb", "w": 50, "h": 21 },
+      "label": "Tooltip",
+      "type": { "fontSize": 11, "lineHeight": "auto", "fill": "#ffffffff" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Medium" } }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Tooltip",
+      "componentId": "183:76191",
+      "sectionId": "183:76190",
+      "containerId": "183:76192",
+      "box": { "paddingX": 8, "paddingY": 6, "radius": 6, "fill": "#000000d9", "w": 59, "h": 34 },
+      "label": "Tooltip",
+      "type": { "fontSize": 14, "lineHeight": 22, "fill": "#ffffffff" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

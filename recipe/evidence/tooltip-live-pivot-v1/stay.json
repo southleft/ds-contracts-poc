@@ -1,0 +1,28 @@
+{
+  "artifactVersion": "tooltip-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:76151",
+  "pageName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+  "runIdentity": "3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76151",
+  "components": {
+    "Astryx Tooltip": "183:76164",
+    "MUI Tooltip": "183:76177",
+    "Ant Design Tooltip": "183:76191"
+  },
+  "containers": {
+    "Astryx": "183:76165",
+    "MUI": "183:76178",
+    "Ant Design": "183:76192"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "shape": "open bubble chrome only; Astryx inverted 12/4×8, MUI grey[700] 0.92 4/4×8, AntD spotlight 6/6×8; placement and arrow attachment receipted"
+}
