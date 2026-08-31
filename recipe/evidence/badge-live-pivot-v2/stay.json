@@ -1,0 +1,38 @@
+{
+  "artifactVersion": "badge-live-pivot-v2-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "198:77177",
+  "pageName": "Recipe Pivot / Badge / 65cbfe82-5db99b22-badge-v2",
+  "runIdentity": "65cbfe82-5db99b22-badge-v2",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77177",
+  "oldStayPageId": "183:76022",
+  "doNotDeleteOldStay": true,
+  "astryxOverlayRefusal": "Astryx Badge is an inline status label; overlay not compiled. Do not invent an Astryx pip.",
+  "components": {
+    "MUI Badge": "198:77184",
+    "Ant Design Badge": "198:77195"
+  },
+  "sections": {
+    "MUI": "198:77183",
+    "Ant Design": "198:77194"
+  },
+  "arrange": {
+    "MUI": "198:77188",
+    "Ant Design": "198:77199"
+  },
+  "accuracyLoop": {
+    "MUI": "color=error pill fill #d32f2f label #fff on 40 host; not a bare 5. color=default remains receipted (no palette fill).",
+    "Ant Design": "stay fill #ff4d4f + white OUTSIDE stroke 1"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "figmaArrangeComponentSet": false,
+  "leftoverComponentContainer": []
+}

@@ -9,7 +9,7 @@
     "Ant Design": "5db99b22905d0296a757db8cd6fe04f51bbeeb6f6d586854cf4b35ee1ef8839d"
   },
   "writerSha256": "050ddcc3f9a421e53c2caca09b383fc553dbcbd2cf167c19f39472e670bfc02a",
-  "liveFigma": false,
+  "liveFigma": true,
   "humanGrade": "queued-for-TJ",
   "overallSuccess": false,
   "productV1": "INCOMPLETE"

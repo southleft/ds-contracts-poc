@@ -1,0 +1,91 @@
+{
+  "artifactVersion": "badge-live-v2-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "198:77177",
+  "pageName": "Recipe Pivot / Badge / 65cbfe82-5db99b22-badge-v2",
+  "runIdentity": "65cbfe82-5db99b22-badge-v2",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77177",
+  "oldStayPageId": "183:76022",
+  "taughtHostClass": "SF Pro Regular listed and loadable but zero-glyph (Chip/Calendar v23 class); AntD painted named fallback Roboto Regular. MUI painted requested Roboto Medium. Do not invent Inter.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "badge@1 is one named default component per overlay library, not a set. Unique white Arrange wraps minted inside each library Section; figma_arrange_component_set was not used. Astryx overlay is a named refusal — no third section.",
+  "astryxOverlayRefusal": "Astryx Badge is an inline status label; overlay compiles from MUI+AntD only. No Astryx pip was minted.",
+  "signedPagesPresent": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "183:69150",
+    "85:6781",
+    "173:48924",
+    "181:64873"
+  ],
+  "oldStaysPresent": [
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:76022"
+  ],
+  "components": [
+    {
+      "library": "MUI",
+      "export": "Badge",
+      "componentId": "198:77184",
+      "sectionId": "198:77183",
+      "containerId": "198:77188",
+      "adapterIdentity": "mui-badge-reviewed-v1",
+      "recipeHash": "65cbfe82cc1d45651d4a318f530a1733380bf323aad6cff39ad7d808a87c25a4",
+      "variantCount": 1,
+      "proofColor": "error",
+      "host": { "w": 40, "h": 40, "radius": 20, "fill": "#bdbdbdff" },
+      "indicator": {
+        "w": 20,
+        "h": 20,
+        "radius": 10,
+        "padX": 6,
+        "stroke": 0,
+        "align": "INSIDE",
+        "fill": "#d32f2fff",
+        "x": 30,
+        "y": -10,
+        "translate": [10, -10]
+      },
+      "label": "5",
+      "labelFill": "#ffffffff",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Medium" } }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Badge",
+      "componentId": "198:77195",
+      "sectionId": "198:77194",
+      "containerId": "198:77199",
+      "adapterIdentity": "antd-badge-reviewed-v1",
+      "recipeHash": "5db99b22905d0296a757db8cd6fe04f51bbeeb6f6d586854cf4b35ee1ef8839d",
+      "variantCount": 1,
+      "host": { "w": 32, "h": 32, "radius": 16, "fill": "#00000040" },
+      "indicator": {
+        "w": 20,
+        "h": 20,
+        "radius": 10,
+        "padX": 0,
+        "stroke": 1,
+        "align": "OUTSIDE",
+        "fill": "#ff4d4fff",
+        "x": 22,
+        "y": -10,
+        "translate": [10, -10]
+      },
+      "label": "5",
+      "labelFill": "#ffffffff",
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}
