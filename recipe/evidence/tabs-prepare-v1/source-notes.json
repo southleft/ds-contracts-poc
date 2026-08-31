@@ -1,0 +1,79 @@
+{
+  "artifactVersion": "tabs-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022",
+    "183:76063",
+    "183:76109",
+    "183:76151"
+  ],
+  "shapeDecisionToCarry": "Tabs teaching is a selected-child indicator bound to the selected tab — not a Polar overlay. Astryx has no Tabs export; compile TabList (like AntD Typography.Link). Placement/scroll/card type are not shared axes. Do not invent Polar positions for the ink bar — bind it to the selected child if a named host fact exists; otherwise receipt it.",
+  "libraries": {
+    "Astryx": {
+      "export": "TabList",
+      "namedAbsence": "no Tabs export — compile TabList",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/TabList/TabList.tsx"
+      ],
+      "namedSoFar": {
+        "sizeDefault": "md → 32 hover target (same as Button/TextInput)",
+        "layoutDefault": "hug",
+        "hasDividerDefault": false,
+        "orientationDefault": "horizontal"
+      },
+      "receipt": ["TabMenu overflow", "fill layout", "vertical orientation", "sizes besides md"]
+    },
+    "MUI": {
+      "export": "Tabs",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Tabs/Tabs.js"
+      ],
+      "namedSoFar": {
+        "variantDefault": "standard",
+        "indicatorColorDefault": "primary",
+        "textColorDefault": "primary",
+        "scrollButtonsDefault": "auto"
+      },
+      "receipt": ["scrollable", "fullWidth", "secondary colors", "scroll buttons"]
+    },
+    "Ant Design": {
+      "export": "Tabs",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/tabs/index.js"
+      ],
+      "namedSoFar": {
+        "type": "unnamed in antd index — rc-tabs line is the named default; do not invent card/editable-card",
+        "indicator": "ink bar on selected tab — compile only if a named size/color exists"
+      },
+      "receipt": ["editable-card", "card", "centered", "destroyOnHidden"]
+    }
+  },
+  "proposedAxesToConfirm": {
+    "Selected": "the shared teaching — indicator bound to the selected child",
+    "notAnAxisUntilShared": ["type/card", "scrollable", "orientation", "size"]
+  },
+  "sharedContentProposal": [
+    "two tabs, first selected — Item One / Item Two; indicator on the selected child only"
+  ],
+  "note": "Next PREPARE compiles TabList + Tabs + Tabs. Do not remint Tooltip 183:76151 or Link 183:76109. Do not invent Polar ink-bar offsets."
+}
