@@ -1,0 +1,24 @@
+{
+  "artifactVersion": "checkbox-live-pivot-v1-stay",
+  "teaching": "selection-control box, dash, and label compiled from named Astryx/MUI/AntD package facts; SVG check paths and AntD rotated tick receipted",
+  "runIdentity": "e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+  "pageName": "Recipe Pivot / Checkbox / e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+  "pageId": "183:74742",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-74742",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "e2386e0d23758fbf9fa9ffed93a8d3a712e5e06b620d3404eef907dd5bf7bc73",
+    "MUI": "f8e77a54f36f091e0af64bb45a2368fb88ded8580924f865b3c6756fd5a095f6",
+    "Ant Design": "be0bbae1bb36487dc2231c9ac621c8e18435195ae0c4e612ecdd8a1edf89688a"
+  },
+  "setIds": {
+    "Astryx": "183:74846",
+    "MUI": "183:74929",
+    "Ant Design": "183:75010"
+  },
+  "extract": "structural-green",
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

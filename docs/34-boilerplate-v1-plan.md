@@ -183,7 +183,7 @@ attributable owner grade citing that page. It does **not** mean
 
 | archetype | Astryx | MUI | AntD |
 |---|---|---|---|
-| **Checkbox** | PREPARE (`CheckboxInput`) | PREPARE (`Checkbox`) | PREPARE (`Checkbox`) |
+| **Checkbox** | stayed, waiting-on-TJ (`CheckboxInput`) page `183:74742` | stayed, waiting-on-TJ (`Checkbox`) | stayed, waiting-on-TJ (`Checkbox`) |
 | **Radio** | not-started (`RadioList` + `RadioListItem` — list-shaped) | not-started (`Radio` + `RadioGroup`) | not-started (`Radio` + `Radio.Group`) |
 | **Switch** | not-started (`Switch`) | not-started (`Switch`) | not-started (`Switch`) |
 | **Textarea** | not-started (`TextArea`) | not-started (`TextField multiline` / `TextareaAutosize` — no standalone Textarea) | not-started (`Input.TextArea`) |
@@ -204,9 +204,11 @@ attributable owner grade citing that page. It does **not** mean
 | **Divider** | not-started (`Divider`) | not-started (`Divider`) | not-started (`Divider`) |
 | **Form-field chrome** | not-started (`Field` / `FieldLabel` / `FieldStatus`) | not-started (`FormControl` / `FormLabel` / `FormHelperText`) | not-started (`Form.Item`) |
 
-**Nothing in 4b is started.** Every cell above is a claim about what the
-library ships, read out of vendored source or the committed extraction
-census. None of it is recipe-path evidence.
+Checkbox is **stayed, not signed**: extract-structural is green on page
+`183:74742` (`Recipe Pivot / Checkbox / e2386e0d-f8e77a54-be0bbae1-checkbox-v1`).
+No human visual grade is invented. `overallSuccess` stays false. Product v1
+stays INCOMPLETE. Every other 4b cell is still a claim about what the library
+ships, not recipe-path evidence.
 
 ---
 

@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Checkbox / e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+  "runIdentity": "e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "checkbox@1 selection-control box + dash + label from named package tokens; SVG check paths and AntD rotated tick are receipted",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-checkbox-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "e2386e0d23758fbf9fa9ffed93a8d3a712e5e06b620d3404eef907dd5bf7bc73",
+      "envelopeHash": "51932d9532901bbf0472da81c2ff44dc54a20f415bd66b597dcd0417ee577f56",
+      "variantCount": 6,
+      "variableCount": 34,
+      "comparedIrFacts": 181
+    },
+    {
+      "adapterIdentity": "mui-checkbox-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "f8e77a54f36f091e0af64bb45a2368fb88ded8580924f865b3c6756fd5a095f6",
+      "envelopeHash": "f5d194dfbc42286e428c29d5370f221b2550a14fb9c1d048e7b2d3fb475b44de",
+      "variantCount": 6,
+      "variableCount": 34,
+      "comparedIrFacts": 181
+    },
+    {
+      "adapterIdentity": "antd-checkbox-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "be0bbae1bb36487dc2231c9ac621c8e18435195ae0c4e612ecdd8a1edf89688a",
+      "envelopeHash": "d25682e0a6528d7b234b459a18e1a2a643ef3c6a94f0d19052ca2e1727df0127",
+      "variantCount": 6,
+      "variableCount": 34,
+      "comparedIrFacts": 181
+    }
+  ]
+}

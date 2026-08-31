@@ -1,0 +1,22 @@
+{
+  "artifactVersion": "checkbox-live-pivot-v1-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "183:74742",
+  "pageName": "Recipe Pivot / Checkbox / e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+  "runIdentity": "e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-74742",
+  "sets": {
+    "Astryx": "183:74846",
+    "MUI": "183:74929",
+    "Ant Design": "183:75010"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true
+}

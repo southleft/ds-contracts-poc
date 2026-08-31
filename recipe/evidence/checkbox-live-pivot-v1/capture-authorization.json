@@ -1,0 +1,53 @@
+{
+  "artifactVersion": "checkbox-live-v1-capture-authorization-v1",
+  "authorizationId": "checkbox-live-v1",
+  "status": "owner-authorized hill-climb window; one new Scratch page; cryptographic broker packet not reused",
+  "authorizationIntent": true,
+  "antecedent": {
+    "ownerMandate": "2026-08-31 unattended hill-climb of docs/34 Phase 1",
+    "prepareCommitExpected": "checkbox@1 PREPARE already on main; this AUTHORIZE is the live-write grant for e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+    "writerSha256": "c7e38f1eac86508e048e22f2a3f6299d1adaf9113581d764a7e07bef5aaa7cc1",
+    "splitWriters": [
+      "writer-astryx-checkbox-reviewed-v1.js",
+      "writer-mui-checkbox-reviewed-v1.js",
+      "writer-antd-checkbox-reviewed-v1.js"
+    ],
+    "runIdentity": "e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+    "pageName": "Recipe Pivot / Checkbox / e2386e0d-f8e77a54-be0bbae1-checkbox-v1"
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "oneNewPage": true,
+    "signedPagesForbidden": [
+      "115:295378",
+      "163:35981",
+      "183:70641",
+      "173:48924",
+      "181:64873",
+      "183:69150",
+      "85:6781"
+    ],
+    "cleanupOnFailureOnly": true
+  },
+  "execution": {
+    "maximumAttempts": 1,
+    "attemptsExecuted": 1,
+    "newTxnPerVersion": true,
+    "doNotRestartFailedAttemptAsIs": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "queued-for-TJ",
+    "overallSuccess": false,
+    "productV1": "INCOMPLETE",
+    "inventedGradeForbidden": true
+  }
+}
