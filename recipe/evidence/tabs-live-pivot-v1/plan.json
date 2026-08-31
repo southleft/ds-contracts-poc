@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Tabs / 34d1e257-b5d949f6-20e72946-tabs-v1",
+  "runIdentity": "34d1e257-b5d949f6-20e72946-tabs-v1",
+  "namespace": "ds.contracts.tabs.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "tabs@1 two-item rail from Astryx TabList, MUI Tabs, and AntD Tabs; indicator is a child of the selected tab; overlay ink-bar offsets are refusals",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-tabs-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "34d1e257dc51c92d9f31c7198f029bf975f78f8b55df19b100e91e64cdd6f19d",
+      "envelopeHash": "b75718880587bcd2decbb1d8ac38d89cd49435d4888250b52ce360bb40e7e6a1",
+      "variantCount": 1,
+      "variableCount": 12,
+      "comparedIrFacts": 37
+    },
+    {
+      "adapterIdentity": "mui-tabs-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "b5d949f6cbd5217607ca9e943912c806138c723431ff6a5a5a6d883640cf478a",
+      "envelopeHash": "09c97abb84ebe92b2888885e0702564912cb781dfd8c4fb6ad1a65708cf59283",
+      "variantCount": 1,
+      "variableCount": 14,
+      "comparedIrFacts": 41
+    },
+    {
+      "adapterIdentity": "antd-tabs-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "20e729469b8ff036fd9a9584feaa5b02c06d8ab2ccec64329b2293008cb4c828",
+      "envelopeHash": "a15635b4fb7daf7af7fe0b1794ddb6f12aec90ab7b40d69753837dc02c869355",
+      "variantCount": 1,
+      "variableCount": 12,
+      "comparedIrFacts": 37
+    }
+  ]
+}

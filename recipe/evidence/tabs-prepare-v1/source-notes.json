@@ -1,7 +1,7 @@
 {
   "artifactVersion": "tabs-prepare-v1-source-notes",
   "status": "offline-notes-only",
-  "recipeLanded": false,
+  "recipeLanded": true,
   "liveFigma": false,
   "overallSuccess": false,
   "productV1": "INCOMPLETE",
@@ -75,5 +75,11 @@
   "sharedContentProposal": [
     "two tabs, first selected — Item One / Item Two; indicator on the selected child only"
   ],
-  "note": "Next PREPARE compiles TabList + Tabs + Tabs. Do not remint Tooltip 183:76151 or Link 183:76109. Do not invent Polar ink-bar offsets."
+  "compiled": {
+    "shape": "lone component, two items, first selected, indicator last child of selected item only",
+    "Astryx": "TabList; gap 2; padX 12; radius 8; indicator 2 #0064E0 r9999; rest #4E606F Regular 14/20; selected #0A1317 Semibold",
+    "MUI": "min 90×48; pad 12×16; indicator 2 #1976d2; button 14 Medium upper; lineHeight 125%; rest #00000099; selected #1976d2",
+    "AntD": "gutter 32; padY 12; indicator 2 #1677ff; 14/22 Regular; rest #000000e0; selected #1677ff"
+  },
+  "note": "PREPARE landed. Do not remint Tooltip 183:76151 or Link 183:76109. Overlay ink-bar offsets are receipted. After stay: Menu, then Dialog last."
 }

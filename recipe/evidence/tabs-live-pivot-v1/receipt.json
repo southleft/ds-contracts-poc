@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "tabs-live-pivot-v1-prepare",
+  "teaching": "One named default Tabs rail; selected-child indicator; no invented overlay ink-bar offsets",
+  "runIdentity": "34d1e257-b5d949f6-20e72946-tabs-v1",
+  "pageName": "Recipe Pivot / Tabs / 34d1e257-b5d949f6-20e72946-tabs-v1",
+  "namespace": "ds.contracts.tabs.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "34d1e257dc51c92d9f31c7198f029bf975f78f8b55df19b100e91e64cdd6f19d",
+    "MUI": "b5d949f6cbd5217607ca9e943912c806138c723431ff6a5a5a6d883640cf478a",
+    "Ant Design": "20e729469b8ff036fd9a9584feaa5b02c06d8ab2ccec64329b2293008cb4c828"
+  },
+  "writerSha256": "7d68129e70c87c0e24a6327ad6316d46fba693127d8fdce80ef0cb778a34e8d6",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}
