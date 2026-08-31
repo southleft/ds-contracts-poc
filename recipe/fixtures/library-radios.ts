@@ -104,6 +104,7 @@ const astryxTokens = cloneTokens("astryx.radio", (path, fallback) => {
   if (path === "dot.size") return 10;
   if (path === "dot.radius") return 5;
   if (path === "labelFontSize") return 14;
+  if (path === "labelLineHeight") return 0;
   if (path === "states.selected.enabled.circleFill") return "#0064e0ff";
   if (path === "states.selected.enabled.circleBorder") return "#0064e0ff";
   if (path === "states.selected.enabled.circleOpacity") return 1;
@@ -128,6 +129,7 @@ const astryxTokens = cloneTokens("astryx.radio", (path, fallback) => {
 });
 astryxTokens.listMode = "vertical";
 astryxTokens.itemAlign = "center";
+astryxTokens.labelLineHeightUnit = "auto";
 astryxTokens.typography = { label: astryxFont() };
 
 /**
@@ -146,6 +148,7 @@ const muiTokens = cloneTokens("mui.radio", (path, fallback) => {
   if (path === "dot.size") return 10;
   if (path === "dot.radius") return 5;
   if (path === "labelFontSize") return 16;
+  if (path === "labelLineHeight") return 0;
   if (path === "states.selected.enabled.circleFill") return "#00000000";
   if (path === "states.selected.enabled.circleBorder") return "#1976d2ff";
   if (path === "states.selected.enabled.circleOpacity") return 1;
@@ -170,6 +173,7 @@ const muiTokens = cloneTokens("mui.radio", (path, fallback) => {
 });
 muiTokens.listMode = "vertical";
 muiTokens.itemAlign = "center";
+muiTokens.labelLineHeightUnit = "auto";
 muiTokens.typography = { label: muiFont() };
 
 /**
@@ -188,6 +192,7 @@ const antdTokens = cloneTokens("antd.radio", (path, fallback) => {
   if (path === "dot.size") return 6;
   if (path === "dot.radius") return 3;
   if (path === "labelFontSize") return 14;
+  if (path === "labelLineHeight") return 22;
   if (path === "states.selected.enabled.circleFill") return "#1677ffff";
   if (path === "states.selected.enabled.circleBorder") return "#1677ffff";
   if (path === "states.selected.enabled.circleOpacity") return 1;
@@ -211,7 +216,8 @@ const antdTokens = cloneTokens("antd.radio", (path, fallback) => {
   return fallback;
 });
 antdTokens.listMode = "horizontal";
-antdTokens.itemAlign = "baseline";
+antdTokens.itemAlign = "center";
+antdTokens.labelLineHeightUnit = "px";
 antdTokens.typography = { label: antdFont() };
 
 export const astryxRadioSource: ReviewedRadioSource = {
@@ -284,7 +290,7 @@ export const antdRadioSource: ReviewedRadioSource = {
   framework: "react",
   sourceRoot: "examples/antd/.antd-sandbox/node_modules/antd/es/radio",
   anatomy: {
-    root: "group.js Radio.Group display inline-block (horizontal siblings); wrapper inline-flex alignItems baseline",
+    root: "group.js Radio.Group display inline-block (horizontal siblings); wrapper inline-flex alignItems baseline with ::after \\a0 strut; radio control alignSelf center — Figma itemAlign compiles the control pairing (center)",
     control:
       "style/index.js radioSize token.fontSizeLG 16; border token.lineWidth + colorBorder; borderRadius 50% → radius 8",
     glyph:
@@ -330,7 +336,8 @@ const tokenFacts = (
     if (
       path.startsWith("tokens.typography") ||
       path === "tokens.listMode" ||
-      path === "tokens.itemAlign"
+      path === "tokens.itemAlign" ||
+      path === "tokens.labelLineHeightUnit"
     ) {
       facts.push({
         occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
@@ -480,6 +487,13 @@ const muiRefusals = makeRefusals("mui", [
 ]);
 
 const antdRefusals = makeRefusals("antd", [
+  {
+    id: "refusal-wrapper-baseline-strut",
+    evidence:
+      "antd/es/radio/style/index.js wrapper alignItems baseline + ::after \\a0 strut; the painted control has alignSelf center. Figma BASELINE uses the circle frame's bottom edge, so itemAlign compiles the control pairing (center). Label lineHeight is 14 × 1.5714285714 = 22 from resetComponent / --line-height.",
+    target: "AntD wrapper baseline + nbsp strut",
+    reason: "lowered",
+  },
   {
     id: "refusal-after-dot",
     evidence:

@@ -68,7 +68,17 @@ test("radio@1 adapts Astryx RadioList, MUI RadioGroup, and AntD Radio.Group", ()
   assert.equal(mui.tokens.typography.label.resolvedFamily, "Roboto");
   assert.equal(antd.tokens.circle.size.fallback, 16, "fontSizeLG radioSize");
   assert.equal(antd.tokens.listMode, "horizontal", "Radio.Group inline-block");
-  assert.equal(antd.tokens.itemAlign, "baseline", "wrapper alignItems baseline");
+  assert.equal(
+    antd.tokens.itemAlign,
+    "center",
+    "radio control alignSelf center — Figma baseline sags the label",
+  );
+  assert.equal(antd.tokens.labelLineHeightUnit, "px");
+  assert.equal(
+    antd.tokens.labelLineHeight.fallback,
+    22,
+    "14 × --line-height 1.5714285714",
+  );
   assert.equal(antd.tokens.dot.size.fallback, 6, "dotSize = 16 - 10");
   assert.equal(
     antd.tokens.states.selected.enabled.circleFill.fallback,

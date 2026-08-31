@@ -115,6 +115,12 @@ export interface RadioRecipeInstance {
     list: { gap: RadioNumberParameter };
     item: { gap: RadioNumberParameter };
     itemAlign: "center" | "baseline";
+    /**
+     * `auto` keeps Astryx/MUI hug text. AntD `px` is
+     * fontSize × lineHeight (14 × 1.5714285714 = 22) from resetComponent.
+     */
+    labelLineHeightUnit: "auto" | "px";
+    labelLineHeight: RadioNumberParameter;
     wrapper: { size: RadioNumberParameter };
     circle: {
       size: RadioNumberParameter;
@@ -218,6 +224,8 @@ export const RadioRecipeInstanceSchema = z.strictObject({
     list: z.strictObject({ gap: NumberParameterSchema }),
     item: z.strictObject({ gap: NumberParameterSchema }),
     itemAlign: z.enum(["center", "baseline"]),
+    labelLineHeightUnit: z.enum(["auto", "px"]),
+    labelLineHeight: NumberParameterSchema,
     wrapper: z.strictObject({ size: NumberParameterSchema }),
     circle: z.strictObject({
       size: NumberParameterSchema,
@@ -337,7 +345,13 @@ const labelText = (
       fontStyle: instance.tokens.typography.label.resolvedStyle,
       fontProvenance: instance.tokens.typography.label,
       fontSize: instance.tokens.labelFontSize.fallback,
-      lineHeight: { unit: "auto" },
+      lineHeight:
+        instance.tokens.labelLineHeightUnit === "px"
+          ? {
+              unit: "px" as const,
+              value: instance.tokens.labelLineHeight.fallback,
+            }
+          : { unit: "auto" as const },
     },
     align: "left",
     verticalAlign: "center",
@@ -346,6 +360,9 @@ const labelText = (
     height: hug,
     bindings: [
       bind("type.fontSize", instance.tokens.labelFontSize),
+      ...(instance.tokens.labelLineHeightUnit === "px"
+        ? [bind("type.lineHeight.value", instance.tokens.labelLineHeight)]
+        : []),
       bind("fills.0.color", cell.label),
     ],
   };
@@ -895,6 +912,19 @@ export function collapseRadioRecipe(
         },
       },
       labelFontSize: numberFrom(label, "type.fontSize", label.type.fontSize),
+      labelLineHeightUnit:
+        label.type.lineHeight.unit === "px" ? "px" : "auto",
+      labelLineHeight:
+        label.type.lineHeight.unit === "px"
+          ? numberFrom(
+              label,
+              "type.lineHeight.value",
+              label.type.lineHeight.value,
+            )
+          : {
+              variable: `${envelope.id}.labelLineHeight`,
+              fallback: 0,
+            },
       typography: { label: fontFrom(label) },
     },
     inputFacts: [

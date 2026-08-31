@@ -79,6 +79,8 @@ export const canonicalRadioRecipeInstance = {
     list: { gap: number("ds.radio.list-gap", 8) },
     item: { gap: number("ds.radio.item-gap", 8) },
     itemAlign: "center",
+    labelLineHeightUnit: "auto",
+    labelLineHeight: number("ds.radio.labelLineHeight", 0),
     wrapper: { size: number("ds.radio.wrapper-size", 24) },
     circle: {
       size: number("ds.radio.circle-size", 22),

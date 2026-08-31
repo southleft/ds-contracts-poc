@@ -1,0 +1,38 @@
+{
+  "artifactVersion": "radio-prepare-v2-source-notes",
+  "status": "prepare-landed",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "oldStayPageId": "183:75031",
+  "doNotDeleteOldStay": true,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "shapeDecisionToCarry": "AntD itemAlign compiles the painted control pairing. No Polar nudge.",
+  "taught": {
+    "Ant Design": {
+      "file": "examples/antd/.antd-sandbox/node_modules/antd/es/radio/style/index.js",
+      "wrapper": "61-63 display inline-flex alignItems baseline",
+      "strut": "78-82 ::after \\a0 — receipted; Figma BASELINE on a 16px circle uses the frame bottom and sags",
+      "control": "101-107 radio alignSelf center — compiled as itemAlign center",
+      "labelPad": "199-201 paddingInline paddingXS 8",
+      "lineHeight": "resetComponent fontSize 14 × --line-height 1.5714285714 (antd.vars.css:27,253) = 22 — compiled as labelLineHeightUnit px 22"
+    },
+    "Astryx": "itemAlign center; labelLineHeightUnit auto",
+    "MUI": "itemAlign center; labelLineHeightUnit auto"
+  },
+  "receipted": [
+    "AntD wrapper alignItems baseline + ::after \\a0 strut — Figma cannot express CSS baseline+strut on a circle frame"
+  ],
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031"
+  ]
+}

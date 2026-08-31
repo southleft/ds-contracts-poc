@@ -24,8 +24,9 @@ import {
 } from "./interpret.js";
 
 export const RADIO_FIGMA_NAMESPACE = "ds.contracts.radio.recipe.v1";
-export const RADIO_FIGMA_WRITER_VERSION = 1;
-export const RADIO_FIGMA_RUN_SUFFIX = "radio-v1";
+export const RADIO_FIGMA_WRITER_VERSION = 2;
+export const RADIO_FIGMA_RUN_SUFFIX = "radio-v2";
+export const FORBIDDEN_RADIO_V1_PAGE_ID = "183:75031";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -262,6 +263,7 @@ void "RADIO-MUST-NOT-WRITE-PRESERVED-BUTTON-PAGE";
 void "RADIO-MUST-NOT-WRITE-TABLE-PAGE";
 void "RADIO-MUST-NOT-WRITE-CALENDAR-PAGE";
 void "RADIO-MUST-NOT-WRITE-CHECKBOX-PAGE";
+void "RADIO-MUST-NOT-WRITE-RADIO-V1-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("RADIO-MUST-NOT-WRITE-INPUT-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("RADIO-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("RADIO-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
@@ -270,6 +272,7 @@ if(figma.currentPage&&figma.currentPage.id==="85:6781")throw new Error("RADIO-MU
 if(figma.currentPage&&figma.currentPage.id==="173:48924")throw new Error("RADIO-MUST-NOT-WRITE-TABLE-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="181:64873")throw new Error("RADIO-MUST-NOT-WRITE-CALENDAR-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:74742")throw new Error("RADIO-MUST-NOT-WRITE-CHECKBOX-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75031")throw new Error("RADIO-MUST-NOT-WRITE-RADIO-V1-PAGE");
 await figma.loadAllPagesAsync();
 const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
 const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
@@ -289,6 +292,7 @@ if(page.id==="85:6781")throw new Error("RADIO-MUST-NOT-WRITE-PRESERVED-BUTTON-PA
 if(page.id==="173:48924")throw new Error("RADIO-MUST-NOT-WRITE-TABLE-PAGE");
 if(page.id==="181:64873")throw new Error("RADIO-MUST-NOT-WRITE-CALENDAR-PAGE");
 if(page.id==="183:74742")throw new Error("RADIO-MUST-NOT-WRITE-CHECKBOX-PAGE");
+if(page.id==="183:75031")throw new Error("RADIO-MUST-NOT-WRITE-RADIO-V1-PAGE");
 await figma.setCurrentPageAsync(page);
 setSharedData(page,"pageOwner",PAGE_OWNER);
 setSharedData(page,"runIdentity",PLAN.runIdentity);
@@ -565,10 +569,11 @@ export function emitRadioFigmaWriter(
     runtime.includes("RADIO-MUST-NOT-WRITE-BUTTON-PAGE") === false ||
     runtime.includes("RADIO-MUST-NOT-WRITE-TABLE-PAGE") === false ||
     runtime.includes("RADIO-MUST-NOT-WRITE-CALENDAR-PAGE") === false ||
-    runtime.includes("RADIO-MUST-NOT-WRITE-CHECKBOX-PAGE") === false
+    runtime.includes("RADIO-MUST-NOT-WRITE-CHECKBOX-PAGE") === false ||
+    runtime.includes("RADIO-MUST-NOT-WRITE-RADIO-V1-PAGE") === false
   )
     throw new TypeError(
-      "radio writer must refuse signed Input, Combobox, Button, Table, Calendar, and Checkbox pages",
+      "radio writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, and old Radio pages",
     );
 
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;

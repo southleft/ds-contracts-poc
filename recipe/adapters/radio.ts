@@ -107,7 +107,11 @@ const atLanding = (value: unknown, landing: string): unknown =>
 
 const expectedCategory = (target: string): RadioFactCategory => {
   if (target.startsWith("tokens.typography")) return "typography";
-  if (target.endsWith("listMode") || target.endsWith("itemAlign"))
+  if (
+    target.endsWith("listMode") ||
+    target.endsWith("itemAlign") ||
+    target.endsWith("labelLineHeightUnit")
+  )
     return "anatomy";
   if (target.includes("circleOpacity")) return "state";
   if (
