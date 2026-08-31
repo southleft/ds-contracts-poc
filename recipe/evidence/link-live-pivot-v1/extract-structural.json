@@ -1,0 +1,62 @@
+{
+  "artifactVersion": "link-live-v1-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "fullSceneReadbackWired": false,
+  "pageId": "183:76109",
+  "pageName": "Recipe Pivot / Link / be7109bb-d810f4f2-7a6db373-link-v1",
+  "runIdentity": "be7109bb-d810f4f2-7a6db373-link-v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=183-76109",
+  "taughtHostClass": "SF Pro listed but zero-glyph; painted named fallback Roboto Regular. Underline-at-rest is per-library, not an axis. Do not invent Inter.",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "link@1 is one named default component per library, not a set. Component Container was created inside each library Section; figma_arrange_component_set was not used.",
+  "components": [
+    {
+      "library": "Astryx",
+      "export": "Link",
+      "componentId": "183:76121",
+      "sectionId": "183:76120",
+      "containerId": "183:76123",
+      "adapterIdentity": "astryx-link-reviewed-v1",
+      "recipeHash": "be7109bbb96cf5d75d051623f483f59839d0a13327985f00aaa445060fbde8ae",
+      "variantCount": 1,
+      "decoration": "none",
+      "label": "Link",
+      "type": { "fontSize": 14, "lineHeight": 20, "fill": "#0064e0ff" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "MUI",
+      "export": "Link",
+      "componentId": "183:76134",
+      "sectionId": "183:76133",
+      "containerId": "183:76136",
+      "adapterIdentity": "mui-link-reviewed-v1",
+      "recipeHash": "d810f4f22cb942ec2a48930f7d3122f1a41fc4db4ad179cad7356e78b77e2ac5",
+      "variantCount": 1,
+      "decoration": "underline",
+      "label": "Link",
+      "type": { "fontSize": 14, "lineHeight": "auto", "fill": "#1976d2ff" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "Ant Design",
+      "export": "Typography.Link",
+      "componentId": "183:76148",
+      "sectionId": "183:76147",
+      "containerId": "183:76150",
+      "adapterIdentity": "antd-link-reviewed-v1",
+      "recipeHash": "7a6db373f013e947a24da7657db1cf24fcb23cd293eda633ced5a84532aa2399",
+      "variantCount": 1,
+      "decoration": "none",
+      "label": "Link",
+      "type": { "fontSize": 14, "lineHeight": 22, "fill": "#1677ffff" },
+      "fontPainted": { "label": { "family": "Roboto", "style": "Regular" } }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}
