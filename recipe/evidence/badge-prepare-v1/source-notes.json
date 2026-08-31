@@ -1,0 +1,121 @@
+{
+  "artifactVersion": "badge-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": false,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976"
+  ],
+  "shapeDecisionToCarry": "Astryx Badge is an inline status label (height --spacing-5, radius-full), not an anchored overlay. MUI Badge and AntD Badge are wrappers that pin a count/dot to a child's corner. Do not invent an Astryx overlay. Do not remint Chip/Token as Badge. Calendar-class: overlay compiles from MUI+AntD named facts; Astryx overlay is a named refusal.",
+  "libraries": {
+    "Astryx": {
+      "export": "Badge",
+      "package": "@astryxdesign/core@0.1.6",
+      "sources": [
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Badge/Badge.tsx",
+        "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/theme/tokens.stylex.ts"
+      ],
+      "shape": "inline status label — not an overlay",
+      "namedSoFar": {
+        "variantDefault": "neutral",
+        "example": "<Badge label=\"Active\" />",
+        "height": "--spacing-5 20",
+        "paddingInline": "--spacing-2 8",
+        "paddingBlock": 0,
+        "gap": "--spacing-1 4",
+        "radius": "--radius-full 9999",
+        "font": "--text-supporting-size 12 / Medium / leading 1.6667 → 20",
+        "fill": "--color-neutral rgba(5,54,89,0.1) = #0536591a",
+        "text": "--color-text-primary #0A1317"
+      },
+      "receipt": [
+        "anchored overlay — Astryx does not ship one",
+        "icon",
+        "variant info…yellow palette"
+      ]
+    },
+    "MUI": {
+      "export": "Badge",
+      "package": "@mui/material@9.2.0",
+      "sources": [
+        "recipe/sandboxes/input-field-mui/node_modules/@mui/material/Badge/Badge.js"
+      ],
+      "shape": "anchored overlay",
+      "namedSoFar": {
+        "variantDefault": "standard",
+        "colorDefault": "default",
+        "overlapDefault": "rectangular",
+        "anchorOriginDefault": "top right",
+        "max": 99,
+        "showZero": false,
+        "invisibleWhen": "badgeContent == null && variant !== dot",
+        "indicatorHeight": "RADIUS_STANDARD * 2 = 20",
+        "indicatorMinWidth": 20,
+        "indicatorRadius": 10,
+        "indicatorPadX": 6,
+        "fontSize": "pxToRem(12)",
+        "fontWeight": "fontWeightMedium",
+        "lineHeight": 1,
+        "insetRectangularTopRight": "0 0 auto auto",
+        "translate": "50%, -50%"
+      },
+      "open": "color=default has no palette.main/contrastText style in Badge.js — do not invent error as the shared default just because the capture harness used error",
+      "receipt": ["dot 8×8", "circular overlap 14%", "max 99+", "color primary…warning", "invisible"]
+    },
+    "Ant Design": {
+      "export": "Badge",
+      "package": "antd@5.29.3",
+      "sources": [
+        "examples/antd/.antd-sandbox/node_modules/antd/es/badge/index.js",
+        "examples/antd/.antd-sandbox/node_modules/antd/es/badge/style/index.js"
+      ],
+      "shape": "anchored overlay",
+      "namedSoFar": {
+        "countDefault": null,
+        "dotDefault": false,
+        "sizeDefault": "default",
+        "overflowCount": 99,
+        "showZero": false,
+        "hiddenWhen": "count null/empty and not dot",
+        "badgeColor": "token.colorError (named default when color unset)",
+        "badgeTextColor": "token.colorTextLightSolid",
+        "indicatorHeight": "Math.round(fontSize * lineHeight) - 2 * lineWidth → 20 with seed 14 / 1.5714 / 1",
+        "dotSize": "fontSizeSM / 2",
+        "textFontSize": "fontSizeSM 12",
+        "anchor": "top 0, insetInlineEnd 0, translate(50%, -50%)",
+        "shadow": "0 0 0 lineWidth colorBorderBg"
+      },
+      "receipt": ["dot", "status/text standalone", "Ribbon", "size small", "preset colors", "offset"]
+    }
+  },
+  "proposedAxesToConfirm": {
+    "Color": "not shared — Astryx variant palette, MUI color, AntD colorError-default vs presets",
+    "Mode": "MUI standard/dot and AntD count/dot are similar but Astryx has neither. Not a 3-way axis.",
+    "notAnAxisUntilShared": [
+      "dot",
+      "status/text",
+      "Ribbon",
+      "overlap circular",
+      "max/overflowCount",
+      "Astryx variant colors"
+    ]
+  },
+  "sharedContentProposal": [
+    "visible overlay count 5 — both MUI and AntD hide when content is null; 5 is the AntD seed, not an invented axis"
+  ],
+  "note": "Writer class to teach is anchored overlay (absolute indicator + named translate). Astryx overlay is a named refusal. Do not compile Astryx Badge as if it were Token, and do not invent a fourth overlay export."
+}
