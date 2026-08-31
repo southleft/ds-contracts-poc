@@ -1,0 +1,467 @@
+{
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "85:6781",
+  "pageName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+  "createdNodeIds": [
+    "85:8089",
+    "85:8090",
+    "85:8091",
+    "85:8095",
+    "85:8097",
+    "85:8099",
+    "85:8101",
+    "85:8103",
+    "85:8105",
+    "85:8107",
+    "85:8111",
+    "85:8113",
+    "85:8115",
+    "85:8117",
+    "85:8119",
+    "85:8121"
+  ],
+  "mutatedPreExistingNodeIds": [],
+  "proofSectionId": "85:8089",
+  "pairedSectionId": "85:8090",
+  "sets": [
+    {
+      "id": "85:7406",
+      "name": "Button / button@1 proof",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variants": 144
+    },
+    {
+      "id": "85:8054",
+      "name": "Button / button@1 proof",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variants": 144
+    }
+  ],
+  "instances": [
+    {
+      "id": "85:8091",
+      "setId": "85:7406",
+      "adapterIdentity": "altitude-button-reviewed-v2"
+    },
+    {
+      "id": "85:8107",
+      "setId": "85:8054",
+      "adapterIdentity": "fluent-button-reviewed-v2"
+    }
+  ],
+  "cellRecords": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "85:8095",
+      "componentId": "85:7100"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "85:8097",
+      "componentId": "85:7119"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "85:8099",
+      "componentId": "85:7154"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "85:8101",
+      "componentId": "85:6789"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "85:8103",
+      "componentId": "85:6813"
+    },
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "85:8105",
+      "componentId": "85:6848"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "85:8111",
+      "componentId": "85:7743"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "85:8113",
+      "componentId": "85:7762"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "85:8115",
+      "componentId": "85:7800"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "85:8117",
+      "componentId": "85:7414"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "85:8119",
+      "componentId": "85:7440"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "85:8121",
+      "componentId": "85:7478"
+    }
+  ],
+  "images": [
+    {
+      "kind": "representative",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "nodeId": "85:8091",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/altitude-button-reviewed-v2.png",
+      "bytes": 1926,
+      "sha256": "52658cb274a817479cc9eb3937206af92a4dbcbaa6a253e7189a7b3c381448c9"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "85:8095",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-default.png",
+      "bytes": 1884,
+      "sha256": "1dee591b4c3d8df989f738499fa457ad2ef930a3f3302b0f9e9cedd6c50db911"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "85:8097",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-hover.png",
+      "bytes": 1848,
+      "sha256": "e89fec3dd2aaae4e7304f5cd5510d5fceb28b3d3b4bcfb05520228d91231587d"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "85:8099",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-focus-visible.png",
+      "bytes": 2428,
+      "sha256": "0f372ca093132d7a2caefee95768b67cb1261136e3ca0d8540a010e33791475a"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "85:8101",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-default.png",
+      "bytes": 1926,
+      "sha256": "52658cb274a817479cc9eb3937206af92a4dbcbaa6a253e7189a7b3c381448c9"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "85:8103",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-hover.png",
+      "bytes": 1861,
+      "sha256": "60ab9c6a768cfec98a4e5a77e494f6871039f0399d21b134aec80aceab1e4398"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "85:8105",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-focus-visible.png",
+      "bytes": 2513,
+      "sha256": "6e137eb5d116c1d1b1bfe415c021a15899df1f036131d51bc289cf994356035f"
+    },
+    {
+      "kind": "representative",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "nodeId": "85:8107",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/fluent-button-reviewed-v2.png",
+      "bytes": 1695,
+      "sha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "nodeId": "85:8111",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-default.png",
+      "bytes": 1656,
+      "sha256": "ed675c367b1eccd6eab7e49c8e3f4f54cfa7ed51a71abad1d8fdcba8c8bfe806"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "nodeId": "85:8113",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-hover.png",
+      "bytes": 1716,
+      "sha256": "1a5aa90466656d0fa718e49264dff5667c54677417b6e38b95fcda3459daa554"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "nodeId": "85:8115",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-focus-visible.png",
+      "bytes": 1656,
+      "sha256": "ed675c367b1eccd6eab7e49c8e3f4f54cfa7ed51a71abad1d8fdcba8c8bfe806"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "nodeId": "85:8117",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-default.png",
+      "bytes": 1695,
+      "sha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "nodeId": "85:8119",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-hover.png",
+      "bytes": 1713,
+      "sha256": "7d6bab82374569e08eb8a3d155736c178727ad1c3e14db06b2832f67187a89e9"
+    },
+    {
+      "kind": "paired-cell",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "nodeId": "85:8121",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-focus-visible.png",
+      "bytes": 1695,
+      "sha256": "2d8550b0d962136720f3912eb15ef1a45f1024f5bb19685d91f8dc14421e881a"
+    }
+  ],
+  "setImages": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "nodeId": "85:7406",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/sets/altitude-button-reviewed-v2.png",
+      "bytes": 9528,
+      "sha256": "a1cb51becd0396e7f3fe4736e9e332c20de5db962c1fe302bffb9652e9b92b91"
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "nodeId": "85:8054",
+      "path": "recipe/evidence/button-live-pivot-v4/screenshots/sets/fluent-button-reviewed-v2.png",
+      "bytes": 10123,
+      "sha256": "331503b25002ce2898e70f742da87127a79e8f2f449ce492fee04225c3ae3069"
+    }
+  ],
+  "probes": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "resize": {
+        "sourceIntent": "HUG",
+        "before": {
+          "width": 83,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "IBM Plex Sans",
+            "fontStyle": "SemiBold",
+            "fontSize": 16,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 51,
+            "height": 24,
+            "x": 16,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "grown": {
+          "width": 147,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "IBM Plex Sans",
+            "fontStyle": "SemiBold",
+            "fontSize": 16,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 51,
+            "height": 24,
+            "x": 48,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restored": {
+          "width": 83,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "IBM Plex Sans",
+            "fontStyle": "SemiBold",
+            "fontSize": 16,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 51,
+            "height": 24,
+            "x": 16,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restorationBeforeSha256": "d31a1b1bb0958dfa782ff8bea4168e47724b4624433960fd09a46b3b1e23db66",
+        "restorationAfterSha256": "d31a1b1bb0958dfa782ff8bea4168e47724b4624433960fd09a46b3b1e23db66",
+        "failures": [],
+        "passed": true
+      },
+      "variantSwitching": {
+        "passed": true,
+        "beforeMain": "85:6789",
+        "afterMain": "85:7100"
+      },
+      "tokenBinding": {
+        "passed": true,
+        "bindingFacts": 2592
+      },
+      "noFakeLayout": {
+        "passed": true,
+        "components": 144,
+        "layoutChildren": 300,
+        "nonAbsoluteChildren": 300
+      },
+      "labelValidation": {
+        "denominator": 144,
+        "passed": 144
+      },
+      "restored": true
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "resize": {
+        "sourceIntent": "HUG",
+        "before": {
+          "width": 96,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "Roboto",
+            "fontStyle": "SemiBold",
+            "fontSize": 14,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 42,
+            "height": 20,
+            "x": 27,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "grown": {
+          "width": 160,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "Roboto",
+            "fontStyle": "SemiBold",
+            "fontSize": 14,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 42,
+            "height": 20,
+            "x": 59,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restored": {
+          "width": 96,
+          "label": {
+            "characters": "Button",
+            "fontFamily": "Roboto",
+            "fontStyle": "SemiBold",
+            "fontSize": 14,
+            "fillAlpha": 1,
+            "visible": true,
+            "width": 42,
+            "height": 20,
+            "x": 27,
+            "horizontalAlignment": "CENTER"
+          }
+        },
+        "restorationBeforeSha256": "909e288e6b75ca7c5156252a6da9271545acb49c208d3983faa2bd4e40d52302",
+        "restorationAfterSha256": "909e288e6b75ca7c5156252a6da9271545acb49c208d3983faa2bd4e40d52302",
+        "failures": [],
+        "passed": true
+      },
+      "variantSwitching": {
+        "passed": true,
+        "beforeMain": "85:7414",
+        "afterMain": "85:7743"
+      },
+      "tokenBinding": {
+        "passed": true,
+        "bindingFacts": 2568
+      },
+      "noFakeLayout": {
+        "passed": true,
+        "components": 144,
+        "layoutChildren": 300,
+        "nonAbsoluteChildren": 300
+      },
+      "labelValidation": {
+        "denominator": 144,
+        "passed": 144
+      },
+      "restored": true
+    }
+  ],
+  "readback": {
+    "comparedFacts": 7956,
+    "observedFacts": 13248,
+    "canonicalCycle1Sha256": "e450fb2bfd2380abb1376c9cc5bd9c6d0860fd11afb7e66803d14bf7c5aa81bd",
+    "canonicalCycle2Sha256": "e450fb2bfd2380abb1376c9cc5bd9c6d0860fd11afb7e66803d14bf7c5aa81bd",
+    "twoCompleteCyclesStable": true
+  },
+  "after": {
+    "pageCount": 13,
+    "totalTopLevelNodes": 174,
+    "proofPageMatches": 1,
+    "collectionCount": 14,
+    "totalLocalVariables": 11163,
+    "matchingCollections": 2
+  },
+  "zeroSilentAccounting": {
+    "denominator": 13248,
+    "carried": 13248,
+    "codeOnly": 0,
+    "namedRefused": 0,
+    "silent": 0
+  }
+}

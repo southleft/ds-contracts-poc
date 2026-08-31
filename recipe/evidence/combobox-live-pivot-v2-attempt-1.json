@@ -1,0 +1,80 @@
+{
+  "artifactVersion": "combobox-live-v2-attempt-1-v1",
+  "status": "failed closed at extract; restore 144 held; cleanup accepted; mint did not stay",
+  "authorizationCommit": "bf03102650354f840087534ccd16d7b933c966f8",
+  "codeCommit": "bf03102650354f840087534ccd16d7b933c966f8",
+  "antecedentCommit": "809b30dcd76a52f2cf0fea93419c49e0458e18b3",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "restore option/label only from option-set; restore input only from combobox/set; keep 144 owned FILL texts",
+    "held": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "126:304408",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["126:305272", "126:304503", "126:306136", "126:305367"],
+    "muiOptionSetId": "126:304503",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v1ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": false,
+    "accepted": false,
+    "refusedClass": "SCENE-DIRECT-OWNERSHIP-METADATA",
+    "refused": "SCENE-DIRECT-OWNERSHIP-METADATA:126:304503:envelopeHash",
+    "measuredNodeId": "126:304503",
+    "measuredNodeKind": "combobox/option-set",
+    "measuredField": "envelopeHash",
+    "namedFromSource": "writer mintSet stamps runIdentity/adapterIdentity/recipeHash/ownershipKey on set roots but omits envelopeHash; tag() stamps envelopeHash on descendants; extract requires envelopeHash on every direct-ownershipKey node including the set root"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "126:304408"
+  },
+  "nextTeaching": {
+    "class": "SCENE-DIRECT-OWNERSHIP-METADATA envelopeHash on set root",
+    "doNotInvent": true,
+    "restartV2Attempt2AsIs": false,
+    "prepareV3": "extract must not require envelopeHash on owned component-set roots; writer mintSet leaves that field unstamped"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

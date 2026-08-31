@@ -1,0 +1,44 @@
+{
+  "artifactVersion": "calendar-live-v7-status-v1",
+  "status": "attempt 1 failed closed at writer CALENDAR-DAY-PROPERTY-ABSENT:Label; day set already had Label; week mint died on the 7th fresh instance; leftover cleaned; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "f1129094a2ec7c0f5d7b1cbf03ad606234a3bfdf",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v7/antecedent-index.json",
+    "indexSha256": "5bd251df2e660149ef94d1a0868e9df49c181a4812b93c713d9383ab267c033a",
+    "hashSetSha256": "251b7c91c546a16b38931845d50b2cfe4c0a50edb2b04a58e28f37c97f7682d3"
+  },
+  "authorization": {
+    "commit": "aae970d3d9f0fdef6970da1984da7aaadfbc765c",
+    "path": "recipe/evidence/calendar-live-pivot-v7/capture-authorization.json",
+    "sha256": "ff24469b6309bfde248117d52fee285e0e82d4c5236ad8f271d0ca640d2530b4",
+    "signingPublicKeySpkiSha256": "cacff9907dfad3798be5c168f0cffb1aea1af0c3c457083e48dc84d99470e279"
+  },
+  "attempt1": {
+    "pageId": "173:50397",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "CALENDAR-DAY-PROPERTY-ABSENT:Label",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "writer must take day Label presence from the set-issued addComponentProperty key, not createInstance().componentProperties",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

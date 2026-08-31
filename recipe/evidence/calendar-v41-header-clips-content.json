@@ -1,0 +1,49 @@
+{
+  "artifactVersion": "calendar-v41-header-clips-content-v1",
+  "status": "failed closed; mint did not stay",
+  "antecedent": {
+    "prepare": "d9d102da56964d520c7bee0170f77d9098336af8",
+    "authorize": "cc362118f"
+  },
+  "runIdentity": "4604bbfe-calendar-v41",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": { "accepted": true, "pageId": "180:60336", "collectionId": "VariableCollectionId:180:60338", "cleaned": true },
+  "restore": { "accepted": true },
+  "extract": {
+    "mcpSucceeded": true,
+    "navUnnamedChromeFamilyCleared": true,
+    "navIconCompileOrderHeld": true,
+    "collapseRefused": "unsupported structural edit at $.children[0].children[0].children[0].clipsContent; calendar@1 accepts only the declared designer edit surface",
+    "brokerCleanupAccepted": true
+  },
+  "measured": {
+    "collapseNode": "calendar/header",
+    "refusedField": "clipsContent",
+    "headerBodyRolesSet": ["calendar/weekday-row", "calendar/grid"],
+    "headerRoleNotInSet": "calendar/header arrived with the V31 nav+caption expansion and was never added to HEADER_BODY_ROLES",
+    "compileHeaderChrome": "compile header omits clipsContent, cornerRadius, effects, strokes; carries only layout facts and the captionGap itemSpacing binding",
+    "liveHeaderClipsContent": true,
+    "precedentForRoleAddition": "V34 added calendar/day/button to the existing per-side stroke-weight fold predicate as one teaching",
+    "captureMonth": "April 2026",
+    "grids": { "on": 6, "off": 6 },
+    "captionFillWidth": 0,
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "doNotRestartAttempt2AsIs": true,
+  "nextTeaching": "calendar/header joins HEADER_BODY_ROLES so the already-taught header-body unnamed-chrome omits (clipsContent, cornerRadius, effects, strokes) cover it",
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}

@@ -1,0 +1,348 @@
+{
+  "version": 1,
+  "source": {
+    "ref": "origin/main",
+    "commit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "verifiedFrom": [
+      "parity/receipts/v1/census-manifest.json",
+      "parity/receipts/v1/census/*/*/verdict.json",
+      "parity/receipts/v1/census/*/*/code-render.json"
+    ]
+  },
+  "legacyCi": {
+    "status": "failed",
+    "passed": 227,
+    "total": 230,
+    "evalCommit": "053f2a0e50447479775dc330e123bb07da1a7714",
+    "failing": [
+      "astryx-reanchor-minted",
+      "minted-leaves-bind-to-something",
+      "console-loop-canvas-drift-probe"
+    ],
+    "policy": "named reds do not make the full lane green; close them or deliberately change policy"
+  },
+  "corpus": {
+    "contracts": 170,
+    "referenceRenders": 805,
+    "recognisableSets": 117,
+    "usableSets": 39,
+    "unwalledNotRecognisableSets": 42,
+    "unwalledDefinition": "recognisable === false and walls.length === 0"
+  },
+  "formula": {
+    "scalarOutperformLegacy": null,
+    "setWeighted": "recognisable subjects / subjects compared",
+    "cellWeighted": "blind-recognisable matched cells / matched cells compared",
+    "comparabilityRequires": [
+      "identical real-library subjects",
+      "identical cell denominator per path",
+      "all declared axes covered",
+      "all required states and structural roles covered",
+      "complete non-zero sample",
+      "all four usability assertions executed per path",
+      "same pinned source/reference hashes and sample matrix",
+      "one randomized anonymized independent blind batch under one protocol/environment"
+    ]
+  },
+  "blindGradeProtocol": {
+    "status": "completed-and-adjudicated",
+    "pinBeforeGeneration": [
+      "source commit",
+      "fixture hash",
+      "sample matrix hash",
+      "per-cell real-library reference hashes"
+    ],
+    "sameForBothPaths": [
+      "rubric and pass threshold",
+      "crop and scale",
+      "browser",
+      "fonts",
+      "environment hash"
+    ],
+    "batch": "legacy and recipe specimens are randomized/anonymized together; arithmetic resolves immutable output hashes, never labels",
+    "requiredGradeFields": [
+      "independent grader identity",
+      "protocol version",
+      "per-cell recognisable verdict",
+      "per-cell defects",
+      "per-cell confidence"
+    ],
+    "builderMayWriteFinalVerdict": false,
+    "fixtureRebuildPolicy": "any source, fixture, sample, output, or reference hash change voids both sides and requires regrading both"
+  },
+  "legacyContext": {
+    "button": {
+      "classification": "easy control",
+      "sets": 14,
+      "recognisableSets": 12,
+      "totalVariants": 633,
+      "variantWeightedSetVerdict": {
+        "recognisableVariants": 617,
+        "variants": 633
+      }
+    },
+    "inputField": {
+      "classification": "difficult control",
+      "sets": 11,
+      "recognisableSets": 3,
+      "totalVariants": 1415,
+      "variantWeightedSetVerdict": {
+        "recognisableVariants": 1349,
+        "variants": 1415
+      }
+    },
+    "selectCombobox": {
+      "classification": "weak non-comparable stub context",
+      "sets": 4,
+      "recognisableSets": 4,
+      "totalVariants": 6,
+      "variantWeightedSetVerdict": {
+        "recognisableVariants": 6,
+        "variants": 6
+      },
+      "target": false
+    },
+    "tableDataGrid": {
+      "classification": "weak non-comparable stub context",
+      "sets": 5,
+      "recognisableSets": 5,
+      "totalVariants": 10,
+      "variantWeightedSetVerdict": {
+        "recognisableVariants": 10,
+        "variants": 10
+      },
+      "target": false
+    },
+    "calendar": {
+      "legacyComparison": "undefined (0 contracts)",
+      "acceptance": [
+        "blind recognisability on all sampled variants",
+        "all four usability assertions",
+        "canonical two-cycle fixed point",
+        "zero silent facts with a non-zero denominator",
+        "held-out first-pass"
+      ]
+    }
+  },
+  "buttonMatchedSlice": {
+    "subjects": ["altitude.button", "fluent.button"],
+    "legacyContext": {
+      "sets": 2,
+      "recognisableSets": 1,
+      "totalVariants": 49,
+      "renderedSampleCells": 18,
+      "recipe-axis-intersectionCandidates": 11
+    },
+    "sourceReferenceAudit": {
+      "rule": "reference means the original external source render, never either conversion path",
+      "altitude.button": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Altitude package publisher",
+        "package": "altitude-web-components",
+        "version": "1.0.2",
+        "component": "Button",
+        "configPath": "extract/computed/configs/altitude.json",
+        "documentedHarness": "examples/altitude/.altitude-sandbox",
+        "renderedReferenceCells": 6,
+        "status": "complete-paired-provenance",
+        "missing": [],
+        "evidencePath": "recipe/evidence/button-comparison/receipt.json"
+      },
+      "fluent.button": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "package": "@fluentui/react-components",
+        "version": "9.74.5",
+        "component": "Button",
+        "configPath": "extract/computed/configs/fluent.json",
+        "documentedHarness": "examples/fluent/.fluent-sandbox",
+        "sandboxLockfileHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "renderedReferenceCells": 6,
+        "status": "complete-paired-provenance",
+        "missing": [],
+        "evidencePath": "recipe/evidence/button-comparison/receipt.json"
+      },
+      "gradingValidity": "adjudicated-integrity-passed",
+      "regenerationRequired": false
+    },
+    "recipeOffline": {
+      "setsCompiled": 2,
+      "cellsCompiled": 288,
+      "axesPerSet": 4,
+      "factsCompared": 16,
+      "structuralRolesCovered": [
+        "button/root",
+        "button/label",
+        "button/slot/leading",
+        "button/slot/trailing",
+        "button/loading-indicator"
+      ]
+    },
+    "matchedComparison": {
+      "status": "adjudicated-failed",
+      "comparisonFixturePin": "recipe/evidence/button-comparison/receipt.json#comparisonPin",
+      "adjudicationArtifact": "recipe/evidence/button-comparison/comparison-result.json",
+      "cellsComparedPerPath": 12,
+      "sampleComplete": true,
+      "setWeighted": {
+        "definition": "a source-library set passes only when all 6 sampled cells are recognisable",
+        "legacy": "0/2",
+        "recipeReact": "0/2"
+      },
+      "cellWeighted": {
+        "definition": "each exact source-library×variant×state cell has equal weight",
+        "legacy": "9/12",
+        "recipeReact": "0/12"
+      },
+      "legacyRecognisability": "9/12",
+      "recipeRecognisability": "0/12",
+      "legacyUsabilityAssertionsExecuted": 4,
+      "recipeUsabilityAssertionsExecuted": 4,
+      "reason": "The independent 24-specimen blind batch passed integrity adjudication. On the exact paired 12-cell denominator, legacy scored 9/12 and recipe React scored 0/12; recipe lost 9 cells and tied failure on 3. Web Component parity remains a separate ungraded surface. Offline usability assertion counts tie 4/4, while strict structural/usability improvement is not established on a symmetric denominator.",
+      "handoff": "Correct recipe Button source-adapter token, geometry, typography, and state mapping without branching the archetype recipe; regenerate a newly sealed packet and obtain a fresh independent grade."
+    },
+    "v2Comparison": {
+      "status": "adjudicated-passed-offline-recognisability",
+      "evidenceReceipt": "recipe/evidence/button-comparison-v2/receipt.json",
+      "blindPacket": "recipe/evidence/button-comparison-v2/blind-packet/packet.json",
+      "sealedAnswerKey": "recipe/evidence/button-comparison-v2/sealed-answer-key.json",
+      "grades": "recipe/evidence/button-comparison-v2/blind-packet/grades.json",
+      "adjudicationArtifact": "recipe/evidence/button-comparison-v2/comparison-result.json",
+      "sourceReferences": 12,
+      "legacyOutputs": 12,
+      "correctedRecipeReactOutputs": 12,
+      "recipeWebComponentParityOutputs": 12,
+      "blindSpecimens": 24,
+      "sampleMatrixHashUnchangedFromV1": true,
+      "sourceReferenceHashesUnchangedFromV1": true,
+      "legacyOutputHashesUnchangedFromV1": true,
+      "reactWebComponentPixelsEquivalent": true,
+      "setWeighted": {
+        "legacy": "0/2",
+        "recipeReact": "2/2"
+      },
+      "cellWeighted": {
+        "legacy": "7/12",
+        "recipeReact": "12/12"
+      },
+      "pairedOutcomes": {
+        "recipeBeatLegacy": 5,
+        "tiedPass": 7,
+        "tiedFail": 0,
+        "legacyBeatRecipe": 0
+      },
+      "immutableV1RecipeResult": "0/12",
+      "acquisitionFacts": {
+        "altitude": 13,
+        "fluent": 13
+      },
+      "buttonSuccess": false
+    },
+    "v4FinalAdjudication": {
+      "status": "adjudicated-passed-complete-button",
+      "preGradeReceipt": "recipe/evidence/button-live-pivot-v4/receipt.json",
+      "grades": "recipe/evidence/button-live-pivot-v4/blind-packet/grades.json",
+      "finalAdjudication": "recipe/evidence/button-live-pivot-v4/final-adjudication.json",
+      "liveCanvasRecognisability": "12/12",
+      "confidence": {
+        "high": 12,
+        "medium": 0,
+        "low": 0
+      },
+      "liveMint": {
+        "componentSets": 2,
+        "variants": 288,
+        "variables": 57,
+        "bindings": 4296
+      },
+      "usability": {
+        "reflow": "2/2",
+        "variantSwitching": "2/2",
+        "tokenBinding": "2/2",
+        "noFakeLayout": "2/2",
+        "exactRestoration": "2/2"
+      },
+      "readback": {
+        "canonicalCycles": 2,
+        "observedFacts": 13248,
+        "accountedFacts": 13248,
+        "silentFacts": 0
+      },
+      "proofBoundary": "one Button archetype, two real libraries, one matched 12-cell slice; no Input/Field, Combobox, Data Table, or Calendar claim",
+      "buttonSuccess": true
+    },
+    "evidenceColumns": {
+      "offlineImplementation": "passed",
+      "pairedRecognisability": "passed",
+      "webComponentParity": "passed-ungraded-recognisability",
+      "liveFigma": "passed",
+      "usability": "passed",
+      "twoCycleLiveFixedPoint": "passed",
+      "overallSuccess": true
+    }
+  },
+  "inputFieldMatchedSlice": {
+    "status": "evidence-complete-ungraded",
+    "overall": false,
+    "sources": [
+      "@mui/material@9.2.0 TextField",
+      "@shopify/polaris@13.9.5 TextField"
+    ],
+    "matrix": {
+      "axes": ["Size", "State", "Content", "Required", "Adornments"],
+      "recipeVariantsPerSource": 128,
+      "pairedCellsPerSource": 64,
+      "totalSourceCells": 128,
+      "sampleMatrixHash": "7630a3f9e79f4d2df786f5537c550eb9822d0b57796f72f289c87adf0dcc4853"
+    },
+    "artifacts": {
+      "index": "recipe/evidence/input-field-comparison/index.json",
+      "receipt": "recipe/evidence/input-field-comparison/receipt.json",
+      "receiptHash": "c75a30e420240dfa885508735d593cab30dcf80a63d55954ba4b00924c96cc2f",
+      "blindPacket": "recipe/evidence/input-field-comparison/blind-packet/packet.json",
+      "packetHash": "6920d34ba3faec0fd03b6bdd8c8efcbb8b8e81f1e86c709e8021da31e83cd61f",
+      "sealedAnswerKey": "recipe/evidence/input-field-comparison/sealed-answer-key.json"
+    },
+    "counts": {
+      "sourceReferences": 128,
+      "legacyOutputs": 128,
+      "recipeReactOutputs": 128,
+      "recipeWebComponentParityOutputs": 128,
+      "blindReferences": 128,
+      "blindSpecimens": 256
+    },
+    "comparisonCompleteness": {
+      "source": "128/128",
+      "legacy": "128/128",
+      "recipeReact": "128/128",
+      "recipeWebComponent": "128/128",
+      "blindPacket": "256/256",
+      "legacyUnsupportedMappingsRecorded": true,
+      "denominatorClaimsRestrictedToFrozenMatrix": true
+    },
+    "historicalContext": {
+      "setWeightedRecognisability": "3/11",
+      "fullLegacyVariants": 1415,
+      "variantWeightedSetVerdict": "1349/1415",
+      "pairedBaseline": false,
+      "reason": "the census spans 11 heterogeneous contracts and capped historical samples rather than the two fixed real packages and exact 128-cell paired matrix"
+    },
+    "recognisability": {
+      "legacy": "ungraded",
+      "recipeReact": "ungraded",
+      "recipeWebComponent": "ungraded-parity-only"
+    },
+    "liveFigma": "not-attempted",
+    "nextTask": "independent blind grade of all 256 opaque specimens; do not unseal or adjudicate the key during grading"
+  },
+  "completion": {
+    "implementation": "complete-offline-react-web-component-and-acquisition",
+    "offlineComparison": "v1-adjudicated-failed-and-retained; v2-adjudicated-passed",
+    "liveFigma": "v4-complete-artifacts-retained",
+    "independentBlindGrade": "v1-v2-and-live-v4-complete",
+    "fullUsability": "passed-both-sources",
+    "fullFixedPoint": "passed-two-live-cycles",
+    "buttonSuccess": true,
+    "nextTask": "Independent Input/Field blind grade over the sealed 256-specimen packet; Input/Field remains false and ungraded"
+  }
+}

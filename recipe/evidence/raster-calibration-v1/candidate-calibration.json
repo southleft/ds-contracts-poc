@@ -1,0 +1,65 @@
+{
+  "calibration": {
+    "version": "recipe-browser-figma-raster-calibration-v1",
+    "corpusHash": "daeac5691a14cbfd494fb0fb21d5c105d55f1dc257a76bfe42bce425dce28660",
+    "metricHash": "70d788c9bd56f70efb307a9a0d98d7b62c20df2b5e2c2508b63bccbcabecc834",
+    "writer": {
+      "fontSizeScale": 0.9958043981481481,
+      "lineHeightScale": 1,
+      "letterSpacingPx": 0.0075472608024694425
+    },
+    "capture": {
+      "rgbLevels": 64
+    },
+    "bounds": {
+      "fontSizeScale": {
+        "minimum": 0.98,
+        "maximum": 1.02
+      },
+      "lineHeightScale": {
+        "minimum": 0.97,
+        "maximum": 1.03
+      },
+      "letterSpacingPx": {
+        "minimum": -0.35,
+        "maximum": 0.35
+      },
+      "rgbLevels": {
+        "minimum": 64,
+        "maximum": 256
+      }
+    },
+    "provenance": {
+      "derivedFrom": "training-only",
+      "trainingIds": [
+        "adornment-pair-a",
+        "dimension-medium-a",
+        "dimension-small-a",
+        "layout-fill-a",
+        "layout-hug-a",
+        "overlay-label-a",
+        "padding-asymmetric-a",
+        "state-border-a",
+        "state-ring-a",
+        "surface-stroke-a",
+        "text-a1",
+        "text-a2",
+        "text-a3",
+        "text-b1",
+        "text-b2",
+        "text-b3"
+      ],
+      "validationIdsLockedBeforeMeasurement": [
+        "adornment-held",
+        "dimension-held",
+        "layout-fill-held",
+        "overlay-held",
+        "ring-held",
+        "surface-held",
+        "text-held-a",
+        "text-held-b"
+      ]
+    }
+  },
+  "calibrationHash": "397cd1a325e0d24ff9f6ce74caccee74c4d9ac4adb16ce93350de613e665b3cc"
+}

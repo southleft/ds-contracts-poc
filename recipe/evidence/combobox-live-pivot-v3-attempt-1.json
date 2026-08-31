@@ -1,0 +1,86 @@
+{
+  "artifactVersion": "combobox-live-v3-attempt-1-v1",
+  "status": "failed closed at extract; restore 144 held; cleanup accepted; mint did not stay",
+  "authorizationCommit": "9dafd534bbf05953662fe17462e948ad8fb505ce",
+  "codeCommit": "9dafd534bbf05953662fe17462e948ad8fb505ce",
+  "antecedentCommit": "68da7ceb4eeb57abc31503bf83eb63ecb3d3731f",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "extract must not require envelopeHash on owned component-set roots",
+    "cleared": true,
+    "heldRestore144": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "131:306137",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["131:307001", "131:306232", "131:307865", "131:307096"],
+    "muiOptionSetId": "131:306232",
+    "muiComboboxSetId": "131:307001",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": false,
+    "accepted": false,
+    "refusedClass": "SCENE-GENERATED-DESCENDANT-DIRECT-KEY",
+    "refused": "SCENE-GENERATED-DESCENDANT-DIRECT-KEY:I131:306316;131:306219",
+    "measuredNodeId": "I131:306316;131:306219",
+    "measuredNodeKind": "TEXT combobox/option/label inside owned option INSTANCE",
+    "measuredOwnershipKey": "option/children/2/children/0",
+    "measuredParentId": "131:306316",
+    "measuredParentKind": "INSTANCE combobox/option-instance/0",
+    "measuredParentOwnershipKey": "combobox/children/8/children/3/children/0/children/0",
+    "measuredSetId": "131:307001",
+    "namedFromSource": "v3 set-root envelopeHash teaching cleared; extract then refused a TEXT option/label inside an open-listbox option INSTANCE because Figma copied the option-main ownershipKey onto the instance child while generatedContext was already set from the owned instance"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "131:306137"
+  },
+  "nextTeaching": {
+    "class": "SCENE-GENERATED-DESCENDANT-DIRECT-KEY",
+    "doNotInvent": true,
+    "restartV3Attempt2AsIs": false,
+    "prepareV4": "extract must ignore Figma-copied ownershipKey on descendants inside an owned INSTANCE; those nodes are generated descendants of the option instance, not a second direct key"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

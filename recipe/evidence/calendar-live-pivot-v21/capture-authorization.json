@@ -1,0 +1,84 @@
+{
+  "artifactVersion": "calendar-live-v21-capture-authorization-v1",
+  "authorizationId": "calendar-live-v21",
+  "status": "authorization declared; runtime security prerequisites still mandatory",
+  "authorizationIntent": true,
+  "antecedent": {
+    "commit": "366709bcbe2853a69b9e268ff0c3b22fb5baa780",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v21/antecedent-index.json",
+    "indexSha256": "bf6ef0b8e5d37e874893c083b9c1d70d5812b45144b386e2dbd4802cf3283c5e",
+    "hashSetSha256": "70ae802a248818fd74e34f291c761b0dc7aff5b364a363e08ff7414982972d95"
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAn0uvVCggMn7I4OkHXGikVTNLfjdk3Uv49e/RaQchoME=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "3c3f9975556e07ff26cd4ae083273b14730ca52531a8e19d3676a75fac9463cb",
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 13,
+    "hostPhases": 3,
+    "captures": 8,
+    "sourceRoots": 1,
+    "expectedFacts": 1373
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "attemptsExecuted": 0,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "taughtCleanupOnFailureOnly": true,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV41AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "tableLiveV1AuthorizationReusable": false,
+    "calendarLiveV1AuthorizationReusable": false,
+    "calendarLiveV2AuthorizationReusable": false,
+    "calendarLiveV3AuthorizationReusable": false,
+    "calendarLiveV7AuthorizationReusable": false,
+    "tableLiveV3AuthorizationReusable": false,
+    "tableLiveV4AuthorizationReusable": false,
+    "tableLiveV5AuthorizationReusable": false,
+    "tableLiveV6AuthorizationReusable": false,
+    "tableLiveV7AuthorizationReusable": false,
+    "tableLiveV8AuthorizationReusable": false,
+    "tableLiveV9AuthorizationReusable": false,
+    "tableLiveV10AuthorizationReusable": false,
+    "tableLiveV11AuthorizationReusable": false,
+    "tableLiveV12AuthorizationReusable": false,
+    "tableLiveV13AuthorizationReusable": false,
+    "tableLiveV14AuthorizationReusable": false,
+    "tableLiveV15AuthorizationReusable": false,
+    "tableLiveV16AuthorizationReusable": false,
+    "tableLiveV17AuthorizationReusable": false,
+    "tableLiveV18AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending"
+  }
+}

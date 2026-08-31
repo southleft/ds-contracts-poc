@@ -1,0 +1,55 @@
+{
+  "artifactVersion": "table-column-alignment-v27",
+  "measuredAt": "2026-08-29",
+  "substrate": "private/table-live-v27-transaction/004-extract.raw.json",
+  "figmaWrites": 0,
+  "method": "For each table variant, walk its rows, take each row's table/cell-instance/N in order, and collect the distinct rounded widths seen for each column index. A table with a column model has ONE width per column. A table without one has as many widths as it has differing rows.",
+  "whyItMatters": "The v27 probe passed this table on every check it has — rolesExact, stateSemanticsExact, noFakeLayout, visibleAreaLoss 0 and overlapPixels 0 — and the MUI mint's columns still do not line up. The usability gate does not measure column alignment, so a ragged data table can reach green. That bears directly on docs/32 §F item 2, 'minted sets usable, not merely correct-looking'.",
+  "roots": [
+    {
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "aligned": true,
+      "variants": [
+        {
+          "variant": "Density=compact",
+          "columnWidths": { "col0": [120], "col1": [120], "col2": [120] }
+        },
+        {
+          "variant": "Density=comfortable",
+          "columnWidths": { "col0": [120], "col1": [120], "col2": [120] }
+        }
+      ],
+      "note": "Aligned, but not by a column model. Every cell binds layout.minWidth 120 and every cell's content is narrower than 120, so all of them land on exactly 120. Change the data and this goes ragged too — the alignment is a coincidence of the fixture, not a property of table@1."
+    },
+    {
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "aligned": false,
+      "variants": [
+        {
+          "variant": "Density=compact",
+          "columnWidths": {
+            "col0": [127, 159],
+            "col1": [89, 90],
+            "col2": [89, 95]
+          }
+        },
+        {
+          "variant": "Density=comfortable",
+          "columnWidths": {
+            "col0": [127, 159],
+            "col1": [89, 90],
+            "col2": [89, 95]
+          }
+        }
+      ],
+      "worstDivergencePx": 32,
+      "worstDivergenceColumn": "col0 (127 vs 159)",
+      "note": "MUI Table cells declare no min-width, so every cell hugs its own text and each column takes a different width in each row. This is the ragged mint visible in the v26 and v27 screenshots."
+    }
+  ],
+  "conclusion": "table@1 has no per-column width model. Column alignment is currently an accident of whether a source's declared cell min-width happens to exceed its content. This is measured, not inferred, and it is one half of the open human authoring gate — the other half being whether the table root hugs or fills.",
+  "doesNotDecide": "Nothing here picks a column width or a resize mode. Choosing either without a reviewed source fact would be the invented FILL/FIXED teaching the standing constraints forbid.",
+  "productV1Complete": false
+}

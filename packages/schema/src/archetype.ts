@@ -43,11 +43,13 @@ export type Archetype =
   | "menu / dropdown"
   | "pagination"
   | "table / data-grid"
+  | "calendar / date-picker"
   | "breadcrumb"
   | "nav (top / side)"
   | "unmapped";
 
-/** The twenty DECLARABLE rows, in §C.1.1 order. `unmapped` is deliberately
+/** The twenty-one DECLARABLE rows, in §C.1.1 order (calendar / date-picker
+ *  added 2026-08-29 as a reviewed minor contract change per docs/32 D3). `unmapped` is deliberately
  *  absent: it is what the name-map returns when it recognises nothing, never
  *  something a contract may claim. A contract that is genuinely not a
  *  component archetype declares `"none"`. */
@@ -70,6 +72,7 @@ export const ARCHETYPES = [
   "menu / dropdown",
   "pagination",
   "table / data-grid",
+  "calendar / date-picker",
   "breadcrumb",
   "nav (top / side)",
 ] as const satisfies readonly Archetype[];

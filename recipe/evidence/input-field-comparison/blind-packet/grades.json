@@ -1,0 +1,2376 @@
+{
+  "grader": {
+    "identity": "cursor-gpt-5.6-sol-independent-visual-grader",
+    "mode": "independent-blind-visual"
+  },
+  "packetVersion": "input-field-paired-source-v1",
+  "packetProtocol": {
+    "version": "input-field-paired-source-v1",
+    "rubricHash": "ec7361423018edabd7df185c29ae518f0642e339cf84b1caaf80d0c8501a2e8b",
+    "environmentHash": "bb49d731fcb8823a1866a2a615b59ea731e95c6358a1c768cb614b7ed3d97c22",
+    "crop": "painted-union+24-css-px-white-margin",
+    "scale": 2,
+    "browser": "149.0.7827.55 (playwright chromium-1228)",
+    "fontsHash": "6fd1317c7d1f2028a8c0577d5168a48ecc8d91f7354538e11feeb9b2a97bc139",
+    "passThreshold": "independent recognisable=true for each specimen against its paired original-source reference"
+  },
+  "randomizedBatchHash": "5f5e0ae5197791311c03312cdec316069c4b356314cbc12e85d20fa049acdc96",
+  "counts": {
+    "references": 128,
+    "specimens": 256,
+    "grades": 256,
+    "recognisable": 128,
+    "notRecognisable": 128
+  },
+  "grades": [
+    {
+      "specimenId": "specimen-24c3f29ed0f6",
+      "referenceId": "cell-000f0ced5091",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f0984b973fdc",
+      "referenceId": "cell-000f0ced5091",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-7a627473bbe0",
+      "referenceId": "cell-0046d8a222d9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e634c93896b1",
+      "referenceId": "cell-0046d8a222d9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-4e280386d975",
+      "referenceId": "cell-0234bdb7c8a2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-92eed514338d",
+      "referenceId": "cell-0234bdb7c8a2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4de195eafcc9",
+      "referenceId": "cell-025622291d57",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f4db6f88f9e2",
+      "referenceId": "cell-025622291d57",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-17b4b74a40e0",
+      "referenceId": "cell-05e34825baa0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9d9c21742f24",
+      "referenceId": "cell-05e34825baa0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-0310fe546906",
+      "referenceId": "cell-07464028a2c4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-da8c19aa2a20",
+      "referenceId": "cell-07464028a2c4",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-27dc71d66b28",
+      "referenceId": "cell-0929f15c320f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-b671a77ae1d8",
+      "referenceId": "cell-0929f15c320f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-79a302f8f4c4",
+      "referenceId": "cell-0ae6e929c6af",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-97426f0cc5e3",
+      "referenceId": "cell-0ae6e929c6af",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-527228337058",
+      "referenceId": "cell-0bf689031ba8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-d166cfad9b6e",
+      "referenceId": "cell-0bf689031ba8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-115375e8d01e",
+      "referenceId": "cell-0d2b91b49dca",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e91caeb4b0ff",
+      "referenceId": "cell-0d2b91b49dca",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-0d81407fcae2",
+      "referenceId": "cell-0ddef398ddbc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f5c47b736958",
+      "referenceId": "cell-0ddef398ddbc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c314a9314f8b",
+      "referenceId": "cell-0eb023f5a932",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-de39f501382e",
+      "referenceId": "cell-0eb023f5a932",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-15ae0e9a870a",
+      "referenceId": "cell-0ee861c26d00",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-eb08d13ed690",
+      "referenceId": "cell-0ee861c26d00",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-67bafd7592d2",
+      "referenceId": "cell-103b9fca286a",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-782617448114",
+      "referenceId": "cell-103b9fca286a",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-8654f62ff219",
+      "referenceId": "cell-13dd8a167281",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-99f98b639b6e",
+      "referenceId": "cell-13dd8a167281",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-20cb4e948463",
+      "referenceId": "cell-16f411db773c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-76006b792f35",
+      "referenceId": "cell-16f411db773c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-2cbcce83ddf2",
+      "referenceId": "cell-176940da6601",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f72eaa53d3b1",
+      "referenceId": "cell-176940da6601",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-6a8b61e5bd12",
+      "referenceId": "cell-18426d6e5986",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-a712d8a42781",
+      "referenceId": "cell-18426d6e5986",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-289fcbcd9777",
+      "referenceId": "cell-1c48c21af624",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-aa00db84a078",
+      "referenceId": "cell-1c48c21af624",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-1c330ce8134f",
+      "referenceId": "cell-2099afb1aa60",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-da84940169fd",
+      "referenceId": "cell-2099afb1aa60",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-e737d32be3b4",
+      "referenceId": "cell-218185ed6240",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-fcf518585ba3",
+      "referenceId": "cell-218185ed6240",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-714526d80fe6",
+      "referenceId": "cell-28bb2fcea375",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9c1b93064afe",
+      "referenceId": "cell-28bb2fcea375",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-35d34348a604",
+      "referenceId": "cell-29742ff8f66e",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ebcf8930d951",
+      "referenceId": "cell-29742ff8f66e",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-a4d1c9778405",
+      "referenceId": "cell-30b8e021dc33",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-dcffaff1895e",
+      "referenceId": "cell-30b8e021dc33",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-71a4b2492e41",
+      "referenceId": "cell-3366b47c2f9c",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-e673bc6c6c92",
+      "referenceId": "cell-3366b47c2f9c",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-09b4a35a64fd",
+      "referenceId": "cell-386848fa1ce9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-35be45bfddb1",
+      "referenceId": "cell-386848fa1ce9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-2b031688cb04",
+      "referenceId": "cell-39df82209315",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e9f6cb36b29e",
+      "referenceId": "cell-39df82209315",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f7c1a212f7c4",
+      "referenceId": "cell-3b9636ffcf97",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f9bd0752c081",
+      "referenceId": "cell-3b9636ffcf97",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-5c3b14cb0ba1",
+      "referenceId": "cell-3dda0cf43f3a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-fd54b4cb4380",
+      "referenceId": "cell-3dda0cf43f3a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-5d471c2c4695",
+      "referenceId": "cell-3e118b1f843a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-b6f492fa669e",
+      "referenceId": "cell-3e118b1f843a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-12c409aec0cd",
+      "referenceId": "cell-3f83d9673fd0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4955d038d578",
+      "referenceId": "cell-3f83d9673fd0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3c932b15d183",
+      "referenceId": "cell-3fbcd0f0d35b",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a9287ef2b2ca",
+      "referenceId": "cell-3fbcd0f0d35b",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-35e79fe64c95",
+      "referenceId": "cell-429ad0bc76dc",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7b006da11d6f",
+      "referenceId": "cell-429ad0bc76dc",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3e5dd74e4696",
+      "referenceId": "cell-461b537cbadd",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c854a62ae04b",
+      "referenceId": "cell-461b537cbadd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-0dfa13644fdd",
+      "referenceId": "cell-48f1af48bb14",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f2a3565fb1ab",
+      "referenceId": "cell-48f1af48bb14",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-95879ab85dfb",
+      "referenceId": "cell-4b09bfcd9eed",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f91df0812d1e",
+      "referenceId": "cell-4b09bfcd9eed",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-38730049aeb4",
+      "referenceId": "cell-4f147c0af82d",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-97c90926ba7e",
+      "referenceId": "cell-4f147c0af82d",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-6412d7dca80c",
+      "referenceId": "cell-5054031c3064",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-bba7fc739c64",
+      "referenceId": "cell-5054031c3064",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-026f25542e23",
+      "referenceId": "cell-582af82b494e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4f12865d7e74",
+      "referenceId": "cell-582af82b494e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-4d442bcad2f6",
+      "referenceId": "cell-5a3aa72c5070",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f943140c4f1b",
+      "referenceId": "cell-5a3aa72c5070",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-33bb5fb5e4eb",
+      "referenceId": "cell-5c603e0e4b65",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-5c6834a6d5ff",
+      "referenceId": "cell-5c603e0e4b65",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-272d410d43a7",
+      "referenceId": "cell-5c6c10d179b8",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-8b6d8cf0ee37",
+      "referenceId": "cell-5c6c10d179b8",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-4ddd873ee5fd",
+      "referenceId": "cell-5d51a896c7ff",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9d0c3386ca8d",
+      "referenceId": "cell-5d51a896c7ff",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-467ce74e1531",
+      "referenceId": "cell-5ec7afdc171c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-aa912d0a921f",
+      "referenceId": "cell-5ec7afdc171c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-22a84a698c85",
+      "referenceId": "cell-5ef014f4c3f2",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-bdd731c8a8ec",
+      "referenceId": "cell-5ef014f4c3f2",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-5e6a0c05494c",
+      "referenceId": "cell-5f88952bfe9f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-ef2f4cecb109",
+      "referenceId": "cell-5f88952bfe9f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-5235c2dd0220",
+      "referenceId": "cell-60e2abe6baae",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7bc548e6520a",
+      "referenceId": "cell-60e2abe6baae",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-7c1e1716dc6b",
+      "referenceId": "cell-614b20ac905e",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a4f052ba2a6b",
+      "referenceId": "cell-614b20ac905e",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-0cce18cef838",
+      "referenceId": "cell-625adcc8e72c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4a0f404c254d",
+      "referenceId": "cell-625adcc8e72c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-4db59ab746d2",
+      "referenceId": "cell-62b04d782248",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-6604e9e88a9f",
+      "referenceId": "cell-62b04d782248",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3451ba89d988",
+      "referenceId": "cell-638e9e6e069d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ff3045725a16",
+      "referenceId": "cell-638e9e6e069d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-58e74d117264",
+      "referenceId": "cell-67e1567e0a6e",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b19585c0fdf8",
+      "referenceId": "cell-67e1567e0a6e",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-60504d3d4817",
+      "referenceId": "cell-68e24b12a171",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c8fa0894d15b",
+      "referenceId": "cell-68e24b12a171",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-caed0c074f12",
+      "referenceId": "cell-68ea3afaccc8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ceddf7808db8",
+      "referenceId": "cell-68ea3afaccc8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-06c84e681d28",
+      "referenceId": "cell-696de23d1555",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-15bad922a5e9",
+      "referenceId": "cell-696de23d1555",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-1cef1cbea181",
+      "referenceId": "cell-69b43f50c8a9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-903dae35518d",
+      "referenceId": "cell-69b43f50c8a9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-abd67019ef9f",
+      "referenceId": "cell-6aa925055a0a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c9eee2cbfcd2",
+      "referenceId": "cell-6aa925055a0a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-71196e5ba3ae",
+      "referenceId": "cell-6da95c29414e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-d1270fb19257",
+      "referenceId": "cell-6da95c29414e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-b90995eb1ffc",
+      "referenceId": "cell-6ec1e0e679f8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-e3e60d14f629",
+      "referenceId": "cell-6ec1e0e679f8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-29ca77d1ce5a",
+      "referenceId": "cell-73624d7efef5",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-be36120b9d7f",
+      "referenceId": "cell-73624d7efef5",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-32b88e7606d4",
+      "referenceId": "cell-73cc4feca9d7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ba328096db1b",
+      "referenceId": "cell-73cc4feca9d7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-cf6cd41b49be",
+      "referenceId": "cell-73f63ec1e2bc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f836e5522e10",
+      "referenceId": "cell-73f63ec1e2bc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-6193b5ad8e2c",
+      "referenceId": "cell-755bb74f4cd5",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-b27cb833bdd2",
+      "referenceId": "cell-755bb74f4cd5",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ac036e694d3c",
+      "referenceId": "cell-7575589533c3",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-d0a5fc95926c",
+      "referenceId": "cell-7575589533c3",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-133725e2dc7d",
+      "referenceId": "cell-75d14d3592af",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-180b96ef14f4",
+      "referenceId": "cell-75d14d3592af",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-2d4f7154fe45",
+      "referenceId": "cell-777436470194",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-bcc5cc8901b4",
+      "referenceId": "cell-777436470194",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-08e90ae13a53",
+      "referenceId": "cell-78d1cbc7ce2f",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-bfbcc27a23af",
+      "referenceId": "cell-78d1cbc7ce2f",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3acaf8f27bf3",
+      "referenceId": "cell-791d786a1fc7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4eb32cd8739d",
+      "referenceId": "cell-791d786a1fc7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-0e326bee084e",
+      "referenceId": "cell-7c1daac22131",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-72782e62eadf",
+      "referenceId": "cell-7c1daac22131",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-1b46fda1a257",
+      "referenceId": "cell-7e36843154f0",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a13e872bb363",
+      "referenceId": "cell-7e36843154f0",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-004d522f6462",
+      "referenceId": "cell-805e5b6b4c06",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-67dfc470f999",
+      "referenceId": "cell-805e5b6b4c06",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4967e4fc4b9f",
+      "referenceId": "cell-81451a218f81",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-de7bddd4033c",
+      "referenceId": "cell-81451a218f81",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-1febcb288b07",
+      "referenceId": "cell-82815e7e7482",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ae24afbc515c",
+      "referenceId": "cell-82815e7e7482",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-412dcb008e98",
+      "referenceId": "cell-8779e887324c",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-fcce7987e4b7",
+      "referenceId": "cell-8779e887324c",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7606ee883bc9",
+      "referenceId": "cell-89289eccdf11",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f96540bbcc01",
+      "referenceId": "cell-89289eccdf11",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-479c5158a536",
+      "referenceId": "cell-8929132aea71",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-728a9ff3d898",
+      "referenceId": "cell-8929132aea71",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4310586a8158",
+      "referenceId": "cell-8983ea89893c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a18276125962",
+      "referenceId": "cell-8983ea89893c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-30a3c4ac32f0",
+      "referenceId": "cell-904ab6860abc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-401581cfc0e4",
+      "referenceId": "cell-904ab6860abc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-22c8f16ff401",
+      "referenceId": "cell-91cc18706865",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f9d33e1fefe7",
+      "referenceId": "cell-91cc18706865",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-93a0b4736f0f",
+      "referenceId": "cell-92bb1c6546dc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-d72970e73d2e",
+      "referenceId": "cell-92bb1c6546dc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4b0f94794402",
+      "referenceId": "cell-972bfddf0010",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-512f042d69db",
+      "referenceId": "cell-972bfddf0010",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-df67f6822c8e",
+      "referenceId": "cell-9749e4319dcb",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f85ab29919b9",
+      "referenceId": "cell-9749e4319dcb",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-0af8c089a634",
+      "referenceId": "cell-98f659986daa",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-4ecdbac8da16",
+      "referenceId": "cell-98f659986daa",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-72a1ff24faf0",
+      "referenceId": "cell-99d4a04eb85a",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-a8b45701d8d3",
+      "referenceId": "cell-99d4a04eb85a",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-5be10896bd59",
+      "referenceId": "cell-9d41bff392ef",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-f04bd64d74cc",
+      "referenceId": "cell-9d41bff392ef",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7a03daea7781",
+      "referenceId": "cell-a362b10b8416",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c3e5d13a1a08",
+      "referenceId": "cell-a362b10b8416",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-55156f26878d",
+      "referenceId": "cell-a3f26f80755b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-943461659d6c",
+      "referenceId": "cell-a3f26f80755b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-539022cf14ee",
+      "referenceId": "cell-a661e0b80cf1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ab192a902873",
+      "referenceId": "cell-a661e0b80cf1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-544b789e4f5d",
+      "referenceId": "cell-a90a548eb232",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-5a2488f7f906",
+      "referenceId": "cell-a90a548eb232",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-5ac8f8a62adc",
+      "referenceId": "cell-a90efe081cf5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7508cc81e884",
+      "referenceId": "cell-a90efe081cf5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-601649fd44fb",
+      "referenceId": "cell-ac859d1ea53b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-944702f03574",
+      "referenceId": "cell-ac859d1ea53b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3a2fcca9641c",
+      "referenceId": "cell-acfa0d4ddab9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-48c8ca788f29",
+      "referenceId": "cell-acfa0d4ddab9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-a8bc30de69e6",
+      "referenceId": "cell-ade4ab803476",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-dff6ad04ed5f",
+      "referenceId": "cell-ade4ab803476",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-37661da3c7ac",
+      "referenceId": "cell-afa56af6d052",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-8f3acc541bde",
+      "referenceId": "cell-afa56af6d052",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-2c77a6f398cb",
+      "referenceId": "cell-afbb7a16fab2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-aa1295b41823",
+      "referenceId": "cell-afbb7a16fab2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-30cda1cb66ce",
+      "referenceId": "cell-afbdc9f8afe3",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9518620a3aae",
+      "referenceId": "cell-afbdc9f8afe3",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-4ad1ff548ff5",
+      "referenceId": "cell-b0b1e33612c9",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-59de2acc8d1e",
+      "referenceId": "cell-b0b1e33612c9",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-d19aa8390e9d",
+      "referenceId": "cell-b3a48cc136df",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-fc00dd899922",
+      "referenceId": "cell-b3a48cc136df",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b431246232d6",
+      "referenceId": "cell-b3f5df61d5b1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-fee5d2b23fab",
+      "referenceId": "cell-b3f5df61d5b1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3e5ca511af68",
+      "referenceId": "cell-b7050f2640e6",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-46184ab5ef8b",
+      "referenceId": "cell-b7050f2640e6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-66ad399e9d3b",
+      "referenceId": "cell-b98e3a846d33",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-b2889451e76c",
+      "referenceId": "cell-b98e3a846d33",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e2adf745d90f",
+      "referenceId": "cell-ba50fde23aa2",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f086698a1f2e",
+      "referenceId": "cell-ba50fde23aa2",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-64b038e14e64",
+      "referenceId": "cell-bb4205dcc875",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-9037cae5d58b",
+      "referenceId": "cell-bb4205dcc875",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-44591133eb8c",
+      "referenceId": "cell-bbacd7aef681",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-540b8dba99a8",
+      "referenceId": "cell-bbacd7aef681",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-098875a04082",
+      "referenceId": "cell-bcae6142ff55",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-0fdcfc012788",
+      "referenceId": "cell-bcae6142ff55",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-734e34527613",
+      "referenceId": "cell-bd614abe3da3",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-82abd1168f4b",
+      "referenceId": "cell-bd614abe3da3",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a11b2fd986f3",
+      "referenceId": "cell-bf53df5e0e9a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ded3a3723f33",
+      "referenceId": "cell-bf53df5e0e9a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-1d2116eb4595",
+      "referenceId": "cell-c13f1a43c918",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f6d803be151d",
+      "referenceId": "cell-c13f1a43c918",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3bbadbd3e27a",
+      "referenceId": "cell-cafa9f637ff0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-c3bd7a44fb05",
+      "referenceId": "cell-cafa9f637ff0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-c86eba192382",
+      "referenceId": "cell-caff0d393475",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-e5ddd05fc313",
+      "referenceId": "cell-caff0d393475",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-364b63c4f01e",
+      "referenceId": "cell-cb5543ba4171",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-3cbfaba51f2d",
+      "referenceId": "cell-cb5543ba4171",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-c2bafbe73a1c",
+      "referenceId": "cell-cd5c5291093e",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-ffb5ba73e249",
+      "referenceId": "cell-cd5c5291093e",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-266190fa9cfb",
+      "referenceId": "cell-cdf7d91eeb6e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-917c22cccb9d",
+      "referenceId": "cell-cdf7d91eeb6e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-1f9ca62cceeb",
+      "referenceId": "cell-d09e8a2e8054",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-d3bcd3019a24",
+      "referenceId": "cell-d09e8a2e8054",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-400379c6fba1",
+      "referenceId": "cell-d16348cca878",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-41aae5bc3ba7",
+      "referenceId": "cell-d16348cca878",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-0a54f8c29400",
+      "referenceId": "cell-d57cd58123fc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-91e8b88e652f",
+      "referenceId": "cell-d57cd58123fc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-a11c5db02396",
+      "referenceId": "cell-d8cfcc4ad994",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f1ba37d2aa40",
+      "referenceId": "cell-d8cfcc4ad994",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-17ef8f7bb409",
+      "referenceId": "cell-dbb3d65c922c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-f4826b77a8fe",
+      "referenceId": "cell-dbb3d65c922c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-515801de8dbf",
+      "referenceId": "cell-e1ece02350f4",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-7f80a57b8d3b",
+      "referenceId": "cell-e1ece02350f4",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-56d25697f694",
+      "referenceId": "cell-e23c58e6e27c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-adf576248935",
+      "referenceId": "cell-e23c58e6e27c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-726a07c302c9",
+      "referenceId": "cell-e3e9ccb4a852",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-a8e770a9e79f",
+      "referenceId": "cell-e3e9ccb4a852",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-45686db609d0",
+      "referenceId": "cell-e4669d127ba4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-4570f06f09b8",
+      "referenceId": "cell-e4669d127ba4",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-21f58ae40f65",
+      "referenceId": "cell-eb1295b41ee6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-3481914de6b7",
+      "referenceId": "cell-eb1295b41ee6",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7d76616efc9b",
+      "referenceId": "cell-ec912981adbb",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-b3bb4aea2158",
+      "referenceId": "cell-ec912981adbb",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-908f25d21b12",
+      "referenceId": "cell-f1d66349bb86",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-abb4e4d043a4",
+      "referenceId": "cell-f1d66349bb86",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7c049153e6dd",
+      "referenceId": "cell-f2abb1e803da",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-ae338d4a3576",
+      "referenceId": "cell-f2abb1e803da",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-393f815fab89",
+      "referenceId": "cell-f7526b3bf20a",
+      "recognisable": false,
+      "confidence": "medium",
+      "defects": [
+        "Overall field composition has substantially different width-to-height proportions from the reference.",
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-c02f6768b501",
+      "referenceId": "cell-f7526b3bf20a",
+      "recognisable": true,
+      "confidence": "medium",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-54e066b6f528",
+      "referenceId": "cell-fa257051f546",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Border, fill, or ink state treatment differs visibly from the reference.",
+        "Label/helper text structure or vertical spacing does not match the reference.",
+        "Input outline, internal padding, and element alignment differ materially from the reference."
+      ]
+    },
+    {
+      "specimenId": "specimen-d3092e244352",
+      "referenceId": "cell-fa257051f546",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    }
+  ]
+}

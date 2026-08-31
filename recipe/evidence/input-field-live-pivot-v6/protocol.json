@@ -1,0 +1,215 @@
+{
+  "artifactVersion": "input-live-v6-external-operator-protocol-draft-v1",
+  "protocolId": "input-live-v6",
+  "status": "draft uncommitted; pending separate authorization; live write and capture forbidden",
+  "authorization": {
+    "authorized": false,
+    "artifactPath": "recipe/evidence/input-field-live-pivot-v6/authorization-template.json",
+    "artifactIsTemplateOnly": true,
+    "separateAuthorizationCommitRequired": true,
+    "v5AuthorizationReusable": false,
+    "liveExecutionPermitted": false,
+    "exactScratchOnly": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "maximumAttempts": 3,
+    "cleanPublishedDescendantsOnly": true,
+    "humanSignoffMandatory": true
+  },
+  "v5Supersession": {
+    "v5ProtocolBytesChanged": false,
+    "v5AuthorizationBytesChanged": false,
+    "v5AuthorizationPresent": true,
+    "v5AttemptAuthorizedNow": false,
+    "statusArtifact": "recipe/evidence/input-field-live-pivot-v5-superseding-status.json",
+    "reasons": [
+      "one raw scene cannot verify two independent generated roots",
+      "self-comparison normalization and fixed point do not compare a pinned expected-scene denominator",
+      "the exact 128-cell objective and independent-reference manifest is absent",
+      "cleanup is available only in-process and cannot be executed from a persisted request after host crash"
+    ],
+    "outcomesInvented": false
+  },
+  "operatorBoundary": {
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "repositoryNodeCallsCursorTools": false,
+    "localWebSocketImpersonation": false,
+    "plaintextHelperTrusted": false,
+    "externalOperatorRequired": true,
+    "requestSignature": "Ed25519",
+    "rawResponsePersistedBeforeAcceptance": true,
+    "requestPins": [
+      "transaction ID and attempt",
+      "global request sequence and exact predecessor request hash",
+      "previous accepted receipt hash",
+      "exact dynamic namespace and tool",
+      "exact Scratch file key, file name, and editor type",
+      "exact program bytes and SHA-256",
+      "complete tool arguments and SHA-256",
+      "expected response schema, cardinality, and maximum bytes",
+      "protocol, runner, code, and authorization commits once authorized",
+      "authorization, proof-plan, and capture-manifest SHA-256",
+      "cleanup request availability"
+    ]
+  },
+  "execution": {
+    "remoteRequests": 132,
+    "mainLaneRequests": 131,
+    "recoveryCleanupRequests": 1,
+    "hostPhases": 3,
+    "requestOrder": [
+      "writer",
+      "cleanup recovery request issued immediately after writer acceptance",
+      "extract",
+      "host normalize and account MUI and Polaris independently",
+      "probe",
+      "host bind all technical gates",
+      "capture-000 through capture-127, one exact cell per request",
+      "cleanup execution"
+    ],
+    "durableState": {
+      "oneActiveMainRequest": true,
+      "stopsForExternalExecution": true,
+      "onePersistedRawResponseAcceptedAtATime": true,
+      "resumesAfterProcessRestart": true,
+      "cleanupAlwaysSurfacedAfterWriter": true,
+      "journalHashChained": true
+    }
+  },
+  "writer": {
+    "program": "recipe/evidence/input-field-live-pivot-v6/programs/writer.txt",
+    "payload": "recipe/evidence/input-field-live-pivot-v6/programs/writer-payload.js",
+    "exactCommittedV5WriterBytesReused": true,
+    "expectedResponse": {
+      "pages": 1,
+      "sections": 2,
+      "componentSets": 2,
+      "sourceRoots": 2,
+      "variants": 256,
+      "collections": 2,
+      "nodeIdsAndCountsRequired": true
+    }
+  },
+  "extraction": {
+    "sourceNeutral": true,
+    "roots": ["mui", "polaris"],
+    "rootsCapturedIndependently": true,
+    "localVariableTableCaptured": true,
+    "actualScenePropertiesOnly": true,
+    "ownershipAndInstanceLineageCaptured": true,
+    "sourceIrFactsInResponseForbidden": true,
+    "expectedDataUsedInPlugin": "identity-only ownership and generated-descendant lineage"
+  },
+  "hostNormalizationAndAccounting": {
+    "perSource": true,
+    "sources": ["mui", "polaris"],
+    "expectedScenePlansPinnedBeforeAuthorization": true,
+    "observedNormalizedFactsComparedToOwnExpectedPlan": true,
+    "occurrenceMultisetPreserved": true,
+    "derivedFields": [
+      "missing",
+      "extra",
+      "mismatched",
+      "duplicateCollapsed",
+      "unobserved",
+      "silent"
+    ],
+    "allDerivedFieldsMustBeZero": true,
+    "twoCycleRecipeCollapseRecompilePerRoot": true,
+    "sourceIrRead": false,
+    "cycleSceneAndCompiledHashesMustMatch": true
+  },
+  "usabilityProbe": {
+    "sourceRoots": 2,
+    "variantSwitches": 256,
+    "checks": [
+      "horizontal reflow",
+      "content fill",
+      "all-axis variant switching",
+      "typed variable bindings",
+      "no fake layout",
+      "clipping",
+      "overlap",
+      "actual adornment payload",
+      "state semantics",
+      "text property restoration",
+      "exact scene restoration"
+    ]
+  },
+  "captureObjective": {
+    "captureBeforeTechnicalGates": false,
+    "technicalGateArtifactHashBound": true,
+    "plannedCells": 128,
+    "sampleReduction": false,
+    "transport": {
+      "requests": 128,
+      "cellsPerRequest": 1,
+      "format": "PNG bytes encoded as base64 in one bounded raw JSON response",
+      "maximumPngBytesPerResponse": 1500000,
+      "maximumRawResponseBytes": 2100000,
+      "responsePersistedBeforePNGDecode": true,
+      "truncationRejected": true,
+      "duplicatesRejected": true,
+      "missingCellsRejected": true
+    },
+    "independentSourceReferences": true,
+    "referencePathAndSha256PinnedPerCell": true,
+    "lockedStrata": ["source", "state", "adornment"],
+    "hostObjective": {
+      "rows": 128,
+      "metrics": ["geometry", "perceptual", "pixelInk"],
+      "recipeWinsMustExceedLegacyLosses": true,
+      "aggregateRecipeErrorsMustBeLower": true,
+      "maximumStratumRelativeRegression": 0.1,
+      "catastrophicCellRule": "recipe error exceeds legacy error * 1.5 + 0.02",
+      "humanSignoffStillRequiredForOverallSuccess": true
+    },
+    "capturesPerformedByThisAntecedentTask": 0
+  },
+  "cleanup": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "persistedSignedRequest": true,
+    "executableAfterHostCrash": true,
+    "ownershipScoped": true,
+    "exactOwnedPage": 1,
+    "exactOwnedCollections": 2,
+    "unrelatedScratchContentMutationForbidden": true
+  },
+  "offlineSimulation": {
+    "usesSignedProductionIssuePersistAcceptCode": true,
+    "roots": 2,
+    "captureManifests": 128,
+    "figmaCalls": 0,
+    "figmaWrites": 0,
+    "figmaCaptures": 0,
+    "adversarialCases": [
+      "replay",
+      "wrong sequence and predecessor",
+      "wrong target",
+      "wrong dynamic tool",
+      "request tamper",
+      "response tamper",
+      "signing key substitution",
+      "truncated response",
+      "one-root omission",
+      "expected-plan mismatch",
+      "phase crash and resume",
+      "cleanup after crash",
+      "premature capture",
+      "antecedent result leakage"
+    ]
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3
+  },
+  "outcomes": null,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

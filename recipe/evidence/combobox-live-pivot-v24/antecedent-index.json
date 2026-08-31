@@ -1,0 +1,153 @@
+{
+  "artifactVersion": "combobox-live-v24-antecedent-index-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "artifacts": {
+    "recipe/evidence/combobox-live-pivot-v24/expected-scene-plan-mui-combobox.json.gz": {
+      "bytes": 234253,
+      "sha256": "61db2a58027eee66a3feaef3f4358c7c92a5806c8f07893d57ce59855754e927"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/expected-scene-plan-mui-option.json.gz": {
+      "bytes": 6832,
+      "sha256": "404c4fb6593a539436fb96f9d8359a66c039395515c5c0d6e10a5bab8f0fd145"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/expected-scene-plan-antd-combobox.json.gz": {
+      "bytes": 233255,
+      "sha256": "164cf4c95707c81d07a31b67ee278586a3fa2dffe7782f0cedf191eb22212c53"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/expected-scene-plan-antd-option.json.gz": {
+      "bytes": 6744,
+      "sha256": "6948ec5d375f79c727f182a5f8e1d8965cb809ac0d514a8a32d3f98f33999e5b"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/protocol.json": {
+      "bytes": 4671,
+      "sha256": "e9651d22c5b6e25aaf013f12e4ec4d959ef6daa3a786791cd55611225b32fc60"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/programs/writer.txt": {
+      "bytes": 1248266,
+      "sha256": "71bb35654fe4666d6cbca57a9816ef08ef2e12534f24515bbfeaa772ce72b1a7"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/programs/restore-blueprint.js": {
+      "bytes": 3051,
+      "sha256": "ee9d6b65b8d4c03b5795cc927ba1874513a548d369f5568af43114a51f3d7497"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/programs/extract-blueprint.js": {
+      "bytes": 8491061,
+      "sha256": "3cfbde8bcb653032761bc09a4c4cade04ee5a70cbdeec71b10aaa05937168e52"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/programs/probe-blueprint.js": {
+      "bytes": 9098,
+      "sha256": "2d3245e1b4205740f9dc376277a5e01d124a0897477f3df3eacaae25a6219db8"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/programs/capture-blueprint.js": {
+      "bytes": 10277,
+      "sha256": "1d1baa1da5ba415d7cbf86bd7efbf9473446ca41eb24c5f0e5fa883343b5a18f"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/programs/cleanup-blueprint.js": {
+      "bytes": 5184,
+      "sha256": "5e9a7a18d096c171e7e650440d3cc3d73848bd8bb945c23cd222aed7777d3342"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/capture-manifest.json": {
+      "bytes": 39343,
+      "sha256": "9f39306587079f664892407a1380f9e9c2f55eb2e5ee0467f1dbf7ce7370c3cc"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/proof-plan.json": {
+      "bytes": 3408,
+      "sha256": "596475e348d25179d7a35fbd08a22fdf4832a0f6d7d43252f1082782570e76df"
+    },
+    "recipe/evidence/combobox-live-pivot-v24/request-manifest.json": {
+      "bytes": 14262,
+      "sha256": "69b6e3df92a04ed6bc4bd1a2abe76bcd68d863a776a3425b64e43c68e17b4767"
+    },
+    "recipe/combobox-live-v24-broker.ts": {
+      "bytes": 37463,
+      "sha256": "df8c14a0a8165ccde42c77b62b5b44979fe6838fee3850bd7979fad02cb49844"
+    },
+    "recipe/combobox-live-v24-contract.ts": {
+      "bytes": 41297,
+      "sha256": "5e2509e25579bd769f4fbb49935ffff8d4a781a3c220ef66d4ebf5d28b84030f"
+    },
+    "recipe/combobox-live-v24-restore.ts": {
+      "bytes": 6085,
+      "sha256": "5d3dd1aca67f446fa8e3f5b9767ded9dbe716c5b4a5fd64a3b8e340dcaa91787"
+    },
+    "recipe/combobox-live-v24-cleanup.ts": {
+      "bytes": 5281,
+      "sha256": "33401c77f8f9742813da3d9824e437d7650e7a45d0c65fa573a277ad52c9d580"
+    },
+    "recipe/combobox-live-v24-verifier.ts": {
+      "bytes": 7828,
+      "sha256": "fd1502fdf6c2ae95391767349dc9951c7bbdb4b68da1186c888291ef948b1da7"
+    },
+    "recipe/combobox-live-v24-fixed-point.ts": {
+      "bytes": 16403,
+      "sha256": "05b6f9b9c09456e2348bb5b46a7fd2ee40c6ac00661564ec0d3d44e1ef98b090"
+    },
+    "recipe/run-combobox-live-v24.ts": {
+      "bytes": 25418,
+      "sha256": "6b9dbb9a36f5701f13c01ef393e829fbeea5a10f255335952e8a4b45df68646c"
+    },
+    "recipe/build-combobox-live-proof-v24.ts": {
+      "bytes": 30343,
+      "sha256": "254f298177096c862b910f41b4c6ef94c03ead403a8532e8ba8371e04d84093e"
+    },
+    "recipe/combobox-live-v24-lifecycle-simulation.ts": {
+      "bytes": 8162,
+      "sha256": "8e572a6e773e5aa30ed12b1c51d0e7d7d04138cfe3856004425e93795f5bc217"
+    },
+    "recipe/scene-readback-combobox-v24.ts": {
+      "bytes": 90839,
+      "sha256": "3848c0589c544b41f6458a4089a641537d953a69e4239ec884ec4d4e04ac1b66"
+    },
+    "recipe/scene-readback-runtime-combobox-v24.ts": {
+      "bytes": 15540,
+      "sha256": "dabb4becd8632e8133e8ba352106b039ef9aeeaa7d5b1bcdbd2a49d334db218a"
+    },
+    "recipe/combobox-figma-writer.ts": {
+      "bytes": 33646,
+      "sha256": "83d5b17b38aa7192ccf33348128c2d5db33c82b451b29b58b18f06d0b9c45bf1"
+    },
+    "recipe/figma-property-normalizer-v8.ts": {
+      "bytes": 11009,
+      "sha256": "103abec0f81e59fb5c25fd38b05f4961d755eeee2e4bb18f99ca74411b45eae0"
+    },
+    "recipe/figma-runtime-portability.ts": {
+      "bytes": 12817,
+      "sha256": "df0ada6caea5cf05c9f46552cbf675b76e029438f75a9805802b1446ab3a034f"
+    },
+    "recipe/normalize.ts": {
+      "bytes": 7537,
+      "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
+    }
+  },
+  "hashSetSha256": "94b7061906d7dd6f4b60beda0829af9aa628fba582afdd24abe0364cb5c96292",
+  "counts": {
+    "sources": 2,
+    "variants": 144,
+    "expectedSceneFacts": 26614,
+    "captureCells": 72,
+    "remoteRequests": 77,
+    "hostPhases": 3
+  },
+  "generatedDeterministically": true,
+  "authorizationLifecycleExcluded": [
+    "recipe/evidence/combobox-live-pivot-v24/authorization-template.json",
+    "recipe/evidence/combobox-live-pivot-v24/capture-authorization.json",
+    "recipe/combobox-live-v24-authorization.ts",
+    "recipe/combobox-live-v24-authorization.test.ts",
+    "recipe/combobox-live-v24-preflight.ts",
+    "recipe/combobox-live-v24-authorized.ts",
+    "recipe/write-combobox-live-v24-authorization.ts",
+    "recipe/create-combobox-live-v24-security-attestation.ts",
+    "recipe/evidence/combobox-live-pivot-v24/operator-security-attestation-template.json",
+    "recipe/evidence/combobox-live-pivot-v24-status.json",
+    "recipe/evidence/status-index.json"
+  ],
+  "authorizationCanBeAddedWithoutAntecedentRebuild": true,
+  "attemptsExecuted": 0,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false
+}

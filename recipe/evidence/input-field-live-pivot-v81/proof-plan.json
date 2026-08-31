@@ -1,0 +1,73 @@
+{
+  "artifactVersion": "input-live-v81-proof-plan-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "namespace": "ds.contracts.input.recipe.v5",
+  "writer": {
+    "programPath": "recipe/evidence/input-field-live-pivot-v81/programs/writer.txt",
+    "programBytes": 3282458,
+    "programSha256": "0ed357dbe2acb272d1348d90cf689510f7b967e82f6c0cf834ad1a315ed759e0",
+    "payloadPath": "recipe/evidence/input-field-live-pivot-v81/programs/writer-payload.js",
+    "payloadBytes": 2454238,
+    "payloadSha256": "5d0f232375dbe83cb865bf27abb5321d871e0a16ddf1d8ee7628d14be6261681"
+  },
+  "sources": [
+    {
+      "source": "mui",
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "recipeHash": "4a074b24daac8a16200f5ee6fc827eeb0a86d3602e98efddd14c9cb405f9e570",
+      "envelopeHash": "c23d77449d54c5a7c2d1ca488fb1675f9541d1bc36c9a25456e87307cbed957a",
+      "expectedScenePlan": {
+        "path": "recipe/evidence/input-field-live-pivot-v81/expected-scene-plan-mui.json.gz",
+        "bytes": 426749,
+        "sha256": "5a37b185316d13b01a263b56ff0959409274b168f11a9d5f60a3dee2ec315af9",
+        "uncompressedBytes": 7442555,
+        "uncompressedSha256": "9e2a5d96f88e3ad93659f0ba474f483dec5d4b3e2046157c007a1c82b9c2d4eb",
+        "facts": 22811,
+        "generatedDescendants": 128
+      }
+    },
+    {
+      "source": "polaris",
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "recipeHash": "e8503dd5f31316b11dfd6509673d826edb880430e6433bc096810ab6efd891cd",
+      "envelopeHash": "a2dce4b2c1998c1834e4c1b9d6e2b69dc55249f6f02ad8cae3da5f508a30ba3a",
+      "expectedScenePlan": {
+        "path": "recipe/evidence/input-field-live-pivot-v81/expected-scene-plan-polaris.json.gz",
+        "bytes": 413247,
+        "sha256": "b830d0095216484faea76b810769fed8879e5ed68bfc84bff4239867a8326387",
+        "uncompressedBytes": 6631047,
+        "uncompressedSha256": "6b8f70f1b3202370f16d06d73c1e56a926c8c6e7c84d11fb2f814a20e54cc8c9",
+        "facts": 20915,
+        "generatedDescendants": 128
+      }
+    }
+  ],
+  "captureManifest": {
+    "path": "recipe/evidence/input-field-live-pivot-v81/capture-manifest.json",
+    "cells": 128,
+    "requests": 128,
+    "cellsPerRequest": 1,
+    "sha256": "b77f413972243848fb40224685a784c308c0c0dbb9e97a45c34c357b8b107dca",
+    "maximumPngBytesPerResponse": 1500000,
+    "maximumRawResponseBytes": 2100000
+  },
+  "requests": {
+    "remote": 133,
+    "mainLane": 132,
+    "recoveryCleanup": 1,
+    "hostPhases": 3
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3,
+    "cleanPublishedDescendantsOnly": true
+  },
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

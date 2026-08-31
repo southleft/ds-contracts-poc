@@ -1,0 +1,97 @@
+{
+  "artifactVersion": "calendar-live-v21-attempt-1-v1",
+  "status": "failed closed at probe reflowPassed only; writer, restore, and extract accepted; Label after-append and probe Label-via-characters held; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "438ec2d7ac4e4d06f3c24aa36b8f5e09e0712be5",
+  "codeCommit": "438ec2d7ac4e4d06f3c24aa36b8f5e09e0712be5",
+  "antecedentCommit": "366709bcbe2853a69b9e268ff0c3b22fb5baa780",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v21",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "bf4d6fff-3d48-4a5a-8884-0f349344ef8b",
+    "attempt": 1,
+    "authorizationSha256": "5fa9f0f1fbd66d89f260f9590e329eee1ffe16b0a5a912e44c27ee747e418c0b",
+    "signingPublicKeySpkiSha256": "3c3f9975556e07ff26cd4ae083273b14730ca52531a8e19d3676a75fac9463cb",
+    "programSha256": "862699ac4a92cbbd7bf1fbbde92d2c1c51ef57d84186fcd8cd1b421513c48b45",
+    "requestBindingSha256": "39885d4167c98cac3bd90511a73b9297f7f6dccec80d71d4ac6d64a9b18e97a4",
+    "requestSha256": "94925f5704fcde9c769b896cccf25476b2fd0d7bc7f0a1696855e05a49afd0bc"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v21",
+    "pageId": "173:53091",
+    "sectionId": "173:53092",
+    "collectionId": "VariableCollectionId:173:53093",
+    "daySetId": "173:53121",
+    "weekSetId": "173:53153",
+    "calendarSetId": "173:53270",
+    "runIdentity": "19be1c96-calendar-v21",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "accepted": true,
+    "refusedClass": null,
+    "namedCause": "Label after-append held. Extract accepted."
+  },
+  "probe": {
+    "issued": true,
+    "accepted": false,
+    "refusedClass": "PROBE-REFLOW-FORCED-WIDTH-ON-HUG-ROOT",
+    "refused": "reflowPassed=false; every other source boolean true; 8/8 cells rolesExact/stateSemantics/noFakeLayout; visibleAreaLoss 0; overlapPixels 0; textPropertiesRestored true; exactSceneRestoration true",
+    "namedCause": "calendar defaultVariant instance is HUG/AUTO. resizeWithoutConstraints(beforeWidth+64) leaves width at content 256. Compile calendar/set is hug. Astryx names no fixed width. Do not invent FIXED. Do not invent a column-width model."
+  },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:53091",
+    "removedCollectionIds": ["VariableCollectionId:173:53093"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "PROBE-REFLOW-FORCED-WIDTH-ON-HUG-ROOT",
+    "path": "probe calendar instance resizeWithoutConstraints(beforeWidth+64)",
+    "role": "calendar/set",
+    "doNotInvent": true,
+    "restartV21Attempt2AsIs": false,
+    "prepareV22": "probe hug-root reflow passes when width stays at content hug after forced resize; do not require +64 to stick"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

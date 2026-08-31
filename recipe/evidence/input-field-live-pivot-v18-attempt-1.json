@@ -1,0 +1,127 @@
+{
+  "artifactVersion": "input-live-v18-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "829f7c5217e3f4f5342cb2111112b6abb448a29a",
+  "codeCommit": "829f7c5217e3f4f5342cb2111112b6abb448a29a",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 976,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8402443,
+    "hostNormalizeAccount": false,
+    "marker": "INPUT-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL"
+  },
+  "v16FailureCleared": {
+    "leadingSlotSolidPaintSurfacedFromPayloadOrChild": true
+  },
+  "v17FailureCleared": {
+    "leadingSlotColorBindingSurfacedFromChild": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedLeadingSlotFills": {
+    "mui": { "empty": 64, "solid": 0, "total": 64 },
+    "polaris": { "empty": 64, "solid": 0, "total": 64 }
+  },
+  "observedLeadingSlotFillSources": {
+    "mui": {
+      "slotNodeFillsEmpty": 64,
+      "instancePayloadSolid": 64,
+      "adornmentContentChildSolid": 64,
+      "total": 64
+    },
+    "polaris": {
+      "slotNodeFillsEmpty": 64,
+      "instancePayloadSolid": 64,
+      "adornmentContentChildSolid": 64,
+      "total": 64
+    }
+  },
+  "observedLeadingSlotColorBindings": {
+    "mui": {
+      "slotNodeMissingFills0Color": 64,
+      "adornmentContentChildHasFills0Color": 64,
+      "hostWouldSurfaceExactlyOne": 64,
+      "total": 64
+    },
+    "polaris": {
+      "slotNodeMissingFills0Color": 64,
+      "adornmentContentChildHasFills0Color": 64,
+      "hostWouldSurfaceExactlyOne": 64,
+      "total": 64
+    }
+  },
+  "observedSurfaceStrokeWeightBindings": {
+    "mui": {
+      "slotOrSurfaceMissingStrokes0Weight": 128,
+      "hasUniformStrokeWeight": 0,
+      "hasPerSideStrokeWeights": 128,
+      "fourPerSideBindSameFloat": 128,
+      "total": 128
+    },
+    "polaris": {
+      "slotOrSurfaceMissingStrokes0Weight": 128,
+      "hasUniformStrokeWeight": 0,
+      "hasPerSideStrokeWeights": 128,
+      "fourPerSideBindSameFloat": 128,
+      "total": 128
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:990 via recipe/input-field-live-v3-verifier-v18.ts:443",
+    "messages": [
+      "input-field@1: input-field/surface: required token binding strokes.0.weight must appear exactly once"
+    ],
+    "cause": "Carried v18 scene-readback surfaced leading-slot fills.0.color from the adornment-content child, so host collapse no longer refused the v17 slot-color gate. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8402443 bytes). Content-width census remains MUI 128/128 FILL and Polaris 128/128 FILL. Host then refused the surface strokes.0.weight token binding. All 128+128 surface nodes bind strokeTopWeight, strokeRightWeight, strokeBottomWeight, and strokeLeftWeight to the same FLOAT variable and bind no strokeWeight / strokes.0.weight. Do not teach FIXED. Do not invent a binding. Do not restart v18 attempt 2 as-is. Scene-readback-v18 bytes are in the v18 hash set.",
+    "inputFieldRecipeInV18AntecedentHashSet": false,
+    "writerInV18AntecedentHashSet": true,
+    "restoreInV18AntecedentHashSet": true,
+    "extractRuntimeInV18AntecedentHashSet": true,
+    "sceneReadbackInV18AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v17AntecedentBytesUnchanged": true,
+  "v17SceneReadbackUnchanged": true,
+  "v17AuthorizationBytesUnchanged": true,
+  "v18AntecedentBytesUnchanged": true,
+  "v18AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV18Attempt2WithoutSurfaceStrokeWeightForbidden": true
+}

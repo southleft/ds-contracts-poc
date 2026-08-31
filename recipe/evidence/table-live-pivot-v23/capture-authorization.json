@@ -1,0 +1,81 @@
+{
+  "artifactVersion": "table-live-v23-capture-authorization-v1",
+  "authorizationId": "table-live-v23",
+  "status": "authorization declared; runtime security prerequisites still mandatory",
+  "authorizationIntent": true,
+  "antecedent": {
+    "commit": "6def9472e22529058ddf92f687590dc61b868abd",
+    "indexPath": "recipe/evidence/table-live-pivot-v23/antecedent-index.json",
+    "indexSha256": "0d12351891cff001073c15df0c1f67c118e4b6ad41f13f48efda4a694c62d9b6",
+    "hashSetSha256": "ac7f237ad04bdaf8c9304535a00457cdea73d480c88d51d4d1b5f79abc07f892"
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAfLiymvIrGAi7wWgmd3yowy0uDulTNeIaJxfdKyhoTWk=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "5fd42674c39943399f2c2245355ad1616e09e90f69a35e986c3ef8753cbc1ee1",
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 25,
+    "hostPhases": 3,
+    "captures": 20,
+    "sourceRoots": 2,
+    "expectedFacts": 1230
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "attemptsExecuted": 0,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "taughtCleanupOnFailureOnly": true,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV41AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "tableLiveV1AuthorizationReusable": false,
+    "tableLiveV2AuthorizationReusable": false,
+    "tableLiveV3AuthorizationReusable": false,
+    "tableLiveV4AuthorizationReusable": false,
+    "tableLiveV5AuthorizationReusable": false,
+    "tableLiveV6AuthorizationReusable": false,
+    "tableLiveV7AuthorizationReusable": false,
+    "tableLiveV8AuthorizationReusable": false,
+    "tableLiveV9AuthorizationReusable": false,
+    "tableLiveV10AuthorizationReusable": false,
+    "tableLiveV11AuthorizationReusable": false,
+    "tableLiveV12AuthorizationReusable": false,
+    "tableLiveV13AuthorizationReusable": false,
+    "tableLiveV14AuthorizationReusable": false,
+    "tableLiveV15AuthorizationReusable": false,
+    "tableLiveV16AuthorizationReusable": false,
+    "tableLiveV17AuthorizationReusable": false,
+    "tableLiveV18AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending"
+  }
+}

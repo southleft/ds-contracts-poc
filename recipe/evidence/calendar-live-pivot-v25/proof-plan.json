@@ -1,0 +1,70 @@
+{
+  "artifactVersion": "calendar-live-v25-proof-plan-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "namespace": "ds.contracts.calendar.recipe.v1",
+  "writer": {
+    "programPath": "recipe/evidence/calendar-live-pivot-v25/programs/writer.txt",
+    "programBytes": 82435,
+    "programSha256": "b67ae4ec34a466084c053eeb9e2f7814219f6d1e6cc57b2dae3790537097772e",
+    "runIdentity": "19be1c96-calendar-v25",
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v25"
+  },
+  "sources": [
+    {
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "recipeHash": "19be1c96bb4519cf50bfe210dc1d1436ff7718ec071c03f4c8d846f3eb10dde6",
+      "envelopeHash": "bfd248ad9edd9a30e4fe4d165b70d240dde9adc341e0d61c1328ab6331d18f36",
+      "calendarExpectedScenePlan": {
+        "path": "recipe/evidence/calendar-live-pivot-v25/expected-scene-plan-astryx-calendar.json.gz",
+        "bytes": 17931,
+        "sha256": "db1369f5be9fade8ad919b3163d517abd542cda73c523e1609ba1ec88615a923",
+        "uncompressedBytes": 334650,
+        "uncompressedSha256": "4b649c6c59b6173be3725b756f33f77b0efcec83c2c47f5aa1afa37c1f58e373",
+        "facts": 977
+      },
+      "weekExpectedScenePlan": {
+        "path": "recipe/evidence/calendar-live-pivot-v25/expected-scene-plan-astryx-week.json.gz",
+        "bytes": 4057,
+        "sha256": "9321a5741ee9bc43a871254dabaf05bf2ca65471ccaa6715e5546aadc8d62aba",
+        "uncompressedBytes": 50246,
+        "uncompressedSha256": "2d2dde2dceeb94bc75e0e3c59aca3e59300b4e412653305c509e07380fc960a0",
+        "facts": 206
+      },
+      "dayExpectedScenePlan": {
+        "path": "recipe/evidence/calendar-live-pivot-v25/expected-scene-plan-astryx-day.json.gz",
+        "bytes": 4230,
+        "sha256": "297cb27a2d5600e9099cc68eee6c790e1fc7d0884dd898ded2b5f1f993742fad",
+        "uncompressedBytes": 53404,
+        "uncompressedSha256": "02e32e56b03611f211b0a1cc2a144a4b262b34acf50501e29f74ee5b84b70947",
+        "facts": 190
+      }
+    }
+  ],
+  "captureManifest": {
+    "path": "recipe/evidence/calendar-live-pivot-v25/capture-manifest.json",
+    "cells": 8,
+    "requests": 8,
+    "cellsPerRequest": 1,
+    "sha256": "c517569561bb356c37becbd3e8fd8fd621634442fb801cb5510bc97b7fd5c341"
+  },
+  "requests": {
+    "remote": 13,
+    "mainLane": 12,
+    "recoveryCleanup": 1,
+    "hostPhases": 3
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3,
+    "cleanPublishedDescendantsOnly": true
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false
+}

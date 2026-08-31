@@ -1,0 +1,155 @@
+{
+  "artifactVersion": "input-live-v6-capture-authorization-v1",
+  "authorizationId": "input-live-v6",
+  "status": "authorization-prepared-uncommitted; security-blocked; live execution and capture forbidden",
+  "authorizationIntent": true,
+  "effectiveAuthorizationDerivedByHistoryAndPreflight": true,
+  "antecedent": {
+    "commit": "8737fab9f35aeae43b25734e8f9709a4247c379b",
+    "committedAt": "2026-08-27T06:56:14-05:00",
+    "gitTreeObject": "1065a502feddd59ce8d11985e3f6e14365d65bfd",
+    "gitTreeObjectSha256": "7c93434bd6e742be7f8137af68239976b1ac226ff4d27346f52c3b86d5d5de68",
+    "upstreamEqualWhenVerified": true,
+    "protocol": {
+      "path": "recipe/evidence/input-field-live-pivot-v6/protocol.json",
+      "artifactVersion": "input-live-v6-external-operator-protocol-draft-v1",
+      "sha256": "0d79c50a4a21763eae067ff18f2ad65bc071f2fca5af7cfd4335f775c9d5e296"
+    },
+    "artifacts": {
+      "recipe/evidence/input-field-live-pivot-v6/protocol.json": "0d79c50a4a21763eae067ff18f2ad65bc071f2fca5af7cfd4335f775c9d5e296",
+      "recipe/evidence/input-field-live-pivot-v6/authorization-template.json": "e89b614b101872c0c8edafebdf66afafa38aeddfbc58f921186c5f52a0db58ac",
+      "recipe/evidence/input-field-live-pivot-v6/proof-plan.json": "28c22a4b86fe98e558c48278c624a229da6417b5abcbdd6587cb533197fdf199",
+      "recipe/evidence/input-field-live-pivot-v6/request-manifest.json": "03126813dfe8a9e7fa9c18db8f906d3e65c33e162bbdc768341802cddeb634b2",
+      "recipe/evidence/input-field-live-pivot-v6/capture-manifest.json": "b58506dd5bc238cafc7b346ddad6fa5d1c1178e5ec6e566f0cc799e4c43e9571",
+      "recipe/evidence/input-field-live-pivot-v6/programs/writer.txt": "a839d5bd2304fa18b449692676345486606bca6a79dd8bd84e8b9b307b9f7826",
+      "recipe/evidence/input-field-live-pivot-v6/programs/writer-payload.js": "aedb679f27be7b8159f4822f5cfb61aeef7f85e7ea824af884f14ad2f3c5e1a2",
+      "recipe/evidence/input-field-live-pivot-v6/programs/extract-blueprint.js": "36b8611fee7ba257256e986e73361ba2c7e0b0d1cce49d55879b2914447a8ef3",
+      "recipe/evidence/input-field-live-pivot-v6/programs/probe-blueprint.js": "471e08c9be8c83e3457867e1f04d0fed55137eb99cec0ce858e92efd933ddba9",
+      "recipe/evidence/input-field-live-pivot-v6/programs/capture-blueprint.js": "179b87be2f81567c16874c5039bfc7bba9e01dbd48f4ec55f9e74cb173592a0e",
+      "recipe/evidence/input-field-live-pivot-v6/expected-scene-plan-mui.json.gz": "96e8d543b259066268af2d871f1a0258bdd3173b5c4402ed3f4d57296cfddfa3",
+      "recipe/evidence/input-field-live-pivot-v6/expected-scene-plan-polaris.json.gz": "6e6517f9a819ce6cffff9e6bda913f3c9c8bdd6d0da95bcebffcdb972bbcd41d",
+      "recipe/input-field-live-v6-broker.ts": "3c8cf2b50ba055a86fc1118723c091f21748541b4a76bde01d1e653012457f1a",
+      "recipe/input-field-live-v6-contract.ts": "11741375907f0dd69678a6ba652a9a1b00b685ae47994ee88ae34e753e52144a",
+      "recipe/run-input-field-live-v6.ts": "0d9871ef268a2253045b13f637b4a71a0853a0d124a13484c25a4e6d5f4bfcf3",
+      "recipe/build-input-field-live-proof-v6.ts": "2e988bb848efb2ea384112495eb53604323cb31ff307d7600eaea187dea013a1",
+      "recipe/input-field-live-v6-broker.test.ts": "4ac6123d06aba5356f1d48789c05a25c51db147cd2e2b21cf1894ec243b6f67d",
+      "recipe/input-field-live-v3-cleanup.ts": "e28c7b8500720899a01fbbb9bdb47e498c7abf1b5798ee14ca4e8cbebd6c7950"
+    },
+    "offlineSamePathSimulation": {
+      "testPath": "recipe/input-field-live-v6-broker.test.ts",
+      "tests": 9,
+      "passed": 9,
+      "failed": 0,
+      "figmaCalls": 0,
+      "usesProductionIssuePersistAcceptPath": true
+    }
+  },
+  "authorizationCommitDiscovery": {
+    "rule": "the authorization commit is the unique first commit that adds this artifact",
+    "command": "git log --reverse --diff-filter=A --format=%H <codeCommit> -- recipe/evidence/input-field-live-pivot-v6/capture-authorization.json",
+    "commitNotEmbeddedInArtifact": true,
+    "mustStrictlyDescendFromAntecedent": true,
+    "artifactBytesMustRemainEqualToFirstAddition": true
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA6H6w8mC0t90XxfV5uT02OPFR1SCqRqYjgRoBwrU+S3M=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "c5d04bf950dea3e1b62a2a274031677546e9c24bbee4cabb64773d0f1a7b3ac4",
+    "sshFingerprint": "SHA256:7F48cfTYIUbZtNRLdq0Uv5GZdZC8X/aRPEN7YuYsk3w",
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 132,
+    "mainLaneRequests": 131,
+    "recoveryCleanupRequests": 1,
+    "hostPhases": 3,
+    "captures": 128,
+    "cellsPerCaptureRequest": 1,
+    "sampleReduction": false
+  },
+  "twoRootFacts": {
+    "roots": 2,
+    "sources": {
+      "mui": {
+        "expectedFacts": 22811,
+        "generatedDescendants": 128
+      },
+      "polaris": {
+        "expectedFacts": 20915,
+        "generatedDescendants": 128
+      }
+    },
+    "expectedFacts": 43726,
+    "variants": 256
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "cleanWorktreeRequired": true,
+    "upstreamEqualityRequired": true,
+    "codeCommitMustDescendFromAntecedentAndAuthorization": true,
+    "authorizationArtifactMustBeCommittedUnchanged": true,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "v5AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "status": "blocked-pending-user-account-action",
+    "liveExecutionForbidden": true,
+    "exposedFigmaPatMustBeRevokedOrReplaced": true,
+    "rotationCompleted": false,
+    "mcpProcessesMustRestartAfterRotation": true,
+    "mcpRestartCompleted": false,
+    "ownerOnlyEnvironmentFileConfigurationRequired": true,
+    "tokenValuesMayNotBeStoredInAttestationOrRepository": true,
+    "operatorAttestationTemplate": "recipe/evidence/input-field-live-pivot-v6/operator-security-attestation-template.json",
+    "operatorAttestationRuntimePath": "private/input-live-v6-security-attestation.json",
+    "safeAttestationCreatedAfterRotationRequired": true,
+    "currentRepositorySecretScan": {
+      "scope": "tracked and untracked repository files",
+      "matches": 0,
+      "status": "zero",
+      "doesNotEstablishTokenRotation": true
+    }
+  },
+  "requiredGates": {
+    "authorizationHistory": true,
+    "antecedentGitObjectBytes": true,
+    "protocolAndProgramPins": true,
+    "signingPublicKeyIdentity": true,
+    "operatorSecurityAttestation": true,
+    "cleanPublishedDescendant": true,
+    "exactTargetAndTool": true,
+    "requestDenominator": true,
+    "noCaptureBeforeTechnicalGates": true,
+    "durableCleanup": true,
+    "noOutcomeOrResultLeakage": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending",
+    "attributableReviewerRequired": true,
+    "overallSuccessBeforeSignoff": false
+  },
+  "criterionPolicy": {
+    "onlyPinnedProtocolDefinesAcceptance": true,
+    "protocolCriteriaAltered": false,
+    "posthocFieldsForbidden": true,
+    "captureDataPresent": false
+  },
+  "outcomes": null
+}

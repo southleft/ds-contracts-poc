@@ -1,0 +1,526 @@
+{
+  "componentFacts": [
+    {
+      "role": "input-field/variant/medium/default/placeholder/false/none",
+      "type": "COMPONENT",
+      "width": 195,
+      "height": 79,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/set"
+    },
+    {
+      "role": "input-field/surface",
+      "type": "FRAME",
+      "width": 195,
+      "height": 56,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/content-row",
+      "type": "FRAME",
+      "width": 165,
+      "height": 54,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/content/placeholder",
+      "type": "TEXT",
+      "width": 118,
+      "height": 23,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "NONE",
+      "parentRole": "input-field/content-row"
+    },
+    {
+      "role": "input-field/label-row",
+      "type": "FRAME",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "ABSOLUTE",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/label",
+      "type": "TEXT",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "WIDTH_AND_HEIGHT",
+      "parentRole": "input-field/label-row"
+    },
+    {
+      "role": "input-field/message-container",
+      "type": "FRAME",
+      "width": 195,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/message/helper",
+      "type": "TEXT",
+      "width": 167,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "HEIGHT",
+      "parentRole": "input-field/message-container"
+    }
+  ],
+  "before": [
+    {
+      "role": "input-field/variant/medium/default/placeholder/false/none",
+      "type": "INSTANCE",
+      "width": 195,
+      "height": 79,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "parentRole": ""
+    },
+    {
+      "role": "input-field/surface",
+      "type": "FRAME",
+      "width": 195,
+      "height": 56,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/content-row",
+      "type": "FRAME",
+      "width": 165,
+      "height": 54,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/content/placeholder",
+      "type": "TEXT",
+      "width": 118,
+      "height": 23,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "NONE",
+      "parentRole": "input-field/content-row"
+    },
+    {
+      "role": "input-field/label-row",
+      "type": "FRAME",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "ABSOLUTE",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/label",
+      "type": "TEXT",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "WIDTH_AND_HEIGHT",
+      "parentRole": "input-field/label-row"
+    },
+    {
+      "role": "input-field/message-container",
+      "type": "FRAME",
+      "width": 195,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/message/helper",
+      "type": "TEXT",
+      "width": 167,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "HEIGHT",
+      "parentRole": "input-field/message-container"
+    }
+  ],
+  "after": [
+    {
+      "role": "input-field/variant/medium/default/placeholder/false/none",
+      "type": "INSTANCE",
+      "width": 259,
+      "height": 79,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "parentRole": ""
+    },
+    {
+      "role": "input-field/surface",
+      "type": "FRAME",
+      "width": 259,
+      "height": 56,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/content-row",
+      "type": "FRAME",
+      "width": 229,
+      "height": 54,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/content/placeholder",
+      "type": "TEXT",
+      "width": 118,
+      "height": 23,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "NONE",
+      "parentRole": "input-field/content-row"
+    },
+    {
+      "role": "input-field/label-row",
+      "type": "FRAME",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "ABSOLUTE",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/label",
+      "type": "TEXT",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "WIDTH_AND_HEIGHT",
+      "parentRole": "input-field/label-row"
+    },
+    {
+      "role": "input-field/message-container",
+      "type": "FRAME",
+      "width": 259,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/message/helper",
+      "type": "TEXT",
+      "width": 231,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "HEIGHT",
+      "parentRole": "input-field/message-container"
+    }
+  ],
+  "restored": [
+    {
+      "role": "input-field/variant/medium/default/placeholder/false/none",
+      "type": "INSTANCE",
+      "width": 195,
+      "height": 79,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "parentRole": ""
+    },
+    {
+      "role": "input-field/surface",
+      "type": "FRAME",
+      "width": 195,
+      "height": 56,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/content-row",
+      "type": "FRAME",
+      "width": 165,
+      "height": 54,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/content/placeholder",
+      "type": "TEXT",
+      "width": 118,
+      "height": 23,
+      "layoutSizingHorizontal": "FIXED",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "NONE",
+      "parentRole": "input-field/content-row"
+    },
+    {
+      "role": "input-field/label-row",
+      "type": "FRAME",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "ABSOLUTE",
+      "parentRole": "input-field/surface"
+    },
+    {
+      "role": "input-field/label",
+      "type": "TEXT",
+      "width": 57,
+      "height": 23,
+      "layoutSizingHorizontal": "HUG",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "WIDTH_AND_HEIGHT",
+      "parentRole": "input-field/label-row"
+    },
+    {
+      "role": "input-field/message-container",
+      "type": "FRAME",
+      "width": 195,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "STRETCH",
+      "layoutPositioning": "AUTO",
+      "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+    },
+    {
+      "role": "input-field/message/helper",
+      "type": "TEXT",
+      "width": 167,
+      "height": 20,
+      "layoutSizingHorizontal": "FILL",
+      "layoutAlign": "INHERIT",
+      "layoutPositioning": "AUTO",
+      "textAutoResize": "HEIGHT",
+      "parentRole": "input-field/message-container"
+    }
+  ],
+  "restoredExactly": true,
+  "stretchExperiment": {
+    "experimentalBefore": [
+      {
+        "role": "input-field/variant/medium/default/placeholder/false/none",
+        "type": "INSTANCE",
+        "width": 195,
+        "height": 79,
+        "layoutSizingHorizontal": "FIXED",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "AUTO",
+        "parentRole": ""
+      },
+      {
+        "role": "input-field/surface",
+        "type": "FRAME",
+        "width": 195,
+        "height": 56,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+      },
+      {
+        "role": "input-field/content-row",
+        "type": "FRAME",
+        "width": 165,
+        "height": 54,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "parentRole": "input-field/surface"
+      },
+      {
+        "role": "input-field/content/placeholder",
+        "type": "TEXT",
+        "width": 118,
+        "height": 23,
+        "layoutSizingHorizontal": "FIXED",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "textAutoResize": "NONE",
+        "parentRole": "input-field/content-row"
+      },
+      {
+        "role": "input-field/label-row",
+        "type": "FRAME",
+        "width": 57,
+        "height": 23,
+        "layoutSizingHorizontal": "HUG",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "ABSOLUTE",
+        "parentRole": "input-field/surface"
+      },
+      {
+        "role": "input-field/label",
+        "type": "TEXT",
+        "width": 57,
+        "height": 23,
+        "layoutSizingHorizontal": "HUG",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "AUTO",
+        "textAutoResize": "WIDTH_AND_HEIGHT",
+        "parentRole": "input-field/label-row"
+      },
+      {
+        "role": "input-field/message-container",
+        "type": "FRAME",
+        "width": 195,
+        "height": 20,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+      },
+      {
+        "role": "input-field/message/helper",
+        "type": "TEXT",
+        "width": 167,
+        "height": 20,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "AUTO",
+        "textAutoResize": "HEIGHT",
+        "parentRole": "input-field/message-container"
+      }
+    ],
+    "experimentalAfter": [
+      {
+        "role": "input-field/variant/medium/default/placeholder/false/none",
+        "type": "INSTANCE",
+        "width": 259,
+        "height": 79,
+        "layoutSizingHorizontal": "FIXED",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "AUTO",
+        "parentRole": ""
+      },
+      {
+        "role": "input-field/surface",
+        "type": "FRAME",
+        "width": 259,
+        "height": 56,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+      },
+      {
+        "role": "input-field/content-row",
+        "type": "FRAME",
+        "width": 229,
+        "height": 54,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "parentRole": "input-field/surface"
+      },
+      {
+        "role": "input-field/content/placeholder",
+        "type": "TEXT",
+        "width": 118,
+        "height": 23,
+        "layoutSizingHorizontal": "FIXED",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "textAutoResize": "NONE",
+        "parentRole": "input-field/content-row"
+      },
+      {
+        "role": "input-field/label-row",
+        "type": "FRAME",
+        "width": 57,
+        "height": 23,
+        "layoutSizingHorizontal": "HUG",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "ABSOLUTE",
+        "parentRole": "input-field/surface"
+      },
+      {
+        "role": "input-field/label",
+        "type": "TEXT",
+        "width": 57,
+        "height": 23,
+        "layoutSizingHorizontal": "HUG",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "AUTO",
+        "textAutoResize": "WIDTH_AND_HEIGHT",
+        "parentRole": "input-field/label-row"
+      },
+      {
+        "role": "input-field/message-container",
+        "type": "FRAME",
+        "width": 259,
+        "height": 20,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "STRETCH",
+        "layoutPositioning": "AUTO",
+        "parentRole": "input-field/variant/medium/default/placeholder/false/none"
+      },
+      {
+        "role": "input-field/message/helper",
+        "type": "TEXT",
+        "width": 231,
+        "height": 20,
+        "layoutSizingHorizontal": "FILL",
+        "layoutAlign": "INHERIT",
+        "layoutPositioning": "AUTO",
+        "textAutoResize": "HEIGHT",
+        "parentRole": "input-field/message-container"
+      }
+    ],
+    "sourceBefore": {
+      "layoutAlign": "INHERIT",
+      "layoutSizingHorizontal": "FIXED",
+      "textAutoResize": "NONE"
+    },
+    "sourceAfter": {
+      "layoutAlign": "INHERIT",
+      "layoutSizingHorizontal": "FIXED",
+      "textAutoResize": "NONE"
+    },
+    "sourceRestored": true
+  }
+}

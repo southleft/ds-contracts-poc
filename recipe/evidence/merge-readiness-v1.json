@@ -1,0 +1,98 @@
+{
+  "artifactVersion": "merge-readiness-v1",
+  "assessedAt": "2026-08-30T13:45:00-05:00",
+  "branch": "pivot/recipe-ir-v1",
+  "assessedAtCommit": "79ea90dde",
+  "readOnly": "assessment only — no merge performed, no PR opened",
+  "branchVsMain": {
+    "base": "origin/main 047f66b8e (merge of PR #73)",
+    "ahead": 674,
+    "behind": 0,
+    "fastForwardPossible": true,
+    "mergeConvention": "main history is PR merges (e.g. #73 census/stack-to-main); merge via PR after TJ approves, do not push main directly"
+  },
+  "testSuite": {
+    "note": "there is no top-level npm test script; the recipe pivot gates are the branch's own acceptance surface. All run at 79ea90dde on 2026-08-30.",
+    "gates": {
+      "recipe:normalize:check": { "tests": 10, "pass": 10, "fail": 0 },
+      "recipe:hash:check": { "tests": 7, "pass": 7, "fail": 0 },
+      "recipe:scene-readback:check": { "tests": 10, "pass": 10, "fail": 0 },
+      "recipe:figma-writer:check": { "tests": 8, "pass": 8, "fail": 0 },
+      "recipe:acquisition:check": { "tests": 6, "pass": 6, "fail": 0 },
+      "recipe:button:check": { "tests": 12, "pass": 12, "fail": 0 },
+      "recipe:input-field:check": { "tests": 24, "pass": 24, "fail": 0 },
+      "recipe:combobox:check": { "tests": 12, "pass": 12, "fail": 0 },
+      "recipe:table:check": { "tests": 19, "pass": 19, "fail": 0, "note": "11 + tail census 4 + writer 4" },
+      "recipe:calendar:check": { "tests": 38, "pass": 38, "fail": 0 },
+      "recipe:pivot-status:check": { "tests": 3, "pass": 3, "fail": 0, "note": "plus the tsx verifier run itself" }
+    },
+    "total": { "tests": 149, "pass": 149, "fail": 0 },
+    "notRunHere": "the repository fast/full CI lanes (npm run ci:lanes / .github/workflows/full.yml — eval, plugin:check, parity, extract drift, etc.). Main's last local full-lane record was 83 pass / 2 fail with both failures NAMED (parity red at 8a5c455 by design; deploy:check red before a deploy). The lanes must be run on this branch head before merge; expect the same named-red-only profile."
+  },
+  "humanGrades": {
+    "input": "passed (V85, 2026-08-28)",
+    "combobox": "passed (V41, 2026-08-29) — source-fidelity audit flagged fixture overlay chrome; TJ decided 2026-08-30 to keep the signoff and remint from MUI/AntD-named chrome post-merge (recipe/evidence/signed-archetype-source-audit.json); signoff not invalidated",
+    "table": "passed (V32, 2026-08-29)",
+    "calendar": "passed (V50, 2026-08-30, full pass)",
+    "button": "PENDING — leftover inversion (5+1 set-naming defect on 85:6781) in progress separately; do not invent a grade"
+  },
+  "whatStandsBetweenBranchAndMain": [
+    {
+      "item": "Button leftover inversion",
+      "status": "open, in progress by a separate agent",
+      "blocking": true,
+      "why": "docs/32 F4 requires Button to have recipe-path proof plus attributable human signoff or a named refusal; product v1 is incomplete until it closes"
+    },
+    {
+      "item": "docs/26 vs docs/32 reconciliation (E4)",
+      "status": "open — E4 proposal drafted 2026-08-29, NOT applied",
+      "blocking": true,
+      "why": "docs/26 V1-CLASS-02 still lists select/combobox and table/data-grid as experimental/not-v1-supported and Calendar as never-attempted, while docs/32 records green gates and passed human grades for all three. Per E4, docs/26 rows change only by citing the green gate on a commit — an owner (TJ) action, not a gate."
+    },
+    {
+      "item": "Combobox fixture-chrome flag",
+      "status": "DECIDED 2026-08-30 by TJ Pitre — keep the V41 signoff; remint from real MUI/AntD-named overlay chrome as a named POST-MERGE work item (pre-merge remint and permanent acceptance both declined)",
+      "blocking": false,
+      "why": "signed-archetype-source-audit.json flags canonical overlay chrome under library-scoped names; decision recorded in that file (archetypes.combobox.tjDecision20260830). Scope: overlay fill/border/radius/shadow, listPadding, optionPaddingX renamed from canonical-fixture values to real MUI/AntD-named values; V41 page 163:35981 and the signoff stay valid until the remint lands"
+    },
+    {
+      "item": "CI fast/full lanes on the branch head",
+      "status": "not yet run on this branch",
+      "blocking": true,
+      "why": "docs/32 F6: CI lanes required for release must be green; only the recipe:* gates have been run here (149/149)"
+    },
+    {
+      "item": "npm publish",
+      "status": "deferred by design",
+      "blocking": false,
+      "why": "docs/32 F6: npm publish remains deferred and is not a v1-proof substitute"
+    },
+    {
+      "item": "open PRs against main",
+      "status": "out of scope for this merge",
+      "blocking": false,
+      "detail": "#61 layout-lowering, #56 proof/altitude-badge, #54 corpus/hard-cases, #15 sync-spine/polaris-avatar, #14 draft, plus dependabot bumps — independent lines of work; the branch is 0 behind main so none conflict with this merge"
+    },
+    {
+      "item": "stale evidence",
+      "status": "none blocking in-repo",
+      "blocking": false,
+      "detail": "private/ and PEMs are untracked (verified: git ls-files private/ empty). Historical status lines below the docs/32 superseding blockquote are by-design history. Figma-side: older Calendar mint pages on Scratch (173:53929, 179:54747, 180:55345, 180:55528, 180:56126) are signed-clean-permitted but deferred to a dedicated signed cleanup — a Figma task, not a repo blocker."
+    }
+  ],
+  "mergeChecklist": {
+    "executeAfter": "Button leftover closes AND TJ approves the merge",
+    "ordered": [
+      "1. Button leftover inversion closes with evidence; Button gets an attributable human grade or a named refusal per docs/32 F4 (other agent's line of work — do not duplicate).",
+      "2. DONE 2026-08-30 — TJ decided the Combobox fixture-chrome flag: keep the V41 signoff and schedule the remint post-merge (recorded in signed-archetype-source-audit.json, archetypes.combobox.tjDecision20260830); does not block the merge.",
+      "3. Apply the docs/26 <-> docs/32 reconciliation (E4): move select/combobox, table/data-grid, and calendar/date-picker rows citing the green gates and signoff evidence paths on a named commit; run npm run docs:check.",
+      "4. Re-run all recipe:*:check gates at the intended merge commit; require 149/149 (or the then-current denominator) green.",
+      "5. Run npm run ci:lanes (fast) and the full lane locally on the branch head; require the named-red-only profile (parity by design, deploy:check pre-deploy) with zero unnamed reds.",
+      "6. Verify hygiene at the merge commit: git ls-files private/ empty, no PEMs tracked, no FIGMA_TOKEN in any tracked file.",
+      "7. Open a PR pivot/recipe-ir-v1 -> main (branch is 674 ahead / 0 behind; repo convention is PR merges). TJ approves and merges.",
+      "8. Post-merge: remint Combobox from real MUI/AntD-named overlay chrome per TJ's 2026-08-30 decision (scope: overlay fill/border/radius/shadow, listPadding, optionPaddingX from canonical-fixture values to library-named values; fresh mint on a new Scratch page, fresh human grade; V41 page 163:35981 and signoff stay valid until then); npm publish stays deferred; schedule the dedicated signed cleanup of older Calendar Scratch pages; keep Scratch checkpoints (V50 Calendar signed off = 2393545747493203926) as restore points."
+    ]
+  },
+  "productV1Complete": false,
+  "doNotClaimV1Complete": true
+}

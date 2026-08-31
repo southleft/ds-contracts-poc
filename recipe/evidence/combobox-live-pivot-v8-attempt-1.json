@@ -1,0 +1,158 @@
+{
+  "artifactVersion": "combobox-live-v8-attempt-1-v1",
+  "status": "failed closed at collapse invalid ARIA/data model; writer ARIA stamp teaching cleared; hashed property keys remain; extract walk cleared; restore 144 held; cleanup accepted; mint did not stay",
+  "authorizationCommit": "17d0ba19c655b8d6396a7d2efab80d26f3363a19",
+  "codeCommit": "17d0ba19c655b8d6396a7d2efab80d26f3363a19",
+  "antecedentCommit": "dac6891f13ec76742ae4274da7d7240994b0fe68",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "writer must stamp option-instance Label, Value, and Disabled component properties named from source so live extract carries the recipe ARIA/data model, not only Size and Option state",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "135:314782",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["135:314877", "135:315646", "135:315741", "135:316510"],
+    "muiOptionSetId": "135:314877",
+    "muiComboboxSetId": "135:315646",
+    "antdOptionSetId": "135:315741",
+    "antdComboboxSetId": "135:316510",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true,
+    "stampedOptionAriaProperties": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "633542d868fed4e1cceaea8b1beb71b15e37542889e7b8c14f9befe3756fd2e6",
+    "writerAriaStampTeachingCleared": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "invalid ARIA/data model",
+    "refused": "invalid ARIA/data model at option occurrence 0",
+    "refusedAt": "recipe/recipes/combobox.ts:1290",
+    "nonInstanceRepetitionDidNotRecur": true,
+    "hostRecoversComponentRefAs": "combobox@1/option",
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveOptionInstanceKinds": [
+      "INSTANCE",
+      "INSTANCE",
+      "INSTANCE",
+      "INSTANCE"
+    ],
+    "measuredLiveOptionInstanceComponentRefs": [
+      "Size=small, Option state=selected",
+      "Size=small, Option state=highlighted",
+      "Size=small, Option state=disabled",
+      "Size=small, Option state=default"
+    ],
+    "measuredLiveOptionInstanceProperties": {
+      "0": {
+        "Disabled#135:173540": false,
+        "Label#135:173522": "Ada Lovelace",
+        "Option state": "selected",
+        "Size": "small",
+        "Value#135:173531": "ada"
+      },
+      "1": {
+        "Disabled#135:173540": false,
+        "Label#135:173522": "Grace Hopper",
+        "Option state": "highlighted",
+        "Size": "small",
+        "Value#135:173531": "grace"
+      },
+      "2": {
+        "Disabled#135:173540": true,
+        "Label#135:173522": "Linus Torvalds",
+        "Option state": "disabled",
+        "Size": "small",
+        "Value#135:173531": "linus"
+      },
+      "3": {
+        "Disabled#135:173540": false,
+        "Label#135:173522": "Margaret Hamilton",
+        "Option state": "default",
+        "Size": "small",
+        "Value#135:173531": "margaret"
+      }
+    },
+    "requiredCollapseProperties": {
+      "Label": "string",
+      "Value": "string",
+      "Disabled": "boolean"
+    },
+    "valueNamedFromSourceNotInventedFromLabel": true,
+    "sourceValuesPresentUnderHashedKeys": true,
+    "unsuffixedLabelValueDisabledAbsent": true,
+    "sceneToNormalizedIrCopiesLiveComponentProperties": true,
+    "namedFromSource": "v8 writer teaching cleared; live extract carries source Label Ada Lovelace, Value ada, Disabled false under Figma keys Label#135:173522 / Value#135:173531 / Disabled#135:173540; host copies those hashed keys unchanged; collapse looks for unsuffixed properties.Label / properties.Value / properties.Disabled and refuses invalid ARIA/data model at option occurrence 0; do not invent ada from Ada Lovelace"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "d671c2126300eeec69df297b8b06b637039ada49fcd69072e406db53d69c49bb",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "135:314782",
+    "removedCollectionIds": [
+      "VariableCollectionId:135:314784",
+      "VariableCollectionId:135:315648"
+    ]
+  },
+  "nextTeaching": {
+    "class": "invalid ARIA/data model",
+    "doNotInvent": true,
+    "doNotInventOptionGlyphText": true,
+    "doNotInventValueFromLabel": true,
+    "restartV8Attempt2AsIs": false,
+    "prepareV9": "host sceneToNormalizedIr must recover option-instance Label, Value, and Disabled from live Figma component-property keys by the name before #, carrying the already-stamped source values"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

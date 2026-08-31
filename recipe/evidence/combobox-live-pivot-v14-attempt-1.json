@@ -1,0 +1,178 @@
+{
+  "artifactVersion": "combobox-live-v14-attempt-1-v1",
+  "status": "failed closed at collapse unsupported structural edit; host trailing-slot compile-carry visible teaching cleared; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "6f02f5036b73ebbea273726a0f013fdf7c73625b",
+  "codeCommit": "6f02f5036b73ebbea273726a0f013fdf7c73625b",
+  "antecedentCommit": "95da077ffe522235cac6085d053fb71648ec86fe",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host must emit compile-carried visible: true on trailing-slot instances instead of omitting the default-true visible flag",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true,
+    "heldHostTriggerBindingCompileOrder": true,
+    "heldHostLeadingSlotBindingCompileOrder": true,
+    "heldHostLeadingSlotCompileCarryVisible": true,
+    "heldHostTrailingSlotBindingCompileOrder": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "154:325156",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["154:326020", "154:325251", "154:326884", "154:326115"],
+    "muiOptionSetId": "154:325251",
+    "muiComboboxSetId": "154:326020",
+    "antdOptionSetId": "154:326115",
+    "antdComboboxSetId": "154:326884",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "inputPageUntouched": true,
+    "stampedOptionAriaProperties": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "411e4cc6483f5ad6156f18173155f5e8402a356e0cdc1f108f782fae376ee8d3",
+    "hostTrailingSlotCompileCarryVisibleTeachingCleared": true,
+    "hostTrailingSlotBindingCompileOrderTeachingHeld": true,
+    "hostLeadingSlotCompileCarryVisibleTeachingHeld": true,
+    "hostLeadingSlotBindingCompileOrderTeachingHeld": true,
+    "hostTriggerBindingCompileOrderTeachingHeld": true,
+    "hostPropertyNameBeforeHashTeachingHeld": true,
+    "invalidAriaDidNotRecur": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[1].effects",
+    "refusedAt": "recipe/recipes/combobox.ts:1738",
+    "hostRecoversComponentRefAs": "combobox@1/option",
+    "hostRecoversHashedPropertyNames": true,
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveExtractHashedKeys": {
+      "0": {
+        "Disabled#154:180884": false,
+        "Label#154:180866": "Ada Lovelace",
+        "Option state": "selected",
+        "Size": "small",
+        "Value#154:180875": "ada"
+      }
+    },
+    "hostRecoveredUnsuffixedProperties": {
+      "Label": "Ada Lovelace",
+      "Value": "ada",
+      "Disabled": false
+    },
+    "valueNamedFromSourceNotInventedFromLabel": true,
+    "measuredClearVisible": {
+      "role": "combobox/control/clear",
+      "path": "$.children[0].children[0].children[1].children[2].children[0]",
+      "liveVisible": true,
+      "liveOpacity": 1,
+      "hostHasVisible": true,
+      "hostVisible": true,
+      "hostVisibleCensus": {
+        "true": 48,
+        "false": 16
+      },
+      "compileHasVisible": true,
+      "compileVisible": true,
+      "compileVisibleCensus": {
+        "true": 48,
+        "false": 16
+      },
+      "siblingPopupHostHasVisible": true,
+      "siblingPopupHostVisible": true,
+      "siblingPopupHostVisibleTrue": 64,
+      "siblingPopupCompileHasVisible": true,
+      "siblingPopupCompileVisible": true
+    },
+    "measuredTriggerEffects": {
+      "role": "combobox/trigger",
+      "path": "$.children[0].children[0].children[1].effects",
+      "hostCount": 64,
+      "hostHasEffects": true,
+      "hostEffects": [],
+      "hostEmpty": 64,
+      "hostNonempty": 0,
+      "compileCount": 64,
+      "compileHasEffects": false,
+      "overlayHostCount": 32,
+      "overlayHostHasEffects": true,
+      "overlayHostNonempty": 32,
+      "overlayCompileHasEffects": true,
+      "overlayCompileNonempty": 32,
+      "listboxHostEmpty": 32,
+      "listboxCompileHasEffects": false
+    },
+    "namedFromSource": "v14 host trailing-slot compile-carry visible teaching cleared; host now emits visible: true on combobox/control/clear (48) and visible: false on the 16 disabled clears, matching compile controlInstance; sibling combobox/control/popup is visible: true on 64/64; collapse then refuses unsupported structural edit at combobox/trigger effects because host emits effects: [] on all 64 triggers while compile omits the effects key; overlay must keep its compile-carried drop-shadow (32/32 host and compile); host also emits effects: [] on 32 listboxes that compile omits, but firstDifference stops at trigger; live extract still carries source Label Ada Lovelace, Value ada, Disabled false under Figma keys Label#154:180866 / Value#154:180875 / Disabled#154:180884; do not invent ada from Ada Lovelace; do not invent an effects value; do not invent visible: false; do not change occupancy opacity: 0"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "909d13e72349f4ad1bb6116fc208a7577489933f9cbbab5337a6e27b62f2f846",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "154:325156",
+    "removedCollectionIds": [
+      "VariableCollectionId:154:325158",
+      "VariableCollectionId:154:326022"
+    ]
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "doNotInventOptionGlyphText": true,
+    "doNotInventValueFromLabel": true,
+    "doNotInventVisibleFalse": true,
+    "doNotInventEffectsValue": true,
+    "doNotOmitOverlayEffects": true,
+    "doNotLiftOntoListboxInSamePrepare": true,
+    "restartV14Attempt2AsIs": false,
+    "prepareV15": "host must omit empty effects on combobox/trigger that compile never emits"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

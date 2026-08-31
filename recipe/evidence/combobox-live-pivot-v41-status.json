@@ -1,0 +1,41 @@
+{
+  "artifactVersion": "combobox-live-v41-status-v1",
+  "status": "attempt 1 stayed; host probe measured overlay-nested option/label and selected-indicator against in-flow helper/error on the 24 open-options cells, then did not score that pair class; original-plan accounting 0/0 and 13307/13307; two-cycle scene-derived fixed-point stable; restore 144 held; extract walk cleared; 72 captures technical-passed; cleanup persisted not executed; writer accepted on new page 163:35981; Input 115:295378 stayed; mint stayed; no Combobox human grade",
+  "antecedent": {
+    "commit": "165e7fa13cd9d808116503c84d1bc8838aaaed1f",
+    "indexPath": "recipe/evidence/combobox-live-pivot-v41/antecedent-index.json",
+    "indexSha256": "f6e7f89ba0b55e1aa7bc5253e95b1d9220e5cb655ee7ef8c830b7f28588b077b",
+    "hashSetSha256": "26037ecc3c78d1879f49ad81b241c9e81cb3a16362b505719e2d839a2678cfa0"
+  },
+  "authorization": {
+    "commit": "663ed03d1ed89f93f6bca98147435836fb1dc10d",
+    "path": "recipe/evidence/combobox-live-pivot-v41/capture-authorization.json",
+    "sha256": "decab4ef35b03229e0c964e532a24aa80506ccebfcdc3149cec344c96dbcf2f5",
+    "signingPublicKeySpkiSha256": "8dfb7e7401b680408223853cf4dd5e72128c70a57b101a4d4290733e526b174d"
+  },
+  "attempt1": {
+    "pageId": "163:35981",
+    "pageRemoved": false,
+    "restoreAccepted": true,
+    "restoredCount": 144,
+    "extractWalkCleared": true,
+    "hostProbeExcludesOverlayOptionLabelMessageOverlapTeachingCleared": true,
+    "originalPlanAccountingOk": true,
+    "hostCollapseAccepted": true,
+    "fixedPointStable": true,
+    "hostAccountingRefused": false,
+    "probeIssued": true,
+    "probeRefused": null,
+    "capturesIssued": 72,
+    "technicalPassed": true,
+    "cleanupAccepted": false,
+    "cleanupPersistedNotExecuted": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterMint": true
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

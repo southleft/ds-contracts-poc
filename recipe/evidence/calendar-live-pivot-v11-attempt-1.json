@@ -1,0 +1,91 @@
+{
+  "artifactVersion": "calendar-live-v11-attempt-1-v1",
+  "status": "failed closed at extract; writer and restore accepted; week-frame clipsContent omit held; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "cc89c18e0ef9c0f2eeeb67e1d7935f08687e3892",
+  "codeCommit": "cc89c18e0ef9c0f2eeeb67e1d7935f08687e3892",
+  "antecedentCommit": "c9591a63377c6875f3e300b5696c0761567d6bb6",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v11",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "f5ef3075-377d-478e-9bed-d084ff98e983",
+    "attempt": 1,
+    "authorizationSha256": "40424dbeab085969dc0475e4582758c82090f1fdebe5e6b0bb416ddade13d9c6",
+    "signingPublicKeySpkiSha256": "5fc8ea851e992625b5fd07fa54ad66ff2d9330d922a9c2279fd309f78663ac5e",
+    "programSha256": "bdb1527685abd1cd2e81b471a048ad3422c76ce5c040196470c169338880badd",
+    "requestBindingSha256": "ff0f2d6125fe8a3134e505c9fe7541d2df9952baccc2c7a059e3834029692e6c",
+    "requestSha256": "23e82c36772d912e58464c89e7cd96dde70f65117c1f918884b86b777ccd2d9c"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v11",
+    "pageId": "173:51082",
+    "sectionId": "173:51083",
+    "collectionId": "VariableCollectionId:173:51084",
+    "daySetId": "173:51112",
+    "weekSetId": "173:51144",
+    "calendarSetId": "173:51261",
+    "runIdentity": "19be1c96-calendar-v11",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "refusedClass": "CALENDAR-UNSUPPORTED-STRUCTURAL-EDIT",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[2].children[0].cornerRadius",
+    "namedCause": "compile calendar/week/0 frames omit cornerRadius; host emitted the key"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:51082",
+    "removedCollectionIds": ["VariableCollectionId:173:51084"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-UNSUPPORTED-STRUCTURAL-EDIT",
+    "path": "$.children[0].children[0].children[2].children[0].cornerRadius",
+    "role": "calendar/week/0",
+    "doNotInvent": true,
+    "restartV11Attempt2AsIs": false,
+    "prepareV12": "host-omit cornerRadius on calendar/week/${n} frames"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

@@ -1,0 +1,114 @@
+{
+  "artifactVersion": "table-live-v5-external-operator-protocol-v1",
+  "protocolId": "table-live-v5",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "lifecycle": {
+    "executionAntecedentImmutable": true,
+    "authorizationAddedOnlyAfterAntecedentCommit": true,
+    "authorizationExcludedFromAntecedentFreshness": true,
+    "laterAuthorizationDoesNotRecomputeAntecedent": true,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV41AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "tableLiveV1AuthorizationReusable": false,
+    "tableLiveV2AuthorizationReusable": false,
+    "tableLiveV3AuthorizationReusable": false,
+    "tableLiveV4AuthorizationReusable": false,
+    "inputRunIdentityForbidden": true,
+    "inputPage115295378Forbidden": true,
+    "comboboxRunIdentityForbidden": true,
+    "comboboxPage16335981Forbidden": true,
+    "tableV1RunIdentityForbidden": true,
+    "tableV2RunIdentityForbidden": true,
+    "tableV3RunIdentityForbidden": true,
+    "tableV4RunIdentityForbidden": true
+  },
+  "teaching": {
+    "restoreHugLabelsOnlyFromCellSet": true,
+    "ownedHugTexts": 8,
+    "nestedInstanceLabelsAreNotOwned": true,
+    "extractSetRootOmitsEnvelopeHash": true,
+    "ignoreCopiedOwnershipKeyInsideOwnedInstance": true,
+    "hostOmitsEmptyInstancePayload": true,
+    "observeSceneFactsProjectsLiveRootOwnershipKey": true,
+    "hostRecoversRecipeComponentRef": true,
+    "hostRecoversComponentPropertyNameBeforeHash": true,
+    "hostOrdersBindingsToCompileFieldOrder": true,
+    "hostAliasesWidthHeightToLayoutWidthHeight": true,
+    "hostOmitsTextExtrasUnlessSourceHasThem": true,
+    "hostObserveOmitsInstancePayloadOnTableRowCellInstances": true,
+    "hostProbeKeepsExactSceneRestorationAfterDensityWalk": true,
+    "hostProbeExcludesOpacityZeroOccupancyOverlap": true,
+    "hostProbeRequiresContentHugNotFill": true,
+    "firstPartyHeaderFontNamedHostListedInterSemiBold": true,
+    "rowCellNBindsNestedCellLabelTextCharacters": true,
+    "rowOwnedTextCharactersOnOriginalRow": true,
+    "hostMinWidthZeroUnsetsNull": true
+  },
+  "inheritedCapability": {
+    "roleFirstSegment": true,
+    "hiddenFillOccupancyVisibleTrueOpacity0": true,
+    "compileOmitsVisibleFalseOnOccupancyPlaceholders": true,
+    "expectedPlanOccupancyOpacity0": true,
+    "collapseMustNotInventDefaultOpacity1": true,
+    "probeExcludesOpacityZeroOccupancyOverlap": true,
+    "omitTextExtrasUnlessSourceHasThem": true,
+    "setLayoutCompileCarryAfterFirstMeasure": true,
+    "cleanupOnFailureOnly": true,
+    "inventPolar9300Forbidden": true,
+    "inventPolarContentRowForbidden": true,
+    "inventOverlapZeroForbidden": true
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "writerPath": "recipe/table-figma-writer.ts",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputRunIdentity": "4a074b24-e8503dd5-input-v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxRunIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenTableV2RunIdentity": "cc811f47-82d19508-table-v2",
+    "forbiddenTableV3RunIdentity": "cc811f47-82d19508-table-v3",
+    "forbiddenTableV4RunIdentity": "cc811f47-82d19508-table-v4"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "expectedDynamicTool": {
+    "namespace": "user-Figma Console",
+    "tool": "figma_execute"
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "sets": 6,
+    "variants": 20,
+    "captureCells": 20,
+    "remoteRequests": 25,
+    "hostPhases": 3,
+    "expectedSceneFacts": 1230,
+    "restoreHugTexts": 8
+  },
+  "execution": {
+    "requestOrder": [
+      "writer",
+      "persist signed cleanup recovery request",
+      "restore",
+      "extract",
+      "host-normalize-account",
+      "probe",
+      "captures"
+    ],
+    "cleanupOnFailureOnly": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "maximumAttempts": 3
+  },
+  "proof": {
+    "cleanupOnFailureOnly": true,
+    "independentRootAccounting": true,
+    "compileCarryLiveSetFactsAfterFirstMeasure": true
+  }
+}

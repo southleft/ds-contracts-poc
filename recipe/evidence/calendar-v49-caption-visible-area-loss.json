@@ -1,0 +1,46 @@
+{
+  "artifactVersion": "calendar-v49-caption-visible-area-loss-v1",
+  "status": "failed closed; mint did not stay",
+  "antecedent": {
+    "prepare": "8e47b36d74eafcdf1ad3d3c514733113b5c067c0",
+    "authorize": "32dcf6b49"
+  },
+  "runIdentity": "4604bbfe-calendar-v49",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": { "accepted": true, "pageId": "180:63973", "collectionId": "VariableCollectionId:180:63975", "cleaned": true },
+  "restore": { "accepted": true },
+  "extract": { "accepted": true },
+  "probe": {
+    "mcpSucceeded": true,
+    "contentHugGateHeld": true,
+    "refused": "cell visibleAreaLoss 1 > 0.05 on astryx/calendar/off and astryx/calendar/on; all other flags true, all other cells loss 0 overlap 0",
+    "cells": {
+      "astryx/calendar/off": { "visibleAreaLoss": 1, "overlapPixels": 0 },
+      "astryx/calendar/on": { "visibleAreaLoss": 1, "overlapPixels": 0 }
+    }
+  },
+  "measured": {
+    "lossSource": "calendar/caption paints nothing — width 0, absoluteRenderBounds null (V48 live measurement) — so the semantic caption node reports full visible-area loss in both calendar cells",
+    "cause": "the V24 named-fallback-after-zero-glyph walk is guarded by ir.width.mode !== fill; the FILL caption stays on the zero-intrinsic resolved face and never paints",
+    "captureMonth": "April 2026",
+    "grids": { "on": 6, "off": 6 },
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "doNotRestartAttempt2AsIs": true,
+  "nextTeaching": "writer runs the named fallback walk for FILL text too (triggered by null render bounds after characters); the walk stays on the source-named fallback chain; no invented px or faces",
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}

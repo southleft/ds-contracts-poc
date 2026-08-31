@@ -1,0 +1,29 @@
+{
+  "artifactVersion": "input-live-v4-index-v1",
+  "status": "authorization artifact prepared; pending parent commit and upstream publication; capture forbidden",
+  "antecedent": {
+    "commit": "25b820868104be65194f83e154f59b70aacf2bae",
+    "protocolPath": "recipe/evidence/input-field-live-pivot-v4/protocol.json",
+    "protocolSha256": "e65584d1d52178cd80dddbe42458a58b0a1ade4f24e41fb53fa4b9cdb97105d6"
+  },
+  "authorization": {
+    "path": "recipe/evidence/input-field-live-pivot-v4/capture-authorization.json",
+    "sha256": "6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b",
+    "firstAddCommit": null,
+    "committed": false,
+    "upstreamPublished": false,
+    "authorized": false,
+    "discoveredAfterCommit": true
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3,
+    "v3AttemptsDoNotCarryForward": true
+  },
+  "liveExecutionOccurred": false,
+  "captureArtifactsPresent": false,
+  "protocolCriteriaAltered": false,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

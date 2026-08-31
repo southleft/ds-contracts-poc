@@ -1,0 +1,2660 @@
+{
+  "version": 1,
+  "status": {
+    "evidenceGeneration": "complete",
+    "independentBlindGrade": "pending",
+    "legacyRecognisability": "ungraded",
+    "recipeRecognisability": "ungraded",
+    "buttonSuccess": false
+  },
+  "historicalCorpusBaseline": {
+    "recognisable": "117/170",
+    "usable": "39/170",
+    "changed": false
+  },
+  "verifiedButtonLegacyContext": {
+    "sets": 2,
+    "recognisableSets": 1,
+    "totalVariants": 49,
+    "historicalRenderedSampleCells": 18,
+    "scope": "context only; not a per-cell blind grade"
+  },
+  "matrix": {
+    "frozenBeforeRender": true,
+    "sampleMatrixHash": "077ea88015620515abab93e09ca8fb30b5d24df438eae08c674fab3ea43f12e7",
+    "axesCompared": [
+      "Variant",
+      "State"
+    ],
+    "variants": [
+      "primary",
+      "secondary"
+    ],
+    "states": [
+      "default",
+      "hover",
+      "focus-visible"
+    ],
+    "fixed": {
+      "Size": "medium",
+      "Icons": "none",
+      "Label": "Button"
+    },
+    "sharedCellsPerLibrary": 6,
+    "libraries": 2,
+    "totalSourceCells": 12,
+    "cells": [
+      {
+        "key": "altitude/variant=primary/state=default",
+        "library": "altitude",
+        "variant": "primary",
+        "state": "default",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "altitude/variant=primary/state=hover",
+        "library": "altitude",
+        "variant": "primary",
+        "state": "hover",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "altitude/variant=primary/state=focus-visible",
+        "library": "altitude",
+        "variant": "primary",
+        "state": "focus-visible",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "altitude/variant=secondary/state=default",
+        "library": "altitude",
+        "variant": "secondary",
+        "state": "default",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "altitude/variant=secondary/state=hover",
+        "library": "altitude",
+        "variant": "secondary",
+        "state": "hover",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "altitude/variant=secondary/state=focus-visible",
+        "library": "altitude",
+        "variant": "secondary",
+        "state": "focus-visible",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "fluent/variant=primary/state=default",
+        "library": "fluent",
+        "variant": "primary",
+        "state": "default",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "fluent/variant=primary/state=hover",
+        "library": "fluent",
+        "variant": "primary",
+        "state": "hover",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "fluent/variant=primary/state=focus-visible",
+        "library": "fluent",
+        "variant": "primary",
+        "state": "focus-visible",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "fluent/variant=secondary/state=default",
+        "library": "fluent",
+        "variant": "secondary",
+        "state": "default",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "fluent/variant=secondary/state=hover",
+        "library": "fluent",
+        "variant": "secondary",
+        "state": "hover",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      },
+      {
+        "key": "fluent/variant=secondary/state=focus-visible",
+        "library": "fluent",
+        "variant": "secondary",
+        "state": "focus-visible",
+        "recipeSize": "medium",
+        "icons": "none",
+        "label": "Button"
+      }
+    ],
+    "excludedByName": [
+      "Size=small",
+      "Size=large",
+      "State=pressed",
+      "State=disabled",
+      "State=loading",
+      "Icons=leading",
+      "Icons=trailing",
+      "Icons=both"
+    ]
+  },
+  "provenance": {
+    "sourceCommit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "fixtureHash": "a7ac09214a8ba34d3ab42e02db02cdb09995812acdc340ee647561985c6e8800",
+    "harnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+    "sourceAdapterHashes": {
+      "altitude": "0b82a9db88874d5706256055661fcbc8522c62f1b9932b2e67599e2e91da284a",
+      "fluent": "cf599b258264b906987bd81f8d343199a171db44ee409cc27432fc46da0ae863"
+    },
+    "packages": {
+      "altitude": {
+        "packageName": "altitude-web-components",
+        "exactVersion": "1.0.2",
+        "packageJsonHash": "71458d7cff3dffeabfd338d91bb0c5ce1afbab00f34c1964b6d577456cc139f7",
+        "packageLockHash": "89ddf95b5c47edf2b4c5a6f2619c98d8e35031b4642a40656ab16516b2dcf317",
+        "packageIntegrity": "sha512-2ZZ+JV2sz3I2gBhyOBBCLyUgp0frPArCWTC+LYKg4Efzp70tVCveZY4GMNw/x/oxxitZsS4/qpQhdJ38lYr1RA==",
+        "installedTreeHash": "5ab80e29330407917630f240e79d71f3624ac2b92340f1ca102bd2019d2b014e",
+        "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc"
+      },
+      "fluent": {
+        "packageName": "@fluentui/react-components",
+        "exactVersion": "9.74.5",
+        "packageJsonHash": "a10dc6cb435329ab2802365a4157a5b7d96611d42890ce648620173901d4c004",
+        "packageLockHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "packageIntegrity": "sha512-4ODUBQJ/VBJIdfvY+tomRJc2a6wsJwieOcGoruH1EI2xyx5jVnfJGM4rn2CAtrGy8INfjl1V96GJ5ZPTLJ7wVA==",
+        "installedTreeHash": "ad317b99c0036dcd0c9bd8876465d3236d96f2834745600f50e3200104f538e3",
+        "componentPackage": {
+          "packageName": "@fluentui/react-button",
+          "exactVersion": "9.10.1",
+          "installedTreeHash": "8f0c41718d57cad7fab0624f7c488a1e9618b3bff60ff7595a2e29acbbe871dc",
+          "integrity": "sha512-8Ow/ck9a/RLh3cJ6ZPF4asmGnNfqXr/Kengk+zTkMuppk+pFL3X6WEMrJLSOUKKZtx0Tp1UBuUPA6RL6Ive5WQ=="
+        },
+        "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09"
+      }
+    },
+    "adapters": {
+      "altitude": {
+        "packageName": "altitude-web-components",
+        "exactVersion": "1.0.2",
+        "externalOwner": "Altitude package publisher",
+        "component": "al-button",
+        "sandbox": "examples/altitude/.altitude-sandbox",
+        "recipeSelection": {
+          "recipe": "button@1",
+          "mechanism": "manual-human-review",
+          "selectedBy": "recipe-pivot-button-comparison-review",
+          "reviewedAt": "2026-08-26T21:06:00-05:00"
+        },
+        "sourceApiMap": {
+          "variant": {
+            "primary": "omit variant attribute (the package's actual primary default)",
+            "secondary": "variant=\"secondary\""
+          },
+          "state": {
+            "default": "no interaction",
+            "hover": "real pointer hover",
+            "focus-visible": "sentinel focus followed by keyboard Tab"
+          },
+          "recipeSize": "medium is fixed on recipe/legacy only; source has no size API",
+          "icons": "none; source Button exposes no icon slot",
+          "label": "light-DOM text child"
+        },
+        "fixedSourceProps": {},
+        "unsupportedPairedCells": [
+          "Size=small",
+          "Size=large",
+          "State=pressed",
+          "State=disabled",
+          "State=loading",
+          "Icons=leading",
+          "Icons=trailing",
+          "Icons=both"
+        ],
+        "capabilityCoverageOutsidePairedMatrix": [
+          "source variants tertiary, bare, danger",
+          "isDisabled sets aria-disabled but shipped :disabled styling is unreachable"
+        ],
+        "manualSetupSeconds": 1560,
+        "mappingDecisions": [
+          "The absent variant is primary; danger is not relabelled as primary.",
+          "Secondary maps directly to the source variant of the same meaning.",
+          "Only browser-stimulated hover and focus-visible join the paired matrix.",
+          "Unsupported source size/icon/loading/disabled cells are excluded by name."
+        ]
+      },
+      "fluent": {
+        "packageName": "@fluentui/react-components",
+        "exactVersion": "9.74.5",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "component": "Button",
+        "sandbox": "examples/fluent/.fluent-sandbox",
+        "recipeSelection": {
+          "recipe": "button@1",
+          "mechanism": "manual-human-review",
+          "selectedBy": "recipe-pivot-button-comparison-review",
+          "reviewedAt": "2026-08-26T21:06:00-05:00"
+        },
+        "sourceApiMap": {
+          "variant": {
+            "primary": "appearance=\"primary\"",
+            "secondary": "appearance=\"secondary\""
+          },
+          "state": {
+            "default": "no interaction",
+            "hover": "real pointer hover",
+            "focus-visible": "sentinel focus followed by keyboard Tab"
+          },
+          "recipeSize": "source size=\"medium\"; shared matrix excludes size because Altitude has no size API",
+          "icons": "none; the optional Fluent icon slot is intentionally empty",
+          "label": "React children"
+        },
+        "fixedSourceProps": {
+          "size": "medium",
+          "shape": "rounded",
+          "iconPosition": "before"
+        },
+        "unsupportedPairedCells": [
+          "Size=small",
+          "Size=large",
+          "State=pressed",
+          "State=disabled",
+          "State=loading",
+          "Icons=leading",
+          "Icons=trailing",
+          "Icons=both"
+        ],
+        "capabilityCoverageOutsidePairedMatrix": [
+          "source size small and large",
+          "source appearances outline, subtle, transparent",
+          "source active and disabled states",
+          "source icon slot"
+        ],
+        "manualSetupSeconds": 1320,
+        "mappingDecisions": [
+          "Primary and secondary map directly to Fluent appearance values.",
+          "Size is pinned to medium for the shared denominator.",
+          "Shape is pinned to rounded and iconPosition to before.",
+          "Only browser-stimulated hover and focus-visible join the paired matrix."
+        ]
+      }
+    },
+    "environment": {
+      "platform": "darwin",
+      "arch": "arm64",
+      "node": "v20.19.4",
+      "browser": "149.0.7827.55",
+      "browserRevision": "1228",
+      "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+      "viewport": {
+        "width": 600,
+        "height": 800
+      },
+      "deviceScaleFactor": 2,
+      "colorScheme": "light",
+      "background": "#ffffff",
+      "fonts": [
+        {
+          "file": "extract/computed/fonts/ibm-plex-sans/IBMPlexSans-Regular.woff2",
+          "hash": "ba711a3085ff9f27440b6b9c4550cfc47c97bf36591d5da958b975bb3add8c1a"
+        },
+        {
+          "file": "extract/computed/fonts/ibm-plex-sans/IBMPlexSans-SemiBold.woff2",
+          "hash": "f78048030eab62e860efa39a0df79e2e5581bf122eb95b9bc42c0b8a4988d205"
+        },
+        {
+          "file": "extract/computed/fonts/inter/inter-latin-variable.woff2",
+          "hash": "c940764593d0fe5d596be327ca7558855e018039fb78509aa21921fd3644c3e4"
+        }
+      ],
+      "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7"
+    },
+    "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+    "captureCommand": "npx tsx recipe/capture-button-comparison.ts"
+  },
+  "references": [
+    {
+      "cellKey": "altitude/variant=primary/state=default",
+      "file": "recipe/evidence/button-comparison/source-reference/altitude__variant-primary__state-default.png",
+      "hash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "width": 260,
+      "height": 176,
+      "contentBox": {
+        "width": 82.25,
+        "height": 40
+      },
+      "dom": {
+        "hostTag": "al-button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "altitude/variant=primary/state=hover",
+      "file": "recipe/evidence/button-comparison/source-reference/altitude__variant-primary__state-hover.png",
+      "hash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+      "width": 260,
+      "height": 176,
+      "contentBox": {
+        "width": 82.25,
+        "height": 40
+      },
+      "dom": {
+        "hostTag": "al-button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "file": "recipe/evidence/button-comparison/source-reference/altitude__variant-primary__state-focus-visible.png",
+      "hash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+      "width": 260,
+      "height": 176,
+      "contentBox": {
+        "width": 82.25,
+        "height": 40
+      },
+      "focusVisibleMatched": true,
+      "dom": {
+        "hostTag": "al-button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=default",
+      "file": "recipe/evidence/button-comparison/source-reference/altitude__variant-secondary__state-default.png",
+      "hash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "width": 260,
+      "height": 176,
+      "contentBox": {
+        "width": 82.25,
+        "height": 40
+      },
+      "dom": {
+        "hostTag": "al-button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "file": "recipe/evidence/button-comparison/source-reference/altitude__variant-secondary__state-hover.png",
+      "hash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+      "width": 260,
+      "height": 176,
+      "contentBox": {
+        "width": 82.25,
+        "height": 40
+      },
+      "dom": {
+        "hostTag": "al-button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "file": "recipe/evidence/button-comparison/source-reference/altitude__variant-secondary__state-focus-visible.png",
+      "hash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+      "width": 260,
+      "height": 176,
+      "contentBox": {
+        "width": 82.25,
+        "height": 40
+      },
+      "focusVisibleMatched": true,
+      "dom": {
+        "hostTag": "al-button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=default",
+      "file": "recipe/evidence/button-comparison/source-reference/fluent__variant-primary__state-default.png",
+      "hash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "width": 288,
+      "height": 160,
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      },
+      "dom": {
+        "hostTag": "button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "Button",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=hover",
+      "file": "recipe/evidence/button-comparison/source-reference/fluent__variant-primary__state-hover.png",
+      "hash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "width": 288,
+      "height": 160,
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      },
+      "dom": {
+        "hostTag": "button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "Button",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "file": "recipe/evidence/button-comparison/source-reference/fluent__variant-primary__state-focus-visible.png",
+      "hash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "width": 288,
+      "height": 160,
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      },
+      "focusVisibleMatched": true,
+      "dom": {
+        "hostTag": "button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "Button",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=default",
+      "file": "recipe/evidence/button-comparison/source-reference/fluent__variant-secondary__state-default.png",
+      "hash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "width": 288,
+      "height": 160,
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      },
+      "dom": {
+        "hostTag": "button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "Button",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "file": "recipe/evidence/button-comparison/source-reference/fluent__variant-secondary__state-hover.png",
+      "hash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "width": 288,
+      "height": 160,
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      },
+      "dom": {
+        "hostTag": "button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "Button",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    },
+    {
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "file": "recipe/evidence/button-comparison/source-reference/fluent__variant-secondary__state-focus-visible.png",
+      "hash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "width": 288,
+      "height": 160,
+      "contentBox": {
+        "width": 96,
+        "height": 32
+      },
+      "focusVisibleMatched": true,
+      "dom": {
+        "hostTag": "button",
+        "buttonFound": true,
+        "buttonTag": "button",
+        "role": "button",
+        "text": "Button",
+        "accessibleNameMatched": true,
+        "disabled": false,
+        "ariaDisabled": null,
+        "ariaBusy": null
+      }
+    }
+  ],
+  "outputs": {
+    "legacy": [
+      {
+        "cellKey": "altitude/variant=primary/state=default",
+        "file": "recipe/evidence/button-comparison/legacy/altitude__variant-primary__state-default.png",
+        "hash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+        "width": 260,
+        "height": 176,
+        "contentBox": {
+          "width": 82.25,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=primary/state=hover",
+        "file": "recipe/evidence/button-comparison/legacy/altitude__variant-primary__state-hover.png",
+        "hash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+        "width": 260,
+        "height": 176,
+        "contentBox": {
+          "width": 82.25,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=primary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/legacy/altitude__variant-primary__state-focus-visible.png",
+        "hash": "2007706c67a40c667c74fc5aa78d2fc3cf25e318944a9b6516a326df3798d02c",
+        "width": 260,
+        "height": 176,
+        "contentBox": {
+          "width": 82.25,
+          "height": 40
+        },
+        "focusVisibleMatched": true,
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=default",
+        "file": "recipe/evidence/button-comparison/legacy/altitude__variant-secondary__state-default.png",
+        "hash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+        "width": 260,
+        "height": 176,
+        "contentBox": {
+          "width": 82.25,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=hover",
+        "file": "recipe/evidence/button-comparison/legacy/altitude__variant-secondary__state-hover.png",
+        "hash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+        "width": 260,
+        "height": 176,
+        "contentBox": {
+          "width": 82.25,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/legacy/altitude__variant-secondary__state-focus-visible.png",
+        "hash": "3e373e248dae4cd6be69ed81090805d10a7b4c6f8e05416ba77fbbc750d366d5",
+        "width": 260,
+        "height": 176,
+        "contentBox": {
+          "width": 82.25,
+          "height": 40
+        },
+        "focusVisibleMatched": true,
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=default",
+        "file": "recipe/evidence/button-comparison/legacy/fluent__variant-primary__state-default.png",
+        "hash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+        "width": 288,
+        "height": 160,
+        "contentBox": {
+          "width": 96,
+          "height": 32
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=hover",
+        "file": "recipe/evidence/button-comparison/legacy/fluent__variant-primary__state-hover.png",
+        "hash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+        "width": 288,
+        "height": 160,
+        "contentBox": {
+          "width": 96,
+          "height": 32
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/legacy/fluent__variant-primary__state-focus-visible.png",
+        "hash": "2a56113461e9d45fc8c6e2015f9c13a332c161a56db309ec72eba52f220fd8ac",
+        "width": 288,
+        "height": 160,
+        "contentBox": {
+          "width": 96,
+          "height": 32
+        },
+        "focusVisibleMatched": true,
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=default",
+        "file": "recipe/evidence/button-comparison/legacy/fluent__variant-secondary__state-default.png",
+        "hash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+        "width": 288,
+        "height": 160,
+        "contentBox": {
+          "width": 96,
+          "height": 32
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=hover",
+        "file": "recipe/evidence/button-comparison/legacy/fluent__variant-secondary__state-hover.png",
+        "hash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+        "width": 288,
+        "height": 160,
+        "contentBox": {
+          "width": 96,
+          "height": 32
+        },
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/legacy/fluent__variant-secondary__state-focus-visible.png",
+        "hash": "c75c1a624ea5a219cf792fafbb92833496a74879282efde086e623cad1f006f1",
+        "width": 288,
+        "height": 160,
+        "contentBox": {
+          "width": 96,
+          "height": 32
+        },
+        "focusVisibleMatched": true,
+        "dom": {
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      }
+    ],
+    "recipeReact": [
+      {
+        "cellKey": "altitude/variant=primary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-react/altitude__variant-primary__state-default.png",
+        "hash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=primary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-react/altitude__variant-primary__state-hover.png",
+        "hash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=primary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-react/altitude__variant-primary__state-focus-visible.png",
+        "hash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-react/altitude__variant-secondary__state-default.png",
+        "hash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-react/altitude__variant-secondary__state-hover.png",
+        "hash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-react/altitude__variant-secondary__state-focus-visible.png",
+        "hash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-react/fluent__variant-primary__state-default.png",
+        "hash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-react/fluent__variant-primary__state-hover.png",
+        "hash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-react/fluent__variant-primary__state-focus-visible.png",
+        "hash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-react/fluent__variant-secondary__state-default.png",
+        "hash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-react/fluent__variant-secondary__state-hover.png",
+        "hash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-react/fluent__variant-secondary__state-focus-visible.png",
+        "hash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc",
+        "width": 250,
+        "height": 176,
+        "contentBox": {
+          "width": 77.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      }
+    ],
+    "recipeWebComponent": [
+      {
+        "cellKey": "altitude/variant=primary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-wc/altitude__variant-primary__state-default.png",
+        "hash": "38beafaf6e9f9d5316e4d1be7a595631cf4a0f214e6910f02999a100e0269c9b",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=primary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-wc/altitude__variant-primary__state-hover.png",
+        "hash": "80f8078ec57e61a68e3aca547439dbd60153e971992438b28a4dbc9b67ba18ad",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=primary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-wc/altitude__variant-primary__state-focus-visible.png",
+        "hash": "3b615fc0479c5065ca9eebfae0fddc8f7e56961adc41aec3910f8498d806e8a0",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-wc/altitude__variant-secondary__state-default.png",
+        "hash": "dbbccef36e601f67366ea3f105265da7440a5b5dfaee4de65299ad56fc8a254c",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-wc/altitude__variant-secondary__state-hover.png",
+        "hash": "be6934e72eb27d22e0d0ef4f61f053eefcddd66196f7bf91df983cb0027fd8d4",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "altitude/variant=secondary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-wc/altitude__variant-secondary__state-focus-visible.png",
+        "hash": "b47c39470aec7bf09c1a82fb66bddae768c07adf6df8a88adc711858a46600c6",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-wc/fluent__variant-primary__state-default.png",
+        "hash": "38beafaf6e9f9d5316e4d1be7a595631cf4a0f214e6910f02999a100e0269c9b",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-wc/fluent__variant-primary__state-hover.png",
+        "hash": "80f8078ec57e61a68e3aca547439dbd60153e971992438b28a4dbc9b67ba18ad",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=primary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-wc/fluent__variant-primary__state-focus-visible.png",
+        "hash": "3b615fc0479c5065ca9eebfae0fddc8f7e56961adc41aec3910f8498d806e8a0",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=default",
+        "file": "recipe/evidence/button-comparison/recipe-wc/fluent__variant-secondary__state-default.png",
+        "hash": "dbbccef36e601f67366ea3f105265da7440a5b5dfaee4de65299ad56fc8a254c",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=hover",
+        "file": "recipe/evidence/button-comparison/recipe-wc/fluent__variant-secondary__state-hover.png",
+        "hash": "be6934e72eb27d22e0d0ef4f61f053eefcddd66196f7bf91df983cb0027fd8d4",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      },
+      {
+        "cellKey": "fluent/variant=secondary/state=focus-visible",
+        "file": "recipe/evidence/button-comparison/recipe-wc/fluent__variant-secondary__state-focus-visible.png",
+        "hash": "b47c39470aec7bf09c1a82fb66bddae768c07adf6df8a88adc711858a46600c6",
+        "width": 354,
+        "height": 176,
+        "contentBox": {
+          "width": 129.140625,
+          "height": 40
+        },
+        "dom": {
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      }
+    ]
+  },
+  "comparisonPin": {
+    "sourceCommit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "fixtureHash": "a7ac09214a8ba34d3ab42e02db02cdb09995812acdc340ee647561985c6e8800",
+    "sampleMatrixHash": "077ea88015620515abab93e09ca8fb30b5d24df438eae08c674fab3ea43f12e7",
+    "cellKeys": [
+      "altitude/variant=primary/state=default",
+      "altitude/variant=primary/state=hover",
+      "altitude/variant=primary/state=focus-visible",
+      "altitude/variant=secondary/state=default",
+      "altitude/variant=secondary/state=hover",
+      "altitude/variant=secondary/state=focus-visible",
+      "fluent/variant=primary/state=default",
+      "fluent/variant=primary/state=hover",
+      "fluent/variant=primary/state=focus-visible",
+      "fluent/variant=secondary/state=default",
+      "fluent/variant=secondary/state=hover",
+      "fluent/variant=secondary/state=focus-visible"
+    ],
+    "referenceHashes": {
+      "altitude/variant=primary/state=default": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+      "altitude/variant=primary/state=hover": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+      "altitude/variant=primary/state=focus-visible": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+      "altitude/variant=secondary/state=default": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+      "altitude/variant=secondary/state=hover": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+      "altitude/variant=secondary/state=focus-visible": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+      "fluent/variant=primary/state=default": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "fluent/variant=primary/state=hover": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+      "fluent/variant=primary/state=focus-visible": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+      "fluent/variant=secondary/state=default": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+      "fluent/variant=secondary/state=hover": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+      "fluent/variant=secondary/state=focus-visible": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    "referenceProvenance": {
+      "altitude/variant=primary/state=default": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Altitude package publisher",
+        "sourceId": "altitude-web-components",
+        "sourceVersionOrRevision": "1.0.2",
+        "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+        "packageLockHash": "89ddf95b5c47edf2b4c5a6f2619c98d8e35031b4642a40656ab16516b2dcf317",
+        "packageIntegrity": "sha512-2ZZ+JV2sz3I2gBhyOBBCLyUgp0frPArCWTC+LYKg4Efzp70tVCveZY4GMNw/x/oxxitZsS4/qpQhdJ38lYr1RA==",
+        "componentOrNodeId": "al-button",
+        "sourceAdapterHash": "0b82a9db88874d5706256055661fcbc8522c62f1b9932b2e67599e2e91da284a",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "074107ac9a81b3b6bdb59ae783160645d706d7932df35912c312ebf3f94b8c85",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "altitude/variant=primary/state=default",
+        "screenshotHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "altitude/variant=primary/state=hover": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Altitude package publisher",
+        "sourceId": "altitude-web-components",
+        "sourceVersionOrRevision": "1.0.2",
+        "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+        "packageLockHash": "89ddf95b5c47edf2b4c5a6f2619c98d8e35031b4642a40656ab16516b2dcf317",
+        "packageIntegrity": "sha512-2ZZ+JV2sz3I2gBhyOBBCLyUgp0frPArCWTC+LYKg4Efzp70tVCveZY4GMNw/x/oxxitZsS4/qpQhdJ38lYr1RA==",
+        "componentOrNodeId": "al-button",
+        "sourceAdapterHash": "0b82a9db88874d5706256055661fcbc8522c62f1b9932b2e67599e2e91da284a",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "94b8f7ed1fd1717f4483e0497fe24902bc0b33ef02e0125db663d9f07837b479",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "altitude/variant=primary/state=hover",
+        "screenshotHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "altitude/variant=primary/state=focus-visible": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Altitude package publisher",
+        "sourceId": "altitude-web-components",
+        "sourceVersionOrRevision": "1.0.2",
+        "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+        "packageLockHash": "89ddf95b5c47edf2b4c5a6f2619c98d8e35031b4642a40656ab16516b2dcf317",
+        "packageIntegrity": "sha512-2ZZ+JV2sz3I2gBhyOBBCLyUgp0frPArCWTC+LYKg4Efzp70tVCveZY4GMNw/x/oxxitZsS4/qpQhdJ38lYr1RA==",
+        "componentOrNodeId": "al-button",
+        "sourceAdapterHash": "0b82a9db88874d5706256055661fcbc8522c62f1b9932b2e67599e2e91da284a",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "1bf1516edd60fd769127ca421c38eda6e426ced35c095a0675892bd2fdff8a06",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "altitude/variant=primary/state=focus-visible",
+        "screenshotHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "altitude/variant=secondary/state=default": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Altitude package publisher",
+        "sourceId": "altitude-web-components",
+        "sourceVersionOrRevision": "1.0.2",
+        "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+        "packageLockHash": "89ddf95b5c47edf2b4c5a6f2619c98d8e35031b4642a40656ab16516b2dcf317",
+        "packageIntegrity": "sha512-2ZZ+JV2sz3I2gBhyOBBCLyUgp0frPArCWTC+LYKg4Efzp70tVCveZY4GMNw/x/oxxitZsS4/qpQhdJ38lYr1RA==",
+        "componentOrNodeId": "al-button",
+        "sourceAdapterHash": "0b82a9db88874d5706256055661fcbc8522c62f1b9932b2e67599e2e91da284a",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "0cc33c7bb08d44bfd99ba420e8552ff1dce121969ebc7d3abd32b6ae767c79ff",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "altitude/variant=secondary/state=default",
+        "screenshotHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "altitude/variant=secondary/state=hover": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Altitude package publisher",
+        "sourceId": "altitude-web-components",
+        "sourceVersionOrRevision": "1.0.2",
+        "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+        "packageLockHash": "89ddf95b5c47edf2b4c5a6f2619c98d8e35031b4642a40656ab16516b2dcf317",
+        "packageIntegrity": "sha512-2ZZ+JV2sz3I2gBhyOBBCLyUgp0frPArCWTC+LYKg4Efzp70tVCveZY4GMNw/x/oxxitZsS4/qpQhdJ38lYr1RA==",
+        "componentOrNodeId": "al-button",
+        "sourceAdapterHash": "0b82a9db88874d5706256055661fcbc8522c62f1b9932b2e67599e2e91da284a",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "9d6ecccb0adade09e9416b9943126d4f06f1c3962c591c0a0be3714b1c236df5",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "altitude/variant=secondary/state=hover",
+        "screenshotHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "altitude/variant=secondary/state=focus-visible": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Altitude package publisher",
+        "sourceId": "altitude-web-components",
+        "sourceVersionOrRevision": "1.0.2",
+        "sourceHash": "fd937c3e2db6c7e80cee6cc6139b6408dd43a814c84aa65ba9011d5d07109ddc",
+        "packageLockHash": "89ddf95b5c47edf2b4c5a6f2619c98d8e35031b4642a40656ab16516b2dcf317",
+        "packageIntegrity": "sha512-2ZZ+JV2sz3I2gBhyOBBCLyUgp0frPArCWTC+LYKg4Efzp70tVCveZY4GMNw/x/oxxitZsS4/qpQhdJ38lYr1RA==",
+        "componentOrNodeId": "al-button",
+        "sourceAdapterHash": "0b82a9db88874d5706256055661fcbc8522c62f1b9932b2e67599e2e91da284a",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "e7e69cf3c30730c8379ce9e0a337ecb2b7b994040c903119d62660216da5406a",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "altitude/variant=secondary/state=focus-visible",
+        "screenshotHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "fluent/variant=primary/state=default": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "sourceId": "@fluentui/react-components",
+        "sourceVersionOrRevision": "9.74.5",
+        "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+        "packageLockHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "packageIntegrity": "sha512-4ODUBQJ/VBJIdfvY+tomRJc2a6wsJwieOcGoruH1EI2xyx5jVnfJGM4rn2CAtrGy8INfjl1V96GJ5ZPTLJ7wVA==",
+        "componentOrNodeId": "Button",
+        "sourceAdapterHash": "cf599b258264b906987bd81f8d343199a171db44ee409cc27432fc46da0ae863",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "9887b02dfc183ac1e1dfe2c40510d7b0f53781d984849dc88d1c4ee7a311479d",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "fluent/variant=primary/state=default",
+        "screenshotHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "fluent/variant=primary/state=hover": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "sourceId": "@fluentui/react-components",
+        "sourceVersionOrRevision": "9.74.5",
+        "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+        "packageLockHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "packageIntegrity": "sha512-4ODUBQJ/VBJIdfvY+tomRJc2a6wsJwieOcGoruH1EI2xyx5jVnfJGM4rn2CAtrGy8INfjl1V96GJ5ZPTLJ7wVA==",
+        "componentOrNodeId": "Button",
+        "sourceAdapterHash": "cf599b258264b906987bd81f8d343199a171db44ee409cc27432fc46da0ae863",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "715627b92cb017d73c703b3cf1fe05381b39f59e665f462c424238b0a534f6a0",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "fluent/variant=primary/state=hover",
+        "screenshotHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "fluent/variant=primary/state=focus-visible": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "sourceId": "@fluentui/react-components",
+        "sourceVersionOrRevision": "9.74.5",
+        "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+        "packageLockHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "packageIntegrity": "sha512-4ODUBQJ/VBJIdfvY+tomRJc2a6wsJwieOcGoruH1EI2xyx5jVnfJGM4rn2CAtrGy8INfjl1V96GJ5ZPTLJ7wVA==",
+        "componentOrNodeId": "Button",
+        "sourceAdapterHash": "cf599b258264b906987bd81f8d343199a171db44ee409cc27432fc46da0ae863",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "4ef19f4f3a86b92b74baa7bc11699cdac4aee54ca11fba8d741633959342829f",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "fluent/variant=primary/state=focus-visible",
+        "screenshotHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "fluent/variant=secondary/state=default": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "sourceId": "@fluentui/react-components",
+        "sourceVersionOrRevision": "9.74.5",
+        "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+        "packageLockHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "packageIntegrity": "sha512-4ODUBQJ/VBJIdfvY+tomRJc2a6wsJwieOcGoruH1EI2xyx5jVnfJGM4rn2CAtrGy8INfjl1V96GJ5ZPTLJ7wVA==",
+        "componentOrNodeId": "Button",
+        "sourceAdapterHash": "cf599b258264b906987bd81f8d343199a171db44ee409cc27432fc46da0ae863",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "3870b0d25a32055ef27ffff0cf232456eef77dd944cefd4190f38be64920b21f",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "fluent/variant=secondary/state=default",
+        "screenshotHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "fluent/variant=secondary/state=hover": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "sourceId": "@fluentui/react-components",
+        "sourceVersionOrRevision": "9.74.5",
+        "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+        "packageLockHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "packageIntegrity": "sha512-4ODUBQJ/VBJIdfvY+tomRJc2a6wsJwieOcGoruH1EI2xyx5jVnfJGM4rn2CAtrGy8INfjl1V96GJ5ZPTLJ7wVA==",
+        "componentOrNodeId": "Button",
+        "sourceAdapterHash": "cf599b258264b906987bd81f8d343199a171db44ee409cc27432fc46da0ae863",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "5c44cb041b4d493f9afc6f9140560b63118bda9d77b6819bf718746319e37c4b",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "fluent/variant=secondary/state=hover",
+        "screenshotHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      },
+      "fluent/variant=secondary/state=focus-visible": {
+        "sourceKind": "external-library-package",
+        "externalOwner": "Microsoft Fluent package publisher",
+        "sourceId": "@fluentui/react-components",
+        "sourceVersionOrRevision": "9.74.5",
+        "sourceHash": "90a1881a0241887bf519ac2e8a565d641a55d85a9c4b704445d70f05d1465f09",
+        "packageLockHash": "c3b230dfbd8abd68408fefed9c8abc0e0fd46722faf8652e16e5c038452e0536",
+        "packageIntegrity": "sha512-4ODUBQJ/VBJIdfvY+tomRJc2a6wsJwieOcGoruH1EI2xyx5jVnfJGM4rn2CAtrGy8INfjl1V96GJ5ZPTLJ7wVA==",
+        "componentOrNodeId": "Button",
+        "sourceAdapterHash": "cf599b258264b906987bd81f8d343199a171db44ee409cc27432fc46da0ae863",
+        "renderHarnessHash": "a355412c405df54472c9b768074bfc6b2f3b889842a2fe558b2e5efdef37fff5",
+        "captureInputHash": "4f3f77e0d9a113acff3f0343d92d5789d6b1a8e9fb6342b0768997327e2d6ee0",
+        "browser": "149.0.7827.55 (playwright chromium-1228)",
+        "browserRevision": "1228",
+        "browserExecutableHash": "b1b9e2dd063115031f08eadc10ed381ca0fa05b2284baff8f721d87f5f0f61b7",
+        "viewport": {
+          "width": 600,
+          "height": 800
+        },
+        "deviceScaleFactor": 2,
+        "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+        "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+        "cellKey": "fluent/variant=secondary/state=focus-visible",
+        "screenshotHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+        "captureCommand": "npx tsx recipe/capture-button-comparison.ts",
+        "producedBy": "independent-real-library-mount-harness",
+        "independentHarness": true
+      }
+    },
+    "protocol": {
+      "version": "button-paired-source-v1",
+      "rubricHash": "9b8bf4d58929f7a7f289df9c9e5794de04db19223e6f2f1d29a10827c384d605",
+      "environmentHash": "2c7961b3d4ee49cb9082a96fd423099f7eb7a48a12334100b58958da749dd4ae",
+      "crop": "painted-union+24-css-px-white-margin",
+      "scale": 2,
+      "browser": "149.0.7827.55 (playwright chromium-1228)",
+      "fontsHash": "5e869114c2564343554059d955bccee8bcc7f48fc0ac897f82e3e3d9eae2b2d7",
+      "passThreshold": "independent recognisable=true for each paired specimen"
+    }
+  },
+  "manifests": {
+    "legacy": {
+      "fixtureHash": "a7ac09214a8ba34d3ab42e02db02cdb09995812acdc340ee647561985c6e8800",
+      "sampleMatrixHash": "077ea88015620515abab93e09ca8fb30b5d24df438eae08c674fab3ea43f12e7",
+      "cells": [
+        {
+          "cellKey": "altitude/variant=primary/state=default",
+          "outputHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+          "referenceHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=hover",
+          "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+          "referenceHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=focus-visible",
+          "outputHash": "2007706c67a40c667c74fc5aa78d2fc3cf25e318944a9b6516a326df3798d02c",
+          "referenceHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=default",
+          "outputHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+          "referenceHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=hover",
+          "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a",
+          "referenceHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=focus-visible",
+          "outputHash": "3e373e248dae4cd6be69ed81090805d10a7b4c6f8e05416ba77fbbc750d366d5",
+          "referenceHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=default",
+          "outputHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+          "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=hover",
+          "outputHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+          "referenceHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=focus-visible",
+          "outputHash": "2a56113461e9d45fc8c6e2015f9c13a332c161a56db309ec72eba52f220fd8ac",
+          "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=default",
+          "outputHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+          "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=hover",
+          "outputHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+          "referenceHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=focus-visible",
+          "outputHash": "c75c1a624ea5a219cf792fafbb92833496a74879282efde086e623cad1f006f1",
+          "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+          "comparedPixels": 46080
+        }
+      ]
+    },
+    "recipeReact": {
+      "fixtureHash": "a7ac09214a8ba34d3ab42e02db02cdb09995812acdc340ee647561985c6e8800",
+      "sampleMatrixHash": "077ea88015620515abab93e09ca8fb30b5d24df438eae08c674fab3ea43f12e7",
+      "cells": [
+        {
+          "cellKey": "altitude/variant=primary/state=default",
+          "outputHash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f",
+          "referenceHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+          "comparedPixels": 44000
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=hover",
+          "outputHash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681",
+          "referenceHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+          "comparedPixels": 44000
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=focus-visible",
+          "outputHash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56",
+          "referenceHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+          "comparedPixels": 44000
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=default",
+          "outputHash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe",
+          "referenceHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+          "comparedPixels": 44000
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=hover",
+          "outputHash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1",
+          "referenceHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+          "comparedPixels": 44000
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=focus-visible",
+          "outputHash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc",
+          "referenceHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+          "comparedPixels": 44000
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=default",
+          "outputHash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f",
+          "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+          "comparedPixels": 40000
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=hover",
+          "outputHash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681",
+          "referenceHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+          "comparedPixels": 40000
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=focus-visible",
+          "outputHash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56",
+          "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+          "comparedPixels": 40000
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=default",
+          "outputHash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe",
+          "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+          "comparedPixels": 40000
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=hover",
+          "outputHash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1",
+          "referenceHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+          "comparedPixels": 40000
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=focus-visible",
+          "outputHash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc",
+          "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+          "comparedPixels": 40000
+        }
+      ]
+    },
+    "recipeWebComponentParity": {
+      "fixtureHash": "a7ac09214a8ba34d3ab42e02db02cdb09995812acdc340ee647561985c6e8800",
+      "sampleMatrixHash": "077ea88015620515abab93e09ca8fb30b5d24df438eae08c674fab3ea43f12e7",
+      "cells": [
+        {
+          "cellKey": "altitude/variant=primary/state=default",
+          "outputHash": "38beafaf6e9f9d5316e4d1be7a595631cf4a0f214e6910f02999a100e0269c9b",
+          "referenceHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=hover",
+          "outputHash": "80f8078ec57e61a68e3aca547439dbd60153e971992438b28a4dbc9b67ba18ad",
+          "referenceHash": "49d556c2d5fb73c4da4641ad245d162bc02278fb9d0f2dd8c999b3193ea1b997",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=focus-visible",
+          "outputHash": "3b615fc0479c5065ca9eebfae0fddc8f7e56961adc41aec3910f8498d806e8a0",
+          "referenceHash": "1130a287733971ae77d078d4eabb3482a10e78f554c9bbbd20bd4c28473bda98",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=default",
+          "outputHash": "dbbccef36e601f67366ea3f105265da7440a5b5dfaee4de65299ad56fc8a254c",
+          "referenceHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=hover",
+          "outputHash": "be6934e72eb27d22e0d0ef4f61f053eefcddd66196f7bf91df983cb0027fd8d4",
+          "referenceHash": "2666afdb3d8b6204bd89fefc1ea1410abdbc1a0a02e17e2edbad95138eabd1c1",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=focus-visible",
+          "outputHash": "b47c39470aec7bf09c1a82fb66bddae768c07adf6df8a88adc711858a46600c6",
+          "referenceHash": "dbbd0cea74f5850bd832f9d61affe4086adc7392af24dda3fedc5f7b5fbda80d",
+          "comparedPixels": 45760
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=default",
+          "outputHash": "38beafaf6e9f9d5316e4d1be7a595631cf4a0f214e6910f02999a100e0269c9b",
+          "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=hover",
+          "outputHash": "80f8078ec57e61a68e3aca547439dbd60153e971992438b28a4dbc9b67ba18ad",
+          "referenceHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=focus-visible",
+          "outputHash": "3b615fc0479c5065ca9eebfae0fddc8f7e56961adc41aec3910f8498d806e8a0",
+          "referenceHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=default",
+          "outputHash": "dbbccef36e601f67366ea3f105265da7440a5b5dfaee4de65299ad56fc8a254c",
+          "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=hover",
+          "outputHash": "be6934e72eb27d22e0d0ef4f61f053eefcddd66196f7bf91df983cb0027fd8d4",
+          "referenceHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba",
+          "comparedPixels": 46080
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=focus-visible",
+          "outputHash": "b47c39470aec7bf09c1a82fb66bddae768c07adf6df8a88adc711858a46600c6",
+          "referenceHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a",
+          "comparedPixels": 46080
+        }
+      ]
+    }
+  },
+  "counts": {
+    "sourceReferences": 12,
+    "legacyOutputs": 12,
+    "recipeReactOutputs": 12,
+    "recipeWebComponentOutputs": 12,
+    "blindSpecimens": 24
+  },
+  "nonvisualEvidence": {
+    "setsCompared": 2,
+    "cellsPerPath": 12,
+    "variantsCompared": 2,
+    "axesCompared": 2,
+    "statesCompared": 3,
+    "legacyComparedPixels": 551040,
+    "recipeReactComparedPixels": 504000,
+    "recipeWebComponentComparedPixels": 551040,
+    "zeroPixelComparisons": 0,
+    "byteEqualSourceLegacyPairs": 6,
+    "byteEqualSourceRecipePairs": 0,
+    "apiDomAria": {
+      "sourceReference": [
+        {
+          "cellKey": "altitude/variant=primary/state=default",
+          "hostTag": "al-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=hover",
+          "hostTag": "al-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=focus-visible",
+          "hostTag": "al-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=default",
+          "hostTag": "al-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=hover",
+          "hostTag": "al-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=focus-visible",
+          "hostTag": "al-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=default",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=hover",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=focus-visible",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=default",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=hover",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=focus-visible",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      ],
+      "legacy": [
+        {
+          "cellKey": "altitude/variant=primary/state=default",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=hover",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=focus-visible",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=default",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=hover",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=focus-visible",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=default",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=hover",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=focus-visible",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=default",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=hover",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=focus-visible",
+          "hostTag": "section",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      ],
+      "recipeReact": [
+        {
+          "cellKey": "altitude/variant=primary/state=default",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=hover",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=focus-visible",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=default",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=hover",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=focus-visible",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=default",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=hover",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=focus-visible",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=default",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=hover",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=focus-visible",
+          "hostTag": "button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      ],
+      "recipeWebComponent": [
+        {
+          "cellKey": "altitude/variant=primary/state=default",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=hover",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=primary/state=focus-visible",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=default",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=hover",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "altitude/variant=secondary/state=focus-visible",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=default",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=hover",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=primary/state=focus-visible",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=default",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=hover",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        },
+        {
+          "cellKey": "fluent/variant=secondary/state=focus-visible",
+          "hostTag": "recipe-button",
+          "buttonFound": true,
+          "buttonTag": "button",
+          "role": "button",
+          "text": "Button",
+          "accessibleNameMatched": true,
+          "disabled": false,
+          "ariaDisabled": null,
+          "ariaBusy": null
+        }
+      ]
+    },
+    "provenanceFieldsComplete": true,
+    "usabilityFactsAvailableOffline": {
+      "legacy": {
+        "reflow": "contract HTML uses real flex/inline-flex layout; no fixed coordinates in the sampled Button roots",
+        "variantSwitching": "legacy contract axes map to source variants in the frozen matrix",
+        "tokenBinding": "legacy HTML resolves committed bundle tokenSet custom properties",
+        "noFakeLayout": "sampled roots use CSS flex/inline-flex"
+      },
+      "recipe": {
+        "reflow": "recipe React/WC outputs use inline-flex and content padding",
+        "variantSwitching": "data-variant and data-state select explicit recipe cells",
+        "tokenBinding": "every emitted var() reference has a generated custom-property definition",
+        "noFakeLayout": "button@1 IR and emitted code use auto/flex layout, not coordinates"
+      },
+      "finalUsabilityVerdict": "ungraded"
+    }
+  },
+  "blindPacket": {
+    "path": "recipe/evidence/button-comparison/blind-packet/packet.json",
+    "sealedAnswerKey": "recipe/evidence/button-comparison/sealed-answer-key.json",
+    "randomizedBatchHash": "5aeaeaf85ff6ec26e9b978efc583b4803e1571d3e09673824eaa976ddc7ad056",
+    "packetHash": "1dd49a8ce9ac4e2bacdfc8dcc1ba21d23ed7f476d369cf1b23244fe287360878",
+    "recognisabilityVerdictsAuthoredByBuilder": false
+  }
+}

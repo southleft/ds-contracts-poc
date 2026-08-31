@@ -1,0 +1,108 @@
+{
+  "kind": "button-scene-derived-inversion",
+  "version": "button-scene-inversion-v1",
+  "method": "expected-plan-vs-observe",
+  "status": {
+    "sourceIrRead": false,
+    "silentAssigned": false,
+    "silentDerived": true,
+    "ok": true,
+    "figmaWrites": 0,
+    "inputPageUntouched": true,
+    "historicalReadbackRefusedAsObserve": true,
+    "humanSignoff": "pending",
+    "buttonSuccess": false
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageId": "183:69150",
+    "pageName": "Recipe Pivot / Button / 6857935c-b04f4059-v4"
+  },
+  "observeGuard": {
+    "writes": 0,
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "buttonPage": {
+      "id": "183:69150",
+      "name": "Recipe Pivot / Button / 6857935c-b04f4059-v4"
+    },
+    "sets": [
+      {
+        "id": "183:69776",
+        "adapterIdentity": "altitude-button-reviewed-v2",
+        "runIdentity": "6857935c-b04f4059-v4",
+        "variants": 144,
+        "ownershipKey": "root"
+      },
+      {
+        "id": "183:70424",
+        "adapterIdentity": "fluent-button-reviewed-v2",
+        "runIdentity": "6857935c-b04f4059-v4",
+        "variants": 144,
+        "ownershipKey": "root"
+      }
+    ],
+    "pluginDataNote": "Sets carry adapterIdentity, runIdentity, and ownershipKey=root (the v5 writer stamps ownership). Stamped ir*/cells keys were not read as observe values.",
+    "currentPageUnchanged": false,
+    "inputPagePresent": true,
+    "currentPageId": "183:69150"
+  },
+  "roots": [
+    {
+      "source": "altitude",
+      "setId": "183:69776",
+      "expectedFacts": 8730,
+      "matched": 8730,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "fixedPointStable": true,
+      "ok": true
+    },
+    {
+      "source": "fluent",
+      "setId": "183:70424",
+      "expectedFacts": 8778,
+      "matched": 8778,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatched": 0,
+      "fixedPointStable": true,
+      "ok": true
+    }
+  ],
+  "artifacts": {
+    "expectedScenePlanAltitude": {
+      "path": "recipe/evidence/button-scene-inversion-v2/expected-scene-plan-altitude.json.gz",
+      "sha256": "74ffcd5981f0dab27e4779c8c21ac89c364a0de94ea746f8801b2a95211f7ea8",
+      "uncompressedSha256": "584ffbd81323fcd583774161ef3f658cf83a33746d4aa7a3e30a215d3d0b6ae9",
+      "bytes": 107340,
+      "facts": 8730
+    },
+    "expectedScenePlanFluent": {
+      "path": "recipe/evidence/button-scene-inversion-v2/expected-scene-plan-fluent.json.gz",
+      "sha256": "30da6c464fa32f05dfe010e990976cc63b928d654de0b831f8cd9da7be667892",
+      "uncompressedSha256": "6eee721429911702d54fc57bd7b06efc90667c584e7d96350f579c56a3afd124",
+      "bytes": 109225,
+      "facts": 8778
+    },
+    "observeAltitude": {
+      "path": "recipe/evidence/button-scene-inversion-v2/observe-altitude.json.gz",
+      "sha256": "823c999399cf43527f231f7bc8d17e5e6741942387c077bfb6f9ec5bdbb8223f"
+    },
+    "observeFluent": {
+      "path": "recipe/evidence/button-scene-inversion-v2/observe-fluent.json.gz",
+      "sha256": "77143c7b68f76e28380f04d2c64ad1f5052c09a5633776b8afbd941a1d918ef6"
+    },
+    "inversion": {
+      "path": "recipe/evidence/button-scene-inversion-v2/inversion.json",
+      "sha256": "d2c4a623f20c0ec0d4662e6cd5a68698f223aae8d14c33d7c9aa82faeba4c0e7"
+    },
+    "census": {
+      "path": "recipe/evidence/button-scene-inversion-v2/census.json",
+      "sha256": "a499f3d77da7f1c40e2c9bbe398aa7129467a44d8abc59ad469547f33379b5fc"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "artifactVersion": "table-live-v1-status-v1",
+  "status": "attempt 1 failed closed at writer TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold; host lists Inter Semi Bold; writer not accepted; cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "f42aaa461ecdbb4bec4d12698ee03199a7ed8c98",
+    "indexPath": "recipe/evidence/table-live-pivot-v1/antecedent-index.json",
+    "indexSha256": "66a4d41b3de200654ccdcc0761e245c8b9e2755a42b52fb9e7ebb01603290192",
+    "hashSetSha256": "6aade9da2e4826322f107ad9ad4a1f1503df7d64111388aa6c85a129a50f186d"
+  },
+  "authorization": {
+    "commit": "fd3d20e98b13895c6b2d845e267b9aa888c74123",
+    "path": "recipe/evidence/table-live-pivot-v1/capture-authorization.json",
+    "sha256": "569b89e6717cdfe4ea14e1263b39160162eabbdff6f3e2b13ef4a6701c2cbda4",
+    "signingPublicKeySpkiSha256": "5ead5242ad6ef37c592e784540ca81ce56e30b2cdabde0bf5a8c3a65f4d409d3"
+  },
+  "attempt1": {
+    "pageId": "165:40622",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "name first-party header font as host-listed Inter Semi Bold",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

@@ -1,0 +1,20 @@
+{
+  "version": "recipe-browser-figma-raster-calibration-v1",
+  "accepted": false,
+  "inputV3Authorized": false,
+  "calibrationAppliedToInput": false,
+  "corpus": {
+    "count": 24,
+    "training": 16,
+    "validation": 8,
+    "hash": "daeac5691a14cbfd494fb0fb21d5c105d55f1dc257a76bfe42bce425dce28660"
+  },
+  "results": {
+    "path": "recipe/evidence/raster-calibration-v1/results.json",
+    "sha256": "f0ba7051c1edb532931739184af9557f4fd4f0e722f30da751fdffc81d94338f"
+  },
+  "receipt": {
+    "path": "recipe/evidence/raster-calibration-v1/receipt.json",
+    "sha256": "ce4e84298b2d8c16553e005ddbc75690023f008d41530c0a2031f51963acf563"
+  }
+}

@@ -1,0 +1,2035 @@
+{
+  "version": "input-field-calibrated-hidden-duplicate-v1",
+  "status": {
+    "packetBuild": "complete",
+    "independentBlindGrades": "pending",
+    "reliability": "unmeasured",
+    "recognisability": "unusable-until-reliability-passes",
+    "architectureProgress": "blocked",
+    "liveInputMayProceed": false,
+    "inputOverall": false
+  },
+  "preservation": {
+    "priorArtifactsModified": false,
+    "historicalArtifactHashes": {
+      "recipe/evidence/input-field-comparison/index.json": "e11a4d7ecc59bce4c622b28d7ffdd9e5ca850f9da88c5fa4d9076f329efbddc1",
+      "recipe/evidence/input-field-comparison/receipt.json": "c75a30e420240dfa885508735d593cab30dcf80a63d55954ba4b00924c96cc2f",
+      "recipe/evidence/input-field-comparison/blind-packet/packet.json": "6920d34ba3faec0fd03b6bdd8c8efcbb8b8e81f1e86c709e8021da31e83cd61f",
+      "recipe/evidence/input-field-comparison/blind-packet/grades.json": "08e7c75aff2a34befa953e287cc635f753d988b84fa538df7b4975d4441e65b4",
+      "recipe/evidence/input-field-comparison/sealed-answer-key.json": "7b7d35efadf58e23e8224e92197e4f92d42b05812f496332bf2f1e2e4e400eb9",
+      "recipe/evidence/input-field-comparison/comparison-result.json": "ad19224c96da0702f7667239ccc8bafe0db4f99272bae352f7ab06f4216792d5",
+      "recipe/evidence/input-field-comparison-v2/index.json": "59dab7547b8014d39d956c8ba34a68084f568e8dcb6c6818553490ce929ecd25",
+      "recipe/evidence/input-field-comparison-v2/receipt.json": "4e218ec83e82aac420072b51d69fff7afc7b25e978e9126093436f1996bccb9c",
+      "recipe/evidence/input-field-comparison-v2/blind-packet/packet.json": "926a249784907d0133611b47b442cdcca7e2531b3efe903891a46b71739fc9af",
+      "recipe/evidence/input-field-comparison-v2/blind-packet/grades.json": "fa28c85cb12fbf12531bcc76caf534b0135a0ef6a7eb4652af45bb4336daecc5",
+      "recipe/evidence/input-field-comparison-v2/blind-packet/grades-rater-b.json": "71e35e2f83f24a9f45502f372164d66105d71d7f3ada5adeb4d531a7a7c27137",
+      "recipe/evidence/input-field-comparison-v2/blind-packet/grades-rater-c.json": "35a848a9162464e7e12182a939a6946535cd962d3a35986add647d0aa65691fd",
+      "recipe/evidence/input-field-comparison-v2/sealed-answer-key.json": "ad7deaa46af774e29d43c18d56510ebc0aa0af339ea11ec4dbb948475b93770b",
+      "recipe/evidence/input-field-comparison-v2/comparison-result.json": "056a612c9c0071ab9c2d0525340f6f55920de92bc7591dbda26db36f256bf26e",
+      "recipe/evidence/input-field-comparison-v2/multi-rater-adjudication.json": "9b175adbe64006bb93e11446a1f1155827701031b76f23590d4af43d1a7c9fd9",
+      "recipe/evidence/input-field-comparison-v2/v1-root-cause.json": "0cf9a89750f13eab6efffd214e396563af99e8eef5f5b4e052ee7fbe753da6d0"
+    }
+  },
+  "continuity": {
+    "exactMatrix": true,
+    "sampleMatrixHash": "7630a3f9e79f4d2df786f5537c550eb9822d0b57796f72f289c87adf0dcc4853",
+    "sourceCommit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "fixtureHash": "f3ee33b9b8f8c6624a48696bbe9c18dc9d45482e4ca4bfd7fd27ded870b68457",
+    "environmentHash": "bb49d731fcb8823a1866a2a615b59ea731e95c6358a1c768cb614b7ed3d97c22",
+    "referenceBytesEqualV1ToV2": 128,
+    "sourceReferenceProvenanceEqualV1ToV2": 128,
+    "sourceReferenceProvenanceHash": "d79c0005b7033f171535d88a7c06331c6b99c16427d866f0c3aea3a9d5859085",
+    "legacyBytesEqualV1ToV2": 128,
+    "cells": [
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+        "referenceHash": "aefcc710833dd60c4206a22667ee7724293b54f3b48ffff6309f6b786ac6bcc8",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "be3f1f6c190e7950488eeb2ecc13c882b37ba3d6aac66dca1a67e27b52279f36"
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+        "referenceHash": "0eee71646b24a4a8d18a10f1f8f75a59b7aab548abb4ed1f154ded8dd20dd289",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "eb31999db4c4a09a581ac816c4e375b94fddbed32fb1a8bc6e6e3ec4324d6f8e"
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+        "referenceHash": "2a15d1285d7002c6fdfeca24a93c8b0cbb89ee8de2aa29214bec939c69110b0c",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "ac47dcb94f8ab70f4a6529847b6bcebd12e9a69f5e5a3dd7fb0ca185b177296f"
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+        "referenceHash": "7d7691f8de414a777c26bf47a427e9c4ebf64fc9642606766442e4ca65e29398",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "7b746a27348d1916591fbdc4fe28b5f1c80be318f5d4218a90262e122ddfdd0d"
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+        "referenceHash": "54913f6424d935e6b283800350dc7295e3229e6261395575893fc7686d41532b",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "e94f5909048b34e44ec2b1601a8d9de383d0a6359db3848e3be689fb1287a6b6"
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+        "referenceHash": "47446a7cdb765d5b1f39839bb759eabce0860e8dd54cc635a659ac677bb08ad5",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "f35da2b36b3d527569fbe9a65b8e27c0d6ba4891afcd934fdd00ff82e6177c42"
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+        "referenceHash": "4e937da0e5a305e74564f8154a0d98f765fa3cb0eff022453d6101814558f823",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "a78e3ec1a1a09428a525a47fc3c51a38627218dc2744a3e2465d9eb9930debde"
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+        "referenceHash": "f9c9423f6086c8b00438805b3c7865fe2b953694e0a2f1ff07a6f39ef3afba27",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "9eb797188127ca0b39c1414aa7d9096d5fd207b03c2eca68fc6d19a8254b0bbf"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "referenceHash": "245665f5195a653d28aee1d635806de78ce083a6da2f3ac6023c123e58f0bb02",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "410a56eaaea5428d170dbaf94d94623606e21b104e04c91a7990678eab472d46"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "referenceHash": "98b68ff6a8a8404b962933d435ac626a6cb372b561462ba4947d8bae25b2604b",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "6b55ef04eecc014f6abd77fc87e2ddf8a0e33d32365a81e467d787c1fa9dc0a8"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "referenceHash": "83ba22e1f730b90fe278dc4bed727f69848bb3670767532837ca97808ce837ae",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "5e8cea6070e9714aa5248145e0ffc6f32970bcca3f40d0850038d96db09dbf31"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "referenceHash": "211a409ccf77497c768623351db20d08b76c6b21ef9c2440358ee849fb67416d",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "b4a5875708a1d56a379cc27c0410c6aa355a69c074ec498280608b1a92942a8e"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+        "referenceHash": "8df74459a49bfb9b2eef475dfdbe656d1caca61c71e9467d69a2b93ab2e4fd45",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "262f6acd6a473093294ffbc6b8c55a0982854ab76c0c1c9904ea5533437e8381"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+        "referenceHash": "3c4f6ffb3a6732c09f23192ac8c94072df1152880ccf11da455bec6e7be12ce7",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "86b7d0b9f8b3b5dab737cc92e67baef03211bfac9a1f283bb049c0a2284f6c5b"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+        "referenceHash": "aa6824ed7033dde50ab8ee54cbce37f6dd9c8b47e14d167aaca606718ac3aa41",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "251d4bffecfebf95b06a115024362c6adc17149264c21682191c926c430a544e"
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+        "referenceHash": "7fb7adfa6f3a4dd960df2ce21e83ecba1229def617dea1d623a2a7117fce22a0",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "ef10dfb10ac2e30a5e699ed0da3609a31e31207541cbaa7120cea79783fc0c1c"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+        "referenceHash": "83867811659cc6966b25addc0c4ee33362f8eea74b4803358a94f201f96afd53",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "57eb0fe3665b61ce0a0b887089d4c86bf23e1eb13b527b836bd62ea99799e479"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+        "referenceHash": "b862ca1d678f4f97aa9dc8bf9d60ea967edc85206880c51047f7304832a10972",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "2051e8841c253eb11557ffc96cb933622c8cc45810fcdb0f48f179e078c6515a"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+        "referenceHash": "fc5e1f10dbee10831bc00fde4c4d9b0a29086fc6ef54ad3a1690baed64874cba",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "290b34a6847f71ac0651198e8f76e3af5ee2ccaab0327404525005a2ae016c05"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+        "referenceHash": "bc5866037650b3a8d50598c287063036214c9d6c78f1d2b06a3cbb3e81eaf4ad",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "a30f4cdf6932b60df79173e8e58fec910c612c5dbae5ef40303eccfe48003de0"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+        "referenceHash": "4b49dd2dcde912e019c92987f13739b0eda3323f9083802d68569544499f605e",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "cc279ddc0ed1a31b7996e936dd77e6b2d873722f6a74f242b069d820d5349a0c"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+        "referenceHash": "87d1bb317674afa08928b7f32dff4c71317854e533edcb1c8762b3b6d782ea5c",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "8ba77e44a48c3059aa72e10ea01e0a3f98e52d1712c508290f80092a74399f3e"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+        "referenceHash": "b90f9615cedea245b837109dd49a0171f8e4149561f09e10b858ec3e4faf5c4b",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "825113fe4526554690fb23a999bede477608f03e84ff649b559205887a15111a"
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+        "referenceHash": "7a0d24bd12ba82a36ad4a8b7571d69df30017f9a2e0f21e4186c86e485f84c6c",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "73270bc9d6befa84eef5d92b56ff72c0cf9d1de85abd4ab5f1bdcd45e43e26be"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+        "referenceHash": "b6c60e381acca382f08f6279ab94bc392ad9bdbeaa894752d414b883d0c72cd4",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "3ca31ca0b389d78bbcbd86b1b3d07c337669db73edf04d81b604d4976268533b"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+        "referenceHash": "1e944bc0f9a9e4217fe45c1f1f2fa093a9ded460c99d69ee565eec425e3a5333",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "05b3f26369d4da81e1201fef28f32e7af33742b88fcf4a2fb09539cfb3335e20"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+        "referenceHash": "8415e643a23ac2ece9e8386ea4bcc090cad0dd3e4d8e14d9308e47f8926aeb57",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "5ea90fddc3062dff88d1f8331ddd0c04faaa0097c4c0301dbd56c05e9186f0e6"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+        "referenceHash": "67c792067f73d6f124e55aeb304a594e0c9371d80b18d9306779ed204c5af546",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "8481c3708ca3129d0b7253451ffeb86d967222eeb1b8c999f92fc88e8a86c76c"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+        "referenceHash": "20032b850f3bde59d047359f299f6e29e491e7feb4143c32f343d71b36f37248",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "62639eeb1146024120becd2aa7969b73202269958f1a7f8b2b59b97cf0db9862"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+        "referenceHash": "d4927e52fa3f0a3b794c488c767167e1a901887c410307d03f5e736481de444e",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "e4e70ac899189f138c6acc35510c1a9bd04f20a1a855499be6c97bfd9944a320"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+        "referenceHash": "b9757dccbbe9db6a5aa35d611e4a6be5aa3ad3fb59b6a46edadd565fb3b2cd15",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "e7a6df0f2337ec23ff64cfb0774ba24f5bad8d5a40c5ffd61290a60da61023c1"
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+        "referenceHash": "adc3b93b1d49ca7afef27f13b58486b66a1e0290fc3d10b0ba6c8edc186b298d",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "85238a8ef5144cff50ae87567e16bcda682853f3af27f0b665a91a4bcc5a88ba"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+        "referenceHash": "81e1728c049774586f8dffddb5a66561afe74050076605096bc9167d4a7c9e02",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "22da31f6175d3ac9bd07847787497231c78d85b10ad7b2654f25621fc43787eb"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "referenceHash": "f389a97a4a80a044bb01f5f465ac282d8208dbec2d44de646f28c5fe60d49cd8",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "b82fd74b36dc9bc4634e995d08216a5404d62d7e11c21cb742b6e1cf6a7aea75"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+        "referenceHash": "bfa1b4ff562461707991b12ec82e7846725d1fe59506081ad8e073db02208679",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "73bd9c651de86b5cfbd69611f1dd30153df1c92853ef658c303d181e57d52992"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "referenceHash": "fd53e751d1b2fe07f2590d43f66b914daf9e58428c08ec3dc807db15a868f8b8",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "770f2ccb3cb1e2149c1c136f9bf82d35b59421cac8ccc57bb4a9844af2c428a8"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+        "referenceHash": "adc83a441ef297d916e0fe46b387a61d6427f6d8fff68d50b50d1acd8805e769",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "8015f28df553bf451f36a9f6ec7c0aae81faffa0053d5e423f187d984f653e65"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+        "referenceHash": "caebb71ef67dd8cb9247d6f88b1c966adceb76aa7b5ec1e94a906704500bd0a2",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "5d4101681b671bca0ea6a05cb6f99c9993033fa27dc33287437a3744caa9400f"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+        "referenceHash": "dc942e272c2aed05aafc5341716d418ab1d14ad0840141c0f65ea10f408c277b",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "9bd107c8c089c282336c9b378464899fa25453d34023190db1fdd02613a51b4a"
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+        "referenceHash": "dc645c6d096293e049a8d1a1fb031e62efdd226fb72771a910cda4a2a177a178",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "323e1282d00b9891fd7c44d5564101edacdc38116df15ef282c221e256185084"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "referenceHash": "03c051b9e1736452a85f52c7dacccf26ad170a48bd5492fbb83f76ad4402855b",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "516dfd7d9ef8f79b24a248bba1406fc048017d296c87d05b01dcea3ee2b5da57"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "referenceHash": "0c472eb464827adb3d8fa8be66dd2b035c84124451a4082b03beee6cdd884555",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "c274365968ed9c9ad78c02a51514c083b04686f1455996da4dbe53e3d7b4d866"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "referenceHash": "9769bf3f90f1ac2055ec97d06d96dcfeba1c117505e1e07403bdac88615c52a9",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "7e714f8f7d048830a19ba5c159160ec634e2dffb31170795ddf3db7870bab68e"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "referenceHash": "bc6ac44d7785d8da40b3aee1d4d7b6551ba658366d50a620f8b491518b27f46b",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "71fd9cc83d7cdff260aee824ccb83c583407e9e2b40d8cfbddae46b0bd2a4ed6"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+        "referenceHash": "e79638b516c0eadab342ff24e8275cccf2f584bc2f601a70f0bffa4eac464b2b",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "24707049e38d9bc50bf494061082571d24321d1b1f35222a86ad5c2084c65b0d"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+        "referenceHash": "9a40a59da91d32a658c3cfb29f04565f8c3782d44fecf3c0f8655aabc3fd344f",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "556d0812d5d05b974daaea43cd230bbba6fedcfea321b8c0317df47a3c4d1ad1"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+        "referenceHash": "3eeaf785db102e606d3116bc0e3462ff98aa6ae9f790df721e18ab7b00bbd30d",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "cbda37e5590943e2cc33e5c05321deaab9068f5c4b4ef63ed9633ab826a766d3"
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+        "referenceHash": "255349dbfc1171b90e7104abb63deadea8196edab5df6023cb06a20d4c031b9f",
+        "legacyHash": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "correctedV2Hash": "271228445c49a9fd9ab44ba9f7234f02ef2f7b003a863bcf7043f0420aee28d7"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+        "referenceHash": "774b8125b6a2054647f18406762da1d7442f278501da2a869ee622e21d06442a",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "27f047e178fd0b8e7c568088497a8a0e1a1187ded40f0ee745fd4514355da4ab"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "referenceHash": "494d912d62aafd57119acbaeaf7f9bd70c1adddccf7d1ff517cc20c64ee214d8",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "f5edb7d06889fcd39814caa019560b48795170db93ef4811468dcf2940fd1624"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+        "referenceHash": "1c67027bf48918429afa2a4ee1980a0812ab6b37ec0bbfed0b05e93f54ae99e8",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "eea3b898a4983dbf205f7cd95da7744d5c5bdae5efe989eed1191cca1e6b4952"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "referenceHash": "7d9153b2459d3269954c6da44351f38c53fad1ecf5bf14391cd38b1a3474da23",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "d15f7bf244268f5361dd0e044bc07647f3a13a5c3d54cdf391eb2f0c338a8df8"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+        "referenceHash": "749d83fbc4fb14ab75eece3dca22a77412d4ace431e7dd88b4f9d70285362de3",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "b2e5a84a7b348402b57bedaff2c8f06157c27d2d657cc153c80a83d3e7096340"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+        "referenceHash": "d470fa578ffbda89719c871ae4b62e336ae36fe8a51b72eca6572dcacaef26e5",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "24efcd2922a049bc8db4f126dca4f428c069aadf7b06504ced6130de3e4e7d0d"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+        "referenceHash": "8002899441fe70fca2a72c9f2b2f404a83997d5115f229d738895c93e894a8bb",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "864f4e9da9614ef5fb3e2b5f2ed6c2d95274611653ef2374a7734b6a0092a7e5"
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+        "referenceHash": "e4d7d279d6808adb5170aaa26f7e26602d1f9ea5d10c48c603f932d144b49d3c",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "988084215f3456f571015ad64a2083a777853dfaed6a27641dc7d6c649d94c29"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+        "referenceHash": "ff8f021380a4d27eb0d81412f0a0e0cbb5c2dde40913b32bba3221fe8569acd5",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "6436c5abda089e8174196eec003e321140681bdbdbc88a4ace555be403a339d6"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "referenceHash": "81ddfcaa23ed8382ca0088ef0247003c761b24fc51b8a86611ebd5cd5d479c7d",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "1ec90719481cf3bfc5c2a9bec4c7e30541318a7fcef97dc52abf754987bf4885"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+        "referenceHash": "6112e442bfb0a587b27c6296d3cec2121e344ce842a1ba1c7d6892fb9c293d48",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "d59f06a6372b4a6f3ff795d6dde490205c6a12bcf13472263639d9b9f59d5694"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "referenceHash": "23b6fa536e1335f3c19d46947860d037cfcd61540525ea59e4d2da392669d6b9",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "ca57c044f1790ff4cdba492cc4717b1a2671284b60e5ff670663348d00d6b030"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+        "referenceHash": "ee8988ac2d45fba32468b1d2105a69e85ed2b77521d4f573dbc2b2a9fa834294",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "bc5868b192c35b2ed39996a8d7fcae5b17720c99020a63791b5e12fdf46e7d81"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "referenceHash": "aca24c6b3a27eb0db7c7d4a28e347d9da8290f35e463a363ee6a89df587ff244",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "1408e78fb3dae554d901de2ec930c49c785b3ae63a4e1837c7377f1ec975a0ae"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+        "referenceHash": "5485004c8b02a32ae3c69161c15f5ef501d431623b5ebf4e4142ce29235de6ab",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "3490a70c71684e79436ddca2ceaa1d51c6f63729dd7e61c8fec4120874dcdcf7"
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "referenceHash": "bf3c84500f2a380d3c9e7be2487cc2574c88e2a0a9f7bbb3c21d84317e07fc5f",
+        "legacyHash": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "correctedV2Hash": "51a8e176571199a539f2f5dcafb4373417bbd1a3f3ac7f2f821b0f6dd01a00a9"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+        "referenceHash": "72194d0640c5c86e8a1373e79958b40eb628fa0296e6bd56a2ac76f6f2f28399",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "6c08db88dbedf9a0153063e96e3215b7c715f327e4cbcdb40de945700cade00f"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+        "referenceHash": "f0ee65ef2d594ff73484a90f6e31cfd15a1d9d943b9978ec3b5ca95ec89b146e",
+        "legacyHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "correctedV2Hash": "e035b445d429dec092f5d3303e65316d8c3fcc6ff0f9c27d6ae28ceb7501bb50"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+        "referenceHash": "3202013a7cb27f5aadf13e317e087c64c499db5bed2ce23b5fdee7c64458b3c4",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "d98b605b462a005bebeba537dd2bd5d65ad333c37f2eccacf905eccb118ad034"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+        "referenceHash": "286799e6ec36709b9808f968815311302b2df7b149bea07d9e1d7f6a7e3b31fe",
+        "legacyHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "correctedV2Hash": "f3b8f8cb555fe8558863178f03446d3cf9ded71c8919be810e3a87515edf1593"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+        "referenceHash": "26c88f37f76a86ba9cb18dff32396497c5a109ea6767b049730f3946d63f4e37",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "14bdba503d5c7f6ec2759e0c9e5ea4175384dede79e751675f3d21109610120c"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+        "referenceHash": "d26df25224b5979cb795c6edca3ba03153e2fafea81d871ec1b827fbc77a94e3",
+        "legacyHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "correctedV2Hash": "b2d594c83b3b8e3c1a5e475560716f52e32dc3d1c0699df73e62c8bfc2d5eb4d"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+        "referenceHash": "6d875b2747a44b3a03a96eafe7df1d376b688681b41a95348ef6065043feece1",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "9eaaac31140d31c9c46061a9b4c1037a40aef5ed7e08e30ce59255a594bd4b25"
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+        "referenceHash": "670dfb3749c33c64a3e709dffbdd1e9b95f872ce32fc554e3b5ec99a9c51f73b",
+        "legacyHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "correctedV2Hash": "066b76f857bcb1dadf007e133a4d4ba76d68ee58925f0fd33f1b2d0b5597b8d4"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "referenceHash": "8e0ec81edc25c409e989b370b6a34aaa4a72ed7d73fb9cc588420a6ce57bf2ef",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "55521195254f33e8d0097df0c06be210a4da7cf594a65e6504a08534cb356f46"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "referenceHash": "706ad9bac1d587367d411a22cbe625babaa2c670b3d2cf3bdd33604ff3de7e27",
+        "legacyHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "correctedV2Hash": "0fc5816208dbe066797f362c06126c3ebaf697c1ed9ca68e75ed5d260f95738a"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "referenceHash": "0b4c7044fa40c57d0dc4a7a6bb90afd4e1301259519a2bc2b0bbbc7870d23bd6",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "59675e7c0a67b498418479e068bf62e22f1b81d2e9542a2528c309ffbc08d25a"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "referenceHash": "4804c93668ee77a64422c765a04d14a6f81cfb3a6eefd92073eb4488472cea1b",
+        "legacyHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "correctedV2Hash": "60b29246d080cbec67135bd71538815dc4cdb37beeb6f7c1051559816481e2f2"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+        "referenceHash": "10f6053721a740c23ac88808763001e178914dec66cbbb1937d5c6b43bc2b5dd",
+        "legacyHash": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b",
+        "correctedV2Hash": "74fe5e1b16fc9316e628a49a1db01880f2d2c5a8e2f47bf96da9e3feced9e1c9"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+        "referenceHash": "eaf25d27607ff56667c6771564b6d4d3384b8acc2292a2543888a95c2fff612a",
+        "legacyHash": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050",
+        "correctedV2Hash": "cf3211781d5fba4fff7ea5b35096712c098ff5234f6c70c63d0d4c0d5b6bf1cc"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+        "referenceHash": "5cc52e8e8a32aeb63beda6840dc38e08110b09d9813278a188374b973b23808e",
+        "legacyHash": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b",
+        "correctedV2Hash": "86045d8282684e68107bd2ee0dc543d3de47ca113f36dd333812dfc13faf3b56"
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+        "referenceHash": "7dec63441dcbb31ffd9057f54aea31c3116f5dcda1dfd0c8f3e2fe166ea89658",
+        "legacyHash": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050",
+        "correctedV2Hash": "69619c49e6e757be21dd23943a7ff83f4aed207df11c8547799d97bd3dacdecb"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+        "referenceHash": "9c4172e848f61c5938e1b9244b888e7d07bff8c644c2c7bc63c8626095fd8449",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "245bb43c48fa8a9b7707e4eab7363d5dc417921e094406083d384412d77adaf6"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+        "referenceHash": "daad7ea160db6a2d461197c01d1e6bb58ca557d77b95e463bbab1f4273f45087",
+        "legacyHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "correctedV2Hash": "000f7c23d4e1eb0e4cde9c39586babadb6f9f24789c496ead4f10e53de94316e"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+        "referenceHash": "82c1220ecf0e6407ff3e94939f306a1499283c5d35f4f7103a01531e936bb8d8",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "0b6f85008330aaa6d990a51b1ba1868b469284f616bad44a1aebec93be79bd3b"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+        "referenceHash": "717def74e6a7c5e20f1ae7192d4820fe35f508a43298393aee44e66f03ad0bac",
+        "legacyHash": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "correctedV2Hash": "554134ad7551ea4e2988cd036e74dc0771645f2da0a82f46edb9f33a6f66769b"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+        "referenceHash": "49a54ab6a4dd625a2319affdeebc0bed37ec7fa97041d08282b9ee3db6d14a85",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "a977ec4dd4e65605281255b641ae6cd9eff0076420cf8142b48eaef5aa9494c5"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+        "referenceHash": "a057d803fc3f113f6ef4107bc330c228931d44572f74ef0e49656ad47662ba1d",
+        "legacyHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "correctedV2Hash": "217ace761a3f0104ebf9e01db563a7d1490c471c2e14797498d224208e219395"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+        "referenceHash": "2e86426f069965960287834b1826cbb9469a1c9352ce6d0b6f9a1d5ba6384928",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "a5ce685f42720edb9632893c37f8500454f45dbfe1dffce256de3846fb24a7f1"
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+        "referenceHash": "73ab4b5713829eb2ea93fbeeec25775054e5f0f53efc86dd1362c02dfcbb2203",
+        "legacyHash": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "correctedV2Hash": "744c0afc22046025394f9d912a1c9a437e9420ef1dc12d50489f935c324bbfdd"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+        "referenceHash": "15225364e2ccbbb6351b7d356fb8b64b47fa83848d10afc55297d8680df06941",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "6c4f730e712a2ea9a998bcf58334f4d3d3cc3999b425dce53e55ea9b9ff66fcc"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+        "referenceHash": "4ec85d9f40c6107afaa3f8e054748a69cef4f5ea0fd1884e1ac67c3570e72da8",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "95e43ac588dfcb4ecbc82092b45c8fca9859e6d025232e31d3b12e5951b5fa79"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+        "referenceHash": "41ddacd3fc0af2b86313d9045ce5c3b8d774804ed20f7f98cd3efc850f37c96f",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "97e282915c062b96f9718159c01dfe04cdb7fb23b515eec741b7f3050f153fa2"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+        "referenceHash": "12cdc7f1b4f1f086034d734d9ebe0da969e314b243dbfc3579a6eee9907c6c40",
+        "legacyHash": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "correctedV2Hash": "963c83682a3928caff464a07fb44bf2cb63d5fbc700da9557a2c8207172ef090"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+        "referenceHash": "6f7ae7ef3837fa6df093b439ec25bc2b300fb81406d4a345a466ba4c51964dbf",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "9ba843074796615d99ae5e60ae7f3403a3f654dcc7d9d5c2c22bbd4c437117dd"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+        "referenceHash": "7c04e91c281da9f6738831d277fbe8ba466e4214f3c2efb9120b7ad7bf808f03",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "a80d61090dcd9b1e998d73bcf13108863a2496952659ffd3c5f7bae5a27dfd74"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+        "referenceHash": "b265ff2c6c5a3676708c6b23784e8123a4bb6c48333881155904366469f7d9a2",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "51a14231fa621dbeb3bc03f6f6dbb4f274c6d31b1b8485dcfdd983c5091723e1"
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+        "referenceHash": "471a270a12f753af04094b2f0e6e8c28e99d3c52d625ab5e7475c0d543d37baa",
+        "legacyHash": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "correctedV2Hash": "ae912a00f7f5858a4b9fb2f1e70a15c73cfd087f983659a1e4bd93f857555a03"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+        "referenceHash": "4e01db31bff1ebbcc0c47b01d449c060615f8d119a08f13a89cc66dcefcaa357",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "9e0ff39b980e3dfa354cc1e83fe21b26f42d8f4cbd7c8ff18db9971bb5cf4d8b"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "referenceHash": "b3bb74ae1db307be4695a86c21ea1580c83e22d06a2e48dba2eb8cf755a4bc13",
+        "legacyHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "correctedV2Hash": "afb89fe271db11d40d27537311940cbadd1d1fd970730fd928aa993fd67089f4"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+        "referenceHash": "f610505148d248935bc440ac0aaa882b890838b73958c024bd01fa4d34025d73",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "cdc05053c4a7d41a2483ffbde4fca6fe78bf0c3601ee30552217f38fb0212b05"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "referenceHash": "31a709a52196009471e80dd903f570f5fdc7b54171907da9d8b18fe07fbdbf21",
+        "legacyHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "correctedV2Hash": "761f11fd9328743be22e1d6a50a831059d4c08dd7ab07e7dc6465cd18cd7f128"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+        "referenceHash": "af6b151a7fd62568a9eb5e7eb49b1a91e1c881fdbb22fdca4b9e4d1f752a6f48",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "9a312fef69ec739acaed83436f46da02cbccad477bdd594ca2619288c0e8207b"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+        "referenceHash": "62c342f1e3dd7acddc2548217e3b4591bfdc1d210cf1f0b3970178e9255fcb6e",
+        "legacyHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "correctedV2Hash": "3971967aa26d99009953c31210ca28dea504d33108db6309ffe2d8f4ece34fb4"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+        "referenceHash": "fef166345ce4e5d3f883199928ffe115e053068f68f023803d86e3e79467a313",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "2b1d2067d054a4fe87faaac1b01ef8e34f5bdc99533e870d1cf08b906dd60f14"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+        "referenceHash": "6a83e925b899db9c28df1e00b3bcfe263ec49a57f5b07f5655ca6fd56156a5a0",
+        "legacyHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "correctedV2Hash": "143dcdbf2c8616d2d153aa8a45c5047ad2812551246baf4c454977c5c1370668"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "referenceHash": "5ad28305223d10251939913d088b251c065b8356b8cd563253b00566a74ef2ef",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "233114e3e10d0ef931f83b8ebd87e2ea37a9bfb4c62d010b3734c5e03488083f"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "referenceHash": "0b56317b0b875800208aa7988751a2eb2135dcb2851fdd662d6d33caeb9af39a",
+        "legacyHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "correctedV2Hash": "536f6da5a71b1d614339a7ad5da9dc8bb8e1af89a8a005a108966472896e3029"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "referenceHash": "2f9e0713d1b9ceebc76a2a68438e61f3c57e0fb3f7b16e81be2b2674ec16b59d",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "6fb7d00c9cd5506f14e83058d71bf8e15f872cd3668d0ab7cbe171967136beff"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "referenceHash": "4c193d5c4002ca13753e318dbe39ea0b8989dc89575d0e212901440b8dc943db",
+        "legacyHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "correctedV2Hash": "83a6cc9a66f9c0b9c8573b9d8117ec574d13390eca6a89e3d3c527f98f9c606e"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+        "referenceHash": "fefafe26c9683447cde2615b49b632a75cc3830c1e76143dea394faa689bce5b",
+        "legacyHash": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40",
+        "correctedV2Hash": "b05372a54933dbb35d03fcb5e71d9529c79be9b2b1ee0c47e2efdc92c9405a6a"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+        "referenceHash": "d80d9ca81d89485f155c633b574edf226164300a17718206c4041a8651d5f034",
+        "legacyHash": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb",
+        "correctedV2Hash": "519505d9fe373259349f333a7aa02a46b2ead25e9961949e6421cf6c1b41ca75"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+        "referenceHash": "b920db6c6c6ca25a469fdcb0fc5c606c1bbfeac4313e1152a720ff24cb6f95e3",
+        "legacyHash": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40",
+        "correctedV2Hash": "02c3d77764ec0dac74cd80916f6084cd91f043f664a98c3a2f6e72cb6fad474f"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+        "referenceHash": "34f4cf97b9391139d61df84b0e95d538aeeadef1feccd7fa2eb2c15d0b111b99",
+        "legacyHash": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb",
+        "correctedV2Hash": "e2e9510bfa352310d21bc4514c2fc787179e1c0b881cba275bce14d3162d4f1f"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+        "referenceHash": "6389ce73c26a317ab3f1a3ad14fab0d6683fbb5d79a56c33e703bc39eba3f3bf",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "4d8600da2daa134245d4208313d39233f56eced090306ac7d94122c673164a86"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "referenceHash": "c9cfd530aeb3ff3681b133d28e5d85322640bc01f7ceec459640d5d48383657c",
+        "legacyHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "correctedV2Hash": "65030eb2540ace9da3293a1290c4439fdf5076c898fce5aeb3dcf80ea5c3eed4"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+        "referenceHash": "2f2490a4fc83128b0bf6fd8985188f241e07146663e31698a659806138c92a40",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "981f1f4e173d9a785b5bd72dd35c3cdca647c36d15210e89d297799c1a1b27e1"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "referenceHash": "d5e05d24374ddd48a3f9d1e72a555a1aaa91f0c1854c42cb681207bd7d0a4417",
+        "legacyHash": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "correctedV2Hash": "0fdca450a0448c2372062fa9622110c9ed063310c44079255dfb924a0508562f"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+        "referenceHash": "e283802266112d88c48109271684eab36b696a04dcf182132182f46447e8cf9a",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "597338fd591b35979f12570a41e8a9f643665cb6062f4c4006b4062b8f49059f"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+        "referenceHash": "85e48947dfaa5df338cc30d19d590145083d19dd4b7a34a41daa7827eef001bf",
+        "legacyHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "correctedV2Hash": "2164cb4435e8854f7c2c929202d061646815d52ad04550e90e3082bf07f8bda7"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+        "referenceHash": "49d12648475adfb3146692f101ee28c558ec80ac2c3d476bee4185151292b4bf",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "4bbd5b395bf289d13abb0f675bb15bf79b7045e7119346887c259db5fd93606c"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+        "referenceHash": "dc454bf2552e5145f9eca1109427b23322ae6586a678a8f585963b91bb889371",
+        "legacyHash": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "correctedV2Hash": "87ce0e8cc41469f220545af941bc4d421c3b0462e3c11849456a6e3ebccb9747"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+        "referenceHash": "c82e4605a80c7246f84c0afa193794d61acd0c926fd71b9da5407b9d91dc8d09",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "3d39e16185352bdff5ce89993725764219fbb2316e95fb96b88883d88f67e1ed"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "referenceHash": "b0561252a96058242e37711c1de19965949af0f066dc36970c572bfc9074104b",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "d59a58e9e7ff4ff6880ee77d1de166cbe657cc6c3841618bd1ce1d2ab716a6af"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+        "referenceHash": "5d0dd7531ab905d42c1bd0f05c9520ba15cc55015fa094bd92c86b5551012bdc",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "c02833c91c264292fac020eb41b294fdbd69be20ae3dc675fa911599325e81a4"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "referenceHash": "26f19958972b0841ea7aecad1bb1d4d9407afd956c1ee7e7704b1462a8cf0ae4",
+        "legacyHash": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "correctedV2Hash": "853bd1c0727bfc422006a42c9a42de3855ee3d909fcc43ad0846cc824b1e1a72"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+        "referenceHash": "9574dbd5cc0864ba0a56b727c0697002e18979fedc696fcf0baa60d2f1f6a6ed",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "26c59c32dc4579bdf4c3953f0e513ceec082b5918befc99404c47a59e8e1bd57"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "referenceHash": "518f8f2b9468d48292a7905040a5c21d2abea34565295d31e0cbbce3ccedab75",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "6b079535084c13c04df3ae266c35312817e06ff6e000a4cb7cb35b73c9f75145"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+        "referenceHash": "2073defe23b4ec9a4326a52bc80ea39bf131786ca6f47a24f061dac51ff0a50b",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "febbb8a5dab2a2f8fa057cc124632253af86a3999679826537780f043205e4e9"
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "referenceHash": "c32deed253d855c6d7f48d1a6b686cef21ae893a0b559e0463e6739fc2b4cdd3",
+        "legacyHash": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "correctedV2Hash": "c00cba3d939eb1eef9185016ef40b2688517174fcd9cb6945df9238b1a8d75ef"
+      }
+    ]
+  },
+  "calibratedBatch": {
+    "sourceCells": 128,
+    "uniqueOriginalSourceReferences": 128,
+    "referencePresentations": 384,
+    "correctedV2Specimens": 128,
+    "unchangedControlCopyA": 128,
+    "unchangedControlCopyB": 128,
+    "totalSpecimens": 384,
+    "duplicateProof": [
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-f018512221b40c43",
+        "copyAPath": "blind-packet/specimens/specimen-f018512221b40c43.png",
+        "copyBSpecimenId": "specimen-35c01be7b9eb89ed",
+        "copyBPath": "blind-packet/specimens/specimen-35c01be7b9eb89ed.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-239e33d08aa2242d",
+        "copyAPath": "blind-packet/specimens/specimen-239e33d08aa2242d.png",
+        "copyBSpecimenId": "specimen-df9d8e7142ec6161",
+        "copyBPath": "blind-packet/specimens/specimen-df9d8e7142ec6161.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-f06ea9998c84b3b7",
+        "copyAPath": "blind-packet/specimens/specimen-f06ea9998c84b3b7.png",
+        "copyBSpecimenId": "specimen-fc95c2f0a27efe1f",
+        "copyBPath": "blind-packet/specimens/specimen-fc95c2f0a27efe1f.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-e9c869fd39ddf006",
+        "copyAPath": "blind-packet/specimens/specimen-e9c869fd39ddf006.png",
+        "copyBSpecimenId": "specimen-6682f201ac399a8f",
+        "copyBPath": "blind-packet/specimens/specimen-6682f201ac399a8f.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-ca6b5301cf59a895",
+        "copyAPath": "blind-packet/specimens/specimen-ca6b5301cf59a895.png",
+        "copyBSpecimenId": "specimen-05f8af0af3a8694a",
+        "copyBPath": "blind-packet/specimens/specimen-05f8af0af3a8694a.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-b553f905737a8305",
+        "copyAPath": "blind-packet/specimens/specimen-b553f905737a8305.png",
+        "copyBSpecimenId": "specimen-6b068ac2ee24c900",
+        "copyBPath": "blind-packet/specimens/specimen-6b068ac2ee24c900.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-244778dee870ba67",
+        "copyAPath": "blind-packet/specimens/specimen-244778dee870ba67.png",
+        "copyBSpecimenId": "specimen-fbed2ad4ed6e9221",
+        "copyBPath": "blind-packet/specimens/specimen-fbed2ad4ed6e9221.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=default/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-cfd66e6a50687866",
+        "copyAPath": "blind-packet/specimens/specimen-cfd66e6a50687866.png",
+        "copyBSpecimenId": "specimen-1dc91b9df94bd088",
+        "copyBPath": "blind-packet/specimens/specimen-1dc91b9df94bd088.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-53bc2b9919d78505",
+        "copyAPath": "blind-packet/specimens/specimen-53bc2b9919d78505.png",
+        "copyBSpecimenId": "specimen-f25506c227a2a143",
+        "copyBPath": "blind-packet/specimens/specimen-f25506c227a2a143.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-06d6e73df768fe16",
+        "copyAPath": "blind-packet/specimens/specimen-06d6e73df768fe16.png",
+        "copyBSpecimenId": "specimen-bbe03f3489c024f4",
+        "copyBPath": "blind-packet/specimens/specimen-bbe03f3489c024f4.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-cb27b92d93acf0b0",
+        "copyAPath": "blind-packet/specimens/specimen-cb27b92d93acf0b0.png",
+        "copyBSpecimenId": "specimen-1c8a77d4b3e446aa",
+        "copyBPath": "blind-packet/specimens/specimen-1c8a77d4b3e446aa.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-baa329b411458442",
+        "copyAPath": "blind-packet/specimens/specimen-baa329b411458442.png",
+        "copyBSpecimenId": "specimen-9a74e3121df6f490",
+        "copyBPath": "blind-packet/specimens/specimen-9a74e3121df6f490.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-236ad9278ac9f906",
+        "copyAPath": "blind-packet/specimens/specimen-236ad9278ac9f906.png",
+        "copyBSpecimenId": "specimen-55950452ab97c653",
+        "copyBPath": "blind-packet/specimens/specimen-55950452ab97c653.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-92046f6c17fd075e",
+        "copyAPath": "blind-packet/specimens/specimen-92046f6c17fd075e.png",
+        "copyBSpecimenId": "specimen-934baa11563c533e",
+        "copyBPath": "blind-packet/specimens/specimen-934baa11563c533e.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-4b2d8d67f630a2c8",
+        "copyAPath": "blind-packet/specimens/specimen-4b2d8d67f630a2c8.png",
+        "copyBSpecimenId": "specimen-4c42553e40efffa6",
+        "copyBPath": "blind-packet/specimens/specimen-4c42553e40efffa6.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=focus-visible/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-1474d1c5ddc4e45d",
+        "copyAPath": "blind-packet/specimens/specimen-1474d1c5ddc4e45d.png",
+        "copyBSpecimenId": "specimen-79b380ed158b9f7b",
+        "copyBPath": "blind-packet/specimens/specimen-79b380ed158b9f7b.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-dbe9ff7f7082ff66",
+        "copyAPath": "blind-packet/specimens/specimen-dbe9ff7f7082ff66.png",
+        "copyBSpecimenId": "specimen-ab51feac7391d2f8",
+        "copyBPath": "blind-packet/specimens/specimen-ab51feac7391d2f8.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-2426b52b32744548",
+        "copyAPath": "blind-packet/specimens/specimen-2426b52b32744548.png",
+        "copyBSpecimenId": "specimen-2b4b27bd7d36aa83",
+        "copyBPath": "blind-packet/specimens/specimen-2b4b27bd7d36aa83.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-263b0cf0125a95bb",
+        "copyAPath": "blind-packet/specimens/specimen-263b0cf0125a95bb.png",
+        "copyBSpecimenId": "specimen-b5690fd8a24ecc2a",
+        "copyBPath": "blind-packet/specimens/specimen-b5690fd8a24ecc2a.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-9677095815abe7d5",
+        "copyAPath": "blind-packet/specimens/specimen-9677095815abe7d5.png",
+        "copyBSpecimenId": "specimen-e1964fd757c34ff2",
+        "copyBPath": "blind-packet/specimens/specimen-e1964fd757c34ff2.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-588a83f4b52cbc20",
+        "copyAPath": "blind-packet/specimens/specimen-588a83f4b52cbc20.png",
+        "copyBSpecimenId": "specimen-c95685bacc0046a7",
+        "copyBPath": "blind-packet/specimens/specimen-c95685bacc0046a7.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-7405de75e6053da3",
+        "copyAPath": "blind-packet/specimens/specimen-7405de75e6053da3.png",
+        "copyBSpecimenId": "specimen-1e627b337bc8cb88",
+        "copyBPath": "blind-packet/specimens/specimen-1e627b337bc8cb88.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-5d8c013bbb56608c",
+        "copyAPath": "blind-packet/specimens/specimen-5d8c013bbb56608c.png",
+        "copyBSpecimenId": "specimen-fc5bf94bcdf68d1b",
+        "copyBPath": "blind-packet/specimens/specimen-fc5bf94bcdf68d1b.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=error/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-709aa5bca72da509",
+        "copyAPath": "blind-packet/specimens/specimen-709aa5bca72da509.png",
+        "copyBSpecimenId": "specimen-60eb0d6f245a293a",
+        "copyBPath": "blind-packet/specimens/specimen-60eb0d6f245a293a.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-1cf9217dd29b3d83",
+        "copyAPath": "blind-packet/specimens/specimen-1cf9217dd29b3d83.png",
+        "copyBSpecimenId": "specimen-8b6301ad061b4dc5",
+        "copyBPath": "blind-packet/specimens/specimen-8b6301ad061b4dc5.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-a14357cfe38a2bea",
+        "copyAPath": "blind-packet/specimens/specimen-a14357cfe38a2bea.png",
+        "copyBSpecimenId": "specimen-c34c0ef8a8cf63aa",
+        "copyBPath": "blind-packet/specimens/specimen-c34c0ef8a8cf63aa.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-6e02c69984640fd3",
+        "copyAPath": "blind-packet/specimens/specimen-6e02c69984640fd3.png",
+        "copyBSpecimenId": "specimen-0d3122012dbd7368",
+        "copyBPath": "blind-packet/specimens/specimen-0d3122012dbd7368.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-6f56f769712b1238",
+        "copyAPath": "blind-packet/specimens/specimen-6f56f769712b1238.png",
+        "copyBSpecimenId": "specimen-c11ce060e84c2a37",
+        "copyBPath": "blind-packet/specimens/specimen-c11ce060e84c2a37.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-da8996617ffb0060",
+        "copyAPath": "blind-packet/specimens/specimen-da8996617ffb0060.png",
+        "copyBSpecimenId": "specimen-a77ea441611c1468",
+        "copyBPath": "blind-packet/specimens/specimen-a77ea441611c1468.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-5598e9ba16630b20",
+        "copyAPath": "blind-packet/specimens/specimen-5598e9ba16630b20.png",
+        "copyBSpecimenId": "specimen-60250cf5afe5948d",
+        "copyBPath": "blind-packet/specimens/specimen-60250cf5afe5948d.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-6dbad11c2e74d8b3",
+        "copyAPath": "blind-packet/specimens/specimen-6dbad11c2e74d8b3.png",
+        "copyBSpecimenId": "specimen-46260eb906ea0aa1",
+        "copyBPath": "blind-packet/specimens/specimen-46260eb906ea0aa1.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=small/state=disabled/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-b1bf150edd015b2d",
+        "copyAPath": "blind-packet/specimens/specimen-b1bf150edd015b2d.png",
+        "copyBSpecimenId": "specimen-8648ecdd8f04b435",
+        "copyBPath": "blind-packet/specimens/specimen-8648ecdd8f04b435.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-9eb42a80273cd0a7",
+        "copyAPath": "blind-packet/specimens/specimen-9eb42a80273cd0a7.png",
+        "copyBSpecimenId": "specimen-0b313e3d7e6bb61b",
+        "copyBPath": "blind-packet/specimens/specimen-0b313e3d7e6bb61b.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-68e60360313bc65a",
+        "copyAPath": "blind-packet/specimens/specimen-68e60360313bc65a.png",
+        "copyBSpecimenId": "specimen-ff2b02aa4dadf3d0",
+        "copyBPath": "blind-packet/specimens/specimen-ff2b02aa4dadf3d0.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-ba8165e9df34bb99",
+        "copyAPath": "blind-packet/specimens/specimen-ba8165e9df34bb99.png",
+        "copyBSpecimenId": "specimen-76cec74a26d02036",
+        "copyBPath": "blind-packet/specimens/specimen-76cec74a26d02036.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-ab49838798f10406",
+        "copyAPath": "blind-packet/specimens/specimen-ab49838798f10406.png",
+        "copyBSpecimenId": "specimen-50ab9bd0af0eb3af",
+        "copyBPath": "blind-packet/specimens/specimen-50ab9bd0af0eb3af.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-3f870ea40b8bec90",
+        "copyAPath": "blind-packet/specimens/specimen-3f870ea40b8bec90.png",
+        "copyBSpecimenId": "specimen-947b2ffc3029f92c",
+        "copyBPath": "blind-packet/specimens/specimen-947b2ffc3029f92c.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-66f951a55b9f8339",
+        "copyAPath": "blind-packet/specimens/specimen-66f951a55b9f8339.png",
+        "copyBSpecimenId": "specimen-cec6b8e037106300",
+        "copyBPath": "blind-packet/specimens/specimen-cec6b8e037106300.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-af824d4aa52ec099",
+        "copyAPath": "blind-packet/specimens/specimen-af824d4aa52ec099.png",
+        "copyBSpecimenId": "specimen-21c776e15b479932",
+        "copyBPath": "blind-packet/specimens/specimen-21c776e15b479932.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=default/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-959db068e7d0a841",
+        "copyAPath": "blind-packet/specimens/specimen-959db068e7d0a841.png",
+        "copyBSpecimenId": "specimen-65ca9b7cf3e2576c",
+        "copyBPath": "blind-packet/specimens/specimen-65ca9b7cf3e2576c.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-24cefe7eec95f8fc",
+        "copyAPath": "blind-packet/specimens/specimen-24cefe7eec95f8fc.png",
+        "copyBSpecimenId": "specimen-fc2a0f708fec081c",
+        "copyBPath": "blind-packet/specimens/specimen-fc2a0f708fec081c.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-303a7cd85962df4b",
+        "copyAPath": "blind-packet/specimens/specimen-303a7cd85962df4b.png",
+        "copyBSpecimenId": "specimen-a6ed969b52637b12",
+        "copyBPath": "blind-packet/specimens/specimen-a6ed969b52637b12.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-2f823cb28b9478cb",
+        "copyAPath": "blind-packet/specimens/specimen-2f823cb28b9478cb.png",
+        "copyBSpecimenId": "specimen-f37f04d9e25fb599",
+        "copyBPath": "blind-packet/specimens/specimen-f37f04d9e25fb599.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-d56a0567155a284b",
+        "copyAPath": "blind-packet/specimens/specimen-d56a0567155a284b.png",
+        "copyBSpecimenId": "specimen-0eb0df4393816cf6",
+        "copyBPath": "blind-packet/specimens/specimen-0eb0df4393816cf6.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-49635ca1ad9bd77e",
+        "copyAPath": "blind-packet/specimens/specimen-49635ca1ad9bd77e.png",
+        "copyBSpecimenId": "specimen-da89df66b4258542",
+        "copyBPath": "blind-packet/specimens/specimen-da89df66b4258542.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-1be2e362a9362d6c",
+        "copyAPath": "blind-packet/specimens/specimen-1be2e362a9362d6c.png",
+        "copyBSpecimenId": "specimen-0224c0d2bf964b27",
+        "copyBPath": "blind-packet/specimens/specimen-0224c0d2bf964b27.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-d4b4696c58dfddd3",
+        "copyAPath": "blind-packet/specimens/specimen-d4b4696c58dfddd3.png",
+        "copyBSpecimenId": "specimen-c1a7c5d431b3069a",
+        "copyBPath": "blind-packet/specimens/specimen-c1a7c5d431b3069a.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-3d1fabd8c6921064",
+        "copyAPath": "blind-packet/specimens/specimen-3d1fabd8c6921064.png",
+        "copyBSpecimenId": "specimen-44dd8bd25fdece67",
+        "copyBPath": "blind-packet/specimens/specimen-44dd8bd25fdece67.png",
+        "sha256": "249da858b3b16491d5d45741ccbdd8d506dade36d6d276e56885282915af2bee",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-b97f16f0d250e3ad",
+        "copyAPath": "blind-packet/specimens/specimen-b97f16f0d250e3ad.png",
+        "copyBSpecimenId": "specimen-58f7a34a9a8d2c97",
+        "copyBPath": "blind-packet/specimens/specimen-58f7a34a9a8d2c97.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-3147af6521113ca8",
+        "copyAPath": "blind-packet/specimens/specimen-3147af6521113ca8.png",
+        "copyBSpecimenId": "specimen-936b1ea83aeb86c1",
+        "copyBPath": "blind-packet/specimens/specimen-936b1ea83aeb86c1.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-10408182a08855e8",
+        "copyAPath": "blind-packet/specimens/specimen-10408182a08855e8.png",
+        "copyBSpecimenId": "specimen-52ab7eaec73cf926",
+        "copyBPath": "blind-packet/specimens/specimen-52ab7eaec73cf926.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-1217582835ab5dbf",
+        "copyAPath": "blind-packet/specimens/specimen-1217582835ab5dbf.png",
+        "copyBSpecimenId": "specimen-74ab32346ca9a617",
+        "copyBPath": "blind-packet/specimens/specimen-74ab32346ca9a617.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-81fb14864525418b",
+        "copyAPath": "blind-packet/specimens/specimen-81fb14864525418b.png",
+        "copyBSpecimenId": "specimen-7e66ba668acf3e3b",
+        "copyBPath": "blind-packet/specimens/specimen-7e66ba668acf3e3b.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-74eb7fc468f3b2b8",
+        "copyAPath": "blind-packet/specimens/specimen-74eb7fc468f3b2b8.png",
+        "copyBSpecimenId": "specimen-409b33f5bed08258",
+        "copyBPath": "blind-packet/specimens/specimen-409b33f5bed08258.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-d0bb2f35fc089939",
+        "copyAPath": "blind-packet/specimens/specimen-d0bb2f35fc089939.png",
+        "copyBSpecimenId": "specimen-9c014b01b5c5a398",
+        "copyBPath": "blind-packet/specimens/specimen-9c014b01b5c5a398.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=error/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-58b7803ab54abd7f",
+        "copyAPath": "blind-packet/specimens/specimen-58b7803ab54abd7f.png",
+        "copyBSpecimenId": "specimen-037857c559d76c45",
+        "copyBPath": "blind-packet/specimens/specimen-037857c559d76c45.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-ca4d8fc5ddb56922",
+        "copyAPath": "blind-packet/specimens/specimen-ca4d8fc5ddb56922.png",
+        "copyBSpecimenId": "specimen-90c4caafe1b23692",
+        "copyBPath": "blind-packet/specimens/specimen-90c4caafe1b23692.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-888bfd1a65a141a5",
+        "copyAPath": "blind-packet/specimens/specimen-888bfd1a65a141a5.png",
+        "copyBSpecimenId": "specimen-e482a5bc2a869e31",
+        "copyBPath": "blind-packet/specimens/specimen-e482a5bc2a869e31.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-79366f2fb97ec13a",
+        "copyAPath": "blind-packet/specimens/specimen-79366f2fb97ec13a.png",
+        "copyBSpecimenId": "specimen-0995e3b7edf5ab14",
+        "copyBPath": "blind-packet/specimens/specimen-0995e3b7edf5ab14.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-60f8217508f44c3a",
+        "copyAPath": "blind-packet/specimens/specimen-60f8217508f44c3a.png",
+        "copyBSpecimenId": "specimen-2ca84152acb03b5f",
+        "copyBPath": "blind-packet/specimens/specimen-2ca84152acb03b5f.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-072002d4aa0c3284",
+        "copyAPath": "blind-packet/specimens/specimen-072002d4aa0c3284.png",
+        "copyBSpecimenId": "specimen-c3e25b19c029292e",
+        "copyBPath": "blind-packet/specimens/specimen-c3e25b19c029292e.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-058da6abe7b64dd0",
+        "copyAPath": "blind-packet/specimens/specimen-058da6abe7b64dd0.png",
+        "copyBSpecimenId": "specimen-00bffcde4f30c22b",
+        "copyBPath": "blind-packet/specimens/specimen-00bffcde4f30c22b.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-76c7ab13e42c61dd",
+        "copyAPath": "blind-packet/specimens/specimen-76c7ab13e42c61dd.png",
+        "copyBSpecimenId": "specimen-8a5617127d47bcfd",
+        "copyBPath": "blind-packet/specimens/specimen-8a5617127d47bcfd.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "mui/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-1de53eeb5b04cd4e",
+        "copyAPath": "blind-packet/specimens/specimen-1de53eeb5b04cd4e.png",
+        "copyBSpecimenId": "specimen-72dfc9f15e752811",
+        "copyBPath": "blind-packet/specimens/specimen-72dfc9f15e752811.png",
+        "sha256": "da5996649649134a021e267c940bde06fade9ad7c1842e49608ce097a61912a4",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-f711e0a52467b1d7",
+        "copyAPath": "blind-packet/specimens/specimen-f711e0a52467b1d7.png",
+        "copyBSpecimenId": "specimen-d4581eca147ef109",
+        "copyBPath": "blind-packet/specimens/specimen-d4581eca147ef109.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-acf90813c927fac9",
+        "copyAPath": "blind-packet/specimens/specimen-acf90813c927fac9.png",
+        "copyBSpecimenId": "specimen-5f96ece194f4908e",
+        "copyBPath": "blind-packet/specimens/specimen-5f96ece194f4908e.png",
+        "sha256": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-f6efd55a844ce36f",
+        "copyAPath": "blind-packet/specimens/specimen-f6efd55a844ce36f.png",
+        "copyBSpecimenId": "specimen-0f4456fbaef05963",
+        "copyBPath": "blind-packet/specimens/specimen-0f4456fbaef05963.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-db16b8432405c8de",
+        "copyAPath": "blind-packet/specimens/specimen-db16b8432405c8de.png",
+        "copyBSpecimenId": "specimen-802f66081500655c",
+        "copyBPath": "blind-packet/specimens/specimen-802f66081500655c.png",
+        "sha256": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-d1b9635b7e3eda57",
+        "copyAPath": "blind-packet/specimens/specimen-d1b9635b7e3eda57.png",
+        "copyBSpecimenId": "specimen-7368607eeed7354e",
+        "copyBPath": "blind-packet/specimens/specimen-7368607eeed7354e.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-b565b50d6e0bf1a1",
+        "copyAPath": "blind-packet/specimens/specimen-b565b50d6e0bf1a1.png",
+        "copyBSpecimenId": "specimen-d92859906de7db90",
+        "copyBPath": "blind-packet/specimens/specimen-d92859906de7db90.png",
+        "sha256": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-2782884a473678c3",
+        "copyAPath": "blind-packet/specimens/specimen-2782884a473678c3.png",
+        "copyBSpecimenId": "specimen-ddfd2d3b167796a7",
+        "copyBPath": "blind-packet/specimens/specimen-ddfd2d3b167796a7.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=default/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-092639e6a0871d7e",
+        "copyAPath": "blind-packet/specimens/specimen-092639e6a0871d7e.png",
+        "copyBSpecimenId": "specimen-dc809198ff821ca6",
+        "copyBPath": "blind-packet/specimens/specimen-dc809198ff821ca6.png",
+        "sha256": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-865e699b9b698e31",
+        "copyAPath": "blind-packet/specimens/specimen-865e699b9b698e31.png",
+        "copyBSpecimenId": "specimen-4d60fbda5e933a4d",
+        "copyBPath": "blind-packet/specimens/specimen-4d60fbda5e933a4d.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-4fa57611c88b7972",
+        "copyAPath": "blind-packet/specimens/specimen-4fa57611c88b7972.png",
+        "copyBSpecimenId": "specimen-77d27300fa49747b",
+        "copyBPath": "blind-packet/specimens/specimen-77d27300fa49747b.png",
+        "sha256": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-3f5c1ecd6c6e27cc",
+        "copyAPath": "blind-packet/specimens/specimen-3f5c1ecd6c6e27cc.png",
+        "copyBSpecimenId": "specimen-e0ed40aa93aedffa",
+        "copyBPath": "blind-packet/specimens/specimen-e0ed40aa93aedffa.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-786b85a2da72d398",
+        "copyAPath": "blind-packet/specimens/specimen-786b85a2da72d398.png",
+        "copyBSpecimenId": "specimen-fb7102e4c8707fbe",
+        "copyBPath": "blind-packet/specimens/specimen-fb7102e4c8707fbe.png",
+        "sha256": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-8f8b7fd05ab37ea5",
+        "copyAPath": "blind-packet/specimens/specimen-8f8b7fd05ab37ea5.png",
+        "copyBSpecimenId": "specimen-77ddf40496000247",
+        "copyBPath": "blind-packet/specimens/specimen-77ddf40496000247.png",
+        "sha256": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-f5f40a5dfb61b2ae",
+        "copyAPath": "blind-packet/specimens/specimen-f5f40a5dfb61b2ae.png",
+        "copyBSpecimenId": "specimen-7da9519f37b3e1c6",
+        "copyBPath": "blind-packet/specimens/specimen-7da9519f37b3e1c6.png",
+        "sha256": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-9c5998ad7f69017b",
+        "copyAPath": "blind-packet/specimens/specimen-9c5998ad7f69017b.png",
+        "copyBSpecimenId": "specimen-86777782fb888784",
+        "copyBPath": "blind-packet/specimens/specimen-86777782fb888784.png",
+        "sha256": "be32dc4f079529026b03bfabe3cfc2444c21689c41415941bc8d6878aa3b6a1b",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=focus-visible/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-75d6e8e00a9aeee2",
+        "copyAPath": "blind-packet/specimens/specimen-75d6e8e00a9aeee2.png",
+        "copyBSpecimenId": "specimen-ed3f609268edc3f2",
+        "copyBPath": "blind-packet/specimens/specimen-ed3f609268edc3f2.png",
+        "sha256": "751acc011fa6506d997202ae56446ec54b71b44b07c0adb922cf61d3b497d050",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-8c0f38ff1828729b",
+        "copyAPath": "blind-packet/specimens/specimen-8c0f38ff1828729b.png",
+        "copyBSpecimenId": "specimen-f4ef2aebed642b02",
+        "copyBPath": "blind-packet/specimens/specimen-f4ef2aebed642b02.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-5b3ba5c9071bfdfa",
+        "copyAPath": "blind-packet/specimens/specimen-5b3ba5c9071bfdfa.png",
+        "copyBSpecimenId": "specimen-49c1558611d97ced",
+        "copyBPath": "blind-packet/specimens/specimen-49c1558611d97ced.png",
+        "sha256": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-89be716c3c30055f",
+        "copyAPath": "blind-packet/specimens/specimen-89be716c3c30055f.png",
+        "copyBSpecimenId": "specimen-2732ffb0fa49fd1f",
+        "copyBPath": "blind-packet/specimens/specimen-2732ffb0fa49fd1f.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-07f4f0366e6643a5",
+        "copyAPath": "blind-packet/specimens/specimen-07f4f0366e6643a5.png",
+        "copyBSpecimenId": "specimen-6786077d102dfb2e",
+        "copyBPath": "blind-packet/specimens/specimen-6786077d102dfb2e.png",
+        "sha256": "653e057fa5962f7b967fc7bd49645f8b70be9fcb468a15726c9c0c2c4ed2d6e8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-04be3bc0ef988547",
+        "copyAPath": "blind-packet/specimens/specimen-04be3bc0ef988547.png",
+        "copyBSpecimenId": "specimen-41101148cdc641c2",
+        "copyBPath": "blind-packet/specimens/specimen-41101148cdc641c2.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-f33c7665a37c3043",
+        "copyAPath": "blind-packet/specimens/specimen-f33c7665a37c3043.png",
+        "copyBSpecimenId": "specimen-b757e432dc33c840",
+        "copyBPath": "blind-packet/specimens/specimen-b757e432dc33c840.png",
+        "sha256": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-298dfbde41f56e0f",
+        "copyAPath": "blind-packet/specimens/specimen-298dfbde41f56e0f.png",
+        "copyBSpecimenId": "specimen-42a5235eccad65db",
+        "copyBPath": "blind-packet/specimens/specimen-42a5235eccad65db.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=error/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-6f12283a85511f0c",
+        "copyAPath": "blind-packet/specimens/specimen-6f12283a85511f0c.png",
+        "copyBSpecimenId": "specimen-46b0e8c7ebb3d169",
+        "copyBPath": "blind-packet/specimens/specimen-46b0e8c7ebb3d169.png",
+        "sha256": "3dab2b86b2264d4353b8098362de3053c4fc4fde508c006bbc9c9bdbbb250903",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-b519cc6e7ff1c4cb",
+        "copyAPath": "blind-packet/specimens/specimen-b519cc6e7ff1c4cb.png",
+        "copyBSpecimenId": "specimen-82fc753dc0ff1f5a",
+        "copyBPath": "blind-packet/specimens/specimen-82fc753dc0ff1f5a.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-6a8267705d4908b4",
+        "copyAPath": "blind-packet/specimens/specimen-6a8267705d4908b4.png",
+        "copyBSpecimenId": "specimen-71685891e56def4a",
+        "copyBPath": "blind-packet/specimens/specimen-71685891e56def4a.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-0df940e175962afa",
+        "copyAPath": "blind-packet/specimens/specimen-0df940e175962afa.png",
+        "copyBSpecimenId": "specimen-b51f9ca164a297a2",
+        "copyBPath": "blind-packet/specimens/specimen-b51f9ca164a297a2.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-57b6a921e65436da",
+        "copyAPath": "blind-packet/specimens/specimen-57b6a921e65436da.png",
+        "copyBSpecimenId": "specimen-0633ae7feb289558",
+        "copyBPath": "blind-packet/specimens/specimen-0633ae7feb289558.png",
+        "sha256": "666096b24f2bfd63fc297fa5729ae4260573dc8087329f5361fb09604e2a350d",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-e83cf4f2d534442d",
+        "copyAPath": "blind-packet/specimens/specimen-e83cf4f2d534442d.png",
+        "copyBSpecimenId": "specimen-eb28cedd73d6f533",
+        "copyBPath": "blind-packet/specimens/specimen-eb28cedd73d6f533.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-a004e8d4a0d19124",
+        "copyAPath": "blind-packet/specimens/specimen-a004e8d4a0d19124.png",
+        "copyBSpecimenId": "specimen-91e15ee369ce0ae6",
+        "copyBPath": "blind-packet/specimens/specimen-91e15ee369ce0ae6.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-d1c1ecf0931f2f11",
+        "copyAPath": "blind-packet/specimens/specimen-d1c1ecf0931f2f11.png",
+        "copyBSpecimenId": "specimen-64e928cb016f02eb",
+        "copyBPath": "blind-packet/specimens/specimen-64e928cb016f02eb.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=small/state=disabled/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-4617489def7ecf24",
+        "copyAPath": "blind-packet/specimens/specimen-4617489def7ecf24.png",
+        "copyBSpecimenId": "specimen-350c870d22946370",
+        "copyBPath": "blind-packet/specimens/specimen-350c870d22946370.png",
+        "sha256": "78c7f2ea59c23acaf8d53b062cae186d6c881f82fdbfe0760d5c5196ebb46ee8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-169a63ce572eae3e",
+        "copyAPath": "blind-packet/specimens/specimen-169a63ce572eae3e.png",
+        "copyBSpecimenId": "specimen-d487a0f1cf786403",
+        "copyBPath": "blind-packet/specimens/specimen-d487a0f1cf786403.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-ee21cd2c4b47cdfe",
+        "copyAPath": "blind-packet/specimens/specimen-ee21cd2c4b47cdfe.png",
+        "copyBSpecimenId": "specimen-831b40098eefe2c4",
+        "copyBPath": "blind-packet/specimens/specimen-831b40098eefe2c4.png",
+        "sha256": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-7f9033e44d8eac76",
+        "copyAPath": "blind-packet/specimens/specimen-7f9033e44d8eac76.png",
+        "copyBSpecimenId": "specimen-94c061289d658bab",
+        "copyBPath": "blind-packet/specimens/specimen-94c061289d658bab.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-fcc0788c75588a12",
+        "copyAPath": "blind-packet/specimens/specimen-fcc0788c75588a12.png",
+        "copyBSpecimenId": "specimen-11fc6daf1647429e",
+        "copyBPath": "blind-packet/specimens/specimen-11fc6daf1647429e.png",
+        "sha256": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-13cd94fc6e7bca84",
+        "copyAPath": "blind-packet/specimens/specimen-13cd94fc6e7bca84.png",
+        "copyBSpecimenId": "specimen-57eef8d42388f0c3",
+        "copyBPath": "blind-packet/specimens/specimen-57eef8d42388f0c3.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-3454bf77b19dcd75",
+        "copyAPath": "blind-packet/specimens/specimen-3454bf77b19dcd75.png",
+        "copyBSpecimenId": "specimen-c4613a03b2352bc6",
+        "copyBPath": "blind-packet/specimens/specimen-c4613a03b2352bc6.png",
+        "sha256": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-782ddd5935e572f7",
+        "copyAPath": "blind-packet/specimens/specimen-782ddd5935e572f7.png",
+        "copyBSpecimenId": "specimen-87cfe61dc95acf4a",
+        "copyBPath": "blind-packet/specimens/specimen-87cfe61dc95acf4a.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=default/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-6e3ebdc63e6202ed",
+        "copyAPath": "blind-packet/specimens/specimen-6e3ebdc63e6202ed.png",
+        "copyBSpecimenId": "specimen-ddeab637e3a5089d",
+        "copyBPath": "blind-packet/specimens/specimen-ddeab637e3a5089d.png",
+        "sha256": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-96c921243856c1a9",
+        "copyAPath": "blind-packet/specimens/specimen-96c921243856c1a9.png",
+        "copyBSpecimenId": "specimen-f08a8a48a9922259",
+        "copyBPath": "blind-packet/specimens/specimen-f08a8a48a9922259.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-a7a2b36ddd800df6",
+        "copyAPath": "blind-packet/specimens/specimen-a7a2b36ddd800df6.png",
+        "copyBSpecimenId": "specimen-61d2b0697b220ada",
+        "copyBPath": "blind-packet/specimens/specimen-61d2b0697b220ada.png",
+        "sha256": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-4016bdf133d9bb2b",
+        "copyAPath": "blind-packet/specimens/specimen-4016bdf133d9bb2b.png",
+        "copyBSpecimenId": "specimen-0099a8136d398077",
+        "copyBPath": "blind-packet/specimens/specimen-0099a8136d398077.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-86360c527d16d465",
+        "copyAPath": "blind-packet/specimens/specimen-86360c527d16d465.png",
+        "copyBSpecimenId": "specimen-79461096bb3891a5",
+        "copyBPath": "blind-packet/specimens/specimen-79461096bb3891a5.png",
+        "sha256": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-ba9dc5625e00c2df",
+        "copyAPath": "blind-packet/specimens/specimen-ba9dc5625e00c2df.png",
+        "copyBSpecimenId": "specimen-8c3a29ce72b80d70",
+        "copyBPath": "blind-packet/specimens/specimen-8c3a29ce72b80d70.png",
+        "sha256": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-1c46e972098c73c0",
+        "copyAPath": "blind-packet/specimens/specimen-1c46e972098c73c0.png",
+        "copyBSpecimenId": "specimen-4a44c3c82022ae11",
+        "copyBPath": "blind-packet/specimens/specimen-4a44c3c82022ae11.png",
+        "sha256": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-c7a5963cf3758351",
+        "copyAPath": "blind-packet/specimens/specimen-c7a5963cf3758351.png",
+        "copyBSpecimenId": "specimen-6a337baeb1a1e5f9",
+        "copyBPath": "blind-packet/specimens/specimen-6a337baeb1a1e5f9.png",
+        "sha256": "4c6452dbc776a20cd2eabeb83c47459aaa581b8ed6fbc03b58de24d769a11d40",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=focus-visible/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-2a84462220ebf14e",
+        "copyAPath": "blind-packet/specimens/specimen-2a84462220ebf14e.png",
+        "copyBSpecimenId": "specimen-76c2925e019d6491",
+        "copyBPath": "blind-packet/specimens/specimen-76c2925e019d6491.png",
+        "sha256": "137166f9e9150e2f81ad97307fb7390ca3fd8f710d8cc1694bf8cb45a96d27bb",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-11b2257e4cbbbaae",
+        "copyAPath": "blind-packet/specimens/specimen-11b2257e4cbbbaae.png",
+        "copyBSpecimenId": "specimen-e961ba0fe1eefb0b",
+        "copyBPath": "blind-packet/specimens/specimen-e961ba0fe1eefb0b.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-29afe774c842b632",
+        "copyAPath": "blind-packet/specimens/specimen-29afe774c842b632.png",
+        "copyBSpecimenId": "specimen-6ed14d688b44ad64",
+        "copyBPath": "blind-packet/specimens/specimen-6ed14d688b44ad64.png",
+        "sha256": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-bbfa424b2a78ae58",
+        "copyAPath": "blind-packet/specimens/specimen-bbfa424b2a78ae58.png",
+        "copyBSpecimenId": "specimen-5bb9a7af14152e8b",
+        "copyBPath": "blind-packet/specimens/specimen-5bb9a7af14152e8b.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-b7fcf18727b14858",
+        "copyAPath": "blind-packet/specimens/specimen-b7fcf18727b14858.png",
+        "copyBSpecimenId": "specimen-9c68ce1c6a697461",
+        "copyBPath": "blind-packet/specimens/specimen-9c68ce1c6a697461.png",
+        "sha256": "9b8891d7ac1d444dcd212ef76cab77d76250be7e3cc7e829beb50fb4b3efb6c1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-53ed829d12643ce6",
+        "copyAPath": "blind-packet/specimens/specimen-53ed829d12643ce6.png",
+        "copyBSpecimenId": "specimen-2b8536bf9be1f525",
+        "copyBPath": "blind-packet/specimens/specimen-2b8536bf9be1f525.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-0cdc6bc8b93d1db5",
+        "copyAPath": "blind-packet/specimens/specimen-0cdc6bc8b93d1db5.png",
+        "copyBSpecimenId": "specimen-676f1476334a9ff6",
+        "copyBPath": "blind-packet/specimens/specimen-676f1476334a9ff6.png",
+        "sha256": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-cfc2e7abeb6be5c4",
+        "copyAPath": "blind-packet/specimens/specimen-cfc2e7abeb6be5c4.png",
+        "copyBSpecimenId": "specimen-dc142f3a8eeb0554",
+        "copyBPath": "blind-packet/specimens/specimen-dc142f3a8eeb0554.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=error/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-0fdfec77c0411782",
+        "copyAPath": "blind-packet/specimens/specimen-0fdfec77c0411782.png",
+        "copyBSpecimenId": "specimen-db30b08e469e031b",
+        "copyBPath": "blind-packet/specimens/specimen-db30b08e469e031b.png",
+        "sha256": "c2739f33ad2225327bcf876366c9ca632a6b1fd33163602149292ed3613f6bc8",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=none",
+        "copyASpecimenId": "specimen-36b783cca5ca1c64",
+        "copyAPath": "blind-packet/specimens/specimen-36b783cca5ca1c64.png",
+        "copyBSpecimenId": "specimen-ee7e42b7e34aa5bc",
+        "copyBPath": "blind-packet/specimens/specimen-ee7e42b7e34aa5bc.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=false/adornments=both",
+        "copyASpecimenId": "specimen-61ae02e808c2654b",
+        "copyAPath": "blind-packet/specimens/specimen-61ae02e808c2654b.png",
+        "copyBSpecimenId": "specimen-bf986cb3fd27b75d",
+        "copyBPath": "blind-packet/specimens/specimen-bf986cb3fd27b75d.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=none",
+        "copyASpecimenId": "specimen-65bd15dbd2afb9ed",
+        "copyAPath": "blind-packet/specimens/specimen-65bd15dbd2afb9ed.png",
+        "copyBSpecimenId": "specimen-9f9ab908ec02711a",
+        "copyBPath": "blind-packet/specimens/specimen-9f9ab908ec02711a.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=placeholder/required=true/adornments=both",
+        "copyASpecimenId": "specimen-5dabed631bcfa487",
+        "copyAPath": "blind-packet/specimens/specimen-5dabed631bcfa487.png",
+        "copyBSpecimenId": "specimen-98562bdda5a2368c",
+        "copyBPath": "blind-packet/specimens/specimen-98562bdda5a2368c.png",
+        "sha256": "5048a8314c4e5d0649dac3a6429b3f671d72a2819593c9aafae9d6bfc92a6fe1",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=none",
+        "copyASpecimenId": "specimen-cdd94617817723bd",
+        "copyAPath": "blind-packet/specimens/specimen-cdd94617817723bd.png",
+        "copyBSpecimenId": "specimen-6573b1c22f9d25e9",
+        "copyBPath": "blind-packet/specimens/specimen-6573b1c22f9d25e9.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=false/adornments=both",
+        "copyASpecimenId": "specimen-8b341654324121f0",
+        "copyAPath": "blind-packet/specimens/specimen-8b341654324121f0.png",
+        "copyBSpecimenId": "specimen-44809a9e4e78cf93",
+        "copyBPath": "blind-packet/specimens/specimen-44809a9e4e78cf93.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=none",
+        "copyASpecimenId": "specimen-5d2c6cbdc4fbe1e0",
+        "copyAPath": "blind-packet/specimens/specimen-5d2c6cbdc4fbe1e0.png",
+        "copyBSpecimenId": "specimen-5972156317d44abc",
+        "copyBPath": "blind-packet/specimens/specimen-5972156317d44abc.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      },
+      {
+        "cellKey": "polaris/size=medium/state=disabled/content=value/required=true/adornments=both",
+        "copyASpecimenId": "specimen-683a3c96126c6952",
+        "copyAPath": "blind-packet/specimens/specimen-683a3c96126c6952.png",
+        "copyBSpecimenId": "specimen-80f3ddc96ed07d07",
+        "copyBPath": "blind-packet/specimens/specimen-80f3ddc96ed07d07.png",
+        "sha256": "e53a94e8dabe3b2a7800cc843a3edfa11fb31713d897af23ad2c0fb1fe4746ed",
+        "byteIdentical": true
+      }
+    ],
+    "nonAdjacentSameCellPresentations": true,
+    "packetContainsIdentityOrDuplicateMetadata": false
+  },
+  "commitment": {
+    "protocol": "recipe/evidence/input-field-comparison-calibrated/calibration-protocol.json",
+    "protocolHash": "51bcdd9f605edabf4eb3df3fb87d3f2323fceb52f24cf1dcdb8b775a077f8ce5",
+    "commitmentHash": "6375461cfa138a76ebd041cab23309a1044350ce5036c14a6d5fc74df7e9c246",
+    "rubricHash": "5d2210e8e8e07a19a9e99f92bf59693707c22ff10d1fd5cf38ddbacf8910976e",
+    "packet": "recipe/evidence/input-field-comparison-calibrated/blind-packet/packet.json",
+    "packetHash": "f6f245d78c3ef9e8fe6b9fd7e957f660bf69b19f7776f290cf948610f2949dd7",
+    "randomizedBatchHash": "35fe7cf94c2379a419a77cc85c5dc4f3290a4bdc038de6c84dc0179639c0aae8",
+    "sealedAnswerKey": "recipe/evidence/input-field-comparison-calibrated/sealed-answer-key.json",
+    "sealedAnswerKeyHash": "156a47b788793e4d126a2d538c2df33b4aeedc79eab5456c2cc3763ab142f843",
+    "lockedBeforeGrading": true,
+    "recognisabilityVerdictsAuthoredByBuilder": false
+  },
+  "predeclaredAcceptance": {
+    "allThreeRatersValidAndComplete": true,
+    "hiddenDuplicateAgreementPerRaterMinimum": 0.95,
+    "majorityConsensusDuplicateAgreementMinimum": 127,
+    "majorityConsensusDuplicateAgreementDenominator": 128,
+    "duplicateMismatchBlocksAffectedCell": true,
+    "everyPairwiseAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "maximumIdenticalCopyPassRateDifference": 0.05,
+    "majorityFailNeedsConcreteDefectsFromRaters": 2,
+    "failureConsequence": "If any acceptance condition fails, recognisability remains unusable, architecture progression remains blocked, and live Input/Field work stays blocked."
+  },
+  "progressArithmetic": {
+    "availableOnlyAfterReliabilityPasses": true,
+    "legacyCopiesCollapseToOneConsensusPerCell": true,
+    "legacyMayNeverBeDoubleWeighted": true,
+    "exactComparisonCells": 128,
+    "recipeConsensusPerCell": "two-of-three majority",
+    "legacyConsensusPerCell": "one collapsed result only when copy A and copy B majority consensus are identical",
+    "affectedDuplicateMismatchCell": "blocked",
+    "historicalResultsRemainHistory": true,
+    "calibratedConsensusSupersedesHistoryForProgressionOnlyIfThresholdsPass": true
+  },
+  "independentRaters": [
+    {
+      "rater": "BATCH-CAL-A",
+      "status": "pending",
+      "allowedOutputPath": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-a.json",
+      "prompt": "Act as independent blind rater BATCH-CAL-A. Open only recipe/evidence/input-field-comparison-calibrated/blind-packet/packet.json and image files beneath recipe/evidence/input-field-comparison-calibrated/blind-packet; do not inspect parent directories, source code, prior grades, or recipe/evidence/input-field-comparison-calibrated/sealed-answer-key.json. Grade all 384 tasks independently in exact packet order using the packet's deterministic five-category rubric and pass rule. Do not compare tasks, search for repeated images, infer identities, rank outputs, omit tasks, or alter packet artifacts. Write only recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-a.json using the declared grade schema, packet hash, randomized batch hash, calibration commitment hash, rubric hash, exact task/reference/specimen IDs, and one complete grade per task. Do not adjudicate or unseal any key."
+    },
+    {
+      "rater": "BATCH-CAL-B",
+      "status": "pending",
+      "allowedOutputPath": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-b.json",
+      "prompt": "Act as independent blind rater BATCH-CAL-B. Open only recipe/evidence/input-field-comparison-calibrated/blind-packet/packet.json and image files beneath recipe/evidence/input-field-comparison-calibrated/blind-packet; do not inspect parent directories, source code, prior grades, or recipe/evidence/input-field-comparison-calibrated/sealed-answer-key.json. Grade all 384 tasks independently in exact packet order using the packet's deterministic five-category rubric and pass rule. Do not compare tasks, search for repeated images, infer identities, rank outputs, omit tasks, or alter packet artifacts. Write only recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-b.json using the declared grade schema, packet hash, randomized batch hash, calibration commitment hash, rubric hash, exact task/reference/specimen IDs, and one complete grade per task. Do not adjudicate or unseal any key."
+    },
+    {
+      "rater": "BATCH-CAL-C",
+      "status": "pending",
+      "allowedOutputPath": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-c.json",
+      "prompt": "Act as independent blind rater BATCH-CAL-C. Open only recipe/evidence/input-field-comparison-calibrated/blind-packet/packet.json and image files beneath recipe/evidence/input-field-comparison-calibrated/blind-packet; do not inspect parent directories, source code, prior grades, or recipe/evidence/input-field-comparison-calibrated/sealed-answer-key.json. Grade all 384 tasks independently in exact packet order using the packet's deterministic five-category rubric and pass rule. Do not compare tasks, search for repeated images, infer identities, rank outputs, omit tasks, or alter packet artifacts. Write only recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-c.json using the declared grade schema, packet hash, randomized batch hash, calibration commitment hash, rubric hash, exact task/reference/specimen IDs, and one complete grade per task. Do not adjudicate or unseal any key."
+    }
+  ]
+}

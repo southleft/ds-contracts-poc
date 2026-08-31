@@ -1,0 +1,183 @@
+{
+  "artifactVersion": "input-live-v67-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "81a75ebc42a09cb9ed84f1d4cbc0aa0e11427eb3",
+  "codeCommit": "81a75ebc42a09cb9ed84f1d4cbc0aa0e11427eb3",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "108:226296",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436209,
+    "sha256": "6d9c254157fce04fb3bf7a4dbaa06d6a653a4dc311e8fcac0c8f7e64ef09d881",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v63FailureCleared": {
+    "setLayoutModeNotTheRefusalLocus": true
+  },
+  "v64FailureCleared": {
+    "setLayoutPaddingNotTheRefusalLocus": true
+  },
+  "v65FailureCleared": {
+    "setLayoutWidthModeNotTheRefusalLocus": true
+  },
+  "v66FailureCleared": {
+    "setStrokesNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "extractScene": {
+      "mui": { "FILL": 0, "FIXED": 24, "HUG": 104, "total": 128 },
+      "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 }
+    },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedSetLayoutMode": {
+    "extractScene": {
+      "mui": "HORIZONTAL",
+      "polaris": "HORIZONTAL"
+    },
+    "hostIr": {
+      "mui": "horizontal",
+      "polaris": "horizontal"
+    },
+    "compileEmits": "horizontal",
+    "compileOmits": false,
+    "v64TeachingHeld": true
+  },
+  "observedSetLayoutPadding": {
+    "extractScene": {
+      "mui": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 },
+      "polaris": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 }
+    },
+    "hostIr": {
+      "mui": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+      "polaris": { "top": 32, "right": 32, "bottom": 32, "left": 32 }
+    },
+    "compileEmits": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+    "compileOmits": false,
+    "v65TeachingHeld": true
+  },
+  "observedSetLayoutWidth": {
+    "extractScene": {
+      "mui": { "layoutSizingHorizontal": "HUG", "width": 31656 },
+      "polaris": { "layoutSizingHorizontal": "HUG", "width": 33050 }
+    },
+    "hostIr": {
+      "mui": { "mode": "hug" },
+      "polaris": { "mode": "hug" }
+    },
+    "compileEmits": { "mode": "hug" },
+    "compileOmits": false,
+    "payloadIr": { "mode": "hug" },
+    "writerProgramLayoutSizingHorizontalAssignments": 1,
+    "v66TeachingHeld": true
+  },
+  "observedSetStrokes": {
+    "extractScene": {
+      "mui": { "present": true, "value": [] },
+      "polaris": { "present": true, "value": [] }
+    },
+    "hostIr": {
+      "mui": { "present": false },
+      "polaris": { "present": false }
+    },
+    "compileOmits": true,
+    "v67TeachingHeld": true
+  },
+  "observedLabelRowBindings": {
+    "muiFirstChildIsSurfaceNotLabelRow": true,
+    "polaris": {
+      "host": [
+        "layout.itemSpacing",
+        "layout.padding.left",
+        "layout.padding.top"
+      ],
+      "compile": [
+        "layout.itemSpacing",
+        "layout.padding.top",
+        "layout.padding.left"
+      ],
+      "hostBindingsLength": 3,
+      "compileBindingsLength": 3
+    }
+  },
+  "observedSurfaceBindingsMui": {
+    "hostBindingsLength": 12,
+    "compileBindingsLength": 12,
+    "fieldsMatchCompileOrder": true
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v67.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[0].children[0].bindings[1].field; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Scene-readback-v67 omitted set strokes. Host did not refuse $.strokes. Extract scene strokes is [] both; host IR omits strokes both; compile omits strokes both. V67 teaching held. Extract layoutSizingHorizontal remains HUG both (MUI hug width 31656, Polar hug width 33050). Host IR layout.width is {mode:hug} / {mode:hug}. Compile emits hug. V66 teaching held. Pixel widths remain library-specific hug extents; they were not taught as FIXED and were not compile-carried. Host then refused unsupported structural edit at $.children[0].children[0].bindings[1].field. $ is the extracted component-set root, role input-field/set. children[0] is the first variant. children[0].children[0] is MUI input-field/surface (12 bindings match compile field order) and Polar input-field/label-row (3 bindings, same fields, different order). Polar host bindings[1] is layout.padding.left; compile bindings[1] is layout.padding.top. Polar host order is itemSpacing, padding.left, padding.top. Compile order is itemSpacing, padding.top, padding.left. This is a binding-order gate, not a missing or invented binding. Do not invent a binding. Do not compile-carry Polar encounter order. Do not teach FIXED. Do not invent a stroke. Do not omit layout.width.mode. Do not change set layout.mode back to vertical. Do not restart v67 attempt 2 as-is. Do not patch hashed v16, v66, or v67 writer bytes. Next prepare is a scene-readback overlay that orders label-row bindings to compile fields (one teaching). Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436209 bytes, sha256 6d9c254157fce04fb3bf7a4dbaa06d6a653a4dc311e8fcac0c8f7e64ef09d881). Content-width census is MUI 128/128 FILL and Polar 128/128 FILL. Extract content-height is MUI 24 FIXED / 104 HUG and Polar 128 HUG. New page 108:226296 (not 108:223567, not 108:220838). Cleanup accepted; remainingOwnedNodes 0.",
+    "inputFieldRecipeInV67AntecedentHashSet": false,
+    "writerInV67AntecedentHashSet": true,
+    "restoreInV67AntecedentHashSet": true,
+    "extractRuntimeInV67AntecedentHashSet": true,
+    "sceneReadbackInV67AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "108:226296",
+    "removedPageNodeId": "108:226296"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterMinted": true,
+  "v66SceneReadbackUnchanged": true,
+  "v66AuthorizationReusable": false,
+  "v66AntecedentBytesUnchanged": true,
+  "v65SceneReadbackUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV67Attempt2WithoutLabelRowBindingOrderForbidden": true
+}

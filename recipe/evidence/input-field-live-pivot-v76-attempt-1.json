@@ -1,0 +1,212 @@
+{
+  "artifactVersion": "input-live-v76-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "95621752b504ccc1663344d2b527f800996b95c6",
+  "codeCommit": "95621752b504ccc1663344d2b527f800996b95c6",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "111:257814",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "9653ecd2e5992a76b1e6f2d77ded4f35c1f31bcc5c9c3818c691600ba73181ac",
+    "payloadSha256": "07a5124f3b38053b5e39ecc2b79640d1e5097a54e7b52de6d5cce1322e1f12de"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436209,
+    "sha256": "0fdcdacb7e8fef97242668187203b123865331b901ffbee803c45b29f6b0f00b",
+    "hostNormalizeAccount": true,
+    "payloadKeys": ["pageId", "roots", "variableTable"],
+    "pageId": "111:257814",
+    "marker": null
+  },
+  "v74FailureCleared": {
+    "taughtProbeFirstSegmentRole": true,
+    "rolesExact": 256,
+    "stateSemanticsExact": 256,
+    "stateSemanticsPassedBoth": true
+  },
+  "v75PolarTeaching": {
+    "taughtProbePolarReflowAgainstContentText": true,
+    "polarisReflowPassed": true,
+    "polarisContentFillPassed": true,
+    "polarisContentRow": 0,
+    "polarisContentTextFill": 128,
+    "polarisContentTextFixed": 0,
+    "inventedPolarContentRow": false
+  },
+  "v76WriterTeaching": {
+    "taughtWriterFirstSegmentBind": true,
+    "textPropertiesRestoredMui": true,
+    "textPropertiesRestoredPolaris": true,
+    "v17WriterProgramUnchanged": true,
+    "v17WriterPayloadUnchanged": true,
+    "v18WriterMinted": true
+  },
+  "observedIndependentRootAccounting": {
+    "mui": {
+      "ok": true,
+      "denominator": 23074,
+      "matched": 22811,
+      "codeOnly": 262,
+      "refused": 1,
+      "silent": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "extra": 0
+    },
+    "polaris": {
+      "ok": true,
+      "denominator": 20922,
+      "matched": 20915,
+      "codeOnly": 6,
+      "refused": 1,
+      "silent": 0,
+      "mismatch": 0,
+      "missing": 0,
+      "extra": 0
+    },
+    "fixedPointStableBoth": true,
+    "recipeRefusalDidNotFire": true,
+    "hostNormalizeAccountJournaled": true,
+    "probeIssuedBecauseAccountingPassed": true
+  },
+  "probe": {
+    "issued": true,
+    "operatorSuccess": true,
+    "accepted": false,
+    "rawResponseBytes": 69352,
+    "sha256": "db87e783376bc04e8164fa5218d211476b81b03558cc3e624c9ff36d8c1e9c2a",
+    "pageId": "111:257814",
+    "sources": 2,
+    "cells": 256,
+    "sourceFailures": {
+      "mui": {
+        "contentFillPassed": false
+      },
+      "polaris": {}
+    },
+    "sourcePasses": {
+      "mui": {
+        "reflowPassed": true,
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "adornmentPayloadPassed": true,
+        "stateSemanticsPassed": true,
+        "switchingRestored": true,
+        "textPropertiesRestored": true,
+        "exactSceneRestoration": true,
+        "variants": 128,
+        "visitedVariants": 128
+      },
+      "polaris": {
+        "reflowPassed": true,
+        "contentFillPassed": true,
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "adornmentPayloadPassed": true,
+        "stateSemanticsPassed": true,
+        "switchingRestored": true,
+        "textPropertiesRestored": true,
+        "exactSceneRestoration": true,
+        "variants": 128,
+        "visitedVariants": 128
+      }
+    },
+    "cellFailures": {
+      "rolesExactFalse": 0,
+      "stateSemanticsExactFalse": 0,
+      "adornmentPayloadExactFalse": 0,
+      "noFakeLayoutFalse": 0,
+      "visibleAreaLossGt0_05": 104,
+      "overlapPixelsGt2": 12,
+      "visibleAreaLossMax": 0.5294117647058824,
+      "overlapPixelsMax": 20,
+      "visibleAreaLossBySource": {
+        "muiOver05": 104,
+        "polarisOver05": 0
+      },
+      "overlapBySource": {
+        "muiOver2": 12,
+        "polarisOver2": 0
+      }
+    },
+    "extractRoles": {
+      "muiContentRow": 128,
+      "polarisContentRow": 0,
+      "muiContentTextFill": 128,
+      "polarisContentTextFill": 128,
+      "muiContentTextFixed": 0,
+      "polarisContentTextFixed": 0,
+      "muiPlaceholderHiddenFill": 24,
+      "muiPlaceholderVisibleFill": 40,
+      "muiValueVisibleFill": 64,
+      "polarisPlaceholderVisibleFill": 64,
+      "polarisValueVisibleFill": 64,
+      "muiLabel": 128,
+      "polarisLabel": 128
+    },
+    "locus": "recipe/input-field-live-v76-contract.ts:584"
+  },
+  "failure": {
+    "phase": "probe-usability-restoration",
+    "locus": "recipe/input-field-live-v76-contract.ts:584",
+    "messages": [
+      "Input live v12 probe/usability/restoration failed"
+    ],
+    "cause": "V76 writer first-segment Label bind held: textPropertiesRestored true both (MUI and Polar). First-segment role still held: 256/256 rolesExact and stateSemanticsExact; both sources stateSemanticsPassed. Polar V75 teaching still held: polaris reflowPassed=true and contentFillPassed=true; Polar content-row still 0 (not invented); Polar content texts FILL 128 / FIXED 0. Independent root accounting silent-zero both (MUI matched 22811 silent 0; Polar matched 20915 silent 0). Probe operator succeeded on new page 111:257814 (not 111:252766), then host accept refused validateInputLiveV76ProbePayload. Remaining measured classes: (1) MUI contentFillPassed still false — extract MUI content texts FILL 128/128 (0 FIXED); probe samples defaultVariant only and checks live layoutSizingHorizontal===FILL without extract reveal; MUI default placeholder is hidden FILL (24 restore-hidden); Polar default placeholder is visible FILL. Do not invent plugin layoutSizingHorizontal. Do not invent a Polar content-row. Do not teach writer FIXED. (2) MUI visibleAreaLoss>0.05 on 104/128 (max 0.529; 52 small + 52 medium) and overlapPixels>2 on 12/128 (max 20, all mui/*/placeholder/*/trailing except focus-visible). Writer accepted 2317 nodes (v18 program 9653ecd2…81ac / payload 07a5124f…12de). Restore accepted (restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0). Extract issued (8436209 bytes, sha256 0fdcdacb7e8fef97242668187203b123865331b901ffbee803c45b29f6b0f00b). Hashed v16/v17 writer bytes unchanged. One teaching cannot clear the remaining conjunction. Do not invent 9/30/0. Do not restart V76 attempt 2 as-is. Do not claim v1 complete. Cleanup accepted after probe refuse; remainingOwnedNodes 0; requested and removed page 111:257814. Mint did not stay. Protocol requestOrder still includes cleanup after captures, so a green probe would also have deleted the mint. Cleanup-on-failure-only remains a named later teaching, not bundled."
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "requestedPageNodeId": "111:257814",
+    "removedPageNodeId": "111:257814",
+    "complete": true
+  },
+  "captures": 0,
+  "figmaWrites": 5,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "mintStayed": false,
+  "mintCleaned": true,
+  "v16AntecedentBytesUnchanged": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterProgramUnchanged": true,
+  "v17WriterPayloadUnchanged": true,
+  "v18WriterMinted": true,
+  "v75SceneReadbackUnchanged": true,
+  "taughtProbeFirstSegmentRoleHeld": true,
+  "taughtProbePolarReflowAgainstContentTextHeld": true,
+  "taughtWriterFirstSegmentBindHeld": true,
+  "muiContentFillStillFalseAfterHiddenDefaultSample": true,
+  "unnamedSourcePxCarriedTeachingHeld": true,
+  "nextAttempt": 2,
+  "restartAsV76Attempt2WithoutRemainingProbeDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "inventPolarContentRowForbidden": true,
+  "doNotClaimV1Complete": true
+}

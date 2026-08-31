@@ -1,0 +1,46 @@
+{
+  "artifactVersion": "input-live-v10-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "68b8366013aaf531b9c4f519f043e4cdd1b4e3a2",
+  "codeCommit": "68b8366013aaf531b9c4f519f043e4cdd1b4e3a2",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "extract": {
+    "operatorSuccess": true,
+    "rawResponseBytes": 8364327,
+    "hostNormalizeAccount": false
+  },
+  "v9FailureCleared": {
+    "hashedV3VerifierCalledSceneReadbackTs": true
+  },
+  "observedSizeAxisValues": ["medium", "small"],
+  "expectedSizeAxisValues": ["small", "medium"],
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:1188 via recipe/input-field-live-v3-verifier-v10.ts:442",
+    "messages": [
+      "input-field@1: axis Size has unsupported values; expected small, medium"
+    ],
+    "inputFieldRecipeInV10AntecedentHashSet": false
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v10AntecedentBytesUnchanged": true,
+  "v10AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV10Attempt2WithoutAxisOrderTeachingForbidden": true
+}

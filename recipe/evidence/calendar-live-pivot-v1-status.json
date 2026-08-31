@@ -1,0 +1,44 @@
+{
+  "artifactVersion": "calendar-live-v1-status-v1",
+  "status": "attempt 1 failed closed at writer CALENDAR-TEXT-GEOMETRY:calendar/day/label; hug label width collapsed to 0 inside an unsized day component; writer not accepted; cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "2b2dca528ca046310e77488b638fd3adb1be79c5",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v1/antecedent-index.json",
+    "indexSha256": "4c1bd770d7d095d2ebece1822c3483b89b8b70c6904f52980bb2ace04efe64df",
+    "hashSetSha256": "697a0619e86d77bac4cc18e7bd8dd2d726c7858ecc51946303bea80e1157b1cc"
+  },
+  "authorization": {
+    "commit": "ca7b8df4e55ddeb44713920f2cb08a6ca27fbbe5",
+    "path": "recipe/evidence/calendar-live-pivot-v1/capture-authorization.json",
+    "sha256": "fe1a0f050c42c15a397f5e8e7e1bff1dcdc47f4ae0362bbd1650f345d0a50a52",
+    "signingPublicKeySpkiSha256": "4123297d5fc896e6b9cfce77c811b4e6cc06d04838bfcedbc779fcb8dc97112e"
+  },
+  "attempt1": {
+    "pageId": "173:49763",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "CALENDAR-TEXT-GEOMETRY:calendar/day/label",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "apply the FIXED day-cell box before minting the hug label, and keep hug-text intrinsic size before a 0-width parent can collapse it",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

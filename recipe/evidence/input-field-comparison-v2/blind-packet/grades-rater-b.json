@@ -1,0 +1,2079 @@
+{
+  "protocol": {
+    "version": "input-field-paired-source-v2",
+    "rubricHash": "ec7361423018edabd7df185c29ae518f0642e339cf84b1caaf80d0c8501a2e8b",
+    "environmentHash": "bb49d731fcb8823a1866a2a615b59ea731e95c6358a1c768cb614b7ed3d97c22",
+    "crop": "painted-union+24-css-px-white-margin",
+    "scale": 2,
+    "browser": "149.0.7827.55 (playwright chromium-1228)",
+    "fontsHash": "6fd1317c7d1f2028a8c0577d5168a48ecc8d91f7354538e11feeb9b2a97bc139",
+    "passThreshold": "independent recognisable=true for each specimen against its paired original-source reference"
+  },
+  "randomizedBatchHash": "c6885a462d0821827b76eedde273db640e7939f48ee44904fdfcf9484d3d5868",
+  "grades": [
+    {
+      "referenceId": "cell-0028e28e0ba5",
+      "specimenId": "specimen-c31ecc16f49e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-0028e28e0ba5",
+      "specimenId": "specimen-d232ced481de",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-0098da057298",
+      "specimenId": "specimen-00f6f742e161",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-0098da057298",
+      "specimenId": "specimen-ac9adaf942e1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-00e67b27304b",
+      "specimenId": "specimen-2c0bb34f8cd1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-00e67b27304b",
+      "specimenId": "specimen-5728aae06018",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-02172f6669ad",
+      "specimenId": "specimen-76dcb74f454c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-02172f6669ad",
+      "specimenId": "specimen-e1daad73fab5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-06a8d8cab039",
+      "specimenId": "specimen-3f3b3bc8437c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-06a8d8cab039",
+      "specimenId": "specimen-f9bb2ec10c76",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-06afcc516d92",
+      "specimenId": "specimen-3869fe139116",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-06afcc516d92",
+      "specimenId": "specimen-6de6b5313721",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-0840718f4032",
+      "specimenId": "specimen-c01e8ea97e2b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-0840718f4032",
+      "specimenId": "specimen-c3fc51815e3d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-089d58f2902b",
+      "specimenId": "specimen-3b27d00415f3",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-089d58f2902b",
+      "specimenId": "specimen-3d4b55eeba0a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-0c5e8ec8ea13",
+      "specimenId": "specimen-012f2cca6cce",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-0c5e8ec8ea13",
+      "specimenId": "specimen-9602548f1ce7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-0c8378dc6daa",
+      "specimenId": "specimen-75e46ec156fd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-0c8378dc6daa",
+      "specimenId": "specimen-d00d3ed5f016",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-0e63f49ca830",
+      "specimenId": "specimen-9bf99e5ea754",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-0e63f49ca830",
+      "specimenId": "specimen-b2764246cab7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-0f5d8554e52c",
+      "specimenId": "specimen-0133ac01e553",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-0f5d8554e52c",
+      "specimenId": "specimen-c181c3b8e948",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-131dac51d7a7",
+      "specimenId": "specimen-742dc91c52b7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-131dac51d7a7",
+      "specimenId": "specimen-cd38dd6ac28b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-15b7f3f554b0",
+      "specimenId": "specimen-0adbd51fe15c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-15b7f3f554b0",
+      "specimenId": "specimen-f35fef452fe2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-167ebcb83492",
+      "specimenId": "specimen-4489f8734045",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-167ebcb83492",
+      "specimenId": "specimen-fd4ab316b727",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-17279523dca2",
+      "specimenId": "specimen-0c76e0526c5f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-17279523dca2",
+      "specimenId": "specimen-70c078d63086",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-19987db4fb25",
+      "specimenId": "specimen-0ce72ff7b65b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-19987db4fb25",
+      "specimenId": "specimen-c76fa093c9bb",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-1c00099e3bb4",
+      "specimenId": "specimen-ab2655ad15c2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-1c00099e3bb4",
+      "specimenId": "specimen-b462714630be",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-1e1684dede14",
+      "specimenId": "specimen-08fbb8dad75e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Disabled/error presentation is not reproduced: required mark, error/helper treatment, and surface fill differ substantially."
+      ]
+    },
+    {
+      "referenceId": "cell-1e1684dede14",
+      "specimenId": "specimen-5f5f42cf5092",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error presentation omits the reference error icon and substantially changes the state treatment."
+      ]
+    },
+    {
+      "referenceId": "cell-1ea97a23d474",
+      "specimenId": "specimen-21706710836a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-1ea97a23d474",
+      "specimenId": "specimen-57c0ced5b7ad",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-2298c4a8539a",
+      "specimenId": "specimen-0f11b36f00e1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-2298c4a8539a",
+      "specimenId": "specimen-26f111e5288f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-23db6ce2e857",
+      "specimenId": "specimen-63064b993769",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-23db6ce2e857",
+      "specimenId": "specimen-e2f08137d4a8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-25ba8bad357f",
+      "specimenId": "specimen-c9ea8f1693e7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus treatment and outer field geometry are substantially different from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-25ba8bad357f",
+      "specimenId": "specimen-d9d85f5f8393",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus treatment and outer field geometry are substantially different from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-260f124a14f1",
+      "specimenId": "specimen-47e06e1ff5f3",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus treatment and outer field geometry are substantially different from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-260f124a14f1",
+      "specimenId": "specimen-f7d50bdb10d5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Focus treatment and outer field geometry are substantially different from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-260f8e3b1ec4",
+      "specimenId": "specimen-d33d970b4a19",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-260f8e3b1ec4",
+      "specimenId": "specimen-fc610e5adb57",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-2a986a7e22d9",
+      "specimenId": "specimen-4cb51898e796",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-2a986a7e22d9",
+      "specimenId": "specimen-7e1b17db3378",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-2af96de05d10",
+      "specimenId": "specimen-11ed651c3235",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Required error state is missing its error message and associated state treatment."
+      ]
+    },
+    {
+      "referenceId": "cell-2af96de05d10",
+      "specimenId": "specimen-f3b84a195b5f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error presentation omits the reference error icon and changes the field-state styling."
+      ]
+    },
+    {
+      "referenceId": "cell-2c52871b1fc9",
+      "specimenId": "specimen-060b19ac371d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-2c52871b1fc9",
+      "specimenId": "specimen-1c1bd4f30408",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-2e6cd0eec7f6",
+      "specimenId": "specimen-978dab7be86b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-2e6cd0eec7f6",
+      "specimenId": "specimen-e4f92adad3bf",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-2f427b9fe726",
+      "specimenId": "specimen-7cfaa83aceaa",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-2f427b9fe726",
+      "specimenId": "specimen-b36074c8e3d1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-332594beb4d1",
+      "specimenId": "specimen-9922138fb795",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error helper omits the leading error icon and its alignment differs from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-332594beb4d1",
+      "specimenId": "specimen-bec0fe820333",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Required error state and helper are absent, and the field content is visibly clipped."
+      ]
+    },
+    {
+      "referenceId": "cell-338c338b6a82",
+      "specimenId": "specimen-56d3b996ed52",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-338c338b6a82",
+      "specimenId": "specimen-eb6eda48db1a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-34f85d158ea8",
+      "specimenId": "specimen-26ce9a8c127b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-34f85d158ea8",
+      "specimenId": "specimen-d920a4fc7ede",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-35ea29e468db",
+      "specimenId": "specimen-7c2388e1104c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-35ea29e468db",
+      "specimenId": "specimen-fdec01292035",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-363c791f5e41",
+      "specimenId": "specimen-5f5a42ce93f6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-363c791f5e41",
+      "specimenId": "specimen-909b291b8045",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-39889e953a05",
+      "specimenId": "specimen-542a1883367d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-39889e953a05",
+      "specimenId": "specimen-677c6a9b1d8d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-3a254ea4760d",
+      "specimenId": "specimen-2cfe2011c992",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error helper omits the leading error icon and its alignment differs from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-3a254ea4760d",
+      "specimenId": "specimen-f61b758faa9a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error border, error fill, and error helper are absent."
+      ]
+    },
+    {
+      "referenceId": "cell-3da0155cd252",
+      "specimenId": "specimen-341c62e7b6fc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-3da0155cd252",
+      "specimenId": "specimen-50c5ce254fef",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4067e6104b16",
+      "specimenId": "specimen-0e34fd31893a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4067e6104b16",
+      "specimenId": "specimen-6a8a9534ac6d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-40ffa45151ac",
+      "specimenId": "specimen-0f318fd4630a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-40ffa45151ac",
+      "specimenId": "specimen-ccdcd54f7670",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-44e630d862f9",
+      "specimenId": "specimen-84a0ebd0e044",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Field content is wrong: an extra value appears beside the label, changing the intended empty/error presentation."
+      ]
+    },
+    {
+      "referenceId": "cell-44e630d862f9",
+      "specimenId": "specimen-e1859e138edb",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Field structure and content are from a different adorned variant, with the label and helper treatment mismatched."
+      ]
+    },
+    {
+      "referenceId": "cell-44ff2835117c",
+      "specimenId": "specimen-4184d68371c2",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Required mark, error border/fill, error helper, and error icon are absent."
+      ]
+    },
+    {
+      "referenceId": "cell-44ff2835117c",
+      "specimenId": "specimen-dac2b4ccc218",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Error helper omits the leading error icon and its alignment differs from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-452fc4da7882",
+      "specimenId": "specimen-b0b8f9108e93",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-452fc4da7882",
+      "specimenId": "specimen-ca54a31e929b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4640a6cc9f39",
+      "specimenId": "specimen-5a266717b059",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4640a6cc9f39",
+      "specimenId": "specimen-753e75f86f61",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-4792d00c0191",
+      "specimenId": "specimen-39924a256ff8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-4792d00c0191",
+      "specimenId": "specimen-3d00df435a5f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4b67772843f6",
+      "specimenId": "specimen-3a6960af82d1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4b67772843f6",
+      "specimenId": "specimen-ae0db0b70380",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-4b9ee7aba10c",
+      "specimenId": "specimen-5aacd60d696a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-4b9ee7aba10c",
+      "specimenId": "specimen-625d2bd13360",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4f806a0c8461",
+      "specimenId": "specimen-6d3ab1672243",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-4f806a0c8461",
+      "specimenId": "specimen-804296582244",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-4ffb01750d13",
+      "specimenId": "specimen-53abe8389a0a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-4ffb01750d13",
+      "specimenId": "specimen-59eb3bbfb9d1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-5051f1e19fec",
+      "specimenId": "specimen-5ad9df384c8c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-5051f1e19fec",
+      "specimenId": "specimen-e96e16376c57",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-5563d3ccdcee",
+      "specimenId": "specimen-7f431af474b6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-5563d3ccdcee",
+      "specimenId": "specimen-98d7dfeabcc5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-56223037a834",
+      "specimenId": "specimen-8ad2177ada8b",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-56223037a834",
+      "specimenId": "specimen-f0c41ed38e0d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-57da9eb1cad5",
+      "specimenId": "specimen-a8088ddddc25",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-57da9eb1cad5",
+      "specimenId": "specimen-d26d40603587",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-5846ac58d0de",
+      "specimenId": "specimen-ba2f8f6bc13d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-5846ac58d0de",
+      "specimenId": "specimen-d6bf82764af2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-5a21e82ab9ec",
+      "specimenId": "specimen-3edf9ffaad6d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-5a21e82ab9ec",
+      "specimenId": "specimen-c76cfee717e4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-63edb3797fcd",
+      "specimenId": "specimen-bbe1df551b7f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-63edb3797fcd",
+      "specimenId": "specimen-eddbaa67a06a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-6451b8688961",
+      "specimenId": "specimen-3e0e594a5408",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-6451b8688961",
+      "specimenId": "specimen-9fc82d17a863",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-690303f921bc",
+      "specimenId": "specimen-35eeca6b8b25",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-690303f921bc",
+      "specimenId": "specimen-b16c0ef7d0e0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-69b8281d81cd",
+      "specimenId": "specimen-2d7de61897ba",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-69b8281d81cd",
+      "specimenId": "specimen-fa95395a383c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-6cc3fadc5262",
+      "specimenId": "specimen-41d8c94d3ead",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-6cc3fadc5262",
+      "specimenId": "specimen-7aaf87154bc2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-6e2a2e02bfd0",
+      "specimenId": "specimen-90da064f9b32",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-6e2a2e02bfd0",
+      "specimenId": "specimen-d20c2ee43144",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-6f480ce680a5",
+      "specimenId": "specimen-20f8534deaa4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-6f480ce680a5",
+      "specimenId": "specimen-edc2ae3b6452",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-74a39f253b80",
+      "specimenId": "specimen-45a17649b658",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-74a39f253b80",
+      "specimenId": "specimen-ed369a86bf24",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-76a2bede9d9e",
+      "specimenId": "specimen-80ee6364fb40",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-76a2bede9d9e",
+      "specimenId": "specimen-9162861d408a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-77dfbb02283e",
+      "specimenId": "specimen-134345e963fd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-77dfbb02283e",
+      "specimenId": "specimen-cfe1a7901a5a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-78439b8c86db",
+      "specimenId": "specimen-912fbe4f689a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-78439b8c86db",
+      "specimenId": "specimen-c1d3df603680",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-792eae90923b",
+      "specimenId": "specimen-4320d0d7c888",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-792eae90923b",
+      "specimenId": "specimen-e2ecc7b86bad",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-7996898dbc56",
+      "specimenId": "specimen-d2089843a3ac",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-7996898dbc56",
+      "specimenId": "specimen-ff6c927ccee8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-79b1b03c20a2",
+      "specimenId": "specimen-5a4acc9567b5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-79b1b03c20a2",
+      "specimenId": "specimen-5edec6db3ba9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-79edb5fab1b0",
+      "specimenId": "specimen-815eb959b1ea",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-79edb5fab1b0",
+      "specimenId": "specimen-d39d2e11e26e",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-7f07cc21bf6c",
+      "specimenId": "specimen-ee8b4a15a803",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-7f07cc21bf6c",
+      "specimenId": "specimen-f8de2c2a18e1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-805e8682f20a",
+      "specimenId": "specimen-74dd3df419cc",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-805e8682f20a",
+      "specimenId": "specimen-d32d310f96ac",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-81d4388fd7ec",
+      "specimenId": "specimen-0215dd6d0fe1",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-81d4388fd7ec",
+      "specimenId": "specimen-599b8e0aae36",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-839bb61c12fd",
+      "specimenId": "specimen-8a8697927eb2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-839bb61c12fd",
+      "specimenId": "specimen-8ce325497fc0",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-848dce9b1abb",
+      "specimenId": "specimen-06f0ea48c167",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-848dce9b1abb",
+      "specimenId": "specimen-e4b36ad403db",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-8da4fe751827",
+      "specimenId": "specimen-6663c4ce33a1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-8da4fe751827",
+      "specimenId": "specimen-d8da611bc7a0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-8ee31985cfed",
+      "specimenId": "specimen-2fd2f7b869a9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-8ee31985cfed",
+      "specimenId": "specimen-d59805d8c7e5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-91273c6e8e36",
+      "specimenId": "specimen-637fb7986f6e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-91273c6e8e36",
+      "specimenId": "specimen-810270f221cc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-91af8884fc97",
+      "specimenId": "specimen-21c6dcc9c7cf",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-91af8884fc97",
+      "specimenId": "specimen-db4781a6d074",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-937dd490298c",
+      "specimenId": "specimen-95a355d026fd",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-937dd490298c",
+      "specimenId": "specimen-d9e410583ea8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-940dc4f48666",
+      "specimenId": "specimen-907f610c72a7",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-940dc4f48666",
+      "specimenId": "specimen-af47ff4ef35c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-965b6e711464",
+      "specimenId": "specimen-c65864a43abe",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-965b6e711464",
+      "specimenId": "specimen-f6f5ff8db0ff",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-a35a507e467b",
+      "specimenId": "specimen-574eb697985d",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-a35a507e467b",
+      "specimenId": "specimen-dd715f18a5b0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-a8b6c9d81740",
+      "specimenId": "specimen-b7e5d0ba3716",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-a8b6c9d81740",
+      "specimenId": "specimen-b970394e1e48",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-aab1478560db",
+      "specimenId": "specimen-d49076164984",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-aab1478560db",
+      "specimenId": "specimen-fcffa0e3fa62",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ab0cb16f6071",
+      "specimenId": "specimen-8f77d87b74c7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ab0cb16f6071",
+      "specimenId": "specimen-a0bb9261e7c3",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-abe459246845",
+      "specimenId": "specimen-004c5713373f",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-abe459246845",
+      "specimenId": "specimen-4a915e79acb7",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-aca37e088cc1",
+      "specimenId": "specimen-337b4572aa55",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-aca37e088cc1",
+      "specimenId": "specimen-456fcdfdea4a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-aeb7bd3728a3",
+      "specimenId": "specimen-a2347164f5ef",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-aeb7bd3728a3",
+      "specimenId": "specimen-dd60eda090ef",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-b18781e29cf0",
+      "specimenId": "specimen-4a23bf7288f5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-b18781e29cf0",
+      "specimenId": "specimen-67942de36fba",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-b4bdc1ddefe4",
+      "specimenId": "specimen-8df3dca66f04",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-b4bdc1ddefe4",
+      "specimenId": "specimen-f6fb821f5628",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-b6f84171582b",
+      "specimenId": "specimen-0df6b6b155f9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-b6f84171582b",
+      "specimenId": "specimen-3a1df4cc6b61",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-b7c5e52144d3",
+      "specimenId": "specimen-16fce18046da",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-b7c5e52144d3",
+      "specimenId": "specimen-9223afc89afb",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-bd393acf1d50",
+      "specimenId": "specimen-1535eedf8526",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-bd393acf1d50",
+      "specimenId": "specimen-7bc1751cbf0b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-be7a173524c1",
+      "specimenId": "specimen-810d21a18553",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-be7a173524c1",
+      "specimenId": "specimen-a427f3c1ba96",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-be9cc592760d",
+      "specimenId": "specimen-5936aba6d3ac",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-be9cc592760d",
+      "specimenId": "specimen-7c06f69f8d47",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-bf4894b8eead",
+      "specimenId": "specimen-72762d0f1e3b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-bf4894b8eead",
+      "specimenId": "specimen-ef5034a0f85f",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-c43aa21192b6",
+      "specimenId": "specimen-00090cf781c0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-c43aa21192b6",
+      "specimenId": "specimen-575d3a12e4b1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-c717afb2320a",
+      "specimenId": "specimen-6b80165a0715",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-c717afb2320a",
+      "specimenId": "specimen-d1a01650c8d0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-c756683bbf8a",
+      "specimenId": "specimen-4689cc0f34af",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-c756683bbf8a",
+      "specimenId": "specimen-cbd5a2d0971a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-c75e45e3e479",
+      "specimenId": "specimen-b3dba4d81eb8",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-c75e45e3e479",
+      "specimenId": "specimen-df746e3a08e1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-c80a8c512dfd",
+      "specimenId": "specimen-311e2df7f013",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-c80a8c512dfd",
+      "specimenId": "specimen-c32abc8449d6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-cbb1e8d21e6f",
+      "specimenId": "specimen-b8629ba18897",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-cbb1e8d21e6f",
+      "specimenId": "specimen-e2934d2078a5",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-cec5f68d2435",
+      "specimenId": "specimen-22e73a6d1bc9",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-cec5f68d2435",
+      "specimenId": "specimen-85a4ed8672d0",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-cf3664c55af9",
+      "specimenId": "specimen-16eb0b8f4571",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-cf3664c55af9",
+      "specimenId": "specimen-379c73ea217d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-d180747275d0",
+      "specimenId": "specimen-4db2c09768be",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-d180747275d0",
+      "specimenId": "specimen-9d87f61b8521",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-d204c21942b2",
+      "specimenId": "specimen-433f77a33228",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-d204c21942b2",
+      "specimenId": "specimen-8babcb3f28ed",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-d2400a337f00",
+      "specimenId": "specimen-883913496d72",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-d2400a337f00",
+      "specimenId": "specimen-94c9edb34121",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-dca1153d8d00",
+      "specimenId": "specimen-0e3f6dd72854",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-dca1153d8d00",
+      "specimenId": "specimen-ed19cab92053",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-de76e7268003",
+      "specimenId": "specimen-1d57b8ee4a17",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-de76e7268003",
+      "specimenId": "specimen-7e8d28d23127",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-e2fc670e893f",
+      "specimenId": "specimen-8836abc1b7ec",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-e2fc670e893f",
+      "specimenId": "specimen-fc6e87fd7d2b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-e450149e7804",
+      "specimenId": "specimen-73bdd1fd76b2",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-e450149e7804",
+      "specimenId": "specimen-e7f0700d26fa",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-e67e7cb6b79d",
+      "specimenId": "specimen-4f9adcb6ef8b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-e67e7cb6b79d",
+      "specimenId": "specimen-8ba9d1be1c54",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ebc4140fedef",
+      "specimenId": "specimen-0edfb645efa3",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ebc4140fedef",
+      "specimenId": "specimen-f084e19cc69b",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-ec5cfc622bfe",
+      "specimenId": "specimen-13fe6141d603",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ec5cfc622bfe",
+      "specimenId": "specimen-a82d94e81032",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-ed42e55cd620",
+      "specimenId": "specimen-82903a327f4c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-ed42e55cd620",
+      "specimenId": "specimen-9d18f2b4e1fc",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ef5123ff0f1e",
+      "specimenId": "specimen-6917a8a7bb25",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ef5123ff0f1e",
+      "specimenId": "specimen-d3c5e7379883",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f00857288843",
+      "specimenId": "specimen-abaf7c60256a",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-f00857288843",
+      "specimenId": "specimen-f4526aa6e75d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f05a72f7471b",
+      "specimenId": "specimen-437304973ce8",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-f05a72f7471b",
+      "specimenId": "specimen-afec4f1eedc4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f36aef83c515",
+      "specimenId": "specimen-31b67c763890",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f36aef83c515",
+      "specimenId": "specimen-dd630cf237b6",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-f4572aeefe13",
+      "specimenId": "specimen-1c51636c1539",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-f4572aeefe13",
+      "specimenId": "specimen-ca42bf52fbfd",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f5e44894c0e7",
+      "specimenId": "specimen-5d8c02e3ac15",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f5e44894c0e7",
+      "specimenId": "specimen-ed3ad4161d34",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-f693f9bd00cd",
+      "specimenId": "specimen-618f09ec40ec",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-f693f9bd00cd",
+      "specimenId": "specimen-a76498d31cbb",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f6a6c7bd8bfb",
+      "specimenId": "specimen-930032984539",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-f6a6c7bd8bfb",
+      "specimenId": "specimen-b6d586e4a2ea",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-fbefc39c9f5c",
+      "specimenId": "specimen-1da3724361d3",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-fbefc39c9f5c",
+      "specimenId": "specimen-70607ff1f188",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-fe3db42287b1",
+      "specimenId": "specimen-c05e27ee683c",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-fe3db42287b1",
+      "specimenId": "specimen-d18da67230e9",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-ff35663663f6",
+      "specimenId": "specimen-265135f78ae1",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    },
+    {
+      "referenceId": "cell-ff35663663f6",
+      "specimenId": "specimen-d14e311ae7c4",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-ff53298c8735",
+      "specimenId": "specimen-4a33c1e1b404",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "referenceId": "cell-ff53298c8735",
+      "specimenId": "specimen-68228e32cd63",
+      "recognisable": false,
+      "confidence": "high",
+      "defects": [
+        "Substantial mismatch: the field variant/state is wrong, with label, content or adornments, and helper/error treatment differing from the reference."
+      ]
+    }
+  ]
+}

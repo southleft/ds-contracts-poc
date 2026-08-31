@@ -1,0 +1,38 @@
+{
+  "artifactVersion": "combobox-live-v39-status-v1",
+  "status": "attempt 1 failed closed at probe/usability/restoration; host sceneToNormalizedIr trigger-slot sibling-order teaching cleared; original-plan accounting 0/0 and 13307/13307; two-cycle scene-derived fixed-point stable; restore 144 held; extract walk cleared; writer accepted on new page 163:29627; cleanup accepted; Input 115:295378 stayed; mint did not stay; no Combobox human grade",
+  "antecedent": {
+    "commit": "353308114e6c3717325b9cdcb1c7f0b83a3639c2",
+    "indexPath": "recipe/evidence/combobox-live-pivot-v39/antecedent-index.json",
+    "indexSha256": "4985cd222595cdbbdcab9f959890cc2a246b349b0529343888d158203c9f6f56",
+    "hashSetSha256": "c506af22d5e4a745a29f17bc6d742ded2e0a108f7c302b8e36fedecee2e5a8f0"
+  },
+  "authorization": {
+    "commit": "9d136bf09be8f621dc9b2e6e632700fd2b3964a2",
+    "path": "recipe/evidence/combobox-live-pivot-v39/capture-authorization.json",
+    "sha256": "1e6225c41ec9d103c9bec8e9f409117d00c311ec65fb185635f0a4cfa02f2f44",
+    "signingPublicKeySpkiSha256": "88edb1ed67b357bef23f59fc3f1e8e9164ada3c4458d28a82367af523f1309ff"
+  },
+  "attempt1": {
+    "pageId": "163:29627",
+    "pageRemoved": true,
+    "restoreAccepted": true,
+    "restoredCount": 144,
+    "extractWalkCleared": true,
+    "hostSceneToNormalizedIrRecoversTriggerSlotComponentRefCompileSiblingOrderTeachingCleared": true,
+    "originalPlanAccountingOk": true,
+    "hostCollapseAccepted": true,
+    "fixedPointStable": true,
+    "hostAccountingRefused": false,
+    "probeIssued": true,
+    "probeRefused": "probe/usability/restoration exactSceneRestoration=false both sources; 24 open-options cells overlapPixels 5-9",
+    "cleanupAccepted": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

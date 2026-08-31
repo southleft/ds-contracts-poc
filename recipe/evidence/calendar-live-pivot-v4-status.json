@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "calendar-live-v4-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit at $.children[0].bindings; writer accepted; restore 4 held; host omitted empty set bindings that compile carries as []; mint cleaned; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "2990ee1823d03ef3fdb1f2304ac3dda6d28c5192",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v4/antecedent-index.json",
+    "indexSha256": "f222505809a5209a1135c2c645a275fbcba2bf6a4effc5288e1ca42354cfe4f2",
+    "hashSetSha256": "6d36cc6efda8d2c2d9a7cf2f308738f5aabec8bad5aaf95a9177611ce0069a66"
+  },
+  "authorization": {
+    "commit": "06308bdc24c27e922869ab45f7ef738c10514027",
+    "path": "recipe/evidence/calendar-live-pivot-v4/capture-authorization.json",
+    "sha256": "8e0d0b534242e51494cfc3aeec081af2f7f2748c78984bbf162820436bd3a8a7",
+    "signingPublicKeySpkiSha256": "af641edfb85f4aaefdcae6d5e400582a79be7205792845e7c3242ba723bc7201"
+  },
+  "attempt1": {
+    "pageId": "173:49857",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "extractRefused": "unsupported structural edit at $.children[0].bindings",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "host-emit compile-carried empty bindings arrays on calendar/set, calendar/week-set, and calendar/day-set",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

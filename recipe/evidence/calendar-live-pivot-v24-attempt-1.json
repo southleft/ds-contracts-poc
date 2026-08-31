@@ -1,0 +1,103 @@
+{
+  "artifactVersion": "calendar-live-v24-attempt-1-v1",
+  "status": "failed closed at writer; leftover page 179:54565 deleted; mint did not stay; V23 page 173:53929 left; siblings left",
+  "authorizationCommit": "faadec5f67e0ae4f08f07e956df0d6773a50cda9",
+  "codeCommit": "faadec5f67e0ae4f08f07e956df0d6773a50cda9",
+  "antecedentCommit": "ac3d92cdb5a90adabe356779a62e1c06264b7426",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v24",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "703d55b6-c72f-405a-aea0-b8ec95c74fe6",
+    "attempt": 1,
+    "authorizationSha256": "790eb1528fd2dae23d7d8ed213102ac1d1d4c69fe54e9f90512bc1d1e5eec125",
+    "signingPublicKeySpkiSha256": "82f0364d527c9894ed4c26ea31583821dcf34a449d758b38b3b6c38d1aa92185",
+    "programSha256": "7b96c287442f19ed0242eb30d1088defdcd1f9e0306a7188086162aacf991e8c",
+    "requestBindingSha256": "f98aa2c83d9069233ec42bf98224e50a99bd1bdb9f22b08cee4b4b63e40211c4",
+    "requestSha256": "af52498eb8a75c34a9dc5135dfac8811ed5d994e42d8d735e92f2ecff5d7749a"
+  },
+  "teaching": {
+    "one": "CALENDAR-WRITER-HUG-TEXT-POST-CHARACTER-INTRINSIC",
+    "clearedOnOwnedDayLabels": true,
+    "blockedOn": "CALENDAR-DAY-LABEL-MISMATCH:calendar/day-instance/1",
+    "namedCauseCleared": "SF Pro Regular/Semibold load but paint width 0 / absoluteRenderBounds null after characters. Walking the named Astryx fallback chain lands on Roboto Regular. Owned day labels painted 16×16 with readable 26 in 32×32 cells (default / today ring / selected blue / outside). Caption and weekday FIXED faces would have taken the same walk. Do not invent Inter. Do not invent FIXED text px."
+  },
+  "writer": {
+    "accepted": false,
+    "refusedClass": "CALENDAR-DAY-LABEL-MISMATCH:calendar/day-instance/1",
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v24",
+    "pageId": "179:54565",
+    "leftoverDeleted": true,
+    "runIdentity": "19be1c96-calendar-v24",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true,
+    "v23PageUntouched": true
+  },
+  "measuredBeforeCleanup": {
+    "daySetId": "179:54595",
+    "ownedDayLabels": {
+      "font": { "family": "Roboto", "style": "Regular" },
+      "chars": "26",
+      "w": 16,
+      "h": 16,
+      "readable": true
+    },
+    "weekNumber": {
+      "chars": "31",
+      "w": 32,
+      "h": 16,
+      "font": { "family": "Roboto", "style": "Regular" }
+    },
+    "dayInstance1": {
+      "name": "calendar/day-instance/1 :: 27",
+      "labelPropertyValue": "26",
+      "textCharacters": "26",
+      "charactersAssignmentSilentFail": true,
+      "setPropertiesThenCharactersWorked": true
+    }
+  },
+  "screenshots": {
+    "v23Page": "empty shells / 1px slivers; matches TJ hard-fail",
+    "v23DayGrid": "today ring and selected blue square; no readable day numbers",
+    "v23WeekGrid": "empty dashed week shell",
+    "v23MonthGrid": "1px vertical slivers under on/off",
+    "v24LeftoverDaySet": "readable 26 in default / today / selected / outside 32×32 cells",
+    "v24LeftoverPage": "day numbers visible; week mint incomplete; no month grid"
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "signedCleanupIssued": false,
+    "leftoverPageDeleted": true,
+    "leftoverPageId": "179:54565",
+    "v23PagePresent": true,
+    "siblingsPresent": {
+      "input": "115:295378",
+      "combobox": "163:35981",
+      "table": "173:48924",
+      "button": "85:6781"
+    }
+  },
+  "nextTeaching": "Once the named fallback paints, instance text bound to the already-issued Label property silent-fails on text.characters. Write instance Label through setProperties({[dayLabelProperty]: Label}) after loading the instance font, then verify text.characters. Do not invent a font. Do not invent FIXED. Probe stays characters-only.",
+  "doNotInventCalendarGrade": true,
+  "productV1Complete": false
+}

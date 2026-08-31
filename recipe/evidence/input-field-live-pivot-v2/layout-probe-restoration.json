@@ -1,0 +1,15 @@
+{
+  "before": {
+    "layoutAlign": "STRETCH",
+    "layoutSizingHorizontal": "FIXED",
+    "textAutoResize": "NONE",
+    "minWidth": null
+  },
+  "after": {
+    "layoutAlign": "INHERIT",
+    "layoutSizingHorizontal": "FIXED",
+    "textAutoResize": "NONE",
+    "minWidth": null
+  },
+  "restored": true
+}

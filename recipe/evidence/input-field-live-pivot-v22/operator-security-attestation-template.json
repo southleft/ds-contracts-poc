@@ -1,0 +1,44 @@
+{
+  "artifactVersion": "input-live-v22-operator-security-attestation-v1",
+  "status": "template only; complete only after every prerequisite",
+  "createdAt": null,
+  "rotation": {
+    "completedAt": null,
+    "completedByUserAssertion": false,
+    "credentialType": "Figma personal access token",
+    "exposedCredentialRevokedOrReplaced": false,
+    "tokenValueStored": false
+  },
+  "mcpRestart": {
+    "completedAt": null,
+    "completedAfterRotation": false,
+    "sessionIdentity": null,
+    "sessionIdentityContainsSecrets": false,
+    "ownerOnlyEnvironmentFileConfigured": false,
+    "environmentFileMode": null,
+    "tokenValueStored": false
+  },
+  "scratchReadOnlyProbe": {
+    "completedAt": null,
+    "completedAfterMcpRestart": false,
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "readOnly": true,
+    "probe": "exact file key, file name, and editor type",
+    "passed": false,
+    "figmaWrites": 0,
+    "figmaCaptures": 0
+  },
+  "repositorySecretScan": {
+    "completedAt": null,
+    "codeCommit": null,
+    "scope": "tracked and untracked repository files",
+    "matches": null,
+    "zero": false
+  },
+  "tokenValuesStored": false,
+  "attestationSha256": null
+}

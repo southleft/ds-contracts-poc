@@ -1,0 +1,194 @@
+{
+  "artifactVersion": "input-live-v4-normalization-fixtures-v1",
+  "provenance": {
+    "attemptEvidence": "recipe/evidence/input-field-live-pivot-v3/live-attempt-3.json",
+    "attemptFailureLocation": "recipe/scene-readback.ts:982",
+    "pluginTypings": {
+      "package": "@figma/plugin-typings",
+      "version": "1.135.0",
+      "alias": "plugin-api.d.ts:11534-11537",
+      "nodeBindings": "plugin-api.d.ts:6437-6449",
+      "letterSpacing": "plugin-api.d.ts:5297-5300",
+      "lineHeight": "plugin-api.d.ts:5301-5308",
+      "mixedText": "plugin-api.d.ts:9624,9670,10145"
+    },
+    "readOnlyFigmaInspectionUsed": true,
+    "readOnlyFigmaInspection": {
+      "inspectedAt": "2026-08-27",
+      "target": {
+        "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+        "fileName": "Scratch Project",
+        "editorType": "figma"
+      },
+      "mutationPerformed": false,
+      "scope": "existing unrelated Scratch nodes after attempt-3 cleanup",
+      "pageCount": 13,
+      "example": {
+        "pageId": "33:2",
+        "pageName": "antd exam 2026-08-23",
+        "nodeId": "33:4687",
+        "nodeName": "Alert message",
+        "boundVariables": {
+          "fills": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:33:1484"
+            }
+          ],
+          "fontSize": [
+            {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:33:514"
+            }
+          ]
+        },
+        "paintBindings": [
+          {
+            "index": 0,
+            "boundVariables": {
+              "color": {
+                "type": "VARIABLE_ALIAS",
+                "id": "VariableID:33:1484"
+              }
+            }
+          }
+        ],
+        "fontSize": 14,
+        "lineHeight": {
+          "unit": "PIXELS",
+          "value": 22
+        },
+        "letterSpacing": {
+          "unit": "PERCENT",
+          "value": 0
+        }
+      },
+      "variables": [
+        {
+          "id": "VariableID:33:1484",
+          "name": "imported/shared/color-000000e0",
+          "resolvedType": "COLOR",
+          "variableCollectionId": "VariableCollectionId:33:3",
+          "variableCollectionName": "Ant Design",
+          "remote": false
+        },
+        {
+          "id": "VariableID:33:514",
+          "name": "imported/alert/label/font-size/off",
+          "resolvedType": "FLOAT",
+          "variableCollectionId": "VariableCollectionId:33:3",
+          "variableCollectionName": "Ant Design",
+          "remote": false
+        }
+      ]
+    },
+    "rawAttemptPayloadPersisted": false,
+    "limitation": "Attempt 3 persisted exact Zod paths and issue text but lost the returned raw payload and IDs. Alias IDs and numeric unit values in attempt3ObservedShapeClasses are explicit fixture placeholders. Existing unrelated Scratch nodes independently confirm alias arrays, mirrored paint-level color aliases, and PIXELS/PERCENT unit objects; they are shape evidence only and are not substituted for attempt-3 values or outcomes."
+  },
+  "attempt3ObservedShapeClasses": {
+    "nodeBoundVariables": {
+      "fills": [
+        {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:fixture-color"
+        }
+      ],
+      "fontSize": [
+        {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:fixture-font-size"
+        }
+      ],
+      "lineHeight": [
+        {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:fixture-line-height"
+        }
+      ]
+    },
+    "letterSpacing": {
+      "unit": "PIXELS",
+      "value": 0
+    },
+    "exactFailureIssues": [
+      {
+        "path": ["bindings", 1],
+        "message": "fills.0 is not compatible with COLOR"
+      },
+      {
+        "path": ["bindings", 2],
+        "message": "fontSize.0 is not compatible with FLOAT"
+      },
+      {
+        "path": ["bindings", 3],
+        "message": "lineHeight.0 is not compatible with FLOAT"
+      },
+      {
+        "path": ["type", "letterSpacing"],
+        "message": "Invalid input: expected number, received object"
+      }
+    ]
+  },
+  "supportedFixtures": {
+    "directAlias": {
+      "itemSpacing": {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:fixture-spacing"
+      }
+    },
+    "paintLevelAlias": {
+      "fills": [
+        {
+          "boundVariables": {
+            "color": {
+              "type": "VARIABLE_ALIAS",
+              "id": "VariableID:fixture-color"
+            }
+          }
+        }
+      ]
+    },
+    "lineHeightAuto": {
+      "unit": "AUTO"
+    },
+    "lineHeightPercent": {
+      "unit": "PERCENT",
+      "value": 150
+    },
+    "letterSpacingPixels": {
+      "unit": "PIXELS",
+      "value": 0
+    }
+  },
+  "plantedInvalidFixtures": {
+    "unknownAliasObject": {
+      "type": "VARIABLE_ALIAS",
+      "id": "VariableID:fixture-color",
+      "extra": true
+    },
+    "staleAlias": {
+      "type": "VARIABLE_ALIAS",
+      "id": "VariableID:stale"
+    },
+    "mixed": {
+      "$figma": "MIXED"
+    },
+    "partialTextRangeAliases": [
+      {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:fixture-font-size"
+      },
+      {
+        "type": "VARIABLE_ALIAS",
+        "id": "VariableID:fixture-line-height"
+      }
+    ],
+    "unitMissingValue": {
+      "unit": "PERCENT"
+    },
+    "unitUnknown": {
+      "unit": "EM",
+      "value": 1
+    }
+  }
+}

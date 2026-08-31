@@ -1,0 +1,123 @@
+{
+  "artifactVersion": "input-live-v79-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "50e4a88f0e6658e43d7dd82841d6a1a825896b79",
+  "codeCommit": "50e4a88f0e6658e43d7dd82841d6a1a825896b79",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "111:272958",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "0ed357dbe2acb272d1348d90cf689510f7b967e82f6c0cf834ad1a315ed759e0",
+    "payloadSha256": "5d0f232375dbe83cb865bf27abb5321d871e0a16ddf1d8ee7628d14be6261681",
+    "v18WriterProgramUnchanged": true,
+    "v18WriterPayloadUnchanged": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 980,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436161,
+    "sha256": "708028f296146bacac48ac616245f996f783d2bf24050f2861c3000c4e3b49c9",
+    "hostNormalizeAccount": false,
+    "payloadKeys": ["pageId", "roots", "variableTable"],
+    "pageId": "111:272958",
+    "marker": null
+  },
+  "v19WriterTeaching": {
+    "taughtWriterHiddenFillOccupancy": true,
+    "marker": "INPUT-WRITER-HIDDEN-FILL-OCCUPANCY",
+    "citedMechanism": "recipe CSS ::placeholder { opacity: 0 } plus restore visible=true for FILL measure",
+    "extractPlaceholderVisibleTrue": 128,
+    "extractPlaceholderVisibleFalse": 0,
+    "extractPlaceholderOpacity0": 24,
+    "extractPlaceholderOpacity1": 104,
+    "extractPlaceholderFill": 128,
+    "extractPlaceholderFixed": 0,
+    "hiddenRevealedForFill": 0,
+    "muiOverlapClassTrailingX": [165],
+    "muiOverlapClassTrailingXWasZeroOnV78": true,
+    "sampleKey": "mui/medium/default/placeholder/false/trailing",
+    "sampleTrailingX": 165,
+    "samplePlaceholderWidth": 157,
+    "sampleContentRowWidth": 204,
+    "sampleLabelLocal": { "x": 0, "width": 57 },
+    "focusVisibleSampleTrailingX": 163,
+    "addedSpacer": false,
+    "setPixelWidth": false,
+    "setPrimaryAxisAlignMax": false
+  },
+  "probe": {
+    "issued": false,
+    "operatorSuccess": false,
+    "accepted": false,
+    "overlapCensus": null,
+    "inventOverlapZero": false
+  },
+  "observedIndependentRootAccounting": {
+    "reached": false,
+    "recipeRefusalFired": true,
+    "probeIssuedBecauseAccountingPassed": false
+  },
+  "failure": {
+    "phase": "extract-host-recipe-collapse",
+    "locus": "recipe/recipes/input-field.ts:2272",
+    "messages": [
+      "unsupported structural edit at $.children[0].children[0].children[0].children[0].opacity; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "V19 writer hidden FILL occupancy held on the minted canvas: extract shows 24 placeholders visible=true opacity=0 FILL (0 visible=false); the 12 V78 overlap-class MUI keys have trailing x=165 (content-row width 204), not x=0. Sample mui/medium/default/placeholder/false/trailing trailingX=165 vs V78 trailingX=0. Restore hiddenRevealedForFill=0 because those nodes were already visible. Host extract accept then refused recipe collapse at input-field.ts:2272 — IR now carries opacity on the first content placeholder, which compile does not emit. Independent root accounting and probe were not issued. Probe overlap census was not measured and must not be invented as 0. Polar extract trailing remains at end (x=198/199). Writer accepted 2317 nodes on new page 111:272958 (not 111:267910); v19 program 0ed357db…59e0 / payload 5d0f2323…1681; hashed v18 9653ecd2…81ac / 07a5124f…12de unchanged. Cleanup accepted; remainingOwnedNodes 0; requested and removed page 111:272958. Mint did not stay. Do not invent overlap-zero. Do not probe-hide. Do not invent 9/30/0 or a Polar content-row. Do not teach FIXED. Do not invent plugin layoutSizingHorizontal. Do not restart V78 attempt 2. Do not claim v1 complete. Next teaching if any must be a different cited mechanism for the opacity collapse contradiction, not probe-hide."
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "requestedPageNodeId": "111:272958",
+    "removedPageNodeId": "111:272958",
+    "complete": true
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "mintStayed": false,
+  "mintCleaned": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterProgramUnchanged": true,
+  "v17WriterPayloadUnchanged": true,
+  "v18WriterMinted": true,
+  "v18WriterProgramUnchanged": true,
+  "v18WriterPayloadUnchanged": true,
+  "v19WriterMinted": true,
+  "v78SceneReadbackUnchanged": true,
+  "taughtWriterHiddenFillOccupancyHeld": true,
+  "recipeCollapseRefusedOpacity": true,
+  "probeIssued": false,
+  "inventOverlapZeroForbidden": true,
+  "unnamedSourcePxCarriedTeachingHeld": true,
+  "nextAttempt": 2,
+  "restartAsV79Attempt2WithoutNewTeachingForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "inventPolarContentRowForbidden": true,
+  "doNotClaimV1Complete": true
+}

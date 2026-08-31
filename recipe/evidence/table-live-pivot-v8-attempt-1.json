@@ -1,0 +1,146 @@
+{
+  "artifactVersion": "table-live-v8-attempt-1-v1",
+  "status": "failed closed at extract collapse; writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "c6169da72468645a3359caa7f433188f4366a21f",
+  "codeCommit": "c6169da72468645a3359caa7f433188f4366a21f",
+  "antecedentCommit": "2c3513d5b55ef82e5f80253df41aacac7d9c182f",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-82d19508-table-v8",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenTableV2RunIdentity": "cc811f47-82d19508-table-v2",
+    "forbiddenTableV3RunIdentity": "cc811f47-82d19508-table-v3",
+    "forbiddenTableV4RunIdentity": "cc811f47-82d19508-table-v4",
+    "forbiddenTableV5RunIdentity": "cc811f47-82d19508-table-v5",
+    "forbiddenTableV6RunIdentity": "cc811f47-82d19508-table-v6",
+    "forbiddenTableV7RunIdentity": "cc811f47-82d19508-table-v7"
+  },
+  "transaction": {
+    "transactionId": "ff53fff4-86a7-43de-b9f9-e242372a2fa5",
+    "attempt": 1,
+    "authorizationSha256": "08e83141e4ab3ce1420c91cbb156d4480ea1118b4e174feedf2386adaa15b672",
+    "signingPublicKeySpkiSha256": "4f60addec01985fbe0caaecf3115b6dd9a776096cc7daab322ee724ddc182df9",
+    "programSha256": "6c2ec8c848ae55ad0d8f269b1311806f105cc33670a6016a04fc000b20b7d0e3",
+    "bindingSha256": "45ee02b808b157b43386704f324a0b4781bde15e54c71b24233e5184340cba4e",
+    "requestSha256": "52d16eabcea4fb81ec5910035c0a4a0cf1d7f0633a50af28ffd864609b89835d"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v8",
+    "pageId": "165:41691",
+    "sectionIds": ["165:41692", "165:41821"],
+    "collectionIds": [
+      "VariableCollectionId:165:41693",
+      "VariableCollectionId:165:41822"
+    ],
+    "firstParty": {
+      "sectionId": "165:41692",
+      "cellSetId": "165:41720",
+      "rowSetId": "165:41749",
+      "tableSetId": "165:41820",
+      "collectionId": "VariableCollectionId:165:41693"
+    },
+    "mui": {
+      "sectionId": "165:41821",
+      "cellSetId": "165:41849",
+      "rowSetId": "165:41878",
+      "tableSetId": "165:41949",
+      "collectionId": "VariableCollectionId:165:41822"
+    },
+    "runIdentity": "cc811f47-82d19508-table-v8",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "createdNodeIds": 83,
+    "cellInstanceBindingExtrasTeachingCleared": true,
+    "perSideStrokeWeightFoldTeachingUnchangedFromV7": true,
+    "rowOwnedCellLabelSkipTeachingUnchangedFromV6": true,
+    "minWidthZeroUnsetTeachingUnchangedFromV5": true,
+    "headerFontTeachingUnchangedFromV2": true,
+    "ownedRowTextCharactersTeachingUnchangedFromV4": true,
+    "namedFromSourceFamily": "Inter",
+    "carriedHostStyle": "Semi Bold",
+    "resolutionDeclared": "requested",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "pageId": "165:41691",
+    "restoredCount": 8,
+    "fixedBefore": 0,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": false,
+    "walkClearedOwnershipKeyAbsent": true,
+    "rowComponentChildCountAfterSkip": 3,
+    "tableVariantHasUnifiedStrokeWeight": true,
+    "cellVariantHasUnifiedStrokeWeight": true,
+    "cellInstanceHostBindings": [],
+    "compileInstanceBindings": [],
+    "extractHeaderCellInstanceRawBindFields": [
+      "minWidth",
+      "paddingBottom",
+      "paddingLeft",
+      "paddingRight",
+      "paddingTop",
+      "strokeBottomWeight",
+      "strokeLeftWeight",
+      "strokeRightWeight",
+      "strokes.0.paint.color",
+      "strokes.0",
+      "strokeTopWeight"
+    ],
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[0].clipsContent",
+    "failedOn": "first-party table/header; RecipeRefusal table@1: unsupported structural edit at $.children[0].children[0].children[0].clipsContent",
+    "adapterIdentity": "first-party-table-reviewed-v1",
+    "role": "table/header",
+    "hostHeaderClipsContent": true,
+    "compileHeaderHasClipsContent": false,
+    "sameClassOnTableBody": true,
+    "sameClassOnMuiHeaderAndBody": true,
+    "extractHeaderClipsContent": true,
+    "extractBodyClipsContent": true
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "165:41691",
+    "removedCollectionIds": [
+      "VariableCollectionId:165:41693",
+      "VariableCollectionId:165:41822"
+    ],
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "restartV8Attempt2AsIs": false,
+    "prepareV9": "when extract host-normalizes table/header and table/body, omit clipsContent because compile header/body frames omit clipsContent"
+  },
+  "secondaryNoteNotTheRefusedClass": "v8 teaching cleared as stated: host-normalize omitted Figma-copied bindings on table/header-cell-instance and table/cell-instance; compile cell instances carry none; extract walk still saw copied binds on those instances and host dropped them. Writer accepted both first-party and MUI; restore held 8 hug labels. Collapse then refused clipsContent on table/header because compile header/body frames omit the key and host emits extract clipsContent true. table/variant also emits clipsContent false; that is not this refused path. Row-instances also copy fills.0.color; that is not this refused path. MUI cells still lack layout.minWidth after v5 unset-null of minWidth 0; that is not this refused class.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

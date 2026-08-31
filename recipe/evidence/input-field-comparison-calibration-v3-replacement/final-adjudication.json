@@ -1,0 +1,352 @@
+{
+  "artifactVersion": "input-field-calibration-v3-final-adjudication-v1",
+  "sequence": {
+    "qualificationAndEnvelopeValidationCompleted": true,
+    "opaqueReliabilityComputedBeforePerformanceIdentity": true,
+    "hiddenDuplicatePairingUsedSourcePathIdentity": false,
+    "sealedAnswerKeyHashCheckedAfterReliability": true,
+    "sealedAnswerKeyParsed": false,
+    "performanceIdentityUnsealed": false
+  },
+  "inputHashes": {
+    "replacementProtocol": "cfb8b7307397e0434b0f68a5226e4ae2e4255faae9422b60c947ff92350e12b0",
+    "replacementReceipt": "672f64c07fe9e57b93bbe8db80910afc44a417f4109e59bc741f8cf7f0d1376f",
+    "replacementIndex": "a74e72c6db8fa2a81d9b25d4a4bc27b98b0d174d565683dcf936ce27fe4ce034",
+    "sourceV2Protocol": "b3beb503740e31491aa4c0195ffff33eda1207362fb2d2cb4aafa848e6201ddd",
+    "gradeSchema": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+    "performancePacket": "c24f43a3c769a0b5747bbae93a098bdc762895d39d15326547ce857cc104299e",
+    "randomizedBatch": "9dee5601af7077d660b643c6abe9bdff9ef9550dc8193a4d5b82828a18edae42",
+    "sealedAnswerKeyCommitment": "31424d32a6a2f7da6bae8d67b5e515746c4ad108c8580c44d439d4bb0f9d30f9",
+    "templates": {
+      "RATER-CAL-V2-B": "544361c6824b8aec56b40b4969da54703271a388437cec2a47c2c090c998042f",
+      "RATER-CAL-V2-C": "6aa1e8b20c4d888fb19797ccf4b2b9c286271453ea450234bba6311f7dbc65c0",
+      "RATER-CAL-V3-D": "7355d1d595397c01b85a4a7dfa97da60da58b0c0b12abb20e5fbc3e741a171b6"
+    },
+    "submissions": {
+      "RATER-CAL-V2-B": "7596381924042b6b6f55e9fb0b47e13a4c2c42ea1281c06b1b15b20ceaeb0434",
+      "RATER-CAL-V2-C": "6a8bc3f213241a035abda42111b5729ce77f351e64d6e9d5ef1338b22a9222e6",
+      "RATER-CAL-V3-D": "201aa27edae387250c037fcd8f9ac21ddafe653decff3dbcdaf7a6fb14a68a60"
+    },
+    "qualificationReceipts": {
+      "RATER-CAL-V2-B": "1d351c753946f615237c407ff036e0fe29b3a2b673562c8e7386364188b4c8ee",
+      "RATER-CAL-V2-C": "4538e58eadc06389f87e47c126b8d4825acc211bcf5d5f8961b42d3b8e2b53fd",
+      "RATER-CAL-V3-D": "38bcbb445ae6361cd7db667f10b996db76b9122138502977e8f866ec993c0739"
+    },
+    "historical": {
+      "immutableV1": "ad19224c96da0702f7667239ccc8bafe0db4f99272bae352f7ab06f4216792d5",
+      "correctedV2": "056a612c9c0071ab9c2d0525340f6f55920de92bc7591dbda26db36f256bf26e",
+      "v2MultiRater": "9b175adbe64006bb93e11446a1f1155827701031b76f23590d4af43d1a7c9fd9",
+      "refusedCalibration": "a0312103e1c7e367978335d41e287b67d01c9c8938adff7cd08f9eee9b3a65b5"
+    }
+  },
+  "integrity": {
+    "v2AndV3Protocols": "passed",
+    "replacementCommitment": "passed",
+    "importedQualifications": "passed",
+    "freshDQualification": {
+      "status": "passed",
+      "score": 0.9583333333333334,
+      "obviousFailureScore": 1,
+      "envelopeValid": true
+    },
+    "performancePacket": {
+      "status": "passed",
+      "tasks": 384,
+      "uniqueTaskIds": 384,
+      "uniqueReferenceIds": 384,
+      "uniqueSpecimenIds": 384,
+      "exactIdsAndOrderPerRater": true,
+      "schemaAndEnvelopes": "passed",
+      "defectsAndPassRule": "passed",
+      "identityGuessesAbsent": true,
+      "containedRegularImagePaths": 768
+    },
+    "sourceProvenance": {
+      "status": "passed",
+      "exactRecords": 128,
+      "independentHarnessRecords": 128,
+      "sampleMatrixHash": "7630a3f9e79f4d2df786f5537c550eb9822d0b57796f72f289c87adf0dcc4853",
+      "sourceCommit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+      "comparisonFixtureHash": "f3ee33b9b8f8c6624a48696bbe9c18dc9d45482e4ca4bfd7fd27ded870b68457",
+      "environmentHash": "bb49d731fcb8823a1866a2a615b59ea731e95c6358a1c768cb614b7ed3d97c22",
+      "recordsHash": "d79c0005b7033f171535d88a7c06331c6b99c16427d866f0c3aea3a9d5859085"
+    },
+    "byteContinuity": {
+      "status": "passed",
+      "sourceReferencePresentations": 384,
+      "exactSourceReferences": 128,
+      "correctedPresentations": 128,
+      "unchangedControlPresentations": 256,
+      "exactOpaqueMultisets": true
+    },
+    "priorPerformanceKeyAccess": {
+      "status": "passed-on-hash-pinned-qualification-receipts",
+      "raterReceiptsRecordPerformanceAccessed": false,
+      "importedReceiptsRecordPerformanceIdentityRevealed": false,
+      "replacementProtocolForbidsPriorKeyAccess": true,
+      "operatingSystemReadAuditAvailable": false
+    },
+    "sealedAnswerKey": {
+      "sha256": "31424d32a6a2f7da6bae8d67b5e515746c4ad108c8580c44d439d4bb0f9d30f9",
+      "hashMatchesCommitment": true,
+      "parsed": false,
+      "keptSealedBecauseReliabilityFailed": true
+    }
+  },
+  "raterValidations": [
+    {
+      "rater": "RATER-CAL-V2-B",
+      "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-b.json",
+      "sha256": "7596381924042b6b6f55e9fb0b47e13a4c2c42ea1281c06b1b15b20ceaeb0434",
+      "recognisable": 4,
+      "unrecognisable": 380,
+      "confidence": { "low": 0, "medium": 75, "high": 309, "total": 384 },
+      "exact384IdsAndOrder": true,
+      "schemaAndEnvelopeValid": true,
+      "passRuleAndDefectsValid": true,
+      "identityGuessesAbsent": true,
+      "qualificationReceiptBindingValid": true
+    },
+    {
+      "rater": "RATER-CAL-V2-C",
+      "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-c.json",
+      "sha256": "6a8bc3f213241a035abda42111b5729ce77f351e64d6e9d5ef1338b22a9222e6",
+      "recognisable": 14,
+      "unrecognisable": 370,
+      "confidence": { "low": 0, "medium": 94, "high": 290, "total": 384 },
+      "exact384IdsAndOrder": true,
+      "schemaAndEnvelopeValid": true,
+      "passRuleAndDefectsValid": true,
+      "identityGuessesAbsent": true,
+      "qualificationReceiptBindingValid": true
+    },
+    {
+      "rater": "RATER-CAL-V3-D",
+      "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v3-d.json",
+      "sha256": "201aa27edae387250c037fcd8f9ac21ddafe653decff3dbcdaf7a6fb14a68a60",
+      "recognisable": 26,
+      "unrecognisable": 358,
+      "confidence": { "low": 0, "medium": 0, "high": 384, "total": 384 },
+      "exact384IdsAndOrder": true,
+      "schemaAndEnvelopeValid": true,
+      "passRuleAndDefectsValid": true,
+      "identityGuessesAbsent": true,
+      "qualificationReceiptBindingValid": true
+    }
+  ],
+  "opaqueReliability": {
+    "perRaterPasses": {
+      "RATER-CAL-V2-B": {
+        "recognisable": 4,
+        "denominator": 384,
+        "ratio": 0.010416666666666666
+      },
+      "RATER-CAL-V2-C": {
+        "recognisable": 14,
+        "denominator": 384,
+        "ratio": 0.036458333333333336
+      },
+      "RATER-CAL-V3-D": {
+        "recognisable": 26,
+        "denominator": 384,
+        "ratio": 0.06770833333333333
+      }
+    },
+    "unanimous": {
+      "count": 359,
+      "ratio": 0.9348958333333334,
+      "unanimousPass": 2,
+      "unanimousFail": 357
+    },
+    "split": { "count": 25, "ratio": 0.06510416666666667 },
+    "votePatterns": {
+      "FFF": 357,
+      "FPP": 12,
+      "FFP": 11,
+      "PPP": 2,
+      "PFP": 1,
+      "PFF": 1
+    },
+    "pairwise": [
+      {
+        "raters": "B-C",
+        "agreements": 370,
+        "denominator": 384,
+        "ratio": 0.9635416666666666,
+        "cohensKappa": 0.20941176470588072,
+        "threshold": 0.75,
+        "passed": true
+      },
+      {
+        "raters": "B-D",
+        "agreements": 360,
+        "denominator": 384,
+        "ratio": 0.9375,
+        "cohensKappa": 0.18528995756718633,
+        "threshold": 0.75,
+        "passed": true
+      },
+      {
+        "raters": "C-D",
+        "agreements": 372,
+        "denominator": 384,
+        "ratio": 0.96875,
+        "cohensKappa": 0.6850738108255877,
+        "threshold": 0.75,
+        "passed": true
+      }
+    ],
+    "overallPairwiseAgreement": 0.956597222222222,
+    "fleissKappa": 0.40925500492287054,
+    "majorityFailureRows": 369,
+    "majorityFailuresWithTwoConcreteRaterDefectSets": 369
+  },
+  "duplicateIntegrity": {
+    "status": "passed",
+    "pairingMethod": "opaque same-reference byte groups; no source path or implementation identity",
+    "referenceGroups": 128,
+    "pairs": 128,
+    "uniquePairedSpecimens": 256,
+    "byteIdenticalPairs": 128,
+    "minimumPacketPositionDistance": 2,
+    "implementationIdentityUsed": false,
+    "byRater": {
+      "RATER-CAL-V2-B": {
+        "agreements": 128,
+        "denominator": 128,
+        "ratio": 1,
+        "threshold": 0.95,
+        "agreementPassed": true,
+        "opaqueFirstPasses": 0,
+        "opaqueSecondPasses": 0,
+        "passRateDelta": 0,
+        "maximumPassRateDelta": 0.05,
+        "passRateDeltaPassed": true
+      },
+      "RATER-CAL-V2-C": {
+        "agreements": 128,
+        "denominator": 128,
+        "ratio": 1,
+        "threshold": 0.95,
+        "agreementPassed": true,
+        "opaqueFirstPasses": 0,
+        "opaqueSecondPasses": 0,
+        "passRateDelta": 0,
+        "maximumPassRateDelta": 0.05,
+        "passRateDeltaPassed": true
+      },
+      "RATER-CAL-V3-D": {
+        "agreements": 128,
+        "denominator": 128,
+        "ratio": 1,
+        "threshold": 0.95,
+        "agreementPassed": true,
+        "opaqueFirstPasses": 0,
+        "opaqueSecondPasses": 0,
+        "passRateDelta": 0,
+        "maximumPassRateDelta": 0.05,
+        "passRateDeltaPassed": true
+      }
+    },
+    "majorityConsensus": {
+      "agreements": 128,
+      "denominator": 128,
+      "ratio": 1,
+      "mismatchedPairs": 0,
+      "passPairs": 0,
+      "failPairs": 128,
+      "thresholdAgreements": 127,
+      "passed": true
+    }
+  },
+  "thresholds": {
+    "source": "unchanged-v2-v3-locked-protocol",
+    "unchanged": true,
+    "calibratedValidRaters": { "required": 3, "actual": 3, "passed": true },
+    "hiddenDuplicateAgreementPerRater": { "threshold": 0.95, "passed": true },
+    "majorityDuplicateAgreement": {
+      "threshold": { "agreements": 127, "denominator": 128 },
+      "actual": { "agreements": 128, "denominator": 128 },
+      "passed": true
+    },
+    "everyPairwiseAgreement": { "threshold": 0.75, "passed": true },
+    "fleissKappa": {
+      "threshold": 0.6,
+      "actual": 0.40925500492287054,
+      "passed": false,
+      "prevalenceAdjustedPostHoc": false
+    },
+    "maximumDuplicateCopyPassRateDelta": { "threshold": 0.05, "passed": true },
+    "majorityFailureConcreteDefectRaters": {
+      "threshold": 2,
+      "majorityFailures": 369,
+      "supported": 369,
+      "passed": true
+    }
+  },
+  "instrumentValidity": {
+    "status": "failed",
+    "measurementUsable": false,
+    "blockers": [
+      "Fleiss kappa 0.40925500492287054 is below the locked 0.60 minimum; prevalence is not used to adjust the threshold."
+    ]
+  },
+  "architecturePerformance": null,
+  "consensus": null,
+  "offlineDifficultControlCriterion": {
+    "status": "not-evaluated",
+    "passed": false,
+    "reason": "Instrument reliability failed before the sealed performance mapping could be opened."
+  },
+  "descriptiveDuplicateControlOnly": {
+    "acceptedAsArchitecturePerformance": false,
+    "majorityPassPairs": 0,
+    "denominator": 128,
+    "note": "The opaque duplicate-control majority is 0/128 passes, but it is a reliability diagnostic and cannot be promoted to implementation-labelled performance."
+  },
+  "instability": {
+    "historicalUnchangedControl": {
+      "v1": { "passes": 88, "denominator": 128 },
+      "v2Consensus": { "passes": 0, "denominator": 128 },
+      "swing": 88
+    },
+    "replacementOpaqueDuplicateControl": { "passPairs": 0, "denominator": 128 },
+    "resolvedByReplacementCohort": false,
+    "reason": "The replacement duplicate-control observation again equals 0/128, but the full 384-row cohort fails locked Fleiss reliability; it therefore cannot resolve the prior 88-to-0 standard instability or support an architecture claim."
+  },
+  "retainedNonPerformanceEvidence": {
+    "sample": {
+      "complete": true,
+      "sourceLibraries": ["mui", "polaris"],
+      "axes": ["Size", "State", "Content", "Required", "Adornments"],
+      "sourceCells": 128,
+      "cellsPerSourceSet": 64,
+      "cellWeighting": "each exact source×size×state×content×required×adornments cell has equal weight",
+      "completeSetWeighting": "a source set passes only when all 64 paired cells are recognisable"
+    },
+    "webComponentParity": {
+      "status": "passed-parity-only",
+      "recognisability": "not-blind-graded",
+      "cells": 128,
+      "byteHashEqualToReact": 76,
+      "renderedPixelHashEqualToReact": 76,
+      "perceptualPixelEqualToReact": 128,
+      "geometryEqualToReact": 128,
+      "semanticProbeEqualToReact": 128
+    },
+    "offlineImplementation": "previously-passed-separate-from-recognisability",
+    "accounting": "previously-passed-offline-pending-live"
+  },
+  "evidenceStatus": {
+    "measurementReliability": "failed",
+    "architecturePerformance": "not-unsealed",
+    "offlineDifficultControl": "not-evaluated",
+    "humanRecognisabilityReleaseGate": "blocked",
+    "liveInputMayProceed": false,
+    "inputOverall": false
+  },
+  "blockers": [
+    "Fleiss kappa 0.40925500492287054 is below the locked 0.60 minimum; prevalence is not used to adjust the threshold."
+  ],
+  "nextAction": "Preserve the B/C/D submissions as refused measurement evidence, then commission a newly versioned three-rater performance round whose pre-performance calibration includes representative materiality-boundary cases; lock its packet, rubric, templates, and unchanged thresholds before collecting fresh rows."
+}

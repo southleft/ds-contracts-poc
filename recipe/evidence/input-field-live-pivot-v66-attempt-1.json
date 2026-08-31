@@ -1,0 +1,177 @@
+{
+  "artifactVersion": "input-live-v66-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "6b0bdd23321b803b9cb07dc972b7978ddf480f18",
+  "codeCommit": "6b0bdd23321b803b9cb07dc972b7978ddf480f18",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "108:223567",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436209,
+    "sha256": "1ac056a5ed36e13ddc909b7625fdad50113c2992135781b651a9fc9cbb815782",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v63FailureCleared": {
+    "setLayoutModeNotTheRefusalLocus": true
+  },
+  "v64FailureCleared": {
+    "setLayoutPaddingNotTheRefusalLocus": true
+  },
+  "v65FailureCleared": {
+    "setLayoutWidthModeNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "extractScene": {
+      "mui": { "FILL": 0, "FIXED": 24, "HUG": 104, "total": 128 },
+      "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 }
+    },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedVariantClipsContent": {
+    "hostPresent": { "mui": 128, "polaris": 128 },
+    "compileEmits": true
+  },
+  "observedSetLayoutMode": {
+    "extractScene": {
+      "mui": "HORIZONTAL",
+      "polaris": "HORIZONTAL"
+    },
+    "hostIr": {
+      "mui": "horizontal",
+      "polaris": "horizontal"
+    },
+    "compileEmits": "horizontal",
+    "compileOmits": false,
+    "v64TeachingHeld": true
+  },
+  "observedSetLayoutPadding": {
+    "extractScene": {
+      "mui": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 },
+      "polaris": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 }
+    },
+    "hostIr": {
+      "mui": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+      "polaris": { "top": 32, "right": 32, "bottom": 32, "left": 32 }
+    },
+    "compileEmits": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+    "compileOmits": false,
+    "v65TeachingHeld": true
+  },
+  "observedSetLayoutWidth": {
+    "extractScene": {
+      "mui": { "layoutSizingHorizontal": "HUG", "width": 31656 },
+      "polaris": { "layoutSizingHorizontal": "HUG", "width": 33050 }
+    },
+    "hostIr": {
+      "mui": { "mode": "hug" },
+      "polaris": { "mode": "hug" }
+    },
+    "compileEmits": { "mode": "hug" },
+    "compileOmits": false,
+    "payloadIr": { "mode": "hug" },
+    "writerProgramLayoutSizingHorizontalAssignments": 1,
+    "v66TeachingHeld": true
+  },
+  "observedSetStrokes": {
+    "mui": {
+      "present": true,
+      "value": []
+    },
+    "polaris": {
+      "present": true,
+      "value": []
+    },
+    "compileOmits": true
+  },
+  "observedSetFills": {
+    "extractScene": {
+      "mui": { "present": true, "value": [{ "type": "SOLID", "color": "#f7f7f8ff" }] },
+      "polaris": { "present": true, "value": [{ "type": "SOLID", "color": "#f7f7f8ff" }] }
+    },
+    "hostIr": {
+      "mui": { "present": true, "value": [] },
+      "polaris": { "present": true, "value": [] }
+    },
+    "compileOmits": true
+  },
+  "observedSetClipsContent": {
+    "mui": false,
+    "polaris": false,
+    "compileEmits": false
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v66.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.strokes; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Unfrozen v17 writer assigned set.layoutSizingHorizontal=\"HUG\" after combineAsVariants. Host did not refuse $.layout.width.mode. Extract layoutSizingHorizontal is HUG both (MUI hug width 31656, Polar hug width 33050). Host IR layout.width is {mode:hug} / {mode:hug}. Compile root emits width.mode hug both. V66 teaching held. Pixel widths remain library-specific hug extents; they were not taught as FIXED and were not compile-carried. Host then refused unsupported structural edit at $.strokes. $ is the extracted component-set root, role input-field/set, kind component-set. Extract scene strokes is [] both. Host IR strokes is [] both. Compile root omits strokes both. This is a compile-absent omit, not a value disagreement. Do not invent a stroke. Do not compile-carry []. Do not teach FIXED. Do not invent hug onto host-normalize (extract is already HUG). Do not omit layout.width.mode. Do not change set layout.mode back to vertical. Do not restart v66 attempt 2 as-is. Do not patch hashed v16 or v66 writer bytes. Next prepare is a scene-readback/compile overlay that omits set strokes (one teaching). Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436209 bytes, sha256 1ac056a5ed36e13ddc909b7625fdad50113c2992135781b651a9fc9cbb815782). Content-width census is MUI 128/128 FILL and Polar 128/128 FILL. Extract content-height is MUI 24 FIXED / 104 HUG and Polar 128 HUG. New page 108:223567 (not 108:220838). Cleanup accepted; remainingOwnedNodes 0.",
+    "inputFieldRecipeInV66AntecedentHashSet": false,
+    "writerInV66AntecedentHashSet": true,
+    "restoreInV66AntecedentHashSet": true,
+    "extractRuntimeInV66AntecedentHashSet": true,
+    "sceneReadbackInV66AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "108:223567",
+    "removedPageNodeId": "108:223567"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterMinted": true,
+  "v65SceneReadbackUnchanged": true,
+  "v65AuthorizationReusable": false,
+  "v65AntecedentBytesUnchanged": true,
+  "v64SceneReadbackUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV66Attempt2WithoutSetStrokesOmitForbidden": true
+}

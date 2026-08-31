@@ -1,0 +1,185 @@
+{
+  "version": "input-field-paired-comparison-instrument-v1",
+  "status": "qualification-incomplete-performance-not-commissioned-key-sealed",
+  "protocol": {
+    "path": "recipe/evidence/input-field-paired-comparison-v1/protocol.json",
+    "sha256": "d6c9b1b7282a289039a3f5c0092da7d088a56268dfde4972ed65214aab966a5a"
+  },
+  "gradeSchema": {
+    "path": "recipe/evidence/input-field-paired-comparison-v1/grade.schema.json",
+    "sha256": "23179ec871dd0d61189b3d89b2b6a81b530a4431ed866f6d917931e4373aef2b"
+  },
+  "gold": {
+    "packet": {
+      "path": "recipe/evidence/input-field-paired-comparison-v1/gold/blind-packet/packet.json",
+      "sha256": "4f3418b4a54c5cc683ffc07c7098c282324d931fedd7a50cf5c2bd720b1d1d1b"
+    },
+    "key": {
+      "path": "recipe/evidence/input-field-paired-comparison-v1/gold/sealed-answer-key.json",
+      "sha256": "67ccb5fce4e6ca88d9fc5ba65503f84700090b116354cda83f53d8e1dc6563d3",
+      "sealed": true
+    },
+    "counts": {
+      "tasks": 48,
+      "primaryTasks": 24,
+      "sideSwappedHiddenDuplicates": 24
+    },
+    "randomizedBatchHash": "de2e95a6377830cc2da0020b05564c0e03592478f7bcfe6944515b343112c963"
+  },
+  "performance": {
+    "packet": {
+      "path": "recipe/evidence/input-field-paired-comparison-v1/performance/blind-packet/packet.json",
+      "sha256": "e21e8bf9cbcbded15e35a11a08b03a7a68e408c585ac64ac7ef631862e0f90d7"
+    },
+    "key": {
+      "path": "recipe/evidence/input-field-paired-comparison-v1/performance/sealed-answer-key.json",
+      "sha256": "9c365fc7ff82f9eaf1c3ca7a87b408c6bdcf67e595ecdbd6175cf7b7c8ad7a3a",
+      "sealed": true,
+      "parsedForResult": false
+    },
+    "counts": {
+      "tasks": 256,
+      "primaryTasks": 128,
+      "sideSwappedHiddenDuplicates": 128
+    },
+    "randomizedBatchHash": "653eaed5834d79511209932e38a4b3235f0a4f7609e76c62ffcdb6502d6d9c8b",
+    "sourceByteContinuity": {
+      "exactIndependentReferences": 128,
+      "exactLegacyCandidates": 128,
+      "exactRecipeCandidates": 128,
+      "presentationsPerCell": 2
+    }
+  },
+  "thresholds": {
+    "calibratedValidRatersRequired": 3,
+    "goldAccuracyMinimum": 0.95,
+    "allClearGoldWinnersRequired": true,
+    "validEnvelopeRequired": true,
+    "sideSwapConsistencyPerRaterMinimum": 0.95,
+    "majoritySideSwapConsistency": { "numerator": 127, "denominator": 128 },
+    "everyPairwiseCategoricalAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "statistic": "Fleiss kappa over left/right/tie is predeclared and reported with raw pairwise agreement. Side-swapped duplicates symmetrise left/right category prevalence; tie remains an explicit third category.",
+    "majorityDecisionSupportRatersMinimum": 2,
+    "finalDenominator": 128,
+    "noDenominatorReduction": true,
+    "failureConsequence": "Any failed qualification, envelope, side-swap, pairwise, kappa, or majority-support threshold keeps the performance key sealed and yields no relative result."
+  },
+  "objectiveAbsoluteGate": {
+    "path": "recipe/evidence/input-field-paired-comparison-v1/objective-absolute-gate.json",
+    "sha256": "a6b91ea5b683250d14e843511ab848e3a489b073a515234b66089f1523fb230f",
+    "status": "blocked-existing-evidence-incomplete",
+    "passed": false
+  },
+  "raterPrompts": {
+    "RATER-PAIR-V1-A": {
+      "gold": "Act as independent calibrated rater RATER-PAIR-V1-A. Open only recipe/evidence/input-field-paired-comparison-v1/gold/blind-packet/packet.json, recipe/evidence/input-field-paired-comparison-v1/gold/templates/rater-pair-v1-a.json, recipe/evidence/input-field-paired-comparison-v1/grade.schema.json, and images referenced by the packet. Grade all 48 rows in exact order using left|right|tie, confidence, and concrete rationale; never inspect keys, parent directories, prior grades, or other raters. Write only recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-a.json and run npx tsx recipe/input-field-paired-comparison-v1.ts --preflight recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-a.json. Stop after GOLD until a passing qualification receipt is issued.",
+      "performance": "Only after recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-a.json proves >=95% GOLD and all clear winners correct, open recipe/evidence/input-field-paired-comparison-v1/performance/blind-packet/packet.json, recipe/evidence/input-field-paired-comparison-v1/performance/templates/rater-pair-v1-a.json, recipe/evidence/input-field-paired-comparison-v1/grade.schema.json, that receipt, and packet-referenced images. Grade all 256 tasks independently in exact order. Choose which candidate is closer even if both fail absolutely; tie only within the explicit tolerances. Write only recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-a.json and run npx tsx recipe/input-field-paired-comparison-v1.ts --preflight recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-a.json. Never inspect recipe/evidence/input-field-paired-comparison-v1/performance/sealed-answer-key.json, compare tasks, infer candidate or hidden-control identity, access prior rounds, or communicate with another rater.",
+      "outputPaths": {
+        "gold": "recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-a.json",
+        "qualificationReceipt": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-a.json",
+        "performance": "recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-a.json"
+      },
+      "performancePacketHash": "e21e8bf9cbcbded15e35a11a08b03a7a68e408c585ac64ac7ef631862e0f90d7"
+    },
+    "RATER-PAIR-V1-B": {
+      "gold": "Act as independent calibrated rater RATER-PAIR-V1-B. Open only recipe/evidence/input-field-paired-comparison-v1/gold/blind-packet/packet.json, recipe/evidence/input-field-paired-comparison-v1/gold/templates/rater-pair-v1-b.json, recipe/evidence/input-field-paired-comparison-v1/grade.schema.json, and images referenced by the packet. Grade all 48 rows in exact order using left|right|tie, confidence, and concrete rationale; never inspect keys, parent directories, prior grades, or other raters. Write only recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-b.json and run npx tsx recipe/input-field-paired-comparison-v1.ts --preflight recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-b.json. Stop after GOLD until a passing qualification receipt is issued.",
+      "performance": "Only after recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-b.json proves >=95% GOLD and all clear winners correct, open recipe/evidence/input-field-paired-comparison-v1/performance/blind-packet/packet.json, recipe/evidence/input-field-paired-comparison-v1/performance/templates/rater-pair-v1-b.json, recipe/evidence/input-field-paired-comparison-v1/grade.schema.json, that receipt, and packet-referenced images. Grade all 256 tasks independently in exact order. Choose which candidate is closer even if both fail absolutely; tie only within the explicit tolerances. Write only recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-b.json and run npx tsx recipe/input-field-paired-comparison-v1.ts --preflight recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-b.json. Never inspect recipe/evidence/input-field-paired-comparison-v1/performance/sealed-answer-key.json, compare tasks, infer candidate or hidden-control identity, access prior rounds, or communicate with another rater.",
+      "outputPaths": {
+        "gold": "recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-b.json",
+        "qualificationReceipt": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-b.json",
+        "performance": "recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-b.json"
+      },
+      "performancePacketHash": "e21e8bf9cbcbded15e35a11a08b03a7a68e408c585ac64ac7ef631862e0f90d7"
+    },
+    "RATER-PAIR-V1-C": {
+      "gold": "Act as independent calibrated rater RATER-PAIR-V1-C. Open only recipe/evidence/input-field-paired-comparison-v1/gold/blind-packet/packet.json, recipe/evidence/input-field-paired-comparison-v1/gold/templates/rater-pair-v1-c.json, recipe/evidence/input-field-paired-comparison-v1/grade.schema.json, and images referenced by the packet. Grade all 48 rows in exact order using left|right|tie, confidence, and concrete rationale; never inspect keys, parent directories, prior grades, or other raters. Write only recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-c.json and run npx tsx recipe/input-field-paired-comparison-v1.ts --preflight recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-c.json. Stop after GOLD until a passing qualification receipt is issued.",
+      "performance": "Only after recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-c.json proves >=95% GOLD and all clear winners correct, open recipe/evidence/input-field-paired-comparison-v1/performance/blind-packet/packet.json, recipe/evidence/input-field-paired-comparison-v1/performance/templates/rater-pair-v1-c.json, recipe/evidence/input-field-paired-comparison-v1/grade.schema.json, that receipt, and packet-referenced images. Grade all 256 tasks independently in exact order. Choose which candidate is closer even if both fail absolutely; tie only within the explicit tolerances. Write only recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-c.json and run npx tsx recipe/input-field-paired-comparison-v1.ts --preflight recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-c.json. Never inspect recipe/evidence/input-field-paired-comparison-v1/performance/sealed-answer-key.json, compare tasks, infer candidate or hidden-control identity, access prior rounds, or communicate with another rater.",
+      "outputPaths": {
+        "gold": "recipe/evidence/input-field-paired-comparison-v1/gold/submissions/rater-pair-v1-c.json",
+        "qualificationReceipt": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-c.json",
+        "performance": "recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-c.json"
+      },
+      "performancePacketHash": "e21e8bf9cbcbded15e35a11a08b03a7a68e408c585ac64ac7ef631862e0f90d7"
+    }
+  },
+  "preservation": {
+    "historicalRootsModified": false,
+    "snapshots": [
+      {
+        "root": "recipe/evidence/input-field-comparison",
+        "files": 902,
+        "bytes": 10959678,
+        "aggregateSha256": "97aa3f02e528aa55ad38b85b014c8e916ecdc6054235ee4fc6d1a917081ef871"
+      },
+      {
+        "root": "recipe/evidence/input-field-comparison-calibrated",
+        "files": 777,
+        "bytes": 9869527,
+        "aggregateSha256": "fa11a7f3ada7643c43ba6bdf95a9328965a2310f2e310fdde009d26b2d971eb1"
+      },
+      {
+        "root": "recipe/evidence/input-field-comparison-calibration-v2",
+        "files": 836,
+        "bytes": 9429777,
+        "aggregateSha256": "4431cbc41f429b134c3967757ee3530356e6df493a01f8e413e00d38a41b0648"
+      },
+      {
+        "root": "recipe/evidence/input-field-comparison-calibration-v3-replacement",
+        "files": 13,
+        "bytes": 2544906,
+        "aggregateSha256": "102c6dc31741394a649e166b90694a16892e49a101d9810644becaecc3c904cf"
+      },
+      {
+        "root": "recipe/evidence/input-field-comparison-v2",
+        "files": 906,
+        "bytes": 11582098,
+        "aggregateSha256": "104ea1252fcc7132c4a9ab72de7418e5974f66897598483d5d8c1a4a125af190"
+      }
+    ]
+  },
+  "claims": {
+    "canProveAfterReliableGrades": "relative fidelity preference between unchanged recipe and legacy candidates over all 128 exact cells",
+    "cannotProve": "absolute recognisability, Input success, live canvas usability, generality beyond this denominator, or permission to begin live work"
+  },
+  "qualification": {
+    "evaluated": true,
+    "validEnvelopes": 3,
+    "requiredQualifiers": 3,
+    "qualifiedRaters": [],
+    "failedRaters": ["RATER-PAIR-V1-A", "RATER-PAIR-V1-B", "RATER-PAIR-V1-C"],
+    "allPassed": false,
+    "performanceCommissioned": false,
+    "performancePromptsIssued": false,
+    "performanceGraded": false,
+    "performanceKeyUnsealed": false,
+    "receipts": {
+      "RATER-PAIR-V1-A": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-a.json",
+      "RATER-PAIR-V1-B": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-b.json",
+      "RATER-PAIR-V1-C": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-c.json"
+    },
+    "replacementProtocol": {
+      "required": true,
+      "preserveOriginalSubmissionsAndReceipts": true,
+      "round": 1,
+      "replaceOnlyFailedSlots": [
+        "RATER-PAIR-V1-A",
+        "RATER-PAIR-V1-B",
+        "RATER-PAIR-V1-C"
+      ],
+      "replacementRaterIds": [
+        "RATER-PAIR-V1-A-R1",
+        "RATER-PAIR-V1-B-R1",
+        "RATER-PAIR-V1-C-R1"
+      ],
+      "requirements": [
+        "Recruit fresh independent raters with no access to prior submissions, receipts, GOLD keys, or performance artifacts.",
+        "Create a qualification-only replacement packet with fresh opaque task, reference, candidate, pair, and randomized-order bindings; lock its sealed GOLD key before rater access.",
+        "Use the unchanged rubric, 48-row denominator, >=95% GOLD threshold, every clear winner correct requirement, exact envelope validation, and no waivers.",
+        "Write replacement templates, submissions, and receipts under gold/replacements/round-1 without overwriting any original artifact.",
+        "Commission performance only after the retained qualifiers plus all replacement slots form a three-rater passing cohort with hash-bound performance templates."
+      ],
+      "root": "recipe/evidence/input-field-paired-comparison-v1/gold/replacements/round-1"
+    }
+  }
+}

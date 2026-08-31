@@ -1,0 +1,100 @@
+{
+  "protocolVersion": "button-live-canvas-v4",
+  "counts": {
+    "expectedCells": 12,
+    "packetCells": 12,
+    "packetSpecimens": 12,
+    "referenceImages": 12,
+    "specimenImages": 12,
+    "nonzeroImages": 24,
+    "gradedSpecimens": 12,
+    "recognisable": 12,
+    "notRecognisable": 0
+  },
+  "grades": [
+    {
+      "specimenId": "specimen-3c2155846f05",
+      "referenceId": "cell-e9fe00a5179d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-082b942ece71",
+      "referenceId": "cell-030eaf529e3a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-72621c5fc797",
+      "referenceId": "cell-5eaa940d0be5",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-6759eb8e7af7",
+      "referenceId": "cell-f495272b6e92",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-e477a34f8ef1",
+      "referenceId": "cell-56651013d52a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-113ff7d3a70c",
+      "referenceId": "cell-9de488e11f1d",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-914c41c8f555",
+      "referenceId": "cell-b119c22e9e57",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-1638caef312a",
+      "referenceId": "cell-5f9749142cba",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-a1d8c4b847c7",
+      "referenceId": "cell-e1f00bba996c",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-05f8b77d43f8",
+      "referenceId": "cell-15c725e7f09e",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-0ecabcba3f79",
+      "referenceId": "cell-ba92c7c0417a",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    },
+    {
+      "specimenId": "specimen-7c254eacb1b0",
+      "referenceId": "cell-fb6f8afd9090",
+      "recognisable": true,
+      "confidence": "high",
+      "defects": []
+    }
+  ]
+}

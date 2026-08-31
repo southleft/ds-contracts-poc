@@ -1,0 +1,159 @@
+{
+  "version": "input-field-paired-comparison-instrument-v1",
+  "protocolVersion": "input-field-relative-fidelity-v1",
+  "lockedBeforeRaterAccess": true,
+  "purpose": "Measure relative fidelity between two opaque candidates on each exact Input/Field source cell without treating preference as proof of absolute recognisability.",
+  "measurementFailureDiagnosis": {
+    "immutableFailedRounds": [
+      {
+        "root": "recipe/evidence/input-field-comparison-calibrated",
+        "hiddenDuplicateConsistency": "100%",
+        "fleissKappa": 0.4725274725274726
+      },
+      {
+        "root": "recipe/evidence/input-field-comparison-calibration-v3-replacement",
+        "hiddenDuplicateConsistency": "100%",
+        "overallRawPairwiseAgreement": 0.956597222222222,
+        "fleissKappa": 0.40925500492287054
+      }
+    ],
+    "diagnosis": "Binary absolute pass/fail mixed recognisability with materiality threshold selection. Extreme fail prevalence raised chance agreement, depressing kappa despite high raw agreement, while each rater's perfect duplicate repeatability showed stable individual thresholds rather than a shared threshold.",
+    "consequence": "Do not commission another equivalent absolute pass/fail round and do not change the locked historical criteria. Use paired relative choice for architecture-progress evidence and retain absolute recognisability as a separate gate."
+  },
+  "claims": {
+    "relativeFidelity": "Which opaque candidate is closer to the independent original-source reference on the exact same cell.",
+    "absoluteRecognisability": "A separate human/design-review decision plus objective structural, state, geometry, semantic, Web Component, zero-silent, and usability checks; never inferred from relative preference."
+  },
+  "gold": {
+    "independentFromTargetPerformance": true,
+    "syntheticObjectivePixelFixtures": true,
+    "primaryCases": 24,
+    "sideSwappedHiddenDuplicates": 24,
+    "classes": {
+      "clearWinners": 12,
+      "trueTies": 6,
+      "materialityBoundaries": 6
+    },
+    "expectedOutcomesLockedBeforeRaterAccess": true,
+    "ambiguousOpinionCasesForbidden": true
+  },
+  "performance": {
+    "independentReferences": 128,
+    "primaryTasks": 128,
+    "sideSwappedHiddenDuplicates": 128,
+    "totalTasks": 256,
+    "exactUnchangedReferenceLegacyAndRecipeBytesRequired": true,
+    "opaqueCandidatesOnly": true,
+    "independentlyRandomizedCandidateOrderPerCell": true,
+    "duplicateIdsUnrelated": true,
+    "duplicateIdentityHidden": true,
+    "keyRevealOnlyAfterReliability": true,
+    "duplicateVotesExcludedFromFinalArithmetic": true
+  },
+  "rubric": {
+    "version": "input-field-paired-observable-rubric-v1",
+    "claim": "Choose which opaque candidate is closer to the independent original-source reference for this exact cell; this is relative fidelity, not absolute recognisability.",
+    "decisionOrder": [
+      {
+        "rank": 1,
+        "category": "structure-and-state",
+        "rule": "Required roles, visible content, adornments, and semantic state dominate every lower-ranked difference."
+      },
+      {
+        "rank": 2,
+        "category": "geometry-and-proportions",
+        "rule": "Compare silhouette, dimensions, padding, gaps, alignment, scale, clipping, and overlap."
+      },
+      {
+        "rank": 3,
+        "category": "labels-helpers-adornments",
+        "rule": "Compare wording, role placement, required marker, helper/error message, and leading/trailing adornments."
+      },
+      {
+        "rank": 4,
+        "category": "typography",
+        "rule": "Compare hierarchy, line count, wrapping, baseline, size, and weight; raster-only shifts may be tolerated."
+      },
+      {
+        "rank": 5,
+        "category": "border-fill-focus-error",
+        "rule": "Compare border/fill classes and focus, error, and disabled treatments after all higher ranks."
+      }
+    ],
+    "materialityTolerances": {
+      "overallWidthOrHeight": "material only when deviation exceeds both 4 px and 8% of the reference dimension",
+      "localSpacing": "material only when deviation exceeds both 4 px and 20% of the reference spacing",
+      "roleDefiningScale": "material above 10%",
+      "clipping": "material above 5% of a required part's visible area",
+      "overlap": "material above 2 px between required parts",
+      "glyphEdgeShift": "within 1 px is immaterial when hierarchy and wrapping stay unchanged",
+      "color": "immaterial only within both 12 per-channel sRGB and 20 Euclidean sRGB, with semantic state and contrast role unchanged"
+    },
+    "choiceRule": "At the first ranked category that distinguishes candidates, choose the candidate with fewer or smaller material defects relative to the reference. A candidate can be closer even when neither would pass an absolute gate. 'Both fail' is not a valid reason to avoid choosing.",
+    "tieRule": "Choose tie only when neither candidate is distinguished at any ranked category and their residual difference magnitudes are equivalent within 1 px geometry, 1% role scale, 1 px glyph shift, and 2 per-channel/3 Euclidean sRGB. The tie basis must name the measured tolerance or exact equality.",
+    "rationaleRule": "Every non-tie names the decisive ranked difference and at least one concrete defect in the losing candidate. Never infer candidate provenance or compare tasks."
+  },
+  "reliability": {
+    "calibratedValidRatersRequired": 3,
+    "goldAccuracyMinimum": 0.95,
+    "allClearGoldWinnersRequired": true,
+    "validEnvelopeRequired": true,
+    "sideSwapConsistencyPerRaterMinimum": 0.95,
+    "majoritySideSwapConsistency": { "numerator": 127, "denominator": 128 },
+    "everyPairwiseCategoricalAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "statistic": "Fleiss kappa over left/right/tie is predeclared and reported with raw pairwise agreement. Side-swapped duplicates symmetrise left/right category prevalence; tie remains an explicit third category.",
+    "majorityDecisionSupportRatersMinimum": 2,
+    "finalDenominator": 128,
+    "noDenominatorReduction": true,
+    "failureConsequence": "Any failed qualification, envelope, side-swap, pairwise, kappa, or majority-support threshold keeps the performance key sealed and yields no relative result."
+  },
+  "relativeResultRule": {
+    "onlyAfterReliabilityAndUnsealing": true,
+    "categories": ["recipe-wins", "legacy-wins", "ties"],
+    "reportBy": [
+      "all-128-cells",
+      "source",
+      "Size",
+      "State",
+      "Content",
+      "Required",
+      "Adornments"
+    ],
+    "pass": "recipe wins > legacy wins over exactly 128 primary cells, with no denominator reduction and no hidden source branch",
+    "doesNotAuthorize": "Input success, live work, or bypass of objective and later absolute human gates"
+  },
+  "preservation": [
+    {
+      "root": "recipe/evidence/input-field-comparison",
+      "files": 902,
+      "bytes": 10959678,
+      "aggregateSha256": "97aa3f02e528aa55ad38b85b014c8e916ecdc6054235ee4fc6d1a917081ef871"
+    },
+    {
+      "root": "recipe/evidence/input-field-comparison-calibrated",
+      "files": 777,
+      "bytes": 9869527,
+      "aggregateSha256": "fa11a7f3ada7643c43ba6bdf95a9328965a2310f2e310fdde009d26b2d971eb1"
+    },
+    {
+      "root": "recipe/evidence/input-field-comparison-calibration-v2",
+      "files": 836,
+      "bytes": 9429777,
+      "aggregateSha256": "4431cbc41f429b134c3967757ee3530356e6df493a01f8e413e00d38a41b0648"
+    },
+    {
+      "root": "recipe/evidence/input-field-comparison-calibration-v3-replacement",
+      "files": 13,
+      "bytes": 2544906,
+      "aggregateSha256": "102c6dc31741394a649e166b90694a16892e49a101d9810644becaecc3c904cf"
+    },
+    {
+      "root": "recipe/evidence/input-field-comparison-v2",
+      "files": 906,
+      "bytes": 11582098,
+      "aggregateSha256": "104ea1252fcc7132c4a9ab72de7418e5974f66897598483d5d8c1a4a125af190"
+    }
+  ],
+  "commitment": "64f071edba0bf024ace7cd5875838727120092854db041ecb17a8aca89d707c8"
+}

@@ -1,0 +1,25 @@
+{
+  "artifactVersion": "input-live-v6-authorization-draft-v1",
+  "status": "draft uncommitted; pending separate authorization; live execution and capture forbidden",
+  "authorized": false,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "antecedentCommit": null,
+  "protocolCommit": null,
+  "runnerCommit": null,
+  "authorizationCommit": null,
+  "codeCommit": null,
+  "upstreamCommit": null,
+  "maximumAttempts": 3,
+  "exactProofPlanSha256": "28c22a4b86fe98e558c48278c624a229da6417b5abcbdd6587cb533197fdf199",
+  "exactCaptureManifestSha256": "b58506dd5bc238cafc7b346ddad6fa5d1c1178e5ec6e566f0cc799e4c43e9571",
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending",
+    "attributableReviewerRequired": true
+  },
+  "outcomes": null
+}

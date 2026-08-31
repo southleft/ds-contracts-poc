@@ -1,0 +1,21 @@
+{
+  "version": 3,
+  "archetype": "input / field",
+  "status": "false-ungraded",
+  "overall": false,
+  "gradeWritten": false,
+  "v1PreservedFailure": true,
+  "receipt": "recipe/evidence/input-field-comparison-v3/receipt.json",
+  "receiptHash": "5a7ace2b71c1aa835d11cd518a96d8888c918e48e81cbeedc1cb4fefc72913dc",
+  "packet": "recipe/evidence/input-field-comparison-v3/blind-packet/packet.json",
+  "packetHash": "98aa7a1ac47f12e71d0bccadf4a13ed10400c33f48416fabfa6bd011701f6833",
+  "sealedAnswerKey": "recipe/evidence/input-field-comparison-v3/sealed-answer-key.json",
+  "counts": {
+    "sourceReferences": 128,
+    "legacyOutputs": 128,
+    "recipeReactOutputs": 128,
+    "recipeWebComponentOutputs": 128,
+    "blindReferences": 128,
+    "blindSpecimens": 256
+  }
+}

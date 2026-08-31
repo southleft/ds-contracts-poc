@@ -1,0 +1,295 @@
+{
+  "artifactVersion": "input-live-v71-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "68349870953c6865a100f6c00100e2a7fac0700e",
+  "codeCommit": "68349870953c6865a100f6c00100e2a7fac0700e",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "110:237212",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "05a0654618f46df22152870410362bbd44339f767139013ff219bb717488c2e2",
+    "payloadSha256": "f5e1294a09074cf4dfe7509e4a27531a288d8ffb93828664b2b9e92fe7137ce9"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436209,
+    "sha256": "595c99394431385cc3ac51a010f6ed48608318cb01b099d7496977a797261f8d",
+    "hostNormalizeAccount": true,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v63FailureCleared": {
+    "setLayoutModeNotTheRefusalLocus": true
+  },
+  "v64FailureCleared": {
+    "setLayoutPaddingNotTheRefusalLocus": true
+  },
+  "v65FailureCleared": {
+    "setLayoutWidthModeNotTheRefusalLocus": true
+  },
+  "v66FailureCleared": {
+    "setStrokesNotTheRefusalLocus": true
+  },
+  "v67FailureCleared": {
+    "polarLabelRowBindingOrderNotTheRefusalLocus": true
+  },
+  "v68FailureCleared": {
+    "polarSurfaceBindingOrderNotTheRefusalLocus": true
+  },
+  "v69FailureCleared": {
+    "fontProvenanceNameKeyOrderNotTheRefusalLocus": true
+  },
+  "v70FailureCleared": {
+    "instancePayloadFillKindNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "extractScene": {
+      "mui": { "FILL": 0, "FIXED": 24, "HUG": 104, "total": 128 },
+      "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 }
+    },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedSetLayoutMode": {
+    "extractScene": {
+      "mui": "HORIZONTAL",
+      "polaris": "HORIZONTAL"
+    },
+    "hostIr": {
+      "mui": "horizontal",
+      "polaris": "horizontal"
+    },
+    "compileEmits": "horizontal",
+    "compileOmits": false,
+    "v64TeachingHeld": true
+  },
+  "observedSetLayoutPadding": {
+    "extractScene": {
+      "mui": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 },
+      "polaris": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 }
+    },
+    "hostIr": {
+      "mui": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+      "polaris": { "top": 32, "right": 32, "bottom": 32, "left": 32 }
+    },
+    "compileEmits": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+    "compileOmits": false,
+    "v65TeachingHeld": true
+  },
+  "observedSetLayoutWidth": {
+    "extractScene": {
+      "mui": { "layoutSizingHorizontal": "HUG", "width": 31656 },
+      "polaris": { "layoutSizingHorizontal": "HUG", "width": 33050 }
+    },
+    "hostIr": {
+      "mui": { "mode": "hug" },
+      "polaris": { "mode": "hug" }
+    },
+    "compileEmits": { "mode": "hug" },
+    "compileOmits": false,
+    "payloadIr": { "mode": "hug" },
+    "writerProgramLayoutSizingHorizontalAssignments": 1,
+    "v66TeachingHeld": true
+  },
+  "observedSetStrokes": {
+    "extractScene": {
+      "mui": { "present": true, "value": [] },
+      "polaris": { "present": true, "value": [] }
+    },
+    "hostIr": {
+      "mui": { "present": false },
+      "polaris": { "present": false }
+    },
+    "compileOmits": true,
+    "v67TeachingHeld": true
+  },
+  "observedLabelRowBindings": {
+    "muiFirstChildIsSurfaceNotLabelRow": true,
+    "polaris": {
+      "host": [
+        "layout.itemSpacing",
+        "layout.padding.top",
+        "layout.padding.left"
+      ],
+      "compile": [
+        "layout.itemSpacing",
+        "layout.padding.top",
+        "layout.padding.left"
+      ],
+      "hostBindingsLength": 3,
+      "compileBindingsLength": 3,
+      "fieldsMatchCompileOrder": true
+    },
+    "v68TeachingHeld": true
+  },
+  "observedSurfaceBindingsMui": {
+    "hostBindingsLength": 12,
+    "compileBindingsLength": 12,
+    "fieldsMatchCompileOrder": true
+  },
+  "observedPolarSurfaceBindings": {
+    "host": [
+      "layout.itemSpacing",
+      "layout.padding.right",
+      "layout.padding.left",
+      "layout.height.value",
+      "layout.minWidth",
+      "layout.minHeight",
+      "fills.0.color",
+      "strokes.0.weight",
+      "strokes.0.paint.color",
+      "cornerRadius.topLeft",
+      "cornerRadius.topRight",
+      "cornerRadius.bottomRight",
+      "cornerRadius.bottomLeft"
+    ],
+    "compile": [
+      "layout.itemSpacing",
+      "layout.padding.right",
+      "layout.padding.left",
+      "layout.height.value",
+      "layout.minWidth",
+      "layout.minHeight",
+      "fills.0.color",
+      "strokes.0.weight",
+      "strokes.0.paint.color",
+      "cornerRadius.topLeft",
+      "cornerRadius.topRight",
+      "cornerRadius.bottomRight",
+      "cornerRadius.bottomLeft"
+    ],
+    "hostBindingsLength": 13,
+    "compileBindingsLength": 13,
+    "fieldsMatchCompileOrder": true,
+    "v69TeachingHeld": true
+  },
+  "observedFontProvenanceNameOrder": {
+    "nameChannelMismatches": 0,
+    "v70TeachingHeld": true,
+    "canonicalizer": "canonicalizeObservedFontProvenanceName",
+    "compileKeyOrder": "fallbackChain-first"
+  },
+  "observedInstancePayloadFillKind": {
+    "canonicalizer": "canonicalizeObservedInstancePayloadFillKind",
+    "v71TeachingHeld": true,
+    "muiKindTypeOnlyCleared": true,
+    "polarisFillNowMatchesCompileKindSolid": true,
+    "polarisPayloadStillMismatchesOnIntrinsicSizeWidth": true,
+    "hashedV70StillEmitsTypeSOLID": true
+  },
+  "observedIndependentRootAccounting": {
+    "mui": {
+      "matched": 22810,
+      "silent": 1,
+      "mismatch": 1,
+      "missing": 0,
+      "extra": 0,
+      "byChannel": {
+        "variantAxis": 1
+      }
+    },
+    "polaris": {
+      "matched": 20722,
+      "silent": 193,
+      "mismatch": 193,
+      "missing": 0,
+      "extra": 0,
+      "byChannel": {
+        "instancePayload": 128,
+        "effect": 64,
+        "variantAxis": 1
+      }
+    },
+    "sampledClasses": {
+      "nameFontProvenanceKeyOrderBoth": 0,
+      "instancePayloadFillsKindSolidVsTypeSOLIDMuiOnly": 0,
+      "instancePayloadFillsKindSolidVsTypeSOLIDPlusPolarIntrinsicSize": 0,
+      "polarisInstancePayloadIntrinsicSizeOnly": 128,
+      "polarisInstancePayloadIntrinsicSizeWidth8to9": 64,
+      "polarisInstancePayloadIntrinsicSizeWidth25_78125to30": 64,
+      "polarisEffectDropShadowSpread1to0": 32,
+      "polarisEffectDropShadowSpread3to0": 32,
+      "variantAxisSizeValuesOrderSwapBoth": 2
+    },
+    "fillDiscriminator": {
+      "expectedCompile": { "kind": "solid" },
+      "observedAfterV71Alias": { "kind": "solid" },
+      "muiKindTypeOnly": true,
+      "polarisKindTypeOnly": false,
+      "polarisWidthRemainedInSameInstancePayloadFact": true
+    },
+    "nameProvenanceCanonicalKeysMatch": true,
+    "recipeRefusalDidNotFire": true
+  },
+  "failure": {
+    "phase": "independent-root-accounting",
+    "locus": "recipe/input-field-live-v71-contract.ts:487",
+    "messages": [
+      "Input live v12 independent root accounting failed: mui:missing=0,extra=0,mismatch=1,duplicate=0,unobserved=0,silent=1;polaris:missing=0,extra=0,mismatch=193,duplicate=0,unobserved=0,silent=193"
+    ],
+    "cause": "Scene-readback-v71 canonicalized observed instancePayload fill type:SOLID to compile {kind:solid} on the paint object only. MUI instancePayload kind/type-only facts fell from 128 to 0; MUI silent 129 → 1. Polar fill leaves now match compile kind+color; Polar silent stayed 193 because width remained in the same atomic instancePayload fact (128 intrinsicSize-only) plus 64 effect plus 1 Size axis. Polar payload facts did not split into a separate width class. Measured Polar intrinsicSize.width pairs remain 8→9 (64) and 25.78125→30 (64). Polar effect drop-shadow spread remains 1→0 (32) and 3→0 (32). Both roots still swap variantAxis Size values [small,medium] vs [medium,small] (1+1 order-only). Font-provenance name order held (0). Polar surface/label-row compile order held. Set strokes omitted; extract width remains HUG both. Do not invent Polar pixels or spreads as compile targets. Do not teach FIXED. Do not rewrite Polar widths in a shared payload rewriter. Do not restart v71 attempt 2 as-is. Size-axis order is the remaining same-class leftover allowed for V72. Do not patch hashed v16, v17, or v70 writer or scene-readback bytes. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436209 bytes, sha256 595c99394431385cc3ac51a010f6ed48608318cb01b099d7496977a797261f8d). Content-width census is MUI 128/128 FILL and Polar 128/128 FILL. Extract content-height is MUI 24 FIXED / 104 HUG and Polar 128 HUG. New page 110:237212 (not 110:234483). Cleanup accepted; remainingOwnedNodes 0.",
+    "inputFieldRecipeInV71AntecedentHashSet": false,
+    "writerInV71AntecedentHashSet": true,
+    "restoreInV71AntecedentHashSet": true,
+    "extractRuntimeInV71AntecedentHashSet": true,
+    "sceneReadbackInV71AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "110:237212",
+    "removedPageNodeId": "110:237212"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterMinted": true,
+  "v70SceneReadbackUnchanged": true,
+  "v70AuthorizationReusable": false,
+  "v70AntecedentBytesUnchanged": true,
+  "v71SceneReadbackTaughtFillKindOnly": true,
+  "nextAttempt": 2,
+  "restartAsV71Attempt2WithoutSizeAxisOrderDiagnosisForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "v72SizeAxisOrderOnlyOnBothLibraries": true
+}

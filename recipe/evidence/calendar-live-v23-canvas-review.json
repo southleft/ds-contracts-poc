@@ -1,0 +1,82 @@
+{
+  "artifactVersion": "calendar-live-v23-canvas-review-v1",
+  "when": "after-spacing",
+  "classification": "mixed",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=173-53929",
+  "pageId": "173:53929",
+  "runIdentity": "19be1c96-calendar-v23",
+  "doNotInventCalendarGrade": true,
+  "doNotInventCalendarChrome": true,
+  "didNotRemint": true,
+  "didNotCallArrangeComponentSet": true,
+  "arrangeComponentSetSkippedBecause": "V23 already arranged and uniquely named Calendar Day/Week/Month Grid. Re-calling figma_arrange_component_set would mint a new generic Component Container — the Input V85 accident class. Intra-set variants were not colliding. The A miss was page-level wrapper overlap.",
+  "classA": {
+    "family": "same as Combobox open-column collisions — overlapping section/grid frames, not missing instances",
+    "before": {
+      "dayGrid": { "id": "173:54481", "name": "Calendar Day Grid", "x": -80, "y": -48, "w": 459, "h": 289 },
+      "weekGrid": { "id": "173:54499", "name": "Calendar Week Grid", "x": -80, "y": 256, "w": 498, "h": 272 },
+      "monthGrid": { "id": "173:54513", "name": "Calendar Month Grid", "x": -80, "y": 430, "w": 730, "h": 334 },
+      "emptySection": { "id": "173:53930", "name": "Recipe Pivot / Astryx Calendar / 19be1c96", "x": 0, "y": 0, "w": 448, "h": 856, "childCount": 0 },
+      "overlapWeekMonthPx": 98,
+      "overlapDayWeekPx": 0,
+      "sectionCoveredTheStack": true
+    },
+    "spaced": {
+      "gapUsed": 77,
+      "gapSource": "measured month variant height (WeekNumbers=on 173:53992 and WeekNumbers=off 173:54052 are both 77)",
+      "dayGrid": { "id": "173:54481", "x": -80, "y": 0, "w": 459, "h": 289 },
+      "weekGrid": { "id": "173:54499", "x": -80, "y": 366, "w": 498, "h": 272 },
+      "monthGrid": { "id": "173:54513", "x": -80, "y": 715, "w": 730, "h": 334 },
+      "emptySection": { "id": "173:53930", "x": 727, "y": 0, "w": 448, "h": 856, "movedNotDeleted": true },
+      "overlapDayWeek": 0,
+      "overlapWeekMonth": 0,
+      "overlapDayMonth": 0,
+      "overlapSectionDay": 0,
+      "overlapSectionWeek": 0,
+      "overlapSectionMonth": 0,
+      "leftoverComponentContainer": []
+    }
+  },
+  "classB": {
+    "honestMiss": "compile-faithful hug collapse — not empty mint, not host omit of day labels",
+    "notHostOmitOfCompileCarriedLabelWidth": true,
+    "knownClass": "calendar-live-pivot-v2-attempt-1 secondaryNote: hug-label width was 1 not 0 because intrinsic was captured before append",
+    "compileCarries": {
+      "dayCell": "width.mode fixed, width.value 32, height.value 32",
+      "dayLabel": "width.mode hug, height.mode hug, characters 26, no width.value",
+      "weekDayInstances": "width.mode hug (not dayCell-size 32)",
+      "caption": "width.mode hug, characters August 2026",
+      "weekdayHeaders": "width.mode fixed, width.value 32, characters Su..Sa"
+    },
+    "livePainted": {
+      "dayDefault": { "id": "173:53951", "w": 32, "h": 32, "fill": "#000000@0", "stroke": "none", "label": { "chars": "26", "w": 1, "h": 15, "textAutoResize": "WIDTH_AND_HEIGHT", "sizing": "HUG/HUG" } },
+      "dayToday": { "id": "173:53953", "w": 32, "h": 32, "fill": "#000000@0", "stroke": "#ccd3db w=1", "label": { "chars": "26", "w": 1, "h": 15 } },
+      "daySelected": { "id": "173:53955", "w": 32, "h": 32, "fill": "#0064e0@1", "label": { "chars": "26", "w": 1, "h": 15, "fill": "#ffffff@1" } },
+      "dayOutside": { "id": "173:53957", "w": 32, "h": 32, "fill": "#000000@0", "label": { "chars": "26", "w": 1, "h": 15, "fill": "#4e606f@1" } },
+      "weekOn": { "id": "173:53960", "w": 39, "h": 15, "weekNumber": { "chars": "31", "w": 32, "h": 15 }, "dayInstances": "7 × 1×15 HUG" },
+      "weekOff": { "id": "173:53976", "w": 7, "h": 15, "dayInstances": "7 × 1×15 HUG" },
+      "monthOn": { "id": "173:53992", "w": 256, "h": 77, "caption": { "chars": "August 2026", "w": 1, "h": 15 }, "weekdayRow": { "w": 256, "h": 15, "headers": "8 × 32×15 FIXED (31 + Su..Sa)" }, "grid": { "w": 41, "h": 47, "dayInstances": "21 mostly 1×15 HUG" } },
+      "monthOff": { "id": "173:54052", "w": 224, "h": 77, "caption": { "chars": "August 2026", "w": 1, "h": 15 }, "weekdayRow": { "w": 224, "h": 15, "headers": "7 × 32×15 FIXED Su..Sa" }, "grid": { "w": 9, "h": 47 } }
+    },
+    "whatTjSeesAfterSpacing": [
+      "three non-overlapping white wrappers",
+      "day today: 32×32 ringed square; day selected: 32×32 blue square; default/outside look empty (1px label)",
+      "week on/off look empty (15-tall hug row; week-number 32×15 is the only fixed paint)",
+      "month on/off look like empty dashed shells with thin slivers (1px caption + hug day-instances; weekday Su..Sa exist at 32×15 but sit on a 15-tall row above a 41×47 / 9×47 hug grid)"
+    ],
+    "didNotPrepareNextVersion": "no measured host-omit vs compile-carry of a day-label width. Compile never carried width.value on calendar/day/label. Teaching FIXED/px on hug labels or hug day-instances would invent calendar chrome. Do not restart V23 attempt 2 as-is."
+  },
+  "siblingPagesStillPresent": {
+    "input": { "id": "115:295378", "present": true },
+    "combobox": { "id": "163:35981", "present": true },
+    "table": { "id": "173:48924", "present": true },
+    "button": { "id": "85:6781", "present": true }
+  },
+  "tjCanReviewFrames": true,
+  "tjCanReviewCalendarLook": false,
+  "nextTeaching": null,
+  "humanSignoff": "pending",
+  "productV1Complete": false,
+  "v23RecordNotRestamped": "bf11bede7"
+}

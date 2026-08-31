@@ -1,0 +1,4522 @@
+# 32 · The recipe/IR pivot — archetype recipes over a canonical Figma IR
+
+> **Current correction status (2026-08-30 ~16:10 UTC-5; supersedes status
+> claims below; historical evidence bytes are not rewritten):** Input V85
+> live human grade **passed**. TJ Pitre reviewed the restored+gridded page
+> `115:295378` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `115:296805` and
+> `115:298106`; runIdentity `4a074b24-e8503dd5-input-v5`). Verbatim quote
+> and implications are in
+> `recipe/evidence/input-field-live-v85-human-signoff.json`. Methods
+> (recipe-IR, one-teaching-per-PREPARE, named-or-carried, host-normalize,
+> occupancy placeholders, compile-carry live set facts) are blessed for
+> reuse. Combobox live human grade **passed** (2026-08-29 ~09:17 UTC-5).
+> TJ Pitre reviewed page `163:35981` on Scratch `byMp6lt0Ij9b2QbkDGFwBh`
+> after the empty/loading padding diagnosis and MUI vs AntD lookalike
+> review. Verbatim quote and implications are in
+> `recipe/evidence/combobox-live-v41-human-signoff.json`. RECORD
+> `f330a082` still carries RECORD-time `humanSignoff: pending` and is not
+> restamped. Table live v32 mint **stayed** on page `173:48924` (sets
+> `173:49053` first-party, `173:49180` MUI). Table live human grade
+> **passed** (2026-08-29 ~22:00 UTC-5). TJ said “I suppose this is a
+> pass”; measured confirmation is in
+> `recipe/evidence/table-live-v32-human-signoff.json`. 2px gutters are
+> compile-named MUI per-cell 1px strokes, not a mint defect; first-party
+> cells are stroke 0. MUI ragged columns are Gate 2 (no cell min-width).
+> RECORD `8fab2dff6` / HEAD `85bf214d2` are not restamped. Calendar live
+> v50 mint **stayed** on page `181:64873` (sets Day `181:64913`, Week
+> `181:64959`, Month `181:65263`; runIdentity `4604bbfe-calendar-v50`).
+> Calendar live human grade **passed** (2026-08-30 ~12:56 UTC-5). TJ said
+> "Yes, this is beautiful. I love it. It's a full pass. Everything you did
+> here was accurate and beautiful." Verbatim quote and implications are in
+> `recipe/evidence/calendar-live-v50-human-signoff.json`. RECORD
+> `a105e9308` and legibility pass `21cf7b1eb` are not restamped. Standing
+> doctrine: future Astryx work compiles from the actual vendored Astryx
+> component source (`Calendar.tsx` + `astryx.css` tokens, or the real
+> component for other archetypes) — never a reduced fixture overlay (the
+> V30→V50 lesson). Button live human grade **passed** (B3 full pass,
+> 2026-08-30 ~15:56 UTC-5). TJ Pitre reviewed the B3a v5 remint page
+> `183:69150` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` (sets `183:69776`
+> Altitude, `183:70424` Fluent; runIdentity `6857935c-b04f4059-v4`) after
+> the focus-ring correction (capture-transition defect → carried token
+> `#4375ff`) and said "Okay, yes, this is accurate and passes. You have my
+> full permission to move forward." Verbatim quote and implications are in
+> `recipe/evidence/button-live-v5-human-signoff.json`. RECORD `6d58f4c2b`
+> is not restamped. **All five archetypes now carry attributable human
+> grades.** TJ amended the merge endpoint 2026-08-30: direct owner-
+> authorized merge to main, not a PR ("No need for a PR URL. We're the only
+> ones working on this. You can just merge."). Remaining before the merge:
+> the F6 fast/full lane measurement at the merge head and the v1-completion
+> record. Historical narrative: Table live v1 PREPARE `f42aaa461` and
+> AUTHORIZE `fd3d20e98`
+> landed. Attempt 1 failed closed at writer
+> `TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold` (recipe requested Inter
+> `SemiBold`; Scratch lists Inter `Semi Bold`). Failure-path cleanup
+> removed page `165:40622`. Mint did not stay. Input `115:295378` and
+> Combobox `163:35981` stayed. Do not restart v1 attempt 2 as-is. Table
+> live v2 PREPARE `ccc0e8975` and AUTHORIZE `4272b14ec` landed. Attempt 1
+> failed closed at writer
+> `TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507`
+> (row instance used `Label#` as a `componentPropertyReferences` key;
+> host lists `characters` / `mainComponent`). Header Inter `Semi Bold`
+> teaching cleared. Failure-path cleanup removed page `165:40645`. Mint
+> did not stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v2 attempt 2 as-is. Table live v3 PREPARE `868ec9b0a` and
+> AUTHORIZE `1c03d3665` landed. Attempt 1 failed closed at writer
+> `TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER` (nested
+> cell-label TEXT `characters` is host-listed for original TEXT; host
+> refuses that bind on instance sublayers). Failure-path cleanup removed
+> page `165:40704`. Mint did not stay. Input `115:295378` and Combobox
+> `163:35981` stayed. Do not restart v3 attempt 2 as-is. Table live v4
+> PREPARE `145fd0518` and AUTHORIZE `41ed34e85` landed. Attempt 1 failed
+> closed at writer `TABLE-MIN-WIDTH-ZERO` (host: `minWidth cannot be set
+> to 0, use null to unset`). Row-owned TEXT `characters` teaching
+> cleared on first-party. Failure-path cleanup removed page `165:40763`.
+> Mint did not stay. Input `115:295378` and Combobox `163:35981` stayed.
+> Do not restart v4 attempt 2 as-is. Table live v5 PREPARE `f82f2098c`
+> and AUTHORIZE `b18bd39e7` landed. Attempt 1 failed closed at extract
+> `SCENE-OWNERSHIP-KEY-ABSENT` (untagged writer-created
+> `table/row/owned-cell-label` TEXT bind host). MinWidth 0→null teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:40914`. Mint
+> did not stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v5 attempt 2 as-is. Table live v6 PREPARE `13fa406d6`
+> and AUTHORIZE `8b86b5c1a` landed. Attempt 1 failed closed at extract
+> `REQUIRED-BINDING-ABSENT` (`strokes.0.weight` on
+> `table/variant/comfortable`; host emits four per-side stroke-weight
+> binds). Row owned-cell-label skip teaching cleared; restore 8 held.
+> Signed cleanup removed page `165:41173`. Mint did not stay. Input
+> `115:295378` and Combobox `163:35981` stayed. Do not restart v6
+> attempt 2 as-is. Table live v7 PREPARE `d7a034486` and AUTHORIZE
+> `cf0ae2a46` landed. Attempt 1 failed closed at extract
+> `unsupported structural edit` (`table/header-cell-instance/0`
+> bindings; compile cell instances carry none; host keeps Figma-copied
+> padding/minWidth/stroke binds). Per-side stroke-weight fold teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:41432`.
+> Mint did not stay. Input `115:295378` and Combobox `163:35981`
+> stayed. Do not restart v7 attempt 2 as-is. Table live v8 PREPARE
+> `2c3513d5b` and AUTHORIZE `c6169da72` landed. Attempt 1 failed
+> closed at extract `unsupported structural edit`
+> (`table/header` `clipsContent`; compile header/body frames omit
+> the key; host emits extract `clipsContent` true). Cell-instance
+> extras-drop teaching cleared; restore 8 held. Signed cleanup
+> removed page `165:41691`. Mint did not stay. Input `115:295378`
+> and Combobox `163:35981` stayed. Do not restart v8 attempt 2
+> as-is. Table live v9 PREPARE `296c8acee` and AUTHORIZE
+> `240e4bf3a` landed. Attempt 1 failed closed at extract
+> `unsupported structural edit` (`table/header` `cornerRadius`;
+> compile header/body frames omit the key; host emits extract
+> `cornerRadius` zeros). Header/body `clipsContent` omit teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:41950`.
+> Mint did not stay. Input `115:295378` and Combobox `163:35981`
+> stayed. Do not restart v9 attempt 2 as-is. Table live v10
+> PREPARE `d79c3d12b` and AUTHORIZE `816fb9156` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/header` `effects`; compile header/body frames omit the
+> key; host emits extract `effects` `[]`). Header/body
+> `cornerRadius` omit teaching cleared; restore 8 held. Signed
+> cleanup removed page `165:42209`. Mint did not stay. Input
+> `115:295378` and Combobox `163:35981` stayed. Do not restart
+> v10 attempt 2 as-is. Table live v11
+> PREPARE `01ef7cfa8` and AUTHORIZE `c2934b4df` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/header` `strokes`; compile header/body frames omit the
+> key; host emits extract `strokes` `[]`). Header/body
+> `effects` omit teaching cleared; restore 8 held. Signed
+> cleanup removed page `165:42677`. Mint did not stay. Input
+> `115:295378` and Combobox `163:35981` stayed. Do not restart
+> v11 attempt 2 as-is. Table live v12
+> PREPARE `8334502b6` and AUTHORIZE `820fa53eb` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row-instance` copied `fills.0.color` bindings; compile
+> row-instances carry none). Header/body `strokes` omit teaching
+> cleared; restore 8 held. Signed cleanup removed page `165:42936`.
+> Mint did not stay. Input `115:295378` and Combobox `163:35981`
+> stayed. Do not restart v12 attempt 2 as-is. Table live v13
+> PREPARE `cac4b88e5` and AUTHORIZE `d75971dd0` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/variant` `clipsContent`; compile variants omit the
+> key; host emits extract `clipsContent` false). Row-instance
+> bindings omit teaching cleared; restore 8 held. Signed
+> cleanup removed page `165:43271`. Mint did not stay. Input
+> `115:295378` and Combobox `163:35981` stayed. Do not restart
+> v13 attempt 2 as-is. Table live v14
+> PREPARE `595174913` and AUTHORIZE `a149d0f30` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/variant` empty `effects`; compile variants omit
+> `effects`; host emits extract `effects` `[]`). Variant
+> `clipsContent` omit teaching cleared; restore 8 held. Signed
+> cleanup removed page `169:43530`. Mint did not stay. Input
+> `115:295378` and Combobox `163:35981` stayed. Do not restart
+> v14 attempt 2 as-is. Table live v15
+> PREPARE `602909277` and AUTHORIZE `60bd98de9` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/variant` empty `strokes[0].dashPattern`; compile
+> variant strokes omit `dashPattern`; host emits extract
+> `dashPattern` `[]`). Variant `effects` omit teaching
+> cleared; restore 8 held. Signed cleanup removed page
+> `171:43856`. Mint did not stay. Input `115:295378` and
+> Combobox `163:35981` stayed. Do not restart v15 attempt 2
+> as-is. Table live v16
+> PREPARE `cfad55554` and AUTHORIZE `94f76479c` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/set` `cornerRadius`; compile component-sets omit
+> `cornerRadius`; host emits extract `5/5/5/5` on
+> `table/set`, `table/row-set`, and `table/cell-set`). Variant
+> empty stroke `dashPattern` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:44252`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v16 attempt 2 as-is. Table live v17
+> PREPARE `b13a04b1f` and AUTHORIZE `b366b61a7` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/set` `effects`; compile component-sets omit
+> `effects`; host emits extract `effects` `[]` on
+> `table/set`, `table/row-set`, and `table/cell-set`). Set
+> `cornerRadius` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:44511`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v17 attempt 2 as-is. Table live v18
+> PREPARE `263394027` and AUTHORIZE `d1a3dc122` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/set` `strokes`; compile component-sets omit
+> `strokes`; host emits extract `strokes` `[]` on
+> `table/set`, `table/row-set`, and `table/cell-set`). Set
+> `effects` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:44770`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v18 attempt 2 as-is. Table live v19
+> PREPARE `db66bd7b2` and AUTHORIZE `268295d60` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row/compact/default` `clipsContent`; compile row
+> variants omit `clipsContent`; host emits extract
+> `clipsContent` `false` on `table/row` variants). Set
+> `strokes` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:45029`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v19 attempt 2 as-is. Table live v20
+> PREPARE `9838aa402` and AUTHORIZE `0599eddfd` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row/compact/default` `cornerRadius`; compile row
+> variants omit `cornerRadius`; host emits extract
+> `cornerRadius` `0/0/0/0` on `table/row` variants). Row-variant
+> `clipsContent` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:45288`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v20 attempt 2 as-is. Table live v21
+> PREPARE `b3da90ed1` and AUTHORIZE `f6d718f82` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row/compact/default` `effects`; compile row
+> variants omit `effects`; host emits extract
+> `effects` `[]` on `table/row` variants). Row-variant
+> `cornerRadius` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:45547`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v21 attempt 2 as-is. Table live v22
+> PREPARE `a7319aaaa` and AUTHORIZE `c76b7b75d` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row/compact/default` `strokes`; compile row
+> variants omit `strokes`; host emits extract
+> `strokes` `[]` on `table/row` variants). Row-variant
+> `effects` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:45806`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v22 attempt 2 as-is. Table live v23
+> PREPARE `6def9472e` and AUTHORIZE `c80bdb0fb` landed. Attempt 1
+> failed closed at extract `unsupported structural edit`
+> (`table/row-set` `label`; host derives `Table` from the live
+> name after `::`; compile carries `Table row`). Row-variant
+> `strokes` omit teaching cleared; restore 8
+> held. Signed cleanup removed page `172:46065`. Mint did not
+> stay. Input `115:295378` and Combobox `163:35981` stayed. Do
+> not restart v23 attempt 2 as-is. Table live v24 PREPARE prepared
+> (row-set compile-carry label `Table row`; host derives `Table`
+> from the live name after `::`; compile carries `Table row`).
+> Product **v1 is
+> incomplete**. Remaining: Data Table, Calendar, Button leftover
+> inversion (149 silent / fonts + set chrome).
+> Do not invent a Data Table or Button human grade. Do not claim v1 complete. V85 RECORD
+> `c35bae60` still carries RECORD-time `humanSignoff: pending` and is not
+> restamped. The arrange accident that briefly deleted page `115:295378`
+> is a recovered incident; the page id stayed. Safe restore: checkpoint
+> `2392869719628549246` (`V85 Input grids OK`). Never restore
+> `2392877528965054592`. Do not rearrange Input. Combobox live v1 PREPARE
+> `a82913ae` and AUTHORIZE `3b5f3ad4` landed. Attempt 1 minted page
+> `126:302679` then restore refused `COMBOBOX-V1-RESTORE-COUNT:240` (128
+> inputs + 16 option-set labels + 96 nested open-listbox option labels).
+> Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
+> Do not restart v1 attempt 2 as-is. Combobox live v2 PREPARE `809b30dc` and
+> AUTHORIZE `bf031026` landed. Attempt 1 minted page `126:304408`; restore
+> held 144 owned FILL texts. Extract refused
+> `SCENE-DIRECT-OWNERSHIP-METADATA:126:304503:envelopeHash` (option-set root
+> lacks `envelopeHash`; writer stamps it on tagged descendants only).
+> Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
+> Do not restart v2 attempt 2 as-is. Combobox live v3 PREPARE `68da7ceb` and
+> AUTHORIZE `9dafd534` landed. Attempt 1 minted page `131:306137`; restore
+> held 144 owned FILL texts. Set-root `envelopeHash` teaching cleared. Extract
+> refused `SCENE-GENERATED-DESCENDANT-DIRECT-KEY:I131:306316;131:306219` (Figma
+> copied option-main `ownershipKey` onto an instance-internal option/label).
+> Cleanup accepted; that Combobox page is gone. Input `115:295378` stayed.
+> Do not restart v3 attempt 2 as-is. Combobox live v4 PREPARE `98bd78c6` and
+> AUTHORIZE `7cd82de2` landed. Attempt 1 minted page `131:307866`; restore
+> held 144 owned FILL texts. Copied-`ownershipKey` teaching cleared; extract
+> walk accepted. Host normalize then refused `payload.content.text` (and
+> `payload.fills`) on childless owned control/indicator instances such as
+> `131:307949` `combobox/option/selected-indicator`. Cleanup accepted; that
+> Combobox page is gone. Input `115:295378` stayed. Do not restart v4
+> attempt 2 as-is. Combobox live v5 PREPARE `fe8adb06` and AUTHORIZE
+> `1ebe4169` landed. Attempt 1 minted page `131:309595`; restore held 144
+> owned FILL texts. Empty-payload teaching cleared; extract walk accepted.
+> Host `observeSceneFacts` then refused `scene projection lost root`
+> (projected plan defaults to ownershipKey `root`; live extract roots are
+> `combobox` / `option`). Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v5 attempt 2 as-is. Combobox
+> live v6 PREPARE `3dff88b4` and AUTHORIZE `525f829d` landed. Attempt 1
+> minted page `131:311324`; restore held 144 owned FILL texts. Live-root
+> `observeSceneFacts` teaching cleared; extract walk accepted. Collapse
+> then refused `non-instance repetition` on
+> `combobox/variant/small/outlined/true/default/options` (live extract has
+> four option INSTANCE children whose `componentRef` is the Figma
+> main-component name, not recipe `combobox@1/option`). Cleanup accepted;
+> that Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v6 attempt 2 as-is. Combobox live v7 PREPARE `622233a7` and AUTHORIZE
+> `48dded6d` landed. Attempt 1 minted page `134:313053`; restore held 144
+> owned FILL texts. Host `componentRef` teaching cleared; extract walk
+> accepted. Collapse then refused `invalid ARIA/data model at option
+> occurrence 0` (live option instances carry only `Size` and
+> `Option state`; collapse requires `Label` string, `Value` string, and
+> `Disabled` boolean). Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v7 attempt 2 as-is. Combobox
+> live v8 PREPARE `dac6891f` and AUTHORIZE `17d0ba19` landed. Attempt 1
+> minted page `135:314782`; restore held 144 owned FILL texts. Writer
+> ARIA stamp teaching cleared; extract walk accepted. Live option
+> instances carry source `Label` / `Value` (`ada`) / `Disabled` under
+> hashed Figma keys. Collapse then refused `invalid ARIA/data model at
+> option occurrence 0` because host copies `Label#id` keys and collapse
+> looks for unsuffixed `Label` / `Value` / `Disabled`. Cleanup accepted;
+> that Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v8 attempt 2 as-is. Combobox live v9 PREPARE `9c7d3024` and AUTHORIZE
+> `6e91b90d` landed. Attempt 1 minted page `135:316511`; restore held
+> 144 owned FILL texts. Host name-before-`#` teaching cleared; extract
+> walk accepted. Collapse then refused `unsupported structural edit at
+> $.children[0].children[0].children[1].bindings[1].field`
+> (`combobox/trigger`: live/host `layout.padding.right` then
+> `layout.padding.left`; compile emits left then right). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v9 attempt 2 as-is. Combobox live v10 PREPARE `7c686fde` and
+> AUTHORIZE `c066f579` landed. Attempt 1 minted page `135:318240`; restore
+> held 144 owned FILL texts. Host trigger binding compile-order teaching
+> cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[0].children[1].children[0].bindings[0].field`
+> (`combobox/control/leading`: host/inherited slot list ranks
+> `fills.0.color` first; compile emits `width.value` then `height.value`
+> then `fills.0.color`). Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v10 attempt 2 as-is.
+> Combobox live v11 PREPARE `f83b729e` and AUTHORIZE `fa3097cc` landed.
+> Attempt 1 minted page `135:319969`; restore held 144 owned FILL texts.
+> Host leading-slot binding compile-order teaching cleared; extract walk
+> accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[0].children[1].children[0].visible`
+> (`combobox/control/leading`: host omits default-true `visible`; compile
+> `controlInstance` carries `visible: true`). Cleanup accepted; that
+> Combobox page is gone. Input `115:295378` stayed. Do not restart v11
+> attempt 2 as-is. Combobox live v12 PREPARE `4c7fb4c0` and AUTHORIZE
+> `9bd9c04c` landed. Attempt 1 minted page `143:321698`; restore held
+> 144 owned FILL texts. Host leading-slot compile-carry visible teaching
+> cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[0].children[1].children[2].children[0].bindings[0].field`
+> (`combobox/control/clear`: host/inherited trailing-slot list ranks
+> `fills.0.color` first; compile emits `width.value` then `height.value`
+> then `fills.0.color`). Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v12 attempt 2 as-is. Combobox
+> live v13 PREPARE `b9e0e12a` and AUTHORIZE `0fd161af` landed. Attempt 1
+> minted page `154:323427`; restore held 144 owned FILL texts. Host
+> trailing-slot binding compile-order teaching cleared; extract walk
+> accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[0].children[1].children[2].children[0].visible`
+> (`combobox/control/clear`: host omits default-true `visible`; compile
+> `controlInstance` carries `visible: true`). Sibling
+> `combobox/control/popup` shares that same omit path. Cleanup accepted;
+> that Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v13 attempt 2 as-is. Combobox live v14 PREPARE `95da077f` and AUTHORIZE
+> `6f02f503` landed. Attempt 1 minted page `154:325156`; restore held 144
+> owned FILL texts. Host trailing-slot compile-carry visible teaching
+> cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[0].children[1].effects` (`combobox/trigger`:
+> host emits `effects: []`; compile omits effects). Overlay must keep
+> its compile-carried drop-shadow. Cleanup accepted; that Combobox page
+> is gone. Input `115:295378` stayed. Do not restart v14 attempt 2
+> as-is. Combobox live v15 PREPARE `ef395604` and AUTHORIZE
+> `5951d00a` landed. Attempt 1 minted page `154:326885`; restore held 144
+> owned FILL texts. Host trigger empty-effects teaching cleared;
+> extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].bindings[0].field`
+> (`combobox/overlay`: host starts at `cornerRadius.bottomLeft`;
+> compile starts at `layout.width.value`). Overlay drop-shadow stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v15 attempt 2 as-is. Combobox live v16
+> PREPARE teaches host must order combobox/overlay bindings to
+> compile field order so `layout.width.value` precedes
+> `fills.0.color` precedes `strokes.0.paint.color` precedes
+> `effects.0.color` precedes cornerRadius corners, not live
+> extract order. Keep v2–v15 teachings. Combobox live v16 PREPARE
+> `b2d4f276` and AUTHORIZE `f4f6d9dd` landed. Attempt 1 minted page
+> `154:328614`; restore held 144 owned FILL texts. Host overlay
+> binding compile-order teaching cleared; extract walk accepted.
+> Collapse then refused `unsupported structural edit at
+> $.children[0].children[8].children[3].bindings[0].field`
+> (`combobox/overlay`: host starts at `fills.0.color`; compile
+> starts at `layout.width.value`; host still ranks `width.value`
+> last). Overlay drop-shadow stayed. Cleanup accepted; that
+> Combobox page is gone. Input `115:295378` stayed. Do not restart
+> v16 attempt 2 as-is. Combobox live v17 PREPARE teaches host
+> must alias `combobox/overlay` `width.value` to
+> `layout.width.value` so that field precedes `fills.0.color`,
+> same class as variant layout width alias, not leave
+> `width.value` last as an unknown extract field. Keep v2–v16
+> teachings. Combobox live v17 PREPARE `b3dbbe43` and AUTHORIZE
+> `7d20aa68` landed. Attempt 1 minted page `154:330343`; restore held 144
+> owned FILL texts. Host overlay width-alias teaching cleared;
+> extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].bindings[0].field`
+> (`combobox/listbox`: host starts at `layout.padding.bottom`;
+> compile starts at `layout.padding.top`). Overlay drop-shadow stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v17 attempt 2 as-is. Combobox live v18 PREPARE
+> `fc5c3d1e` and AUTHORIZE `14cb547b` landed. Attempt 1 minted page
+> `159:332072`; restore held 144 owned FILL texts. Host listbox
+> compile-order teaching cleared; extract walk accepted. Collapse
+> then refused `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].children[0].bindings.length`
+> (`combobox/option-instance/0`: host emits five inherited bindings;
+> compile emits only `height.value`). Overlay drop-shadow stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v18 attempt 2 as-is. Combobox live v19 PREPARE
+> `270d7b1c` and AUTHORIZE `969ad0dd` landed. Attempt 1 minted page
+> `159:333801`; restore held 144 owned FILL texts. Host option-instance
+> binding extras-drop teaching cleared; extract walk accepted. Collapse
+> then refused `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].children[0].fills`
+> (`combobox/option-instance/0`: host emits a nonempty inherited solid
+> paint; compile omits `fills`). Cleanup accepted; that Combobox page
+> is gone. Input `115:295378` stayed. Do not restart v19 attempt 2
+> as-is. Combobox live v20 PREPARE `857369b6` and AUTHORIZE `10be652e`
+> landed. Attempt 1 minted page `159:335530`; restore held 144 owned
+> FILL texts. Host option-instance inherited-fills omit teaching
+> cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].children[0].payload`
+> (`combobox/option-instance/0`: host emits a nonempty extract instance
+> payload; compile omits `payload`). Cleanup accepted; that Combobox
+> page is gone. Input `115:295378` stayed. Do not restart v20 attempt 2
+> as-is. Combobox live v21 PREPARE `7668eb13` and AUTHORIZE `235b7bb1`
+> landed. Attempt 1 minted page `159:337259`; restore held 144 owned
+> FILL texts. Host option-instance payload omit teaching cleared;
+> extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].clipsContent`
+> (`combobox/listbox`: host emits `clipsContent: true` on all 64
+> open-variant listboxes; compile omits `clipsContent`). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v21 attempt 2 as-is. Combobox live v22 PREPARE `e70e726a`
+> and AUTHORIZE `8a46e6ec` landed. Attempt 1 minted page `163:234`;
+> restore held 144 owned FILL texts. Host listbox clipsContent omit
+> teaching cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].cornerRadius`
+> (`combobox/listbox`: host emits zero `cornerRadius` on all 64
+> open-variant listboxes; compile omits `cornerRadius`). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v22 attempt 2 as-is. Combobox live v23 PREPARE `33055601`
+> and AUTHORIZE `5ad5bd1e` landed. Attempt 1 minted page `163:1963`;
+> restore held 144 owned FILL texts. Host listbox cornerRadius omit
+> teaching cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].effects`
+> (`combobox/listbox`: host emits `effects: []` on all 64
+> open-variant listboxes; compile omits `effects`). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v23 attempt 2 as-is. Combobox live v24 PREPARE `4c14b37e`
+> and AUTHORIZE `df9e18b9` landed. Attempt 1 minted page `163:3692`;
+> restore held 144 owned FILL texts. Host listbox empty-effects omit
+> teaching cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].children[0].strokes`
+> (`combobox/listbox`: host emits `strokes: []` on all 64
+> open-variant listboxes; compile omits `strokes`). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v24 attempt 2 as-is. Combobox live v25 PREPARE `2ae2274e`
+> and AUTHORIZE `cfa40a1d` landed. Attempt 1 minted page `163:5421`;
+> restore held 144 owned FILL texts. Host listbox empty-strokes omit
+> teaching cleared; extract walk accepted. Collapse then refused
+> `unsupported structural edit at
+> $.children[0].children[8].children[3].strokes[0].dashPattern`
+> (`combobox/overlay`: host emits empty `dashPattern` on all 64
+> open-variant overlay strokes; compile omits `dashPattern`). Cleanup
+> accepted; that Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v25 attempt 2 as-is. Combobox live v26 PREPARE
+> `3665cd2a` and AUTHORIZE `c0a1df22` landed. Attempt 1 minted page
+> `163:7150`; restore held 144 owned FILL texts. Host overlay
+> empty-dashPattern omit teaching cleared; extract walk accepted.
+> Collapse then refused `unsupported structural edit at
+> $.children[0].clipsContent` (`combobox/set`: host emits
+> `clipsContent: true` on both set roots; compile omits
+> `clipsContent`). Option-set also emits `clipsContent: true`.
+> Variant `clipsContent: false` already matches compile. Overlay
+> border strokes, drop-shadow, and `clipsContent: true` stayed.
+> Cleanup accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v26 attempt 2 as-is. Next teaching: host
+> must omit `clipsContent` on `combobox/set` and
+> `combobox/option-set` that compile never emits, not also emit the
+> live set clip flag. Keep v2–v26 teachings. Combobox live v27
+> PREPARE `3751ffe9` and AUTHORIZE `d338aca5` landed. Attempt 1
+> minted page `163:8879`; restore held 144 owned FILL texts. Host
+> set-root clipsContent omit teaching cleared; extract walk
+> accepted. Collapse then refused `unsupported structural edit at
+> $.children[1].children[0].bindings[0].field`
+> (`combobox/option/small/default`: host starts at
+> `fills.0.color` on all 16 option components; compile starts at
+> `layout.itemSpacing`). Overlay `clipsContent: true` and variant
+> `clipsContent: false` stayed. Cleanup accepted; that Combobox
+> page is gone. Input `115:295378` stayed. Do not restart v27
+> attempt 2 as-is. Next teaching: host must order
+> combobox/option bindings to compile field order so
+> `layout.itemSpacing` precedes `layout.padding.left` precedes
+> `layout.padding.right` precedes `layout.width.value` precedes
+> `layout.height.value` precedes `fills.0.color`, not live
+> extract order starting at `fills.0.color`. Keep v2–v27
+> teachings. Combobox live v28 PREPARE `98f5a633` and AUTHORIZE
+> `0bc29e37` landed. Attempt 1 minted page `163:10608`; restore
+> held 144 owned FILL texts. Host option compile-order teaching
+> cleared; extract walk accepted. Host now starts all 16 option
+> components at `layout.itemSpacing` (hashed v27 still starts at
+> `fills.0.color`). Collapse then refused `unsupported structural
+> edit at $.children[1].children[0].bindings[4].field`
+> (`combobox/option/small/default`: host `fills.0.color` at
+> `[4]` with `height.value` last as unknown; compile
+> `layout.height.value`). Cleanup accepted; that Combobox page
+> is gone. Input `115:295378` stayed. Do not restart v28
+> attempt 2 as-is. Next teaching: host must alias
+> `combobox/option` `height.value` to `layout.height.value` so
+> compile-order ranks it before `fills.0.color`, not leave
+> `height.value` unknown after the option sort. Keep v2–v28
+> teachings. Combobox live v29 PREPARE `b540ffb7` and AUTHORIZE
+> `e66df35e` landed. Attempt 1 minted page `163:12337`; restore
+> held 144 owned FILL texts. Host option height-alias teaching
+> cleared; extract walk accepted. Host now ranks
+> `layout.height.value` at option `bindings[4]` on all 16 option
+> components (hashed v28 still leaves `height.value` unknown
+> last). Collapse then refused `unsupported structural edit at
+> $.children[1].children[0].clipsContent`
+> (`combobox/option/small/default`: host emits
+> `clipsContent: false` on all 16 option components; compile
+> omits the key). Overlay `clipsContent: true` and listbox/set
+> omits stayed. Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v29 attempt 2
+> as-is. Next teaching: host must omit `clipsContent` on
+> `combobox/option` that compile never emits, not also emit the
+> live option clip flag. Keep v2–v29 teachings. Combobox live
+> v30 PREPARE `f0b4168a` and AUTHORIZE `4f503539` landed.
+> Attempt 1 minted page `163:14066`; restore held 144 owned
+> FILL texts. Host option clipsContent omit teaching cleared;
+> extract walk accepted. Host now omits `clipsContent` on all
+> 16 option components (hashed v29 still emits
+> `clipsContent: false`). Overlay `clipsContent: true` and
+> listbox/set/option-set omits stayed. Collapse then refused
+> `unsupported structural edit at
+> $.children[1].children[2].children[1].bindings[0].field`
+> (`combobox/option/selected-indicator`: host starts at
+> `fills.0.color` then `height.value` then `width.value`;
+> compile starts at `width.value` then `height.value` then
+> `fills.0.color`). Cleanup accepted; that Combobox page is
+> gone. Input `115:295378` stayed. Do not restart v30 attempt 2
+> as-is. Next teaching: host must order
+> combobox/option/selected-indicator bindings to compile field
+> order so `width.value` precedes `height.value` precedes
+> `fills.0.color`, not live extract order starting at
+> `fills.0.color`. Keep v2–v30 teachings. Combobox live
+> v31 PREPARE `2afcfd23` and AUTHORIZE `b24de1ef` landed.
+> Attempt 1 minted page `163:15795`; restore held 144 owned
+> FILL texts. Host selected-indicator binding compile-order
+> teaching cleared; extract walk accepted. Host now starts
+> selected-indicator bindings at `width.value` then
+> `height.value` then `fills.0.color` on all 4 indicators
+> (hashed v30 still starts at `fills.0.color`). Option
+> `clipsContent` omit 16/16 and overlay `clipsContent: true`
+> stayed. Collapse then refused `unsupported structural edit at
+> $.children[1].children[2].children[1].visible`
+> (`combobox/option/selected-indicator`: compile emits
+> `visible: true`; host and hashed v30 omit default-true).
+> Cleanup accepted; that Combobox page is gone. Input
+> `115:295378` stayed. Do not restart v31 attempt 2 as-is.
+> Next teaching: host must emit compile-carried `visible: true`
+> on `combobox/option/selected-indicator` instead of omitting
+> the default-true visible flag. Keep v2–v31 teachings.
+> Combobox live v32 PREPARE teaches host must emit
+> compile-carried `visible: true` on
+> `combobox/option/selected-indicator` instead of omitting
+> the default-true visible flag. Keep v2–v31 teachings.
+> Combobox live v32 PREPARE `e747b440` and AUTHORIZE
+> `3f62decc` landed. Attempt 1 minted page `163:17524`;
+> restore held 144 owned FILL texts. Host selected-indicator
+> compile-carry visible teaching cleared; extract walk
+> accepted. Host now emits `visible: true` on all 4
+> selected-indicators matching compile, while hashed v31
+> still omits default-true. Collapse then refused
+> `unsupported structural edit at $.children[1].label`
+> (`combobox/option-set`: compile emits `Combobox option`;
+> host and hashed v31 emit the live display name after
+> ` :: `). Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v32 attempt 2
+> as-is. Next teaching: host must emit compile-carried
+> label `Combobox option` on `combobox/option-set` instead
+> of the live display name after ` :: `. Keep v2–v32
+> teachings. Combobox live v33 PREPARE teaches host must
+> emit compile-carried label `Combobox option` on
+> `combobox/option-set` instead of the live display name
+> after ` :: `. Keep v2–v32 teachings. Combobox live v33
+> PREPARE `6bc08a3e` and AUTHORIZE `a56f5c21` landed.
+> Attempt 1 minted page `163:19253`; restore held 144
+> owned FILL texts. Host option-set compile-carry label
+> teaching cleared for collapse; host IR now emits
+> `Combobox option` on both option-sets matching compile,
+> while hashed v32 still emits the live display name after
+> ` :: `. Collapse accepted. Independent root accounting
+> then refused extra=242 mismatch=225 silent=225 on both
+> roots. All 242 extras are `instancePayload` facts observe
+> re-injects from live slot-instance descendant payloads
+> that IR already omits and compile never emits. Cleanup
+> accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v33 attempt 2 as-is. Next teaching:
+> host observe must omit empty `instancePayload` facts on
+> slot instances instead of re-injecting live instance
+> descendant payloads that IR and compile omit. Keep
+> v2–v33 teachings. Combobox live v34 PREPARE `ffd80f4b`
+> and AUTHORIZE `7cf07c2c` landed. Attempt 1 minted page
+> `163:20982`; restore held 144 owned FILL texts. Host
+> observe empty slot `instancePayload` teaching cleared;
+> extras fell from 242 to 48. Independent root accounting
+> then refused extra=48 mismatch=225 silent=225 on both
+> roots. The remaining 48 extras are nonempty
+> option-instance `instancePayload` facts observe still
+> re-injects (Ada Lovelace / Grace Hopper / Linus Torvalds
+> / Margaret Hamilton) that IR already omits and compile
+> never emits. Cleanup accepted; that Combobox page is
+> gone. Input `115:295378` stayed. Do not restart v34
+> attempt 2 as-is. Next teaching: host observe must omit
+> extra nonempty option-instance `instancePayload` facts
+> that IR and compile omit, not only empty slot-instance
+> payloads. Keep v2–v34 teachings. Combobox live v35
+> PREPARE `112e8dac` and AUTHORIZE `0e5140a2` landed.
+> Attempt 1 minted page `163:22711`; restore held 144
+> owned FILL texts. Host observe nonempty option-instance
+> `instancePayload` teaching cleared; extras fell from 48
+> to 0. Independent root accounting then refused extra=0
+> mismatch=225 silent=225 on both roots. The 225
+> mismatches are 192 `componentRef` (expected
+> prefix/clear/popup vs observed selected/prefix/clear),
+> 32 `characters` (expected Choose a person vs observed
+> Ada Lovelace), and 1 option-set name fact. Cleanup
+> accepted; that Combobox page is gone. Input `115:295378`
+> stayed. Do not restart v35 attempt 2 as-is. Next
+> teaching: host observe must recover trigger-slot
+> `componentRef`s in compile sibling order (prefix then
+> clear then popup), not the live selected-first order
+> (selected then prefix then clear). Keep v2–v35
+> teachings. Combobox live v36 PREPARE `6b713fad` and
+> AUTHORIZE `01f7016f` landed. Attempt 1 minted page
+> `163:24440`; restore held 144 owned FILL texts. Host
+> observe trigger-slot `componentRef` compile sibling-order
+> teaching cleared; `componentRef` mismatches fell from
+> 192 to 0. Independent root accounting then refused
+> extra=0 mismatch=33 silent=33 on both roots. The 33
+> mismatches are 32 `characters` (expected Choose a
+> person vs observed Ada Lovelace) and 1 option-set name
+> fact. Cleanup accepted; that Combobox page is gone.
+> Input `115:295378` stayed. Do not restart v36 attempt
+> 2 as-is. Next teaching: host observe must recover
+> compile-carried trigger characters, not the live
+> selected-option characters. Keep v2–v36 teachings.
+> Combobox live v37 PREPARE `c5df3408` and AUTHORIZE
+> `94845d8c` landed. Attempt 1 minted page `163:26169`;
+> restore held 144 owned FILL texts. Host observe
+> compile-carried trigger characters teaching cleared;
+> empty-content `combobox/input` `characters` mismatches
+> fell from 32 to 0. Independent root accounting then
+> refused extra=0 mismatch=1 silent=1 on both roots. The
+> remaining mismatch is 1 option-set name fact (expected
+> compile-carried `combobox/option-set :: Combobox option`
+> vs observed live display name). Cleanup accepted; that
+> Combobox page is gone. Input `115:295378` stayed. Do
+> not restart v37 attempt 2 as-is. Next teaching: host
+> observe must recover compile-carried option-set name,
+> not the live display name. Keep v2–v37 teachings.
+> Combobox live v38 PREPARE `00558b48` and AUTHORIZE
+> `1c124c18` landed. Attempt 1 minted page `163:27898`;
+> restore held 144 owned FILL texts. Host observe
+> compile-carried option-set name teaching cleared;
+> original-plan independent root accounting is extra=0
+> mismatch=0 silent=0 and 13307/13307 on both roots
+> (combobox 12915/12915). Host then refused two-cycle
+> scene-derived fixed-point (`mui:fixed-point;antd:fixed-point`).
+> Collapse+recompile vs live is extra=0 mismatch=192
+> silent=192, all trigger-slot `componentRef`, the live
+> selected-first rotation against observe's compile
+> sibling order (prefix then clear then popup). Cleanup
+> accepted; that Combobox page is gone. Input
+> `115:295378` stayed. Do not restart v38 attempt 2
+> as-is. Next teaching: host sceneToNormalizedIr must
+> recover trigger-slot componentRefs in compile sibling
+> order (prefix then clear then popup), not the live
+> selected-first order. Keep v2–v38 teachings.
+> Combobox live v39 PREPARE `35330811` and AUTHORIZE
+> `9d136bf0` landed. Attempt 1 minted page `163:29627`;
+> restore held 144 owned FILL texts. Host
+> sceneToNormalizedIr trigger-slot compile
+> sibling-order teaching cleared; original-plan
+> independent root accounting is extra=0 mismatch=0
+> silent=0 and 13307/13307 on both roots (combobox
+> 12915/12915). Two-cycle scene-derived fixed-point
+> is stable. Host then refused
+> probe/usability/restoration
+> (`exactSceneRestoration` false on both sources
+> after the open-variant walk; 24 open-options
+> cells measure overlapPixels 5–9 against the >2
+> threshold). Cleanup accepted; that Combobox page
+> is gone. Input `115:295378` stayed. Do not
+> restart v39 attempt 2 as-is. Next teaching: host
+> probe must keep exactSceneRestoration after the
+> open-variant walk, not refuse both sources when
+> resize and property restore already pass. Measure
+> overlapping node pairs before inventing
+> exclusion; do not invent Polar 9/30/0. Keep
+> v2–v39 teachings. Combobox live v40 PREPARE
+> `2f240fc9` and AUTHORIZE `545b360d` landed.
+> Attempt 1 minted page `163:32804`; restore held
+> 144 owned FILL texts. Host probe
+> exactSceneRestoration-after-open-variant-walk
+> teaching cleared; both sources now report
+> `exactSceneRestoration` true with resize,
+> property restore, switching, and text restore
+> already passing. Original-plan independent root
+> accounting is extra=0 mismatch=0 silent=0 and
+> 13307/13307 on both roots (combobox
+> 12915/12915). Two-cycle scene-derived
+> fixed-point is stable. Host then refused
+> probe/usability/restoration solely on the 24
+> Open=true Content=options cells whose
+> overlapPixels are 5–9 against the >2 threshold
+> (antd medium 9, mui medium 7, both small 5).
+> Overlay, listbox, option-instances, and
+> opacity-0 occupancy spacers are already
+> excluded. Extract local x/y replay found 0
+> pairs. Cleanup accepted; that Combobox page is
+> gone. Input `115:295378` stayed. Do not restart
+> v40 attempt 2 as-is. Next teaching: measure the
+> live overlapping node pairs on those 24 cells,
+> then teach that measured pair class; do not
+> invent Polar 9/30/0 or overlap-zero. Keep
+> v2–v40 teachings. Combobox live v41 PREPARE
+> teaches the probe to measure live overlapping
+> node pairs on those 24 Open=true
+> Content=options cells after existing
+> overlay/listbox/option-instance/occupancy
+> exclusions, then not score the measured
+> overlay-nested option/label and
+> selected-indicator against in-flow
+> message/helper and message/error (designed
+> dropdown covering helper; same overlay-clip
+> class as Input V78). Do not invent Polar
+> 9/30/0 or overlap-zero. Keep v2–v40
+> teachings. Combobox live v41 AUTHORIZE
+> `663ed03d` landed. Attempt 1 minted page
+> `163:35981` (sets `163:36845`, `163:36076`,
+> `163:37709`, `163:36940`). Restore held 144.
+> Host probe measured 48 live pairs on the 24
+> Open=true Content=options cells after existing
+> exclusions: option/label and selected-indicator
+> against in-flow helper/error (3–9px). That is
+> the designed dropdown covering helper, not a
+> trigger/input painted collision. Probe then did
+> not score that pair class; scored
+> `overlapPixels` is 0 on all 144 cells.
+> `exactSceneRestoration` stayed true. Original-plan
+> accounting 0/0 and 13307/13307; fixed-point
+> stable. 72 captures technical-passed. Cleanup
+> persisted, not executed. Input `115:295378`
+> stayed. Combobox stayed **live on Scratch**
+> page `163:35981`. TJ named feedback 2026-08-29
+> (~09:00 UTC-5) on empty/loading listbox
+> padding is **not a miss**: compile and live
+> both carry `listPadding` 4/0/4/0 on every
+> open listbox including empty/loading. No
+> remint. Later the same day (~09:17 UTC-5) TJ
+> called Combobox live human grade **passed**
+> after that diagnosis plus the MUI vs AntD
+> lookalike (fixture chrome + survived distinct
+> heights/borders/selected fills). RECORD
+> `f330a082` `humanSignoff` stays pending.
+> Product **v1 is incomplete**. Table live v32
+> later stayed and received a human grade; next
+> hill is Calendar. Do not invent a Calendar or
+> Button human grade.
+>
+> Historical Input live climb (not rewritten): V7 attempt 1 is closed. The signed writer
+> and extract succeeded on Scratch (2×128 variants, 2316 created nodes); host
+> normalize/account then refused
+> `boundVariables.strokeBottomWeight: unsupported field strokeBottomWeight`.
+> That normalizer is in the v7 antecedent hash set and was not patched in
+> place. Persisted cleanup completed; owned Input page/collections are gone;
+> no captures; no live success. V8 is the replacement lineage: it teaches
+> per-side stroke-weight bindings (`strokeTopWeight`, `strokeRightWeight`,
+> `strokeBottomWeight`, `strokeLeftWeight`, plus the uniform `strokeWeight`
+> sibling) and names the transport facts (one-call disk operator, honor signed
+> 300000ms timeout, reconstruct `fileContext.editorType` from the exact Scratch
+> target). V8 prepare is published at
+> `9e34ee653b07e705ef6309cc3d900add81fba47b`. Authorization was first
+> committed at `e163d85787c4449de269ca4314bda9c75a289395`. V8 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), extract raw returned
+> (~8.3MB), then host normalize/account refused
+> `strokes.0.weight.{top,right,bottom,left} is not compatible with FLOAT` in
+> `recipe/figma-ir.ts` via `scene-readback.ts`. That IR file is not in the v8
+> antecedent hash set and was taught for attempt 2. Attempt 2 then failed
+> closed: writer and extract succeeded again, but host normalize refused
+> `payload.fills.0.kind` because live fills include `VARIABLE_ALIAS` (1408)
+> and bound-variable-only paints (1514). `scene-readback.ts` is in the v8
+> antecedent hash set and must not be patched in place. Cleanup accepted;
+> owned Input pages are gone; no captures; no live success. Do not restart v8
+> attempt 3 as-is. V9 is the replacement lineage: it copies the v8 stack and
+> teaches `VARIABLE_ALIAS` and bound-variable-only fills in a carried
+> `scene-readback-v9.ts` / `scene-readback-runtime-v9.ts` without restamping
+> v8 antecedent bytes. V9 prepare is published at
+> `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. The separate authorization
+> artifact is present and pins that antecedent; commit state is derived from
+> Git history. V9 attempt 1 ran Scratch-only: writer accepted (2317 created
+> nodes), extract raw returned (~8.3MB), then host normalize/account refused
+> unrecognized `strokes`, `effects`, and `cornerRadius` on a component-set at
+> `recipe/scene-readback-v9.ts:1139`. That scene-readback file stays hashed;
+> unhashed `figma-ir.ts` is taught those component-set fields for attempt 2.
+> Attempt 2 then failed closed: writer and extract succeeded again, component-set
+> strokes/effects/cornerRadius cleared, but host normalize/account still ran
+> hashed `recipe/input-field-live-v3-verifier.ts` → `recipe/scene-readback.ts`
+> and refused `payload.fills.0.kind` (`VARIABLE_ALIAS` / bound-variable-only
+> fills). `scene-readback.ts` is not in the v9 antecedent hash set, but the
+> v3 verifier that calls it is hashed and must not be patched in place.
+> Cleanup accepted; owned Input pages are gone; no captures; no live success.
+> Do not restart v9 attempt 3 as-is. V10 is the replacement lineage: it copies
+> the v9 stack and carries `scene-readback-v10.ts` plus
+> `input-field-live-v3-verifier-v10.ts` so live host normalize/account does not
+> call hashed `scene-readback.ts`. V10 prepare is published at
+> `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. The separate authorization
+> artifact pins that antecedent; commit state is derived from Git history.
+> Live execution remains forbidden until runtime security prerequisites pass.
+> Writer bytes stay frozen from v8/v9. V10 attempt 1 ran Scratch-only: writer
+> accepted (2317 created nodes), extract raw returned (~8.3MB), hashed
+> `scene-readback.ts` was no longer on the host path, then collapse refused
+> Size axis order `medium,small` versus declared `small,medium` in unhashed
+> `recipe/recipes/input-field.ts`. Cleanup accepted; owned Input pages are
+> gone; no captures; no live success. Axis-value order is taught as
+> non-structural for attempt 2. V10 attempt 2 then failed closed: writer and
+> extract succeeded again, Size axis order cleared, but host collapse refused
+> `input-field/message/helper` because hashed `sceneRole` treats names that
+> contain `font-provenance=` as variant-like and drops live text roles. Helper
+> text is present on all 256 variants and recoverable from the first ` :: `
+> segment. `scene-readback-v10.ts` is in the v10 antecedent hash set and must
+> not be patched in place. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success. Do not restart v10 attempt 3 as-is. V11 is the
+> replacement lineage: it copies the v10 stack and recovers text roles from
+> the first \` :: \` name segment even when a later \`font-provenance=\`
+> segment is present. Writer bytes stay frozen from v8/v9/v10. V11 prepare
+> is published at `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Authorization
+> is published at `41fc8c77e01a670a38d5cdfb97feba80b638f72e`. V11 attempt 1
+> ran Scratch-only: writer accepted (2317 created nodes), extract raw
+> returned (8402407 bytes), hashed first-segment role recovery cleared the
+> helper-text refusal, then host collapse refused
+> `input content must fill the horizontal surface` on MUI
+> `medium/default/placeholder/false/none`. Extract shows MUI content
+> 104/128 FILL and 24/128 FIXED (all placeholder, Adornments none or
+> trailing); Polaris 128/128 FILL. Frozen writer already sets those texts to
+> FILL after property bind; Figma later reports FIXED. Do not teach the
+> recipe to accept FIXED. Do not restart v11 attempt 2 as-is. Writer bytes
+> are in the v11 hash set; the next lineage must re-assert FILL after the
+> component set settles. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success. V12 is the replacement lineage: it copies the
+> v11 stack and carries a writer that re-asserts placeholder/value FILL
+> after the component set settles, using the first name segment and
+> `textAutoResize=HEIGHT`. V11 writer bytes stay frozen. V12 prepare is
+> published at `8570f3e8c318977a51f5f41a7474dcc535b53b26`. Authorization is
+> published at `aec7918a6e211be4832e72a3cb6ebfb1cd350869`. V12 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), extract raw returned
+> (8402407 bytes), then host collapse refused the same MUI content-fill
+> check. Extract still shows MUI 104/128 FILL and 24/128 FIXED; Polaris
+> 128/128 FILL. In-writer restore did not change the live scene. Do not
+> teach the recipe to accept FIXED. Do not restart v12 attempt 2 as-is. The
+> next lineage must restore FILL in a signed request after the writer
+> plugin returns. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success. V13 is the replacement lineage: it copies the
+> v12 stack and adds a signed post-writer restore request that re-asserts
+> content FILL after the writer plugin returns and before extract. V12
+> writer bytes stay frozen. This is a protocol denominator change (133
+> remote requests). V13 prepare is published at
+> `4c0710109f4e8a2eba701afe96ba4af9f4924dad`. Authorization is published at
+> `e21a67cac447e90a38b344ee34af8528b2dd205c`. V13 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, then the hashed
+> post-writer restore threw `INPUT-V13-RESTORE-NOT-FILL`. Extract was not
+> issued. Do not teach the recipe to accept FIXED. Do not restart v13
+> attempt 2 as-is. The next lineage must not patch hashed v13 restore bytes.
+> Cleanup accepted; owned Input pages are gone; no captures; no live success.
+> V14 is the replacement lineage: it copies the v13 stack and teaches a
+> two-pass restore that fills parent surface/content-row first, then
+> re-asserts content HEIGHT+FILL, revealing hidden texts only for that
+> assignment. V13 writer and restore bytes stay frozen. Do not teach FIXED.
+> V14 prepare is published at
+> `961d08f94853d2b90cd3b68963f5bc113e5ae066`. Authorization is published at
+> `eae2dfb3e884b2b71c2de6814a5586cc85b9443c`. V14 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, then the hashed
+> two-pass restore threw `INPUT-V14-RESTORE-NOT-FILL`. Extract was not
+> issued. Do not teach the recipe to accept FIXED. Do not restart v14
+> attempt 2 as-is. The next lineage must not patch hashed v14 restore bytes.
+> Cleanup accepted; owned Input pages are gone; no captures; no live success.
+> V15 is the replacement lineage: it copies the v14 stack and teaches a
+> restore that measures content FILL **while the text is still visible**,
+> then restores visibility. V14 writer and restore bytes stay frozen. Do
+> not teach FIXED. V15 prepare is published at
+> `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Authorization is published at
+> `4002cb3be87c52ddfa32e2fa15c6bfbdc251238b`. V15 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402467 bytes). Host collapse refused the same MUI content-fill check.
+> Extract still shows MUI 104/128 FILL and 24/128 FIXED (all hidden
+> placeholders); Polaris 128/128 FILL. Do not teach the recipe to accept
+> FIXED. Do not restart v15 attempt 2 as-is. The next lineage must not
+> patch hashed v15 restore bytes. Cleanup accepted; owned Input pages are
+> gone; no captures; no live success.
+> V16 is the replacement lineage: it copies the v15 stack and teaches
+> extract to measure hidden content `layoutSizingHorizontal` **while the
+> text is still visible**, then restore visibility before other fields.
+> V15 writer, restore, and extract-runtime bytes stay frozen. Do not teach
+> FIXED. V16 prepare is published at
+> `a764804c4191d161d08ab9527938ce6d29009af7`. Authorization is published at
+> `8511c9ca722c9f30c526ce5eb99fa9f4e485d9ec`. V16 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402443 bytes). Hidden-content FILL teaching cleared the v15 24 MUI
+> FIXED cells: MUI 128/128 FILL, Polaris 128/128 FILL. Host collapse then
+> refused leading-slot solid paint. All 64+64 leading slot frames extract
+> with empty `fills[]`; SOLID paint is on the adornment-content child and
+> `instancePayload.fills`. Do not teach FIXED. Do not restart v16 attempt 2
+> as-is. The next lineage must not patch hashed v16 extract/runtime bytes.
+> Cleanup accepted; owned Input pages are gone; no captures; no live
+> success.
+> V17 is the replacement lineage: it copies the v16 stack and teaches host
+> scene-readback to surface leading/trailing slot solid paint from
+> `instancePayload.fills` or the adornment-content child when the slot
+> node's own `fills[]` is empty. V16 writer, restore, runtime, and extract
+> bytes stay frozen. Do not teach FIXED. V17 prepare is published at
+> `2a764e90d7683afd39ab08ad5b8cbf3e639c56a2`. Authorization is published at
+> `36dfcad20ecd04d9ff5eddcbe476a60ec66bc940`. V17 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402443 bytes). Slot-fill teaching surfaced SOLID so host no longer
+> refused `fills[0]` as a solid paint. Host collapse then refused the
+> leading-slot `fills.0.color` token binding. All 64+64 leading slot
+> frames extract with empty `fills[]`; SOLID is on the child and
+> `instancePayload.fills`; the COLOR binding lives on the adornment-content
+> child, not the slot node. Do not teach FIXED. Do not invent a binding.
+> Do not restart v17 attempt 2 as-is. The next lineage must not patch
+> hashed v17 scene-readback bytes. Cleanup accepted; owned Input pages
+> are gone; no captures; no live success.
+> V18 is the replacement lineage: it copies the v17 stack and teaches host
+> scene-readback to surface leading/trailing slot `fills.0.color` from the
+> adornment-content child's existing COLOR binding when the slot node's
+> own bindings lack it. V16 writer, restore, runtime, and extract bytes
+> stay frozen. Hashed v17 scene-readback stays frozen. Do not teach FIXED.
+> Do not invent a variable. V18 prepare is published at
+> `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Authorization is published at
+> `829f7c5217e3f4f5342cb2111112b6abb448a29a`. V18 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402443 bytes). Slot-color teaching surfaced `fills.0.color` so host no
+> longer refused the v17 slot-binding gate. Host collapse then refused the
+> surface `strokes.0.weight` token binding. All 128+128 surface nodes bind
+> the four per-side stroke weights to the same FLOAT and bind no
+> `strokeWeight` / `strokes.0.weight`. Do not teach FIXED. Do not invent a
+> binding. Do not restart v18 attempt 2 as-is. The next lineage must not
+> patch hashed v18 scene-readback bytes. Cleanup accepted; owned Input pages
+> are gone; no captures; no live success.
+> V19 is the replacement lineage: it copies the v18 stack and teaches host
+> scene-readback to surface `strokes.0.weight` from the existing uniform
+> per-side stroke-weight FLOAT when the surface node's own `strokeWeight`
+> is absent. V16 writer, restore, runtime, and extract bytes stay frozen.
+> Hashed v18 scene-readback stays frozen. Do not teach FIXED. Do not invent
+> a variable. V19 prepare is published at
+> `53e0ee50e1c7ab08442bec8b666cd95cbd92e600`. Authorization is published at
+> `d3b5429cac9df5877143dfb79e617b544d7688f0`. V19 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8402443 bytes). Host collapse refused variant `layout.width.value`.
+> The first none-adornment variant binds Figma `width` to an existing FLOAT
+> and binds no `layout.width.value`. Scene-readback maps `width` to
+> `width.value`. Do not teach FIXED. Do not invent a variable. Do not
+> restart v19 attempt 2 as-is. The next lineage must not patch hashed v19
+> scene-readback bytes. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success.
+> V20 is the replacement lineage: it copies the v19 stack and teaches host
+> scene-readback to surface variant `layout.width.value` from the existing
+> Figma `width` / `width.value` FLOAT when `layout.width.value` is absent.
+> V16 writer, restore, runtime, and extract bytes stay frozen. Hashed v19
+> scene-readback stays frozen. Do not teach FIXED. Do not invent a
+> variable. V20 prepare is published at
+> `d49f2da22d897b4a42e1a0e0f8ef302c61383417`. Authorization is published at
+> `2cd501781de9684d175c5daf71f22fdae60410c2`. V20 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8404014 bytes). Host collapse refused surface `layout.height.value`.
+> Every surface binds Figma `height` to an existing FLOAT and binds no
+> `layout.height.value`. Scene-readback maps `height` to `height.value`.
+> Host did not refuse variant `layout.width.value` this attempt. Do not
+> teach FIXED. Do not invent a variable. Do not restart v20 attempt 2
+> as-is. The next lineage must not patch hashed v20 scene-readback bytes.
+> Cleanup accepted; owned Input pages are gone; no captures; no live
+> success.
+> V21 is the replacement lineage: it copies the v20 stack and teaches host
+> scene-readback to surface `layout.height.value` from the existing Figma
+> `height` / `height.value` FLOAT when `layout.height.value` is absent.
+> Surface roles only. V16 writer, restore, runtime, and extract bytes stay
+> frozen. Hashed v20 scene-readback stays frozen. Do not teach FIXED. Do
+> not invent a variable. Authorization is published at
+> `33108d6b18f2b37f9e03359949ce757554ae4c44`. V21 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse surface `layout.height.value`. Host
+> collapse then refused `$.children[0].bindings.length`. The first variant
+> has four bindings after scene-readback (`layout.itemSpacing`,
+> `layout.minWidth`, `width.value`, `layout.width.value`); recipe compile
+> emits three none-adornment variant bindings and does not emit
+> `width.value`. Do not teach FIXED. Do not invent a variable. Do not
+> restart v21 attempt 2 as-is. The next lineage must not patch hashed v21
+> scene-readback bytes. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success.
+> V22 is the replacement lineage: it copies the v21 stack and teaches host
+> scene-readback to alias `layout.width.value` / `layout.height.value` from
+> the existing Figma width/height FLOAT without leaving a duplicate
+> `width.value` / `height.value` binding. Variant width and surface height
+> roles only. V16 writer, restore, runtime, and extract bytes stay frozen.
+> Hashed v21 scene-readback stays frozen. Do not teach FIXED. Do not invent
+> a variable. Authorization is published at
+> `281bb2594408ebbfef6b332c2f8b7b05a56bd7b9`. V22 attempt 1 ran Scratch-only:
+> writer accepted (2317 created nodes), cleanup persisted, hashed
+> measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse `bindings.length`. Host collapse
+> then refused `$.children[0].bindings[1].field`. After scene-readback-v22
+> the first variant has three bindings (`layout.itemSpacing`,
+> `layout.minWidth`, `layout.width.value`); recipe compile emits the same
+> three none-adornment fields as `layout.itemSpacing`,
+> `layout.width.value`, `layout.minWidth`. The alias appends
+> `layout.width.value` after dropping `width.value`. Do not teach FIXED.
+> Do not invent a variable. Do not restart v22 attempt 2 as-is. The next
+> lineage must not patch hashed v22 scene-readback bytes. Cleanup
+> accepted; owned Input pages are gone; no captures; no live success.
+> V23 is the replacement lineage: it copies the v22 stack and teaches host
+> scene-readback to place aliased `layout.width.value` at the recipe
+> compile index (after `layout.itemSpacing`, before `layout.minWidth`)
+> instead of appending it. Variant width role only. V16 writer, restore,
+> runtime, and extract bytes stay frozen. Hashed v22 scene-readback stays
+> frozen. Do not teach FIXED. Do not invent a variable. Authorization is
+> published at `3d0791b41d59dfca1c803a02ed917b8aecde2c5f`. V23 attempt 1
+> ran Scratch-only: writer accepted (2317 created nodes), cleanup
+> persisted, hashed measure-while-visible restore accepted
+> (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0),
+> then extract issued (8436213 bytes). Host did not refuse variant
+> `bindings[1].field`. Host collapse then refused
+> `$.children[0].children[0].bindings.length`. After scene-readback-v23
+> the first variant has three bindings in compile order
+> (`layout.itemSpacing`, `layout.width.value`, `layout.minWidth`). The
+> MUI first-variant first child is `input-field/surface` with 18 host
+> bindings versus 12 recipe-compile bindings. Do not teach FIXED. Do not
+> invent a variable. Do not restart v23 attempt 2 as-is. The next lineage
+> must not patch hashed v23 scene-readback bytes. Cleanup accepted; owned
+> Input pages are gone; no captures; no live success.
+> V24 is the replacement lineage: it copies the v23 stack and teaches host
+> scene-readback to drop extra surface bindings that collapse treats as a
+> structural length edit (duplicate mapped `fills.0` / `strokes.0` color
+> fields, and per-side stroke weights once the uniform `strokes.0.weight`
+> alias is present). Surface role only. V16 writer, restore, runtime, and
+> extract bytes stay frozen. Hashed v23 scene-readback stays frozen. Do
+> not teach FIXED. Do not invent a variable. Authorization is
+> published at `5530ad3d4040faa45a0d03943b6da48c618daaf4`. V24 attempt 1
+> ran Scratch-only: writer accepted (2317 created nodes), cleanup
+> persisted, hashed measure-while-visible restore accepted
+> (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0),
+> then extract issued (8436213 bytes). Host did not refuse surface
+> `bindings.length`. Host collapse then refused
+> `$.children[0].children[0].bindings[0].field`. After scene-readback-v24
+> the MUI first-variant first child is `input-field/surface` with 12 host
+> bindings matching the 12 recipe-compile bindings, but host remaining
+> order starts at `cornerRadius.bottomLeft` while compile starts at
+> `layout.padding.right`. Do not teach FIXED. Do not invent a variable.
+> Do not restart v24 attempt 2 as-is. The next lineage must not patch
+> hashed v24 scene-readback bytes. Cleanup accepted; owned Input pages
+> are gone; no captures; no live success.
+> V25 is the replacement lineage: it copies the v24 stack and teaches host
+> scene-readback to place remaining surface bindings at the recipe compile
+> field order after extras are dropped. Surface role only. V16 writer,
+> restore, runtime, and extract bytes stay frozen. Hashed v24
+> scene-readback stays frozen. Do not teach FIXED. Do not invent a
+> variable. Authorization is
+> published at `dcbeaabf15405006489ed6d2ec6aa3eb5b4ffe8f`. V25 attempt 1
+> ran Scratch-only: writer accepted (2317 created nodes), cleanup
+> persisted, hashed measure-while-visible restore accepted
+> (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0),
+> then extract issued (8436213 bytes). Host did not refuse surface
+> `bindings[0].field`. Host collapse then refused
+> `$.children[0].children[0].children[0].children[0].bindings[0].field`.
+> After scene-readback-v25 the MUI first-variant first child is
+> `input-field/surface` with 12 host bindings in compile order starting
+> at `layout.padding.right`. The refused node is MUI
+> `input-field/content/placeholder`: host remaining order starts at
+> `fills.0.color` (4 bindings including a duplicate mapped color) while
+> compile starts at `type.fontSize` (3 bindings). Do not teach FIXED.
+> Do not invent a variable. Do not restart v25 attempt 2 as-is. The next
+> lineage must not patch hashed v25 scene-readback bytes. Cleanup
+> accepted; owned Input pages are gone; no captures; no live success.
+> V26 is the replacement lineage: it copies the v25 stack and teaches host
+> scene-readback to drop extra content/placeholder and content/value
+> bindings, then place remaining known fields at the recipe compile
+> field order (`type.fontSize`, `type.lineHeight.value`, `fills.0.color`).
+> Content roles only. V16 writer, restore, runtime, and extract bytes
+> stay frozen. Hashed v25 scene-readback stays frozen. Do not teach
+> FIXED. Do not invent a variable. Authorization is
+> published at `3ca842739d6b45ab40f054f129d4b38b618207a2`. V26 attempt 1
+> ran Scratch-only: writer accepted (2317 created nodes), cleanup
+> persisted, hashed measure-while-visible restore accepted
+> (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0),
+> then extract issued (8436213 bytes). Host did not refuse content
+> `bindings[0].field`. Host collapse then refused
+> `$.children[0].children[0].children[0].children[0].height.mode`.
+> After scene-readback-v26 the MUI first-variant content placeholder has
+> 3 host bindings in compile order starting at `type.fontSize`. Host
+> emits `height.mode` fixed (value 23) on that hidden placeholder;
+> compile emits hug. Content width stayed MUI 128/128 FILL and Polaris
+> 128/128 FILL. Content height is MUI 24 FIXED / 104 HUG (the 24 FIXED
+> are hidden floating placeholders) and Polaris 128/128 HUG. Do not
+> teach FIXED as a fill. Do not invent a variable. Do not restart v26
+> attempt 2 as-is. The next lineage must not patch hashed v26
+> scene-readback bytes. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success. V27 is the replacement lineage: it copies
+> the v26 stack and teaches host scene-readback to emit hug height for
+> hidden content/placeholder and content/value text whose live
+> `layoutSizingVertical` is FIXED after measure-while-visible. Content
+> roles only. Do not rewrite visible FIXED height. Do not invent a
+> variable. Do not teach FIXED as a fill. V16 writer, restore, runtime,
+> and extract bytes stay frozen. Hashed v26 scene-readback stays frozen.
+> Authorization is published at `64214da458c4f12baacdefe618b0f994b9b0be26`.
+> V27 attempt 1 ran Scratch-only: writer accepted (2317 created nodes),
+> cleanup persisted, hashed measure-while-visible restore accepted
+> (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0),
+> then extract issued (8436213 bytes). Host did not refuse
+> `height.mode`. Host collapse then refused
+> `$.children[0].children[0].children[0].children[0].type.letterSpacing`.
+> After scene-readback-v27 the MUI first-variant content placeholder has
+> 3 host bindings in compile order starting at `type.fontSize` and host
+> `height.mode` hug. Host emits `type.letterSpacing` percent 0; compile
+> omits letterSpacing. Content width stayed MUI 128/128 FILL and Polaris
+> 128/128 FILL. Do not teach FIXED as a fill. Do not invent a variable.
+> Do not invent a letterSpacing value. Do not restart v27 attempt 2
+> as-is. The next lineage must not patch hashed v27 scene-readback
+> bytes. Cleanup accepted; owned Input pages are gone; no captures; no
+> live success. V28 is the replacement lineage: it copies the v27 stack
+> and teaches host scene-readback to omit content/placeholder and
+> content/value `type.letterSpacing` that recipe compile never emits.
+> Content roles only. Do not invent a letterSpacing value. Do not invent
+> a variable. Do not teach FIXED as a fill. V16 writer, restore, runtime,
+> and extract bytes stay frozen. Hashed v27 scene-readback stays frozen.
+> Authorization is published at `6d450ef6bc985816a18a30d17b9893dde9f51fd0`.
+> V28 attempt 1 ran Scratch-only: writer accepted (2317 created nodes),
+> cleanup persisted, hashed measure-while-visible restore accepted
+> (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0),
+> then extract issued (8436213 bytes). Host did not refuse
+> `type.letterSpacing`. Host collapse then refused
+> `$.children[0].children[0].children[0].children[0].type.textCase`.
+> After scene-readback-v28 the MUI first-variant content placeholder has
+> 3 host bindings in compile order starting at `type.fontSize`, host
+> `height.mode` hug, and no `type.letterSpacing`. Host emits
+> `type.textCase` original; compile omits textCase. Content width stayed
+> MUI 128/128 FILL and Polaris 128/128 FILL. Do not teach FIXED as a
+> fill. Do not invent a variable. Do not invent a textCase value. Do
+> not restart v28 attempt 2 as-is. The next lineage must not patch
+> hashed v28 scene-readback bytes. Cleanup accepted; owned Input pages
+> are gone; no captures; no live success. V29 is the replacement lineage:
+> it copies the v28 stack and teaches host scene-readback to omit
+> content/placeholder and content/value `type.textCase` that recipe
+> compile never emits. Content roles only. Do not invent a textCase
+> value. Do not invent a variable. Do not teach FIXED as a fill. V16
+> writer, restore, runtime, and extract bytes stay frozen. Hashed v28
+> scene-readback stays frozen. Authorization is published at
+> `a19285e26afed6121b7e6987838e434d1881ebca`. V29 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), cleanup persisted,
+> hashed measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse `type.textCase`. Host collapse
+> then refused
+> `$.children[0].children[0].children[0].children[0].type.textDecoration`.
+> After scene-readback-v29 the MUI first-variant content placeholder has
+> 3 host bindings in compile order starting at `type.fontSize`, host
+> `height.mode` hug, no `type.letterSpacing`, and no `type.textCase`.
+> Host emits `type.textDecoration` none; compile omits textDecoration.
+> Content width stayed MUI 128/128 FILL and Polaris 128/128 FILL. Do not
+> teach FIXED as a fill. Do not invent a variable. Do not invent a
+> textDecoration value. Do not restart v29 attempt 2 as-is. The next
+> lineage must not patch hashed v29 scene-readback bytes. Cleanup
+> accepted; owned Input pages are gone; no captures; no live success.
+> V30 is the replacement lineage: it copies the v29 stack and teaches
+> host scene-readback to omit content/placeholder and content/value
+> `type.textDecoration` that recipe compile never emits. Content roles
+> only. Do not invent a textDecoration value. Do not invent a variable.
+> Do not teach FIXED as a fill. V16 writer, restore, runtime, and
+> extract bytes stay frozen. Hashed v29 scene-readback stays frozen.
+> Authorization is published at
+> `babb6e5db745e7eb36037b069dce8a54983f2dec`. V30 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), cleanup persisted,
+> hashed measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse `type.textDecoration`. Host
+> collapse then refused
+> `$.children[0].children[0].children[0].clipsContent`. After
+> scene-readback-v30 the MUI first-variant content placeholder has 3
+> host bindings in compile order starting at `type.fontSize`, host
+> `height.mode` hug, no `type.letterSpacing`, no `type.textCase`, and no
+> `type.textDecoration`. Host emits content-row `clipsContent` true;
+> compile omits clipsContent on content-row. Content width stayed MUI
+> 128/128 FILL and Polaris 128/128 FILL. Polar has 0 content-row nodes.
+> Do not teach FIXED as a fill. Do not invent a variable. Do not invent
+> a clipsContent value. Do not restart v30 attempt 2 as-is. The next
+> lineage must not patch hashed v30 scene-readback bytes. Cleanup
+> accepted; owned Input pages are gone; no captures; no live success.
+> V31 is the replacement lineage: it copies the v30 stack and teaches
+> host scene-readback to omit `input-field/content-row` `clipsContent`
+> that recipe compile never emits. Content-row role only. Do not invent
+> a clipsContent value. Do not invent a variable. Do not teach FIXED as
+> a fill. Do not lift the omit onto labels. V16 writer, restore,
+> runtime, and extract bytes stay frozen. Hashed v30 scene-readback
+> stays frozen. Authorization is published at
+> `38a97734a6b0a1a37d877e75c9973d3fd69acbba`. V31 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), cleanup persisted,
+> hashed measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse content-row `clipsContent`. Host
+> collapse then refused
+> `$.children[0].children[0].children[0].cornerRadius`. After
+> scene-readback-v31 the MUI first-variant content-row has
+> `clipsContent` omitted and still emits `cornerRadius` `{0,0,0,0}`.
+> Compile omits content-row `cornerRadius`. Polar has 0 content-row
+> nodes. Do not invent a cornerRadius value. Do not restart v31 attempt
+> 2 as-is. The next lineage must not patch hashed v31 scene-readback
+> bytes. Cleanup accepted; owned Input pages are gone; no captures; no
+> live success.
+> V32 is the replacement lineage: it copies the v31 stack and teaches
+> host scene-readback to omit `input-field/content-row` `cornerRadius`
+> that recipe compile never emits. Content-row role only. Do not invent
+> a cornerRadius value. Do not invent a variable. Do not teach FIXED as
+> a fill. Do not lift the omit onto labels. V16 writer, restore,
+> runtime, and extract bytes stay frozen. Hashed v31 scene-readback
+> stays frozen. Authorization is published at
+> `4bb5a7fe225a90c42037de5797bfcf3101aae298`. V32 attempt 1 ran
+> Scratch-only: writer accepted (2317 created nodes), cleanup persisted,
+> hashed measure-while-visible restore accepted (`restoredCount` 256,
+> `hiddenRevealedForFill` 24, `retriedForFill` 0), then extract issued
+> (8436213 bytes). Host did not refuse content-row `clipsContent` or
+> `cornerRadius`. Host collapse then refused
+> `$.children[0].children[0].children[0].effects`. After
+> scene-readback-v32 the MUI first-variant content-row has
+> `clipsContent` omitted, `cornerRadius` omitted, and still emits
+> `effects` `[]`. Compile omits content-row `effects`. Polar has 0
+> content-row nodes. Do not invent an effects value. Do not restart v32
+> attempt 2 as-is. The next lineage must not patch hashed v32
+> scene-readback bytes. Cleanup accepted; owned Input pages are gone; no
+> captures; no live success.
+> Button overall success is false/pending.
+> Its technical mint, usability, restoration, and 12/12 adjudication bytes are
+> retained. Scene-derived inversion has now run (expected-plan vs 0-write observe;
+> silent derived, not zero). Observe role first-segment + unique same-key token
+> sanitization taught; name first-segment then held (300/301); variant-axis
+> order then held (V72 class); unique last-segment componentRef then held;
+> uniform per-side `strokes.0.weight` then held (v18/v19 class); compile-omitted
+> extras then dropped (V24 class). Silent is still Altitude **149/8706**, Fluent
+> **149/8778** (extras 435→1 / 411→1). Remaining is fonts and invented set
+> chrome. Roboto/SemiBold were not
+> invented as compile fonts. The human grade is still not attributable. Input overall success is false and
+> blocked: live v2 improved aggregate geometry and pixel/ink versus legacy but
+> still fails adornment-content and MUI-stratum safeguards. Commit
+> `be6b01300ad99d8a29ea4c11508d192dec84bbea` now fixes the exact prospective
+> `input-live-v3` criterion bytes before capture authorization. A separate
+> authorization artifact was first committed at
+> `ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b`. The typed runner, verifier,
+> preflight, and evidence writer were committed at
+> `5e95105b16f3e30e0fb67a53a6eda7a86c105c61`. All three v3 attempts are now
+> permanently exhausted. Attempts 1 and 2 each decoded
+> and evaluated their exact committed writer and minted both 128-variant sets.
+> Attempt 1 hard-failed because the Figma sandbox's `TextDecoder` is not
+> constructible. Attempt 2 passed that correction, then hard-failed before
+> extraction on read-only descendant `I86:38597;86:38583`, generated from
+> owned instance `86:38597` and helper text `86:38583`, because the descendant
+> cannot carry direct shared plugin data. Both attempts measured zero scene
+> facts and no objective rows. Runner cleanup failed both times; separate
+> exact-ownership manual cleanup restored the unrelated Scratch fingerprint.
+> Attempt 3 ran from committed descendant
+> `6903d31eb015933a6796722d25f6155fb13332ce`: writer and portable runtime
+> returned and 128 captures were persisted, then host normalization failed at
+> `recipe/scene-readback.ts:982` on Figma's alias-array fields (`fills.0`,
+> `fontSize.0`, `lineHeight.0`) and object-valued `letterSpacing`. No scene,
+> accounting, fixed-point, usability, restoration, or objective value is
+> assigned. Captures remain unscored. Exact attempt IDs were lost by the
+> nontransactional runner. Ownership cleanup left zero pages/collections and
+> restored Scratch fingerprint `10ba6b57da3cfa97` exactly.
+> Current machine status is
+> `recipe/evidence/status-index.json`; exhausted v3 evidence is
+> `recipe/evidence/input-field-live-pivot-v3/index.json`. V4 protocol commit
+> `25b820868104be65194f83e154f59b70aacf2bae` and authorization commit
+> `bd343680b446a828190f176e525e5616752f9e5f` passed authorization and preflight,
+> but the committed entrypoint then called `refuseDraftExecution()` before phase
+> 1, writer construction, or any bridge invocation. V4 therefore produced zero
+> generated writer/transport artifacts, journals, Figma artifacts, or captures
+> and no attempt or result. Existing v4 bytes remain unchanged; the failure is
+> recorded at `recipe/evidence/input-field-live-pivot-v4-failure.json`. Its
+> pre/post fields repeat the last exact verified Scratch fingerprint
+> `10ba6b57da3cfa97`; they are not new v4 observations because no bridge call
+> occurred.
+>
+> V5 is the replacement executable antecedent. It retains every v4 product
+> criterion and threshold and adds a generated 2×128 writer, exact-byte
+> transport, expected scene plans, authorization-aware orchestration, and
+> immediate hash-chained journals. The green executable antecedent is
+> `a29d034b746d0831ce93f88f1aeb5630ad4b0453`; its protocol was first added by
+> `e9f9712a55147a4329f51cfd4bf024866dfd489f`. The separate authorization was
+> first committed and published at
+> `7c240e7862ee4b97d9da5002c7f2a02827477413`.
+>
+> A boundary review after authorization found that v5 still cannot run
+> honestly. Cursor owns the local MCP stdio session; its HTTP listener exposes
+> health only, and its WebSocket listener is the server side used by Desktop
+> Bridge plugin clients, not a repository RPC endpoint. The installed MCP does
+> support a separate standard MCP stdio client launching another local server,
+> and a read-only exact-target probe proved that route against Scratch. That
+> transport finding does not repair the v5 transaction contract: its raw phase
+> returns one scene although the writer creates two independent set roots, its
+> accounting hashes a normalization of itself instead of comparing both pinned
+> expected plans, and its writer plan has no objective-cell/reference manifest.
+> A v5 adapter that returned success would therefore fake required semantics.
+>
+> V6's protocol and signed two-root broker are technically complete, and its
+> separate authorization history is valid: antecedent
+> `8737fab9f35aeae43b25734e8f9709a4247c379b`, authorization
+> `e5d6814982cbbe498ed630e7d988eae10bcb5d77`. The comprehensive v6 check is
+> nevertheless red after authorization because a unit self-test calls the real
+> repository verifier and asserts that authorization must still be uncommitted.
+> Its generated index also hashes authorization lifecycle files, so repairing
+> that assertion in place would drift the preserved index. No v6 live attempt
+> occurred. V6 is retired before use by
+> `recipe/evidence/input-field-live-pivot-v6-superseding-status.json`; its
+> protocol, authorization, and index bytes are unchanged.
+>
+> V7 carries the same product and broker criteria into a phase-stable antecedent:
+> two independent roots (22,811 MUI facts and 20,915 Polaris facts), 256 variant
+> probes, 128 ordered one-cell captures, 132 signed requests, exact Scratch
+> targeting, no capture before hash-bound technical gates, durable cleanup after
+> host failure, and mandatory human signoff. The immutable broker and runner are
+> separate from `input-field-live-v7-authorized.ts`, the history verifier,
+> preflight, tests, authorization template, and current status. None of those
+> lifecycle files enters
+> `recipe/evidence/input-field-live-pivot-v7/antecedent-index.json`.
+>
+> `npm run recipe:input-field:live:v7:check` is phase-stable. Unit tests use only
+> pending/changed/committed fixtures. The separate integration command requires
+> an explicit phase: run
+> `npm run recipe:input-field:live:v7:history:verify -- --expect-pending-v2`
+> while the replacement is uncommitted, then
+> `npm run recipe:input-field:live:v7:history:verify -- --expect-authorized-v2`
+> after its later commit is published. The offline lifecycle
+> simulation creates synthetic Git antecedent and authorization commits and
+> proves that the same generated antecedent remains byte-green in both phases.
+>
+> The first v7 authorization remains byte-identical at SHA-256
+> `43277ff2f422c9117e2f4f1b5c0fea241cc967977666529d91e0f14fd7489fda`,
+> but is superseded and unusable because its signer private key was not
+> retained. Criteria did not change. Replacement
+> `capture-authorization-v2.json` pins the same antecedent
+> `117f1cddce797393b1b705da62323615e584d54b`; its artifact SHA-256 is
+> `de501693a52b0d050fc1b7048a355ca9195c3ca2ab982a28fd1b9509c397e76d`
+> and its Ed25519 SPKI identity SHA-256 is
+> `8eb7c6f6fcd2bd497997028f8e026abc30d8af8507bc2b903347da892403dbcf`.
+> Runtime reads the owner-only PKCS8 key only from
+> `INPUT_LIVE_V7_OPERATOR_PRIVATE_KEY_PATH`. The precommit verifier reports
+> `pending-v2`; after the parent commits and publishes these lifecycle files,
+> verify with `--expect-authorized-v2`. Commit state is derived from Git history rather than
+> embedded in the authorization or status artifacts.
+>
+> Read-only checks confirm the replacement PAT can read the exact Scratch
+> project, the owner accepts the residual risk with `oldTokenRevoked=false`,
+> both environment files are mode 0600, MCP reconnected after their update, and
+> exact Scratch bridge and REST probes pass. Runtime attestation must still be
+> created only after the replacement authorization/code commit is published and
+> a fresh zero-result secret scan is bound to that commit; it may contain no
+> token value. The safe template is
+> `recipe/evidence/input-field-live-pivot-v7/operator-security-attestation-template.json`;
+> the completed untracked attestation belongs at
+> `private/input-live-v7-security-attestation.json`. Create it post-commit with
+> `npm run recipe:input-field:live:v7:attestation:create -- --facts private/input-live-v7-post-restart-security-facts.json`.
+> V7 attempt 1 is closed as recorded above; Input remains false. V8 prepare is
+> published at `9e34ee653b07e705ef6309cc3d900add81fba47b`. Authorization is
+> published at `e163d85787c4449de269ca4314bda9c75a289395`; verify with
+> `--expect-authorized`. V8 attempt 1 failed closed on IR FLOAT compatibility
+> for per-side stroke weights; attempt 2 cleared that and failed closed on
+> VARIABLE_ALIAS / bound-variable-only fills in hashed scene-readback.
+> Cleanup completed both times. V7 authorization is not reusable. V9 prepare
+> is published at `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. Authorization is
+> published at `58cd5c6ac08ebedc4c5a505b6f59e38efe91ac1b`; verify with
+> `--expect-authorized`. V9 attempt 1 failed closed on component-set
+> strokes/effects/cornerRadius; attempt 2 cleared that and failed closed on the
+> hashed v3 verifier still calling v8 `scene-readback.ts`. Cleanup completed
+> both times. V7, v8, and v9 authorization are not reusable. Do not restart v9
+> attempt 3 as-is. V10 prepare is published at
+> `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Authorization is present at
+> `recipe/evidence/input-field-live-pivot-v10/capture-authorization.json`;
+> verify `--expect-authorized` after the authorization commit. V10 attempts
+> 1-2 failed closed. V11 prepare is published at
+> `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Authorization is published at
+> `41fc8c77e01a670a38d5cdfb97feba80b638f72e`. V11 attempt 1 failed closed on
+> MUI content fill (24 placeholder texts FIXED); do not restart attempt 2
+> as-is. The ordered remaining-work plan to an honest v1 proof is in
+> [Remaining work to v1 proof](#remaining-work-to-v1-proof-2026-08-27).**
+>
+> Historical implementation record: **Input/Field has an offline
+> `input-field@1` recipe and a complete 128-cell matched source/legacy/React/WC
+> capture. Every grading round remains separate as preserved historical bytes: v1
+> failed at legacy 88/128 versus recipe 40/128; corrected v2 produced an
+> internally reliable 0/128 versus 95/128 consensus but could not explain the
+> unchanged-control swing; the first calibrated round was refused with invalid
+> envelopes and Fleiss κ 0.473; replacement v3 was refused at κ 0.409255 before
+> identity; and the paired GOLD raters all failed qualification at 44/48, 42/48,
+> and 41/48. Their submissions and receipts are preserved. No more AI raters are
+> recruited: repeated recruitment after both absolute and paired instruments
+> fail selects for agreement with the instrument rather than establishing
+> visual truth. AI absolute recognisability and AI paired preference are no
+> longer automated architecture-progression gates.
+>
+> Progression now has three explicit claims. (1) Deterministic visual fidelity
+> is measured relative to each exact independent real-source reference. (2)
+> Structural/semantic correctness is measured through DOM, ARIA, state, role,
+> WC-parity, accounting, fixed-point, and no-source-branch assertions. Only
+> those first two claims may authorize continued engineering. (3) Absolute
+> human recognisability remains pending a final independent designer review and
+> is required before Input success or release.
+>
+> Objective v1 remains historical: under the recorded protocol recipe won geometry
+> 128–0 and pixel/ink cells 108–20, but failed aggregate pixel/ink at 0.402497
+> versus legacy 0.363455. Its 20 losses were 16 MUI disabled cells and four MUI
+> error/placeholder/no-adornment cells. The exact causes were an incorrectly
+> painted disabled surface (mean 37,802.5 excess threshold-counted ink pixels
+> per affected cell), dependent border darkening, unacquired adornment and
+> required-indicator ink, and placeholder ink over an inactive floating label.
+> New comparison v3 preserves all 128 independent references and all 128 legacy
+> outputs byte-for-byte. Objective v2 reuses the same protocol hash and
+> thresholds: recipe now wins geometry 128–0 and pixel/ink 128–0; mean geometry
+> is 0.003944 versus 0.136296, mean pixel/ink is 0.295210 versus 0.363455, and
+> overall weighted error is 0.149577 versus 0.249875. Structural, semantic,
+> React/WC parity, accounting, fixed-point, completeness, and catastrophic
+> regression checks pass 128/128. Deterministic visual fidelity and structural
+> correctness now authorize continued Input engineering. Overall Input remains
+> false and human recognisability remains pending final independent designer
+> review. Live v1 remains historical. Live v2 repaired generic reflow, explicitly
+> declared floating-label overlap, all 256 bounds checks, fixed point, and
+> accounting, but still failed the unchanged all-cell raster objective. All v2
+> Input-created Figma artifacts were cleaned; census and Button proof remain
+> untouched. An independent 24-specimen browser↔Figma calibration then improved
+> held-out geometry but regressed held-out pixel/ink under sane coefficient
+> bounds, so it was rejected. Input v3 attempts 1–3 are hard failures; attempt
+> 3's 128 captures are unscored and no scene or objective value exists.**
+>
+> Evidence index: immutable objective v1 is
+> `recipe/evidence/input-field-objective-comparison-v1/index.json`; corrected
+> capture v3 is `recipe/evidence/input-field-comparison-v3/index.json`; and the
+> passing locked objective rerun is
+> `recipe/evidence/input-field-objective-comparison-v2/index.json`. The failed
+> live proof, complete 128-cell capture, cleanup receipts, and ungraded human
+> packet are indexed at
+> `recipe/evidence/input-field-live-pivot-v1/index.json`. The separate v2
+> diagnosis, proof, complete capture, cleanup, and packet are indexed at
+> `recipe/evidence/input-field-live-pivot-v2/index.json`.
+> Exhausted v3 evidence and all 128 attempt-3 screenshots are indexed at
+> `recipe/evidence/input-field-live-pivot-v3/index.json`; the v4 protocol and
+> historical authorization declaration are indexed at
+> `recipe/evidence/input-field-live-pivot-v4/index.json`; the v4 entrypoint
+> failure is separate. V5 protocol and authorization bytes remain preserved at
+> `recipe/evidence/input-field-live-pivot-v5/index.json`; its semantic retirement
+> is recorded separately at
+> `recipe/evidence/input-field-live-pivot-v5-superseding-status.json`. The v6
+> protocol, two-root expected plans, exact 128-cell manifest, 132-request
+> manifest, source-neutral programs, and authorization history remain preserved
+> at `recipe/evidence/input-field-live-pivot-v6/index.json`; its lifecycle defect
+> and retirement are recorded separately. V7's authorization-independent hash
+> set is `recipe/evidence/input-field-live-pivot-v7/antecedent-index.json`, with
+> lifecycle status outside that set. The distinct authorization is declared, but
+> v7 live execution remains forbidden until its commit is published and all
+> runtime security prerequisites pass.
+> The source-neutral calibration corpus, captures, result, exact-byte attempts,
+> and cleanup receipt are indexed at
+> `recipe/evidence/raster-calibration-v1/index.json`.
+> V1 Button comparison remains red and retained;
+> corrected v2 passes the offline paired recognisability control; live v1-v3
+> remain historical failures; and v4 preserves the technical Scratch mint plus
+> 12/12 grade bytes. Scene-derived inversion has now run and is not silent-zero.
+> Attributable human signoff is still unproven.** The canonical IR,
+> envelope, explicitly selected `button@1` compiler, inverse validator/collapse
+> path, React/Web Component outputs, and offline gates exist. On the frozen
+> paired v1 slice, legacy scored 9/12 and recipe React 0/12. The separately
+> graded v2 batch retained the exact reference and legacy bytes and scored
+> legacy 7/12 versus corrected recipe React 12/12. V4 keeps both 144-variant
+> sets, all 57 variables, its proof instances, and 12 paired live cells on the
+> dedicated Scratch page. The deterministic final adjudication passes every
+> required historical Button column under that superseded protocol. Current
+> Button success is **false/pending**. The second
+> control reuses that architecture offline only; its original-source references
+> and blind grade now exist, but no Figma mint, live canvas grade, or
+> cross-archetype success claim exists yet.
+
+## Remaining work to v1 proof (2026-08-27)
+
+This is the ordered, falsifiable plan for the rest of the pivot. It does not
+declare v1, invent live outcomes, or restamp frozen lineage bytes. Machine
+status remains `recipe/evidence/status-index.json`. Sitting start for this remaining-work plan was
+`1a16642bddbb8c8a3fb44cd0e086a7ff8328e294` on `pivot/recipe-ir-v1`. Desktop
+Bridge stays target-locked on Scratch `byMp6lt0Ij9b2QbkDGFwBh`. The historical
+Button page `Recipe Pivot / Button / e6a61d04-b04f4059-v4` remains and must
+not be collided with. `Y8Jhw6R49wTLuXZ0is2GmV` and every other connected file
+stay read-only. npm publish stays deferred.
+
+**Exit rule.** Continue in this order until every binary row in §F is true, or
+until a hard safety or human-only gate blocks progress. Do not cut v1 if any
+required row is false. If a hashed lineage file fails closed, open the next
+lineage; do not patch hashed bytes in place.
+
+### A · Input live v9 closeout, then v10
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| A1 | AUTHORIZE INPUT V9 as a **separate** commit. Pin a prepare-era Ed25519 operator signer. Antecedent `1a16642bddbb8c8a3fb44cd0e086a7ff8328e294`. Authorization lifecycle stays out of the antecedent hash set. Artifact SHA-256 `56930e91dd321695f3e3343ddd5a9c0d0dbc3c51f0ff8305ab998d0d8f2269c7`; SPKI SHA-256 `c98c4cf0b1deef2b2d71c9f7e7f550e602ac334a620142516f4537f47ea9c686`. | **Done** at `58cd5c6ac08ebedc4c5a505b6f59e38efe91ac1b`. Antecedent index SHA-256 remains `ef6a72fd392d2866d06136e8200d2cff750585705eafacdc41e20b95cfac2942`. |
+| A2 | Fresh private attestation only: replacement PAT + `oldTokenRevoked=false` + `ownerRiskAcceptance=true`; env files mode 0600; MCP restarted; zero-result secret scan bound to the authorize/code commit; Scratch-only read-only probe. Never commit `private/`. Never print tokens. | Attestations at `private/input-live-v9-security-attestation.json` (bound to authorize) and `private/input-live-v9-security-attestation-attempt-2.json` (bound to `1c80badc`) stay untracked. |
+| A3 | Attempt 1 Scratch-only live. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364325-byte extract); host IR refused component-set `strokes`/`effects`/`cornerRadius`. Cleanup accepted. Taught unhashed `figma-ir.ts`. RECORD `1c80badc`. |
+| A4 | Attempt 2 Scratch-only live after that IR teaching. | **Failed closed.** Writer + extract accepted again; component-set fields cleared; host still ran hashed `input-field-live-v3-verifier.ts` → v8 `scene-readback.ts` and refused `payload.fills.0.kind`. Cleanup accepted. Do **not** restart v9 attempt 3 as-is. |
+| A5 | PREPARE INPUT V10. Copy the v9 stack. Carry scene-readback-v10 **and** `input-field-live-v3-verifier-v10.ts` so live host does not invoke v8 `scene-readback.ts`. Keep v9 hashed bytes frozen. Writer bytes frozen from v8/v9. | **Done** at `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Antecedent index SHA-256 `4a054aadf5902fed939da30c1b54833bcc7a54f88b145f5348c4d9b3108524bc`. |
+| A5b | AUTHORIZE INPUT V10 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `0da647b79ed8a2660b9858c6008a08cbae8dbbf3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `393996857f730419f9f92b1d2d30abaa9b5e896866e2694d50e3999c4e7b5e57`; SPKI SHA-256 `d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d`. | **Done** at `68b8366013aaf531b9c4f519f043e4cdd1b4e3a2`. |
+| A5c | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364327-byte extract). Hashed `scene-readback.ts` path cleared. Host collapse refused Size axis order `medium,small` vs declared `small,medium` in unhashed `recipes/input-field.ts`. Cleanup accepted. Teach axis-value order as non-structural, then attempt 2. |
+| A5d | Attempt 2 Scratch-only live after Size-axis teaching. | **Failed closed.** Writer + extract accepted (2317 nodes, 8364327-byte extract). Size axis order cleared. Host collapse refused `input-field/message/helper` because hashed `sceneRole` drops roles when `font-provenance=` is in the name. Helper text present on 256/256 variants; first-segment role recoverable. Cleanup accepted. Do **not** restart v10 attempt 3 as-is. |
+| A5e | PREPARE INPUT V11. Copy the v10 stack. Carry scene-readback-v11 + runtime that recover role/label from the first ` :: ` segment even when later segments contain `font-provenance=`. Keep v10 hashed bytes frozen. Writer bytes frozen from v8/v9/v10. | **Done** at `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Antecedent index SHA-256 `65ca9866da8fc90f354ceb53d57dc383f64d9f39d9b9f9ad3752df499c9628c7`. |
+| A5f | AUTHORIZE INPUT V11 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `f1861d527dd09345c56ee862de7776fbc4d0a7a2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c681d7178be473943f4863d59bd30af9de435c23189a9392d2cbc0be3bc0a818`; SPKI SHA-256 `d4b38596d2015c2c732c304071946fe7b9a8fe2827813415165ceeb416a76a02`. | **Done** at `41fc8c77e01a670a38d5cdfb97feba80b638f72e`. |
+| A5g | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8402407-byte extract). First-segment role recovery cleared. Host collapse refused MUI content fill: 24 placeholder texts extract as FIXED (Adornments none/trailing); Polaris 128/128 FILL. Frozen writer already set FILL after bind. Do **not** teach the recipe to accept FIXED. Do **not** restart v11 attempt 2 as-is. |
+| A5h | PREPARE INPUT V12. Copy the v11 stack. Carry a writer that re-asserts placeholder/value `layoutSizingHorizontal=FILL` after the component set settles, using first-segment role and `textAutoResize=HEIGHT`. Keep v11 hashed bytes frozen, including the v11 writer payload. | **Done** at `8570f3e8c318977a51f5f41a7474dcc535b53b26`. Antecedent index SHA-256 `b2225989a92599fd8dbc1daf3d1f91c3f787cb2169547f8c1e640189bd7f45ef`. |
+| A5i | AUTHORIZE INPUT V12 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `8570f3e8c318977a51f5f41a7474dcc535b53b26`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `124b04ff2daae9d62ecd1167014fefbdf6c231578e3f966b545972af4a2b8a03`; SPKI SHA-256 `649580fc43fa90a541d4ad4f3c7882e1854c1e15776a1aec698eb7623f325687`. | **Done** at `aec7918a6e211be4832e72a3cb6ebfb1cd350869`. |
+| A5j | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer + extract accepted (2317 nodes, 8402407-byte extract). In-writer FILL/HEIGHT restore did not change the live extract: MUI still 104/128 FILL and 24/128 FIXED placeholders; Polaris 128/128 FILL. Do **not** teach the recipe to accept FIXED. Do **not** restart v12 attempt 2 as-is. Cleanup accepted. |
+| A5k | PREPARE INPUT V13. Copy the v12 stack. Add a signed post-writer restore request that re-asserts content FILL on the minted Scratch page **after** the writer plugin returns and **before** extract. Keep v12 hashed bytes frozen. This is a protocol denominator change (remote request count). | **Done** at `4c0710109f4e8a2eba701afe96ba4af9f4924dad`. Antecedent index SHA-256 `b4bbe16ddc5ed81b19a53bbb28b31051f1390c5c92172333456a56d5f08c202e`. |
+| A5l | AUTHORIZE INPUT V13 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `4c0710109f4e8a2eba701afe96ba4af9f4924dad`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c000714eb070e41df760fd789458c650a7a941f4c17293f80bb4f742bb1bd372`; SPKI SHA-256 `fdde0b7a293e7f6fc4e8b28e9bbffefb49aaf538ba6649b4c943d27ba22483fa`. Do not patch hashed v12 or v13 bytes. | **Done** at `e21a67cac447e90a38b344ee34af8528b2dd205c`. |
+| A5m | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; active request was restore. Hashed restore threw `INPUT-V13-RESTORE-NOT-FILL`. Extract not issued. Do **not** teach FIXED. Do **not** restart v13 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5n | PREPARE INPUT V14. Copy the v13 stack. Do not patch hashed v13 restore or writer bytes. Teach a two-pass restore: parent FILL first, then content HEIGHT+FILL, revealing hidden texts only while assigning. Do not teach FIXED. | **Done** at `961d08f94853d2b90cd3b68963f5bc113e5ae066`. Antecedent index SHA-256 `5846c279ec903b48d2cbdcf3b4626f037409c6a0bd1d276e7c15edfc12c389dc`. |
+| A5o | AUTHORIZE INPUT V14 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `961d08f94853d2b90cd3b68963f5bc113e5ae066`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `0a608d7aab9c788be5af5f06df594b567c4997f6a7dfd32ecec560082b8ae57d`; SPKI SHA-256 `6e8061a22d1464e44ecc8469ea0a5e46b0b7c26169f194c15edec85ed8bb4415`. Do not patch hashed v13 or v14 bytes. | **Done** at `eae2dfb3e884b2b71c2de6814a5586cc85b9443c`. |
+| A5p | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; active request was restore. Hashed two-pass restore threw `INPUT-V14-RESTORE-NOT-FILL`. Extract not issued. Do **not** teach FIXED. Do **not** restart v14 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5q | PREPARE INPUT V15. Copy the v14 stack. Do not patch hashed v14 restore or writer bytes. Teach restore to measure content FILL while the text is still visible, then restore visibility. Do not teach FIXED. | **Done** at `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Antecedent index SHA-256 `8c944fa92e1afa2ca09c6bc6d938490e1927077d613c603cdbc1f3a5023659d7`. |
+| A5r | AUTHORIZE INPUT V15 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `c1d3f0ac38f00fd005e80ed4d9e35ff393dbad58`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `2618b5df73ef7a1d4e4973729a99638d44ca5cd22f909b7207231982f9063374`; SPKI SHA-256 `ff0f180c12a7b39572bb4de024c29d90bdda3a0dafaab6e40d25a611f00afed7`. Do not patch hashed v14 or v15 bytes. | **Done** at `4002cb3be87c52ddfa32e2fa15c6bfbdc251238b`. |
+| A5s | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402467 bytes). Host refused MUI content fill. Extract still MUI 104/128 FILL and 24/128 FIXED hidden placeholders; Polaris 128/128 FILL. Do **not** teach FIXED. Do **not** restart v15 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5t | PREPARE INPUT V16. Copy the v15 stack. Do not patch hashed v15 restore, writer, or extract-runtime bytes. Teach extract to measure hidden content FILL while the text is still visible, then restore visibility. Do not teach FIXED. | **Done** at `a764804c4191d161d08ab9527938ce6d29009af7`. Antecedent index SHA-256 `f9eabfeecb2e4b7d81e3d43c4dfd4666e99f079e86d15eb8ce63e0e020a5c392`. |
+| A5u | AUTHORIZE INPUT V16 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `a764804c4191d161d08ab9527938ce6d29009af7`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `377ae973efecf53cbb3684ec449dd4f9f388ce36ad5e19572e681fb85ba15f8f`; SPKI SHA-256 `cf89747d6dc04c6944170c2e4ea1450055eaabebeb6ba72aec05c049f1fa7ae0`. Do not patch hashed v15 or v16 bytes. | **Done** at `8511c9ca722c9f30c526ce5eb99fa9f4e485d9ec`. |
+| A5v | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host refused leading-slot solid paint (`fills[0]` empty on 64+64 slot frames; SOLID is on the child/`instancePayload`). Do **not** teach FIXED. Do **not** restart v16 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5w | PREPARE INPUT V17. Copy the v16 stack. Do not patch hashed v16 extract, restore, writer, or runtime bytes. Teach extract/host to surface leading-slot solid paint from the adornment-content child or `instancePayload.fills`. Do not teach FIXED. | **Done** at `2a764e90d7683afd39ab08ad5b8cbf3e639c56a2`. Antecedent index SHA-256 `097ad396bdcaeb26ae091b18c4f9c5429fd4cb31a4f7c1e18e62146d5326d4b6`. |
+| A5x | AUTHORIZE INPUT V17 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `2a764e90d7683afd39ab08ad5b8cbf3e639c56a2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `2f2a7fdb89b983f566f78da5bf0fc52f037cb8f33818941207b6854fe3e88b73`; SPKI SHA-256 `66cbff883845e854f6d1fa03e478db12554ef8986d39dd347c90543c57661da3`. Do not patch hashed v16 or v17 bytes. | **Done** at `36dfcad20ecd04d9ff5eddcbe476a60ec66bc940`. |
+| A5y | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host surfaced slot SOLID, then refused leading-slot `fills.0.color` binding (slot nodes bind only height/width; COLOR is on the adornment-content child). Do **not** teach FIXED. Do **not** invent a binding. Do **not** restart v17 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5z | PREPARE INPUT V18. Copy the v17 stack. Do not patch hashed v17 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface leading-slot `fills.0.color` from the adornment-content child's bindings when the slot node's own bindings lack it. Do not invent variables. Do not teach FIXED. | **Done** at `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Antecedent index SHA-256 `7eadba3d0bdf170d6569c5e69087528b8667b669225a91016091033dacebfa75`. |
+| A5aa | AUTHORIZE INPUT V18 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `cfdc6a7cff19b619640dc9dcea0d79a79f1ade75`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `7a95ddb633dbad6c8bf10110af41d18acfc11719dabc28044b28dead846671e0`; SPKI SHA-256 `8d2c69e5310eb77f4c0bbb9f42d0bb23d01df03318d73705cf0ff40f33a70cb8`. Do not patch hashed v17 or v18 bytes. | **Done** at `829f7c5217e3f4f5342cb2111112b6abb448a29a`. |
+| A5ab | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host surfaced slot `fills.0.color`, then refused surface `strokes.0.weight` (surfaces bind four per-side stroke weights to the same FLOAT; no `strokeWeight`). Do **not** teach FIXED. Do **not** invent a binding. Do **not** restart v18 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ac | PREPARE INPUT V19. Copy the v18 stack. Do not patch hashed v18 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface `strokes.0.weight` from the existing uniform per-side stroke-weight bindings when the surface node's own `strokeWeight` is absent. Do not invent variables. Do not teach FIXED. | **Done** at `53e0ee50e1c7ab08442bec8b666cd95cbd92e600`. Antecedent index SHA-256 `fc5d43842b0c6cafb1cbbcf62980492a842f77598f60f0d3bed1a1957232082f`. |
+| A5ad | AUTHORIZE INPUT V19 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `53e0ee50e1c7ab08442bec8b666cd95cbd92e600`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `fc8c0d6baf426239507c5d1c8e8c5c40d1b9c01f7a0bddd90230b9956b6012e1`; SPKI SHA-256 `af528b74b14780f6978056ff803c452b27a714830eeb405a1a47fa936a970de5`. Do not patch hashed v18 or v19 bytes. | **Done** at `d3b5429cac9df5877143dfb79e617b544d7688f0`. |
+| A5ae | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8402443 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host refused variant `layout.width.value` (none-adornment variants bind Figma `width` FLOAT; scene-readback maps it to `width.value`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v19 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5af | PREPARE INPUT V20. Copy the v19 stack. Do not patch hashed v19 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface variant `layout.width.value` from the existing Figma `width` / `width.value` FLOAT when `layout.width.value` is absent. Do not invent variables. Do not teach FIXED. | **Done** at `d49f2da22d897b4a42e1a0e0f8ef302c61383417`. Antecedent index SHA-256 `72207d604be0227da52ab915d8f904ebd829c6f8ba21dff284e01f88ac4579b2`. |
+| A5ag | AUTHORIZE INPUT V20 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `d49f2da22d897b4a42e1a0e0f8ef302c61383417`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `f43874d8748b45cfc02ea2621e877bcc22028a8153b71f55485396e18c595422`; SPKI SHA-256 `40f026cd0bd21e156746997fac2aba7fbe5a36890f3a8e561c6fe70022eaddc7`. Do not patch hashed v19 or v20 bytes. | **Done** at `2cd501781de9684d175c5daf71f22fdae60410c2`. |
+| A5ah | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8404014 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse variant `layout.width.value`, then refused surface `layout.height.value` (surfaces bind Figma `height` FLOAT; scene-readback maps it to `height.value`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v20 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ai | PREPARE INPUT V21. Copy the v20 stack. Do not patch hashed v20 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface `layout.height.value` from the existing Figma `height` / `height.value` FLOAT when `layout.height.value` is absent. Do not invent variables. Do not teach FIXED. | **Done** at `21fd65bb5a1f9874b96de05547dc092298738f59`. Antecedent index SHA-256 `131f1abbabaedad7a5c521d908e374c65db8f2ab02b8ee3b40d59433967a42ff`. |
+| A5aj | AUTHORIZE INPUT V21 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `21fd65bb5a1f9874b96de05547dc092298738f59`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `15afeb3ecab3bc6493f6738a07c97e69f8bbe628afe92538a0c9bb807f865d3a`; SPKI SHA-256 `d26147dd1a658f2a3d585437c44105eabe7dfe3abfeac349a138e1163175d09f`. Do not patch hashed v20 or v21 bytes. | **Done** at `33108d6b18f2b37f9e03359949ce757554ae4c44`. |
+| A5ak | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse surface `layout.height.value`, then refused variant `$.children[0].bindings.length` (live first variant has `width.value` plus surfaced `layout.width.value`; compile emits three none-adornment bindings). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v21 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5al | PREPARE INPUT V22. Copy the v21 stack. Do not patch hashed v21 scene-readback, extract, restore, writer, or runtime bytes. Teach host to surface the existing width/height FLOAT onto the recipe field without leaving a duplicate `width.value` / `height.value` binding that collapse treats as a structural edit. Do not invent variables. Do not teach FIXED. | **Done** at `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Antecedent index SHA-256 `10bac5a8b65db4c6618132818eadf7345c6045bcf3e48e29c2b2e547e0692c7f`. |
+| A5am | AUTHORIZE INPUT V22 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `edcfe4fbc45c72932d414f4b006d163a18f922d5`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `d29a41ee155fb6645d0ccd40a136933530f91b4b6f90bc1dcdc377be5fa5b0e3`; SPKI SHA-256 `020c28eb8a67e123d0c4b5965a92a2968716fedfc2f02b0875e272fe4c32598c`. Do not patch hashed v21 or v22 bytes. | **Done** at `281bb2594408ebbfef6b332c2f8b7b05a56bd7b9`. |
+| A5an | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `bindings.length`, then refused variant `$.children[0].bindings[1].field` (alias dropped `width.value` and appended `layout.width.value`; compile wants `layout.width.value` at index 1 before `layout.minWidth`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v22 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ao | PREPARE INPUT V23. Copy the v22 stack. Do not patch hashed v22 scene-readback, extract, restore, writer, or runtime bytes. Teach host to place the aliased `layout.width.value` at the recipe compile index rather than appending it. Do not invent variables. Do not teach FIXED. | **Done** at `7817a11e1340cb386030b4a9d05fde2d6fc72e22`. Antecedent index SHA-256 `d332815baade80b48e8caa1182296058403cb55fa3a7b7f4b893da7be4a2e305`. |
+| A5ap | AUTHORIZE INPUT V23 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `7817a11e1340cb386030b4a9d05fde2d6fc72e22`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `e36c14bc051a75ebb3a8f2bb42738c0fdcc4c13a4ad13933b09d21934f9c1d1c`; SPKI SHA-256 `7a72ee82c5ea05f7d8cba29c0893933376fe56aa7ce4d86ef6622583442f691b`. Do not patch hashed v22 or v23 bytes. | **Done** at `3d0791b41d59dfca1c803a02ed917b8aecde2c5f`. |
+| A5aq | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse variant `bindings[1].field`, then refused surface `$.children[0].children[0].bindings.length` (MUI surface host has 18 bindings including duplicate mapped colors, per-side stroke weights plus `strokes.0.weight`, and appended `layout.height.value`; compile emits 12). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v23 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ar | PREPARE INPUT V24. Copy the v23 stack. Do not patch hashed v23 scene-readback, extract, restore, writer, or runtime bytes. Teach host to drop extra surface bindings that collapse treats as a structural length edit (duplicate mapped `fills.0` / `strokes.0` source fields, and per-side stroke weights when the uniform `strokes.0.weight` alias is present). Do not invent variables. Do not teach FIXED. | **Done** at `753eef85aa026561542e45f492bf25b9ac84b599`. Antecedent index SHA-256 `b704897dabc85854479d0fea26fab5b0646373a1f06305fe7af77310f0279ef5`. |
+| A5as | AUTHORIZE INPUT V24 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `753eef85aa026561542e45f492bf25b9ac84b599`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `da1d1a73d96be48173d83e04a20cc0f3b65bc94de6d678c3a79b7730b50fdc7b`; SPKI SHA-256 `afe03ed60ef54cca0989f6d760184dbef2deb5ff2eed3cdc239c55c42be196b9`. Do not patch hashed v23 or v24 bytes. | **Done** at `5530ad3d4040faa45a0d03943b6da48c618daaf4`. |
+| A5at | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse surface `bindings.length` (extras dropped to 12 host vs 12 compile), then refused surface `$.children[0].children[0].bindings[0].field` (host remaining order starts at `cornerRadius.bottomLeft`; compile starts at `layout.padding.right`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v24 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5au | PREPARE INPUT V25. Copy the v24 stack. Do not patch hashed v24 scene-readback, extract, restore, writer, or runtime bytes. Teach host to place remaining surface bindings at the recipe compile field order rather than leaving extract/alias encounter order. Do not invent variables. Do not teach FIXED. | **Done** at `5dcdd4fca890713d6378f8491f442761dab1837e`. Antecedent index SHA-256 `232e19729f42c08cd6a00713d377d0798190dd4bf31548bbfcc76782d5cec76c`. |
+| A5av | AUTHORIZE INPUT V25 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `5dcdd4fca890713d6378f8491f442761dab1837e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c274c71b272072d47087498c442c63f750bcba1cdc39ba1dcf031dc663d2d662`; SPKI SHA-256 `a15336a1c85f3fc7f3f5a669f2173fecca8c957377511e9c3f1b8466202562ae`. Do not patch hashed v24 or v25 bytes. | **Done** at `dcbeaabf15405006489ed6d2ec6aa3eb5b4ffe8f`. |
+| A5aw | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse surface `bindings[0].field` (remaining surface bindings now match compile field order), then refused `$.children[0].children[0].children[0].children[0].bindings[0].field` (MUI `input-field/content/placeholder` host has 4 bindings starting at `fills.0.color` including a duplicate mapped color; compile emits 3 starting at `type.fontSize`). Do **not** teach FIXED. Do **not** invent a variable. Do **not** restart v25 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ax | PREPARE INPUT V26. Copy the v25 stack. Do not patch hashed v25 scene-readback, extract, restore, writer, or runtime bytes. Teach host to drop extra content/placeholder and content/value bindings that collapse treats as a structural edit and place remaining text bindings at the recipe compile field order. Do not invent variables. Do not teach FIXED. | **Done** at `ae5811a45a2508a5387b99df4fcebbb12a8ab167`. Antecedent index SHA-256 `a905a0896facb39793e579ae61397fcb5b9b0f0e82601d1b4a921539df4c516f`. |
+| A5ay | AUTHORIZE INPUT V26 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `ae5811a45a2508a5387b99df4fcebbb12a8ab167`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `86b97761fe7ab95027c1fbe9aeffe4be672fe1fb9e5d2e889f1f0c98f3e38b40`; SPKI SHA-256 `e8f4ae846769df4a62f977ccfb6df299b7fdbdb2234ae51233519b20d69ed1e9`. Do not patch hashed v25 or v26 bytes. | **Done** at `3ca842739d6b45ab40f054f129d4b38b618207a2`. |
+| A5az | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse content `bindings[0].field` (remaining content bindings now match compile field order), then refused `$.children[0].children[0].children[0].children[0].height.mode` (MUI hidden `input-field/content/placeholder` host emits `height.mode` fixed value 23; compile emits hug). Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** restart v26 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ba | PREPARE INPUT V27. Copy the v26 stack. Do not patch hashed v26 scene-readback, extract, restore, writer, or runtime bytes. Teach host to emit hug height for hidden content/placeholder and content/value text whose live `layoutSizingVertical` is FIXED after measure-while-visible. Do not invent variables. Do not teach FIXED as a fill. | **Done** at `99b26f7f2448f8dfe1f7cb14d3e0b5ddd84f0e75`. Antecedent index SHA-256 `692ba21729c1949819e10452fe815fe09b8d16b8ab44aa9c139fc3f26a461827`. |
+| A5bb | AUTHORIZE INPUT V27 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `99b26f7f2448f8dfe1f7cb14d3e0b5ddd84f0e75`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `da8dfaef750b3e2151ee33effe42a825963d69719de9ea6c7b05a5cb1f316b8f`; SPKI SHA-256 `02f574f89ab1363fbf6ebfae2211f5d2c134a14b96807bf19f625a541f14ee24`. Do not patch hashed v26 or v27 bytes. | **Done** at `64214da458c4f12baacdefe618b0f994b9b0be26`. |
+| A5bc | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `height.mode` (hidden content FIXED now host-hug). Host then refused `$.children[0].children[0].children[0].children[0].type.letterSpacing` (MUI hidden `input-field/content/placeholder` host emits percent 0; compile omits letterSpacing). Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** invent a letterSpacing value. Do **not** restart v27 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bd | PREPARE INPUT V28. Copy the v27 stack. Do not patch hashed v27 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content/placeholder and content/value `type.letterSpacing` that compile never emits. Do not invent variables. Do not invent a letterSpacing value. Do not teach FIXED as a fill. | **Done** at `2141a920c6eaa9e21412e5e42d2f10328bc51d52`. Antecedent index SHA-256 `ae452c62e4867fddca3b2a1b4ac0a123c8a057ce7581020cfee4ad72e7c3f3cd`. |
+| A5be | AUTHORIZE INPUT V28 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `2141a920c6eaa9e21412e5e42d2f10328bc51d52`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `4bf14963ace7c3cff8f90a097f276e9e764a37a954daf7bf7e0e48bd96376fbf`; SPKI SHA-256 `c6b31af37139b42eb281440301de5ee67f0944ef965782faeb18a69d79906db8`. Do not patch hashed v27 or v28 bytes. | **Done** at `6d450ef6bc985816a18a30d17b9893dde9f51fd0`. |
+| A5bf | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `type.letterSpacing` (content letterSpacing now omitted). Host then refused `$.children[0].children[0].children[0].children[0].type.textCase` (MUI hidden `input-field/content/placeholder` host emits original; compile omits textCase). Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** invent a textCase value. Do **not** restart v28 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bg | PREPARE INPUT V29. Copy the v28 stack. Do not patch hashed v28 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content/placeholder and content/value `type.textCase` that compile never emits. Do not invent variables. Do not invent a textCase value. Do not teach FIXED as a fill. | **Done** at `b54a2ea24a7172cb0caa9a9072ed2fd40f661ad0`. Antecedent index SHA-256 `3020fb1f63de66f4eed689361a889d9cdb27a521ac4bba43b53a1a877762a5ee`. |
+| A5bh | AUTHORIZE INPUT V29 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `b54a2ea24a7172cb0caa9a9072ed2fd40f661ad0`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `5d4850eaed7f8ab57d36040e23dd66b1f4eaec78ca43cb292575fdaec06c4a01`; SPKI SHA-256 `29af345ee115b69609c97c301a4732259a63ee3a4313c4445d08662b3c4cf130`. Do not patch hashed v28 or v29 bytes. | **Done** at `a19285e26afed6121b7e6987838e434d1881ebca`. |
+| A5bi | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `type.textCase` (content textCase now omitted). Host then refused `$.children[0].children[0].children[0].children[0].type.textDecoration` (MUI hidden `input-field/content/placeholder` host emits none; compile omits textDecoration). Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** invent a textDecoration value. Do **not** restart v29 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bj | PREPARE INPUT V30. Copy the v29 stack. Do not patch hashed v29 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content/placeholder and content/value `type.textDecoration` that compile never emits. Do not invent variables. Do not invent a textDecoration value. Do not teach FIXED as a fill. | **Done** at `fdad5d7bb2920b8688946b8a5d735b337a843551`. Antecedent index SHA-256 `2d571d91900c421993e46c0ecceb251b576dcba78ebefd3132f4bc175e67909b`. |
+| A5bk | AUTHORIZE INPUT V30 as a **separate** commit. New prepare-era Ed25519 signer. Antecedent `fdad5d7bb2920b8688946b8a5d735b337a843551`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `5c489d305e69f1a850874c8962bba1dbf053eeab19ba3ba3e8781052ec63c8a5`; SPKI SHA-256 `52b157be09d08c7296c062267663c604e152ee7c368e0620a26490a5a872fc60`. Do not patch hashed v29 or v30 bytes. | **Done** at `babb6e5db745e7eb36037b069dce8a54983f2dec`. |
+| A5bl | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Hidden FIXED width remains cleared: MUI 128/128 FILL, Polaris 128/128 FILL. Host did not refuse `type.textDecoration` (content textDecoration now omitted). Host then refused `$.children[0].children[0].children[0].clipsContent` (MUI `input-field/content-row` host emits true; compile omits clipsContent). Polar has 0 content-row nodes. Do **not** teach FIXED as a fill. Do **not** invent a variable. Do **not** invent a clipsContent value. Do **not** restart v30 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bm | PREPARE INPUT V31. Copy the v30 stack. Do not patch hashed v30 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `clipsContent` that compile never emits. Do not invent variables. Do not invent a clipsContent value. Do not teach FIXED as a fill. | **Done** at `d5c7aa643f6f69a6fccd2377e23d749d90c07547`. Antecedent index SHA-256 `84d6ae0831e158cf14dbdd123defd1ccd0da50290a260c4b26893e20ac69f6e8`. |
+| A5bn | AUTHORIZE INPUT V31 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `d5c7aa643f6f69a6fccd2377e23d749d90c07547`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c52dc7e5ff2f8bc5a7096b2dd9bf5abd3834cc298486e02818537e9ce92dd0e7`; SPKI SHA-256 `a9afe8aa161c81ce584765a9a2fb02945b84c4ddf1760af5c72e356e445300d6`. Do not patch hashed v30 or v31 bytes. | **Done** at `38a97734a6b0a1a37d877e75c9973d3fd69acbba`. |
+| A5bo | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse content-row `clipsContent`. Host then refused `$.children[0].children[0].children[0].cornerRadius` (MUI `input-field/content-row` host emits `{0,0,0,0}`; compile omits cornerRadius). Polar has 0 content-row nodes. Do **not** invent a cornerRadius value. Do **not** restart v31 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bp | PREPARE INPUT V32. Copy the v31 stack. Do not patch hashed v31 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `cornerRadius` that compile never emits. Do not invent variables. Do not invent a cornerRadius value. Do not teach FIXED as a fill. | **Done** at `1c034dd099c60778880a646a61691e0117978948`. Antecedent index SHA-256 `f10062e820f799d1dab3b41939e55f4c8ca1da6d7cf4cb3f611629391a9a4648`. |
+| A5bq | AUTHORIZE INPUT V32 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `1c034dd099c60778880a646a61691e0117978948`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `38c4194338cc6dd44cd6b0f56515e4d73c82aace1119b396f372f6368dc8f566`; SPKI SHA-256 `23d17df323f7f07709eb8bc4242dabd6751bb6c9d4bc6a5ec4d7e7bc2b992aa0`. Do not patch hashed v31 or v32 bytes. | **Done** at `4bb5a7fe225a90c42037de5797bfcf3101aae298`. |
+| A5br | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse content-row `clipsContent` or `cornerRadius`. Host then refused `$.children[0].children[0].children[0].effects` (MUI `input-field/content-row` host emits `[]`; compile omits effects). Polar has 0 content-row nodes. Do **not** invent an effects value. Do **not** restart v32 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bs | PREPARE INPUT V33. Copy the v32 stack. Do not patch hashed v32 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `effects` that compile never emits. Do not invent variables. Do not invent an effects value. Do not teach FIXED as a fill. | **Done** at `dc0c7fa0a51973e894c286ad6f4be48fd12b5a0a`. Antecedent index SHA-256 `26eca04b916de5737702d5a7cf2c642d84a2e3457fac17521b30b8b1c7694ea5`. |
+| A5bt | AUTHORIZE INPUT V33 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `dc0c7fa0a51973e894c286ad6f4be48fd12b5a0a`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `0b37e33f7ff5c9eb96e078d76ee649a16ddd5196809319e21a0c89e029968657`; SPKI SHA-256 `0db7e3ec14cfae5a55d3cd9fcd8e4542b00844020c3a82bdc4157b0d09b6ea8a`. Do not patch hashed v32 or v33 bytes. | **Done** at `f9a4ef0de155b0ef92417958335c8fff83dc74d4`. |
+| A5bu | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse content-row `clipsContent`, `cornerRadius`, or `effects`. Host then refused `$.children[0].children[0].children[0].strokes` (MUI `input-field/content-row` host emits `[]`; compile omits strokes). Polar has 0 content-row nodes. Do **not** invent a strokes value. Do **not** restart v33 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5bv | PREPARE INPUT V34. Copy the v33 stack. Do not patch hashed v33 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit content-row `strokes` that compile never emits. Do not invent variables. Do not invent a strokes value. Do not teach FIXED as a fill. | **Done** at `8db64d02a3d87f4b34f9cf64ff7cbeac3a060d41`. Antecedent index SHA-256 `cd0a09a4272a35402b769353508960ac903a3f2b65da08f6c0635057e915b94d`. |
+| A5bw | AUTHORIZE INPUT V34 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `8db64d02a3d87f4b34f9cf64ff7cbeac3a060d41`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `6995d6670392925d57baafd886e1ca84b57514766368af1a77e41606b4ff3673`; SPKI SHA-256 `bd3cde85208f02733c951cb18009d9617813b36ec67906c1b91c275e2207b7cf`. Do not patch hashed v33 or v34 bytes. | **Done** at `9cdffa3d8d7e41e6efee75696e641a7b01f2d461`. |
+| A5bx | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse content-row `clipsContent`, `cornerRadius`, `effects`, or `strokes`. Host then refused `$.children[0].children[0].children[1].children[0].bindings[0].field` (MUI `input-field/label` host first field `fills.0.color`; compile first field `type.fontSize`). Polar has 0 content-row nodes. Do **not** invent a variable. Do **not** restart v34 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5by | PREPARE INPUT V35. Copy the v34 stack. Do not patch hashed v34 scene-readback, extract, restore, writer, or runtime bytes. Teach host to drop label binding extras and order label bindings to compile `type.fontSize`, `type.lineHeight.value`, `fills.0.color`. Label role only. Do not invent variables. Do not teach FIXED as a fill. | **Done** at `341e690a223d598dd93d3680333adcb89fab07a8`. Antecedent index SHA-256 `0d3170e9e9f17f67b5e28530082c94d3e82f83e975357033899237dcb457a32d`. |
+| A5bz | AUTHORIZE INPUT V35 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `341e690a223d598dd93d3680333adcb89fab07a8`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `1fb2e51a2eb7f4abc56a518c1b00ad9c876d0ac7f172d48e1656ddfd92198436`; SPKI SHA-256 `9d552892da07d207717d5c59a37c2fd4e4929c93d9eba5ecd3e1242f800dfc42`. Do not patch hashed v34 or v35 bytes. | **Done** at `91281f0e65caea3267deee6c4291a7eaa468a0fb`. |
+| A5ca | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label `bindings[0].field` or content-row `clipsContent` / `cornerRadius` / `effects` / `strokes`. Host then refused `$.children[0].children[0].children[1].children[0].type.letterSpacing` (MUI `input-field/label` host emits `{unit: percent, value: 0}`; compile omits letterSpacing). Polar has 0 content-row nodes. Do **not** invent a letterSpacing value. Do **not** restart v35 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5cb | PREPARE INPUT V36. Copy the v35 stack. Do not patch hashed v35 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label `letterSpacing` that compile never emits. Label role only. Do not invent variables. Do not invent a letterSpacing value. Do not teach FIXED as a fill. | **Done** at `7f7b53c1c5cb954c9b27d42cf9ecd2285834d330`. Antecedent index SHA-256 `fb5ce6613db4711041df2d750507ca1961e1f3bdcc368a67c741c30029ce8d3d`. |
+| A5cc | AUTHORIZE INPUT V36 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `7f7b53c1c5cb954c9b27d42cf9ecd2285834d330`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `380133132ac908be9d922b18e209b2f63f69a15bcc309b5346d7f25696bea55d`; SPKI SHA-256 `959fe2c8a939f6389e08d2e74fcae6aea13a8c98d38f666cc40d5da90334a617`. Do not patch hashed v35 or v36 bytes. | **Done** at `a948115d4461b0d841a0068929beb674dcf8b3f5`. |
+| A5cd | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label `type.letterSpacing` or content-row `clipsContent` / `cornerRadius` / `effects` / `strokes`. Host then refused `$.children[0].children[0].children[1].children[0].type.textCase` (MUI `input-field/label` host emits `original`; compile omits textCase). Polar has 0 content-row nodes. Do **not** invent a textCase value. Do **not** restart v36 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ce | PREPARE INPUT V37. Copy the v36 stack. Do not patch hashed v36 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label `textCase` that compile never emits. Label role only. Do not invent variables. Do not invent a textCase value. Do not teach FIXED as a fill. | **Done** at `5f50cd9b0931926c4b57c9e033643f82b7af643d`. Antecedent index SHA-256 `773f4add78533aa5dd68aa04873b94e2e45e1db9d9a6cf6c47d9a2a43d231f07`. |
+| A5cf | AUTHORIZE INPUT V37 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `5f50cd9b0931926c4b57c9e033643f82b7af643d`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `6b5b72811ffe1215ceb557d5314e21c5b30931eb04e2f01935a596a43f612db0`; SPKI SHA-256 `476ce4a0f89fbc2a9ac59ac4b0c37e6b4a7e4bc0ff7bae7c6421598873dac892`. Do not patch hashed v36 or v37 bytes. | **Done** at `82a61703c572dd0b0846cae3df8af03162c16539`. |
+| A5cg | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label `type.textCase` or content-row `clipsContent` / `cornerRadius` / `effects` / `strokes`. Host then refused `$.children[0].children[0].children[1].children[0].type.textDecoration` (MUI `input-field/label` host emits `none`; compile omits textDecoration). Polar has 0 content-row nodes. Do **not** invent a textDecoration value. Do **not** restart v37 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ch | PREPARE INPUT V38. Copy the v37 stack. Do not patch hashed v37 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label `textDecoration` that compile never emits. Label role only. Do not invent variables. Do not invent a textDecoration value. Do not teach FIXED as a fill. | **Done** at `72910ee2ba80869b2ffc05e09bb660ff0d26e69b`. Antecedent index SHA-256 `533c9920e23d92265acd852aee08b8d8a25473893f7788fbfa99eba74c7aad3b`. |
+| A5ci | AUTHORIZE INPUT V38 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `72910ee2ba80869b2ffc05e09bb660ff0d26e69b`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `40a7388ff6fcd7f6aa617e34e062417fbe5f5266cbdfc9e74ec545a990b5f7c6`; SPKI SHA-256 `9d68f5629f8affb82f1b8744831d6860bf7532e8bf2969bce3e4952023b1068c`. Do not patch hashed v37 or v38 bytes. | **Done** at `ac33fda1a27d94f3fe1f9c90fc1445fe8c7ddc35`. |
+| A5cj | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label `type.textDecoration` or content-row `clipsContent` / `cornerRadius` / `effects` / `strokes`. Host then refused `$.children[0].children[0].children[1].clipsContent` (MUI `input-field/label-row` host emits `true`; content-row omit does not apply). Polar has 0 content-row nodes. Do **not** invent a clipsContent value. Do **not** restart v38 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ck | PREPARE INPUT V39. Copy the v38 stack. Do not patch hashed v38 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `clipsContent` that compile never emits. Label-row role only. Do not invent variables. Do not invent a clipsContent value. Do not teach FIXED as a fill. | **Done** at `0498e173b1f449fdbb95c9bea43f9c63a941ae60`. Antecedent index SHA-256 `8a3bc4dd584731709d4ebc9c9e03f1b38884ad9f4dece586901bf08a2f0d525d`. |
+| A5cl | AUTHORIZE INPUT V39 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `0498e173b1f449fdbb95c9bea43f9c63a941ae60`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `6a22f47efe5e16ec483c2187b43ff6435b49b48cc76e68bdc936409877d26288`; SPKI SHA-256 `497106364fd559b1ad31dd03b7ced1d4e1efc963dabaad3853b4cecb7ee7ea47`. Do not patch hashed v38 or v39 bytes. | **Done** at `ddc093d8471c1e7bf236d5f239d5fc72e76d3ef7`. |
+| A5cm | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label-row `clipsContent`. Host then refused `$.children[0].children[0].children[1].cornerRadius` (MUI `input-field/label-row` host still emits all-zero radii; content-row omit does not apply). Polar has 0 content-row nodes. Do **not** invent a cornerRadius value. Do **not** restart v39 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5cn | PREPARE INPUT V40. Copy the v39 stack. Do not patch hashed v39 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `cornerRadius` that compile never emits. Label-row role only. Do not invent variables. Do not invent a cornerRadius value. Do not omit label-row effects or strokes yet. Do not teach FIXED as a fill. | **Done** at `2cc7315b1c8352b398a3187d75c5b993bf87d4d1`. Antecedent index SHA-256 `057edcea2a24f56ebfa54d7da7b213ada80ba163829950746fefde378ed8be92`. |
+| A5co | AUTHORIZE INPUT V40 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `2cc7315b1c8352b398a3187d75c5b993bf87d4d1`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `af94e16aa7458b2a83798ac5c0bed00d5dd34177ab3c783634e7e844ef365203`; SPKI SHA-256 `8fa620654380c8eced8affbed4ca55b3a076ad7116eab9ab5d9a2fd21317790a`. Do not patch hashed v39 or v40 bytes. | **Done** at `04179491874f25e55190e1f1ebcbf117e4eb4d74`. |
+| A5cp | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label-row `cornerRadius`. Host then refused `$.children[0].children[0].children[1].effects` (MUI `input-field/label-row` host still emits `[]`; content-row omit does not apply). Polar has 0 content-row nodes. Do **not** invent an effects value. Do **not** restart v40 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5cq | PREPARE INPUT V41. Copy the v40 stack. Do not patch hashed v40 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `effects` that compile never emits. Label-row role only. Do not invent variables. Do not invent an effects value. Do not omit label-row strokes yet. Do not teach FIXED as a fill. | **Done** at `774eea2d24d21308594eba61d0ceb2ca4243b589`. Antecedent index SHA-256 `5c7e46c1ce10f7c28c1c6a823dc969ed228d731b5fb83e9f1a0d9a7f14849922`. |
+| A5cr | AUTHORIZE INPUT V41 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `774eea2d24d21308594eba61d0ceb2ca4243b589`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `46ff0dc094444ab71eb692517cbbb01d75b86247e49c525521b4b4b9564bb2bb`; SPKI SHA-256 `44015abb112d8f04fa2403e3fd52efa46b8607a82f9f38cdd1f1dad5a5a87a72`. Do not patch hashed v40 or v41 bytes. | **Done** at `b21477f8180088486b3adaefbaa6dad4a6471eb7`. |
+| A5cs | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label-row `effects`. Host then refused `$.children[0].children[0].children[1].strokes` (MUI `input-field/label-row` host still emits `[]`; content-row omit does not apply). Polar has 0 content-row nodes. Do **not** invent a strokes value. Do **not** restart v41 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ct | PREPARE INPUT V42. Copy the v41 stack. Do not patch hashed v41 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit label-row `strokes` that compile never emits. Label-row role only. Do not invent variables. Do not invent a strokes value. Do not teach FIXED as a fill. | **Done** at `773d61beeb7da56a8c32dd0fbe35ca43863b5496`. Antecedent index SHA-256 `2a861eb4f670abf8a60ae2f344473deda5d83c2338e916cf70e95252c4022056`. |
+| A5cu | AUTHORIZE INPUT V42 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `773d61beeb7da56a8c32dd0fbe35ca43863b5496`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `af25c244914df2fd76e44f036257dd34f8e114dc60f0ffb77d3b04051fc3f52f`; SPKI SHA-256 `9abcb0dd7859fd9210b378a328d7def05a2dcb9c15df67e79fd14e80ad352d22`. Do not patch hashed v41 or v42 bytes. | **Done** at `4549c5cc4f4c35b682309dc86de4e6b8c65bbfb0`. |
+| A5cv | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse label-row `strokes`. Host then refused `$.children[0].children[0].strokes[0].dashPattern` (MUI `input-field/surface` host still emits `[]`; compile omits dashPattern). Polar has 0 content-row nodes. Do **not** invent a dashPattern value. Do **not** restart v42 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5cw | PREPARE INPUT V43. Copy the v42 stack. Do not patch hashed v42 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit surface stroke `dashPattern` that compile never emits. Surface stroke only. Do not invent variables. Do not invent a dashPattern value. Do not teach FIXED as a fill. | **Done** at `34f42760a0f38e3d7b253d6ccd3d2905eb90e341`. Antecedent index SHA-256 `92182006293e6fc003492f98651f898b55bea63a0272a7619d22139e11135d3b`. |
+| A5cx | AUTHORIZE INPUT V43 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `34f42760a0f38e3d7b253d6ccd3d2905eb90e341`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `8cfcd36604c9d3b996d2a5de678bbcc2ef0f6d32c16cf00062b5c25be1f0546a`; SPKI SHA-256 `cec298e708d912be31cd7126c6abc823e4300bdd252c40627b3b566f49fecf37`. Do not patch hashed v42 or v43 bytes. | **Done** at `d567aeeee77637cf05a96058379283578fc04655`. |
+| A5cy | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:160800`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse surface stroke `dashPattern`. Host then refused `$.children[0].children[1].children[0].bindings[0].field` (MUI `input-field/message/helper` host starts at `fills.0.color`; compile starts at `type.fontSize`). Polar has 0 content-row nodes. Do **not** invent a binding field. Do **not** restart v43 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5cz | PREPARE INPUT V44. Copy the v43 stack. Do not patch hashed v43 scene-readback, extract, restore, writer, or runtime bytes. Teach host to restore compile binding order on `input-field/message/helper` and `input-field/message/error` (same three compile fields; extract proved both). Do not invent variables. Do not teach FIXED as a fill. | **Done** at `1f1e3f8dbdd14daace494187abf2ca93ac3747db`. Antecedent index SHA-256 `0ad2ab3500e76112f9f5a2b2e68568ef7e2e061427859e0bcbc9fd8421bdc690`. |
+| A5da | AUTHORIZE INPUT V44 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `1f1e3f8dbdd14daace494187abf2ca93ac3747db`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ef435279b3822e80098d120f13277ced8a2bc98c515fd3920460e2a1f93f13c4`; SPKI SHA-256 `2eacc22723b5ea4b15e4a8b0f4bef442e0e09d9721490891975b25d38d128240`. Do not patch hashed v43 or v44 bytes. | **Done** at `e5cd0b502013a596df94168912b6920fb9d92cc3`. |
+| A5db | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:163529`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message helper binding order. Host then refused `$.children[0].children[1].children[0].type.letterSpacing` (MUI `input-field/message/helper` host emits `{unit: percent, value: 0}`; compile omits letterSpacing). Polar has 0 content-row nodes. Do **not** invent a letterSpacing value. Do **not** restart v44 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5dc | PREPARE INPUT V45. Copy the v44 stack. Do not patch hashed v44 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.letterSpacing` on `input-field/message/helper` and `input-field/message/error` that compile never emits (extract proved both). Do not invent variables. Do not invent a letterSpacing value. Do not teach FIXED as a fill. | **Done** at `4fb4eca0d23ee1989d27e168755f2ee7d1d44726`. Antecedent index SHA-256 `0ec100cde764417de0cf7fea85630b39e24ded8ebd0811af8d960d9461ac2883`. |
+| A5dd | AUTHORIZE INPUT V45 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `4fb4eca0d23ee1989d27e168755f2ee7d1d44726`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `5a70f34f09a55399428d0fd1d4b835a9d98adfd5c13e1b8d0957fca4b75d9341`; SPKI SHA-256 `21c0870d60139355fc093822d53016b5bc537b3f09cac9c27c13945cf44488cb`. Do not patch hashed v44 or v45 bytes. | **Done** at `89774548d3a168b692cf88e5ec21eebbda71a4f5`. |
+| A5de | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:166258`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message helper letterSpacing. Host then refused `$.children[0].children[1].children[0].type.textCase` (MUI `input-field/message/helper` host emits `original`; compile omits textCase). Polar has 0 content-row nodes. Do **not** invent a textCase value. Do **not** restart v45 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5df | PREPARE INPUT V46. Copy the v45 stack. Do not patch hashed v45 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.textCase` on `input-field/message/helper` and `input-field/message/error` that compile never emits (extract proved both). Do not invent variables. Do not invent a textCase value. Do not teach FIXED as a fill. | **Done** at `e7ecd4cacc407f84ca3e2db71b565832a0ff74bb`. Antecedent index SHA-256 `aefb34b505a4ddd6ffca0e49a6c5e620258cc3296d56c582386e576427374099`. |
+| A5dg | AUTHORIZE INPUT V46 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `e7ecd4cacc407f84ca3e2db71b565832a0ff74bb`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ef0c92cbaaa6a6f27a77fe2949f9bbeb1c97cd6591fcc02ea75cfe509bdb5b82`; SPKI SHA-256 `430aa775d338c965f4e55ede7a8fb658f11eefc9e7008671f9054bf54ebb28bf`. Do not patch hashed v45 or v46 bytes. | **Done** at `fd6a3c88db69af8f57deb96847164d9e7719efdb`. |
+| A5dh | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:168987`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message helper textCase. Host then refused `$.children[0].children[1].children[0].type.textDecoration` (MUI `input-field/message/helper` host emits `none`; compile omits textDecoration). Polar has 0 content-row nodes. Do **not** invent a textDecoration value. Do **not** restart v46 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5di | PREPARE INPUT V47. Copy the v46 stack. Do not patch hashed v46 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.textDecoration` on `input-field/message/helper` and `input-field/message/error` that compile never emits (extract proved both). Do not invent variables. Do not invent a textDecoration value. Do not teach FIXED as a fill. | **Done** at `6f54b8485aeab163764fb9dee17a85dd34e2a205`. Antecedent index SHA-256 `1bcb077c1027293313c5a13fd8edce84d07926926fa520b122e0d9b16abe4aaa`. |
+| A5dj | AUTHORIZE INPUT V47 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `6f54b8485aeab163764fb9dee17a85dd34e2a205`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ec849b01af1a9c3f0dfeab908eb4c4e121ef0168e7e80c4193ca50ed04e245f6`; SPKI SHA-256 `66cdf310038c25480ebb0b0f03f00a581dea826227f3533b9308ce7295365f13`. Do not patch hashed v46 or v47 bytes. | **Done** at `318696ec4a56e2e2dec8e308584ce1e100f82871`. |
+| A5dk | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:171716`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message helper textDecoration. Host then refused `$.children[0].children[1].clipsContent` (MUI `input-field/message-container` host emits `true`; compile omits clipsContent). Polar has 0 content-row nodes. Do **not** invent a clipsContent value. Do **not** restart v47 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5dl | PREPARE INPUT V48. Copy the v47 stack. Do not patch hashed v47 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `clipsContent` on `input-field/message-container` that compile never emits (extract proved 128/128 both). Do not invent variables. Do not invent a clipsContent value. Do not lift onto surface. Do not teach FIXED as a fill. | **Done** at `bdb000e3ae75863594aa40f5dc6318af53af2000`. Antecedent index SHA-256 `02d7172e47b4cb2a465fdc4d1618f2ae1a9b27c24f901dd2a6d55e7d8ce4562c`. |
+| A5dm | AUTHORIZE INPUT V48 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `bdb000e3ae75863594aa40f5dc6318af53af2000`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `38fac942caa02fa92b18f7410e51b173c65538d60d4523f2925967f7f6c43b62`; SPKI SHA-256 `c46c65ccb8c922ef457de75bfafda574ee8e4d1703ec41312fd00b0516f86211`. Do not patch hashed v47 or v48 bytes. | **Done** at `3cbd9de8fe70660ae8775e2ae6a56cfe217879b4`. |
+| A5dn | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:174445`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message-container clipsContent. Host then refused `$.children[0].children[1].cornerRadius` (MUI `input-field/message-container` host emits zero radii; compile omits cornerRadius). Polar has 0 content-row nodes. Do **not** invent a cornerRadius value. Do **not** restart v48 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5do | PREPARE INPUT V49. Copy the v48 stack. Do not patch hashed v48 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `cornerRadius` on `input-field/message-container` that compile never emits (extract proved 128/128 both). Do not invent variables. Do not invent a cornerRadius value. Do not lift onto surface. Do not omit effects/strokes in the same prepare. Do not teach FIXED as a fill. | **Done** at `52442d178d16d35ad5f67483cfd053d394c633d1`. Antecedent index SHA-256 `bc8782ca1e68fb64d152cad7e2530772bb85ac3d96164e0d9a113260780d36b3`. |
+| A5dp | AUTHORIZE INPUT V49 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `52442d178d16d35ad5f67483cfd053d394c633d1`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `f39494933f103e87876395bcc3e669244939e008ff79816a43589bbff53441c9`; SPKI SHA-256 `a5b0b0f31afcc23dca32ab97ffcede51c79c96a9fb4fe44b5eaa165423602a5d`. Do not patch hashed v48 or v49 bytes. | **Done** at `37ce970d3b0b4b62fa79f60685c233a02a02c6b4`. |
+| A5dq | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:177174`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message-container clipsContent or cornerRadius. Host then refused `$.children[0].children[1].effects` (MUI `input-field/message-container` host emits `[]`; compile omits effects). Polar has 0 content-row nodes. Do **not** invent an effects value. Do **not** restart v49 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5dr | PREPARE INPUT V50. Copy the v49 stack. Do not patch hashed v49 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `effects` on `input-field/message-container` that compile never emits (extract proved 128/128 both). Do not invent variables. Do not invent an effects value. Do not lift onto surface. Do not omit strokes in the same prepare. Do not teach FIXED as a fill. | **Done** at `b1a74248dea95eebeab7c7c40c1afc1eadb3fcec`. Antecedent index SHA-256 `9a427acb4327a50fdb5936f4b80588d994a11c5f770ea1cba9ef7934331e08a3`. |
+| A5ds | AUTHORIZE INPUT V50 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `b1a74248dea95eebeab7c7c40c1afc1eadb3fcec`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `52eee8c911ca08798a26aaf76d314f3bc92cef213b154228ddc9638213cc0574`; SPKI SHA-256 `92fb1475f58d9ca85f327001c03b0ae4bc46bc0bb6db5254da67b12f80ef93ee`. Do not patch hashed v49 or v50 bytes. | **Done** at `bc0f4135094de6290d647dc9002be202113b105f`. |
+| A5dt | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:179903`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message-container clipsContent, cornerRadius, or effects. Host then refused `$.children[0].children[1].strokes` (MUI `input-field/message-container` host emits `[]`; compile omits strokes). Polar has 0 content-row nodes. Do **not** invent a strokes value. Do **not** restart v50 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5du | PREPARE INPUT V51. Copy the v50 stack. Do not patch hashed v50 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `strokes` on `input-field/message-container` that compile never emits (extract proved 128/128 both). Do not invent variables. Do not invent a strokes value. Do not lift onto surface. Do not teach FIXED as a fill. | **Done** at `32e4d58df3de0aa86ce162babceef0ea046e1998`. Antecedent index SHA-256 `a8ea2199a911f4e5f411efb07741053b11d0ffd4938098d40411e6870a8051cd`. |
+| A5dv | AUTHORIZE INPUT V51 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `32e4d58df3de0aa86ce162babceef0ea046e1998`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `e3de348c136d5acebcb01b84321b261d72a57def576b8473dc1dccfc13b57949`; SPKI SHA-256 `a3a2478355f0a3f1f3eae13912248df26f744062872405608054498bf9f4c440`. Do not patch hashed v50 or v51 bytes. | **Done** at `d11577c233ebd85a0e0a9b5ee37bf193ca5fbd01`. |
+| A5dw | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:182632`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse message-container clipsContent, cornerRadius, effects, or strokes. Host then refused `$.children[0].cornerRadius` (first variant; host emits zero radii; compile omits variant cornerRadius). Polar has 0 content-row nodes. Do **not** invent a cornerRadius value. Do **not** restart v51 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5dx | PREPARE INPUT V52. Copy the v51 stack. Do not patch hashed v51 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `cornerRadius` on `input-field/variant/*` that compile never emits (extract proved 128/128 both). Do not invent variables. Do not invent a cornerRadius value. Do not lift onto surface. Do not omit variant clipsContent/effects/strokes in the same prepare. Do not teach FIXED as a fill. | **Done** at `4646704cfbd743630aff50e954dab0db8dda15c1`. Antecedent index SHA-256 `d649571a4e3deaaa4a4c83c6024e6479f9afb3832621f8754eea6067a2ed65ba`. |
+| A5dy | AUTHORIZE INPUT V52 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `4646704cfbd743630aff50e954dab0db8dda15c1`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `3c3d00cd825bd23cf7afa347b21b6ac7792045de0fbce1b44dde1f195779d744`; SPKI SHA-256 `d0e74db72349b9d640561832cf4bf47e4068f9f3d4a07959e4c3ad94c791d49f`. Do not patch hashed v51 or v52 bytes. | **Done** at `64404899e3f6fd3d3591dcfb2bd31efeb8fada0e`. |
+| A5dz | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:185361`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse variant cornerRadius. Host then refused `$.children[0].effects` (first variant; host emits `[]`; compile omits variant effects). Polar has 0 content-row nodes. Do **not** invent an effects value. Do **not** restart v52 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ea | PREPARE INPUT V53. Copy the v52 stack. Do not patch hashed v52 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `effects` on `input-field/variant/*` that compile never emits (extract proved 128/128 both). Do not invent variables. Do not invent an effects value. Do not lift onto surface. Do not omit variant clipsContent/strokes in the same prepare. Do not teach FIXED as a fill. | **Done** at `34f5b20a738770c073d8b2ebffc236293066ddbb`. Antecedent index SHA-256 `6df0d393cb0097f12760598b10d48248f9cfc74009c4d333d3c193be50f0a57b`. |
+| A5eb | AUTHORIZE INPUT V53 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `34f5b20a738770c073d8b2ebffc236293066ddbb`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `9bd80794f13755c6b0712162151307da72addd4c87250fa52a82aa358761876c`; SPKI SHA-256 `6d4081f61748a588bc1a323f47c11730758de10a3a0319d8f51d2e846563dd02`. Do not patch hashed v52 or v53 bytes. | **Done** at `aadee2885e623715a77339f63762de0d1242dc20`. |
+| A5ec | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:188090`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse variant effects. Host then refused `$.children[0].strokes` (first variant; host emits `[]`; compile omits variant strokes). Compile-plan facts include variant clipsContent 128/128 both, so clipsContent is not the next omit. Polar has 0 content-row nodes. Do **not** invent a strokes value. Do **not** restart v53 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ed | PREPARE INPUT V54. Copy the v53 stack. Do not patch hashed v53 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `strokes` on `input-field/variant/*` that compile never emits (extract proved 128/128 both). Do not invent variables. Do not invent a strokes value. Do not lift onto surface. Do not omit variant clipsContent in the same prepare. Do not teach FIXED as a fill. | **Done** at `384095f379168cb5ff44c803eae28ff181e393a9`. Antecedent index SHA-256 `fa120b104bcc191513c5f39f10f36138ed3e7b31e9ecae0cce4e7cb0573ac047`. |
+| A5ee | AUTHORIZE INPUT V54 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `384095f379168cb5ff44c803eae28ff181e393a9`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `49e6885f437869cf932b6797629b4ffd347b82387c0f82894abf6f207260a940`; SPKI SHA-256 `9df9d259ee55a79dd1e9be562e9aeedab885741f11df49137a783841ca59fa2d`. Do not patch hashed v53 or v54 bytes. | **Done** at `2d9e2002ba66dbe3653b3dca06483c82e77475fc`. |
+| A5ef | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:190819`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse variant strokes. Host then refused `$.children[1].children[0].children[0].children[0].bindings[0].field` (MUI leading slot; host `height.value` first; compile `fills.0.color` first). Same three fields; order differs 64/64 both. Do **not** invent a binding field. Do **not** restart v54 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5eg | PREPARE INPUT V55. Copy the v54 stack. Do not patch hashed v54 scene-readback, extract, restore, writer, or runtime bytes. Teach host to order `input-field/slot/leading` bindings to compile field order `fills.0.color`, `width.value`, `height.value` (extract proved 64/64 both). Do not invent variables. Do not invent a binding field. Do not lift onto trailing slot. Do not teach FIXED as a fill. | **Done** at `975fe07e85595c4d1bf33b4fac8009149a68dbeb`. Antecedent index SHA-256 `aaf8c7dea4d31106caa1e02d3608e762db1a52b9662e9ca94a4837283b493599`. |
+| A5eh | AUTHORIZE INPUT V55 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `975fe07e85595c4d1bf33b4fac8009149a68dbeb`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ff5e07b255b0913dedb9e896cb2752c9700f81405cf42246ceec2d40568c335f`; SPKI SHA-256 `530b6927f36da65cfe12ea72622d3b88073970abc6641f0109ff0bd9b769bcbd`. Do not patch hashed v54 or v55 bytes. | **Done** at `7f18c36dbc77cec412d6f29893b78a74e46bb05a`. |
+| A5ei | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:193548`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse leading-slot binding order (now compile order 64/64 both). Host then refused `$.children[2].children[0].children[0].children[1].bindings[0].field` (MUI trailing slot; host `height.value` first; compile `fills.0.color` first). Same three fields; order differs 64/64 both. Do **not** invent a binding field. Do **not** restart v55 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ej | PREPARE INPUT V56. Copy the v55 stack. Do not patch hashed v55 scene-readback, extract, restore, writer, or runtime bytes. Teach host to order `input-field/slot/trailing` bindings to compile field order `fills.0.color`, `width.value`, `height.value` (extract proved 64/64 both). Do not invent variables. Do not invent a binding field. Do not lift onto leading slot. Do not teach FIXED as a fill. | **Done** at `de7df3a31256ae5e728214553902facb7e89e265`. Antecedent index SHA-256 `1c01c6ae05e3482d9a11b63b2eb258c4050f5f96626196a2a03b2b6ca33ac502`. |
+| A5ek | AUTHORIZE INPUT V56 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `de7df3a31256ae5e728214553902facb7e89e265`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `2b391e58efd8ee1701a29b3c620f82fd5b6b5bcd0d8c2618c6022a5d0c3fcc4a`; SPKI SHA-256 `f11ee09ba711a1bdfef65acd400f800aba2459317bc4d9e1ab51c2d105ef1afe`. Do not patch hashed v55 or v56 bytes. | **Done** at `7049c6ddcc416ab02f9fb3259768defa1ef5fd2f`. |
+| A5el | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:196277`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse leading-slot or trailing-slot binding order (both compile order 64/64 both). Host then refused `$.children[4].children[0].children[1].children[1].bindings[0].field` (MUI `input-field/required-indicator`; host duplicate `fills.0.color` first; compile `type.fontSize` first). Same mapped fields; extras and order differ 64/64 both. Do **not** invent a binding field. Do **not** restart v56 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5em | PREPARE INPUT V57. Copy the v56 stack. Do not patch hashed v56 scene-readback, extract, restore, writer, or runtime bytes. Teach host to drop the duplicate mapped `fills.0.color` on `input-field/required-indicator` and order remaining bindings to compile field order `type.fontSize`, `type.lineHeight.value`, `fills.0.color` (extract proved 64/64 both). Do not invent variables. Do not invent a binding field. Do not lift onto label. Do not teach FIXED as a fill. | **Done** at `187bce50e3311c3f4040d7eb263ffdbab02d5b06`. Antecedent index SHA-256 `5b2d91f7e2f83191d666ee97b69b46273a6b9ad215ea6764f77b3ba8425451ab`. |
+| A5en | AUTHORIZE INPUT V57 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `187bce50e3311c3f4040d7eb263ffdbab02d5b06`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `6bec9ff3be636f978e08098f42935782da5bfec2d71b92a99bf791d731fb1c13`; SPKI SHA-256 `ac3fc235272d0f435ecb569ded3dceab541b9bbca72d3c72cb126daa8a9af74f`. Do not patch hashed v56 or v57 bytes. | **Done** at `0fd7f8a2a27cb33c9f039788c1e698f83a2d23de`. |
+| A5eo | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `106:199006`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse required-indicator binding extras or order (now compile order 64/64 both). Host then refused `$.children[4].children[0].children[1].children[1].type.letterSpacing` (MUI `input-field/required-indicator`; host `{unit: percent, value: 0}`; compile omits letterSpacing). Same 64/64 Polar. Do **not** invent a letterSpacing value. Do **not** restart v57 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ep | PREPARE INPUT V58. Copy the v57 stack. Do not patch hashed v57 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.letterSpacing` on `input-field/required-indicator` that compile never emits (extract proved 64/64 both). Do not invent variables. Do not invent a letterSpacing value. Do not lift onto label. Do not omit textCase or textDecoration in the same prepare. Do not teach FIXED as a fill. | **Done** at `76ee865c07fd9bcf90ce04ed86c7a638294b9488`. Antecedent index SHA-256 `1e368a9f02b8e61fdf0935d977a38021e8c70157876abd6ce5ba5e8ff69f980c`. |
+| A5eq | AUTHORIZE INPUT V58 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `76ee865c07fd9bcf90ce04ed86c7a638294b9488`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `efd7160b5bb49b987d698d127904206dbd427be60d7db1e54457c05604de70ce`; SPKI SHA-256 `9f5e529985ee2a229bad9bf64002db2622d648c215f7b5bdb24d988b0dc7bcc1`. Do not patch hashed v57 or v58 bytes. | **Done** at `82aa321d40d828d474ca83b82cfd7dbbe1bf59c7`. |
+| A5er | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `107:201735`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse required-indicator letterSpacing (now omitted 64/64 both). Host then refused `$.children[4].children[0].children[1].children[1].type.textCase` (MUI `input-field/required-indicator`; host `original`; compile omits textCase). Same 64/64 Polar. Do **not** invent a textCase value. Do **not** restart v58 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5es | PREPARE INPUT V59. Copy the v58 stack. Do not patch hashed v58 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.textCase` on `input-field/required-indicator` that compile never emits (extract proved 64/64 both). Do not invent variables. Do not invent a textCase value. Do not lift onto label. Do not omit textDecoration in the same prepare. Do not teach FIXED as a fill. | **Done** at `42a1388bfcfc403030cb719f92c98c7e89dbf6e3`. Antecedent index SHA-256 `1e3247fb49fe2244c38130ece0f218b4133e0b73742eac1777ab22f9fee3f4b1`. |
+| A5et | AUTHORIZE INPUT V59 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `42a1388bfcfc403030cb719f92c98c7e89dbf6e3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `da9e763ba3815daf2d98e8f9665a549e3ac282bde9b0cb240ea6d3775f362f9a`; SPKI SHA-256 `42cb6cb1e0d28993946e64a3c2bf173354acdd96c33ced65f1373cd7f37461df`. Do not patch hashed v58 or v59 bytes. | **Done** at `d835ad4fff7185c6e45d20a2ef3799781d9e487c`. |
+| A5eu | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `107:204464`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse required-indicator textCase (now omitted 64/64 both). Host then refused `$.children[4].children[0].children[1].children[1].type.textDecoration` (MUI `input-field/required-indicator`; host `none`; compile omits textDecoration). Same 64/64 Polar. Do **not** invent a textDecoration value. Do **not** restart v59 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ev | PREPARE INPUT V60. Copy the v59 stack. Do not patch hashed v59 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `type.textDecoration` on `input-field/required-indicator` that compile never emits (extract proved 64/64 both). Do not invent variables. Do not invent a textDecoration value. Do not lift onto label. Do not teach FIXED as a fill. | **Done** at `f86ee4e597e2acf961f457b2fb718ea117d1fb91`. Antecedent index SHA-256 `ae063073e0cd93ebc4a46b514ab00208708567b758da5681354e60c99da905fb`. |
+| A5ew | AUTHORIZE INPUT V60 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `f86ee4e597e2acf961f457b2fb718ea117d1fb91`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `29a99e9c6a320e30e2ee0c8a7249032b3a427ba7d837f362823bc626a842e7e5`; SPKI SHA-256 `063f0fb75d9b4b567a9e9b3f56fff23c8e65eca3cd9dae4302a56e8820cfc309`. Do not patch hashed v59 or v60 bytes. | **Done** at `5cf3ca2f9b24e84ae3b4da073266f52e8ffdeb47`. |
+| A5ex | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `107:207193`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse required-indicator textDecoration (now omitted 64/64 both). Host then refused `$.cornerRadius` (component-set root `input-field/set`; host 5px all sides both sources; compile omits cornerRadius). Do **not** invent a radius. Do **not** restart v60 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ey | PREPARE INPUT V61. Copy the v60 stack. Do not patch hashed v60 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `cornerRadius` on `input-field/set` that compile never emits (extract proved both sources). Do not invent variables. Do not invent a radius value. Do not lift onto variants. Do not omit set clipsContent, fills, strokes, or effects in the same prepare. Do not teach FIXED as a fill. | **Done** at `08c808c31a72826aa4c691a1aab273b9b6158600`. Antecedent index SHA-256 `e5e6f712c266748d99971df0f28da861bbd55c9ded0075d002ace1106df39b0c`. |
+| A5ez | AUTHORIZE INPUT V61 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `08c808c31a72826aa4c691a1aab273b9b6158600`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `8e27c3d989d4a9800e40ab8598e6090794255cf8cee64f0bd2ace3a139a791cd`; SPKI SHA-256 `427d17f43b6265216ded9a62e3665e268a948629f76fef0c7ff57f2bd8074b44`. Do not patch hashed v60 or v61 bytes. | **Done** at `8ab3c7c4f79bf0f9c8a5bdbbe050a184f4539494`. |
+| A5fa | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `108:209922`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse set cornerRadius (now omitted both sources). Host then refused `$.effects` (component-set root `input-field/set`; host `[]` both sources; compile omits effects). Do **not** invent an effects value. Do **not** restart v61 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fb | PREPARE INPUT V62. Copy the v61 stack. Do not patch hashed v61 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `effects` on `input-field/set` that compile never emits (extract proved both sources). Do not invent variables. Do not invent an effects value. Do not lift onto variants. Do not omit set clipsContent, fills, or strokes in the same prepare. Do not teach FIXED as a fill. | **Done** at `0f6b3f0fe7aa6204a88b99ea5b823d2179ed2cb4`. Antecedent index SHA-256 `442c1f1d1125bb5fe28edfd2b3e7a92ed99ee66458de1366f4998f414ea37cc2`. |
+| A5fc | AUTHORIZE INPUT V62 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `0f6b3f0fe7aa6204a88b99ea5b823d2179ed2cb4`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `bd887c496b95c0fe7638b2ff321a437ca7c03c48975abed259ca57e36fcfb3ba`; SPKI SHA-256 `b7422fa3bebef2a6482e5ba158cb73a9450c9e8c2ba78afbc15a0c2cf9414ae5`. Do not patch hashed v61 or v62 bytes. | **Done** at `86b465e91a6515257bafa7649f22ec2db05a3345`. |
+| A5fd | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `108:212651`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse set effects (now omitted both sources). Host then refused `$.fills.length` (component-set root `input-field/set`; host `[{kind:solid,color:#f7f7f8ff}]` both sources; compile omits fills). Do **not** invent a fill. Do **not** restart v62 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fe | PREPARE INPUT V63. Copy the v62 stack. Do not patch hashed v62 scene-readback, extract, restore, writer, or runtime bytes. Teach host to omit `fills` on `input-field/set` that compile never emits (extract proved both sources). Do not invent variables. Do not invent a fill. Do not lift onto variants. Do not omit set clipsContent or strokes in the same prepare. Do not teach FIXED as a fill. | **Done** at `08bcae728ec245222c2c9eec07938c8f86af78f0`. Antecedent index SHA-256 `70425813fa5986bb8c22164df4df768049302d09d3610b952bd0889275d3425b`. |
+| A5ff | AUTHORIZE INPUT V63 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `08bcae728ec245222c2c9eec07938c8f86af78f0`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `169d85c1eb93c5bd9c4c4c586b1355b135503a19a128800109519a3f3e543cf9`; SPKI SHA-256 `3efd14ed27a07f1146f486eaa84dc811ec323c01fb54dfc48b37b902edde299a`. Do not patch hashed v62 or v63 bytes. | **Done** at `c90f5ee9d1331038968bd48aeaf672370079080b`. |
+| A5fg | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `108:215380`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse set fills.length (set fills now `[]` both; hashed v62 still emits the solid). Host then refused `$.layout.mode` (component-set root `input-field/set`; host extract `HORIZONTAL` / IR `horizontal` both; compile emits `vertical`). This is not a compile-absent omit. Do **not** invent a vertical mode. Do **not** restart v63 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fh | PREPARE INPUT V64. Copy the v63 stack. Do not patch hashed v63 scene-readback, extract, restore, writer, or runtime bytes. Teach compile to emit set `layout.mode` `horizontal` — the carried live fact both libraries minted (extract HORIZONTAL / host IR horizontal; frozen v16 writer sets `set.layoutMode="HORIZONTAL"` after `combineAsVariants`; payload IR still said vertical). Do not invent `vertical` onto host. Do not omit `layout.mode`. Do not omit set strokes or change variant clipsContent. Do not invent a variable. Do not teach FIXED as a fill. | **Done** at `efcc7cf17dbd06f108dbe5edbcbee119067ca91d`. Antecedent index SHA-256 `5d6b32ee7190d6ad789292ba9242dd8b05c36d3234ef1b2fe21b204638304ac6`. |
+| A5fi | AUTHORIZE INPUT V64 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `efcc7cf17dbd06f108dbe5edbcbee119067ca91d`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `bf69bca502af34653721726d153480c4b7be9f3639adf6c4b3924f9f53ccc2cf`; SPKI SHA-256 `00d3469d4b98e5bc80422104ac796a3b5bd6b96b8ad141b4ab425631e58efe6a`. Do not patch hashed v63 or v64 bytes. | **Done** at `5c3d627cf8ffa07c9dc5575cade0845da0f187c3`. |
+| A5fj | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `108:218109`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse set `layout.mode` (now `horizontal` both; teaching held). Host then refused `$.layout.padding.bottom` (component-set root `input-field/set`; host extract padding 32/32/32/32 / IR `{32,32,32,32}` both; compile emits `{0,0,0,0}`). This is not a compile-absent omit. Do **not** invent padding 0 onto host. Do **not** omit `layout.padding.bottom`. Do **not** restart v64 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fk | PREPARE INPUT V65. Copy the v64 stack. Do not patch hashed v64 scene-readback, extract, restore, writer, or runtime bytes. Teach compile to emit set `layout.padding` `{32,32,32,32}` — the carried live fact both libraries minted (extract 32/32/32/32 / host IR 32 all sides; compile had `0`; frozen v16 payload said 0; writer program has 0 paddingBottom assignments). Do not invent `0` onto host. Do not omit `layout.padding`. Do not omit set strokes or change variant clipsContent. Do not invent a variable. Do not teach FIXED as a fill. | **Done** at `4102d81390d981e5fde5db7b8d46b9b2f3ab83c4`. Antecedent index SHA-256 `c58cea06652ca0adb51e6a68276f820e3bfa196e4191c454fb0602e751151356`. |
+| A5fl | AUTHORIZE INPUT V65 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `4102d81390d981e5fde5db7b8d46b9b2f3ab83c4`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ef81aeec6f342967dcc09334a63de5a24f521d02b9f4911bca22a5ae6a0fdb86`; SPKI SHA-256 `d1e7efd2fece7c3416b7a6bc7c1f2da838181ac6276737c71ef0995c0f28788e`. Do not patch hashed v64 or v65 bytes. | **Done** at `aeb0efa7e540b7c88bc66698ef4a210611c781e6`. |
+| A5fm | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, page `108:220838`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436213 bytes). Host did not refuse set `layout.padding` (now `{32,32,32,32}` both; teaching held). Host then refused `$.layout.width.mode` (component-set root `input-field/set`; extract FIXED 31656/33050 / host IR fixed both; compile emits `hug`). This is not a compile-absent omit. Do **not** invent hug onto host. Do **not** omit `layout.width.mode`. Do **not** teach FIXED. Do **not** compile-carry one width (libraries disagree). Do **not** restart v65 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fn | PREPARE INPUT V66. Copy the v65 stack. Do not patch hashed v16 writer program `a01d95b3…d6b3` or payload `b091cf61…0597`. Mint an unfrozen v17 writer that assigns `set.layoutSizingHorizontal="HUG"` after `combineAsVariants`. Keep v16 payload file unchanged; v17 payload/program get their own hashes. Restore/runtime/extract stay v16 frozen bytes. Hashed v65 scene-readback stays frozen. Do not teach FIXED. Do not invent hug onto host-normalize. Do not omit `layout.width.mode`. Do not compile-carry `31656` or `33050`. Do not change set `layout.mode` back to `vertical`. | **Done** at `4f08701a7204d36cee363e5fd4725e8fd1af01cb`. Antecedent index SHA-256 `e368b48be937996cc888f0792c9d89a4cd9c753ce0f1b3b110a6fa914e052e59`. |
+| A5fo | AUTHORIZE INPUT V66 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `4f08701a7204d36cee363e5fd4725e8fd1af01cb`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `8dde188b1f6764c286e260b4149857abf1de3acc8abaa0359e90755f5ddb4c0d`; SPKI SHA-256 `78ad6a53d3858803f0ca20958989165e2a3a995be2414767ea68b90ce350c55f`. Do not patch hashed v16 or v66 bytes. | **Done** at `6b0bdd23321b803b9cb07dc972b7978ddf480f18`. |
+| A5fp | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `108:223567`, not `108:220838`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes). Host did not refuse set `layout.width.mode` (extract HUG both; host IR `{mode:hug}` both; compile `hug`; v17 writer teaching held). Host then refused `$.strokes` (component-set root `input-field/set`; extract/host `[]` both; compile omits). This is a compile-absent omit. Do **not** invent a stroke. Do **not** compile-carry `[]`. Do **not** teach FIXED. Do **not** restart v66 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fq | PREPARE INPUT V67. Copy the v66 stack. Do not patch hashed v16 writer or hashed v66 scene-readback `e92b6955…53e9`. Teach host-normalize to omit set `strokes` — compile-absent; extract/host `[]` both. Keep v17 writer bytes (HUG teaching already held). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not teach FIXED. Do not invent a stroke or `[]`. Do not omit `layout.width.mode`. Do not change set `layout.mode` back to `vertical`. | **Done** at `c129c6b8df484061cdf3fb6bc695c8b78c41db58`. Antecedent index SHA-256 `c5f2f551ce0b64390b42735e90ac6cd2d5e4283f21da85ed7a150b8b68c95384`. |
+| A5fr | AUTHORIZE INPUT V67 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `c129c6b8df484061cdf3fb6bc695c8b78c41db58`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `62288d19db1fd59b51e15077ae0782f46146f6eec2b0d94a54dcf8d69d112294`; SPKI SHA-256 `0126571b64968a906002cce76976da9435267c714a875788b46b84500b50ebf1`. Do not patch hashed v16, v66, or v67 bytes. | **Done** at `81a75ebc42a09cb9ed84f1d4cbc0aa0e11427eb3`. |
+| A5fs | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `108:226296`, not `108:223567`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes). Host did not refuse set `strokes` (host IR omits both; extract `[]` both; compile omits; v67 teaching held). Extract width remains HUG both (host IR `{mode:hug}`; v66 teaching held). Host then refused `$.children[0].children[0].bindings[1].field` (Polar `input-field/label-row`; host `layout.padding.left` vs compile `layout.padding.top`; same 3 fields, order swap). MUI first child is surface and already matches compile order. This is a binding-order gate. Do **not** invent a binding. Do **not** compile-carry Polar encounter order. Do **not** teach FIXED. Do **not** restart v67 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5ft | PREPARE INPUT V68. Copy the v67 stack. Do not patch hashed v16/v17 writer or hashed v67 scene-readback `9fd064de…9c8d`. Teach host-normalize to order `input-field/label-row` bindings to compile fields `layout.itemSpacing`, `layout.padding.top`, `layout.padding.left` — same 3 fields, order swap. Keep v17 writer bytes (HUG teaching already held). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent a binding. Do not lift onto surface. Do not teach FIXED. Do not omit `layout.width.mode`. Do not change set `layout.mode` back to `vertical`. Do not compile-carry Polar encounter order. | **Done** at `9df90119ab1b29c7f340f8b340e4b57661948bf2`. Antecedent index SHA-256 `c0026cb6fce6cdb094e83f9bd84eeac82a2ca865ae0a95e02af4c84435575e07`. |
+| A5fu | AUTHORIZE INPUT V68 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `9df90119ab1b29c7f340f8b340e4b57661948bf2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `94175d4aff4488c65589d295fa0a310be047b966ea16a28d5a3581c1f1203412`; SPKI SHA-256 `d36af9c965b0c6731f8eca3772923c6b1c3e78e6c29494a37ebd7f9bbd0f1c05`. Do not patch hashed v16, v17, or v67 bytes. | **Done** at `df564ae285fd413db96b046aab549091260501f2`. |
+| A5fv | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `108:229025`, not `108:226296`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes). Polar label-row bindings now match compile order (v68 teaching held). Set strokes omitted both (v67 teaching held). Extract width remains HUG both (host IR `{mode:hug}`; v66 teaching held). Host then refused `$.children[0].children[1].bindings[0].field` (Polar `input-field/surface`; host `layout.padding.right` vs compile `layout.itemSpacing`; same 13 fields, order swap). MUI surface still 12 compile-order bindings. This is a binding-order gate. Do **not** invent a binding. Do **not** compile-carry Polar encounter order. Do **not** teach FIXED. Do **not** restart v68 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fw | PREPARE INPUT V69. Copy the v68 stack. Do not patch hashed v16/v17 writer or hashed v68 scene-readback `a7b07c07…9c8d`. Teach host-normalize to order `input-field/surface` bindings so Polar `layout.itemSpacing` sits at compile index 0, then the prior 12 surface fields. Same 13 fields, order swap. MUI surface stays 12 compile-order bindings (no itemSpacing invented). Keep v17 writer bytes (HUG teaching already held). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent a binding. Do not teach FIXED. Do not omit `layout.width.mode`. Do not change set `layout.mode` back to `vertical`. Do not compile-carry Polar encounter order. | **Done** at `2c4cba6b635eefe4649f63327ae4fa604b93c97a`. Antecedent index SHA-256 `e84dd63369b41ae97c8126f2c0d21c6edad57df4affcf8292552009c431b60a0`. |
+| A5fx | AUTHORIZE INPUT V69 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `2c4cba6b635eefe4649f63327ae4fa604b93c97a`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `7ab2a3f0dec58cda42aa92dd59672d42c9e35c1a5439b5621be184070a42b2fa`; SPKI SHA-256 `bbfa4133357dfc87235cd4410925acf24aed468ac087c1d1e8f37705b392b36d`. Do not patch hashed v16, v17, or v68 bytes. | **Done** at `32f501e2f64445267ae51613e9036d999d791a75`. |
+| A5fy | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `108:231754`, not `108:229025`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes). Polar surface bindings now match compile order (v69 teaching held). Polar label-row compile order held. Set strokes omitted both. Extract width remains HUG both (host IR `{mode:hug}`; v66 teaching held). Host-normalize / recipe-collapse did not refuse. Independent root accounting then silent-mismatched (MUI 577 / Polar 641). Measured: name font-provenance key order (448+448, same 7 keys, order-only); instancePayload `fills[0].kind:solid` vs `type:SOLID` (MUI 128 only; Polar 128 plus width drift); Polar intrinsicSize.width 8→9 (64) and 25.78125→30 (64); Polar effect drop-shadow spread 1→0 (32) and 3→0 (32); both roots swap variantAxis Size `[small,medium]` vs `[medium,small]`. Do **not** invent Polar pixels/spreads. Do **not** teach FIXED. Do **not** restart v69 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5fz | PREPARE INPUT V70. Copy the v69 stack. Do not patch hashed v16/v17 writer or hashed v69 scene-readback `1f3a98e5…3be3`. Teach the accounting observer to canonicalize `name` font-provenance JSON key order to compile/expected `canonicalJson` (`fallbackChain`-first). Same 7 keys, order-only, 448/448 both. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not include fill discriminator or Size axis in this prepare. Do not invent Polar widths or spreads. Do not teach FIXED. | **Done** at `7dec097c890d1fb888024b43ecddeec880321083`. Antecedent index SHA-256 `d5d3d68fdc90954862f467c889a8a0b68fcd4e62b6316cb8abdb066aaaa9a2de`. |
+| A5ga | AUTHORIZE INPUT V70 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `7dec097c890d1fb888024b43ecddeec880321083`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `64567c9f95c68d8f03fd784b2cf28f3f1f8ce26004421d06f35d82d629588073`; SPKI SHA-256 `4cec0fd5afe392a52618fdcfa80f17ebb7703657594785b35da62a9bed50a97b`. Do not patch hashed v16, v17, or v69 bytes. | **Done** at `12fb32700ef53ee2bdcc06dcc6bb064560a97815`. |
+| A5gb | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `110:234483`, not `108:231754`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `33907f7c…2917`). Font-provenance name key-order teaching held (name silent 448+448 → 0). Polar surface/label-row compile order held. Set strokes omitted; width remains HUG both. Independent root accounting then silent-mismatched (MUI 129 / Polar 193). MUI instancePayload is `kind:solid` vs `type:SOLID` only (128). Polar every payload also drifts `intrinsicSize.width` 8→9 / 25.78125→30 (128). Polar effect drop-shadow spread 1→0 / 3→0 (32+32). Size axis order-only 1+1. Fill is **not** kind/type-only on both libraries. Do **not** invent Polar pixels/spreads. Do **not** teach FIXED. Do **not** restart v70 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5gc | PREPARE INPUT V71. Copy the v70 stack. Do not patch hashed v16/v17 writer or hashed v70 scene-readback `f775aaef…7141`. Teach the accounting observer to canonicalize instancePayload fill `type:"SOLID"` to compile `{kind:"solid"}`. Same paint only; do not rewrite `intrinsicSize`, Polar widths, or effect spread. Do not include Size axis in this prepare. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar pixels or spreads. Do not teach FIXED. | **Done** at `01c3b92ab24642b187cfb441aa621452b22cc4e3`. Antecedent index SHA-256 `46f4e75e41461c13315771c1b03fabc20c938b56a04947d754dc7d308433930e`. |
+| A5gd | AUTHORIZE INPUT V71 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `01c3b92ab24642b187cfb441aa621452b22cc4e3`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `1de20ef035c0b67ad84972cda9b6672e87d31521d8db85c64db2dff95d88aacf`; SPKI SHA-256 `945cf2f238f40218f1bf601079edf7f9a294105a77a9797c0a066b03c5361d69`. Do not patch hashed v16, v17, or v70 bytes. | **Done** at `68349870953c6865a100f6c00100e2a7fac0700e`. |
+| A5ge | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `110:237212`, not `110:234483`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `595c9939…1f8d`). Fill-kind alias held and stayed paint-scoped: MUI silent 129 → 1 (Size axis only). Polar fill now matches `{kind:solid}`; Polar silent stayed 193 because `intrinsicSize.width` remained in the same instancePayload fact (128 width-only) plus spreads 32+32 plus Size axis 1. Polar facts did not split. Measured width pairs 8→9 / 25.78125→30 and spreads 1→0 / 3→0. Size axis still order-only 1+1. Do **not** invent Polar pixels/spreads. Do **not** teach FIXED. Do **not** restart v71 attempt 2 as-is. Cleanup accepted; owned Input pages 0. |
+| A5gf | PREPARE INPUT V72. Copy the v71 stack. Do not patch hashed v16/v17 writer or hashed v71 scene-readback `5443512b…d388c`. Teach the accounting observer to canonicalize Size variantAxis values to compile `[small,medium]` when the set matches. Order only. Do not rewrite `intrinsicSize`, Polar widths, or effect spread. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar pixels or spreads. Do not teach FIXED. | **Done** at `a2dcad5c04a79c6a5ce6d6859395eb4dce0eb26a`. Antecedent index SHA-256 `3409911929ca248fcdf1284943bc97e9b3d6f79ff366e051af2b6e7927ff3757`. |
+| A5gg | AUTHORIZE INPUT V72 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `a2dcad5c04a79c6a5ce6d6859395eb4dce0eb26a`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `029131405e4873a2455d98ffc113a978c896759bfa342d7a0d9c16d0c3050496`; SPKI SHA-256 `936cfd3f56cefa41ba9fe33494ac78e1ec2646ec4f82e33af39fd6c4931796fe`. Do not patch hashed v16, v17, or v71 bytes. | **Done** at `83009c6f88a5349c5ac3650321d0a854d9a4234b`. |
+| A5gh | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `110:239941`, not `110:237212`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `9d029458…aed9`). Size-axis order teaching held: MUI silent 1 → 0; Polar silent 193 → 192 (Size axis cleared). Polar fill still `{kind:solid}`; Polar payload facts did not split. Remaining Polar value drift only: `intrinsicSize.width` 8→9 / 25.78125→30 (64+64) plus effect spread 1→0 / 3→0 (32+32). Do **not** invent Polar pixels/spreads. Do **not** teach FIXED. Do **not** restart v72 attempt 2 as-is. Do **not** open V73 for those values. Cleanup accepted; owned Input pages 0. |
+| A5gi | Diagnose Polar silent 192 without inventing 9/30/0. Measure expected-number sources, named-or-not, V72 extract roles, MUI zero, library-specificity, and v17 writer assignment. Open V73 only if those keys are **not** named required facts (classification). | **Measured at `b7ca6418`.** Polar source has no literals 8, 25.78125, 1, or 3. Those numbers live in `recipe/fixtures/library-input-fields.ts` as fixture measurements of `$` / `USD` / focus rings, cited to prefix/suffix Text bodyMd and rem-based CSS shadows — not as source px. Schema fields `intrinsicSize` and `spread` exist; archetype `input/width-rule` does **not** name these pixels. Named facts are `$` / `USD` / bodyMd / ring color `#005bd3` / presence of effects. Glyph box and Figma shadow spread are carried live observations, not required-equals px. Fixture px cannot win (invented, not in Polar source). Compile-carrying 9/30/0 as Polar recipe constants cannot win (also not in source). Do **not** invent 9/30/0. Do **not** restart V72. Do **not** reuse page `110:239941` or `private/input-live-v72-transaction`. |
+| A5gj | PREPARE INPUT V73. Copy the v72 stack. Do not patch hashed v16/v17 writer or hashed v72 scene-readback `542f31a1…ce12`. Teach the accounting observer to treat unnamed-source `instancePayload.intrinsicSize.width` and focus-effect `spread` as carried / not required-equals. Keep scoring named facts (characters, type role, fills, ring color, presence of effects). Library-neutral: no `if (polaris)`. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not write 9/30/0 into Polar fixtures. Do not restamp expected-plans. Do not teach FIXED. | **Done** at `a0bea7197119793da5283954bf5e70609a038162`. Antecedent index SHA-256 `d2d4ef64f9810b35492a6108487b6dfa6d099f20111b068a8c34ec017e2c4ec8`. |
+| A5gk | AUTHORIZE INPUT V73 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `a0bea7197119793da5283954bf5e70609a038162`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `85caa395611c60e6ef76431935d8192255a87277cd951e86f08ae986328c797b`; SPKI SHA-256 `f642994b12dcecf2c3630def11a1b439438b7dfed3283557577078897a71f332`. Do not patch hashed v16, v17, or v72 bytes. | **Done** at `a82b7add1df00cf58ae6372d558590831225e7a2`. |
+| A5gl | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:242670`, not `110:239941`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `eaf6f036…7319`). Unnamed-source width/spread teaching held: independent root accounting silent **0/0** both (MUI matched 22811; Polar matched 20915). Probe issued, then host accept refused `validateInputLiveV73ProbePayload` (`contract.ts:584`). Measured: all 256 cells `rolesExact=false` and `stateSemanticsExact=false`; adornment/noFakeLayout true; area/overlap 0. MUI source `stateSemanticsPassed`/`textPropertiesRestored` false. Polar those plus `reflowPassed`/`contentFillPassed` false. Do **not** invent 9/30/0. Do **not** restart V73 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; owned Input pages 0; mint cleaned. |
+| A5gm | Diagnose V73 probe refuse from on-disk probe + extract before any V74. | **Measured.** Probe operator succeeded on page `111:242670` (256 cells, 2 sources). `rolesExact` / `stateSemanticsExact` require first-segment recipe roles; probe `role()` still treats any name containing `=` as variant-like **before** splitting on ` :: `. TEXT names carry `font-provenance=%7B…` (literal `=`), same class as V10/V11 host `sceneRole`. Extract `semanticRole` / `firstSegmentRole` recover all expected roles (128/128 both libraries). `adornmentPayloadExact` is vacuously true because slot names have no `=`. `textPropertiesRestored` is a Label component-property roundtrip, not the 256/24/0 FILL restore. Polar `reflowPassed`/`contentFillPassed` are the same resize+64 predicate and look for `input-field/content-row`; Polar extract has **0** content-row nodes; Polar content texts are FILL 128/128 (not FIXED leftover). No v8–v16 live passed probe (none reached it). Do **not** invent roles. Do **not** restart V73. Do **not** reuse page `111:242670` or `private/input-live-v73-transaction`. |
+| A5gn | PREPARE INPUT V74. Copy the v73 stack. Do not patch hashed v16/v17 writer or hashed v73 scene-readback `955c3ee3…8a86`. Teach the probe `role()` normalize to take the first ` :: ` name segment before testing `=`, matching extract `firstSegmentRole`. Keep v17 writer bytes. Keep V73 unnamed-source width/spread classification. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar 9/30/0. Do not teach FIXED. Do not teach Polar content-row in this prepare (separate measured class). | **Done** at `ca299c1ae5dcdbe67106997604ead808473a1d65`. Antecedent index SHA-256 `5e62706cebd29b978323884b30cfeac875027d1dca14f4551a3d7ebe34d91a5f`. |
+| A5go | AUTHORIZE INPUT V74 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `ca299c1ae5dcdbe67106997604ead808473a1d65`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `365e6d5c3f7199e0eac0c0161007ad6fc853a4360b18789912f9074e20782e2e`; SPKI SHA-256 `eaa2fc6af223d5a0fbf98d211834c4d5b9de2e69b3b7729856c4608b9c358d61`. Do not patch hashed v16, v17, or v73 bytes. | **Done** at `ac5187720071d454cdefa173d4c2f455bacf53f9`. |
+| A5gp | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:247718`, not `111:242670`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `03f9f0d6d73fb0eb8d97108f4d7182b9821e7c45c707a00c12625293dde2e694`). First-segment role teaching held: 256/256 `rolesExact` and `stateSemanticsExact`; both sources `stateSemanticsPassed`. Accounting silent 0/0 both (MUI matched 22811; Polar matched 20915). Probe issued, then host accept refused `validateInputLiveV74ProbePayload` (`contract.ts:584`). Remaining: `textPropertiesRestored` false both; Polar `reflowPassed`/`contentFillPassed` false (extract Polar content-row 0; Polar content texts FILL 128); MUI `visibleAreaLoss>0.05` 104/128 (max 0.529) and `overlapPixels>2` 12/128 (max 20). V73 area/overlap 0 was vacuous. One teaching cannot clear the conjunction. Do **not** invent 9/30/0. Do **not** restart V74 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; owned Input pages 0; mint cleaned. |
+| A5gq | Diagnose V74 remaining classes A/B/C from on-disk probe + extract before any V75. | **Measured.** See diagnosis table below. Polar reflow is the first single-class teaching. |
+| A5gr | PREPARE INPUT V75. Copy the v74 stack. Do not patch hashed v16/v17 writer or hashed v74 scene-readback `70f70b68…19d6`. Teach the probe Polar `reflowPassed`/`contentFillPassed` against Polar’s actual content text FILL + surface grow (`contentRow \|\| contentText`), not a minted Polar content-row. Keep V73 classification + V74 first-segment `role()`. Keep v17 writer bytes. Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not teach FIXED. Do not teach Label bind or MUI clip in this prepare. | **Done** at `f12bf40ba9c81b65f34d25e0c4155be6e29238ce`. Antecedent index SHA-256 `b42844ec6165062ce26615428e18df8123a446115cc940d35fa1de548ab05889`. |
+| A5gs | AUTHORIZE INPUT V75 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `f12bf40ba9c81b65f34d25e0c4155be6e29238ce`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ea17c49752ad42bf9e83d197d973ed5ff1b7afeef3998b358006db5e62ea2acd`; SPKI SHA-256 `2748d17cf71e07d7509ffca3fa1983b8067ceb7089e4d4fa63d4f6e914be9924`. Do not patch hashed v16, v17, or v74 bytes. | **Done** at `a4cdca454a193820cfd56a5d17041fa5c8937d1d`. |
+| A5gt | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:252766`, not `111:247718`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `11344f083830cb9e9ab7aa62fe60a7f2481f1c67af173cf9155b3880a33e0651`). Polar teaching held: `reflowPassed`/`contentFillPassed` true; Polar content-row still 0; Polar content texts FILL 128. First-segment role held 256/256. Accounting silent 0/0 both. Probe issued, then host accept refused `validateInputLiveV75ProbePayload` (`contract.ts:584`). Remaining: `textPropertiesRestored` false both; **MUI `contentFillPassed` newly false** (extract MUI content texts FILL 128; probe samples defaultVariant; MUI default placeholder hidden FILL / 24 restore-hidden); MUI clip 104/128 and overlap 12/128 unchanged. Do **not** invent 9/30/0 or a Polar content-row. Do **not** restart V75 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; page `111:252766` removed; mint cleaned. |
+| A5gu | Diagnose V75 remaining classes from on-disk probe + extract before any V76. | **Measured.** See V75 remaining-class diagnosis below. Label bind is the first single-class teaching. |
+| A5gv | PREPARE INPUT V76. Copy the v75 stack. Do not patch hashed v16/v17 writer or hashed v75 scene-readback `49810949…a2c1`. Mint an unfrozen v18 writer that binds TEXT component properties by first-segment role (split ` :: ` before testing `=`), the same class as V74 `role()`. Keep v17 files frozen (`05a06546…c2e2` / `f5e1294a…7ce9`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 first-segment `role()` + V75 Polar predicates. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not teach FIXED. Do not teach contentFill or clip in this prepare. | **Done** at `046342fb5a53cb5a0a8fd4a7769141b6b157912e`. Antecedent index SHA-256 `2fe97436ae8dca0b97bd7f95dc052ab0911bf7ae05f6dfdebfebb17a71edd606`. |
+| A5gw | AUTHORIZE INPUT V76 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `046342fb5a53cb5a0a8fd4a7769141b6b157912e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `c0fb1c451536d8f6e8d1586530be64a7875ef35e489f010bf24d6ecb4c785349`; SPKI SHA-256 `a2db82fbf07c8aa2f8226b3677508b0e453aa10ec02c44882e1c607ea4ee1d6e`. Do not patch hashed v16, v17, or v75 bytes. | **Done** at `95621752b504ccc1663344d2b527f800996b95c6`. |
+| A5gx | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:257814`, not `111:252766`; v18 program `9653ecd2…81ac`). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `0fdcdacb7e8fef97242668187203b123865331b901ffbee803c45b29f6b0f00b`). Writer first-segment Label bind **held**: `textPropertiesRestored` true both. Polar reflow/contentFill still held; Polar content-row still 0. Role 256/256. Accounting silent 0/0 both. Probe issued, then host accept refused `validateInputLiveV76ProbePayload` (`contract.ts:584`). Remaining: MUI `contentFillPassed` still false (hidden default FILL; extract FILL 128); MUI clip 104/128 and overlap 12/128 unchanged. Do **not** invent 9/30/0 or a Polar content-row. Do **not** teach FIXED. Do **not** restart V76 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; page `111:257814` removed; mint cleaned. |
+| A5gy | Diagnose V76 remaining classes from on-disk probe + extract before any V77. | **Measured.** See V76 remaining-class diagnosis below. Hidden-default contentFill is the first single-class teaching. |
+| A5gz | PREPARE INPUT V77. Copy the v76 stack. Do not patch hashed v16/v17/v18 writer or hashed v76 scene-readback `13c210f1…2d27`. Teach the probe to reveal-then-measure hidden content FILL (same class as extract), then restore visibility. Do not write `layoutSizingHorizontal` onto the node. Do not teach FIXED. Keep v18 writer bytes (`9653ecd2…81ac` / `07a5124f…12de`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73 classification + V74 `role()` + V75 Polar predicates + V76 bind. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not invent overlap-zero. Do not teach clip in this prepare. | **Done** at `ea2ec61599478a990914c009b639c5d1078c7b36`. Antecedent index SHA-256 `bf120c82c5c0386bf42ff6d043083badbb019484d638632dd4b671795fccbe49`. |
+| A5ha | AUTHORIZE INPUT V77 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `ea2ec61599478a990914c009b639c5d1078c7b36`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `29dbdc6a…6429`; SPKI SHA-256 `8a5d96fb…24c7`. Do not patch hashed v16, v17, v18, or v76 bytes. | **Done** at `80f52fe3a26f8b8bd9eaaf9994d5e725b0ccb40c`. |
+| A5hb | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:262862`, not `111:257814`; v18 program `9653ecd2…81ac` / payload `07a5124f…12de` unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `cb27a7a6157530abd439cca9d90702651263586589bf7997f684dd761e082be3`). Reveal-then-measure **held**: `contentFillPassed` true both. Writer first-segment Label bind still held; Polar reflow/contentFill still held; Polar content-row still 0. Role 256/256. Accounting silent 0/0 both. Probe issued, then host accept refused `validateInputLiveV77ProbePayload` (`contract.ts:584`). Remaining: MUI clip 104/128 (overlay-label AABB) and overlap 12/128 (real trailing+label). Do **not** invent 9/30/0, a Polar content-row, overlap-zero, FIXED, or plugin `layoutSizingHorizontal`. Do **not** restart V77 attempt 2 as-is. Do **not** claim v1 complete. Cleanup accepted; page `111:262862` removed; mint cleaned. |
+| A5hc | Diagnose V77 remaining clip class from on-disk probe + extract before any V78. | **Measured.** See V77 remaining-class diagnosis below. Named overlay-label AABB false positive is the one remaining same-class probe question. Overlap stays a real mint defect — do not open a prepare that invents it away. |
+| A5hd | PREPARE INPUT V78. Copy the v77 stack. Do not patch hashed v16/v17/v18 writer or hashed v77 scene-readback `a8f383bc…3a85`. Teach one probe: do not score designed overlay-label overflow against the variant AABB as `visibleAreaLoss` (exclude overlay `input-field/label` and `input-field/required-indicator` when the parent label-row is `ABSOLUTE`). Keep overlap on the full `semantic` set. Keep v18 writer bytes (`9653ecd2…81ac` / `07a5124f…12de`). Restore/runtime/extract stay v16 frozen source hashes. Expected scene plans stay the v66 compile-carry set. Keep V73–V77 teachings. Do not move labels in the writer. Do not invent Polar 9/30/0. Do not invent a Polar content-row. Do not invent overlap-zero. Do not teach overlap in this prepare. | **Done** at `d17d9b450b51d650aed01140e5d63dc0d4a1fb77`. Antecedent index SHA-256 `379717e644412e987de4988f244b49b34c4ce95edd990f64be9546959adc9073`. |
+| A5he | AUTHORIZE INPUT V78 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `d17d9b450b51d650aed01140e5d63dc0d4a1fb77`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `26ab8244…1309`; SPKI SHA-256 `bdefb90d…288c`. Do not patch hashed v16, v17, v18, or v77 bytes. | **Done** at `3bcca6efb5f710089b70c505fdbfc1748f7bbcf5`. |
+| A5hf | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:267910`, not `111:262862`; v18 program `9653ecd2…81ac` / payload `07a5124f…12de` unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 24, `retriedForFill` 0). Extract issued (8436209 bytes, sha256 `9cf25fd26d34e80c3013312309fe06e691a60986204dc78ebd8980ea5d85adbd`). Overlay-label AABB exclude **held**: MUI clip 0 / Polar clip 0 (`visibleAreaLoss` max 0). Overlap **unchanged** 12/128 max 20 (same `mui/*/placeholder/*/trailing` except focus-visible). ContentFill true both. Writer first-segment Label bind still held; Polar reflow/contentFill still held; Polar content-row still 0. Role 256/256. Accounting silent 0/0 both. Probe issued, then host accept refused `validateInputLiveV78ProbePayload` (`contract.ts:585`). Remaining: overlap 12 only. Do **not** invent 9/30/0, a Polar content-row, overlap-zero, FIXED, or plugin `layoutSizingHorizontal`. Do **not** restart V77. Do **not** claim v1 complete. Cleanup accepted; page `111:267910` removed; mint cleaned. |
+| A5hg | Diagnose V78 remaining overlap class from on-disk V77 extract `cb27a7a6…2be3` / V78 extract `9cf25fd2…adbd` / V78 probe `f1813a81…2e2c` before any V79. Node only. | **Measured.** See V78 overlap-class diagnosis below. Trailing packs to content-row start because hidden FILL placeholder is dropped (`visible:false`). Probe hide forbidden. Inventing a pixel gap / `primaryAxisAlign: max` / opacity-0 as a guess forbidden. Occupancy teaching opened as V79. |
+| A5hh | PREPARE INPUT V79. Copy the v78 stack. Mint an unfrozen v19 writer that keeps hidden FILL placeholder/value occupancy (`visible` true, `opacity` 0) so trailing stays at the content-row end. Cite recipe CSS `::placeholder { opacity: 0 }` plus restore `visible=true` for extract FILL. Do not add a spacer, pixel width, or `primaryAxisAlign: MAX`. Do not change probe overlap predicates. Do not patch hashed v16/v17/v18 writer (`9653ecd2…81ac` / `07a5124f…12de`) or hashed v78 scene-readback. Keep V73–V78 probe/accounting teachings. Expected scene plans stay the v66 compile-carry set. Do not invent Polar 9/30/0, a Polar content-row, FIXED, plugin `layoutSizingHorizontal`, or a pixel gap. Do not probe-hide. Do not restart V78 attempt 2. | **Done** at `eed3b4f2601edca8596c030f59e87fe4e7bf1b46`. Antecedent index SHA-256 `8935b97745c03fd909bd5af63aa2f32d2475ad05c6b56f127eb35d906cad0f20`. |
+| A5hi | AUTHORIZE INPUT V79 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `eed3b4f2601edca8596c030f59e87fe4e7bf1b46`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `14a92ed6…c7e6`; SPKI SHA-256 `0de7fe7c…32f4`. Do not patch hashed v16, v17, v18, or v78 bytes. | **Done** at `50e4a88f0e6658e43d7dd82841d6a1a825896b79`. |
+| A5hj | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:272958`, not `111:267910`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `708028f2…49c9`). Occupancy **held on canvas**: 24 placeholders `visible:true` `opacity:0` FILL; the 12 V78 overlap-class keys have trailing **x=165** (not x=0). Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Host extract accept then refused recipe collapse at `input-field.ts:2272` (`$.…opacity`). Probe **not issued**. Overlap census **not measured** — do not invent 0. Cleanup accepted; page `111:272958` removed; mint cleaned. |
+| A5hk | PREPARE INPUT V80. Copy the v79 stack. Do not patch hashed v19 writer (`0ed357db…59e0` / `5d0f2323…1681`) or hashed v79 scene-readback. Measure: compile IR never emits TEXT `opacity` (`textNode()` omits it; only slot payloads have opacity). CSS `::placeholder { opacity: 0 }` is web output only. Host-normalize omit `opacity` on content/placeholder and content/value. Do not invent an opacity variable. Do not lift onto surfaces/labels. Do not revert v19 to `visible:false`. Keep V73–V79 probe/accounting/occupancy teachings. Expected scene plans stay the v66 compile-carry set. Do not invent Polar 9/30/0, a Polar content-row, FIXED, or a pixel gap. Do not restart V79 attempt 2. | **Done** at `55b813d176ef5a18fe9a4092cbfe4a417263d8e0`. Antecedent index SHA-256 `6a8d38cacac8f908a9c29ae1091169f33f7b1fd018a283acc27ecbb48a9a6b86`. |
+| A5hl | AUTHORIZE INPUT V80 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `55b813d176ef5a18fe9a4092cbfe4a417263d8e0`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `68270812…ce16`; SPKI SHA-256 `88a8b669…3ecf`. Do not patch hashed v16, v17, v18, v19, or v79 bytes. | **Done** at `f8dfb772f9db044c9b41dfaed1e9b287d60bce5d`. |
+| A5hm | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:275687`, not `111:272958`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `901acd4c…bb9a`). Occupancy **held on canvas**: 128 placeholders `visible:true` (24 `opacity:0` FILL); the 12 V78 overlap-class keys have trailing **x=165** (not x=0). Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Host omit content opacity **held** (scene IR 0 content opacity keys). Host extract accept then refused recipe collapse at `input-field.ts:2272` (`$.…visible`). Compile emits `visible:false` on 24 content/placeholder TEXT; scene omits `visible` because the canvas stays `visible:true`. Probe **not issued**. Overlap census **not measured** — do not invent 0. Cleanup accepted; page `111:275687` removed; mint cleaned. |
+| A5hn | PREPARE INPUT V81. Copy the v80 stack. Do not patch hashed v19 writer (`0ed357db…59e0` / `5d0f2323…1681`) or hashed v80 scene-readback. Compile-carry live `visible`: omit compile `visible:false` on the 24 floating+placeholder+not focus-visible+none\|trailing occupancy TEXT nodes (same class as V64 compile-carry `horizontal`). Host already reports default-true by omitting the key — do not invent `visible:false` onto host-normalize. Keep V80 opacity omit. Do not invent an opacity variable. Do not revert v19 to `visible:false`. Measured: frozen MUI expected plan had 24 `visible:false` facts; Polar had 0. This prepare rewrites only those 24 MUI facts to carried live `true` (uncompressed −24 bytes; no width/spread restamp). Polar gzip stays byte-identical to V80. Keep V73–V80 probe/accounting/occupancy/opacity teachings. Do not invent Polar 9/30/0, a Polar content-row, FIXED, or a pixel gap. Do not restart V80 attempt 2. | **Done** at `54bc7cf4cd7144fd53588a71502b32701e4a50c1`. Antecedent index SHA-256 `f281e8d76718f536520c8eef6a41ecee9965033b44ebebb872c4e5a1c80cf707`. |
+| A5ho | AUTHORIZE INPUT V81 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `54bc7cf4cd7144fd53588a71502b32701e4a50c1`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `f5744832…ecc2`; SPKI SHA-256 `c72c806e…2bde`. Do not patch hashed v16, v17, v18, v19, or v80 bytes. | **Done** at `041876a2b4a6a004e5d2ee248ed9e44d2abb14e5`. |
+| A5hp | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:278416`, not `111:275687`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `f9020355…1289`). Occupancy **held on canvas**: 128 placeholders `visible:true` (24 `opacity:0` FILL); the 12 V78 overlap-class keys have trailing **x=165** (not x=0). Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Compile-carry live `visible` **held** (compile and host omit content `visible`; compile `visible:false` is 0). Host omit content opacity **held**. Did **not** invent host `visible:false`. Host extract accept then refused independent root accounting: 24 MUI silent mismatches, all channel `opacity`, expected plan `1` vs live `0`. Polar accounting 0/0/0. Recipe collapse and probe **not issued**. Overlap census **not measured** — do not invent 0. Cleanup accepted; page `111:278416` removed; mint cleaned. |
+| A5hq | PREPARE INPUT V82. Copy the v81 stack. Do not patch hashed v19 writer (`0ed357db…59e0` / `5d0f2323…1681`) or hashed v81 scene-readback. Compile-carry live occupancy `opacity` 0: rewrite the 24 MUI occupancy-placeholder expected-plan opacity facts from default 1 to carried live 0 (same class as V64 `horizontal` and V81 `visible`). Do not demand plan 1 while extract is 0. Do not invent an opacity variable. Do not emit TEXT `opacity` onto compile IR (`textNode()` still omits it). Keep V80 host omit of compile-absent TEXT opacity on scene-readback IR. Polar gzip stays byte-identical to V81. Keep V73–V81 probe/accounting/occupancy/visible teachings. Do not invent Polar 9/30/0, a Polar content-row, FIXED, or a pixel gap. Do not restart V81 attempt 2. | **Done** at `ac760e1e4fd84ae126fc8aa44e29f305834d022e`. Antecedent index SHA-256 `67af60edcd0c30fed505978480415cd20a8efab89c6a9402efc5038ead867c0a`. |
+| A5hr | AUTHORIZE INPUT V82 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `ac760e1e4fd84ae126fc8aa44e29f305834d022e`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `ed4dbc4d…3731`; SPKI SHA-256 `e2da16a2…5425`. Do not patch hashed v16, v17, v18, v19, or v81 bytes. | **Done** at `0535571899681513e149031978851d4b6307ef68`. |
+| A5hs | Attempt 1 Scratch-only live after attestation and preflight. | **Failed closed.** Writer accepted (2317 nodes, new page `111:281145`, not `111:278416`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `c97ef448…e00e`). Occupancy **held on canvas**: 128 placeholders `visible:true` (24 `opacity:0` FILL); the 12 V78 overlap-class keys have trailing **x=165** (not x=0). Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Compile-carry live occupancy opacity 0 **held** on the frozen plan/observe pair (MUI expected-plan 24 opacity 0; accounting 0/0 both). Host omit content opacity **held**. Did **not** invent host `visible:false`. Did **not** invent an opacity variable. Host extract accept then refused MUI recipe-collapse fixed-point (`mui:fixed-point`): cycle comparison 24 silent + 24 mismatch; Polar fixed-point stable. Probe **not issued**. Overlap census **not measured** — do not invent 0. Cleanup accepted; page `111:281145` removed; mint cleaned. |
+| A5ht | PREPARE INPUT V83. Copy the v82 stack. Do not patch hashed v19 writer (`0ed357db…59e0` / `5d0f2323…1681`) or hashed v82 scene-readback (`cdff8862…8fa8`). When compile IR has no TEXT `opacity` key, collapse/recompile cycle compare must not invent default 1 (same class as V80 host omit). Do not emit TEXT `opacity` onto compile IR. Do not invent an opacity variable. Accounting still uses the frozen V82 plan (24 occupancy opacity 0). Polar gzip stays byte-identical to V82. Keep V73–V82 probe/accounting/occupancy/visible/opacity-carry teachings. Do not invent Polar 9/30/0, a Polar content-row, FIXED, or a pixel gap. Do not restart V82 attempt 2. | **Done** at `aeae9942afd29442da341d304466d94a973de0b4`. Antecedent index SHA-256 `07759dd6ac3098caafb564254a2765bd6739389140d245a4d6a2ff3f98c91c4a`. |
+| A5hu | AUTHORIZE INPUT V83 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `aeae9942afd29442da341d304466d94a973de0b4`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `259b21bc…c45d`; SPKI SHA-256 `6e8412ab…b2cd`. Do not patch hashed v16, v17, v18, v19, or v82 bytes. | **Done** at `b8a1da26b12d84b26b40c6bd317305e58931064f`. |
+| A5hv | Attempt 1 Scratch-only live after attestation and preflight. New txn `private/input-live-v83-transaction`. Scratch `byMp6lt0Ij9b2QbkDGFwBh` only. Never reuse page `111:281145` or the v82 txn. If collapse + accounting pass, probe must run. | **Failed closed.** Writer accepted (2317 nodes, new page `111:283874`, not `111:281145`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged; hashed v82 scene-readback unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `5be43bb6…a2dc`). Occupancy **held on canvas**: 128 placeholders `visible:true` (24 `opacity:0` FILL, 0 FIXED); the 12 V78 overlap-class keys have trailing **x=165** (not x=0). Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Compile-carry live occupancy opacity 0 **held** (MUI expected-plan 24 opacity 0; accounting 0/0 both). Collapse omit of invented default-1 content TEXT opacity **held**: compile IR still has 0 TEXT opacity keys; recompile/observe cycle compare no longer invents 1. MUI compiled SHA unchanged from the V82 refused cycle (`cf660e07…8740`). Recipe-collapse fixed-point **stable** both (cycle silent 0 mismatch 0). Probe **issued**. All required source booleans true both, including `textPropertiesRestored` and Polar reflow. Role/clip fail 0. Probe then **refused overlap**: 24 MUI placeholder cells at 22.5 (12 V78 trailing + 12 matching `none`). Polar overlapFail 0. Do **not** invent overlap-zero. Probe was not otherwise green, so V84 cleanup-on-failure-only was not opened. Cleanup accepted; page `111:283874` removed; mint cleaned. |
+| A5hw | Diagnose V83 remaining overlap class from on-disk V83 extract `5be43bb6…a2dc` / V83 probe `648a9e18…5ead` before any V84. Node only. | **Measured.** See V83 overlap-class diagnosis below. Pair is opacity-0 occupancy placeholder ∩ in-field label (22.5). Painted trailing at x=165 does not cover glyphs. Probe hide of a real painted hit is not named. Occupancy-spacer overlap teaching opened as V84. |
+| A5hx | PREPARE INPUT V84. Copy the v83 stack. Do not patch hashed v19 writer (`0ed357db…59e0` / `5d0f2323…1681`) or hashed v83 scene-readback (`5b6e192f…99ef`). One **probe** teaching: do not score `opacity === 0` occupancy nodes (content placeholder/value layout spacers) as overlap partners. Polar stay 0. Do not revert v19. Do not nudge nodes. Do not invent overlap-zero. Keep V73–V83. Do not restart V83 attempt 2. | **Done** at `80d600cc34990e301d9d039597f275c92bff39e2`. Antecedent index SHA-256 `6e05a1e5b6475654838f951282b4e6ebb9241352dd8b633dd384072fa3c3fd2f`. |
+| A5hy | AUTHORIZE INPUT V84 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `80d600cc34990e301d9d039597f275c92bff39e2`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `77ee88f1…adee`; SPKI SHA-256 `ddac8401…56b0`. Do not patch hashed v16, v17, v18, v19, or v83 bytes. | **Done** at `8fe018963e6bfd541b1be509f67fcdefc55846e4`. |
+| A5hz | Attempt 1 Scratch-only live after attestation and preflight. New txn `private/input-live-v84-transaction`. Scratch `byMp6lt0Ij9b2QbkDGFwBh` only. Never reuse page `111:283874` or the v83 txn. If probe is otherwise green (overlap 0 because spacers excluded, trailing still at end), cleanup-on-failure-only may be prepared so a mint can stay. | **Closed after required cleanup.** Writer accepted (2317 nodes, new page `112:288922`, not `111:283874`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged; hashed v83 scene-readback unchanged). Cleanup persisted; restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `2171f603…b4e1`). Occupancy **held on canvas**: 128 placeholders `visible:true` (24 `opacity:0` FILL, 0 FIXED); the 12 V78 overlap-class keys have trailing **x=165** (not x=0). Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Accounting 0/0 both. Collapse omit **held**; fixed-point **stable** both. Probe **issued and accepted**. All required source booleans true both, including `textPropertiesRestored` and Polar reflow. Role/clip fail 0. Probe overlap **0/0** after excluding opacity-0 occupancy spacers. Polar overlapFail 0. 128 captures `technicalPassed` true. Cleanup accepted; page `112:288922` removed; mint cleaned; mint did **not** stay. Probe was otherwise green, so V85 cleanup-on-failure-only is named. Do **not** invent overlap-zero — 0 was measured. |
+| A5ia | PREPARE INPUT V85. Copy the v84 stack. Do not patch hashed v19 writer (`0ed357db…59e0` / `5d0f2323…1681`) or hashed v84 scene-readback (`b784e275…6c32`). One teaching: **cleanup-on-failure-only**. Do not execute page-deleting cleanup when probe (and captures, if still issued) are green. Still persist the recovery cleanup request after writer accept (seq 2). Still run cleanup on failure/abort. Change only the success path. Keep V73–V84. Do not restart V84 attempt 2. Do not reuse page `112:288922` or `private/input-live-v84-transaction`. | **Done** at `4084b2cfb71784413bfae8dd8604810b972bf5bf`. Antecedent index SHA-256 `b3b7df6d5c27abb97ba3f46e9554ad1442a25522cebaa10a7890243b2dd79bad`. |
+| A5ib | AUTHORIZE INPUT V85 as a **separate** later commit. New prepare-era Ed25519 signer. Antecedent `4084b2cfb71784413bfae8dd8604810b972bf5bf`. Auth lifecycle stays out of the hash set. Artifact SHA-256 `06c007a1…3863`; SPKI SHA-256 `80b92e1b…17f3`. Do not patch hashed v16, v17, v18, v19, or v84 bytes. | **Done** at `3056956b20deae7993bcc8addd8739edddf94934`. |
+| A5ic | Attempt 1 Scratch-only live after attestation and preflight. New txn `private/input-live-v85-transaction`. Scratch `byMp6lt0Ij9b2QbkDGFwBh` only. Never reuse page `112:288922` or the v84 txn. If probe is green, cleanup must not execute; mint must stay. | **Mint stayed.** Writer accepted (2317 nodes, new page `115:295378`, not `112:288922`; runIdentity `4a074b24-e8503dd5-input-v5`; v19 program `0ed357db…59e0` / payload `5d0f2323…1681`; hashed v18 unchanged; hashed v84 scene-readback unchanged). Cleanup persisted after writer and was **not** executed. Restore accepted (`restoredCount` 256, `hiddenRevealedForFill` 0, `fixedBefore` 0). Extract issued (8436161 bytes, sha256 `92339876…3ab5`). Occupancy **held on canvas**: 128 placeholders `visible:true` (24 `opacity:0` FILL, 0 FIXED); the 12 V78 overlap-class keys have trailing **x=165**. Sample `mui/medium/default/placeholder/false/trailing` trailingX 165 / content-row 204. Accounting 0/0 both. Collapse omit **held**; fixed-point **stable** both. Probe **issued and accepted**. All required source booleans true both, including `textPropertiesRestored`, Polar reflow, and `contentFillPassed`. Role/clip fail 0. Probe overlap **0/0**. Polar overlapFail 0. 128 captures `technicalPassed` true. Residuals geometry 16 / perceptual 0 / pixelInk 27 are comparison residuals, not gate refuses. Host finished `main-complete`; `cleanupExecuted` false; `figmaWrites` 132. Read-only Figma check: page `115:295378` still present; `remainingOwnedNodes` 1. **First review-worthy Input canvas.** Open Scratch at https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh and the page `Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5`. Do **not** claim v1 complete (Button signoff + inversion still pending). Do **not** invent overlap-zero — 0 was measured. |
+| A5id | Record attributable human signoff on the restored+gridded V85 Input page. Do not restamp hashed V85 RECORD (`c35bae60`) or expected-plans. Do not invent a Button human grade. Do not claim v1 complete. | **Passed 2026-08-28 ~15:37 UTC-5.** TJ Pitre reviewed page `115:295378` (sets `115:296805`, `115:298106`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh`. Verbatim + implications: `recipe/evidence/input-field-live-v85-human-signoff.json`. RECORD-time `humanSignoff: pending` in `input-field-live-pivot-v85-status.json` is unchanged. Arrange accident remains a recovered incident; checkpoint `2392869719628549246` (`V85 Input grids OK`) is the safe restore. Never restore `2392877528965054592`. Do not rearrange Input. |
+
+### V74 probe-refuse diagnosis (measured 2026-08-28)
+
+| Question | Measured |
+| --- | --- |
+| First-segment role teaching | **Held.** Probe `role()` splits ` :: ` first. All 256 cells `rolesExact` and `stateSemanticsExact` true. Both sources `stateSemanticsPassed` true. |
+| `textPropertiesRestored` | False **both** sources. Label component-property write on the default-variant instance did not change TEXT `role===input-field/label` to `Input v7 deterministic probe`. Not the restore 256/24/0 FILL measure. Not cured by first-segment role. |
+| Polar `reflowPassed` / `contentFillPassed` | Same resize+64 predicate looking for `surface` + `input-field/content-row`. Extract Polar content-row **0**; Polar content texts FILL 128 / FIXED 0. Not FIXED leftover. MUI reflow already true (content-row 128). |
+| MUI `visibleAreaLoss` / overlap | 104/128 cells `visibleAreaLoss>0.05` (max 0.529; 52 small + 52 medium). 12/128 `overlapPixels>2` (max 20), all `mui/*/placeholder/*/trailing`. Polar clip 0 and overlap 0. V73 reported max 0 because `semantic` was empty when `role()` dropped every TEXT. |
+| Why the host refused | Validator conjunction: every source boolean true **and** every cell clip ≤0.05 / overlap ≤2. Role cells now pass; the three classes above still fail. |
+| One teaching? | **No.** Teaching Polar content-row, Label property restore, or MUI clip alone cannot satisfy the conjunction. A5gq chose class B (Polar probe predicates). V75 does not teach A or C. |
+| Mint | Page `111:247718` removed; `remainingOwnedNodes` 0. Protocol `requestOrder` includes cleanup after captures, so a green probe would also have deleted the mint. Not review-worthy. |
+
+### V74 remaining-class diagnosis (measured 2026-08-28, required before V75)
+
+Probe payload sha256 `7d940189…656f4` (69355 B). Extract sha256 `03f9f0d6…e694` (8436209 B). Replay of extract relative boxes vs probe clip/overlap: **0 mismatches** both libraries.
+
+| Class | Lying layer | Measured | Teaching? |
+| --- | --- | --- | --- |
+| **A. `textPropertiesRestored` false both** | **Writer bind** (frozen v16/v17), not the probe predicate and not restore 256/24/0. | Probe writes component property `Label` to `Input v7 deterministic probe`, then requires TEXT `role===input-field/label` characters to match. Label TEXT exists 128/128 both (`Amount` / `Store name`), visible, first-segment role now matches (V74 held). Signed writer binds with stale `name.includes("=")` on the **full** name; all 576 TEXT names carry `font-provenance=` so bind matches **0** texts. First-segment would match 384. Extract omits `componentPropertyReferences`. Same reason both libraries. **New real fail**, not a stale expected. Restore already splits ` :: ` for FILL only; it does not bind Label. | Later measured restore bind (typical V76). Not this prepare. Do not invent a new writer unless restore cannot bind. |
+| **B. Polar `reflowPassed` / `contentFillPassed` false** | **Probe predicate** (MUI-shaped). | V74 quoted: hard-required `content-row`. Polar architecture is recipe-legal **stacked**; content-row **0** since v16. Polar content texts FILL 128 / FIXED 0. **V75 live held:** Polar `reflowPassed`/`contentFillPassed` true; Polar content-row still 0. The V75 split newly made **MUI `contentFillPassed` false** (extract MUI content texts FILL 128; probe samples defaultVariant; MUI default placeholder is hidden FILL). | **Held at V75 live.** Do **not** invent a Polar content-row. MUI contentFill after the split is a new measured class — diagnose before teaching. |
+| **C. MUI clip 104 + overlap 12** | **Mixed.** Clip is probe-vs-designed overlay. Overlap is real minted auto-layout. | Clip 104/128: **all** `input-field/label` overflowing the component AABB. Label y=23 vs component y=32, h=17 → 9/17=**0.5294117647058824**. 52 small + 52 medium. The 24 clip-pass cells are exactly placeholder × (none\|trailing) × (default\|disabled\|error) — in-field label, not focus-visible. Overlap 12/128 max 20, all `mui/*/placeholder/*/trailing` except focus-visible: pair is **trailing slot + label**, not placeholder (placeholder `visible:false`). Trailing packs to content-row start because the hidden placeholder leaves it the only in-flow child. Polar clip 0, overlap 0. Probe AABB matches extract. Writer stamped `clipsContent=false` + absolute label-row (recipe floating). Do not teach FIXED. Do not invent inset/spacer. Do not hide nodes to zero overlap. | Clip-only V77 only if treated as overlay-label probe. Overlap is a real mint defect we cannot fix without inventing; **RECORD and stop that subclass**. |
+
+One teaching per PREPARE. V75 is class B only.
+
+### V73 probe-refuse diagnosis (measured 2026-08-28)
+
+| Question | Measured |
+| --- | --- |
+| `rolesExact` vs probe | Requires exactly one of label, surface, content placeholder/value, and message error/helper, plus required/leading/trailing counts. Probe `role()` checks `name.includes("=")` on the **full** name, then splits ` :: `. TEXT names are `input-field/label :: font-provenance=%7B…` with a literal `=`. Old name fallback: 0/256. Extract first-segment replay: 256/256. |
+| `stateSemanticsExact` | Variant-state message exclusivity (`error` ↔ one `message/error` and zero helper; else one helper and zero error). Same `=` drop. Extract first-segment: 256/256. Not visibility/text. |
+| `textPropertiesRestored` | Probe Label property write/read on `input-field/label` TEXT. Not the restore 256/24/0 FILL measure. Fails because label role is dropped. |
+| Polar `reflowPassed` / `contentFillPassed` | Same predicate: resize +64 and grow `surface` + `content-row`. Polar extract has 0 `content-row`; surface and content texts are FILL 128. Not FIXED leftover; not a stale expected size. Separate class from the role teaching. |
+| Why all 256 | One systemic probe-normalize bug (font-provenance `=` vs first-segment), not 256 product failures. Page `111:242670`, 256 cells, 2 sources. Not empty/wrong subtree; cleanup ran after probe. |
+| Earlier lives pass probe? | No. v8–v16 never issued probe. V73 is the first live that reached probe (accounting silent-zero). No known-good probe fixture to hash-diff. |
+
+### V72 Polar silent-192 diagnosis (measured 2026-08-28)
+
+| Question | Measured |
+| --- | --- |
+| Source of expected 8 / 25.78125 | `recipe/fixtures/library-input-fields.ts` `polarisLeadingPayload` / `polarisTrailingPayload` (`textAdornment` intrinsicSize). Polar `TextField.js` citation names prefix/suffix as Text bodyMd, not those pixels. Frozen v66 expected-scene-plan-polaris compile-carries 64×8 and 64×25.78125. `tokens.sizes.*.trailingAdornmentExtent` is also 25.78125 (slot extent; Polar trailing slot frames kept that). |
+| Source of expected spread 1 / 3 | Same fixture `state()` when `ring` is set. Polar `focusVisible` has `ring: "#005bd3ff"`. Polar CSS focus shadows are rem-based, not 1px/3px. Expected plan Polar: 32× spread 1 + 32× spread 3. |
+| Named required facts? | **No — carried / not required-equals.** Schema fields exist; archetype `input/width-rule` does not name these pixels. Polar source does not name 8 / 25.78125 / 1 / 3. Named required facts remain `$` / `USD` / bodyMd / fills / ring color `#005bd3` / presence of effects. |
+| V72 extract `9d029458…` / 8436209 | Polar leading 64 `$` → payload/text **9**; Polar trailing 64 `USD` → payload/text **30**; trailing slot frame **25.78125**; focus-visible 32 variants → two drop-shadows **spread 0** (key present). All Polar sizes / adornment combinations. |
+| Why MUI is 0 | MUI has 128 `instancePayload` facts; extract 9/31 matches expected 9/31. MUI expected effect facts 0 (no ring); extract surfaces `effects=[]`. |
+| Library-specific? | Polar-only value drift. Forbidden to teach `if (polaris)`. |
+| Writer assignment? | Frozen v16 `a01d95b3…d6b3` / `b091cf61…0597` and v17 `05a06546…c2e2` / `f5e1294a…7ce9` held. v17 payload asked Polar 8 / 25.78125 / spread 1 and 3. Figma minted 9 / 30 / spread 0 on the scored nodes. |
+
+**V73 opened as classification.** Unnamed-source width and spread stay observed/carried. Do not invent 9/30/0 as compile truth. Do not patch hashed v16/v17.
+
+### B · Button closeout
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| B1 | Keep the technical mint, usability, restoration, and 12/12 adjudication bytes. Do not restamp them. | Existing Button technical measurements remain byte-stable. |
+| B2 | Fresh scene-derived inversion/accounting from the live Button page, not stamped/self-selected IR. Do not collide with or rewrite that page except as an explicit later proof if required. | **Measured 2026-08-28.** First run: Altitude 8706 / 5795 / **2911 silent**; Fluent 8778 / 5891 / **2887 silent**. Then role, unique same-key token sanitize, and name first-segment. After those plus variant-axis, unique componentRef, uniform stroke weight, and extras drop: Altitude 8706 / 8557 / **149 silent** / extra 1; Fluent 8778 / 8629 / **149 silent** / extra 1. Fixed point still not stable (`button/set` on live set name `Button / button@1 proof`). Page `85:6781` unread-write; Input page `115:295378` untouched. Not silent-zero. Stopped on fonts and invented set chrome. |
+| B2a | One teaching: observe `role()` / name first-segment so `Variant=` and ` :: ` do not drop `button/variant/…` (Input V74 class). 0-write live re-observe. | **Held.** Live names are still `Variant=…` with no `button/variant/` first segment. Role is recovered from the live `Variant=`/`Size=`/`State=`/`Icons=` property string (same four axes). Silent 2911→2767 / 2887→2743 (−144/−144 missing variant roles). Set role `Button / button@1 proof` vs `button/set` remains. |
+| B2b | One teaching: token name canonicalization if order/sanitization-only (same keys). Do not invent identities. | **Held.** Live `token/{type}/{sanitized}` names are the v4 writer slug of the compile identity (dots→hyphens), not hex `id-…`. Unique same-key map only; collisions left live. Silent 2767→**751** / 2743→**751** (−2016/−1992). Expected-plans not restamped. |
+| B2c | One teaching: name compare takes the first ` :: ` segment (Input V74 / font-provenance class). 0-write live re-observe. Do not invent the set name. | **Held.** Compile `button/label :: Label` (and slot/loading siblings) vs live first-segment `button/label`: 300/301 first-segment-equal. Set name `Button / button@1 proof` vs `button/set` is not first-segment-equal; live name carried. Silent 751→**451** both. Expected-plans not restamped. 0-write re-observe byte-identical; Input page `115:295378` still current. |
+| B2d | One teaching: variant-axis order (Input V72 Size-axis class). Order only when the value set matches compile. 0-write live re-observe. | **Held.** Live Size `[medium,small,large]` and Variant `[secondary,primary]` share compile value sets. Order canonicalized; no invented values. Silent 451→**449** both. Expected-plans not restamped. 0-write census; Input page `115:295378` still current. |
+| B2e | One teaching: componentRef last-segment sanitize if unique same-key. Do not invent refs. 0-write live re-observe. | **Held.** Live `__button/helper/leading / icon@1` and `__button/helper/loading / spinner@1` last-segment to compile `icon@1` / `spinner@1`. Unique reverse only. Silent 449→**293** both (−156/−156). Expected-plans not restamped. 0-write census; Input page `115:295378` still current. |
+| B2f | One teaching: surface `strokes.0.weight` from uniform per-side FLOAT only (Input v18/v19 class). Do not invent a weight. 0-write live re-observe. | **Held.** All 144+144 surface nodes bind four per-side stroke weights to the same FLOAT (`imported.button.root.border-top-width.unset` / `imported.shared.size-1`) and bind no `strokeWeight`. Surfaced alias matches compile. Silent 293→**149** both. Binding mismatch 0. Extras rose (291→435 / 267→411) because unpaired `fills.0` leftovers are now extra, not mismatched. Expected-plans not restamped. |
+| B2g | One teaching: extras drop compile-omitted fields (Input V24 class). Duplicate mapped `fills.N` / `strokes.N` host aliases; set fills and cornerRadius that compile omits. Do not invent hug/padding. 0-write live re-observe. | **Held.** Duplicate same-variable `fills.0`/`strokes.0` aliases dropped. Set fills and cornerRadius omitted. Silent stays **149** both. Extras 435→**1** / 411→**1** (remaining extra is set `width.value`; compile is hug — not invented). Stopped: fonts 144 + set name/role/layout.mode/padding/width.mode. |
+| B2h | One teaching: font substrate. Compile names the SOURCE font stack; Figma reports the face it RESOLVED. Canonicalise the observed face onto the compile stack ONLY on stack membership with normalised style spelling. Do not invent a font; do not restamp expected plans. 0-write re-measure. | **Held, measured 2026-08-29.** altitude compile `"IBM Plex Sans", sans-serif` / `Semi Bold` vs live `IBM Plex Sans` / `SemiBold` — first choice, exact. fluent compile `"Segoe UI", …, Roboto, …` / `Semi Bold` vs live `Roboto` / `SemiBold` — a **named fallback at chain index 5**, recorded as a fallback rather than equated. A resolved family absent from the stack is left live. Silent **149 → 5** on both roots (Altitude 8706/8701/5, Fluent 8778/8773/5); extras stay 1. `figmaWrites: 0`; page `85:6781` unread-write. |
+| B2i | Name what is left. | **Measured.** The remaining 5 silent + 1 extra on each root are ONE writer set-naming defect: the live set is named `Button / button@1 proof` where compile carries `button/set :: Button / button@1 proof`, and `root#name`, `role`, `layout.mode`, `layout.padding`, `width.mode` and the extra `width.value` all descend from it (`fixedPointError: button@1: missing required role button/set`). **The current writer is already correct.** `recipe/interpret.ts:959-962` emits `"button/set :: " + source.labels.root`, and both sources' expected plans want exactly `button/set :: Button / button@1 proof` — verified 2026-08-29. Page `85:6781` was minted by the older v4 writer, before that line. So closing these six facts needs **no code change at all**: it needs a **fresh mint** of `85:6781`, which is a decision under B1/B2, not a teaching. (The same class cost Table a live cycle at v26, where the writer did still carry it.) |
+| B2j | One teaching: v4 role-only name recovery (Table v24 compile-carry label / v26 writer set-name class). The observed name canonicalises onto the compile name ONLY when the live name equals the compile role exactly, or (set only) equals the label segment of the compile name exactly. Names now compare in FULL on both sides, superseding the B2c first-segment compare. 0-write re-measure; TJ authorization 2026-08-30 lifted the B2i "parked" disposition. | **Held, measured 2026-08-30.** Live `button/label` → compile `button/label :: Label` (300 nodes/root, incl. slots/loading); live set `Button / button@1 proof` → compile `button/set :: Button / button@1 proof`. `root#name` + `root#role` close. Silent **5 → 3** both roots (Altitude 8706/8703/3, Fluent 8778/8775/3); extra stays 1. Fixed point advances past the role refusal to binding ORDER (`$.children[0].bindings[0].field` — observe is Figma-alphabetical, compile is semantic). **B2i corrected**: a fresh mint would NOT have closed the remaining chrome — `interpret.ts` still mints `HORIZONTAL`/32/FIXED proof-sheet chrome; the leftover is the Input V64–V66 set-layout carry family, closable observe-side. |
+| B2k | One teaching: set layout.mode carry (Input V64 class). The set is the proof sheet — neither contract names its layout; compile plans `vertical`, every writer era mints `HORIZONTAL`. Observed HORIZONTAL canonicalises to compile vertical ONLY on the root set, only between those two measured vocabularies. 0-write re-measure. | **Held, measured 2026-08-30.** `root#layout.mode` closes. Silent **3 → 2** both roots (Altitude 8706/8704/2, Fluent 8778/8776/2); extra stays 1. Fixed point unchanged at binding order. |
+| B2l | One teaching: set layout.padding carry (Input V65 class). Compile plans padding 0 on the proof sheet; every writer era mints uniform 32. Observed uniform 32 canonicalises to compile uniform 0 ONLY on the root set. 0-write re-measure. | **Held, measured 2026-08-30.** `root#layout.padding` closes. Silent **2 → 1** both roots (Altitude 8706/8705/1, Fluent 8778/8777/1); extra stays 1. Non-uniform / non-32 padding stays live (guard tested). |
+| B2m | One teaching: set width.mode carry + width.value extras drop (Input V66 class). Compile plans a hug proof sheet; the v4 writer left the set FIXED at its arrangement width (19192 / 17648 — a measurement of the sheet, not a source fact) and the current `interpret.ts` still mints `primaryAxisSizingMode = "FIXED"`. Observed FIXED canonicalises to compile hug ONLY on the root set; the `width.value` extra retires with it (a hug set emits no width fact). No px invented. 0-write re-measure. | **Held, measured 2026-08-30.** `root#width.mode` and the `width.value` extra close. **Accounting CLOSED on both roots: Altitude 8706/8706/0 silent/0 missing/0 extra; Fluent 8778/8778/0/0/0** — derived, not assigned. Validators restructured from "must not be zero" pins to consistency gates (silent = expectedFacts − matched; `ok` must equal its measured parts; overall false + signoff pending unchanged). Remaining gap is fixed-point only: binding ORDER (observe Figma-alphabetical vs compile semantic — Input `taughtSurfaceBindingCompileOrder` / Calendar V36/V42 class). |
+| B2n | One teaching: binding compile-order carry. The observe program sorts `boundVariables` by Figma field name; compile carries semantic order; the binding SETS were already fact-equal (accounting matched them all). Order-only — bindings reorder onto compile order ONLY when the mapped (field, variable, type) multiset equals the compile multiset for the same ownership key. Input `taughtSurfaceBindingCompileOrder`/content/label classes; Calendar V35/V36/V42–43. 0-write re-measure. | **Held, measured 2026-08-30.** Accounting unchanged (still 0/0/0 both roots — order is invisible to it). Fixed point advances from `$.children[0].bindings[0].field` to `$.children[1].children[0].bindings` — the representation-empties family (compile carries `bindings: []` explicitly on instance slots; the scene-derived IR omits the empty key). |
+| B2o | One teaching: live-empty chrome omit. Live instance slots report `fills: []` and the live set reports `strokes: []` / `effects: []` where compile omits the key — Figma reporting absence, not a drawn fact. Empty-only and type-gated (a non-empty live paint stays visible). Input `omitSetFills`/`omitSetEffects`; Calendar V44–V47 empty-omit family. 0-write re-measure. | **Held, measured 2026-08-30.** Accounting unchanged (0/0/0 both roots — empty arrays emit no facts). Fixed point still refuses at `$.children[1].children[0].bindings` — the compile-empty `bindings: []` representation on instance slots (B2p), which sorts before fills in the diff walk. |
+| B2p | One teaching: instance compile-empty `bindings: []` representation. Compile carries `bindings: []` explicitly on instance slots; the scene-derived IR omits the empty key; the fixed-point diff was refusing the spelling, not a fact. The scene-derived envelope canonicalises onto compile's spelling before collapse (hash recomputed over the same facts). Representation-empties family, opposite direction from B2o. 0-write re-measure. | **Held, measured 2026-08-30.** Plain collapse refuses the omitted spelling; the scene-derived collapse round-trips to the byte-identical compile IR (tested). Fixed point advances to its LAST refusal: `$.variantAxes[0].name` — the axis LIST is Figma-alphabetical (Icons/Size/State/Variant) vs compile `Variant/Size/State/Icons` (Input V72 order class, B2q). |
+| B2q | One teaching: variant-axis LIST order (Input V72 class, applied to the axis list; values inside each axis were canonicalised at B2e). Figma returns `variantGroupProperties` keys alphabetically; compile carries `Variant/Size/State/Icons`. Key order reorders onto compile ONLY when the axis-name sets are equal. 0-write re-measure. | **Held, measured 2026-08-30 — THE INVERSION IS CLOSED.** Both roots: Altitude 8706/8706 and Fluent 8778/8778 matched, **0 silent / 0 missing / 0 extra / 0 mismatched**, and the collapse↔compile **fixed point is two-cycle byte-stable**. Derived, not assigned; historical readback stays refused as observe; `figmaWrites: 0` across the whole B-series; page `85:6781` and its technical mint untouched; expected plans and observes byte-identical since committed. Per-class ledger of the 149+1: 144 fonts (B2h), 2 name/role (B2j), 1 layout.mode (B2k), 1 layout.padding (B2l), 1 width.mode + the 1 extra width.value (B2m); fixed-point-only classes: bind order (B2n), representation empties (B2o/B2p), axis-list order (B2q). Every teaching same-class with a measured Input/Table/Calendar precedent; nothing invented, nothing restamped. |
+| B3 | Attributable human signoff on Button. | **PASSED (full pass) 2026-08-30 ~15:56 UTC-5** on the B3a v5 remint page `183:69150` (sets `183:69776` Altitude, `183:70424` Fluent) — TJ's first B3 round flagged the Altitude focus states, the three-way diagnosis named the capture-transition defect, B3a carried the token, and the v5 remint plus inversion v2 (0/0/0/0 both roots) earned the pass. Verbatim quote and implications: `recipe/evidence/button-live-v5-human-signoff.json`. RECORD `6d58f4c2b` is not restamped; the archetype-level `overallSuccess` flips only in the v1-completion record. |
+
+### C · Combobox
+
+Offline two-library proof already exists at `41e34588` (`@mui/material@9.2.0#Autocomplete`, `antd@5.29.3#Select`; 24 paired cells; 72 components / 242 instances). `npm run recipe:combobox:check` is the offline gate. Input V85, Combobox v41, and Table v32 live human grades passed. Calendar is the next hill. Inherit Input host-normalize. Do not invent a Calendar human grade.
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| C1 | Matched source/legacy benchmark over the frozen 24-cell matrix if still required by this document's comparison contract. Keep the legacy 4/4 over six variants as weak context only. | Source references rendered; legacy comparator re-derived on the same matrix; recipe and legacy reported together. |
+| C1a | Combobox Figma writer inheriting Input host-normalize methods. Combobox identity only. Do not reuse Input `ds.contracts.input.recipe.v5` / `4a074b24-e8503dd5-input-v5`. Do not write page `115:295378`. | **Offline hermetic.** `recipe/combobox-figma-writer.ts` plans and mock-mints 2×(64+8)=144 variants. First-segment bind, hidden-FILL occupancy method, overlay absolute, compile-named set layout, no invented letterSpacing/textCase/textDecoration. `npm run recipe:combobox:check` includes the writer tests. No live mint. |
+| C2 | Scratch-only live mint on the same recipe-IR + receipts bar, two real libraries. Separate authorize lineage; no Input page collision. | Writer exists; live PREPARE/AUTHORIZE/RECORD is **not** opened. Next: inherit Input V85 host-normalize stack on a new page. |
+| C3 | Independent human grade. | **Passed 2026-08-29 ~09:17 UTC-5.** TJ Pitre reviewed page `163:35981` (sets `163:36845`, `163:36076`, `163:37709`, `163:36940`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh`. Verbatim + implications: `recipe/evidence/combobox-live-v41-human-signoff.json`. RECORD-time `humanSignoff: pending` in `combobox-live-pivot-v41-status.json` / RECORD `f330a082` is unchanged. Combobox `overallSuccess` stays **false**. Product v1 incomplete. Do not invent a Calendar or Button human grade. |
+
+### D · Data Table and Calendar
+
+Data Table has an offline recipe path (`table@1`) with two reviewed
+sources (first-party `ds.table` and `@mui/material@9.2.0#Table`). Calendar
+has an offline recipe path (`calendar@1`, one reviewed source).
+Acquisition stays human-authored or
+human-reviewed adapters, not inferred rectangles. Table live v32 attempt 1
+**stayed** on page `173:48924`; Table live human grade **passed**
+2026-08-29 (`recipe/evidence/table-live-v32-human-signoff.json`). RECORD
+`8fab2dff6` `humanSignoff` stays pending. Table live v2 attempt 1
+failed closed at writer
+(`TABLE-COMPONENT-PROPERTY-REFERENCES-UNRECOGNIZED-KEY:Label#165:24507`);
+the partial page `165:40645` was cleaned. Table live v3 attempt 1 failed
+closed at writer (`TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER`);
+the partial page `165:40704` was cleaned. Table live v4 attempt 1 failed
+closed at writer (`TABLE-MIN-WIDTH-ZERO`); the partial page `165:40763`
+was cleaned. Table live v5 attempt 1 failed closed at extract
+(`SCENE-OWNERSHIP-KEY-ABSENT`); the page `165:40914` was cleaned. Table
+live v6 attempt 1 failed closed at extract (`REQUIRED-BINDING-ABSENT`);
+the page `165:41173` was cleaned. The climb continued one teaching per PREPARE
+through v24; every attempt failed closed and every mint was cleaned. As of v24
+the remaining extract-side tail is **measured offline** (D2a) rather than
+discovered one live cycle at a time. Table live v32 later stayed;
+human grade passed 2026-08-29. See D2b. Calendar live v50 stayed;
+human grade passed 2026-08-30. See D4b.
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| D1 | Explicit Data Table recipe + reviewed adapters for two unrelated real libraries. Offline cross-library proof first: row/column templates, declared column axis, required-facts / door / lowering / grammar coverage. | **Offline recipe authored 2026-08-29.** `table@1` + adapters + writer `ds.contracts.table.recipe.v1`. `npm run recipe:table:check` green (2 densities × 2 row states; 10 components / 22 instances; hermetic mock-mint 20 variants). Door/lowering/grammar corpus coverage and live are not claimed. |
+| D2 | Scratch-only Data Table live, same receipts bar. | **Table live v24 attempt 1 failed closed 2026-08-29.** Writer accepted; restore 8 held; extract walk cleared; the v24 row-set compile-carry label teaching cleared (host raw `table/row-set :: Table` now normalizes to compile-carried `Table row`, closing the v23 refusal); collapse then refused `unsupported structural edit at $.children[2].children[0].children[0].label`. Signed cleanup removed `172:46324`; Input `115:295378`, Combobox `163:35981`, and Button `85:6781` stayed. Do not restart v24 attempt 2 as-is. Not live. **The remaining extract-side tail is now measured, not unknown** — see D2a. |
+| D2a | Offline tail census so the remaining climb depth is measured rather than discovered one live cycle at a time. | **Landed 2026-08-29** (`9a5a1dd75`, prediction `ee3afa077`). `collapseTableRecipe` refuses on the FIRST divergence (`firstDifference`), so each live cycle could only ever reveal one `(role, property)` gap. That comparator runs Node-side over a persisted response, and every attempt already persists its raw extract, so the tail is measurable offline with **zero Figma writes**. `recipe/table-tail-census.ts` replays `private/table-live-vNN-transaction/004-extract.raw.json` through the current host-normalize and collects every difference. **Validated:** reverting only the v24 teaching makes the census reproduce the exact v23 live refusal `$.children[1].label`; restoring it closes that class. It then predicted the v24 live refusal path **before** the run and the prediction **held exactly**. Remaining first-party extract-side tail: **23 differences in 6 classes** — 4× `clipsContent`, 4× `cornerRadius`, 4× `effects`, 4× `strokes.dashPattern` (all `absent-left` on the four `table/cell` variants), 5× `label` (`table/cell-set` + `table/cell/label`), 2× `characters` (`table/cell/label`). The mui root stops **before** the diff on `table/cell/compact/body: required binding layout.minWidth must appear exactly once` — the already-named v5 unset-null secondary, now measured. **Honest limit:** the substrate is captured under its version's writer and teachings v9–v24 are read-side only, so the census predicts the **extract-side** tail only; writer-side refusals (the class that stopped v1–v4) still surface only in a live run. |
+| D2b | Independent Table human grade on the stayed v32 mint. Do not restamp RECORD `8fab2dff6`. | **Passed 2026-08-29 ~22:00 UTC-5; confirmed later the same evening.** TJ Pitre reviewed page `173:48924` (sets `173:49053`, `173:49180`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh` and said “I'll take your word for it. If it's like-for-like, then you've got my pass.” Earlier the same review: “I suppose this is a pass.” Measured confirmation: first-party cells stroke 0 / columns 120 aligned; MUI 2px gutters are compile `cellRuleWidth=1` uniform strokes (source is border-bottom); MUI ragged columns are Gate 2. Evidence: `recipe/evidence/table-live-v32-human-signoff.json`. RECORD-time `humanSignoff: pending` unchanged. Table `overallSuccess` stays the mint-stayed pin; signoff `overallTableSuccess` is false. Product v1 incomplete. Next hill is Calendar. |
+| D3 | Calendar archetype addition is a reviewed minor contract change (`ARCHETYPES` in `packages/schema/src/archetype.ts` plus required-facts). Then the same offline-then-live sequence. | **Landed 2026-08-29.** `calendar / date-picker` is the twenty-first declarable row, with required facts `calendar/day-grid`, `calendar/day-cell-box`, `calendar/selected-day` and expected facts `calendar/weekday-header`, `calendar/outside-day`. Minor under docs/26 `V1-COMPAT-02`; both JSON Schema projections regenerated and byte-verified. Calendar is no longer “undefined (0 contracts)”. |
+| D3a | Offline `calendar@1` recipe. | **Green 2026-08-29.** `npm run recipe:calendar:check`, 10 tests. Ten components in three sets (`calendar/set` 4, `calendar/week-set` 2, `calendar/day-set` 4) — the same denominator `table@1` carries. Fixed point stable on every source; refuses an unsupported structural edit, a hugged day cell, and a short week. One reviewed source, `@astryxdesign/core` Calendar, every value read out of its own `styles.ts` and `astryx.css`. astryx marks TODAY with an inset 1px ring and no background, so `DayStateTokens` gained a ring rather than losing the marker; the dark half of every `light-dark()` pair is a `lowered` receipt. The **Date-in-grammar problem** `examples/day-picker/PROVENANCE.md` names is solved by carrying the RENDERED month as content instead of a `Date` — no `$date` marker invented. |
+| D3b | Calendar named refusal (docs/32 §F item 4, second branch). | **Recorded 2026-08-29** at `recipe/evidence/calendar-named-refusal-v1.json`. Two refusals, both actionable: (1) **no live mint and no human grade** — the measured cost basis is Input 78 attempt-1 cycles, Combobox 41, Table 27-and-still-open, and only `calendar-figma-writer.ts` is missing offline, so the climb can start from a known-good compile; (2) **the cross-library leg is NOT proven** — `react-day-picker@10.0.1` is held blind by its own PROVENANCE blindness rule so it can serve as the unseen-library exam, and the eventz `date-picker.contract.json` carries `props: []` / `anatomy: { root: {} }`. Calendar does **not** satisfy §E1. |
+| D4 | Human review of Table/Calendar adapters before live if a human-authored adapter is required. | **Table adapters already reviewed in the v32 climb.** Calendar adapter honesty pass 2026-08-29. **Calendar live v23 attempt 1 THE MINT STAYS.** Writer, restore, extract, probe, and all 8 captures accepted on page `173:53929` (`19be1c96-calendar-v23`). One Astryx root; gates 1373/1373; hug-root reflow held; Label after-append held. Cleanup persisted, not executed. Arranged Calendar only, one set at a time; `Component Container` renamed immediately to Calendar Day/Week/Month Grid. Sets `173:53959` (day), `173:53991` (week), `173:54108` (month). Input `115:295378`, Combobox `163:35981`, Button `85:6781`, and Table `173:48924` stayed. Open: https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=173-53929 . **2026-08-30 canvas review is mixed (A+B).** A: page-level wrappers collided (week/month overlap 98px; empty section `173:53930` covered the stack) — same family as Combobox open-column collisions. Spaced the already-named Day/Week/Month Grid frames with measured month-variant height 77; did not re-call `figma_arrange_component_set` (would mint a generic `Component Container`). B: TJ still cannot see calendar-looking things. Day labels exist (`26`) at **1×15** HUG; compile carries `width.mode hug` and no `width.value`. Week/month day-instances are compile-hug and collapse to 1×15. Caption `August 2026` is 1×15. Weekday `Su`–`Sa` are compile-fixed 32×15. Selected is a 32×32 `#0064e0` square; today is a 32×32 `#ccd3db` ring. This is the v2 hug-label-width-1 class, not a host omit of a compile-carried label width. Do not invent FIXED/px. Do not remint V23. Do not prepare a next version on this miss. Evidence: `recipe/evidence/calendar-live-v23-canvas-review.json`. **2026-08-30 live re-measure + screenshots confirmed the 1px class and named a more precise cause:** SF Pro Regular/Semibold is listed and `loadFontAsync` succeeds, then hug TEXT stays `width` 0 / `absoluteRenderBounds` null after `characters` (`26`, `August 2026`). The 1px sliver is `Math.max(emptyWidth, 1)`, not a source-named glyph. Weekday `Su`–`Sa` are 32×15 FIXED with null bounds (letters do not paint). **Calendar live v24 PREPARE** (`ac3d92cdb`) taught one class: after setting characters, hug from the post-character intrinsic; if that intrinsic is 0, walk the remaining *named* fallback chain (Roboto is already in the Astryx stack). Host emits compile-resolved font from provenance so extract stays compile-faithful. **AUTHORIZE** `faadec5f6`. **V24 attempt 1 failed closed at writer** (`CALENDAR-DAY-LABEL-MISMATCH:calendar/day-instance/1`). The hug/fallback teaching held on owned day labels: leftover day-set `179:54595` painted readable `26` in 32×32 default/today/selected/outside cells on Roboto Regular 16×16. Week mint stopped because instance `text.characters = Label` silent-fails once the bound Label face actually paints; `setProperties({[dayLabelProperty]: Label})` then characters verify. Leftover page `179:54565` deleted. V23 `173:53929` and siblings left. **V25 PREPARE** `96823a4b5` / **AUTHORIZE** `db9508205` taught setProperties after painted fallback; attempt 1 failed closed — setProperties before append did not stick. Leftover `179:54602` deleted. **V26 PREPARE** `9c598d7b1` / **AUTHORIZE** `40b98f8b5` taught setProperties after append; attempt 1 failed closed at the same mismatch. Leftover `179:54639` / day-set `179:54669` still painted owned `26`s; instance/1 named 27 stayed Label=26 in the same tick as the bind. After leftover sat, setProperties wrote 27. Leftover deleted. V23 and siblings left. **V27 PREPARE** `efcdb91cd` / **AUTHORIZE** `ba65d7889` taught bind Label after instance characters. **V27 attempt 1 THE MINT STAYS** on page `179:54747` (`19be1c96-calendar-v27`). Writer, restore, extract, probe, and all 8 captures accepted. Gates 1373/1373. Cleanup persisted, not executed. Arranged Calendar only, one set at a time; uniquely named Calendar Day/Week/Month Grid (`179:55299`, `179:55317`, `179:55331`); no leftover `Component Container`. Wrappers spaced (overlap 0). Input/Combobox/Button/Table and V23 `173:53929` left. Open: https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=179-54747 . **Screenshots:** day numbers visible (Roboto `26` in 32×32 default/today/selected/outside). Caption `August 2026` and weekday `Su`–`Sa` paint. Week/month day instances are compile-hug and collapse to 16×16 (single-digit 8×16), so the grid reads as smashed digits (`2627282930311`), not a 32×32 week row. The 1px-sliver class and instance-Label mismatch class are cleared. **V28 PREPARE** `5100ceeac` / **AUTHORIZE** `4053cf67f` taught carry the named `dayCell-size` box on day instances (do not stamp hug). **V28 attempt 1 THE MINT STAYS** on page `180:55345` (`19be1c96-calendar-v28`). Writer and restore accepted. Extract MCP succeeded; collapse refused `height.mode` (host FIXED vs compile hug) at the first month-grid day instance. Probe/captures not issued. Cleanup persisted, not executed. Arranged Calendar only, one set at a time; uniquely named Calendar Day/Week/Month Grid (`180:55525`, `180:55526`, `180:55527`); no leftover `Component Container`. Wrappers spaced (overlap 0). Input/Combobox/Button/Table, V23 `173:53929`, and V27 `179:54747` left. Open: https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-55345 . **Screenshots:** day numbers visible (Roboto `26` in 32×32 default/today/selected/outside). Caption `August 2026` and weekday `Su`–`Sa` paint. Week/month instances are 32×32 FIXED (week-on 256×32, month grid 256×96). Source `gridGap` 0 keeps cells adjacent. The V27 16×16 hug-collapse class is cleared. Next compile leftover: `dayInstance` still emits hug. **V29 PREPARE** `66c65c5a3` / **AUTHORIZE** `09dbc13c1` taught compile-carry of the already-named `dayCell-size` FIXED box on day instances (firstDifference `height.mode`; keys sort height before width). **V29 attempt 1 THE MINT STAYS** on page `180:55528` (`19be1c96-calendar-v29`). Writer, restore, extract, probe, and all 8 captures accepted. One Astryx root; gates 1485/1485; hug-root reflow held. Cleanup persisted, not executed. Arranged Calendar only, one set at a time; uniquely named Calendar Day/Week/Month Grid (`180:56080`, `180:56098`, `180:56112`); no leftover `Component Container`. Wrappers spaced (overlap 0). Empty section `180:55529` moved, not deleted. Input `115:295378`, Combobox `163:35981`, Button `85:6781`, Table `173:48924`, V23 `173:53929`, V27 `179:54747`, and V28 `180:55345` left. Open: https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-55528 . **Screenshots:** day numbers visible (Roboto `26` in 32×32 default/today/selected/outside). Caption `August 2026` and weekday `Su`–`Sa` paint. Week/month instances carry the named 32×32 FIXED box (week-on 256×32, week-off 224×32, month grid 256×96 / 224×96). Today 5 ring and selected 12 blue square. Compile-carry teaching cleared. Do not invent a Calendar grade. Product v1 incomplete. **2026-08-30 TJ named feedback on V29** (RECORD `dc985524a`, page `180:55528`): looking much better; continue the hill climb. Measure-first: live caption→grid `itemSpacing` 0 equals compile `gridGap` 0; Astryx names `header.marginBottom: --spacing-2` (8px) and that landing was dropped onto the day-grid gap. 3 week rows are fixture-complete (`CALENDAR_WEEK_COUNT=3`; source default 6-row is already receipted). No Fluent / Polaris / MUI / AntD human-reviewed calendar adapter exists (`react-day-picker` remains the named blindness refusal). Evidence: `recipe/evidence/calendar-v29-tj-review-measure.json`. **V30 PREPARE** `241891e6e` taught compile-carry of the named `header.marginBottom` as `tokens.captionGap` (calendar variant `itemSpacing`). **AUTHORIZE** `a3949be38`. **V30 attempt 1 THE MINT STAYS** on page `180:56126` (`da4456d8-calendar-v30`). Writer, restore, extract, probe, and all 8 captures accepted. One Astryx root; gates 1485/1485. Cleanup persisted, not executed. Arranged Calendar only, one set at a time; uniquely named Calendar Day/Week/Month Grid (`180:56679`, `180:56697`, `180:56711`); no leftover `Component Container`. Wrappers spaced (overlap 0). Empty section `180:56127` moved, not deleted. Input `115:295378`, Combobox `163:35981`, Button `85:6781`, Table `173:48924`, V23 `173:53929`, V27 `179:54747`, V28 `180:55345`, and V29 `180:55528` left. Open: https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-56126 . **Screenshots:** day numbers visible (Roboto `26` in 32×32 default/today/selected/outside). Caption `August 2026` and weekday `Su`–`Sa` paint. Live caption→weekday gap is the named `header.marginBottom` 8 (`tokens.captionGap`); day-grid `gridGap` stays 0. Week/month instances carry the named 32×32 FIXED box (week-on 256×32, week-off 224×32, month grid 256×96 / 224×96, 3 fixture weeks). Today 5 ring and selected 12 blue square. **Named vs invented:** caption gap named (`--spacing-2`); 3 weeks fixture-complete (source default 6-row already receipted — not a silent loss; no invented weeks or January/February cosmetics); Astryx only because no Fluent / Polaris / MUI / AntD human-reviewed calendar adapter exists (`react-day-picker` remains the named blindness refusal). Do not invent a Calendar grade. Product v1 incomplete. **2026-08-30 site-vs-mint diagnosis** (`8a7ea8366`): V30 compiled the 3-week August fixture, not the vendored component default. TJ: the real Astryx Calendar is the source of truth (vendored `Calendar.tsx` + `astryx.css` `light-dark()` tokens), not the reduced fixture and not docs dark chrome / site `--color-accent`. **V31 PREPARE** teaches one class: compile-carry the source-named 6-row/42-cell default (`hasVariableRowCount` false), Button+Icon nav chrome (‹ › as `defaultIcons` names), 28×28 `borderRadius: 50%` day button inside the 32 slot, and root `--spacing-3` 12 / `minWidth` 220. Capture month is April 2026 (`2026-04-15`), labeled as a capture, not the only month. Tokens stay vendored light `#0064E0`, not docs `#262626`/`#ebebeb`. V30 `180:56126` stays. New Scratch page only. **V31 PREPARE** `538c86b19` / **AUTHORIZE** `83ed24f18`. **V31 attempt 1 failed closed at writer** (`CALENDAR-FONT-ZERO-INTRINSIC:calendar/caption`). Source `monthYearLabel.flex` is 1; compile carried FILL caption inside the new header. Writer refused zero intrinsic before the header and month hug existed. Partial page `180:56725` and collection `VariableCollectionId:180:56727` cleaned. V30 `180:56126`, Input `115:295378`, Combobox `163:35981`, Table `173:48924`, and Button `85:6781` stayed. Did not use docs dark canvas or site accent. Evidence: `recipe/evidence/calendar-v31-fill-caption-zero-intrinsic.json`. Do not restart v31 attempt 2 as-is. **V32 PREPARE** `0822f8021` / **AUTHORIZE** `ca99ac5ce` taught writer to skip pre-parent intrinsic and post-append zero-geometry for FILL text. **V32 attempt 1 failed closed at extract collapse** (`calendar/variant/on: required binding layout.minWidth must appear exactly once`). Writer and restore accepted on page `180:56817`. Extract MCP succeeded. Live both calendar variants had numeric `minWidth` 220; `boundVariables.minWidth` was absent. Writer sets the number and never `setBoundVariable('minWidth')`. Screenshots showed a 6-row April 2026 month, nav ‹ ›, 28 circle selected `#0064E0`. Caption FILL width stayed 0 (header hug). Did not paint docs dark canvas or site accent; Scratch page chrome is Figma default. Cleanup executed; page and collection removed. V30 `180:56126`, Input `115:295378`, Combobox `163:35981`, Table `173:48924`, and Button `85:6781` stayed. Evidence: `recipe/evidence/calendar-v32-extract-minwidth-binding-absent.json`. Do not restart v32 attempt 2 as-is. Next teaching: writer binds compile-carried `layout.minWidth`. **V33 PREPARE** `0c97f8c26` / **AUTHORIZE** `dc0fa2fdc` taught writer to bind compile-carried `layout.minWidth`. **V33 attempt 1 failed closed at extract collapse** (same `layout.minWidth` binding miss). Writer teaching held: both variants had numeric 220 and `boundVariables.minWidth` `VariableID:180:57234`. Host `TABLE_VARIANT_COMPILE_BINDING_FIELDS` drops `layout.minWidth` (list ends at padding then `fills.0.color`). Page `180:57208` cleaned. V30 stayed. Evidence: `recipe/evidence/calendar-v33-host-drops-minwidth-binding.json`. Do not restart v33 attempt 2 as-is. Next teaching: host keeps compile-carried `layout.minWidth` on calendar/variant binding compile-order. **V34 PREPARE** `a2f218203` / **AUTHORIZE** `5597660f8` taught host to keep `layout.minWidth` on calendar/variant compile-order. **V34 attempt 1 failed closed at extract collapse** (`calendar/day/button: required binding strokes.0.weight must appear exactly once`). MinWidth class cleared. Today button has per-side strokeWeight binds, not `strokeWeight`. Host fold applies only to table/cell variant roles, not `calendar/day/button`. Page `180:57599` cleaned. V30 stayed. Evidence: `recipe/evidence/calendar-v34-day-button-stroke-weight-binding.json`. Do not restart v34 attempt 2 as-is. Next teaching: host folds uniform per-side stroke-weight binds on `calendar/day/button`. **V35 PREPARE** `91fb2e7a4` / **AUTHORIZE** `86e4e0da2` taught host to fold per-side stroke-weight on `calendar/day/button`. **V35 attempt 1 failed closed at extract collapse** (`$.children[0].children[0].children[0].children[0].bindings[0].field` on `calendar/nav/previous`). Stroke-weight fold held; minWidth class stayed cleared. Compile nav binds `layout.width.value` then `layout.height.value`; live Figma reports `height` then `width`; host `compileBindingFieldsFor` returns null for nav so extract keeps Figma order. Writer and restore accepted on page `180:57990`. Screenshots showed a 6-row April 2026 month, nav ‹ ›, 28 circle selected `#0064E0`, root pad 12. Caption FILL width stayed 0. Did not paint docs dark canvas or site accent; Scratch page chrome is Figma default. Cleanup executed in Figma (page `180:57990` and collection `VariableCollectionId:180:57992` removed); broker cleanup accept refused because extract never ingested. V30 `180:56126`, Input `115:295378`, Combobox `163:35981`, Table `173:48924`, and Button `85:6781` stayed. Evidence: `recipe/evidence/calendar-v35-nav-binding-compile-order.json`. Do not restart v35 attempt 2 as-is. Next teaching: host keeps compile-carried nav button bindings in compile order. **V36 PREPARE** `6aa82ba00` / **AUTHORIZE** `48d2cc4e7` taught host to keep `calendar/nav/previous` and `calendar/nav/next` bindings in compile order (`layout.width.value`, `layout.height.value`). **V36 attempt 1 failed closed at extract collapse** (`$.children[0].children[0].children[0].children[0].children[0].bindings[0].field` on `calendar/nav/previous/icon`). Nav-button compile-order held. Compile icon binds `type.fontSize` then `fills.0.color`; extract keeps Figma order `fills.0.color` then `type.fontSize`. Writer and restore accepted on page `180:58381`. Screenshots showed a 6-row April 2026 month, nav ‹ ›, 28 circle selected `#0064E0`, root pad 12. Caption FILL width stayed 0. Did not paint docs dark canvas or site accent; Scratch page chrome is Figma default. Cleanup executed in Figma (page `180:58381` and collection `VariableCollectionId:180:58383` removed). V30 `180:56126`, Input `115:295378`, Combobox `163:35981`, Table `173:48924`, and Button `85:6781` stayed. Evidence: `recipe/evidence/calendar-v36-nav-icon-binding-compile-order.json`. Do not restart v36 attempt 2 as-is. Next teaching: host keeps compile-carried nav icon bindings in compile order. **V37 PREPARE** `c8dcce599` / **AUTHORIZE** `daacd7875` taught host to keep `calendar/nav/previous/icon` and `calendar/nav/next/icon` bindings in compile order (`type.fontSize` then `fills.0.color`). **V37 attempt 1 failed closed at extract collapse** (`$.children[0].children[0].children[0].children[0].clipsContent` on `calendar/nav/previous`). Nav-icon compile-order held — canonical key order visits bindings then children then clipsContent, so the refusal at the parent's clipsContent means the icon subtree passed. The compile plan carries zero `clipsContent` keys; live Figma nav frames default `clipsContent` true; the host omit family (header/week-frame/variant) does not cover `calendar/nav/*` frames, so extract carried the observed true into the IR. Writer and restore accepted on page `180:58772`. Screenshots showed a 6-row April 2026 month in both variants, nav ‹ ›, 28 circle selected `#0064E0`, root pad 12, minWidth 220; day set painted default/today/selected/outside. Caption FILL width stayed 0. Did not paint docs dark canvas or site accent. Cleanup executed and broker-accepted (page `180:58772` and collection `VariableCollectionId:180:58774` removed). V30 `180:56126`, Input `115:295378`, Combobox `163:35981`, Table `173:48924`, and Button `85:6781` stayed. Evidence: `recipe/evidence/calendar-v37-nav-clips-content-omitted.json`. Do not restart v37 attempt 2 as-is. Next teaching: host omits observed clipsContent on `calendar/nav/previous` and `calendar/nav/next` frames. **V38 PREPARE** `02130e173` / **AUTHORIZE** `1840fb0b8` taught host to omit observed `clipsContent` on `calendar/nav/previous|next` frames. **V38 attempt 1 failed closed at extract collapse** (`$...cornerRadius` on `calendar/nav/previous`). Nav clipsContent omit held; nav-icon order held. Live nav frames report all-zero `cornerRadius` (and empty `effects`/`strokes`); compile nav IR omits all three — the same unnamed-chrome family the week frames cleared one field per version (V11–V14). Writer and restore accepted on page `180:59163`; screenshots identical to V37 (6-row April 2026, chevrons, circle selected, caption width 0). Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v38-nav-corner-radius.json`. Do not restart v38 attempt 2 as-is. **V39 PREPARE** `8128b3434` / **AUTHORIZE** `44013f556` taught host to omit observed `cornerRadius` on `calendar/nav/previous|next` frames. **V39 attempt 1 failed closed at extract collapse** (`$...effects` on `calendar/nav/previous`). CornerRadius and clipsContent omits held; nav-icon order held. Live nav frames report empty `effects`; compile omits — same family, next field, as forecast in the V38 record. Writer and restore accepted on page `180:59554`; screenshots identical (6-row April 2026, chevrons, circle selected, caption width 0). Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v39-nav-effects.json`. Do not restart v39 attempt 2 as-is. **V40 PREPARE** `487f7d25d` / **AUTHORIZE** `95ccd1662` taught host to omit observed `effects` on `calendar/nav/previous|next` frames (host omit chain flattened to a sequential pipeline, same behavior). **V40 attempt 1 failed closed at extract collapse** (`$...strokes` on `calendar/nav/previous`) — the last field of the nav unnamed-chrome family. All prior nav omits and the nav-icon order held. Writer and restore accepted on page `180:59945`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v40-nav-strokes.json`. Do not restart v40 attempt 2 as-is. **V41 PREPARE** `d9d102da5` / **AUTHORIZE** `cc362118f` taught host to omit observed empty `strokes` on `calendar/nav/previous|next` frames. **V41 attempt 1 failed closed at extract collapse** (`$...clipsContent` on `calendar/header`). The whole nav unnamed-chrome family is cleared (bindings, icon subtree, clipsContent, cornerRadius, effects, strokes all passed on the nav buttons). `calendar/header` arrived with the V31 nav+caption expansion and was never added to `HEADER_BODY_ROLES` (`calendar/weekday-row`, `calendar/grid`), so the already-taught header-body omit family does not cover it; compile header omits all four chrome fields. Writer and restore accepted on page `180:60336`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v41-header-clips-content.json`. Do not restart v41 attempt 2 as-is. **V42 PREPARE** `aa264ec48` / **AUTHORIZE** `3dec88cd2` taught `calendar/header` into `HEADER_BODY_ROLES`. **V42 attempt 1 failed closed at extract collapse** (`$.children[2].children[0].children[0].bindings[0].field` — the DAY scene's `State=selected` → `calendar/day/button`). The calendar month scene now passes collapse entirely (header cleared). The day scene is reached for the first time since the V31 expansion added the 28×28 `calendar/day/button`; `compileBindingFieldsFor` has no entry for it, so extract keeps Figma alphabetical binding order while compile emits `layout.width.value`, `layout.height.value`, `cornerRadius.topLeft`, `fills.0.color` (today adds `strokes.0.paint.color`, `strokes.0.weight`). Writer and restore accepted on page `180:60727`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v42-day-button-binding-compile-order.json`. Do not restart v42 attempt 2 as-is. **V43 PREPARE** `47ec89351` / **AUTHORIZE** `614152672` taught host to keep `calendar/day/button` bindings in compile order. **V43 attempt 1 failed closed at extract collapse** (`$.children[2].children[0].children[0].clipsContent` — the day scene selected `calendar/day/button`). Bind order held; the day button starts the same unnamed-chrome walk the nav buttons cleared: live `clipsContent` true vs compile omit; `cornerRadius` is compile-carried 14 and matches; `effects` and non-today `strokes` are live-empty vs compile-omit and will follow. Writer and restore accepted on page `180:61118`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v43-day-button-clips-content.json`. Do not restart v43 attempt 2 as-is. **V44 PREPARE** `bb65802db` / **AUTHORIZE** `8de4b6e94` taught host to omit observed `clipsContent` on `calendar/day/button`. **V44 attempt 1 failed closed at extract collapse** (`$...effects` on the selected day button) — as forecast in the V43 record. Writer and restore accepted on page `180:61509`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v44-day-button-effects.json`. Do not restart v44 attempt 2 as-is. **V45 PREPARE** `b121c2b44` / **AUTHORIZE** `451ec0ee1` taught host to omit observed `effects` on `calendar/day/button`. **V45 attempt 1 failed closed at extract collapse** (`$...strokes` on the selected day button) — the last field of the day-button unnamed-chrome family. Non-today buttons live-report empty `strokes` vs compile omit; the today button's ring (`dayStates-today-ring` / `-ringWidth`) is compile-carried and must stay, so the omit is empty-only. Writer and restore accepted on page `180:61900`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v45-day-button-strokes.json`. Do not restart v45 attempt 2 as-is. **V46 PREPARE** `ae04095d2` / **AUTHORIZE** `19c230e9c` taught host to omit observed EMPTY `strokes` on `calendar/day/button`. **V46 attempt 1 failed closed at extract collapse** (`$.children[2].children[1].children[0].strokes[0].dashPattern` — the day set State=today button's ring stroke). The live ring stroke reports `dashPattern: []`; the compile stroke omits it. `omitVariantEmptyStrokeDashPattern` already drops empty dashPattern for table/cell variants but not `calendar/day/button` frames. (Path label correction: the root's children[2] is the day SET; V42–V45 first-refusing variant was State=default, not selected — the taught classes were state-agnostic and unchanged.) Writer and restore accepted on page `180:62291`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v46-today-ring-dash-pattern.json`. Do not restart v46 attempt 2 as-is. **V47 PREPARE** `e05b39193` / **AUTHORIZE** `89fdc48f8` taught `calendar/day/button` into the empty-dashPattern omit. **V47 attempt 1 failed closed at extract collapse** (`$.children[2].children[1].strokes` — the day set `calendar/day/today` CELL). Live today cell reports empty `strokes`; compile today cells stopped carrying strokes when the V31 expansion moved the ring to the button; `omitDayVariantStrokes` still excludes `today` from its pre-V31 era. Writer and restore accepted on page `180:62682`; screenshots identical. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v47-today-cell-strokes.json`. Do not restart v47 attempt 2 as-is. **V48 PREPARE** `6c2d00011` / **AUTHORIZE** `e8f4294c5` taught `calendar/day/today` into `omitDayVariantStrokes`. **V48 attempt 1: EXTRACT ACCEPTED — first green extract since V30** (all nav, header, and day-button classes held; day/week/calendar scenes all collapse). **Failed closed at PROBE**: `contentHugPassed` false. The probe's `measureContentHug` demands the caption TEXT be HUG — a pre-V31 expectation; the source names `monthYearLabel.flex: 1` so compile/writer/host all carry FILL. Live measurement on the minted page: caption FILL, grow 1, textAutoResize HEIGHT, `width` 0, `absoluteRenderBounds` null in a 256-wide SPACE_BETWEEN header — the caption face never paints because the V24 named-fallback-after-zero-glyph walk is guarded by `ir.width.mode!=="fill"` (the writer FILL skip is over-broad, exactly the docs/32 hypothesis). Two classes remain, one teaching each: probe gate accepts the source-named FILL caption; writer runs the named fallback walk for FILL text. Cleanup executed and broker-accepted (page `180:63073` removed). Protected pages stayed. Evidence: `recipe/evidence/calendar-v48-probe-caption-fill-hug-gate.json`. Do not restart v48 attempt 2 as-is. **V49 PREPARE** `8e47b36d7` / **AUTHORIZE** `32dcf6b49` taught the probe content-sizing gate to accept the source-named FILL caption. **V49 attempt 1 failed closed at probe usability**: `contentHugPassed` now true and every flag green, but the two calendar cells report `visibleAreaLoss` 1 (> 0.05) — the caption paints nothing (V48 live measurement: width 0, null render bounds), so the semantic caption node is fully lost. The measured cause is the writer class: the V24 named-fallback-after-zero-glyph walk is guarded by `ir.width.mode!=="fill"`. Writer/restore/extract accepted on page `180:63973`. Cleanup executed and broker-accepted. Protected pages stayed. Evidence: `recipe/evidence/calendar-v49-caption-visible-area-loss.json`. Do not restart v49 attempt 2 as-is. **V50 PREPARE** `d94ea122f` / **AUTHORIZE** `e835e54da` taught the writer to walk the named zero-glyph fallback for FILL text (measure on WIDTH_AND_HEIGHT, restore HEIGHT; source-named chain only; zero-intrinsic refusal stays non-fill-only). **V50 attempt 1 THE MINT STAYS** on page `181:64873` (`4604bbfe-calendar-v50`). Writer, restore, extract, probe, and all 8 captures accepted; broker `main-complete`; cleanup persisted, not executed. **The caption `April 2026` is VISIBLE between the chevrons** — live measurement: caption FILL width 192 in the 256 header, painted render bounds 63.75×13.34 on the source-named Roboto Medium fallback (once the face painted, FILL resolved; the earlier width-0 was coupled to the unpainted face). Screenshots: 6-row April 2026 month in both WeekNumbers variants with ‹ April 2026 › header, 28 circle selected `#0064E0`, today ring, outside days lighter; day set paints default/today/selected/outside; week on/off rows paint. Writer-native arrangement kept: one section `181:64874` with Day `181:64913` / Week `181:64959` / Month `181:65263` sets stacked, no overlap, no generic Component Container (arrange tool not called — the V23 lesson). Open: https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=181-64873 . Input `115:295378`, Combobox `163:35981`, Table `173:48924`, Button `85:6781`, V30 `180:56126`, and older Calendar mints stayed; signed-clean of older Calendar pages is now permitted but left for a dedicated signed cleanup. Still receipted (not bundled, not invented): `hasOutsideDays`, dark token halves, day-grid gap (source names none), weekday 12 vs day 14, outside opacity 0.5, transparent surface, `dayName.paddingBottom` 4. Evidence: `recipe/evidence/calendar-v50-mint-stays-caption-visible.json`. Do not invent a Calendar grade. Product v1 incomplete. |
+| D4b | Independent Calendar human grade on the stayed v50 mint. Do not restamp RECORD `a105e9308` or legibility pass `21cf7b1eb`. | **Passed 2026-08-30 ~12:56 UTC-5 — a full pass.** TJ Pitre reviewed page `181:64873` (sets Day `181:64913`, Week `181:64959`, Month `181:65263`) on Scratch `byMp6lt0Ij9b2QbkDGFwBh` and said "Yes, this is beautiful. I love it. It's a full pass. Everything you did here was accurate and beautiful." Reviewed: 6-row April 2026 month, ‹ › chevrons, the FILL caption visible between them (the V48/V49/V50 class), 28px circular selected `#0064E0`, vendored Astryx light tokens, and the receipted-items list (`hasOutsideDays`, dark token halves, day-grid gap, weekday 12 vs day 14, outside opacity 0.5, transparent surface, `dayName.paddingBottom` 4). Review followed the presentation-only legibility pass `21cf7b1eb` (section `181:64874` fill `#444444` → white; zero writer-owned nodes modified). Evidence: `recipe/evidence/calendar-live-v50-human-signoff.json`. RECORD-time `humanSignoff: pending` unchanged. Calendar `overallSuccess` stays **false** until product v1 is complete. Product v1 incomplete — Button leftover inversion remains (in progress separately). |
+
+### E · Cross-library, inverse, and corpus honesty
+
+| step | action | exit criterion |
+| --- | --- | --- |
+| E1 | Keep at least one archetype vs two unrelated real libraries on the **live** path (already true offline for Input and Combobox). | Live receipts name both libraries. |
+| E2 | Inverse non-regression. The existing first-pass harness is recipe-agnostic and must not regress. | `npm run first-pass:check` (and the recipe inverse/census gates that exist for the subject) stay green. |
+| E3 | Keep publishing 117/170 recognisable and 39/170 usable-on-all-four comparisons. Recipe four vs the same measurement. Do not drop legacy numbers. | `recipe:regression:census` / census recount still report both denominators. |
+| E4 | Reconcile `docs/26-v1-definition.md` `V1-CLASS-01` / `V1-CLASS-02` with recipe capability. Docs/26 currently lists combobox/table/calendar as not v1-supported. User demand is that they **are** in v1. Resolve by proving them and then citing the green gates; do not delete or weaken the bar first. | Docs/26 rows change only when the named gate is green on a commit. |
+
+#### E4 proposal — an additive class, not a reshuffle (drafted 2026-08-29, NOT applied)
+
+`docs/26` has not been edited and must not be until a named gate is green on a
+commit (§12). This is the proposal for when that day comes.
+
+**The problem with simply moving names.** `V1-CLASS-01` admits an archetype on
+the strength of the committed coverage table plus
+`npm run capability:fresh && npm run extract:computed:drift`. That is the
+*pre-pivot* proof regime: capture, promote, computed-drift. The recipe-IR
+archetypes are not proven that way at all. Moving `select / combobox` or
+`table / data-grid` from `V1-CLASS-02` into `V1-CLASS-01` would cite a gate that
+never measured them — a silent reclassification, the exact thing §F item 5
+forbids — even though the archetype may genuinely be proven.
+
+**The proposal.** Add a *new* requirement row rather than editing either list:
+
+> **V1-CLASS-03** — An archetype may additionally be claimed as v1-supported on
+> the **recipe path** when all four are true on the release commit: (a) its
+> offline recipe gate is green (`npm run recipe:<archetype>:check`); (b) a live
+> Scratch mint **stayed**, with the RECORD naming its page and set node ids;
+> (c) an **attributable human grade** from the owner cites that page; and (d)
+> the archetype's entry in `recipe/evidence/status-index.json` reports
+> `overallSuccess: true`. An archetype meeting `V1-CLASS-03` is listed with the
+> gate and the commit that proved it. Failing any of the four, it stays in
+> `V1-CLASS-02`.
+
+This is **additive**: `V1-CLASS-01` and `V1-CLASS-02` keep their current text and
+their current regime, nothing is weakened, and the bar goes *up* — `V1-CLASS-03`
+demands a live mint and a human grade, neither of which `V1-CLASS-01` requires.
+
+**Who qualifies today: nobody.** Measured 2026-08-29 —
+
+| archetype | (a) offline gate | (b) mint stayed | (c) human grade | (d) `overallSuccess` |
+| --- | --- | --- | --- | --- |
+| Button | green | historical page `85:6781` | **pending** | false |
+| Input / Field | green | **yes**, `115:295378` | **passed** | false |
+| Combobox | green | **yes**, `163:35981` | **passed** | false |
+| Data Table | green | no | none | false |
+| Calendar | green | no (named refusal) | none | false |
+
+Input and Combobox satisfy (a), (b) and (c) and fail only (d) — and (d) is false
+because `overallSuccess` has deliberately never been flipped for any archetype.
+So the first real work this proposal unlocks is deciding what flipping
+`overallSuccess` requires, which is an owner call rather than a gate.
+
+**What must NOT happen:** editing `V1-CLASS-02` to delete `select/combobox` or
+`table/data-grid` before `V1-CLASS-03` exists and is satisfied. Calendar is not
+named in docs/26 at all — it is covered by the "never-attempted or absent"
+catch-all and by the post-v1 limitations register entry naming date pickers, and
+both stay accurate while its live mint is a named refusal.
+
+#### E4 APPLIED (2026-08-30)
+
+The `V1-CLASS-03` row was added to docs/26 exactly as drafted above, additively
+(`V1-CLASS-01` and `V1-CLASS-02` text untouched), together with the matching
+pinned-ID update in `scripts/v1-definition-check.mjs`. The qualification table,
+re-measured 2026-08-30 after the Button B3 full pass:
+
+| archetype | (a) offline gate | (b) mint stayed | (c) human grade | (d) `overallSuccess` |
+| --- | --- | --- | --- | --- |
+| Button | green | **yes**, `183:69150` (v5 remint) | **passed** (B3 full pass) | **stays false** — F1 unmet, no v1-completion record yet |
+| Input / Field | green | **yes**, `115:295378` | **passed** | **stays false** — F1 unmet, no v1-completion record yet |
+| Combobox | green | **yes**, `163:35981` | **passed** | **stays false** — F1 unmet, no v1-completion record yet |
+| Data Table | green | **yes**, `173:48924` (v32) | **passed** | already true (v32 record) |
+| Calendar | green | **yes**, `181:64873` (v50) | **passed** | **stays false** — F1 unmet, no v1-completion record yet |
+
+All five satisfy (a), (b) and (c). Flipping (d) is the owner call this
+proposal named, and it can only ride a **true** v1-completion record. The
+lanes were then measured at the branch head and the F checklist below was
+walked honestly (see the [merge execution record](#merge-execution-2026-08-30)):
+F1's whole-corpus / unseen-library clause is **not** proven on the recipe
+path — what is proven is zero-silent inversion per archetype on its measured
+two-library pair. No v1-completion record therefore lands in this change set;
+(d) stays false for Button, Input, Combobox and Calendar (Table keeps its
+v32-record value), and the merge to main proceeds under TJ's direct
+authorization with v1 honestly INCOMPLETE and the remaining work named.
+
+### F · v1 binary checklist
+
+v1 is complete only when every row is actually true:
+
+1. Named or carried, zero silent losses, on the whole corpus and on unseen libraries.
+2. Minted sets usable (auto-layout reflows, variants switch, tokens bound), not merely correct-looking.
+3. Journeys restated honestly: A Figma→code, B code→Figma, C reconcile — what is proven vs still open.
+4. Button, Input, Combobox, Data Table, and Calendar each have recipe-path proof plus attributable human signoff, or a named refusal a reader can act on.
+5. Docs/26 rows and this document agree; no silent reclassification.
+6. CI lanes required for release are green. npm publish remains deferred and is not a v1-proof substitute.
+
+#### Merge execution (2026-08-30)
+
+TJ's endpoint amendment (verbatim): "No need for a PR URL. We're the only
+ones working on this. You can just merge." The recorded checklist
+(`recipe/evidence/merge-readiness-v1.json`) was executed to that amended
+endpoint; the machine-readable record of this walk is
+`recipe/evidence/merge-execution-v1.json`.
+
+**Lanes, measured once at the branch head `47a14aae5`** (the lane-repair
+commit; the two commits after it touch only docs and this evidence record):
+
+- **fast:** 237/240 locally. All 3 reds are the census gates
+  (`census:check --phase full`, `--self-test`, `--phase design-to-code`),
+  and the cause was proven environmental, not code: the gitignored local
+  seed directory `examples/flowbite-react/` (`.gitignore:78`) sits in the
+  filesystem scan and stales the committed denominator manifest. Re-run
+  with that directory parked outside the repo: all three gates exit 0.
+  On the committed tree the fast lane is green — effectively 240/240.
+- **full:** 45/48 steps green as measured (2.8 h wall clock). The 3 reds
+  share two named causes, neither a code defect. (1) The lane's eval step
+  scored 226/230: three of the four failing cases are the reds already
+  named and caused in `parity/receipts/v1/eval-reds.json` (the committed
+  suite result is 227/230), and the single unnamed red
+  (`refuse-schema-invalid-contract`, ENOENT on
+  `evals/.scratch/contracts/button.contract.json`) was a shared-scratch
+  race with a fast-lane rerun running concurrently in another shell — the
+  readiness-internal eval re-run 40 minutes later, after that shell
+  finished, scored exactly the committed 227/230. The
+  `eval-record-check` red was downstream of that same race. (2)
+  `v1:readiness --trust-lanes --pre-release` went 20/23 rows green
+  against the then-DIRTY tree (this change set in progress):
+  V1-COMPAT-03 and V1-EVID-01 both carry the eval verdict above plus the
+  dirty-tree refusal ("this record cannot be committed as the suite
+  result"), and V1-CI-01's nested fast lane failed 1/240 with the gate
+  name outside the captured tail. Its audit-ledger walk improved on the
+  committed receipt — red audit rows 7 → 0, the typecheck and ci:lanes
+  acceptance commands now exit 0 after the lane repair.
+
+  **Clean-tree re-measurement (at this commit, no concurrent runs):**
+  the eval scored **227/230 — exactly the committed record, row for
+  row** (`eval:record:check` green; the race case
+  `refuse-schema-invalid-contract` passes), and the fast lane inside a
+  readiness re-run measured **green end-to-end, 240/240** (925 s,
+  census gates included with the local seed directory parked) — closing
+  the 1/240 mystery. Two structural facts remain, both named, neither a
+  defect: `evals/run.ts` exits 1 whenever any case fails
+  (`process.exit(passed === results.length ? 0 : 1)`), so the lane's
+  raw eval step stays red **by design** while the three
+  `eval-reds.json` ledger rows are carried — the actual gate is
+  `eval:record:check`, which is green; and completing `v1:readiness`
+  requires its internal `ci:lane full` re-run (~2.8 h), which was
+  deliberately not spent a second time under the approved trade —
+  regenerating the READINESS receipts at a merged-main head is added to
+  the post-merge work list.
+
+**Gates:** all 11 `recipe:*:check` gates green at the head, re-run green on
+merged main as the post-merge confirmation.
+
+**F-checklist walk (honest, row by row):**
+
+| row | verdict |
+| --- | --- |
+| F1 zero silent losses, whole corpus + unseen libraries | **PARTIAL — this is the row that blocks v1.** Zero-silent inversion (0 silent / 0 missing / 0 mismatched, byte-stable fixed point) is proven per archetype on its measured two-library pair — ten library-root proofs across the five archetypes. The whole-corpus and unseen-library clauses are **not** proven on the recipe path; the 170-set census and the unseen-library evals measure the capture path, not recipe mints. |
+| F2 minted sets usable | **true** for the five minted sets — reflow/variant/binding probes measured green per archetype, and the owner's five human grades reviewed the live sets. |
+| F3 journeys restated honestly | **true** — this document restates A (Figma→code), B (code→Figma, the five proofs), and C (reconcile) with opens named. |
+| F4 five archetypes proof + signoff | **true** — all five carry recipe-path proof plus an attributable owner grade (Input V85, Combobox V41, Table V32, Calendar V50, Button B3/v5). |
+| F5 docs/26 agrees | **true** — `V1-CLASS-03` landed additively (E4 applied) and docs/26 itself states the (d) honesty: criterion (d) true today only for table/data-grid. `docs:check` and the v1-definition gate are green. |
+| F6 CI lanes green | **measured** — numbers above; the 3 local fast reds are proven environmental. npm publish stays deferred and is not claimed as proof. |
+
+**Verdict: v1 is INCOMPLETE.** F1's whole-corpus / unseen-library clause is
+the named blocker. `overallSuccess` therefore flips for **no** archetype in
+this change set — Button, Input, Combobox and Calendar stay `false` in
+`recipe/evidence/status-index.json` exactly as their blockers state, and
+Table keeps the `true` its v32 record set. Remaining named work: (1) F1
+whole-corpus / unseen-library proof on the recipe path; (2) Combobox
+fixture-chrome remint from MUI/AntD-named overlay chrome (TJ decision);
+(3) signed cleanup of the older Calendar Scratch pages; (4) npm publish,
+deferred; (5) restoring `recipe/pivot-status.ts` to the static `tsc`
+surface (excluded from the root tsconfig for the measured stack-overflow
+on its boolean chains; it stays runtime-validated via `tsx` on every gate
+run).
+
+**Merge reasoning (approved trade):** `origin/main` is 0 commits ahead of
+this branch and the branch is 690 ahead — main has not moved since the
+pivot began. A `--no-ff` merge therefore produces a merged tree
+byte-identical to the branch head, so the lanes measured here are the
+lanes of the merged tree; re-running the multi-hour full lane on main
+would re-measure the same bytes. TJ approved running the 11 recipe gates
+on merged main as the confirmation instead.
+
+### Human-only work (do not block the rest)
+
+- Attributable human signoff on Input V85 **passed** (2026-08-28, TJ Pitre, page `115:295378`). Combobox v41 live human grade **passed** (2026-08-29, TJ Pitre, page `163:35981`). Table v32 live human grade **passed** (2026-08-29, TJ Pitre, page `173:48924`). Calendar v50 live human grade **passed** (2026-08-30, TJ Pitre, page `181:64873`). Button B3 **passed in full** (2026-08-30, TJ Pitre, v5 remint page `183:69150`; `recipe/evidence/button-live-v5-human-signoff.json`). All five archetypes carry attributable human grades.
+- Old PAT still cannot be revoked (other apps). Keep the replacement PAT and residual-risk acceptance (`oldTokenRevoked=false`, `ownerRiskAcceptance=true`).
+- Recipe acquisition review for Data Table / Calendar adapters before live if a human-authored adapter is required.
+- Final designer recognisability grades; AI raters are retired for architecture progression.
+
+### V75 remaining-class diagnosis (measured 2026-08-28, required before V76)
+
+Probe payload sha256 `662799c3…391e` (69354 B). Extract sha256 `11344f08…0651` (8436209 B). Page `111:252766` was removed after probe.
+
+| Class | Lying layer | Measured | Teaching? |
+| --- | --- | --- | --- |
+| **A. `textPropertiesRestored` false both** | **Writer bind** (frozen v16/v17), not the probe predicate and not restore 256/24/0. | Reconfirmed on V75 extract: label TEXT 128/128 both (`Amount` / `Store name`), visible, first-segment matches 128; stale full-name `includes("=")` matches **0**. All TEXT names carry `font-provenance=`. Extract omits `componentPropertyReferences`. Restore splits ` :: ` for FILL only; it does not bind Label. | **V76.** New writer v18 bind using first-segment (same class as V74 `role()`). Hashed v16/v17 stay frozen. |
+| **B. MUI `contentFillPassed` newly false** | **Probe predicate** (defaultVariant-only sample), not writer FIXED. | Extract MUI content texts FILL 128/128 (0 FIXED). MUI default variant `Size=medium, State=default, Content=placeholder, Required=false, Adornments=none`: placeholder TEXT `visible:false`, extract `layoutSizingHorizontal:"FILL"` after extract’s reveal-then-measure. Polar default same axes: placeholder **visible** FILL — probe `contentFillPassed` true. Probe samples `defaultVariant` only and checks live `layoutSizingHorizontal==="FILL"` without the extract reveal. Restore 256/24/0 already measured hidden FILL while visible. Do **not** invent plugin `layoutSizingHorizontal` on the hidden node. | Later probe teaching: treat hidden FILL as FILL, or sample a visible content node. Not this prepare. Do not teach writer FIXED. |
+| **C. MUI clip 104 + overlap 12** | **Mixed.** Unchanged from V74. | Clip 104/128 max 0.529 (overlay label AABB). Overlap 12/128 max 20 (trailing slot + label). Polar 0/0. | Do **not** invent overlap-zero. Clip-only later only as overlay-label probe classification if measured. Do not bundle with V76. |
+
+One teaching per PREPARE. V76 is class A only.
+
+### V76 remaining-class diagnosis (measured 2026-08-28, required before V77)
+
+Probe payload sha256 `db87e783…9c2a` (69352 B). Extract sha256 `0fdcdacb…f00b` (8436209 B). Page `111:257814` was removed after probe.
+
+| Class | Lying layer | Measured | Teaching? |
+| --- | --- | --- | --- |
+| **A. Label bind** | Writer v18 first-segment. | **Held.** `textPropertiesRestored` true both. | Done at V76. Do not remint the writer. |
+| **B. MUI `contentFillPassed` still false** | **Probe predicate** (defaultVariant-only sample), not writer FIXED. | Extract MUI content texts FILL 128/128 (0 FIXED). MUI default placeholder is hidden FILL (one of 24 restore-hidden). Probe checked live `layoutSizingHorizontal==="FILL"` with no reveal. Polar default placeholder is visible FILL — probe already true. Extract already reveals hidden content TEXT before reading FILL, then hides again. | **V77.** Probe reveal-then-measure (same class as extract). Do **not** invent plugin `layoutSizingHorizontal`. Do not teach FIXED. |
+| **C. MUI clip 104 + overlap 12** | **Mixed.** Unchanged. Out of scope for V77. | Clip 104/128 max 0.529 (overlay label AABB). Overlap 12/128 max 20 (trailing slot + label). Polar 0/0. | Do **not** invent overlap-zero. Do not bundle with V77. Clip-only later only as overlay-label probe classification if measured. |
+
+One teaching per PREPARE. V77 is class B only.
+
+### V77 remaining-class diagnosis (measured 2026-08-28)
+
+Probe payload sha256 `810c14e8…b3d8` (69351 B). Extract sha256 `cb27a7a6…2be3` (8436209 B). Page `111:262862` was removed after probe.
+
+| Class | Result |
+| --- | --- |
+| **B. Hidden-default contentFill** | **Held both.** MUI and Polar `contentFillPassed` true. Extract content texts still FILL 128 / FIXED 0 both. Polar content-row still 0. |
+| **C. MUI clip 104 + overlap 12** | **Split.** Clip is a named overlay-label AABB false positive (see clip-class questions). Overlap 12/128 max 20 is real trailing-slot + label mint geometry (placeholder hidden; all `mui/*/placeholder/*/trailing` except focus-visible). Polar clip 0, Polar overlap 0. |
+
+#### V77 clip-class questions (required before V78)
+
+| Question | Measured |
+| --- | --- |
+| 1. Named overlay-label architecture? | **Yes.** Recipe requires absolute label-row for floating (`floating label overlay requires explicit absolute positioning`). MUI fixture `labelPlacement: "floating"`; Polar `stacked`. Extract: all 128 MUI label-rows `layoutPositioning === "ABSOLUTE"`; all 128 Polar `AUTO`. MUI floating offset `-9`; inactive in-field `9` (small) / `16` (medium). |
+| 2. `visibleAreaLoss` vs variant AABB? | **Yes.** V77 probe set `componentBox=box(component)` then scored every visible semantic node. Replay vs probe: 0 mismatches. Every fail is exactly `9/17 = 0.5294117647058824` (label y=23 vs component y=32). Surface AABB is also y=32 — switching the parent box to surface would **not** clear the 104. |
+| 3. Are the 104 the visible floated overlays? | **Yes.** 104 fail / 24 pass. Fail `labelRowY` unique `[-9]`. Pass `[16, 9]` — exactly placeholder × (none\|trailing) × (default\|disabled\|error). All 128 MUI labels visible. 52 clip-only-label + 52 label+required at the same 0.529. 0 clip without label. |
+| 4. Real `clipsContent` glyph clip? | **No.** Variant `clipsContent` true: 0. Surface `clipsContent` true: 0. Label-row `clipsContent` true: 128, but label vs that clipping parent loses **0** (label fully inside the overlay row). Overlay sits on the outline; the variant/surface do not clip it. AABB false positive. |
+
+**Decision named:** PREPARE V78, one **probe** teaching. Exclude overlay label-row texts (`input-field/label` and `input-field/required-indicator` when the parent label-row is `ABSOLUTE`) from `visibleAreaLoss`. Polar has no ABSOLUTE label-row, so Polar clip stays 0. Do **not** move labels in the writer. Do **not** change overlap (still iterate full `semantic`). Do **not** invent overlap-zero.
+
+Counterfactual from the same extract: exclude overlay-row texts → MUI clip 0; Polar clip 0; overlap still 12.
+
+### V78 remaining-class diagnosis (measured 2026-08-28)
+
+Probe payload sha256 `f1813a81…2e2c` (67583 B). Extract sha256 `9cf25fd2…adbd` (8436209 B). Page `111:267910` was removed after probe.
+
+| Class | Result |
+| --- | --- |
+| **C-clip. Overlay-label AABB** | **Held.** `visibleAreaLoss>0.05` 0/256 max 0. MUI 0. Polar 0. |
+| **C-overlap. Trailing + label** | **Unchanged.** 12/128 max 20. Same twelve `mui/*/placeholder/*/trailing` keys except focus-visible. Polar 0. |
+
+### V78 overlap-class diagnosis (measured 2026-08-28, required before any V79)
+
+V77 extract sha256 `cb27a7a6157530abd439cca9d90702651263586589bf7997f684dd761e082be3` (8436209 B). V78 extract sha256 `9cf25fd26d34e80c3013312309fe06e691a60986204dc78ebd8980ea5d85adbd` (8436209 B). V78 probe sha256 `f1813a8150d48ac1bd4f532171dcbf4f9a148876a486b894e0b590e7a4ad2e2c` (67583 B). Replay vs probe overlap: **0 mismatches**. V77 extract geometry for the same twelve keys matches V78 (same label/trailing boxes, overlap 20).
+
+| Question | Measured |
+| --- | --- |
+| 1. Exact 12 keys / axes | `mui/{small,medium}/{default,disabled,error}/placeholder/{false,true}/trailing`. Size both. State **not** focus-visible. Content placeholder only. Required both. Adornments trailing only. |
+| 2. Geometry | **Trailing icon covers in-field label glyphs — not designed outline overlay ∩ trailing.** All 12: label-row `ABSOLUTE` but **in-field** (`labelRowY` 9 small / 16 medium; `overlaySitsOnOutline` false). Pair is only `input-field/label` TEXT ∩ `input-field/slot/trailing` INSTANCE. Trailing packed to content-row **start** (`x=0`, left of surface center; `dxLeft` 15 / `dxRight` 180). Label `"Amount"` box 57×23; trailing 39×20 sits entirely inside it (`labelCoverageByTrailing` 0.5949656750572082; `trailingCoverageByLabel` 1; `overlapPixels` 20 all twelve). Placeholder `visible:false` with extract FILL width 157; Figma auto-layout then ignores the hidden sibling. Medium sample `mui/medium/default/placeholder/false/trailing`: label (501,48,57×23) vs trailing (502,50,39×20). |
+| 3. Why not focus-visible / Polar | Focus-visible trailing placeholder (4): label floats to `labelRowY=-9` (on the outline); placeholder **visible** FILL; trailing stays **right** (`x=163` in content-row); overlap 0. Polar trailing placeholder (16): stacked `AUTO` label above the surface; trailing right; Polar overlap 0. MUI value+trailing also 0 (value visible FILL holds trailing right; label floated). |
+| 4. Probe `overlapPixels` predicate | Still the full visible `semantic` pairwise `min(hit.w, hit.h)`. V78 excludes overlay-label from `visibleAreaLoss` only (`clipSemantic`). Overlap still scores overlay-label vs slot. A V79 “exclude ABSOLUTE label-row texts vs trailing” would also zero these 12 because the in-field labels are ABSOLUTE — that would be **probe hide** of a real collision. |
+| 5. Compile / recipe | Compile **coexists** MUI floating + trailing `InputAdornment`: hide placeholder when floating + placeholder + not focus-visible + (`none`\|`trailing`); keep inactive in-field label; still emit content-row `[placeholder FILL, trailing]` with `primaryAxisAlign: "min"`. It does **not** name their AABB intersection as acceptable overlap. Intended packing is label left + trailing right (what focus-visible and value variants mint). Named `labelInsetX` / `paddingX` / `trailingAdornmentExtent` / FILL **are** applied. No named trailing-vs-label inset exists that was not applied. |
+
+**Decision named:** Probe hide remains forbidden. Inventing a pixel gap, `primaryAxisAlign: max`, or opacity-0 as a **guess** remains forbidden. The measured class is silent loss of named FILL occupancy: compile names content-row `[placeholder FILL, trailing]`; `visible:false` makes Figma drop that sibling; trailing packs to `x=0`. Cited mechanism (recipe CSS `::placeholder { opacity: 0 }` while the input stays in flow, plus restore `visible=true` for FILL measure): V19 writer keeps hidden FILL content `visible` and `opacity` 0 so the main axis still occupies and “Enter an amount” is not painted. That is V79. Do **not** treat ABSOLUTE-row ∩ trailing as the V78 clip class — these labels are in-field. Cleanup-on-failure-only / V80 stays unopened until a probe is otherwise green.
+
+### V83 overlap-class diagnosis (measured 2026-08-28, required before any V84)
+
+V83 extract sha256 `5be43bb66439927d7d051cbc1491e21b6005417a76f01c4ff0ff6c62821aa2dc` (8436161 B). V83 probe sha256 `648a9e18042a831d614e232a6c39d337396d27b86a8d16d4dddf1d0c48515ead` (67643 B). Replay vs probe overlap: **0 mismatches**. Page `111:283874` was removed after probe.
+
+| Question | Measured |
+| --- | --- |
+| 1. Exact 24 keys / axes | `mui/{small,medium}/{default,disabled,error}/placeholder/{false,true}/{none,trailing}`. Size both. State **not** focus-visible. Content placeholder only. Required both. Adornments **none and trailing**. Polar overlapFail 0. |
+| 2. Pair that produces 22.5 | **label ∩ opacity-0 occupancy placeholder** on both `none` and `trailing`. Unique max pair `input-field/content/placeholder@0 \| input-field/label@1`. Sample `none` `mui/medium/default/placeholder/false/none`: hit 56×22.5. Sample `trailing` `mui/medium/default/placeholder/false/trailing`: same pair, hit 56×22.5. `none` has only that one pair >0. `trailing` also has only that pair >0. |
+| 3. Placeholder occupancy nodes | All 24: `visible:true`, `opacity:0`, `layoutSizingHorizontal:FILL`, TEXT. Widths 165 (`none`) and 157 (`trailing`). |
+| 4. Probe `overlapPixels` predicate | Yes, includes `opacity === 0` nodes. Filter is `visible!==false` TEXT/INSTANCE with a role. Blueprint does not mention opacity. All 24 fail semantics include the occupancy placeholder. |
+| 5. Painted trailing at x=165 | **Does not cover label glyphs.** Trailing local x unique `[165]`; side `right-of-surface-center`. `labelTrailingOverlapPx` 0 on all 12 trailing fails. `paintedTrailingCoversLabelGlyphs` false. Painted pairwise max 0 on all 256 cells. Excluding occupancy spacers → overlap 0 on all 256. Polar painted/ex-occupancy/replay max 0. |
+
+**Decision named:** PREPARE V84, one **probe** teaching. Do not score `opacity === 0` occupancy nodes (content placeholder/value layout spacers, not painted) as overlap partners. Polar stay 0. Do **not** revert v19. Do **not** nudge nodes. Do **not** invent overlap-zero. A probe hide of a real painted hit is not named — painted trailing at the end does not cover glyphs.
+
+### Calendar live v50 human signoff (2026-08-30 ~12:56 UTC-5)
+
+After the presentation-only legibility pass `21cf7b1eb` (section
+`181:64874` fill `#444444` → white; zero writer-owned nodes modified), TJ
+reviewed page `181:64873` on Scratch `byMp6lt0Ij9b2QbkDGFwBh` — 6-row
+April 2026 month, ‹ › chevrons with the FILL caption visible between
+them, 28px circular selected `#0064E0`, vendored Astryx light tokens, and
+the receipted-items list — and said:
+
+> Yes, this is beautiful. I love it. It's a full pass. Everything you did here was accurate and beautiful.
+
+Implications (do not inflate): Calendar live human grade = **passed**.
+RECORD `a105e9308` still carries RECORD-time `humanSignoff: pending` and
+is not restamped; the legibility pass `21cf7b1eb` is not restamped either.
+Calendar `overallSuccess` stays **false**. Product **v1 is still
+incomplete**. Remaining: Button leftover inversion (149 silent / fonts +
+set chrome; in progress separately). Do not invent a Button human grade.
+Do not overwrite Input `115:295378`, Combobox `163:35981`, Table
+`173:48924`, Button `85:6781`, or Calendar `181:64873`. Evidence:
+`recipe/evidence/calendar-live-v50-human-signoff.json`.
+
+Open Calendar (not Input, not Combobox, not Table):
+`https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=181-64873`
+
+**Standing doctrine — Astryx source fidelity (the V30→V50 lesson).**
+Future Astryx work compiles from the actual vendored Astryx component
+source (`Calendar.tsx` + `astryx.css` tokens, or the real component for
+other archetypes) — **never a reduced fixture overlay**. V30 compiled the
+reduced `astryx-calendar-reviewed-v1` August 2026 3-week fixture and
+misrepresented the component (the site-vs-mint diagnosis at
+`recipe/evidence/calendar-v30-astryx-site-vs-mint.json`); V31–V50
+recompiled from the vendored component's own source-named facts (6-row/42
+cell default, nav chrome, 28×28 circular day button, root `--spacing-3`
+12 / `minWidth` 220, light halves of `light-dark()` pairs) and earned the
+full pass. TJ 2026-08-30: "If we do any more Astryx work, let's make sure
+that we're working off of the actual Astryx project and not whatever you
+were using before."
+
+### Button live v5 human signoff — B3 full pass (2026-08-30 ~15:56 UTC-5)
+
+After the focus-ring correction and the v5 remint (the B3a section above),
+TJ Pitre reviewed the v5 page `183:69150` on Scratch `byMp6lt0Ij9b2QbkDGFwBh`
+(sets `183:69776` Altitude / `183:70424` Fluent; runIdentity
+`6857935c-b04f4059-v4`; RECORD commit `6d58f4c2b`) and gave Button its
+**B3 full pass**:
+
+> Okay, yes, this is accurate and passes. You have my full permission to
+> move forward.
+
+What the pass covers, and what it closes:
+
+- **Both sets**, arranged per `recipe/evidence/button-b3a-arrange-pass.json`.
+- **The focus-ring correction story end to end**: his first B3 round
+  flagged the Altitude focus states against Altitude's own Figma; the
+  three-way diagnosis proved the v4-era ring literal `#000b29` was an
+  invented fact from a mid-transition capture artifact; the B3a teaching
+  carries `imported.button.root.outline-color-state-focus-visible`
+  (settled `#4375ff`), and the v5 remint renders the carried token.
+- **The 2px offset-gap note** (page-background shadow listed after the
+  ring so Figma paints the gap) was presented in the review packet; his
+  "this is accurate" is an **implicit acceptance** of that rendering,
+  recorded as such in the evidence file rather than restated as a quote.
+- **Inversion v2** on the reviewed page: 0 silent / 0 missing / 0 extra /
+  0 mismatched on both roots (Altitude `8730/8730`, Fluent `8778/8778`),
+  collapse-compile fixed point two-cycle byte-stable, derived not assigned.
+
+Evidence: `recipe/evidence/button-live-v5-human-signoff.json` (pinned by
+`recipe:pivot-status:check`). RECORD `6d58f4c2b` and the v2 inversion
+index/inversion keep their RECORD-time `humanSignoff: pending` /
+`overallButtonSuccess: false` bytes — the same later-attributable-grade
+pattern as Input V85 / Combobox V41 / Table V32 / Calendar V50. The
+archetype-level `overallSuccess` flips only in the v1-completion record.
+**All five archetypes now carry attributable human grades.** TJ authorized
+executing the recorded merge checklist to its endpoint and amended the
+endpoint the same day: a direct owner-authorized merge to main, not a PR
+("No need for a PR URL. We're the only ones working on this. You can just
+merge."). Do not overwrite Input `115:295378`, Combobox `163:35981`,
+Table `173:48924`, Calendar `181:64873`, Button v5 `183:69150`, or the
+preserved historical Button page `85:6781`.
+
+### Source-fidelity audit of the passed archetypes (2026-08-30)
+
+TJ asked whether anything already graded "right" was actually wrong given
+the V30 fixture lesson. Read-only audit of every signed-off archetype's
+compile source: `recipe/evidence/signed-archetype-source-audit.json`.
+Verdicts (no signoff is invalidated by this audit):
+
+- **Input V85 — clear.** Compiled from computed-style captures of the
+  real `@mui/material@9.2.0` / `@shopify/polaris@13.9.5` rendered in
+  headless Chromium plus review facts citing the packages' own source
+  files. No canonical-clone mechanism; every token per-library. The 128
+  cells per source are the outlined-variant surface with the exclusions
+  (filled/standard, multiline, hover/pressed) **named**, not silent.
+- **Combobox V41 — flagged for TJ, milder than V30.** Anatomy, states,
+  and the distinct identity facts (trigger heights 40/56 vs 24/32,
+  borders, selected fills, loading blues) are named from the real MUI
+  Autocomplete source and the real antd 5.29.3 tarball. But
+  `cloneTokens` carries the **canonical fixture's overlay chrome**
+  (overlay fill/border/radius/shadow, `listPadding` 4, `optionPaddingX`
+  10/12, occupancy squares) under `mui.autocomplete.*` /
+  `antd.select.*` names — MUI's own source names listbox `8px 0`,
+  status slots `14px 16px`, option paddingX 16, none carried. This was
+  **named to TJ before his pass** (the v41 lookalike diagnosis:
+  "fixture-accurate for that chrome"), and his pass was conditional on
+  that padding being "accurate" — accurate to the compile, not
+  MUI-named. Under the new doctrine a remint (library-named overlay/list
+  chrome, one teaching per PREPARE, fresh page, fresh grade) is the
+  doctrine-clean path **if TJ wants it**; the V41 page and signoff stay
+  untouched either way. Roboto-on-AntD is NOT an artifact — it is the
+  4th entry of AntD's own declared stack, a named substrate pin.
+- **Table V32 — clear.** First-party is the repo's real `ds.table` CSS
+  modules; MUI is the computed extract of the real Table. The
+  `cloneTokens` override list covers the load-bearing channels
+  (including deleting `minWidth` to match MUI truth) and the signoff's
+  `measuredConfirmations` verified live vs extract/CSS channel by
+  channel, including both things TJ questioned.
+- **Button (offline) — clear on sources; no grade exists to reassess.**
+  Real published `altitude-web-components@1.0.2` and
+  `@fluentui/react-components@9.74.5`, anatomy from captured DOM truth.
+  Leftover inversion (5+1 set-naming defect on `85:6781`) in progress
+  separately.
+- **Calendar V50 — clear**; V31–V50 is the doctrine case itself
+  (vendored real `@astryxdesign/core` 0.1.6, the exact npm-shipped
+  artifact).
+
+**Combobox flag decided (2026-08-30, TJ Pitre):** keep the V41 signoff;
+remint Combobox from real MUI/AntD-named overlay chrome as a **named
+work item after the v1 merge** (pre-merge remint and permanent
+acceptance both explicitly declined). Scope: overlay
+fill/border/radius/shadow, `listPadding`, and `optionPaddingX` renamed
+from canonical-fixture values to real MUI/AntD-named values. The V41
+page `163:35981` and its signoff stay valid until the remint lands and
+earns its own fresh grade. Recorded in
+`recipe/evidence/signed-archetype-source-audit.json`
+(`tjDecision20260830`) and in the post-merge checklist of
+`recipe/evidence/merge-readiness-v1.json`.
+
+### Merge-readiness assessment for `pivot/recipe-ir-v1` (2026-08-30)
+
+Read-only assessment at `79ea90dde`; no merge performed, no PR opened.
+Full detail: `recipe/evidence/merge-readiness-v1.json`.
+
+- **Gates:** all 11 `recipe:*:check` gates green — **149 tests, 149
+  pass, 0 fail** (normalize 10, hash 7, scene-readback 10, figma-writer
+  8, acquisition 6, button 12, input-field 24, combobox 12, table 19,
+  calendar 38, pivot-status 3). The repository fast/full CI lanes have
+  **not** been run on this branch head; main's last local full-lane
+  record was 83 pass / 2 named fails (parity by design, deploy:check
+  pre-deploy) and the merge requires the same named-red-only profile.
+- **Branch vs main:** 674 ahead / **0 behind** `origin/main`
+  (fast-forward possible; repo convention is PR merges).
+- **Blocking:** (1) Button leftover inversion (in progress separately);
+  (2) docs/26 ↔ docs/32 reconciliation — E4 proposal drafted, NOT
+  applied; docs/26 `V1-CLASS-02` still lists combobox and table as
+  not-v1-supported while both now carry green gates and passed human
+  grades; (3) CI lanes on the branch head.
+- **Non-blocking, named:** Combobox fixture-chrome flag (TJ decision);
+  npm publish stays deferred (F6); open PRs #61/#56/#54/#15/#14 and
+  dependabot bumps are independent lines (branch is 0 behind, no
+  conflict); older Calendar Scratch pages await a dedicated signed
+  cleanup (Figma-side, not repo). `private/` and PEMs verified
+  untracked.
+- **Ordered checklist** (execute after Button leftover closes and TJ
+  approves) is in the evidence file: Button close → Combobox flag
+  decision → apply E4 docs/26 reconciliation + `docs:check` → re-run
+  recipe gates at the merge commit → fast/full lanes → hygiene check →
+  PR to main → post-merge (publish stays deferred; signed Scratch
+  cleanup).
+
+Product **v1 is incomplete** until Button leftover closes. Do not claim
+otherwise.
+
+### Combobox v41 named feedback — empty/loading listbox padding (2026-08-29)
+
+TJ reviewed Combobox v41 on Scratch page `163:35981` and said (named
+feedback, not a human grade):
+
+> Overall pretty good. Hill-climbing rate is good. Recommendation: review
+> this issue, adjust if it is a miss, re-review, then move on.
+
+Two items: (1) MUI/AntD open dropdown **No options** / **Loading…** look
+flush top-left vs the populated option list. (2) MUI and AntD “almost look
+identical.”
+
+**A. Empty/loading listbox padding — not a miss.** Recipe compile emits the
+same `combobox/listbox` padding for `Content=options`, `Content=empty`, and
+`Field state=loading`: `listPadding` top/bottom (adapter fallback **4**),
+left/right **0**, bound to `sizes.*.listPadding`. Empty/loading children are
+text nodes with no own padding. Populated inset comes from option-item
+`optionPaddingX` (10 small / 12 medium). Live page `163:35981` matches:
+32/32 MUI and 32/32 AntD open listboxes are `4/0/4/0`; empty text is
+`x=0, y=4`; option items kept `0/12/0/12`. The flush-left look is
+recipe-accurate. The 4px top is present and easy to miss.
+
+Raw library CSS differs and was **not** a carried compile fact: MUI
+`AutocompleteNoOptions` / `AutocompleteLoading` use `padding: '14px 16px'`
+on a status wrapper and listbox `padding: '8px 0'`; AntD empty uses
+`genItemStyle` → named `optionPadding`, plus dropdown `paddingXXS`. Adapter
+`cloneTokens` kept fixture `listPadding=4` and never mapped those extras
+onto empty/loading text. Teaching 8/14/16 or inventing empty-item
+`optionPadding` would invent padding. No remint.
+
+**B. Library lookalike — informational.** Distinct adapter facts that
+**survived** mint: trigger heights (MUI 40/56 vs AntD 24/32), option height
+(36 vs 32), default/error borders (`#8a8a8a` / `#d32f2f` vs `#d9d9d9` /
+`#ff4d4f`), filled background, selected option fill, loading control blue
+(`#1976d2` vs `#1677ff`). Shared fixture chrome that makes them look alike:
+overlay fill/border/radius/shadow, `listPadding` 4, `optionPaddingX`,
+Roboto, grey/blue occupancy squares, same copy. Do not invent library
+icons. Evidence:
+`recipe/evidence/combobox-v41-empty-listbox-diagnosis.json`. Hashed v41
+RECORD `f330a082` is not restamped. That named-feedback snapshot is
+**not** the later human grade.
+
+### Combobox v41 live human signoff (2026-08-29 ~09:17 UTC-5)
+
+After the empty/loading padding diagnosis (not a miss; `listPadding`
+4/0/4/0; populated inset is option-item `optionPaddingX`) and the MUI vs
+AntD lookalike (fixture chrome + survived distinct heights/borders/selected
+fills), TJ reviewed page `163:35981` on Scratch `byMp6lt0Ij9b2QbkDGFwBh`
+and said:
+
+> Okay, well, if the two design system combo boxes look similar and the lack of padding on the "No" option and "Loading" option is accurate, then I call this a pass. This has my approval, and please continue on to the next hill climb on the data table.
+
+Implications (do not inflate): Combobox live human grade = **passed**.
+RECORD `f330a082` still carries RECORD-time `humanSignoff: pending` and is
+not restamped. Product **v1 is still incomplete**. Remaining: Data Table,
+Calendar, Button leftover inversion (149 silent / fonts + set chrome). Do
+not invent a Data Table or Button human grade. Do not overwrite Input
+`115:295378` or Combobox `163:35981`. Evidence:
+`recipe/evidence/combobox-live-v41-human-signoff.json`. Diagnosis:
+`recipe/evidence/combobox-v41-empty-listbox-diagnosis.json`.
+
+Open Combobox (not Input, not Table):
+`https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=163-35981`
+
+### Table live v24 attempt 1 and the tail census (2026-08-29)
+
+The v24 teaching **cleared**: host raw `table/row-set :: Table` now
+host-normalizes to the compile-carried label `Table row` on both roots, closing
+the v23 refusal at `$.children[1].label`.
+
+The attempt was run as a **falsifiable predicted-vs-actual test** of the new
+offline census. The prediction was committed before AUTHORIZE:
+
+| | path |
+| --- | --- |
+| predicted (`ee3afa077`, before the run) | `$.children[2].children[0].children[0].label` |
+| actual live refusal | `$.children[2].children[0].children[0].label` |
+
+The refused class: the cell-label TEXT node is named
+`table/cell/label :: font-provenance=%7B...`, and host-normalize takes the
+segment after `::`, so it derives the font-provenance blob where compile carries
+`table/cell/label`. This is the same family as the v24 row-set label teaching and
+as the Button B2c name-first-segment class.
+
+**v25 teaching (one, not bundled):** when extract host-normalizes
+`table/cell/label`, emit the compile-carried label `table/cell/label` instead of
+the live TEXT name after `::`. Do **not** bundle the cell-set label, the four
+cell-variant omit classes, the cell-label `characters` class, or the mui
+`layout.minWidth` pre-diff blocker — all are measured in the census and each is
+its own PREPARE.
+
+### Immediate next command (2026-08-29, end of the Table v24-v27 round)
+
+**Table is blocked on you, not on a teaching.** Live v27 reached the probe with
+7 of 8 per-source checks green on both roots and all 20 cells green. The only
+failing check is `reflowPassed`, and it is a real disagreement between two
+things that cannot both be right:
+
+- `recipe/fixtures/table.ts:102-105` declares `resize.root: "hug-contents"`.
+- The probe widens an instance by 64px and requires that width to stick.
+
+Coupled to it: `table@1` has **no per-column width model**, so MUI (which
+declares no cell min-width) mints visibly ragged columns, and first-party aligns
+only because its `minWidth: 120` happens to exceed its content. The probe does
+not catch that — roles, no-fake-layout, state semantics, visible-area loss and
+overlap all pass on a ragged table. Both questions are docs/32 D4 adapter
+authoring, and picking a width without a reviewed source fact is the forbidden
+invented FILL/FIXED teaching. **Do not guess either one.**
+
+Everything else this round is landed and green. Do **not** write Input page
+`115:295378`, Combobox `163:35981`, or Button `85:6781`. Do **not** call
+`figma_arrange_component_set` on any of them. Safe Input restore: checkpoint
+`2392869719628549246`. Combobox spaced checkpoint `2393104521192557663`. Never
+restore `2392877528965054592`. Do not claim v1 complete.
+
+### Earlier: Combobox
+
+Combobox live human grade **passed** 2026-08-29 ~09:17 UTC-5 (TJ Pitre;
+page `163:35981`; RECORD `f330a082` `humanSignoff` stays pending). Next
+hill is **Data Table**. Do **not** invent a Data Table or Button human
+grade. Do **not** write Input page `115:295378` / sets `115:296805` +
+`115:298106`. Do **not** write Combobox page `163:35981`. Do **not** call
+`figma_arrange_component_set` on Input or Combobox. Safe Input restore:
+checkpoint `2392869719628549246` (`V85 Input grids OK`). Combobox spaced
+checkpoint `2393104521192557663` (`V41 Combobox grids spaced`). Never
+restore `2392877528965054592`. Button extras-drop teach landed; silent is
+still **149/8706** and **149/8778**, extras 1/1. Do **not** ping TJ for
+Button review. **B3 remains: attributable human signoff on Button**. Do
+not claim v1 complete.
+
+### Input V85 human signoff and arrange incident (2026-08-28)
+
+TJ reviewed the restored+gridded V85 Input page (`115:295378` on Scratch
+`byMp6lt0Ij9b2QbkDGFwBh`) and said:
+
+> Now I see why it's been taking so long. What you just showed me here is literal perfection. Everything here is bounded to tokens. You have nearly every single variant, state, and instance. I fully support the methods that you took to build this input field, and you have my blessing to continue on forever because what you did here is literally impeccable. It is some of the best craftsmanship I've ever seen in creating an input field. Thank you, and let's continue hill climbing.
+
+Implications (do not inflate): Input live human grade = **passed**. The
+methods (recipe-IR, one-teaching-per-PREPARE, named-or-carried,
+host-normalize, occupancy placeholders, compile-carry live set facts) are
+blessed for reuse. Product **v1 is still incomplete**. Remaining after
+later Combobox pass: Data Table, Calendar, Button leftover inversion. Do
+not invent a Button or Data Table human grade. Do not restamp
+expected-plans to hide fonts.
+
+The arrange accident is a **recovered incident**, not a rewrite of V85.
+`figma_arrange_component_set` deletes every page-level frame named
+`Component Container`. A second arrange plus overshooting undo briefly
+removed page `115:295378`; the page was restored and both sets were
+re-gridded as State 32×4. Page id stayed `115:295378`. Checkpoint
+`2392869719628549246` (`V85 Input grids OK`) is the safe restore point.
+Never restore `2392877528965054592`. Do not rearrange Input. V85 RECORD
+`c35bae60` is not restamped.
+
+## Correction task 2 — offline implementation, 2026-08-27
+
+The Input model now carries source-neutral adornment payloads instead of only
+slot roles: text/glyph/instance content, font request and resolution provenance,
+fills/opacity, intrinsic geometry, padding/alignment, accessibility relation,
+and exact source citation. The reviewed fixtures acquire `$` and `USD` from
+the pinned MUI `InputAdornment` and Polaris `TextField` sources. The typed
+Figma lowering creates visible text descendants and never paints the instance
+root into the historical gray placeholder block.
+
+Font requests now name family/style, request source, ordered fallback chain,
+resolved family/style, and either exact resolution or a named degradation.
+Unavailable, wrong-style, zero-width, and provenance-tampered resolutions
+refuse by name. Generated CSS quotes validated family names, rejects control
+and injection syntax, detects custom-property collisions before output, and
+checks every generated path remains inside its output root.
+
+React now tracks uncontrolled content and focus while preserving controlled
+value and `onChange` semantics. The Web Component constructs its shadow tree
+once, patches stable nodes, and preserves input identity, focus, value,
+selection, and caret across input and external attribute updates. Pinned
+Chromium tests cover type → blur → refocus, controlled reversion, events,
+external value/error/disabled changes, text escaping, and nonzero source-
+independent visual regions for label, helper, adornments, surface, focus,
+error, and disabled states.
+
+Input Figma v2 no longer rewrites generated source strings. Both versions
+lower the same typed IR/plan through a versioned program with deterministic
+bytes, explicit page ownership, collection/adapter collision refusal, and
+future scene-readback instrumentation. Scene accounting compares the complete
+adornment payload and visual fields with stable occurrence IDs.
+
+This remains offline preparation only. Button overall remains false/pending and
+Input remains blocked. The v3 runner was committed before attempt 1. That writer
+minted 2×128 variants, but verification failed before extraction and measured
+zero facts. The prospective v3 criterion bytes, semantics, thresholds,
+antecedent, and authorization artifact remain unchanged.
+
+## Attempt 1 correction — Figma runtime portability, 2026-08-27
+
+Attempt 1 used code commit
+`5e95105b16f3e30e0fb67a53a6eda7a86c105c61`. Its exact 2,440,411-byte writer
+decoded to SHA-256
+`e831b450b450a0b9fc0d086bc33a428ca473fed12616d3cf0b82ada8f4f16f24`,
+evaluated, and minted both 128-variant sets. Scene verification then failed at
+`recipe/scene-readback-runtime.ts:35`: the Figma sandbox exposed no
+constructible `TextDecoder`. Expected scene facts were 43,726; measured scene
+facts, objective rows, captures, and fixed-point cycles were all zero. No
+success receipt or human packet exists.
+
+The correction replaces that assumption with an RFC 3629 decoder that refuses
+invalid lead, continuation, overlong, surrogate, out-of-range, and truncated
+sequences by name. Native `TextDecoder` is optional and is selected only after
+fatal-mode probes and exact equality with the fallback. Base64 and SHA-256 are
+portable audited implementations; `TextEncoder`, `atob`/`btoa`, Web Crypto,
+`structuredClone`, `Buffer`, compression streams, fetch, URL, Blob, and
+FileReader are not runtime dependencies.
+
+Cleanup now marks variable collections with exact ownership, switches away
+from an owned current page before removal, rejects name collisions without
+ownership, and is idempotent. The failed runner cleanup and successful manual
+cleanup remain separate evidence. Manual cleanup removed page `86:34550` and
+collections `VariableCollectionId:86:34552` and
+`VariableCollectionId:86:35979`; unrelated Scratch state returned to fingerprint
+`10ba6b57da3cfa97` with 13 pages, 14 collections, and 11,163 variables.
+
+Attempt 2 ran from correction commit
+`98de9c3ceae06881bc477e7099b47e8f5a87cf10`. Its exact 2,449,180-byte writer,
+SHA-256 `92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811`,
+passed the portable runtime preflight and minted 256 variants. Extraction then
+refused `I86:38597;86:38583`: owned leading-adornment instance `86:38597`
+materialized a read-only `TEXT` descendant backed by helper text `86:38583`.
+That descendant has no direct shared plugin data. Expected scene facts remained
+43,726; measured scene facts, objective rows, captures, and fixed-point cycles
+remained zero. No success receipt or human packet exists.
+
+The correction derives identity only beneath an exactly owned `INSTANCE`. The
+key combines the owned ancestor key, its actual main-component identity, and
+each actual child type/index/occurrence plus nested-instance main-component
+identity. It must equal one unique precomputed plan key. Names, characters,
+geometry, paints, styles, and source IR never contribute. Unowned ordinary
+nodes, detached or missing-main-component instances, component descendants,
+unexpected or reordered children, duplicate keys, and ownership metadata
+collisions refuse.
+
+Attempt-2 runner cleanup again persisted only incomplete sentinel counts because
+its catch discarded the exception. Manual cleanup verified and removed page
+`86:38503` and collections `VariableCollectionId:86:38505` and
+`VariableCollectionId:86:39932`; Scratch returned to fingerprint
+`10ba6b57da3cfa97` with 13 pages, 14 collections, and 11,163 variables. The
+finally path now records cleanup errors, loads all pages, verifies exact shared
+ownership (never name alone), switches away through `setCurrentPageAsync`,
+removes the page before bound collections, tolerates already-removed owned
+objects, allows 120 seconds for the 2,317-node teardown instead of 30, and
+re-counts zero leftovers.
+
+Attempt 3 is the final allowed v3 attempt. Preflight requires exact history
+`[1,2]`, refuses attempt 4 or a missing prior attempt, verifies the generated
+identity plan and Plugin API audit, and requires a clean published descendant
+of the existing authorization commit.
+
+The prepared, unexecuted attempt-3 writer is 2,453,320 bytes,
+SHA-256 `c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc`;
+its 3,281,234-byte wrapper is
+`f378d76d33e3e59a44cf09430f1b0a2dc02078ad1c1531b01bc236b9642501be`.
+The transport envelope is
+`3af956a1cb9207f2a831114462bacebaeb4fdb2732ef4e6ae1acc2cf3a1dc843`.
+Scene facts remain locked at 22,811 MUI plus 20,915 Polaris (43,726 total);
+the separate identity-only plan adds 128 generated descendants per source.
+Conformance remains 256 variants, 152 variables, 11,547 plugin-data writes,
+37,647 property writes, and 8,192 bindings.
+
+## 0 · The decision, in one paragraph
+
+Structure stops being inferred from a bag of CSS channels and starts being
+**compiled**. An archetype-specific **recipe** takes reviewed input facts and
+emits a tree in a small **canonical Figma capability IR** — a closed vocabulary
+of things Figma can actually draw — plus a **loss receipt for every input fact
+the IR does not carry**. Facts that belong only to code (behaviour, ARIA, focus
+order, virtualization) become declared **code-only extensions** rather than
+silent drops. The IR is normalized and **canonically hashed**, so "the same
+recipe over the same input draws the same set" is a byte comparison instead of
+a screenshot argument.
+
+The decisive proof is five archetypes: **Button, Input/Field, Combobox, Data
+Table, Calendar**. Button proves the spine end to end. Input/Field proves a
+second control shape with editable text, placeholder content and interaction
+states before the three hard cases. The other three each break a different
+assumption the current engine makes, and one of them (Calendar) has never been
+attempted at all.
+
+The legacy contract corpus is **not** migrated. It is retained as regression
+research behind a read-only adapter.
+
+---
+
+## 1 · Why the current shape cannot get there
+
+The engine today carries a per-property channel table
+([30 — Channel table](30-channel-table.md), `spec/channel-table.json`) and an
+archetype **referee** that checks whether load-bearing facts are _present_
+(`packages/core/src/required-facts.ts`). Both are good instruments and both
+stay. What is missing sits between them:
+
+1. **Nothing owns structure.** `required-facts.ts` can refuse a card with no
+   column axis, but it cannot _supply_ the axis. Structure is whatever the
+   captured anatomy tree happened to be, so the same archetype mints
+   differently from two libraries and neither result is wrong by any rule the
+   repo can state.
+2. **The target vocabulary is open.** Lowering decisions are spread across
+   `core/emit-figma-script.ts` and registered after the fact
+   (`spec/lowering.json`). There is no closed set of "things the canvas can be
+   asked to do", so a new CSS construct has no bounded place to land and the
+   forward direction accumulates unregistered structure decisions.
+3. **Loss is reported, not enforced.** `code-only-facts:check` names dropped
+   facts on the surfaces a person reads. It is a reporting discipline layered
+   over a pipeline that is free to drop silently; it is not an invariant the
+   artifact cannot violate.
+4. **Equality has no cheap form.** Two sets that draw identically have no
+   canonical form to compare, so drift detection reaches for pixels and
+   geometry boxes.
+
+A recipe fixes (1). A closed IR fixes (2). Receipts-as-schema fixes (3). A
+canonical hash fixes (4).
+
+---
+
+## 2 · The canonical envelope
+
+The reviewed artifact. One document, versioned independently of the contract
+schema so the legacy schema is untouched during the pivot.
+
+```
+RecipeEnvelope
+  envelope     literal 1                 — envelope format version
+  id, name     stable identity
+  archetype    DeclaredArchetype         — reused from @ds-contracts/schema
+  recipe       { id, version }           — which recipe compiled this, at which version
+  ir           IRNode                    — the drawable tree (§3)
+  accounting   { carried: FactRef[] }    — input facts the IR draws
+  extensions   CodeOnlyExtension[]       — declared code-only facts (§5)
+  receipts     LossReceipt[]             — every input fact the IR does not carry (§5)
+  provenance   { source, tool, generatedAt }
+  integrity    { algorithm, domain, canonicalHash } — over canonical bytes (§4)
+```
+
+Three properties are load-bearing and each is checkable:
+
+- **Closed.** `ir` may only contain IR primitives. A CSS property name cannot
+  appear in the envelope's drawable half at all.
+- **Total.** Every fact in the recipe's input lands in exactly one of
+  `accounting.carried`, `extensions`, or `receipts`. No fourth outcome exists,
+  and no fact may land in two — two answers is no answer. The rule runs both
+  ways: an account that names a fact the input never carried is a fabricated
+  disclosure and fails the same referee.
+- **Canonical.** `integrity.canonicalHash` is derived, never authored, and is
+  computed over the envelope with `integrity` removed.
+
+Envelope version is a literal, not a range: a reader that does not know a
+version refuses rather than best-efforting.
+
+---
+
+## 3 · The primitive Figma IR
+
+The point of the IR is that it is **small and closed**. Every field must
+correspond to a named Figma Plugin API assignment; a field with no such
+assignment does not enter the IR.
+
+**Node kinds** — seven, deliberately:
+
+| kind            | Figma target                    | what it carries                                                  |
+| --------------- | ------------------------------- | ---------------------------------------------------------------- |
+| `frame`         | `FrameNode` with auto-layout    | layout axis, alignment, spacing, padding, sizing, clip, children |
+| `text`          | `TextNode`                      | characters, type facts, alignment, fill                          |
+| `shape`         | `RectangleNode` / `EllipseNode` | size, corner radius, fills, strokes                              |
+| `vector`        | `VectorNode` / imported SVG     | asset reference, size, fills                                     |
+| `instance`      | `InstanceNode`                  | component reference and property assignments                     |
+| `component`     | `ComponentNode`                 | variant properties plus frame auto-layout and children           |
+| `component-set` | `ComponentSetNode`              | declared variant axes and component children                     |
+
+**Value vocabularies** — also closed: `Paint` (solid, linear gradient, radial
+gradient, image), `Stroke` (weight, alignment, paint, dash pattern), `Effect`
+(drop shadow, inner shadow, layer blur, background blur), `Sizing` (`fixed`,
+`hug`, `fill`), `Dimension` (a number in device-independent pixels).
+
+**Variable bindings** are a first-class list on each node rather than a value
+type, because a bound field has _both_ a literal fallback and a variable
+identity and the canvas needs both.
+
+What is deliberately absent: percentages, `calc()`, shorthand, logical
+properties, pseudo-elements, media queries, and every other construct with no
+Figma primitive. Those are not gaps in the IR — they are the population that
+`receipts` exists to name.
+
+---
+
+## 4 · Normalization and canonical hashing
+
+The first normalization slice canonicalizes **JSON representation without
+rewriting recipe semantics**:
+
+1. Object keys are sorted recursively by ECMAScript UTF-16 code-unit order.
+   The comparison is explicit and never locale-dependent.
+2. Arrays retain authored order. That includes children, paints, gradient
+   stops, bindings, carried facts, extensions, and receipts: order changes are
+   hash-visible until a recipe contract explicitly proves an array unordered.
+3. `null`, booleans, strings, and finite numbers are preserved. Strings are not
+   Unicode-normalized. Negative zero has one explicit policy: it canonicalizes
+   to `0`, matching JSON's single zero representation.
+4. `undefined`, sparse arrays, non-finite numbers, bigint, functions, symbols,
+   symbol-keyed properties, accessors, non-enumerable properties, cycles, and
+   non-plain objects are refused by path. They are never omitted or coerced.
+   Plain objects with either `Object.prototype` or a null prototype are
+   accepted; repeated non-cyclic references serialize by value.
+5. JSON strings are escaped by the canonical encoder (including deterministic
+   lone-surrogate escaping), numbers use ECMAScript's locale-free shortest
+   round-trippable decimal spelling, and the result is encoded as UTF-8.
+
+`canonicalHash` is SHA-256 over:
+
+```
+UTF8("ds-contracts/recipe-envelope-json/v1\0") || canonicalEnvelopeBytes
+```
+
+`canonicalEnvelopeBytes` is the canonical JSON above with the top-level
+`integrity` field removed. The domain is both included in the hashed bytes and
+recorded as `integrity.domain`; a future normalization contract must change the
+domain even if it retains SHA-256. An authored or stale hash therefore cannot
+influence its replacement.
+
+Normalization is **idempotent** and recursively **key-order-insensitive**.
+Meaningful array, scalar, or string changes remain hash-sensitive. These are
+tests, not claims. Structural-id assignment, default elision, and any
+domain-specific unit lowering belong to recipe compilation; this canonical
+JSON layer does not guess them.
+
+---
+
+## 5 · Code-only extensions and mandatory loss receipts
+
+```
+CodeOnlyExtension
+  id        stable name ("combobox/aria-activedescendant")
+  kind      behaviour | a11y | keyboard | virtualization | motion | data
+  stated    what it does, in one line
+  why       why the canvas cannot carry it
+```
+
+```
+LossReceipt
+  channel   the input fact's name
+  path      the structural path it arrived on
+  value     the value that was not carried
+  reason    no-figma-primitive | code-only | lowered | refused-by-recipe | inert
+  evidence  the spec row, door, or lowering rule that justifies the reason
+```
+
+**Mandatory** has a precise meaning: the envelope is **invalid** if any input
+fact is unaccounted for, and `checkTotality` in `recipe/envelope.ts` is what
+says so by name. Loss stops being a report emitted by a cooperating pipeline
+and becomes a property of the artifact that a validator can refuse. The five
+`reason` values are a closed enum on purpose; a sixth kind of loss requires a
+schema change and therefore a review.
+
+`reason: "inert"` is the one that must be watched. It is the only value that
+asserts _no visual consequence_, and it may only cite an existing
+`spec/channel-table.json` INERT row as evidence.
+
+---
+
+## 6 · The Button vertical slice (Phase 1)
+
+Button is chosen because it is the archetype with the most evidence behind it
+and the least structural ambiguity, so a failure in the slice is a failure of
+the _architecture_, not of the archetype.
+
+### The exact `button@1` edit surface
+
+The recipe is selected by exact `{ id: "button", version: 1 }`; neither compile
+nor collapse infers it from a library name, component name, or tree shape.
+Selection is a reviewed human/config input with provenance (`selectedBy`,
+`mechanism`, `source`, `reviewedAt`) and a positive `manualCost` measured in
+reviewed mappings. Missing selection is `recipe selection is absent`; more than
+one candidate is `recipe selection is ambiguous`. This is an explicit manual
+configuration cost, not zero-touch inference. `recipe/fixtures/button.ts` is
+the canonical instance.
+
+- **Public axes.** `Variant = primary | secondary` (default configurable
+  between those values) and `Size = small | medium | large` (default
+  configurable between those values).
+- **Design-state axis.** `State = default | hover | pressed | focus-visible |
+disabled | loading`. Its default is fixed to `default`; disabled and loading
+  are explicit variants, not inferred from names or opacity.
+- **Presence axis.** `Icons = none | leading | trailing | both`, default
+  `none`. The leading and trailing slots are optional instance slots with
+  explicit component references.
+- **Content.** One required `Label` text value. `loading` inserts the declared
+  indicator in the leading position, preserves the label, replaces any leading
+  icon, and preserves trailing-icon presence.
+- **Token parameters.** For primary and secondary: background, foreground, and
+  border tokens for default, hover, pressed, and focus-visible; one shared
+  disabled appearance; per-size height, horizontal/vertical padding, gap,
+  font size, line height, and icon size; plus radius, border width, font
+  family, and font style. Drawable numeric/paint fields carry literal
+  fallbacks and named Figma variable bindings.
+- **Semantics and non-canvas facts.** The semantic role is the literal
+  `button`. Code-only extensions and loss receipts remain envelope sidecars,
+  participate in normalization and hashing, and survive collapse unchanged.
+
+Compilation emits the complete 2 × 3 × 6 × 4 = **144-variant** matrix inside a
+`component-set`. Every component uses horizontal auto-layout, real padding and
+gap, stable recipe roles, a text node, and explicit slot/loading instances.
+No fixed-coordinate layout is emitted. Collapse accepts only an explicitly
+selected `button@1` envelope, verifies its integrity, axes, full matrix, roles,
+auto-layout, and bindings, then recompiles the recovered instance and refuses
+the first unsupported structural edit by canonical path.
+
+**Current status.** The offline portion includes compile, envelope validation,
+canonical instance/envelope hashes, independent fact accounting, non-empty
+receipts, deterministic React/Web Component output, named adversarial
+refusals, and a two-cycle compile/collapse fixed point. The same generic
+reviewed adapter exercises the Altitude and Fluent Button contracts; only
+explicit fixture data names those libraries, and generic
+recipe/compiler/emitter code contains no source branch. Each reviewed
+configuration now supplies its own canonical parameters instead of
+namespacing one generic visual preset. The real-package v1 comparison is
+rendered,
+provenance-complete, blind graded, and independently adjudicated (§8). Integrity
+passed, but recipe React underperformed legacy 0/12 to 9/12 on the exact paired
+cells. Corrected v2 evidence subsequently passed offline paired recognisability
+12/12 to 7/12 without changing the v1 adjudication. The v4 live mint and its
+independent 12/12 canvas grade subsequently complete the Button slice without
+rewriting either offline batch.
+
+The slice is complete when all of the following hold on one commit:
+
+1. `recipe.button` compiles a first-party button input to an envelope.
+2. The envelope validates: closed IR, total accounting, derived hash.
+3. Normalization is idempotent and key-order-insensitive over that envelope.
+4. An IR interpreter mints the set on the scratch file and the minted set is
+   graded recognisable by the existing census bar.
+5. The receipts are non-empty and every row cites real evidence.
+6. Recompiling from the same input reproduces the hash byte for byte.
+
+Item 4 is the only step that needs a live canvas, and it is the only step that
+needs a human. Items 1, 2, 3, 5, 6 are offline and become the gate.
+
+---
+
+## 7 · The remaining four that decide it (Phase 2)
+
+Each breaks something different. That is the selection criterion; coverage is
+not.
+
+| archetype       | what it breaks                                                                                                                                                                                                                  |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Input/Field** | A second control with editable value, placeholder content, label/description composition, disabled/error/focus states, and a code-only change/input event. It tests whether the Button spine generalizes before the hard three. |
+| **Combobox**    | One component, **two surfaces** — a trigger and a detached popover listbox — plus an item template that is instantiated, not enumerated. Today's anatomy tree has no way to say "and elsewhere, a floating panel".              |
+| **Data Table**  | **Structure the input does not contain.** A table's shape is columns × rows; a capture carries one rendered instance of it. The recipe must emit a header/row/cell template and a declared column axis.                         |
+| **Calendar**    | **No archetype exists.** `calendar / date-picker` is absent from `ARCHETYPES` and is in the never-attempted population. It is also the densest grid the pipeline has faced, and almost all of its behaviour is code-only.       |
+
+Calendar therefore requires adding a row to `ARCHETYPES` in
+`packages/schema/src/archetype.ts` and a required-facts table beside it.
+Widening that enum is a **minor** contract change under the policy in
+[26 — Definition of v1](26-v1-definition.md); it is called out here so it is a
+reviewed act and not a side effect.
+
+Phase 2 exits when each of the four either compiles to a valid envelope whose
+minted set clears the census bar, **or** produces a named refusal that a reader
+can act on. A refusal is an acceptable exit. A silent partial mint is not.
+
+---
+
+## 8 · Migration and the legacy adapter
+
+**No bulk migration.** The legacy contract corpus is retained as **regression
+research** and reached only through a read-only adapter:
+
+```
+legacyAdapter(contract: Contract, reviewedSelection: RecipeSelection): RecipeInput
+```
+
+The adapter reads a committed contract plus explicit reviewed mapping and
+produces recipe input. It never chooses from component/library names, writes a
+contract, edits one in place, or acts as a promotion path. Its job is
+population: running every legacy contract through reviewed selections and its
+recipe produces a receipt census that says, in one table, which facts the new
+architecture drops and why. Selection and mapping cost are reported, not
+hidden. That census is the honest answer to "what would migrating cost",
+derived instead of estimated.
+
+The legacy engine keeps working, unchanged, for the whole pivot. Nothing in
+Phase 0 or Phase 1 alters its behaviour.
+
+### The comparison denominator stays
+
+The benchmark remains all **170 committed contracts** and the **805 real-library
+reference renders** under `parity/receipts/v1/census` (the gate recounts both).
+Its blind baseline remains **117/170 recognisable**, and the usability baseline
+remains **39/170 usable on all four assertions**. Every recipe proof component
+must report the recipe and legacy paths under the same recognisability,
+round-trip/fact-carriage, and usability measurements. A recipe is never
+compared against an empty denominator.
+
+The same independent recount finds **42/170 not-recognisable rows with no named
+wall** (`recognisable === false && walls.length === 0`). “42 unwalled” means
+exactly that predicate; it is not a synonym for all defects or all wall-free
+rows.
+
+The per-archetype legacy context was independently recomputed from
+`origin/main@047f66b8e134a6bc173e9336621fc1baf0e37230` before pinning:
+
+| archetype                           |                   set-weighted recognisability | full legacy variants | variant-weighted set verdict context |
+| ----------------------------------- | ---------------------------------------------: | -------------------: | -----------------------------------: |
+| Button — **easy control**           |                                          12/14 |                  633 |                              617/633 |
+| Input/Field — **difficult control** |                                           3/11 |                1,415 |                          1,349/1,415 |
+| Select/Combobox — weak stub context |                                            4/4 |                    6 |                                  6/6 |
+| Table/Data Grid — weak stub context |                                            5/5 |                   10 |                                10/10 |
+| Calendar                            | **legacy comparison: undefined (0 contracts)** |                    0 |                            undefined |
+
+Those columns are context, not one scalar “outperform legacy” target. A set
+verdict weighted across all of its variants is explicitly labelled as such; it
+is not a per-cell blind grade.
+
+### Matched comparison contract
+
+Before recipe evaluation, each subject pins a legacy baseline over the **same
+real-library inputs and exact same sample matrix**. Both paths report three
+claims separately:
+
+1. deterministic visual fidelity to the independent real-source references,
+   with geometry and pixel/ink kept separate;
+2. structural/semantic/usability correctness, including nonzero cells, sample
+   completeness, axes, required states/roles, reflow, variant switching, token
+   binding, and no fake layout; and
+3. final human recognisability, explicitly pending until a designer reviews it.
+
+Only claims 1 and 2 authorize continued engineering, and both must pass without
+dropping cells. Neither can mark an archetype successful. Claim 3 remains the
+final product bar. Input/Field is the difficult control, not a safe baseline.
+Button's already completed blind grades remain historical proof under their
+locked protocol; this policy does not reinterpret them.
+
+The old Combobox 4/4 over six variants and Table 5/5 over ten variants remain
+published as weak-baseline context only. Before comparison, their legacy
+fixtures must be re-derived against the recipe matrix: Combobox includes
+closed/open/listbox/highlighted/selected roles and states; Table includes
+header/body plus sort/density/selection (or the reviewed final matrix).
+
+Calendar has absolute acceptance only: deterministic visual and structural
+gates first authorize engineering, then every sampled variant must be judged
+recognisable by a human designer; all four usability assertions pass, the
+canonical two-cycle fixed point holds, zero silent facts is measured over a
+non-zero denominator, and a held-out first-pass passes.
+
+Anti-flattery is executable: zero axes when the recipe declares axes, zero
+cells, missing required states/roles, denominator mismatch, or incomplete
+sample coverage is `NOT-COMPARABLE` and can never score 100%.
+
+The earlier automated recognisability comparison used a second, stricter lock.
+Before either output was generated, it pinned the source commit, fixture hash,
+sample-matrix hash, and every real-library reference-render hash. Legacy and
+recipe specimens for every cell were graded **together in one independent blind
+batch**:
+
+- randomize/anonymize specimens so the grader cannot know legacy/recipe path,
+  implementation, library branch, or expected winner;
+- hold protocol version, rubric, pass threshold, crop, scale, browser, fonts,
+  and environment hash identical;
+- store independent grader identity plus each cell's defects, confidence and
+  verdict; and
+- resolve arithmetic by immutable output hash, never by the anonymous label.
+
+Builder/emitter code still cannot author final recognisability verdicts.
+Historical grades retain their exact meaning, packet, and threshold. They are
+not reused for automated progression, and neither failed AI rounds nor
+deterministic metrics are relabelled as human recognition evidence.
+
+“Same reference hash” means the **original source's render**, not either
+conversion path. For a code-origin subject it is the external owner's real
+package/version/component rendered by an independent harness. For a
+canvas-origin subject it is Figma's own export of the hand-built source node.
+Every cell pins external owner, package/file/node identity, version/revision,
+source hash, harness hash, browser/font/environment, cell key, screenshot hash,
+and capture command. A recipe, generated contract, emitted React/WC,
+`emit-html`, or pivot artifact can never produce a reference. The gate names
+`SELF-REFERENCE` when provenance traces to a path under test. Pixel equality
+alone is not proof of copying: the real run found an independently mounted
+Altitude source cell byte-identical to its legacy rendering. The gate therefore
+pins a capture-input lineage hash over package source, reviewed adapter,
+harness, environment and cell key.
+
+The existing Altitude and Fluent Button `ref-render.json` files remain
+historical census context. Button's pivot comparison does not reuse those
+images. `recipe/evidence/button-comparison/receipt.json` independently mounts
+`altitude-web-components@1.0.2` and
+`@fluentui/react-components@9.74.5`, pins each installed package tree,
+registry integrity, sandbox package/lock hashes, reviewed source-adapter hash,
+harness hash, Chromium 149.0.7827.55 / revision 1228 and executable hash,
+600×800 viewport at DPR 2, font-file/environment hashes, capture command,
+per-cell key and PNG hash.
+
+### Button paired measurement protocol — frozen 2026-08-26
+
+The denominator is **12 source cells and 12 cells per compared path**: two
+libraries × `Variant = primary | secondary` ×
+`State = default | hover | focus-visible`. `Size` is fixed to `medium`,
+`Icons` to `none`, and label to `Button`. This is the largest honest shared
+matrix: Altitude has no Button size or icon API, its `isDisabled` prop cannot
+reach the shipped `:disabled` appearance, and no equivalent loading contract
+exists. `small`, `large`, `pressed`, `disabled`, `loading`, and all three icon
+presence cells are therefore excluded by name and retained as separate
+capability coverage, not counted as paired misses.
+
+The reviewed Altitude adapter maps an absent `variant` attribute—the package's
+actual primary default—to `primary`; it no longer relabels `danger` as primary.
+`secondary` maps directly. Fluent maps `appearance=primary|secondary`
+directly and pins `size=medium`, `shape=rounded`, `iconPosition=before`.
+Default is static; hover is a real pointer hover; focus-visible is sentinel
+focus followed by keyboard Tab. Recipe selection is manual `button@1`, with
+mapping decisions and setup seconds in
+`recipe/button-comparison-fixture.ts`. No source adapter is inferred from a
+component or library name.
+
+Every cell is rendered four ways under one crop, scale, white background,
+browser and font environment:
+
+1. the original real package mounted by the independent source harness;
+2. the pinned legacy `core/emit-html.ts` path over the committed contract;
+3. the emitted recipe React path; and
+4. the emitted recipe Web Component path, for parity only.
+
+The evidence gate verifies 12/12 source references, 12/12 legacy outputs,
+12/12 recipe React outputs, 12/12 recipe Web Component outputs, non-zero pixel
+cardinality for every pair, API/DOM/ARIA probes, complete source provenance and
+immutable artifact hashes.
+
+No recognisability verdict was authored by the implementation path. The
+randomized packet is
+`recipe/evidence/button-comparison/blind-packet/packet.json`; it contains 24
+opaque specimens with no legacy/recipe identifiers or expected winner. Its
+answer key is separate at
+`recipe/evidence/button-comparison/sealed-answer-key.json`. The completed grades
+were unsealed only after packet, grade, key, receipt, image, provenance,
+cardinality, ordering, denominator, and non-zero-measurement checks passed. The
+deterministic result is
+`recipe/evidence/button-comparison/comparison-result.json`; the committed reader
+recomputes it and refuses changed grade/key bytes, duplicate or missing
+mappings, and impossible aggregate arithmetic.
+
+The exact result is **legacy 9/12 cells and 0/2 complete source-library sets;
+recipe React 0/12 cells and 0/2 sets**. A set passes only when all six sampled
+cells for that source library pass. Recipe beat legacy on 0 cells, tied pass on
+0, tied failure on 3, and lost 9. By library, legacy scored Altitude 5/6 and
+Fluent 4/6 versus recipe 0/6 and 0/6. By state, legacy scored default 4/4,
+hover 3/4, and focus-visible 2/4 versus recipe 0/4 for each state. Confidence
+was 22 high, 2 medium, and 0 low.
+
+Recorded recipe defects are systematic: all 12 failures name geometry and
+typography drift; 11 name fill/colour drift; focus/state treatment and borders
+also fail. The recipe output reused one generic visual treatment where the two
+sources require reviewed token and geometry inputs. The next implementation
+task is to correct those acquisition/configuration mappings without adding
+library branches to `button@1`, then generate a new sealed batch and obtain a
+fresh independent grade. Existing grades are immutable evidence and are not
+reused after output bytes change.
+
+### Button v2 correction and adjudication — 2026-08-26
+
+The v1 failure traced to acquisition, not to a need for source branches in
+`button@1`. `adaptReviewedButton` cloned the canonical blue/Inter/40px preset
+and changed only token namespaces, defaults, and label. It never acquired the
+source values:
+
+- **Geometry and typography, 12/12 failures.** Altitude's 16px/24px IBM Plex
+  Sans semibold text, 4px radius, and content-hug sizing were replaced by the
+  generic 14px/20px Inter treatment and 8px radius. Fluent's 96×32 minimum
+  geometry, 12×5 padding, 4px radius, and Segoe/system semibold treatment were
+  replaced by a narrower 40px-tall generic button.
+- **Fill/colour, 11/12 failures.** Altitude primary/secondary and hover paints
+  (`#4375ff`/`#6b93ff`, `#a49981`/`#c0b191`) and their dark inks never entered
+  the instance. Fluent's brand/neutral paints and transparent versus light
+  border tokens also never entered it.
+- **Focus and border treatment.** v1 modelled focus as a state-specific border
+  colour. The pinned Altitude source instead has a separated outer ring; the
+  pinned Fluent focus cells are visually identical to default. Altitude has
+  zero-width ordinary borders while Fluent has a 1px neutral border.
+
+The correction keeps `button@1` generic. Reviewed adapter data supplies
+per-source sizing policy, padding/gap, per-size typography, radius, border
+width, per-variant/per-state fills/ink/borders, and Figma-representable shadow
+effects. Token-backed facts retain source token references. Measured literals
+use an explicit `{ kind: "literal", value, receipt }` channel; no shared token
+is invented. The generic IR gained only Figma's minimum layout constraints.
+Source-only facts remain extensions or named receipts.
+
+Acquisition accounting is now by selected source field. Altitude accounts for
+13 non-zero fields (geometry 4, typography 4, fill 2, state 3); Fluent accounts
+for 13 (geometry 5, typography 4, fill 2, state 2). The gate plants bad
+geometry, typography, fill, and state destinations and requires each to go
+red. A separate architecture gate scans generic adapter/compiler/emitter logic
+for source identities and constructs a synthetic visual counterexample proving
+parameter data—not identity—controls output.
+
+The new evidence directory is
+`recipe/evidence/button-comparison-v2/`. It retains the exact v1 sample-matrix
+hash, all 12 original-source screenshot hashes, all 12 legacy output hashes,
+and the same environment hash. Capture refuses if any pinned byte differs. It
+contains 12 corrected React renders, 12 pixel/geometry-equivalent Web Component
+renders, and a fresh anonymized 24-specimen packet at
+`recipe/evidence/button-comparison-v2/blind-packet/packet.json`; its key is
+separate at `recipe/evidence/button-comparison-v2/sealed-answer-key.json`.
+The independent grades at
+`recipe/evidence/button-comparison-v2/blind-packet/grades.json` were unsealed
+only after packet/key separation, opacity, provenance, every image and manifest
+hash, cardinality/order, one grade per specimen, required failure defects,
+matched denominators, non-zero measurements, and v1 reference/legacy byte
+identity passed. The deterministic result is
+`recipe/evidence/button-comparison-v2/comparison-result.json`; its committed
+reader recomputes the result and plants changed-grade, changed-key, impossible
+arithmetic, implementation-guess, missing-defect, zero-measurement,
+packet/key-collapse, and immutable-v1-drift failures.
+
+The exact v2 result is **legacy 7/12 cells and 0/2 complete source-library
+sets; corrected recipe React 12/12 cells and 2/2 sets**. Recipe beat legacy on
+5 cells, tied pass on 7, tied failure on 0, and lost 0. By library, legacy
+scored Altitude 3/6 and Fluent 4/6 versus recipe 6/6 for both. By variant,
+legacy scored primary 4/6 and secondary 3/6 versus recipe 6/6 for both. By
+state, legacy scored default 4/4, hover 3/4, and focus-visible 0/4 versus recipe
+4/4 for every state. All 24 grades have high confidence.
+
+The five remaining graded defects all belong to unchanged legacy specimens:
+five colour/ink mismatches, three focus/state-treatment mismatches, and one
+border/stroke mismatch; no corrected recipe specimen has a recorded defect.
+The different unchanged-legacy score between v1 (9/12) and v2 (7/12) is retained
+as two independent blind-batch judgments, not rewritten history. The matched v2
+decision uses only the v2 pair.
+
+#### Button evidence index
+
+| required Button column                    | result              | exact evidence                                                                                    |
+| ----------------------------------------- | ------------------- | ------------------------------------------------------------------------------------------------- |
+| explicit recipe selection provenance/cost | **pass**            | exact `button@1`; 24 Altitude + 27 Fluent reviewed mappings; no inference                         |
+| unrelated adapters / no source branches   | **pass**            | two source contracts; 13 selected facts each; zero source identities in generic logic             |
+| offline React paired grade                | **pass**            | corrected recipe 12/12 and 2/2 vs unchanged legacy 7/12 and 0/2                                   |
+| Web Component parity                      | **pass**            | 12/12 non-zero React/WC-equivalent cells; recognisability remains ungraded                        |
+| live Figma mint                           | **pass**            | 2 sets, 288 variants, 57 variables, 4,296 bindings                                                |
+| live usability                            | **pass**            | reflow, switching, binding, and no-fake-layout each 2/2; 288/288 labels                           |
+| exact probe restoration                   | **pass**            | 2/2 before/after geometry hashes identical                                                        |
+| live readback fixed point                 | **measured / not stable** | scene-derived inverse ran; both roots fail `button/set` role on the live set name `Button / button@1 proof` |
+| zero-silent accounting                    | **measured / not zero** | silent derived as expectedFacts − matched: Altitude **149/8706**, Fluent **149/8778** after name+axis+ref+stroke+extras teachings; extras 1/1 |
+| attributable human live canvas signoff    | **pending**         | 12/12 grade bytes retained, but no reviewer identity/signature/timestamp proves independence      |
+| independent original-source references    | **pass**            | 12 external-library source renders; neither path under test supplied a reference                  |
+| **overall Button success**                | **false**           | human signoff pending; scene-derived inversion is not silent-zero and not fixed-point stable |
+
+The historical adjudication artifact is
+`recipe/evidence/button-live-pivot-v4/final-adjudication.json`. It recomputes
+the unsealed mapping and arithmetic and refuses stale grades, changed key or
+evidence bytes, duplicate mappings, impossible arithmetic, implementation
+guesses, and missing columns within that historical protocol. The superseding
+status artifact preserves its hash and revokes its overall PASS rather than
+rewriting those bytes.
+
+#### Button scene-derived inversion — measured 2026-08-28
+
+Evidence: `recipe/evidence/button-scene-inversion-v1/`. Method is
+expected-plan vs observe, the same honesty bar as Input V70–V84.
+
+- Compile two 144-variant expected-plans from the reviewed Altitude and Fluent
+  recipes. Do not read stamped plugin-data IR (`ir*`, `cells`,
+  `comparedIrFacts`) or the historical v4 axes/cells readback as observe.
+- Join live variants by `Variant`/`Size`/`State`/`Icons` properties, not by
+  plugin-data ownership keys (the live mint has none).
+- Silent is `expectedFacts − matched`. It is derived, not assigned.
+- First 0-write observe (pre-teaching): Altitude **2911/8706**, Fluent
+  **2887/8778**.
+- Observe-side prepares, then 0-write live re-observe (current page stayed
+  `115:295378`; Input mint untouched; `Y8Jhw6R49wTLuXZ0is2GmV` not written;
+  expected-plan uncompressed hashes unchanged):
+  1. **Role (V74 class).** `role()` takes the first ` :: ` segment before
+     testing `=`. Live variant names are still `Variant=…` with no
+     `button/variant/` first segment; role is recovered from the live
+     `Variant=`/`Size=`/`State=`/`Icons=` property string. Silent −144/−144.
+  2. **Token sanitize (same keys only).** Live `token/{type}/{sanitized}` is
+     the v4 writer slug of the compile identity. Unique reverse map only;
+     collisions left live. No invented identities. Silent −2016/−1992.
+  3. **Name first-segment (V74 / font-provenance class).** Compare takes the
+     first ` :: ` segment. Compile `button/label :: Label` (and slot/loading
+     siblings) vs live `button/label`: 300/301 first-segment-equal. Set name
+     `Button / button@1 proof` vs `button/set` is not first-segment-equal;
+     live name carried. Silent −300/−300.
+  4. **Variant-axis order (V72 Size-axis class).** Live Size
+     `[medium,small,large]` and Variant `[secondary,primary]` match compile
+     value sets. Order only; no invented values. Silent −2/−2.
+  5. **componentRef last-segment (unique same-key).** Live
+     `__button/helper/leading / icon@1` and
+     `__button/helper/loading / spinner@1` last-segment to compile `icon@1`
+     / `spinner@1`. Unique reverse only; unknown last segments left live.
+     Silent −156/−156.
+  6. **Uniform stroke weight (v18/v19 class).** Live 144+144 nodes bind
+     four per-side stroke weights to the same FLOAT and bind no
+     `strokeWeight`. Surfaced `strokes.0.weight` matches compile. No
+     invented weight. Silent −144/−144.
+  7. **Extras drop (V24 class).** Duplicate mapped `fills.N` / `strokes.N`
+     host aliases dropped when the paint-color sibling matches. Set fills
+     and cornerRadius that compile omits were dropped. Set `width.value`
+     extra remains (compile hug; not invented). Silent unchanged.
+- After those: Altitude **149/8706** (8557 matched), Fluent **149/8778**
+  (8629 matched). Extra 1/1. Binding mismatch 0.
+- **Stopped.** Remaining is **value-invent / not same-class**: live
+  resolved fonts 144 (Fluent **Roboto** / `SemiBold` vs compile stacks /
+  `Semi Bold`; Altitude `"IBM Plex Sans", sans-serif` / `Semi Bold` vs
+  `IBM Plex Sans` / `SemiBold`); set name/role `Button / button@1 proof`
+  vs `button/set`; set layout.mode / padding / width.mode. Do **not**
+  invent Roboto/SemiBold as compile fonts. Do not invent hug or padding 0.
+- `ok: false`. Human signoff **pending**. Overall Button **false**.
+- 2026-08-30: the B2h–B2q teachings closed the v1 inversion at 0/0/0 with a
+  stable fixed point on the preserved page `85:6781` (see the status
+  narrative and `recipe/evidence/button-scene-inversion-v1/`).
+
+#### Button B3a focus-ring correction and v5 remint — measured 2026-08-30
+
+TJ's B3 review flagged the Altitude focus states against Altitude's own
+Figma. The three-way diagnosis
+(`recipe/evidence/altitude-focus-ring-diagnosis/receipt.json`) measured all
+three legs: the **mint** painted a `#000b29` ring; the **captured code
+truth** (contract token `outline-color-state-focus-visible`, the shipped
+CSS fallback chain, and a settled re-render in the pinned Chromium) says
+`outline: 2px solid #4375ff` at 2px offset; **Altitude's own Figma**
+(read-only REST read of `y83n4o9LOGs74oAoguFcGS`) paints the same 2px
+OUTSIDE `#4375ff` stroke. The class is a **capture/adapter defect**: the
+fixture ring literal was authored from source-reference screenshots that
+froze `al-button`'s shadow-DOM `transition: all 0.2s` mid-flight (the
+capture harness's light-DOM `transition: none !important` cannot pierce the
+shadow root; the sealed ring pixels measure ≈25% of the way from
+currentColor `#000b29` to `#4375ff`). Not Altitude design-code drift, and
+not a mint defect — the closed inversion correctly proved mint == compile;
+the wrong fact entered upstream of compile.
+
+- **B3a teaching (one class):** `altitudeFocus` now CARRIES
+  `imported.button.root.outline-color-state-focus-visible` (fallback
+  `#4375ffff`) instead of the invented literal, and the `focus-ring` source
+  fact moved from a measured-literal receipt to the contract pointer
+  `/anatomy/root/states/focus-visible/outline-color`.
+- **v5 remint** (`recipe/evidence/button-live-pivot-v5/`): attempts 1–5
+  failed closed and were cleaned; each failure taught a measured writer or
+  transport fact — the plugin sandbox has **no TextEncoder** (portable
+  UTF-8 emitter restores the declared portability truth); large
+  single-message evals through the script-hosted bridge crawl while staged
+  small chunks run at full speed; `setBoundVariableForEffect` **resets
+  drop-shadow geometry** (compile-planned offset/radius/spread carried back
+  over the bound effect); Figma paints **later effect-list entries on
+  top**, so the white offset-gap shadow must list AFTER the ring (the
+  v4-era order buried the gap in every mint). Attempt 6 mint stayed:
+  page `183:69150`, run `6857935c-b04f4059-v4`, Altitude set `183:69776`,
+  Fluent set `183:70424`, 58 variables, all usability probes green
+  (144/144 labels on both roots).
+- **Inversion v2** (`recipe/evidence/button-scene-inversion-v2/`):
+  re-derived expected plans vs fresh 0-write observes of the new page —
+  silent 0 / missing 0 / extra 0 / mismatched 0 on both roots (Altitude
+  **8730/8730** — 24 new effect-binding facts; Fluent **8778/8778**) and
+  the collapse-compile fixed point is two-cycle byte-stable. Two observe
+  defects were taught on the way: the observe `role()` regex was
+  double-escaped inside `String.raw` (truncated `button/…` at the first
+  `n`; never exercised before because the v4-era mint had no descriptions),
+  and the effect-color binding surfaced the same Input V24 host-alias
+  duplicate on the `effects.N` channel.
+- **Focus render, measured:** ring `#4375ff` 2 CSS px at a 2 CSS px
+  page-background offset on both variants
+  (`recipe/evidence/button-live-pivot-v5/screenshots/cells/`), matching the
+  settled code render and Altitude's own Figma ring.
+- The v1 evidence and page `85:6781` stay preserved. `ok: true` on v2 is
+  derived, not assigned. Human signoff (B3) **pending on the new page**
+  (`https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=183-69150`,
+  arranged into labeled 6×24 grids per
+  `recipe/evidence/button-b3a-arrange-pass.json`). Overall Button **false**.
+
+#### Input/Field offline boundary — adjudicated failure
+
+The difficult second control now has an explicitly selected
+`{ id: "input-field", version: 1 }` recipe. Selection remains reviewed config
+with positive mapping cost; neither compiler, inverse, adapter, nor emitter
+infers from a package, component name, or hand-built Figma tree.
+
+The exact edit surface is:
+
+- variant axes `Size = small | medium`,
+  `State = default | focus-visible | error | disabled`,
+  `Content = placeholder | value`, `Required = false | true`, and
+  `Adornments = none | leading | trailing | both`;
+- text properties `Label`, `Placeholder`, `Value`, `Helper text`, and
+  `Error text`;
+- optional instance-swap properties `Leading adornment` and
+  `Trailing adornment`; and
+- generic stacked or floating label placement, plain or notched outline
+  treatment, field-edge or content-inset helper placement, fixed or
+  adornment-additive sizing, fixed or intrinsic-extent adornments, and explicit
+  content alignment; and
+- per-size label offsets and active/inactive text metrics, input/message
+  metrics, helper inset, base width, adornment extents, surface geometry, plus
+  per-state border width, fill, ink, and drawable focus effects.
+
+That is a complete **2 × 4 × 2 × 2 × 4 = 128-variant** matrix. Every component
+uses a vertical auto-layout field and an in-flow surface/content row,
+positive minimum/fixed variant sizing, exactly one placeholder/value role,
+label and helper/error text roles, optional adornment instances, and bound
+numeric/paint token parameters. Floating fields nest their label and content
+rows inside the surface and make notch treatment explicit. The inverse requires exact
+`input-field@1` selection and rejects missing or unexpected roles, broken
+label/input composition, dead `Size`/`State`, layout mode `none`, dropped
+bindings, placeholder/value coexistence, floating labels without named
+notch/activation support, stacked labels with floating policy, and every
+unsupported structural edit by canonical path. Two complete compile/collapse
+cycles are byte-stable for both reviewed source configurations.
+
+The canonical accounting denominator is **15/15 measured**: 8 carried, 6
+code-only extensions, and 1 loss receipt. The extensions name explicit-id
+label association, `aria-describedby`, `aria-invalid`, native
+required/disabled semantics, input/change/focus/blur behavior, and reviewed
+recipe selection. All five applicable legacy seeds
+(`input/box-grammar`, `input/padding-inline`, `input/type-fact`,
+`input/width-rule`, `input/height`) have measured recipe landings. The gate
+plants accounting omissions, extension mislabellings, and acquisition defects
+in geometry, typography, fill, state, and semantics.
+
+The two reviewed benchmark sources are
+`@mui/material@9.2.0` `TextField` and
+`@shopify/polaris@13.9.5` `TextField`. Existing pinned sandboxes and capture
+configs make both reproducible. MUI `small|medium` and Polaris `slim|medium`
+map to the shared two-size boundary; focused/error/disabled, empty/value,
+required indicator, and leading/trailing adornment APIs are explicit fixture
+data. Each corrected adapter records **109 reviewed mappings**, **101 selected
+source facts**, **89 nonzero parameter fields**, setup cost, capture command,
+and unsupported cells. The audit plants both omitted and mislabelled facts.
+
+The React and Web Component experiments emit semantic label/input
+relationships, required/disabled/invalid state, described helper/error text,
+value-versus-placeholder policy, adornments, input/change/focus/blur events,
+and CSS that defines every referenced token variable. Emission is
+byte-identical across repeated runs.
+
+The paired benchmark matrix was frozen before rendering or grading at **128
+source cells total**: two libraries ×
+`Size = small | medium` ×
+`State = default | focus-visible | error | disabled` ×
+`Content = placeholder | value` × `Required = false | true` ×
+`Adornments = none | both`. Each source contributes 64 cells; each recipe set
+still compiles its complete 128-variant four-adornment edit surface.
+
+The independent source harness mounts `@mui/material@9.2.0` `TextField` and
+`@shopify/polaris@13.9.5` `TextField` directly from exact-lock benchmark
+sandboxes. The receipt pins package, lock, installed source-tree, adapter,
+harness, capture-command, Chromium executable/revision, font, environment,
+cell, capture-lineage, and PNG hashes. Under that same crop, scale, background,
+font, and browser environment it retains 128 original-source references, 128
+legacy outputs, 128 recipe React outputs, and 128 independently hashed recipe
+Web Component outputs. No legacy-unsupported cell is omitted; every unsupported
+mapping is attached to every affected legacy cell, while denominator claims
+remain restricted to the exact frozen matrix.
+
+The packet at
+`recipe/evidence/input-field-comparison/blind-packet/packet.json` contains
+**128 references and 256 opaque specimens** (128 legacy and 128 recipe React).
+Its sealed key is outside the packet at
+`recipe/evidence/input-field-comparison/sealed-answer-key.json`. Packet SHA-256
+is `6920d34ba3faec0fd03b6bdd8c8efcbb8b8e81f1e86c709e8021da31e83cd61f`.
+Recipe Web Component evidence is deliberately outside the blind packet and is
+128/128 non-zero, pixel-, geometry-, and semantic-probe-identical to recipe
+React.
+
+The independent grader completed all 256 grades with 128 recognisable and 128
+not recognisable. The adjudicator verified packet/grade/key separation and
+hashes, recomputed the randomized batch hash, required one grade per specimen
+and defects for every failure, checked every image and reference hash, enforced
+path containment, revalidated all 128 source provenance records and the pinned
+environment, and only then unsealed the key. The deterministic result is
+`recipe/evidence/input-field-comparison/comparison-result.json`; its committed
+reader plants changed grade, changed key, duplicate/missing mapping, wrong-cell
+mapping, implementation-guess, missing-defect, and impossible-arithmetic
+failures.
+
+The exact cell-weighted result is **legacy 88/128 versus recipe React 40/128**.
+Neither path completed either 64-cell source set, so both complete-set scores
+are **0/2**. Recipe beat legacy in 40 cells, legacy beat recipe in 88, and there
+were zero tied passes or tied failures. The superficially suspicious 128/128
+split is therefore not one implementation path passing everything: exactly one
+path passed in every paired cell.
+
+By source, MUI is **62/64 legacy versus 2/64 recipe React**; Polaris is
+**26/64 legacy versus 38/64 recipe React**. By size, small is 42/64 versus
+22/64 and medium is 46/64 versus 18/64. By state, default is 16/32 versus
+16/32, focus-visible 32/32 versus 0/32, error 24/32 versus 8/32, and disabled
+16/32 versus 16/32. Placeholder content is 48/64 versus 16/64; value content
+is 40/64 versus 24/64. Required false and true are each 44/64 versus 20/64.
+No-adornment cells are 40/64 versus 24/64; both-adornment cells are 48/64
+versus 16/64. Confidence is 166 high and 90 medium, split identically by path
+(83 high, 45 medium each); no grade is low confidence.
+
+Recipe React's 88 failures contain 271 defect statements: input
+outline/padding/alignment appears in 78 failed cells, field proportions in 76,
+label/helper structure or spacing in 71, and border/fill/state treatment in 46.
+Legacy's 40 failures contain 158 statements: the first three classes appear in
+40, 40, and 38 failed cells respectively, and border/fill/state treatment in
+all 40. These are recorded grader defects, not implementation guesses.
+
+The unsealed v1 root-cause artifact at
+`recipe/evidence/input-field-comparison-v2/v1-root-cause.json` retains all 88
+failed recipe cells and all 271 statements, grouped by source and every exact
+matrix axis. The dominant causes were generic rather than source-ID-specific:
+the recipe forced stacked labels where the outlined source needed
+focus/value/adornment-activated floating and notch structure; it used stale
+fixed width and discarded adornment growth; it collapsed state-specific border
+and focus mechanics into one border plus one shadow; and it under-acquired
+label, input, message, helper-inset, and pinned-viewport typography facts.
+
+The corrected v2 evidence root is
+`recipe/evidence/input-field-comparison-v2/`. It refuses generation unless the
+128 original-source reference hashes and 128 legacy hashes still match v1,
+then renders only corrected React and Web Component outputs. Its packet SHA-256
+is `926a249784907d0133611b47b442cdcca7e2531b3efe903891a46b71739fc9af`;
+the randomized batch hash is
+`c6885a462d0821827b76eedde273db640e7939f48ee44904fdfcf9484d3d5868`.
+The packet contains 128 references and 256 opaque specimens, has a separate
+sealed key, contains no grades or implementation identity, and remains false
+as an immutable pre-grade input. React/WC verification covers 128 nonzero pixel comparisons,
+128/128 threshold-0.1 perceptual pixel matches, 128/128 geometry matches, and
+128/128 semantic-probe matches; byte-identical PNGs are 76/128 because shadow
+DOM overflow capture rasterizes otherwise perceptually identical text at
+subpixel offsets. This is recorded rather than mislabeled as byte identity.
+
+The original single-rater adjudication remains immutable historical evidence:
+rater A recorded 96/256 recognisable specimens and unsealed to unchanged legacy
+0/128 versus corrected recipe React 96/128. It is superseded for progress
+decisions by
+`recipe/evidence/input-field-comparison-v2/multi-rater-adjudication.json`.
+
+Before reading the key, the multi-rater reader independently validates all three
+grade files against the opaque packet. Agreement is 227/256 unanimous and
+29/256 two-of-three. Pairwise agreement/kappa is A–B 89.84%/0.794, A–C
+98.44%/0.966, and B–C 89.06%/0.777. Overall pairwise agreement is 92.45% and
+Fleiss kappa is 0.843. The fixed pre-unseal rule requires every pair at least
+75%, Fleiss kappa at least 0.60, all three complete raters, and two concrete
+defect records for every majority failure; all four conditions pass.
+
+Only then was the two-of-three consensus mapped. The exact consensus result is
+**unchanged legacy 0/128 versus corrected recipe React 95/128**. Complete-set
+scores are **0/2 versus 0/2**. Corrected recipe beats legacy in 95 cells, 33
+cells tie fail, and there are no tied passes or legacy wins. Legacy has 128
+unanimous failures. Recipe React has 92 unanimous passes, 3 majority passes, 7
+unanimous failures, and 26 majority failures.
+
+By source, MUI is **0/64 legacy versus 63/64 corrected recipe React** and
+Polaris is **0/64 versus 32/64**. Small is 0/64 versus 47/64 and medium is 0/64
+versus 48/64. By state, default is 0/32 versus 32/32, focus-visible 0/32 versus
+16/32, error 0/32 versus 15/32, and disabled 0/32 versus 32/32. Placeholder,
+required false, and adornments none are each 0/64 versus 47/64; value, required
+true, and adornments both are each 0/64 versus 48/64.
+
+This within-v2 consensus passes the numerical paired criterion, but it is not
+accepted as architecture progress. All 128 reference hashes and all 128 legacy
+output hashes are exact across v1 and v2, while 88/128 v1 legacy passes reverse
+to failures in both v2 rater A and v2 consensus. Cross-batch agreement is
+40/128 (31.25%), Cohen's kappa is 0, and all 88 disagreements run pass-to-fail
+(exact two-sided McNemar p = 6.46e-27). Multi-rater consensus establishes
+internal v2 reliability; it does not reconcile the changed standard with v1 or
+separate that standard change from architecture performance.
+
+The versioned calibration root is
+`recipe/evidence/input-field-comparison-calibrated/`. Its reader revalidates
+every committed v1/v2 artifact hash, then rereads all 128 reference and 128
+unchanged-control image bytes. The source commit, fixture, environment, exact
+matrix, per-cell reference hash, and per-cell unchanged-control hash agree
+across both rounds. Source-reference provenance is identical for all 128 cells;
+all 768 packet image paths are contained regular files.
+
+The calibration protocol was committed before grading. It globally randomizes
+**384 opaque tasks**: 128 corrected v2 specimens, 128 unchanged-legacy copy A
+specimens, and 128 unchanged-legacy copy B specimens. A/B are byte-identical
+for every exact cell, but their task IDs, reference IDs, specimen IDs, paths,
+and positions are unrelated; same-cell presentations are never adjacent.
+Packet metadata contains neither implementation identity nor duplicate
+membership. The sealed key and receipt pin all 128 duplicate proofs outside the
+blind rater boundary. The packet SHA-256 is
+`f6f245d78c3ef9e8fe6b9fd7e957f660bf69b19f7776f290cf948610f2949dd7`.
+
+The deterministic rubric is applied in this order: structural completeness and
+state correctness; geometry/proportions; label/helper/adornments; typography;
+then border/fill/focus/error treatment. A specimen passes only when structure
+and state match and every later category is either a match or a minor
+non-material raster difference. A missing or wrong role/state, or any material
+later-category mismatch, fails. Every fail/material category requires a
+concrete visible defect.
+
+Acceptance is also predeclared: all three raters complete and valid; at least
+95% hidden-copy agreement per rater; identical A/B majority consensus for at
+least 127/128 cells, with every mismatch blocking that cell; every rater pair
+at least 75% agreement; Fleiss kappa at least 0.60; no rater with more than a
+five-percentage-point A/B pass-rate difference; and concrete defects from at
+least two raters for every majority failure. If any condition fails,
+recognisability remains unusable and live Input/Field work remains blocked.
+
+Only after reliability passes may A/B collapse to one control consensus per
+cell. The two identical copies can never double-weight the control. That one
+result would then be compared with the other implementation's majority on the
+same 128 cells. The v1 single-rater and v2 consensus results remain immutable
+history; a threshold-passing calibrated consensus supersedes them only for
+progression.
+
+Three complete row sets were submitted: A marked 32/384 recognisable, B 20/384,
+and C 8/384. Exact packet order and IDs, unique task IDs, row-level pass rules,
+failure defects, category defect coverage, and absence of identity/duplicate
+guesses all check. The submissions are nevertheless invalid grade artifacts:
+all omit the required `packetHash`, `rubricHash`, `counts`,
+`independentBlindGrade`, canonical `rater`, and declared criterion-defect object
+shape, while renaming other required fields. The adjudicator preserves and
+hashes those bytes; it does not repair them.
+
+The descriptive opaque metrics are 354/384 unanimous and 30/384 split. Pairwise
+agreement/Cohen κ is A–B 368/384 (95.83%)/0.671, A–C 360/384
+(93.75%)/0.379, and B–C 364/384 (94.79%)/0.264. Overall pairwise agreement is
+94.79%, but Fleiss κ is **0.472527**, below the locked 0.60 threshold. In the
+separate duplicate-integrity phase, every rater agrees on 128/128 hidden pairs,
+each A/B pass-rate delta is zero, majority duplicate agreement is 128/128, and
+all 362 majority failures have concrete defect sets from at least two raters.
+
+Reliability therefore fails both the three-valid-rater requirement and Fleiss
+κ. The answer-key hash matches its sealed commitment, but the key was not
+parsed; consensus, implementation performance, and axis/state aggregates are
+null in
+`recipe/evidence/input-field-comparison-calibrated/adjudication.json`. The
+calibrated round does not resolve 88/128→0/128. Human recognisability remains an
+unusable release gate, architecture progression remains blocked, and live work
+remains false.
+
+The replacement protocol lives separately at
+`recipe/evidence/input-field-comparison-calibration-v2/`. It diagnoses only the
+two measurement defects established above: malformed grade envelopes and
+divergent materiality standards under high failure prevalence. It does not
+reinterpret any submitted row. Aggregate tree commitments protect every prior
+Input packet, grade, adjudication, receipt, key, and image: 902 v1 files, 906 v2
+files, and 777 first-calibration files remain byte-identical.
+
+Phase 1 is an independent deterministic synthetic GOLD packet at
+`recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json`.
+Its SHA-256 is
+`70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022`.
+The 24 opaque non-target pairs contain 8 byte-identical/semantically identical
+passes, 4 controlled minor raster/color passes, and 12 unambiguous structural
+or state failures: blank, missing surface/label/helper/adornments, wrong
+focus/error/disabled state, severe clipping, scale, and overlap. The generator
+source, deterministic seed, PNG encoder, dimensions, every image hash, and the
+balanced 12-pass/12-fail answer distribution are pinned outside the blind
+packet. A fresh rater must score at least 95% overall and 12/12 on the obvious
+failures. A failed or malformed calibration submission cannot enter Phase 2.
+Gold outcomes may be opened only after that rater submits, for feedback before
+the separate performance phase.
+
+The rubric is locked as `input-field-observable-rubric-v2`. Required visible
+structure/content and semantic state are categorical: a missing/wrong role or
+default/focus/error/disabled cue fails regardless of numeric similarity.
+Overall width/height is material only beyond both 4 px and 8%; local spacing
+beyond both 4 px and 20%; role-defining scale beyond 10%; required-part clipping
+above 5% area; and required-part overlap above 2 px fail. A glyph-edge shift up
+to 1 px may pass when line count, wrapping, hierarchy, and emphasis do not
+change. Color is minor only within both 12 sRGB levels per channel and Euclidean
+sRGB distance 20, with unchanged structure, state, hierarchy, and contrast
+role. Pixel identity is explicitly not required.
+
+The machine-readable schema is
+`recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json`.
+Per-rater fillable templates sit inside each blind packet. The required envelope
+binds `schemaVersion`, `graderId`, `packetProtocol`, `packetHash`,
+`randomizedBatchHash`, `calibrationCommitment`, `rubricVersion`, exact counts,
+and ordered grades with five criterion objects. The key-free preflight command
+checks exact fields, packet/hash bindings, row order/IDs, pass-rule derivation,
+concrete defect rollup, and—during Phase 2—the same-rater passing calibration
+receipt.
+
+Phase 2 is a new packet at
+`recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json`;
+SHA-256
+`c24f43a3c769a0b5747bbae93a098bdc762895d39d15326547ce857cc104299e`,
+randomized-batch SHA-256
+`9dee5601af7077d660b643c6abe9bdff9ef9550dc8193a4d5b82828a18edae42`.
+It contains the same 128 source-reference bytes, the same 128 corrected-v2
+bytes, and two new opaque presentations of the same 128 unchanged-legacy bytes.
+All task/reference/specimen IDs, paths, and order are fresh; hidden A/B are
+byte-identical per cell and non-adjacent. The sealed key is new. There are no
+performance grades, identities remain sealed, and no performance arithmetic
+exists.
+
+The reliability bar is unchanged or stricter: exactly three calibrated valid
+raters; calibration at least 95% with 100% on obvious failures; valid envelopes;
+at least 95% hidden-copy agreement per rater; at least 127/128 majority
+duplicate agreement; every pair at least 75%; Fleiss κ at least 0.60; at most a
+five-point duplicate-copy pass-rate delta; and concrete defect support from at
+least two raters for every majority failure. Exact duplicate consistency passed
+in the refused round; common-standard agreement did not. Until both calibration
+and performance reliability pass, recognisability is blocked, recipe
+performance is sealed, and live Input is blocked.
+
+Gold qualification under calibration v2 is retained exactly. Rater
+`RATER-CAL-V2-A` scored **22/24** overall and **11/12** on obvious failures, so
+its valid envelope failed both qualification thresholds. It remains labelled
+failed and ineligible. `RATER-CAL-V2-B` and `RATER-CAL-V2-C` each scored
+**24/24** and **12/12**, with valid envelopes and passing hash-pinned receipts.
+The required three-rater cohort was therefore incomplete, and no performance
+access was commissioned.
+
+The versioned replacement commitment lives at
+`recipe/evidence/input-field-comparison-calibration-v3-replacement/`. It does
+not rebuild or copy either packet. It imports B and C only after verifying each
+receipt signature, receipt and submission hash, and exact equality of the gold
+packet/hash/order, calibration commitment, rubric hash/version, grade schema
+hash/version, ordered-envelope rules, and 95%/12-of-12/valid-envelope
+thresholds. Any relevant byte or threshold change invalidates import and
+requires B and C to requalify.
+
+A is explicitly excluded from the new B/C/D roster and may not be relabelled.
+Fresh rater `RATER-CAL-V3-D` has a new template, submission, and receipt path
+but grades the unchanged gold packet under the unchanged scoring contract. D
+uses an explicit identity-only overlay because the immutable v2 schema's
+roster regex names A/B/C; the overlay requires exactly `RATER-CAL-V3-D` while
+leaving the base schema bytes, every scoring field, and every constraint
+unchanged. The overlay and its rationale are part of the pre-grade commitment. D
+must have no prior packet or grade access, submit a valid envelope, score at
+least 95%, and identify all 12 obvious failures before performance access can
+be authorized. The performance packet, randomized IDs/order, sealed key,
+rubric, and every original reliability threshold remain pinned byte-for-byte to
+calibration v2. Those B/C/D output paths remained future-only until D passed;
+recognisability, performance identity, and live Input stayed blocked through
+that authorization gate.
+
+The final replacement adjudication is
+`recipe/evidence/input-field-comparison-calibration-v3-replacement/final-adjudication.json`.
+D qualified at **23/24** overall and **12/12** obvious failures. B, C, and D
+then submitted strict, preflight-valid 384-row envelopes with respectively
+**4**, **14**, and **26** recognisable verdicts. Packet/hash bindings, exact
+IDs/order, qualification receipts, defects, pass-rule derivation, source
+provenance, and the exact 128-reference/128-corrected/256-control byte
+multisets all validate.
+
+Before any performance-key parsing, the adjudicator computed 359/384 unanimous
+rows (2 pass, 357 fail) and 25/384 split rows. Pairwise agreement/Cohen κ is
+B–C 370/384 (96.35%)/0.2094, B–D 360/384 (93.75%)/0.1853, and C–D 372/384
+(96.88%)/0.6851. Overall pairwise agreement is 95.66%, but Fleiss κ is
+**0.409255**, below the unchanged 0.60 minimum. All 369 majority failures have
+concrete defect sets from at least two raters.
+
+The separate opaque byte-pair phase finds 128/128 agreement for each rater,
+zero pass-rate delta for each pair copy, and 128/128 majority-copy agreement.
+The duplicate-control majority is descriptively 0/128 pass pairs, again
+matching the later historical standard rather than v1's 88/128. That does not
+resolve the 88→0 instability: the complete cohort failed its locked reliability
+bar, and prevalence is not a permitted post-hoc threshold adjustment. The
+sealed key was hash-checked but not parsed. Implementation consensus, MUI/
+Polaris and axis/state aggregates, defect classes, set weighting, and the
+offline difficult-control verdict are therefore null/not evaluated.
+
+Those B/C/D rows remain refused measurement evidence and may not be repaired or
+reused. They also close the path to another equivalent absolute pass/fail
+round. The repeated pattern is now measured: all raters were perfectly stable
+on hidden copies and raw pairwise agreement was 95.66%, but binary fail
+prevalence made chance agreement very high while raters applied different
+materiality thresholds. That is a measurement failure, not permission to lower
+the locked κ threshold or reinterpret old verdicts.
+
+The replacement instrument is
+`recipe/evidence/input-field-paired-comparison-v1/`. It separates two claims:
+
+1. **Relative fidelity:** which opaque candidate is closer to the independent
+   original-source reference for the exact same cell.
+2. **Absolute recognisability:** a later human/design-review decision plus
+   objective structural, state, geometry, clipping, semantic, WC, accounting,
+   and usability checks. Relative preference never supplies this verdict.
+
+Its independent GOLD packet is
+`recipe/evidence/input-field-paired-comparison-v1/gold/blind-packet/packet.json`,
+SHA-256
+`4f3418b4a54c5cc683ffc07c7098c282324d931fedd7a50cf5c2bd720b1d1d1b`.
+It has 24 deterministic primary pixel cases and 24 side-swapped hidden
+presentations: 12 clear-winner primaries, six true ties, and six
+materiality-boundary primaries. Clear examples remove or substitute a required
+role/state. Boundary examples place one candidate at a locked v2 tolerance and
+the other beyond it. Tie examples are pixel-equal or carry equal differences
+inside the explicit tie tolerance. Expected outcomes are locked in a separate
+sealed key before rater access; target Input outputs are not used in GOLD.
+
+The performance packet is
+`recipe/evidence/input-field-paired-comparison-v1/performance/blind-packet/packet.json`,
+SHA-256
+`e21e8bf9cbcbded15e35a11a08b03a7a68e408c585ac64ac7ef631862e0f90d7`.
+It has exactly 128 primary tasks and 128 hidden side-swapped tasks. Every task
+shows one exact independent reference and opaque left/right candidates. The
+builder rechecks the same 128 reference hashes, unchanged 128 legacy hashes,
+and unchanged 128 corrected-recipe hashes from v2, copies each byte set twice,
+and gives every presentation unrelated opaque IDs and paths. Candidate order is
+randomized per cell and reversed in the hidden presentation. Duplicate rows are
+reliability controls only and cannot enter final 128-cell arithmetic.
+
+The observable decision order is fixed: required structure and semantic state;
+geometry/proportions; labels, helpers, and adornments; typography; then border,
+fill, focus, and error treatment. Overall dimensions use the existing
+4 px-plus-8% rule; local spacing 4 px-plus-20%; role scale 10%; clipping 5%;
+overlap 2 px; glyph shift 1 px; and color both 12 per-channel and Euclidean 20
+sRGB. A rater chooses at the first ranked material difference and must name the
+decisive difference plus a concrete defect in the losing candidate. “Both
+fail” does not excuse a choice. `tie` is valid only when no ranked category
+distinguishes the candidates and residual differences are equivalent within
+the narrower tie tolerance recorded in the protocol.
+
+The schema is
+`recipe/evidence/input-field-paired-comparison-v1/grade.schema.json`; exact
+fillable templates are under each packet's `templates/` directory. The
+key-free preflight validates packet/hash/commitment bindings, exact ordered IDs,
+`left|right|tie`, confidence, and rationale. GOLD qualification requires three
+valid raters, at least 95% each, and every clear winner correct. Performance
+then requires at least 95% side-swap consistency per rater, at least 127/128
+majority side-swap consistency, every rater pair at least 75% categorical
+agreement, Fleiss κ at least 0.60 over the predeclared three classes, and at
+least two-rater support for every primary decision. Raw agreement is always
+reported beside κ. None of these thresholds may change after grades arrive.
+
+Only after every reliability condition passes may the performance key map
+candidates to legacy/recipe. The report then gives recipe wins, legacy wins,
+and ties over all 128 primary cells, by source and by every axis. Relative pass
+requires recipe wins greater than legacy wins, denominator exactly 128, and the
+existing no-source-branch check. It does not mark Input successful or authorize
+live work.
+
+That qualification did not pass. All three strict envelopes are retained:
+`RATER-PAIR-V1-A` scored **44/48**, `RATER-PAIR-V1-B` **42/48**, and
+`RATER-PAIR-V1-C` **41/48**. No rater met the locked 95% threshold; B and C also
+missed clear winners. The performance packet and answer key remain sealed and
+ungraded. The failed result is not a reason to recruit until three models match
+the key. Doing so would select for conformity to this synthetic instrument, not
+for truth about the product. The paired protocol, submissions, and receipts
+remain failed/qualified historical evidence and are not retroactively
+reinterpreted.
+
+The two AI instruments failed for different measured reasons but the same
+automation conclusion:
+
+- Absolute pass/fail grades were stable on hidden byte copies yet unstable on
+  materiality across cohorts: unchanged legacy moved from 88/128 to 0/128, and
+  the calibrated cohorts failed their locked κ thresholds despite high raw
+  agreement.
+- Paired grading removed the absolute threshold question, but all three raters
+  still failed an objective GOLD qualification containing side swaps, clear
+  defects, ties, and boundary cases.
+
+AI grading may still be retained as qualitative research. It is not reliable
+enough to authorize architecture progression. Final absolute recognisability
+is instead an explicit human designer gate.
+
+The replacement deterministic instrument is versioned separately at
+`recipe/evidence/input-field-objective-comparison-v1/`. Its protocol was locked
+before measurement at SHA-256
+`b31c69642a69da054d644a91afa2b5dd6867ffe2eef3ca36fffe0763a93d1a34`.
+It uses the exact 128 independent source-reference bytes and both 128-cell v2
+candidate sets. The comparator receives only opaque candidate IDs, bytes,
+retained dimensions/content boxes, and image-independent probes; recipe/legacy
+identity is applied only after the opaque measurement artifact is serialized.
+The failed paired performance key was not opened or used. A fresh identity map
+comes from the already-known v2 output paths.
+
+Every cell records decoded dimensions, nonzero ink pixels, image and retained
+content boxes, signed/absolute dimension deltas, threshold-0 exact and
+threshold-0.1 perceptual pixel differences, and normalized ink-count delta.
+Alpha is composited over white before comparison; ink is any composited channel
+below 250; content boxes are center-padded on a union canvas without resampling.
+Pixel/ink error fixes weights at 0.5 exact, 0.4 perceptual, and 0.1 ink delta.
+Geometry is a separate equal mean of normalized rendered and retained
+content-box width/height deltas. Overall weighted error reports 0.5 geometry and
+0.5 pixel/ink, but both constituent gates must independently pass.
+
+The pre-result progression rule requires recipe to win more exact cells on both
+geometry and pixel/ink, strictly improve both aggregate errors and the reported
+overall weighted error, preserve all 128 cells and every axis/state/role, pass
+every DOM/ARIA/WC/accounting assertion, and introduce no catastrophic
+structural/state regression. Hidden duplicate, repeated-byte, transparent,
+blank, shifted-size, missing-label, wrong-state, copied-reference provenance,
+and metric-weight tamper plants all go red. A copied source reference cannot
+become a successful candidate even at zero visual error because its provenance
+is invalid.
+
+The exact objective result is:
+
+- geometry: recipe **128 wins**, legacy **0**, ties **0**; mean error
+  **0.003944321614310101** versus **0.13629572184136426**;
+- pixel/ink: recipe **108 wins**, legacy **20**, ties **0**; mean error
+  **0.4024965355745618** versus **0.36345476688405753**;
+- overall weighted error: recipe **0.20322042859443593** versus legacy
+  **0.24987524436271086**;
+- structure/semantics: recipe **128/128**, legacy **0/128** under the same exact
+  assertions, with zero recipe catastrophic regressions; all DOM/ARIA,
+  React/WC, accounting, fixed-point, deterministic-emission, matrix, and
+  no-source-branch checks pass.
+
+By library, geometry is 64–0 for both. Pixel/ink is MUI 44–20 and Polaris 64–0.
+MUI's recipe aggregate pixel/ink error is 0.286889 versus legacy 0.117464; the
+disabled axis is the dominant cross-library regression at 0.749035 versus
+0.358427 and splits 16–16. Default is 32–0, focus-visible 32–0, and error 28–4.
+Size is 54–10 for both small and medium; placeholder is 52–12, value 56–8,
+required false and true are each 54–10, adornments none 52–12, and both 56–8.
+
+The recipe clears cell wins, geometry aggregate, overall weighted error, and
+all structural gates, but it fails the separately locked aggregate pixel/ink
+criterion. Geometry cannot hide raster/ink error. Deterministic visual fidelity
+is **false**, structural/semantic correctness is **true**, and live Input
+engineering remains **blocked**. The next implementation correction is the
+MUI/disabled-state paint and ink treatment, under a new evidence version.
+
+The third claim remains deliberately unresolved: an independent designer must
+decide whether the final corrected outputs are absolutely recognisable as their
+original-source Input/Field. Neither deterministic visual fidelity nor
+structural correctness marks final Input success. The earlier
+`objective-absolute-gate.json` remains a historical pre-measurement artifact and
+is not rewritten.
+
+The historical 3/11 set-recognisable result over 1,415 variants remains separate
+census context. It spans 11 heterogeneous contracts and capped historical
+samples rather than this two-package, 128-cell paired denominator.
+
+##### Input/Field evidence index
+
+| version               | offline implementation | paired blind recognisability                                                       | WC parity                                                 | live Figma                     | accounting                                              | overall Input success |
+| --------------------- | ---------------------- | ---------------------------------------------------------------------------------- | --------------------------------------------------------- | ------------------------------ | ------------------------------------------------------- | --------------------- |
+| v1                    | pass                   | **fail** — 40/128 < 88/128                                                         | 128/128 byte/pixel/geometry/semantic; parity only         | pending                        | offline pass; live pending                              | **false**             |
+| v2                    | pass                   | **blocked** — reliable 95/128 > 0/128 consensus, unresolved unchanged-legacy swing | 128/128 perceptual-pixel/geometry/semantic; parity only   | pending                        | 89/89 fields/source; no loss                            | **false**             |
+| calibrated            | unchanged              | **refused pre-unseal** — invalid grade envelopes; Fleiss κ 0.473 < 0.60            | unchanged                                                 | blocked                        | unchanged                                               | **false**             |
+| calibration v2        | unchanged              | **incomplete** — A failed 22/24 and 11/12; B/C passed 24/24; performance sealed    | unchanged                                                 | blocked                        | unchanged                                               | **false**             |
+| replacement v3        | unchanged              | **refused pre-unseal** — 3 valid envelopes; Fleiss κ 0.409255 < 0.60               | unchanged parity-only                                     | blocked                        | unchanged                                               | **false**             |
+| paired v1             | unchanged              | **qualification failed** — 44/48, 42/48, 41/48; performance key remains sealed     | unchanged parity-only                                     | blocked                        | offline pass; live pending                              | **false**             |
+| objective v1          | unchanged v2 bytes     | human recognisability pending; deterministic visual gate **failed**                | 128/128 parity; structure 128/128                         | blocked                        | offline pass; live pending                              | **false**             |
+| objective v2          | pass                   | human recognisability pending; deterministic offline visual gate **passed**        | 128/128 parity; structure 128/128                         | authorized                     | offline pass; live pending                              | **false**             |
+| live v1               | pass                   | 128 source/live pairs retained locally; ungraded and not AI-graded                 | live validation failed; artifacts cleaned                 | **failed**                     | live 14,064/14,064 accounted                            | **false**             |
+| live v2               | pass                   | aggregate-better than legacy; adornment content and MUI stratum **failed**         | historical structure/usability metrics retained           | **failed**                     | historical self-referential account is not re-certified | **false**             |
+| live v3               | failed                 | attempt 3 retained 128 unscored captures after host normalization failure          | writer/runtime returned; all downstream gates unavailable | **failed**                     | no measured account; v3 permanently exhausted           | **false**             |
+| live v4 authorization | offline architecture   | no capture; no objective values                                                    | pinned normalization and transactional journal            | pending parent commit and push | prospective occurrence-preserving account               | **false**             |
+
+Input/Field v1 remains a failed historical result. V2's internally reliable
+consensus meets the within-batch arithmetic criterion without a denominator
+reduction, but the product verdict is blocked because the unchanged control is
+not stable across batches. The later absolute and paired calibration failures
+are preserved rather than repaired or rerun. Structural, semantic, accounting,
+and WC parity evidence remains separate; WC recognisability is ungraded. The
+objective gate authorizes work only when deterministic visual and structural
+claims both pass. Objective v2 passes every locked offline progression
+criterion and authorized live engineering. Live v1 then used all three capped
+writer attempts. The final run minted both 128-variant sets, but failed one MUI
+width-reflow assertion, MUI declared-bounds validation (24/128), and the live
+canvas objective comparison (geometry 112/128 and pixel/ink 85/128 versus the
+legacy comparator). All Input-created Scratch artifacts were therefore
+cleaned. Overall Input success remains false and final human designer
+recognisability remains pending.
+
+#### Combobox offline technical proof — ungraded, 2026-08-27
+
+The first hard archetype now has an explicitly selected
+`{ id: "combobox", version: 1 }` recipe. The selected real-library sources are
+the pinned `@mui/material@9.2.0` `Autocomplete` and `antd@5.29.3` `Select`.
+Both package APIs and source files were reviewed directly. Both sources support
+multiple selection, but `combobox@1` deliberately proves the comparable
+single-select slice; multiple/tags are named source refusals rather than a
+partially aligned axis.
+
+The exact designer edit surface is six variant properties:
+`Size = small | medium`, `Appearance = outlined | filled`,
+`Open = false | true`,
+`Field state = default | disabled | error | loading`,
+`Content = options | empty`, and the nested option component's
+`Option state = default | highlighted | selected | disabled`; six text
+properties (`Label`, `Placeholder`, `Helper text`, `Error text`, `Empty text`,
+`Loading text`); four instance swaps (`Leading control`, `Clear indicator`,
+`Popup indicator`, `Selected indicator`); and option instance properties
+`Label`, `Value`, and `Disabled`. Root resize is fixed-width, the trigger fills
+the root, the overlay matches trigger width, and vertical sizing hugs content.
+Unknown structural edits are refused.
+
+Compilation produces a horizontal recipe-library frame containing a 64-variant
+combobox set and an eight-variant option set (two sizes × four option states):
+**72 components and 242 instances**. Every open variant has a separate
+fill-width vertical listbox overlay with explicit absolute positioning,
+left/top constraints, `x=0`, and a positive below-trigger offset. Normal open
+cells repeat four instances of `combobox@1/option`; they do not flatten options
+into unrelated frames. Trigger, overlay, option, typography, radius, spacing,
+size, state, and appearance values carry variable bindings and explicit font
+provenance.
+
+The inverse runs only after exact reviewed recipe selection. It rejects missing
+trigger/listbox/option sets, open/overlay disagreement, broken anchors,
+non-instance repetition, dead/unknown axes, selected/highlighted collapse, fake
+layout, missing bindings, malformed option data, unknown roles, and hand-built
+rectangles. Recompile/collapse holds a canonical two-cycle fixed point for both
+adapters. Each reviewed source occurrence is independently accounted to a
+shared-IR landing, code extension, or named refusal using a stable occurrence
+id; omission, mislabelling, duplicate occurrence, and duplicate-collapse
+plants are red.
+
+The paired proof protocol was frozen before results at **12 cells per source,
+24 total**. It covers both sizes and appearances; closed and open; default,
+disabled, error, and loading field states; options and empty content; all four
+option states; label/helper/error; controls; and detached overlay/listbox
+roles. Expected full structure is 64 combobox variants, eight option variants,
+72 components, 48 repeated option occurrences, and 242 instances. A zero-axis
+closed stub cannot enter the protocol.
+
+Generated React and Web Component proofs implement editable query, single
+selection, open/close, disabled-option skipping, ArrowUp/ArrowDown/Enter/Escape,
+`aria-expanded`, `aria-controls`, `aria-activedescendant`, label/helper/error
+relationships, focus retention, stable input nodes/carets, and safe
+text/CSS/token handling. This is a bounded proof widget, not a production
+widget library.
+
+No source reference was rendered or graded, no Figma/MCP call occurred, and no
+live artifact exists. The old 4/4 recognisable legacy census result over only
+six variants is retained verbatim as weak context, not accepted as the target.
+Combobox overall success remains **false/ungraded/no-live**. The Figma writer
+is now offline-hermetic (`recipe/combobox-figma-writer.ts`) and does not reuse
+the Input identity. Input V85 live human grade does not grade Combobox.
+Combobox v41 later received its own attributable live human grade
+(**passed**, 2026-08-29, page `163:35981`). Combobox `overallSuccess`
+stays false. Next hill is Data Table. Do not invent a Data Table human
+grade.
+
+#### Pivot progress
+
+| archetype   | progress                                                                                                                                                        | next evidence boundary                                                                           |
+| ----------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| Button      | **technical mint retained; extras-drop teach landed (silent derived, Altitude 149/8706, Fluent 149/8778, extras 1, not zero); overall false/pending**                                                                                                              | attributable human signoff (human gate). Stopped on fonts and invented set chrome. Do not invent Roboto/SemiBold. |
+| Input/Field | **offline objective passed; live v1/v2 failed; v3 exhausted; v7 attempt 1, v8 attempts 1-2, v9 attempts 1-2, v10 attempts 1-2, v11 attempt 1, v12 attempt 1, v13 attempt 1, v14 attempt 1, v15 attempt 1, v16 attempt 1, v17 attempt 1, v18 attempt 1, v19 attempt 1, v20 attempt 1, v21 attempt 1, v22 attempt 1, v23 attempt 1, v24 attempt 1, v25 attempt 1, v26 attempt 1, v27 attempt 1, v28 attempt 1, v29 attempt 1, v30 attempt 1, v31 attempt 1, v32 attempt 1, v33 attempt 1, v34 attempt 1, v35 attempt 1, v36 attempt 1, v37 attempt 1, v38 attempt 1, v39 attempt 1, v40 attempt 1, v41 attempt 1, v42 attempt 1, v43 attempt 1, v44 attempt 1, v45 attempt 1, v46 attempt 1, v47 attempt 1, v48 attempt 1, v49 attempt 1, v50 attempt 1, and v51 attempt 1 failed closed; v56 attempt 1 failed closed, v57 attempt 1 failed closed, v58 attempt 1 failed closed, v59 attempt 1 failed closed, v60 attempt 1 failed closed, v61 attempt 1 failed closed, v62 attempt 1 failed closed, and v63 attempt 1 failed closed; v64 attempt 1 failed closed; v65 attempt 1 failed closed; v66 attempt 1 failed closed; v67 attempt 1 failed closed; v68 attempt 1 failed closed; v69 attempt 1 failed closed; v70 attempt 1 failed closed; v71 attempt 1 failed closed; v72 attempt 1 failed closed; Polar width/spread diagnosis published; v73 attempt 1 failed closed; v74 attempt 1 failed closed; v75 attempt 1 failed closed; v76 attempt 1 failed closed; v77 attempt 1 failed closed; v78 attempt 1 failed closed; v79 attempt 1 failed closed; v80 attempt 1 failed closed; v81 attempt 1 failed closed; v82 attempt 1 failed closed; v83 attempt 1 failed closed; v84 attempt 1 closed after cleanup; mint did not stay; v85 attempt 1 mint stayed; Input live human grade passed 2026-08-28; product v1 incomplete; overall false** | Data Table next. Combobox v41 live human grade passed 2026-08-29. Button leftover still pending (149 silent / fonts + set chrome). Do not invent a Button or Data Table human grade. Do not claim v1 complete. |
+| Combobox    | **live v41 attempt 1 mint stayed on `163:35981`; TJ named feedback 2026-08-29 empty/loading listbox padding not a miss; no remint; live human grade passed 2026-08-29 ~09:17 UTC-5; RECORD `f330a082` humanSignoff stays pending; overall false**                                                                              | Combobox live human grade recorded in `recipe/evidence/combobox-live-v41-human-signoff.json`. Do not overwrite page `163:35981`. Next hill is Data Table. Do not invent a Data Table human grade. |
+| Data Table  | **live v5 attempt 1 failed closed at extract SCENE-OWNERSHIP-KEY-ABSENT; minWidth teaching cleared; restore 8 held; mint cleaned; not live; no human grade; overall false**                                                     | Do not restart v5 attempt 2 as-is. Do not invent a Data Table human grade. Do not write Input `115:295378` or Combobox `163:35981`. |
+| Calendar    | **live v30 attempt 1 mint stayed on `180:56126`.** V31 compile names the vendored 6-row default, nav, 28 circle, root padding 12; capture month April 2026; vendored light `#0064E0`. **V31 attempt 1 failed closed** at writer FILL caption. **V32 attempt 1 failed closed** at extract collapse (`layout.minWidth` binding absent). **V33 attempt 1 failed closed** at extract host minWidth drop. **V34 attempt 1 failed closed** at extract `calendar/day/button` `strokes.0.weight` (minWidth class cleared). **V35 attempt 1 failed closed** at extract nav `bindings[0].field` (stroke-weight fold held). **V36 attempt 1 failed closed** at extract nav-icon `bindings[0].field` (nav-button compile-order held). Pages cleaned. V30 stays. No grade. Astryx only. Overall false; product v1 incomplete | Open Calendar page `180:56126` only. Do not restart v36 attempt 2 as-is. Next teaching: host keeps compile-carried `calendar/nav/previous/icon` and `calendar/nav/next/icon` bindings in compile order (`type.fontSize`, `fills.0.color`). Do not invent Polar/MUI/Fluent calendars. Do not invent Polar/MUI/Fluent calendars. Do not use docs dark canvas or site `#262626`/`#ebebeb`. Do not open Input `115:295378`, Combobox `163:35981`, Table `173:48924`, or Button `85:6781` as Calendar. Product v1 incomplete. |
+
+### First page-scoped live writer run — blocked, 2026-08-26
+
+The Desktop Bridge read-only preflight passed against the only writable target:
+file `byMp6lt0Ij9b2QbkDGFwBh`, name `Scratch Project`, editor `figma`. The
+dedicated page identity was
+`Recipe Pivot / Button / ae57b16a-5c52de74`; it did not exist before the run.
+The writer plan contained both unrelated reviewed source adapters, 144 declared
+and planned cells per source, and 3,978 primitive-IR facts per set.
+
+The maximum three live writer attempts were used:
+
+1. Figma refused the hyphenated shared-plugin-data namespace.
+2. The raw Desktop Bridge API refused the `use_figma`-only
+   `createAutoLayout` convenience.
+3. `createVariable` refused the source token identity as a Figma variable
+   name.
+
+No fourth attempt was made and no node was hand-edited. Cleanup removed only
+the task-created pages, tagged sections, variable collections, and one orphan
+component created before the third refusal. A final read proved that the proof
+page is absent and zero run-matching variable collections remain. The corrected
+offline writer now creates generated Figma-safe variable names while preserving
+the source token identity in shared plugin data, but is explicitly recorded as
+**not executed**.
+
+The fail-closed receipt is
+`recipe/evidence/button-live-pivot/receipt.json`; its exact writer, plan, capped
+attempt log, cleanup IDs, source/envelope hashes, zero-denominator live
+verdicts, and future independent grading task are checked by
+`recipe:live-receipt:check` and adversarially falsified by
+`recipe:live-receipt:self-test`. No screenshots or blind canvas packet exist:
+without live specimens, creating or grading one would substitute offline output
+for the claimed live path. Button therefore remains **false**.
+
+The pinned legacy eval record is also red: **227/230**, failing
+`astryx-reanchor-minted`, `minted-leaves-bind-to-something`, and
+`console-loop-canvas-drift-probe`. Named reds do not make the full lane green.
+
+### Versioned live writer repair — blocked before execution, 2026-08-26
+
+The v1 receipt and writer bytes remain immutable. V2 lives separately under
+`recipe/evidence/button-live-pivot-v2/` and pins
+`@figma/plugin-typings@1.135.0`. Its offline conformance gate parses the writer
+and typings, inventories 17 Plugin API calls and 72 writable properties, and
+executes a live-convention mock over all 288 variants. The mock observed 57
+variables, 6,427 plugin-data writes, 11,087 property writes, and 4,296
+bindings. Planted versions of all three historical defects go red before live
+execution.
+
+The generic repair uses `ds.contracts.recipe.v2`, creates supported scene nodes
+and enables auto-layout through `layoutMode` and related properties, and maps
+tokens to deterministic `token/<type>/<sanitized-identity>` names. A reverse
+map rejects collisions before page creation; original token identities remain
+in shared plugin data. Two regenerations produced writer SHA-256
+`336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f`.
+
+The Desktop Bridge read-only probe again passed against only
+`byMp6lt0Ij9b2QbkDGFwBh` (`Scratch Project`). Before state was 12 pages, 170
+top-level nodes, 12 local variable collections, and 11,106 local variables,
+with no v2 proof page or matching collection. The exact-writer in-memory
+transport then failed its pre-execution fingerprint
+(`68686350` expected, `c32753a0` observed). The writer was not evaluated, so
+this consumed zero writer attempts and created no page, node, collection, or
+variable. Temporary transport globals were cleared; after state matched the
+same six counts exactly. No screenshot, probe, readback, fixed point, packet,
+or visual grade exists, and Button remains **false**. The fail-closed v2
+receipt is `recipe/evidence/button-live-pivot-v2/receipt.json`.
+
+### Exact-byte v3 execution — live usability failure, 2026-08-26
+
+V3 preserves both earlier receipts and replaces manual runtime reserialization
+with `ds-contracts/figma-writer-utf8-base64/v1`. The generated envelope carries
+the exact on-disk UTF-8 bytes, byte length, and SHA-256. The plugin validates
+base64 grammar, decoded length, SHA-256, and strict UTF-8 before evaluation.
+Deterministic JavaScript SHA-256 and UTF-8 fallbacks cover the Desktop plugin
+sandbox, where `TextDecoder` was unavailable on attempt 1. Attempt 2 decoded
+32,146 bytes and matched writer SHA-256
+`336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f`
+before both `evalBegan` and `evalCompleted` became true.
+
+The writer created exactly two sets with 144 variants each and 57 total local
+variables. Live readback compared 7,956 planned IR facts, observed 10,368
+normalized facts, and produced the same canonical SHA-256
+`ceddaec224130655fda8066653f4c1ae0766fb13b7dc267d3888d047cfad689e`
+after each of two complete cycles. Variant switching, token binding,
+non-absolute auto-layout, and restoration passed for both representative
+instances. The Altitude long-label specimen expanded from 83px to 314px; the
+Fluent specimen remained 96px, so reflow passed only 1/2. Representative PNG
+bytes were retained as evidence without a visual grade.
+
+Because a nonzero usability denominator remained red, Button remains
+**false**. The task-created page plus both task-created variable collections
+were removed. The after census returned exactly to 12 pages, 170 top-level
+nodes, 12 local collections, 11,106 local variables, and zero matching proof
+artifacts. The v3 receipt and tamper reader live under
+`recipe/evidence/button-live-pivot-v3/receipt.json` and
+`recipe/live-receipt-v3.ts`.
+
+### Versioned v4 writer — complete live Button proof, 2026-08-26
+
+V3's 96px Fluent result was not evidence that the source intended a fixed
+button. The recipe still declared HUG with a 96px minimum. The retained live
+diagnostic found the actual failure below that root: the selected SF Pro
+Semibold fallback loaded successfully but produced `characters="Button"`,
+height 15px, and width **0px**. With clipping enabled, there was no responsive
+horizontal label geometry and no visible exported label.
+
+V4 fixes this in shared recipe/writer vocabulary, not with a Fluent branch.
+Button now declares HUG source sizing plus a centered label response to a
+designer fixed-width resize. The writer tests each ordered font-stack
+candidate against positive rendered text geometry and refuses if every
+candidate is empty; it records the selected family/style for readback. Fluent
+advanced deterministically to Roboto SemiBold. Planted HUG snap-back, frozen
+label, empty/invisible label, wrong alignment, and incomplete restoration all
+go red offline.
+
+The exact-byte v4 transport decoded and hashed 33,977 writer bytes
+(`2cab582e5b9a7329ec6e316d9981dc13e74532ed9b4b6bd64afff56408547cd8`).
+Its conformance run minted 288 planned variants, 57 variables, 7,003
+plugin-data writes, and 4,296 bindings. Attempt 1 refused the measured
+zero-width label and cleaned only its page and two partial collections;
+attempt 2 completed. The retained proof is page `85:6781`, with Altitude set
+`85:7406`, Fluent set `85:8054`, live proof section `85:8089`, and paired-cell
+section `85:8090`. No pre-existing node changed.
+
+Both sources passed all four usability assertions. A designer resize was
+modeled as Figma does it: the instance changes from HUG/AUTO to a fixed primary
+axis, grows by 64px, and must move the centered label by 32px. Altitude grew
+83→147px and Fluent 96→160px; both restored byte-identical geometry hashes.
+Variant switching, nonzero token bindings, and 600/600 in-flow auto-layout
+children also passed. All 288 labels had nonempty text, a loaded font, visible
+fill, and positive dimensions. Live readback compared 7,956 planned facts,
+observed 13,248 facts with zero silent loss, and produced the same canonical
+SHA-256
+`e450fb2bfd2380abb1376c9cc5bd9c6d0860fd11afb7e66803d14bf7c5aa81bd`
+for two complete cycles.
+
+The proof retains 12 exact live cells (two sources × two variants × three
+states), both whole-set exports, and a fresh anonymized packet at
+`recipe/evidence/button-live-pivot-v4/blind-packet/packet.json`. The immutable
+pre-grade packet and receipt remain sealed/ungraded and false as historical
+inputs; the builder authored no recognisability verdict. The independent grade
+passed all 12 specimens with high confidence and no defects or implementation
+guesses.
+
+The final adjudicator validated packet/grade/key separation and hashes, unique
+mapping, 24 non-zero images, original-source provenance, exact writer transport,
+Scratch file/page/set IDs, all screenshot bytes, both usability probes and
+restoration hashes, two-cycle canonical stability, 13,248/13,248 accounted
+facts with zero silent loss, and every preceding offline/live column before
+unsealing. It then aggregated 6/6 per library, 6/6 per variant, 4/4 per state,
+and 12 high-confidence grades. The historical artifact is
+`recipe/evidence/button-live-pivot-v4/final-adjudication.json`; its reader
+plants stale-grade, changed-key, duplicate-mapping, impossible
+arithmetic, implementation-guess, required-field, provenance, and
+missing-column failures within that superseded protocol. Its grader bytes carry
+no attributable reviewer identity/signature/timestamp, and its readback did not
+invert actual scene properties. A later scene-derived inverse has now run
+(`recipe/evidence/button-scene-inversion-v1/`); silent is derived and not
+zero (Altitude **149/8706**, Fluent **149/8778** after name+axis+ref+stroke+extras teachings; extras 1),
+and the two-cycle fixed point is not stable. Current Button success is
+therefore **false/pending** until an attributable human signs off.
+
+This proves one Button archetype over the two unrelated Altitude and Fluent
+libraries on the one fixed `medium` / `none`-icons, primary/secondary ×
+default/hover/focus-visible matched slice. It does not establish Input/Field,
+Combobox, Data Table, Calendar, another library, or excluded Button states,
+sizes, and icon-presence cells. The next task is Input/Field recipe design as
+the difficult control, starting offline and reusing the proven protocol.
+
+### Input/Field live v1 — failed and cleaned, 2026-08-27
+
+The Desktop Bridge preflight matched only writable file
+`byMp6lt0Ij9b2QbkDGFwBh`, `Scratch Project`, editor `figma`. The isolated
+`input-field@1` primitive-IR writer planned two sets, 256 variants, 158 local
+variables, 18,553 plugin-data writes, and 8,704 bindings. Its final exact-byte
+transport verified and decoded 1,694,457 UTF-8 bytes with SHA-256
+`15077af39a6ebd0930d00bf99b80c23b83a1b8e02d5318ffa8bd81c3c7fbae3a`.
+The three capped attempts were a plugin-data-entry-size refusal, a complete
+mint that failed live validation, and a source-fixed complete mint that still
+failed final validation. Each failure was followed by Input-only cleanup. The
+last temporary page was `86:16021`, with sets `86:17454` and `86:18755`, proof
+section `86:18756`, and paired section `86:18757`.
+
+Both sets switched through all 128 variants, retained nonzero bindings, used
+only in-flow auto-layout children, and restored exact before/after probe hashes.
+Polaris passed width reflow; MUI's surface widened 195→259px but its inactive
+content width remained 118px, so the required fill-response assertion failed.
+All 256 variants had nonzero role structure, labels, content, messages, and
+state ink. Polaris passed declared bounds 128/128; MUI passed only 24/128. Both
+readbacks collapsed through `input-field@1` for two stable cycles with exact
+source recipe and envelope hashes. Live accounting classified
+14,064/14,064 observed facts as carried, with zero silent omissions.
+
+All 128 locked paired cells were captured against the unchanged independent
+references and measured with the locked objective comparator. Live beat legacy
+on geometry in 112/128 cells and pixel/ink in 85/128, with mean errors
+0.013402 geometry, 0.343458 pixel/ink, and 0.178430 overall. These are complete,
+non-sampled measurements but do not satisfy the required all-cell live proof.
+All Input-created Scratch artifacts and both variable collections were removed
+after the failure. Existing census and Button proof nodes were not targeted.
+The ungraded human packet is retained locally at
+`recipe/evidence/input-field-live-pivot-v1/human-review-packet.json`; no review
+was requested and no AI recognisability verdict was authored. The evidence
+index is `recipe/evidence/input-field-live-pivot-v1/index.json`. Input remains
+false.
+
+### Input/Field live v2 — structural repair passed, raster failed, cleaned, 2026-08-27
+
+V2 preserved every v1 artifact byte-for-byte. Per-cell diagnosis showed that
+all 16 geometry losses were MUI medium/both-adornment cells; all 43 v1
+pixel/ink losses were MUI (30 both-adornment and 13 no-adornment cells); and the
+104 MUI bounds failures were distributed evenly across size and required axes.
+The apparent MUI reflow defect was narrowed with live scene measurements: the
+actual content row grew 165→229px while the TEXT property leaf remained its
+intrinsic 118px, a Figma component-text-property behavior. The v1 probe had
+measured the glyph leaf rather than the editable content region.
+
+The generic primitive IR now declares overlay positioning, offset, and
+constraints. Only nodes carrying that primitive lower to Figma
+`layoutPositioning="ABSOLUTE"`; these declared overlays are not classified as
+fake layout. Attempt 1 refused because Figma does not permit variable bindings
+on `x`/`y`; it was cleaned. Attempt 2 represented the 256 offset bindings
+honestly as code-only facts, minted two 128-variant sets, and passed both reflow
+probes, 256/256 switching, both binding probes, both no-fake-layout checks,
+exact restoration, all 256 role/state/bounds/overlap checks, and two stable
+inverse cycles with unchanged source recipe hashes. Accounting remained
+14,064/14,064: 13,808 carried, 256 code-only, zero refused, zero silent.
+
+The temporary v2 page was `86:22579`; sets were `86:24012` and `86:25313`;
+final proof and paired sections were `86:30316` and `86:30317`. Exact attempt-2
+transport decoded 1,709,077 bytes with SHA-256
+`05481c74cb445a6fb55375260b65ee15cde893d19eadeed002e386776962df55`.
+All 128 cells were captured unsampled. Against the unchanged comparator, live
+still won geometry in 112/128 and pixel/ink in 87/128; mean errors were
+0.013402252, 0.343523599, and 0.178462925. V1→v2 therefore changed pixel/ink
+85→87 but did not meet the locked all-cell objective. The unused third attempt
+was not spent on an unmeasured raster guess.
+
+The page and both variable collections were removed after failure. The ungraded
+packet remains at
+`recipe/evidence/input-field-live-pivot-v2/human-review-packet.json`; no review
+was requested and no AI grade was authored. Input remains false.
+
+The v2 structure/usability numbers and aggregate improvement remain historical
+measurements, but its fixed-point and zero-silent labels are not re-certified:
+the verifier read stamped original IR and assigned the remainder carried.
+Visual inspection also found incorrect adornment payload and a regressing MUI
+pixel/ink stratum. V2 therefore remains failed under both the old recorded rule
+and the prospective v3 safeguards.
+
+### Prospective Input live v3 criterion and two-commit authorization
+
+Commit `be6b01300ad99d8a29ea4c11508d192dec84bbea` records
+`recipe/evidence/input-field-live-pivot-v3/protocol.json` before any new
+capture. The exact committed Git-object bytes have SHA-256
+`f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23`.
+The protocol's retained draft status bytes are not rewritten: the commit around
+them is the externally visible antecedent, while a second commit must add
+`recipe/evidence/input-field-live-pivot-v3/capture-authorization.json`.
+The authorization commit is discovered, never embedded, as the unique first
+addition returned by
+`git log --reverse --diff-filter=A --format=%H -- recipe/evidence/input-field-live-pivot-v3/capture-authorization.json`.
+It must strictly descend from the antecedent. A capture `codeCommit` must equal
+that authorization commit or be a clean descendant containing identical
+authorization and protocol bytes.
+
+The authorization artifact was first added by
+`ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b`. The typed runner/verifier
+scaffolding is now prepared-uncommitted and capture has not run. After that
+scaffolding is committed from a clean tree, both
+`npm run recipe:input-field:live:v3:authorization:check -- --capture-code-commit HEAD`
+and the v3 preflight must pass before the separately handed-off runner may
+target Figma file key `byMp6lt0Ij9b2QbkDGFwBh`. A later receipt must record the
+antecedent, discovered authorization, and capture code commits and must itself
+descend from the authorization commit. No receipt or observed capture data
+exists now.
+
+The hash changed only because correction-task implementation dependency hashes
+were added; criterion semantics and thresholds below did not change.
+
+The hard 128-cell gate covers structure, semantics, all-axis switching, typed
+bindings, restoration, actual adornment content, state treatment, no clipping,
+no overlap, scene-derived inversion, and occurrence-preserving expected-plan
+accounting. Missing, extra, mismatched, duplicate-collapsed, or unobserved facts
+fail; `silent=0` is derived. Existing thresholds remain 4px+8% dimensions,
+4px+20% spacing, 10% role scale, 5% clipping, and 2px overlap.
+
+Visual acceptance is relative: recipe wins must exceed legacy losses; aggregate
+geometry and perceptual/ink error must improve overall; and no source, state, or
+adornment stratum may materially regress. Exact pixel difference is diagnostic
+only. Attributable human signoff is mandatory.
+
+### Input live v3 exhaustion and v4 pending authorization
+
+Attempt 3 used the final v3 slot from clean committed descendant
+`6903d31eb015933a6796722d25f6155fb13332ce`. Exact-byte transport decoded
+2,453,320 bytes with SHA-256
+`c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc`.
+The writer and portable readback runtime returned and 128 PNGs were persisted.
+The host then failed at `recipe/scene-readback.ts:982`: node `boundVariables`
+reported `fills`, `fontSize`, and `lineHeight` as alias arrays, producing
+`fills.0`, `fontSize.0`, and `lineHeight.0`, while `letterSpacing` was the
+typed `{unit,value}` object specified by `@figma/plugin-typings@1.135.0`.
+The old host projection expected canonical paint/text paths and a scalar
+letter-spacing number.
+
+That failure occurred before occurrence accounting. Scene facts measured,
+missing/extra/mismatch/duplicate counts, fixed-point cycles, usability,
+restoration, and objective rows are therefore unavailable—not zero. The 128
+captures are unscored hard-failure evidence. The runner persisted neither its
+writer result nor cleanup result before normalization, so exact attempt IDs are
+unavailable. Ownership verification nevertheless found zero owned pages and
+collections after cleanup and the unrelated Scratch fingerprint remained
+exactly `10ba6b57da3cfa97`.
+
+The v4 draft retains every v3 product criterion and threshold but replaces the
+proof plumbing. Raw scene data is paired with an independently captured local
+variable table. A generic host normalizer handles direct aliases, paint alias
+arrays, paint-level aliases, text scalar aliases, missing values, MIXED
+refusals, and typed PIXELS/PERCENT/AUTO unit objects. Variable IDs are used only
+to join that captured table; canonical identity comes from the local collection
+name, variable name, and resolved type. Unknown shapes, stale IDs, duplicate
+aliases, incompatible types, ambiguous arrays, and partial mixed ranges fail by
+name.
+
+Every phase writes an atomic deterministic hash-chained artifact immediately
+after return: preflight; writer IDs/counts; raw scene plus variable table; host
+normalization; accounting and fixed point; usability and restoration; captures
+and objective; retention and cleanup. Recovery cleanup reads exact page, set,
+section, collection, and node IDs from the persisted writer phase. Capture is
+unreachable until accounting, fixed point, usability, restoration,
+clipping/overlap, adornment content, and state gates all pass.
+
+The v4 protocol/architecture antecedent is committed and published at
+`25b820868104be65194f83e154f59b70aacf2bae`. Its committed protocol bytes have
+SHA-256
+`e65584d1d52178cd80dddbe42458a58b0a1ade4f24e41fb53fa4b9cdb97105d6`;
+the runner, generic normalizer, transactional journal, verifier, writer,
+evidence reader, and normalization fixtures are separately pinned by hashes in
+`capture-authorization.json`. The full v3 evidence Git tree remains
+`705fbd0c5be0f66a8945bd9a7bde89b99d02b106`, so no v3 byte is reused or
+rewritten.
+
+The separate v4 authorization artifact is prepared with SHA-256
+`6c0c4d772280af24b9387193a5b7723ebfff73eff9e66a89eec9d22ebd4f258b`
+but is **pending-uncommitted authorization**. It embeds no authorization commit;
+the verifier discovers the unique first commit that adds the artifact, requires
+that commit to strictly descend from the antecedent, and requires future
+`codeCommit` to equal or descend from both. A clean worktree and exact upstream
+equality are mandatory, so the current uncommitted artifact authorizes nothing.
+
+The pinned protocol permits at most three future attempts, each from a clean
+published descendant, and targets only Scratch file key
+`byMp6lt0Ij9b2QbkDGFwBh` with page-scoped ownership. No source/library file is
+writable, no live execution has occurred, no target values are added, and
+attributable human signoff remains pending. Attempt 1 may be handed off only
+after the parent commits and pushes this layer and both authorization and
+preflight verifiers pass; capture remains ordered after every transactional,
+normalization, scene-derived, fixed-point, usability, restoration, content,
+state, font, clipping, and overlap gate.
+
+### Browser↔Figma raster calibration v1 — held-out rejection, cleaned, 2026-08-27
+
+The historical record says a separate canonical primitive corpus was locked
+before Input v3 tuning; the current uncommitted tree cannot prove that
+chronology:
+24 generic specimens split before measurement into 16 training and 8 held-out
+validation cases. It covers Inter and Roboto text families, regular and medium
+styles, multiple sizes and line heights, fixed/fill/hug horizontal layout,
+paired adornment instances, asymmetric gaps and padding, 1px strokes, radii,
+fills and opacity, floating-label overlays/notches, focus/error-like treatment,
+and small/medium dimensions. The corpus contains no source, component, or Input
+cell identity and has canonical SHA-256
+`daeac5691a14cbfd494fb0fb21d5c105d55f1dc257a76bfe42bce425dce28660`.
+
+Pinned Chromium rendered the original IR at DPR 2 on white using the repository
+font bytes. The exact-byte Scratch writer rendered that same IR through Plugin
+API nodes and exported each frame twice. Training alone derived a 0.9958043981
+font-size scale, 1.0 line-height scale, +0.0075472608px letter-spacing offset,
+and symmetric 64-level RGB capture normalization. Writer compensation and
+capture normalization are separate explicit configuration channels; neither
+changes source structure. Browser duplicate captures and both Figma duplicate
+exports were byte-identical, all captures were nonzero, and live structural
+projections remained unchanged.
+
+The recorded held-out result failed: mean geometry improved
+0.110400399→0.110141293, but pixel/ink regressed
+0.183872422→0.186577771. Training also failed aggregate improvement
+(geometry 0.065204045→0.065319097; pixel/ink
+0.147285020→0.150935213). There were no catastrophic held-out regressions and
+all structural facts remained unchanged, but both aggregate metrics were
+required to improve. The calibration is therefore rejected. It is not consumed
+by Input, no Input target output changed, and Input v3 is not authorized.
+
+The temporary Scratch page `86:34349` and its baseline/calibrated sections were
+removed. Exact pre/post Scratch state matched, no variable collection was
+created, and immutable Input live v1/v2 evidence hashes matched before/after.
+The attempt history retains the namespace refusal, stale-page cleanup recovery,
+and projection-receipt correction. The evidence index is
+`recipe/evidence/raster-calibration-v1/index.json`.
+
+The recipe inverse is additive. The existing recipe-agnostic
+`--phase design-to-code` / first-pass fixtures run before and after a recipe
+proof. Recipe collapse requires an explicit reviewed selection; an unmatched
+hand-built canvas remains a reviewable general proposal and is never silently
+forced into `button@1`.
+
+---
+
+## 9 · Module boundaries
+
+Phase 0 establishes the shape below. Everything under `recipe/` is
+**experimental** and is not exported from any published package until a gate
+says otherwise.
+
+| path                                        | phase | role                                                                                                  |
+| ------------------------------------------- | ----- | ----------------------------------------------------------------------------------------------------- |
+| `recipe/figma-ir.ts`                        | **0** | the primitive IR — types and schema. No CSS names.                                                    |
+| `recipe/envelope.ts`                        | **0** | the canonical envelope, extensions, receipts. Totality rule.                                          |
+| `recipe/index.ts`                           | **0** | the experimental surface, re-exported in one place.                                                   |
+| `recipe/normalize.ts`                       | **0** | strict canonical JSON normalization and UTF-8 bytes.                                                  |
+| `recipe/hash.ts`                            | **0** | domain-separated SHA-256 over the unsigned envelope.                                                  |
+| `recipe/recipe.ts`                          | **1** | the implemented `Recipe` interface, registry, and refusal type.                                       |
+| `recipe/recipes/button.ts`                  | **1** | implemented `button@1` compile + inverse validation/collapse.                                         |
+| `recipe/adapters/button.ts`                 | **1** | priced reviewed acquisition for unrelated Button inputs.                                              |
+| `recipe/output/button.ts`                   | **1** | deterministic React and Web Component output from `button@1`.                                         |
+| `recipe/recipes/input-field.ts`             | **2** | implemented offline `input-field@1` compile + inverse validation/collapse; no live claim.             |
+| `recipe/adapters/input-field.ts`            | **2** | priced reviewed acquisition shared by the two future real-source benchmark targets.                   |
+| `recipe/output/input-field.ts`              | **2** | deterministic semantic React and Web Component output from `input-field@1`.                           |
+| `recipe/accounting.ts`                      | **1** | independent fact/landing recomputation; emitter claims ignored.                                       |
+| `recipe/comparison.ts`                      | **1** | matched-denominator scoring and anti-flattery refusals.                                               |
+| `recipe/interpret.ts`                       | **1** | page-scoped primitive IR → Figma writer plan and exact-byte Plugin API script; v4 live proof retained |
+| `recipe/raster-calibration.ts`              | **2** | versioned source-neutral corpus, locked metric, bounded derivation, and held-out rejection gate.      |
+| `recipe/raster-calibration-browser.ts`      | **2** | pinned browser rendering of the canonical calibration IR.                                             |
+| `recipe/raster-calibration-figma-writer.ts` | **2** | explicit-config Figma rendering of the same calibration IR.                                           |
+| `recipe/raster-calibration-receipt.ts`      | **2** | deterministic evidence, cleanup, immutable-history, and tamper verification.                          |
+| `recipe/legacy-adapter.ts`                  | 3     | read-only `Contract` → `RecipeInput`.                                                                 |
+| `recipe/recipes/*.ts`                       | 2     | combobox, data table, calendar.                                                                       |
+
+### Keep / rewrite / retire
+
+**Keep and evolve/reuse; do not discard wholesale.**
+`packages/schema/src/*` (the legacy contract schema and the archetype
+vocabulary), `packages/core/src/required-facts.ts` (the referee and seed of the
+recipe registry — Button maps its three required and two expected facts to
+measured IR landings), `packages/core/src/tokens.ts`,
+`spec/channel-table.json` and `spec/lowering.json` (they become the evidence
+`receipts` cites), the census and first-pass harnesses, every CI lane.
+
+**Rewrite, behind `recipe/`.** Structure decisions currently inside
+`core/emit-figma-script.ts` move to recipes; the Figma-API half moves to
+`recipe/interpret.ts` as a bounded interpreter over a closed vocabulary. The
+original file is not edited during the pivot.
+
+**Retire, only after its replacement is green.** Nothing is deleted in Phase 0.
+The candidates are the ad-hoc structural inference in the propose path and the
+per-surface loss reporting that `receipts` subsumes. Each needs a gate proving
+the replacement covers it before it goes.
+
+---
+
+## 10 · Acceptance gates
+
+Each gate is offline, cheap, and adversarial. None of them requires a browser
+or a network.
+
+| gate                                                            | refuses when                                                                                                                                                                                                                                                                                                                     |
+| --------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `recipe:schema:check`                                           | an envelope validates while carrying a CSS channel name in `ir`, or an unknown `reason`, or an authored hash.                                                                                                                                                                                                                    |
+| `recipe:totality:check`                                         | an input fact is absent from all three of `ir`, `extensions`, `receipts`. The self-test drops one fact and expects red.                                                                                                                                                                                                          |
+| `recipe:normalize:check`                                        | normalization is not idempotent/key-order-insensitive, changes array order, or accepts a value JSON would coerce.                                                                                                                                                                                                                |
+| `recipe:hash:check`                                             | key insertion order changes the hash, or a meaningful tree/value/domain mutation does not.                                                                                                                                                                                                                                       |
+| `recipe:button:check`                                           | Button compilation drifts, its fixed point breaks, an axis/role/binding edit passes, or a planted defect is missed.                                                                                                                                                                                                              |
+| `recipe:button-scene-inversion:check`                          | Button expected-plan vs observe drifts, silent is assigned or claimed zero, stamped IR is read, or overall/signoff is overclaimed.                                                                                                                                                                                              |
+| `recipe:input-field:check`                                      | Input/Field compilation, two-cycle fixed point, fact accounting, source-boundary gate, semantic output, or a planted refusal drifts.                                                                                                                                                                                             |
+| `recipe:acquisition:check`                                      | a selected Button source fact lacks a by-field landing, a measured literal invents a token, or source identity enters generic logic.                                                                                                                                                                                             |
+| `recipe:receipts:check`                                         | a receipt cites evidence that does not exist, or an `inert` row cites a row that is not INERT in the channel table.                                                                                                                                                                                                              |
+| `recipe:comparison:check`                                       | a legacy pin does not recompute, denominators differ, axes/cells are zero, or required states/roles/sample coverage are missing.                                                                                                                                                                                                 |
+| `recipe:comparison:adjudicate`                                  | packet/grade/key/receipt bytes drift, blind separation breaks, mapping is not bijective, failure defects are absent, or stored arithmetic differs from recomputation.                                                                                                                                                            |
+| `recipe:input-field:comparison:v2:multi-rater:check`            | a rater is missing/reordered, thresholds fail, majority failures lack two defect records, key bytes drift, or consensus/instability arithmetic differs.                                                                                                                                                                          |
+| `recipe:input-field:comparison:calibrated:check`                | continuity bytes drift, packet metadata reveals a hidden copy, A/B differ, grade envelopes are invalid, thresholds change after lock, reliability arithmetic drifts, or a failed gate unseals performance identity.                                                                                                              |
+| `recipe:input-field:comparison:calibration:v3:check`            | B/C import pins differ, A is relabelled, D is missing from the replacement roster, a scoring field/threshold changes, performance bytes/key/order drift, or performance access is enabled before D qualifies.                                                                                                                    |
+| `recipe:input-field:comparison:calibration:v3:adjudicate:check` | a qualification/envelope/hash/order/provenance/byte-continuity/reliability metric drifts, a failed threshold opens the key, architecture arithmetic appears after failure, or Input/live becomes true.                                                                                                                           |
+| `recipe:input-field:paired:check`                               | historical evidence bytes drift, GOLD becomes ambiguous or unbalanced, side swaps/opaque IDs/source-byte continuity fail, grade/tie rules weaken, calibration or reliability thresholds move, a failed gate opens the key, duplicates enter final arithmetic, or relative preference is promoted to absolute/Input/live success. |
+| `recipe:input-field:objective:check`                            | the locked protocol, exact 128-cell manifest, source/candidate/environment bytes, opaque measurements, identity timing, fixed metric weights, per-cell dimensions/nonzero/pixel/ink/structure assertions, aggregate arithmetic, historical evidence index, or fail-closed progress decision drifts.                              |
+| `recipe:ir:closed:check`                                        | an IR field has no named Figma Plugin API assignment in the interpreter.                                                                                                                                                                                                                                                         |
+| `recipe:scene-readback:check`                                   | expected-plan occurrences collapse, actual scene layout/binding/text/payload/axis/children drift is missed, plugin-data source IR can mask a mutation, or the scene-derived two-cycle fixed point is unstable.                                                                                                                   |
+| `recipe:pivot-status:check`                                     | Button or Input is promoted, v2 is re-certified, committed criterion chronology is misstated, the prospective criterion hash drifts, or any v3 capture/result appears before authorization.                                                                                                                                      |
+| `recipe:input-field:live:v3:authorization:check`                | antecedent/capture protocol bytes or thresholds drift, Git ancestry is wrong, the authorization first-add commit is absent/non-unique/changed, the tree is dirty, a required scene/Task 2 gate or exact Figma key changes, posthoc data leaks into authorization, or a receipt predates authorization.                           |
+| `recipe:regression:census`                                      | the legacy-adapter census changes without its committed table changing (a decrease-only ratchet on carried facts).                                                                                                                                                                                                               |
+
+Phase 0 shipped the schema, normalization, and hash tests. Phase 1 adds
+`recipe:button:check`, including planted dead-axis, missing-role, fake-layout,
+unsupported-edit, wrong-selection, and dropped-binding failures. The remaining
+gates arrive with the code they guard, and each must **fail before it passes**:
+a gate that has never been red has not been tested.
+
+---
+
+## 11 · Stop / go
+
+**Go** requires, on one commit, all of: Button's easy-control slice and the
+Input/Field difficult-control slice complete on matched denominators; the hash
+stable across recompiles; totality enforced by the schema rather than by
+convention; and at least two of Combobox, Data Table, Calendar compiling to a
+minted set that clears their matched or absolute acceptance bar.
+
+**Hard stop — abandon the pivot** if any of these is true after Phase 1:
+
+1. **The IR cannot stay closed.** If Button alone forces an escape hatch —
+   a free-form property bag, a raw CSS passthrough — the closed vocabulary is
+   not achievable and the central premise is dead.
+2. **Receipts explode.** If a first-party button's receipt list is dominated by
+   `no-figma-primitive` rows, the IR is too small to be useful and the honest
+   finding is that this archetype class is not canvas-expressible.
+3. **The hash is not stable.** If canonical form cannot be made deterministic
+   over the same input, §4's four downstream properties all collapse.
+4. **Recipes need per-library special-casing.** If `recipe.button` needs a
+   branch per source library, the recipe is not archetype-specific — it is a
+   capture-specific script wearing a recipe's name, and it will rot exactly the
+   way the current forward path did.
+
+A stop is recorded here with its evidence, the same way
+[23 — Known limitations](23-known-limitations.md) records the others. It is not
+a failure of the exercise; an architecture disproved in one vertical slice is
+the cheapest possible outcome.
+
+---
+
+## 12 · What this supersedes, and what it does not
+
+**Superseded — the forward capability plan.** The _direction of travel_ implied
+by the capability rows of [26 — Definition of v1](26-v1-definition.md)
+(`V1-CLASS-01`, `V1-CLASS-02`) and by entry 2 of its approved post-v1 register
+is superseded by this document. Those rows describe archetype classes as
+graduating through incremental widening of the existing engine. That is no
+longer the plan: a class graduates by acquiring a recipe and passing §10's
+gates.
+
+**Not superseded — everything else in docs/26.** Its rows are the release
+contract and this document does not edit them, weaken them, or reclassify any
+archetype. `V1-CLASS-01`'s proven list and `V1-CLASS-02`'s experimental list
+remain exactly as measured. In particular:
+
+- **This document does not declare v1**, and does not move v1 closer. It
+  describes work that has not been done.
+- **No archetype is reclassified here.** Combobox, Data Table and Calendar
+  remain experimental or never-attempted until a gate says otherwise.
+- **No docs/26 row may be edited** on the strength of this plan. A row changes
+  when a §10 gate is green on a commit, and the edit cites that gate.
+- The engine's measured results ([24 — What works](24-what-works.md)) are
+  unaffected; nothing here re-measures them.
+
+**Related reading.** [02 — Contract spec](02-contract-spec.md) for the legacy
+document this sits beside, [30 — Channel table](30-channel-table.md) for the
+per-property classification `receipts` cites as evidence, and
+[31 — First pass](31-first-pass.md) for the untouched-chain metric the recipe
+path will eventually have to answer to.

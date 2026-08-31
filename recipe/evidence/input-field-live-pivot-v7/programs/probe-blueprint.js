@@ -1,0 +1,40 @@
+
+await figma.loadAllPagesAsync();
+const V7_NS="ds.contracts.input.recipe.v5",V7_PAGE_ID="__WRITER_PAGE_ID__",V7_SET_IDS=new Set(["__MUI_SET_ID__","__POLARIS_SET_ID__"]),V7_SOURCE_BY_ADAPTER={"material-text-field-reviewed-v1":"mui","commerce-text-field-reviewed-v1":"polaris"};
+const page=await figma.getNodeByIdAsync(V7_PAGE_ID);
+if(!page||page.type!=="PAGE")throw new Error("INPUT-V7-PROBE-PAGE");
+const get=(node,key)=>node.getSharedPluginData(V7_NS,key),sets=page.findAllWithCriteria({types:["COMPONENT_SET"]}).filter(node=>V7_SET_IDS.has(node.id));
+if(sets.length!==2)throw new Error("INPUT-V7-PROBE-ROOTS:"+sets.length);
+const role=node=>{const description=typeof node.description==="string"?node.description:"",match=description.match(/(?:^|\n)recipe-role:([^\n]+)/);return match?match[1]:(node.name.includes("/")&&!node.name.includes("=")?node.name.split(" :: ",1)[0]:undefined);};
+const nodes=root=>[root,...root.findAll()],box=node=>node.absoluteBoundingBox?{x:node.absoluteBoundingBox.x,y:node.absoluteBoundingBox.y,width:node.absoluteBoundingBox.width,height:node.absoluteBoundingBox.height}:null;
+const area=value=>value?Math.max(0,value.width)*Math.max(0,value.height):0,intersection=(a,b)=>{if(!a||!b)return null;const x=Math.max(a.x,b.x),y=Math.max(a.y,b.y),r=Math.min(a.x+a.width,b.x+b.width),d=Math.min(a.y+a.height,b.y+b.height);return r>x&&d>y?{x,y,width:r-x,height:d-y}:null;};
+const visibleLoss=(child,parent)=>{const childArea=area(child);return childArea===0?1:1-area(intersection(child,parent))/childArea;},overlap=(a,b)=>{const hit=intersection(a,b);return hit?Math.min(hit.width,hit.height):0;};
+const axes=node=>Object.fromEntries(node.name.split(",").map(part=>part.trim()).filter(part=>part.includes("=")).map(part=>{const at=part.indexOf("=");return[part.slice(0,at),part.slice(at+1)];}));
+const propertyKey=(instance,name)=>Object.keys(instance.componentProperties).find(key=>key.split("#")[0]===name),plain=instance=>Object.fromEntries(Object.entries(instance.componentProperties).sort(([a],[b])=>a.localeCompare(b)).map(([key,value])=>[key,value.value]));
+const snapshot=instance=>JSON.stringify({width:instance.width,height:instance.height,properties:plain(instance),nodes:nodes(instance).map(node=>({type:node.type,name:node.name,width:node.width,height:node.height,visible:node.visible!==false,characters:node.type==="TEXT"?node.characters:undefined})).sort((a,b)=>(a.name+a.type).localeCompare(b.name+b.type))});
+const sources=[],cells=[];
+for(const set of sets){
+ const adapterIdentity=get(set,"adapterIdentity"),source=V7_SOURCE_BY_ADAPTER[adapterIdentity],components=[...set.children];
+ if(!source||components.length!==128)throw new Error("INPUT-V7-PROBE-VARIANTS:"+adapterIdentity+":"+components.length);
+ for(const component of components){
+  const axis=axes(component),all=nodes(component),byRole=name=>all.filter(node=>role(node)===name),semantic=all.filter(node=>role(node)&&(node.type==="TEXT"||node.type==="INSTANCE")&&node.visible!==false),componentBox=box(component);
+  let maximumOverlap=0;for(let i=0;i<semantic.length;i++)for(let j=i+1;j<semantic.length;j++)maximumOverlap=Math.max(maximumOverlap,overlap(box(semantic[i]),box(semantic[j])));
+  const required=byRole("input-field/required-indicator").length===(axis.Required==="true"?1:0),leading=byRole("input-field/slot/leading").length===((axis.Adornments==="leading"||axis.Adornments==="both")?1:0),trailing=byRole("input-field/slot/trailing").length===((axis.Adornments==="trailing"||axis.Adornments==="both")?1:0);
+  const adornments=[...byRole("input-field/slot/leading"),...byRole("input-field/slot/trailing")];let adornmentPayloadExact=true;
+  for(const node of adornments){if(node.type!=="INSTANCE"){adornmentPayloadExact=false;continue;}const main=await node.getMainComponentAsync(),description=main&&typeof main.description==="string"?main.description:"",accessibility=description.match(/(?:^|\n)adornment-accessibility:([^\n]+)/),sourceMarker=description.match(/(?:^|\n)adornment-source:([^\n]+)/),texts=node.findAllWithCriteria({types:["TEXT"]}).filter(text=>text.visible!==false).map(text=>text.characters),expectedText=role(node)==="input-field/slot/leading"?"$":"USD";let parsedAccessibility;try{parsedAccessibility=accessibility?JSON.parse(accessibility[1]):null;}catch{parsedAccessibility=null;}if(texts.length!==1||texts[0]!==expectedText||!sourceMarker||!parsedAccessibility||typeof parsedAccessibility.decorative!=="boolean"||!parsedAccessibility.relation)adornmentPayloadExact=false;}
+  const expected=["input-field/label","input-field/surface",axis.Content==="placeholder"?"input-field/content/placeholder":"input-field/content/value",axis.State==="error"?"input-field/message/error":"input-field/message/helper"];
+  const stateSemanticsExact=axis.State==="error"?byRole("input-field/message/error").length===1&&byRole("input-field/message/helper").length===0:byRole("input-field/message/helper").length===1&&byRole("input-field/message/error").length===0;
+  const noFakeLayout=all.filter(node=>"children" in node).every(node=>node.layoutMode!=="NONE"&&node.children.every(child=>child.layoutPositioning!=="ABSOLUTE"||!!child.constraints));
+  cells.push({source,adapterIdentity,cellKey:[source,axis.Size,axis.State,axis.Content,axis.Required,axis.Adornments].join("/"),rolesExact:expected.every(name=>byRole(name).length===1)&&required&&leading&&trailing,stateSemanticsExact,adornmentPayloadExact,noFakeLayout,visibleAreaLoss:Math.max(0,...semantic.map(node=>visibleLoss(box(node),componentBox))),overlapPixels:maximumOverlap});
+ }
+ const instance=set.defaultVariant.createInstance();page.appendChild(instance);const before=snapshot(instance),beforeWidth=instance.width,original=plain(instance),allBefore=nodes(instance),surface=allBefore.find(node=>role(node)==="input-field/surface"),content=allBefore.find(node=>role(node)==="input-field/content-row"),surfaceWidth=surface&&surface.width,contentWidth=content&&content.width;
+ instance.resizeWithoutConstraints(beforeWidth+64,instance.height);const reflowPassed=instance.width===beforeWidth+64&&surface&&surface.width>surfaceWidth&&content&&content.width>contentWidth;instance.resizeWithoutConstraints(beforeWidth,instance.height);
+ const visited=new Set(),axisNames=["Size","State","Content","Required","Adornments"];
+ for(const component of components){const target=axes(component),updates={};for(const name of axisNames){const key=propertyKey(instance,name);if(!key)throw new Error("INPUT-V7-PROBE-AXIS:"+name);updates[key]=target[name];}instance.setProperties(updates);const main=await instance.getMainComponentAsync();if(main)visited.add(main.id);}
+ instance.setProperties(original);const labelKey=propertyKey(instance,"Label"),labelBefore=labelKey&&instance.componentProperties[labelKey].value;let textPropertiesRestored=false;if(labelKey){instance.setProperties({[labelKey]:"Input v7 deterministic probe"});const changed=nodes(instance).some(node=>node.type==="TEXT"&&role(node)==="input-field/label"&&node.characters==="Input v7 deterministic probe");instance.setProperties({[labelKey]:labelBefore});textPropertiesRestored=changed&&JSON.stringify(original)===JSON.stringify(plain(instance));}
+ const sourceCells=cells.filter(cell=>cell.source===source),bindingCompatibilityPassed=nodes(set).every(node=>Object.values(node.boundVariables||{}).flat().every(alias=>alias&&typeof alias.id==="string"));
+ const switchingRestored=JSON.stringify(original)===JSON.stringify(plain(instance)),after=snapshot(instance);instance.remove();
+ sources.push({source,adapterIdentity,variants:128,visitedVariants:visited.size,reflowPassed:!!reflowPassed,contentFillPassed:!!reflowPassed,bindingCompatibilityPassed,noFakeLayoutPassed:sourceCells.every(cell=>cell.noFakeLayout),adornmentPayloadPassed:sourceCells.every(cell=>cell.adornmentPayloadExact),stateSemanticsPassed:sourceCells.every(cell=>cell.stateSemanticsExact),switchingRestored,textPropertiesRestored,exactSceneRestoration:before===after});
+}
+sources.sort((a,b)=>a.source.localeCompare(b.source));cells.sort((a,b)=>a.cellKey.localeCompare(b.cellKey));
+return{pageId:page.id,sources,cells};

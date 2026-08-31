@@ -1,0 +1,110 @@
+{
+  "artifactVersion": "calendar-live-v22-attempt-1-v1",
+  "status": "failed closed after probe when issuing capture 0; writer, restore, extract, and probe accepted; hug-root reflow held; gates required 2 roots; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "e64b3787e4669c18b328044d12c3e0ef08bc29a9",
+  "codeCommit": "e64b3787e4669c18b328044d12c3e0ef08bc29a9",
+  "antecedentCommit": "dfa1d9bd9d74c239d2839ae5e87e03dc2afdea7b",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v22",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "3edcb4eb-3ff3-48fa-ae9e-eb5c2384877e",
+    "attempt": 1,
+    "authorizationSha256": "d33c15e9e7c5cc6d0377f5ac4017f5753b55c7ddf78ea7e6cf305c64e0a91bd5",
+    "signingPublicKeySpkiSha256": "fe6de9cf7d112c9089a733950ab9a25c8ac630ff9d2e07d6284c75c7b930dc4a",
+    "programSha256": "245d8592e4dc5e05c995d137099d4e928086f273c18bf5468fa95495e4bec541",
+    "requestBindingSha256": "5e351af7e17158ea345e0d0d55ba84de2ae5df175075d6fdf9a110cc3eea72e3",
+    "requestSha256": "bd32c64e758c37a8ca21fc417bbf36c857333dd6bf101cd65fc5fa1193352db6"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v22",
+    "pageId": "173:53540",
+    "sectionId": "173:53541",
+    "collectionId": "VariableCollectionId:173:53542",
+    "daySetId": "173:53570",
+    "weekSetId": "173:53602",
+    "calendarSetId": "173:53719",
+    "runIdentity": "19be1c96-calendar-v22",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "accepted": true,
+    "refusedClass": null
+  },
+  "probe": {
+    "issued": true,
+    "accepted": true,
+    "reflowPassed": true,
+    "contentHugPassed": true,
+    "bindingCompatibilityPassed": true,
+    "noFakeLayoutPassed": true,
+    "stateSemanticsPassed": true,
+    "switchingRestored": true,
+    "textPropertiesRestored": true,
+    "exactSceneRestoration": true,
+    "cellsPassing": 8,
+    "visibleAreaLoss": 0,
+    "overlapPixels": 0
+  },
+  "captures": { "issued": 0 },
+  "gates": {
+    "persisted": true,
+    "validated": false,
+    "refusedClass": "CALENDAR-HOST-GATES-TWO-ROOT-TABLE-LEFTOVER",
+    "refused": "invalid Calendar live v22 technical gates artifact",
+    "namedCause": "persist wrote 1 Astryx root. validate required roots.length === 2 and unique source size 2. Calendar is Astryx only. react-day-picker stays a named refusal. Do not invent a second library."
+  },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:53540",
+    "removedCollectionIds": ["VariableCollectionId:173:53542"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-HOST-GATES-TWO-ROOT-TABLE-LEFTOVER",
+    "path": "validateCalendarLiveTechnicalGates roots.length",
+    "doNotInvent": true,
+    "restartV22Attempt2AsIs": false,
+    "prepareV23": "gates validate one Astryx root; do not invent a second library"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

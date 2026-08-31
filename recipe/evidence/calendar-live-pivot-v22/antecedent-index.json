@@ -1,0 +1,149 @@
+{
+  "artifactVersion": "calendar-live-v22-antecedent-index-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "artifacts": {
+    "recipe/evidence/calendar-live-pivot-v22/expected-scene-plan-astryx-calendar.json.gz": {
+      "bytes": 17931,
+      "sha256": "db1369f5be9fade8ad919b3163d517abd542cda73c523e1609ba1ec88615a923"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/expected-scene-plan-astryx-week.json.gz": {
+      "bytes": 4057,
+      "sha256": "9321a5741ee9bc43a871254dabaf05bf2ca65471ccaa6715e5546aadc8d62aba"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/expected-scene-plan-astryx-day.json.gz": {
+      "bytes": 4230,
+      "sha256": "297cb27a2d5600e9099cc68eee6c790e1fc7d0884dd898ded2b5f1f993742fad"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/protocol.json": {
+      "bytes": 6112,
+      "sha256": "530bb48c7aa24ce964801ce57a4da9992d830958aeceb427fe4410fa2a67db33"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/programs/writer.txt": {
+      "bytes": 80771,
+      "sha256": "245d8592e4dc5e05c995d137099d4e928086f273c18bf5468fa95495e4bec541"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/programs/restore-blueprint.js": {
+      "bytes": 3216,
+      "sha256": "ec587d442583645ffb079a3f12356f4e9842581889f0200e72e38988b1c108f2"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/programs/extract-blueprint.js": {
+      "bytes": 470534,
+      "sha256": "00662e58a027518c3d07d08987cf9350258f43da8f901e63efed4ebe183c9372"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/programs/probe-blueprint.js": {
+      "bytes": 9496,
+      "sha256": "b9692a2530c949af5647d323b96f59d3093356ce21658e7123ab64e7cc9425e5"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/programs/capture-blueprint.js": {
+      "bytes": 10198,
+      "sha256": "c7e5ddc6451fc9b33f48d97471f987ee42d3b285b0412eda44fa43c9447dc41d"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/programs/cleanup-blueprint.js": {
+      "bytes": 6333,
+      "sha256": "9555eae9d09c152406b4b4237e8df6eb56a3ed383f1ee951a26fc7a4eed63981"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/capture-manifest.json": {
+      "bytes": 3684,
+      "sha256": "0b3b6589dc982f2f2cb63befe9bf71972fcf7632895a70d4512a9e8004b0f90c"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/proof-plan.json": {
+      "bytes": 2692,
+      "sha256": "9b4bb99a49b8486e7fd4a7a03a2821733d05724ea8973cfa1d2ccde6d8c251ea"
+    },
+    "recipe/evidence/calendar-live-pivot-v22/request-manifest.json": {
+      "bytes": 2117,
+      "sha256": "85687f5539ad740dde698f9029bb4999644b7b54e355f12564dcb92e59c6200e"
+    },
+    "recipe/calendar-live-v22-broker.ts": {
+      "bytes": 37453,
+      "sha256": "5b1f975d18542c59bd23e3e21abb42b4ece12db215d5ff2e1de7a3dd934cc84f"
+    },
+    "recipe/calendar-live-v22-contract.ts": {
+      "bytes": 46173,
+      "sha256": "01eedf56df496ecb684de7fdbec120320882d65c52bfda1cf9206ede4689ddb9"
+    },
+    "recipe/calendar-live-v22-restore.ts": {
+      "bytes": 6442,
+      "sha256": "442181cd1376894e8a6641f1c132404944af6e6cf7ce0d07fc37f357ebbb4ada"
+    },
+    "recipe/calendar-live-v22-cleanup.ts": {
+      "bytes": 6520,
+      "sha256": "9f13c1dfb388503662c1bcf43871a8198d223dc539be7303316ab5b5f43a86b1"
+    },
+    "recipe/calendar-live-v22-verifier.ts": {
+      "bytes": 7880,
+      "sha256": "74c4ac1d436f6e3d9504091104eac8063fe54bc4d4f0e5c2dd42d94675e9ffd5"
+    },
+    "recipe/calendar-live-v22-fixed-point.ts": {
+      "bytes": 10412,
+      "sha256": "2a32528df504908bfd5669f23f62f0bd2bc39de0723ed80883be544a7c45d0e1"
+    },
+    "recipe/run-calendar-live-v22.ts": {
+      "bytes": 25385,
+      "sha256": "7220b30facf514225169cf61fdf0a01387d4b04a151301ffb5e29c7f8781637f"
+    },
+    "recipe/build-calendar-live-proof-v22.ts": {
+      "bytes": 40542,
+      "sha256": "d95b1e88ef3e1e51c980946f50bd313ba483711bd299272de4b5a04ca089708a"
+    },
+    "recipe/calendar-live-v22-lifecycle-simulation.ts": {
+      "bytes": 8227,
+      "sha256": "371e1f608105d4c354f9cc2710eaf10f29b3759f20a78ac70c477766f5f24abe"
+    },
+    "recipe/scene-readback-calendar-v1.ts": {
+      "bytes": 65763,
+      "sha256": "dc1455e7dc4d18bbc4c305183ed6587ae485bfee02145f9828d7e814ed65592d"
+    },
+    "recipe/scene-readback-runtime-calendar-v1.ts": {
+      "bytes": 15359,
+      "sha256": "a963b00f50a96cb73b27162acf14ee38ac2d82956ce9e256eb0babc20fb68522"
+    },
+    "recipe/calendar-figma-writer.ts": {
+      "bytes": 43434,
+      "sha256": "318ae1c7a96c199d014d7e5e2358cf05b23722e764923f758938b65f99dd730d"
+    },
+    "recipe/figma-property-normalizer-v8.ts": {
+      "bytes": 11009,
+      "sha256": "103abec0f81e59fb5c25fd38b05f4961d755eeee2e4bb18f99ca74411b45eae0"
+    },
+    "recipe/figma-runtime-portability.ts": {
+      "bytes": 12817,
+      "sha256": "df0ada6caea5cf05c9f46552cbf675b76e029438f75a9805802b1446ab3a034f"
+    },
+    "recipe/normalize.ts": {
+      "bytes": 7537,
+      "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
+    }
+  },
+  "hashSetSha256": "684bd4a93dadf813c4e33f8985a46c7d3e0b74469d7a35a1e19a4a6e3e53a7ad",
+  "counts": {
+    "sources": 1,
+    "variants": 8,
+    "expectedSceneFacts": 1373,
+    "captureCells": 8,
+    "remoteRequests": 13,
+    "hostPhases": 3
+  },
+  "generatedDeterministically": true,
+  "authorizationLifecycleExcluded": [
+    "recipe/evidence/calendar-live-pivot-v22/authorization-template.json",
+    "recipe/evidence/calendar-live-pivot-v22/capture-authorization.json",
+    "recipe/calendar-live-v22-authorization.ts",
+    "recipe/calendar-live-v22-authorization.test.ts",
+    "recipe/calendar-live-v22-preflight.ts",
+    "recipe/calendar-live-v22-authorized.ts",
+    "recipe/write-calendar-live-v22-authorization.ts",
+    "recipe/create-calendar-live-v22-security-attestation.ts",
+    "recipe/evidence/calendar-live-pivot-v22/operator-security-attestation-template.json",
+    "recipe/evidence/calendar-live-pivot-v22-status.json",
+    "recipe/evidence/status-index.json"
+  ],
+  "authorizationCanBeAddedWithoutAntecedentRebuild": true,
+  "attemptsExecuted": 0,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false
+}

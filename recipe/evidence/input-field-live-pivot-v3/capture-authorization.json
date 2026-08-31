@@ -1,0 +1,79 @@
+{
+  "artifactVersion": "input-live-v3-capture-authorization-v1",
+  "authorizationId": "input-live-v3",
+  "antecedent": {
+    "commit": "be6b01300ad99d8a29ea4c11508d192dec84bbea",
+    "criterion": {
+      "semanticVersion": "input-live-v3-protocol-v1",
+      "path": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
+      "sha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23"
+    }
+  },
+  "authorizationCommitDiscovery": {
+    "rule": "the authorization commit is the unique first commit that adds this artifact",
+    "command": "git log --reverse --diff-filter=A --format=%H -- recipe/evidence/input-field-live-pivot-v3/capture-authorization.json",
+    "mustStrictlyDescendFromAntecedent": true,
+    "artifactBytesMustRemainEqualToFirstAddition": true
+  },
+  "capture": {
+    "status": "capture may occur only from a clean descendant commit that contains this authorization artifact",
+    "codeCommitRule": "codeCommit must equal the discovered authorization commit or be its clean descendant",
+    "authorizedWritableFigmaFileKeys": ["byMp6lt0Ij9b2QbkDGFwBh"],
+    "receiptPath": "recipe/evidence/input-field-live-pivot-v3/receipt.json",
+    "receiptChronologyFields": [
+      "antecedentCommit",
+      "authorizationCommit",
+      "codeCommit"
+    ]
+  },
+  "requiredGates": {
+    "sceneDerived": [
+      {
+        "id": "expected-plan-multiset-occurrences-preserved",
+        "command": "npm run recipe:scene-readback:check"
+      },
+      {
+        "id": "zero-missing-extra-mismatched-duplicate-collapsed-unobserved-facts",
+        "command": "npm run recipe:scene-readback:check"
+      },
+      {
+        "id": "actual-scene-properties-only",
+        "command": "npm run recipe:scene-readback:check"
+      },
+      {
+        "id": "plugin-data-source-ir-forbidden",
+        "command": "npm run recipe:scene-readback:check"
+      },
+      {
+        "id": "silent-count-derived",
+        "command": "npm run recipe:scene-readback:check"
+      },
+      {
+        "id": "two-cycle-scene-derived-fixed-point",
+        "command": "npm run recipe:scene-readback:check"
+      }
+    ],
+    "task2": [
+      {
+        "id": "controlled-uncontrolled-behavior-and-stable-web-component-input",
+        "command": "npm run recipe:input-field:browser:check"
+      },
+      {
+        "id": "css-and-output-path-security",
+        "command": "node --import tsx --test recipe/input-field-proof.test.ts"
+      },
+      {
+        "id": "actual-adornment-content-payload-and-accessibility",
+        "command": "node --import tsx --test recipe/input-field-figma-writer.test.ts recipe/input-field-figma-writer-v2.test.ts recipe/scene-readback.test.ts"
+      },
+      {
+        "id": "font-resolution-provenance-and-named-refusals",
+        "command": "node --import tsx --test recipe/input-field-figma-writer-v2.test.ts"
+      },
+      {
+        "id": "typed-deterministic-writer-and-collision-refusals",
+        "command": "node --import tsx --test recipe/input-field-figma-writer.test.ts recipe/input-field-figma-writer-v2.test.ts"
+      }
+    ]
+  }
+}

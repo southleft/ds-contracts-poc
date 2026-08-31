@@ -1,0 +1,89 @@
+{
+  "version": 3,
+  "kind": "button-recipe-live-transport-plan",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "path": "recipe/evidence/button-live-pivot-v2/writer.js",
+    "bytes": 32146,
+    "sha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f",
+    "deterministicRegeneration": "inherited-pass-from-immutable-v2-plan",
+    "conformanceCounts": {
+      "apiCalls": 17,
+      "propertyNames": 72,
+      "variants": 288,
+      "variables": 57,
+      "pluginDataWrites": 6427,
+      "propertyWrites": 11087,
+      "bindings": 4296
+    }
+  },
+  "transport": {
+    "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
+    "encoding": "utf8+base64",
+    "envelopePath": "recipe/evidence/button-live-pivot-v3/transport-envelope.json",
+    "envelopeSha256": "e702cade7741d8acac46a42cc271157b02b5e0e107ae63cd228294b630b96199",
+    "payloadBytes": 32146,
+    "payloadSha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f",
+    "wrapperPath": "recipe/evidence/button-live-pivot-v3/writer-wrapper-attempt-2.txt",
+    "wrapperBytes": 48406,
+    "wrapperSha256": "4f9989b1e9c3fd791a87d3aa48fff357bfbcec77878709f4190abf6ec8eddf81",
+    "stagedPayloadChunksPath": "recipe/evidence/button-live-pivot-v3/transport-payload-chunks.json",
+    "stagedPayloadChunksSha256": "224f3a3a90791cb71c7b16b7527c02729cc9fe2c3a90a672dbe715b9b5d2fad6",
+    "stagedPayloadChunkCount": 11,
+    "stagedWrapperPath": "recipe/evidence/button-live-pivot-v3/writer-staged-wrapper.txt",
+    "stagedWrapperBytes": 5577,
+    "stagedWrapperSha256": "f2e6cc21f1e6a51a56d505bc39fe3624c6a0ca52f16a5377b24629eaf637e2e7",
+    "preEvalChecks": [
+      "exact Scratch file key/name/editor",
+      "protocol and encoding",
+      "strict canonical base64",
+      "decoded byte length",
+      "decoded SHA-256",
+      "fatal UTF-8 decode"
+    ],
+    "sha256Implementations": [
+      "WebCrypto",
+      "verified deterministic JS fallback"
+    ],
+    "utf8Implementations": [
+      "TextDecoder",
+      "verified deterministic JS fallback"
+    ],
+    "attempt1": {
+      "wrapperPath": "recipe/evidence/button-live-pivot-v3/writer-wrapper.txt",
+      "wrapperBytes": 46953,
+      "wrapperSha256": "d7a54125be27c9c4bd3a6bea069a7c72e0f00649ba5d56aadc82887ff37801e3",
+      "resultPath": "recipe/evidence/button-live-pivot-v3/live-attempt-1.json",
+      "defect": "TextDecoder is unavailable in the live Plugin API sandbox",
+      "evalBegan": false
+    }
+  },
+  "immutableV1": {
+    "receiptSha256": "863fe1af6b38fc12237b47e4deb0e5db1c298d462666e4921bd28d8bf964b652",
+    "planSha256": "3490585cf531590fcf70a5daa174be7f9d103cb326e55df44e4b76c08a445518",
+    "writerSha256": "45fda4b78fb5f77f6554eac02cbf54213e206d8b817610e8edcd7ca7065b33f8"
+  },
+  "immutableV2": {
+    "receiptSha256": "7668e12fd95b017ad7093a279dcae2817a518c6e1a324ef800f906b9e8fc8a81",
+    "planSha256": "b2a0b864741b1c299d11d959ce0af1885173fb82a17a9bf92cf1feb64fc484f5",
+    "writerSha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f",
+    "transportSha256": "c00992959560914b21e68430a09c6e95c4c9fd41cf939cd37d718d5056972801",
+    "transportChunksSha256": "c610103239d22f0249788517eaee329e4e820d69da7d7541b5c87d436660bdc1",
+    "conformanceSha256": "d242819508ab6d59db01db69683af1dbdc3e6c315697406b9d9873a2884af67a"
+  },
+  "historicalMismatch": {
+    "boundary": "constructed figma_execute code argument",
+    "expectedSource": "generated writer-transport-chunks.json runtime base64 bytes",
+    "observedSource": "manually reconstructed repeated bridge-call string literals",
+    "isolatedRange": "[1000,1500)",
+    "expectedRuntimeFnv1a": "68686350",
+    "observedRuntimeFnv1a": "c32753a0",
+    "diskBytesChanged": false,
+    "evalBegan": false,
+    "repair": "one generated UTF-8 writer payload; decoded length and SHA-256 verified before eval"
+  }
+}

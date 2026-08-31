@@ -1,0 +1,829 @@
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
+import test from "node:test";
+
+import { CALENDAR_FIGMA_NAMESPACE } from "./calendar-figma-writer.js";
+import { buildFigmaSceneReadbackRuntime } from "./scene-readback-runtime-calendar-v1.js";
+
+test("extract does not require envelopeHash on owned table/row/cell set roots", () => {
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.match(runtime, /CALENDAR-EXTRACT-SET-ROOT-ENVELOPE-HASH/);
+  assert.match(runtime, /type==="COMPONENT_SET"/);
+  assert.match(runtime, /\["runIdentity","adapterIdentity","recipeHash"\]/);
+  assert.match(
+    runtime,
+    /\["runIdentity","adapterIdentity","recipeHash","envelopeHash"\]/,
+  );
+  assert.doesNotMatch(
+    runtime,
+    /for\(const field of \["runIdentity","adapterIdentity","recipeHash","envelopeHash"\]\)if\(current\.getSharedPluginData\(SCENE_READBACK_NS,field\)!==expectedOwner\[field\]\)/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.match(
+    writerSource,
+    /setSharedData\(set,"runIdentity",PLAN\.runIdentity\);setSharedData\(set,"adapterIdentity",source\.adapterIdentity\);setSharedData\(set,"recipeHash",source\.recipeHash\);setSharedData\(set,"ownershipKey",kind\);/,
+  );
+  assert.doesNotMatch(writerSource, /setSharedData\(set,"envelopeHash"/);
+});
+
+test("extract ignores Figma-copied ownershipKey inside an owned INSTANCE", () => {
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.match(runtime, /CALENDAR-EXTRACT-IGNORE-COPIED-INSTANCE-OWNERSHIP-KEY/);
+  assert.match(runtime, /copiedInsideOwnedInstance/);
+  assert.match(runtime, /explicit&&!generatedContext/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.match(writerSource, /node=main\.createInstance\(\)/);
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-EXTRACT-IGNORE-COPIED-INSTANCE-OWNERSHIP-KEY/,
+  );
+});
+
+test("host omits empty extract instance payload; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-OMIT-EMPTY-INSTANCE-PAYLOAD/);
+  assert.match(host, /shouldOmitEmptyInstancePayload/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-OMIT-EMPTY-INSTANCE-PAYLOAD/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-OMIT-EMPTY-INSTANCE-PAYLOAD/);
+});
+
+test("host observe omits instancePayload on table/row/cell instances", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-OBSERVE-OMIT-INSTANCE-PAYLOAD/);
+  assert.match(host, /shouldOmitObservedInstancePayload/);
+  assert.doesNotMatch(host, /combobox\/option-instance/);
+  assert.doesNotMatch(host, /isOptionInstanceRole/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-OBSERVE-OMIT-INSTANCE-PAYLOAD/,
+  );
+});
+
+test("extract measures hidden FILL only for table/cell/label", () => {
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.match(runtime, /CALENDAR-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL/);
+  assert.match(runtime, /calendar\/day\/label/);
+  assert.doesNotMatch(runtime, /combobox\/input/);
+});
+
+test("host folds uniform per-side stroke-weight binds; writer still binds strokeWeight", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT/);
+  assert.match(host, /strokeTopWeight/);
+  assert.match(host, /strokeRightWeight/);
+  assert.match(host, /strokeBottomWeight/);
+  assert.match(host, /strokeLeftWeight/);
+  assert.match(host, /strokes\.0\.weight/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.match(writerSource, /bindFloat\(node,"strokeWeight",bindingFor\(ir,"strokes\.0\.weight"\)\)/);
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT/,
+  );
+});
+
+test("host omits table/header and table/body clipsContent; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED/);
+  assert.match(host, /HEADER_BODY_ROLES/);
+  assert.match(host, /omitHeaderBodyClipsContent/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-HEADER-BODY-CLIPS-CONTENT-OMITTED/,
+  );
+});
+
+test("host orders calendar/nav button bindings to compile field order — the Calendar live v35 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-NAV-BINDING-COMPILE-ORDER/);
+  assert.match(host, /NAV_COMPILE_BINDING_FIELDS/);
+  assert.match(host, /NAV_BUTTON_ROLE/);
+  assert.match(
+    host,
+    /"layout.width.value",\n  "layout.height.value"/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-NAV-BINDING-COMPILE-ORDER/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-NAV-BINDING-COMPILE-ORDER/);
+});
+
+test("host orders calendar/nav icon bindings to compile field order — the Calendar live v36 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-NAV-ICON-BINDING-COMPILE-ORDER/);
+  assert.match(host, /NAV_ICON_COMPILE_BINDING_FIELDS/);
+  assert.match(host, /NAV_ICON_ROLE/);
+  assert.match(
+    host,
+    /NAV_ICON_COMPILE_BINDING_FIELDS = \[\n  "type.fontSize",\n  "fills.0.color",\n\] as const/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-NAV-ICON-BINDING-COMPILE-ORDER/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-NAV-ICON-BINDING-COMPILE-ORDER/);
+});
+
+test("host omits observed clipsContent on calendar/nav frames — the Calendar live v37 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-NAV-CLIPS-CONTENT-OMITTED/);
+  assert.match(host, /omitNavClipsContent/);
+  assert.match(
+    host,
+    /omitNavClipsContent = <T extends \{ clipsContent\?: unknown \}>/,
+  );
+  assert.match(
+    host,
+    /NAV_BUTTON_ROLE.test\(role\) \|\| scene.type !== "FRAME"/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-NAV-CLIPS-CONTENT-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-NAV-CLIPS-CONTENT-OMITTED/);
+});
+
+test("host omits observed cornerRadius on calendar/nav frames — the Calendar live v38 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-NAV-CORNER-RADIUS-OMITTED/);
+  assert.match(host, /omitNavCornerRadius/);
+  assert.match(
+    host,
+    /omitNavCornerRadius = <T extends \{ cornerRadius\?: unknown \}>/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-NAV-CORNER-RADIUS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-NAV-CORNER-RADIUS-OMITTED/);
+});
+
+test("host omits observed effects on calendar/nav frames — the Calendar live v39 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-NAV-EFFECTS-OMITTED/);
+  assert.match(host, /omitNavEffects/);
+  assert.match(host, /omitNavEffects = <T extends \{ effects\?: unknown \}>/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-NAV-EFFECTS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-NAV-EFFECTS-OMITTED/);
+});
+
+test("host omits observed strokes on calendar/nav frames — the Calendar live v40 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-NAV-STROKES-OMITTED/);
+  assert.match(host, /omitNavStrokes/);
+  assert.match(host, /omitNavStrokes = <T extends \{ strokes\?: unknown \}>/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-NAV-STROKES-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-NAV-STROKES-OMITTED/);
+});
+
+test("calendar/header joins the header-body omit family — the Calendar live v41 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-HEADER-JOINS-HEADER-BODY-ROLES/);
+  assert.match(
+    host,
+    /HEADER_BODY_ROLES = new Set\(\[\n  "calendar\/weekday-row",\n  "calendar\/grid",\n  "calendar\/header",\n\]\)/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-HEADER-JOINS-HEADER-BODY-ROLES/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-HEADER-JOINS-HEADER-BODY-ROLES/);
+});
+
+test("host orders calendar/day/button bindings to compile field order — the Calendar live v42 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-DAY-BUTTON-BINDING-COMPILE-ORDER/);
+  assert.match(host, /DAY_BUTTON_COMPILE_BINDING_FIELDS/);
+  assert.match(
+    host,
+    /DAY_BUTTON_COMPILE_BINDING_FIELDS = \[\n  "layout.width.value",\n  "layout.height.value",\n  "cornerRadius.topLeft",\n  "fills.0.color",\n  "strokes.0.paint.color",\n  "strokes.0.weight",\n\] as const/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-DAY-BUTTON-BINDING-COMPILE-ORDER/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-DAY-BUTTON-BINDING-COMPILE-ORDER/);
+});
+
+test("host omits observed clipsContent on calendar/day/button — the Calendar live v43 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-DAY-BUTTON-CLIPS-CONTENT-OMITTED/);
+  assert.match(host, /omitDayButtonClipsContent/);
+  assert.match(
+    host,
+    /omitDayButtonClipsContent = <T extends \{ clipsContent\?: unknown \}>/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-DAY-BUTTON-CLIPS-CONTENT-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-DAY-BUTTON-CLIPS-CONTENT-OMITTED/,
+  );
+});
+
+test("host omits observed effects on calendar/day/button — the Calendar live v44 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-DAY-BUTTON-EFFECTS-OMITTED/);
+  assert.match(host, /omitDayButtonEffects/);
+  assert.match(
+    host,
+    /omitDayButtonEffects = <T extends \{ effects\?: unknown \}>/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-DAY-BUTTON-EFFECTS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-DAY-BUTTON-EFFECTS-OMITTED/);
+});
+
+test("host omits observed EMPTY strokes on calendar/day/button — the Calendar live v45 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKES-OMITTED/);
+  assert.match(host, /omitDayButtonEmptyStrokes/);
+  assert.match(
+    host,
+    /if \(!Array.isArray\(frame.strokes\) \|\| frame.strokes.length > 0\) return frame;/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKES-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKES-OMITTED/,
+  );
+});
+
+test("calendar/day/button joins the empty-dashPattern omit — the Calendar live v46 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(
+    host,
+    /CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKE-DASH-PATTERN-OMITTED/,
+  );
+  assert.match(
+    host,
+    /dayButton =\n    role === "calendar\/day\/button" && scene.type === "FRAME";/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKE-DASH-PATTERN-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-DAY-BUTTON-EMPTY-STROKE-DASH-PATTERN-OMITTED/,
+  );
+});
+
+test("calendar/day/today joins the day-variant strokes omit — the Calendar live v47 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-TODAY-CELL-STROKES-OMITTED/);
+  assert.match(
+    host,
+    /!\/\^calendar\\\/day\\\/\(\?:default\|today\|selected\|outside\)\$\/.test\(role\)/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-TODAY-CELL-STROKES-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-TODAY-CELL-STROKES-OMITTED/);
+});
+
+test("host folds uniform per-side stroke-weight on calendar/day/button — the Calendar live v34 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(
+    host,
+    /CALENDAR-HOST-DAY-BUTTON-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT/,
+  );
+  assert.match(host, /role === "calendar\/day\/button"/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-DAY-BUTTON-FOLD-UNIFORM-PER-SIDE-STROKE-WEIGHT/,
+  );
+});
+
+test("host keeps compile-carried layout.minWidth on calendar/variant — the Calendar live v33 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-VARIANT-MIN-WIDTH-BINDING-COMPILE-ORDER/);
+  assert.match(host, /TABLE_VARIANT_COMPILE_BINDING_FIELDS/);
+  assert.match(
+    host,
+    /"layout.padding.bottom",\n  "layout.minWidth",\n  "fills.0.color"/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-VARIANT-MIN-WIDTH-BINDING-COMPILE-ORDER/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-VARIANT-MIN-WIDTH-BINDING-COMPILE-ORDER/,
+  );
+});
+
+test("host omits table/variant clipsContent; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-VARIANT-CLIPS-CONTENT-OMITTED/);
+  assert.match(host, /TABLE_VARIANT_ROLE/);
+  assert.match(host, /omitHeaderBodyClipsContent/);
+  assert.match(host, /tableVariant/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-VARIANT-CLIPS-CONTENT-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-VARIANT-CLIPS-CONTENT-OMITTED/);
+});
+
+test("host omits table/row variant clipsContent; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-ROW-VARIANT-CLIPS-CONTENT-OMITTED/);
+  assert.match(host, /ROW_COMPONENT_ROLE/);
+  assert.match(host, /omitHeaderBodyClipsContent/);
+  assert.match(host, /rowVariant/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-ROW-VARIANT-CLIPS-CONTENT-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-ROW-VARIANT-CLIPS-CONTENT-OMITTED/);
+});
+
+test("host omits table/row variant cornerRadius; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-ROW-VARIANT-CORNER-RADIUS-OMITTED/);
+  assert.match(host, /ROW_COMPONENT_ROLE/);
+  assert.match(host, /omitHeaderBodyCornerRadius/);
+  assert.match(host, /rowVariant/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-ROW-VARIANT-CORNER-RADIUS-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-ROW-VARIANT-CORNER-RADIUS-OMITTED/);
+});
+
+test("host omits table/row variant effects; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-ROW-VARIANT-EFFECTS-OMITTED/);
+  assert.match(host, /ROW_COMPONENT_ROLE/);
+  assert.match(host, /omitHeaderBodyEffects/);
+  assert.match(host, /rowVariant/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-ROW-VARIANT-EFFECTS-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-ROW-VARIANT-EFFECTS-OMITTED/);
+});
+
+test("host omits table/row variant strokes; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-ROW-VARIANT-STROKES-OMITTED/);
+  assert.match(host, /ROW_COMPONENT_ROLE/);
+  assert.match(host, /omitHeaderBodyStrokes/);
+  assert.match(host, /rowVariant/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-ROW-VARIANT-STROKES-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-ROW-VARIANT-STROKES-OMITTED/);
+});
+
+test("host emits compile-carried Table row on table/row-set; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-ROW-SET-COMPILE-CARRY-LABEL/);
+  assert.match(host, /compileCarriedLabel/);
+  assert.match(host, /Calendar week/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-ROW-SET-COMPILE-CARRY-LABEL/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-ROW-SET-COMPILE-CARRY-LABEL/);
+});
+
+test("host omits table/header and table/body cornerRadius; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED/);
+  assert.match(host, /HEADER_BODY_ROLES/);
+  assert.match(host, /omitHeaderBodyCornerRadius/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-HEADER-BODY-CORNER-RADIUS-OMITTED/,
+  );
+});
+
+test("host omits table/set, table/row-set, and table/cell-set cornerRadius; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-SET-CORNER-RADIUS-OMITTED/);
+  assert.match(host, /SET_ROLES/);
+  assert.match(host, /omitSetCornerRadius/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-SET-CORNER-RADIUS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-SET-CORNER-RADIUS-OMITTED/);
+});
+
+test("host omits table/set, table/row-set, and table/cell-set effects; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-SET-EFFECTS-OMITTED/);
+  assert.match(host, /SET_ROLES/);
+  assert.match(host, /omitSetEffects/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-SET-EFFECTS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-SET-EFFECTS-OMITTED/);
+});
+
+test("host omits table/set, table/row-set, and table/cell-set strokes; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-SET-STROKES-OMITTED/);
+  assert.match(host, /SET_ROLES/);
+  assert.match(host, /omitSetStrokes/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-SET-STROKES-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-SET-STROKES-OMITTED/);
+});
+
+test("host omits empty table/variant stroke dashPattern; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-VARIANT-EMPTY-STROKE-DASH-PATTERN-OMITTED/);
+  assert.match(host, /TABLE_VARIANT_ROLE/);
+  assert.match(host, /omitVariantEmptyStrokeDashPattern/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-VARIANT-EMPTY-STROKE-DASH-PATTERN-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-VARIANT-EMPTY-STROKE-DASH-PATTERN-OMITTED/,
+  );
+});
+
+test("host omits table/variant effects; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-VARIANT-EFFECTS-OMITTED/);
+  assert.match(host, /TABLE_VARIANT_ROLE/);
+  assert.match(host, /omitHeaderBodyEffects/);
+  assert.match(host, /tableVariant/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-VARIANT-EFFECTS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-VARIANT-EFFECTS-OMITTED/);
+});
+
+test("host omits table/header and table/body effects; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-HEADER-BODY-EFFECTS-OMITTED/);
+  assert.match(host, /HEADER_BODY_ROLES/);
+  assert.match(host, /omitHeaderBodyEffects/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-HEADER-BODY-EFFECTS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-HEADER-BODY-EFFECTS-OMITTED/);
+});
+
+test("host omits table/header and table/body strokes; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-HEADER-BODY-STROKES-OMITTED/);
+  assert.match(host, /HEADER_BODY_ROLES/);
+  assert.match(host, /omitHeaderBodyStrokes/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-HEADER-BODY-STROKES-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-HEADER-BODY-STROKES-OMITTED/);
+});
+
+test("host omits copied cell-instance bindings; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED/);
+  assert.match(host, /CELL_INSTANCE_COMPILE_BINDING_FIELDS/);
+  assert.match(host, /CELL_INSTANCE_ROLE/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-CELL-INSTANCE-BINDING-EXTRAS-DROPPED/);
+});
+
+test("host omits copied row-instance bindings; writer is unchanged", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-ROW-INSTANCE-BINDING-EXTRAS-DROPPED/);
+  assert.match(host, /ROW_INSTANCE_COMPILE_BINDING_FIELDS/);
+  assert.match(host, /ROW_INSTANCE_ROLE/);
+  assert.match(host, /ROW_COMPILE_BINDING_FIELDS/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-ROW-INSTANCE-BINDING-EXTRAS-DROPPED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-ROW-INSTANCE-BINDING-EXTRAS-DROPPED/);
+});
+
+test("host omits effects on calendar/week/${n} frames — the Calendar live v12 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEK-FRAME-EFFECTS-OMITTED/);
+  assert.match(host, /omitWeekFrameEffects/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-WEEK-FRAME-EFFECTS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-WEEK-FRAME-EFFECTS-OMITTED/);
+});
+
+test("host omits strokes on day cells — the Calendar live v18 class, today joined in v47 when the ring moved to the button", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-DAY-VARIANT-STROKES-OMITTED/);
+  assert.match(host, /omitDayVariantStrokes/);
+  assert.match(host, /calendar\\\/day\\\/\(\?:default\|today\|selected\|outside\)/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-DAY-VARIANT-STROKES-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-DAY-VARIANT-STROKES-OMITTED/);
+});
+
+test("host carries cornerRadius on calendar/day/* — the Calendar live v17 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-DAY-VARIANT-CORNER-RADIUS-CARRIED/);
+  assert.match(host, /omitHeaderBodyCornerRadius/);
+  const omit = host.slice(
+    host.indexOf("const omitHeaderBodyCornerRadius"),
+    host.indexOf("const omitWeekFrameCornerRadius"),
+  );
+  assert.match(omit, /CALENDAR_LIVE_V1_DAY_VARIANT_CORNER_RADIUS_CARRIED_MARKER/);
+  assert.doesNotMatch(omit, /CELL_COMPONENT_ROLE/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-DAY-VARIANT-CORNER-RADIUS-CARRIED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-DAY-VARIANT-CORNER-RADIUS-CARRIED/);
+});
+
+test("host orders calendar/week/number bindings — the Calendar live v16 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEK-SET-NUMBER-BINDING-COMPILE-ORDER/);
+  assert.match(host, /role === "calendar\/week\/number"/);
+  assert.match(host, /WEEK_NUMBER_COMPILE_BINDING_FIELDS/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-WEEK-SET-NUMBER-BINDING-COMPILE-ORDER/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(
+    runtime,
+    /CALENDAR-HOST-WEEK-SET-NUMBER-BINDING-COMPILE-ORDER/,
+  );
+});
+
+test("host omits strokes on calendar/variant components — the Calendar live v15 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-VARIANT-STROKES-OMITTED/);
+  assert.match(host, /omitHeaderBodyStrokes/);
+  assert.match(host, /TABLE_VARIANT_ROLE/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-VARIANT-STROKES-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-VARIANT-STROKES-OMITTED/);
+});
+
+test("host omits cornerRadius on calendar/variant components — the Calendar live v14 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-VARIANT-CORNER-RADIUS-OMITTED/);
+  assert.match(host, /omitHeaderBodyCornerRadius/);
+  assert.match(host, /TABLE_VARIANT_ROLE/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-VARIANT-CORNER-RADIUS-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-VARIANT-CORNER-RADIUS-OMITTED/);
+});
+
+test("host omits strokes on calendar/week/${n} frames — the Calendar live v13 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEK-FRAME-STROKES-OMITTED/);
+  assert.match(host, /omitWeekFrameStrokes/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-WEEK-FRAME-STROKES-OMITTED/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-WEEK-FRAME-STROKES-OMITTED/);
+});
+
+test("host omits cornerRadius on calendar/week/${n} frames — the Calendar live v11 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEK-FRAME-CORNER-RADIUS-OMITTED/);
+  assert.match(host, /omitWeekFrameCornerRadius/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-WEEK-FRAME-CORNER-RADIUS-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-WEEK-FRAME-CORNER-RADIUS-OMITTED/);
+});
+
+test("host omits clipsContent on calendar/week/${n} frames — the Calendar live v10 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEK-FRAME-CLIPS-CONTENT-OMITTED/);
+  assert.match(host, /omitWeekFrameClipsContent/);
+  assert.match(host, /!ROW_INSTANCE_ROLE\.test\(role\) \|\| scene\.type !== "FRAME"/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-WEEK-FRAME-CLIPS-CONTENT-OMITTED/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-WEEK-FRAME-CLIPS-CONTENT-OMITTED/);
+});
+
+test("host orders calendar/week/${n}/number TEXT bindings to compile field order — the Calendar live v9 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEK-NUMBER-BINDING-COMPILE-ORDER/);
+  assert.match(host, /WEEK_NUMBER_COMPILE_BINDING_FIELDS/);
+  assert.match(host, /WEEK_NUMBER_TEXT_ROLE/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-HOST-WEEK-NUMBER-BINDING-COMPILE-ORDER/,
+  );
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-WEEK-NUMBER-BINDING-COMPILE-ORDER/);
+});
+
+test("host emits compile-carried layout.itemSpacing on calendar/week/${n} frames — the Calendar live v8 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEK-FRAME-ITEM-SPACING/);
+  assert.match(host, /ROW_INSTANCE_ROLE\.test\(role\) && scene\.type === "INSTANCE"/);
+  assert.match(host, /ROW_COMPILE_BINDING_FIELDS/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-WEEK-FRAME-ITEM-SPACING/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-WEEK-FRAME-ITEM-SPACING/);
+});
+
+test("host orders calendar/weekday TEXT bindings to compile field order — the Calendar live v6 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-WEEKDAY-BINDING-COMPILE-ORDER/);
+  assert.match(host, /WEEKDAY_COMPILE_BINDING_FIELDS/);
+  assert.match(host, /WEEKDAY_TEXT_ROLE/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-WEEKDAY-BINDING-COMPILE-ORDER/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-WEEKDAY-BINDING-COMPILE-ORDER/);
+});
+
+test("host orders calendar/caption bindings to compile field order — the Calendar live v5 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-CAPTION-BINDING-COMPILE-ORDER/);
+  assert.match(host, /CAPTION_COMPILE_BINDING_FIELDS/);
+  assert.match(
+    host,
+    /if \(role === "calendar\/caption"\) return \[\.\.\.CAPTION_COMPILE_BINDING_FIELDS\]/,
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-CAPTION-BINDING-COMPILE-ORDER/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-CAPTION-BINDING-COMPILE-ORDER/);
+});
+
+test("host emits compile-carried empty bindings on calendar sets — the Calendar live v4 class", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-SET-EMPTY-BINDINGS/);
+  assert.match(host, /SET_ROLES\.has\(role \?\? ""\) \|\| bindings\.length > 0/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-HOST-SET-EMPTY-BINDINGS/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-HOST-SET-EMPTY-BINDINGS/);
+});
+
+test("probe treats hug-root reflow as content width — the Calendar live v21 class", () => {
+  const contract = readFileSync("recipe/calendar-live-v48-contract.ts", "utf8");
+  assert.match(contract, /CALENDAR-PROBE-HUG-ROOT-REFLOW-IS-CONTENT-WIDTH/);
+  assert.match(
+    contract,
+    /reflowPassed=instance\.layoutSizingHorizontal==="HUG"\?instance\.width===beforeWidth:instance\.width===beforeWidth\+64/,
+  );
+  assert.equal(
+    contract.includes(
+      "const reflowPassed=instance.width===beforeWidth+64",
+    ),
+    false,
+    "forced +64 stick is the refused hug-root class",
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-PROBE-HUG-ROOT-REFLOW-IS-CONTENT-WIDTH/,
+  );
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.doesNotMatch(host, /CALENDAR-PROBE-HUG-ROOT-REFLOW-IS-CONTENT-WIDTH/);
+});
+
+test("writer binds day Label after instance characters; host is unchanged — the Calendar live v26 class", () => {
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.match(writerSource, /CALENDAR-WRITER-BIND-LABEL-AFTER-INSTANCE-CHARACTERS/);
+  assert.match(writerSource, /CALENDAR-WRITER-BIND-LABEL-AFTER-WEEK-AND-MONTH/);
+  const calendarMint = writerSource.indexOf("const calendarSet=await mintSet");
+  const bind = writerSource.indexOf(
+    "descendant.componentPropertyReferences={characters:dayLabelProperty}",
+  );
+  assert.ok(calendarMint >= 0 && bind >= 0 && calendarMint < bind);
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.doesNotMatch(host, /CALENDAR-WRITER-BIND-LABEL-AFTER-INSTANCE-CHARACTERS/);
+});
+
+test("writer re-applies instance Label after append; host is unchanged — the Calendar live v20 class", () => {
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.match(writerSource, /CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND/);
+  assert.match(writerSource, /CALENDAR-DAY-LABEL-MISMATCH/);
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.doesNotMatch(host, /CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-WRITER-INSTANCE-LABEL-AFTER-APPEND/);
+});
+
+test("probe writes day Label via characters, not setProperties — the Calendar live v19 class", () => {
+  const contract = readFileSync("recipe/calendar-live-v48-contract.ts", "utf8");
+  assert.match(contract, /CALENDAR-PROBE-DAY-LABEL-VIA-CHARACTERS/);
+  assert.match(contract, /text\.characters="Calendar v1 deterministic probe"/);
+  assert.match(contract, /await figma\.loadFontAsync\(text\.fontName\)/);
+  assert.equal(
+    contract.includes('dayInstance.setProperties({[labelKey]'),
+    false,
+    "setProperties(Label) is the refused probe class; do not call it",
+  );
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.doesNotMatch(writerSource, /CALENDAR-PROBE-DAY-LABEL-VIA-CHARACTERS/);
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.doesNotMatch(host, /CALENDAR-PROBE-DAY-LABEL-VIA-CHARACTERS/);
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.doesNotMatch(runtime, /CALENDAR-PROBE-DAY-LABEL-VIA-CHARACTERS/);
+});
+
+test("extract skips untagged row owned-cell-label TEXT bind hosts; writer is unchanged", () => {
+  const runtime = buildFigmaSceneReadbackRuntime(CALENDAR_FIGMA_NAMESPACE);
+  assert.match(runtime, /CALENDAR-EXTRACT-SKIP-WEEK-OWNED-DAY-LABEL-BIND-HOST/);
+  assert.match(runtime, /calendar\/day\/label/);
+  assert.match(runtime, /walkingRowComponent/);
+  assert.match(runtime, /untaggedOwnedCellLabelBindHost/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.match(writerSource, /CALENDAR-WRITER-DAY-PROPERTIES/);
+  assert.doesNotMatch(
+    writerSource,
+    /CALENDAR-EXTRACT-SKIP-WEEK-OWNED-DAY-LABEL-BIND-HOST/,
+  );
+});
+
+test("host emits compile-resolved font from provenance, not the live fallback face", () => {
+  const host = readFileSync("recipe/scene-readback-calendar-v1.ts", "utf8");
+  assert.match(host, /CALENDAR-HOST-TYPE-FONT-FROM-PROVENANCE-NOT-LIVE-FACE/);
+  assert.match(host, /fontProvenance\?\.resolvedFamily/);
+  assert.match(host, /fontProvenance\?\.resolvedStyle/);
+  const writerSource = readFileSync("recipe/calendar-figma-writer.ts", "utf8");
+  assert.match(writerSource, /CALENDAR-WRITER-NAMED-FALLBACK-AFTER-ZERO-GLYPH/);
+  assert.doesNotMatch(writerSource, /family==="Inter"/);
+});

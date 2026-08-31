@@ -1,0 +1,204 @@
+{
+  "version": 3,
+  "kind": "button-recipe-live-figma-proof",
+  "status": {
+    "bridgeReadOnly": "pass",
+    "offlineConformance": "pass",
+    "exactByteTransport": "pass",
+    "liveWrite": "pass-then-cleaned",
+    "writerAttemptsExecuted": 2,
+    "cleanup": "pass-exact-preflight-census-restored",
+    "screenshots": "produced-before-cleanup",
+    "usability": "fail-fluent-reflow",
+    "liveReadback": "pass",
+    "fixedPoint": "pass-two-cycles",
+    "liveAccounting": "pass-nonzero-denominator",
+    "independentCanvasGrade": "not-requested-after-proof-failure",
+    "buttonSuccess": false
+  },
+  "immutableV1": {
+    "receiptPath": "recipe/evidence/button-live-pivot/receipt.json",
+    "receiptSha256": "863fe1af6b38fc12237b47e4deb0e5db1c298d462666e4921bd28d8bf964b652",
+    "planPath": "recipe/evidence/button-live-pivot/writer-plan.json",
+    "planSha256": "3490585cf531590fcf70a5daa174be7f9d103cb326e55df44e4b76c08a445518",
+    "writerPath": "recipe/evidence/button-live-pivot/writer.js",
+    "writerSha256": "45fda4b78fb5f77f6554eac02cbf54213e206d8b817610e8edcd7ca7065b33f8"
+  },
+  "immutableV2": {
+    "receiptPath": "recipe/evidence/button-live-pivot-v2/receipt.json",
+    "receiptSha256": "7668e12fd95b017ad7093a279dcae2817a518c6e1a324ef800f906b9e8fc8a81",
+    "planPath": "recipe/evidence/button-live-pivot-v2/writer-plan.json",
+    "planSha256": "b2a0b864741b1c299d11d959ce0af1885173fb82a17a9bf92cf1feb64fc484f5",
+    "writerPath": "recipe/evidence/button-live-pivot-v2/writer.js",
+    "writerSha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "bridgeTransport": "dedicated-websocket",
+    "pageName": "Recipe Pivot / Button / ae57b16a-5c52de74-v2"
+  },
+  "before": {
+    "pageCount": 12,
+    "totalTopLevelNodes": 170,
+    "proofPageMatches": 0,
+    "collectionCount": 12,
+    "totalLocalVariables": 11106,
+    "matchingCollections": 0
+  },
+  "after": {
+    "pageCount": 12,
+    "totalTopLevelNodes": 170,
+    "proofPageMatches": 0,
+    "collectionCount": 12,
+    "totalLocalVariables": 11106,
+    "matchingCollections": 0
+  },
+  "transportDiagnosis": {
+    "historicalMismatch": "The v2 tool argument was manually reconstructed from compressed runtime chunks. The in-memory concatenation was not byte-identical to the generated on-disk transport: expected FNV-1a 68686350, observed c32753a0. Repairing one mismatched chunk exposed an additional JavaScript parse failure, proving the manually reserialized wrapper path was not a reliable exact-byte channel.",
+    "repair": "The v3 envelope base64-encodes the on-disk UTF-8 writer bytes and carries their byte length and SHA-256. The plugin validates protocol, base64 grammar, decoded length, decoded SHA-256, and strict UTF-8 before eval. A deterministic pure-JavaScript SHA-256 and UTF-8 decoder cover the restricted plugin sandbox.",
+    "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
+    "payloadBytes": 32146,
+    "payloadSha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f",
+    "decodedBytes": 32146,
+    "decodedSha256": "336dbf2a0124fbd154c2dcde4013dca0db11a014f09417e83d5950cf181b686f",
+    "hashImplementation": "verified-js-fallback",
+    "utf8Implementation": "verified-js-fallback",
+    "evalBegan": true,
+    "evalCompleted": true
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "failed-closed-before-eval",
+      "defect": "TextDecoder is unavailable in the live Plugin API sandbox",
+      "evalBegan": false,
+      "artifactPath": "recipe/evidence/button-live-pivot-v3/live-attempt-1.json",
+      "artifactSha256": "42e83cee81a984d3b7ce0e09b07818ec493727cd6682238ccfa6576200aaf455"
+    },
+    {
+      "attempt": 2,
+      "result": "writer-executed",
+      "evalBegan": true,
+      "evalCompleted": true,
+      "artifactPath": "recipe/evidence/button-live-pivot-v3/live-attempt-2.json",
+      "artifactSha256": "5c0039d061eec3b44b34de3133585a477d5d4743fed886b26f01afeaec19089c"
+    }
+  ],
+  "artifacts": {
+    "plan": {
+      "path": "recipe/evidence/button-live-pivot-v3/writer-plan.json",
+      "sha256": "54c1dba91a0b09dcb1e982de700ade52dfe49083b911fa93f7d610809d9a726d"
+    },
+    "envelope": {
+      "path": "recipe/evidence/button-live-pivot-v3/transport-envelope.json",
+      "sha256": "e702cade7741d8acac46a42cc271157b02b5e0e107ae63cd228294b630b96199"
+    },
+    "wrapper": {
+      "path": "recipe/evidence/button-live-pivot-v3/writer-wrapper-attempt-2.txt",
+      "bytes": 48406,
+      "sha256": "4f9989b1e9c3fd791a87d3aa48fff357bfbcec77878709f4190abf6ec8eddf81"
+    },
+    "verification": {
+      "path": "recipe/evidence/button-live-pivot-v3/live-verification.json",
+      "sha256": "77107891d528a4c79ff73ecfa6e1226f6a482145a4db3f14c9c8fe7b062f0544"
+    },
+    "normalizedReadback": {
+      "path": "recipe/evidence/button-live-pivot-v3/normalized-live-readback.json",
+      "sha256": "d7a958739c688dcdf3934d1c9771961a8f661515077a6ffffbddfa6fae072de8"
+    },
+    "cleanup": {
+      "path": "recipe/evidence/button-live-pivot-v3/cleanup.json",
+      "sha256": "bf069a3abb8f9a9f6aca24e237c23d0e3ba1f63f56ffa81599762877ffbfb2ea"
+    }
+  },
+  "transientLiveProof": {
+    "pageId": "85:4813",
+    "proofSectionId": "85:6129",
+    "componentSets": [
+      {
+        "id": "85:5438",
+        "adapterIdentity": "altitude-button-reviewed-v2",
+        "variants": 144,
+        "variables": 17
+      },
+      {
+        "id": "85:6086",
+        "adapterIdentity": "fluent-button-reviewed-v2",
+        "variants": 144,
+        "variables": 40
+      }
+    ],
+    "instances": ["85:6130", "85:6134"],
+    "screenshots": [
+      {
+        "path": "recipe/evidence/button-live-pivot-v3/screenshots/altitude-button-reviewed-v2.png",
+        "bytes": 1926,
+        "sha256": "52658cb274a817479cc9eb3937206af92a4dbcbaa6a253e7189a7b3c381448c9"
+      },
+      {
+        "path": "recipe/evidence/button-live-pivot-v3/screenshots/fluent-button-reviewed-v2.png",
+        "bytes": 682,
+        "sha256": "225d536025d8e182a893bf65219d4d38986fd6dcfe227cbc44327707a5f02413"
+      }
+    ],
+    "probes": {
+      "reflow": {
+        "denominator": 2,
+        "passed": 1,
+        "failedAdapter": "fluent-button-reviewed-v2"
+      },
+      "variantSwitching": {
+        "denominator": 2,
+        "passed": 2
+      },
+      "tokenBinding": {
+        "denominator": 2,
+        "passed": 2,
+        "bindingFacts": 5160
+      },
+      "noFakeLayout": {
+        "denominator": 2,
+        "passed": 2,
+        "components": 288,
+        "layoutChildren": 600,
+        "nonAbsoluteChildren": 600
+      },
+      "restored": {
+        "denominator": 2,
+        "passed": 2
+      }
+    },
+    "readback": {
+      "plannedComparedFacts": 7956,
+      "observedFacts": 10368,
+      "canonicalCycles": 2,
+      "canonicalCycle1Sha256": "ceddaec224130655fda8066653f4c1ae0766fb13b7dc267d3888d047cfad689e",
+      "canonicalCycle2Sha256": "ceddaec224130655fda8066653f4c1ae0766fb13b7dc267d3888d047cfad689e",
+      "twoCycleStable": true
+    },
+    "zeroSilentAccounting": {
+      "denominator": 10368,
+      "carried": 10368,
+      "codeOnly": 0,
+      "namedRefused": 0,
+      "silent": 0
+    }
+  },
+  "cleanup": {
+    "removedPageId": "85:4813",
+    "removedCollectionIds": [
+      "VariableCollectionId:85:4815",
+      "VariableCollectionId:85:5440"
+    ],
+    "preExistingPagesOrNodesRemoved": 0,
+    "censusRestored": true
+  },
+  "failure": {
+    "stage": "live-usability-probe",
+    "rootCause": "The Fluent default instance did not expand under a verified long-label override: width remained 96px while the Altitude instance expanded from 83px to 314px. The Fluent representative export also preserved the failed-state bytes. This is a writer/layout semantic defect after successful exact-byte execution, not a transport defect.",
+    "buttonSuccess": false
+  },
+  "nextTask": "Create a new writer version that preserves Fluent min-width while allowing hug-content expansion, add a live-mock regression for long-label reflow and visible label output, then run a new versioned Scratch-only proof. Do not retry v3."
+}

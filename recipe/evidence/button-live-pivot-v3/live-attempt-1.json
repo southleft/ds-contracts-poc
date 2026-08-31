@@ -1,0 +1,18 @@
+{
+  "version": 3,
+  "attempt": 1,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "transport": "local-generated-file-to-dedicated-websocket-bridge",
+  "evalBegan": false,
+  "wrapperPath": "recipe/evidence/button-live-pivot-v3/writer-wrapper.txt",
+  "wrapperBytes": 46953,
+  "wrapperSha256": "d7a54125be27c9c4bd3a6bea069a7c72e0f00649ba5d56aadc82887ff37801e3",
+  "bridgePort": 9230,
+  "bridgeResult": {
+    "success": false,
+    "error": "Error: WRITER-TRANSPORT-UTF8"
+  },
+  "decodedBytes": null,
+  "decodedSha256": null,
+  "hashImplementation": null
+}

@@ -1,0 +1,38 @@
+{
+  "artifactVersion": "input-live-v3-cleanup-v1",
+  "attempt": 3,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "runIdentity": "4a074b24-e8503dd5-input-v2",
+  "runnerCleanup": {
+    "bridgeExecutionSucceeded": true,
+    "bridgeCodeCharacters": 4245,
+    "resultReturnedToRunner": true,
+    "resultPersistedBeforeHostFailure": false,
+    "requestedNodeIds": null,
+    "removedNodeIds": null,
+    "requestedCollectionIds": null,
+    "removedCollectionIds": null,
+    "reasonExactIdsUnavailable": "the committed runner discarded its in-memory cleanup result when the subsequent host normalization exception terminated the process"
+  },
+  "postCleanupVerification": {
+    "ownershipVerified": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "complete": true,
+    "unrelatedScratchFingerprint": {
+      "algorithm": "cyrb64",
+      "before": "10ba6b57da3cfa97",
+      "after": "10ba6b57da3cfa97",
+      "exact": true,
+      "pageCount": 13,
+      "collectionCount": 14,
+      "variableCount": 11163,
+      "censusPagesUnchanged": true,
+      "retainedButtonProofUnchanged": true
+    }
+  }
+}

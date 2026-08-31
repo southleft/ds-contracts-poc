@@ -1,0 +1,148 @@
+{
+  "artifactVersion": "table-live-v32-attempt-1-v1",
+  "status": "THE MINT STAYS. Writer, restore, extract, probe and all 20 captures accepted; every per-source usability boolean green on both roots; 20 of 20 cells pass. Cleanup was NOT executed -- this is the green path. Table has a live Figma mint for the first time. Human signoff is pending and is TJ's; Gate 2 (the per-column width model) is visible in the MUI root and remains an open owner decision.",
+  "authorizationCommit": "12ff0df83884c06d796aba76b63726ddf124d17d",
+  "codeCommit": "12ff0df83884c06d796aba76b63726ddf124d17d",
+  "antecedentCommit": "627fee793cca58d8620d69a6cbf2a95f677a2ad8",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "2f9b764f-82a04258-table-v32",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781"
+  },
+  "teaching": {
+    "one": "pin counterAxisSizingMode FIXED before resizing the set, then read set.width back and refuse TABLE-SET-WIDTH-NOT-APPLIED if the resize did not stick",
+    "cleared": true,
+    "buildsOn": {
+      "v28": "defer FILL until the node has an auto-layout parent",
+      "v29": "a set that hugs children which fill it is degenerate",
+      "v31": "the descent to the hug cells was already correct; only the ordering was wrong"
+    }
+  },
+  "writer": {
+    "accepted": true,
+    "pageId": "173:48924",
+    "runIdentity": "2f9b764f-82a04258-table-v32",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "sources": [
+      {
+        "adapterIdentity": "first-party-table-reviewed-v1",
+        "sectionId": "173:48925",
+        "tableSetId": "173:49053",
+        "rowSetId": "173:48982",
+        "cellSetId": "173:48953",
+        "tableSetWidth": 360,
+        "variantCount": 10,
+        "instanceCount": 22
+      },
+      {
+        "adapterIdentity": "material-table-reviewed-v1",
+        "sectionId": "173:49054",
+        "tableSetId": "173:49180",
+        "rowSetId": "173:49109",
+        "cellSetId": "173:49080",
+        "tableSetWidth": 343,
+        "variantCount": 10,
+        "instanceCount": 22
+      }
+    ],
+    "setWidthsAreMeasuredNotChosen": "360 and 343, each the widest variant's own content plus set padding, walked down to the hug cells",
+    "receiptSha256": "03a499e175e5ff911375283697834f7fc015e1257f1ace55d5d2fdd0e8da58e4"
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "receiptSha256": "86c248489edd1e7b557b25cce38aa8086b22807c6202fdd0a3a58709a92a6230",
+    "summary": {
+      "contentHugAfter": true
+    }
+  },
+  "extract": {
+    "issued": true,
+    "accepted": true,
+    "receiptSha256": "f1a8fb819724013958fe9eaa07f407a41294d466fe6a830b304df42f94d71e44",
+    "rawResponseBytes": 2703315,
+    "roots": ["first-party", "mui"],
+    "fixedPointReached": true
+  },
+  "probe": {
+    "issued": true,
+    "accepted": true,
+    "passed": true,
+    "receiptSha256": "977b4c37027c530252b9dae97729a9b230618c0a816a64abc9a8acacf337e3cd",
+    "pageId": "173:48924",
+    "perSource": [
+      {
+        "source": "first-party",
+        "reflowPassed": true,
+        "contentHugPassed": true,
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "stateSemanticsPassed": true,
+        "switchingRestored": true,
+        "textPropertiesRestored": true,
+        "exactSceneRestoration": true
+      },
+      {
+        "source": "mui",
+        "reflowPassed": true,
+        "contentHugPassed": true,
+        "bindingCompatibilityPassed": true,
+        "noFakeLayoutPassed": true,
+        "stateSemanticsPassed": true,
+        "switchingRestored": true,
+        "textPropertiesRestored": true,
+        "exactSceneRestoration": true
+      }
+    ],
+    "cellsMeasured": 20,
+    "cellsFailing": 0,
+    "maxVisibleAreaLoss": 0.008333333333333304,
+    "maxOverlapPixels": 0,
+    "firstEverTablePass": true
+  },
+  "captures": {
+    "issued": 20,
+    "accepted": 20,
+    "allAccepted": true
+  },
+  "cleanup": {
+    "executedBecauseFailure": false,
+    "notExecutedBecauseGreenPath": "the orchestrator reports main-complete and instructs that cleanup remains persisted for failure/abort recovery only; do not execute it on this green path",
+    "mintStayed": true
+  },
+  "columnAlignment": {
+    "measuredFrom": "004-extract.raw.json via recipe/table-column-alignment.ts",
+    "first-party": {
+      "aligned": true,
+      "worstDivergencePx": 0,
+      "columns": [[120], [120], [120]]
+    },
+    "mui": {
+      "aligned": false,
+      "worstDivergencePx": 32,
+      "columns": [
+        [127, 159],
+        [89, 90],
+        [89, 95]
+      ],
+      "note": "GATE 2, and it is now visible on the canvas rather than only in a measurement. MUI declares no cell min-width, so its cells hug their contents and a column carries a different width in each row. The probe passes this mint because every cell is inside its box, correctly roled and non-overlapping -- raggedness is a different defect from the ones it measures. Choosing a column model is an authoring decision and is the owner's."
+    }
+  },
+  "nextTeaching": {
+    "doNotInvent": true,
+    "doNotInventHumanGrade": true,
+    "gate2IsTheOwners": "table@1 has no per-column width model; the MUI root shows what that costs",
+    "noFurtherVersionNeededForTheMint": true
+  },
+  "humanSignoff": "pending",
+  "overallTableSuccess": true,
+  "productV1Complete": false
+}

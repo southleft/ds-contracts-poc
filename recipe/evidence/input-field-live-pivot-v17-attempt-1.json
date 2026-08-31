@@ -1,0 +1,103 @@
+{
+  "artifactVersion": "input-live-v17-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "36dfcad20ecd04d9ff5eddcbe476a60ec66bc940",
+  "codeCommit": "36dfcad20ecd04d9ff5eddcbe476a60ec66bc940",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 976,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8402443,
+    "hostNormalizeAccount": false,
+    "marker": "INPUT-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL"
+  },
+  "v16FailureCleared": {
+    "leadingSlotSolidPaintSurfacedFromPayloadOrChild": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedLeadingSlotFills": {
+    "mui": { "empty": 64, "solid": 0, "total": 64 },
+    "polaris": { "empty": 64, "solid": 0, "total": 64 }
+  },
+  "observedLeadingSlotFillSources": {
+    "mui": {
+      "slotNodeFillsEmpty": 64,
+      "instancePayloadSolid": 64,
+      "adornmentContentChildSolid": 64,
+      "total": 64
+    },
+    "polaris": {
+      "slotNodeFillsEmpty": 64,
+      "instancePayloadSolid": 64,
+      "adornmentContentChildSolid": 64,
+      "total": 64
+    }
+  },
+  "observedLeadingSlotColorBindings": {
+    "mui": {
+      "slotNodeMissingFills0Color": 64,
+      "adornmentContentChildHasFills0Color": 64,
+      "total": 64
+    },
+    "polaris": {
+      "slotNodeMissingFills0Color": 64,
+      "adornmentContentChildHasFills0Color": 64,
+      "total": 64
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:990 via recipe/input-field-live-v3-verifier-v17.ts:443",
+    "messages": [
+      "input-field@1: input-field/slot/leading: required token binding fills.0.color must appear exactly once"
+    ],
+    "cause": "Carried v17 scene-readback surfaced leading-slot SOLID from instancePayload.fills or the adornment-content child, so host collapse no longer refused fills[0] as a solid paint. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8402443 bytes). Content-width census remains MUI 128/128 FILL and Polaris 128/128 FILL. Extract slot frames still have empty fills[] (64+64); SOLID is on the child and instancePayload.fills. Host then refused the leading-slot fills.0.color token binding. All 64+64 leading slot nodes bind only height/width; the COLOR binding fills.0.color lives on the adornment-content child. Do not teach FIXED. Do not invent a binding. Do not restart v17 attempt 2 as-is. Scene-readback-v17 bytes are in the v17 hash set.",
+    "inputFieldRecipeInV17AntecedentHashSet": false,
+    "writerInV17AntecedentHashSet": true,
+    "restoreInV17AntecedentHashSet": true,
+    "extractRuntimeInV17AntecedentHashSet": true,
+    "sceneReadbackInV17AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v17AntecedentBytesUnchanged": true,
+  "v17AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV17Attempt2WithoutLeadingSlotColorBindingForbidden": true
+}

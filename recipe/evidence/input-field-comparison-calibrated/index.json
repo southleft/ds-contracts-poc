@@ -1,0 +1,30 @@
+{
+  "version": "input-field-calibrated-hidden-duplicate-v1",
+  "archetype": "input / field",
+  "status": "calibrated-packet-sealed-ungraded-progress-blocked",
+  "overall": false,
+  "gradeWritten": false,
+  "liveInputMayProceed": false,
+  "protocol": "recipe/evidence/input-field-comparison-calibrated/calibration-protocol.json",
+  "protocolHash": "51bcdd9f605edabf4eb3df3fb87d3f2323fceb52f24cf1dcdb8b775a077f8ce5",
+  "packet": "recipe/evidence/input-field-comparison-calibrated/blind-packet/packet.json",
+  "packetHash": "f6f245d78c3ef9e8fe6b9fd7e957f660bf69b19f7776f290cf948610f2949dd7",
+  "sealedAnswerKey": "recipe/evidence/input-field-comparison-calibrated/sealed-answer-key.json",
+  "sealedAnswerKeyHash": "156a47b788793e4d126a2d538c2df33b4aeedc79eab5456c2cc3763ab142f843",
+  "receipt": "recipe/evidence/input-field-comparison-calibrated/receipt.json",
+  "receiptHash": "0e1e7b662704b82a496a02b9552be8173835c207d3758497e9402658d4de3bc0",
+  "counts": {
+    "sourceCells": 128,
+    "uniqueOriginalSourceReferences": 128,
+    "referencePresentations": 384,
+    "specimens": 384,
+    "correctedV2": 128,
+    "unchangedControlCopyA": 128,
+    "unchangedControlCopyB": 128
+  },
+  "allowedGradeOutputs": [
+    "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-a.json",
+    "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-b.json",
+    "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-c.json"
+  ]
+}

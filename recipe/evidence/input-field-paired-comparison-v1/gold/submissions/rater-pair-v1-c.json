@@ -1,0 +1,804 @@
+{
+  "version": "paired-comparison-grade-envelope-v1",
+  "phase": "gold",
+  "raterId": "RATER-PAIR-V1-C",
+  "packetHash": "4f3418b4a54c5cc683ffc07c7098c282324d931fedd7a50cf5c2bd720b1d1d1b",
+  "randomizedBatchHash": "de2e95a6377830cc2da0020b05564c0e03592478f7bcfe6944515b343112c963",
+  "protocolCommitment": "64f071edba0bf024ace7cd5875838727120092854db041ecb17a8aca89d707c8",
+  "rubricVersion": "input-field-paired-observable-rubric-v1",
+  "calibrationReceipt": null,
+  "counts": {
+    "expected": 48,
+    "submitted": 48
+  },
+  "grades": [
+    {
+      "taskId": "task-259f9336e4f11ec4da1d84b4",
+      "referenceId": "reference-94707499f796e38077e34b1a",
+      "leftCandidateId": "candidate-f8d253c99b40cf46e28650d9",
+      "rightCandidateId": "candidate-045ea2fe74764bc4c1efefec",
+      "choice": "right",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the right field is about 2 px wider and therefore closer to the reference field width."
+        ],
+        "leftDefects": [
+          "The left field is about 2 px narrower than the winner and farther from the reference width."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1af621bc171363951343aecb",
+      "referenceId": "reference-427a99a063ae03859d3755f4",
+      "leftCandidateId": "candidate-78a7218512a61a3b15556882",
+      "rightCandidateId": "candidate-ddc341014c1375ba8a21b9a2",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the left preserves the visible placeholder content required by the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right candidate omits the long placeholder bar that is visibly present in the reference."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7d484ec87772b06e33ecef26",
+      "referenceId": "reference-579f3d0491ff659f22e9800e",
+      "leftCandidateId": "candidate-f1fc2fe2af2153c10d34fdee",
+      "rightCandidateId": "candidate-3c43cf88d9e9df5c7bc8cdb8",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the right preserves the reference field width while the left is roughly 19 px narrower."
+        ],
+        "leftDefects": [
+          "The left field outline is roughly 19 px narrower than the reference field outline."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7a3115734c12736aa30c0599",
+      "referenceId": "reference-f9a3106ad70c8797edad13a8",
+      "leftCandidateId": "candidate-c813ca0fdea32d9b6ddb0626",
+      "rightCandidateId": "candidate-d0e67c100eca529af469d90d",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-80e3b154882e2eaf8303487b",
+      "referenceId": "reference-4c5fd25fcc2546f694fd0b35",
+      "leftCandidateId": "candidate-17c33b245d0308821f075619",
+      "rightCandidateId": "candidate-4c6c0286bbe64a12a7938742",
+      "choice": "left",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the left field is about 2 px wider and therefore closer to the reference field width."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right field is about 2 px narrower than the winner and farther from the reference width."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7c83af503888af50ab086ada",
+      "referenceId": "reference-8f724d0f76c4475c76272afe",
+      "leftCandidateId": "candidate-d5587bf0fbb4c07c4637eb1c",
+      "rightCandidateId": "candidate-6f6581957d5a1d6b6b8c889d",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-9be4a9f37eb5cb3daafa4d13",
+      "referenceId": "reference-dbddd5ecdfc2adf3a7cf964d",
+      "leftCandidateId": "candidate-4873c417631ffa73b3ba8285",
+      "rightCandidateId": "candidate-1e802616fab2a7be6b96d0d6",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-9e68b2e10cd59369bb862718",
+      "referenceId": "reference-04fab407babcbff570f31fc5",
+      "leftCandidateId": "candidate-b0a38837d3d032da051a67c9",
+      "rightCandidateId": "candidate-3e6691a0be3ecba9dc60f14f",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At semantic-state rank, the right preserves the blue focused outline shown by the reference."
+        ],
+        "leftDefects": [
+          "The left candidate uses a red error outline instead of the reference blue focused outline."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ae3f1bf36f747b271dd5f0fb",
+      "referenceId": "reference-f0d631f65afaaae2fb78c79e",
+      "leftCandidateId": "candidate-ae1019777e3186af5b1e0d3d",
+      "rightCandidateId": "candidate-407f9ed342355ca90266bfd0",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the right keeps the helper line separate below the field as in the reference."
+        ],
+        "leftDefects": [
+          "The left helper line overlaps the lower field border instead of remaining separately below the input."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-db3c41e9fcca1366b96e0b18",
+      "referenceId": "reference-d168c9fd548b1f460dc63045",
+      "leftCandidateId": "candidate-591d4f18cfbf32aa4a813fcd",
+      "rightCandidateId": "candidate-ac417731a20e2c6693495e7f",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-7167c01ba3e548e527956c3c",
+      "referenceId": "reference-07c92a13f058eb71a31ede5a",
+      "leftCandidateId": "candidate-fc1b2f0c1c3c6306eca0f1ad",
+      "rightCandidateId": "candidate-42a4991e79d369312e0487d9",
+      "choice": "right",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At role-scale rank, the right placeholder is about 2 px longer and closer to the reference placeholder length."
+        ],
+        "leftDefects": [
+          "The left placeholder is about 2 px shorter than the winner and farther from the reference role scale."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-27b7edb0ccf420ecb9a40e99",
+      "referenceId": "reference-50ca442b86ce0c0ef71d76a4",
+      "leftCandidateId": "candidate-d89af3b9e1980ec845cd9ffd",
+      "rightCandidateId": "candidate-ee1082beb44a56bbc441cb4e",
+      "choice": "left",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At role-scale rank, the left placeholder is about 2 px longer and closer to the reference placeholder length."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right placeholder is about 2 px shorter than the winner and farther from the reference role scale."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-02f59bf03e4d7eca134cfbf2",
+      "referenceId": "reference-9252df4d7bdf4ee68bf29777",
+      "leftCandidateId": "candidate-94955870124e5b3496d2f852",
+      "rightCandidateId": "candidate-a0f836cb37e080b878dcf7aa",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-43a9ca53ec811ec710090a17",
+      "referenceId": "reference-595d20d7d1670c56c1a179e1",
+      "leftCandidateId": "candidate-1649b79faf7b0524198cc7d6",
+      "rightCandidateId": "candidate-20763dd5f470e332fbb7371d",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the left preserves the visible placeholder content required by the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right candidate omits the long placeholder bar that is visibly present in the reference."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b90701a555a792cd02e0d8aa",
+      "referenceId": "reference-127e25220aebb1a5cb422234",
+      "leftCandidateId": "candidate-4f8ec32ccc9617b606a2dbcc",
+      "rightCandidateId": "candidate-ab6ea7c50aedec89d1588fd2",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-b0bc8dc11f744a5f49a569f9",
+      "referenceId": "reference-c1271ddfd7a357563f9354e7",
+      "leftCandidateId": "candidate-09a9d8e23ad8b7ce3a58530a",
+      "rightCandidateId": "candidate-79924d297521229e14ca5699",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the left preserves the visible label above the field required by the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right candidate omits the required label above the field while retaining the input."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8d4a981dd589284c5e65187d",
+      "referenceId": "reference-abb7bde4be2db89a98fb8eb3",
+      "leftCandidateId": "candidate-241a7d4060f5ee4f0b5b2a89",
+      "rightCandidateId": "candidate-b43aa9c2011bd3534dbac3bd",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the left preserves the reference field width while the right is roughly 19 px narrower."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right field outline is roughly 19 px narrower than the reference field outline."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-cc61fbfeac9017c050b796ef",
+      "referenceId": "reference-7065197051bb5c312eb77c25",
+      "leftCandidateId": "candidate-56f9950da4a5a06ed547503f",
+      "rightCandidateId": "candidate-a2395abd13e03e507f60b0ef",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-39155594ca9eb749658a16b7",
+      "referenceId": "reference-bc646beb35939c70451da666",
+      "leftCandidateId": "candidate-b487d2f4adc9293316514490",
+      "rightCandidateId": "candidate-dda78a29c7f1d36283cc930f",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the left keeps the helper line separate below the field as in the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right helper line overlaps the lower field border instead of remaining separately below the input."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f01411cda38b2a898824c81d",
+      "referenceId": "reference-829affcf4d95ceecd23068fd",
+      "leftCandidateId": "candidate-fd165acdcba6f0caeb73e45c",
+      "rightCandidateId": "candidate-59f0d8aa2d28af61fd340de8",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-336c78312a11e3dc70e4654c",
+      "referenceId": "reference-d714d2042eff2d6cd5003298",
+      "leftCandidateId": "candidate-1c14994d98dd0065b6c694bf",
+      "rightCandidateId": "candidate-177381c61c77b242328b6d5c",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At semantic-state rank, the left preserves the blue focused outline shown by the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right candidate uses a red error outline instead of the reference blue focused outline."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-39ffc344ddb3ed6ad16632b4",
+      "referenceId": "reference-f8296ff3fa06686dd9940876",
+      "leftCandidateId": "candidate-c99b1e6d51033af3f3b08351",
+      "rightCandidateId": "candidate-54d8100b0113f38a2899ef7a",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the right preserves the visible label above the field required by the reference."
+        ],
+        "leftDefects": [
+          "The left candidate omits the required label above the field while retaining the input."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ff260d34befb62a8ebc89735",
+      "referenceId": "reference-64140e0b8c1bdeeb22961f1b",
+      "leftCandidateId": "candidate-107746036d1558c79f2d55a6",
+      "rightCandidateId": "candidate-f4133b2b094b84b773d67c37",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At semantic-state rank, the left preserves the blue focused outline shown by the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right candidate uses a red error outline instead of the reference blue focused outline."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-890718ad8d964f109591b4e5",
+      "referenceId": "reference-777891850f98fd2b8e067295",
+      "leftCandidateId": "candidate-0fb89ecdaa36e10afa3ff33a",
+      "rightCandidateId": "candidate-84751a92dc12f5734f2b75b8",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-aa58f7b6ab22bd445c4d9041",
+      "referenceId": "reference-8ba235503f3699d0aa4b9f75",
+      "leftCandidateId": "candidate-12305f6a6135063d3d69ebd5",
+      "rightCandidateId": "candidate-902a1c1635ff68d8ef4725f6",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-6dabb60cee0bbd0177a646a5",
+      "referenceId": "reference-ee162072002a2f0ec4fcb501",
+      "leftCandidateId": "candidate-fd5b7b8c45b0c0730cbb65f0",
+      "rightCandidateId": "candidate-a94e1757ce9515c62dc47144",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the right preserves the visible placeholder content required by the reference."
+        ],
+        "leftDefects": [
+          "The left candidate omits the long placeholder bar that is visibly present in the reference."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-15c978c97abb865721d55da7",
+      "referenceId": "reference-fbc74cb7b89af22985c91463",
+      "leftCandidateId": "candidate-06f0fcb4bfbdcaa72bd4fdd0",
+      "rightCandidateId": "candidate-65a395040fe2100122dab27e",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the right preserves the visible label above the field required by the reference."
+        ],
+        "leftDefects": [
+          "The left candidate omits the required label above the field while retaining the input."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-adb9cbde393bc2d5ca91fd50",
+      "referenceId": "reference-dd397abc3a3b76513cd325f1",
+      "leftCandidateId": "candidate-6dcb52a58569dc5fb8acd52d",
+      "rightCandidateId": "candidate-630cbba4c3fa35fbe363ea39",
+      "choice": "left",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At role-scale rank, the left placeholder is about 2 px longer and closer to the reference placeholder length."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right placeholder is about 2 px shorter than the winner and farther from the reference role scale."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4c4d61b27546b998acd74c95",
+      "referenceId": "reference-18091876c9d0e5bc1e0db08f",
+      "leftCandidateId": "candidate-60190e9c60752c9ca2731fed",
+      "rightCandidateId": "candidate-6673342fd684b5979b563827",
+      "choice": "right",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At role-scale rank, the right placeholder is about 2 px longer and closer to the reference placeholder length."
+        ],
+        "leftDefects": [
+          "The left placeholder is about 2 px shorter than the winner and farther from the reference role scale."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4bdfd926e26ad180782c183e",
+      "referenceId": "reference-3567b1179364eb634b33f570",
+      "leftCandidateId": "candidate-2d579080219ee1700daf3546",
+      "rightCandidateId": "candidate-ae80005c5ea5c19ebb42bb92",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the right preserves the helper line visibly required below the input."
+        ],
+        "leftDefects": [
+          "The left candidate omits the helper line that is visibly required beneath the field."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5350a1f7f73ba2e1fbdd61ea",
+      "referenceId": "reference-0e8f4df51cf2a941cc9d0229",
+      "leftCandidateId": "candidate-bd5dbb8d54521e4af76609eb",
+      "rightCandidateId": "candidate-bb1282a1faf728dd9acbe5a7",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-5cd9fe961ef90e5c34a674d2",
+      "referenceId": "reference-b1bf5daf3c0556735db84a87",
+      "leftCandidateId": "candidate-a3611731ebcde7220e6e2737",
+      "rightCandidateId": "candidate-9f2ce3a52c7285a4d9f9ec1a",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-6847d246bf136daec081d8bf",
+      "referenceId": "reference-ab3a0c6f2fe544537791e569",
+      "leftCandidateId": "candidate-6286d3cd17c664108be65484",
+      "rightCandidateId": "candidate-5ca8227d9222aa5eab1ce6d5",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the left preserves the visible label above the field required by the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right candidate omits the required label above the field while retaining the input."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5eb905de982d529c803e08c3",
+      "referenceId": "reference-95abcef6ba7c14ad42a03739",
+      "leftCandidateId": "candidate-ab3d03af8d5fda034173dc4c",
+      "rightCandidateId": "candidate-8cf78b48672a522dae877a8f",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the left preserves the reference field width while the right is roughly 19 px narrower."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right field outline is roughly 19 px narrower than the reference field outline."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f7a734df3fc7a093d06e9ea3",
+      "referenceId": "reference-cf71f4a1214d5b126357dabc",
+      "leftCandidateId": "candidate-e1c77a643626509f79e4202b",
+      "rightCandidateId": "candidate-1319e58589b253c5f694a625",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-4a14236fde0c1c5fa64c0492",
+      "referenceId": "reference-9624e479f097dfbeddc7b605",
+      "leftCandidateId": "candidate-80a6f6df8bae00fa19451408",
+      "rightCandidateId": "candidate-80ca03c8370389a958a18db4",
+      "choice": "left",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the left keeps the helper line separate below the field as in the reference."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right helper line overlaps the lower field border instead of remaining separately below the input."
+        ],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9601e349614e67af17a291f2",
+      "referenceId": "reference-e00ce957f2970b5a24e1918c",
+      "leftCandidateId": "candidate-99db65440bda950c8707f79c",
+      "rightCandidateId": "candidate-e9187a0c3bb7a4b156a07902",
+      "choice": "right",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the right field is about 2 px wider and therefore closer to the reference field width."
+        ],
+        "leftDefects": [
+          "The left field is about 2 px narrower than the winner and farther from the reference width."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b7f8c879dec951571d1bb4ce",
+      "referenceId": "reference-3a9d8a3b6a6b038a6c1e7eb4",
+      "leftCandidateId": "candidate-1c2654e45affd85bcbaf6541",
+      "rightCandidateId": "candidate-3a840f7871537e84c59c3e26",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At semantic-state rank, the right preserves the blue focused outline shown by the reference."
+        ],
+        "leftDefects": [
+          "The left candidate uses a red error outline instead of the reference blue focused outline."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-afc3683608778c7bf15253bc",
+      "referenceId": "reference-91566ca7fa5f02adb9e7d33b",
+      "leftCandidateId": "candidate-ef125035462bff4a01c73059",
+      "rightCandidateId": "candidate-1dd8f922ea103a304e8c6346",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the right preserves the visible placeholder content required by the reference."
+        ],
+        "leftDefects": [
+          "The left candidate omits the long placeholder bar that is visibly present in the reference."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ffca121f0a312ed10451e722",
+      "referenceId": "reference-cb888e7dd1dc85644a7ce364",
+      "leftCandidateId": "candidate-66876fe72f90753861db3db3",
+      "rightCandidateId": "candidate-afdb2cb589375672c8781696",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-a0a7855f2058da3aa05afdd8",
+      "referenceId": "reference-47527155bf380c7f911770b0",
+      "leftCandidateId": "candidate-671e34f1460a2525d076d3ee",
+      "rightCandidateId": "candidate-b0e27c9d13e9f9db15b2063b",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-4359e0d8e46a7630ebe84309",
+      "referenceId": "reference-4ae44ba815e34c7f208b95b7",
+      "leftCandidateId": "candidate-bc365a73c3c6cd76e42af946",
+      "rightCandidateId": "candidate-71d68e2c2b3cf41184df36ab",
+      "choice": "tie",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates are within the named 1 px geometry tolerance, with no difference in any higher-ranked visible property."
+      }
+    },
+    {
+      "taskId": "task-bcd0a8cb3e4dd32cff5ec1ef",
+      "referenceId": "reference-178cd19dd21e239df3222a4b",
+      "leftCandidateId": "candidate-e8eaaea304fca939d3e02a78",
+      "rightCandidateId": "candidate-e2a987c3cd5e19325427f424",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the right preserves the reference field width while the left is roughly 19 px narrower."
+        ],
+        "leftDefects": [
+          "The left field outline is roughly 19 px narrower than the reference field outline."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-38cd269163f7f82119c0560f",
+      "referenceId": "reference-ec3edf9293675ea7a5f27fb4",
+      "leftCandidateId": "candidate-127022505a3c99b2b56553cf",
+      "rightCandidateId": "candidate-602787ab85b40808540aa2ed",
+      "choice": "right",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [
+          "At structure-and-state rank, the right keeps the helper line separate below the field as in the reference."
+        ],
+        "leftDefects": [
+          "The left helper line overlaps the lower field border instead of remaining separately below the input."
+        ],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-6765eb31c71b9f0caafddd4b",
+      "referenceId": "reference-d852f0ad41a507ec5cd187ca",
+      "leftCandidateId": "candidate-9a2bcb5fdde6266c09fda777",
+      "rightCandidateId": "candidate-01b8576b4c82f2861228afae",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-e24f4253e97c96004270e477",
+      "referenceId": "reference-004b4427e98ffb2358bed2f8",
+      "leftCandidateId": "candidate-4a1b1391a6b10d781969cf98",
+      "rightCandidateId": "candidate-aba0ab0ef4a370390a29448c",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-a4b31b99436a479d064ed261",
+      "referenceId": "reference-01818c3a18f95543ca0f2f2e",
+      "leftCandidateId": "candidate-04dbbb0940de44cd72c633ea",
+      "rightCandidateId": "candidate-65947e0dc183531f8da600ad",
+      "choice": "tie",
+      "confidence": "high",
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": "The candidates have exact pixel equality across visible structure, geometry, content, color, and alignment."
+      }
+    },
+    {
+      "taskId": "task-076195318cb455a8d414d1b3",
+      "referenceId": "reference-16d3331fcdd0f125f3ec592f",
+      "leftCandidateId": "candidate-1bceb68072d14e6986e14bad",
+      "rightCandidateId": "candidate-f0683428776fddd7eae0a5a4",
+      "choice": "left",
+      "confidence": "medium",
+      "rationale": {
+        "decisiveDifferences": [
+          "At geometry rank, the left field is about 2 px wider and therefore closer to the reference field width."
+        ],
+        "leftDefects": [],
+        "rightDefects": [
+          "The right field is about 2 px narrower than the winner and farther from the reference width."
+        ],
+        "tieBasis": null
+      }
+    }
+  ]
+}

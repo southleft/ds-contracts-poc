@@ -1,0 +1,53 @@
+{
+  "artifactVersion": "calendar-live-v50-legibility-pass-v1",
+  "classification": "presentation-only",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=181-64873",
+  "pageId": "181:64873",
+  "pageName": "Recipe Pivot / Calendar / 4604bbfe-calendar-v50",
+  "runIdentity": "4604bbfe-calendar-v50",
+  "why": "TJ reviewed V50 and said it looks pretty good but is hard to read: light-half Astryx tokens (dark text, transparent set surfaces) sat inside a dark-gray section on the canvas. Requested white background so he can give better feedback.",
+  "whatChanged": {
+    "pageBackground": {
+      "id": "181:64873",
+      "before": "#FFFFFF (already white — not the cause)",
+      "after": "#FFFFFF (re-asserted solid white)"
+    },
+    "sectionFill": {
+      "id": "181:64874",
+      "name": "Recipe Pivot / Astryx Calendar / 4604bbfe",
+      "before": "SOLID #444444 @ 1 (dark gray — this was the legibility problem)",
+      "after": "SOLID #FFFFFF @ 1"
+    }
+  },
+  "whatWasNotTouched": {
+    "componentSets": [
+      { "id": "181:64913", "name": "calendar/day-set :: Calendar day", "ownershipKey": "day", "fills": "[] unchanged" },
+      { "id": "181:64959", "name": "calendar/week-set :: Calendar week", "ownershipKey": "week", "fills": "[] unchanged" },
+      { "id": "181:65263", "name": "calendar/set :: Astryx Calendar", "ownershipKey": "calendar", "fills": "[] unchanged" }
+    ],
+    "writerOwnedNodesModified": 0,
+    "sectionHasNoOwnershipKey": true,
+    "ownershipNamespaceChecked": "ds.contracts.calendar.recipe.v1"
+  },
+  "noGridWrapperFramesAdded": "white section fill alone made the page legible; adding Calendar Day/Week/Month Grid frames was unnecessary",
+  "didNotRemint": true,
+  "noPrepare": true,
+  "noRecord": true,
+  "noWriterChanges": true,
+  "screenshotVerdict": {
+    "legible": true,
+    "darkTextOnWhite": true,
+    "chevronsVisible": true,
+    "april2026CaptionReadable": true,
+    "selected15BlueCircleVisible": true,
+    "ghostedOutsideDaysDistinguishable": true
+  },
+  "siblingPagesStillPresent": {
+    "input": { "id": "115:295378", "present": true },
+    "combobox": { "id": "163:35981", "present": true },
+    "table": { "id": "173:48924", "present": true },
+    "button": { "id": "85:6781", "present": true }
+  },
+  "humanSignoff": "pending"
+}

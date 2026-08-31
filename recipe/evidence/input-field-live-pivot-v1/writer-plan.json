@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "kind": "input-field-recipe-live-writer-plan",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "pageName": "Recipe Pivot / Input Field / e4ac8bb8-f30a3672-input-v1",
+  "runIdentity": "e4ac8bb8-f30a3672-input-v1",
+  "writer": {
+    "path": "recipe/evidence/input-field-live-pivot-v1/writer.js",
+    "bytes": 1694457,
+    "sha256": "15077af39a6ebd0930d00bf99b80c23b83a1b8e02d5318ffa8bd81c3c7fbae3a",
+    "deterministicRegeneration": "pass-two-complete-generations"
+  },
+  "transport": {
+    "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
+    "encoding": "utf8+base64",
+    "payloadBytes": 1694457,
+    "payloadSha256": "15077af39a6ebd0930d00bf99b80c23b83a1b8e02d5318ffa8bd81c3c7fbae3a",
+    "envelopePath": "recipe/evidence/input-field-live-pivot-v1/transport-envelope.json",
+    "envelopeSha256": "306cc2cff3267f00e90bd5d42e54728a4867b52919dbafab7172b1192857d0b2",
+    "wrapperPath": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-3.txt",
+    "wrapperBytes": 2264820,
+    "wrapperSha256": "0cdcc6b5f85b5ec9bae051c2ddfe6e01bbfdef0ed5af2a725e842469873f5411",
+    "preEvalChecks": [
+      "exact Scratch file key/name/editor",
+      "strict canonical base64",
+      "decoded byte length",
+      "decoded SHA-256",
+      "fatal UTF-8 decode"
+    ]
+  },
+  "pluginApi": {
+    "typingsVersion": "1.135.0",
+    "conformanceReport": "recipe/evidence/input-field-live-pivot-v1/conformance-report.json",
+    "counts": {
+      "apiCalls": 15,
+      "propertyNames": 50,
+      "variants": 256,
+      "variables": 158,
+      "pluginDataWrites": 18553,
+      "propertyWrites": 34529,
+      "bindings": 8704
+    }
+  },
+  "sources": [
+    {
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "displayName": "Material source",
+      "contractPath": "examples/mui/contracts/text-field.contract.json",
+      "contractSha256": "82cd6e0b499e4d0022ead243a65f7ba2b5a3523821a8192c90f21def5c542186",
+      "recipeHash": "e4ac8bb8272dd115d596a44251cc06d4e4ea95a99c1a5732cea23adda0ecdc4c",
+      "envelopeHash": "c11c4f447c840c615e82c3ffb57d083ef73ab761eef0987aaf6dae319693791f",
+      "plannedVariants": 128,
+      "plannedVariables": 81,
+      "comparedIrFacts": 10119
+    },
+    {
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "displayName": "Commerce source",
+      "contractPath": "examples/polaris/contracts/text-field.contract.json",
+      "contractSha256": "4bef6c13790d8e9319333c5f07be06ad53c39f1c8d493e9572faed2aab3f4530",
+      "recipeHash": "f30a3672046fb6db48e434bd34574b47b783fcdbaf92ec58d65994e887d11117",
+      "envelopeHash": "d7307be77e31d058a21ab8d144483966b42d663c3b53ceddd8fc29b2caf07716",
+      "plannedVariants": 128,
+      "plannedVariables": 77,
+      "comparedIrFacts": 9351
+    }
+  ],
+  "attempts": {
+    "maximum": 3,
+    "planned": 3,
+    "executed": 2,
+    "history": [
+      {
+        "attempt": 1,
+        "result": "failed-source-fixed-plugin-data-entry-limit",
+        "writerPath": "recipe/evidence/input-field-live-pivot-v1/writer-attempt-1.js",
+        "writerSha256": "4f709f6cfefcb22272a6449930dee78b77a318aabcaea766d3364684db28b216",
+        "wrapperPath": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-1.txt",
+        "wrapperSha256": "5c4771b0d93b1823a48b1c61015b860674e8a04d4f25984fe7e911ccf0ddb81b",
+        "resultPath": "recipe/evidence/input-field-live-pivot-v1/live-attempt-1.json",
+        "cleanupPath": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-1.json"
+      },
+      {
+        "attempt": 2,
+        "result": "writer-executed-live-validation-failed-source-fixed",
+        "writerPath": "recipe/evidence/input-field-live-pivot-v1/writer-attempt-2.js",
+        "writerSha256": "a2a77513704bb7f7e0322228dd059b9c0f8b9d73388c00a4e53e8a71bf092db8",
+        "wrapperPath": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-2.txt",
+        "wrapperSha256": "ec31ef9fc7c29c48820126505de5f9b2cb6b8191e18637ab1807e1cf9ce1082d",
+        "resultPath": "recipe/evidence/input-field-live-pivot-v1/live-attempt-2.json",
+        "cleanupPath": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-2.json",
+        "verificationPath": "recipe/evidence/input-field-live-pivot-v1/live-verification.json",
+        "objectivePath": "recipe/evidence/input-field-live-pivot-v1/objective-canvas-result.json"
+      }
+    ]
+  },
+  "provenance": {
+    "commit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "branch": "pivot/recipe-ir-v1",
+    "dirty": true,
+    "dirtyStatusSha256": "4bf835767cc0fcc5a6ea76873af643fb9dfe0eb80be60d0d5f39eb8111c4be70"
+  },
+  "status": {
+    "objectiveV2": "pass-locked-128-of-128",
+    "live": "pending",
+    "humanRecognisability": "pending-independent-designer-signoff",
+    "overallInputSuccess": false
+  }
+}

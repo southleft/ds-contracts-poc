@@ -1,0 +1,182 @@
+{
+  "artifactVersion": "input-live-v3-index-v1",
+  "status": "attempt 3 hard failure; v3 permanently exhausted",
+  "captureAuthorized": true,
+  "protocol": {
+    "path": "recipe/evidence/input-field-live-pivot-v3/protocol.json",
+    "sha256": "f4decf46da7cd3870e247d5304d632028356580e58ce68bedcb7acb7c0e31a23"
+  },
+  "captureArtifacts": [
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-1.json",
+      "bytes": 44902,
+      "sha256": "28100f55a183c6dd346c9c0d4adb394eb33705881e1ad302d5a3dd174653a698"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-1.json",
+      "bytes": 1246,
+      "sha256": "5aa381b9c7d82431d8a5861a678e2e6949b0977adaa66a17e1f4c73eeb4df2b3"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-2.json",
+      "bytes": 45547,
+      "sha256": "f1de7c8bcb8785522a022c5c6354add31214b40653c27ee27721156bed238256"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-2.json",
+      "bytes": 1444,
+      "sha256": "c0f52d8fb45bdcc048f570384898e2f6d0465a2da88c2551f3d75f428f34d19d"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-3.json",
+      "bytes": 4335,
+      "sha256": "b3b316a9886b67e788d3ba287fb0fc945ef7c7fba336ab9f41b43f238956115c"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-3.json",
+      "bytes": 1192,
+      "sha256": "bd5af62d7fd797babb613cc62fe8952234da0c2f13656804e0037eabfe871d3e"
+    },
+    {
+      "path": "recipe/evidence/input-field-live-pivot-v3/screenshots/manifest.json",
+      "bytes": 41399,
+      "sha256": "f465e8ee0f6545390a3deb9a75a47384aee027a7a42c34c74f51d15f0c897109"
+    }
+  ],
+  "result": {
+    "status": "hard-failure",
+    "attempt": 3,
+    "writerExecutionSucceeded": true,
+    "mintedVariants": null,
+    "verifierCompleted": false,
+    "sceneFactsExpected": 43726,
+    "sceneFactsMeasured": null,
+    "sceneAccounting": null,
+    "fixedPointCyclesMeasured": null,
+    "usability": null,
+    "restoration": null,
+    "objectiveRowsMeasured": null,
+    "capturedCells": 128,
+    "capturesScored": false,
+    "successReceiptWritten": false,
+    "rootCause": "host scene normalization rejected actual Figma alias-array fields fills.0, fontSize.0, lineHeight.0 and object-valued letterSpacing at recipe/scene-readback.ts:982 before occurrence accounting",
+    "exactFigmaIdsAvailable": false,
+    "reasonExactIdsUnavailable": "the nontransactional runner retained writer and cleanup IDs only in memory until after host normalization"
+  },
+  "overallInputSuccess": false,
+  "attemptHistory": [
+    {
+      "attempt": 1,
+      "outcome": "hard-failure",
+      "codeCommit": "5e95105b16f3e30e0fb67a53a6eda7a86c105c61",
+      "writerSha256": "e831b450b450a0b9fc0d086bc33a428ca473fed12616d3cf0b82ada8f4f16f24",
+      "rootCause": "Figma sandbox TextDecoder is not constructible in scene variable identity decoding",
+      "runnerCleanupComplete": false,
+      "manualCleanupComplete": true,
+      "artifacts": {
+        "attempt": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-1.json",
+          "bytes": 44902,
+          "sha256": "28100f55a183c6dd346c9c0d4adb394eb33705881e1ad302d5a3dd174653a698"
+        },
+        "cleanup": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-1.json",
+          "bytes": 1246,
+          "sha256": "5aa381b9c7d82431d8a5861a678e2e6949b0977adaa66a17e1f4c73eeb4df2b3"
+        }
+      }
+    },
+    {
+      "attempt": 2,
+      "outcome": "hard-failure",
+      "codeCommit": "98de9c3ceae06881bc477e7099b47e8f5a87cf10",
+      "writerSha256": "92da8f8c5ae78a870b392f9dfb3e239e82e8dc018d9abebfbcdd8118bf542811",
+      "rootCause": "owned instance 86:38597 materialized read-only TEXT descendant I86:38597;86:38583 from helper text 86:38583; the descendant cannot carry direct shared plugin data",
+      "runnerCleanupComplete": false,
+      "manualCleanupComplete": true,
+      "artifacts": {
+        "attempt": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-2.json",
+          "bytes": 45547,
+          "sha256": "f1de7c8bcb8785522a022c5c6354add31214b40653c27ee27721156bed238256"
+        },
+        "cleanup": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-2.json",
+          "bytes": 1444,
+          "sha256": "c0f52d8fb45bdcc048f570384898e2f6d0465a2da88c2551f3d75f428f34d19d"
+        }
+      }
+    },
+    {
+      "attempt": 3,
+      "outcome": "hard-failure",
+      "codeCommit": "6903d31eb015933a6796722d25f6155fb13332ce",
+      "writerSha256": "c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc",
+      "rootCause": "host scene normalization rejected actual Figma alias-array fields and a typed letterSpacing unit object before occurrence accounting",
+      "runnerCleanupComplete": true,
+      "postCleanupVerificationComplete": true,
+      "captures": {
+        "count": 128,
+        "totalBytes": 1065965,
+        "orderedBundleSha256": "f75fbbdf6e28c0d265f44de758128fc707e76da331345b4eb603638bbfbd528d",
+        "scored": false
+      },
+      "artifacts": {
+        "attempt": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/live-attempt-3.json",
+          "bytes": 4335,
+          "sha256": "b3b316a9886b67e788d3ba287fb0fc945ef7c7fba336ab9f41b43f238956115c"
+        },
+        "cleanup": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-3.json",
+          "bytes": 1192,
+          "sha256": "bd5af62d7fd797babb613cc62fe8952234da0c2f13656804e0037eabfe871d3e"
+        },
+        "screenshots": {
+          "path": "recipe/evidence/input-field-live-pivot-v3/screenshots/manifest.json",
+          "bytes": 41399,
+          "sha256": "f465e8ee0f6545390a3deb9a75a47384aee027a7a42c34c74f51d15f0c897109"
+        }
+      }
+    }
+  ],
+  "offlineCorrectionTask2": {
+    "implemented": true,
+    "figmaOrCaptureRun": false,
+    "claimsLiveReadiness": false
+  },
+  "runnerPreparation": {
+    "prepared": true,
+    "committed": true,
+    "figmaOrCaptureRun": false,
+    "generatedPlan": "recipe/evidence/input-field-live-pivot-v3/writer-plan.json"
+  },
+  "runtimeCorrection": {
+    "status": "executed; final attempt hard-failed; no further v3 correction authorized",
+    "figmaOrCaptureRun": false,
+    "nextAttempt": null,
+    "maximumAttempts": 3,
+    "authorizationReusable": false,
+    "newAuthorizationArtifactRequired": true,
+    "dependencies": {
+      "recipe/figma-runtime-portability.ts": "df0ada6caea5cf05c9f46552cbf675b76e029438f75a9805802b1446ab3a034f",
+      "recipe/scene-readback-runtime.ts": "d60fec6b83b304c8c4357e789b629f75c45e264220d654a0062e0e9def22a7f1",
+      "recipe/scene-readback.ts": "8c0bce86e099d30e96b779b2e0dc6815afefca5ad9f0c66aac479ceb28af47a1",
+      "recipe/input-field-figma-writer.ts": "7418ba26cdc873f485328b5e2b2ef01c474b91f58caa5aabd4219dde238b4dc2",
+      "recipe/writer-transport.ts": "e6762b86d9e4d4a1e0369405cb299cf411d952cf35de09ca31f83449d8d4e9e3",
+      "recipe/input-field-live-v3-cleanup.ts": "e28c7b8500720899a01fbbb9bdb47e498c7abf1b5798ee14ca4e8cbebd6c7950",
+      "recipe/run-input-field-live-v3.ts": "e887d18574706479a2a23d839c39f77bb1b8156c24b99978a31ce59c886f3839",
+      "recipe/input-field-live-v3-evidence.ts": "36a6630fc06d69a1059d3235095b9e9f1cf8b372eb9a8ec6b70b1f36598ac327",
+      "recipe/input-field-live-v3-preflight.ts": "a7c19ddf2ff8715c1539551f43ad84a25240bab54aaa4c0c0e8c415c7e5d21f2",
+      "recipe/build-input-field-live-proof-v3.ts": "7c84cc9f94cae723ca0ddf1136839a783953869728337596ed61b938b0003a25"
+    }
+  },
+  "blockers": [
+    "attempts 1, 2, and 3 are exhausted; attempt 4 is not authorized",
+    "attempt 3 scene extraction returned but host normalization failed before occurrence accounting",
+    "scene accounting, fixed point, usability, restoration, and objective values are unavailable and must not be inferred",
+    "128 captures are retained as unscored hard-failure evidence",
+    "exact attempt-3 Figma IDs were lost by the nontransactional runner",
+    "attributable human signoff has not occurred"
+  ]
+}

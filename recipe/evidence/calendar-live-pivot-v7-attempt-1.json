@@ -1,0 +1,76 @@
+{
+  "artifactVersion": "calendar-live-v7-attempt-1-v1",
+  "status": "failed closed at writer; CALENDAR-DAY-PROPERTY-ABSENT:Label; weekday host teaching not reached; leftover cleaned; mint did not stay",
+  "authorizationCommit": "aae970d3d9f0fdef6970da1984da7aaadfbc765c",
+  "codeCommit": "aae970d3d9f0fdef6970da1984da7aaadfbc765c",
+  "antecedentCommit": "f1129094a2ec7c0f5d7b1cbf03ad606234a3bfdf",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v7",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "cd67a293-4ed5-427c-940f-9582dd8ce263",
+    "attempt": 1,
+    "authorizationSha256": "ff24469b6309bfde248117d52fee285e0e82d4c5236ad8f271d0ca640d2530b4",
+    "signingPublicKeySpkiSha256": "cacff9907dfad3798be5c168f0cffb1aea1af0c3c457083e48dc84d99470e279",
+    "programSha256": "82cd0e5f346dbe30a15d5e92286e6647988ea4792b6db652591e2c9197d44ece",
+    "requestBindingSha256": "fa80cac3edaf9e94e7aa0fa3bf23446865fdfce2c48f7a0b4432f0c6c2b07e1a",
+    "requestSha256": "3429ce5c599c9838dacb01c429a68dfe8f9cc783d795d26aa901aacbbb149f37"
+  },
+  "writer": {
+    "accepted": false,
+    "refusedClass": "CALENDAR-DAY-PROPERTY-ABSENT",
+    "refused": "CALENDAR-DAY-PROPERTY-ABSENT:Label",
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v7",
+    "pageId": "173:50397",
+    "sectionId": "173:50398",
+    "collectionId": "VariableCollectionId:173:50399",
+    "daySetId": "173:50427",
+    "namedCause": "day set already carried Label#173:26437 after addComponentProperty; week WeekNumbers=on minted 6 day instances then refused on the 7th because createInstance().componentProperties lacked Label. Writer still writes Label via text.characters. Property presence must be taken from the set-issued key, not a fresh instance.",
+    "runIdentity": "19be1c96-calendar-v7",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": false,
+    "signedCleanupAccepted": false,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:50397",
+    "removedCollectionIds": ["VariableCollectionId:173:50399"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-DAY-PROPERTY-ABSENT",
+    "doNotInvent": true,
+    "restartV7Attempt2AsIs": false,
+    "prepareV8": "writer must take day Label presence from the set-issued addComponentProperty key, not createInstance().componentProperties"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

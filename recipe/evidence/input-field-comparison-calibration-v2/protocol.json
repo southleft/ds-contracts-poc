@@ -1,0 +1,156 @@
+{
+  "version": "input-field-recognisability-calibration-v2",
+  "lockedBeforeAnyFreshGrade": true,
+  "purpose": "Qualify fresh raters on an independent objective gold set before any separately sealed Input/Field performance grading; this artifact neither grades nor unseals performance.",
+  "failedRoundDiagnosis": {
+    "immutableEvidenceRoot": "recipe/evidence/input-field-comparison-calibrated",
+    "validGradeEnvelopes": "0/3",
+    "fleissKappa": 0.4725274725274726,
+    "hiddenDuplicateConsistency": "128/128 per rater and 128/128 majority",
+    "protocolDefectsOnly": [
+      "The blind packet described a strict envelope but did not provide a serialized fillable output template or rater-runnable preflight; all three submissions omitted or renamed required envelope fields and used a different criterion shape.",
+      "The observable rubric lacked enough quantitative anchors to force a common pass/fail standard; under high failure prevalence, raters were individually repeatable on exact duplicates while diverging on which specimens crossed the subjective materiality boundary."
+    ],
+    "excludedInferences": [
+      "No prior grade outcome is reused, repaired, transformed, or treated as performance evidence.",
+      "No performance identity, winner, consensus, axis aggregate, or implementation-labelled result is opened.",
+      "Thresholds are locked from the protocol defect analysis and objective gold construction, not tuned to a performance result."
+    ]
+  },
+  "phases": {
+    "goldCalibration": {
+      "protocol": "recognisability-gold-calibration-v1",
+      "separateFromPerformanceSpecimens": true,
+      "opaqueUntilSubmission": true,
+      "expectedCases": 24,
+      "exactOrSemanticPasses": 8,
+      "controlledMinorPasses": 4,
+      "obviousStructuralOrStateFailures": 12,
+      "minimumScore": 0.95,
+      "obviousFailureScoreRequired": 1,
+      "failureConsequence": "A rater below 95%, below 100% on obvious structural/state failures, or without a valid envelope is invalid and may not grade the performance packet.",
+      "feedbackBoundary": "Gold identities, expected outcomes, and rationales may be revealed only after that rater submits a valid gold envelope, solely as calibration feedback and before a separate performance phase."
+    },
+    "performance": {
+      "protocol": "input-field-performance-blind-v3",
+      "requiresPassingCalibrationReceipt": true,
+      "sourceReferences": 128,
+      "correctedV2Specimens": 128,
+      "hiddenLegacyCopyA": 128,
+      "hiddenLegacyCopyB": 128,
+      "specimens": 384,
+      "neverRevealPerformanceIdentitiesToRaters": true,
+      "remainsSealedAndUngraded": true
+    }
+  },
+  "gradeEnvelope": {
+    "schemaVersion": "recognisability-grade-envelope-v2",
+    "schemaPath": "recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json",
+    "requiredTopLevelFields": [
+      "phase",
+      "schemaVersion",
+      "graderId",
+      "packetProtocol",
+      "packetHash",
+      "randomizedBatchHash",
+      "calibrationCommitment",
+      "rubricVersion",
+      "counts",
+      "orderedGrades"
+    ],
+    "exactOrderedGradesRequired": true,
+    "preflightReadsAnswerKeys": false
+  },
+  "rubric": {
+    "version": "input-field-observable-rubric-v2",
+    "decisionOrder": [
+      {
+        "category": "required-structure-content",
+        "requiredObservations": [
+          "The input surface, label, visible value or placeholder, required marker when shown, helper or error message, and expected leading/trailing adornments occupy the same semantic roles as the reference.",
+          "Missing, substituted, extra, role-swapped, or unreadable required parts fail."
+        ],
+        "failWhen": "Any role-defining part or supplied visible content is missing, substituted, extra, or no longer recognisable."
+      },
+      {
+        "category": "semantic-state",
+        "requiredObservations": [
+          "Default, focus, error, and disabled cues are compared as semantic states, not merely as colors.",
+          "The specimen may not omit, add, or substitute the reference state."
+        ],
+        "failWhen": "Any wrong or missing semantic state cue fails regardless of raster or color distance."
+      },
+      {
+        "category": "geometry-proportion",
+        "requiredObservations": [
+          "Compare overall silhouette, field surface dimensions, padding, alignment, gaps, adornment scale, label/message position, clipping, and overlap.",
+          "Use the locked quantitative guardrails when coordinates can be read; obvious clipping or overlap remains a failure without measurement tooling."
+        ],
+        "failWhen": "A dimension, spacing, scale, clipping, or overlap guardrail is exceeded and materially changes the visible component."
+      },
+      {
+        "category": "typography-raster",
+        "requiredObservations": [
+          "Compare visible hierarchy, line count, wrapping, baseline, weight class, size class, and emphasis.",
+          "Antialiasing, subpixel rasterization, and glyph-edge shifts within the locked allowance are minor."
+        ],
+        "failWhen": "Typography changes hierarchy, semantic emphasis, wrapping, line count, alignment, or exceeds the minor raster allowance."
+      },
+      {
+        "category": "color-border-effects",
+        "requiredObservations": [
+          "Compare fill, ink, border width/style, focus effect, error treatment, and disabled opacity.",
+          "Small color deltas may be minor only when structure, hierarchy, contrast role, and semantic state stay recognisable."
+        ],
+        "failWhen": "A treatment changes semantic state, contrast role, border/effect class, or exceeds minor tolerance in a visibly material way."
+      }
+    ],
+    "quantitativeGuardrails": {
+      "geometry": {
+        "overallWidthOrHeightRelativeTolerance": 0.08,
+        "overallWidthOrHeightAbsoluteTolerancePx": 4,
+        "localSpacingAbsoluteTolerancePx": 4,
+        "localSpacingRelativeTolerance": 0.2,
+        "materialScaleDelta": 0.1,
+        "severeRequiredPartClippingArea": 0.05,
+        "requiredPartOverlapTolerancePx": 2
+      },
+      "rasterAndTypography": {
+        "permittedGlyphEdgeShiftPx": 1,
+        "wrappingOrLineCountChange": "fail",
+        "hierarchyOrSemanticEmphasisChange": "fail"
+      },
+      "color": {
+        "minorPerChannelSrgbDeltaMaximum": 12,
+        "minorEuclideanSrgbDeltaMaximum": 20,
+        "semanticStateCueChange": "fail-regardless-of-delta"
+      }
+    },
+    "precedence": [
+      "Required structure/content and semantic state rules override all numeric minor tolerances.",
+      "For overall width/height, a deviation is material only when it exceeds both 4 px and 8% of the reference dimension.",
+      "For local spacing, a deviation is material when it exceeds both 4 px and 20% of the reference spacing.",
+      "Any required-part clipping above 5% of that part's visible area, or required-part overlap above 2 px, fails.",
+      "A scale change above 10% for a role-defining part fails.",
+      "A color delta within both stated sRGB limits is minor only when state, structure, hierarchy, and contrast role are unchanged."
+    ],
+    "passRule": "recognisable=true only when required structure/content and semantic state match, no geometry/proportion failure exists, and all typography/raster and color/border/effect differences are match or minor. Every fail verdict requires a concrete observable defect; top-level defects are the ordered concatenation of criterion defects.",
+    "rationale": "The first round showed perfect exact-duplicate consistency but insufficient common-standard agreement under high failure prevalence. These limits turn role/state failures into categorical decisions while allowing known non-semantic raster variation."
+  },
+  "reliability": {
+    "calibratedValidRatersRequired": 3,
+    "calibrationScoreMinimum": 0.95,
+    "obviousFailureScoreRequired": 1,
+    "validEnvelopeRequired": true,
+    "hiddenDuplicateAgreementPerRaterMinimum": 0.95,
+    "majorityDuplicateAgreementMinimum": 127,
+    "majorityDuplicateAgreementDenominator": 128,
+    "everyPairwiseAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "maximumDuplicateCopyPassRateDelta": 0.05,
+    "majorityFailureConcreteDefectRatersMinimum": 2,
+    "failureConsequence": "Any failed prerequisite or reliability threshold keeps recognisability unusable, performance sealed, architecture progression blocked, and live Input blocked."
+  },
+  "commitment": "8e6894a5b87fd2ce129f29d1a9ea041ac0792aa96a0a01528b25b2d0c0bb48c9",
+  "rubricHash": "08d75803555566604a76b05edbc1a2411be2661936cf61ab1371dc15bbfeccf0"
+}

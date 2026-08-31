@@ -1,0 +1,50 @@
+{
+  "artifactVersion": "input-live-v12-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "aec7918a6e211be4832e72a3cb6ebfb1cd350869",
+  "codeCommit": "aec7918a6e211be4832e72a3cb6ebfb1cd350869",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "extract": {
+    "operatorSuccess": true,
+    "rawResponseBytes": 8402407,
+    "hostNormalizeAccount": false
+  },
+  "v11FailureNotCleared": {
+    "muiContentFillFixedAfterWriterRestore": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 104, "FIXED": 24, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:1350 via recipe/input-field-live-v3-verifier-v12.ts:443",
+    "messages": [
+      "input-field@1: input-field/variant/medium/default/placeholder/false/none: input content must fill the horizontal surface"
+    ],
+    "cause": "v12 writer re-asserted FILL and HEIGHT text auto-resize after combineAsVariants; extract still shows the same 24 MUI placeholder FIXED cells as v11. Do not teach the recipe to accept FIXED. Do not restart v12 attempt 2 as-is.",
+    "inputFieldRecipeInV12AntecedentHashSet": false,
+    "writerInV12AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v12AntecedentBytesUnchanged": true,
+  "v12AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV12Attempt2WithoutPostWriterFillRestoreForbidden": true
+}

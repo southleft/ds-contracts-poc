@@ -1,0 +1,55 @@
+{
+  "artifactVersion": "input-live-v13-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "e21a67cac447e90a38b344ee34af8528b2dd205c",
+  "codeCommit": "e21a67cac447e90a38b344ee34af8528b2dd205c",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": false,
+    "pluginError": "INPUT-V13-RESTORE-NOT-FILL",
+    "rawResponseBytes": 115,
+    "accepted": false,
+    "extractIssued": false
+  },
+  "extract": {
+    "issued": false
+  },
+  "v12FailureNotCleared": {
+    "hashedPostWriterFillRestoreStillNotFill": true
+  },
+  "failure": {
+    "phase": "restore",
+    "locus": "recipe/input-field-live-v13-restore.ts and recipe/evidence/input-field-live-pivot-v13/programs/restore-blueprint.js",
+    "messages": [
+      "INPUT-V13-RESTORE-NOT-FILL"
+    ],
+    "cause": "Hashed post-writer restore ran on the minted Scratch page after writer acceptance. The plugin threw INPUT-V13-RESTORE-NOT-FILL, which that program emits only after it collected 256 content texts and set layoutSizingHorizontal=FILL. Extract was not issued, so there is no live FILL/FIXED census. Do not teach the recipe to accept FIXED. Do not restart v13 attempt 2 as-is. Restore bytes are in the v13 hash set.",
+    "inputFieldRecipeInV13AntecedentHashSet": false,
+    "writerInV13AntecedentHashSet": true,
+    "restoreInV13AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v12AntecedentBytesUnchanged": true,
+  "v13AntecedentBytesUnchanged": true,
+  "v13AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV13Attempt2WithoutHashedRestoreChangeForbidden": true
+}

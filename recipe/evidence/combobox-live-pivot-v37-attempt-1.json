@@ -1,0 +1,178 @@
+{
+  "artifactVersion": "combobox-live-v37-attempt-1-v1",
+  "status": "failed closed at independent root accounting mismatches; host observe compile-carried trigger characters teaching cleared; characters mismatches 32 to 0; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "94845d8c48f8eadc39afc0470207343d6273b56f",
+  "codeCommit": "94845d8c48f8eadc39afc0470207343d6273b56f",
+  "antecedentCommit": "c5df34085e8f9ddff5bbd8e995236b479a837df2",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host observe must recover compile-carried trigger characters, not the live selected-option characters",
+    "cleared": true,
+    "clearedFor": "independent root accounting empty-content trigger characters mismatches",
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true,
+    "heldHostTriggerBindingCompileOrder": true,
+    "heldHostLeadingSlotBindingCompileOrder": true,
+    "heldHostLeadingSlotCompileCarryVisible": true,
+    "heldHostTrailingSlotBindingCompileOrder": true,
+    "heldHostTrailingSlotCompileCarryVisible": true,
+    "heldHostTriggerEmptyEffects": true,
+    "heldHostOverlayBindingCompileOrder": true,
+    "heldHostOverlayWidthAlias": true,
+    "heldHostListboxBindingCompileOrder": true,
+    "heldHostOptionInstanceBindingExtras": true,
+    "heldHostOptionInstanceFillsOmit": true,
+    "heldHostOptionInstancePayloadOmit": true,
+    "heldHostListboxClipsContentOmit": true,
+    "heldHostListboxCornerRadiusOmit": true,
+    "heldHostListboxEmptyEffectsOmit": true,
+    "heldHostListboxEmptyStrokesOmit": true,
+    "heldHostOverlayEmptyDashPatternOmit": true,
+    "heldHostSetRootClipsContentOmit": true,
+    "heldHostOptionBindingCompileOrder": true,
+    "heldHostOptionHeightAlias": true,
+    "heldHostOptionClipsContentOmit": true,
+    "heldHostSelectedIndicatorBindingCompileOrder": true,
+    "heldHostSelectedIndicatorCompileCarryVisible": true,
+    "heldHostOptionSetCompileCarryLabel": true,
+    "heldHostObserveOmitsEmptySlotInstancePayload": true,
+    "heldHostObserveOmitsOptionInstanceInstancePayload": true,
+    "heldHostRecoversTriggerSlotComponentRefCompileSiblingOrder": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "163:26169",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": [
+      "163:27033",
+      "163:26264",
+      "163:27897",
+      "163:27128"
+    ],
+    "muiComboboxSetId": "163:27033",
+    "muiOptionSetId": "163:26264",
+    "antdComboboxSetId": "163:27897",
+    "antdOptionSetId": "163:27128",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "inputPageUntouched": true,
+    "operationalRetriesBeforeAccept": "none; first signed writer accepted",
+    "receiptSha256": "b2110edb95179781f77bdfee1b1fd65786c09b03f47a72664997de56f02be79e"
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true,
+    "receiptSha256": "5e7f4d8826aad2a66c3e883d53a373701cc22e726a468ead0b83937f7206e530"
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "147dc5cd57202daa3b23c989cae5ade1ca0d1622dc3ff5bc0f4843219a8d3e87",
+    "rawResponseBytes": 5710830,
+    "hostRecoversCompileCarriedTriggerCharactersTeachingCleared": true,
+    "liveOptionSetNames": [
+      "combobox/option-set :: MUI Autocomplete / combobox@1 offline fixture",
+      "combobox/option-set :: AntD Select / combobox@1 offline fixture"
+    ],
+    "hostOptionSetLabels": [
+      "Combobox option",
+      "Combobox option"
+    ],
+    "compileOptionSetLabel": "Combobox option",
+    "hostComboboxSetLabelsMatchCompileIdentityName": true,
+    "hostCollapseRefused": false,
+    "hostCollapseAccepted": true,
+    "hostAccountingRefused": true,
+    "refusedClass": "independent root accounting",
+    "refused": "Combobox live v37 independent root accounting failed: mui:missing=0,extra=0,mismatch=1,duplicate=0,unobserved=0,silent=1;antd:missing=0,extra=0,mismatch=1,duplicate=0,unobserved=0,silent=1",
+    "refusedAt": "recipe/combobox-live-v37-contract.ts:601",
+    "accountingMui": {
+      "extra": 0,
+      "mismatch": 1,
+      "missing": 0,
+      "silent": 1,
+      "matched": 13306,
+      "denominator": 13307,
+      "comboboxExtra": 0,
+      "comboboxMismatch": 0,
+      "optionExtra": 0,
+      "optionMismatch": 1
+    },
+    "charactersMismatchesCleared": true,
+    "priorCharactersMismatches": 32,
+    "remainingCharactersCount": 0,
+    "remainingExtraCount": 0,
+    "mismatchByChannel": {
+      "name": 1
+    },
+    "optionSetNameFactExpected": "combobox/option-set :: Combobox option",
+    "optionSetNameFactObservedMui": "combobox/option-set :: MUI Autocomplete / combobox@1 offline fixture",
+    "optionSetNameFactObservedAntd": "combobox/option-set :: AntD Select / combobox@1 offline fixture",
+    "observeStillOverlaysLiveOptionSetName": true,
+    "namedFromSource": "v37 host observe compile-carried trigger characters teaching cleared; empty-content combobox/input characters mismatches fell from 32 to 0; combobox roots now match 12915/12915. Independent root accounting then refused extra=0 mismatch=1 silent=1 on both mui and antd. The remaining mismatch is 1 option-set name fact (observe still overlays the live display name onto the compile-carried combobox/option-set :: Combobox option fact). Do not invent occupancy or Polar; do not teach FIXED; do not change the writer; do not invent ada as placeholder text; do not drop stamped Label/Value/Disabled; do not restart v37 attempt 2 as-is"
+  },
+  "probe": {
+    "issued": false
+  },
+  "captures": {
+    "issued": 0
+  },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "6ebaca31983caf19e6144e12a5412aff89f89ba6bed56bd01bb899046fe92a43",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "163:26169",
+    "removedCollectionIds": [
+      "VariableCollectionId:163:26171",
+      "VariableCollectionId:163:27035"
+    ]
+  },
+  "nextTeaching": {
+    "class": "independent root accounting",
+    "doNotInvent": true,
+    "doNotInventOccupancy": true,
+    "doNotInventPolar": true,
+    "doNotTeachFixed": true,
+    "doNotRestartV37Attempt2AsIs": true,
+    "doNotChangeWriter": true,
+    "doNotInventAda": true,
+    "doNotDropStampedLabelValueDisabled": true,
+    "prepareV38": "host observe must recover compile-carried option-set name, not the live display name"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

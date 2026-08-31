@@ -1,0 +1,182 @@
+{
+  "artifactVersion": "table-live-v24-request-manifest-v1",
+  "expectedDynamicTool": {
+    "namespace": "user-Figma Console",
+    "tool": "figma_execute"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "signedAtRuntime": true,
+  "requestCount": 25,
+  "requests": [
+    {
+      "requestId": "writer",
+      "sequence": 1,
+      "phase": "writer"
+    },
+    {
+      "requestId": "cleanup",
+      "sequence": 2,
+      "phase": "cleanup",
+      "availability": "persisted immediately after writer acceptance"
+    },
+    {
+      "requestId": "restore",
+      "sequence": 3,
+      "phase": "restore"
+    },
+    {
+      "requestId": "extract",
+      "sequence": 4,
+      "phase": "extract"
+    },
+    {
+      "requestId": "probe",
+      "sequence": 5,
+      "phase": "probe"
+    },
+    {
+      "requestId": "capture-000",
+      "sequence": 6,
+      "phase": "capture",
+      "captureIndex": 0,
+      "cellKey": "first-party/table/compact"
+    },
+    {
+      "requestId": "capture-001",
+      "sequence": 7,
+      "phase": "capture",
+      "captureIndex": 1,
+      "cellKey": "first-party/table/comfortable"
+    },
+    {
+      "requestId": "capture-002",
+      "sequence": 8,
+      "phase": "capture",
+      "captureIndex": 2,
+      "cellKey": "first-party/row/compact/default"
+    },
+    {
+      "requestId": "capture-003",
+      "sequence": 9,
+      "phase": "capture",
+      "captureIndex": 3,
+      "cellKey": "first-party/row/compact/selected"
+    },
+    {
+      "requestId": "capture-004",
+      "sequence": 10,
+      "phase": "capture",
+      "captureIndex": 4,
+      "cellKey": "first-party/row/comfortable/default"
+    },
+    {
+      "requestId": "capture-005",
+      "sequence": 11,
+      "phase": "capture",
+      "captureIndex": 5,
+      "cellKey": "first-party/row/comfortable/selected"
+    },
+    {
+      "requestId": "capture-006",
+      "sequence": 12,
+      "phase": "capture",
+      "captureIndex": 6,
+      "cellKey": "first-party/cell/compact/header"
+    },
+    {
+      "requestId": "capture-007",
+      "sequence": 13,
+      "phase": "capture",
+      "captureIndex": 7,
+      "cellKey": "first-party/cell/compact/body"
+    },
+    {
+      "requestId": "capture-008",
+      "sequence": 14,
+      "phase": "capture",
+      "captureIndex": 8,
+      "cellKey": "first-party/cell/comfortable/header"
+    },
+    {
+      "requestId": "capture-009",
+      "sequence": 15,
+      "phase": "capture",
+      "captureIndex": 9,
+      "cellKey": "first-party/cell/comfortable/body"
+    },
+    {
+      "requestId": "capture-010",
+      "sequence": 16,
+      "phase": "capture",
+      "captureIndex": 10,
+      "cellKey": "mui/table/compact"
+    },
+    {
+      "requestId": "capture-011",
+      "sequence": 17,
+      "phase": "capture",
+      "captureIndex": 11,
+      "cellKey": "mui/table/comfortable"
+    },
+    {
+      "requestId": "capture-012",
+      "sequence": 18,
+      "phase": "capture",
+      "captureIndex": 12,
+      "cellKey": "mui/row/compact/default"
+    },
+    {
+      "requestId": "capture-013",
+      "sequence": 19,
+      "phase": "capture",
+      "captureIndex": 13,
+      "cellKey": "mui/row/compact/selected"
+    },
+    {
+      "requestId": "capture-014",
+      "sequence": 20,
+      "phase": "capture",
+      "captureIndex": 14,
+      "cellKey": "mui/row/comfortable/default"
+    },
+    {
+      "requestId": "capture-015",
+      "sequence": 21,
+      "phase": "capture",
+      "captureIndex": 15,
+      "cellKey": "mui/row/comfortable/selected"
+    },
+    {
+      "requestId": "capture-016",
+      "sequence": 22,
+      "phase": "capture",
+      "captureIndex": 16,
+      "cellKey": "mui/cell/compact/header"
+    },
+    {
+      "requestId": "capture-017",
+      "sequence": 23,
+      "phase": "capture",
+      "captureIndex": 17,
+      "cellKey": "mui/cell/compact/body"
+    },
+    {
+      "requestId": "capture-018",
+      "sequence": 24,
+      "phase": "capture",
+      "captureIndex": 18,
+      "cellKey": "mui/cell/comfortable/header"
+    },
+    {
+      "requestId": "capture-019",
+      "sequence": 25,
+      "phase": "capture",
+      "captureIndex": 19,
+      "cellKey": "mui/cell/comfortable/body"
+    }
+  ]
+}

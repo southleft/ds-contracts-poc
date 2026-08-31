@@ -1,0 +1,73 @@
+{
+  "artifactVersion": "input-live-v9-status-v1",
+  "status": "attempt 2 failed closed; host normalize used hashed v3 verifier scene-readback.ts; cleanup complete; do not restart v9 as-is",
+  "baseCommit": "1d49f4db6db14eca0c4185326153c972d50b7127",
+  "antecedent": {
+    "commit": "1a16642bddbb8c8a3fb44cd0e086a7ff8328e294",
+    "indexPath": "recipe/evidence/input-field-live-pivot-v9/antecedent-index.json",
+    "indexSha256": "ef6a72fd392d2866d06136e8200d2cff750585705eafacdc41e20b95cfac2942",
+    "hashSetSha256": "6111066edba80ab6494f6d2b412754a060519621bd586086f5db8f1abed97138",
+    "authorizationLifecycleExcluded": true,
+    "byteStableAcrossLaterAuthorization": true
+  },
+  "authorization": {
+    "present": true,
+    "commitStateDerivedByHistory": true,
+    "effective": false,
+    "path": "recipe/evidence/input-field-live-pivot-v9/capture-authorization.json",
+    "sha256": "56930e91dd321695f3e3343ddd5a9c0d0dbc3c51f0ff8305ab998d0d8f2269c7",
+    "signingPublicKeySpkiSha256": "c98c4cf0b1deef2b2d71c9f7e7f550e602ac334a620142516f4537f47ea9c686",
+    "templatePath": "recipe/evidence/input-field-live-pivot-v9/authorization-template.json",
+    "templateSha256": "1c6e0d698f20b0eee59eeb65e550647ad71def6c191613869ac35dc3ed809fa7",
+    "precommitHistoryState": "pending-uncommitted-authorization",
+    "expectedHistoryModeAfterAuthorizationCommit": "--expect-authorized",
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false
+  },
+  "smallestHonestDelta": {
+    "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
+    "carriedSceneReadback": "recipe/scene-readback-v9.ts",
+    "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v9.ts",
+    "v8SceneReadbackUnchanged": true,
+    "v8AntecedentBytesUnchanged": true
+  },
+  "transportFacts": {
+    "oneCallDiskOperatorRequired": true,
+    "honorSignedTimeoutRequired": true,
+    "signedWriterTimeoutMs": 300000,
+    "fileContextEditorTypeReconstructedFromExactScratchTarget": true,
+    "emptyCodeEnvelopeRefused": true,
+    "cursorReadMustNotIngestSignedWriter": true
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "expectedSceneFacts": 43726,
+    "variants": 256,
+    "captureCells": 128,
+    "remoteRequests": 132,
+    "hostPhases": 3
+  },
+  "securityPrerequisites": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "attemptsExecuted": 2,
+  "nextAttempt": 3,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
+  "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v9-attempt-1.json",
+  "attempt1Sha256": "aad14b8a83c8b91935e24c06c1432d846e8d3322e66514c76acc36b9ef3c36fc",
+  "attempt2Path": "recipe/evidence/input-field-live-pivot-v9-attempt-2.json",
+  "attempt2Sha256": "af5099944f2260400bceb6aa47f3ca375dd67b6d9a80d02cc2337d4efa7db20a",
+  "restartAsV9Attempt2WithoutComponentSetStrokeTeachingForbidden": true,
+  "restartAsV9Attempt3WithoutCarriedV3VerifierForbidden": true,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

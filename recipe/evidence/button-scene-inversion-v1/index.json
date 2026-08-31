@@ -1,0 +1,96 @@
+{
+  "artifactVersion": "button-scene-inversion-v1",
+  "method": "expected-plan-vs-observe",
+  "sourceIrRead": false,
+  "silentAssigned": false,
+  "silentDerived": true,
+  "historicalReadbackRefusedAsObserve": true,
+  "figmaWrites": 0,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageId": "85:6781",
+    "pageName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4"
+  },
+  "expectedScenePlans": {
+    "altitude": {
+      "path": "recipe/evidence/button-scene-inversion-v1/expected-scene-plan-altitude.json.gz",
+      "sha256": "40461487c6eb6a2251bfe1aea51546c80aa4c0f9870dd4960e10c15e2631c3b8",
+      "uncompressedSha256": "9347623664be74de0c7aa29d6646dea3698e53f49502bb9c5a84e9f902f956b8",
+      "bytes": 106922,
+      "facts": 8706
+    },
+    "fluent": {
+      "path": "recipe/evidence/button-scene-inversion-v1/expected-scene-plan-fluent.json.gz",
+      "sha256": "30da6c464fa32f05dfe010e990976cc63b928d654de0b831f8cd9da7be667892",
+      "uncompressedSha256": "6eee721429911702d54fc57bd7b06efc90667c584e7d96350f579c56a3afd124",
+      "bytes": 109225,
+      "facts": 8778
+    }
+  },
+  "observe": {
+    "altitude": {
+      "path": "recipe/evidence/button-scene-inversion-v1/observe-altitude.json.gz",
+      "sha256": "5b04738cfaa91218f87548f651c4efed350a8ea2706fb245423934526282aa3b"
+    },
+    "fluent": {
+      "path": "recipe/evidence/button-scene-inversion-v1/observe-fluent.json.gz",
+      "sha256": "7dee4463c1c158ee1e22598762bb52a4e899ff16da9532575c85f343a7f0ba31"
+    }
+  },
+  "observePresent": true,
+  "overallButtonSuccess": false,
+  "humanSignoff": "pending",
+  "inversion": {
+    "path": "recipe/evidence/button-scene-inversion-v1/inversion.json",
+    "sha256": "7f3d9a72f80eaaf0bae73587e1b0887fa283adfe1eebfaabe356f87be6bc9ed8",
+    "ok": true,
+    "roots": [
+      {
+        "source": "altitude",
+        "adapterIdentity": "altitude-button-reviewed-v2",
+        "setId": "85:7406",
+        "variants": 144,
+        "expectedFacts": 8706,
+        "matched": 8706,
+        "silent": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0,
+        "duplicateCollapsed": 0,
+        "unobserved": 0,
+        "denominator": 8706,
+        "ok": true,
+        "fixedPointStable": true,
+        "channelDrift": [],
+        "sampleFailures": []
+      },
+      {
+        "source": "fluent",
+        "adapterIdentity": "fluent-button-reviewed-v2",
+        "setId": "85:8054",
+        "variants": 144,
+        "expectedFacts": 8778,
+        "matched": 8778,
+        "silent": 0,
+        "missing": 0,
+        "extra": 0,
+        "mismatched": 0,
+        "duplicateCollapsed": 0,
+        "unobserved": 0,
+        "denominator": 8778,
+        "ok": true,
+        "fixedPointStable": true,
+        "channelDrift": [],
+        "sampleFailures": []
+      }
+    ]
+  },
+  "census": {
+    "path": "recipe/evidence/button-scene-inversion-v1/census.json",
+    "sha256": "21481e237f0f711dba7bcd53db7e2be8b2e28c665d05612529f7243066c4fddb"
+  },
+  "receipt": {
+    "path": "recipe/evidence/button-scene-inversion-v1/receipt.json",
+    "sha256": "084f62f1e13a26d7878c56d0d809732909984db1fffc1df1c31e733c46e9b923"
+  }
+}

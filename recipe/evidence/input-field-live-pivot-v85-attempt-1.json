@@ -1,0 +1,304 @@
+{
+  "artifactVersion": "input-live-v85-attempt-1-v1",
+  "status": "mint stayed after green probe and captures; cleanup persisted not executed",
+  "authorizationCommit": "3056956b20deae7993bcc8addd8739edddf94934",
+  "codeCommit": "3056956b20deae7993bcc8addd8739edddf94934",
+  "transactionId": "11c7561e-eb2b-4b5b-88ad-8a759218c55d",
+  "transactionDirectory": "private/input-live-v85-transaction",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "115:295378",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2,
+    "programSha256": "0ed357dbe2acb272d1348d90cf689510f7b967e82f6c0cf834ad1a315ed759e0",
+    "payloadSha256": "5d0f232375dbe83cb865bf27abb5321d871e0a16ddf1d8ee7628d14be6261681",
+    "v18WriterProgramUnchanged": true,
+    "v18WriterPayloadUnchanged": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 980,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436161,
+    "sha256": "92339876a780be11ffdcd5cadd048bb7cb1eec958ea763641caa349747c83ab5",
+    "hostNormalizeAccount": true,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "pageId": "115:295378",
+    "marker": null
+  },
+  "v19WriterTeaching": {
+    "taughtWriterHiddenFillOccupancy": true,
+    "marker": "INPUT-WRITER-HIDDEN-FILL-OCCUPANCY",
+    "citedMechanism": "recipe CSS ::placeholder { opacity: 0 } plus restore visible=true for FILL measure",
+    "extractPlaceholderVisibleTrue": 128,
+    "extractPlaceholderVisibleFalse": 0,
+    "extractPlaceholderOpacity0": 24,
+    "extractPlaceholderOpacity1": 104,
+    "extractPlaceholderFill": 128,
+    "extractPlaceholderFixed": 0,
+    "hiddenRevealedForFill": 0,
+    "muiOverlapClassTrailingX": [
+      165
+    ],
+    "muiOverlapClassTrailingXWasZeroOnV78": true,
+    "sampleKey": "mui/medium/default/placeholder/false/trailing",
+    "sampleTrailingX": 165,
+    "samplePlaceholderWidth": 157,
+    "sampleContentRowWidth": 204,
+    "addedSpacer": false,
+    "setPixelWidth": false,
+    "setPrimaryAxisAlignMax": false
+  },
+  "v80HostTeaching": {
+    "taughtContentOpacityOmitted": true,
+    "sceneContentOpacityKeys": 0,
+    "compileContentOpacityKeys": 0
+  },
+  "v81CompileCarryTeaching": {
+    "taughtCompileCarryLiveVisible": true,
+    "inventHostVisibleFalseForbidden": true,
+    "compileContentVisibleKeys": 0,
+    "compileContentVisibleFalseKeys": 0,
+    "sceneContentVisibleKeys": 0,
+    "extractPlaceholderVisibleTrue": 128,
+    "extractPlaceholderVisibleFalse": 0
+  },
+  "v82CompileCarryTeaching": {
+    "taughtCompileCarryLiveOpacity": true,
+    "inventOpacityVariableForbidden": true,
+    "inventCompileTextOpacityForbidden": true,
+    "expectedPlanMuiOpacity0": 24,
+    "expectedPlanMuiOpacity1": 1193,
+    "expectedPlanPolarOpacity0": 0,
+    "expectedPlanPolarOpacity1": 1089,
+    "independentRootAccountingMui": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "independentRootAccountingPolar": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    }
+  },
+  "v83CollapseTeaching": {
+    "taughtCollapseOmitInventedContentTextOpacity": true,
+    "inventCompileTextOpacityForbidden": true,
+    "compileContentOpacityKeys": 0,
+    "recompileDidNotInventDefault1": true,
+    "muiCycle1SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+    "muiCycle2SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+    "muiCycle1CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+    "muiCycle2CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+    "polarCycle1SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+    "polarCycle2SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+    "polarCycle1CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+    "polarCycle2CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+    "compiledShaUnchangedFromV82RefusedCycle": true
+  },
+  "v84ProbeTeaching": {
+    "taughtProbeExcludeOpacityZeroOccupancyOverlap": true,
+    "marker": "INPUT-PROBE-EXCLUDE-OPACITY-ZERO-OCCUPANCY-OVERLAP",
+    "occupancySpacersNotOverlapPartners": true,
+    "paintedTrailingStillAtEnd": true
+  },
+  "v85CleanupTeaching": {
+    "taughtCleanupOnFailureOnly": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "cleanupPersistedAfterWriter": true,
+    "cleanupExecuted": false,
+    "mintStayed": true
+  },
+  "probe": {
+    "issued": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "rawResponseBytes": 67571,
+    "sha256": "598466d0e5cc79226761451579b6fcc453a25ea2af4aee3b7e8aafd72b7ef640",
+    "cells": 256,
+    "muiSourceBooleansAllTrue": true,
+    "polarSourceBooleansAllTrue": true,
+    "textPropertiesRestoredBoth": true,
+    "reflowPassedBoth": true,
+    "contentFillPassedBoth": true,
+    "polarReflowPassed": true,
+    "rolesExact": 256,
+    "roleFail": 0,
+    "clipFail": 0,
+    "clipMax": 0,
+    "overlapFail": 0,
+    "overlapMax": 0,
+    "polarOverlapFail": 0,
+    "polarClipFail": 0,
+    "v78OverlapClassKeys": 12,
+    "v78OverlapPixels": 0,
+    "v78TrailingX": 165,
+    "overlapAlsoFailedOnMuiPlaceholderNone": false,
+    "inventOverlapZero": false
+  },
+  "observedIndependentRootAccounting": {
+    "reached": true,
+    "mui": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "polaris": {
+      "ok": true,
+      "silent": 0,
+      "missing": 0,
+      "extra": 0,
+      "mismatch": 0
+    },
+    "recipeCollapseReached": true,
+    "recipeCollapsePassed": true,
+    "probeIssuedBecauseAccountingAndCollapsePassed": true
+  },
+  "observedFixedPoint": {
+    "mui": {
+      "stable": true,
+      "sourceIrRead": false,
+      "cycle1SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+      "cycle2SceneIrSha256": "1e1d85ab453721e526c9e3f2d8b08d50ac663241fc7379cdc898321caf34d0bc",
+      "cycle1CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+      "cycle2CompiledIrSha256": "cf660e07a56527ceb4cef288d87830a3c7ddf028f24d6bf79fd9e7443cb87d40",
+      "cycle1Ok": true,
+      "cycle2Ok": true,
+      "cycle1Silent": 0,
+      "cycle1Mismatch": 0
+    },
+    "polaris": {
+      "stable": true,
+      "sourceIrRead": false,
+      "cycle1SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+      "cycle2SceneIrSha256": "10333179eb3a9ff5ebf86f5d2637b88fb03f43430d3922f16128846559a67876",
+      "cycle1CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+      "cycle2CompiledIrSha256": "c73f2eb310ca6ee3d9720505f3b387013b8faf87f258f501a59c4c91641aed48",
+      "cycle1Ok": true,
+      "cycle2Ok": true,
+      "cycle1Silent": 0,
+      "cycle1Mismatch": 0
+    }
+  },
+  "hostTechnicalGates": {
+    "sceneExtraction": true,
+    "hostNormalization": true,
+    "accounting": true,
+    "fixedPoint": true,
+    "usability": true,
+    "restoration": true,
+    "clipping": true,
+    "overlap": true,
+    "adornmentContent": true,
+    "stateSemantics": true
+  },
+  "objective": {
+    "denominator": 128,
+    "technicalPassed": true,
+    "failures": 0,
+    "catastrophicCells": 0,
+    "stratumRegressions": 0,
+    "wins": {
+      "geometry": 112,
+      "perceptual": 128,
+      "pixelInk": 101
+    },
+    "losses": {
+      "geometry": 16,
+      "perceptual": 0,
+      "pixelInk": 27
+    }
+  },
+  "closure": {
+    "phase": "main-complete-cleanup-on-failure-only",
+    "locus": "private/input-live-v85-host-loop.mjs",
+    "messages": [
+      "Input live v85 main lane completed; cleanup was not executed because probe and captures were green"
+    ],
+    "cause": "V85 cleanup-on-failure-only held. Probe and 128 captures were green, so the host loop did not execute the persisted recovery cleanup. Writer accepted 2317 nodes on new page 115:295378 (not 112:288922); runIdentity 4a074b24-e8503dd5-input-v5; v19 program 0ed357db\u202659e0 / payload 5d0f2323\u20261681; hashed v18 unchanged; hashed v84 scene-readback unchanged. Cleanup request persisted after writer (seq 2) and remains on disk without a receipt. Restore accepted (restoredCount 256, hiddenRevealedForFill 0, fixedBefore 0). Extract issued (8436161 bytes, sha256 92339876\u20263ab5). Occupancy held: 128 placeholders visible=true (24 opacity=0 FILL, 0 FIXED); the 12 V78-class MUI placeholder/trailing keys have trailing x=165 (sample mui/medium/default/placeholder/false/trailing trailingX=165 placeholderWidth=157 content-row 204). Independent-root accounting 0/0 both. Recipe-collapse fixed-point stable both; MUI compiled SHA unchanged from the V82 refused cycle (cf660e07\u20268740). Probe issued and accepted. All required source booleans true both, including textPropertiesRestored, reflowPassed/Polar reflow, and contentFillPassed. Role/clip fail 0. Probe overlapFail 0 / overlapMax 0 on 256 cells (MUI and Polar). 128 captures ran; objective technicalPassed true (geometry losses 16 / perceptual 0 / pixelInk 27 are comparison residuals, not gate refuses). Host finished main-complete; mint-stayed; cleanupExecuted false. Read-only Figma check: page 115:295378 still present on Scratch byMp6lt0Ij9b2QbkDGFwBh; remainingOwnedNodes 1. figmaWrites 132. Did not revert v19. Did not invent host visible:false. Did not invent an opacity variable. Did not invent overlap-zero \u2014 overlap 0 was measured after excluding opacity-0 occupancy spacers. This is the first review-worthy Input canvas. Do not claim v1 complete: Button signoff and inversion remain pending. Do not restart V85 attempt 2 without a new teaching. Do not restart V84 attempt 2."
+  },
+  "cleanup": {
+    "accepted": false,
+    "executed": false,
+    "persisted": true,
+    "requestPath": "private/input-live-v85-transaction/requests/002-cleanup/request.json",
+    "receiptPresent": false,
+    "remainingOwnedNodes": 1,
+    "pageIdStillInFile": "115:295378",
+    "complete": false
+  },
+  "captures": 128,
+  "figmaWrites": 132,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "mintStayed": true,
+  "mintCleaned": false,
+  "reviewWorthyInputCanvas": true,
+  "scratchFileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "scratchUrl": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh",
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterProgramUnchanged": true,
+  "v17WriterPayloadUnchanged": true,
+  "v18WriterMinted": true,
+  "v18WriterProgramUnchanged": true,
+  "v18WriterPayloadUnchanged": true,
+  "v19WriterMinted": true,
+  "v84SceneReadbackUnchanged": true,
+  "v83SceneReadbackUnchanged": true,
+  "v82SceneReadbackUnchanged": true,
+  "taughtWriterHiddenFillOccupancyHeld": true,
+  "taughtContentOpacityOmittedHeld": true,
+  "taughtCompileCarryLiveVisibleHeld": true,
+  "taughtCompileCarryLiveOpacityHeld": true,
+  "taughtCollapseOmitInventedContentTextOpacityHeld": true,
+  "taughtProbeExcludeOpacityZeroOccupancyOverlapHeld": true,
+  "taughtCleanupOnFailureOnlyHeld": true,
+  "inventHostVisibleFalseForbidden": true,
+  "inventOpacityVariableForbidden": true,
+  "inventCompileTextOpacityForbidden": true,
+  "independentRootAccountingPassed": true,
+  "recipeCollapseFixedPointStable": true,
+  "recipeCollapseRefusedFixedPoint": false,
+  "probeIssued": true,
+  "probeOtherwiseGreen": true,
+  "inventOverlapZeroForbidden": true,
+  "unnamedSourcePxCarriedTeachingHeld": true,
+  "nextAttempt": 2,
+  "restartAsV85Attempt2WithoutNewTeachingForbidden": true,
+  "restartAsV84Attempt2WithoutNewTeachingForbidden": true,
+  "inventPolarPixelOrSpreadValuesForbidden": true,
+  "inventPolarContentRowForbidden": true,
+  "doNotClaimV1Complete": true
+}

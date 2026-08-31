@@ -1,0 +1,103 @@
+{
+  "artifactVersion": "merge-execution-v1",
+  "executedAt": "2026-08-30T18:30:00-05:00",
+  "executor": "agent, under TJ Pitre's recorded authorization",
+  "endpoint": {
+    "original": "PR to main (recipe/evidence/merge-readiness-v1.json)",
+    "amendedBy": "TJ Pitre (owner), 2026-08-30",
+    "amendmentVerbatim": "No need for a PR URL. We're the only ones working on this. You can just merge.",
+    "amended": "direct --no-ff merge of pivot/recipe-ir-v1 into main, normal push, branch left in place"
+  },
+  "branchHead": {
+    "lanesMeasuredAt": "47a14aae5",
+    "note": "fast and full lanes were measured once at the lane-repair commit 47a14aae5; the commits after it touch only docs (26, 32) and this evidence record — no gate code, no fixtures, no plant fields. The docs-affected gates (docs:check, v1-definition, the 11 recipe gates) were re-run green at the final pre-merge head."
+  },
+  "lanes": {
+    "fast": {
+      "gates": 240,
+      "green": 237,
+      "red": 3,
+      "redGates": [
+        "census:check -- --phase full --allow-red-verdicts",
+        "census:check -- --self-test",
+        "census:check -- --phase design-to-code"
+      ],
+      "redCauseProven": "environmental, not code: the gitignored local seed directory examples/flowbite-react/ (.gitignore:78) sits in the filesystem scan and stales the committed census denominator manifest. Re-run 2026-08-30 with that directory parked outside the repo: all three census gates exit 0. On the committed tree the fast lane is green — effectively 240/240.",
+      "log": "not committed; run locally via npx tsx .github/scripts/run-lane.ts fast"
+    },
+    "full": {
+      "steps": 48,
+      "green": 45,
+      "red": 3,
+      "wallClock": "~2.8h",
+      "redSteps": [
+        "npm run eval -- --record evals/.ci/results.json (226/230)",
+        "node scripts/eval-record-check.mjs evals/.ci/results.json (downstream of the eval red)",
+        "npm run v1:readiness -- --trust-lanes --pre-release (20/23 rows green on the then-DIRTY tree)"
+      ],
+      "redCausesNamed": {
+        "evalStep": "226/230. Three of the four failing cases (astryx-reanchor-minted, minted-leaves-bind-to-something, console-loop-canvas-drift-probe) are the reds already named and caused in parity/receipts/v1/eval-reds.json — the committed suite result is 227/230. The single unnamed red, refuse-schema-invalid-contract, failed on ENOENT evals/.scratch/contracts/button.contract.json: a shared-scratch race with a fast-lane rerun running concurrently in another shell. The readiness-internal eval re-run 40 minutes later, after that shell had finished, scored exactly the committed 227/230 with only the three named reds.",
+        "evalRecordCheck": "downstream of the same race: it refused the 226/230 record because refuse-schema-invalid-contract was a red not named in eval-reds.json — the correct refusal for a contaminated run.",
+        "v1Readiness": "20/23 rows green against the then-DIRTY tree (this change set in progress). V1-COMPAT-03 and V1-EVID-01 carry the eval verdict plus the dirty-tree refusal ('this record cannot be committed as the suite result'); V1-CI-01's nested ci:lane fast failed 1/240 with the failing gate name outside the captured output tail. The run's audit-ledger walk improved on the committed receipt: red audit rows 7 -> 0 (typecheck and ci:lanes acceptance commands exit 0 after the lane repair)."
+      },
+      "cleanRerun": {
+        "atCommit": "c2e37147c (clean tree, no concurrent runs)",
+        "eval": "227/230 — exactly the committed record, row for row; eval:record:check GREEN ('CI measurement matches the committed record row for row'); the race case refuse-schema-invalid-contract passes",
+        "fastLaneInsideReadiness": "green end-to-end 240/240 (925s), census gates included with the local seed directory parked — the dirty-run 1/240 mystery gate cleared",
+        "structuralFactsNamed": [
+          "evals/run.ts exits 1 whenever any case fails (process.exit(passed === results.length ? 0 : 1)), so the lane's raw eval step is red BY DESIGN while the three eval-reds.json ledger rows are carried; the actual gate is eval:record:check, which is green",
+          "completing v1:readiness requires its internal ci:lane full re-run (~2.8h); deliberately not spent a second time under the approved trade — READINESS receipt regeneration at a merged-main head is post-merge named work"
+        ]
+      }
+    }
+  },
+  "recipeGates": {
+    "count": 11,
+    "atBranchHead": "all green",
+    "onMergedMain": "re-run post-merge as the confirmation; recorded in the return summary"
+  },
+  "fChecklistWalk": {
+    "F1-zero-silent-whole-corpus-unseen": {
+      "verdict": "PARTIAL — the blocking row",
+      "proven": "zero-silent inversion (0 silent / 0 missing / 0 mismatched, byte-stable fixed point) per archetype on its measured two-library pair: Button (Altitude 8730/8730, Fluent 8778/8778, inversion v2), Input V85, Combobox V41, Table V32, Calendar V50 — ten library-root proofs across five archetypes",
+      "notProven": "the whole-corpus and unseen-library clauses on the recipe path; the 170-set census and the unseen-library evals measure the capture path, not recipe mints"
+    },
+    "F2-minted-sets-usable": "true for the five minted sets — reflow/variant/binding probes green per archetype plus the owner's five live human grades",
+    "F3-journeys-restated": "true — docs/32 restates A/B/C with opens named",
+    "F4-five-archetypes-proof-plus-signoff": "true — Input V85 (2026-08-28), Combobox V41 (2026-08-29), Table V32 (2026-08-29), Calendar V50 (2026-08-30), Button B3 full pass on v5 page 183:69150 (2026-08-30)",
+    "F5-docs26-agrees": "true — V1-CLASS-03 added additively (E4 applied); docs/26 itself states criterion (d) is true today only for table/data-grid; docs:check and v1-definition gate green",
+    "F6-lanes-green": "measured — fast 237/240 with the 3 reds proven environmental (green on the committed tree); full lane recorded above; npm publish stays deferred and is not claimed as proof"
+  },
+  "verdict": {
+    "productV1Complete": false,
+    "blockingRow": "F1 — whole-corpus / unseen-library proof does not exist on the recipe path",
+    "overallSuccessFlips": "none. Button, Input, Combobox and Calendar stay false in recipe/evidence/status-index.json exactly as their recorded blockers state ('stays false until the product v1 completion record lands'); Table keeps the true its v32 record set. This file is a merge-execution record, not a v1-completion record.",
+    "remainingNamedWork": [
+      "F1: whole-corpus / unseen-library zero-silent proof on the recipe path",
+      "Combobox fixture-chrome remint from MUI/AntD-named overlay chrome (TJ decision)",
+      "signed cleanup of the older Calendar Scratch pages",
+      "npm publish (deferred; not a v1-proof substitute)",
+      "restore recipe/pivot-status.ts to the static tsc surface (excluded from root tsconfig for the measured stack-overflow on its boolean chains; runtime-validated via tsx on every gate run)",
+      "regenerate parity/receipts/v1/READINESS receipts via a completed clean v1:readiness run at a merged-main head (requires its internal ci:lane full re-run)"
+    ]
+  },
+  "mergeReasoning": {
+    "divergence": "origin/main is 0 commits ahead of the branch; the branch is 690 ahead — main has not moved since the pivot began",
+    "consequence": "a --no-ff merge produces a merged tree byte-identical to the branch head, so the lanes measured at the head are the lanes of the merged tree",
+    "approvedTrade": "TJ approved skipping a second multi-hour full-lane run on merged main; the 11 recipe gates re-run on main are the post-merge confirmation"
+  },
+  "hardStopsHonored": {
+    "noHashedRecordRestamped": true,
+    "privateAndPemsUntracked": true,
+    "figmaTokenNeverPrinted": true,
+    "scratchOnlyFigmaWrites": "checkpoint 'Button v5 signed off (B3)' only; no page-content changes",
+    "signedPagesUntouched": [
+      "115:295378",
+      "163:35981",
+      "173:48924",
+      "181:64873",
+      "183:69150",
+      "85:6781"
+    ]
+  }
+}

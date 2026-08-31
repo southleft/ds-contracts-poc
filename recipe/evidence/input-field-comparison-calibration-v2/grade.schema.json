@@ -1,0 +1,174 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ds-contracts.local/schema/recognisability-grade-envelope-v2.json",
+  "title": "Recognisability grade envelope v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "phase",
+    "schemaVersion",
+    "graderId",
+    "packetProtocol",
+    "packetHash",
+    "randomizedBatchHash",
+    "calibrationCommitment",
+    "rubricVersion",
+    "counts",
+    "orderedGrades"
+  ],
+  "properties": {
+    "phase": { "enum": ["gold-calibration", "performance"] },
+    "schemaVersion": { "const": "recognisability-grade-envelope-v2" },
+    "graderId": { "type": "string", "pattern": "^RATER-CAL-V2-[ABC]$" },
+    "packetProtocol": {
+      "enum": [
+        "recognisability-gold-calibration-v1",
+        "input-field-performance-blind-v3"
+      ]
+    },
+    "packetHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "randomizedBatchHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "calibrationCommitment": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "rubricVersion": { "const": "input-field-observable-rubric-v2" },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expected", "submitted"],
+      "properties": {
+        "expected": { "type": "integer", "enum": [24, 384] },
+        "submitted": { "type": "integer", "enum": [24, 384] }
+      }
+    },
+    "calibrationReceipt": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "path",
+        "sha256",
+        "score",
+        "obviousStructuralStateFailureScore",
+        "passed"
+      ],
+      "properties": {
+        "path": { "type": "string" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "score": { "type": "number", "minimum": 0.95, "maximum": 1 },
+        "obviousStructuralStateFailureScore": { "const": 1 },
+        "passed": { "const": true }
+      }
+    },
+    "orderedGrades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "taskId",
+          "referenceId",
+          "specimenId",
+          "recognisable",
+          "confidence",
+          "criteria",
+          "defects"
+        ],
+        "properties": {
+          "taskId": { "type": "string", "pattern": "^task-[a-f0-9]{20}$" },
+          "referenceId": {
+            "type": "string",
+            "pattern": "^reference-[a-f0-9]{20}$"
+          },
+          "specimenId": {
+            "type": "string",
+            "pattern": "^specimen-[a-f0-9]{20}$"
+          },
+          "recognisable": { "type": "boolean" },
+          "confidence": { "enum": ["low", "medium", "high"] },
+          "criteria": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "required-structure-content",
+              "semantic-state",
+              "geometry-proportion",
+              "typography-raster",
+              "color-border-effects"
+            ],
+            "properties": {
+              "required-structure-content": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["verdict", "defects"],
+                "properties": {
+                  "verdict": { "enum": ["match", "minor", "fail"] },
+                  "defects": {
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 20 }
+                  }
+                }
+              },
+              "semantic-state": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["verdict", "defects"],
+                "properties": {
+                  "verdict": { "enum": ["match", "minor", "fail"] },
+                  "defects": {
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 20 }
+                  }
+                }
+              },
+              "geometry-proportion": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["verdict", "defects"],
+                "properties": {
+                  "verdict": { "enum": ["match", "minor", "fail"] },
+                  "defects": {
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 20 }
+                  }
+                }
+              },
+              "typography-raster": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["verdict", "defects"],
+                "properties": {
+                  "verdict": { "enum": ["match", "minor", "fail"] },
+                  "defects": {
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 20 }
+                  }
+                }
+              },
+              "color-border-effects": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["verdict", "defects"],
+                "properties": {
+                  "verdict": { "enum": ["match", "minor", "fail"] },
+                  "defects": {
+                    "type": "array",
+                    "items": { "type": "string", "minLength": 20 }
+                  }
+                }
+              }
+            }
+          },
+          "defects": {
+            "type": "array",
+            "items": { "type": "string", "minLength": 20 }
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "phase": { "const": "performance" } } },
+      "then": { "required": ["calibrationReceipt"] },
+      "else": { "not": { "required": ["calibrationReceipt"] } }
+    }
+  ]
+}

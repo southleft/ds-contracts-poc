@@ -38,6 +38,12 @@
     "sync",
     "evals",
     "conformance",
+    // "recipe" is deliberately NOT included: the recipe path's acceptance
+    // surface is its gates (recipe:*:check run the code under tsx), its
+    // versioned lineage files are byte-frozen receipts that cannot be edited
+    // to track checker evolution, and recipe/pivot-status.ts's ~11k-operand
+    // boolean chains crash the TypeScript binder outright. Static typecheck
+    // of the current recipe surface is named post-merge work in docs/32.
     "figma-sync/plugin/engine"
   ],
   "exclude": [

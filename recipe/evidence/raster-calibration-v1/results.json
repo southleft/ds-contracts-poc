@@ -1,0 +1,1136 @@
+{
+  "version": "recipe-browser-figma-raster-calibration-v1",
+  "corpusHash": "daeac5691a14cbfd494fb0fb21d5c105d55f1dc257a76bfe42bce425dce28660",
+  "metric": {
+    "version": "recipe-browser-figma-raster-metric-v1",
+    "exactWeight": 0.5,
+    "perceptualWeight": 0.4,
+    "inkWeight": 0.1,
+    "perceptualThreshold": 0.1,
+    "inkChannelCutoff": 250,
+    "catastrophicMultiplier": 1.5,
+    "catastrophicAllowance": 0.02
+  },
+  "metricHash": "70d788c9bd56f70efb307a9a0d98d7b62c20df2b5e2c2508b63bccbcabecc834",
+  "splitLockedBeforeMeasurement": true,
+  "counts": {
+    "corpus": 24,
+    "training": 16,
+    "validation": 8
+  },
+  "training": {
+    "baseline": {
+      "geometry": 0.06520404493770589,
+      "pixelInk": 0.14728501952053957
+    },
+    "calibrated": {
+      "geometry": 0.06531909673891256,
+      "pixelInk": 0.1509352134947703
+    }
+  },
+  "validation": {
+    "baseline": {
+      "geometry": 0.11040039867757394,
+      "pixelInk": 0.1838724220586396
+    },
+    "calibrated": {
+      "geometry": 0.11014129296244216,
+      "pixelInk": 0.18657777066709744
+    },
+    "catastrophicRegressions": [],
+    "structuralFactsUnchanged": true,
+    "allNonzero": true,
+    "accepted": false
+  },
+  "parameters": {
+    "version": "recipe-browser-figma-raster-calibration-v1",
+    "corpusHash": "daeac5691a14cbfd494fb0fb21d5c105d55f1dc257a76bfe42bce425dce28660",
+    "metricHash": "70d788c9bd56f70efb307a9a0d98d7b62c20df2b5e2c2508b63bccbcabecc834",
+    "writer": {
+      "fontSizeScale": 0.9958043981481481,
+      "lineHeightScale": 1,
+      "letterSpacingPx": 0.0075472608024694425
+    },
+    "capture": {
+      "rgbLevels": 64
+    },
+    "bounds": {
+      "fontSizeScale": {
+        "minimum": 0.98,
+        "maximum": 1.02
+      },
+      "lineHeightScale": {
+        "minimum": 0.97,
+        "maximum": 1.03
+      },
+      "letterSpacingPx": {
+        "minimum": -0.35,
+        "maximum": 0.35
+      },
+      "rgbLevels": {
+        "minimum": 64,
+        "maximum": 256
+      }
+    },
+    "provenance": {
+      "derivedFrom": "training-only",
+      "trainingIds": [
+        "adornment-pair-a",
+        "dimension-medium-a",
+        "dimension-small-a",
+        "layout-fill-a",
+        "layout-hug-a",
+        "overlay-label-a",
+        "padding-asymmetric-a",
+        "state-border-a",
+        "state-ring-a",
+        "surface-stroke-a",
+        "text-a1",
+        "text-a2",
+        "text-a3",
+        "text-b1",
+        "text-b2",
+        "text-b3"
+      ],
+      "validationIdsLockedBeforeMeasurement": [
+        "adornment-held",
+        "dimension-held",
+        "layout-fill-held",
+        "overlay-held",
+        "ring-held",
+        "surface-held",
+        "text-held-a",
+        "text-held-b"
+      ]
+    }
+  },
+  "parametersHash": "397cd1a325e0d24ff9f6ce74caccee74c4d9ac4adb16ce93350de613e665b3cc",
+  "decision": {
+    "accepted": false,
+    "reason": "held-out acceptance criteria failed; candidate calibration is rejected",
+    "inputV3Authorized": false,
+    "appliedToInput": false
+  },
+  "deterministic": {
+    "browserDuplicateCaptureBytes": true,
+    "figmaBaselineDuplicateExportBytes": true,
+    "figmaCalibratedDuplicateExportBytes": true
+  },
+  "structuralFactsUnchanged": true,
+  "captures": {
+    "browser": [
+      {
+        "specimenId": "text-a1",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-a1.png",
+        "bytes": 4323,
+        "sha256": "253c74a875c32a4a18908246d9f96a440792274d80807935bb34ff9b53dc0bd3",
+        "root": {
+          "x": 125.09375,
+          "y": 72.5,
+          "width": 69.796875,
+          "height": 15
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-a2",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-a2.png",
+        "bytes": 5660,
+        "sha256": "aa7925b15eef27a9ac6c0a85cd191eb348ce06f1da2c145c44910b17bb25eda1",
+        "root": {
+          "x": 111.765625,
+          "y": 71,
+          "width": 96.46875,
+          "height": 18
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-a3",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-a3.png",
+        "bytes": 6642,
+        "sha256": "caba1bf1e113a7bf65579d258a7dae5197e75b4bbb9deb70a8422fdc86b76e3d",
+        "root": {
+          "x": 93.171875,
+          "y": 68.5,
+          "width": 133.65625,
+          "height": 23
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b1",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-b1.png",
+        "bytes": 4511,
+        "sha256": "5e4a96a330ff80ade361cb7889efa057649cade06056555162d2d2f39c2b06f9",
+        "root": {
+          "x": 122.796875,
+          "y": 71.5,
+          "width": 74.40625,
+          "height": 17
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b2",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-b2.png",
+        "bytes": 5351,
+        "sha256": "1859962422599699b14382677fbad0567e5041dd3f0865948152ade4f5867284",
+        "root": {
+          "x": 114.140625,
+          "y": 70,
+          "width": 91.71875,
+          "height": 20
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b3",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-b3.png",
+        "bytes": 5068,
+        "sha256": "79d784c6a2420893f0c25cf3838e22891a96dad1e8feeae6bc21550ceaea83fd",
+        "root": {
+          "x": 103.09375,
+          "y": 67.5,
+          "width": 113.796875,
+          "height": 25
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "layout-fill-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/layout-fill-a.png",
+        "bytes": 6001,
+        "sha256": "bcb1e8cb955dd28594c2d0f9995f4647b69475446fcf14f04576c7890961d43e",
+        "root": {
+          "x": 41,
+          "y": 61,
+          "width": 238,
+          "height": 38
+        },
+        "structureHash": "d3676187af9b88df917472a32d802454521752e1eec5abd1572393884bdc172e"
+      },
+      {
+        "specimenId": "layout-hug-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/layout-hug-a.png",
+        "bytes": 5196,
+        "sha256": "d08137fc902bf5323ee33da5589b5f5745ca05844003a8db825d7b65a6bcac75",
+        "root": {
+          "x": 102.671875,
+          "y": 64.5,
+          "width": 114.65625,
+          "height": 31
+        },
+        "structureHash": "6c7fc8df47ecb5668c8c4b577aa11803934215ad62e96df535362b12f59ef25e"
+      },
+      {
+        "specimenId": "adornment-pair-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/adornment-pair-a.png",
+        "bytes": 5261,
+        "sha256": "bc03d7deb540020f14810da88a3b7041a09eb2be033a35daa361b7b40b1a4416",
+        "root": {
+          "x": 38,
+          "y": 59,
+          "width": 244,
+          "height": 42
+        },
+        "structureHash": "9dae43e41769684cb679e33e7cf522921f44876717df0e180a6f7fbb5dbcc22c"
+      },
+      {
+        "specimenId": "padding-asymmetric-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/padding-asymmetric-a.png",
+        "bytes": 5777,
+        "sha256": "d414c0a3d70c4d3075d9fad7fdab80f37192258a84b79c97affa9e99c467cded",
+        "root": {
+          "x": 98.484375,
+          "y": 63,
+          "width": 123.03125,
+          "height": 34
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "surface-stroke-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/surface-stroke-a.png",
+        "bytes": 2023,
+        "sha256": "939638280ec156bc953218c9ab4369f26fcb28a033747ee85d2d2b707377a4f8",
+        "root": {
+          "x": 121.5,
+          "y": 61,
+          "width": 77,
+          "height": 38
+        },
+        "structureHash": "1fd7ddac6b941a3124b6db41f56af682cfca0fb034e9d13ee37407455c9b125e"
+      },
+      {
+        "specimenId": "overlay-label-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/overlay-label-a.png",
+        "bytes": 8035,
+        "sha256": "a9a9dceaef4ad472497d4b6a0cb4392e3240bc7feeff4d16697f4d7c17b15077",
+        "root": {
+          "x": 55,
+          "y": 56,
+          "width": 210,
+          "height": 48
+        },
+        "structureHash": "ccfac1d8aee5a1ca111044878fa8e677554e0531fd9692558f966f063ed2c288"
+      },
+      {
+        "specimenId": "state-ring-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/state-ring-a.png",
+        "bytes": 6293,
+        "sha256": "8cb4685d09b62ae21afadca6a9ff9468836122f4dc704201a384cb0e271e2077",
+        "root": {
+          "x": 72,
+          "y": 60,
+          "width": 176,
+          "height": 40
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "state-border-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/state-border-a.png",
+        "bytes": 4611,
+        "sha256": "c8854706b8d66469ffc15463156718ff6ebb0c0c61c1090ea7b8815a3aa5374d",
+        "root": {
+          "x": 78,
+          "y": 62,
+          "width": 164,
+          "height": 36
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "dimension-small-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/dimension-small-a.png",
+        "bytes": 3902,
+        "sha256": "4d63ac8c03935e27e780aa380e7bb524b312797447ba3f779ec2f84055b688ac",
+        "root": {
+          "x": 78.625,
+          "y": 62.5,
+          "width": 162.734375,
+          "height": 35
+        },
+        "structureHash": "b60382355134953265ad4371cde6de76b8b531f3b784c162c7378300b1026336"
+      },
+      {
+        "specimenId": "dimension-medium-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/dimension-medium-a.png",
+        "bytes": 5510,
+        "sha256": "ba9f42129beb9215238992248afd031d3ac2115f32b79a4a796e116bc3b40570",
+        "root": {
+          "x": 47.703125,
+          "y": 50.5,
+          "width": 224.578125,
+          "height": 59
+        },
+        "structureHash": "b60382355134953265ad4371cde6de76b8b531f3b784c162c7378300b1026336"
+      },
+      {
+        "specimenId": "text-held-a",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-held-a.png",
+        "bytes": 4763,
+        "sha256": "68092f67ba9e88d3a1a26a0cebbc2fb8eaeb07e19d3c78c5bb29af90df131949",
+        "root": {
+          "x": 115.671875,
+          "y": 72,
+          "width": 88.640625,
+          "height": 16
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-held-b",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/text-held-b.png",
+        "bytes": 6171,
+        "sha256": "e6be940475a99bed1b82d2ea2f312eb65b460fa9754e70656c9adfeb361c89fe",
+        "root": {
+          "x": 104.1875,
+          "y": 69,
+          "width": 111.625,
+          "height": 22
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "layout-fill-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/layout-fill-held.png",
+        "bytes": 5949,
+        "sha256": "7471fb12607bf53911466d61074fe64d676115788c29bb60fa46b71a8f3164f8",
+        "root": {
+          "x": 47,
+          "y": 60.5,
+          "width": 226,
+          "height": 39
+        },
+        "structureHash": "d3676187af9b88df917472a32d802454521752e1eec5abd1572393884bdc172e"
+      },
+      {
+        "specimenId": "adornment-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/adornment-held.png",
+        "bytes": 4767,
+        "sha256": "0c4f9d9400b1dcf5aefa12d168b5b192e574c8523f5ac06cc928f4788ed0ebf1",
+        "root": {
+          "x": 44,
+          "y": 60,
+          "width": 232,
+          "height": 40
+        },
+        "structureHash": "9dae43e41769684cb679e33e7cf522921f44876717df0e180a6f7fbb5dbcc22c"
+      },
+      {
+        "specimenId": "surface-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/surface-held.png",
+        "bytes": 4585,
+        "sha256": "5f7d2b9ca092957c09d2a240c7b6fc850bbd78670784442da31a12df01eb1690",
+        "root": {
+          "x": 87.875,
+          "y": 58.5,
+          "width": 144.25,
+          "height": 43
+        },
+        "structureHash": "29c065bfdeb77c7f27d458c8ba9fbcf5f1bfd01d9dba2097d6faba40fe583063"
+      },
+      {
+        "specimenId": "overlay-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/overlay-held.png",
+        "bytes": 6263,
+        "sha256": "4adf62ab203ab07a6b60f49e61f8e2cded608cd78d3495c9302d1eb486e7f79f",
+        "root": {
+          "x": 59,
+          "y": 57,
+          "width": 202,
+          "height": 46
+        },
+        "structureHash": "ccfac1d8aee5a1ca111044878fa8e677554e0531fd9692558f966f063ed2c288"
+      },
+      {
+        "specimenId": "ring-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/ring-held.png",
+        "bytes": 5261,
+        "sha256": "61be0242579bb492ff9d5d7faf09765315c3b71c161351f64b6766b7897d37f5",
+        "root": {
+          "x": 76,
+          "y": 61,
+          "width": 168,
+          "height": 38
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "dimension-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/browser/dimension-held.png",
+        "bytes": 4504,
+        "sha256": "4f1bf7b4a0e319acf153c31b2a4c41772abaf1ab9ca54d0dbd65b6462ec62771",
+        "root": {
+          "x": 54.46875,
+          "y": 60.5,
+          "width": 211.0625,
+          "height": 39
+        },
+        "structureHash": "6e6556e7b9eb9903a44a202c59a7b4be711b1714739fcf884dcd8ac260d968e2"
+      }
+    ],
+    "figmaBaseline": [
+      {
+        "specimenId": "text-a1",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-a1.png",
+        "bytes": 3507,
+        "sha256": "f90369b964a98e93c2d87e66ff88ca4ade842b5607ea36389a1b72a8405ec761",
+        "root": {
+          "x": 125,
+          "y": 72.5,
+          "width": 70,
+          "height": 15
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-a2",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-a2.png",
+        "bytes": 4582,
+        "sha256": "0cfd7c5a697fc041d18e7feffdb8d8f25a6e3a02352d41fc1eb632dfeea21afc",
+        "root": {
+          "x": 111.5,
+          "y": 71,
+          "width": 97,
+          "height": 18
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-a3",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-a3.png",
+        "bytes": 5025,
+        "sha256": "cf5df3925087f323132b63df20e9996f5efe9c70031080e6e0398de9736925be",
+        "root": {
+          "x": 93,
+          "y": 68.5,
+          "width": 134,
+          "height": 23
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b1",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-b1.png",
+        "bytes": 3991,
+        "sha256": "68d32e3f60f82bcb78be7aa4fbfcb2e65d20c76909a6c7eb12ed0d54b02175da",
+        "root": {
+          "x": 122.5,
+          "y": 71.5,
+          "width": 75,
+          "height": 17
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b2",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-b2.png",
+        "bytes": 4629,
+        "sha256": "0b5a3cfeb844527c39fe2fb23568d9f62fc29938a6ee32a27a2d86f57592b95b",
+        "root": {
+          "x": 114,
+          "y": 70,
+          "width": 92,
+          "height": 20
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b3",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-b3.png",
+        "bytes": 4296,
+        "sha256": "57fb557019cb91196d16f666582089bd37c5c71e68867b976a43fc6462c44448",
+        "root": {
+          "x": 103,
+          "y": 67.5,
+          "width": 114,
+          "height": 25
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "layout-fill-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/layout-fill-a.png",
+        "bytes": 4737,
+        "sha256": "ccfc3985db2ad7d52a26bddb84bd1ddf4c6f187240abdf3f0441a9c2526dd044",
+        "root": {
+          "x": 79,
+          "y": 61,
+          "width": 162,
+          "height": 38
+        },
+        "structureHash": "d3676187af9b88df917472a32d802454521752e1eec5abd1572393884bdc172e"
+      },
+      {
+        "specimenId": "layout-hug-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/layout-hug-a.png",
+        "bytes": 4343,
+        "sha256": "2fd87c3adcb168f5643ef9a3e97c82aa03dc9f1ea317f10f49e5e4c942ebc98a",
+        "root": {
+          "x": 102.5,
+          "y": 64.5,
+          "width": 115,
+          "height": 31
+        },
+        "structureHash": "6c7fc8df47ecb5668c8c4b577aa11803934215ad62e96df535362b12f59ef25e"
+      },
+      {
+        "specimenId": "adornment-pair-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/adornment-pair-a.png",
+        "bytes": 4735,
+        "sha256": "6acb0b096acc9aee2b05550f063632da0a00c2e196a0b2f4ba5561cbfd0cfcc8",
+        "root": {
+          "x": 92,
+          "y": 59,
+          "width": 136,
+          "height": 42
+        },
+        "structureHash": "9dae43e41769684cb679e33e7cf522921f44876717df0e180a6f7fbb5dbcc22c"
+      },
+      {
+        "specimenId": "padding-asymmetric-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/padding-asymmetric-a.png",
+        "bytes": 4536,
+        "sha256": "3bf59fb46b025ac8d2a265c25f9876a0b11a9a2858c54fa81ca7e16415c5558c",
+        "root": {
+          "x": 98,
+          "y": 63,
+          "width": 124,
+          "height": 34
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "surface-stroke-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/surface-stroke-a.png",
+        "bytes": 2536,
+        "sha256": "119ba9fcc783135e5da4cf117fe3aac09f99ea967f6bd473472eb4fdb2254079",
+        "root": {
+          "x": 121.5,
+          "y": 61,
+          "width": 77,
+          "height": 38
+        },
+        "structureHash": "1fd7ddac6b941a3124b6db41f56af682cfca0fb034e9d13ee37407455c9b125e"
+      },
+      {
+        "specimenId": "overlay-label-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/overlay-label-a.png",
+        "bytes": 6440,
+        "sha256": "bac1f1a20714eb62615d645ba202e941f24c5194b7fedb5535b596ada576cf3f",
+        "root": {
+          "x": 98.5,
+          "y": 56,
+          "width": 123,
+          "height": 48
+        },
+        "structureHash": "ccfac1d8aee5a1ca111044878fa8e677554e0531fd9692558f966f063ed2c288"
+      },
+      {
+        "specimenId": "state-ring-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/state-ring-a.png",
+        "bytes": 4778,
+        "sha256": "ea90cbd9f5dd124a6b6b12019aef8f51426a72408bcb0bb2f71e6ad0ccac617a",
+        "root": {
+          "x": 108.5,
+          "y": 60,
+          "width": 103,
+          "height": 40
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "state-border-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/state-border-a.png",
+        "bytes": 3980,
+        "sha256": "0d5b3c21e3cc3f39d9c86d7ef9f76f2caee56ab09e8efaaa5bfe11a20f55eaa2",
+        "root": {
+          "x": 115.5,
+          "y": 62,
+          "width": 89,
+          "height": 36
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "dimension-small-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/dimension-small-a.png",
+        "bytes": 3462,
+        "sha256": "5056b0c1b08214ff3ff042a17e660f0fa05653e273e900b98dbff7974f645d22",
+        "root": {
+          "x": 78.5,
+          "y": 62.5,
+          "width": 163,
+          "height": 35
+        },
+        "structureHash": "b60382355134953265ad4371cde6de76b8b531f3b784c162c7378300b1026336"
+      },
+      {
+        "specimenId": "dimension-medium-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/dimension-medium-a.png",
+        "bytes": 4753,
+        "sha256": "8867daee5d9d9ea51784d75aa60c0234cb93d5e547a6dc58afd49473b71dfddf",
+        "root": {
+          "x": 47.5,
+          "y": 50.5,
+          "width": 225,
+          "height": 59
+        },
+        "structureHash": "b60382355134953265ad4371cde6de76b8b531f3b784c162c7378300b1026336"
+      },
+      {
+        "specimenId": "text-held-a",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-held-a.png",
+        "bytes": 4093,
+        "sha256": "31e3b40f8dadad2903cb42fd3f63549193c5fc31f5333b539b81396146866c80",
+        "root": {
+          "x": 115.5,
+          "y": 72,
+          "width": 89,
+          "height": 16
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-held-b",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/text-held-b.png",
+        "bytes": 4767,
+        "sha256": "bd1cfdd844611735ea62fd9eae0188eacaaef45b1ba32074c31d3b7f3a83428a",
+        "root": {
+          "x": 104,
+          "y": 69,
+          "width": 112,
+          "height": 22
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "layout-fill-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/layout-fill-held.png",
+        "bytes": 4803,
+        "sha256": "ad25618dbb8c9bb2ed5f2840421cdc9f1d6bf7b0aa5dc9110f926fedf1fe6d98",
+        "root": {
+          "x": 77.5,
+          "y": 60.5,
+          "width": 165,
+          "height": 39
+        },
+        "structureHash": "d3676187af9b88df917472a32d802454521752e1eec5abd1572393884bdc172e"
+      },
+      {
+        "specimenId": "adornment-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/adornment-held.png",
+        "bytes": 4574,
+        "sha256": "a25e7974f7e28a4d06b4f82fb631cd9fa0f453774cc0955f37a3b1f59a9e4e9a",
+        "root": {
+          "x": 102.5,
+          "y": 60,
+          "width": 115,
+          "height": 40
+        },
+        "structureHash": "9dae43e41769684cb679e33e7cf522921f44876717df0e180a6f7fbb5dbcc22c"
+      },
+      {
+        "specimenId": "surface-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/surface-held.png",
+        "bytes": 4530,
+        "sha256": "ade18a8911573653773b104d9961d94bf3282239c97ee24671d02ab9b8ec7b44",
+        "root": {
+          "x": 87.5,
+          "y": 58.5,
+          "width": 145,
+          "height": 43
+        },
+        "structureHash": "29c065bfdeb77c7f27d458c8ba9fbcf5f1bfd01d9dba2097d6faba40fe583063"
+      },
+      {
+        "specimenId": "overlay-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/overlay-held.png",
+        "bytes": 5281,
+        "sha256": "290d9f513bb69387d30887abad114b5ec317c6724acb09f158ea0ba8d15d758c",
+        "root": {
+          "x": 113,
+          "y": 57,
+          "width": 94,
+          "height": 46
+        },
+        "structureHash": "ccfac1d8aee5a1ca111044878fa8e677554e0531fd9692558f966f063ed2c288"
+      },
+      {
+        "specimenId": "ring-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/ring-held.png",
+        "bytes": 4191,
+        "sha256": "58167ce8d4cca7cf97e8b82ca2c28b2b712da5da0b2eb851a7dd85945a5a3f48",
+        "root": {
+          "x": 113,
+          "y": 61,
+          "width": 94,
+          "height": 38
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "dimension-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-baseline/dimension-held.png",
+        "bytes": 3836,
+        "sha256": "f65e2a761e845e0e37b2518b436193e4a61051665f209dc794383e6f782c183b",
+        "root": {
+          "x": 54,
+          "y": 60.5,
+          "width": 212,
+          "height": 39
+        },
+        "structureHash": "6e6556e7b9eb9903a44a202c59a7b4be711b1714739fcf884dcd8ac260d968e2"
+      }
+    ],
+    "figmaCalibrated": [
+      {
+        "specimenId": "text-a1",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-a1.png",
+        "bytes": 3576,
+        "sha256": "6c978882278af1cdd89e2d6b6e604ec0f7323079a8fb44a2c4985299fb253a26",
+        "root": {
+          "x": 125,
+          "y": 72.5,
+          "width": 70,
+          "height": 15
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-a2",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-a2.png",
+        "bytes": 4572,
+        "sha256": "409061d68f8a48c3dc6fc6ace05480905fc07618c5aa40cfe0d3dcaa49be30e3",
+        "root": {
+          "x": 111.5,
+          "y": 71,
+          "width": 97,
+          "height": 18
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-a3",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-a3.png",
+        "bytes": 5020,
+        "sha256": "07a5bdbb23b430c230dce24bbf65489015118895ca966bcaacc1f80509350371",
+        "root": {
+          "x": 93.5,
+          "y": 68.5,
+          "width": 133,
+          "height": 23
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b1",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-b1.png",
+        "bytes": 3988,
+        "sha256": "3590843cb946eef9b13daf4013a02a12176ad9f6bc9db6cbf141ed4be7a16b4c",
+        "root": {
+          "x": 122.5,
+          "y": 71.5,
+          "width": 75,
+          "height": 17
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b2",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-b2.png",
+        "bytes": 4510,
+        "sha256": "aa83809be120688c1231370318d46a3bb184c76f109bb96972822c327da937ed",
+        "root": {
+          "x": 114,
+          "y": 70,
+          "width": 92,
+          "height": 20
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-b3",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-b3.png",
+        "bytes": 4408,
+        "sha256": "a86ebb2ecf49854350e50666f9bc5c5fe46e772d39301e7ced1157697ddc9ebf",
+        "root": {
+          "x": 103,
+          "y": 67.5,
+          "width": 114,
+          "height": 25
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "layout-fill-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/layout-fill-a.png",
+        "bytes": 4750,
+        "sha256": "d3c8d90d3b5b2f10dc18eb784cc624e599e24229da64d7fb54e167cbf45a80b6",
+        "root": {
+          "x": 79.5,
+          "y": 61,
+          "width": 161,
+          "height": 38
+        },
+        "structureHash": "d3676187af9b88df917472a32d802454521752e1eec5abd1572393884bdc172e"
+      },
+      {
+        "specimenId": "layout-hug-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/layout-hug-a.png",
+        "bytes": 4295,
+        "sha256": "24fae87ed6f9a32c7b5cf47d8c11dde86feaeae5c54f321ae648f6fbfa43ea49",
+        "root": {
+          "x": 102.5,
+          "y": 64.5,
+          "width": 115,
+          "height": 31
+        },
+        "structureHash": "6c7fc8df47ecb5668c8c4b577aa11803934215ad62e96df535362b12f59ef25e"
+      },
+      {
+        "specimenId": "adornment-pair-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/adornment-pair-a.png",
+        "bytes": 4730,
+        "sha256": "8c17b827806dd46590b5638c2f9fd0593781bae8bc7e24e725ac54ced5752799",
+        "root": {
+          "x": 92,
+          "y": 59,
+          "width": 136,
+          "height": 42
+        },
+        "structureHash": "9dae43e41769684cb679e33e7cf522921f44876717df0e180a6f7fbb5dbcc22c"
+      },
+      {
+        "specimenId": "padding-asymmetric-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/padding-asymmetric-a.png",
+        "bytes": 4582,
+        "sha256": "c7288931bd05e75041688971038580f2ef6873b1d9e28fcc180c12566ff46a52",
+        "root": {
+          "x": 98.5,
+          "y": 63,
+          "width": 123,
+          "height": 34
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "surface-stroke-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/surface-stroke-a.png",
+        "bytes": 2536,
+        "sha256": "119ba9fcc783135e5da4cf117fe3aac09f99ea967f6bd473472eb4fdb2254079",
+        "root": {
+          "x": 121.5,
+          "y": 61,
+          "width": 77,
+          "height": 38
+        },
+        "structureHash": "1fd7ddac6b941a3124b6db41f56af682cfca0fb034e9d13ee37407455c9b125e"
+      },
+      {
+        "specimenId": "overlay-label-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/overlay-label-a.png",
+        "bytes": 6414,
+        "sha256": "e69d470f50b0fafe38fb7643df0268e61f7cb809f89efda989aed1173588c9bf",
+        "root": {
+          "x": 99,
+          "y": 56,
+          "width": 122,
+          "height": 48
+        },
+        "structureHash": "ccfac1d8aee5a1ca111044878fa8e677554e0531fd9692558f966f063ed2c288"
+      },
+      {
+        "specimenId": "state-ring-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/state-ring-a.png",
+        "bytes": 4910,
+        "sha256": "9c2adeedce871ab00710704d3a27d52277f5d1942f1d224a4f2268bb80e8db9b",
+        "root": {
+          "x": 108.5,
+          "y": 60,
+          "width": 103,
+          "height": 40
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "state-border-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/state-border-a.png",
+        "bytes": 3968,
+        "sha256": "fe55a081734a9b75a7572a4224b249abd812abc72c73d496ed357759907ab0e0",
+        "root": {
+          "x": 115.5,
+          "y": 62,
+          "width": 89,
+          "height": 36
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "dimension-small-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/dimension-small-a.png",
+        "bytes": 3537,
+        "sha256": "a835a9b178aca834d586a8f6f5415d3851338c41b822704cd42b8e2febbf5b60",
+        "root": {
+          "x": 78.5,
+          "y": 62.5,
+          "width": 163,
+          "height": 35
+        },
+        "structureHash": "b60382355134953265ad4371cde6de76b8b531f3b784c162c7378300b1026336"
+      },
+      {
+        "specimenId": "dimension-medium-a",
+        "split": "training",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/dimension-medium-a.png",
+        "bytes": 4654,
+        "sha256": "35e6a8192e76345c8ef1308a65be1638debe58f77df0f09fb6f5d7e085750e50",
+        "root": {
+          "x": 47.5,
+          "y": 50.5,
+          "width": 225,
+          "height": 59
+        },
+        "structureHash": "b60382355134953265ad4371cde6de76b8b531f3b784c162c7378300b1026336"
+      },
+      {
+        "specimenId": "text-held-a",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-held-a.png",
+        "bytes": 4117,
+        "sha256": "c15ff647a1ba431c642c21e5356c49b058b994319f016c893582dfc5cffe0a08",
+        "root": {
+          "x": 115.5,
+          "y": 72,
+          "width": 89,
+          "height": 16
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "text-held-b",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/text-held-b.png",
+        "bytes": 4765,
+        "sha256": "f02b80c412ed70431ea631560e024d14396ee75aa650251ad0f97992dca48cca",
+        "root": {
+          "x": 104,
+          "y": 69,
+          "width": 112,
+          "height": 22
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "layout-fill-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/layout-fill-held.png",
+        "bytes": 5011,
+        "sha256": "da4c7ab5bc048f558290caeafb0ba3b73f196e94a25bb66a0e428ac586febdc7",
+        "root": {
+          "x": 77.5,
+          "y": 60.5,
+          "width": 165,
+          "height": 39
+        },
+        "structureHash": "d3676187af9b88df917472a32d802454521752e1eec5abd1572393884bdc172e"
+      },
+      {
+        "specimenId": "adornment-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/adornment-held.png",
+        "bytes": 4538,
+        "sha256": "f7bd19e1e926c7779b0b70c2b80a690b23ef9f712554edca8e3e0d221422a96e",
+        "root": {
+          "x": 102.5,
+          "y": 60,
+          "width": 115,
+          "height": 40
+        },
+        "structureHash": "9dae43e41769684cb679e33e7cf522921f44876717df0e180a6f7fbb5dbcc22c"
+      },
+      {
+        "specimenId": "surface-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/surface-held.png",
+        "bytes": 4554,
+        "sha256": "a08fd801876dbb58b0c66238e860c185cb2c0d3e25886849e013361fa4348624",
+        "root": {
+          "x": 87.5,
+          "y": 58.5,
+          "width": 145,
+          "height": 43
+        },
+        "structureHash": "29c065bfdeb77c7f27d458c8ba9fbcf5f1bfd01d9dba2097d6faba40fe583063"
+      },
+      {
+        "specimenId": "overlay-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/overlay-held.png",
+        "bytes": 5221,
+        "sha256": "79a9edb909a1926dc6cca6808eed2a049355825a4e89bc9cc434ecdf5a25502a",
+        "root": {
+          "x": 113,
+          "y": 57,
+          "width": 94,
+          "height": 46
+        },
+        "structureHash": "ccfac1d8aee5a1ca111044878fa8e677554e0531fd9692558f966f063ed2c288"
+      },
+      {
+        "specimenId": "ring-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/ring-held.png",
+        "bytes": 4113,
+        "sha256": "e7f18b6fb98f267c513e59a52635b6d546fdc5542a575896b29bd3e036d7e60b",
+        "root": {
+          "x": 113,
+          "y": 61,
+          "width": 94,
+          "height": 38
+        },
+        "structureHash": "97eec7d8d708982049922969de0c4882fb9448496b7be91a1f92478f25076d3d"
+      },
+      {
+        "specimenId": "dimension-held",
+        "split": "validation",
+        "path": "recipe/evidence/raster-calibration-v1/captures/figma-calibrated/dimension-held.png",
+        "bytes": 3944,
+        "sha256": "f11d5b82be36c32b346b9883efa67dad7f1626eefc3ed652f2ae397efef52e5a",
+        "root": {
+          "x": 54.5,
+          "y": 60.5,
+          "width": 211,
+          "height": 39
+        },
+        "structureHash": "6e6556e7b9eb9903a44a202c59a7b4be711b1714739fcf884dcd8ac260d968e2"
+      }
+    ]
+  }
+}

@@ -1,0 +1,165 @@
+{
+  "version": "input-field-recognisability-replacement-rater-v3",
+  "status": {
+    "protocol": "locked-before-d-grade",
+    "qualification": "passed-three-rater-cohort",
+    "performancePacket": "sealed-reliability-failed",
+    "recognisabilityInstrument": "failed-reliability",
+    "architecturePerformance": "not-unsealed",
+    "liveInput": "blocked",
+    "inputOverall": false
+  },
+  "preservation": {
+    "calibrationV2Modified": false,
+    "calibrationV2Snapshot": {
+      "root": "recipe/evidence/input-field-comparison-calibration-v2",
+      "files": 836,
+      "bytes": 9429777,
+      "aggregateSha256": "4431cbc41f429b134c3967757ee3530356e6df493a01f8e413e00d38a41b0648"
+    }
+  },
+  "commitment": {
+    "protocol": "recipe/evidence/input-field-comparison-calibration-v3-replacement/protocol.json",
+    "protocolHash": "cfb8b7307397e0434b0f68a5226e4ae2e4255faae9422b60c947ff92350e12b0",
+    "replacementCommitment": "b5abc88083a2322c4b682e17630710d2e4457e56c17afdf07aa211548e7f593a",
+    "compatibilityFieldsHash": "0edc73337c9ce60f5fb91189530d83fb45a2d59a95c11c5c08a4ff061a4f7db0"
+  },
+  "historicalA": {
+    "excludedRater": "RATER-CAL-V2-A",
+    "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-a.json",
+    "receiptHash": "474d2c13bcbb31f40dc13f9420d567a09c32c00cd0abfea37dc6108a172eeec7",
+    "correct": 22,
+    "denominator": 24,
+    "obviousFailuresCorrect": 11,
+    "obviousFailuresDenominator": 12,
+    "passed": false,
+    "relabellingForbidden": true
+  },
+  "imports": {
+    "RATER-CAL-V2-B": {
+      "status": "imported-valid",
+      "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json",
+      "receiptHash": "1d351c753946f615237c407ff036e0fe29b3a2b673562c8e7386364188b4c8ee",
+      "submissionPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-b.json",
+      "submissionHash": "8a360f77475b69593c20b27ab7d14252c0c10650d8853c1e49e42471af9c9d7a",
+      "score": 1,
+      "obviousFailureScore": 1,
+      "envelopeValid": true,
+      "compatibilityFieldsHash": "0edc73337c9ce60f5fb91189530d83fb45a2d59a95c11c5c08a4ff061a4f7db0",
+      "whyValid": "Passing receipt and source submission hashes verify against the exact same gold packet/order, protocol commitment, rubric, grade schema, envelope rules, and thresholds."
+    },
+    "RATER-CAL-V2-C": {
+      "status": "imported-valid",
+      "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json",
+      "receiptHash": "4538e58eadc06389f87e47c126b8d4825acc211bcf5d5f8961b42d3b8e2b53fd",
+      "submissionPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-c.json",
+      "submissionHash": "d687385e75ee15cbf28ae7838f28ab2b7696d2f870cfa80a7b3aa7efa10d17b4",
+      "score": 1,
+      "obviousFailureScore": 1,
+      "envelopeValid": true,
+      "compatibilityFieldsHash": "0edc73337c9ce60f5fb91189530d83fb45a2d59a95c11c5c08a4ff061a4f7db0",
+      "whyValid": "Passing receipt and source submission hashes verify against the exact same gold packet/order, protocol commitment, rubric, grade schema, envelope rules, and thresholds."
+    }
+  },
+  "freshD": {
+    "graderId": "RATER-CAL-V3-D",
+    "status": "qualified-performance-authorized",
+    "independenceRequired": {
+      "noPriorGoldPacketAccess": true,
+      "noPriorGradeAccess": true,
+      "noPerformanceAccess": true
+    },
+    "goldTemplate": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/templates/rater-cal-v3-d.json",
+    "goldTemplateHash": "084ad041fccd30ef9efc9377bbf64b1b85a059581a3fa2f203a321ba9d9437f9",
+    "goldOutput": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/submissions/rater-cal-v3-d.json",
+    "qualificationReceipt": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/receipts/rater-cal-v3-d.json",
+    "prompt": "Act as fresh independent rater RATER-CAL-V3-D; you must have no prior access to this gold packet, any prior grade, or the sealed performance packet. Open only recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json, recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/templates/rater-cal-v3-d.json, and the referenced images beneath recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet; do not inspect parent directories, prior submissions/receipts, or recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json. Apply the unchanged locked rubric to all 24 tasks in exact order, replace every null, and preserve every field and ID. Write only recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/submissions/rater-cal-v3-d.json, then run npx tsx recipe/input-field-comparison-calibration-v3.ts --preflight-gold recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/submissions/rater-cal-v3-d.json. Stop after submission. Do not open any performance artifact.",
+    "qualification": {
+      "receiptPath": "recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/receipts/rater-cal-v3-d.json",
+      "receiptHash": "38bcbb445ae6361cd7db667f10b996db76b9122138502977e8f866ec993c0739",
+      "submissionHash": "42d8ff1757d264bdb952b913060383a6c6c1708dafca728942f699e82071620a",
+      "counts": {
+        "expected": 24,
+        "submitted": 24,
+        "correct": 23,
+        "obviousStructuralStateFailures": 12,
+        "obviousStructuralStateFailuresCorrect": 12
+      },
+      "score": 0.9583333333333334,
+      "obviousFailureScore": 1,
+      "envelopeValid": true,
+      "passed": true
+    }
+  },
+  "performance": {
+    "packetPath": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json",
+    "packetHash": "c24f43a3c769a0b5747bbae93a098bdc762895d39d15326547ce857cc104299e",
+    "randomizedBatchHash": "9dee5601af7077d660b643c6abe9bdff9ef9550dc8193a4d5b82828a18edae42",
+    "sealedAnswerKeyPath": "recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json",
+    "sealedAnswerKeyHash": "31424d32a6a2f7da6bae8d67b5e515746c4ad108c8580c44d439d4bb0f9d30f9",
+    "packetBytesChanged": false,
+    "randomizedIdsOrOrderChanged": false,
+    "sealedKeyChanged": false,
+    "packetCopiedOrRebuilt": false,
+    "remainsSealedAndUngraded": true,
+    "packetAccessedByReplacementRater": false,
+    "performanceCommissioned": true,
+    "cohort": ["RATER-CAL-V2-B", "RATER-CAL-V2-C", "RATER-CAL-V3-D"],
+    "templates": {
+      "RATER-CAL-V2-B": {
+        "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v2-b.json",
+        "sha256": "544361c6824b8aec56b40b4969da54703271a388437cec2a47c2c090c998042f"
+      },
+      "RATER-CAL-V2-C": {
+        "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v2-c.json",
+        "sha256": "6aa1e8b20c4d888fb19797ccf4b2b9c286271453ea450234bba6311f7dbc65c0"
+      },
+      "RATER-CAL-V3-D": {
+        "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v3-d.json",
+        "sha256": "7355d1d595397c01b85a4a7dfa97da60da58b0c0b12abb20e5fbc3e741a171b6"
+      }
+    },
+    "outputs": {
+      "RATER-CAL-V2-B": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-b.json",
+      "RATER-CAL-V2-C": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-c.json",
+      "RATER-CAL-V3-D": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v3-d.json"
+    },
+    "submissions": {
+      "RATER-CAL-V2-B": {
+        "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-b.json",
+        "sha256": "7596381924042b6b6f55e9fb0b47e13a4c2c42ea1281c06b1b15b20ceaeb0434"
+      },
+      "RATER-CAL-V2-C": {
+        "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-c.json",
+        "sha256": "6a8bc3f213241a035abda42111b5729ce77f351e64d6e9d5ef1338b22a9222e6"
+      },
+      "RATER-CAL-V3-D": {
+        "path": "recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v3-d.json",
+        "sha256": "201aa27edae387250c037fcd8f9ac21ddafe653decff3dbcdaf7a6fb14a68a60"
+      }
+    },
+    "adjudicationPath": "recipe/evidence/input-field-comparison-calibration-v3-replacement/final-adjudication.json",
+    "reliability": "failed",
+    "performanceIdentityUnsealed": false,
+    "prompts": {
+      "RATER-CAL-V2-B": "RATER-CAL-V2-B uses imported qualification receipt recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json only after the replacement gate verifies its exact compatibility and valid D completes the B/C/D cohort. Then open only recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json, recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v2-b.json, that imported receipt, and referenced images beneath recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet. Write only recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-b.json and run npx tsx recipe/input-field-comparison-calibration-v3.ts --preflight-performance recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-b.json. Never inspect recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json, parent evidence, prior grades, or another rater's work.",
+      "RATER-CAL-V2-C": "RATER-CAL-V2-C uses imported qualification receipt recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-c.json only after the replacement gate verifies its exact compatibility and valid D completes the B/C/D cohort. Then open only recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json, recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v2-c.json, that imported receipt, and referenced images beneath recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet. Write only recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-c.json and run npx tsx recipe/input-field-comparison-calibration-v3.ts --preflight-performance recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v2-c.json. Never inspect recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json, parent evidence, prior grades, or another rater's work.",
+      "RATER-CAL-V3-D": "Phase 2 for RATER-CAL-V3-D is forbidden until recipe/evidence/input-field-comparison-calibration-v3-replacement/gold/receipts/rater-cal-v3-d.json is hash-pinned and proves envelopeValid=true, score>=0.95, 12/12 obvious failures, passed=true, no prior packet/grade access, and replacement commitment b5abc88083a2322c4b682e17630710d2e4457e56c17afdf07aa211548e7f593a. After the replacement gate authorizes the complete B/C/D cohort, open only recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json, recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/templates/rater-cal-v3-d.json, that receipt, and referenced images beneath recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet. Write only recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v3-d.json and run npx tsx recipe/input-field-comparison-calibration-v3.ts --preflight-performance recipe/evidence/input-field-comparison-calibration-v3-replacement/performance/submissions/rater-cal-v3-d.json. Never inspect recipe/evidence/input-field-comparison-calibration-v2/performance/sealed-answer-key.json, parent evidence, source code, prior grades, or another rater's work; do not compare tasks, infer identities, rank paths, or change thresholds."
+    },
+    "authorizedRaters": ["RATER-CAL-V2-B", "RATER-CAL-V2-C", "RATER-CAL-V3-D"]
+  },
+  "thresholds": {
+    "calibratedValidRatersRequired": 3,
+    "calibrationScoreMinimum": 0.95,
+    "obviousFailureScoreRequired": 1,
+    "validEnvelopeRequired": true,
+    "hiddenDuplicateAgreementPerRaterMinimum": 0.95,
+    "majorityDuplicateAgreementMinimum": 127,
+    "majorityDuplicateAgreementDenominator": 128,
+    "everyPairwiseAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "maximumDuplicateCopyPassRateDelta": 0.05,
+    "majorityFailureConcreteDefectRatersMinimum": 2,
+    "failureConsequence": "Any failed prerequisite or reliability threshold keeps recognisability unusable, performance sealed, architecture progression blocked, and live Input blocked."
+  }
+}

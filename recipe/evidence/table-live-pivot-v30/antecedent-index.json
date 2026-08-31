@@ -1,0 +1,161 @@
+{
+  "artifactVersion": "table-live-v30-antecedent-index-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "artifacts": {
+    "recipe/evidence/table-live-pivot-v30/expected-scene-plan-first-party-table.json.gz": {
+      "bytes": 3846,
+      "sha256": "4ef7d8cf0c7d6807b210d7e0ca7c4ce52fe8713a9e30337c2926d94ac36b8190"
+    },
+    "recipe/evidence/table-live-pivot-v30/expected-scene-plan-first-party-row.json.gz": {
+      "bytes": 3342,
+      "sha256": "7ad7d715aecebc59463605a384ee9a35a150d8c4107970faebe9722e53b1bfbd"
+    },
+    "recipe/evidence/table-live-pivot-v30/expected-scene-plan-first-party-cell.json.gz": {
+      "bytes": 3576,
+      "sha256": "db351399511e4e83b318411b7a7868cff01469da31b5a17fe5b7d8f79bac4a1a"
+    },
+    "recipe/evidence/table-live-pivot-v30/expected-scene-plan-mui-table.json.gz": {
+      "bytes": 3841,
+      "sha256": "e2172d900621a815186328efbb9f48cd42900c28e80e1cdd59af076e3e27803f"
+    },
+    "recipe/evidence/table-live-pivot-v30/expected-scene-plan-mui-row.json.gz": {
+      "bytes": 3367,
+      "sha256": "9eb1c44127a39e5ae8572c3001859745ebd22cc5b346541beca1bcf6ecbb8e08"
+    },
+    "recipe/evidence/table-live-pivot-v30/expected-scene-plan-mui-cell.json.gz": {
+      "bytes": 3555,
+      "sha256": "5f13ebbb1062d6bc03440b60c3ab6f28ff0a20c8a68b486687f51ba4336f6cbb"
+    },
+    "recipe/evidence/table-live-pivot-v30/protocol.json": {
+      "bytes": 7539,
+      "sha256": "c334a421df9e097ea2ede3dc36ebcc985c46d998c1dcc1cc7acdef8685942dcb"
+    },
+    "recipe/evidence/table-live-pivot-v30/programs/writer.txt": {
+      "bytes": 72569,
+      "sha256": "74f90dd6f3f5d15252d02c0138bee6b1b260e18720de183b8ec0395a925655ed"
+    },
+    "recipe/evidence/table-live-pivot-v30/programs/restore-blueprint.js": {
+      "bytes": 2914,
+      "sha256": "5b38c5f695c114a08de67dec9a9348b4e474a4dd36ff897a6f8f315089b63c46"
+    },
+    "recipe/evidence/table-live-pivot-v30/programs/extract-blueprint.js": {
+      "bytes": 338832,
+      "sha256": "fea12d5a1cd6ca992028af88a5adf5429c796d5fc4f2231602e77d49797cb29b"
+    },
+    "recipe/evidence/table-live-pivot-v30/programs/probe-blueprint.js": {
+      "bytes": 8948,
+      "sha256": "ef7ea572d590abaa43a8c65ebb46985b84a0d8a01336f850f4fc5a1e7cfd00af"
+    },
+    "recipe/evidence/table-live-pivot-v30/programs/capture-blueprint.js": {
+      "bytes": 10198,
+      "sha256": "f8c655272576c47db0d2592fc42b01dc1f6140e932f42b39236ba75dfc6a00a0"
+    },
+    "recipe/evidence/table-live-pivot-v30/programs/cleanup-blueprint.js": {
+      "bytes": 5609,
+      "sha256": "c06cfa5076709dec4161f58366d09e301f6a460b030dd17d8e3aed52f662279d"
+    },
+    "recipe/evidence/table-live-pivot-v30/capture-manifest.json": {
+      "bytes": 9306,
+      "sha256": "f386d00b24ea8ff6771367d102a551dc0f296621cfdc4fe244094a46d596a99b"
+    },
+    "recipe/evidence/table-live-pivot-v30/proof-plan.json": {
+      "bytes": 4158,
+      "sha256": "20efb1e09b2dd814da5823a4354cf146452444bd6622603ad19aa59fd4d70ca3"
+    },
+    "recipe/evidence/table-live-pivot-v30/request-manifest.json": {
+      "bytes": 4219,
+      "sha256": "2f0c381fe19bc3ceb82e3041e4fda48419b88a38fe1216fd8b441c1ab8a20850"
+    },
+    "recipe/table-live-v30-broker.ts": {
+      "bytes": 36797,
+      "sha256": "80a4379676ef8a4e87244bc2579368bf6c51b7865979df4963383ba41dfc6f7c"
+    },
+    "recipe/table-live-v30-contract.ts": {
+      "bytes": 45741,
+      "sha256": "1f0fb5622a3f339ac5e3afcc5e789014cb547c20ddffc2053e7fc2ad13302732"
+    },
+    "recipe/table-live-v30-restore.ts": {
+      "bytes": 5675,
+      "sha256": "d0b18cb7bb2287df5a503559d98bb74475612c92a156abb3d7ec4016f8133c0d"
+    },
+    "recipe/table-live-v30-cleanup.ts": {
+      "bytes": 5639,
+      "sha256": "161918d9bb3e1652058e9caf06d9c7431f82490817c5740d706709b095c0867d"
+    },
+    "recipe/table-live-v30-verifier.ts": {
+      "bytes": 7808,
+      "sha256": "ff58c3eb582c131ec9c63f59738cfb7a25638654405c3fc59a73cfcd7c321e4a"
+    },
+    "recipe/table-live-v30-fixed-point.ts": {
+      "bytes": 10331,
+      "sha256": "008b842f555f57e4bfdd31c857ba75f48d2c2ec1e480f13093f753bb44b436f5"
+    },
+    "recipe/run-table-live-v30.ts": {
+      "bytes": 25030,
+      "sha256": "5b2759c4fbe9ef1ffce219ad14ce395849f9309c13660146bc47756f6ca85428"
+    },
+    "recipe/build-table-live-proof-v30.ts": {
+      "bytes": 40167,
+      "sha256": "f2f55c8454daf72f6356751edeeaa25fc606ae0595eea7b828aef7354397fcc8"
+    },
+    "recipe/table-live-v30-lifecycle-simulation.ts": {
+      "bytes": 8107,
+      "sha256": "2d3cfc81a97beb84cb774bfbbef2f2f81c5626fbe709db71657f68563088e1b3"
+    },
+    "recipe/scene-readback-table-v1.ts": {
+      "bytes": 59185,
+      "sha256": "1aae8850cf55bc608402014449b3ba302ca5678fc07d71e0dbfe11a021f30163"
+    },
+    "recipe/scene-readback-runtime-table-v30.ts": {
+      "bytes": 15347,
+      "sha256": "79ceecafda280cb482c01bb9387c94675fa8605f92de2abf502b9e04785fe3a4"
+    },
+    "recipe/table-figma-writer.ts": {
+      "bytes": 45694,
+      "sha256": "f69a88726bb22105bfab13fc9705438aee34297703ff0dc9576754931f9920df"
+    },
+    "recipe/figma-property-normalizer-v8.ts": {
+      "bytes": 11009,
+      "sha256": "103abec0f81e59fb5c25fd38b05f4961d755eeee2e4bb18f99ca74411b45eae0"
+    },
+    "recipe/figma-runtime-portability.ts": {
+      "bytes": 12817,
+      "sha256": "df0ada6caea5cf05c9f46552cbf675b76e029438f75a9805802b1446ab3a034f"
+    },
+    "recipe/normalize.ts": {
+      "bytes": 7537,
+      "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
+    }
+  },
+  "hashSetSha256": "5abdcf451b35f92034b73c7673be5f5eb2e1a38db397b7e8fa1b14ca9f135f2b",
+  "counts": {
+    "sources": 2,
+    "variants": 20,
+    "expectedSceneFacts": 1222,
+    "captureCells": 20,
+    "remoteRequests": 25,
+    "hostPhases": 3
+  },
+  "generatedDeterministically": true,
+  "authorizationLifecycleExcluded": [
+    "recipe/evidence/table-live-pivot-v30/authorization-template.json",
+    "recipe/evidence/table-live-pivot-v30/capture-authorization.json",
+    "recipe/table-live-v30-authorization.ts",
+    "recipe/table-live-v30-authorization.test.ts",
+    "recipe/table-live-v30-preflight.ts",
+    "recipe/table-live-v30-authorized.ts",
+    "recipe/write-table-live-v30-authorization.ts",
+    "recipe/create-table-live-v30-security-attestation.ts",
+    "recipe/evidence/table-live-pivot-v30/operator-security-attestation-template.json",
+    "recipe/evidence/table-live-pivot-v30-status.json",
+    "recipe/evidence/status-index.json"
+  ],
+  "authorizationCanBeAddedWithoutAntecedentRebuild": true,
+  "attemptsExecuted": 0,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallTableSuccess": false
+}

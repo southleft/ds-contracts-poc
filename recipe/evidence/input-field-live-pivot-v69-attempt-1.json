@@ -1,0 +1,265 @@
+{
+  "artifactVersion": "input-live-v69-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "32f501e2f64445267ae51613e9036d999d791a75",
+  "codeCommit": "32f501e2f64445267ae51613e9036d999d791a75",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "108:231754",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436209,
+    "sha256": "863c06fd37f14dba0d73d2b7b49d348ee41e9a78e577eda564b62f41b423e36c",
+    "hostNormalizeAccount": true,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v63FailureCleared": {
+    "setLayoutModeNotTheRefusalLocus": true
+  },
+  "v64FailureCleared": {
+    "setLayoutPaddingNotTheRefusalLocus": true
+  },
+  "v65FailureCleared": {
+    "setLayoutWidthModeNotTheRefusalLocus": true
+  },
+  "v66FailureCleared": {
+    "setStrokesNotTheRefusalLocus": true
+  },
+  "v67FailureCleared": {
+    "polarLabelRowBindingOrderNotTheRefusalLocus": true
+  },
+  "v68FailureCleared": {
+    "polarSurfaceBindingOrderNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "extractScene": {
+      "mui": { "FILL": 0, "FIXED": 24, "HUG": 104, "total": 128 },
+      "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 }
+    },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedSetLayoutMode": {
+    "extractScene": {
+      "mui": "HORIZONTAL",
+      "polaris": "HORIZONTAL"
+    },
+    "hostIr": {
+      "mui": "horizontal",
+      "polaris": "horizontal"
+    },
+    "compileEmits": "horizontal",
+    "compileOmits": false,
+    "v64TeachingHeld": true
+  },
+  "observedSetLayoutPadding": {
+    "extractScene": {
+      "mui": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 },
+      "polaris": { "paddingTop": 32, "paddingRight": 32, "paddingBottom": 32, "paddingLeft": 32 }
+    },
+    "hostIr": {
+      "mui": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+      "polaris": { "top": 32, "right": 32, "bottom": 32, "left": 32 }
+    },
+    "compileEmits": { "top": 32, "right": 32, "bottom": 32, "left": 32 },
+    "compileOmits": false,
+    "v65TeachingHeld": true
+  },
+  "observedSetLayoutWidth": {
+    "extractScene": {
+      "mui": { "layoutSizingHorizontal": "HUG", "width": 31656 },
+      "polaris": { "layoutSizingHorizontal": "HUG", "width": 33050 }
+    },
+    "hostIr": {
+      "mui": { "mode": "hug" },
+      "polaris": { "mode": "hug" }
+    },
+    "compileEmits": { "mode": "hug" },
+    "compileOmits": false,
+    "payloadIr": { "mode": "hug" },
+    "writerProgramLayoutSizingHorizontalAssignments": 1,
+    "v66TeachingHeld": true
+  },
+  "observedSetStrokes": {
+    "extractScene": {
+      "mui": { "present": true, "value": [] },
+      "polaris": { "present": true, "value": [] }
+    },
+    "hostIr": {
+      "mui": { "present": false },
+      "polaris": { "present": false }
+    },
+    "compileOmits": true,
+    "v67TeachingHeld": true
+  },
+  "observedLabelRowBindings": {
+    "muiFirstChildIsSurfaceNotLabelRow": true,
+    "polaris": {
+      "host": [
+        "layout.itemSpacing",
+        "layout.padding.top",
+        "layout.padding.left"
+      ],
+      "compile": [
+        "layout.itemSpacing",
+        "layout.padding.top",
+        "layout.padding.left"
+      ],
+      "hostBindingsLength": 3,
+      "compileBindingsLength": 3,
+      "fieldsMatchCompileOrder": true
+    },
+    "v68TeachingHeld": true
+  },
+  "observedSurfaceBindingsMui": {
+    "hostBindingsLength": 12,
+    "compileBindingsLength": 12,
+    "fieldsMatchCompileOrder": true
+  },
+  "observedPolarSurfaceBindings": {
+    "host": [
+      "layout.itemSpacing",
+      "layout.padding.right",
+      "layout.padding.left",
+      "layout.height.value",
+      "layout.minWidth",
+      "layout.minHeight",
+      "fills.0.color",
+      "strokes.0.weight",
+      "strokes.0.paint.color",
+      "cornerRadius.topLeft",
+      "cornerRadius.topRight",
+      "cornerRadius.bottomRight",
+      "cornerRadius.bottomLeft"
+    ],
+    "compile": [
+      "layout.itemSpacing",
+      "layout.padding.right",
+      "layout.padding.left",
+      "layout.height.value",
+      "layout.minWidth",
+      "layout.minHeight",
+      "fills.0.color",
+      "strokes.0.weight",
+      "strokes.0.paint.color",
+      "cornerRadius.topLeft",
+      "cornerRadius.topRight",
+      "cornerRadius.bottomRight",
+      "cornerRadius.bottomLeft"
+    ],
+    "hostBindingsLength": 13,
+    "compileBindingsLength": 13,
+    "fieldsMatchCompileOrder": true,
+    "v69TeachingHeld": true
+  },
+  "observedIndependentRootAccounting": {
+    "mui": {
+      "matched": 22234,
+      "silent": 577,
+      "mismatch": 577,
+      "missing": 0,
+      "extra": 0,
+      "byChannel": {
+        "name": 448,
+        "instancePayload": 128,
+        "variantAxis": 1
+      }
+    },
+    "polaris": {
+      "matched": 20274,
+      "silent": 641,
+      "mismatch": 641,
+      "missing": 0,
+      "extra": 0,
+      "byChannel": {
+        "name": 448,
+        "instancePayload": 128,
+        "effect": 64,
+        "variantAxis": 1
+      }
+    },
+    "sampledClasses": {
+      "nameFontProvenanceKeyOrderBoth": 896,
+      "instancePayloadFillsKindSolidVsTypeSOLIDBoth": 256,
+      "polarisInstancePayloadIntrinsicSizeWidth8to9": 64,
+      "polarisInstancePayloadIntrinsicSizeWidth25_78125to30": 64,
+      "polarisEffectDropShadowSpread1to0": 32,
+      "polarisEffectDropShadowSpread3to0": 32,
+      "variantAxisSizeValuesOrderSwapBoth": 2
+    },
+    "nameProvenanceCanonicalKeysMatch": true,
+    "recipeRefusalDidNotFire": true
+  },
+  "failure": {
+    "phase": "independent-root-accounting",
+    "locus": "recipe/input-field-live-v69-contract.ts:487",
+    "messages": [
+      "Input live v12 independent root accounting failed: mui:missing=0,extra=0,mismatch=577,duplicate=0,unobserved=0,silent=577;polaris:missing=0,extra=0,mismatch=641,duplicate=0,unobserved=0,silent=641"
+    ],
+    "cause": "Scene-readback-v69 ordered Polar surface bindings so layout.itemSpacing sits at compile index 0. Polar host surface is now [layout.itemSpacing, layout.padding.right, layout.padding.left, layout.height.value, layout.minWidth, layout.minHeight, fills.0.color, strokes.0.weight, strokes.0.paint.color, cornerRadius.topLeft, cornerRadius.topRight, cornerRadius.bottomRight, cornerRadius.bottomLeft] and matches compile. V69 teaching held. Polar label-row remains compile order (v68 teaching held). Set strokes omitted both; extract strokes is [] both; compile omits strokes both. V67 teaching held. Extract layoutSizingHorizontal remains HUG both (MUI hug width 31656, Polar hug width 33050). Host IR layout.width is {mode:hug} / {mode:hug}. Compile emits hug. V66 teaching held. Pixel widths remain library-specific hug extents; they were not taught as FIXED and were not compile-carried. Host-normalize / recipe-collapse did not refuse. Independent root accounting then failed: MUI silent 577 (448 name, 128 instancePayload, 1 variantAxis) and Polar silent 641 (448 name, 128 instancePayload, 64 effect, 1 variantAxis). Sampled name mismatches are font-provenance JSON key order only (expected fallbackChain-first; observed requestedFamily-first; same canonical keys). Sampled instancePayload mismatches are fills[0] kind:solid vs type:SOLID on both libraries (128 each); Polar also drifts intrinsicSize.width 8→9 (64) and 25.78125→30 (64). Polar effect mismatches are drop-shadow spread 1→0 (32) and 3→0 (32). Both roots swap variantAxis Size values [small,medium] vs [medium,small]. This is expected-plan vs observe fact-value drift, not a binding-order gate and not a compile-absent omit. These silent mismatches were hidden behind the prior recipe-refusal gate. Do not invent a teaching. Do not invent a binding. Do not compile-carry Polar encounter order. Do not teach FIXED. Do not invent a stroke. Do not omit layout.width.mode. Do not change set layout.mode back to vertical. Do not restart v69 attempt 2 as-is. Do not patch hashed v16, v17, v68, or v69 writer or scene-readback bytes. Do not casually unfreeze the writer. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436209 bytes, sha256 863c06fd37f14dba0d73d2b7b49d348ee41e9a78e577eda564b62f41b423e36c). Content-width census is MUI 128/128 FILL and Polar 128/128 FILL. Extract content-height is MUI 24 FIXED / 104 HUG and Polar 128 HUG. New page 108:231754 (not 108:229025, not 108:226296). Cleanup accepted; remainingOwnedNodes 0.",
+    "inputFieldRecipeInV69AntecedentHashSet": false,
+    "writerInV69AntecedentHashSet": true,
+    "restoreInV69AntecedentHashSet": true,
+    "extractRuntimeInV69AntecedentHashSet": true,
+    "sceneReadbackInV69AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "108:231754",
+    "removedPageNodeId": "108:231754"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16WriterProgramUnchanged": true,
+  "v16WriterPayloadUnchanged": true,
+  "v17WriterMinted": true,
+  "v68SceneReadbackUnchanged": true,
+  "v68AuthorizationReusable": false,
+  "v68AntecedentBytesUnchanged": true,
+  "v69SceneReadbackUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV69Attempt2WithoutAccountingFactValueDiagnosisForbidden": true
+}

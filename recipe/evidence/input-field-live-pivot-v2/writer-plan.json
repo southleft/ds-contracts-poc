@@ -1,0 +1,101 @@
+{
+  "version": 2,
+  "kind": "input-field-recipe-live-writer-plan",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "pageName": "Recipe Pivot / Input Field / e4ac8bb8-f30a3672-input-v2",
+  "runIdentity": "e4ac8bb8-f30a3672-input-v2",
+  "writer": {
+    "path": "recipe/evidence/input-field-live-pivot-v2/writer.js",
+    "bytes": 1709077,
+    "sha256": "05481c74cb445a6fb55375260b65ee15cde893d19eadeed002e386776962df55",
+    "deterministicRegeneration": "pass-two-complete-generations"
+  },
+  "transport": {
+    "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
+    "encoding": "utf8+base64",
+    "payloadBytes": 1709077,
+    "payloadSha256": "05481c74cb445a6fb55375260b65ee15cde893d19eadeed002e386776962df55",
+    "envelopePath": "recipe/evidence/input-field-live-pivot-v2/transport-envelope.json",
+    "envelopeSha256": "58f972bdbccced4e739ea1a662df50b9a612b8f502e2633078087e6b02c1286a",
+    "wrapperPath": "recipe/evidence/input-field-live-pivot-v2/writer-wrapper-attempt-2.txt",
+    "wrapperBytes": 2284316,
+    "wrapperSha256": "589f3e625813ca43f2caf65b58f00556a2702745e0270fdbe6cfa5c106df14c0",
+    "preEvalChecks": [
+      "exact Scratch file key/name/editor",
+      "strict canonical base64",
+      "decoded byte length",
+      "decoded SHA-256",
+      "fatal UTF-8 decode"
+    ]
+  },
+  "pluginApi": {
+    "typingsVersion": "1.135.0",
+    "conformanceReport": "recipe/evidence/input-field-live-pivot-v2/conformance-report.json",
+    "counts": {
+      "apiCalls": 15,
+      "propertyNames": 52,
+      "variants": 256,
+      "variables": 158,
+      "pluginDataWrites": 19065,
+      "propertyWrites": 35425,
+      "bindings": 8448
+    }
+  },
+  "sources": [
+    {
+      "adapterIdentity": "material-text-field-reviewed-v1",
+      "displayName": "Material source",
+      "contractPath": "examples/mui/contracts/text-field.contract.json",
+      "contractSha256": "82cd6e0b499e4d0022ead243a65f7ba2b5a3523821a8192c90f21def5c542186",
+      "recipeHash": "e4ac8bb8272dd115d596a44251cc06d4e4ea95a99c1a5732cea23adda0ecdc4c",
+      "envelopeHash": "6ec7c1832acd197625820968b6df0feef39c11054f62c91b4c15218960983a29",
+      "plannedVariants": 128,
+      "plannedVariables": 81,
+      "comparedIrFacts": 10119
+    },
+    {
+      "adapterIdentity": "commerce-text-field-reviewed-v1",
+      "displayName": "Commerce source",
+      "contractPath": "examples/polaris/contracts/text-field.contract.json",
+      "contractSha256": "4bef6c13790d8e9319333c5f07be06ad53c39f1c8d493e9572faed2aab3f4530",
+      "recipeHash": "f30a3672046fb6db48e434bd34574b47b783fcdbaf92ec58d65994e887d11117",
+      "envelopeHash": "9fe76c8e6c2ae7fbf315998f8007e1c7c14204f184a7635a71074f8725e70cb0",
+      "plannedVariants": 128,
+      "plannedVariables": 77,
+      "comparedIrFacts": 9351
+    }
+  ],
+  "attempts": {
+    "maximum": 3,
+    "planned": 2,
+    "executed": 1,
+    "history": [
+      {
+        "attempt": 1,
+        "result": "failed-source-fixed-invalid-x-variable-binding",
+        "writerPath": "recipe/evidence/input-field-live-pivot-v2/writer-attempt-1.js",
+        "writerSha256": "b3efd51fd85e6828ef0c0827ad632cca86420140cbd0880631300cc917ed5943",
+        "wrapperPath": "recipe/evidence/input-field-live-pivot-v2/writer-wrapper-attempt-1.txt",
+        "wrapperSha256": "c3b8ad5d296ed8ab8c9aeb6e9ae2338725f4c311b2c224bcc9e681c94d0b465c",
+        "resultPath": "recipe/evidence/input-field-live-pivot-v2/live-attempt-1.json",
+        "cleanupPath": "recipe/evidence/input-field-live-pivot-v2/cleanup-attempt-1.json"
+      }
+    ]
+  },
+  "provenance": {
+    "commit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "branch": "pivot/recipe-ir-v1",
+    "dirty": true,
+    "dirtyStatusSha256": "4bf835767cc0fcc5a6ea76873af643fb9dfe0eb80be60d0d5f39eb8111c4be70"
+  },
+  "status": {
+    "objectiveV2": "pass-locked-128-of-128",
+    "live": "pending",
+    "humanRecognisability": "pending-independent-designer-signoff",
+    "overallInputSuccess": false
+  }
+}

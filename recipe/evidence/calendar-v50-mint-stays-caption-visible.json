@@ -1,0 +1,77 @@
+{
+  "artifactVersion": "calendar-v50-mint-stays-caption-visible-v1",
+  "status": "THE MINT STAYS; extract green; caption visible",
+  "antecedent": {
+    "prepare": "d94ea122f5b5fbce3738dd46b9c80836e721f947",
+    "authorize": "e835e54da"
+  },
+  "runIdentity": "4604bbfe-calendar-v50",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "acceptance": {
+    "writer": true,
+    "restore": true,
+    "extract": true,
+    "probe": true,
+    "captures": "all 8 capture cells / 20 capture responses accepted; broker status main-complete",
+    "cleanupPersistedNotExecuted": true
+  },
+  "page": {
+    "pageId": "181:64873",
+    "section": "181:64874",
+    "daySet": "181:64913",
+    "weekSet": "181:64959",
+    "calendarSet": "181:65263",
+    "openUrl": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=181-64873",
+    "arrangement": "writer-native single section, three sets stacked with clear spacing, no overlap, no generic Component Container; arrange tool not called (V23 lesson)"
+  },
+  "measured": {
+    "captionVisible": true,
+    "captionCharacters": "April 2026",
+    "captionFont": { "family": "Roboto", "style": "Medium" },
+    "captionFillWidth": 192,
+    "captionRenderBounds": { "width": 63.75, "height": 13.34 },
+    "captionBetweenChevrons": true,
+    "grids": { "on": 6, "off": 6 },
+    "navGlyphs": ["‹", "›"],
+    "dayButton": { "width": 28, "height": 28, "radius": 14 },
+    "selectedFill": "#0064E0",
+    "rootPadding": 12,
+    "rootMinWidth": 220,
+    "captureMonth": "April 2026",
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false
+  },
+  "screenshotVerdict": {
+    "sixRowMonth": true,
+    "chevrons": true,
+    "circularSelected": true,
+    "captionAprilTwentyTwentySixVisible": true,
+    "daySetDefaultTodaySelectedOutsidePaint": true,
+    "weekSetOnOffPaint": true
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781",
+    "olderCalendarMints": ["173:53929", "179:54747", "180:55345", "180:55528"]
+  },
+  "olderCalendarPagesNotCleaned": "signed-clean of older Calendar pages is permitted now that V50 stays, but their transactions are closed; left for a dedicated signed cleanup",
+  "stillReceipted": [
+    "hasOutsideDays",
+    "dark token half of every light-dark() pair",
+    "day-grid gap (source has none — no invented 8px)",
+    "weekday 12px vs day 14",
+    "outside opacity 0.5",
+    "transparent surface",
+    "dayName.paddingBottom 4px"
+  ],
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}

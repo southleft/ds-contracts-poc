@@ -1,0 +1,69 @@
+{
+  "artifactVersion": "calendar-v29-tj-review-measure-v1",
+  "measuredAt": "2026-08-30T10:06:00-05:00",
+  "record": "dc985524a",
+  "pageId": "180:55528",
+  "calendarSetId": "180:55707",
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-55528",
+  "verbatimAbbrev": "looking much better; continue the hill climb. Vertical spacing between August 2026 and the date grid is very tight. Not a full calendar — ~3 weeks. Only Astryx — should Fluent / Polaris / MUI also be minted?",
+  "doNotInvent": true,
+  "doNotInventHumanGrade": true,
+  "productV1Complete": false,
+  "captionGap": {
+    "live": {
+      "variantItemSpacing": 0,
+      "variantPadding": [0, 0, 0, 0],
+      "captionY": 0,
+      "captionHeight": 16,
+      "weekdayRowY": 16,
+      "gridY": 32,
+      "gapCaptionToWeekday": 0
+    },
+    "compile": {
+      "v29BoundTo": "tokens.gridGap",
+      "astryxGridGap": 0
+    },
+    "source": {
+      "named": true,
+      "pointer": "@astryxdesign/core/src/Calendar/styles.ts#/calendarStyles/header/marginBottom",
+      "token": "--spacing-2",
+      "resolvedPx": 8,
+      "notThisLanding": "header.gap --spacing-2 is horizontal chrome; daysGrid has no gap; a previous adapter that minted 8px as gridGap was refused"
+    },
+    "decision": "named in source and live dropped it onto gridGap=0. One PREPARE teaching: compile-carry header.marginBottom as tokens.captionGap (calendar variant itemSpacing). Do not invent 8px. Do not bind it as the day-grid gutter."
+  },
+  "weekCount": {
+    "liveWeekRows": 3,
+    "compile": 3,
+    "fixture": 3,
+    "fixtureWindow": "August 2026 Sunday-start 26-31+1 / 2-8 / 9-15; week numbers 31, 31, 32",
+    "sourceDefault": "hasVariableRowCount default false → fixed 6-row month",
+    "receipt": "@astryxdesign/core/src/Calendar/hooks/useCalendarDays.ts#/hasVariableRowCount",
+    "silentLoss": false,
+    "decision": "fixture-complete. Do not remint to invent remaining weeks. Do not invent January vs February cosmetics. Named axis remains WeekNumbers on|off only."
+  },
+  "otherLibraries": {
+    "reviewedCalendarAdapters": ["astryx-calendar-reviewed-v1"],
+    "namedRefusals": [
+      "react-day-picker@10.0.1 held blind by examples/day-picker/PROVENANCE.md",
+      "extract/pilots/eventz/out/contracts/date-picker.contract.json is props: [] / anatomy: { root: {} }",
+      "unsupportedCells include antd-datepicker and mui-datepicker"
+    ],
+    "searchedNotReviewed": [
+      "no Fluent calendar adapter",
+      "no MUI calendar adapter",
+      "Polaris DatePicker exists only as examples/polaris/extraction/proposals.md — not a human-reviewed calendar@1 adapter"
+    ],
+    "decision": "Astryx only because no other human-reviewed calendar source exists. Do not invent a second library. Do not invent Polar tokens."
+  },
+  "siblingsUntouched": {
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781",
+    "v23": "173:53929",
+    "v27": "179:54747",
+    "v28": "180:55345",
+    "v29": "180:55528"
+  }
+}

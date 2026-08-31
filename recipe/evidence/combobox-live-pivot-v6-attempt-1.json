@@ -1,0 +1,115 @@
+{
+  "artifactVersion": "combobox-live-v6-attempt-1-v1",
+  "status": "failed closed at collapse non-instance repetition; observeSceneFacts live-root teaching cleared; extract walk cleared; restore 144 held; cleanup accepted; mint did not stay",
+  "authorizationCommit": "525f829d3cf7b44465e177d99d38f28afaf5f5ed",
+  "codeCommit": "525f829d3cf7b44465e177d99d38f28afaf5f5ed",
+  "antecedentCommit": "3dff88b41a18146b80318062921ecb082c31b9d8",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host observeSceneFacts must project with the live scene root ownershipKey, not default root",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "131:311324",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["131:312188", "131:311419", "131:313052", "131:312283"],
+    "muiOptionSetId": "131:311419",
+    "muiComboboxSetId": "131:312188",
+    "antdOptionSetId": "131:312283",
+    "antdComboboxSetId": "131:313052",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "b918b5eb68ef8e8f44611fe7b8a9806360b97c56ef991b77b2c17fc0d8e23120",
+    "hostObserveSceneFactsCleared": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "non-instance repetition",
+    "refused": "non-instance repetition; four option instances are required",
+    "refusedVariantRole": "combobox/variant/small/outlined/true/default/options",
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveOptionInstanceKinds": [
+      "INSTANCE",
+      "INSTANCE",
+      "INSTANCE",
+      "INSTANCE"
+    ],
+    "measuredLiveOptionInstanceComponentRefs": [
+      "Size=small, Option state=selected",
+      "Size=small, Option state=highlighted",
+      "Size=small, Option state=disabled",
+      "Size=small, Option state=default"
+    ],
+    "requiredCollapseComponentRef": "combobox@1/option",
+    "sceneToNormalizedIrCopiesLiveComponentRef": true,
+    "observeSceneFactsLiveRootTeachingCleared": true,
+    "namedFromSource": "v6 live-root teaching cleared; extract walked four option INSTANCE children with roles combobox/option-instance/0..3; sceneToNormalizedIr copies live Figma main-component names as componentRef; collapse validateComboboxStructure then requires componentRef combobox@1/option and refuses non-instance repetition"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "96cd507663cd36ceb701e713dc887a4515f285dc183d5d719038468af915d89b",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "131:311324",
+    "removedCollectionIds": [
+      "VariableCollectionId:131:311326",
+      "VariableCollectionId:131:312190"
+    ]
+  },
+  "nextTeaching": {
+    "class": "non-instance repetition",
+    "doNotInvent": true,
+    "restartV6Attempt2AsIs": false,
+    "prepareV7": "host sceneToNormalizedIr must recover option-instance componentRef as combobox@1/option, not the live Figma main-component name"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

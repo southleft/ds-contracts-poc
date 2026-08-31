@@ -1,0 +1,66 @@
+{
+  "artifactVersion": "combobox-live-v1-attempt-1-v1",
+  "status": "failed closed at restore; cleanup accepted; mint did not stay",
+  "authorizationCommit": "3b5f3ad43f864358e31cf964d33659f1f7bb9a79",
+  "codeCommit": "3b5f3ad43f864358e31cf964d33659f1f7bb9a79",
+  "antecedentCommit": "a82913ae045a81b06c7703ac157e3fcd0ae54870",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "126:302679",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "firstCallRefusedCurrentPageWasInput": true,
+    "retriedAfterLeavingInputPage": true,
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": false,
+    "accepted": false,
+    "refusedClass": "COMBOBOX-V1-RESTORE-COUNT",
+    "observedCount": 240,
+    "expectedCount": 144,
+    "measuredOwnedInputs": 128,
+    "measuredOptionSetLabels": 16,
+    "measuredNestedOptionLabelsInsideComboboxSet": 96,
+    "nestedOptionLabelsPerComboboxSet": 48,
+    "namedFromSource": "3 options × 16 open+options variants per combobox/set"
+  },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "inputPageChildCount": 4
+  },
+  "nextTeaching": {
+    "class": "restore nested option labels inside combobox/set",
+    "doNotInvent": true,
+    "restartV1Attempt2AsIs": false,
+    "prepareV2": "restore option/label only from option-set; restore input only from combobox/set; keep 144 owned FILL texts"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

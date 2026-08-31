@@ -1,0 +1,202 @@
+{
+  "version": 1,
+  "kind": "button-recipe-live-figma-proof",
+  "status": {
+    "bridgeReadOnly": "pass",
+    "liveWrite": "blocked-after-three-attempts",
+    "cleanup": "pass",
+    "screenshots": "not-produced",
+    "blindPacket": "blocked-no-live-specimens",
+    "usability": "hard-fail-zero-denominator",
+    "liveReadback": "hard-fail-zero-compared-facts",
+    "fixedPoint": "hard-fail-zero-compared-facts",
+    "liveAccounting": "hard-fail-zero-compared-facts",
+    "independentCanvasGrade": "pending",
+    "buttonSuccess": false
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "bridgeTransport": "websocket",
+    "bridgeProbe": "pass",
+    "pageName": "Recipe Pivot / Button / ae57b16a-5c52de74",
+    "pageExistedBefore": false,
+    "pageExistsAfterCleanup": false,
+    "matchingVariableCollectionsAfterCleanup": 0
+  },
+  "provenance": {
+    "commit": "047f66b8e134a6bc173e9336621fc1baf0e37230",
+    "branch": "pivot/recipe-ir-v1",
+    "dirty": true,
+    "writerPlan": "recipe/evidence/button-live-pivot/writer-plan.json",
+    "writerPlanSha256": "3490585cf531590fcf70a5daa174be7f9d103cb326e55df44e4b76c08a445518",
+    "finalOfflineWriter": "recipe/evidence/button-live-pivot/writer.js",
+    "finalOfflineWriterBytes": 29481,
+    "finalOfflineWriterSha256": "45fda4b78fb5f77f6554eac02cbf54213e206d8b817610e8edcd7ca7065b33f8",
+    "finalOfflineWriterExecuted": false
+  },
+  "sources": [
+    {
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "recipeHash": "ae57b16ab50438ea3f00b0690933e0b7850742225afad3df275465fb7fc2b923",
+      "envelopeHash": "73b9c0ccc268545d711e55fd4ae3e8081e1708d6a27059e6779e42b3e81735bb",
+      "declaredVariants": 144,
+      "plannedVariants": 144,
+      "mintedVariants": 0,
+      "plannedPrimitiveIrFacts": 3978,
+      "liveComparedFacts": 0
+    },
+    {
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "recipeHash": "5c52de7484830d735f375d52ee26d86ed6d5c24f528ff5815d41ea17fa622cc7",
+      "envelopeHash": "9b5626840521a733ea2ef28b7cdc5f5d5b3b673229336ab58f11e82a0a120afd",
+      "declaredVariants": 144,
+      "plannedVariants": 144,
+      "mintedVariants": 0,
+      "plannedPrimitiveIrFacts": 3978,
+      "liveComparedFacts": 0
+    }
+  ],
+  "attempts": [
+    {
+      "attempt": 1,
+      "generatedWriterSha256": "c9381c14808169471b84aed2ba9d8d6f335834130dd8130fdbbba164bda4bc5c",
+      "result": "failed",
+      "error": "setSharedPluginData namespace may contain only alphanumeric characters, underscore, or period",
+      "createdPageId": "85:4801",
+      "cleanup": {
+        "removedPageId": "85:4801",
+        "removedChildren": 0
+      }
+    },
+    {
+      "attempt": 2,
+      "generatedWriterSha256": "ae0d8bb271524746e988ba438167b4fea729230405daca4885a80fbf07928c16",
+      "result": "failed",
+      "error": "figma.createAutoLayout is not a function in the raw Desktop Bridge Plugin API",
+      "createdPageId": "85:4802",
+      "partialSectionId": "85:4803",
+      "cleanup": {
+        "removedSectionIds": ["85:4803"],
+        "removedVariableCollections": 1
+      }
+    },
+    {
+      "attempt": 3,
+      "generatedWriterSha256": "6853c7820caad8702e086d9eba0e7093d44f4fe61eb626584caa1984a7d4238f",
+      "result": "failed",
+      "error": "createVariable rejected the source token identity as an invalid Figma variable name",
+      "reusedPageId": "85:4802",
+      "partialSectionId": "85:4805",
+      "orphanComponentId": "85:4812",
+      "cleanup": {
+        "removedSectionIds": ["85:4805"],
+        "removedVariableCollections": 1,
+        "removedPageId": "85:4802",
+        "removedOrphanNodeIds": ["85:4812"]
+      }
+    }
+  ],
+  "screenshots": [],
+  "usability": {
+    "setsProbed": 0,
+    "reflow": {
+      "denominator": 0,
+      "passed": 0,
+      "verdict": "hard-fail"
+    },
+    "variantSwitching": {
+      "denominator": 0,
+      "passed": 0,
+      "verdict": "hard-fail"
+    },
+    "tokenBinding": {
+      "denominator": 0,
+      "passed": 0,
+      "verdict": "hard-fail"
+    },
+    "noFakeLayout": {
+      "denominator": 0,
+      "passed": 0,
+      "verdict": "hard-fail"
+    },
+    "restorationBeforeHash": null,
+    "restorationAfterHash": null,
+    "restored": false,
+    "blocker": "No complete minted set survived the capped writer attempts."
+  },
+  "readback": {
+    "setCount": 0,
+    "normalizedPrimitiveIr": [],
+    "selectedButtonCollapseCount": 0,
+    "comparedFacts": 0,
+    "comparedProperties": [],
+    "exclusions": ["node IDs", "page placement"],
+    "cyclesCompleted": 0,
+    "twoCompleteCyclesStable": false,
+    "verdict": "hard-fail"
+  },
+  "accounting": {
+    "offlineSourceAndCompiledIr": {
+      "altitude-button-reviewed-v2": {
+        "factsCompared": 21,
+        "measuredLandings": 21,
+        "carried": 17,
+        "codeOnly": 3,
+        "namedRefused": 1,
+        "failures": []
+      },
+      "fluent-button-reviewed-v2": {
+        "factsCompared": 21,
+        "measuredLandings": 21,
+        "carried": 17,
+        "codeOnly": 3,
+        "namedRefused": 1,
+        "failures": []
+      }
+    },
+    "liveReadback": {
+      "factsCompared": 0,
+      "carried": 0,
+      "codeOnly": 0,
+      "namedRefused": 0,
+      "silent": 0,
+      "verdict": "hard-fail-zero-denominator"
+    },
+    "plantedChecksRequiredByReader": [
+      "source fact omission",
+      "source fact disposition mislabel",
+      "forged nonzero live comparison"
+    ]
+  },
+  "blindPacket": {
+    "status": "blocked-no-live-specimens",
+    "packetPath": null,
+    "canvasPath": null,
+    "recognisabilityVerdictsAuthoredByBuilder": false,
+    "sampleKeys": [
+      "altitude/variant=primary/state=default",
+      "altitude/variant=primary/state=hover",
+      "altitude/variant=primary/state=focus-visible",
+      "altitude/variant=secondary/state=default",
+      "altitude/variant=secondary/state=hover",
+      "altitude/variant=secondary/state=focus-visible",
+      "fluent/variant=primary/state=default",
+      "fluent/variant=primary/state=hover",
+      "fluent/variant=primary/state=focus-visible",
+      "fluent/variant=secondary/state=default",
+      "fluent/variant=secondary/state=hover",
+      "fluent/variant=secondary/state=focus-visible"
+    ],
+    "originalSourceReceipt": "recipe/evidence/button-comparison-v2/receipt.json",
+    "blocker": "Live specimens and representative set screenshots do not exist after the capped writer failures."
+  },
+  "blockers": [
+    "The three live writer attempts were exhausted before either component set completed.",
+    "No live set IDs, section IDs, variant counts, screenshots, usability denominators, normalized readback, collapse, or fixed-point cycles exist.",
+    "The final offline correction uses valid generated Figma variable names and stores original token identities in shared plugin data, but safety forbids a fourth live attempt.",
+    "Independent canvas grading cannot start without fresh live screenshots; prior offline recipe screenshots cannot substitute for live Figma specimens."
+  ],
+  "independentCanvasGradingTask": "After a future explicitly authorized live run succeeds on Scratch Project only, capture the 12 live medium/Icons=none paired cells for Altitude and Fluent plus whole-set screenshots; copy the exact original-source references and sample keys from recipe/evidence/button-comparison-v2/receipt.json; create a new opaque packet with one original-source reference and one live-Figma specimen per cell, randomized labels, no source/implementation identifiers, null grades, and a separate sealed answer key; render that packet in a Cursor canvas; then have an independent grader score recognisability, defects, and confidence without access to the key. Recompute results only after packet, image, reference, environment, and key hashes pass. Do not reuse v1/v2 grades and do not set Button success true until this grade plus live usability, readback, two-cycle fixed point, and zero-silent accounting all pass."
+}

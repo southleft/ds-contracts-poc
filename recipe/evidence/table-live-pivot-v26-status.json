@@ -1,0 +1,25 @@
+{
+  "artifactVersion": "table-live-v26-status-v1",
+  "status": "attempt 1 failed closed at probe usability/restoration; extract ACCEPTED for the first time (IR fixed point and independent root accounting both passed); writer accepted; restore 8 held; signed cleanup executed; Input, Combobox and Button pages stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "2c7981776868924c2d8a2871bf97ed36dad035d3"
+  },
+  "authorization": {
+    "commit": "4a9010dbf9e817699e1f1491853a2eda85b409fb"
+  },
+  "attempt1": {
+    "pageId": "173:46840",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "restoredCount": 8,
+    "extractAccepted": true,
+    "probeAccepted": false,
+    "probeFailures": ["reflowPassed", "overlapPixels"],
+    "cleanupExecuted": true
+  },
+  "nextTeaching": "probe: containment is not overlap (v27). Open human gate: whether the table root stays hug-contents or becomes resizable, and whether table@1 gains a per-column width model.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

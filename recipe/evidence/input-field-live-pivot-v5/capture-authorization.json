@@ -1,0 +1,135 @@
+{
+  "artifactVersion": "input-live-v5-capture-authorization-v1",
+  "authorizationId": "input-live-v5",
+  "status": "prepared uncommitted; capture forbidden",
+  "antecedent": {
+    "executableCommit": "a29d034b746d0831ce93f88f1aeb5630ad4b0453",
+    "protocolFirstAddCommit": "e9f9712a55147a4329f51cfd4bf024866dfd489f",
+    "protocol": {
+      "semanticVersion": "input-live-v5-protocol-draft-v1",
+      "path": "recipe/evidence/input-field-live-pivot-v5/protocol.json",
+      "sha256": "6fdc4b99923aed0990a1f46fe1bdce620e2f63f0b38263983cd2da5443d9b6cf"
+    },
+    "dependencies": {
+      "recipe/build-input-field-live-proof-v5.ts": "d2f650125305b4c4e0b2402979d6456e5f4a0d7af315b25f38d587b6b1e780ef",
+      "recipe/input-field-live-v5-authorization.ts": "fb1a550be331d3cc1d90e453180f8e63bc68772745e36aa834ed32eaafa4bd5d",
+      "recipe/input-field-live-v5-journal.ts": "e521c21e68754188ebe166fccfc5160867610026477614395b750f4c08d695cf",
+      "recipe/input-field-live-v5-preflight.ts": "21ce81a912ffa58ecd458cade70e65a2eea8f8ae6b142f5ca3b6f1bdec7eeaec",
+      "recipe/run-input-field-live-v5.ts": "278c6c9a06dd9cf22c34b4ec55b9f8e64b2ccb3aa806ad7e3ca1fcbc2b64a313",
+      "recipe/input-field-live-v5.test.ts": "4f1ea794d8fa68b7258d1a132d074b920975d123f0f75324733282681fe187a5",
+      "recipe/input-field-live-v4-verifier.ts": "417d849f40edf39b5073bd26e938212888476cbabc89a4c09e4cf305b5811cd1",
+      "recipe/figma-property-normalizer.ts": "7a92fab6779d9b3243b397a4e6ed8c8622a52a244933fb2b2a0a1e2e8ebce54b",
+      "recipe/input-field-figma-writer-v2.ts": "a75c77c3c129cac56af7ed92fbe35eb08e50eede7d996e5e4ceb6757c4df11a3",
+      "recipe/figma-runtime-portability.ts": "df0ada6caea5cf05c9f46552cbf675b76e029438f75a9805802b1446ab3a034f",
+      "recipe/writer-transport.ts": "fa8456e57342b1fee339d4d3e53e4b6dda85e94f777277bcfaaf5ab06e09cc1d",
+      "recipe/evidence/input-field-live-pivot-v5/writer.js": "aedb679f27be7b8159f4822f5cfb61aeef7f85e7ea824af884f14ad2f3c5e1a2",
+      "recipe/evidence/input-field-live-pivot-v5/transport-envelope.json": "757aa01187827151a0a5a3fe6db6d0385f464a8a76eccc58cf1f6d43c8feb836",
+      "recipe/evidence/input-field-live-pivot-v5/writer-wrapper.txt": "a839d5bd2304fa18b449692676345486606bca6a79dd8bd84e8b9b307b9f7826",
+      "recipe/evidence/input-field-live-pivot-v5/writer-plan.json": "d6ff229c9187f814fdd97698a5302ec0b982947b4aef3732edaf943d6daaf848",
+      "recipe/evidence/input-field-live-pivot-v5/conformance-report.json": "05e0d5fcf4f37c28774c2812fda0568616ef4b803488186fa097fa075a189755",
+      "recipe/evidence/input-field-live-pivot-v5/expected-scene-plan-mui.json.gz": "96e8d543b259066268af2d871f1a0258bdd3173b5c4402ed3f4d57296cfddfa3",
+      "recipe/evidence/input-field-live-pivot-v5/expected-scene-plan-polaris.json.gz": "6e6517f9a819ce6cffff9e6bda913f3c9c8bdd6d0da95bcebffcdb972bbcd41d"
+    },
+    "preservedEvidenceTrees": {
+      "recipe/evidence/input-field-live-pivot-v3": "705fbd0c5be0f66a8945bd9a7bde89b99d02b106",
+      "recipe/evidence/input-field-live-pivot-v4": "85c3c9c69b4a2652cf043d693155015bf50011c8"
+    }
+  },
+  "authorizationCommitDiscovery": {
+    "rule": "the authorization commit is the unique first commit that adds this artifact",
+    "command": "git log --reverse --diff-filter=A --format=%H <codeCommit> -- recipe/evidence/input-field-live-pivot-v5/capture-authorization.json",
+    "commitNotEmbeddedInArtifact": true,
+    "mustStrictlyDescendFromExecutableAntecedent": true,
+    "artifactBytesMustRemainEqualToFirstAddition": true
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "capture": {
+    "status": "capture may occur only after authorization and every preflight gate pass from a clean upstream-equal descendant",
+    "codeCommitMustDescendFromExecutableAntecedentAndAuthorization": true,
+    "cleanWorktreeRequired": true,
+    "upstreamEqualityRequired": true,
+    "authorizedWritableFigmaFileKeys": ["byMp6lt0Ij9b2QbkDGFwBh"],
+    "maximumAttempts": 3,
+    "attemptChronology": "attempt must equal completed v5 attempts plus one",
+    "evidenceRoot": "recipe/evidence/input-field-live-pivot-v5",
+    "v3OrV4EvidenceReuseForbidden": true
+  },
+  "requiredGates": {
+    "sameEntrypointOfflineSmoke": {
+      "runnerPath": "recipe/run-input-field-live-v5.ts",
+      "testPath": "recipe/input-field-live-v5.test.ts",
+      "usesLiveEntrypointOrchestration": true,
+      "generatedWriterPayloadEvaluated": true,
+      "fakeBridgePermittedOnlyWithSimulatedOfflineAuthorization": true
+    },
+    "transactionalPhases": [
+      "preflight",
+      "writer-result",
+      "raw-scene-and-variable-table",
+      "host-normalization",
+      "accounting-and-fixed-point",
+      "usability-and-restoration",
+      "captures-and-objective",
+      "retention-and-cleanup"
+    ],
+    "transactionalJournal": {
+      "hashChained": true,
+      "persistImmediatelyAfterPhaseReturn": true,
+      "cleanupUsesPersistedWriterOwnership": true,
+      "captureAfterAllTechnicalGatesOnly": true
+    },
+    "normalization": {
+      "rawSceneAndLocalVariableTableRequired": true,
+      "bindingAliasesResolvedOnlyThroughCapturedTable": true,
+      "typedUnitsPreserved": true,
+      "namedRefusalsRequired": true
+    },
+    "sceneDerived": {
+      "occurrencePreservingMultisetAccounting": true,
+      "silentCountDerived": true,
+      "sourceIrReadbackForbidden": true,
+      "twoCycleFixedPointRequired": true
+    },
+    "beforeCapture": [
+      "raw scene and local-variable table persisted",
+      "host binding and unit normalization passed",
+      "occurrence-preserving accounting passed",
+      "two-cycle scene-derived fixed point passed",
+      "all-axis usability and exact restoration passed",
+      "clipping and overlap passed",
+      "actual adornment content and accessibility payload passed",
+      "state semantics and typed bindings passed",
+      "font provenance or named refusal passed"
+    ],
+    "cleanup": {
+      "freshOwnedPagePerAttempt": true,
+      "exactPersistedIdsRequired": true,
+      "remainingOwnedNodes": 0,
+      "remainingOwnedCollections": 0
+    },
+    "objective": {
+      "strata": ["source", "state", "adornment"],
+      "recipeWinsMustExceedLegacyLosses": true,
+      "aggregateRecipeErrorsMustBeLower": true,
+      "catastrophicCellRuleInheritedOnlyFromPinnedProtocol": true,
+      "exactPixelDifferenceDiagnosticOnly": true
+    },
+    "humanSignoff": {
+      "mandatory": true,
+      "status": "pending",
+      "attributableReviewerRequired": true,
+      "builderOrAnonymousSignoffAccepted": false,
+      "overallSuccessBeforeSignoff": false
+    }
+  },
+  "criterionPolicy": {
+    "onlyPinnedProtocolDefinesAcceptance": true,
+    "protocolCriteriaAltered": false,
+    "posthocFieldsForbidden": true,
+    "captureDataPresent": false
+  }
+}

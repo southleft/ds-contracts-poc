@@ -1,0 +1,176 @@
+{
+  "version": "button-paired-source-v1",
+  "sealedFromBlindGrader": true,
+  "randomizationSeedHash": "fb9ab40c610a53b39addc68ad4bb626e078951788bf9b48590d15cb7c4853895",
+  "randomizedBatchHash": "5aeaeaf85ff6ec26e9b978efc583b4803e1571d3e09673824eaa976ddc7ad056",
+  "answers": [
+    {
+      "anonymousCell": "cell-5c2b7c5ff6b8",
+      "anonymousLabel": "specimen-8aa648f7c18d",
+      "implementationPath": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=default",
+      "outputHash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f"
+    },
+    {
+      "anonymousCell": "cell-5c2b7c5ff6b8",
+      "anonymousLabel": "specimen-d6330393b3c8",
+      "implementationPath": "legacy",
+      "cellKey": "altitude/variant=primary/state=default",
+      "outputHash": "400d14841474c83c7ceca18334081987f004c9e89abb33a7b477cee69ee43152"
+    },
+    {
+      "anonymousCell": "cell-a02de3213193",
+      "anonymousLabel": "specimen-21bb1d2d543e",
+      "implementationPath": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=hover",
+      "outputHash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681"
+    },
+    {
+      "anonymousCell": "cell-a02de3213193",
+      "anonymousLabel": "specimen-f0bb1e0f4994",
+      "implementationPath": "legacy",
+      "cellKey": "altitude/variant=primary/state=hover",
+      "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a"
+    },
+    {
+      "anonymousCell": "cell-236b3130acd1",
+      "anonymousLabel": "specimen-03962606b2a5",
+      "implementationPath": "recipe-react",
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "outputHash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56"
+    },
+    {
+      "anonymousCell": "cell-236b3130acd1",
+      "anonymousLabel": "specimen-0bc74df82a25",
+      "implementationPath": "legacy",
+      "cellKey": "altitude/variant=primary/state=focus-visible",
+      "outputHash": "2007706c67a40c667c74fc5aa78d2fc3cf25e318944a9b6516a326df3798d02c"
+    },
+    {
+      "anonymousCell": "cell-fbf1fc1f6e9e",
+      "anonymousLabel": "specimen-5146f97554d6",
+      "implementationPath": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=default",
+      "outputHash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe"
+    },
+    {
+      "anonymousCell": "cell-fbf1fc1f6e9e",
+      "anonymousLabel": "specimen-f6cb4bd252d6",
+      "implementationPath": "legacy",
+      "cellKey": "altitude/variant=secondary/state=default",
+      "outputHash": "4c6797280ea4a4e7e27fa692fff3c395e6ceded9c0c73bd16e6a2757f6b22716"
+    },
+    {
+      "anonymousCell": "cell-37766fe6b534",
+      "anonymousLabel": "specimen-202180a7db24",
+      "implementationPath": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "outputHash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1"
+    },
+    {
+      "anonymousCell": "cell-37766fe6b534",
+      "anonymousLabel": "specimen-26e458028db3",
+      "implementationPath": "legacy",
+      "cellKey": "altitude/variant=secondary/state=hover",
+      "outputHash": "7dad57ce4e3128524a8b9c080cabbcb2b1b6331ea64ea9c8bacf799f8aebec5a"
+    },
+    {
+      "anonymousCell": "cell-e2a67d4b8646",
+      "anonymousLabel": "specimen-08ce1f7fc603",
+      "implementationPath": "legacy",
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "outputHash": "3e373e248dae4cd6be69ed81090805d10a7b4c6f8e05416ba77fbbc750d366d5"
+    },
+    {
+      "anonymousCell": "cell-e2a67d4b8646",
+      "anonymousLabel": "specimen-ccfa80c49ed0",
+      "implementationPath": "recipe-react",
+      "cellKey": "altitude/variant=secondary/state=focus-visible",
+      "outputHash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc"
+    },
+    {
+      "anonymousCell": "cell-d8eddf3831a0",
+      "anonymousLabel": "specimen-77c42a2b96f7",
+      "implementationPath": "legacy",
+      "cellKey": "fluent/variant=primary/state=default",
+      "outputHash": "08ca5bf97d214cff1942906e884d12f758fd2718a6090e1e4f429b62dda5ce9a"
+    },
+    {
+      "anonymousCell": "cell-d8eddf3831a0",
+      "anonymousLabel": "specimen-a1a3aa0e83c7",
+      "implementationPath": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=default",
+      "outputHash": "68aa5a236ed13bfee9ce35232fce5101cdb8f9147afe35a1535a7a19b849134f"
+    },
+    {
+      "anonymousCell": "cell-45eabe58c2e7",
+      "anonymousLabel": "specimen-579fec1bcdd3",
+      "implementationPath": "legacy",
+      "cellKey": "fluent/variant=primary/state=hover",
+      "outputHash": "bc03519bd8c5b6397b85340df634e089f8649ef7144e911c27e857a3987c037c"
+    },
+    {
+      "anonymousCell": "cell-45eabe58c2e7",
+      "anonymousLabel": "specimen-ab2f7e49fbee",
+      "implementationPath": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=hover",
+      "outputHash": "693adb739790593a1270e886b6de1165971f6b067820dd9636299742d6ae8681"
+    },
+    {
+      "anonymousCell": "cell-0320ddb96eed",
+      "anonymousLabel": "specimen-30d6b2b882a0",
+      "implementationPath": "legacy",
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "outputHash": "2a56113461e9d45fc8c6e2015f9c13a332c161a56db309ec72eba52f220fd8ac"
+    },
+    {
+      "anonymousCell": "cell-0320ddb96eed",
+      "anonymousLabel": "specimen-6ecbc1ddd294",
+      "implementationPath": "recipe-react",
+      "cellKey": "fluent/variant=primary/state=focus-visible",
+      "outputHash": "889ac9cc6360085975cc90b08464b1821753a04ace887069353ed95733628c56"
+    },
+    {
+      "anonymousCell": "cell-9cae759e7528",
+      "anonymousLabel": "specimen-4cf964329867",
+      "implementationPath": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=default",
+      "outputHash": "952477dd5d67bd2a38a811ab27a8bc186ea90a78fdd86d4d68a8b7488a0fe7fe"
+    },
+    {
+      "anonymousCell": "cell-9cae759e7528",
+      "anonymousLabel": "specimen-ffbef11af02a",
+      "implementationPath": "legacy",
+      "cellKey": "fluent/variant=secondary/state=default",
+      "outputHash": "3282bad706c3778adb4647c29886b2e2ff069c68feb4581768027042d6d1519a"
+    },
+    {
+      "anonymousCell": "cell-ad60b5a22f4e",
+      "anonymousLabel": "specimen-3bd328995cb7",
+      "implementationPath": "legacy",
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "outputHash": "d91406b7338b4737eb052d1cc0f645b81e02b7110ea996d8a5bf104b153d33ba"
+    },
+    {
+      "anonymousCell": "cell-ad60b5a22f4e",
+      "anonymousLabel": "specimen-d3834c46cdc3",
+      "implementationPath": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=hover",
+      "outputHash": "0c96a43935ea179b6520058f603904429c63e422b0dcd8677a4b2a0e9f63d6a1"
+    },
+    {
+      "anonymousCell": "cell-e57c93f01fb2",
+      "anonymousLabel": "specimen-34ed18864a8d",
+      "implementationPath": "legacy",
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "outputHash": "c75c1a624ea5a219cf792fafbb92833496a74879282efde086e623cad1f006f1"
+    },
+    {
+      "anonymousCell": "cell-e57c93f01fb2",
+      "anonymousLabel": "specimen-8e59abe168f0",
+      "implementationPath": "recipe-react",
+      "cellKey": "fluent/variant=secondary/state=focus-visible",
+      "outputHash": "b27903688877513a75cfa8e0959988303daa6a44a184949f3588a1b1ec101efc"
+    }
+  ]
+}

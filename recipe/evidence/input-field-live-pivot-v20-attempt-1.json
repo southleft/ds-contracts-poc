@@ -1,0 +1,144 @@
+{
+  "artifactVersion": "input-live-v20-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "2cd501781de9684d175c5daf71f22fdae60410c2",
+  "codeCommit": "2cd501781de9684d175c5daf71f22fdae60410c2",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 977,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8404014,
+    "hostNormalizeAccount": false,
+    "marker": "INPUT-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL"
+  },
+  "v16FailureCleared": {
+    "leadingSlotSolidPaintSurfacedFromPayloadOrChild": true
+  },
+  "v17FailureCleared": {
+    "leadingSlotColorBindingSurfacedFromChild": true
+  },
+  "v19FailureCleared": {
+    "variantLayoutWidthValueNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedSurfaceStrokeWeightBindings": {
+    "mui": {
+      "hasStrokes0Weight": 0,
+      "hasStrokeWeight": 0,
+      "hasPerSideStrokeWeights": 128,
+      "fourPerSideBindSameFloat": 128,
+      "total": 128
+    },
+    "polaris": {
+      "hasStrokes0Weight": 0,
+      "hasStrokeWeight": 0,
+      "hasPerSideStrokeWeights": 128,
+      "fourPerSideBindSameFloat": 128,
+      "total": 128
+    }
+  },
+  "observedVariantWidthBindings": {
+    "mui": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "total": 128
+    },
+    "polaris": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "total": 128
+    }
+  },
+  "observedSurfaceHeightBindings": {
+    "mui": {
+      "hasFigmaHeight": 128,
+      "hasLayoutHeightValue": 0,
+      "hasHeightValue": 0,
+      "missingHeightBinding": 0,
+      "failingSurfaceHasFigmaHeightFloat": true,
+      "failingSurfaceRole": "input-field/surface",
+      "failingSurfaceVariable": "imported.text-field.medium.surface-height",
+      "total": 128
+    },
+    "polaris": {
+      "hasFigmaHeight": 128,
+      "hasLayoutHeightValue": 0,
+      "hasHeightValue": 0,
+      "missingHeightBinding": 0,
+      "failingSurfaceHasFigmaHeightFloat": true,
+      "failingSurfaceRole": "input-field/surface",
+      "failingSurfaceVariable": "p.text-field.medium.surface-height",
+      "total": 128
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:990 via recipe/input-field-live-v3-verifier-v20.ts:443",
+    "messages": [
+      "input-field@1: input-field/surface: required token binding layout.height.value must appear exactly once"
+    ],
+    "cause": "Carried v20 scene-readback was not refused on variant layout.width.value. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8404014 bytes). Content-width census remains MUI 128/128 FILL and Polaris 128/128 FILL. Host collapse refused required token binding layout.height.value on input-field/surface. Extract shows every surface binds Figma height to an existing FLOAT (MUI imported.text-field.medium.surface-height; Polaris p.text-field.medium.surface-height) and binds no layout.height.value. Scene-readback maps Figma height to height.value. Across both roots, 128+128 surfaces bind Figma height and 0 bind layout.height.value / height.value. Variant width remains 32+32 Figma width / 0 layout.width.value / 96+96 unbound; host did not refuse layout.width.value this attempt. Surface nodes still bind four per-side stroke weights to the same FLOAT and bind no strokeWeight / strokes.0.weight in the extract; host did not refuse strokes.0.weight this attempt. Do not teach FIXED. Do not invent a variable. Do not restart v20 attempt 2 as-is. Scene-readback-v20 bytes are in the v20 hash set.",
+    "inputFieldRecipeInV20AntecedentHashSet": false,
+    "writerInV20AntecedentHashSet": true,
+    "restoreInV20AntecedentHashSet": true,
+    "extractRuntimeInV20AntecedentHashSet": true,
+    "sceneReadbackInV20AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v17AntecedentBytesUnchanged": true,
+  "v17SceneReadbackUnchanged": true,
+  "v17AuthorizationBytesUnchanged": true,
+  "v18AntecedentBytesUnchanged": true,
+  "v18SceneReadbackUnchanged": true,
+  "v18AuthorizationBytesUnchanged": true,
+  "v18Attempt1BytesUnchanged": true,
+  "v19AntecedentBytesUnchanged": true,
+  "v19SceneReadbackUnchanged": true,
+  "v19AuthorizationBytesUnchanged": true,
+  "v19Attempt1BytesUnchanged": true,
+  "v20AntecedentBytesUnchanged": true,
+  "v20AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV20Attempt2WithoutSurfaceLayoutHeightForbidden": true
+}

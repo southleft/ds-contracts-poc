@@ -1,0 +1,73 @@
+{
+  "when": "after-spacing",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=163-35981",
+  "checkpoint": {
+    "id": "2393104521192557663",
+    "label": "V41 Combobox grids spaced"
+  },
+  "inputPresent": true,
+  "inputPageId": "115:295378",
+  "arrange": {
+    "comboboxSets": {
+      "gap": 180,
+      "cellPadding": 20,
+      "columnProperty": "Open"
+    },
+    "optionSets": "unchanged (already 0 collisions; gap 24, cellPadding 20, columnProperty Option state)"
+  },
+  "collisionsPaintedNeighborPairs": {
+    "MUI Option 163:36076": { "before": 0, "after": 0 },
+    "MUI Combobox 163:36845": { "before": 12, "after": 0 },
+    "AntD Option 163:36940": { "before": 0, "after": 0 },
+    "AntD Combobox 163:37709": { "before": 12, "after": 0 }
+  },
+  "liveContainers": {
+    "MUI Option Grid": "165:39826",
+    "MUI Combobox Grid": "165:40082",
+    "AntD Option Grid": "165:39954",
+    "AntD Combobox Grid": "165:40189"
+  },
+  "sets": {
+    "MUI option": "163:36076",
+    "MUI combobox": "163:36845",
+    "AntD option": "163:36940",
+    "AntD combobox": "163:37709"
+  },
+  "cropsForReview": [
+    "/Users/tjpitre/Sites/ds-contracts-poc/recipe/evidence/combobox-v41-canvas-review/after-mui-combobox-top-rows.png",
+    "/Users/tjpitre/Sites/ds-contracts-poc/recipe/evidence/combobox-v41-canvas-review/after-antd-combobox-top-rows.png"
+  ],
+  "openColumnMinClearancePx": {
+    "MUI Combobox": 48,
+    "AntD Combobox": 64
+  },
+  "saved": [
+    {
+      "nodeId": "163:35981",
+      "file": "/Users/tjpitre/Sites/ds-contracts-poc/recipe/evidence/combobox-v41-canvas-review/after-page-163-35981.png",
+      "bytes": 1175270
+    },
+    {
+      "nodeId": "165:39826",
+      "file": "/Users/tjpitre/Sites/ds-contracts-poc/recipe/evidence/combobox-v41-canvas-review/after-mui-option-165-39826.png",
+      "bytes": 25978
+    },
+    {
+      "nodeId": "165:40082",
+      "file": "/Users/tjpitre/Sites/ds-contracts-poc/recipe/evidence/combobox-v41-canvas-review/after-mui-combobox-165-40082.png",
+      "bytes": 561705
+    },
+    {
+      "nodeId": "165:39954",
+      "file": "/Users/tjpitre/Sites/ds-contracts-poc/recipe/evidence/combobox-v41-canvas-review/after-antd-option-165-39954.png",
+      "bytes": 25247
+    },
+    {
+      "nodeId": "165:40189",
+      "file": "/Users/tjpitre/Sites/ds-contracts-poc/recipe/evidence/combobox-v41-canvas-review/after-antd-combobox-165-40189.png",
+      "bytes": 546640
+    }
+  ],
+  "record": "f330a082 not restamped"
+}

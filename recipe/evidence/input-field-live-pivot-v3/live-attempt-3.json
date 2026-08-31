@@ -1,0 +1,127 @@
+{
+  "artifactVersion": "input-live-v3-attempt-v1",
+  "attempt": 3,
+  "outcome": "hard-failure",
+  "exhausted": true,
+  "fourthAttemptAuthorized": false,
+  "chronology": {
+    "antecedentCommit": "be6b01300ad99d8a29ea4c11508d192dec84bbea",
+    "authorizationCommit": "ad7e02d3bfaf79f757ff63085c0a24a64a5c4c7b",
+    "codeCommit": "6903d31eb015933a6796722d25f6155fb13332ce"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "preState": {
+    "algorithm": "cyrb64",
+    "fullHash": "10ba6b57da3cfa97",
+    "unrelatedHash": "10ba6b57da3cfa97",
+    "pageCount": 13,
+    "collectionCount": 14,
+    "variableCount": 11163,
+    "ownedV3PageIds": [],
+    "ownedV3CollectionIds": []
+  },
+  "transport": {
+    "protocol": "ds-contracts/figma-writer-utf8-base64/v1",
+    "payloadBytes": 2453320,
+    "expectedSha256": "c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc",
+    "decodedBytes": 2453320,
+    "decodedSha256": "c88ffc740fb91448fa37685b0a832fc7420e0e34f5838352af75c8f617abc2bc",
+    "wrapperBytes": 3281234,
+    "wrapperSha256": "f378d76d33e3e59a44cf09430f1b0a2dc02078ad1c1531b01bc236b9642501be",
+    "bridgeCodeCharacters": 3281224,
+    "evalBegan": true,
+    "evalCompleted": true,
+    "bridgeExecutionSucceeded": true
+  },
+  "writerResult": {
+    "status": "succeeded",
+    "resultReturnedToRunner": true,
+    "resultPersistedBeforeHostFailure": false,
+    "plannedVariants": 256,
+    "exactPageId": null,
+    "exactSetIds": null,
+    "exactCollectionIds": null,
+    "exactCreatedNodeIds": null,
+    "reasonExactIdsUnavailable": "the committed runner retained writerResult only in memory and crashed after cleanup during host scene normalization before writing attempt evidence"
+  },
+  "verificationRuntime": {
+    "bridgeCodeCharacters": 274492,
+    "bridgeExecutionSucceeded": true,
+    "resultReturnedToRunner": true,
+    "portableSceneExtractionRan": true,
+    "derivedReadonlyInstanceLineageRan": true,
+    "resultPersistedBeforeHostFailure": false
+  },
+  "error": {
+    "name": "ZodError",
+    "failureStage": "host-scene-normalization-before-occurrence-accounting",
+    "sourceLocation": "recipe/scene-readback.ts:982",
+    "issues": [
+      {
+        "path": ["bindings", 1],
+        "message": "fills.0 is not compatible with COLOR"
+      },
+      {
+        "path": ["bindings", 2],
+        "message": "fontSize.0 is not compatible with FLOAT"
+      },
+      {
+        "path": ["bindings", 3],
+        "message": "lineHeight.0 is not compatible with FLOAT"
+      },
+      {
+        "path": ["type", "letterSpacing"],
+        "message": "Invalid input: expected number, received object"
+      }
+    ]
+  },
+  "verification": {
+    "status": "hard-failure",
+    "completed": false,
+    "expectedSceneFacts": 43726,
+    "sceneFactsMeasured": null,
+    "sceneAccounting": {
+      "missing": null,
+      "extra": null,
+      "mismatched": null,
+      "duplicateCollapsed": null,
+      "unobserved": null,
+      "silent": null,
+      "reasonUnavailable": "host normalization rejected extracted scene bindings before occurrence-level expected-plan comparison; no count is assigned or inferred"
+    },
+    "fixedPointCyclesMeasured": null,
+    "usability": null,
+    "restoration": null,
+    "capturedCells": 128,
+    "objectiveRowsMeasured": null,
+    "objectiveMetrics": null,
+    "objectiveStrata": null,
+    "reasonDownstreamGatesUnavailable": "the hard normalization failure stopped accounting, inversion, usability, capture, and objective phases"
+  },
+  "artifacts": {
+    "successReceipt": null,
+    "sceneDerivedFacts": null,
+    "objectiveResult": null,
+    "humanReviewPacket": null,
+    "captures": {
+      "directory": "recipe/evidence/input-field-live-pivot-v3/screenshots/live-cells",
+      "count": 128,
+      "unsampled": true,
+      "naming": "<committed source-pair cell hash>.png"
+    },
+    "reasonAbsent": "all live PNGs were persisted, but technical hard failure occurred before objective scoring and attributable human-review packet generation"
+  },
+  "cleanup": {
+    "artifact": "recipe/evidence/input-field-live-pivot-v3/cleanup-attempt-3.json",
+    "runnerBridgeExecutionSucceeded": true,
+    "postCleanupOwnershipCounts": {
+      "pages": 0,
+      "collections": 0
+    },
+    "prePostFingerprintExact": true
+  }
+}

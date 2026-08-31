@@ -1,0 +1,3600 @@
+{
+  "version": "paired-comparison-grade-envelope-v1",
+  "phase": "performance",
+  "raterId": "RATER-PAIR-V1-C",
+  "packetHash": "e21e8bf9cbcbded15e35a11a08b03a7a68e408c585ac64ac7ef631862e0f90d7",
+  "randomizedBatchHash": "653eaed5834d79511209932e38a4b3235f0a4f7609e76c62ffcdb6502d6d9c8b",
+  "protocolCommitment": "64f071edba0bf024ace7cd5875838727120092854db041ecb17a8aca89d707c8",
+  "rubricVersion": "input-field-paired-observable-rubric-v1",
+  "calibrationReceipt": null,
+  "counts": {
+    "expected": 256,
+    "submitted": null
+  },
+  "grades": [
+    {
+      "taskId": "task-b98c5b64ebc0352697c466f6",
+      "referenceId": "reference-4e4f98cfd487eb3b9712d5e2",
+      "leftCandidateId": "candidate-4dbcbab31cebe11794713255",
+      "rightCandidateId": "candidate-940f6946fddffd039f25af03",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e6001145c2113f3cb95e1f6b",
+      "referenceId": "reference-50d99af78bf7de4aa10b80cc",
+      "leftCandidateId": "candidate-274e5b278e8f00172adbb09d",
+      "rightCandidateId": "candidate-91e374471558799737f5107b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d4057b9c740abce7e7b9941b",
+      "referenceId": "reference-93984da74c48c0741311370e",
+      "leftCandidateId": "candidate-b137e847f2cd739566e1aef4",
+      "rightCandidateId": "candidate-42eb5c3a4a19d6388b532c8f",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0307834100b0ca5bff869750",
+      "referenceId": "reference-71e8988cffa1102db29ccf00",
+      "leftCandidateId": "candidate-dd9db3115e1fb4d3c705b458",
+      "rightCandidateId": "candidate-e136ac56e79487b89533e37b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7f50ea0613bb0f48b1387995",
+      "referenceId": "reference-5711348a6cfabc7b80b897ba",
+      "leftCandidateId": "candidate-e63b4cff55b0cc4b5fdbbbc3",
+      "rightCandidateId": "candidate-8f807c6b631d821813889830",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ea2dc5b9a9453fc0e3a88620",
+      "referenceId": "reference-bd4aa531f2de5f74d0554a55",
+      "leftCandidateId": "candidate-eefc6b0c05c2200709149b6d",
+      "rightCandidateId": "candidate-024830a6a2eeb8632beb634c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5f36f9d58758dae87773058d",
+      "referenceId": "reference-dd076addf74be2680b551863",
+      "leftCandidateId": "candidate-b611247c03d81d034578b7e7",
+      "rightCandidateId": "candidate-75a31f57ea2e85a0b9219da0",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-18d32e641e1c43087996bf12",
+      "referenceId": "reference-cdc92d7428395147a0079774",
+      "leftCandidateId": "candidate-6adb81a86f0776f2b073c672",
+      "rightCandidateId": "candidate-6badd9af663085436e92e5b8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d9f8df971bc088b3770ced98",
+      "referenceId": "reference-ef9526058f72d5eccab37e79",
+      "leftCandidateId": "candidate-a5f0ba6f27af97eeded54e8a",
+      "rightCandidateId": "candidate-193953c6b073042ff8d8b4ab",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d12e14ec7c8cb715aefc64e6",
+      "referenceId": "reference-1c3bce6015f940afd7223231",
+      "leftCandidateId": "candidate-e62d8c9cd029c9fffaba9c89",
+      "rightCandidateId": "candidate-f0babd9969e58208d3fb79b0",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c1b16b3c968d7652753ec29b",
+      "referenceId": "reference-ca07772364d7d37ff98e3c24",
+      "leftCandidateId": "candidate-f3b0ee0c041d82c0b4846f60",
+      "rightCandidateId": "candidate-764f1ec3a879eb3701cc3bff",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-57f4ed5f7a1e6ba388a81cb4",
+      "referenceId": "reference-b012a29b3dc6c42d9e8b610f",
+      "leftCandidateId": "candidate-aa3d8ffa7900e10c40dfc32c",
+      "rightCandidateId": "candidate-88ebc597f5276dcff33c2348",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f9b6d3bc6182dabb30ee3e8e",
+      "referenceId": "reference-886661bedb60c119703af982",
+      "leftCandidateId": "candidate-68a6394267851480d6e23a0e",
+      "rightCandidateId": "candidate-d145729cd8ee452c329b81ff",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2897ccf2fe8398256eb8796a",
+      "referenceId": "reference-7a620d5a6b6b4f24594aff1e",
+      "leftCandidateId": "candidate-0ebfe92a2a8032ebe8eb58dc",
+      "rightCandidateId": "candidate-22af87c4bd9245a0a881c11d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7151f13e0dc0eace7af74f71",
+      "referenceId": "reference-cee912e592794d73e53ac2bf",
+      "leftCandidateId": "candidate-2d8485c2d195a42ec25c8ae2",
+      "rightCandidateId": "candidate-58eb1828cd52f005d59b98c5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e913f35afc65ef0f07da1011",
+      "referenceId": "reference-3fef9e600318c8510ebb732e",
+      "leftCandidateId": "candidate-816b6d0ee0e2e2ae1e16601b",
+      "rightCandidateId": "candidate-61888b3ad6a483f352d7cff6",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e21b628dd1390934d15df3d2",
+      "referenceId": "reference-f69f84062fc3c7bc178cc0d4",
+      "leftCandidateId": "candidate-707962f47fe6130bbf1af888",
+      "rightCandidateId": "candidate-55fbe339718e7cce2263501a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-fadc8989b36aa5189c6d474b",
+      "referenceId": "reference-f4a0e104f7fab8c9939e6f68",
+      "leftCandidateId": "candidate-b23547007a78bfba079f79a1",
+      "rightCandidateId": "candidate-5ffa411f1e3b90b376a315ab",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-39c00661587fa5bc9f6168e9",
+      "referenceId": "reference-68a47f1a4c7dfd2af85aa4cf",
+      "leftCandidateId": "candidate-c7281acb9330fa04b8cf0663",
+      "rightCandidateId": "candidate-4e45478fd5d3b3c65b7ebed9",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-989b418b4f02e15ee777a3ff",
+      "referenceId": "reference-ecb487281727c5975dba2624",
+      "leftCandidateId": "candidate-31d1ef45859c6ca8f9a613cb",
+      "rightCandidateId": "candidate-3ff3afef8c0fb0f144cf22be",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a62707670bde5a1c5737ede0",
+      "referenceId": "reference-47195c896905a236b62ff14d",
+      "leftCandidateId": "candidate-149b530c10ec684cfdbd3416",
+      "rightCandidateId": "candidate-9884c42eaa71447b44faf7f5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9450b782d69e7c6582682582",
+      "referenceId": "reference-44c1897e3dfe1bddc2477322",
+      "leftCandidateId": "candidate-b970fac4f8fe6b41dab9690c",
+      "rightCandidateId": "candidate-01bec9e326eab84b8e6c2ae5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-14669c083f781bcd4a28bed4",
+      "referenceId": "reference-6c28ba1b1021a828abeefc0a",
+      "leftCandidateId": "candidate-317584e728553f28b8da91da",
+      "rightCandidateId": "candidate-71fc087a2837ff7211441899",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c01de11d596286ba751c4609",
+      "referenceId": "reference-6b4b54785f55f9c862432cd5",
+      "leftCandidateId": "candidate-a134c3a3584a14b1a9ced91d",
+      "rightCandidateId": "candidate-a5c9b6f6143bd8325de5bc67",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a0f7a1cbfb81a7a4b0bba7c4",
+      "referenceId": "reference-23248ab3cda48b07eaf3dae6",
+      "leftCandidateId": "candidate-cc3344dc51588e343b000a5d",
+      "rightCandidateId": "candidate-55d2b743d3da9467deb0767c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5e79273ddd80ccf8b79d0e25",
+      "referenceId": "reference-7fc850ba30c8de0c64091bb9",
+      "leftCandidateId": "candidate-fe6518c742639125bafafb3f",
+      "rightCandidateId": "candidate-66444a124d83aae0f54c3481",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-3bc6527410a4d4656d7d045e",
+      "referenceId": "reference-1e50899c3cc9f0fa70585e44",
+      "leftCandidateId": "candidate-4d5bfa202f0503acea16af36",
+      "rightCandidateId": "candidate-f23d9a7410ccb0de8e95d015",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-56293fef403e13cf64cf7e5b",
+      "referenceId": "reference-33adfd4a1dc614036570bf88",
+      "leftCandidateId": "candidate-43aa25045fec89956405ccce",
+      "rightCandidateId": "candidate-2ccd796128056e91b1054286",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c633f489c0a0d435b493505e",
+      "referenceId": "reference-7389d1dbe237fb0633e8f72c",
+      "leftCandidateId": "candidate-9024c67ae989b05c446c524f",
+      "rightCandidateId": "candidate-2e91326a5c1aa9dc8ec1c28a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-dca778b397f52a7c9362bf4d",
+      "referenceId": "reference-9c31d8441b56e9e104a01ff1",
+      "leftCandidateId": "candidate-2d0924627ae1d27015c822f4",
+      "rightCandidateId": "candidate-6d120c8170e5d83f24498397",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-3849ecda803e2d757d8fa509",
+      "referenceId": "reference-b89810ce85d84ff25ce77a70",
+      "leftCandidateId": "candidate-a16d99be06ebb33560dcff74",
+      "rightCandidateId": "candidate-7a9b814882e55911e729b0c1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c9bf8aafd647e2b713488228",
+      "referenceId": "reference-5aa56db92a1701230eb83279",
+      "leftCandidateId": "candidate-839784311b9b39a84abb7f4d",
+      "rightCandidateId": "candidate-1beb1a479ea341d5838b71c8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ee3da463a434ce403fbecae6",
+      "referenceId": "reference-26aaf73c1c727dedaf30fc31",
+      "leftCandidateId": "candidate-f36d46dec5c5ca9c3883cc43",
+      "rightCandidateId": "candidate-46e63a0c12d84c279196068b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f9ebb02ad4393f52b6e5ab70",
+      "referenceId": "reference-e1429b952c0a55e742f0d9b6",
+      "leftCandidateId": "candidate-11a9e4f25800eba5763e7820",
+      "rightCandidateId": "candidate-5587431c94f2c313ed4658f4",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-986af55d7bb4ec180a4c65e2",
+      "referenceId": "reference-8e90cb26c8028e5549c8cf54",
+      "leftCandidateId": "candidate-7811b7fa683c3f75cc11786d",
+      "rightCandidateId": "candidate-6bd5cb1fe3b96262fe12ef38",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-43dbf92140d7e61424101358",
+      "referenceId": "reference-9a3dd5734de65f6be09e0b98",
+      "leftCandidateId": "candidate-91e6c98030b0ee440ab659df",
+      "rightCandidateId": "candidate-47be7d4e724bc4836adc4c99",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9d55be809182b4b03c3e924a",
+      "referenceId": "reference-d3c323a2d0610054173024e1",
+      "leftCandidateId": "candidate-3b8680e05be65d7e3de30240",
+      "rightCandidateId": "candidate-b38490965dba90185dc0d69c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1d6a43515bfc3e9d0e0910b8",
+      "referenceId": "reference-e47d2bdb30d73fd07fcab521",
+      "leftCandidateId": "candidate-aa08aa77901f446ab3eab909",
+      "rightCandidateId": "candidate-9c6701ce64b921b182dcb19c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-29fcb3668fb6af33b01125e8",
+      "referenceId": "reference-c6db0c5c86354e088e71517d",
+      "leftCandidateId": "candidate-b3b55dc8a20abd42d3e292d6",
+      "rightCandidateId": "candidate-85593e2c871933e37b02d7dc",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-aa8207c8c6518a1832e20134",
+      "referenceId": "reference-b7e0c9c4acca9315d2baddb2",
+      "leftCandidateId": "candidate-3d04c7b84d1939c8212110bf",
+      "rightCandidateId": "candidate-7b2e0386c422918e955a53db",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e7cc36132495b93cc189512a",
+      "referenceId": "reference-c530842d99b12d2d23acdabe",
+      "leftCandidateId": "candidate-e0f099e97193314a24ac1997",
+      "rightCandidateId": "candidate-32789463d2a14cbf1df39162",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-50385bc55bf5be14e6504dff",
+      "referenceId": "reference-d494319e22a7cdd8519eb119",
+      "leftCandidateId": "candidate-02722e2079e4701652fa7db9",
+      "rightCandidateId": "candidate-642a95f24e2f7c8db49e0dbe",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4cb4e77f8429f407930d7584",
+      "referenceId": "reference-e80419c7b8bb81d89a70009d",
+      "leftCandidateId": "candidate-265f142e11a61498d506a043",
+      "rightCandidateId": "candidate-ae61f77172bd0f86f1292032",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4b61320b4fc5637adafd4226",
+      "referenceId": "reference-6b0857aead413b1ebde8c6ba",
+      "leftCandidateId": "candidate-7723cf337742e166570c14a8",
+      "rightCandidateId": "candidate-39deaea4a96be3cd55d2e7e3",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0afbc3771a62445ae0793044",
+      "referenceId": "reference-6fb554ef1dac695cee7817a8",
+      "leftCandidateId": "candidate-cfcf2b26c74e258191829cf8",
+      "rightCandidateId": "candidate-6057b8bf11d4ac6e3abc2d2d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d1990859076c99428e80ce35",
+      "referenceId": "reference-08017b6bd54fd62f7b8ac60f",
+      "leftCandidateId": "candidate-29ac042d1d59a1f30679932e",
+      "rightCandidateId": "candidate-e7cefacdd87afda7680fc3d9",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5db5138f0257db289a8242dc",
+      "referenceId": "reference-998b95fc1ed56b440cb5a19f",
+      "leftCandidateId": "candidate-c5220415022d2fff559145ad",
+      "rightCandidateId": "candidate-a710cc836328860401782ab3",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-975e4a115bd942fb9a33d383",
+      "referenceId": "reference-029d327793d3b646d113bda5",
+      "leftCandidateId": "candidate-fe279e5ff66cf836e864aec1",
+      "rightCandidateId": "candidate-7a6ad566cdaea7891de3a77a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7d8655350232f999581def0a",
+      "referenceId": "reference-481cd8d02103d5a29977efb4",
+      "leftCandidateId": "candidate-f285c7529b33137b317a75f4",
+      "rightCandidateId": "candidate-2ec08428c6625e33cf9610db",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2bdb5278b7da4eeef4a3186c",
+      "referenceId": "reference-58a73abb453f02b5a5132987",
+      "leftCandidateId": "candidate-788b37706d657fa7cacc5da5",
+      "rightCandidateId": "candidate-3215bb3157aacc793c911d32",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c764b46502ef9bf6aa85ff0a",
+      "referenceId": "reference-4c51f69a668ef7bba03f8ff6",
+      "leftCandidateId": "candidate-fdc0f33080c8a2b5035a7ea2",
+      "rightCandidateId": "candidate-af293c2aa816c4bbd67d7826",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ebe22962fdca16f6c985fedf",
+      "referenceId": "reference-6d0066e17d2a07f6cc881001",
+      "leftCandidateId": "candidate-5f0275b7305826003372d19a",
+      "rightCandidateId": "candidate-4439d12ef99cbdd3d4ce42af",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f846268b04c38cf654b033b6",
+      "referenceId": "reference-1099d28d6edffa65873bb78b",
+      "leftCandidateId": "candidate-3d09041052bc178a7e805700",
+      "rightCandidateId": "candidate-2493ae374464ef42a254c455",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d5f4937b74540a33fd1f46f0",
+      "referenceId": "reference-b0bc7416ef7316aabd27dee9",
+      "leftCandidateId": "candidate-3a711be127db8cab63e1b2c9",
+      "rightCandidateId": "candidate-5314053c9b0b500a2a399340",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d632bec2d0389fade6e69fde",
+      "referenceId": "reference-a858760a17ee6d853bcd52a2",
+      "leftCandidateId": "candidate-4bfa2df166e75ddb0b1a214d",
+      "rightCandidateId": "candidate-4eeb2e427ea436e30c91047d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c0fd9790f0a84bfc1913be9a",
+      "referenceId": "reference-a5f7634e3da4a1319c7f8bfc",
+      "leftCandidateId": "candidate-f722a3f36306087346f4dce8",
+      "rightCandidateId": "candidate-789a04b86d968173019af3fe",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5807715776a9bd32ce8c2bca",
+      "referenceId": "reference-bcd223e3a22bd28b0b028a26",
+      "leftCandidateId": "candidate-9c66d04f82eb07b7fe093750",
+      "rightCandidateId": "candidate-2c3eab1803ab41d27bfa7194",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-50d5ec578eccb255b68b53e8",
+      "referenceId": "reference-f11b786ea84a8dc561ec417f",
+      "leftCandidateId": "candidate-57e8a8db407fc102dd60008e",
+      "rightCandidateId": "candidate-cdd5919be9ce85cf4d6e988a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7057c179267377e4f3512938",
+      "referenceId": "reference-156c2739f5eeaed63f3be3c0",
+      "leftCandidateId": "candidate-76794749088b9c00c99fa6a8",
+      "rightCandidateId": "candidate-15f80b45b7f3be117bb2fb81",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-aba2f5a9057d84cbd4b295ca",
+      "referenceId": "reference-05a0eddec2f9531274a2eba9",
+      "leftCandidateId": "candidate-eed3538b1f3b33887cbee606",
+      "rightCandidateId": "candidate-bdc3fe934dc132929563b09e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-14cd7110f595b8bfa6a1a0c7",
+      "referenceId": "reference-30379e5c2e08cb76ec64b8c4",
+      "leftCandidateId": "candidate-204cc57cd94ebd27ef533cd5",
+      "rightCandidateId": "candidate-6ef2680f3027325ef2b723bd",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-6686b7f4f6b9687c492dbfbe",
+      "referenceId": "reference-b288a72696044f35d2389620",
+      "leftCandidateId": "candidate-92d2e116d547cc16d3362c3f",
+      "rightCandidateId": "candidate-0bde2909d095d62c6b5782d8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-477957312e64d7c294d65dfb",
+      "referenceId": "reference-3a182692466763bc55fa4589",
+      "leftCandidateId": "candidate-399309635bc419dc686bdba2",
+      "rightCandidateId": "candidate-8ea43bc2213a113ec4d7e414",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a200eb97c3526399d5dc8cef",
+      "referenceId": "reference-6d8de5682969e6c0f133f0d9",
+      "leftCandidateId": "candidate-d519f45b06611df4257151f6",
+      "rightCandidateId": "candidate-6baca2954b2d4bb8a70485e9",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-22d16d56e0e6c00f2d874c63",
+      "referenceId": "reference-4b0c48396bb57c070da354a6",
+      "leftCandidateId": "candidate-f1fd1635cd0a078690f4b069",
+      "rightCandidateId": "candidate-50b6fdd360f593821e14e7bf",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-55fbeed22e65b22c7784e652",
+      "referenceId": "reference-4900cca2a72febd16deed324",
+      "leftCandidateId": "candidate-6e81fbd394de38cb0ce5b3d3",
+      "rightCandidateId": "candidate-bfde844a242353fda94f7bc5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c80dcdad1a586d92c0da4306",
+      "referenceId": "reference-2ab70579f8f99aae4dc4a4c9",
+      "leftCandidateId": "candidate-3f2067a92619f2d4cbe5c9ec",
+      "rightCandidateId": "candidate-2f84a45b5052c391781e19f2",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-42a57a62bf2d0bf9eac17351",
+      "referenceId": "reference-3b045b16d534ce40afb9d169",
+      "leftCandidateId": "candidate-c975359301ae1c7b433ad247",
+      "rightCandidateId": "candidate-130a7bcadca12f131c5209c2",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9441187c0893f681ca4e87e1",
+      "referenceId": "reference-d001c7fb23828da71a0b2788",
+      "leftCandidateId": "candidate-e518c090adc7de2c0a143da9",
+      "rightCandidateId": "candidate-aa22807ac99a95c0cdea60a7",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4a8ea29e930acbc4c8c59885",
+      "referenceId": "reference-e61118763cb4603fe6e1be43",
+      "leftCandidateId": "candidate-aba4dffa13326d5e1017ad96",
+      "rightCandidateId": "candidate-4c9a0ef0f6c21f801616eca4",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-942ea5070656e070a021a6c3",
+      "referenceId": "reference-253cadccead9e13b6225ba15",
+      "leftCandidateId": "candidate-1750282461c040d9043d308b",
+      "rightCandidateId": "candidate-d44fc595fb8c40e339f97162",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-472b7efaeef822a97e4b0af6",
+      "referenceId": "reference-a550e77c7c3c82a45edd65f6",
+      "leftCandidateId": "candidate-60f3ed2bb65e94a5a5b32026",
+      "rightCandidateId": "candidate-655be03522dd513526d04ecc",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2b6a16fcf1f5ee0e70d991c6",
+      "referenceId": "reference-a027d3d964e7ef7f79bbb706",
+      "leftCandidateId": "candidate-5ec7d3b83ebdac17c1ce0b41",
+      "rightCandidateId": "candidate-99b08a7cac5eee0b7450ff32",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2aeb100199c4f669eccfae6c",
+      "referenceId": "reference-38ec52c86c610c00634fc3d9",
+      "leftCandidateId": "candidate-496601c298e598515885506b",
+      "rightCandidateId": "candidate-872e149382bfec788a1f6f0e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-caf5cc8fe74282ee6c4be89f",
+      "referenceId": "reference-104eded9a5abb98ddff2cb70",
+      "leftCandidateId": "candidate-fb39dd13fc6af87d578182a1",
+      "rightCandidateId": "candidate-cf44e6af594db464de5e3ce5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e0ed4893a79841ac96100cab",
+      "referenceId": "reference-15e46fb643507a5c00be69d9",
+      "leftCandidateId": "candidate-1517e47c2705c80f93997b90",
+      "rightCandidateId": "candidate-a695b16cac0c92dbf170af81",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ef9d2bd297e018df86f43832",
+      "referenceId": "reference-87002c1d7b12ff189980baa8",
+      "leftCandidateId": "candidate-c80328003eec08df5c4a469f",
+      "rightCandidateId": "candidate-dd690a96c6d59d98627f54c8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ceb5b5f1a4430e3e74ec998f",
+      "referenceId": "reference-ac540bb494dabfe5795d23f5",
+      "leftCandidateId": "candidate-18c22f97abf97b6dfd90f3c6",
+      "rightCandidateId": "candidate-cabdd3e8ba539299c1eba3ec",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f1ed7acbe495b25a54c0dfae",
+      "referenceId": "reference-ed84c1c8f8b16b5f9600365a",
+      "leftCandidateId": "candidate-0f61e610c15463721530ed7a",
+      "rightCandidateId": "candidate-b2478ee0f0aafa9441723dbc",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-be43e30ac10cdbe582d232c1",
+      "referenceId": "reference-12b6700336b3466743d053d3",
+      "leftCandidateId": "candidate-1d92099f28cd7fd37dcfdbda",
+      "rightCandidateId": "candidate-a150c655b3986ec88417fe6a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4c34c09534c1a7e9b26e4896",
+      "referenceId": "reference-5b8240dfe310f67760800480",
+      "leftCandidateId": "candidate-ef3dde69e6a6d7adfe2d0c30",
+      "rightCandidateId": "candidate-49386e542d8a69d3918769d7",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-216ff2716817f71c52f4b11f",
+      "referenceId": "reference-0885a2ac1bebaf0bd4a9a64c",
+      "leftCandidateId": "candidate-ae4de1cfafe5e1d66014b514",
+      "rightCandidateId": "candidate-33251d0bc534c1b32dcc8619",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-bdffa5c5f5dba35617a24cbc",
+      "referenceId": "reference-8110147850ab8d112ae239d3",
+      "leftCandidateId": "candidate-426d788c3263075df6325f63",
+      "rightCandidateId": "candidate-28261ce7aa068a2e46e9ebe8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d0a683491cb780ff7163224c",
+      "referenceId": "reference-12789b08c9969f83f3bbf4f7",
+      "leftCandidateId": "candidate-4fba5288daf0759f589b8536",
+      "rightCandidateId": "candidate-873635ad6e0f4737ff3c23eb",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-bba8a2e1a20a20426e46d9f6",
+      "referenceId": "reference-b78f0627ef08e1a5b833e1b7",
+      "leftCandidateId": "candidate-3f8b469ee5a1e5a158170048",
+      "rightCandidateId": "candidate-edcd0761972462d088eb85df",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-247a539e5ce6e9876d097805",
+      "referenceId": "reference-3d4c36a3a794ad15b0cbe21b",
+      "leftCandidateId": "candidate-99b595180272f4e1988517b9",
+      "rightCandidateId": "candidate-9b733e4f26d3af559447f7b7",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b61b79e20994f24e582b874f",
+      "referenceId": "reference-c8e2eeb394ebac5194bd51b5",
+      "leftCandidateId": "candidate-35182db2482acb2c3f659ea8",
+      "rightCandidateId": "candidate-5ec357eb1ee7694a5d4bfc7a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7bce1d036c0b4c56ca287b38",
+      "referenceId": "reference-3636d83abdee337378e34434",
+      "leftCandidateId": "candidate-5d3dec6176965c6dbfccc1e0",
+      "rightCandidateId": "candidate-2a037527d6994c5701115093",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0f8d1d316eaa456accbacf0f",
+      "referenceId": "reference-0a27116d980370cb03fab44d",
+      "leftCandidateId": "candidate-b36f3265aa6accdf0d13cf2b",
+      "rightCandidateId": "candidate-6a3e1fbea9fcd19eb96928e0",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0ca107fb34458668cfcf3485",
+      "referenceId": "reference-0c1ad968c772a1112b1fb633",
+      "leftCandidateId": "candidate-35696cf65564b56b056cccef",
+      "rightCandidateId": "candidate-8197cfef2c083b11c7547964",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9a351dc122335403f3474c41",
+      "referenceId": "reference-fc401e30ac4a3d7bddecdf97",
+      "leftCandidateId": "candidate-5ab39612fbaac787bcde6478",
+      "rightCandidateId": "candidate-8e40f0929703467af599d7fe",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a4e051b321ea5a6ba6b361d7",
+      "referenceId": "reference-2d67cfb35e0d1d544069f2f4",
+      "leftCandidateId": "candidate-b445dbc4dc836483e92f97a7",
+      "rightCandidateId": "candidate-8977a305fff5a6a51bd8e9ac",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-71297ee88e17e39fd611d23c",
+      "referenceId": "reference-6c6a6800ccd1271308ce9ff9",
+      "leftCandidateId": "candidate-faa3ad316d3499d0a950370b",
+      "rightCandidateId": "candidate-1ea9d1d346ef8658f999e5a8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d4ffeeeb49dc9f394a15f4e0",
+      "referenceId": "reference-3ecb91abb3368079484a5770",
+      "leftCandidateId": "candidate-25287bce21aba313d4722ec1",
+      "rightCandidateId": "candidate-e735c8b55aea46fb9a6d4cfb",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-41311a1270ed52a4e7311237",
+      "referenceId": "reference-63cd95e8e84fac1ef994b86b",
+      "leftCandidateId": "candidate-94bda54cc1f830e1f2ab7b99",
+      "rightCandidateId": "candidate-69c67dfd127e23eccd6f6de8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8a4c953f6dea707f27a28ab6",
+      "referenceId": "reference-da25654682b4e67fa11524c0",
+      "leftCandidateId": "candidate-1ad669c805f0085bc782e2a6",
+      "rightCandidateId": "candidate-6e163779bb99658e76a71409",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-29c16709e5fc74d40addc3a1",
+      "referenceId": "reference-77d52d9f7b83a87e7ea7de10",
+      "leftCandidateId": "candidate-072d4e58544fb2a7a83535f5",
+      "rightCandidateId": "candidate-e285eded312d720676a5ddfb",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5f7413356984e28479e861ca",
+      "referenceId": "reference-5d2b70cd72760c0ca06f2adf",
+      "leftCandidateId": "candidate-c72407a02b60f020aa0e5ef3",
+      "rightCandidateId": "candidate-0a8b6f5da7af45ad85f3e201",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-45c20f0a12ca454d09e8158b",
+      "referenceId": "reference-5c39b740b6104939e30ac6a9",
+      "leftCandidateId": "candidate-0fdf61e5b15e462bc7b4cbbc",
+      "rightCandidateId": "candidate-0192912ca6a98cfab5d4fd13",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f0111883c33d77330257be90",
+      "referenceId": "reference-370f0130d485704f0d23b516",
+      "leftCandidateId": "candidate-08046b8fc1f62f2433a0c5ab",
+      "rightCandidateId": "candidate-87b326a8eebec9825ec02eeb",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-45c319cbb364e7100dbb9e03",
+      "referenceId": "reference-366281a8e379f057ca4d6f3a",
+      "leftCandidateId": "candidate-08ad3cc17bc9c1070cb238b6",
+      "rightCandidateId": "candidate-638e91b11ba0626b37bc2c85",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-dcdf270020929db4b1e2bd0e",
+      "referenceId": "reference-c899e445e27a706d61152eb4",
+      "leftCandidateId": "candidate-5fb31a9254ed96de6d6e04b7",
+      "rightCandidateId": "candidate-e74dac73c80da40378cc40dc",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-bc261bd8cfdf220766add59c",
+      "referenceId": "reference-5c95b4f6f7b1a9807f91484b",
+      "leftCandidateId": "candidate-fdeeda4547a19e9144d22feb",
+      "rightCandidateId": "candidate-d1ad35b143ea51be2cda57d0",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4f5577313c9269d83da8c345",
+      "referenceId": "reference-1074bee2a09127f9fb347286",
+      "leftCandidateId": "candidate-c89ee4629121cd535a97eef0",
+      "rightCandidateId": "candidate-df1521dbc28bd5f7092c2ec6",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a58a9f19f8c3dc8396019e06",
+      "referenceId": "reference-3a90c6e6d4ff304a798cc401",
+      "leftCandidateId": "candidate-ae7c57e185a4eeb354a16751",
+      "rightCandidateId": "candidate-5c88b729831b3fc41e389eee",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ab4fbb861b60f32528dd359f",
+      "referenceId": "reference-046afb99957589899de057ef",
+      "leftCandidateId": "candidate-eeaef1bcfc0a25141080260d",
+      "rightCandidateId": "candidate-2532ff371d01168375643eb1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0c7344abc341d6f8627ea2bc",
+      "referenceId": "reference-46c57aa46f2531ceb181d697",
+      "leftCandidateId": "candidate-3cb3bc8da3c4990f60f6f675",
+      "rightCandidateId": "candidate-3bb5f1d345e03c31a9474982",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1b0a09b864add2dfaf150a38",
+      "referenceId": "reference-07416b76999471a4c61195c3",
+      "leftCandidateId": "candidate-3afd0cb3c2cc16ce6ea0ac91",
+      "rightCandidateId": "candidate-e5a3efc25ae73b728ac348b1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-358c12465a6e08a114d795ce",
+      "referenceId": "reference-37c6eac831b3d16b388dd9eb",
+      "leftCandidateId": "candidate-8bee36372dbf20250577f4f0",
+      "rightCandidateId": "candidate-613082f328fb551a5d344a7b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5f0d527b22a257f82ea8e6df",
+      "referenceId": "reference-ad0a8ddf3efc972b34ee8f21",
+      "leftCandidateId": "candidate-ba6fb6151b0b8d7df11bea28",
+      "rightCandidateId": "candidate-67e81425d40610376f2bd517",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-34581b9ff573602b2db75c90",
+      "referenceId": "reference-167c66b0458747a045b4a76f",
+      "leftCandidateId": "candidate-b95fe2bd7bfb7517c4b56f64",
+      "rightCandidateId": "candidate-b75637a28c44b001415d3618",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1f73b850b9825c3c371fd2af",
+      "referenceId": "reference-48cbe0305622bd6ac5e4c8dc",
+      "leftCandidateId": "candidate-ab19a036c21ec64c1decf55c",
+      "rightCandidateId": "candidate-e0a108313c77056bc27622a7",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-209a160399b40df0f30a78cf",
+      "referenceId": "reference-3e8e5ea80346018639298b6e",
+      "leftCandidateId": "candidate-3088be634b4485953b9e9266",
+      "rightCandidateId": "candidate-ae9401ad38f2ab09d8ff0ff8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1228cf15b26f4c176c15399f",
+      "referenceId": "reference-3aedec63a522e8caacfe1050",
+      "leftCandidateId": "candidate-acc7c63df94c380fae87cedd",
+      "rightCandidateId": "candidate-363d6a1929c827f2e7a9cf4a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-84c6fa485df5021bbcbc61a3",
+      "referenceId": "reference-43a967b7aa17eb8191129237",
+      "leftCandidateId": "candidate-57061032ee2af02fcac4c847",
+      "rightCandidateId": "candidate-cfb92815cbb1611b64a2178e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-fd9f95059fab54735364ee9f",
+      "referenceId": "reference-9d8c7422baccaaf1403643fe",
+      "leftCandidateId": "candidate-747ee7bf7dd2e280ce39004b",
+      "rightCandidateId": "candidate-e00c30383adea53f2f55a294",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-892fa904d5faaec1b87bf441",
+      "referenceId": "reference-4e00266169d108421a8ff4f9",
+      "leftCandidateId": "candidate-d7c27ae32feb485148ff87fc",
+      "rightCandidateId": "candidate-9657575dcc1bb20ca9856f53",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8287e357f63631fad394b243",
+      "referenceId": "reference-f80698a0d679da9e95db8d05",
+      "leftCandidateId": "candidate-433a3f72a655e0c8df7e9b59",
+      "rightCandidateId": "candidate-fc448530fb89c563216b4d86",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c247c7fe0ad915e0cd4e49a0",
+      "referenceId": "reference-b4d28a48d6bd97d2df61efcd",
+      "leftCandidateId": "candidate-fed93b583fb9a90044d886c5",
+      "rightCandidateId": "candidate-cf26ed924d6adae2033dd5e7",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9a2c2f15b96b617693a538f0",
+      "referenceId": "reference-12ccaa7c102c48ef61dc85f1",
+      "leftCandidateId": "candidate-bdb51f3b9939fbf45d5ac1b9",
+      "rightCandidateId": "candidate-3ab93b32fcb376c075882b2c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-6108c75e42b4dde393ea4a59",
+      "referenceId": "reference-ce7601bc46375e39cf638e7e",
+      "leftCandidateId": "candidate-4464a48c380ee4505e98d164",
+      "rightCandidateId": "candidate-0825921391c194cce20b93da",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-df8b5571b0e75f94e4630144",
+      "referenceId": "reference-3b12da5c589e153710c73989",
+      "leftCandidateId": "candidate-ac1539463264ca0d7b0f9c6d",
+      "rightCandidateId": "candidate-74d7d8bb7059cc22589cd69e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-dc2be06b1450c75ae71281ff",
+      "referenceId": "reference-0a429d0fdc0bfcb0615856fc",
+      "leftCandidateId": "candidate-8c4217615da50606be54a198",
+      "rightCandidateId": "candidate-a7df823f3f730e6892e9d19f",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9cc43fe1aa819252f732b474",
+      "referenceId": "reference-d84a2c97090b248daa3e4c12",
+      "leftCandidateId": "candidate-80e629d0416c77b450495883",
+      "rightCandidateId": "candidate-9fcc10f492e64c7ac4eb412c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0412ed08c35732f9e9042c78",
+      "referenceId": "reference-ace71c5a5b3796c311739213",
+      "leftCandidateId": "candidate-b529d1f1e44dc341c8164b1a",
+      "rightCandidateId": "candidate-fb783ef513c68e9f7f542d6c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5afb1c7886b658bf3bf277cd",
+      "referenceId": "reference-8fc77de1222ade44f42667ae",
+      "leftCandidateId": "candidate-08678b936db26ec17ec4292f",
+      "rightCandidateId": "candidate-057f31803fb523fa7938723b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-253a46cf0fbba3c1242cb603",
+      "referenceId": "reference-14c7183aa81e38aad7be2ca1",
+      "leftCandidateId": "candidate-783d136139d0a5d42ea04fdf",
+      "rightCandidateId": "candidate-03e201a956219847b251dbc1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-28d27844f65a3c29d308f7ad",
+      "referenceId": "reference-467ced1b18725335eda1a58b",
+      "leftCandidateId": "candidate-69bb4a0da519c2ebbe2cfa22",
+      "rightCandidateId": "candidate-33a01743f0522af67f81fa49",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-34a4f59ed7e023eebc49d341",
+      "referenceId": "reference-0982cef0800a60e7b658f414",
+      "leftCandidateId": "candidate-1b07814433ce0ab5c819eaf9",
+      "rightCandidateId": "candidate-137e50f39cf7c67055088322",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e13eb5bc9aedec96d9fd8733",
+      "referenceId": "reference-1556bbcea85c22ed3a46619a",
+      "leftCandidateId": "candidate-a243c2843c2d51120eae7bc5",
+      "rightCandidateId": "candidate-4a0a1270965f93738397d86d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1b1491b7866dd8710f2a9283",
+      "referenceId": "reference-5e334fe8c9b5b62d33f5b587",
+      "leftCandidateId": "candidate-5e2179fcf6248119276fe582",
+      "rightCandidateId": "candidate-44ed284e756560ecae101ced",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a4cc8e69e60cba0db1e9f76b",
+      "referenceId": "reference-4d4aa58904c3adc309711212",
+      "leftCandidateId": "candidate-d8928e39e4df89fa6a92bb71",
+      "rightCandidateId": "candidate-02ccd92b8b881b27283cc400",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-981f4eac03ff3b8f1bafbb0c",
+      "referenceId": "reference-fb81f8517e35eb7c29315143",
+      "leftCandidateId": "candidate-26b7641731b8e6f47b298c14",
+      "rightCandidateId": "candidate-cfa8cc66086644c9839464ae",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4194262d33204a464d206aa9",
+      "referenceId": "reference-51da5b608d839cea998c4f9d",
+      "leftCandidateId": "candidate-a41278c33e4a4bb08503d9f7",
+      "rightCandidateId": "candidate-c229f67c29966e0147f1e3e0",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-10304322fdc34e6a2f52bead",
+      "referenceId": "reference-dfdb053903dc5adc9b9ece0d",
+      "leftCandidateId": "candidate-a8c0dc9221ef4a88ff510e3f",
+      "rightCandidateId": "candidate-72de2c1e27713135b4b7c92d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-18b5ce8075fd7203900451cc",
+      "referenceId": "reference-ce45f1bbf939f0486f188650",
+      "leftCandidateId": "candidate-71fb4568048ee4f59f6321d9",
+      "rightCandidateId": "candidate-d084498d9021178b1a1d18ad",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8ec8be7d0253a0afcc65e357",
+      "referenceId": "reference-43d9d7c1efb0c54fcc7c278d",
+      "leftCandidateId": "candidate-f5452892b7f74c7e034e32b7",
+      "rightCandidateId": "candidate-93a3d08a2da61aac5b2953d5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0db5c60de7fbd70bb96e5f57",
+      "referenceId": "reference-a277f352072448a85ec5392a",
+      "leftCandidateId": "candidate-48b34a88ccc700639bb04e21",
+      "rightCandidateId": "candidate-dc6fc434b74e330410e28ab2",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f0bc808fdcc8f643213bdf45",
+      "referenceId": "reference-605cd2e29eff9315da7cf5df",
+      "leftCandidateId": "candidate-347fc84a710ee8c383884326",
+      "rightCandidateId": "candidate-385ad28ee3ac16094bec48af",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b5a7bfa2950a5cc6844ca7ce",
+      "referenceId": "reference-373f0963986acb85d2b31e9d",
+      "leftCandidateId": "candidate-1cd08f6a4dd1d43705ffc74c",
+      "rightCandidateId": "candidate-a5707855e91d7457235d5745",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-41a577b7bb3a6342510adbfb",
+      "referenceId": "reference-4cac2d24917d8ef19c3340fc",
+      "leftCandidateId": "candidate-1e1fc6d078430404919d53bd",
+      "rightCandidateId": "candidate-d791455ec67e815367acb4f3",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-015b9a447fa747cc26a124e3",
+      "referenceId": "reference-6956762974ca3559edaaef04",
+      "leftCandidateId": "candidate-019ae05fc79f9fcd551bc439",
+      "rightCandidateId": "candidate-0b5042ae4145096b4fb38244",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-3081ed104484240e45019862",
+      "referenceId": "reference-125984f28291c2f04f0f5728",
+      "leftCandidateId": "candidate-98b2a3ab45b9e35a6279703e",
+      "rightCandidateId": "candidate-855e0dee2ef08bc3f969aac9",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-65e7b430dc595142289bcd37",
+      "referenceId": "reference-f24ca40dac28785f9178aaf9",
+      "leftCandidateId": "candidate-9ea6e620eca983490d3cd784",
+      "rightCandidateId": "candidate-4b6ce1d84d5c9e266843d38d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-5691961cc557789c324f20ff",
+      "referenceId": "reference-539d855de604accd74dee7a2",
+      "leftCandidateId": "candidate-8b678035647500056aaad969",
+      "rightCandidateId": "candidate-e0f8047a83cda2dd8456e9e6",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-45439139d7fa3fe1f9373f20",
+      "referenceId": "reference-76247f326066c936f0738211",
+      "leftCandidateId": "candidate-d6242ad68bb2945ef39a15be",
+      "rightCandidateId": "candidate-1292400aba0f6b36c3f6dc74",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-3318b853cf537c90bf733a20",
+      "referenceId": "reference-21732dcfbcd1b87fc5f3e46b",
+      "leftCandidateId": "candidate-6eebaf3068465c09680d96b4",
+      "rightCandidateId": "candidate-cb329313ff453fe2a092a4ab",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d02d6fbb12cc47f8364ee842",
+      "referenceId": "reference-5245021e6e216ab55cb0fe8a",
+      "leftCandidateId": "candidate-53e91f9d2c3522b6717064c2",
+      "rightCandidateId": "candidate-32949add689bbb709fbcfb6a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-aca45143dbddeecd50ef47e2",
+      "referenceId": "reference-e507642ee3e908b4f0e8ea37",
+      "leftCandidateId": "candidate-4897111d676fde3134ef1b1c",
+      "rightCandidateId": "candidate-6cc9d3e554ae23d48c25660b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c26c70baea87ba35ca25bc4d",
+      "referenceId": "reference-63639cbe564784f0a14b05b4",
+      "leftCandidateId": "candidate-391d0c9c0685f6d8fff323c3",
+      "rightCandidateId": "candidate-567d6eefcae9c1f12790e5b0",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b0d99bbfd1dc088885f51ee0",
+      "referenceId": "reference-4678f637cc3860e572508e11",
+      "leftCandidateId": "candidate-135c5781834e3d592892a9e2",
+      "rightCandidateId": "candidate-f4245f845c44312739ec66bf",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e06eb724d1cb32878b205ad0",
+      "referenceId": "reference-9f24c31179dd5260bebf1743",
+      "leftCandidateId": "candidate-0cab803ca138a5b68d042668",
+      "rightCandidateId": "candidate-466ba9beec2b75edcde0e18c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d50c03b159a20d9af527f99a",
+      "referenceId": "reference-365837e3f49a77819378a212",
+      "leftCandidateId": "candidate-4f7efa433204bb8d8f02fece",
+      "rightCandidateId": "candidate-ae3657abac6b1b5f77721f71",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b80cff19fbbef30d38d0cfbb",
+      "referenceId": "reference-0004da8d952bd727446e59b2",
+      "leftCandidateId": "candidate-1f5b4d86d3e5534963494a06",
+      "rightCandidateId": "candidate-f218abbca2f5dbe979bbdfb4",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d83b8a9732ee2e9397f24d88",
+      "referenceId": "reference-d63985c3f1e6afc227612900",
+      "leftCandidateId": "candidate-c63c08ca9f78f1dc4b61c116",
+      "rightCandidateId": "candidate-f68a108aafd759f5063c7fa5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9bca46f1efd42511834115a0",
+      "referenceId": "reference-b35b41df3e3fd89d214e1fda",
+      "leftCandidateId": "candidate-1b2d297f368ccb361222ebbf",
+      "rightCandidateId": "candidate-5a5c6427bea7529aa6e56b61",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2710b1961091e577c926201b",
+      "referenceId": "reference-04072b962c53260e97d8919e",
+      "leftCandidateId": "candidate-63b8c7bbdc67f299bca7a706",
+      "rightCandidateId": "candidate-96a2af9eef6a76b46aeee6a8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8b8574f014a58251f6d37502",
+      "referenceId": "reference-aceab431b8c56ce176aa0f09",
+      "leftCandidateId": "candidate-f34afdc4ee05094004faa877",
+      "rightCandidateId": "candidate-5afb7ef6dc6bc45faff051cf",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f1da87960f214c3e5a399f08",
+      "referenceId": "reference-f5872e9948597beb7d6958a0",
+      "leftCandidateId": "candidate-1f2c698e574ae030a7b2cfae",
+      "rightCandidateId": "candidate-649a40cf079d78f755fe299f",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-bd59f99cd8bfc6349592f4f4",
+      "referenceId": "reference-69b7bbb92405e19ebc5d925c",
+      "leftCandidateId": "candidate-f333d2e74c9aded4da6c75a5",
+      "rightCandidateId": "candidate-0c0e780cec7934568800b9df",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-bece1fc8cd77968b5ba690a2",
+      "referenceId": "reference-1abb4de93b4ed7883b6a4016",
+      "leftCandidateId": "candidate-09671865dd5d0753c29ac3db",
+      "rightCandidateId": "candidate-5950604200806e9de22d9471",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-503d6301ab7625916570d8dd",
+      "referenceId": "reference-732daf9641cdf334e53087ea",
+      "leftCandidateId": "candidate-c2451255ddc35df89cd4a191",
+      "rightCandidateId": "candidate-5c1292870a13916f51f28a13",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-682e95df313ceb1c86061ed7",
+      "referenceId": "reference-2c5afa0527f2f55a57fff0c3",
+      "leftCandidateId": "candidate-279943f2ff038e1032f3c45d",
+      "rightCandidateId": "candidate-71117e074d4ab8abe0047c22",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-12297c44d081cead0aa3b2a6",
+      "referenceId": "reference-a434f050b2c1a7b7319480c0",
+      "leftCandidateId": "candidate-68a7935bb13ade5e74d0f296",
+      "rightCandidateId": "candidate-0a7ad0eddd016b356a030f30",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0befc36b10d37139cf0f3020",
+      "referenceId": "reference-f526936013c95f59a32a81f2",
+      "leftCandidateId": "candidate-52e0abdf2d0a5e9d1e44e12a",
+      "rightCandidateId": "candidate-683f666653a6a2d0ddfc80a5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-20f18d9c541132af0d278aa4",
+      "referenceId": "reference-e425dc10f607bb56eb66a71d",
+      "leftCandidateId": "candidate-ec0d4986c74501c0728f060d",
+      "rightCandidateId": "candidate-97c16339cdb2114390bbaabb",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d60a728d58926417ea765ac0",
+      "referenceId": "reference-665c71c6b38697ed568749a0",
+      "leftCandidateId": "candidate-233e7a78336d1469b0b1a0bd",
+      "rightCandidateId": "candidate-65c5d3bdb5a8fd613391e5c1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-cf4abd15f1b832b6af4e35bf",
+      "referenceId": "reference-244759877d682c71aeed0f8d",
+      "leftCandidateId": "candidate-ff28dabbd2a6ba32c7ca3cc5",
+      "rightCandidateId": "candidate-492c2754a90e0da8f82daaf6",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0a11b09992f77c7170650af2",
+      "referenceId": "reference-59ae049d0c39ef9359f7de57",
+      "leftCandidateId": "candidate-59b9058fa547a7e979b6c5b1",
+      "rightCandidateId": "candidate-c4287ebfc808dcbf118fd9cc",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-68994921980631fccf54f6f5",
+      "referenceId": "reference-bff2e6fe91804593547b5465",
+      "leftCandidateId": "candidate-c53959a9e1e61a38a5f99923",
+      "rightCandidateId": "candidate-c2aab3802e17d39769aa25d1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f3ed33d2a484078eff204428",
+      "referenceId": "reference-cae6ae1bb3eb3e9339b3ab57",
+      "leftCandidateId": "candidate-2669d679d35c8582dd53df15",
+      "rightCandidateId": "candidate-b148dc352ac442a8a75a3656",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e97ac2aa7ed9fc863c864ae7",
+      "referenceId": "reference-321a37c26b41d6c8e4d25b87",
+      "leftCandidateId": "candidate-a985662d9fd3f44f77918b8b",
+      "rightCandidateId": "candidate-9be8b7d3b9d1d99931556f11",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-784fd3ed7a9b3630c8841682",
+      "referenceId": "reference-38eac15e140eac183d7c19d6",
+      "leftCandidateId": "candidate-c746d0e5e6938a2ce59a4dea",
+      "rightCandidateId": "candidate-667896207a382d04d338417b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1371ac6b3378118c6fbd33d4",
+      "referenceId": "reference-82a47489b0219857a1e70bcd",
+      "leftCandidateId": "candidate-f01ac4b84bc3f13cb17d6afc",
+      "rightCandidateId": "candidate-bf3d83c5800813eb6c1506cd",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-37beb2208168897eb034579b",
+      "referenceId": "reference-0f561eddbc4041dc03c03b8f",
+      "leftCandidateId": "candidate-031e4737182af4343b196526",
+      "rightCandidateId": "candidate-e275ba62369505e830608270",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1b621d3afa84c9dbb7151212",
+      "referenceId": "reference-784d5d7dea9518218c330d25",
+      "leftCandidateId": "candidate-3086fb8466ace78c6e0134aa",
+      "rightCandidateId": "candidate-5dbc30a140155aa41d0cd560",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-42712a3fcb6fcc6741990b7a",
+      "referenceId": "reference-b9bde799ef228543d99a9c07",
+      "leftCandidateId": "candidate-4c96eb0fb49a9c0809f0cbd1",
+      "rightCandidateId": "candidate-6e3a207e53a74f0f0da0df16",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-da453e124d07a94a0a90b139",
+      "referenceId": "reference-a2eb8454652abbc664cb474a",
+      "leftCandidateId": "candidate-501aa45b4beaff93039c7275",
+      "rightCandidateId": "candidate-3e0d582ae0f443fe555dc5f6",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-fd8875af6fc52285fbeba97b",
+      "referenceId": "reference-7c729704fb54fa7b23685912",
+      "leftCandidateId": "candidate-5fb02ad75c7406d9f9f2a618",
+      "rightCandidateId": "candidate-8b5c4f12725483b827d9751f",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7310710ad2ae7d597f1eb13a",
+      "referenceId": "reference-3f912b9fe63872eacbbbe0b8",
+      "leftCandidateId": "candidate-8f7c92fcfd8cc105c218ae0a",
+      "rightCandidateId": "candidate-cd5409b6a5f724c8ba05dcce",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e1ad9f4fa55caccca096a0a4",
+      "referenceId": "reference-9a66a509b3df63a73bf215e3",
+      "leftCandidateId": "candidate-b00e22a71002ed528697b8e7",
+      "rightCandidateId": "candidate-17821b12b799152dfed86402",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-af88816d682edd3cadb5709f",
+      "referenceId": "reference-3b444a0cb3cf76843d02ecdf",
+      "leftCandidateId": "candidate-31cd3bd72d3bb3773096fc00",
+      "rightCandidateId": "candidate-261bea03fedcb25a138d4470",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d4513ed728e096d199147492",
+      "referenceId": "reference-6cc88c7ae93f693e06725a53",
+      "leftCandidateId": "candidate-0801fb271b344fa96425e519",
+      "rightCandidateId": "candidate-27f8322d8b123fe455d6fa6d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c5511c1c2c1110850dff29d8",
+      "referenceId": "reference-48074378a37368876d1e5db2",
+      "leftCandidateId": "candidate-6e165d9a4b1c0e20d21ce1d7",
+      "rightCandidateId": "candidate-101b833e4c9137d60430c7f1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-238353a74df1470d1adf3028",
+      "referenceId": "reference-80dd596c2db17a2ea072128c",
+      "leftCandidateId": "candidate-2272ff31a186a7a193652dc7",
+      "rightCandidateId": "candidate-804a9067d2038ab3add6997d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d572d08f9ccc68e42f20bd92",
+      "referenceId": "reference-4b7ff81e236f3ef6a1e2e8a4",
+      "leftCandidateId": "candidate-0d9024a78613b2830d074d88",
+      "rightCandidateId": "candidate-62a36e9861f11c73ee434ab3",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f33cf1a8a449f9db9a2f6077",
+      "referenceId": "reference-9c0c4da0cac52ed6d8cdb49a",
+      "leftCandidateId": "candidate-5e168eccb5ced2f3a3f21d5c",
+      "rightCandidateId": "candidate-9002f918ba12a72ce220520e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e74a42498547d8139e743b1e",
+      "referenceId": "reference-3c6197f46ce304df421ad1f2",
+      "leftCandidateId": "candidate-0054e9f72f329ae417563864",
+      "rightCandidateId": "candidate-2136c7f12beb782d02528f36",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a89c023d664eb3d64150e8c6",
+      "referenceId": "reference-b1653604b9ffe60ac820f680",
+      "leftCandidateId": "candidate-f3fcf386647536d1dc4169d1",
+      "rightCandidateId": "candidate-eebc4bd172ffc6a0fc0cb674",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8941a140f6947f3bc56acb29",
+      "referenceId": "reference-aeaec6436128ef59ba0277f1",
+      "leftCandidateId": "candidate-28f9315e4a7ae9622d714d77",
+      "rightCandidateId": "candidate-caee9e3814e314b4a852dc70",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-feb690e8aab7830c40ed45e5",
+      "referenceId": "reference-02d41efa1b87eb37c44ec05a",
+      "leftCandidateId": "candidate-751f7a62c2645a528d738593",
+      "rightCandidateId": "candidate-2da1e361de80cd29f818c92c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-78a687a7b3b057eaf6be3328",
+      "referenceId": "reference-174198cbaa06c7812b86682b",
+      "leftCandidateId": "candidate-2a72a5e8304752dd21485fdc",
+      "rightCandidateId": "candidate-4c51804993c7db4198a7c5be",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9a9e54626c49013623ba0097",
+      "referenceId": "reference-16f864ecc8f8667e84256b12",
+      "leftCandidateId": "candidate-a05c82eed2fe2392e291b091",
+      "rightCandidateId": "candidate-ce90663dbadff7b5da18a43b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-6adc6357ea502b5ec9ef54bd",
+      "referenceId": "reference-b8729459bfa00ec951bd4e73",
+      "leftCandidateId": "candidate-83d24bdb7dcad1989eac18b3",
+      "rightCandidateId": "candidate-af32f128cf3bf4bfb9feba45",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b35671a7a7f1cc4021505b4a",
+      "referenceId": "reference-f57588de74833dac3c01042c",
+      "leftCandidateId": "candidate-0e83bd57c19e1c11a3bee762",
+      "rightCandidateId": "candidate-430cfab1d037b6ca91b68e20",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-32a466c9116b88944f4c4511",
+      "referenceId": "reference-be8825faadd71509d0d0c8f8",
+      "leftCandidateId": "candidate-aa5e64d4348084e3a43e9115",
+      "rightCandidateId": "candidate-15b6f43118485b9efeb97772",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1088aa5ab1d44c810b9f062c",
+      "referenceId": "reference-83f7644be851553528cd84c8",
+      "leftCandidateId": "candidate-793d9a0e1cc1e25acaac3321",
+      "rightCandidateId": "candidate-3d7b4faf3baa3f9e6b378779",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2e81e8416d2beea037986af1",
+      "referenceId": "reference-d4bae42e54784783b39175d9",
+      "leftCandidateId": "candidate-6eb9e2a3e0ce655466db91c7",
+      "rightCandidateId": "candidate-c8dc14df2040803b2fc3cb3a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-3048ec6e322eda5a38a166ba",
+      "referenceId": "reference-597eefcce56d50a7927df7c0",
+      "leftCandidateId": "candidate-7c8ef7a42170de1b95345741",
+      "rightCandidateId": "candidate-17bcd930f932a3bd73b3954c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-54ea6efa1738e48aaca66eaf",
+      "referenceId": "reference-bc2cbe9076fa666e9b0f6922",
+      "leftCandidateId": "candidate-b2152547d87a3e97c6e6552c",
+      "rightCandidateId": "candidate-d4aee215742c0c0e1cad0e7d",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-6938cb65272eb48e8877f457",
+      "referenceId": "reference-f7c7a52d0c964c1f11670cda",
+      "leftCandidateId": "candidate-02f71615cfe3466b06231c4a",
+      "rightCandidateId": "candidate-9d64d97de7c36b183bbab789",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4a06ad46b8624797dd05a115",
+      "referenceId": "reference-f49848c31626f2907019deed",
+      "leftCandidateId": "candidate-0e8bc2f8f1495c7baca21e6a",
+      "rightCandidateId": "candidate-d97cfc93f7acd7667af067ec",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-e4d7db50f91e448bebc75336",
+      "referenceId": "reference-c5ad42469acab2d27cf12a42",
+      "leftCandidateId": "candidate-664a930474e76545c02a2eea",
+      "rightCandidateId": "candidate-e5ce1ab40d56c78d6926e248",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f123b2d99d30faba48b28d74",
+      "referenceId": "reference-5ecc9064dbc049f47a8a6f78",
+      "leftCandidateId": "candidate-83dc3015b317fa661b20d45c",
+      "rightCandidateId": "candidate-b4920b4900512bfd456f2cfe",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-725db40e4bef48691831ebc4",
+      "referenceId": "reference-7f279973832056e13b063757",
+      "leftCandidateId": "candidate-653f27140b0d6f535bab426f",
+      "rightCandidateId": "candidate-605aff631d63a4e67c41ab44",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-cb35a2223400a093ee36bd6c",
+      "referenceId": "reference-ea7555885885a41027262f1c",
+      "leftCandidateId": "candidate-ea95fd64c102d3b058a7d809",
+      "rightCandidateId": "candidate-07a3f8a2dafc063c8560f7a8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ec6798ae9019633c78ada540",
+      "referenceId": "reference-54fe0b72978692254ba85b3b",
+      "leftCandidateId": "candidate-08802f96276c2605b912187f",
+      "rightCandidateId": "candidate-224f510635f2cda27190e8ca",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-03d05aadaaf61a5de6942564",
+      "referenceId": "reference-7b7e4687e71b9c894ad3bdf8",
+      "leftCandidateId": "candidate-6233806f2cbc672931fa8f8e",
+      "rightCandidateId": "candidate-527f58dcdd8a143fab837286",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9d7a4c40635c1a30f4aa09af",
+      "referenceId": "reference-ba4ecc454569098524433d0b",
+      "leftCandidateId": "candidate-9fe287d3bec85e70f010f5d6",
+      "rightCandidateId": "candidate-b6e4eeb47b3d1487c5c172c9",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c2b948befe402052153fa588",
+      "referenceId": "reference-8a47dfda29d96bf7b460ab11",
+      "leftCandidateId": "candidate-2cd0ec49872e2db5e56ecfd3",
+      "rightCandidateId": "candidate-caea7b9622222d67717456db",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-f5046aee9d81f003fb81cfb4",
+      "referenceId": "reference-b4281502c1a666808007643d",
+      "leftCandidateId": "candidate-8e6178e6ec0638c7078591f2",
+      "rightCandidateId": "candidate-ca8ec649f2fefbd717216539",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8c4ae8a3d426d58518e934b4",
+      "referenceId": "reference-9c03a27f8a7e14b4c2fa084a",
+      "leftCandidateId": "candidate-4f33e70256ab162ab1c59291",
+      "rightCandidateId": "candidate-0c26277ea1c6cd1169e9af30",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-4384270d786ca135cfb5d08f",
+      "referenceId": "reference-080a045c57dba5cffd3b2c29",
+      "leftCandidateId": "candidate-55afddef9889f20b15637a23",
+      "rightCandidateId": "candidate-70a726a87b6f5bc8ad269f77",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ef514fab97c3335e78453382",
+      "referenceId": "reference-f79de809da490412f3c14205",
+      "leftCandidateId": "candidate-388ddbcb1d918cfa922d73f9",
+      "rightCandidateId": "candidate-d6fd67a4bac967209f6b5de5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-6a7653fd43021a3285680e51",
+      "referenceId": "reference-5cb268706a25b2b2955176c8",
+      "leftCandidateId": "candidate-507c11994e635fe7a6159760",
+      "rightCandidateId": "candidate-1cb5853170c55e3d5b4593be",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-cd4e33cddaf6df13c89f4438",
+      "referenceId": "reference-574502077a4e0477069e6bfa",
+      "leftCandidateId": "candidate-23e453a6722988eefc5c2cfb",
+      "rightCandidateId": "candidate-39cefb2ea654f861923aa659",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-aad11baaa133832125d4e71a",
+      "referenceId": "reference-ed4bd54249f735350a3ef567",
+      "leftCandidateId": "candidate-2a7348e905973374fc2fb9f7",
+      "rightCandidateId": "candidate-725e8a5a1fdc58c4b151fd8a",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-24480c09775c4c78e570dbe6",
+      "referenceId": "reference-2ebda16b16c939502e63191c",
+      "leftCandidateId": "candidate-290ce2ef1c9edbddb9da9452",
+      "rightCandidateId": "candidate-98434fe2a4ea628ec7a12498",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-15dd14595cf79e3ad86cc67c",
+      "referenceId": "reference-2e19ac8d97de9b75b78f9184",
+      "leftCandidateId": "candidate-6c077a35e17e219e1b186a64",
+      "rightCandidateId": "candidate-2564f4d8e8b1ddcdd9d51303",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-cd5de022304edd5f57fed1c3",
+      "referenceId": "reference-c3968bdf937094735204e962",
+      "leftCandidateId": "candidate-651a75a45ebefc2b43c182d2",
+      "rightCandidateId": "candidate-00599aea4e872f01b32ed629",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-94640b56856738a874cf3a41",
+      "referenceId": "reference-db30e0ae88cd92937992c8f7",
+      "leftCandidateId": "candidate-0e449f880a7a0cce7d2c6256",
+      "rightCandidateId": "candidate-4d8564ce41e1308e84480280",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0133f2d5a664ff1f70f9e1b5",
+      "referenceId": "reference-2601bdf8391cf21a10fe0e04",
+      "leftCandidateId": "candidate-9f49e33684aa2ea1ed2cdb26",
+      "rightCandidateId": "candidate-27445573a68eff943b6fc7f6",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8697ea71e70cf47ba939323d",
+      "referenceId": "reference-05911c8df045d55bccbfe390",
+      "leftCandidateId": "candidate-8d4dcded634107b12dbeb6ea",
+      "rightCandidateId": "candidate-490f11a4fcc9840a254a837b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-9eb64dbbf3fc09cf415c99f4",
+      "referenceId": "reference-b2bf0888ea4460593bec110e",
+      "leftCandidateId": "candidate-2e68213b5709b5a24af9f584",
+      "rightCandidateId": "candidate-97a8f67dc5bfc92af5b27c54",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ad47d06c93a5ed9d096ca161",
+      "referenceId": "reference-6d119296530ac84e5fda1f45",
+      "leftCandidateId": "candidate-7f39feacd59db9ba606ed498",
+      "rightCandidateId": "candidate-523c42fdcf28a566c346e3cf",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-ce9eecf5ea1058a0deeaf806",
+      "referenceId": "reference-5d7cf369d25281205ed29bfd",
+      "leftCandidateId": "candidate-40fb9a60cd2351c3b0f0037f",
+      "rightCandidateId": "candidate-5cc2f7909feb425b9b024d17",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-67f75689528f08c15371fd9f",
+      "referenceId": "reference-901ae320efc9e25237be44a1",
+      "leftCandidateId": "candidate-2c2ba500864f33ed91c17c08",
+      "rightCandidateId": "candidate-a3e0a451bf0222500beeb2bc",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-62250ba4df6e30a1063e98e6",
+      "referenceId": "reference-9578854031baa094706ef78d",
+      "leftCandidateId": "candidate-d47dff917eff22a008073dff",
+      "rightCandidateId": "candidate-899c070ac10bf88ed4c842ec",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-aefcc56ade1618740796be84",
+      "referenceId": "reference-0759b215ece43aade3481357",
+      "leftCandidateId": "candidate-4ab77d84d28d29117107eb6b",
+      "rightCandidateId": "candidate-69205a4e31b57123f858b8c2",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-3452b71f3fd61cbff9a016fc",
+      "referenceId": "reference-2a40a985dd1475f0a02df567",
+      "leftCandidateId": "candidate-caf453770233bb945ec4b8ad",
+      "rightCandidateId": "candidate-f1fb2da13f45b8fc39f496cd",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-793819afd3081b69a26566f5",
+      "referenceId": "reference-e8fa8d9f3700c505dfd3c9de",
+      "leftCandidateId": "candidate-b0c712e21fe35ca1626bc250",
+      "rightCandidateId": "candidate-2d6fbbb050487f15e23aa350",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-6357a103f6cc8d5db2ac5c58",
+      "referenceId": "reference-19efa2898598cfa40ae7fddd",
+      "leftCandidateId": "candidate-56a1b1a63adc8d6b5e7cbd2f",
+      "rightCandidateId": "candidate-feb4b9b80452f4913e99226c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a5b5c53f58a30691a4692abd",
+      "referenceId": "reference-6faa9395ea75196218469204",
+      "leftCandidateId": "candidate-93a29d3653ab762730f9df80",
+      "rightCandidateId": "candidate-5c388f324860c5d8c321555f",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c01ee051189a4b3a3337f435",
+      "referenceId": "reference-78fc873f2fc5170261132b18",
+      "leftCandidateId": "candidate-eaced51b438e2f0d0578fa30",
+      "rightCandidateId": "candidate-130e10738d73e83f605571b7",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-04ab3be16ca9b8c42f261437",
+      "referenceId": "reference-c8ec232d0e21c6661e96895e",
+      "leftCandidateId": "candidate-c3b8cf747c9c00e921789fe3",
+      "rightCandidateId": "candidate-a73d5f9c6c68647d93de845b",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2cfed562d88ffd84417494da",
+      "referenceId": "reference-c90e2ec464d838e52ccece2f",
+      "leftCandidateId": "candidate-82e4999e42dbcec66760db12",
+      "rightCandidateId": "candidate-607ccdd2aaaddae9772e1993",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-73c139c09ad801ae91978f0a",
+      "referenceId": "reference-9a8fdd8394abcffb058ec105",
+      "leftCandidateId": "candidate-59cf4a6678121cf2acf6c299",
+      "rightCandidateId": "candidate-4c7d6a22e385f3ae7cfa95c8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-59b485410674a7799956d6fb",
+      "referenceId": "reference-a81b8f3b4fa3ca8c2c44ceca",
+      "leftCandidateId": "candidate-630a832a361238b97f681782",
+      "rightCandidateId": "candidate-79cdcc7dae72cf8ae1d31338",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-18124ed7ec7f403ef93c8a63",
+      "referenceId": "reference-2027a8b66bfa17f0967ba448",
+      "leftCandidateId": "candidate-afac5de2f25d2eb5060d15f4",
+      "rightCandidateId": "candidate-6f0acb4ef8b713377c061c32",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-1b47c41bc2625346d4eef4f8",
+      "referenceId": "reference-2ab7ccb8d289e267d2046be3",
+      "leftCandidateId": "candidate-5318a3fe550c7615fc38e374",
+      "rightCandidateId": "candidate-cd3e852f82dd2f84bbf9ce1e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d679de0e471a5ebfbca8c559",
+      "referenceId": "reference-b42e6fbc6a464a82a3a6a012",
+      "leftCandidateId": "candidate-e7dfbe4195fd1c2734707397",
+      "rightCandidateId": "candidate-690b855b3a2cbc6356b9ad2e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-c941eb58101025f1bb268546",
+      "referenceId": "reference-696408729e13d7a28b498bbf",
+      "leftCandidateId": "candidate-120f7d9eb6f1c92dc9c18335",
+      "rightCandidateId": "candidate-412e3520361ea5723f7439e5",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-7f252c7f195c8e4404d7265d",
+      "referenceId": "reference-aef56a1762111fcb7951db5f",
+      "leftCandidateId": "candidate-c8fef848d0710ef4618ea814",
+      "rightCandidateId": "candidate-cdcae3ac81328e71b9a6ec30",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-b20d1661b1cf7a809fea5ce1",
+      "referenceId": "reference-11e83ab84f87ecae676bb594",
+      "leftCandidateId": "candidate-a5831bd77d665bfda4514c9e",
+      "rightCandidateId": "candidate-f65640fbbb0ade8d2be7ae3e",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-eef5862499985b10057893d8",
+      "referenceId": "reference-4a0d1c0e54e2809b4fa011e2",
+      "leftCandidateId": "candidate-730f8f0e1adc95eb93805987",
+      "rightCandidateId": "candidate-f41d1fd58b9e6fd901567b55",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0e3742f8200d4396cd110964",
+      "referenceId": "reference-4c6d8ab6e4c2fd1956a0f45d",
+      "leftCandidateId": "candidate-5c0ed25b7c50d2f79ce7dfe2",
+      "rightCandidateId": "candidate-458cf6a3bd999535cb11d7c2",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-8b496233a87d2d8d13844eb1",
+      "referenceId": "reference-f4f8180cd9b29367bf6c8c8d",
+      "leftCandidateId": "candidate-a06a7ac9a606d5d5f2ed7dcd",
+      "rightCandidateId": "candidate-baa942e3e89a1a4ce5df0e18",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-74db6155a973e8c1155a569a",
+      "referenceId": "reference-aeef4ce00e1b8f0757b4a785",
+      "leftCandidateId": "candidate-56aafc26737db73f05b9b063",
+      "rightCandidateId": "candidate-9c4ce69cefe6ea6b57ea2831",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-aaa06278697351d1d0fb9e5c",
+      "referenceId": "reference-043710272c742ba6794fcb65",
+      "leftCandidateId": "candidate-0b5ec509d1a59ccd6dc06299",
+      "rightCandidateId": "candidate-225baa250e0c2c1383ce41ca",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-17683a2e2571b76ebbd40a4d",
+      "referenceId": "reference-d486f0472d1d485d519864b2",
+      "leftCandidateId": "candidate-8fc69a562f823f273aed18e9",
+      "rightCandidateId": "candidate-9fd7e2ce6b1b744ea6aeeff8",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-2336148dc00de3f55b0b899c",
+      "referenceId": "reference-427c728950e7a807e8ed78ab",
+      "leftCandidateId": "candidate-0107bccd7bcfbae2c820c747",
+      "rightCandidateId": "candidate-55f766da064c60e55abca694",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-d804040a58c8dfe6b3773a86",
+      "referenceId": "reference-aa7ce680e16b526c421ad0bc",
+      "leftCandidateId": "candidate-561ce7225ce3ff0c9b1ca3a6",
+      "rightCandidateId": "candidate-6ab3d868625075c9e4c11ca4",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-0f76e6e09b0d9ecc5a68c9c7",
+      "referenceId": "reference-9c150b5335d850543a00559b",
+      "leftCandidateId": "candidate-381c5224f7473369b6acf70b",
+      "rightCandidateId": "candidate-0caf2871ae4ee11b949a11d1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-a749b4184ef8d65a6f549771",
+      "referenceId": "reference-2ea1486abbd582bdf5dee093",
+      "leftCandidateId": "candidate-e0c2080a0875468ab8fe1e29",
+      "rightCandidateId": "candidate-80d34f298ef8966d5977a7e1",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-332d4ef97e460da1908001ff",
+      "referenceId": "reference-f65bf76359fad3af9207139b",
+      "leftCandidateId": "candidate-487befd62153dc7bfabd5c8e",
+      "rightCandidateId": "candidate-62943486c573c99869bcd223",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    },
+    {
+      "taskId": "task-318341fc53747712bd6850ac",
+      "referenceId": "reference-a036f168f6c9a78afd9a9f73",
+      "leftCandidateId": "candidate-64e02e6236287a613d844b6e",
+      "rightCandidateId": "candidate-a5e8778651a838637b618f7c",
+      "choice": null,
+      "confidence": null,
+      "rationale": {
+        "decisiveDifferences": [],
+        "leftDefects": [],
+        "rightDefects": [],
+        "tieBasis": null
+      }
+    }
+  ]
+}

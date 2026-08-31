@@ -1,0 +1,44 @@
+{
+  "artifactVersion": "calendar-live-v3-status-v1",
+  "status": "attempt 1 failed closed at writer setProperties font unavailable; loadFont-before-setProperties teaching held and did not clear the class; SF Pro is listed and loadable; direct text.characters works; writer not accepted; cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "6f4135a4ad6bb5db04acc58c4989714fbe20a9a9",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v3/antecedent-index.json",
+    "indexSha256": "f69821f1f08c0b6ec97832e1edf024b40156da5f5955dd7f8693c2beafdfb862",
+    "hashSetSha256": "c6698df3e76be0085e145186b722d96b00cee3c1275a872c5aa94677fe19f83a"
+  },
+  "authorization": {
+    "commit": "712e26b5c504a96bff84ec34251a8577b8aa9e5d",
+    "path": "recipe/evidence/calendar-live-pivot-v3/capture-authorization.json",
+    "sha256": "db07ebb1503b7e31bbc81c219ac72b96e6cb1c2085b87a7254d0950f334e674e",
+    "signingPublicKeySpkiSha256": "054acebe6aa10d5524b4d0a8e414117485efdb65ee6b12d105e7d91e7f90812c"
+  },
+  "attempt1": {
+    "pageId": "173:49822",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "Error: in setProperties: Unable to update this text property because the component uses a font that isn't available.",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "apply the day instance Label via text.characters, not setProperties; do not invent a different font",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

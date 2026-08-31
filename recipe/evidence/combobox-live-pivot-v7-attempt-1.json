@@ -1,0 +1,133 @@
+{
+  "artifactVersion": "combobox-live-v7-attempt-1-v1",
+  "status": "failed closed at collapse invalid ARIA/data model; componentRef teaching cleared; extract walk cleared; restore 144 held; cleanup accepted; mint did not stay",
+  "authorizationCommit": "48dded6d618552130985b0ac2ba66f5981ce2c64",
+  "codeCommit": "48dded6d618552130985b0ac2ba66f5981ce2c64",
+  "antecedentCommit": "622233a7afece52050e59315a955808a9ab2a165",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host sceneToNormalizedIr must recover option-instance componentRef as combobox@1/option, not the live Figma main-component name",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "134:313053",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["134:313148", "134:313917", "134:314012", "134:314781"],
+    "muiOptionSetId": "134:313148",
+    "muiComboboxSetId": "134:313917",
+    "antdOptionSetId": "134:314012",
+    "antdComboboxSetId": "134:314781",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "7fd7ceae99a9358a247d1c853a9e01142e058ab54d21f68c82ef571e0655ed87",
+    "hostComponentRefTeachingCleared": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "invalid ARIA/data model",
+    "refused": "invalid ARIA/data model at option occurrence 0",
+    "refusedAt": "recipe/recipes/combobox.ts:1290",
+    "nonInstanceRepetitionDidNotRecur": true,
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveOptionInstanceKinds": [
+      "INSTANCE",
+      "INSTANCE",
+      "INSTANCE",
+      "INSTANCE"
+    ],
+    "measuredLiveOptionInstanceComponentRefs": [
+      "Size=small, Option state=selected",
+      "Size=small, Option state=highlighted",
+      "Size=small, Option state=disabled",
+      "Size=small, Option state=default"
+    ],
+    "hostRecoversComponentRefAs": "combobox@1/option",
+    "measuredLiveOptionInstanceProperties": {
+      "0": { "Size": "small", "Option state": "selected" },
+      "1": { "Size": "small", "Option state": "highlighted" },
+      "2": { "Size": "small", "Option state": "disabled" },
+      "3": { "Size": "small", "Option state": "default" }
+    },
+    "requiredCollapseProperties": {
+      "Label": "string",
+      "Value": "string",
+      "Disabled": "boolean"
+    },
+    "labelNamedFromSourceInInstanceName": "combobox/option-instance/0 :: Ada Lovelace",
+    "valueNotPresentInLiveScene": "ada",
+    "disabledImpliedByOptionState": true,
+    "writerStampsOptionSetTextProperties": false,
+    "sceneToNormalizedIrCopiesLiveComponentProperties": true,
+    "namedFromSource": "v7 componentRef teaching cleared; collapse accepted four option INSTANCE children as combobox@1/option; live componentProperties are only Size and Option state; collapse then requires properties.Label string, properties.Value string, and properties.Disabled boolean; Label is named from source in the instance name after :: ; Value ada is not in the live scene; writer never adds Label/Value/Disabled on the option set"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "886af14e28f904bec4adcfac378df2a81d498585209f835ac0a99fab90fc0301",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "134:313053",
+    "removedCollectionIds": [
+      "VariableCollectionId:134:313055",
+      "VariableCollectionId:134:313919"
+    ]
+  },
+  "nextTeaching": {
+    "class": "invalid ARIA/data model",
+    "doNotInvent": true,
+    "doNotInventOptionGlyphText": true,
+    "doNotInventValueFromLabel": true,
+    "restartV7Attempt2AsIs": false,
+    "prepareV8": "writer must stamp option-instance Label, Value, and Disabled component properties named from source so live extract carries the recipe ARIA/data model, not only Size and Option state"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

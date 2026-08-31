@@ -1,0 +1,105 @@
+{
+  "artifactVersion": "calendar-live-v50-human-signoff-v1",
+  "grade": "passed",
+  "reviewedAt": "2026-08-30T12:56:00-05:00",
+  "reviewer": {
+    "name": "TJ Pitre",
+    "identity": "human-owner",
+    "independent": true
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "181:64873",
+    "pageName": "Recipe Pivot / Calendar / 4604bbfe-calendar-v50",
+    "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=181-64873",
+    "sets": [
+      {
+        "id": "181:64913",
+        "name": "calendar/day-set :: Calendar day",
+        "library": "@astryxdesign/core Calendar (vendored)"
+      },
+      {
+        "id": "181:64959",
+        "name": "calendar/week-set :: Calendar week",
+        "library": "@astryxdesign/core Calendar (vendored)"
+      },
+      {
+        "id": "181:65263",
+        "name": "calendar/set :: Astryx Calendar",
+        "library": "@astryxdesign/core Calendar (vendored)"
+      }
+    ],
+    "runIdentity": "4604bbfe-calendar-v50",
+    "recordCommit": "a105e93084cedff4b784f2c33fad14a2e50e50b5",
+    "legibilityPassCommit": "21cf7b1eba7f9a56c12f79eb9455758ef7f3ef3b",
+    "legibilityPassPath": "recipe/evidence/calendar-live-v50-legibility-pass.json"
+  },
+  "verbatim": "Yes, this is beautiful. I love it. It's a full pass. Everything you did here was accurate and beautiful.",
+  "whatWasReviewed": {
+    "sixRowApril2026Month": true,
+    "navChevronsBetweenCaption": true,
+    "fillCaptionVisible": "caption April 2026 is a FILL text (source-named monthYearLabel.flex 1) that paints between the chevrons — the V48/V49/V50 class",
+    "selectedDay": "28px circular selected day, fill #0064E0",
+    "tokens": "vendored Astryx light tokens (light half of every light-dark() pair; dark halves are lowered receipts)",
+    "receiptedNotBundledNotInvented": [
+      "hasOutsideDays",
+      "dark token half of every light-dark() pair",
+      "day-grid gap (source has none — no invented 8px)",
+      "weekday 12px vs day 14",
+      "outside opacity 0.5",
+      "transparent surface",
+      "dayName.paddingBottom 4px"
+    ],
+    "legibilityContext": "reviewed after the presentation-only legibility pass 21cf7b1eb (section 181:64874 fill #444444 -> white; zero writer-owned nodes modified)"
+  },
+  "tjDirectives": {
+    "astryxSourceDoctrine": "If we do any more Astryx work, let's make sure that we're working off of the actual Astryx project and not whatever you were using before.",
+    "reassessmentQuestion": "TJ wonders if anything in the past that he already said was right was actually wrong and needs to be reassessed; answered by recipe/evidence/signed-archetype-source-audit.json"
+  },
+  "implications": {
+    "calendarLiveHumanGrade": "passed",
+    "productV1Complete": false,
+    "buttonHumanGrade": "not-invented",
+    "overallCalendarSuccess": false,
+    "remaining": [
+      "Button leftover inversion (149 silent / fonts + set chrome; in progress separately)"
+    ],
+    "v30ToV50Lesson": "V30 compiled the reduced astryx-calendar-reviewed-v1 August 2026 3-week fixture and looked wrong against the real component; V31-V50 compiled the vendored Astryx Calendar.tsx + astryx.css tokens and earned the full pass. Future Astryx work compiles from the actual vendored component source, never a reduced fixture overlay."
+  },
+  "recordTimeHumanSignoffUnchanged": {
+    "path": "recipe/evidence/calendar-v50-mint-stays-caption-visible.json",
+    "humanSignoff": "pending",
+    "overallCalendarSuccess": false,
+    "note": "V50 RECORD a105e9308 is not restamped. Legibility pass 21cf7b1eb is not restamped. This file is the later attributable human grade, the same pattern as Input V85, Combobox V41, and Table V32."
+  },
+  "doNotOverwritePages": {
+    "inputPageId": "115:295378",
+    "comboboxPageId": "163:35981",
+    "tablePageId": "173:48924",
+    "buttonPageId": "85:6781",
+    "calendarPageId": "181:64873"
+  },
+  "safeCheckpoints": {
+    "calendarSignedOff": {
+      "id": "2393545747493203926",
+      "name": "V50 Calendar signed off"
+    },
+    "input": {
+      "id": "2392869719628549246",
+      "name": "V85 Input grids OK"
+    },
+    "comboboxSpaced": {
+      "id": "2393104521192557663",
+      "name": "V41 Combobox grids spaced"
+    },
+    "doNotRestore": {
+      "id": "2392877528965054592",
+      "name": "DO NOT RESTORE — V85 Input page 115 deleted"
+    }
+  },
+  "doNotClaimV1Complete": true,
+  "doNotInventButtonHumanGrade": true,
+  "doNotRemintCalendar": true,
+  "buttonLeftoverInProgressSeparately": true
+}

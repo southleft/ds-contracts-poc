@@ -1,0 +1,52 @@
+{
+  "artifactVersion": "table-live-v24-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit; writer accepted; restore 8 held; row-set compile-carry label teaching cleared; signed cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "228960d2938ca7ff2e27eeef740d8f34873d53aa",
+    "indexPath": "recipe/evidence/table-live-pivot-v24/antecedent-index.json"
+  },
+  "authorization": {
+    "commit": "81d6491a730b6ce3ce52fdf7f37ca350485c881b",
+    "path": "recipe/evidence/table-live-pivot-v24/capture-authorization.json",
+    "sha256": "942e07d4cc87f33d49833d8232d98d71756340adcf8186c5f82823b37b3027e7",
+    "signingPublicKeySpkiSha256": "b2ddecee09a6f85314a069bfb6226d1536297266ae4e7431b3adff4931d3f6bd"
+  },
+  "attempt1": {
+    "pageId": "172:46324",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "restoredCount": 8,
+    "extractAccepted": false,
+    "extractRefused": "unsupported structural edit",
+    "extractRefusedAt": "$.children[2].children[0].children[0].label",
+    "rowSetCompileCarryLabelTeachingCleared": true,
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true
+  },
+  "census": {
+    "predictedBeforeTheRun": "$.children[2].children[0].children[0].label",
+    "actualRefusal": "$.children[2].children[0].children[0].label",
+    "predictionHeld": true,
+    "remainingExtractSideTailFirstParty": 23,
+    "remainingClassCount": 6,
+    "artifact": "recipe/evidence/table-tail-census-v1.json"
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "when extract host-normalizes table/cell/label, emit the compile-carried label table/cell/label instead of the live TEXT name after ::",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

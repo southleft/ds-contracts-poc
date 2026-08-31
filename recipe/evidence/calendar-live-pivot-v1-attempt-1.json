@@ -1,0 +1,92 @@
+{
+  "artifactVersion": "calendar-live-v1-attempt-1-v1",
+  "status": "failed closed at writer; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "ca7b8df4e55ddeb44713920f2cb08a6ca27fbbe5",
+  "codeCommit": "ca7b8df4e55ddeb44713920f2cb08a6ca27fbbe5",
+  "antecedentCommit": "2b2dca528ca046310e77488b638fd3adb1be79c5",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "c388310b-0a73-4265-af47-06eb04932a75",
+    "attempt": 1,
+    "authorizationSha256": "fe1a0f050c42c15a397f5e8e7e1bff1dcdc47f4ae0362bbd1650f345d0a50a52",
+    "signingPublicKeySpkiSha256": "4123297d5fc896e6b9cfce77c811b4e6cc06d04838bfcedbc779fcb8dc97112e",
+    "programSha256": "7d781cc431365d2a159c76a08dbb5cead093b0b5b82518c4458090d3d38090e0",
+    "requestBindingSha256": "8320d64982d0372199ebf281b31e14b6622757fa4dfa152981522ba59eaf93dd",
+    "requestSha256": "3b5e5fe3b1422cd4a89868c1e58438349c8c4c7c1110ba150b6b3f7cb5cc58fd"
+  },
+  "writer": {
+    "accepted": false,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v1",
+    "pageId": "173:49763",
+    "sectionId": "173:49764",
+    "collectionId": "VariableCollectionId:173:49765",
+    "runIdentity": "19be1c96-calendar-v1",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "refusedClass": "CALENDAR-TEXT-GEOMETRY",
+    "refused": "CALENDAR-TEXT-GEOMETRY:calendar/day/label",
+    "observedText": {
+      "role": "calendar/day/label",
+      "characters": "26",
+      "width": 0,
+      "height": 15,
+      "layoutSizingHorizontal": "HUG",
+      "layoutSizingVertical": "HUG",
+      "parent": {
+        "name": "State=default",
+        "type": "COMPONENT",
+        "width": 0,
+        "height": 100,
+        "layoutMode": "HORIZONTAL",
+        "layoutSizingHorizontal": "HUG"
+      }
+    },
+    "namedCause": "day label is HUG text inside a day component that is still HUG-width 0 because applySizing of the FIXED 32px day box runs after children; horizontal AUTO layout then collapses the label width to 0",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": false,
+    "signedCleanupAccepted": false,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:49763",
+    "removedCollectionIds": ["VariableCollectionId:173:49765"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-TEXT-GEOMETRY",
+    "doNotInvent": true,
+    "restartV1Attempt2AsIs": false,
+    "prepareV2": "apply the FIXED day-cell box before minting the hug label, and keep hug-text intrinsic size before a 0-width parent can collapse it"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

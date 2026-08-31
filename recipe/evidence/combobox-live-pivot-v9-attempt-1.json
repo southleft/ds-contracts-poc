@@ -1,0 +1,154 @@
+{
+  "artifactVersion": "combobox-live-v9-attempt-1-v1",
+  "status": "failed closed at collapse unsupported structural edit; host property-name-before-# teaching cleared; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "6e91b90d2c3791bc3f1e0e4e907cd90a261e7987",
+  "codeCommit": "6e91b90d2c3791bc3f1e0e4e907cd90a261e7987",
+  "antecedentCommit": "9c7d302456b2ab59b878e4e74c159a5f861ffd78",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host sceneToNormalizedIr must recover option-instance Label, Value, and Disabled from live Figma component-property keys by the name before #, carrying the already-stamped source values",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "135:316511",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["135:316606", "135:317375", "135:317470", "135:318239"],
+    "muiOptionSetId": "135:316606",
+    "muiComboboxSetId": "135:317375",
+    "antdOptionSetId": "135:317470",
+    "antdComboboxSetId": "135:318239",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true,
+    "stampedOptionAriaProperties": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "b289fef905c9d3c849fef831402c38e513240d344e28797032b24435dbc0700d",
+    "hostPropertyNameBeforeHashTeachingCleared": true,
+    "invalidAriaDidNotRecur": true,
+    "hostCollapseRefused": true,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[1].bindings[1].field",
+    "refusedAt": "recipe/recipes/combobox.ts:1738",
+    "hostRecoversComponentRefAs": "combobox@1/option",
+    "hostRecoversHashedPropertyNames": true,
+    "measuredLiveOptionInstanceCount": 4,
+    "measuredLiveOptionInstanceRoles": [
+      "combobox/option-instance/0",
+      "combobox/option-instance/1",
+      "combobox/option-instance/2",
+      "combobox/option-instance/3"
+    ],
+    "measuredLiveExtractHashedKeys": {
+      "0": {
+        "Disabled#135:174764": false,
+        "Label#135:174746": "Ada Lovelace",
+        "Option state": "selected",
+        "Size": "small",
+        "Value#135:174755": "ada"
+      }
+    },
+    "hostRecoveredUnsuffixedProperties": {
+      "Label": "Ada Lovelace",
+      "Value": "ada",
+      "Disabled": false
+    },
+    "valueNamedFromSourceNotInventedFromLabel": true,
+    "measuredTriggerBindings": {
+      "role": "combobox/trigger",
+      "liveFieldOrder": [
+        "layout.itemSpacing",
+        "layout.padding.right",
+        "layout.padding.left",
+        "layout.height.value",
+        "fills.0.color",
+        "strokes.0.paint.color",
+        "cornerRadius.topLeft",
+        "cornerRadius.topRight",
+        "cornerRadius.bottomRight",
+        "cornerRadius.bottomLeft"
+      ],
+      "compileFieldOrder": [
+        "layout.itemSpacing",
+        "layout.padding.left",
+        "layout.padding.right",
+        "layout.height.value",
+        "fills.0.color",
+        "strokes.0.paint.color",
+        "cornerRadius.topLeft",
+        "cornerRadius.topRight",
+        "cornerRadius.bottomRight",
+        "cornerRadius.bottomLeft"
+      ],
+      "inheritedSurfaceCompileListRanksRightBeforeLeft": true,
+      "bindings1FieldLive": "layout.padding.right",
+      "bindings1FieldCompile": "layout.padding.left"
+    },
+    "namedFromSource": "v9 host teaching cleared; live extract still carries source Label Ada Lovelace, Value ada, Disabled false under Figma keys Label#135:174746 / Value#135:174755 / Disabled#135:174764; host recovers unsuffixed Label / Value / Disabled and collapse passes ARIA; collapse then refuses unsupported structural edit at combobox/trigger bindings[1].field because live/host order is padding.right then padding.left while compile emits padding.left then padding.right; inherited Input surface compile list ranks right first; do not invent ada from Ada Lovelace"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "71e2b8f5ef06a2522481a9552582904cb8361d384adffdbb1e06da6147db4b49",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "135:316511",
+    "removedCollectionIds": [
+      "VariableCollectionId:135:316513",
+      "VariableCollectionId:135:317377"
+    ]
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "doNotInventOptionGlyphText": true,
+    "doNotInventValueFromLabel": true,
+    "restartV9Attempt2AsIs": false,
+    "prepareV10": "host must order combobox/trigger bindings to compile field order so layout.padding.left precedes layout.padding.right, not live extract order or the inherited Input surface list that ranks padding.right first"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

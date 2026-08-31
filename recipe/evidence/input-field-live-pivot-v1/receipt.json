@@ -1,0 +1,374 @@
+{
+  "version": 1,
+  "kind": "input-field-live-proof-receipt",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageName": "Recipe Pivot / Input Field / e4ac8bb8-f30a3672-input-v1",
+    "lastPageId": "86:16021",
+    "componentSetIds": [
+      "86:17454",
+      "86:18755"
+    ],
+    "proofSectionId": "86:18756",
+    "pairedSectionId": "86:18757",
+    "retained": false,
+    "cleanupReason": "failed-live-criteria-after-capped-third-attempt"
+  },
+  "status": {
+    "objectiveV2Offline": "pass-128-of-128",
+    "writerConformance": "pass",
+    "exactByteTransport": "pass-attempts-2-and-3",
+    "liveMint": "failed-proof-cleaned",
+    "usability": "failed-7-of-8-required-source-assertions",
+    "variantSwitching": "pass-256-of-256",
+    "tokenBindings": "pass-2-of-2",
+    "noFakeLayout": "pass-2-of-2",
+    "exactProbeRestoration": "pass-2-of-2",
+    "liveCellValidation": "failed-material-bounds-24-of-128-commerce-128-of-128",
+    "fixedPoint": "pass-2-of-2-two-stable-cycles",
+    "zeroSilentAccounting": "pass-nonzero-denominator",
+    "pairedCapture": "pass-128-of-128",
+    "objectiveCanvas": "failed-geometry-112-of-128-pixel-ink-85-of-128-versus-legacy",
+    "humanRecognisability": "pending-not-requested-not-ai-graded",
+    "overallInputSuccess": false
+  },
+  "plan": {
+    "path": "recipe/evidence/input-field-live-pivot-v1/writer-plan.json",
+    "bytes": 4859,
+    "sha256": "93c01a42a983b49c621430c97ed9fe2b66b3d3526c2eca00c725fa9dd6a8ffa1"
+  },
+  "conformance": {
+    "path": "recipe/evidence/input-field-live-pivot-v1/conformance-report.json",
+    "bytes": 46832,
+    "sha256": "98c7f8f98c8863a0b6985f076eab1d28f42d5a7f0500891cbae742cb456af2c5"
+  },
+  "transportEnvelope": {
+    "path": "recipe/evidence/input-field-live-pivot-v1/transport-envelope.json",
+    "bytes": 2259497,
+    "sha256": "306cc2cff3267f00e90bd5d42e54728a4867b52919dbafab7172b1192857d0b2"
+  },
+  "attempts": [
+    {
+      "attempt": 1,
+      "result": "failed-plugin-data-entry-limit",
+      "writer": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/writer-attempt-1.js",
+        "bytes": 1692539,
+        "sha256": "4f709f6cfefcb22272a6449930dee78b77a318aabcaea766d3364684db28b216"
+      },
+      "wrapper": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-1.txt",
+        "bytes": 2262264,
+        "sha256": "5c4771b0d93b1823a48b1c61015b860674e8a04d4f25984fe7e911ccf0ddb81b"
+      },
+      "bridgeResult": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/live-attempt-1.json",
+        "bytes": 919,
+        "sha256": "1558a945895e40e24f0e6c6233f53f1489a10490635db0fb8fbbe87c8b396137"
+      },
+      "decodedBytes": null,
+      "decodedSha256": null,
+      "exactTransport": false,
+      "cleanup": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-1.json",
+        "bytes": 236,
+        "sha256": "9df80452d470d4509569e3469c0aaa02379b7b015ad024ee585b19370c8d730b",
+        "removedPageIds": [
+          "86:8123"
+        ],
+        "removedCollectionIds": [
+          "VariableCollectionId:86:8125"
+        ],
+        "complete": true
+      }
+    },
+    {
+      "attempt": 2,
+      "result": "minted-then-failed-live-validation",
+      "writer": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/writer-attempt-2.js",
+        "bytes": 1693056,
+        "sha256": "a2a77513704bb7f7e0322228dd059b9c0f8b9d73388c00a4e53e8a71bf092db8"
+      },
+      "wrapper": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-2.txt",
+        "bytes": 2262952,
+        "sha256": "ec31ef9fc7c29c48820126505de5f9b2cb6b8191e18637ab1807e1cf9ce1082d"
+      },
+      "bridgeResult": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/live-attempt-2.json",
+        "bytes": 53879,
+        "sha256": "7146766235c4b4b6fa405eef9ebb39e3efc21a69bb1cc5bc2c0aed911d963d21"
+      },
+      "decodedBytes": 1693056,
+      "decodedSha256": "a2a77513704bb7f7e0322228dd059b9c0f8b9d73388c00a4e53e8a71bf092db8",
+      "exactTransport": true,
+      "cleanup": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-2.json",
+        "bytes": 273,
+        "sha256": "6d5ec35f539cbd47a5f8bac62f3e528a70701a2887cc2aa8121e56b60154c341",
+        "removedPageIds": [
+          "86:9557"
+        ],
+        "removedCollectionIds": [
+          "VariableCollectionId:86:9559",
+          "VariableCollectionId:86:10992"
+        ],
+        "complete": true
+      }
+    },
+    {
+      "attempt": 3,
+      "result": "minted-then-failed-final-live-validation",
+      "writer": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/writer.js",
+        "bytes": 1694457,
+        "sha256": "15077af39a6ebd0930d00bf99b80c23b83a1b8e02d5318ffa8bd81c3c7fbae3a"
+      },
+      "wrapper": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/writer-wrapper-attempt-3.txt",
+        "bytes": 2264820,
+        "sha256": "0cdcc6b5f85b5ec9bae051c2ddfe6e01bbfdef0ed5af2a725e842469873f5411"
+      },
+      "bridgeResult": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/live-attempt-3.json",
+        "bytes": 54211,
+        "sha256": "3c403601504bcca4d38d568d6cddac95938694cc67a2f51297f8776c7b701b61"
+      },
+      "decodedBytes": 1694457,
+      "decodedSha256": "15077af39a6ebd0930d00bf99b80c23b83a1b8e02d5318ffa8bd81c3c7fbae3a",
+      "exactTransport": true,
+      "cleanup": {
+        "path": "recipe/evidence/input-field-live-pivot-v1/cleanup-attempt-3.json",
+        "bytes": 275,
+        "sha256": "04fe0b6f7d76a971a4e84d3fd3f8f86114f82724c865c1003b1609f20247d065",
+        "removedPageIds": [
+          "86:16021"
+        ],
+        "removedCollectionIds": [
+          "VariableCollectionId:86:16023",
+          "VariableCollectionId:86:17456"
+        ],
+        "complete": true
+      }
+    }
+  ],
+  "finalLiveMeasurements": {
+    "verification": {
+      "path": "recipe/evidence/input-field-live-pivot-v1/live-verification.json",
+      "bytes": 43421,
+      "sha256": "ab92064550708004a593331b886146a29b6d8a6d58d1700789c7739d8a77abab"
+    },
+    "normalizedReadback": {
+      "path": "recipe/evidence/input-field-live-pivot-v1/normalized-live-readback.json",
+      "bytes": 4074086,
+      "sha256": "8dd4aa83e2412c4ef7403f01d69962380bc7ec9ab6260bd59545e2055744ad36"
+    },
+    "objectiveCanvas": {
+      "path": "recipe/evidence/input-field-live-pivot-v1/objective-canvas-result.json",
+      "bytes": 313311,
+      "sha256": "ef71cbcba2ac4bddd1bde6290b5445817998e55a1bd6ca22413aba44d5459ec6"
+    },
+    "sets": [
+      {
+        "id": "86:17454",
+        "name": "TextField / input-field@1 offline fixture",
+        "adapterIdentity": "material-text-field-reviewed-v1",
+        "variants": 128
+      },
+      {
+        "id": "86:18755",
+        "name": "TextField / input-field@1 offline fixture",
+        "adapterIdentity": "commerce-text-field-reviewed-v1",
+        "variants": 128
+      }
+    ],
+    "probes": [
+      {
+        "adapterIdentity": "material-text-field-reviewed-v1",
+        "instanceId": "86:18758",
+        "reflow": {
+          "beforeWidth": 195,
+          "grownWidth": 259,
+          "beforeSurfaceWidth": 195,
+          "grownSurfaceWidth": 259,
+          "beforeContentWidth": 118,
+          "grownContentWidth": 118,
+          "passed": false
+        },
+        "variantSwitching": {
+          "denominator": 128,
+          "visited": 128,
+          "failures": [],
+          "passed": true
+        },
+        "textProperty": {
+          "passed": true
+        },
+        "tokenBinding": {
+          "bindingFacts": 4832,
+          "passed": true
+        },
+        "noFakeLayout": {
+          "layoutNodes": 640,
+          "layoutChildren": 1088,
+          "nonAbsoluteChildren": 1088,
+          "passed": true
+        },
+        "restoration": {
+          "propertiesRestored": true,
+          "passed": true,
+          "beforeSha256": "656ed30019f0394ac3482b8487825948432c52d8891cf621752f988a82a8a277",
+          "afterSha256": "656ed30019f0394ac3482b8487825948432c52d8891cf621752f988a82a8a277"
+        }
+      },
+      {
+        "adapterIdentity": "commerce-text-field-reviewed-v1",
+        "instanceId": "86:19982",
+        "reflow": {
+          "beforeWidth": 211,
+          "grownWidth": 275,
+          "beforeSurfaceWidth": 211,
+          "grownSurfaceWidth": 275,
+          "beforeContentWidth": 185,
+          "grownContentWidth": 249,
+          "passed": true
+        },
+        "variantSwitching": {
+          "denominator": 128,
+          "visited": 128,
+          "failures": [],
+          "passed": true
+        },
+        "textProperty": {
+          "passed": true
+        },
+        "tokenBinding": {
+          "bindingFacts": 4864,
+          "passed": true
+        },
+        "noFakeLayout": {
+          "layoutNodes": 512,
+          "layoutChildren": 960,
+          "nonAbsoluteChildren": 960,
+          "passed": true
+        },
+        "restoration": {
+          "propertiesRestored": true,
+          "passed": true,
+          "beforeSha256": "127123188b83907ff9b2c308f505e7f8546da065b82caeec2a130ed833bc640e",
+          "afterSha256": "127123188b83907ff9b2c308f505e7f8546da065b82caeec2a130ed833bc640e"
+        }
+      }
+    ],
+    "validation": [
+      {
+        "adapterIdentity": "material-text-field-reviewed-v1",
+        "denominator": 128,
+        "visibleStructures": 128,
+        "rolePasses": 128,
+        "stateIndicators": 128,
+        "boundsPasses": 24,
+        "overlapPasses": 128,
+        "failures": 104
+      },
+      {
+        "adapterIdentity": "commerce-text-field-reviewed-v1",
+        "denominator": 128,
+        "visibleStructures": 128,
+        "rolePasses": 128,
+        "stateIndicators": 128,
+        "boundsPasses": 128,
+        "overlapPasses": 128,
+        "failures": 0
+      }
+    ],
+    "readback": {
+      "sources": 2,
+      "comparedIrFacts": 19470,
+      "fixedPoints": [
+        {
+          "adapterIdentity": "material-text-field-reviewed-v1",
+          "recipeHash": "e4ac8bb8272dd115d596a44251cc06d4e4ea95a99c1a5732cea23adda0ecdc4c",
+          "computedRecipeHash": "e4ac8bb8272dd115d596a44251cc06d4e4ea95a99c1a5732cea23adda0ecdc4c",
+          "envelopeHash": "c11c4f447c840c615e82c3ffb57d083ef73ab761eef0987aaf6dae319693791f",
+          "computedEnvelopeHash": "c11c4f447c840c615e82c3ffb57d083ef73ab761eef0987aaf6dae319693791f",
+          "cycle1Sha256": "b308642d9cc007d28c4fa2adc0ec8374b87a5c41139c1d8f17dbdd25fad841da",
+          "cycle2Sha256": "b308642d9cc007d28c4fa2adc0ec8374b87a5c41139c1d8f17dbdd25fad841da",
+          "stable": true,
+          "recipeHashEquivalent": true,
+          "comparedFacts": [
+            "five variant axes and complete cells",
+            "vertical field and horizontal surface auto-layout",
+            "label, required, content, message, and adornment roles",
+            "text content and typography",
+            "fills, strokes, effects, radius, and state ink",
+            "fixed/fill/hug sizing policies",
+            "all primitive-IR variable bindings",
+            "source and envelope hashes"
+          ]
+        },
+        {
+          "adapterIdentity": "commerce-text-field-reviewed-v1",
+          "recipeHash": "f30a3672046fb6db48e434bd34574b47b783fcdbaf92ec58d65994e887d11117",
+          "computedRecipeHash": "f30a3672046fb6db48e434bd34574b47b783fcdbaf92ec58d65994e887d11117",
+          "envelopeHash": "d7307be77e31d058a21ab8d144483966b42d663c3b53ceddd8fc29b2caf07716",
+          "computedEnvelopeHash": "d7307be77e31d058a21ab8d144483966b42d663c3b53ceddd8fc29b2caf07716",
+          "cycle1Sha256": "261f77c1466cb5918d3e248579328c801652ebc71087e0750a23fcc9bd7b50b0",
+          "cycle2Sha256": "261f77c1466cb5918d3e248579328c801652ebc71087e0750a23fcc9bd7b50b0",
+          "stable": true,
+          "recipeHashEquivalent": true,
+          "comparedFacts": [
+            "five variant axes and complete cells",
+            "vertical field and horizontal surface auto-layout",
+            "label, required, content, message, and adornment roles",
+            "text content and typography",
+            "fills, strokes, effects, radius, and state ink",
+            "fixed/fill/hug sizing policies",
+            "all primitive-IR variable bindings",
+            "source and envelope hashes"
+          ]
+        }
+      ]
+    },
+    "zeroSilentAccounting": {
+      "denominator": 14064,
+      "carried": 14064,
+      "codeOnly": 0,
+      "refused": 0,
+      "silent": 0
+    },
+    "objective": {
+      "denominator": 128,
+      "geometry": {
+        "liveWins": 112,
+        "legacyWins": 16
+      },
+      "pixelInk": {
+        "liveWins": 85,
+        "legacyWins": 43
+      },
+      "aggregates": {
+        "meanGeometryError": 0.013402251632062032,
+        "meanPixelInkCompositeError": 0.3434575897619288,
+        "meanOverallWeightedError": 0.1784299206969954
+      }
+    }
+  },
+  "humanPacket": {
+    "path": "recipe/evidence/input-field-live-pivot-v1/human-review-packet.json",
+    "bytes": 91785,
+    "sha256": "a74b23719a3bd3934b580658af648303fac1b386547c1d54bfca2a4ecda5ba28"
+  },
+  "tamperGates": {
+    "exactScratchOnly": true,
+    "sourceReferencesUnchanged": true,
+    "liveCapturesPresent": true,
+    "attemptsCappedAtThree": true,
+    "allInputArtifactsCleaned": true,
+    "overallInputRemainsFalse": true
+  },
+  "docs32Status": "live Input attempted three times; objective canvas and final live validation failed; all Input canvas artifacts cleaned; Button proof preserved; human signoff still pending",
+  "nextTask": "repair generic floating-field fill/bounds behavior and Figma raster fidelity under a new version before any further live attempt"
+}

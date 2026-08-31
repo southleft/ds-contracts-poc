@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ds-contracts.local/paired-comparison-grade-envelope-v1.schema.json",
+  "title": "paired-comparison-grade-envelope-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "phase",
+    "raterId",
+    "packetHash",
+    "randomizedBatchHash",
+    "protocolCommitment",
+    "rubricVersion",
+    "calibrationReceipt",
+    "counts",
+    "grades"
+  ],
+  "properties": {
+    "version": { "const": "paired-comparison-grade-envelope-v1" },
+    "phase": { "enum": ["gold", "performance"] },
+    "raterId": {
+      "enum": ["RATER-PAIR-V1-A", "RATER-PAIR-V1-B", "RATER-PAIR-V1-C"]
+    },
+    "packetHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "randomizedBatchHash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "protocolCommitment": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "rubricVersion": { "const": "input-field-paired-observable-rubric-v1" },
+    "calibrationReceipt": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "path",
+            "sha256",
+            "score",
+            "allClearWinnersCorrect",
+            "passed"
+          ],
+          "properties": {
+            "path": { "type": "string", "minLength": 1 },
+            "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+            "score": { "type": "number", "minimum": 0.95, "maximum": 1 },
+            "allClearWinnersCorrect": { "const": true },
+            "passed": { "const": true }
+          }
+        }
+      ],
+      "description": "Must be null for GOLD and a hash-pinned passing qualification receipt for performance."
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["expected", "submitted"],
+      "properties": {
+        "expected": { "type": "integer", "minimum": 1 },
+        "submitted": { "type": ["integer", "null"], "minimum": 1 }
+      }
+    },
+    "grades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "taskId",
+          "referenceId",
+          "leftCandidateId",
+          "rightCandidateId",
+          "choice",
+          "confidence",
+          "rationale"
+        ],
+        "properties": {
+          "taskId": { "type": "string", "pattern": "^task-[a-f0-9]{24}$" },
+          "referenceId": {
+            "type": "string",
+            "pattern": "^reference-[a-f0-9]{24}$"
+          },
+          "leftCandidateId": {
+            "type": "string",
+            "pattern": "^candidate-[a-f0-9]{24}$"
+          },
+          "rightCandidateId": {
+            "type": "string",
+            "pattern": "^candidate-[a-f0-9]{24}$"
+          },
+          "choice": { "enum": ["left", "right", "tie"] },
+          "confidence": { "enum": ["low", "medium", "high"] },
+          "rationale": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "decisiveDifferences",
+              "leftDefects",
+              "rightDefects",
+              "tieBasis"
+            ],
+            "properties": {
+              "decisiveDifferences": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 20 }
+              },
+              "leftDefects": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 20 }
+              },
+              "rightDefects": {
+                "type": "array",
+                "items": { "type": "string", "minLength": 20 }
+              },
+              "tieBasis": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "choice": { "const": "tie" } } },
+            "then": {
+              "properties": {
+                "rationale": {
+                  "properties": {
+                    "decisiveDifferences": { "maxItems": 0 },
+                    "tieBasis": {
+                      "type": "string",
+                      "minLength": 20,
+                      "pattern": "(exact|within|px|%|sRGB|Euclidean)"
+                    }
+                  }
+                }
+              }
+            },
+            "else": {
+              "properties": {
+                "rationale": {
+                  "properties": {
+                    "decisiveDifferences": { "minItems": 1 },
+                    "tieBasis": { "type": "null" }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "if": { "properties": { "choice": { "const": "left" } } },
+            "then": {
+              "properties": {
+                "rationale": {
+                  "properties": { "rightDefects": { "minItems": 1 } }
+                }
+              }
+            }
+          },
+          {
+            "if": { "properties": { "choice": { "const": "right" } } },
+            "then": {
+              "properties": {
+                "rationale": {
+                  "properties": { "leftDefects": { "minItems": 1 } }
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

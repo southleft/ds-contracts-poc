@@ -1,0 +1,128 @@
+{
+  "version": "button-live-canvas-v4-sealed-key",
+  "status": "sealed-until-independent-grade",
+  "packetPath": "recipe/evidence/button-live-pivot-v4/blind-packet/packet.json",
+  "packetSha256": "054763d1602ba476414fd072701410200c0c3006d37d77ea5a7831abfba58e46",
+  "mappings": [
+    {
+      "anonymousCell": "cell-e9fe00a5179d",
+      "anonymousSpecimen": "specimen-3c2155846f05",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "liveNodeId": "85:8119",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-secondary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-hover.png"
+    },
+    {
+      "anonymousCell": "cell-030eaf529e3a",
+      "anonymousSpecimen": "specimen-082b942ece71",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8105",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-secondary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-focus-visible.png"
+    },
+    {
+      "anonymousCell": "cell-5eaa940d0be5",
+      "anonymousSpecimen": "specimen-72621c5fc797",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "liveNodeId": "85:8117",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-secondary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-default.png"
+    },
+    {
+      "anonymousCell": "cell-f495272b6e92",
+      "anonymousSpecimen": "specimen-6759eb8e7af7",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8115",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-primary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-focus-visible.png"
+    },
+    {
+      "anonymousCell": "cell-56651013d52a",
+      "anonymousSpecimen": "specimen-e477a34f8ef1",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8099",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-primary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-focus-visible.png"
+    },
+    {
+      "anonymousCell": "cell-9de488e11f1d",
+      "anonymousSpecimen": "specimen-113ff7d3a70c",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "liveNodeId": "85:8111",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-primary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-default.png"
+    },
+    {
+      "anonymousCell": "cell-b119c22e9e57",
+      "anonymousSpecimen": "specimen-914c41c8f555",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "default",
+      "liveNodeId": "85:8101",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-secondary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-default.png"
+    },
+    {
+      "anonymousCell": "cell-5f9749142cba",
+      "anonymousSpecimen": "specimen-1638caef312a",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "liveNodeId": "85:8113",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-primary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-primary__state-hover.png"
+    },
+    {
+      "anonymousCell": "cell-e1f00bba996c",
+      "anonymousSpecimen": "specimen-a1d8c4b847c7",
+      "adapterIdentity": "fluent-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "focus-visible",
+      "liveNodeId": "85:8121",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/fluent__variant-secondary__state-focus-visible.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/fluent-button-reviewed-v2__variant-secondary__state-focus-visible.png"
+    },
+    {
+      "anonymousCell": "cell-15c725e7f09e",
+      "anonymousSpecimen": "specimen-05f8b77d43f8",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "hover",
+      "liveNodeId": "85:8097",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-primary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-hover.png"
+    },
+    {
+      "anonymousCell": "cell-ba92c7c0417a",
+      "anonymousSpecimen": "specimen-0ecabcba3f79",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "secondary",
+      "state": "hover",
+      "liveNodeId": "85:8103",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-secondary__state-hover.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-secondary__state-hover.png"
+    },
+    {
+      "anonymousCell": "cell-fb6f8afd9090",
+      "anonymousSpecimen": "specimen-7c254eacb1b0",
+      "adapterIdentity": "altitude-button-reviewed-v2",
+      "variant": "primary",
+      "state": "default",
+      "liveNodeId": "85:8095",
+      "sourceReferencePath": "recipe/evidence/button-comparison-v2/source-reference/altitude__variant-primary__state-default.png",
+      "liveEvidencePath": "recipe/evidence/button-live-pivot-v4/screenshots/cells/altitude-button-reviewed-v2__variant-primary__state-default.png"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "artifactVersion": "calendar-live-v10-status-v1",
+  "status": "attempt 1 failed closed at extract unsupported structural edit at $.children[0].children[0].children[2].children[0].clipsContent; writer accepted; restore 4 held; week-number order held; host emitted week-frame clipsContent true vs compile omit; mint cleaned; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "bb9a9a64bb451bc990ed000a71d203950746af0d",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v10/antecedent-index.json",
+    "indexSha256": "9eda606f145586688f372702d95c4c98fd1fabebef9a53ee01cd89a26aae59d2",
+    "hashSetSha256": "107a8051c166cf5ff32349c7c5e59d024c34d1cd8143e0fa169ced1831930bef"
+  },
+  "authorization": {
+    "commit": "ae64b978f96b13b57976c6c12fd0501cfaebf501",
+    "path": "recipe/evidence/calendar-live-pivot-v10/capture-authorization.json",
+    "sha256": "5186ad3e3af002d21d33d4f55dc235c490be527de611aa5fadc49529bfc963d5",
+    "signingPublicKeySpkiSha256": "4f3ff7f70c6bb76d3c62d5e1a5266f0d5451487934e97b4d1fc1b7ec62e2866f"
+  },
+  "attempt1": {
+    "pageId": "173:50902",
+    "pageRemoved": true,
+    "writerAccepted": true,
+    "restoreAccepted": true,
+    "extractRefused": "unsupported structural edit at $.children[0].children[0].children[2].children[0].clipsContent",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": true
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "host-omit clipsContent on calendar/week/${n} frames",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

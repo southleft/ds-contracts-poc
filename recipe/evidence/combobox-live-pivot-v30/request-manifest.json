@@ -1,0 +1,546 @@
+{
+  "artifactVersion": "combobox-live-v30-request-manifest-v1",
+  "expectedDynamicTool": {
+    "namespace": "user-Figma Console",
+    "tool": "figma_execute"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "signedAtRuntime": true,
+  "requestCount": 77,
+  "requests": [
+    {
+      "requestId": "writer",
+      "sequence": 1,
+      "phase": "writer"
+    },
+    {
+      "requestId": "cleanup",
+      "sequence": 2,
+      "phase": "cleanup",
+      "availability": "persisted immediately after writer acceptance"
+    },
+    {
+      "requestId": "restore",
+      "sequence": 3,
+      "phase": "restore"
+    },
+    {
+      "requestId": "extract",
+      "sequence": 4,
+      "phase": "extract"
+    },
+    {
+      "requestId": "probe",
+      "sequence": 5,
+      "phase": "probe"
+    },
+    {
+      "requestId": "capture-000",
+      "sequence": 6,
+      "phase": "capture",
+      "captureIndex": 0,
+      "cellKey": "mui/combobox/small/outlined/false/default/options"
+    },
+    {
+      "requestId": "capture-001",
+      "sequence": 7,
+      "phase": "capture",
+      "captureIndex": 1,
+      "cellKey": "mui/combobox/small/outlined/false/default/empty"
+    },
+    {
+      "requestId": "capture-002",
+      "sequence": 8,
+      "phase": "capture",
+      "captureIndex": 2,
+      "cellKey": "mui/combobox/small/outlined/false/disabled/options"
+    },
+    {
+      "requestId": "capture-003",
+      "sequence": 9,
+      "phase": "capture",
+      "captureIndex": 3,
+      "cellKey": "mui/combobox/small/outlined/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-004",
+      "sequence": 10,
+      "phase": "capture",
+      "captureIndex": 4,
+      "cellKey": "mui/combobox/small/outlined/false/error/options"
+    },
+    {
+      "requestId": "capture-005",
+      "sequence": 11,
+      "phase": "capture",
+      "captureIndex": 5,
+      "cellKey": "mui/combobox/small/outlined/false/error/empty"
+    },
+    {
+      "requestId": "capture-006",
+      "sequence": 12,
+      "phase": "capture",
+      "captureIndex": 6,
+      "cellKey": "mui/combobox/small/outlined/false/loading/options"
+    },
+    {
+      "requestId": "capture-007",
+      "sequence": 13,
+      "phase": "capture",
+      "captureIndex": 7,
+      "cellKey": "mui/combobox/small/outlined/false/loading/empty"
+    },
+    {
+      "requestId": "capture-008",
+      "sequence": 14,
+      "phase": "capture",
+      "captureIndex": 8,
+      "cellKey": "mui/combobox/small/filled/false/default/options"
+    },
+    {
+      "requestId": "capture-009",
+      "sequence": 15,
+      "phase": "capture",
+      "captureIndex": 9,
+      "cellKey": "mui/combobox/small/filled/false/default/empty"
+    },
+    {
+      "requestId": "capture-010",
+      "sequence": 16,
+      "phase": "capture",
+      "captureIndex": 10,
+      "cellKey": "mui/combobox/small/filled/false/disabled/options"
+    },
+    {
+      "requestId": "capture-011",
+      "sequence": 17,
+      "phase": "capture",
+      "captureIndex": 11,
+      "cellKey": "mui/combobox/small/filled/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-012",
+      "sequence": 18,
+      "phase": "capture",
+      "captureIndex": 12,
+      "cellKey": "mui/combobox/small/filled/false/error/options"
+    },
+    {
+      "requestId": "capture-013",
+      "sequence": 19,
+      "phase": "capture",
+      "captureIndex": 13,
+      "cellKey": "mui/combobox/small/filled/false/error/empty"
+    },
+    {
+      "requestId": "capture-014",
+      "sequence": 20,
+      "phase": "capture",
+      "captureIndex": 14,
+      "cellKey": "mui/combobox/small/filled/false/loading/options"
+    },
+    {
+      "requestId": "capture-015",
+      "sequence": 21,
+      "phase": "capture",
+      "captureIndex": 15,
+      "cellKey": "mui/combobox/small/filled/false/loading/empty"
+    },
+    {
+      "requestId": "capture-016",
+      "sequence": 22,
+      "phase": "capture",
+      "captureIndex": 16,
+      "cellKey": "mui/combobox/medium/outlined/false/default/options"
+    },
+    {
+      "requestId": "capture-017",
+      "sequence": 23,
+      "phase": "capture",
+      "captureIndex": 17,
+      "cellKey": "mui/combobox/medium/outlined/false/default/empty"
+    },
+    {
+      "requestId": "capture-018",
+      "sequence": 24,
+      "phase": "capture",
+      "captureIndex": 18,
+      "cellKey": "mui/combobox/medium/outlined/false/disabled/options"
+    },
+    {
+      "requestId": "capture-019",
+      "sequence": 25,
+      "phase": "capture",
+      "captureIndex": 19,
+      "cellKey": "mui/combobox/medium/outlined/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-020",
+      "sequence": 26,
+      "phase": "capture",
+      "captureIndex": 20,
+      "cellKey": "mui/combobox/medium/outlined/false/error/options"
+    },
+    {
+      "requestId": "capture-021",
+      "sequence": 27,
+      "phase": "capture",
+      "captureIndex": 21,
+      "cellKey": "mui/combobox/medium/outlined/false/error/empty"
+    },
+    {
+      "requestId": "capture-022",
+      "sequence": 28,
+      "phase": "capture",
+      "captureIndex": 22,
+      "cellKey": "mui/combobox/medium/outlined/false/loading/options"
+    },
+    {
+      "requestId": "capture-023",
+      "sequence": 29,
+      "phase": "capture",
+      "captureIndex": 23,
+      "cellKey": "mui/combobox/medium/outlined/false/loading/empty"
+    },
+    {
+      "requestId": "capture-024",
+      "sequence": 30,
+      "phase": "capture",
+      "captureIndex": 24,
+      "cellKey": "mui/combobox/medium/filled/false/default/options"
+    },
+    {
+      "requestId": "capture-025",
+      "sequence": 31,
+      "phase": "capture",
+      "captureIndex": 25,
+      "cellKey": "mui/combobox/medium/filled/false/default/empty"
+    },
+    {
+      "requestId": "capture-026",
+      "sequence": 32,
+      "phase": "capture",
+      "captureIndex": 26,
+      "cellKey": "mui/combobox/medium/filled/false/disabled/options"
+    },
+    {
+      "requestId": "capture-027",
+      "sequence": 33,
+      "phase": "capture",
+      "captureIndex": 27,
+      "cellKey": "mui/combobox/medium/filled/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-028",
+      "sequence": 34,
+      "phase": "capture",
+      "captureIndex": 28,
+      "cellKey": "mui/combobox/medium/filled/false/error/options"
+    },
+    {
+      "requestId": "capture-029",
+      "sequence": 35,
+      "phase": "capture",
+      "captureIndex": 29,
+      "cellKey": "mui/combobox/medium/filled/false/error/empty"
+    },
+    {
+      "requestId": "capture-030",
+      "sequence": 36,
+      "phase": "capture",
+      "captureIndex": 30,
+      "cellKey": "mui/combobox/medium/filled/false/loading/options"
+    },
+    {
+      "requestId": "capture-031",
+      "sequence": 37,
+      "phase": "capture",
+      "captureIndex": 31,
+      "cellKey": "mui/combobox/medium/filled/false/loading/empty"
+    },
+    {
+      "requestId": "capture-032",
+      "sequence": 38,
+      "phase": "capture",
+      "captureIndex": 32,
+      "cellKey": "mui/option/small/default"
+    },
+    {
+      "requestId": "capture-033",
+      "sequence": 39,
+      "phase": "capture",
+      "captureIndex": 33,
+      "cellKey": "mui/option/small/selected"
+    },
+    {
+      "requestId": "capture-034",
+      "sequence": 40,
+      "phase": "capture",
+      "captureIndex": 34,
+      "cellKey": "mui/option/medium/default"
+    },
+    {
+      "requestId": "capture-035",
+      "sequence": 41,
+      "phase": "capture",
+      "captureIndex": 35,
+      "cellKey": "mui/option/medium/selected"
+    },
+    {
+      "requestId": "capture-036",
+      "sequence": 42,
+      "phase": "capture",
+      "captureIndex": 36,
+      "cellKey": "antd/combobox/small/outlined/false/default/options"
+    },
+    {
+      "requestId": "capture-037",
+      "sequence": 43,
+      "phase": "capture",
+      "captureIndex": 37,
+      "cellKey": "antd/combobox/small/outlined/false/default/empty"
+    },
+    {
+      "requestId": "capture-038",
+      "sequence": 44,
+      "phase": "capture",
+      "captureIndex": 38,
+      "cellKey": "antd/combobox/small/outlined/false/disabled/options"
+    },
+    {
+      "requestId": "capture-039",
+      "sequence": 45,
+      "phase": "capture",
+      "captureIndex": 39,
+      "cellKey": "antd/combobox/small/outlined/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-040",
+      "sequence": 46,
+      "phase": "capture",
+      "captureIndex": 40,
+      "cellKey": "antd/combobox/small/outlined/false/error/options"
+    },
+    {
+      "requestId": "capture-041",
+      "sequence": 47,
+      "phase": "capture",
+      "captureIndex": 41,
+      "cellKey": "antd/combobox/small/outlined/false/error/empty"
+    },
+    {
+      "requestId": "capture-042",
+      "sequence": 48,
+      "phase": "capture",
+      "captureIndex": 42,
+      "cellKey": "antd/combobox/small/outlined/false/loading/options"
+    },
+    {
+      "requestId": "capture-043",
+      "sequence": 49,
+      "phase": "capture",
+      "captureIndex": 43,
+      "cellKey": "antd/combobox/small/outlined/false/loading/empty"
+    },
+    {
+      "requestId": "capture-044",
+      "sequence": 50,
+      "phase": "capture",
+      "captureIndex": 44,
+      "cellKey": "antd/combobox/small/filled/false/default/options"
+    },
+    {
+      "requestId": "capture-045",
+      "sequence": 51,
+      "phase": "capture",
+      "captureIndex": 45,
+      "cellKey": "antd/combobox/small/filled/false/default/empty"
+    },
+    {
+      "requestId": "capture-046",
+      "sequence": 52,
+      "phase": "capture",
+      "captureIndex": 46,
+      "cellKey": "antd/combobox/small/filled/false/disabled/options"
+    },
+    {
+      "requestId": "capture-047",
+      "sequence": 53,
+      "phase": "capture",
+      "captureIndex": 47,
+      "cellKey": "antd/combobox/small/filled/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-048",
+      "sequence": 54,
+      "phase": "capture",
+      "captureIndex": 48,
+      "cellKey": "antd/combobox/small/filled/false/error/options"
+    },
+    {
+      "requestId": "capture-049",
+      "sequence": 55,
+      "phase": "capture",
+      "captureIndex": 49,
+      "cellKey": "antd/combobox/small/filled/false/error/empty"
+    },
+    {
+      "requestId": "capture-050",
+      "sequence": 56,
+      "phase": "capture",
+      "captureIndex": 50,
+      "cellKey": "antd/combobox/small/filled/false/loading/options"
+    },
+    {
+      "requestId": "capture-051",
+      "sequence": 57,
+      "phase": "capture",
+      "captureIndex": 51,
+      "cellKey": "antd/combobox/small/filled/false/loading/empty"
+    },
+    {
+      "requestId": "capture-052",
+      "sequence": 58,
+      "phase": "capture",
+      "captureIndex": 52,
+      "cellKey": "antd/combobox/medium/outlined/false/default/options"
+    },
+    {
+      "requestId": "capture-053",
+      "sequence": 59,
+      "phase": "capture",
+      "captureIndex": 53,
+      "cellKey": "antd/combobox/medium/outlined/false/default/empty"
+    },
+    {
+      "requestId": "capture-054",
+      "sequence": 60,
+      "phase": "capture",
+      "captureIndex": 54,
+      "cellKey": "antd/combobox/medium/outlined/false/disabled/options"
+    },
+    {
+      "requestId": "capture-055",
+      "sequence": 61,
+      "phase": "capture",
+      "captureIndex": 55,
+      "cellKey": "antd/combobox/medium/outlined/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-056",
+      "sequence": 62,
+      "phase": "capture",
+      "captureIndex": 56,
+      "cellKey": "antd/combobox/medium/outlined/false/error/options"
+    },
+    {
+      "requestId": "capture-057",
+      "sequence": 63,
+      "phase": "capture",
+      "captureIndex": 57,
+      "cellKey": "antd/combobox/medium/outlined/false/error/empty"
+    },
+    {
+      "requestId": "capture-058",
+      "sequence": 64,
+      "phase": "capture",
+      "captureIndex": 58,
+      "cellKey": "antd/combobox/medium/outlined/false/loading/options"
+    },
+    {
+      "requestId": "capture-059",
+      "sequence": 65,
+      "phase": "capture",
+      "captureIndex": 59,
+      "cellKey": "antd/combobox/medium/outlined/false/loading/empty"
+    },
+    {
+      "requestId": "capture-060",
+      "sequence": 66,
+      "phase": "capture",
+      "captureIndex": 60,
+      "cellKey": "antd/combobox/medium/filled/false/default/options"
+    },
+    {
+      "requestId": "capture-061",
+      "sequence": 67,
+      "phase": "capture",
+      "captureIndex": 61,
+      "cellKey": "antd/combobox/medium/filled/false/default/empty"
+    },
+    {
+      "requestId": "capture-062",
+      "sequence": 68,
+      "phase": "capture",
+      "captureIndex": 62,
+      "cellKey": "antd/combobox/medium/filled/false/disabled/options"
+    },
+    {
+      "requestId": "capture-063",
+      "sequence": 69,
+      "phase": "capture",
+      "captureIndex": 63,
+      "cellKey": "antd/combobox/medium/filled/false/disabled/empty"
+    },
+    {
+      "requestId": "capture-064",
+      "sequence": 70,
+      "phase": "capture",
+      "captureIndex": 64,
+      "cellKey": "antd/combobox/medium/filled/false/error/options"
+    },
+    {
+      "requestId": "capture-065",
+      "sequence": 71,
+      "phase": "capture",
+      "captureIndex": 65,
+      "cellKey": "antd/combobox/medium/filled/false/error/empty"
+    },
+    {
+      "requestId": "capture-066",
+      "sequence": 72,
+      "phase": "capture",
+      "captureIndex": 66,
+      "cellKey": "antd/combobox/medium/filled/false/loading/options"
+    },
+    {
+      "requestId": "capture-067",
+      "sequence": 73,
+      "phase": "capture",
+      "captureIndex": 67,
+      "cellKey": "antd/combobox/medium/filled/false/loading/empty"
+    },
+    {
+      "requestId": "capture-068",
+      "sequence": 74,
+      "phase": "capture",
+      "captureIndex": 68,
+      "cellKey": "antd/option/small/default"
+    },
+    {
+      "requestId": "capture-069",
+      "sequence": 75,
+      "phase": "capture",
+      "captureIndex": 69,
+      "cellKey": "antd/option/small/selected"
+    },
+    {
+      "requestId": "capture-070",
+      "sequence": 76,
+      "phase": "capture",
+      "captureIndex": 70,
+      "cellKey": "antd/option/medium/default"
+    },
+    {
+      "requestId": "capture-071",
+      "sequence": 77,
+      "phase": "capture",
+      "captureIndex": 71,
+      "cellKey": "antd/option/medium/selected"
+    }
+  ]
+}

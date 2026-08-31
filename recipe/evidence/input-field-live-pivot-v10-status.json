@@ -1,0 +1,76 @@
+{
+  "artifactVersion": "input-live-v10-status-v1",
+  "status": "attempt 2 failed closed; host dropped text roles on font-provenance= names; cleanup complete; do not restart v10 as-is",
+  "baseCommit": "2618e4e15cd88ad9f3428f1a8026a0fee2ede04f",
+  "antecedent": {
+    "commit": "0da647b79ed8a2660b9858c6008a08cbae8dbbf3",
+    "indexPath": "recipe/evidence/input-field-live-pivot-v10/antecedent-index.json",
+    "indexSha256": "4a054aadf5902fed939da30c1b54833bcc7a54f88b145f5348c4d9b3108524bc",
+    "hashSetSha256": "c39fba6f31281ab89bfc7a6e256985b47f0c5c7133dba0d6c7700c2d36a002a2",
+    "authorizationLifecycleExcluded": true,
+    "byteStableAcrossLaterAuthorization": true
+  },
+  "authorization": {
+    "present": true,
+    "commitStateDerivedByHistory": true,
+    "effective": false,
+    "path": "recipe/evidence/input-field-live-pivot-v10/capture-authorization.json",
+    "sha256": "393996857f730419f9f92b1d2d30abaa9b5e896866e2694d50e3999c4e7b5e57",
+    "signingPublicKeySpkiSha256": "d651c665ee361bfc72f1bf671e5e45493c9a9eb7444493bc764551793909d25d",
+    "templatePath": "recipe/evidence/input-field-live-pivot-v10/authorization-template.json",
+    "templateSha256": "cc37e0d6da97a40a1d076f7ecba35ed2394ba101fa007ff08bf9ffcb135af57b",
+    "precommitHistoryState": "pending-uncommitted-authorization",
+    "expectedHistoryModeAfterAuthorizationCommit": "--expect-authorized",
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false,
+    "v9AuthorizationReusable": false
+  },
+  "smallestHonestDelta": {
+    "taughtLiveFillKinds": ["VARIABLE_ALIAS", "boundVariablesOnly"],
+    "carriedSceneReadback": "recipe/scene-readback-v10.ts",
+    "carriedSceneReadbackRuntime": "recipe/scene-readback-runtime-v10.ts",
+    "carriedV3Verifier": "recipe/input-field-live-v3-verifier-v10.ts",
+    "liveHostDoesNotImportSceneReadbackTs": true,
+    "v8SceneReadbackUnchanged": true,
+    "v9AntecedentBytesUnchanged": true
+  },
+  "transportFacts": {
+    "oneCallDiskOperatorRequired": true,
+    "honorSignedTimeoutRequired": true,
+    "signedWriterTimeoutMs": 300000,
+    "fileContextEditorTypeReconstructedFromExactScratchTarget": true,
+    "emptyCodeEnvelopeRefused": true,
+    "cursorReadMustNotIngestSignedWriter": true
+  },
+  "denominator": {
+    "sourceRoots": 2,
+    "expectedSceneFacts": 43726,
+    "variants": 256,
+    "captureCells": 128,
+    "remoteRequests": 132,
+    "hostPhases": 3
+  },
+  "securityPrerequisites": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "attemptsExecuted": 2,
+  "nextAttempt": 3,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": true,
+  "figmaWrites": 4,
+  "figmaCaptures": 0,
+  "createdNodesThenRemoved": 2317,
+  "attempt1Path": "recipe/evidence/input-field-live-pivot-v10-attempt-1.json",
+  "attempt1Sha256": "a3acc3dda0e8dedd616a53a7129db08bf4ed8ff839cd65c5919b286440ba320a",
+  "attempt2Path": "recipe/evidence/input-field-live-pivot-v10-attempt-2.json",
+  "attempt2Sha256": "8a98000b9187c097024d976c4c56242498093a38f4e1e7ea4307bd8a73e1fd48",
+  "restartAsV10Attempt2WithoutAxisOrderTeachingForbidden": true,
+  "restartAsV10Attempt3WithoutCarriedFirstSegmentRoleForbidden": true,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

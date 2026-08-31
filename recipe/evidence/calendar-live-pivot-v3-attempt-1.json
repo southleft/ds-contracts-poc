@@ -1,0 +1,86 @@
+{
+  "artifactVersion": "calendar-live-v3-attempt-1-v1",
+  "status": "failed closed at writer; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "712e26b5c504a96bff84ec34251a8577b8aa9e5d",
+  "codeCommit": "712e26b5c504a96bff84ec34251a8577b8aa9e5d",
+  "antecedentCommit": "6f4135a4ad6bb5db04acc58c4989714fbe20a9a9",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v3",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "e34ec7f5-ea50-4428-b639-bd69470f9229",
+    "attempt": 1,
+    "authorizationSha256": "db07ebb1503b7e31bbc81c219ac72b96e6cb1c2085b87a7254d0950f334e674e",
+    "signingPublicKeySpkiSha256": "054acebe6aa10d5524b4d0a8e414117485efdb65ee6b12d105e7d91e7f90812c",
+    "programSha256": "f6f2f968ca799082e75d14778b698a68fe731ac5e2d6eba19ef1d3d95560e02c",
+    "requestBindingSha256": "ef0dc2358494278c06565b795c3faa165b9aaa45a39252e338457679cd1d9e11",
+    "requestSha256": "ebe83c67c46d0f0731ad979d1a409ef4b25ea943a03eea756d4ee7f906f94733"
+  },
+  "writer": {
+    "accepted": false,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v3",
+    "pageId": "173:49822",
+    "sectionId": "173:49823",
+    "collectionId": "VariableCollectionId:173:49824",
+    "runIdentity": "19be1c96-calendar-v3",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "refusedClass": "CALENDAR-SET-PROPERTIES-FONT-UNAVAILABLE",
+    "refused": "Error: in setProperties: Unable to update this text property because the component uses a font that isn't available.",
+    "observed": {
+      "loadFontBeforeSetPropertiesHeld": true,
+      "font": { "family": "SF Pro", "style": "Regular" },
+      "fontListed": true,
+      "setPropertiesAfterLoadFont": "still refused",
+      "directCharactersAfterLoadFont": "ok",
+      "failedAt": "first calendar@1/day instance setProperties(Label) while minting week WeekNumbers=on",
+      "instanceId": "173:49855",
+      "labelProperty": "Label#173:26417"
+    },
+    "namedCause": "SF Pro is listed and loadable, but a TEXT component property on that face cannot be updated via setProperties; the instance label can be written as text.characters",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": false,
+    "signedCleanupAccepted": false,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:49822",
+    "removedCollectionIds": ["VariableCollectionId:173:49824"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-SET-PROPERTIES-FONT-UNAVAILABLE",
+    "doNotInvent": true,
+    "restartV3Attempt2AsIs": false,
+    "prepareV4": "apply the day instance Label via text.characters, not setProperties; do not invent a different font"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

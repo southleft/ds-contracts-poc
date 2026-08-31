@@ -1,0 +1,27 @@
+{
+  "version": 5,
+  "attempt": 4,
+  "kind": "cleanup-before-corrected-remint",
+  "date": "2026-08-30",
+  "reason": "Attempt 4 completed the mint with exact byte transport (staged chunks; decodedSha256 verified) and all live usability probes green, but the minted focus rings painted NOTHING: figma.variables.setBoundVariableForEffect returned the effect with its spread RESET to 0 (planned spread 4; the unbound white gap shadow kept its spread 2, isolating the defect to the binding call). Measured live on set 183:67124 focus-visible variants: effects[1] = DROP_SHADOW #4375ffff spread 0 bound to VariableID:183:66566. The writer runtime now carries the compile-planned shadow geometry (offset/radius/spread) over the bound effect; attempt 5 remints with the corrected writer under the SAME run identity (the recipe hash is unchanged — only writer runtime bytes changed).",
+  "removed": {
+    "pages": [{ "id": "183:66498", "children": 4 }],
+    "collections": [
+      {
+        "id": "VariableCollectionId:183:66500",
+        "name": "Recipe Pivot / 4063ba55-b04f4059-v4 / altitude-button-reviewed-v2"
+      },
+      {
+        "id": "VariableCollectionId:183:67126",
+        "name": "Recipe Pivot / 4063ba55-b04f4059-v4 / fluent-button-reviewed-v2"
+      }
+    ]
+  },
+  "after": {
+    "proofPageMatches": 0,
+    "matchingCollections": 0,
+    "oldButtonPagePresent": true,
+    "inputPagePresent": true
+  },
+  "transport": "figma_execute_across_files scoped to fileKey byMp6lt0Ij9b2QbkDGFwBh; connected read-only files untouched"
+}

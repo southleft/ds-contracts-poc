@@ -1,0 +1,44 @@
+{
+  "artifactVersion": "calendar-live-v2-status-v1",
+  "status": "attempt 1 failed closed at writer setProperties font unavailable; day-box teaching held; first day instance Label update refused because SF Pro was not loaded on the instance; writer not accepted; cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; Button 85:6781 stayed; Table 173:48924 stayed; mint did not stay; no Calendar human grade",
+  "antecedent": {
+    "commit": "33ec75ead051f895e361b9fbdc3774b37132c200",
+    "indexPath": "recipe/evidence/calendar-live-pivot-v2/antecedent-index.json",
+    "indexSha256": "43833c5c7eac8cddc3ae7c2da06c5322cac758f21e559cc1edb84742f2faabd0",
+    "hashSetSha256": "93e33d60831b3d27b683f22c5ed584f9a1ec43ce487c5e202ed6afbe6bb5280d"
+  },
+  "authorization": {
+    "commit": "4e2e3e7e4fdf3548ea3f9ed2fe7884db9b71b342",
+    "path": "recipe/evidence/calendar-live-pivot-v2/capture-authorization.json",
+    "sha256": "3494956604e9c4190f478e85d4834b50681175460eaa20c3bd1e4253ceadbdc5",
+    "signingPublicKeySpkiSha256": "f5395611739553e3097b6b530e2c0cd46751070d3d35a8c18a30f72d473b0a10"
+  },
+  "attempt1": {
+    "pageId": "173:49787",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "Error: in setProperties: Unable to update this text property because the component uses a font that isn't available.",
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "buttonPageUntouched": {
+    "pageId": "85:6781",
+    "presentAfterCleanup": true
+  },
+  "tablePageUntouched": {
+    "pageId": "173:48924",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "load each day-instance TEXT font before setProperties(Label)",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

@@ -1,0 +1,110 @@
+{
+  "artifactVersion": "calendar-live-v28-attempt-1-v1",
+  "status": "THE MINT STAYS. Writer and restore accepted. Extract MCP succeeded; collapse refused host instance height.mode FIXED against compile hug. Probe and captures not issued. Cleanup persisted, not executed. Screenshots show a recognizable calendar: day numbers paint; week/month instances carry the named dayCell-size 32x32 box (not V27 16x16 hug-collapse). Product v1 incomplete. Do not invent a Calendar grade.",
+  "authorizationCommit": "4053cf67f",
+  "codeCommit": "4053cf67f",
+  "antecedentCommit": "5100ceeac48bfe4120bb3a7f41ab79312704f775",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=180-55345",
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v28",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "82bdb9c7-9c89-48ba-8a36-d094ab227966",
+    "attempt": 1,
+    "programSha256": "fdfe2a3be193f4e02bda7637fcc229788d6807f6e518eef4fca5018c344926e9"
+  },
+  "teaching": {
+    "one": "CALENDAR-WRITER-INSTANCE-CARRIES-DAY-CELL-SIZE",
+    "cleared": true,
+    "namedCauseCleared": "V27 week/month day instances were 16x16 HUG (single-digit 8x16) because the writer stamped compile hug onto instances of a FIXED dayCell-size 32x32 main. V28 skips instance hug, resizes to main.width/main.height, and re-carries that box after Label bind. Measured after mint+restore+arrange: instances 32x32 FIXED/FIXED; week-on 256x32; week-off 224x32; month grid 256x96 / 224x96. Do not invent a new px. Do not change day-label hug."
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v28",
+    "pageId": "180:55345",
+    "sectionId": "180:55346",
+    "collectionId": "VariableCollectionId:180:55347",
+    "daySetId": "180:55375",
+    "weekSetId": "180:55407",
+    "calendarSetId": "180:55524",
+    "runIdentity": "19be1c96-calendar-v28",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "createdNodeIds": 101,
+    "receiptSha256": "b6f036048f780280692e912197eed6643bb407754df2991db26432a4c985eaad",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true,
+    "v23PageUntouched": true,
+    "v27PageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "receiptSha256": "43f4b21c77cd43a6e1a63b65fe3f38ff5b5a7d726f504ed825d04714aeb75515"
+  },
+  "extract": {
+    "issued": true,
+    "mcpSuccess": true,
+    "accepted": false,
+    "refuseClass": "unsupported structural edit at $.children[0].children[0].children[2].children[0].children[1].height.mode",
+    "namedCause": "Compile still emits day-instance height.mode hug (and width.mode hug). Host now carries FIXED dayCell-size on the instance. firstDifference hits height.mode on the first month-grid day instance. Not a smashed-grid class."
+  },
+  "probe": {
+    "issued": false,
+    "accepted": false
+  },
+  "captures": {
+    "issued": 0,
+    "accepted": 0
+  },
+  "arranged": {
+    "oneSetAtATime": true,
+    "dayGrid": { "id": "180:55525", "name": "Calendar Day Grid" },
+    "weekGrid": { "id": "180:55526", "name": "Calendar Week Grid" },
+    "monthGrid": { "id": "180:55527", "name": "Calendar Month Grid" },
+    "leftoverGenericComponentContainer": [],
+    "wrapperOverlapAfterSpacing": { "dayWeek": 0, "weekMonth": 0, "dayMonth": 0 },
+    "emptySectionMovedNotDeleted": null,
+    "sectionResized": { "id": "180:55346", "w": 448, "h": 1408 }
+  },
+  "screenshots": {
+    "v28DayGrid": "readable 26 in default / today ring / selected blue / outside 32x32 cells; numbers visible: yes",
+    "v28WeekGrid": "instance Labels 26-31-1 paint; instances 32x32 FIXED so the row is 256x32 (week-on) / 224x32 (week-off); source gridGap 0 so digits sit in adjacent 32px cells, not V27 16x16 smash",
+    "v28MonthGrid": "August 2026 and Su-Sa visible; today 5 ring and selected 12 blue square; grid 256x96 / 224x96 (3x32 rows); recognizable calendar"
+  },
+  "product": {
+    "onePxSliverClassCleared": true,
+    "instanceLabelMismatchClassCleared": true,
+    "dayNumbersVisible": true,
+    "weekdayHeadersVisible": true,
+    "monthCaptionVisible": true,
+    "weekMonthThirtyTwoGrid": true,
+    "instanceCarriesDayCellSize": true,
+    "measuredInstance": { "w": 32, "h": 32, "sizing": "FIXED/FIXED", "main": "32x32 FIXED dayCell-size" },
+    "measuredWeekOn": { "w": 256, "h": 32 },
+    "measuredMonthGrid": { "w": 256, "h": 96 }
+  },
+  "cleanup": {
+    "signedCleanupIssued": true,
+    "executed": false,
+    "reason": "writer accepted and screenshots show a grid; cleanup-on-failure-only"
+  },
+  "v23PageLeft": "173:53929",
+  "v27PageLeft": "179:54747",
+  "doNotInventCalendarGrade": true,
+  "productV1Complete": false,
+  "nextTeaching": "Compile dayInstance width/height to the already-named dayCell-size fixed box so extract matches the host FIXED instance. Do not invent a new px. Do not change day-label hug. Do not invent Polar/FILL/fonts."
+}

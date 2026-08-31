@@ -1,0 +1,76 @@
+{
+  "artifactVersion": "table-live-v1-attempt-1-v1",
+  "status": "failed closed at writer; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "fd3d20e98b13895c6b2d845e267b9aa888c74123",
+  "codeCommit": "fd3d20e98b13895c6b2d845e267b9aa888c74123",
+  "antecedentCommit": "f42aaa461ecdbb4bec4d12698ee03199a7ed8c98",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981"
+  },
+  "transaction": {
+    "transactionId": "7848aa96-d5f3-4dd8-98d3-a279565b674d",
+    "attempt": 1,
+    "authorizationSha256": "569b89e6717cdfe4ea14e1263b39160162eabbdff6f3e2b13ef4a6701c2cbda4",
+    "signingPublicKeySpkiSha256": "5ead5242ad6ef37c592e784540ca81ce56e30b2cdabde0bf5a8c3a65f4d409d3",
+    "programSha256": "104a616c10fa8917f4e0f4a2dcaf7a672d743e151c79bd79cf445f39b46a1bf4",
+    "bindingSha256": "48f73f571894af1788bb51aca5af78bee3e61ac3ca05e2fc6698fbcf58221a96",
+    "requestSha256": "a02bd53e61f5072511928dc2f4217a6b7b654e3140178f8a1d20b3c3d173bf5b"
+  },
+  "writer": {
+    "accepted": false,
+    "pageName": "Recipe Pivot / Table / 83a27edf-82d19508-table-v1",
+    "pageId": "165:40622",
+    "sectionId": "165:40623",
+    "collectionId": "VariableCollectionId:165:40624",
+    "orphanTextId": "165:40644",
+    "runIdentity": "83a27edf-82d19508-table-v1",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "refusedClass": "TABLE-FONT-PROVENANCE-TAMPER",
+    "refused": "TABLE-FONT-PROVENANCE-TAMPER:Arial:Bold",
+    "observedFont": "Arial:Bold",
+    "namedFromSource": "Inter SemiBold",
+    "namedFromSourcePath": "recipe/fixtures/table.ts#header",
+    "hostListed": "Inter Semi Bold",
+    "resolutionDeclared": "requested",
+    "resolutionObserved": "fallback",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": false,
+    "signedCleanupAccepted": false,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "165:40622",
+    "removedCollectionIds": ["VariableCollectionId:165:40624"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "currentPageAfterCleanup": "85:6781"
+  },
+  "nextTeaching": {
+    "class": "TABLE-FONT-PROVENANCE-TAMPER",
+    "doNotInvent": true,
+    "restartV1Attempt2AsIs": false,
+    "prepareV2": "name first-party header font as the host-listed Inter Semi Bold so resolveFont does not fall through to Arial Bold"
+  },
+  "secondaryNoteNotTheRefusedClass": "writer creates TEXT before resolveFont, so a TAMPER throw left orphan TEXT 165:40644 on the partial page",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

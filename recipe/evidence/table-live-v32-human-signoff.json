@@ -1,0 +1,160 @@
+{
+  "artifactVersion": "table-live-v32-human-signoff-v1",
+  "grade": "passed",
+  "reviewedAt": "2026-08-29T22:00:00-05:00",
+  "reviewer": {
+    "name": "TJ Pitre",
+    "identity": "human-owner",
+    "independent": true
+  },
+  "measuredBy": {
+    "name": "agent",
+    "role": "visual-confirmation-against-compile-and-source",
+    "measuredAt": "2026-08-29T22:10:00-05:00",
+    "method": "Figma Console read-only walk of Scratch page 173:48924 plus recipe/compile IR, library-tables fixtures, first-party CSS, and MUI extract"
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "173:48924",
+    "pageName": "Recipe Pivot / Table / 2f9b764f-82a04258-table-v32",
+    "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=173-48924",
+    "sets": [
+      {
+        "id": "173:49053",
+        "library": "first-party ds.table",
+        "name": "table/set :: Table",
+        "variantWidths": { "compact": 360, "comfortable": 360 }
+      },
+      {
+        "id": "173:49180",
+        "library": "@mui/material Table",
+        "name": "table/set :: Table",
+        "variantWidths": { "compact": 343, "comfortable": 343 }
+      }
+    ],
+    "runIdentity": "2f9b764f-82a04258-table-v32",
+    "recordCommit": "8fab2dff63fab66368f45cd224112b6f61552b66",
+    "doNotRestampHead": "85bf214d2"
+  },
+  "verbatim": "I'll take your word for it. If it's like-for-like, then you've got my pass.",
+  "priorVerbatim": "I suppose this is a pass",
+  "tjNotes": {
+    "propertiesLookRight": true,
+    "askedWhetherAdjacentCellLeftRightStrokesLooking2pxAreDesignSystemOrSourceAccurate": true,
+    "askedAgentToJudgeVisualsAgainstReferenceBeforeMovingOn": true
+  },
+  "screenshotIdentity": {
+    "attachedAs": "first-party table/set :: Table compact + comfortable",
+    "measuredContent": "Name / Role / Team; Frozen yoghurt; Ice cream sandwich",
+    "actualLibrary": "mui",
+    "note": "Both libraries publish the same set name table/set :: Table. TJ's attached frame is the MUI set (dessert copy). First-party live copy is Name / Role / Status; Ada Lovelace; Grace Hopper."
+  },
+  "measuredConfirmations": {
+    "doubleBorderClass": {
+      "verdict": "compile-named-not-a-mint-defect",
+      "firstParty": {
+        "liveCellStrokeWeight": 0,
+        "liveCellStrokePaint": [0, 0, 0, 0],
+        "liveCellStrokeSides": { "left": 0, "right": 0, "top": 0, "bottom": 0 },
+        "compile": "tokens.cellRuleWidth fallback 0; tokens.cellRule #00000000; cellComponent strokes weight from cellRuleWidth",
+        "source": "src/components/TableCell/TableCell.module.css and TableHeaderCell.module.css border: 0; only Table.module.css root carries border-width",
+        "visible2pxGutters": false
+      },
+      "mui": {
+        "liveCellStrokeWeight": 1,
+        "liveCellStrokePaint": [224, 224, 224, 100],
+        "liveCellStrokeSides": { "left": 1, "right": 1, "top": 1, "bottom": 1 },
+        "compile": "library-tables.ts muiTokens cellRuleWidth=1 cellRule=#e0e0e0ff; recipe/recipes/table.ts cellComponent applies one uniform inside stroke on every cell",
+        "source": "extract/computed/out/mui/table/enriched.contract.json tablecell border-bottom-width shared.size-1 / border-bottom-color shared.color-e0e0e0; border-left-width, border-right-width, border-top-width shared.size-0",
+        "visible2pxGutters": true,
+        "whyNotAMintDefect": "table@1 has one cellRuleWidth token and writes it as a uniform Figma stroke on the cell. Adjacent 1px + 1px reads as 2px. That is the compile lowering, not a writer inventing a second stroke.",
+        "whyNotASilentSourceLoss": "The MUI extract names a bottom rule, not collapsed table borders. The recipe cannot spell per-side cell strokes; the adapter maps the 1px #e0e0e0 rule onto cellRuleWidth. Inventing strokeBottomWeight-only cells would be a new model, not a same-class teaching."
+      }
+    },
+    "hugColumnsClass": {
+      "verdict": "compile-and-source-named",
+      "firstParty": {
+        "liveColumnWidths": [[120], [120], [120]],
+        "aligned": true,
+        "worstDivergencePx": 0,
+        "liveCellSizing": "HUG/HUG with minWidth 120",
+        "compile": "designerEditSurface.resize.cell hug-contents; densities.*.minWidth 120",
+        "source": "TableCell.module.css min-width: var(--size-table-cell-width); no width"
+      },
+      "mui": {
+        "liveColumnWidths": {
+          "header": [72, 62, 70],
+          "yogurt": [127, 90, 89],
+          "sandwich": [159, 89, 95]
+        },
+        "aligned": false,
+        "worstDivergencePx": 32,
+        "liveCellSizing": "HUG/HUG with minWidth unset",
+        "compile": "muiTokens delete densities.*.minWidth; cells hug; independent row instances; no shared column tracks",
+        "source": "@mui/material TableCell.js display table-cell, no min-width; Gate 2 in table-live-pivot-v32-attempt-1.json",
+        "note": "Ragged MUI columns are the open owner column-model decision. They must survive. Do not invent FILL/FIXED column tracks to look like a CSS TABLE grid."
+      }
+    },
+    "densityAndState": {
+      "firstParty": {
+        "compactCellPadding": [4, 12, 4, 12],
+        "comfortableCellPadding": [12, 12, 12, 12],
+        "compactRowHeight": 25,
+        "comfortableRowHeight": 41,
+        "headerFont": { "family": "Inter", "style": "Semi Bold" },
+        "bodyFont": { "family": "Inter", "style": "Regular" },
+        "headerFill": [243, 244, 246, 100],
+        "selectedRowFill": [219, 234, 254, 100],
+        "frameStroke": { "weight": 1, "paint": [229, 231, 235, 100] }
+      },
+      "mui": {
+        "compactCellPadding": [6, 16, 6, 16],
+        "comfortableCellPadding": [16, 16, 16, 16],
+        "compactRowHeight": 30,
+        "comfortableRowHeight": 50,
+        "headerFont": { "family": "Roboto", "style": "Medium" },
+        "bodyFont": { "family": "Roboto", "style": "Regular" },
+        "headerFill": [255, 255, 255, 100],
+        "selectedRowFill": [25, 118, 210, 8],
+        "frameStroke": { "weight": 0, "paint": [0, 0, 0, 0] }
+      },
+      "mustSurviveNotLookalike": [
+        "first-party 120 min-width aligned columns vs MUI ragged hug columns",
+        "first-party cell stroke 0 vs MUI cell stroke 1 #e0e0e0",
+        "first-party header #f3f4f6 + Inter Semi Bold vs MUI white header + Roboto Medium",
+        "first-party selected #dbeafe vs MUI #1976d214",
+        "first-party 8px radius + 1px frame vs MUI radius 0 + frame stroke 0"
+      ]
+    }
+  },
+  "implications": {
+    "tableLiveHumanGrade": "passed",
+    "productV1Complete": false,
+    "buttonHumanGrade": "not-invented",
+    "calendarHumanGrade": "not-invented",
+    "overallTableSuccess": false,
+    "remaining": [
+      "Calendar",
+      "Button leftover inversion (149 silent / fonts + set chrome)"
+    ],
+    "nextHill": "Calendar"
+  },
+  "recordTimeHumanSignoffUnchanged": {
+    "path": "recipe/evidence/table-live-pivot-v32-attempt-1.json",
+    "humanSignoff": "pending",
+    "overallTableSuccess": true,
+    "note": "V32 RECORD 8fab2dff6 is not restamped. HEAD 85bf214d2 is not restamped. This file is the later attributable human grade. attempt-1 overallTableSuccess remains the mint-stayed pin; this signoff keeps overallTableSuccess false the way Input V85 and Combobox V41 signoffs do."
+  },
+  "doNotOverwritePages": {
+    "inputPageId": "115:295378",
+    "comboboxPageId": "163:35981",
+    "tablePageId": "173:48924",
+    "buttonPageId": "85:6781"
+  },
+  "doNotClaimV1Complete": true,
+  "doNotInventButtonHumanGrade": true,
+  "doNotInventCalendarHumanGrade": true,
+  "doNotRemintTable": true,
+  "doNotInventColumnModel": true
+}

@@ -13,6 +13,7 @@ export const REQUIREMENT_IDS = Object.freeze([
   'V1-JOURNEY-03',
   'V1-CLASS-01',
   'V1-CLASS-02',
+  'V1-CLASS-03',
   'V1-COMPAT-01',
   'V1-COMPAT-02',
   'V1-COMPAT-03',
@@ -417,6 +418,7 @@ export function loadRepositoryContext(root) {
     DOCUMENT_PATH,
     'docs/23-known-limitations.md',
     'docs/24-what-works.md',
+    'docs/32-recipe-ir-pivot.md',
     'parity/receipts/live-figma-variant-drift.md',
     'CONTRIBUTING.md',
   ]) {

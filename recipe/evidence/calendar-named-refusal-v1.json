@@ -1,0 +1,160 @@
+{
+  "artifactVersion": "calendar-named-refusal-v1",
+  "recordedAt": "2026-08-29",
+  "archetype": "calendar / date-picker",
+  "recipe": {
+    "id": "calendar",
+    "version": 1
+  },
+  "posture": "docs/32 §F item 4 second branch — a named refusal a reader can act on, not a claim of proof",
+  "whatIsProven": {
+    "archetypeDeclared": {
+      "change": "calendar / date-picker added to ARCHETYPES (twenty -> twenty-one) with a required-facts table",
+      "classification": "minor under docs/26 V1-COMPAT-02 — a widening; no field repurposed, no value removed or renamed",
+      "files": [
+        "packages/schema/src/archetype.ts",
+        "packages/core/src/required-facts.ts"
+      ],
+      "requiredFacts": [
+        "calendar/day-grid",
+        "calendar/day-cell-box",
+        "calendar/selected-day"
+      ],
+      "expectedFacts": ["calendar/weekday-header", "calendar/outside-day"],
+      "schemaProjectionsRegenerated": true
+    },
+    "offlineRecipe": {
+      "path": "recipe/recipes/calendar.ts",
+      "gate": "npm run recipe:calendar:check",
+      "gateGreen": true,
+      "tests": 25,
+      "components": 8,
+      "sets": {
+        "calendar/set": 2,
+        "calendar/week-set": 2,
+        "calendar/day-set": 4
+      },
+      "fixedPointStable": "compile(collapse(compile(x))) === compile(x) on every source",
+      "refusesUnsupportedStructuralEdit": true,
+      "refusesHuggedDayCell": true,
+      "refusesShortWeek": true,
+      "gridOwnsDayInstances": {
+        "defectFoundAndFixed": "the grid first held week INSTANCES carrying only a week number, so every week rendered week one seven days and week one states — the same seven days three times. It compiled and held its fixed point and was not a calendar.",
+        "whyAnInstanceCannotCarryIt": "day state varies WITHIN a week (one today, one selected, leading days outside) while a component instance picks ONE variant for the whole component. Table gets away with row instances because a row is selected or not as a unit; a week is not.",
+        "resolution": "the calendar grid owns day instances directly, each picking its own State variant and carrying its own Label. calendar/week-set stays as the published week template.",
+        "regressionTest": "each week in the grid carries its OWN days and states"
+      },
+      "headerAlignsWithDayColumns": {
+        "defectFoundAndFixed": "weekday labels and the week-number gutter were hug, so \"Mo\" was about 18px while a day cell renders 32 — the header did not line up with the days beneath it.",
+        "whyTheGatesMissedIt": "calendar/day-cell-box only measures the day cells. The header row is not a day cell, so a required fact about day cells could not see it.",
+        "sameClassAs": "the ragged columns the Table climb hit live, in a header row instead of a body row",
+        "resolution": "every cell in a column-bearing row is measured to the day column: text() takes a columnWidth and binds width.value to the dayCell size token.",
+        "regressionTest": "the weekday header lines up with the day columns — computes the column x-positions of the header and every week and requires them to agree",
+        "classClosedNotJustInstance": "validateCalendarStructure now refuses ANY hug text cell in a column-bearing row, so the class cannot recur one row up again."
+      },
+      "refusesUnmeasuredColumnCell": true,
+      "refusesDeadAxis": true,
+      "deadAxisFoundAndFixed": {
+        "defect": "OutsideDays was modelled as a variant axis and its two values compiled to byte-identical content — the axis decided nothing while a designer could still click it.",
+        "resolution": "the prop is dropped and receipted as no-figma-primitive (calendar@1 has no primitive for a blank-but-measured cell), and validateCalendarStructure now refuses ANY axis whose variants compile to identical content.",
+        "componentsWentFrom": 10,
+        "componentsWentTo": 8,
+        "note": "eight honest components beat ten with a dead axis."
+      }
+    },
+    "reviewedSource": {
+      "library": "@astryxdesign/core Calendar",
+      "vendoredAt": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/Calendar",
+      "everyValueReadFromSource": true,
+      "resolvedTokens": {
+        "dayCellSize": "--size-element-md = 32px",
+        "gridGap": "--spacing-2 = 8px",
+        "dayCellPadding": "--spacing-1 = 4px",
+        "dayCellRadius": "--radius-inner = 4px",
+        "dayFontSize": "--text-supporting-size -> --font-size-sm = 0.75rem = 12px",
+        "textPrimary": "--color-text-primary #0A1317",
+        "textSecondary": "--color-text-secondary #4E606F",
+        "accent": "--color-accent #0064E0",
+        "onAccent": "--color-on-accent #FFFFFF",
+        "todayRing": "--color-border-emphasized #CCD3DB, inset 0 0 0 1px",
+        "surface": "--color-background-surface #FFFFFF"
+      },
+      "todayRingCarriedNotDropped": "astryx marks TODAY with an inset 1px ring and NO background, and SELECTED with a background and no ring. A background+text model would have lost the today marker entirely, so DayStateTokens gained an optional ring and calendar@1 emits it as an inside stroke.",
+      "receipts": [
+        {
+          "reason": "lowered",
+          "what": "the dark half of every astryx light-dark() colour pair",
+          "why": "calendar@1 carries one colour mode; the dark half is a second Figma variable mode, not a missing colour"
+        },
+        {
+          "reason": "no-figma-primitive",
+          "what": "hasOutsideDays / showOutsideDays, declared by BOTH sources",
+          "why": "hiding an outside day means the cell renders nothing while the grid keeps its shape, and calendar@1 has no primitive for present-measured-and-showing-no-text"
+        }
+      ]
+    },
+    "dateGrammarProblemSolved": {
+      "problem": "examples/day-picker/PROVENANCE.md records that the capture grammar cannot spell a Date, so a calendar driven by a live clock has a today ring and a visible month that move between captures and never byte-compare",
+      "resolution": "calendar@1 carries the month that was RENDERED as content (caption, weekdays, weeks of labelled day states), not a Date to re-render from. Determinism comes from the content being data. No $date marker was invented."
+    },
+    "figmaWriter": {
+      "path": "recipe/calendar-figma-writer.ts",
+      "hermetic": true,
+      "figmaWrites": 0,
+      "emittedProgramBytes": 95787,
+      "variantsPerSource": 10,
+      "dayInstancesPerSource": 98,
+      "plannedVariables": 19,
+      "inheritsTableWriterHardening": [
+        "exact file identity guard",
+        "page ownership",
+        "owned variable collections",
+        "font provenance tamper refusal",
+        "first-segment naming"
+      ],
+      "carriesTableV25Lesson": "the set name carries the compile label from the start (TABLE-WRITER-SET-NAME-CARRIES-COMPILE-LABEL class), so the accounting failure that cost Table a live cycle cannot happen here",
+      "onlyDayIsInstantiable": "a week cannot be an instance; the grid owns day instances",
+      "refusesUnmeasuredDayCell": "CALENDAR-DAY-CELL-NOT-MEASURED",
+      "refusesOtherArchetypePages": [
+        "115:295378 Input",
+        "163:35981 Combobox",
+        "85:6781 Button",
+        "173:48924 Table"
+      ],
+      "instanceCountConstantEarnedItsPlace": "the first draft said 91 and the writer refused with \"requires 91 day instances; found 98\" rather than minting a wrong page — the week template has a variant per WeekNumbers, so it contributes 2x7, not 7"
+    }
+  },
+  "refusal": {
+    "liveMintNotAttempted": {
+      "refused": true,
+      "statement": "No Calendar live Figma mint was attempted and no Calendar human grade exists or is claimed.",
+      "whyNotAttempted": "Table live v32 stayed and received a human grade on 2026-08-29. Calendar still has no live mint. docs/32 D4 requires human review of Calendar adapters before any live write. The reviewed adapter is recipe/adapters/calendar.ts + astryxCalendarAdapterConfig; react-day-picker remains a named refusal, not an authored second library.",
+      "whatWouldBeNeeded": [
+        "D4 human review of the Astryx Calendar adapter (no invented AntD/MUI/day-picker cosmetics)",
+        "the PREPARE / AUTHORIZE / attempt / RECORD scaffold per version",
+        "an attributable human grade from the owner on a mint that stays"
+      ],
+      "actionableBecause": "the offline gate is green, the writer exists, and a reviewed single-library adapter now exists. Live PREPARE is blocked on D4 adapter review, not on a missing recipe."
+    },
+    "crossLibraryLegNotProven": {
+      "refused": true,
+      "statement": "The Calendar offline proof is SINGLE-LIBRARY. Every other archetype in this pivot carries two unrelated real libraries; Calendar carries one.",
+      "why": [
+        "react-day-picker@10.0.1 is the obvious second library and is DELIBERATELY unused. examples/day-picker/PROVENANCE.md states a blindness rule: no stage of this repo's pipeline has ever been run against it, so it can serve as the unseen-library exam. Authoring an adapter now would spend an asset worth more than this proof.",
+        "extract/pilots/eventz/out/contracts/date-picker.contract.json exists but carries props: [] and anatomy: { root: {} } — an empty shell, not a source.",
+        "No other calendar or date-picker appears in the captured corpus."
+      ],
+      "doesNotClaim": "cross-library honesty for Calendar. docs/32 §E1 is not satisfied for this archetype.",
+      "actionableBecause": "the blind react-day-picker leg is exactly the first-pass-on-an-unseen-library test docs/32 wants; running it is a decision about when to spend it, not a missing capability"
+    }
+  },
+  "doesNotClaim": [
+    "a Calendar live mint",
+    "a Calendar human grade",
+    "cross-library proof for Calendar",
+    "that product v1 is complete"
+  ],
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

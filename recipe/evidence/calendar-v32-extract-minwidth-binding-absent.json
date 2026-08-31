@@ -1,0 +1,62 @@
+{
+  "artifactVersion": "calendar-v32-extract-minwidth-binding-absent-v1",
+  "status": "failed closed; mint did not stay",
+  "antecedent": {
+    "prepare": "0822f8021083738610629764296d4b20931e9652",
+    "authorize": "ca99ac5ce8fe072d10f0b1a37dd9ee675795cf3e"
+  },
+  "runIdentity": "4604bbfe-calendar-v32",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "pageId": "180:56817",
+    "collectionId": "VariableCollectionId:180:56819",
+    "cleaned": true
+  },
+  "restore": {
+    "accepted": true
+  },
+  "extract": {
+    "mcpSucceeded": true,
+    "collapseRefused": "calendar/variant/on: required binding layout.minWidth must appear exactly once"
+  },
+  "measured": {
+    "calendarVariantOnMinWidth": 220,
+    "calendarVariantOffMinWidth": 220,
+    "boundVariablesMinWidth": null,
+    "writerSetsNumericMinWidth": true,
+    "writerBindsLayoutMinWidth": false,
+    "figmaSetBoundVariableMinWidthSupported": true,
+    "rows": 6,
+    "gridHeight": 192,
+    "captureMonth": "April 2026",
+    "selectedAccent": "#0064E0",
+    "dayButton": "28x28 cornerRadius 14",
+    "navGlyphs": ["‹", "›"],
+    "captionFillWidth": 0,
+    "rootPadding": 12
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "tokens": {
+    "selectedAccent": "#0064E0",
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false,
+    "calendarSurfacePainted": false,
+    "scratchPageBackgroundIsFigmaDefault": true
+  },
+  "doNotRestartAttempt2AsIs": true,
+  "nextTeaching": "writer binds compile-carried layout.minWidth after the numeric minWidth write",
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}

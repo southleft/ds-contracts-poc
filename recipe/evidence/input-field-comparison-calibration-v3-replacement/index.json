@@ -1,0 +1,21 @@
+{
+  "version": "input-field-recognisability-replacement-rater-v3",
+  "status": "reliability-failed-performance-sealed-live-input-blocked",
+  "overall": false,
+  "recognisabilityInstrumentUsable": false,
+  "performanceGraded": false,
+  "performanceUnsealed": false,
+  "performanceAccessAllowed": true,
+  "liveInputMayProceed": false,
+  "protocol": "recipe/evidence/input-field-comparison-calibration-v3-replacement/protocol.json",
+  "protocolHash": "cfb8b7307397e0434b0f68a5226e4ae2e4255faae9422b60c947ff92350e12b0",
+  "receipt": "recipe/evidence/input-field-comparison-calibration-v3-replacement/receipt.json",
+  "receiptHash": "672f64c07fe9e57b93bbe8db80910afc44a417f4109e59bc741f8cf7f0d1376f",
+  "sourceGoldPacket": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/packet.json",
+  "sourceGoldPacketHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+  "sealedPerformancePacket": "recipe/evidence/input-field-comparison-calibration-v2/performance/blind-packet/packet.json",
+  "sealedPerformancePacketHash": "c24f43a3c769a0b5747bbae93a098bdc762895d39d15326547ce857cc104299e",
+  "adjudication": "recipe/evidence/input-field-comparison-calibration-v3-replacement/final-adjudication.json",
+  "reliability": "failed",
+  "architecturePerformance": null
+}

@@ -1,0 +1,353 @@
+{
+  "artifactVersion": "input-field-calibrated-adjudication-v1",
+  "sequence": {
+    "opaqueGradeValidationCompletedBeforeDuplicatePairing": true,
+    "pairwiseAndFleissComputedOnOpaquePacketOrder": true,
+    "duplicatePairingCheckedInSeparateIntegrityPhase": true,
+    "duplicatePhaseUsedImplementationIdentity": false,
+    "answerKeyHashCheckedWithoutParsing": true,
+    "answerKeyParsed": false,
+    "performanceIdentityUnsealed": false
+  },
+  "inputHashes": {
+    "protocol": "51bcdd9f605edabf4eb3df3fb87d3f2323fceb52f24cf1dcdb8b775a077f8ce5",
+    "packet": "f6f245d78c3ef9e8fe6b9fd7e957f660bf69b19f7776f290cf948610f2949dd7",
+    "receipt": "0e1e7b662704b82a496a02b9552be8173835c207d3758497e9402658d4de3bc0",
+    "index": "7d660886036a8d0ce84aa60b3254de74717ee0be467541908527f4a800114bb4",
+    "grades": {
+      "BATCH-CAL-A": "d439745124a445f48e95cd788326b65ac04cd58d0d5ac5c9eee857b87a06de33",
+      "BATCH-CAL-B": "fe3a46dca39a43d4399fa5ed4fd124e6b75b642c3aa4bad09cd945452962ce99",
+      "BATCH-CAL-C": "7fe765aedec561aafddf577be7989f63fdf2d51fa21ca455d13aedefdae404a8"
+    },
+    "sealedAnswerKeyCommitment": "156a47b788793e4d126a2d538c2df33b4aeedc79eab5456c2cc3763ab142f843"
+  },
+  "integrity": {
+    "protocolCommitment": "passed",
+    "receiptAndIndexPins": "passed",
+    "sourceReferenceProvenance": {
+      "status": "passed",
+      "exactRecords": 128,
+      "provenanceHash": "d79c0005b7033f171535d88a7c06331c6b99c16427d866f0c3aea3a9d5859085"
+    },
+    "historicalContinuity": {
+      "status": "passed",
+      "historicalArtifactsUnchanged": 16,
+      "exactMatrixCells": 128,
+      "v1V2ReferenceBytesEqual": 128,
+      "v1V2LegacyBytesEqual": 128
+    },
+    "packet": {
+      "status": "passed",
+      "tasks": 384,
+      "uniqueTaskIds": 384,
+      "uniqueReferenceIds": 384,
+      "uniqueSpecimenIds": 384,
+      "containedRegularImagePaths": 768,
+      "pathBoundaryEscapes": 0,
+      "packetHashMatchesCommitment": true,
+      "randomizedBatchHashMatchesCommitment": true
+    },
+    "sealedAnswerKey": {
+      "sha256": "156a47b788793e4d126a2d538c2df33b4aeedc79eab5456c2cc3763ab142f843",
+      "hashMatchesCommitment": true,
+      "parsed": false,
+      "validationDeferredUntilReliabilityPasses": true
+    }
+  },
+  "gradeValidations": [
+    {
+      "rater": "BATCH-CAL-A",
+      "path": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-a.json",
+      "sha256": "d439745124a445f48e95cd788326b65ac04cd58d0d5ac5c9eee857b87a06de33",
+      "submittedRecognisable": 32,
+      "submittedUnrecognisable": 352,
+      "gradeCount": 384,
+      "uniqueTaskIds": 384,
+      "exactPacketOrderAndIds": true,
+      "verdictsAndPassRuleValid": true,
+      "failureDefectsComplete": true,
+      "categoryDefectCoverageComplete": true,
+      "implementationOrDuplicateGuessesAbsent": true,
+      "submittedBindingFields": {
+        "randomizedBatchHashMatches": true,
+        "calibrationCommitmentMatches": true
+      },
+      "declaredEnvelope": {
+        "valid": false,
+        "missingFields": [
+          "version",
+          "rater",
+          "independentBlindGrade",
+          "packetHash",
+          "calibrationCommitmentHash",
+          "rubricHash",
+          "counts"
+        ],
+        "unexpectedFields": ["protocol", "calibrationCommitment"],
+        "criterionObjectsPresent": false,
+        "strictReaderError": "CALIBRATION REFUSED: BATCH-CAL-A grade protocol or cardinality differs"
+      },
+      "validAndCompleteRater": false
+    },
+    {
+      "rater": "BATCH-CAL-B",
+      "path": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-b.json",
+      "sha256": "fe3a46dca39a43d4399fa5ed4fd124e6b75b642c3aa4bad09cd945452962ce99",
+      "submittedRecognisable": 20,
+      "submittedUnrecognisable": 364,
+      "gradeCount": 384,
+      "uniqueTaskIds": 384,
+      "exactPacketOrderAndIds": true,
+      "verdictsAndPassRuleValid": true,
+      "failureDefectsComplete": true,
+      "categoryDefectCoverageComplete": true,
+      "implementationOrDuplicateGuessesAbsent": true,
+      "submittedBindingFields": {
+        "randomizedBatchHashMatches": true,
+        "calibrationCommitmentMatches": true
+      },
+      "declaredEnvelope": {
+        "valid": false,
+        "missingFields": [
+          "version",
+          "rater",
+          "independentBlindGrade",
+          "packetHash",
+          "calibrationCommitmentHash",
+          "rubricHash",
+          "counts"
+        ],
+        "unexpectedFields": ["protocol", "calibrationCommitment"],
+        "criterionObjectsPresent": false,
+        "strictReaderError": "CALIBRATION REFUSED: BATCH-CAL-B grade protocol or cardinality differs"
+      },
+      "validAndCompleteRater": false
+    },
+    {
+      "rater": "BATCH-CAL-C",
+      "path": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-c.json",
+      "sha256": "7fe765aedec561aafddf577be7989f63fdf2d51fa21ca455d13aedefdae404a8",
+      "submittedRecognisable": 8,
+      "submittedUnrecognisable": 376,
+      "gradeCount": 384,
+      "uniqueTaskIds": 384,
+      "exactPacketOrderAndIds": true,
+      "verdictsAndPassRuleValid": true,
+      "failureDefectsComplete": true,
+      "categoryDefectCoverageComplete": true,
+      "implementationOrDuplicateGuessesAbsent": true,
+      "submittedBindingFields": {
+        "randomizedBatchHashMatches": true,
+        "calibrationCommitmentMatches": true
+      },
+      "declaredEnvelope": {
+        "valid": false,
+        "missingFields": [
+          "version",
+          "rater",
+          "independentBlindGrade",
+          "packetHash",
+          "calibrationCommitmentHash",
+          "rubricHash",
+          "counts"
+        ],
+        "unexpectedFields": [
+          "protocol",
+          "raterId",
+          "calibrationCommitment",
+          "packetValidation"
+        ],
+        "criterionObjectsPresent": false,
+        "strictReaderError": "CALIBRATION REFUSED: BATCH-CAL-C grade protocol or cardinality differs"
+      },
+      "validAndCompleteRater": false
+    }
+  ],
+  "opaqueAgreement": {
+    "perRaterPasses": {
+      "BATCH-CAL-A": {
+        "recognisable": 32,
+        "denominator": 384,
+        "ratio": 0.08333333333333333
+      },
+      "BATCH-CAL-B": {
+        "recognisable": 20,
+        "denominator": 384,
+        "ratio": 0.052083333333333336
+      },
+      "BATCH-CAL-C": {
+        "recognisable": 8,
+        "denominator": 384,
+        "ratio": 0.020833333333333332
+      }
+    },
+    "unanimous": {
+      "count": 354,
+      "ratio": 0.921875,
+      "unanimousPass": 4,
+      "unanimousFail": 350
+    },
+    "split": { "count": 30, "ratio": 0.078125 },
+    "votePatterns": {
+      "FFF": 350,
+      "FPF": 2,
+      "PFF": 10,
+      "PFP": 4,
+      "PPF": 14,
+      "PPP": 4
+    },
+    "pairwise": [
+      {
+        "raters": "BATCH-CAL-A/BATCH-CAL-B",
+        "agreements": 368,
+        "denominator": 384,
+        "ratio": 0.9583333333333334,
+        "cohensKappa": 0.6712328767123292,
+        "threshold": 0.75,
+        "passed": true
+      },
+      {
+        "raters": "BATCH-CAL-A/BATCH-CAL-C",
+        "agreements": 360,
+        "denominator": 384,
+        "ratio": 0.9375,
+        "cohensKappa": 0.3793103448275861,
+        "threshold": 0.75,
+        "passed": true
+      },
+      {
+        "raters": "BATCH-CAL-B/BATCH-CAL-C",
+        "agreements": 364,
+        "denominator": 384,
+        "ratio": 0.9479166666666666,
+        "cohensKappa": 0.26380368098159585,
+        "threshold": 0.75,
+        "passed": true
+      }
+    ],
+    "overallPairwiseAgreement": 0.9479166666666664,
+    "fleissKappa": 0.4725274725274698,
+    "majorityFailureRows": 362,
+    "majorityFailuresWithTwoConcreteRaterDefectSets": 362
+  },
+  "duplicateIntegrity": {
+    "status": "passed",
+    "pairs": 128,
+    "uniquePairedSpecimens": 256,
+    "byteIdenticalPairs": 128,
+    "containedRegularPaths": 256,
+    "implementationIdentityUsed": false,
+    "byRater": {
+      "BATCH-CAL-A": {
+        "agreements": 128,
+        "denominator": 128,
+        "ratio": 1,
+        "threshold": 0.95,
+        "agreementPassed": true,
+        "copyAPasses": 0,
+        "copyBPasses": 0,
+        "percentagePointDifference": 0,
+        "maximumDifference": 0.05,
+        "passRateDifferencePassed": true
+      },
+      "BATCH-CAL-B": {
+        "agreements": 128,
+        "denominator": 128,
+        "ratio": 1,
+        "threshold": 0.95,
+        "agreementPassed": true,
+        "copyAPasses": 0,
+        "copyBPasses": 0,
+        "percentagePointDifference": 0,
+        "maximumDifference": 0.05,
+        "passRateDifferencePassed": true
+      },
+      "BATCH-CAL-C": {
+        "agreements": 128,
+        "denominator": 128,
+        "ratio": 1,
+        "threshold": 0.95,
+        "agreementPassed": true,
+        "copyAPasses": 0,
+        "copyBPasses": 0,
+        "percentagePointDifference": 0,
+        "maximumDifference": 0.05,
+        "passRateDifferencePassed": true
+      }
+    },
+    "majorityConsensus": {
+      "agreements": 128,
+      "denominator": 128,
+      "ratio": 1,
+      "mismatchedPairCount": 0,
+      "thresholdAgreements": 127,
+      "passed": true
+    }
+  },
+  "thresholds": {
+    "source": "calibration-receipt-predeclared-acceptance",
+    "unchanged": true,
+    "allThreeRatersValidAndComplete": {
+      "required": 3,
+      "actual": 0,
+      "passed": false
+    },
+    "hiddenDuplicateAgreementPerRaterMinimum": {
+      "threshold": 0.95,
+      "passed": true
+    },
+    "majorityConsensusDuplicateAgreementMinimum": {
+      "threshold": { "agreements": 127, "denominator": 128 },
+      "actual": { "agreements": 128, "denominator": 128 },
+      "passed": true
+    },
+    "everyPairwiseAgreementMinimum": { "threshold": 0.75, "passed": true },
+    "fleissKappaMinimum": {
+      "threshold": 0.6,
+      "actual": 0.4725274725274698,
+      "passed": false
+    },
+    "maximumIdenticalCopyPassRateDifference": {
+      "threshold": 0.05,
+      "passed": true
+    },
+    "majorityFailNeedsConcreteDefectsFromRaters": {
+      "threshold": 2,
+      "majorityFailures": 362,
+      "supported": 362,
+      "passed": true
+    }
+  },
+  "reliability": {
+    "status": "failed",
+    "measurementUsable": false,
+    "blockers": [
+      "All three submitted grade files violate the predeclared grade envelope: required packet/rubric hash fields, counts, independent-blind declaration, canonical rater field, and criterion defect objects are absent or differently named.",
+      "Fleiss kappa 0.4725274725274698 is below the locked 0.60 minimum."
+    ]
+  },
+  "answerKey": {
+    "unsealingAllowed": false,
+    "validated": false,
+    "parsed": false
+  },
+  "consensus": null,
+  "performance": null,
+  "instability": {
+    "historicalSwing": "88/128-to-0/128",
+    "resolvedByCalibratedRound": false,
+    "reason": "The calibrated round failed pre-unseal reliability, so no implementation-labelled consensus can be computed and the historical unchanged-control instability remains unresolved."
+  },
+  "evidenceStatus": {
+    "measurementReliability": "failed",
+    "architecturePerformance": "not-unsealed",
+    "humanRecognisabilityReleaseGate": "blocked",
+    "liveInputMayProceed": false,
+    "inputOverall": false
+  },
+  "blockers": [
+    "All three submitted grade files violate the predeclared grade envelope: required packet/rubric hash fields, counts, independent-blind declaration, canonical rater field, and criterion defect objects are absent or differently named.",
+    "Fleiss kappa 0.4725274725274698 is below the locked 0.60 minimum."
+  ],
+  "nextAction": "Preserve these refused submissions, calibrate raters on separate opaque examples, then commission three fresh complete blind grade files under a newly versioned packet whose serialized grade envelope is explicit; do not transform or reuse these rows."
+}

@@ -1,0 +1,159 @@
+{
+  "artifactVersion": "input-live-v44-antecedent-index-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "artifacts": {
+    "recipe/evidence/input-field-live-pivot-v44/protocol.json": {
+      "bytes": 14747,
+      "sha256": "fe2c7be1b49cf91115859d4abc10bdd1349aefdc9f1ec4e78ade28411de7552d"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/programs/writer.txt": {
+      "bytes": 3282066,
+      "sha256": "a01d95b3b2a46999d4228814101d5e8b19ef35bb0f0b9113b1d9d438e150d6b3"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/programs/writer-payload.js": {
+      "bytes": 2453945,
+      "sha256": "b091cf61288e21aea4031e7717957e5329f2fb1ec164757b08f1f0d9ea830597"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/programs/restore-blueprint.js": {
+      "bytes": 2629,
+      "sha256": "b1af3959ac396f745c9347df7e7db155ea441bae8071a8aef6c38e5e1d85a3c5"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/programs/extract-blueprint.js": {
+      "bytes": 190296,
+      "sha256": "14ca2690887bc2f33d437af9257ff156a74467f65337b041737aaa1a125a974e"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/programs/probe-blueprint.js": {
+      "bytes": 8117,
+      "sha256": "395cbc7da8611c73c3ec0722a340ed8867c301f6508c3bf72e65413a13f3a9b2"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/programs/capture-blueprint.js": {
+      "bytes": 10748,
+      "sha256": "49097493588eca1dfbd412b1e7426642ef41a953b38af11580e5317f8fac3200"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/expected-scene-plan-mui.json.gz": {
+      "bytes": 399132,
+      "sha256": "96e8d543b259066268af2d871f1a0258bdd3173b5c4402ed3f4d57296cfddfa3"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/expected-scene-plan-polaris.json.gz": {
+      "bytes": 391345,
+      "sha256": "6e6517f9a819ce6cffff9e6bda913f3c9c8bdd6d0da95bcebffcdb972bbcd41d"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/capture-manifest.json": {
+      "bytes": 128727,
+      "sha256": "451d2d688d2796014bc3a4c522eabb2e69acecee7a78f0fe25dcd2e5207ff431"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/proof-plan.json": {
+      "bytes": 2816,
+      "sha256": "47f83936923043a0968cee7f68bfebc61269144ae6b8f5879e140ebb2a667445"
+    },
+    "recipe/evidence/input-field-live-pivot-v44/request-manifest.json": {
+      "bytes": 73062,
+      "sha256": "5feda6ff2315198eb8e8f139a1eb02fe9d9cc544cc7554fd94117b6c414aafb4"
+    },
+    "recipe/input-field-live-v44-broker.ts": {
+      "bytes": 36725,
+      "sha256": "1673db78ae4fb4393edb4c3357b653b6eebec957ddb7a4d355dad694cb8a7dd1"
+    },
+    "recipe/input-field-live-v44-contract.ts": {
+      "bytes": 40918,
+      "sha256": "93f3c581a40d0e70e8ef9bdd6e1ee9bbdd0d768fb46d307ee42985b5f96e1880"
+    },
+    "recipe/run-input-field-live-v44.ts": {
+      "bytes": 25227,
+      "sha256": "6cc7db73f85c0e017376f5e8fdb66f2569e345dc4a32ce27a36bf1fa0df98bb9"
+    },
+    "recipe/build-input-field-live-proof-v44.ts": {
+      "bytes": 41146,
+      "sha256": "c716bedd6c387ae0125f2e817cf7ee26d890bb949f8535b8a901fd4af4b3f6a8"
+    },
+    "recipe/input-field-live-v44-broker.test.ts": {
+      "bytes": 25521,
+      "sha256": "b15819cbd9bd3644e03eb835bc5fd409665eca2c1deffa5843d2040e881114a1"
+    },
+    "recipe/figma-property-normalizer-v8.test.ts": {
+      "bytes": 3625,
+      "sha256": "dbe89ab1431e7780e67bc99cf0bb508fad90e1484a98b4238a15a719825e53f0"
+    },
+    "recipe/scene-readback-v44.test.ts": {
+      "bytes": 75561,
+      "sha256": "ec556c00967291d5a32f668a79361aa347940591630891245b0f001a15a426a2"
+    },
+    "recipe/input-field-live-v44-restore.ts": {
+      "bytes": 9673,
+      "sha256": "c2372c332445513451dc75d7b68c7c8fc7057d7c288c9f92fecf094ecb09d8f4"
+    },
+    "recipe/input-field-live-v44-restore.test.ts": {
+      "bytes": 5861,
+      "sha256": "853641cc2d1393d735964de18925db53eb0d62a49e0e33aa2fdb46a549af29af"
+    },
+    "recipe/input-field-live-v44-lifecycle-simulation.ts": {
+      "bytes": 8063,
+      "sha256": "84d0f7b5e60f9ad12acc3be93e8eb901a4ac806ab08a991a9496a2cc372ae601"
+    },
+    "recipe/input-field-live-v3-cleanup.ts": {
+      "bytes": 6205,
+      "sha256": "e28c7b8500720899a01fbbb9bdb47e498c7abf1b5798ee14ca4e8cbebd6c7950"
+    },
+    "recipe/input-field-live-v3-verifier-v44.ts": {
+      "bytes": 15923,
+      "sha256": "67396569ff3ac1daacf5d4e11e8fd308117c487bcf8fa5d427badd54e7fa3f64"
+    },
+    "recipe/input-field-live-v44-verifier.ts": {
+      "bytes": 7732,
+      "sha256": "a2f4ee444b72eb57361875e509da34b52ca2370ecfa2658d37c51b954d293ecd"
+    },
+    "recipe/figma-property-normalizer-v8.ts": {
+      "bytes": 11009,
+      "sha256": "103abec0f81e59fb5c25fd38b05f4961d755eeee2e4bb18f99ca74411b45eae0"
+    },
+    "recipe/figma-runtime-portability.ts": {
+      "bytes": 12817,
+      "sha256": "df0ada6caea5cf05c9f46552cbf675b76e029438f75a9805802b1446ab3a034f"
+    },
+    "recipe/input-field-objective-comparison-v1.ts": {
+      "bytes": 52534,
+      "sha256": "043607778ede804f232b67239454bd1b1a8f7d20fbee1a98c405e8d74b5c2648"
+    },
+    "recipe/normalize.ts": {
+      "bytes": 7537,
+      "sha256": "5360d6862b0ac3fd704d97a491da3d750f0d1d59d20e1f71441c4f4065a67d4c"
+    },
+    "recipe/scene-readback-runtime-v44.ts": {
+      "bytes": 14406,
+      "sha256": "266dc3738fbe8c89a4edeef58f2818a231969366ead07ededbf442c9d66440b5"
+    },
+    "recipe/scene-readback-v44.ts": {
+      "bytes": 60582,
+      "sha256": "3093131174abb7f493d34898f1fe8b6f96b6b0b3986694b9522f42f6cf3c91f7"
+    }
+  },
+  "hashSetSha256": "3f2a259129849272ec67d5b2617cb7d8021def9e2f565eecafb01503a942388c",
+  "counts": {
+    "sources": 2,
+    "variants": 256,
+    "expectedSceneFacts": 43726,
+    "captureCells": 128,
+    "remoteRequests": 133,
+    "hostPhases": 3
+  },
+  "generatedDeterministically": true,
+  "authorizationLifecycleExcluded": [
+    "recipe/evidence/input-field-live-pivot-v44/authorization-template.json",
+    "recipe/evidence/input-field-live-pivot-v44/capture-authorization.json",
+    "recipe/input-field-live-v44-authorization.ts",
+    "recipe/input-field-live-v44-authorization.test.ts",
+    "recipe/input-field-live-v44-preflight.ts",
+    "recipe/input-field-live-v44-authorized.ts",
+    "recipe/evidence/input-field-live-pivot-v44/operator-security-attestation-template.json",
+    "recipe/evidence/input-field-live-pivot-v44-status.json",
+    "recipe/evidence/status-index.json"
+  ],
+  "authorizationCanBeAddedWithoutAntecedentRebuild": true,
+  "attemptsExecuted": 0,
+  "maximumFutureAttempts": 3,
+  "liveExecutionOccurred": false,
+  "figmaWrites": 0,
+  "figmaCaptures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false
+}

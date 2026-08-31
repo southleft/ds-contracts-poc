@@ -1,0 +1,143 @@
+{
+  "artifactVersion": "input-live-v45-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "89774548d3a168b692cf88e5ec21eebbda71a4f5",
+  "codeCommit": "89774548d3a168b692cf88e5ec21eebbda71a4f5",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "106:166258",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "sha256": "82409b49699585b4c45e9cb740e471a025dd7894c0699a1802658f62d6d1acce",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v43FailureCleared": {
+    "messageHelperBindingsFieldOrderNotTheRefusalLocus": true
+  },
+  "v44FailureCleared": {
+    "messageHelperLetterSpacingNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "mui": { "FILL": 0, "FIXED": 24, "HUG": 104, "total": 128 },
+    "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "muiHiddenPlaceholderFixed": 24
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedHostNormalizedFirstMessageHelper": {
+    "path": "$.children[0].children[1].children[0]",
+    "mui": {
+      "role": "input-field/message/helper",
+      "bindingFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "letterSpacing": null,
+      "textCase": "original"
+    },
+    "compile": {
+      "role": "input-field/message/helper",
+      "bindingFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "letterSpacing": null,
+      "textCase": null
+    }
+  },
+  "observedMessageHelperLetterSpacing": {
+    "hostAbsent": { "mui": 96, "polaris": 96 },
+    "compileAbsent": { "mui": 96, "polaris": 96 },
+    "hashedV44HostPresent": {
+      "mui": 96,
+      "polaris": 96,
+      "value": { "unit": "percent", "value": 0 }
+    }
+  },
+  "observedMessageHelperTextCase": {
+    "hostPresent": { "mui": 96, "polaris": 96, "value": "original" },
+    "compileAbsent": { "mui": 96, "polaris": 96 },
+    "hashedV44HostPresent": { "mui": 96, "polaris": 96, "value": "original" }
+  },
+  "observedMessageErrorTextCase": {
+    "hostPresent": { "mui": 32, "polaris": 32, "value": "original" },
+    "compileAbsent": { "mui": 32, "polaris": 32 }
+  },
+  "observedMessageHelperBindings": {
+    "mui": {
+      "total": 96,
+      "hostFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 96
+    },
+    "polaris": {
+      "total": 96,
+      "hostFields": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 96
+    }
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v45.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[0].children[1].children[0].type.textCase; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v45 scene-readback omitted type.letterSpacing on input-field/message/helper and input-field/message/error. Host did not refuse message helper letterSpacing. Host helper letterSpacing omitted 96/96 MUI and 96/96 Polar; compile absent 96/96 both. Error letterSpacing omitted 32/32 both. Hashed v44 still emits helper letterSpacing {unit: percent, value: 0} 96/96 both. Helper bindings stay compile order type.fontSize|type.lineHeight.value|fills.0.color 96/96 both. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes, sha256 82409b49699585b4c45e9cb740e471a025dd7894c0699a1802658f62d6d1acce). Content-width census remains MUI 128/128 FILL and Polar 128/128 FILL. Content-height census on the extract scene remains MUI 24 FIXED / 104 HUG (the 24 FIXED are hidden floating placeholders) and Polar 128/128 HUG. Host collapse then refused unsupported structural edit at $.children[0].children[1].children[0].type.textCase. $.children[0] is the first variant (Size=medium, State=default, Content=placeholder, Required=false, Adornments=none). $.children[0].children[1] is the MUI first-variant second child (input-field/message-container). $.children[0].children[1].children[0] is input-field/message/helper. Host-normalized helper type.textCase is original; compile omits textCase. Host helper textCase original 96/96 MUI and 96/96 Polar. Compile absent 96/96 both. input-field/message/error has the same host textCase original 32/32 both and compile-absent 32/32 both; it was not the first-difference locus. Hashed v44 still emits helper textCase original 96/96 both. Host helper type also still has textDecoration none (96/96 both); that was not the refusal locus. Polar has 0 content-row nodes; Polar first nested child is input-field/label-row. Polar first-variant children are label-row, surface, message-container. Do not invent a textCase value. Do not invent a variable. Do not teach the recipe to accept host message textCase. Do not teach FIXED as a fill. Do not restart v45 attempt 2 as-is. Scene-readback-v45 bytes are in the v45 hash set.",
+    "inputFieldRecipeInV45AntecedentHashSet": false,
+    "writerInV45AntecedentHashSet": true,
+    "restoreInV45AntecedentHashSet": true,
+    "extractRuntimeInV45AntecedentHashSet": true,
+    "sceneReadbackInV45AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "106:166258",
+    "removedPageNodeId": "106:166258"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v43SceneReadbackUnchanged": true,
+  "v43Attempt1BytesUnchanged": true,
+  "v44SceneReadbackUnchanged": true,
+  "v44Attempt1BytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV45Attempt2WithoutMessageTextCaseOmitForbidden": true
+}

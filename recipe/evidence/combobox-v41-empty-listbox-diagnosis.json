@@ -1,0 +1,189 @@
+{
+  "artifactVersion": "combobox-v41-empty-listbox-diagnosis-v1",
+  "kind": "named-feedback-not-human-grade",
+  "reviewedAt": "2026-08-29T09:00:00-05:00",
+  "diagnosedAt": "2026-08-29T09:20:00-05:00",
+  "reviewer": {
+    "name": "TJ Pitre",
+    "identity": "human-owner",
+    "independent": true
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "163:35981",
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=163-35981",
+    "sets": {
+      "muiCombobox": "163:36845",
+      "muiOption": "163:36076",
+      "antdCombobox": "163:37709",
+      "antdOption": "163:36940"
+    },
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "record": "f330a082",
+    "checkpointSpaced": "2393104521192557663",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "verbatim": "Overall pretty good. Hill-climbing rate is good. Recommendation: review this issue, adjust if it is a miss, re-review, then move on. (1) Empty listbox padding: MUI open dropdown with No options is missing internal padding — text flush to top-left vs populated option list. Same for Loading.... Same on AntD empty/loading. (2) Library lookalike: MUI and AntD almost look identical. He is unsure they should.",
+  "verdict": {
+    "A": "not-a-miss",
+    "B": "fixture-accurate-shared-chrome-plus-survived-distinct-facts",
+    "reminted": false,
+    "comboboxHumanGrade": "pending",
+    "overallComboboxSuccess": false,
+    "productV1Complete": false
+  },
+  "A": {
+    "question": "Empty/loading listbox padding: silent loss vs source-accurate recipe?",
+    "axes": {
+      "open": "Open=true",
+      "empty": "Content=empty",
+      "loading": "Field state=loading (loading wins over Content; compile emits combobox/listbox/loading)"
+    },
+    "rawLibrarySource": {
+      "muiAutocomplete": {
+        "package": "@mui/material@9.2.0",
+        "citedByAdapter": "Autocomplete.js:330-379 listbox/option padding and option states",
+        "measuredFromMuiSource": {
+          "listbox": "padding: '8px 0' on AutocompleteListbox (ul)",
+          "noOptions": "padding: '14px 16px' on AutocompleteNoOptions status wrapper",
+          "loading": "padding: '14px 16px' on AutocompleteLoading status wrapper",
+          "option": "paddingTop/Bottom 6, paddingLeft/Right 16"
+        },
+        "note": "noOptions/loading padding lives on a Paper-level status slot, not as extra listbox padding. Adapter cloneTokens did not land 8 or 14/16."
+      },
+      "antdSelect": {
+        "package": "antd@5.29.3",
+        "dropdown": "padding: token.paddingXXS on .ant-select-dropdown",
+        "empty": "&-empty uses genItemStyle, which applies padding: optionPadding (named token, same as options)",
+        "optionPaddingToken": "${(controlHeight - fontSize * lineHeight) / 2}px ${controlPaddingHorizontal}px",
+        "note": "Named source applies optionPadding to empty items. Reviewed adapter never mapped that onto combobox/listbox/empty text. Do not teach a computed px."
+      }
+    },
+    "reviewedAdapterTokens": {
+      "listPadding": {
+        "mui": {
+          "variable": "mui.autocomplete.sizes-*-listPadding",
+          "fallback": 4
+        },
+        "antd": {
+          "variable": "antd.select.sizes-*-listPadding",
+          "fallback": 4
+        },
+        "origin": "canonical fixture recipe/fixtures/combobox.ts listPadding=4; cloneTokens did not mutate it"
+      },
+      "optionPaddingX": {
+        "small": 10,
+        "medium": 12,
+        "landsOn": "combobox/option/* items only, not empty/loading text"
+      }
+    },
+    "compile": {
+      "role": "combobox/listbox",
+      "identicalFor": ["Content=options", "Content=empty", "Field state=loading"],
+      "layout.padding": { "top": 4, "right": 0, "bottom": 4, "left": 0 },
+      "bindings": [
+        "layout.padding.top → sizes.*.listPadding",
+        "layout.padding.bottom → sizes.*.listPadding"
+      ],
+      "emptyChild": "TEXT combobox/listbox/empty, no own padding",
+      "loadingChild": "TEXT combobox/listbox/loading, no own padding",
+      "populatedInset": "comes from option-item optionPaddingX, not from extra listbox padding"
+    },
+    "livePage16335981": {
+      "muiOpenListboxes": { "count": 32, "paddingHist": { "4/0/4/0": 32 } },
+      "antdOpenListboxes": { "count": 32, "paddingHist": { "4/0/4/0": 32 } },
+      "emptyParentPadding": { "4/0/4/0": 24 },
+      "loadingParentPadding": { "4/0/4/0": 16 },
+      "sample": {
+        "mui": {
+          "empty": {
+            "id": "163:36553",
+            "pad": { "t": 4, "r": 0, "b": 4, "l": 0 },
+            "emptyText": { "x": 0, "y": 4, "chars": "No options" },
+            "bound": "VariableID:163:36031 (sizes-medium-listPadding=4)"
+          },
+          "loading": {
+            "id": "163:36629",
+            "pad": { "t": 4, "r": 0, "b": 4, "l": 0 },
+            "loadingText": { "x": 0, "y": 4, "chars": "Loading…" }
+          },
+          "options": {
+            "id": "163:36533",
+            "pad": { "t": 4, "r": 0, "b": 4, "l": 0 }
+          }
+        },
+        "antd": {
+          "empty": {
+            "id": "163:37417",
+            "pad": { "t": 4, "r": 0, "b": 4, "l": 0 },
+            "emptyText": { "x": 0, "y": 4, "chars": "No options" },
+            "bound": "VariableID:163:36895 (sizes-medium-listPadding=4)"
+          },
+          "loading": {
+            "id": "163:37493",
+            "pad": { "t": 4, "r": 0, "b": 4, "l": 0 },
+            "loadingText": { "x": 0, "y": 4, "chars": "Loading…" }
+          }
+        }
+      },
+      "optionItemPaddingSurvived": {
+        "muiMedium": { "t": 0, "r": 12, "b": 0, "l": 12 },
+        "antdMedium": { "t": 0, "r": 12, "b": 0, "l": 12 }
+      }
+    },
+    "whyItLooksFlush": [
+      "listbox left/right padding is 0 in recipe, compile, and live",
+      "populated names sit on option items that carry optionPaddingX 10/12",
+      "empty/loading are listbox text children with no option-item inset",
+      "4px top is present (empty.y=4) and easy to miss against option-row density"
+    ],
+    "decision": "Not a mint silent loss. Compile listPadding 4/0/4/0 survived on every open listbox including empty/loading. Do not remint. Do not invent 8/14/16 or optionPadding on empty/loading to look nicer. Raw-library 14/16 and AntD empty optionPadding were never carried compile facts."
+  },
+  "B": {
+    "question": "MUI vs AntD lookalike: lost facts vs fixture-identical chrome?",
+    "sharedChromeThatSurvived": {
+      "overlayFill": "#ffffffff",
+      "overlayBorder": "#d1d5dbff",
+      "overlayRadius": 6,
+      "overlayShadow": { "radius": 12, "color": "#00000026", "offset": { "x": 0, "y": 4 } },
+      "listPadding": "4/0/4/0",
+      "optionPaddingX": { "small": 10, "medium": 12 },
+      "typography": "Roboto Regular/Medium (both adapters pin Roboto)",
+      "occupancyPlaceholders": "solid squares; default control #5f6368; loading control library blue",
+      "content": "Assignee / Ada Lovelace / No options / Loading…"
+    },
+    "distinctFactsThatSurvivedLive": {
+      "triggerHeight": { "mui": { "small": 40, "medium": 56 }, "antd": { "small": 24, "medium": 32 } },
+      "optionHeight": { "muiMedium": 36, "antdMedium": 32 },
+      "defaultBorder": { "mui": "#8a8a8aff", "antd": "#d9d9d9ff" },
+      "errorBorder": { "mui": "#d32f2fff", "antd": "#ff4d4fff" },
+      "filledBackground": { "mui": "#f3f4f6ff", "antd": "#0000000a (adapter); live paint stores alpha on opacity" },
+      "selectedOptionFill": { "mui": "#1976d214 adapter / live solid reports #1976d2", "antd": "#e6f4ffff" },
+      "loadingControl": { "mui": "#1976d2ff", "antd": "#1677ffff" }
+    },
+    "lost": [],
+    "decision": "Adapters emit distinct heights, borders, selected fills, and loading control blues; those survived mint. Overlay/listbox chrome, Roboto, listPadding, optionPaddingX, and grey/blue occupancy squares are shared by this fixture. TJ's identical look is fixture-accurate for that chrome. Do not invent library-specific icons or Polar/if(antd) cosmetics."
+  },
+  "snapshots": {
+    "dir": "recipe/evidence/combobox-v41-empty-listbox-diagnosis",
+    "files": [
+      "mui-medium-outlined-open-default-empty.png",
+      "mui-medium-outlined-open-loading-options.png",
+      "mui-medium-outlined-open-default-options.png",
+      "antd-medium-outlined-open-default-empty.png",
+      "antd-medium-outlined-open-loading-options.png",
+      "antd-medium-outlined-open-default-options.png"
+    ]
+  },
+  "recordTimeUnchanged": {
+    "path": "recipe/evidence/combobox-live-pivot-v41-status.json",
+    "humanSignoff": "pending",
+    "overallComboboxSuccess": false,
+    "note": "Hashed v41 RECORD f330a082 is not restamped."
+  },
+  "nextHill": "Data Table once TJ has seen this empty/loading conclusion. Do not start Data Table / Calendar / Button remint in this turn.",
+  "doNotInventComboboxHumanGrade": true,
+  "doNotClaimV1Complete": true
+}

@@ -1,0 +1,129 @@
+{
+  "artifactVersion": "combobox-live-v18-attempt-1-v1",
+  "status": "failed closed at collapse unsupported structural edit; host listbox compile-order teaching cleared; restore 144 held; extract walk cleared; cleanup accepted; mint did not stay",
+  "authorizationCommit": "14cb547b9de39b7f4aff47dfe60af8657397dd46",
+  "codeCommit": "14cb547b9de39b7f4aff47dfe60af8657397dd46",
+  "antecedentCommit": "fc5c3d1eabdadb8d422b2ef13bc392ae86937856",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host must order combobox/listbox bindings to compile field order so layout.padding.top precedes layout.padding.bottom, not start at layout.padding.bottom",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true,
+    "heldEmptyInstancePayloadOmit": true,
+    "heldObserveSceneFactsLiveRoot": true,
+    "heldHostRecoversRecipeComponentRef": true,
+    "heldWriterAriaStamp": true,
+    "heldHostRecoversComponentPropertyName": true,
+    "heldHostTriggerBindingCompileOrder": true,
+    "heldHostLeadingSlotBindingCompileOrder": true,
+    "heldHostLeadingSlotCompileCarryVisible": true,
+    "heldHostTrailingSlotBindingCompileOrder": true,
+    "heldHostTrailingSlotCompileCarryVisible": true,
+    "heldHostTriggerEmptyEffects": true,
+    "heldHostOverlayBindingCompileOrder": true,
+    "heldHostOverlayWidthAlias": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "159:332072",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["159:332936", "159:332167", "159:333800", "159:333031"],
+    "muiComboboxSetId": "159:332936",
+    "muiOptionSetId": "159:332167",
+    "antdComboboxSetId": "159:333800",
+    "antdOptionSetId": "159:333031",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "6b22a1b0e3caba670d0303b8810c28dfe2c315f45a858137e5a17e061b0f42e2",
+    "hostListboxBindingCompileOrderTeachingCleared": true,
+    "hostListboxStartsAtPaddingTop": 64,
+    "listboxCompileStartsAtPaddingTop": 64,
+    "hashedV17StillStartsAtPaddingBottom": true,
+    "overlayDropShadowKept": true,
+    "overlayHostNonempty": 64,
+    "overlayCompileNonempty": 64,
+    "listboxHostEmptyEffects": 64,
+    "listboxCompileHasEffects": false,
+    "hostCollapseRefused": true,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[8].children[3].children[0].children[0].bindings.length",
+    "refusedAt": "recipe/recipes/combobox.ts:1738",
+    "refusedNodeRole": "combobox/option-instance/0",
+    "hostBindingCount": 5,
+    "compileBindingCount": 1,
+    "hostBindings": [
+      "fills.0.color",
+      "height.value",
+      "layout.itemSpacing",
+      "layout.padding.left",
+      "layout.padding.right"
+    ],
+    "compileBindings": [
+      "height.value"
+    ],
+    "namedFromSource": "v18 host listbox compile-order teaching cleared; host now starts combobox/listbox bindings at layout.padding.top and matches compile field order on all 64 listboxes; hashed v17 still starts at layout.padding.bottom; overlay drop-shadow kept 64/64; host still emits effects: [] on 64 listboxes that compile omits, but firstDifference compared children before effects; collapse then refuses unsupported structural edit at combobox/option-instance/0 bindings.length because host emits five inherited bindings while compile emits only height.value; do not invent an option-instance binding; do not lift listbox empty effects in the same PREPARE; do not omit overlay drop-shadow; do not restart v18 attempt 2 as-is"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "receiptSha256": "27c6fbb8c199d6cf29d3fa621f081de9ee34aef2d2aa8fd1c1b6198f60218d24",
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "159:332072",
+    "removedCollectionIds": [
+      "VariableCollectionId:159:332074",
+      "VariableCollectionId:159:332938"
+    ]
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "doNotInventOptionInstanceBinding": true,
+    "doNotInventEffectsValue": true,
+    "doNotOmitOverlayEffects": true,
+    "doNotLiftListboxEmptyEffectsInSamePrepare": true,
+    "restartV18Attempt2AsIs": false,
+    "prepareV19": "host must drop extra combobox/option-instance bindings that compile never emits, keeping only height.value, not also emit inherited fills.0.color, layout.itemSpacing, layout.padding.left, and layout.padding.right"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

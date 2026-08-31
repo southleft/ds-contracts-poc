@@ -1,0 +1,100 @@
+{
+  "artifactVersion": "table-live-v4-proof-plan-v1",
+  "status": "draft antecedent; pending separate authorization; live execution forbidden",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "namespace": "ds.contracts.table.recipe.v1",
+  "writer": {
+    "programPath": "recipe/evidence/table-live-pivot-v4/programs/writer.txt",
+    "programBytes": 69075,
+    "programSha256": "8c34fe64a74250ac2ada609d627434f20e849f260124df88c1fba86701b2a340",
+    "runIdentity": "cc811f47-82d19508-table-v4",
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v4"
+  },
+  "sources": [
+    {
+      "source": "first-party",
+      "adapterIdentity": "first-party-table-reviewed-v1",
+      "recipeHash": "cc811f470b9421b96c184b4aa4ca05cd8476b59b452e364ac6bd1ce5ba9afeb4",
+      "envelopeHash": "8190067940399ba48c615dcf9fdc01d3a7703e2a95db013010d31aef0c7e8ca6",
+      "tableExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v4/expected-scene-plan-first-party-table.json.gz",
+        "bytes": 3832,
+        "sha256": "64855c02d7d838f6e600665429fddddc3c7f29969f5d59c960aeeca230eda12e",
+        "uncompressedBytes": 60278,
+        "uncompressedSha256": "7f7d2c6e31359976ee1b732364a90b1b693955c02f5704bde8df123d89002e83",
+        "facts": 231
+      },
+      "rowExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v4/expected-scene-plan-first-party-row.json.gz",
+        "bytes": 3329,
+        "sha256": "68998f466f76ea2fad97148261b20833f1fef10ee710ac57c4f9a3748e73c118",
+        "uncompressedBytes": 48111,
+        "uncompressedSha256": "ed7598a40260c016cf10e7166c17796f89b62deb117f13da8fbc324be41569ec",
+        "facts": 208
+      },
+      "cellExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v4/expected-scene-plan-first-party-cell.json.gz",
+        "bytes": 3590,
+        "sha256": "4b7383dd6905bed7d31eaedcc47babafae69dbe581f1ce475d4e58e12fbef96e",
+        "uncompressedBytes": 46021,
+        "uncompressedSha256": "3f0ca91e016dfb6c08c30934c1e663e705b8e6eab58a5478ad9ae91461cc78ad",
+        "facts": 176
+      }
+    },
+    {
+      "source": "mui",
+      "adapterIdentity": "material-table-reviewed-v1",
+      "recipeHash": "82d19508617f247bfd54801e8220bd8257da186a7c239b572ddfcf44281b14df",
+      "envelopeHash": "6b835d2403c32f6fc510c2d60b0b845c26f40481be7bbdd7c5c9173604e5847a",
+      "tableExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v4/expected-scene-plan-mui-table.json.gz",
+        "bytes": 3826,
+        "sha256": "d3a1b2353cc7b655ac47c22a7f74e1c56cc606e9e26c3148aa5aaa45ab3ab64f",
+        "uncompressedBytes": 60314,
+        "uncompressedSha256": "4ba833b96e9ff150ec5133756dcd5187b47304b3a8d2120c1bba14ee56df76f1",
+        "facts": 231
+      },
+      "rowExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v4/expected-scene-plan-mui-row.json.gz",
+        "bytes": 3354,
+        "sha256": "122b8dbcf575fe13c50ff7b21a3bb03c0bdae71b31feaca6fe8e401b87630df8",
+        "uncompressedBytes": 48147,
+        "uncompressedSha256": "f72cbc790645d24a296780da384442e791b56a47a77f0bb36929689b52db9e7c",
+        "facts": 208
+      },
+      "cellExpectedScenePlan": {
+        "path": "recipe/evidence/table-live-pivot-v4/expected-scene-plan-mui-cell.json.gz",
+        "bytes": 3700,
+        "sha256": "270a560fe3239fd93946e7c513af8f5284755e6c5b713b4c2f84ccec3c6333f4",
+        "uncompressedBytes": 46967,
+        "uncompressedSha256": "88e171d399dd317565270fb974622fa5970e9aa058a34e59d4941cd5a307e0e0",
+        "facts": 176
+      }
+    }
+  ],
+  "captureManifest": {
+    "path": "recipe/evidence/table-live-pivot-v4/capture-manifest.json",
+    "cells": 20,
+    "requests": 20,
+    "cellsPerRequest": 1,
+    "sha256": "b3d125c451afd27d2340bd104e2034019f040e719aff8c49224cccbc6576bdb0"
+  },
+  "requests": {
+    "remote": 25,
+    "mainLane": 24,
+    "recoveryCleanup": 1,
+    "hostPhases": 3
+  },
+  "attempts": {
+    "executed": 0,
+    "next": 1,
+    "maximum": 3,
+    "cleanPublishedDescendantsOnly": true
+  },
+  "humanSignoff": "pending",
+  "overallTableSuccess": false
+}

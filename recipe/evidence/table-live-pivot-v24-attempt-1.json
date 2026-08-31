@@ -1,0 +1,144 @@
+{
+  "artifactVersion": "table-live-v24-attempt-1-v1",
+  "status": "failed closed at extract collapse; writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "81d6491a730b6ce3ce52fdf7f37ca350485c881b",
+  "codeCommit": "81d6491a730b6ce3ce52fdf7f37ca350485c881b",
+  "antecedentCommit": "228960d2938ca7ff2e27eeef740d8f34873d53aa",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-82d19508-table-v24",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenTableV23RunIdentity": "cc811f47-82d19508-table-v23"
+  },
+  "transaction": {
+    "transactionId": "749b2f5b-491f-4bca-809c-caada2507297",
+    "attempt": 1,
+    "authorizationSha256": "942e07d4cc87f33d49833d8232d98d71756340adcf8186c5f82823b37b3027e7",
+    "signingPublicKeySpkiSha256": "b2ddecee09a6f85314a069bfb6226d1536297266ae4e7431b3adff4931d3f6bd",
+    "securityAttestationSha256": "0d4c1027813f7d8ede51811d9722c9dd469f5214d78c75317bc61adf9f2c3af7",
+    "programSha256": "d6b9e7f28c37545174f3ccb3f708aabfa5b27b6a799b0481aba66e80719efbdd",
+    "bindingSha256": "e391679abef3b6aeeaab4626ca1dddba52294c6d3cc22a3cd36af183f7b17241",
+    "requestSha256": "c879d12ede5c467be87e271ebeb365e9618bef8cd45c24e0346aa5500db572df"
+  },
+  "writer": {
+    "accepted": true,
+    "firstSignedCallAccepted": true,
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v24",
+    "pageId": "172:46324",
+    "sectionIds": ["172:46325", "172:46454"],
+    "collectionIds": [
+      "VariableCollectionId:172:46326",
+      "VariableCollectionId:172:46455"
+    ],
+    "firstParty": {
+      "sectionId": "172:46325",
+      "cellSetId": "172:46353",
+      "rowSetId": "172:46382",
+      "tableSetId": "172:46453",
+      "collectionId": "VariableCollectionId:172:46326"
+    },
+    "mui": {
+      "sectionId": "172:46454",
+      "cellSetId": "172:46482",
+      "rowSetId": "172:46511",
+      "tableSetId": "172:46582",
+      "collectionId": "VariableCollectionId:172:46455"
+    },
+    "runIdentity": "cc811f47-82d19508-table-v24",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "createdNodeIds": 83,
+    "rowSetCompileCarryLabelTeachingCleared": true,
+    "rowVariantStrokesOmitTeachingUnchangedFromV23": true,
+    "namedFromSourceFamily": "Inter",
+    "carriedHostStyle": "Semi Bold",
+    "resolutionDeclared": "requested",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "pageId": "172:46324",
+    "restoredCount": 8,
+    "fixedBefore": 0,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": false,
+    "rowSetCompileCarryLabelClearedByHostNormalize": true,
+    "hostRawRowSetName": "table/row-set :: Table",
+    "hostNormalizedRowSetLabel": "Table row",
+    "compileRowSetLabel": "Table row",
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[2].children[0].children[0].label",
+    "failedOn": "first-party library-frame table/cell-set; RecipeRefusal table@1: unsupported structural edit at $.children[2].children[0].children[0].label",
+    "adapterIdentity": "first-party-table-reviewed-v1",
+    "role": "table/cell/label",
+    "parentRole": "table/cell/compact/header",
+    "hostRawCellLabelTextName": "table/cell/label :: font-provenance=%7B%22requestedFamily%22%3A%22Inter%22...",
+    "hostDerivedLabelFromNameAfterSeparator": "font-provenance=%7B%22requestedFamily%22%3A%22Inter%22...",
+    "compileCellLabelLabel": "table/cell/label",
+    "sameClassLikelyOnCellSetLabel": true
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "172:46324",
+    "removedCollectionIds": [
+      "VariableCollectionId:172:46326",
+      "VariableCollectionId:172:46455"
+    ],
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "currentPageAfterCleanup": "0:1",
+    "independentlyVerifiedByReadOnlyProbe": true
+  },
+  "census": {
+    "artifact": "recipe/evidence/table-tail-census-v1.json",
+    "predictedBeforeTheRun": "$.children[2].children[0].children[0].label",
+    "actualRefusal": "$.children[2].children[0].children[0].label",
+    "predictionHeld": true,
+    "note": "The offline census (commit 9a5a1dd75) enumerated the remaining extract-side tail from the persisted v23 extract and recorded its prediction in commit ee3afa077 BEFORE this attempt was authorized. The live refusal matched the predicted path exactly. The v24 extract substrate reproduces the same census as the v23 substrate: 23 differences, same six classes, same next prediction.",
+    "remainingExtractSideTailFirstParty": 23,
+    "remainingClasses": [
+      "4 absent-left clipsContent on the four table/cell variants",
+      "4 absent-left cornerRadius on the four table/cell variants",
+      "4 absent-left effects on the four table/cell variants",
+      "4 absent-left strokes.dashPattern on the four table/cell variants",
+      "5 value label on table/cell-set and table/cell/label",
+      "2 value characters on table/cell/label"
+    ],
+    "muiRootBlockedBeforeDiff": "table/cell/compact/body: required binding layout.minWidth must appear exactly once",
+    "predictsExtractSideOnly": true,
+    "doesNotPredictWriterSideRefusals": true
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "restartV24Attempt2AsIs": false,
+    "prepareV25": "when extract host-normalizes table/cell/label, emit the compile-carried label table/cell/label instead of the live TEXT name after :: (the host currently derives the font-provenance blob from table/cell/label :: font-provenance=...)"
+  },
+  "secondaryNoteNotTheRefusedClass": "v24 teaching cleared as stated: host raw row-set name is table/row-set :: Table on both roots and host-normalize now emits the compile-carried label Table row, so the v23 refusal at $.children[1].label is closed. Writer first signed call accepted. Restore held 8 hug labels. Extract walk accepted. Collapse then refused the cell-label name on the cell-set path because the host takes the segment after :: while that TEXT name carries font-provenance. Cell-set label is measured as the same class as the v23/v24 row-set label (host derives Table; compile carries Table cell) and is NOT this refused class. Cell variants still carry clipsContent, cornerRadius, effects, and empty strokes dashPattern that compile omits -- measured, not yet taught. MUI cells still lack layout.minWidth after the v5 unset-null teaching and that root stops before the diff; not the refused class. Do not invent a label onto compile. Do not change table/variant labels. Do not omit table/variant strokes or cornerRadius.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

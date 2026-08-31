@@ -1,0 +1,37 @@
+{
+  "artifactVersion": "table-live-v3-status-v1",
+  "status": "attempt 1 failed closed at writer TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER; host refuses componentPropertyReferences on instance sublayers; writer not accepted; cleanup executed on failure; Input 115:295378 stayed; Combobox 163:35981 stayed; mint did not stay; no Table human grade",
+  "antecedent": {
+    "commit": "868ec9b0a45a0790e59efc49fe6f35e91f540212",
+    "indexPath": "recipe/evidence/table-live-pivot-v3/antecedent-index.json",
+    "indexSha256": "fe9e3688acc8b19e8462795214fb70cd1d652c54843bba3dc5553ff714a60377",
+    "hashSetSha256": "7a45d99dc4d324386b8a9ce63789b65705d5e7608b1ff3ba72c5a8498ca0a410"
+  },
+  "authorization": {
+    "commit": "1c03d3665881cdc8db7e8c0fe276358f72577367",
+    "path": "recipe/evidence/table-live-pivot-v3/capture-authorization.json",
+    "sha256": "51e10384055ce4e49078a519d9c2519815eb5174f33de7da6b0899ebd1f836ff",
+    "signingPublicKeySpkiSha256": "a4cfc59751b2b6ac5c080b9e1b0cbebaf83e6926e02913a9cf937dce767190bf"
+  },
+  "attempt1": {
+    "pageId": "165:40704",
+    "pageRemoved": true,
+    "writerAccepted": false,
+    "writerRefused": "TABLE-COMPONENT-PROPERTY-REFERENCES-INSTANCE-SUBLAYER",
+    "nestedCellLabelCharactersTeachingCleared": true,
+    "cleanupExecuted": true,
+    "signedCleanupIssued": false
+  },
+  "inputPageUntouched": {
+    "pageId": "115:295378",
+    "presentAfterCleanup": true
+  },
+  "comboboxPageUntouched": {
+    "pageId": "163:35981",
+    "presentAfterCleanup": true
+  },
+  "nextTeaching": "bind row Cell N on original non-instance-sublayer TEXT in the row component through host-listed characters; do not set componentPropertyReferences on TEXT nested inside a cell INSTANCE",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

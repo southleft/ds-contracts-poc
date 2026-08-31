@@ -1,0 +1,94 @@
+{
+  "artifactVersion": "table-live-v27-attempt-1-v1",
+  "status": "failed closed at probe on reflowPassed ONLY; every other probe check passed on both roots and on all 20 cells; writer, restore and extract accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "c6a79db562441bee31a44a8c54d935d89c100a73",
+  "codeCommit": "c6a79db562441bee31a44a8c54d935d89c100a73",
+  "antecedentCommit": "9d4b902819f3e9974f828fa8950cf65b261ef4d1",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-9cd3c67b-table-v27"
+  },
+  "transaction": {
+    "transactionId": "2a17e067-44e5-443b-beeb-9fd457fab20d",
+    "attempt": 1,
+    "authorizationSha256": "78216379857e91cdf363cbcb9f4d0b0707b56db3935afc0941d3d7b115c0684e",
+    "programSha256": "b881be9fd62b9b98af49d95f0a2003e9bd353932ce76c1067d94097d90fe6a1c",
+    "requestSha256": "7744e53204fa56acf1c298312fe7fdfafbcf03684b2a8862e2a3854574ba2494"
+  },
+  "writer": {
+    "accepted": true,
+    "pageId": "173:47351",
+    "pageName": "Recipe Pivot / Table / cc811f47-9cd3c67b-table-v27",
+    "setIds": [
+      "173:47480",
+      "173:47409",
+      "173:47380",
+      "173:47607",
+      "173:47536",
+      "173:47507"
+    ],
+    "createdNodeIds": 83,
+    "sourceRoots": 2,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 8,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": true,
+    "fixedPointIrDiffPassed": true,
+    "independentRootAccountingPassed": true
+  },
+  "probe": {
+    "issued": true,
+    "accepted": false,
+    "containmentFixHeld": true,
+    "maximumOverlapPixelsAcrossAll20Cells": 0,
+    "overlapWasV26MeasurementDefect": true,
+    "cellsFailingAnyLimit": 0,
+    "perSourcePassed": [
+      "contentHugPassed",
+      "bindingCompatibilityPassed",
+      "noFakeLayoutPassed",
+      "stateSemanticsPassed",
+      "switchingRestored",
+      "textPropertiesRestored",
+      "exactSceneRestoration"
+    ],
+    "perSourceFailed": ["reflowPassed"],
+    "onlyRemainingFailure": "reflowPassed",
+    "reflowCause": "the probe widens an instance by 64px and requires the width to stick; the table root is minted hug-contents, declared at recipe/fixtures/table.ts:102-105. The probe asserts FILL semantics against a HUG-declared root."
+  },
+  "captures": {
+    "issued": 0
+  },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "removedPageId": "173:47351",
+    "remainingOwnedNodes": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true
+  },
+  "openHumanGate": {
+    "gate": "docs/32 D4 - reviewed adapter authoring",
+    "question1": "Does the table root stay hug-contents (and the probe stop asserting a forced width must stick), or does a data table root become resizable? Turning hug into fill/fixed without a reviewed source fact is the invented FILL/FIXED teaching the standing constraints forbid.",
+    "question2": "Does table@1 gain a per-column width model? MUI declares no cell min-width, so every MUI cell hugs its own content and the columns do not align across rows. The probe does NOT catch this: rolesExact, noFakeLayout, stateSemantics, visibleAreaLoss and overlap all pass on a table whose columns are ragged. That is a gap in the usability gate as well as in the recipe.",
+    "firstPartyAlignsOnlyByAccident": "first-party columns line up only because its minWidth 120 happens to exceed its content"
+  },
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

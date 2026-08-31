@@ -1,0 +1,39 @@
+{
+  "artifactVersion": "calendar-v31-fill-caption-zero-intrinsic-v1",
+  "status": "failed closed; mint did not stay",
+  "antecedent": {
+    "prepare": "538c86b19869dec5b1d224d4715f7c75fd0f0ac6",
+    "authorize": "83ed24f18b821a3eb3eb55a7f9b6e4365ffa4617"
+  },
+  "runIdentity": "4604bbfe-calendar-v31",
+  "attempt": 1,
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": false,
+    "error": "CALENDAR-FONT-ZERO-INTRINSIC:calendar/caption",
+    "class": "FILL caption is parent-sized. Source monthYearLabel.flex is 1. Writer refused zero intrinsic before the header and month hug existed.",
+    "partialPageId": "180:56725",
+    "partialCollectionId": "VariableCollectionId:180:56727",
+    "cleaned": true
+  },
+  "protectedPagesStayed": {
+    "calendarV30": "180:56126",
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  },
+  "tokens": {
+    "selectedAccent": "#0064E0",
+    "usedDocsSiteAccent": false,
+    "usedDocsDarkCanvas": false
+  },
+  "doNotRestartAttempt2AsIs": true,
+  "nextTeaching": "writer skips pre-parent intrinsic and post-append zero-geometry for FILL text",
+  "humanSignoff": "pending",
+  "productV1": "incomplete"
+}

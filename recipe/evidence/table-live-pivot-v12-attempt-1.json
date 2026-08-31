@@ -1,0 +1,174 @@
+{
+  "artifactVersion": "table-live-v12-attempt-1-v1",
+  "status": "failed closed at extract collapse; writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "820fa53eb7ce5b406f7a2b87f1b09487984976ce",
+  "codeCommit": "820fa53eb7ce5b406f7a2b87f1b09487984976ce",
+  "antecedentCommit": "8334502b6ca135fe69f0bec849c7c1afe5d7f660",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-82d19508-table-v12",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenTableV2RunIdentity": "cc811f47-82d19508-table-v2",
+    "forbiddenTableV3RunIdentity": "cc811f47-82d19508-table-v3",
+    "forbiddenTableV4RunIdentity": "cc811f47-82d19508-table-v4",
+    "forbiddenTableV5RunIdentity": "cc811f47-82d19508-table-v5",
+    "forbiddenTableV6RunIdentity": "cc811f47-82d19508-table-v6",
+    "forbiddenTableV7RunIdentity": "cc811f47-82d19508-table-v7",
+    "forbiddenTableV8RunIdentity": "cc811f47-82d19508-table-v8",
+    "forbiddenTableV9RunIdentity": "cc811f47-82d19508-table-v9",
+    "forbiddenTableV10RunIdentity": "cc811f47-82d19508-table-v10",
+    "forbiddenTableV11RunIdentity": "cc811f47-82d19508-table-v11"
+  },
+  "transaction": {
+    "transactionId": "5fd29afc-a50f-449e-8551-7f383b09f8b5",
+    "attempt": 1,
+    "authorizationSha256": "0647cf12bdf2ceb0e4f90b0a12763a39aa13ea0fe2b62676a94471a7ac4dc72c",
+    "signingPublicKeySpkiSha256": "cbbbd82088b32e4d64b6f2358addbe78c0c00a9d4753dd7443eace2ab1c9d2e8",
+    "programSha256": "acde5693286850fda0f40a84c4c2335ed7f42b59921800041ee7237c38c66785",
+    "bindingSha256": "037723a698d411195848501a98e29d9ee4c6ee78504fb7d93baa3022ef5ac77e",
+    "requestSha256": "486b2bf85acb095253d238fae0fa8369ffc0c81fbccad934167236f5fe7de953"
+  },
+  "writer": {
+    "accepted": true,
+    "firstSignedCallRefused": "TABLE-CELL-PROPERTY-ABSENT:Label",
+    "firstSignedCallNote": "first signed writer raced TABLE-CELL-PROPERTY-ABSENT:Label; same-attempt retry listed Label and accepted; not a new teaching",
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v12",
+    "pageId": "165:42936",
+    "sectionIds": ["165:43011", "165:43142"],
+    "collectionIds": [
+      "VariableCollectionId:165:43014",
+      "VariableCollectionId:165:43143"
+    ],
+    "firstParty": {
+      "sectionId": "165:43011",
+      "cellSetId": "165:43041",
+      "rowSetId": "165:43070",
+      "tableSetId": "165:43141",
+      "collectionId": "VariableCollectionId:165:43014"
+    },
+    "mui": {
+      "sectionId": "165:43142",
+      "cellSetId": "165:43170",
+      "rowSetId": "165:43199",
+      "tableSetId": "165:43270",
+      "collectionId": "VariableCollectionId:165:43143"
+    },
+    "runIdentity": "cc811f47-82d19508-table-v12",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "createdNodeIds": 82,
+    "headerBodyStrokesOmitTeachingCleared": true,
+    "headerBodyEffectsOmitTeachingUnchangedFromV11": true,
+    "headerBodyCornerRadiusOmitTeachingUnchangedFromV10": true,
+    "headerBodyClipsContentOmitTeachingUnchangedFromV9": true,
+    "cellInstanceBindingExtrasTeachingUnchangedFromV8": true,
+    "perSideStrokeWeightFoldTeachingUnchangedFromV7": true,
+    "rowOwnedCellLabelSkipTeachingUnchangedFromV6": true,
+    "minWidthZeroUnsetTeachingUnchangedFromV5": true,
+    "headerFontTeachingUnchangedFromV2": true,
+    "ownedRowTextCharactersTeachingUnchangedFromV4": true,
+    "namedFromSourceFamily": "Inter",
+    "carriedHostStyle": "Semi Bold",
+    "resolutionDeclared": "requested",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "pageId": "165:42936",
+    "restoredCount": 8,
+    "fixedBefore": 0,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": false,
+    "walkClearedOwnershipKeyAbsent": true,
+    "cellInstanceHostBindings": [],
+    "compileInstanceBindings": [],
+    "headerBodyClipsContentOmittedByHostNormalize": true,
+    "headerBodyCornerRadiusOmittedByHostNormalize": true,
+    "headerBodyEffectsOmittedByHostNormalize": true,
+    "headerBodyStrokesOmittedByHostNormalize": true,
+    "hostNormalizedHeaderHasClipsContent": false,
+    "hostNormalizedBodyHasClipsContent": false,
+    "hostNormalizedHeaderHasCornerRadius": false,
+    "hostNormalizedBodyHasCornerRadius": false,
+    "hostNormalizedHeaderHasEffects": false,
+    "hostNormalizedBodyHasEffects": false,
+    "hostNormalizedHeaderHasStrokes": false,
+    "hostNormalizedBodyHasStrokes": false,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[1].children[0].bindings",
+    "failedOn": "first-party table/row-instance/0; RecipeRefusal table@1: unsupported structural edit at $.children[0].children[0].children[1].children[0].bindings",
+    "adapterIdentity": "first-party-table-reviewed-v1",
+    "role": "table/row-instance/0",
+    "hostRowInstanceBindings": [
+      {
+        "field": "fills.0.color",
+        "type": "COLOR",
+        "variable": "ds.table.rowStates-default-background"
+      }
+    ],
+    "compileRowInstanceHasBindings": false,
+    "muiHostRowInstanceBindings": [
+      {
+        "field": "fills.0.color",
+        "type": "COLOR",
+        "variable": "mui.table.rowStates-default-background"
+      }
+    ],
+    "sameClassOnMuiRowInstances": true,
+    "hostHeaderStrokes": null,
+    "hostBodyStrokes": null,
+    "compileHeaderHasStrokes": false,
+    "compileBodyHasStrokes": false,
+    "extractHeaderHasStrokes": true,
+    "extractBodyHasStrokes": true,
+    "extractHeaderStrokes": [],
+    "extractBodyStrokes": [],
+    "compileVariantHasStrokes": true,
+    "hostVariantHasStrokes": true,
+    "compileVariantHasEffects": false,
+    "hostVariantHasEmptyEffects": true
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "165:42936",
+    "removedCollectionIds": [
+      "VariableCollectionId:165:43014",
+      "VariableCollectionId:165:43143"
+    ],
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "restartV12Attempt2AsIs": false,
+    "prepareV13": "when extract host-normalizes table/row-instance, omit Figma-copied bindings because compile row-instances carry none"
+  },
+  "secondaryNoteNotTheRefusedClass": "v12 teaching cleared as stated: extract host-normalize omitted strokes on table/header and table/body; compile header/body frames omit the key; host drop removed extract empty strokes []. Writer accepted both first-party and MUI after a same-attempt Label race retry. Restore held 8 hug labels. Collapse then refused copied fills.0.color bindings on table/row-instance/0 because compile row-instances carry no bindings. The same class is on MUI row-instances. This is the previously-named secondary class. Reuse the v8 cell-instance empty compile-binding-fields extras-drop path for ROW_INSTANCE_ROLE; do not invent bindings onto compile. Do not omit table/variant strokes. table/variant still emits clipsContent false and empty effects []; compile omits both on variants; those are not this refused path and must not be bundled. MUI cells still lack layout.minWidth after v5 unset-null of minWidth 0; that is not this refused class.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

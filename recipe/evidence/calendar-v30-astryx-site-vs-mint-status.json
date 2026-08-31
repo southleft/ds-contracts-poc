@@ -1,0 +1,20 @@
+{
+  "artifactVersion": "calendar-v30-astryx-site-vs-mint-status-v1",
+  "status": "diagnosis only; no remint; no Calendar grade. V30 mint on 180:56126 compiled astryx-calendar-reviewed-v1 August 2026 3-week fixture from vendored @astryxdesign/core. Docs page https://astryx.atmeta.com/components/Calendar is the live v0.5.1 Calendar showcase (value 2026-04-15, 6 rows, nav chevrons, site theme, dark chrome). TJ PNG matches that dark showcase, not a compile miss. Product v1 incomplete.",
+  "evidence": "recipe/evidence/calendar-v30-astryx-site-vs-mint.json",
+  "pageId": "180:56126",
+  "adapterIdentity": "astryx-calendar-reviewed-v1",
+  "didNotRemint": true,
+  "doNotInventCalendarGrade": true,
+  "nextPrepareJustified": false,
+  "needsTjPick": "keep fixture slice vs expand adapter from the live Astryx component",
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false,
+  "siblingsUntouched": {
+    "input": "115:295378",
+    "combobox": "163:35981",
+    "table": "173:48924",
+    "button": "85:6781"
+  }
+}

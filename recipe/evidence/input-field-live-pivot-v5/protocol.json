@@ -1,0 +1,157 @@
+{
+  "artifactVersion": "input-live-v5-protocol-draft-v1",
+  "protocolId": "input-live-v5",
+  "status": "draft antecedent uncommitted; pending separate authorization; execution forbidden",
+  "authorization": {
+    "authorized": false,
+    "artifactPath": "recipe/evidence/input-field-live-pivot-v5/capture-authorization.json",
+    "artifactPresent": false,
+    "separateCommitRequired": true,
+    "v4AuthorizationReusable": false,
+    "rule": "The unique commit that first adds the v5 authorization artifact must strictly descend from the unique commit that first adds this protocol. Live execution requires a clean published descendant containing byte-identical protocol, authorization, generated writer, and transport artifacts."
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma",
+    "pageScopedOwnership": true,
+    "sourceOrLibraryFilesWritable": false
+  },
+  "attempts": {
+    "executed": 0,
+    "maximum": 3,
+    "cleanPublishedDescendantsOnly": true,
+    "freshOwnedPagePerAttempt": true
+  },
+  "execution": {
+    "phaseOrder": [
+      "preflight",
+      "writer-result",
+      "raw-scene-and-variable-table",
+      "host-normalization",
+      "accounting-and-fixed-point",
+      "usability-and-restoration",
+      "captures-and-objective",
+      "retention-and-cleanup"
+    ],
+    "authorizationVerifiedBeforeBridge": true,
+    "bridgeInvocationsPerAttempt": 1,
+    "generatedWriterAndTransportRequired": true,
+    "entrypointMustReachWriterUnderSimulatedAuthorization": true,
+    "transactionalHashChain": true,
+    "artifactWrittenImmediatelyAfterPhaseReturn": true,
+    "cleanupFromPersistedWriterJournal": true,
+    "captureAfterAllTechnicalGatesOnly": true,
+    "portableRuntimeRequired": true,
+    "strictUtf8AndHashTransportRequired": true
+  },
+  "normalization": {
+    "localVariableTableCapturedWithRawScene": true,
+    "variableAliasesResolvedOnlyThroughCapturedTable": true,
+    "sourcePlanVariableStampsAccepted": false,
+    "supportedBindingShapes": [
+      "direct VariableAlias",
+      "node alias arrays for fills and strokes",
+      "paint-level bound color aliases",
+      "single text scalar alias arrays",
+      "missing values"
+    ],
+    "supportedUnitShapes": [
+      "PIXELS with finite value",
+      "PERCENT with finite value",
+      "AUTO without value"
+    ],
+    "namedRefusals": [
+      "MIXED values",
+      "partial mixed text ranges",
+      "unknown object shapes",
+      "ambiguous arrays",
+      "stale variable IDs",
+      "duplicate aliases",
+      "incompatible field and variable types"
+    ],
+    "unitsNeverDiscarded": true
+  },
+  "criteria": {
+    "denominator": {
+      "sources": 2,
+      "cellsPerSource": 128,
+      "requiredCellsPerSource": 128,
+      "objectiveCells": 128,
+      "missingExtraOrDuplicateCellsFail": true
+    },
+    "thresholds": {
+      "dimensionError": {
+        "absolutePixels": 4,
+        "relative": 0.08,
+        "failureRule": "absolute error exceeds 4px and relative error exceeds 8%"
+      },
+      "spacingError": {
+        "absolutePixels": 4,
+        "relative": 0.2,
+        "failureRule": "absolute error exceeds 4px and relative error exceeds 20%"
+      },
+      "roleScaleError": {
+        "relative": 0.1
+      },
+      "clipping": {
+        "maximumVisibleAreaLoss": 0.05
+      },
+      "overlap": {
+        "maximumPixels": 2
+      }
+    },
+    "requiredBeforeCapture": [
+      "raw scene extraction and independently captured local-variable table",
+      "host normalization",
+      "occurrence-preserving multiset accounting",
+      "two-cycle scene-derived fixed point",
+      "all-axis usability and exact restoration",
+      "clipping and overlap",
+      "actual adornment content and accessibility payload",
+      "state semantics and typed bindings",
+      "font provenance and named fallback or refusal"
+    ],
+    "visualRelativeProgression": {
+      "exactPixelDifference": "diagnostic-only",
+      "acceptanceMetrics": ["geometry", "perceptual", "ink"],
+      "recipeWinsMustExceedLegacyLosses": true,
+      "aggregateRecipeErrorsMustBeLower": true,
+      "strata": ["source", "state", "adornment"],
+      "aggregateRelativeIncreaseLimit": 0.1,
+      "catastrophicCellRule": "recipe error exceeds legacy error * 1.5 + 0.02"
+    },
+    "sceneIndependence": {
+      "actualScenePropertiesOnly": true,
+      "sourceIrReadback": false,
+      "occurrenceIdsAndDuplicatesPreserved": true,
+      "silentCountDerived": true
+    },
+    "humanGate": {
+      "mandatory": true,
+      "status": "pending",
+      "attributableReviewerRequired": true,
+      "builderOrAnonymousSignoffAccepted": false,
+      "overallSuccessBeforeSignoff": false
+    }
+  },
+  "implementationBoundaries": {
+    "sourceLibraryBranches": false,
+    "actualAdornmentPayloadsRequired": true,
+    "fontProvenanceRequired": true,
+    "sceneDerivedInversionRequired": true,
+    "offlineBridgeMayBeInjectedOnlyWithExplicitSimulatedAuthorization": true,
+    "liveAuthorizationBypassForbidden": true
+  },
+  "supersession": {
+    "v4BytesChanged": false,
+    "v4AuthorizationReusable": false,
+    "v4Status": "authorization lineage invalid for execution because the committed entrypoint refused before writer phase",
+    "v3Status": "permanently exhausted after three attempts",
+    "replacementScope": [
+      "authorization-aware executable entrypoint",
+      "generated writer and exact-byte transport",
+      "offline end-to-end executable proof"
+    ]
+  }
+}

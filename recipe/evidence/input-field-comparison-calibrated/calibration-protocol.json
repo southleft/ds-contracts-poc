@@ -1,0 +1,92 @@
+{
+  "version": "input-field-calibrated-hidden-duplicate-v1",
+  "lockedBeforeGrading": true,
+  "purpose": "Resolve whether the Input/Field recognisability instrument is stable within one calibrated blind batch; this protocol does not grade the packet.",
+  "evidenceDesign": {
+    "exactSourceCells": 128,
+    "correctedSpecimens": 128,
+    "unchangedControlCopyA": 128,
+    "unchangedControlCopyB": 128,
+    "totalSpecimens": 384,
+    "hiddenCopiesAreByteIdenticalPerCell": true,
+    "randomization": "One deterministic global pseudorandom permutation; each presentation has an unrelated opaque task, reference, specimen, filename, and non-adjacent same-cell position."
+  },
+  "rubric": {
+    "version": "input-field-observable-rubric-v1",
+    "evaluationOrder": [
+      {
+        "category": "structural-completeness-state-correctness",
+        "observableCriteria": [
+          "Compare visible parts first: input surface, label, content, required indicator, helper or error message, and expected adornment positions.",
+          "The visible state must match the reference: default, focus, error, or disabled cues may not be missing, substituted, or added.",
+          "A missing, extra, relocated, clipped, or wrong load-bearing part is observable structural failure."
+        ],
+        "failureRule": "Any load-bearing structure or state mismatch is fail and makes recognisable false; continue the remaining categories to record defects."
+      },
+      {
+        "category": "geometry-proportions",
+        "observableCriteria": [
+          "Compare total field width and height, surface height, internal padding, alignment, spacing, corner geometry, and relative proportions.",
+          "A difference is material when it changes the component silhouette, spacing hierarchy, alignment, wrapping, or clipping; subpixel antialiasing alone is not material."
+        ],
+        "failureRule": "A material geometry or proportion mismatch makes recognisable false."
+      },
+      {
+        "category": "label-helper-adornments",
+        "observableCriteria": [
+          "Compare label placement and activation, helper versus error text, required marker, leading and trailing adornment presence, order, size, and spacing.",
+          "Text wording that is visibly supplied by the paired reference must appear in the same semantic visual role."
+        ],
+        "failureRule": "Any missing or wrong role is structural fail; other material placement, scale, or spacing mismatch makes recognisable false."
+      },
+      {
+        "category": "typography",
+        "observableCriteria": [
+          "Compare visible family character, weight, size, line height, letter spacing, alignment, and emphasis hierarchy.",
+          "Raster antialiasing or a subpixel edge difference with unchanged metrics and hierarchy is minor."
+        ],
+        "failureRule": "A material typography mismatch that changes metrics, hierarchy, wrapping, or alignment makes recognisable false."
+      },
+      {
+        "category": "border-fill-focus-error-treatment",
+        "observableCriteria": [
+          "Compare border width and style, fill and ink colors, opacity, disabled treatment, focus ring or shadow, and error treatment.",
+          "State cues must be present only where the paired reference shows them and must use the same visible treatment class."
+        ],
+        "failureRule": "A missing, extra, or materially different border, fill, focus, disabled, or error treatment makes recognisable false."
+      }
+    ],
+    "passRule": "recognisable=true if and only if structural-completeness-state-correctness is match and every later category is match or minor; any structural fail or material later-category verdict requires recognisable=false.",
+    "gradeSchemaRule": "Grade categories in the declared order. Every fail or material verdict requires a concrete visible defect in that category; top-level defects are the exact ordered concatenation of category defects."
+  },
+  "acceptance": {
+    "allThreeRatersValidAndComplete": true,
+    "hiddenDuplicateAgreementPerRaterMinimum": 0.95,
+    "majorityConsensusDuplicateAgreementMinimum": 127,
+    "majorityConsensusDuplicateAgreementDenominator": 128,
+    "duplicateMismatchBlocksAffectedCell": true,
+    "everyPairwiseAgreementMinimum": 0.75,
+    "fleissKappaMinimum": 0.6,
+    "maximumIdenticalCopyPassRateDifference": 0.05,
+    "majorityFailNeedsConcreteDefectsFromRaters": 2,
+    "failureConsequence": "If any acceptance condition fails, recognisability remains unusable, architecture progression remains blocked, and live Input/Field work stays blocked."
+  },
+  "progressArithmetic": {
+    "availableOnlyAfterReliabilityPasses": true,
+    "legacyCopiesCollapseToOneConsensusPerCell": true,
+    "legacyMayNeverBeDoubleWeighted": true,
+    "exactComparisonCells": 128,
+    "recipeConsensusPerCell": "two-of-three majority",
+    "legacyConsensusPerCell": "one collapsed result only when copy A and copy B majority consensus are identical",
+    "affectedDuplicateMismatchCell": "blocked",
+    "historicalResultsRemainHistory": true,
+    "calibratedConsensusSupersedesHistoryForProgressionOnlyIfThresholdsPass": true
+  },
+  "gradeOutputs": {
+    "BATCH-CAL-A": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-a.json",
+    "BATCH-CAL-B": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-b.json",
+    "BATCH-CAL-C": "recipe/evidence/input-field-comparison-calibrated/blind-packet/grades-batch-cal-c.json"
+  },
+  "commitmentHash": "6375461cfa138a76ebd041cab23309a1044350ce5036c14a6d5fc74df7e9c246",
+  "rubricHash": "5d2210e8e8e07a19a9e99f92bf59693707c22ff10d1fd5cf38ddbacf8910976e"
+}

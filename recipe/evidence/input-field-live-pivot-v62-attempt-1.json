@@ -1,0 +1,228 @@
+{
+  "artifactVersion": "input-live-v62-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "86b465e91a6515257bafa7649f22ec2db05a3345",
+  "codeCommit": "86b465e91a6515257bafa7649f22ec2db05a3345",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "pageId": "108:212651",
+    "runIdentity": "4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "sha256": "2a90241f191521adffd4eefd68f7545d0b60314612741dbbdd6a08c573615d41",
+    "hostNormalizeAccount": false,
+    "payloadKeys": [
+      "pageId",
+      "roots",
+      "variableTable"
+    ],
+    "marker": null
+  },
+  "v54FailureCleared": {
+    "leadingSlotBindingOrderNotTheRefusalLocus": true
+  },
+  "v55FailureCleared": {
+    "trailingSlotBindingOrderNotTheRefusalLocus": true
+  },
+  "v56FailureCleared": {
+    "requiredIndicatorBindingExtrasAndOrderNotTheRefusalLocus": true
+  },
+  "v57FailureCleared": {
+    "requiredIndicatorLetterSpacingNotTheRefusalLocus": true
+  },
+  "v58FailureCleared": {
+    "requiredIndicatorTextCaseNotTheRefusalLocus": true
+  },
+  "v59FailureCleared": {
+    "requiredIndicatorTextDecorationNotTheRefusalLocus": true
+  },
+  "v60FailureCleared": {
+    "setCornerRadiusNotTheRefusalLocus": true
+  },
+  "v61FailureCleared": {
+    "setEffectsNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedContentHeightMode": {
+    "mui": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "polaris": { "FILL": 0, "FIXED": 0, "HUG": 128, "total": 128 },
+    "muiHiddenPlaceholderFixed": 0
+  },
+  "observedExtractFirstNestedChild": {
+    "mui": { "role": "input-field/surface" },
+    "polaris": { "role": "input-field/label-row" }
+  },
+  "observedMessageContainerClipsContent": {
+    "hostAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedVariantClipsContent": {
+    "hostPresent": { "mui": 128, "polaris": 128 },
+    "compileEmits": true
+  },
+  "observedVariantCornerRadius": {
+    "hostAbsent": { "mui": 128, "polaris": 128 }
+  },
+  "observedSetCornerRadius": {
+    "hostAbsent": { "mui": 1, "polaris": 1 },
+    "compileOmits": true
+  },
+  "observedSetEffects": {
+    "hostAbsent": { "mui": 1, "polaris": 1 },
+    "compileOmits": true
+  },
+  "observedSetFills": {
+    "mui": {
+      "present": true,
+      "value": [{ "kind": "solid", "color": "#f7f7f8ff" }]
+    },
+    "polaris": {
+      "present": true,
+      "value": [{ "kind": "solid", "color": "#f7f7f8ff" }]
+    },
+    "compileOmits": true
+  },
+  "observedSetStrokes": {
+    "mui": {
+      "present": true,
+      "value": []
+    },
+    "polaris": {
+      "present": true,
+      "value": []
+    },
+    "compileOmits": true
+  },
+  "observedSetClipsContent": {
+    "mui": false,
+    "polaris": false,
+    "compileEmits": false
+  },
+  "observedLeadingSlotBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    }
+  },
+  "observedTrailingSlotBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["fills.0.color", "width.value", "height.value"],
+      "hostFieldSequenceCount": 64
+    }
+  },
+  "observedRequiredIndicatorBindings": {
+    "mui": {
+      "total": 64,
+      "hostFieldSequence": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    },
+    "polaris": {
+      "total": 64,
+      "hostFieldSequence": ["type.fontSize", "type.lineHeight.value", "fills.0.color"],
+      "hostFieldSequenceCount": 64
+    }
+  },
+  "observedRequiredIndicatorType": {
+    "mui": {
+      "total": 64,
+      "letterSpacingPresent": 0,
+      "letterSpacingAbsent": 64,
+      "textCasePresent": 0,
+      "textCaseAbsent": 64,
+      "textDecorationPresent": 0,
+      "textDecorationAbsent": 64
+    },
+    "polaris": {
+      "total": 64,
+      "letterSpacingPresent": 0,
+      "letterSpacingAbsent": 64,
+      "textCasePresent": 0,
+      "textCaseAbsent": 64,
+      "textDecorationPresent": 0,
+      "textDecorationAbsent": 64
+    },
+    "compileMuiTypeKeys": ["fontFamily", "fontStyle", "fontProvenance", "fontSize", "lineHeight"],
+    "compileOmitsLetterSpacing": true,
+    "compileOmitsTextCase": true,
+    "compileOmitsTextDecoration": true
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v62.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.fills.length; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v62 scene-readback omitted effects on input-field/set, keeping v17-v61 teachings including set cornerRadius omit. Host did not refuse set effects; effects is now absent on both extracted set roots. Host then refused unsupported structural edit at $.fills.length. $ is the extracted component-set root, role input-field/set, kind component-set. Host fills is [{kind:solid,color:#f7f7f8ff}] on both MUI and Polar. Compile root facts omit fills. Do not invent a fill. Do not invent a radius. Do not invent a variable. Do not invent a binding field. Do not lift onto variants. Do not omit set clipsContent (host false; compile emits false). Do not omit set strokes in the same prepare. Hashed v61 still emits set effects [] and the same set fills. Variant clipsContent remains present 128/128 both; compile still emits it. Variant cornerRadius remains absent 128/128 both. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes, sha256 2a90241f191521adffd4eefd68f7545d0b60314612741dbbdd6a08c573615d41). Content-width census remains MUI 128/128 FILL and Polar 128/128 FILL. Content-height census is MUI 128/128 HUG and Polar 128/128 HUG; hiddenPlaceholderFixed 0. Polar has 0 content-row nodes. Do not invent a FILL or FIXED. Do not teach FIXED as a fill. Do not restart v62 attempt 2 as-is. Scene-readback-v62 bytes are in the v62 hash set.",
+    "inputFieldRecipeInV62AntecedentHashSet": false,
+    "writerInV62AntecedentHashSet": true,
+    "restoreInV62AntecedentHashSet": true,
+    "extractRuntimeInV62AntecedentHashSet": true,
+    "sceneReadbackInV62AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0,
+    "requestedPageNodeId": "108:212651",
+    "removedPageNodeId": "108:212651"
+  },
+  "captures": 0,
+  "figmaWrites": 4,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v56SceneReadbackUnchanged": true,
+  "v56AuthorizationReusable": false,
+  "v58SceneReadbackUnchanged": true,
+  "v59SceneReadbackUnchanged": true,
+  "v60SceneReadbackUnchanged": true,
+  "v60AuthorizationReusable": false,
+  "v60AntecedentBytesUnchanged": true,
+  "v61SceneReadbackUnchanged": true,
+  "v61AuthorizationReusable": false,
+  "v61AntecedentBytesUnchanged": true,
+  "v61Attempt1BytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV62Attempt2WithoutSetFillsOmitForbidden": true
+}

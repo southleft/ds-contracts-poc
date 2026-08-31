@@ -1,0 +1,56 @@
+{
+  "version": "rater-calibration-receipt-v2",
+  "adjudication": "independent-objective-gold-qualification",
+  "graderId": "RATER-CAL-V2-B",
+  "submissionPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/submissions/rater-cal-v2-b.json",
+  "submissionHash": "8a360f77475b69593c20b27ab7d14252c0c10650d8853c1e49e42471af9c9d7a",
+  "gradeHash": "8a360f77475b69593c20b27ab7d14252c0c10650d8853c1e49e42471af9c9d7a",
+  "goldAnswerKeyPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/sealed-answer-key.json",
+  "goldAnswerKeyHash": "7a5d844898442fc4e34d687041b5d29d9a162618f97b7eefa0f4e886b06c51b4",
+  "protocolPath": "recipe/evidence/input-field-comparison-calibration-v2/protocol.json",
+  "protocolHash": "b3beb503740e31491aa4c0195ffff33eda1207362fb2d2cb4aafa848e6201ddd",
+  "gradeSchemaPath": "recipe/evidence/input-field-comparison-calibration-v2/grade.schema.json",
+  "gradeSchemaHash": "73c10638530eff42ab54af754f1acbe94a94d3fe478321781cdb6b1256a10741",
+  "templatePath": "recipe/evidence/input-field-comparison-calibration-v2/gold/blind-packet/templates/rater-cal-v2-b.json",
+  "templateHash": "72a30bd4c4e12f9f0bbb1e92226e9a21551a9323d3883550273325cfc7809e1b",
+  "calibrationCommitment": "8e6894a5b87fd2ce129f29d1a9ea041ac0792aa96a0a01528b25b2d0c0bb48c9",
+  "packetHash": "70dd47851b2a7c19548fb666cb82eafe0be67aaca8e001d4bcac73f10767c022",
+  "randomizedBatchHash": "a4bdbd9708674df88fc27b9ce00e316537778a4c4648426fd8c9354a385f4503",
+  "counts": {
+    "expected": 24,
+    "submitted": 24,
+    "correct": 24,
+    "incorrect": 0,
+    "obviousStructuralStateFailures": 12,
+    "obviousStructuralStateFailuresCorrect": 12,
+    "errors": 0
+  },
+  "errors": [],
+  "score": 1,
+  "correct": 24,
+  "denominator": 24,
+  "obviousStructuralStateFailuresCorrect": 12,
+  "obviousStructuralStateFailuresDenominator": 12,
+  "obviousFailureScore": 1,
+  "obviousStructuralStateFailureScore": 1,
+  "envelopeValid": true,
+  "thresholds": {
+    "minimumScore": 0.95,
+    "obviousFailureScoreRequired": 1,
+    "envelopeValidRequired": true
+  },
+  "passed": true,
+  "performanceEligibility": true,
+  "performanceBinding": {
+    "receiptPath": "recipe/evidence/input-field-comparison-calibration-v2/gold/receipts/rater-cal-v2-b.json",
+    "score": 1,
+    "obviousStructuralStateFailureScore": 1,
+    "passed": true
+  },
+  "performanceAccessed": false,
+  "performanceIdentityRevealed": false,
+  "signature": {
+    "algorithm": "sha256",
+    "signedPayloadHash": "544f7440c7913a4f5e3e05afd1ed7cc7302e16f4a021f3be05415f6dbe912dc8"
+  }
+}

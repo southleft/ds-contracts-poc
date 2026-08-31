@@ -1,0 +1,101 @@
+{
+  "artifactVersion": "combobox-live-v5-attempt-1-v1",
+  "status": "failed closed at host observeSceneFacts scene projection lost root; empty-payload teaching cleared; extract walk cleared; restore 144 held; cleanup accepted; mint did not stay",
+  "authorizationCommit": "1ebe4169ebd6d5f34b297587d6aae19c13d7e8db",
+  "codeCommit": "1ebe4169ebd6d5f34b297587d6aae19c13d7e8db",
+  "antecedentCommit": "fe8adb0678c63ee1a08168f1aad6a3e86d732486",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378"
+  },
+  "teaching": {
+    "one": "host must omit instance payload when extract instancePayload has empty text and empty fills",
+    "cleared": true,
+    "heldRestore144": true,
+    "heldSetRootEnvelopeHash": true,
+    "heldCopiedOwnershipKey": true
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 1465,
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "pageId": "131:309595",
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "namespace": "ds.contracts.combobox.recipe.v1",
+    "sourceRoots": 2,
+    "sets": 4,
+    "variants": 144,
+    "setIds": ["131:310459", "131:309690", "131:311323", "131:310554"],
+    "muiOptionSetId": "131:309690",
+    "muiComboboxSetId": "131:310459",
+    "antdOptionSetId": "131:310554",
+    "antdComboboxSetId": "131:311323",
+    "firstCallRefusedCurrentPageWasInput": false,
+    "currentPageAtWriterStart": "Page 1",
+    "inputPageUntouched": true
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 144,
+    "fixedBefore": 0,
+    "hiddenRevealedForFill": 0,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "v2ClassHeld": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "brokerAccepted": true,
+    "receiptSha256": "0038fba5db47b1057f2b285239dc27603a1ee10b16608eaefd34d0480e23b7e7",
+    "hostNormalizeAccepted": false,
+    "refusedClass": "scene projection lost root",
+    "refused": "scene projection lost root",
+    "emptyInstancePayloadCount": 412,
+    "emptyInstanceRoles": [
+      "combobox/option/selected-indicator",
+      "combobox/control/leading",
+      "combobox/control/clear",
+      "combobox/control/popup"
+    ],
+    "emptyPayloadTeachingCleared": true,
+    "measuredComboboxOwnershipKey": "combobox",
+    "measuredOptionOwnershipKey": "option",
+    "measuredProjectedOwnershipKey": "root",
+    "observeSceneFactsDefaultRootOwnershipKey": "root",
+    "namedFromSource": "v5 empty-payload teaching cleared; sceneToNormalizedIr accepted 412 empty extract payloads; observeSceneFacts then compiled the projected plan with default rootOwnershipKey root and could not find that key on live extract roots whose ownershipKey is combobox or option"
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "accepted": true,
+    "comboboxPageRemoved": true,
+    "comboboxCollectionsRemoved": true,
+    "inputPage115295378Present": true,
+    "removedPageId": "131:309595",
+    "removedCollectionIds": [
+      "VariableCollectionId:131:309597",
+      "VariableCollectionId:131:310461"
+    ]
+  },
+  "nextTeaching": {
+    "class": "scene projection lost root",
+    "doNotInvent": true,
+    "restartV5Attempt2AsIs": false,
+    "prepareV6": "host observeSceneFacts must project with the live scene root ownershipKey, not default root"
+  },
+  "humanSignoff": "pending",
+  "overallComboboxSuccess": false,
+  "productV1Complete": false
+}

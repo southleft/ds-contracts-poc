@@ -1,0 +1,130 @@
+{
+  "artifactVersion": "table-live-v6-attempt-1-v1",
+  "status": "failed closed at extract; writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "8b86b5c1a43f4bef04d4aa4952a82e1692de0c89",
+  "codeCommit": "8b86b5c1a43f4bef04d4aa4952a82e1692de0c89",
+  "antecedentCommit": "13fa406d6cad0f1255515f4aececdbd61b848f5a",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-82d19508-table-v6",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenTableV2RunIdentity": "cc811f47-82d19508-table-v2",
+    "forbiddenTableV3RunIdentity": "cc811f47-82d19508-table-v3",
+    "forbiddenTableV4RunIdentity": "cc811f47-82d19508-table-v4",
+    "forbiddenTableV5RunIdentity": "cc811f47-82d19508-table-v5"
+  },
+  "transaction": {
+    "transactionId": "225295ce-3912-4b8d-bfc8-a2ca10177e38",
+    "attempt": 1,
+    "authorizationSha256": "1291b28d0325c7e3e73cb8401240d987c03948a71c603a74b5215bcc831c3b02",
+    "signingPublicKeySpkiSha256": "396881982adc1c456fb674c2700b81e4e54221c494070e672903b785df713656",
+    "programSha256": "dd90ddb39dd2631bdd6b4a90eb400c7c61b75e01f24cb9626c8c9b86436f1979",
+    "bindingSha256": "74ea03ea040f1c9d4a9b7c739f4fee09bf86f79dbf3676f8b5b3a31681864368",
+    "requestSha256": "03228279476e0916843e8ffb8aa133ecf7fa1ce605bd82a1b72dd2192cb817ac"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v6",
+    "pageId": "165:41173",
+    "sectionIds": ["165:41174", "165:41303"],
+    "collectionIds": [
+      "VariableCollectionId:165:41175",
+      "VariableCollectionId:165:41304"
+    ],
+    "firstParty": {
+      "sectionId": "165:41174",
+      "cellSetId": "165:41202",
+      "rowSetId": "165:41231",
+      "tableSetId": "165:41302",
+      "collectionId": "VariableCollectionId:165:41175"
+    },
+    "mui": {
+      "sectionId": "165:41303",
+      "cellSetId": "165:41331",
+      "rowSetId": "165:41360",
+      "tableSetId": "165:41431",
+      "collectionId": "VariableCollectionId:165:41304"
+    },
+    "runIdentity": "cc811f47-82d19508-table-v6",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "createdNodeIds": 83,
+    "rowOwnedCellLabelSkipTeachingCleared": true,
+    "minWidthZeroUnsetTeachingUnchangedFromV5": true,
+    "headerFontTeachingUnchangedFromV2": true,
+    "ownedRowTextCharactersTeachingUnchangedFromV4": true,
+    "namedFromSourceFamily": "Inter",
+    "carriedHostStyle": "Semi Bold",
+    "resolutionDeclared": "requested",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "pageId": "165:41173",
+    "restoredCount": 8,
+    "fixedBefore": 0,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": false,
+    "walkClearedOwnershipKeyAbsent": true,
+    "rowComponentChildCountAfterSkip": 3,
+    "refusedClass": "REQUIRED-BINDING-ABSENT",
+    "refused": "REQUIRED-BINDING-ABSENT:strokes.0.weight:table/variant/comfortable",
+    "failedOn": "first-party table/variant/comfortable (ownershipKey table/children/1); RecipeRefusal table/variant/comfortable: required binding strokes.0.weight must appear exactly once",
+    "adapterIdentity": "first-party-table-reviewed-v1",
+    "role": "table/variant/comfortable",
+    "ownershipKey": "table/children/1",
+    "hostUnifiedStrokeWeightBind": false,
+    "hostPerSideStrokeWeightBinds": [
+      "strokeTopWeight",
+      "strokeRightWeight",
+      "strokeBottomWeight",
+      "strokeLeftWeight"
+    ],
+    "sharedVariable": "ds.table.frameBorderWidth",
+    "hostNormalizeMapsOnly": "strokeWeight -> strokes.0.weight",
+    "sameClassOnMuiTableAndBothCellSets": true
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "165:41173",
+    "removedCollectionIds": [
+      "VariableCollectionId:165:41175",
+      "VariableCollectionId:165:41304"
+    ],
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "REQUIRED-BINDING-ABSENT",
+    "doNotInvent": true,
+    "restartV6Attempt2AsIs": false,
+    "prepareV7": "when extract host-normalizes table and cell variants, fold Figma per-side strokeTopWeight/strokeRightWeight/strokeBottomWeight/strokeLeftWeight binds that share one variable into compile field strokes.0.weight"
+  },
+  "secondaryNoteNotTheRefusedClass": "v6 teaching cleared as stated: extract skipped untagged table/row/owned-cell-label TEXT bind hosts (row COMPONENTS kept 3 owned cell instances); writer accepted both first-party and MUI; restore held 8 hug labels; collapse then refused missing strokes.0.weight because host-normalize does not fold the four per-side stroke weight binds Figma emits for the writer's unified strokeWeight bind. MUI cells also lack layout.minWidth after v5 unset-null of minWidth 0; that is not this refused class.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

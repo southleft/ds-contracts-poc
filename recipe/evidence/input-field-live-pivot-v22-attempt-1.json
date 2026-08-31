@@ -1,0 +1,169 @@
+{
+  "artifactVersion": "input-live-v22-attempt-1-v1",
+  "status": "failed closed",
+  "authorizationCommit": "281bb2594408ebbfef6b332c2f8b7b05a56bd7b9",
+  "codeCommit": "281bb2594408ebbfef6b332c2f8b7b05a56bd7b9",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "writer": {
+    "accepted": true,
+    "createdNodeIds": 2317,
+    "pageName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+    "sourceRoots": 2
+  },
+  "restore": {
+    "issuedImmediatelyAfterWriterAcceptance": true,
+    "cleanupRequestPersistedBeforeRestore": true,
+    "operatorSuccess": true,
+    "accepted": true,
+    "restoredCount": 256,
+    "fixedBefore": 24,
+    "hiddenRevealedForFill": 24,
+    "retriedForFill": 0,
+    "contentFillAfter": true,
+    "marker": "INPUT-TEXT-FILL-MEASURE-VISIBLE",
+    "rawResponseBytes": 982,
+    "extractIssued": true
+  },
+  "extract": {
+    "issued": true,
+    "operatorSuccess": true,
+    "rawResponseBytes": 8436213,
+    "hostNormalizeAccount": false,
+    "marker": "INPUT-EXTRACT-MEASURE-HIDDEN-CONTENT-FILL"
+  },
+  "v16FailureCleared": {
+    "leadingSlotSolidPaintSurfacedFromPayloadOrChild": true
+  },
+  "v17FailureCleared": {
+    "leadingSlotColorBindingSurfacedFromChild": true
+  },
+  "v19FailureCleared": {
+    "variantLayoutWidthValueNotTheRefusalLocus": true
+  },
+  "v20FailureCleared": {
+    "surfaceLayoutHeightValueNotTheRefusalLocus": true
+  },
+  "v21FailureCleared": {
+    "variantBindingsLengthNotTheRefusalLocus": true
+  },
+  "observedContentWidthMode": {
+    "mui": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 },
+    "polaris": { "FILL": 128, "FIXED": 0, "HUG": 0, "total": 128 }
+  },
+  "observedVariantWidthBindings": {
+    "mui": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "total": 128
+    },
+    "polaris": {
+      "hasFigmaWidth": 32,
+      "hasLayoutWidthValue": 0,
+      "hasWidthValue": 0,
+      "missingWidthBinding": 96,
+      "total": 128
+    }
+  },
+  "observedSurfaceHeightBindings": {
+    "mui": {
+      "hasFigmaHeight": 128,
+      "hasLayoutHeightValue": 0,
+      "hasHeightValue": 0,
+      "missingHeightBinding": 0,
+      "failingSurfaceHasFigmaHeightFloat": true,
+      "failingSurfaceRole": "input-field/surface",
+      "failingSurfaceVariable": "imported.text-field.medium.surface-height",
+      "failingSurfaceResolvedType": "FLOAT",
+      "total": 128
+    },
+    "polaris": {
+      "hasFigmaHeight": 128,
+      "hasLayoutHeightValue": 0,
+      "hasHeightValue": 0,
+      "missingHeightBinding": 0,
+      "failingSurfaceHasFigmaHeightFloat": true,
+      "failingSurfaceRole": "input-field/surface",
+      "failingSurfaceVariable": "p.text-field.medium.surface-height",
+      "failingSurfaceResolvedType": "FLOAT",
+      "total": 128
+    }
+  },
+  "observedExtractFirstVariantBindings": {
+    "role": "input-field/variant/medium/default/placeholder/false/none",
+    "muiBindingFields": ["itemSpacing", "minWidth", "width"],
+    "polarisBindingFields": ["itemSpacing", "minWidth", "width"]
+  },
+  "observedHostNormalizedFirstVariantBindings": {
+    "role": "input-field/variant/medium/default/placeholder/false/none",
+    "muiBindingFields": [
+      "layout.itemSpacing",
+      "layout.minWidth",
+      "layout.width.value"
+    ],
+    "polarisBindingFields": [
+      "layout.itemSpacing",
+      "layout.minWidth",
+      "layout.width.value"
+    ],
+    "recipeCompileNoneAdornmentBindingCount": 3,
+    "recipeCompileNoneAdornmentBindingFields": [
+      "layout.itemSpacing",
+      "layout.width.value",
+      "layout.minWidth"
+    ]
+  },
+  "failure": {
+    "phase": "host-normalize-account",
+    "locus": "recipe/recipes/input-field.ts:2272 via recipe/input-field-live-v3-verifier-v22.ts:443",
+    "messages": [
+      "input-field@1: unsupported structural edit at $.children[0].bindings[1].field; input-field@1 accepts only its declared edit surface"
+    ],
+    "cause": "Carried v22 scene-readback aliased the existing width FLOAT onto layout.width.value and dropped the mapped source width.value, so collapse no longer refused $.children[0].bindings.length. Restore accepted on Scratch: restoredCount 256, hiddenRevealedForFill 24, retriedForFill 0, contentFillAfter true. Extract was issued (8436213 bytes). Content-width census remains MUI 128/128 FILL and Polaris 128/128 FILL. Host collapse then refused unsupported structural edit at $.children[0].bindings[1].field. $.children[0] is the first variant (input-field/variant/medium/default/placeholder/false/none). Extract first-variant boundVariables are itemSpacing, minWidth, width (Figma FLOAT). After scene-readback-v22 the same variant has three bindings: layout.itemSpacing, layout.minWidth, layout.width.value. Recipe compile emits the same three none-adornment fields in a different order: layout.itemSpacing, layout.width.value, layout.minWidth. The alias appends layout.width.value after dropping width.value, so bindings[1].field is layout.minWidth instead of layout.width.value. Extract still shows 32+32 variants bind Figma width FLOAT, 0 layout.width.value, 0 width.value, 96+96 unbound. Surfaces still bind Figma height FLOAT (MUI imported.text-field.medium.surface-height; Polaris p.text-field.medium.surface-height; resolvedType FLOAT) and bind no layout.height.value / height.value in the extract. Host did not refuse layout.height.value, layout.width.value, or bindings.length this attempt. Do not teach FIXED. Do not invent a variable. Do not restart v22 attempt 2 as-is. Scene-readback-v22 bytes are in the v22 hash set.",
+    "inputFieldRecipeInV22AntecedentHashSet": false,
+    "writerInV22AntecedentHashSet": true,
+    "restoreInV22AntecedentHashSet": true,
+    "extractRuntimeInV22AntecedentHashSet": true,
+    "sceneReadbackInV22AntecedentHashSet": true
+  },
+  "cleanup": {
+    "accepted": true,
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "scratchOwnedInputPagesRemaining": 0
+  },
+  "captures": 0,
+  "humanSignoff": "pending",
+  "overallInputSuccess": false,
+  "v16AntecedentBytesUnchanged": true,
+  "v16AuthorizationBytesUnchanged": true,
+  "v16Attempt1BytesUnchanged": true,
+  "v17AntecedentBytesUnchanged": true,
+  "v17SceneReadbackUnchanged": true,
+  "v17AuthorizationBytesUnchanged": true,
+  "v18AntecedentBytesUnchanged": true,
+  "v18SceneReadbackUnchanged": true,
+  "v18AuthorizationBytesUnchanged": true,
+  "v18Attempt1BytesUnchanged": true,
+  "v19AntecedentBytesUnchanged": true,
+  "v19SceneReadbackUnchanged": true,
+  "v19AuthorizationBytesUnchanged": true,
+  "v19Attempt1BytesUnchanged": true,
+  "v20AntecedentBytesUnchanged": true,
+  "v20SceneReadbackUnchanged": true,
+  "v20AuthorizationBytesUnchanged": true,
+  "v20Attempt1BytesUnchanged": true,
+  "v21AntecedentBytesUnchanged": true,
+  "v21SceneReadbackUnchanged": true,
+  "v21AuthorizationBytesUnchanged": true,
+  "v21Attempt1BytesUnchanged": true,
+  "v22AntecedentBytesUnchanged": true,
+  "v22AuthorizationBytesUnchanged": true,
+  "nextAttempt": 2,
+  "restartAsV22Attempt2WithoutVariantBindingsFieldForbidden": true
+}

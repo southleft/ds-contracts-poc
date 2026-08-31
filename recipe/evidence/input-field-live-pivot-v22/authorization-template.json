@@ -1,0 +1,73 @@
+{
+  "artifactVersion": "input-live-v22-authorization-template-v1",
+  "authorizationId": "input-live-v22",
+  "status": "template only; no authorization",
+  "authorizationIntent": false,
+  "antecedent": {
+    "commit": null,
+    "indexPath": "recipe/evidence/input-field-live-pivot-v22/antecedent-index.json",
+    "indexSha256": null,
+    "hashSetSha256": "948c240ba4d92ae1a182cc9741bcc03e9f1759ffc2d1d20b3174c7ab04b4a5a6"
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": null,
+    "spkiSha256": null,
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 133,
+    "hostPhases": 3,
+    "captures": 128,
+    "sourceRoots": 2,
+    "expectedFacts": 43726
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "attemptsExecuted": 0,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false,
+    "v9AuthorizationReusable": false,
+    "v10AuthorizationReusable": false,
+    "v11AuthorizationReusable": false,
+    "v12AuthorizationReusable": false,
+    "v13AuthorizationReusable": false,
+    "v14AuthorizationReusable": false,
+    "v15AuthorizationReusable": false,
+    "v16AuthorizationReusable": false,
+    "v17AuthorizationReusable": false,
+    "v18AuthorizationReusable": false,
+    "v19AuthorizationReusable": false,
+    "v20AuthorizationReusable": false,
+    "v21AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending"
+  }
+}

@@ -1,0 +1,130 @@
+{
+  "artifactVersion": "table-live-v26-attempt-1-v1",
+  "status": "failed closed at probe usability/restoration; extract ACCEPTED for the first time in the lineage (fixed-point IR diff AND independent root accounting both passed); writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "4a9010dbf9e817699e1f1491853a2eda85b409fb",
+  "codeCommit": "4a9010dbf9e817699e1f1491853a2eda85b409fb",
+  "antecedentCommit": "2c7981776868924c2d8a2871bf97ed36dad035d3",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-9cd3c67b-table-v26",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981"
+  },
+  "transaction": {
+    "transactionId": "51e47dd1-0bdb-4965-b4d8-6c41d4548c8f",
+    "attempt": 1,
+    "authorizationSha256": "30a0af3212422bef75f984fa4133c1655cd588850aa7fad954d730ce790cc163",
+    "programSha256": "29298baafad52d8de53a0f8a4cd0118ea269b092a5822abfd8c71d784441d8b3",
+    "bindingSha256": "a9ec4c83fce12177f6d0836e4fb0b4bd8e5ceaf5761ac4677eb17d9a7a0a151a",
+    "requestSha256": "34778fdadedc32e6c8226a511cd0fde856147106fa2a8baaca662c67491919ad"
+  },
+  "writer": {
+    "accepted": true,
+    "pageId": "173:46840",
+    "pageName": "Recipe Pivot / Table / cc811f47-9cd3c67b-table-v26",
+    "setIds": [
+      "173:46969",
+      "173:46898",
+      "173:46869",
+      "173:47096",
+      "173:47025",
+      "173:46996"
+    ],
+    "collectionIds": [
+      "VariableCollectionId:173:46842",
+      "VariableCollectionId:173:46971"
+    ],
+    "sourceRoots": 2,
+    "createdNodeIds": 83,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 8,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": true,
+    "fixedPointIrDiffPassed": true,
+    "independentRootAccountingPassed": true,
+    "writerSetNameFixHeld": true,
+    "note": "The writer set-name fix closed all four accounting mismatches. The offline simulation predicted 0 IR differences and 0 accounting problems on both roots; the live run confirmed both."
+  },
+  "probe": {
+    "issued": true,
+    "accepted": false,
+    "refused": "Table live v26 probe/usability/restoration failed",
+    "passedChecks": [
+      "contentHugPassed",
+      "bindingCompatibilityPassed",
+      "noFakeLayoutPassed",
+      "stateSemanticsPassed",
+      "switchingRestored",
+      "textPropertiesRestored",
+      "exactSceneRestoration",
+      "rolesExact",
+      "visibleAreaLoss=0 on every cell"
+    ],
+    "failedChecks": [
+      {
+        "check": "reflowPassed",
+        "value": false,
+        "roots": ["first-party", "mui"],
+        "cause": "the probe widens an instance by 64px and requires the width to stick. The table root is minted hug-contents, which recipe/fixtures/table.ts:102-105 explicitly declares (resize.root/row/cell all hug-contents), so a forced width cannot stick. The probe is asserting FILL semantics against a HUG-declared root. Unresolved: this is an authoring decision, not a measured source fact.",
+        "humanGate": true
+      },
+      {
+        "check": "overlapPixels",
+        "limit": 2,
+        "observed": {
+          "cells": 0,
+          "rows": {
+            "firstParty": 17,
+            "mui": 16
+          },
+          "tables": {
+            "firstParty": [41, 25],
+            "mui": [50, 30]
+          }
+        },
+        "cause": "MEASUREMENT DEFECT, not a mint defect. The probe takes the max pairwise overlap across every semantic node, and for a row that set contains both the cell INSTANCES and the table/cell/label TEXT nested inside each instance. A parent box always contains its child box, so containment was scored as overlap; 16-17px is the label height. Cells report 0 because a cell has a single semantic node.",
+        "fixedInV27": "TABLE-PROBE-CONTAINMENT-IS-NOT-OVERLAP skips pairs in an ancestor/descendant relationship."
+      }
+    ]
+  },
+  "captures": {
+    "issued": 0
+  },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "173:46840",
+    "remainingOwnedNodes": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "currentPageAfterCleanup": "0:1",
+    "independentlyVerifiedByReadOnlyProbe": true
+  },
+  "visualEvidence": {
+    "firstPartyTableSetId": "173:46969",
+    "muiTableSetId": "173:47096",
+    "firstPartyReadsAsATable": true,
+    "muiColumnsRagged": true,
+    "muiColumnsRaggedCause": "MUI Table cells declare no min-width, so every cell hugs its own content and nothing aligns across rows. table@1 has no per-column width model; first-party columns line up only because its minWidth 120 happens to exceed its content. Named, not fixed."
+  },
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}

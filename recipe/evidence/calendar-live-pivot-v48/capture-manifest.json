@@ -1,0 +1,167 @@
+{
+  "artifactVersion": "calendar-live-v48-capture-manifest-v1",
+  "status": "planned only; authorization and capture pending",
+  "transport": {
+    "encoding": "one PNG base64 payload per signed response",
+    "cellsPerRequest": 1,
+    "requests": 20,
+    "rejectTruncationDuplicatesMissing": true,
+    "sampleReduction": false,
+    "legacyVisualComparison": false
+  },
+  "cells": [
+    {
+      "index": 0,
+      "cellKey": "astryx/calendar/on",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "calendar",
+      "axes": {
+        "WeekNumbers": "on"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "calendar",
+        "density": "on"
+      },
+      "frame": {
+        "width": 336,
+        "height": 368
+      }
+    },
+    {
+      "index": 1,
+      "cellKey": "astryx/calendar/off",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "calendar",
+      "axes": {
+        "WeekNumbers": "off"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "calendar",
+        "density": "off"
+      },
+      "frame": {
+        "width": 336,
+        "height": 368
+      }
+    },
+    {
+      "index": 2,
+      "cellKey": "astryx/week/on",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "week",
+      "axes": {
+        "WeekNumbers": "on"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "week",
+        "density": "on"
+      },
+      "frame": {
+        "width": 336,
+        "height": 112
+      }
+    },
+    {
+      "index": 3,
+      "cellKey": "astryx/week/off",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "week",
+      "axes": {
+        "WeekNumbers": "off"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "week",
+        "density": "off"
+      },
+      "frame": {
+        "width": 336,
+        "height": 112
+      }
+    },
+    {
+      "index": 4,
+      "cellKey": "astryx/day/default",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "day",
+      "axes": {
+        "State": "default"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "day",
+        "density": "default"
+      },
+      "frame": {
+        "width": 112,
+        "height": 112
+      }
+    },
+    {
+      "index": 5,
+      "cellKey": "astryx/day/today",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "day",
+      "axes": {
+        "State": "today"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "day",
+        "density": "today"
+      },
+      "frame": {
+        "width": 112,
+        "height": 112
+      }
+    },
+    {
+      "index": 6,
+      "cellKey": "astryx/day/selected",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "day",
+      "axes": {
+        "State": "selected"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "day",
+        "density": "selected"
+      },
+      "frame": {
+        "width": 112,
+        "height": 112
+      }
+    },
+    {
+      "index": 7,
+      "cellKey": "astryx/day/outside",
+      "source": "astryx",
+      "adapterIdentity": "astryx-calendar-reviewed-v1",
+      "kind": "day",
+      "axes": {
+        "State": "outside"
+      },
+      "strata": {
+        "source": "astryx",
+        "kind": "day",
+        "density": "outside"
+      },
+      "frame": {
+        "width": 112,
+        "height": 112
+      }
+    }
+  ],
+  "cellsSha256": "5dfc4d178ed0ceb3039937261f1405c55219570a6c0888d7981ec8f5bc8f15f5"
+}

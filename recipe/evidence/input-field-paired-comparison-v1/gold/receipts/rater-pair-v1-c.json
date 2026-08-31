@@ -1,0 +1,68 @@
+{
+  "version": "paired-comparison-qualification-receipt-v1",
+  "raterId": "RATER-PAIR-V1-C",
+  "packetHash": "4f3418b4a54c5cc683ffc07c7098c282324d931fedd7a50cf5c2bd720b1d1d1b",
+  "randomizedBatchHash": "de2e95a6377830cc2da0020b05564c0e03592478f7bcfe6944515b343112c963",
+  "protocolCommitment": "64f071edba0bf024ace7cd5875838727120092854db041ecb17a8aca89d707c8",
+  "gradeHash": "e44a6a3b353a2eff42136bb99c21aded4189aea4df49e73c4b6a984baa377baf",
+  "correct": 41,
+  "denominator": 48,
+  "score": 0.8541666666666666,
+  "clearWinnersCorrect": 21,
+  "clearWinnersDenominator": 24,
+  "allClearWinnersCorrect": false,
+  "envelopeValid": true,
+  "passed": false,
+  "thresholds": {
+    "goldAccuracyMinimum": 0.95,
+    "allClearWinnersRequired": true,
+    "validEnvelopeRequired": true
+  },
+  "waiversApplied": false,
+  "hashes": {
+    "protocol": "d6c9b1b7282a289039a3f5c0092da7d088a56268dfde4972ed65214aab966a5a",
+    "instrumentReceipt": "571c2cf4afce73fa7733589e9df6a8fb0c2cc96fd599c66c2bff64350f7e0868",
+    "goldPacket": "4f3418b4a54c5cc683ffc07c7098c282324d931fedd7a50cf5c2bd720b1d1d1b",
+    "goldAnswerKey": "67ccb5fce4e6ca88d9fc5ba65503f84700090b116354cda83f53d8e1dc6563d3",
+    "gradeSchema": "23179ec871dd0d61189b3d89b2b6a81b530a4431ed866f6d917931e4373aef2b",
+    "goldTemplate": "4dbb7d557b37d213ecd24aa5b014f7b97ded61ddd3fbe6de97a7ba6220affcd2",
+    "goldSubmission": "e44a6a3b353a2eff42136bb99c21aded4189aea4df49e73c4b6a984baa377baf"
+  },
+  "scoreBreakdown": {
+    "clearWinner": { "correct": 21, "denominator": 24, "ratio": 0.875 },
+    "trueTie": { "correct": 12, "denominator": 12, "ratio": 1 },
+    "materialityBoundary": {
+      "correct": 8,
+      "denominator": 12,
+      "ratio": 0.6666666666666666
+    }
+  },
+  "sideSwapCalibration": {
+    "accuracy": {
+      "correct": 20,
+      "denominator": 24,
+      "ratio": 0.8333333333333334
+    },
+    "consistency": {
+      "correct": 23,
+      "denominator": 24,
+      "ratio": 0.9583333333333334
+    }
+  },
+  "performanceBinding": {
+    "packetPath": "recipe/evidence/input-field-paired-comparison-v1/performance/blind-packet/packet.json",
+    "packetHash": "e21e8bf9cbcbded15e35a11a08b03a7a68e408c585ac64ac7ef631862e0f90d7",
+    "templatePath": "recipe/evidence/input-field-paired-comparison-v1/performance/templates/rater-pair-v1-c.json",
+    "qualificationReceiptPath": "recipe/evidence/input-field-paired-comparison-v1/gold/receipts/rater-pair-v1-c.json",
+    "outputPath": "recipe/evidence/input-field-paired-comparison-v1/performance/submissions/rater-pair-v1-c.json",
+    "cohortGatePassed": false,
+    "commissioned": false
+  },
+  "accessControl": {
+    "goldAnswerKeyOpened": true,
+    "performancePacketOpened": false,
+    "performanceAnswerKeyOpened": false,
+    "performanceResultsOpened": false,
+    "performanceIdentityRevealed": false
+  }
+}

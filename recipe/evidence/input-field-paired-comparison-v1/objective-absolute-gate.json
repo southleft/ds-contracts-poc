@@ -1,0 +1,39 @@
+{
+  "version": "input-field-objective-absolute-gate-v1",
+  "claim": "Objective prerequisites for absolute Input/Field acceptance; independent of paired preference.",
+  "status": "blocked-existing-evidence-incomplete",
+  "passed": false,
+  "checks": {
+    "requiredRolesAndStates": {
+      "status": "passed",
+      "semanticRows": 128,
+      "denominator": 128
+    },
+    "geometryAndToleranceToIndependentReference": {
+      "status": "not-evidenced",
+      "reason": "Existing receipts retain screenshots and content-box dimensions but no locked per-role source-relative geometry measurement under the v2 tolerances."
+    },
+    "noClippingOrOverlap": {
+      "status": "not-evidenced",
+      "reason": "Existing non-subjective probes do not record required-part boxes or pixel-visible-area intersections needed to prove clipping <=5% and overlap <=2 px."
+    },
+    "semanticAndAria": {
+      "status": "passed",
+      "evidence": "128/128 React rows plus the retained 256/256 API/ARIA event assertion"
+    },
+    "webComponentParity": { "status": "passed-parity-only", "cells": 128 },
+    "zeroSilentAccounting": {
+      "status": "passed-offline",
+      "liveCanvasAccounting": "pending"
+    },
+    "usability": {
+      "status": "pending-live-canvas",
+      "required": "reflow, variant switching, token binding, no fake layout, and live two-cycle fixed point"
+    },
+    "noHiddenSourceBranch": { "status": "passed" }
+  },
+  "remainingHumanVisualDecision": "An independent design reviewer must decide whether each rendered Input/Field is absolutely recognisable as the original-source component under the locked absolute rubric; relative preference cannot answer that question.",
+  "relativePreferenceCanSatisfyThisGate": false,
+  "inputSuccess": false,
+  "liveWorkAuthorized": false
+}

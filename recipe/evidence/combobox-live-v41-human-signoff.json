@@ -1,0 +1,88 @@
+{
+  "artifactVersion": "combobox-live-v41-human-signoff-v1",
+  "grade": "passed",
+  "reviewedAt": "2026-08-29T09:17:00-05:00",
+  "reviewer": {
+    "name": "TJ Pitre",
+    "identity": "human-owner",
+    "independent": true
+  },
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "pageId": "163:35981",
+    "pageName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+    "howTjOpens": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh?node-id=163-35981",
+    "sets": [
+      {
+        "id": "163:36845",
+        "library": "Material"
+      },
+      {
+        "id": "163:36076",
+        "library": "Material option"
+      },
+      {
+        "id": "163:37709",
+        "library": "Ant Design"
+      },
+      {
+        "id": "163:36940",
+        "library": "Ant Design option"
+      }
+    ],
+    "runIdentity": "70c24cbd-d27f2e85-combobox-v1",
+    "recordCommit": "f330a0821a5c442662c9df755c9f65e825fe5baa",
+    "diagnosisPath": "recipe/evidence/combobox-v41-empty-listbox-diagnosis.json"
+  },
+  "antecedentNamedFeedback": {
+    "reviewedAt": "2026-08-29T09:00:00-05:00",
+    "kind": "named-feedback-not-human-grade",
+    "evidencePath": "recipe/evidence/combobox-v41-empty-listbox-diagnosis.json",
+    "verdict": "empty-loading-listbox-padding-not-a-miss",
+    "listPadding": "4/0/4/0",
+    "populatedInset": "option-item optionPaddingX",
+    "lookalike": "fixture chrome plus survived distinct heights/borders/selected fills"
+  },
+  "verbatim": "Okay, well, if the two design system combo boxes look similar and the lack of padding on the \"No\" option and \"Loading\" option is accurate, then I call this a pass. This has my approval, and please continue on to the next hill climb on the data table.",
+  "implications": {
+    "comboboxLiveHumanGrade": "passed",
+    "productV1Complete": false,
+    "buttonHumanGrade": "not-invented",
+    "dataTableHumanGrade": "not-invented",
+    "overallComboboxSuccess": false,
+    "remaining": [
+      "Data Table",
+      "Calendar",
+      "Button leftover inversion (149 silent / fonts + set chrome)"
+    ],
+    "nextHill": "Data Table"
+  },
+  "recordTimeHumanSignoffUnchanged": {
+    "path": "recipe/evidence/combobox-live-pivot-v41-status.json",
+    "humanSignoff": "pending",
+    "overallComboboxSuccess": false,
+    "note": "V41 RECORD f330a082 is not restamped. This file is the later attributable human grade."
+  },
+  "doNotOverwritePages": {
+    "inputPageId": "115:295378",
+    "comboboxPageId": "163:35981"
+  },
+  "safeCheckpoints": {
+    "input": {
+      "id": "2392869719628549246",
+      "name": "V85 Input grids OK"
+    },
+    "comboboxSpaced": {
+      "id": "2393104521192557663",
+      "name": "V41 Combobox grids spaced"
+    },
+    "doNotRestore": {
+      "id": "2392877528965054592",
+      "name": "DO NOT RESTORE — V85 Input page 115 deleted"
+    }
+  },
+  "doNotClaimV1Complete": true,
+  "doNotInventButtonHumanGrade": true,
+  "doNotInventDataTableHumanGrade": true
+}

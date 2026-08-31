@@ -1,0 +1,104 @@
+{
+  "artifactVersion": "combobox-live-v13-capture-authorization-v1",
+  "authorizationId": "combobox-live-v13",
+  "status": "authorization declared; runtime security prerequisites still mandatory",
+  "authorizationIntent": true,
+  "antecedent": {
+    "commit": "b9e0e12abb7b8925042842a2cfa80a008d8be17d",
+    "indexPath": "recipe/evidence/combobox-live-pivot-v13/antecedent-index.json",
+    "indexSha256": "f1ca07aa7947a7f7e4c114e7db1371fa2ca7e26e9d2f184ff282cf34d7ec6841",
+    "hashSetSha256": "d362e7d2dc9355974626cc364ea140cb15607dfb49a1db19aa5d0d19345481c5"
+  },
+  "signingPublicKey": {
+    "algorithm": "Ed25519",
+    "encoding": "SPKI-PEM",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA9SpBzX3hgtLMmIzzSO/vSfUznvpQHyww3KrPIcRL9rY=\n-----END PUBLIC KEY-----\n",
+    "spkiSha256": "d10130678e135c9e1507773fb82bb0c3ed960231c71f32b75e10935add1c445d",
+    "privateKeyStoredInRepository": false
+  },
+  "operatorBoundary": {
+    "target": {
+      "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+      "fileName": "Scratch Project",
+      "editorType": "figma"
+    },
+    "expectedDynamicTool": {
+      "namespace": "user-Figma Console",
+      "tool": "figma_execute"
+    },
+    "externalOperatorOnly": true,
+    "oneMcpCallPerSignedRequest": true
+  },
+  "denominator": {
+    "remoteRequests": 77,
+    "hostPhases": 3,
+    "captures": 72,
+    "sourceRoots": 2,
+    "expectedFacts": 26614
+  },
+  "execution": {
+    "maximumAttempts": 3,
+    "attemptsExecuted": 0,
+    "captureBeforeHashBoundTechnicalGates": false,
+    "durableCleanupRequestPersistedImmediatelyAfterWriterAcceptance": true,
+    "cleanupMustRemainExecutableAfterHostFailure": true,
+    "cleanupMustNotExecuteOnMainComplete": true,
+    "taughtCleanupOnFailureOnly": true,
+    "v7AuthorizationReusable": false,
+    "v8AuthorizationReusable": false,
+    "v9AuthorizationReusable": false,
+    "v10AuthorizationReusable": false,
+    "v11AuthorizationReusable": false,
+    "v12AuthorizationReusable": false,
+    "v13AuthorizationReusable": false,
+    "v14AuthorizationReusable": false,
+    "v15AuthorizationReusable": false,
+    "v16AuthorizationReusable": false,
+    "v17AuthorizationReusable": false,
+    "v18AuthorizationReusable": false,
+    "v19AuthorizationReusable": false,
+    "v20AuthorizationReusable": false,
+    "v21AuthorizationReusable": false,
+    "v22AuthorizationReusable": false,
+    "v23AuthorizationReusable": false,
+    "v24AuthorizationReusable": false,
+    "v25AuthorizationReusable": false,
+    "v26AuthorizationReusable": false,
+    "v27AuthorizationReusable": false,
+    "v28AuthorizationReusable": false,
+    "v29AuthorizationReusable": false,
+    "v30AuthorizationReusable": false,
+    "v31AuthorizationReusable": false,
+    "v32AuthorizationReusable": false,
+    "v33AuthorizationReusable": false,
+    "v34AuthorizationReusable": false,
+    "v35AuthorizationReusable": false,
+    "v36AuthorizationReusable": false,
+    "v85AuthorizationReusable": false,
+    "inputV85AuthorizationReusable": false,
+    "comboboxLiveV1AuthorizationReusable": false,
+    "comboboxLiveV2AuthorizationReusable": false,
+    "comboboxLiveV3AuthorizationReusable": false,
+    "comboboxLiveV4AuthorizationReusable": false,
+    "comboboxLiveV5AuthorizationReusable": false,
+    "comboboxLiveV6AuthorizationReusable": false,
+    "comboboxLiveV7AuthorizationReusable": false,
+    "comboboxLiveV8AuthorizationReusable": false,
+    "comboboxLiveV9AuthorizationReusable": false,
+    "comboboxLiveV10AuthorizationReusable": false,
+    "comboboxLiveV11AuthorizationReusable": false,
+    "comboboxLiveV12AuthorizationReusable": false
+  },
+  "securityPrerequisite": {
+    "figmaPatRevokedOrReplacedRequired": true,
+    "mcpRestartAfterRotationRequired": true,
+    "ownerOnlyEnvironmentFileMode0600Required": true,
+    "repositorySecretScanZeroRequired": true,
+    "exactScratchReadOnlyProbeRequired": true,
+    "tokenValuesForbidden": true
+  },
+  "humanSignoff": {
+    "mandatory": true,
+    "status": "pending"
+  }
+}

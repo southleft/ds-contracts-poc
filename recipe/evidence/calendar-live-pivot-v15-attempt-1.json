@@ -1,0 +1,91 @@
+{
+  "artifactVersion": "calendar-live-v15-attempt-1-v1",
+  "status": "failed closed at extract; writer and restore accepted; variant cornerRadius omit held; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "3fc1f3a2e6c19eb62018476ae08b5fa1a45d2339",
+  "codeCommit": "3fc1f3a2e6c19eb62018476ae08b5fa1a45d2339",
+  "antecedentCommit": "b815430ff5d5ae72352f9418c2ee3d3dbe8c7fec",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v15",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "d163ab16-50fe-4696-b5ae-a52ab6adbf33",
+    "attempt": 1,
+    "authorizationSha256": "efdb3ed0c9f47db4cbc6563b4e52cf9335fe6a2c7dddd8c55eb250faece5977d",
+    "signingPublicKeySpkiSha256": "0c0e56ce340d4e10399c31aa5ac9dcbb7a580dd1225c55d0d362ad1a238dd799",
+    "programSha256": "5c94c443f79a0d1ad55a1c1ef45c6fafc2a593098e30408862a44722eaff7a90",
+    "requestBindingSha256": "eb56c6fe737d27f256138a3810bbb3da2176cd8ff135efb817474b58e10f48b0",
+    "requestSha256": "bd177470bc7e01f710d8ccac5f74c1b65439699b36ac7095f2fb874bb0f364a3"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v15",
+    "pageId": "173:51802",
+    "sectionId": "173:51803",
+    "collectionId": "VariableCollectionId:173:51804",
+    "daySetId": "173:51832",
+    "weekSetId": "173:51864",
+    "calendarSetId": "173:51981",
+    "runIdentity": "19be1c96-calendar-v15",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "refusedClass": "CALENDAR-UNSUPPORTED-STRUCTURAL-EDIT",
+    "refused": "unsupported structural edit at $.children[0].children[0].strokes",
+    "namedCause": "compile calendar/variant/on components omit strokes; host emitted the key. Variant cornerRadius omit held."
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:51802",
+    "removedCollectionIds": ["VariableCollectionId:173:51804"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "CALENDAR-UNSUPPORTED-STRUCTURAL-EDIT",
+    "path": "$.children[0].children[0].strokes",
+    "role": "calendar/variant/on",
+    "doNotInvent": true,
+    "restartV15Attempt2AsIs": false,
+    "prepareV16": "host-omit strokes on calendar/variant/(on|off) components"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

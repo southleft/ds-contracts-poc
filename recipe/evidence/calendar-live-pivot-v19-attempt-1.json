@@ -1,0 +1,97 @@
+{
+  "artifactVersion": "calendar-live-v19-attempt-1-v1",
+  "status": "failed closed at probe; writer, restore, and extract accepted; day-variant strokes omit held; cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "7a2f01a07435fa9302dcaef9ede59819498d21f8",
+  "codeCommit": "7a2f01a07435fa9302dcaef9ede59819498d21f8",
+  "antecedentCommit": "ff01d316fe3fe11e9c69ac86b8b7975f6b48ad11",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v19",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTableNamespace": "ds.contracts.table.recipe.v1",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "6d7bd8f4-1589-4938-8722-94bd3b4db1b4",
+    "attempt": 1,
+    "authorizationSha256": "e3074f6ecd32b96b3fa4299abd62d6ad24fe672f8cb9560678641af00e2b5a7c",
+    "signingPublicKeySpkiSha256": "4654f80d2cdc04973d41e50cf2fe35c50d307a0e97c6a6488a6560a36fcbc848",
+    "programSha256": "06ec6077feb94cf6b421a6051b7259db96eeeabbe88c01cb12872eedaa401245",
+    "requestBindingSha256": "1a37099730e05958be622ccefba38e7ebc4ac9a054cbd175e8447402d7a25e6d",
+    "requestSha256": "80cdccb161623d3f7a31586db0fc8d73cc7493c95e2f9b271f1a5ff056f2748b"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v19",
+    "pageId": "173:52522",
+    "sectionId": "173:52523",
+    "collectionId": "VariableCollectionId:173:52524",
+    "daySetId": "173:52552",
+    "weekSetId": "173:52584",
+    "calendarSetId": "173:52701",
+    "runIdentity": "19be1c96-calendar-v19",
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "sourceRoots": 1,
+    "variantCount": 8,
+    "instanceCount": 56,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "restoredCount": 4,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "walkAccepted": true,
+    "accepted": true,
+    "refusedClass": null,
+    "namedCause": "first Calendar extract accept. Day-variant strokes omit held."
+  },
+  "probe": {
+    "issued": true,
+    "accepted": false,
+    "refusedClass": "FIGMA-SET-PROPERTIES-FONT-UNAVAILABLE",
+    "refused": "in setProperties: Unable to update this text property because the component uses a font that isn't available.",
+    "namedCause": "probe called dayInstance.setProperties(Label). Writer v3 already measured that setProperties(Label) refuses even when SF Pro Regular is listed and loadable; text.characters writes. Do not invent a font; do not retry setProperties."
+  },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "calendarPageRemoved": true,
+    "calendarCollectionsRemoved": true,
+    "removedPageId": "173:52522",
+    "removedCollectionIds": ["VariableCollectionId:173:52524"],
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "buttonPage856781Present": true,
+    "tablePage17348924Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "FIGMA-SET-PROPERTIES-FONT-UNAVAILABLE",
+    "path": "probe dayInstance.setProperties(Label)",
+    "role": "calendar/day/label",
+    "doNotInvent": true,
+    "restartV19Attempt2AsIs": false,
+    "prepareV20": "probe apply Label via text.characters after loadFontAsync, not setProperties(Label)"
+  },
+  "humanSignoff": "pending",
+  "overallCalendarSuccess": false,
+  "productV1Complete": false
+}

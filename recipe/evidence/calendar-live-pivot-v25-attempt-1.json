@@ -1,0 +1,59 @@
+{
+  "artifactVersion": "calendar-live-v25-attempt-1-v1",
+  "status": "failed closed at writer; leftover page 179:54602 deleted; mint did not stay; V23 page 173:53929 left; siblings left",
+  "authorizationCommit": "db95082052242c4eeb03e0bf5773e39f0a688ea4",
+  "codeCommit": "db95082052242c4eeb03e0bf5773e39f0a688ea4",
+  "antecedentCommit": "96823a4b5fe87ddc7839156013852c6ac3eb6395",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.calendar.recipe.v1",
+    "runIdentity": "19be1c96-calendar-v25",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenButtonPageId": "85:6781",
+    "forbiddenTablePageId": "173:48924"
+  },
+  "transaction": {
+    "transactionId": "d9bf1aa7-953a-4838-a3bc-22f8f5709c00",
+    "attempt": 1,
+    "authorizationSha256": "4d8e8ae602ecafb9c337414567bb79ee5da5b11da02085ae0827efa9ecca2666",
+    "programSha256": "b67ae4ec34a466084c053eeb9e2f7814219f6d1e6cc57b2dae3790537097772e",
+    "requestBindingSha256": "243db2e77ec8164b86877fd6010948e8a24e33f608480e67c1144f4a148fd49a",
+    "requestSha256": "8c633f04a52ea04b3506814933b331ae898da87b70377d336957cb4c8d5f07c2"
+  },
+  "teaching": {
+    "one": "CALENDAR-WRITER-INSTANCE-LABEL-VIA-SET-PROPERTIES-AFTER-PAINTED-FALLBACK",
+    "cleared": false,
+    "blockedOn": "CALENDAR-DAY-LABEL-MISMATCH:calendar/day-instance/1",
+    "namedCause": "setProperties({[dayLabelProperty]: Label}) before appendChild does not stick on a detached instance. Leftover day-instance/1 stayed Label=26. The same setProperties after append wrote 27 and painted. Do not invent a font. Do not invent FIXED."
+  },
+  "writer": {
+    "accepted": false,
+    "refusedClass": "CALENDAR-DAY-LABEL-MISMATCH:calendar/day-instance/1",
+    "pageName": "Recipe Pivot / Calendar / 19be1c96-calendar-v25",
+    "pageId": "179:54602",
+    "leftoverDeleted": true,
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true,
+    "buttonPageUntouched": true,
+    "tablePageUntouched": true,
+    "v23PageUntouched": true
+  },
+  "restore": { "issued": false },
+  "extract": { "issued": false },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "signedCleanupIssued": false,
+    "leftoverPageDeleted": true,
+    "leftoverPageId": "179:54602",
+    "leftoverCollectionDeleted": "Recipe Calendar / 19be1c96-calendar-v25 / astryx-calendar-reviewed-v1"
+  },
+  "nextTeaching": "Write instance Label through the already-issued Label property after appendChild, then verify text.characters. setProperties before append is lost.",
+  "doNotInventCalendarGrade": true,
+  "productV1Complete": false
+}

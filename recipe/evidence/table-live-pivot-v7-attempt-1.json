@@ -1,0 +1,138 @@
+{
+  "artifactVersion": "table-live-v7-attempt-1-v1",
+  "status": "failed closed at extract collapse; writer and restore accepted; signed cleanup executed on failure; mint did not stay",
+  "authorizationCommit": "cf0ae2a465a58e913844bdfae40d6c7eef150fcf",
+  "codeCommit": "cf0ae2a465a58e913844bdfae40d6c7eef150fcf",
+  "antecedentCommit": "d7a03448620334c6407eb86d7a898cc7c8386530",
+  "target": {
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "fileName": "Scratch Project",
+    "editorType": "figma"
+  },
+  "identity": {
+    "namespace": "ds.contracts.table.recipe.v1",
+    "runIdentity": "cc811f47-82d19508-table-v7",
+    "forbiddenInputNamespace": "ds.contracts.input.recipe.v5",
+    "forbiddenInputPageId": "115:295378",
+    "forbiddenComboboxNamespace": "ds.contracts.combobox.recipe.v1",
+    "forbiddenComboboxPageId": "163:35981",
+    "forbiddenTableV1RunIdentity": "83a27edf-82d19508-table-v1",
+    "forbiddenTableV2RunIdentity": "cc811f47-82d19508-table-v2",
+    "forbiddenTableV3RunIdentity": "cc811f47-82d19508-table-v3",
+    "forbiddenTableV4RunIdentity": "cc811f47-82d19508-table-v4",
+    "forbiddenTableV5RunIdentity": "cc811f47-82d19508-table-v5",
+    "forbiddenTableV6RunIdentity": "cc811f47-82d19508-table-v6"
+  },
+  "transaction": {
+    "transactionId": "573e9a34-2343-4175-bba8-dd548755de29",
+    "attempt": 1,
+    "authorizationSha256": "416230210c7cb0a6ac556817b42277c614a13ac041da4d613b65a72aeb500250",
+    "signingPublicKeySpkiSha256": "ed4d38a30171803f837427f4c404d36dceb814b958ad49ad1a46cde146c78eab",
+    "programSha256": "3aa7ab3c339e11ebcb238ea53978ee02d6584c52ec400e82914da476403f6a9e",
+    "bindingSha256": "5a57224f03d198b55c30f6dfc192bc79ef6449ec1f99bbf93d7d2902ac2ec3f2",
+    "requestSha256": "d6b87990c314e68a1db83b3aa7abce07bf80cb6b566583eed8942694d50cc7e1"
+  },
+  "writer": {
+    "accepted": true,
+    "pageName": "Recipe Pivot / Table / cc811f47-82d19508-table-v7",
+    "pageId": "165:41432",
+    "sectionIds": ["165:41433", "165:41562"],
+    "collectionIds": [
+      "VariableCollectionId:165:41434",
+      "VariableCollectionId:165:41563"
+    ],
+    "firstParty": {
+      "sectionId": "165:41433",
+      "cellSetId": "165:41461",
+      "rowSetId": "165:41490",
+      "tableSetId": "165:41561",
+      "collectionId": "VariableCollectionId:165:41434"
+    },
+    "mui": {
+      "sectionId": "165:41562",
+      "cellSetId": "165:41590",
+      "rowSetId": "165:41619",
+      "tableSetId": "165:41690",
+      "collectionId": "VariableCollectionId:165:41563"
+    },
+    "runIdentity": "cc811f47-82d19508-table-v7",
+    "namespace": "ds.contracts.table.recipe.v1",
+    "sourceRoots": 2,
+    "createdNodeIds": 83,
+    "perSideStrokeWeightFoldTeachingCleared": true,
+    "rowOwnedCellLabelSkipTeachingUnchangedFromV6": true,
+    "minWidthZeroUnsetTeachingUnchangedFromV5": true,
+    "headerFontTeachingUnchangedFromV2": true,
+    "ownedRowTextCharactersTeachingUnchangedFromV4": true,
+    "namedFromSourceFamily": "Inter",
+    "carriedHostStyle": "Semi Bold",
+    "resolutionDeclared": "requested",
+    "inputPageUntouched": true,
+    "comboboxPageUntouched": true
+  },
+  "restore": {
+    "issued": true,
+    "accepted": true,
+    "pageId": "165:41432",
+    "restoredCount": 8,
+    "fixedBefore": 0,
+    "contentHugAfter": true
+  },
+  "extract": {
+    "issued": true,
+    "accepted": false,
+    "walkClearedOwnershipKeyAbsent": true,
+    "rowComponentChildCountAfterSkip": 3,
+    "tableVariantHasUnifiedStrokeWeight": true,
+    "cellVariantHasUnifiedStrokeWeight": true,
+    "refusedClass": "unsupported structural edit",
+    "refused": "unsupported structural edit at $.children[0].children[0].children[0].children[0].bindings",
+    "failedOn": "first-party table/header-cell-instance/0; RecipeRefusal table@1: unsupported structural edit at $.children[0].children[0].children[0].children[0].bindings",
+    "adapterIdentity": "first-party-table-reviewed-v1",
+    "role": "table/header-cell-instance/0",
+    "compileInstanceBindings": [],
+    "liveHeaderCellInstanceBindings": [
+      "layout.minWidth",
+      "layout.padding.bottom",
+      "layout.padding.left",
+      "layout.padding.right",
+      "layout.padding.top",
+      "strokes.0.paint.color",
+      "strokes.0.weight.bottom",
+      "strokes.0.weight.left",
+      "strokes.0.weight.right",
+      "strokes.0.weight.top"
+    ],
+    "sameClassOnBodyCellInstances": true,
+    "sameClassOnMuiCellInstances": true
+  },
+  "probe": { "issued": false },
+  "captures": { "issued": 0 },
+  "cleanup": {
+    "executedBecauseFailure": true,
+    "signedCleanupIssued": true,
+    "signedCleanupAccepted": true,
+    "tablePageRemoved": true,
+    "tableCollectionsRemoved": true,
+    "removedPageId": "165:41432",
+    "removedCollectionIds": [
+      "VariableCollectionId:165:41434",
+      "VariableCollectionId:165:41563"
+    ],
+    "remainingOwnedNodes": 0,
+    "remainingOwnedCollections": 0,
+    "inputPage115295378Present": true,
+    "comboboxPage16335981Present": true,
+    "currentPageAfterCleanup": "0:1"
+  },
+  "nextTeaching": {
+    "class": "unsupported structural edit",
+    "doNotInvent": true,
+    "restartV7Attempt2AsIs": false,
+    "prepareV8": "when extract host-normalizes table/header-cell-instance and table/cell-instance, omit Figma-copied bindings because compile cell instances carry none"
+  },
+  "secondaryNoteNotTheRefusedClass": "v7 teaching cleared as stated: host-normalize folded uniform per-side strokeTopWeight/strokeRightWeight/strokeBottomWeight/strokeLeftWeight binds on table and cell variants into strokes.0.weight; writer accepted both first-party and MUI; restore held 8 hug labels; extract walk skipped untagged owned-cell-label TEXT (row COMPONENTS kept 3 owned cell instances). Collapse then refused extra bindings on table/header-cell-instance/0 because compile cell instances carry none and host-normalize returns raw copied binds (padding, minWidth, stroke paint, unfolded per-side stroke weights). Row-instances also copy fills.0.color; that is not this refused path. MUI cells still lack layout.minWidth after v5 unset-null of minWidth 0; that is not this refused class.",
+  "humanSignoff": "pending",
+  "overallTableSuccess": false,
+  "productV1Complete": false
+}
