@@ -1,0 +1,41 @@
+{
+  "artifactVersion": "checkbox-live-pivot-v2-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "196:76370",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-c8ce9a83-7856869a-checkbox-v2",
+  "runIdentity": "548cf953-c8ce9a83-7856869a-checkbox-v2",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=196-76370",
+  "oldStayPageId": "183:74742",
+  "doNotDeleteOldStay": true,
+  "sets": {
+    "Astryx": "197:76452",
+    "MUI": "197:76534",
+    "Ant Design": "197:76675"
+  },
+  "sections": {
+    "Astryx": "197:76415",
+    "MUI": "197:76497",
+    "Ant Design": "197:76632"
+  },
+  "arrange": {
+    "Astryx": "197:76676",
+    "MUI": "197:76677",
+    "Ant Design": "197:76678"
+  },
+  "accuracyLoop": {
+    "Astryx": "checked white stroke tick visible; indeterminate white dash; states distinct",
+    "MUI": "checked white filled hole-overlay tick; indeterminate white dash; states distinct",
+    "Ant Design": "checked white rotate(45deg) L-stroke; indeterminate 8x8 primary square; states distinct"
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "figmaArrangeComponentSet": false,
+  "leftoverComponentContainer": []
+}
