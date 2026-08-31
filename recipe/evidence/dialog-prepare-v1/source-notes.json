@@ -1,0 +1,71 @@
+{
+  "artifactVersion": "dialog-prepare-v1-source-notes",
+  "status": "offline-notes-only",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:75801",
+    "183:75976",
+    "183:76022",
+    "183:76063",
+    "183:76109",
+    "183:76151",
+    "183:76193",
+    "183:76259"
+  ],
+  "shapeDecisionToCarry": "Dialog teaching is the open paper chrome plus title and body. AntD is Modal. Full-bleed scrim fill is named; Polar viewport size and centering are receipted — do not invent overlay offsets.",
+  "libraries": {
+    "Astryx": {
+      "export": "Dialog",
+      "package": "@astryxdesign/core@0.1.6",
+      "namedSoFar": {
+        "widthDefault": "400 — named default prop",
+        "paper": "fill --color-background-surface #FFFFFF; radius --radius-container 12; theme dialog padding --astryx-dialog-padding fallback --spacing-4 16",
+        "title": "Heading 2 --text-heading-2-size 20 / leading 1.4 → 28 Semibold --color-text-primary #0A1317",
+        "body": "Text body 14/20 Regular #0A1317",
+        "scrim": "--color-overlay #01122866 — Polar viewport receipted"
+      },
+      "receipt": ["Polar ::backdrop viewport", "margin auto center", "shadow-high", "close", "animation", "maxHeight 75vh"]
+    },
+    "MUI": {
+      "export": "Dialog",
+      "package": "@mui/material@9.2.0",
+      "namedSoFar": {
+        "maxWidthDefault": "sm 600",
+        "paper": "background.paper #fff; shape.borderRadius 4",
+        "title": "DialogTitle pad 16 24; h6 20 / 1.6 → 32 Medium",
+        "body": "body1 16/24 Regular; DialogContent pad 20 24 receipted vs title 16",
+        "scrim": "Backdrop rgba(0,0,0,0.5) — Polar inset 0 receipted"
+      },
+      "receipt": ["Polar center", "Paper margin 32", "elevation 24", "Fade", "DialogActions"]
+    },
+    "Ant Design": {
+      "export": "Modal",
+      "namedAbsence": "no Dialog export — compile Modal",
+      "package": "antd@5.29.3",
+      "namedSoFar": {
+        "widthDefault": "520",
+        "paper": "colorBgElevated #fff; borderRadiusLG 8; contentPadding paddingMD 20 / paddingContentHorizontalLG 24; headerMarginBottom marginXS 8",
+        "title": "fontSizeHeading5 16 / lineHeightHeading5 1.5 → 24; colorTextHeading #000000e0",
+        "body": "14/22 Regular #000000e0",
+        "scrim": "colorBgMask rgba(0,0,0,0.45) — Polar inset 0 receipted"
+      },
+      "receipt": ["Polar top 100", "mask viewport", "boxShadow", "close", "footer", "zoom"]
+    }
+  },
+  "sharedContentProposal": ["Dialog title / Dialog body; no invented viewport scrim rectangle"],
+  "note": "Do not remint Menu 183:76259. After stay: F1 held-out exam offline only — no live day-picker write, no invented F1 pass."
+}
