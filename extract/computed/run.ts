@@ -44,6 +44,7 @@ import {
   loadConfig,
   portalSweep,
   propSpaceFor,
+  reloadHarnessPage,
   stageFor,
   sweep,
   INTERACTIONS,
@@ -168,10 +169,7 @@ async function main() {
     colorScheme: cfg.browser.colorScheme,
   });
   const page = await context.newPage();
-  await page.goto(`file://${pageHtml}`);
-  await page.waitForSelector('[data-combo]', { timeout: 15_000 });
-  await page.evaluate('document.fonts.ready');
-  await page.waitForTimeout(400);
+  await reloadHarnessPage(page, pageHtml);
 
   const scratchShots = path.join(OUT_ROOT, '.orig-shots');
   rmSync(scratchShots, { recursive: true, force: true });
@@ -182,7 +180,8 @@ async function main() {
   const run1 = await sweep(page, standardMounts, { screenshots: scratchShots, fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix, uaBaseline });
   console.log(`  ${run1.captures.length} captures, ${run1.allProps.length} channels enumerated, browser ${run1.browserVersion}`);
 
-  console.log('phase 1 — determinism: second full sweep (no screenshots)…');
+  console.log('phase 1 — determinism: remount harness, second full sweep (no screenshots)…');
+  await reloadHarnessPage(page, pageHtml);
   const run2 = await sweep(page, standardMounts, { fontProbes, classAllow: cfg.library.classAllow, varPrefix: cfg.library.varPrefix, uaBaseline });
 
   // ---- portal sweeps (MOLECULE round): one two-phase page per component,
@@ -193,9 +192,7 @@ async function main() {
     console.log(`phase 1 — portal sweep (${m.comp.name}: ${m.space.enumeration.combos.length} combos, default interaction only)…`);
     const portalHtml = buildPortalHarnessPage(HARNESS, cfg, m);
     const pPage = await context.newPage();
-    await pPage.goto(`file://${portalHtml}`);
-    await pPage.evaluate('document.fonts.ready');
-    await pPage.waitForTimeout(300);
+    await reloadHarnessPage(pPage, portalHtml, { settleMs: 300, ready: '#root' });
     const pProps = (await pPage.evaluate(
       `(() => { window.__ALL_PROPS = [...getComputedStyle(document.documentElement)].sort(); return window.__ALL_PROPS; })()`,
     )) as string[];
@@ -203,6 +200,7 @@ async function main() {
       throw new Error(`${m.comp.name}: portal page enumerates a different longhand set than the census page (${pProps.length} vs ${run1.allProps.length}) — refusing`);
     }
     const p1 = await portalSweep(pPage, m.comp, m.space, { screenshots: scratchShots, classAllow: cfg.library.classAllow, classPrefix: cfg.library.classPrefix });
+    await reloadHarnessPage(pPage, portalHtml, { settleMs: 300, ready: '#root' });
     const p2 = await portalSweep(pPage, m.comp, m.space, { classAllow: cfg.library.classAllow, classPrefix: cfg.library.classPrefix });
     run1.captures.push(...p1.captures);
     run2.captures.push(...p2.captures);
@@ -591,6 +589,8 @@ async function main() {
           : {
               formStateReset:
                 'after every interaction capture, native input state mutated by the interaction itself (a click on an uncontrolled radio/checkbox checks it) is reset to mount defaults — interaction-caused form state never leaks across captures',
+              reactStateRemount:
+                'before every interaction, the census harness remounts every combo from its mount props (window.__DSC_REMOUNT / React key bump). Click-mutated React state — a calendar selected day, an uncontrolled tab — is not an <input checked> and formStateReset cannot see it. The second determinism sweep also reloads the harness page so sweep 2 never reads sweep 1 leftover instances',
               hover: 'playwright locator.hover({force:true}) — pointer to element center',
               'focus-visible': 'sentinel.focus() + keyboard Tab (keyboard modality; matched state recorded per capture)',
               active: 'hover + mouse.down (held during capture) — honestly hover+active, what a user sees mid-press',

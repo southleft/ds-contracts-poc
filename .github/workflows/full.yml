@@ -368,6 +368,13 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run extract:computed:portal:check
 
+      # Full lane: launches Chromium. Pins that click-mutated React state
+      # (a repeating-cell selected class) is remounted away before the next
+      # plane, so double-run byte-identity does not thrash on calendars.
+      - name: extract:computed:remount:check (click-mutated React state does not leak across sweeps)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run extract:computed:remount:check
+
       # Full lane because it re-fuses the COMMITTED captured-truth files under
       # extract/computed/out/** and conformance/ — no browser, ~2s, but it
       # needs the corpus the fast lane does not touch. It pins that a

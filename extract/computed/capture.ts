@@ -1135,6 +1135,7 @@ export function buildHarnessPage(
   // @door capture.stage-geometry
   const entry = `import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { flushSync } from 'react-dom';
 ${ce ? '' : `import { ${importRoots.join(', ')} } from '${cfg.library.package}';\n`}${extraImportLines.join('\n')}
 ${cfg.mount.imports.join('\n')}
 
@@ -1214,7 +1215,7 @@ function renderKids(s) {
   return s.text === '' ? undefined : s.text;
 }
 
-function App() {
+function App({ gen, comboGen }) {
   return (
     ${cfg.mount.wrapperOpen}
       {SPECS.map((s) => {
@@ -1223,7 +1224,7 @@ function App() {
         for (const cb of s.callbacks) props0[cb] = () => {};
         const props = ceProps(props0);
         return (
-          <React.Fragment key={s.key}>
+          <React.Fragment key={s.key + ':' + gen + ':' + (comboGen[s.key] || 0)}>
             <button data-sentinel={s.key} style={{ width: 8, height: 8, padding: 0, border: 0, margin: 2, background: '#eee' }} aria-label="sentinel" />
             <div data-combo={s.key} style={stageStyle(s.stage, s.blockStage)}><C {...props}>{renderKids(s)}</C></div>
           </React.Fragment>
@@ -1238,7 +1239,22 @@ function App() {
     ${cfg.mount.wrapperClose}
   );
 }
-createRoot(document.getElementById('root')).render(<App />);
+const root = createRoot(document.getElementById('root'));
+let mountGen = 0;
+const comboGen = {};
+function paint() { root.render(<App gen={mountGen} comboGen={{ ...comboGen }} />); }
+// REACT-STATE REMOUNT — click-mutated library state (a calendar's selected
+// day, an uncontrolled tab) is not an <input checked> and formStateReset
+// cannot see it. A key bump remounts that combo from its original props.
+// Optional key remounts ONE combo (the sweep's current subject) so a
+// 50-combo census page does not rebuild every sibling on every plane.
+// flushSync so the next capture reads the new tree. See remountHarness().
+window.__DSC_REMOUNT = (key) => {
+  if (typeof key === 'string' && key) comboGen[key] = (comboGen[key] || 0) + 1;
+  else mountGen += 1;
+  flushSync(paint);
+};
+paint();
 `;
   const pageDir = path.join(harness, 'computed-capture-page');
   mkdirSync(pageDir, { recursive: true });
@@ -2102,6 +2118,44 @@ export function readBoundaryReceipts(
   walk(raw, '');
 }
 
+/** Remount a census combo from its mount props (`window.__DSC_REMOUNT`).
+ *  Pass a combo key to remount that combo only; omit to remount every combo.
+ *
+ *  WHY THIS EXISTS (F1 / react-day-picker, 2026-08-31). The `active` driver
+ *  does hover + mouse.down, then mouse.up after the capture. mouse.up is a
+ *  real click. formStateReset walks `<input>` checked/value only — a React
+ *  calendar's `selected` day, a tab, a disclosure, are invisible to that
+ *  walk. Sweep 2 then reads the SAME instances and the selected class has
+ *  moved to a different repeating cell (`td|rdp-day` vs
+ *  `td|rdp-day.rdp-selected` at a new structural index). That is an
+ *  interaction leak, not a held-out-config problem, and not a reason to
+ *  strip state classes from signatures (see `signature()` in lib.ts).
+ *
+ *  No-op when the page has no remount hook (portal pages, fixture HTML).
+ *  flushSync inside the harness so the next read sees the new tree. */
+// @door capture.react-state-remount
+export async function remountHarness(page: Page, key?: string): Promise<boolean> {
+  const ok = (await page.evaluate(`(() => {
+    if (typeof window.__DSC_REMOUNT !== 'function') return false;
+    window.__DSC_REMOUNT(${key === undefined ? 'undefined' : JSON.stringify(key)});
+    return true;
+  })()`)) as boolean;
+  if (ok) {
+    await page.evaluate(`() => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))`);
+  }
+  return ok;
+}
+
+/** Reload a file:// harness (census or portal) so the second determinism
+ *  sweep starts from a clean document, not leftover pointer/focus/React
+ *  state from sweep 1. Fonts + the data-combo mount are the ready signal. */
+export async function reloadHarnessPage(page: Page, pageHtml: string, opts?: { timeout?: number; settleMs?: number; ready?: string }): Promise<void> {
+  await page.goto(`file://${pageHtml}`);
+  await page.waitForSelector(opts?.ready ?? '[data-combo]', { timeout: opts?.timeout ?? 15_000 });
+  await page.evaluate('document.fonts.ready');
+  await page.waitForTimeout(opts?.settleMs ?? 400);
+}
+
 /** The state sweep (§2): real browser states, driven exactly as
  *  visual-parity/render.ts drives them — residual-pointer neutralization,
  *  sentinel+Tab keyboard modality for :focus-visible, hover+mouse.down for
@@ -2152,24 +2206,28 @@ export async function sweep(
       // (Playwright's attribute selector pierces shadow, verified). Nothing is
       // stamped, and the locator is byte-for-byte the old one, unless the
       // stage's chosen child is actually a shadow host.
-      const stamped = (await page.evaluate(`(() => {
-        ${SHADOW_HELPERS_JS}
-        const stage = document.querySelector('${stageSel}');
-        if (!stage || !stage.firstElementChild) return false;
-        let first = stage.firstElementChild;
-        for (const c of stage.children) { if (shDrawsRects(c)) { first = c; break; } }
-        if (!first.shadowRoot) return false;
-        const trail = [];
-        const el = shDescendHost(first, trail);
-        if (!el || el === first) return false;
-        el.setAttribute('data-capture-root', ${JSON.stringify(key)});
-        return trail.join('>');
-      })()`)) as string | false;
-      if (stamped) shadowHostTrails.set(key, stamped);
-      const rootLoc = stamped
-        ? page.locator(`[data-capture-root="${key}"]`)
-        : page.locator(`${stageSel} > *`).filter({ visible: true }).first();
       for (const interaction of INTERACTIONS) {
+        // Clean remount BEFORE the interaction so click-mutated React state
+        // from the previous plane (or from sweep 1) cannot leak. Shadow-host
+        // stamps live on the old tree and must be re-applied after remount.
+        await remountHarness(page, key);
+        const stamped = (await page.evaluate(`(() => {
+          ${SHADOW_HELPERS_JS}
+          const stage = document.querySelector('${stageSel}');
+          if (!stage || !stage.firstElementChild) return false;
+          let first = stage.firstElementChild;
+          for (const c of stage.children) { if (shDrawsRects(c)) { first = c; break; } }
+          if (!first.shadowRoot) return false;
+          const trail = [];
+          const el = shDescendHost(first, trail);
+          if (!el || el === first) return false;
+          el.setAttribute('data-capture-root', ${JSON.stringify(key)});
+          return trail.join('>');
+        })()`)) as string | false;
+        if (stamped) shadowHostTrails.set(key, stamped);
+        const rootLoc = stamped
+          ? page.locator(`[data-capture-root="${key}"]`)
+          : page.locator(`${stageSel} > *`).filter({ visible: true }).first();
         // pin infinite animations at a deterministic time point (idempotent)
         for (const n of (await page.evaluate(pinInfiniteAnimationsJs)) as string[]) pinnedAnimations.add(n);
         // neutralize residual pointer + focus state (render.ts discipline)

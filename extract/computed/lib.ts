@@ -741,6 +741,15 @@ export const stems = (classes: string[], classPrefix: string): string[] =>
     .filter((c) => c !== '' && !c.includes('--'))
     .sort();
 
+/** Structural identity = tag + stems. State classes that survive
+ *  `classAllow` (react-day-picker `rdp-selected`, a checked switch) stay in
+ *  `classes` as facts and therefore in this signature. That is correct when
+ *  the class is pinned and remount-stable — the selected day IS a different
+ *  cell. It is NOT a floor denylist: antd/MUI already encode "which classes
+ *  are identity" in `classAllow`, and a global selected/today/focused strip
+ *  would collide with element names (`ant-switch-inner-checked`) and force
+ *  a corpus recapture. If a state class MOVES across remounts, that is an
+ *  interaction leak (fix: remount), not an identity bug. */
 export const signature = (n: CapturedNode, classPrefix: string): string =>
   `${n.tag}|${stems(n.classes, classPrefix).join('.')}`;
 
