@@ -115,18 +115,54 @@ duplicate identifiers.
 Audit rows **AUD-V06 (P0)** and **AUD-U37 (P1)** are satisfied today by
 exclusion, not by fix.
 
-## 6. CI
+## 6. CI — was dead, now finishes
 
-`fast.yml` has produced **no verdict in 300 consecutive runs**, all cancelled,
-since 2026-08-29. Last success: 2026-08-27. The lane spends ~21 minutes on 81
-`recipe:input-field:live:vN:check` steps against a 15-minute timeout, so it
-cannot finish. At HEAD it died at step 100 of 523 with five steps already red —
-including `recipe:table:live:v32:check`, `recipe:combobox:live:v42:check` and
+`fast.yml` had produced **no verdict in 300 consecutive runs**, all cancelled,
+since 2026-08-29. It was not flaky: it invoked 86 SUPERSEDED per-version `:check`
+composites for ~21 minutes against a 15-minute timeout, so it could not finish.
+At HEAD it died at step 100 of 523 with five steps already red — including
+`recipe:table:live:v32:check`, `recipe:combobox:live:v42:check` and
 `recipe:calendar:live:v50:check`, the exact lineages the signed archetypes were
-signed on.
+signed on. All three pass now that the lane reaches them.
 
-`ci:lanes` reports 72 defects: 33 gate-shaped scripts no workflow runs, and 39
-test files no CI-invoked script names.
+  package.json  2,718 scripts → 436     2,283 superseded lanes removed
+  fast.yml      258 steps → 190         86 superseded dropped, 15 added
+  ci:lanes      72 defects → 90         (see below — the metric moved twice)
+
+The 86 removed steps are replaced by ONE lane, `recipe:live:history:test`, which
+runs the per-version test FILES directly: **705 files, 5,080 assertions, 70
+seconds**, exit 0.
+
+**It immediately found 30 red tests nobody knew about.** 29 are
+`recipe/calendar-live-v19..v47-extract.test.ts`, all failing at HEAD on
+"host omits strokes on day default/selected/outside — the Calendar live v18
+class" with `TypeError: scene solid paint has no color`. Pre-existing, and
+invisible for as long as the lane has been dying at step 100. The 30th,
+`input-field-live-v6-authorization.test.ts`, can only pass in a DIRTY tree — its
+last assertion reads the live repository and requires an artifact to be
+uncommitted. Both exclusions are named in the workflow beside the lane.
+
+`ci:lanes` went 72 → 313 the moment the scripts were removed (every per-version
+test file was suddenly named by nothing), then → 90 with the aggregate lane: 77
+test files and 13 scripts, the lowest it has been.
+
+**Not done: the source deletion.** Removing the 3,476 superseded
+`recipe/*-live-v*` sources (59 MB) would take typecheck from 9,168 errors to
+about 47. It is not a mechanical delete — `recipe/pivot-status.ts` hash-pins
+historical artifacts by READING those files at runtime with template-built
+paths, so the closure is not statically enumerable. Attempted and reverted; it
+means rewriting a 20,000-line ledger, which should be a deliberate reviewed
+change.
+
+## 6b. The readiness bar could not finish either
+
+A full `v1:readiness` run sat for 62 minutes on `npm run dagger:census` having
+used **0.09 seconds of CPU**. dagger:census finishes standalone in under 45
+seconds. `runShell` resolved on the child's `'close'` event, which waits for
+every stdio stream to end — and a leaked grandchild from an earlier heavy row
+(eval spawns Chromium) held the pipe open forever. Fixed to resolve on `'exit'`
+with a 2-second drain. That is why no current readiness receipt existed: the bar
+could not complete, so its verdict was frozen at whatever last finished.
 
 ## 7. Scale
 
