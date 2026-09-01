@@ -207,6 +207,47 @@ every stdio stream to end — and a leaked grandchild from an earlier heavy row
 with a 2-second drain. That is why no current readiness receipt existed: the bar
 could not complete, so its verdict was frozen at whatever last finished.
 
+## 6c. The bar finished, and it says RED 11 · GREEN 13
+
+First complete `v1:readiness` run on this branch, at commit `cdda66f1f`, tree
+clean. **RED 11 · GREEN 13 across 24 rows.** The stale receipt it replaced said
+GREEN 17 · RED 5 over 22 rows, on a commit 281 behind — it was not better, it was
+older and shorter.
+
+Of the 11 reds, **`docs:check` alone caused five** (V1-SCOPE-01, and
+V1-JOURNEY-03 / V1-CLASS-02 / V1-EVID-02 / V1-REL-03 all reuse it). Both of its
+stale claims were mine and are fixed: my astryx-core captures were a stray
+population in a *second* library registry, and I had made docs/21's capture-config
+count off by one.
+
+Fixed since that run, so they should not reproduce:
+
+| was red | cause | state |
+| --- | --- | --- |
+| V1-SCOPE-01 + 4 rows reusing it | `docs:check` — two stale claims, both mine | **fixed** |
+| V1-CI-01 | `ci:lanes` red | **green** |
+| — | `test:v1-definition` pinned 23 rows, docs/26 has 24 | **fixed** (pre-existing) |
+| — | `test:recipe` — 4 vector fields undeclared | **fixed** (pre-existing) |
+| — | `grammar-coverage:check` — config count stale | **fixed** |
+
+Still red and NOT fixed:
+
+- **V1-COMPAT-03 / V1-EVID-01** — `npm run eval` is 227/230. The three failures
+  (`astryx-reanchor-minted`, `minted-leaves-bind-to-something`,
+  `console-loop-canvas-drift-probe`) are the astryx/carbon pair I was told not to
+  re-run propose/promote on without the owner.
+- **V1-CLASS-01** — `extract:computed:drift`. Mine: the astryx-core rows need
+  baseline entries. Being re-recorded; they carry no gap to name (offline re-fuse
+  and committed harness gate agree exactly at 96.667%).
+- **`census:check`** (3 phases) — "the committed manifest is stale". **Verified
+  pre-existing**: it fails identically at `d75301b20`, this session's starting
+  commit, checked in a scratch worktree. Left alone deliberately — the remedy is
+  `--write-manifest`, and regenerating a census DENOMINATOR is precisely the move
+  this repo warns about, since every gate's denominator comes from the filter
+  that decides carriage. Naming it is safe; silently rewriting it is not.
+- **V1-REL-01 / V1-REL-02 / V1-REL-03** — the audit ledger and deploy rows,
+  including AUD-U17 and AUD-U22, which are owner-only.
+
 ## 7. Scale
 
 2,712 npm scripts, of which **2,389 (88%) are per-version live lanes**
