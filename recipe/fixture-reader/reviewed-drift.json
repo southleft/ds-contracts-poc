@@ -1,0 +1,255 @@
+{
+  "_marker": "REVIEWED DRIFT LEDGER — recipe:fixture-drift:check fails CLOSED on any (subject, fact) whose fixture value differs from the capture ledger UNLESS it is carried here with exact values and a resolvable cause. A stale row (values moved, or the drift healed) also refuses — a dead receipt is as dishonest as a missing one. Adoption of the captured values (the corrected reviewed tables in recipe/fixture-reader/out/*.proposed-tables.json) plus any remint is Phase 2 of docs/35 and stays an owner-reviewed act; nothing here edits recipe/fixtures/*.",
+  "reviewedAt": "2026-08-31",
+  "causes": {
+    "astryx-theme-mount": "THEME-MOUNT DIVERGENCE, systematic: the fixture table transcribed the UNTHEMED astryx.css light-half :root fallbacks (accent #0064e0, border-emphasized #ccd3db, text-secondary #4e606f, text-disabled #a4b0bc, text-primary #0a1317, radius-inner 4 / radius-element 8, -apple-system-first family stack). The capture floor mounts the library's OWN documented consumer mount — <Theme theme={neutralTheme}> (extract/computed/configs/astryx.json mount.__note: without it no @scope'd theme token resolves at all, the Times defect) — under which the SAME tokens resolve to the neutral theme's values: accent #262626, border #d4d4d4, text-secondary #737373, disabled #a3a3a3/#f1f1f1/#ebebeb, radius 6/10, Figtree-first stack. Both are real renders of @astryxdesign/core@0.1.6; which surface the recipe mints from is a Phase-2 owner decision (docs/35 §4). The proposed tables carry the themed capture values.",
+    "antd-indeterminate-dash-lowering": "DELIBERATE LOWERING, already named in the fixture (refusal antd-refusal-indeterminate-square, recipe/fixtures/library-checkboxes.ts): antd's indeterminate ::after is an 8×8 colorPrimary SQUARE (fontSizeLG/2 each side); the v2 mint painted that square and the owner read it as a filled tile, so the v3 stay carries an 8×2 dash — width mechanical from the ledger, height respelled. Whether the canvas should adopt the library-true 8×8 square is a Phase-2 owner decision."
+  },
+  "rows": [
+    {
+      "subject": "checkbox/astryx",
+      "path": "box.radius",
+      "fixture": 4,
+      "captured": 6,
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.unchecked.enabled.boxBorder",
+      "fixture": "#ccd3dbff",
+      "captured": "#d4d4d4ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.unchecked.enabled.label",
+      "fixture": "#4e606fff",
+      "captured": "#737373ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.unchecked.disabled.boxFill",
+      "fixture": "#0536590c",
+      "captured": "#f1f1f1ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.unchecked.disabled.boxBorder",
+      "fixture": "#05365919",
+      "captured": "#ebebebff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.unchecked.disabled.label",
+      "fixture": "#a4b0bcff",
+      "captured": "#a3a3a3ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.checked.enabled.boxFill",
+      "fixture": "#0064e0ff",
+      "captured": "#262626ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.checked.enabled.boxBorder",
+      "fixture": "#0064e0ff",
+      "captured": "#262626ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.checked.enabled.label",
+      "fixture": "#4e606fff",
+      "captured": "#737373ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.checked.disabled.boxFill",
+      "fixture": "#0064e0ff",
+      "captured": "#262626ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.checked.disabled.boxBorder",
+      "fixture": "#05365919",
+      "captured": "#ebebebff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.checked.disabled.label",
+      "fixture": "#a4b0bcff",
+      "captured": "#a3a3a3ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.indeterminate.enabled.boxFill",
+      "fixture": "#0064e0ff",
+      "captured": "#262626ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.indeterminate.enabled.boxBorder",
+      "fixture": "#0064e0ff",
+      "captured": "#262626ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.indeterminate.enabled.label",
+      "fixture": "#4e606fff",
+      "captured": "#737373ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.indeterminate.disabled.boxFill",
+      "fixture": "#0064e0ff",
+      "captured": "#262626ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.indeterminate.disabled.boxBorder",
+      "fixture": "#05365919",
+      "captured": "#ebebebff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "states.indeterminate.disabled.label",
+      "fixture": "#a4b0bcff",
+      "captured": "#a3a3a3ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/astryx",
+      "path": "typography.label.family",
+      "fixture": "-apple-system",
+      "captured": "Figtree",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "checkbox/antd",
+      "path": "dash.height",
+      "fixture": 2,
+      "captured": 8,
+      "cause": "antd-indeterminate-dash-lowering"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "box.radius",
+      "fixture": 8,
+      "captured": 10,
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.empty.enabled.boxBorder",
+      "fixture": "#ccd3dbff",
+      "captured": "#d4d4d4ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.empty.enabled.label",
+      "fixture": "#4e606fff",
+      "captured": "#737373ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.empty.enabled.value",
+      "fixture": "#4e606fff",
+      "captured": "#737373ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.empty.disabled.boxBorder",
+      "fixture": "#ccd3dbff",
+      "captured": "#d4d4d4ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.empty.disabled.label",
+      "fixture": "#a4b0bcff",
+      "captured": "#a3a3a3ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.empty.disabled.value",
+      "fixture": "#4e606fff",
+      "captured": "#737373ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.value.enabled.boxBorder",
+      "fixture": "#ccd3dbff",
+      "captured": "#d4d4d4ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.value.enabled.label",
+      "fixture": "#4e606fff",
+      "captured": "#737373ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.value.enabled.value",
+      "fixture": "#0a1317ff",
+      "captured": "#171717ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.value.disabled.boxBorder",
+      "fixture": "#ccd3dbff",
+      "captured": "#d4d4d4ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.value.disabled.label",
+      "fixture": "#a4b0bcff",
+      "captured": "#a3a3a3ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "states.value.disabled.value",
+      "fixture": "#0a1317ff",
+      "captured": "#171717ff",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "typography.label.family",
+      "fixture": "-apple-system",
+      "captured": "Figtree",
+      "cause": "astryx-theme-mount"
+    },
+    {
+      "subject": "textarea/astryx",
+      "path": "typography.value.family",
+      "fixture": "-apple-system",
+      "captured": "Figtree",
+      "cause": "astryx-theme-mount"
+    }
+  ]
+}

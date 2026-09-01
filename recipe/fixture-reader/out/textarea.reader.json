@@ -1,0 +1,1206 @@
+[
+  {
+    "archetype": "textarea",
+    "library": "astryx",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "TextArea"
+    },
+    "ledgerFile": "extract/computed/out/astryx/textarea/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 70,
+        "verdict": "match",
+        "capturedValue": 70,
+        "proposedValue": 70,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.height"
+        ]
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 8,
+        "verdict": "drift",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-width"
+        ]
+      },
+      {
+        "path": "box.rows",
+        "fixtureValue": 3,
+        "verdict": "match",
+        "capturedValue": 3,
+        "proposedValue": 3,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.height",
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
+        ],
+        "formula": "rendered rows = inner textarea height / line-height (TextArea.tsx rows default 3)"
+      },
+      {
+        "path": "box.lineHeight",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
+        ]
+      },
+      {
+        "path": "labelGap",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default root.row-gap"
+        ],
+        "formula": "Field container row-gap between label and control"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-size"
+        ]
+      },
+      {
+        "path": "valueFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-size"
+        ]
+      },
+      {
+        "path": "labelInsetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "stacked label — no floating plane exists; 0 is the recipe's spelling",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelInactiveOffsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "stacked label — no floating plane exists; 0 is the recipe's spelling",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelFloatingOffsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "stacked label — no floating plane exists; 0 is the recipe's spelling",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "floatingLabelFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "stacked label — no shrink plane; the stacked size is the label size",
+        "evidence": "reviewed 14"
+      },
+      {
+        "path": "notchFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "plain outline — no notched-outline anatomy; transparent is the recipe's spelling of no knockout",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.empty.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.background-color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.boxBorder",
+        "fixtureValue": "#ccd3dbff",
+        "verdict": "drift",
+        "capturedValue": "#d4d4d4ff",
+        "proposedValue": "#d4d4d4ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.opacity"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.label",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.value",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0::placeholder.color"
+        ],
+        "formula": "placeholder ink (Astryx shows the placeholder at rest)"
+      },
+      {
+        "path": "states.empty.disabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.background-color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.boxBorder",
+        "fixtureValue": "#ccd3dbff",
+        "verdict": "drift",
+        "capturedValue": "#d4d4d4ff",
+        "proposedValue": "#d4d4d4ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.border-top-color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.opacity"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.label",
+        "fixtureValue": "#a4b0bcff",
+        "verdict": "drift",
+        "capturedValue": "#a3a3a3ff",
+        "proposedValue": "#a3a3a3ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.value",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default idx:1.0.0::placeholder.color"
+        ],
+        "formula": "placeholder ink (Astryx shows the placeholder at rest)"
+      },
+      {
+        "path": "states.value.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.background-color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.boxBorder",
+        "fixtureValue": "#ccd3dbff",
+        "verdict": "drift",
+        "capturedValue": "#d4d4d4ff",
+        "proposedValue": "#d4d4d4ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.border-top-color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.opacity"
+        ]
+      },
+      {
+        "path": "states.value.enabled.label",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.value",
+        "fixtureValue": "#0a1317ff",
+        "verdict": "drift",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default idx:1.0.0.color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.background-color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxBorder",
+        "fixtureValue": "#ccd3dbff",
+        "verdict": "drift",
+        "capturedValue": "#d4d4d4ff",
+        "proposedValue": "#d4d4d4ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.border-top-color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.opacity"
+        ]
+      },
+      {
+        "path": "states.value.disabled.label",
+        "fixtureValue": "#a4b0bcff",
+        "verdict": "drift",
+        "capturedValue": "#a3a3a3ff",
+        "proposedValue": "#a3a3a3ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.value",
+        "fixtureValue": "#0a1317ff",
+        "verdict": "drift",
+        "capturedValue": "#171717ff",
+        "proposedValue": "#171717ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default idx:1.0.0.color"
+        ]
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "drift",
+        "capturedValue": "Figtree",
+        "proposedValue": "Figtree",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-family"
+        ],
+        "formula": "first family of the label's computed stack under the library's documented Theme mount"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-weight"
+        ]
+      },
+      {
+        "path": "typography.value.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "drift",
+        "capturedValue": "Figtree",
+        "proposedValue": "Figtree",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-family"
+        ]
+      },
+      {
+        "path": "typography.value.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 19,
+      "drift": 15,
+      "receipt": 5,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "textarea",
+    "library": "mui",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "TextField"
+    },
+    "ledgerFile": "extract/computed/out/mui/textarea/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 56,
+        "verdict": "match",
+        "capturedValue": 56,
+        "proposedValue": 56,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-root.height"
+        ]
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-root.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 16.5,
+        "verdict": "match",
+        "capturedValue": 16.5,
+        "proposedValue": 16.5,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-root.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiOutlinedInput-notchedOutline.border-top-width"
+        ]
+      },
+      {
+        "path": "box.rows",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-input.height",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-input.line-height"
+        ],
+        "formula": "rendered rows = textarea height / line-height (TextareaAutosize minRows default 1 — NOT invented as 3)"
+      },
+      {
+        "path": "box.lineHeight",
+        "fixtureValue": 23,
+        "verdict": "match",
+        "capturedValue": 23,
+        "proposedValue": 23,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-input.line-height"
+        ]
+      },
+      {
+        "path": "labelGap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the floating label overlays the outline — there is no stacked label→box gap channel; 0 is the recipe's spelling of the floating plane",
+        "evidence": "InputLabel absolute over OutlinedInput — reviewed 0"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.font-size"
+        ]
+      },
+      {
+        "path": "valueFontSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-input.font-size"
+        ]
+      },
+      {
+        "path": "labelInsetX",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.transform"
+        ],
+        "formula": "rest label transform matrix tx"
+      },
+      {
+        "path": "labelInactiveOffsetY",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.transform"
+        ],
+        "formula": "rest label transform matrix ty"
+      },
+      {
+        "path": "labelFloatingOffsetY",
+        "fixtureValue": -9,
+        "verdict": "match",
+        "capturedValue": -9,
+        "proposedValue": -9,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiInputLabel-root.transform"
+        ],
+        "formula": "shrunk label transform matrix ty (Content=value floats the label — the v3 named shrink column)"
+      },
+      {
+        "path": "floatingLabelFontSize",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiInputLabel-root.font-size",
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiInputLabel-root.transform"
+        ],
+        "formula": "shrunk label rendered size = font-size × matrix scale a (16 × 0.75)"
+      },
+      {
+        "path": "notchFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the notch knockout is the paper surface showing through the fieldset legend gap — no computed channel carries it (legend background is transparent)",
+        "evidence": "--palette-background-paper #ffffff — the fixture's citation; fixture refusal mui-refusal-fieldset-legend names the legend lowering"
+      },
+      {
+        "path": "states.empty.enabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-root.background-color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.boxBorder",
+        "fixtureValue": "#0000003b",
+        "verdict": "match",
+        "capturedValue": "#0000003b",
+        "proposedValue": "#0000003b",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiOutlinedInput-notchedOutline.border-top-color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-root.opacity"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.label",
+        "fixtureValue": "#00000099",
+        "verdict": "match",
+        "capturedValue": "#00000099",
+        "proposedValue": "#00000099",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.value",
+        "fixtureValue": "#0000005d",
+        "verdict": "match",
+        "capturedValue": "#0000005d",
+        "proposedValue": "#0000005d",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__focus-visible cls:MuiInputBase-input::placeholder.color",
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__focus-visible cls:MuiInputBase-input::placeholder.opacity"
+        ],
+        "formula": "placeholder ink = ::placeholder color alpha × ::placeholder opacity, read at FOCUS — at rest MUI hides the placeholder under the overlaying label (::placeholder opacity 0 at default: the v3 named rest-empty teaching)"
+      },
+      {
+        "path": "states.empty.disabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default cls:MuiInputBase-root.background-color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.boxBorder",
+        "fixtureValue": "#00000042",
+        "verdict": "match",
+        "capturedValue": "#00000042",
+        "proposedValue": "#00000042",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default cls:MuiOutlinedInput-notchedOutline.border-top-color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default cls:MuiInputBase-root.opacity"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.label",
+        "fixtureValue": "#00000061",
+        "verdict": "match",
+        "capturedValue": "#00000061",
+        "proposedValue": "#00000061",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.disabled__default cls:MuiInputLabel-root.color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.value",
+        "fixtureValue": "#00000061",
+        "verdict": "receipt",
+        "proposedValue": "#00000061",
+        "receipt": "a disabled field cannot take focus and MUI's rest-empty rule hides the placeholder (::placeholder opacity 0 at default) — the disabled placeholder ink is unobservable in the ledger",
+        "evidence": "palette.text.disabled #00000061 — the fixture's citation"
+      },
+      {
+        "path": "states.value.enabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiInputBase-root.background-color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.boxBorder",
+        "fixtureValue": "#0000003b",
+        "verdict": "match",
+        "capturedValue": "#0000003b",
+        "proposedValue": "#0000003b",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiOutlinedInput-notchedOutline.border-top-color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiInputBase-root.opacity"
+        ]
+      },
+      {
+        "path": "states.value.enabled.label",
+        "fixtureValue": "#00000099",
+        "verdict": "match",
+        "capturedValue": "#00000099",
+        "proposedValue": "#00000099",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiInputLabel-root.color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.value",
+        "fixtureValue": "#000000de",
+        "verdict": "match",
+        "capturedValue": "#000000de",
+        "proposedValue": "#000000de",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.enabled__default cls:MuiInputBase-input.-webkit-text-fill-color"
+        ],
+        "formula": "MUI paints disabled/value ink via -webkit-text-fill-color (falls back to color when equal)"
+      },
+      {
+        "path": "states.value.disabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default cls:MuiInputBase-root.background-color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxBorder",
+        "fixtureValue": "#00000042",
+        "verdict": "match",
+        "capturedValue": "#00000042",
+        "proposedValue": "#00000042",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default cls:MuiOutlinedInput-notchedOutline.border-top-color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default cls:MuiInputBase-root.opacity"
+        ]
+      },
+      {
+        "path": "states.value.disabled.label",
+        "fixtureValue": "#00000061",
+        "verdict": "match",
+        "capturedValue": "#00000061",
+        "proposedValue": "#00000061",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default cls:MuiInputLabel-root.color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.value",
+        "fixtureValue": "#00000061",
+        "verdict": "match",
+        "capturedValue": "#00000061",
+        "proposedValue": "#00000061",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#value.disabled__default cls:MuiInputBase-input.-webkit-text-fill-color"
+        ],
+        "formula": "MUI paints disabled/value ink via -webkit-text-fill-color (falls back to color when equal)"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputLabel-root.font-weight"
+        ]
+      },
+      {
+        "path": "typography.value.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-input.font-family"
+        ]
+      },
+      {
+        "path": "typography.value.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/mui/textarea/captured-truth.json#empty.enabled__default cls:MuiInputBase-input.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 36,
+      "drift": 0,
+      "receipt": 3,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "textarea",
+    "library": "antd",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Input.TextArea"
+    },
+    "ledgerFile": "extract/computed/out/antd/textarea/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 54,
+        "verdict": "match",
+        "capturedValue": 54,
+        "proposedValue": 54,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.height"
+        ]
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 11,
+        "verdict": "match",
+        "capturedValue": 11,
+        "proposedValue": 11,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-width"
+        ]
+      },
+      {
+        "path": "box.rows",
+        "fixtureValue": 2,
+        "verdict": "match",
+        "capturedValue": 2,
+        "proposedValue": 2,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.height",
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.padding-top",
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-width",
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height"
+        ],
+        "formula": "rendered rows = (height − 2·paddingY − 2·borderWidth) / line-height (HTML rows default 2 — the WHATWG default the antd wrapper leaves in place)"
+      },
+      {
+        "path": "box.lineHeight",
+        "fixtureValue": 22,
+        "verdict": "match",
+        "capturedValue": 22,
+        "proposedValue": 22,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.line-height"
+        ]
+      },
+      {
+        "path": "labelGap",
+        "fixtureValue": 8,
+        "verdict": "receipt",
+        "proposedValue": 8,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "evidence": "--padding-xs 8px — the fixture's citation"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "evidence": "--font-size 14px — the fixture's citation"
+      },
+      {
+        "path": "valueFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-size"
+        ]
+      },
+      {
+        "path": "labelInsetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelInactiveOffsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelFloatingOffsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; the stacked label has no floating plane",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "floatingLabelFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; no shrink plane — the stacked size is the label size",
+        "evidence": "reviewed 14"
+      },
+      {
+        "path": "notchFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "plain outline — antd has no notched-outline anatomy; transparent is the recipe's spelling of no knockout",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.empty.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.empty.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "receipt",
+        "proposedValue": "#000000e0",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+      },
+      {
+        "path": "states.empty.enabled.value",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root::placeholder.color"
+        ],
+        "formula": "placeholder ink (antd shows the placeholder at rest — no hide rule)"
+      },
+      {
+        "path": "states.empty.disabled.boxFill",
+        "fixtureValue": "#0000000a",
+        "verdict": "match",
+        "capturedValue": "#0000000a",
+        "proposedValue": "#0000000a",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.empty.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "receipt",
+        "proposedValue": "#00000040",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+      },
+      {
+        "path": "states.empty.disabled.value",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.disabled__default root::placeholder.color"
+        ],
+        "formula": "placeholder ink (antd shows the placeholder at rest — no hide rule)"
+      },
+      {
+        "path": "states.value.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.value.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.value.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "receipt",
+        "proposedValue": "#000000e0",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+      },
+      {
+        "path": "states.value.enabled.value",
+        "fixtureValue": "#000000e0",
+        "verdict": "match",
+        "capturedValue": "#000000e0",
+        "proposedValue": "#000000e0",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.enabled__default root.color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxFill",
+        "fixtureValue": "#0000000a",
+        "verdict": "match",
+        "capturedValue": "#0000000a",
+        "proposedValue": "#0000000a",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.background-color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.border-top-color"
+        ]
+      },
+      {
+        "path": "states.value.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.value.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "receipt",
+        "proposedValue": "#00000040",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "evidence": "--color-text / --color-text-disabled — the fixture's citation"
+      },
+      {
+        "path": "states.value.disabled.value",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#value.disabled__default root.color"
+        ]
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; additionally the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure), so even the control's own family channel is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites",
+        "evidence": "theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part",
+        "evidence": "reviewed Regular"
+      },
+      {
+        "path": "typography.value.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure, extract/computed/configs/antd.json fonts.__note) — the ledger's font-family is the mount pin, not the library declaration",
+        "evidence": "theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily"
+      },
+      {
+        "path": "typography.value.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/antd/textarea/captured-truth.json#empty.enabled__default root.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 25,
+      "drift": 0,
+      "receipt": 14,
+      "unread": 0
+    }
+  }
+]

@@ -1,0 +1,1632 @@
+[
+  {
+    "archetype": "checkbox",
+    "library": "astryx",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "CheckboxInput"
+    },
+    "ledgerFile": "extract/computed/out/astryx/checkboxinput/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.size",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.0.width"
+        ],
+        "formula": "the 24×24 wrapper div around input+box"
+      },
+      {
+        "path": "box.size",
+        "fixtureValue": 22,
+        "verdict": "match",
+        "capturedValue": 22,
+        "proposedValue": 22,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.width"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 4,
+        "verdict": "drift",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-width"
+        ]
+      },
+      {
+        "path": "box.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.padding-top"
+        ]
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.column-gap"
+        ]
+      },
+      {
+        "path": "dash.width",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.width"
+        ],
+        "formula": "the indeterminate mark div inside the box"
+      },
+      {
+        "path": "dash.height",
+        "fixtureValue": 2,
+        "verdict": "match",
+        "capturedValue": 2,
+        "proposedValue": 2,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.height"
+        ]
+      },
+      {
+        "path": "dash.radius",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "check.width",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
+        ]
+      },
+      {
+        "path": "check.height",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.height"
+        ]
+      },
+      {
+        "path": "check.strokeWidth",
+        "fixtureValue": 2.1,
+        "verdict": "match",
+        "capturedValue": 2.1,
+        "proposedValue": 2.1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke-width",
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
+        ],
+        "formula": "path stroke-width × (rendered svg width / viewBox 10) — the viewBox is not a computed channel; 10 is read from the committed glyph asset extract/computed/out/astryx/checkboxinput/assets/checkbox-input-icon-md.svg"
+      },
+      {
+        "path": "check.offsetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "flex-centered glyph; placement: center is the recipe's spelling",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "check.offsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "same as check.offsetX",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-size"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxBorder",
+        "fixtureValue": "#ccd3dbff",
+        "verdict": "drift",
+        "capturedValue": "#d4d4d4ff",
+        "proposedValue": "#d4d4d4ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.label",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo unchecked.md.no-isDisabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo unchecked.md.no-isDisabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.unchecked.disabled.boxFill",
+        "fixtureValue": "#0536590c",
+        "verdict": "drift",
+        "capturedValue": "#f1f1f1ff",
+        "proposedValue": "#f1f1f1ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.boxBorder",
+        "fixtureValue": "#05365919",
+        "verdict": "drift",
+        "capturedValue": "#ebebebff",
+        "proposedValue": "#ebebebff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.label",
+        "fixtureValue": "#a4b0bcff",
+        "verdict": "drift",
+        "capturedValue": "#a3a3a3ff",
+        "proposedValue": "#a3a3a3ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo unchecked.md.isDisabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.disabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo unchecked.md.isDisabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.checked.enabled.boxFill",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "drift",
+        "capturedValue": "#262626ff",
+        "proposedValue": "#262626ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.boxBorder",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "drift",
+        "capturedValue": "#262626ff",
+        "proposedValue": "#262626ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.label",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo checked.md.no-isDisabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke"
+        ],
+        "formula": "the check strokes in --color-on-accent"
+      },
+      {
+        "path": "states.checked.disabled.boxFill",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "drift",
+        "capturedValue": "#262626ff",
+        "proposedValue": "#262626ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.background-color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.boxBorder",
+        "fixtureValue": "#05365919",
+        "verdict": "drift",
+        "capturedValue": "#ebebebff",
+        "proposedValue": "#ebebebff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.label",
+        "fixtureValue": "#a4b0bcff",
+        "verdict": "drift",
+        "capturedValue": "#a3a3a3ff",
+        "proposedValue": "#a3a3a3ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no mark at combo checked.md.isDisabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.disabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default tag:path.stroke"
+        ],
+        "formula": "the check strokes in --color-on-accent"
+      },
+      {
+        "path": "states.indeterminate.enabled.boxFill",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "drift",
+        "capturedValue": "#262626ff",
+        "proposedValue": "#262626ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.boxBorder",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "drift",
+        "capturedValue": "#262626ff",
+        "proposedValue": "#262626ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.label",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.dashFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo indeterminate.md.no-isDisabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.indeterminate.disabled.boxFill",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "drift",
+        "capturedValue": "#262626ff",
+        "proposedValue": "#262626ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.boxBorder",
+        "fixtureValue": "#05365919",
+        "verdict": "drift",
+        "capturedValue": "#ebebebff",
+        "proposedValue": "#ebebebff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.boxOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.label",
+        "fixtureValue": "#a4b0bcff",
+        "verdict": "drift",
+        "capturedValue": "#a3a3a3ff",
+        "proposedValue": "#a3a3a3ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.dashFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default idx:0.0.1.1.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "no check at combo indeterminate.md.isDisabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "match",
+        "capturedValue": "center",
+        "proposedValue": "center",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.align-items"
+        ]
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "drift",
+        "capturedValue": "Figtree",
+        "proposedValue": "Figtree",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-family"
+        ],
+        "formula": "first family of the label's computed stack under the library's documented Theme mount"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      },
+      {
+        "path": "check.path",
+        "fixtureValue": "M11.9 3.5 L5.6 10.5 L2.1 7",
+        "verdict": "match",
+        "capturedValue": "path(\"M 8.5 2.5 L 4 7.5 L 1.5 5\")",
+        "proposedValue": "M11.9 3.5 L5.6 10.5 L2.1 7",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.d"
+        ],
+        "formula": "captured path() coordinates × (rendered 14 / viewBox 10) numerically equal the fixture's scaled path"
+      }
+    ],
+    "counts": {
+      "match": 26,
+      "drift": 19,
+      "receipt": 10,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "checkbox",
+    "library": "mui",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Checkbox"
+    },
+    "ledgerFile": "extract/computed/out/mui/checkbox/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.size",
+        "fixtureValue": 42,
+        "verdict": "match",
+        "capturedValue": 42,
+        "proposedValue": 42,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default root.width"
+        ]
+      },
+      {
+        "path": "box.size",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default cls:MuiSvgIcon-root.width"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 2,
+        "verdict": "receipt",
+        "proposedValue": 2,
+        "receipt": "the unchecked box corner is SVG path geometry inside CheckBoxOutlineBlank's 24-viewBox icon, not a CSS border-radius (the SvgIcon's computed border-radius is 0)",
+        "evidence": "CheckBoxOutlineBlank.js path corner c-1.1 → reviewed 2; committed glyph asset extract/computed/out/mui/checkbox/assets/checkbox-icon-unchecked.svg"
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 2,
+        "verdict": "receipt",
+        "proposedValue": 2,
+        "receipt": "the unchecked outline stroke is drawn by the SVG path ring (outer box minus inner hole), not a CSS border — no computed channel carries its 2px thickness",
+        "evidence": "CheckBoxOutlineBlank.js outer 19×19 at (3,3) minus inner 15×15 at (5,5) → reviewed 2"
+      },
+      {
+        "path": "box.padding",
+        "fixtureValue": 9,
+        "verdict": "match",
+        "capturedValue": 9,
+        "proposedValue": 9,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default root.padding-top"
+        ]
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "FormControlLabel.js gap 0 (label sits flush; spacing is the label's own padding) — reviewed 0"
+      },
+      {
+        "path": "dash.width",
+        "fixtureValue": 10,
+        "verdict": "receipt",
+        "proposedValue": 10,
+        "receipt": "the indeterminate bar is the even-odd HOLE of IndeterminateCheckBox's single path — hole geometry is not a computed style channel",
+        "evidence": "IndeterminateCheckBox.js hole M7 11 h10 v2 → 10×2 at (7,11); committed glyph asset checkbox-icon-indeterminate.svg"
+      },
+      {
+        "path": "dash.height",
+        "fixtureValue": 2,
+        "verdict": "receipt",
+        "proposedValue": 2,
+        "receipt": "same even-odd hole geometry as dash.width — not a computed channel",
+        "evidence": "IndeterminateCheckBox.js hole v2 → reviewed 2"
+      },
+      {
+        "path": "dash.radius",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "same even-odd hole geometry — the hole is a sharp rect",
+        "evidence": "IndeterminateCheckBox.js hole path has no arc segments → reviewed 0"
+      },
+      {
+        "path": "check.width",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default cls:MuiSvgIcon-root.width"
+        ]
+      },
+      {
+        "path": "check.height",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default cls:MuiSvgIcon-root.height"
+        ]
+      },
+      {
+        "path": "check.strokeWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default tag:path.stroke"
+        ],
+        "formula": "0 when the glyph paints by fill (captured stroke: none)"
+      },
+      {
+        "path": "check.offsetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "glyph placement is the recipe's own spelling (placement: center); the capture centers the icon by flex, which has no per-glyph offset channel",
+        "evidence": "SwitchBase root display flex align center — reviewed 0"
+      },
+      {
+        "path": "check.offsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "same as check.offsetX",
+        "evidence": "SwitchBase root display flex align center — reviewed 0"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "createTypography.js body1 16 — reviewed 16"
+      },
+      {
+        "path": "states.unchecked.enabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default cls:MuiSvgIcon-root.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxBorder",
+        "fixtureValue": "#00000099",
+        "verdict": "match",
+        "capturedValue": "#00000099",
+        "proposedValue": "#00000099",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "the outline icon draws its ring in currentColor"
+      },
+      {
+        "path": "states.unchecked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.label",
+        "fixtureValue": "#000000de",
+        "verdict": "receipt",
+        "proposedValue": "#000000de",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "palette.text.primary #000000de — reviewed"
+      },
+      {
+        "path": "states.unchecked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dash glyph does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no indeterminate bar at combo unchecked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a white spelling for the glyph slot",
+        "evidence": "no check glyph at combo unchecked.enabled — reviewed #ffffffff (unchecked)"
+      },
+      {
+        "path": "states.unchecked.disabled.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.disabled__default cls:MuiSvgIcon-root.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.boxBorder",
+        "fixtureValue": "#00000042",
+        "verdict": "match",
+        "capturedValue": "#00000042",
+        "proposedValue": "#00000042",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.disabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "the outline icon draws its ring in currentColor"
+      },
+      {
+        "path": "states.unchecked.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.label",
+        "fixtureValue": "#00000061",
+        "verdict": "receipt",
+        "proposedValue": "#00000061",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "palette.text.disabled #00000061 — reviewed"
+      },
+      {
+        "path": "states.unchecked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dash glyph does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no indeterminate bar at combo unchecked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.disabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a white spelling for the glyph slot",
+        "evidence": "no check glyph at combo unchecked.disabled — reviewed #ffffffff (unchecked)"
+      },
+      {
+        "path": "states.checked.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "ANATOMY LOWERING (named in the fixture): the checked CheckBox icon is one solid-primary path with an even-odd white hole; the recipe paints a white box behind a primary glyph. The white box has no captured element",
+        "evidence": "recipe/fixtures/library-checkboxes.ts mui glyph note 'even-odd hole lowered to a white filled check overlay' — reviewed #ffffffff"
+      },
+      {
+        "path": "states.checked.enabled.boxBorder",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "same anatomy lowering — the solid checked icon draws no separate border; transparent is the recipe's spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.checked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.label",
+        "fixtureValue": "#000000de",
+        "verdict": "receipt",
+        "proposedValue": "#000000de",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "palette.text.primary #000000de — reviewed"
+      },
+      {
+        "path": "states.checked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dash glyph does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no indeterminate bar at combo checked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.enabled.checkFill",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "the checked icon paints in currentColor; the recipe's glyph fill = icon color"
+      },
+      {
+        "path": "states.checked.disabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "ANATOMY LOWERING (named in the fixture): the checked CheckBox icon is one solid-primary path with an even-odd white hole; the recipe paints a white box behind a primary glyph. The white box has no captured element",
+        "evidence": "recipe/fixtures/library-checkboxes.ts mui glyph note 'even-odd hole lowered to a white filled check overlay' — reviewed #ffffffff"
+      },
+      {
+        "path": "states.checked.disabled.boxBorder",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "same anatomy lowering — the solid checked icon draws no separate border; transparent is the recipe's spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "states.checked.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.label",
+        "fixtureValue": "#00000061",
+        "verdict": "receipt",
+        "proposedValue": "#00000061",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "palette.text.disabled #00000061 — reviewed"
+      },
+      {
+        "path": "states.checked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the dash glyph does not render in this state; transparent is the recipe's spelling of absent",
+        "evidence": "no indeterminate bar at combo checked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.disabled.checkFill",
+        "fixtureValue": "#00000042",
+        "verdict": "match",
+        "capturedValue": "#00000042",
+        "proposedValue": "#00000042",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.disabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "the checked icon paints in currentColor; the recipe's glyph fill = icon color"
+      },
+      {
+        "path": "states.indeterminate.enabled.boxFill",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#indeterminate.enabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "the filled IndeterminateCheckBox icon IS the box: box fill = icon currentColor"
+      },
+      {
+        "path": "states.indeterminate.enabled.boxBorder",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#indeterminate.enabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "solid icon: border = fill"
+      },
+      {
+        "path": "states.indeterminate.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#indeterminate.enabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.label",
+        "fixtureValue": "#000000de",
+        "verdict": "receipt",
+        "proposedValue": "#000000de",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "palette.text.primary #000000de — reviewed"
+      },
+      {
+        "path": "states.indeterminate.enabled.dashFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "ANATOMY LOWERING (named in the fixture refusal mui-refusal-indeterminate-icon): the bar is the icon's even-odd HOLE — the recipe paints it as a white dash rect; the hole itself has no fill channel",
+        "evidence": "IndeterminateCheckBox.js even-odd hole — reviewed #ffffffff"
+      },
+      {
+        "path": "states.indeterminate.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a white spelling for the glyph slot",
+        "evidence": "no check glyph at combo indeterminate.enabled — reviewed #ffffffff"
+      },
+      {
+        "path": "states.indeterminate.disabled.boxFill",
+        "fixtureValue": "#00000042",
+        "verdict": "match",
+        "capturedValue": "#00000042",
+        "proposedValue": "#00000042",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#indeterminate.disabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "the filled IndeterminateCheckBox icon IS the box: box fill = icon currentColor"
+      },
+      {
+        "path": "states.indeterminate.disabled.boxBorder",
+        "fixtureValue": "#00000042",
+        "verdict": "match",
+        "capturedValue": "#00000042",
+        "proposedValue": "#00000042",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#indeterminate.disabled__default cls:MuiSvgIcon-root.color"
+        ],
+        "formula": "solid icon: border = fill"
+      },
+      {
+        "path": "states.indeterminate.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#indeterminate.disabled__default root.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.label",
+        "fixtureValue": "#00000061",
+        "verdict": "receipt",
+        "proposedValue": "#00000061",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "palette.text.disabled #00000061 — reviewed"
+      },
+      {
+        "path": "states.indeterminate.disabled.dashFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "ANATOMY LOWERING (named in the fixture refusal mui-refusal-indeterminate-icon): the bar is the icon's even-odd HOLE — the recipe paints it as a white dash rect; the hole itself has no fill channel",
+        "evidence": "IndeterminateCheckBox.js even-odd hole — reviewed #ffffffff"
+      },
+      {
+        "path": "states.indeterminate.disabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the check glyph does not render in this state; the recipe carries a white spelling for the glyph slot",
+        "evidence": "no check glyph at combo indeterminate.disabled — reviewed #ffffffff"
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "match",
+        "capturedValue": "center",
+        "proposedValue": "center",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default root.align-items"
+        ],
+        "formula": "SwitchBase root align-items"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "receipt",
+        "proposedValue": "Roboto",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "createTypography.js fontFamily Roboto — reviewed Roboto"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger",
+        "evidence": "createTypography.js fontWeightRegular 400 — reviewed Regular"
+      },
+      {
+        "path": "check.path",
+        "fixtureValue": "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+        "verdict": "match",
+        "capturedValue": "path(\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\")",
+        "proposedValue": "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+        "ledgerKeys": [
+          "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default tag:path.d"
+        ],
+        "formula": "the captured path('…') data of the checked glyph, numerically compared against the fixture's check.path (same 24-viewBox coordinate space)"
+      }
+    ],
+    "counts": {
+      "match": 24,
+      "drift": 0,
+      "receipt": 31,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "checkbox",
+    "library": "antd",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Checkbox"
+    },
+    "ledgerFile": "extract/computed/out/antd/checkbox/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.size",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox.width"
+        ]
+      },
+      {
+        "path": "box.size",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.width"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.border-top-width"
+        ]
+      },
+      {
+        "path": "box.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.padding-top"
+        ]
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-label.padding-left"
+        ],
+        "formula": "'& + span' paddingInlineStart — the label span's own padding is the row gap"
+      },
+      {
+        "path": "dash.width",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-inner::after.width"
+        ]
+      },
+      {
+        "path": "dash.height",
+        "fixtureValue": 2,
+        "verdict": "drift",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-inner::after.height"
+        ]
+      },
+      {
+        "path": "dash.radius",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-inner::after.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "check.width",
+        "fixtureValue": 7.677,
+        "verdict": "match",
+        "capturedValue": 7.668,
+        "proposedValue": 7.677,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner::after.width",
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner::after.height",
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner::after.border-bottom-width"
+        ],
+        "formula": "the ::after L-stroke (legs w×h, stroke s) rotated 45° with the rotation BAKED into the path (the v3 teaching): bbox width = ((w−s)+(h−s))/√2",
+        "tolerance": 0.05,
+        "toleranceReason": "Chromium quantizes calc()-derived lengths to 1/64 CSS px (e.g. calc(16px/14*5) computes 5.70312, source-exact 5.71428); the fixture carries the source-exact rational"
+      },
+      {
+        "path": "check.height",
+        "fixtureValue": 5.051,
+        "verdict": "match",
+        "capturedValue": 5.049,
+        "proposedValue": 5.051,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner::after.height",
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner::after.border-bottom-width"
+        ],
+        "formula": "baked-rotation bbox height = (h−s)/√2",
+        "tolerance": 0.05,
+        "toleranceReason": "Chromium quantizes calc()-derived lengths to 1/64 CSS px (e.g. calc(16px/14*5) computes 5.70312, source-exact 5.71428); the fixture carries the source-exact rational"
+      },
+      {
+        "path": "check.strokeWidth",
+        "fixtureValue": 2,
+        "verdict": "match",
+        "capturedValue": 2,
+        "proposedValue": 2,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner::after.border-bottom-width"
+        ]
+      },
+      {
+        "path": "check.offsetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "glyph placement is the recipe's spelling (placement: center); the ::after centers by translate(-50%,-50%), which the baked path already absorbs",
+        "evidence": "genCheckboxStyle inner::after translate(-50%,-50%) — reviewed 0"
+      },
+      {
+        "path": "check.offsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "same as check.offsetX",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-label.font-size"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-inner.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "match",
+        "capturedValue": "#000000e0",
+        "proposedValue": "#000000e0",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-label.color"
+        ]
+      },
+      {
+        "path": "states.unchecked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate bar does not render in this state (::after transform scale(0) / no background); transparent is the recipe's spelling of absent",
+        "evidence": "inner::after hidden at combo unchecked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the tick does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "inner::after scale(0) at combo unchecked.enabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.unchecked.disabled.boxFill",
+        "fixtureValue": "#0000000a",
+        "verdict": "match",
+        "capturedValue": "#0000000a",
+        "proposedValue": "#0000000a",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.disabled__default cls:ant-checkbox-inner.background-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.disabled__default cls:ant-checkbox-inner.border-top-color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.disabled__default cls:ant-checkbox-inner.opacity"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.disabled__default cls:ant-checkbox-label.color"
+        ]
+      },
+      {
+        "path": "states.unchecked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate bar does not render in this state (::after transform scale(0) / no background); transparent is the recipe's spelling of absent",
+        "evidence": "inner::after hidden at combo unchecked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.unchecked.disabled.checkFill",
+        "fixtureValue": "#00000040",
+        "verdict": "receipt",
+        "proposedValue": "#00000040",
+        "receipt": "the tick does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "inner::after scale(0) at combo unchecked.disabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.checked.enabled.boxFill",
+        "fixtureValue": "#1677ffff",
+        "verdict": "match",
+        "capturedValue": "#1677ffff",
+        "proposedValue": "#1677ffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner.background-color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.boxBorder",
+        "fixtureValue": "#1677ffff",
+        "verdict": "match",
+        "capturedValue": "#1677ffff",
+        "proposedValue": "#1677ffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner.border-top-color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "match",
+        "capturedValue": "#000000e0",
+        "proposedValue": "#000000e0",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-label.color"
+        ]
+      },
+      {
+        "path": "states.checked.enabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate bar does not render in this state (::after transform scale(0) / no background); transparent is the recipe's spelling of absent",
+        "evidence": "inner::after hidden at combo checked.enabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.enabled__default cls:ant-checkbox-inner::after.border-bottom-color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.boxFill",
+        "fixtureValue": "#0000000a",
+        "verdict": "match",
+        "capturedValue": "#0000000a",
+        "proposedValue": "#0000000a",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.disabled__default cls:ant-checkbox-inner.background-color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.disabled__default cls:ant-checkbox-inner.border-top-color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.disabled__default cls:ant-checkbox-inner.opacity"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.disabled__default cls:ant-checkbox-label.color"
+        ]
+      },
+      {
+        "path": "states.checked.disabled.dashFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the indeterminate bar does not render in this state (::after transform scale(0) / no background); transparent is the recipe's spelling of absent",
+        "evidence": "inner::after hidden at combo checked.disabled — reviewed #00000000"
+      },
+      {
+        "path": "states.checked.disabled.checkFill",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#checked.disabled__default cls:ant-checkbox-inner::after.border-bottom-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.boxFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-inner.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-inner.border-top-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-inner.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "match",
+        "capturedValue": "#000000e0",
+        "proposedValue": "#000000e0",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-label.color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.dashFill",
+        "fixtureValue": "#1677ffff",
+        "verdict": "match",
+        "capturedValue": "#1677ffff",
+        "proposedValue": "#1677ffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.enabled__default cls:ant-checkbox-inner::after.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.enabled.checkFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the tick does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "inner::after scale(0) at combo indeterminate.enabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "states.indeterminate.disabled.boxFill",
+        "fixtureValue": "#0000000a",
+        "verdict": "match",
+        "capturedValue": "#0000000a",
+        "proposedValue": "#0000000a",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.disabled__default cls:ant-checkbox-inner.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.boxBorder",
+        "fixtureValue": "#d9d9d9ff",
+        "verdict": "match",
+        "capturedValue": "#d9d9d9ff",
+        "proposedValue": "#d9d9d9ff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.disabled__default cls:ant-checkbox-inner.border-top-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.disabled__default cls:ant-checkbox-inner.opacity"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.disabled__default cls:ant-checkbox-label.color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.dashFill",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#indeterminate.disabled__default cls:ant-checkbox-inner::after.background-color"
+        ]
+      },
+      {
+        "path": "states.indeterminate.disabled.checkFill",
+        "fixtureValue": "#00000040",
+        "verdict": "receipt",
+        "proposedValue": "#00000040",
+        "receipt": "the tick does not render in this state; the recipe carries a glyph-slot spelling",
+        "evidence": "inner::after scale(0) at combo indeterminate.disabled — reviewed (fixture value carried)"
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "baseline",
+        "verdict": "match",
+        "capturedValue": "baseline",
+        "proposedValue": "baseline",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default root.align-items"
+        ],
+        "formula": "wrapper label align-items"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure, extract/computed/configs/antd.json fonts.__note) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites",
+        "evidence": "theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/antd/checkbox/captured-truth.json#unchecked.enabled__default cls:ant-checkbox-label.font-weight"
+        ],
+        "formula": "label font-weight → style word (400 Regular / 500 Medium / 600 Semibold / 700 Bold)"
+      },
+      {
+        "path": "check.path",
+        "fixtureValue": "M7.677 0.000 L2.626 5.051 L0.000 2.424",
+        "verdict": "receipt",
+        "proposedValue": "M7.677 0.000 L2.626 5.051 L0.000 2.424",
+        "receipt": "the tick is a border-drawn ::after L-stroke, not an SVG — there is no path data channel. The baked-rotation path's ENDPOINT GEOMETRY is mechanically held by the check.width / check.height derivations above (legs (w−s, h−s) rotated 45°)",
+        "evidence": "genCheckboxStyle inner::after border-right+border-bottom rotate(45deg) — fixture path M7.677 0 L2.626 5.051 L0 2.424 bakes the rotation (the v3 teaching)"
+      }
+    ],
+    "counts": {
+      "match": 42,
+      "drift": 1,
+      "receipt": 12,
+      "unread": 0
+    }
+  }
+]

@@ -261,6 +261,16 @@ jobs:
       - name: recipe:calendar:check (calendar@1 grid proof, per-week days, today ring, and the hermetic Figma writer)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:calendar:check
+      # THE READER's drift gate (docs/35 Phase 1). Every numeric/color/typography
+      # fact in the Checkbox and Textarea fixture tables must equal the committed
+      # Chromium capture ledger of the real npm package or carry a named receipt
+      # (mapping receipts for facts the ledger cannot express; reviewed-drift.json
+      # for reviewed divergences like the Astryx theme-mount question). Fails
+      # closed on unexplained drift, stale receipts, and coverage gaps. Offline:
+      # reads committed captured-truth.json fixtures, no browser, no token, ~1s.
+      - name: recipe:fixture-drift:check (Checkbox + Textarea fixture tables equal the npm capture ledger or carry named receipts)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:fixture-drift:check
       - name: recipe:combobox:live:v42:check (the CURRENT combobox lineage — library-named overlay chrome remint; generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:combobox:live:v42:check
