@@ -1086,7 +1086,7 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.width"
         ]
       },
       {
@@ -1096,7 +1096,7 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.width"
         ]
       },
       {
@@ -1106,7 +1106,7 @@
         "capturedValue": 2,
         "proposedValue": 2,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-left-radius"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-left-radius"
         ]
       },
       {
@@ -1116,7 +1116,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-width"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-width"
         ]
       },
       {
@@ -1126,7 +1126,7 @@
         "capturedValue": 2,
         "proposedValue": 2,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.padding-top"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.padding-top"
         ]
       },
       {
@@ -1220,7 +1220,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-size"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.font-size"
         ]
       },
       {
@@ -1230,7 +1230,7 @@
         "capturedValue": "#00000000",
         "proposedValue": "#00000000",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.background-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.background-color"
         ]
       },
       {
@@ -1240,7 +1240,7 @@
         "capturedValue": "#d4d4d8ff",
         "proposedValue": "#d4d4d8ff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-color"
         ]
       },
       {
@@ -1250,7 +1250,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.opacity"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.opacity"
         ]
       },
       {
@@ -1260,7 +1260,7 @@
         "capturedValue": "#09090bff",
         "proposedValue": "#09090bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.color"
         ]
       },
       {
@@ -1286,7 +1286,7 @@
         "capturedValue": "#00000000",
         "proposedValue": "#00000000",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.background-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.background-color"
         ]
       },
       {
@@ -1296,7 +1296,7 @@
         "capturedValue": "#d4d4d8ff",
         "proposedValue": "#d4d4d8ff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.border-top-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.border-top-color"
         ]
       },
       {
@@ -1306,7 +1306,7 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.opacity"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.opacity"
         ]
       },
       {
@@ -1316,7 +1316,7 @@
         "capturedValue": "#09090bff",
         "proposedValue": "#09090bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__label.color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:2.color"
         ]
       },
       {
@@ -1342,7 +1342,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.background-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.background-color"
         ]
       },
       {
@@ -1352,7 +1352,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.border-top-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.border-top-color"
         ]
       },
       {
@@ -1362,7 +1362,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.opacity"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.opacity"
         ]
       },
       {
@@ -1372,7 +1372,7 @@
         "capturedValue": "#09090bff",
         "proposedValue": "#09090bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__label.color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:2.color"
         ]
       },
       {
@@ -1401,7 +1401,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.background-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.background-color"
         ]
       },
       {
@@ -1411,7 +1411,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.border-top-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.border-top-color"
         ]
       },
       {
@@ -1421,7 +1421,7 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.opacity"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.opacity"
         ]
       },
       {
@@ -1431,7 +1431,7 @@
         "capturedValue": "#09090bff",
         "proposedValue": "#09090bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__label.color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:2.color"
         ]
       },
       {
@@ -1460,7 +1460,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.background-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.background-color"
         ]
       },
       {
@@ -1470,7 +1470,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.border-top-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.border-top-color"
         ]
       },
       {
@@ -1480,7 +1480,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.opacity"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.opacity"
         ]
       },
       {
@@ -1490,7 +1490,7 @@
         "capturedValue": "#09090bff",
         "proposedValue": "#09090bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__label.color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:2.color"
         ]
       },
       {
@@ -1519,7 +1519,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.background-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.background-color"
         ]
       },
       {
@@ -1529,7 +1529,7 @@
         "capturedValue": "#18181bff",
         "proposedValue": "#18181bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.border-top-color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.border-top-color"
         ]
       },
       {
@@ -1539,7 +1539,7 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.opacity"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.opacity"
         ]
       },
       {
@@ -1549,7 +1549,7 @@
         "capturedValue": "#09090bff",
         "proposedValue": "#09090bff",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__label.color"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:2.color"
         ]
       },
       {
@@ -1588,7 +1588,7 @@
         "capturedValue": "Inter",
         "proposedValue": "Inter",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-family"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.font-family"
         ],
         "formula": "first family of the label's computed stack"
       },
@@ -1599,7 +1599,7 @@
         "capturedValue": "Medium",
         "proposedValue": "Medium",
         "ledgerKeys": [
-          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-weight"
+          "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.font-weight"
         ],
         "formula": "label font-weight → style word"
       },

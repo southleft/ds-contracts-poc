@@ -53,12 +53,12 @@
     "dash.width": {
       "value": 9.9167,
       "from": "set",
-      "why": "checkmark.js indeterminate stroke lowered to a rounded rect"
+      "why": "checkmark.js indeterminate <path d=\"M5 12h14\"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)"
     },
     "dash.height": {
       "value": 1.75,
       "from": "set",
-      "why": "stroke-width 3 × 14/24"
+      "why": "stroke-width 3 × 14/24 = 1.75"
     },
     "dash.radius": {
       "value": 0,
@@ -307,13 +307,13 @@
     {
       "path": "dash.width",
       "why": "ledger value unusable: not a px length: \"auto\"",
-      "evidence": "checkmark.js indeterminate stroke lowered to a rounded rect",
+      "evidence": "checkmark.js indeterminate <path d=\"M5 12h14\"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)",
       "value": 9.9167
     },
     {
       "path": "dash.height",
       "why": "ledger value unusable: not a px length: \"auto\"",
-      "evidence": "stroke-width 3 × 14/24",
+      "evidence": "stroke-width 3 × 14/24 = 1.75",
       "value": 1.75
     },
     {

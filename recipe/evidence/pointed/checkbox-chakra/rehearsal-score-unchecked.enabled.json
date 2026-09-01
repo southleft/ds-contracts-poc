@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "pointed/chakra/unchecked.enabled",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 3.75,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "canvasPx": "20x20",
+    "realPx": "20x20",
+    "inkCanvasPct": 19,
+    "inkRealPct": 20
+  },
+  "canvas": {
+    "path": "/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/6febcf64-adc3-4bf6-89d9-ff1789edee2a/scratchpad/pointed-unchecked.enabled.png",
+    "sha256": "feda8e7955c0de86204d6b6eb911dd4745c025ab59317b28b7164ff73b6ef87e"
+  },
+  "reference": {
+    "path": "extract/computed/out/chakra/checkbox/orig-shots/unchecked.enabled__default.png",
+    "sha256": "966c4dda426b56f392ce1b57e0431b86891b34b797a237cd991f5dfc10496a38"
+  },
+  "diff": "/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/6febcf64-adc3-4bf6-89d9-ff1789edee2a/scratchpad/pointed-unchecked.enabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 245,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 240,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

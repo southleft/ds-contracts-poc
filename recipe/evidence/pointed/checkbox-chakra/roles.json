@@ -1,0 +1,12 @@
+{
+  "box": "idx:1",
+  "glyph": "tag:svg",
+  "glyphPath": "tag:polyline",
+  "label": "idx:2",
+  "row": "root",
+  "hit": "idx:1",
+  "dash": {
+    "part": "tag:path"
+  },
+  "opacityOn": "idx:1"
+}

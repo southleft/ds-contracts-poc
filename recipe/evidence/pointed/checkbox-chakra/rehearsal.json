@@ -1,0 +1,15 @@
+{
+  "what": "writer.plugin.js from this directory executed in the Scratch file through scripts/run-figma-writer.mjs --plugin-target (the plugin's Paste-a-script execution shape) and scored against the real package render",
+  "pageId": "213:82580",
+  "recordedFrom": "private/pointed-chakra-writer.raw.json",
+  "fidelity": {
+    "unchecked.enabled": "0.00% 20x20",
+    "checked.enabled": "0.00% 20x20"
+  },
+  "humanInputs": [
+    "glyph.json (cited from checkmark.js)",
+    "three dash leaves with their arithmetic (--set/--why)",
+    "the drafted role map, reviewed by reading roles.draft.json"
+  ],
+  "notExercised": "the plugin's own paste verb in Figma desktop"
+}

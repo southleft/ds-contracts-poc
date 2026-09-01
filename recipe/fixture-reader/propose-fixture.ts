@@ -21,7 +21,7 @@
  * ledger key is recorded), SET with a --why (recorded as a reviewed receipt),
  * or absent — and an absent leaf refuses the whole proposal by name.
  */
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 
 import { Ledger, hex8, num, px } from "./ledger.js";
@@ -258,38 +258,45 @@ function schemaOptionsFor(p: Proposal): CheckboxSchemaOptions {
   return { glyphPaint: p.glyph.asIs.paint, glyphViewBox: p.glyph.asIs.viewBox, receipts };
 }
 
-if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1]))) {
-  const archetype = arg("archetype");
-  const library = arg("library");
-  const ledgerRel = arg("ledger");
-  const rolesJson = arg("roles");
-  const glyphJson = arg("glyph");
-  const out = arg("out");
-  if (archetype !== "checkbox") throw new Error("only checkbox@1 has a reader schema today (--archetype checkbox)");
-  if (!library || !ledgerRel || !rolesJson || !glyphJson || !out) throw new Error("usage: --archetype checkbox --library <slug> --ledger <captured-truth.json> --roles <json> --glyph <json> --out <file> [--set path=value --why 'path=evidence']… [--display-name] [--export-name] [--source-root] [--unsupported a,b]");
-  const roles = JSON.parse(rolesJson) as CheckboxRoles;
-  const glyph = JSON.parse(glyphJson) as GlyphSpec;
-  const sets = new Map<string, { value: string; why: string }>();
-  const whys = new Map(args("why").map((w) => { const i = w.indexOf("="); return [w.slice(0, i), w.slice(i + 1)] as const; }));
-  for (const s of args("set")) {
-    const i = s.indexOf("=");
-    const p = s.slice(0, i);
-    const why = whys.get(p);
-    if (!why) throw new Error(`--set ${p} needs a matching --why '${p}=<evidence>'`);
-    sets.set(p, { value: s.slice(i + 1), why });
-  }
+export interface ProposeInput {
+  library: string;
+  ledger: string;
+  roles: CheckboxRoles;
+  glyph: GlyphSpec;
+  /** path → { value, why } reviewed values for leaves the ledger cannot carry. */
+  sets?: Record<string, { value: string; why: string }>;
+  displayName?: string;
+  exportName?: string;
+  sourceRoot?: string;
+  unsupported?: string[];
+  /** Repo-relative output path of the generated fixture module. */
+  out: string;
+}
+
+export interface ProposeResult {
+  proposal: Proposal;
+  modulePath: string;
+  proposalPath: string;
+  refused: string[];
+}
+
+/** Propose a checkbox@1 fixture module from a ledger. Returns refusals instead of writing when any leaf cannot be carried. */
+export function proposeCheckboxFixture(input: ProposeInput): ProposeResult {
+  const { library, roles, glyph } = input;
+  const ledgerRel = input.ledger;
+  const out = input.out;
+  const sets = new Map<string, { value: string; why: string }>(Object.entries(input.sets ?? {}));
   const ledger = new Ledger(REPO, ledgerRel);
   const truth = JSON.parse(readFileSync(path.join(REPO, ledgerRel), "utf8")) as { _provenance: { library: string; browser: string } };
   const [pkg, version] = truth._provenance.library.split(/@(?=[^@]+$)/);
   const receiptsForSchema: NonNullable<CheckboxSchemaOptions["receipts"]> = {};
-  // check.path is cited from the package (--glyph), never read from the DOM.
   receiptsForSchema["check.path"] = { why: "glyph geometry is cited from the package source (--glyph), not a computed channel", evidence: glyph.source };
   const mappings = checkboxSchemaMappings(roles, { glyphPaint: glyph.paint, glyphViewBox: glyph.viewBox, receipts: receiptsForSchema });
   sets.set("check.path", { value: "(see glyph)", why: glyph.source });
   const evaluated = evaluate(ledger, mappings, sets);
+  const proposalPath = path.join(REPO, "recipe/fixture-reader/out/proposals", `checkbox.${library}.json`);
   if (evaluated.refused.length > 0) {
-    console.error(`✖ ${library}/${archetype}: ${evaluated.refused.length} leaf/leaves cannot be proposed:\n  - ${evaluated.refused.join("\n  - ")}`);
-    process.exit(1);
+    return { proposal: null as unknown as Proposal, modulePath: path.join(REPO, out), proposalPath, refused: evaluated.refused };
   }
   const labelPart = ledger.capture("unchecked.enabled__default").parts.find((p) => selectorMatches(p, roles.label));
   const labelText = (labelPart?.text ?? [])[0] ?? "";
@@ -298,13 +305,8 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
   const stack = ledger.raw("unchecked.enabled__default", roles.label, "font-family");
   const renderedWidth = Number(evaluated.leaves["check.width"]?.value);
   const scaled = scaleGlyph(glyph, renderedWidth);
-  // check.strokeWidth: the ledger read is in rendered px already; the cited
-  // glyph's stroke scaled onto the rendered box must agree, or say so.
-  const readStroke = Number(evaluated.leaves["check.strokeWidth"]?.value ?? 0);
-  if (glyph.paint === "stroke" && Math.abs(readStroke - scaled.strokeWidth) > 0.05)
-    console.warn(`  note: ledger stroke-width ${readStroke} vs cited glyph stroke ${glyph.strokeWidth} scaled ${scaled.strokeWidth} — the ledger value is kept`);
   const proposal: Proposal = {
-    archetype,
+    archetype: "checkbox",
     library,
     ledger: ledgerRel,
     provenance: { package: pkg!, version: version!, browser: truth._provenance.browser },
@@ -314,24 +316,53 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
     typography: { family, style, stack },
     glyph: { asIs: glyph, scaled },
   };
-  const slug = library;
   const module = renderModule(proposal, {
-    slug,
-    displayName: arg("display-name") ?? library,
-    exportName: arg("export-name") ?? "Checkbox",
-    sourceRoot: arg("source-root") ?? `extract/computed/out/${library}`,
-    unsupported: (arg("unsupported") ?? "").split(",").filter(Boolean),
+    slug: library,
+    displayName: input.displayName ?? library,
+    exportName: input.exportName ?? "Checkbox",
+    sourceRoot: input.sourceRoot ?? `extract/computed/out/${library}`,
+    unsupported: input.unsupported ?? [],
   });
   mkdirSync(path.dirname(path.join(REPO, out)), { recursive: true });
   writeFileSync(path.join(REPO, out), module);
-  const proposalPath = path.join(REPO, "recipe/fixture-reader/out/proposals", `${archetype}.${library}.json`);
   mkdirSync(path.dirname(proposalPath), { recursive: true });
   writeFileSync(proposalPath, `${JSON.stringify(proposal, null, 2)}\n`);
-  const fromLedger = Object.values(proposal.leaves).filter((l) => l.from === "ledger").length;
-  const fromSet = Object.values(proposal.leaves).filter((l) => l.from === "set").length;
-  const fromSpelling = Object.values(proposal.leaves).filter((l) => l.from === "spelling").length;
+  return { proposal, modulePath: path.join(REPO, out), proposalPath, refused: [] };
+}
+
+if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1]))) {
+  const archetype = arg("archetype");
+  const library = arg("library");
+  const ledgerRel = arg("ledger");
+  const rolesJson = arg("roles");
+  const glyphJson = arg("glyph");
+  const out = arg("out");
+  if (archetype !== "checkbox") throw new Error("only checkbox@1 has a reader schema today (--archetype checkbox)");
+  if (!library || !ledgerRel || !rolesJson || !glyphJson || !out) throw new Error("usage: --archetype checkbox --library <slug> --ledger <captured-truth.json> --roles <json> --glyph <json> --out <file> [--set path=value --why 'path=evidence']… [--display-name] [--export-name] [--source-root] [--unsupported a,b]");
+  const sets: Record<string, { value: string; why: string }> = {};
+  const whys = new Map(args("why").map((w) => { const i = w.indexOf("="); return [w.slice(0, i), w.slice(i + 1)] as const; }));
+  for (const s of args("set")) {
+    const i = s.indexOf("=");
+    const p = s.slice(0, i);
+    const why = whys.get(p);
+    if (!why) throw new Error(`--set ${p} needs a matching --why '${p}=<evidence>'`);
+    sets[p] = { value: s.slice(i + 1), why };
+  }
+  const result = proposeCheckboxFixture({
+    library, ledger: ledgerRel, roles: JSON.parse(rolesJson) as CheckboxRoles, glyph: JSON.parse(glyphJson) as GlyphSpec, sets,
+    displayName: arg("display-name"), exportName: arg("export-name"), sourceRoot: arg("source-root"),
+    unsupported: (arg("unsupported") ?? "").split(",").filter(Boolean), out,
+  });
+  if (result.refused.length > 0) {
+    console.error(`✖ ${library}/${archetype}: ${result.refused.length} leaf/leaves cannot be proposed:\n  - ${result.refused.join("\n  - ")}`);
+    process.exit(1);
+  }
+  const p = result.proposal;
+  const fromLedger = Object.values(p.leaves).filter((l) => l.from === "ledger").length;
+  const fromSet = Object.values(p.leaves).filter((l) => l.from === "set").length;
+  const fromSpelling = Object.values(p.leaves).filter((l) => l.from === "spelling").length;
   console.log(`✔ ${library}/${archetype}: ${fromLedger} leaves read from the ledger, ${fromSet} reviewed (named), ${fromSpelling} archetype spellings, 0 invented → ${out}`);
-  console.log(`  proposal: ${path.relative(REPO, proposalPath)}; label ${JSON.stringify(labelText)}; ${family} ${style}; glyph ${scaled.width}x${scaled.height} stroke ${scaled.strokeWidth}`);
+  console.log(`  proposal: ${path.relative(REPO, result.proposalPath)}; label ${JSON.stringify(p.content.label)}; ${p.typography.family} ${p.typography.style}; glyph ${p.glyph.scaled.width}x${p.glyph.scaled.height} stroke ${p.glyph.scaled.strokeWidth}`);
 }
 
 function selectorMatches(part: { tag: string; classes: string[]; idxPath: string }, selector: string): boolean {

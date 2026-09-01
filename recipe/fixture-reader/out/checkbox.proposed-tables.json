@@ -768,35 +768,35 @@
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.width"
       },
       "box.size": {
         "fixture": 20,
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.width"
       },
       "box.radius": {
         "fixture": 2,
         "proposed": 2,
         "verdict": "match",
         "captured": 2,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-left-radius"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-left-radius"
       },
       "box.borderWidth": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-width"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-width"
       },
       "box.padding": {
         "fixture": 2,
         "proposed": 2,
         "verdict": "match",
         "captured": 2,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.padding-top"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.padding-top"
       },
       "row.gap": {
         "fixture": 10,
@@ -862,35 +862,35 @@
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-size"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.font-size"
       },
       "states.unchecked.enabled.boxFill": {
         "fixture": "#00000000",
         "proposed": "#00000000",
         "verdict": "match",
         "captured": "#00000000",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.background-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.background-color"
       },
       "states.unchecked.enabled.boxBorder": {
         "fixture": "#d4d4d8ff",
         "proposed": "#d4d4d8ff",
         "verdict": "match",
         "captured": "#d4d4d8ff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-color"
       },
       "states.unchecked.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.opacity"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.opacity"
       },
       "states.unchecked.enabled.label": {
         "fixture": "#09090bff",
         "proposed": "#09090bff",
         "verdict": "match",
         "captured": "#09090bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.color"
       },
       "states.unchecked.enabled.dashFill": {
         "fixture": "#00000000",
@@ -909,28 +909,28 @@
         "proposed": "#00000000",
         "verdict": "match",
         "captured": "#00000000",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.background-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.background-color"
       },
       "states.unchecked.disabled.boxBorder": {
         "fixture": "#d4d4d8ff",
         "proposed": "#d4d4d8ff",
         "verdict": "match",
         "captured": "#d4d4d8ff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.border-top-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.border-top-color"
       },
       "states.unchecked.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.opacity"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.opacity"
       },
       "states.unchecked.disabled.label": {
         "fixture": "#09090bff",
         "proposed": "#09090bff",
         "verdict": "match",
         "captured": "#09090bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__label.color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:2.color"
       },
       "states.unchecked.disabled.dashFill": {
         "fixture": "#00000000",
@@ -949,28 +949,28 @@
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.background-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.background-color"
       },
       "states.checked.enabled.boxBorder": {
         "fixture": "#18181bff",
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.border-top-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.border-top-color"
       },
       "states.checked.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.opacity"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.opacity"
       },
       "states.checked.enabled.label": {
         "fixture": "#09090bff",
         "proposed": "#09090bff",
         "verdict": "match",
         "captured": "#09090bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__label.color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:2.color"
       },
       "states.checked.enabled.dashFill": {
         "fixture": "#00000000",
@@ -990,28 +990,28 @@
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.background-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.background-color"
       },
       "states.checked.disabled.boxBorder": {
         "fixture": "#18181bff",
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.border-top-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.border-top-color"
       },
       "states.checked.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.opacity"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.opacity"
       },
       "states.checked.disabled.label": {
         "fixture": "#09090bff",
         "proposed": "#09090bff",
         "verdict": "match",
         "captured": "#09090bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__label.color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:2.color"
       },
       "states.checked.disabled.dashFill": {
         "fixture": "#00000000",
@@ -1031,28 +1031,28 @@
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.background-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.background-color"
       },
       "states.indeterminate.enabled.boxBorder": {
         "fixture": "#18181bff",
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.border-top-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.border-top-color"
       },
       "states.indeterminate.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.opacity"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.opacity"
       },
       "states.indeterminate.enabled.label": {
         "fixture": "#09090bff",
         "proposed": "#09090bff",
         "verdict": "match",
         "captured": "#09090bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__label.color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:2.color"
       },
       "states.indeterminate.enabled.dashFill": {
         "fixture": "#ffffffff",
@@ -1072,28 +1072,28 @@
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.background-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.background-color"
       },
       "states.indeterminate.disabled.boxBorder": {
         "fixture": "#18181bff",
         "proposed": "#18181bff",
         "verdict": "match",
         "captured": "#18181bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.border-top-color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.border-top-color"
       },
       "states.indeterminate.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.opacity"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.opacity"
       },
       "states.indeterminate.disabled.label": {
         "fixture": "#09090bff",
         "proposed": "#09090bff",
         "verdict": "match",
         "captured": "#09090bff",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__label.color"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:2.color"
       },
       "states.indeterminate.disabled.dashFill": {
         "fixture": "#ffffffff",
@@ -1120,14 +1120,14 @@
         "proposed": "Inter",
         "verdict": "match",
         "captured": "Inter",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-family — first family of the label's computed stack"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.font-family — first family of the label's computed stack"
       },
       "typography.label.style": {
         "fixture": "Medium",
         "proposed": "Medium",
         "verdict": "match",
         "captured": "Medium",
-        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-weight — label font-weight → style word"
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.font-weight — label font-weight → style word"
       },
       "check.path": {
         "fixture": "M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7",

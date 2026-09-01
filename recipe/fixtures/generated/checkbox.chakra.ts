@@ -9,24 +9,24 @@ import { checkboxSchemaMappings, type CheckboxRoles } from "../../fixture-reader
 export const CHAKRA_CHECKBOX_LEDGER = "extract/computed/out/chakra/checkbox/captured-truth.json";
 
 export const chakraCheckboxRoles: CheckboxRoles = {
-  "hit": "cls:chakra-checkbox__control",
-  "box": "cls:chakra-checkbox__control",
+  "box": "idx:1",
   "glyph": "tag:svg",
   "glyphPath": "tag:polyline",
+  "label": "idx:2",
+  "row": "root",
+  "hit": "idx:1",
   "dash": {
     "part": "tag:path"
   },
-  "label": "cls:chakra-checkbox__label",
-  "row": "root",
-  "opacityOn": "cls:chakra-checkbox__control"
+  "opacityOn": "idx:1"
 };
 
 const VALUES: Record<string, number | string> = {
-  "wrapper.size": 20, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width
-  "box.size": 20, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width
-  "box.radius": 2, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-left-radius
-  "box.borderWidth": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-width
-  "box.padding": 2, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.padding-top
+  "wrapper.size": 20, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.width
+  "box.size": 20, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.width
+  "box.radius": 2, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-left-radius
+  "box.borderWidth": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-width
+  "box.padding": 2, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.padding-top
   "row.gap": 10, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default root.column-gap
   "dash.width": 9.9167, // reviewed: checkmark.js indeterminate <path d="M5 12h14"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)
   "dash.height": 1.75, // reviewed: stroke-width 3 × 14/24 = 1.75
@@ -36,38 +36,38 @@ const VALUES: Record<string, number | string> = {
   "check.strokeWidth": 1.75, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:polyline.stroke-width | extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:svg.width
   "check.offsetX": 0, // archetype spelling: glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel
   "check.offsetY": 0, // archetype spelling: same as check.offsetX
-  "labelFontSize": 14, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-size
-  "states.unchecked.enabled.boxFill": "#00000000", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.background-color
-  "states.unchecked.enabled.boxBorder": "#d4d4d8ff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-color
-  "states.unchecked.enabled.boxOpacity": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.opacity
-  "states.unchecked.enabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.color
+  "labelFontSize": 14, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.font-size
+  "states.unchecked.enabled.boxFill": "#00000000", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.background-color
+  "states.unchecked.enabled.boxBorder": "#d4d4d8ff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.border-top-color
+  "states.unchecked.enabled.boxOpacity": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:1.opacity
+  "states.unchecked.enabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default idx:2.color
   "states.unchecked.enabled.dashFill": "#00000000", // archetype spelling: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent
-  "states.unchecked.disabled.boxFill": "#00000000", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.background-color
-  "states.unchecked.disabled.boxBorder": "#d4d4d8ff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.border-top-color
-  "states.unchecked.disabled.boxOpacity": 0.5, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.opacity
-  "states.unchecked.disabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__label.color
+  "states.unchecked.disabled.boxFill": "#00000000", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.background-color
+  "states.unchecked.disabled.boxBorder": "#d4d4d8ff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.border-top-color
+  "states.unchecked.disabled.boxOpacity": 0.5, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:1.opacity
+  "states.unchecked.disabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default idx:2.color
   "states.unchecked.disabled.dashFill": "#00000000", // archetype spelling: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent
-  "states.checked.enabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.background-color
-  "states.checked.enabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.border-top-color
-  "states.checked.enabled.boxOpacity": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.opacity
-  "states.checked.enabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__label.color
+  "states.checked.enabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.background-color
+  "states.checked.enabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.border-top-color
+  "states.checked.enabled.boxOpacity": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:1.opacity
+  "states.checked.enabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default idx:2.color
   "states.checked.enabled.dashFill": "#00000000", // archetype spelling: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent
   "states.checked.enabled.checkFill": "#ffffffff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:polyline.stroke
-  "states.checked.disabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.background-color
-  "states.checked.disabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.border-top-color
-  "states.checked.disabled.boxOpacity": 0.5, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.opacity
-  "states.checked.disabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__label.color
+  "states.checked.disabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.background-color
+  "states.checked.disabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.border-top-color
+  "states.checked.disabled.boxOpacity": 0.5, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:1.opacity
+  "states.checked.disabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default idx:2.color
   "states.checked.disabled.dashFill": "#00000000", // archetype spelling: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent
   "states.checked.disabled.checkFill": "#ffffffff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default tag:polyline.stroke
-  "states.indeterminate.enabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.background-color
-  "states.indeterminate.enabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.border-top-color
-  "states.indeterminate.enabled.boxOpacity": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.opacity
-  "states.indeterminate.enabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__label.color
+  "states.indeterminate.enabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.background-color
+  "states.indeterminate.enabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.border-top-color
+  "states.indeterminate.enabled.boxOpacity": 1, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:1.opacity
+  "states.indeterminate.enabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default idx:2.color
   "states.indeterminate.enabled.dashFill": "#ffffffff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default tag:path.stroke
-  "states.indeterminate.disabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.background-color
-  "states.indeterminate.disabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.border-top-color
-  "states.indeterminate.disabled.boxOpacity": 0.5, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.opacity
-  "states.indeterminate.disabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__label.color
+  "states.indeterminate.disabled.boxFill": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.background-color
+  "states.indeterminate.disabled.boxBorder": "#18181bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.border-top-color
+  "states.indeterminate.disabled.boxOpacity": 0.5, // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:1.opacity
+  "states.indeterminate.disabled.label": "#09090bff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default idx:2.color
   "states.indeterminate.disabled.dashFill": "#ffffffff", // ledger extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default tag:path.stroke
   "states.unchecked.enabled.checkFill": "#ffffffff", // archetype spelling: the check glyph does not render in this state; the recipe carries a glyph-slot spelling
   "states.unchecked.disabled.checkFill": "#ffffffff", // archetype spelling: the check glyph does not render in this state; the recipe carries a glyph-slot spelling
@@ -113,10 +113,10 @@ export const chakraCheckboxSource: ReviewedCheckboxSource = {
   framework: "react",
   sourceRoot: "examples/chakra/.chakra-sandbox/node_modules/@chakra-ui/react",
   anatomy: {
-    root: "ledger part cls:chakra-checkbox__control (hit) / root (row)",
-    control: "ledger part cls:chakra-checkbox__control: 20px, border 1, radius 2",
+    root: "ledger part idx:1 (hit) / root (row)",
+    control: "ledger part idx:1: 20px, border 1, radius 2",
     glyph: "@chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3px\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg>; rendered 14x14",
-    label: "ledger part cls:chakra-checkbox__label: Inter Medium 14px; text \"Accept\"",
+    label: "ledger part idx:2: Inter Medium 14px; text \"Accept\"",
   },
   api: { generated: "proposed from the capture ledger; no API review" },
   styleSources: ["extract/computed/out/chakra/checkbox/captured-truth.json"],

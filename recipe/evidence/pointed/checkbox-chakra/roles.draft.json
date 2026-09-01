@@ -1,0 +1,57 @@
+{
+  "roles": {
+    "box": "idx:1",
+    "glyph": "tag:svg",
+    "glyphPath": "tag:polyline",
+    "label": "idx:2",
+    "row": "root",
+    "hit": "idx:1",
+    "dash": {
+      "part": "tag:path"
+    },
+    "opacityOn": "idx:1"
+  },
+  "evidence": {
+    "box": {
+      "selector": "idx:1",
+      "why": "square 20px div.chakra-checkbox__control whose paint changes unchecked → checked (bg rgba(0, 0, 0, 0) → rgba(24, 24, 27, 1))",
+      "confidence": "high"
+    },
+    "glyph": {
+      "selector": "tag:svg",
+      "why": "svg 14px×14px present in the checked combo",
+      "confidence": "high"
+    },
+    "glyphPath": {
+      "selector": "tag:polyline",
+      "why": "polyline inside the svg, stroke rgba(255, 255, 255, 1) 3px, d=none — a polyline's points are not a computed channel: cite the glyph from the package with --glyph",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:2",
+      "why": "span.chakra-checkbox__label carries text \"Accept\"",
+      "confidence": "high"
+    },
+    "row": {
+      "selector": "root",
+      "why": "nearest common ancestor of box and label: label display flex, column-gap 10px, align-items center",
+      "confidence": "high"
+    },
+    "hit": {
+      "selector": "idx:1",
+      "why": "no larger square parent; the box is its own hit area",
+      "confidence": "medium"
+    },
+    "dash": {
+      "selector": "tag:path",
+      "why": "path in the indeterminate combo draws d=path(\"M 5 12 H 19\") — a stroked line: its width/height/radius are not channels, give --set with the lowering",
+      "confidence": "medium"
+    },
+    "opacityOn": {
+      "selector": "idx:1",
+      "why": "div opacity 1 → 0.5 when disabled",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}
