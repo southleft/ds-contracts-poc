@@ -20,19 +20,19 @@ the complete inventory of what this does not do, and it is longer than this one.
 
 ## 1. The one-paragraph version
 
-Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
-architectures were run through one pipeline. 119 components came out with a measured floor:
+Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
+architectures were run through one pipeline. 120 components came out with a measured floor:
 **86.6% mean computed-style equality** against the original npm package rendering in the same pinned
-Chromium, exact string comparison with no tolerance, over 734,834 compared style cells
-(58 of 119 components at ≥90%, 92 of 119 at ≥80%).
+Chromium, exact string comparison with no tolerance, over 737,162 compared style cells
+(58 of 120 components at ≥90%, 93 of 120 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
 canvas→code→canvas executes through the fact diff on **15 of 15** components with every
 one of 36,287 facts classified as matched, diverged, lost or invented rather than dropped in silence.
 Exact structured projection is separately evidenced: **0 verified exact, 15 legacy unverified, 0 refused**.
 The whole thing is pinned by 230 executable claim gates and a 292-file byte-identical
-generation manifest. **What that does not say:** those 119 components are
-11.1% of the 9 libraries they came from, and they were picked because they were the tractable ones.
+generation manifest. **What that does not say:** those 120 components are
+11.1% of the 10 libraries they came from, and they were picked because they were the tractable ones.
 
 ---
 
@@ -54,9 +54,10 @@ averages.
 | Flowbite / Tailwind (`flowbite-react@0.12.17`) | 8 | 8 | 46 | **17.4%** | `docs/22-generality.md` §8.3 |
 | Fluent 2 (`@fluentui/react-components@9.74.5`) | 11 | 11 | **source cannot answer** | — | no row in §8.3 matched this package id |
 | Ant Design (`antd@5.29.3`) | 12 | 12 | 72 | **16.7%** | `docs/22-generality.md` §8.3 |
+| Chakra UI (`@chakra-ui/react@3.37.0`) | 0 | 0 | **source cannot answer** | — | §8.3 row present; library size deliberately unmeasured |
 | **total** | **116** | **113** | **1,015** | **11.1%** |  |
 
-**Read every percentage on this page as "on the easy 11.1%."** The 119 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 9 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+**Read every percentage on this page as "on the easy 11.1%."** The 120 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 10 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **This table's coverage column is stricter than the one in docs/22 and docs/23, on purpose.**
 Those two print 116/1,015 = **11.4%** — *contracts committed* over library size.
@@ -67,9 +68,9 @@ when it was measured AND kept. A contract existing is not the same as a contract
 being measured, and a scorecard existing is not the same as a stem shipping;
 where these differ this page uses the smallest number.
 
-**6 measured component(s) are deliberately excluded here**
+**7 measured component(s) are deliberately excluded here**
 because they carry a scorecard but no committed contract — captured with full
-receipts and then HELD: `antd/Textarea`, `astryx/TextArea`, `mui/Textarea`, `tailwind/Blockquote`, `tailwind/Spinner`, `tailwind/TextInput`.
+receipts and then HELD: `antd/Textarea`, `astryx/TextArea`, `chakra/Checkbox`, `mui/Textarea`, `tailwind/Blockquote`, `tailwind/Spinner`, `tailwind/TextInput`.
 Counting them would report refused stems as shipped ones
 (`FC-COVERAGE-COUNTS-CAPTURES`); their fidelity numbers still appear in §3,
 which averages over everything measured.
@@ -84,7 +85,7 @@ this repo's own extractor could see, helpers included. The true denominators
 are smaller and the true percentages a little higher. The order of magnitude
 is the finding.
 
-Beyond the 9 foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:
+Beyond the 10 foreign libraries, the corpus also holds contracts that are **not** captured from a third party and are not counted above:
 
 | corpus | contracts | what it is | source |
 |---|---|---|---|
@@ -114,16 +115,17 @@ pipeline never opened still counts against it.
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
 | Fluent 2 | 11 | **82.5** | 82.4 | 4/11 | 7/11 | 132,426 | 80.8 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 13 | **89.0** | 91.4 | 8/13 | 11/13 | 134,916 | 85.4 | `extract/computed/out/antd/<comp>/scorecard.json` |
-| **all libraries** | **119** | **86.6** | 89.4 | **58/119** | **92/119** | **734,834** | **85.9** |  |
+| Chakra UI | 1 | **88.5** | 88.5 | 0/1 | 1/1 | 2,328 | 88.5 | `extract/computed/out/chakra/<comp>/scorecard.json` |
+| **all libraries** | **120** | **86.6** | 89.3 | **58/120** | **93/120** | **737,162** | **85.9** |  |
 
-**Read every percentage on this page as "on the easy 11.1%."** The 119 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 9 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
+**Read every percentage on this page as "on the easy 11.1%."** The 120 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 10 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 
 **Two means, both printed, because they answer different questions.** The
 unweighted mean (86.6%) treats a 16-cell Spinner and an 83,520-cell Button as equals;
 the cell-weighted figure (85.9%) is what fraction of every style cell in the corpus
 actually matched. Neither is quoted alone. Whole-row exactness is the harshest
-cut of the same data: **2,984 of 11,656** rendered rows
-(25.6%) match the original on *every* channel at once.
+cut of the same data: **2,984 of 11,680** rendered rows
+(25.5%) match the original on *every* channel at once.
 
 ### 3.1 Every measured component, worst first
 
@@ -185,6 +187,7 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Alert` | Ant Design | 86.6 | 32 × 4 | 14,848 | `extract/computed/out/antd/alert/scorecard.json` |
 | `HelperText` | Flowbite / Tailwind | 87.1 | 5 × 4 | 340 | `extract/computed/out/tailwind/helpertext/scorecard.json` |
 | `Paper` | MUI | 87.9 | 8 × 4 | 1,056 | `extract/computed/out/mui/paper/scorecard.json` |
+| `Checkbox` | Chakra UI | 88.5 | 6 × 4 | 2,328 | `extract/computed/out/chakra/checkbox/scorecard.json` |
 | `ToggleSwitch` | Flowbite / Tailwind | 88.9 | 6 × 4 | 864 | `extract/computed/out/tailwind/toggleswitch/scorecard.json` |
 | `TextInput` | Carbon | 89.0 | 10 × 4 | 3,560 | `extract/computed/out/carbon/textinput/scorecard.json` |
 | `Fab` | MUI | 89.1 | 18 × 4 | 4,032 | `extract/computed/out/mui/fab/scorecard.json` |
@@ -266,7 +269,7 @@ no scorecard escaped classification.
 | fixture | cases | mean %equal | counted in §3? | source |
 |---|---|---|---|---|
 | synthetic CSS/DOM constructs | 124 | 98.3 | **no** | `extract/computed/out/conformance/*/scorecard.json` |
-| real third-party components | 119 | 86.6 | yes | `extract/computed/out/**/scorecard.json` |
+| real third-party components | 120 | 86.6 | yes | `extract/computed/out/**/scorecard.json` |
 
 ---
 
@@ -332,8 +335,8 @@ asserted in prose.
 | pin | value | what it forbids | source |
 |---|---|---|---|
 | generated source, byte-identical | 292 files hashed | a contract change altering generated code without review | `evals/golden.json` |
-| capture double-sweep identity | 243/243 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
-| browser captures behind the corpus | 12,113 | a floor quoted from a sample smaller than it claims | same files, `captures` |
+| capture double-sweep identity | 244/244 runs | a capture whose second sweep disagrees with its first | `extract/computed/out/**/numbers.json`, `determinism` |
+| browser captures behind the corpus | 12,137 | a floor quoted from a sample smaller than it claims | same files, `captures` |
 | executable claims | 230 gates | a documented behaviour with no test | `evals/results.json` |
 | dropped-fact receipt count | 120 pinned exactly | honesty being switched off unnoticed — see §6 | `extract/figma/dagger-census.json` |
 | doc numbers vs the repo | gated | a doc quoting a number the repo no longer produces | `scripts/docs-numbers-check.mjs` |
@@ -516,7 +519,7 @@ earlier for a different purpose.
 | components measured AND backed by a committed contract = components pinned by the drift instrument | 113 — `extract/computed/out/**/scorecard.json ∩ examples/*/contracts/*.contract.json` | 113 — `docs/22-generality.md §8.3, "pinned" total` | ✔ |
 | contracts committed under `examples/<lib>/contracts` = the coverage table's committed column | 116 — `examples/*/contracts/*.contract.json` | 116 — `docs/22-generality.md §8.3, "contracts committed" total` | ✔ |
 | the eval suite has as many result rows as it claims | 230 — `evals/results.json → results.length` | 230 — `same file → total` | ✔ |
-| every capture run carries the two-sweep determinism receipt | 243 — `extract/computed/out/**/numbers.json` | 243 — `count of numbers.json files` | ✔ |
+| every capture run carries the two-sweep determinism receipt | 244 — `extract/computed/out/**/numbers.json` | 244 — `count of numbers.json files` | ✔ |
 | every scorecard falls in a known corpus | 0 — `extract/computed/out/**/scorecard.json` | 0 — `the library registry in this script` | ✔ |
 | every round-trip execution reached the fact diff | 15 — `extract/figma/roundtrip-uui/report.json → totals.roundTripClosed` | 15 — `same file → totals.components` | ✔ |
 | Altitude — contracts on disk = the coverage table's committed column | 8 — `examples/altitude/contracts/*.contract.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
@@ -535,8 +538,10 @@ earlier for a different purpose.
 | Flowbite / Tailwind — components measured AND committed = the coverage table's pinned column | 8 — `extract/computed/out/tailwind/<comp>/scorecard.json` | 8 — `docs/22-generality.md §8.3` | ✔ |
 | Ant Design — contracts on disk = the coverage table's committed column | 12 — `examples/antd/contracts/*.contract.json` | 12 — `docs/22-generality.md §8.3` | ✔ |
 | Ant Design — components measured AND committed = the coverage table's pinned column | 12 — `extract/computed/out/antd/<comp>/scorecard.json` | 12 — `docs/22-generality.md §8.3` | ✔ |
+| Chakra UI — contracts on disk = the coverage table's committed column | 0 — `examples/chakra/contracts/*.contract.json` | 0 — `docs/22-generality.md §8.3` | ✔ |
+| Chakra UI — components measured AND committed = the coverage table's pinned column | 0 — `extract/computed/out/chakra/ (no files matched)` | 0 — `docs/22-generality.md §8.3` | ✔ |
 
-All 22 agree.
+All 24 agree.
 
 ---
 
@@ -556,12 +561,12 @@ npm run capability:fresh
 | artifact | sha256 (12) | bytes | what it supplied |
 |---|---|---|---|
 | `conformance/MANIFEST.json` | `1bd005488b35` | 147,316 | CSS/DOM frontier vocabulary |
-| `docs/22-generality.md` | `178f242658bd` | 73,465 | coverage denominators (docs/22 §8.3 table) |
+| `docs/22-generality.md` | `e6f6a0566452` | 73,967 | coverage denominators (docs/22 §8.3 table) |
 | `evals/golden.json` | `259ec554f9a0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `39197ba234ae` | 1,652,731 | capture counts + determinism receipts — 243 files |
-| `extract/computed/out/**/scorecard.json` | `eaa511f5ff6f` | 20,450,295 | computed-equality per component — 243 files |
+| `extract/computed/out/**/numbers.json` | `711bee0bf251` | 1,662,882 | capture counts + determinism receipts — 244 files |
+| `extract/computed/out/**/scorecard.json` | `883f1949203f` | 20,503,852 | computed-equality per component — 244 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `4708222bebfc` | 6,968 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |

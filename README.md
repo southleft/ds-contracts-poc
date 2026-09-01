@@ -5,29 +5,23 @@
 
 # Design System Contracts
 
-> **Current state (2026-08-31).** The active v1 plan is
-> **[docs/35 — the two-journey plan](docs/35-two-journey-v1-plan.md)**
-> (reader as mechanical source of truth; canvas→code as a co-equal pillar;
-> both held-out exams gate v1). This is **not** a ship claim. Product **v1
-> is incomplete**. The v1 *proof* surface remains **recipe-IR** under
-> `recipe/` ([docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md)):
-> archetype recipes compile to a canonical Figma-capability IR, and every
-> fact is **named or carried**. Five archetypes have stayed live Scratch
-> mints and owner-signed human grades — Button (`183:69150`), Input
-> (`115:295378`), Combobox (`163:35981`), Table (`173:48924`), Calendar
-> (`181:64873`). F1 (whole-corpus / unseen-library on the recipe path) is
-> unmet; `overallSuccess` stays false for Button, Input, Combobox, and
-> Calendar (Table keeps the `true` its v32 record already set). Named
-> leftover work: Combobox chrome remint after hardening; npm publish
-> deferred. The universal JSON contract (`contracts/*.contract.json` →
-> generate / bundle /
-> [playground](https://ds-contracts-playground.pages.dev)) still exists and
-> still powers Journeys A–C; it is **not** the v1 proof. Checks:
-> `npm run recipe:button:check`, `recipe:input-field:check`,
-> `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`,
-> `recipe:pivot-status:check`. Chronology:
-> [docs/32](docs/32-recipe-ir-pivot.md). Release bar:
-> [docs/26](docs/26-v1-definition.md).
+> **Current state (2026-08-31).** Active plan:
+> **[docs/35 — two-journey v1](docs/35-two-journey-v1-plan.md)**. Product
+> **v1 is incomplete**; `overallSuccess` stays false (Table keeps its
+> existing v32 `true`). This is **not** a ship claim. Both journeys are
+> **partially proven**, neither held-out exam is a release gate yet:
+> **code→canvas** — reader covers 13×3 boilerplate subjects
+> ([review package](recipe/evidence/boilerplate-review-package-v1/));
+> **F1 is blocked** (react-day-picker signature thrash —
+> [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/)), not passed.
+> **canvas→code** — Button apply-step + held-out AntD Card exam ran with
+> silent=0
+> ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));
+> the docs/26 F-C2C amendment is
+> **[proposed, awaiting owner sign-off](docs/26-amendment-canvas-to-code.md)**.
+> Five signed stays still stand: Button, Input, Combobox, Table, Calendar.
+> Version/npm remain owner decisions. Universal-contract Journeys A–C are
+> still not the v1 proof. Release bar: [docs/26](docs/26-v1-definition.md).
 
 **A design system's source of truth should be neither the design file nor the code — but a machine-readable *contract* that sits between them and generates both.**
 
@@ -42,15 +36,22 @@ This repository is the working proof, and the candidate reference implementation
 <a id="release-candidate-status"></a>
 
 **The RC heading is retired.** Recipe-IR never shipped as an npm release
-candidate. Product **v1 is incomplete** (F1: whole-corpus / unseen-library
-zero-silent on the recipe path). The active climb is
+candidate. Product **v1 is incomplete**. The active climb is
 [docs/35](docs/35-two-journey-v1-plan.md). A version string, a GitHub
 prerelease, or `npm i @ds-contracts/cli` is not v1-complete. No new semver
 is invented here.
 
+**What would ship vs what is proven (owner decision note):** *Proven in
+this tree* — reader + 13×3 review package; canvas→code Button apply-step;
+held-out Card exam silent=0; Phase 4 shadcn/Chakra proposed tables; five
+signed stays. *Not proven / not shippable as v1* — F1 **blocked**; F-C2C
+amendment **proposed only**; `overallSuccess` false; no recipe npm surface.
+Publishing today would ship the pre-pivot `@ds-contracts/*` envelope (or
+source-ahead unpublished RCs), not a completed two-journey v1.
+
 | Surface | What it is | What it is not |
 |---|---|---|
-| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five archetypes have stayed live Scratch mints and owner-signed human grades — Button (`183:69150`), Input (`115:295378`), Combobox (`163:35981`), Table (`173:48924`), Calendar (`181:64873`). Gates: `npm run recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`. Chronology: [docs/32](docs/32-recipe-ir-pivot.md). Release bar: [docs/26](docs/26-v1-definition.md). | Product v1. `overallSuccess` stays false except Table's existing v32 pin. F1 is unmet. Combobox chrome remint is *after hardening*; V41 is not restamped. |
+| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five signed stays — Button, Input, Combobox, Table, Calendar. Both journeys **partially** proven (reader 13×3; canvas→code held-out silent=0). Gates: `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`, plus docs/35 reader / canvas→code checks. Chronology: [docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md). | Product v1. `overallSuccess` stays false except Table's v32 pin. F1 is **blocked**. F-C2C amendment awaits owner sign-off. |
 | **Published npm (`@ds-contracts/*`)** | The **universal-contract** envelope (extract / generate / bundle / onboard). `latest` is the stable line (CLI `0.4.0`, schema `16.0.0`, emitter `0.3.0`). npm `next` still carries older package RCs (CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`). Use an exact version; do not assume `latest` or `next` is this tree. | Recipe-IR. A v1 proof. A complete product. |
 | **This source tree** | Root `package.json` still reads `1.0.0-rc.1`. CLI source is `0.5.0-rc.2`, schema `17.0.0-rc.1` (the `bindings` hoist), emitter `0.4.0-rc.2`, and `@ds-contracts/core` `0.1.0-rc.1` — source-ahead and unpublished. npm publish of a recipe surface is **deferred**. | A published recipe-IR RC. |
 | **GitHub releases** | Tags such as `v1.0.0-rc.1` exist. | The recipe-IR pivot. They **predate** merge `4caebfc5b` and still describe the universal-contract RC. |
@@ -63,7 +64,7 @@ it is **not** a claim that a recipe-IR RC is in flight. Sign-off record:
 
 **Evaluating the still-shipping universal-contract path? Two documents, and neither is honest alone.**
 
-- **What it does — [docs/24 — What Works](docs/24-what-works.md).** Generated from committed artifacts, every number carrying the file it was read from. The headline: **86.6% mean computed-style equality** for 119 third-party components measured against the original npm package rendering in the same pinned Chromium — exact string match, no tolerance, over 734834 style cells; **92.70% visual fidelity** in the other direction, over the 537 statically scorable variants of a 599-variant Figma kit; and generation that is **deterministic** — the same contract produces byte-identical output on any machine, with 291 generated files hashed against a golden manifest and no model anywhere in the path.
+- **What it does — [docs/24 — What Works](docs/24-what-works.md).** Generated from committed artifacts, every number carrying the file it was read from. The headline: **86.6% mean computed-style equality** for 120 third-party components measured against the original npm package rendering in the same pinned Chromium — exact string match, no tolerance, over 737162 style cells; **92.70% visual fidelity** in the other direction, over the 537 statically scorable variants of a 599-variant Figma kit; and generation that is **deterministic** — the same contract produces byte-identical output on any machine, with 291 generated files hashed against a golden manifest and no model anywhere in the path.
 - **What it costs — [docs/23 — Known Limitations](docs/23-known-limitations.md).** The complete inventory of what this tool does *not* do: measured coverage per library, the component classes captured nowhere, what a captured component fails to reproduce, which examples are frozen, and what each gate does and does not measure. It is the longer of the two, deliberately the least flattering document here, and it is the one worth your time before you invest any.
 
 The number that reconciles them is the denominator, which docs/24 prints **before** any mean: 101 of those measured components also carry a committed contract, and those 113 components are **11.1% of the 1015** in the seven libraries with a measured size. (The other three are captured with full receipts and deliberately held, so they count as measured but never as covered — a scorecard is not a shipped stem.) They were picked because they were the tractable ones. Read every percentage above as *"on the easy 11.1%."*
@@ -360,7 +361,7 @@ Brownfield: a mature Figma library your team drew by hand, and a mature codebase
 
 The two numbers that matter pull in opposite directions, and both are true. Both are measured in [docs/24 — What Works](docs/24-what-works.md), and both are priced in [docs/23 — Known Limitations](docs/23-known-limitations.md):
 
-**Fidelity per captured component is high — 86.6% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 116 components across nine libraries (the measured capture corpus of [docs/24 §2](docs/24-what-works.md) — shadcn/ui, Fluent 2 and Ant Design are in it, this repo's own library is not) score **86.6% mean computed-style equality** (85.9% cell-weighted over 734,834 cells; 58 of 119 at ≥90%, 92 of 119 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 119 worst-first, with nothing omitted — the worst is 50.0% (shadcn Avatar, pixel-AA-perfect 12/12; the divergence is channel-string spelling). The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
+**Fidelity per captured component is high — 86.6% mean, and every component is listed.** What lands on the canvas is the browser's own computed truth for your real component: not an approximation, not a screenshot, not a guess. Measured against the original npm package rendering, per prop combination × interaction state, as an exact string match with no tolerance and no whitelist, 116 components across nine libraries (the measured capture corpus of [docs/24 §2](docs/24-what-works.md) — shadcn/ui, Fluent 2 and Ant Design are in it, this repo's own library is not) score **86.6% mean computed-style equality** (85.9% cell-weighted over 737,162 cells; 58 of 120 at ≥90%, 93 of 120 at ≥80%). [docs/24 §3.1](docs/24-what-works.md) lists all 120 worst-first, with nothing omitted — the worst is 50.0% (shadcn Avatar, pixel-AA-perfect 12/12; the divergence is channel-string spelling). The capture runs twice and refuses if the runs disagree, which catches uncontrolled state, random ids and animation sampling before any of it reaches a contract.
 **Coverage per library is partial, and a first pass will not be your whole library.** Each foreign-library round in this repo committed between 5 and 31 components out of a library of 46 to 243 — the measured per-library coverage runs from about 2% to about 23%, and those 113 components are **11.1% of the 1015** in the seven libraries with a measured size. The per-library table with its denominators is [docs/24 §2](docs/24-what-works.md), printed there *before* any fidelity average for exactly this reason; the source of those denominators is [docs/22 §8.3](docs/22-generality.md). Budget hours per library for the recon and the config, then machine time for the capture.
 
 Beyond that, four properties you can rely on:
@@ -563,7 +564,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 21. [Bring Your Own Design System](docs/21-bring-your-own-design-system.md) · the nine-step recipe eight library rounds actually followed, the full capture-config reference, the decision guide for the parts that are still craft, and a troubleshooting table built from real failures
 22. [Generality — general engine, or just these libraries?](docs/22-generality.md) · the evidence behind the recipe: the styling-architecture matrix, the cross-library fix record (a defect found via one library repairing another's bytes in the same commit), the adversarial engine audit, and the honest ledger of where the claim leaks
 23. [**Known Limitations**](docs/23-known-limitations.md) · half of the adoption-decision pair — what it costs: measured coverage per library, the component classes captured nowhere, what a captured component does not reproduce, which examples are frozen and why, the journey verbs that do not exist, and what every gate leaves out of its denominator
-24. [**What Works**](docs/24-what-works.md) · the other half — what it does: the denominator first, then computed-style equality per library and per component (all 119, worst first), canvas→code fidelity, the round-trip fact accounting, and the pins that make each number re-derivable. Generated by `npm run capability:report`; `npm run capability:fresh` refuses if it has gone stale, and one of the 230 evals runs that refusal
+24. [**What Works**](docs/24-what-works.md) · the other half — what it does: the denominator first, then computed-style equality per library and per component (all 120, worst first), canvas→code fidelity, the round-trip fact accounting, and the pins that make each number re-derivable. Generated by `npm run capability:report`; `npm run capability:fresh` refuses if it has gone stale, and one of the 230 evals runs that refusal
 25. [Astryx Coverage Map](docs/research/astryx-coverage.md) · every component in a 93-component industry library: mirrored, gap-blocked, or behavior-bounded
 26. [Definition of v1](docs/26-v1-definition.md) · the pinned release contract and its exact evidence
 27. [Release Process](docs/27-release-process.md) · pre-pivot envelope runbook (coordinated RC build, pack, verify); recipe-IR never shipped as an npm RC

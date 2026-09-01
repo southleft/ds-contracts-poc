@@ -402,11 +402,11 @@ name** rather than folded into an average.
 
 Source of truth: the `CaptureConfig` / `ComponentConfig` interfaces in
 [`extract/computed/capture.ts`](../extract/computed/capture.ts). Worked
-examples: the 13 committed capture configs in `extract/computed/configs/`
+examples: the 14 committed capture configs in `extract/computed/configs/`
 (`carbon`, `mui`, `tailwind`, `astryx`, `polaris`, `polaris-depth`, `altitude`,
-`shadcn`, `fluent`, `antd`, plus the three HELD-OUT exam subjects
-`radix-themes`, `bootstrap5`, `day-picker`, which are prepared but deliberately
-never captured — see
+`shadcn`, `fluent`, `antd`, `chakra` — Phase 4 reader subject, docs/35 — plus
+the three HELD-OUT exam subjects `radix-themes`, `bootstrap5`, `day-picker`,
+which are prepared but deliberately never captured — see
 [`parity/receipts/v1/HELD-OUT-MANIFEST.md`](../parity/receipts/v1/HELD-OUT-MANIFEST.md))
 — read the one whose styling method is closest to yours before writing a line
 of your own.

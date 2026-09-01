@@ -13,6 +13,30 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Phase 5 final honesty pass (2026-08-31)
+
+- README / docs/35 / this Unreleased note say the same thing: product **v1
+  is incomplete**; `overallSuccess` stays false; no ship claim; no new
+  semver; no npm publish. Version and publish remain owner decisions.
+- **Landed (partial proof, not v1):** fixture reader across 13×3
+  boilerplate subjects + consolidated
+  [`boilerplate-review-package-v1`](recipe/evidence/boilerplate-review-package-v1/);
+  canvas→code Button perturbation **apply-step**; held-out canvas→code exam
+  on Scratch AntD Card with silent=0
+  ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));
+  Phase 4 reader subjects (shadcn / Chakra) as proposed tables only.
+- **Blocked / proposed only:** F1 held-out prepare is **blocked**
+  (react-day-picker day-cell signature thrash —
+  [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/)); docs/26 F-C2C
+  amendment is
+  [proposed, awaiting owner sign-off](docs/26-amendment-canvas-to-code.md).
+- Phase 5 labeling + Figma soft-archive of superseded stays already landed;
+  release remains blocked on F1 + amendment sign-off.
+- **docs:check:** Chakra Phase 4 Checkbox scorecard joins the gated capture
+  population (120 measured / 737,162 cells / mean 86.6%; still held — no
+  committed `examples/chakra/contracts/`). Coverage stays 113/1015 = 11.1%.
+  No ship claim.
+
 ### Two-journey plan adopted — Phase 5 labeling (2026-08-31)
 
 - [docs/35](docs/35-two-journey-v1-plan.md) is the active v1 climb

@@ -172,6 +172,10 @@ const LIBRARIES = [
   // examples/antd/.antd-sandbox (package.json archived at examples/antd/probe/
   // sandbox-package.json); the runner refuses a version drift by name.
   { dir: 'antd', label: 'Ant Design', pkg: 'antd@5.29.3', contracts: 'examples/antd/contracts' },
+  // Chakra UI v3 (docs/35 Phase 4 reader subject): runtime Emotion; Checkbox
+  // scorecard committed; contracts-seed only — no examples/chakra/contracts/
+  // yet, so coverage stays held (FC-COVERAGE-COUNTS-CAPTURES).
+  { dir: 'chakra', label: 'Chakra UI', pkg: '@chakra-ui/react@3.37.0', contracts: 'examples/chakra/contracts' },
 ];
 
 /* ==================================================================== READ */
@@ -572,13 +576,14 @@ if (covRows && COV_TOTAL) {
     LIBRARIES.map((l) => {
       const cov = coverage.get(l.dir);
       const measured = coveredCards.filter((s) => s.corpus === l.dir).length;
+      const sizeKnown = cov && cov.size != null;
       return [
         `${l.label} (\`${l.pkg}\`)`,
         fmt(libContracts[l.dir]),
         fmt(measured),
-        cov ? fmt(cov.size) : '**source cannot answer**',
-        cov ? `**${f1(pct(measured, cov.size))}%**` : '—',
-        cov ? '`docs/22-generality.md` §8.3' : 'no row in §8.3 matched this package id',
+        sizeKnown ? fmt(cov.size) : '**source cannot answer**',
+        sizeKnown ? `**${f1(pct(measured, cov.size))}%**` : '—',
+        sizeKnown ? '`docs/22-generality.md` §8.3' : (cov ? '§8.3 row present; library size deliberately unmeasured' : 'no row in §8.3 matched this package id'),
       ];
     }).concat([[
       '**total**', `**${fmt(FOREIGN_CONTRACTS)}**`, `**${fmt(COVERED_N)}**`, `**${fmt(COV_TOTAL.size)}**`,

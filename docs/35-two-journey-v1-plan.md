@@ -6,6 +6,20 @@
 > governs everything from here to v1. Nothing in this document mints a
 > grade or flips `overallSuccess`. Product **v1 remains INCOMPLETE**.
 >
+> **Where we are (2026-08-31 — honesty, not completion):**
+> Phases **1–3f / 4 prep** are done with **named blockers**, not a green
+> release bar. Phase **5** labeling + soft-archive of superseded Scratch
+> stays are done. Reader covers 13×3 boilerplate subjects
+> ([`boilerplate-review-package-v1`](../recipe/evidence/boilerplate-review-package-v1/));
+> Astryx theme capture is often `capture-theme-unavailable`; AntD Checkbox
+> dash height stays named-refused. Canvas→code Button apply-step + held-out
+> AntD Card exam ran with silent=0; the
+> [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **proposed,
+> awaiting owner sign-off**. F1 is **blocked** (react-day-picker signature
+> thrash — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/)), not
+> passed. **Release is blocked** on F1 + that owner amendment sign-off.
+> No semver bump. No npm publish. No `overallSuccess` flip.
+>
 > **Owner decisions adopted 2026-08-31:**
 >
 > 1. **Freeze eyeball-driven remints.** After the Checkbox v3
@@ -148,8 +162,10 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   `173:48924`, Calendar `181:64873`, Button `183:69150`, preserved
   `85:6781`.
 - Lane split for universal gates only after labels land.
-- Final honesty pass on README / site / CHANGELOG; version and npm
-  publish remain owner decisions.
+- Final honesty pass on README / CHANGELOG / this status box
+  (**landed 2026-08-31** — no ship claim). Version and npm publish remain
+  owner decisions; release still blocked on F1 + docs/26 amendment
+  sign-off.
 
 ## 8 · What this plan refuses
 
