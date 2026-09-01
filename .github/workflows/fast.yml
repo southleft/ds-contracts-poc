@@ -349,7 +349,7 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:lowering:check
       # The thirteen boilerplate archetypes' current-version generated freshness.
-      - name: recipe:boilerplate:generated:check (13 boilerplate archetypes, current version each)
+      - name: recipe:boilerplate:generated:check (13 boilerplate archetypes, current version each — compare-not-write)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:boilerplate:generated:check
       - name: recipe:live:history:test (705 per-version live test files, 5,080 assertions, ~70s)

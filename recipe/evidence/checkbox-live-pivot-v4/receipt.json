@@ -10,8 +10,41 @@
     "Ant Design": "ff3a8565ebbe2c34e83b34f8200804b9aa81be71cc4521e6b5a72bc9df4c6e56"
   },
   "writerSha256": "3e57382f1d443c93623684c2df663a01c1026961a1a1396035fd76a94fe552fc",
-  "liveFigma": false,
+  "liveFigma": true,
   "humanGrade": "queued-for-TJ",
   "overallSuccess": false,
-  "productV1": "INCOMPLETE"
+  "productV1": "INCOMPLETE",
+  "pageId": "199:78556",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=199-78556",
+  "live": {
+    "recordedFrom": "checkbox-v4-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-checkbox-v4",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-checkbox-reviewed-v1",
+        "sectionId": "199:78557",
+        "setId": "199:78638",
+        "collectionId": "VariableCollectionId:199:78558",
+        "variantCount": 6,
+        "comparedIrFacts": 211
+      },
+      {
+        "adapterIdentity": "mui-checkbox-reviewed-v1",
+        "sectionId": "199:78639",
+        "setId": "199:78719",
+        "collectionId": "VariableCollectionId:199:78640",
+        "variantCount": 6,
+        "comparedIrFacts": 205
+      },
+      {
+        "adapterIdentity": "antd-checkbox-reviewed-v1",
+        "sectionId": "199:78720",
+        "setId": "199:78801",
+        "collectionId": "VariableCollectionId:199:78721",
+        "variantCount": 6,
+        "comparedIrFacts": 211
+      }
+    ]
+  }
 }

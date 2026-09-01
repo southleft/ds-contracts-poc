@@ -10,8 +10,42 @@
     "Ant Design": "232eed6e7d36ccd21a30bd38650c3a5bc465b2c37139bf47ea056142ca8a2220"
   },
   "writerSha256": "d8cd678979362e02ac811463d58799f5f05cb6cfc5da72301f9e2cfb05c48679",
-  "liveFigma": false,
+  "liveFigma": true,
   "humanGrade": "queued-for-TJ",
   "overallSuccess": false,
-  "productV1": "INCOMPLETE"
+  "productV1": "INCOMPLETE",
+  "pageId": "211:80294",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=211-80294",
+  "live": {
+    "recordedFrom": "tabs-v5b-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Tabs / 5b025a2f-1101d121-232eed6e-tabs-v5",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-tabs-reviewed-v1",
+        "sectionId": "211:80295",
+        "setId": "211:80309",
+        "collectionId": "VariableCollectionId:211:80296",
+        "variantCount": 1,
+        "comparedIrFacts": 37
+      },
+      {
+        "adapterIdentity": "mui-tabs-reviewed-v1",
+        "sectionId": "211:80316",
+        "setId": "211:80332",
+        "collectionId": "VariableCollectionId:211:80317",
+        "variantCount": 1,
+        "comparedIrFacts": 41
+      },
+      {
+        "adapterIdentity": "antd-tabs-reviewed-v1",
+        "sectionId": "211:80339",
+        "setId": "211:80353",
+        "collectionId": "VariableCollectionId:211:80340",
+        "variantCount": 1,
+        "comparedIrFacts": 37
+      }
+    ]
+  },
+  "supersededBy": "tabs-live-pivot-v6"
 }

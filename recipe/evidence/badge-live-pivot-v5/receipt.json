@@ -9,8 +9,33 @@
     "Ant Design": "76d59843686f044cb0a0322d6301b269d893d7dd061a997ef82f5ff1aacab40c"
   },
   "writerSha256": "87fa3eec4b5516d4c1551585d5e9f3b84dee03d6fc294d4e33450881b937577c",
-  "liveFigma": false,
+  "liveFigma": true,
   "humanGrade": "queued-for-TJ",
   "overallSuccess": false,
-  "productV1": "INCOMPLETE"
+  "productV1": "INCOMPLETE",
+  "pageId": "211:80168",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=211-80168",
+  "live": {
+    "recordedFrom": "badge-v5-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-badge-v5",
+    "sources": [
+      {
+        "adapterIdentity": "mui-badge-reviewed-v1",
+        "sectionId": "211:80169",
+        "setId": "211:80184",
+        "collectionId": "VariableCollectionId:211:80170",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      },
+      {
+        "adapterIdentity": "antd-badge-reviewed-v1",
+        "sectionId": "211:80189",
+        "setId": "211:80204",
+        "collectionId": "VariableCollectionId:211:80190",
+        "variantCount": 1,
+        "comparedIrFacts": 25
+      }
+    ]
+  }
 }

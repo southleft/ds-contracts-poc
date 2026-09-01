@@ -93,13 +93,10 @@ const EXCLUDED: Record<string, string> = {
   // Laning them would have had CI quietly revert those three receipts on every
   // run. They stay out until the builders gain a real --check that compares
   // instead of writing, the way build-reader-artifacts.ts --check already does.
-  // The other ten run in recipe:boilerplate:generated:check.
-  "root:recipe:avatar:live:v1:generated:check":
-    "--check regenerates and overwrites; it downgrades receipt.liveFigma true -> false while exiting 0. Needs a compare-not-write --check first.",
-  "root:recipe:badge:live:v5:generated:check":
-    "--check regenerates and overwrites; it downgrades receipt.liveFigma true -> false while exiting 0. Needs a compare-not-write --check first.",
-  "root:recipe:chip:live:v2:generated:check":
-    "--check regenerates and overwrites; it downgrades receipt.liveFigma true -> false while exiting 0. Needs a compare-not-write --check first.",
+  // 2026-09-01: every current build script now publishes through
+  // recipe/live-proof-evidence.ts, whose --check compares and never writes and
+  // whose prepare preserves recorded mint fields — so avatar/badge/chip rejoin
+  // recipe:boilerplate:generated:check and the three exclusions are gone.
   // The four "root:recipe:input-field:live:v6:*" reasons that stood here are gone
   // with the scripts they named: every superseded per-version lane was removed
   // when the fast lane was collapsed (2,718 scripts -> 436), and an EXCLUDED

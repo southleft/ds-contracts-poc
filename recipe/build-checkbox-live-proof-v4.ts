@@ -1,5 +1,5 @@
-import { mkdirSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { publishEvidence } from "./live-proof-evidence.js";
 
 import { adaptReviewedCheckbox } from "./adapters/checkbox.js";
 import { emitCheckboxFigmaWriter } from "./checkbox-figma-writer.js";
@@ -62,13 +62,9 @@ const splitWriters = sources.map((source) => {
   return { adapterIdentity: source.adapterIdentity, ...part };
 });
 
-mkdirSync(EVIDENCE, { recursive: true });
-writeFileSync(`${EVIDENCE}/writer.js`, writer.code);
-for (const part of splitWriters)
-  writeFileSync(`${EVIDENCE}/writer-${part.adapterIdentity}.js`, part.code);
-writeFileSync(
-  `${EVIDENCE}/plan.json`,
-  JSON.stringify(
+const files: Record<string, string> = { "writer.js": writer.code };
+for (const part of splitWriters) files[`writer-${part.adapterIdentity}.js`] = part.code;
+files["plan.json"] = JSON.stringify(
     {
       pageName: writer.pageName,
       runIdentity: writer.runIdentity,
@@ -88,12 +84,11 @@ writeFileSync(
     },
     null,
     2,
-  ) + "\n",
-);
-writeFileSync(
-  `${EVIDENCE}/receipt.json`,
-  JSON.stringify(
-    {
+  ) + "\n";
+// Builder-owned receipt fields. Anything else already recorded in the
+// committed receipt (liveFigma, pageId, url, humanGrade, live) is preserved
+// by prepare and ignored by --check (recipe/live-proof-evidence.ts).
+const receiptOwned = {
       artifactVersion: "checkbox-live-pivot-v4-prepare",
       teaching:
         "MUI even-odd primary icon on paper; AntD pre-rotated L is a check; AntD dash is 8×2 not an 8×8 tile",
@@ -107,15 +102,8 @@ writeFileSync(
         ]),
       ),
       writerSha256: sha256(writer.code),
-      liveFigma: false,
-      humanGrade: "queued-for-TJ",
-      overallSuccess: false,
-      productV1: "INCOMPLETE",
-    },
-    null,
-    2,
-  ) + "\n",
-);
+};
+publishEvidence(EVIDENCE, files, receiptOwned, { check: process.argv.includes("--check") });
 
 if (process.argv.includes("--check")) {
   if (!writer.code.includes("CHECKBOX-WRITER-SET-NAME-CARRIES-COMPILE-LABEL"))
