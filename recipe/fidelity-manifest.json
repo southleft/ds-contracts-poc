@@ -190,9 +190,9 @@
     },
     {
       "label": "tabs/mui",
-      "page": "211:80209",
+      "page": "211:80360",
       "component": "tabs/variant/default :: MUI Tabs",
-      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-default-v4.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-default-v6.png",
       "reference": "extract/computed/out/mui/tabs/orig-shots/primary.primary__default.png"
     },
     {

@@ -121,6 +121,9 @@ const astryxTokens = cloneTokens("astryx.tabs", (path, fallback) => {
   if (path === "indicator.radius") return 9999;
   if (path === "indicator.opacity") return 1;
   if (path === "indicator.fill") return "#0064e0ff";
+  // Tab.tsx styles.indicator: position absolute; bottom -1px; left/right --spacing-3 12
+  if (path === "indicator.insetX") return 12;
+  if (path === "indicator.offsetY") return -1;
   if (path === "labelFontSize") return 14;
   if (path === "labelLineHeight") return 20;
   if (path === "rest.label") return "#4e606fff";
@@ -128,6 +131,7 @@ const astryxTokens = cloneTokens("astryx.tabs", (path, fallback) => {
   return fallback;
 });
 astryxTokens.lineHeightUnit = "px";
+astryxTokens.tab.contentAlign = "start"; // no alignment fact read for TabList (no capture lane); keeps the stacked start
 astryxTokens.textCase = "original";
 astryxTokens.typography = {
   rest: astryxRestFont(),
@@ -146,13 +150,18 @@ const muiTokens = cloneTokens("mui.tabs", (path, fallback) => {
   if (path === "indicator.radius") return 0;
   if (path === "indicator.opacity") return 1;
   if (path === "indicator.fill") return "#1976d2ff";
+  // ledger MuiTabs-indicator: position absolute, left 0px, bottom 0px, width = tab width
+  if (path === "indicator.insetX") return 0;
+  if (path === "indicator.offsetY") return 0;
   if (path === "labelFontSize") return 14;
   if (path === "labelLineHeight") return 125;
+  if (path === "labelLetterSpacing") return 0.4; // ledger MuiTab-root letter-spacing 0.39998px (theme.typography.button 0.02857em)
   if (path === "rest.label") return "#00000099";
   if (path === "selected.label") return "#1976d2ff";
   return fallback;
 });
 muiTokens.lineHeightUnit = "percent";
+muiTokens.tab.contentAlign = "center"; // ledger MuiTab-root display flex, flex-direction column, justify-content center, align-items center
 muiTokens.textCase = "upper";
 muiTokens.typography = { rest: muiLabelFont(), selected: muiLabelFont() };
 
@@ -168,6 +177,9 @@ const antdTokens = cloneTokens("antd.tabs", (path, fallback) => {
   if (path === "indicator.radius") return 0;
   if (path === "indicator.opacity") return 1;
   if (path === "indicator.fill") return "#1677ffff";
+  // antd/es/tabs/style ink-bar: position absolute; bottom 0; left/width follow the active tab
+  if (path === "indicator.insetX") return 0;
+  if (path === "indicator.offsetY") return 0;
   if (path === "labelFontSize") return 14;
   if (path === "labelLineHeight") return 22;
   if (path === "rest.label") return "#000000e0";
@@ -175,6 +187,7 @@ const antdTokens = cloneTokens("antd.tabs", (path, fallback) => {
   return fallback;
 });
 antdTokens.lineHeightUnit = "px";
+antdTokens.tab.contentAlign = "center"; // antd/es/tabs/style/index.js .ant-tabs-tab alignItems center
 antdTokens.textCase = "original";
 antdTokens.typography = { rest: antdLabelFont(), selected: antdLabelFont() };
 
@@ -234,7 +247,7 @@ export const antdTabsSource: ReviewedTabsSource = {
   framework: "react",
   sourceRoot: "examples/antd/.antd-sandbox/node_modules/antd/es/tabs",
   anatomy: {
-    root: "antd/es/tabs/index.js type unnamed — rc-tabs line is the named default. Polar ink-bar position absolute receipted; bind lineWidthBold 2 + inkBarColor to the selected child.",
+    root: "antd/es/tabs/index.js type unnamed — rc-tabs line is the named default. ink-bar position absolute, bottom 0, active-tab width — carried as insetX 0 / offsetY 0 on the selected child; lineWidthBold 2 + inkBarColor.",
     control:
       "prepareComponentToken inkBarColor colorPrimary #1677ff; horizontalItemPadding paddingSM 12 0; horizontalItemGutter 32 (Fixed Value).",
     label: "titleFontSize fontSize 14 / lineHeight 22. itemColor colorText #000000e0; itemSelectedColor colorPrimary #1677ff",
@@ -279,11 +292,12 @@ const tokenFacts = (
     if (
       path.startsWith("tokens.typography") ||
       path === "tokens.textCase" ||
-      path === "tokens.lineHeightUnit"
+      path === "tokens.lineHeightUnit" ||
+      path === "tokens.tab.contentAlign"
     ) {
       facts.push({
         occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
-        category: "typography",
+        category: path === "tokens.tab.contentAlign" ? "geometry" : "typography",
         source: {
           kind: "review",
           evidence: `${evidence}; reviewed ${path}=${String(value)}`,
@@ -336,13 +350,6 @@ const makeRefusals = (
 
 const astryxRefusals = makeRefusals("astryx", [
   {
-    id: "refusal-polar-indicator",
-    evidence:
-      "Tab.tsx styles.indicator position absolute; bottom -1px; left/right --spacing-3 12 — Polar inset is receipted; indicator binds to the selected child",
-    target: "Astryx Tab Polar indicator inset",
-    reason: "no-figma-primitive",
-  },
-  {
     id: "refusal-tabmenu",
     evidence: "TabMenu overflow is not a shared axis",
     target: "Astryx TabMenu",
@@ -358,13 +365,6 @@ const astryxRefusals = makeRefusals("astryx", [
 
 const muiRefusals = makeRefusals("mui", [
   {
-    id: "refusal-polar-indicator",
-    evidence:
-      "TabsIndicator position absolute; width 100%; bottom 0 — Polar attachment receipted; height 2 + primary bind to the selected child",
-    target: "MUI Tabs Polar indicator",
-    reason: "no-figma-primitive",
-  },
-  {
     id: "refusal-scrollable",
     evidence: "scrollable / scrollButtons auto are not a shared axis",
     target: "MUI Tabs scrollable",
@@ -379,13 +379,6 @@ const muiRefusals = makeRefusals("mui", [
 ]);
 
 const antdRefusals = makeRefusals("antd", [
-  {
-    id: "refusal-polar-inkbar",
-    evidence:
-      "ink-bar position absolute + lineWidthBold 2 — Polar offsets receipted; bind 2 + inkBarColor to the selected child",
-    target: "AntD Tabs Polar ink-bar",
-    reason: "no-figma-primitive",
-  },
   {
     id: "refusal-card",
     evidence: "card / editable-card are not the named line default",

@@ -225,16 +225,22 @@ const EXTRA_KEYS = [
   "lineHeightUnit",
   "decoration",
   "textCase",
+  // Nested string leaf (tabs@1): the tab's content alignment. EXTRA_KEYS are
+  // resolved as dotted paths below, so a nested spelling is allowed.
+  "tab.contentAlign",
 ] as const;
+
+const atPath = (tokens: Record<string, unknown>, dotted: string): unknown =>
+  dotted.split(".").reduce<unknown>((cur, part) => (cur && typeof cur === "object" ? (cur as Record<string, unknown>)[part] : undefined), tokens);
 
 function extrasFor(tokens: Record<string, unknown>, mappings: FactMapping[]): Map<string, number | string> {
   const mapped = new Set(mappings.map((m) => m.path));
   const out = new Map<string, number | string>();
   for (const k of EXTRA_KEYS) {
     if (!mapped.has(k)) continue;
-    if (k in tokens && (typeof tokens[k] === "string" || typeof tokens[k] === "boolean" || typeof tokens[k] === "number")) {
-      const v = tokens[k];
-      out.set(k, typeof v === "boolean" ? String(v) : (v as string | number));
+    const v = atPath(tokens, k);
+    if (typeof v === "string" || typeof v === "boolean" || typeof v === "number") {
+      out.set(k, typeof v === "boolean" ? String(v) : v);
     }
   }
   const typo = tokens.typography as Record<string, Typo> | undefined;

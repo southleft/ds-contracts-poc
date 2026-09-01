@@ -164,8 +164,8 @@
     {
       "label": "tabs/mui",
       "status": "fail",
-      "pctAAMasked": 18.07,
-      "canvasPx": "162x17",
+      "pctAAMasked": 7.73,
+      "canvasPx": "184x30",
       "realPx": "183x31",
       "convergesAt": null
     },

@@ -15,8 +15,8 @@
       "cause": "49.08%. Both sides render 'Link' in a serif fallback (MUI Link variant=inherit inherits the unstyled stage); 26x13 vs 31x14 is fallback-font metrics on both renderers, not geometry the recipe decided."
     },
     "tabs/mui": {
-      "class": "real-defect",
-      "cause": "18.07% (tabs v4). Labels, count, colours and the 48px tab now match the two-item capture. The indicator is drawn label-wide directly under the text (y=30, 69x2); MUI positions it absolute at the tab's bottom edge (y=46) across the full tab width including padding (101x2). library-tabs.ts receipted the 100% width as Polar and the recipe stacked it under the label — invented placement, the same class as the alert disc. Fix: absolute bottom-stretch indicator."
+      "class": "font-substrate",
+      "cause": "7.73% (tabs v6; was 14.73% → 18.07% → 12.09%). The indicator is now an absolute bottom-stretched overlay (ledger: position absolute, left 0, bottom 0, width = tab), the label is centred in the 48px tab (ledger: flex column, justify/align center) and letter-spacing 0.4px is carried; ink 184x30 vs 183x31. What remains is uppercase Roboto Medium rasterised by Figma vs Chromium across two 8-glyph labels plus a 1px AA line on the indicator edge — no geometry the recipe decided."
     },
     "textarea/astryx": {
       "class": "real-defect",

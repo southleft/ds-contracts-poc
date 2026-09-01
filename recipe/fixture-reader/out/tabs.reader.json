@@ -98,6 +98,22 @@
         "evidence": "docs/34 Astryx Tabs — no extract/computed capture subject"
       },
       {
+        "path": "indicator.insetX",
+        "fixtureValue": 12,
+        "verdict": "receipt",
+        "proposedValue": 12,
+        "receipt": "the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs",
+        "evidence": "docs/34 Astryx Tabs — no extract/computed capture subject"
+      },
+      {
+        "path": "indicator.offsetY",
+        "fixtureValue": -1,
+        "verdict": "receipt",
+        "proposedValue": -1,
+        "receipt": "the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs",
+        "evidence": "docs/34 Astryx Tabs — no extract/computed capture subject"
+      },
+      {
         "path": "labelFontSize",
         "fixtureValue": 14,
         "verdict": "receipt",
@@ -146,6 +162,22 @@
         "evidence": "docs/34 Astryx Tabs — no extract/computed capture subject"
       },
       {
+        "path": "tab.contentAlign",
+        "fixtureValue": "start",
+        "verdict": "receipt",
+        "proposedValue": "start",
+        "receipt": "the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs",
+        "evidence": "docs/34 Astryx Tabs — no extract/computed capture subject"
+      },
+      {
+        "path": "labelLetterSpacing",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs",
+        "evidence": "docs/34 Astryx Tabs — no extract/computed capture subject"
+      },
+      {
         "path": "typography.rest.family",
         "fixtureValue": "-apple-system",
         "verdict": "receipt",
@@ -181,7 +213,7 @@
     "counts": {
       "match": 0,
       "drift": 0,
-      "receipt": 21,
+      "receipt": 25,
       "unread": 0
     }
   },
@@ -304,6 +336,26 @@
         ]
       },
       {
+        "path": "indicator.insetX",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTabs-indicator.left"
+        ]
+      },
+      {
+        "path": "indicator.offsetY",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTabs-indicator.bottom"
+        ]
+      },
+      {
         "path": "labelFontSize",
         "fixtureValue": 14,
         "verdict": "match",
@@ -362,6 +414,27 @@
         "evidence": "reviewed upper"
       },
       {
+        "path": "tab.contentAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "MuiTab-root justify-content center / align-items center — recipe spelling of the flex centring",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "labelLetterSpacing",
+        "fixtureValue": 0.4,
+        "verdict": "match",
+        "capturedValue": 0.4,
+        "proposedValue": 0.4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.letter-spacing"
+        ],
+        "formula": "letter-spacing px (theme.typography.button 0.02857em at 14px)",
+        "tolerance": 0.001,
+        "toleranceReason": "ledger 0.39998px is the browser's rendering of 0.02857em; the fixture carries the design value 0.4"
+      },
+      {
         "path": "typography.rest.family",
         "fixtureValue": "Roboto",
         "verdict": "match",
@@ -403,9 +476,9 @@
       }
     ],
     "counts": {
-      "match": 18,
+      "match": 21,
       "drift": 0,
-      "receipt": 3,
+      "receipt": 4,
       "unread": 0
     }
   },
@@ -508,6 +581,22 @@
         "evidence": "extract/computed/configs/antd.json components list has no Tabs"
       },
       {
+        "path": "indicator.insetX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention",
+        "evidence": "extract/computed/configs/antd.json components list has no Tabs"
+      },
+      {
+        "path": "indicator.offsetY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention",
+        "evidence": "extract/computed/configs/antd.json components list has no Tabs"
+      },
+      {
         "path": "labelFontSize",
         "fixtureValue": 14,
         "verdict": "receipt",
@@ -556,6 +645,22 @@
         "evidence": "extract/computed/configs/antd.json components list has no Tabs"
       },
       {
+        "path": "tab.contentAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention",
+        "evidence": "extract/computed/configs/antd.json components list has no Tabs"
+      },
+      {
+        "path": "labelLetterSpacing",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention",
+        "evidence": "extract/computed/configs/antd.json components list has no Tabs"
+      },
+      {
         "path": "typography.rest.family",
         "fixtureValue": "-apple-system",
         "verdict": "receipt",
@@ -591,7 +696,7 @@
     "counts": {
       "match": 0,
       "drift": 0,
-      "receipt": 21,
+      "receipt": 25,
       "unread": 0
     }
   }

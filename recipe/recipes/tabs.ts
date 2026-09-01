@@ -84,15 +84,23 @@ export interface TabsRecipeInstance {
       minWidth: TabsNumberParameter;
       minHeight: TabsNumberParameter;
       fill: TabsColorParameter;
+      /** How the label sits in the tab box: MUI/AntD centre it (flex, justify/align center); a "start" tab stacks from the top padding. */
+      contentAlign: "start" | "center";
     };
     indicator: {
       height: TabsNumberParameter;
       radius: TabsNumberParameter;
       opacity: TabsNumberParameter;
       fill: TabsColorParameter;
+      /** Horizontal inset from each edge of the selected tab (MUI 0: width 100%; Astryx 12: left/right --spacing-3). */
+      insetX: TabsNumberParameter;
+      /** Distance of the indicator's bottom edge from the tab's bottom edge; negative hangs below (Astryx bottom -1). */
+      offsetY: TabsNumberParameter;
     };
     labelFontSize: TabsNumberParameter;
     labelLineHeight: TabsNumberParameter;
+    /** px; MUI button typography letterSpacing 0.02857em = 0.4px at 14px (ledger 0.39998px). */
+    labelLetterSpacing: TabsNumberParameter;
     lineHeightUnit: "px" | "auto" | "percent";
     textCase: "original" | "upper";
     rest: { label: TabsColorParameter };
@@ -166,15 +174,19 @@ export const TabsRecipeInstanceSchema = z.strictObject({
       minWidth: NumberParameterSchema,
       minHeight: NumberParameterSchema,
       fill: ColorParameterSchema,
+      contentAlign: z.enum(["start", "center"]),
     }),
     indicator: z.strictObject({
       height: NumberParameterSchema,
       radius: NumberParameterSchema,
       opacity: NumberParameterSchema,
       fill: ColorParameterSchema,
+      insetX: NumberParameterSchema,
+      offsetY: NumberParameterSchema,
     }),
     labelFontSize: NumberParameterSchema,
     labelLineHeight: NumberParameterSchema,
+    labelLetterSpacing: NumberParameterSchema,
     lineHeightUnit: z.enum(["px", "auto", "percent"]),
     textCase: z.enum(["original", "upper"]),
     rest: z.strictObject({ label: ColorParameterSchema }),
@@ -279,6 +291,7 @@ const labelNode = (
       fontProvenance: font,
       fontSize: instance.tokens.labelFontSize.fallback,
       lineHeight: lineHeightOf(instance),
+      letterSpacing: { unit: "px", value: instance.tokens.labelLetterSpacing.fallback },
       textCase: instance.tokens.textCase,
     },
     align: "center",
@@ -288,6 +301,7 @@ const labelNode = (
     height: hug,
     bindings: [
       bind("type.fontSize", instance.tokens.labelFontSize),
+      bind("type.letterSpacing.value", instance.tokens.labelLetterSpacing),
       ...lineHeightBindings(instance),
       bind("fills.0.color", color),
     ],
@@ -309,6 +323,21 @@ const indicatorNode = (instance: TabsRecipeInstance): FrameNode => ({
     height: {
       mode: "fixed",
       value: instance.tokens.indicator.height.fallback,
+    },
+    // The indicator is an ABSOLUTE overlay pinned to the bottom of the
+    // selected tab and stretched between insetX from each edge — the named
+    // library facts (MUI: position absolute, left 0, bottom 0, width 100%;
+    // Astryx: bottom -1, left/right 12). Until 2026-09-01 it sat in the
+    // vertical flow under the label at label width, an invented placement
+    // that measured 18% against the real render.
+    positioning: "absolute",
+    constraints: { horizontal: "stretch", vertical: "bottom" },
+    // Carried as literals: the IR does not variable-bind an offset (the same
+    // as the badge indicator translate), so insetX/offsetY are named facts
+    // without a Figma variable behind them.
+    offset: {
+      x: instance.tokens.indicator.insetX.fallback,
+      y: instance.tokens.indicator.offsetY.fallback,
     },
   },
   fills: [solid(instance.tokens.indicator.fill.fallback)],
@@ -342,8 +371,11 @@ const itemNode = (
     label: `tabs/item/${which}`,
     layout: {
       mode: "vertical",
-      primaryAxisAlign: "min",
-      counterAxisAlign: "min",
+      // MUI Tab: display flex column, justify-content center, align-items
+      // center (ledger); AntD .ant-tabs-tab align-items center. The label
+      // sits centred inside the minHeight box, not at the top padding.
+      primaryAxisAlign: instance.tokens.tab.contentAlign === "center" ? "center" : "min",
+      counterAxisAlign: instance.tokens.tab.contentAlign === "center" ? "center" : "min",
       itemSpacing: 0,
       padding: {
         top: instance.tokens.tab.paddingY.fallback,
@@ -540,6 +572,15 @@ export function validateTabsStructure(root: IRNode): void {
     throw new RecipeRefusal(TABS_RECIPE_REF, [
       "indicator height is the named 2px host fact",
     ]);
+  if (
+    indicator.layout.positioning !== "absolute" ||
+    indicator.layout.constraints?.horizontal !== "stretch" ||
+    indicator.layout.constraints?.vertical !== "bottom" ||
+    !indicator.layout.offset
+  )
+    throw new RecipeRefusal(TABS_RECIPE_REF, [
+      "indicator is an absolute bottom-stretched overlay with a named inset and bottom offset — never a flow child under the label",
+    ]);
   direct(selected, "tabs/label", "text");
   direct(rest, "tabs/label", "text");
 }
@@ -658,6 +699,7 @@ export function collapseTabsRecipe(
           "fills.0.color",
           solidColor(selected.fills[0], selected.role!),
         ),
+        contentAlign: selected.layout.primaryAxisAlign === "center" ? "center" : "start",
       },
       indicator: {
         height: numberFrom(
@@ -681,11 +723,25 @@ export function collapseTabsRecipe(
           "fills.0.color",
           solidColor(indicator.fills[0], indicator.role!),
         ),
+        // Literal facts (no variable binding on an offset — see indicatorNode).
+        insetX: {
+          variable: `${envelope.id}.indicator-insetX`,
+          fallback: indicator.layout.offset?.x ?? 0,
+        },
+        offsetY: {
+          variable: `${envelope.id}.indicator-offsetY`,
+          fallback: indicator.layout.offset?.y ?? 0,
+        },
       },
       labelFontSize: numberFrom(
         selectedLabel,
         "type.fontSize",
         selectedLabel.type.fontSize,
+      ),
+      labelLetterSpacing: numberFrom(
+        selectedLabel,
+        "type.letterSpacing.value",
+        selectedLabel.type.letterSpacing?.value ?? 0,
       ),
       labelLineHeight:
         selectedLabel.type.lineHeight.unit === "auto"
