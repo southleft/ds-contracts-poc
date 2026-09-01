@@ -1,16 +1,13 @@
-# Proposed docs/26 amendment — canvas→code held-out exam (3f)
+# docs/26 amendment — canvas→code held-out exam (3f)
 
-> **Status: PROPOSED — awaiting owner sign-off.**
-> This sibling of [docs/26](26-v1-definition.md) does **not** flip any existing
-> F-checklist row, does **not** flip `overallSuccess`, and does **not** claim
-> product v1. It records the amendment that [docs/35](35-two-journey-v1-plan.md)
-> §5 3f / §6 requires before the canvas→code held-out exam can enter the
-> release contract.
->
-> Adopted direction (docs/35 owner decisions): canvas→code is a co-equal
-> pillar with code→canvas; both held-out exams gate v1. Stamping this
-> amendment into docs/26 itself is an **explicit owner action**, not an
-> agent side-effect.
+> **Status: ADOPTED 2026-08-31** by the owner in session (TJ: “go with your
+> recommendation”). The requirement now lives as **V1-JOURNEY-04** in
+> [docs/26](26-v1-definition.md) and as **F-C2C** in the
+> [docs/32 F-checklist](32-recipe-ir-pivot.md#merge-execution-2026-08-30).
+> This sibling stays as the attributable sign-off record. It does **not**
+> flip `overallSuccess` and does **not** claim product v1. npm publish
+> stays deferred until F1 and this gate are both honest on the same
+> release commit.
 
 ## Proposed F-checklist addition
 
@@ -20,7 +17,7 @@ Add one row beside the existing F1–F6 walk in
 
 | row | proposed verdict language |
 | --- | --- |
-| **F-C2C** canvas→code held-out exam (docs/35 §5 3f) | **PROPOSED gate.** A component set the recipe path never minted as a first-class stay goes committed-observe → canvas facts → bridge → emit → Chromium computed-style diff with **zero silent losses**. Evidence: `recipe/evidence/canvas-to-code-held-out-v1/`; gate: `npm run recipe:canvas-to-code:held-out:check`. Passing the gate proves accounting honesty on a held-out substrate — it does **not** alone flip product v1 or any archetype `overallSuccess`. |
+| **F-C2C** canvas→code held-out exam (docs/35 §5 3f) | **ADOPTED gate (2026-08-31).** A component set the recipe path never minted as a first-class stay goes committed-observe → canvas facts → bridge → emit → Chromium computed-style diff with **zero silent losses**. Evidence: `recipe/evidence/canvas-to-code-held-out-v1/`; gate: `npm run recipe:canvas-to-code:held-out:check`. Passing the gate proves accounting honesty on a held-out substrate — it does **not** alone flip product v1 or any archetype `overallSuccess`. |
 
 ## Exact acceptance command (proposed)
 
@@ -48,12 +45,11 @@ npm run recipe:canvas-to-code:held-out:check
 
 ## Owner sign-off checklist
 
-When adopting, the owner should:
+Done 2026-08-31 (TJ in session):
 
-1. Paste the F-C2C row into the docs/32 merge-execution F-checklist (or the
-   docs/26 requirements table) with an attributable date and name.
-2. Confirm the held-out substrate (or name a replacement) remains acceptable.
-3. Leave product v1 **incomplete** until **both** F1 (code→canvas held-out)
-   and F-C2C pass under the same release commit.
-4. Delete or archive this sibling file only after the text lives in docs/26 /
-   docs/32 under sign-off — do not silently absorb it.
+1. F-C2C row is in the docs/32 merge-execution F-checklist and docs/26
+   Journey A recipe canvas→code requirement, dated and attributable.
+2. Held-out substrate remains the Scratch AntD exam Card (`33:5093`).
+3. Product v1 stays **incomplete** until F1 (code→canvas held-out) also
+   passes under the same release commit. npm stays deferred.
+4. This sibling stays as the sign-off record; it is not silently absorbed.

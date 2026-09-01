@@ -14,10 +14,10 @@
 > Astryx theme capture is often `capture-theme-unavailable`; AntD Checkbox
 > dash height stays named-refused. Canvas→code Button apply-step + held-out
 > AntD Card exam ran with silent=0; the
-> [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **proposed,
-> awaiting owner sign-off**. F1 is **blocked** (react-day-picker signature
+> [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **adopted
+> 2026-08-31** (owner). F1 is **blocked** (react-day-picker signature
 > thrash — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/)), not
-> passed. **Release is blocked** on F1 + that owner amendment sign-off.
+> passed. **Release is blocked** on F1. npm stays deferred.
 > No semver bump. No npm publish. No `overallSuccess` flip.
 >
 > **Owner decisions adopted 2026-08-31:**
@@ -38,8 +38,9 @@
 >    re-render, mechanical diff) is a co-equal pillar with its own
 >    held-out exam. A formal amendment to the
 >    [docs/26](26-v1-definition.md) F-checklist adding the canvas→code
->    exam will be written and presented for explicit owner sign-off —
->    it is adopted in direction here, not silently stamped there.
+>    exam is now **adopted** (2026-08-31 owner sign-off) as the
+>    docs/26 Journey A recipe canvas→code row + docs/32 F-C2C. It does
+>    not complete v1.
 > 4. **Cleanup is labeling, not moving.** Old universal-contract surfaces
 >    (`core/`, `playground/`, `packages/`, site Journeys A–C) are
 >    CI-load-bearing (~78 importers of `core/`). Quarantine = LEGACY

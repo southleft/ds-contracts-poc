@@ -11,6 +11,7 @@ export const REQUIREMENT_IDS = Object.freeze([
   'V1-JOURNEY-01',
   'V1-JOURNEY-02',
   'V1-JOURNEY-03',
+  'V1-JOURNEY-04',
   'V1-CLASS-01',
   'V1-CLASS-02',
   'V1-CLASS-03',

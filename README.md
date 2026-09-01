@@ -18,7 +18,7 @@
 > silent=0
 > ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));
 > the docs/26 F-C2C amendment is
-> **[proposed, awaiting owner sign-off](docs/26-amendment-canvas-to-code.md)**.
+> **[adopted 2026-08-31](docs/26-amendment-canvas-to-code.md)**.
 > Five signed stays still stand: Button, Input, Combobox, Table, Calendar.
 > Version/npm remain owner decisions. Universal-contract Journeys A–C are
 > still not the v1 proof. Release bar: [docs/26](docs/26-v1-definition.md).
@@ -45,13 +45,13 @@ is invented here.
 this tree* — reader + 13×3 review package; canvas→code Button apply-step;
 held-out Card exam silent=0; Phase 4 shadcn/Chakra proposed tables; five
 signed stays. *Not proven / not shippable as v1* — F1 **blocked**; F-C2C
-amendment **proposed only**; `overallSuccess` false; no recipe npm surface.
+adopted but does not complete v1; `overallSuccess` false; no recipe npm surface.
 Publishing today would ship the pre-pivot `@ds-contracts/*` envelope (or
 source-ahead unpublished RCs), not a completed two-journey v1.
 
 | Surface | What it is | What it is not |
 |---|---|---|
-| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five signed stays — Button, Input, Combobox, Table, Calendar. Both journeys **partially** proven (reader 13×3; canvas→code held-out silent=0). Gates: `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`, plus docs/35 reader / canvas→code checks. Chronology: [docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md). | Product v1. `overallSuccess` stays false except Table's v32 pin. F1 is **blocked**. F-C2C amendment awaits owner sign-off. |
+| **Proven (this repo)** | **Recipe-IR** is the v1 *proof* surface. Five signed stays — Button, Input, Combobox, Table, Calendar. Both journeys **partially** proven (reader 13×3; canvas→code held-out silent=0). Gates: `recipe:button:check`, `recipe:input-field:check`, `recipe:combobox:check`, `recipe:table:check`, `recipe:calendar:check`, plus docs/35 reader / canvas→code checks. Chronology: [docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md). | Product v1. `overallSuccess` stays false except Table's v32 pin. F1 is **blocked**. F-C2C is adopted and does not complete v1. |
 | **Published npm (`@ds-contracts/*`)** | The **universal-contract** envelope (extract / generate / bundle / onboard). `latest` is the stable line (CLI `0.4.0`, schema `16.0.0`, emitter `0.3.0`). npm `next` still carries older package RCs (CLI `0.5.0-rc.1`, schema `16.1.0-rc.1`, emitter `0.4.0-rc.1`). Use an exact version; do not assume `latest` or `next` is this tree. | Recipe-IR. A v1 proof. A complete product. |
 | **This source tree** | Root `package.json` still reads `1.0.0-rc.1`. CLI source is `0.5.0-rc.2`, schema `17.0.0-rc.1` (the `bindings` hoist), emitter `0.4.0-rc.2`, and `@ds-contracts/core` `0.1.0-rc.1` — source-ahead and unpublished. npm publish of a recipe surface is **deferred**. | A published recipe-IR RC. |
 | **GitHub releases** | Tags such as `v1.0.0-rc.1` exist. | The recipe-IR pivot. They **predate** merge `4caebfc5b` and still describe the universal-contract RC. |
