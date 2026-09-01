@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reader v1 — Chromium capture vs minted Figma v3 (Checkbox + Textarea)</title>
+<style>
+  body { font: 14px/1.5 -apple-system, system-ui, sans-serif; margin: 24px; background: #f6f7f8; color: #1a1d21; }
+  h1 { font-size: 20px; } h2 { font-size: 17px; margin-top: 40px; } h3 { font-size: 14px; margin: 18px 0 6px; }
+  .note { max-width: 72em; background: #fff7e0; border: 1px solid #e6d9a8; padding: 10px 14px; border-radius: 6px; }
+  .pair { display: flex; gap: 24px; align-items: flex-start; flex-wrap: wrap; }
+  .col { background: #fff; border: 1px solid #d6dade; border-radius: 8px; padding: 12px; }
+  .col h4 { margin: 0 0 8px; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: #555; }
+  .shots { display: flex; gap: 8px; flex-wrap: wrap; }
+  figure { margin: 0; text-align: center; }
+  figure img { border: 1px solid #e2e5e8; background: #fff; image-rendering: -webkit-optimize-contrast; }
+  figcaption { font-size: 11px; color: #666; margin-top: 2px; max-width: 180px; }
+  .figma img { max-width: 100%; height: auto; }
+  .counts { font-size: 13px; color: #333; }
+  code { background: #eef0f2; padding: 1px 4px; border-radius: 3px; font-size: 12px; }
+</style>
+</head>
+<body>
+<h1>Reader v1 — the real npm package beside the minted Figma page</h1>
+<p class="note">
+  Phase 1 of <code>docs/35</code> (the reader). LEFT of each pair: Chromium screenshots of the
+  <strong>real npm package</strong> from the committed capture runs
+  (<code>extract/computed/out/&lt;lib&gt;/&lt;component&gt;/orig-shots/</code> — the same runs that produced the
+  captured-truth ledgers the fixture-drift gate reads). RIGHT: a <strong>read-only PNG export</strong> of the
+  latest minted Figma v3 page (checkbox <code>198:77718</code>, textarea <code>198:77456</code>, Scratch file
+  <code>byMp6lt0Ij9b2QbkDGFwBh</code> — no Figma writes were made). Per-fact agreement is the machine's job:
+  see <code>recipe/fixture-reader/out/DRIFT-REPORT.md</code>. This sheet exists so owner review is
+  compare-two-images, not re-derive-from-source. <strong>No grade is minted here; overallSuccess stays false.</strong>
+</p>
+
+<h2>Checkbox — minted Figma v3 page (Astryx · MUI · Ant Design)</h2>
+<div class="col figma">
+  <h4>Minted Figma v3 — page 198:77718 (read-only export, scale 1)</h4>
+  <img src="figma-checkbox-v3-198-77718.png" alt="Figma checkbox v3 page">
+</div>
+
+<h3>Astryx CheckboxInput — @astryxdesign/core@0.1.6 (Theme neutralTheme mount)</h3>
+<p class="counts">Reader: 26 match · 19 drift (all carried: theme-mount divergence — the fixture transcribed the unthemed astryx.css fallbacks; the documented Theme mount renders #262626/#d4d4d4/#737373/Figtree) · 10 receipts.</p>
+<div class="pair"><div class="col"><h4>Real npm package (Chromium, md size)</h4><div class="shots">
+  <figure><img src="../../../extract/computed/out/astryx/checkboxinput/orig-shots/unchecked.md.no-isDisabled__default.png" alt=""><figcaption>unchecked · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/checkboxinput/orig-shots/unchecked.md.isDisabled__default.png" alt=""><figcaption>unchecked · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/checkboxinput/orig-shots/checked.md.no-isDisabled__default.png" alt=""><figcaption>checked · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/checkboxinput/orig-shots/checked.md.isDisabled__default.png" alt=""><figcaption>checked · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/checkboxinput/orig-shots/indeterminate.md.no-isDisabled__default.png" alt=""><figcaption>indeterminate · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/checkboxinput/orig-shots/indeterminate.md.isDisabled__default.png" alt=""><figcaption>indeterminate · disabled</figcaption></figure>
+</div></div></div>
+
+<h3>MUI Checkbox — @mui/material@9.2.0 (bare control; FormControlLabel is a reviewed pairing)</h3>
+<p class="counts">Reader: 24 match · 0 drift · 31 receipts (no label mounted; icon-anatomy lowerings named). The even-odd tick path verifies structurally against the ledger.</p>
+<div class="pair"><div class="col"><h4>Real npm package (Chromium)</h4><div class="shots">
+  <figure><img src="../../../extract/computed/out/mui/checkbox/orig-shots/unchecked.enabled__default.png" alt=""><figcaption>unchecked · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/checkbox/orig-shots/unchecked.disabled__default.png" alt=""><figcaption>unchecked · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/checkbox/orig-shots/checked.enabled__default.png" alt=""><figcaption>checked · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/checkbox/orig-shots/checked.disabled__default.png" alt=""><figcaption>checked · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/checkbox/orig-shots/indeterminate.enabled__default.png" alt=""><figcaption>indeterminate · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/checkbox/orig-shots/indeterminate.disabled__default.png" alt=""><figcaption>indeterminate · disabled</figcaption></figure>
+</div></div></div>
+
+<h3>Ant Design Checkbox — antd@5.29.3</h3>
+<p class="counts">Reader: 42 match · 1 drift (the 8×2-dash-vs-8×8-square lowering, carried by name) · 12 receipts. The baked-45° check geometry verifies mechanically from the ::after legs.</p>
+<div class="pair"><div class="col"><h4>Real npm package (Chromium)</h4><div class="shots">
+  <figure><img src="../../../extract/computed/out/antd/checkbox/orig-shots/unchecked.enabled__default.png" alt=""><figcaption>unchecked · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/checkbox/orig-shots/unchecked.disabled__default.png" alt=""><figcaption>unchecked · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/checkbox/orig-shots/checked.enabled__default.png" alt=""><figcaption>checked · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/checkbox/orig-shots/checked.disabled__default.png" alt=""><figcaption>checked · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/checkbox/orig-shots/indeterminate.enabled__default.png" alt=""><figcaption>indeterminate · enabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/checkbox/orig-shots/indeterminate.disabled__default.png" alt=""><figcaption>indeterminate · disabled</figcaption></figure>
+</div></div></div>
+
+<h2>Textarea — minted Figma v3 page (Astryx · MUI · Ant Design)</h2>
+<div class="col figma">
+  <h4>Minted Figma v3 — page 198:77456 (read-only export, scale 1)</h4>
+  <img src="figma-textarea-v3-198-77456.png" alt="Figma textarea v3 page">
+</div>
+
+<h3>Astryx TextArea — @astryxdesign/core@0.1.6 (Theme neutralTheme mount)</h3>
+<p class="counts">Reader: 19 match · 15 drift (all carried: the same theme-mount divergence) · 5 receipts.</p>
+<div class="pair"><div class="col"><h4>Real npm package (Chromium)</h4><div class="shots">
+  <figure><img src="../../../extract/computed/out/astryx/textarea/orig-shots/empty.no-isDisabled__default.png" alt=""><figcaption>empty · enabled · rest</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/textarea/orig-shots/empty.no-isDisabled__focus-visible.png" alt=""><figcaption>empty · enabled · focus</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/textarea/orig-shots/empty.isDisabled__default.png" alt=""><figcaption>empty · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/textarea/orig-shots/value.no-isDisabled__default.png" alt=""><figcaption>value · enabled · rest</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/textarea/orig-shots/value.no-isDisabled__focus-visible.png" alt=""><figcaption>value · enabled · focus</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/astryx/textarea/orig-shots/value.isDisabled__default.png" alt=""><figcaption>value · disabled</figcaption></figure>
+</div></div></div>
+
+<h3>MUI TextField multiline — @mui/material@9.2.0 (no standalone Textarea export)</h3>
+<p class="counts">Reader: 36 match · 0 drift · 3 receipts. Rest-empty hides the placeholder (::placeholder opacity 0 at rest — read at focus); the Content=value shrink plane (−9px, ×0.75) verifies from the label transform.</p>
+<div class="pair"><div class="col"><h4>Real npm package (Chromium)</h4><div class="shots">
+  <figure><img src="../../../extract/computed/out/mui/textarea/orig-shots/empty.enabled__default.png" alt=""><figcaption>empty · enabled · rest</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/textarea/orig-shots/empty.enabled__focus-visible.png" alt=""><figcaption>empty · enabled · focus</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/textarea/orig-shots/empty.disabled__default.png" alt=""><figcaption>empty · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/textarea/orig-shots/value.enabled__default.png" alt=""><figcaption>value · enabled · rest</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/textarea/orig-shots/value.enabled__focus-visible.png" alt=""><figcaption>value · enabled · focus</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/mui/textarea/orig-shots/value.disabled__default.png" alt=""><figcaption>value · disabled</figcaption></figure>
+</div></div></div>
+
+<h3>Ant Design Input.TextArea — antd@5.29.3 (bare textarea; label row is a reviewed pairing)</h3>
+<p class="counts">Reader: 25 match · 0 drift · 14 receipts (no label part; font family is the capture's Roboto mount pin, receipted).</p>
+<div class="pair"><div class="col"><h4>Real npm package (Chromium)</h4><div class="shots">
+  <figure><img src="../../../extract/computed/out/antd/textarea/orig-shots/empty.enabled__default.png" alt=""><figcaption>empty · enabled · rest</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/textarea/orig-shots/empty.enabled__focus-visible.png" alt=""><figcaption>empty · enabled · focus</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/textarea/orig-shots/empty.disabled__default.png" alt=""><figcaption>empty · disabled</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/textarea/orig-shots/value.enabled__default.png" alt=""><figcaption>value · enabled · rest</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/textarea/orig-shots/value.enabled__focus-visible.png" alt=""><figcaption>value · enabled · focus</figcaption></figure>
+  <figure><img src="../../../extract/computed/out/antd/textarea/orig-shots/value.disabled__default.png" alt=""><figcaption>value · disabled</figcaption></figure>
+</div></div></div>
+
+</body>
+</html>
