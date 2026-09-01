@@ -24,6 +24,33 @@
   },
   "diff": "recipe/evidence/fidelity-v1/switch-antd.diff.png",
   "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "44x22",
+      "reference": "44x24",
+      "agree": false
+    },
+    {
+      "threshold": 245,
+      "canvas": "44x22",
+      "reference": "44x23",
+      "agree": false
+    },
+    {
+      "threshold": 240,
+      "canvas": "44x22",
+      "reference": "44x22",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "44x22",
+      "reference": "44x22",
+      "agree": true
+    }
+  ],
   "caveats": [
     "One state of one component. A pass here is not a pass for the archetype.",
     "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",

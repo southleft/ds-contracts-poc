@@ -64,6 +64,11 @@ export interface FidelityScorecard {
   referenceCroppedToControl: boolean;
   /** True when the canvas export was cropped the same way. */
   canvasCroppedToControl: boolean;
+  /**
+   * Ink box at tightening thresholds. If the two sides AGREE as the threshold
+   * tightens, the failure is anti-aliasing fringe, not geometry.
+   */
+  thresholdSweep: Array<{ threshold: number; canvas: string; reference: string; agree: boolean }>;
   /** Why a reader should not over-read this number. */
   caveats: string[];
 }
@@ -164,6 +169,40 @@ export function cropBox(src: PNG, x: number, y: number, w: number, h: number): P
   return out;
 }
 
+
+/**
+ * Ink bounding box at a given near-white threshold.
+ *
+ * The scorer trims to content at 250/255, and that choice is load-bearing in a
+ * way it does not look. Chromium's renders carry anti-aliasing fringe rows in
+ * the 241-248 band that Figma's exports do not produce, so a reference can trim
+ * two pixels taller than an identical canvas and the union pad then misaligns
+ * the whole comparison. That manufactured a "2px defect" in switch/antd which
+ * did not exist: at 240 or stricter both sides measure 44x22 exactly.
+ *
+ * So every scorecard now carries the sweep. A failure whose box CONVERGES as the
+ * threshold tightens is the instrument; one that stays apart is the design.
+ */
+const inkBox = (png: PNG, threshold: number): string => {
+  let minX = Infinity, minY = Infinity, maxX = -1, maxY = -1;
+  for (let y = 0; y < png.height; y++) {
+    for (let x = 0; x < png.width; x++) {
+      const i = (y * png.width + x) * 4;
+      const a = png.data[i + 3]! / 255;
+      const r = png.data[i]! * a + 255 * (1 - a);
+      const g = png.data[i + 1]! * a + 255 * (1 - a);
+      const b = png.data[i + 2]! * a + 255 * (1 - a);
+      if (r < threshold || g < threshold || b < threshold) {
+        if (x < minX) minX = x;
+        if (x > maxX) maxX = x;
+        if (y < minY) minY = y;
+        if (y > maxY) maxY = y;
+      }
+    }
+  }
+  return maxX < 0 ? "empty" : `${maxX - minX + 1}x${maxY - minY + 1}`;
+};
+
 export function scoreFidelity(
   canvasPath: string,
   referencePath: string,
@@ -193,6 +232,14 @@ export function scoreFidelity(
   writeFileSync(diffPath, PNG.sync.write(score.diff as unknown as PNG));
 
   const masked = score.pctAAMasked ?? score.pctAAUnmasked;
+  const canvasForSweep = cropCanvasControl ? cropLeadingControl(canvasPng) : canvasPng;
+  const refForSweep = cropReferenceControl ? cropLeadingControl(refPng) : refPng;
+  const thresholdSweep = [250, 245, 240, 230].map((t) => ({
+    threshold: t,
+    canvas: inkBox(canvasForSweep, t),
+    reference: inkBox(refForSweep, t),
+    agree: inkBox(canvasForSweep, t) === inkBox(refForSweep, t),
+  }));
   return {
     artifactVersion: "recipe-fidelity-v1",
     label,
@@ -212,6 +259,7 @@ export function scoreFidelity(
     diff: diffPath,
     referenceCroppedToControl: cropReferenceControl,
     canvasCroppedToControl: cropCanvasControl,
+    thresholdSweep,
     caveats: [
       "One state of one component. A pass here is not a pass for the archetype.",
       "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
@@ -250,6 +298,13 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
   mkdirSync(path.dirname(out), { recursive: true });
   writeFileSync(out, `${JSON.stringify(card, null, 2)}\n`);
   const m = card.metrics;
+  const converges = card.thresholdSweep.some((r) => r.agree);
+  if (card.status === "fail" && converges) {
+    const at = card.thresholdSweep.find((r) => r.agree)!;
+    console.log(
+      `  note: ink boxes AGREE at threshold ${at.threshold} (${at.canvas}) — this failure is anti-aliasing fringe, not geometry`,
+    );
+  }
   console.log(
     `${card.status.toUpperCase()} ${card.label} — AA masked ${(m.pctAAMasked ?? m.pctAAUnmasked).toFixed(2)}% (bar ${FIDELITY_BAR.pctAAMaskedMax}%) · canvas ${m.canvasPx} ink ${m.inkCanvasPct.toFixed(1)}% · real ${m.realPx} ink ${m.inkRealPct.toFixed(1)}%`,
   );
