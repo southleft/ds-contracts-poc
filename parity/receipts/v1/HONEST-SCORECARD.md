@@ -248,6 +248,52 @@ Still red and NOT fixed:
 - **V1-REL-01 / V1-REL-02 / V1-REL-03** — the audit ledger and deploy rows,
   including AUD-U17 and AUD-U22, which are owner-only.
 
+## 6d. The four signed lineages do not reproduce off my machine
+
+The fast lane produced a **verdict** for the first time since 2026-08-27 (run
+`33477901113`: 197/197 steps, conclusion `failure` rather than `cancelled`). The
+first thing it reported is the most serious finding of the session.
+
+**All four current signed lineages fail in CI and pass locally:**
+
+    recipe:table:live:v32:check          FAIL in CI · PASS on macOS
+    recipe:calendar:live:v50:check       FAIL in CI · PASS on macOS
+    recipe:combobox:live:v42:check       FAIL in CI · PASS on macOS
+    recipe:input-field:live:v85:check    FAIL in CI · PASS on macOS
+
+Every one with the same error — `antecedent generated artifact drift` — naming
+the `expected-scene-plan-*.json.gz` files plus `antecedent-index.json` and
+`proof-plan.json`.
+
+**Verified:**
+
+- The check is a raw byte comparison: `readFileSync(outputPath).equals(expected)`.
+- The drifting artifacts are gzip blobs, and `antecedent-index.json` contains the
+  **sha256 of those gzip bytes** — so one difference cascades into the index and
+  the proof plan. (That index carries a field named `generatedDeterministically`.)
+- Re-gzipping locally reproduces the committed bytes exactly, header included.
+- The v32 `.gz` files were written by commit `627fee793` on **2026-08-31, on
+  macOS** — *after* CI last produced a verdict on 2026-08-27. So this lane has
+  never once been green in CI. The same is true of calendar v50, combobox v42 and
+  input-field v85: all four were created during the blind period.
+
+**Inferred, not proven:** the difference is the gzip envelope rather than the
+content — Node's `gzipSync` writes a platform-dependent byte in the 10-byte
+header, and the content beneath is canonical JSON that should be deterministic. I
+could not confirm the Linux byte from here.
+
+**Not fixed, deliberately.** Both available remedies touch signed artifacts:
+normalising the gzip header means regenerating every antecedent and re-indexing
+the hashes that the authorizations pin; comparing decompressed content instead
+means changing what a signed lineage's freshness check actually asserts. Either
+is an owner decision about a signature chain, not a 3am repair.
+
+What it means in the meantime: **"the signed lineage gate is green" has been a
+statement about one laptop.** The archetypes are still live-minted and
+owner-graded — that evidence is unaffected — but their generated antecedents are
+not reproducible on another machine, and nothing could say so while the lane was
+being killed at step 100.
+
 ## 7. Scale
 
 2,712 npm scripts, of which **2,389 (88%) are per-version live lanes**
