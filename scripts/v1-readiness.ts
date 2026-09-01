@@ -409,6 +409,13 @@ function changedBetween(before: string, after: string): string[] {
     .map((line) => line.trim());
 }
 
+/**
+ * How long to keep reading a finished process's pipes before giving up on them.
+ * Long enough to collect a trailing flush, short enough that a leaked grandchild
+ * costs seconds rather than the whole run.
+ */
+const EXIT_DRAIN_MS = 2_000;
+
 async function runShell(cmd: string): Promise<{ exit: number | null; tail: string }> {
   return new Promise((resolve) => {
     const child = spawn(cmd, {
@@ -424,8 +431,38 @@ async function runShell(cmd: string): Promise<{ exit: number | null; tail: strin
     };
     child.stdout.on('data', take);
     child.stderr.on('data', take);
-    child.on('close', (code) => resolve({ exit: code, tail: buffer.slice(-TAIL_BYTES) }));
-    child.on('error', (err) => resolve({ exit: null, tail: String(err) }));
+
+    // Resolve on 'exit', not 'close'.
+    //
+    // 'close' waits for every stdio stream to end, and a leaked GRANDCHILD that
+    // inherited the pipe keeps them open forever — the row's own process is
+    // gone, but the harness waits on a pipe nobody will close. That is not
+    // hypothetical: a v1:readiness run on 2026-09-01 sat on
+    // `npm run dagger:census` for over an hour at 0.09s of CPU with no children
+    // of its own, and dagger:census finishes standalone in under 45 seconds. The
+    // leak came from an earlier heavy row (eval spawns Chromium), which this
+    // repo has recorded leaving node and Chromium children alive after the
+    // runner called the lane complete.
+    //
+    // So: take the exit code the moment the process exits, give the pipes a
+    // short grace period to deliver whatever is still buffered, and move on.
+    // 'close' is still honoured when it arrives first, which is the normal case.
+    let settled = false;
+    const finish = (code: number | null) => {
+      if (settled) return;
+      settled = true;
+      resolve({ exit: code, tail: buffer.slice(-TAIL_BYTES) });
+    };
+    child.on('close', (code) => finish(code));
+    child.on('exit', (code) => {
+      const drain = setTimeout(() => finish(code), EXIT_DRAIN_MS);
+      drain.unref?.();
+    });
+    child.on('error', (err) => {
+      if (settled) return;
+      settled = true;
+      resolve({ exit: null, tail: String(err) });
+    });
   });
 }
 
