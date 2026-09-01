@@ -29,6 +29,7 @@
     "recipe:button:check": "node --import tsx --test recipe/recipe.test.ts recipe/recipes/button.test.ts recipe/proof.test.ts && npm run recipe:button-scene-inversion:check",
     "recipe:button-scene-inversion:check": "tsx recipe/build-button-scene-inversion.ts --check && node --import tsx --test recipe/button-scene-inversion.test.ts",
     "recipe:button:perturbation:check": "tsx recipe/button-perturbation-exam.ts --write && node --import tsx --test recipe/button-perturbation-exam.test.ts",
+    "recipe:canvas-to-code:check": "tsx recipe/emit-canvas-facts.ts --check && tsx recipe/canvas-to-code.ts --check && node --import tsx --test recipe/canvas-to-code.test.ts",
     "recipe:input-field:check": "node --import tsx --test recipe/recipe.test.ts recipe/recipes/input-field.test.ts recipe/input-field-proof.test.ts",
     "recipe:input-field:browser:check": "node --import tsx --test recipe/input-field-browser.test.ts",
     "recipe:combobox:check": "node --import tsx --test recipe/combobox-proof.test.ts recipe/combobox-browser.test.ts recipe/combobox-figma-writer.test.ts",

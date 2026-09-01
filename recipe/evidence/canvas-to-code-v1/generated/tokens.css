@@ -1,0 +1,58 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code.ts --write
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --imported-button-set-button-button-1-proof-button-label-label-color-primary: #000b29;
+  --imported-button-set-button-button-1-proof-button-label-label-color-secondary: #191306;
+  --imported-button-set-button-button-1-proof-button-label-label-font-weight: 600;
+  --imported-button-set-button-button-1-proof-root-background-color-primary-default: #4375ff;
+  --imported-button-set-button-button-1-proof-root-background-color-primary-disabled: #4375ff;
+  --imported-button-set-button-button-1-proof-root-background-color-primary-focusVisible: #4375ff;
+  --imported-button-set-button-button-1-proof-root-background-color-primary-hover: #6b93ff;
+  --imported-button-set-button-button-1-proof-root-background-color-primary-loading: #4375ff;
+  --imported-button-set-button-button-1-proof-root-background-color-primary-pressed: #4375ff;
+  --imported-button-set-button-button-1-proof-root-background-color-secondary-default: #a49981;
+  --imported-button-set-button-button-1-proof-root-background-color-secondary-disabled: #a49981;
+  --imported-button-set-button-button-1-proof-root-background-color-secondary-focusVisible: #a49981;
+  --imported-button-set-button-button-1-proof-root-background-color-secondary-hover: #c0b191;
+  --imported-button-set-button-button-1-proof-root-background-color-secondary-loading: #a49981;
+  --imported-button-set-button-button-1-proof-root-background-color-secondary-pressed: #a49981;
+  --imported-button-set-button-button-1-proof-root-border-color-primary: #000b29;
+  --imported-button-set-button-button-1-proof-root-border-color-secondary: #191306;
+  --imported-button-root-background-color-state-hover-secondary: #c0b191;
+  --imported-button-root-background-color-state-hover-unset: #6b93ff;
+  --imported-button-root-background-color-secondary: #a49981;
+  --imported-button-root-background-color-unset: #4375ff;
+  --imported-button-root-border-top-color-state-hover-secondary: #191306;
+  --imported-button-root-border-top-color-state-hover-unset: #000b29;
+  --imported-button-root-border-top-color-secondary: #191306;
+  --imported-button-root-border-top-color-unset: #000b29;
+  --imported-button-root-border-top-width-unset: 0px;
+  --imported-button-root-color-state-hover-secondary: #191306;
+  --imported-button-root-color-state-hover-unset: #000b29;
+  --imported-button-root-color-secondary: #191306;
+  --imported-button-root-color-unset: #000b29;
+  --imported-button-root-line-height: 24px;
+  --imported-button-root-outline-color-state-focus-visible: #4375ff;
+  --imported-shared-size-16: 16px;
+  --imported-shared-size-4: 4px;
+  --imported-shared-size-8: 8px;
+  --imported-stub-button-helper-leading-icon-1-root-height: 16px;
+  --imported-stub-button-helper-leading-icon-1-root-width: 16px;
+  --imported-stub-button-helper-loading-spinner-1-root-height: 16px;
+  --imported-stub-button-helper-loading-spinner-1-root-width: 16px;
+}

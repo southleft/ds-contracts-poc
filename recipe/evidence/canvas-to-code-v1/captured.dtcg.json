@@ -1,0 +1,103 @@
+{
+  "imported": {
+    "button": {
+      "root": {
+        "background-color-state-hover": {
+          "secondary": {
+            "$value": "#c0b191",
+            "$type": "color"
+          },
+          "unset": {
+            "$value": "#6b93ff",
+            "$type": "color"
+          }
+        },
+        "background-color": {
+          "secondary": {
+            "$value": "#a49981",
+            "$type": "color"
+          },
+          "unset": {
+            "$value": "#4375ff",
+            "$type": "color"
+          }
+        },
+        "border-top-color-state-hover": {
+          "secondary": {
+            "$value": "#191306",
+            "$type": "color"
+          },
+          "unset": {
+            "$value": "#000b29",
+            "$type": "color"
+          }
+        },
+        "border-top-color": {
+          "secondary": {
+            "$value": "#191306",
+            "$type": "color"
+          },
+          "unset": {
+            "$value": "#000b29",
+            "$type": "color"
+          }
+        },
+        "border-top-width": {
+          "unset": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        },
+        "color-state-hover": {
+          "secondary": {
+            "$value": "#191306",
+            "$type": "color"
+          },
+          "unset": {
+            "$value": "#000b29",
+            "$type": "color"
+          }
+        },
+        "color": {
+          "secondary": {
+            "$value": "#191306",
+            "$type": "color"
+          },
+          "unset": {
+            "$value": "#000b29",
+            "$type": "color"
+          }
+        },
+        "line-height": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "outline-color-state-focus-visible": {
+          "$value": "#4375ff",
+          "$type": "color"
+        }
+      }
+    },
+    "shared": {
+      "size-16": {
+        "$value": "16px",
+        "$type": "dimension"
+      },
+      "size-4": {
+        "$value": "4px",
+        "$type": "dimension"
+      },
+      "size-8": {
+        "$value": "8px",
+        "$type": "dimension"
+      }
+    }
+  },
+  "$extensions": {
+    "ds-contracts": {
+      "source": "figma `_variables` (dump v1.4 values, v1.6 per-mode values) — resolved values, not the alias graph",
+      "captured": 18,
+      "skipped": []
+    }
+  }
+}

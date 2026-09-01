@@ -1,0 +1,138 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/button-set-button-button-1-proof.contract.json (ds.button-set-button-button-1-proof v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-style: solid;
+  cursor: pointer;
+  padding-inline: var(--imported-shared-size-16);
+  padding-block: var(--imported-shared-size-8);
+  border-radius: var(--imported-shared-size-4);
+  border-width: var(--imported-button-root-border-top-width-unset);
+  gap: var(--imported-shared-size-8);
+}
+
+.variant-secondary {
+  border-color: var(--imported-button-set-button-button-1-proof-root-border-color-secondary);
+}
+
+.state-default {
+}
+
+.variant-secondary.state-default {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-default
+  );
+}
+
+.state-hover {
+}
+
+.variant-secondary.state-hover {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-hover
+  );
+}
+
+.state-pressed {
+}
+
+.variant-secondary.state-pressed {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-pressed
+  );
+}
+
+.state-focusVisible {
+}
+
+.variant-secondary.state-focusVisible {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-focusVisible
+  );
+}
+
+.state-disabled {
+}
+
+.variant-secondary.state-disabled {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-disabled
+  );
+}
+
+.state-loading {
+}
+
+.variant-secondary.state-loading {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-secondary-loading
+  );
+}
+
+.variant-primary {
+  border-color: var(--imported-button-set-button-button-1-proof-root-border-color-primary);
+}
+
+.variant-primary.state-default {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-default
+  );
+}
+
+.variant-primary.state-hover {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-hover
+  );
+}
+
+.variant-primary.state-pressed {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-pressed
+  );
+}
+
+.variant-primary.state-focusVisible {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-focusVisible
+  );
+}
+
+.variant-primary.state-disabled {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-disabled
+  );
+}
+
+.variant-primary.state-loading {
+  background-color: var(
+    --imported-button-set-button-button-1-proof-root-background-color-primary-loading
+  );
+}
+
+.buttonlabelLabel {
+  font-size: var(--imported-shared-size-16);
+  line-height: var(--imported-button-root-line-height);
+  font-weight: var(--imported-button-set-button-button-1-proof-button-label-label-font-weight);
+  font-family: IBM Plex Sans;
+  text-align: center;
+}
+
+.variant-secondary .buttonlabelLabel {
+  color: var(--imported-button-set-button-button-1-proof-button-label-label-color-secondary);
+}
+
+.variant-primary .buttonlabelLabel {
+  color: var(--imported-button-set-button-button-1-proof-button-label-label-color-primary);
+}

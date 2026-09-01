@@ -1,0 +1,183 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "ds.button-set-button-button-1-proof",
+  "name": "ButtonSetButtonButton1Proof",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "PROPOSED contract extracted from the design canvas (extract/figma dump v1) — API, anatomy, and token bindings inverted from the drawn structure. Semantics beyond the name/axis inference table, a11y, events, and slot accepts are not canvas-recoverable; review before adoption.",
+  "semantics": {
+    "element": "button"
+  },
+  "props": [
+    {
+      "name": "variant",
+      "type": {
+        "enum": [
+          "secondary",
+          "primary"
+        ]
+      },
+      "default": "secondary",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Variant",
+          "values": {
+            "secondary": "secondary",
+            "primary": "primary"
+          }
+        },
+        "code": {
+          "prop": "variant"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "type": {
+        "enum": [
+          "medium",
+          "small",
+          "large"
+        ]
+      },
+      "default": "medium",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "medium": "medium",
+            "small": "small",
+            "large": "large"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "state",
+      "type": {
+        "enum": [
+          "default",
+          "hover",
+          "pressed",
+          "focusVisible",
+          "disabled",
+          "loading"
+        ]
+      },
+      "default": "default",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "State",
+          "values": {
+            "default": "default",
+            "hover": "hover",
+            "pressed": "pressed",
+            "focusVisible": "focus-visible",
+            "disabled": "disabled",
+            "loading": "loading"
+          }
+        },
+        "code": {
+          "prop": "state"
+        }
+      }
+    },
+    {
+      "name": "icons",
+      "type": {
+        "enum": [
+          "none",
+          "leading",
+          "trailing",
+          "both"
+        ]
+      },
+      "default": "none",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Icons",
+          "values": {
+            "none": "none",
+            "leading": "leading",
+            "trailing": "trailing",
+            "both": "both"
+          }
+        },
+        "code": {
+          "prop": "icons"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "parts": {
+        "buttonloadingIndicatorLo": {
+          "component": {
+            "id": "ds.button-helper-loading-spinner-1"
+          },
+          "visibleWhen": {
+            "prop": "state",
+            "equals": "loading"
+          }
+        },
+        "buttonlabelLabel": {
+          "declared": {
+            "font-family": "IBM Plex Sans",
+            "text-align": "center"
+          },
+          "text": "Button",
+          "tokens": {
+            "font-size": "{imported.shared.size-16}",
+            "line-height": "{imported.button.root.line-height}",
+            "color": "{imported.button-set-button-button-1-proof.button-label-label.color.{variant}}",
+            "font-weight": "{imported.button-set-button-button-1-proof.button-label-label.font-weight}"
+          }
+        },
+        "buttonslottrailingTraili": {
+          "component": {
+            "id": "ds.button-helper-leading-icon-1"
+          },
+          "visibleWhen": {
+            "prop": "icons",
+            "equals": [
+              "trailing",
+              "both"
+            ]
+          }
+        }
+      },
+      "tokens": {
+        "padding-inline": "{imported.shared.size-16}",
+        "padding-block": "{imported.shared.size-8}",
+        "border-radius": "{imported.shared.size-4}",
+        "border-width": "{imported.button.root.border-top-width.unset}",
+        "gap": "{imported.shared.size-8}",
+        "background-color": "{imported.button-set-button-button-1-proof.root.background-color.{variant}.{state}}",
+        "border-color": "{imported.button-set-button-button-1-proof.root.border-color.{variant}}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "src/components/ButtonSetButtonButton1Proof",
+        "export": "ButtonSetButtonButton1Proof"
+      }
+    }
+  }
+}
