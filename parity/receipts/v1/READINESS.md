@@ -2,115 +2,49 @@
 
 Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their commands and their evidence references are parsed from docs/26-v1-definition.md — nothing here is listed by hand. Seconds are measured and move run to run; nothing else in this file should.
 
-- **commit:** `cdda66f1f7f9832e7a730e231d3e46db224bde8a`
+- **commit:** `3240e39055aa4c2b4bc2943d362a4273d6a3936f`
 - **tree dirty at start:** no
 - **definition:** docs/26-v1-definition.md sha256 `11df3102bf4f1579`
 - **flags:** (none)
 - **lane map:** catalog-visual, deploy-check, fast, full, publish-rc, release-candidate, security, sync-spine (from .github/workflows via .github/scripts/lane-map.ts)
 - **prep:** ✔ `npm --prefix packages/schema run build` 1s · ✔ `npm --prefix packages/core run build` 1s · ✔ `npm --prefix packages/cli run build` 1s · ✔ `npm --prefix packages/emitter-web-components run build` 0s · ✔ `npm run build:lib` 1s · ✔ `npm run plugin:zip` 0s
 
-**Tally.** RED 11 · GREEN 13 — 24 rows.
+**Tally.** GREEN 19 · RED 5 — 24 rows.
 
 | row | state | command | seconds | evidence |
 |---|---|---|---|---|
-| V1-SCOPE-01 | **RED** | ✖ `npm run docs:check` | 1 | ✔ 23-known-limitations.md#a4-out-of-scope-by-decision--not-gaps<br>human: Known Limitations §A.4 remains linked from the release notes |
+| V1-SCOPE-01 | **GREEN** | ✔ `npm run docs:check` | 0 | ✔ 23-known-limitations.md#a4-out-of-scope-by-decision--not-gaps<br>human: Known Limitations §A.4 remains linked from the release notes |
 | V1-JOURNEY-01 | **GREEN** | ✔ `npm run plugin:ui-check` && ✔ `npm run extract:figma:roundtrip:uui` && ✔ `npm run ledger:fresh` && ✔ `npm run conformance:canvas` | 13 | ✔ parity/receipts/phase-2/FIGMA-DS-EXAM.md |
-| V1-JOURNEY-02 | **GREEN** | ✔ `npm run test:onboarding` && ✔ `npm run paste:check` && ✔ `npm run plugin:check` && ✔ `npm run first-party-bundle:check` && ✔ `npm run maintain` | 70 | — |
-| V1-JOURNEY-03 | **RED** | ✔ `npm run reconcile` && ✔ `npm run diagnose` && ✖ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 2 | ✔ 23-known-limitations.md#b11-adopting-a-hand-built-figma-set-is-not-a-verb-this-tool-has<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed<br>mentions (not run): `npm run reconcile && npm run diagnose`<br>mentions (not run): `npm run parity:snapshot:rest` |
+| V1-JOURNEY-02 | **GREEN** | ✔ `npm run test:onboarding` && ✔ `npm run paste:check` && ✔ `npm run plugin:check` && ✔ `npm run first-party-bundle:check` && ✔ `npm run maintain` | 71 | — |
+| V1-JOURNEY-03 | **GREEN** | ✔ `npm run reconcile` && ✔ `npm run diagnose` && ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 2 | ✔ 23-known-limitations.md#b11-adopting-a-hand-built-figma-set-is-not-a-verb-this-tool-has<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed<br>mentions (not run): `npm run reconcile && npm run diagnose`<br>mentions (not run): `npm run parity:snapshot:rest` |
 | V1-JOURNEY-04 | **GREEN** | ✔ `npm run recipe:canvas-to-code:held-out:check` | 2 | ✔ 32-recipe-ir-pivot.md#merge-execution-2026-08-30 |
-| V1-CLASS-01 | **RED** | ✔ `npm run capability:fresh` && ✖ `npm run extract:computed:drift` | 0 | ✔ 23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed |
-| V1-CLASS-02 | **RED** | ✖ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut<br>human: the release notes reproduce or link the bounds in Known Limitations §C.1.1 |
+| V1-CLASS-01 | **GREEN** | ✔ `npm run capability:fresh` && ✔ `npm run extract:computed:drift` | 0 | ✔ 23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed |
+| V1-CLASS-02 | **GREEN** | ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut<br>human: the release notes reproduce or link the bounds in Known Limitations §C.1.1 |
 | V1-CLASS-03 | **GREEN** | ✔ `npm run recipe:button:check` && ✔ `npm run recipe:input-field:check` && ✔ `npm run recipe:combobox:check` && ✔ `npm run recipe:table:check` && ✔ `npm run recipe:calendar:check` && ✔ `npm run recipe:pivot-status:check` | 18 | ✔ 32-recipe-ir-pivot.md#e4-applied-2026-08-30 |
 | V1-COMPAT-01 | **GREEN** | ✔ `node -e "const r=require('./package.json'),c=require('./packages/cli/package.json');if(r.engines.node!=='>=20'\|\|c.engines.node!=='>=20'\|\|r.peerDependencies.react!=='>=18'\|\|r.peerDependencies['react-dom']!=='>=18')process.exit(1)"` | 0 | — |
 | V1-COMPAT-02 | **GREEN** | ✔ `npm run schema` && ✔ `npm run schema:fresh` && ✔ `npm run contracts:migrate:check` && ✔ `npm run slot-constraints:check` | 7 | ✔ ../CONTRIBUTING.md#contract-change-policy<br>human: release PR includes a contract-change classification using CONTRIBUTING § Contract change policy |
-| V1-COMPAT-03 | **RED** | ✖ `npm run eval` && · `npm run eval:record:check` && · `npm run generation:atomic:check` && · `npm run provenance:check` && · `npm run figma:fresh` && · `npm run verify:catalog` | 2241 | — |
+| V1-COMPAT-03 | **RED** | ✖ `npm run eval` && · `npm run eval:record:check` && · `npm run generation:atomic:check` && · `npm run provenance:check` && · `npm run figma:fresh` && · `npm run verify:catalog` | 3089 | — |
 | V1-COMPAT-04 | **GREEN** | ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run plugin:ui-check` ⟨reused V1-JOURNEY-01⟩ | 0 | ✔ 23-known-limitations.md#a3-the-architecture-the-plugin-cannot-run-your-code<br>human: Known Limitations §§A.3–A.4 remains linked from release notes |
 | V1-EVID-01 | **RED** | ✖ `npm run eval` ⟨reused V1-COMPAT-03⟩ && · `npm run docs:check` && · `npm run capability:fresh` && · `npm run generation:atomic:check` && · `npm run static:empty-content:check` && · `npm run code-only-facts:check` | 0 | — |
-| V1-EVID-02 | **RED** | ✔ `npm run capability:fresh` ⟨reused V1-CLASS-01⟩ && ✖ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md#c1-coverage--how-much-of-a-library-is-actually-captured |
+| V1-EVID-02 | **GREEN** | ✔ `npm run capability:fresh` ⟨reused V1-CLASS-01⟩ && ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md#c1-coverage--how-much-of-a-library-is-actually-captured |
 | V1-EVID-03 | **GREEN** | ✔ `npm run conformance` && ✔ `npm run conformance:roundtrip` && ✔ `npm run conformance:canvas` ⟨reused V1-JOURNEY-01⟩ && ✔ `npm run dagger:census` && ✔ `npm run closure:check` | 33 | — |
 | V1-EVID-04 | **GREEN** | ✔ `npm run snapshot:schema:check` && ✔ `npm run canvas:binding:check` && ✔ `npm run variant-drift:check` | 10 | ✔ ../parity/receipts/live-figma-variant-drift.md |
 | V1-EVID-05 | **GREEN** | ✔ `npm run catalog:visual:check` && ✔ `npm run maintain:visual` | 24 | — |
 | V1-SEC-01 | **GREEN** | ✔ `npm run test:worker` && ✔ `npm run test:playground` && ✔ `npm run typecheck:worker` && ✔ `npm run plugin:check` ⟨reused V1-JOURNEY-02⟩ && ✔ `npm run plugin:ui-check` ⟨reused V1-JOURNEY-01⟩ | 2 | ✔ 23-known-limitations.md#b14-the-standing-cifigma-channel-is-half-a-channel<br>human: release security review records a clean secret scan and links Known Limitations §B.14. |
 | V1-SEC-02 | **GREEN** | ✔ `npm audit --omit=dev --audit-level=high` | 0 | — |
-| V1-CI-01 | **RED** | ✔ `npm run ci:lanes` && ✖ `npm run ci:lane fast` && · `npm run ci:lane full` && · `npm run ci:lane catalog-visual` && · `npm run test:v1-definition` && · `npm run v1:definition:check` && · `npm run provenance:check` && · `npm run eval:record:check` | 368 | — |
-| V1-CI-02 | **GREEN** | ✔ `npm run prep:core` && ✔ `npm --prefix packages/schema run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/emitter-web-components run build` ⟨reused prep⟩ && ✔ `npm run build:lib` ⟨reused prep⟩ && ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` && ✔ `npm run site:build` && ✔ `npm run publish:check` && ✔ `npm run verify:package` && ✔ `npm run verify:published` && ✔ `npm run schema:fresh` ⟨reused V1-COMPAT-02⟩ && ✔ `npm run figma:fresh` && ✔ `npm run generated:fresh` && ✔ `npm run verify:catalog` && ✔ `npm run catalog:visual:check` ⟨reused V1-EVID-05⟩ | 20 | — |
-| V1-REL-01 | **RED** | — (evidence only) | 23 | human: the release PR contains a complete P0/P1 audit ledger with task ID, closing commit, acceptance command, and result<br>ledger: 60 rows — closed 54, refuted 2, open-human 2, red 2 ([AUDIT-LEDGER.md](AUDIT-LEDGER.md))<br>audit ledger: AUD-U15 RED, AUD-U17 OPEN-HUMAN, AUD-U22 OPEN-HUMAN, AUD-U24 RED |
+| V1-CI-01 | **RED** | ✖ `npm run ci:lanes` && · `npm run ci:lane fast` && · `npm run ci:lane full` && · `npm run ci:lane catalog-visual` && · `npm run test:v1-definition` && · `npm run v1:definition:check` && · `npm run provenance:check` && · `npm run eval:record:check` | 1 | — |
+| V1-CI-02 | **GREEN** | ✔ `npm run prep:core` && ✔ `npm --prefix packages/schema run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/emitter-web-components run build` ⟨reused prep⟩ && ✔ `npm run build:lib` ⟨reused prep⟩ && ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` && ✔ `npm run site:build` && ✔ `npm run publish:check` && ✔ `npm run verify:package` && ✔ `npm run verify:published` && ✔ `npm run schema:fresh` ⟨reused V1-COMPAT-02⟩ && ✔ `npm run figma:fresh` && ✔ `npm run generated:fresh` && ✔ `npm run verify:catalog` && ✔ `npm run catalog:visual:check` ⟨reused V1-EVID-05⟩ | 21 | — |
+| V1-REL-01 | **RED** | — (evidence only) | 26 | human: the release PR contains a complete P0/P1 audit ledger with task ID, closing commit, acceptance command, and result<br>ledger: 60 rows — closed 51, refuted 2, open-human 2, red 5 ([AUDIT-LEDGER.md](AUDIT-LEDGER.md))<br>audit ledger: AUD-V07 RED, AUD-V09 RED, AUD-U17 OPEN-HUMAN, AUD-U19 RED, AUD-U22 OPEN-HUMAN, AUD-U29 RED, AUD-U33 RED |
 | V1-REL-02 | **RED** | ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm run publish:check` ⟨reused V1-CI-02⟩ && ✔ `npm run verify:published` ⟨reused V1-CI-02⟩<br>after publish: ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` ⟨reused V1-CI-02⟩ && ✔ `npm run site:build` ⟨reused V1-CI-02⟩ && ✖ `npm run deploy:check` | 729 | — |
-| V1-REL-03 | **RED** | ✖ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md<br>human: release PR checklist links every deferred audit task to one item below and links the complete Known Limitations |
+| V1-REL-03 | **GREEN** | ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md<br>human: release PR checklist links every deferred audit task to one item below and links the complete Known Limitations |
 
 ## Tracked files a command rewrote
 
-- V1-JOURNEY-02: `npm run plugin:check` changed M recipe/evidence/fidelity-v1/SCORECARD.json, M recipe/fidelity-manifest.json
 - V1-COMPAT-03: `npm run eval` changed M evals/results.json
 
 ## Red and unrun commands — captured tail
 
-### V1-SCOPE-01 — `npm run docs:check` (exit 1, 1s)
-
-```
-> ds-contracts-poc@1.0.0-rc.1 docs:check
-> node scripts/docs-numbers-check.mjs
-
-  evals/results.json: 227/230 measured at de7cd603 (2026-08-30), 293 commit(s) behind HEAD, 3737 file(s) changed since — the full CI lane re-measures and compares (eval-record-check <measured>)
-  UNMEASURED (0 cells compared, excluded from the mean and the thresholds): tailwind
-docs:check — derived values
-  evals            230 (evals/results.json)
-  contracts        56 (contracts/*.contract.json)
-  DTCG tokens      282 (tokens/**)
-  capture configs  15 (extract/computed/configs/*.json)
-  round trip       11400/1857/7671/15359 m/d/l/i of 36287, orig 20928, matched 31.4% (extract/figma/roundtrip-uui/report.json)
-  fidelity         537/599 scored, mean 92.70% (examples/untitled-ui/renders/fidelity.json)
-  capture floor    120 measured, 737,162 cells, mean 86.6% (extract/computed/out/**, 10 libraries)
-  capture coverage 113 measured AND committed = 11.1% of 1015; 7 held, uncounted: antd/Textarea, astryx/TextArea, chakra/Checkbox, mui/Textarea, tailwind/Blockquote, tailwind/Spinner, tailwind/TextInput (+ docs/22 §8.3)
-  registry truth   cli 0.4.0/0.5.0-rc.1 · schema 16.0.0/16.1.0-rc.1 · emitter-web-components 0.3.0/0.4.0-rc.1 (scripts/registry-truth.json, no network)
-  documents gated  46
-
-✖ 2 stale doc claim(s):
-
-  extract/computed/out: scorecards under "astryx-core/" belong to no library this script knows — add it to LIB_DIRS (and to docs/22 §8.3) or every capture number below is measured over the wrong population
-  docs/21-bring-your-own-design-system.md:405: capture-config count — doc says 14, derived value is 15  ("14 committed capture configs")
-
-Fix the docs, or — if a number is deliberately historical — put <!-- docs-check:ignore --> on that line.
-If the eval suite legitimately changed size, re-run `npm run eval` first: this script reads
-evals/results.json and never runs the suite itself.
-```
-
-### V1-CLASS-01 — `npm run extract:computed:drift` (exit 1, 0s)
-
-```
-  shadcn/Input             offline     66.667  committed     93.103  gap -26.437 — COLOUR NOTATION, NOT COLOUR (measured 2026-08-25, burn-down RC7).
-  shadcn/Select            offline     65.032  committed     73.884  gap -8.852 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  shadcn/Switch            offline     55.488  committed     65.556  gap -10.068 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  shadcn/Tabs              offline     68.991  committed     82.120  gap -13.129 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  shadcn/Tooltip           offline     53.846  committed     57.143  gap -3.297 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Alert           offline     85.976  committed     84.545  gap 1.430 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Badge           offline     90.113  committed     90.650  gap -0.537 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Blockquote      offline     95.833  committed     94.118  gap 1.716 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Button          offline     95.455  committed     97.576  gap -2.121 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Card            offline     87.500  committed     72.414  gap 15.086 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/HelperText      offline     86.667  committed     87.059  gap -0.392 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Kbd             offline     97.143  committed    100.000  gap -2.857 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Label           offline     86.087  committed     86.250  gap -0.163 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/Spinner         offline UNMEASURED  committed UNMEASURED  UNMEASURED — 0 cells compared, so there is no score to report — UNMEASURED, NOT A SCORE (fix/pin-render-browser 2026-08-25).
-  tailwind/TextInput       offline     90.313  committed     92.381  gap -2.068 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-  tailwind/ToggleSwitch    offline     89.333  committed     88.889  gap 0.444 — BASELINE ISOLATION ROUND (doors `capture.control-baseline-mint` + `fuse.control-element-delta`) — re-recorded DELIBERATELY.
-
-✗ regate drift (verify, 0.1s): 12 finding(s)
-  - astryx-core/Button: no committed offline scorecard at extract/computed/out/astryx-core/button/regate.scorecard.json — re-record with --write
-  - astryx-core/Badge: no committed offline scorecard at extract/computed/out/astryx-core/badge/regate.scorecard.json — re-record with --write
-  - astryx-core/Card: no committed offline scorecard at extract/computed/out/astryx-core/card/regate.scorecard.json — re-record with --write
-  - astryx-core/Switch: no committed offline scorecard at extract/computed/out/astryx-core/switch/regate.scorecard.json — re-record with --write
-  - astryx-core/Slider: no committed offline scorecard at extract/computed/out/astryx-core/slider/regate.scorecard.json — re-record with --write
-  - astryx-core/Banner: no committed offline scorecard at extract/computed/out/astryx-core/banner/regate.scorecard.json — re-record with --write
-  - astryx-core/CheckboxInput: no committed offline scorecard at extract/computed/out/astryx-core/checkboxinput/regate.scorecard.json — re-record with --write
-  - astryx-core/TextArea: no committed offline scorecard at extract/computed/out/astryx-core/textarea/regate.scorecard.json — re-record with --write
-  - astryx-core/ProgressBar: no committed offline scorecard at extract/computed/out/astryx-core/progressbar/regate.scorecard.json — re-record with --write
-  - astryx-core/TextInput: no committed offline scorecard at extract/computed/out/astryx-core/textinput/regate.scorecard.json — re-record with --write
-  - astryx-core/Token: no committed offline scorecard at extract/computed/out/astryx-core/token/regate.scorecard.json — re-record with --write
-  - chakra/Checkbox: no committed offline scorecard at extract/computed/out/chakra/checkbox/regate.scorecard.json — re-record with --write
-```
-
-### V1-COMPAT-03 — `npm run eval` (exit 1, 2241s)
+### V1-COMPAT-03 — `npm run eval` (exit 1, 3089s)
 
 ```
 e stroke, FC-PSEUDO-STROKE-GLYPH L→SVG, FC-VARIANT-BOOL-LBP, FC-CARBON-TABS-LABEL, FC-FIGMA-CLIP-DEFAULT, FC-ASTRYX-SLIDER-TOOLTIP, FC-SVG-VIEWBOX, FC-FLEX-BASIS, FC-SVG-ROTATION, FC-WIDTH-TOKEN, FC-CONTRAST-ICON, FC-ENUM-HOLE chip, FC-PSEUDO-OVERFLOW, FC-STATE-PREVIEW-NOISE — all green
@@ -132,42 +66,34 @@ painted-decoration-survives-control-equality: altitude Link's underline EQUALS t
 astryx-token-plane-is-the-render-substrate: 177 of 186 committed astryx tokens are comparable against the 11 committed capture(s)' own raw custom-property declarations, and ALL 177 agree (87 disagreed before the theme-neutral re-base — the DTCG was @astryxdesign/core's UNTHEMED defaults while every reference render was made under @astryxdesign/theme-neutral). CSS-keyword font families across 72 fontFamily declaration(s): 0 (allowance 0, was 148) — ZERO remain. The token-plane ones died with the re-base; the 28 that survived it were contract LITERALS and died to one missing alternation in firstFamily(), whose denylist covered the generic families but not the system-font keywords. The allowance was tightened 28 -> 0 in the same change, so the gain cannot be given back.
   ✔ C3-detection  astryx-token-plane-is-the-render-substrate
 
-227/230 evals passed — evals/results.json (commit 122fab4d)
+227/230 evals passed — evals/results.json (commit dbbd44d4)
 ```
 
-### V1-CI-01 — `npm run ci:lane fast` (exit 1, 367s)
+### V1-CI-01 — `npm run ci:lanes` (exit 1, 1s)
 
 ```
-  ✔    0.6s  npm run placeholder-ink:check
-  ✔    3.2s  npm run first-party-bundle:check
-  ✔    2.1s  npm run code-connect:check
-  ✔    1.3s  npm run prop-collision:check
-  ✔    0.6s  npm run playground:flow-check
-  ✔    0.2s  npm run extract:figma:visual:anchors
-  ✔    0.1s  npm run visual-truth:report:fresh
-  ✔    0.2s  npm run tokens:snapshot:check
-  ✔    0.2s  npm run figma:rest:refusal:check
-  ✖   11.0s  npm run census:check -- --phase full --allow-red-verdicts
-  ✖   11.5s  npm run census:check -- --self-test
-  ✔    0.5s  npm run canvas:usable:check
-  ✔    0.8s  npm run canvas:usable:self-test
-  ✖   11.1s  npm run census:check -- --phase design-to-code
-  ✔    0.5s  npm run first-pass:check
-  ✔    1.0s  npm run first-pass:check -- --self-test
-  ✔    2.5s  npm run render-browser:check
-  ✔    1.3s  npm run mixed-browser:check
-  ✔    9.4s  npm run door-register:check
-  ✔   11.4s  npm run door-register:self-test
-  ✔    0.3s  npm run lowering:check
-  ✔    1.4s  npm run lowering:check -- --self-test
-  ✖    0.2s  npm run grammar-coverage:check
-  ✖    0.2s  npm run grammar-coverage:check -- --self-test
-  ✔    1.0s  npm run corpus:reproducible:check
-  ✔    0.2s  npm run corpus:reproducible:check -- --self-test
-  ✔    0.9s  npm --prefix packages/cli run test
-  ✔    1.5s  npm --prefix packages/cli run coverage
+box live lineage v6 lifecycle test — it is invoked only by the retired recipe:combobox:live:v6 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v6-restore.test.ts — Retired combobox live lineage v6 lifecycle test — it is invoked only by the retired recipe:combobox:live:v6 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v7-authorization.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v7-broker.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v7-extract.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v7-restore.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v8-authorization.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v8-broker.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v8-extract.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v8-restore.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v9-authorization.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v9-broker.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v9-extract.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/combobox-live-v9-restore.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/scene-readback-combobox-v1.test.ts — Retired combobox live lineage v1 lifecycle test — it is invoked only by the retired recipe:combobox:live:v1 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/scene-readback-combobox-v10.test.ts — Retired combobox live lineage v10 lifecycle test — it is invoked only by the retired recipe:combobox:live:v10 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/scene-readback-combobox-v11.test.ts — Retired combobox live lineage v11 lifecycle test — it is invoked only by the retired recipe:combobox:live:v11 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/scene-readback-combobox-v12.test.ts — Retired combobox live lineage v12 lifecycle test — it is invoked only by the retired recipe:combobox:live:v12 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  · recipe/scene-readback-combobox-v13.test.ts — Retired combobox live lineage v13 lifecycle test — it is invoked only by the retired recipe:combobox:live:v13 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
 
-✖ 9/181 gate(s) failed in lane "fast".
+✖ 1 lane defect(s):
+    `root:recipe:radio:live:v3:generated:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
 ```
 
 ### V1-REL-02 — `npm run deploy:check` (exit 1, 729s)
@@ -200,7 +126,7 @@ astryx-token-plane-is-the-render-substrate: 177 of 186 committed astryx tokens a
 ✘ 3 deployed surface(s) DIVERGE from the local build:
   - plugin zip STALE: live is 942148 bytes (sha af19cc985469…), local build is 1117430 bytes (sha 514d2263ec30…) — a designer downloading today gets a different engine than this repo builds
   - playground STALE: live index references [/assets/index-C1ojNmZG.js, /assets/index-oTRYTN6T.css, /assets/rolldown-runtime-aKtaBQYM.js], local build references [/assets/index-COkJOfDr.js, /assets/index-CfaJLxBU.css, /assets/rolldown-runtime-aKtaBQYM.js] — vite renames every chunk on any content change, so these are different builds
-  - spec site STALE: /get-started/ live is 40276 bytes (sha fdf98969ffe6…), local build is 41936 bytes (sha dcb7c36f33a3…)
+  - spec site STALE: /get-started/ live is 40276 bytes (sha fdf98969ffe6…), local build is 41936 bytes (sha 2948ffd9dedd…)
 
 Redeploy with: npm run deploy   (builds, publishes both Pages projects, then re-runs this check)
 ```
