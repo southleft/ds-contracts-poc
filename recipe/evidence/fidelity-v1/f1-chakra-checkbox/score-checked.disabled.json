@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "checkbox/chakra/checked.disabled",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 11.25,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "canvasPx": "20x20",
+    "realPx": "20x20",
+    "inkCanvasPct": 97.5,
+    "inkRealPct": 97
+  },
+  "canvas": {
+    "path": "/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/6febcf64-adc3-4bf6-89d9-ff1789edee2a/scratchpad/chakra-checked.disabled.png",
+    "sha256": "2619cddc8b40707f480d885b9f3cfba52cf8421bf96fc7d83aaf8c0755a1ed2f"
+  },
+  "reference": {
+    "path": "extract/computed/out/chakra/checkbox/orig-shots/checked.disabled__default.png",
+    "sha256": "a14fbf9eae4f3ae9c1a6093ffe76cc287666af648b6fcdbd4130f7dadb1349a8"
+  },
+  "diff": "/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/6febcf64-adc3-4bf6-89d9-ff1789edee2a/scratchpad/chakra-checked.disabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 245,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 240,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

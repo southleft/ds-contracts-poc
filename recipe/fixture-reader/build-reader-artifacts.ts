@@ -10,6 +10,11 @@
  * on any byte difference.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
+import {
+  CHAKRA_CHECKBOX_LEDGER,
+  chakraCheckboxAdapterConfig,
+  chakraCheckboxMappings,
+} from "../fixtures/generated/checkbox.chakra.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Ledger } from "./ledger.js";
@@ -309,6 +314,19 @@ const SUBJECTS: Subject[] = [
     mappings: muiCheckboxMappings,
     extras: checkboxExtras(muiCheckboxAdapterConfig.tokens as unknown as Record<string, unknown>),
     customEqual: { "check.path": muiCheckPathEqual },
+  },
+  {
+    // PROPOSED, not transcribed: recipe/fixtures/generated/checkbox.chakra.ts
+    // was written by recipe/fixture-reader/propose-fixture.ts from this same
+    // ledger through the role schema; the gate verifies the proposal reads
+    // back unchanged (every non-receipt leaf must match).
+    archetype: "checkbox",
+    library: "chakra",
+    source: src(chakraCheckboxAdapterConfig),
+    ledgerFile: CHAKRA_CHECKBOX_LEDGER,
+    tokens: chakraCheckboxAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraCheckboxMappings,
+    extras: checkboxExtras(chakraCheckboxAdapterConfig.tokens as unknown as Record<string, unknown>),
   },
   {
     archetype: "checkbox",

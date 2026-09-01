@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 24,
-  "passed": 16,
+  "subjects": 25,
+  "passed": 17,
   "failed": 7,
   "fringeExcused": 1,
   "knownFailures": 7,
@@ -23,6 +23,14 @@
       "pctAAMasked": 0,
       "canvasPx": "18x18",
       "realPx": "18x18",
+      "convergesAt": 250
+    },
+    {
+      "label": "checkbox/chakra",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "20x20",
+      "realPx": "20x20",
       "convergesAt": 250
     },
     {

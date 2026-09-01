@@ -1,0 +1,352 @@
+{
+  "archetype": "checkbox",
+  "library": "chakra",
+  "ledger": "extract/computed/out/chakra/checkbox/captured-truth.json",
+  "provenance": {
+    "package": "@chakra-ui/react",
+    "version": "3.37.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "hit": "cls:chakra-checkbox__control",
+    "box": "cls:chakra-checkbox__control",
+    "glyph": "tag:svg",
+    "glyphPath": "tag:polyline",
+    "dash": {
+      "part": "tag:path"
+    },
+    "label": "cls:chakra-checkbox__label",
+    "row": "root",
+    "opacityOn": "cls:chakra-checkbox__control"
+  },
+  "leaves": {
+    "wrapper.size": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+    },
+    "box.size": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+    },
+    "box.radius": {
+      "value": 2,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-width"
+    },
+    "box.padding": {
+      "value": 2,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.padding-top"
+    },
+    "row.gap": {
+      "value": 10,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default root.column-gap"
+    },
+    "dash.width": {
+      "value": 9.9167,
+      "from": "set",
+      "why": "checkmark.js indeterminate <path d=\"M5 12h14\"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)"
+    },
+    "dash.height": {
+      "value": 1.75,
+      "from": "set",
+      "why": "stroke-width 3 × 14/24 = 1.75"
+    },
+    "dash.radius": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default tag:path.border-top-left-radius"
+    },
+    "check.width": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:svg.width"
+    },
+    "check.height": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:svg.height"
+    },
+    "check.strokeWidth": {
+      "value": 1.75,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:polyline.stroke-width | extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:svg.width",
+      "formula": "path stroke-width × (rendered svg width / viewBox 24) — an SVG stroke is a user-space length"
+    },
+    "check.offsetX": {
+      "value": 0,
+      "from": "spelling",
+      "why": "glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel"
+    },
+    "check.offsetY": {
+      "value": 0,
+      "from": "spelling",
+      "why": "same as check.offsetX"
+    },
+    "labelFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-size"
+    },
+    "states.unchecked.enabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.background-color"
+    },
+    "states.unchecked.enabled.boxBorder": {
+      "value": "#d4d4d8ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-color"
+    },
+    "states.unchecked.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.opacity"
+    },
+    "states.unchecked.enabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.color"
+    },
+    "states.unchecked.enabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.unchecked.disabled.boxFill": {
+      "value": "#00000000",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.background-color"
+    },
+    "states.unchecked.disabled.boxBorder": {
+      "value": "#d4d4d8ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.border-top-color"
+    },
+    "states.unchecked.disabled.boxOpacity": {
+      "value": 0.5,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.opacity"
+    },
+    "states.unchecked.disabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__label.color"
+    },
+    "states.unchecked.disabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.checked.enabled.boxFill": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.background-color"
+    },
+    "states.checked.enabled.boxBorder": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.border-top-color"
+    },
+    "states.checked.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.opacity"
+    },
+    "states.checked.enabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__label.color"
+    },
+    "states.checked.enabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.checked.enabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:polyline.stroke",
+      "formula": "the glyph strokes in this colour"
+    },
+    "states.checked.disabled.boxFill": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.background-color"
+    },
+    "states.checked.disabled.boxBorder": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.border-top-color"
+    },
+    "states.checked.disabled.boxOpacity": {
+      "value": 0.5,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.opacity"
+    },
+    "states.checked.disabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__label.color"
+    },
+    "states.checked.disabled.dashFill": {
+      "value": "#00000000",
+      "from": "spelling",
+      "why": "the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent"
+    },
+    "states.checked.disabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default tag:polyline.stroke",
+      "formula": "the glyph strokes in this colour"
+    },
+    "states.indeterminate.enabled.boxFill": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.background-color"
+    },
+    "states.indeterminate.enabled.boxBorder": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.border-top-color"
+    },
+    "states.indeterminate.enabled.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.opacity"
+    },
+    "states.indeterminate.enabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__label.color"
+    },
+    "states.indeterminate.enabled.dashFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default tag:path.stroke",
+      "formula": "the indeterminate mark's paint (a stroked line reads stroke; a box reads background-color)"
+    },
+    "states.indeterminate.disabled.boxFill": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.background-color"
+    },
+    "states.indeterminate.disabled.boxBorder": {
+      "value": "#18181bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.border-top-color"
+    },
+    "states.indeterminate.disabled.boxOpacity": {
+      "value": 0.5,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.opacity"
+    },
+    "states.indeterminate.disabled.label": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__label.color"
+    },
+    "states.indeterminate.disabled.dashFill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default tag:path.stroke",
+      "formula": "the indeterminate mark's paint (a stroked line reads stroke; a box reads background-color)"
+    },
+    "rowAlign": {
+      "value": "center",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default root.align-items"
+    },
+    "typography.label.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-weight",
+      "formula": "label font-weight → style word"
+    },
+    "check.path": {
+      "value": "(see glyph)",
+      "from": "set",
+      "why": "@chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3px\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg>"
+    },
+    "states.unchecked.enabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    },
+    "states.unchecked.disabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    },
+    "states.indeterminate.enabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    },
+    "states.indeterminate.disabled.checkFill": {
+      "value": "#ffffffff",
+      "from": "spelling",
+      "why": "the check glyph does not render in this state; the recipe carries a glyph-slot spelling"
+    }
+  },
+  "receipts": [
+    {
+      "path": "dash.width",
+      "why": "ledger value unusable: not a px length: \"auto\"",
+      "evidence": "checkmark.js indeterminate <path d=\"M5 12h14\"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)",
+      "value": 9.9167
+    },
+    {
+      "path": "dash.height",
+      "why": "ledger value unusable: not a px length: \"auto\"",
+      "evidence": "stroke-width 3 × 14/24 = 1.75",
+      "value": 1.75
+    },
+    {
+      "path": "check.path",
+      "why": "glyph geometry is cited from the package source (--glyph), not a computed channel",
+      "evidence": "@chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3px\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg>",
+      "value": "(see glyph)"
+    }
+  ],
+  "refused": [],
+  "content": {
+    "label": "Accept"
+  },
+  "typography": {
+    "family": "Inter",
+    "style": "Medium",
+    "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+  },
+  "glyph": {
+    "asIs": {
+      "path": "M20 6 L9 17 L4 12",
+      "viewBox": 24,
+      "paint": "stroke",
+      "strokeWidth": 3,
+      "cap": "round",
+      "join": "round",
+      "source": "@chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3px\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg>"
+    },
+    "scaled": {
+      "path": "M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7",
+      "width": 9.3334,
+      "height": 6.4167,
+      "strokeWidth": 1.75
+    }
+  }
+}

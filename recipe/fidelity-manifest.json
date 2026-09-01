@@ -9,31 +9,42 @@
   "subjects": [
     {
       "label": "checkbox/astryx",
-      "page": "212:81535",
+      "page": "212:82228",
       "set": "checkbox/set :: Astryx CheckboxInput",
       "variant": "Checked=unchecked, Disabled=false",
       "child": "checkbox/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-astryx-glyph-shared-v5.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-astryx-glyph-v6.png",
       "reference": "extract/computed/out/astryx-core/checkboxinput/orig-shots/unchecked.md.no-isDisabled__default.png",
       "referenceControlOnly": true
     },
     {
       "label": "checkbox/mui",
-      "page": "212:81535",
+      "page": "212:82228",
       "set": "checkbox/set :: MUI Checkbox",
       "variant": "Checked=unchecked, Disabled=false",
       "child": "checkbox/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-mui-glyph-shared-v5.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-mui-glyph-v6.png",
       "reference": "extract/computed/out/mui/checkbox/orig-shots/unchecked.enabled__default.png",
       "referenceControlOnly": true
     },
     {
+      "label": "checkbox/chakra",
+      "page": "212:82228",
+      "set": "checkbox/set :: Chakra Checkbox",
+      "variant": "Checked=unchecked, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-chakra-glyph-v6.png",
+      "reference": "extract/computed/out/chakra/checkbox/orig-shots/unchecked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_proposedWhy": "the Chakra fixture was PROPOSED by recipe/fixture-reader/propose-fixture.ts from the capture ledger (42 leaves read, 3 reviewed, 10 archetype spellings, 0 invented) — the first library the recipe path was pointed at rather than taught"
+    },
+    {
       "label": "checkbox/antd",
-      "page": "212:81535",
+      "page": "212:82228",
       "set": "checkbox/set :: Ant Design Checkbox",
       "variant": "Checked=unchecked, Disabled=false",
       "child": "checkbox/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-antd-glyph-shared-v5.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-antd-glyph-v6.png",
       "reference": "extract/computed/out/antd/checkbox/orig-shots/unchecked.enabled__default.png",
       "referenceControlOnly": true
     },

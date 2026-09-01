@@ -213,3 +213,22 @@ the same references (`shots/checkbox-*-shared-v5-plugin.png`). What is not
 exercised here is the plugin's UI itself: a person pasting `writer.plugin.js`
 into the development plugin in Figma desktop. Every current evidence
 directory now carries that file beside `writer.js`.
+
+## 2026-09-01 (late) — a library the recipe path was pointed at, not taught
+
+`recipe/fixture-reader/propose-fixture.ts` writes a fixture module from a
+capture ledger through a role-based archetype schema
+(`schema-checkbox.ts`). Pointed at Chakra UI's checkbox — never transcribed
+by anyone — it read 42 leaves from the ledger, took 3 reviewed values (the
+indeterminate stroke lowered to a rounded rect, with the arithmetic) and 10
+archetype spellings, and invented nothing; the drift gate reads the
+proposal back with zero drift. Minted as the fourth source of checkbox v6
+(page `212:82228`) and scored against the real package:
+
+    unchecked      0.00%   checked        0.00%
+    indeterminate  3.75%   unchecked.disabled 0.00%   checked.disabled 0.00%
+
+The human inputs were a seven-line role map and the glyph's points cited
+from `checkmark.js`. Per-state canvas shots and scorecards are in
+`f1-chakra-checkbox/`. This is F1 for one archetype, measured; docs/26's F1
+clause still needs the owner's grade and every archetype.

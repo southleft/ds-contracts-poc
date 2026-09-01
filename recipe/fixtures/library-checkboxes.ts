@@ -7,7 +7,7 @@ import type {
 import { canonicalCheckboxRecipeInstance } from "./checkbox.js";
 import type { CheckboxRecipeInstance } from "../recipes/checkbox.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): CheckboxRecipeInstance["tokens"] => {
@@ -496,7 +496,7 @@ const tokenFacts = (
 
 const sharedContent = { label: "Accept terms" } as const;
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -608,7 +608,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedCheckboxSource,
   tokens: CheckboxRecipeInstance["tokens"],
@@ -616,6 +616,7 @@ const buildConfig = (
   refusals: ReviewedCheckboxSourceFact[],
   extraIr: ReviewedCheckboxSourceFact[],
   unsupported: string[],
+  content: { label: string } = sharedContent,
 ): ReviewedCheckboxAdapterConfig => {
   const facts = [
     ...tokenFacts(slug, `${source.packageName} ${source.exportName} source review`, tokens),
@@ -641,7 +642,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: structuredClone(sharedContent),
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -664,7 +665,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedCheckboxSource,
 ): ReviewedCheckboxSourceFact[] => [

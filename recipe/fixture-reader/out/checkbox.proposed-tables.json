@@ -753,6 +753,391 @@
     }
   },
   {
+    "library": "chakra",
+    "archetype": "checkbox",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Checkbox"
+    },
+    "ledger": "extract/computed/out/chakra/checkbox/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "wrapper.size": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+      },
+      "box.size": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width"
+      },
+      "box.radius": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-width"
+      },
+      "box.padding": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.padding-top"
+      },
+      "row.gap": {
+        "fixture": 10,
+        "proposed": 10,
+        "verdict": "match",
+        "captured": 10,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default root.column-gap"
+      },
+      "dash.width": {
+        "fixture": 9.9167,
+        "proposed": 9.9167,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: ledger value unusable: not a px length: \"auto\" [checkmark.js indeterminate <path d=\"M5 12h14\"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)]"
+      },
+      "dash.height": {
+        "fixture": 1.75,
+        "proposed": 1.75,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: ledger value unusable: not a px length: \"auto\" [stroke-width 3 × 14/24 = 1.75]"
+      },
+      "dash.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default tag:path.border-top-left-radius"
+      },
+      "check.width": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:svg.width"
+      },
+      "check.height": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:svg.height"
+      },
+      "check.strokeWidth": {
+        "fixture": 1.75,
+        "proposed": 1.75,
+        "verdict": "match",
+        "captured": 1.75,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:polyline.stroke-width ; extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:svg.width — path stroke-width × (rendered svg width / viewBox 24) — an SVG stroke is a user-space length"
+      },
+      "check.offsetX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel [reviewed 0]"
+      },
+      "check.offsetY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: same as check.offsetX [reviewed 0]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-size"
+      },
+      "states.unchecked.enabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.background-color"
+      },
+      "states.unchecked.enabled.boxBorder": {
+        "fixture": "#d4d4d8ff",
+        "proposed": "#d4d4d8ff",
+        "verdict": "match",
+        "captured": "#d4d4d8ff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-color"
+      },
+      "states.unchecked.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.opacity"
+      },
+      "states.unchecked.enabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.color"
+      },
+      "states.unchecked.enabled.dashFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent [no mark at combo unchecked.enabled — reviewed #00000000]"
+      },
+      "states.unchecked.enabled.checkFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the check glyph does not render in this state; the recipe carries a glyph-slot spelling [no check at combo unchecked.enabled — reviewed (fixture value carried)]"
+      },
+      "states.unchecked.disabled.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.background-color"
+      },
+      "states.unchecked.disabled.boxBorder": {
+        "fixture": "#d4d4d8ff",
+        "proposed": "#d4d4d8ff",
+        "verdict": "match",
+        "captured": "#d4d4d8ff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.border-top-color"
+      },
+      "states.unchecked.disabled.boxOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__control.opacity"
+      },
+      "states.unchecked.disabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.disabled__default cls:chakra-checkbox__label.color"
+      },
+      "states.unchecked.disabled.dashFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent [no mark at combo unchecked.disabled — reviewed #00000000]"
+      },
+      "states.unchecked.disabled.checkFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the check glyph does not render in this state; the recipe carries a glyph-slot spelling [no check at combo unchecked.disabled — reviewed (fixture value carried)]"
+      },
+      "states.checked.enabled.boxFill": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.background-color"
+      },
+      "states.checked.enabled.boxBorder": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.border-top-color"
+      },
+      "states.checked.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.opacity"
+      },
+      "states.checked.enabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__label.color"
+      },
+      "states.checked.enabled.dashFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent [no mark at combo checked.enabled — reviewed #00000000]"
+      },
+      "states.checked.enabled.checkFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default tag:polyline.stroke — the glyph strokes in this colour"
+      },
+      "states.checked.disabled.boxFill": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.background-color"
+      },
+      "states.checked.disabled.boxBorder": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.border-top-color"
+      },
+      "states.checked.disabled.boxOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__control.opacity"
+      },
+      "states.checked.disabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default cls:chakra-checkbox__label.color"
+      },
+      "states.checked.disabled.dashFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent [no mark at combo checked.disabled — reviewed #00000000]"
+      },
+      "states.checked.disabled.checkFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.disabled__default tag:polyline.stroke — the glyph strokes in this colour"
+      },
+      "states.indeterminate.enabled.boxFill": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.background-color"
+      },
+      "states.indeterminate.enabled.boxBorder": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.border-top-color"
+      },
+      "states.indeterminate.enabled.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__control.opacity"
+      },
+      "states.indeterminate.enabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default cls:chakra-checkbox__label.color"
+      },
+      "states.indeterminate.enabled.dashFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.enabled__default tag:path.stroke — the indeterminate mark's paint (a stroked line reads stroke; a box reads background-color)"
+      },
+      "states.indeterminate.enabled.checkFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the check glyph does not render in this state; the recipe carries a glyph-slot spelling [no check at combo indeterminate.enabled — reviewed (fixture value carried)]"
+      },
+      "states.indeterminate.disabled.boxFill": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.background-color"
+      },
+      "states.indeterminate.disabled.boxBorder": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.border-top-color"
+      },
+      "states.indeterminate.disabled.boxOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__control.opacity"
+      },
+      "states.indeterminate.disabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default cls:chakra-checkbox__label.color"
+      },
+      "states.indeterminate.disabled.dashFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#indeterminate.disabled__default tag:path.stroke — the indeterminate mark's paint (a stroked line reads stroke; a box reads background-color)"
+      },
+      "states.indeterminate.disabled.checkFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the check glyph does not render in this state; the recipe carries a glyph-slot spelling [no check at combo indeterminate.disabled — reviewed (fixture value carried)]"
+      },
+      "rowAlign": {
+        "fixture": "center",
+        "proposed": "center",
+        "verdict": "match",
+        "captured": "center",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default root.align-items"
+      },
+      "typography.label.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__label.font-weight — label font-weight → style word"
+      },
+      "check.path": {
+        "fixture": "M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7",
+        "proposed": "M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: glyph geometry is cited from the package source (--glyph), not a computed channel [@chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" strokeWidth=\"3px\" strokeLinecap=\"round\" strokeLinejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"/></svg>]"
+      }
+    }
+  },
+  {
     "library": "antd",
     "archetype": "checkbox",
     "source": {

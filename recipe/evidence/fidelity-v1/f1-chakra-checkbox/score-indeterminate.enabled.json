@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "checkbox/chakra/indeterminate.enabled",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 9,
+    "pctAAUnmasked": 3.75,
+    "pctAAMasked": 3.75,
+    "canvasPx": "20x20",
+    "realPx": "20x20",
+    "inkCanvasPct": 100,
+    "inkRealPct": 100
+  },
+  "canvas": {
+    "path": "/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/6febcf64-adc3-4bf6-89d9-ff1789edee2a/scratchpad/chakra-indeterminate.enabled.png",
+    "sha256": "1b52631ed08dc85a5257d8d51fedb0e81f7491f2368bd570fa167c754ad7efc5"
+  },
+  "reference": {
+    "path": "extract/computed/out/chakra/checkbox/orig-shots/indeterminate.enabled__default.png",
+    "sha256": "6e82bbe94ec2b0f2ae61745657aabfe28a98f564aff096935777b6335cd25d20"
+  },
+  "diff": "/private/tmp/claude-501/-Users-tjpitre-Sites-ds-contracts-poc/6febcf64-adc3-4bf6-89d9-ff1789edee2a/scratchpad/chakra-indeterminate.enabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 245,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 240,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "20x20",
+      "reference": "20x20",
+      "agree": true
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

@@ -20,6 +20,12 @@ ledger `extract/computed/out/mui/checkbox/captured-truth.json` · 55 facts: **22
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### chakra — @chakra-ui/react@3.37.0#Checkbox
+
+ledger `extract/computed/out/chakra/checkbox/captured-truth.json` · 55 facts: **42 match**, **0 drift**, 13 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ### antd — antd@5.29.3#Checkbox
 
 ledger `extract/computed/out/antd/checkbox/captured-truth.json` · 55 facts: **42 match**, **1 drift**, 12 named receipts, 0 unread
@@ -313,6 +319,19 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **checkbox/mui** `states.indeterminate.disabled.checkFill` = `#ffffffff` — the check glyph does not render in this state; the recipe carries a white spelling for the glyph slot _[no check glyph at combo indeterminate.disabled — reviewed #ffffffff]_
 - **checkbox/mui** `typography.label.family` = `Roboto` — the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger _[createTypography.js fontFamily Roboto — reviewed Roboto]_
 - **checkbox/mui** `typography.label.style` = `Regular` — the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger _[createTypography.js fontWeightRegular 400 — reviewed Regular]_
+- **checkbox/chakra** `dash.width` = `9.9167` — ledger value unusable: not a px length: "auto" _[checkmark.js indeterminate <path d="M5 12h14"> stroke 3 round caps in a 24 viewBox, rendered 14: line 14×14/24 = 8.1667 + one cap width 1.75 = 9.9167 (a round-capped stroke lowered to a rounded rect)]_
+- **checkbox/chakra** `dash.height` = `1.75` — ledger value unusable: not a px length: "auto" _[stroke-width 3 × 14/24 = 1.75]_
+- **checkbox/chakra** `check.offsetX` = `0` — glyph placement is the recipe's spelling (placement: center); a flex-centred glyph has no per-glyph offset channel _[reviewed 0]_
+- **checkbox/chakra** `check.offsetY` = `0` — same as check.offsetX _[reviewed 0]_
+- **checkbox/chakra** `states.unchecked.enabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo unchecked.enabled — reviewed #00000000]_
+- **checkbox/chakra** `states.unchecked.enabled.checkFill` = `#ffffffff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo unchecked.enabled — reviewed (fixture value carried)]_
+- **checkbox/chakra** `states.unchecked.disabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo unchecked.disabled — reviewed #00000000]_
+- **checkbox/chakra** `states.unchecked.disabled.checkFill` = `#ffffffff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo unchecked.disabled — reviewed (fixture value carried)]_
+- **checkbox/chakra** `states.checked.enabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo checked.enabled — reviewed #00000000]_
+- **checkbox/chakra** `states.checked.disabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo checked.disabled — reviewed #00000000]_
+- **checkbox/chakra** `states.indeterminate.enabled.checkFill` = `#ffffffff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.enabled — reviewed (fixture value carried)]_
+- **checkbox/chakra** `states.indeterminate.disabled.checkFill` = `#ffffffff` — the check glyph does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.disabled — reviewed (fixture value carried)]_
+- **checkbox/chakra** `check.path` = `M 11.6667 3.5 L 5.25 9.9167 L 2.3333 7` — glyph geometry is cited from the package source (--glyph), not a computed channel _[@chakra-ui/react@3.37.0 dist/esm/components/checkmark/checkmark.js: <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3px" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>]_
 - **checkbox/antd** `check.offsetX` = `0` — glyph placement is the recipe's spelling (placement: center); the ::after centers by translate(-50%,-50%), which the baked path already absorbs _[genCheckboxStyle inner::after translate(-50%,-50%) — reviewed 0]_
 - **checkbox/antd** `check.offsetY` = `0` — same as check.offsetX _[reviewed 0]_
 - **checkbox/antd** `states.unchecked.enabled.dashFill` = `#00000000` — the indeterminate bar does not render in this state (::after transform scale(0) / no background); transparent is the recipe's spelling of absent _[inner::after hidden at combo unchecked.enabled — reviewed #00000000]_

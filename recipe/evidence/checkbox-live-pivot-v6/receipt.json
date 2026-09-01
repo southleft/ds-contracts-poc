@@ -1,0 +1,90 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "checkbox-live-pivot-v6-prepare",
+  "teaching": "MUI even-odd primary icon on paper; AntD pre-rotated L is a check; AntD dash is 8×2 not an 8×8 tile",
+  "runIdentity": "548cf953-296f37b2-ff3a8565-5e8642f1-checkbox-v6",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-5e8642f1-checkbox-v6",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "548cf95362cf7ea99fd42cf4b4d21c6a7fe01495bce805029cf3a85a1267f51b",
+    "MUI": "296f37b23f86a224a7dee5fb41e301753b827869e09991f9a7ac9169d26863fa",
+    "Ant Design": "ff3a8565ebbe2c34e83b34f8200804b9aa81be71cc4521e6b5a72bc9df4c6e56",
+    "Chakra": "5e8642f19996528381f65612c3f5c31b7ead76bfe5a2be35f1cf876eb75419b3"
+  },
+  "writerSha256": "0fa834cb02a475e47f6aa432454d190c8b45da86b8a888f3a3cd7f262c8561a6",
+  "pageId": "212:82228",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=212-82228",
+  "live": {
+    "recordedFrom": "checkbox-v6-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-5e8642f1-checkbox-v6",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-checkbox-reviewed-v1",
+        "sectionId": "212:82229",
+        "setId": "212:82316",
+        "collectionId": "VariableCollectionId:212:82230",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      },
+      {
+        "adapterIdentity": "mui-checkbox-reviewed-v1",
+        "sectionId": "212:82317",
+        "setId": "212:82403",
+        "collectionId": "VariableCollectionId:212:82318",
+        "variantCount": 6,
+        "comparedIrFacts": 211
+      },
+      {
+        "adapterIdentity": "antd-checkbox-reviewed-v1",
+        "sectionId": "212:82404",
+        "setId": "212:82491",
+        "collectionId": "VariableCollectionId:212:82405",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      },
+      {
+        "adapterIdentity": "chakra-checkbox-proposed-v1",
+        "sectionId": "212:82492",
+        "setId": "212:82579",
+        "collectionId": "VariableCollectionId:212:82493",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      }
+    ]
+  },
+  "f1ProposedLibrary": {
+    "library": "chakra",
+    "package": "@chakra-ui/react@3.37.0",
+    "what": "The first library the recipe path was POINTED AT rather than taught. recipe/fixtures/generated/checkbox.chakra.ts was written by recipe/fixture-reader/propose-fixture.ts from extract/computed/out/chakra/checkbox/captured-truth.json through the checkbox@1 role schema: 42 leaves read from the ledger, 3 reviewed (the indeterminate stroke lowered to a rounded rect, cited), 10 archetype spellings, 0 invented. The reader's drift gate reads the proposal back with 0 drift. Minted as the fourth source of this stay through the shared runtime.",
+    "roles": {
+      "hit": "cls:chakra-checkbox__control",
+      "box": "cls:chakra-checkbox__control",
+      "glyph": "tag:svg",
+      "glyphPath": "tag:polyline",
+      "dash": {
+        "part": "tag:path"
+      },
+      "label": "cls:chakra-checkbox__label",
+      "row": "root",
+      "opacityOn": "cls:chakra-checkbox__control"
+    },
+    "humanInputs": [
+      "the role map above (which captured part plays which role)",
+      "the check glyph geometry cited from checkmark.js (a polyline's points are not a computed style channel)",
+      "three dash leaves: a round-capped stroke lowered to a rounded rect, with the arithmetic"
+    ],
+    "fidelity": {
+      "unchecked.enabled": "0.00% 20x20 (manifest row checkbox/chakra)",
+      "checked.enabled": "0.00% 20x20",
+      "indeterminate.enabled": "3.75% 20x20",
+      "unchecked.disabled": "0.00% 20x20",
+      "checked.disabled": "0.00% 20x20"
+    },
+    "evidence": "recipe/evidence/fidelity-v1/f1-chakra-checkbox/ (canvas PNG + scorecard per state); reference extract/computed/out/chakra/checkbox/orig-shots/",
+    "notClaimed": "docs/26 F1 (whole-corpus / unseen-library on the recipe path) needs an owner grade and covers every archetype; this is F1 for ONE archetype, measured, and the owner has not graded it. f1-held-out-v1 (react-day-picker calendar) stays capture-only."
+  }
+}
