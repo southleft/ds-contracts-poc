@@ -23,7 +23,7 @@ the complete inventory of what this does not do, and it is longer than this one.
 Six third-party component libraries — Altitude, Ant Design, Astryx, Carbon, Chakra UI, Flowbite / Tailwind, Fluent 2, MUI, Polaris, shadcn/ui — across five styling
 architectures were run through one pipeline. 120 components came out with a measured floor:
 **86.6% mean computed-style equality** against the original npm package rendering in the same pinned
-Chromium, exact string comparison with no tolerance, over 737,162 compared style cells
+Chromium, exact string comparison with no tolerance, over 735,938 compared style cells
 (58 of 120 components at ≥90%, 93 of 120 at ≥80%).
 In the other direction, a 599-variant Figma kit converted to code scores
 **92.70% visual fidelity** over the 537 statically scorable variants, and the
@@ -116,7 +116,7 @@ pipeline never opened still counts against it.
 | Fluent 2 | 11 | **82.5** | 82.4 | 4/11 | 7/11 | 132,426 | 80.8 | `extract/computed/out/fluent/<comp>/scorecard.json` |
 | Ant Design | 13 | **89.0** | 91.4 | 8/13 | 11/13 | 134,916 | 85.4 | `extract/computed/out/antd/<comp>/scorecard.json` |
 | Chakra UI | 1 | **88.5** | 88.5 | 0/1 | 1/1 | 2,328 | 88.5 | `extract/computed/out/chakra/<comp>/scorecard.json` |
-| **all libraries** | **120** | **86.6** | 89.3 | **58/120** | **93/120** | **737,162** | **85.9** |  |
+| **all libraries** | **120** | **86.6** | 89.3 | **58/120** | **93/120** | **735,938** | **85.9** |  |
 
 **Read every percentage on this page as "on the easy 11.1%."** The 120 components measured here were chosen because they were **tractable**, not at random — they are Button, Badge, Chip, Card, Checkbox, Tag, Avatar, Divider and their siblings. Across the 10 libraries they are 113 of 1,015 components (11.1%). Data grid, tree, virtualized list, date picker, rich text and charts appear in **zero** committed contracts. A mean over this slice is a statement about this slice.
 

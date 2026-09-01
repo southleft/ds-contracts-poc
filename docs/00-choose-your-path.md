@@ -228,7 +228,7 @@ their component-property overrides.
   package rendering in the same pinned Chromium — an exact string match over
   the browser's full longhand set, no tolerance, no whitelist, so a channel the
   pipeline never opened still counts against it. 116 components across nine
-  libraries and six styling architectures: 85.9% cell-weighted over 737,162
+  libraries and six styling architectures: 85.9% cell-weighted over 735,938
   cells, 58 of 120 at ≥90%, 93 of 120 at ≥80%. Every one of the 116 is listed
   worst-first in [24 §3.1](24-what-works.md) — the worst is 50.0%.
 - **What it costs** ([23](23-known-limitations.md)): hours of expert
