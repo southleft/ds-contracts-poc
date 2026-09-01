@@ -63,7 +63,19 @@ jobs:
   fast:
     name: fast gates
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # 15 was set when this lane did less work, and it is now the ONLY thing
+    # standing between the lane and a verdict: run 33476113213 completed all
+    # 197 steps in 15.2 minutes of step time and GitHub cancelled it at 15.3.
+    # It has not been a real timeout for a while — it was the cap that turned
+    # "this lane takes too long" into "this lane never reports", which is how
+    # 300 consecutive runs produced nothing and five red steps went unseen.
+    #
+    # The dominant cost is recipe:live:history:test: 85 seconds locally, 359 on
+    # a CI runner — 40% of the budget for 822 files and 15,551 assertions. It
+    # belongs in its own parallel job eventually; that is a bigger change than
+    # letting the lane finish, and letting it finish is what unblocks every
+    # verdict downstream.
+    timeout-minutes: 25
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
