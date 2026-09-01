@@ -4,7 +4,7 @@
   "name": "CheckboxInput",
   "version": "0.1.0",
   "status": "draft",
-  "description": "Astryx CheckboxInput — a labelled checkbox form control. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/size and the disabled/readOnly/required flags are verbatim; description, disabledMessage, htmlName, isLoading and isLabelHidden are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2).",
+  "description": "Astryx CheckboxInput — a labelled checkbox form control. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/size and the disabled/readOnly/required flags are verbatim; description, disabledMessage, htmlName, isLoading and isLabelHidden are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). PHASE-1 READER ROUND (docs/35 §3): the `checked` tri-state axis is added the MUI/antd Checkbox way — one contract enum expanded by the config through $props into the library's own `value: boolean | 'indeterminate'` (CheckboxInput.d.ts:63) — so the captured truth finally carries checked/indeterminate renderings instead of the value:false pin the first capture rode.",
   "semantics": {
     "element": "div"
   },
@@ -24,6 +24,32 @@
       },
       "required": true,
       "default": "Accept terms"
+    },
+    {
+      "name": "checked",
+      "description": "Whether the checkbox is unchecked, checked, or indeterminate (the library's `value: boolean | 'indeterminate'`).",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
     },
     {
       "name": "size",

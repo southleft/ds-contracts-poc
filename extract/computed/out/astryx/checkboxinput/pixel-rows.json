@@ -1,42 +1,242 @@
 [
   {
-    "key": "sm__default",
+    "key": "unchecked.sm.no-isDisabled__default",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
   },
   {
-    "key": "sm__hover",
+    "key": "unchecked.sm.no-isDisabled__hover",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
   },
   {
-    "key": "sm__focus-visible",
+    "key": "unchecked.sm.no-isDisabled__focus-visible",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
   },
   {
-    "key": "sm__active",
+    "key": "unchecked.sm.no-isDisabled__active",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
   },
   {
-    "key": "md__default",
+    "key": "unchecked.sm.isDisabled__default",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "unchecked.sm.isDisabled__hover",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "unchecked.sm.isDisabled__focus-visible",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "unchecked.sm.isDisabled__active",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "unchecked.md.no-isDisabled__default",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
   },
   {
-    "key": "md__hover",
+    "key": "unchecked.md.no-isDisabled__hover",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
   },
   {
-    "key": "md__focus-visible",
+    "key": "unchecked.md.no-isDisabled__focus-visible",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
   },
   {
-    "key": "md__active",
+    "key": "unchecked.md.no-isDisabled__active",
     "pctExact": 3.193359375,
     "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "unchecked.md.isDisabled__default",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "unchecked.md.isDisabled__hover",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "unchecked.md.isDisabled__focus-visible",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "unchecked.md.isDisabled__active",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "checked.sm.no-isDisabled__default",
+    "pctExact": 3.3561197916666665,
+    "pctAA": 1.171875
+  },
+  {
+    "key": "checked.sm.no-isDisabled__hover",
+    "pctExact": 3.3561197916666665,
+    "pctAA": 1.171875
+  },
+  {
+    "key": "checked.sm.no-isDisabled__focus-visible",
+    "pctExact": 3.408203125,
+    "pctAA": 1.171875
+  },
+  {
+    "key": "checked.sm.no-isDisabled__active",
+    "pctExact": 3.3561197916666665,
+    "pctAA": 1.171875
+  },
+  {
+    "key": "checked.sm.isDisabled__default",
+    "pctExact": 3.3072916666666665,
+    "pctAA": 1.09375
+  },
+  {
+    "key": "checked.sm.isDisabled__hover",
+    "pctExact": 3.3072916666666665,
+    "pctAA": 1.09375
+  },
+  {
+    "key": "checked.sm.isDisabled__focus-visible",
+    "pctExact": 3.3072916666666665,
+    "pctAA": 1.09375
+  },
+  {
+    "key": "checked.sm.isDisabled__active",
+    "pctExact": 3.3072916666666665,
+    "pctAA": 1.09375
+  },
+  {
+    "key": "checked.md.no-isDisabled__default",
+    "pctExact": 3.3919270833333335,
+    "pctAA": 1.1979166666666667
+  },
+  {
+    "key": "checked.md.no-isDisabled__hover",
+    "pctExact": 3.3919270833333335,
+    "pctAA": 1.1979166666666667
+  },
+  {
+    "key": "checked.md.no-isDisabled__focus-visible",
+    "pctExact": 3.4440104166666665,
+    "pctAA": 1.1979166666666667
+  },
+  {
+    "key": "checked.md.no-isDisabled__active",
+    "pctExact": 3.3919270833333335,
+    "pctAA": 1.1979166666666667
+  },
+  {
+    "key": "checked.md.isDisabled__default",
+    "pctExact": 3.3365885416666665,
+    "pctAA": 1.1197916666666667
+  },
+  {
+    "key": "checked.md.isDisabled__hover",
+    "pctExact": 3.3365885416666665,
+    "pctAA": 1.1197916666666667
+  },
+  {
+    "key": "checked.md.isDisabled__focus-visible",
+    "pctExact": 3.3365885416666665,
+    "pctAA": 1.1197916666666667
+  },
+  {
+    "key": "checked.md.isDisabled__active",
+    "pctExact": 3.3365885416666665,
+    "pctAA": 1.1197916666666667
+  },
+  {
+    "key": "indeterminate.sm.no-isDisabled__default",
+    "pctExact": 3.2454427083333335,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.sm.no-isDisabled__hover",
+    "pctExact": 3.2454427083333335,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.sm.no-isDisabled__focus-visible",
+    "pctExact": 3.271484375,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.sm.no-isDisabled__active",
+    "pctExact": 3.2454427083333335,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.sm.isDisabled__default",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "indeterminate.sm.isDisabled__hover",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "indeterminate.sm.isDisabled__focus-visible",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "indeterminate.sm.isDisabled__active",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "indeterminate.md.no-isDisabled__default",
+    "pctExact": 3.193359375,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.md.no-isDisabled__hover",
+    "pctExact": 3.193359375,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.md.no-isDisabled__focus-visible",
+    "pctExact": 3.193359375,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.md.no-isDisabled__active",
+    "pctExact": 3.193359375,
+    "pctAA": 1.1295572916666667
+  },
+  {
+    "key": "indeterminate.md.isDisabled__default",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "indeterminate.md.isDisabled__hover",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "indeterminate.md.isDisabled__focus-visible",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
+  },
+  {
+    "key": "indeterminate.md.isDisabled__active",
+    "pctExact": 3.14453125,
+    "pctAA": 1.0514322916666667
   }
 ]

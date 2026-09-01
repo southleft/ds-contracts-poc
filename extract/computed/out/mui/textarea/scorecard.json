@@ -1,0 +1,3858 @@
+{
+  "component": "Textarea",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 4,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 2256,
+    "cellsEqual": 1672,
+    "pctEqual": 74.11347517730496,
+    "rowsFullyEqual": 0,
+    "rows": 16
+  },
+  "pixel": {
+    "pairs": 16,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 4.1892361111111125,
+    "meanAA": 2.3454861111111116,
+    "maxAA": 4.029761904761905
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 43,
+    "mintedLeavesUnfolded": 39,
+    "baseBindings": 85,
+    "stateBindings": 29,
+    "codeOnlyChannels": 15,
+    "overflowBindings": 26,
+    "folds": 76
+  },
+  "worstRows": [
+    {
+      "key": "value.enabled__focus-visible",
+      "pctAA": 4.029761904761905,
+      "pctExact": 6.301587301587301,
+      "channelsMismatched": 27
+    },
+    {
+      "key": "value.enabled__active",
+      "pctAA": 4.029761904761905,
+      "pctExact": 6.301587301587301,
+      "channelsMismatched": 27
+    },
+    {
+      "key": "value.enabled__hover",
+      "pctAA": 3.109126984126984,
+      "pctExact": 5.388888888888889,
+      "channelsMismatched": 12
+    },
+    {
+      "key": "empty.enabled__focus-visible",
+      "pctAA": 2.8392857142857144,
+      "pctExact": 3.882936507936508,
+      "channelsMismatched": 28
+    },
+    {
+      "key": "empty.enabled__active",
+      "pctAA": 2.8392857142857144,
+      "pctExact": 3.882936507936508,
+      "channelsMismatched": 28
+    },
+    {
+      "key": "value.enabled__default",
+      "pctAA": 2.498015873015873,
+      "pctExact": 4.7023809523809526,
+      "channelsMismatched": 8
+    },
+    {
+      "key": "value.disabled__default",
+      "pctAA": 2.4007936507936507,
+      "pctExact": 5.365079365079365,
+      "channelsMismatched": 55
+    },
+    {
+      "key": "value.disabled__hover",
+      "pctAA": 2.4007936507936507,
+      "pctExact": 5.365079365079365,
+      "channelsMismatched": 55
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.display",
+      16
+    ],
+    [
+      "root.vertical-align",
+      16
+    ],
+    [
+      "inputbase-input.animation-duration",
+      16
+    ],
+    [
+      "inputbase-input.animation-name",
+      16
+    ],
+    [
+      "outlinedinput-notchedoutline.min-width",
+      16
+    ],
+    [
+      "outlinedinput-notchedoutline.border-bottom-color",
+      14
+    ],
+    [
+      "outlinedinput-notchedoutline.border-left-color",
+      14
+    ],
+    [
+      "outlinedinput-notchedoutline.border-right-color",
+      14
+    ],
+    [
+      "outlinedinput-notchedoutline.border-top-color",
+      14
+    ],
+    [
+      "label-3.max-width",
+      10
+    ],
+    [
+      "label-3.transform",
+      10
+    ],
+    [
+      "label-3.transition-behavior",
+      10
+    ],
+    [
+      "label-3.border-bottom-color",
+      8
+    ],
+    [
+      "label-3.border-left-color",
+      8
+    ],
+    [
+      "label-3.border-right-color",
+      8
+    ]
+  ],
+  "namedLosses": [
+    "promotion: non-painting-part: inputbase-input-2 <textarea> renders NO INK in any combo it appears in (visibility: hidden) and no descendant paints — NOT promoted. A part that paints nowhere must carry the fact that hides it (declared display:none / an opacity token) or be refused by name; neither `visibility` nor `content-visibility` has a carried spelling, so promoting this box would put a VISIBLE frame on the canvas that the browser draws nowhere (the general form of the SVG <title> defect)",
+    "promotion: inert-overlay-wrapper: part-1-2-0 draws no box in any captured combo, carries no text/icon/shape of its own, and every one of its 1 child part(s) is declared display:none — a carried part that draws NOTHING; refused by name (Carbon's tooltip `popover` wrapper; census sibling of the portal round's stripInertPortalChildren)",
+    "overflow: inputbase-input.outline-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-color [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-width [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-color [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: inputbase-input.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-bottom-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-left-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-right-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: outlinedinput-notchedoutline.border-top-color [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-3.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label-3.transform — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label-3.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label.max-width — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: label.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: inputbase-input.white-space-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: outlinedinput-notchedoutline.min-width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <fieldset>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <fieldset> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only[active]: label-3.color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label-3.color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[disabled]: label.color — default-state values not kind-compatible for padding — cannot correlate",
+    "code-only[focus-visible]: label-3.color — default-state values not kind-compatible for padding — cannot correlate"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/mui/tokens/mui-minted.dtcg.json",
+    "leavesAdded": 1981,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "empty.enabled__default",
+      "channelsCompared": 141,
+      "channelsEqual": 134,
+      "pctExact": 1.8273809523809523,
+      "pctAA": 1.2380952380952381,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(100% - 24px)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "empty.enabled__hover",
+      "channelsCompared": 141,
+      "channelsEqual": 130,
+      "pctExact": 2.4226190476190474,
+      "pctAA": 1.7857142857142858,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(100% - 24px)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "empty.enabled__focus-visible",
+      "channelsCompared": 141,
+      "channelsEqual": 113,
+      "pctExact": 3.882936507936508,
+      "pctAA": 2.8392857142857144,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "bottom",
+          "ours": "56px",
+          "theirs": "33px"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "empty.enabled__active",
+      "channelsCompared": 141,
+      "channelsEqual": 113,
+      "pctExact": 3.882936507936508,
+      "pctAA": 2.8392857142857144,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "bottom",
+          "ours": "56px",
+          "theirs": "33px"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__default",
+      "channelsCompared": 141,
+      "channelsEqual": 87,
+      "pctExact": 2.7142857142857144,
+      "pctAA": 1.3888888888888888,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(100% - 24px)"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__hover",
+      "channelsCompared": 141,
+      "channelsEqual": 87,
+      "pctExact": 2.7142857142857144,
+      "pctAA": 1.3888888888888888,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(100% - 24px)"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__focus-visible",
+      "channelsCompared": 141,
+      "channelsEqual": 87,
+      "pctExact": 2.7142857142857144,
+      "pctAA": 1.3888888888888888,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(100% - 24px)"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__active",
+      "channelsCompared": 141,
+      "channelsEqual": 87,
+      "pctExact": 2.7142857142857144,
+      "pctAA": 1.3888888888888888,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(100% - 24px)"
+        },
+        {
+          "part": "label",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__default",
+      "channelsCompared": 141,
+      "channelsEqual": 133,
+      "pctExact": 4.7023809523809526,
+      "pctAA": 2.498015873015873,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__hover",
+      "channelsCompared": 141,
+      "channelsEqual": 129,
+      "pctExact": 5.388888888888889,
+      "pctAA": 3.109126984126984,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.87)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__focus-visible",
+      "channelsCompared": 141,
+      "channelsEqual": 114,
+      "pctExact": 6.301587301587301,
+      "pctAA": 4.029761904761905,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__active",
+      "channelsCompared": 141,
+      "channelsEqual": 114,
+      "pctExact": 6.301587301587301,
+      "pctAA": 4.029761904761905,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(25, 118, 210, 1)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-width",
+          "ours": "1px",
+          "theirs": "2px"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__default",
+      "channelsCompared": 141,
+      "channelsEqual": 86,
+      "pctExact": 5.365079365079365,
+      "pctAA": 2.4007936507936507,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__hover",
+      "channelsCompared": 141,
+      "channelsEqual": 86,
+      "pctExact": 5.365079365079365,
+      "pctAA": 2.4007936507936507,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__focus-visible",
+      "channelsCompared": 141,
+      "channelsEqual": 86,
+      "pctExact": 5.365079365079365,
+      "pctAA": 2.4007936507936507,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__active",
+      "channelsCompared": 141,
+      "channelsEqual": 86,
+      "pctExact": 5.365079365079365,
+      "pctAA": 2.4007936507936507,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "flex",
+          "theirs": "inline-flex"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "max-width",
+          "ours": "none",
+          "theirs": "calc(133% - 32px)"
+        },
+        {
+          "part": "label-3",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.6)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transform",
+          "ours": "none",
+          "theirs": "matrix(0.75, 0, 0, 0.75, 14, -9)"
+        },
+        {
+          "part": "label-3",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-formcontrol",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.01s"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "mui-auto-fill-cancel"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "inputbase-input",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-bottom-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-left-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-right-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "border-top-color",
+          "ours": "rgba(0, 0, 0, 0.23)",
+          "theirs": "rgba(0, 0, 0, 0.26)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "caret-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "column-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "cursor",
+          "ours": "text",
+          "theirs": "default"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "min-width",
+          "ours": "min-content",
+          "theirs": "0%"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "outline-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "row-rule-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-decoration-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        },
+        {
+          "part": "outlinedinput-notchedoutline",
+          "channel": "text-emphasis-color",
+          "ours": "rgba(0, 0, 0, 0.87)",
+          "theirs": "rgba(0, 0, 0, 0.38)"
+        }
+      ]
+    }
+  ]
+}

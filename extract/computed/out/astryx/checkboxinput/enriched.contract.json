@@ -4,7 +4,7 @@
   "name": "CheckboxInput",
   "version": "0.1.0",
   "status": "draft",
-  "description": "Astryx CheckboxInput — a labelled checkbox form control. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/size and the disabled/readOnly/required flags are verbatim; description, disabledMessage, htmlName, isLoading and isLabelHidden are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 151.0.7922.34; overflow channels in the sibling extension file.",
+  "description": "Astryx CheckboxInput — a labelled checkbox form control. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/size and the disabled/readOnly/required flags are verbatim; description, disabledMessage, htmlName, isLoading and isLabelHidden are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). PHASE-1 READER ROUND (docs/35 §3): the `checked` tri-state axis is added the MUI/antd Checkbox way — one contract enum expanded by the config through $props into the library's own `value: boolean | 'indeterminate'` (CheckboxInput.d.ts:63) — so the captured truth finally carries checked/indeterminate renderings instead of the value:false pin the first capture rode. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
   "semantics": {
     "element": "div"
   },
@@ -22,6 +22,32 @@
         },
         "code": {
           "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "description": "Whether the checkbox is unchecked, checked, or indeterminate (the library's `value: boolean | 'indeterminate'`).",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "value"
         }
       }
     },
@@ -96,12 +122,19 @@
     }
   ],
   "states": [
+    "disabled",
     "focus-visible"
   ],
   "anatomy": {
     "root": {
       "declared": {
-        "display": "block"
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       "parts": {
         "part-0": {
@@ -120,6 +153,12 @@
               },
               "declared": {
                 "aspect-ratio": "1 / 1",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                 "isolation": "isolate",
                 "position": "relative"
               },
@@ -130,25 +169,30 @@
                   "declared": {
                     "display": "none",
                     "appearance": "auto",
-                    "border-bottom-style": "none",
-                    "border-left-style": "none",
-                    "border-right-style": "none",
-                    "border-top-style": "none",
+                    "box-sizing": "border-box",
                     "cursor": "pointer",
+                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                     "position": "absolute"
                   },
                   "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    },
                     "focus-visible": {
                       "outline-style": "auto"
                     }
                   },
                   "tokens": {
                     "bottom": "{imported.shared.size-0}",
+                    "color": "{imported.shared.color-171717}",
                     "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-24}",
                     "min-height": "{imported.shared.size-0}",
                     "min-width": "{imported.shared.size-0}",
                     "opacity": "{imported.checkbox-input.part-0-0-0.opacity}",
+                    "outline-color": "{imported.shared.color-171717}",
                     "right": "{imported.shared.size-0}",
+                    "tab-size": "{imported.shared.num-4}",
                     "top": "{imported.shared.size-0}",
                     "z-index": "{imported.checkbox-input.part-0-0-0.z-index}"
                   },
@@ -166,6 +210,32 @@
                         }
                       }
                     }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_8_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#005fcc",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    }
                   ]
                 },
                 "checkbox": {
@@ -181,6 +251,8 @@
                     "border-left-style": "solid",
                     "border-right-style": "solid",
                     "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                     "transition-duration": "0.125s",
                     "transition-property": "background-color, border-color",
                     "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
@@ -189,8 +261,13 @@
                     "icon": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
-                        "display": "none",
                         "aspect-ratio": "1 / 1",
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "box-sizing": "border-box",
+                        "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                         "overflow-x": "hidden",
                         "overflow-y": "hidden"
                       },
@@ -219,9 +296,9 @@
                         }
                       },
                       "tokens": {
-                        "color": "{imported.shared.color-ffffff}",
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
+                        "color": "{imported.checkbox-input.icon.color}",
+                        "line-height": "{imported.shared.size-24}",
+                        "tab-size": "{imported.shared.num-4}"
                       },
                       "tokensByProp": [
                         {
@@ -242,20 +319,38 @@
                     "part-0-0-1-1": {
                       "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
                       "declared": {
-                        "display": "none"
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "box-sizing": "border-box",
+                        "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                       },
                       "tokens": {
-                        "background-color": "{imported.shared.color-ffffff}",
+                        "background-color": "{imported.checkbox-input.part-0-0-1-1.background-color}",
                         "border-bottom-left-radius": "{imported.shared.size-1}",
                         "border-bottom-right-radius": "{imported.shared.size-1}",
                         "border-top-left-radius": "{imported.shared.size-1}",
                         "border-top-right-radius": "{imported.shared.size-1}",
-                        "color": "{imported.checkbox-input.part-0-0-1-1.color}",
                         "height": "{imported.shared.size-2}",
-                        "min-height": "{imported.shared.size-0}",
-                        "min-width": "{imported.shared.size-0}"
+                        "line-height": "{imported.shared.size-24}",
+                        "tab-size": "{imported.shared.num-4}"
                       },
                       "tokensByProp": [
+                        {
+                          "prop": "checked",
+                          "map": {
+                            "checked": {
+                              "color": "{imported.checkbox-input.part-0-0-1-1.color.checked}"
+                            },
+                            "indeterminate": {
+                              "color": "{imported.checkbox-input.part-0-0-1-1.color.indeterminate}"
+                            },
+                            "unchecked": {
+                              "color": "{imported.checkbox-input.part-0-0-1-1.color.unchecked}"
+                            }
+                          }
+                        },
                         {
                           "prop": "size",
                           "map": {
@@ -276,22 +371,50 @@
                     }
                   },
                   "tokens": {
-                    "background-color": "{imported.shared.color-ffffff}",
-                    "border-bottom-color": "{imported.shared.color-d4d4d4}",
                     "border-bottom-left-radius": "{imported.shared.size-6}",
                     "border-bottom-right-radius": "{imported.shared.size-6}",
                     "border-bottom-width": "{imported.shared.size-1}",
-                    "border-left-color": "{imported.shared.color-d4d4d4}",
                     "border-left-width": "{imported.shared.size-1}",
-                    "border-right-color": "{imported.shared.color-d4d4d4}",
                     "border-right-width": "{imported.shared.size-1}",
-                    "border-top-color": "{imported.shared.color-d4d4d4}",
                     "border-top-left-radius": "{imported.shared.size-6}",
                     "border-top-right-radius": "{imported.shared.size-6}",
                     "border-top-width": "{imported.shared.size-1}",
-                    "color": "{imported.checkbox-input.checkbox.color}"
+                    "line-height": "{imported.shared.size-24}",
+                    "tab-size": "{imported.shared.num-4}"
                   },
                   "tokensByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "checked": {
+                          "background-color": "{imported.checkbox-input.checkbox.background-color.checked}",
+                          "border-bottom-color": "{imported.checkbox-input.checkbox.border-bottom-color.checked}",
+                          "border-left-color": "{imported.checkbox-input.checkbox.border-left-color.checked}",
+                          "border-right-color": "{imported.checkbox-input.checkbox.border-right-color.checked}",
+                          "border-top-color": "{imported.checkbox-input.checkbox.border-top-color.checked}",
+                          "color": "{imported.checkbox-input.checkbox.color.checked}",
+                          "outline-color": "{imported.checkbox-input.checkbox.outline-color.checked}"
+                        },
+                        "indeterminate": {
+                          "background-color": "{imported.checkbox-input.checkbox.background-color.indeterminate}",
+                          "border-bottom-color": "{imported.checkbox-input.checkbox.border-bottom-color.indeterminate}",
+                          "border-left-color": "{imported.checkbox-input.checkbox.border-left-color.indeterminate}",
+                          "border-right-color": "{imported.checkbox-input.checkbox.border-right-color.indeterminate}",
+                          "border-top-color": "{imported.checkbox-input.checkbox.border-top-color.indeterminate}",
+                          "color": "{imported.checkbox-input.checkbox.color.indeterminate}",
+                          "outline-color": "{imported.checkbox-input.checkbox.outline-color.indeterminate}"
+                        },
+                        "unchecked": {
+                          "background-color": "{imported.checkbox-input.checkbox.background-color.unchecked}",
+                          "border-bottom-color": "{imported.checkbox-input.checkbox.border-bottom-color.unchecked}",
+                          "border-left-color": "{imported.checkbox-input.checkbox.border-left-color.unchecked}",
+                          "border-right-color": "{imported.checkbox-input.checkbox.border-right-color.unchecked}",
+                          "border-top-color": "{imported.checkbox-input.checkbox.border-top-color.unchecked}",
+                          "color": "{imported.checkbox-input.checkbox.color.unchecked}",
+                          "outline-color": "{imported.checkbox-input.checkbox.outline-color.unchecked}"
+                        }
+                      }
+                    },
                     {
                       "prop": "size",
                       "map": {
@@ -305,14 +428,133 @@
                         }
                       }
                     }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.95 0.95 0.95)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-bottom-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-left-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-right-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-top-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "background-color",
+                      "value": "{imported.checkbox-input.checkbox.background-color-state-disabled.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#ebebeb",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#ebebeb",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#ebebeb",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#ebebeb",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "opacity",
+                      "value": "0.5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#262626",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.95 0.95 0.95)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-bottom-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-left-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-right-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-top-color",
+                      "value": "color(srgb 0.665098 0.665098 0.665098)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
                   ]
                 }
               },
               "tokens": {
                 "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-171717}",
                 "flex-shrink": "{imported.checkbox-input.part-0-0.flex-shrink}",
                 "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-24}",
                 "right": "{imported.shared.size-0}",
+                "tab-size": "{imported.shared.num-4}",
                 "top": "{imported.shared.size-0}"
               },
               "tokensByProp": [
@@ -349,7 +591,18 @@
                     "align": "center"
                   },
                   "declared": {
-                    "cursor": "pointer"
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "cursor": "pointer",
+                    "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
                   },
                   "tokens": {
                     "color": "{imported.checkbox-input.label.color}",
@@ -357,23 +610,51 @@
                     "font-size": "{imported.checkbox-input.label.font-size}",
                     "font-weight": "{imported.checkbox-input.label.font-weight}",
                     "line-height": "{imported.checkbox-input.label.line-height}",
-                    "row-gap": "{imported.checkbox-input.label.row-gap}"
+                    "row-gap": "{imported.checkbox-input.label.row-gap}",
+                    "tab-size": "{imported.shared.num-4}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.checkbox-input.label.color-state-disabled}"
+                    }
                   }
                 }
               },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+              },
               "tokens": {
+                "color": "{imported.shared.color-171717}",
                 "column-gap": "{imported.shared.size-2}",
                 "height": "{imported.checkbox-input.part-0-1.height}",
+                "line-height": "{imported.shared.size-24}",
                 "row-gap": "{imported.shared.size-2}",
+                "tab-size": "{imported.shared.num-4}",
                 "width": "{imported.checkbox-input.part-0-1.width}"
               }
             }
           },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Figtree, -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+          },
           "tokens": {
+            "color": "{imported.shared.color-171717}",
             "column-gap": "{imported.checkbox-input.part-0.column-gap}",
+            "line-height": "{imported.shared.size-24}",
             "min-height": "{imported.shared.size-0}",
             "min-width": "{imported.shared.size-0}",
-            "row-gap": "{imported.checkbox-input.part-0.row-gap}"
+            "row-gap": "{imported.checkbox-input.part-0.row-gap}",
+            "tab-size": "{imported.shared.num-4}"
           },
           "tokensByProp": [
             {
@@ -391,6 +672,11 @@
             }
           ]
         }
+      },
+      "tokens": {
+        "color": "{imported.shared.color-171717}",
+        "line-height": "{imported.shared.size-24}",
+        "tab-size": "{imported.shared.num-4}"
       },
       "tokensByProp": [
         {

@@ -1,0 +1,802 @@
+{
+  "component": "Textarea",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 4,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 848,
+    "cellsEqual": 764,
+    "pctEqual": 90.09433962264151,
+    "rowsFullyEqual": 0,
+    "rows": 16
+  },
+  "pixel": {
+    "pairs": 16,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 2.0924479166666665,
+    "meanAA": 0.9609374999999999,
+    "maxAA": 2.9296875
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 23,
+    "mintedLeavesUnfolded": 20,
+    "baseBindings": 28,
+    "stateBindings": 18,
+    "codeOnlyChannels": 7,
+    "overflowBindings": 0,
+    "folds": 6
+  },
+  "worstRows": [
+    {
+      "key": "value.enabled__active",
+      "pctAA": 2.9296875,
+      "pctExact": 4.528645833333333,
+      "channelsMismatched": 9
+    },
+    {
+      "key": "empty.enabled__active",
+      "pctAA": 2.0833333333333335,
+      "pctExact": 2.8463541666666665,
+      "channelsMismatched": 10
+    },
+    {
+      "key": "value.enabled__focus-visible",
+      "pctAA": 1.2213541666666667,
+      "pctExact": 2.7265625,
+      "channelsMismatched": 5
+    },
+    {
+      "key": "value.enabled__default",
+      "pctAA": 1.2213541666666667,
+      "pctExact": 2.7265625,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "value.enabled__hover",
+      "pctAA": 1.2213541666666667,
+      "pctExact": 2.7265625,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "value.disabled__default",
+      "pctAA": 1.0260416666666667,
+      "pctExact": 2.6692708333333335,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "value.disabled__hover",
+      "pctAA": 1.0260416666666667,
+      "pctExact": 2.6692708333333335,
+      "channelsMismatched": 4
+    },
+    {
+      "key": "value.disabled__focus-visible",
+      "pctAA": 1.0260416666666667,
+      "pctExact": 2.6692708333333335,
+      "channelsMismatched": 4
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.display",
+      16
+    ],
+    [
+      "root.list-style-type",
+      16
+    ],
+    [
+      "root.resize",
+      16
+    ],
+    [
+      "root.vertical-align",
+      16
+    ],
+    [
+      "root.text-overflow",
+      8
+    ],
+    [
+      "root.outline-color",
+      4
+    ],
+    [
+      "root.border-bottom-color",
+      2
+    ],
+    [
+      "root.border-left-color",
+      2
+    ],
+    [
+      "root.border-right-color",
+      2
+    ],
+    [
+      "root.border-top-color",
+      2
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.resize — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.text-overflow — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.white-space-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only[active]: root.transition-behavior — value shape outside mintable kinds and outside the declared vocabulary"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/antd/tokens/antd-minted.dtcg.json",
+    "leavesAdded": 1275,
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "empty.enabled__default",
+      "channelsCompared": 53,
+      "channelsEqual": 48,
+      "pctExact": 1.0442708333333333,
+      "pctAA": 0.375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "empty.enabled__hover",
+      "channelsCompared": 53,
+      "channelsEqual": 48,
+      "pctExact": 1.0442708333333333,
+      "pctAA": 0.375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "empty.enabled__focus-visible",
+      "channelsCompared": 53,
+      "channelsEqual": 47,
+      "pctExact": 1.0442708333333333,
+      "pctAA": 0.375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "empty.enabled__active",
+      "channelsCompared": 53,
+      "channelsEqual": 43,
+      "pctExact": 2.8463541666666665,
+      "pctAA": 2.0833333333333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__default",
+      "channelsCompared": 53,
+      "channelsEqual": 48,
+      "pctExact": 1.0286458333333333,
+      "pctAA": 0.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__hover",
+      "channelsCompared": 53,
+      "channelsEqual": 48,
+      "pctExact": 1.0286458333333333,
+      "pctAA": 0.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__focus-visible",
+      "channelsCompared": 53,
+      "channelsEqual": 48,
+      "pctExact": 1.0286458333333333,
+      "pctAA": 0.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "empty.disabled__active",
+      "channelsCompared": 53,
+      "channelsEqual": 48,
+      "pctExact": 1.0286458333333333,
+      "pctAA": 0.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "text-overflow",
+          "ours": "clip",
+          "theirs": "ellipsis"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__default",
+      "channelsCompared": 53,
+      "channelsEqual": 49,
+      "pctExact": 2.7265625,
+      "pctAA": 1.2213541666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__hover",
+      "channelsCompared": 53,
+      "channelsEqual": 49,
+      "pctExact": 2.7265625,
+      "pctAA": 1.2213541666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__focus-visible",
+      "channelsCompared": 53,
+      "channelsEqual": 48,
+      "pctExact": 2.7265625,
+      "pctAA": 1.2213541666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.enabled__active",
+      "channelsCompared": 53,
+      "channelsEqual": 44,
+      "pctExact": 4.528645833333333,
+      "pctAA": 2.9296875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "border-bottom-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-left-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-right-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "border-top-color",
+          "ours": "rgba(64, 150, 255, 1)",
+          "theirs": "rgba(22, 119, 255, 1)"
+        },
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "outline-color",
+          "ours": "rgba(0, 95, 204, 1)",
+          "theirs": "rgba(0, 0, 0, 0.88)"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__default",
+      "channelsCompared": 53,
+      "channelsEqual": 49,
+      "pctExact": 2.6692708333333335,
+      "pctAA": 1.0260416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__hover",
+      "channelsCompared": 53,
+      "channelsEqual": 49,
+      "pctExact": 2.6692708333333335,
+      "pctAA": 1.0260416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__focus-visible",
+      "channelsCompared": 53,
+      "channelsEqual": 49,
+      "pctExact": 2.6692708333333335,
+      "pctAA": 1.0260416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    },
+    {
+      "key": "value.disabled__active",
+      "channelsCompared": 53,
+      "channelsEqual": 49,
+      "pctExact": 2.6692708333333335,
+      "pctAA": 1.0260416666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "inline-block"
+        },
+        {
+          "part": "root",
+          "channel": "list-style-type",
+          "ours": "disc",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "resize",
+          "ours": "both",
+          "theirs": "vertical"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "bottom"
+        }
+      ]
+    }
+  ]
+}

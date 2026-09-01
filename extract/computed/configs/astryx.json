@@ -176,20 +176,69 @@
       "__note:readmitted": "RE-ADMITTED (was `_bannerReceipt`, EXCLUDED for a double-run determinism refusal: height/transform/radii unstable on an unsettled expand/collapse transition). The transition belongs to the collapse TOGGLE, which Banner renders only when it receives `children` (Banner.tsx header comment: \"When children are provided, a collapse/expand toggle button appears in the end area\"). This mount passes NO children (sampleText \"\"), so the toggle never exists and there is nothing to settle. If the double-run self-check refuses it again the exclusion stands and is re-recorded \u2014 the refusal is the instrument, not an obstacle."
     },
     {
+      "__note:readerRound": "PHASE-1 READER ROUND (docs/35 §3) — REAL RECAPTURE with the MUI Switch spelling the Switch __note:valueAxis prescribed: the first capture PINNED value:false, so the committed truth carried no checked or indeterminate rendering at all and no disabled plane — the recipe's Checked×Disabled table had nothing to be read against. `checked` is one contract enum axis expanded by axisValueMap $props into the library's own `value: boolean | 'indeterminate'` (CheckboxInput.d.ts:63); isDisabled rides stateProps (the Astryx Switch precedent). size stays an axis (sm|md) so the earlier size coverage is not lost.",
       "name": "CheckboxInput",
       "importName": "CheckboxInput",
       "contract": "examples/astryx/contracts-seed/checkbox-input.contract.json",
       "sampleText": "",
       "axes": [
+        "checked",
         "size"
       ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": { "$props": { "value": false } },
+          "checked": { "$props": { "value": true } },
+          "indeterminate": { "$props": { "value": "indeterminate" } }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
       "fixedProps": {
-        "label": "Accept terms",
-        "value": false
+        "label": "Accept terms"
       },
       "callbackProps": [
         "onChange"
       ]
+    },
+    {
+      "__note": "PHASE-1 READER ROUND (docs/35 §3) — the Textarea archetype's Astryx leg. TextArea.tsx (label REQUIRED via Field/FieldLabel; rows default 3; inputWrapperStyles.base paddingBlock --spacing-1 paddingInline --spacing-2, border --border-width, radius --radius-element). `value` is REQUIRED by TextAreaProps (dist/TextArea/TextArea.d.ts:67) — the `content` axis expands through $props into the controlled string (the TextInput precedent mounts the empty string so the placeholder renders). isDisabled rides stateProps. Label 'Notes' + placeholder 'Add a note' are the recipe's shared content. STAGE INNER WIDTH = 320px, the width the recipe's textarea table renders at (the TextInput/ProgressBar fill-width pin: a fill-width field in the default flex stage would be sized by the harness container, not the library).",
+      "name": "TextArea",
+      "importName": "TextArea",
+      "contract": "examples/astryx/contracts-seed/text-area.contract.json",
+      "sampleText": "",
+      "axes": [
+        "content"
+      ],
+      "axisValueMap": {
+        "content": {
+          "empty": { "$props": { "value": "" } },
+          "value": { "$props": { "value": "Meeting notes for Tuesday." } }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Notes",
+        "placeholder": "Add a note"
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 352,
+        "height": 176,
+        "padding": 16
+      }
     },
     {
       "name": "ProgressBar",

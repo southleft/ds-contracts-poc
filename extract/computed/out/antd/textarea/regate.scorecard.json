@@ -1,0 +1,951 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Textarea",
+  "config": "extract/computed/configs/antd.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "appearance",
+        "value": "auto"
+      },
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "cursor",
+        "value": "text"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "auto"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "auto"
+      },
+      {
+        "part": "root",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.3s"
+      }
+    ],
+    "state": [
+      {
+        "state": "active",
+        "part": "root",
+        "channel": "transition-delay",
+        "value": "0s, 0s, 0s"
+      },
+      {
+        "state": "active",
+        "part": "root",
+        "channel": "transition-duration",
+        "value": "0.3s, 0s, 0s"
+      },
+      {
+        "state": "active",
+        "part": "root",
+        "channel": "transition-property",
+        "value": "all, height, width"
+      },
+      {
+        "state": "active",
+        "part": "root",
+        "channel": "transition-timing-function",
+        "value": "ease, ease, ease"
+      },
+      {
+        "state": "disabled",
+        "part": "root",
+        "channel": "cursor",
+        "value": "not-allowed"
+      }
+    ]
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Textarea",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 4,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 848,
+      "cellsEqual": 764,
+      "pctEqual": 90.09433962264151,
+      "rowsFullyEqual": 0,
+      "rows": 16
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 16,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 23,
+      "mintedLeavesUnfolded": 20,
+      "baseBindings": 28,
+      "stateBindings": 18,
+      "codeOnlyChannels": 7,
+      "overflowBindings": 0,
+      "folds": 6
+    },
+    "worstRows": [
+      {
+        "key": "empty.enabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 10,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "value.enabled__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 9,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "empty.enabled__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 6,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "empty.enabled__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "empty.enabled__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "empty.disabled__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "empty.disabled__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "empty.disabled__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 5,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.display",
+        16
+      ],
+      [
+        "root.list-style-type",
+        16
+      ],
+      [
+        "root.resize",
+        16
+      ],
+      [
+        "root.vertical-align",
+        16
+      ],
+      [
+        "root.text-overflow",
+        8
+      ],
+      [
+        "root.outline-color",
+        4
+      ],
+      [
+        "root.border-bottom-color",
+        2
+      ],
+      [
+        "root.border-left-color",
+        2
+      ],
+      [
+        "root.border-right-color",
+        2
+      ],
+      [
+        "root.border-top-color",
+        2
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.list-style-type — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: root.resize — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: root.text-overflow — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: root.white-space-collapse — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <textarea>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <textarea> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only[active]: root.transition-behavior — value shape outside mintable kinds and outside the declared vocabulary"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/antd/tokens/antd-minted.dtcg.json",
+      "leavesAdded": 1275,
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "empty.enabled__default",
+        "channelsCompared": 53,
+        "channelsEqual": 48,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "empty.enabled__hover",
+        "channelsCompared": 53,
+        "channelsEqual": 48,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "empty.enabled__focus-visible",
+        "channelsCompared": 53,
+        "channelsEqual": 47,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 95, 204, 1)",
+            "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "empty.enabled__active",
+        "channelsCompared": 53,
+        "channelsEqual": 43,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 95, 204, 1)",
+            "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "empty.disabled__default",
+        "channelsCompared": 53,
+        "channelsEqual": 48,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "empty.disabled__hover",
+        "channelsCompared": 53,
+        "channelsEqual": 48,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "empty.disabled__focus-visible",
+        "channelsCompared": 53,
+        "channelsEqual": 48,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "empty.disabled__active",
+        "channelsCompared": 53,
+        "channelsEqual": 48,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "text-overflow",
+            "ours": "clip",
+            "theirs": "ellipsis"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.enabled__default",
+        "channelsCompared": 53,
+        "channelsEqual": 49,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.enabled__hover",
+        "channelsCompared": 53,
+        "channelsEqual": 49,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.enabled__focus-visible",
+        "channelsCompared": 53,
+        "channelsEqual": 48,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 95, 204, 1)",
+            "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.enabled__active",
+        "channelsCompared": 53,
+        "channelsEqual": 44,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "border-bottom-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "border-left-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "border-right-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "border-top-color",
+            "ours": "rgba(64, 150, 255, 1)",
+            "theirs": "rgba(22, 119, 255, 1)"
+          },
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "outline-color",
+            "ours": "rgba(0, 95, 204, 1)",
+            "theirs": "rgba(0, 0, 0, 0.88)"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.disabled__default",
+        "channelsCompared": 53,
+        "channelsEqual": 49,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.disabled__hover",
+        "channelsCompared": 53,
+        "channelsEqual": 49,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.disabled__focus-visible",
+        "channelsCompared": 53,
+        "channelsEqual": 49,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "value.disabled__active",
+        "channelsCompared": 53,
+        "channelsEqual": 49,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "inline-block"
+          },
+          {
+            "part": "root",
+            "channel": "list-style-type",
+            "ours": "disc",
+            "theirs": "none"
+          },
+          {
+            "part": "root",
+            "channel": "resize",
+            "ours": "both",
+            "theirs": "vertical"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "bottom"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

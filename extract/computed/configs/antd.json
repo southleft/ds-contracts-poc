@@ -285,6 +285,40 @@
       }
     },
     {
+      "__note": "PHASE-1 READER ROUND (docs/35 §3) — the Textarea archetype's antd leg. COMPOUND EXPORT: `Input.TextArea` (antd/es/input/TextArea.js wrapping rc-textarea; no top-level TextArea export) mounts through the compound-export-name grammar — importRoot `Input`, member path `.TextArea` (the Radio.Button W8 gap, since closed). Root = <textarea class='ant-input …'> (single element, the bare-Input precedent — no affix wrapper mounted). HTML rows default 2 (WHATWG; the antd wrapper sets none) deliberately NOT pinned. The `content` axis expands through $props into the controlled `value` string; `::placeholder` is a READ plane so the placeholder ink lands. size/status/variant held at their defaults (the recipe's textarea table carries only the default column; the Input capture above already sweeps those axes on the single-line control). blockStage so the textarea takes the stage width.",
+      "name": "Textarea",
+      "importName": "Input.TextArea",
+      "contract": "examples/antd/contracts-seed/textarea.contract.json",
+      "sampleText": "",
+      "axes": [
+        "content"
+      ],
+      "axisValueMap": {
+        "content": {
+          "empty": { "$props": { "value": "" } },
+          "value": { "$props": { "value": "Meeting notes for Tuesday." } }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "placeholder": "Add a note"
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 320,
+        "height": 120,
+        "padding": 16
+      }
+    },
+    {
       "__note": "MOLECULE, PRESENCE-HEAVY (the Polaris Banner precedent). Root div.ant-alert.ant-alert-<type>[.ant-alert-no-icon][.ant-alert-with-description] > [span.anticon.anticon-<glyph>.ant-alert-icon > svg] + div.ant-alert-content > [div.ant-alert-message + div.ant-alert-description] + [button.ant-alert-close-icon > span.anticon.anticon-close > svg]. The icon GLYPH is a function of `type` (check-circle|info-circle|exclamation-circle|close-circle) AND its presence is a function of `showIcon` — glyph-per-value over one axis is in-grammar (svg-content per-value glyph parts); the presence × axis product is the thing to watch (expect either visibleWhen factoring or a named presence-uncorrelated refusal). showIcon is modelled as an AXIS (2 values) rather than presence so the glyph stays a one-axis function of `type`. `description` and `closable` are presence props (each adds a part; closable's close button has its OWN hover plane — descendant state). blockStage at 320.",
       "name": "Alert",
       "importName": "Alert",

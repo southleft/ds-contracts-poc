@@ -230,14 +230,27 @@ const insideTemplate = (spans: Array<[number, number]>, line: number) => spans.s
  *      Four such channels exist in antd; they are a real, newly visible hole,
  *      and they are counted rather than absorbed.
  *  astryx and mui stay at 0 authored: neither corpus carries var() evidence on a
- *  dropped channel, so neither can contribute to this split. */
+ *  dropped channel, so neither can contribute to this split.
+ *
+ *  RE-MEASURED FOR THE PHASE-1 READER ROUND (docs/35 §3, 2026-08-31): four
+ *  captures landed so the recipe fixture-drift gate has ledgers to read —
+ *  mui/Textarea (TextField multiline, NEW), antd/Textarea (Input.TextArea,
+ *  NEW), astryx/TextArea (NEW), and astryx/CheckboxInput RECAPTURED with the
+ *  checked×disabled axes its first capture pinned away (value:false). What
+ *  moved: antd 12→13 components (drops +340, authored 23→31 — the textarea's
+ *  var()-carrying paddings/radius are real newly-counted authored drops,
+ *  fallback +1), astryx 10→11 (drops +1,775: the CheckboxInput recapture
+ *  sweeps 12 combos where the old capture swept 2, plus the new TextArea;
+ *  fallback +2), mui 31→32 (drops +3,263, fallback +6 — the multiline
+ *  TextField mounts six unnamed parts). No engine change — the same doors
+ *  over a larger corpus. */
 export const PINNED_CENSUS: Record<string, { components: number; drops: number; authored: number; fallback: number }> = {
   altitude: { components: 8, drops: 4734, authored: 6, fallback: 5 },
-  antd: { components: 12, drops: 25048, authored: 23, fallback: 20 },
-  astryx: { components: 10, drops: 23321, authored: 0, fallback: 16 },
+  antd: { components: 13, drops: 25388, authored: 31, fallback: 21 },
+  astryx: { components: 11, drops: 25096, authored: 0, fallback: 18 },
   carbon: { components: 10, drops: 37271, authored: 12, fallback: 32 },
   fluent: { components: 11, drops: 20892, authored: 13, fallback: 19 },
-  mui: { components: 31, drops: 70062, authored: 0, fallback: 93 },
+  mui: { components: 32, drops: 73325, authored: 0, fallback: 99 },
   polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
   shadcn: { components: 11, drops: 12244, authored: 1, fallback: 7 },
   tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },

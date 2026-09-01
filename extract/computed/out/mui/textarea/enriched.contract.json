@@ -1,0 +1,586 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.textarea",
+  "name": "Textarea",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Phase-1 reader round (docs/35 §3) — MUI has NO standalone Textarea export; this subject is TextField with `multiline` PINNED true (TextField.js → OutlinedInput → InputBase → TextareaAutosize, the exact composition recipe/fixtures/library-textareas.ts cites). The `content` axis is the recipe's empty|value column expanded by the config through $props into the controlled `value` string (empty '' vs the shared recipe sample), so rest-empty (label overlaying, placeholder hidden by MUI's own rest-empty rule) and value (label shrunk) are BOTH captured; focus rides the standard focus-visible interaction sweep. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @mui/material@9.2.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "content",
+      "type": {
+        "enum": [
+          "empty",
+          "value"
+        ]
+      },
+      "default": "empty",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Content",
+          "values": {
+            "empty": "Empty",
+            "value": "Value"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Notes",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "inline-flex",
+        "direction": "column"
+      },
+      "parts": {
+        "label-3": {
+          "element": "label",
+          "content": {
+            "prop": "label"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|FormLabel-root.InputLabel-animated.InputLabel-formControl.InputLabel-root.InputLabel-shrink — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "cursor": "default",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap",
+            "transition-delay": "0s, 0s, 0s",
+            "transition-duration": "0.2s, 0.2s, 0.2s",
+            "transition-property": "color, transform, max-width",
+            "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1)",
+            "user-select": "none"
+          },
+          "stylesWhen": [
+            {
+              "prop": "content",
+              "equals": "empty",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "tokens": {
+            "bottom": "{imported.textarea.label-3.bottom}",
+            "color": "{imported.textarea.label-3.color}",
+            "font-size": "{imported.shared.size-16}",
+            "font-weight": "{imported.textarea.label-3.font-weight}",
+            "height": "{imported.shared.size-23}",
+            "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.textarea.label-3.right}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.textarea.label-3.width}",
+            "z-index": "{imported.textarea.label-3.z-index}"
+          },
+          "codeOnly": [
+            {
+              "state": "active",
+              "channel": "color",
+              "value": "rgba(25, 118, 210, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "rgba(0, 0, 0, 0.38)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "color",
+              "value": "rgba(25, 118, 210, 1)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            }
+          ]
+        },
+        "label": {
+          "element": "label",
+          "content": {
+            "prop": "label"
+          },
+          "description": "Promoted from the computed floor (round 4): rendered anatomy label|FormLabel-root.InputLabel-animated.InputLabel-formControl.InputLabel-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "position": "absolute",
+            "cursor": "default",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "pointer-events": "none",
+            "text-overflow": "ellipsis",
+            "text-wrap-mode": "nowrap",
+            "transform": "matrix(1, 0, 0, 1, 14, 16)",
+            "transition-delay": "0s, 0s, 0s",
+            "transition-duration": "0.2s, 0.2s, 0.2s",
+            "transition-property": "color, transform, max-width",
+            "transition-timing-function": "cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1), cubic-bezier(0, 0, 0.2, 1)"
+          },
+          "stylesWhen": [
+            {
+              "prop": "content",
+              "equals": "value",
+              "styles": {
+                "display": "none"
+              }
+            },
+            {
+              "prop": "disabled",
+              "styles": {
+                "display": "none"
+              }
+            }
+          ],
+          "tokens": {
+            "bottom": "{imported.textarea.label.bottom}",
+            "color": "{imported.textarea.label.color}",
+            "font-size": "{imported.shared.size-16}",
+            "font-weight": "{imported.textarea.label.font-weight}",
+            "height": "{imported.shared.size-23}",
+            "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "right": "{imported.textarea.label.right}",
+            "top": "{imported.shared.size-0}",
+            "translate-x": "{imported.shared.size-14}",
+            "translate-y": "{imported.shared.size-16}",
+            "width": "{imported.textarea.label.width}",
+            "z-index": "{imported.textarea.label.z-index}"
+          },
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "color",
+              "value": "rgba(0, 0, 0, 0.38)",
+              "reason": "default-state values not kind-compatible for padding — cannot correlate"
+            }
+          ]
+        },
+        "inputbase-formcontrol": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|InputBase-formControl.InputBase-multiline.InputBase-root.OutlinedInput-root — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "inputbase-input": {
+              "element": "textarea",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy textarea|InputBase-input.OutlinedInput-input — this element exists in the real component's DOM; the static layer had no part for it.",
+              "attrs": {
+                "placeholder": "Add a note"
+              },
+              "declared": {
+                "display": "block",
+                "appearance": "auto",
+                "cursor": "text",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden"
+              },
+              "layout": {
+                "grow": true
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default"
+                }
+              },
+              "tokens": {
+                "color": "{imported.shared.color-000000de}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-23}",
+                "min-width": "{imported.shared.size-0}",
+                "width": "{imported.textarea.inputbase-input.width}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-00000061}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "content",
+                  "map": {
+                    "empty": {
+                      "height": "{imported.textarea.inputbase-input.height.empty}"
+                    },
+                    "value": {
+                      "height": "{imported.textarea.inputbase-input.height.value}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "outline-width",
+                  "value": "0px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "outline-width",
+                  "value": "0px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
+            },
+            "outlinedinput-notchedoutline": {
+              "element": "fieldset",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy fieldset|OutlinedInput-notchedOutline — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "position": "absolute",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "cursor": "text",
+                "font-family": "Roboto, Helvetica, Arial, sans-serif",
+                "overflow-x": "hidden",
+                "overflow-y": "hidden",
+                "pointer-events": "none",
+                "text-align": "left"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "default"
+                }
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-0000003b}",
+                "border-bottom-left-radius": "{imported.shared.size-4}",
+                "border-bottom-right-radius": "{imported.shared.size-4}",
+                "border-bottom-width": "{imported.shared.size-1}",
+                "border-left-color": "{imported.shared.color-0000003b}",
+                "border-left-width": "{imported.shared.size-1}",
+                "border-right-color": "{imported.shared.color-0000003b}",
+                "border-right-width": "{imported.shared.size-1}",
+                "border-top-color": "{imported.shared.color-0000003b}",
+                "border-top-left-radius": "{imported.shared.size-4}",
+                "border-top-right-radius": "{imported.shared.size-4}",
+                "border-top-width": "{imported.shared.size-1}",
+                "bottom": "{imported.shared.size-0}",
+                "color": "{imported.shared.color-000000de}",
+                "left": "{imported.shared.size-0}",
+                "letter-spacing": "{imported.shared.size-0-15008}",
+                "line-height": "{imported.shared.size-23}",
+                "min-height": "{imported.shared.size-0}",
+                "padding-left": "{imported.textarea.outlinedinput-notchedoutline.padding-left}",
+                "padding-right": "{imported.textarea.outlinedinput-notchedoutline.padding-right}",
+                "right": "{imported.shared.size-0}",
+                "top": "{imported.textarea.outlinedinput-notchedoutline.top}",
+                "width": "{imported.shared.size-188}"
+              },
+              "states": {
+                "disabled": {
+                  "color": "{imported.shared.color-00000061}"
+                }
+              },
+              "tokensByProp": [
+                {
+                  "prop": "content",
+                  "map": {
+                    "empty": {
+                      "height": "{imported.textarea.outlinedinput-notchedoutline.height.empty}"
+                    },
+                    "value": {
+                      "height": "{imported.textarea.outlinedinput-notchedoutline.height.value}"
+                    }
+                  }
+                }
+              ],
+              "codeOnly": [
+                {
+                  "state": "active",
+                  "channel": "border-bottom-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-bottom-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-left-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-left-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-right-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-right-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-top-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "active",
+                  "channel": "border-top-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-bottom-color",
+                  "value": "#00000042",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-left-color",
+                  "value": "#00000042",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-right-color",
+                  "value": "#00000042",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "disabled",
+                  "channel": "border-top-color",
+                  "value": "#00000042",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-bottom-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-bottom-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-left-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-left-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-right-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-right-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-top-color",
+                  "value": "#1976d2",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "focus-visible",
+                  "channel": "border-top-width",
+                  "value": "2px",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-bottom-color",
+                  "value": "#000000de",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-left-color",
+                  "value": "#000000de",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-right-color",
+                  "value": "#000000de",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                },
+                {
+                  "state": "hover",
+                  "channel": "border-top-color",
+                  "value": "#000000de",
+                  "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                }
+              ]
+            }
+          },
+          "declared": {
+            "box-sizing": "border-box",
+            "cursor": "text",
+            "font-family": "Roboto, Helvetica, Arial, sans-serif",
+            "position": "relative"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "default"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-4}",
+            "border-bottom-right-radius": "{imported.shared.size-4}",
+            "border-top-left-radius": "{imported.shared.size-4}",
+            "border-top-right-radius": "{imported.shared.size-4}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-000000de}",
+            "left": "{imported.shared.size-0}",
+            "letter-spacing": "{imported.shared.size-0-15008}",
+            "line-height": "{imported.shared.size-23}",
+            "padding-bottom": "{imported.textarea.inputbase-formcontrol.padding-bottom}",
+            "padding-left": "{imported.shared.size-14}",
+            "padding-right": "{imported.shared.size-14}",
+            "padding-top": "{imported.textarea.inputbase-formcontrol.padding-top}",
+            "right": "{imported.shared.size-0}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.shared.size-188}"
+          },
+          "states": {
+            "disabled": {
+              "color": "{imported.shared.color-00000061}"
+            }
+          },
+          "tokensByProp": [
+            {
+              "prop": "content",
+              "map": {
+                "empty": {
+                  "height": "{imported.textarea.inputbase-formcontrol.height.empty}"
+                },
+                "value": {
+                  "height": "{imported.textarea.inputbase-formcontrol.height.value}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "position": "relative"
+      },
+      "tokens": {
+        "bottom": "{imported.shared.size-0}",
+        "left": "{imported.shared.size-0}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.shared.size-188}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "content",
+          "map": {
+            "empty": {
+              "height": "{imported.textarea.root.height.empty}"
+            },
+            "value": {
+              "height": "{imported.textarea.root.height.value}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@mui/material",
+        "export": "TextField"
+      }
+    }
+  }
+}

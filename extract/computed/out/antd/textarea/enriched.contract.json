@@ -1,0 +1,170 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.textarea",
+  "name": "Textarea",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Phase-1 reader round (docs/35 §3) — antd's multiline control is the COMPOUND export `Input.TextArea` (antd/es/input/TextArea.js wrapping rc-textarea; there is no top-level TextArea export), mounted through the compound-export-name grammar (importRoot `Input`, member path `.TextArea`). The `content` axis is the recipe's empty|value column expanded by the config through $props into the controlled `value` string. HTML `rows` default 2 (WHATWG; the antd wrapper sets none) — deliberately NOT pinned so the capture records the library's own default rendering. Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of antd@5.29.3 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "textarea"
+  },
+  "props": [
+    {
+      "name": "content",
+      "type": {
+        "enum": [
+          "empty",
+          "value"
+        ]
+      },
+      "default": "empty",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Content",
+          "values": {
+            "empty": "Empty",
+            "value": "Value"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "inline-block",
+        "appearance": "auto",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "cursor": "text",
+        "font-family": "Roboto, Helvetica, Arial, sans-serif",
+        "max-width": "100%",
+        "overflow-x": "auto",
+        "overflow-y": "auto",
+        "position": "relative",
+        "transition-duration": "0.3s"
+      },
+      "attrs": {
+        "placeholder": "Add a note"
+      },
+      "declaredStates": {
+        "active": {
+          "transition-delay": "0s, 0s, 0s",
+          "transition-duration": "0.3s, 0s, 0s",
+          "transition-property": "all, height, width",
+          "transition-timing-function": "ease, ease, ease"
+        },
+        "disabled": {
+          "cursor": "not-allowed"
+        }
+      },
+      "tokens": {
+        "background-color": "{imported.textarea.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-d9d9d9}",
+        "border-bottom-left-radius": "{imported.shared.size-6}",
+        "border-bottom-right-radius": "{imported.shared.size-6}",
+        "border-bottom-width": "{imported.shared.size-1}",
+        "border-left-color": "{imported.shared.color-d9d9d9}",
+        "border-left-width": "{imported.shared.size-1}",
+        "border-right-color": "{imported.shared.color-d9d9d9}",
+        "border-right-width": "{imported.shared.size-1}",
+        "border-top-color": "{imported.shared.color-d9d9d9}",
+        "border-top-left-radius": "{imported.shared.size-6}",
+        "border-top-right-radius": "{imported.shared.size-6}",
+        "border-top-width": "{imported.shared.size-1}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.textarea.root.color}",
+        "font-size": "{imported.textarea.root.font-size}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.textarea.root.line-height}",
+        "min-height": "{imported.textarea.root.min-height}",
+        "min-width": "{imported.shared.size-0}",
+        "padding-bottom": "{imported.textarea.root.padding-bottom}",
+        "padding-left": "{imported.textarea.root.padding-left}",
+        "padding-right": "{imported.textarea.root.padding-right}",
+        "padding-top": "{imported.textarea.root.padding-top}",
+        "placeholder-color": "{imported.textarea.root.placeholder-color}",
+        "right": "{imported.shared.size-0}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.textarea.root.width}"
+      },
+      "states": {
+        "active": {
+          "border-bottom-color": "{imported.shared.color-1677ff}",
+          "border-left-color": "{imported.shared.color-1677ff}",
+          "border-right-color": "{imported.shared.color-1677ff}",
+          "border-top-color": "{imported.shared.color-1677ff}",
+          "box-shadow": "{imported.textarea.root.box-shadow-state-active}",
+          "outline-width": "{imported.textarea.root.outline-width-state-active}"
+        },
+        "disabled": {
+          "background-color": "{imported.textarea.root.background-color-state-disabled}",
+          "color": "{imported.textarea.root.color-state-disabled}"
+        },
+        "focus-visible": {
+          "border-bottom-color": "{imported.shared.color-1677ff}",
+          "border-left-color": "{imported.shared.color-1677ff}",
+          "border-right-color": "{imported.shared.color-1677ff}",
+          "border-top-color": "{imported.shared.color-1677ff}",
+          "box-shadow": "{imported.textarea.root.box-shadow-state-focus-visible}",
+          "outline-width": "{imported.textarea.root.outline-width-state-focus-visible}"
+        },
+        "hover": {
+          "border-bottom-color": "{imported.shared.color-4096ff}",
+          "border-left-color": "{imported.shared.color-4096ff}",
+          "border-right-color": "{imported.shared.color-4096ff}",
+          "border-top-color": "{imported.shared.color-4096ff}"
+        }
+      },
+      "codeOnly": [
+        {
+          "state": "active",
+          "channel": "transition-behavior",
+          "value": "normal, normal, normal",
+          "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Input.TextArea"
+      }
+    }
+  }
+}

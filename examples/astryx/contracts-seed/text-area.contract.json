@@ -1,0 +1,85 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.text-area",
+  "name": "TextArea",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Phase-1 reader round (docs/35 §3) — Astryx TextArea (@astryxdesign/core@0.1.6 src/TextArea/TextArea.tsx; StyleX; label REQUIRED via Field/FieldLabel; rows default 3). The `content` axis is the recipe's empty|value column expanded by the config through $props into the REQUIRED controlled `value` string (TextAreaProps.value is required — the TextInput precedent mounts it as the empty controlled string so the placeholder renders). isDisabled rides stateProps. Subject vendored under examples/astryx/.astryx-sandbox (recreate via examples/astryx/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The field label (required by TextAreaProps).",
+      "type": "text",
+      "required": true,
+      "default": "Notes",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "content",
+      "type": {
+        "enum": [
+          "empty",
+          "value"
+        ]
+      },
+      "default": "empty",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Content",
+          "values": {
+            "empty": "Empty",
+            "value": "Value"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the textarea is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@astryxdesign/core",
+        "export": "TextArea"
+      }
+    }
+  }
+}

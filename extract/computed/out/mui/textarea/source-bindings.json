@@ -1,0 +1,172 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Textarea",
+  "varPrefix": "--mui-",
+  "facts": [
+    {
+      "part": "inputbase-formcontrol",
+      "channel": "color",
+      "combo": "empty.enabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1vy5iro-MuiInputBase-root-MuiOutlinedInput-root"
+      }
+    },
+    {
+      "part": "inputbase-formcontrol",
+      "channel": "color",
+      "combo": "empty.disabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-1vy5iro-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "inputbase-formcontrol",
+      "channel": "color",
+      "combo": "value.enabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "palette-text-primary",
+      "varName": "--mui-palette-text-primary",
+      "anchor": {
+        "selector": ".css-1vy5iro-MuiInputBase-root-MuiOutlinedInput-root"
+      }
+    },
+    {
+      "part": "inputbase-formcontrol",
+      "channel": "color",
+      "combo": "value.disabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-1vy5iro-MuiInputBase-root-MuiOutlinedInput-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "inputbase-input",
+      "channel": "-webkit-text-fill-color",
+      "combo": "empty.disabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-17y4ens-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled"
+      }
+    },
+    {
+      "part": "inputbase-input",
+      "channel": "-webkit-text-fill-color",
+      "combo": "value.disabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-17y4ens-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled"
+      }
+    },
+    {
+      "part": "inputbase-input-2",
+      "channel": "-webkit-text-fill-color",
+      "combo": "empty.disabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-17y4ens-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled"
+      }
+    },
+    {
+      "part": "inputbase-input-2",
+      "channel": "-webkit-text-fill-color",
+      "combo": "value.disabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-17y4ens-MuiInputBase-input-MuiOutlinedInput-input.Mui-disabled"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "empty.enabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-kbp9eo-MuiFormLabel-root-MuiInputLabel-root"
+      }
+    },
+    {
+      "part": "label",
+      "channel": "color",
+      "combo": "empty.disabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-kbp9eo-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "value.enabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "palette-text-secondary",
+      "varName": "--mui-palette-text-secondary",
+      "anchor": {
+        "selector": ".css-6b784p-MuiFormLabel-root-MuiInputLabel-root"
+      }
+    },
+    {
+      "part": "label-3",
+      "channel": "color",
+      "combo": "value.disabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "palette-text-disabled",
+      "varName": "--mui-palette-text-disabled",
+      "anchor": {
+        "selector": ".css-6b784p-MuiFormLabel-root-MuiInputLabel-root.Mui-disabled"
+      }
+    }
+  ],
+  "skips": [],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "outlinedinput-notchedoutline.border-color: SHORTHAND carrying var(--mui-palette-action-disabled) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

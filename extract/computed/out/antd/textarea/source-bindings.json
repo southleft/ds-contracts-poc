@@ -1,0 +1,176 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Textarea",
+  "varPrefix": "--ant-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "empty.enabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "empty.disabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "value.enabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-family",
+      "combo": "value.disabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "font-family",
+      "varName": "--ant-font-family",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "empty.enabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "empty.disabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "value.enabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "font-size",
+      "combo": "value.disabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "input-input-font-size",
+      "varName": "--ant-input-input-font-size",
+      "anchor": {
+        "selector": ".ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-height",
+      "combo": "empty.enabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "control-height",
+      "varName": "--ant-control-height",
+      "anchor": {
+        "selector": "textarea.ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-height",
+      "combo": "empty.disabled",
+      "axisValues": {
+        "content": "empty"
+      },
+      "token": "control-height",
+      "varName": "--ant-control-height",
+      "anchor": {
+        "selector": "textarea.ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-height",
+      "combo": "value.enabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "control-height",
+      "varName": "--ant-control-height",
+      "anchor": {
+        "selector": "textarea.ant-input"
+      }
+    },
+    {
+      "part": "root",
+      "channel": "min-height",
+      "combo": "value.disabled",
+      "axisValues": {
+        "content": "value"
+      },
+      "token": "control-height",
+      "varName": "--ant-control-height",
+      "anchor": {
+        "selector": "textarea.ant-input"
+      }
+    }
+  ],
+  "skips": [
+    "root.background-color: candidate --ant-color-bg-container-disabled → \"color-bg-container-disabled\" = rgba(0,0,0,0.04) names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.color: candidates --ant-color-text → \"color-text\" = rgba(0,0,0,0.88); --ant-color-text-disabled → \"color-text-disabled\" = rgba(0,0,0,0.25) name a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.line-height: candidate --ant-line-height → \"line-height\" = 1.5714285714285714 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name"
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "root.background: SHORTHAND carrying var(--ant-color-bg-container) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

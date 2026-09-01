@@ -1,0 +1,73 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "antd.textarea",
+  "name": "Textarea",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Phase-1 reader round (docs/35 §3) — antd's multiline control is the COMPOUND export `Input.TextArea` (antd/es/input/TextArea.js wrapping rc-textarea; there is no top-level TextArea export), mounted through the compound-export-name grammar (importRoot `Input`, member path `.TextArea`). The `content` axis is the recipe's empty|value column expanded by the config through $props into the controlled `value` string. HTML `rows` default 2 (WHATWG; the antd wrapper sets none) — deliberately NOT pinned so the capture records the library's own default rendering. Subject: antd@5.29.3 (pinned, examples/antd/PROVENANCE.md).",
+  "semantics": {
+    "element": "textarea"
+  },
+  "props": [
+    {
+      "name": "content",
+      "type": {
+        "enum": [
+          "empty",
+          "value"
+        ]
+      },
+      "default": "empty",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Content",
+          "values": {
+            "empty": "Empty",
+            "value": "Value"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "antd",
+        "export": "Input.TextArea"
+      }
+    }
+  }
+}

@@ -459,6 +459,43 @@
       }
     },
     {
+      "__note": "PHASE-1 READER ROUND (docs/35 §3) — the Textarea archetype's MUI leg. MUI ships NO standalone Textarea export (recipe/fixtures/library-textareas.ts names that refusal); the subject is TextField with `multiline` PINNED true — TextField.js → OutlinedInput (multiline padding 16.5px 14px) → InputBase → TextareaAutosize (minRows default 1, NOT invented as 3). The `content` axis expands through $props into the controlled `value` string (empty '' vs the shared recipe sample 'Meeting notes for Tuesday.'), so BOTH label planes are captured: rest-empty (InputLabel translate(14px,16px) scale(1), placeholder hidden by MUI's own rest-empty rule) and value (shrink translate(14px,-9px) scale(0.75)). Focus rides the standard focus-visible interaction. Label 'Notes' + placeholder 'Add a note' are the recipe's shared content, pinned so typography identity is scorable. Distinct subject from the adorned `TextField` capture above — that one is the signed-Input oracle and stays byte-frozen.",
+      "name": "Textarea",
+      "importName": "TextField",
+      "contract": "examples/mui/contracts-seed/textarea.contract.json",
+      "sampleText": "",
+      "axes": [
+        "content"
+      ],
+      "axisValueMap": {
+        "content": {
+          "empty": { "$props": { "value": "" } },
+          "value": { "$props": { "value": "Meeting notes for Tuesday." } }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "disabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "id": "mui-textarea-oracle",
+        "label": "Notes",
+        "placeholder": "Add a note",
+        "multiline": true
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 360,
+        "height": 140,
+        "padding": 16
+      }
+    },
+    {
       "__note": "WAVE 5 DENOMINATOR — Avatar. Variant axis only (circular|rounded|square); initials via sampleText. Size is sx-driven in MUI and deliberately out of v1.",
       "name": "Avatar",
       "importName": "Avatar",

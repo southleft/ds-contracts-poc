@@ -1,0 +1,87 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "mui.textarea",
+  "name": "Textarea",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Phase-1 reader round (docs/35 §3) — MUI has NO standalone Textarea export; this subject is TextField with `multiline` PINNED true (TextField.js → OutlinedInput → InputBase → TextareaAutosize, the exact composition recipe/fixtures/library-textareas.ts cites). The `content` axis is the recipe's empty|value column expanded by the config through $props into the controlled `value` string (empty '' vs the shared recipe sample), so rest-empty (label overlaying, placeholder hidden by MUI's own rest-empty rule) and value (label shrunk) are BOTH captured; focus rides the standard focus-visible interaction sweep. Subject: @mui/material@9.2.0 (pinned, examples/mui/PROVENANCE.md).",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "content",
+      "type": {
+        "enum": [
+          "empty",
+          "value"
+        ]
+      },
+      "default": "empty",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Content",
+          "values": {
+            "empty": "Empty",
+            "value": "Value"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    },
+    {
+      "name": "label",
+      "type": "text",
+      "default": "Notes",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@mui/material",
+        "export": "TextField"
+      }
+    }
+  }
+}
