@@ -25,13 +25,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   on Scratch AntD Card with silent=0
   ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));
   Phase 4 reader subjects (shadcn / Chakra) as proposed tables only.
-- **Blocked / proposed only:** F1 held-out prepare is **blocked**
+- **Blocked:** F1 held-out prepare is **blocked**
   (react-day-picker day-cell signature thrash —
-  [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/)); docs/26 F-C2C
-  amendment is
-  [proposed, awaiting owner sign-off](docs/26-amendment-canvas-to-code.md).
+  [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/)). docs/26 F-C2C
+  amendment is [adopted 2026-08-31](docs/26-amendment-canvas-to-code.md)
+  as Journey A recipe canvas→code; it does not complete v1.
 - Phase 5 labeling + Figma soft-archive of superseded stays already landed;
-  release remains blocked on F1 + amendment sign-off.
+  release remains blocked on F1. npm stays deferred.
 - **docs:check:** Chakra Phase 4 Checkbox scorecard joins the gated capture
   population (120 measured / 737,162 cells / mean 86.6%; still held — no
   committed `examples/chakra/contracts/`). Coverage stays 113/1015 = 11.1%.
