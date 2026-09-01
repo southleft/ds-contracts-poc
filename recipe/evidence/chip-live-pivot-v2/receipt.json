@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "chip-live-pivot-v2-prepare",
+  "teaching": "One named default Token/Chip/Tag cell; no shared Color/Size/Closable axis",
+  "runIdentity": "932f13fe-eb96b2ab-908fd120-chip-v2",
+  "pageName": "Recipe Pivot / Chip / 932f13fe-eb96b2ab-908fd120-chip-v2",
+  "namespace": "ds.contracts.chip.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "932f13fefdd27eb4dd2b5fb64e01bcb803ee1f4f6418109114faf414894738b6",
+    "MUI": "eb96b2abd592a1ce8c6f61ab00593071726fa933c23e5c200d2bedb23343d3c2",
+    "Ant Design": "908fd120d4b84efeb619230a15e1001d009d3f980d44dc13efcc275631855038"
+  },
+  "writerSha256": "3afd30285fa4dec1ee92de6f3dbda7571de526c26410fbf302595b61e5b09ef5",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

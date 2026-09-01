@@ -1,0 +1,16 @@
+{
+  "artifactVersion": "badge-live-pivot-v4-prepare",
+  "teaching": "MUI Badge proof is color=error from the docs Color demo; do not paint a fake pill on color=default",
+  "runIdentity": "17da6833-76d59843-badge-v4",
+  "pageName": "Recipe Pivot / Badge / 17da6833-76d59843-badge-v4",
+  "namespace": "ds.contracts.badge.recipe.v1",
+  "recipeHashes": {
+    "MUI": "17da68334ab3f716e4eeceb61565f94ab998b3f30d1c9b4cd56f7ba71d62ce3f",
+    "Ant Design": "76d59843686f044cb0a0322d6301b269d893d7dd061a997ef82f5ff1aacab40c"
+  },
+  "writerSha256": "364cb7437d619f98330a995cd2cdb555df9e70c1d87e224ecb72d017c9707f7c",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

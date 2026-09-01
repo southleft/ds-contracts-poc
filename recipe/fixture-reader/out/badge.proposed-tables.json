@@ -59,14 +59,14 @@
         "provenance": "RECEIPT: Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal. [recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal]"
       },
       "indicator.translateX": {
-        "fixture": 10,
-        "proposed": 10,
+        "fixture": 4.40625,
+        "proposed": 4.40625,
         "verdict": "receipt",
         "provenance": "RECEIPT: Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal. [recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal]"
       },
       "indicator.translateY": {
-        "fixture": -10,
-        "proposed": -10,
+        "fixture": -4.40625,
+        "proposed": -4.40625,
         "verdict": "receipt",
         "provenance": "RECEIPT: Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal. [recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal]"
       },
@@ -194,18 +194,22 @@
         "provenance": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.border-top-width"
       },
       "indicator.translateX": {
-        "fixture": 10,
-        "proposed": 10,
+        "fixture": 4.40625,
+        "proposed": 4.40625,
         "verdict": "match",
-        "captured": 10,
-        "provenance": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform — matrix tx of the anchored badge"
+        "captured": 4.406,
+        "provenance": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform ; extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.right — matrix tx − right inset (circular overlap anchors 14% inside the host)",
+        "tolerance": 0.001,
+        "toleranceReason": "the ledger rounds to 3 decimals (4.406); the fixture carries the captured 5.59375 inset exactly (4.40625)"
       },
       "indicator.translateY": {
-        "fixture": -10,
-        "proposed": -10,
+        "fixture": -4.40625,
+        "proposed": -4.40625,
         "verdict": "match",
-        "captured": -10,
-        "provenance": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform — matrix ty of the anchored badge"
+        "captured": -4.406,
+        "provenance": "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform ; extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.top — matrix ty + top inset (circular overlap anchors 14% inside the host)",
+        "tolerance": 0.001,
+        "toleranceReason": "the ledger rounds to 3 decimals (4.406); the fixture carries the captured 5.59375 inset exactly (4.40625)"
       },
       "indicator.fill": {
         "fixture": "#d32f2fff",
@@ -289,8 +293,8 @@
         "provenance": "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-avatar.height"
       },
       "host.radius": {
-        "fixture": 16,
-        "proposed": 16,
+        "fixture": 6,
+        "proposed": 6,
         "verdict": "receipt",
         "provenance": "RECEIPT: the capture mounts a default Avatar (borderRadiusLG 6) as the host child — the recipe spells a CIRCLE host (size/2 = 16); that circle host is a reviewed pairing, not the ledger's default Avatar [Avatar circle size/2 — reviewed 16]"
       },

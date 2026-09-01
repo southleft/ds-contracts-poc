@@ -434,7 +434,10 @@ const buildConfig = (
       },
     },
     identity,
-    content: { label: "Tag" },
+    // Label text from each capture's own sample so the fidelity pair is
+    // like-for-like: mui Chip fixedProps.label "Chip"; antd Tag sampleText
+    // "Tag"; astryx Token fixedProps.label "Tag" (extract/computed/configs).
+    content: { label: slug === "mui" ? "Chip" : "Tag" },
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,

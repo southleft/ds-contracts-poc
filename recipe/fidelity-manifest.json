@@ -129,23 +129,23 @@
     },
     {
       "label": "chip/astryx",
-      "page": "183:75976",
+      "page": "209:79861",
       "component": "chip/variant/default :: Astryx Token",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-astryx-default.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-astryx-default-v2.png",
       "reference": "extract/computed/out/astryx-core/token/orig-shots/md.default__default.png"
     },
     {
       "label": "chip/mui",
-      "page": "183:75976",
+      "page": "209:79861",
       "component": "chip/variant/default :: MUI Chip",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-default.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-default-v2.png",
       "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png"
     },
     {
       "label": "chip/antd",
-      "page": "183:75976",
+      "page": "209:79861",
       "component": "chip/variant/default :: Ant Design Tag",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-default.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-default-v2.png",
       "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png"
     },
     {
@@ -164,18 +164,22 @@
     },
     {
       "label": "badge/mui",
-      "page": "198:77177",
+      "page": "211:80168",
       "component": "badge/variant/default :: MUI Badge",
       "_referenceWhy": "the fixture proof cell is the documented Color demo color=error; color=default paints no fill (recipe/fixtures/library-badges.ts refusal-color-default)",
-      "shot": "recipe/evidence/fidelity-v1/shots/badge-mui-default.png",
-      "reference": "extract/computed/out/mui/badge/orig-shots/error.standard__default.png"
+      "shot": "recipe/evidence/fidelity-v1/shots/badge-mui-default-v5.png",
+      "reference": "extract/computed/out/mui/badge/orig-shots/error.standard__default.png",
+      "exportParent": true,
+      "_exportParentWhy": "the indicator overhangs the host on two sides and a node-box export clips it (measured 40x40 / 32x32 against 44x44 / 42x42 renders, even with useAbsoluteBounds); the wrap frame holds the overhang and the ink trim drops its margin"
     },
     {
       "label": "badge/antd",
-      "page": "198:77177",
+      "page": "211:80168",
       "component": "badge/variant/default :: Ant Design Badge",
-      "shot": "recipe/evidence/fidelity-v1/shots/badge-antd-default.png",
-      "reference": "extract/computed/out/antd/badge/orig-shots/count.unset__default.png"
+      "shot": "recipe/evidence/fidelity-v1/shots/badge-antd-default-v5.png",
+      "reference": "extract/computed/out/antd/badge/orig-shots/count.unset__default.png",
+      "exportParent": true,
+      "_exportParentWhy": "the indicator overhangs the host on two sides and a node-box export clips it (measured 40x40 / 32x32 against 44x44 / 42x42 renders, even with useAbsoluteBounds); the wrap frame holds the overhang and the ink trim drops its margin"
     },
     {
       "label": "link/mui",
@@ -186,16 +190,16 @@
     },
     {
       "label": "tabs/mui",
-      "page": "183:76193",
+      "page": "211:80209",
       "component": "tabs/variant/default :: MUI Tabs",
-      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-default.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tabs-mui-default-v4.png",
       "reference": "extract/computed/out/mui/tabs/orig-shots/primary.primary__default.png"
     },
     {
       "label": "tooltip/antd",
-      "page": "183:76151",
+      "page": "209:79907",
       "component": "tooltip/variant/default :: Ant Design Tooltip",
-      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-default.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/tooltip-antd-default-v2.png",
       "reference": "extract/computed/out/antd/tooltip/orig-shots/__default.png"
     },
     {

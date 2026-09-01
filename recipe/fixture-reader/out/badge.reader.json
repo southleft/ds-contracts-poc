@@ -75,17 +75,17 @@
       },
       {
         "path": "indicator.translateX",
-        "fixtureValue": 10,
+        "fixtureValue": 4.40625,
         "verdict": "receipt",
-        "proposedValue": 10,
+        "proposedValue": 4.40625,
         "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
         "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
       },
       {
         "path": "indicator.translateY",
-        "fixtureValue": -10,
+        "fixtureValue": -4.40625,
         "verdict": "receipt",
-        "proposedValue": -10,
+        "proposedValue": -4.40625,
         "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
         "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
       },
@@ -263,25 +263,31 @@
       },
       {
         "path": "indicator.translateX",
-        "fixtureValue": 10,
+        "fixtureValue": 4.40625,
         "verdict": "match",
-        "capturedValue": 10,
-        "proposedValue": 10,
+        "capturedValue": 4.406,
+        "proposedValue": 4.40625,
         "ledgerKeys": [
-          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform"
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform",
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.right"
         ],
-        "formula": "matrix tx of the anchored badge"
+        "formula": "matrix tx − right inset (circular overlap anchors 14% inside the host)",
+        "tolerance": 0.001,
+        "toleranceReason": "the ledger rounds to 3 decimals (4.406); the fixture carries the captured 5.59375 inset exactly (4.40625)"
       },
       {
         "path": "indicator.translateY",
-        "fixtureValue": -10,
+        "fixtureValue": -4.40625,
         "verdict": "match",
-        "capturedValue": -10,
-        "proposedValue": -10,
+        "capturedValue": -4.406,
+        "proposedValue": -4.40625,
         "ledgerKeys": [
-          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform"
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform",
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.top"
         ],
-        "formula": "matrix ty of the anchored badge"
+        "formula": "matrix ty + top inset (circular overlap anchors 14% inside the host)",
+        "tolerance": 0.001,
+        "toleranceReason": "the ledger rounds to 3 decimals (4.406); the fixture carries the captured 5.59375 inset exactly (4.40625)"
       },
       {
         "path": "indicator.fill",
@@ -399,9 +405,9 @@
       },
       {
         "path": "host.radius",
-        "fixtureValue": 16,
+        "fixtureValue": 6,
         "verdict": "receipt",
-        "proposedValue": 16,
+        "proposedValue": 6,
         "receipt": "the capture mounts a default Avatar (borderRadiusLG 6) as the host child — the recipe spells a CIRCLE host (size/2 = 16); that circle host is a reviewed pairing, not the ledger's default Avatar",
         "evidence": "Avatar circle size/2 — reviewed 16"
       },

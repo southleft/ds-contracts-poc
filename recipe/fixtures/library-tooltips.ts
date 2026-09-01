@@ -398,7 +398,9 @@ const buildConfig = (
       },
     },
     identity,
-    content: { label: "Tooltip" },
+    // antd: the capture mounts title "Tooltip text" (configs/antd.json Tooltip);
+    // the other two captures have no tooltip reference yet and keep "Tooltip".
+    content: { label: slug === "antd" ? "Tooltip text" : "Tooltip" },
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,

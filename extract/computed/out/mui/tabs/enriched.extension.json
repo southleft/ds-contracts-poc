@@ -10,44 +10,12 @@
           "$value": "48px",
           "$type": "dimension"
         },
-        "size-288": {
-          "$value": "288px",
+        "size-199-391": {
+          "$value": "199.391px",
           "$type": "dimension"
         },
         "size-0": {
           "$value": "0px",
-          "$type": "dimension"
-        },
-        "color-00000000": {
-          "$value": "#00000000",
-          "$type": "color"
-        },
-        "num-0": {
-          "$value": "0",
-          "$type": "number"
-        },
-        "size-14": {
-          "$value": "14px",
-          "$type": "dimension"
-        },
-        "num-500": {
-          "$value": "500",
-          "$type": "number"
-        },
-        "size-0-39998": {
-          "$value": "0.39998px",
-          "$type": "dimension"
-        },
-        "size-17-5": {
-          "$value": "17.5px",
-          "$type": "dimension"
-        },
-        "size-360": {
-          "$value": "360px",
-          "$type": "dimension"
-        },
-        "size-90": {
-          "$value": "90px",
           "$type": "dimension"
         },
         "size-12": {
@@ -67,6 +35,10 @@
           }
         },
         "label": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
           "color": {
             "primary": {
               "$value": "#1976d2",
@@ -80,9 +52,41 @@
               "$value": "#000000",
               "$type": "color"
             }
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.39998px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "17.5px",
+            "$type": "dimension"
+          },
+          "max-width": {
+            "$value": "360px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "90px",
+            "$type": "dimension"
           }
         },
         "label-2": {
+          "background-color": {
+            "$value": "#00000000",
+            "$type": "color"
+          },
           "color": {
             "primary": {
               "$value": "#00000099",
@@ -97,35 +101,33 @@
               "$type": "color"
             }
           },
-          "opacity": {
-            "primary": {
-              "$value": "1",
-              "$type": "number"
-            },
-            "secondary": {
-              "$value": "1",
-              "$type": "number"
-            },
-            "inherit": {
-              "$value": "0.6",
-              "$type": "number"
-            }
-          }
-        },
-        "label-3": {
-          "color": {
-            "primary": {
-              "$value": "#00000099",
-              "$type": "color"
-            },
-            "secondary": {
-              "$value": "#00000099",
-              "$type": "color"
-            },
-            "inherit": {
-              "$value": "#000000",
-              "$type": "color"
-            }
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.39998px",
+            "$type": "dimension"
+          },
+          "line-height": {
+            "$value": "17.5px",
+            "$type": "dimension"
+          },
+          "max-width": {
+            "$value": "360px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "90px",
+            "$type": "dimension"
           },
           "opacity": {
             "primary": {
@@ -158,7 +160,7 @@
             "$type": "dimension"
           },
           "right": {
-            "$value": "185.594px",
+            "$value": "95.8281px",
             "$type": "dimension"
           },
           "top": {
@@ -166,7 +168,7 @@
             "$type": "dimension"
           },
           "width": {
-            "$value": "102.406px",
+            "$value": "103.562px",
             "$type": "dimension"
           }
         }
@@ -293,66 +295,6 @@
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-bottom-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-left-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-right-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "border-top-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "caret-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "column-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "outline-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "row-rule-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "text-decoration-color",
-      "foldedInto": "color",
-      "class": "currentColor"
-    },
-    {
-      "part": "label-3",
-      "channel": "text-emphasis-color",
-      "foldedInto": "color",
-      "class": "currentColor"
     }
   ],
   "foldedStateSkips": [],
@@ -385,21 +327,6 @@
       },
       {
         "part": "label-2",
-        "field": "justify",
-        "value": "center"
-      },
-      {
-        "part": "label-3",
-        "field": "direction",
-        "value": "column"
-      },
-      {
-        "part": "label-3",
-        "field": "align",
-        "value": "center"
-      },
-      {
-        "part": "label-3",
         "field": "justify",
         "value": "center"
       }
@@ -567,66 +494,6 @@
         "value": "none"
       },
       {
-        "part": "label-3",
-        "channel": "appearance",
-        "value": "none"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-bottom-style",
-        "value": "none"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-left-style",
-        "value": "none"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-right-style",
-        "value": "none"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-top-style",
-        "value": "none"
-      },
-      {
-        "part": "label-3",
-        "channel": "cursor",
-        "value": "pointer"
-      },
-      {
-        "part": "label-3",
-        "channel": "font-family",
-        "value": "Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "label-3",
-        "channel": "overflow-x",
-        "value": "hidden"
-      },
-      {
-        "part": "label-3",
-        "channel": "overflow-y",
-        "value": "hidden"
-      },
-      {
-        "part": "label-3",
-        "channel": "position",
-        "value": "relative"
-      },
-      {
-        "part": "label-3",
-        "channel": "text-transform",
-        "value": "uppercase"
-      },
-      {
-        "part": "label-3",
-        "channel": "user-select",
-        "value": "none"
-      },
-      {
         "part": "tabs-indicator",
         "channel": "text-wrap-mode",
         "value": "nowrap"
@@ -658,13 +525,6 @@
       "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "sample": "middle",
       "distinctValues": 1
-    },
-    {
-      "part": "label-3",
-      "channel": "vertical-align",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "middle",
-      "distinctValues": 1
     }
   ],
   "stateOverflow": [],
@@ -677,16 +537,35 @@
   },
   "bindingContradictions": [],
   "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
   "structureReceipts": [],
   "styledChannelReceipts": [
     "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
-    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
     "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: tabs-fixed — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: tabs-list — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: tabs-indicator — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "webkit-prefixed-channels-refused: 5 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (label, label-2, label-3); -webkit-box-pack (label, label-2, label-3); -webkit-tap-highlight-color (label, label-2, label-3); -webkit-text-fill-color (label, label-2, label-3); -webkit-text-stroke-color (label, label-2, label-3)",
+    "control-equal-drop: root — 591 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: root — 388 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: tabs-fixed — 586 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: tabs-fixed — 383 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: tabs-list — 591 of 597 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: tabs-list — 388 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 545 of 595 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: label — 342 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-2 — 545 of 595 admitted channels compared EQUAL to the <button> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: label-2 — 341 channel(s) EQUAL to the <button> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: tabs-indicator — 584 of 597 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: tabs-indicator — 381 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: label — block-size 48px, height 48px, inline-size 103.562px, perspective-origin 51.7812px 24px, transform-origin 51.7812px 24px, width 103.562px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 48px, height 48px, inline-size 95.8281px, perspective-origin 47.9062px 24px, transform-origin 47.9141px 24px, width 95.8281px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 48px, inline-size 199.391px, perspective-origin 99.6875px 24px, transform-origin 99.6953px 24px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: tabs-fixed — block-size 48px, inline-size 199.391px, perspective-origin 99.6875px 24px, transform-origin 99.6953px 24px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: tabs-indicator — block-size 2px, inline-size 103.562px, perspective-origin 51.7812px 1px, transform-origin 51.7812px 1px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: tabs-list — block-size 48px, inline-size 199.391px, perspective-origin 99.6875px 24px, transform-origin 99.6953px 24px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 5 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (label, label-2); -webkit-box-pack (label, label-2); -webkit-tap-highlight-color (label, label-2); -webkit-text-fill-color (label, label-2); -webkit-text-stroke-color (label, label-2)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: label-2.caret-color — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.color — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -694,12 +573,6 @@
     "inheritance-check-rejected: label-2.font-weight — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label-2.line-height — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.caret-color — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.color — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-size — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.letter-spacing — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
-    "inheritance-check-rejected: label-3.line-height — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.caret-color — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.color — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"tabs-list\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
@@ -737,10 +610,6 @@
         "join": "computed-only"
       },
       {
-        "part": "label-3",
-        "join": "computed-only"
-      },
-      {
         "part": "tabs-indicator",
         "join": "computed-only"
       }
@@ -755,7 +624,6 @@
       "tabs-list",
       "label",
       "label-2",
-      "label-3",
       "tabs-indicator"
     ],
     "svgAssets": [],
@@ -763,8 +631,7 @@
       "root-display-carried: flex",
       "full-width-carried: tabs-fixed spans its row parent's content width in every enabled combo → layout.grow (geometry evidence)",
       "literal-text-carried: label = \"Overview\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "literal-text-carried: label-2 = \"Activity\" (no text prop sample matches — the mounted value is carried verbatim)",
-      "literal-text-carried: label-3 = \"Settings\" (no text prop sample matches — the mounted value is carried verbatim)"
+      "literal-text-carried: label-2 = \"Activity\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": []
   },
@@ -775,13 +642,10 @@
     "layout enriched: label-2.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label-2.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
     "layout enriched: label-2.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: label-3.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: label-3.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
-    "layout enriched: label-3.layout.justify = center (uniform computed keyword — the schema's own vocabulary)",
-    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tabs-fixed.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: tabs-fixed.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs-fixed.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tabs-fixed.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: tabs-fixed.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: tabs-fixed.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: tabs-list.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -792,8 +656,8 @@
     "declared fact carried: label.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.text-transform = uppercase (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -804,28 +668,15 @@
     "declared fact carried: label-2.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.text-transform = uppercase (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.appearance = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.border-bottom-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.border-left-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.border-right-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.border-top-style = none (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-3.overflow-x = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.overflow-y = hidden (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label-3.text-transform = uppercase (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label-3.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: tabs-indicator.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: tabs-indicator.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: tabs-indicator.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
     "sizing evidence carried: label.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)",
-    "sizing evidence carried: label-2.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)",
-    "sizing evidence carried: label-3.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)"
+    "sizing evidence carried: label-2.hugsBelowMaxWidth = true (MEASURED — the used width stayed strictly below the max-width cap in every enumerated combo, so the max-width is a CEILING the box hugs beneath, not a design width)"
   ]
 }

@@ -25,7 +25,13 @@ import {
 
 export const BADGE_FIGMA_NAMESPACE = "ds.contracts.badge.recipe.v1";
 export const BADGE_FIGMA_WRITER_VERSION = 2;
-export const BADGE_FIGMA_RUN_SUFFIX = "badge-v2";
+export const BADGE_FIGMA_RUN_SUFFIX = "badge-v5";
+/** v4 (2026-09-01) stays as evidence of the clipping container; never written again. */
+export const FORBIDDEN_BADGE_V4_PAGE_ID = "210:80061";
+/** v3 (2026-09-01) stays as evidence of the writer omission it exposed; never written again. */
+export const FORBIDDEN_BADGE_V3_PAGE_ID = "209:79949";
+/** The v2 stay is preserved as evidence (superseded by the 2026-09-01 capture-content remint) and never written again. */
+export const FORBIDDEN_BADGE_V2_PAGE_ID = "198:77177";
 export const FORBIDDEN_BADGE_V1_PAGE_ID = "183:76022";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -260,6 +266,9 @@ if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
 void "BADGE-MUST-NOT-WRITE-INPUT-PAGE";
+void "BADGE-MUST-NOT-WRITE-BADGE-V4-PAGE";
+void "BADGE-MUST-NOT-WRITE-BADGE-V3-PAGE";
+void "BADGE-MUST-NOT-WRITE-BADGE-V2-PAGE";
 void "BADGE-MUST-NOT-WRITE-COMBOBOX-PAGE";
 void "BADGE-MUST-NOT-WRITE-COMBOBOX-V42-PAGE";
 void "BADGE-MUST-NOT-WRITE-BUTTON-PAGE";
@@ -274,6 +283,9 @@ void "BADGE-MUST-NOT-WRITE-ALERT-PAGE";
 void "BADGE-MUST-NOT-WRITE-CHIP-PAGE";
 void "BADGE-MUST-NOT-WRITE-BADGE-V1-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("BADGE-MUST-NOT-WRITE-INPUT-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="210:80061")throw new Error("BADGE-MUST-NOT-WRITE-BADGE-V4-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="209:79949")throw new Error("BADGE-MUST-NOT-WRITE-BADGE-V3-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="198:77177")throw new Error("BADGE-MUST-NOT-WRITE-BADGE-V2-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("BADGE-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("BADGE-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:69150")throw new Error("BADGE-MUST-NOT-WRITE-BUTTON-PAGE");
@@ -405,6 +417,9 @@ for(const source of PLAN.sources){
     node.itemSpacing=layout.itemSpacing;
     node.paddingTop=Math.max(0,layout.padding.top);node.paddingRight=Math.max(0,layout.padding.right);node.paddingBottom=Math.max(0,layout.padding.bottom);node.paddingLeft=Math.max(0,layout.padding.left);
     if(ir.clipsContent!==undefined)node.clipsContent=ir.clipsContent;
+    void "BADGE-WRITER-LAYOUT-MIN-WIDTH";
+    if(layout.minWidth!==undefined)node.minWidth=layout.minWidth;
+    if(layout.minHeight!==undefined)node.minHeight=layout.minHeight;
     if(layout.positioning==="absolute"){
       node.layoutPositioning="ABSOLUTE";
       const c=layout.constraints||{};
@@ -479,6 +494,15 @@ for(const source of PLAN.sources){
     if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
     if(ir.kind==="frame"){applyLayout(node,ir);for(const [childIndex,child] of ir.children.entries())await render(child,node,ownershipKey+"/children/"+childIndex);applySizing(node,ir);}
     else applySizing(node,ir);
+    void "BADGE-WRITER-ABSOLUTE-OFFSET";
+    if(ir.kind==="frame"&&ir.layout.positioning==="absolute"&&ir.layout.offset){
+      // The IR offset is from the docked top-right of the parent (constraints
+      // right/top): x = parent.width − node.width + offset.x, y = offset.y.
+      // Until 2026-09-01 the writer set positioning and constraints but never
+      // the coordinates, so the indicator landed at Figma's default and the
+      // mint lost the anchoring fact silently (measured 40x40 vs 44x44).
+      node.x=parent.width-node.width+ir.layout.offset.x;node.y=ir.layout.offset.y;
+    }
     if(ir.kind==="text"){
       bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
       if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
@@ -505,6 +529,14 @@ for(const source of PLAN.sources){
     container.x=80;container.y=96;
     section.appendChild(container);
     container.appendChild(component);
+    void "BADGE-WRITER-CONTAINER-HUGS-COMPONENT";
+    // A fresh frame is 100x100 and clips. Left that way, an export of anything
+    // wider than 100px — or an overlay that overhangs its host — is cut at the
+    // container edge (tabs v3 exported 100x48 of a 194x48 set; badge v4 lost
+    // its indicator's overhang). The container takes the component's size and
+    // never clips; the section is sized from it below.
+    container.clipsContent=false;
+    container.resizeWithoutConstraints(Math.max(1,component.width),Math.max(1,component.height));
     createdNodeIds.push(container.id);
     setSharedData(container,"runIdentity",PLAN.runIdentity);setSharedData(container,"adapterIdentity",source.adapterIdentity);setSharedData(container,"recipeHash",source.recipeHash);setSharedData(container,"ownershipKey","badge/container");
     return {component,container};

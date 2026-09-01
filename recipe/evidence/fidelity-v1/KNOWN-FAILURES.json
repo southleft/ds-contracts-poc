@@ -1,6 +1,6 @@
 {
   "_marker": "KNOWN FAILURES — a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
-  "recorded": "2026-09-01 (alert rows revised after the v3 remint)",
+  "recorded": "2026-09-01 (revised after the chip/tooltip/badge/tabs remints)",
   "failures": {
     "alert/astryx": {
       "class": "font-substrate",
@@ -10,29 +10,13 @@
       "class": "font-substrate",
       "cause": "5.07% — 0.07 over the bar. Same label 'Tag', ink 36x24 vs 37x24; the 1px is glyph advance width under Figma's font fallback vs Chromium's."
     },
-    "chip/mui": {
-      "class": "content-mismatch",
-      "cause": "5.94%. Mint label 'Tag' vs capture sample 'Chip' (extract/computed/out/mui/chip captured-truth _provenance.sampleText). Shape, height 32, radius and fill agree."
-    },
-    "badge/mui": {
-      "class": "real-defect",
-      "cause": "14.6%. Canvas 50x50 vs real 44x44: the badge sits further off its anchor than MUI's translate(50%,-50%) places it; also the reference child is an 'A' avatar with count 4, the mint a bare disc with count 5 (content-mismatch on top)."
-    },
-    "badge/antd": {
-      "class": "content-mismatch",
-      "cause": "7.26%. Same 42x42 box and badge placement; the reference child is a rounded square 'A' avatar, the mint a bare disc."
-    },
     "link/mui": {
       "class": "font-substrate",
       "cause": "49.08%. Both sides render 'Link' in a serif fallback (MUI Link variant=inherit inherits the unstyled stage); 26x13 vs 31x14 is fallback-font metrics on both renderers, not geometry the recipe decided."
     },
     "tabs/mui": {
-      "class": "content-mismatch",
-      "cause": "14.73%. Mint has two tabs 'ITEM ONE / ITEM TWO'; the capture mounts three (Overview / Activity / Settings, configs/mui.json childrenSpec) with a bottom divider. Indicator colour and weight agree."
-    },
-    "tooltip/antd": {
-      "class": "content-mismatch",
-      "cause": "35.67%. Mint text 'Tooltip' vs capture 'Tooltip text'; height 34 = 34, fill and radius agree."
+      "class": "real-defect",
+      "cause": "18.07% (tabs v4). Labels, count, colours and the 48px tab now match the two-item capture. The indicator is drawn label-wide directly under the text (y=30, 69x2); MUI positions it absolute at the tab's bottom edge (y=46) across the full tab width including padding (101x2). library-tabs.ts receipted the 100% width as Polar and the recipe stacked it under the label — invented placement, the same class as the alert disc. Fix: absolute bottom-stretch indicator."
     },
     "textarea/astryx": {
       "class": "real-defect",

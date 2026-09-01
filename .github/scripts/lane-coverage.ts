@@ -96,9 +96,9 @@ const EXCLUDED: Record<string, string> = {
   // The other ten run in recipe:boilerplate:generated:check.
   "root:recipe:avatar:live:v1:generated:check":
     "--check regenerates and overwrites; it downgrades receipt.liveFigma true -> false while exiting 0. Needs a compare-not-write --check first.",
-  "root:recipe:badge:live:v2:generated:check":
+  "root:recipe:badge:live:v5:generated:check":
     "--check regenerates and overwrites; it downgrades receipt.liveFigma true -> false while exiting 0. Needs a compare-not-write --check first.",
-  "root:recipe:chip:live:v1:generated:check":
+  "root:recipe:chip:live:v2:generated:check":
     "--check regenerates and overwrites; it downgrades receipt.liveFigma true -> false while exiting 0. Needs a compare-not-write --check first.",
   // The four "root:recipe:input-field:live:v6:*" reasons that stood here are gone
   // with the scripts they named: every superseded per-version lane was removed

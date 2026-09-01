@@ -24,7 +24,9 @@ import {
 
 export const CHIP_FIGMA_NAMESPACE = "ds.contracts.chip.recipe.v1";
 export const CHIP_FIGMA_WRITER_VERSION = 1;
-export const CHIP_FIGMA_RUN_SUFFIX = "chip-v1";
+export const CHIP_FIGMA_RUN_SUFFIX = "chip-v2";
+/** The v1 stay is preserved as evidence (superseded by the 2026-09-01 capture-content remint) and never written again. */
+export const FORBIDDEN_CHIP_V1_PAGE_ID = "183:75976";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -255,6 +257,7 @@ if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
 void "CHIP-MUST-NOT-WRITE-INPUT-PAGE";
+void "CHIP-MUST-NOT-WRITE-CHIP-V1-PAGE";
 void "CHIP-MUST-NOT-WRITE-COMBOBOX-PAGE";
 void "CHIP-MUST-NOT-WRITE-COMBOBOX-V42-PAGE";
 void "CHIP-MUST-NOT-WRITE-BUTTON-PAGE";
@@ -267,6 +270,7 @@ void "CHIP-MUST-NOT-WRITE-SWITCH-PAGE";
 void "CHIP-MUST-NOT-WRITE-TEXTAREA-PAGE";
 void "CHIP-MUST-NOT-WRITE-ALERT-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("CHIP-MUST-NOT-WRITE-INPUT-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75976")throw new Error("CHIP-MUST-NOT-WRITE-CHIP-V1-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("CHIP-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("CHIP-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:69150")throw new Error("CHIP-MUST-NOT-WRITE-BUTTON-PAGE");

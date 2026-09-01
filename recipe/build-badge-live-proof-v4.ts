@@ -1,0 +1,132 @@
+import { mkdirSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+
+import { adaptReviewedBadge } from "./adapters/badge.js";
+import { emitBadgeFigmaWriter } from "./badge-figma-writer.js";
+import {
+  antdBadgeAdapterConfig,
+  antdBadgeSource,
+  muiBadgeAdapterConfig,
+  muiBadgeSource,
+} from "./fixtures/library-badges.js";
+import { hashRecipeInstance } from "./recipe.js";
+import { compileBadgeRecipe, badgeRecipe } from "./recipes/badge.js";
+
+const EVIDENCE = "recipe/evidence/badge-live-pivot-v4";
+const sha256 = (value: string): string =>
+  createHash("sha256").update(value).digest("hex");
+
+const sources = [
+  {
+    adapterIdentity: "mui-badge-reviewed-v1",
+    displayName: "MUI",
+    source: muiBadgeSource,
+    config: muiBadgeAdapterConfig,
+  },
+  {
+    adapterIdentity: "antd-badge-reviewed-v1",
+    displayName: "Ant Design",
+    source: antdBadgeSource,
+    config: antdBadgeAdapterConfig,
+  },
+].map((entry) => {
+  const instance = adaptReviewedBadge(entry.source, entry.config);
+  return {
+    adapterIdentity: entry.adapterIdentity,
+    displayName: entry.displayName,
+    recipeHash: hashRecipeInstance(badgeRecipe, instance),
+    envelope: compileBadgeRecipe(instance),
+  };
+});
+
+const writer = emitBadgeFigmaWriter(sources);
+const splitWriters = sources.map((source) => {
+  const part = emitBadgeFigmaWriter([source], {
+    runIdentity: writer.runIdentity,
+  });
+  if (part.pageName !== writer.pageName || part.runIdentity !== writer.runIdentity)
+    throw new TypeError("split badge writer must keep the overlay-library run identity");
+  return { adapterIdentity: source.adapterIdentity, ...part };
+});
+
+mkdirSync(EVIDENCE, { recursive: true });
+writeFileSync(`${EVIDENCE}/writer.js`, writer.code);
+for (const part of splitWriters)
+  writeFileSync(`${EVIDENCE}/writer-${part.adapterIdentity}.js`, part.code);
+writeFileSync(
+  `${EVIDENCE}/plan.json`,
+  JSON.stringify(
+    {
+      pageName: writer.pageName,
+      runIdentity: writer.runIdentity,
+      namespace: writer.namespace,
+      fileKey: "byMp6lt0Ij9b2QbkDGFwBh",
+      teaching:
+        "badge@1 MUI proof cell is the documented Color demo color=error (palette.error.main #d32f2f / contrast #fff). color=default has no palette fill and is receipted. Astryx overlay remains refused. Old stay 183:76022 refused.",
+      sources: writer.sourcePlans.map((source) => ({
+        adapterIdentity: source.adapterIdentity,
+        displayName: source.displayName,
+        recipeHash: source.recipeHash,
+        envelopeHash: source.envelopeHash,
+        variantCount: 1,
+        variableCount: source.variables.length,
+        comparedIrFacts: source.comparedIrFacts,
+      })),
+    },
+    null,
+    2,
+  ) + "\n",
+);
+writeFileSync(
+  `${EVIDENCE}/receipt.json`,
+  JSON.stringify(
+    {
+      artifactVersion: "badge-live-pivot-v4-prepare",
+      teaching:
+        "MUI Badge proof is color=error from the docs Color demo; do not paint a fake pill on color=default",
+      runIdentity: writer.runIdentity,
+      pageName: writer.pageName,
+      namespace: writer.namespace,
+      recipeHashes: Object.fromEntries(
+        writer.sourcePlans.map((source) => [
+          source.displayName,
+          source.recipeHash,
+        ]),
+      ),
+      writerSha256: sha256(writer.code),
+      liveFigma: false,
+      humanGrade: "queued-for-TJ",
+      overallSuccess: false,
+      productV1: "INCOMPLETE",
+    },
+    null,
+    2,
+  ) + "\n",
+);
+
+if (process.argv.includes("--check")) {
+  if (!writer.code.includes("BADGE-MUST-NOT-WRITE-CHIP-PAGE"))
+    throw new Error("badge writer must refuse the Chip stay page");
+  if (!writer.code.includes("BADGE-MUST-NOT-WRITE-BADGE-V1-PAGE"))
+    throw new Error("badge writer must refuse the Badge v1 stay page");
+  if (writer.sourcePlans.length !== 2)
+    throw new Error("badge prepare requires two overlay library sources");
+  if (writer.namespace === "ds.contracts.chip.recipe.v1")
+    throw new Error("badge writer must not reuse the Chip namespace");
+  console.log(
+    JSON.stringify({
+      check: "ok",
+      runIdentity: writer.runIdentity,
+      pageName: writer.pageName,
+    }),
+  );
+} else {
+  console.log(
+    JSON.stringify({
+      runIdentity: writer.runIdentity,
+      pageName: writer.pageName,
+      writer: `${EVIDENCE}/writer.js`,
+      writerSha256: sha256(writer.code),
+    }),
+  );
+}

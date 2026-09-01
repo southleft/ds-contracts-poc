@@ -104,10 +104,18 @@ if (${JSON.stringify(s.component ?? null)}) {
   if (!variant) throw new Error("no variant " + ${JSON.stringify(s.variant ?? null)});
 }
 let node = variant;
+// exportParent: export the wrap frame around the component instead of the
+// component itself — Figma clips a node-box export to the node, so an
+// anchored overlay that overhangs its host (badge) is cut off. The wrap
+// frame contains the overhang; the scorer's ink trim removes the margin.
+${s.exportParent ? `node = variant.parent; if (!node) throw new Error("no parent to export");` : ""}
 ${s.child ? `node = variant.children.find(c => String(c.name).startsWith(${JSON.stringify(s.child)}))
   || variant.findOne(n => String(n.name).startsWith(${JSON.stringify(s.child)}));
 if (!node) throw new Error("no child ${s.child}");` : ""}
-const bytes = await node.exportAsync({ format: "PNG", constraint: { type: "SCALE", value: 1 } });
+// exportAbsoluteBounds: include children that overflow the node's own box
+// (an anchored badge indicator sits partly above/right of its host). Off by
+// default so every other subject keeps the node-box export it was scored on.
+const bytes = await node.exportAsync({ format: "PNG", constraint: { type: "SCALE", value: 1 }${s.exportAbsoluteBounds ? ", useAbsoluteBounds: true" : ""} });
 return { id: node.id, w: Math.round(node.width), h: Math.round(node.height), bytes: Array.from(bytes) };
 `;
   const res = await call("figma_execute", { code, fileKey: TARGET.fileKey });

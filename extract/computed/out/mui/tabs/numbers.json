@@ -6,7 +6,7 @@
   "interactions": 4,
   "enumerationPolicy": "full-cartesian",
   "channelsEnumerated": 675,
-  "elementsPerCapture": 7,
+  "elementsPerCapture": 6,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
     "root": 6,
@@ -14,11 +14,10 @@
     "tabs-list": 6,
     "label": 50,
     "label-2": 51,
-    "label-3": 51,
     "tabs-indicator": 13
   },
   "folds": {
-    "count": 30,
+    "count": 20,
     "receipts": [
       {
         "part": "label",
@@ -139,70 +138,10 @@
         "channel": "text-emphasis-color",
         "foldedInto": "color",
         "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-bottom-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-left-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-right-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "border-top-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "caret-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "column-rule-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "outline-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "row-rule-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "text-decoration-color",
-        "foldedInto": "color",
-        "class": "currentColor"
-      },
-      {
-        "part": "label-3",
-        "channel": "text-emphasis-color",
-        "foldedInto": "color",
-        "class": "currentColor"
       }
     ],
-    "mintedLeavesUnfolded": 125,
-    "mintedLeavesFolded": 35
+    "mintedLeavesUnfolded": 97,
+    "mintedLeavesFolded": 37
   },
   "bound": {
     "cellsChecked": 0,
@@ -211,37 +150,37 @@
     "untriaged": 0
   },
   "minted": {
-    "leaves": 35,
-    "baseBindings": 94,
+    "leaves": 37,
+    "baseBindings": 70,
     "stateBindings": 0,
     "byShape": {
-      "uniform": 88,
-      "perAxis": 6,
+      "uniform": 66,
+      "perAxis": 4,
       "perPair": 0,
       "refused": 0
     }
   },
   "declared": {
-    "base": 46,
+    "base": 34,
     "state": 0
   },
   "codeOnly": {
-    "base": 3,
+    "base": 2,
     "state": 0,
     "overflowBindings": 0
   },
   "pseudoElementFindings": 0,
   "anatomyPromotion": {
-    "partsCarried": 7,
+    "partsCarried": 6,
     "svgAssets": 0,
     "refusals": 0
   },
   "enrichedContractSchemaValid": true,
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
-    "cellsCompared": 113064,
-    "cellsMatched": 112896,
-    "pct": 99.85141158989599,
+    "cellsCompared": 96912,
+    "cellsMatched": 96696,
+    "pct": 99.77711738484398,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -250,16 +189,16 @@
     ],
     "topMismatchedChannels": [
       [
+        "inline-size",
+        72
+      ],
+      [
         "perspective-origin",
         72
       ],
       [
-        "inline-size",
-        48
-      ],
-      [
         "width",
-        48
+        72
       ]
     ]
   },
@@ -272,60 +211,60 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 24
+      "mean": 3.3040364583333335,
+      "max": 3.3040364583333335,
+      "perfect": 0
     },
     "aa": {
-      "mean": 0,
-      "max": 0,
-      "perfect": 24
+      "mean": 1.3346354166666663,
+      "max": 1.3509114583333333,
+      "perfect": 0
     },
     "worst": [
       {
-        "key": "primary.primary__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.primary__default",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       },
       {
-        "key": "primary.primary__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.primary__hover",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       },
       {
-        "key": "primary.primary__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.primary__focus-visible",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       },
       {
-        "key": "primary.primary__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.primary__active",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       },
       {
-        "key": "primary.secondary__default",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.secondary__default",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       },
       {
-        "key": "primary.secondary__hover",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.secondary__hover",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       },
       {
-        "key": "primary.secondary__focus-visible",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.secondary__focus-visible",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       },
       {
-        "key": "primary.secondary__active",
-        "pctExact": 0,
-        "pctAA": 0
+        "key": "inherit.secondary__active",
+        "pctExact": 3.3040364583333335,
+        "pctAA": 1.3509114583333333
       }
     ]
   },
   "gate": {
-    "computedPctEqual": 93.75,
+    "computedPctEqual": 94.12144702842377,
     "rowsFullyEqual": 0,
     "rows": 24,
     "pixelPerfectExact": 18,

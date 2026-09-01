@@ -438,7 +438,10 @@ const buildConfig = (
       },
     },
     identity,
-    content: { selected: "Item One", rest: "Item Two" },
+    // mui: labels from the capture mount (configs/mui.json Tabs childrenSpec
+    // Overview / Activity — re-captured two-item on 2026-09-01 to match the
+    // recipe's declared two-item cell). Astryx keeps the seed labels.
+    content: slug === "mui" ? { selected: "Overview", rest: "Activity" } : { selected: "Item One", rest: "Item Two" },
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,

@@ -77,8 +77,14 @@ const muiTokens = cloneTokens("mui.badge", (path, fallback) => {
   if (path === "indicator.paddingX") return 6;
   if (path === "indicator.radius") return 10;
   if (path === "indicator.borderWidth") return 0;
-  if (path === "indicator.translateX") return 10;
-  if (path === "indicator.translateY") return -10;
+  // overlap="circular" — the mount the capture records (configs/mui.json
+  // Badge fixedProps.overlap). Badge.js circular anchorOrigin top-right:
+  // top 14%, right 14%, then translate(50%, -50%). On the 40px Avatar host
+  // that is a 5.6px inset from the corner, so the indicator's box sits at
+  // ±(10 − 5.6) = ±4.4 from the docked top-right position — not ±10, which
+  // is the rectangular overlap and measured 50x50 against a 44x44 render.
+  if (path === "indicator.translateX") return 4.40625; // 10 − 5.59375 (captured right)
+  if (path === "indicator.translateY") return -4.40625; // −10 + 5.59375 (captured top)
   if (path === "indicator.fill") return "#d32f2fff";
   if (path === "indicator.border") return "#00000000";
   if (path === "indicator.opacity") return 1;
@@ -92,7 +98,11 @@ muiTokens.typography = { label: muiLabelFont() };
 
 const antdTokens = cloneTokens("antd.badge", (path, fallback) => {
   if (path === "host.size") return 32;
-  if (path === "host.radius") return 16;
+  // The capture's child is <Avatar shape="square"> (configs/antd.json Badge
+  // childrenSpec): antd Avatar square border-radius = borderRadius token 6,
+  // not the 16 of a circle. The child is the consumer's; its box is what the
+  // indicator anchors to, so it must be the box the capture rendered.
+  if (path === "host.radius") return 6;
   if (path === "host.fill") return "#00000040";
   if (path === "indicator.height") return 20;
   if (path === "indicator.minWidth") return 20;
@@ -130,7 +140,7 @@ export const muiBadgeSource: ReviewedBadgeSource = {
   api: {
     variant: "standard default; dot receipted",
     color: "docs Color demo error; color=default has no palette fill and is receipted",
-    extras: "overlap circular, max 99, invisible, showZero receipted",
+    extras: "max 99, invisible, showZero receipted; overlap circular is the compiled proof cell (the capture mounts it)",
   },
   styleSources: [
     "Badge/Badge.js RADIUS_STANDARD 10, anchor top-right rectangular, color error from the documented Color demo (palette.error.main). color=default has no backgroundColor.",
@@ -342,7 +352,8 @@ const buildConfig = (
       },
     },
     identity,
-    content: { count: "5" },
+    // mui: the capture mounts badgeContent 4 (configs/mui.json Badge fixedProps).
+    content: { count: slug === "mui" ? "4" : "5" },
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -389,7 +400,7 @@ export const muiBadgeAdapterConfig = buildConfig(
   { id: "mui.badge", name: "MUI Badge" },
   muiRefusals,
   anatomyFacts("mui", muiBadgeSource),
-  ["color-error-as-default", "dot", "circular-overlap", "max", "invisible"],
+  ["color-error-as-default", "dot", "max", "invisible"],
 );
 
 export const antdBadgeAdapterConfig = buildConfig(

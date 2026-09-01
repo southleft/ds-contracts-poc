@@ -113,21 +113,21 @@
                     "user-select": "none"
                   },
                   "tokens": {
-                    "background-color": "{imported.shared.color-00000000}",
+                    "background-color": "{imported.tabs.label.background-color}",
                     "border-bottom-width": "{imported.shared.size-0}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
                     "bottom": "{imported.shared.size-0}",
-                    "flex-shrink": "{imported.shared.num-0}",
-                    "font-size": "{imported.shared.size-14}",
-                    "font-weight": "{imported.shared.num-500}",
+                    "flex-shrink": "{imported.tabs.label.flex-shrink}",
+                    "font-size": "{imported.tabs.label.font-size}",
+                    "font-weight": "{imported.tabs.label.font-weight}",
                     "left": "{imported.shared.size-0}",
-                    "letter-spacing": "{imported.shared.size-0-39998}",
-                    "line-height": "{imported.shared.size-17-5}",
-                    "max-width": "{imported.shared.size-360}",
+                    "letter-spacing": "{imported.tabs.label.letter-spacing}",
+                    "line-height": "{imported.tabs.label.line-height}",
+                    "max-width": "{imported.tabs.label.max-width}",
                     "min-height": "{imported.shared.size-48}",
-                    "min-width": "{imported.shared.size-90}",
+                    "min-width": "{imported.tabs.label.min-width}",
                     "outline-width": "{imported.shared.size-0}",
                     "padding-bottom": "{imported.shared.size-12}",
                     "padding-left": "{imported.shared.size-16}",
@@ -179,21 +179,21 @@
                     "user-select": "none"
                   },
                   "tokens": {
-                    "background-color": "{imported.shared.color-00000000}",
+                    "background-color": "{imported.tabs.label-2.background-color}",
                     "border-bottom-width": "{imported.shared.size-0}",
                     "border-left-width": "{imported.shared.size-0}",
                     "border-right-width": "{imported.shared.size-0}",
                     "border-top-width": "{imported.shared.size-0}",
                     "bottom": "{imported.shared.size-0}",
-                    "flex-shrink": "{imported.shared.num-0}",
-                    "font-size": "{imported.shared.size-14}",
-                    "font-weight": "{imported.shared.num-500}",
+                    "flex-shrink": "{imported.tabs.label-2.flex-shrink}",
+                    "font-size": "{imported.tabs.label-2.font-size}",
+                    "font-weight": "{imported.tabs.label-2.font-weight}",
                     "left": "{imported.shared.size-0}",
-                    "letter-spacing": "{imported.shared.size-0-39998}",
-                    "line-height": "{imported.shared.size-17-5}",
-                    "max-width": "{imported.shared.size-360}",
+                    "letter-spacing": "{imported.tabs.label-2.letter-spacing}",
+                    "line-height": "{imported.tabs.label-2.line-height}",
+                    "max-width": "{imported.tabs.label-2.max-width}",
                     "min-height": "{imported.shared.size-48}",
-                    "min-width": "{imported.shared.size-90}",
+                    "min-width": "{imported.tabs.label-2.min-width}",
                     "outline-width": "{imported.shared.size-0}",
                     "padding-bottom": "{imported.shared.size-12}",
                     "padding-left": "{imported.shared.size-16}",
@@ -222,75 +222,6 @@
                     }
                   ],
                   "hugsBelowMaxWidth": true
-                },
-                "label-3": {
-                  "element": "button",
-                  "text": "Settings",
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy button|ButtonBase-root.Tab-root — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "layout": {
-                    "display": "flex",
-                    "direction": "column",
-                    "align": "center",
-                    "justify": "center"
-                  },
-                  "declared": {
-                    "appearance": "none",
-                    "border-bottom-style": "none",
-                    "border-left-style": "none",
-                    "border-right-style": "none",
-                    "border-top-style": "none",
-                    "cursor": "pointer",
-                    "font-family": "Roboto, Helvetica, Arial, sans-serif",
-                    "overflow-x": "hidden",
-                    "overflow-y": "hidden",
-                    "position": "relative",
-                    "text-transform": "uppercase",
-                    "user-select": "none"
-                  },
-                  "tokens": {
-                    "background-color": "{imported.shared.color-00000000}",
-                    "border-bottom-width": "{imported.shared.size-0}",
-                    "border-left-width": "{imported.shared.size-0}",
-                    "border-right-width": "{imported.shared.size-0}",
-                    "border-top-width": "{imported.shared.size-0}",
-                    "bottom": "{imported.shared.size-0}",
-                    "flex-shrink": "{imported.shared.num-0}",
-                    "font-size": "{imported.shared.size-14}",
-                    "font-weight": "{imported.shared.num-500}",
-                    "left": "{imported.shared.size-0}",
-                    "letter-spacing": "{imported.shared.size-0-39998}",
-                    "line-height": "{imported.shared.size-17-5}",
-                    "max-width": "{imported.shared.size-360}",
-                    "min-height": "{imported.shared.size-48}",
-                    "min-width": "{imported.shared.size-90}",
-                    "outline-width": "{imported.shared.size-0}",
-                    "padding-bottom": "{imported.shared.size-12}",
-                    "padding-left": "{imported.shared.size-16}",
-                    "padding-right": "{imported.shared.size-16}",
-                    "padding-top": "{imported.shared.size-12}",
-                    "right": "{imported.shared.size-0}",
-                    "top": "{imported.shared.size-0}"
-                  },
-                  "tokensByProp": [
-                    {
-                      "prop": "textColor",
-                      "map": {
-                        "inherit": {
-                          "color": "{imported.tabs.label-3.color.inherit}",
-                          "opacity": "{imported.tabs.label-3.opacity.inherit}"
-                        },
-                        "primary": {
-                          "color": "{imported.tabs.label-3.color.primary}",
-                          "opacity": "{imported.tabs.label-3.opacity.primary}"
-                        },
-                        "secondary": {
-                          "color": "{imported.tabs.label-3.color.secondary}",
-                          "opacity": "{imported.tabs.label-3.opacity.secondary}"
-                        }
-                      }
-                    }
-                  ],
-                  "hugsBelowMaxWidth": true
                 }
               },
               "declared": {
@@ -300,7 +231,7 @@
                 "height": "{imported.shared.size-48}",
                 "min-height": "{imported.shared.size-0}",
                 "min-width": "{imported.shared.size-0}",
-                "width": "{imported.shared.size-288}"
+                "width": "{imported.shared.size-199-391}"
               }
             },
             "tabs-indicator": {
@@ -345,7 +276,7 @@
             "left": "{imported.shared.size-0}",
             "right": "{imported.shared.size-0}",
             "top": "{imported.shared.size-0}",
-            "width": "{imported.shared.size-288}"
+            "width": "{imported.shared.size-199-391}"
           }
         }
       },
@@ -356,7 +287,7 @@
       "tokens": {
         "height": "{imported.shared.size-48}",
         "min-height": "{imported.shared.size-48}",
-        "width": "{imported.shared.size-288}"
+        "width": "{imported.shared.size-199-391}"
       }
     }
   },

@@ -24,7 +24,13 @@ import {
 
 export const TABS_FIGMA_NAMESPACE = "ds.contracts.tabs.recipe.v1";
 export const TABS_FIGMA_WRITER_VERSION = 1;
-export const TABS_FIGMA_RUN_SUFFIX = "tabs-v1";
+export const TABS_FIGMA_RUN_SUFFIX = "tabs-v4";
+/** v3 (2026-09-01) stays as evidence of the clipping container; never written again. */
+export const FORBIDDEN_TABS_V3_PAGE_ID = "210:80102";
+/** v2 (2026-09-01) stays as evidence of the writer omission it exposed; never written again. */
+export const FORBIDDEN_TABS_V2_PAGE_ID = "209:79990";
+/** The v1 stay is preserved as evidence (superseded by the 2026-09-01 capture-content remint) and never written again. */
+export const FORBIDDEN_TABS_V1_PAGE_ID = "183:76193";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -270,6 +276,9 @@ if(figma.fileKey!==EXPECTED_FILE_KEY)throw new Error("WRONG-FILE:"+figma.fileKey
 if(figma.root.name!==EXPECTED_FILE_NAME)throw new Error("WRONG-FILE-NAME:"+figma.root.name);
 if(figma.editorType!=="figma")throw new Error("WRONG-EDITOR:"+figma.editorType);
 void "TABS-MUST-NOT-WRITE-INPUT-PAGE";
+void "TABS-MUST-NOT-WRITE-TABS-V3-PAGE";
+void "TABS-MUST-NOT-WRITE-TABS-V2-PAGE";
+void "TABS-MUST-NOT-WRITE-TABS-V1-PAGE";
 void "TABS-MUST-NOT-WRITE-COMBOBOX-PAGE";
 void "TABS-MUST-NOT-WRITE-COMBOBOX-V42-PAGE";
 void "TABS-MUST-NOT-WRITE-BUTTON-PAGE";
@@ -287,6 +296,9 @@ void "TABS-MUST-NOT-WRITE-AVATAR-PAGE";
 void "TABS-MUST-NOT-WRITE-LINK-PAGE";
 void "TABS-MUST-NOT-WRITE-TOOLTIP-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("TABS-MUST-NOT-WRITE-INPUT-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="210:80102")throw new Error("TABS-MUST-NOT-WRITE-TABS-V3-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="209:79990")throw new Error("TABS-MUST-NOT-WRITE-TABS-V2-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:76193")throw new Error("TABS-MUST-NOT-WRITE-TABS-V1-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("TABS-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("TABS-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:69150")throw new Error("TABS-MUST-NOT-WRITE-BUTTON-PAGE");
@@ -495,7 +507,12 @@ for(const source of PLAN.sources){
     if(ir.kind==="frame"){applyLayout(node,ir);const hugKids=[],fillKids=[];for(const [childIndex,child] of ir.children.entries()){const width=child.layout?child.layout.width:child.width;((width&&width.mode==="fill")?fillKids:hugKids).push([childIndex,child]);}for(const [childIndex,child] of hugKids)await render(child,node,ownershipKey+"/children/"+childIndex);applySizing(node,ir);for(const [childIndex,child] of fillKids)await render(child,node,ownershipKey+"/children/"+childIndex);}
     else applySizing(node,ir);
     if(ir.kind==="text"){
-      bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
+      bindFloat(node,"fontSize",bindingFor(ir,"type.fontSize"));
+      void "TABS-WRITER-PERCENT-LINE-HEIGHT-STAYS-LITERAL";
+      // Probed 2026-09-01: setBoundVariable("lineHeight", float) turns a PERCENT
+      // line-height into PIXELS of the same number (125% → 125px, an 18px label
+      // became 125px tall). A percent line-height stays a literal; px binds.
+      if(ir.type.lineHeight.unit!=="percent")bindFloat(node,"lineHeight",bindingFor(ir,"type.lineHeight.value"));
       if(hugTextIntrinsic&&(node.width<=0||node.height<=0))node.resizeWithoutConstraints(hugTextIntrinsic.width,hugTextIntrinsic.height);
       if(node.characters.trim().length===0||node.width<=0||node.height<=0)throw new Error("TABS-TEXT-GEOMETRY:"+ir.role);
     }
@@ -523,6 +540,14 @@ for(const source of PLAN.sources){
     container.x=80;container.y=96;
     section.appendChild(container);
     container.appendChild(component);
+    void "TABS-WRITER-CONTAINER-HUGS-COMPONENT";
+    // A fresh frame is 100x100 and clips. Left that way, an export of anything
+    // wider than 100px — or an overlay that overhangs its host — is cut at the
+    // container edge (tabs v3 exported 100x48 of a 194x48 set; badge v4 lost
+    // its indicator's overhang). The container takes the component's size and
+    // never clips; the section is sized from it below.
+    container.clipsContent=false;
+    container.resizeWithoutConstraints(Math.max(1,component.width),Math.max(1,component.height));
     createdNodeIds.push(container.id);
     setSharedData(container,"runIdentity",PLAN.runIdentity);setSharedData(container,"adapterIdentity",source.adapterIdentity);setSharedData(container,"recipeHash",source.recipeHash);setSharedData(container,"ownershipKey","tabs/container");
     return {component,container};

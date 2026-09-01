@@ -63,19 +63,35 @@ export const muiBadgeMappings: FactMapping[] = [
   one("indicator.paddingX", "px", { combo: mCombo, part: mBadge, channel: "padding-left" }),
   one("indicator.radius", "px", { combo: mCombo, part: mBadge, channel: "border-top-left-radius" }),
   one("indicator.borderWidth", "px", { combo: mCombo, part: mBadge, channel: "border-top-width" }),
+  // overlap="circular" (the mount the capture records): Badge.js anchors the
+  // badge at top/right 14% of the host and THEN translates (50%, -50%). The
+  // recipe's translateX/Y is the offset from the docked top-right position,
+  // so it is transform.tx − right and transform.ty + top — reading the
+  // transform alone gives the rectangular ±10 and misses the 5.6px inset,
+  // which is exactly the 50x50-vs-44x44 the fidelity gate measured.
   {
     path: "indicator.translateX",
     kind: "px",
-    reads: { v: { combo: mCombo, part: mBadge, channel: "transform" } },
-    formula: "matrix tx of the anchored badge",
-    combine: (raw) => matrix(raw.v).tx,
+    reads: {
+      v: { combo: mCombo, part: mBadge, channel: "transform" },
+      right: { combo: mCombo, part: mBadge, channel: "right" },
+    },
+    formula: "matrix tx − right inset (circular overlap anchors 14% inside the host)",
+    tolerance: 0.001,
+    toleranceReason: "the ledger rounds to 3 decimals (4.406); the fixture carries the captured 5.59375 inset exactly (4.40625)",
+    combine: (raw) => matrix(raw.v).tx - parseFloat(String(raw.right)),
   },
   {
     path: "indicator.translateY",
     kind: "px",
-    reads: { v: { combo: mCombo, part: mBadge, channel: "transform" } },
-    formula: "matrix ty of the anchored badge",
-    combine: (raw) => matrix(raw.v).ty,
+    reads: {
+      v: { combo: mCombo, part: mBadge, channel: "transform" },
+      top: { combo: mCombo, part: mBadge, channel: "top" },
+    },
+    formula: "matrix ty + top inset (circular overlap anchors 14% inside the host)",
+    tolerance: 0.001,
+    toleranceReason: "the ledger rounds to 3 decimals (4.406); the fixture carries the captured 5.59375 inset exactly (4.40625)",
+    combine: (raw) => matrix(raw.v).ty + parseFloat(String(raw.top)),
   },
   one("indicator.fill", "color", { combo: mCombo, part: mBadge, channel: "background-color" }),
   receipt(

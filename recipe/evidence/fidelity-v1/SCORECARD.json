@@ -4,10 +4,10 @@
     "pctAAMaskedMax": 5
   },
   "subjects": 24,
-  "passed": 12,
-  "failed": 11,
+  "passed": 16,
+  "failed": 7,
   "fringeExcused": 1,
-  "knownFailures": 11,
+  "knownFailures": 7,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -107,11 +107,11 @@
     },
     {
       "label": "chip/mui",
-      "status": "fail",
-      "pctAAMasked": 5.94,
-      "canvasPx": "46x32",
+      "status": "pass",
+      "pctAAMasked": 0.61,
+      "canvasPx": "51x32",
       "realPx": "50x32",
-      "convergesAt": null
+      "convergesAt": 230
     },
     {
       "label": "chip/antd",
@@ -139,16 +139,16 @@
     },
     {
       "label": "badge/mui",
-      "status": "fail",
-      "pctAAMasked": 14.6,
-      "canvasPx": "50x50",
+      "status": "pass",
+      "pctAAMasked": 2.52,
+      "canvasPx": "45x45",
       "realPx": "44x44",
       "convergesAt": null
     },
     {
       "label": "badge/antd",
-      "status": "fail",
-      "pctAAMasked": 7.26,
+      "status": "pass",
+      "pctAAMasked": 1.98,
       "canvasPx": "42x42",
       "realPx": "42x42",
       "convergesAt": 250
@@ -164,18 +164,18 @@
     {
       "label": "tabs/mui",
       "status": "fail",
-      "pctAAMasked": 14.73,
+      "pctAAMasked": 18.07,
       "canvasPx": "162x17",
-      "realPx": "284x31",
+      "realPx": "183x31",
       "convergesAt": null
     },
     {
       "label": "tooltip/antd",
-      "status": "fail",
-      "pctAAMasked": 35.67,
-      "canvasPx": "59x34",
+      "status": "pass",
+      "pctAAMasked": 3.01,
+      "canvasPx": "86x34",
       "realPx": "86x34",
-      "convergesAt": null
+      "convergesAt": 250
     },
     {
       "label": "textarea/astryx",

@@ -177,10 +177,22 @@
         "onChange"
       ],
       "childrenSpec": [
-        { "importName": "Tab", "props": { "label": "Overview", "disableRipple": true } },
-        { "importName": "Tab", "props": { "label": "Activity", "disableRipple": true } },
-        { "importName": "Tab", "props": { "label": "Settings", "disableRipple": true } }
-      ]
+        {
+          "importName": "Tab",
+          "props": {
+            "label": "Overview",
+            "disableRipple": true
+          }
+        },
+        {
+          "importName": "Tab",
+          "props": {
+            "label": "Activity",
+            "disableRipple": true
+          }
+        }
+      ],
+      "__note:two-items": "2026-09-01: Settings dropped from the mount. tabs@1 compiles a two-item cell (recipe/recipes/tabs.ts validateTabsStructure: \"default cell is two items, first selected\"); the fidelity reference must render what the recipe claims, and a two-tab Tabs is a real render of the package. Three-plus items stay a named recipe limit, not a hidden one."
     },
     {
       "name": "Accordion",
@@ -204,11 +216,21 @@
         }
       ],
       "childrenSpec": [
-        { "importName": "AccordionSummary", "text": "Accordion title" },
-        { "importName": "AccordionDetails", "text": "Details body copy for the molecule round." }
+        {
+          "importName": "AccordionSummary",
+          "text": "Accordion title"
+        },
+        {
+          "importName": "AccordionDetails",
+          "text": "Details body copy for the molecule round."
+        }
       ],
       "blockStage": true,
-      "stage": { "width": 320, "height": 220, "padding": 16 }
+      "stage": {
+        "width": 320,
+        "height": 220,
+        "padding": 16
+      }
     },
     {
       "name": "Autocomplete",
@@ -220,15 +242,29 @@
       ],
       "fixedProps": {
         "multiple": true,
-        "options": ["Alpha", "Beta", "Gamma", "Delta"],
-        "value": ["Alpha", "Beta"],
-        "renderInput": { "$render": "@mui/material#TextField" }
+        "options": [
+          "Alpha",
+          "Beta",
+          "Gamma",
+          "Delta"
+        ],
+        "value": [
+          "Alpha",
+          "Beta"
+        ],
+        "renderInput": {
+          "$render": "@mui/material#TextField"
+        }
       },
       "callbackProps": [
         "onChange"
       ],
       "blockStage": true,
-      "stage": { "width": 320, "height": 140, "padding": 16 }
+      "stage": {
+        "width": 320,
+        "height": 140,
+        "padding": 16
+      }
     },
     {
       "name": "Tooltip",
@@ -262,16 +298,37 @@
       "openDriver": {
         "open": true,
         "anchorReference": "anchorPosition",
-        "anchorPosition": { "top": 24, "left": 24 },
+        "anchorPosition": {
+          "top": 24,
+          "left": 24
+        },
         "transitionDuration": 0
       },
       "callbackProps": [
         "onClose"
       ],
       "childrenSpec": [
-        { "importName": "MenuItem", "props": { "disableRipple": true }, "text": "Profile" },
-        { "importName": "MenuItem", "props": { "disableRipple": true }, "text": "My account" },
-        { "importName": "MenuItem", "props": { "disableRipple": true }, "text": "Log out" }
+        {
+          "importName": "MenuItem",
+          "props": {
+            "disableRipple": true
+          },
+          "text": "Profile"
+        },
+        {
+          "importName": "MenuItem",
+          "props": {
+            "disableRipple": true
+          },
+          "text": "My account"
+        },
+        {
+          "importName": "MenuItem",
+          "props": {
+            "disableRipple": true
+          },
+          "text": "Log out"
+        }
       ]
     },
     {
@@ -307,9 +364,22 @@
       ],
       "axisValueMap": {
         "checked": {
-          "unchecked": { "$props": { "checked": false } },
-          "checked": { "$props": { "checked": true } },
-          "indeterminate": { "$props": { "checked": false, "indeterminate": true } }
+          "unchecked": {
+            "$props": {
+              "checked": false
+            }
+          },
+          "checked": {
+            "$props": {
+              "checked": true
+            }
+          },
+          "indeterminate": {
+            "$props": {
+              "checked": false,
+              "indeterminate": true
+            }
+          }
         }
       },
       "stateProps": [
@@ -334,14 +404,22 @@
         "count": 3,
         "rowsPerPage": 10,
         "page": 0,
-        "slotProps": { "select": { "open": false } }
+        "slotProps": {
+          "select": {
+            "open": false
+          }
+        }
       },
       "callbackProps": [
         "onPageChange",
         "onRowsPerPageChange"
       ],
       "blockStage": true,
-      "stage": { "width": 460, "height": 120, "padding": 16 }
+      "stage": {
+        "width": 460,
+        "height": 120,
+        "padding": 16
+      }
     },
     {
       "__note": "ORGANISM ROUND — the composed DataTable, the first ORGANISM through the pipeline. NAMED EXCLUSIONS (v1): (1) stickyHeader is NOT captured — position:sticky has no carried spelling (contract-schema position = relative|static|absolute) and the sticky header also flips border-collapse to separate and paints its own background; (2) the row overflow MENU is captured CLOSED — an open Menu portals a root to document.body and the single-portaled-root policy would DROP the in-stage table; (3) TableSortLabel carries direction='asc' only — the direction axis is excluded by name (the -directionAsc/-directionDesc classes are also excluded from classAllow so a stray axis can never branch the union); (4) TableContainer/Paper is NOT the captured root — enumerated axes ride the ROOT mount and `size` is a Table prop, so the organism IS the Table (Paper elevation is already a captured component this round); (5) rows are INLINED, not component refs — promotion emits no component/repeat/slot refs, and MUI's size='small' descendant rule restyles the nested Checkbox's own padding (42x42 -> 24x24) with UNCHANGED child classes, so composing the standalone Checkbox contract would be WRONG in small tables; (6) TWO body rows, not three — repeated siblings are separate parts under a GLOBAL naming counter (label, label-2, ...), so the sample is the minimum that proves both the plain and the selected/checked row; (7) the row-action control carries a TEXT glyph, not an icon asset — the childrenSpec grammar mounts imported COMPONENTS and @mui/icons-material is not in the pinned sandbox; raw SVG markup in config is deliberately NOT invented this round.",
@@ -353,7 +431,11 @@
         "size"
       ],
       "blockStage": true,
-      "stage": { "width": 720, "height": 360, "padding": 16 },
+      "stage": {
+        "width": 720,
+        "height": 360,
+        "padding": 16
+      },
       "childrenSpec": [
         {
           "importName": "TableHead",
@@ -361,15 +443,52 @@
             {
               "importName": "TableRow",
               "children": [
-                { "importName": "TableCell", "props": { "padding": "checkbox" }, "children": [
-                  { "importName": "Checkbox", "props": { "indeterminate": true, "disableRipple": true } }
-                ] },
-                { "importName": "TableCell", "props": { "sortDirection": "asc" }, "children": [
-                  { "importName": "TableSortLabel", "props": { "active": true, "direction": "asc" }, "text": "Name" }
-                ] },
-                { "importName": "TableCell", "text": "Role" },
-                { "importName": "TableCell", "text": "Team" },
-                { "importName": "TableCell", "props": { "align": "right" }, "text": "Actions" }
+                {
+                  "importName": "TableCell",
+                  "props": {
+                    "padding": "checkbox"
+                  },
+                  "children": [
+                    {
+                      "importName": "Checkbox",
+                      "props": {
+                        "indeterminate": true,
+                        "disableRipple": true
+                      }
+                    }
+                  ]
+                },
+                {
+                  "importName": "TableCell",
+                  "props": {
+                    "sortDirection": "asc"
+                  },
+                  "children": [
+                    {
+                      "importName": "TableSortLabel",
+                      "props": {
+                        "active": true,
+                        "direction": "asc"
+                      },
+                      "text": "Name"
+                    }
+                  ]
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Role"
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Team"
+                },
+                {
+                  "importName": "TableCell",
+                  "props": {
+                    "align": "right"
+                  },
+                  "text": "Actions"
+                }
               ]
             }
           ]
@@ -380,30 +499,102 @@
             {
               "importName": "TableRow",
               "children": [
-                { "importName": "TableCell", "props": { "padding": "checkbox" }, "children": [
-                  { "importName": "Checkbox", "props": { "checked": false, "disableRipple": true } }
-                ] },
-                { "importName": "TableCell", "text": "Frozen yoghurt" },
-                { "importName": "TableCell", "text": "Designer" },
-                { "importName": "TableCell", "text": "Platform" },
-                { "importName": "TableCell", "props": { "align": "right" }, "children": [
-                  { "importName": "IconButton", "props": { "size": "small", "disableRipple": true, "aria-label": "row actions" }, "text": "⋮" }
-                ] }
+                {
+                  "importName": "TableCell",
+                  "props": {
+                    "padding": "checkbox"
+                  },
+                  "children": [
+                    {
+                      "importName": "Checkbox",
+                      "props": {
+                        "checked": false,
+                        "disableRipple": true
+                      }
+                    }
+                  ]
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Frozen yoghurt"
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Designer"
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Platform"
+                },
+                {
+                  "importName": "TableCell",
+                  "props": {
+                    "align": "right"
+                  },
+                  "children": [
+                    {
+                      "importName": "IconButton",
+                      "props": {
+                        "size": "small",
+                        "disableRipple": true,
+                        "aria-label": "row actions"
+                      },
+                      "text": "⋮"
+                    }
+                  ]
+                }
               ]
             },
             {
               "importName": "TableRow",
-              "props": { "selected": true },
+              "props": {
+                "selected": true
+              },
               "children": [
-                { "importName": "TableCell", "props": { "padding": "checkbox" }, "children": [
-                  { "importName": "Checkbox", "props": { "checked": true, "disableRipple": true } }
-                ] },
-                { "importName": "TableCell", "text": "Ice cream sandwich" },
-                { "importName": "TableCell", "text": "Engineer" },
-                { "importName": "TableCell", "text": "Contracts" },
-                { "importName": "TableCell", "props": { "align": "right" }, "children": [
-                  { "importName": "IconButton", "props": { "size": "small", "disableRipple": true, "aria-label": "row actions" }, "text": "⋮" }
-                ] }
+                {
+                  "importName": "TableCell",
+                  "props": {
+                    "padding": "checkbox"
+                  },
+                  "children": [
+                    {
+                      "importName": "Checkbox",
+                      "props": {
+                        "checked": true,
+                        "disableRipple": true
+                      }
+                    }
+                  ]
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Ice cream sandwich"
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Engineer"
+                },
+                {
+                  "importName": "TableCell",
+                  "text": "Contracts"
+                },
+                {
+                  "importName": "TableCell",
+                  "props": {
+                    "align": "right"
+                  },
+                  "children": [
+                    {
+                      "importName": "IconButton",
+                      "props": {
+                        "size": "small",
+                        "disableRipple": true,
+                        "aria-label": "row actions"
+                      },
+                      "text": "⋮"
+                    }
+                  ]
+                }
               ]
             }
           ]
@@ -469,8 +660,16 @@
       ],
       "axisValueMap": {
         "content": {
-          "empty": { "$props": { "value": "" } },
-          "value": { "$props": { "value": "Meeting notes for Tuesday." } }
+          "empty": {
+            "$props": {
+              "value": ""
+            }
+          },
+          "value": {
+            "$props": {
+              "value": "Meeting notes for Tuesday."
+            }
+          }
         }
       },
       "stateProps": [
@@ -609,7 +808,13 @@
         "overlap": "circular"
       },
       "childrenSpec": [
-        { "importName": "Avatar", "props": { "variant": "circular" }, "text": "A" }
+        {
+          "importName": "Avatar",
+          "props": {
+            "variant": "circular"
+          },
+          "text": "A"
+        }
       ]
     },
     {
@@ -665,9 +870,31 @@
       "sampleText": "",
       "axes": [],
       "childrenSpec": [
-        { "importName": "Link", "props": { "underline": "hover", "color": "inherit", "href": "#home" }, "text": "Home" },
-        { "importName": "Link", "props": { "underline": "hover", "color": "inherit", "href": "#catalog" }, "text": "Catalog" },
-        { "importName": "Typography", "props": { "color": "text.primary" }, "text": "Breadcrumbs" }
+        {
+          "importName": "Link",
+          "props": {
+            "underline": "hover",
+            "color": "inherit",
+            "href": "#home"
+          },
+          "text": "Home"
+        },
+        {
+          "importName": "Link",
+          "props": {
+            "underline": "hover",
+            "color": "inherit",
+            "href": "#catalog"
+          },
+          "text": "Catalog"
+        },
+        {
+          "importName": "Typography",
+          "props": {
+            "color": "text.primary"
+          },
+          "text": "Breadcrumbs"
+        }
       ],
       "blockStage": true
     },
@@ -750,9 +977,27 @@
         "onOpen"
       ],
       "childrenSpec": [
-        { "importName": "MenuItem", "props": { "value": "one" }, "text": "One" },
-        { "importName": "MenuItem", "props": { "value": "two" }, "text": "Two" },
-        { "importName": "MenuItem", "props": { "value": "three" }, "text": "Three" }
+        {
+          "importName": "MenuItem",
+          "props": {
+            "value": "one"
+          },
+          "text": "One"
+        },
+        {
+          "importName": "MenuItem",
+          "props": {
+            "value": "two"
+          },
+          "text": "Two"
+        },
+        {
+          "importName": "MenuItem",
+          "props": {
+            "value": "three"
+          },
+          "text": "Three"
+        }
       ],
       "blockStage": true,
       "stage": {
