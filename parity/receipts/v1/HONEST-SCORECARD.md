@@ -127,7 +127,7 @@ signed on. All three pass now that the lane reaches them.
 
   package.json  2,718 scripts → 436     2,283 superseded lanes removed
   fast.yml      258 steps → 190         86 superseded dropped, 15 added
-  ci:lanes      72 defects → 90         (see below — the metric moved twice)
+  ci:lanes      72 defects → 0 (GREEN)   (see below — the metric moved twice first)
 
 The 86 removed steps are replaced by ONE lane, `recipe:live:history:test`, which
 runs the per-version test FILES directly: **705 files, 5,080 assertions, 70
@@ -143,8 +143,18 @@ last assertion reads the live repository and requires an artifact to be
 uncommitted. Both exclusions are named in the workflow beside the lane.
 
 `ci:lanes` went 72 → 313 the moment the scripts were removed (every per-version
-test file was suddenly named by nothing), then → 90 with the aggregate lane: 77
-test files and 13 scripts, the lowest it has been.
+test file was suddenly named by nothing), → 90 with the aggregate lane, and then
+to **0 — green for the first time on this branch**:
+
+    ✔ every gate-shaped script is either wired into a lane or excluded with a
+      reason; every present test is CI-reachable; every fast/full executable
+      step reports independently.
+
+The last 90 closed by adding the 117 `scene-readback-vN` test files my first glob
+missed (the lane now runs **822 files, 15,551 assertions, 85 seconds**), laning
+my own two new lowering tests, laning the 13 boilerplate archetypes' current
+versions, and retiring 4 stale EXCLUDED reasons that named scripts which no
+longer exist. **V1-CI-01 is no longer red for this reason.**
 
 **Not done: the source deletion.** Removing the 3,476 superseded
 `recipe/*-live-v*` sources (59 MB) would take typecheck from 9,168 errors to
