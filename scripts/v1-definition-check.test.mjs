@@ -49,7 +49,11 @@ function expectFailure(markdown, pattern) {
 }
 
 test('the real v1 definition is a valid baseline', () => {
-  assert.equal(parseRequirementTables(BASELINE).length, 23);
+  // 24 since commit 77a61c894 adopted F-C2C as V1-JOURNEY-04 (the owner-signed
+  // canvas-to-code held-out exam). The row landed in docs/26 and this pin was
+  // not moved with it, so the fast lane has been red on it ever since — one of
+  // the 8 gates that lane could not report because it never finished.
+  assert.equal(parseRequirementTables(BASELINE).length, 24);
   assert.equal(parsePostV1Entries(BASELINE).length, 5);
   assert.deepEqual(validateV1Definition(BASELINE, CONTEXT), []);
 });

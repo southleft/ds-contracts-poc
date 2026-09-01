@@ -37,6 +37,13 @@ export const RECIPE_FIGMA_ASSIGNMENTS = {
   cornerRadius:
     "SceneNode topLeftRadius/topRightRadius/bottomRightRadius/bottomLeftRadius",
   effects: "BlendMixin.effects",
+  // Vector paint attributes. Presented by the vector node schema since
+  // 3b2c3fb84 added VECTOR glyphs, but never declared here or in
+  // IR_DRAWABLE_FIELDS, so the closed-field guard has been red ever since.
+  windingRule: "VectorNode.vectorPaths[].windingRule",
+  strokeCap: "MinimalStrokesMixin.strokeCap",
+  strokeJoin: "MinimalStrokesMixin.strokeJoin",
+  rotation: "LayoutMixin.rotation",
   fills: "GeometryMixin.fills",
   height: "LayoutMixin.resize + layoutSizingVertical",
   kind: "PluginAPI createComponent/createText/createInstance/combineAsVariants",

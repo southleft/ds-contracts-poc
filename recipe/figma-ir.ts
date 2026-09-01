@@ -633,7 +633,16 @@ export const IR_DRAWABLE_FIELDS = [
   "payload",
   "properties",
   "role",
+  "rotation",
   "shape",
+  // Vector paint attributes, presented by the vector node schema since
+  // 3b2c3fb84 ("PREPARE checkbox@1 v2 VECTOR glyphs from named Astryx, MUI and
+  // AntD package paths") added them without extending this list. The gap has
+  // failed `IR_DRAWABLE_FIELDS is exactly the fields the node schemas present`
+  // ever since, unnoticed because test:recipe sits in a lane that has not
+  // finished since 2026-08-27.
+  "strokeCap",
+  "strokeJoin",
   "strokes",
   "type",
   "verticalAlign",
@@ -641,4 +650,5 @@ export const IR_DRAWABLE_FIELDS = [
   "variantAxes",
   "variantProperties",
   "width",
+  "windingRule",
 ] as const;
