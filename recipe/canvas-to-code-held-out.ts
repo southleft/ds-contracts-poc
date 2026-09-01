@@ -59,7 +59,9 @@ const sha256 = (value: string | Uint8Array): string =>
 
 /** Provenance of the held-out substrate — option 1 of the 3f mission. */
 export const HELD_OUT_SUBSTRATE = {
-  kind: "scratch-designer-set-not-in-stay-list" as const,
+  // Named for what it is. The earlier name was "scratch-designer-set-…", which
+  // read as though a designer drew this set. None did — see authoredBy.
+  kind: "engine-minted-exam-set-not-in-stay-list" as const,
   option: 1 as const,
   fileKey: "byMp6lt0Ij9b2QbkDGFwBh",
   pageId: "33:2",
@@ -73,6 +75,24 @@ export const HELD_OUT_SUBSTRATE = {
   /** Why this set is held-out: never a first-class recipe stay. */
   notInStayList:
     "Card has no recipe:card:* gate and no signed/boilerplate stay page; the antd exam 2026-08-23 page is census/exam chrome, not a recipe mint stay.",
+  /**
+   * Disclosure. This page was written by THIS repository's own code→canvas
+   * engine on 2026-08-23 — parity/receipts/phase-2/ANTD-EXAM.md records the
+   * Scratch file as "the ONLY file written; blank before the first mint", with
+   * Card minted at 33:5093 by DSC.planGenerate. The bound variables in the
+   * observe carry the engine's own `imported/card/...` naming convention.
+   */
+  authoredBy: "this repository's code→canvas engine, 2026-08-23" as const,
+  /**
+   * What this exam therefore does and does not prove. It is a ROUND TRIP on our
+   * own output: held out from the RECIPE path, not from the project. It shows
+   * the canvas→code direction can read a set no recipe minted and account for
+   * every fact. It does NOT show the pipeline can read a file drawn by a
+   * designer who never used this tool, and no claim here should be read that
+   * way. That exam is still owed.
+   */
+  heldOutFromRecipePathNotFromProject: true as const,
+  foreignDesignerFileExamOwed: true as const,
 };
 
 export interface HeldOutNamedBlocker {
@@ -192,6 +212,13 @@ const blockersFromRun = (
     severity: "product-incomplete",
     detail:
       "humanGrade stays pending; this exam invents no grade and does not flip any archetype overallSuccess.",
+  });
+  blockers.push({
+    id: "substrate-is-our-own-mint",
+    stage: "observe",
+    severity: "product-incomplete",
+    detail:
+      "The exam substrate (page 33:2, Card 33:5093) was minted by THIS repository's code→canvas engine on 2026-08-23 — parity/receipts/phase-2/ANTD-EXAM.md records the Scratch file as blank before that first mint. So this is a round trip on our own output: held out from the RECIPE path, not from the project. A canvas→code exam on a file drawn by a designer who never used this tool is still owed, and nothing here should be read as having passed one.",
   });
   return blockers;
 };

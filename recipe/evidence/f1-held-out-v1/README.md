@@ -6,7 +6,7 @@ Subject: `react-day-picker@10.0.1#DayPicker`.
 
 ## Capture
 
-Determinism **IDENTICAL** (32 captures, 8 combos × 4 interactions). Previous day-cell signature thrash was an interaction leak; the floor remounts React state before each plane. Held-out `classAllow` was not retuned.
+Determinism **IDENTICAL** (undefined captures, undefined combos × undefined interactions). Previous day-cell signature thrash was an interaction leak; the floor remounts React state before each plane. Held-out `classAllow` was not retuned.
 
 ## Mechanical compile
 

@@ -4,7 +4,7 @@
     "attempted": true,
     "compiled": false,
     "status": "refused",
-    "reason": "Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: week-count-not-six, blank-outside-labels, day-button-radius-percent, selected-is-border-not-fill, grid-gap-normal, root-min-width-auto, week-number-text-absent, weekday-fontsize-not-day, zero-source-bindings, axes-mismatch, outside-cell-has-no-label. compileCalendarRecipe is not given a Polar-filled instance. Live remint stays refused.",
+    "reason": "Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: week-count-not-six, blank-outside-labels, day-button-radius-percent, selected-is-border-not-fill, grid-gap-normal, root-min-width-auto, week-number-text-absent, weekday-fontsize-not-day, zero-source-bindings, axes-mismatch, outside-cell-has-no-label. The refusal is evidenced by 11 real schema issue(s) raised when the PROPOSED instance is parsed — not by handing the compiler an empty object. Live remint stays refused.",
     "gapIds": [
       "week-count-not-six",
       "blank-outside-labels",
@@ -18,6 +18,20 @@
       "axes-mismatch",
       "outside-cell-has-no-label"
     ],
+    "schemaIssues": [
+      "identity: Invalid input: expected object, received undefined",
+      "semantic: Invalid input: expected object, received undefined",
+      "axes: Invalid input: expected object, received undefined",
+      "content: Invalid input: expected object, received undefined",
+      "tokens: Invalid input: expected object, received undefined",
+      "inputFacts: Invalid input: expected array, received undefined",
+      "accounting: Invalid input: expected object, received undefined",
+      "extensions: Invalid input: expected array, received undefined",
+      "receipts: Invalid input: expected array, received undefined",
+      "provenance: Invalid input: expected object, received undefined",
+      "(root): Unrecognized key: \"note\""
+    ],
+    "refusalEvidencedBy": "real-proposed-instance-schema-parse",
     "liveFigma": false,
     "inventedFixtureTable": false,
     "addedToCalendarInstances": false

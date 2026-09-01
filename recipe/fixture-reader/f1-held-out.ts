@@ -10,7 +10,6 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { compileCalendarRecipe } from "../recipes/calendar.js";
 import {
   assertNoPolarPropose,
   proposeCalendarInstanceFromLedger,
@@ -33,6 +32,9 @@ export interface F1RecipeCompile {
   status: "refused";
   reason: string;
   gapIds: string[];
+  /** The real zod issues from parsing the mechanically proposed instance. */
+  schemaIssues: string[];
+  refusalEvidencedBy: "real-proposed-instance-schema-parse";
   liveFigma: false;
   inventedFixtureTable: false;
   addedToCalendarInstances: false;
@@ -40,18 +42,25 @@ export interface F1RecipeCompile {
 
 function compileAttempt(propose: MechanicalCalendarPropose): F1RecipeCompile {
   assertNoPolarPropose(propose);
-  let compiledByAccident = false;
-  try {
-    compileCalendarRecipe({
-      identity: { id: "f1.day-picker.forbidden", name: "forbidden" },
-    });
-    compiledByAccident = true;
-  } catch {
-    /* expected — incomplete input is not a CalendarRecipeInstance */
-  }
-  if (compiledByAccident) {
+
+  // What this refusal is, and what it is not.
+  //
+  // This used to call compileCalendarRecipe({ identity }) — an object with no
+  // content, tokens or axes — and record the resulting throw as "the compile
+  // was attempted and refused". That refusal was real but meaningless: it
+  // failed schema validation because the INPUT WAS EMPTY, not because of
+  // anything react-day-picker does. The mechanically proposed instance was
+  // computed and then never given to the compiler at all, so the headline
+  // claim rested on a strawman.
+  //
+  // The honest signal was already being produced next door and thrown away:
+  // proposeCalendarInstanceFromLedger parses the REAL proposed instance
+  // against the REAL schema and keeps every issue. Those issues are the
+  // refusal. They are reported here verbatim.
+  const parseIssues = propose.instanceParse.issues;
+  if (propose.instanceParse.success !== false || parseIssues.length === 0) {
     throw new Error(
-      "F1 compile must not succeed on an incomplete Polar-free instance",
+      "F1 refusal must be evidenced by real schema issues from the proposed instance",
     );
   }
   return {
@@ -59,8 +68,11 @@ function compileAttempt(propose: MechanicalCalendarPropose): F1RecipeCompile {
     compiled: false,
     status: "refused",
     reason:
-      `Mechanical propose from ${LEDGER} cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: ${propose.schemaGaps.map((g) => g.id).join(", ")}. compileCalendarRecipe is not given a Polar-filled instance. Live remint stays refused.`,
+      `Mechanical propose from ${LEDGER} cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: ${propose.schemaGaps.map((g) => g.id).join(", ")}. The refusal is evidenced by ${parseIssues.length} real schema issue(s) raised when the PROPOSED instance is parsed — not by handing the compiler an empty object. Live remint stays refused.`,
     gapIds: propose.schemaGaps.map((g) => g.id),
+    /** The actual zod issues from parsing the mechanically proposed instance. */
+    schemaIssues: parseIssues,
+    refusalEvidencedBy: "real-proposed-instance-schema-parse" as const,
     liveFigma: false,
     inventedFixtureTable: false,
     addedToCalendarInstances: false,
@@ -103,14 +115,27 @@ export function buildF1HeldOutEvidence(): {
         status: "captured",
         ...captureShared,
         blocker: null,
-        determinism: "byte-identical across two full sweeps in one session",
-        captures: 32,
-        combos: 8,
-        interactions: 4,
-        channelsEnumerated: 472,
-        elementsPerCapture: 626,
+        // These are TRANSCRIBED from a capture session on 2026-08-31, not
+        // measured by this gate. `recipe:f1-held-out:check` completes in under
+        // a second and only reads the committed ledger; it re-runs no capture,
+        // so it cannot confirm any of them — including the determinism claim,
+        // which is the one a reader is most likely to lean on. The supporting
+        // log was written to /tmp and never committed, so it is not
+        // independently checkable either. Treat every field under
+        // `unverifiedByThisGate` as a claim awaiting re-measurement, not as
+        // evidence. Closing this means folding the capture into the gate.
+        determinismVerifiedByThisGate: false,
+        unverifiedByThisGate: {
+          determinism: "byte-identical across two full sweeps in one session",
+          captures: 32,
+          combos: 8,
+          interactions: 4,
+          channelsEnumerated: 472,
+          elementsPerCapture: 626,
+          recordedAt: "2026-08-31",
+          evidenceLog: "/tmp/day-picker-capture-f1.log (NOT COMMITTED)",
+        },
         ledgerFile: LEDGER,
-        evidenceLog: "/tmp/day-picker-capture-f1.log",
         namedLimitations: [
           "Union anatomy names repeating day cells and year-dropdown <option>s as individual parts (192 parts carried, 5 svg polygon refusals). That is a floor shape, not an F1 pass.",
           "0 verified source bindings — the library hard-codes most paint (294 named skips, 1 shorthand-ceiling skip).",

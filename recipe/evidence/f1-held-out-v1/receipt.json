@@ -30,14 +30,18 @@
     "heldOutConfigUntouched": true,
     "previousBlocker": "2026-08-31 double-run refused: td|rdp-day vs td|rdp-day.rdp-selected moved between structural indices (Calendar:label.1__default). Cause was an interaction leak — active mouse.up mutated React selected; formStateReset only resets <input> checked/value. Floor remount (capture.react-state-remount) closed that leak. classAllow was not retuned.",
     "blocker": null,
-    "determinism": "byte-identical across two full sweeps in one session",
-    "captures": 32,
-    "combos": 8,
-    "interactions": 4,
-    "channelsEnumerated": 472,
-    "elementsPerCapture": 626,
+    "determinismVerifiedByThisGate": false,
+    "unverifiedByThisGate": {
+      "determinism": "byte-identical across two full sweeps in one session",
+      "captures": 32,
+      "combos": 8,
+      "interactions": 4,
+      "channelsEnumerated": 472,
+      "elementsPerCapture": 626,
+      "recordedAt": "2026-08-31",
+      "evidenceLog": "/tmp/day-picker-capture-f1.log (NOT COMMITTED)"
+    },
     "ledgerFile": "extract/computed/out/day-picker/calendar/captured-truth.json",
-    "evidenceLog": "/tmp/day-picker-capture-f1.log",
     "namedLimitations": [
       "Union anatomy names repeating day cells and year-dropdown <option>s as individual parts (192 parts carried, 5 svg polygon refusals). That is a floor shape, not an F1 pass.",
       "0 verified source bindings — the library hard-codes most paint (294 named skips, 1 shorthand-ceiling skip).",
@@ -241,7 +245,7 @@
     "attempted": true,
     "compiled": false,
     "status": "refused",
-    "reason": "Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: week-count-not-six, blank-outside-labels, day-button-radius-percent, selected-is-border-not-fill, grid-gap-normal, root-min-width-auto, week-number-text-absent, weekday-fontsize-not-day, zero-source-bindings, axes-mismatch, outside-cell-has-no-label. compileCalendarRecipe is not given a Polar-filled instance. Live remint stays refused.",
+    "reason": "Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: week-count-not-six, blank-outside-labels, day-button-radius-percent, selected-is-border-not-fill, grid-gap-normal, root-min-width-auto, week-number-text-absent, weekday-fontsize-not-day, zero-source-bindings, axes-mismatch, outside-cell-has-no-label. The refusal is evidenced by 11 real schema issue(s) raised when the PROPOSED instance is parsed — not by handing the compiler an empty object. Live remint stays refused.",
     "gapIds": [
       "week-count-not-six",
       "blank-outside-labels",
@@ -255,6 +259,20 @@
       "axes-mismatch",
       "outside-cell-has-no-label"
     ],
+    "schemaIssues": [
+      "identity: Invalid input: expected object, received undefined",
+      "semantic: Invalid input: expected object, received undefined",
+      "axes: Invalid input: expected object, received undefined",
+      "content: Invalid input: expected object, received undefined",
+      "tokens: Invalid input: expected object, received undefined",
+      "inputFacts: Invalid input: expected array, received undefined",
+      "accounting: Invalid input: expected object, received undefined",
+      "extensions: Invalid input: expected array, received undefined",
+      "receipts: Invalid input: expected array, received undefined",
+      "provenance: Invalid input: expected object, received undefined",
+      "(root): Unrecognized key: \"note\""
+    ],
+    "refusalEvidencedBy": "real-proposed-instance-schema-parse",
     "liveFigma": false,
     "inventedFixtureTable": false,
     "addedToCalendarInstances": false
