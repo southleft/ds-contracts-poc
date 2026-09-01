@@ -694,6 +694,14 @@ export function diffRenderedAgainstFacts(
 
     switch (fact.channel) {
       case "layout.mode": {
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy layout — Chromium harness reads only the component root computed style; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         compare(
           fact,
           "display/flex-direction",
@@ -703,11 +711,21 @@ export function diffRenderedAgainstFacts(
           (expected, actual) =>
             (expected === "inline-flex/row" &&
               (actual === "inline-flex/row" || actual === "flex/row")) ||
+            (expected === "inline-flex/column" &&
+              (actual === "inline-flex/column" || actual === "flex/column")) ||
             expected === actual,
         );
         break;
       }
       case "layout.primaryAxisAlign": {
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy layout — Chromium harness reads only the component root computed style; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         const expected =
           { min: "normal|flex-start", center: "center", max: "flex-end", "space-between": "space-between" }[
             String(fact.value)
@@ -718,20 +736,71 @@ export function diffRenderedAgainstFacts(
         break;
       }
       case "layout.counterAxisAlign": {
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy layout — Chromium harness reads only the component root computed style; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         const expected =
           { min: "normal|flex-start", center: "center", max: "flex-end", baseline: "baseline" }[
             String(fact.value)
           ] ?? String(fact.value);
-        compare(fact, "align-items", expected, root["align-items"], ["layout"], (e, a) =>
+        const actual = root["align-items"];
+        // Reviewable-inversion often omits counter-axis align; CSS flex then
+        // defaults to stretch. That is NOT Figma MIN — name the residual,
+        // do not equate stretch with flex-start.
+        if (
+          String(fact.value) === "min" &&
+          actual === "stretch" &&
+          !build.proposalNotes.some((note) =>
+            /align-items|counterAxis|counter-axis/i.test(note),
+          )
+        ) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "canvas counterAxisAlign=MIN but emitted CSS omits align-items (computed stretch) — reviewable-inversion residual; RECEIPT, not equated with flex-start",
+          });
+          break;
+        }
+        compare(fact, "align-items", expected, actual, ["layout"], (e, a) =>
           e.split("|").includes(a),
         );
         break;
       }
       case "layout.itemSpacing": {
-        compare(fact, "column-gap", `${String(fact.value)}px`, root["column-gap"], ["gap", "spacing"]);
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy layout — Chromium harness reads only the component root computed style; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
+        compare(
+          fact,
+          "column-gap",
+          `${String(fact.value)}px`,
+          root["column-gap"],
+          ["gap", "spacing"],
+          (expected, actual) =>
+            expected === actual ||
+            (expected === "0px" && (actual === "normal" || actual === "0px")),
+        );
         break;
       }
       case "layout.padding": {
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy layout — Chromium harness reads only the component root computed style; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         const padding = fact.value as { top: number; right: number; bottom: number; left: number };
         const actual = `${root["padding-top"]}/${root["padding-right"]}/${root["padding-bottom"]}/${root["padding-left"]}`;
         compare(
@@ -744,20 +813,23 @@ export function diffRenderedAgainstFacts(
         break;
       }
       case "cornerRadius": {
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: isInstance
+              ? "carried"
+              : "receipted",
+            landing: isInstance
+              ? "instance corner radius belongs to the child component (dump v1 stops at instance boundaries); the stub renders the observed box"
+              : "nested anatomy corner radius — Chromium harness reads only the component root; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         const radius = fact.value as {
           topLeft: number;
           topRight: number;
           bottomRight: number;
           bottomLeft: number;
         };
-        if (!isComponentRoot) {
-          row(fact, {
-            disposition: "carried",
-            landing:
-              "instance corner radius belongs to the child component (dump v1 stops at instance boundaries); the stub renders the observed box",
-          });
-          break;
-        }
         const actual = `${root["border-top-left-radius"]}/${root["border-top-right-radius"]}/${root["border-bottom-right-radius"]}/${root["border-bottom-left-radius"]}`;
         compare(
           fact,
@@ -778,11 +850,25 @@ export function diffRenderedAgainstFacts(
           break;
         }
         if (isText) {
+          if (label !== null && label.text !== node.characters) {
+            row(fact, {
+              disposition: "receipted",
+              landing:
+                "secondary TEXT — Chromium harness reads only the first label span; RECEIPT until a part-tree harness lands",
+            });
+            break;
+          }
           compare(fact, "color (label)", hexToCss(paint.color), label?.color, ["fill", "color"], colorsAgree);
         } else if (isInstance) {
           row(fact, {
             disposition: "receipted",
             landing: "instance fill — internals belong to the child component; receipt",
+          });
+        } else if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy fill — Chromium harness reads only the component root; RECEIPT until a part-tree harness lands",
           });
         } else {
           compare(fact, "background-color", hexToCss(paint.color), root["background-color"], ["fill", "background"], colorsAgree);
@@ -790,6 +876,14 @@ export function diffRenderedAgainstFacts(
         break;
       }
       case "stroke": {
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy stroke — Chromium harness reads only the component root; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         const stroke = fact.value as {
           weight: number;
           align: string;
@@ -821,6 +915,14 @@ export function diffRenderedAgainstFacts(
         break;
       }
       case "effect": {
+        if (!isComponentRoot) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "nested anatomy effect — Chromium harness reads only the component root; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         const effect = fact.value as {
           kind: string;
           offsetX?: number;
@@ -845,10 +947,26 @@ export function diffRenderedAgainstFacts(
         break;
       }
       case "characters": {
+        if (label !== null && label.text !== String(fact.value)) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "secondary TEXT — Chromium harness reads only the first label span; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         compare(fact, "textContent (label)", String(fact.value), label?.text, ["characters", "text prop", "content"]);
         break;
       }
       case "type": {
+        if (label !== null && node.characters !== undefined && label.text !== node.characters) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "secondary TEXT — Chromium harness reads only the first label span; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         const type = fact.value as {
           fontFamily: string;
           fontStyle: string;
@@ -868,12 +986,24 @@ export function diffRenderedAgainstFacts(
         break;
       }
       case "align": {
+        if (label !== null && node.characters !== undefined && label.text !== node.characters) {
+          row(fact, {
+            disposition: "receipted",
+            landing:
+              "secondary TEXT — Chromium harness reads only the first label span; RECEIPT until a part-tree harness lands",
+          });
+          break;
+        }
         compare(
           fact,
           "text-align (label)",
           String(fact.value).toLowerCase(),
           label?.["text-align"],
           ["text-align", "textAlign"],
+          (expected, actual) =>
+            expected === actual ||
+            (expected === "left" && actual === "start") ||
+            (expected === "right" && actual === "end"),
         );
         break;
       }

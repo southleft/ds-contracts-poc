@@ -1,0 +1,129 @@
+/* GENERATED FILE — DO NOT EDIT.
+ * Source of truth: contracts/card.contract.json (ds.card v0.1.0)
+ * Regenerate with: npm run generate
+ */
+
+.root,
+.root *,
+.root *::before,
+.root *::after {
+  box-sizing: border-box;
+}
+
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  border-style: solid;
+  background-color: var(--imported-card-root-background-color);
+  border-radius: var(--imported-shared-size-8);
+  height: fit-content;
+}
+
+.variant-outlined {
+  border-color: var(--imported-card-root-border-top-color-outlined);
+  border-width: var(--imported-card-root-border-width-outlined);
+}
+
+.variant-borderless {
+  border-color: var(--imported-card-root-border-top-color-borderless);
+  border-width: var(--imported-card-root-border-width-borderless);
+}
+
+.cardHead {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: center;
+  border-color: var(--imported-card-card-head-border-bottom-color);
+}
+
+.size-default .cardHead {
+  padding-left: var(--imported-card-card-head-padding-left-default);
+}
+
+.size-small .cardHead {
+  padding-left: var(--imported-card-card-head-padding-left-small);
+}
+
+.size-default .cardHead {
+  padding-right: var(--imported-card-card-head-padding-right-default);
+}
+
+.size-small .cardHead {
+  padding-right: var(--imported-card-card-head-padding-right-small);
+}
+
+.size-default .cardHead {
+  min-height: var(--imported-card-card-head-min-height-default);
+}
+
+.size-small .cardHead {
+  min-height: var(--imported-card-card-head-min-height-small);
+}
+
+.cardHeadWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.label {
+  color: var(--imported-shared-color-000000e0);
+  font-weight: var(--imported-card-card-head-card-head-wrapper-label-font-weight);
+  line-height: var(--imported-card-card-head-card-head-wrapper-label-line-height);
+  font-family: Roboto;
+}
+
+.size-default .label {
+  font-size: var(--imported-card-label-font-size-default);
+}
+
+.size-small .label {
+  font-size: var(--imported-card-label-font-size-small);
+}
+
+.label2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.size-default .label2 {
+  padding-left: var(--imported-card-label-2-padding-left-default);
+}
+
+.size-small .label2 {
+  padding-left: var(--imported-card-label-2-padding-left-small);
+}
+
+.size-default .label2 {
+  padding-right: var(--imported-card-label-2-padding-right-default);
+}
+
+.size-small .label2 {
+  padding-right: var(--imported-card-label-2-padding-right-small);
+}
+
+.size-default .label2 {
+  padding-top: var(--imported-card-label-2-padding-top-default);
+}
+
+.size-small .label2 {
+  padding-top: var(--imported-card-label-2-padding-top-small);
+}
+
+.size-default .label2 {
+  padding-bottom: var(--imported-card-label-2-padding-bottom-default);
+}
+
+.size-small .label2 {
+  padding-bottom: var(--imported-card-label-2-padding-bottom-small);
+}
+
+.label2Text {
+  color: var(--imported-shared-color-000000e0);
+  font-size: var(--imported-card-label-2-font-size);
+  font-weight: var(--imported-card-label-2-label-2-text-font-weight);
+  line-height: var(--imported-card-label-2-label-2-text-line-height);
+  font-family: Roboto;
+}

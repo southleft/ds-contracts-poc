@@ -65,6 +65,9 @@ does not carry. Each fold is mechanical and RECORDED:
    DIFFERENT variables have no IR spelling; the bindings are removed from the
    projection and this receipt is the named loss the downstream ledger MUST
    carry. Nothing is invented.
+4. `partial-stroke-side-weights-receipted` — fewer than four of
+   `strokeTop/Right/Bottom/LeftWeight` are bound (e.g. a header divider that
+   only binds `strokeBottomWeight`); same RECEIPT doctrine as (3).
 
 ## Committed artifacts
 

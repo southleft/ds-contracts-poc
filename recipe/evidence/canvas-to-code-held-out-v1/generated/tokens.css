@@ -1,0 +1,49 @@
+/**
+ * GENERATED FILE — DO NOT EDIT.
+ * Source of truth: captured.dtcg.json [primitives], minted.dtcg.json [primitives]
+ * Regenerate with: tsx recipe/canvas-to-code-held-out.ts --write
+ *
+ * Import ONCE at the app root — the generated components only REFERENCE
+ * these custom properties. React / Vite: `import './tokens.css'` (the
+ * emitted index.ts and *.stories.tsx already do). Static HTML and Web
+ * Components: `<link rel="stylesheet" href="tokens.css">` — custom
+ * properties inherit into shadow roots, so one document-level sheet
+ * styles every custom element.
+ *
+ * Modes: `:root` is the default (light) slot; `[data-theme="dark"]` the
+ * dark slot; `[data-brand="<name>"]` each other brand — set the attribute
+ * on <html> to switch.
+ */
+
+:root {
+  --imported-card-card-head-card-head-wrapper-label-font-weight: 600;
+  --imported-card-card-head-card-head-wrapper-label-line-height: 22px;
+  --imported-card-card-head-border-bottom-color: #f0f0f0;
+  --imported-card-card-head-min-height-default: 56px;
+  --imported-card-card-head-min-height-small: 38px;
+  --imported-card-card-head-padding-left-default: 24px;
+  --imported-card-card-head-padding-left-small: 12px;
+  --imported-card-card-head-padding-right-default: 24px;
+  --imported-card-card-head-padding-right-small: 12px;
+  --imported-card-label-2-label-2-text-font-weight: 400;
+  --imported-card-label-2-label-2-text-line-height: 22px;
+  --imported-card-label-2-font-size: 14px;
+  --imported-card-label-2-padding-bottom-default: 24px;
+  --imported-card-label-2-padding-bottom-small: 12px;
+  --imported-card-label-2-padding-left-default: 24px;
+  --imported-card-label-2-padding-left-small: 12px;
+  --imported-card-label-2-padding-right-default: 24px;
+  --imported-card-label-2-padding-right-small: 12px;
+  --imported-card-label-2-padding-top-default: 24px;
+  --imported-card-label-2-padding-top-small: 12px;
+  --imported-card-label-font-size-default: 16px;
+  --imported-card-label-font-size-small: 14px;
+  --imported-card-root-background-color: #ffffff;
+  --imported-card-root-border-top-color-borderless: #000000e0;
+  --imported-card-root-border-top-color-outlined: #f0f0f0;
+  --imported-card-root-border-width-borderless: 0px;
+  --imported-card-root-border-width-outlined: 1px;
+  --imported-card-root-width: 288px;
+  --imported-shared-color-000000e0: #000000e0;
+  --imported-shared-size-8: 8px;
+}

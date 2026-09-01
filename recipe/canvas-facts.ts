@@ -97,7 +97,8 @@ export interface CanvasBindingNormalization {
   kind:
     | "paint-alias-duplicate-dropped"
     | "uniform-stroke-side-weights-collapsed"
-    | "nonuniform-stroke-side-weights-receipted";
+    | "nonuniform-stroke-side-weights-receipted"
+    | "partial-stroke-side-weights-receipted";
   detail: string;
 }
 
@@ -214,6 +215,28 @@ export function normalizeSceneBindings(scene: SceneNodeSnapshot): {
           detail: `per-side stroke weights bind distinct variables (${names.join(", ")}) — no IR spelling; RECEIPT, nothing invented`,
         });
       }
+    }
+    // Leftover side-weight fields (e.g. only strokeBottomWeight on a header
+    // divider) have no IR spelling either — RECEIPT and drop, never throw.
+    const leftoverSides = bindings.filter((binding) =>
+      STROKE_SIDE_FIELDS.includes(
+        binding.field as (typeof STROKE_SIDE_FIELDS)[number],
+      ),
+    );
+    if (leftoverSides.length > 0) {
+      bindings = bindings.filter(
+        (binding) =>
+          !STROKE_SIDE_FIELDS.includes(
+            binding.field as (typeof STROKE_SIDE_FIELDS)[number],
+          ),
+      );
+      normalizations.push({
+        ownershipKey: node.ownershipKey,
+        kind: "partial-stroke-side-weights-receipted",
+        detail: `partial stroke side weight(s) ${leftoverSides
+          .map((binding) => `${binding.field}=${binding.variableName}`)
+          .join(", ")} — no IR spelling; RECEIPT, nothing invented`,
+      });
     }
     node.boundVariables = bindings;
     for (const child of node.children) visit(child);

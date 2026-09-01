@@ -1,0 +1,38 @@
+{
+  "imported": {
+    "card": {
+      "root": {
+        "border-width": {
+          "outlined": {
+            "$value": "1px",
+            "$type": "dimension"
+          },
+          "borderless": {
+            "$value": "0px",
+            "$type": "dimension"
+          }
+        }
+      },
+      "card-head-card-head-wrapper-label": {
+        "font-weight": {
+          "$value": "600",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "22px",
+          "$type": "dimension"
+        }
+      },
+      "label-2-label-2-text": {
+        "font-weight": {
+          "$value": "400",
+          "$type": "number"
+        },
+        "line-height": {
+          "$value": "22px",
+          "$type": "dimension"
+        }
+      }
+    }
+  }
+}

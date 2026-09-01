@@ -339,12 +339,26 @@ export function bridgeCanvasFactsToDump(
         }
         case "minWidth":
         case "minHeight": {
+          const resolved = float(node[binding.field]);
+          if (resolved === undefined) {
+            // Observe snapshot carries null for an unbound-looking min that
+            // still has a variable alias — without a resolved float we cannot
+            // mint the token. RECEIPT the binding; do not invent 0 from the name.
+            ledger.land(
+              key,
+              "binding",
+              index,
+              "receipted",
+              `${binding.field} binds ${binding.variableName} but the observe resolves ${binding.field}=null — no dump value to capture; RECEIPT, nothing invented`,
+            );
+            break;
+          }
           bound[binding.field] = name;
           landNamed(`bound.${binding.field} = ${name}`);
           observeVariable(
             binding.variableName,
             "FLOAT",
-            float(node[binding.field]),
+            resolved,
             site,
           );
           break;
@@ -685,6 +699,33 @@ export function bridgeCanvasFactsToDump(
     if (node.layoutSizingVertical === "FIXED") {
       fixed.height = node.height;
       ledger.land(key, "height.value", 0, "named", "bbox.height (drawn FIXED height)");
+    }
+    // Geometric minWidth/minHeight facts: dump v1 has no literal min* field —
+    // only the bound spelling. When a binding is present, the geometric fact
+    // is CARRIED by that binding; otherwise RECEIPT (nothing invented).
+    if (node.minWidth !== undefined && node.minWidth !== null) {
+      const boundMin = byField.has("minWidth");
+      ledger.land(
+        key,
+        "layout.minWidth",
+        0,
+        boundMin ? "carried" : "receipted",
+        boundMin
+          ? "layout.minWidth carried via bound.minWidth (dump has no literal minWidth)"
+          : "unbound layout.minWidth — dump v1 has no literal minWidth spelling; RECEIPT, nothing invented",
+      );
+    }
+    if (node.minHeight !== undefined && node.minHeight !== null) {
+      const boundMin = byField.has("minHeight");
+      ledger.land(
+        key,
+        "layout.minHeight",
+        0,
+        boundMin ? "carried" : "receipted",
+        boundMin
+          ? "layout.minHeight carried via bound.minHeight (dump has no literal minHeight)"
+          : "unbound layout.minHeight — dump v1 has no literal minHeight spelling; RECEIPT, nothing invented",
+      );
     }
     ledger.land(
       key,
