@@ -41,7 +41,7 @@ export function getStartedPage(): { route: string; html: string } {
 <p class="eyebrow">Get started</p>
 <h1>What do you want to do?</h1>
 <p class="lede">Three situations bring people here, and they are genuinely different amounts of work. Find yours, then read only that section. Everything runs on the published <code>@ds-contracts/cli</code> and the companion Figma plugin; the terminal commands below are <a href="#tested">executed by the eval suite from the same file this page renders</a>.</p>
-<p class="section-note"><strong>Current state (2026-08-30).</strong> Paths A–C below are the universal-contract journeys. They still run. They are <strong>not</strong> the recipe-IR v1 proof (five live-minted, owner-signed archetypes; product v1 incomplete, F1 unmet). The playground linked from this site drives the same pre-pivot envelope. See <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a>.</p>
+<p class="section-note"><strong>Current state (2026-08-31).</strong> Paths A–C below are the universal-contract journeys. They still run. They are <strong>not</strong> the recipe-IR v1 proof (five live-minted, owner-signed archetypes; product v1 incomplete, F1 unmet). The playground linked from this site drives the same pre-pivot envelope. Active v1 plan: <a href="${REPO_URL}/blob/main/docs/35-two-journey-v1-plan.md">docs/35</a> (not a ship claim). See <a href="${REPO_URL}/blob/main/docs/32-recipe-ir-pivot.md">docs/32</a>.</p>
 
 <div class="table-wrap"><table>
 <thead><tr><th></th><th>Your situation</th><th>Ends with</th></tr></thead>

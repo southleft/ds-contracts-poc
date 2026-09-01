@@ -1,8 +1,9 @@
 # Choose Your Path — one truth, three situations
 
-> **Current state (2026-08-30).** Journeys A–C below are the
+> **Current state (2026-08-31).** Journeys A–C below are the
 > **universal-contract** adoption paths (plugin Send / `onboard` / reconcile).
-> They still run. They are **not** the v1 proof. Recipe-IR proved five
+> They still run. They are **not** the v1 proof. The active v1 plan is
+> [docs/35](35-two-journey-v1-plan.md). Recipe-IR proved five
 > archetypes live with owner grades; product v1 is incomplete (F1). See
 > [docs/32](32-recipe-ir-pivot.md). Combobox, table, and calendar are
 > live-proven on the recipe path — do not read the capture-path

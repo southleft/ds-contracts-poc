@@ -5,17 +5,22 @@
 
 # Design System Contracts
 
-> **Current state (2026-08-30, merge `4caebfc5b` and later).** The v1 proof
-> surface is **recipe-IR**: archetype recipes compile to a canonical
-> Figma-capability IR, and every fact is **named or carried**. Five
-> archetypes have stayed live Scratch mints and owner-signed human grades —
-> Button (`183:69150`), Input (`115:295378`), Combobox (`163:35981`), Table
-> (`173:48924`), Calendar (`181:64873`). Product **v1 is incomplete**: F1
-> (whole-corpus / unseen-library on the recipe path) is unmet;
-> `overallSuccess` stays false for Button, Input, Combobox, and Calendar
-> (Table keeps the `true` its v32 record already set). Named leftover work:
-> Combobox chrome remint after hardening; npm publish deferred. The
-> universal JSON contract (`contracts/*.contract.json` → generate / bundle /
+> **Current state (2026-08-31).** The active v1 plan is
+> **[docs/35 — the two-journey plan](docs/35-two-journey-v1-plan.md)**
+> (reader as mechanical source of truth; canvas→code as a co-equal pillar;
+> both held-out exams gate v1). This is **not** a ship claim. Product **v1
+> is incomplete**. The v1 *proof* surface remains **recipe-IR** under
+> `recipe/` ([docs/32](docs/32-recipe-ir-pivot.md)–[35](docs/35-two-journey-v1-plan.md)):
+> archetype recipes compile to a canonical Figma-capability IR, and every
+> fact is **named or carried**. Five archetypes have stayed live Scratch
+> mints and owner-signed human grades — Button (`183:69150`), Input
+> (`115:295378`), Combobox (`163:35981`), Table (`173:48924`), Calendar
+> (`181:64873`). F1 (whole-corpus / unseen-library on the recipe path) is
+> unmet; `overallSuccess` stays false for Button, Input, Combobox, and
+> Calendar (Table keeps the `true` its v32 record already set). Named
+> leftover work: Combobox chrome remint after hardening; npm publish
+> deferred. The universal JSON contract (`contracts/*.contract.json` →
+> generate / bundle /
 > [playground](https://ds-contracts-playground.pages.dev)) still exists and
 > still powers Journeys A–C; it is **not** the v1 proof. Checks:
 > `npm run recipe:button:check`, `recipe:input-field:check`,
@@ -38,9 +43,10 @@ This repository is the working proof, and the candidate reference implementation
 
 **The RC heading is retired.** Recipe-IR never shipped as an npm release
 candidate. Product **v1 is incomplete** (F1: whole-corpus / unseen-library
-zero-silent on the recipe path). A version string, a GitHub prerelease, or
-`npm i @ds-contracts/cli` is not v1-complete. No new semver is invented
-here.
+zero-silent on the recipe path). The active climb is
+[docs/35](docs/35-two-journey-v1-plan.md). A version string, a GitHub
+prerelease, or `npm i @ds-contracts/cli` is not v1-complete. No new semver
+is invented here.
 
 | Surface | What it is | What it is not |
 |---|---|---|
@@ -370,7 +376,7 @@ Beyond that, four properties you can rely on:
 
 **→ [ds-contracts-playground.pages.dev](https://ds-contracts-playground.pages.dev)**
 
-**Start here if you want to understand the *universal-contract* model before installing anything.** The playground runs the repository's `core/` engine in your browser — no backend, no accounts, no analytics; credentials are session-only and never leave the browser. Ten minutes there teaches that older loop. **It is not the v1 proof surface.** After the recipe-IR pivot, v1 proof is the five live-minted archetypes and their owner grades ([docs/32](docs/32-recipe-ir-pivot.md)); the playground still proposes and emits the pre-pivot `*.contract.json` envelope. Do not treat a playground mint or refusal as recipe-IR evidence.
+**Start here if you want to understand the *universal-contract* model before installing anything.** The playground runs the repository's `core/` engine in your browser — no backend, no accounts, no analytics; credentials are session-only and never leave the browser. Ten minutes there teaches that older loop. **It is not the v1 proof surface.** After the recipe-IR pivot, v1 proof is the five live-minted archetypes and their owner grades ([docs/32](docs/32-recipe-ir-pivot.md)); the active climb is [docs/35](docs/35-two-journey-v1-plan.md). The playground still proposes and emits the pre-pivot `*.contract.json` envelope. Do not treat a playground mint or refusal as recipe-IR evidence.
 
 *Try first:* open **Examples**, pick the Badge, then break its contract on purpose — delete a required field, or point a token binding at a name that doesn't exist. The refusal appears on screen, named. That refusal is the whole product.
 
@@ -530,7 +536,7 @@ That is a claim about the future, so it's held to the same standard as everythin
 
 ## Documentation
 
-**If you are new, read these in this order:** the current-state box at the top of this README (what landed, what is still named) → [docs/32 — The recipe/IR pivot](docs/32-recipe-ir-pivot.md) (the v1 proof surface) → [docs/26 — Definition of v1](docs/26-v1-definition.md) (the bar, including the additive recipe-path row) → [Choose Your Path](docs/00-choose-your-path.md) (Journeys A–C on the still-shipping universal-contract path) → [Getting Started](docs/00-getting-started.md) (the five-minute orientation for that path). The playground and docs/29 walk the older envelope; they are not the v1 proof.
+**If you are new, read these in this order:** the current-state box at the top of this README (what landed, what is still named) → [docs/35 — The two-journey v1 plan](docs/35-two-journey-v1-plan.md) (the active climb; not a ship claim) → [docs/32 — The recipe/IR pivot](docs/32-recipe-ir-pivot.md) (the v1 proof surface) → [docs/26 — Definition of v1](docs/26-v1-definition.md) (the bar, including the additive recipe-path row) → [Choose Your Path](docs/00-choose-your-path.md) (Journeys A–C on the still-shipping universal-contract path) → [Getting Started](docs/00-getting-started.md) (the five-minute orientation for that path). The playground and docs/29 walk the older envelope; they are not the v1 proof.
 
 **If you are deciding whether to adopt this, read the pair alongside them** — [What Works](docs/24-what-works.md) (everything the tool provably does, each number carrying the artifact it was read from) and [Known Limitations](docs/23-known-limitations.md) (everything it cannot do, in one place, sourced to a measurement). They share a denominator on purpose; either one alone is a sales document.
 
@@ -566,7 +572,8 @@ That is a claim about the future, so it's held to the same standard as everythin
 31. [First-pass](docs/31-first-pass.md) · does the documented chain work on the FIRST try, untouched — the no-retry exam, the graded-pair packet, and why first-pass quality is not the same claim as end-state quality
 32. [**The recipe/IR pivot**](docs/32-recipe-ir-pivot.md) · current v1 proof surface: archetype recipes, Figma-capability IR, named-or-carried receipts, five live-minted owner-signed archetypes; product v1 still incomplete (F1)
 33. [Post-v1 plan](docs/33-post-v1-plan.md) · approved next work (design→code perturbation, day-picker F1 exam, lifecycle hardening). Not a claim that v1 shipped.
-34. [The boilerplate hill-climb](docs/34-boilerplate-v1-plan.md) · **proposed, not approved** · the common-component corpus plan across Astryx / MUI / Ant Design: three-library coverage matrix, hill-climb order, measured cost, and the two owner questions it waits on. F1 stays the named v1 gate; product v1 still incomplete
+34. [The boilerplate hill-climb](docs/34-boilerplate-v1-plan.md) · corpus inventory and honesty constraints remain in force; **sequencing superseded** by docs/35. Product v1 still incomplete
+35. [**The two-journey v1 plan**](docs/35-two-journey-v1-plan.md) · **ACTIVE** — reader as mechanical source of truth, canvas→code as a co-equal pillar, both held-out exams gate v1. Not a ship claim. Product v1 still incomplete
 
 ## Honesty as a design principle
 
@@ -578,7 +585,7 @@ Not everything is expressible yet, and nothing here pretends otherwise:
 
 ## Status
 
-**Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** Five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live Scratch mints and owner-signed grades; F1 (whole-corpus / unseen-library on the recipe path) is the named blocker. `overallSuccess` is not flipped except Table's existing v32 pin. npm publish of a recipe surface is deferred. The playground and the published CLI still run the pre-pivot universal-contract path.
+**Recipe-IR is the v1 proof surface, and product v1 is still incomplete.** The active climb is [docs/35](docs/35-two-journey-v1-plan.md). Five archetypes (Button, Input, Combobox, Table, Calendar) have stayed live Scratch mints and owner-signed grades; F1 (whole-corpus / unseen-library on the recipe path) is the named blocker. `overallSuccess` is not flipped except Table's existing v32 pin. npm publish of a recipe surface is deferred. The playground and the published CLI still run the pre-pivot universal-contract path.
 
 The older model is still validated end-to-end and running in public: generation into both surfaces, the parity loop executed in both directions with receipts, 230/230 evals — the two long-standing named reds (`mui-figma-genesis`, `child-wider-ratchet-and-script-freshness`) were closed on 2026-08-16, stable schema and CLI releases on the public npm registry, a measured 100-vs-69 governed-generation result, bidirectional anatomy extraction with zero-mismatch round-trip receipts, four brownfield pilots plus an enterprise code gauntlet (Carbon, Fluent 2, Spectrum, Polaris) on systems this project doesn't own, a live enterprise Figma kit censused to 100.0% clean (1,618 sets), a standing pixel-level visual-parity instrument, in-place amend proven forensically on live files, and a launched browser playground running the same `core/` engine — with a companion Figma plugin (Build / Changes / Send) that applies contract bundles to the canvas. Live relay from the plugin into the playground is off; use a figma.com URL or paste a dump. GitHub releases `v1.0.0-rc.1` and earlier **predate the pivot**. npm publish of a recipe surface is deferred. [docs/27](docs/27-release-process.md) remains the universal-contract release runbook, not a claim that a recipe-IR RC is in flight. The reference design-tool integration lives behind a transport-agnostic script boundary (`docs/internal/`) — the contract format itself is tool-agnostic.
 

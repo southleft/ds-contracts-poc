@@ -29,7 +29,7 @@ export function emittersPage(): { route: string; html: string } {
 ${codeBlock(interfaces, 'ts', 'packages/core/src/emitter.ts (@ds-contracts/core) — the three types every emitter is written against; extracted at build time')}
 <p>Three rules the registry holds you to:</p>
 <ul>
-<li><strong>Pure.</strong> Contract + ctx in, file texts out. No filesystem, no network, no globals — every emitter must be browser-importable (the playground still runs these <em>universal-contract</em> emitters; it is not the recipe-IR v1 proof).</li>
+<li><strong>Pure.</strong> Contract + ctx in, file texts out. No filesystem, no network, no globals — every emitter must be browser-importable (the playground still runs these <em>universal-contract</em> emitters; it is not the recipe-IR v1 proof; active v1 plan: <a href="${REPO_URL}/blob/main/docs/35-two-journey-v1-plan.md">docs/35</a>).</li>
 <li><strong>Validated input, always.</strong> The engine validates contracts <em>before</em> your emitter sees them — a schema-invalid contract is refused by name upstream; you never defend against malformed input.</li>
 <li><strong>Named no-ops, never silent drops.</strong> A concept your surface cannot express (canvas state previews, <code>bindings.figma</code>, modes) is declared as a named no-op — in an emitted file header, a comment, a manifest note. The reader learns what didn't carry, from the artifact itself.</li>
 </ul>

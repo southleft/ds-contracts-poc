@@ -1,13 +1,14 @@
 # Roadmap
 
-> **Current state (2026-08-30).** Recipe-IR landed on main (`4caebfc5b`):
+> **Current state (2026-08-31).** Recipe-IR landed on main (`4caebfc5b`):
 > archetype recipes + Figma-capability IR + receipts. Five archetypes
 > (Button, Input, Combobox, Table, Calendar) have stayed live mints and
 > owner-signed grades. Product **v1 is incomplete** — F1 (whole-corpus /
 > unseen-library on the recipe path) is unmet; `overallSuccess` is not
-> flipped except Table's existing v32 pin. npm publish deferred. The phases
-> below are the *spec* roadmap and still stand; they are not a claim that
-> v1 shipped. See [docs/32](docs/32-recipe-ir-pivot.md).
+> flipped except Table's existing v32 pin. npm publish deferred. The active
+> v1 climb is [docs/35](docs/35-two-journey-v1-plan.md) (not a ship claim).
+> The phases below are the *spec* roadmap and still stand; they are not a
+> claim that v1 shipped. See [docs/32](docs/32-recipe-ir-pivot.md).
 
 *Looking for how to **use** this rather than where it's going? Start at [Choose Your Path](docs/00-choose-your-path.md) — design-first (canvas into code), code-first (code into Figma), or a brownfield pair reconciled. Deciding whether to **adopt** it? Start at [Known Limitations](docs/23-known-limitations.md) instead — it is the honest counterweight to this page.*
 

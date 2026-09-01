@@ -46,7 +46,15 @@ export function Landing() {
         >
           docs/32
         </a>
-        . This playground is for <i>understanding</i> that older loop. Building
+        . Active v1 plan:{" "}
+        <a
+          href={`${REPO_URL}/blob/main/docs/35-two-journey-v1-plan.md`}
+          target="_blank"
+          rel="noreferrer"
+        >
+          docs/35
+        </a>{" "}
+        (not a ship claim). This playground is for <i>understanding</i> that older loop. Building
         a library into Figma on this path is the CLI plus the companion plugin —{" "}
         <a
           href="https://ds-contracts-spec.pages.dev/get-started/"

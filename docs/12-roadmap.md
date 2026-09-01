@@ -1,10 +1,11 @@
 # 12 · Roadmap
 
-> **Current state (2026-08-30).** The recipe-IR pivot landed on main
+> **Current state (2026-08-31).** The recipe-IR pivot landed on main
 > (`4caebfc5b`). Five archetypes are live-minted and owner-signed. Product
-> **v1 is incomplete** (F1 whole-corpus / unseen-library). This page's four
-> phases still describe the *spec* roadmap (harden → brownfield → spec
-> candidacy → governance). They do not restate the pivot. See
+> **v1 is incomplete** (F1 whole-corpus / unseen-library). The active v1
+> climb is [docs/35](35-two-journey-v1-plan.md) (not a ship claim). This
+> page's four phases still describe the *spec* roadmap (harden → brownfield
+> → spec candidacy → governance). They do not restate the pivot. See
 > [docs/32](32-recipe-ir-pivot.md) and the current-state box on
 > [ROADMAP.md](../ROADMAP.md).
 

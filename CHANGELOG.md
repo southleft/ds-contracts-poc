@@ -13,6 +13,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### Two-journey plan adopted — Phase 5 labeling (2026-08-31)
+
+- [docs/35](docs/35-two-journey-v1-plan.md) is the active v1 climb
+  (reader as mechanical source of truth; canvas→code as a co-equal pillar;
+  both held-out exams). Product v1 remains incomplete. This is not a ship
+  claim. Pre-pivot surfaces (`core/`, `playground/`, `packages/`) carry
+  LEGACY markers in place; they were not moved. No semver bump. No npm
+  publish. `overallSuccess` is unchanged.
+
 ### Honesty pass — retired RC framing (2026-08-30)
 
 - README **What's released vs what's proven** replaces **Release-candidate
