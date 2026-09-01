@@ -21,7 +21,7 @@
       "file": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/internal/svg-icons/CheckBox.js",
       "lines": "14-16 even-odd compound path M19 3H5c-1.11… plus hole",
       "indeterminate": "IndeterminateCheckBox.js:14-16 hole is 10×2 bar at (7,11)",
-      "compiled": "fill VECTOR evenodd primary #1976d2; checked boxFill paper #fff border transparent so the hole reads white; no overlay path; effects=[]; strokes=[]"
+      "compiled": "fill VECTOR evenodd primary #1976d2; checked boxFill paper #fff border transparent so the hole reads white; no overlay path; effects=[]; strokes=[]. Figma vectorPaths refuse CheckBox.js H/c/v packing; compact paints the same even-odd geometry as M/L/Z (24 square + named hole)."
     },
     "Ant Design": {
       "file": "examples/antd/.antd-sandbox/node_modules/antd/es/checkbox/style/index.js",

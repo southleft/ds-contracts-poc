@@ -1,0 +1,63 @@
+{
+  "artifactVersion": "checkbox-live-pivot-v3-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "198:77718",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-a473aa6a-ff3a8565-checkbox-v3",
+  "runIdentity": "548cf953-a473aa6a-ff3a8565-checkbox-v3",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77718",
+  "oldStayPageIds": ["183:74742", "196:76370"],
+  "doNotDeleteOldStay": true,
+  "sets": {
+    "MUI": "198:77857",
+    "Astryx": "198:77977",
+    "Ant Design": "198:78098"
+  },
+  "sections": {
+    "MUI": "198:77820",
+    "Astryx": "198:77940",
+    "Ant Design": "198:78061"
+  },
+  "arrange": {
+    "MUI": "198:77858",
+    "Astryx": "198:77978",
+    "Ant Design": "198:78099"
+  },
+  "review": {
+    "MUI": "198:77859",
+    "Astryx": "198:77979",
+    "Ant Design": "198:78100"
+  },
+  "taught": {
+    "CheckBox.js:14-16": "even-odd compound path; compact M/L/Z (Figma refuses H/c/v); fill primary; paper behind hole; strokes=[]; effects=[]",
+    "IndeterminateCheckBox.js:14-16": "10x2 hole at (7,11) painted as dash",
+    "antd/es/checkbox/style/index.js:82-97": "::after is an L of borders rotate(45deg); baked to M7.677 0 L2.626 5.051 L0 2.424 rotation 0",
+    "antd/es/checkbox/style/index.js:160-168": "indeterminate ::after is 8x8 colorPrimary; lowered to 8x2 dash (refusal-indeterminate-square)",
+    "CheckboxInput.tsx:562-576": "Astryx M8.5 2.5L4 7.5L1.5 5 scaled to M11.9 3.5 L5.6 10.5 L2.1 7 — still a check"
+  },
+  "accuracyLoop": {
+    "MUI": "checked even-odd primary fill, white hole, no leftover stroke or glow. indeterminate 10x2 white dash.",
+    "Astryx": "checked white stroke tick (not a chevron). indeterminate 12x2 white dash.",
+    "Ant Design": "checked is a check (not >). indeterminate is an 8x2 dash (not an 8x8 square). rotation 0."
+  },
+  "variantMatrix": {
+    "compiled": "Checked unchecked|checked|indeterminate × Disabled false|true = 6 per library. All 6 are on the page as set children and as Review instances inside each Section.",
+    "notCompiled": "No color axis, no size-small, no ripple, no hover. The contract will not grow those.",
+    "vsButtonInput": "Button 183:69150 and Input 115:295378 expose every compiled cell as page-level instance grids (156 / 128) because those recipes compiled that many cells. This page instances the 6 compiled cells inside each Section."
+  },
+  "radioSwitchBadgeHonesty": {
+    "Radio 197:76679": "Selected a|b × Disabled = 4. All 4 are already visible as VERTICAL set children inside each Arrange wrap. No extra axes exist. Did not remint. Did not invent size/color.",
+    "Switch 197:76903": "Checked × Disabled = 4. All 4 are already visible as VERTICAL set children. No extra axes exist. Did not remint.",
+    "Badge 198:77177": "One COMPONENT each (MUI, AntD). No variant axes. color/dot/status/Ribbon were not compiled. Astryx overlay remains refused. The contract will not pull those variants — they are not in the recipe."
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "figmaArrangeComponentSet": false,
+  "leftoverComponentContainer": []
+}

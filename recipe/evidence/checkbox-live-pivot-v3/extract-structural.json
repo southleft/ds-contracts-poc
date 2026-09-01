@@ -1,0 +1,56 @@
+{
+  "artifactVersion": "checkbox-live-v3-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "pageId": "198:77718",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-a473aa6a-ff3a8565-checkbox-v3",
+  "runIdentity": "548cf953-a473aa6a-ff3a8565-checkbox-v3",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77718",
+  "oldStayPageIds": ["183:74742", "196:76370"],
+  "leftoverComponentContainer": [],
+  "arrangeNote": "Uniquely named white Arrange wrap plus Review instance grid inside each library Section. figma_arrange_component_set was not used. No page-level Component Container.",
+  "sets": [
+    {
+      "library": "MUI",
+      "setId": "198:77857",
+      "sectionId": "198:77820",
+      "arrangeId": "198:77858",
+      "reviewId": "198:77859",
+      "variantCount": 6,
+      "winding": "EVENODD",
+      "rotation": 0,
+      "strokes": 0,
+      "effects": 0,
+      "dash": { "w": 10, "h": 2 },
+      "figmaPathLowering": "CheckBox.js H/c/v packing is refused by Figma vectorPaths. Compact paints the same even-odd geometry as M/L/Z (24 square + named hole)."
+    },
+    {
+      "library": "Astryx",
+      "setId": "198:77977",
+      "sectionId": "198:77940",
+      "arrangeId": "198:77978",
+      "reviewId": "198:77979",
+      "variantCount": 6,
+      "path": "M11.9 3.5 L5.6 10.5 L2.1 7",
+      "rotation": 0,
+      "dash": { "w": 12, "h": 2 }
+    },
+    {
+      "library": "Ant Design",
+      "setId": "198:78098",
+      "sectionId": "198:78061",
+      "arrangeId": "198:78099",
+      "reviewId": "198:78100",
+      "variantCount": 6,
+      "path": "M7.677 0.000 L2.626 5.051 L0.000 2.424",
+      "rotation": 0,
+      "dash": { "w": 8, "h": 2 },
+      "indeterminateLowering": "source index.js:163-164 is 8x8 colorPrimary square; compile paints 8x2 (fontSizeLG/2 x lineWidthBold)"
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}
