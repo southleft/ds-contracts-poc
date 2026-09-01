@@ -2,6 +2,20 @@
 
 Prepared 2026-08-29.
 
+> **Third update — 2026-09-01, and this one is measured rather than argued.**
+> The audit ledger now reads **60 rows · closed 56 · refuted 2 · open-human 2 ·
+> RED 0**. It was red 7 when this page was written. `v1:readiness` on a frozen
+> tree at `9553a6a5` reads **GREEN 19 · RED 5** over 24 rows.
+>
+> So the two rows below are, at last, *literally* the only thing under
+> `V1-REL-01`. Not "the part that has nothing to do with the pivot" — the whole
+> of it. Nothing red remains beneath them.
+>
+> The other four reds are `V1-COMPAT-03` and `V1-EVID-01` (the three astryx /
+> carbon evals), `V1-CI-01` (the four signed lineages fail on Linux and pass on
+> macOS — see HONEST-SCORECARD §6d), and `V1-REL-02` (deploy). None of those is
+> closable without you either, but none of them is *this* page.
+
 > **Second update, same day — and this one is good news.** Data Table minted
 > live at **v32** and the mint **stayed** (page `173:48924` on Scratch), which
 > closed the four remaining archetype rows. `v1:readiness` on commit `8fab2dff`

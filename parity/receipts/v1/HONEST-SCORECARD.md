@@ -294,6 +294,24 @@ owner-graded — that evidence is unaffected — but their generated antecedents
 not reproducible on another machine, and nothing could say so while the lane was
 being killed at step 100.
 
+## 6e. Where the bar actually stands
+
+Measured on a frozen tree at `9553a6a5`, and confirmed identical to a run at
+`3240e3905` that had been caveated for a moving tree:
+
+    v1:readiness    GREEN 19 · RED 5 over 24 rows   (was RED 11 · GREEN 13)
+    audit ledger    60 rows · closed 56 · refuted 2 · open-human 2 · RED 0
+                    (was closed 49 · red 7)
+
+**Every remaining red needs you, and none needs more engineering:**
+
+| row | what it is |
+| --- | --- |
+| `V1-COMPAT-03`, `V1-EVID-01` | eval 227/230 — the three astryx/carbon failures; do not re-run propose/promote without the owner |
+| `V1-CI-01` | `ci:lane fast` red on the four signed lineages that fail on Linux (§6d) — fixing it touches a signature chain |
+| `V1-REL-01` | **AUD-U17 and AUD-U22 alone.** Zero red audit rows remain beneath them |
+| `V1-REL-02` | `deploy:check` — a deployment decision |
+
 ## 7. Scale
 
 2,712 npm scripts, of which **2,389 (88%) are per-version live lanes**
