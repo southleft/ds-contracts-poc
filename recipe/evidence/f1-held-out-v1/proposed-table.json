@@ -1,0 +1,5 @@
+{
+  "note": "PROPOSED only — empty when capture is blocked. Never a hand-authored fixture table.",
+  "proposed": null,
+  "proposeError": "No captured-truth.json — capture refused before writing a ledger (determinism self-check). Reader cannot propose a table from nothing."
+}

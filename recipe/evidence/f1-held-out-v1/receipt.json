@@ -1,0 +1,40 @@
+{
+  "artifactVersion": "f1-held-out-v1",
+  "phase": "docs/35 Phase 4 — F1 held-out exam PREPARE (code→canvas), offline-first",
+  "overallSuccess": false,
+  "f1Status": "blocked",
+  "productV1": "INCOMPLETE",
+  "liveFigma": false,
+  "inventedF1Pass": false,
+  "humanGrade": "not-run — prepare only; live zero-silent mint is owner-authorized later",
+  "subject": {
+    "packageName": "react-day-picker",
+    "version": "10.0.1",
+    "exportName": "DayPicker",
+    "config": "extract/computed/configs/day-picker.json",
+    "sandbox": "examples/day-picker/.day-picker-sandbox",
+    "ledgerFile": null
+  },
+  "capture": {
+    "status": "mount-blocked",
+    "gate": "extract/computed/run.ts determinism self-check (double-run byte-identity)",
+    "blocker": "UNSTABLE channels across double-run: (signature), border-*-color, font-size, font-weight — day-cell SIGNATURE thrash: td|rdp-day vs td|rdp-day.rdp-selected moved between structural indices across two sweeps of the same combo (e.g. Calendar:label.1__default @0.1.1.1.1.3 vs @0.1.1.1.3.2). classAllow keeps rdp-selected as identity; the selected class is not stable under the interaction sweep on this floor.",
+    "configAxesEnumerated": [
+      "captionLayout",
+      "numberOfMonths"
+    ],
+    "configAxesPinnedAsFixed": [
+      "showOutsideDays=false",
+      "showWeekNumber=false"
+    ],
+    "pinNote": "Bare boolean axes refused by capture.ts §1.4 against the blind seed contract; pinning at library defaults avoids contaminating the held-out seed by rewriting booleans into string enums.",
+    "evidenceLog": "/tmp/day-picker-capture3.log (local run) + this receipt"
+  },
+  "proposedTable": null,
+  "proposeError": "No captured-truth.json — capture refused before writing a ledger (determinism self-check). Reader cannot propose a table from nothing.",
+  "recipeCompile": {
+    "attempted": false,
+    "reason": "Stopped at proposed-table + named receipts. Calendar recipe teaching / writer / live remint is out of scope for this PREPARE (docs/35 §6; no Polar; no inventing a remint)."
+  },
+  "note": "The docs/26 F1 bar is live zero-silent on an unseen library. This artifact prepares the exam mechanically. overallSuccess stays false. Product v1 remains INCOMPLETE."
+}

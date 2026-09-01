@@ -45,16 +45,14 @@
   },
   "components": [
     {
-      "__note": "NO blockStage: .rdp-root is a plain block div, so a block stage would make the calendar FILL the stage and mint the harness window as the component width (the viewport-geometry hazard). A month grid is intrinsically sized — 44px day cells — so the default flex stage lets it shrink-to-fit to its own content width, which is the honest geometry.",
+      "__note": "NO blockStage: .rdp-root is a plain block div, so a block stage would make the calendar FILL the stage and mint the harness window as the component width (the viewport-geometry hazard). A month grid is intrinsically sized — 44px day cells — so the default flex stage lets it shrink-to-fit to its own content width, which is the honest geometry. docs/35 Phase 4 F1 prepare: showOutsideDays/showWeekNumber are PINNED at library defaults (false) — capture.ts §1.4 refuses bare boolean axes, and rewriting the seed contract's boolean props into string enums would contaminate the held-out material. Enumerated axes remain captionLayout × numberOfMonths.",
       "name": "Calendar",
       "importName": "DayPicker",
       "contract": "examples/day-picker/contracts-seed/calendar.contract.json",
       "sampleText": "",
       "axes": [
         "captionLayout",
-        "numberOfMonths",
-        "showOutsideDays",
-        "showWeekNumber"
+        "numberOfMonths"
       ],
       "axisValueMap": {
         "numberOfMonths": {
@@ -74,7 +72,9 @@
           "$date": "2026-01-20T00:00:00.000Z"
         },
         "timeZone": "UTC",
-        "animate": false
+        "animate": false,
+        "showOutsideDays": false,
+        "showWeekNumber": false
       }
     }
   ]
