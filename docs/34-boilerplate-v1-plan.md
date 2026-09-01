@@ -120,6 +120,24 @@ Sources, all in-repo:
   the authoritative list of what MUI Material actually ships.
 - **AntD** — `antd@5.29.3`, vendored by tarball for the Combobox climb
   (`recipe/fixtures/library-comboboxes.ts`), plus `examples/antd/contracts/`.
+  Boilerplate AntD legs now cite the local
+  `examples/antd/.antd-sandbox/node_modules/antd@5.29.3` install (gitignored;
+  recreate via `examples/antd/README.md`). The Combobox fixture still
+  *declares* the historical tarball `sourceRoot`.
+
+### Source of truth for minting (2026-08-31)
+
+TJ asked where code→canvas actually gets what it mints. Honest answer:
+**compile does not read `node_modules`.** It copies human-reviewed token
+tables in `recipe/fixtures/library-*.ts` that *cite* the public npm
+packages (`@mui/material@9.2.0`, `antd@5.29.3`,
+`@astryxdesign/core@0.1.6`). The installs on disk are real and complete
+(MUI `Switch.js` is present — earlier “missing” was a glob false
+negative). Computed CSS of those packages is a separate pipeline
+(`extract/computed`) used for signed Input, not for boilerplate compile.
+Evidence: [`recipe/evidence/compile-source-of-truth-v1.md`](../recipe/evidence/compile-source-of-truth-v1.md).
+Does not remint. Does not invent Polar. Does not flip `overallSuccess`.
+Product v1 stays INCOMPLETE.
 
 Astryx renames aggressively, and those renames are the part of this plan most
 likely to bite. The category → Astryx-name map, from Astryx's own census:
