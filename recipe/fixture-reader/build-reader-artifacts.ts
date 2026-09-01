@@ -51,6 +51,7 @@ import {
   muiTextareaAdapterConfig,
   antdTextareaAdapterConfig,
 } from "../fixtures/library-textareas.js";
+import { buildPhase4Proposals } from "./phase4-new-libraries.js";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const OUT = path.join(REPO, "recipe", "fixture-reader", "out");
@@ -285,6 +286,21 @@ function driftReport(all: { checkbox: SubjectResult[]; textarea: SubjectResult[]
     }
   }
   L.push("");
+  const phase4 = buildPhase4Proposals();
+  L.push("## Phase 4 — new libraries via the reader (docs/35 §6)");
+  L.push("");
+  L.push(
+    "No hand-authored `recipe/fixtures/library-*.ts` for these subjects. Each row is `mapped` (proposed table from ledger), `capture-pending`, or `mount-blocked` by name.",
+  );
+  L.push("");
+  L.push("| subject | package | status | receipt |");
+  L.push("|---|---|---|---|");
+  for (const s of phase4.subjects) {
+    L.push(
+      `| \`${s.id}\` | \`${s.packageName}@${s.version}#${s.exportName}\` | **${s.status}** | ${s.receipt ? s.receipt.replace(/\|/g, "\\|") : "—"} |`,
+    );
+  }
+  L.push("");
   return L.join("\n");
 }
 
@@ -294,11 +310,19 @@ function stringify(v: unknown): string {
 
 function main(): void {
   const all = buildAll();
+  const phase4 = buildPhase4Proposals();
   const files: Record<string, string> = {
     "checkbox.reader.json": stringify(all.checkbox),
     "textarea.reader.json": stringify(all.textarea),
     "checkbox.proposed-tables.json": stringify(proposedTables(all.checkbox)),
     "textarea.proposed-tables.json": stringify(proposedTables(all.textarea)),
+    "phase4-new-libraries.json": stringify({
+      artifactVersion: "phase4-new-libraries-v1",
+      overallSuccess: false,
+      productV1: "INCOMPLETE",
+      note: "docs/35 Phase 4 reader subjects — proposed tables only; no hand-authored fixture tables; no live Figma remint.",
+      ...phase4,
+    }),
     "DRIFT-REPORT.md": driftReport(all),
   };
   if (CHECK) {

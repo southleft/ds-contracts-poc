@@ -1,0 +1,24 @@
+{
+  "artifactVersion": "phase4-new-libraries-v1-evidence",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "phase": "docs/35 Phase 4 — new libraries via the reader",
+  "liveFigma": false,
+  "libraries": [
+    {
+      "id": "shadcn",
+      "package": "@shadcn-sandbox/ui@0.0.1",
+      "styling": "Tailwind utilities over Radix (vendored registry slice)",
+      "checkbox": "mapped — extract/computed/out/shadcn/checkbox/captured-truth.json",
+      "textarea": "capture-pending — Textarea not in vendored ui/ slice"
+    },
+    {
+      "id": "chakra",
+      "package": "@chakra-ui/react@3.37.0",
+      "styling": "runtime Emotion + defaultSystem CSS variables (--chakra-*)",
+      "checkbox": "mapped — extract/computed/out/chakra/checkbox/ (gate computed 88.531%)",
+      "textarea": "mapped ledger + contract QUARANTINED (scroll-padding-* not in TOKEN_CHANNELS) — proposed table from ledger only"
+    }
+  ],
+  "note": "No hand-authored recipe/fixtures/library-*.ts. No live remint. Reader proposals only."
+}

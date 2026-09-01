@@ -159,3 +159,14 @@ No drift — every mapped fact equals the ledger value.
 - **textarea/antd** `typography.label.family` = `-apple-system` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part; additionally the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure), so even the control's own family channel is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites _[theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily]_
 - **textarea/antd** `typography.label.style` = `Regular` — Input.TextArea renders ONE bare <textarea> — the recipe's label row is a reviewed pairing (like the Checkbox label precedent), never a captured part _[reviewed Regular]_
 - **textarea/antd** `typography.value.family` = `-apple-system` — the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure, extract/computed/configs/antd.json fonts.__note) — the ledger's font-family is the mount pin, not the library declaration _[theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily]_
+
+## Phase 4 — new libraries via the reader (docs/35 §6)
+
+No hand-authored `recipe/fixtures/library-*.ts` for these subjects. Each row is `mapped` (proposed table from ledger), `capture-pending`, or `mount-blocked` by name.
+
+| subject | package | status | receipt |
+|---|---|---|---|
+| `shadcn/checkbox` | `@shadcn-sandbox/ui@0.0.1#Checkbox` | **mapped** | — |
+| `shadcn/textarea` | `@shadcn-sandbox/ui@0.0.1#Textarea` | **capture-pending** | Textarea is NOT in the vendored shadcn registry slice (examples/shadcn/.shadcn-sandbox/src/components/ui has alert/avatar/badge/button/card/checkbox/dialog/input/select/switch/tabs/tooltip — no textarea.tsx). Adding it would be a new registry fetch, not a reader subject of the existing capture floor. |
+| `chakra/checkbox` | `@chakra-ui/react@3.37.0#CheckboxRoot` | **mapped** | — |
+| `chakra/textarea` | `@chakra-ui/react@3.37.0#Textarea` | **mapped** | — |

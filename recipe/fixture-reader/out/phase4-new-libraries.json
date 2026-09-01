@@ -1,0 +1,188 @@
+{
+  "artifactVersion": "phase4-new-libraries-v1",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "note": "docs/35 Phase 4 reader subjects — proposed tables only; no hand-authored fixture tables; no live Figma remint.",
+  "subjects": [
+    {
+      "id": "shadcn/checkbox",
+      "library": "shadcn",
+      "archetype": "checkbox",
+      "packageName": "@shadcn-sandbox/ui",
+      "version": "0.0.1",
+      "exportName": "Checkbox",
+      "ledgerFile": "extract/computed/out/shadcn/checkbox/captured-truth.json",
+      "status": "mapped",
+      "evidence": "extract/computed/configs/shadcn.json Checkbox; examples/shadcn sandbox"
+    },
+    {
+      "id": "shadcn/textarea",
+      "library": "shadcn",
+      "archetype": "textarea",
+      "packageName": "@shadcn-sandbox/ui",
+      "version": "0.0.1",
+      "exportName": "Textarea",
+      "ledgerFile": null,
+      "status": "capture-pending",
+      "receipt": "Textarea is NOT in the vendored shadcn registry slice (examples/shadcn/.shadcn-sandbox/src/components/ui has alert/avatar/badge/button/card/checkbox/dialog/input/select/switch/tabs/tooltip — no textarea.tsx). Adding it would be a new registry fetch, not a reader subject of the existing capture floor.",
+      "evidence": "examples/shadcn/.shadcn-sandbox/src/components/ui/; extract/computed/configs/shadcn.json components list"
+    },
+    {
+      "id": "chakra/checkbox",
+      "library": "chakra",
+      "archetype": "checkbox",
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "CheckboxRoot",
+      "ledgerFile": "extract/computed/out/chakra/checkbox/captured-truth.json",
+      "status": "mapped",
+      "evidence": "extract/computed/configs/chakra.json; examples/chakra/README.md"
+    },
+    {
+      "id": "chakra/textarea",
+      "library": "chakra",
+      "archetype": "textarea",
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Textarea",
+      "ledgerFile": "extract/computed/out/chakra/textarea/captured-truth.json",
+      "status": "mapped",
+      "evidence": "extract/computed/out/chakra/textarea/captured-truth.json (ledger written); contract QUARANTINED — scroll-padding-block-end/scroll-padding-bottom not in TOKEN_CHANNELS (see REFUSAL.md). Proposed table is ledger-only; no enriched contract shipped."
+    }
+  ],
+  "proposals": [
+    {
+      "id": "shadcn/checkbox",
+      "status": "mapped",
+      "source": {
+        "packageName": "@shadcn-sandbox/ui",
+        "version": "0.0.1",
+        "exportName": "Checkbox"
+      },
+      "ledgerFile": "extract/computed/out/shadcn/checkbox/captured-truth.json",
+      "evidence": "extract/computed/configs/shadcn.json Checkbox; examples/shadcn sandbox",
+      "note": "PROPOSED reviewed table from capture ledger — docs/35 Phase 4. No hand-authored recipe/fixtures/library-*.ts. Nothing overwrites fixtures without review. No live Figma remint in this phase.",
+      "proposed": [
+        {
+          "path": "wrapper.width",
+          "value": 16,
+          "ledgerKey": "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.width",
+          "formula": "ledger root.width @ unchecked.enabled__default"
+        },
+        {
+          "path": "box.size",
+          "value": 16,
+          "ledgerKey": "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.width",
+          "formula": "ledger root.width @ unchecked.enabled__default"
+        },
+        {
+          "path": "box.radius",
+          "value": 4,
+          "ledgerKey": "extract/computed/out/shadcn/checkbox/captured-truth.json#unchecked.enabled__default root.border-top-left-radius",
+          "formula": "ledger root.border-top-left-radius @ unchecked.enabled__default"
+        },
+        {
+          "path": "states.checked.enabled.box",
+          "value": "oklch(0.205 0 0)",
+          "ledgerKey": "extract/computed/out/shadcn/checkbox/captured-truth.json#checked.enabled__default root.background-color",
+          "formula": "ledger root.background-color @ checked.enabled__default"
+        }
+      ]
+    },
+    {
+      "id": "shadcn/textarea",
+      "status": "capture-pending",
+      "source": {
+        "packageName": "@shadcn-sandbox/ui",
+        "version": "0.0.1",
+        "exportName": "Textarea"
+      },
+      "ledgerFile": null,
+      "receipt": "Textarea is NOT in the vendored shadcn registry slice (examples/shadcn/.shadcn-sandbox/src/components/ui has alert/avatar/badge/button/card/checkbox/dialog/input/select/switch/tabs/tooltip — no textarea.tsx). Adding it would be a new registry fetch, not a reader subject of the existing capture floor.",
+      "evidence": "examples/shadcn/.shadcn-sandbox/src/components/ui/; extract/computed/configs/shadcn.json components list",
+      "note": "PROPOSED reviewed table from capture ledger — docs/35 Phase 4. No hand-authored recipe/fixtures/library-*.ts. Nothing overwrites fixtures without review. No live Figma remint in this phase."
+    },
+    {
+      "id": "chakra/checkbox",
+      "status": "mapped",
+      "source": {
+        "packageName": "@chakra-ui/react",
+        "version": "3.37.0",
+        "exportName": "CheckboxRoot"
+      },
+      "ledgerFile": "extract/computed/out/chakra/checkbox/captured-truth.json",
+      "evidence": "extract/computed/configs/chakra.json; examples/chakra/README.md",
+      "note": "PROPOSED reviewed table from capture ledger — docs/35 Phase 4. No hand-authored recipe/fixtures/library-*.ts. Nothing overwrites fixtures without review. No live Figma remint in this phase.",
+      "proposed": [
+        {
+          "path": "wrapper.width",
+          "value": 77.625,
+          "ledgerKey": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__root.width",
+          "formula": "ledger cls:chakra-checkbox__root.width @ unchecked.enabled__default"
+        },
+        {
+          "path": "box.size",
+          "value": 20,
+          "ledgerKey": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.width",
+          "formula": "ledger cls:chakra-checkbox__control.width @ unchecked.enabled__default"
+        },
+        {
+          "path": "box.radius",
+          "value": 2,
+          "ledgerKey": "extract/computed/out/chakra/checkbox/captured-truth.json#unchecked.enabled__default cls:chakra-checkbox__control.border-top-left-radius",
+          "formula": "ledger cls:chakra-checkbox__control.border-top-left-radius @ unchecked.enabled__default"
+        },
+        {
+          "path": "states.checked.enabled.box",
+          "value": "#18181bff",
+          "ledgerKey": "extract/computed/out/chakra/checkbox/captured-truth.json#checked.enabled__default cls:chakra-checkbox__control.background-color",
+          "formula": "ledger cls:chakra-checkbox__control.background-color @ checked.enabled__default"
+        }
+      ]
+    },
+    {
+      "id": "chakra/textarea",
+      "status": "mapped",
+      "source": {
+        "packageName": "@chakra-ui/react",
+        "version": "3.37.0",
+        "exportName": "Textarea"
+      },
+      "ledgerFile": "extract/computed/out/chakra/textarea/captured-truth.json",
+      "evidence": "extract/computed/out/chakra/textarea/captured-truth.json (ledger written); contract QUARANTINED — scroll-padding-block-end/scroll-padding-bottom not in TOKEN_CHANNELS (see REFUSAL.md). Proposed table is ledger-only; no enriched contract shipped.",
+      "note": "PROPOSED reviewed table from capture ledger — docs/35 Phase 4. No hand-authored recipe/fixtures/library-*.ts. Nothing overwrites fixtures without review. No live Figma remint in this phase.",
+      "proposed": [
+        {
+          "path": "root.width",
+          "value": 328,
+          "ledgerKey": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.width",
+          "formula": "ledger root.width @ empty.enabled__default"
+        },
+        {
+          "path": "root.minHeight",
+          "value": 0,
+          "ledgerKey": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.min-height",
+          "formula": "ledger root.min-height @ empty.enabled__default"
+        },
+        {
+          "path": "root.radius",
+          "value": 4,
+          "ledgerKey": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.border-top-left-radius",
+          "formula": "ledger root.border-top-left-radius @ empty.enabled__default"
+        },
+        {
+          "path": "root.borderColor",
+          "value": "#e4e4e7ff",
+          "ledgerKey": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.border-top-color",
+          "formula": "ledger root.border-top-color @ empty.enabled__default"
+        },
+        {
+          "path": "root.color",
+          "value": "#09090bff",
+          "ledgerKey": "extract/computed/out/chakra/textarea/captured-truth.json#empty.enabled__default root.color",
+          "formula": "ledger root.color @ empty.enabled__default"
+        }
+      ]
+    }
+  ]
+}

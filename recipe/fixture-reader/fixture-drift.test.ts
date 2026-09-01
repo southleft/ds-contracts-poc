@@ -28,6 +28,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildAll, type SubjectResult } from "./build-reader-artifacts.js";
+import { buildPhase4Proposals } from "./phase4-new-libraries.js";
+import { buildF1HeldOutEvidence } from "./f1-held-out.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -154,6 +156,43 @@ test("FALSIFICATION: a reviewed-drift row with an unregistered cause refuses", (
   plantedLedger.rows = [{ ...plantedLedger.rows[0], cause: "no-such-cause" }];
   const verdict = judge(results, plantedLedger);
   assert.equal(verdict.badCause.length, 1);
+});
+
+
+test("Phase 4 new libraries are mapped, capture-pending, or mount-blocked by name", () => {
+  const { subjects, proposals } = buildPhase4Proposals();
+  assert.ok(subjects.length >= 4, "expected shadcn+chakra × checkbox+textarea");
+  const byId = new Map(subjects.map((s) => [s.id, s]));
+  assert.ok(byId.has("shadcn/checkbox"));
+  assert.ok(byId.has("shadcn/textarea"));
+  assert.ok(byId.has("chakra/checkbox"));
+  assert.ok(byId.has("chakra/textarea"));
+  for (const s of subjects) {
+    assert.ok(
+      s.status === "mapped" || s.status === "capture-pending" || s.status === "mount-blocked",
+      `${s.id}: illegal status ${s.status}`,
+    );
+    if (s.status !== "mapped") {
+      assert.ok(s.receipt && s.receipt.length > 20, `${s.id}: thin receipt`);
+      assert.ok(s.evidence && s.evidence.length > 5, `${s.id}: missing evidence`);
+    } else {
+      assert.ok(s.ledgerFile, `${s.id}: mapped without ledger`);
+      const proposal = proposals.find((p) => p.id === s.id)!;
+      assert.ok(proposal.proposed && proposal.proposed.length > 0, `${s.id}: mapped but empty proposal`);
+    }
+  }
+  assert.equal(byId.get("shadcn/textarea")!.status, "capture-pending");
+});
+
+test("F1 held-out prepare never claims passed and stays fail-closed on overallSuccess", () => {
+  const { overallSuccess, f1Status, productV1, receipt } = buildF1HeldOutEvidence();
+  assert.equal(overallSuccess, false);
+  assert.equal(productV1, "INCOMPLETE");
+  assert.ok(f1Status === "unproven" || f1Status === "capture-only" || f1Status === "blocked");
+  assert.notEqual(f1Status, "passed" as string);
+  assert.equal(receipt.overallSuccess, false);
+  assert.equal(receipt.liveFigma, false);
+  assert.equal(receipt.inventedF1Pass, false);
 });
 
 test("the reader catches the owner-caught miss classes mechanically (the five-misses check, checkbox/textarea half)", () => {
