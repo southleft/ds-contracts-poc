@@ -133,14 +133,30 @@ The 86 removed steps are replaced by ONE lane, `recipe:live:history:test`, which
 runs the per-version test FILES directly: **705 files, 5,080 assertions, 70
 seconds**, exit 0.
 
-**It immediately found 30 red tests nobody knew about.** 29 are
-`recipe/calendar-live-v19..v47-extract.test.ts`, all failing at HEAD on
-"host omits strokes on day default/selected/outside — the Calendar live v18
-class" with `TypeError: scene solid paint has no color`. Pre-existing, and
-invisible for as long as the lane has been dying at step 100. The 30th,
-`input-field-live-v6-authorization.test.ts`, can only pass in a DIRTY tree — its
-last assertion reads the live repository and requires an artifact to be
-uncommitted. Both exclusions are named in the workflow beside the lane.
+**It immediately found 30 red tests nobody knew about, and the cause is
+structural.**
+
+29 are `recipe/calendar-live-v19..v47-extract.test.ts`. Each asserts — by regex,
+against the SOURCE of `recipe/scene-readback-calendar-v1.ts` — that the
+day-variant stroke omit reads `(default|selected|outside)` and keeps `today`.
+Commit `6c2d00011`, *"PREPARE CALENDAR LIVE V48 — today cell joins the
+day-variant strokes omit"*, deliberately changed it to
+`(default|today|selected|outside)` when the ring moved to the button at v47.
+**v48, v49 and v50 assert the new spelling and pass.** So this is not a
+regression; it is 29 historical receipts that a later teaching superseded.
+
+The structural point matters more than the symptom: these per-version tests are
+treated as **byte-frozen receipts, but they assert against a file that is not
+versioned**. Any later teaching retroactively falsifies every earlier version's
+test, and nothing notices while the lane cannot reach them. That is a design
+question about the whole per-version scheme, not a calendar bug.
+
+The 30th, `input-field-live-v6-authorization.test.ts`, can only pass in a DIRTY
+tree — its last assertion reads the live repository and requires an artifact to
+be uncommitted. The repo already knew: a now-deleted `EXCLUDED` reason described
+that composite as *"intentionally red after its published authorization."*
+
+Both exclusions are named in the workflow beside the lane.
 
 `ci:lanes` went 72 → 313 the moment the scripts were removed (every per-version
 test file was suddenly named by nothing), → 90 with the aggregate lane, and then

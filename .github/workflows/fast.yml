@@ -307,10 +307,19 @@ jobs:
       #
       # 30 files are NOT in this lane and are not silently dropped.
       #
-      # 29: recipe/calendar-live-v19..v47-extract.test.ts all fail at HEAD on
-      # "host omits strokes on day default/selected/outside and keeps today —
-      # the Calendar live v18 class" with "scene solid paint has no color".
-      # Pre-existing, and invisible until now because the lane never reached
+      # 29: recipe/calendar-live-v19..v47-extract.test.ts. NOT a regression, and
+      # not really about calendars. Each asserts, by regex against the SOURCE of
+      # recipe/scene-readback-calendar-v1.ts, that the day-variant stroke omit
+      # reads (default|selected|outside) and KEEPS today. Commit 6c2d00011
+      # ("PREPARE CALENDAR LIVE V48 — today cell joins the day-variant strokes
+      # omit") deliberately changed it to (default|today|selected|outside) when
+      # the ring moved to the button at v47. v48, v49 and v50 assert the new
+      # spelling and pass.
+      #
+      # The structural point is worth more than the symptom: these per-version
+      # tests are treated as byte-frozen receipts, but they assert against a file
+      # that is NOT versioned. Any later teaching retroactively falsifies every
+      # earlier version's test, and nothing notices while the lane cannot reach
       # them. Named in parity/receipts/v1/HONEST-SCORECARD.md.
       #
       # 1: recipe/input-field-live-v6-authorization.test.ts can only pass in a
