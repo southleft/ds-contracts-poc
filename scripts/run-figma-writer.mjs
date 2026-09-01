@@ -137,7 +137,9 @@ if (!connected) {
   throw new Error(`Scratch ${TARGET.fileKey} not connected after ${waitMs}ms`);
 }
 
-const result = await call("figma_execute", { code, fileKey: TARGET.fileKey }, waitMs);
+// figma_execute defaults to a 5 s execution budget (max 300 s). A three-library
+// set with six variants each needs more; the alert's twelve fit by luck.
+const result = await call("figma_execute", { code, fileKey: TARGET.fileKey, timeout: Math.min(waitMs, 300_000) }, waitMs);
 writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`);
 await client.close();
 

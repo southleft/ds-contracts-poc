@@ -204,29 +204,29 @@
     },
     {
       "label": "textarea/astryx",
-      "page": "198:77456",
+      "page": "212:81799",
       "set": "textarea/set :: Astryx TextArea",
       "variant": "Disabled=false, Content=empty",
       "widthNormalised": true,
-      "shot": "recipe/evidence/fidelity-v1/shots/textarea-astryx-empty.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-astryx-empty-shared-v4.png",
       "reference": "extract/computed/out/astryx-core/textarea/orig-shots/empty.no-isDisabled__default.png"
     },
     {
       "label": "textarea/mui",
-      "page": "198:77456",
+      "page": "212:81799",
       "set": "textarea/set :: MUI TextField multiline",
       "variant": "Disabled=false, Content=empty",
       "widthNormalised": true,
-      "shot": "recipe/evidence/fidelity-v1/shots/textarea-mui-empty.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-mui-empty-shared-v4.png",
       "reference": "extract/computed/out/mui/textarea/orig-shots/empty.enabled__default.png"
     },
     {
       "label": "textarea/antd",
-      "page": "198:77456",
+      "page": "212:81799",
       "set": "textarea/set :: Ant Design TextArea",
       "variant": "Disabled=false, Content=empty",
       "widthNormalised": true,
-      "shot": "recipe/evidence/fidelity-v1/shots/textarea-antd-empty.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/textarea-antd-empty-shared-v4.png",
       "reference": "extract/computed/out/antd/textarea/orig-shots/empty.enabled__default.png"
     }
   ],

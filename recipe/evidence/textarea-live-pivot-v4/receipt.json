@@ -1,5 +1,5 @@
 {
-  "liveFigma": false,
+  "liveFigma": true,
   "humanGrade": "queued-for-TJ",
   "overallSuccess": false,
   "productV1": "INCOMPLETE",
@@ -13,5 +13,38 @@
     "MUI": "82f958a9f67ded1b65b50c986493d42ef754ce0e048ca9366b14a6aa1cccd645",
     "Ant Design": "142f359858ed37f4601d2c9269a014caf5beae42f4220cdaf94f4cce786cc19b"
   },
-  "writerSha256": "68a31f7d06782ff906c546ecb5f18e2708d2c0f84404900c64a9ff383731ebd8"
+  "writerSha256": "68a31f7d06782ff906c546ecb5f18e2708d2c0f84404900c64a9ff383731ebd8",
+  "pageId": "212:81799",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=212-81799",
+  "live": {
+    "recordedFrom": "textarea-v4b-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v4",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-textarea-reviewed-v1",
+        "sectionId": "212:81800",
+        "setId": "212:81851",
+        "collectionId": "VariableCollectionId:212:81801",
+        "variantCount": 6,
+        "comparedIrFacts": 133
+      },
+      {
+        "adapterIdentity": "mui-textarea-reviewed-v1",
+        "sectionId": "212:81852",
+        "setId": "212:81911",
+        "collectionId": "VariableCollectionId:212:81853",
+        "variantCount": 6,
+        "comparedIrFacts": 143
+      },
+      {
+        "adapterIdentity": "antd-textarea-reviewed-v1",
+        "sectionId": "212:81912",
+        "setId": "212:81963",
+        "collectionId": "VariableCollectionId:212:81913",
+        "variantCount": 6,
+        "comparedIrFacts": 133
+      }
+    ]
+  }
 }

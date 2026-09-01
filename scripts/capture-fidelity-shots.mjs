@@ -118,7 +118,7 @@ if (!node) throw new Error("no child ${s.child}");` : ""}
 const bytes = await node.exportAsync({ format: "PNG", constraint: { type: "SCALE", value: 1 }${s.exportAbsoluteBounds ? ", useAbsoluteBounds: true" : ""} });
 return { id: node.id, w: Math.round(node.width), h: Math.round(node.height), bytes: Array.from(bytes) };
 `;
-  const res = await call("figma_execute", { code, fileKey: TARGET.fileKey });
+  const res = await call("figma_execute", { code, fileKey: TARGET.fileKey, timeout: 60_000 });
   if (!res?.success || !res?.result?.bytes) {
     console.error(`✖ ${s.label}: ${String(res?.error ?? "export failed").slice(0, 160)}`);
     failures += 1;
