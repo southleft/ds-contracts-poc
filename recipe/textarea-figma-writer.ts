@@ -8,7 +8,7 @@
  * then children then sizing.
  *
  * Textarea is a vertical label + multi-line box. One component set per
- * source: Disabled × Content (4 variants). Do not remint Input.
+ * source: Disabled × Content (6 variants: empty / focus / value). Do not remint Input.
  *
  * No live write happens here. Executing the program requires a separate
  * PREPARE / AUTHORIZE / attempt lineage.
@@ -23,9 +23,10 @@ import {
 } from "./interpret.js";
 
 export const TEXTAREA_FIGMA_NAMESPACE = "ds.contracts.textarea.recipe.v1";
-export const TEXTAREA_FIGMA_WRITER_VERSION = 2;
-export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v2";
+export const TEXTAREA_FIGMA_WRITER_VERSION = 3;
+export const TEXTAREA_FIGMA_RUN_SUFFIX = "textarea-v3";
 export const FORBIDDEN_TEXTAREA_V1_PAGE_ID = "183:75495";
+export const FORBIDDEN_TEXTAREA_V2_PAGE_ID = "198:77048";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -271,6 +272,7 @@ void "TEXTAREA-MUST-NOT-WRITE-CHECKBOX-PAGE";
 void "TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE";
 void "TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE";
 void "TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE";
+void "TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V2-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("TEXTAREA-MUST-NOT-WRITE-INPUT-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("TEXTAREA-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("TEXTAREA-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
@@ -282,6 +284,7 @@ if(figma.currentPage&&figma.currentPage.id==="183:74742")throw new Error("TEXTAR
 if(figma.currentPage&&figma.currentPage.id==="183:75031")throw new Error("TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:75302")throw new Error("TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:75495")throw new Error("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="198:77048")throw new Error("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V2-PAGE");
 await figma.loadAllPagesAsync();
 const setSharedData=(target,key,value)=>target.setSharedPluginData(NS,key,String(value));
 const getSharedData=(target,key)=>target.getSharedPluginData(NS,key);
@@ -304,6 +307,7 @@ if(page.id==="183:74742")throw new Error("TEXTAREA-MUST-NOT-WRITE-CHECKBOX-PAGE"
 if(page.id==="183:75031")throw new Error("TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE");
 if(page.id==="183:75302")throw new Error("TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE");
 if(page.id==="183:75495")throw new Error("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE");
+if(page.id==="198:77048")throw new Error("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V2-PAGE");
 await figma.setCurrentPageAsync(page);
 setSharedData(page,"pageOwner",PAGE_OWNER);
 setSharedData(page,"runIdentity",PLAN.runIdentity);
@@ -592,7 +596,8 @@ export function emitTextareaFigmaWriter(
     runtime.includes("TEXTAREA-MUST-NOT-WRITE-CHECKBOX-PAGE") === false ||
     runtime.includes("TEXTAREA-MUST-NOT-WRITE-RADIO-PAGE") === false ||
     runtime.includes("TEXTAREA-MUST-NOT-WRITE-SWITCH-PAGE") === false ||
-    runtime.includes("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE") === false
+    runtime.includes("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V1-PAGE") === false ||
+    runtime.includes("TEXTAREA-MUST-NOT-WRITE-TEXTAREA-V2-PAGE") === false
   )
     throw new TypeError(
       "textarea writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, and Switch pages",

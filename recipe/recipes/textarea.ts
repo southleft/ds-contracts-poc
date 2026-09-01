@@ -44,11 +44,15 @@ export const TEXTAREA_RECIPE_REF = {
  * compile TextField multiline / InputBase / TextareaAutosize.
  * Do not remint Input. Do not invent minRows or padding.
  *
- * Shared axes: Disabled × Content (empty placeholder vs filled value).
+ * Shared axes: Disabled × Content.
+ * Content `empty` is rest (not focused, no value). Content `focus` is the
+ * named focused-empty column from MUI InputLabel shrink =
+ * filled || focused (InputLabel.js:197-199). Content `value` is filled.
  * rows / size / status / variant / allowClear / showCount are not axes.
+ * Focus chrome (2px primary ring) is not a token on this recipe.
  */
 export const TEXTAREA_DISABLED = ["false", "true"] as const;
-export const TEXTAREA_CONTENT = ["empty", "value"] as const;
+export const TEXTAREA_CONTENT = ["empty", "focus", "value"] as const;
 
 export type TextareaDisabled = (typeof TEXTAREA_DISABLED)[number];
 export type TextareaContent = (typeof TEXTAREA_CONTENT)[number];
@@ -324,7 +328,9 @@ const cellOf = (
   content: TextareaContent,
   disabled: TextareaDisabled,
 ): StateCell =>
-  instance.tokens.states[content][disabled === "true" ? "disabled" : "enabled"];
+  instance.tokens.states[content === "value" ? "value" : "empty"][
+    disabled === "true" ? "disabled" : "enabled"
+  ];
 
 const labelText = (
   instance: TextareaRecipeInstance,
@@ -357,12 +363,19 @@ const valueText = (
   instance: TextareaRecipeInstance,
   content: TextareaContent,
   cell: StateCell,
+  floating: boolean,
 ): TextNode => ({
   kind: "text",
   role: "textarea/value",
   label: "textarea/value",
+  /**
+   * InputBase.js:179-188 — when the label is unshrunk
+   * (`label[data-shrink=false]`), placeholder opacity is 0 until :focus.
+   * Stacked libraries keep the native placeholder visible on empty.
+   */
+  visible: !(floating && content === "empty"),
   characters:
-    content === "empty" ? instance.content.placeholder : instance.content.value,
+    content === "value" ? instance.content.value : instance.content.placeholder,
   type: {
     fontFamily: instance.tokens.typography.value.resolvedFamily,
     fontStyle: instance.tokens.typography.value.resolvedStyle,
@@ -432,7 +445,7 @@ const boxNode = (
     bind("cornerRadius.bottomRight", instance.tokens.box.radius),
     bind("cornerRadius.bottomLeft", instance.tokens.box.radius),
   ],
-  children: [valueText(instance, content, cell)],
+  children: [valueText(instance, content, cell, instance.tokens.labelPlacement === "floating")],
 });
 
 const variantComponent = (
@@ -442,7 +455,7 @@ const variantComponent = (
 ): ComponentNode => {
   const cell = cellOf(instance, content, disabled);
   const floating = instance.tokens.labelPlacement === "floating";
-  const shrunk = floating && content === "value";
+  const shrunk = floating && content !== "empty";
   const labelFont = shrunk
     ? instance.tokens.floatingLabelFontSize
     : instance.tokens.labelFontSize;
@@ -680,7 +693,15 @@ export function validateTextareaStructure(root: IRNode): void {
       } else {
         direct(variant, "textarea/label", "text");
       }
-      direct(box, "textarea/value", "text");
+      const value = direct(box, "textarea/value", "text");
+      if (labelRow && content === "empty" && value.visible !== false)
+        throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
+          `${variant.role}: floating rest empty must hide the placeholder (InputBase.js:179-188)`,
+        ]);
+      if (labelRow && content !== "empty" && value.visible === false)
+        throw new RecipeRefusal(TEXTAREA_RECIPE_REF, [
+          `${variant.role}: floating shrink/focus must show the field text`,
+        ]);
     }
   }
   if (aligns.size !== 1)
@@ -938,7 +959,7 @@ export function collapseTextareaRecipe(
     receipts: envelope.receipts,
     provenance: envelope.provenance,
   });
-  for (const content of TEXTAREA_CONTENT) {
+  for (const content of ["empty", "value"] as const) {
     for (const arm of ["enabled", "disabled"] as const)
       instance.tokens.states[content][arm].boxOpacity = {
         variable: `${instance.identity.id}.states-${content}-${arm}-boxOpacity`,

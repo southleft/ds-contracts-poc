@@ -63,13 +63,48 @@ test("textarea@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   assert.equal(mui.tokens.floatingLabelFontSize.fallback, 12);
   assert.equal(mui.tokens.notchFill.fallback, "#ffffffff");
   assert.equal(mui.tokens.typography.label.resolvedFamily, "Roboto");
+  const muiEnvelope = compileTextareaRecipe(mui);
+  const muiEmpty = muiEnvelope.ir.children.find(
+    (child) =>
+      child.kind === "component" &&
+      child.variantProperties?.Disabled === "false" &&
+      child.variantProperties?.Content === "empty",
+  );
+  const muiFocus = muiEnvelope.ir.children.find(
+    (child) =>
+      child.kind === "component" &&
+      child.variantProperties?.Disabled === "false" &&
+      child.variantProperties?.Content === "focus",
+  );
+  const walk = (
+    node: { role?: string; visible?: boolean; children?: unknown[] },
+    found: Array<{ role?: string; visible?: boolean }>,
+  ) => {
+    found.push(node);
+    for (const child of node.children ?? [])
+      walk(child as { role?: string; visible?: boolean; children?: unknown[] }, found);
+  };
+  const emptyNodes: Array<{ role?: string; visible?: boolean }> = [];
+  const focusNodes: Array<{ role?: string; visible?: boolean }> = [];
+  if (muiEmpty && muiEmpty.kind === "component") walk(muiEmpty, emptyNodes);
+  if (muiFocus && muiFocus.kind === "component") walk(muiFocus, focusNodes);
+  assert.equal(
+    emptyNodes.find((node) => node.role === "textarea/value")?.visible,
+    false,
+    "MUI rest empty hides placeholder (InputBase.js:179-188)",
+  );
+  assert.notEqual(
+    focusNodes.find((node) => node.role === "textarea/value")?.visible,
+    false,
+    "MUI focused empty shows placeholder",
+  );
   assert.equal(antd.tokens.box.rows.fallback, 2, "HTML textarea rows default");
   assert.equal(antd.tokens.box.height.fallback, 54, "2*22+8+2");
   assert.equal(antd.tokens.box.paddingY.fallback, 4);
   assert.equal(antd.tokens.box.paddingX.fallback, 11);
   assert.equal(antd.tokens.box.radius.fallback, 6, "--border-radius");
   assert.equal(antd.tokens.box.lineHeight.fallback, 22);
-  assert.equal(TEXTAREA_THREE_LIBRARY_PROOF_PROTOCOL.totalCells, 12);
+  assert.equal(TEXTAREA_THREE_LIBRARY_PROOF_PROTOCOL.totalCells, 18);
   assert.ok(performance.now() - started < 4000);
 });
 

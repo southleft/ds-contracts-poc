@@ -61,7 +61,7 @@ export const canonicalTextareaRecipeInstance = {
     },
     content: {
       name: "Content",
-      values: ["empty", "value"],
+      values: ["empty", "focus", "value"],
       default: "empty",
     },
   },

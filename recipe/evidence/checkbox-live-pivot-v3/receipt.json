@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "checkbox-live-pivot-v3-prepare",
+  "teaching": "MUI even-odd primary icon on paper; AntD pre-rotated L is a check; AntD dash is 8×2 not an 8×8 tile",
+  "runIdentity": "548cf953-a473aa6a-ff3a8565-checkbox-v3",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-a473aa6a-ff3a8565-checkbox-v3",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "548cf95362cf7ea99fd42cf4b4d21c6a7fe01495bce805029cf3a85a1267f51b",
+    "MUI": "a473aa6a174bc1074fd1586c85c7dff9d89721af6064f82d5959a167d6e79d82",
+    "Ant Design": "ff3a8565ebbe2c34e83b34f8200804b9aa81be71cc4521e6b5a72bc9df4c6e56"
+  },
+  "writerSha256": "91969714961ab4a5861a37ddb9dee4a525393533597890a0651d6cebf0395db7",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

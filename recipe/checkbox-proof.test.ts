@@ -55,6 +55,11 @@ test("checkbox@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   assert.equal(mui.tokens.box.padding.fallback, 9, "SwitchBase.js padding 9");
   assert.equal(
     mui.tokens.states.checked.enabled.boxFill.fallback,
+    "#ffffffff",
+    "paper behind the even-odd hole",
+  );
+  assert.equal(
+    mui.tokens.states.checked.enabled.checkFill.fallback,
     "#1976d2ff",
     "palette.primary.main",
   );
@@ -67,18 +72,30 @@ test("checkbox@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   );
   assert.equal(astryx.tokens.check.paint, "stroke");
   assert.equal(
-    mui.tokens.check.path.startsWith("M10 17"),
+    mui.tokens.check.path.startsWith("M19 3H5"),
     true,
-    "MUI CheckBox.js hole overlay",
+    "MUI CheckBox.js even-odd icon",
   );
+  assert.equal(mui.tokens.check.winding, "evenodd");
   assert.equal(mui.tokens.check.paint, "fill");
+  assert.equal(
+    mui.tokens.states.checked.enabled.checkFill.fallback,
+    "#1976d2ff",
+    "even-odd icon is primary, not a white overlay",
+  );
   assert.equal(
     mui.tokens.states.indeterminate.enabled.dashFill.fallback,
     "#ffffffff",
     "IndeterminateCheckBox hole is a white bar, not a poster tile",
   );
-  assert.equal(antd.tokens.check.rotation, 45, "inner::after rotate(45deg)");
-  assert.equal(antd.tokens.check.placement, "absolute");
+  assert.equal(antd.tokens.check.rotation, 0, "45deg baked into the check path");
+  assert.equal(antd.tokens.check.placement, "center");
+  assert.equal(
+    antd.tokens.check.path.startsWith("M7.677"),
+    true,
+    "AntD L after rotate(45deg) is a check, not a chevron",
+  );
+  assert.equal(antd.tokens.dash.height.fallback, 2, "named dash is lineWidthBold");
   assert.equal(antd.tokens.rowAlign, "baseline", "wrapper alignItems baseline");
   assert.equal(
     antd.tokens.states.checked.enabled.boxFill.fallback,

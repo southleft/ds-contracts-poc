@@ -526,6 +526,13 @@ const muiRefusals = makeRefusals("mui", [
     target: "MUI helper text",
     reason: "refused-by-recipe",
   },
+  {
+    id: "refusal-focus-ring",
+    evidence:
+      "OutlinedInput focus is 2px palette.primary.main; Content=focus is the named shrink/placeholder column only (InputLabel.js:197-199). Do not invent a focus ring token",
+    target: "MUI outlined 2px primary focus ring",
+    reason: "refused-by-recipe",
+  },
 ]);
 
 const antdRefusals = makeRefusals("antd", [
@@ -617,7 +624,7 @@ const buildConfig = (
       wrapper: `${source.exportName} control + label`,
       setupSeconds: 12,
       sourceHarness: source.sourceRoot,
-      sourceMatrixCells: 4,
+      sourceMatrixCells: 6,
       unsupportedCells: unsupported,
       captureCommand:
         "deferred: source references must be rendered in a separately authorized matched-benchmark task",
@@ -684,8 +691,8 @@ export const TEXTAREA_THREE_LIBRARY_PROOF_PROTOCOL = {
   artifactVersion: "textarea-three-library-proof-protocol-v1",
   frozenBeforeResults: true,
   resultStatus: "not-run",
-  cellsPerSource: 4,
-  totalCells: 12,
+  cellsPerSource: 6,
+  totalCells: 18,
   sources: [
     "@astryxdesign/core@0.1.6#TextArea",
     "@mui/material@9.2.0#TextField multiline",

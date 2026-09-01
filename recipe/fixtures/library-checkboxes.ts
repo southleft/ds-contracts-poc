@@ -193,18 +193,18 @@ const muiTokens = cloneTokens("mui.checkbox", (path, fallback) => {
   if (path === "states.unchecked.disabled.label") return "#00000061";
   if (path === "states.unchecked.disabled.dashFill") return "#00000000";
   if (path === "states.unchecked.disabled.checkFill") return "#ffffffff";
-  if (path === "states.checked.enabled.boxFill") return "#1976d2ff";
-  if (path === "states.checked.enabled.boxBorder") return "#1976d2ff";
+  if (path === "states.checked.enabled.boxFill") return "#ffffffff";
+  if (path === "states.checked.enabled.boxBorder") return "#00000000";
   if (path === "states.checked.enabled.boxOpacity") return 1;
   if (path === "states.checked.enabled.label") return "#000000de";
   if (path === "states.checked.enabled.dashFill") return "#00000000";
-  if (path === "states.checked.enabled.checkFill") return "#ffffffff";
-  if (path === "states.checked.disabled.boxFill") return "#00000042";
-  if (path === "states.checked.disabled.boxBorder") return "#00000042";
+  if (path === "states.checked.enabled.checkFill") return "#1976d2ff";
+  if (path === "states.checked.disabled.boxFill") return "#ffffffff";
+  if (path === "states.checked.disabled.boxBorder") return "#00000000";
   if (path === "states.checked.disabled.boxOpacity") return 1;
   if (path === "states.checked.disabled.label") return "#00000061";
   if (path === "states.checked.disabled.dashFill") return "#00000000";
-  if (path === "states.checked.disabled.checkFill") return "#ffffffff";
+  if (path === "states.checked.disabled.checkFill") return "#00000042";
   if (path === "states.indeterminate.enabled.boxFill") return "#1976d2ff";
   if (path === "states.indeterminate.enabled.boxBorder") return "#1976d2ff";
   if (path === "states.indeterminate.enabled.boxOpacity") return 1;
@@ -222,8 +222,8 @@ const muiTokens = cloneTokens("mui.checkbox", (path, fallback) => {
 muiTokens.rowAlign = "center";
 muiTokens.check = {
   ...muiTokens.check,
-  path: "M10 17 L5 12 L6.41 10.59 L10 14.17 L17.59 6.58 L19 8 Z",
-  winding: "nonzero",
+  path: "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+  winding: "evenodd",
   paint: "fill",
   strokeCap: "none",
   strokeJoin: "miter",
@@ -235,13 +235,15 @@ muiTokens.typography = { label: muiFont() };
 /**
  * AntD Checkbox inner is controlInteractiveSize 16. Tick is inner::after
  * L-stroke (checkboxSize/14*5 × checkboxSize/14*8, lineWidthBold 2,
- * rotate(45deg), top 50% / inset-inline-start 25%, translate(-50%,-50%)).
- * Indeterminate after is fontSizeLG/2 = 8 square of colorPrimary.
+ * rotate(45deg)). v2 minted that L as a rotated path and it read as `>`.
+ * This remint bakes the 45° CW into the path (rotation 0) so the stroke
+ * is a check. Indeterminate ::after box is fontSizeLG/2 (index.js:163-164);
+ * the named bar is that width × lineWidthBold — a dash, not an 8×8 fill.
  */
-const ANTD_CHECKBOX_SIZE = 16;
-const ANTD_AFTER_W = (ANTD_CHECKBOX_SIZE / 14) * 5;
-const ANTD_AFTER_H = (ANTD_CHECKBOX_SIZE / 14) * 8;
 const ANTD_LINE_BOLD = 2;
+const ANTD_CHECK_W = 7.677;
+const ANTD_CHECK_H = 5.051;
+const ANTD_CHECK_PATH = "M7.677 0.000 L2.626 5.051 L0.000 2.424";
 const antdTokens = cloneTokens("antd.checkbox", (path, fallback) => {
   if (path === "wrapper.size") return 16;
   if (path === "box.size") return 16;
@@ -250,13 +252,13 @@ const antdTokens = cloneTokens("antd.checkbox", (path, fallback) => {
   if (path === "box.padding") return 0;
   if (path === "row.gap") return 8;
   if (path === "dash.width") return 8;
-  if (path === "dash.height") return 8;
+  if (path === "dash.height") return 2;
   if (path === "dash.radius") return 0;
-  if (path === "check.width") return ANTD_AFTER_W;
-  if (path === "check.height") return ANTD_AFTER_H;
+  if (path === "check.width") return ANTD_CHECK_W;
+  if (path === "check.height") return ANTD_CHECK_H;
   if (path === "check.strokeWidth") return ANTD_LINE_BOLD;
-  if (path === "check.offsetX") return ANTD_CHECKBOX_SIZE * 0.25 - ANTD_AFTER_W / 2;
-  if (path === "check.offsetY") return ANTD_CHECKBOX_SIZE * 0.5 - ANTD_AFTER_H / 2;
+  if (path === "check.offsetX") return 0;
+  if (path === "check.offsetY") return 0;
   if (path === "labelFontSize") return 14;
   if (path === "states.unchecked.enabled.boxFill") return "#ffffffff";
   if (path === "states.unchecked.enabled.boxBorder") return "#d9d9d9ff";
@@ -299,13 +301,13 @@ const antdTokens = cloneTokens("antd.checkbox", (path, fallback) => {
 antdTokens.rowAlign = "baseline";
 antdTokens.check = {
   ...antdTokens.check,
-  path: `M ${ANTD_AFTER_W - ANTD_LINE_BOLD} 0 L ${ANTD_AFTER_W - ANTD_LINE_BOLD} ${ANTD_AFTER_H - ANTD_LINE_BOLD} L 0 ${ANTD_AFTER_H - ANTD_LINE_BOLD}`,
+  path: ANTD_CHECK_PATH,
   winding: "nonzero",
   paint: "stroke",
-  strokeCap: "none",
+  strokeCap: "square",
   strokeJoin: "miter",
-  rotation: 45,
-  placement: "absolute",
+  rotation: 0,
+  placement: "center",
 };
 antdTokens.typography = { label: antdFont() };
 
@@ -387,7 +389,7 @@ export const antdCheckboxSource: ReviewedCheckboxSource = {
     control:
       "style/index.js checkboxSize token.controlInteractiveSize 16; border token.lineWidth + colorBorder; radius borderRadiusSM 4",
     glyph:
-      "inner::after L-stroke width checkboxSize/14*5 height checkboxSize/14*8, lineWidthBold 2, rotate(45deg), top 50% inset-inline-start 25% translate(-50%,-50%); indeterminate after fontSizeLG/2 8 square colorPrimary",
+      "inner::after L-stroke width checkboxSize/14*5 height checkboxSize/14*8, lineWidthBold 2, rotate(45deg) baked into path M7.677 0 L2.626 5.051 L0 2.424; indeterminate bar fontSizeLG/2 × lineWidthBold colorPrimary",
     label: "& + span paddingInlineStart/End paddingXS 8; colorText 14",
   },
   api: {
@@ -529,10 +531,10 @@ const astryxRefusals = makeRefusals("astryx", [
 
 const muiRefusals = makeRefusals("mui", [
   {
-    id: "refusal-evenodd-hole",
+    id: "refusal-indeterminate-icon",
     evidence:
-      "CheckBox.js even-odd path is box+hole in one fill; compile keeps the named box frame and paints the hole as a white overlay vector (same visual on a white page)",
-    target: "MUI SvgIcon even-odd winding as a single icon",
+      "IndeterminateCheckBox.js even-odd hole is the 10×2 bar; compile paints that bar as a dash rect on the named box, not a second even-odd icon",
+    target: "MUI IndeterminateCheckBox even-odd as a second icon",
     reason: "lowered",
   },
   {
@@ -575,6 +577,13 @@ const antdRefusals = makeRefusals("antd", [
     evidence: "genCheckboxStyle hover borderColor colorPrimary — not this teaching",
     target: "AntD hover border",
     reason: "refused-by-recipe",
+  },
+  {
+    id: "refusal-indeterminate-square",
+    evidence:
+      "index.js:163-164 indeterminate ::after is fontSizeLG/2 × fontSizeLG/2 colorPrimary. v2 minted that square and it read as a filled tile. Compile paints width fontSizeLG/2 × lineWidthBold — a named dash, not an invented Polar bar",
+    target: "AntD indeterminate 8×8 square fill",
+    reason: "lowered",
   },
 ]);
 

@@ -1,0 +1,56 @@
+{
+  "artifactVersion": "checkbox-prepare-v3-source-notes",
+  "status": "prepare-landed",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "oldStayPageIds": ["183:74742", "196:76370"],
+  "doNotDeleteOldStay": true,
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "shapeDecisionToCarry": "MUI ticks are the CheckBox.js even-odd compound path filled with primary, paper behind the hole, no white overlay, no leftover stroke or effect. AntD ::after is an L of borders; v3 bakes rotate(45deg) into the path (rotation 0) so it reads as a check, not a chevron. AntD indeterminate source is an 8×8 primary square (index.js:163-164); compile lowers that to fontSizeLG/2 × lineWidthBold (8×2) — a named dash, refusal-indeterminate-square.",
+  "taught": {
+    "ir": "recipe/figma-ir.ts VectorNodeSchema windingRule evenodd|nonzero; writer clears vector.effects and node.strokes when IR has no strokes",
+    "writer": "recipe/checkbox-figma-writer.ts CHECKBOX_FIGMA_WRITER_VERSION 3. Refuses 183:74742 and 196:76370. windingRule EVENODD when geom says evenodd.",
+    "Astryx": {
+      "file": "examples/astryx/.astryx-sandbox/node_modules/@astryxdesign/core/src/CheckboxInput/CheckboxInput.tsx",
+      "lines": "562-576 path M8.5 2.5L4 7.5L1.5 5 viewBox 0 0 10 10 stroke 1.5 round; 210-218 checkmarkSizeStyles.md 14×14 (path × 1.4 → stroke 2.1)",
+      "compiled": "centered stroke VECTOR M11.9 3.5 L5.6 10.5 L2.1 7 stroke 2.1 — still a check, not a chevron"
+    },
+    "MUI": {
+      "file": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/internal/svg-icons/CheckBox.js",
+      "lines": "14-16 even-odd compound path M19 3H5c-1.11… plus hole",
+      "indeterminate": "IndeterminateCheckBox.js:14-16 hole is 10×2 bar at (7,11)",
+      "compiled": "fill VECTOR evenodd primary #1976d2; checked boxFill paper #fff border transparent so the hole reads white; no overlay path; effects=[]; strokes=[]"
+    },
+    "Ant Design": {
+      "file": "examples/antd/.antd-sandbox/node_modules/antd/es/checkbox/style/index.js",
+      "lines": "82-97 ::after L-stroke width checkboxSize/14*5 height checkboxSize/14*8 lineWidthBold 2 rotate(45deg); 130-137 checked opacity 1 scale 1; 160-168 indeterminate 8×8 colorPrimary square",
+      "compiled": "baked path M7.677 0.000 L2.626 5.051 L0.000 2.424 rotation 0 placement center stroke 2 square caps. Dash 8×2 named lowering of the 8×8 square."
+    }
+  },
+  "receipted": [
+    "AntD wrapper hover / motion",
+    "MUI ripple / focus ring / color axis",
+    "AntD indeterminate source square lowered to 8×2 dash (refusal-indeterminate-square)"
+  ],
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:76022",
+    "196:76370",
+    "197:76679",
+    "197:76903",
+    "198:77048",
+    "198:77177"
+  ]
+}

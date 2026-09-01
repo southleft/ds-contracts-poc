@@ -1,0 +1,49 @@
+{
+  "artifactVersion": "textarea-prepare-v3-source-notes",
+  "status": "prepare-landed",
+  "recipeLanded": true,
+  "liveFigma": false,
+  "oldStayPageIds": ["183:75495", "198:77048"],
+  "doNotDeleteOldStay": true,
+  "doNotRemintInput": "115:295378",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ",
+  "shapeDecisionToCarry": "v2 empty overlap was a fail, not a named rest. Official outlined MUI hides the placeholder until shrink/focus. Content=focus is the named focused-empty column from InputLabel shrink = filled || focused. No invented focus ring. Astryx/AntD stay stacked; their focus column reuses empty colors and looks the same as empty.",
+  "taught": {
+    "MUI": {
+      "InputLabel.js": {
+        "file": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/InputLabel/InputLabel.js",
+        "rest": "148-156 outlined transform translate(14px, 16px) scale(1)",
+        "shrink": "166-176 outlined shrink translate(14px, -9px) scale(0.75)",
+        "shrinkWhen": "197-199 shrink = filled || focused || adornedStart"
+      },
+      "InputBase.js": {
+        "file": "recipe/sandboxes/input-field-mui/node_modules/@mui/material/InputBase/InputBase.js",
+        "placeholder": "179-188 label[data-shrink=false] hides placeholder; :focus shows it"
+      },
+      "compiled": "Content empty|focus|value. Floating empty hides textarea/value. Floating focus and value shrink the label to the notch and show text. Focus binds empty colors. 2px primary focus ring remains receipted."
+    },
+    "Astryx": "stacked; Content=focus reuses empty colors; placeholder stays visible (native textarea)",
+    "Ant Design": "stacked; Content=focus reuses empty colors; placeholder stays visible"
+  },
+  "doNotTouchSignedPages": [
+    "115:295378",
+    "163:35981",
+    "183:70641",
+    "173:48924",
+    "181:64873",
+    "183:69150",
+    "85:6781",
+    "183:74742",
+    "183:75031",
+    "183:75302",
+    "183:75495",
+    "183:76022",
+    "196:76370",
+    "197:76679",
+    "197:76903",
+    "198:77048",
+    "198:77177"
+  ]
+}
