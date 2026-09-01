@@ -1,0 +1,3895 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Slider",
+  "config": "extract/computed/configs/astryx-core.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "slider",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "isolation",
+        "value": "isolate"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "touch-action",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider-track",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "slider-track",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "slider-track",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "cursor",
+        "value": "grab"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "cursor",
+        "value": "grab"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "tooltip",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tooltip",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "tooltip",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tooltip",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Slider",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 6,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 4632,
+      "cellsEqual": 4161,
+      "pctEqual": 89.83160621761658,
+      "rowsFullyEqual": 0,
+      "rows": 24
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 24,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 125,
+      "mintedLeavesUnfolded": 123,
+      "baseBindings": 141,
+      "stateBindings": 0,
+      "codeOnlyChannels": 61,
+      "overflowBindings": 2,
+      "folds": 40
+    },
+    "worstRows": [
+      {
+        "key": "vertical.tooltip__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 28,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "vertical.tooltip__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 28,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "horizontal.tooltip__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 27,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "vertical.tooltip__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 27,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "vertical.tooltip__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 27,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "horizontal.tooltip__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "horizontal.tooltip__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "horizontal.tooltip__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 26,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        24
+      ],
+      [
+        "label.align-items",
+        24
+      ],
+      [
+        "label.display",
+        24
+      ],
+      [
+        "label.text-size-adjust",
+        24
+      ],
+      [
+        "slider.text-size-adjust",
+        24
+      ],
+      [
+        "part-1-0.anchor-name",
+        24
+      ],
+      [
+        "part-1-0.text-size-adjust",
+        24
+      ],
+      [
+        "slider-track.text-size-adjust",
+        24
+      ],
+      [
+        "slider-track.transform",
+        24
+      ],
+      [
+        "part-1-0-1.text-size-adjust",
+        24
+      ],
+      [
+        "part-1-0-1.transform",
+        24
+      ],
+      [
+        "slider-thumb-2.left",
+        16
+      ],
+      [
+        "slider-thumb-2.right",
+        16
+      ],
+      [
+        "slider-thumb-2.text-size-adjust",
+        16
+      ],
+      [
+        "slider-thumb-2.transform",
+        16
+      ]
+    ],
+    "namedLosses": [
+      "overflow: slider-thumb-2.left — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "overflow: slider-thumb-2.right — resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "code-only: slider.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-0.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-0.justify-content — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-track.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-track.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: part-1-0-1.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-0-1.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: slider-thumb-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-thumb-2.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: part-1-0-2.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-0-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: part-1-0-2.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-thumb.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-thumb.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: slider-thumb.transform — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "code-only: tooltip.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.animation-fill-mode — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.animation-timing-function — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.position — declared-channel value outside the bounded grammar — named residue (v15)",
+      "code-only: tooltip.position-anchor — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.position-area — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.position-try-fallbacks — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: tooltip.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-2.word-break — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label-3.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only[active]: part-1-0.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[active]: slider-thumb-2.outline-color — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[active]: slider-thumb-2.outline-offset — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[active]: slider-thumb-2.outline-style — declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[active]: slider-thumb-2.outline-width — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[active]: slider-thumb.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[active]: slider-thumb.outline-color — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[active]: slider-thumb.outline-offset — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[active]: slider-thumb.outline-style — declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[active]: slider-thumb.outline-width — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[active]: tooltip.display — declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[active]: tooltip.overlay — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[active]: tooltip.position-anchor — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[focus-visible]: part-1-0.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[focus-visible]: slider-thumb-2.outline-color — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[focus-visible]: slider-thumb-2.outline-offset — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[focus-visible]: slider-thumb-2.outline-style — declared-channel state delta on 4/6 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[focus-visible]: slider-thumb-2.outline-width — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[focus-visible]: slider-thumb.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[focus-visible]: slider-thumb.outline-color — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[focus-visible]: slider-thumb.outline-offset — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[focus-visible]: slider-thumb.outline-style — declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[focus-visible]: slider-thumb.outline-width — default-state values not kind-compatible for padding — cannot correlate",
+      "code-only[focus-visible]: tooltip.display — declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue",
+      "code-only[focus-visible]: tooltip.overlay — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[focus-visible]: tooltip.position-anchor — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[hover]: part-1-0.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[hover]: slider-thumb.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+      "code-only[hover]: tooltip.position-anchor — value shape outside mintable kinds and outside the declared vocabulary"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+      "leavesAdded": 444,
+      "divergent": [
+        {
+          "token": "imported.slider.label-2.color",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-dark}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.slider.label.color",
+          "fresh": "#4e606f",
+          "shipped": "{color-text-secondary}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.part-1-0-1.left.vertical.text",
+          "fresh": "107.234px",
+          "shipped": "107.156px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.part-1-0-1.right.horizontal.text",
+          "fresh": "128.688px",
+          "shipped": "128.609px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.part-1-0-1.right.vertical.text",
+          "fresh": "103.234px",
+          "shipped": "103.172px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.part-1-0-1.width.horizontal.text",
+          "fresh": "85.7812px",
+          "shipped": "85.7188px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.part-1-0.width.text",
+          "fresh": "214.469px",
+          "shipped": "214.328px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.slider-track.background-color",
+          "fresh": "#ccd3db",
+          "shipped": "{color-track}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.slider.slider-track.left.vertical.text",
+          "fresh": "107.234px",
+          "shipped": "107.156px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.slider-track.right.vertical.text",
+          "fresh": "103.234px",
+          "shipped": "103.172px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.slider-track.width.horizontal.text",
+          "fresh": "214.469px",
+          "shipped": "214.328px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.tooltip.background-color",
+          "fresh": "#0a1317",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.slider.tooltip.color",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-dark}",
+          "resolvedEqual": true
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "horizontal.tooltip__default",
+        "channelsCompared": 245,
+        "channelsEqual": 219,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_t_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_u_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "x1ahk7ht-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_u_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-block-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.tooltip__hover",
+        "channelsCompared": 245,
+        "channelsEqual": 219,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_12_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_13_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "x1ahk7ht-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_13_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-block-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.tooltip__focus-visible",
+        "channelsCompared": 245,
+        "channelsEqual": 218,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_17_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_18_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "x1ahk7ht-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_18_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-block-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.tooltip__active",
+        "channelsCompared": 245,
+        "channelsEqual": 219,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_1c_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_1d_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "x1ahk7ht-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_1d_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-block-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.text__default",
+        "channelsCompared": 179,
+        "channelsEqual": 163,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_1h_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "85.7812px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "176.469px",
+            "theirs": "108.688px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.text__hover",
+        "channelsCompared": 179,
+        "channelsEqual": 163,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_1l_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "85.7812px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "176.469px",
+            "theirs": "108.688px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.text__focus-visible",
+        "channelsCompared": 179,
+        "channelsEqual": 163,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_1p_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "85.7812px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "176.469px",
+            "theirs": "108.688px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.text__active",
+        "channelsCompared": 179,
+        "channelsEqual": 163,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_1t_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "85.7812px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "176.469px",
+            "theirs": "108.688px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.none__default",
+        "channelsCompared": 155,
+        "channelsEqual": 140,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_21_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "96px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "208px",
+            "theirs": "124px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.none__hover",
+        "channelsCompared": 155,
+        "channelsEqual": 140,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_25_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "96px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "208px",
+            "theirs": "124px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.none__focus-visible",
+        "channelsCompared": 155,
+        "channelsEqual": 140,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_29_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "96px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "208px",
+            "theirs": "124px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "horizontal.none__active",
+        "channelsCompared": 155,
+        "channelsEqual": 140,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2d_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, 0, -2)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "0px",
+            "theirs": "96px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "208px",
+            "theirs": "124px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, -10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.tooltip__default",
+        "channelsCompared": 245,
+        "channelsEqual": 218,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2h_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2i_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "xu7jd1z-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2i_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-inline-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.tooltip__hover",
+        "channelsCompared": 245,
+        "channelsEqual": 218,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2m_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2n_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "xu7jd1z-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2n_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-inline-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.tooltip__focus-visible",
+        "channelsCompared": 245,
+        "channelsEqual": 217,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2r_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2s_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "xu7jd1z-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_2s_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-inline-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.tooltip__active",
+        "channelsCompared": 245,
+        "channelsEqual": 217,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_30_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_31_"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-duration",
+            "ours": "0s",
+            "theirs": "0.23s"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-fill-mode",
+            "ours": "none",
+            "theirs": "backwards"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-name",
+            "ours": "none",
+            "theirs": "xu7jd1z-B"
+          },
+          {
+            "part": "tooltip",
+            "channel": "animation-timing-function",
+            "ours": "ease",
+            "theirs": "cubic-bezier(0.24, 1, 0.4, 1)"
+          },
+          {
+            "part": "tooltip",
+            "channel": "display",
+            "ours": "none",
+            "theirs": "block"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position",
+            "ours": "static",
+            "theirs": "fixed"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-anchor",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_31_"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-area",
+            "ours": "none",
+            "theirs": "self-inline-start"
+          },
+          {
+            "part": "tooltip",
+            "channel": "position-try-fallbacks",
+            "ours": "none",
+            "theirs": "flip-block, flip-inline, flip-block flip-inline"
+          },
+          {
+            "part": "tooltip",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label-2",
+            "channel": "word-break",
+            "ours": "normal",
+            "theirs": "break-word"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.text__default",
+        "channelsCompared": 179,
+        "channelsEqual": 162,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_35_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "88.2344px",
+            "theirs": "107.234px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "88.2344px",
+            "theirs": "87.2344px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.text__hover",
+        "channelsCompared": 179,
+        "channelsEqual": 162,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_39_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "88.2344px",
+            "theirs": "107.234px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "88.2344px",
+            "theirs": "87.2344px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.text__focus-visible",
+        "channelsCompared": 179,
+        "channelsEqual": 162,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_3d_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "88.2344px",
+            "theirs": "107.234px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "88.2344px",
+            "theirs": "87.2344px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.text__active",
+        "channelsCompared": 179,
+        "channelsEqual": 162,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_3h_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "88.2344px",
+            "theirs": "107.234px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "88.2344px",
+            "theirs": "87.2344px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          },
+          {
+            "part": "label-3",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.none__default",
+        "channelsCompared": 155,
+        "channelsEqual": 139,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_3l_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "104px",
+            "theirs": "120px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "104px",
+            "theirs": "100px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.none__hover",
+        "channelsCompared": 155,
+        "channelsEqual": 139,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_3p_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "104px",
+            "theirs": "120px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "104px",
+            "theirs": "100px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.none__focus-visible",
+        "channelsCompared": 155,
+        "channelsEqual": 139,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_3t_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "104px",
+            "theirs": "120px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "104px",
+            "theirs": "100px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "vertical.none__active",
+        "channelsCompared": 155,
+        "channelsEqual": 139,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "label",
+            "channel": "align-items",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "label",
+            "channel": "display",
+            "ours": "block",
+            "theirs": "flex"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "anchor-name",
+            "ours": "none",
+            "theirs": "--astryx-layer-_r_41_"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "justify-content",
+            "ours": "normal",
+            "theirs": "center"
+          },
+          {
+            "part": "part-1-0",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-track",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "part-1-0-1",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -2, 0)"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "left",
+            "ours": "104px",
+            "theirs": "120px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "right",
+            "ours": "104px",
+            "theirs": "100px"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "slider-thumb-2",
+            "channel": "transform",
+            "ours": "none",
+            "theirs": "matrix(1, 0, 0, 1, -10, 10)"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

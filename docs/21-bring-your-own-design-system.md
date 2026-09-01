@@ -402,7 +402,7 @@ name** rather than folded into an average.
 
 Source of truth: the `CaptureConfig` / `ComponentConfig` interfaces in
 [`extract/computed/capture.ts`](../extract/computed/capture.ts). Worked
-examples: the 14 committed capture configs in `extract/computed/configs/`
+examples: the 15 committed capture configs in `extract/computed/configs/`
 (`carbon`, `mui`, `tailwind`, `astryx`, `polaris`, `polaris-depth`, `altitude`,
 `shadcn`, `fluent`, `antd`, `chakra` — Phase 4 reader subject, docs/35 — plus
 the three HELD-OUT exam subjects `radix-themes`, `bootstrap5`, `day-picker`,

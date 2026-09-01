@@ -1,0 +1,1283 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Badge",
+  "config": "extract/computed/configs/astryx-core.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Badge",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 14,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 1960,
+      "cellsEqual": 1904,
+      "pctEqual": 97.14285714285714,
+      "rowsFullyEqual": 0,
+      "rows": 56
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 56,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 37,
+      "mintedLeavesUnfolded": 177,
+      "baseBindings": 14,
+      "stateBindings": 0,
+      "codeOnlyChannels": 1,
+      "overflowBindings": 0,
+      "folds": 10
+    },
+    "worstRows": [
+      {
+        "key": "neutral__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "neutral__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "neutral__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "neutral__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "info__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        56
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+      "leavesAdded": 529,
+      "divergent": [
+        {
+          "token": "imported.badge.root.background-color.blue",
+          "fresh": "#0171e333",
+          "shipped": "{color-background-blue}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.cyan",
+          "fresh": "#03a7d733",
+          "shipped": "{color-background-cyan}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.error",
+          "fresh": "#e3193b",
+          "shipped": "#e33f4a",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.green",
+          "fresh": "#24bb5e33",
+          "shipped": "{color-background-green}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.info",
+          "fresh": "#0064e0",
+          "shipped": "#0074e2",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.neutral",
+          "fresh": "#0536591a",
+          "shipped": "#e5e5e5",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.orange",
+          "fresh": "#f2790233",
+          "shipped": "{color-background-orange}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.pink",
+          "fresh": "#e638b333",
+          "shipped": "{color-background-pink}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.purple",
+          "fresh": "#7952ff33",
+          "shipped": "{color-background-purple}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.red",
+          "fresh": "#e3193b33",
+          "shipped": "{color-background-red}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.success",
+          "fresh": "#0d8626",
+          "shipped": "#198100",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.teal",
+          "fresh": "#0db7af33",
+          "shipped": "{color-background-teal}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.warning",
+          "fresh": "#e9af08",
+          "shipped": "#ffce2f",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.background-color.yellow",
+          "fresh": "#e2a40033",
+          "shipped": "{color-background-yellow}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.blue",
+          "fresh": "#042f97",
+          "shipped": "{color-text-blue}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.cyan",
+          "fresh": "#014975",
+          "shipped": "{color-text-cyan}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.green",
+          "fresh": "#09441f",
+          "shipped": "{color-text-green}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.info",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-accent}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.neutral",
+          "fresh": "#0a1317",
+          "shipped": "#262626",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.orange",
+          "fresh": "#6b2203",
+          "shipped": "{color-text-orange}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.pink",
+          "fresh": "#650053",
+          "shipped": "{color-text-pink}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.purple",
+          "fresh": "#3e0697",
+          "shipped": "{color-text-purple}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.red",
+          "fresh": "#7b0210",
+          "shipped": "{color-text-red}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.success",
+          "fresh": "#ffffff",
+          "shipped": "{color-on-success}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.badge.root.color.teal",
+          "fresh": "#083943",
+          "shipped": "{color-text-teal}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.warning",
+          "fresh": "#0a1317",
+          "shipped": "{color-on-warning}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.badge.root.color.yellow",
+          "fresh": "#753f07",
+          "shipped": "{color-text-yellow}",
+          "resolvedEqual": false
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "neutral__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "neutral__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "neutral__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "neutral__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "info__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "success__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "warning__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "error__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__default",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__hover",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (hover): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__focus-visible",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__active",
+        "channelsCompared": 35,
+        "channelsEqual": 34,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "interaction-driver-failed (active): locator.hover: Element is outside of the viewport; original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

@@ -1,0 +1,1754 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Card",
+  "config": "extract/computed/configs/astryx-core.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-x",
+        "value": "clip"
+      },
+      {
+        "part": "root",
+        "channel": "overflow-y",
+        "value": "clip"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Card",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 13,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 1560,
+      "cellsEqual": 1508,
+      "pctEqual": 96.66666666666667,
+      "rowsFullyEqual": 0,
+      "rows": 52
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 52,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 174,
+      "mintedLeavesUnfolded": 174,
+      "baseBindings": 21,
+      "stateBindings": 0,
+      "codeOnlyChannels": 1,
+      "overflowBindings": 0,
+      "folds": 0
+    },
+    "worstRows": [
+      {
+        "key": "default__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "default__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "default__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "default__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "transparent__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "transparent__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "transparent__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "transparent__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 1,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.text-size-adjust",
+        52
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+      "leavesAdded": 392,
+      "divergent": [
+        {
+          "token": "imported.card.root.background-color.blue",
+          "fresh": "#0171e333",
+          "shipped": "{color-background-blue}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.cyan",
+          "fresh": "#03a7d733",
+          "shipped": "{color-background-cyan}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.default",
+          "fresh": "#ffffff",
+          "shipped": "{color-background-card}",
+          "resolvedEqual": true
+        },
+        {
+          "token": "imported.card.root.background-color.gray",
+          "fresh": "#0a131733",
+          "shipped": "{color-background-gray}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.green",
+          "fresh": "#24bb5e33",
+          "shipped": "{color-background-green}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.muted",
+          "fresh": "#0536590c",
+          "shipped": "{color-background-muted}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.orange",
+          "fresh": "#f2790233",
+          "shipped": "{color-background-orange}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.pink",
+          "fresh": "#e638b333",
+          "shipped": "{color-background-pink}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.purple",
+          "fresh": "#7952ff33",
+          "shipped": "{color-background-purple}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.red",
+          "fresh": "#e3193b33",
+          "shipped": "{color-background-red}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.teal",
+          "fresh": "#0db7af33",
+          "shipped": "{color-background-teal}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.background-color.yellow",
+          "fresh": "#e2a40033",
+          "shipped": "{color-background-yellow}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.blue",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.cyan",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.gray",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.green",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.muted",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.orange",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.pink",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.purple",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.red",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.teal",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.transparent",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-bottom-color.yellow",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.blue",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.cyan",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.gray",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.green",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.muted",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.orange",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.pink",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.purple",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.red",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.teal",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.transparent",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-left-color.yellow",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.blue",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.cyan",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.gray",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.green",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.muted",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.orange",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.pink",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.purple",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.red",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.teal",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.transparent",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-right-color.yellow",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.blue",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.cyan",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.default",
+          "fresh": "#ccd3db",
+          "shipped": "{color-border-emphasized}",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.gray",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.green",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.muted",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.orange",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.pink",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.purple",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.red",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.teal",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.transparent",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.border-top-color.yellow",
+          "fresh": "#000000",
+          "shipped": "#171717",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.blue",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.cyan",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.default",
+          "fresh": "15px",
+          "shipped": "11px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.gray",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.green",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.muted",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.orange",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.pink",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.purple",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.red",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.teal",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.transparent",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-bottom.yellow",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.blue",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.cyan",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.default",
+          "fresh": "15px",
+          "shipped": "11px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.gray",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.green",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.muted",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.orange",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.pink",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.purple",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.red",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.teal",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.transparent",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-left.yellow",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.blue",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.cyan",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.default",
+          "fresh": "15px",
+          "shipped": "11px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.gray",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.green",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.muted",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.orange",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.pink",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.purple",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.red",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.teal",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.transparent",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-right.yellow",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.blue",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.cyan",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.default",
+          "fresh": "15px",
+          "shipped": "11px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.gray",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.green",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.muted",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.orange",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.pink",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.purple",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.red",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.teal",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.transparent",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        },
+        {
+          "token": "imported.card.root.padding-top.yellow",
+          "fresh": "16px",
+          "shipped": "12px",
+          "resolvedEqual": false
+        }
+      ]
+    },
+    "rows": [
+      {
+        "key": "default__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "default__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "transparent__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "transparent__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "transparent__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "transparent__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "muted__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "muted__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "muted__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "muted__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "blue__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "cyan__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "gray__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "green__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "orange__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "pink__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "purple__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "red__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "teal__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__default",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__hover",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__focus-visible",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "yellow__active",
+        "channelsCompared": 30,
+        "channelsEqual": 29,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

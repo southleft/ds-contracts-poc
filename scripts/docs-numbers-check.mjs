@@ -158,6 +158,22 @@ const FID_CARRIAGE = FID_UNSCORED - FID_INTERACTION;
 // refusal below: a corpus this list has never heard of is a failure by name,
 // so the next library cannot be silently left out the way Fluent was.
 const LIB_DIRS = new Set(['altitude', 'antd', 'astryx', 'carbon', 'chakra', 'fluent', 'mui', 'polaris', 'shadcn', 'tailwind']);
+
+/**
+ * Capture directories that are a SECOND MOUNT of a library already in LIB_DIRS —
+ * same package, same version, mounted differently. Declared, not counted: adding
+ * one to LIB_DIRS would measure every capture number over an inflated
+ * population, and leaving it undeclared makes it a stray, which is the guard
+ * that should fire for an accidental capture dir.
+ *
+ * astryx-core: @astryxdesign/core with NO theme provider. `astryx/` follows the
+ * library's README quick start (<Theme theme={neutralTheme}>), which overrides
+ * palette, body font and radius scale; the recipe fixtures transcribe the
+ * un-themed core defaults, so they could not be verified against the themed
+ * capture. Mirrors ALTERNATE_MOUNTS in scripts/build-capability-report.mjs —
+ * both scripts keep their own registry, so both have to be told.
+ */
+const ALTERNATE_MOUNTS = new Set(['astryx-core']);
 const scorecards = (() => {
   const outDir = path.join(ROOT, 'extract/computed/out');
   const acc = [];
@@ -180,7 +196,7 @@ const scorecards = (() => {
 // The refusal that keeps the explicit list above honest. `conformance` is the
 // synthetic CSS/DOM frontier fixture and is deliberately not a library.
 for (const stray of new Set(
-  scorecards.filter((s) => !LIB_DIRS.has(s.corpus) && s.corpus !== 'conformance').map((s) => s.corpus),
+  scorecards.filter((s) => !LIB_DIRS.has(s.corpus) && s.corpus !== 'conformance' && !ALTERNATE_MOUNTS.has(s.corpus)).map((s) => s.corpus),
 )) {
   fail('extract/computed/out', `scorecards under "${stray}/" belong to no library this script knows — add it to LIB_DIRS (and to docs/22 §8.3) or every capture number below is measured over the wrong population`);
 }
