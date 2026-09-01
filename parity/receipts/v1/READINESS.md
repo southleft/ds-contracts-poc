@@ -2,7 +2,7 @@
 
 Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their commands and their evidence references are parsed from docs/26-v1-definition.md — nothing here is listed by hand. Seconds are measured and move run to run; nothing else in this file should.
 
-- **commit:** `3240e39055aa4c2b4bc2943d362a4273d6a3936f`
+- **commit:** `9553a6a5648b46a0b475cb60e53cec7f318b2532`
 - **tree dirty at start:** no
 - **definition:** docs/26-v1-definition.md sha256 `11df3102bf4f1579`
 - **flags:** (none)
@@ -15,7 +15,7 @@ Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their com
 |---|---|---|---|---|
 | V1-SCOPE-01 | **GREEN** | ✔ `npm run docs:check` | 0 | ✔ 23-known-limitations.md#a4-out-of-scope-by-decision--not-gaps<br>human: Known Limitations §A.4 remains linked from the release notes |
 | V1-JOURNEY-01 | **GREEN** | ✔ `npm run plugin:ui-check` && ✔ `npm run extract:figma:roundtrip:uui` && ✔ `npm run ledger:fresh` && ✔ `npm run conformance:canvas` | 13 | ✔ parity/receipts/phase-2/FIGMA-DS-EXAM.md |
-| V1-JOURNEY-02 | **GREEN** | ✔ `npm run test:onboarding` && ✔ `npm run paste:check` && ✔ `npm run plugin:check` && ✔ `npm run first-party-bundle:check` && ✔ `npm run maintain` | 71 | — |
+| V1-JOURNEY-02 | **GREEN** | ✔ `npm run test:onboarding` && ✔ `npm run paste:check` && ✔ `npm run plugin:check` && ✔ `npm run first-party-bundle:check` && ✔ `npm run maintain` | 69 | — |
 | V1-JOURNEY-03 | **GREEN** | ✔ `npm run reconcile` && ✔ `npm run diagnose` && ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 2 | ✔ 23-known-limitations.md#b11-adopting-a-hand-built-figma-set-is-not-a-verb-this-tool-has<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed<br>mentions (not run): `npm run reconcile && npm run diagnose`<br>mentions (not run): `npm run parity:snapshot:rest` |
 | V1-JOURNEY-04 | **GREEN** | ✔ `npm run recipe:canvas-to-code:held-out:check` | 2 | ✔ 32-recipe-ir-pivot.md#merge-execution-2026-08-30 |
 | V1-CLASS-01 | **GREEN** | ✔ `npm run capability:fresh` && ✔ `npm run extract:computed:drift` | 0 | ✔ 23-known-limitations.md#c11-which-component-archetypes-are-proven--the-actionable-cut<br>✔ 23-known-limitations.md#d32-the-two-acceptance-rows-that-were-red-on-the-commit-itself--closed |
@@ -23,7 +23,7 @@ Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their com
 | V1-CLASS-03 | **GREEN** | ✔ `npm run recipe:button:check` && ✔ `npm run recipe:input-field:check` && ✔ `npm run recipe:combobox:check` && ✔ `npm run recipe:table:check` && ✔ `npm run recipe:calendar:check` && ✔ `npm run recipe:pivot-status:check` | 18 | ✔ 32-recipe-ir-pivot.md#e4-applied-2026-08-30 |
 | V1-COMPAT-01 | **GREEN** | ✔ `node -e "const r=require('./package.json'),c=require('./packages/cli/package.json');if(r.engines.node!=='>=20'\|\|c.engines.node!=='>=20'\|\|r.peerDependencies.react!=='>=18'\|\|r.peerDependencies['react-dom']!=='>=18')process.exit(1)"` | 0 | — |
 | V1-COMPAT-02 | **GREEN** | ✔ `npm run schema` && ✔ `npm run schema:fresh` && ✔ `npm run contracts:migrate:check` && ✔ `npm run slot-constraints:check` | 7 | ✔ ../CONTRIBUTING.md#contract-change-policy<br>human: release PR includes a contract-change classification using CONTRIBUTING § Contract change policy |
-| V1-COMPAT-03 | **RED** | ✖ `npm run eval` && · `npm run eval:record:check` && · `npm run generation:atomic:check` && · `npm run provenance:check` && · `npm run figma:fresh` && · `npm run verify:catalog` | 3089 | — |
+| V1-COMPAT-03 | **RED** | ✖ `npm run eval` && · `npm run eval:record:check` && · `npm run generation:atomic:check` && · `npm run provenance:check` && · `npm run figma:fresh` && · `npm run verify:catalog` | 3242 | — |
 | V1-COMPAT-04 | **GREEN** | ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run plugin:ui-check` ⟨reused V1-JOURNEY-01⟩ | 0 | ✔ 23-known-limitations.md#a3-the-architecture-the-plugin-cannot-run-your-code<br>human: Known Limitations §§A.3–A.4 remains linked from release notes |
 | V1-EVID-01 | **RED** | ✖ `npm run eval` ⟨reused V1-COMPAT-03⟩ && · `npm run docs:check` && · `npm run capability:fresh` && · `npm run generation:atomic:check` && · `npm run static:empty-content:check` && · `npm run code-only-facts:check` | 0 | — |
 | V1-EVID-02 | **GREEN** | ✔ `npm run capability:fresh` ⟨reused V1-CLASS-01⟩ && ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md#c1-coverage--how-much-of-a-library-is-actually-captured |
@@ -31,10 +31,10 @@ Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their com
 | V1-EVID-04 | **GREEN** | ✔ `npm run snapshot:schema:check` && ✔ `npm run canvas:binding:check` && ✔ `npm run variant-drift:check` | 10 | ✔ ../parity/receipts/live-figma-variant-drift.md |
 | V1-EVID-05 | **GREEN** | ✔ `npm run catalog:visual:check` && ✔ `npm run maintain:visual` | 24 | — |
 | V1-SEC-01 | **GREEN** | ✔ `npm run test:worker` && ✔ `npm run test:playground` && ✔ `npm run typecheck:worker` && ✔ `npm run plugin:check` ⟨reused V1-JOURNEY-02⟩ && ✔ `npm run plugin:ui-check` ⟨reused V1-JOURNEY-01⟩ | 2 | ✔ 23-known-limitations.md#b14-the-standing-cifigma-channel-is-half-a-channel<br>human: release security review records a clean secret scan and links Known Limitations §B.14. |
-| V1-SEC-02 | **GREEN** | ✔ `npm audit --omit=dev --audit-level=high` | 0 | — |
-| V1-CI-01 | **RED** | ✖ `npm run ci:lanes` && · `npm run ci:lane fast` && · `npm run ci:lane full` && · `npm run ci:lane catalog-visual` && · `npm run test:v1-definition` && · `npm run v1:definition:check` && · `npm run provenance:check` && · `npm run eval:record:check` | 1 | — |
-| V1-CI-02 | **GREEN** | ✔ `npm run prep:core` && ✔ `npm --prefix packages/schema run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/emitter-web-components run build` ⟨reused prep⟩ && ✔ `npm run build:lib` ⟨reused prep⟩ && ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` && ✔ `npm run site:build` && ✔ `npm run publish:check` && ✔ `npm run verify:package` && ✔ `npm run verify:published` && ✔ `npm run schema:fresh` ⟨reused V1-COMPAT-02⟩ && ✔ `npm run figma:fresh` && ✔ `npm run generated:fresh` && ✔ `npm run verify:catalog` && ✔ `npm run catalog:visual:check` ⟨reused V1-EVID-05⟩ | 21 | — |
-| V1-REL-01 | **RED** | — (evidence only) | 26 | human: the release PR contains a complete P0/P1 audit ledger with task ID, closing commit, acceptance command, and result<br>ledger: 60 rows — closed 51, refuted 2, open-human 2, red 5 ([AUDIT-LEDGER.md](AUDIT-LEDGER.md))<br>audit ledger: AUD-V07 RED, AUD-V09 RED, AUD-U17 OPEN-HUMAN, AUD-U19 RED, AUD-U22 OPEN-HUMAN, AUD-U29 RED, AUD-U33 RED |
+| V1-SEC-02 | **GREEN** | ✔ `npm audit --omit=dev --audit-level=high` | 1 | — |
+| V1-CI-01 | **RED** | ✔ `npm run ci:lanes` && ✖ `npm run ci:lane fast` && · `npm run ci:lane full` && · `npm run ci:lane catalog-visual` && · `npm run test:v1-definition` && · `npm run v1:definition:check` && · `npm run provenance:check` && · `npm run eval:record:check` | 366 | — |
+| V1-CI-02 | **GREEN** | ✔ `npm run prep:core` && ✔ `npm --prefix packages/schema run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm --prefix packages/emitter-web-components run build` ⟨reused prep⟩ && ✔ `npm run build:lib` ⟨reused prep⟩ && ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` && ✔ `npm run site:build` && ✔ `npm run publish:check` && ✔ `npm run verify:package` && ✔ `npm run verify:published` && ✔ `npm run schema:fresh` ⟨reused V1-COMPAT-02⟩ && ✔ `npm run figma:fresh` && ✔ `npm run generated:fresh` && ✔ `npm run verify:catalog` && ✔ `npm run catalog:visual:check` ⟨reused V1-EVID-05⟩ | 20 | — |
+| V1-REL-01 | **RED** | — (evidence only) | 26 | human: the release PR contains a complete P0/P1 audit ledger with task ID, closing commit, acceptance command, and result<br>ledger: 60 rows — closed 56, refuted 2, open-human 2, red 0 ([AUDIT-LEDGER.md](AUDIT-LEDGER.md))<br>audit ledger: AUD-U17 OPEN-HUMAN, AUD-U22 OPEN-HUMAN |
 | V1-REL-02 | **RED** | ✔ `npm --prefix packages/cli run build` ⟨reused prep⟩ && ✔ `npm run publish:check` ⟨reused V1-CI-02⟩ && ✔ `npm run verify:published` ⟨reused V1-CI-02⟩<br>after publish: ✔ `npm run plugin:zip` ⟨reused prep⟩ && ✔ `npm run build:playground` ⟨reused V1-CI-02⟩ && ✔ `npm run site:build` ⟨reused V1-CI-02⟩ && ✖ `npm run deploy:check` | 729 | — |
 | V1-REL-03 | **GREEN** | ✔ `npm run docs:check` ⟨reused V1-SCOPE-01⟩ | 0 | ✔ 23-known-limitations.md<br>human: release PR checklist links every deferred audit task to one item below and links the complete Known Limitations |
 
@@ -44,7 +44,7 @@ Written by `npm run v1:readiness` (scripts/v1-readiness.ts). The rows, their com
 
 ## Red and unrun commands — captured tail
 
-### V1-COMPAT-03 — `npm run eval` (exit 1, 3089s)
+### V1-COMPAT-03 — `npm run eval` (exit 1, 3242s)
 
 ```
 e stroke, FC-PSEUDO-STROKE-GLYPH L→SVG, FC-VARIANT-BOOL-LBP, FC-CARBON-TABS-LABEL, FC-FIGMA-CLIP-DEFAULT, FC-ASTRYX-SLIDER-TOOLTIP, FC-SVG-VIEWBOX, FC-FLEX-BASIS, FC-SVG-ROTATION, FC-WIDTH-TOKEN, FC-CONTRAST-ICON, FC-ENUM-HOLE chip, FC-PSEUDO-OVERFLOW, FC-STATE-PREVIEW-NOISE — all green
@@ -66,34 +66,42 @@ painted-decoration-survives-control-equality: altitude Link's underline EQUALS t
 astryx-token-plane-is-the-render-substrate: 177 of 186 committed astryx tokens are comparable against the 11 committed capture(s)' own raw custom-property declarations, and ALL 177 agree (87 disagreed before the theme-neutral re-base — the DTCG was @astryxdesign/core's UNTHEMED defaults while every reference render was made under @astryxdesign/theme-neutral). CSS-keyword font families across 72 fontFamily declaration(s): 0 (allowance 0, was 148) — ZERO remain. The token-plane ones died with the re-base; the 28 that survived it were contract LITERALS and died to one missing alternation in firstFamily(), whose denylist covered the generic families but not the system-font keywords. The allowance was tightened 28 -> 0 in the same change, so the gain cannot be given back.
   ✔ C3-detection  astryx-token-plane-is-the-render-substrate
 
-227/230 evals passed — evals/results.json (commit dbbd44d4)
+227/230 evals passed — evals/results.json (commit 9553a6a5)
 ```
 
-### V1-CI-01 — `npm run ci:lanes` (exit 1, 1s)
+### V1-CI-01 — `npm run ci:lane fast` (exit 1, 365s)
 
 ```
-box live lineage v6 lifecycle test — it is invoked only by the retired recipe:combobox:live:v6 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v6-restore.test.ts — Retired combobox live lineage v6 lifecycle test — it is invoked only by the retired recipe:combobox:live:v6 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v7-authorization.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v7-broker.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v7-extract.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v7-restore.test.ts — Retired combobox live lineage v7 lifecycle test — it is invoked only by the retired recipe:combobox:live:v7 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v8-authorization.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v8-broker.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v8-extract.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v8-restore.test.ts — Retired combobox live lineage v8 lifecycle test — it is invoked only by the retired recipe:combobox:live:v8 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v9-authorization.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v9-broker.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v9-extract.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/combobox-live-v9-restore.test.ts — Retired combobox live lineage v9 lifecycle test — it is invoked only by the retired recipe:combobox:live:v9 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/scene-readback-combobox-v1.test.ts — Retired combobox live lineage v1 lifecycle test — it is invoked only by the retired recipe:combobox:live:v1 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/scene-readback-combobox-v10.test.ts — Retired combobox live lineage v10 lifecycle test — it is invoked only by the retired recipe:combobox:live:v10 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/scene-readback-combobox-v11.test.ts — Retired combobox live lineage v11 lifecycle test — it is invoked only by the retired recipe:combobox:live:v11 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/scene-readback-combobox-v12.test.ts — Retired combobox live lineage v12 lifecycle test — it is invoked only by the retired recipe:combobox:live:v12 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
-  · recipe/scene-readback-combobox-v13.test.ts — Retired combobox live lineage v13 lifecycle test — it is invoked only by the retired recipe:combobox:live:v13 scripts (EXCLUDED above with the family reason) and its lifecycle is superseded by recipe:combobox:live:v42:check, which stays wired in the fast lane.
+  ✔    0.6s  npm run placeholder-ink:check
+  ✔    3.1s  npm run first-party-bundle:check
+  ✔    2.0s  npm run code-connect:check
+  ✔    1.3s  npm run prop-collision:check
+  ✔    0.6s  npm run playground:flow-check
+  ✔    0.2s  npm run extract:figma:visual:anchors
+  ✔    0.1s  npm run visual-truth:report:fresh
+  ✔    0.2s  npm run tokens:snapshot:check
+  ✔    0.2s  npm run figma:rest:refusal:check
+  ✖   10.7s  npm run census:check -- --phase full --allow-red-verdicts
+  ✖   11.7s  npm run census:check -- --self-test
+  ✔    0.5s  npm run canvas:usable:check
+  ✔    0.8s  npm run canvas:usable:self-test
+  ✖   11.6s  npm run census:check -- --phase design-to-code
+  ✔    0.5s  npm run first-pass:check
+  ✔    1.1s  npm run first-pass:check -- --self-test
+  ✔    2.5s  npm run render-browser:check
+  ✔    1.4s  npm run mixed-browser:check
+  ✔    9.2s  npm run door-register:check
+  ✔   11.3s  npm run door-register:self-test
+  ✔    0.3s  npm run lowering:check
+  ✔    1.5s  npm run lowering:check -- --self-test
+  ✔    0.2s  npm run grammar-coverage:check
+  ✔    0.2s  npm run grammar-coverage:check -- --self-test
+  ✔    1.1s  npm run corpus:reproducible:check
+  ✔    0.2s  npm run corpus:reproducible:check -- --self-test
+  ✔    0.9s  npm --prefix packages/cli run test
+  ✔    1.5s  npm --prefix packages/cli run coverage
 
-✖ 1 lane defect(s):
-    `root:recipe:radio:live:v3:generated:check` is gate-shaped but no workflow runs it and EXCLUDED gives no reason — wire it into a lane, or add it to EXCLUDED in .github/scripts/lane-coverage.ts with why
+✖ 3/181 gate(s) failed in lane "fast".
 ```
 
 ### V1-REL-02 — `npm run deploy:check` (exit 1, 729s)
@@ -126,7 +134,7 @@ box live lineage v6 lifecycle test — it is invoked only by the retired recipe:
 ✘ 3 deployed surface(s) DIVERGE from the local build:
   - plugin zip STALE: live is 942148 bytes (sha af19cc985469…), local build is 1117430 bytes (sha 514d2263ec30…) — a designer downloading today gets a different engine than this repo builds
   - playground STALE: live index references [/assets/index-C1ojNmZG.js, /assets/index-oTRYTN6T.css, /assets/rolldown-runtime-aKtaBQYM.js], local build references [/assets/index-COkJOfDr.js, /assets/index-CfaJLxBU.css, /assets/rolldown-runtime-aKtaBQYM.js] — vite renames every chunk on any content change, so these are different builds
-  - spec site STALE: /get-started/ live is 40276 bytes (sha fdf98969ffe6…), local build is 41936 bytes (sha 2948ffd9dedd…)
+  - spec site STALE: /get-started/ live is 40276 bytes (sha fdf98969ffe6…), local build is 41936 bytes (sha 67474ff30be6…)
 
 Redeploy with: npm run deploy   (builds, publishes both Pages projects, then re-runs this check)
 ```
