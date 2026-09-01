@@ -109,7 +109,7 @@ pipeline never opened still counts against it.
 | Altitude | 8 | **91.7** | 94.0 | 5/8 | 8/8 | 6,224 | 90.2 | `extract/computed/out/altitude/<comp>/scorecard.json` |
 | Astryx | 11 | **85.2** | 90.1 | 6/11 | 8/11 | 47,808 | 89.3 | `extract/computed/out/astryx/<comp>/scorecard.json` |
 | Carbon | 10 | **87.5** | 86.7 | 4/10 | 8/10 | 54,297 | 82.8 | `extract/computed/out/carbon/<comp>/scorecard.json` |
-| MUI | 32 | **89.3** | 90.7 | 18/32 | 27/32 | 122,438 | 85.6 | `extract/computed/out/mui/<comp>/scorecard.json` |
+| MUI | 32 | **89.3** | 90.7 | 18/32 | 27/32 | 121,214 | 85.5 | `extract/computed/out/mui/<comp>/scorecard.json` |
 | Polaris | 12 | **89.4** | 91.5 | 7/12 | 11/12 | 200,405 | 90.5 | `extract/computed/out/<comp>/scorecard.json` |
 | shadcn/ui | 11 | **70.7** | 70.4 | 1/11 | 3/11 | 22,516 | 73.6 | `extract/computed/out/shadcn/<comp>/scorecard.json` |
 | Flowbite / Tailwind | 11 | **90.4** | 90.7 | 6/11 | 10/11 | 13,804 | 93.5 | `extract/computed/out/tailwind/<comp>/scorecard.json` |
@@ -216,9 +216,9 @@ No component is omitted. The worst row in the corpus is at the top.
 | `Badge` | Ant Design | 93.4 | 8 × 4 | 4,976 | `extract/computed/out/antd/badge/scorecard.json` |
 | `TextInput` | Astryx | 93.4 | 9 × 4 | 2,736 | `extract/computed/out/astryx/textinput/scorecard.json` |
 | `Badge` | Altitude | 93.8 | 10 × 4 | 1,280 | `extract/computed/out/altitude/badge/scorecard.json` |
-| `Tabs` | MUI | 93.8 | 6 × 4 | 4,320 | `extract/computed/out/mui/tabs/scorecard.json` |
 | `Pagination` | MUI | 94.0 | 1 × 4 | 796 | `extract/computed/out/mui/pagination/scorecard.json` |
 | `Blockquote` | Flowbite / Tailwind | 94.1 | 1 × 4 | 68 | `extract/computed/out/tailwind/blockquote/scorecard.json` |
+| `Tabs` | MUI | 94.1 | 6 × 4 | 3,096 | `extract/computed/out/mui/tabs/scorecard.json` |
 | `Menu` | MUI | 94.2 | 1 × 4 | 171 | `extract/computed/out/mui/menu/scorecard.json` |
 | `Chip` | Altitude | 94.3 | 12 × 4 | 1,968 | `extract/computed/out/altitude/chip/scorecard.json` |
 | `Switch` | Ant Design | 94.3 | 8 × 4 | 5,216 | `extract/computed/out/antd/switch/scorecard.json` |
@@ -565,8 +565,8 @@ npm run capability:fresh
 | `evals/golden.json` | `259ec554f9a0` | 32,256 | generated-source golden manifest |
 | `evals/results.json` | `ed20d3b959a4` | 7,150 | executable claim suite (registry ids + size; the pass column is the suite's own output) |
 | `examples/untitled-ui/renders/fidelity.json` | `0a468d6682bf` | 84,415 | Untitled UI scored fidelity table |
-| `extract/computed/out/**/numbers.json` | `34755eaef150` | 1,763,907 | capture counts + determinism receipts — 256 files |
-| `extract/computed/out/**/scorecard.json` | `9f5de09c45fe` | 21,391,998 | computed-equality per component — 255 files |
+| `extract/computed/out/**/numbers.json` | `6b5e4a808523` | 1,761,286 | capture counts + determinism receipts — 256 files |
+| `extract/computed/out/**/scorecard.json` | `6db418ec8af7` | 21,371,975 | computed-equality per component — 255 files |
 | `extract/figma/conformance/MANIFEST.json` | `8e9caedb5f10` | 113,594 | canvas construct vocabulary |
 | `extract/figma/dagger-census.json` | `4708222bebfc` | 6,968 | dropped-fact receipt census |
 | `extract/figma/roundtrip-uui/report.json` | `3f4d66b6b63c` | 7,704,705 | canvas→code→canvas round trip |
