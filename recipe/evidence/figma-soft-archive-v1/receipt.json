@@ -1,0 +1,209 @@
+{
+  "artifactVersion": "figma-soft-archive-v1",
+  "plan": "docs/35-two-journey-v1-plan.md §7",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project",
+  "deleted": false,
+  "figmaArrangeComponentSet": false,
+  "pageGrouping": "plugin API does not expose page folders or sections; pages remain document children; rename-only",
+  "neverTouchWritten": false,
+  "neverTouchUnchanged": true,
+  "currentPageAfter": {
+    "id": "198:77718",
+    "name": "Recipe Pivot / Checkbox / 548cf953-a473aa6a-ff3a8565-checkbox-v3"
+  },
+  "pageCount": 44,
+  "pages": [
+    {
+      "id": "183:74742",
+      "label": "Checkbox v1",
+      "oldName": "Recipe Pivot / Checkbox / e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+      "newName": "[superseded] Recipe Pivot / Checkbox / e2386e0d-f8e77a54-be0bbae1-checkbox-v1",
+      "action": "renamed"
+    },
+    {
+      "id": "183:75031",
+      "label": "Radio v1",
+      "oldName": "Recipe Pivot / Radio / 98044e9d-4c17efd5-3dd31d13-radio-v1",
+      "newName": "[superseded] Recipe Pivot / Radio / 98044e9d-4c17efd5-3dd31d13-radio-v1",
+      "action": "renamed"
+    },
+    {
+      "id": "183:75302",
+      "label": "Switch v1",
+      "oldName": "Recipe Pivot / Switch / a8686d63-3d086535-f55e4ace-switch-v1",
+      "newName": "[superseded] Recipe Pivot / Switch / a8686d63-3d086535-f55e4ace-switch-v1",
+      "action": "renamed"
+    },
+    {
+      "id": "183:75495",
+      "label": "Textarea v1",
+      "oldName": "Recipe Pivot / Textarea / 830c90b5-e9c10699-09726acb-textarea-v1",
+      "newName": "[superseded] Recipe Pivot / Textarea / 830c90b5-e9c10699-09726acb-textarea-v1",
+      "action": "renamed"
+    },
+    {
+      "id": "183:76022",
+      "label": "Badge v1",
+      "oldName": "Recipe Pivot / Badge / cd44cf69-5db99b22-badge-v1",
+      "newName": "[superseded] Recipe Pivot / Badge / cd44cf69-5db99b22-badge-v1",
+      "action": "renamed"
+    },
+    {
+      "id": "196:76370",
+      "label": "Checkbox v2",
+      "oldName": "Recipe Pivot / Checkbox / 548cf953-c8ce9a83-7856869a-checkbox-v2",
+      "newName": "[superseded] Recipe Pivot / Checkbox / 548cf953-c8ce9a83-7856869a-checkbox-v2",
+      "action": "renamed"
+    },
+    {
+      "id": "198:77048",
+      "label": "Textarea v2",
+      "oldName": "Recipe Pivot / Textarea / c45888d1-b36722e2-ecdda45d-textarea-v2",
+      "newName": "[superseded] Recipe Pivot / Textarea / c45888d1-b36722e2-ecdda45d-textarea-v2",
+      "action": "renamed"
+    },
+    {
+      "id": "115:295378",
+      "label": "Input",
+      "oldName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+      "newName": "Recipe Pivot / Input Field / 4a074b24-e8503dd5-input-v5",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "163:35981",
+      "label": "Combobox V41",
+      "oldName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+      "newName": "Recipe Pivot / Combobox / 70c24cbd-d27f2e85-combobox-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:70641",
+      "label": "Combobox V42",
+      "oldName": "Recipe Pivot / Combobox / 58ef8274-85b2f4a0-combobox-v1",
+      "newName": "Recipe Pivot / Combobox / 58ef8274-85b2f4a0-combobox-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "173:48924",
+      "label": "Table",
+      "oldName": "Recipe Pivot / Table / 2f9b764f-82a04258-table-v32",
+      "newName": "Recipe Pivot / Table / 2f9b764f-82a04258-table-v32",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "181:64873",
+      "label": "Calendar",
+      "oldName": "Recipe Pivot / Calendar / 4604bbfe-calendar-v50",
+      "newName": "Recipe Pivot / Calendar / 4604bbfe-calendar-v50",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:69150",
+      "label": "Button v5",
+      "oldName": "Recipe Pivot / Button / 6857935c-b04f4059-v4",
+      "newName": "Recipe Pivot / Button / 6857935c-b04f4059-v4",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "85:6781",
+      "label": "Preserved Button",
+      "oldName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+      "newName": "Recipe Pivot / Button / e6a61d04-b04f4059-v4",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "198:77718",
+      "label": "Checkbox v3",
+      "oldName": "Recipe Pivot / Checkbox / 548cf953-a473aa6a-ff3a8565-checkbox-v3",
+      "newName": "Recipe Pivot / Checkbox / 548cf953-a473aa6a-ff3a8565-checkbox-v3",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "198:77456",
+      "label": "Textarea v3",
+      "oldName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v3",
+      "newName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v3",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "197:76679",
+      "label": "Radio v2",
+      "oldName": "Recipe Pivot / Radio / 0b0ee218-7e6bbd32-6c11de88-radio-v2",
+      "newName": "Recipe Pivot / Radio / 0b0ee218-7e6bbd32-6c11de88-radio-v2",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "197:76903",
+      "label": "Switch v2",
+      "oldName": "Recipe Pivot / Switch / a8686d63-3d086535-0720db18-switch-v2",
+      "newName": "Recipe Pivot / Switch / a8686d63-3d086535-0720db18-switch-v2",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "198:77177",
+      "label": "Badge v2",
+      "oldName": "Recipe Pivot / Badge / 65cbfe82-5db99b22-badge-v2",
+      "newName": "Recipe Pivot / Badge / 65cbfe82-5db99b22-badge-v2",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:75801",
+      "label": "Alert",
+      "oldName": "Recipe Pivot / Alert / dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+      "newName": "Recipe Pivot / Alert / dfe6ebb7-72aeb8dc-f5f066f4-alert-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:75976",
+      "label": "Chip",
+      "oldName": "Recipe Pivot / Chip / 932f13fe-d960c0d4-908fd120-chip-v1",
+      "newName": "Recipe Pivot / Chip / 932f13fe-d960c0d4-908fd120-chip-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:76063",
+      "label": "Avatar",
+      "oldName": "Recipe Pivot / Avatar / 8b6f943a-0b73c85a-8714d3a8-avatar-v1",
+      "newName": "Recipe Pivot / Avatar / 8b6f943a-0b73c85a-8714d3a8-avatar-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:76109",
+      "label": "Link",
+      "oldName": "Recipe Pivot / Link / be7109bb-d810f4f2-7a6db373-link-v1",
+      "newName": "Recipe Pivot / Link / be7109bb-d810f4f2-7a6db373-link-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:76151",
+      "label": "Tooltip",
+      "oldName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+      "newName": "Recipe Pivot / Tooltip / 3a63b6dc-7f1ebbdc-d4c3859c-tooltip-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:76193",
+      "label": "Tabs",
+      "oldName": "Recipe Pivot / Tabs / 34d1e257-b5d949f6-20e72946-tabs-v1",
+      "newName": "Recipe Pivot / Tabs / 34d1e257-b5d949f6-20e72946-tabs-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:76259",
+      "label": "Menu",
+      "oldName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v1",
+      "newName": "Recipe Pivot / Menu / 49334e8e-9f1933de-af4cca86-menu-v1",
+      "action": "skipped-because-current"
+    },
+    {
+      "id": "183:76315",
+      "label": "Dialog",
+      "oldName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-dialog-v1",
+      "newName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-dialog-v1",
+      "action": "skipped-because-current"
+    }
+  ]
+}
