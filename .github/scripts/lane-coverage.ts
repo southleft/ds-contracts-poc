@@ -82,19 +82,20 @@ const parseComposite = (body: string): string[] | null => {
  * deliberate act; the checks in this file make sure the entry stays true.
  */
 const EXCLUDED: Record<string, string> = {
-  "root:recipe:input-field:live:v6:check":
-    "Retired phase-sensitive historical composite: it is intentionally red after its published " +
-    "authorization because its self-test asserts the real repository must still be pre-authorization. " +
-    "V6 bytes are held by recipe:pivot-status:check; v7 replaces the lifecycle in the fast lane.",
-  "root:recipe:input-field:live:v6:generated:check":
-    "Retired with v6: its index hashes authorization lifecycle files. Pivot status holds every indexed " +
-    "v6 byte while v7 generated freshness excludes lifecycle files.",
-  "root:recipe:input-field:live:v6:authorization:self-test":
-    "Retired exact defect specimen. It remains on disk to prove the phase-sensitive failure class and " +
-    "is planted by the hermetic v7 authorization test.",
-  "root:recipe:input-field:live:v6:smoke":
-    "The same broker semantics run through input-field-live-v7-broker.test.ts in the v7 fast-lane " +
-    "composite; the immutable v6 broker test also remains covered by test:recipe.",
+  // The four "root:recipe:input-field:live:v6:*" reasons that stood here are gone
+  // with the scripts they named: every superseded per-version lane was removed
+  // when the fast lane was collapsed (2,718 scripts -> 436), and an EXCLUDED
+  // entry naming a script that no longer exists is itself a lane defect.
+  //
+  // The knowledge in them was right and is worth keeping, because it explains an
+  // exclusion that still exists one level down. v6's composite was described as
+  // "intentionally red after its published authorization because its self-test
+  // asserts the real repository must still be pre-authorization" — that is
+  // exactly why recipe/input-field-live-v6-authorization.test.ts is held out of
+  // `recipe:live:history:test`: its last assertion reads the live repository and
+  // can only pass in a dirty tree. Named at that lane in fast.yml.
+  //
+  // v6's bytes are still held by recipe:pivot-status:check, as they always were.
   "root:sync:spine":
     "The live drift spine: needs the FIGMA_TOKEN secret + network (Figma REST) and, with --open-pr, an " +
     "authenticated gh — none of which belong in a PR gate, and its red means 'a drifted row has no " +

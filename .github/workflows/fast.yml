@@ -321,6 +321,16 @@ jobs:
       # the same refusal from constructed state; only the third is coupled to the
       # working tree. Excluded rather than edited, because per-version files are
       # byte-frozen receipts.
+      # The two shared LOWERINGS: SVG path → Figma vectorPaths, and CSS
+      # box-shadow → Figma effects. Both exist because a library's own spelling
+      # is not something Figma accepts, and both refuse rather than approximate.
+      - name: recipe:lowering:check (SVG path and CSS box-shadow lowerings)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:lowering:check
+      # The thirteen boilerplate archetypes' current-version generated freshness.
+      - name: recipe:boilerplate:generated:check (13 boilerplate archetypes, current version each)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:boilerplate:generated:check
       - name: recipe:live:history:test (705 per-version live test files, 5,080 assertions, ~70s)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:live:history:test
