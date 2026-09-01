@@ -1,0 +1,331 @@
+[
+  {
+    "library": "astryx",
+    "archetype": "chip",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "Token"
+    },
+    "ledger": "extract/computed/out/astryx/token/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.height"
+      },
+      "box.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 6,
+        "verdict": "drift",
+        "captured": 6,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.line-height — sub-pixel line-height rounded",
+        "tolerance": 0.001,
+        "toleranceReason": "captured line-height is 20.0004 from the theme leading token"
+      },
+      "rest.boxFill": {
+        "fixture": "#0536591a",
+        "proposed": "#0000000f",
+        "verdict": "drift",
+        "captured": "#0000000f",
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Token draws no painted border — transparent is the recipe spelling (ledger border color is ink, not a stroke) [Token.tsx border none — reviewed #00000000]"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.opacity"
+      },
+      "rest.label": {
+        "fixture": "#0a1317ff",
+        "proposed": "#171717ff",
+        "verdict": "drift",
+        "captured": "#171717ff",
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "Figtree",
+        "verdict": "drift",
+        "captured": "Figtree",
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-family"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-weight"
+      }
+    }
+  },
+  {
+    "library": "mui",
+    "archetype": "chip",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Chip"
+    },
+    "ledger": "extract/computed/out/mui/chip/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 32,
+        "proposed": 32,
+        "verdict": "match",
+        "captured": 32,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-root.height"
+      },
+      "box.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-label.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-label.padding-top"
+      },
+      "box.radius": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-root.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 13,
+        "proposed": 13,
+        "verdict": "match",
+        "captured": 13,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-label.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 19.5,
+        "proposed": 19.5,
+        "verdict": "match",
+        "captured": 19.5,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-label.line-height"
+      },
+      "rest.boxFill": {
+        "fixture": "#00000014",
+        "proposed": "#00000014",
+        "verdict": "match",
+        "captured": "#00000014",
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-root.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: filled Chip draws no visible border — transparent is the recipe's spelling (ledger border-top-color is the ink color, not a painted stroke) [Chip.js filled border none — reviewed #00000000]"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-root.opacity"
+      },
+      "rest.label": {
+        "fixture": "#000000de",
+        "proposed": "#000000de",
+        "verdict": "match",
+        "captured": "#000000de",
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-label.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-label.font-family"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default cls:MuiChip-label.font-weight"
+      }
+    }
+  },
+  {
+    "library": "antd",
+    "archetype": "chip",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Tag"
+    },
+    "ledger": "extract/computed/out/antd/tag/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.height"
+      },
+      "box.paddingX": {
+        "fixture": 7,
+        "proposed": 7,
+        "verdict": "match",
+        "captured": 7,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.line-height"
+      },
+      "rest.boxFill": {
+        "fixture": "#fafafaff",
+        "proposed": "#fafafaff",
+        "verdict": "match",
+        "captured": "#fafafaff",
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.border-top-color"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.opacity"
+      },
+      "rest.label": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites [theme.getDesignToken().fontFamily starts -apple-system]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default cls:ant-tag.font-weight"
+      }
+    }
+  }
+]

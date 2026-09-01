@@ -1,0 +1,695 @@
+[
+  {
+    "library": "astryx",
+    "archetype": "alert",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "Banner"
+    },
+    "ledger": "extract/computed/out/astryx/banner/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 44,
+        "proposed": 44,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Banner hug-contents height depends on title+description lines — the recipe spells 44 for the single-line proof; the capture mounts title+description (64) [Banner.tsx single-line proof — reviewed 44]"
+      },
+      "box.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-top"
+      },
+      "box.radius": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-width"
+      },
+      "box.gap": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Banner uses CSS gap 8 but the committed capture ledger does not enumerate the gap channel — 8 is the recipe spelling from Banner.tsx [Banner.tsx gap --spacing-2 8 — reviewed 8]"
+      },
+      "icon.size": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.width"
+      },
+      "titleFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.line-height"
+      },
+      "states.info.boxFill": {
+        "fixture": "#0082fb33",
+        "proposed": "#c4ddfbff",
+        "verdict": "drift",
+        "captured": "#c4ddfbff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.background-color"
+      },
+      "states.info.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Banner draws no painted border — transparent is the recipe spelling [reviewed #00000000]"
+      },
+      "states.info.title": {
+        "fixture": "#0a1317ff",
+        "proposed": "#00458cff",
+        "verdict": "drift",
+        "captured": "#00458cff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.color"
+      },
+      "states.info.iconFill": {
+        "fixture": "#0064e0ff",
+        "proposed": "#00458cff",
+        "verdict": "drift",
+        "captured": "#00458cff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.color"
+      },
+      "states.info.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.opacity"
+      },
+      "states.success.boxFill": {
+        "fixture": "#0b991f33",
+        "proposed": "#c5e5c0ff",
+        "verdict": "drift",
+        "captured": "#c5e5c0ff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-banner.background-color"
+      },
+      "states.success.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Banner draws no painted border — transparent is the recipe spelling [reviewed #00000000]"
+      },
+      "states.success.title": {
+        "fixture": "#0a1317ff",
+        "proposed": "#0c5700ff",
+        "verdict": "drift",
+        "captured": "#0c5700ff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default idx:0.1.0.color"
+      },
+      "states.success.iconFill": {
+        "fixture": "#0d8626ff",
+        "proposed": "#0c5700ff",
+        "verdict": "drift",
+        "captured": "#0c5700ff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-icon.color"
+      },
+      "states.success.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-icon.opacity"
+      },
+      "states.warning.boxFill": {
+        "fixture": "#e2a40033",
+        "proposed": "#f8da9dff",
+        "verdict": "drift",
+        "captured": "#f8da9dff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-banner.background-color"
+      },
+      "states.warning.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Banner draws no painted border — transparent is the recipe spelling [reviewed #00000000]"
+      },
+      "states.warning.title": {
+        "fixture": "#0a1317ff",
+        "proposed": "#584400ff",
+        "verdict": "drift",
+        "captured": "#584400ff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default idx:0.1.0.color"
+      },
+      "states.warning.iconFill": {
+        "fixture": "#e9af08ff",
+        "proposed": "#584400ff",
+        "verdict": "drift",
+        "captured": "#584400ff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-icon.color"
+      },
+      "states.warning.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-icon.opacity"
+      },
+      "states.error.boxFill": {
+        "fixture": "#e3193b33",
+        "proposed": "#facecbff",
+        "verdict": "drift",
+        "captured": "#facecbff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-banner.background-color"
+      },
+      "states.error.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Banner draws no painted border — transparent is the recipe spelling [reviewed #00000000]"
+      },
+      "states.error.title": {
+        "fixture": "#0a1317ff",
+        "proposed": "#89001aff",
+        "verdict": "drift",
+        "captured": "#89001aff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default idx:0.1.0.color"
+      },
+      "states.error.iconFill": {
+        "fixture": "#e3193bff",
+        "proposed": "#89001aff",
+        "verdict": "drift",
+        "captured": "#89001aff",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-icon.color"
+      },
+      "states.error.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-icon.opacity"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "typography.title.family": {
+        "fixture": "-apple-system",
+        "proposed": "Figtree",
+        "verdict": "drift",
+        "captured": "Figtree",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-family"
+      },
+      "typography.title.style": {
+        "fixture": "Semibold",
+        "proposed": "Semibold",
+        "verdict": "match",
+        "captured": "Semibold",
+        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-weight"
+      }
+    }
+  },
+  {
+    "library": "mui",
+    "archetype": "alert",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Alert"
+    },
+    "ledger": "extract/computed/out/mui/alert/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 48,
+        "proposed": 48,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Alert hug-contents height depends on message line count — the recipe spells 48 from the reviewed single-line + icon pairing; the capture's content-box height is not a fixed channel [Alert.js padding 6+6 + icon 22 + message leading — reviewed 48]"
+      },
+      "box.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-root.border-top-width"
+      },
+      "box.gap": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Alert uses margin on the icon (mr 12), not CSS gap — 12 is the recipe's spelling of that margin [Alert.js icon marginRight 12 — reviewed 12]"
+      },
+      "icon.size": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiSvgIcon-root.width"
+      },
+      "titleFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-message.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-message.line-height — sub-pixel leading rounded"
+      },
+      "states.info.boxFill": {
+        "fixture": "#e5f6fdff",
+        "proposed": "#e5f6fdff",
+        "verdict": "match",
+        "captured": "#e5f6fdff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-root.background-color"
+      },
+      "states.info.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: standard Alert draws no painted border — transparent is the recipe spelling (ledger border-top-color is the title ink) [Alert.js standard border none — reviewed #00000000]"
+      },
+      "states.info.title": {
+        "fixture": "#014361ff",
+        "proposed": "#014361ff",
+        "verdict": "match",
+        "captured": "#014361ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-message.color"
+      },
+      "states.info.iconFill": {
+        "fixture": "#0288d1ff",
+        "proposed": "#0288d1ff",
+        "verdict": "match",
+        "captured": "#0288d1ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiSvgIcon-root.color"
+      },
+      "states.info.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-icon.opacity"
+      },
+      "states.success.boxFill": {
+        "fixture": "#edf7edff",
+        "proposed": "#edf7edff",
+        "verdict": "match",
+        "captured": "#edf7edff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default cls:MuiAlert-root.background-color"
+      },
+      "states.success.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: standard Alert draws no painted border — transparent is the recipe spelling (ledger border-top-color is the title ink) [Alert.js standard border none — reviewed #00000000]"
+      },
+      "states.success.title": {
+        "fixture": "#1e4620ff",
+        "proposed": "#1e4620ff",
+        "verdict": "match",
+        "captured": "#1e4620ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default cls:MuiAlert-message.color"
+      },
+      "states.success.iconFill": {
+        "fixture": "#2e7d32ff",
+        "proposed": "#2e7d32ff",
+        "verdict": "match",
+        "captured": "#2e7d32ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default cls:MuiSvgIcon-root.color"
+      },
+      "states.success.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#success.standard__default cls:MuiAlert-icon.opacity"
+      },
+      "states.warning.boxFill": {
+        "fixture": "#fff4e5ff",
+        "proposed": "#fff4e5ff",
+        "verdict": "match",
+        "captured": "#fff4e5ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default cls:MuiAlert-root.background-color"
+      },
+      "states.warning.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: standard Alert draws no painted border — transparent is the recipe spelling (ledger border-top-color is the title ink) [Alert.js standard border none — reviewed #00000000]"
+      },
+      "states.warning.title": {
+        "fixture": "#663c00ff",
+        "proposed": "#663c00ff",
+        "verdict": "match",
+        "captured": "#663c00ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default cls:MuiAlert-message.color"
+      },
+      "states.warning.iconFill": {
+        "fixture": "#ed6c02ff",
+        "proposed": "#ed6c02ff",
+        "verdict": "match",
+        "captured": "#ed6c02ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default cls:MuiSvgIcon-root.color"
+      },
+      "states.warning.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#warning.standard__default cls:MuiAlert-icon.opacity"
+      },
+      "states.error.boxFill": {
+        "fixture": "#fdededff",
+        "proposed": "#fdededff",
+        "verdict": "match",
+        "captured": "#fdededff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default cls:MuiAlert-root.background-color"
+      },
+      "states.error.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: standard Alert draws no painted border — transparent is the recipe spelling (ledger border-top-color is the title ink) [Alert.js standard border none — reviewed #00000000]"
+      },
+      "states.error.title": {
+        "fixture": "#5f2120ff",
+        "proposed": "#5f2120ff",
+        "verdict": "match",
+        "captured": "#5f2120ff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default cls:MuiAlert-message.color"
+      },
+      "states.error.iconFill": {
+        "fixture": "#d32f2fff",
+        "proposed": "#d32f2fff",
+        "verdict": "match",
+        "captured": "#d32f2fff",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default cls:MuiSvgIcon-root.color"
+      },
+      "states.error.iconOpacity": {
+        "fixture": 0.9,
+        "proposed": 0.9,
+        "verdict": "match",
+        "captured": 0.9,
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#error.standard__default cls:MuiAlert-icon.opacity"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "typography.title.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-message.font-family"
+      },
+      "typography.title.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/alert/captured-truth.json#info.standard__default cls:MuiAlert-message.font-weight"
+      }
+    }
+  },
+  {
+    "library": "antd",
+    "archetype": "alert",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Alert"
+    },
+    "ledger": "extract/computed/out/antd/alert/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 38,
+        "proposed": 38,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: capture height 40 includes the 1px border on both sides (border-box); the recipe spells the content-box 38 (8+8+22) — border-box vs content-box, not a color miss [padding 8+8 + line 22 = 38 — reviewed 38]"
+      },
+      "box.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert.padding-top"
+      },
+      "box.radius": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert.border-top-width"
+      },
+      "box.gap": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Alert icon margin-inline-end is 8 — not a CSS gap on the root; 8 is the recipe spelling [genAlertStyle icon margin — reviewed 8]"
+      },
+      "icon.size": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-icon.width"
+      },
+      "titleFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-message.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-message.line-height"
+      },
+      "states.info.boxFill": {
+        "fixture": "#e6f4ffff",
+        "proposed": "#e6f4ffff",
+        "verdict": "match",
+        "captured": "#e6f4ffff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert.background-color"
+      },
+      "states.info.boxBorder": {
+        "fixture": "#91caffff",
+        "proposed": "#91caffff",
+        "verdict": "match",
+        "captured": "#91caffff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert.border-top-color"
+      },
+      "states.info.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-message.color"
+      },
+      "states.info.iconFill": {
+        "fixture": "#1677ffff",
+        "proposed": "#1677ffff",
+        "verdict": "match",
+        "captured": "#1677ffff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-icon.color"
+      },
+      "states.info.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-icon.opacity"
+      },
+      "states.success.boxFill": {
+        "fixture": "#f6ffedff",
+        "proposed": "#f6ffedff",
+        "verdict": "match",
+        "captured": "#f6ffedff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default cls:ant-alert.background-color"
+      },
+      "states.success.boxBorder": {
+        "fixture": "#b7eb8fff",
+        "proposed": "#b7eb8fff",
+        "verdict": "match",
+        "captured": "#b7eb8fff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default cls:ant-alert.border-top-color"
+      },
+      "states.success.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default cls:ant-alert-message.color"
+      },
+      "states.success.iconFill": {
+        "fixture": "#52c41aff",
+        "proposed": "#52c41aff",
+        "verdict": "match",
+        "captured": "#52c41aff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default cls:ant-alert-icon.color"
+      },
+      "states.success.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#success.icon.off.off__default cls:ant-alert-icon.opacity"
+      },
+      "states.warning.boxFill": {
+        "fixture": "#fffbe6ff",
+        "proposed": "#fffbe6ff",
+        "verdict": "match",
+        "captured": "#fffbe6ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default cls:ant-alert.background-color"
+      },
+      "states.warning.boxBorder": {
+        "fixture": "#ffe58fff",
+        "proposed": "#ffe58fff",
+        "verdict": "match",
+        "captured": "#ffe58fff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default cls:ant-alert.border-top-color"
+      },
+      "states.warning.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default cls:ant-alert-message.color"
+      },
+      "states.warning.iconFill": {
+        "fixture": "#faad14ff",
+        "proposed": "#faad14ff",
+        "verdict": "match",
+        "captured": "#faad14ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default cls:ant-alert-icon.color"
+      },
+      "states.warning.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#warning.icon.off.off__default cls:ant-alert-icon.opacity"
+      },
+      "states.error.boxFill": {
+        "fixture": "#fff2f0ff",
+        "proposed": "#fff2f0ff",
+        "verdict": "match",
+        "captured": "#fff2f0ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default cls:ant-alert.background-color"
+      },
+      "states.error.boxBorder": {
+        "fixture": "#ffccc7ff",
+        "proposed": "#ffccc7ff",
+        "verdict": "match",
+        "captured": "#ffccc7ff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default cls:ant-alert.border-top-color"
+      },
+      "states.error.title": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default cls:ant-alert-message.color"
+      },
+      "states.error.iconFill": {
+        "fixture": "#ff4d4fff",
+        "proposed": "#ff4d4fff",
+        "verdict": "match",
+        "captured": "#ff4d4fff",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default cls:ant-alert-icon.color"
+      },
+      "states.error.iconOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#error.icon.off.off__default cls:ant-alert-icon.opacity"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "typography.title.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites [theme.getDesignToken().fontFamily starts -apple-system]"
+      },
+      "typography.title.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/antd/alert/captured-truth.json#info.icon.off.off__default cls:ant-alert-message.font-weight"
+      }
+    }
+  }
+]

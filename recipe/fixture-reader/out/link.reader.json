@@ -1,0 +1,454 @@
+[
+  {
+    "archetype": "link",
+    "library": "astryx",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "Link"
+    },
+    "ledgerFile": null,
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "receipt",
+        "proposedValue": "#0064e0ff",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "receipt",
+        "proposedValue": "px",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "none",
+        "verdict": "receipt",
+        "proposedValue": "none",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "the capture floor has no Link subject — configs/astryx.json does not mount Link",
+        "evidence": "docs/34 Astryx Link — no extract/computed capture subject"
+      }
+    ],
+    "counts": {
+      "match": 0,
+      "drift": 0,
+      "receipt": 16,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "link",
+    "library": "mui",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Link"
+    },
+    "ledgerFile": "extract/computed/out/mui/link/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "Link is inline text — the recipe spells height 0 (no box plane); the capture's content-box height is not the recipe anatomy",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.hover__default cls:MuiLink-root.padding-left"
+        ]
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.hover__default cls:MuiLink-root.padding-top"
+        ]
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.hover__default cls:MuiLink-root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.hover__default cls:MuiLink-root.border-top-width"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "the capture mounts Typography variant=inherit (font-size 16 / Times on the unstyled host) — the recipe cites body2 14 from the reviewed Link docs pairing, not the inherit plane",
+        "evidence": "Link.js + Typography body2 14 — reviewed 14"
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "recipe spells 0 (auto unit / CSS normal) — the inherit plane's line-height is not the recipe's spelling",
+        "evidence": "reviewed 0 with lineHeightUnit auto"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "match",
+        "capturedValue": "#00000000",
+        "proposedValue": "#00000000",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.hover__default cls:MuiLink-root.background-color"
+        ]
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "Link draws no painted border — transparent is the recipe spelling",
+        "evidence": "reviewed #00000000"
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.hover__default cls:MuiLink-root.opacity"
+        ]
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/link/captured-truth.json#primary.hover__default cls:MuiLink-root.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "recipe anatomy spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "auto",
+        "verdict": "receipt",
+        "proposedValue": "auto",
+        "receipt": "recipe spelling of CSS normal/auto line-height",
+        "evidence": "reviewed auto"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "underline",
+        "verdict": "receipt",
+        "proposedValue": "underline",
+        "receipt": "the capture mounts underline=hover (MuiLink-underlineHover — no underline at rest); the recipe cites underline=always as the reviewed rest decoration",
+        "evidence": "Link.js underlineAlways — reviewed underline"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "receipt",
+        "proposedValue": "Roboto",
+        "receipt": "inherit plane computes Times on the capture host — recipe cites Roboto from createTypography",
+        "evidence": "createTypography.js fontFamily Roboto — reviewed Roboto"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "createTypography fontWeightRegular 400 — reviewed Regular",
+        "evidence": "reviewed Regular"
+      }
+    ],
+    "counts": {
+      "match": 7,
+      "drift": 0,
+      "receipt": 9,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "link",
+    "library": "antd",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Typography.Link"
+    },
+    "ledgerFile": null,
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 22,
+        "verdict": "receipt",
+        "proposedValue": 22,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#1677ffff",
+        "verdict": "receipt",
+        "proposedValue": "#1677ffff",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "receipt",
+        "proposedValue": "px",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "decoration",
+        "fixtureValue": "none",
+        "verdict": "receipt",
+        "proposedValue": "none",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "antd has no top-level Link export — Typography.Link is a named absence (docs/34); do not invent a capture mount",
+        "evidence": "docs/34 AntD Link named absence — Typography.Link"
+      }
+    ],
+    "counts": {
+      "match": 0,
+      "drift": 0,
+      "receipt": 16,
+      "unread": 0
+    }
+  }
+]

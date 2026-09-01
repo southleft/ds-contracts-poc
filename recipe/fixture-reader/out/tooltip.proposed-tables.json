@@ -1,0 +1,350 @@
+[
+  {
+    "library": "astryx",
+    "archetype": "tooltip",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "Tooltip"
+    },
+    "ledger": null,
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "box.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "box.paddingY": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "box.radius": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "rest.boxFill": {
+        "fixture": "#0a1317ff",
+        "proposed": "#0a1317ff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "rest.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "rest.label": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "decoration": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tooltip subject — configs/astryx.json does not mount Tooltip [docs/34 Astryx Tooltip — no extract/computed capture subject]"
+      }
+    }
+  },
+  {
+    "library": "mui",
+    "archetype": "tooltip",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Tooltip"
+    },
+    "ledger": "extract/computed/out/mui/tooltip/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Tooltip hug-contents height is content-dependent — the recipe spells 0 (auto hug); the capture's content-box height is not a fixed recipe fact [reviewed 0]"
+      },
+      "box.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.padding-top"
+      },
+      "box.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 11,
+        "proposed": 11,
+        "verdict": "match",
+        "captured": 11,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.line-height — CSS normal → recipe 0 with lineHeightUnit auto"
+      },
+      "rest.boxFill": {
+        "fixture": "#616161eb",
+        "proposed": "#616161eb",
+        "verdict": "match",
+        "captured": "#616161eb",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Tooltip draws no painted border — transparent is the recipe spelling [reviewed #00000000]"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.opacity"
+      },
+      "rest.label": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "lineHeightUnit": {
+        "fixture": "auto",
+        "proposed": "auto",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe spelling of CSS normal [reviewed auto]"
+      },
+      "decoration": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: tooltip text has no text-decoration [reviewed none]"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.font-family"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/mui/tooltip/captured-truth.json#on__default cls:MuiTooltip-tooltip.font-weight"
+      }
+    }
+  },
+  {
+    "library": "antd",
+    "archetype": "tooltip",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Tooltip"
+    },
+    "ledger": "extract/computed/out/antd/tooltip/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Tooltip hug-contents height is content-dependent — the recipe spells 0 [reviewed 0]"
+      },
+      "box.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.padding-top"
+      },
+      "box.radius": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.line-height"
+      },
+      "rest.boxFill": {
+        "fixture": "#000000d9",
+        "proposed": "#000000d9",
+        "verdict": "match",
+        "captured": "#000000d9",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Tooltip inner draws no painted border — transparent is the recipe spelling [reviewed #00000000]"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.opacity"
+      },
+      "rest.label": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe anatomy spelling [reviewed inside]"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe spelling of the line-height unit axis (px length from the token) [reviewed px]"
+      },
+      "decoration": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: tooltip text has no text-decoration [reviewed none]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites [theme.getDesignToken().fontFamily starts -apple-system]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/antd/tooltip/captured-truth.json#__default cls:ant-tooltip-inner.font-weight"
+      }
+    }
+  }
+]

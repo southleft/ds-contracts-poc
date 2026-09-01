@@ -1,0 +1,437 @@
+[
+  {
+    "library": "astryx",
+    "archetype": "tabs",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "TabList"
+    },
+    "ledger": null,
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.itemSpacing": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "tab.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "tab.paddingY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "tab.radius": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "tab.minWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "tab.minHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "tab.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "indicator.height": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "indicator.radius": {
+        "fixture": 9999,
+        "proposed": 9999,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "indicator.opacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "indicator.fill": {
+        "fixture": "#0064e0ff",
+        "proposed": "#0064e0ff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "rest.label": {
+        "fixture": "#4e606fff",
+        "proposed": "#4e606fff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "selected.label": {
+        "fixture": "#0a1317ff",
+        "proposed": "#0a1317ff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "textCase": {
+        "fixture": "original",
+        "proposed": "original",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "typography.rest.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "typography.rest.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "typography.selected.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      },
+      "typography.selected.style": {
+        "fixture": "Semibold",
+        "proposed": "Semibold",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Tabs subject — configs/astryx.json does not mount Tabs [docs/34 Astryx Tabs — no extract/computed capture subject]"
+      }
+    }
+  },
+  {
+    "library": "mui",
+    "archetype": "tabs",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Tabs"
+    },
+    "ledger": "extract/computed/out/mui/tabs/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.itemSpacing": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: MUI Tabs flex list has no gap channel — 0 is the recipe spelling [Tabs.js flex no gap — reviewed 0]"
+      },
+      "tab.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.padding-left"
+      },
+      "tab.paddingY": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "match",
+        "captured": 12,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.padding-top"
+      },
+      "tab.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.border-top-left-radius"
+      },
+      "tab.minWidth": {
+        "fixture": 90,
+        "proposed": 90,
+        "verdict": "match",
+        "captured": 90,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.min-width"
+      },
+      "tab.minHeight": {
+        "fixture": 48,
+        "proposed": 48,
+        "verdict": "match",
+        "captured": 48,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.min-height"
+      },
+      "tab.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.background-color"
+      },
+      "indicator.height": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTabs-indicator.height"
+      },
+      "indicator.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTabs-indicator.border-top-left-radius"
+      },
+      "indicator.opacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTabs-indicator.opacity"
+      },
+      "indicator.fill": {
+        "fixture": "#1976d2ff",
+        "proposed": "#1976d2ff",
+        "verdict": "match",
+        "captured": "#1976d2ff",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTabs-indicator.background-color"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 125,
+        "proposed": 125,
+        "verdict": "match",
+        "captured": 125,
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.line-height ; extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.font-size — recipe spells percent units (lineHeightUnit percent) — percent = round(px / fontSize * 100)"
+      },
+      "rest.label": {
+        "fixture": "#00000099",
+        "proposed": "#00000099",
+        "verdict": "match",
+        "captured": "#00000099",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root#1.color"
+      },
+      "selected.label": {
+        "fixture": "#1976d2ff",
+        "proposed": "#1976d2ff",
+        "verdict": "match",
+        "captured": "#1976d2ff",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.color"
+      },
+      "lineHeightUnit": {
+        "fixture": "percent",
+        "proposed": "percent",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe spelling of percent line-height from button typography [reviewed percent]"
+      },
+      "textCase": {
+        "fixture": "upper",
+        "proposed": "upper",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Tab label text-transform uppercase — recipe spelling [reviewed upper]"
+      },
+      "typography.rest.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root#1.font-family"
+      },
+      "typography.rest.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root#1.font-weight"
+      },
+      "typography.selected.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.font-family"
+      },
+      "typography.selected.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/mui/tabs/captured-truth.json#primary.primary__default cls:MuiTab-root.font-weight"
+      }
+    }
+  },
+  {
+    "library": "antd",
+    "archetype": "tabs",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Tabs"
+    },
+    "ledger": null,
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.itemSpacing": {
+        "fixture": 32,
+        "proposed": 32,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "tab.paddingX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "tab.paddingY": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "tab.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "tab.minWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "tab.minHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "tab.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "indicator.height": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "indicator.radius": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "indicator.opacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "indicator.fill": {
+        "fixture": "#1677ffff",
+        "proposed": "#1677ffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "labelLineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "rest.label": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "selected.label": {
+        "fixture": "#1677ffff",
+        "proposed": "#1677ffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "textCase": {
+        "fixture": "original",
+        "proposed": "original",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "typography.rest.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "typography.rest.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "typography.selected.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      },
+      "typography.selected.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Tabs — no capture-floor ledger; named receipt not invention [extract/computed/configs/antd.json components list has no Tabs]"
+      }
+    }
+  }
+]

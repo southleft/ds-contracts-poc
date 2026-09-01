@@ -1,0 +1,733 @@
+[
+  {
+    "library": "astryx",
+    "archetype": "radio",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "RadioList"
+    },
+    "ledger": null,
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.gap": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "item.gap": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "labelLineHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "wrapper.size": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "circle.size": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "circle.radius": {
+        "fixture": 11,
+        "proposed": 11,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "circle.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "circle.padding": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "dot.size": {
+        "fixture": 10,
+        "proposed": 10,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "dot.radius": {
+        "fixture": 5,
+        "proposed": 5,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.enabled.circleFill": {
+        "fixture": "#0064e0ff",
+        "proposed": "#0064e0ff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.enabled.circleBorder": {
+        "fixture": "#0064e0ff",
+        "proposed": "#0064e0ff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.enabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.enabled.label": {
+        "fixture": "#4e606fff",
+        "proposed": "#4e606fff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.enabled.dotFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.disabled.circleFill": {
+        "fixture": "#0064e0ff",
+        "proposed": "#0064e0ff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.disabled.circleBorder": {
+        "fixture": "#05365919",
+        "proposed": "#05365919",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.disabled.circleOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.disabled.label": {
+        "fixture": "#a4b0bcff",
+        "proposed": "#a4b0bcff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.selected.disabled.dotFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.enabled.circleFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.enabled.circleBorder": {
+        "fixture": "#ccd3dbff",
+        "proposed": "#ccd3dbff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.enabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.enabled.label": {
+        "fixture": "#4e606fff",
+        "proposed": "#4e606fff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.enabled.dotFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.disabled.circleFill": {
+        "fixture": "#0536590c",
+        "proposed": "#0536590c",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.disabled.circleBorder": {
+        "fixture": "#05365919",
+        "proposed": "#05365919",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.disabled.circleOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.disabled.label": {
+        "fixture": "#a4b0bcff",
+        "proposed": "#a4b0bcff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "states.unselected.disabled.dotFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "listMode": {
+        "fixture": "vertical",
+        "proposed": "vertical",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "itemAlign": {
+        "fixture": "center",
+        "proposed": "center",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "auto",
+        "proposed": "auto",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no RadioList subject — Astryx ships RadioList + RadioListItem (no standalone Radio) and extract/computed/configs/astryx.json does not mount it; a single-radio capture would invent a shape the recipe does not compile [docs/34 §3 Astryx has no standalone Radio; configs/astryx.json components list has no RadioList]"
+      }
+    }
+  },
+  {
+    "library": "mui",
+    "archetype": "radio",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Radio"
+    },
+    "ledger": "extract/computed/out/mui/radio/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.gap": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [RadioGroup is a reviewed pairing — reviewed 0]"
+      },
+      "item.gap": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [FormControlLabel gap is a reviewed pairing — reviewed 0]"
+      },
+      "labelLineHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [no label part — reviewed 0 (auto unit)]"
+      },
+      "wrapper.size": {
+        "fixture": 42,
+        "proposed": 42,
+        "verdict": "match",
+        "captured": 42,
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default root.width"
+      },
+      "circle.size": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default cls:MuiSvgIcon-root.width"
+      },
+      "circle.radius": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the radio ring is SVG path geometry inside RadioButtonUnchecked, not a CSS border-radius (SvgIcon computed radius is 0) [RadioButtonUnchecked 24-viewBox — reviewed 12]"
+      },
+      "circle.borderWidth": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the ring stroke is SVG path geometry, not a CSS border [RadioButtonUnchecked path ring — reviewed 2]"
+      },
+      "circle.padding": {
+        "fixture": 9,
+        "proposed": 9,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: hit-target padding lives on SwitchBase, not a captured circle-padding channel [Radio.js padding 9 — reviewed 9]"
+      },
+      "dot.size": {
+        "fixture": 10,
+        "proposed": 10,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the inner dot is RadioButtonChecked's even-odd hole / inner circle, not a computed box [RadioButtonChecked inner circle — reviewed 10]"
+      },
+      "dot.radius": {
+        "fixture": 5,
+        "proposed": 5,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: same SVG inner-circle geometry — not a CSS radius channel [reviewed 5]"
+      },
+      "states.selected.enabled.circleFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.enabled__default cls:MuiSvgIcon-root.background-color"
+      },
+      "states.selected.enabled.circleBorder": {
+        "fixture": "#1976d2ff",
+        "proposed": "#1976d2ff",
+        "verdict": "match",
+        "captured": "#1976d2ff",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.enabled__default cls:MuiSvgIcon-root.color"
+      },
+      "states.selected.enabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.enabled__default cls:MuiSvgIcon-root.opacity"
+      },
+      "states.selected.enabled.label": {
+        "fixture": "#000000de",
+        "proposed": "#000000de",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [palette.text.primary #000000de — reviewed]"
+      },
+      "states.selected.enabled.dotFill": {
+        "fixture": "#1976d2ff",
+        "proposed": "#1976d2ff",
+        "verdict": "match",
+        "captured": "#1976d2ff",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.enabled__default cls:MuiSvgIcon-root.color"
+      },
+      "states.selected.disabled.circleFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.disabled__default cls:MuiSvgIcon-root.background-color"
+      },
+      "states.selected.disabled.circleBorder": {
+        "fixture": "#00000042",
+        "proposed": "#00000042",
+        "verdict": "match",
+        "captured": "#00000042",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.disabled__default cls:MuiSvgIcon-root.color"
+      },
+      "states.selected.disabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.disabled__default cls:MuiSvgIcon-root.opacity"
+      },
+      "states.selected.disabled.label": {
+        "fixture": "#00000061",
+        "proposed": "#00000061",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [palette.text.disabled #00000061 — reviewed]"
+      },
+      "states.selected.disabled.dotFill": {
+        "fixture": "#00000042",
+        "proposed": "#00000042",
+        "verdict": "match",
+        "captured": "#00000042",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.checked.disabled__default cls:MuiSvgIcon-root.color"
+      },
+      "states.unselected.enabled.circleFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default cls:MuiSvgIcon-root.background-color"
+      },
+      "states.unselected.enabled.circleBorder": {
+        "fixture": "#00000099",
+        "proposed": "#00000099",
+        "verdict": "match",
+        "captured": "#00000099",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default cls:MuiSvgIcon-root.color"
+      },
+      "states.unselected.enabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default cls:MuiSvgIcon-root.opacity"
+      },
+      "states.unselected.enabled.label": {
+        "fixture": "#000000de",
+        "proposed": "#000000de",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [palette.text.primary #000000de — reviewed]"
+      },
+      "states.unselected.enabled.dotFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the inner dot does not render in the unchecked state; transparent is the recipe's spelling of absent [no RadioButtonChecked at combo primary.unchecked.enabled — reviewed #00000000]"
+      },
+      "states.unselected.disabled.circleFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.disabled__default cls:MuiSvgIcon-root.background-color"
+      },
+      "states.unselected.disabled.circleBorder": {
+        "fixture": "#00000042",
+        "proposed": "#00000042",
+        "verdict": "match",
+        "captured": "#00000042",
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.disabled__default cls:MuiSvgIcon-root.color"
+      },
+      "states.unselected.disabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.disabled__default cls:MuiSvgIcon-root.opacity"
+      },
+      "states.unselected.disabled.label": {
+        "fixture": "#00000061",
+        "proposed": "#00000061",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [palette.text.disabled #00000061 — reviewed]"
+      },
+      "states.unselected.disabled.dotFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the inner dot does not render in the unchecked state; transparent is the recipe's spelling of absent [no RadioButtonChecked at combo primary.unchecked.disabled — reviewed #00000000]"
+      },
+      "labelFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [createTypography.js body1 16 — reviewed 16]"
+      },
+      "listMode": {
+        "fixture": "vertical",
+        "proposed": "vertical",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe spelling of RadioGroup direction; the capture mounts one Radio [reviewed vertical]"
+      },
+      "itemAlign": {
+        "fixture": "center",
+        "proposed": "center",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe spelling of the reviewed FormControlLabel pairing [reviewed center]"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "auto",
+        "proposed": "auto",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: no label part in the ledger [reviewed auto]"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [createTypography.js fontFamily Roboto — reviewed Roboto]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger [createTypography.js fontWeightRegular 400 — reviewed Regular]"
+      }
+    }
+  },
+  {
+    "library": "antd",
+    "archetype": "radio",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Radio"
+    },
+    "ledger": "extract/computed/out/antd/radio/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "list.gap": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture mounts a bare Radio — Radio.Group (the recipe's two-item list) is a reviewed pairing, never a captured part [Radio.Group gap --margin-xs 8 — the fixture's citation]"
+      },
+      "item.gap": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-label.padding-left"
+      },
+      "labelLineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "match",
+        "captured": 22,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-label.line-height"
+      },
+      "wrapper.size": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-inner.width"
+      },
+      "circle.size": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-inner.width"
+      },
+      "circle.radius": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-inner.width — circle is a 50% pill — radius = size/2"
+      },
+      "circle.borderWidth": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-inner.border-top-width"
+      },
+      "circle.padding": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: antd's radio inner has no inset padding channel — 0 is the recipe's spelling [genRadioStyle inner padding 0 — reviewed 0]"
+      },
+      "dot.size": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner::after.width ; extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner::after.transform — inner::after is 16×16 scaled by matrix(s,0,0,s) — painted size = 16×s"
+      },
+      "dot.radius": {
+        "fixture": 3,
+        "proposed": 3,
+        "verdict": "match",
+        "captured": 3,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner::after.width ; extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner::after.transform — scaled ::after is a circle — radius = painted size/2"
+      },
+      "states.selected.enabled.circleFill": {
+        "fixture": "#1677ffff",
+        "proposed": "#1677ffff",
+        "verdict": "match",
+        "captured": "#1677ffff",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner.background-color"
+      },
+      "states.selected.enabled.circleBorder": {
+        "fixture": "#1677ffff",
+        "proposed": "#1677ffff",
+        "verdict": "match",
+        "captured": "#1677ffff",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner.border-top-color"
+      },
+      "states.selected.enabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner.opacity"
+      },
+      "states.selected.enabled.label": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-label.color"
+      },
+      "states.selected.enabled.dotFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.enabled__default cls:ant-radio-inner::after.background-color"
+      },
+      "states.selected.disabled.circleFill": {
+        "fixture": "#0000000a",
+        "proposed": "#0000000a",
+        "verdict": "match",
+        "captured": "#0000000a",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default cls:ant-radio-inner.background-color"
+      },
+      "states.selected.disabled.circleBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default cls:ant-radio-inner.border-top-color"
+      },
+      "states.selected.disabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default cls:ant-radio-inner.opacity"
+      },
+      "states.selected.disabled.label": {
+        "fixture": "#00000040",
+        "proposed": "#00000040",
+        "verdict": "match",
+        "captured": "#00000040",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default cls:ant-radio-label.color"
+      },
+      "states.selected.disabled.dotFill": {
+        "fixture": "#00000040",
+        "proposed": "#00000040",
+        "verdict": "match",
+        "captured": "#00000040",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#checked.disabled__default cls:ant-radio-inner::after.background-color"
+      },
+      "states.unselected.enabled.circleFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-inner.background-color"
+      },
+      "states.unselected.enabled.circleBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-inner.border-top-color"
+      },
+      "states.unselected.enabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-inner.opacity"
+      },
+      "states.unselected.enabled.label": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "match",
+        "captured": "#000000e0",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-label.color"
+      },
+      "states.unselected.enabled.dotFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the ::after dot is scale(0) / opacity 0 in the unchecked state; transparent is the recipe's spelling of absent [inner::after transform matrix(0,…) at combo unchecked.enabled — reviewed #00000000]"
+      },
+      "states.unselected.disabled.circleFill": {
+        "fixture": "#0000000a",
+        "proposed": "#0000000a",
+        "verdict": "match",
+        "captured": "#0000000a",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default cls:ant-radio-inner.background-color"
+      },
+      "states.unselected.disabled.circleBorder": {
+        "fixture": "#d9d9d9ff",
+        "proposed": "#d9d9d9ff",
+        "verdict": "match",
+        "captured": "#d9d9d9ff",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default cls:ant-radio-inner.border-top-color"
+      },
+      "states.unselected.disabled.circleOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default cls:ant-radio-inner.opacity"
+      },
+      "states.unselected.disabled.label": {
+        "fixture": "#00000040",
+        "proposed": "#00000040",
+        "verdict": "match",
+        "captured": "#00000040",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.disabled__default cls:ant-radio-label.color"
+      },
+      "states.unselected.disabled.dotFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the ::after dot is scale(0) / opacity 0 in the unchecked state; transparent is the recipe's spelling of absent [inner::after hidden at combo unchecked.disabled — reviewed #00000000]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-label.font-size"
+      },
+      "listMode": {
+        "fixture": "horizontal",
+        "proposed": "horizontal",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Radio.Group default is inline-block horizontal; the capture mounts one Radio [reviewed horizontal]"
+      },
+      "itemAlign": {
+        "fixture": "center",
+        "proposed": "center",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the wrapper's align-items is baseline (antd's own) — the v2 stay respelled CENTER so the label optically centers on the 16px circle; that respelling is a recipe fact, not a ledger channel [radio-live-pivot-v2 stay accuracyLoop — reviewed center]"
+      },
+      "labelLineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the label line-height is a px length (22) [reviewed px]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites [theme.getDesignToken().fontFamily starts -apple-system — the fixture's requestedFamily]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/antd/radio/captured-truth.json#unchecked.enabled__default cls:ant-radio-label.font-weight"
+      }
+    }
+  }
+]

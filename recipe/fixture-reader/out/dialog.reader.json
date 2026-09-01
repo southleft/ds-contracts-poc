@@ -1,0 +1,446 @@
+[
+  {
+    "archetype": "dialog",
+    "library": "astryx",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "Dialog"
+    },
+    "ledgerFile": null,
+    "rows": [
+      {
+        "path": "paper.paddingX",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "paper.paddingY",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "paper.radius",
+        "fixtureValue": 12,
+        "verdict": "receipt",
+        "proposedValue": 12,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "paper.itemSpacing",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "paper.minWidth",
+        "fixtureValue": 400,
+        "verdict": "receipt",
+        "proposedValue": 400,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "paper.fill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "titleFontSize",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "titleLineHeight",
+        "fixtureValue": 28,
+        "verdict": "receipt",
+        "proposedValue": 28,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "bodyFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "bodyLineHeight",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "title",
+        "fixtureValue": "#0a1317ff",
+        "verdict": "receipt",
+        "proposedValue": "#0a1317ff",
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "body",
+        "fixtureValue": "#0a1317ff",
+        "verdict": "receipt",
+        "proposedValue": "#0a1317ff",
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "typography.title.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "typography.title.style",
+        "fixtureValue": "Semibold",
+        "verdict": "receipt",
+        "proposedValue": "Semibold",
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "typography.body.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      },
+      {
+        "path": "typography.body.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "the capture floor has no Dialog subject — configs/astryx.json does not mount Dialog",
+        "evidence": "docs/34 Astryx Dialog — no extract/computed capture subject"
+      }
+    ],
+    "counts": {
+      "match": 0,
+      "drift": 0,
+      "receipt": 16,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "dialog",
+    "library": "mui",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Dialog"
+    },
+    "ledgerFile": "extract/computed/out/mui/dialog/captured-truth.json",
+    "rows": [
+      {
+        "path": "paper.paddingX",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default cls:MuiDialogContent-root.padding-left"
+        ]
+      },
+      {
+        "path": "paper.paddingY",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "the capture mounts DialogContent alone (paddingY 20); the recipe's 16 is DialogTitle's vertical padding — a reviewed title+content pairing, not the content-only plane",
+        "evidence": "DialogTitle.js padding 16px 24px — reviewed 16"
+      },
+      {
+        "path": "paper.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default cls:MuiDialog-paper.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "paper.itemSpacing",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "Dialog paper has no gap channel — 0 is the recipe spelling",
+        "evidence": "reviewed 0"
+      },
+      {
+        "path": "paper.minWidth",
+        "fixtureValue": 600,
+        "verdict": "receipt",
+        "proposedValue": 600,
+        "receipt": "sm maxWidth collapses under the 320-wide capture stage (min-width auto); the recipe cites theme breakpoints sm minWidth 600 from Dialog.js",
+        "evidence": "Dialog.js paperWidthSm minWidth 600 — reviewed 600"
+      },
+      {
+        "path": "paper.fill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default cls:MuiDialog-paper.background-color"
+        ]
+      },
+      {
+        "path": "titleFontSize",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "no DialogTitle in the capture mount — recipe cites h6 1.25rem 20",
+        "evidence": "DialogTitle + typography h6 — reviewed 20"
+      },
+      {
+        "path": "titleLineHeight",
+        "fixtureValue": 32,
+        "verdict": "receipt",
+        "proposedValue": 32,
+        "receipt": "no DialogTitle in the capture mount — recipe cites h6 lineHeight 1.6 → 32",
+        "evidence": "reviewed 32"
+      },
+      {
+        "path": "bodyFontSize",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "DialogContent text inherits — recipe cites body1 16",
+        "evidence": "createTypography body1 16 — reviewed 16"
+      },
+      {
+        "path": "bodyLineHeight",
+        "fixtureValue": 24,
+        "verdict": "receipt",
+        "proposedValue": 24,
+        "receipt": "DialogContent text inherits — recipe cites body1 lineHeight 1.5 → 24",
+        "evidence": "reviewed 24"
+      },
+      {
+        "path": "title",
+        "fixtureValue": "#000000de",
+        "verdict": "receipt",
+        "proposedValue": "#000000de",
+        "receipt": "no DialogTitle in the capture mount — recipe cites palette.text.primary",
+        "evidence": "palette.text.primary #000000de — reviewed"
+      },
+      {
+        "path": "body",
+        "fixtureValue": "#000000de",
+        "verdict": "receipt",
+        "proposedValue": "#000000de",
+        "receipt": "no DialogContent text color channel distinct from paper — recipe cites palette.text.primary",
+        "evidence": "palette.text.primary #000000de — reviewed"
+      },
+      {
+        "path": "typography.title.family",
+        "fixtureValue": "Roboto",
+        "verdict": "receipt",
+        "proposedValue": "Roboto",
+        "receipt": "no DialogTitle mounted — Roboto from createTypography",
+        "evidence": "reviewed Roboto"
+      },
+      {
+        "path": "typography.title.style",
+        "fixtureValue": "Medium",
+        "verdict": "receipt",
+        "proposedValue": "Medium",
+        "receipt": "h6 fontWeight Medium 500 — reviewed Medium",
+        "evidence": "reviewed Medium"
+      },
+      {
+        "path": "typography.body.family",
+        "fixtureValue": "Roboto",
+        "verdict": "receipt",
+        "proposedValue": "Roboto",
+        "receipt": "body1 Roboto — reviewed Roboto",
+        "evidence": "reviewed Roboto"
+      },
+      {
+        "path": "typography.body.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "body1 Regular — reviewed Regular",
+        "evidence": "reviewed Regular"
+      }
+    ],
+    "counts": {
+      "match": 3,
+      "drift": 0,
+      "receipt": 13,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "dialog",
+    "library": "antd",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Modal"
+    },
+    "ledgerFile": null,
+    "rows": [
+      {
+        "path": "paper.paddingX",
+        "fixtureValue": 24,
+        "verdict": "receipt",
+        "proposedValue": 24,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "paper.paddingY",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "paper.radius",
+        "fixtureValue": 8,
+        "verdict": "receipt",
+        "proposedValue": 8,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "paper.itemSpacing",
+        "fixtureValue": 8,
+        "verdict": "receipt",
+        "proposedValue": 8,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "paper.minWidth",
+        "fixtureValue": 520,
+        "verdict": "receipt",
+        "proposedValue": 520,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "paper.fill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "titleFontSize",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "titleLineHeight",
+        "fixtureValue": 24,
+        "verdict": "receipt",
+        "proposedValue": 24,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "bodyFontSize",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "bodyLineHeight",
+        "fixtureValue": 22,
+        "verdict": "receipt",
+        "proposedValue": 22,
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "title",
+        "fixtureValue": "#000000e0",
+        "verdict": "receipt",
+        "proposedValue": "#000000e0",
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "body",
+        "fixtureValue": "#000000e0",
+        "verdict": "receipt",
+        "proposedValue": "#000000e0",
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "typography.title.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "typography.title.style",
+        "fixtureValue": "Semibold",
+        "verdict": "receipt",
+        "proposedValue": "Semibold",
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "typography.body.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      },
+      {
+        "path": "typography.body.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "configs/antd.json does not mount Modal/Dialog — no capture-floor ledger",
+        "evidence": "extract/computed/configs/antd.json components list has no Dialog"
+      }
+    ],
+    "counts": {
+      "match": 0,
+      "drift": 0,
+      "receipt": 16,
+      "unread": 0
+    }
+  }
+]

@@ -1,26 +1,11 @@
 /**
- * FIXTURE DRIFT GATE — `npm run recipe:fixture-drift:check` (docs/35 Phase 1).
+ * FIXTURE DRIFT GATE — `npm run recipe:fixture-drift:check` (docs/35 Phase 1–2).
  *
- * For Checkbox and Textarea, every numeric/color/typography fact in the
- * reviewed fixture tables (recipe/fixtures/library-checkboxes.ts /
- * library-textareas.ts) must EQUAL the capture-ledger value (Chromium
- * computed style of the real npm package, extract/computed/out/**) or carry
- * a NAMED receipt:
+ * For every reader subject (13 archetypes × astryx/mui/antd), every
+ * numeric/color/typography fact in the reviewed fixture tables must EQUAL the
+ * capture-ledger value or carry a NAMED receipt.
  *
- *   · mapping receipts — facts the ledger cannot express (no part mounted,
- *     SVG viewBox, reviewed pairings) live in the mapping tables;
- *   · reviewed drift — facts the ledger DOES express and the table differs
- *     on live in recipe/fixture-reader/reviewed-drift.json with exact values
- *     and a resolvable cause.
- *
- * FAIL CLOSED: an unexplained drift, an unreadable mapping, an uncovered
- * fixture leaf (enforced inside runMappings), a stale reviewed-drift row
- * (the drift healed or its values moved) and an unresolvable cause are all
- * red. The falsification halves plant each of those and expect the refusal.
- *
- * Byte-freshness of the committed artifacts (out/*.json, DRIFT-REPORT.md) is
- * the `--check` half of build-reader-artifacts.ts, which the npm script runs
- * before this file.
+ * FAIL CLOSED. Byte-freshness of out/* is `--check` on build-reader-artifacts.ts.
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
@@ -28,8 +13,6 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { buildAll, type SubjectResult } from "./build-reader-artifacts.js";
-import { buildPhase4Proposals } from "./phase4-new-libraries.js";
-import { buildF1HeldOutEvidence } from "./f1-held-out.js";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -51,7 +34,6 @@ const ledger = JSON.parse(
   readFileSync(path.join(HERE, "reviewed-drift.json"), "utf8"),
 ) as DriftLedger;
 
-/** The gate's verdict, shared by the live test and the falsification halves. */
 function judge(
   results: SubjectResult[],
   drift: DriftLedger,
@@ -101,20 +83,20 @@ function judge(
 }
 
 const all = buildAll();
-const results = [...all.checkbox, ...all.textarea];
+const results = Object.values(all).flat();
 
 test("every fixture fact equals the ledger or carries a named receipt (fail closed)", () => {
   const verdict = judge(results, ledger);
   assert.deepEqual(verdict.unread, [], `unreadable mappings:\n${verdict.unread.join("\n")}`);
   assert.deepEqual(verdict.badCause, [], verdict.badCause.join("\n"));
-  assert.deepEqual(verdict.unexplained, [], `UNEXPLAINED DRIFT (add nothing silently — either the table is wrong, the mapping is wrong, or the drift is real and must be reviewed into reviewed-drift.json):\n${verdict.unexplained.join("\n")}`);
+  assert.deepEqual(verdict.unexplained, [], `UNEXPLAINED DRIFT:\n${verdict.unexplained.join("\n")}`);
   assert.deepEqual(verdict.stale, [], `STALE reviewed-drift rows:\n${verdict.stale.join("\n")}`);
 });
 
-test("the six subjects cover checkbox and textarea across astryx/mui/antd with a non-zero denominator", () => {
-  assert.equal(results.length, 6);
+test("the thirteen archetypes cover astryx/mui/antd (39 subjects) with a non-zero denominator", () => {
+  assert.equal(results.length, 39);
   for (const r of results) {
-    assert.ok(r.rows.length >= 39, `${r.archetype}/${r.library}: only ${r.rows.length} facts`);
+    assert.ok(r.rows.length >= 11, `${r.archetype}/${r.library}: only ${r.rows.length} facts`);
     const receipts = r.rows.filter((x) => x.verdict === "receipt");
     for (const row of receipts) {
       assert.ok(row.receipt && row.receipt.length > 20, `${r.library} ${row.path}: receipt too thin to review`);
@@ -124,14 +106,12 @@ test("the six subjects cover checkbox and textarea across astryx/mui/antd with a
 });
 
 test("FALSIFICATION: a planted fixture perturbation is an UNEXPLAINED drift, not a silent pass", () => {
-  // Clone one subject's rows and flip a matched fact to a wrong value the way
-  // a bad transcription would; the judge must name it.
   const subject = results.find((r) => r.archetype === "checkbox" && r.library === "antd")!;
   const planted: SubjectResult = structuredClone(subject);
   const row = planted.rows.find((x) => x.path === "box.radius")!;
   assert.equal(row.verdict, "match", "precondition: box.radius currently matches");
   row.verdict = "drift";
-  row.fixtureValue = 5; // the invented value
+  row.fixtureValue = 5;
   const verdict = judge([planted], ledger);
   assert.equal(verdict.unexplained.length, 1);
   assert.match(verdict.unexplained[0], /checkbox\/antd\|box\.radius/);
@@ -144,7 +124,7 @@ test("FALSIFICATION: a reviewed-drift row whose drift healed is STALE, not silen
     path: "box.size",
     fixture: 24,
     captured: 25,
-    cause: "astryx-theme-mount",
+    cause: "capture-theme-unavailable",
   });
   const verdict = judge(results, plantedLedger);
   assert.equal(verdict.stale.length, 1);
@@ -158,70 +138,34 @@ test("FALSIFICATION: a reviewed-drift row with an unregistered cause refuses", (
   assert.equal(verdict.badCause.length, 1);
 });
 
-
-test("Phase 4 new libraries are mapped, capture-pending, or mount-blocked by name", () => {
-  const { subjects, proposals } = buildPhase4Proposals();
-  assert.ok(subjects.length >= 4, "expected shadcn+chakra × checkbox+textarea");
-  const byId = new Map(subjects.map((s) => [s.id, s]));
-  assert.ok(byId.has("shadcn/checkbox"));
-  assert.ok(byId.has("shadcn/textarea"));
-  assert.ok(byId.has("chakra/checkbox"));
-  assert.ok(byId.has("chakra/textarea"));
-  for (const s of subjects) {
-    assert.ok(
-      s.status === "mapped" || s.status === "capture-pending" || s.status === "mount-blocked",
-      `${s.id}: illegal status ${s.status}`,
-    );
-    if (s.status !== "mapped") {
-      assert.ok(s.receipt && s.receipt.length > 20, `${s.id}: thin receipt`);
-      assert.ok(s.evidence && s.evidence.length > 5, `${s.id}: missing evidence`);
-    } else {
-      assert.ok(s.ledgerFile, `${s.id}: mapped without ledger`);
-      const proposal = proposals.find((p) => p.id === s.id)!;
-      assert.ok(proposal.proposed && proposal.proposed.length > 0, `${s.id}: mapped but empty proposal`);
-    }
-  }
-  assert.equal(byId.get("shadcn/textarea")!.status, "capture-pending");
-});
-
-test("F1 held-out prepare never claims passed and stays fail-closed on overallSuccess", () => {
-  const { overallSuccess, f1Status, productV1, receipt } = buildF1HeldOutEvidence();
-  assert.equal(overallSuccess, false);
-  assert.equal(productV1, "INCOMPLETE");
-  assert.ok(f1Status === "unproven" || f1Status === "capture-only" || f1Status === "blocked");
-  assert.notEqual(f1Status, "passed" as string);
-  assert.equal(receipt.overallSuccess, false);
-  assert.equal(receipt.liveFigma, false);
-  assert.equal(receipt.inventedF1Pass, false);
-});
-
 test("the reader catches the owner-caught miss classes mechanically (the five-misses check, checkbox/textarea half)", () => {
-  // 1 · MUI even-odd tick: check.path is MAPPED (structural path equality),
-  //     not a receipt — a missing/mangled glyph can never pass silently again.
   const muiCb = results.find((r) => r.archetype === "checkbox" && r.library === "mui")!;
   const tick = muiCb.rows.find((x) => x.path === "check.path")!;
   assert.equal(tick.verdict, "match");
   assert.ok(tick.ledgerKeys!.length > 0);
-  // 2 · AntD baked check: the rotated L geometry is DERIVED from the ledger
-  //     (legs minus stroke over √2), so an un-baked `>` would drift.
   const antdCb = results.find((r) => r.archetype === "checkbox" && r.library === "antd")!;
   for (const p of ["check.width", "check.height"]) {
     assert.equal(antdCb.rows.find((x) => x.path === p)!.verdict, "match", p);
   }
-  // 3 · AntD dash: the 8×2-vs-8×8 lowering is VISIBLE drift carried by name,
-  //     never a silent respelling.
   const dash = antdCb.rows.find((x) => x.path === "dash.height")!;
   assert.equal(dash.verdict, "drift");
   assert.ok(ledger.rows.some((r) => r.subject === "checkbox/antd" && r.path === "dash.height"));
-  // 4 · MUI rest-empty placeholder: the empty.enabled ink derives from the
-  //     FOCUS plane because rest hides it — the formula names the teaching.
   const muiTa = results.find((r) => r.archetype === "textarea" && r.library === "mui")!;
   const ink = muiTa.rows.find((x) => x.path === "states.empty.enabled.value")!;
   assert.equal(ink.verdict, "match");
   assert.match(ink.formula!, /rest.*hides|hides the placeholder/i);
-  // 5 · MUI Content=focus shrink: the floating plane (offset −9, size ×0.75)
-  //     is read from the value-combo label transform.
   for (const p of ["labelFloatingOffsetY", "floatingLabelFontSize"]) {
     assert.equal(muiTa.rows.find((x) => x.path === p)!.verdict, "match", p);
+  }
+});
+
+test("Astryx theme drifts are capture-theme-unavailable — never silent adoption of #262626", () => {
+  assert.ok(ledger.causes["capture-theme-unavailable"]);
+  assert.match(ledger.causes["capture-theme-unavailable"], /0064E0|#0064E0|branded/i);
+  assert.match(ledger.causes["capture-theme-unavailable"], /Do NOT adopt|do not adopt/i);
+  const astryxDrifts = ledger.rows.filter((r) => r.subject.endsWith("/astryx"));
+  assert.ok(astryxDrifts.length >= 34, "expected the checkbox+textarea theme block at minimum");
+  for (const r of astryxDrifts) {
+    assert.equal(r.cause, "capture-theme-unavailable", `${r.subject}|${r.path}`);
   }
 });

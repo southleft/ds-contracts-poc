@@ -1,0 +1,303 @@
+[
+  {
+    "library": "astryx",
+    "archetype": "menu",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "DropdownMenu"
+    },
+    "ledger": null,
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "panel.padding": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "panel.radius": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "panel.itemSpacing": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "panel.fill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "item.paddingX": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "item.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "item.minHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "item.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "labelLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "label": {
+        "fixture": "#0a1317ff",
+        "proposed": "#0a1317ff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the capture floor has no Menu subject — configs/astryx.json does not mount Menu [docs/34 Astryx Menu — no extract/computed capture subject]"
+      }
+    }
+  },
+  {
+    "library": "mui",
+    "archetype": "menu",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Menu"
+    },
+    "ledger": "extract/computed/out/mui/menu/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "panel.padding": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Menu-paper padding is 0; the 8px vertical padding lives on Menu-list — the recipe spells panel.padding 0 and does not expose list padding as a separate leaf [Menu.js paper padding 0 — reviewed 0]"
+      },
+      "panel.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-paper.border-top-left-radius"
+      },
+      "panel.itemSpacing": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: Menu list has no gap — 0 is the recipe spelling [reviewed 0]"
+      },
+      "panel.fill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenu-paper.background-color"
+      },
+      "item.paddingX": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.padding-left"
+      },
+      "item.paddingY": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.padding-top"
+      },
+      "item.minHeight": {
+        "fixture": 48,
+        "proposed": 48,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: MenuItem dense/default computed height is 36 under the capture mount; the recipe cites MenuItem minHeight 48 from the source token — that 48 is the reviewed source citation, not the dense capture plane [MenuItem.js minHeight 48 — reviewed 48]"
+      },
+      "item.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.background-color"
+      },
+      "labelFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.line-height"
+      },
+      "label": {
+        "fixture": "#000000de",
+        "proposed": "#000000de",
+        "verdict": "match",
+        "captured": "#000000de",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.color"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: recipe spelling of the MenuItem line-height unit axis (px length) [reviewed px]"
+      },
+      "typography.label.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.font-family"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/menu/captured-truth.json#__default cls:MuiMenuItem-root.font-weight"
+      }
+    }
+  },
+  {
+    "library": "antd",
+    "archetype": "menu",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Dropdown"
+    },
+    "ledger": null,
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "panel.padding": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "panel.radius": {
+        "fixture": 8,
+        "proposed": 8,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "panel.itemSpacing": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "panel.fill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "item.paddingX": {
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "item.paddingY": {
+        "fixture": 5,
+        "proposed": 5,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "item.minHeight": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "item.fill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "labelLineHeight": {
+        "fixture": 22,
+        "proposed": 22,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "label": {
+        "fixture": "#000000e0",
+        "proposed": "#000000e0",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "typography.label.family": {
+        "fixture": "-apple-system",
+        "proposed": "-apple-system",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: configs/antd.json does not mount Menu — no capture-floor ledger [extract/computed/configs/antd.json components list has no Menu]"
+      }
+    }
+  }
+]

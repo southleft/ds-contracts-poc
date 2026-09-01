@@ -1,0 +1,969 @@
+[
+  {
+    "archetype": "switch",
+    "library": "astryx",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "Switch"
+    },
+    "ledgerFile": "extract/computed/out/astryx/switch/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.width",
+        "fixtureValue": 40,
+        "verdict": "match",
+        "capturedValue": 40,
+        "proposedValue": 40,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
+        ]
+      },
+      {
+        "path": "wrapper.height",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
+        ]
+      },
+      {
+        "path": "wrapper.padding",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the 40×24 wrapper has no extra padding outside the track — 0 is the recipe's spelling",
+        "evidence": "Switch.tsx switchWrapper 40×24 — reviewed 0"
+      },
+      {
+        "path": "track.width",
+        "fixtureValue": 40,
+        "verdict": "match",
+        "capturedValue": 40,
+        "proposedValue": 40,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
+        ]
+      },
+      {
+        "path": "track.height",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
+        ]
+      },
+      {
+        "path": "track.radius",
+        "fixtureValue": 9999,
+        "verdict": "match",
+        "capturedValue": 9999,
+        "proposedValue": 9999,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "track.padding",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.padding-left"
+        ]
+      },
+      {
+        "path": "thumb.offSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.width"
+        ]
+      },
+      {
+        "path": "thumb.onSize",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "Switch.tsx THUMB_SIZE_ON 20 — reviewed 20"
+      },
+      {
+        "path": "thumb.travel",
+        "fixtureValue": 14,
+        "verdict": "receipt",
+        "proposedValue": 14,
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "Switch.tsx THUMB_TRAVEL_ON 14 — reviewed 14"
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 8,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default idx:0.column-gap"
+        ]
+      },
+      {
+        "path": "states.false.enabled.trackFill",
+        "fixtureValue": "#0a131733",
+        "verdict": "drift",
+        "capturedValue": "#d4d4d4ff",
+        "proposedValue": "#d4d4d4ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.opacity"
+        ]
+      },
+      {
+        "path": "states.false.enabled.label",
+        "fixtureValue": "#4e606fff",
+        "verdict": "drift",
+        "capturedValue": "#737373ff",
+        "proposedValue": "#737373ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.trackFill",
+        "fixtureValue": "#0a131733",
+        "verdict": "drift",
+        "capturedValue": "#d4d4d4ff",
+        "proposedValue": "#d4d4d4ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch-thumb.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.trackOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.opacity"
+        ]
+      },
+      {
+        "path": "states.false.disabled.label",
+        "fixtureValue": "#a4b0bcff",
+        "verdict": "drift",
+        "capturedValue": "#a3a3a3ff",
+        "proposedValue": "#a3a3a3ff",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-field-label.color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.trackFill",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "receipt",
+        "proposedValue": "#0064e0ff",
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "astryx.css --color-accent #0064E0 — reviewed; do not adopt capture-theme #262626"
+      },
+      {
+        "path": "states.true.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "thumb --color-background-surface — reviewed #ffffffff"
+      },
+      {
+        "path": "states.true.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.true.enabled.label",
+        "fixtureValue": "#4e606fff",
+        "verdict": "receipt",
+        "proposedValue": "#4e606fff",
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "FieldLabel --color-text-secondary — reviewed"
+      },
+      {
+        "path": "states.true.disabled.trackFill",
+        "fixtureValue": "#0064e0ff",
+        "verdict": "receipt",
+        "proposedValue": "#0064e0ff",
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "accent under disabled opacity — reviewed"
+      },
+      {
+        "path": "states.true.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "reviewed #ffffffff"
+      },
+      {
+        "path": "states.true.disabled.trackOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "receipt",
+        "proposedValue": 0.5,
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "disabled track opacity 0.5 — reviewed"
+      },
+      {
+        "path": "states.true.disabled.label",
+        "fixtureValue": "#a4b0bcff",
+        "verdict": "receipt",
+        "proposedValue": "#a4b0bcff",
+        "receipt": "the committed Astryx Switch capture enumerates labelPosition × isDisabled only — value/checked is NOT an axis (configs/astryx.json Switch __note:valueAxis); the ON plane never rendered",
+        "evidence": "FieldLabel disabled — reviewed"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-size"
+        ]
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "flex align-items:center on the row — recipe spelling",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "hitClips",
+        "fixtureValue": "false",
+        "verdict": "receipt",
+        "proposedValue": "false",
+        "receipt": "recipe anatomy spelling (hit target does not clip)",
+        "evidence": "reviewed false"
+      },
+      {
+        "path": "trackClips",
+        "fixtureValue": "false",
+        "verdict": "receipt",
+        "proposedValue": "false",
+        "receipt": "recipe anatomy spelling (track does not clip the thumb)",
+        "evidence": "reviewed false"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "drift",
+        "capturedValue": "Figtree",
+        "proposedValue": "Figtree",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-family"
+        ]
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 5,
+      "receipt": 14,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "switch",
+    "library": "mui",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Switch"
+    },
+    "ledgerFile": "extract/computed/out/mui/switch/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.width",
+        "fixtureValue": 58,
+        "verdict": "match",
+        "capturedValue": 58,
+        "proposedValue": 58,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-root.width"
+        ]
+      },
+      {
+        "path": "wrapper.height",
+        "fixtureValue": 38,
+        "verdict": "match",
+        "capturedValue": 38,
+        "proposedValue": 38,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-root.height"
+        ]
+      },
+      {
+        "path": "wrapper.padding",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-root.padding-left"
+        ]
+      },
+      {
+        "path": "track.width",
+        "fixtureValue": 34,
+        "verdict": "match",
+        "capturedValue": 34,
+        "proposedValue": 34,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-track.width"
+        ]
+      },
+      {
+        "path": "track.height",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-track.height"
+        ]
+      },
+      {
+        "path": "track.radius",
+        "fixtureValue": 7,
+        "verdict": "match",
+        "capturedValue": 7,
+        "proposedValue": 7,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-track.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "track.padding",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "MUI track has no inset padding — 0 is the recipe's spelling",
+        "evidence": "Switch.js track 34×14 — reviewed 0"
+      },
+      {
+        "path": "thumb.offSize",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-thumb.width"
+        ]
+      },
+      {
+        "path": "thumb.onSize",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default cls:MuiSwitch-thumb.width"
+        ]
+      },
+      {
+        "path": "thumb.travel",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default cls:MuiSwitch-switchBase.transform"
+        ],
+        "formula": "checked SwitchBase translateX is the travel"
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "FormControlLabel gap 0 — reviewed 0"
+      },
+      {
+        "path": "states.false.enabled.trackFill",
+        "fixtureValue": "#00000061",
+        "verdict": "match",
+        "capturedValue": "#00000061",
+        "proposedValue": "#00000061",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-track.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-track.opacity"
+        ],
+        "formula": "track CSS opacity is baked into the fill so the nested thumb stays opaque"
+      },
+      {
+        "path": "states.false.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-thumb.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "recipe bakes the track's CSS opacity into trackFill; the spelled opacity is 1 so the thumb stays opaque",
+        "evidence": "Switch.js track opacity 0.38 baked into #00000061 — reviewed 1"
+      },
+      {
+        "path": "states.false.enabled.label",
+        "fixtureValue": "#000000de",
+        "verdict": "receipt",
+        "proposedValue": "#000000de",
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "palette.text.primary #000000de — reviewed"
+      },
+      {
+        "path": "states.false.disabled.trackFill",
+        "fixtureValue": "#0000001f",
+        "verdict": "match",
+        "capturedValue": "#0000001f",
+        "proposedValue": "#0000001f",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default cls:MuiSwitch-track.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default cls:MuiSwitch-track.opacity"
+        ],
+        "formula": "disabled track opacity baked into the fill"
+      },
+      {
+        "path": "states.false.disabled.thumbFill",
+        "fixtureValue": "#f5f5f5ff",
+        "verdict": "match",
+        "capturedValue": "#f5f5f5ff",
+        "proposedValue": "#f5f5f5ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.disabled__default cls:MuiSwitch-thumb.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "baked into trackFill — spelled 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.false.disabled.label",
+        "fixtureValue": "#00000061",
+        "verdict": "receipt",
+        "proposedValue": "#00000061",
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "palette.text.disabled #00000061 — reviewed"
+      },
+      {
+        "path": "states.true.enabled.trackFill",
+        "fixtureValue": "#1976d280",
+        "verdict": "match",
+        "capturedValue": "#1976d280",
+        "proposedValue": "#1976d280",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default cls:MuiSwitch-track.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default cls:MuiSwitch-track.opacity"
+        ],
+        "formula": "checked track opacity 0.5 baked into #1976d280"
+      },
+      {
+        "path": "states.true.enabled.thumbFill",
+        "fixtureValue": "#1976d2ff",
+        "verdict": "match",
+        "capturedValue": "#1976d2ff",
+        "proposedValue": "#1976d2ff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default cls:MuiSwitch-thumb.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "baked into trackFill — spelled 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.true.enabled.label",
+        "fixtureValue": "#000000de",
+        "verdict": "receipt",
+        "proposedValue": "#000000de",
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "palette.text.primary #000000de — reviewed"
+      },
+      {
+        "path": "states.true.disabled.trackFill",
+        "fixtureValue": "#1976d21f",
+        "verdict": "match",
+        "capturedValue": "#1976d21f",
+        "proposedValue": "#1976d21f",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default cls:MuiSwitch-track.background-color",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default cls:MuiSwitch-track.opacity"
+        ],
+        "formula": "disabled checked track opacity baked into the fill"
+      },
+      {
+        "path": "states.true.disabled.thumbFill",
+        "fixtureValue": "#a7caedff",
+        "verdict": "match",
+        "capturedValue": "#a7caedff",
+        "proposedValue": "#a7caedff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.disabled__default cls:MuiSwitch-thumb.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "baked into trackFill — spelled 1",
+        "evidence": "reviewed 1"
+      },
+      {
+        "path": "states.true.disabled.label",
+        "fixtureValue": "#00000061",
+        "verdict": "receipt",
+        "proposedValue": "#00000061",
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "palette.text.disabled #00000061 — reviewed"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "createTypography.js body1 16 — reviewed 16"
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "recipe spelling of the reviewed FormControlLabel pairing",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "hitClips",
+        "fixtureValue": "true",
+        "verdict": "receipt",
+        "proposedValue": "true",
+        "receipt": "Switch-root overflow hidden on the 38px hit — recipe spelling",
+        "evidence": "reviewed true"
+      },
+      {
+        "path": "trackClips",
+        "fixtureValue": "false",
+        "verdict": "receipt",
+        "proposedValue": "false",
+        "receipt": "track does not clip the thumb",
+        "evidence": "reviewed false"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "receipt",
+        "proposedValue": "Roboto",
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "createTypography.js fontFamily Roboto — reviewed Roboto"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "the capture mounts the bare Switch (sampleText '' — FormControlLabel is a reviewed pairing); no label part exists in the ledger",
+        "evidence": "createTypography.js fontWeightRegular 400 — reviewed Regular"
+      }
+    ],
+    "counts": {
+      "match": 17,
+      "drift": 0,
+      "receipt": 16,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "switch",
+    "library": "antd",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Switch"
+    },
+    "ledgerFile": "extract/computed/out/antd/switch/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.width",
+        "fixtureValue": 44,
+        "verdict": "match",
+        "capturedValue": 44,
+        "proposedValue": 44,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.width"
+        ]
+      },
+      {
+        "path": "wrapper.height",
+        "fixtureValue": 22,
+        "verdict": "match",
+        "capturedValue": 22,
+        "proposedValue": 22,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.height"
+        ]
+      },
+      {
+        "path": "wrapper.padding",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "the 44×22 root has no extra padding — 0 is the recipe's spelling",
+        "evidence": "prepareComponentToken padding 2 is INSIDE the track — reviewed 0 on the wrapper"
+      },
+      {
+        "path": "track.width",
+        "fixtureValue": 44,
+        "verdict": "match",
+        "capturedValue": 44,
+        "proposedValue": 44,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.width"
+        ]
+      },
+      {
+        "path": "track.height",
+        "fixtureValue": 22,
+        "verdict": "match",
+        "capturedValue": 22,
+        "proposedValue": 22,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.height"
+        ]
+      },
+      {
+        "path": "track.radius",
+        "fixtureValue": 100,
+        "verdict": "match",
+        "capturedValue": 100,
+        "proposedValue": 100,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "track.padding",
+        "fixtureValue": 2,
+        "verdict": "receipt",
+        "proposedValue": 2,
+        "receipt": "handle inset is 2px (padding token) — not a CSS padding on the root",
+        "evidence": "prepareComponentToken padding 2 — reviewed 2"
+      },
+      {
+        "path": "thumb.offSize",
+        "fixtureValue": 18,
+        "verdict": "match",
+        "capturedValue": 18,
+        "proposedValue": 18,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch-handle.width"
+        ]
+      },
+      {
+        "path": "thumb.onSize",
+        "fixtureValue": 18,
+        "verdict": "match",
+        "capturedValue": 18,
+        "proposedValue": 18,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.checked.enabled__default cls:ant-switch-handle.width"
+        ]
+      },
+      {
+        "path": "thumb.travel",
+        "fixtureValue": 22,
+        "verdict": "receipt",
+        "proposedValue": 22,
+        "receipt": "travel = trackMinWidth − handleSize − 2×padding = 44 − 18 − 4 = 22; the handle inset is not a single computed channel",
+        "evidence": "v2 stay accuracyLoop travel 22 = 44-18-2*2 — reviewed 22"
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 8,
+        "verdict": "receipt",
+        "proposedValue": 8,
+        "receipt": "antd Switch mounts no label — the recipe's label row is a reviewed pairing, never a captured part",
+        "evidence": "--margin-xs 8 — the fixture's citation"
+      },
+      {
+        "path": "states.false.enabled.trackFill",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch-handle::before.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.opacity"
+        ]
+      },
+      {
+        "path": "states.false.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "receipt",
+        "proposedValue": "#000000e0",
+        "receipt": "antd Switch mounts no label — the recipe's label row is a reviewed pairing, never a captured part",
+        "evidence": "--color-text — the fixture's citation"
+      },
+      {
+        "path": "states.false.disabled.trackFill",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.disabled__default cls:ant-switch.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.disabled__default cls:ant-switch-handle::before.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.trackOpacity",
+        "fixtureValue": 0.65,
+        "verdict": "match",
+        "capturedValue": 0.65,
+        "proposedValue": 0.65,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.disabled__default cls:ant-switch.opacity"
+        ]
+      },
+      {
+        "path": "states.false.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "receipt",
+        "proposedValue": "#00000040",
+        "receipt": "antd Switch mounts no label — the recipe's label row is a reviewed pairing, never a captured part",
+        "evidence": "--color-text-disabled — the fixture's citation"
+      },
+      {
+        "path": "states.true.enabled.trackFill",
+        "fixtureValue": "#1677ffff",
+        "verdict": "match",
+        "capturedValue": "#1677ffff",
+        "proposedValue": "#1677ffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.checked.enabled__default cls:ant-switch.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.checked.enabled__default cls:ant-switch-handle::before.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.checked.enabled__default cls:ant-switch.opacity"
+        ]
+      },
+      {
+        "path": "states.true.enabled.label",
+        "fixtureValue": "#000000e0",
+        "verdict": "receipt",
+        "proposedValue": "#000000e0",
+        "receipt": "antd Switch mounts no label — the recipe's label row is a reviewed pairing, never a captured part",
+        "evidence": "--color-text — the fixture's citation"
+      },
+      {
+        "path": "states.true.disabled.trackFill",
+        "fixtureValue": "#1677ffff",
+        "verdict": "match",
+        "capturedValue": "#1677ffff",
+        "proposedValue": "#1677ffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.checked.disabled__default cls:ant-switch.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.checked.disabled__default cls:ant-switch-handle::before.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.trackOpacity",
+        "fixtureValue": 0.65,
+        "verdict": "match",
+        "capturedValue": 0.65,
+        "proposedValue": 0.65,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.checked.disabled__default cls:ant-switch.opacity"
+        ]
+      },
+      {
+        "path": "states.true.disabled.label",
+        "fixtureValue": "#00000040",
+        "verdict": "receipt",
+        "proposedValue": "#00000040",
+        "receipt": "antd Switch mounts no label — the recipe's label row is a reviewed pairing, never a captured part",
+        "evidence": "--color-text-disabled — the fixture's citation"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch.font-size"
+        ]
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "recipe spelling of the reviewed label pairing",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "hitClips",
+        "fixtureValue": "false",
+        "verdict": "receipt",
+        "proposedValue": "false",
+        "receipt": "antd switch does not clip the handle",
+        "evidence": "reviewed false"
+      },
+      {
+        "path": "trackClips",
+        "fixtureValue": "false",
+        "verdict": "receipt",
+        "proposedValue": "false",
+        "receipt": "antd switch does not clip the handle",
+        "evidence": "reviewed false"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites; additionally no label part is mounted",
+        "evidence": "theme.getDesignToken().fontFamily starts -apple-system"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "receipt",
+        "proposedValue": "Regular",
+        "receipt": "antd Switch mounts no label — the recipe's label row is a reviewed pairing, never a captured part",
+        "evidence": "reviewed Regular"
+      }
+    ],
+    "counts": {
+      "match": 20,
+      "drift": 0,
+      "receipt": 13,
+      "unread": 0
+    }
+  }
+]

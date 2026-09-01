@@ -1,0 +1,578 @@
+[
+  {
+    "archetype": "badge",
+    "library": "astryx",
+    "source": {
+      "packageName": "@astryxdesign/core",
+      "version": "0.1.6",
+      "exportName": "Badge (overlay refused)"
+    },
+    "ledgerFile": null,
+    "rows": [
+      {
+        "path": "host.size",
+        "fixtureValue": 40,
+        "verdict": "receipt",
+        "proposedValue": 40,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "host.radius",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "host.fill",
+        "fixtureValue": "#bdbdbdff",
+        "verdict": "receipt",
+        "proposedValue": "#bdbdbdff",
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.height",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.minWidth",
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.paddingX",
+        "fixtureValue": 6,
+        "verdict": "receipt",
+        "proposedValue": 6,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.radius",
+        "fixtureValue": 10,
+        "verdict": "receipt",
+        "proposedValue": 10,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "receipt",
+        "proposedValue": 0,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.translateX",
+        "fixtureValue": 10,
+        "verdict": "receipt",
+        "proposedValue": 10,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.translateY",
+        "fixtureValue": -10,
+        "verdict": "receipt",
+        "proposedValue": -10,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.fill",
+        "fixtureValue": "#d32f2fff",
+        "verdict": "receipt",
+        "proposedValue": "#d32f2fff",
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.border",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "indicator.opacity",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 12,
+        "verdict": "receipt",
+        "proposedValue": 12,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 12,
+        "verdict": "receipt",
+        "proposedValue": 12,
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "label",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "receipt",
+        "proposedValue": "Roboto",
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "receipt",
+        "proposedValue": "Medium",
+        "receipt": "Astryx Badge is an inline status label (height 20, padX 8, radius-full, variant neutral) — not an anchored overlay. Do not invent an Astryx pip. Named refusal astryxBadgeOverlayRefusal.",
+        "evidence": "recipe/fixtures/library-badges.ts astryxBadgeOverlayRefusal"
+      }
+    ],
+    "counts": {
+      "match": 0,
+      "drift": 0,
+      "receipt": 19,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "badge",
+    "library": "mui",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Badge"
+    },
+    "ledgerFile": "extract/computed/out/mui/badge/captured-truth.json",
+    "rows": [
+      {
+        "path": "host.size",
+        "fixtureValue": 40,
+        "verdict": "match",
+        "capturedValue": 40,
+        "proposedValue": 40,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiAvatar-root.height"
+        ]
+      },
+      {
+        "path": "host.radius",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiAvatar-root.border-top-left-radius",
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiAvatar-root.height"
+        ],
+        "formula": "circular host is 50% → size/2"
+      },
+      {
+        "path": "host.fill",
+        "fixtureValue": "#bdbdbdff",
+        "verdict": "match",
+        "capturedValue": "#bdbdbdff",
+        "proposedValue": "#bdbdbdff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiAvatar-root.background-color"
+        ]
+      },
+      {
+        "path": "indicator.height",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.height"
+        ]
+      },
+      {
+        "path": "indicator.minWidth",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.min-width"
+        ]
+      },
+      {
+        "path": "indicator.paddingX",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.padding-left"
+        ]
+      },
+      {
+        "path": "indicator.radius",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "indicator.borderWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.border-top-width"
+        ]
+      },
+      {
+        "path": "indicator.translateX",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform"
+        ],
+        "formula": "matrix tx of the anchored badge"
+      },
+      {
+        "path": "indicator.translateY",
+        "fixtureValue": -10,
+        "verdict": "match",
+        "capturedValue": -10,
+        "proposedValue": -10,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.transform"
+        ],
+        "formula": "matrix ty of the anchored badge"
+      },
+      {
+        "path": "indicator.fill",
+        "fixtureValue": "#d32f2fff",
+        "verdict": "match",
+        "capturedValue": "#d32f2fff",
+        "proposedValue": "#d32f2fff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.background-color"
+        ]
+      },
+      {
+        "path": "indicator.border",
+        "fixtureValue": "#00000000",
+        "verdict": "receipt",
+        "proposedValue": "#00000000",
+        "receipt": "standard BadgeBadge draws no painted border — transparent is the recipe spelling",
+        "evidence": "Badge.js border none — reviewed #00000000"
+      },
+      {
+        "path": "indicator.opacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.opacity"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.line-height"
+        ]
+      },
+      {
+        "path": "label",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "recipe anatomy spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.font-family"
+        ]
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/mui/badge/captured-truth.json#error.standard__default cls:MuiBadge-badge.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 17,
+      "drift": 0,
+      "receipt": 2,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "badge",
+    "library": "antd",
+    "source": {
+      "packageName": "antd",
+      "version": "5.29.3",
+      "exportName": "Badge"
+    },
+    "ledgerFile": "extract/computed/out/antd/badge/captured-truth.json",
+    "rows": [
+      {
+        "path": "host.size",
+        "fixtureValue": 32,
+        "verdict": "match",
+        "capturedValue": 32,
+        "proposedValue": 32,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-avatar.height"
+        ]
+      },
+      {
+        "path": "host.radius",
+        "fixtureValue": 16,
+        "verdict": "receipt",
+        "proposedValue": 16,
+        "receipt": "the capture mounts a default Avatar (borderRadiusLG 6) as the host child — the recipe spells a CIRCLE host (size/2 = 16); that circle host is a reviewed pairing, not the ledger's default Avatar",
+        "evidence": "Avatar circle size/2 — reviewed 16"
+      },
+      {
+        "path": "host.fill",
+        "fixtureValue": "#00000040",
+        "verdict": "match",
+        "capturedValue": "#00000040",
+        "proposedValue": "#00000040",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-avatar.background-color"
+        ]
+      },
+      {
+        "path": "indicator.height",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.height"
+        ]
+      },
+      {
+        "path": "indicator.minWidth",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.min-width"
+        ]
+      },
+      {
+        "path": "indicator.paddingX",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.padding-left"
+        ]
+      },
+      {
+        "path": "indicator.radius",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "indicator.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "receipt",
+        "proposedValue": 1,
+        "receipt": "antd count uses box-shadow as the white ring, not CSS border-width (ledger border-top-width is 0) — the recipe's 1px border is the reviewed box-shadow lowering",
+        "evidence": "Badge count box-shadow ring — reviewed 1"
+      },
+      {
+        "path": "indicator.translateX",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.transform"
+        ]
+      },
+      {
+        "path": "indicator.translateY",
+        "fixtureValue": -10,
+        "verdict": "match",
+        "capturedValue": -10,
+        "proposedValue": -10,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.transform"
+        ]
+      },
+      {
+        "path": "indicator.fill",
+        "fixtureValue": "#ff4d4fff",
+        "verdict": "match",
+        "capturedValue": "#ff4d4fff",
+        "proposedValue": "#ff4d4fff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.background-color"
+        ]
+      },
+      {
+        "path": "indicator.border",
+        "fixtureValue": "#ffffffff",
+        "verdict": "receipt",
+        "proposedValue": "#ffffffff",
+        "receipt": "the white ring is a box-shadow, not border-color — recipe spells #ffffffff from the shadow",
+        "evidence": "Badge count box-shadow #fff — reviewed #ffffffff"
+      },
+      {
+        "path": "indicator.opacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.opacity"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.line-height"
+        ]
+      },
+      {
+        "path": "label",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "outside",
+        "verdict": "receipt",
+        "proposedValue": "outside",
+        "receipt": "recipe anatomy spelling (outside for the shadow ring)",
+        "evidence": "reviewed outside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "-apple-system",
+        "verdict": "receipt",
+        "proposedValue": "-apple-system",
+        "receipt": "the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites",
+        "evidence": "theme.getDesignToken().fontFamily starts -apple-system"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/antd/badge/captured-truth.json#count.unset__default cls:ant-badge-count.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 14,
+      "drift": 0,
+      "receipt": 5,
+      "unread": 0
+    }
+  }
+]
