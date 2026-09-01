@@ -1,0 +1,76 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Checkbox",
+  "varPrefix": "--chakra-",
+  "facts": [
+    {
+      "part": "checkbox__control",
+      "channel": "color",
+      "combo": "checked.enabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "colors-color-palette-contrast",
+      "varName": "--chakra-colors-color-palette-contrast",
+      "anchor": {
+        "selector": ".css-1tnpu33:is([data-state=\"checked\"], [data-state=\"indeterminate\"])"
+      }
+    },
+    {
+      "part": "checkbox__control",
+      "channel": "color",
+      "combo": "checked.disabled",
+      "axisValues": {
+        "checked": "checked"
+      },
+      "token": "colors-color-palette-contrast",
+      "varName": "--chakra-colors-color-palette-contrast",
+      "anchor": {
+        "selector": ".css-1tnpu33:is([data-state=\"checked\"], [data-state=\"indeterminate\"])"
+      }
+    },
+    {
+      "part": "checkbox__control",
+      "channel": "color",
+      "combo": "indeterminate.enabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "colors-color-palette-contrast",
+      "varName": "--chakra-colors-color-palette-contrast",
+      "anchor": {
+        "selector": ".css-1tnpu33:is([data-state=\"checked\"], [data-state=\"indeterminate\"])"
+      }
+    },
+    {
+      "part": "checkbox__control",
+      "channel": "color",
+      "combo": "indeterminate.disabled",
+      "axisValues": {
+        "checked": "indeterminate"
+      },
+      "token": "colors-color-palette-contrast",
+      "varName": "--chakra-colors-color-palette-contrast",
+      "anchor": {
+        "selector": ".css-1tnpu33:is([data-state=\"checked\"], [data-state=\"indeterminate\"])"
+      }
+    }
+  ],
+  "skips": [
+    "checkbox__control.cursor: candidates --chakra-cursor-checkbox → \"cursor-checkbox\" = default (value MATCHES the computed value); --chakra-cursor-disabled → \"cursor-disabled\" = not-allowed (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "checkbox__control.height: candidate --chakra-sizes-5 → \"sizes-5\" = 1.25rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "checkbox__control.width: candidate --chakra-sizes-5 → \"sizes-5\" = 1.25rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "icon.height: candidate --chakra-sizes-full → \"sizes-full\" = 100% (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "icon.width: candidate --chakra-sizes-full → \"sizes-full\" = 100% (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "label.font-size: candidate --chakra-font-sizes-sm → \"font-sizes-sm\" = 0.875rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "label.font-weight: candidate --chakra-font-weights-medium → \"font-weights-medium\" = 500 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "checkbox__control.background: SHORTHAND carrying var(--chakra-colors-color-palette-solid) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

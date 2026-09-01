@@ -1,0 +1,51 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.textarea",
+  "name": "Textarea",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for docs/35 Phase 4 Chakra UI reader subject — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0 Textarea. content axis expands through $props into the controlled value string (empty vs sample) so both placeholder and value planes are captured.",
+  "semantics": {
+    "element": "textarea"
+  },
+  "props": [
+    {
+      "name": "content",
+      "type": {
+        "enum": ["empty", "value"]
+      },
+      "default": "empty",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Content",
+          "values": {
+            "empty": "Empty",
+            "value": "Value"
+          }
+        },
+        "code": { "prop": "value" }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": { "kind": "BOOLEAN", "property": "Disabled" },
+        "code": { "prop": "disabled" }
+      }
+    }
+  ],
+  "states": ["disabled", "focus-visible", "active", "hover"],
+  "anatomy": { "root": {} },
+  "bindings": {
+    "figma": { "anchors": { "fileKey": null, "componentSetKey": null } },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "Textarea"
+      }
+    }
+  }
+}

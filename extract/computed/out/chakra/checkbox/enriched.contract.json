@@ -1,0 +1,312 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for docs/35 Phase 4 Chakra UI reader subject — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Canonical composition pinned from Chakra docs: CheckboxRoot ⊃ (CheckboxHiddenInput, CheckboxControl ⊃ CheckboxIndicator, CheckboxLabel). Tri-state on ONE axis (unchecked|checked|indeterminate) — Chakra accepts checked=\"indeterminate\" directly. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "part-0": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-wrap-mode": "nowrap"
+          },
+          "declaredStates": {
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.checkbox.part-0.bottom}",
+            "color": "{imported.shared.color-09090b}",
+            "height": "{imported.shared.size-1}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-24}",
+            "margin-bottom": "{imported.shared.size-neg-1}",
+            "margin-left": "{imported.shared.size-neg-1}",
+            "margin-right": "{imported.shared.size-neg-1}",
+            "margin-top": "{imported.shared.size-neg-1}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-color": "{imported.shared.color-09090b}",
+            "right": "{imported.checkbox.part-0.right}",
+            "tab-size": "{imported.shared.num-4}",
+            "top": "{imported.checkbox.part-0.top}",
+            "width": "{imported.shared.size-1}"
+          },
+          "codeOnly": [
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        },
+        "checkbox__control": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|checkbox__control — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center",
+            "justify": "center"
+          },
+          "icon": {
+            "asset": "checkbox-checkbox-control",
+            "size": 14
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "text-rendering": "optimizelegibility"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            },
+            "focus-visible": {
+              "outline-style": "solid"
+            }
+          },
+          "tokens": {
+            "border-bottom-left-radius": "{imported.shared.size-2}",
+            "border-bottom-right-radius": "{imported.shared.size-2}",
+            "border-bottom-width": "{imported.shared.size-1}",
+            "border-left-width": "{imported.shared.size-1}",
+            "border-right-width": "{imported.shared.size-1}",
+            "border-top-left-radius": "{imported.shared.size-2}",
+            "border-top-right-radius": "{imported.shared.size-2}",
+            "border-top-width": "{imported.shared.size-1}",
+            "color": "{imported.checkbox.checkbox-control.color}",
+            "flex-shrink": "{imported.checkbox.checkbox-control.flex-shrink}",
+            "height": "{imported.shared.size-20}",
+            "line-height": "{imported.shared.size-24}",
+            "outline-color": "{imported.checkbox.checkbox-control.outline-color}",
+            "padding-bottom": "{imported.shared.size-2}",
+            "padding-left": "{imported.shared.size-2}",
+            "padding-right": "{imported.shared.size-2}",
+            "padding-top": "{imported.shared.size-2}",
+            "tab-size": "{imported.shared.num-4}",
+            "width": "{imported.shared.size-20}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "background-color": "{imported.checkbox.checkbox-control.background-color.checked}",
+                  "border-bottom-color": "{imported.checkbox.checkbox-control.border-bottom-color.checked}",
+                  "border-left-color": "{imported.checkbox.checkbox-control.border-left-color.checked}",
+                  "border-right-color": "{imported.checkbox.checkbox-control.border-right-color.checked}",
+                  "border-top-color": "{imported.checkbox.checkbox-control.border-top-color.checked}"
+                },
+                "indeterminate": {
+                  "background-color": "{imported.checkbox.checkbox-control.background-color.indeterminate}",
+                  "border-bottom-color": "{imported.checkbox.checkbox-control.border-bottom-color.indeterminate}",
+                  "border-left-color": "{imported.checkbox.checkbox-control.border-left-color.indeterminate}",
+                  "border-right-color": "{imported.checkbox.checkbox-control.border-right-color.indeterminate}",
+                  "border-top-color": "{imported.checkbox.checkbox-control.border-top-color.indeterminate}"
+                },
+                "unchecked": {
+                  "background-color": "{imported.checkbox.checkbox-control.background-color.unchecked}",
+                  "border-bottom-color": "{imported.checkbox.checkbox-control.border-bottom-color.unchecked}",
+                  "border-left-color": "{imported.checkbox.checkbox-control.border-left-color.unchecked}",
+                  "border-right-color": "{imported.checkbox.checkbox-control.border-right-color.unchecked}",
+                  "border-top-color": "{imported.checkbox.checkbox-control.border-top-color.unchecked}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "opacity",
+              "value": "0.5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#a1a1aa",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        },
+        "label": {
+          "text": "Accept",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|checkbox__label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "text-rendering": "optimizelegibility",
+            "user-select": "none"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "color": "{imported.shared.color-09090b}",
+            "font-size": "{imported.checkbox.label.font-size}",
+            "font-weight": "{imported.checkbox.label.font-weight}",
+            "line-height": "{imported.shared.size-20}",
+            "tab-size": "{imported.shared.num-4}"
+          },
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "opacity",
+              "value": "0.5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "cursor": "default",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "position": "relative",
+        "text-rendering": "optimizelegibility"
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-09090b}",
+        "column-gap": "{imported.checkbox.root.column-gap}",
+        "height": "{imported.shared.size-20}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-24}",
+        "right": "{imported.shared.size-0}",
+        "row-gap": "{imported.checkbox.root.row-gap}",
+        "tab-size": "{imported.shared.num-4}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.checkbox.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "CheckboxRoot"
+      }
+    }
+  }
+}

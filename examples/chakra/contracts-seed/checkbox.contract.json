@@ -1,0 +1,52 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.checkbox",
+  "name": "Checkbox",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for docs/35 Phase 4 Chakra UI reader subject — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Canonical composition pinned from Chakra docs: CheckboxRoot ⊃ (CheckboxHiddenInput, CheckboxControl ⊃ CheckboxIndicator, CheckboxLabel). Tri-state on ONE axis (unchecked|checked|indeterminate) — Chakra accepts checked=\"indeterminate\" directly.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": ["unchecked", "checked", "indeterminate"]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": { "prop": "checked" }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": { "kind": "BOOLEAN", "property": "Disabled" },
+        "code": { "prop": "disabled" }
+      }
+    }
+  ],
+  "states": ["disabled", "focus-visible", "active", "hover"],
+  "anatomy": { "root": {} },
+  "bindings": {
+    "figma": { "anchors": { "fileKey": null, "componentSetKey": null } },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "CheckboxRoot"
+      }
+    }
+  }
+}

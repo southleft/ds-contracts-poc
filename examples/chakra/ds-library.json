@@ -1,0 +1,15 @@
+{
+  "library": "chakra",
+  "exampleDir": "examples/chakra",
+  "captureOut": "extract/computed/out/chakra",
+  "dtcg": "examples/chakra/tokens/chakra.dtcg.json",
+  "mintedOut": "examples/chakra/tokens/chakra-minted.dtcg.json",
+  "components": ["checkbox", "textarea"],
+  "contractVersion": "0.1.0",
+  "capture": {
+    "config": "extract/computed/configs/chakra.json",
+    "harness": "examples/chakra/.chakra-sandbox",
+    "out": "extract/computed/out/chakra"
+  },
+  "seeds": "examples/chakra/contracts-seed"
+}

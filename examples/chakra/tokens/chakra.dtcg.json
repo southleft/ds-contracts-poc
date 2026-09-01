@@ -1,0 +1,1802 @@
+{
+  "colors-bg": {
+    "$type": "color",
+    "$value": "#FFFFFF",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg)"
+      }
+    }
+  },
+  "colors-bg-emphasized": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-emphasized)"
+      }
+    }
+  },
+  "colors-bg-error": {
+    "$type": "color",
+    "$value": "#fef2f2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-error)"
+      }
+    }
+  },
+  "colors-bg-info": {
+    "$type": "color",
+    "$value": "#eff6ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-info)"
+      }
+    }
+  },
+  "colors-bg-inverted": {
+    "$type": "color",
+    "$value": "#09090B",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-inverted)"
+      }
+    }
+  },
+  "colors-bg-muted": {
+    "$type": "color",
+    "$value": "#f4f4f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-muted)"
+      }
+    }
+  },
+  "colors-bg-panel": {
+    "$type": "color",
+    "$value": "#FFFFFF",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-panel)"
+      }
+    }
+  },
+  "colors-bg-subtle": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-subtle)"
+      }
+    }
+  },
+  "colors-bg-success": {
+    "$type": "color",
+    "$value": "#f0fdf4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-success)"
+      }
+    }
+  },
+  "colors-bg-warning": {
+    "$type": "color",
+    "$value": "#fff7ed",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-bg-warning)"
+      }
+    }
+  },
+  "colors-black": {
+    "$type": "color",
+    "$value": "#09090B",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black)"
+      }
+    }
+  },
+  "colors-black-alpha-100": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.06)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-100)"
+      }
+    }
+  },
+  "colors-black-alpha-200": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.08)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-200)"
+      }
+    }
+  },
+  "colors-black-alpha-300": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.16)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-300)"
+      }
+    }
+  },
+  "colors-black-alpha-400": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.24)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-400)"
+      }
+    }
+  },
+  "colors-black-alpha-50": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.04)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-50)"
+      }
+    }
+  },
+  "colors-black-alpha-500": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.36)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-500)"
+      }
+    }
+  },
+  "colors-black-alpha-600": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.48)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-600)"
+      }
+    }
+  },
+  "colors-black-alpha-700": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.64)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-700)"
+      }
+    }
+  },
+  "colors-black-alpha-800": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.80)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-800)"
+      }
+    }
+  },
+  "colors-black-alpha-900": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.92)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-900)"
+      }
+    }
+  },
+  "colors-black-alpha-950": {
+    "$type": "color",
+    "$value": "rgba(0, 0, 0, 0.95)",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-black-alpha-950)"
+      }
+    }
+  },
+  "colors-blue-100": {
+    "$type": "color",
+    "$value": "#dbeafe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-100)"
+      }
+    }
+  },
+  "colors-blue-200": {
+    "$type": "color",
+    "$value": "#bfdbfe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-200)"
+      }
+    }
+  },
+  "colors-blue-300": {
+    "$type": "color",
+    "$value": "#a3cfff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-300)"
+      }
+    }
+  },
+  "colors-blue-400": {
+    "$type": "color",
+    "$value": "#60a5fa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-400)"
+      }
+    }
+  },
+  "colors-blue-50": {
+    "$type": "color",
+    "$value": "#eff6ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-50)"
+      }
+    }
+  },
+  "colors-blue-500": {
+    "$type": "color",
+    "$value": "#3b82f6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-500)"
+      }
+    }
+  },
+  "colors-blue-600": {
+    "$type": "color",
+    "$value": "#2563eb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-600)"
+      }
+    }
+  },
+  "colors-blue-700": {
+    "$type": "color",
+    "$value": "#173da6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-700)"
+      }
+    }
+  },
+  "colors-blue-800": {
+    "$type": "color",
+    "$value": "#1a3478",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-800)"
+      }
+    }
+  },
+  "colors-blue-900": {
+    "$type": "color",
+    "$value": "#14204a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-900)"
+      }
+    }
+  },
+  "colors-blue-950": {
+    "$type": "color",
+    "$value": "#0c142e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-950)"
+      }
+    }
+  },
+  "colors-blue-border": {
+    "$type": "color",
+    "$value": "#3b82f6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-border)"
+      }
+    }
+  },
+  "colors-blue-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-contrast)"
+      }
+    }
+  },
+  "colors-blue-emphasized": {
+    "$type": "color",
+    "$value": "#a3cfff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-emphasized)"
+      }
+    }
+  },
+  "colors-blue-fg": {
+    "$type": "color",
+    "$value": "#173da6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-fg)"
+      }
+    }
+  },
+  "colors-blue-focus-ring": {
+    "$type": "color",
+    "$value": "#3b82f6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-focus-ring)"
+      }
+    }
+  },
+  "colors-blue-muted": {
+    "$type": "color",
+    "$value": "#bfdbfe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-muted)"
+      }
+    }
+  },
+  "colors-blue-solid": {
+    "$type": "color",
+    "$value": "#2563eb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-solid)"
+      }
+    }
+  },
+  "colors-blue-subtle": {
+    "$type": "color",
+    "$value": "#dbeafe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-blue-subtle)"
+      }
+    }
+  },
+  "colors-border": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border)"
+      }
+    }
+  },
+  "colors-border-emphasized": {
+    "$type": "color",
+    "$value": "#d4d4d8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-emphasized)"
+      }
+    }
+  },
+  "colors-border-error": {
+    "$type": "color",
+    "$value": "#ef4444",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-error)"
+      }
+    }
+  },
+  "colors-border-info": {
+    "$type": "color",
+    "$value": "#3b82f6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-info)"
+      }
+    }
+  },
+  "colors-border-inverted": {
+    "$type": "color",
+    "$value": "#27272a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-inverted)"
+      }
+    }
+  },
+  "colors-border-muted": {
+    "$type": "color",
+    "$value": "#f4f4f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-muted)"
+      }
+    }
+  },
+  "colors-border-subtle": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-subtle)"
+      }
+    }
+  },
+  "colors-border-success": {
+    "$type": "color",
+    "$value": "#22c55e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-success)"
+      }
+    }
+  },
+  "colors-border-warning": {
+    "$type": "color",
+    "$value": "#f97316",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-border-warning)"
+      }
+    }
+  },
+  "colors-color-palette-100": {
+    "$type": "color",
+    "$value": "#f4f4f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-100)"
+      }
+    }
+  },
+  "colors-color-palette-200": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-200)"
+      }
+    }
+  },
+  "colors-color-palette-300": {
+    "$type": "color",
+    "$value": "#d4d4d8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-300)"
+      }
+    }
+  },
+  "colors-color-palette-400": {
+    "$type": "color",
+    "$value": "#a1a1aa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-400)"
+      }
+    }
+  },
+  "colors-color-palette-50": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-50)"
+      }
+    }
+  },
+  "colors-color-palette-500": {
+    "$type": "color",
+    "$value": "#71717a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-500)"
+      }
+    }
+  },
+  "colors-color-palette-600": {
+    "$type": "color",
+    "$value": "#52525b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-600)"
+      }
+    }
+  },
+  "colors-color-palette-700": {
+    "$type": "color",
+    "$value": "#3f3f46",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-700)"
+      }
+    }
+  },
+  "colors-color-palette-800": {
+    "$type": "color",
+    "$value": "#27272a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-800)"
+      }
+    }
+  },
+  "colors-color-palette-900": {
+    "$type": "color",
+    "$value": "#18181b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-900)"
+      }
+    }
+  },
+  "colors-color-palette-950": {
+    "$type": "color",
+    "$value": "#111111",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-950)"
+      }
+    }
+  },
+  "colors-color-palette-border": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-border)"
+      }
+    }
+  },
+  "colors-color-palette-contrast": {
+    "$type": "color",
+    "$value": "#FFFFFF",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-contrast)"
+      }
+    }
+  },
+  "colors-color-palette-emphasized": {
+    "$type": "color",
+    "$value": "#d4d4d8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-emphasized)"
+      }
+    }
+  },
+  "colors-color-palette-fg": {
+    "$type": "color",
+    "$value": "#27272a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-fg)"
+      }
+    }
+  },
+  "colors-color-palette-focus-ring": {
+    "$type": "color",
+    "$value": "#a1a1aa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-focus-ring)"
+      }
+    }
+  },
+  "colors-color-palette-muted": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-muted)"
+      }
+    }
+  },
+  "colors-color-palette-solid": {
+    "$type": "color",
+    "$value": "#18181b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-solid)"
+      }
+    }
+  },
+  "colors-color-palette-subtle": {
+    "$type": "color",
+    "$value": "#f4f4f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-color-palette-subtle)"
+      }
+    }
+  },
+  "colors-current": {
+    "$type": "color",
+    "$value": "currentColor",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-current)"
+      }
+    }
+  },
+  "colors-cyan-100": {
+    "$type": "color",
+    "$value": "#cffafe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-100)"
+      }
+    }
+  },
+  "colors-cyan-200": {
+    "$type": "color",
+    "$value": "#a5f3fc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-200)"
+      }
+    }
+  },
+  "colors-cyan-300": {
+    "$type": "color",
+    "$value": "#67e8f9",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-300)"
+      }
+    }
+  },
+  "colors-cyan-400": {
+    "$type": "color",
+    "$value": "#22d3ee",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-400)"
+      }
+    }
+  },
+  "colors-cyan-50": {
+    "$type": "color",
+    "$value": "#ecfeff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-50)"
+      }
+    }
+  },
+  "colors-cyan-500": {
+    "$type": "color",
+    "$value": "#06b6d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-500)"
+      }
+    }
+  },
+  "colors-cyan-600": {
+    "$type": "color",
+    "$value": "#0891b2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-600)"
+      }
+    }
+  },
+  "colors-cyan-700": {
+    "$type": "color",
+    "$value": "#0c5c72",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-700)"
+      }
+    }
+  },
+  "colors-cyan-800": {
+    "$type": "color",
+    "$value": "#134152",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-800)"
+      }
+    }
+  },
+  "colors-cyan-900": {
+    "$type": "color",
+    "$value": "#072a38",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-900)"
+      }
+    }
+  },
+  "colors-cyan-950": {
+    "$type": "color",
+    "$value": "#051b24",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-950)"
+      }
+    }
+  },
+  "colors-cyan-border": {
+    "$type": "color",
+    "$value": "#06b6d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-border)"
+      }
+    }
+  },
+  "colors-cyan-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-contrast)"
+      }
+    }
+  },
+  "colors-cyan-emphasized": {
+    "$type": "color",
+    "$value": "#67e8f9",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-emphasized)"
+      }
+    }
+  },
+  "colors-cyan-fg": {
+    "$type": "color",
+    "$value": "#0c5c72",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-fg)"
+      }
+    }
+  },
+  "colors-cyan-focus-ring": {
+    "$type": "color",
+    "$value": "#06b6d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-focus-ring)"
+      }
+    }
+  },
+  "colors-cyan-muted": {
+    "$type": "color",
+    "$value": "#a5f3fc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-muted)"
+      }
+    }
+  },
+  "colors-cyan-solid": {
+    "$type": "color",
+    "$value": "#0891b2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-solid)"
+      }
+    }
+  },
+  "colors-cyan-subtle": {
+    "$type": "color",
+    "$value": "#cffafe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-cyan-subtle)"
+      }
+    }
+  },
+  "colors-fg": {
+    "$type": "color",
+    "$value": "#09090B",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg)"
+      }
+    }
+  },
+  "colors-fg-error": {
+    "$type": "color",
+    "$value": "#ef4444",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg-error)"
+      }
+    }
+  },
+  "colors-fg-info": {
+    "$type": "color",
+    "$value": "#2563eb",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg-info)"
+      }
+    }
+  },
+  "colors-fg-inverted": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg-inverted)"
+      }
+    }
+  },
+  "colors-fg-muted": {
+    "$type": "color",
+    "$value": "#52525b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg-muted)"
+      }
+    }
+  },
+  "colors-fg-subtle": {
+    "$type": "color",
+    "$value": "#a1a1aa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg-subtle)"
+      }
+    }
+  },
+  "colors-fg-success": {
+    "$type": "color",
+    "$value": "#16a34a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg-success)"
+      }
+    }
+  },
+  "colors-fg-warning": {
+    "$type": "color",
+    "$value": "#ea580c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-fg-warning)"
+      }
+    }
+  },
+  "colors-gray-100": {
+    "$type": "color",
+    "$value": "#f4f4f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-100)"
+      }
+    }
+  },
+  "colors-gray-200": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-200)"
+      }
+    }
+  },
+  "colors-gray-300": {
+    "$type": "color",
+    "$value": "#d4d4d8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-300)"
+      }
+    }
+  },
+  "colors-gray-400": {
+    "$type": "color",
+    "$value": "#a1a1aa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-400)"
+      }
+    }
+  },
+  "colors-gray-50": {
+    "$type": "color",
+    "$value": "#fafafa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-50)"
+      }
+    }
+  },
+  "colors-gray-500": {
+    "$type": "color",
+    "$value": "#71717a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-500)"
+      }
+    }
+  },
+  "colors-gray-600": {
+    "$type": "color",
+    "$value": "#52525b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-600)"
+      }
+    }
+  },
+  "colors-gray-700": {
+    "$type": "color",
+    "$value": "#3f3f46",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-700)"
+      }
+    }
+  },
+  "colors-gray-800": {
+    "$type": "color",
+    "$value": "#27272a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-800)"
+      }
+    }
+  },
+  "colors-gray-900": {
+    "$type": "color",
+    "$value": "#18181b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-900)"
+      }
+    }
+  },
+  "colors-gray-950": {
+    "$type": "color",
+    "$value": "#111111",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-950)"
+      }
+    }
+  },
+  "colors-gray-border": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-border)"
+      }
+    }
+  },
+  "colors-gray-contrast": {
+    "$type": "color",
+    "$value": "#FFFFFF",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-contrast)"
+      }
+    }
+  },
+  "colors-gray-emphasized": {
+    "$type": "color",
+    "$value": "#d4d4d8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-emphasized)"
+      }
+    }
+  },
+  "colors-gray-fg": {
+    "$type": "color",
+    "$value": "#27272a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-fg)"
+      }
+    }
+  },
+  "colors-gray-focus-ring": {
+    "$type": "color",
+    "$value": "#a1a1aa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-focus-ring)"
+      }
+    }
+  },
+  "colors-gray-muted": {
+    "$type": "color",
+    "$value": "#e4e4e7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-muted)"
+      }
+    }
+  },
+  "colors-gray-solid": {
+    "$type": "color",
+    "$value": "#18181b",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-solid)"
+      }
+    }
+  },
+  "colors-gray-subtle": {
+    "$type": "color",
+    "$value": "#f4f4f5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-gray-subtle)"
+      }
+    }
+  },
+  "colors-green-100": {
+    "$type": "color",
+    "$value": "#dcfce7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-100)"
+      }
+    }
+  },
+  "colors-green-200": {
+    "$type": "color",
+    "$value": "#bbf7d0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-200)"
+      }
+    }
+  },
+  "colors-green-300": {
+    "$type": "color",
+    "$value": "#86efac",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-300)"
+      }
+    }
+  },
+  "colors-green-400": {
+    "$type": "color",
+    "$value": "#4ade80",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-400)"
+      }
+    }
+  },
+  "colors-green-50": {
+    "$type": "color",
+    "$value": "#f0fdf4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-50)"
+      }
+    }
+  },
+  "colors-green-500": {
+    "$type": "color",
+    "$value": "#22c55e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-500)"
+      }
+    }
+  },
+  "colors-green-600": {
+    "$type": "color",
+    "$value": "#16a34a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-600)"
+      }
+    }
+  },
+  "colors-green-700": {
+    "$type": "color",
+    "$value": "#116932",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-700)"
+      }
+    }
+  },
+  "colors-green-800": {
+    "$type": "color",
+    "$value": "#124a28",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-800)"
+      }
+    }
+  },
+  "colors-green-900": {
+    "$type": "color",
+    "$value": "#042713",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-900)"
+      }
+    }
+  },
+  "colors-green-950": {
+    "$type": "color",
+    "$value": "#03190c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-950)"
+      }
+    }
+  },
+  "colors-green-border": {
+    "$type": "color",
+    "$value": "#22c55e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-border)"
+      }
+    }
+  },
+  "colors-green-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-contrast)"
+      }
+    }
+  },
+  "colors-green-emphasized": {
+    "$type": "color",
+    "$value": "#86efac",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-emphasized)"
+      }
+    }
+  },
+  "colors-green-fg": {
+    "$type": "color",
+    "$value": "#116932",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-fg)"
+      }
+    }
+  },
+  "colors-green-focus-ring": {
+    "$type": "color",
+    "$value": "#22c55e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-focus-ring)"
+      }
+    }
+  },
+  "colors-green-muted": {
+    "$type": "color",
+    "$value": "#bbf7d0",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-muted)"
+      }
+    }
+  },
+  "colors-green-solid": {
+    "$type": "color",
+    "$value": "#16a34a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-solid)"
+      }
+    }
+  },
+  "colors-green-subtle": {
+    "$type": "color",
+    "$value": "#dcfce7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-green-subtle)"
+      }
+    }
+  },
+  "colors-orange-100": {
+    "$type": "color",
+    "$value": "#ffedd5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-100)"
+      }
+    }
+  },
+  "colors-orange-200": {
+    "$type": "color",
+    "$value": "#fed7aa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-200)"
+      }
+    }
+  },
+  "colors-orange-300": {
+    "$type": "color",
+    "$value": "#fdba74",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-300)"
+      }
+    }
+  },
+  "colors-orange-400": {
+    "$type": "color",
+    "$value": "#fb923c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-400)"
+      }
+    }
+  },
+  "colors-orange-50": {
+    "$type": "color",
+    "$value": "#fff7ed",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-50)"
+      }
+    }
+  },
+  "colors-orange-500": {
+    "$type": "color",
+    "$value": "#f97316",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-500)"
+      }
+    }
+  },
+  "colors-orange-600": {
+    "$type": "color",
+    "$value": "#ea580c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-600)"
+      }
+    }
+  },
+  "colors-orange-700": {
+    "$type": "color",
+    "$value": "#92310a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-700)"
+      }
+    }
+  },
+  "colors-orange-800": {
+    "$type": "color",
+    "$value": "#6c2710",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-800)"
+      }
+    }
+  },
+  "colors-orange-900": {
+    "$type": "color",
+    "$value": "#3b1106",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-900)"
+      }
+    }
+  },
+  "colors-orange-950": {
+    "$type": "color",
+    "$value": "#220a04",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-950)"
+      }
+    }
+  },
+  "colors-orange-border": {
+    "$type": "color",
+    "$value": "#f97316",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-border)"
+      }
+    }
+  },
+  "colors-orange-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-contrast)"
+      }
+    }
+  },
+  "colors-orange-emphasized": {
+    "$type": "color",
+    "$value": "#fdba74",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-emphasized)"
+      }
+    }
+  },
+  "colors-orange-fg": {
+    "$type": "color",
+    "$value": "#92310a",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-fg)"
+      }
+    }
+  },
+  "colors-orange-focus-ring": {
+    "$type": "color",
+    "$value": "#f97316",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-focus-ring)"
+      }
+    }
+  },
+  "colors-orange-muted": {
+    "$type": "color",
+    "$value": "#fed7aa",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-muted)"
+      }
+    }
+  },
+  "colors-orange-solid": {
+    "$type": "color",
+    "$value": "#ea580c",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-solid)"
+      }
+    }
+  },
+  "colors-orange-subtle": {
+    "$type": "color",
+    "$value": "#ffedd5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-orange-subtle)"
+      }
+    }
+  },
+  "colors-pink-100": {
+    "$type": "color",
+    "$value": "#fce7f3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-100)"
+      }
+    }
+  },
+  "colors-pink-200": {
+    "$type": "color",
+    "$value": "#fbcfe8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-200)"
+      }
+    }
+  },
+  "colors-pink-300": {
+    "$type": "color",
+    "$value": "#f9a8d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-300)"
+      }
+    }
+  },
+  "colors-pink-400": {
+    "$type": "color",
+    "$value": "#f472b6",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-400)"
+      }
+    }
+  },
+  "colors-pink-50": {
+    "$type": "color",
+    "$value": "#fdf2f8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-50)"
+      }
+    }
+  },
+  "colors-pink-500": {
+    "$type": "color",
+    "$value": "#ec4899",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-500)"
+      }
+    }
+  },
+  "colors-pink-600": {
+    "$type": "color",
+    "$value": "#db2777",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-600)"
+      }
+    }
+  },
+  "colors-pink-700": {
+    "$type": "color",
+    "$value": "#a41752",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-700)"
+      }
+    }
+  },
+  "colors-pink-800": {
+    "$type": "color",
+    "$value": "#6d0e34",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-800)"
+      }
+    }
+  },
+  "colors-pink-900": {
+    "$type": "color",
+    "$value": "#45061f",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-900)"
+      }
+    }
+  },
+  "colors-pink-950": {
+    "$type": "color",
+    "$value": "#2c0514",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-950)"
+      }
+    }
+  },
+  "colors-pink-border": {
+    "$type": "color",
+    "$value": "#ec4899",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-border)"
+      }
+    }
+  },
+  "colors-pink-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-contrast)"
+      }
+    }
+  },
+  "colors-pink-emphasized": {
+    "$type": "color",
+    "$value": "#f9a8d4",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-emphasized)"
+      }
+    }
+  },
+  "colors-pink-fg": {
+    "$type": "color",
+    "$value": "#a41752",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-fg)"
+      }
+    }
+  },
+  "colors-pink-focus-ring": {
+    "$type": "color",
+    "$value": "#ec4899",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-focus-ring)"
+      }
+    }
+  },
+  "colors-pink-muted": {
+    "$type": "color",
+    "$value": "#fbcfe8",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-muted)"
+      }
+    }
+  },
+  "colors-pink-solid": {
+    "$type": "color",
+    "$value": "#db2777",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-solid)"
+      }
+    }
+  },
+  "colors-pink-subtle": {
+    "$type": "color",
+    "$value": "#fce7f3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-pink-subtle)"
+      }
+    }
+  },
+  "colors-purple-100": {
+    "$type": "color",
+    "$value": "#f3e8ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-100)"
+      }
+    }
+  },
+  "colors-purple-200": {
+    "$type": "color",
+    "$value": "#e9d5ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-200)"
+      }
+    }
+  },
+  "colors-purple-300": {
+    "$type": "color",
+    "$value": "#d8b4fe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-300)"
+      }
+    }
+  },
+  "colors-purple-400": {
+    "$type": "color",
+    "$value": "#c084fc",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-400)"
+      }
+    }
+  },
+  "colors-purple-50": {
+    "$type": "color",
+    "$value": "#faf5ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-50)"
+      }
+    }
+  },
+  "colors-purple-500": {
+    "$type": "color",
+    "$value": "#a855f7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-500)"
+      }
+    }
+  },
+  "colors-purple-600": {
+    "$type": "color",
+    "$value": "#9333ea",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-600)"
+      }
+    }
+  },
+  "colors-purple-700": {
+    "$type": "color",
+    "$value": "#641ba3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-700)"
+      }
+    }
+  },
+  "colors-purple-800": {
+    "$type": "color",
+    "$value": "#4a1772",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-800)"
+      }
+    }
+  },
+  "colors-purple-900": {
+    "$type": "color",
+    "$value": "#2f0553",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-900)"
+      }
+    }
+  },
+  "colors-purple-950": {
+    "$type": "color",
+    "$value": "#1a032e",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-950)"
+      }
+    }
+  },
+  "colors-purple-border": {
+    "$type": "color",
+    "$value": "#a855f7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-border)"
+      }
+    }
+  },
+  "colors-purple-contrast": {
+    "$type": "color",
+    "$value": "white",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-contrast)"
+      }
+    }
+  },
+  "colors-purple-emphasized": {
+    "$type": "color",
+    "$value": "#d8b4fe",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-emphasized)"
+      }
+    }
+  },
+  "colors-purple-fg": {
+    "$type": "color",
+    "$value": "#641ba3",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-fg)"
+      }
+    }
+  },
+  "colors-purple-focus-ring": {
+    "$type": "color",
+    "$value": "#a855f7",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-focus-ring)"
+      }
+    }
+  },
+  "colors-purple-muted": {
+    "$type": "color",
+    "$value": "#e9d5ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-muted)"
+      }
+    }
+  },
+  "colors-purple-solid": {
+    "$type": "color",
+    "$value": "#9333ea",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-solid)"
+      }
+    }
+  },
+  "colors-purple-subtle": {
+    "$type": "color",
+    "$value": "#f3e8ff",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-purple-subtle)"
+      }
+    }
+  },
+  "colors-red-100": {
+    "$type": "color",
+    "$value": "#fee2e2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-100)"
+      }
+    }
+  },
+  "colors-red-200": {
+    "$type": "color",
+    "$value": "#fecaca",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-200)"
+      }
+    }
+  },
+  "colors-red-300": {
+    "$type": "color",
+    "$value": "#fca5a5",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-300)"
+      }
+    }
+  },
+  "colors-red-400": {
+    "$type": "color",
+    "$value": "#f87171",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-400)"
+      }
+    }
+  },
+  "colors-red-50": {
+    "$type": "color",
+    "$value": "#fef2f2",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-50)"
+      }
+    }
+  },
+  "colors-red-500": {
+    "$type": "color",
+    "$value": "#ef4444",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-500)"
+      }
+    }
+  },
+  "colors-red-600": {
+    "$type": "color",
+    "$value": "#dc2626",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-600)"
+      }
+    }
+  },
+  "colors-red-700": {
+    "$type": "color",
+    "$value": "#991919",
+    "$extensions": {
+      "dev.ds-contracts.source": {
+        "declared": "var(--chakra-colors-red-700)"
+      }
+    }
+  }
+}
