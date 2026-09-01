@@ -3,10 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 8,
-  "passed": 7,
-  "failed": 0,
+  "subjects": 24,
+  "passed": 10,
+  "failed": 13,
   "fringeExcused": 1,
+  "knownFailures": 13,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -71,6 +72,134 @@
       "canvasPx": "16x16",
       "realPx": "16x16",
       "convergesAt": 250
+    },
+    {
+      "label": "alert/astryx",
+      "status": "fail",
+      "pctAAMasked": 64.6,
+      "canvasPx": "194x44",
+      "realPx": "320x64",
+      "convergesAt": null
+    },
+    {
+      "label": "alert/mui",
+      "status": "fail",
+      "pctAAMasked": 6.98,
+      "canvasPx": "199x48",
+      "realPx": "288x48",
+      "convergesAt": null
+    },
+    {
+      "label": "alert/antd",
+      "status": "fail",
+      "pctAAMasked": 15.86,
+      "canvasPx": "181x38",
+      "realPx": "288x40",
+      "convergesAt": null
+    },
+    {
+      "label": "chip/astryx",
+      "status": "fail",
+      "pctAAMasked": 5.07,
+      "canvasPx": "36x24",
+      "realPx": "37x24",
+      "convergesAt": 230
+    },
+    {
+      "label": "chip/mui",
+      "status": "fail",
+      "pctAAMasked": 5.94,
+      "canvasPx": "46x32",
+      "realPx": "50x32",
+      "convergesAt": null
+    },
+    {
+      "label": "chip/antd",
+      "status": "pass",
+      "pctAAMasked": 1.89,
+      "canvasPx": "36x22",
+      "realPx": "36x22",
+      "convergesAt": 250
+    },
+    {
+      "label": "avatar/mui",
+      "status": "pass",
+      "pctAAMasked": 4,
+      "canvasPx": "40x40",
+      "realPx": "40x40",
+      "convergesAt": 250
+    },
+    {
+      "label": "avatar/antd",
+      "status": "pass",
+      "pctAAMasked": 2.73,
+      "canvasPx": "32x32",
+      "realPx": "32x32",
+      "convergesAt": 250
+    },
+    {
+      "label": "badge/mui",
+      "status": "fail",
+      "pctAAMasked": 14.6,
+      "canvasPx": "50x50",
+      "realPx": "44x44",
+      "convergesAt": null
+    },
+    {
+      "label": "badge/antd",
+      "status": "fail",
+      "pctAAMasked": 7.26,
+      "canvasPx": "42x42",
+      "realPx": "42x42",
+      "convergesAt": 250
+    },
+    {
+      "label": "link/mui",
+      "status": "fail",
+      "pctAAMasked": 49.08,
+      "canvasPx": "26x13",
+      "realPx": "31x14",
+      "convergesAt": null
+    },
+    {
+      "label": "tabs/mui",
+      "status": "fail",
+      "pctAAMasked": 14.73,
+      "canvasPx": "162x17",
+      "realPx": "284x31",
+      "convergesAt": null
+    },
+    {
+      "label": "tooltip/antd",
+      "status": "fail",
+      "pctAAMasked": 35.67,
+      "canvasPx": "59x34",
+      "realPx": "86x34",
+      "convergesAt": null
+    },
+    {
+      "label": "textarea/astryx",
+      "status": "fail",
+      "pctAAMasked": 6.16,
+      "canvasPx": "86x87",
+      "realPx": "320x89",
+      "convergesAt": null
+    },
+    {
+      "label": "textarea/mui",
+      "status": "fail",
+      "pctAAMasked": 9.52,
+      "canvasPx": "102x58",
+      "realPx": "188x56",
+      "convergesAt": null
+    },
+    {
+      "label": "textarea/antd",
+      "status": "fail",
+      "pctAAMasked": 7.42,
+      "canvasPx": "92x75",
+      "realPx": "288x54",
+      "convergesAt": null
     }
   ]
 }

@@ -88,11 +88,21 @@ for (const s of subjects) {
 await figma.loadAllPagesAsync();
 const page = await figma.getNodeByIdAsync(${JSON.stringify(s.page)});
 if (!page || page.type !== "PAGE") throw new Error("no page ${s.page}");
-const set = page.findAllWithCriteria({ types: ["COMPONENT_SET"] })
-  .find(n => n.name === ${JSON.stringify(s.set)});
-if (!set) throw new Error("no set " + ${JSON.stringify(s.set)} + " on " + page.name);
-const variant = set.children.find(c => c.name === ${JSON.stringify(s.variant)});
-if (!variant) throw new Error("no variant " + ${JSON.stringify(s.variant)});
+let variant;
+if (${JSON.stringify(s.component ?? null)}) {
+  // A single COMPONENT resolved by name — the boilerplate v1 stays live as
+  // one component inside a wrap frame inside a per-library section.
+  const matches = page.findAllWithCriteria({ types: ["COMPONENT"] })
+    .filter(n => n.name === ${JSON.stringify(s.component ?? null)});
+  if (matches.length !== 1) throw new Error("expected exactly one component named " + ${JSON.stringify(s.component ?? null)} + " on " + page.name + ", found " + matches.length);
+  variant = matches[0];
+} else {
+  const set = page.findAllWithCriteria({ types: ["COMPONENT_SET"] })
+    .find(n => n.name === ${JSON.stringify(s.set ?? null)});
+  if (!set) throw new Error("no set " + ${JSON.stringify(s.set ?? null)} + " on " + page.name);
+  variant = set.children.find(c => c.name === ${JSON.stringify(s.variant ?? null)});
+  if (!variant) throw new Error("no variant " + ${JSON.stringify(s.variant ?? null)});
+}
 let node = variant;
 ${s.child ? `node = variant.children.find(c => String(c.name).startsWith(${JSON.stringify(s.child)}))
   || variant.findOne(n => String(n.name).startsWith(${JSON.stringify(s.child)}));

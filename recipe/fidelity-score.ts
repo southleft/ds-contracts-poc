@@ -69,6 +69,15 @@ export interface FidelityScorecard {
    * tightens, the failure is anti-aliasing fringe, not geometry.
    */
   thresholdSweep: Array<{ threshold: number; canvas: string; reference: string; agree: boolean }>;
+  /**
+   * Present only in width-normalised mode (fill-width controls such as
+   * textarea / text field / combobox). The two ink-trimmed images are scored
+   * as a LEFT window and a RIGHT window of equal width `k`, so both corners,
+   * the border and every vertical metric are compared while the interior
+   * width — which the container owns, not the component — is not. The
+   * headline pctAAMasked is the mean of the two windows.
+   */
+  edgeWindows?: { k: number; left: number; right: number; canvasHeight: number; realHeight: number };
   /** Why a reader should not over-read this number. */
   caveats: string[];
 }
@@ -203,6 +212,60 @@ const inkBox = (png: PNG, threshold: number): string => {
   return maxX < 0 ? "empty" : `${maxX - minX + 1}x${maxY - minY + 1}`;
 };
 
+/** Ink bounding box at `threshold` (inclusive rect), or null when blank. */
+export function inkRect(png: PNG, threshold = NEAR_WHITE): { x: number; y: number; w: number; h: number } | null {
+  let minX = png.width, minY = png.height, maxX = -1, maxY = -1;
+  for (let y = 0; y < png.height; y++) {
+    for (let x = 0; x < png.width; x++) {
+      const i = (y * png.width + x) * 4;
+      const a = png.data[i + 3]!;
+      if (a === 0) continue;
+      const r = png.data[i]!, g = png.data[i + 1]!, b = png.data[i + 2]!;
+      if (r >= threshold && g >= threshold && b >= threshold) continue;
+      if (x < minX) minX = x;
+      if (x > maxX) maxX = x;
+      if (y < minY) minY = y;
+      if (y > maxY) maxY = y;
+    }
+  }
+  return maxX < 0 ? null : { x: minX, y: minY, w: maxX - minX + 1, h: maxY - minY + 1 };
+}
+
+export function trimToInk(png: PNG, threshold = NEAR_WHITE): PNG {
+  const r = inkRect(png, threshold);
+  return r ? cropBox(png, r.x, r.y, r.w, r.h) : png;
+}
+
+/**
+ * Width-normalised comparison for FILL-WIDTH controls.
+ *
+ * A textarea, text field or combobox takes its width from its container: the
+ * capture stage is 320px wide, the mint declares its own box, and comparing
+ * absolute geometry measures two container choices rather than two designs.
+ * The manifest used to exclude those subjects by prose. This scores what the
+ * component actually owns: both are trimmed to ink, then a LEFT window and a
+ * RIGHT window of width k = floor(min(w) / 2) are cut from each and scored
+ * pairwise, so the corners, the border, the radius, the label offset and every
+ * vertical metric are compared, and the interior run of the wider side is not.
+ * Heights are NOT normalised — a height difference is a design difference and
+ * shows in both windows.
+ */
+export function scoreEdgeWindows(
+  canvas: PNG,
+  reference: PNG,
+): { k: number; left: ReturnType<typeof scoreCell>; right: ReturnType<typeof scoreCell>; canvasHeight: number; realHeight: number } {
+  const c = trimToInk(canvas);
+  const r = trimToInk(reference);
+  const k = Math.max(1, Math.floor(Math.min(c.width, r.width) / 2));
+  const left = scoreCell(alignPair(cropBox(c, 0, 0, k, c.height), cropBox(r, 0, 0, k, r.height)), [], []);
+  const right = scoreCell(
+    alignPair(cropBox(c, c.width - k, 0, k, c.height), cropBox(r, r.width - k, 0, k, r.height)),
+    [],
+    [],
+  );
+  return { k, left, right, canvasHeight: c.height, realHeight: r.height };
+}
+
 export function scoreFidelity(
   canvasPath: string,
   referencePath: string,
@@ -211,6 +274,7 @@ export function scoreFidelity(
   cropReferenceControl = false,
   cropCanvasControl = false,
   canvasBox: [number, number, number, number] | null = null,
+  opts: { widthNormalised?: boolean } = {},
 ): FidelityScorecard {
   if (/gate-shots/.test(referencePath)) {
     throw new Error(
@@ -226,7 +290,31 @@ export function scoreFidelity(
     cropCanvasControl ? cropLeadingControl(canvasPng) : canvasPng,
     cropReferenceControl ? cropLeadingControl(refPng) : refPng,
   );
-  const score = scoreCell(aligned, [], []);
+  let score = scoreCell(aligned, [], []);
+  let edgeWindows: FidelityScorecard["edgeWindows"];
+  if (opts.widthNormalised) {
+    const ew = scoreEdgeWindows(
+      cropCanvasControl ? cropLeadingControl(canvasPng) : canvasPng,
+      cropReferenceControl ? cropLeadingControl(refPng) : refPng,
+    );
+    const pct = (c: ReturnType<typeof scoreCell>) => c.pctAAMasked ?? c.pctAAUnmasked;
+    edgeWindows = {
+      k: ew.k,
+      left: Math.round(pct(ew.left) * 100) / 100,
+      right: Math.round(pct(ew.right) * 100) / 100,
+      canvasHeight: ew.canvasHeight,
+      realHeight: ew.realHeight,
+    };
+    // The headline number becomes the mean of the two windows; the full-width
+    // score is still computed above so the diff image shows the whole pair.
+    const mean = (pct(ew.left) + pct(ew.right)) / 2;
+    score = { ...score, pctAAMasked: mean, pctAAUnmasked: mean };
+    // Write the two window diffs beside the full diff so a reader can see
+    // exactly which pixels were compared.
+    mkdirSync(path.dirname(diffPath), { recursive: true });
+    writeFileSync(diffPath.replace(/\.diff\.png$/, ".left.diff.png"), PNG.sync.write(ew.left.diff as unknown as PNG));
+    writeFileSync(diffPath.replace(/\.diff\.png$/, ".right.diff.png"), PNG.sync.write(ew.right.diff as unknown as PNG));
+  }
 
   mkdirSync(path.dirname(diffPath), { recursive: true });
   writeFileSync(diffPath, PNG.sync.write(score.diff as unknown as PNG));
@@ -260,7 +348,13 @@ export function scoreFidelity(
     referenceCroppedToControl: cropReferenceControl,
     canvasCroppedToControl: cropCanvasControl,
     thresholdSweep,
+    ...(edgeWindows ? { edgeWindows } : {}),
     caveats: [
+      ...(edgeWindows
+        ? [
+            `Width-normalised: scored as two ${edgeWindows.k}px edge windows (left ${edgeWindows.left}%, right ${edgeWindows.right}%); the interior width belongs to the container and was not compared. Heights ${edgeWindows.canvasHeight} vs ${edgeWindows.realHeight} were.`,
+          ]
+        : []),
       "One state of one component. A pass here is not a pass for the archetype.",
       "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
       "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
@@ -294,6 +388,7 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
       if (n.length !== 4 || n.some(Number.isNaN)) throw new Error("--canvas-box wants x,y,w,h");
       return [n[0]!, n[1]!, n[2]!, n[3]!] as [number, number, number, number];
     })(),
+    { widthNormalised: process.argv.includes("--width-normalised") },
   );
   mkdirSync(path.dirname(out), { recursive: true });
   writeFileSync(out, `${JSON.stringify(card, null, 2)}\n`);

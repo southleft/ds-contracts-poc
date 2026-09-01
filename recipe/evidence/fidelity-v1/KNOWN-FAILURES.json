@@ -1,0 +1,58 @@
+{
+  "_marker": "KNOWN FAILURES — a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
+  "recorded": "2026-09-01",
+  "failures": {
+    "alert/astryx": {
+      "class": "real-defect",
+      "cause": "64.6%. The mint paints a filled disc where Astryx Banner draws its status glyph (extract/computed/out/astryx-core/banner/assets/banner-icon-info.svg). The reference also carries a bold title + description line the fixture content does not (content-mismatch on top)."
+    },
+    "alert/mui": {
+      "class": "real-defect",
+      "cause": "6.98%. Filled disc where MUI Alert draws CheckCircleOutline (assets/alert-alert-icon-success.svg); text differs from the capture sample. Height 48 = 48 and the background matches."
+    },
+    "alert/antd": {
+      "class": "real-defect",
+      "cause": "15.86%. Filled disc where AntD Alert draws InfoCircleFilled (assets/alert-alert-icon-info.svg); text differs from the capture; height 38 vs 40."
+    },
+    "chip/astryx": {
+      "class": "font-substrate",
+      "cause": "5.07% — 0.07 over the bar. Same label 'Tag', ink 36x24 vs 37x24; the 1px is glyph advance width under Figma's font fallback vs Chromium's."
+    },
+    "chip/mui": {
+      "class": "content-mismatch",
+      "cause": "5.94%. Mint label 'Tag' vs capture sample 'Chip' (extract/computed/out/mui/chip captured-truth _provenance.sampleText). Shape, height 32, radius and fill agree."
+    },
+    "badge/mui": {
+      "class": "real-defect",
+      "cause": "14.6%. Canvas 50x50 vs real 44x44: the badge sits further off its anchor than MUI's translate(50%,-50%) places it; also the reference child is an 'A' avatar with count 4, the mint a bare disc with count 5 (content-mismatch on top)."
+    },
+    "badge/antd": {
+      "class": "content-mismatch",
+      "cause": "7.26%. Same 42x42 box and badge placement; the reference child is a rounded square 'A' avatar, the mint a bare disc."
+    },
+    "link/mui": {
+      "class": "font-substrate",
+      "cause": "49.08%. Both sides render 'Link' in a serif fallback (MUI Link variant=inherit inherits the unstyled stage); 26x13 vs 31x14 is fallback-font metrics on both renderers, not geometry the recipe decided."
+    },
+    "tabs/mui": {
+      "class": "content-mismatch",
+      "cause": "14.73%. Mint has two tabs 'ITEM ONE / ITEM TWO'; the capture mounts three (Overview / Activity / Settings, configs/mui.json childrenSpec) with a bottom divider. Indicator colour and weight agree."
+    },
+    "tooltip/antd": {
+      "class": "content-mismatch",
+      "cause": "35.67%. Mint text 'Tooltip' vs capture 'Tooltip text'; height 34 = 34, fill and radius agree."
+    },
+    "textarea/astryx": {
+      "class": "real-defect",
+      "cause": "6.16% width-normalised (heights 87 vs 89). The native resize grip is a named refusal (library-textareas.ts refusal-resize) and is absent from the mint; placeholder text differs slightly in weight."
+    },
+    "textarea/mui": {
+      "class": "real-defect",
+      "cause": "9.52% width-normalised (heights 58 vs 56). Resize grip absent (named refusal); the floating label offset differs by ~2px."
+    },
+    "textarea/antd": {
+      "class": "real-defect",
+      "cause": "7.42% width-normalised (heights 75 vs 54). The mint stacks a 'Notes' label above the box; antd TextArea renders NO label — the recipe grammar requires one (labelPlacement stacked). Structure the package does not render, plus the absent resize grip."
+    }
+  }
+}

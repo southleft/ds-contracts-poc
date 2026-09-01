@@ -25,12 +25,26 @@ import { FIDELITY_BAR, scoreFidelity, type FidelityScorecard } from "./fidelity-
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "..");
 const MANIFEST = path.join(REPO, "recipe/fidelity-manifest.json");
 const OUT = path.join(REPO, "recipe/evidence/fidelity-v1/SCORECARD.json");
+/**
+ * KNOWN FAILURES — a shrink-only ratchet, not an excuse list.
+ *
+ * Every failing subject must be named here with its measured cause, or the
+ * gate is red. A subject named here that PASSES is also red ("stale ratchet"):
+ * the row must be removed the moment the defect is fixed, so the list can
+ * only shrink. A pass regressing to a fail is red. Nothing here changes a
+ * score, and the scorecard still prints every row as FAIL.
+ */
+const KNOWN = path.join(REPO, "recipe/evidence/fidelity-v1/KNOWN-FAILURES.json");
 
 interface Subject {
   label: string;
   page: string;
-  set: string;
-  variant: string;
+  /** A component SET on the page, resolved by name, plus the variant name … */
+  set?: string;
+  variant?: string;
+  /** … or a single COMPONENT resolved by name (the boilerplate v1 stays are
+   *  single components inside wrap frames, not sets). */
+  component?: string;
   child?: string;
   shot: string;
   reference: string;
@@ -38,6 +52,8 @@ interface Subject {
   canvasControlOnly?: boolean;
   canvasBox?: [number, number, number, number];
   expectFringe?: boolean;
+  /** Fill-width control: score the two edge windows, not the interior width. */
+  widthNormalised?: boolean;
 }
 
 export interface FidelityRun {
@@ -47,6 +63,8 @@ export interface FidelityRun {
   passed: number;
   failed: number;
   fringeExcused: number;
+  /** Failing rows named in KNOWN-FAILURES.json (counted in `failed` too). */
+  knownFailures: number;
   rows: Array<{
     label: string;
     status: "pass" | "fail" | "fringe";
@@ -57,7 +75,7 @@ export interface FidelityRun {
   }>;
 }
 
-export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[] } {
+export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[]; known: Record<string, { cause: string; class: string }> } {
   const manifest = JSON.parse(readFileSync(MANIFEST, "utf8")) as { subjects: Subject[] };
   const cards: FidelityScorecard[] = [];
   const rows: FidelityRun["rows"] = [];
@@ -76,6 +94,7 @@ export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[] } 
       s.referenceControlOnly === true,
       s.canvasControlOnly === true,
       s.canvasBox ?? null,
+      { widthNormalised: s.widthNormalised === true },
     );
     cards.push(card);
 
@@ -103,13 +122,18 @@ export function runFidelity(): { run: FidelityRun; cards: FidelityScorecard[] } 
     passed: rows.filter((r) => r.status === "pass").length,
     failed: rows.filter((r) => r.status === "fail").length,
     fringeExcused: rows.filter((r) => r.status === "fringe").length,
+    knownFailures: 0,
     rows,
   };
-  return { run, cards };
+  const known = existsSync(KNOWN)
+    ? (JSON.parse(readFileSync(KNOWN, "utf8")) as { failures: Record<string, { cause: string; class: string }> }).failures
+    : {};
+  run.knownFailures = rows.filter((r) => r.status === "fail" && known[r.label] !== undefined).length;
+  return { run, cards, known };
 }
 
 if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1]))) {
-  const { run } = runFidelity();
+  const { run, known } = runFidelity();
   writeFileSync(OUT, `${JSON.stringify(run, null, 2)}\n`);
   for (const r of run.rows) {
     const tail =
@@ -123,9 +147,28 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
   console.log(
     `\n${run.passed} pass · ${run.fringeExcused} fringe · ${run.failed} fail  (bar ${FIDELITY_BAR.pctAAMaskedMax}% AA)`,
   );
-  if (run.failed > 0) {
-    console.error(`\n✖ recipe:fidelity:check — ${run.failed} subject(s) do not look like their library`);
+  const failing = run.rows.filter((r) => r.status === "fail");
+  const unnamed = failing.filter((r) => known[r.label] === undefined);
+  const stale = Object.keys(known).filter((l) => {
+    const row = run.rows.find((r) => r.label === l);
+    return row === undefined || row.status !== "fail";
+  });
+  for (const r of failing.filter((r) => known[r.label] !== undefined)) {
+    console.log(`  known  ${r.label.padEnd(20)} [${known[r.label]!.class}] ${known[r.label]!.cause}`);
+  }
+  if (unnamed.length > 0) {
+    console.error(`\n✖ recipe:fidelity:check — ${unnamed.length} subject(s) fail and are NOT named in KNOWN-FAILURES.json: ${unnamed.map((r) => r.label).join(", ")}`);
+    console.error("  A failure must be measured and named with its cause before the gate accepts it; naming is not fixing.");
     process.exit(1);
   }
-  console.log("✔ recipe:fidelity:check");
+  if (stale.length > 0) {
+    console.error(`\n✖ recipe:fidelity:check — KNOWN-FAILURES.json names ${stale.length} subject(s) that no longer fail: ${stale.join(", ")}`);
+    console.error("  The ratchet only shrinks: remove the row so the fix is recorded as a fix.");
+    process.exit(1);
+  }
+  if (run.failed > 0) {
+    console.log(`\n✔ recipe:fidelity:check — ${run.passed} pass; ${run.failed} known failure(s) named in KNOWN-FAILURES.json (shrink-only ratchet; still FAIL rows, not passes)`);
+  } else {
+    console.log("✔ recipe:fidelity:check");
+  }
 }

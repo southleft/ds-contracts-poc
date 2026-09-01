@@ -144,3 +144,27 @@ npx tsx recipe/fidelity-score.ts \
 
 Canvas shots are read-only exports of signed Scratch page `198:77718`
 (`checkbox/hit` frames `198:77942`, `198:77822`, `198:78063`). Zero Figma writes.
+
+## 2026-09-01 — every existing reference scored
+
+The manifest went from 8 subjects to 24. Two additions to the instrument:
+
+- `component` resolver — the boilerplate v1 stays are single components inside
+  wrap frames, not sets (`scripts/capture-fidelity-shots.mjs`).
+- `widthNormalised` — fill-width controls (textarea) are scored as two equal
+  edge windows after an ink trim, so corners, border, radius and every vertical
+  metric count and the container-owned interior width does not
+  (`recipe/fidelity-score.ts` `scoreEdgeWindows`). The three textareas the
+  previous manifest excluded by prose are now measured rows.
+
+Result: **10 pass · 1 fringe · 13 fail.** The 13 are named in
+`KNOWN-FAILURES.json`, a shrink-only ratchet the gate reads: a failing subject
+not named there is red, a named subject that passes is red (stale), and no row
+changes a score. Classes: 7 real-defect, 4 content-mismatch, 2 font-substrate.
+The headline real defect is the alert archetype: all three libraries ship the
+status glyph as an SVG asset in the capture output and the mint paints a
+filled disc. See `scripts/fidelity-contact-sheet.ts` for the side-by-side.
+
+Still excluded, with the reason in the manifest: dialog/menu (the only
+references are full-viewport overlay captures) and the four signed legs whose
+pages carry two identically named sets (name resolution cannot pick a leg).
