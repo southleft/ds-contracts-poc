@@ -1,5 +1,10 @@
 # 34 · The boilerplate hill-climb — a corpus plan for a releasable v1
 
+> **Sequencing superseded 2026-08-31 by [docs/35](35-two-journey-v1-plan.md)**
+> (the two-journey v1 plan: reader as source of truth, canvas→code as
+> co-equal pillar, both held-out exams). The corpus inventory, honesty
+> constraints, and owner decisions below remain in force.
+>
 > **Status: ACTIVE — adopted 2026-08-31.** This is the climb, not a draft.
 > Nothing here mints, grades, or flips `overallSuccess`. Product **v1
 > remains INCOMPLETE** — F1 (whole-corpus / unseen-library on the recipe
