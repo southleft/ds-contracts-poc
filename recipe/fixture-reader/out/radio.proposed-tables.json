@@ -265,11 +265,10 @@
         "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default root.width"
       },
       "circle.size": {
-        "fixture": 24,
-        "proposed": 24,
-        "verdict": "match",
-        "captured": 24,
-        "provenance": "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default cls:MuiSvgIcon-root.width"
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the painted ring is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel [extract/computed/out/mui/radio/assets/radio-icon.svg outer circle 2→22 in viewBox 0 0 24 24 = 20×20]"
       },
       "circle.radius": {
         "fixture": 12,
@@ -284,8 +283,8 @@
         "provenance": "RECEIPT: the ring stroke is SVG path geometry, not a CSS border [RadioButtonUnchecked path ring — reviewed 2]"
       },
       "circle.padding": {
-        "fixture": 9,
-        "proposed": 9,
+        "fixture": 11,
+        "proposed": 11,
         "verdict": "receipt",
         "provenance": "RECEIPT: hit-target padding lives on SwitchBase, not a captured circle-padding channel [Radio.js padding 9 — reviewed 9]"
       },

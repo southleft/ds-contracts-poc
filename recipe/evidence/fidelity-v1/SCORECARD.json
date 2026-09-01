@@ -3,8 +3,8 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 6,
-  "passed": 5,
+  "subjects": 8,
+  "passed": 7,
   "failed": 0,
   "fringeExcused": 1,
   "rows": [
@@ -55,6 +55,22 @@
       "canvasPx": "44x22",
       "realPx": "44x24",
       "convergesAt": 240
+    },
+    {
+      "label": "radio/mui",
+      "status": "pass",
+      "pctAAMasked": 3.75,
+      "canvasPx": "20x20",
+      "realPx": "20x20",
+      "convergesAt": 250
+    },
+    {
+      "label": "radio/antd",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250
     }
   ]
 }

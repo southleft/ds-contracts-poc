@@ -58,7 +58,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Radio
 
-ledger `extract/computed/out/mui/radio/captured-truth.json` · 36 facts: **16 match**, **0 drift**, 20 named receipts, 0 unread
+ledger `extract/computed/out/mui/radio/captured-truth.json` · 36 facts: **15 match**, **0 drift**, 21 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -386,9 +386,10 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **radio/mui** `list.gap` = `0` — the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger _[RadioGroup is a reviewed pairing — reviewed 0]_
 - **radio/mui** `item.gap` = `0` — the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger _[FormControlLabel gap is a reviewed pairing — reviewed 0]_
 - **radio/mui** `labelLineHeight` = `0` — the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger _[no label part — reviewed 0 (auto unit)]_
+- **radio/mui** `circle.size` = `20` — the painted ring is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel _[extract/computed/out/mui/radio/assets/radio-icon.svg outer circle 2→22 in viewBox 0 0 24 24 = 20×20]_
 - **radio/mui** `circle.radius` = `12` — the radio ring is SVG path geometry inside RadioButtonUnchecked, not a CSS border-radius (SvgIcon computed radius is 0) _[RadioButtonUnchecked 24-viewBox — reviewed 12]_
 - **radio/mui** `circle.borderWidth` = `2` — the ring stroke is SVG path geometry, not a CSS border _[RadioButtonUnchecked path ring — reviewed 2]_
-- **radio/mui** `circle.padding` = `9` — hit-target padding lives on SwitchBase, not a captured circle-padding channel _[Radio.js padding 9 — reviewed 9]_
+- **radio/mui** `circle.padding` = `11` — hit-target padding lives on SwitchBase, not a captured circle-padding channel _[Radio.js padding 9 — reviewed 9]_
 - **radio/mui** `dot.size` = `10` — the inner dot is RadioButtonChecked's even-odd hole / inner circle, not a computed box _[RadioButtonChecked inner circle — reviewed 10]_
 - **radio/mui** `dot.radius` = `5` — same SVG inner-circle geometry — not a CSS radius channel _[reviewed 5]_
 - **radio/mui** `states.selected.enabled.label` = `#000000de` — the capture mounts the bare Radio (no RadioGroup, sampleText '' — FormControlLabel is a reviewed pairing); no list or label part exists in the ledger _[palette.text.primary #000000de — reviewed]_

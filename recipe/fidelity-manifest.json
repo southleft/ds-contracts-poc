@@ -74,6 +74,28 @@
       "referenceControlOnly": true,
       "expectFringe": true,
       "_expectFringeWhy": "Chromium renders two rows of AA fringe at 241-248 that Figma does not; at the scorer's 250 cutoff the reference trims 44x24 against an identical 44x22 canvas. The threshold sweep confirms both are 44x22 at 240 or stricter. Scored as a known instrument artifact, not a design difference \u2014 and if the sweep ever stops converging, this subject fails."
+    },
+    {
+      "label": "radio/mui",
+      "page": "200:79301",
+      "set": "radio/set :: MUI Radio + RadioGroup",
+      "variant": "Selected=a, Disabled=false",
+      "child": "radio/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/radio-mui-hit.png",
+      "reference": "extract/computed/out/mui/radio/orig-shots/primary.checked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_variantPairing": "MUI's radio has a COLOUR axis and the capture's leading segment is that colour, not a default-ness. The fixture carries #1976d2 (primary), so the reference must be primary.*. Pairing it with default.* compared our blue radio to MUI's grey one and read 36% as a mint defect. The Figma variant is Selected=a, so the control is the CHECKED state."
+    },
+    {
+      "label": "radio/antd",
+      "page": "200:79301",
+      "set": "radio/set :: Ant Design Radio.Group",
+      "variant": "Selected=a, Disabled=false",
+      "child": "radio/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/radio-antd-hit.png",
+      "reference": "extract/computed/out/antd/radio/orig-shots/checked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_variantPairing": "The Figma variant is Selected=a, so radio/item/a's control is the SELECTED state. It must be scored against the library's CHECKED render; pairing it with unchecked.enabled__default compared our filled radio to their empty one and read 55% as a mint defect."
     }
   ],
   "_excluded": {
@@ -86,6 +108,7 @@
       },
       "note": "HEIGHTS are close and in two cases exact (antd 54/54, mui 58/56), which is the dimension a textarea actually owns. Width is not ours to match.",
       "toAdmitThem": "the scorer needs a width-normalised mode for fill-width controls \u2014 compare the border, radius and vertical metrics without pretending the widths should agree. Excluded until then rather than scored against a number that cannot mean anything, and not marked expectFringe, because this is not anti-aliasing."
-    }
+    },
+    "radio/astryx": "Astryx ships RadioList, and extract/computed/configs/astryx.json declares no Radio component \u2014 there is no real-package render to score against. Not a defect in the mint; a gap in the capture corpus."
   }
 }

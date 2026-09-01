@@ -56,9 +56,21 @@ test("radio@1 adapts Astryx RadioList, MUI RadioGroup, and AntD Radio.Group", ()
   assert.equal(astryx.content.items[1]?.label, "Phone");
   assert.equal(astryx.tokens.typography.label.requestedFamily, "-apple-system");
   assert.notEqual(astryx.tokens.typography.label.resolvedFamily, "Inter");
-  assert.equal(mui.tokens.circle.size.fallback, 24, "SvgIcon medium 24");
-  assert.equal(mui.tokens.wrapper.size.fallback, 42, "24 + SwitchBase padding 9×2");
-  assert.equal(mui.tokens.circle.padding.fallback, 9, "SwitchBase.js padding 9");
+  // The painted ring, not the SvgIcon viewport — the same correction checkbox
+  // needed. radio-icon.svg draws its outer circle 2 → 22 in a 24 viewBox.
+  // Asserting the viewport is what let the mint paint 24×24 of ink against
+  // MUI's 20×20 and still pass every gate (41.49% AA, recipe/evidence/fidelity-v1).
+  assert.equal(
+    mui.tokens.circle.size.fallback,
+    20,
+    "painted ring: radio-icon.svg outer circle 2→22 in a 24 viewBox",
+  );
+  assert.equal(mui.tokens.wrapper.size.fallback, 42, "20 + padding 11×2");
+  assert.equal(
+    mui.tokens.circle.padding.fallback,
+    11,
+    "SwitchBase padding 9 is measured from the 24 viewport; from the painted 20 ring it is 11, and 20 + 11×2 = 42",
+  );
   assert.equal(mui.tokens.listMode, "vertical", "RadioGroup / FormGroup column");
   assert.equal(
     mui.tokens.states.selected.enabled.dotFill.fallback,

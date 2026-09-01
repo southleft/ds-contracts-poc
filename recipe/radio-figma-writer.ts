@@ -25,7 +25,7 @@ import {
 
 export const RADIO_FIGMA_NAMESPACE = "ds.contracts.radio.recipe.v1";
 export const RADIO_FIGMA_WRITER_VERSION = 2;
-export const RADIO_FIGMA_RUN_SUFFIX = "radio-v2";
+export const RADIO_FIGMA_RUN_SUFFIX = "radio-v3";
 export const FORBIDDEN_RADIO_V1_PAGE_ID = "183:75031";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";

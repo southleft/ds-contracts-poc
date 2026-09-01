@@ -351,13 +351,11 @@
       },
       {
         "path": "circle.size",
-        "fixtureValue": 24,
-        "verdict": "match",
-        "capturedValue": 24,
-        "proposedValue": 24,
-        "ledgerKeys": [
-          "extract/computed/out/mui/radio/captured-truth.json#primary.unchecked.enabled__default cls:MuiSvgIcon-root.width"
-        ]
+        "fixtureValue": 20,
+        "verdict": "receipt",
+        "proposedValue": 20,
+        "receipt": "the painted ring is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel",
+        "evidence": "extract/computed/out/mui/radio/assets/radio-icon.svg outer circle 2→22 in viewBox 0 0 24 24 = 20×20"
       },
       {
         "path": "circle.radius",
@@ -377,9 +375,9 @@
       },
       {
         "path": "circle.padding",
-        "fixtureValue": 9,
+        "fixtureValue": 11,
         "verdict": "receipt",
-        "proposedValue": 9,
+        "proposedValue": 11,
         "receipt": "hit-target padding lives on SwitchBase, not a captured circle-padding channel",
         "evidence": "Radio.js padding 9 — reviewed 9"
       },
@@ -637,9 +635,9 @@
       }
     ],
     "counts": {
-      "match": 16,
+      "match": 15,
       "drift": 0,
-      "receipt": 20,
+      "receipt": 21,
       "unread": 0
     }
   },

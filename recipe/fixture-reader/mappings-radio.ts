@@ -70,7 +70,16 @@ export const muiRadioMappings: FactMapping[] = [
   receipt("item.gap", NO_GROUP, "FormControlLabel gap is a reviewed pairing — reviewed 0"),
   receipt("labelLineHeight", NO_GROUP, "no label part — reviewed 0 (auto unit)"),
   one("wrapper.size", "px", { combo: "primary.unchecked.enabled", part: "root", channel: "width" }),
-  one("circle.size", "px", { combo: "primary.unchecked.enabled", part: mIcon, channel: "width" }),
+  // NOT a capture read, for the same reason as checkbox's box.size: this read
+  // MuiSvgIcon-root's width (24) and matched a fixture that also said 24, while
+  // both described the icon VIEWPORT that MUI never paints. The painted ring is
+  // the outer circle of radio-icon.svg, 2 → 22 in a 24 viewBox = 20×20. SVG path
+  // extent is not a computed channel.
+  receipt(
+    "circle.size",
+    "the painted ring is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel",
+    "extract/computed/out/mui/radio/assets/radio-icon.svg outer circle 2→22 in viewBox 0 0 24 24 = 20×20",
+  ),
   receipt(
     "circle.radius",
     "the radio ring is SVG path geometry inside RadioButtonUnchecked, not a CSS border-radius (SvgIcon computed radius is 0)",

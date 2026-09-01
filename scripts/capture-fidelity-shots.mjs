@@ -12,6 +12,12 @@
  * page. If a name no longer resolves, this fails rather than exporting
  * something adjacent.
  *
+ * `child` prefers a DIRECT child and falls back to the first matching
+ * descendant, because not every archetype puts its control at the top: a
+ * checkbox variant holds `checkbox/hit` directly, while a radio variant holds
+ * `radio/item/a` which holds `radio/hit`. Depth-first order means the fallback
+ * takes the first item's control, which is the one the variant is named for.
+ *
  *   npm run recipe:fidelity:capture
  *   npm run recipe:fidelity:capture -- --label switch/mui
  */
@@ -88,7 +94,9 @@ if (!set) throw new Error("no set " + ${JSON.stringify(s.set)} + " on " + page.n
 const variant = set.children.find(c => c.name === ${JSON.stringify(s.variant)});
 if (!variant) throw new Error("no variant " + ${JSON.stringify(s.variant)});
 let node = variant;
-${s.child ? `node = variant.children.find(c => String(c.name).startsWith(${JSON.stringify(s.child)})); if (!node) throw new Error("no child ${s.child}");` : ""}
+${s.child ? `node = variant.children.find(c => String(c.name).startsWith(${JSON.stringify(s.child)}))
+  || variant.findOne(n => String(n.name).startsWith(${JSON.stringify(s.child)}));
+if (!node) throw new Error("no child ${s.child}");` : ""}
 const bytes = await node.exportAsync({ format: "PNG", constraint: { type: "SCALE", value: 1 } });
 return { id: node.id, w: Math.round(node.width), h: Math.round(node.height), bytes: Array.from(bytes) };
 `;

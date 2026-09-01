@@ -141,10 +141,25 @@ const muiTokens = cloneTokens("mui.radio", (path, fallback) => {
   if (path === "list.gap") return 0;
   if (path === "item.gap") return 0;
   if (path === "wrapper.size") return 42;
-  if (path === "circle.size") return 24;
+  // circle.size is the PAINTED ring, not the SvgIcon viewport.
+  //
+  // Same defect the fidelity gate found on checkbox/mui, in a second archetype:
+  // this read 24 — MuiSvgIcon-root's width — and the capture agreed, so every
+  // accounting gate passed. MUI does not paint that container.
+  // radio-icon.svg draws a ring whose outer circle runs 2 -> 22 in a 24
+  // viewBox (20x20, inner hole 4 -> 20), and radio-icon-2.svg draws the dot
+  // 7 -> 17 (10x10, which dot.size already had right).
+  // recipe/evidence/fidelity-v1 measured the mint at 41.49% AA against the real
+  // render: 24x24 of ink against 20x20.
+  //
+  // Read from the committed glyph assets under
+  // extract/computed/out/mui/radio/assets/. SVG path extent is not a computed
+  // channel, so the reader mapping is a receipt, not a capture match.
+  // 20 + 11*2 = 42 keeps the wrapper exact.
+  if (path === "circle.size") return 20;
   if (path === "circle.radius") return 12;
   if (path === "circle.borderWidth") return 2;
-  if (path === "circle.padding") return 9;
+  if (path === "circle.padding") return 11;
   if (path === "dot.size") return 10;
   if (path === "dot.radius") return 5;
   if (path === "labelFontSize") return 16;
