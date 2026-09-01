@@ -67,6 +67,38 @@ both are 24. Only rasterising both sides catches it.
 That is the class of defect this gate exists for, and it is the answer to "why
 did accounting-green mints still look wrong".
 
+## Switch — three more subjects, two more real defects
+
+| subject | canvas | real | AA masked | verdict |
+| --- | --- | --- | --- | --- |
+| `switch/astryx` | 40×24 | 40×24 | **0.00%** | **PASS** |
+| `switch/antd` | 44×22 | 44×24 | 6.82% | FAIL |
+| `switch/mui` | 17×14 ink | 38×19 ink | 35.04% | FAIL |
+
+**`switch/antd`** is off by 2px of height — 22 against the real 24. Small, real,
+and invisible to every other gate.
+
+**`switch/mui`** is the more serious one, and it is visible at a glance. MUI's
+unchecked switch is a **white circular thumb sitting on a grey track**. The mint
+renders a single grey blob: the thumb is not white and does not read as separate
+from the track. Ink extent gives it away — 17×14 painted against the real 38×19.
+
+Neither is fixed here. They are named, measured, and reproducible.
+
+## Two instrument limits found while measuring
+
+- **`cropLeadingControl` assumes the control is visually contiguous.** It is,
+  for a checkbox and for the Astryx/AntD switches. MUI's unchecked switch has
+  internal whitespace between thumb and track, so the 6px gap rule splits it and
+  measures the thumb alone. `--canvas-box x,y,w,h` takes explicit bounds from the
+  scene instead; tuning the heuristic per subject would have been fitting the
+  instrument to the answer.
+- **pngjs cannot decode one particular Figma export.** The 58×38
+  `switch/hit` PNG is structurally valid (identical chunk layout to exports that
+  read fine, IEND terminated, no trailing bytes) and pngjs still refuses it with
+  "unrecognised content at end of stream". Worked around by exporting the parent
+  variant instead. Named, not silently skipped.
+
 ## What these numbers do NOT mean
 
 - **One state of one component.** A pass here is not a pass for the archetype.

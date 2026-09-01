@@ -1,0 +1,33 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "switch/astryx",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 11.145833333333334,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "canvasPx": "40x24",
+    "realPx": "40x24",
+    "inkCanvasPct": 71.25,
+    "inkRealPct": 71.66666666666667
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/shots/switch-astryx-hit.png",
+    "sha256": "7b3343d1f3bfbac3b7165c1b05f489a4a0905da67ca5d2ab0cefdd14d15cb013"
+  },
+  "reference": {
+    "path": "extract/computed/out/astryx-core/switch/orig-shots/end.no-isDisabled__default.png",
+    "sha256": "40b5771c98f24e6250a32802d389b16dfb5e02873cdb272fe1ab74281d273911"
+  },
+  "diff": "recipe/evidence/fidelity-v1/switch-astryx.diff.png",
+  "referenceCroppedToControl": true,
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

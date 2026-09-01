@@ -62,6 +62,8 @@ export interface FidelityScorecard {
   diff: string;
   /** True when the reference was cropped to the leading control (label dropped). */
   referenceCroppedToControl: boolean;
+  /** True when the canvas export was cropped the same way. */
+  canvasCroppedToControl: boolean;
   /** Why a reader should not over-read this number. */
   caveats: string[];
 }
@@ -136,12 +138,40 @@ export function cropLeadingControl(src: PNG, gapPx = 6): PNG {
   return out;
 }
 
+
+/**
+ * Crop to an explicit box. Some controls are not visually contiguous — MUI's
+ * unchecked Switch is a thumb at the left of a wider track, so the
+ * whitespace-gap rule in cropLeadingControl splits it and measures the thumb
+ * alone. Where the control's bounds are known from the scene rather than
+ * guessable from ink, pass them instead of tuning the heuristic per subject.
+ */
+export function cropBox(src: PNG, x: number, y: number, w: number, h: number): PNG {
+  const width = Math.min(w, src.width - x);
+  const height = Math.min(h, src.height - y);
+  if (width <= 0 || height <= 0) throw new Error(`crop box outside image: ${x},${y},${w},${h}`);
+  const out = new PNG({ width, height });
+  for (let row = 0; row < height; row++) {
+    for (let col = 0; col < width; col++) {
+      const si = ((y + row) * src.width + (x + col)) * 4;
+      const di = (row * width + col) * 4;
+      out.data[di] = src.data[si]!;
+      out.data[di + 1] = src.data[si + 1]!;
+      out.data[di + 2] = src.data[si + 2]!;
+      out.data[di + 3] = src.data[si + 3]!;
+    }
+  }
+  return out;
+}
+
 export function scoreFidelity(
   canvasPath: string,
   referencePath: string,
   label: string,
   diffPath: string,
   cropReferenceControl = false,
+  cropCanvasControl = false,
+  canvasBox: [number, number, number, number] | null = null,
 ): FidelityScorecard {
   if (/gate-shots/.test(referencePath)) {
     throw new Error(
@@ -151,8 +181,10 @@ export function scoreFidelity(
   const canvasBuf = readFileSync(canvasPath);
   const refBuf = readFileSync(referencePath);
   const refPng = readPngBuffer(refBuf);
+  const canvasRaw = readPngBuffer(canvasBuf);
+  const canvasPng = canvasBox ? cropBox(canvasRaw, ...canvasBox) : canvasRaw;
   const aligned = alignPair(
-    readPngBuffer(canvasBuf),
+    cropCanvasControl ? cropLeadingControl(canvasPng) : canvasPng,
     cropReferenceControl ? cropLeadingControl(refPng) : refPng,
   );
   const score = scoreCell(aligned, [], []);
@@ -179,6 +211,7 @@ export function scoreFidelity(
     reference: { path: referencePath, sha256: sha256(refBuf) },
     diff: diffPath,
     referenceCroppedToControl: cropReferenceControl,
+    canvasCroppedToControl: cropCanvasControl,
     caveats: [
       "One state of one component. A pass here is not a pass for the archetype.",
       "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
@@ -205,6 +238,14 @@ if (process.argv[1] && import.meta.url.endsWith(path.basename(process.argv[1])))
     label,
     out.replace(/\.json$/, ".diff.png"),
     process.argv.includes("--reference-control-only"),
+    process.argv.includes("--canvas-control-only"),
+    (() => {
+      const raw = arg("canvas-box");
+      if (!raw) return null;
+      const n = raw.split(",").map(Number);
+      if (n.length !== 4 || n.some(Number.isNaN)) throw new Error("--canvas-box wants x,y,w,h");
+      return [n[0]!, n[1]!, n[2]!, n[3]!] as [number, number, number, number];
+    })(),
   );
   mkdirSync(path.dirname(out), { recursive: true });
   writeFileSync(out, `${JSON.stringify(card, null, 2)}\n`);

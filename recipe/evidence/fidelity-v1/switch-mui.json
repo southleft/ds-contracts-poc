@@ -1,0 +1,34 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "switch/mui",
+  "status": "fail",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 59.418282548476455,
+    "pctAAUnmasked": 35.041551246537395,
+    "pctAAMasked": 35.041551246537395,
+    "canvasPx": "17x14",
+    "realPx": "38x19",
+    "inkCanvasPct": 28.254847645429365,
+    "inkRealPct": 41.82825484764543
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/shots/switch-mui-variant.png",
+    "sha256": "f9c96add15002451ba2da1159a156ed48974cb6a55b95f3bf2ea0f5e57a8eb76"
+  },
+  "reference": {
+    "path": "extract/computed/out/mui/switch/orig-shots/default.medium.unchecked.enabled__default.png",
+    "sha256": "602a4846fb70163a1c491ccb3936e85c5aad772248956d32fb7e7aca5a3cacae"
+  },
+  "diff": "recipe/evidence/fidelity-v1/switch-mui.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}
