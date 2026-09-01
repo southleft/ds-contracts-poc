@@ -97,10 +97,11 @@ export interface CanvasToCodeBuild {
   emittedFiles: Array<{ path: string; sha256: string }>;
 }
 
-export async function buildButtonCanvasToCode(
+export async function buildCanvasToCodeFromFacts(
+  doc: CanvasFactsDocument,
   outRoot: string,
+  options?: { regenerateHint?: string; contractFileName?: string },
 ): Promise<CanvasToCodeBuild> {
-  const doc = checkButtonCanvasFacts();
   const bridge = bridgeCanvasFactsToDump(doc);
   const dump = bridge.dump as unknown as Record<string, unknown>;
   const captured = capturedTokensDocument(dump);
@@ -146,7 +147,10 @@ export async function buildButtonCanvasToCode(
     throw new Error("canvas-to-code: proposed contract has no name");
 
   mkdirSync(outRoot, { recursive: true });
-  const contractPath = path.join(outRoot, "button.contract.proposed.json");
+  const contractPath = path.join(
+    outRoot,
+    options?.contractFileName ?? "button.contract.proposed.json",
+  );
   writeFileSync(contractPath, `${JSON.stringify(contract, null, 2)}\n`);
   const stubPaths: string[] = [];
   for (const stub of proposal.childStubs ?? []) {
@@ -175,7 +179,8 @@ export async function buildButtonCanvasToCode(
     tokenFiles: [capturedPath, mintedPath],
     outDir: generatedDir,
     stories: false,
-    regenerateHint: "tsx recipe/canvas-to-code.ts --write",
+    regenerateHint:
+      options?.regenerateHint ?? "tsx recipe/canvas-to-code.ts --write",
   });
   if (result.refused.length > 0)
     throw new Error(
@@ -213,11 +218,17 @@ export async function buildButtonCanvasToCode(
   };
 }
 
+export async function buildButtonCanvasToCode(
+  outRoot: string,
+): Promise<CanvasToCodeBuild> {
+  return buildCanvasToCodeFromFacts(checkButtonCanvasFacts(), outRoot);
+}
+
 // ---------------------------------------------------------------------------
 // 3d — mount in Chromium, read computed styles
 // ---------------------------------------------------------------------------
 
-interface MountCell {
+export interface MountCell {
   key: string;
   ownershipKey: string;
   props: Record<string, string>;
@@ -240,7 +251,7 @@ interface RenderedCell {
 
 /** Mount matrix: one cell per drawn COMPONENT, props derived from its
  *  authoritative variant tuple through the contract's own figma bindings. */
-function mountCells(
+export function mountCells(
   doc: CanvasFactsDocument,
   contract: Record<string, unknown>,
 ): MountCell[] {
@@ -1036,6 +1047,27 @@ export function diffRenderedAgainstFacts(
         .join("\n")}`,
     );
   return { ledger: rows, counts, deltaSummaries };
+}
+
+export async function runCanvasToCodeFromFacts(
+  doc: CanvasFactsDocument,
+  outRoot: string,
+  options?: {
+    extraNotes?: string[];
+    regenerateHint?: string;
+    contractFileName?: string;
+  },
+): Promise<{
+  build: CanvasToCodeBuild;
+  diff: RenderDiffResult;
+  cellsMounted: number;
+}> {
+  const build = await buildCanvasToCodeFromFacts(doc, outRoot, options);
+  if (options?.extraNotes) build.proposalNotes.push(...options.extraNotes);
+  const cells = mountCells(build.doc, build.contract);
+  const rendered = await renderCells(build, cells);
+  const diff = diffRenderedAgainstFacts(build.doc, build, cells, rendered);
+  return { build, diff, cellsMounted: cells.length };
 }
 
 // ---------------------------------------------------------------------------

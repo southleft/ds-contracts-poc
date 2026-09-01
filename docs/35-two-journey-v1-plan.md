@@ -114,6 +114,14 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
   one overlay archetype, then gains the missing **apply** step:
   owner-approved diffs land in fixtures, re-mint, fixed-point check.
   Review-before-write stays absolute.
+  **Landed 2026-08-31 (ungraded):** Button `padding` approve-then-apply
+  (`recipe:button:perturbation:apply:check`) writes the approved
+  from→to onto the offline observe duplicate, re-runs canvas→code, and
+  proves the second apply is a no-op. Unapproved proposals refuse.
+  Checkbox gained a committed Astryx observe
+  (`recipe/evidence/checkbox-scene-observe-v1/`, page `198:77718`) and
+  one named `padding` exam (`recipe:checkbox:perturbation:check`).
+  Overlay (Tooltip/Menu/Dialog) remains a named blocker — no observe.
 - **3f — Held-out canvas→code exam.** A never-minted component set goes
   read → bridge → emit → re-render diff with zero hand-holding. The
   reverse-direction F1 analogue; enters docs/26 only by explicit owner
