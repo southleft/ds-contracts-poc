@@ -189,6 +189,26 @@ const allNumbers = walk(OUTDIR, (n) => n === 'numbers.json');
  *  library directory, the literal `conformance` synthetic fixture, or — for the
  *  paths with no library level at all — Polaris, which predates that level. */
 const LIB_DIRS = new Set(LIBRARIES.map((l) => l.dir));
+
+/**
+ * Capture directories that are a SECOND MOUNT of a library already in
+ * LIBRARIES — same package, same version, different mounting.
+ *
+ * They are declared rather than counted. Adding one to LIBRARIES would inflate
+ * the library count, the measured-component count and the contract totals,
+ * because a mount shares its library's contracts; leaving it undeclared would
+ * make it a stray scorecard, which is exactly the guard that should fire for an
+ * accidental capture population. So it is neither: named here, excluded from
+ * the corpus totals, and no longer stray.
+ *
+ * astryx-core: @astryxdesign/core with NO theme provider. `astryx/` follows the
+ * library's README quick start (<Theme theme={neutralTheme}>), which overrides
+ * the palette, the body font and the radius scale. The recipe fixtures
+ * transcribe the un-themed core defaults, so they could never be verified
+ * against the themed capture — 56 reader drifts sat behind one blanket excuse
+ * until this mount existed. See extract/computed/configs/astryx-core.json.
+ */
+const ALTERNATE_MOUNTS = new Map([['astryx-core', 'astryx']]);
 function classify(abs) {
   const parts = path.relative(OUTDIR, abs).split(path.sep);
   if (parts.length === 3) return { corpus: parts[0], component: parts[1] };
@@ -203,7 +223,9 @@ const numbers = readGroup('extract/computed/out/**/numbers.json', 'capture count
 
 const realCards = scorecards.filter((s) => LIB_DIRS.has(s.corpus)).sort((a, b) => a.rel.localeCompare(b.rel));
 const confCards = scorecards.filter((s) => s.corpus === 'conformance').sort((a, b) => a.rel.localeCompare(b.rel));
-const strayCards = scorecards.filter((s) => !LIB_DIRS.has(s.corpus) && s.corpus !== 'conformance');
+const strayCards = scorecards.filter(
+  (s) => !LIB_DIRS.has(s.corpus) && s.corpus !== 'conformance' && !ALTERNATE_MOUNTS.has(s.corpus),
+);
 
 // A scorecard with cellsCompared === 0 compared NOTHING. gate.ts returns NULL
 // for its pctEqual (@door gate.empty-comparison-is-100) — it used to return 100,
