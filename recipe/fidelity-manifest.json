@@ -1,9 +1,11 @@
 {
-  "_marker": "RECIPE FIDELITY MANIFEST — every subject scored by npm run recipe:fidelity:check",
+  "_marker": "RECIPE FIDELITY MANIFEST \u2014 every subject scored by npm run recipe:fidelity:check",
   "_note": "The check is OFFLINE: it scores committed canvas shots against committed real-package references, so it runs in CI with no Figma access. `npm run recipe:fidelity:capture` re-exports the shots from the live canvas (read-only exportAsync) and is the only step that needs the plugin. A shot and its reference are both committed bytes, so a score is reproducible from the repo alone.",
-  "_referenceRule": "The reference MUST be orig-shots/ — the real package rendered in Chromium by extract/computed. Never a gate-shot (the pipeline's own re-render) and never another mint. Comparing a mint to a mint measures nothing, and the scorer refuses a gate-shot path outright.",
-  "_astryxMountNote": "Astryx subjects reference extract/computed/out/astryx-core/, the un-themed @astryxdesign/core mount, because that is the surface recipe/fixtures/library-*.ts transcribes. The themed astryx/ capture mounts <Theme theme={neutralTheme}>, which is a different real surface — scoring against it would fail on the theme rather than on the mint.",
-  "bar": { "pctAAMaskedMax": 5 },
+  "_referenceRule": "The reference MUST be orig-shots/ \u2014 the real package rendered in Chromium by extract/computed. Never a gate-shot (the pipeline's own re-render) and never another mint. Comparing a mint to a mint measures nothing, and the scorer refuses a gate-shot path outright.",
+  "_astryxMountNote": "Astryx subjects reference extract/computed/out/astryx-core/, the un-themed @astryxdesign/core mount, because that is the surface recipe/fixtures/library-*.ts transcribes. The themed astryx/ capture mounts <Theme theme={neutralTheme}>, which is a different real surface \u2014 scoring against it would fail on the theme rather than on the mint.",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
   "subjects": [
     {
       "label": "checkbox/astryx",
@@ -51,7 +53,12 @@
       "set": "switch/set :: MUI Switch",
       "variant": "Checked=false, Disabled=false",
       "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-variant-v3.png",
-      "canvasBox": [0, 0, 58, 38],
+      "canvasBox": [
+        0,
+        0,
+        58,
+        38
+      ],
       "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.unchecked.enabled__default.png",
       "referenceControlOnly": true,
       "_canvasBoxWhy": "MUI's unchecked switch is a thumb at the left of a wider track, with whitespace between them. The leading-control crop rule splits that and measures the thumb alone, so the control's bounds are taken from the scene instead."
@@ -66,7 +73,19 @@
       "reference": "extract/computed/out/antd/switch/orig-shots/default.unchecked.enabled__default.png",
       "referenceControlOnly": true,
       "expectFringe": true,
-      "_expectFringeWhy": "Chromium renders two rows of AA fringe at 241-248 that Figma does not; at the scorer's 250 cutoff the reference trims 44x24 against an identical 44x22 canvas. The threshold sweep confirms both are 44x22 at 240 or stricter. Scored as a known instrument artifact, not a design difference — and if the sweep ever stops converging, this subject fails."
+      "_expectFringeWhy": "Chromium renders two rows of AA fringe at 241-248 that Figma does not; at the scorer's 250 cutoff the reference trims 44x24 against an identical 44x22 canvas. The threshold sweep confirms both are 44x22 at 240 or stricter. Scored as a known instrument artifact, not a design difference \u2014 and if the sweep ever stops converging, this subject fails."
     }
-  ]
+  ],
+  "_excluded": {
+    "textarea/astryx, textarea/mui, textarea/antd": {
+      "why": "A textarea is a FILL-WIDTH control: its rendered width comes from its container, not from the component. The capture stage is 320px wide, the mint declares its own box, and the scorer compares absolute geometry \u2014 so the comparison measures two container choices rather than two designs.",
+      "measured": {
+        "textarea/astryx": "canvas 86x70 vs real 320x89 \u2014 4.84%",
+        "textarea/mui": "canvas 102x58 vs real 188x56 \u2014 7.94%",
+        "textarea/antd": "canvas 92x54 vs real 288x54 \u2014 5.42%"
+      },
+      "note": "HEIGHTS are close and in two cases exact (antd 54/54, mui 58/56), which is the dimension a textarea actually owns. Width is not ours to match.",
+      "toAdmitThem": "the scorer needs a width-normalised mode for fill-width controls \u2014 compare the border, radius and vertical metrics without pretending the widths should agree. Excluded until then rather than scored against a number that cannot mean anything, and not marked expectFringe, because this is not anti-aliasing."
+    }
+  }
 }
