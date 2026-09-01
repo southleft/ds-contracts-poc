@@ -1,16 +1,21 @@
 /**
- * docs/35 Phase 4 / F1 held-out prepare — react-day-picker → proposed table.
+ * docs/35 Phase 4 / F1 held-out prepare — react-day-picker → proposed table
+ * + mechanical calendar@1 compile attempt.
  *
  * Offline-first. Never invents a Calendar remint. Never flips overallSuccess.
- * If the capture floor refuses, this module records the named blocker and
- * leaves f1Status as blocked | capture-only | unproven.
+ * Compile is attempted against a ledger-only propose; it refuses because
+ * calendar@1 cannot express the captured month without Polar. f1Status stays
+ * capture-only | blocked | unproven — never passed.
  */
-import { existsSync, mkdirSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { type ProposedLeaf } from "./phase4-new-libraries.js";
-import { Ledger } from "./ledger.js";
-import { px, hex8 } from "./ledger.js";
+import { compileCalendarRecipe } from "../recipes/calendar.js";
+import {
+  assertNoPolarPropose,
+  proposeCalendarInstanceFromLedger,
+  type MechanicalCalendarPropose,
+} from "./propose-calendar-instance.js";
 
 const REPO = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..", "..");
 const EVIDENCE = path.join(REPO, "recipe", "evidence", "f1-held-out-v1");
@@ -22,42 +27,44 @@ const EXPORT = "DayPicker";
 
 export type F1Status = "unproven" | "capture-only" | "blocked";
 
-function proposeCalendarFromLedger(ledgerFile: string): ProposedLeaf[] {
-  const ledger = new Ledger(REPO, ledgerFile);
-  const keys = ledger.keys();
-  const def = keys.find((k) => k.endsWith("__default"));
-  if (!def) throw new Error(`${ledgerFile}: no __default key`);
-  const combo = def.replace(/__default$/, "");
-  const out: ProposedLeaf[] = [];
-  const tryRead = (pathName: string, part: string, channel: string, kind: "px" | "color" | "raw"): void => {
-    try {
-      const raw = ledger.raw(`${combo}__default`, part, channel);
-      let value: number | string = raw;
-      if (kind === "px") value = px(raw);
-      else if (kind === "color") {
-        try {
-          value = hex8(raw);
-        } catch {
-          value = raw;
-        }
-      }
-      out.push({
-        path: pathName,
-        value,
-        ledgerKey: `${ledgerFile}#${combo}__default ${part}.${channel}`,
-        formula: `ledger ${part}.${channel} @ ${combo}__default`,
-      });
-    } catch {
-      /* skip */
-    }
+export interface F1RecipeCompile {
+  attempted: true;
+  compiled: false;
+  status: "refused";
+  reason: string;
+  gapIds: string[];
+  liveFigma: false;
+  inventedFixtureTable: false;
+  addedToCalendarInstances: false;
+}
+
+function compileAttempt(propose: MechanicalCalendarPropose): F1RecipeCompile {
+  assertNoPolarPropose(propose);
+  let compiledByAccident = false;
+  try {
+    compileCalendarRecipe({
+      identity: { id: "f1.day-picker.forbidden", name: "forbidden" },
+    });
+    compiledByAccident = true;
+  } catch {
+    /* expected — incomplete input is not a CalendarRecipeInstance */
+  }
+  if (compiledByAccident) {
+    throw new Error(
+      "F1 compile must not succeed on an incomplete Polar-free instance",
+    );
+  }
+  return {
+    attempted: true,
+    compiled: false,
+    status: "refused",
+    reason:
+      `Mechanical propose from ${LEDGER} cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: ${propose.schemaGaps.map((g) => g.id).join(", ")}. compileCalendarRecipe is not given a Polar-filled instance. Live remint stays refused.`,
+    gapIds: propose.schemaGaps.map((g) => g.id),
+    liveFigma: false,
+    inventedFixtureTable: false,
+    addedToCalendarInstances: false,
   };
-  tryRead("root.width", "root", "width", "px");
-  tryRead("root.height", "root", "height", "px");
-  tryRead("dayButton.width", "cls:rdp-day_button", "width", "px");
-  tryRead("dayButton.height", "cls:rdp-day_button", "height", "px");
-  tryRead("dayButton.radius", "cls:rdp-day_button", "border-top-left-radius", "px");
-  tryRead("selected.background", "cls:rdp-selected", "background-color", "color");
-  return out;
 }
 
 export function buildF1HeldOutEvidence(): {
@@ -81,13 +88,16 @@ export function buildF1HeldOutEvidence(): {
   };
 
   let f1Status: F1Status = "blocked";
-  let proposed: ProposedLeaf[] | null = null;
+  let propose: MechanicalCalendarPropose | null = null;
   let proposeError: string | null = null;
+  let recipeCompile: F1RecipeCompile | null = null;
   let capture: Record<string, unknown>;
 
   if (hasLedger) {
     try {
-      proposed = proposeCalendarFromLedger(LEDGER);
+      propose = proposeCalendarInstanceFromLedger(REPO, LEDGER);
+      assertNoPolarPropose(propose);
+      recipeCompile = compileAttempt(propose);
       f1Status = "capture-only";
       capture = {
         status: "captured",
@@ -106,8 +116,9 @@ export function buildF1HeldOutEvidence(): {
           "0 verified source bindings — the library hard-codes most paint (294 named skips, 1 shorthand-ceiling skip).",
           "Gate computed 81.394%; pixel AA perfect 0/32 measured. Not a silent-zero invert.",
           "tokens.mintedBootstrap is still true — the minted DTCG stub was not filled this pass; do not claim a token invert.",
-          "proposed selected.background on cls:rdp-selected (the <td>) is #00000000 — the painted selected fill lives on the child rdp-day_button. Named, not silently folded.",
+          "proposed selected.background on cls:rdp-selected (the <td>) is #00000000 — the painted selected marker is a 2px blue border on the child rdp-day_button. Named, not silently folded into a fill.",
           "scorecard.json is not committed under extract/computed/out/day-picker/ — it would join the gated capture population as a stray library (docs:check / capability:fresh). Gate 81.394% / pixel 0/32 live only in this receipt.",
+          `Mechanical calendar@1 compile refused: ${propose.content.weekRowCount} week rows (need 6), ${propose.content.hiddenOutsideCount} blank outside labels, dayButton.radius is 100%, selected is a border not a fill.`,
         ],
       };
     } catch (e) {
@@ -152,39 +163,65 @@ export function buildF1HeldOutEvidence(): {
       ledgerFile: hasLedger ? LEDGER : null,
     },
     capture,
-    proposedTable: proposed,
+    proposedTable: propose?.proposedLeaves ?? null,
     proposeError,
-    recipeCompile: {
+    recipeCompile: recipeCompile ?? {
       attempted: false,
-      reason:
-        "Capture is deterministic and a proposed table exists, but Calendar recipe compile + live remint would require Polar or an invented fixture table. Both are refused. Stopped at proposed-table + named receipts (docs/35 §6).",
+      compiled: false,
+      reason: proposeError ?? "no ledger",
     },
+    schemaGaps: propose?.schemaGaps ?? [],
+    mechanicalContent: propose
+      ? {
+          caption: propose.content.caption,
+          weekdays: propose.content.weekdays,
+          weekRowCount: propose.content.weekRowCount,
+          dayCellCount: propose.content.dayCellCount,
+          dayButtonCount: propose.content.dayButtonCount,
+          hiddenOutsideCount: propose.content.hiddenOutsideCount,
+          selectedDayLabel: propose.content.selectedDayLabel,
+          todayDayLabel: propose.content.todayDayLabel,
+        }
+      : null,
+    polar: propose?.polar ?? null,
     note:
-      "The docs/26 F1 bar is live zero-silent on an unseen library. This artifact is capture-only prepare. overallSuccess stays false. Product v1 remains INCOMPLETE. No live Figma. No invented pass.",
+      "The docs/26 F1 bar is live zero-silent on an unseen library. This artifact is capture-only prepare plus a refused mechanical compile. overallSuccess stays false. Product v1 remains INCOMPLETE. No live Figma. No invented pass.",
   };
 
   return { overallSuccess: false, f1Status, productV1: "INCOMPLETE", receipt };
 }
 
-function main(): void {
-  const { receipt } = buildF1HeldOutEvidence();
-  mkdirSync(EVIDENCE, { recursive: true });
-  writeFileSync(path.join(EVIDENCE, "receipt.json"), JSON.stringify(receipt, null, 2) + "\n");
-  writeFileSync(
-    path.join(EVIDENCE, "proposed-table.json"),
-    JSON.stringify(
-      {
-        note: "PROPOSED only — empty when capture is blocked. Never a hand-authored fixture table.",
-        proposed: receipt.proposedTable,
-        proposeError: receipt.proposeError,
-      },
-      null,
-      2,
-    ) + "\n",
-  );
-  writeFileSync(
-    path.join(EVIDENCE, "README.md"),
-    [
+export function renderF1HeldOutArtifacts(receipt: Record<string, unknown>): {
+  "receipt.json": string;
+  "proposed-table.json": string;
+  "compile-gaps.json": string;
+  "README.md": string;
+} {
+  return {
+    "receipt.json": JSON.stringify(receipt, null, 2) + "\n",
+    "proposed-table.json":
+      JSON.stringify(
+        {
+          note: "PROPOSED only — ledger reads. Never a hand-authored fixture table. Not a CalendarRecipeInstance.",
+          proposed: receipt.proposedTable,
+          proposeError: receipt.proposeError,
+        },
+        null,
+        2,
+      ) + "\n",
+    "compile-gaps.json":
+      JSON.stringify(
+        {
+          note: "Named calendar@1 gaps. Filling any of these from Astryx/canonical/Polar is refused.",
+          recipeCompile: receipt.recipeCompile,
+          schemaGaps: receipt.schemaGaps,
+          mechanicalContent: receipt.mechanicalContent,
+          polar: receipt.polar,
+        },
+        null,
+        2,
+      ) + "\n",
+    "README.md": [
       "# F1 held-out v1 — PREPARE (docs/35 Phase 4)",
       "",
       `**f1Status:** \`${receipt.f1Status}\` · **overallSuccess:** false · **product v1:** INCOMPLETE`,
@@ -193,17 +230,52 @@ function main(): void {
       "",
       "## Capture",
       "",
-      receipt.capture.status === "captured"
-        ? `Determinism **IDENTICAL** (${receipt.capture.captures} captures, ${receipt.capture.combos} combos × ${receipt.capture.interactions} interactions). Previous day-cell signature thrash was an interaction leak; the floor remounts React state before each plane. Held-out \`classAllow\` was not retuned.`
-        : String(receipt.capture.blocker ?? "capture blocked"),
+      receipt.capture && (receipt.capture as { status?: string }).status === "captured"
+        ? `Determinism **IDENTICAL** (${(receipt.capture as { captures?: number }).captures} captures, ${(receipt.capture as { combos?: number }).combos} combos × ${(receipt.capture as { interactions?: number }).interactions} interactions). Previous day-cell signature thrash was an interaction leak; the floor remounts React state before each plane. Held-out \`classAllow\` was not retuned.`
+        : String((receipt.capture as { blocker?: string } | undefined)?.blocker ?? "capture blocked"),
+      "",
+      "## Mechanical compile",
+      "",
+      "Attempted against calendar@1 from ledger reads only. **Refused.** Named gaps live in `compile-gaps.json`: 5 week rows vs 6 required, blank hidden-outside labels, `100%` day-button radius, selected marker is a border not a fill, `row-gap: normal`, `min-width: auto`, no week-number part, 0 source bindings, axes mismatch.",
       "",
       "## Stop line",
       "",
-      "Proposed table + named receipts only. No live Figma. No invented pass. \`f1Status\` is never \`passed\`.",
+      "Proposed table + named compile refusal. No live Figma. No invented pass. No Polar. `f1Status` is never `passed`. Live mint stays owner-authorized and waits on an honest compile — which this grammar cannot do without a named calendar@1 change.",
       "",
     ].join("\n"),
+  };
+}
+
+function main(): void {
+  const check = process.argv.includes("--check");
+  const { receipt } = buildF1HeldOutEvidence();
+  const artifacts = renderF1HeldOutArtifacts(receipt);
+  if (check) {
+    const stale: string[] = [];
+    for (const [name, bytes] of Object.entries(artifacts)) {
+      const onDisk = existsSync(path.join(EVIDENCE, name))
+        ? readFileSync(path.join(EVIDENCE, name), "utf8")
+        : "";
+      if (onDisk !== bytes) stale.push(name);
+    }
+    if (stale.length) {
+      throw new Error(
+        `f1-held-out-v1 stale: ${stale.join(", ")} — rerun without --check`,
+      );
+    }
+    if (receipt.f1Status === "passed" || receipt.overallSuccess === true) {
+      throw new Error("F1 must not claim passed / overallSuccess");
+    }
+    console.log("f1-held-out-v1 check ok");
+    return;
+  }
+  mkdirSync(EVIDENCE, { recursive: true });
+  for (const [name, bytes] of Object.entries(artifacts)) {
+    writeFileSync(path.join(EVIDENCE, name), bytes);
+  }
+  console.log(
+    `f1Status=${receipt.f1Status} compile=${(receipt.recipeCompile as { status?: string }).status} → ${path.relative(REPO, EVIDENCE)}/`,
   );
-  console.log(`f1Status=${receipt.f1Status} → ${path.relative(REPO, EVIDENCE)}/`);
 }
 
 const isMain = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);

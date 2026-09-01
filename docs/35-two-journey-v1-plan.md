@@ -17,7 +17,10 @@
 > [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **adopted
 > 2026-08-31** (owner). F1 is **capture-only** (react-day-picker
 > double-run is green — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/),
-> `f1Status: capture-only`), not passed. **Release is blocked** on F1.
+> `f1Status: capture-only`). Mechanical calendar@1 compile was
+> **attempted and refused** (5 week rows, blank outside labels, selected
+> is a border not a fill — see `compile-gaps.json`). Not passed.
+> **Release is blocked** on F1.
 > npm stays deferred.
 > No semver bump. No npm publish. No `overallSuccess` flip.
 >
@@ -149,6 +152,13 @@ Six stages, each with a mechanical gate; runs in parallel with Phases 1–2
 - **F1 (code→canvas):** reader + recipes pointed at react-day-picker or a
   held-out library, zero hand-authored fixtures, zero-silent extract,
   owner grade.
+  **2026-08-31:** capture is deterministic; mechanical calendar@1
+  compile from those ledger reads was **attempted and refused**
+  (`recipe/evidence/f1-held-out-v1/compile-gaps.json`,
+  `npm run recipe:f1-held-out:check`). The grammar cannot express a
+  5-week month, blank hidden-outside cells, or a selected *border*
+  without Polar. Live mint is not justified. `f1Status` stays
+  `capture-only`.
 - **Canvas→code exam (3f)** runs in the same window.
 - `overallSuccess` flips only when **both** exams pass and the owner has
   signed the docs/26 amendment. One journey alone does not make v1.

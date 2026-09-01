@@ -4,7 +4,8 @@
 > exam** for F1 (unseen library). The first capture has now run
 > (`extract/computed/out/day-picker/calendar/`,
 > [`f1-held-out-v1`](../../recipe/evidence/f1-held-out-v1/)
-> `f1Status: capture-only`). Do not retune this config in response to
+> `f1Status: capture-only`; mechanical calendar@1 compile refused).
+> Do not retune this config in response to
 > that run. Calendar is separately **live-proven on the recipe-IR path**
 > (page `181:64873`, owner-signed). Do not read §5 as “calendar has no
 > proof” — it names why the *capture* path cannot treat a month grid as
@@ -235,7 +236,9 @@ retune**. Double-run byte-identity is **IDENTICAL** after the floor remount
 (the previous refusal was an interaction leak, not a held-out-config
 problem). Ledger: `extract/computed/out/day-picker/calendar/captured-truth.json`.
 Evidence: [`recipe/evidence/f1-held-out-v1/`](../../recipe/evidence/f1-held-out-v1/)
-`f1Status: capture-only`. `overallSuccess` stays false.
+`f1Status: capture-only`. Mechanical calendar@1 compile was attempted
+from those ledger reads and **refused** (`compile-gaps.json`).
+`overallSuccess` stays false.
 
 Still not done, on purpose:
 

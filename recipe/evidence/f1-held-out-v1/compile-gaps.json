@@ -1,0 +1,128 @@
+{
+  "note": "Named calendar@1 gaps. Filling any of these from Astryx/canonical/Polar is refused.",
+  "recipeCompile": {
+    "attempted": true,
+    "compiled": false,
+    "status": "refused",
+    "reason": "Mechanical propose from extract/computed/out/day-picker/calendar/captured-truth.json cannot become a CalendarRecipeInstance without Polar or a hand-authored fixture table. Named gaps: week-count-not-six, blank-outside-labels, day-button-radius-percent, selected-is-border-not-fill, grid-gap-normal, root-min-width-auto, week-number-text-absent, weekday-fontsize-not-day, zero-source-bindings, axes-mismatch, outside-cell-has-no-label. compileCalendarRecipe is not given a Polar-filled instance. Live remint stays refused.",
+    "gapIds": [
+      "week-count-not-six",
+      "blank-outside-labels",
+      "day-button-radius-percent",
+      "selected-is-border-not-fill",
+      "grid-gap-normal",
+      "root-min-width-auto",
+      "week-number-text-absent",
+      "weekday-fontsize-not-day",
+      "zero-source-bindings",
+      "axes-mismatch",
+      "outside-cell-has-no-label"
+    ],
+    "liveFigma": false,
+    "inventedFixtureTable": false,
+    "addedToCalendarInstances": false
+  },
+  "schemaGaps": [
+    {
+      "id": "week-count-not-six",
+      "schemaPath": "content.weeks.length",
+      "ledgerValue": 5,
+      "reason": "calendar@1 requires exactly 6 week rows (CALENDAR_WEEK_COUNT). label.1 January 2026 renders 5 <tr class=\"rdp-week\">. Inventing a sixth week of February outside days is Polar content the ledger does not carry.",
+      "evidence": "recipe/recipes/calendar.ts CALENDAR_WEEK_COUNT; extract/computed/out/day-picker/calendar/LEDGER.md week rows"
+    },
+    {
+      "id": "blank-outside-labels",
+      "schemaPath": "content.weeks[].days[].label",
+      "ledgerValue": 4,
+      "reason": "4 rdp-hidden.rdp-outside cells have no button and no text. calendar@1 requires label.min(1) on every cell and has no blank-but-measured primitive (CALENDAR_OUTSIDE_DAYS_NOT_CARRIED). Inventing December 28–31 labels the capture did not render is Polar.",
+      "evidence": "recipe/recipes/calendar.ts CALENDAR_OUTSIDE_DAYS_NOT_CARRIED"
+    },
+    {
+      "id": "day-button-radius-percent",
+      "schemaPath": "tokens.dayButton.radius",
+      "ledgerValue": "100%",
+      "reason": "rdp-day_button border-top-left-radius is \"100%\" (a circle). calendar@1 wants a px number. Folding 100% of 42px into 21 is invented FIXED px.",
+      "evidence": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.border-top-left-radius"
+    },
+    {
+      "id": "selected-is-border-not-fill",
+      "schemaPath": "tokens.dayStates.selected.background",
+      "ledgerValue": "#00000000",
+      "reason": "Selected paint is a 2px #0000ffff border on rdp-day_button. Both the td and the button background are transparent. calendar@1 selected is a background fill. Folding the blue border into a fill would invent Polar paint.",
+      "evidence": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default selected rdp-day_button.border-top-width"
+    },
+    {
+      "id": "grid-gap-normal",
+      "schemaPath": "tokens.gridGap",
+      "ledgerValue": "normal",
+      "reason": "rdp-weeks row-gap is \"normal\", not a px length. rdp-months 32px gap is the multi-month gutter (numberOfMonths), not the day grid. Folding either into gridGap is Polar.",
+      "evidence": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weeks.row-gap"
+    },
+    {
+      "id": "root-min-width-auto",
+      "schemaPath": "tokens.rootMinWidth",
+      "ledgerValue": "auto",
+      "reason": "root min-width is \"auto\". root.width 308 is a different channel. Carrying width as minWidth would invent a constraint.",
+      "evidence": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default root.min-width"
+    },
+    {
+      "id": "week-number-text-absent",
+      "schemaPath": "tokens.weekNumberText",
+      "ledgerValue": null,
+      "reason": "showWeekNumber is pinned false. No rdp-week_number part exists. Compiling WeekNumbers on|off would be a dead axis (validateCalendarStructure). Compiling a weekNumberText colour is Polar.",
+      "evidence": "extract/computed/configs/day-picker.json fixedProps.showWeekNumber"
+    },
+    {
+      "id": "weekday-fontsize-not-day",
+      "schemaPath": "tokens.dayCell.fontSize",
+      "ledgerValue": "13.3333px",
+      "reason": "Weekday font-size is 13.3333px; day button is 16px. calendar@1 has one dayCell.fontSize. Collapsing 13.3333 onto 16 is the same lowering Astryx receipted, not a silent fold.",
+      "evidence": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-size"
+    },
+    {
+      "id": "zero-source-bindings",
+      "schemaPath": "tokens.*.variable",
+      "ledgerValue": 0,
+      "reason": "source-bindings.json facts is []. 0 verified DTCG bindings. Inventing variable names (rdp.calendar.*) would claim a token invert the minted stub does not carry (tokens.mintedBootstrap still true).",
+      "evidence": "extract/computed/out/day-picker/calendar/source-bindings.json"
+    },
+    {
+      "id": "axes-mismatch",
+      "schemaPath": "axes",
+      "ledgerValue": "captionLayout × numberOfMonths",
+      "reason": "Capture enumerates captionLayout × numberOfMonths. calendar@1 axes are WeekNumbers × State. showWeekNumber/showOutsideDays are pinned, not enumerated. Dropdown caption and numberOfMonths:2 are grammar outside this exam.",
+      "evidence": "extract/computed/configs/day-picker.json axes; recipe/recipes/calendar.ts axes"
+    },
+    {
+      "id": "outside-cell-has-no-label",
+      "schemaPath": "content.weeks[].days[outside].label",
+      "ledgerValue": "",
+      "reason": "Hidden outside td text is empty. calendar@1 outside state still requires a visible label. This is the blank-but-measured cell the recipe dropped.",
+      "evidence": "recipe/recipes/calendar.ts CALENDAR_OUTSIDE_DAYS_NOT_CARRIED"
+    }
+  ],
+  "mechanicalContent": {
+    "caption": "January 2026",
+    "weekdays": [
+      "Su",
+      "Mo",
+      "Tu",
+      "We",
+      "Th",
+      "Fr",
+      "Sa"
+    ],
+    "weekRowCount": 5,
+    "dayCellCount": 35,
+    "dayButtonCount": 31,
+    "hiddenOutsideCount": 4,
+    "selectedDayLabel": "20",
+    "todayDayLabel": "15"
+  },
+  "polar": {
+    "inventedInstance": false,
+    "clonedAstryx": false,
+    "inventedInter": false,
+    "inventedSelectedFill": false
+  }
+}

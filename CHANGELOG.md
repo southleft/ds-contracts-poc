@@ -13,6 +13,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### F1 capture-only — mechanical compile refused (2026-08-31)
+
+- Mechanical calendar@1 compile from the day-picker ledger was
+  **attempted and refused**. Five week rows, blank hidden-outside
+  labels, `100%` day-button radius, selected marker is a 2px border
+  not a fill. No Polar, no hand-authored `library-calendars.ts` row,
+  no live Figma. Gate: `npm run recipe:f1-held-out:check`. Evidence:
+  `recipe/evidence/f1-held-out-v1/compile-gaps.json`.
+- F1 stays **capture-only**. Product v1 remains incomplete. npm stays
+  deferred.
+
 ### F1 capture-only — day-picker remount (2026-08-31)
 
 - Capture-floor remount: click-mutated React state (a calendar's
@@ -37,9 +48,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));
   Phase 4 reader subjects (shadcn / Chakra) as proposed tables only.
 - **Blocked:** F1 held-out prepare is **capture-only**
-  (react-day-picker double-run is green after the floor remount;
-  [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/); no live mint,
-  no invented pass). docs/26 F-C2C amendment is
+  (react-day-picker double-run is green; mechanical calendar@1 compile
+  refused — [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/); no live
+  mint, no invented pass). docs/26 F-C2C amendment is
   [adopted 2026-08-31](docs/26-amendment-canvas-to-code.md) as Journey A
   recipe canvas→code; it does not complete v1.
 - Phase 5 labeling + Figma soft-archive of superseded stays already landed;

@@ -33,6 +33,7 @@
     "recipe:checkbox:perturbation:check": "tsx recipe/checkbox-perturbation-exam.ts --write && node --import tsx --test recipe/checkbox-perturbation-exam.test.ts",
     "recipe:canvas-to-code:check": "tsx recipe/emit-canvas-facts.ts --check && tsx recipe/canvas-to-code.ts --check && node --import tsx --test recipe/canvas-to-code.test.ts",
     "recipe:canvas-to-code:held-out:check": "tsx recipe/canvas-to-code-held-out.ts --check && node --import tsx --test recipe/canvas-to-code-held-out.test.ts",
+    "recipe:f1-held-out:check": "tsx recipe/fixture-reader/f1-held-out.ts --check && node --import tsx --test recipe/f1-held-out.test.ts",
     "recipe:input-field:check": "node --import tsx --test recipe/recipe.test.ts recipe/recipes/input-field.test.ts recipe/input-field-proof.test.ts",
     "recipe:input-field:browser:check": "node --import tsx --test recipe/input-field-browser.test.ts",
     "recipe:combobox:check": "node --import tsx --test recipe/combobox-proof.test.ts recipe/combobox-browser.test.ts recipe/combobox-figma-writer.test.ts",

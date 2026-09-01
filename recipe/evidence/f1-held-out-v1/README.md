@@ -8,6 +8,10 @@ Subject: `react-day-picker@10.0.1#DayPicker`.
 
 Determinism **IDENTICAL** (32 captures, 8 combos × 4 interactions). Previous day-cell signature thrash was an interaction leak; the floor remounts React state before each plane. Held-out `classAllow` was not retuned.
 
+## Mechanical compile
+
+Attempted against calendar@1 from ledger reads only. **Refused.** Named gaps live in `compile-gaps.json`: 5 week rows vs 6 required, blank hidden-outside labels, `100%` day-button radius, selected marker is a border not a fill, `row-gap: normal`, `min-width: auto`, no week-number part, 0 source bindings, axes mismatch.
+
 ## Stop line
 
-Proposed table + named receipts only. No live Figma. No invented pass. `f1Status` is never `passed`.
+Proposed table + named compile refusal. No live Figma. No invented pass. No Polar. `f1Status` is never `passed`. Live mint stays owner-authorized and waits on an honest compile — which this grammar cannot do without a named calendar@1 change.

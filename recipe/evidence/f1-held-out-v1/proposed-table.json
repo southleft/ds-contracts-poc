@@ -1,5 +1,5 @@
 {
-  "note": "PROPOSED only — empty when capture is blocked. Never a hand-authored fixture table.",
+  "note": "PROPOSED only — ledger reads. Never a hand-authored fixture table. Not a CalendarRecipeInstance.",
   "proposed": [
     {
       "path": "root.width",
@@ -14,6 +14,24 @@
       "formula": "ledger root.height @ label.1__default"
     },
     {
+      "path": "dayCell.size",
+      "value": 44,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day.width",
+      "formula": "ledger cls:rdp-day.width @ label.1__default (slot, not button)"
+    },
+    {
+      "path": "dayCell.padding",
+      "value": 1,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day.padding-top",
+      "formula": "ledger cls:rdp-day.padding-top @ label.1__default"
+    },
+    {
+      "path": "dayCell.radius",
+      "value": 0,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day.border-top-left-radius",
+      "formula": "ledger cls:rdp-day.border-top-left-radius @ label.1__default"
+    },
+    {
       "path": "dayButton.width",
       "value": 42,
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.width",
@@ -26,10 +44,148 @@
       "formula": "ledger cls:rdp-day_button.height @ label.1__default"
     },
     {
-      "path": "selected.background",
+      "path": "dayCell.fontSize",
+      "value": 16,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.font-size",
+      "formula": "ledger cls:rdp-day_button.font-size @ label.1__default"
+    },
+    {
+      "path": "dayButton.radius",
+      "value": "100%",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.border-top-left-radius",
+      "formula": "ledger raw radius — 100% circle, not a px fallback"
+    },
+    {
+      "path": "navIconSize",
+      "value": 24,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-chevron.width",
+      "formula": "ledger cls:rdp-chevron.width"
+    },
+    {
+      "path": "root.padding",
+      "value": 0,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default root.padding-top",
+      "formula": "ledger root.padding-top"
+    },
+    {
+      "path": "surface",
+      "value": "#00000000",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default root.background-color",
+      "formula": "ledger root.background-color"
+    },
+    {
+      "path": "captionText",
+      "value": "#000000ff",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-caption_label.color",
+      "formula": "ledger cls:rdp-caption_label.color"
+    },
+    {
+      "path": "weekdayText",
+      "value": "#000000ff",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.color",
+      "formula": "ledger cls:rdp-weekday.color"
+    },
+    {
+      "path": "selected.td.background",
       "value": "#00000000",
       "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-selected.background-color",
-      "formula": "ledger cls:rdp-selected.background-color @ label.1__default"
+      "formula": "ledger td.rdp-selected.background-color — transparent; paint is not here"
+    },
+    {
+      "path": "selected.button.background",
+      "value": "#00000000",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.background-color",
+      "formula": "ledger selected rdp-day_button.background-color — also transparent"
+    },
+    {
+      "path": "selected.button.text",
+      "value": "#000000ff",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.color",
+      "formula": "ledger selected rdp-day_button.color"
+    },
+    {
+      "path": "selected.button.borderWidth",
+      "value": "2px",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.border-top-width",
+      "formula": "ledger selected marker is a 2px border, not a fill"
+    },
+    {
+      "path": "selected.button.borderColor",
+      "value": "#0000ffff",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.border-top-color",
+      "formula": "ledger selected rdp-day_button.border-top-color"
+    },
+    {
+      "path": "today.button.background",
+      "value": "#00000000",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.background-color",
+      "formula": "ledger today rdp-day_button.background-color"
+    },
+    {
+      "path": "today.button.text",
+      "value": "#0000ffff",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.color",
+      "formula": "ledger today rdp-day_button.color"
+    },
+    {
+      "path": "dayStates.default.background",
+      "value": "#00000000",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.background-color",
+      "formula": "ledger first rdp-day_button.background-color"
+    },
+    {
+      "path": "dayStates.default.text",
+      "value": "#000000ff",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.color",
+      "formula": "ledger first rdp-day_button.color"
+    },
+    {
+      "path": "dayStates.outside.background",
+      "value": "#00000000",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-outside.background-color",
+      "formula": "ledger hidden outside td.background-color"
+    },
+    {
+      "path": "dayStates.outside.text",
+      "value": "#ffffffff",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-outside.color",
+      "formula": "ledger hidden outside td.color (white; cell has no button/label)"
+    },
+    {
+      "path": "captionGap",
+      "value": 0,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-month_grid.margin-top",
+      "formula": "ledger cls:rdp-month_grid.margin-top"
+    },
+    {
+      "path": "typography.caption.family",
+      "value": "Times",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-caption_label.font-family",
+      "formula": "ledger computed font-family (UA default; library ships no webfont)"
+    },
+    {
+      "path": "typography.caption.style",
+      "value": "Bold",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-caption_label.font-weight",
+      "formula": "ledger font-weight mapped to CSS weight name"
+    },
+    {
+      "path": "typography.day.family",
+      "value": "Times",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.font-family",
+      "formula": "ledger computed font-family (UA default)"
+    },
+    {
+      "path": "typography.day.style",
+      "value": "Regular",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.font-weight",
+      "formula": "ledger font-weight mapped to CSS weight name"
+    },
+    {
+      "path": "typography.weekday.fontSize",
+      "value": "13.3333px",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-weekday.font-size",
+      "formula": "ledger weekday font-size — calendar@1 has one dayCell.fontSize"
     }
   ],
   "proposeError": null
