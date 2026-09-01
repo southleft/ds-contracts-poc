@@ -1,10 +1,14 @@
 # react-day-picker — held-out exam subject #3, the COMPLEX-ARCHETYPE probe
 
-> **Current state (2026-08-30).** This directory is the **held-out capture
-> exam** for F1 (unseen library). Keep the blindness rule below. Calendar
-> is separately **live-proven on the recipe-IR path** (page `181:64873`,
-> owner-signed). Do not read §5 as “calendar has no proof” — it names
-> why the *capture* path cannot treat a month grid as a proven archetype.
+> **Current state (2026-08-31).** This directory is the **held-out capture
+> exam** for F1 (unseen library). The first capture has now run
+> (`extract/computed/out/day-picker/calendar/`,
+> [`f1-held-out-v1`](../../recipe/evidence/f1-held-out-v1/)
+> `f1Status: capture-only`). Do not retune this config in response to
+> that run. Calendar is separately **live-proven on the recipe-IR path**
+> (page `181:64873`, owner-signed). Do not read §5 as “calendar has no
+> proof” — it names why the *capture* path cannot treat a month grid as
+> a proven archetype.
 
 > ## THE BLINDNESS RULE
 >
@@ -224,16 +228,27 @@ in the loop:
 - `loadConfig()` — the engine's own config validator, which reads the config and
   runs no capture — accepts `extract/computed/configs/day-picker.json`.
 
-## 7 · What has NOT been done, on purpose
+## 7 · What the first capture measured (2026-08-31)
 
-No capture has run. `extract/computed/out/day-picker/` does not exist, there are
-no scorecards, no `contracts/`, no `figma/`, no emitted React. The minted tree
-`tokens/day-picker-minted.dtcg.json` is a committed **zero-leaf stub** riding
-the documented `tokens.mintedBootstrap` allowance — a genuine first-ever pass.
+Capture ran against this config with **no classAllow / axes / fixedProps
+retune**. Double-run byte-identity is **IDENTICAL** after the floor remount
+(the previous refusal was an interaction leak, not a held-out-config
+problem). Ledger: `extract/computed/out/day-picker/calendar/captured-truth.json`.
+Evidence: [`recipe/evidence/f1-held-out-v1/`](../../recipe/evidence/f1-held-out-v1/)
+`f1Status: capture-only`. `overallSuccess` stays false.
 
-One expectation worth writing down in advance, so it cannot be rationalised
-afterwards: this library declares **38 custom properties total** and hard-codes
-everything else (grid tracks, caption flex layout, nav geometry). A first pass
-should therefore **mint far more than it binds**, and that ratio is a real
-measurement about complex components — they are mostly layout, and layout is not
-tokenised — not a defect in the reader.
+Still not done, on purpose:
+
+- no `examples/day-picker/contracts/` (the enriched contract from the floor
+  is a measurement, not an adopted contract)
+- no Figma stay, no live remint, no Polar
+- no invented F1 pass
+- the minted tree `tokens/day-picker-minted.dtcg.json` is still the
+  committed **zero-leaf stub** (`tokens.mintedBootstrap` remains true)
+
+The expectation written down before the run still holds: this library
+declares **38 custom properties total** and hard-codes everything else.
+The first pass bound **0** source facts and minted **66** leaves (294
+named skips). That ratio is a measurement about complex components —
+they are mostly layout, and layout is not tokenised — not a defect in
+the reader, and not an F1 pass.

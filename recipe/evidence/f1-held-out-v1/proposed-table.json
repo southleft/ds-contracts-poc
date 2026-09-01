@@ -1,5 +1,36 @@
 {
   "note": "PROPOSED only — empty when capture is blocked. Never a hand-authored fixture table.",
-  "proposed": null,
-  "proposeError": "No captured-truth.json — capture refused before writing a ledger (determinism self-check). Reader cannot propose a table from nothing."
+  "proposed": [
+    {
+      "path": "root.width",
+      "value": 308,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default root.width",
+      "formula": "ledger root.width @ label.1__default"
+    },
+    {
+      "path": "root.height",
+      "value": 295,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default root.height",
+      "formula": "ledger root.height @ label.1__default"
+    },
+    {
+      "path": "dayButton.width",
+      "value": 42,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.width",
+      "formula": "ledger cls:rdp-day_button.width @ label.1__default"
+    },
+    {
+      "path": "dayButton.height",
+      "value": 42,
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-day_button.height",
+      "formula": "ledger cls:rdp-day_button.height @ label.1__default"
+    },
+    {
+      "path": "selected.background",
+      "value": "#00000000",
+      "ledgerKey": "extract/computed/out/day-picker/calendar/captured-truth.json#label.1__default cls:rdp-selected.background-color",
+      "formula": "ledger cls:rdp-selected.background-color @ label.1__default"
+    }
+  ],
+  "proposeError": null
 }

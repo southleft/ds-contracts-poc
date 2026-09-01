@@ -12,8 +12,9 @@
 > **partially proven**, neither held-out exam is a release gate yet:
 > **code→canvas** — reader covers 13×3 boilerplate subjects
 > ([review package](recipe/evidence/boilerplate-review-package-v1/));
-> **F1 is blocked** (react-day-picker signature thrash —
-> [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/)), not passed.
+> **F1 is capture-only** (react-day-picker double-run is green —
+> [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/),
+> `f1Status: capture-only`), not passed.
 > **canvas→code** — Button apply-step + held-out AntD Card exam ran with
 > silent=0
 > ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));

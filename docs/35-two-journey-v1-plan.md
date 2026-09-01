@@ -15,9 +15,10 @@
 > dash height stays named-refused. Canvas→code Button apply-step + held-out
 > AntD Card exam ran with silent=0; the
 > [docs/26 F-C2C amendment](26-amendment-canvas-to-code.md) is **adopted
-> 2026-08-31** (owner). F1 is **blocked** (react-day-picker signature
-> thrash — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/)), not
-> passed. **Release is blocked** on F1. npm stays deferred.
+> 2026-08-31** (owner). F1 is **capture-only** (react-day-picker
+> double-run is green — [`f1-held-out-v1`](../recipe/evidence/f1-held-out-v1/),
+> `f1Status: capture-only`), not passed. **Release is blocked** on F1.
+> npm stays deferred.
 > No semver bump. No npm publish. No `overallSuccess` flip.
 >
 > **Owner decisions adopted 2026-08-31:**

@@ -13,6 +13,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 
 ## [Unreleased]
 
+### F1 capture-only — day-picker remount (2026-08-31)
+
+- Capture-floor remount: click-mutated React state (a calendar's
+  selected day) no longer leaks across double-run sweeps. Held-out
+  `day-picker.json` was not retuned. Check:
+  `npm run extract:computed:remount:check`.
+- F1 prepare against `react-day-picker@10.0.1` is **capture-only**
+  (`recipe/evidence/f1-held-out-v1/`). Double-run IDENTICAL. Proposed
+  table exists. No live Figma. No invented pass. Product v1 remains
+  incomplete. npm stays deferred.
+
 ### Phase 5 final honesty pass (2026-08-31)
 
 - README / docs/35 / this Unreleased note say the same thing: product **v1
@@ -25,11 +36,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
   on Scratch AntD Card with silent=0
   ([`canvas-to-code-held-out-v1`](recipe/evidence/canvas-to-code-held-out-v1/receipt.json));
   Phase 4 reader subjects (shadcn / Chakra) as proposed tables only.
-- **Blocked:** F1 held-out prepare is **blocked**
-  (react-day-picker day-cell signature thrash —
-  [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/)). docs/26 F-C2C
-  amendment is [adopted 2026-08-31](docs/26-amendment-canvas-to-code.md)
-  as Journey A recipe canvas→code; it does not complete v1.
+- **Blocked:** F1 held-out prepare is **capture-only**
+  (react-day-picker double-run is green after the floor remount;
+  [`f1-held-out-v1`](recipe/evidence/f1-held-out-v1/); no live mint,
+  no invented pass). docs/26 F-C2C amendment is
+  [adopted 2026-08-31](docs/26-amendment-canvas-to-code.md) as Journey A
+  recipe canvas→code; it does not complete v1.
 - Phase 5 labeling + Figma soft-archive of superseded stays already landed;
   release remains blocked on F1. npm stays deferred.
 - **docs:check:** Chakra Phase 4 Checkbox scorecard joins the gated capture
