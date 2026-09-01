@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-checkbox-v5",
+  "runIdentity": "548cf953-296f37b2-ff3a8565-checkbox-v5",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "checkbox@1 MUI CheckBox.js even-odd icon (no white overlay, no leftover stroke). AntD ::after L baked to a check path (rotation 0). AntD indeterminate is fontSizeLG/2 × lineWidthBold dash. Old stays 183:74742 and 196:76370 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-checkbox-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "548cf95362cf7ea99fd42cf4b4d21c6a7fe01495bce805029cf3a85a1267f51b",
+      "envelopeHash": "f39fbb5be730f26ca4cea8f7313ae2cc02b270613f4d2822a86e8f4c1251ec89",
+      "variantCount": 6,
+      "variableCount": 43,
+      "comparedIrFacts": 217
+    },
+    {
+      "adapterIdentity": "mui-checkbox-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "296f37b23f86a224a7dee5fb41e301753b827869e09991f9a7ac9169d26863fa",
+      "envelopeHash": "525495303ee29b0e8a45eeeaaad7926894a4774d3bd6f52e77c8bc460b2ed61a",
+      "variantCount": 6,
+      "variableCount": 42,
+      "comparedIrFacts": 211
+    },
+    {
+      "adapterIdentity": "antd-checkbox-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "ff3a8565ebbe2c34e83b34f8200804b9aa81be71cc4521e6b5a72bc9df4c6e56",
+      "envelopeHash": "b23fbf7f99c05a355137855cff2fc3c9bfb12eb053d0e43ce909998376d6b921",
+      "variantCount": 6,
+      "variableCount": 43,
+      "comparedIrFacts": 217
+    }
+  ]
+}

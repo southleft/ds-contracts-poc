@@ -1,0 +1,36 @@
+{
+  "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-510a0cec-switch-v4",
+  "runIdentity": "3ba64ebc-4b939b9e-510a0cec-switch-v4",
+  "namespace": "ds.contracts.switch.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "switch@1 AntD thumb.travel is the delta 22 (track 44 − handle 18 − 2×padding 2), not the ON inset 24. Old stay 183:75302 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-switch-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "3ba64ebca7ac7eaff7dfe84dbc120a4d6b060812be7faffc9ccd66aa9f0bcb73",
+      "envelopeHash": "0bf61c0f6f24c5274ec2ac98ba3a8998b5547f321a47fbd21d7b66df532fa784",
+      "variantCount": 4,
+      "variableCount": 23,
+      "comparedIrFacts": 99
+    },
+    {
+      "adapterIdentity": "mui-switch-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "4b939b9e867ec77b6c74712c55fef72f707b463eb4c95c09d9992075184da3ff",
+      "envelopeHash": "7c5c7a6bc5e39ea82323a4cf5dce5f1057c4230fb4a31b51e2dbb1738ab3954a",
+      "variantCount": 4,
+      "variableCount": 23,
+      "comparedIrFacts": 99
+    },
+    {
+      "adapterIdentity": "antd-switch-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "510a0cecd53ead8a8951b6b811039ecd3bebac93872cb963a96f317f342e3fe0",
+      "envelopeHash": "4be6dbf2ba6a0e0ebf06448f72bda3c16ab644470c79be7962bc48f5365dce6d",
+      "variantCount": 4,
+      "variableCount": 23,
+      "comparedIrFacts": 99
+    }
+  ]
+}

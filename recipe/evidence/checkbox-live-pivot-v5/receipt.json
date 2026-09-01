@@ -1,0 +1,50 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "checkbox-live-pivot-v5-prepare",
+  "teaching": "MUI even-odd primary icon on paper; AntD pre-rotated L is a check; AntD dash is 8×2 not an 8×8 tile",
+  "runIdentity": "548cf953-296f37b2-ff3a8565-checkbox-v5",
+  "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-checkbox-v5",
+  "namespace": "ds.contracts.checkbox.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "548cf95362cf7ea99fd42cf4b4d21c6a7fe01495bce805029cf3a85a1267f51b",
+    "MUI": "296f37b23f86a224a7dee5fb41e301753b827869e09991f9a7ac9169d26863fa",
+    "Ant Design": "ff3a8565ebbe2c34e83b34f8200804b9aa81be71cc4521e6b5a72bc9df4c6e56"
+  },
+  "writerSha256": "48c257668a5b520d66b1e7f9b22b7ec8bc8c9054f888855af0862c042f14af16",
+  "pageId": "212:81535",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=212-81535",
+  "live": {
+    "recordedFrom": "checkbox-v5b-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Checkbox / 548cf953-296f37b2-ff3a8565-checkbox-v5",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-checkbox-reviewed-v1",
+        "sectionId": "212:81536",
+        "setId": "212:81623",
+        "collectionId": "VariableCollectionId:212:81537",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      },
+      {
+        "adapterIdentity": "mui-checkbox-reviewed-v1",
+        "sectionId": "212:81624",
+        "setId": "212:81710",
+        "collectionId": "VariableCollectionId:212:81625",
+        "variantCount": 6,
+        "comparedIrFacts": 211
+      },
+      {
+        "adapterIdentity": "antd-checkbox-reviewed-v1",
+        "sectionId": "212:81711",
+        "setId": "212:81798",
+        "collectionId": "VariableCollectionId:212:81712",
+        "variantCount": 6,
+        "comparedIrFacts": 217
+      }
+    ]
+  }
+}

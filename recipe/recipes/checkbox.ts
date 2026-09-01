@@ -23,7 +23,12 @@ import {
   type VariableBinding,
   type VectorNode,
 } from "../figma-ir.js";
-import { toFigmaVectorPath } from "../figma-vector-path.js";
+import {
+  toFigmaVectorPath,
+  transformVectorPath,
+  vectorPathBounds,
+  vectorPathHullBounds,
+} from "../figma-vector-path.js";
 import { deriveRecipeIntegrity } from "../hash.js";
 import { canonicalJson } from "../normalize.js";
 import {
@@ -401,6 +406,38 @@ const dashNode = (
   children: [],
 });
 
+const GLYPH_PRECISION = 1e-4;
+const round4 = (n: number): number => Math.round(n / GLYPH_PRECISION) * GLYPH_PRECISION;
+
+/**
+ * Lower the library's check path (already in the viewport's px space) to
+ * Figma's grammar, translate it to its own origin and size it by its true ink.
+ * A path that still carries a viewport position (hull min ≠ 0,0) must be
+ * centred in that viewport within half a pixel, because the host centres the
+ * vector and an off-centre source would be moved silently. A path that is
+ * already origin-based carries no position to lose (that is what collapse
+ * hands back), so only the size is measured.
+ */
+export function lowerCheckGlyph(check: {
+  path: string;
+  width: { fallback: number };
+  height: { fallback: number };
+}): { assetRef: string; width: number; height: number } {
+  const lowered = toFigmaVectorPath(check.path);
+  const hull = vectorPathHullBounds(lowered);
+  if (Math.abs(hull.minX) > GLYPH_PRECISION || Math.abs(hull.minY) > GLYPH_PRECISION) {
+    const cx = (hull.minX + hull.maxX) / 2;
+    const cy = (hull.minY + hull.maxY) / 2;
+    if (Math.abs(cx - check.width.fallback / 2) > 0.5 || Math.abs(cy - check.height.fallback / 2) > 0.5)
+      throw new RecipeRefusal(CHECKBOX_RECIPE_REF, [
+        `checkbox/glyph/check: the glyph is not centred in its ${check.width.fallback}x${check.height.fallback} viewport (centre ${cx.toFixed(2)},${cy.toFixed(2)}); the centred host would move it — carry the offset explicitly`,
+      ]);
+  }
+  const assetRef = transformVectorPath(lowered, { tx: -hull.minX, ty: -hull.minY });
+  const ink = vectorPathBounds(assetRef);
+  return { assetRef, width: round4(ink.maxX - ink.minX), height: round4(ink.maxY - ink.minY) };
+}
+
 const checkVector = (
   instance: CheckboxRecipeInstance,
   cell: StateCell,
@@ -408,19 +445,22 @@ const checkVector = (
 ): VectorNode => {
   const check = instance.tokens.check;
   const strokePaint = check.paint === "stroke";
+  const glyph = lowerCheckGlyph(check);
   return {
     kind: "vector",
     role: "checkbox/glyph/check",
     label: "checkbox/glyph/check",
     visible,
-    // Lower the library's shipped path into the subset Figma accepts.
-    // recipe/figma-vector-path.ts documents the probed grammar (M L C Q Z
-    // absolute; H, V, A and every relative command refused). MUI ships
-    // "M19 3H5c-1.11…", which Figma rejects outright, so without this the
-    // archetype cannot mint at all.
-    assetRef: toFigmaVectorPath(check.path),
-    width: fixed(check.width.fallback),
-    height: fixed(check.height.fallback),
+    // The vector carries the glyph at its OWN ink size, at its own origin.
+    // check.width/height are the viewport the path was authored in (Astryx
+    // 14, MUI's SvgIcon 24, AntD the ::after box) and live on the host frame
+    // that centres this vector. Until 2026-09-01 the vector itself was sized
+    // to the viewport, which scaled the ink to fill it (Astryx 9.8x7 → 14x14,
+    // MUI 18 → 24); the shared writer's bounds guard refused that on the first
+    // shared-runtime remint.
+    assetRef: glyph.assetRef,
+    width: fixed(glyph.width),
+    height: fixed(glyph.height),
     fills: strokePaint ? [] : [solid(cell.checkFill.fallback)],
     ...(strokePaint
       ? {
@@ -438,8 +478,6 @@ const checkVector = (
     strokeJoin: check.strokeJoin,
     rotation: check.rotation,
     bindings: [
-      bind("width.value", check.width),
-      bind("height.value", check.height),
       ...(strokePaint
         ? [
             bind("strokes.0.weight", check.strokeWidth),
@@ -457,7 +495,10 @@ const checkChild = (
 ): FrameNode | VectorNode => {
   const vector = checkVector(instance, cell, visible);
   const check = instance.tokens.check;
-  if (check.placement !== "absolute") return vector;
+  // The host is the glyph's viewport: check.width/height sized, centring the
+  // ink-sized vector. It is always present so the viewport facts are carried
+  // and collapse can read them back; only AntD positions it absolutely.
+  const absolute = check.placement === "absolute";
   return {
     kind: "frame",
     role: "checkbox/glyph/check-host",
@@ -470,12 +511,13 @@ const checkChild = (
       padding: { top: 0, right: 0, bottom: 0, left: 0 },
       width: fixed(check.width.fallback),
       height: fixed(check.height.fallback),
-      positioning: "absolute",
-      offset: {
-        x: check.offsetX.fallback,
-        y: check.offsetY.fallback,
-      },
-      constraints: { horizontal: "left", vertical: "top" },
+      ...(absolute
+        ? {
+            positioning: "absolute" as const,
+            offset: { x: check.offsetX.fallback, y: check.offsetY.fallback },
+            constraints: { horizontal: "left" as const, vertical: "top" as const },
+          }
+        : {}),
     },
     fills: [],
     clipsContent: false,
@@ -980,15 +1022,16 @@ export function collapseCheckboxRecipe(
       },
       check: {
         path: check.assetRef,
+        // The viewport lives on the host; the vector is ink-sized.
         width: numberFrom(
-          check,
-          "width.value",
-          check.width.mode === "fixed" ? check.width.value : 0,
+          checkHost!,
+          "layout.width.value",
+          checkHost!.layout.width.mode === "fixed" ? checkHost!.layout.width.value : 0,
         ),
         height: numberFrom(
-          check,
-          "height.value",
-          check.height.mode === "fixed" ? check.height.value : 0,
+          checkHost!,
+          "layout.height.value",
+          checkHost!.layout.height.mode === "fixed" ? checkHost!.layout.height.value : 0,
         ),
         strokeWidth: checkStroke
           ? numberFrom(check, "strokes.0.weight", checkStroke.weight)
@@ -1019,7 +1062,7 @@ export function collapseCheckboxRecipe(
               variable: `${envelope.id}.check-offsetY`,
               fallback: 0,
             },
-        placement: checkHost ? "absolute" : "center",
+        placement: checkHost?.layout.positioning === "absolute" ? "absolute" : "center",
       },
       states: {
         unchecked: {

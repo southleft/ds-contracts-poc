@@ -52,7 +52,7 @@ test("the writer plans three link sources without touching Figma", () => {
   const writer = emitLinkFigmaWriter(sources);
   assert.equal(writer.namespace, LINK_FIGMA_NAMESPACE);
   assert.match(writer.pageName, /^Recipe Pivot \/ Link \//);
-  assert.match(writer.runIdentity, /-link-v1$/);
+  assert.match(writer.runIdentity, /-link-v2$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.chip.kind, "component");

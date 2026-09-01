@@ -52,7 +52,7 @@ test("the writer plans three menu sources without touching Figma", () => {
   const writer = emitMenuFigmaWriter(sources);
   assert.equal(writer.namespace, MENU_FIGMA_NAMESPACE);
   assert.match(writer.pageName, /^Recipe Pivot \/ Menu \//);
-  assert.match(writer.runIdentity, /-menu-v1$/);
+  assert.match(writer.runIdentity, /-menu-v2$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.chip.kind, "component");
