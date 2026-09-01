@@ -109,6 +109,6 @@
       "note": "HEIGHTS are close and in two cases exact (antd 54/54, mui 58/56), which is the dimension a textarea actually owns. Width is not ours to match.",
       "toAdmitThem": "the scorer needs a width-normalised mode for fill-width controls \u2014 compare the border, radius and vertical metrics without pretending the widths should agree. Excluded until then rather than scored against a number that cannot mean anything, and not marked expectFringe, because this is not anti-aliasing."
     },
-    "radio/astryx": "Astryx ships RadioList, and extract/computed/configs/astryx.json declares no Radio component \u2014 there is no real-package render to score against. Not a defect in the mint; a gap in the capture corpus."
+    "radio/astryx": "Astryx ships RadioList, and extract/computed/configs/astryx.json declares no Radio component \u2014 there is no real-package render to score against. Not a defect in the mint; a gap in the capture corpus. EYEBALL NOTE, unverified: on the v3 page the Astryx UNSELECTED radio reads as a solid white circle with no visible border, where a radio normally carries one. That may be correct for Astryx or may be a missing stroke \u2014 it cannot be decided here, which is the whole point of the exclusion. Capturing Astryx Radio would settle it."
   }
 }
