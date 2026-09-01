@@ -23,7 +23,7 @@ Chromium render, canvas-gate scorer, bar `pctAAMasked ≤ 5%`.
 | `checkbox/mui` (v4) | 18×18 | 18×18 | **0.00%** | PASS |
 | `checkbox/mui` (v3, before fix) | 24×24 | 18×18 | 49.31% | FAIL |
 | `switch/astryx` | 40×24 | 40×24 | **0.00%** | PASS |
-| `switch/antd` | 44×22 | 44×24 | 6.82% | FAIL |
+| `switch/antd` | 44×22 | 44×24 | 6.82% | FAIL — instrument, not design |
 | `switch/mui` | 17×14 ink | 38×19 ink | 35.04% | FAIL |
 
 **4 of 6 current subjects pass, three of them pixel-identical.** That is a real
@@ -33,7 +33,12 @@ is now a number rather than a feeling.
 
 Two failures are open and named:
 
-- **`switch/antd`** is 2px short in height (22 against 24).
+- **`switch/antd` is NOT a design defect** — I said it was, and re-measured.
+  The canvas-gate trim treats anything below 250/255 as ink, and Chromium's
+  render carries two rows of sub-threshold AA fringe (241–248) that Figma's
+  export does not. At any threshold of 240 or stricter **both sides measure
+  44×22 exactly**. The 6.82% is the union-pad misalignment that 2px causes.
+  A trim threshold is a tuning choice, and here it manufactured a defect.
 - **`switch/mui`** does not paint the thumb's elevation shadow, so a white thumb
   on a white ground is invisible and the control reads as a grey blob. This is
   already a **named refusal** (`refusal-thumb-shadow`, "SwitchThumb boxShadow

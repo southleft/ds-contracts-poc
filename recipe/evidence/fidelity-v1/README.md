@@ -75,8 +75,22 @@ did accounting-green mints still look wrong".
 | `switch/antd` | 44×22 | 44×24 | 6.82% | FAIL |
 | `switch/mui` | 17×14 ink | 38×19 ink | 35.04% | FAIL |
 
-**`switch/antd`** is off by 2px of height — 22 against the real 24. Small, real,
-and invisible to every other gate.
+**`switch/antd` is not a defect, and I recorded it as one before re-measuring.**
+The trim counts anything below 250/255 as ink. Chromium's render carries two
+rows of AA fringe at 241–248 that Figma's export does not produce, so the
+reference measures 44×24 and the canvas 44×22. At a threshold of 240 or stricter
+**both are 44×22 exactly**. The 6.82% is the misalignment those 2px cause in the
+union pad, not a difference in the design.
+
+| threshold | reference | canvas |
+| --- | --- | --- |
+| 250 (scorer default) | 44×24 | 44×22 |
+| 245 | 44×23 | 44×22 |
+| **240** | **44×22** | **44×22** |
+| 230 | 44×22 | 44×22 |
+
+Worth stating plainly: a trim threshold is a tuning choice, and this one
+manufactured a defect out of two renderers' anti-aliasing.
 
 **`switch/mui`** is the more serious one, and it is visible at a glance. MUI's
 unchecked switch is a **white circular thumb sitting on a grey track**. The mint
