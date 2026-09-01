@@ -24,9 +24,10 @@ Chromium render, canvas-gate scorer, bar `pctAAMasked ≤ 5%`.
 | `checkbox/mui` (v3, before fix) | 24×24 | 18×18 | 49.31% | FAIL |
 | `switch/astryx` | 40×24 | 40×24 | **0.00%** | PASS |
 | `switch/antd` | 44×22 | 44×24 | 6.82% | FAIL — instrument, not design |
-| `switch/mui` | 17×14 ink | 38×19 ink | 35.04% | FAIL |
+| `switch/mui` (v3, after fix) | 35×19 ink | 38×19 ink | **4.57%** | PASS |
+| `switch/mui` (v2, before fix) | 17×14 ink | 38×19 ink | 35.04% | FAIL |
 
-**4 of 6 current subjects pass, three of them pixel-identical.** That is a real
+**5 of 6 current subjects pass, three of them pixel-identical.** That is a real
 answer to the owner's question, and it is better news than the impression that
 prompted it: the mints are mostly faithful, and where they are not, the defect
 is now a number rather than a feeling.

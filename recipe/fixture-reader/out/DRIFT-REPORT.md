@@ -72,19 +72,19 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### astryx — @astryxdesign/core@0.1.6#Switch
 
-ledger `extract/computed/out/astryx-core/switch/captured-truth.json` · 33 facts: **19 match**, **0 drift**, 14 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/switch/captured-truth.json` · 34 facts: **20 match**, **0 drift**, 14 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Switch
 
-ledger `extract/computed/out/mui/switch/captured-truth.json` · 33 facts: **17 match**, **0 drift**, 16 named receipts, 0 unread
+ledger `extract/computed/out/mui/switch/captured-truth.json` · 34 facts: **18 match**, **0 drift**, 16 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### antd — antd@5.29.3#Switch
 
-ledger `extract/computed/out/antd/switch/captured-truth.json` · 33 facts: **20 match**, **0 drift**, 13 named receipts, 0 unread
+ledger `extract/computed/out/antd/switch/captured-truth.json` · 34 facts: **21 match**, **0 drift**, 13 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 

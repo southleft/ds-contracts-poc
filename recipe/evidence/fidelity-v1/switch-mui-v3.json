@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "switch/mui (v3)",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 30.47091412742382,
+    "pctAAUnmasked": 4.570637119113574,
+    "pctAAMasked": 4.570637119113574,
+    "canvasPx": "35x19",
+    "realPx": "38x19",
+    "inkCanvasPct": 36.98060941828255,
+    "inkRealPct": 41.82825484764543
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/shots/switch-mui-variant-v3.png",
+    "sha256": "0473d08bbd69aad00f3f451866fdc15010fe879626f06aff828beaf24ea32708"
+  },
+  "reference": {
+    "path": "extract/computed/out/mui/switch/orig-shots/default.medium.unchecked.enabled__default.png",
+    "sha256": "602a4846fb70163a1c491ccb3936e85c5aad772248956d32fb7e7aca5a3cacae"
+  },
+  "diff": "recipe/evidence/fidelity-v1/switch-mui-v3.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "35x19",
+      "reference": "38x19",
+      "agree": false
+    },
+    {
+      "threshold": 245,
+      "canvas": "35x19",
+      "reference": "37x18",
+      "agree": false
+    },
+    {
+      "threshold": 240,
+      "canvas": "34x19",
+      "reference": "36x18",
+      "agree": false
+    },
+    {
+      "threshold": 230,
+      "canvas": "33x18",
+      "reference": "34x18",
+      "agree": false
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

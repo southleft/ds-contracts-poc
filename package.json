@@ -83,6 +83,8 @@
     "recipe:switch:live:v1:generated:check": "tsx recipe/build-switch-live-proof-v1.ts --check",
     "recipe:switch:live:v2:prepare": "tsx recipe/build-switch-live-proof-v2.ts",
     "recipe:switch:live:v2:generated:check": "tsx recipe/build-switch-live-proof-v2.ts --check",
+    "recipe:switch:live:v3:prepare": "tsx recipe/build-switch-live-proof-v3.ts",
+    "recipe:switch:live:v3:generated:check": "tsx recipe/build-switch-live-proof-v3.ts --check",
     "recipe:radio:live:v1:prepare": "tsx recipe/build-radio-live-proof-v1.ts",
     "recipe:radio:live:v1:generated:check": "tsx recipe/build-radio-live-proof-v1.ts --check",
     "recipe:radio:live:v2:prepare": "tsx recipe/build-radio-live-proof-v2.ts",

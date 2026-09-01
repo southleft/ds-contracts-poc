@@ -215,6 +215,10 @@ const EXTRA_KEYS = [
   "itemAlign",
   "labelLineHeightUnit",
   "rowAlign",
+  // The thumb's CSS box-shadow, carried as the library's literal declaration
+  // and lowered to Figma effects at compile. A plain string like rowAlign, so
+  // it reaches the reader as an extra rather than a {variable, fallback} leaf.
+  "thumbShadow",
   "hitClips",
   "trackClips",
   "strokeAlign",

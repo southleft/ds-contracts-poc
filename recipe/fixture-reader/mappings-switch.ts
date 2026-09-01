@@ -54,6 +54,7 @@ export const astryxSwitchMappings: FactMapping[] = [
   receipt("states.true.disabled.label", NO_ON, "FieldLabel disabled — reviewed"),
   one("labelFontSize", "px", { combo: aOff, part: aLabel, channel: "font-size" }),
   receipt("rowAlign", "flex align-items:center on the row — recipe spelling", "reviewed center"),
+  one("thumbShadow", "string", { combo: aOff, part: aThumb, channel: "box-shadow" }),
   receipt("hitClips", "recipe anatomy spelling (hit target does not clip)", "reviewed false"),
   receipt("trackClips", "recipe anatomy spelling (track does not clip the thumb)", "reviewed false"),
   {
@@ -158,6 +159,10 @@ export const muiSwitchMappings: FactMapping[] = [
   receipt("states.true.disabled.label", NO_LBL, "palette.text.disabled #00000061 — reviewed"),
   receipt("labelFontSize", NO_LBL, "createTypography.js body1 16 — reviewed 16"),
   receipt("rowAlign", "recipe spelling of the reviewed FormControlLabel pairing", "reviewed center"),
+  // The thumb's elevation, read from the capture's computed channel. This was a
+  // named refusal until recipe/evidence/fidelity-v1 measured what it cost: a
+  // white thumb with no shadow, on a white ground, is invisible.
+  one("thumbShadow", "string", { combo: mOff, part: mThumb, channel: "box-shadow" }),
   receipt("hitClips", "Switch-root overflow hidden on the 38px hit — recipe spelling", "reviewed true"),
   receipt("trackClips", "track does not clip the thumb", "reviewed false"),
   receipt("typography.label.family", NO_LBL, "createTypography.js fontFamily Roboto — reviewed Roboto"),
@@ -228,6 +233,7 @@ export const antdSwitchMappings: FactMapping[] = [
   receipt("states.true.disabled.label", NO_ANTD_LBL, "--color-text-disabled — the fixture's citation"),
   one("labelFontSize", "px", { combo: sOff, part: sRoot, channel: "font-size" }),
   receipt("rowAlign", "recipe spelling of the reviewed label pairing", "reviewed center"),
+  one("thumbShadow", "string", { combo: sOff, part: sHandle, channel: "box-shadow" }),
   receipt("hitClips", "antd switch does not clip the handle", "reviewed false"),
   receipt("trackClips", "antd switch does not clip the handle", "reviewed false"),
   receipt("typography.label.family", FONT_PIN + "; additionally no label part is mounted", "theme.getDesignToken().fontFamily starts -apple-system"),

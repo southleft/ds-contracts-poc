@@ -276,6 +276,16 @@
         "evidence": "reviewed center"
       },
       {
+        "path": "thumbShadow",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.box-shadow"
+        ]
+      },
+      {
         "path": "hitClips",
         "fixtureValue": "false",
         "verdict": "receipt",
@@ -313,7 +323,7 @@
       }
     ],
     "counts": {
-      "match": 19,
+      "match": 20,
       "drift": 0,
       "receipt": 14,
       "unread": 0
@@ -605,6 +615,16 @@
         "evidence": "reviewed center"
       },
       {
+        "path": "thumbShadow",
+        "fixtureValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "verdict": "match",
+        "capturedValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "proposedValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "ledgerKeys": [
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-thumb.box-shadow"
+        ]
+      },
+      {
         "path": "hitClips",
         "fixtureValue": "true",
         "verdict": "receipt",
@@ -638,7 +658,7 @@
       }
     ],
     "counts": {
-      "match": 17,
+      "match": 18,
       "drift": 0,
       "receipt": 16,
       "unread": 0
@@ -927,6 +947,16 @@
         "evidence": "reviewed center"
       },
       {
+        "path": "thumbShadow",
+        "fixtureValue": "none",
+        "verdict": "match",
+        "capturedValue": "none",
+        "proposedValue": "none",
+        "ledgerKeys": [
+          "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch-handle.box-shadow"
+        ]
+      },
+      {
         "path": "hitClips",
         "fixtureValue": "false",
         "verdict": "receipt",
@@ -960,7 +990,7 @@
       }
     ],
     "counts": {
-      "match": 20,
+      "match": 21,
       "drift": 0,
       "receipt": 13,
       "unread": 0

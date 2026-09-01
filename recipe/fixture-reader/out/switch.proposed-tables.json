@@ -201,6 +201,13 @@
         "verdict": "receipt",
         "provenance": "RECEIPT: flex align-items:center on the row — recipe spelling [reviewed center]"
       },
+      "thumbShadow": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "match",
+        "captured": "none",
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.box-shadow"
+      },
       "hitClips": {
         "fixture": "false",
         "proposed": "false",
@@ -430,6 +437,13 @@
         "proposed": "center",
         "verdict": "receipt",
         "provenance": "RECEIPT: recipe spelling of the reviewed FormControlLabel pairing [reviewed center]"
+      },
+      "thumbShadow": {
+        "fixture": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "proposed": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "verdict": "match",
+        "captured": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
+        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default cls:MuiSwitch-thumb.box-shadow"
       },
       "hitClips": {
         "fixture": "true",
@@ -661,6 +675,13 @@
         "proposed": "center",
         "verdict": "receipt",
         "provenance": "RECEIPT: recipe spelling of the reviewed label pairing [reviewed center]"
+      },
+      "thumbShadow": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "match",
+        "captured": "none",
+        "provenance": "extract/computed/out/antd/switch/captured-truth.json#default.unchecked.enabled__default cls:ant-switch-handle.box-shadow"
       },
       "hitClips": {
         "fixture": "false",

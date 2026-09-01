@@ -25,7 +25,7 @@ import {
 
 export const SWITCH_FIGMA_NAMESPACE = "ds.contracts.switch.recipe.v1";
 export const SWITCH_FIGMA_WRITER_VERSION = 2;
-export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v2";
+export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v3";
 export const FORBIDDEN_SWITCH_V1_PAGE_ID = "183:75302";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
@@ -381,6 +381,19 @@ for(const source of PLAN.sources){
       for(const [irKey,figmaKey] of [["topLeft","topLeftRadius"],["topRight","topRightRadius"],["bottomRight","bottomRightRadius"],["bottomLeft","bottomLeftRadius"]]){
         node[figmaKey]=ir.cornerRadius[irKey];bindFloat(node,figmaKey,bindingFor(ir,"cornerRadius."+irKey));
       }
+    }
+    // The switch writer carried no effects block at all, so a compiled shadow
+    // was silently dropped on the way to the canvas — the MUI thumb minted flat
+    // and the control read as a grey blob. Same shape as the combobox writer's
+    // block, which already had it.
+    void "SWITCH-WRITER-EFFECTS";
+    if(ir.effects){
+      node.effects=ir.effects.map((effect,index)=>{
+        const base=effect.kind==="drop-shadow"||effect.kind==="inner-shadow"?{type:effect.kind==="drop-shadow"?"DROP_SHADOW":"INNER_SHADOW",color:rgba(effect.color),offset:{x:effect.offsetX,y:effect.offsetY},radius:effect.blur,spread:effect.spread,visible:true,blendMode:"NORMAL"}:{type:effect.kind==="layer-blur"?"LAYER_BLUR":"BACKGROUND_BLUR",radius:effect.blur,visible:true};
+        const binding=bindingFor(ir,"effects."+index+".color");
+        if(!binding||!("color" in base))return base;
+        return figma.variables.setBoundVariableForEffect(base,"color",variables.get("COLOR:"+binding.variable));
+      });
     }
   };
   const align={min:"MIN",center:"CENTER",max:"MAX","space-between":"SPACE_BETWEEN",baseline:"BASELINE"};

@@ -22,6 +22,10 @@ import {
   type TextNode,
   type VariableBinding,
 } from "../figma-ir.js";
+import {
+  cssBoxShadowFromEffects,
+  parseCssBoxShadow,
+} from "../css-box-shadow.js";
 import { deriveRecipeIntegrity } from "../hash.js";
 import { canonicalJson } from "../normalize.js";
 import {
@@ -124,6 +128,18 @@ export interface SwitchRecipeInstance {
     row: { gap: SwitchNumberParameter };
     rowAlign: "center" | "baseline";
     /**
+     * The thumb's CSS `box-shadow`, verbatim from the library, or "none".
+     *
+     * Carried as the library's own declaration so the reader can check it
+     * against the capture's computed channel; lowered to Figma effects at
+     * compile by recipe/css-box-shadow.ts. This was a named refusal
+     * (`refusal-thumb-shadow`) until recipe/evidence/fidelity-v1 measured what
+     * the refusal cost: MUI's thumb is WHITE, and with no elevation on a white
+     * ground the control renders as a grey blob (35.04% AA against the real
+     * render). A named loss is honest; it is not automatically acceptable.
+     */
+    thumbShadow: string;
+    /**
      * MUI SwitchRoot sets overflow:hidden on the 58×38 hit box.
      * Astryx and AntD do not clip the control wrapper.
      */
@@ -224,6 +240,7 @@ export const SwitchRecipeInstanceSchema = z.strictObject({
     }),
     row: z.strictObject({ gap: NumberParameterSchema }),
     rowAlign: z.enum(["center", "baseline"]),
+    thumbShadow: z.string().min(1),
     hitClips: z.boolean(),
     trackClips: z.boolean(),
     states: z.strictObject({
@@ -373,6 +390,11 @@ const thumbNode = (
       height: fixed(size),
     },
     fills: [solid(cell.thumbFill.fallback)],
+    // Lower the library's own box-shadow declaration into Figma effects.
+    // MUI's thumb is white; without its elevation it disappears on a white
+    // ground. "none" yields no effects, so libraries that paint none are
+    // unaffected.
+    effects: parseCssBoxShadow(instance.tokens.thumbShadow),
     cornerRadius: corners(radius),
     bindings: [
       bind("layout.width.value", sizeParam),
@@ -834,6 +856,13 @@ export function collapseSwitchRecipe(
         gap: numberFrom(off, "layout.itemSpacing", off.layout.itemSpacing),
       },
       rowAlign: off.layout.counterAxisAlign === "baseline" ? "baseline" : "center",
+      // Recover the thumb's shadow from the minted effects, back into the CSS
+      // spelling the fixture carries. Round-tripping the library's own
+      // declaration is what keeps compile a fixed point; recovering a Figma-only
+      // shape here would make the instance uninvertible.
+      thumbShadow: cssBoxShadowFromEffects(
+        (thumbOff.effects ?? []) as Parameters<typeof cssBoxShadowFromEffects>[0],
+      ),
       hitClips: hit.clipsContent === true,
       trackClips: track.clipsContent === true,
       states: {

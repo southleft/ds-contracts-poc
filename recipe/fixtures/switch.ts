@@ -83,6 +83,10 @@ export const canonicalSwitchRecipeInstance = {
     },
     row: { gap: number("ds.switch.row-gap", 8) },
     rowAlign: "center",
+    // The canonical skeleton paints no thumb elevation; a library declares its
+    // own via tokens.thumbShadow, carried as the library's literal CSS
+    // box-shadow and lowered to Figma effects at compile.
+    thumbShadow: "none",
     hitClips: false,
     trackClips: false,
     states: {

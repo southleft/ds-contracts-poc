@@ -126,6 +126,9 @@ const astryxTokens = cloneTokens("astryx.switch", (path, fallback) => {
 });
 astryxTokens.rowAlign = "center";
 astryxTokens.hitClips = false;
+// Astryx paints no thumb elevation — verified against the core-only capture,
+// where .astryx-switch handle reports box-shadow: none.
+astryxTokens.thumbShadow = "none";
 astryxTokens.trackClips = false;
 astryxTokens.typography = { label: astryxFont() };
 
@@ -168,6 +171,13 @@ const muiTokens = cloneTokens("mui.switch", (path, fallback) => {
 });
 muiTokens.rowAlign = "center";
 muiTokens.hitClips = true;
+// MUI elevation 1, verbatim from the capture's computed .MuiSwitch-thumb
+// box-shadow. Carried as the library's own declaration and lowered to Figma
+// effects at compile (recipe/css-box-shadow.ts). Previously refused as
+// `refusal-thumb-shadow`; the refusal was honest and the loss was expensive —
+// a white thumb with no elevation is invisible on a white ground.
+muiTokens.thumbShadow =
+  "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px";
 muiTokens.trackClips = false;
 muiTokens.typography = { label: muiFont() };
 
@@ -209,6 +219,8 @@ const antdTokens = cloneTokens("antd.switch", (path, fallback) => {
 });
 antdTokens.rowAlign = "center";
 antdTokens.hitClips = false;
+// AntD paints no thumb elevation in the captured default theme.
+antdTokens.thumbShadow = "none";
 antdTokens.trackClips = false;
 antdTokens.typography = { label: antdFont() };
 
@@ -326,6 +338,7 @@ const tokenFacts = (
     if (
       path.startsWith("tokens.typography") ||
       path === "tokens.rowAlign" ||
+      path === "tokens.thumbShadow" ||
       path === "tokens.hitClips" ||
       path === "tokens.trackClips"
     ) {
@@ -336,7 +349,13 @@ const tokenFacts = (
           path === "tokens.hitClips" ||
           path === "tokens.trackClips"
             ? "anatomy"
-            : "typography",
+            : // adapters/switch.ts expectedCategory falls through to "geometry"
+              // for any tokens.* it does not name earlier, and thumbShadow is
+              // one of those. The fixture must agree with that rule or the
+              // acquisition audit refuses the source.
+              path === "tokens.thumbShadow"
+              ? "geometry"
+              : "typography",
         source: {
           kind: "review",
           evidence: `${evidence}; reviewed ${path}=${String(value)}`,
@@ -464,12 +483,6 @@ const muiRefusals = makeRefusals("mui", [
     evidence:
       "Switch.js size small is width 40 height 24 padding 7 thumb 16 translateX 16; AntD SM and Astryx have no shared size axis",
     target: "MUI size small",
-    reason: "refused-by-recipe",
-  },
-  {
-    id: "refusal-thumb-shadow",
-    evidence: "SwitchThumb boxShadow theme.shadows[1] — not this teaching",
-    target: "MUI thumb elevation shadow",
     reason: "refused-by-recipe",
   },
 ]);
