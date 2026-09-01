@@ -72,9 +72,20 @@ test('components prefill: axes from enum props, contract path, sampleText, infer
   assert.equal(badge.contract, 'ds-contracts/out/contracts/badge.contract.json');
   assert.equal(badge.sampleText, 'Badge');
   assert.deepEqual(badge.axes, ['tone', 'size']);
-  // disabled is the inferable state boolean; checked on the second component
+  // disabled is the inferable state boolean. checked is NOT a state: it
+  // selects a rendering, so the second component carries it as a variant
+  // axis with an axisValueMap — the shape the runner accepts and every
+  // committed seed hand-authors. (This assertion used to pin
+  // stateProps: [{prop:'checked', state:'checked'}], which the runner's
+  // loadConfig refuses by name — the test was pinning the crash.)
   assert.deepEqual(badge.stateProps, [{ prop: 'disabled', state: 'disabled' }]);
-  assert.deepEqual((comps[1] as { stateProps: unknown }).stateProps, [{ prop: 'checked', state: 'checked' }]);
+  const stack = comps[1] as { stateProps?: unknown; axes: string[]; axisValueMap: Record<string, unknown> };
+  assert.equal(stack.stateProps, undefined, 'checked never drafts as a state');
+  assert.deepEqual(stack.axes, ['elevation', 'checked']);
+  assert.deepEqual(stack.axisValueMap.checked, {
+    unchecked: { $props: { checked: false } },
+    checked: { $props: { checked: true } },
+  });
   // kebab in the contract path for multi-word names
   assert.equal(comps[1].contract, 'ds-contracts/out/contracts/card-stack.contract.json');
 });
@@ -191,4 +202,37 @@ test('a committed hand-authored config is NOT a draft — the gate is marker-key
   const cfgPath = path.join(dir, 'hand.json');
   writeFileSync(cfgPath, JSON.stringify(cfg));
   assert.doesNotThrow(() => loadCaptureConfig(dir, cfgPath));
+});
+
+test('a drafted checked-bearing component LOADS through the capture runner (the first --continue crash)', () => {
+  // Reproduces the stranger walk of 2026-09-01: draft → delete marker →
+  // loadConfig. The old drafter emitted stateProps checked/checked and the
+  // runner refused it by name ("outside the closed contract state
+  // vocabulary") on the first phase-2 run of any library with a checkbox.
+  const dir = mkdtempSync(path.join(tmpdir(), 'ds-checked-'));
+  const { config } = draftCaptureConfig(EXTRACTION, { ...OPTS, contractsDir: '.' });
+  const approved = structuredClone(config) as Record<string, unknown>;
+  delete approved[DRAFT_MARKER_KEY];
+  const comps = approved.components as Record<string, unknown>[];
+  approved.components = comps.filter((c) => c.name === 'CardStack');
+  // the seed contract the proposer drafts beside this config: checked is an enum axis
+  writeFileSync(path.join(dir, 'card-stack.contract.json'), JSON.stringify({
+    id: 'acme.card-stack', name: 'CardStack',
+    props: [
+      { name: 'elevation', type: { enum: ['0', '1', '8'] } },
+      { name: 'checked', type: { enum: ['unchecked', 'checked'] }, default: 'unchecked' },
+    ],
+  }));
+  const approvedPath = path.join(dir, 'capture-config.json');
+  writeFileSync(approvedPath, JSON.stringify(approved, null, 2));
+  assert.doesNotThrow(() => loadCaptureConfig(dir, approvedPath));
+  // and the old spelling is still refused by name — the guard is intact
+  const oldShape = structuredClone(approved) as Record<string, unknown>;
+  const c0 = (oldShape.components as Record<string, unknown>[])[0];
+  delete c0.axisValueMap;
+  c0.axes = ['elevation'];
+  c0.stateProps = [{ prop: 'checked', state: 'checked' }];
+  const oldPath = path.join(dir, 'old.json');
+  writeFileSync(oldPath, JSON.stringify(oldShape));
+  assert.throws(() => loadCaptureConfig(dir, oldPath), (err: Error) => err.message.includes('closed contract state vocabulary'));
 });

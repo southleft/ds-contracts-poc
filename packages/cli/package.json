@@ -17,7 +17,7 @@
   "scripts": {
     "build": "node build.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "tsx --test test/draft-capture-config.test.ts test/accept-candidates.test.ts test/init-detect.test.ts test/library-scorecard.test.ts test/onboard.test.ts test/figma-receive.test.ts test/token-routing.test.ts test/promotion-integrity.test.ts",
+    "test": "tsx --test test/draft-capture-config.test.ts test/propose-bool-axis.test.ts test/accept-candidates.test.ts test/init-detect.test.ts test/library-scorecard.test.ts test/onboard.test.ts test/figma-receive.test.ts test/token-routing.test.ts test/promotion-integrity.test.ts",
     "coverage": "c8 --all --include='src/**/*.ts' --reporter=text --reporter=json --reports-dir=../../coverage/cli --check-coverage --statements=55 --branches=60 --functions=55 --lines=55 npm test"
   },
   "engines": {

@@ -21,6 +21,7 @@
  * The sidecar report (proposals.md) lists every inference and every skip.
  */
 import { ContractSchema } from '../scripts/contract-schema.js';
+import { AXIS_BY_BOOL_PROP } from './bool-axis-props.js';
 import { mintFromCss } from '../core/mint-code.js';
 import type { MintAxis, MintedEntry } from '../core/mint-tokens.js';
 import { isEventCallbackName, kebab, titleCase } from './types.js';
@@ -179,6 +180,31 @@ export function proposeContract(
       if (dflt !== undefined && p.default === undefined) {
         notes.push(`prop \`${p.name}\`: default '${dflt}' read from the uncontrolled useState initializer`);
       }
+    } else if (p.kind === 'boolean' && AXIS_BY_BOOL_PROP[p.name] !== undefined) {
+      // A boolean that SELECTS A RENDERING is an enum axis in the contract —
+      // the shape every committed seed hand-authors for `checked`. The
+      // capture config drafted beside this (extract/draft-capture-config.ts)
+      // maps each label to the boolean through axisValueMap, so the library
+      // still receives `checked={true}`; only the contract vocabulary changes.
+      const [off, on] = AXIS_BY_BOOL_PROP[p.name]!;
+      const values = [off, on];
+      const dflt = p.default === true ? on : off;
+      props.push({
+        ...base,
+        type: { enum: values },
+        default: dflt,
+        bindings: {
+          figma: {
+            kind: 'VARIANT',
+            property: titleCase(p.name),
+            values: Object.fromEntries(values.map((v) => [v, titleCase(v)])),
+          },
+          code: { prop: p.name },
+        },
+      });
+      notes.push(
+        `prop \`${p.name}\`: boolean that selects a rendering — modeled as the enum axis [${values.join(', ')}] (default '${dflt}'); the capture config's axisValueMap mounts the boolean`,
+      );
     } else if (p.kind === 'boolean') {
       props.push({
         ...base,

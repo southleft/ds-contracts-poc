@@ -549,12 +549,13 @@ function freshOnboard(target: string, workspace: string, only: string[], force: 
             `SKELETON DTCG token file, written by \`ds-contracts onboard ${target}\` because no token file was detected in the target. ` +
             `The manifest's "dtcg" names THIS file: phase 2's promote stage aliases minted leaves against it, and while it is empty every ` +
             `minted leaf stays an anonymous literal. AUTHOR YOUR LIBRARY'S TOKENS HERE. THE FLAT-NAME RULE: every leaf's key must equal the ` +
-            `CSS custom property name minus its leading "--" (the token for --btn-bg is the TOP-LEVEL key "btn-bg") — the source-alias join ` +
-            `matches on that flat spelling, so a nested tree verifies 0 facts. Leaf shape: {"$value": "#1f6feb", "$type": "color"}. ` +
+            `CSS custom property name minus the capture config's library.varPrefix (with varPrefix "--st-", the token for --st-btn-bg is the ` +
+            `TOP-LEVEL key "btn-bg"; with no varPrefix, minus the leading "--"; camelCase becomes kebab-case) — the source-alias join ` +
+            `matches on that flat spelling, so a nested tree or a prefixed key verifies 0 facts. Leaf shape: {"$value": "#1f6feb", "$type": "color"}. ` +
             `Delete this $description once authored.`,
         }, null, 2) + '\n',
       );
-      console.log(`         tokens: none detected in the target — SKELETON written → ${rel(skeletonPath)} (author your tokens there; FLAT leaf names: css var minus "--")`);
+      console.log(`         tokens: none detected in the target — SKELETON written → ${rel(skeletonPath)} (author your tokens there; FLAT leaf names: css var minus your varPrefix, or minus "--" when none)`);
     }
   }
   writeFileSync(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
@@ -718,8 +719,8 @@ async function phaseTwo(argv: string[]): Promise<number> {
   if (!existsSync(abs(manifest.dtcg))) {
     console.error(`✘ REFUSED — the base DTCG token file the manifest names does not exist: ${manifest.dtcg}`);
     console.error(`  (named as "dtcg" in ${state.manifest}). Onboard writes a SKELETON there when the target ships no token file;`);
-    console.error('  author your library\'s tokens in it — FLAT leaf names: each key = the CSS custom property minus "--"');
-    console.error('  (the token for --btn-bg is the top-level key "btn-bg"; a nested tree verifies 0 facts) — then re-run:');
+    console.error('  author your library\'s tokens in it — FLAT leaf names: each key = the CSS custom property minus library.varPrefix');
+    console.error('  (varPrefix "--st-": --st-btn-bg → top-level key "btn-bg"; no varPrefix: minus "--"; a nested or prefixed key verifies 0 facts) — then re-run:');
     console.error('  ds-contracts onboard --continue');
     console.error('  Nothing was captured, promoted, bundled or published.');
     return 1;
@@ -839,6 +840,43 @@ async function phaseTwo(argv: string[]): Promise<number> {
     return 1;
   }
 
+  // THE SILENT JOIN FAILURE (stranger walk, 2026-09-01). With a varPrefix
+  // declared, the CSS-vars reader maps every `var(--<prefix>x)` to the DTCG
+  // leaf "x" and binds ONLY existing leaves. A token file whose keys carry the
+  // prefix (the old skeleton text said "minus --") matches nothing: the run
+  // exits 0, prints "source-bindings: 0 verified fact(s)" once in ~80 lines,
+  // and every fact in the bundle mints as an anonymous `imported.*` literal.
+  // Zero verified facts across a whole library with the reader ON is not a
+  // result, it is the join failing — refuse by name, with the rule and the
+  // file, unless the operator says the zero is real.
+  if (!skip('capture') && !dryRun) {
+    const vp = (captureCfg.library as { varPrefix?: unknown } | undefined)?.varPrefix;
+    if (typeof vp === 'string' && vp !== '' && parsed.flags.get('accept-zero-bindings') !== true) {
+      let facts = 0;
+      const perComponent: string[] = [];
+      for (const c of captured) {
+        const f = path.join(abs(manifest.captureOut), c.toLowerCase(), 'source-bindings.json');
+        if (!existsSync(f)) continue;
+        const sb = JSON.parse(readFileSync(f, 'utf8')) as { facts?: unknown[] };
+        const n = sb.facts?.length ?? 0;
+        facts += n;
+        perComponent.push(`${c}=${n}`);
+      }
+      if (perComponent.length > 0 && facts === 0) {
+        const example = `${vp}btn-bg`;
+        console.error(`\n✘ REFUSED — library.varPrefix is "${vp}" but the CSS-vars reader verified 0 source facts across ${captured.length} component(s) (${perComponent.join(', ')}).`);
+        console.error('  With the reader on, zero facts means the token-name join failed, so every token in the bundle would mint as an anonymous imported.* literal.');
+        console.error(`  The join rule: a leaf's key = the custom property minus the varPrefix, camelCase → kebab-case (${example} → top-level key "btn-bg").`);
+        console.error(`  Check the keys in ${manifest.dtcg} against the custom properties in ${String((captureCfg.tokens as { css?: unknown } | undefined)?.css ?? 'tokens.css')},`);
+        console.error(`  and the per-component receipts in ${manifest.captureOut}/<component>/source-bindings.json ("skips" names each declaration that bound nothing).`);
+        console.error('  If your components genuinely reference no custom properties, unset library.varPrefix (the reader stays off and says so),');
+        console.error('  or re-run with --accept-zero-bindings to promote anonymous literals knowingly.');
+        console.error('  Nothing was promoted, bundled or published.');
+        return 1;
+      }
+    }
+  }
+
   // ---- 2 · PROMOTE ----
   if (skip('promote')) stage(2, TOTAL, 'promote', `SKIPPED (--from ${fromArg}) — reusing the promoted contracts in ${manifest.exampleDir}/contracts`);
   else stage(2, TOTAL, 'promote', `${promoteComponents.length} contract(s) → ${manifest.exampleDir}/contracts (source-alias pass + statePreviews probe)`
@@ -955,7 +993,7 @@ export function promoteCommand(argv: string[]): number {
     throw new CliUsageError(
       `the base DTCG token file the promote config names does not exist: ${cfg.dtcg} (resolved against ${root}).\n` +
         '  `ds-contracts onboard` writes a SKELETON there when the target ships no token file — author your library\'s tokens in it first.\n' +
-        '  FLAT-NAME RULE: each leaf key = the CSS custom property minus "--" (--btn-bg → top-level "btn-bg"); a nested tree verifies 0 facts.',
+        '  FLAT-NAME RULE: each leaf key = the CSS custom property minus library.varPrefix (varPrefix "--st-": --st-btn-bg → top-level "btn-bg"; none: minus "--"); a nested or prefixed key verifies 0 facts.',
     );
   }
   promote(root, cfg);

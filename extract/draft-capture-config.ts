@@ -31,6 +31,7 @@ import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { loadConfig, outDir } from './config.js';
 import { kebab } from './types.js';
+import { AXIS_BY_BOOL_PROP, boolAxisValueMap } from './bool-axis-props.js';
 import type { ExtractedComponent } from './types.js';
 
 export const DRAFT_MARKER_KEY = '__unreviewed-draft';
@@ -77,7 +78,10 @@ export interface DraftResult {
 /** The two boolean props whose contract state is inferable BY NAME — the
  *  visual-parity state vocabulary. Everything else is a review item, not a
  *  guess. */
-const STATE_BY_BOOL_PROP: Record<string, string> = { disabled: 'disabled', checked: 'checked' };
+// `checked` is NOT here on purpose: it selects a rendering, so it is a
+// variant axis (AXIS_BY_BOOL_PROP), never a pseudo-class state. The runner
+// refuses a `checked` state by name; the drafter used to emit exactly that.
+const STATE_BY_BOOL_PROP: Record<string, string> = { disabled: 'disabled' };
 
 const countReviewFields = (node: unknown): number => {
   if (Array.isArray(node)) return node.reduce((n: number, v) => n + countReviewFields(v), 0);
@@ -99,7 +103,10 @@ export function draftCaptureConfig(extracted: ExtractedComponent[], opts: DraftO
     const stateProps = boolProps
       .filter((p) => STATE_BY_BOOL_PROP[p.name] !== undefined)
       .map((p) => ({ prop: p.name, state: STATE_BY_BOOL_PROP[p.name] }));
-    const unmappedBools = boolProps.filter((p) => STATE_BY_BOOL_PROP[p.name] === undefined);
+    const axisBools = boolProps.filter((p) => AXIS_BY_BOOL_PROP[p.name] !== undefined);
+    const unmappedBools = boolProps.filter(
+      (p) => STATE_BY_BOOL_PROP[p.name] === undefined && AXIS_BY_BOOL_PROP[p.name] === undefined,
+    );
     const requiredNonAxis = c.props.filter(
       (p) => !p.optional && (p.kind === 'string' || p.kind === 'number' || p.kind === 'node'),
     );
@@ -111,11 +118,17 @@ export function draftCaptureConfig(extracted: ExtractedComponent[], opts: DraftO
       importName: c.name,
       contract: `${opts.contractsDir}/${kebab(c.name)}.contract.json`,
       sampleText: c.name,
-      axes: enumProps.map((p) => p.name),
+      axes: [...enumProps.map((p) => p.name), ...axisBools.map((p) => p.name)],
     };
     if (stateProps.length > 0) entry.stateProps = stateProps;
+    // A rendering-selecting boolean (checked) mounts as a variant axis: the
+    // seed contract carries it as an enum (extract/propose.ts, same table)
+    // and the config maps each label back to the boolean the library takes.
+    if (axisBools.length > 0) {
+      entry.axisValueMap = Object.fromEntries(axisBools.map((p) => [p.name, boolAxisValueMap(p.name)]));
+    }
     if (unmappedBools.length > 0) {
-      entry['__review:stateProps'] = `boolean prop(s) ${unmappedBools.map((p) => p.name).join(', ')} — if one drives a visual state (hover/active/focus-visible/disabled/checked), add {"prop","state"} here; otherwise pin it under fixedProps or leave it at its default`;
+      entry['__review:stateProps'] = `boolean prop(s) ${unmappedBools.map((p) => p.name).join(', ')} — if one is a pseudo-class plane the same instance takes (hover/active/focus-visible/disabled), add {"prop","state"} here; if it SELECTS a rendering (checked-like), model it under "axes" + "axisValueMap" and as an enum in the contract; otherwise pin it under fixedProps or leave it at its default`;
     }
     if (requiredNonAxis.length > 0) {
       entry['__review:fixedProps'] = `required prop(s) ${requiredNonAxis.map((p) => p.name).join(', ')} — pin each to a deterministic value ("fixedProps": {"${requiredNonAxis[0].name}": "…"}); an unpinned required prop makes every mount fail or drift`;
