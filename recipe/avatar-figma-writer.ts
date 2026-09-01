@@ -86,6 +86,7 @@ export interface AvatarFigmaSourcePlan {
 
 export interface AvatarFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: AvatarFigmaSourcePlan[];
@@ -357,13 +358,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "avatar",
     prefix: "AVATAR",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -372,7 +377,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitAvatarFigmaWriter(
   inputs: readonly AvatarFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): AvatarFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateAvatarFigmaSourcePlans(sourcePlans);
@@ -417,10 +422,14 @@ export function emitAvatarFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     AVATAR_FIGMA_NAMESPACE,
     AVATAR_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("AVATAR-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL") ===
@@ -468,10 +477,13 @@ export function emitAvatarFigmaWriter(
       "avatar writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, Switch, Textarea, Alert, Chip, and Badge pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: AVATAR_FIGMA_NAMESPACE,
     sourcePlans,
     code,

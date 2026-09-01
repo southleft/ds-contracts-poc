@@ -77,6 +77,7 @@ export interface RadioFigmaSourcePlan {
 
 export interface RadioFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: RadioFigmaSourcePlan[];
@@ -314,13 +315,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "radio",
     prefix: "RADIO",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -329,7 +334,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitRadioFigmaWriter(
   inputs: readonly RadioFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): RadioFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateRadioFigmaSourcePlans(sourcePlans);
@@ -368,10 +373,14 @@ export function emitRadioFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     RADIO_FIGMA_NAMESPACE,
     RADIO_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("RADIO-WRITER-SET-NAME-CARRIES-COMPILE-LABEL") === false
@@ -413,10 +422,13 @@ export function emitRadioFigmaWriter(
       "radio writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, and old Radio pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: RADIO_FIGMA_NAMESPACE,
     sourcePlans,
     code,

@@ -193,3 +193,23 @@ Two attempts before v3 were refused by the writer's own guards (the glyph
 bounds guard at 0.15px on the Astryx warning icon; the font tamper check)
 and their partial pages and collections were removed before the next attempt.
 The gate is now **12 pass · 1 fringe · 11 known**.
+
+## 2026-09-01 (night) — one runtime, and the product-path program scores the same
+
+Every boilerplate archetype is now minted by `recipe/figma-writer-runtime.ts`,
+one IR → canvas program with a `scratch` target (developer pins) and a
+`plugin` target (no file pin, no page list — what the shipped plugin's
+Paste-a-script verb executes). All thirteen were reminted through it and
+re-scored: **16 pass · 1 fringe · 7 known, subject by subject identical.**
+The runtime's bounds guard refused the first checkbox remint — the old copy
+had scaled the Astryx check's 9.8×7 ink to fill its 14×14 viewport, invisible
+in the scored unchecked variant — and checkbox@1 now carries the glyph
+ink-sized in a viewport host, still at 0.00%.
+
+The plugin-target program was then run in Scratch through the same execution
+shape the plugin uses (`scripts/run-figma-writer.mjs --plugin-target`,
+page `212:81964`) and scored **0.00% / 0.00% / 0.00%** on checkbox against
+the same references (`shots/checkbox-*-shared-v5-plugin.png`). What is not
+exercised here is the plugin's UI itself: a person pasting `writer.plugin.js`
+into the development plugin in Figma desktop. Every current evidence
+directory now carries that file beside `writer.js`.

@@ -92,6 +92,7 @@ export interface TooltipFigmaSourcePlan {
 
 export interface TooltipFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: TooltipFigmaSourcePlan[];
@@ -383,13 +384,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "tooltip",
     prefix: "TOOLTIP",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -398,7 +403,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitTooltipFigmaWriter(
   inputs: readonly TooltipFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): TooltipFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateTooltipFigmaSourcePlans(sourcePlans);
@@ -445,10 +450,14 @@ export function emitTooltipFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     TOOLTIP_FIGMA_NAMESPACE,
     TOOLTIP_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("TOOLTIP-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL") ===
@@ -494,10 +503,13 @@ export function emitTooltipFigmaWriter(
       "tooltip writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, Switch, Textarea, and Alert pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: TOOLTIP_FIGMA_NAMESPACE,
     sourcePlans,
     code,

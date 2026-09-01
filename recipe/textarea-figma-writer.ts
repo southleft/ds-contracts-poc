@@ -79,6 +79,7 @@ export interface TextareaFigmaSourcePlan {
 
 export interface TextareaFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: TextareaFigmaSourcePlan[];
@@ -335,13 +336,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "textarea",
     prefix: "TEXTAREA",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -350,7 +355,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitTextareaFigmaWriter(
   inputs: readonly TextareaFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): TextareaFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateTextareaFigmaSourcePlans(sourcePlans);
@@ -391,10 +396,14 @@ export function emitTextareaFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     TEXTAREA_FIGMA_NAMESPACE,
     TEXTAREA_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("TEXTAREA-WRITER-SET-NAME-CARRIES-COMPILE-LABEL") === false
@@ -439,10 +448,13 @@ export function emitTextareaFigmaWriter(
       "textarea writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, and Switch pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: TEXTAREA_FIGMA_NAMESPACE,
     sourcePlans,
     code,

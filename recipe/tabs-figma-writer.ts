@@ -102,6 +102,7 @@ export interface TabsFigmaSourcePlan {
 
 export interface TabsFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: TabsFigmaSourcePlan[];
@@ -417,13 +418,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "tabs",
     prefix: "TABS",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -432,7 +437,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitTabsFigmaWriter(
   inputs: readonly TabsFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): TabsFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateTabsFigmaSourcePlans(sourcePlans);
@@ -480,10 +485,14 @@ export function emitTabsFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     TABS_FIGMA_NAMESPACE,
     TABS_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("TABS-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL") ===
@@ -530,10 +539,13 @@ export function emitTabsFigmaWriter(
       "tabs writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, Switch, Textarea, and Alert pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: TABS_FIGMA_NAMESPACE,
     sourcePlans,
     code,

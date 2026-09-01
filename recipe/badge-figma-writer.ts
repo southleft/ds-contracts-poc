@@ -92,6 +92,7 @@ export interface BadgeFigmaSourcePlan {
 
 export interface BadgeFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: BadgeFigmaSourcePlan[];
@@ -371,13 +372,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "badge",
     prefix: "BADGE",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -386,7 +391,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitBadgeFigmaWriter(
   inputs: readonly BadgeFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): BadgeFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateBadgeFigmaSourcePlans(sourcePlans);
@@ -430,10 +435,14 @@ export function emitBadgeFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     BADGE_FIGMA_NAMESPACE,
     BADGE_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("BADGE-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL") ===
@@ -481,10 +490,13 @@ export function emitBadgeFigmaWriter(
       "chip writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, Switch, Textarea, Alert, and Chip pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: BADGE_FIGMA_NAMESPACE,
     sourcePlans,
     code,

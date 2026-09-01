@@ -46,5 +46,22 @@
         "comparedIrFacts": 217
       }
     ]
+  },
+  "pluginTargetRehearsal": {
+    "what": "writer.plugin.js — the product-path program (no Scratch pin, no page list) — executed through figma_execute in the Scratch file with scripts/run-figma-writer.mjs --plugin-target, the same async-body-returns-report shape the shipped plugin's Paste-a-script verb runs (figma-sync/plugin/code.js runScript)",
+    "pageId": "212:81964",
+    "runIdentity": "548cf953-296f37b2-ff3a8565-checkbox-v5-plugin",
+    "recordedFrom": "checkbox-v5-plugin-writer.raw.json",
+    "fidelity": {
+      "checkbox/astryx": "0.00% 22x22",
+      "checkbox/mui": "0.00% 18x18",
+      "checkbox/antd": "0.00% 16x16"
+    },
+    "shots": [
+      "recipe/evidence/fidelity-v1/shots/checkbox-astryx-glyph-shared-v5-plugin.png",
+      "recipe/evidence/fidelity-v1/shots/checkbox-mui-glyph-shared-v5-plugin.png",
+      "recipe/evidence/fidelity-v1/shots/checkbox-antd-glyph-shared-v5-plugin.png"
+    ],
+    "notYetProven": "execution through the plugin's UI itself (a person pasting writer.plugin.js into the Paste-a-script tab of the development plugin in Figma desktop) — the program is proven, the verb is not exercised here"
   }
 }

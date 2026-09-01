@@ -84,6 +84,7 @@ export interface AlertFigmaSourcePlan {
 
 export interface AlertFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: AlertFigmaSourcePlan[];
@@ -344,13 +345,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "alert",
     prefix: "ALERT",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -359,7 +364,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitAlertFigmaWriter(
   inputs: readonly AlertFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): AlertFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateAlertFigmaSourcePlans(sourcePlans);
@@ -401,10 +406,14 @@ export function emitAlertFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     ALERT_FIGMA_NAMESPACE,
     ALERT_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("ALERT-WRITER-SET-NAME-CARRIES-COMPILE-LABEL") === false
@@ -448,10 +457,13 @@ export function emitAlertFigmaWriter(
       "alert writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, Switch, and Textarea pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: ALERT_FIGMA_NAMESPACE,
     sourcePlans,
     code,

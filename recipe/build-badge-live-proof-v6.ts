@@ -40,6 +40,9 @@ const sources = [
 });
 
 const writer = emitBadgeFigmaWriter(sources);
+// The product-path program: same plan, no Scratch pin, no page list — what a
+// user pastes into the shipped plugin's Paste-a-script verb in their own file.
+const pluginWriter = emitBadgeFigmaWriter(sources, { runIdentity: `${writer.runIdentity}-plugin`, target: "plugin" });
 const splitWriters = sources.map((source) => {
   const part = emitBadgeFigmaWriter([source], {
     runIdentity: writer.runIdentity,
@@ -49,7 +52,7 @@ const splitWriters = sources.map((source) => {
   return { adapterIdentity: source.adapterIdentity, ...part };
 });
 
-const files: Record<string, string> = { "writer.js": writer.code };
+const files: Record<string, string> = { "writer.js": writer.code, "writer.plugin.js": pluginWriter.code };
 for (const part of splitWriters) files[`writer-${part.adapterIdentity}.js`] = part.code;
 files["plan.json"] = JSON.stringify(
     {

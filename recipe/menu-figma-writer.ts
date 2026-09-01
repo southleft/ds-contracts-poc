@@ -92,6 +92,7 @@ export interface MenuFigmaSourcePlan {
 
 export interface MenuFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: MenuFigmaSourcePlan[];
@@ -394,13 +395,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "menu",
     prefix: "MENU",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -409,7 +414,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitMenuFigmaWriter(
   inputs: readonly MenuFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): MenuFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateMenuFigmaSourcePlans(sourcePlans);
@@ -458,10 +463,14 @@ export function emitMenuFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     MENU_FIGMA_NAMESPACE,
     MENU_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("MENU-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL") ===
@@ -509,10 +518,13 @@ export function emitMenuFigmaWriter(
       "menu writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, Switch, Textarea, and Alert pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: MENU_FIGMA_NAMESPACE,
     sourcePlans,
     code,

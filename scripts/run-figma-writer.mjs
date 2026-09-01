@@ -74,9 +74,18 @@ for (const page of PROTECTED_PAGES) {
     from = at + page.length;
   }
 }
-if (!code.includes(TARGET.fileKey)) {
+// --plugin-target: the program is the product-path writer (no file pin by
+// design). This runner still only ever talks to Scratch — TARGET above is the
+// runner's own pin — so executing an unpinned program here is the honest
+// rehearsal of what the shipped plugin's Paste-a-script verb does in a user's
+// file, without the program knowing which file it is in.
+const pluginTarget = process.argv.includes("--plugin-target");
+if (!pluginTarget && !code.includes(TARGET.fileKey)) {
   // A writer that never names the Scratch key is not a writer for this file.
-  throw new Error(`writer does not pin ${TARGET.fileKey} — refusing to run`);
+  throw new Error(`writer does not pin ${TARGET.fileKey} — refusing to run (pass --plugin-target for a plugin-target program)`);
+}
+if (pluginTarget && code.includes(TARGET.fileKey)) {
+  throw new Error("--plugin-target given but the program pins the Scratch key — that is a scratch-target writer");
 }
 
 const loadEnvFile = (file, into) => {

@@ -94,6 +94,7 @@ export interface DialogFigmaSourcePlan {
 
 export interface DialogFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: DialogFigmaSourcePlan[];
@@ -404,13 +405,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "dialog",
     prefix: "DIALOG",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -419,7 +424,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitDialogFigmaWriter(
   inputs: readonly DialogFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): DialogFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateDialogFigmaSourcePlans(sourcePlans);
@@ -469,10 +474,14 @@ export function emitDialogFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     DIALOG_FIGMA_NAMESPACE,
     DIALOG_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("DIALOG-WRITER-COMPONENT-NAME-CARRIES-COMPILE-LABEL") ===
@@ -521,10 +530,13 @@ export function emitDialogFigmaWriter(
       "dialog writer must refuse signed Input, Combobox, Button, Table, Calendar, Checkbox, Radio, Switch, Textarea, and Alert pages",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: DIALOG_FIGMA_NAMESPACE,
     sourcePlans,
     code,

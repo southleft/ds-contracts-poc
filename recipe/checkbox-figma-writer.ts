@@ -77,6 +77,7 @@ export interface CheckboxFigmaSourcePlan {
 
 export interface CheckboxFigmaWriter {
   pageName: string;
+  target: "scratch" | "plugin";
   runIdentity: string;
   namespace: string;
   sourcePlans: CheckboxFigmaSourcePlan[];
@@ -310,13 +311,17 @@ const WRITER_RUNTIME_SPEC = {
   ]
 } as const;
 
-const writerRuntime = (namespace: string, version: number): string =>
+const writerRuntime = (
+  namespace: string,
+  version: number,
+  target: "scratch" | "plugin" = "scratch",
+): string =>
   figmaWriterRuntime({
     archetype: "checkbox",
     prefix: "CHECKBOX",
     namespace,
     writerVersion: version,
-    target: "scratch",
+    target,
     collectionLabel: WRITER_RUNTIME_SPEC.collectionLabel,
     mint: { kind: WRITER_RUNTIME_SPEC.mint.kind, field: WRITER_RUNTIME_SPEC.mint.field },
     forbiddenPages: [...WRITER_RUNTIME_SPEC.forbiddenPages],
@@ -325,7 +330,7 @@ const writerRuntime = (namespace: string, version: number): string =>
 
 export function emitCheckboxFigmaWriter(
   inputs: readonly CheckboxFigmaWriterInput[],
-  options?: { runIdentity?: string },
+  options?: { runIdentity?: string; target?: "scratch" | "plugin" },
 ): CheckboxFigmaWriter {
   const sourcePlans = inputs.map(planSource);
   const failures = validateCheckboxFigmaSourcePlans(sourcePlans);
@@ -363,10 +368,14 @@ export function emitCheckboxFigmaWriter(
     })),
   };
 
+  const target = options?.target ?? "scratch";
   const runtime = writerRuntime(
     CHECKBOX_FIGMA_NAMESPACE,
     CHECKBOX_FIGMA_WRITER_VERSION,
+    target,
   );
+
+  if (target === "scratch") {
 
   if (
     runtime.includes("CHECKBOX-WRITER-SET-NAME-CARRIES-COMPILE-LABEL") === false
@@ -412,10 +421,13 @@ export function emitCheckboxFigmaWriter(
       "checkbox writer must emit createVector for named package glyphs",
     );
 
+  }
+
   const code = `const PLAN=${JSON.stringify(plan)};\n${runtime}`;
   return {
     pageName,
     runIdentity,
+    target,
     namespace: CHECKBOX_FIGMA_NAMESPACE,
     sourcePlans,
     code,

@@ -36,9 +36,16 @@ const arg = (name) => {
   return i > -1 ? process.argv[i + 1] : undefined;
 };
 const only = arg("label");
+// --page <id> overrides every selected subject's page (a rehearsal mint on
+// another page); --shot-suffix <s> writes "<shot>-<s>.png" so the committed
+// shot is untouched. Together they score a page without editing the manifest.
+const pageOverride = arg("page");
+const shotSuffix = arg("shot-suffix");
 
 const manifest = JSON.parse(readFileSync(path.join(REPO, "recipe/fidelity-manifest.json"), "utf8"));
-const subjects = manifest.subjects.filter((s) => !only || s.label === only);
+const subjects = manifest.subjects
+  .filter((s) => !only || s.label === only || (only.endsWith("/*") && s.label.startsWith(only.slice(0, -1))))
+  .map((s) => ({ ...s, page: pageOverride ?? s.page, shot: shotSuffix ? s.shot.replace(/\.png$/, `-${shotSuffix}.png`) : s.shot }));
 if (subjects.length === 0) throw new Error(`no subject matches --label ${only}`);
 
 const loadEnv = (file, into) => {
