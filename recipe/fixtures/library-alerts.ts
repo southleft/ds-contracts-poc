@@ -5,6 +5,7 @@ import type {
   AlertFactCategory,
 } from "../adapters/alert.js";
 import { canonicalAlertRecipeInstance } from "./alert.js";
+import { readCaptureGlyph } from "./capture-glyph.js";
 import type { AlertRecipeInstance } from "../recipes/alert.js";
 
 const cloneTokens = (
@@ -51,9 +52,13 @@ const astryxTitleFont = (): AlertRecipeInstance["tokens"]["typography"]["title"]
     { family: "Arial", style: "Bold" },
   ],
   resolvedFamily: "SF Pro",
-  resolvedStyle: "Medium",
+  resolvedStyle: "Semibold",
   resolution: "fallback",
-  degradation: `source ${ASTRYX_BODY_STACK} Semibold 600; Figma cannot load a CSS stack; first named host font that painted Switch/Textarea is SF Pro Medium`,
+  // 2026-09-01: the v1 record said SF Pro Medium because SF Pro Semibold was
+  // not installed in Figma when v1 minted; it is now, the writer's tamper
+  // check caught the stale record on the first v2 attempt, and the capture
+  // confirms font-weight 600 on the title. Semibold is the truth.
+  degradation: `source ${ASTRYX_BODY_STACK} Semibold 600; Figma cannot load a CSS stack; first named host font available is SF Pro Semibold`,
 });
 
 const muiTitleFont = (): AlertRecipeInstance["tokens"]["typography"]["title"] => ({
@@ -129,6 +134,12 @@ const astryxTokens = cloneTokens("astryx.alert", (path, fallback) => {
   if (path === "states.error.iconOpacity") return 1;
   return fallback;
 });
+astryxTokens.icon.glyphs = {
+  info: readCaptureGlyph("extract/computed/out/astryx-core/banner/assets/banner-icon-info.svg", { x: 0, y: 0, width: 24, height: 24 }, "@astryxdesign/core dist/Icon/defaultIcons.js viewBox '0 0 24 24'"),
+  success: readCaptureGlyph("extract/computed/out/astryx-core/banner/assets/banner-icon-success.svg", { x: 0, y: 0, width: 24, height: 24 }, "@astryxdesign/core dist/Icon/defaultIcons.js viewBox '0 0 24 24'"),
+  warning: readCaptureGlyph("extract/computed/out/astryx-core/banner/assets/banner-icon-warning.svg", { x: 0, y: 0, width: 24, height: 24 }, "@astryxdesign/core dist/Icon/defaultIcons.js viewBox '0 0 24 24'"),
+  error: readCaptureGlyph("extract/computed/out/astryx-core/banner/assets/banner-icon-error.svg", { x: 0, y: 0, width: 24, height: 24 }, "@astryxdesign/core dist/Icon/defaultIcons.js viewBox '0 0 24 24'"),
+};
 astryxTokens.strokeAlign = "inside";
 astryxTokens.typography = { title: astryxTitleFont() };
 
@@ -172,6 +183,12 @@ const muiTokens = cloneTokens("mui.alert", (path, fallback) => {
   if (path === "states.error.iconOpacity") return 0.9;
   return fallback;
 });
+muiTokens.icon.glyphs = {
+  info: readCaptureGlyph("extract/computed/out/mui/alert/assets/alert-alert-icon-info.svg", { x: 0, y: 0, width: 24, height: 24 }, "@mui/material SvgIcon default viewBox '0 0 24 24' (icons-material CheckCircleOutline / InfoOutlined / ReportProblemOutlined / ErrorOutline)"),
+  success: readCaptureGlyph("extract/computed/out/mui/alert/assets/alert-alert-icon-success.svg", { x: 0, y: 0, width: 24, height: 24 }, "@mui/material SvgIcon default viewBox '0 0 24 24' (icons-material CheckCircleOutline / InfoOutlined / ReportProblemOutlined / ErrorOutline)"),
+  warning: readCaptureGlyph("extract/computed/out/mui/alert/assets/alert-alert-icon-warning.svg", { x: 0, y: 0, width: 24, height: 24 }, "@mui/material SvgIcon default viewBox '0 0 24 24' (icons-material CheckCircleOutline / InfoOutlined / ReportProblemOutlined / ErrorOutline)"),
+  error: readCaptureGlyph("extract/computed/out/mui/alert/assets/alert-alert-icon-error.svg", { x: 0, y: 0, width: 24, height: 24 }, "@mui/material SvgIcon default viewBox '0 0 24 24' (icons-material CheckCircleOutline / InfoOutlined / ReportProblemOutlined / ErrorOutline)"),
+};
 muiTokens.strokeAlign = "inside";
 muiTokens.typography = { title: muiTitleFont() };
 
@@ -183,7 +200,11 @@ muiTokens.typography = { title: muiTitleFont() };
  * Colors from examples/antd/tokens/antd.vars.css status tokens.
  */
 const antdTokens = cloneTokens("antd.alert", (path, fallback) => {
-  if (path === "box.height") return 38;
+  // BORDER-BOX height: paddingBlock 8+8 + line 22 + border 1+1 = 40. The
+  // hand-typed 38 omitted the 1px border the capture records
+  // (extract/computed/out/antd/alert root.border-top-width 1px) and the real
+  // render measures 40; the stroke is inside, so the frame height carries it.
+  if (path === "box.height") return 40;
   if (path === "box.paddingX") return 12;
   if (path === "box.paddingY") return 8;
   if (path === "box.radius") return 8;
@@ -214,6 +235,12 @@ const antdTokens = cloneTokens("antd.alert", (path, fallback) => {
   if (path === "states.error.iconOpacity") return 1;
   return fallback;
 });
+antdTokens.icon.glyphs = {
+  info: readCaptureGlyph("extract/computed/out/antd/alert/assets/alert-alert-icon-info.svg", { x: 64, y: 64, width: 896, height: 896 }, "@ant-design/icons-svg lib/asn/*Filled.js viewBox '64 64 896 896'"),
+  success: readCaptureGlyph("extract/computed/out/antd/alert/assets/alert-alert-icon-success.svg", { x: 64, y: 64, width: 896, height: 896 }, "@ant-design/icons-svg lib/asn/*Filled.js viewBox '64 64 896 896'"),
+  warning: readCaptureGlyph("extract/computed/out/antd/alert/assets/alert-alert-icon-warning.svg", { x: 64, y: 64, width: 896, height: 896 }, "@ant-design/icons-svg lib/asn/*Filled.js viewBox '64 64 896 896'"),
+  error: readCaptureGlyph("extract/computed/out/antd/alert/assets/alert-alert-icon-error.svg", { x: 64, y: 64, width: 896, height: 896 }, "@ant-design/icons-svg lib/asn/*Filled.js viewBox '64 64 896 896'"),
+};
 antdTokens.strokeAlign = "inside";
 antdTokens.typography = { title: antdTitleFont() };
 
@@ -281,7 +308,7 @@ export const antdAlertSource: ReviewedAlertSource = {
   anatomy: {
     root: "Alert.js type default info. banner mode is not the shared axis (banner defaults type to warning and drops radius/border).",
     control:
-      "prepareComponentToken paddingHorizontal 12; defaultPadding 8px 12px; borderRadiusLG 8; icon marginInlineEnd marginXS 8; icon 1em 14; height 8+8+22 = 38",
+      "prepareComponentToken paddingHorizontal 12; defaultPadding 8px 12px; borderRadiusLG 8; icon marginInlineEnd marginXS 8; icon 1em 14; border-box height 8+8+22+1+1 = 40 (lineWidth 1 border)",
     title:
       "message colorTextHeading rgba(0,0,0,0.88); --font-size 14; --line-height 1.5714285714285714 → 22. Title-only; description is optional.",
   },
@@ -336,6 +363,30 @@ const tokenFacts = (
     return facts;
   }
   const record = value as Record<string, unknown>;
+  // A status glyph is one CAPTURE-READ fact per leaf: the path and winding
+  // come from the asset file at build time and the viewBox from the cited
+  // package source, so every leaf names the file it was read from.
+  if (/^tokens\.icon\.glyphs\.(info|success|warning|error)$/.test(path)) {
+    const glyph = record as { source?: { asset: string; viewBoxCitation: string } };
+    const where = glyph.source
+      ? `read from ${glyph.source.asset}; viewBox per ${glyph.source.viewBoxCitation}`
+      : "canonical ring glyph";
+    const leaves = (v: unknown, at: string): void => {
+      if (v === null || typeof v !== "object") {
+        facts.push({
+          occurrenceId: `${sourceSlug}-ir-${facts.length + 1}`,
+          category: "geometry",
+          source: { kind: "review", evidence: `${evidence}; ${where}; ${at}=${String(v).slice(0, 60)}` },
+          disposition: "ir",
+          target: at,
+        });
+        return;
+      }
+      for (const [k, c] of Object.entries(v as Record<string, unknown>)) leaves(c, `${at}.${k}`);
+    };
+    leaves(record, path);
+    return facts;
+  }
   if (
     typeof record.variable === "string" &&
     (typeof record.fallback === "string" || typeof record.fallback === "number")
@@ -357,7 +408,17 @@ const tokenFacts = (
   return facts;
 };
 
-const sharedContent = { title: "New update available" } as const;
+/**
+ * Title text is taken from each capture's own sample, so the fidelity pair
+ * (extract/computed/out/<lib>/<comp>/orig-shots) is like-for-like. It is
+ * content, not a design fact; a shared string across libraries compared
+ * three mints against three different renders.
+ */
+const captureContent = {
+  astryx: { title: "A new software update is available." }, // configs/astryx-core.json Banner fixedProps.title
+  mui: { title: "This is an alert — check it out!" }, // configs/mui.json Alert sampleText
+  antd: { title: "Alert message" }, // configs/antd.json Alert fixedProps.message
+} as const;
 
 const makeRefusals = (
   slug: string,
@@ -403,16 +464,16 @@ const astryxRefusals = makeRefusals("astryx", [
     reason: "refused-by-recipe",
   },
   {
+    id: "refusal-description",
+    evidence: "Banner description prop — a second text line under the title; alert@1 compiles a title-only banner, and the fidelity reference is captured title-only to match (configs/astryx-core.json Banner)",
+    target: "Astryx Banner description",
+    reason: "refused-by-recipe",
+  },
+  {
     id: "refusal-section",
     evidence: "container=section radius 0 — not the shared Banner card",
     target: "Astryx container section",
     reason: "refused-by-recipe",
-  },
-  {
-    id: "refusal-svg-icon",
-    evidence: "defaultIcons info/warning/error/success SVGs — no Figma primitive; colour + md 20 box compiled",
-    target: "Astryx Banner SVG glyphs",
-    reason: "no-figma-primitive",
   },
   {
     id: "refusal-dark",
@@ -442,12 +503,6 @@ const muiRefusals = makeRefusals("mui", [
     reason: "refused-by-recipe",
   },
   {
-    id: "refusal-svg-icon",
-    evidence: "severity SVG icons — no Figma primitive; colour + fontSize 22 box compiled",
-    target: "MUI Alert SVG glyphs",
-    reason: "no-figma-primitive",
-  },
-  {
     id: "refusal-description",
     evidence: "optional children / description — title-only compile",
     target: "MUI Alert description",
@@ -473,12 +528,6 @@ const antdRefusals = makeRefusals("antd", [
     evidence: "withDescription padding — title-only compile",
     target: "AntD Alert description",
     reason: "refused-by-recipe",
-  },
-  {
-    id: "refusal-svg-icon",
-    evidence: "@ant-design/icons SVGs — no Figma primitive; colour + 14 box compiled",
-    target: "AntD Alert SVG glyphs",
-    reason: "no-figma-primitive",
   },
   {
     id: "refusal-action",
@@ -526,7 +575,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: structuredClone(sharedContent),
+    content: structuredClone(captureContent[slug as keyof typeof captureContent]),
     tokens: structuredClone(tokens),
     axes: structuredClone(axes),
     sourceFacts: facts,
@@ -585,7 +634,7 @@ export const astryxAlertAdapterConfig = buildConfig(
   statusAxis("info"),
   astryxRefusals,
   anatomyFacts("astryx", astryxAlertSource),
-  ["AlertDialog", "Toast", "isDismissable", "children", "container-section", "svg-glyphs"],
+  ["AlertDialog", "Toast", "isDismissable", "children", "container-section", "description"],
 );
 
 export const muiAlertAdapterConfig = buildConfig(
@@ -596,7 +645,7 @@ export const muiAlertAdapterConfig = buildConfig(
   statusAxis("success"),
   muiRefusals,
   anatomyFacts("mui", muiAlertSource),
-  ["variant-outlined", "variant-filled", "onClose", "Snackbar", "description", "svg-glyphs"],
+  ["variant-outlined", "variant-filled", "onClose", "Snackbar", "description"],
 );
 
 export const antdAlertAdapterConfig = buildConfig(
@@ -607,7 +656,7 @@ export const antdAlertAdapterConfig = buildConfig(
   statusAxis("info"),
   antdRefusals,
   anatomyFacts("antd", antdAlertSource),
-  ["banner-mode", "closable", "description", "action", "svg-glyphs"],
+  ["banner-mode", "closable", "description", "action"],
 );
 
 export const ALERT_THREE_LIBRARY_PROOF_PROTOCOL = {

@@ -262,28 +262,6 @@
                     "line-height": "{imported.banner.label.line-height}",
                     "tab-size": "{imported.shared.num-4}"
                   }
-                },
-                "label-2": {
-                  "content": {
-                    "prop": "description"
-                  },
-                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
-                  "declared": {
-                    "display": "block",
-                    "border-bottom-style": "solid",
-                    "border-left-style": "solid",
-                    "border-right-style": "solid",
-                    "border-top-style": "solid",
-                    "box-sizing": "border-box",
-                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-                  },
-                  "tokens": {
-                    "color": "{imported.banner.label-2.color}",
-                    "font-size": "{imported.shared.size-12}",
-                    "font-weight": "{imported.banner.label-2.font-weight}",
-                    "line-height": "{imported.banner.label-2.line-height}",
-                    "tab-size": "{imported.shared.num-4}"
-                  }
                 }
               },
               "declared": {
@@ -315,10 +293,10 @@
           "tokens": {
             "column-gap": "{imported.banner.banner.column-gap}",
             "line-height": "{imported.shared.size-24}",
-            "padding-bottom": "{imported.shared.size-12}",
+            "padding-bottom": "{imported.banner.banner.padding-bottom}",
             "padding-left": "{imported.banner.banner.padding-left}",
             "padding-right": "{imported.banner.banner.padding-right}",
-            "padding-top": "{imported.shared.size-12}",
+            "padding-top": "{imported.banner.banner.padding-top}",
             "row-gap": "{imported.banner.banner.row-gap}",
             "tab-size": "{imported.shared.num-4}"
           },

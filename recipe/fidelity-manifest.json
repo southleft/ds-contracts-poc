@@ -99,27 +99,33 @@
     },
     {
       "label": "alert/astryx",
-      "page": "183:75801",
+      "page": "209:79728",
       "set": "alert/set :: Astryx Banner",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-astryx-info.png",
-      "reference": "extract/computed/out/astryx-core/banner/orig-shots/info.card__default.png"
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-astryx-info-v3.png",
+      "reference": "extract/computed/out/astryx-core/banner/orig-shots/info.card__default.png",
+      "widthNormalised": true,
+      "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "alert/mui",
-      "page": "183:75801",
+      "page": "209:79728",
       "set": "alert/set :: MUI Alert",
       "variant": "Status=success",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-success.png",
-      "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png"
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-mui-success-v3.png",
+      "reference": "extract/computed/out/mui/alert/orig-shots/success.standard__default.png",
+      "widthNormalised": true,
+      "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "alert/antd",
-      "page": "183:75801",
+      "page": "209:79728",
       "set": "alert/set :: Ant Design Alert",
       "variant": "Status=info",
-      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-info.png",
-      "reference": "extract/computed/out/antd/alert/orig-shots/info.icon.off.off__default.png"
+      "shot": "recipe/evidence/fidelity-v1/shots/alert-antd-info-v3.png",
+      "reference": "extract/computed/out/antd/alert/orig-shots/info.icon.off.off__default.png",
+      "widthNormalised": true,
+      "_widthNormalisedWhy": "an alert/banner is a fill-width control: the capture stage is 320px wide and the mint hugs its content; the interior width is the container's, so the two edge windows (icon side, trailing side) are compared and heights are not normalised"
     },
     {
       "label": "chip/astryx",

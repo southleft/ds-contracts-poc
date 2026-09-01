@@ -1,18 +1,10 @@
 {
   "_marker": "KNOWN FAILURES — a shrink-only ratchet read by recipe/fidelity-check.ts. Every row is a measured FAIL with its cause; the gate is red on any failing subject NOT listed here and on any listed subject that passes (stale). Nothing here changes a score. Classes: real-defect = the mint differs from the package render; content-mismatch = the mint's sample content differs from the capture's, so the pair is not like-for-like (fix: derive content from the capture, remint); font-substrate = the difference is glyph rasterisation/fallback metrics, not geometry.",
-  "recorded": "2026-09-01",
+  "recorded": "2026-09-01 (alert rows revised after the v3 remint)",
   "failures": {
     "alert/astryx": {
-      "class": "real-defect",
-      "cause": "64.6%. The mint paints a filled disc where Astryx Banner draws its status glyph (extract/computed/out/astryx-core/banner/assets/banner-icon-info.svg). The reference also carries a bold title + description line the fixture content does not (content-mismatch on top)."
-    },
-    "alert/mui": {
-      "class": "real-defect",
-      "cause": "6.98%. Filled disc where MUI Alert draws CheckCircleOutline (assets/alert-alert-icon-success.svg); text differs from the capture sample. Height 48 = 48 and the background matches."
-    },
-    "alert/antd": {
-      "class": "real-defect",
-      "cause": "15.86%. Filled disc where AntD Alert draws InfoCircleFilled (assets/alert-alert-icon-info.svg); text differs from the capture; height 38 vs 40."
+      "class": "font-substrate",
+      "cause": "7.57% width-normalised (was 64.6%). After alert v3 the glyph, the Semibold title, the fill and the radius all match and heights agree at 44; the residual is the bold title's glyph rasterisation — SF Pro Semibold drawn by Figma vs -apple-system Semibold drawn by Chromium — across a 281px-wide title line, which the edge windows cannot avoid. Geometry the recipe decided is exhausted here."
     },
     "chip/astryx": {
       "class": "font-substrate",

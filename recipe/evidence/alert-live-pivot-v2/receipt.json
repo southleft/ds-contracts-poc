@@ -1,0 +1,17 @@
+{
+  "artifactVersion": "alert-live-pivot-v2-prepare",
+  "teaching": "Status info|success|warning|error compiled from named Banner/Alert facts; do not invent a shared default status; SVG glyphs receipted as colour+size boxes",
+  "runIdentity": "762cb77c-9b4bd337-4a232913-alert-v2",
+  "pageName": "Recipe Pivot / Alert / 762cb77c-9b4bd337-4a232913-alert-v2",
+  "namespace": "ds.contracts.alert.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "762cb77c3d4e68bc2f723662a7988d9fbfc8652e4f3732983072fbd68420c8f1",
+    "MUI": "9b4bd3375d4bd4c846972da58119ee67e6897853a3e6db88d8dc776a1cfb672a",
+    "Ant Design": "4a232913a352163d91399971af32e5c66fcc72e12a18a4e52e23a0a836cd8e7f"
+  },
+  "writerSha256": "8348542324bb3de30df9cf3fd68e99bc4d5611e3739cbaf7f0dd42bd8fa45e8b",
+  "liveFigma": false,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE"
+}

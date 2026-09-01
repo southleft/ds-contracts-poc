@@ -469,7 +469,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **alert/mui** `states.warning.boxBorder` = `#00000000` — standard Alert draws no painted border — transparent is the recipe spelling (ledger border-top-color is the title ink) _[Alert.js standard border none — reviewed #00000000]_
 - **alert/mui** `states.error.boxBorder` = `#00000000` — standard Alert draws no painted border — transparent is the recipe spelling (ledger border-top-color is the title ink) _[Alert.js standard border none — reviewed #00000000]_
 - **alert/mui** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
-- **alert/antd** `box.height` = `38` — capture height 40 includes the 1px border on both sides (border-box); the recipe spells the content-box 38 (8+8+22) — border-box vs content-box, not a color miss _[padding 8+8 + line 22 = 38 — reviewed 38]_
+- **alert/antd** `box.height` = `40` — capture height 40 includes the 1px border on both sides (border-box); the recipe spells the content-box 38 (8+8+22) — border-box vs content-box, not a color miss _[padding 8+8 + line 22 = 38 — reviewed 38]_
 - **alert/antd** `box.gap` = `8` — Alert icon margin-inline-end is 8 — not a CSS gap on the root; 8 is the recipe spelling _[genAlertStyle icon margin — reviewed 8]_
 - **alert/antd** `strokeAlign` = `inside` — recipe anatomy spelling _[reviewed inside]_
 - **alert/antd** `typography.title.family` = `-apple-system` — the capture PINS token.fontFamily to the Roboto stack (FC-FONT-SUBSTRATE closure) — the ledger's font-family is the mount pin, not the library's declared '-apple-system, …' stack the fixture cites _[theme.getDesignToken().fontFamily starts -apple-system]_

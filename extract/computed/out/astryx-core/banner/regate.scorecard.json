@@ -185,36 +185,6 @@
         "part": "label",
         "channel": "font-family",
         "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
-      },
-      {
-        "part": "label-2",
-        "channel": "border-bottom-style",
-        "value": "solid"
-      },
-      {
-        "part": "label-2",
-        "channel": "border-left-style",
-        "value": "solid"
-      },
-      {
-        "part": "label-2",
-        "channel": "border-right-style",
-        "value": "solid"
-      },
-      {
-        "part": "label-2",
-        "channel": "border-top-style",
-        "value": "solid"
-      },
-      {
-        "part": "label-2",
-        "channel": "box-sizing",
-        "value": "border-box"
-      },
-      {
-        "part": "label-2",
-        "channel": "font-family",
-        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       }
     ],
     "state": []
@@ -229,9 +199,9 @@
     "combos": 8,
     "interactions": 4,
     "computed": {
-      "cellsCompared": 4224,
-      "cellsEqual": 3968,
-      "pctEqual": 93.93939393939394,
+      "cellsCompared": 3520,
+      "cellsEqual": 3296,
+      "pctEqual": 93.63636363636364,
       "rowsFullyEqual": 0,
       "rows": 32
     },
@@ -253,69 +223,69 @@
       "boundConfirmed": 0,
       "boundCells": 0,
       "contradictions": 0,
-      "mintedLeaves": 37,
-      "mintedLeavesUnfolded": 77,
-      "baseBindings": 42,
+      "mintedLeaves": 35,
+      "mintedLeavesUnfolded": 75,
+      "baseBindings": 37,
       "stateBindings": 0,
-      "codeOnlyChannels": 8,
+      "codeOnlyChannels": 7,
       "overflowBindings": 0,
-      "folds": 50
+      "folds": 40
     },
     "worstRows": [
       {
         "key": "info.card__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "info.card__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "info.card__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "info.card__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__default",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__hover",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__focus-visible",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       },
       {
         "key": "info.section__active",
         "pctAA": null,
         "pctExact": null,
-        "channelsMismatched": 8,
+        "channelsMismatched": 7,
         "unscorable": "no-original"
       }
     ],
@@ -347,10 +317,6 @@
       [
         "label.text-size-adjust",
         32
-      ],
-      [
-        "label-2.text-size-adjust",
-        32
       ]
     ],
     "namedLosses": [
@@ -360,8 +326,7 @@
       "code-only: icon.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
       "code-only: part-0-1.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
     ],
     "unresolvedTokenRefs": {
       "count": 0,
@@ -369,7 +334,7 @@
     },
     "shippedMinted": {
       "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
-      "leavesAdded": 525,
+      "leavesAdded": 532,
       "divergent": [
         {
           "token": "imported.banner.banner.background-color.error",
@@ -420,12 +385,6 @@
           "resolvedEqual": false
         },
         {
-          "token": "imported.banner.label-2.color",
-          "fresh": "#4e606f",
-          "shipped": "(group)",
-          "resolvedEqual": false
-        },
-        {
           "token": "imported.banner.label.color",
           "fresh": "#0a1317",
           "shipped": "(group)",
@@ -436,8 +395,8 @@
     "rows": [
       {
         "key": "info.card__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -480,12 +439,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -495,8 +448,8 @@
       },
       {
         "key": "info.card__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -539,12 +492,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -554,8 +501,8 @@
       },
       {
         "key": "info.card__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -598,12 +545,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -613,8 +554,8 @@
       },
       {
         "key": "info.card__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -657,12 +598,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -672,8 +607,8 @@
       },
       {
         "key": "info.section__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -716,12 +651,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -731,8 +660,8 @@
       },
       {
         "key": "info.section__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -775,12 +704,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -790,8 +713,8 @@
       },
       {
         "key": "info.section__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -834,12 +757,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -849,8 +766,8 @@
       },
       {
         "key": "info.section__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -893,12 +810,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -908,8 +819,8 @@
       },
       {
         "key": "warning.card__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -952,12 +863,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -967,8 +872,8 @@
       },
       {
         "key": "warning.card__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1011,12 +916,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1026,8 +925,8 @@
       },
       {
         "key": "warning.card__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1070,12 +969,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1085,8 +978,8 @@
       },
       {
         "key": "warning.card__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1129,12 +1022,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1144,8 +1031,8 @@
       },
       {
         "key": "warning.section__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1188,12 +1075,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1203,8 +1084,8 @@
       },
       {
         "key": "warning.section__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1247,12 +1128,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1262,8 +1137,8 @@
       },
       {
         "key": "warning.section__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1306,12 +1181,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1321,8 +1190,8 @@
       },
       {
         "key": "warning.section__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1365,12 +1234,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1380,8 +1243,8 @@
       },
       {
         "key": "error.card__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1424,12 +1287,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1439,8 +1296,8 @@
       },
       {
         "key": "error.card__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1483,12 +1340,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1498,8 +1349,8 @@
       },
       {
         "key": "error.card__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1542,12 +1393,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1557,8 +1402,8 @@
       },
       {
         "key": "error.card__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1601,12 +1446,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1616,8 +1455,8 @@
       },
       {
         "key": "error.section__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1660,12 +1499,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1675,8 +1508,8 @@
       },
       {
         "key": "error.section__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1719,12 +1552,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1734,8 +1561,8 @@
       },
       {
         "key": "error.section__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1778,12 +1605,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1793,8 +1614,8 @@
       },
       {
         "key": "error.section__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1837,12 +1658,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1852,8 +1667,8 @@
       },
       {
         "key": "success.card__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1896,12 +1711,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1911,8 +1720,8 @@
       },
       {
         "key": "success.card__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -1955,12 +1764,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -1970,8 +1773,8 @@
       },
       {
         "key": "success.card__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2014,12 +1817,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -2029,8 +1826,8 @@
       },
       {
         "key": "success.card__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2073,12 +1870,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -2088,8 +1879,8 @@
       },
       {
         "key": "success.section__default",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2132,12 +1923,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -2147,8 +1932,8 @@
       },
       {
         "key": "success.section__hover",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2191,12 +1976,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -2206,8 +1985,8 @@
       },
       {
         "key": "success.section__focus-visible",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2250,12 +2029,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"
@@ -2265,8 +2038,8 @@
       },
       {
         "key": "success.section__active",
-        "channelsCompared": 132,
-        "channelsEqual": 124,
+        "channelsCompared": 110,
+        "channelsEqual": 103,
         "pctExact": null,
         "pctAA": null,
         "unscorable": "no-original",
@@ -2309,12 +2082,6 @@
           },
           {
             "part": "label",
-            "channel": "text-size-adjust",
-            "ours": "auto",
-            "theirs": "100%"
-          },
-          {
-            "part": "label-2",
             "channel": "text-size-adjust",
             "ours": "auto",
             "theirs": "100%"

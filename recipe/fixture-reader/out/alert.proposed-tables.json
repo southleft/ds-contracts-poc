@@ -471,8 +471,8 @@
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
     "values": {
       "box.height": {
-        "fixture": 38,
-        "proposed": 38,
+        "fixture": 40,
+        "proposed": 40,
         "verdict": "receipt",
         "provenance": "RECEIPT: capture height 40 includes the 1px border on both sides (border-box); the recipe spells the content-box 38 (8+8+22) — border-box vs content-box, not a color miss [padding 8+8 + line 22 = 38 — reviewed 38]"
       },

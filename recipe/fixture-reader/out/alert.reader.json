@@ -660,9 +660,9 @@
     "rows": [
       {
         "path": "box.height",
-        "fixtureValue": 38,
+        "fixtureValue": 40,
         "verdict": "receipt",
-        "proposedValue": 38,
+        "proposedValue": 40,
         "receipt": "capture height 40 includes the 1px border on both sides (border-box); the recipe spells the content-box 38 (8+8+22) — border-box vs content-box, not a color miss",
         "evidence": "padding 8+8 + line 22 = 38 — reviewed 38"
       },

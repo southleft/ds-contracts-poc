@@ -46,7 +46,7 @@ test("alert@1 adapts Astryx Banner, MUI Alert, and AntD Alert from named package
   assert.equal(mui.tokens.icon.size.fallback, 22);
   assert.equal(mui.tokens.states.success.iconOpacity.fallback, 0.9);
   assert.equal(antd.axes.status.default, "info", "Alert type default");
-  assert.equal(antd.tokens.box.height.fallback, 38, "8+8+22");
+  assert.equal(antd.tokens.box.height.fallback, 40, "border-box: 8+8+22 + 1+1 lineWidth border (the real render measures 40; the 38 the test used to pin omitted the border)");
   assert.equal(antd.tokens.box.paddingX.fallback, 12);
   assert.equal(antd.tokens.box.radius.fallback, 8, "borderRadiusLG");
   assert.equal(antd.tokens.box.borderWidth.fallback, 1);

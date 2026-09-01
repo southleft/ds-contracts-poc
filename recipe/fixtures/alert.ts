@@ -1,5 +1,6 @@
 import type {
   AlertColorParameter,
+  AlertGlyph,
   AlertFontSpec,
   AlertNumberParameter,
   AlertRecipeInstance,
@@ -24,6 +25,13 @@ const font = (family: string, style: string): AlertFontSpec => ({
   resolvedFamily: family,
   resolvedStyle: style,
   resolution: "requested",
+});
+
+const ringGlyph = (): AlertGlyph => ({
+  path:
+    "M 22 12 C 22 17.5228 17.5228 22 12 22 C 6.4772 22 2 17.5228 2 12 C 2 6.4772 6.4772 2 12 2 C 17.5228 2 22 6.4772 22 12 Z",
+  viewBox: { x: 0, y: 0, width: 24, height: 24 },
+  winding: "nonzero",
 });
 
 const cell = (
@@ -67,7 +75,13 @@ export const canonicalAlertRecipeInstance = {
       borderWidth: number("ds.alert.box-borderWidth", 0),
       gap: number("ds.alert.box-gap", 8),
     },
-    icon: { size: number("ds.alert.icon-size", 20) },
+    icon: {
+      size: number("ds.alert.icon-size", 20),
+      // The canonical archetype instance carries a plain ring glyph (four
+      // cubic quadrants of a 24-space circle, no arcs) so the compile has a
+      // real vector to lower; every library replaces it with its own SVG.
+      glyphs: { info: ringGlyph(), success: ringGlyph(), warning: ringGlyph(), error: ringGlyph() },
+    },
     titleFontSize: number("ds.alert.titleFontSize", 14),
     titleLineHeight: number("ds.alert.titleLineHeight", 20),
     strokeAlign: "inside",

@@ -4,10 +4,10 @@
     "pctAAMaskedMax": 5
   },
   "subjects": 24,
-  "passed": 10,
-  "failed": 13,
+  "passed": 12,
+  "failed": 11,
   "fringeExcused": 1,
-  "knownFailures": 13,
+  "knownFailures": 11,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -76,24 +76,24 @@
     {
       "label": "alert/astryx",
       "status": "fail",
-      "pctAAMasked": 64.6,
-      "canvasPx": "194x44",
-      "realPx": "320x64",
+      "pctAAMasked": 7.57,
+      "canvasPx": "281x44",
+      "realPx": "320x44",
       "convergesAt": null
     },
     {
       "label": "alert/mui",
-      "status": "fail",
-      "pctAAMasked": 6.98,
-      "canvasPx": "199x48",
+      "status": "pass",
+      "pctAAMasked": 3.95,
+      "canvasPx": "251x48",
       "realPx": "288x48",
       "convergesAt": null
     },
     {
       "label": "alert/antd",
-      "status": "fail",
-      "pctAAMasked": 15.86,
-      "canvasPx": "181x38",
+      "status": "pass",
+      "pctAAMasked": 3.35,
+      "canvasPx": "139x40",
       "realPx": "288x40",
       "convergesAt": null
     },

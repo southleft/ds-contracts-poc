@@ -168,3 +168,28 @@ filled disc. See `scripts/fidelity-contact-sheet.ts` for the side-by-side.
 Still excluded, with the reason in the manifest: dialog/menu (the only
 references are full-viewport overlay captures) and the four signed legs whose
 pages carry two identically named sets (name resolution cannot pick a leg).
+
+## 2026-09-01 (later) — the alert glyphs, closed by remint
+
+The headline real defect above is fixed at the source. `alert@1` now carries
+each library's status glyph as a vector read from the capture's own SVG asset
+(`recipe/fixtures/capture-glyph.ts`), lowered through
+`recipe/figma-vector-path.ts` — which gained arc lowering with a reported
+bound and SVG-style closing of open filled subpaths — and placed in a centred
+host that refuses an off-centre source. Two more defects surfaced on the way
+and were fixed in the same remint: AntD's height omitted its 1px border
+(38 → 40, border-box), and the Astryx title provenance recorded SF Pro Medium
+because Semibold was not installed when v1 minted (the writer's tamper check
+caught it). Title text now comes from each capture's sample, and the Astryx
+reference is captured title-only to match the recipe's declared scope, with
+`description` a named refusal.
+
+    subject        v1 (disc)   v3 (glyph)
+    alert/astryx   64.6% FAIL   7.57% known (font-substrate)
+    alert/mui       6.98% FAIL   3.95% PASS
+    alert/antd     15.86% FAIL   3.35% PASS
+
+Two attempts before v3 were refused by the writer's own guards (the glyph
+bounds guard at 0.15px on the Astryx warning icon; the font tamper check)
+and their partial pages and collections were removed before the next attempt.
+The gate is now **12 pass · 1 fringe · 11 known**.

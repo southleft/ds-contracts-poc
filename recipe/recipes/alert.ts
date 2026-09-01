@@ -1,4 +1,5 @@
 import * as z from "zod";
+import { lowerVectorPath, transformVectorPath, vectorPathBounds, vectorPathHullBounds } from "../figma-vector-path.js";
 
 import {
   CodeOnlyExtensionSchema,
@@ -66,6 +67,21 @@ export interface AlertFontSpec {
   degradation?: string;
 }
 
+/**
+ * The library's status glyph, as the capture recorded it. `path` is the
+ * package's SVG `d` in the package's own coordinate space (`viewBox`); the
+ * compile lowers it to Figma's grammar, scales the viewBox onto `icon.size`
+ * and REFUSES a glyph that is not centred in its viewport, because the host
+ * frame centres it and an off-centre source would be moved silently.
+ */
+export interface AlertGlyph {
+  path: string;
+  viewBox: { x: number; y: number; width: number; height: number };
+  winding: "nonzero" | "evenodd";
+  /** Where the path and the viewBox were read from (kept for the record; not part of the IR). */
+  source?: { asset: string; viewBoxCitation: string };
+}
+
 interface StateCell {
   boxFill: AlertColorParameter;
   boxBorder: AlertColorParameter;
@@ -98,7 +114,7 @@ export interface AlertRecipeInstance {
       borderWidth: AlertNumberParameter;
       gap: AlertNumberParameter;
     };
-    icon: { size: AlertNumberParameter };
+    icon: { size: AlertNumberParameter; glyphs: Record<AlertStatus, AlertGlyph> };
     titleFontSize: AlertNumberParameter;
     titleLineHeight: AlertNumberParameter;
     strokeAlign: "inside" | "outside";
@@ -144,6 +160,19 @@ const FontSpecSchema = z.strictObject({
   resolution: z.enum(["requested", "fallback"]),
   degradation: z.string().min(1).optional(),
 });
+const GlyphSchema = z.strictObject({
+  path: z.string().min(1),
+  viewBox: z.strictObject({
+    x: z.number().finite(),
+    y: z.number().finite(),
+    width: z.number().positive(),
+    height: z.number().positive(),
+  }),
+  winding: z.enum(["nonzero", "evenodd"]),
+  source: z
+    .strictObject({ asset: z.string().min(1), viewBoxCitation: z.string().min(1) })
+    .optional(),
+});
 const StateCellSchema = z.strictObject({
   boxFill: ColorParameterSchema,
   boxBorder: ColorParameterSchema,
@@ -176,7 +205,15 @@ export const AlertRecipeInstanceSchema = z.strictObject({
       borderWidth: NumberParameterSchema,
       gap: NumberParameterSchema,
     }),
-    icon: z.strictObject({ size: NumberParameterSchema }),
+    icon: z.strictObject({
+      size: NumberParameterSchema,
+      glyphs: z.strictObject({
+        info: GlyphSchema,
+        success: GlyphSchema,
+        warning: GlyphSchema,
+        error: GlyphSchema,
+      }),
+    }),
     titleFontSize: NumberParameterSchema,
     titleLineHeight: NumberParameterSchema,
     strokeAlign: z.enum(["inside", "outside"]),
@@ -281,8 +318,84 @@ const titleText = (
   ],
 });
 
+const GLYPH_PRECISION = 1e-4;
+const round4 = (n: number): number => Math.round(n / GLYPH_PRECISION) * GLYPH_PRECISION;
+
+/**
+ * Lower the library glyph onto the icon box. Returns the Figma-local path
+ * (origin at the glyph's own top-left) and its exact size. The viewport is
+ * scaled uniformly by `size / viewBox.width`; the glyph must be centred in
+ * its viewport within half a pixel or the compile refuses by name.
+ */
+export function lowerAlertGlyph(
+  glyph: AlertGlyph,
+  size: number,
+  role: string,
+): { assetRef: string; width: number; height: number } {
+  if (glyph.viewBox.width !== glyph.viewBox.height)
+    throw new RecipeRefusal(ALERT_RECIPE_REF, [
+      `${role}: glyph viewBox must be square to scale onto a square icon box (got ${glyph.viewBox.width}x${glyph.viewBox.height})`,
+    ]);
+  const scale = size / glyph.viewBox.width;
+  // Filled glyph: arcs lowered with a reported bound, open subpaths closed
+  // the way SVG fill semantics close them (Figma paints no fill on an open
+  // contour — the v2 MUI mint lost its ring that way).
+  const lowered = lowerVectorPath(glyph.path, { arcs: "lower", closeSubpaths: true }).d;
+  const inViewport = transformVectorPath(lowered, {
+    scale,
+    tx: -glyph.viewBox.x * scale,
+    ty: -glyph.viewBox.y * scale,
+  });
+  // Hull bounds, not sampled ink bounds: their edges are exact path
+  // coordinates, so the translation below is grid-exact and the
+  // compile → collapse → compile cycle reproduces the same bytes. The writer
+  // guards the one case where hull ≠ ink (a control point off the box) by
+  // refusing when Figma's measured bounds disagree with these.
+  const b = vectorPathHullBounds(inViewport);
+  const cx = (b.minX + b.maxX) / 2;
+  const cy = (b.minY + b.maxY) / 2;
+  if (Math.abs(cx - size / 2) > 0.5 || Math.abs(cy - size / 2) > 0.5)
+    throw new RecipeRefusal(ALERT_RECIPE_REF, [
+      `${role}: glyph is not centred in its viewport (centre ${cx.toFixed(2)},${cy.toFixed(2)} vs ${size / 2}); the centred host would move it — carry the offset explicitly instead of hoping`,
+    ]);
+  // Translate by the HULL minimum (grid-exact, cycle-stable) but size the
+  // node by the TRUE ink box (densely sampled): Figma sizes a vector node to
+  // its ink, and the writer refuses when its measurement disagrees with this
+  // by more than 0.05px — the first v2 attempt was refused at 0.15px on the
+  // Astryx warning glyph, where a control point lies outside the ink.
+  const assetRef = transformVectorPath(inViewport, { tx: -b.minX, ty: -b.minY });
+  const ink = vectorPathBounds(assetRef);
+  return {
+    assetRef,
+    width: round4(ink.maxX - ink.minX),
+    height: round4(ink.maxY - ink.minY),
+  };
+}
+
+const glyphVector = (
+  instance: AlertRecipeInstance,
+  status: AlertStatus,
+  cell: StateCell,
+): VectorNode => {
+  const glyph = instance.tokens.icon.glyphs[status];
+  const size = instance.tokens.icon.size.fallback;
+  const lowered = lowerAlertGlyph(glyph, size, `alert/icon/glyph (${status})`);
+  return {
+    kind: "vector",
+    role: "alert/icon/glyph",
+    label: "alert/icon/glyph",
+    assetRef: lowered.assetRef,
+    width: fixed(lowered.width),
+    height: fixed(lowered.height),
+    fills: [solid(cell.iconFill.fallback)],
+    windingRule: glyph.winding,
+    bindings: [bind("fills.0.color", cell.iconFill)],
+  };
+};
+
 const iconNode = (
   instance: AlertRecipeInstance,
+  status: AlertStatus,
   cell: StateCell,
 ): FrameNode => ({
   kind: "frame",
@@ -298,14 +411,15 @@ const iconNode = (
     width: fixed(instance.tokens.icon.size.fallback),
     height: fixed(instance.tokens.icon.size.fallback),
   },
-  fills: [solid(cell.iconFill.fallback)],
-  cornerRadius: corners(instance.tokens.icon.size.fallback / 2),
+  // The host paints nothing: the glyph is the icon. Before 2026-09-01 this
+  // frame carried the status fill as a disc and no glyph — measured against
+  // the real renders at 64.6% / 6.98% / 15.86% difference.
+  fills: [],
   bindings: [
     bind("layout.width.value", instance.tokens.icon.size),
     bind("layout.height.value", instance.tokens.icon.size),
-    bind("fills.0.color", cell.iconFill),
   ],
-  children: [],
+  children: [glyphVector(instance, status, cell)],
 });
 
 const variantComponent = (
@@ -357,7 +471,7 @@ const variantComponent = (
       bind("cornerRadius.bottomRight", instance.tokens.box.radius),
       bind("cornerRadius.bottomLeft", instance.tokens.box.radius),
     ],
-    children: [iconNode(instance, cell), titleText(instance, cell)],
+    children: [iconNode(instance, status, cell), titleText(instance, cell)],
   };
 };
 
@@ -520,6 +634,11 @@ export function validateAlertStructure(root: IRNode): void {
       throw new RecipeRefusal(ALERT_RECIPE_REF, [
         `${variant.role}: icon must carry a named size`,
       ]);
+    const glyph = direct(icon, "alert/icon/glyph", "vector");
+    if (glyph.width.mode !== "fixed" || glyph.height.mode !== "fixed" || glyph.fills.length !== 1)
+      throw new RecipeRefusal(ALERT_RECIPE_REF, [
+        `${variant.role}: the status glyph is a sized, filled vector — never a painted disc`,
+      ]);
     direct(variant, "alert/title", "text");
   }
 }
@@ -562,9 +681,30 @@ const firstDifference = (
   return undefined;
 };
 
+/**
+ * Inverse of `lowerAlertGlyph`: the IR carries the glyph at its own origin
+ * with an exact size inside a centred host of `icon.size`, so the viewport it
+ * was compiled from is the icon square with the glyph offset by
+ * (size − w)/2, (size − h)/2. Expressed as a viewBox origin rather than by
+ * moving the path, so recompiling reproduces the same bytes.
+ */
+const glyphFromVariant = (variant: ComponentNode): AlertGlyph => {
+  const icon = direct(variant, "alert/icon", "frame");
+  const glyph = direct(icon, "alert/icon/glyph", "vector");
+  const size = icon.layout.width.mode === "fixed" ? icon.layout.width.value : 0;
+  const w = glyph.width.mode === "fixed" ? glyph.width.value : 0;
+  const h = glyph.height.mode === "fixed" ? glyph.height.value : 0;
+  return {
+    path: glyph.assetRef,
+    viewBox: { x: -round4((size - w) / 2), y: -round4((size - h) / 2), width: size, height: size },
+    winding: glyph.windingRule ?? "nonzero",
+  };
+};
+
 const cellFromVariant = (variant: ComponentNode): StateCell => {
   const title = direct(variant, "alert/title", "text");
   const icon = direct(variant, "alert/icon", "frame");
+  const glyph = direct(icon, "alert/icon/glyph", "vector");
   return {
     boxFill: colorFrom(
       variant,
@@ -582,9 +722,9 @@ const cellFromVariant = (variant: ComponentNode): StateCell => {
       solidColor(title.fills[0], title.role!),
     ),
     iconFill: colorFrom(
-      icon,
+      glyph,
       "fills.0.color",
-      solidColor(icon.fills[0], icon.role!),
+      solidColor(glyph.fills[0], glyph.role!),
     ),
     iconOpacity: {
       variable: `${variant.role}-iconOpacity`,
@@ -662,6 +802,12 @@ export function collapseAlertRecipe(
           "layout.width.value",
           icon.layout.width.mode === "fixed" ? icon.layout.width.value : 0,
         ),
+        glyphs: {
+          info: glyphFromVariant(info),
+          success: glyphFromVariant(componentFor(set, { Status: "success" })),
+          warning: glyphFromVariant(componentFor(set, { Status: "warning" })),
+          error: glyphFromVariant(componentFor(set, { Status: "error" })),
+        },
       },
       titleFontSize: numberFrom(title, "type.fontSize", title.type.fontSize),
       titleLineHeight: numberFrom(

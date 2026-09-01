@@ -302,10 +302,10 @@
     {
       "library": "astryx-core",
       "component": "Banner",
-      "rerunPctEqual": 93.93939393939394,
-      "cellsCompared": 4224,
+      "rerunPctEqual": 93.63636363636364,
+      "cellsCompared": 3520,
       "unresolvedTokenRefs": 0,
-      "committedPctEqual": 93.93939393939394,
+      "committedPctEqual": 93.63636363636364,
       "gapCause": ""
     },
     {

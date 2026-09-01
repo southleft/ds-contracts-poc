@@ -4,7 +4,10 @@ import test from "node:test";
 import {
   FigmaVectorPathError,
   isFigmaVectorPath,
+  lowerVectorPath,
   toFigmaVectorPath,
+  transformVectorPath,
+  vectorPathBounds,
 } from "./figma-vector-path.js";
 
 test("H and V become absolute linetos", () => {
@@ -75,4 +78,41 @@ test("an already-accepted path is recognised and round-trips unchanged in shape"
   assert.equal(isFigmaVectorPath(d), true);
   assert.equal(toFigmaVectorPath(d), d);
   assert.equal(isFigmaVectorPath("M 0 0 H 10"), false);
+});
+
+test("arcs are still refused by default, and lowered with a reported bound on request", () => {
+  const circle = "M 22 12 A 10 10 0 1 1 2 12 A 10 10 0 1 1 22 12 Z";
+  assert.throws(() => toFigmaVectorPath(circle), /elliptical arc/);
+  const { d, lowerings } = lowerVectorPath(circle, { arcs: "lower" });
+  assert.equal(lowerings.length, 2, "two arcs lowered");
+  assert.equal(lowerings[0]!.segments, 2, "a 180° arc is two ≤90° cubics");
+  assert.ok(/^[MLCQZ0-9 .-]+$/.test(d), "only accepted commands remain");
+  // Every sampled point of the lowered circle sits within 0.03% of radius 10.
+  const b = vectorPathBounds(d);
+  assert.ok(Math.abs(b.minX - 2) < 0.01 && Math.abs(b.maxX - 22) < 0.01, "extent 2→22 kept");
+  assert.ok(Math.abs(b.minY - 2) < 0.01 && Math.abs(b.maxY - 22) < 0.01);
+});
+
+test("lowering is deterministic and idempotent on an already-accepted path", () => {
+  const src = "M 12 3 A 9 9 0 1 0 12 21 A 9 9 0 0 0 12 3 Z";
+  const once = toFigmaVectorPath(src, { arcs: "lower" });
+  const twice = toFigmaVectorPath(once, { arcs: "lower" });
+  assert.equal(once, twice);
+});
+
+test("transformVectorPath scales and translates exactly, and bounds follow", () => {
+  const d = toFigmaVectorPath("M 2 2 L 22 2 L 22 22 L 2 22 Z");
+  const moved = transformVectorPath(d, { scale: 0.5, tx: -1, ty: -1 });
+  assert.equal(moved, "M 0 0 L 10 0 L 10 10 L 0 10 Z");
+  assert.deepEqual(vectorPathBounds(moved), { minX: 0, minY: 0, maxX: 10, maxY: 10 });
+});
+
+test("closeSubpaths closes an open filled contour before the next M and at the end, and leaves closed ones alone", () => {
+  const ring = "M 20 12 A 8 8 0 0 1 12 20 A 8 8 0 0 1 4 12 M 7.91 10.08 L 6.5 11.5 L 11 16 Z";
+  const closed = toFigmaVectorPath(ring, { arcs: "lower", closeSubpaths: true });
+  assert.equal((closed.match(/Z/g) ?? []).length, 2, "the open ring gains a Z; the check keeps its one");
+  assert.ok(/Z M 7\.91/.test(closed), "Z lands before the second subpath's M");
+  const open = toFigmaVectorPath("M 0 0 L 10 0 L 10 10", { closeSubpaths: false });
+  assert.equal(open.includes("Z"), false, "default leaves an open stroke path open");
+  assert.equal(toFigmaVectorPath("M 0 0 L 10 0 Z", { closeSubpaths: true }), "M 0 0 L 10 0 Z", "no double Z");
 });

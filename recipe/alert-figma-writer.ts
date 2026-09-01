@@ -24,7 +24,11 @@ import {
 
 export const ALERT_FIGMA_NAMESPACE = "ds.contracts.alert.recipe.v1";
 export const ALERT_FIGMA_WRITER_VERSION = 1;
-export const ALERT_FIGMA_RUN_SUFFIX = "alert-v1";
+export const ALERT_FIGMA_RUN_SUFFIX = "alert-v3";
+/** The v2 stay (glyphs carried, ring lost to an open subpath, AntD 38 tall) is preserved as evidence and never written again. */
+export const FORBIDDEN_ALERT_V2_PAGE_ID = "208:79595";
+/** The v1 stay (filled-disc icons, measured 2026-09-01) is preserved as evidence and never written again. */
+export const FORBIDDEN_ALERT_V1_PAGE_ID = "183:75801";
 
 export const FORBIDDEN_INPUT_NAMESPACE = "ds.contracts.input.recipe.v5";
 export const FORBIDDEN_INPUT_RUN_IDENTITY = "4a074b24-e8503dd5-input-v5";
@@ -267,7 +271,11 @@ void "ALERT-MUST-NOT-WRITE-CHECKBOX-PAGE";
 void "ALERT-MUST-NOT-WRITE-RADIO-PAGE";
 void "ALERT-MUST-NOT-WRITE-SWITCH-PAGE";
 void "ALERT-MUST-NOT-WRITE-TEXTAREA-PAGE";
+void "ALERT-MUST-NOT-WRITE-ALERT-V1-PAGE";
+void "ALERT-MUST-NOT-WRITE-ALERT-V2-PAGE";
 if(figma.currentPage&&figma.currentPage.id==="115:295378")throw new Error("ALERT-MUST-NOT-WRITE-INPUT-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="183:75801")throw new Error("ALERT-MUST-NOT-WRITE-ALERT-V1-PAGE");
+if(figma.currentPage&&figma.currentPage.id==="208:79595")throw new Error("ALERT-MUST-NOT-WRITE-ALERT-V2-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="163:35981")throw new Error("ALERT-MUST-NOT-WRITE-COMBOBOX-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:70641")throw new Error("ALERT-MUST-NOT-WRITE-COMBOBOX-V42-PAGE");
 if(figma.currentPage&&figma.currentPage.id==="183:69150")throw new Error("ALERT-MUST-NOT-WRITE-BUTTON-PAGE");
@@ -378,6 +386,7 @@ for(const source of PLAN.sources){
         bindFloat(node,"strokeWeight",bindingFor(ir,"strokes.0.weight"));
       }
     }
+    else if(ir.kind==="vector"){node.strokes=[];}
     if(ir.cornerRadius){
       for(const [irKey,figmaKey] of [["topLeft","topLeftRadius"],["topRight","topRightRadius"],["bottomRight","bottomRightRadius"],["bottomLeft","bottomLeftRadius"]]){
         node[figmaKey]=ir.cornerRadius[irKey];bindFloat(node,figmaKey,bindingFor(ir,"cornerRadius."+irKey));
@@ -445,6 +454,18 @@ for(const source of PLAN.sources){
         if(!painted&&(label.width<=0||label.absoluteRenderBounds===null))throw new Error("ALERT-FONT-ZERO-INTRINSIC:"+ir.role);
       }
       node=label;
+    }else if(ir.kind==="vector"){
+      void "ALERT-WRITER-VECTOR-PATH";
+      const vector=figma.createVector();
+      vector.vectorPaths=[{windingRule:ir.windingRule==="evenodd"?"EVENODD":"NONZERO",data:ir.assetRef}];
+      vector.effects=[];
+      if(ir.strokeCap)vector.strokeCap=ir.strokeCap.toUpperCase();
+      if(ir.strokeJoin)vector.strokeJoin=ir.strokeJoin.toUpperCase();
+      if(ir.rotation)vector.rotation=ir.rotation;
+      void "ALERT-WRITER-GLYPH-BOUNDS-GUARD";
+      const wantW=ir.width.mode==="fixed"?ir.width.value:vector.width,wantH=ir.height.mode==="fixed"?ir.height.value:vector.height;
+      if(Math.abs(vector.width-wantW)>0.05||Math.abs(vector.height-wantH)>0.05)throw new Error("ALERT-GLYPH-BOUNDS-MISMATCH:"+ir.role+":"+vector.width.toFixed(3)+"x"+vector.height.toFixed(3)+" vs "+wantW+"x"+wantH);
+      node=vector;
     }else throw new Error("UNSUPPORTED-CHILD-KIND:"+ir.kind);
     node.visible=ir.visible!==false;node.opacity=ir.opacity===undefined?1:ir.opacity;
     node.name=ir.role&&ir.label&&ir.role!==ir.label?ir.role+" :: "+ir.label:(ir.label||ir.role||ir.kind);
