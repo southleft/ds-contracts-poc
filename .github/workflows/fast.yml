@@ -294,6 +294,68 @@ jobs:
       - name: recipe:fidelity:check (minted components scored against the real package's own Chromium render)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:fidelity:check
+      # The thirteen boilerplate archetypes plus the button scene inversion. Each
+      # was gate-shaped and unlaned: ci:lanes reported 33 scripts no workflow ran
+      # and 39 test files no CI-invoked script named. They were never expensive —
+      # the lane simply had no room while 86 superseded per-version steps were
+      # spending ~21 minutes against a 15-minute timeout.
+      # Every per-version live test file, in one step. The lane used to invoke 86
+      # SUPERSEDED per-version :check composites (prepare + authorize self-test +
+      # smoke + lifecycle each), ~21 minutes against a 15-minute timeout — which
+      # is why fast produced no verdict in 300 consecutive runs. Running the test
+      # files directly covers the same 705 files in ~75 seconds.
+      #
+      # 29 files are NOT in this lane and are not silently dropped:
+      # recipe/calendar-live-v19..v47-extract.test.ts all fail at HEAD on
+      # "host omits strokes on day default/selected/outside and keeps today —
+      # the Calendar live v18 class" with "scene solid paint has no color".
+      # Pre-existing, and invisible until now because the lane never reached
+      # them. Named in parity/receipts/v1/HONEST-SCORECARD.md.
+      - name: recipe:live:history:test (705 per-version live test files, ~75s)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:live:history:test
+      - name: recipe:checkbox:check (checkbox@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:checkbox:check
+      - name: recipe:radio:check (radio@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:radio:check
+      - name: recipe:switch:check (switch@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:switch:check
+      - name: recipe:textarea:check (textarea@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:textarea:check
+      - name: recipe:alert:check (alert@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:alert:check
+      - name: recipe:chip:check (chip@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:chip:check
+      - name: recipe:badge:check (badge@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:badge:check
+      - name: recipe:avatar:check (avatar@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:avatar:check
+      - name: recipe:link:check (link@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:link:check
+      - name: recipe:tooltip:check (tooltip@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:tooltip:check
+      - name: recipe:tabs:check (tabs@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:tabs:check
+      - name: recipe:menu:check (menu@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:menu:check
+      - name: recipe:dialog:check (dialog@1 offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:dialog:check
+      - name: recipe:button-scene-inversion:check (button scene inversion offline proof, writer plan and fixed point)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:button-scene-inversion:check
       - name: recipe:combobox:live:v42:check (the CURRENT combobox lineage — library-named overlay chrome remint; generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:combobox:live:v42:check
@@ -309,252 +371,6 @@ jobs:
       - name: recipe:pivot-status:check (Button/Input false, v7 attempt 1 closed, v8 draft pending authorization)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:pivot-status:check
-      - name: recipe:input-field:live:v3:authorization:self-test (chronology and no-posthoc guard)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v3:authorization:self-test
-      - name: recipe:input-field:live:v3:authorization:check (committed antecedent and clean descendant)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v3:authorization:check -- --capture-code-commit HEAD
-      - name: recipe:input-field:live:v3:offline:check (deterministic plan, scene proof, hard-gate falsifications)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v3:offline:check
-      - name: recipe:input-field:live:v4:self-test (authorization, preflight, normalization, journaling, and order)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v4:self-test
-      - name: recipe:input-field:live:v7:check (phase-stable signed broker, hermetic lifecycle, two roots, crash cleanup)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v7:check
-      - name: recipe:input-field:live:v8:check (per-side stroke weights, named transport facts, phase-stable antecedent)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v8:check
-      - name: recipe:input-field:live:v9:check (carried scene-readback for VARIABLE_ALIAS and bound-variable fills)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v9:check
-      - name: recipe:input-field:live:v10:check (carried v3 verifier uses scene-readback-v10, not hashed scene-readback.ts)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v10:check
-      - name: recipe:input-field:live:v11:check (first-segment role recovery when font-provenance= is present)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v11:check
-      - name: recipe:input-field:live:v12:check (post-settle content fill restore after hashed v11 writer)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v12:check
-      - name: recipe:input-field:live:v13:check (signed post-writer content fill restore before extract)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v13:check
-      - name: recipe:input-field:live:v14:check (two-pass parent then content fill restore; v13 restore frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v14:check
-      - name: recipe:input-field:live:v15:check (measure FILL while visible; v14 restore frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v15:check
-      - name: recipe:input-field:live:v16:check (extract measures hidden content FILL while visible; v15 restore frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v16:check
-      - name: recipe:input-field:live:v17:check (surface leading-slot solid paint from payload or child; v16 extract frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v17:check
-      - name: recipe:input-field:live:v18:check (surface leading-slot fills.0.color from child; hashed v17 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v18:check
-      - name: recipe:input-field:live:v19:check (surface strokes.0.weight from uniform per-side FLOAT; hashed v18 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v19:check
-      - name: recipe:input-field:live:v20:check (surface variant layout.width.value from existing width FLOAT; hashed v19 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v20:check
-      - name: recipe:input-field:live:v21:check (surface layout.height.value from existing height FLOAT; hashed v20 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v21:check
-      - name: recipe:input-field:live:v22:check (alias layout width/height without duplicate source field; hashed v21 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v22:check
-      - name: recipe:input-field:live:v23:check (place aliased layout.width.value at compile index; hashed v22 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v23:check
-      - name: recipe:input-field:live:v24:check (drop extra surface bindings; hashed v23 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v24:check
-      - name: recipe:input-field:live:v25:check (place remaining surface bindings at compile field order; hashed v24 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v25:check
-      - name: recipe:input-field:live:v26:check (place remaining content bindings at compile field order; hashed v25 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v26:check
-      - name: recipe:input-field:live:v27:check (recover hug height for hidden content FIXED; hashed v26 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v27:check
-      - name: recipe:input-field:live:v28:check (omit content letterSpacing; hashed v27 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v28:check
-      - name: recipe:input-field:live:v29:check (omit content textCase; hashed v28 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v29:check
-      - name: recipe:input-field:live:v30:check (omit content textDecoration; hashed v29 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v30:check
-      - name: recipe:input-field:live:v31:check (omit content-row clipsContent; hashed v30 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v31:check
-      - name: recipe:input-field:live:v32:check (omit content-row cornerRadius; hashed v31 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v32:check
-      - name: recipe:input-field:live:v33:check (omit content-row effects; hashed v32 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v33:check
-      - name: recipe:input-field:live:v34:check (omit content-row strokes; hashed v33 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v34:check
-      - name: recipe:input-field:live:v35:check (order label bindings; hashed v34 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v35:check
-      - name: recipe:input-field:live:v36:check (omit label letterSpacing; hashed v35 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v36:check
-      - name: recipe:input-field:live:v37:check (omit label textCase; hashed v36 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v37:check
-      - name: recipe:input-field:live:v38:check (omit label textDecoration; hashed v37 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v38:check
-      - name: recipe:input-field:live:v39:check (omit label-row clipsContent; hashed v38 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v39:check
-      - name: recipe:input-field:live:v40:check (omit label-row cornerRadius; hashed v39 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v40:check
-      - name: recipe:input-field:live:v41:check (omit label-row effects; hashed v40 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v41:check
-      - name: recipe:input-field:live:v42:check (omit label-row strokes; hashed v41 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v42:check
-      - name: recipe:input-field:live:v43:check (omit surface stroke dashPattern; hashed v42 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v43:check
-      - name: recipe:input-field:live:v44:check (restore message binding compile order; hashed v43 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v44:check
-      - name: recipe:input-field:live:v45:check (omit message letterSpacing; hashed v44 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v45:check
-      - name: recipe:input-field:live:v46:check (omit message helper/error textCase; hashed v45 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v46:check
-      - name: recipe:input-field:live:v47:check (omit message helper/error textDecoration; hashed v46 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v47:check
-      - name: recipe:input-field:live:v48:check (omit message-container clipsContent; hashed v47 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v48:check
-      - name: recipe:input-field:live:v49:check (omit message-container cornerRadius; hashed v48 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v49:check
-      - name: recipe:input-field:live:v50:check (omit message-container effects; hashed v49 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v50:check
-      - name: recipe:input-field:live:v51:check (omit message-container strokes; hashed v50 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v51:check
-      - name: recipe:input-field:live:v52:check (omit variant cornerRadius; hashed v51 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v52:check
-      - name: recipe:input-field:live:v53:check (omit variant effects; hashed v52 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v53:check
-      - name: recipe:input-field:live:v54:check (omit variant strokes; hashed v53 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v54:check
-      - name: recipe:input-field:live:v55:check (order leading-slot bindings; hashed v54 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v55:check
-      - name: recipe:input-field:live:v56:check (order trailing-slot bindings; hashed v55 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v56:check
-      - name: recipe:input-field:live:v57:check (drop required-indicator extras and order remaining bindings; hashed v56 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v57:check
-      - name: recipe:input-field:live:v58:check (omit required-indicator letterSpacing; hashed v57 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v58:check
-      - name: recipe:input-field:live:v59:check (omit required-indicator textCase; hashed v58 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v59:check
-      - name: recipe:input-field:live:v60:check (omit required-indicator textDecoration; hashed v59 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v60:check
-      - name: recipe:input-field:live:v61:check (omit set cornerRadius; hashed v60 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v61:check
-      - name: recipe:input-field:live:v62:check (omit set effects; hashed v61 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v62:check
-      - name: recipe:input-field:live:v63:check (omit set fills; hashed v62 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v63:check
-      - name: recipe:input-field:live:v64:check (carry set layout.mode horizontal; hashed v63 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v64:check
-      - name: recipe:input-field:live:v65:check (carry set layout.padding 32; hashed v64 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v65:check
-      - name: recipe:input-field:live:v66:check (unfrozen v17 writer set layoutSizingHorizontal HUG; hashed v65 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v66:check
-      - name: recipe:input-field:live:v67:check (omit set strokes; hashed v66 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v67:check
-      - name: recipe:input-field:live:v68:check (order label-row bindings; hashed v67 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v68:check
-      - name: recipe:input-field:live:v69:check (order Polar surface bindings; hashed v68 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v69:check
-      - name: recipe:input-field:live:v70:check (canonicalize font-provenance name key order; hashed v69 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v70:check
-      - name: recipe:input-field:live:v71:check (canonicalize instancePayload fill kind vs type; hashed v70 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v71:check
-      - name: recipe:input-field:live:v72:check (canonicalize Size axis order; hashed v71 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v72:check
-      - name: recipe:input-field:live:v73:check (carry unnamed source px; hashed v72 scene-readback frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v73:check
-      - name: recipe:input-field:live:v74:check (probe first-segment role; hashed v73 scene-readback and v17 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v74:check
-      - name: recipe:input-field:live:v75:check (probe Polar reflow/contentFill vs content text; hashed v74 scene-readback and v17 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v75:check
-      - name: recipe:input-field:live:v76:check (writer first-segment Label bind; hashed v75 scene-readback and v17 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v76:check
-      - name: recipe:input-field:live:v77:check (probe reveal-then-measure hidden content FILL; hashed v76 scene-readback and v18 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v77:check
-      - name: recipe:input-field:live:v78:check (probe exclude overlay-label AABB; hashed v77 scene-readback and v18 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v78:check
-      - name: recipe:input-field:live:v79:check (writer hidden FILL occupancy; hashed v78 scene-readback and v18 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v79:check
-      - name: recipe:input-field:live:v80:check (host omit content opacity; hashed v79 scene-readback and v19 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v80:check
-      - name: recipe:input-field:live:v81:check (compile-carry live visible; hashed v80 scene-readback and v19 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v81:check
-      - name: recipe:input-field:live:v82:check (compile-carry live occupancy opacity 0; hashed v81 scene-readback and v19 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v82:check
-      - name: recipe:input-field:live:v83:check (collapse omit invented default-1 content TEXT opacity; hashed v82 scene-readback and v19 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v83:check
-      - name: recipe:input-field:live:v84:check (probe exclude opacity-0 occupancy overlap; hashed v83 scene-readback and v19 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v84:check
       - name: recipe:input-field:live:v85:check (cleanup-on-failure-only; hashed v84 scene-readback and v19 writer frozen)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:live:v85:check
@@ -591,18 +407,6 @@ jobs:
       - name: recipe:input-field:objective:v2:check (same locked comparator, corrected v3 bytes, all progression criteria)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:input-field:objective:v2:check
-      - name: recipe:input-field:live:v1:check (failed Scratch proof is cleaned, complete, false, and tamper-evident)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v1:check
-      - name: recipe:input-field:live:v1:self-test (writer structure, API, target, count, cleanup, and success lies go red)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v1:self-test
-      - name: recipe:input-field:live:v2:check (reflow and bounds pass; failed raster proof is cleaned and false)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v2:check
-      - name: recipe:input-field:live:v2:self-test (overlay, reflow, font, restore, target, and cleanup plants go red)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
-        run: npm run recipe:input-field:live:v2:self-test
       - name: recipe:raster-calibration:check (independent held-out browser-Figma calibration evidence remains exact)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:raster-calibration:check
