@@ -1,0 +1,72 @@
+{
+  "_marker": "RECIPE FIDELITY MANIFEST — every subject scored by npm run recipe:fidelity:check",
+  "_note": "The check is OFFLINE: it scores committed canvas shots against committed real-package references, so it runs in CI with no Figma access. `npm run recipe:fidelity:capture` re-exports the shots from the live canvas (read-only exportAsync) and is the only step that needs the plugin. A shot and its reference are both committed bytes, so a score is reproducible from the repo alone.",
+  "_referenceRule": "The reference MUST be orig-shots/ — the real package rendered in Chromium by extract/computed. Never a gate-shot (the pipeline's own re-render) and never another mint. Comparing a mint to a mint measures nothing, and the scorer refuses a gate-shot path outright.",
+  "_astryxMountNote": "Astryx subjects reference extract/computed/out/astryx-core/, the un-themed @astryxdesign/core mount, because that is the surface recipe/fixtures/library-*.ts transcribes. The themed astryx/ capture mounts <Theme theme={neutralTheme}>, which is a different real surface — scoring against it would fail on the theme rather than on the mint.",
+  "bar": { "pctAAMaskedMax": 5 },
+  "subjects": [
+    {
+      "label": "checkbox/astryx",
+      "page": "199:78556",
+      "set": "checkbox/set :: Astryx CheckboxInput",
+      "variant": "Checked=unchecked, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-astryx-glyph-v4.png",
+      "reference": "extract/computed/out/astryx-core/checkboxinput/orig-shots/unchecked.md.no-isDisabled__default.png",
+      "referenceControlOnly": true
+    },
+    {
+      "label": "checkbox/mui",
+      "page": "199:78556",
+      "set": "checkbox/set :: MUI Checkbox",
+      "variant": "Checked=unchecked, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-mui-glyph-v4.png",
+      "reference": "extract/computed/out/mui/checkbox/orig-shots/unchecked.enabled__default.png",
+      "referenceControlOnly": true
+    },
+    {
+      "label": "checkbox/antd",
+      "page": "199:78556",
+      "set": "checkbox/set :: Ant Design Checkbox",
+      "variant": "Checked=unchecked, Disabled=false",
+      "child": "checkbox/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/checkbox-antd-glyph-v4.png",
+      "reference": "extract/computed/out/antd/checkbox/orig-shots/unchecked.enabled__default.png",
+      "referenceControlOnly": true
+    },
+    {
+      "label": "switch/astryx",
+      "page": "199:78941",
+      "set": "switch/set :: Astryx Switch",
+      "variant": "Checked=false, Disabled=false",
+      "child": "switch/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-astryx-hit.png",
+      "reference": "extract/computed/out/astryx-core/switch/orig-shots/end.no-isDisabled__default.png",
+      "referenceControlOnly": true
+    },
+    {
+      "label": "switch/mui",
+      "page": "199:78941",
+      "set": "switch/set :: MUI Switch",
+      "variant": "Checked=false, Disabled=false",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-variant-v3.png",
+      "canvasBox": [0, 0, 58, 38],
+      "reference": "extract/computed/out/mui/switch/orig-shots/default.medium.unchecked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_canvasBoxWhy": "MUI's unchecked switch is a thumb at the left of a wider track, with whitespace between them. The leading-control crop rule splits that and measures the thumb alone, so the control's bounds are taken from the scene instead."
+    },
+    {
+      "label": "switch/antd",
+      "page": "199:78941",
+      "set": "switch/set :: Ant Design Switch",
+      "variant": "Checked=false, Disabled=false",
+      "child": "switch/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-antd-hit.png",
+      "reference": "extract/computed/out/antd/switch/orig-shots/default.unchecked.enabled__default.png",
+      "referenceControlOnly": true,
+      "expectFringe": true,
+      "_expectFringeWhy": "Chromium renders two rows of AA fringe at 241-248 that Figma does not; at the scorer's 250 cutoff the reference trims 44x24 against an identical 44x22 canvas. The threshold sweep confirms both are 44x22 at 240 or stricter. Scored as a known instrument artifact, not a design difference — and if the sweep ever stops converging, this subject fails."
+    }
+  ]
+}

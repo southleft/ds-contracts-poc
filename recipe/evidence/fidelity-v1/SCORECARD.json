@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-run-v1",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "subjects": 6,
+  "passed": 5,
+  "failed": 0,
+  "fringeExcused": 1,
+  "rows": [
+    {
+      "label": "checkbox/astryx",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "22x22",
+      "realPx": "22x22",
+      "convergesAt": 250
+    },
+    {
+      "label": "checkbox/mui",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "18x18",
+      "realPx": "18x18",
+      "convergesAt": 250
+    },
+    {
+      "label": "checkbox/antd",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "16x16",
+      "realPx": "16x16",
+      "convergesAt": 250
+    },
+    {
+      "label": "switch/astryx",
+      "status": "pass",
+      "pctAAMasked": 0,
+      "canvasPx": "40x24",
+      "realPx": "40x24",
+      "convergesAt": 250
+    },
+    {
+      "label": "switch/mui",
+      "status": "pass",
+      "pctAAMasked": 4.57,
+      "canvasPx": "35x19",
+      "realPx": "38x19",
+      "convergesAt": null
+    },
+    {
+      "label": "switch/antd",
+      "status": "fringe",
+      "pctAAMasked": 6.82,
+      "canvasPx": "44x22",
+      "realPx": "44x24",
+      "convergesAt": 240
+    }
+  ]
+}

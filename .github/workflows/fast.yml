@@ -286,6 +286,14 @@ jobs:
       - name: recipe:fixture-drift:check (Checkbox + Textarea fixture tables equal the npm capture ledger or carry named receipts)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:fixture-drift:check
+      # Does the MINT look like the library? Every other gate measures accounting
+      # or usability; this one rasterises. Offline: it scores committed canvas
+      # shots against committed real-package renders, so it needs no Figma
+      # access and no token. Re-exporting the shots is a separate, read-only,
+      # local step (npm run recipe:fidelity:capture).
+      - name: recipe:fidelity:check (minted components scored against the real package's own Chromium render)
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        run: npm run recipe:fidelity:check
       - name: recipe:combobox:live:v42:check (the CURRENT combobox lineage — library-named overlay chrome remint; generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:combobox:live:v42:check
