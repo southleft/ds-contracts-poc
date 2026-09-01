@@ -305,13 +305,23 @@ jobs:
       # is why fast produced no verdict in 300 consecutive runs. Running the test
       # files directly covers the same 705 files in ~75 seconds.
       #
-      # 29 files are NOT in this lane and are not silently dropped:
-      # recipe/calendar-live-v19..v47-extract.test.ts all fail at HEAD on
+      # 30 files are NOT in this lane and are not silently dropped.
+      #
+      # 29: recipe/calendar-live-v19..v47-extract.test.ts all fail at HEAD on
       # "host omits strokes on day default/selected/outside and keeps today —
       # the Calendar live v18 class" with "scene solid paint has no color".
       # Pre-existing, and invisible until now because the lane never reached
       # them. Named in parity/receipts/v1/HONEST-SCORECARD.md.
-      - name: recipe:live:history:test (705 per-version live test files, ~75s)
+      #
+      # 1: recipe/input-field-live-v6-authorization.test.ts can only pass in a
+      # DIRTY tree. Its last assertion calls verifyInputLiveV6Authorization()
+      # with no arguments, so it reads the live repository and requires the v6
+      # authorization artifact to be uncommitted. Commit and push, and it fails
+      # with "Missing expected exception". Its first two assertions already prove
+      # the same refusal from constructed state; only the third is coupled to the
+      # working tree. Excluded rather than edited, because per-version files are
+      # byte-frozen receipts.
+      - name: recipe:live:history:test (705 per-version live test files, 5,080 assertions, ~70s)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:live:history:test
       - name: recipe:checkbox:check (checkbox@1 offline proof, writer plan and fixed point)
