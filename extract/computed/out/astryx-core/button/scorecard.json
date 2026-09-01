@@ -1,0 +1,4795 @@
+{
+  "component": "Button",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 24,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 13728,
+    "cellsEqual": 13128,
+    "pctEqual": 95.62937062937063,
+    "rowsFullyEqual": 0,
+    "rows": 96
+  },
+  "pixel": {
+    "pairs": 96,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 96,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 2.0735337999131933,
+    "meanAA": 1.4631144205729159,
+    "maxAA": 1.7350260416666667
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 52,
+    "mintedLeavesUnfolded": 208,
+    "baseBindings": 57,
+    "stateBindings": 6,
+    "codeOnlyChannels": 9,
+    "overflowBindings": 0,
+    "folds": 39
+  },
+  "worstRows": [
+    {
+      "key": "destructive.lg.no-isDisabled__active",
+      "pctAA": 1.7350260416666667,
+      "pctExact": 2.5162760416666665,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "destructive.md.no-isDisabled__active",
+      "pctAA": 1.728515625,
+      "pctExact": 2.490234375,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "destructive.sm.no-isDisabled__active",
+      "pctAA": 1.728515625,
+      "pctExact": 2.4641927083333335,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "primary.sm.no-isDisabled__active",
+      "pctAA": 1.71875,
+      "pctExact": 2.4641927083333335,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "primary.lg.no-isDisabled__active",
+      "pctAA": 1.7154947916666667,
+      "pctExact": 3.427734375,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "ghost.md.no-isDisabled__active",
+      "pctAA": 1.7154947916666667,
+      "pctExact": 3.3040364583333335,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "ghost.sm.no-isDisabled__active",
+      "pctAA": 1.7154947916666667,
+      "pctExact": 2.6822916666666665,
+      "channelsMismatched": 7
+    },
+    {
+      "key": "primary.md.no-isDisabled__active",
+      "pctAA": 1.7122395833333333,
+      "pctExact": 2.490234375,
+      "channelsMismatched": 7
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.appearance",
+      96
+    ],
+    [
+      "root.text-size-adjust",
+      96
+    ],
+    [
+      "part-0.text-size-adjust",
+      96
+    ],
+    [
+      "label.text-size-adjust",
+      96
+    ],
+    [
+      "part-1.clip",
+      96
+    ],
+    [
+      "part-1.text-size-adjust",
+      96
+    ],
+    [
+      "root.transform",
+      24
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.appearance — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-0.width — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only[active]: root.transform — value shape outside mintable kinds and outside the declared vocabulary"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+    "leavesAdded": 514,
+    "divergent": [
+      {
+        "token": "imported.button.label.color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "#a50c25",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.label.color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.label.color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.label.color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.part-0.color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "#a50c25",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.part-0.color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.part-0.color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-0.color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.part-1.color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "#a50c25",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.part-1.color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.part-1.color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.part-1.color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.part-1.right",
+        "fresh": "63.125px",
+        "shipped": "68.0781px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.background-color.destructive",
+        "fresh": "#e3193b",
+        "shipped": "#facecb",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.background-color.primary",
+        "fresh": "#0064e0",
+        "shipped": "#262626",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.background-color.secondary",
+        "fresh": "#0536591a",
+        "shipped": "#0000000f",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.background-image-state-active",
+        "fresh": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+        "shipped": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.background-image-state-hover",
+        "fresh": "linear-gradient(rgba(5, 54, 89, 0.047), rgba(5, 54, 89, 0.047))",
+        "shipped": "linear-gradient(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05))",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "#a50c25",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.outline-color-state-focus-visible.destructive",
+        "fresh": "#e3193b",
+        "shipped": "#a50c25",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.outline-color-state-focus-visible.ghost",
+        "fresh": "#0064e0",
+        "shipped": "#262626",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.outline-color-state-focus-visible.primary",
+        "fresh": "#0064e0",
+        "shipped": "#262626",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.outline-color-state-focus-visible.secondary",
+        "fresh": "#0064e0",
+        "shipped": "#262626",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.outline-color.destructive",
+        "fresh": "#ffffff",
+        "shipped": "#a50c25",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.outline-color.ghost",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.outline-color.primary",
+        "fresh": "#ffffff",
+        "shipped": "{color-on-accent}",
+        "resolvedEqual": true
+      },
+      {
+        "token": "imported.button.root.outline-color.secondary",
+        "fresh": "#0a1317",
+        "shipped": "#171717",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.button.root.width",
+        "fresh": "62.125px",
+        "shipped": "67.0781px",
+        "resolvedEqual": false
+      }
+    ]
+  },
+  "rows": [
+    {
+      "key": "primary.sm.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.sm.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.6471354166666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.sm.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.9368489583333333,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.sm.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.4641927083333335,
+      "pctAA": 1.71875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.sm.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.sm.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.sm.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.sm.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.4641927083333335,
+      "pctAA": 1.3932291666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.6373697916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.490234375,
+      "pctAA": 1.7122395833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.md.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.490234375,
+      "pctAA": 1.3932291666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 2.8548177083333335,
+      "pctAA": 1.640625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 3.427734375,
+      "pctAA": 1.7154947916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3606770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "primary.lg.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.5162760416666665,
+      "pctAA": 1.3932291666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.4225260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 2.4251302083333335,
+      "pctAA": 1.6536458333333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.4225260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.96875,
+      "pctAA": 1.7024739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.sm.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.4609375,
+      "pctAA": 1.4029947916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.4225260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.650390625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.4225260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.490234375,
+      "pctAA": 1.7024739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.md.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.4869791666666665,
+      "pctAA": 1.4029947916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.4225260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 2.021484375,
+      "pctAA": 1.6373697916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.4225260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.6302083333333335,
+      "pctAA": 1.69921875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3671875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "secondary.lg.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.5130208333333335,
+      "pctAA": 1.4029947916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.42578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 2.6009114583333335,
+      "pctAA": 1.6731770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.42578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.6822916666666665,
+      "pctAA": 1.7154947916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.sm.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 1.875,
+      "pctAA": 1.4095052083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.42578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 2.7669270833333335,
+      "pctAA": 1.6731770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.42578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 3.3040364583333335,
+      "pctAA": 1.7154947916666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.md.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 1.875,
+      "pctAA": 1.4095052083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.42578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 2.958984375,
+      "pctAA": 1.6731770833333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.42578125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.5162760416666665,
+      "pctAA": 1.708984375,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.3899739583333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "ghost.lg.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 1.875,
+      "pctAA": 1.4095052083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.6471354166666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.4641927083333335,
+      "pctAA": 1.728515625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.sm.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.4544270833333335,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.6471354166666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.490234375,
+      "pctAA": 1.728515625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.md.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.48046875,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.no-isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.no-isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.865234375,
+      "pctAA": 1.6471354166666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.no-isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8815104166666667,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.no-isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.5162760416666665,
+      "pctAA": 1.7350260416666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.isDisabled__default",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.isDisabled__hover",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.isDisabled__focus-visible",
+      "channelsCompared": 143,
+      "channelsEqual": 137,
+      "pctExact": 1.8424479166666667,
+      "pctAA": 1.3541666666666667,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "destructive.lg.isDisabled__active",
+      "channelsCompared": 143,
+      "channelsEqual": 136,
+      "pctExact": 2.5065104166666665,
+      "pctAA": 1.40625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "appearance",
+          "ours": "auto",
+          "theirs": "button"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "transform",
+          "ours": "matrix(1, 0, 0, 1, 0, 0)",
+          "theirs": "matrix(0.98, 0, 0, 0.98, 0, 0)"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    }
+  ]
+}

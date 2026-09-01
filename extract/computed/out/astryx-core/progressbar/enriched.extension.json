@@ -1,0 +1,509 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "progress-bar": {
+        "root": {
+          "column-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "min-width": {
+            "$value": "48px",
+            "$type": "dimension"
+          },
+          "row-gap": {
+            "$value": "4px",
+            "$type": "dimension"
+          },
+          "width": {
+            "$value": "240px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "color": {
+            "$value": "#0a1317",
+            "$type": "color"
+          },
+          "font-size": {
+            "$value": "14px",
+            "$type": "dimension"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "20.0004px",
+            "$type": "dimension"
+          }
+        },
+        "progressbar-track": {
+          "background-color": {
+            "$value": "#0536590c",
+            "$type": "color"
+          }
+        },
+        "progressbar-fill": {
+          "background-color": {
+            "accent": {
+              "$value": "#0064e0",
+              "$type": "color"
+            },
+            "success": {
+              "$value": "#0d8626",
+              "$type": "color"
+            },
+            "warning": {
+              "$value": "#e9af08",
+              "$type": "color"
+            },
+            "neutral": {
+              "$value": "#a4b0bc",
+              "$type": "color"
+            },
+            "error": {
+              "$value": "#e3193b",
+              "$type": "color"
+            }
+          }
+        }
+      },
+      "shared": {
+        "size-24": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "num-4": {
+          "$value": "4",
+          "$type": "number"
+        },
+        "size-9999": {
+          "$value": "9999px",
+          "$type": "dimension"
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "part-0",
+        "field": "align",
+        "value": "baseline"
+      },
+      {
+        "part": "part-0",
+        "field": "justify",
+        "value": "space-between"
+      }
+    ],
+    "contradictions": [],
+    "receipts": [],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Times"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "transition-duration",
+        "value": "0.41s"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "transition-property",
+        "value": "width"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-0",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "progressbar-track",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "progressbar-fill",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [],
+  "overflowBindings": [],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [],
+  "interactionOnlyPlaneDropCount": 0,
+  "structureReceipts": [],
+  "styledChannelReceipts": [
+    "stage-fill-root-admitted: root — display:flex root measures exactly the stage content box (240px) in every enabled combo: it fills its container like a block root (antd Input `width: 100%`), so the captured stage width joins fusion under the block-root receipt below",
+    "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
+    "control-equal-drop: root — 564 of 579 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 378 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0 — 567 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0 — 381 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 557 of 578 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 7 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label — font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label — 370 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: progressbar-track — 563 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: progressbar-track — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: progressbar-track — 377 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: progressbar-fill — 560 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: progressbar-fill — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: progressbar-fill — 374 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: label — block-size 20px, height 20px, inline-size 59.1094px, perspective-origin 29.5469px 10px, transform-origin 29.5547px 10px, width 59.1094px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-0 — block-size 20px, height 20px, inline-size 240px, perspective-origin 120px 10px, transform-origin 120px 10px, width 240px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: progressbar-fill — block-size 8px, height 8px, inline-size 96px, perspective-origin 48px 4px, transform-origin 48px 4px, width 96px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: progressbar-track — block-size 8px, height 8px, inline-size 240px, perspective-origin 120px 4px, transform-origin 120px 4px, width 240px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 32px, height 32px, inline-size 240px, perspective-origin 120px 16px, transform-origin 120px 16px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 4 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-font-smoothing (label, part-0, progressbar-fill, progressbar-track, root); -webkit-tap-highlight-color (label, part-0, progressbar-fill, progressbar-track, root); -webkit-text-fill-color (label); -webkit-text-stroke-color (label)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"part-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: part-0.line-height equals ancestor \"root\" on all 20 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: progressbar-fill.line-height equals ancestor \"progressbar-track\" on all 20 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: progressbar-track.line-height equals ancestor \"root\" on all 20 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "part-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "progressbar-track",
+        "join": "computed-only"
+      },
+      {
+        "part": "progressbar-fill",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "part-0",
+      "label",
+      "progressbar-track",
+      "progressbar-fill"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-0.layout.align = baseline (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-0.layout.justify = space-between (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = Times (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: progressbar-track.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-track.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-track.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-track.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-track.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: progressbar-track.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: progressbar-track.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: progressbar-fill.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-fill.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-fill.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-fill.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-fill.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: progressbar-fill.transition-duration = 0.41s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-fill.transition-property = width (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: progressbar-fill.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"
+  ]
+}

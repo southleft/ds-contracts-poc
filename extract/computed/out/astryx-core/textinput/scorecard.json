@@ -1,0 +1,2911 @@
+{
+  "component": "TextInput",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 9,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 4176,
+    "cellsEqual": 3780,
+    "pctEqual": 90.51724137931035,
+    "rowsFullyEqual": 0,
+    "rows": 36
+  },
+  "pixel": {
+    "pairs": 36,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 36,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 15.392326586174246,
+    "meanAA": 11.377138080018941,
+    "maxAA": 12.941672585227273
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 23,
+    "mintedLeavesUnfolded": 22,
+    "baseBindings": 49,
+    "stateBindings": 7,
+    "codeOnlyChannels": 10,
+    "overflowBindings": 7,
+    "folds": 20
+  },
+  "worstRows": [
+    {
+      "key": "text.md__focus-visible",
+      "pctAA": 12.941672585227273,
+      "pctExact": 15.946821732954545,
+      "channelsMismatched": 14
+    },
+    {
+      "key": "password.md__focus-visible",
+      "pctAA": 12.941672585227273,
+      "pctExact": 15.946821732954545,
+      "channelsMismatched": 14
+    },
+    {
+      "key": "email.md__focus-visible",
+      "pctAA": 12.941672585227273,
+      "pctExact": 15.946821732954545,
+      "channelsMismatched": 14
+    },
+    {
+      "key": "text.sm__focus-visible",
+      "pctAA": 12.939453125,
+      "pctExact": 15.915749289772727,
+      "channelsMismatched": 14
+    },
+    {
+      "key": "password.sm__focus-visible",
+      "pctAA": 12.939453125,
+      "pctExact": 15.915749289772727,
+      "channelsMismatched": 14
+    },
+    {
+      "key": "email.sm__focus-visible",
+      "pctAA": 12.939453125,
+      "pctExact": 15.915749289772727,
+      "channelsMismatched": 14
+    },
+    {
+      "key": "text.lg__focus-visible",
+      "pctAA": 12.932794744318182,
+      "pctExact": 15.924627130681818,
+      "channelsMismatched": 14
+    },
+    {
+      "key": "password.lg__focus-visible",
+      "pctAA": 12.932794744318182,
+      "pctExact": 15.924627130681818,
+      "channelsMismatched": 14
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.text-size-adjust",
+      36
+    ],
+    [
+      "label.align-items",
+      36
+    ],
+    [
+      "label.display",
+      36
+    ],
+    [
+      "label.text-size-adjust",
+      36
+    ],
+    [
+      "part-1.text-size-adjust",
+      36
+    ],
+    [
+      "text-input.anchor-name",
+      36
+    ],
+    [
+      "text-input.text-size-adjust",
+      36
+    ],
+    [
+      "part-1-0-0.flex-basis",
+      36
+    ],
+    [
+      "part-1-0-0.placeholder-color",
+      36
+    ],
+    [
+      "part-1-0-0.text-size-adjust",
+      36
+    ],
+    [
+      "text-input.border-bottom-color",
+      9
+    ],
+    [
+      "text-input.border-left-color",
+      9
+    ],
+    [
+      "text-input.border-right-color",
+      9
+    ],
+    [
+      "text-input.border-top-color",
+      9
+    ]
+  ],
+  "namedLosses": [
+    "overflow: text-input.box-shadow [active] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: text-input.border-bottom-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: text-input.border-left-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: text-input.border-right-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: text-input.border-top-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: text-input.box-shadow [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: text-input.box-shadow [hover] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-1.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: text-input.anchor-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: text-input.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: part-1-0-0.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-1-0-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only[active]: text-input.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[focus-visible]: text-input.anchor-name — value shape outside mintable kinds and outside the declared vocabulary",
+    "code-only[hover]: text-input.anchor-name — value shape outside mintable kinds and outside the declared vocabulary"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/astryx/tokens/astryx-minted.dtcg.json",
+    "leavesAdded": 547,
+    "divergent": [
+      {
+        "token": "imported.text-input.label.color",
+        "fresh": "#4e606f",
+        "shipped": "#737373",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-input.part-1-0-0.placeholder-color",
+        "fresh": "#4e606f",
+        "shipped": "#737373",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-input.text-input.box-shadow-state-active",
+        "fresh": "color(srgb 0.8 0.827451 0.858824 / 0.3) 0px 0px 0px 2px inset",
+        "shipped": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-input.text-input.box-shadow-state-focus-visible",
+        "fresh": "rgba(0, 130, 251, 0.2) 0px 0px 0px 2px inset",
+        "shipped": "rgba(241, 241, 241, 1) 0px 0px 0px 2px inset",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.text-input.text-input.box-shadow-state-hover",
+        "fresh": "color(srgb 0.8 0.827451 0.858824 / 0.3) 0px 0px 0px 2px inset",
+        "shipped": "color(srgb 0.831373 0.831373 0.831373 / 0.3) 0px 0px 0px 2px inset",
+        "resolvedEqual": false
+      }
+    ]
+  },
+  "rows": [
+    {
+      "key": "text.sm__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.785067471590908,
+      "pctAA": 10.857599431818182,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_1h_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.sm__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.906871448863637,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_1m_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.sm__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.915749289772727,
+      "pctAA": 12.939453125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_1r_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.sm__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.906871448863637,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_20_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.md__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.816139914772727,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_25_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.md__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.937943892045455,
+      "pctAA": 10.862038352272727,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_2a_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.md__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.946821732954545,
+      "pctAA": 12.941672585227273,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_2f_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.md__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.937943892045455,
+      "pctAA": 10.862038352272727,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_2k_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.lg__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.798384232954545,
+      "pctAA": 10.848721590909092,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_2p_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.lg__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.915749289772727,
+      "pctAA": 10.850941051136363,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_2u_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.lg__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.924627130681818,
+      "pctAA": 12.932794744318182,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_33_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "text.lg__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.915749289772727,
+      "pctAA": 10.850941051136363,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_38_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.sm__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.785067471590908,
+      "pctAA": 10.857599431818182,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_3d_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.sm__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.906871448863637,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_3i_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.sm__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.915749289772727,
+      "pctAA": 12.939453125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_3n_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.sm__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.906871448863637,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_3s_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.md__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.816139914772727,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_41_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.md__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.937943892045455,
+      "pctAA": 10.862038352272727,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_46_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.md__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.946821732954545,
+      "pctAA": 12.941672585227273,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4b_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.md__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.937943892045455,
+      "pctAA": 10.862038352272727,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4g_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.lg__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.798384232954545,
+      "pctAA": 10.848721590909092,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4l_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.lg__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.915749289772727,
+      "pctAA": 10.850941051136363,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4q_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.lg__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.924627130681818,
+      "pctAA": 12.932794744318182,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_4v_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "password.lg__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.915749289772727,
+      "pctAA": 10.850941051136363,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_54_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.sm__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.785067471590908,
+      "pctAA": 10.857599431818182,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_59_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.sm__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.906871448863637,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_5e_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.sm__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.915749289772727,
+      "pctAA": 12.939453125,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_5j_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.sm__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.906871448863637,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_5o_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.md__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.816139914772727,
+      "pctAA": 10.859818892045455,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_5t_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.md__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.937943892045455,
+      "pctAA": 10.862038352272727,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_62_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.md__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.946821732954545,
+      "pctAA": 12.941672585227273,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_67_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.md__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.937943892045455,
+      "pctAA": 10.862038352272727,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_6c_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.lg__default",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 13.798384232954545,
+      "pctAA": 10.848721590909092,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_6h_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.lg__hover",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.915749289772727,
+      "pctAA": 10.850941051136363,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_6m_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.lg__focus-visible",
+      "channelsCompared": 116,
+      "channelsEqual": 102,
+      "pctExact": 15.924627130681818,
+      "pctAA": 12.932794744318182,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_6r_"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-bottom-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-left-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-right-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "border-top-color",
+          "ours": "rgba(204, 211, 219, 1)",
+          "theirs": "rgba(0, 100, 224, 1)"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    },
+    {
+      "key": "email.lg__active",
+      "channelsCompared": 116,
+      "channelsEqual": 106,
+      "pctExact": 15.915749289772727,
+      "pctAA": 10.850941051136363,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "align-items",
+          "ours": "normal",
+          "theirs": "center"
+        },
+        {
+          "part": "label",
+          "channel": "display",
+          "ours": "block",
+          "theirs": "flex"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "text-input",
+          "channel": "anchor-name",
+          "ours": "none",
+          "theirs": "--astryx-layer-_r_70_"
+        },
+        {
+          "part": "text-input",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "placeholder-color",
+          "ours": "rgba(10, 19, 23, 1)",
+          "theirs": "rgba(78, 96, 111, 1)"
+        },
+        {
+          "part": "part-1-0-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ]
+    }
+  ]
+}

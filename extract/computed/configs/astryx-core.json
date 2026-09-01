@@ -1,0 +1,328 @@
+{
+  "library": {
+    "package": "@astryxdesign/core",
+    "version": "0.1.6",
+    "framework": "react",
+    "classPrefix": "astryx-",
+    "classAllow": "^astryx-"
+  },
+  "mount": {
+    "__note": "CORE-ONLY MOUNT. astryx.json wraps stages in <Theme theme={neutralTheme}> because that is the library's README quick start. That is a legitimate mount, but it is NOT the surface recipe/fixtures/library-*.ts transcribe: those carry @astryxdesign/core dist/astryx.css :root defaults (#0064E0 accent, -apple-system body stack, --radius-inner 4px, --radius-element 8px), which theme-neutral overrides to #262626 / Figtree / 6px / 10px. Capturing only the themed mount left every Astryx subject 0% mechanically verified and forced 56 of the reader's 57 drifts into one blanket excuse. This config captures the un-themed core surface so the fixtures can be checked against the thing they actually describe. Keep BOTH: they are two real mounts of the same library, not a right one and a wrong one.",
+    "imports": [
+      "import '@astryxdesign/core/reset.css';",
+      "import '@astryxdesign/core/astryx.css';"
+    ],
+    "wrapperOpen": "<div data-astryx-core-only=\"true\">",
+    "wrapperClose": "</div>"
+  },
+  "fonts": {
+    "__note": "FC-FONT-SUBSTRATE closure. NOT A GUESS: @astryxdesign/theme-neutral declares 'Figtree, -apple-system, BlinkMacSystemFont, ...' as --font-family-body/--font-family-heading (dist/theme.css:149-150, dist/neutral.js:83-84) \u2014 the library's OWN first-choice face; weights 400/500/600/700 are the library's full --font-weight-normal/medium/semibold/bold token set (core dist/astryx.css). Files committed under extract/computed/fonts/figtree/ from @fontsource/figtree@5.3.0 (exact-pinned in examples/astryx/.astryx-sandbox/package.json). Inlined as data: URIs \u2014 no network at render or check time. NOTE: the face only renders because the mount fix above makes --font-family-body resolve to Figtree at capture \u2014 loading a face for a token that never resolves was the trap this round refused.",
+    "faces": [
+      {
+        "family": "Figtree",
+        "weight": 400,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-400-normal.woff2"
+      },
+      {
+        "family": "Figtree",
+        "weight": 500,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-500-normal.woff2"
+      },
+      {
+        "family": "Figtree",
+        "weight": 600,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-600-normal.woff2"
+      },
+      {
+        "family": "Figtree",
+        "weight": 700,
+        "style": "normal",
+        "file": "extract/computed/fonts/figtree/figtree-latin-700-normal.woff2"
+      }
+    ]
+  },
+  "tokens": {
+    "dtcg": [
+      "examples/astryx/tokens/astryx.dtcg.json"
+    ],
+    "css": "examples/astryx/tokens/astryx.vars.css",
+    "minted": "examples/astryx/tokens/astryx-minted.dtcg.json"
+  },
+  "browser": {
+    "viewport": {
+      "width": 900,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1,
+    "colorScheme": "light"
+  },
+  "stage": {
+    "width": 320,
+    "height": 96,
+    "padding": 16
+  },
+  "enumeration": {
+    "cartesianLimit": 512,
+    "unsetLabel": "__unset"
+  },
+  "components": [
+    {
+      "name": "Button",
+      "importName": "Button",
+      "contract": "examples/astryx/contracts-seed/button.contract.json",
+      "sampleText": "Button",
+      "axes": [
+        "variant",
+        "size"
+      ],
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Button"
+      },
+      "__note:sampleText": "SAMPLE TEXT = THE CONTRACT'S OWN DEFAULT. It was \"Save changes\", which the seed contract never declares \u2014 the seed's `label` default is \"Button\" (examples/astryx/contracts-seed/button.contract.json), and \"Button\" is therefore the string the emitted Figma set paints into every cell. So the developed reference read \"Save chan\u2026\" (truncated at the lg cell width) while the canvas read \"Button\": every canvas-vs-developed pixel comparison for this stem was measuring an arbitrary harness string against the contract default, on top of whatever real defect existed. Any other astryx component's sampleText already equals its contract text default (Badge \"New\", Card \"Card content\", Slider \"Volume\", Switch \"Enable notifications\") \u2014 Button was the one that did not."
+    },
+    {
+      "name": "Badge",
+      "importName": "Badge",
+      "contract": "examples/astryx/contracts-seed/badge.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "fixedProps": {
+        "label": "New"
+      },
+      "__note:labelIsAProp": "THE SAMPLE TEXT NEVER REACHED THE COMPONENT. `sampleText` mounts as CHILDREN, and `@astryxdesign/core@0.1.6` Badge takes a REQUIRED `label: ReactNode` prop and renders NOTHING from children (dist/Badge/Badge.d.ts:61 + its own @example `<Badge label=\"Active\" />`). So every committed Badge capture was of an EMPTY badge: the real-library render at Variant=Blue is a 16x20 label-less pill, against a 42x20 canvas cell reading \"New\" \u2014 a 2.63x content-box ratio that read as FC-REF-FRAMING and was really a mount defect. React tolerated the ignored child silently, and nothing downstream could tell an empty badge from a full one because BOTH sides of the fidelity gate mounted the same way. `label` now mounts as a fixed prop with the string the canvas paints; the contract keeps `children` as the materialized text slot bound to the Figma TEXT property (Astryx types the label as a ReactNode, which extraction drops as a `node` prop \u2014 see DEV-JOURNEY.md), so the contract vocabulary is unchanged."
+    },
+    {
+      "name": "Card",
+      "importName": "Card",
+      "contract": "examples/astryx/contracts-seed/card.contract.json",
+      "sampleText": "Card content",
+      "axes": [
+        "variant"
+      ]
+    },
+    {
+      "name": "Switch",
+      "importName": "Switch",
+      "contract": "examples/astryx/contracts-seed/switch.contract.json",
+      "sampleText": "Enable notifications",
+      "axes": [
+        "labelPosition"
+      ],
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Enable notifications"
+      },
+      "__note:valueAxis": "Wave B.3 FC-MISSING-AXIS \u2014 value IS a variant axis on the contract side (seed + committed switch.contract.json v0.2.0 carry it as a VARIANT-bound boolean; thumb geometry from Switch.tsx source constants, not harness-captured). It is NOT listed in `axes`: capture's propSpaceFor enumerates enum props only (booleans ride stateProps \u2014 \u00a71.4), the claimed 'prop adapter / sample casting in capture' was never built, and the committed captured truth (33a1ded2) carries no value dimension \u2014 so listing it made every offline re-fuse (ua-baseline:check) refuse while capturing nothing. Re-adding it requires a REAL recapture with the MUI Switch spelling: enum seed axis (off/on) + axisValueMap {off:false,on:true}."
+    },
+    {
+      "name": "Slider",
+      "importName": "Slider",
+      "contract": "examples/astryx/contracts-seed/slider.contract.json",
+      "sampleText": "Volume",
+      "axes": [
+        "orientation",
+        "valueDisplay"
+      ],
+      "fixedProps": {
+        "label": "Volume",
+        "value": 40
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 272,
+        "height": 128,
+        "padding": 16
+      },
+      "__note:stageWidth": "STAGE INNER WIDTH = 240px, the width the contract's own anatomy declares for the track (examples/astryx/contracts/slider.contract.json, `width: 240px`) and the width the emitted Figma set paints as a cell. Slider is a fill-width control; in the default flex stage it shrink-to-fit at 48px, and the resulting 240-vs-48 content-box ratio was carried as FC-ABS-SIZE (\"canvas track 240px vs developed ~49px\") \u2014 a HARNESS container fact receipted as a component defect. Same pin and same reasoning as ProgressBar and TextInput."
+    },
+    {
+      "name": "Banner",
+      "importName": "Banner",
+      "contract": "examples/astryx/contracts-seed/banner.contract.json",
+      "sampleText": "",
+      "axes": [
+        "status",
+        "container"
+      ],
+      "fixedProps": {
+        "title": "A new software update is available.",
+        "description": "See what changed in this version."
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 352,
+        "height": 176,
+        "padding": 16
+      },
+      "__note:readmitted": "RE-ADMITTED (was `_bannerReceipt`, EXCLUDED for a double-run determinism refusal: height/transform/radii unstable on an unsettled expand/collapse transition). The transition belongs to the collapse TOGGLE, which Banner renders only when it receives `children` (Banner.tsx header comment: \"When children are provided, a collapse/expand toggle button appears in the end area\"). This mount passes NO children (sampleText \"\"), so the toggle never exists and there is nothing to settle. If the double-run self-check refuses it again the exclusion stands and is re-recorded \u2014 the refusal is the instrument, not an obstacle."
+    },
+    {
+      "__note:readerRound": "PHASE-1 READER ROUND (docs/35 \u00a73) \u2014 REAL RECAPTURE with the MUI Switch spelling the Switch __note:valueAxis prescribed: the first capture PINNED value:false, so the committed truth carried no checked or indeterminate rendering at all and no disabled plane \u2014 the recipe's Checked\u00d7Disabled table had nothing to be read against. `checked` is one contract enum axis expanded by axisValueMap $props into the library's own `value: boolean | 'indeterminate'` (CheckboxInput.d.ts:63); isDisabled rides stateProps (the Astryx Switch precedent). size stays an axis (sm|md) so the earlier size coverage is not lost.",
+      "name": "CheckboxInput",
+      "importName": "CheckboxInput",
+      "contract": "examples/astryx/contracts-seed/checkbox-input.contract.json",
+      "sampleText": "",
+      "axes": [
+        "checked",
+        "size"
+      ],
+      "axisValueMap": {
+        "checked": {
+          "unchecked": {
+            "$props": {
+              "value": false
+            }
+          },
+          "checked": {
+            "$props": {
+              "value": true
+            }
+          },
+          "indeterminate": {
+            "$props": {
+              "value": "indeterminate"
+            }
+          }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Accept terms"
+      },
+      "callbackProps": [
+        "onChange"
+      ]
+    },
+    {
+      "__note": "PHASE-1 READER ROUND (docs/35 \u00a73) \u2014 the Textarea archetype's Astryx leg. TextArea.tsx (label REQUIRED via Field/FieldLabel; rows default 3; inputWrapperStyles.base paddingBlock --spacing-1 paddingInline --spacing-2, border --border-width, radius --radius-element). `value` is REQUIRED by TextAreaProps (dist/TextArea/TextArea.d.ts:67) \u2014 the `content` axis expands through $props into the controlled string (the TextInput precedent mounts the empty string so the placeholder renders). isDisabled rides stateProps. Label 'Notes' + placeholder 'Add a note' are the recipe's shared content. STAGE INNER WIDTH = 320px, the width the recipe's textarea table renders at (the TextInput/ProgressBar fill-width pin: a fill-width field in the default flex stage would be sized by the harness container, not the library).",
+      "name": "TextArea",
+      "importName": "TextArea",
+      "contract": "examples/astryx/contracts-seed/text-area.contract.json",
+      "sampleText": "",
+      "axes": [
+        "content"
+      ],
+      "axisValueMap": {
+        "content": {
+          "empty": {
+            "$props": {
+              "value": ""
+            }
+          },
+          "value": {
+            "$props": {
+              "value": "Meeting notes for Tuesday."
+            }
+          }
+        }
+      },
+      "stateProps": [
+        {
+          "prop": "isDisabled",
+          "state": "disabled"
+        }
+      ],
+      "fixedProps": {
+        "label": "Notes",
+        "placeholder": "Add a note"
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 352,
+        "height": 176,
+        "padding": 16
+      }
+    },
+    {
+      "name": "ProgressBar",
+      "importName": "ProgressBar",
+      "contract": "examples/astryx/contracts-seed/progress-bar.contract.json",
+      "sampleText": "",
+      "axes": [
+        "variant"
+      ],
+      "fixedProps": {
+        "label": "Uploading",
+        "value": 40,
+        "max": 100
+      },
+      "blockStage": true,
+      "stage": {
+        "width": 272,
+        "height": 96,
+        "padding": 16
+      },
+      "__note:stageWidth": "STAGE INNER WIDTH = 240px, the width the contract's own anatomy declares for the track (examples/astryx/contracts/progress-bar.contract.json root part `width: 240px`, the Wave B.3 showcase width the emitted Figma set paints as a 240px cell). ProgressBar is a block-level fill-width component: in the default flex stage it shrink-to-fits (the measured 68px content box behind FC-WIDTH-TOKEN), so the harness container width \u2014 not the component \u2014 would decide the reference's width. Pinning the inner width to the contract's declared width makes the comparison measure paint and structure instead of an arbitrary container. blockStage gives width:auto a block formatting context to fill (the MUI Card finding)."
+    },
+    {
+      "name": "TextInput",
+      "importName": "TextInput",
+      "contract": "examples/astryx/contracts-seed/text-input.contract.json",
+      "sampleText": "",
+      "axes": [
+        "type",
+        "size"
+      ],
+      "fixedProps": {
+        "label": "Email",
+        "placeholder": "you@example.com",
+        "value": ""
+      },
+      "callbackProps": [
+        "onChange"
+      ],
+      "blockStage": true,
+      "stage": {
+        "width": 352,
+        "height": 128,
+        "padding": 16
+      },
+      "__note:stageWidth": "STAGE INNER WIDTH = 320px, the width the contract's own anatomy declares (examples/astryx/contracts/text-input.contract.json root part `width: 320px`, the Wave B.3 showcase width the emitted Figma set paints as a 320px cell). Same reasoning as ProgressBar: a fill-width field would otherwise be sized by the harness container. `value` is REQUIRED by TextInputProps (dist/TextInput/TextInput.d.ts:120) and mounts as the empty controlled string so the placeholder \u2014 the thing the contract materializes \u2014 is what renders."
+    },
+    {
+      "name": "Token",
+      "importName": "Token",
+      "contract": "examples/astryx/contracts-seed/token.contract.json",
+      "sampleText": "",
+      "axes": [
+        "size",
+        "color"
+      ],
+      "fixedProps": {
+        "label": "Tag"
+      }
+    }
+  ],
+  "_bannerReceipt": "SUPERSEDED \u2014 Banner is re-admitted in `components` above (see its `__note:readmitted`). The original exclusion read: \"Banner EXCLUDED this round: double-run determinism self-check refuses it by name (height/transform/radii unstable \u2014 an unsettled expand/collapse transition). Re-admit with a settle strategy in the triage round.\"",
+  "_coverageNote": "COVERAGE = 10 of the 13 stems the astryx console-loop lane pins. Before this round the config carried FIVE components (Button, Badge, Card, Switch, Slider) and eight lane stems had NO correctly-themed 1x developed reference to score against at all \u2014 their committed references were emit-html first-item renders in the pre-Theme Times substrate, a POLARIS Banner (FC-REF-CROSS-LIBRARY), or a 1440x2200 documentation screenshot (FC-REF-WHOLE-PAGE). Banner, CheckboxInput, ProgressBar, TextInput and Token are added here. The three still absent are DropdownMenu, DropdownMenuItem and Toast: they are COMPOSITION-tier contracts (multi-root / repeated-row / slot-bearing), not single-component mounts, so a single-component capture config is the wrong instrument for them and they stay fail-closed by name rather than being handed a guessed reference.",
+  "__seedNote": "SEEDS ARE FROZEN INPUTS, NEVER PROMOTE OUTPUT. This config pointed at examples/astryx/contracts/ \u2014 the directory promote WRITES \u2014 so capture read its own previous result and the round-trip was not idempotent. Measured damage in the shipped artifacts: button/badge/slider each carried the FLOOR-PROMOTED and COMPUTED-ENRICHED provenance sentence TWICE, card once, and switch had never promoted at all (still v0.1.0) \u2014 five components in three different states. The seeds now live in examples/astryx/contracts-seed/, derived from the Phase-A static extraction. One measured correction rides in them: Button.size carries default \"md\", which the static adapter dropped and the library's own dist/docs-types.d.ts declares \u2014 a defaultless enum AXIS is the case that fails with an unhelpful error (docs/23 \u00a74.7). Pinned by the eval `capture-seeds-are-not-promote-output`.",
+  "_coreOnlyProvenance": {
+    "derivedFrom": "extract/computed/configs/astryx.json",
+    "differsBy": "drops theme-neutral/theme.css and the <Theme theme={neutralTheme}> wrapper",
+    "matchesFixtureSurface": "recipe/fixtures/library-*.ts astryx blocks"
+  }
+}

@@ -1,0 +1,146 @@
+{
+  "component": "Card",
+  "browser": "149.0.7827.55",
+  "captures": 52,
+  "combos": 13,
+  "interactions": 4,
+  "enumerationPolicy": "full-cartesian",
+  "channelsEnumerated": 658,
+  "elementsPerCapture": 1,
+  "determinism": "byte-identical across two full sweeps in one session",
+  "styledChannels": {
+    "root": 30
+  },
+  "folds": {
+    "count": 0,
+    "receipts": [],
+    "mintedLeavesUnfolded": 174,
+    "mintedLeavesFolded": 174
+  },
+  "bound": {
+    "cellsChecked": 0,
+    "confirmed": 0,
+    "contradictions": 0,
+    "untriaged": 0
+  },
+  "minted": {
+    "leaves": 174,
+    "baseBindings": 21,
+    "stateBindings": 0,
+    "byShape": {
+      "uniform": 8,
+      "perAxis": 13,
+      "perPair": 0,
+      "refused": 0
+    }
+  },
+  "declared": {
+    "base": 8,
+    "state": 0
+  },
+  "codeOnly": {
+    "base": 1,
+    "state": 0,
+    "overflowBindings": 0
+  },
+  "pseudoElementFindings": 0,
+  "anatomyPromotion": {
+    "partsCarried": 1,
+    "svgAssets": 0,
+    "refusals": 0
+  },
+  "enrichedContractSchemaValid": true,
+  "enrichedContractGeneratorValid": true,
+  "replayComputedEquality": {
+    "cellsCompared": 34112,
+    "cellsMatched": 34008,
+    "pct": 99.6951219512195,
+    "namedExclusions": [
+      "app-region",
+      "text-decoration",
+      "translate-x",
+      "translate-y"
+    ],
+    "topMismatchedChannels": [
+      [
+        "inline-size",
+        52
+      ],
+      [
+        "width",
+        52
+      ]
+    ]
+  },
+  "pixel": {
+    "pairs": 52,
+    "measured": 52,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
+    },
+    "exact": {
+      "mean": 0.0020032051282051285,
+      "max": 0.01953125,
+      "perfect": 46
+    },
+    "aa": {
+      "mean": 0,
+      "max": 0,
+      "perfect": 52
+    },
+    "worst": [
+      {
+        "key": "teal__default",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "teal__hover",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "teal__focus-visible",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "teal__active",
+        "pctExact": 0.01953125,
+        "pctAA": 0
+      },
+      {
+        "key": "red__focus-visible",
+        "pctExact": 0.013020833333333334,
+        "pctAA": 0
+      },
+      {
+        "key": "red__active",
+        "pctExact": 0.013020833333333334,
+        "pctAA": 0
+      },
+      {
+        "key": "default__default",
+        "pctExact": 0,
+        "pctAA": 0
+      },
+      {
+        "key": "default__hover",
+        "pctExact": 0,
+        "pctAA": 0
+      }
+    ]
+  },
+  "gate": {
+    "computedPctEqual": 96.66666666666667,
+    "rowsFullyEqual": 0,
+    "rows": 52,
+    "pixelPerfectExact": 0,
+    "pixelPerfectAA": 0,
+    "pairs": 52
+  },
+  "focusVisibleDriverMatched": 0,
+  "focusVisibleDriverTotal": 13
+}

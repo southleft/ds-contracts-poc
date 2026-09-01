@@ -1,0 +1,122 @@
+[
+  {
+    "key": "horizontal.tooltip__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.tooltip__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.tooltip__focus-visible",
+    "pctExact": 0.41934742647058826,
+    "pctAA": 0.06606158088235294
+  },
+  {
+    "key": "horizontal.tooltip__active",
+    "pctExact": 0.04595588235294118,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.text__default",
+    "pctExact": 0.04595588235294118,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.text__hover",
+    "pctExact": 0.04595588235294118,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.text__focus-visible",
+    "pctExact": 0.11488970588235294,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.text__active",
+    "pctExact": 0.04595588235294118,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.none__default",
+    "pctExact": 0.04595588235294118,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.none__hover",
+    "pctExact": 0.04595588235294118,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.none__focus-visible",
+    "pctExact": 0.11488970588235294,
+    "pctAA": 0
+  },
+  {
+    "key": "horizontal.none__active",
+    "pctExact": 0.04595588235294118,
+    "pctAA": 0
+  },
+  {
+    "key": "vertical.tooltip__default",
+    "pctExact": 0.017233455882352942,
+    "pctAA": 0
+  },
+  {
+    "key": "vertical.tooltip__hover",
+    "pctExact": 2.7458639705882355,
+    "pctAA": 1.6314338235294117
+  },
+  {
+    "key": "vertical.tooltip__focus-visible",
+    "pctExact": 4.963235294117647,
+    "pctAA": 3.073299632352941
+  },
+  {
+    "key": "vertical.tooltip__active",
+    "pctExact": 6.583180147058823,
+    "pctAA": 4.374425551470588
+  },
+  {
+    "key": "vertical.text__default",
+    "pctExact": 1.6371783088235294,
+    "pctAA": 1.301125919117647
+  },
+  {
+    "key": "vertical.text__hover",
+    "pctExact": 3.3318014705882355,
+    "pctAA": 1.7635569852941178
+  },
+  {
+    "key": "vertical.text__focus-visible",
+    "pctExact": 3.90625,
+    "pctAA": 1.9789751838235294
+  },
+  {
+    "key": "vertical.text__active",
+    "pctExact": 3.90625,
+    "pctAA": 1.9789751838235294
+  },
+  {
+    "key": "vertical.none__default",
+    "pctExact": 0.017233455882352942,
+    "pctAA": 0
+  },
+  {
+    "key": "vertical.none__hover",
+    "pctExact": 2.7458639705882355,
+    "pctAA": 1.6314338235294117
+  },
+  {
+    "key": "vertical.none__focus-visible",
+    "pctExact": 3.3203125,
+    "pctAA": 1.8468520220588236
+  },
+  {
+    "key": "vertical.none__active",
+    "pctExact": 3.3203125,
+    "pctAA": 1.8468520220588236
+  }
+]

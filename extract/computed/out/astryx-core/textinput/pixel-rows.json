@@ -1,0 +1,182 @@
+[
+  {
+    "key": "text.sm__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.sm__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.sm__focus-visible",
+    "pctExact": 1.5913529829545454,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.sm__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.md__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.md__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.md__focus-visible",
+    "pctExact": 1.5913529829545454,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.md__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.lg__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.lg__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.lg__focus-visible",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "text.lg__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.sm__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.sm__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.sm__focus-visible",
+    "pctExact": 1.5869140625,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.sm__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.md__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.md__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.md__focus-visible",
+    "pctExact": 1.5869140625,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.md__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.lg__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.lg__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.lg__focus-visible",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "password.lg__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.sm__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.sm__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.sm__focus-visible",
+    "pctExact": 1.5869140625,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.sm__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.md__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.md__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.md__focus-visible",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.md__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.lg__default",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.lg__hover",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.lg__focus-visible",
+    "pctExact": 1.5913529829545454,
+    "pctAA": 0.634765625
+  },
+  {
+    "key": "email.lg__active",
+    "pctExact": 1.5846946022727273,
+    "pctAA": 0.634765625
+  }
+]

@@ -1,0 +1,2193 @@
+{
+  "_marker": "NON-SCHEMA EXTENSION BLOCK — computed-capture overflow. Nothing here is contract vocabulary; every entry names why it does not fit (DESIGN §5.4).",
+  "generatedBy": "extract/computed/run.ts",
+  "library": "@astryxdesign/core@0.1.6",
+  "browser": "149.0.7827.55",
+  "mintedTokens": {
+    "imported": {
+      "shared": {
+        "size-4": {
+          "$value": "4px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
+          "$type": "dimension"
+        },
+        "size-0": {
+          "$value": "0px",
+          "$type": "dimension"
+        },
+        "num-4": {
+          "$value": "4",
+          "$type": "number"
+        },
+        "size-14": {
+          "$value": "14px",
+          "$type": "dimension"
+        },
+        "size-20-0004": {
+          "$value": "20.0004px",
+          "$type": "dimension"
+        },
+        "size-8": {
+          "$value": "8px",
+          "$type": "dimension"
+        },
+        "num-1": {
+          "$value": "1",
+          "$type": "number"
+        },
+        "size-9999": {
+          "$value": "9999px",
+          "$type": "dimension"
+        },
+        "color-0064e0": {
+          "$value": "#0064e0",
+          "$type": "color"
+        },
+        "size-20": {
+          "$value": "20px",
+          "$type": "dimension"
+        },
+        "size-12": {
+          "$value": "12px",
+          "$type": "dimension"
+        }
+      },
+      "slider": {
+        "root": {
+          "height": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "44px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "45px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "44px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "184px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "184px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "184px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "width": {
+            "$value": "240px",
+            "$type": "dimension"
+          }
+        },
+        "label": {
+          "color": {
+            "$value": "#4e606f",
+            "$type": "color"
+          },
+          "font-weight": {
+            "$value": "500",
+            "$type": "number"
+          }
+        },
+        "slider": {
+          "height": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "20px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "21px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "20px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "160px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "160px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "160px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "width": {
+            "$value": "240px",
+            "$type": "dimension"
+          }
+        },
+        "part-1-0": {
+          "height": {
+            "horizontal": {
+              "$value": "20px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "160px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "tooltip": {
+              "$value": "240px",
+              "$type": "dimension"
+            },
+            "text": {
+              "$value": "214.469px",
+              "$type": "dimension"
+            },
+            "none": {
+              "$value": "240px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider-track": {
+          "background-color": {
+            "$value": "#ccd3db",
+            "$type": "color"
+          },
+          "bottom": {
+            "horizontal": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "160px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "120px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "107.234px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "120px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "right": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "116px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "103.234px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "116px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "-2px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "240px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "214.469px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "240px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "4px",
+                "$type": "dimension"
+              }
+            }
+          }
+        },
+        "part-1-0-1": {
+          "bottom": {
+            "horizontal": {
+              "$value": "6px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "height": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "0px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "0px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "120px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "107.234px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "120px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "right": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "144px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "128.688px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "144px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "116px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "103.234px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "116px",
+                "$type": "dimension"
+              }
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "96px",
+              "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "-2px",
+              "$type": "dimension"
+            }
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-2px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "width": {
+            "horizontal": {
+              "tooltip": {
+                "$value": "96px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "85.7812px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "96px",
+                "$type": "dimension"
+              }
+            },
+            "vertical": {
+              "tooltip": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "text": {
+                "$value": "4px",
+                "$type": "dimension"
+              },
+              "none": {
+                "$value": "4px",
+                "$type": "dimension"
+              }
+            }
+          }
+        },
+        "slider-thumb-2": {
+          "bottom": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "76px",
+              "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "$value": "-10px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "slider-thumb": {
+          "bottom": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "64px",
+              "$type": "dimension"
+            }
+          },
+          "left": {
+            "horizontal": {
+              "$value": "96px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "120px",
+              "$type": "dimension"
+            }
+          },
+          "right": {
+            "horizontal": {
+              "$value": "124px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "100px",
+              "$type": "dimension"
+            }
+          },
+          "top": {
+            "horizontal": {
+              "$value": "10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "76px",
+              "$type": "dimension"
+            }
+          },
+          "translate-x": {
+            "$value": "-10px",
+            "$type": "dimension"
+          },
+          "translate-y": {
+            "horizontal": {
+              "$value": "-10px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "10px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "tooltip": {
+          "background-color": {
+            "$value": "#0a1317",
+            "$type": "color"
+          },
+          "color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "margin-bottom": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          },
+          "margin-left": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "margin-right": {
+            "horizontal": {
+              "$value": "0px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "4px",
+              "$type": "dimension"
+            }
+          },
+          "margin-top": {
+            "horizontal": {
+              "$value": "4px",
+              "$type": "dimension"
+            },
+            "vertical": {
+              "$value": "0px",
+              "$type": "dimension"
+            }
+          }
+        },
+        "label-2": {
+          "color": {
+            "$value": "#ffffff",
+            "$type": "color"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "max-width": {
+            "$value": "300px",
+            "$type": "dimension"
+          }
+        },
+        "label-3": {
+          "color": {
+            "$value": "#0a1317",
+            "$type": "color"
+          },
+          "flex-shrink": {
+            "$value": "0",
+            "$type": "number"
+          },
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
+          },
+          "line-height": {
+            "$value": "21px",
+            "$type": "dimension"
+          }
+        }
+      }
+    }
+  },
+  "folds": [
+    {
+      "part": "label",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "tooltip",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-3",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    }
+  ],
+  "foldedStateSkips": [],
+  "layout": {
+    "enriched": [
+      {
+        "part": "root",
+        "field": "direction",
+        "value": "column"
+      },
+      {
+        "part": "label",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "slider",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "part-1-0",
+        "field": "direction",
+        "value": "row",
+        "byProp": {
+          "prop": "orientation",
+          "overrides": {
+            "vertical": "column"
+          }
+        }
+      },
+      {
+        "part": "part-1-0",
+        "field": "align",
+        "value": "center"
+      },
+      {
+        "part": "part-1-0",
+        "field": "grow",
+        "value": true
+      }
+    ],
+    "contradictions": [],
+    "receipts": [
+      "layout-factored-on-axis: part-1-0.flex-direction varies across combos but factors on enum axis \"orientation\" — base (orientation=horizontal) carries layout.direction = row; deviating value(s) orientation=vertical → column ride layoutByProp (schema v7; resolveLayout merges per compiled variant)",
+      "layout-not-uniform: part-1-0.justify-content varies across combos — stays code-only",
+      "layout-grow-carried: part-1-0 — flex-grow 1 in a flex row parent (slider); carried as layout.grow (the canvas FILL / layoutGrow twin)"
+    ],
+    "_note": "computed flex keywords carried via Part.layout (the schema's own vocabulary); carried-slot contradictions are receipts, never silent overrides"
+  },
+  "declaredFacts": {
+    "_note": "v15 (S4): uniform registry-channel facts carried as Part.declared / Part.declaredStates — first-class contract vocabulary, listed here as the enrichment receipt",
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "slider",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "isolation",
+        "value": "isolate"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "position",
+        "value": "relative"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "touch-action",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-track",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider-track",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "slider-track",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-1",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "cursor",
+        "value": "grab"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "slider-thumb-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "part-1-0-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "cursor",
+        "value": "grab"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-duration",
+        "value": "0.175s"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-property",
+        "value": "background-color, box-shadow"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "transition-timing-function",
+        "value": "cubic-bezier(0.24, 1, 0.4, 1)"
+      },
+      {
+        "part": "slider-thumb",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "tooltip",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "tooltip",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "tooltip",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "tooltip",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-2",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-2",
+        "channel": "cursor",
+        "value": "pointer"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-2",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label-3",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label-3",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "label-3",
+        "channel": "text-wrap-mode",
+        "value": "nowrap"
+      }
+    ],
+    "state": []
+  },
+  "codeOnlyChannels": [
+    {
+      "part": "root",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0",
+      "channel": "anchor-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_t_",
+      "distinctValues": 6
+    },
+    {
+      "part": "part-1-0",
+      "channel": "justify-content",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "normal",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-1-0",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-track",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-track",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "matrix(1, 0, 0, 1, 0, -2)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-1-0-1",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-1",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "matrix(1, 0, 0, 1, 0, -2)",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-thumb-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb-2",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "matrix(1, 0, 0, 1, -10, -10)",
+      "distinctValues": 2
+    },
+    {
+      "part": "part-1-0-2",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "part-1-0-2",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "auto",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "anchor-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_u_",
+      "distinctValues": 2
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "slider-thumb",
+      "channel": "transform",
+      "reason": "declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+      "sample": "matrix(1, 0, 0, 1, -10, -10)",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-duration",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "0.23s",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-fill-mode",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "backwards",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-name",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "x1ahk7ht-B",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "animation-timing-function",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "cubic-bezier(0.24, 1, 0.4, 1)",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "height",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "fit-content",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "position",
+      "reason": "declared-channel value outside the bounded grammar — named residue (v15)",
+      "sample": "fixed",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "position-anchor",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "--astryx-layer-_r_u_",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "position-area",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "self-block-start",
+      "distinctValues": 2
+    },
+    {
+      "part": "tooltip",
+      "channel": "position-try-fallbacks",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "flip-block, flip-inline, flip-block flip-inline",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "tooltip",
+      "channel": "width",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "fit-content",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "word-break",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "break-word",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-3",
+      "channel": "text-size-adjust",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "sample": "100%",
+      "distinctValues": 1
+    }
+  ],
+  "stateOverflow": [
+    {
+      "state": "active",
+      "part": "part-1-0",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_1c_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb-2",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_1d_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "slider-thumb",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "active",
+      "part": "tooltip",
+      "channel": "display",
+      "sample": "block",
+      "reason": "declared-channel state delta on 1/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "active",
+      "part": "tooltip",
+      "channel": "overlay",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "active",
+      "part": "tooltip",
+      "channel": "position-anchor",
+      "sample": "--astryx-layer-_r_1d_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "part-1-0",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_17_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 4/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb-2",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_18_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-color",
+      "sample": "rgba(0, 100, 224, 1)",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-offset",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-style",
+      "sample": "solid",
+      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "slider-thumb",
+      "channel": "outline-width",
+      "sample": "2px",
+      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+    },
+    {
+      "state": "focus-visible",
+      "part": "tooltip",
+      "channel": "display",
+      "sample": "block",
+      "reason": "declared-channel state delta on 2/6 combos — partial coverage cannot carry as a state selector (v15); named residue"
+    },
+    {
+      "state": "focus-visible",
+      "part": "tooltip",
+      "channel": "overlay",
+      "sample": "auto",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "focus-visible",
+      "part": "tooltip",
+      "channel": "position-anchor",
+      "sample": "--astryx-layer-_r_18_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "part-1-0",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_12_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "slider-thumb",
+      "channel": "anchor-name",
+      "sample": "--astryx-layer-_r_13_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    },
+    {
+      "state": "hover",
+      "part": "tooltip",
+      "channel": "position-anchor",
+      "sample": "--astryx-layer-_r_13_",
+      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+    }
+  ],
+  "overflowBindings": [
+    {
+      "part": "slider-thumb-2",
+      "channel": "left",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    },
+    {
+      "part": "slider-thumb-2",
+      "channel": "right",
+      "refusal": "resolved values differ across variants without correlating to any variant axis or axis PAIR — a nested part carries at most a pair (one map axis + one placeholder); nothing minted, bind manually"
+    }
+  ],
+  "pairwiseRefusals": [],
+  "pseudoParts": {
+    "_reason": "S5 (DESIGN §5.4): pseudo-element decor has no anatomy spelling — captured, receipted, not carried",
+    "findings": [],
+    "totalFindings": 0
+  },
+  "bindingContradictions": [],
+  "interactionOnDisabled": [],
+  "interactionOnlyPlaneDrops": [
+    "label-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-3: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-3: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "label-3: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "part-1-0-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb-2: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb-2: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb-2: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "slider-thumb: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "tooltip: absent from BOTH the default and active planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "tooltip: absent from BOTH the default and focus-visible planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only",
+    "tooltip: absent from BOTH the default and hover planes — NO combo plane observes this part, so neither the base pass nor the state round can carry any channel for it. It reached the anatomy from the BASE capture alone (it renders only in a state no combo drives, e.g. an accordion panel that is open), and it ships with declared facts only"
+  ],
+  "interactionOnlyPlaneDropCount": 18,
+  "structureReceipts": [
+    "union-part-added: horizontal.text__default @1.0.2 (div|slider-thumb)",
+    "union-part-added: horizontal.text__default @1.1 (span|)",
+    "part-missing: horizontal.text__default part-1-0-2",
+    "part-missing: horizontal.text__default slider-thumb",
+    "part-missing: horizontal.text__default tooltip",
+    "part-missing: horizontal.text__default label-2",
+    "part-missing: horizontal.text__hover part-1-0-2",
+    "part-missing: horizontal.text__hover slider-thumb",
+    "part-missing: horizontal.text__hover tooltip",
+    "part-missing: horizontal.text__hover label-2",
+    "part-missing: horizontal.text__focus-visible part-1-0-2",
+    "part-missing: horizontal.text__focus-visible slider-thumb",
+    "part-missing: horizontal.text__focus-visible tooltip",
+    "part-missing: horizontal.text__focus-visible label-2",
+    "part-missing: horizontal.text__active part-1-0-2",
+    "part-missing: horizontal.text__active slider-thumb",
+    "part-missing: horizontal.text__active tooltip",
+    "part-missing: horizontal.text__active label-2",
+    "part-missing: horizontal.none__default part-1-0-2",
+    "part-missing: horizontal.none__default slider-thumb",
+    "part-missing: horizontal.none__default tooltip",
+    "part-missing: horizontal.none__default label-2",
+    "part-missing: horizontal.none__hover part-1-0-2",
+    "part-missing: horizontal.none__hover slider-thumb",
+    "part-missing: horizontal.none__hover tooltip",
+    "part-missing: horizontal.none__hover label-2",
+    "part-missing: horizontal.none__focus-visible part-1-0-2",
+    "part-missing: horizontal.none__focus-visible slider-thumb",
+    "part-missing: horizontal.none__focus-visible tooltip",
+    "part-missing: horizontal.none__focus-visible label-2",
+    "part-missing: horizontal.none__active part-1-0-2",
+    "part-missing: horizontal.none__active slider-thumb",
+    "part-missing: horizontal.none__active tooltip",
+    "part-missing: horizontal.none__active label-2",
+    "part-missing: vertical.text__default part-1-0-2",
+    "part-missing: vertical.text__default slider-thumb",
+    "part-missing: vertical.text__default tooltip",
+    "part-missing: vertical.text__default label-2",
+    "part-missing: vertical.text__hover part-1-0-2",
+    "part-missing: vertical.text__hover slider-thumb",
+    "part-missing: vertical.text__hover tooltip",
+    "part-missing: vertical.text__hover label-2",
+    "part-missing: vertical.text__focus-visible part-1-0-2",
+    "part-missing: vertical.text__focus-visible slider-thumb",
+    "part-missing: vertical.text__focus-visible tooltip",
+    "part-missing: vertical.text__focus-visible label-2",
+    "part-missing: vertical.text__active part-1-0-2",
+    "part-missing: vertical.text__active slider-thumb",
+    "part-missing: vertical.text__active tooltip",
+    "part-missing: vertical.text__active label-2",
+    "part-missing: vertical.none__default part-1-0-2",
+    "part-missing: vertical.none__default slider-thumb",
+    "part-missing: vertical.none__default tooltip",
+    "part-missing: vertical.none__default label-2",
+    "part-missing: vertical.none__hover part-1-0-2",
+    "part-missing: vertical.none__hover slider-thumb",
+    "part-missing: vertical.none__hover tooltip",
+    "part-missing: vertical.none__hover label-2",
+    "part-missing: vertical.none__focus-visible part-1-0-2",
+    "part-missing: vertical.none__focus-visible slider-thumb",
+    "part-missing: vertical.none__focus-visible tooltip",
+    "part-missing: vertical.none__focus-visible label-2",
+    "part-missing: vertical.none__active part-1-0-2",
+    "part-missing: vertical.none__active slider-thumb",
+    "part-missing: vertical.none__active tooltip",
+    "part-missing: vertical.none__active label-2"
+  ],
+  "styledChannelReceipts": [
+    "absolute-geometry-excluded: label — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "text-fill-pinned-geometry-refused: label.width — the part's box IS its pinned ancestor's content box in every enabled combo, and the fill is refused anyway: a box on its ancestor chain is a measurement of the harness, not of the library — label.width = 240px = the capture stage's content box (stage 272px − 2×16px) in combo horizontal.tooltip; admitting the fill would mint that same number one generation down",
+    "absolute-geometry-excluded: label-2 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-excluded: label-3 — text-bearing part in an overlay-anatomy component keeps the geometry exclusion (font-metric-dependent widths)",
+    "absolute-geometry-admitted: root — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-track — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-1 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-thumb-2 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: part-1-0-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: slider-thumb — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "absolute-geometry-admitted: tooltip — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
+    "control-equal-drop: root — 564 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 378 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <label> — span control used (part label)",
+    "ua-control-fallback: no UA baseline for <label> — span UA control used (part label)",
+    "control-equal-drop: label — 551 of 578 admitted channels compared EQUAL to the <label> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 7 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: label — 365 channel(s) EQUAL to the <label> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: slider — 566 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: slider — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: slider — 380 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-1-0 — 557 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-1-0 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-1-0 — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: slider-track — 555 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: slider-track — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "translate-door-generalized: slider-track — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-equal-drop: slider-track — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-1-0-1 — 555 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-1-0-1 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "translate-door-generalized: part-1-0-1 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-equal-drop: part-1-0-1 — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: slider-thumb-2 — 551 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: slider-thumb-2 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "translate-door-generalized: slider-thumb-2 — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-equal-drop: slider-thumb-2 — 365 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-1-0-2 — 565 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-1-0-2 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-1-0-2 — 379 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: slider-thumb — 550 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: slider-thumb — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "translate-door-generalized: slider-thumb — translate motion observed on a non-base combo (base at rest); translate-x/y admitted across the whole enabled default plane with ABSENT ≡ 0px (the v1 door required the BASE combo to carry the key and dropped state-plane motion into code-only) — pseudo-decor v2 round",
+    "control-equal-drop: slider-thumb — 364 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: tooltip — 537 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: tooltip — 3 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: tooltip — 349 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-2 — 547 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-2 — 7 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-2 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-2 — 360 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label-3 — 555 of 578 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label-3 — 7 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "text-part-typography-carried: label-3 — font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-3 — 368 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: label — block-size 20px, height 20px, inline-size 240px, perspective-origin 120px 10px, transform-origin 120px 10px, width 240px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size auto, height auto, inline-size auto, perspective-origin 50% 50%, transform-origin 50% 50%, width auto — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-3 — block-size 21px, height 21px, inline-size 17.5312px, perspective-origin 8.76562px 10.5px, transform-origin 8.76562px 10.5px, width 17.5312px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0 — block-size 20px, inline-size 240px, perspective-origin 120px 10px, transform-origin 120px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0-1 — block-size 4px, inline-size 96px, perspective-origin 48px 2px, transform-origin 48px 2px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: part-1-0-2 — block-size auto, inline-size auto, perspective-origin 50% 50%, transform-origin 50% 50% — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: root — block-size 44px, inline-size 240px, perspective-origin 120px 22px, transform-origin 120px 22px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: slider — block-size 20px, inline-size 240px, perspective-origin 120px 10px, transform-origin 120px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: slider-thumb — block-size 20px, inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: slider-thumb-2 — block-size 20px, inline-size 20px, perspective-origin 10px 10px, transform-origin 10px 10px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: slider-track — block-size 4px, inline-size 240px, perspective-origin 120px 2px, transform-origin 120px 2px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: tooltip — block-size fit-content, inline-size fit-content, perspective-origin 50% 50%, transform-origin 50% 50% — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "webkit-prefixed-channels-refused: 4 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-font-smoothing (label, label-2, label-3, part-1-0, part-1-0-1, part-1-0-2, root, slider, slider-thumb, slider-thumb-2, slider-track, tooltip); -webkit-tap-highlight-color (label, label-2, label-3, part-1-0, part-1-0-1, part-1-0-2, root, slider, slider-thumb, slider-thumb-2, slider-track, tooltip); -webkit-text-fill-color (label, label-2, label-3, tooltip); -webkit-text-stroke-color (label, label-2, label-3, tooltip)",
+    "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"tooltip\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.caret-color — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.color — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-size — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-3.font-weight — values track ancestor \"slider\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.caret-color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.color — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-size — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.font-weight — values track ancestor \"root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tooltip.caret-color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tooltip.color — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: tooltip.font-size — values track ancestor \"part-1-0\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: label-2.caret-color equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.color equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.font-size equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent font-size fact (CSS inheritance, observed)",
+    "inheritance-only: label-2.line-height equals ancestor \"tooltip\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-1.line-height equals ancestor \"part-1-0\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0-2.line-height equals ancestor \"part-1-0\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: part-1-0.line-height equals ancestor \"slider\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: slider-thumb-2.line-height equals ancestor \"part-1-0\" on all 16 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: slider-thumb.line-height equals ancestor \"part-1-0-2\" on all 8 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: slider-track.line-height equals ancestor \"part-1-0\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)",
+    "inheritance-only: slider.line-height equals ancestor \"root\" on all 24 captured planes — the part carries no independent line-height fact (CSS inheritance, observed)"
+  ],
+  "frontierReceipts": [
+    "closed-shadow-root-limit: 0 suspected closed shadow root(s) named above. A closed shadow root is UNREACHABLE from script (el.shadowRoot === null), so nothing about a closed host's interior is captured or carried; the reader names the two signatures of its absence it can see (a custom-element leaf that paints a box; a non-replaced display:inline leaf with a non-zero content box) and NAMES AS UNDETECTABLE the third — a closed root on a plain element blockified by a flex/grid parent, which no computed style distinguishes from an empty item. The decisive probe (attachShadow throwing NotSupportedError) mutates the page on its negative path and would break the double-run byte-identity self-check; it is refused, not forgotten.",
+    "pseudo-elements-read: the reader looks at ::before, ::after, ::marker, ::placeholder — measured here on no part. Reading is not carrying: the bounded decor grammar promotes ::before/::after only, so every other pseudo the reader records is a MEASUREMENT with no carriage — named, never silently dropped.",
+    "pseudo-element-not-read: ::selection — REFUSED BY NAME, not measured: transient user state — it paints only while a selection exists, and the capture drives prop combos and pseudo-class states, never a pointer drag; there is also no canvas spelling for a selection highlight",
+    "pseudo-element-not-read: ::backdrop — REFUSED BY NAME, not measured: paints only for an element promoted to the TOP LAYER (dialog.showModal() / popover), which the sweep never calls — measured: getComputedStyle(dialog, \"::backdrop\") reads the authored scrim ONLY after showModal(). The canvas DOES have a spelling (a scrim rectangle), so this is a reader gap worth closing, not a canvas limit",
+    "pseudo-elements-refused: 2 (::selection, ::backdrop)"
+  ],
+  "anatomyJoin": {
+    "computed": [
+      {
+        "part": "root",
+        "join": "matched"
+      },
+      {
+        "part": "label",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-track",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-1",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-thumb-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "part-1-0-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "slider-thumb",
+        "join": "computed-only"
+      },
+      {
+        "part": "tooltip",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-3",
+        "join": "computed-only"
+      }
+    ],
+    "staticOnly": []
+  },
+  "anatomyPromotion": {
+    "_note": "Round 4 DOM-anatomy promotion: computed-only elements carried as REAL parts (extract/computed/anatomy.ts); svg subtrees carried as reconstructed icon assets; presence facts via visibleWhen/stylesWhen; refusals named.",
+    "partsCarried": [
+      "root",
+      "label",
+      "slider",
+      "part-1-0",
+      "slider-track",
+      "part-1-0-1",
+      "slider-thumb-2",
+      "part-1-0-2",
+      "slider-thumb",
+      "tooltip",
+      "label-2",
+      "label-3"
+    ],
+    "svgAssets": [],
+    "receipts": [
+      "root-display-carried: flex",
+      "presence-carried: slider-thumb-2 (4/6 combos) →  hidden-when valueDisplay=tooltip",
+      "presence-carried: part-1-0-2 (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "presence-carried: slider-thumb (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "presence-carried: tooltip (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "literal-text-carried: label-2 = \"40\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-2 (2/6 combos) →  hidden-when valueDisplay=text, valueDisplay=none",
+      "literal-text-carried: label-3 = \"40\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "presence-carried: label-3 (2/6 combos) →  hidden-when valueDisplay=tooltip, valueDisplay=none"
+    ],
+    "refusals": []
+  },
+  "enrichmentNotes": [
+    "layout enriched: root.layout.direction = column (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: label.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: slider.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched per axis: part-1-0.layout.direction = row at base; orientation=vertical → column via layoutByProp (schema v7 — resolveLayout merges per compiled variant)",
+    "layout enriched: part-1-0.layout.align = center (uniform computed keyword — the schema's own vocabulary)",
+    "layout enriched: part-1-0.layout.grow = true (uniform computed keyword — the schema's own vocabulary)",
+    "declared fact carried: root.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: slider.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.isolation = isolate (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.position = relative (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.touch-action = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: slider-track.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-track.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0-1.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-1.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: slider-thumb-2.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-1-0-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-1-0-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: slider-thumb.cursor = grab (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-property = background-color, box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: slider-thumb.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tooltip.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: tooltip.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: tooltip.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.user-select = none (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: label-3.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-3.text-wrap-mode = nowrap (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "nested pair carried: slider.height = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: slider-track.left = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: slider-track.right = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: slider-track.width = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: part-1-0-1.left = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: part-1-0-1.right = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "nested pair carried: part-1-0-1.width = per-valueDisplay map whose refs substitute orientation (nested parts hold ONE placeholder per ref — the reviewed per-value-map capability)",
+    "hug-evidence-unmeasurable: label-2.max-width = 300px — not a pixel value, so \"is the used width below the cap\" cannot be asked. No sizing evidence carried; the max-width lowering is unchanged.",
+    "hug-evidence-absent: label-2 carries max-width but the capture produced no uniform pixel measurement for it — no sizing evidence carried (the max-width lowering is unchanged)."
+  ]
+}

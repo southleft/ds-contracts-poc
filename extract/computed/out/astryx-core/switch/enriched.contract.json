@@ -1,0 +1,807 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.switch",
+  "name": "Switch",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Switch — promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Switch/Switch.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label + labelPosition + labelSpacing and the disabled/optional/required flags are verbatim; description, htmlName, labelTooltip, disabledMessage and isLoading are dropped. Wave B.3: `value` is restored as a VARIANT AXIS (off/on) — FC-MISSING-AXIS — never a stateProp (same pattern as Carbon `toggled`). STRUCTURAL: the track renders as a styled box, not a native role=switch input. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The switch label.",
+      "type": "text",
+      "default": "Enable notifications",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "value",
+      "description": "Whether the switch is on or off.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Value",
+          "values": {
+            "false": "Off",
+            "true": "On"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "labelPosition",
+      "description": "Where the label sits relative to the track.",
+      "type": {
+        "enum": [
+          "start",
+          "end"
+        ]
+      },
+      "default": "end",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Label Position",
+          "values": {
+            "start": "Start",
+            "end": "End"
+          }
+        },
+        "code": {
+          "prop": "labelPosition"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the switch is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the switch is required.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "part-0-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "row"
+              },
+              "parts": {
+                "label-2": {
+                  "element": "label",
+                  "content": {
+                    "prop": "label"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy label|field-label — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "end",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                  },
+                  "tokens": {
+                    "color": "{imported.switch.label-2.color}",
+                    "column-gap": "{imported.shared.size-4}",
+                    "font-size": "{imported.switch.label-2.font-size}",
+                    "font-weight": "{imported.switch.label-2.font-weight}",
+                    "line-height": "{imported.switch.label-2.line-height}",
+                    "row-gap": "{imported.shared.size-4}",
+                    "tab-size": "{imported.shared.num-4}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "color",
+                      "value": "rgba(164, 176, 188, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    }
+                  ]
+                },
+                "part-0-0-0": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "appearance": "auto",
+                    "box-sizing": "border-box",
+                    "cursor": "pointer",
+                    "position": "absolute"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "height": "{imported.shared.size-24}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "opacity": "{imported.switch.part-0-0-0.opacity}",
+                    "right": "{imported.shared.size-0}",
+                    "tab-size": "{imported.shared.num-4}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-40}",
+                    "z-index": "{imported.switch.part-0-0-0.z-index}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_1v_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_23_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_1r_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(0, 95, 204, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "auto",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_1n_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
+                },
+                "switch": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "start",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "switch-thumb": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "labelPosition",
+                          "equals": "start",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "isDisabled",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "declared": {
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "box-sizing": "border-box",
+                        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                        "transition-duration": "0.175s",
+                        "transition-property": "transform, width, height",
+                        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.switch.switch-thumb.background-color}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}",
+                        "height": "{imported.shared.size-16}",
+                        "line-height": "{imported.shared.size-24}",
+                        "tab-size": "{imported.shared.num-4}",
+                        "width": "{imported.shared.size-16}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "transition-duration": "0.175s",
+                    "transition-property": "background-color",
+                    "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.switch.switch.background-color}",
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "height": "{imported.shared.size-24}",
+                    "line-height": "{imported.shared.size-24}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-4}",
+                    "padding-right": "{imported.shared.size-4}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "tab-size": "{imported.shared.num-4}",
+                    "width": "{imported.shared.size-40}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "opacity",
+                      "value": "0.5",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(0, 100, 224, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "solid",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
+                }
+              },
+              "layoutByProp": {
+                "prop": "labelPosition",
+                "map": {
+                  "start": {
+                    "direction": "column"
+                  }
+                }
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box"
+              },
+              "tokens": {
+                "height": "{imported.shared.size-24}",
+                "line-height": "{imported.shared.size-24}",
+                "tab-size": "{imported.shared.num-4}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "labelPosition",
+                  "map": {
+                    "end": {
+                      "flex-shrink": "{imported.switch.part-0-0.flex-shrink.end}",
+                      "width": "{imported.switch.part-0-0.width.end}"
+                    },
+                    "start": {
+                      "flex-shrink": "{imported.switch.part-0-0.flex-shrink.start}",
+                      "width": "{imported.switch.part-0-0.width.start}"
+                    }
+                  }
+                }
+              ]
+            },
+            "part-0-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column"
+              },
+              "parts": {
+                "part-0-1-0": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "appearance": "auto",
+                    "box-sizing": "border-box",
+                    "cursor": "pointer",
+                    "position": "absolute"
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "height": "{imported.shared.size-24}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "opacity": "{imported.switch.part-0-1-0.opacity}",
+                    "right": "{imported.shared.size-0}",
+                    "tab-size": "{imported.shared.num-4}",
+                    "top": "{imported.shared.size-0}",
+                    "width": "{imported.shared.size-40}",
+                    "z-index": "{imported.switch.part-0-1-0.z-index}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_v_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_13_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_r_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(0, 95, 204, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "auto",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_n_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
+                },
+                "switch-2": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "end",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "parts": {
+                    "switch-thumb-2": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div|switch-thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "layout": {
+                        "display": "flex",
+                        "align": "center",
+                        "justify": "center"
+                      },
+                      "stylesWhen": [
+                        {
+                          "prop": "labelPosition",
+                          "equals": "end",
+                          "styles": {
+                            "display": "none"
+                          }
+                        },
+                        {
+                          "prop": "isDisabled",
+                          "styles": {
+                            "display": "none"
+                          }
+                        }
+                      ],
+                      "declared": {
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "box-sizing": "border-box",
+                        "transform": "matrix(1, 0, 0, 1, 0, 0)",
+                        "transition-duration": "0.175s",
+                        "transition-property": "transform, width, height",
+                        "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.switch.switch-thumb-2.background-color}",
+                        "border-bottom-left-radius": "{imported.shared.size-9999}",
+                        "border-bottom-right-radius": "{imported.shared.size-9999}",
+                        "border-top-left-radius": "{imported.shared.size-9999}",
+                        "border-top-right-radius": "{imported.shared.size-9999}",
+                        "height": "{imported.shared.size-16}",
+                        "line-height": "{imported.shared.size-24}",
+                        "tab-size": "{imported.shared.num-4}",
+                        "width": "{imported.shared.size-16}"
+                      }
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "transition-duration": "0.175s",
+                    "transition-property": "background-color",
+                    "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                  },
+                  "tokens": {
+                    "background-color": "{imported.switch.switch-2.background-color}",
+                    "border-bottom-left-radius": "{imported.shared.size-9999}",
+                    "border-bottom-right-radius": "{imported.shared.size-9999}",
+                    "border-top-left-radius": "{imported.shared.size-9999}",
+                    "border-top-right-radius": "{imported.shared.size-9999}",
+                    "height": "{imported.shared.size-24}",
+                    "line-height": "{imported.shared.size-24}",
+                    "padding-bottom": "{imported.shared.size-4}",
+                    "padding-left": "{imported.shared.size-4}",
+                    "padding-right": "{imported.shared.size-4}",
+                    "padding-top": "{imported.shared.size-4}",
+                    "tab-size": "{imported.shared.num-4}",
+                    "width": "{imported.shared.size-40}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "opacity",
+                      "value": "0.5",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "rgba(0, 100, 224, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-style",
+                      "value": "solid",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.0310458 0.0589869 0.0714052 / 0.24)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
+                },
+                "label": {
+                  "element": "label",
+                  "content": {
+                    "prop": "label"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy label|field-label — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center"
+                  },
+                  "stylesWhen": [
+                    {
+                      "prop": "labelPosition",
+                      "equals": "start",
+                      "styles": {
+                        "display": "none"
+                      }
+                    },
+                    {
+                      "prop": "isDisabled",
+                      "styles": {
+                        "display": "none"
+                      }
+                    }
+                  ],
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                  },
+                  "tokens": {
+                    "color": "{imported.switch.label.color}",
+                    "column-gap": "{imported.shared.size-4}",
+                    "font-size": "{imported.switch.label.font-size}",
+                    "font-weight": "{imported.switch.label.font-weight}",
+                    "line-height": "{imported.switch.label.line-height}",
+                    "row-gap": "{imported.shared.size-4}",
+                    "tab-size": "{imported.shared.num-4}"
+                  },
+                  "codeOnly": [
+                    {
+                      "state": "disabled",
+                      "channel": "color",
+                      "value": "rgba(164, 176, 188, 1)",
+                      "reason": "default-state values not kind-compatible for padding — cannot correlate"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "cursor",
+                      "value": "not-allowed",
+                      "reason": "declared-channel state delta on 1/2 combos — partial coverage cannot carry as a state selector (v15); named residue"
+                    }
+                  ]
+                }
+              },
+              "layoutByProp": {
+                "prop": "labelPosition",
+                "map": {
+                  "start": {
+                    "direction": "row"
+                  }
+                }
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box"
+              },
+              "tokens": {
+                "height": "{imported.shared.size-24}",
+                "line-height": "{imported.shared.size-24}",
+                "tab-size": "{imported.shared.num-4}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "labelPosition",
+                  "map": {
+                    "end": {
+                      "flex-shrink": "{imported.switch.part-0-1.flex-shrink.end}",
+                      "width": "{imported.switch.part-0-1.width.end}"
+                    },
+                    "start": {
+                      "flex-shrink": "{imported.switch.part-0-1.flex-shrink.start}",
+                      "width": "{imported.switch.part-0-1.width.start}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box"
+          },
+          "tokens": {
+            "column-gap": "{imported.switch.part-0.column-gap}",
+            "height": "{imported.shared.size-24}",
+            "line-height": "{imported.shared.size-24}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "row-gap": "{imported.switch.part-0.row-gap}",
+            "tab-size": "{imported.shared.num-4}",
+            "width": "{imported.switch.part-0.width}"
+          }
+        }
+      },
+      "tokens": {
+        "height": "{imported.shared.size-24}",
+        "line-height": "{imported.shared.size-24}",
+        "tab-size": "{imported.shared.num-4}",
+        "width": "{imported.switch.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@astryxdesign/core",
+        "export": "Switch"
+      }
+    }
+  }
+}

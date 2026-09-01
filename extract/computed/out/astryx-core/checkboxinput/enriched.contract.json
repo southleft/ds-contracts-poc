@@ -1,0 +1,716 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.checkbox-input",
+  "name": "CheckboxInput",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx CheckboxInput — a labelled checkbox form control. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/CheckboxInput/CheckboxInput.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). label/size and the disabled/readOnly/required flags are verbatim; description, disabledMessage, htmlName, isLoading and isLabelHidden are dropped. CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). PHASE-1 READER ROUND (docs/35 §3): the `checked` tri-state axis is added the MUI/antd Checkbox way — one contract enum expanded by the config through $props into the library's own `value: boolean | 'indeterminate'` (CheckboxInput.d.ts:63) — so the captured truth finally carries checked/indeterminate renderings instead of the value:false pin the first capture rode. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "label",
+      "description": "The checkbox label.",
+      "type": "text",
+      "default": "Accept terms",
+      "required": true,
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Label"
+        },
+        "code": {
+          "prop": "label"
+        }
+      }
+    },
+    {
+      "name": "checked",
+      "description": "Whether the checkbox is unchecked, checked, or indeterminate (the library's `value: boolean | 'indeterminate'`).",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked",
+          "indeterminate"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked",
+            "indeterminate": "Indeterminate"
+          }
+        },
+        "code": {
+          "prop": "value"
+        }
+      }
+    },
+    {
+      "name": "size",
+      "description": "The control size.",
+      "type": {
+        "enum": [
+          "sm",
+          "md"
+        ]
+      },
+      "default": "md",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Size",
+          "values": {
+            "sm": "Sm",
+            "md": "Md"
+          }
+        },
+        "code": {
+          "prop": "size"
+        }
+      }
+    },
+    {
+      "name": "isDisabled",
+      "description": "Whether the checkbox is disabled.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Disabled"
+        },
+        "code": {
+          "prop": "isDisabled"
+        }
+      }
+    },
+    {
+      "name": "isReadOnly",
+      "description": "Whether the checkbox is read-only.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Read Only"
+        },
+        "code": {
+          "prop": "isReadOnly"
+        }
+      }
+    },
+    {
+      "name": "isRequired",
+      "description": "Whether the checkbox is required.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Required"
+        },
+        "code": {
+          "prop": "isRequired"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible"
+  ],
+  "anatomy": {
+    "root": {
+      "declared": {
+        "display": "block",
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box"
+      },
+      "parts": {
+        "part-0": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "center"
+          },
+          "parts": {
+            "part-0-0": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "declared": {
+                "aspect-ratio": "1 / 1",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "isolation": "isolate",
+                "position": "relative"
+              },
+              "parts": {
+                "part-0-0-0": {
+                  "element": "input",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "none",
+                    "appearance": "auto",
+                    "box-sizing": "border-box",
+                    "cursor": "pointer",
+                    "position": "absolute"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    },
+                    "focus-visible": {
+                      "outline-style": "auto"
+                    }
+                  },
+                  "tokens": {
+                    "bottom": "{imported.shared.size-0}",
+                    "left": "{imported.shared.size-0}",
+                    "line-height": "{imported.shared.size-24}",
+                    "min-height": "{imported.shared.size-0}",
+                    "min-width": "{imported.shared.size-0}",
+                    "opacity": "{imported.checkbox-input.part-0-0-0.opacity}",
+                    "right": "{imported.shared.size-0}",
+                    "tab-size": "{imported.shared.num-4}",
+                    "top": "{imported.shared.size-0}",
+                    "z-index": "{imported.checkbox-input.part-0-0-0.z-index}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "size",
+                      "map": {
+                        "md": {
+                          "height": "{imported.checkbox-input.part-0-0-0.height.md}",
+                          "width": "{imported.checkbox-input.part-0-0-0.width.md}"
+                        },
+                        "sm": {
+                          "height": "{imported.checkbox-input.part-0-0-0.height.sm}",
+                          "width": "{imported.checkbox-input.part-0-0-0.width.sm}"
+                        }
+                      }
+                    }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_1v_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_23_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_1r_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#005fcc",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "1px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "anchor-name",
+                      "value": "--astryx-layer-_r_1n_",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
+                },
+                "checkbox": {
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div|checkbox — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "declared": {
+                    "aspect-ratio": "1 / 1",
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "transition-duration": "0.175s",
+                    "transition-property": "background-color, border-color",
+                    "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
+                  },
+                  "parts": {
+                    "icon": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy svg| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "aspect-ratio": "1 / 1",
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "box-sizing": "border-box",
+                        "overflow-x": "hidden",
+                        "overflow-y": "hidden"
+                      },
+                      "parts": {
+                        "icon-sm": {
+                          "icon": {
+                            "asset": "checkbox-input-icon-sm",
+                            "size": 12
+                          },
+                          "visibleWhen": {
+                            "prop": "size",
+                            "equals": "sm"
+                          },
+                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=sm."
+                        },
+                        "icon-md": {
+                          "icon": {
+                            "asset": "checkbox-input-icon-md",
+                            "size": 14
+                          },
+                          "visibleWhen": {
+                            "prop": "size",
+                            "equals": "md"
+                          },
+                          "description": "Per-value svg content promoted from the computed floor: the glyph drawn when size=md."
+                        }
+                      },
+                      "tokens": {
+                        "color": "{imported.checkbox-input.icon.color}",
+                        "line-height": "{imported.shared.size-24}",
+                        "tab-size": "{imported.shared.num-4}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "size",
+                          "map": {
+                            "md": {
+                              "height": "{imported.checkbox-input.icon.height.md}",
+                              "width": "{imported.checkbox-input.icon.width.md}"
+                            },
+                            "sm": {
+                              "height": "{imported.checkbox-input.icon.height.sm}",
+                              "width": "{imported.checkbox-input.icon.width.sm}"
+                            }
+                          }
+                        }
+                      ]
+                    },
+                    "part-0-0-1-1": {
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "border-bottom-style": "solid",
+                        "border-left-style": "solid",
+                        "border-right-style": "solid",
+                        "border-top-style": "solid",
+                        "box-sizing": "border-box"
+                      },
+                      "tokens": {
+                        "background-color": "{imported.checkbox-input.part-0-0-1-1.background-color}",
+                        "border-bottom-left-radius": "{imported.shared.size-1}",
+                        "border-bottom-right-radius": "{imported.shared.size-1}",
+                        "border-top-left-radius": "{imported.shared.size-1}",
+                        "border-top-right-radius": "{imported.shared.size-1}",
+                        "height": "{imported.shared.size-2}",
+                        "line-height": "{imported.shared.size-24}",
+                        "tab-size": "{imported.shared.num-4}"
+                      },
+                      "tokensByProp": [
+                        {
+                          "prop": "checked",
+                          "map": {
+                            "checked": {
+                              "color": "{imported.checkbox-input.part-0-0-1-1.color.checked}"
+                            },
+                            "indeterminate": {
+                              "color": "{imported.checkbox-input.part-0-0-1-1.color.indeterminate}"
+                            },
+                            "unchecked": {
+                              "color": "{imported.checkbox-input.part-0-0-1-1.color.unchecked}"
+                            }
+                          }
+                        },
+                        {
+                          "prop": "size",
+                          "map": {
+                            "md": {
+                              "width": "{imported.checkbox-input.part-0-0-1-1.width.md}"
+                            },
+                            "sm": {
+                              "width": "{imported.checkbox-input.part-0-0-1-1.width.sm}"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "declaredStates": {
+                    "focus-visible": {
+                      "outline-style": "solid"
+                    }
+                  },
+                  "tokens": {
+                    "border-bottom-left-radius": "{imported.shared.size-4}",
+                    "border-bottom-right-radius": "{imported.shared.size-4}",
+                    "border-bottom-width": "{imported.shared.size-1}",
+                    "border-left-width": "{imported.shared.size-1}",
+                    "border-right-width": "{imported.shared.size-1}",
+                    "border-top-left-radius": "{imported.shared.size-4}",
+                    "border-top-right-radius": "{imported.shared.size-4}",
+                    "border-top-width": "{imported.shared.size-1}",
+                    "line-height": "{imported.shared.size-24}",
+                    "tab-size": "{imported.shared.num-4}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "checked",
+                      "map": {
+                        "checked": {
+                          "background-color": "{imported.checkbox-input.checkbox.background-color.checked}",
+                          "border-bottom-color": "{imported.checkbox-input.checkbox.border-bottom-color.checked}",
+                          "border-left-color": "{imported.checkbox-input.checkbox.border-left-color.checked}",
+                          "border-right-color": "{imported.checkbox-input.checkbox.border-right-color.checked}",
+                          "border-top-color": "{imported.checkbox-input.checkbox.border-top-color.checked}",
+                          "color": "{imported.checkbox-input.checkbox.color.checked}",
+                          "outline-color": "{imported.checkbox-input.checkbox.outline-color.checked}"
+                        },
+                        "indeterminate": {
+                          "background-color": "{imported.checkbox-input.checkbox.background-color.indeterminate}",
+                          "border-bottom-color": "{imported.checkbox-input.checkbox.border-bottom-color.indeterminate}",
+                          "border-left-color": "{imported.checkbox-input.checkbox.border-left-color.indeterminate}",
+                          "border-right-color": "{imported.checkbox-input.checkbox.border-right-color.indeterminate}",
+                          "border-top-color": "{imported.checkbox-input.checkbox.border-top-color.indeterminate}",
+                          "color": "{imported.checkbox-input.checkbox.color.indeterminate}",
+                          "outline-color": "{imported.checkbox-input.checkbox.outline-color.indeterminate}"
+                        },
+                        "unchecked": {
+                          "background-color": "{imported.checkbox-input.checkbox.background-color.unchecked}",
+                          "border-bottom-color": "{imported.checkbox-input.checkbox.border-bottom-color.unchecked}",
+                          "border-left-color": "{imported.checkbox-input.checkbox.border-left-color.unchecked}",
+                          "border-right-color": "{imported.checkbox-input.checkbox.border-right-color.unchecked}",
+                          "border-top-color": "{imported.checkbox-input.checkbox.border-top-color.unchecked}",
+                          "color": "{imported.checkbox-input.checkbox.color.unchecked}",
+                          "outline-color": "{imported.checkbox-input.checkbox.outline-color.unchecked}"
+                        }
+                      }
+                    },
+                    {
+                      "prop": "size",
+                      "map": {
+                        "md": {
+                          "height": "{imported.checkbox-input.checkbox.height.md}",
+                          "width": "{imported.checkbox-input.checkbox.width.md}"
+                        },
+                        "sm": {
+                          "height": "{imported.checkbox-input.checkbox.height.sm}",
+                          "width": "{imported.checkbox-input.checkbox.width.sm}"
+                        }
+                      }
+                    }
+                  ],
+                  "codeOnly": [
+                    {
+                      "state": "active",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.95 0.95 0.95)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-bottom-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-left-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-right-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "active",
+                      "channel": "border-top-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "background-color",
+                      "value": "{imported.checkbox-input.checkbox.background-color-state-disabled.{checked}}",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-bottom-color",
+                      "value": "#05365919",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-left-color",
+                      "value": "#05365919",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-right-color",
+                      "value": "#05365919",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "border-top-color",
+                      "value": "#05365919",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "disabled",
+                      "channel": "opacity",
+                      "value": "0.5",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-color",
+                      "value": "#0064e0",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-offset",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "focus-visible",
+                      "channel": "outline-width",
+                      "value": "2px",
+                      "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "background-color",
+                      "value": "color(srgb 0.95 0.95 0.95)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-bottom-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-left-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-right-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    },
+                    {
+                      "state": "hover",
+                      "channel": "border-top-color",
+                      "value": "color(srgb 0.64 0.661961 0.687059)",
+                      "reason": "value shape outside mintable kinds and outside the declared vocabulary"
+                    }
+                  ]
+                }
+              },
+              "tokens": {
+                "bottom": "{imported.shared.size-0}",
+                "flex-shrink": "{imported.checkbox-input.part-0-0.flex-shrink}",
+                "left": "{imported.shared.size-0}",
+                "line-height": "{imported.shared.size-24}",
+                "right": "{imported.shared.size-0}",
+                "tab-size": "{imported.shared.num-4}",
+                "top": "{imported.shared.size-0}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "size",
+                  "map": {
+                    "md": {
+                      "height": "{imported.checkbox-input.part-0-0.height.md}",
+                      "width": "{imported.checkbox-input.part-0-0.width.md}"
+                    },
+                    "sm": {
+                      "height": "{imported.checkbox-input.part-0-0.height.sm}",
+                      "width": "{imported.checkbox-input.part-0-0.width.sm}"
+                    }
+                  }
+                }
+              ]
+            },
+            "part-0-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column"
+              },
+              "parts": {
+                "label": {
+                  "element": "label",
+                  "content": {
+                    "prop": "label"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy label|field-label — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "align": "center"
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+                  },
+                  "declaredStates": {
+                    "disabled": {
+                      "cursor": "not-allowed"
+                    }
+                  },
+                  "tokens": {
+                    "color": "{imported.checkbox-input.label.color}",
+                    "column-gap": "{imported.shared.size-4}",
+                    "font-size": "{imported.checkbox-input.label.font-size}",
+                    "font-weight": "{imported.checkbox-input.label.font-weight}",
+                    "line-height": "{imported.checkbox-input.label.line-height}",
+                    "row-gap": "{imported.shared.size-4}",
+                    "tab-size": "{imported.shared.num-4}"
+                  },
+                  "states": {
+                    "disabled": {
+                      "color": "{imported.checkbox-input.label.color-state-disabled}"
+                    }
+                  }
+                }
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box"
+              },
+              "tokens": {
+                "column-gap": "{imported.shared.size-2}",
+                "height": "{imported.checkbox-input.part-0-1.height}",
+                "line-height": "{imported.shared.size-24}",
+                "row-gap": "{imported.shared.size-2}",
+                "tab-size": "{imported.shared.num-4}",
+                "width": "{imported.checkbox-input.part-0-1.width}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box"
+          },
+          "tokens": {
+            "column-gap": "{imported.checkbox-input.part-0.column-gap}",
+            "line-height": "{imported.shared.size-24}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "row-gap": "{imported.checkbox-input.part-0.row-gap}",
+            "tab-size": "{imported.shared.num-4}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "size",
+              "map": {
+                "md": {
+                  "height": "{imported.checkbox-input.part-0.height.md}",
+                  "width": "{imported.checkbox-input.part-0.width.md}"
+                },
+                "sm": {
+                  "height": "{imported.checkbox-input.part-0.height.sm}",
+                  "width": "{imported.checkbox-input.part-0.width.sm}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "tokens": {
+        "line-height": "{imported.shared.size-24}",
+        "tab-size": "{imported.shared.num-4}"
+      },
+      "tokensByProp": [
+        {
+          "prop": "size",
+          "map": {
+            "md": {
+              "height": "{imported.checkbox-input.root.height.md}",
+              "width": "{imported.checkbox-input.root.width.md}"
+            },
+            "sm": {
+              "height": "{imported.checkbox-input.root.height.sm}",
+              "width": "{imported.checkbox-input.root.width.sm}"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@astryxdesign/core",
+        "export": "CheckboxInput"
+      }
+    }
+  }
+}

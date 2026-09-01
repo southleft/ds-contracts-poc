@@ -1,0 +1,82 @@
+[
+  {
+    "key": "empty.no-isDisabled__default",
+    "pctExact": 0.6553460743801653,
+    "pctAA": 0.2146823347107438
+  },
+  {
+    "key": "empty.no-isDisabled__hover",
+    "pctExact": 0.6359762396694215,
+    "pctAA": 0.2146823347107438
+  },
+  {
+    "key": "empty.no-isDisabled__focus-visible",
+    "pctExact": 0.6408186983471075,
+    "pctAA": 0.2146823347107438
+  },
+  {
+    "key": "empty.no-isDisabled__active",
+    "pctExact": 0.6408186983471075,
+    "pctAA": 0.2146823347107438
+  },
+  {
+    "key": "empty.isDisabled__default",
+    "pctExact": 0.6262913223140496,
+    "pctAA": 0.18078512396694216
+  },
+  {
+    "key": "empty.isDisabled__hover",
+    "pctExact": 0.6182205578512396,
+    "pctAA": 0.18078512396694216
+  },
+  {
+    "key": "empty.isDisabled__focus-visible",
+    "pctExact": 0.6182205578512396,
+    "pctAA": 0.18078512396694216
+  },
+  {
+    "key": "empty.isDisabled__active",
+    "pctExact": 0.6182205578512396,
+    "pctAA": 0.18078512396694216
+  },
+  {
+    "key": "value.no-isDisabled__default",
+    "pctExact": 0.011299070247933885,
+    "pctAA": 0
+  },
+  {
+    "key": "value.no-isDisabled__hover",
+    "pctExact": 0.008070764462809916,
+    "pctAA": 0
+  },
+  {
+    "key": "value.no-isDisabled__focus-visible",
+    "pctExact": 0.008070764462809916,
+    "pctAA": 0
+  },
+  {
+    "key": "value.no-isDisabled__active",
+    "pctExact": 0.008070764462809916,
+    "pctAA": 0
+  },
+  {
+    "key": "value.isDisabled__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "value.isDisabled__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "value.isDisabled__focus-visible",
+    "pctExact": 0.008070764462809916,
+    "pctAA": 0
+  },
+  {
+    "key": "value.isDisabled__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

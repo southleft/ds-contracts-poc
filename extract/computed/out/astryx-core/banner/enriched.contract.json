@@ -1,0 +1,389 @@
+{
+  "$schema": "../../../contracts/contract.schema.json",
+  "id": "astryx.banner",
+  "name": "Banner",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "Astryx Banner — a status surface with title, description and optional dismiss. Promoted from the Phase-A code extraction of @astryxdesign/core@0.1.6 (MIT, react-tsx adapter, src/Banner/Banner.tsx, extracted 2026-07-20 — see examples/astryx/PROVENANCE.md). status/container/isDismissable are verbatim; title and description are materialized text slots (Astryx types both as ReactNode). CODE-SIDE fidelity: structural truth + StyleX token bindings, not the computed pixel floor (Astryx Phase A-2). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @astryxdesign/core@0.1.6 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [
+    {
+      "name": "status",
+      "description": "Status type controlling the icon and color scheme.",
+      "type": {
+        "enum": [
+          "info",
+          "warning",
+          "error",
+          "success"
+        ]
+      },
+      "default": "info",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Status",
+          "values": {
+            "info": "Info",
+            "warning": "Warning",
+            "error": "Error",
+            "success": "Success"
+          }
+        },
+        "code": {
+          "prop": "status"
+        }
+      }
+    },
+    {
+      "name": "container",
+      "description": "How the banner is contained.",
+      "type": {
+        "enum": [
+          "card",
+          "section"
+        ]
+      },
+      "default": "card",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Container",
+          "values": {
+            "card": "Card",
+            "section": "Section"
+          }
+        },
+        "code": {
+          "prop": "container"
+        }
+      }
+    },
+    {
+      "name": "isDismissable",
+      "description": "Whether the banner can be dismissed.",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Is Dismissable"
+        },
+        "code": {
+          "prop": "isDismissable"
+        }
+      }
+    },
+    {
+      "name": "title",
+      "description": "Title text displayed prominently in the header area.",
+      "type": "text",
+      "default": "A new software update is available.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Title"
+        },
+        "code": {
+          "prop": "title"
+        }
+      }
+    },
+    {
+      "name": "description",
+      "description": "Optional supporting text below the title in the header area.",
+      "type": "text",
+      "default": "See what changed in this version.",
+      "bindings": {
+        "figma": {
+          "kind": "TEXT",
+          "property": "Description"
+        },
+        "code": {
+          "prop": "description"
+        }
+      }
+    }
+  ],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "direction": "column"
+      },
+      "parts": {
+        "banner": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|banner — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "align": "start"
+          },
+          "parts": {
+            "banner-icon": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|banner-icon — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center"
+              },
+              "parts": {
+                "icon": {
+                  "element": "span",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy span|icon — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "layout": {
+                    "display": "flex",
+                    "grow": true,
+                    "align": "center",
+                    "justify": "center"
+                  },
+                  "parts": {
+                    "icon-info": {
+                      "icon": {
+                        "asset": "banner-icon-info",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "info"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=info."
+                    },
+                    "icon-warning": {
+                      "icon": {
+                        "asset": "banner-icon-warning",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "warning"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=warning."
+                    },
+                    "icon-error": {
+                      "icon": {
+                        "asset": "banner-icon-error",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "error"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=error."
+                    },
+                    "icon-success": {
+                      "icon": {
+                        "asset": "banner-icon-success",
+                        "size": 20
+                      },
+                      "visibleWhen": {
+                        "prop": "status",
+                        "equals": "success"
+                      },
+                      "description": "Per-value svg content promoted from the computed floor: the glyph drawn when status=success."
+                    }
+                  },
+                  "declared": {
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box"
+                  },
+                  "tokens": {
+                    "flex-shrink": "{imported.banner.icon.flex-shrink}",
+                    "font-size": "{imported.banner.icon.font-size}",
+                    "line-height": "{imported.banner.icon.line-height}",
+                    "tab-size": "{imported.shared.num-4}"
+                  },
+                  "tokensByProp": [
+                    {
+                      "prop": "status",
+                      "map": {
+                        "error": {
+                          "color": "{imported.banner.icon.color.error}"
+                        },
+                        "info": {
+                          "color": "{imported.banner.icon.color.info}"
+                        },
+                        "success": {
+                          "color": "{imported.banner.icon.color.success}"
+                        },
+                        "warning": {
+                          "color": "{imported.banner.icon.color.warning}"
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box"
+              },
+              "tokens": {
+                "flex-shrink": "{imported.banner.banner-icon.flex-shrink}",
+                "line-height": "{imported.shared.size-24}",
+                "tab-size": "{imported.shared.num-4}"
+              }
+            },
+            "part-0-1": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "direction": "column",
+                "grow": true
+              },
+              "parts": {
+                "label": {
+                  "content": {
+                    "prop": "title"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "font-family": "Times"
+                  },
+                  "tokens": {
+                    "color": "{imported.banner.label.color}",
+                    "font-size": "{imported.banner.label.font-size}",
+                    "font-weight": "{imported.banner.label.font-weight}",
+                    "line-height": "{imported.banner.label.line-height}",
+                    "tab-size": "{imported.shared.num-4}"
+                  }
+                },
+                "label-2": {
+                  "content": {
+                    "prop": "description"
+                  },
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy div| — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "font-family": "Times"
+                  },
+                  "tokens": {
+                    "color": "{imported.banner.label-2.color}",
+                    "font-size": "{imported.shared.size-12}",
+                    "font-weight": "{imported.banner.label-2.font-weight}",
+                    "line-height": "{imported.banner.label-2.line-height}",
+                    "tab-size": "{imported.shared.num-4}"
+                  }
+                }
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box"
+              },
+              "tokens": {
+                "column-gap": "{imported.shared.size-0}",
+                "flex-grow": "{imported.banner.part-0-1.flex-grow}",
+                "line-height": "{imported.shared.size-24}",
+                "min-width": "{imported.shared.size-0}",
+                "row-gap": "{imported.shared.size-0}",
+                "tab-size": "{imported.shared.num-4}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box"
+          },
+          "tokens": {
+            "column-gap": "{imported.banner.banner.column-gap}",
+            "line-height": "{imported.shared.size-24}",
+            "padding-bottom": "{imported.shared.size-12}",
+            "padding-left": "{imported.banner.banner.padding-left}",
+            "padding-right": "{imported.banner.banner.padding-right}",
+            "padding-top": "{imported.shared.size-12}",
+            "row-gap": "{imported.banner.banner.row-gap}",
+            "tab-size": "{imported.shared.num-4}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "container",
+              "map": {
+                "card": {
+                  "border-bottom-left-radius": "{imported.banner.banner.border-bottom-left-radius.card}",
+                  "border-bottom-right-radius": "{imported.banner.banner.border-bottom-right-radius.card}",
+                  "border-top-left-radius": "{imported.banner.banner.border-top-left-radius.card}",
+                  "border-top-right-radius": "{imported.banner.banner.border-top-right-radius.card}"
+                },
+                "section": {
+                  "border-bottom-left-radius": "{imported.banner.banner.border-bottom-left-radius.section}",
+                  "border-bottom-right-radius": "{imported.banner.banner.border-bottom-right-radius.section}",
+                  "border-top-left-radius": "{imported.banner.banner.border-top-left-radius.section}",
+                  "border-top-right-radius": "{imported.banner.banner.border-top-right-radius.section}"
+                }
+              }
+            },
+            {
+              "prop": "status",
+              "map": {
+                "error": {
+                  "background-color": "{imported.banner.banner.background-color.error}"
+                },
+                "info": {
+                  "background-color": "{imported.banner.banner.background-color.info}"
+                },
+                "success": {
+                  "background-color": "{imported.banner.banner.background-color.success}"
+                },
+                "warning": {
+                  "background-color": "{imported.banner.banner.background-color.warning}"
+                }
+              }
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box"
+      },
+      "tokens": {
+        "line-height": "{imported.shared.size-24}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "tab-size": "{imported.shared.num-4}",
+        "width": "{imported.banner.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@astryxdesign/core",
+        "export": "Banner"
+      }
+    }
+  }
+}
