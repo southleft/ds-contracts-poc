@@ -144,7 +144,7 @@
                 "border-right-style": "solid",
                 "border-top-style": "solid",
                 "box-sizing": "border-box",
-                "font-family": "Times"
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
                 "color": "{imported.progress-bar.label.color}",
@@ -160,7 +160,8 @@
             "border-left-style": "solid",
             "border-right-style": "solid",
             "border-top-style": "solid",
-            "box-sizing": "border-box"
+            "box-sizing": "border-box",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
           },
           "tokens": {
             "line-height": "{imported.shared.size-24}",
@@ -176,6 +177,7 @@
             "border-right-style": "solid",
             "border-top-style": "solid",
             "box-sizing": "border-box",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
             "overflow-x": "hidden",
             "overflow-y": "hidden"
           },
@@ -189,6 +191,7 @@
                 "border-right-style": "solid",
                 "border-top-style": "solid",
                 "box-sizing": "border-box",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                 "transition-duration": "0.41s",
                 "transition-property": "width",
                 "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
@@ -243,7 +246,8 @@
         "border-left-style": "solid",
         "border-right-style": "solid",
         "border-top-style": "solid",
-        "box-sizing": "border-box"
+        "box-sizing": "border-box",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       "tokens": {
         "column-gap": "{imported.progress-bar.root.column-gap}",

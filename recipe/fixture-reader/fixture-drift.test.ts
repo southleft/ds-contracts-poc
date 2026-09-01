@@ -124,7 +124,7 @@ test("FALSIFICATION: a reviewed-drift row whose drift healed is STALE, not silen
     path: "box.size",
     fixture: 24,
     captured: 25,
-    cause: "capture-theme-unavailable",
+    cause: "antd-indeterminate-dash-lowering",
   });
   const verdict = judge(results, plantedLedger);
   assert.equal(verdict.stale.length, 1);
@@ -159,13 +159,55 @@ test("the reader catches the owner-caught miss classes mechanically (the five-mi
   }
 });
 
-test("Astryx theme drifts are capture-theme-unavailable — never silent adoption of #262626", () => {
-  assert.ok(ledger.causes["capture-theme-unavailable"]);
-  assert.match(ledger.causes["capture-theme-unavailable"], /0064E0|#0064E0|branded/i);
-  assert.match(ledger.causes["capture-theme-unavailable"], /Do NOT adopt|do not adopt/i);
-  const astryxDrifts = ledger.rows.filter((r) => r.subject.endsWith("/astryx"));
-  assert.ok(astryxDrifts.length >= 34, "expected the checkbox+textarea theme block at minimum");
-  for (const r of astryxDrifts) {
-    assert.equal(r.cause, "capture-theme-unavailable", `${r.subject}|${r.path}`);
+test("Astryx is verified against the mount its fixtures describe — never silent adoption of #262626", () => {
+  // This guarded the RIGHT property through the WRONG mechanism. It asserted
+  // that >=34 Astryx rows carried a `capture-theme-unavailable` excuse, which
+  // made an excuse mandatory: the more Astryx facts went unverified, the more
+  // firmly the test passed. The excuse itself was correct — astryx.json mounts
+  // <Theme theme={neutralTheme}> (the library's README quick start) while
+  // recipe/fixtures/library-*.ts transcribe un-themed @astryxdesign/core
+  // defaults, so every Astryx fact was being compared against a different mount
+  // of the same library and none could ever match.
+  //
+  // astryx-core.json captures the core-only surface. All 56 rows became
+  // mechanical matches (reader: 477/57 -> 531/1). The property worth protecting
+  // is unchanged and is now asserted directly: the fixtures still carry the
+  // branded surface, and no blanket theme excuse has crept back.
+  const themeExcuses = ledger.rows.filter(
+    (r) => r.cause === "capture-theme-unavailable",
+  );
+  assert.equal(
+    themeExcuses.length,
+    0,
+    "a theme excuse is back — capture the mount the fixture describes instead",
+  );
+
+  // Astryx subjects must read the core-only ledgers, not the themed ones.
+  const astryx = results.filter((r) => r.library === "astryx" && r.ledgerFile);
+  assert.ok(astryx.length > 0, "expected Astryx subjects with ledgers");
+  for (const r of astryx) {
+    assert.match(
+      r.ledgerFile!,
+      /out\/astryx-core\//,
+      `${r.archetype}/astryx reads ${r.ledgerFile} — Astryx fixtures describe the un-themed core surface`,
+    );
   }
+
+  // And the branded accent is still the reviewed truth, not neutralTheme grey.
+  const branded = results.filter((r) => r.library === "astryx");
+  const hexes = branded.flatMap((r) =>
+    r.rows
+      .map((x) => String(x.fixtureValue))
+      .filter((v) => /^#[0-9a-f]{6,8}$/i.test(v)),
+  );
+  assert.ok(hexes.length > 0, "expected Astryx colour facts");
+  assert.equal(
+    hexes.some((h) => /^#262626/i.test(h)),
+    false,
+    "neutralTheme grey #262626 has been adopted into an Astryx fixture",
+  );
+  assert.ok(
+    hexes.some((h) => /^#0064e0/i.test(h)),
+    "Astryx fixtures should still carry the branded #0064E0",
+  );
 });

@@ -81,22 +81,22 @@
   },
   {
     "key": "error__default",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0.0032552083333333335,
     "pctAA": 0
   },
   {
     "key": "error__hover",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0.0032552083333333335,
     "pctAA": 0
   },
   {
     "key": "error__focus-visible",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0.0032552083333333335,
     "pctAA": 0
   },
   {
     "key": "error__active",
-    "pctExact": 0.006510416666666667,
+    "pctExact": 0.0032552083333333335,
     "pctAA": 0
   },
   {

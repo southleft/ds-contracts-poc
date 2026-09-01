@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "CheckboxInput"
     },
-    "ledgerFile": "extract/computed/out/astryx/checkboxinput/captured-truth.json",
+    "ledgerFile": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json",
     "rows": [
       {
         "path": "wrapper.size",
@@ -16,7 +16,7 @@
         "capturedValue": 24,
         "proposedValue": 24,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.0.width"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.0.width"
         ],
         "formula": "the 24×24 wrapper div around input+box"
       },
@@ -27,17 +27,17 @@
         "capturedValue": 22,
         "proposedValue": 22,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.width"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.width"
         ]
       },
       {
         "path": "box.radius",
         "fixtureValue": 4,
-        "verdict": "drift",
-        "capturedValue": 6,
-        "proposedValue": 6,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-left-radius"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-left-radius"
         ]
       },
       {
@@ -47,7 +47,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-width"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-width"
         ]
       },
       {
@@ -57,7 +57,7 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.padding-top"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.padding-top"
         ]
       },
       {
@@ -67,7 +67,7 @@
         "capturedValue": 8,
         "proposedValue": 8,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.column-gap"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.column-gap"
         ]
       },
       {
@@ -77,7 +77,7 @@
         "capturedValue": 12,
         "proposedValue": 12,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.width"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.width"
         ],
         "formula": "the indeterminate mark div inside the box"
       },
@@ -88,7 +88,7 @@
         "capturedValue": 2,
         "proposedValue": 2,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.height"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.height"
         ]
       },
       {
@@ -98,7 +98,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.border-top-left-radius"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.border-top-left-radius"
         ]
       },
       {
@@ -108,7 +108,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
         ]
       },
       {
@@ -118,7 +118,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.height"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.height"
         ]
       },
       {
@@ -128,10 +128,10 @@
         "capturedValue": 2.1,
         "proposedValue": 2.1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke-width",
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke-width",
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
         ],
-        "formula": "path stroke-width × (rendered svg width / viewBox 10) — the viewBox is not a computed channel; 10 is read from the committed glyph asset extract/computed/out/astryx/checkboxinput/assets/checkbox-input-icon-md.svg"
+        "formula": "path stroke-width × (rendered svg width / viewBox 10) — the viewBox is not a computed channel; 10 is read from the committed glyph asset extract/computed/out/astryx-core/checkboxinput/assets/checkbox-input-icon-md.svg"
       },
       {
         "path": "check.offsetX",
@@ -156,7 +156,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-size"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-size"
         ]
       },
       {
@@ -166,17 +166,17 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
         ]
       },
       {
         "path": "states.unchecked.enabled.boxBorder",
         "fixtureValue": "#ccd3dbff",
-        "verdict": "drift",
-        "capturedValue": "#d4d4d4ff",
-        "proposedValue": "#d4d4d4ff",
+        "verdict": "match",
+        "capturedValue": "#ccd3dbff",
+        "proposedValue": "#ccd3dbff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
         ]
       },
       {
@@ -186,17 +186,17 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
         ]
       },
       {
         "path": "states.unchecked.enabled.label",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
@@ -218,21 +218,21 @@
       {
         "path": "states.unchecked.disabled.boxFill",
         "fixtureValue": "#0536590c",
-        "verdict": "drift",
-        "capturedValue": "#f1f1f1ff",
-        "proposedValue": "#f1f1f1ff",
+        "verdict": "match",
+        "capturedValue": "#0536590c",
+        "proposedValue": "#0536590c",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.background-color"
         ]
       },
       {
         "path": "states.unchecked.disabled.boxBorder",
         "fixtureValue": "#05365919",
-        "verdict": "drift",
-        "capturedValue": "#ebebebff",
-        "proposedValue": "#ebebebff",
+        "verdict": "match",
+        "capturedValue": "#05365919",
+        "proposedValue": "#05365919",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
         ]
       },
       {
@@ -242,17 +242,17 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.opacity"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.opacity"
         ]
       },
       {
         "path": "states.unchecked.disabled.label",
         "fixtureValue": "#a4b0bcff",
-        "verdict": "drift",
-        "capturedValue": "#a3a3a3ff",
-        "proposedValue": "#a3a3a3ff",
+        "verdict": "match",
+        "capturedValue": "#a4b0bcff",
+        "proposedValue": "#a4b0bcff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
@@ -274,21 +274,21 @@
       {
         "path": "states.checked.enabled.boxFill",
         "fixtureValue": "#0064e0ff",
-        "verdict": "drift",
-        "capturedValue": "#262626ff",
-        "proposedValue": "#262626ff",
+        "verdict": "match",
+        "capturedValue": "#0064e0ff",
+        "proposedValue": "#0064e0ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
         ]
       },
       {
         "path": "states.checked.enabled.boxBorder",
         "fixtureValue": "#0064e0ff",
-        "verdict": "drift",
-        "capturedValue": "#262626ff",
-        "proposedValue": "#262626ff",
+        "verdict": "match",
+        "capturedValue": "#0064e0ff",
+        "proposedValue": "#0064e0ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
         ]
       },
       {
@@ -298,17 +298,17 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
         ]
       },
       {
         "path": "states.checked.enabled.label",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
@@ -326,28 +326,28 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke"
         ],
         "formula": "the check strokes in --color-on-accent"
       },
       {
         "path": "states.checked.disabled.boxFill",
         "fixtureValue": "#0064e0ff",
-        "verdict": "drift",
-        "capturedValue": "#262626ff",
-        "proposedValue": "#262626ff",
+        "verdict": "match",
+        "capturedValue": "#0064e0ff",
+        "proposedValue": "#0064e0ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.background-color"
         ]
       },
       {
         "path": "states.checked.disabled.boxBorder",
         "fixtureValue": "#05365919",
-        "verdict": "drift",
-        "capturedValue": "#ebebebff",
-        "proposedValue": "#ebebebff",
+        "verdict": "match",
+        "capturedValue": "#05365919",
+        "proposedValue": "#05365919",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
         ]
       },
       {
@@ -357,17 +357,17 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.opacity"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.opacity"
         ]
       },
       {
         "path": "states.checked.disabled.label",
         "fixtureValue": "#a4b0bcff",
-        "verdict": "drift",
-        "capturedValue": "#a3a3a3ff",
-        "proposedValue": "#a3a3a3ff",
+        "verdict": "match",
+        "capturedValue": "#a4b0bcff",
+        "proposedValue": "#a4b0bcff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
@@ -385,28 +385,28 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default tag:path.stroke"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default tag:path.stroke"
         ],
         "formula": "the check strokes in --color-on-accent"
       },
       {
         "path": "states.indeterminate.enabled.boxFill",
         "fixtureValue": "#0064e0ff",
-        "verdict": "drift",
-        "capturedValue": "#262626ff",
-        "proposedValue": "#262626ff",
+        "verdict": "match",
+        "capturedValue": "#0064e0ff",
+        "proposedValue": "#0064e0ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.background-color"
         ]
       },
       {
         "path": "states.indeterminate.enabled.boxBorder",
         "fixtureValue": "#0064e0ff",
-        "verdict": "drift",
-        "capturedValue": "#262626ff",
-        "proposedValue": "#262626ff",
+        "verdict": "match",
+        "capturedValue": "#0064e0ff",
+        "proposedValue": "#0064e0ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
         ]
       },
       {
@@ -416,17 +416,17 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.opacity"
         ]
       },
       {
         "path": "states.indeterminate.enabled.label",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
@@ -436,7 +436,7 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.background-color"
         ]
       },
       {
@@ -450,21 +450,21 @@
       {
         "path": "states.indeterminate.disabled.boxFill",
         "fixtureValue": "#0064e0ff",
-        "verdict": "drift",
-        "capturedValue": "#262626ff",
-        "proposedValue": "#262626ff",
+        "verdict": "match",
+        "capturedValue": "#0064e0ff",
+        "proposedValue": "#0064e0ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.background-color"
         ]
       },
       {
         "path": "states.indeterminate.disabled.boxBorder",
         "fixtureValue": "#05365919",
-        "verdict": "drift",
-        "capturedValue": "#ebebebff",
-        "proposedValue": "#ebebebff",
+        "verdict": "match",
+        "capturedValue": "#05365919",
+        "proposedValue": "#05365919",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.border-top-color"
         ]
       },
       {
@@ -474,17 +474,17 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.opacity"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.opacity"
         ]
       },
       {
         "path": "states.indeterminate.disabled.label",
         "fixtureValue": "#a4b0bcff",
-        "verdict": "drift",
-        "capturedValue": "#a3a3a3ff",
-        "proposedValue": "#a3a3a3ff",
+        "verdict": "match",
+        "capturedValue": "#a4b0bcff",
+        "proposedValue": "#a4b0bcff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
@@ -494,7 +494,7 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default idx:0.0.1.1.background-color"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default idx:0.0.1.1.background-color"
         ]
       },
       {
@@ -512,17 +512,17 @@
         "capturedValue": "center",
         "proposedValue": "center",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.align-items"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.align-items"
         ]
       },
       {
         "path": "typography.label.family",
         "fixtureValue": "-apple-system",
-        "verdict": "drift",
-        "capturedValue": "Figtree",
-        "proposedValue": "Figtree",
+        "verdict": "match",
+        "capturedValue": "-apple-system",
+        "proposedValue": "-apple-system",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-family"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-family"
         ],
         "formula": "first family of the label's computed stack under the library's documented Theme mount"
       },
@@ -533,7 +533,7 @@
         "capturedValue": "Medium",
         "proposedValue": "Medium",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-weight"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-weight"
         ],
         "formula": "label font-weight → style word"
       },
@@ -544,14 +544,14 @@
         "capturedValue": "path(\"M 8.5 2.5 L 4 7.5 L 1.5 5\")",
         "proposedValue": "M11.9 3.5 L5.6 10.5 L2.1 7",
         "ledgerKeys": [
-          "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.d"
+          "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.d"
         ],
         "formula": "captured path() coordinates × (rendered 14 / viewBox 10) numerically equal the fixture's scaled path"
       }
     ],
     "counts": {
-      "match": 26,
-      "drift": 19,
+      "match": 45,
+      "drift": 0,
       "receipt": 10,
       "unread": 0
     }
@@ -578,13 +578,11 @@
       },
       {
         "path": "box.size",
-        "fixtureValue": 24,
-        "verdict": "match",
-        "capturedValue": 24,
-        "proposedValue": 24,
-        "ledgerKeys": [
-          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default cls:MuiSvgIcon-root.width"
-        ]
+        "fixtureValue": 18,
+        "verdict": "receipt",
+        "proposedValue": 18,
+        "receipt": "the painted square is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel",
+        "evidence": "extract/computed/out/mui/checkbox/assets/checkbox-icon-unchecked.svg outer subpath 3→21 in viewBox 0 0 24 24 = 18×18"
       },
       {
         "path": "box.radius",
@@ -604,13 +602,11 @@
       },
       {
         "path": "box.padding",
-        "fixtureValue": 9,
-        "verdict": "match",
-        "capturedValue": 9,
-        "proposedValue": 9,
-        "ledgerKeys": [
-          "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default root.padding-top"
-        ]
+        "fixtureValue": 12,
+        "verdict": "receipt",
+        "proposedValue": 12,
+        "receipt": "SwitchBase's computed padding 9 is measured from the 24 viewport; from the painted 18 square the inset to the 42 wrapper is 12",
+        "evidence": "SwitchBase.js padding 9 + checkbox-icon-unchecked.svg 18×18 painted extent; 18 + 12×2 = 42"
       },
       {
         "path": "row.gap",
@@ -1056,10 +1052,10 @@
       },
       {
         "path": "check.path",
-        "fixtureValue": "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+        "fixtureValue": "M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z",
         "verdict": "match",
         "capturedValue": "path(\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\")",
-        "proposedValue": "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+        "proposedValue": "M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z",
         "ledgerKeys": [
           "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default tag:path.d"
         ],
@@ -1067,9 +1063,9 @@
       }
     ],
     "counts": {
-      "match": 24,
+      "match": 22,
       "drift": 0,
-      "receipt": 31,
+      "receipt": 33,
       "unread": 0
     }
   },

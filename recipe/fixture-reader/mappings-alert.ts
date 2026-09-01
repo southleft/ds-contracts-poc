@@ -3,7 +3,7 @@
  *
  * MUI    extract/computed/out/mui/alert/captured-truth.json
  * AntD   extract/computed/out/antd/alert/captured-truth.json
- * Astryx extract/computed/out/astryx/banner/captured-truth.json
+ * Astryx extract/computed/out/astryx-core/banner/captured-truth.json
  */
 import { px } from "./ledger.js";
 import type { FactMapping } from "./reader.js";
@@ -143,7 +143,7 @@ export const antdAlertMappings: FactMapping[] = [
   },
 ];
 
-export const ASTRYX_ALERT_LEDGER = "extract/computed/out/astryx/banner/captured-truth.json";
+export const ASTRYX_ALERT_LEDGER = "extract/computed/out/astryx-core/banner/captured-truth.json";
 const xRoot = "cls:astryx-banner";
 const xTitle = "idx:0.1.0";
 const xIcon = "cls:astryx-icon";

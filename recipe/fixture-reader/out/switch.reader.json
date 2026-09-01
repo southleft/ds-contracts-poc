@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "Switch"
     },
-    "ledgerFile": "extract/computed/out/astryx/switch/captured-truth.json",
+    "ledgerFile": "extract/computed/out/astryx-core/switch/captured-truth.json",
     "rows": [
       {
         "path": "wrapper.width",
@@ -16,7 +16,7 @@
         "capturedValue": 40,
         "proposedValue": 40,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
         ]
       },
       {
@@ -26,7 +26,7 @@
         "capturedValue": 24,
         "proposedValue": 24,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
         ]
       },
       {
@@ -44,7 +44,7 @@
         "capturedValue": 40,
         "proposedValue": 40,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
         ]
       },
       {
@@ -54,7 +54,7 @@
         "capturedValue": 24,
         "proposedValue": 24,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
         ]
       },
       {
@@ -64,7 +64,7 @@
         "capturedValue": 9999,
         "proposedValue": 9999,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.border-top-left-radius"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.border-top-left-radius"
         ]
       },
       {
@@ -74,7 +74,7 @@
         "capturedValue": 4,
         "proposedValue": 4,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.padding-left"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.padding-left"
         ]
       },
       {
@@ -84,7 +84,7 @@
         "capturedValue": 16,
         "proposedValue": 16,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.width"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.width"
         ]
       },
       {
@@ -110,17 +110,17 @@
         "capturedValue": 8,
         "proposedValue": 8,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default idx:0.column-gap"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default idx:0.column-gap"
         ]
       },
       {
         "path": "states.false.enabled.trackFill",
         "fixtureValue": "#0a131733",
-        "verdict": "drift",
-        "capturedValue": "#d4d4d4ff",
-        "proposedValue": "#d4d4d4ff",
+        "verdict": "match",
+        "capturedValue": "#0a131733",
+        "proposedValue": "#0a131733",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.background-color"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.background-color"
         ]
       },
       {
@@ -130,7 +130,7 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.background-color"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.background-color"
         ]
       },
       {
@@ -140,27 +140,27 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.opacity"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.opacity"
         ]
       },
       {
         "path": "states.false.enabled.label",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
         "path": "states.false.disabled.trackFill",
         "fixtureValue": "#0a131733",
-        "verdict": "drift",
-        "capturedValue": "#d4d4d4ff",
-        "proposedValue": "#d4d4d4ff",
+        "verdict": "match",
+        "capturedValue": "#0a131733",
+        "proposedValue": "#0a131733",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.background-color"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.background-color"
         ]
       },
       {
@@ -170,7 +170,7 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch-thumb.background-color"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch-thumb.background-color"
         ]
       },
       {
@@ -180,17 +180,17 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.opacity"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.opacity"
         ]
       },
       {
         "path": "states.false.disabled.label",
         "fixtureValue": "#a4b0bcff",
-        "verdict": "drift",
-        "capturedValue": "#a3a3a3ff",
-        "proposedValue": "#a3a3a3ff",
+        "verdict": "match",
+        "capturedValue": "#a4b0bcff",
+        "proposedValue": "#a4b0bcff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
@@ -264,7 +264,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-size"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-size"
         ]
       },
       {
@@ -294,11 +294,11 @@
       {
         "path": "typography.label.family",
         "fixtureValue": "-apple-system",
-        "verdict": "drift",
-        "capturedValue": "Figtree",
-        "proposedValue": "Figtree",
+        "verdict": "match",
+        "capturedValue": "-apple-system",
+        "proposedValue": "-apple-system",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-family"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-family"
         ]
       },
       {
@@ -308,13 +308,13 @@
         "capturedValue": "Medium",
         "proposedValue": "Medium",
         "ledgerKeys": [
-          "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-weight"
+          "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-weight"
         ]
       }
     ],
     "counts": {
-      "match": 14,
-      "drift": 5,
+      "match": 19,
+      "drift": 0,
       "receipt": 14,
       "unread": 0
     }

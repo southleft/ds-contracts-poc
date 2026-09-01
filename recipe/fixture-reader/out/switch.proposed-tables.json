@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "Switch"
     },
-    "ledger": "extract/computed/out/astryx/switch/captured-truth.json",
+    "ledger": "extract/computed/out/astryx-core/switch/captured-truth.json",
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
     "values": {
       "wrapper.width": {
@@ -15,14 +15,14 @@
         "proposed": 40,
         "verdict": "match",
         "captured": 40,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
       },
       "wrapper.height": {
         "fixture": 24,
         "proposed": 24,
         "verdict": "match",
         "captured": 24,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
       },
       "wrapper.padding": {
         "fixture": 0,
@@ -35,35 +35,35 @@
         "proposed": 40,
         "verdict": "match",
         "captured": 40,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.width"
       },
       "track.height": {
         "fixture": 24,
         "proposed": 24,
         "verdict": "match",
         "captured": 24,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.height"
       },
       "track.radius": {
         "fixture": 9999,
         "proposed": 9999,
         "verdict": "match",
         "captured": 9999,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.border-top-left-radius"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.border-top-left-radius"
       },
       "track.padding": {
         "fixture": 4,
         "proposed": 4,
         "verdict": "match",
         "captured": 4,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.padding-left"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.padding-left"
       },
       "thumb.offSize": {
         "fixture": 16,
         "proposed": 16,
         "verdict": "match",
         "captured": 16,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.width"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.width"
       },
       "thumb.onSize": {
         "fixture": 20,
@@ -82,63 +82,63 @@
         "proposed": 8,
         "verdict": "match",
         "captured": 8,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default idx:0.column-gap"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default idx:0.column-gap"
       },
       "states.false.enabled.trackFill": {
         "fixture": "#0a131733",
-        "proposed": "#d4d4d4ff",
-        "verdict": "drift",
-        "captured": "#d4d4d4ff",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.background-color"
+        "proposed": "#0a131733",
+        "verdict": "match",
+        "captured": "#0a131733",
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.background-color"
       },
       "states.false.enabled.thumbFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.background-color"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch-thumb.background-color"
       },
       "states.false.enabled.trackOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.opacity"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.opacity"
       },
       "states.false.enabled.label": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.color"
       },
       "states.false.disabled.trackFill": {
         "fixture": "#0a131733",
-        "proposed": "#d4d4d4ff",
-        "verdict": "drift",
-        "captured": "#d4d4d4ff",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.background-color"
+        "proposed": "#0a131733",
+        "verdict": "match",
+        "captured": "#0a131733",
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.background-color"
       },
       "states.false.disabled.thumbFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch-thumb.background-color"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch-thumb.background-color"
       },
       "states.false.disabled.trackOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.opacity"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.opacity"
       },
       "states.false.disabled.label": {
         "fixture": "#a4b0bcff",
-        "proposed": "#a3a3a3ff",
-        "verdict": "drift",
-        "captured": "#a3a3a3ff",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#a4b0bcff",
+        "verdict": "match",
+        "captured": "#a4b0bcff",
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.isDisabled__default cls:astryx-field-label.color"
       },
       "states.true.enabled.trackFill": {
         "fixture": "#0064e0ff",
@@ -193,7 +193,7 @@
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-size"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-size"
       },
       "rowAlign": {
         "fixture": "center",
@@ -215,17 +215,17 @@
       },
       "typography.label.family": {
         "fixture": "-apple-system",
-        "proposed": "Figtree",
-        "verdict": "drift",
-        "captured": "Figtree",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-family"
+        "proposed": "-apple-system",
+        "verdict": "match",
+        "captured": "-apple-system",
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-family"
       },
       "typography.label.style": {
         "fixture": "Medium",
         "proposed": "Medium",
         "verdict": "match",
         "captured": "Medium",
-        "provenance": "extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-weight"
+        "provenance": "extract/computed/out/astryx-core/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-weight"
       }
     }
   },

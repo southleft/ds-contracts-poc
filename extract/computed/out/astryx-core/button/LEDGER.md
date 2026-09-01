@@ -80,13 +80,13 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **41**
+- base declared facts: **43**
   - root.border-bottom-style = `none`
   - root.border-left-style = `none`
   - root.border-right-style = `none`
   - root.border-top-style = `none`
   - root.cursor = `pointer`
-  - root.font-family = `Times`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - root.position = `relative`
   - root.text-wrap-mode = `nowrap`
   - root.transform = `matrix(1, 0, 0, 1, 0, 0)`
@@ -99,6 +99,7 @@ Zero contradictions.
   - part-0.border-top-style = `solid`
   - part-0.box-sizing = `border-box`
   - part-0.cursor = `pointer`
+  - part-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0.text-align = `center`
   - part-0.text-wrap-mode = `nowrap`
   - label.border-bottom-style = `solid`
@@ -107,7 +108,7 @@ Zero contradictions.
   - label.border-top-style = `solid`
   - label.box-sizing = `border-box`
   - label.cursor = `pointer`
-  - label.font-family = `Times`
+  - label.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label.overflow-x = `hidden`
   - label.overflow-y = `hidden`
   - label.text-align = `center`
@@ -115,6 +116,7 @@ Zero contradictions.
   - label.text-wrap-mode = `nowrap`
   - part-1.box-sizing = `border-box`
   - part-1.cursor = `pointer`
+  - part-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-1.overflow-x = `hidden`
   - part-1.overflow-y = `hidden`
   - part-1.pointer-events = `none`
@@ -146,6 +148,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **95.629%** (13128/13728 cells; 0/96 combo×state rows fully equal)
-- pixel: 0/96 pairs perfect at threshold 0 · 0/96 at the AA point (mean AA 1.463%, max 1.735%; 96/96 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **95.690%** (13320/13920 cells; 0/96 combo×state rows fully equal)
+- pixel: 0/96 pairs perfect at threshold 0 · 0/96 at the AA point (mean AA 1.703%, max 2.035%; 96/96 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

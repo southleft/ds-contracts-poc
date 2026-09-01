@@ -57,7 +57,7 @@ Zero contradictions.
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
-  - root.font-family = `Times`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - root.text-wrap-mode = `nowrap`
 - state declared facts: **0**
 
@@ -71,5 +71,5 @@ Zero contradictions.
 ## Fidelity gate (scorecard.json)
 
 - computed-equality (styled channels, contract-mediated): **97.143%** (1904/1960 cells; 0/56 combo×state rows fully equal)
-- pixel: 0/56 pairs perfect at threshold 0 · 0/56 at the AA point (mean AA 1.719%, max 1.982%; 56/56 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- pixel: 0/56 pairs perfect at threshold 0 · 0/56 at the AA point (mean AA 1.879%, max 2.178%; 56/56 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

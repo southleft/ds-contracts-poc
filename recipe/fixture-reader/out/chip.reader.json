@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "Token"
     },
-    "ledgerFile": "extract/computed/out/astryx/token/captured-truth.json",
+    "ledgerFile": "extract/computed/out/astryx-core/token/captured-truth.json",
     "rows": [
       {
         "path": "box.height",
@@ -16,7 +16,7 @@
         "capturedValue": 24,
         "proposedValue": 24,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.height"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.height"
         ]
       },
       {
@@ -26,7 +26,7 @@
         "capturedValue": 8,
         "proposedValue": 8,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.padding-left"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.padding-left"
         ]
       },
       {
@@ -36,17 +36,17 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.padding-top"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.padding-top"
         ]
       },
       {
         "path": "box.radius",
         "fixtureValue": 4,
-        "verdict": "drift",
-        "capturedValue": 6,
-        "proposedValue": 6,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.border-top-left-radius"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.border-top-left-radius"
         ]
       },
       {
@@ -56,7 +56,7 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.border-top-width"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.border-top-width"
         ]
       },
       {
@@ -66,7 +66,7 @@
         "capturedValue": 12,
         "proposedValue": 12,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-size"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.font-size"
         ]
       },
       {
@@ -76,7 +76,7 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.line-height"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.line-height"
         ],
         "formula": "sub-pixel line-height rounded",
         "tolerance": 0.001,
@@ -85,11 +85,11 @@
       {
         "path": "rest.boxFill",
         "fixtureValue": "#0536591a",
-        "verdict": "drift",
-        "capturedValue": "#0000000f",
-        "proposedValue": "#0000000f",
+        "verdict": "match",
+        "capturedValue": "#0536591a",
+        "proposedValue": "#0536591a",
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.background-color"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.background-color"
         ]
       },
       {
@@ -107,17 +107,17 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.opacity"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.opacity"
         ]
       },
       {
         "path": "rest.label",
         "fixtureValue": "#0a1317ff",
-        "verdict": "drift",
-        "capturedValue": "#171717ff",
-        "proposedValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#0a1317ff",
+        "proposedValue": "#0a1317ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.color"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.color"
         ]
       },
       {
@@ -131,11 +131,11 @@
       {
         "path": "typography.label.family",
         "fixtureValue": "-apple-system",
-        "verdict": "drift",
-        "capturedValue": "Figtree",
-        "proposedValue": "Figtree",
+        "verdict": "match",
+        "capturedValue": "-apple-system",
+        "proposedValue": "-apple-system",
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-family"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.font-family"
         ]
       },
       {
@@ -145,13 +145,13 @@
         "capturedValue": "Medium",
         "proposedValue": "Medium",
         "ledgerKeys": [
-          "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-weight"
+          "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.font-weight"
         ]
       }
     ],
     "counts": {
-      "match": 8,
-      "drift": 4,
+      "match": 12,
+      "drift": 0,
       "receipt": 2,
       "unread": 0
     }

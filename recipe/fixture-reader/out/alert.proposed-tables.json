@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "Banner"
     },
-    "ledger": "extract/computed/out/astryx/banner/captured-truth.json",
+    "ledger": "extract/computed/out/astryx-core/banner/captured-truth.json",
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
     "values": {
       "box.height": {
@@ -21,28 +21,28 @@
         "proposed": 16,
         "verdict": "match",
         "captured": 16,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-left"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-left"
       },
       "box.paddingY": {
         "fixture": 12,
         "proposed": 12,
         "verdict": "match",
         "captured": 12,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-top"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-top"
       },
       "box.radius": {
         "fixture": 12,
         "proposed": 12,
         "verdict": "match",
         "captured": 12,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-left-radius"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-left-radius"
       },
       "box.borderWidth": {
         "fixture": 0,
         "proposed": 0,
         "verdict": "match",
         "captured": 0,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-width"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-width"
       },
       "box.gap": {
         "fixture": 8,
@@ -55,28 +55,28 @@
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.width"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-icon.width"
       },
       "titleFontSize": {
         "fixture": 14,
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-size"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.font-size"
       },
       "titleLineHeight": {
         "fixture": 20,
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.line-height"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.line-height"
       },
       "states.info.boxFill": {
         "fixture": "#0082fb33",
-        "proposed": "#c4ddfbff",
-        "verdict": "drift",
-        "captured": "#c4ddfbff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.background-color"
+        "proposed": "#0082fb33",
+        "verdict": "match",
+        "captured": "#0082fb33",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.background-color"
       },
       "states.info.boxBorder": {
         "fixture": "#00000000",
@@ -86,31 +86,31 @@
       },
       "states.info.title": {
         "fixture": "#0a1317ff",
-        "proposed": "#00458cff",
-        "verdict": "drift",
-        "captured": "#00458cff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.color"
+        "proposed": "#0a1317ff",
+        "verdict": "match",
+        "captured": "#0a1317ff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.color"
       },
       "states.info.iconFill": {
         "fixture": "#0064e0ff",
-        "proposed": "#00458cff",
-        "verdict": "drift",
-        "captured": "#00458cff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.color"
+        "proposed": "#0064e0ff",
+        "verdict": "match",
+        "captured": "#0064e0ff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-icon.color"
       },
       "states.info.iconOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.opacity"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-icon.opacity"
       },
       "states.success.boxFill": {
         "fixture": "#0b991f33",
-        "proposed": "#c5e5c0ff",
-        "verdict": "drift",
-        "captured": "#c5e5c0ff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-banner.background-color"
+        "proposed": "#0b991f33",
+        "verdict": "match",
+        "captured": "#0b991f33",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default cls:astryx-banner.background-color"
       },
       "states.success.boxBorder": {
         "fixture": "#00000000",
@@ -120,31 +120,31 @@
       },
       "states.success.title": {
         "fixture": "#0a1317ff",
-        "proposed": "#0c5700ff",
-        "verdict": "drift",
-        "captured": "#0c5700ff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default idx:0.1.0.color"
+        "proposed": "#0a1317ff",
+        "verdict": "match",
+        "captured": "#0a1317ff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default idx:0.1.0.color"
       },
       "states.success.iconFill": {
         "fixture": "#0d8626ff",
-        "proposed": "#0c5700ff",
-        "verdict": "drift",
-        "captured": "#0c5700ff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-icon.color"
+        "proposed": "#0d8626ff",
+        "verdict": "match",
+        "captured": "#0d8626ff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default cls:astryx-icon.color"
       },
       "states.success.iconOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-icon.opacity"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default cls:astryx-icon.opacity"
       },
       "states.warning.boxFill": {
         "fixture": "#e2a40033",
-        "proposed": "#f8da9dff",
-        "verdict": "drift",
-        "captured": "#f8da9dff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-banner.background-color"
+        "proposed": "#e2a40033",
+        "verdict": "match",
+        "captured": "#e2a40033",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default cls:astryx-banner.background-color"
       },
       "states.warning.boxBorder": {
         "fixture": "#00000000",
@@ -154,31 +154,31 @@
       },
       "states.warning.title": {
         "fixture": "#0a1317ff",
-        "proposed": "#584400ff",
-        "verdict": "drift",
-        "captured": "#584400ff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default idx:0.1.0.color"
+        "proposed": "#0a1317ff",
+        "verdict": "match",
+        "captured": "#0a1317ff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default idx:0.1.0.color"
       },
       "states.warning.iconFill": {
         "fixture": "#e9af08ff",
-        "proposed": "#584400ff",
-        "verdict": "drift",
-        "captured": "#584400ff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-icon.color"
+        "proposed": "#e9af08ff",
+        "verdict": "match",
+        "captured": "#e9af08ff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default cls:astryx-icon.color"
       },
       "states.warning.iconOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-icon.opacity"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default cls:astryx-icon.opacity"
       },
       "states.error.boxFill": {
         "fixture": "#e3193b33",
-        "proposed": "#facecbff",
-        "verdict": "drift",
-        "captured": "#facecbff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-banner.background-color"
+        "proposed": "#e3193b33",
+        "verdict": "match",
+        "captured": "#e3193b33",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default cls:astryx-banner.background-color"
       },
       "states.error.boxBorder": {
         "fixture": "#00000000",
@@ -188,24 +188,24 @@
       },
       "states.error.title": {
         "fixture": "#0a1317ff",
-        "proposed": "#89001aff",
-        "verdict": "drift",
-        "captured": "#89001aff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default idx:0.1.0.color"
+        "proposed": "#0a1317ff",
+        "verdict": "match",
+        "captured": "#0a1317ff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default idx:0.1.0.color"
       },
       "states.error.iconFill": {
         "fixture": "#e3193bff",
-        "proposed": "#89001aff",
-        "verdict": "drift",
-        "captured": "#89001aff",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-icon.color"
+        "proposed": "#e3193bff",
+        "verdict": "match",
+        "captured": "#e3193bff",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default cls:astryx-icon.color"
       },
       "states.error.iconOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-icon.opacity"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default cls:astryx-icon.opacity"
       },
       "strokeAlign": {
         "fixture": "inside",
@@ -215,17 +215,17 @@
       },
       "typography.title.family": {
         "fixture": "-apple-system",
-        "proposed": "Figtree",
-        "verdict": "drift",
-        "captured": "Figtree",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-family"
+        "proposed": "-apple-system",
+        "verdict": "match",
+        "captured": "-apple-system",
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.font-family"
       },
       "typography.title.style": {
         "fixture": "Semibold",
         "proposed": "Semibold",
         "verdict": "match",
         "captured": "Semibold",
-        "provenance": "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-weight"
+        "provenance": "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.font-weight"
       }
     }
   },

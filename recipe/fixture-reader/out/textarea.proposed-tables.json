@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "TextArea"
     },
-    "ledger": "extract/computed/out/astryx/textarea/captured-truth.json",
+    "ledger": "extract/computed/out/astryx-core/textarea/captured-truth.json",
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
     "values": {
       "box.height": {
@@ -15,70 +15,70 @@
         "proposed": 70,
         "verdict": "match",
         "captured": 70,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.height"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.height"
       },
       "box.paddingX": {
         "fixture": 8,
         "proposed": 8,
         "verdict": "match",
         "captured": 8,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-left"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-left"
       },
       "box.paddingY": {
         "fixture": 4,
         "proposed": 4,
         "verdict": "match",
         "captured": 4,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-top"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-top"
       },
       "box.radius": {
         "fixture": 8,
-        "proposed": 10,
-        "verdict": "drift",
-        "captured": 10,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-left-radius"
+        "proposed": 8,
+        "verdict": "match",
+        "captured": 8,
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-left-radius"
       },
       "box.borderWidth": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-width"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-width"
       },
       "box.rows": {
         "fixture": 3,
         "proposed": 3,
         "verdict": "match",
         "captured": 3,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.height ; extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height — rendered rows = inner textarea height / line-height (TextArea.tsx rows default 3)"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.height ; extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height — rendered rows = inner textarea height / line-height (TextArea.tsx rows default 3)"
       },
       "box.lineHeight": {
         "fixture": 20,
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
       },
       "labelGap": {
         "fixture": 4,
         "proposed": 4,
         "verdict": "match",
         "captured": 4,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default root.row-gap — Field container row-gap between label and control"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default root.row-gap — Field container row-gap between label and control"
       },
       "labelFontSize": {
         "fixture": 14,
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-size"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-size"
       },
       "valueFontSize": {
         "fixture": 14,
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-size"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-size"
       },
       "labelInsetX": {
         "fixture": 0,
@@ -115,168 +115,168 @@
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.background-color"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.background-color"
       },
       "states.empty.enabled.boxBorder": {
         "fixture": "#ccd3dbff",
-        "proposed": "#d4d4d4ff",
-        "verdict": "drift",
-        "captured": "#d4d4d4ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-color"
+        "proposed": "#ccd3dbff",
+        "verdict": "match",
+        "captured": "#ccd3dbff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-color"
       },
       "states.empty.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.opacity"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.opacity"
       },
       "states.empty.enabled.label": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.color"
       },
       "states.empty.enabled.value": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0::placeholder.color — placeholder ink (Astryx shows the placeholder at rest)"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0::placeholder.color — placeholder ink (Astryx shows the placeholder at rest)"
       },
       "states.empty.disabled.boxFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.background-color"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.background-color"
       },
       "states.empty.disabled.boxBorder": {
         "fixture": "#ccd3dbff",
-        "proposed": "#d4d4d4ff",
-        "verdict": "drift",
-        "captured": "#d4d4d4ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.border-top-color"
+        "proposed": "#ccd3dbff",
+        "verdict": "match",
+        "captured": "#ccd3dbff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.border-top-color"
       },
       "states.empty.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.opacity"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.opacity"
       },
       "states.empty.disabled.label": {
         "fixture": "#a4b0bcff",
-        "proposed": "#a3a3a3ff",
-        "verdict": "drift",
-        "captured": "#a3a3a3ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#a4b0bcff",
+        "verdict": "match",
+        "captured": "#a4b0bcff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-field-label.color"
       },
       "states.empty.disabled.value": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default idx:1.0.0::placeholder.color — placeholder ink (Astryx shows the placeholder at rest)"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default idx:1.0.0::placeholder.color — placeholder ink (Astryx shows the placeholder at rest)"
       },
       "states.value.enabled.boxFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.background-color"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.background-color"
       },
       "states.value.enabled.boxBorder": {
         "fixture": "#ccd3dbff",
-        "proposed": "#d4d4d4ff",
-        "verdict": "drift",
-        "captured": "#d4d4d4ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.border-top-color"
+        "proposed": "#ccd3dbff",
+        "verdict": "match",
+        "captured": "#ccd3dbff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.border-top-color"
       },
       "states.value.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.opacity"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.opacity"
       },
       "states.value.enabled.label": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-field-label.color"
       },
       "states.value.enabled.value": {
         "fixture": "#0a1317ff",
-        "proposed": "#171717ff",
-        "verdict": "drift",
-        "captured": "#171717ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default idx:1.0.0.color"
+        "proposed": "#0a1317ff",
+        "verdict": "match",
+        "captured": "#0a1317ff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default idx:1.0.0.color"
       },
       "states.value.disabled.boxFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.background-color"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.background-color"
       },
       "states.value.disabled.boxBorder": {
         "fixture": "#ccd3dbff",
-        "proposed": "#d4d4d4ff",
-        "verdict": "drift",
-        "captured": "#d4d4d4ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.border-top-color"
+        "proposed": "#ccd3dbff",
+        "verdict": "match",
+        "captured": "#ccd3dbff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.border-top-color"
       },
       "states.value.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.opacity"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.opacity"
       },
       "states.value.disabled.label": {
         "fixture": "#a4b0bcff",
-        "proposed": "#a3a3a3ff",
-        "verdict": "drift",
-        "captured": "#a3a3a3ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#a4b0bcff",
+        "verdict": "match",
+        "captured": "#a4b0bcff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-field-label.color"
       },
       "states.value.disabled.value": {
         "fixture": "#0a1317ff",
-        "proposed": "#171717ff",
-        "verdict": "drift",
-        "captured": "#171717ff",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default idx:1.0.0.color"
+        "proposed": "#0a1317ff",
+        "verdict": "match",
+        "captured": "#0a1317ff",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default idx:1.0.0.color"
       },
       "typography.label.family": {
         "fixture": "-apple-system",
-        "proposed": "Figtree",
-        "verdict": "drift",
-        "captured": "Figtree",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-family — first family of the label's computed stack under the library's documented Theme mount"
+        "proposed": "-apple-system",
+        "verdict": "match",
+        "captured": "-apple-system",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-family — first family of the label's computed stack under the library's documented Theme mount"
       },
       "typography.label.style": {
         "fixture": "Medium",
         "proposed": "Medium",
         "verdict": "match",
         "captured": "Medium",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-weight"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-weight"
       },
       "typography.value.family": {
         "fixture": "-apple-system",
-        "proposed": "Figtree",
-        "verdict": "drift",
-        "captured": "Figtree",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-family"
+        "proposed": "-apple-system",
+        "verdict": "match",
+        "captured": "-apple-system",
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-family"
       },
       "typography.value.style": {
         "fixture": "Regular",
         "proposed": "Regular",
         "verdict": "match",
         "captured": "Regular",
-        "provenance": "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-weight"
+        "provenance": "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-weight"
       }
     }
   },

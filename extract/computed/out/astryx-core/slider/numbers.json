@@ -9,15 +9,15 @@
   "elementsPerCapture": 12,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 16,
+    "root": 17,
     "label": 27,
-    "slider": 14,
-    "part-1-0": 25,
-    "slider-track": 27,
-    "part-1-0-1": 27,
-    "slider-thumb-2": 31,
-    "part-1-0-2": 15,
-    "slider-thumb": 32,
+    "slider": 15,
+    "part-1-0": 26,
+    "slider-track": 28,
+    "part-1-0-1": 28,
+    "slider-thumb-2": 32,
+    "part-1-0-2": 16,
+    "slider-thumb": 33,
     "tooltip": 45,
     "label-2": 32,
     "label-3": 24
@@ -287,7 +287,7 @@
     }
   },
   "declared": {
-    "base": 87,
+    "base": 95,
     "state": 0
   },
   "codeOnly": {
@@ -394,7 +394,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 89.48660714285714,
+    "computedPctEqual": 89.83160621761658,
     "rowsFullyEqual": 0,
     "rows": 24,
     "pixelPerfectExact": 0,

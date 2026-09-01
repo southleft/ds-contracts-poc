@@ -23,6 +23,7 @@ import {
   type VariableBinding,
   type VectorNode,
 } from "../figma-ir.js";
+import { toFigmaVectorPath } from "../figma-vector-path.js";
 import { deriveRecipeIntegrity } from "../hash.js";
 import { canonicalJson } from "../normalize.js";
 import {
@@ -412,7 +413,12 @@ const checkVector = (
     role: "checkbox/glyph/check",
     label: "checkbox/glyph/check",
     visible,
-    assetRef: check.path,
+    // Lower the library's shipped path into the subset Figma accepts.
+    // recipe/figma-vector-path.ts documents the probed grammar (M L C Q Z
+    // absolute; H, V, A and every relative command refused). MUI ships
+    // "M19 3H5c-1.11…", which Figma rejects outright, so without this the
+    // archetype cannot mint at all.
+    assetRef: toFigmaVectorPath(check.path),
     width: fixed(check.width.fallback),
     height: fixed(check.height.fallback),
     fills: strokePaint ? [] : [solid(cell.checkFill.fallback)],

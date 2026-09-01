@@ -207,6 +207,11 @@
         "value": "border-box"
       },
       {
+        "part": "root",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
         "part": "part-0",
         "channel": "border-bottom-style",
         "value": "solid"
@@ -230,6 +235,11 @@
         "part": "part-0",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "part-0",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "label",
@@ -259,7 +269,7 @@
       {
         "part": "label",
         "channel": "font-family",
-        "value": "Times"
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "progressbar-track",
@@ -285,6 +295,11 @@
         "part": "progressbar-track",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "progressbar-track",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "progressbar-track",
@@ -320,6 +335,11 @@
         "part": "progressbar-fill",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "progressbar-fill",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "progressbar-fill",
@@ -392,23 +412,22 @@
   "styledChannelReceipts": [
     "stage-fill-root-admitted: root — display:flex root measures exactly the stage content box (240px) in every enabled combo: it fills its container like a block root (antd Input `width: 100%`), so the captured stage width joins fusion under the block-root receipt below",
     "block-root-width-admitted: root — display:block root fills its container in CSS; the captured stage width joins fusion (stage-dependent, receipted — the canvas card draws at the captured block width instead of hugging its text)",
-    "control-equal-drop: root — 564 of 579 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: root — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: root — 378 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: part-0 — 567 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: part-0 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: part-0 — 381 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: label — 557 of 578 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: label — 7 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "text-part-typography-carried: label — font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: root — 563 of 579 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 377 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0 — 566 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0 — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0 — 380 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: label — 556 of 578 admitted channels compared EQUAL to the <span> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: label — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
     "control-equal-drop: label — 370 channel(s) EQUAL to the <span> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: progressbar-track — 563 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: progressbar-track — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: progressbar-track — 377 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: progressbar-fill — 560 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: progressbar-fill — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: progressbar-fill — 374 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "geometry-excluded: label — block-size 20px, height 20px, inline-size 59.1094px, perspective-origin 29.5469px 10px, transform-origin 29.5547px 10px, width 59.1094px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "control-equal-drop: progressbar-track — 562 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: progressbar-track — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: progressbar-track — 376 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: progressbar-fill — 559 of 578 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: progressbar-fill — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: progressbar-fill — 373 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "geometry-excluded: label — block-size 20px, height 20px, inline-size 67.3438px, perspective-origin 33.6719px 10px, transform-origin 33.6719px 10px, width 67.3438px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: part-0 — block-size 20px, height 20px, inline-size 240px, perspective-origin 120px 10px, transform-origin 120px 10px, width 240px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: progressbar-fill — block-size 8px, height 8px, inline-size 96px, perspective-origin 48px 4px, transform-origin 48px 4px, width 96px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: progressbar-track — block-size 8px, height 8px, inline-size 240px, perspective-origin 120px 4px, transform-origin 120px 4px, width 240px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
@@ -479,22 +498,25 @@
     "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.font-family = Times (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: progressbar-track.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-track.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-track.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-track.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-track.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: progressbar-track.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: progressbar-track.overflow-x = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: progressbar-track.overflow-y = hidden (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: progressbar-fill.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -502,6 +524,7 @@
     "declared fact carried: progressbar-fill.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-fill.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-fill.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: progressbar-fill.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: progressbar-fill.transition-duration = 0.41s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-fill.transition-property = width (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: progressbar-fill.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)"

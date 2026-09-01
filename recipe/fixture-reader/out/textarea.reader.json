@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "TextArea"
     },
-    "ledgerFile": "extract/computed/out/astryx/textarea/captured-truth.json",
+    "ledgerFile": "extract/computed/out/astryx-core/textarea/captured-truth.json",
     "rows": [
       {
         "path": "box.height",
@@ -16,7 +16,7 @@
         "capturedValue": 70,
         "proposedValue": 70,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.height"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.height"
         ]
       },
       {
@@ -26,7 +26,7 @@
         "capturedValue": 8,
         "proposedValue": 8,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-left"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-left"
         ]
       },
       {
@@ -36,17 +36,17 @@
         "capturedValue": 4,
         "proposedValue": 4,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-top"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.padding-top"
         ]
       },
       {
         "path": "box.radius",
         "fixtureValue": 8,
-        "verdict": "drift",
-        "capturedValue": 10,
-        "proposedValue": 10,
+        "verdict": "match",
+        "capturedValue": 8,
+        "proposedValue": 8,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-left-radius"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-left-radius"
         ]
       },
       {
@@ -56,7 +56,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-width"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-width"
         ]
       },
       {
@@ -66,8 +66,8 @@
         "capturedValue": 3,
         "proposedValue": 3,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.height",
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.height",
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
         ],
         "formula": "rendered rows = inner textarea height / line-height (TextArea.tsx rows default 3)"
       },
@@ -78,7 +78,7 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.line-height"
         ]
       },
       {
@@ -88,7 +88,7 @@
         "capturedValue": 4,
         "proposedValue": 4,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default root.row-gap"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default root.row-gap"
         ],
         "formula": "Field container row-gap between label and control"
       },
@@ -99,7 +99,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-size"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-size"
         ]
       },
       {
@@ -109,7 +109,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-size"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-size"
         ]
       },
       {
@@ -159,17 +159,17 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.background-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.background-color"
         ]
       },
       {
         "path": "states.empty.enabled.boxBorder",
         "fixtureValue": "#ccd3dbff",
-        "verdict": "drift",
-        "capturedValue": "#d4d4d4ff",
-        "proposedValue": "#d4d4d4ff",
+        "verdict": "match",
+        "capturedValue": "#ccd3dbff",
+        "proposedValue": "#ccd3dbff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-color"
         ]
       },
       {
@@ -179,27 +179,27 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.opacity"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.opacity"
         ]
       },
       {
         "path": "states.empty.enabled.label",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
         "path": "states.empty.enabled.value",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0::placeholder.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0::placeholder.color"
         ],
         "formula": "placeholder ink (Astryx shows the placeholder at rest)"
       },
@@ -210,17 +210,17 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.background-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.background-color"
         ]
       },
       {
         "path": "states.empty.disabled.boxBorder",
         "fixtureValue": "#ccd3dbff",
-        "verdict": "drift",
-        "capturedValue": "#d4d4d4ff",
-        "proposedValue": "#d4d4d4ff",
+        "verdict": "match",
+        "capturedValue": "#ccd3dbff",
+        "proposedValue": "#ccd3dbff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.border-top-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.border-top-color"
         ]
       },
       {
@@ -230,27 +230,27 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.opacity"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.opacity"
         ]
       },
       {
         "path": "states.empty.disabled.label",
         "fixtureValue": "#a4b0bcff",
-        "verdict": "drift",
-        "capturedValue": "#a3a3a3ff",
-        "proposedValue": "#a3a3a3ff",
+        "verdict": "match",
+        "capturedValue": "#a4b0bcff",
+        "proposedValue": "#a4b0bcff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
         "path": "states.empty.disabled.value",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default idx:1.0.0::placeholder.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.isDisabled__default idx:1.0.0::placeholder.color"
         ],
         "formula": "placeholder ink (Astryx shows the placeholder at rest)"
       },
@@ -261,17 +261,17 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.background-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.background-color"
         ]
       },
       {
         "path": "states.value.enabled.boxBorder",
         "fixtureValue": "#ccd3dbff",
-        "verdict": "drift",
-        "capturedValue": "#d4d4d4ff",
-        "proposedValue": "#d4d4d4ff",
+        "verdict": "match",
+        "capturedValue": "#ccd3dbff",
+        "proposedValue": "#ccd3dbff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.border-top-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.border-top-color"
         ]
       },
       {
@@ -281,27 +281,27 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.opacity"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.opacity"
         ]
       },
       {
         "path": "states.value.enabled.label",
         "fixtureValue": "#4e606fff",
-        "verdict": "drift",
-        "capturedValue": "#737373ff",
-        "proposedValue": "#737373ff",
+        "verdict": "match",
+        "capturedValue": "#4e606fff",
+        "proposedValue": "#4e606fff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
         "path": "states.value.enabled.value",
         "fixtureValue": "#0a1317ff",
-        "verdict": "drift",
-        "capturedValue": "#171717ff",
-        "proposedValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#0a1317ff",
+        "proposedValue": "#0a1317ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default idx:1.0.0.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.no-isDisabled__default idx:1.0.0.color"
         ]
       },
       {
@@ -311,17 +311,17 @@
         "capturedValue": "#ffffffff",
         "proposedValue": "#ffffffff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.background-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.background-color"
         ]
       },
       {
         "path": "states.value.disabled.boxBorder",
         "fixtureValue": "#ccd3dbff",
-        "verdict": "drift",
-        "capturedValue": "#d4d4d4ff",
-        "proposedValue": "#d4d4d4ff",
+        "verdict": "match",
+        "capturedValue": "#ccd3dbff",
+        "proposedValue": "#ccd3dbff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.border-top-color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.border-top-color"
         ]
       },
       {
@@ -331,37 +331,37 @@
         "capturedValue": 0.5,
         "proposedValue": 0.5,
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.opacity"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.opacity"
         ]
       },
       {
         "path": "states.value.disabled.label",
         "fixtureValue": "#a4b0bcff",
-        "verdict": "drift",
-        "capturedValue": "#a3a3a3ff",
-        "proposedValue": "#a3a3a3ff",
+        "verdict": "match",
+        "capturedValue": "#a4b0bcff",
+        "proposedValue": "#a4b0bcff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-field-label.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default cls:astryx-field-label.color"
         ]
       },
       {
         "path": "states.value.disabled.value",
         "fixtureValue": "#0a1317ff",
-        "verdict": "drift",
-        "capturedValue": "#171717ff",
-        "proposedValue": "#171717ff",
+        "verdict": "match",
+        "capturedValue": "#0a1317ff",
+        "proposedValue": "#0a1317ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default idx:1.0.0.color"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#value.isDisabled__default idx:1.0.0.color"
         ]
       },
       {
         "path": "typography.label.family",
         "fixtureValue": "-apple-system",
-        "verdict": "drift",
-        "capturedValue": "Figtree",
-        "proposedValue": "Figtree",
+        "verdict": "match",
+        "capturedValue": "-apple-system",
+        "proposedValue": "-apple-system",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-family"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-family"
         ],
         "formula": "first family of the label's computed stack under the library's documented Theme mount"
       },
@@ -372,17 +372,17 @@
         "capturedValue": "Medium",
         "proposedValue": "Medium",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-weight"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-weight"
         ]
       },
       {
         "path": "typography.value.family",
         "fixtureValue": "-apple-system",
-        "verdict": "drift",
-        "capturedValue": "Figtree",
-        "proposedValue": "Figtree",
+        "verdict": "match",
+        "capturedValue": "-apple-system",
+        "proposedValue": "-apple-system",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-family"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-family"
         ]
       },
       {
@@ -392,13 +392,13 @@
         "capturedValue": "Regular",
         "proposedValue": "Regular",
         "ledgerKeys": [
-          "extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-weight"
+          "extract/computed/out/astryx-core/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-weight"
         ]
       }
     ],
     "counts": {
-      "match": 19,
-      "drift": 15,
+      "match": 34,
+      "drift": 0,
       "receipt": 5,
       "unread": 0
     }

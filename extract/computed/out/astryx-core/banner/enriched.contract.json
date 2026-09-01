@@ -189,7 +189,8 @@
                     "border-left-style": "solid",
                     "border-right-style": "solid",
                     "border-top-style": "solid",
-                    "box-sizing": "border-box"
+                    "box-sizing": "border-box",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                   },
                   "tokens": {
                     "flex-shrink": "{imported.banner.icon.flex-shrink}",
@@ -223,7 +224,8 @@
                 "border-left-style": "solid",
                 "border-right-style": "solid",
                 "border-top-style": "solid",
-                "box-sizing": "border-box"
+                "box-sizing": "border-box",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
                 "flex-shrink": "{imported.banner.banner-icon.flex-shrink}",
@@ -251,7 +253,7 @@
                     "border-right-style": "solid",
                     "border-top-style": "solid",
                     "box-sizing": "border-box",
-                    "font-family": "Times"
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                   },
                   "tokens": {
                     "color": "{imported.banner.label.color}",
@@ -273,7 +275,7 @@
                     "border-right-style": "solid",
                     "border-top-style": "solid",
                     "box-sizing": "border-box",
-                    "font-family": "Times"
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
                   },
                   "tokens": {
                     "color": "{imported.banner.label-2.color}",
@@ -289,7 +291,8 @@
                 "border-left-style": "solid",
                 "border-right-style": "solid",
                 "border-top-style": "solid",
-                "box-sizing": "border-box"
+                "box-sizing": "border-box",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
                 "column-gap": "{imported.shared.size-0}",
@@ -306,7 +309,8 @@
             "border-left-style": "solid",
             "border-right-style": "solid",
             "border-top-style": "solid",
-            "box-sizing": "border-box"
+            "box-sizing": "border-box",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
           },
           "tokens": {
             "column-gap": "{imported.banner.banner.column-gap}",
@@ -361,7 +365,8 @@
         "border-left-style": "solid",
         "border-right-style": "solid",
         "border-top-style": "solid",
-        "box-sizing": "border-box"
+        "box-sizing": "border-box",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       "tokens": {
         "line-height": "{imported.shared.size-24}",

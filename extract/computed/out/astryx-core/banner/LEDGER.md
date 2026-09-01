@@ -111,44 +111,49 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **37**
+- base declared facts: **42**
   - root.border-bottom-style = `solid`
   - root.border-left-style = `solid`
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - banner.border-bottom-style = `solid`
   - banner.border-left-style = `solid`
   - banner.border-right-style = `solid`
   - banner.border-top-style = `solid`
   - banner.box-sizing = `border-box`
+  - banner.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - banner-icon.border-bottom-style = `solid`
   - banner-icon.border-left-style = `solid`
   - banner-icon.border-right-style = `solid`
   - banner-icon.border-top-style = `solid`
   - banner-icon.box-sizing = `border-box`
+  - banner-icon.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - icon.border-bottom-style = `solid`
   - icon.border-left-style = `solid`
   - icon.border-right-style = `solid`
   - icon.border-top-style = `solid`
   - icon.box-sizing = `border-box`
+  - icon.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-1.border-bottom-style = `solid`
   - part-0-1.border-left-style = `solid`
   - part-0-1.border-right-style = `solid`
   - part-0-1.border-top-style = `solid`
   - part-0-1.box-sizing = `border-box`
+  - part-0-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label.border-bottom-style = `solid`
   - label.border-left-style = `solid`
   - label.border-right-style = `solid`
   - label.border-top-style = `solid`
   - label.box-sizing = `border-box`
-  - label.font-family = `Times`
+  - label.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label-2.border-bottom-style = `solid`
   - label-2.border-left-style = `solid`
   - label-2.border-right-style = `solid`
   - label-2.border-top-style = `solid`
   - label-2.box-sizing = `border-box`
-  - label-2.font-family = `Times`
+  - label-2.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
 - state declared facts: **0**
 
 ## Code-only / overflow (named, in the extension file)
@@ -167,6 +172,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **93.701%** (3808/4064 cells; 0/32 combo×state rows fully equal)
-- pixel: 0/32 pairs perfect at threshold 0 · 0/32 at the AA point (mean AA 20.541%, max 22.714%; 32/32 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **93.939%** (3968/4224 cells; 0/32 combo×state rows fully equal)
+- pixel: 0/32 pairs perfect at threshold 0 · 0/32 at the AA point (mean AA 27.414%, max 31.353%; 32/32 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

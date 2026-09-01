@@ -60,12 +60,13 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **33**
+- base declared facts: **36**
   - root.border-bottom-style = `solid`
   - root.border-left-style = `solid`
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label.border-bottom-style = `solid`
   - label.border-left-style = `solid`
   - label.border-right-style = `solid`
@@ -78,12 +79,14 @@ Zero contradictions.
   - part-1.border-right-style = `solid`
   - part-1.border-top-style = `solid`
   - part-1.box-sizing = `border-box`
+  - part-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-1.isolation = `isolate`
   - text-input.border-bottom-style = `solid`
   - text-input.border-left-style = `solid`
   - text-input.border-right-style = `solid`
   - text-input.border-top-style = `solid`
   - text-input.box-sizing = `border-box`
+  - text-input.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - text-input.position = `relative`
   - text-input.transition-duration = `0.175s`
   - text-input.transition-property = `border-color, box-shadow`
@@ -121,6 +124,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **90.517%** (3780/4176 cells; 0/36 combo×state rows fully equal)
+- computed-equality (styled channels, contract-mediated): **90.756%** (3888/4284 cells; 0/36 combo×state rows fully equal)
 - pixel: 0/36 pairs perfect at threshold 0 · 0/36 at the AA point (mean AA 11.377%, max 12.942%; 36/36 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

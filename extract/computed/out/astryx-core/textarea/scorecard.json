@@ -7,9 +7,9 @@
   "combos": 4,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 1904,
-    "cellsEqual": 1624,
-    "pctEqual": 85.29411764705883,
+    "cellsCompared": 1952,
+    "cellsEqual": 1672,
+    "pctEqual": 85.65573770491804,
     "rowsFullyEqual": 0,
     "rows": 16
   },
@@ -24,7 +24,7 @@
       "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
     },
     "meanExact": 12.016157670454549,
-    "meanAA": 8.550470525568182,
+    "meanAA": 8.550571410123968,
     "maxAA": 10.206288739669422
   },
   "fusion": {
@@ -72,7 +72,7 @@
     },
     {
       "key": "value.no-isDisabled__default",
-      "pctAA": 8.664772727272727,
+      "pctAA": 8.66638688016529,
       "pctExact": 11.48308367768595,
       "channelsMismatched": 10
     },
@@ -191,8 +191,8 @@
   "rows": [
     {
       "key": "empty.no-isDisabled__default",
-      "channelsCompared": 119,
-      "channelsEqual": 109,
+      "channelsCompared": 122,
+      "channelsEqual": 112,
       "pctExact": 10.595299586776859,
       "pctAA": 8.22733729338843,
       "mismatches": [
@@ -260,8 +260,8 @@
     },
     {
       "key": "empty.no-isDisabled__hover",
-      "channelsCompared": 119,
-      "channelsEqual": 109,
+      "channelsCompared": 122,
+      "channelsEqual": 112,
       "pctExact": 12.167484504132231,
       "pctAA": 8.22733729338843,
       "mismatches": [
@@ -329,8 +329,8 @@
     },
     {
       "key": "empty.no-isDisabled__focus-visible",
-      "channelsCompared": 119,
-      "channelsEqual": 105,
+      "channelsCompared": 122,
+      "channelsEqual": 108,
       "pctExact": 12.177169421487603,
       "pctAA": 9.770467458677686,
       "mismatches": [
@@ -422,8 +422,8 @@
     },
     {
       "key": "empty.no-isDisabled__active",
-      "channelsCompared": 119,
-      "channelsEqual": 105,
+      "channelsCompared": 122,
+      "channelsEqual": 108,
       "pctExact": 12.177169421487603,
       "pctAA": 9.770467458677686,
       "mismatches": [
@@ -515,8 +515,8 @@
     },
     {
       "key": "empty.isDisabled__default",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 10.584000516528926,
       "pctAA": 7.684981921487603,
       "mismatches": [
@@ -662,8 +662,8 @@
     },
     {
       "key": "empty.isDisabled__hover",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 12.156185433884298,
       "pctAA": 7.684981921487603,
       "mismatches": [
@@ -809,8 +809,8 @@
     },
     {
       "key": "empty.isDisabled__focus-visible",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 10.584000516528926,
       "pctAA": 7.684981921487603,
       "mismatches": [
@@ -956,8 +956,8 @@
     },
     {
       "key": "empty.isDisabled__active",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 12.156185433884298,
       "pctAA": 7.684981921487603,
       "mismatches": [
@@ -1103,10 +1103,10 @@
     },
     {
       "key": "value.no-isDisabled__default",
-      "channelsCompared": 119,
-      "channelsEqual": 109,
+      "channelsCompared": 122,
+      "channelsEqual": 112,
       "pctExact": 11.48308367768595,
-      "pctAA": 8.664772727272727,
+      "pctAA": 8.66638688016529,
       "mismatches": [
         {
           "part": "root",
@@ -1172,8 +1172,8 @@
     },
     {
       "key": "value.no-isDisabled__hover",
-      "channelsCompared": 119,
-      "channelsEqual": 109,
+      "channelsCompared": 122,
+      "channelsEqual": 112,
       "pctExact": 13.055268595041323,
       "pctAA": 8.66638688016529,
       "mismatches": [
@@ -1241,8 +1241,8 @@
     },
     {
       "key": "value.no-isDisabled__focus-visible",
-      "channelsCompared": 119,
-      "channelsEqual": 105,
+      "channelsCompared": 122,
+      "channelsEqual": 108,
       "pctExact": 13.064953512396695,
       "pctAA": 10.206288739669422,
       "mismatches": [
@@ -1334,8 +1334,8 @@
     },
     {
       "key": "value.no-isDisabled__active",
-      "channelsCompared": 119,
-      "channelsEqual": 105,
+      "channelsCompared": 122,
+      "channelsEqual": 108,
       "pctExact": 13.064953512396695,
       "pctAA": 10.206288739669422,
       "mismatches": [
@@ -1427,8 +1427,8 @@
     },
     {
       "key": "value.isDisabled__default",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 11.462099690082646,
       "pctAA": 8.082063533057852,
       "mismatches": [
@@ -1574,8 +1574,8 @@
     },
     {
       "key": "value.isDisabled__hover",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 13.034284607438016,
       "pctAA": 8.082063533057852,
       "mismatches": [
@@ -1721,8 +1721,8 @@
     },
     {
       "key": "value.isDisabled__focus-visible",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 11.462099690082646,
       "pctAA": 8.082063533057852,
       "mismatches": [
@@ -1868,8 +1868,8 @@
     },
     {
       "key": "value.isDisabled__active",
-      "channelsCompared": 119,
-      "channelsEqual": 96,
+      "channelsCompared": 122,
+      "channelsEqual": 99,
       "pctExact": 13.034284607438016,
       "pctAA": 8.082063533057852,
       "mismatches": [

@@ -13,7 +13,26 @@ This scores a Figma export against the **real library's own Chromium render**
 (`extract/computed/out/<lib>/<component>/orig-shots/`), reusing the canvas-gate
 scorer that already backs the console-loop lane. Bar: `pctAAMasked ≤ 5%`.
 
-## First results — checkbox, unchecked/enabled
+## Result — the loop closed
+
+| subject | v3 mint | v4 mint (after fix) |
+| --- | --- | --- |
+| `checkbox/astryx` | 0.00% PASS | **0.00% PASS** |
+| `checkbox/antd` | 0.00% PASS | **0.00% PASS** |
+| `checkbox/mui` | 49.31% FAIL (24×24 vs 18×18) | **0.00% PASS (18×18 vs 18×18)** |
+
+The gate found a defect no other instrument could see, the fix was made, the
+archetype was reminted (page `199:78556`), and the gate now passes at 0.00% on
+all three. MUI's ink coverage matches the real render exactly: 39.5% / 39.5%.
+
+Fixing it also surfaced a **latent break**: the checkbox archetype could not
+mint at all. `check.path` carried MUI's shipped compact spelling
+(`M19 3H5c-1.11…`) and Figma's `vectorPaths` parser refuses it —
+`Invalid command at H5c-1.11`. The live v3 page predates that path and still
+carried an older hand-flattened square, so nothing had caught it. See
+`recipe/figma-vector-path.ts` for the probed grammar and the lowering.
+
+## First results — checkbox, unchecked/enabled (v3 mint, before the fix)
 
 | subject | canvas | real | AA masked | verdict |
 | --- | --- | --- | --- | --- |

@@ -6,7 +6,7 @@
     "packages/*"
   ],
   "type": "module",
-  "description": "Proof of concept: machine-readable design-system contracts. The v1 proof surface is recipe-IR (archetype recipes + Figma-capability IR + receipts); product v1 is incomplete (F1). The universal JSON contract still powers the CLI, playground, and Journeys A–C.",
+  "description": "Proof of concept: machine-readable design-system contracts. The v1 proof surface is recipe-IR (archetype recipes + Figma-capability IR + receipts); product v1 is incomplete (F1). The universal JSON contract still powers the CLI, playground, and Journeys A\u2013C.",
   "scripts": {
     "ci:lanes": "tsx .github/scripts/lane-coverage.ts",
     "ci:lane": "tsx .github/scripts/run-lane.ts",
@@ -93,6 +93,8 @@
     "recipe:checkbox:live:v2:generated:check": "tsx recipe/build-checkbox-live-proof-v2.ts --check",
     "recipe:checkbox:live:v3:prepare": "tsx recipe/build-checkbox-live-proof-v3.ts",
     "recipe:checkbox:live:v3:generated:check": "tsx recipe/build-checkbox-live-proof-v3.ts --check",
+    "recipe:checkbox:live:v4:prepare": "tsx recipe/build-checkbox-live-proof-v4.ts",
+    "recipe:checkbox:live:v4:generated:check": "tsx recipe/build-checkbox-live-proof-v4.ts --check",
     "recipe:table:tail-census": "tsx recipe/table-tail-census.ts",
     "recipe:table:tail-census:check": "node --import tsx --test recipe/table-tail-census.test.ts",
     "recipe:replay-census": "tsx recipe/replay-census.ts",

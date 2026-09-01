@@ -9,11 +9,11 @@
   "elementsPerCapture": 5,
   "determinism": "byte-identical across two full sweeps in one session",
   "styledChannels": {
-    "root": 15,
-    "part-0": 11,
+    "root": 16,
+    "part-0": 12,
     "label": 22,
-    "progressbar-track": 15,
-    "progressbar-fill": 18
+    "progressbar-track": 16,
+    "progressbar-fill": 19
   },
   "folds": {
     "count": 10,
@@ -100,7 +100,7 @@
     }
   },
   "declared": {
-    "base": 31,
+    "base": 35,
     "state": 0
   },
   "codeOnly": {
@@ -190,7 +190,7 @@
     ]
   },
   "gate": {
-    "computedPctEqual": 93.75,
+    "computedPctEqual": 94.04761904761905,
     "rowsFullyEqual": 0,
     "rows": 20,
     "pixelPerfectExact": 0,

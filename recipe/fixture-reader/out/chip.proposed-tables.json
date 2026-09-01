@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "Token"
     },
-    "ledger": "extract/computed/out/astryx/token/captured-truth.json",
+    "ledger": "extract/computed/out/astryx-core/token/captured-truth.json",
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
     "values": {
       "box.height": {
@@ -15,58 +15,58 @@
         "proposed": 24,
         "verdict": "match",
         "captured": 24,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.height"
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.height"
       },
       "box.paddingX": {
         "fixture": 8,
         "proposed": 8,
         "verdict": "match",
         "captured": 8,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.padding-left"
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.padding-left"
       },
       "box.paddingY": {
         "fixture": 0,
         "proposed": 0,
         "verdict": "match",
         "captured": 0,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.padding-top"
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.padding-top"
       },
       "box.radius": {
         "fixture": 4,
-        "proposed": 6,
-        "verdict": "drift",
-        "captured": 6,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.border-top-left-radius"
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.border-top-left-radius"
       },
       "box.borderWidth": {
         "fixture": 0,
         "proposed": 0,
         "verdict": "match",
         "captured": 0,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.border-top-width"
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.border-top-width"
       },
       "labelFontSize": {
         "fixture": 12,
         "proposed": 12,
         "verdict": "match",
         "captured": 12,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-size"
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.font-size"
       },
       "labelLineHeight": {
         "fixture": 20,
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.line-height — sub-pixel line-height rounded",
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.line-height — sub-pixel line-height rounded",
         "tolerance": 0.001,
         "toleranceReason": "captured line-height is 20.0004 from the theme leading token"
       },
       "rest.boxFill": {
         "fixture": "#0536591a",
-        "proposed": "#0000000f",
-        "verdict": "drift",
-        "captured": "#0000000f",
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.background-color"
+        "proposed": "#0536591a",
+        "verdict": "match",
+        "captured": "#0536591a",
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.background-color"
       },
       "rest.boxBorder": {
         "fixture": "#00000000",
@@ -79,14 +79,14 @@
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.opacity"
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.opacity"
       },
       "rest.label": {
         "fixture": "#0a1317ff",
-        "proposed": "#171717ff",
-        "verdict": "drift",
-        "captured": "#171717ff",
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.color"
+        "proposed": "#0a1317ff",
+        "verdict": "match",
+        "captured": "#0a1317ff",
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.color"
       },
       "strokeAlign": {
         "fixture": "inside",
@@ -96,17 +96,17 @@
       },
       "typography.label.family": {
         "fixture": "-apple-system",
-        "proposed": "Figtree",
-        "verdict": "drift",
-        "captured": "Figtree",
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-family"
+        "proposed": "-apple-system",
+        "verdict": "match",
+        "captured": "-apple-system",
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.font-family"
       },
       "typography.label.style": {
         "fixture": "Medium",
         "proposed": "Medium",
         "verdict": "match",
         "captured": "Medium",
-        "provenance": "extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-weight"
+        "provenance": "extract/computed/out/astryx-core/token/captured-truth.json#md.default__default cls:astryx-token.font-weight"
       }
     }
   },

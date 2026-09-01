@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
+import { isFigmaVectorPath, toFigmaVectorPath } from "./figma-vector-path.js";
+
 import { readFileSync } from "node:fs";
 
 import { adaptReviewedCheckbox } from "./adapters/checkbox.js";
@@ -50,9 +52,23 @@ test("checkbox@1 adapts Astryx, MUI, and AntD from named package facts", () => {
   );
   assert.equal(astryx.tokens.typography.label.requestedFamily, "-apple-system");
   assert.notEqual(astryx.tokens.typography.label.resolvedFamily, "Inter");
-  assert.equal(mui.tokens.box.size.fallback, 24, "SvgIcon medium 24");
-  assert.equal(mui.tokens.wrapper.size.fallback, 42, "24 + SwitchBase padding 9×2");
-  assert.equal(mui.tokens.box.padding.fallback, 9, "SwitchBase.js padding 9");
+  // The painted square, not the SvgIcon viewport. This asserted 24 — the
+  // MuiSvgIcon-root width — which is the container MUI never paints.
+  // checkbox-icon-unchecked.svg draws an outlined square 3 -> 21 inside a 24
+  // viewBox: 18x18 with a 2px stroke. Asserting the viewport is what let a mint
+  // draw 24x24 of ink against MUI's 18x18 and still pass every gate
+  // (recipe/evidence/fidelity-v1 measured it at 49.31% AA).
+  assert.equal(
+    mui.tokens.box.size.fallback,
+    18,
+    "painted square: checkbox-icon-unchecked.svg outer subpath 3→21 in a 24 viewBox",
+  );
+  assert.equal(mui.tokens.wrapper.size.fallback, 42, "18 + padding 12×2");
+  assert.equal(
+    mui.tokens.box.padding.fallback,
+    12,
+    "SwitchBase padding 9 is measured from the 24 viewport; from the painted 18 square it is 12, and 18 + 12×2 = 42 keeps the wrapper exact",
+  );
   assert.equal(
     mui.tokens.states.checked.enabled.boxFill.fallback,
     "#ffffffff",
@@ -71,10 +87,26 @@ test("checkbox@1 adapts Astryx, MUI, and AntD from named package facts", () => {
     "Astryx md check path scaled from viewBox 10 to 14",
   );
   assert.equal(astryx.tokens.check.paint, "stroke");
+  // The FIXTURE keeps MUI's shipped spelling verbatim — compact and relative,
+  // exactly what CheckBox.js contains. Figma's vectorPaths parser refuses that
+  // ("Invalid command at H5c-1.11"), so the adaptation is a LOWERING done at
+  // compile by recipe/figma-vector-path.ts, not a rewrite of the citation.
+  // Asserted below: the fixture cites the library, and the compiled IR carries
+  // the Figma-parseable form.
   assert.equal(
     mui.tokens.check.path.startsWith("M19 3H5"),
     true,
-    "MUI CheckBox.js even-odd icon",
+    "MUI CheckBox.js even-odd icon, shipped spelling",
+  );
+  assert.equal(
+    isFigmaVectorPath(mui.tokens.check.path),
+    false,
+    "the shipped path is NOT already in Figma's subset — the lowering is load-bearing",
+  );
+  assert.equal(
+    isFigmaVectorPath(toFigmaVectorPath(mui.tokens.check.path)),
+    true,
+    "and it lowers into a path Figma accepts",
   );
   assert.equal(mui.tokens.check.winding, "evenodd");
   assert.equal(mui.tokens.check.paint, "fill");

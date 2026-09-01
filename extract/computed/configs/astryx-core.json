@@ -7,12 +7,12 @@
     "classAllow": "^astryx-"
   },
   "mount": {
-    "__note": "CORE-ONLY MOUNT. astryx.json wraps stages in <Theme theme={neutralTheme}> because that is the library's README quick start. That is a legitimate mount, but it is NOT the surface recipe/fixtures/library-*.ts transcribe: those carry @astryxdesign/core dist/astryx.css :root defaults (#0064E0 accent, -apple-system body stack, --radius-inner 4px, --radius-element 8px), which theme-neutral overrides to #262626 / Figtree / 6px / 10px. Capturing only the themed mount left every Astryx subject 0% mechanically verified and forced 56 of the reader's 57 drifts into one blanket excuse. This config captures the un-themed core surface so the fixtures can be checked against the thing they actually describe. Keep BOTH: they are two real mounts of the same library, not a right one and a wrong one.",
+    "__note": "CORE-ONLY MOUNT. astryx.json wraps stages in <Theme theme={neutralTheme}> because that is the library's README quick start. That is a legitimate mount, but it is NOT the surface recipe/fixtures/library-*.ts transcribe: those carry @astryxdesign/core dist/astryx.css :root defaults (#0064E0 accent, -apple-system body stack, --radius-inner 4px, --radius-element 8px), which theme-neutral overrides to #262626 / Figtree / 6px / 10px. Capturing only the themed mount left every Astryx subject 0% mechanically verified and forced 56 of the reader's 57 drifts into one blanket excuse. This config captures the un-themed core surface so the fixtures can be checked against the thing they actually describe. Keep BOTH: they are two real mounts of the same library, not a right one and a wrong one. FONT: the wrapper carries font-family: var(--font-family-body) explicitly. In the themed mount the Theme provider's own wrapper div applies the base font (stylex class x9ynric); with no provider nothing does, and text inheriting from an unstyled body falls back to Times \u2014 the FC-FONT-SUBSTRATE defect, which showed up here as alert/astryx and chip/astryx drifting -apple-system -> Times. The var is core's OWN declaration in dist/astryx.css (--font-family-body: -apple-system, BlinkMacSystemFont, ...); applying it is reproducing core's stated body font, not inventing one. Elements that set font-family themselves (FieldLabel) were unaffected either way.",
     "imports": [
       "import '@astryxdesign/core/reset.css';",
       "import '@astryxdesign/core/astryx.css';"
     ],
-    "wrapperOpen": "<div data-astryx-core-only=\"true\">",
+    "wrapperOpen": "<div data-astryx-core-only=\"true\" style={{ fontFamily: 'var(--font-family-body)' }}>",
     "wrapperClose": "</div>"
   },
   "fonts": {

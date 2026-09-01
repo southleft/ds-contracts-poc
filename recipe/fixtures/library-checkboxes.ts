@@ -167,10 +167,25 @@ astryxTokens.typography = { label: astryxFont() };
  */
 const muiTokens = cloneTokens("mui.checkbox", (path, fallback) => {
   if (path === "wrapper.size") return 42;
-  if (path === "box.size") return 24;
+  // box.size is the PAINTED square, not the SvgIcon viewport.
+  //
+  // This read 24 — the MuiSvgIcon-root width — and both the fixture and the
+  // capture agreed on 24, so every accounting gate passed. MUI does not paint
+  // that container. checkbox-icon-unchecked.svg draws an outlined square whose
+  // outer subpath runs 3 -> 21 in a 24 viewBox: an 18x18 rect with a 2px
+  // stroke (the inner hole runs 5 -> 19). The mint drew the viewport where MUI
+  // draws the path, and recipe/evidence/fidelity-v1 caught it at 49.31% AA
+  // against the real render — 24x24 of ink against 18x18.
+  //
+  // 18 and the 12 below are read from the committed glyph asset
+  // extract/computed/out/mui/checkbox/assets/checkbox-icon-unchecked.svg, the
+  // same way the Astryx viewBox is read (mappings-checkbox.ts). SVG path extent
+  // is not a computed channel, so this is a receipt, not a capture match.
+  // 18 + 12*2 = 42 keeps the wrapper arithmetic intact.
+  if (path === "box.size") return 18;
   if (path === "box.radius") return 2;
   if (path === "box.borderWidth") return 2;
-  if (path === "box.padding") return 9;
+  if (path === "box.padding") return 12;
   if (path === "row.gap") return 0;
   if (path === "dash.width") return 10;
   if (path === "dash.height") return 2;
@@ -222,6 +237,12 @@ const muiTokens = cloneTokens("mui.checkbox", (path, fallback) => {
 muiTokens.rowAlign = "center";
 muiTokens.check = {
   ...muiTokens.check,
+  // MUI's shipped icon path, verbatim from CheckBox.js — compact, relative, and
+  // exactly what the package contains. Figma's vectorPaths parser accepts only
+  // absolute M/L/C/Q/Z, so this is LOWERED at compile time by
+  // recipe/figma-vector-path.ts rather than rewritten here. The fixture stays a
+  // citation of the library; the adaptation to Figma's grammar lives in the
+  // compile, where every other lowering lives.
   path: "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
   winding: "evenodd",
   paint: "fill",

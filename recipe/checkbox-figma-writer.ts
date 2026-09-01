@@ -26,7 +26,7 @@ import {
 
 export const CHECKBOX_FIGMA_NAMESPACE = "ds.contracts.checkbox.recipe.v1";
 export const CHECKBOX_FIGMA_WRITER_VERSION = 3;
-export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v3";
+export const CHECKBOX_FIGMA_RUN_SUFFIX = "checkbox-v4";
 export const FORBIDDEN_CHECKBOX_V1_PAGE_ID = "183:74742";
 export const FORBIDDEN_CHECKBOX_V2_PAGE_ID = "196:76370";
 

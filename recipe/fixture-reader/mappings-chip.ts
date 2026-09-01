@@ -3,7 +3,7 @@
  *
  * MUI    extract/computed/out/mui/chip/captured-truth.json
  * AntD   extract/computed/out/antd/tag/captured-truth.json  (Tag export)
- * Astryx extract/computed/out/astryx/token/captured-truth.json (Token export)
+ * Astryx extract/computed/out/astryx-core/token/captured-truth.json (Token export)
  */
 import { px } from "./ledger.js";
 import type { FactMapping } from "./reader.js";
@@ -71,7 +71,7 @@ export const antdChipMappings: FactMapping[] = [
   },
 ];
 
-export const ASTRYX_CHIP_LEDGER = "extract/computed/out/astryx/token/captured-truth.json";
+export const ASTRYX_CHIP_LEDGER = "extract/computed/out/astryx-core/token/captured-truth.json";
 const xCombo = "md.default";
 const xRoot = "cls:astryx-token";
 

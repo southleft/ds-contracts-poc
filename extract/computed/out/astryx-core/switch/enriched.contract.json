@@ -108,7 +108,8 @@
         "border-left-style": "solid",
         "border-right-style": "solid",
         "border-top-style": "solid",
-        "box-sizing": "border-box"
+        "box-sizing": "border-box",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       "parts": {
         "part-0": {
@@ -191,6 +192,7 @@
                     "appearance": "auto",
                     "box-sizing": "border-box",
                     "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                     "position": "absolute"
                   },
                   "tokens": {
@@ -315,6 +317,7 @@
                         "border-right-style": "solid",
                         "border-top-style": "solid",
                         "box-sizing": "border-box",
+                        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                         "transform": "matrix(1, 0, 0, 1, 0, 0)",
                         "transition-duration": "0.175s",
                         "transition-property": "transform, width, height",
@@ -339,6 +342,7 @@
                     "border-right-style": "solid",
                     "border-top-style": "solid",
                     "box-sizing": "border-box",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                     "transition-duration": "0.175s",
                     "transition-property": "background-color",
                     "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
@@ -417,7 +421,8 @@
                 "border-left-style": "solid",
                 "border-right-style": "solid",
                 "border-top-style": "solid",
-                "box-sizing": "border-box"
+                "box-sizing": "border-box",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
                 "height": "{imported.shared.size-24}",
@@ -455,6 +460,7 @@
                     "appearance": "auto",
                     "box-sizing": "border-box",
                     "cursor": "pointer",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                     "position": "absolute"
                   },
                   "tokens": {
@@ -579,6 +585,7 @@
                         "border-right-style": "solid",
                         "border-top-style": "solid",
                         "box-sizing": "border-box",
+                        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                         "transform": "matrix(1, 0, 0, 1, 0, 0)",
                         "transition-duration": "0.175s",
                         "transition-property": "transform, width, height",
@@ -603,6 +610,7 @@
                     "border-right-style": "solid",
                     "border-top-style": "solid",
                     "box-sizing": "border-box",
+                    "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                     "transition-duration": "0.175s",
                     "transition-property": "background-color",
                     "transition-timing-function": "cubic-bezier(0.24, 1, 0.4, 1)"
@@ -739,7 +747,8 @@
                 "border-left-style": "solid",
                 "border-right-style": "solid",
                 "border-top-style": "solid",
-                "box-sizing": "border-box"
+                "box-sizing": "border-box",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
               },
               "tokens": {
                 "height": "{imported.shared.size-24}",
@@ -768,7 +777,8 @@
             "border-left-style": "solid",
             "border-right-style": "solid",
             "border-top-style": "solid",
-            "box-sizing": "border-box"
+            "box-sizing": "border-box",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
           },
           "tokens": {
             "column-gap": "{imported.switch.part-0.column-gap}",

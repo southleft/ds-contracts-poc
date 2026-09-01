@@ -114,8 +114,8 @@
   "enrichedContractGeneratorValid": true,
   "replayComputedEquality": {
     "cellsCompared": 36736,
-    "cellsMatched": 36680,
-    "pct": 99.84756097560975,
+    "cellsMatched": 36568,
+    "pct": 99.54268292682927,
     "namedExclusions": [
       "app-region",
       "text-decoration",
@@ -124,7 +124,15 @@
     ],
     "topMismatchedChannels": [
       [
+        "inline-size",
+        56
+      ],
+      [
         "perspective-origin",
+        56
+      ],
+      [
+        "width",
         56
       ]
     ]
@@ -138,7 +146,7 @@
       "note": "sizeMismatch: pixelmatch cannot run across sizes — counted in `pairs` (a failed pair), never `perfect`, NOT averaged. noOriginal: there was never a pair — excluded from `pairs`. Both COUNTED here; they used to be scored 100 and averaged as if measured."
     },
     "exact": {
-      "mean": 0.0016276041666666667,
+      "mean": 0.001395089285714286,
       "max": 0.016276041666666668,
       "perfect": 48
     },
@@ -170,22 +178,22 @@
       },
       {
         "key": "error__default",
-        "pctExact": 0.006510416666666667,
+        "pctExact": 0.0032552083333333335,
         "pctAA": 0
       },
       {
         "key": "error__hover",
-        "pctExact": 0.006510416666666667,
+        "pctExact": 0.0032552083333333335,
         "pctAA": 0
       },
       {
         "key": "error__focus-visible",
-        "pctExact": 0.006510416666666667,
+        "pctExact": 0.0032552083333333335,
         "pctAA": 0
       },
       {
         "key": "error__active",
-        "pctExact": 0.006510416666666667,
+        "pctExact": 0.0032552083333333335,
         "pctAA": 0
       }
     ]

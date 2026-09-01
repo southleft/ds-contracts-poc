@@ -6,7 +6,7 @@
  *        NO FormControlLabel — label facts are receipts.
  * AntD   extract/computed/out/antd/switch/captured-truth.json
  *        button.ant-switch + handle + inner. No label mounted.
- * Astryx extract/computed/out/astryx/switch/captured-truth.json
+ * Astryx extract/computed/out/astryx-core/switch/captured-truth.json
  *        labelPosition × isDisabled ONLY — value/checked is NOT an axis
  *        (configs/astryx.json Switch __note:valueAxis). ON-plane facts are receipts.
  */
@@ -14,7 +14,7 @@ import { matrix, px } from "./ledger.js";
 import type { FactMapping } from "./reader.js";
 import { FONT_PIN, firstFam, inkTimesOpacity, one, receipt, styleForWeight } from "./mappings-util.js";
 
-export const ASTRYX_SWITCH_LEDGER = "extract/computed/out/astryx/switch/captured-truth.json";
+export const ASTRYX_SWITCH_LEDGER = "extract/computed/out/astryx-core/switch/captured-truth.json";
 
 const aTrack = "cls:astryx-switch";
 const aThumb = "cls:astryx-switch-thumb";

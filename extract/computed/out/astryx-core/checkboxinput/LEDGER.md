@@ -115,33 +115,38 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **53**
+- base declared facts: **61**
   - root.border-bottom-style = `solid`
   - root.border-left-style = `solid`
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0.border-bottom-style = `solid`
   - part-0.border-left-style = `solid`
   - part-0.border-right-style = `solid`
   - part-0.border-top-style = `solid`
   - part-0.box-sizing = `border-box`
+  - part-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-0.border-bottom-style = `solid`
   - part-0-0.border-left-style = `solid`
   - part-0-0.border-right-style = `solid`
   - part-0-0.border-top-style = `solid`
   - part-0-0.box-sizing = `border-box`
+  - part-0-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-0.isolation = `isolate`
   - part-0-0.position = `relative`
   - part-0-0-0.appearance = `auto`
   - part-0-0-0.box-sizing = `border-box`
   - part-0-0-0.cursor = `pointer`
+  - part-0-0-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-0-0.position = `absolute`
   - checkbox.border-bottom-style = `solid`
   - checkbox.border-left-style = `solid`
   - checkbox.border-right-style = `solid`
   - checkbox.border-top-style = `solid`
   - checkbox.box-sizing = `border-box`
+  - checkbox.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - checkbox.transition-duration = `0.175s`
   - checkbox.transition-property = `background-color, border-color`
   - checkbox.transition-timing-function = `cubic-bezier(0.24, 1, 0.4, 1)`
@@ -150,6 +155,7 @@ Zero contradictions.
   - icon.border-right-style = `solid`
   - icon.border-top-style = `solid`
   - icon.box-sizing = `border-box`
+  - icon.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - icon.overflow-x = `hidden`
   - icon.overflow-y = `hidden`
   - part-0-0-1-1.border-bottom-style = `solid`
@@ -157,11 +163,13 @@ Zero contradictions.
   - part-0-0-1-1.border-right-style = `solid`
   - part-0-0-1-1.border-top-style = `solid`
   - part-0-0-1-1.box-sizing = `border-box`
+  - part-0-0-1-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-1.border-bottom-style = `solid`
   - part-0-1.border-left-style = `solid`
   - part-0-1.border-right-style = `solid`
   - part-0-1.border-top-style = `solid`
   - part-0-1.box-sizing = `border-box`
+  - part-0-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label.border-bottom-style = `solid`
   - label.border-left-style = `solid`
   - label.border-right-style = `solid`
@@ -227,6 +235,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **84.432%** (7376/8736 cells; 0/48 combo×state rows fully equal)
+- computed-equality (styled channels, contract-mediated): **85.088%** (7760/9120 cells; 0/48 combo×state rows fully equal)
 - pixel: 0/48 pairs perfect at threshold 0 · 0/48 at the AA point (mean AA 6.762%, max 7.985%; 48/48 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

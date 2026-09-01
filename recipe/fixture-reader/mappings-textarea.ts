@@ -9,7 +9,7 @@
  *          (Input.TextArea — ONE bare <textarea class='ant-input'> root;
  *          the recipe's label row is a reviewed pairing, so label facts are
  *          receipts)
- *   Astryx extract/computed/out/astryx/textarea/captured-truth.json
+ *   Astryx extract/computed/out/astryx-core/textarea/captured-truth.json
  *          (TextArea under the documented Theme neutralTheme mount — Field +
  *          FieldLabel + wrapper + inner textarea)
  *
@@ -262,7 +262,7 @@ export const antdTextareaMappings: FactMapping[] = [
 // Astryx — TextArea (Theme neutralTheme mount)
 // ---------------------------------------------------------------------------
 
-export const ASTRYX_TEXTAREA_LEDGER = "extract/computed/out/astryx/textarea/captured-truth.json";
+export const ASTRYX_TEXTAREA_LEDGER = "extract/computed/out/astryx-core/textarea/captured-truth.json";
 
 const xBase = "empty.no-isDisabled";
 const xWrap = "cls:astryx-textarea";

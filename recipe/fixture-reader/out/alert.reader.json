@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "Banner"
     },
-    "ledgerFile": "extract/computed/out/astryx/banner/captured-truth.json",
+    "ledgerFile": "extract/computed/out/astryx-core/banner/captured-truth.json",
     "rows": [
       {
         "path": "box.height",
@@ -24,7 +24,7 @@
         "capturedValue": 16,
         "proposedValue": 16,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-left"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-left"
         ]
       },
       {
@@ -34,7 +34,7 @@
         "capturedValue": 12,
         "proposedValue": 12,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-top"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.padding-top"
         ]
       },
       {
@@ -44,7 +44,7 @@
         "capturedValue": 12,
         "proposedValue": 12,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-left-radius"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-left-radius"
         ]
       },
       {
@@ -54,7 +54,7 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-width"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.border-top-width"
         ]
       },
       {
@@ -72,7 +72,7 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.width"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-icon.width"
         ]
       },
       {
@@ -82,7 +82,7 @@
         "capturedValue": 14,
         "proposedValue": 14,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-size"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.font-size"
         ]
       },
       {
@@ -92,17 +92,17 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.line-height"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.line-height"
         ]
       },
       {
         "path": "states.info.boxFill",
         "fixtureValue": "#0082fb33",
-        "verdict": "drift",
-        "capturedValue": "#c4ddfbff",
-        "proposedValue": "#c4ddfbff",
+        "verdict": "match",
+        "capturedValue": "#0082fb33",
+        "proposedValue": "#0082fb33",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.background-color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-banner.background-color"
         ]
       },
       {
@@ -116,21 +116,21 @@
       {
         "path": "states.info.title",
         "fixtureValue": "#0a1317ff",
-        "verdict": "drift",
-        "capturedValue": "#00458cff",
-        "proposedValue": "#00458cff",
+        "verdict": "match",
+        "capturedValue": "#0a1317ff",
+        "proposedValue": "#0a1317ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.color"
         ]
       },
       {
         "path": "states.info.iconFill",
         "fixtureValue": "#0064e0ff",
-        "verdict": "drift",
-        "capturedValue": "#00458cff",
-        "proposedValue": "#00458cff",
+        "verdict": "match",
+        "capturedValue": "#0064e0ff",
+        "proposedValue": "#0064e0ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-icon.color"
         ]
       },
       {
@@ -140,17 +140,17 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.opacity"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default cls:astryx-icon.opacity"
         ]
       },
       {
         "path": "states.success.boxFill",
         "fixtureValue": "#0b991f33",
-        "verdict": "drift",
-        "capturedValue": "#c5e5c0ff",
-        "proposedValue": "#c5e5c0ff",
+        "verdict": "match",
+        "capturedValue": "#0b991f33",
+        "proposedValue": "#0b991f33",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-banner.background-color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default cls:astryx-banner.background-color"
         ]
       },
       {
@@ -164,21 +164,21 @@
       {
         "path": "states.success.title",
         "fixtureValue": "#0a1317ff",
-        "verdict": "drift",
-        "capturedValue": "#0c5700ff",
-        "proposedValue": "#0c5700ff",
+        "verdict": "match",
+        "capturedValue": "#0a1317ff",
+        "proposedValue": "#0a1317ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#success.card__default idx:0.1.0.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default idx:0.1.0.color"
         ]
       },
       {
         "path": "states.success.iconFill",
         "fixtureValue": "#0d8626ff",
-        "verdict": "drift",
-        "capturedValue": "#0c5700ff",
-        "proposedValue": "#0c5700ff",
+        "verdict": "match",
+        "capturedValue": "#0d8626ff",
+        "proposedValue": "#0d8626ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-icon.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default cls:astryx-icon.color"
         ]
       },
       {
@@ -188,17 +188,17 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-icon.opacity"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#success.card__default cls:astryx-icon.opacity"
         ]
       },
       {
         "path": "states.warning.boxFill",
         "fixtureValue": "#e2a40033",
-        "verdict": "drift",
-        "capturedValue": "#f8da9dff",
-        "proposedValue": "#f8da9dff",
+        "verdict": "match",
+        "capturedValue": "#e2a40033",
+        "proposedValue": "#e2a40033",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-banner.background-color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default cls:astryx-banner.background-color"
         ]
       },
       {
@@ -212,21 +212,21 @@
       {
         "path": "states.warning.title",
         "fixtureValue": "#0a1317ff",
-        "verdict": "drift",
-        "capturedValue": "#584400ff",
-        "proposedValue": "#584400ff",
+        "verdict": "match",
+        "capturedValue": "#0a1317ff",
+        "proposedValue": "#0a1317ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default idx:0.1.0.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default idx:0.1.0.color"
         ]
       },
       {
         "path": "states.warning.iconFill",
         "fixtureValue": "#e9af08ff",
-        "verdict": "drift",
-        "capturedValue": "#584400ff",
-        "proposedValue": "#584400ff",
+        "verdict": "match",
+        "capturedValue": "#e9af08ff",
+        "proposedValue": "#e9af08ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-icon.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default cls:astryx-icon.color"
         ]
       },
       {
@@ -236,17 +236,17 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-icon.opacity"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#warning.card__default cls:astryx-icon.opacity"
         ]
       },
       {
         "path": "states.error.boxFill",
         "fixtureValue": "#e3193b33",
-        "verdict": "drift",
-        "capturedValue": "#facecbff",
-        "proposedValue": "#facecbff",
+        "verdict": "match",
+        "capturedValue": "#e3193b33",
+        "proposedValue": "#e3193b33",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-banner.background-color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default cls:astryx-banner.background-color"
         ]
       },
       {
@@ -260,21 +260,21 @@
       {
         "path": "states.error.title",
         "fixtureValue": "#0a1317ff",
-        "verdict": "drift",
-        "capturedValue": "#89001aff",
-        "proposedValue": "#89001aff",
+        "verdict": "match",
+        "capturedValue": "#0a1317ff",
+        "proposedValue": "#0a1317ff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#error.card__default idx:0.1.0.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default idx:0.1.0.color"
         ]
       },
       {
         "path": "states.error.iconFill",
         "fixtureValue": "#e3193bff",
-        "verdict": "drift",
-        "capturedValue": "#89001aff",
-        "proposedValue": "#89001aff",
+        "verdict": "match",
+        "capturedValue": "#e3193bff",
+        "proposedValue": "#e3193bff",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-icon.color"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default cls:astryx-icon.color"
         ]
       },
       {
@@ -284,7 +284,7 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-icon.opacity"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#error.card__default cls:astryx-icon.opacity"
         ]
       },
       {
@@ -298,11 +298,11 @@
       {
         "path": "typography.title.family",
         "fixtureValue": "-apple-system",
-        "verdict": "drift",
-        "capturedValue": "Figtree",
-        "proposedValue": "Figtree",
+        "verdict": "match",
+        "capturedValue": "-apple-system",
+        "proposedValue": "-apple-system",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-family"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.font-family"
         ]
       },
       {
@@ -312,13 +312,13 @@
         "capturedValue": "Semibold",
         "proposedValue": "Semibold",
         "ledgerKeys": [
-          "extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-weight"
+          "extract/computed/out/astryx-core/banner/captured-truth.json#info.card__default idx:0.1.0.font-weight"
         ]
       }
     ],
     "counts": {
-      "match": 12,
-      "drift": 13,
+      "match": 25,
+      "drift": 0,
       "receipt": 7,
       "unread": 0
     }

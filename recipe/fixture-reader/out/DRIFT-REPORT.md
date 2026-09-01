@@ -10,33 +10,13 @@
 
 ### astryx — @astryxdesign/core@0.1.6#CheckboxInput
 
-ledger `extract/computed/out/astryx/checkboxinput/captured-truth.json` · 55 facts: **26 match**, **19 drift**, 10 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/checkboxinput/captured-truth.json` · 55 facts: **45 match**, **0 drift**, 10 named receipts, 0 unread
 
-| fact | fixture | captured | ledger key |
-|---|---|---|---|
-| `box.radius` | `4` | `6` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-left-radius` |
-| `states.unchecked.enabled.boxBorder` | `#ccd3dbff` | `#d4d4d4ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color` |
-| `states.unchecked.enabled.label` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.color` |
-| `states.unchecked.disabled.boxFill` | `#0536590c` | `#f1f1f1ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.background-color` |
-| `states.unchecked.disabled.boxBorder` | `#05365919` | `#ebebebff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.border-top-color` |
-| `states.unchecked.disabled.label` | `#a4b0bcff` | `#a3a3a3ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-field-label.color` |
-| `states.checked.enabled.boxFill` | `#0064e0ff` | `#262626ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.background-color` |
-| `states.checked.enabled.boxBorder` | `#0064e0ff` | `#262626ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color` |
-| `states.checked.enabled.label` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-field-label.color` |
-| `states.checked.disabled.boxFill` | `#0064e0ff` | `#262626ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.background-color` |
-| `states.checked.disabled.boxBorder` | `#05365919` | `#ebebebff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.border-top-color` |
-| `states.checked.disabled.label` | `#a4b0bcff` | `#a3a3a3ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-field-label.color` |
-| `states.indeterminate.enabled.boxFill` | `#0064e0ff` | `#262626ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.background-color` |
-| `states.indeterminate.enabled.boxBorder` | `#0064e0ff` | `#262626ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.border-top-color` |
-| `states.indeterminate.enabled.label` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-field-label.color` |
-| `states.indeterminate.disabled.boxFill` | `#0064e0ff` | `#262626ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.background-color` |
-| `states.indeterminate.disabled.boxBorder` | `#05365919` | `#ebebebff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.border-top-color` |
-| `states.indeterminate.disabled.label` | `#a4b0bcff` | `#a3a3a3ff` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-field-label.color` |
-| `typography.label.family` | `-apple-system` | `Figtree` | `extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-family` |
+No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Checkbox
 
-ledger `extract/computed/out/mui/checkbox/captured-truth.json` · 55 facts: **24 match**, **0 drift**, 31 named receipts, 0 unread
+ledger `extract/computed/out/mui/checkbox/captured-truth.json` · 55 facts: **22 match**, **0 drift**, 33 named receipts, 0 unread
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
@@ -52,25 +32,9 @@ ledger `extract/computed/out/antd/checkbox/captured-truth.json` · 55 facts: **4
 
 ### astryx — @astryxdesign/core@0.1.6#TextArea
 
-ledger `extract/computed/out/astryx/textarea/captured-truth.json` · 39 facts: **19 match**, **15 drift**, 5 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/textarea/captured-truth.json` · 39 facts: **34 match**, **0 drift**, 5 named receipts, 0 unread
 
-| fact | fixture | captured | ledger key |
-|---|---|---|---|
-| `box.radius` | `8` | `10` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-left-radius` |
-| `states.empty.enabled.boxBorder` | `#ccd3dbff` | `#d4d4d4ff` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-textarea.border-top-color` |
-| `states.empty.enabled.label` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.color` |
-| `states.empty.enabled.value` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0::placeholder.color` |
-| `states.empty.disabled.boxBorder` | `#ccd3dbff` | `#d4d4d4ff` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-textarea.border-top-color` |
-| `states.empty.disabled.label` | `#a4b0bcff` | `#a3a3a3ff` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default cls:astryx-field-label.color` |
-| `states.empty.disabled.value` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.isDisabled__default idx:1.0.0::placeholder.color` |
-| `states.value.enabled.boxBorder` | `#ccd3dbff` | `#d4d4d4ff` | `extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-textarea.border-top-color` |
-| `states.value.enabled.label` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default cls:astryx-field-label.color` |
-| `states.value.enabled.value` | `#0a1317ff` | `#171717ff` | `extract/computed/out/astryx/textarea/captured-truth.json#value.no-isDisabled__default idx:1.0.0.color` |
-| `states.value.disabled.boxBorder` | `#ccd3dbff` | `#d4d4d4ff` | `extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-textarea.border-top-color` |
-| `states.value.disabled.label` | `#a4b0bcff` | `#a3a3a3ff` | `extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default cls:astryx-field-label.color` |
-| `states.value.disabled.value` | `#0a1317ff` | `#171717ff` | `extract/computed/out/astryx/textarea/captured-truth.json#value.isDisabled__default idx:1.0.0.color` |
-| `typography.label.family` | `-apple-system` | `Figtree` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default cls:astryx-field-label.font-family` |
-| `typography.value.family` | `-apple-system` | `Figtree` | `extract/computed/out/astryx/textarea/captured-truth.json#empty.no-isDisabled__default idx:1.0.0.font-family` |
+No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#TextField
 
@@ -108,15 +72,9 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### astryx — @astryxdesign/core@0.1.6#Switch
 
-ledger `extract/computed/out/astryx/switch/captured-truth.json` · 33 facts: **14 match**, **5 drift**, 14 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/switch/captured-truth.json` · 33 facts: **19 match**, **0 drift**, 14 named receipts, 0 unread
 
-| fact | fixture | captured | ledger key |
-|---|---|---|---|
-| `states.false.enabled.trackFill` | `#0a131733` | `#d4d4d4ff` | `extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-switch.background-color` |
-| `states.false.enabled.label` | `#4e606fff` | `#737373ff` | `extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.color` |
-| `states.false.disabled.trackFill` | `#0a131733` | `#d4d4d4ff` | `extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-switch.background-color` |
-| `states.false.disabled.label` | `#a4b0bcff` | `#a3a3a3ff` | `extract/computed/out/astryx/switch/captured-truth.json#start.isDisabled__default cls:astryx-field-label.color` |
-| `typography.label.family` | `-apple-system` | `Figtree` | `extract/computed/out/astryx/switch/captured-truth.json#start.no-isDisabled__default cls:astryx-field-label.font-family` |
+No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Switch
 
@@ -134,23 +92,9 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### astryx — @astryxdesign/core@0.1.6#Banner
 
-ledger `extract/computed/out/astryx/banner/captured-truth.json` · 32 facts: **12 match**, **13 drift**, 7 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/banner/captured-truth.json` · 32 facts: **25 match**, **0 drift**, 7 named receipts, 0 unread
 
-| fact | fixture | captured | ledger key |
-|---|---|---|---|
-| `states.info.boxFill` | `#0082fb33` | `#c4ddfbff` | `extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-banner.background-color` |
-| `states.info.title` | `#0a1317ff` | `#00458cff` | `extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.color` |
-| `states.info.iconFill` | `#0064e0ff` | `#00458cff` | `extract/computed/out/astryx/banner/captured-truth.json#info.card__default cls:astryx-icon.color` |
-| `states.success.boxFill` | `#0b991f33` | `#c5e5c0ff` | `extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-banner.background-color` |
-| `states.success.title` | `#0a1317ff` | `#0c5700ff` | `extract/computed/out/astryx/banner/captured-truth.json#success.card__default idx:0.1.0.color` |
-| `states.success.iconFill` | `#0d8626ff` | `#0c5700ff` | `extract/computed/out/astryx/banner/captured-truth.json#success.card__default cls:astryx-icon.color` |
-| `states.warning.boxFill` | `#e2a40033` | `#f8da9dff` | `extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-banner.background-color` |
-| `states.warning.title` | `#0a1317ff` | `#584400ff` | `extract/computed/out/astryx/banner/captured-truth.json#warning.card__default idx:0.1.0.color` |
-| `states.warning.iconFill` | `#e9af08ff` | `#584400ff` | `extract/computed/out/astryx/banner/captured-truth.json#warning.card__default cls:astryx-icon.color` |
-| `states.error.boxFill` | `#e3193b33` | `#facecbff` | `extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-banner.background-color` |
-| `states.error.title` | `#0a1317ff` | `#89001aff` | `extract/computed/out/astryx/banner/captured-truth.json#error.card__default idx:0.1.0.color` |
-| `states.error.iconFill` | `#e3193bff` | `#89001aff` | `extract/computed/out/astryx/banner/captured-truth.json#error.card__default cls:astryx-icon.color` |
-| `typography.title.family` | `-apple-system` | `Figtree` | `extract/computed/out/astryx/banner/captured-truth.json#info.card__default idx:0.1.0.font-family` |
+No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Alert
 
@@ -168,14 +112,9 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### astryx — @astryxdesign/core@0.1.6#Token
 
-ledger `extract/computed/out/astryx/token/captured-truth.json` · 14 facts: **8 match**, **4 drift**, 2 named receipts, 0 unread
+ledger `extract/computed/out/astryx-core/token/captured-truth.json` · 14 facts: **12 match**, **0 drift**, 2 named receipts, 0 unread
 
-| fact | fixture | captured | ledger key |
-|---|---|---|---|
-| `box.radius` | `4` | `6` | `extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.border-top-left-radius` |
-| `rest.boxFill` | `#0536591a` | `#0000000f` | `extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.background-color` |
-| `rest.label` | `#0a1317ff` | `#171717ff` | `extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.color` |
-| `typography.label.family` | `-apple-system` | `Figtree` | `extract/computed/out/astryx/token/captured-truth.json#md.default__default cls:astryx-token.font-family` |
+No drift — every mapped fact equals the ledger value (or is a named receipt).
 
 ### mui — @mui/material@9.2.0#Chip
 
@@ -341,8 +280,10 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **checkbox/astryx** `states.checked.disabled.dashFill` = `#00000000` — the indeterminate mark does not render in this state; transparent is the recipe's spelling of absent _[no mark at combo checked.md.isDisabled — reviewed #00000000]_
 - **checkbox/astryx** `states.indeterminate.enabled.checkFill` = `#ffffffff` — the check does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.md.no-isDisabled — reviewed (fixture value carried)]_
 - **checkbox/astryx** `states.indeterminate.disabled.checkFill` = `#ffffffff` — the check does not render in this state; the recipe carries a glyph-slot spelling _[no check at combo indeterminate.md.isDisabled — reviewed (fixture value carried)]_
+- **checkbox/mui** `box.size` = `18` — the painted square is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel _[extract/computed/out/mui/checkbox/assets/checkbox-icon-unchecked.svg outer subpath 3→21 in viewBox 0 0 24 24 = 18×18]_
 - **checkbox/mui** `box.radius` = `2` — the unchecked box corner is SVG path geometry inside CheckBoxOutlineBlank's 24-viewBox icon, not a CSS border-radius (the SvgIcon's computed border-radius is 0) _[CheckBoxOutlineBlank.js path corner c-1.1 → reviewed 2; committed glyph asset extract/computed/out/mui/checkbox/assets/checkbox-icon-unchecked.svg]_
 - **checkbox/mui** `box.borderWidth` = `2` — the unchecked outline stroke is drawn by the SVG path ring (outer box minus inner hole), not a CSS border — no computed channel carries its 2px thickness _[CheckBoxOutlineBlank.js outer 19×19 at (3,3) minus inner 15×15 at (5,5) → reviewed 2]_
+- **checkbox/mui** `box.padding` = `12` — SwitchBase's computed padding 9 is measured from the 24 viewport; from the painted 18 square the inset to the 42 wrapper is 12 _[SwitchBase.js padding 9 + checkbox-icon-unchecked.svg 18×18 painted extent; 18 + 12×2 = 42]_
 - **checkbox/mui** `row.gap` = `0` — the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger _[FormControlLabel.js gap 0 (label sits flush; spacing is the label's own padding) — reviewed 0]_
 - **checkbox/mui** `dash.width` = `10` — the indeterminate bar is the even-odd HOLE of IndeterminateCheckBox's single path — hole geometry is not a computed style channel _[IndeterminateCheckBox.js hole M7 11 h10 v2 → 10×2 at (7,11); committed glyph asset checkbox-icon-indeterminate.svg]_
 - **checkbox/mui** `dash.height` = `2` — same even-odd hole geometry as dash.width — not a computed channel _[IndeterminateCheckBox.js hole v2 → reviewed 2]_

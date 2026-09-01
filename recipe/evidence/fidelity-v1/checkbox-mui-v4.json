@@ -1,0 +1,33 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "checkbox/mui (v4)",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 3.7037037037037033,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "canvasPx": "18x18",
+    "realPx": "18x18",
+    "inkCanvasPct": 39.50617283950617,
+    "inkRealPct": 39.50617283950617
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/shots/checkbox-mui-glyph-v4.png",
+    "sha256": "10059ed1ef845f81ffa0a40cb49227e84d345bab0d8220653239c5133ffd0f3c"
+  },
+  "reference": {
+    "path": "extract/computed/out/mui/checkbox/orig-shots/unchecked.enabled__default.png",
+    "sha256": "8356abc2e532b95fd0f4f532107f1a1de47480725b0ef95d6d177fb06c6e3e79"
+  },
+  "diff": "recipe/evidence/fidelity-v1/checkbox-mui-v4.diff.png",
+  "referenceCroppedToControl": true,
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

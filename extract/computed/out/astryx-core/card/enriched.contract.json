@@ -81,7 +81,7 @@
         "border-right-style": "solid",
         "border-top-style": "solid",
         "box-sizing": "border-box",
-        "font-family": "Times",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
         "overflow-x": "clip",
         "overflow-y": "clip"
       },

@@ -437,6 +437,11 @@
         "value": "border-box"
       },
       {
+        "part": "root",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
         "part": "part-0",
         "channel": "border-bottom-style",
         "value": "solid"
@@ -462,6 +467,11 @@
         "value": "border-box"
       },
       {
+        "part": "part-0",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
         "part": "part-0-0",
         "channel": "border-bottom-style",
         "value": "solid"
@@ -485,6 +495,11 @@
         "part": "part-0-0",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "part-0-0",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "label-2",
@@ -538,6 +553,11 @@
       },
       {
         "part": "part-0-0-0",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
+        "part": "part-0-0-0",
         "channel": "position",
         "value": "absolute"
       },
@@ -565,6 +585,11 @@
         "part": "switch",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "switch",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "switch",
@@ -605,6 +630,11 @@
         "part": "switch-thumb",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "switch-thumb",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "switch-thumb",
@@ -652,6 +682,11 @@
         "value": "border-box"
       },
       {
+        "part": "part-0-1",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
+      },
+      {
         "part": "part-0-1-0",
         "channel": "appearance",
         "value": "auto"
@@ -665,6 +700,11 @@
         "part": "part-0-1-0",
         "channel": "cursor",
         "value": "pointer"
+      },
+      {
+        "part": "part-0-1-0",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "part-0-1-0",
@@ -695,6 +735,11 @@
         "part": "switch-2",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "switch-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "switch-2",
@@ -735,6 +780,11 @@
         "part": "switch-thumb-2",
         "channel": "box-sizing",
         "value": "border-box"
+      },
+      {
+        "part": "switch-thumb-2",
+        "channel": "font-family",
+        "value": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       {
         "part": "switch-thumb-2",
@@ -1392,49 +1442,49 @@
     "absolute-geometry-admitted: part-0-1-0 — uniformly position:absolute; width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: switch-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
     "absolute-geometry-admitted: switch-thumb-2 — overlay-cluster member (component contains absolute parts); width/height/offset channels join fusion for this part (every other component keeps the geometry exclusion)",
-    "control-equal-drop: root — 570 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: root — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: root — 384 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: part-0 — 564 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: part-0 — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: part-0 — 378 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: part-0-0 — 561 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: part-0-0 — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: part-0-0 — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: root — 569 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: root — 10 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: root — 383 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0 — 563 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0 — 10 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0 — 377 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0-0 — 560 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0 — 10 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0 — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <label> — span control used (part label-2)",
     "ua-control-fallback: no UA baseline for <label> — span UA control used (part label-2)",
     "control-equal-drop: label-2 — 551 of 578 admitted channels compared EQUAL to the <label> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: label-2 — 7 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "page-global-baseline-corrected: label-2 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
     "control-equal-drop: label-2 — 365 channel(s) EQUAL to the <label> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <input> — span control used (part part-0-0-0)",
     "ua-control-fallback: no UA baseline for <input> — span UA control used (part part-0-0-0)",
-    "control-equal-drop: part-0-0-0 — 562 of 580 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: part-0-0-0 — 5 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: part-0-0-0 — 376 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: switch — 556 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: switch — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: switch — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: switch-thumb — 558 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: switch-thumb — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: switch-thumb — 372 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: part-0-1 — 564 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: part-0-1 — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: part-0-1 — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0-0-0 — 561 of 580 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-0-0 — 6 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-0-0 — 375 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: switch — 555 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: switch — 10 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: switch — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: switch-thumb — 557 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: switch-thumb — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: switch-thumb — 371 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0-1 — 563 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-1 — 10 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-1 — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <input> — span control used (part part-0-1-0)",
     "ua-control-fallback: no UA baseline for <input> — span UA control used (part part-0-1-0)",
-    "control-equal-drop: part-0-1-0 — 562 of 580 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: part-0-1-0 — 5 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: part-0-1-0 — 376 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: switch-2 — 556 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: switch-2 — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: switch-2 — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: switch-thumb-2 — 558 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: switch-thumb-2 — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
-    "control-equal-drop: switch-thumb-2 — 372 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: part-0-1-0 — 561 of 580 admitted channels compared EQUAL to the <input> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: part-0-1-0 — 6 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: part-0-1-0 — 375 channel(s) EQUAL to the <input> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: switch-2 — 555 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: switch-2 — 10 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); height=24px (in-page control also read 24px; UA control reads 18px); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: switch-2 — 369 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: switch-thumb-2 — 557 of 580 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "page-global-baseline-corrected: switch-thumb-2 — 9 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); line-height=24px (in-page control also read 24px; UA control reads normal); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "control-equal-drop: switch-thumb-2 — 371 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-fallback: no control for <label> — span control used (part label)",
     "ua-control-fallback: no UA baseline for <label> — span UA control used (part label)",
     "control-equal-drop: label — 551 of 578 admitted channels compared EQUAL to the <label> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "page-global-baseline-corrected: label — 7 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
+    "page-global-baseline-corrected: label — 8 channel(s) that the IN-PAGE control would have cancelled are carried, because the UA baseline proves the value came from the library's own page-global CSS and not from the browser: border-bottom-style=solid (in-page control also read solid; UA control reads none); border-left-style=solid (in-page control also read solid; UA control reads none); border-right-style=solid (in-page control also read solid; UA control reads none); border-top-style=solid (in-page control also read solid; UA control reads none); box-sizing=border-box (in-page control also read border-box; UA control reads content-box); font-family=-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (in-page control also read -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif; UA control reads Times); tab-size=4 (in-page control also read 4; UA control reads 8); text-size-adjust=100% (in-page control also read 100%; UA control reads auto)",
     "control-equal-drop: label — 365 channel(s) EQUAL to the <label> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "geometry-excluded: label — block-size 20px, height 20px, inline-size 130.016px, perspective-origin 65px 10px, transform-origin 65.0078px 10px, width 130.016px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: label-2 — block-size 20px, height 20px, inline-size 130.016px, perspective-origin 65px 10px, transform-origin 65.0078px 10px, width 130.016px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
@@ -1576,16 +1626,19 @@
     "declared fact carried: root.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: root.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: root.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-0.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: label-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: label-2.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1596,12 +1649,14 @@
     "declared fact carried: part-0-0-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-0-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-0-0.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-0-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: switch.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1610,6 +1665,7 @@
     "declared fact carried: switch-thumb.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: switch-thumb.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-thumb.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-thumb.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb.transition-property = transform, width, height (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1619,15 +1675,18 @@
     "declared fact carried: part-0-1.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: part-0-1.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-1-0.appearance = auto (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: part-0-1-0.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-1-0.cursor = pointer (v15 declared vocabulary — declared-not-drawn on canvas)",
+    "declared fact carried: part-0-1-0.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: part-0-1-0.position = absolute (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.border-bottom-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.border-left-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: switch-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.transition-property = background-color (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-2.transition-timing-function = cubic-bezier(0.24, 1, 0.4, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
@@ -1636,6 +1695,7 @@
     "declared fact carried: switch-thumb-2.border-right-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb-2.border-top-style = solid (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb-2.box-sizing = border-box (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: switch-thumb-2.font-family = -apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-thumb-2.transform = matrix(1, 0, 0, 1, 0, 0) (v15 declared vocabulary — canvas-drawable)",
     "declared fact carried: switch-thumb-2.transition-duration = 0.175s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: switch-thumb-2.transition-property = transform, width, height (v15 declared vocabulary — declared-not-drawn on canvas)",

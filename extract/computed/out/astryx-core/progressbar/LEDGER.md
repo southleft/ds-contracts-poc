@@ -50,28 +50,31 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **31**
+- base declared facts: **35**
   - root.border-bottom-style = `solid`
   - root.border-left-style = `solid`
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0.border-bottom-style = `solid`
   - part-0.border-left-style = `solid`
   - part-0.border-right-style = `solid`
   - part-0.border-top-style = `solid`
   - part-0.box-sizing = `border-box`
+  - part-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label.border-bottom-style = `solid`
   - label.border-left-style = `solid`
   - label.border-right-style = `solid`
   - label.border-top-style = `solid`
   - label.box-sizing = `border-box`
-  - label.font-family = `Times`
+  - label.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - progressbar-track.border-bottom-style = `solid`
   - progressbar-track.border-left-style = `solid`
   - progressbar-track.border-right-style = `solid`
   - progressbar-track.border-top-style = `solid`
   - progressbar-track.box-sizing = `border-box`
+  - progressbar-track.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - progressbar-track.overflow-x = `hidden`
   - progressbar-track.overflow-y = `hidden`
   - progressbar-fill.border-bottom-style = `solid`
@@ -79,6 +82,7 @@ Zero contradictions.
   - progressbar-fill.border-right-style = `solid`
   - progressbar-fill.border-top-style = `solid`
   - progressbar-fill.box-sizing = `border-box`
+  - progressbar-fill.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - progressbar-fill.transition-duration = `0.41s`
   - progressbar-fill.transition-property = `width`
   - progressbar-fill.transition-timing-function = `cubic-bezier(0.24, 1, 0.4, 1)`
@@ -97,6 +101,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **93.750%** (1500/1600 cells; 0/20 combo×state rows fully equal)
-- pixel: 0/20 pairs perfect at threshold 0 · 0/20 at the AA point (mean AA 20.888%, max 20.925%; 20/20 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **94.048%** (1580/1680 cells; 0/20 combo×state rows fully equal)
+- pixel: 0/20 pairs perfect at threshold 0 · 0/20 at the AA point (mean AA 21.271%, max 21.308%; 20/20 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

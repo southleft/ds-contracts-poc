@@ -72,12 +72,13 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **33**
+- base declared facts: **36**
   - root.border-bottom-style = `solid`
   - root.border-left-style = `solid`
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label.border-bottom-style = `solid`
   - label.border-left-style = `solid`
   - label.border-right-style = `solid`
@@ -90,12 +91,14 @@ Zero contradictions.
   - part-1.border-right-style = `solid`
   - part-1.border-top-style = `solid`
   - part-1.box-sizing = `border-box`
+  - part-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-1.isolation = `isolate`
   - textarea.border-bottom-style = `solid`
   - textarea.border-left-style = `solid`
   - textarea.border-right-style = `solid`
   - textarea.border-top-style = `solid`
   - textarea.box-sizing = `border-box`
+  - textarea.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - textarea.position = `relative`
   - textarea.transition-duration = `0.175s`
   - textarea.transition-property = `border-color, box-shadow`
@@ -145,6 +148,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **85.294%** (1624/1904 cells; 0/16 combo×state rows fully equal)
-- pixel: 0/16 pairs perfect at threshold 0 · 0/16 at the AA point (mean AA 8.550%, max 10.206%; 16/16 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
+- computed-equality (styled channels, contract-mediated): **85.656%** (1672/1952 cells; 0/16 combo×state rows fully equal)
+- pixel: 0/16 pairs perfect at threshold 0 · 0/16 at the AA point (mean AA 8.551%, max 10.206%; 16/16 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

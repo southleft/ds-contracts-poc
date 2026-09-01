@@ -221,6 +221,7 @@
                 "border-right-style": "solid",
                 "border-top-style": "solid",
                 "box-sizing": "border-box",
+                "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
                 "position": "relative",
                 "transition-duration": "0.175s",
                 "transition-property": "border-color, box-shadow",
@@ -324,6 +325,7 @@
             "border-right-style": "solid",
             "border-top-style": "solid",
             "box-sizing": "border-box",
+            "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif",
             "isolation": "isolate"
           },
           "tokens": {
@@ -337,7 +339,8 @@
         "border-left-style": "solid",
         "border-right-style": "solid",
         "border-top-style": "solid",
-        "box-sizing": "border-box"
+        "box-sizing": "border-box",
+        "font-family": "-apple-system, \"system-ui\", \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
       },
       "tokens": {
         "column-gap": "{imported.shared.size-4}",

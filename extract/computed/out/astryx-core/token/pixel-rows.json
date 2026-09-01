@@ -1,0 +1,662 @@
+[
+  {
+    "key": "sm.default__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.default__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.default__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.default__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.red__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.red__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.red__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.red__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.orange__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.orange__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.orange__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.orange__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.yellow__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.yellow__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.yellow__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.yellow__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.green__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.green__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.green__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.green__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.teal__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.teal__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.teal__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.teal__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.cyan__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.cyan__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.cyan__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.cyan__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.blue__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.blue__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.blue__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.blue__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.purple__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.purple__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.purple__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.purple__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.pink__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.pink__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.pink__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.pink__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.gray__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.gray__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.gray__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "sm.gray__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.default__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.default__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.default__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.default__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.red__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.red__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.red__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.red__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.orange__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.orange__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.orange__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.orange__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.yellow__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.yellow__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.yellow__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.yellow__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.green__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.green__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.green__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.green__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.teal__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.teal__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.teal__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.teal__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.cyan__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.cyan__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.cyan__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.cyan__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.blue__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.blue__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.blue__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.blue__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.purple__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.purple__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.purple__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.purple__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.pink__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.pink__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.pink__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.pink__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.gray__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.gray__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.gray__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "md.gray__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.default__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.default__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.default__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.default__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.red__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.red__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.red__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.red__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.orange__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.orange__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.orange__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.orange__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.yellow__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.yellow__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.yellow__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.yellow__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.green__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.green__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.green__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.green__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.teal__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.teal__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.teal__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.teal__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.cyan__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.cyan__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.cyan__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.cyan__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.blue__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.blue__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.blue__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.blue__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.purple__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.purple__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.purple__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.purple__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.pink__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.pink__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.pink__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.pink__active",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.gray__default",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.gray__hover",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.gray__focus-visible",
+    "pctExact": 0,
+    "pctAA": 0
+  },
+  {
+    "key": "lg.gray__active",
+    "pctExact": 0,
+    "pctAA": 0
+  }
+]

@@ -7,9 +7,9 @@
   "combos": 9,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 4176,
-    "cellsEqual": 3780,
-    "pctEqual": 90.51724137931035,
+    "cellsCompared": 4284,
+    "cellsEqual": 3888,
+    "pctEqual": 90.75630252100841,
     "rowsFullyEqual": 0,
     "rows": 36
   },
@@ -209,8 +209,8 @@
   "rows": [
     {
       "key": "text.sm__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.785067471590908,
       "pctAA": 10.857599431818182,
       "mismatches": [
@@ -278,8 +278,8 @@
     },
     {
       "key": "text.sm__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.906871448863637,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -347,8 +347,8 @@
     },
     {
       "key": "text.sm__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.915749289772727,
       "pctAA": 12.939453125,
       "mismatches": [
@@ -440,8 +440,8 @@
     },
     {
       "key": "text.sm__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.906871448863637,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -509,8 +509,8 @@
     },
     {
       "key": "text.md__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.816139914772727,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -578,8 +578,8 @@
     },
     {
       "key": "text.md__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.937943892045455,
       "pctAA": 10.862038352272727,
       "mismatches": [
@@ -647,8 +647,8 @@
     },
     {
       "key": "text.md__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.946821732954545,
       "pctAA": 12.941672585227273,
       "mismatches": [
@@ -740,8 +740,8 @@
     },
     {
       "key": "text.md__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.937943892045455,
       "pctAA": 10.862038352272727,
       "mismatches": [
@@ -809,8 +809,8 @@
     },
     {
       "key": "text.lg__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.798384232954545,
       "pctAA": 10.848721590909092,
       "mismatches": [
@@ -878,8 +878,8 @@
     },
     {
       "key": "text.lg__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.915749289772727,
       "pctAA": 10.850941051136363,
       "mismatches": [
@@ -947,8 +947,8 @@
     },
     {
       "key": "text.lg__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.924627130681818,
       "pctAA": 12.932794744318182,
       "mismatches": [
@@ -1040,8 +1040,8 @@
     },
     {
       "key": "text.lg__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.915749289772727,
       "pctAA": 10.850941051136363,
       "mismatches": [
@@ -1109,8 +1109,8 @@
     },
     {
       "key": "password.sm__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.785067471590908,
       "pctAA": 10.857599431818182,
       "mismatches": [
@@ -1178,8 +1178,8 @@
     },
     {
       "key": "password.sm__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.906871448863637,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -1247,8 +1247,8 @@
     },
     {
       "key": "password.sm__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.915749289772727,
       "pctAA": 12.939453125,
       "mismatches": [
@@ -1340,8 +1340,8 @@
     },
     {
       "key": "password.sm__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.906871448863637,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -1409,8 +1409,8 @@
     },
     {
       "key": "password.md__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.816139914772727,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -1478,8 +1478,8 @@
     },
     {
       "key": "password.md__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.937943892045455,
       "pctAA": 10.862038352272727,
       "mismatches": [
@@ -1547,8 +1547,8 @@
     },
     {
       "key": "password.md__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.946821732954545,
       "pctAA": 12.941672585227273,
       "mismatches": [
@@ -1640,8 +1640,8 @@
     },
     {
       "key": "password.md__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.937943892045455,
       "pctAA": 10.862038352272727,
       "mismatches": [
@@ -1709,8 +1709,8 @@
     },
     {
       "key": "password.lg__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.798384232954545,
       "pctAA": 10.848721590909092,
       "mismatches": [
@@ -1778,8 +1778,8 @@
     },
     {
       "key": "password.lg__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.915749289772727,
       "pctAA": 10.850941051136363,
       "mismatches": [
@@ -1847,8 +1847,8 @@
     },
     {
       "key": "password.lg__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.924627130681818,
       "pctAA": 12.932794744318182,
       "mismatches": [
@@ -1940,8 +1940,8 @@
     },
     {
       "key": "password.lg__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.915749289772727,
       "pctAA": 10.850941051136363,
       "mismatches": [
@@ -2009,8 +2009,8 @@
     },
     {
       "key": "email.sm__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.785067471590908,
       "pctAA": 10.857599431818182,
       "mismatches": [
@@ -2078,8 +2078,8 @@
     },
     {
       "key": "email.sm__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.906871448863637,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -2147,8 +2147,8 @@
     },
     {
       "key": "email.sm__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.915749289772727,
       "pctAA": 12.939453125,
       "mismatches": [
@@ -2240,8 +2240,8 @@
     },
     {
       "key": "email.sm__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.906871448863637,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -2309,8 +2309,8 @@
     },
     {
       "key": "email.md__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.816139914772727,
       "pctAA": 10.859818892045455,
       "mismatches": [
@@ -2378,8 +2378,8 @@
     },
     {
       "key": "email.md__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.937943892045455,
       "pctAA": 10.862038352272727,
       "mismatches": [
@@ -2447,8 +2447,8 @@
     },
     {
       "key": "email.md__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.946821732954545,
       "pctAA": 12.941672585227273,
       "mismatches": [
@@ -2540,8 +2540,8 @@
     },
     {
       "key": "email.md__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.937943892045455,
       "pctAA": 10.862038352272727,
       "mismatches": [
@@ -2609,8 +2609,8 @@
     },
     {
       "key": "email.lg__default",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 13.798384232954545,
       "pctAA": 10.848721590909092,
       "mismatches": [
@@ -2678,8 +2678,8 @@
     },
     {
       "key": "email.lg__hover",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.915749289772727,
       "pctAA": 10.850941051136363,
       "mismatches": [
@@ -2747,8 +2747,8 @@
     },
     {
       "key": "email.lg__focus-visible",
-      "channelsCompared": 116,
-      "channelsEqual": 102,
+      "channelsCompared": 119,
+      "channelsEqual": 105,
       "pctExact": 15.924627130681818,
       "pctAA": 12.932794744318182,
       "mismatches": [
@@ -2840,8 +2840,8 @@
     },
     {
       "key": "email.lg__active",
-      "channelsCompared": 116,
-      "channelsEqual": 106,
+      "channelsCompared": 119,
+      "channelsEqual": 109,
       "pctExact": 15.915749289772727,
       "pctAA": 10.850941051136363,
       "mismatches": [

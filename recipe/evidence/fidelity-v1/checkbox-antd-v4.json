@@ -1,0 +1,33 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "checkbox/antd (v4)",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 14.453125,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "canvasPx": "16x16",
+    "realPx": "16x16",
+    "inkCanvasPct": 23.4375,
+    "inkRealPct": 26.5625
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/shots/checkbox-antd-glyph-v4.png",
+    "sha256": "ed540a76a5f8ef67ded2399cef14d12b26696bc49fd8adc179b9e4c2d9dda6fd"
+  },
+  "reference": {
+    "path": "extract/computed/out/antd/checkbox/orig-shots/unchecked.enabled__default.png",
+    "sha256": "b86147b8b5615a6b6c249003617905226d464b7c1ad7d354fb2988121002b195"
+  },
+  "diff": "recipe/evidence/fidelity-v1/checkbox-antd-v4.diff.png",
+  "referenceCroppedToControl": true,
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

@@ -90,22 +90,25 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **76**
+- base declared facts: **86**
   - root.border-bottom-style = `solid`
   - root.border-left-style = `solid`
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0.border-bottom-style = `solid`
   - part-0.border-left-style = `solid`
   - part-0.border-right-style = `solid`
   - part-0.border-top-style = `solid`
   - part-0.box-sizing = `border-box`
+  - part-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-0.border-bottom-style = `solid`
   - part-0-0.border-left-style = `solid`
   - part-0-0.border-right-style = `solid`
   - part-0-0.border-top-style = `solid`
   - part-0-0.box-sizing = `border-box`
+  - part-0-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label-2.border-bottom-style = `solid`
   - label-2.border-left-style = `solid`
   - label-2.border-right-style = `solid`
@@ -116,12 +119,14 @@ Zero contradictions.
   - part-0-0-0.appearance = `auto`
   - part-0-0-0.box-sizing = `border-box`
   - part-0-0-0.cursor = `pointer`
+  - part-0-0-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-0-0.position = `absolute`
   - switch.border-bottom-style = `solid`
   - switch.border-left-style = `solid`
   - switch.border-right-style = `solid`
   - switch.border-top-style = `solid`
   - switch.box-sizing = `border-box`
+  - switch.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - switch.transition-duration = `0.175s`
   - switch.transition-property = `background-color`
   - switch.transition-timing-function = `cubic-bezier(0.24, 1, 0.4, 1)`
@@ -130,6 +135,7 @@ Zero contradictions.
   - switch-thumb.border-right-style = `solid`
   - switch-thumb.border-top-style = `solid`
   - switch-thumb.box-sizing = `border-box`
+  - switch-thumb.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - switch-thumb.transform = `matrix(1, 0, 0, 1, 0, 0)`
   - switch-thumb.transition-duration = `0.175s`
   - switch-thumb.transition-property = `transform, width, height`
@@ -139,15 +145,18 @@ Zero contradictions.
   - part-0-1.border-right-style = `solid`
   - part-0-1.border-top-style = `solid`
   - part-0-1.box-sizing = `border-box`
+  - part-0-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-1-0.appearance = `auto`
   - part-0-1-0.box-sizing = `border-box`
   - part-0-1-0.cursor = `pointer`
+  - part-0-1-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-0-1-0.position = `absolute`
   - switch-2.border-bottom-style = `solid`
   - switch-2.border-left-style = `solid`
   - switch-2.border-right-style = `solid`
   - switch-2.border-top-style = `solid`
   - switch-2.box-sizing = `border-box`
+  - switch-2.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - switch-2.transition-duration = `0.175s`
   - switch-2.transition-property = `background-color`
   - switch-2.transition-timing-function = `cubic-bezier(0.24, 1, 0.4, 1)`
@@ -156,6 +165,7 @@ Zero contradictions.
   - switch-thumb-2.border-right-style = `solid`
   - switch-thumb-2.border-top-style = `solid`
   - switch-thumb-2.box-sizing = `border-box`
+  - switch-thumb-2.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - switch-thumb-2.transform = `matrix(1, 0, 0, 1, 0, 0)`
   - switch-thumb-2.transition-duration = `0.175s`
   - switch-thumb-2.transition-property = `transform, width, height`
@@ -249,6 +259,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **80.960%** (1956/2416 cells; 0/16 combo×state rows fully equal)
+- computed-equality (styled channels, contract-mediated): **81.804%** (2068/2528 cells; 0/16 combo×state rows fully equal)
 - pixel: 0/16 pairs perfect at threshold 0 · 0/16 at the AA point (mean AA 10.068%, max 10.404%; 16/16 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 

@@ -13,7 +13,7 @@
  *          receipt here)
  *   AntD   extract/computed/out/antd/checkbox/captured-truth.json
  *          (label.ant-checkbox-wrapper + inner + ::after glyph + label span)
- *   Astryx extract/computed/out/astryx/checkboxinput/captured-truth.json
+ *   Astryx extract/computed/out/astryx-core/checkboxinput/captured-truth.json
  *          (Phase-1 recapture: checked×size×disabled under the library's
  *          documented <Theme theme={neutralTheme}> mount)
  *
@@ -72,7 +72,17 @@ const muiStates: Array<[string, string]> = [
 
 export const muiCheckboxMappings: FactMapping[] = [
   one("wrapper.size", "px", { combo: "unchecked.enabled", part: "root", channel: "width" }),
-  one("box.size", "px", { combo: "unchecked.enabled", part: muiIcon, channel: "width" }),
+  // NOT a capture read. This read MuiSvgIcon-root's width (24) and matched the
+  // fixture's 24 — and both were describing the icon VIEWPORT, which MUI never
+  // paints. The painted square is the outer subpath of
+  // checkbox-icon-unchecked.svg, 3 -> 21 in a 24 viewBox = 18x18 with a 2px
+  // stroke. SVG path extent is not a computed channel, so this is a receipt,
+  // the same way the Astryx viewBox is read from its committed glyph asset.
+  receipt(
+    "box.size",
+    "the painted square is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel",
+    "extract/computed/out/mui/checkbox/assets/checkbox-icon-unchecked.svg outer subpath 3→21 in viewBox 0 0 24 24 = 18×18",
+  ),
   receipt(
     "box.radius",
     "the unchecked box corner is SVG path geometry inside CheckBoxOutlineBlank's 24-viewBox icon, not a CSS border-radius (the SvgIcon's computed border-radius is 0)",
@@ -83,7 +93,11 @@ export const muiCheckboxMappings: FactMapping[] = [
     "the unchecked outline stroke is drawn by the SVG path ring (outer box minus inner hole), not a CSS border — no computed channel carries its 2px thickness",
     "CheckBoxOutlineBlank.js outer 19×19 at (3,3) minus inner 15×15 at (5,5) → reviewed 2",
   ),
-  one("box.padding", "px", { combo: "unchecked.enabled", part: "root", channel: "padding-top" }),
+  receipt(
+    "box.padding",
+    "SwitchBase's computed padding 9 is measured from the 24 viewport; from the painted 18 square the inset to the 42 wrapper is 12",
+    "SwitchBase.js padding 9 + checkbox-icon-unchecked.svg 18×18 painted extent; 18 + 12×2 = 42",
+  ),
   receipt("row.gap", NO_LABEL_MUI, "FormControlLabel.js gap 0 (label sits flush; spacing is the label's own padding) — reviewed 0"),
   receipt(
     "dash.width",
@@ -436,7 +450,7 @@ export const antdCheckboxMappings: FactMapping[] = [
 // ---------------------------------------------------------------------------
 
 export const ASTRYX_CHECKBOX_LEDGER =
-  "extract/computed/out/astryx/checkboxinput/captured-truth.json";
+  "extract/computed/out/astryx-core/checkboxinput/captured-truth.json";
 
 const abox = "cls:astryx-checkbox";
 const alabel = "cls:astryx-field-label";
@@ -475,7 +489,7 @@ export const astryxCheckboxMappings: FactMapping[] = [
       w: { combo: "checked.md.no-isDisabled", part: "tag:svg", channel: "width" },
     },
     formula:
-      "path stroke-width × (rendered svg width / viewBox 10) — the viewBox is not a computed channel; 10 is read from the committed glyph asset extract/computed/out/astryx/checkboxinput/assets/checkbox-input-icon-md.svg",
+      "path stroke-width × (rendered svg width / viewBox 10) — the viewBox is not a computed channel; 10 is read from the committed glyph asset extract/computed/out/astryx-core/checkboxinput/assets/checkbox-input-icon-md.svg",
     combine: (raw) => px(raw.s) * (px(raw.w) / 10),
   },
   receipt("check.offsetX", "flex-centered glyph; placement: center is the recipe's spelling", "reviewed 0"),

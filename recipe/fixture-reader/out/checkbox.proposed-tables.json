@@ -7,7 +7,7 @@
       "version": "0.1.6",
       "exportName": "CheckboxInput"
     },
-    "ledger": "extract/computed/out/astryx/checkboxinput/captured-truth.json",
+    "ledger": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json",
     "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
     "values": {
       "wrapper.size": {
@@ -15,84 +15,84 @@
         "proposed": 24,
         "verdict": "match",
         "captured": 24,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.0.width — the 24×24 wrapper div around input+box"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.0.width — the 24×24 wrapper div around input+box"
       },
       "box.size": {
         "fixture": 22,
         "proposed": 22,
         "verdict": "match",
         "captured": 22,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.width"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.width"
       },
       "box.radius": {
         "fixture": 4,
-        "proposed": 6,
-        "verdict": "drift",
-        "captured": 6,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-left-radius"
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-left-radius"
       },
       "box.borderWidth": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-width"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-width"
       },
       "box.padding": {
         "fixture": 0,
         "proposed": 0,
         "verdict": "match",
         "captured": 0,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.padding-top"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.padding-top"
       },
       "row.gap": {
         "fixture": 8,
         "proposed": 8,
         "verdict": "match",
         "captured": 8,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.column-gap"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.column-gap"
       },
       "dash.width": {
         "fixture": 12,
         "proposed": 12,
         "verdict": "match",
         "captured": 12,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.width — the indeterminate mark div inside the box"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.width — the indeterminate mark div inside the box"
       },
       "dash.height": {
         "fixture": 2,
         "proposed": 2,
         "verdict": "match",
         "captured": 2,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.height"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.height"
       },
       "dash.radius": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.border-top-left-radius"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.border-top-left-radius"
       },
       "check.width": {
         "fixture": 14,
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width"
       },
       "check.height": {
         "fixture": 14,
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.height"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.height"
       },
       "check.strokeWidth": {
         "fixture": 2.1,
         "proposed": 2.1,
         "verdict": "match",
         "captured": 2.1,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke-width ; extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width — path stroke-width × (rendered svg width / viewBox 10) — the viewBox is not a computed channel; 10 is read from the committed glyph asset extract/computed/out/astryx/checkboxinput/assets/checkbox-input-icon-md.svg"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke-width ; extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:svg.width — path stroke-width × (rendered svg width / viewBox 10) — the viewBox is not a computed channel; 10 is read from the committed glyph asset extract/computed/out/astryx-core/checkboxinput/assets/checkbox-input-icon-md.svg"
       },
       "check.offsetX": {
         "fixture": 0,
@@ -111,35 +111,35 @@
         "proposed": 14,
         "verdict": "match",
         "captured": 14,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-size"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-size"
       },
       "states.unchecked.enabled.boxFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
       },
       "states.unchecked.enabled.boxBorder": {
         "fixture": "#ccd3dbff",
-        "proposed": "#d4d4d4ff",
-        "verdict": "drift",
-        "captured": "#d4d4d4ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+        "proposed": "#ccd3dbff",
+        "verdict": "match",
+        "captured": "#ccd3dbff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
       },
       "states.unchecked.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
       },
       "states.unchecked.enabled.label": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.color"
       },
       "states.unchecked.enabled.dashFill": {
         "fixture": "#00000000",
@@ -155,31 +155,31 @@
       },
       "states.unchecked.disabled.boxFill": {
         "fixture": "#0536590c",
-        "proposed": "#f1f1f1ff",
-        "verdict": "drift",
-        "captured": "#f1f1f1ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.background-color"
+        "proposed": "#0536590c",
+        "verdict": "match",
+        "captured": "#0536590c",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.background-color"
       },
       "states.unchecked.disabled.boxBorder": {
         "fixture": "#05365919",
-        "proposed": "#ebebebff",
-        "verdict": "drift",
-        "captured": "#ebebebff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+        "proposed": "#05365919",
+        "verdict": "match",
+        "captured": "#05365919",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
       },
       "states.unchecked.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.opacity"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-checkbox.opacity"
       },
       "states.unchecked.disabled.label": {
         "fixture": "#a4b0bcff",
-        "proposed": "#a3a3a3ff",
-        "verdict": "drift",
-        "captured": "#a3a3a3ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#a4b0bcff",
+        "verdict": "match",
+        "captured": "#a4b0bcff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.isDisabled__default cls:astryx-field-label.color"
       },
       "states.unchecked.disabled.dashFill": {
         "fixture": "#00000000",
@@ -195,31 +195,31 @@
       },
       "states.checked.enabled.boxFill": {
         "fixture": "#0064e0ff",
-        "proposed": "#262626ff",
-        "verdict": "drift",
-        "captured": "#262626ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+        "proposed": "#0064e0ff",
+        "verdict": "match",
+        "captured": "#0064e0ff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.background-color"
       },
       "states.checked.enabled.boxBorder": {
         "fixture": "#0064e0ff",
-        "proposed": "#262626ff",
-        "verdict": "drift",
-        "captured": "#262626ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+        "proposed": "#0064e0ff",
+        "verdict": "match",
+        "captured": "#0064e0ff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
       },
       "states.checked.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-checkbox.opacity"
       },
       "states.checked.enabled.label": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default cls:astryx-field-label.color"
       },
       "states.checked.enabled.dashFill": {
         "fixture": "#00000000",
@@ -232,35 +232,35 @@
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke — the check strokes in --color-on-accent"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.stroke — the check strokes in --color-on-accent"
       },
       "states.checked.disabled.boxFill": {
         "fixture": "#0064e0ff",
-        "proposed": "#262626ff",
-        "verdict": "drift",
-        "captured": "#262626ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.background-color"
+        "proposed": "#0064e0ff",
+        "verdict": "match",
+        "captured": "#0064e0ff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.background-color"
       },
       "states.checked.disabled.boxBorder": {
         "fixture": "#05365919",
-        "proposed": "#ebebebff",
-        "verdict": "drift",
-        "captured": "#ebebebff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+        "proposed": "#05365919",
+        "verdict": "match",
+        "captured": "#05365919",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.border-top-color"
       },
       "states.checked.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.opacity"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-checkbox.opacity"
       },
       "states.checked.disabled.label": {
         "fixture": "#a4b0bcff",
-        "proposed": "#a3a3a3ff",
-        "verdict": "drift",
-        "captured": "#a3a3a3ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#a4b0bcff",
+        "verdict": "match",
+        "captured": "#a4b0bcff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default cls:astryx-field-label.color"
       },
       "states.checked.disabled.dashFill": {
         "fixture": "#00000000",
@@ -273,42 +273,42 @@
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.isDisabled__default tag:path.stroke — the check strokes in --color-on-accent"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.isDisabled__default tag:path.stroke — the check strokes in --color-on-accent"
       },
       "states.indeterminate.enabled.boxFill": {
         "fixture": "#0064e0ff",
-        "proposed": "#262626ff",
-        "verdict": "drift",
-        "captured": "#262626ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.background-color"
+        "proposed": "#0064e0ff",
+        "verdict": "match",
+        "captured": "#0064e0ff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.background-color"
       },
       "states.indeterminate.enabled.boxBorder": {
         "fixture": "#0064e0ff",
-        "proposed": "#262626ff",
-        "verdict": "drift",
-        "captured": "#262626ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
+        "proposed": "#0064e0ff",
+        "verdict": "match",
+        "captured": "#0064e0ff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.border-top-color"
       },
       "states.indeterminate.enabled.boxOpacity": {
         "fixture": 1,
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.opacity"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-checkbox.opacity"
       },
       "states.indeterminate.enabled.label": {
         "fixture": "#4e606fff",
-        "proposed": "#737373ff",
-        "verdict": "drift",
-        "captured": "#737373ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#4e606fff",
+        "verdict": "match",
+        "captured": "#4e606fff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default cls:astryx-field-label.color"
       },
       "states.indeterminate.enabled.dashFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.background-color"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.no-isDisabled__default idx:0.0.1.1.background-color"
       },
       "states.indeterminate.enabled.checkFill": {
         "fixture": "#ffffffff",
@@ -318,38 +318,38 @@
       },
       "states.indeterminate.disabled.boxFill": {
         "fixture": "#0064e0ff",
-        "proposed": "#262626ff",
-        "verdict": "drift",
-        "captured": "#262626ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.background-color"
+        "proposed": "#0064e0ff",
+        "verdict": "match",
+        "captured": "#0064e0ff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.background-color"
       },
       "states.indeterminate.disabled.boxBorder": {
         "fixture": "#05365919",
-        "proposed": "#ebebebff",
-        "verdict": "drift",
-        "captured": "#ebebebff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.border-top-color"
+        "proposed": "#05365919",
+        "verdict": "match",
+        "captured": "#05365919",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.border-top-color"
       },
       "states.indeterminate.disabled.boxOpacity": {
         "fixture": 0.5,
         "proposed": 0.5,
         "verdict": "match",
         "captured": 0.5,
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.opacity"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-checkbox.opacity"
       },
       "states.indeterminate.disabled.label": {
         "fixture": "#a4b0bcff",
-        "proposed": "#a3a3a3ff",
-        "verdict": "drift",
-        "captured": "#a3a3a3ff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-field-label.color"
+        "proposed": "#a4b0bcff",
+        "verdict": "match",
+        "captured": "#a4b0bcff",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default cls:astryx-field-label.color"
       },
       "states.indeterminate.disabled.dashFill": {
         "fixture": "#ffffffff",
         "proposed": "#ffffffff",
         "verdict": "match",
         "captured": "#ffffffff",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default idx:0.0.1.1.background-color"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#indeterminate.md.isDisabled__default idx:0.0.1.1.background-color"
       },
       "states.indeterminate.disabled.checkFill": {
         "fixture": "#ffffffff",
@@ -362,28 +362,28 @@
         "proposed": "center",
         "verdict": "match",
         "captured": "center",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.align-items"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default idx:0.align-items"
       },
       "typography.label.family": {
         "fixture": "-apple-system",
-        "proposed": "Figtree",
-        "verdict": "drift",
-        "captured": "Figtree",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-family — first family of the label's computed stack under the library's documented Theme mount"
+        "proposed": "-apple-system",
+        "verdict": "match",
+        "captured": "-apple-system",
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-family — first family of the label's computed stack under the library's documented Theme mount"
       },
       "typography.label.style": {
         "fixture": "Medium",
         "proposed": "Medium",
         "verdict": "match",
         "captured": "Medium",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-weight — label font-weight → style word"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#unchecked.md.no-isDisabled__default cls:astryx-field-label.font-weight — label font-weight → style word"
       },
       "check.path": {
         "fixture": "M11.9 3.5 L5.6 10.5 L2.1 7",
         "proposed": "M11.9 3.5 L5.6 10.5 L2.1 7",
         "verdict": "match",
         "captured": "path(\"M 8.5 2.5 L 4 7.5 L 1.5 5\")",
-        "provenance": "extract/computed/out/astryx/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.d — captured path() coordinates × (rendered 14 / viewBox 10) numerically equal the fixture's scaled path"
+        "provenance": "extract/computed/out/astryx-core/checkboxinput/captured-truth.json#checked.md.no-isDisabled__default tag:path.d — captured path() coordinates × (rendered 14 / viewBox 10) numerically equal the fixture's scaled path"
       }
     }
   },
@@ -406,11 +406,10 @@
         "provenance": "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default root.width"
       },
       "box.size": {
-        "fixture": 24,
-        "proposed": 24,
-        "verdict": "match",
-        "captured": 24,
-        "provenance": "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default cls:MuiSvgIcon-root.width"
+        "fixture": 18,
+        "proposed": 18,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the painted square is the SVG path's extent, not MuiSvgIcon-root's width; path extent is not a computed channel [extract/computed/out/mui/checkbox/assets/checkbox-icon-unchecked.svg outer subpath 3→21 in viewBox 0 0 24 24 = 18×18]"
       },
       "box.radius": {
         "fixture": 2,
@@ -425,11 +424,10 @@
         "provenance": "RECEIPT: the unchecked outline stroke is drawn by the SVG path ring (outer box minus inner hole), not a CSS border — no computed channel carries its 2px thickness [CheckBoxOutlineBlank.js outer 19×19 at (3,3) minus inner 15×15 at (5,5) → reviewed 2]"
       },
       "box.padding": {
-        "fixture": 9,
-        "proposed": 9,
-        "verdict": "match",
-        "captured": 9,
-        "provenance": "extract/computed/out/mui/checkbox/captured-truth.json#unchecked.enabled__default root.padding-top"
+        "fixture": 12,
+        "proposed": 12,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: SwitchBase's computed padding 9 is measured from the 24 viewport; from the painted 18 square the inset to the 42 wrapper is 12 [SwitchBase.js padding 9 + checkbox-icon-unchecked.svg 18×18 painted extent; 18 + 12×2 = 42]"
       },
       "row.gap": {
         "fixture": 0,
@@ -746,8 +744,8 @@
         "provenance": "RECEIPT: the capture mounts the bare Checkbox (sampleText '' — FormControlLabel is a reviewed pairing with the official docs page, not a Checkbox child); no label part exists in the ledger [createTypography.js fontWeightRegular 400 — reviewed Regular]"
       },
       "check.path": {
-        "fixture": "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
-        "proposed": "M19 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.11 0 2-.9 2-2V5c0-1.1-.89-2-2-2zm-9 14l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z",
+        "fixture": "M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z",
+        "proposed": "M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z",
         "verdict": "match",
         "captured": "path(\"M 19 3 H 5 C 3.89 3 3 3.9 3 5 V 19 C 3 20.1 3.89 21 5 21 H 19 C 20.11 21 21 20.1 21 19 V 5 C 21 3.9 20.11 3 19 3 Z M 10 17 L 5 12 L 6.41 10.59 L 10 14.17 L 17.59 6.58 L 19 8 L 10 17 Z\")",
         "provenance": "extract/computed/out/mui/checkbox/captured-truth.json#checked.enabled__default tag:path.d — the captured path('…') data of the checked glyph, numerically compared against the fixture's check.path (same 24-viewBox coordinate space)"

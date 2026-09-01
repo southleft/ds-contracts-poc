@@ -88,12 +88,13 @@ Zero contradictions.
 
 ## Declared facts (v15 — carried, first-class)
 
-- base declared facts: **87**
+- base declared facts: **95**
   - root.border-bottom-style = `solid`
   - root.border-left-style = `solid`
   - root.border-right-style = `solid`
   - root.border-top-style = `solid`
   - root.box-sizing = `border-box`
+  - root.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - label.border-bottom-style = `solid`
   - label.border-left-style = `solid`
   - label.border-right-style = `solid`
@@ -106,12 +107,14 @@ Zero contradictions.
   - slider.border-right-style = `solid`
   - slider.border-top-style = `solid`
   - slider.box-sizing = `border-box`
+  - slider.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-1-0.border-bottom-style = `solid`
   - part-1-0.border-left-style = `solid`
   - part-1-0.border-right-style = `solid`
   - part-1-0.border-top-style = `solid`
   - part-1-0.box-sizing = `border-box`
   - part-1-0.cursor = `pointer`
+  - part-1-0.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-1-0.isolation = `isolate`
   - part-1-0.position = `relative`
   - part-1-0.touch-action = `none`
@@ -122,6 +125,7 @@ Zero contradictions.
   - slider-track.border-top-style = `solid`
   - slider-track.box-sizing = `border-box`
   - slider-track.cursor = `pointer`
+  - slider-track.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - slider-track.user-select = `none`
   - part-1-0-1.border-bottom-style = `solid`
   - part-1-0-1.border-left-style = `solid`
@@ -129,6 +133,7 @@ Zero contradictions.
   - part-1-0-1.border-top-style = `solid`
   - part-1-0-1.box-sizing = `border-box`
   - part-1-0-1.cursor = `pointer`
+  - part-1-0-1.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-1-0-1.user-select = `none`
   - slider-thumb-2.border-bottom-style = `solid`
   - slider-thumb-2.border-left-style = `solid`
@@ -136,6 +141,7 @@ Zero contradictions.
   - slider-thumb-2.border-top-style = `solid`
   - slider-thumb-2.box-sizing = `border-box`
   - slider-thumb-2.cursor = `grab`
+  - slider-thumb-2.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - slider-thumb-2.transition-duration = `0.175s`
   - slider-thumb-2.transition-property = `background-color, box-shadow`
   - slider-thumb-2.transition-timing-function = `cubic-bezier(0.24, 1, 0.4, 1)`
@@ -146,6 +152,7 @@ Zero contradictions.
   - part-1-0-2.border-top-style = `solid`
   - part-1-0-2.box-sizing = `border-box`
   - part-1-0-2.cursor = `pointer`
+  - part-1-0-2.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - part-1-0-2.user-select = `none`
   - slider-thumb.border-bottom-style = `solid`
   - slider-thumb.border-left-style = `solid`
@@ -153,6 +160,7 @@ Zero contradictions.
   - slider-thumb.border-top-style = `solid`
   - slider-thumb.box-sizing = `border-box`
   - slider-thumb.cursor = `grab`
+  - slider-thumb.font-family = `-apple-system, "system-ui", "Segoe UI", Roboto, Helvetica, Arial, sans-serif`
   - slider-thumb.transition-duration = `0.175s`
   - slider-thumb.transition-property = `background-color, box-shadow`
   - slider-thumb.transition-timing-function = `cubic-bezier(0.24, 1, 0.4, 1)`
@@ -249,6 +257,6 @@ Zero contradictions.
 
 ## Fidelity gate (scorecard.json)
 
-- computed-equality (styled channels, contract-mediated): **89.487%** (4009/4480 cells; 0/24 combo×state rows fully equal)
+- computed-equality (styled channels, contract-mediated): **89.832%** (4161/4632 cells; 0/24 combo×state rows fully equal)
 - pixel: 0/24 pairs perfect at threshold 0 · 0/24 at the AA point (mean AA 14.706%, max 16.966%; 24/24 pairs MEASURED — 0 size-mismatched, 0 with no original screenshot, none averaged)
 
