@@ -1,0 +1,61 @@
+{
+  "artifactVersion": "textarea-live-v3-structural-extract",
+  "status": "green",
+  "kind": "structural",
+  "pageId": "198:77456",
+  "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v3",
+  "runIdentity": "71033c6d-82f958a9-142f3598-textarea-v3",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77456",
+  "oldStayPageIds": ["183:75495", "198:77048"],
+  "doNotRemintInput": "115:295378",
+  "leftoverComponentContainer": [],
+  "arrangeNote": "Uniquely named white Arrange wrap plus Review instance grid inside each library Section. figma_arrange_component_set was not used. No page-level Component Container.",
+  "sets": [
+    {
+      "library": "MUI",
+      "setId": "198:77519",
+      "sectionId": "198:77488",
+      "arrangeId": "198:77520",
+      "reviewId": "198:77521",
+      "variantCount": 6,
+      "reviewCount": 6,
+      "labelPlacement": "floating",
+      "outlineTreatment": "notched",
+      "empty": { "x": 14, "y": 16, "notch": false, "valueVisible": false },
+      "focus": { "x": 14, "y": -9, "notch": true, "valueVisible": true, "characters": "Add a note" },
+      "value": { "x": 14, "y": -9, "notch": true, "valueVisible": true, "characters": "Meeting notes for Tuesday." },
+      "fontPainted": { "family": "Roboto", "style": "Regular" }
+    },
+    {
+      "library": "Astryx",
+      "setId": "198:77608",
+      "sectionId": "198:77583",
+      "arrangeId": "198:77609",
+      "reviewId": "198:77610",
+      "variantCount": 6,
+      "reviewCount": 6,
+      "labelPlacement": "stacked",
+      "labelGap": 4,
+      "focusEqualsEmpty": true,
+      "fontPainted": { "label": { "family": "Roboto", "style": "Medium" }, "value": { "family": "Roboto", "style": "Regular" } }
+    },
+    {
+      "library": "Ant Design",
+      "setId": "198:77691",
+      "sectionId": "198:77666",
+      "arrangeId": "198:77692",
+      "reviewId": "198:77693",
+      "variantCount": 6,
+      "reviewCount": 6,
+      "labelPlacement": "stacked",
+      "labelGap": 8,
+      "focusEqualsEmpty": true,
+      "fontPainted": { "family": "Roboto", "style": "Regular" }
+    }
+  ],
+  "mismatches": [],
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "humanGrade": "queued-for-TJ"
+}

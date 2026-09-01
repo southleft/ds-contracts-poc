@@ -1,0 +1,56 @@
+{
+  "artifactVersion": "textarea-live-pivot-v3-stay",
+  "status": "stayed",
+  "liveFigma": true,
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "fileName": "Scratch Project",
+  "pageId": "198:77456",
+  "pageName": "Recipe Pivot / Textarea / 71033c6d-82f958a9-142f3598-textarea-v3",
+  "runIdentity": "71033c6d-82f958a9-142f3598-textarea-v3",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=198-77456",
+  "oldStayPageIds": ["183:75495", "198:77048"],
+  "doNotDeleteOldStay": true,
+  "doNotRemintInput": "115:295378",
+  "sets": {
+    "MUI": "198:77519",
+    "Astryx": "198:77608",
+    "Ant Design": "198:77691"
+  },
+  "sections": {
+    "MUI": "198:77488",
+    "Astryx": "198:77583",
+    "Ant Design": "198:77666"
+  },
+  "arrange": {
+    "MUI": "198:77520",
+    "Astryx": "198:77609",
+    "Ant Design": "198:77692"
+  },
+  "review": {
+    "MUI": "198:77521",
+    "Astryx": "198:77610",
+    "Ant Design": "198:77693"
+  },
+  "taught": {
+    "InputLabel.js:148-156": "outlined rest translate(14px, 16px) scale(1)",
+    "InputLabel.js:166-176": "outlined shrink translate(14px, -9px) scale(0.75)",
+    "InputLabel.js:197-199": "shrink = filled || focused || adornedStart — Content=focus is this column",
+    "InputBase.js:179-188": "label[data-shrink=false] hides placeholder; :focus shows it"
+  },
+  "accuracyLoop": {
+    "MUI": "Rest empty: label at (14,16) no notch, placeholder hidden. Focus empty: label at (14,-9) notched, placeholder visible. Value: label at (14,-9) notched, value visible. No stacked Notes + Add a note. No invented 2px primary focus ring."
+  },
+  "variantMatrix": {
+    "compiled": "Disabled false|true × Content empty|focus|value = 6 per library. All 6 are on the page as set children and as Review instances inside each Section.",
+    "notCompiled": "No hover, no size, no error, no helper, no standard/filled. Astryx/AntD Content=focus reuses empty colors and looks the same as empty (stacked placeholder always visible). The contract will not grow those.",
+    "vsButtonInput": "Button 183:69150 and Input 115:295378 expose every compiled cell as page-level instance grids (156 / 128) because those recipes compiled that many cells. This page instances the 6 compiled cells inside each Section. It does not invent a Button-sized matrix."
+  },
+  "extract": "structural-green",
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "doNotDelete": true,
+  "doNotRemintAsV1": true,
+  "figmaArrangeComponentSet": false,
+  "leftoverComponentContainer": []
+}
