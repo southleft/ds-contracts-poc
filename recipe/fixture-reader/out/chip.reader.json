@@ -337,8 +337,11 @@
         "capturedValue": 12,
         "proposedValue": 12,
         "ledgerKeys": [
-          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.padding-left"
-        ]
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.padding-left",
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.box-shadow"
+        ],
+        "formula": "box padding-left + label padding-left − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.paddingY",
@@ -347,8 +350,11 @@
         "capturedValue": 4,
         "proposedValue": 4,
         "ledgerKeys": [
-          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.padding-top"
-        ]
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.padding-top",
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.box-shadow"
+        ],
+        "formula": "box padding-top + label padding-top − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.radius",
@@ -367,8 +373,10 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.border-top-width"
-        ]
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.box-shadow"
+        ],
+        "formula": "border-top-width, or the spread of a zero-offset zero-blur inset ring when the border is 0"
       },
       {
         "path": "labelFontSize",
@@ -407,8 +415,11 @@
         "capturedValue": "#3a3a3aff",
         "proposedValue": "#3a3a3aff",
         "ledgerKeys": [
-          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.border-top-color"
-        ]
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.border-top-color",
+          "extract/computed/out/altitude/chip/captured-truth.json#unset.unset__default root.box-shadow"
+        ],
+        "formula": "border-top-color, or the inset ring's colour when the border is 0"
       },
       {
         "path": "rest.boxOpacity",
@@ -496,9 +507,11 @@
         "proposedValue": 12,
         "ledgerKeys": [
           "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.padding-left",
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width",
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow",
           "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.padding-left"
         ],
-        "formula": "box padding-left + label padding-left (the label's own padding is part of the inset)"
+        "formula": "box padding-left + label padding-left − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.paddingY",
@@ -508,9 +521,11 @@
         "proposedValue": 0,
         "ledgerKeys": [
           "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.padding-top",
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width",
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow",
           "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default idx:0.padding-top"
         ],
-        "formula": "box padding-top + label padding-top"
+        "formula": "box padding-top + label padding-top − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.radius",
@@ -529,8 +544,10 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width"
-        ]
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width",
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow"
+        ],
+        "formula": "border-top-width, or the spread of a zero-offset zero-blur inset ring when the border is 0"
       },
       {
         "path": "labelFontSize",
@@ -569,8 +586,11 @@
         "capturedValue": "#000000de",
         "proposedValue": "#000000de",
         "ledgerKeys": [
-          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-color"
-        ]
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-width",
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.border-top-color",
+          "extract/computed/out/mui/chip/captured-truth.json#filled.default.medium__default root.box-shadow"
+        ],
+        "formula": "border-top-color, or the inset ring's colour when the border is 0"
       },
       {
         "path": "rest.boxOpacity",
@@ -657,8 +677,11 @@
         "capturedValue": 7,
         "proposedValue": 7,
         "ledgerKeys": [
-          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.padding-left"
-        ]
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.padding-left",
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.border-top-width",
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.box-shadow"
+        ],
+        "formula": "box padding-left + label padding-left − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.paddingY",
@@ -667,8 +690,11 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.padding-top"
-        ]
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.padding-top",
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.border-top-width",
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.box-shadow"
+        ],
+        "formula": "box padding-top + label padding-top − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.radius",
@@ -687,8 +713,10 @@
         "capturedValue": 1,
         "proposedValue": 1,
         "ledgerKeys": [
-          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.border-top-width"
-        ]
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.border-top-width",
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.box-shadow"
+        ],
+        "formula": "border-top-width, or the spread of a zero-offset zero-blur inset ring when the border is 0"
       },
       {
         "path": "labelFontSize",
@@ -727,8 +755,11 @@
         "capturedValue": "#d9d9d9ff",
         "proposedValue": "#d9d9d9ff",
         "ledgerKeys": [
-          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.border-top-color"
-        ]
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.border-top-width",
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.border-top-color",
+          "extract/computed/out/antd/tag/captured-truth.json#unset.bordered.off__default root.box-shadow"
+        ],
+        "formula": "border-top-color, or the inset ring's colour when the border is 0"
       },
       {
         "path": "rest.boxOpacity",
@@ -816,9 +847,11 @@
         "proposedValue": 8,
         "ledgerKeys": [
           "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-left",
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow",
           "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-left"
         ],
-        "formula": "box padding-left + label padding-left (the label's own padding is part of the inset)"
+        "formula": "box padding-left + label padding-left − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.paddingY",
@@ -828,9 +861,11 @@
         "proposedValue": 0,
         "ledgerKeys": [
           "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-top",
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow",
           "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-top"
         ],
-        "formula": "box padding-top + label padding-top"
+        "formula": "box padding-top + label padding-top − an inset ring's spread when the ring is the border"
       },
       {
         "path": "box.radius",
@@ -849,8 +884,10 @@
         "capturedValue": 0,
         "proposedValue": 0,
         "ledgerKeys": [
-          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width"
-        ]
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow"
+        ],
+        "formula": "border-top-width, or the spread of a zero-offset zero-blur inset ring when the border is 0"
       },
       {
         "path": "labelFontSize",
@@ -889,8 +926,11 @@
         "capturedValue": "#161616ff",
         "proposedValue": "#161616ff",
         "ledgerKeys": [
-          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-color"
-        ]
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width",
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-color",
+          "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow"
+        ],
+        "formula": "border-top-color, or the inset ring's colour when the border is 0"
       },
       {
         "path": "rest.boxOpacity",
@@ -939,6 +979,177 @@
         "proposedValue": "Regular",
         "ledgerKeys": [
           "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.font-weight"
+        ],
+        "formula": "label font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 13,
+      "drift": 0,
+      "receipt": 1,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "chip",
+    "library": "chakra",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Chip"
+    },
+    "ledgerFile": "extract/computed/out/chakra/tag/captured-truth.json",
+    "rows": [
+      {
+        "path": "box.height",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.height"
+        ]
+      },
+      {
+        "path": "box.paddingX",
+        "fixtureValue": 5,
+        "verdict": "match",
+        "capturedValue": 5,
+        "proposedValue": 5,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.padding-left",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.padding-left"
+        ],
+        "formula": "box padding-left + label padding-left − an inset ring's spread when the ring is the border"
+      },
+      {
+        "path": "box.paddingY",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.padding-top",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.padding-top"
+        ],
+        "formula": "box padding-top + label padding-top − an inset ring's spread when the ring is the border"
+      },
+      {
+        "path": "box.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "box.borderWidth",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow"
+        ],
+        "formula": "border-top-width, or the spread of a zero-offset zero-blur inset ring when the border is 0"
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 12,
+        "verdict": "match",
+        "capturedValue": 12,
+        "proposedValue": 12,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.font-size"
+        ]
+      },
+      {
+        "path": "labelLineHeight",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.line-height"
+        ]
+      },
+      {
+        "path": "rest.boxFill",
+        "fixtureValue": "#f4f4f5ff",
+        "verdict": "match",
+        "capturedValue": "#f4f4f5ff",
+        "proposedValue": "#f4f4f5ff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.background-color"
+        ]
+      },
+      {
+        "path": "rest.boxBorder",
+        "fixtureValue": "#e4e4e7ff",
+        "verdict": "match",
+        "capturedValue": "#e4e4e7ff",
+        "proposedValue": "#e4e4e7ff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-color",
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow"
+        ],
+        "formula": "border-top-color, or the inset ring's colour when the border is 0"
+      },
+      {
+        "path": "rest.boxOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default root.opacity"
+        ]
+      },
+      {
+        "path": "rest.label",
+        "fixtureValue": "#27272aff",
+        "verdict": "match",
+        "capturedValue": "#27272aff",
+        "proposedValue": "#27272aff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.color"
+        ]
+      },
+      {
+        "path": "strokeAlign",
+        "fixtureValue": "inside",
+        "verdict": "receipt",
+        "proposedValue": "inside",
+        "receipt": "a CSS border lies inside the box — recipe spelling",
+        "evidence": "reviewed inside"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Inter",
+        "verdict": "match",
+        "capturedValue": "Inter",
+        "proposedValue": "Inter",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.font-family"
+        ],
+        "formula": "first family of the label's computed stack"
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.font-weight"
         ],
         "formula": "label font-weight → style word"
       }

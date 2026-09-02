@@ -9,7 +9,7 @@ import path from "node:path";
 
 import { Ledger } from "./ledger.js";
 import { evaluate, interactionRefusals, shadowRefusal, type Proposal } from "./propose-fixture.js";
-import { CHIP_SPELLINGS, chipSchemaMappings, type ChipRoles } from "./schema-chip.js";
+import { CHIP_SPELLINGS, chipSchemaMappings, insetRing, type ChipRoles } from "./schema-chip.js";
 
 const REPO = path.resolve(path.dirname(new URL(import.meta.url).pathname), "../..");
 const q = (s: unknown): string => JSON.stringify(s);
@@ -133,7 +133,7 @@ export function renderChipModule(p: ChipProposal, opts: { slug: string; displayN
     .join("\n");
   const receiptRows = [
     ...p.receipts.map((r) => `  { id: ${q(`receipt-${r.path.replace(/\./g, "-")}`)}, evidence: ${q(`${r.why} — ${r.evidence}`)}, target: ${q(`${opts.displayName} ${r.path}`)}, reason: "lowered" as const },`),
-    ...shadowRefusal(new Ledger(REPO, p.ledger), p.combo, p.roles.box, p.archetype).map((r) => `  { id: ${q(r.id)}, evidence: ${q(r.evidence)}, target: ${q(`${opts.displayName} ${r.target}`)}, reason: ${q(r.reason)} as const },`),
+    ...shadowRefusal(new Ledger(REPO, p.ledger), p.combo, p.roles.box, p.archetype).filter((r) => { try { return !insetRing(new Ledger(REPO, p.ledger).raw(`${p.combo}__default`, p.roles.box, "box-shadow")); } catch { return true; } }).map((r) => `  { id: ${q(r.id)}, evidence: ${q(r.evidence)}, target: ${q(`${opts.displayName} ${r.target}`)}, reason: ${q(r.reason)} as const },`),
     ...interactionRefusals(new Ledger(REPO, p.ledger), p.archetype).map((r) => `  { id: ${q(r.id)}, evidence: ${q(r.evidence)}, target: ${q(`${opts.displayName} ${r.target}`)}, reason: ${q(r.reason)} as const },`),
   ].join("\n");
   const style = p.typography.style;

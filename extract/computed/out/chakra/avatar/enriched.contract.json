@@ -1,0 +1,108 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Avatar capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition from the package's flat exports: AvatarRoot ⊃ AvatarFallback (initials). Authored 2026-09-02 as the person's step of docs/36 (the capture config makes the capture). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [],
+  "states": [
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center",
+        "justify": "center"
+      },
+      "parts": {
+        "label": {
+          "text": "AB",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|avatar__fallback — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "text-rendering": "optimizelegibility",
+            "text-transform": "uppercase",
+            "user-select": "none"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "color": "{imported.avatar.label.color}",
+            "font-size": "{imported.avatar.label.font-size}",
+            "font-weight": "{imported.avatar.label.font-weight}",
+            "line-height": "{imported.avatar.label.line-height}",
+            "tab-size": "{imported.avatar.label.tab-size}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "position": "relative",
+        "text-rendering": "optimizelegibility",
+        "user-select": "none"
+      },
+      "tokens": {
+        "background-color": "{imported.shared.color-e4e4e7}",
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-bottom-left-radius": "{imported.shared.size-9999}",
+        "border-bottom-right-radius": "{imported.shared.size-9999}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "border-top-left-radius": "{imported.shared.size-9999}",
+        "border-top-right-radius": "{imported.shared.size-9999}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.avatar.root.color}",
+        "flex-shrink": "{imported.avatar.root.flex-shrink}",
+        "font-weight": "{imported.avatar.root.font-weight}",
+        "height": "{imported.avatar.root.height}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.avatar.root.line-height}",
+        "right": "{imported.shared.size-0}",
+        "tab-size": "{imported.avatar.root.tab-size}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.avatar.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "AvatarRoot"
+      }
+    }
+  }
+}

@@ -1,0 +1,105 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.tag",
+  "name": "Tag",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Tag capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition: TagRoot ⊃ TagLabel. Authored 2026-09-02 as the person's step of docs/36 (the capture config makes the capture). COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [],
+  "states": [
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "label": {
+          "text": "Tag",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|tag__label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "flow-root",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "text-rendering": "optimizelegibility",
+            "user-select": "none"
+          },
+          "layout": {
+            "grow": true
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "color": "{imported.tag.label.color}",
+            "font-size": "{imported.tag.label.font-size}",
+            "font-weight": "{imported.tag.label.font-weight}",
+            "line-height": "{imported.tag.label.line-height}",
+            "tab-size": "{imported.tag.label.tab-size}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "max-width": "100%",
+        "text-rendering": "optimizelegibility",
+        "user-select": "none"
+      },
+      "tokens": {
+        "background-color": "{imported.tag.root.background-color}",
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-bottom-left-radius": "{imported.shared.size-4}",
+        "border-bottom-right-radius": "{imported.shared.size-4}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "border-top-left-radius": "{imported.shared.size-4}",
+        "border-top-right-radius": "{imported.shared.size-4}",
+        "box-shadow": "{imported.tag.root.box-shadow}",
+        "color": "{imported.tag.root.color}",
+        "column-gap": "{imported.shared.size-4}",
+        "line-height": "{imported.tag.root.line-height}",
+        "min-height": "{imported.tag.root.min-height}",
+        "padding-left": "{imported.tag.root.padding-left}",
+        "padding-right": "{imported.tag.root.padding-right}",
+        "row-gap": "{imported.shared.size-4}",
+        "tab-size": "{imported.tag.root.tab-size}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "TagRoot"
+      }
+    }
+  }
+}

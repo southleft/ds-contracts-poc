@@ -1,0 +1,81 @@
+{
+  "pageName": "Recipe Pivot / Chip / 932f13fe-eb96b2ab-908fd120-c9e6d710-d900b3b5-5b25bd6a-fa41578a-f54f2761-chip-v9",
+  "runIdentity": "932f13fe-eb96b2ab-908fd120-c9e6d710-d900b3b5-5b25bd6a-fa41578a-f54f2761-chip-v9",
+  "namespace": "ds.contracts.chip.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "chip@1 named default cell from Astryx Token, MUI Chip filled/default/medium, and AntD Tag bordered; color/size/closable are not axes; do not invent an Astryx Chip",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-chip-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "932f13fefdd27eb4dd2b5fb64e01bcb803ee1f4f6418109114faf414894738b6",
+      "envelopeHash": "84e48b7a837f3e910f24cc528cdab62308d7b05ecec478fb2c97511ce5830cb9",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "mui-chip-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "eb96b2abd592a1ce8c6f61ab00593071726fa933c23e5c200d2bedb23343d3c2",
+      "envelopeHash": "c151b986e44e5803bbe287fd904ee52711702b057399ecab2a36778e9b069049",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "antd-chip-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "908fd120d4b84efeb619230a15e1001d009d3f980d44dc13efcc275631855038",
+      "envelopeHash": "95ea739ea51bf46f1d3b545c58746677b490fca7911110ce69c2b0d46737bc37",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "altitude-chip-proposed-v1",
+      "displayName": "altitude (proposed)",
+      "recipeHash": "c9e6d7102d4aed4c662c78e155ed6900607568fe24b76f7e5932e9904120c2d8",
+      "envelopeHash": "5df0d9d7a542bd39344d4e1046459802ce826d029f5ee726079829045e0dbd67",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "mui-chip-proposed-v1",
+      "displayName": "mui (proposed)",
+      "recipeHash": "d900b3b56a5c41f7b6d524107ff23f8199b0156380f77d6d32ec90d453660454",
+      "envelopeHash": "3c35bcc8d7d0e2619b38554ae7efe209f48db3e34e0f2925201f172d18ffbbb7",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "antd-chip-proposed-v1",
+      "displayName": "antd (proposed)",
+      "recipeHash": "5b25bd6a6d22528486f51eeaee167877b867dba3149b33bab4d1ec57b57812df",
+      "envelopeHash": "f7b434789180a8f67ca17b845abccfb18ec6e56301044358ee7b7a6e5aeffc8e",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "carbon-chip-proposed-v1",
+      "displayName": "carbon (proposed)",
+      "recipeHash": "fa41578a048726cb6d6cc97509a32227a0dc043fda101e2ac4348c51c2e6cdf7",
+      "envelopeHash": "f6e2989223a580bfb4e709e87cf50613d2febdb7cf38a3793e7933857986c71e",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    },
+    {
+      "adapterIdentity": "chakra-chip-proposed-v1",
+      "displayName": "Chakra (proposed)",
+      "recipeHash": "f54f2761de181e7c359a5bfc34f3eba8832d92b5acb930d0cae81845cca4d8d5",
+      "envelopeHash": "8a80f2a79ff9a7d17c488835668a457c47ed533d23086e226e582cfc41bacb81",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 17
+    }
+  ]
+}

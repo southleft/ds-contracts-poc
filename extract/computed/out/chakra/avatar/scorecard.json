@@ -1,0 +1,353 @@
+{
+  "component": "Avatar",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 296,
+    "cellsEqual": 264,
+    "pctEqual": 89.1891891891892,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 4,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 4,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 0.419921875,
+    "meanAA": 0.009765625,
+    "maxAA": 0.009765625
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 15,
+    "mintedLeavesUnfolded": 14,
+    "baseBindings": 33,
+    "stateBindings": 0,
+    "codeOnlyChannels": 8,
+    "overflowBindings": 0,
+    "folds": 12
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": 0.009765625,
+      "pctExact": 0.419921875,
+      "channelsMismatched": 8
+    },
+    {
+      "key": "__hover",
+      "pctAA": 0.009765625,
+      "pctExact": 0.419921875,
+      "channelsMismatched": 8
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": 0.009765625,
+      "pctExact": 0.419921875,
+      "channelsMismatched": 8
+    },
+    {
+      "key": "__active",
+      "pctAA": 0.009765625,
+      "pctExact": 0.419921875,
+      "channelsMismatched": 8
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.--bg-currentcolor",
+      4
+    ],
+    [
+      "root.overflow-wrap",
+      4
+    ],
+    [
+      "root.text-size-adjust",
+      4
+    ],
+    [
+      "root.vertical-align",
+      4
+    ],
+    [
+      "label.--bg-currentcolor",
+      4
+    ],
+    [
+      "label.overflow-wrap",
+      4
+    ],
+    [
+      "label.text-size-adjust",
+      4
+    ],
+    [
+      "label.unicode-bidi",
+      4
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.--bg-currentcolor — CSS custom property, not a styled channel — `--bg-currentcolor` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#e4e4e7`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+    "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.--bg-currentcolor — CSS custom property, not a styled channel — `--bg-currentcolor` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#e4e4e7`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+    "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/chakra/tokens/chakra-minted.dtcg.json",
+    "leavesAdded": 0,
+    "bootstrap": true,
+    "note": "measured without a shipped minted tree — this library has never promoted one (tokens.mintedBootstrap). The gate inventory is base + this run's FRESH mint only; re-run the harness after the first promotion to measure against the shipped tree.",
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 74,
+      "channelsEqual": 66,
+      "pctExact": 0.419921875,
+      "pctAA": 0.009765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 74,
+      "channelsEqual": 66,
+      "pctExact": 0.419921875,
+      "pctAA": 0.009765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 74,
+      "channelsEqual": 66,
+      "pctExact": 0.419921875,
+      "pctAA": 0.009765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 74,
+      "channelsEqual": 66,
+      "pctExact": 0.419921875,
+      "pctAA": 0.009765625,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "top"
+        },
+        {
+          "part": "label",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    }
+  ]
+}

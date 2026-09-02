@@ -25,7 +25,13 @@ import {
 
 export const CHIP_FIGMA_NAMESPACE = "ds.contracts.chip.recipe.v1";
 export const CHIP_FIGMA_WRITER_VERSION = 1;
-export const CHIP_FIGMA_RUN_SUFFIX = "chip-v8";
+export const CHIP_FIGMA_RUN_SUFFIX = "chip-v11";
+/** v10 stay (Chakra Tag: the inset ring's spread comes out of the padding) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHIP_V10_PAGE_ID = "219:91809";
+/** v9 stay (Chakra Tag's inset ring lowered to a border) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHIP_V9_PAGE_ID = "219:91605";
+/** v8 stay (Chakra Tag (chip@1 via --capture tag), captured today) is preserved as evidence and never written again. */
+export const FORBIDDEN_CHIP_V8_PAGE_ID = "218:90995";
 /** v7 stay (proposed Altitude, MUI, AntD (Tag) and Carbon (Tag) chips) is preserved as evidence and never written again. */
 export const FORBIDDEN_CHIP_V7_PAGE_ID = "218:90193";
 /** v6 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
@@ -258,6 +264,9 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "219:91809", "marker": "CHIP-V10-PAGE" },
+    { "id": "219:91605", "marker": "CHIP-V9-PAGE" },
+    { "id": "218:90995", "marker": "CHIP-V8-PAGE" },
     { "id": "218:90193", "marker": "CHIP-V7-PAGE" },
     { "id": "218:87557", "marker": "CHIP-V6-PAGE" },
     { "id": "218:86064", "marker": "CHIP-V5-PAGE" },

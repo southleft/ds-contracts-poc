@@ -481,6 +481,15 @@
     },
     {
       "library": "chakra",
+      "component": "Avatar",
+      "rerunPctEqual": 89.1891891891892,
+      "cellsCompared": 296,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 89.1891891891892,
+      "gapCause": ""
+    },
+    {
+      "library": "chakra",
       "component": "Checkbox",
       "rerunPctEqual": 88.53092783505154,
       "cellsCompared": 2328,
@@ -495,6 +504,15 @@
       "cellsCompared": 2912,
       "unresolvedTokenRefs": 0,
       "committedPctEqual": 88.5989010989011,
+      "gapCause": ""
+    },
+    {
+      "library": "chakra",
+      "component": "Tag",
+      "rerunPctEqual": 90,
+      "cellsCompared": 280,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 90,
       "gapCause": ""
     },
     {

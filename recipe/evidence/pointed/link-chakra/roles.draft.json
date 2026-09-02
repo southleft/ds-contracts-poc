@@ -1,0 +1,14 @@
+{
+  "roles": {
+    "box": "root"
+  },
+  "combo": "",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "a.chakra-link is the anchor: text \"Link\", rgba(39, 39, 42, 1), decoration none",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

@@ -25,7 +25,9 @@ import {
 
 export const LINK_FIGMA_NAMESPACE = "ds.contracts.link.recipe.v1";
 export const LINK_FIGMA_WRITER_VERSION = 1;
-export const LINK_FIGMA_RUN_SUFFIX = "link-v7";
+export const LINK_FIGMA_RUN_SUFFIX = "link-v8";
+/** v7 stay (Chakra Link, captured today (contract path quarantined; capture record intact)) is preserved as evidence and never written again. */
+export const FORBIDDEN_LINK_V7_PAGE_ID = "218:91169";
 /** v6 stay (proposed Altitude and MUI links) is preserved as evidence and never written again. */
 export const FORBIDDEN_LINK_V6_PAGE_ID = "218:90280";
 /** v5 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
@@ -260,6 +262,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:91169", "marker": "LINK-V7-PAGE" },
     { "id": "218:90280", "marker": "LINK-V6-PAGE" },
     { "id": "218:87690", "marker": "LINK-V5-PAGE" },
     { "id": "218:86197", "marker": "LINK-V4-PAGE" },

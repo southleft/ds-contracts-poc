@@ -170,6 +170,52 @@
           "text": "Enable"
         }
       ]
+    },
+    {
+      "__note": "Authored 2026-09-02 (person's step of docs/36). AvatarRoot \u2283 AvatarFallback with initials 'AB' so the avatar@1 proposer's label path is measured; no axes.",
+      "name": "Avatar",
+      "importName": "AvatarRoot",
+      "contract": "examples/chakra/contracts-seed/avatar.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "id": "chakra-avatar"
+      },
+      "childrenSpec": [
+        {
+          "importName": "AvatarFallback",
+          "text": "AB"
+        }
+      ]
+    },
+    {
+      "__note": "Authored 2026-09-02 (person's step of docs/36). TagRoot \u2283 TagLabel 'Tag' \u2014 read as chip@1 via --capture tag; no axes.",
+      "name": "Tag",
+      "importName": "TagRoot",
+      "contract": "examples/chakra/contracts-seed/tag.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "fixedProps": {
+        "id": "chakra-tag"
+      },
+      "childrenSpec": [
+        {
+          "importName": "TagLabel",
+          "text": "Tag"
+        }
+      ]
+    },
+    {
+      "__note": "Authored 2026-09-02 (person's step of docs/36). A bare Link with text 'Link' and an href; no axes.",
+      "name": "Link",
+      "importName": "Link",
+      "contract": "examples/chakra/contracts-seed/link.contract.json",
+      "sampleText": "Link",
+      "axes": [],
+      "fixedProps": {
+        "id": "chakra-link",
+        "href": "#"
+      }
     }
   ]
 }

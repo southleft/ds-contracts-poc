@@ -381,3 +381,23 @@ selected tab is not an indicator. See `f1-tabs-proposed/README.md`.
     tabs/mui-proposed 7.73% (named) · tabs/carbon 9.57% (named)
 
     32 pass · 0 fringe · 12 known
+
+## 2026-09-02 (later) — three more held-outs captured today: Chakra avatar, tag and link
+
+The person's step again (three seed contracts and three config entries in
+`extract/computed/configs/chakra.json`), then three captures and three
+`recipe:point` runs, every one 13–14 leaves read and 0 invented. Chakra's
+Avatar scores **0.38%** held out. Chakra's Tag (read as chip@1 via
+`--capture tag`) draws its 1px ring as a zero-offset zero-blur INSET
+box-shadow; the chip schema now lowers that as an inside border whose
+spread comes out of the padding (a shadow takes no layout space, the
+recipe's border does) — the ring paints and the geometry agrees to the
+half-pixel; the 8.09% that remains is the "Tag" glyphs, named
+font-substrate like Carbon's and Astryx's. Chakra's Link proposes (14 read,
+0 invented) but has no real render: the legacy contract path quarantined
+the capture on an unregistered `text-underline-offset` channel before its
+screenshots were kept, so it is a proposal without a score, said so.
+
+    avatar/chakra 0.38% · chip/chakra 8.09% (named) · link/chakra proposed, unscored
+
+    33 pass · 0 fringe · 13 known

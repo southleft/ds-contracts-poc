@@ -1,0 +1,454 @@
+{
+  "_marker": "OFFLINE GATE RE-RUN (extract/computed/regate.ts) — committed captured truth replayed through the CURRENT fusion + emitters. Pixel pairs are NOT scored offline (original screenshots are session artifacts); computed-equality is the instrument. The committed scorecard.json (harness run) is untouched.",
+  "component": "Tag",
+  "config": "extract/computed/configs/chakra.json",
+  "capturedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "renderedBrowser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+  "declared": {
+    "base": [
+      {
+        "part": "root",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "root",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "root",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+      },
+      {
+        "part": "root",
+        "channel": "font-feature-settings",
+        "value": "\"cv11\""
+      },
+      {
+        "part": "root",
+        "channel": "max-width",
+        "value": "100%"
+      },
+      {
+        "part": "root",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "root",
+        "channel": "user-select",
+        "value": "none"
+      },
+      {
+        "part": "label",
+        "channel": "border-bottom-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-left-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-right-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "border-top-style",
+        "value": "solid"
+      },
+      {
+        "part": "label",
+        "channel": "box-sizing",
+        "value": "border-box"
+      },
+      {
+        "part": "label",
+        "channel": "font-family",
+        "value": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+      },
+      {
+        "part": "label",
+        "channel": "font-feature-settings",
+        "value": "\"cv11\""
+      },
+      {
+        "part": "label",
+        "channel": "overflow-x",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "overflow-y",
+        "value": "hidden"
+      },
+      {
+        "part": "label",
+        "channel": "text-rendering",
+        "value": "optimizelegibility"
+      },
+      {
+        "part": "label",
+        "channel": "user-select",
+        "value": "none"
+      }
+    ],
+    "state": []
+  },
+  "decisionsReapplied": [],
+  "scorecard": {
+    "component": "Tag",
+    "generatedBy": "extract/computed/gate.ts",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)",
+    "renderedBy": "149.0.7827.55",
+    "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+    "combos": 1,
+    "interactions": 4,
+    "computed": {
+      "cellsCompared": 280,
+      "cellsEqual": 252,
+      "pctEqual": 90,
+      "rowsFullyEqual": 0,
+      "rows": 4
+    },
+    "pixel": {
+      "pairs": 0,
+      "perfectExact": 0,
+      "perfectAA": 0,
+      "measured": 0,
+      "unscored": {
+        "sizeMismatch": 0,
+        "noOriginal": 4,
+        "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+      },
+      "meanExact": null,
+      "meanAA": null,
+      "maxAA": null
+    },
+    "fusion": {
+      "boundConfirmed": 0,
+      "boundCells": 0,
+      "contradictions": 0,
+      "mintedLeaves": 15,
+      "mintedLeavesUnfolded": 14,
+      "baseBindings": 27,
+      "stateBindings": 0,
+      "codeOnlyChannels": 7,
+      "overflowBindings": 0,
+      "folds": 12
+    },
+    "worstRows": [
+      {
+        "key": "__default",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "__hover",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "__focus-visible",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      },
+      {
+        "key": "__active",
+        "pctAA": null,
+        "pctExact": null,
+        "channelsMismatched": 7,
+        "unscorable": "no-original"
+      }
+    ],
+    "topMismatchedChannels": [
+      [
+        "root.--bg-currentcolor",
+        4
+      ],
+      [
+        "root.overflow-wrap",
+        4
+      ],
+      [
+        "root.text-size-adjust",
+        4
+      ],
+      [
+        "root.vertical-align",
+        4
+      ],
+      [
+        "label.--bg-currentcolor",
+        4
+      ],
+      [
+        "label.overflow-wrap",
+        4
+      ],
+      [
+        "label.text-size-adjust",
+        4
+      ]
+    ],
+    "namedLosses": [
+      "code-only: root.--bg-currentcolor — CSS custom property, not a styled channel — `--bg-currentcolor` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#f4f4f5`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.--bg-currentcolor — CSS custom property, not a styled channel — `--bg-currentcolor` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#f4f4f5`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+      "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+      "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    ],
+    "unresolvedTokenRefs": {
+      "count": 0,
+      "refs": []
+    },
+    "shippedMinted": {
+      "path": "examples/chakra/tokens/chakra-minted.dtcg.json",
+      "leavesAdded": 0,
+      "bootstrap": true,
+      "note": "measured without a shipped minted tree — this library has never promoted one (tokens.mintedBootstrap). The gate inventory is base + this run's FRESH mint only; re-run the harness after the first promotion to measure against the shipped tree.",
+      "divergent": []
+    },
+    "rows": [
+      {
+        "key": "__default",
+        "channelsCompared": 70,
+        "channelsEqual": 63,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "top"
+          },
+          {
+            "part": "label",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__hover",
+        "channelsCompared": 70,
+        "channelsEqual": 63,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "top"
+          },
+          {
+            "part": "label",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__focus-visible",
+        "channelsCompared": 70,
+        "channelsEqual": 63,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "top"
+          },
+          {
+            "part": "label",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      },
+      {
+        "key": "__active",
+        "channelsCompared": 70,
+        "channelsEqual": 63,
+        "pctExact": null,
+        "pctAA": null,
+        "unscorable": "no-original",
+        "mismatches": [
+          {
+            "part": "root",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "root",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "root",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          },
+          {
+            "part": "root",
+            "channel": "vertical-align",
+            "ours": "baseline",
+            "theirs": "top"
+          },
+          {
+            "part": "label",
+            "channel": "--bg-currentcolor",
+            "ours": "",
+            "theirs": "#f4f4f5"
+          },
+          {
+            "part": "label",
+            "channel": "overflow-wrap",
+            "ours": "normal",
+            "theirs": "break-word"
+          },
+          {
+            "part": "label",
+            "channel": "text-size-adjust",
+            "ours": "auto",
+            "theirs": "100%"
+          }
+        ],
+        "note": "original screenshot unavailable — pixel not scored"
+      }
+    ]
+  }
+}

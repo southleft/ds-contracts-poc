@@ -756,6 +756,116 @@
     }
   },
   {
+    "library": "chakra",
+    "archetype": "avatar",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Avatar"
+    },
+    "ledger": "extract/computed/out/chakra/avatar/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 40,
+        "proposed": 40,
+        "verdict": "match",
+        "captured": 40,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.height"
+      },
+      "box.paddingX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 9999,
+        "proposed": 9999,
+        "verdict": "match",
+        "captured": 9999,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.border-top-left-radius ; extract/computed/out/chakra/avatar/captured-truth.json#__default root.height — 50% → half the box height; a length (including Chromium's clamped exponent form) as read"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.line-height"
+      },
+      "rest.boxFill": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.border-top-color"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.opacity"
+      },
+      "rest.label": {
+        "fixture": "#27272aff",
+        "proposed": "#27272aff",
+        "verdict": "match",
+        "captured": "#27272aff",
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a CSS border lies inside the box — recipe spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.font-weight — label font-weight → style word"
+      }
+    }
+  },
+  {
     "library": "antd",
     "archetype": "avatar",
     "source": {

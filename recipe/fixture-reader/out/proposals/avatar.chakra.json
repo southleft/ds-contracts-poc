@@ -1,0 +1,100 @@
+{
+  "archetype": "avatar",
+  "library": "chakra",
+  "ledger": "extract/computed/out/chakra/avatar/captured-truth.json",
+  "provenance": {
+    "package": "@chakra-ui/react",
+    "version": "3.37.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "",
+  "leaves": {
+    "box.height": {
+      "value": 40,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.height"
+    },
+    "box.paddingX": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.padding-left"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.padding-top"
+    },
+    "box.radius": {
+      "value": 9999,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.border-top-left-radius | extract/computed/out/chakra/avatar/captured-truth.json#__default root.height",
+      "formula": "50% → half the box height; a length (including Chromium's clamped exponent form) as read"
+    },
+    "box.borderWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.border-top-width"
+    },
+    "labelFontSize": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.border-top-color"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default root.opacity"
+    },
+    "rest.label": {
+      "value": "#27272aff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Medium",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/avatar/captured-truth.json#__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": "AB"
+  },
+  "typography": {
+    "family": "Inter",
+    "style": "Medium",
+    "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+  }
+}

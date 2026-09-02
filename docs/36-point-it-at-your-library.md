@@ -81,6 +81,12 @@ README that repeats what was read, what you reviewed, and what to do next.
 
 ## What it proved
 
+On Chakra's Avatar, Tag and Link — all three captured the same morning from
+config entries a person wrote — the avatar scores 0.38% held out, the tag's
+inset ring is lowered to a border and its glyphs are named, and the link
+proposes without a render because the legacy contract path quarantined its
+capture before keeping screenshots.
+
 On tabs@1, the indicator is read as a part (MUI) or as the selected tab's
 bottom border (Carbon): MUI from its own capture scores the hand row's
 number; Carbon, held out, is a named content mismatch (three tabs and a
@@ -149,6 +155,10 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
   proposers today (checkbox, switch, avatar, tooltip, chip, link, tabs); the
   other six — radio, badge, alert, textarea, dialog, menu — still have hand
   tables only.
+- **A ring that is a shadow.** A zero-offset, zero-blur inset box-shadow
+  paints exactly like an inside border and takes no layout space; chip@1
+  reads it as a border whose spread comes out of the padding (Chakra's Tag).
+  The other box archetypes do not read it yet.
 - **A selected-tab fill.** tabs@1 draws an indicator under the selected tab;
   shadcn paints the selected tab as a pill and has no indicator, so the
   drafter refuses it by name rather than inventing one.

@@ -1,0 +1,34 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.avatar",
+  "name": "Avatar",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Avatar capture \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition from the package's flat exports: AvatarRoot \u2283 AvatarFallback (initials). Authored 2026-09-02 as the person's step of docs/36 (the capture config makes the capture).",
+  "semantics": {
+    "element": "span"
+  },
+  "props": [],
+  "states": [
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "AvatarRoot"
+      }
+    }
+  }
+}

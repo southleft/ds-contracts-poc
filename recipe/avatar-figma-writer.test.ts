@@ -52,7 +52,7 @@ test("the writer plans three avatar sources without touching Figma", () => {
   const writer = emitAvatarFigmaWriter(sources);
   assert.equal(writer.namespace, AVATAR_FIGMA_NAMESPACE);
   assert.match(writer.pageName, /^Recipe Pivot \/ Avatar \//);
-  assert.match(writer.runIdentity, /-avatar-v6$/);
+  assert.match(writer.runIdentity, /-avatar-v7$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.chip.kind, "component");

@@ -52,7 +52,7 @@ test("the writer plans three chip sources without touching Figma", () => {
   const writer = emitChipFigmaWriter(sources);
   assert.equal(writer.namespace, CHIP_FIGMA_NAMESPACE);
   assert.match(writer.pageName, /^Recipe Pivot \/ Chip \//);
-  assert.match(writer.runIdentity, /-chip-v8$/);
+  assert.match(writer.runIdentity, /-chip-v11$/);
   assert.equal(writer.sourcePlans.length, 3);
   for (const plan of writer.sourcePlans) {
     assert.equal(plan.chip.kind, "component");

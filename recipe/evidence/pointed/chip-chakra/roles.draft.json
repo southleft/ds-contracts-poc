@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "div.chakra-tag__root is the outermost painted part: 33.5156px×20px, bg rgba(244, 244, 245, 1), radius 4px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span.chakra-tag__label carries the text \"Tag\"; its padding 0px is part of the inset",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

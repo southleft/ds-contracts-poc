@@ -189,110 +189,126 @@
     },
     {
       "label": "chip/astryx",
-      "page": "218:90995",
+      "page": "219:91930",
       "component": "chip/variant/default :: Astryx Token",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-astryx-default-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-astryx-default-shared-v11.png",
       "reference": "extract/computed/out/astryx-core/token/orig-shots/md.default__default.png"
     },
     {
       "label": "chip/mui",
-      "page": "218:90995",
+      "page": "219:91930",
       "component": "chip/variant/default :: MUI Chip",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-default-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-default-shared-v11.png",
       "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png"
     },
     {
       "label": "chip/antd",
-      "page": "218:90995",
+      "page": "219:91930",
       "component": "chip/variant/default :: Ant Design Tag",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-default-shared-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-default-shared-v11.png",
       "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png"
     },
     {
       "label": "chip/altitude",
-      "page": "218:90995",
+      "page": "219:91930",
       "component": "chip/variant/default :: altitude (proposed) Chip",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-altitude-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-altitude-default-v11.png",
       "reference": "extract/computed/out/altitude/chip/orig-shots/unset.unset__default.png",
       "_proposedWhy": "HELD OUT: Altitude's chip, never hand-tabled, proposed from its capture (13 read, 0 invented)."
     },
     {
       "label": "chip/mui-proposed",
-      "page": "218:90995",
+      "page": "219:91930",
       "component": "chip/variant/default :: mui (proposed) Chip",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-proposed-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-mui-proposed-default-v11.png",
       "reference": "extract/computed/out/mui/chip/orig-shots/filled.default.medium__default.png",
       "_proposedWhy": "PROPOSED from MUI's own capture (13 read, 0 invented): the label span's padding is read as part of the inset (box padding + label padding), beside the hand row."
     },
     {
       "label": "chip/antd-proposed",
-      "page": "218:90995",
+      "page": "219:91930",
       "component": "chip/variant/default :: antd (proposed) Chip",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-proposed-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-antd-proposed-default-v11.png",
       "reference": "extract/computed/out/antd/tag/orig-shots/unset.bordered.off__default.png",
       "_proposedWhy": "PROPOSED from AntD's own Tag capture (--capture tag; 13 read, 0 invented), beside the hand row."
     },
     {
       "label": "chip/carbon",
-      "page": "218:90995",
+      "page": "219:91930",
       "component": "chip/variant/default :: carbon (proposed) Chip",
-      "shot": "recipe/evidence/fidelity-v1/shots/chip-carbon-default-v8.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-carbon-default-v11.png",
       "reference": "extract/computed/out/carbon/tag/orig-shots/unset.unset__default.png",
       "_proposedWhy": "HELD OUT: Carbon's Tag, never hand-tabled, proposed from its capture (--capture tag; 13 read, 0 invented)."
     },
     {
+      "label": "chip/chakra",
+      "page": "219:91930",
+      "component": "chip/variant/default :: Chakra (proposed) Chip",
+      "shot": "recipe/evidence/fidelity-v1/shots/chip-chakra-default-v11.png",
+      "reference": "extract/computed/out/chakra/tag/orig-shots/__default.png",
+      "_proposedWhy": "HELD OUT, captured today: Chakra's Tag read as chip@1 (--capture tag), 13 leaves read, 0 invented."
+    },
+    {
       "label": "avatar/mui",
-      "page": "218:90709",
+      "page": "219:91469",
       "component": "avatar/variant/default :: MUI Avatar",
-      "shot": "recipe/evidence/fidelity-v1/shots/avatar-mui-default-shared-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-mui-default-shared-v7.png",
       "reference": "extract/computed/out/mui/avatar/orig-shots/circular__default.png"
     },
     {
       "label": "avatar/antd",
-      "page": "218:90709",
+      "page": "219:91469",
       "component": "avatar/variant/default :: Ant Design Avatar",
-      "shot": "recipe/evidence/fidelity-v1/shots/avatar-antd-default-shared-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-antd-default-shared-v7.png",
       "reference": "extract/computed/out/antd/avatar/orig-shots/default.circle__default.png"
     },
     {
       "label": "avatar/mui-proposed",
-      "page": "218:90709",
+      "page": "219:91469",
       "component": "avatar/variant/default :: mui (proposed) Avatar",
-      "shot": "recipe/evidence/fidelity-v1/shots/avatar-mui-proposed-default-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-mui-proposed-default-v7.png",
       "reference": "extract/computed/out/mui/avatar/orig-shots/circular__default.png",
       "_proposedWhy": "PROPOSED by propose-avatar.ts from MUI's own capture (13 read, 0 invented) \u2014 the hand row above transcribes the same capture but pins the initials 'JD' where the capture renders 'A'; the proposal reads the capture's initials, so it is the like-for-like row."
     },
     {
       "label": "avatar/antd-proposed",
-      "page": "218:90709",
+      "page": "219:91469",
       "component": "avatar/variant/default :: antd (proposed) Avatar",
-      "shot": "recipe/evidence/fidelity-v1/shots/avatar-antd-proposed-default-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-antd-proposed-default-v7.png",
       "reference": "extract/computed/out/antd/avatar/orig-shots/default.circle__default.png",
       "_proposedWhy": "PROPOSED from AntD's own capture (13 read, 0 invented): identical tokens to the hand row, the capture's initials 'A', and the capture's Roboto rather than the hand table's SF Pro pin."
     },
     {
       "label": "avatar/altitude",
-      "page": "218:90709",
+      "page": "219:91469",
       "component": "avatar/variant/default :: altitude (proposed) Avatar",
-      "shot": "recipe/evidence/fidelity-v1/shots/avatar-altitude-default-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-altitude-default-v7.png",
       "reference": "extract/computed/out/altitude/avatar/orig-shots/unset.off__default.png",
       "_proposedWhy": "HELD OUT: Altitude's avatar was never hand-tabled; proposed from its capture (13 read, 0 invented) \u2014 IBM Plex Sans SemiBold, the style name matched by the runtime without case."
     },
     {
       "label": "avatar/shadcn",
-      "page": "218:90709",
+      "page": "219:91469",
       "component": "avatar/variant/default :: shadcn (proposed) Avatar",
-      "shot": "recipe/evidence/fidelity-v1/shots/avatar-shadcn-default-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-shadcn-default-v7.png",
       "reference": "extract/computed/out/shadcn/avatar/orig-shots/default__default.png",
       "_proposedWhy": "HELD OUT: shadcn's Avatar (the fallback initials span), proposed from its capture (13 read, 0 invented); the requested face 'Inter Variable' is the npm name of Inter \u2014 a reviewed, named fallback to Inter Regular. Re-captured with --keep-originals to have a real render to score."
     },
     {
       "label": "avatar/fluent",
-      "page": "218:90709",
+      "page": "219:91469",
       "component": "avatar/variant/default :: Fluent (proposed) Avatar",
-      "shot": "recipe/evidence/fidelity-v1/shots/avatar-fluent-default-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-fluent-default-v7.png",
       "reference": "extract/computed/out/fluent/avatar/orig-shots/circular.none.unset__default.png",
       "_proposedWhy": "HELD OUT: Fluent's Avatar initials, proposed from its capture (13 read, 0 invented); Segoe UI is not installed here, so the fixture carries a named degradation to Arial Bold \u2014 a font-substrate row by construction, scored honestly."
+    },
+    {
+      "label": "avatar/chakra",
+      "page": "219:91469",
+      "component": "avatar/variant/default :: Chakra (proposed) Avatar",
+      "shot": "recipe/evidence/fidelity-v1/shots/avatar-chakra-default-v7.png",
+      "reference": "extract/computed/out/chakra/avatar/orig-shots/__default.png",
+      "_proposedWhy": "HELD OUT, captured today: Chakra's Avatar (AvatarRoot \u2283 AvatarFallback 'AB'), proposed with 13 leaves read and 0 invented from a config entry a person wrote."
     },
     {
       "label": "badge/mui",
@@ -315,24 +331,24 @@
     },
     {
       "label": "link/mui",
-      "page": "218:91169",
+      "page": "219:91726",
       "component": "link/variant/default :: MUI Link",
-      "shot": "recipe/evidence/fidelity-v1/shots/link-mui-default-shared-v7.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/link-mui-default-shared-v8.png",
       "reference": "extract/computed/out/mui/link/orig-shots/primary.always__default.png"
     },
     {
       "label": "link/altitude",
-      "page": "218:91169",
+      "page": "219:91726",
       "component": "link/variant/default :: altitude (proposed) Link",
-      "shot": "recipe/evidence/fidelity-v1/shots/link-altitude-default-v7.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/link-altitude-default-v8.png",
       "reference": "extract/computed/out/altitude/link/orig-shots/unset__default.png",
       "_proposedWhy": "HELD OUT: Altitude's link, never hand-tabled, proposed from its capture (14 read, 0 invented; underline read from text-decoration-line)."
     },
     {
       "label": "link/mui-proposed",
-      "page": "218:91169",
+      "page": "219:91726",
       "component": "link/variant/default :: mui (proposed) Link",
-      "shot": "recipe/evidence/fidelity-v1/shots/link-mui-proposed-default-v7.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/link-mui-proposed-default-v8.png",
       "reference": "extract/computed/out/mui/link/orig-shots/primary.always__default.png",
       "_proposedWhy": "PROPOSED from MUI's own capture at the primary.always combo (14 read, 0 invented): the capture's computed face is 'Times' (the sandbox mounts Link without a Typography provider), carried as a reviewed, named fallback to Times New Roman \u2014 the capture's own face, where the hand row pins Roboto and scores 49%."
     },

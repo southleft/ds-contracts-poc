@@ -23,6 +23,9 @@ import {
 import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
 import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
+import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
+import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
+import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
 import { MUI_TABS_LEDGER as MUI_TABS_LEDGER_PROPOSED, muiTabsAdapterConfig as muiTabsProposedConfig, muiTabsMappings as muiTabsProposedMappings } from "../fixtures/generated/tabs.mui.js";
 import { CARBON_TABS_LEDGER as CARBON_TABS_LEDGER_PROPOSED, carbonTabsAdapterConfig as carbonTabsProposedConfig, carbonTabsMappings as carbonTabsProposedMappings } from "../fixtures/generated/tabs.carbon.js";
 import { ALTITUDE_CHIP_LEDGER as ALTITUDE_CHIP_LEDGER_PROPOSED, altitudeChipAdapterConfig as altitudeChipProposedConfig, altitudeChipMappings as altitudeChipProposedMappings } from "../fixtures/generated/chip.altitude.js";
@@ -576,6 +579,16 @@ const SUBJECTS: Subject[] = [
     extras: extrasFor(carbonChipProposedConfig.tokens as unknown as Record<string, unknown>, carbonChipProposedMappings),
   },
   {
+    // PROPOSED from a capture made 2026-09-02 (held out; the config entry was the person's step).
+    archetype: "chip",
+    library: "chakra",
+    source: src(chakraChipAdapterConfig),
+    ledgerFile: CHAKRA_CHIP_LEDGER,
+    tokens: chakraChipAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraChipMappings,
+    extras: extrasFor(chakraChipAdapterConfig.tokens as unknown as Record<string, unknown>, chakraChipMappings),
+  },
+  {
     archetype: "chip",
     library: "antd",
     source: src(antdChipAdapterConfig),
@@ -684,6 +697,16 @@ const SUBJECTS: Subject[] = [
     extras: extrasFor(fluentAvatarProposedConfig.tokens as unknown as Record<string, unknown>, fluentAvatarProposedMappings),
   },
   {
+    // PROPOSED from a capture made 2026-09-02 (held out; the config entry was the person's step).
+    archetype: "avatar",
+    library: "chakra",
+    source: src(chakraAvatarAdapterConfig),
+    ledgerFile: CHAKRA_AVATAR_LEDGER,
+    tokens: chakraAvatarAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraAvatarMappings,
+    extras: extrasFor(chakraAvatarAdapterConfig.tokens as unknown as Record<string, unknown>, chakraAvatarMappings),
+  },
+  {
     archetype: "avatar",
     library: "antd",
     source: src(antdAvatarAdapterConfig),
@@ -720,6 +743,16 @@ const SUBJECTS: Subject[] = [
     tokens: muiLinkProposedConfig.tokens as unknown as Record<string, unknown>,
     mappings: muiLinkProposedMappings,
     extras: extrasFor(muiLinkProposedConfig.tokens as unknown as Record<string, unknown>, muiLinkProposedMappings),
+  },
+  {
+    // PROPOSED from a capture made 2026-09-02 (held out; the config entry was the person's step).
+    archetype: "link",
+    library: "chakra",
+    source: src(chakraLinkAdapterConfig),
+    ledgerFile: CHAKRA_LINK_LEDGER,
+    tokens: chakraLinkAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraLinkMappings,
+    extras: extrasFor(chakraLinkAdapterConfig.tokens as unknown as Record<string, unknown>, chakraLinkMappings),
   },
   {
     archetype: "link",

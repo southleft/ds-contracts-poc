@@ -1,0 +1,103 @@
+{
+  "archetype": "chip",
+  "library": "chakra",
+  "ledger": "extract/computed/out/chakra/tag/captured-truth.json",
+  "provenance": {
+    "package": "@chakra-ui/react",
+    "version": "3.37.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "",
+  "leaves": {
+    "box.height": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.height"
+    },
+    "box.paddingX": {
+      "value": 5,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.padding-left | extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width | extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow | extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.padding-left",
+      "formula": "box padding-left + label padding-left − an inset ring's spread when the ring is the border"
+    },
+    "box.paddingY": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.padding-top | extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width | extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow | extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.padding-top",
+      "formula": "box padding-top + label padding-top − an inset ring's spread when the ring is the border"
+    },
+    "box.radius": {
+      "value": 4,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-left-radius"
+    },
+    "box.borderWidth": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width | extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow",
+      "formula": "border-top-width, or the spread of a zero-offset zero-blur inset ring when the border is 0"
+    },
+    "labelFontSize": {
+      "value": 12,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.font-size"
+    },
+    "labelLineHeight": {
+      "value": 16,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.line-height"
+    },
+    "rest.boxFill": {
+      "value": "#f4f4f5ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.background-color"
+    },
+    "rest.boxBorder": {
+      "value": "#e4e4e7ff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-width | extract/computed/out/chakra/tag/captured-truth.json#__default root.border-top-color | extract/computed/out/chakra/tag/captured-truth.json#__default root.box-shadow",
+      "formula": "border-top-color, or the inset ring's colour when the border is 0"
+    },
+    "rest.boxOpacity": {
+      "value": 1,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default root.opacity"
+    },
+    "rest.label": {
+      "value": "#27272aff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.color"
+    },
+    "strokeAlign": {
+      "value": "inside",
+      "from": "spelling",
+      "why": "a CSS border lies inside the box — recipe spelling"
+    },
+    "typography.label.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.font-family",
+      "formula": "first family of the label's computed stack"
+    },
+    "typography.label.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/tag/captured-truth.json#__default idx:0.font-weight",
+      "formula": "label font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "label": "Tag"
+  },
+  "typography": {
+    "family": "Inter",
+    "style": "Regular",
+    "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+  }
+}

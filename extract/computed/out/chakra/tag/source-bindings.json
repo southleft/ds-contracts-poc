@@ -1,0 +1,29 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Tag",
+  "varPrefix": "--chakra-",
+  "facts": [
+    {
+      "part": "root",
+      "channel": "color",
+      "combo": "",
+      "axisValues": {},
+      "token": "colors-color-palette-fg",
+      "varName": "--chakra-colors-color-palette-fg",
+      "anchor": {
+        "selector": ".css-fs7q9r"
+      }
+    }
+  ],
+  "skips": [
+    "label.font-size: candidate --chakra-font-sizes-xs → \"font-sizes-xs\" = 0.75rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "root.box-shadow: candidate --chakra-colors-color-palette-muted → \"colors-color-palette-muted\" = #e4e4e7 names a DTCG leaf but the resolved value does NOT equal the captured computed value in any combo — the cascade approximation suggested a token the element did not render; binding dropped by name",
+    "root.min-height: candidate --chakra-sizes-5 → \"sizes-5\" = 1.25rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached."
+  ],
+  "shorthandCeiling": 0,
+  "shorthandSkips": [],
+  "calcDeclarations": 0,
+  "calcCeiling": 0,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

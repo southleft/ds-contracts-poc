@@ -1,0 +1,90 @@
+{
+  "pageName": "Recipe Pivot / Avatar / 8b6f943a-0b73c85a-8714d3a8-a76bc632-0f8d4b37-712d7ffe-ea8faf59-af315e26-72628709-avatar-v7",
+  "runIdentity": "8b6f943a-0b73c85a-8714d3a8-a76bc632-0f8d4b37-712d7ffe-ea8faf59-af315e26-72628709-avatar-v7",
+  "namespace": "ds.contracts.avatar.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "avatar@1 circle-clipped JD initials from Astryx Avatar small 36, MUI Avatar 40, and AntD Avatar 32; size/shape are not axes; do not remint the Badge host",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-avatar-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "8b6f943a530d5004a52c12d8bc3b2743c04790d28bf16ac35ef4a50a15b834fe",
+      "envelopeHash": "9ba9d9f104544a5f7cb7d454666797cd9ea4766aa859efdcf9a9a50035701808",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "mui-avatar-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "0b73c85a12e030b2036500d8a3ae401d9a2774611b30a83a9eedb1dd1e07832f",
+      "envelopeHash": "b5beafe658b9b46be1a194ce5bf56c2c7276a3857db15100fee65f3142967ce3",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "antd-avatar-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "8714d3a89a343e139b8bf5053aac8362ccd42a888744e0ae9992f88a760a4fd6",
+      "envelopeHash": "a060e24c22a9af15743cf88b553c6b72d6dfd21a54f99d43a9fd7cb358de1cf5",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "mui-avatar-proposed-v1",
+      "displayName": "mui (proposed)",
+      "recipeHash": "a76bc632c43d51c0b4b23434b9ef8049214c58db7381e4e05b533c3fa1144961",
+      "envelopeHash": "5620a41ceeb05578ed227f9ff26ed649db469fc8e9d922509f29da15b3f6ff6a",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "antd-avatar-proposed-v1",
+      "displayName": "antd (proposed)",
+      "recipeHash": "0f8d4b3725c6844e49e25174a7763a5ea96377508e1906fd5279488cec38b30c",
+      "envelopeHash": "8cf8557c4e3a6f98b8d1093fef2166b2cf547799b1e17e35f9e23835bd0ee143",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "altitude-avatar-proposed-v1",
+      "displayName": "altitude (proposed)",
+      "recipeHash": "712d7ffe2422f1294402e94bbf3c243323f89caaf42f3649b5ab9424a1450c26",
+      "envelopeHash": "58fe0b1fcfb3aeb025fb34d65925cc7a3ab0c81efdb561dcd97c4065ca6cfdf6",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "shadcn-avatar-proposed-v1",
+      "displayName": "shadcn (proposed)",
+      "recipeHash": "ea8faf5903d9a5f0a0f1093203af49da3000ba4390035fc7f51ec8d9cac23ef9",
+      "envelopeHash": "5e9efcb16914901811b2f16d29b317d62dc8a8a1463b3824046b90792a5b8281",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "fluent-avatar-proposed-v1",
+      "displayName": "fluent (proposed)",
+      "recipeHash": "af315e261ce043f851b1e668e3fe2ec8324d55da635e039f2e5e7bd9beb06ab2",
+      "envelopeHash": "5eda0e9ae2599e9ccc05fc9e71fac4e849710eb27f7ceb5a15f5d821df596b06",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    },
+    {
+      "adapterIdentity": "chakra-avatar-proposed-v1",
+      "displayName": "Chakra (proposed)",
+      "recipeHash": "726287099d5287eea631ad4e808b8e30d88bcd8cc0667cfc2efefc848235e8d1",
+      "envelopeHash": "38199d71d90e67a062eb9b47ae494eb9ffb4d9084f7341c67ccc57395d33da06",
+      "variantCount": 1,
+      "variableCount": 10,
+      "comparedIrFacts": 18
+    }
+  ]
+}

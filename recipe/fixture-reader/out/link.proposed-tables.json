@@ -355,6 +355,129 @@
     }
   },
   {
+    "library": "chakra",
+    "archetype": "link",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Link"
+    },
+    "ledger": "extract/computed/out/chakra/link/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "box.height": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "receipt",
+        "provenance": "RECEIPT: the link hugs its text — recipe spelling 0 (hug) [reviewed 0]"
+      },
+      "box.paddingX": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.padding-left"
+      },
+      "box.paddingY": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.padding-top"
+      },
+      "box.radius": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.border-top-left-radius"
+      },
+      "box.borderWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.border-top-width"
+      },
+      "labelFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.font-size"
+      },
+      "labelLineHeight": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.line-height — CSS normal → 0 with lineHeightUnit auto; a length → px"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.line-height — CSS normal → auto; a length → px"
+      },
+      "decoration": {
+        "fixture": "none",
+        "proposed": "none",
+        "verdict": "match",
+        "captured": "none",
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.text-decoration-line — text-decoration-line underline → underline, else none"
+      },
+      "rest.boxFill": {
+        "fixture": "#00000000",
+        "proposed": "#00000000",
+        "verdict": "match",
+        "captured": "#00000000",
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.background-color"
+      },
+      "rest.boxBorder": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.border-top-color"
+      },
+      "rest.boxOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.opacity"
+      },
+      "rest.label": {
+        "fixture": "#27272aff",
+        "proposed": "#27272aff",
+        "verdict": "match",
+        "captured": "#27272aff",
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.color"
+      },
+      "strokeAlign": {
+        "fixture": "inside",
+        "proposed": "inside",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: a CSS border lies inside the box — recipe spelling [reviewed inside]"
+      },
+      "typography.label.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.font-family — first family of the label's computed stack"
+      },
+      "typography.label.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/chakra/link/captured-truth.json#__default root.font-weight — label font-weight → style word"
+      }
+    }
+  },
+  {
     "library": "mui",
     "archetype": "link",
     "source": {

@@ -1,0 +1,20 @@
+{
+  "roles": {
+    "box": "root",
+    "label": "idx:0"
+  },
+  "combo": "",
+  "evidence": {
+    "box": {
+      "selector": "root",
+      "why": "div.chakra-avatar__root is the outermost painted part: 40px×40px, bg rgba(228, 228, 231, 1), radius 9999px",
+      "confidence": "high"
+    },
+    "label": {
+      "selector": "idx:0",
+      "why": "span.chakra-avatar__fallback carries the initials \"AB\"",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

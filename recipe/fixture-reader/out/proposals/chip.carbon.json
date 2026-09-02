@@ -21,14 +21,14 @@
     "box.paddingX": {
       "value": 8,
       "from": "ledger",
-      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-left | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-left",
-      "formula": "box padding-left + label padding-left (the label's own padding is part of the inset)"
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-left | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-left",
+      "formula": "box padding-left + label padding-left − an inset ring's spread when the ring is the border"
     },
     "box.paddingY": {
       "value": 0,
       "from": "ledger",
-      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-top | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-top",
-      "formula": "box padding-top + label padding-top"
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.padding-top | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default idx:0.padding-top",
+      "formula": "box padding-top + label padding-top − an inset ring's spread when the ring is the border"
     },
     "box.radius": {
       "value": 16,
@@ -38,7 +38,8 @@
     "box.borderWidth": {
       "value": 0,
       "from": "ledger",
-      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width"
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow",
+      "formula": "border-top-width, or the spread of a zero-offset zero-blur inset ring when the border is 0"
     },
     "labelFontSize": {
       "value": 12,
@@ -58,7 +59,8 @@
     "rest.boxBorder": {
       "value": "#161616ff",
       "from": "ledger",
-      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-color"
+      "key": "extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-width | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.border-top-color | extract/computed/out/carbon/tag/captured-truth.json#unset.unset__default root.box-shadow",
+      "formula": "border-top-color, or the inset ring's colour when the border is 0"
     },
     "rest.boxOpacity": {
       "value": 1,

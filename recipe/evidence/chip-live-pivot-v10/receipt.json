@@ -1,0 +1,95 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "chip-live-pivot-v10-prepare",
+  "teaching": "One named default Token/Chip/Tag cell; no shared Color/Size/Closable axis",
+  "runIdentity": "932f13fe-eb96b2ab-908fd120-c9e6d710-d900b3b5-5b25bd6a-fa41578a-6dee1c10-chip-v10",
+  "pageName": "Recipe Pivot / Chip / 932f13fe-eb96b2ab-908fd120-c9e6d710-d900b3b5-5b25bd6a-fa41578a-6dee1c10-chip-v10",
+  "namespace": "ds.contracts.chip.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "932f13fefdd27eb4dd2b5fb64e01bcb803ee1f4f6418109114faf414894738b6",
+    "MUI": "eb96b2abd592a1ce8c6f61ab00593071726fa933c23e5c200d2bedb23343d3c2",
+    "Ant Design": "908fd120d4b84efeb619230a15e1001d009d3f980d44dc13efcc275631855038",
+    "altitude (proposed)": "c9e6d7102d4aed4c662c78e155ed6900607568fe24b76f7e5932e9904120c2d8",
+    "mui (proposed)": "d900b3b56a5c41f7b6d524107ff23f8199b0156380f77d6d32ec90d453660454",
+    "antd (proposed)": "5b25bd6a6d22528486f51eeaee167877b867dba3149b33bab4d1ec57b57812df",
+    "carbon (proposed)": "fa41578a048726cb6d6cc97509a32227a0dc043fda101e2ac4348c51c2e6cdf7",
+    "Chakra (proposed)": "6dee1c1039fb9ce504f3e975716889336e8a7e1e3184f04ebb213c1dc34b8002"
+  },
+  "writerSha256": "0581e366cac7061082e4b32ab48233acca01b5d9a9bb6f044b41ac95c30d9282",
+  "pageId": "219:91809",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=219-91809",
+  "live": {
+    "recordedFrom": "chip-v10-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Chip / 932f13fe-eb96b2ab-908fd120-c9e6d710-d900b3b5-5b25bd6a-fa41578a-6dee1c10-chip-v10",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-chip-reviewed-v1",
+        "sectionId": "219:91810",
+        "setId": "219:91822",
+        "collectionId": "VariableCollectionId:219:91811",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      },
+      {
+        "adapterIdentity": "mui-chip-reviewed-v1",
+        "sectionId": "219:91825",
+        "setId": "219:91837",
+        "collectionId": "VariableCollectionId:219:91826",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      },
+      {
+        "adapterIdentity": "antd-chip-reviewed-v1",
+        "sectionId": "219:91840",
+        "setId": "219:91852",
+        "collectionId": "VariableCollectionId:219:91841",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      },
+      {
+        "adapterIdentity": "altitude-chip-proposed-v1",
+        "sectionId": "219:91855",
+        "setId": "219:91867",
+        "collectionId": "VariableCollectionId:219:91856",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      },
+      {
+        "adapterIdentity": "mui-chip-proposed-v1",
+        "sectionId": "219:91870",
+        "setId": "219:91882",
+        "collectionId": "VariableCollectionId:219:91871",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      },
+      {
+        "adapterIdentity": "antd-chip-proposed-v1",
+        "sectionId": "219:91885",
+        "setId": "219:91897",
+        "collectionId": "VariableCollectionId:219:91886",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      },
+      {
+        "adapterIdentity": "carbon-chip-proposed-v1",
+        "sectionId": "219:91900",
+        "setId": "219:91912",
+        "collectionId": "VariableCollectionId:219:91901",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      },
+      {
+        "adapterIdentity": "chakra-chip-proposed-v1",
+        "sectionId": "219:91915",
+        "setId": "219:91927",
+        "collectionId": "VariableCollectionId:219:91916",
+        "variantCount": 1,
+        "comparedIrFacts": 17
+      }
+    ]
+  }
+}

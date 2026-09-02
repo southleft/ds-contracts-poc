@@ -25,7 +25,9 @@ import {
 
 export const AVATAR_FIGMA_NAMESPACE = "ds.contracts.avatar.recipe.v1";
 export const AVATAR_FIGMA_WRITER_VERSION = 1;
-export const AVATAR_FIGMA_RUN_SUFFIX = "avatar-v6";
+export const AVATAR_FIGMA_RUN_SUFFIX = "avatar-v7";
+/** v6 stay (Chakra Avatar, captured today from a config entry authored as the person's step) is preserved as evidence and never written again. */
+export const FORBIDDEN_AVATAR_V6_PAGE_ID = "218:90709";
 /** v5 stay (five proposed sources: MUI and AntD from their own captures, Altitude, shadcn and Fluent held out) is preserved as evidence and never written again. */
 export const FORBIDDEN_AVATAR_V5_PAGE_ID = "218:87603";
 /** v4 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
@@ -258,6 +260,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:90709", "marker": "AVATAR-V6-PAGE" },
     { "id": "218:87603", "marker": "AVATAR-V5-PAGE" },
     { "id": "218:86110", "marker": "AVATAR-V4-PAGE" },
     { "id": "218:84628", "marker": "AVATAR-V3-PAGE" },

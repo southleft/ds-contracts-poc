@@ -3,11 +3,11 @@
   "bar": {
     "pctAAMaskedMax": 5
   },
-  "subjects": 44,
-  "passed": 32,
-  "failed": 12,
+  "subjects": 46,
+  "passed": 33,
+  "failed": 13,
   "fringeExcused": 0,
-  "knownFailures": 12,
+  "knownFailures": 13,
   "rows": [
     {
       "label": "checkbox/astryx",
@@ -194,6 +194,14 @@
       "convergesAt": null
     },
     {
+      "label": "chip/chakra",
+      "status": "fail",
+      "pctAAMasked": 8.09,
+      "canvasPx": "33x20",
+      "realPx": "34x20",
+      "convergesAt": null
+    },
+    {
       "label": "avatar/mui",
       "status": "pass",
       "pctAAMasked": 4,
@@ -247,6 +255,14 @@
       "pctAAMasked": 0,
       "canvasPx": "32x32",
       "realPx": "32x32",
+      "convergesAt": 250
+    },
+    {
+      "label": "avatar/chakra",
+      "status": "pass",
+      "pctAAMasked": 0.38,
+      "canvasPx": "40x40",
+      "realPx": "40x40",
       "convergesAt": 250
     },
     {
