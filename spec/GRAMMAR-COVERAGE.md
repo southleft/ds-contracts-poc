@@ -4,8 +4,8 @@
 
 This names every construct the **capture-config grammar** supports — the language in which a user
 tells us how to mount their library — and every construct a real library needs that it does **not**.
-Today that is **44** supported and **10** unsupported constructs, 54 rows in all, measured against **13** committed capture configs
-using **89** distinct construct paths between them.
+Today that is **45** supported and **10** unsupported constructs, 55 rows in all, measured against **13** committed capture configs
+using **90** distinct construct paths between them.
 
 ## Why this exists
 
@@ -51,9 +51,9 @@ path whether or not the name is dotted. Those rows carry a `probe` the gate runs
 
 | status | constructs |
 |---|---|
-| supported | **44** |
+| supported | **45** |
 | unsupported | **10** |
-| **total** | **54** |
+| **total** | **55** |
 
 ## How to read a row
 
@@ -159,6 +159,7 @@ path whether or not the name is dotted. Those rows carry a `probe` the gate runs
 | `marker.date` **(new this round)** | `{"$date": "2026-01-15T00:00:00.000Z"}` | day-picker | A calendar — the archetype the owner named as the one he fears — can only be mounted through a hand-written sandbox fixtures module holding three `new Date(...)` literals, which puts a JS file between the config and the subject. Unpinned, the DOM changes at midnight and no two captures can be byte-compared. | `config:day-picker` |
 | `marker.element` | `{"$element": "pkg#Export", "props": {}, "text": "…"}` | mui, antd | An element-valued prop can only be a string. | `config:antd`, `config:mui` |
 | `marker.import` | `{"$import": "pkg#Export"}` | polaris, carbon | Element- and component-valued props cannot be mounted. | `config:carbon`, `config:polaris` |
+| `marker.child-props` | `{"$childProps": {"Textarea": {"value": "Meeting notes for Tuesday."}}}` | chakra | Without it a composition whose value lives on a child could only be captured bare (the root took every axis prop); the labelled plane of textarea@1 had no foreign held-out. |
 | `marker.props` | `{"$props": {"checked": true, "indeterminate": true}}` | mui | A two-axis spelling would silently lose all three checkbox glyphs (the svg-content promotion carries per-value assets only when the markup is a function of exactly one axis). | `config:altitude`, `config:antd`, `config:bootstrap5` |
 | `marker.render` | `{"$render": "pkg#Export"}` | mui | MUI's Autocomplete cannot be mounted at all (renderInput is required). Any richer function body is a named refusal, never config. | `config:mui` |
 

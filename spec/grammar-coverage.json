@@ -7,10 +7,10 @@
     "configs": "extract/computed/configs"
   },
   "totals": {
-    "supported": 44,
+    "supported": 45,
     "unsupported": 10,
-    "constructs": 54,
-    "observedPaths": 89,
+    "constructs": 55,
+    "observedPaths": 90,
     "libraries": 15
   },
   "constructs": [
@@ -619,6 +619,21 @@
       "exercisedBy": [
         "config:polaris",
         "config:polaris-depth"
+      ]
+    },
+    {
+      "id": "marker.child-props",
+      "status": "supported",
+      "kind": "marker",
+      "spelling": "{\"$childProps\": {\"Textarea\": {\"value\": \"Meeting notes for Tuesday.\"}}}",
+      "summary": "One contract axis value mounting props on a NAMED childrenSpec child, at any depth, over its static props — a Field + Label + Textarea whose value lives on the Textarea (COMPOSITION round, 2026-09-02).",
+      "provenBy": "chakra",
+      "consequence": "Without it a composition whose value lives on a child could only be captured bare (the root took every axis prop); the labelled plane of textarea@1 had no foreign held-out.",
+      "paths": [
+        "marker:$childProps"
+      ],
+      "exercisedBy": [
+        "config:chakra"
       ]
     },
     {
