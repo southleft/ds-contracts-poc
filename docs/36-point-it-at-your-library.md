@@ -35,6 +35,24 @@ npm run recipe:point -- --archetype checkbox --library chakra \
   --set dash.radius=0.875 --why 'dash.radius=…'
 ```
 
+| flag | what |
+|---|---|
+| `--archetype` | one of checkbox, switch, avatar, tooltip, chip, link, tabs, radio, textarea, alert |
+| `--library <slug>` | the capture directory: `extract/computed/out/<slug>/…` |
+| `--capture <dir>` | the captured component's directory when the library names the archetype differently (AntD's and Carbon's `tag` as chip@1; Chakra's `textareafield` as textarea@1) |
+| `--slug <name>` | the fixture's own name when one library contributes two captures of an archetype (`chakra-field`); the ledger stays under `--library` |
+| `--display-name`, `--export-name`, `--source-root` | what the fixture says about itself; the display name must be distinct from the hand rows' on the same page |
+| `--unsupported a,b,c` | the cells the fixture refuses by name (the adapter requires at least one) |
+| `--set path=value --why 'path=evidence'` | a reviewed leaf the ledger cannot carry, recorded as a receipt with its evidence |
+| `--glyph-file <json>` | checkbox@1 only: the check glyph's geometry cited from the package source |
+| `--roles-file <json>` | a reviewed role map instead of the drafted one |
+
+Leaves that always need `--set` because no computed channel carries them:
+alert@1's `icon.viewBox` (the package's SVG coordinate space, e.g. `24` or
+`64 64 896 896`); textarea@1's `notchFill` on a notched outline and a
+placeholder ink hidden at rest and at focus; a `typography.<role>.resolved`
+face when the requested one is not on the minting machine.
+
 It runs five steps and stops at the first it cannot do honestly:
 
 1. **capture** — `extract/computed/out/<library>/<archetype>/captured-truth.json`
