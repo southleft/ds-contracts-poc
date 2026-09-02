@@ -4845,6 +4845,10 @@
       "reason": "no examples/bootstrap5/contracts/ directory — not a contract library"
     },
     {
+      "what": "examples/chakra",
+      "reason": "no examples/chakra/contracts/ directory — not a contract library"
+    },
+    {
       "what": "examples/ci",
       "reason": "no examples/ci/contracts/ directory — not a contract library"
     },
@@ -4863,6 +4867,10 @@
     {
       "what": "examples/eventz-vars",
       "reason": "examples/eventz-vars/contracts/ exists but the library carries no examples/eventz-vars/figma/*.figma.js and no eventz-vars.bundle.json — contract → canvas was never emitted for it"
+    },
+    {
+      "what": "examples/flowbite-react",
+      "reason": "no examples/flowbite-react/contracts/ directory — not a contract library"
     },
     {
       "what": "examples/radix-themes",
