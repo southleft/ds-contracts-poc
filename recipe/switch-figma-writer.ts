@@ -26,7 +26,11 @@ import {
 
 export const SWITCH_FIGMA_NAMESPACE = "ds.contracts.switch.recipe.v1";
 export const SWITCH_FIGMA_WRITER_VERSION = 2;
-export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v10";
+export const SWITCH_FIGMA_RUN_SUFFIX = "switch-v12";
+/** v11 stay (Chakra thumb: CSS scale 0.8 lowered (size, inset, shadow)) is preserved as evidence and never written again. */
+export const FORBIDDEN_SWITCH_V11_PAGE_ID = "218:88545";
+/** v10 stay (Chakra Switch, captured today from a config entry authored as the person's step, proposed with no --set as the sixth source) is preserved as evidence and never written again. */
+export const FORBIDDEN_SWITCH_V10_PAGE_ID = "218:88332";
 /** v9 stay (proposed MUI (bare) and shadcn (bare, oklch, calc travel, border-inset thumb) as fourth and fifth sources) is preserved as evidence and never written again. */
 export const FORBIDDEN_SWITCH_V9_PAGE_ID = "218:88119";
 /** v8 stay (proposed MUI (bare, from its capture) and shadcn (bare, oklch, calc travel) as fourth and fifth sources) is preserved as evidence and never written again. */
@@ -265,6 +269,8 @@ const WRITER_RUNTIME_SPEC = {
     "field": "switchSet"
   },
   "forbiddenPages": [
+    { "id": "218:88545", "marker": "SWITCH-V11-PAGE" },
+    { "id": "218:88332", "marker": "SWITCH-V10-PAGE" },
     { "id": "218:88119", "marker": "SWITCH-V9-PAGE" },
     { "id": "218:87064", "marker": "SWITCH-V8-PAGE" },
     { "id": "218:85571", "marker": "SWITCH-V7-PAGE" },

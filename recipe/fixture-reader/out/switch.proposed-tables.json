@@ -529,21 +529,21 @@
         "proposed": 0,
         "verdict": "match",
         "captured": 0,
-        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left ; extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-left-width — track padding-left + border-left-width (the content box starts after the border)"
+        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left ; extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-left-width ; extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width ; extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale — track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2"
       },
       "thumb.offSize": {
         "fixture": 20,
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width"
+        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width ; extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale — thumb width × its CSS scale (none → 1)"
       },
       "thumb.onSize": {
         "fixture": 20,
         "proposed": 20,
         "verdict": "match",
         "captured": 20,
-        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width"
+        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width ; extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.scale — thumb width × its CSS scale (none → 1)"
       },
       "thumb.travel": {
         "fixture": 20,
@@ -679,7 +679,7 @@
         "proposed": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
         "verdict": "match",
         "captured": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
-        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow"
+        "provenance": "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow ; extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale — the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)"
       },
       "hitClips": {
         "fixture": "true",
@@ -767,21 +767,21 @@
         "proposed": 1,
         "verdict": "match",
         "captured": 1,
-        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.padding-left ; extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-left-width — track padding-left + border-left-width (the content box starts after the border)"
+        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.padding-left ; extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-left-width ; extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width ; extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.scale — track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2"
       },
       "thumb.offSize": {
         "fixture": 16,
         "proposed": 16,
         "verdict": "match",
         "captured": 16,
-        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width"
+        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width ; extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.scale — thumb width × its CSS scale (none → 1)"
       },
       "thumb.onSize": {
         "fixture": 16,
         "proposed": 16,
         "verdict": "match",
         "captured": 16,
-        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width"
+        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width ; extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.scale — thumb width × its CSS scale (none → 1)"
       },
       "thumb.travel": {
         "fixture": 14,
@@ -921,7 +921,7 @@
         "proposed": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
         "verdict": "match",
         "captured": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
-        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.box-shadow"
+        "provenance": "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.box-shadow ; extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.scale — the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)"
       },
       "hitClips": {
         "fixture": "false",
@@ -948,6 +948,256 @@
         "proposed": "Regular",
         "verdict": "receipt",
         "provenance": "RECEIPT: no label part in the mount [reviewed]"
+      }
+    }
+  },
+  {
+    "library": "chakra",
+    "archetype": "switch",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Switch"
+    },
+    "ledger": "extract/computed/out/chakra/switch/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "wrapper.width": {
+        "fixture": 40,
+        "proposed": 40,
+        "verdict": "match",
+        "captured": 40,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.width"
+      },
+      "wrapper.height": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.height"
+      },
+      "wrapper.padding": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.padding-left"
+      },
+      "track.width": {
+        "fixture": 40,
+        "proposed": 40,
+        "verdict": "match",
+        "captured": 40,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.width"
+      },
+      "track.height": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.height"
+      },
+      "track.radius": {
+        "fixture": 9999,
+        "proposed": 9999,
+        "verdict": "match",
+        "captured": 9999,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.border-top-left-radius"
+      },
+      "track.padding": {
+        "fixture": 2,
+        "proposed": 2,
+        "verdict": "match",
+        "captured": 2,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.padding-left ; extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.border-left-width ; extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.width ; extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.scale — track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2"
+      },
+      "thumb.offSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.width ; extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.scale — thumb width × its CSS scale (none → 1)"
+      },
+      "thumb.onSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.width ; extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.scale — thumb width × its CSS scale (none → 1)"
+      },
+      "thumb.travel": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.translate ; extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.translate ; extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.width — translate x of the moving element on minus off (a calc() percentage is of the moving element's own width)"
+      },
+      "row.gap": {
+        "fixture": 10,
+        "proposed": 10,
+        "verdict": "match",
+        "captured": 10,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default root.column-gap"
+      },
+      "states.false.enabled.trackFill": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.background-color"
+      },
+      "states.false.enabled.trackOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.opacity — the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      "states.false.enabled.thumbFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.background-color"
+      },
+      "states.false.enabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.color"
+      },
+      "states.false.disabled.trackFill": {
+        "fixture": "#e4e4e7ff",
+        "proposed": "#e4e4e7ff",
+        "verdict": "match",
+        "captured": "#e4e4e7ff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:1.background-color"
+      },
+      "states.false.disabled.trackOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:1.opacity — the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      "states.false.disabled.thumbFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:1.0.background-color"
+      },
+      "states.false.disabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:2.color"
+      },
+      "states.true.enabled.trackFill": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.background-color"
+      },
+      "states.true.enabled.trackOpacity": {
+        "fixture": 1,
+        "proposed": 1,
+        "verdict": "match",
+        "captured": 1,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.opacity — the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      "states.true.enabled.thumbFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.background-color"
+      },
+      "states.true.enabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:2.color"
+      },
+      "states.true.disabled.trackFill": {
+        "fixture": "#18181bff",
+        "proposed": "#18181bff",
+        "verdict": "match",
+        "captured": "#18181bff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:1.background-color"
+      },
+      "states.true.disabled.trackOpacity": {
+        "fixture": 0.5,
+        "proposed": 0.5,
+        "verdict": "match",
+        "captured": 0.5,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:1.opacity — the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      "states.true.disabled.thumbFill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:1.0.background-color"
+      },
+      "states.true.disabled.label": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:2.color"
+      },
+      "labelFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.font-size"
+      },
+      "rowAlign": {
+        "fixture": "center",
+        "proposed": "center",
+        "verdict": "receipt",
+        "provenance": "RECEIPT: flex align-items:center on the row — recipe spelling [reviewed center]"
+      },
+      "thumbShadow": {
+        "fixture": "color(srgb 0.0941176 0.0941176 0.105882 / 0.1) 0px 1.6px 3.2px 0px, color(srgb 0.0941176 0.0941176 0.105882 / 0.3) 0px 0px 0.8px 0px",
+        "proposed": "color(srgb 0.0941176 0.0941176 0.105882 / 0.1) 0px 1.6px 3.2px 0px, color(srgb 0.0941176 0.0941176 0.105882 / 0.3) 0px 0px 0.8px 0px",
+        "verdict": "match",
+        "captured": "color(srgb 0.0941176 0.0941176 0.105882 / 0.1) 0px 1.6px 3.2px 0px, color(srgb 0.0941176 0.0941176 0.105882 / 0.3) 0px 0px 0.8px 0px",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.box-shadow ; extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.scale — the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)"
+      },
+      "hitClips": {
+        "fixture": "false",
+        "proposed": "false",
+        "verdict": "match",
+        "captured": "false",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.overflow-x — overflow hidden on the hit → clips"
+      },
+      "trackClips": {
+        "fixture": "false",
+        "proposed": "false",
+        "verdict": "match",
+        "captured": "false",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.overflow-x — overflow hidden on the track → clips"
+      },
+      "typography.label.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.font-family"
+      },
+      "typography.label.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.font-weight"
       }
     }
   },

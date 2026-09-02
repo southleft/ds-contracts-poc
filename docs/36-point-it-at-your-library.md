@@ -5,8 +5,10 @@
 > one command from a capture of a real package to a program the shipped
 > plugin can run in any file. It works today for **two archetypes**
 > (checkbox@1 and switch@1) and has been proven on **two libraries the recipe
-> path was never taught**: Chakra UI, and shadcn — bare controls with no
-> label, colours declared in oklch. Everything it cannot do refuses by name.
+> path was never taught** — Chakra UI and shadcn — including one control
+> captured for the first time the same day (Chakra's Switch: a person wrote
+> the config entry, the command did the rest, four states pixel-identical).
+> Everything it cannot do refuses by name.
 
 ## The sentence this serves
 
@@ -78,6 +80,14 @@ README that repeats what was read, what you reviewed, and what to do next.
   line lowered to a rounded rectangle is three numbers and a sentence each.
 
 ## What it proved
+
+On Chakra's Switch — never captured before — the person's step was the seed
+contract and the config entry; the capture ran, the command proposed the
+fixture with no `--set` (33 read, 0 invented; a labelled control), and after
+the reader learned to lower a CSS-scaled thumb, all four states are
+pixel-identical to the package's render
+(`recipe/evidence/fidelity-v1/f1-chakra-switch/`). That is the sentence
+above, run end to end on one archetype.
 
 On shadcn's Switch — `--archetype switch --library shadcn` with no `--set`
 at all — the proposal read 25 leaves and invented none, and all four states

@@ -22,6 +22,7 @@ import {
 } from "../fixtures/generated/checkbox.shadcn.js";
 import { MUI_SWITCH_LEDGER as MUI_SWITCH_LEDGER_PROPOSED, muiSwitchAdapterConfig as muiSwitchProposedConfig, muiSwitchMappings as muiSwitchProposedMappings } from "../fixtures/generated/switch.mui.js";
 import { SHADCN_SWITCH_LEDGER, shadcnSwitchAdapterConfig, shadcnSwitchMappings } from "../fixtures/generated/switch.shadcn.js";
+import { CHAKRA_SWITCH_LEDGER, chakraSwitchAdapterConfig, chakraSwitchMappings } from "../fixtures/generated/switch.chakra.js";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { Ledger } from "./ledger.js";
@@ -452,6 +453,17 @@ const SUBJECTS: Subject[] = [
     tokens: shadcnSwitchAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: shadcnSwitchMappings,
     extras: extrasFor(shadcnSwitchAdapterConfig.tokens as unknown as Record<string, unknown>, shadcnSwitchMappings),
+  },
+  {
+    // PROPOSED from a capture made the same day (labelled Switch; config
+    // entry authored as the person's step): 33 leaves read, no --set.
+    archetype: "switch",
+    library: "chakra",
+    source: src(chakraSwitchAdapterConfig),
+    ledgerFile: CHAKRA_SWITCH_LEDGER,
+    tokens: chakraSwitchAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraSwitchMappings,
+    extras: extrasFor(chakraSwitchAdapterConfig.tokens as unknown as Record<string, unknown>, chakraSwitchMappings),
   },
   {
     archetype: "switch",

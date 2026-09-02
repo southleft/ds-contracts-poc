@@ -742,9 +742,11 @@
         "proposedValue": 0,
         "ledgerKeys": [
           "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.padding-left",
-          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-left-width"
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:1.border-left-width",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale"
         ],
-        "formula": "track padding-left + border-left-width (the content box starts after the border)"
+        "formula": "track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2"
       },
       {
         "path": "thumb.offSize",
@@ -753,8 +755,10 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width"
-        ]
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.width",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale"
+        ],
+        "formula": "thumb width × its CSS scale (none → 1)"
       },
       {
         "path": "thumb.onSize",
@@ -763,8 +767,10 @@
         "capturedValue": 20,
         "proposedValue": 20,
         "ledgerKeys": [
-          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width"
-        ]
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.width",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.checked.enabled__default idx:0.1.scale"
+        ],
+        "formula": "thumb width × its CSS scale (none → 1)"
       },
       {
         "path": "thumb.travel",
@@ -962,8 +968,10 @@
         "capturedValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
         "proposedValue": "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
         "ledgerKeys": [
-          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow"
-        ]
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.box-shadow",
+          "extract/computed/out/mui/switch/captured-truth.json#primary.medium.unchecked.enabled__default idx:0.1.scale"
+        ],
+        "formula": "the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)"
       },
       {
         "path": "hitClips",
@@ -1089,9 +1097,11 @@
         "proposedValue": 1,
         "ledgerKeys": [
           "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.padding-left",
-          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-left-width"
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default root.border-left-width",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.scale"
         ],
-        "formula": "track padding-left + border-left-width (the content box starts after the border)"
+        "formula": "track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2"
       },
       {
         "path": "thumb.offSize",
@@ -1100,8 +1110,10 @@
         "capturedValue": 16,
         "proposedValue": 16,
         "ledgerKeys": [
-          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width"
-        ]
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.width",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.scale"
+        ],
+        "formula": "thumb width × its CSS scale (none → 1)"
       },
       {
         "path": "thumb.onSize",
@@ -1110,8 +1122,10 @@
         "capturedValue": 16,
         "proposedValue": 16,
         "ledgerKeys": [
-          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width"
-        ]
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.width",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.checked.enabled__default idx:0.scale"
+        ],
+        "formula": "thumb width × its CSS scale (none → 1)"
       },
       {
         "path": "thumb.travel",
@@ -1313,8 +1327,10 @@
         "capturedValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
         "proposedValue": "rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px, oklch(0.145 0 0) 0px 0px 0px 0px, rgba(0, 0, 0, 0) 0px 0px 0px 0px",
         "ledgerKeys": [
-          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.box-shadow"
-        ]
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.box-shadow",
+          "extract/computed/out/shadcn/switch/captured-truth.json#default.unchecked.enabled__default idx:0.scale"
+        ],
+        "formula": "the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)"
       },
       {
         "path": "hitClips",
@@ -1359,6 +1375,381 @@
       "match": 25,
       "drift": 0,
       "receipt": 9,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "switch",
+    "library": "chakra",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Switch"
+    },
+    "ledgerFile": "extract/computed/out/chakra/switch/captured-truth.json",
+    "rows": [
+      {
+        "path": "wrapper.width",
+        "fixtureValue": 40,
+        "verdict": "match",
+        "capturedValue": 40,
+        "proposedValue": 40,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.width"
+        ]
+      },
+      {
+        "path": "wrapper.height",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.height"
+        ]
+      },
+      {
+        "path": "wrapper.padding",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.padding-left"
+        ]
+      },
+      {
+        "path": "track.width",
+        "fixtureValue": 40,
+        "verdict": "match",
+        "capturedValue": 40,
+        "proposedValue": 40,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.width"
+        ]
+      },
+      {
+        "path": "track.height",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.height"
+        ]
+      },
+      {
+        "path": "track.radius",
+        "fixtureValue": 9999,
+        "verdict": "match",
+        "capturedValue": 9999,
+        "proposedValue": 9999,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.border-top-left-radius"
+        ]
+      },
+      {
+        "path": "track.padding",
+        "fixtureValue": 2,
+        "verdict": "match",
+        "capturedValue": 2,
+        "proposedValue": 2,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.padding-left",
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.border-left-width",
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.width",
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.scale"
+        ],
+        "formula": "track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2"
+      },
+      {
+        "path": "thumb.offSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.width",
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.scale"
+        ],
+        "formula": "thumb width × its CSS scale (none → 1)"
+      },
+      {
+        "path": "thumb.onSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.width",
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.scale"
+        ],
+        "formula": "thumb width × its CSS scale (none → 1)"
+      },
+      {
+        "path": "thumb.travel",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.translate",
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.translate",
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.width"
+        ],
+        "formula": "translate x of the moving element on minus off (a calc() percentage is of the moving element's own width)"
+      },
+      {
+        "path": "row.gap",
+        "fixtureValue": 10,
+        "verdict": "match",
+        "capturedValue": 10,
+        "proposedValue": 10,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default root.column-gap"
+        ]
+      },
+      {
+        "path": "states.false.enabled.trackFill",
+        "fixtureValue": "#e4e4e7ff",
+        "verdict": "match",
+        "capturedValue": "#e4e4e7ff",
+        "proposedValue": "#e4e4e7ff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.false.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.background-color"
+        ]
+      },
+      {
+        "path": "states.false.enabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.trackFill",
+        "fixtureValue": "#e4e4e7ff",
+        "verdict": "match",
+        "capturedValue": "#e4e4e7ff",
+        "proposedValue": "#e4e4e7ff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:1.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.trackOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.false.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:1.0.background-color"
+        ]
+      },
+      {
+        "path": "states.false.disabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.disabled__default idx:2.color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.trackFill",
+        "fixtureValue": "#18181bff",
+        "verdict": "match",
+        "capturedValue": "#18181bff",
+        "proposedValue": "#18181bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.trackOpacity",
+        "fixtureValue": 1,
+        "verdict": "match",
+        "capturedValue": 1,
+        "proposedValue": 1,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.true.enabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:1.0.background-color"
+        ]
+      },
+      {
+        "path": "states.true.enabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.enabled__default idx:2.color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.trackFill",
+        "fixtureValue": "#18181bff",
+        "verdict": "match",
+        "capturedValue": "#18181bff",
+        "proposedValue": "#18181bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:1.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.trackOpacity",
+        "fixtureValue": 0.5,
+        "verdict": "match",
+        "capturedValue": 0.5,
+        "proposedValue": 0.5,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:1.opacity"
+        ],
+        "formula": "the thumb sits inside the track, so the track's CSS opacity dims both and is carried as-is"
+      },
+      {
+        "path": "states.true.disabled.thumbFill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:1.0.background-color"
+        ]
+      },
+      {
+        "path": "states.true.disabled.label",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#checked.disabled__default idx:2.color"
+        ]
+      },
+      {
+        "path": "labelFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.font-size"
+        ]
+      },
+      {
+        "path": "rowAlign",
+        "fixtureValue": "center",
+        "verdict": "receipt",
+        "proposedValue": "center",
+        "receipt": "flex align-items:center on the row — recipe spelling",
+        "evidence": "reviewed center"
+      },
+      {
+        "path": "thumbShadow",
+        "fixtureValue": "color(srgb 0.0941176 0.0941176 0.105882 / 0.1) 0px 1.6px 3.2px 0px, color(srgb 0.0941176 0.0941176 0.105882 / 0.3) 0px 0px 0.8px 0px",
+        "verdict": "match",
+        "capturedValue": "color(srgb 0.0941176 0.0941176 0.105882 / 0.1) 0px 1.6px 3.2px 0px, color(srgb 0.0941176 0.0941176 0.105882 / 0.3) 0px 0px 0.8px 0px",
+        "proposedValue": "color(srgb 0.0941176 0.0941176 0.105882 / 0.1) 0px 1.6px 3.2px 0px, color(srgb 0.0941176 0.0941176 0.105882 / 0.3) 0px 0px 0.8px 0px",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.box-shadow",
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.0.scale"
+        ],
+        "formula": "the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)"
+      },
+      {
+        "path": "hitClips",
+        "fixtureValue": "false",
+        "verdict": "match",
+        "capturedValue": "false",
+        "proposedValue": "false",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.overflow-x"
+        ],
+        "formula": "overflow hidden on the hit → clips"
+      },
+      {
+        "path": "trackClips",
+        "fixtureValue": "false",
+        "verdict": "match",
+        "capturedValue": "false",
+        "proposedValue": "false",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:1.overflow-x"
+        ],
+        "formula": "overflow hidden on the track → clips"
+      },
+      {
+        "path": "typography.label.family",
+        "fixtureValue": "Inter",
+        "verdict": "match",
+        "capturedValue": "Inter",
+        "proposedValue": "Inter",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.font-family"
+        ]
+      },
+      {
+        "path": "typography.label.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/switch/captured-truth.json#unchecked.enabled__default idx:2.font-weight"
+        ]
+      }
+    ],
+    "counts": {
+      "match": 33,
+      "drift": 0,
+      "receipt": 1,
       "unread": 0
     }
   },

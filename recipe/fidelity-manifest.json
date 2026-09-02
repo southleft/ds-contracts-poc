@@ -61,20 +61,20 @@
     },
     {
       "label": "switch/astryx",
-      "page": "218:88332",
+      "page": "218:88804",
       "set": "switch/set :: Astryx Switch",
       "variant": "Checked=false, Disabled=false",
       "child": "switch/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-astryx-hit-v10.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-astryx-hit-v12.png",
       "reference": "extract/computed/out/astryx-core/switch/orig-shots/end.no-isDisabled__default.png",
       "referenceControlOnly": true
     },
     {
       "label": "switch/mui",
-      "page": "218:88332",
+      "page": "218:88804",
       "set": "switch/set :: MUI Switch",
       "variant": "Checked=false, Disabled=false",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-variant-v10.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-variant-v12.png",
       "canvasBox": [
         0,
         0,
@@ -87,21 +87,21 @@
     },
     {
       "label": "switch/antd",
-      "page": "218:88332",
+      "page": "218:88804",
       "set": "switch/set :: Ant Design Switch",
       "variant": "Checked=false, Disabled=false",
       "child": "switch/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-antd-hit-v10.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-antd-hit-v12.png",
       "reference": "extract/computed/out/antd/switch/orig-shots/default.unchecked.enabled__default.png",
       "referenceControlOnly": true,
       "_fringeRetired": "2026-09-01: the 44x24-vs-44x22 band was NOT anti-aliasing \u2014 it was the handle's real drop shadow (handleShadow 0 2px 4px rgba(0,35,11,.2)) that the hand fixture recorded as none; found by the role schema re-derivation. The row must pass on its own now."
     },
     {
       "label": "switch/mui-proposed",
-      "page": "218:88332",
+      "page": "218:88804",
       "set": "switch/set :: MUI (proposed) Switch",
       "variant": "Checked=false, Disabled=false",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-proposed-variant-v10.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-mui-proposed-variant-v12.png",
       "canvasBox": [
         0,
         0,
@@ -115,14 +115,25 @@
     },
     {
       "label": "switch/shadcn",
-      "page": "218:88332",
+      "page": "218:88804",
       "set": "switch/set :: shadcn Switch",
       "variant": "Checked=false, Disabled=false",
       "child": "switch/hit",
-      "shot": "recipe/evidence/fidelity-v1/shots/switch-shadcn-hit-v10.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-shadcn-hit-v12.png",
       "reference": "extract/computed/out/shadcn/switch/orig-shots/default.unchecked.enabled__default.png",
       "referenceControlOnly": true,
       "_proposedWhy": "PROPOSED from shadcn's bare Switch (25 leaves read, 0 invented): oklch colours, a pill radius Chromium reports in exponent notation, a calc(100% - 2px) travel of the thumb's own width \u2014 the first switch the recipe path was pointed at rather than taught."
+    },
+    {
+      "label": "switch/chakra",
+      "page": "218:88804",
+      "set": "switch/set :: Chakra Switch",
+      "variant": "Checked=false, Disabled=false",
+      "child": "switch/hit",
+      "shot": "recipe/evidence/fidelity-v1/shots/switch-chakra-hit-v12.png",
+      "reference": "extract/computed/out/chakra/switch/orig-shots/unchecked.enabled__default.png",
+      "referenceControlOnly": true,
+      "_proposedWhy": "PROPOSED from a capture made the same day: Chakra's Switch had never been captured. A person authored the config entry and seed contract (the one input the reader cannot draft from a capture, because it makes the capture); the command then read 33 leaves with no --set and invented none \u2014 a labelled control, so the label path of the proposer measured too."
     },
     {
       "label": "radio/mui",

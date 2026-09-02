@@ -299,3 +299,19 @@ every interaction the harness captured that the archetype has no plane for.
     switch/mui-proposed  4.57%   = switch/mui, the same capture read by a person
 
     21 pass · 0 fringe · 7 known
+
+## 2026-09-02 (later) — the held-out capture: Chakra Switch, captured today, 0.00% ×4
+
+Chakra's Switch had never been captured. A person wrote the seed contract
+and the config entry (the composition from the package's own exports), the
+harness captured 16 combos with real screenshots, and `recipe:point`
+proposed the fixture with **no `--set`** (33 read, 0 invented). The first
+mint scored 9.35%: the thumb is a 20px box drawn at CSS `scale: 0.8`. The
+schema now lowers a scaled thumb — size × scale, inset from the scaled
+margin, shadow lengths × scale — and every state of switch v12 (page
+`218:88804`) is **pixel-identical**. Also read on the way: CSS Color 4
+`color(srgb …)` in shadow layers. See `f1-chakra-switch/README.md`.
+
+    switch/chakra  0.00%   (checked 0.00 · unchecked.disabled 0.00 · checked.disabled 0.00)
+
+    22 pass · 0 fringe · 7 known

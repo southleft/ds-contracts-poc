@@ -100,6 +100,16 @@ const txOf = (v: string, ref = 0): number => {
   return px(t.split(/\s+/)[0]!);
 };
 
+/** A CSS `scale` channel ("0.8", "none", "1 1") → the uniform factor; none → 1. */
+const scaleOf = (v: string | undefined): number => {
+  if (!v || v === "none") return 1;
+  const n = Number(v.trim().split(/\s+/)[0]);
+  if (!Number.isFinite(n)) throw new Error(`not a scale: "${v}"`);
+  return n;
+};
+/** Multiply every px length of a box-shadow list by `k` (a shadow on a scaled element scales with it). */
+const scaleShadow = (v: string, k: number): string => (k === 1 || v === "none" ? v : v.replace(/(-?\d+(?:\.\d+)?)px/g, (_, n) => `${Math.round(Number(n) * k * 1e4) / 1e4}px`));
+
 const one = (
   path: string,
   kind: "px" | "number" | "color" | "string",
@@ -135,13 +145,14 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
             // like padding does. padding-left + border-left-width.
             path: "track.padding",
             kind: "px",
-            reads: { p: { combo: off, part: roles.track, channel: "padding-left" }, b: { combo: off, part: roles.track, channel: "border-left-width" } },
-            formula: "track padding-left + border-left-width (the content box starts after the border)",
-            combine: (raw) => px(raw.p) + px(raw.b),
+            reads: { p: { combo: off, part: roles.track, channel: "padding-left" }, b: { combo: off, part: roles.track, channel: "border-left-width" }, w: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } },
+            formula: "track padding-left + border-left-width (the content box starts after the border) + the margin a CSS-scaled thumb leaves: width × (1 − scale) / 2",
+            combine: (raw) => px(raw.p) + px(raw.b) + (px(raw.w) * (1 - scaleOf(raw.s))) / 2,
           },
     ),
-    R("thumb.offSize", () => one("thumb.offSize", "px", { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" })),
-    R("thumb.onSize", () => one("thumb.onSize", "px", { combo: on, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" })),
+    // A thumb drawn at `scale` (Chakra: 20px × 0.8) paints at width × scale.
+    R("thumb.offSize", () => ({ path: "thumb.offSize", kind: "px", reads: { v: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } }, formula: "thumb width × its CSS scale (none → 1)", combine: (raw) => px(raw.v) * scaleOf(raw.s) })),
+    R("thumb.onSize", () => ({ path: "thumb.onSize", kind: "px", reads: { v: { combo: on, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "width" }, s: { combo: on, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } }, formula: "thumb width × its CSS scale (none → 1)", combine: (raw) => px(raw.v) * scaleOf(raw.s) })),
     R("thumb.travel", () =>
       roles.travelOn
         ? {
@@ -188,7 +199,7 @@ export function switchSchemaMappings(roles: SwitchRoles, opts: SwitchSchemaOptio
   rows.push(
     R("labelFontSize", () => (roles.label ? one("labelFontSize", "px", { combo: off, part: roles.label, channel: "font-size" }) : receipt("labelFontSize", NO_LABEL, "reviewed"))),
     receipt("rowAlign", "flex align-items:center on the row — recipe spelling", "reviewed center"),
-    R("thumbShadow", () => one("thumbShadow", "string", { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "box-shadow" })),
+    R("thumbShadow", () => ({ path: "thumbShadow", kind: "string", reads: { v: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "box-shadow" }, s: { combo: off, part: roles.thumb, pseudo: roles.thumbPseudo, channel: "scale" } }, formula: "the thumb's box-shadow with every length × its CSS scale (a shadow on a scaled element scales with it)", combine: (raw) => scaleShadow(raw.v, scaleOf(raw.s)) })),
     R("hitClips", () => one("hitClips", "string", { combo: off, part: roles.hit, channel: "overflow-x" }, { formula: "overflow hidden on the hit → clips", combine: (raw) => String(raw.v === "hidden" || raw.v === "clip") })),
     R("trackClips", () => one("trackClips", "string", { combo: off, part: roles.track, channel: "overflow-x" }, { formula: "overflow hidden on the track → clips", combine: (raw) => String(raw.v === "hidden" || raw.v === "clip") })),
     R("typography.label.family", () => (roles.label ? one("typography.label.family", "string", { combo: off, part: roles.label, channel: "font-family" }, { combine: firstFam }) : receipt("typography.label.family", NO_LABEL, "reviewed"))),

@@ -1,0 +1,77 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "switch-live-pivot-v11-prepare",
+  "teaching": "AntD Switch ON inset matches OFF: compile travel 22 from named handle travel calc(100% - handleSize - trackPadding)",
+  "runIdentity": "3ba64ebc-4b939b9e-6211639b-81fc98c9-a68d9a8f-71df678c-switch-v11",
+  "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-6211639b-81fc98c9-a68d9a8f-71df678c-switch-v11",
+  "namespace": "ds.contracts.switch.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "3ba64ebca7ac7eaff7dfe84dbc120a4d6b060812be7faffc9ccd66aa9f0bcb73",
+    "MUI": "4b939b9e867ec77b6c74712c55fef72f707b463eb4c95c09d9992075184da3ff",
+    "Ant Design": "6211639b98921062c6325fe77ff66f980e6daa7c431cc91d5734c2ab66c8015c",
+    "MUI (proposed)": "81fc98c9f2aa187c3d5ea67f4120f061d25c60238ee5e7dd17f41065507ed186",
+    "shadcn": "a68d9a8f4b975fcf701313ee8aced71958095146bcfa85c371988415b3e32af0",
+    "Chakra": "71df678ca986d7c070ba6c2b76da543c636f8efcb2a47ab9d32437d2d581e026"
+  },
+  "writerSha256": "976730a62fa6a95fb365f1f0d7981d221e5712c0153de3a234378c0731fdc35d",
+  "pageId": "218:88545",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=218-88545",
+  "live": {
+    "recordedFrom": "switch-v11-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-6211639b-81fc98c9-a68d9a8f-71df678c-switch-v11",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-switch-reviewed-v1",
+        "sectionId": "218:88546",
+        "setId": "218:88591",
+        "collectionId": "VariableCollectionId:218:88547",
+        "variantCount": 4,
+        "comparedIrFacts": 99
+      },
+      {
+        "adapterIdentity": "mui-switch-reviewed-v1",
+        "sectionId": "218:88592",
+        "setId": "218:88637",
+        "collectionId": "VariableCollectionId:218:88593",
+        "variantCount": 4,
+        "comparedIrFacts": 99
+      },
+      {
+        "adapterIdentity": "antd-switch-reviewed-v1",
+        "sectionId": "218:88638",
+        "setId": "218:88683",
+        "collectionId": "VariableCollectionId:218:88639",
+        "variantCount": 4,
+        "comparedIrFacts": 99
+      },
+      {
+        "adapterIdentity": "mui-switch-proposed-v1",
+        "sectionId": "218:88684",
+        "setId": "218:88720",
+        "collectionId": "VariableCollectionId:218:88685",
+        "variantCount": 4,
+        "comparedIrFacts": 87
+      },
+      {
+        "adapterIdentity": "shadcn-switch-proposed-v1",
+        "sectionId": "218:88721",
+        "setId": "218:88757",
+        "collectionId": "VariableCollectionId:218:88722",
+        "variantCount": 4,
+        "comparedIrFacts": 87
+      },
+      {
+        "adapterIdentity": "chakra-switch-proposed-v1",
+        "sectionId": "218:88758",
+        "setId": "218:88803",
+        "collectionId": "VariableCollectionId:218:88759",
+        "variantCount": 4,
+        "comparedIrFacts": 99
+      }
+    ]
+  }
+}

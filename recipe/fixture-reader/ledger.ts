@@ -195,8 +195,19 @@ export function hex8(v: string): string {
     const a = rgb[4] === undefined ? 1 : Number(rgb[4]);
     return `#${h(r)}${h(g)}${h(b)}${h(Math.round(a * 255))}`;
   }
+  // CSS Color 4 color(srgb r g b / a): components in [0,1], already sRGB —
+  // Chakra's shadow tokens arrive this way. Any other colour space (display-p3,
+  // rec2020…) is refused by name rather than carried as its sRGB cousin.
+  const fn = /^color\(\s*([a-z0-9-]+)\s+([\d.]+%?)\s+([\d.]+%?)\s+([\d.]+%?)\s*(?:\/\s*([\d.]+%?))?\s*\)$/i.exec(v);
+  if (fn) {
+    if (fn[1]!.toLowerCase() !== "srgb") throw new LedgerReadError(`color(${fn[1]} …) is not sRGB — not carried as its sRGB cousin: "${v}"`);
+    const unit = (t: string): number => (t.endsWith("%") ? Number(t.slice(0, -1)) / 100 : Number(t));
+    const ch = (t: string): number => Math.round(Math.min(1, Math.max(0, unit(t))) * 255);
+    const fa = fn[5] === undefined ? 1 : unit(fn[5]);
+    return `#${h(ch(fn[2]!))}${h(ch(fn[3]!))}${h(ch(fn[4]!))}${h(Math.round(fa * 255))}`;
+  }
   const ok = /^oklch\(\s*([\d.]+%?)\s+([\d.]+%?)\s+([-\d.]+)(?:deg)?\s*(?:\/\s*([\d.]+%?))?\s*\)$/.exec(v);
-  if (!ok) throw new LedgerReadError(`not an rgb()/rgba()/oklch() color: "${v}"`);
+  if (!ok) throw new LedgerReadError(`not an rgb()/rgba()/oklch()/color(srgb) color: "${v}"`);
   const pct = (t: string, scale: number): number => (t.endsWith("%") ? (Number(t.slice(0, -1)) / 100) * scale : Number(t));
   const L = pct(ok[1]!, 1), C = pct(ok[2]!, 0.4), H = Number(ok[3]);
   const alpha = ok[4] === undefined ? 1 : pct(ok[4], 1);

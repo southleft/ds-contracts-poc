@@ -1,0 +1,63 @@
+{
+  "pageName": "Recipe Pivot / Switch / 3ba64ebc-4b939b9e-6211639b-81fc98c9-a68d9a8f-71df678c-switch-v11",
+  "runIdentity": "3ba64ebc-4b939b9e-6211639b-81fc98c9-a68d9a8f-71df678c-switch-v11",
+  "namespace": "ds.contracts.switch.recipe.v1",
+  "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+  "teaching": "switch@1 AntD thumb.travel is the delta 22 (track 44 − handle 18 − 2×padding 2), not the ON inset 24. Old stay 183:75302 refused.",
+  "sources": [
+    {
+      "adapterIdentity": "astryx-switch-reviewed-v1",
+      "displayName": "Astryx",
+      "recipeHash": "3ba64ebca7ac7eaff7dfe84dbc120a4d6b060812be7faffc9ccd66aa9f0bcb73",
+      "envelopeHash": "0bf61c0f6f24c5274ec2ac98ba3a8998b5547f321a47fbd21d7b66df532fa784",
+      "variantCount": 4,
+      "variableCount": 23,
+      "comparedIrFacts": 99
+    },
+    {
+      "adapterIdentity": "mui-switch-reviewed-v1",
+      "displayName": "MUI",
+      "recipeHash": "4b939b9e867ec77b6c74712c55fef72f707b463eb4c95c09d9992075184da3ff",
+      "envelopeHash": "7c5c7a6bc5e39ea82323a4cf5dce5f1057c4230fb4a31b51e2dbb1738ab3954a",
+      "variantCount": 4,
+      "variableCount": 23,
+      "comparedIrFacts": 99
+    },
+    {
+      "adapterIdentity": "antd-switch-reviewed-v1",
+      "displayName": "Ant Design",
+      "recipeHash": "6211639b98921062c6325fe77ff66f980e6daa7c431cc91d5734c2ab66c8015c",
+      "envelopeHash": "b4ccaf3ac0a8d66dc26093e604e293b6480288fb5e3fa3eac99a5893eae1b668",
+      "variantCount": 4,
+      "variableCount": 23,
+      "comparedIrFacts": 99
+    },
+    {
+      "adapterIdentity": "mui-switch-proposed-v1",
+      "displayName": "MUI (proposed)",
+      "recipeHash": "81fc98c9f2aa187c3d5ea67f4120f061d25c60238ee5e7dd17f41065507ed186",
+      "envelopeHash": "ec04010ea60fa216a3a15abd10817e1f6effbc0c16fb51d91cddfe6bd6802192",
+      "variantCount": 4,
+      "variableCount": 18,
+      "comparedIrFacts": 87
+    },
+    {
+      "adapterIdentity": "shadcn-switch-proposed-v1",
+      "displayName": "shadcn",
+      "recipeHash": "a68d9a8f4b975fcf701313ee8aced71958095146bcfa85c371988415b3e32af0",
+      "envelopeHash": "dca0cf45d47214d1cc369a8240d87f6ce0909ea9226115b3cfdcdb2c4b0ef13f",
+      "variantCount": 4,
+      "variableCount": 18,
+      "comparedIrFacts": 87
+    },
+    {
+      "adapterIdentity": "chakra-switch-proposed-v1",
+      "displayName": "Chakra",
+      "recipeHash": "71df678ca986d7c070ba6c2b76da543c636f8efcb2a47ab9d32437d2d581e026",
+      "envelopeHash": "47dc64287c81f4ac91c5cd4019cb51f5e7ea9f04ec1cad04056168524a298f9f",
+      "variantCount": 4,
+      "variableCount": 23,
+      "comparedIrFacts": 99
+    }
+  ]
+}

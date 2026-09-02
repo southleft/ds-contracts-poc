@@ -1,0 +1,60 @@
+{
+  "artifactVersion": "recipe-fidelity-v1",
+  "label": "switch/chakra/checked.enabled",
+  "status": "pass",
+  "bar": {
+    "pctAAMaskedMax": 5
+  },
+  "metrics": {
+    "pctExactUnmasked": 17.25,
+    "pctAAUnmasked": 0,
+    "pctAAMasked": 0,
+    "canvasPx": "40x20",
+    "realPx": "40x20",
+    "inkCanvasPct": 69.5,
+    "inkRealPct": 69
+  },
+  "canvas": {
+    "path": "recipe/evidence/fidelity-v1/f1-chakra-switch/canvas-checked.enabled.png",
+    "sha256": "babe20aa09a07ea99578d2e096da08147157c9a69669b34afa72dc96dd156f98"
+  },
+  "reference": {
+    "path": "extract/computed/out/chakra/switch/orig-shots/checked.enabled__default.png",
+    "sha256": "2bdd0d148687ea36684093f2126008979acbe4faf6785fcc736798b55db4622f"
+  },
+  "diff": "recipe/evidence/fidelity-v1/f1-chakra-switch/score-checked.enabled.diff.png",
+  "referenceCroppedToControl": true,
+  "canvasCroppedToControl": false,
+  "thresholdSweep": [
+    {
+      "threshold": 250,
+      "canvas": "40x20",
+      "reference": "40x20",
+      "agree": true
+    },
+    {
+      "threshold": 245,
+      "canvas": "40x20",
+      "reference": "40x20",
+      "agree": true
+    },
+    {
+      "threshold": 240,
+      "canvas": "40x20",
+      "reference": "40x20",
+      "agree": true
+    },
+    {
+      "threshold": 230,
+      "canvas": "40x20",
+      "reference": "40x20",
+      "agree": true
+    }
+  ],
+  "caveats": [
+    "One state of one component. A pass here is not a pass for the archetype.",
+    "A near-blank canvas side scores a deceptively low diff — read inkCanvasPct and inkRealPct beside every number.",
+    "The reference is one MOUNT of the library. Astryx renders differently under @astryxdesign/core alone than under <Theme theme={neutralTheme}>; score against the mount the fixture actually transcribes.",
+    "This measures appearance only. It says nothing about token binding, variant axes or usability, which the recipe gates cover."
+  ]
+}

@@ -1,0 +1,2331 @@
+{
+  "component": "Switch",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 4,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 2912,
+    "cellsEqual": 2580,
+    "pctEqual": 88.5989010989011,
+    "rowsFullyEqual": 0,
+    "rows": 16
+  },
+  "pixel": {
+    "pairs": 16,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 16,
+    "unscored": {
+      "sizeMismatch": 0,
+      "noOriginal": 0,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": 4.902954101562499,
+    "meanAA": 3.0834960937500004,
+    "maxAA": 4.173177083333333
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 37,
+    "mintedLeavesUnfolded": 35,
+    "baseBindings": 81,
+    "stateBindings": 8,
+    "codeOnlyChannels": 18,
+    "overflowBindings": 8,
+    "folds": 32
+  },
+  "worstRows": [
+    {
+      "key": "checked.enabled__focus-visible",
+      "pctAA": 4.173177083333333,
+      "pctExact": 5.901692708333333,
+      "channelsMismatched": 22
+    },
+    {
+      "key": "checked.disabled__default",
+      "pctAA": 3.8899739583333335,
+      "pctExact": 5.325520833333333,
+      "channelsMismatched": 22
+    },
+    {
+      "key": "checked.disabled__hover",
+      "pctAA": 3.8899739583333335,
+      "pctExact": 5.325520833333333,
+      "channelsMismatched": 22
+    },
+    {
+      "key": "checked.disabled__focus-visible",
+      "pctAA": 3.8899739583333335,
+      "pctExact": 5.325520833333333,
+      "channelsMismatched": 22
+    },
+    {
+      "key": "checked.disabled__active",
+      "pctAA": 3.8899739583333335,
+      "pctExact": 5.325520833333333,
+      "channelsMismatched": 22
+    },
+    {
+      "key": "checked.enabled__default",
+      "pctAA": 3.5872395833333335,
+      "pctExact": 5.026041666666667,
+      "channelsMismatched": 20
+    },
+    {
+      "key": "checked.enabled__hover",
+      "pctAA": 3.5872395833333335,
+      "pctExact": 5.026041666666667,
+      "channelsMismatched": 20
+    },
+    {
+      "key": "checked.enabled__active",
+      "pctAA": 3.5872395833333335,
+      "pctExact": 5.026041666666667,
+      "channelsMismatched": 20
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.overflow-wrap",
+      16
+    ],
+    [
+      "root.text-size-adjust",
+      16
+    ],
+    [
+      "root.unicode-bidi",
+      16
+    ],
+    [
+      "root.vertical-align",
+      16
+    ],
+    [
+      "part-0.clip",
+      16
+    ],
+    [
+      "part-0.overflow-x",
+      16
+    ],
+    [
+      "part-0.overflow-y",
+      16
+    ],
+    [
+      "part-0.text-size-adjust",
+      16
+    ],
+    [
+      "switch__control.--bg-currentcolor",
+      16
+    ],
+    [
+      "switch__control.overflow-wrap",
+      16
+    ],
+    [
+      "switch__control.text-size-adjust",
+      16
+    ],
+    [
+      "switch__control.transition-behavior",
+      16
+    ],
+    [
+      "switch__control.unicode-bidi",
+      16
+    ],
+    [
+      "switch__thumb.overflow-wrap",
+      16
+    ],
+    [
+      "switch__thumb.text-size-adjust",
+      16
+    ]
+  ],
+  "namedLosses": [
+    "overflow: label.opacity [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: switch__control.opacity [disabled] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-0.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-0.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: part-0.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: switch__control.outline-color [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: switch__control.outline-offset [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "overflow: switch__control.outline-width [focus-visible] — v13 Part.states carries plain color-kind refs only on non-root parts",
+    "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: root.vertical-align — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <label>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <label> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-0.clip — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: part-0.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <input>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <input> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: switch__control.--bg-currentcolor — CSS custom property, not a styled channel — `--bg-currentcolor` is a token DECLARATION the library sets on this element, not a rendered fact of the component. Its value may well be mintable (this one is `#e4e4e7`); the refusal is the CHANNEL's nature, not the value's shape. The token belongs to the library's token system and is carried there if anywhere; the component contract has no channel for \"declares a custom property\" and should not invent one.",
+    "code-only: switch__control.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: switch__control.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: switch__control.transition-behavior — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: switch__control.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: switch__thumb.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: switch__thumb.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: switch__thumb.translate — declared-channel value varies across combos — declared facts carry uniform values only (v15); named residue",
+    "code-only: switch__thumb.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/chakra/tokens/chakra-minted.dtcg.json",
+    "leavesAdded": 0,
+    "bootstrap": true,
+    "note": "measured without a shipped minted tree — this library has never promoted one (tokens.mintedBootstrap). The gate inventory is base + this run's FRESH mint only; re-run the harness after the first promotion to measure against the shipped tree.",
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "unchecked.enabled__default",
+      "channelsCompared": 182,
+      "channelsEqual": 163,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 2.2688802083333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.enabled__hover",
+      "channelsCompared": 182,
+      "channelsEqual": 163,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 2.2688802083333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.enabled__focus-visible",
+      "channelsCompared": 182,
+      "channelsEqual": 161,
+      "pctExact": 4.694010416666667,
+      "pctAA": 2.841796875,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "outline-color",
+          "ours": "rgba(9, 9, 11, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "outline-color",
+          "ours": "rgba(9, 9, 11, 1)",
+          "theirs": "rgba(161, 161, 170, 1)"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.enabled__active",
+      "channelsCompared": 182,
+      "channelsEqual": 163,
+      "pctExact": 3.8020833333333335,
+      "pctAA": 2.2688802083333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__default",
+      "channelsCompared": 182,
+      "channelsEqual": 161,
+      "pctExact": 5.016276041666667,
+      "pctAA": 2.2981770833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__hover",
+      "channelsCompared": 182,
+      "channelsEqual": 161,
+      "pctExact": 5.016276041666667,
+      "pctAA": 2.2981770833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__focus-visible",
+      "channelsCompared": 182,
+      "channelsEqual": 161,
+      "pctExact": 5.016276041666667,
+      "pctAA": 2.2981770833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "unchecked.disabled__active",
+      "channelsCompared": 182,
+      "channelsEqual": 161,
+      "pctExact": 5.016276041666667,
+      "pctAA": 2.2981770833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#e4e4e7"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__default",
+      "channelsCompared": 182,
+      "channelsEqual": 162,
+      "pctExact": 5.026041666666667,
+      "pctAA": 3.5872395833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__hover",
+      "channelsCompared": 182,
+      "channelsEqual": 162,
+      "pctExact": 5.026041666666667,
+      "pctAA": 3.5872395833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__focus-visible",
+      "channelsCompared": 182,
+      "channelsEqual": 160,
+      "pctExact": 5.901692708333333,
+      "pctAA": 4.173177083333333,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "outline-color",
+          "ours": "rgba(9, 9, 11, 1)",
+          "theirs": "rgba(0, 95, 204, 1)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "outline-color",
+          "ours": "rgba(9, 9, 11, 1)",
+          "theirs": "rgba(161, 161, 170, 1)"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.enabled__active",
+      "channelsCompared": 182,
+      "channelsEqual": 162,
+      "pctExact": 5.026041666666667,
+      "pctAA": 3.5872395833333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__default",
+      "channelsCompared": 182,
+      "channelsEqual": 160,
+      "pctExact": 5.325520833333333,
+      "pctAA": 3.8899739583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__hover",
+      "channelsCompared": 182,
+      "channelsEqual": 160,
+      "pctExact": 5.325520833333333,
+      "pctAA": 3.8899739583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__focus-visible",
+      "channelsCompared": 182,
+      "channelsEqual": 160,
+      "pctExact": 5.325520833333333,
+      "pctAA": 3.8899739583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    },
+    {
+      "key": "checked.disabled__active",
+      "channelsCompared": 182,
+      "channelsEqual": 160,
+      "pctExact": 5.325520833333333,
+      "pctAA": 3.8899739583333335,
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "root",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "root",
+          "channel": "vertical-align",
+          "ours": "baseline",
+          "theirs": "middle"
+        },
+        {
+          "part": "part-0",
+          "channel": "clip",
+          "ours": "auto",
+          "theirs": "rect(0px, 0px, 0px, 0px)"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-x",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "overflow-y",
+          "ours": "clip",
+          "theirs": "hidden"
+        },
+        {
+          "part": "part-0",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "--bg-currentcolor",
+          "ours": "",
+          "theirs": "#18181b"
+        },
+        {
+          "part": "switch__control",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__control",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__control",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__control",
+          "channel": "transition-behavior",
+          "ours": "normal",
+          "theirs": "normal, normal, normal, normal"
+        },
+        {
+          "part": "switch__control",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "cursor",
+          "ours": "pointer",
+          "theirs": "not-allowed"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "translate",
+          "ours": "none",
+          "theirs": "20px"
+        },
+        {
+          "part": "switch__thumb",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "unicode-bidi",
+          "ours": "normal",
+          "theirs": "isolate"
+        }
+      ]
+    }
+  ]
+}

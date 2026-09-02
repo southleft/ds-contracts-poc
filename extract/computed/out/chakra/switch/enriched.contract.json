@@ -1,0 +1,360 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.switch",
+  "name": "Switch",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Switch capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Canonical composition pinned from Chakra docs and the package's flat exports: SwitchRoot ⊃ (SwitchHiddenInput, SwitchControl ⊃ SwitchThumb, SwitchLabel). Authored 2026-09-02 as the person's step of docs/36 (the capture config is the one thing the reader cannot draft from a capture, because it makes the capture). `checked` is declared as the two-value enum the harness enumerates (extract/bool-axis-props.ts: booleans ride stateProps; the axis is the enum), the same discipline as the checkbox seed. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "center"
+      },
+      "parts": {
+        "part-0": {
+          "element": "input",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy input||sr-only — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "none",
+            "appearance": "auto",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "overflow-x": "hidden",
+            "overflow-y": "hidden",
+            "position": "absolute",
+            "text-wrap-mode": "nowrap"
+          },
+          "declaredStates": {
+            "focus-visible": {
+              "outline-style": "auto"
+            }
+          },
+          "tokens": {
+            "bottom": "{imported.switch.part-0.bottom}",
+            "color": "{imported.shared.color-09090b}",
+            "height": "{imported.switch.part-0.height}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-24}",
+            "margin-bottom": "{imported.shared.size-neg-1}",
+            "margin-left": "{imported.shared.size-neg-1}",
+            "margin-right": "{imported.shared.size-neg-1}",
+            "margin-top": "{imported.shared.size-neg-1}",
+            "min-height": "{imported.shared.size-0}",
+            "min-width": "{imported.shared.size-0}",
+            "outline-color": "{imported.shared.color-09090b}",
+            "right": "{imported.switch.part-0.right}",
+            "tab-size": "{imported.shared.num-4}",
+            "top": "{imported.switch.part-0.top}",
+            "width": "{imported.switch.part-0.width}"
+          },
+          "codeOnly": [
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#005fcc",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "1px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        },
+        "switch__control": {
+          "element": "span",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|switch__control — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "justify": "start"
+          },
+          "parts": {
+            "switch__thumb": {
+              "element": "span",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy span|switch__thumb — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex",
+                "align": "center",
+                "justify": "center"
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "cursor": "pointer",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                "font-feature-settings": "\"cv11\"",
+                "text-rendering": "optimizelegibility",
+                "transition-duration": "0.15s",
+                "transition-property": "translate"
+              },
+              "declaredStates": {
+                "disabled": {
+                  "cursor": "not-allowed"
+                }
+              },
+              "tokens": {
+                "background-color": "{imported.switch.switch-thumb.background-color}",
+                "border-bottom-color": "{imported.shared.color-e4e4e7}",
+                "border-bottom-left-radius": "{imported.shared.size-9999}",
+                "border-bottom-right-radius": "{imported.shared.size-9999}",
+                "border-left-color": "{imported.shared.color-e4e4e7}",
+                "border-right-color": "{imported.shared.color-e4e4e7}",
+                "border-top-color": "{imported.shared.color-e4e4e7}",
+                "border-top-left-radius": "{imported.shared.size-9999}",
+                "border-top-right-radius": "{imported.shared.size-9999}",
+                "box-shadow": "{imported.switch.switch-thumb.box-shadow}",
+                "color": "{imported.shared.color-09090b}",
+                "flex-shrink": "{imported.switch.switch-thumb.flex-shrink}",
+                "height": "{imported.shared.size-20}",
+                "line-height": "{imported.shared.size-24}",
+                "scale": "{imported.switch.switch-thumb.scale}",
+                "tab-size": "{imported.shared.num-4}",
+                "translate-y": "{imported.shared.size-0}",
+                "width": "{imported.shared.size-20}"
+              },
+              "tokensByProp": [
+                {
+                  "prop": "checked",
+                  "map": {
+                    "checked": {
+                      "translate-x": "{imported.switch.switch-thumb.translate-x.checked}"
+                    },
+                    "unchecked": {
+                      "translate-x": "{imported.switch.switch-thumb.translate-x.unchecked}"
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "pointer",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "position": "relative",
+            "text-rendering": "optimizelegibility",
+            "transition-delay": "0s, 0s, 0s, 0s",
+            "transition-duration": "0.15s",
+            "transition-property": "background, background-color, background-image, background-position",
+            "transition-timing-function": "cubic-bezier(0.4, 0, 0.2, 1)"
+          },
+          "declaredStates": {
+            "disabled": {
+              "cursor": "not-allowed"
+            },
+            "focus-visible": {
+              "outline-style": "solid"
+            }
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-bottom-left-radius": "{imported.shared.size-9999}",
+            "border-bottom-right-radius": "{imported.shared.size-9999}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "border-top-left-radius": "{imported.shared.size-9999}",
+            "border-top-right-radius": "{imported.shared.size-9999}",
+            "bottom": "{imported.shared.size-0}",
+            "color": "{imported.shared.color-09090b}",
+            "column-gap": "{imported.switch.switch-control.column-gap}",
+            "flex-shrink": "{imported.switch.switch-control.flex-shrink}",
+            "height": "{imported.shared.size-20}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-24}",
+            "outline-color": "{imported.shared.color-09090b}",
+            "right": "{imported.shared.size-0}",
+            "row-gap": "{imported.switch.switch-control.row-gap}",
+            "tab-size": "{imported.shared.num-4}",
+            "top": "{imported.shared.size-0}",
+            "width": "{imported.switch.switch-control.width}"
+          },
+          "tokensByProp": [
+            {
+              "prop": "checked",
+              "map": {
+                "checked": {
+                  "background-color": "{imported.switch.switch-control.background-color.checked}"
+                },
+                "unchecked": {
+                  "background-color": "{imported.switch.switch-control.background-color.unchecked}"
+                }
+              }
+            }
+          ],
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "opacity",
+              "value": "0.5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-color",
+              "value": "#a1a1aa",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-offset",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            },
+            {
+              "state": "focus-visible",
+              "channel": "outline-width",
+              "value": "2px",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        },
+        "label": {
+          "text": "Enable",
+          "description": "Promoted from the computed floor (round 4): rendered anatomy span|switch__label — this element exists in the real component's DOM; the static layer had no part for it.",
+          "declared": {
+            "display": "block",
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "cursor": "default",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "text-rendering": "optimizelegibility",
+            "user-select": "none"
+          },
+          "tokens": {
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "color": "{imported.shared.color-09090b}",
+            "font-size": "{imported.switch.label.font-size}",
+            "font-weight": "{imported.switch.label.font-weight}",
+            "line-height": "{imported.switch.label.line-height}",
+            "tab-size": "{imported.shared.num-4}"
+          },
+          "codeOnly": [
+            {
+              "state": "disabled",
+              "channel": "opacity",
+              "value": "0.5",
+              "reason": "v13 Part.states carries plain color-kind refs only on non-root parts"
+            }
+          ]
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "cursor": "default",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "position": "relative",
+        "text-rendering": "optimizelegibility"
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "bottom": "{imported.shared.size-0}",
+        "color": "{imported.shared.color-09090b}",
+        "column-gap": "{imported.switch.root.column-gap}",
+        "height": "{imported.shared.size-20}",
+        "left": "{imported.shared.size-0}",
+        "line-height": "{imported.shared.size-24}",
+        "right": "{imported.shared.size-0}",
+        "row-gap": "{imported.switch.root.row-gap}",
+        "tab-size": "{imported.shared.num-4}",
+        "top": "{imported.shared.size-0}",
+        "width": "{imported.switch.root.width}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "SwitchRoot"
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.switch",
+  "name": "Switch",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Switch capture \u2014 props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Canonical composition pinned from Chakra docs and the package's flat exports: SwitchRoot \u2283 (SwitchHiddenInput, SwitchControl \u2283 SwitchThumb, SwitchLabel). Authored 2026-09-02 as the person's step of docs/36 (the capture config is the one thing the reader cannot draft from a capture, because it makes the capture). `checked` is declared as the two-value enum the harness enumerates (extract/bool-axis-props.ts: booleans ride stateProps; the axis is the enum), the same discipline as the checkbox seed.",
+  "semantics": {
+    "element": "label"
+  },
+  "props": [
+    {
+      "name": "checked",
+      "type": {
+        "enum": [
+          "unchecked",
+          "checked"
+        ]
+      },
+      "default": "unchecked",
+      "bindings": {
+        "figma": {
+          "kind": "VARIANT",
+          "property": "Checked",
+          "values": {
+            "unchecked": "Unchecked",
+            "checked": "Checked"
+          }
+        },
+        "code": {
+          "prop": "checked"
+        }
+      }
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "default": false,
+      "bindings": {
+        "figma": {
+          "kind": "BOOLEAN",
+          "property": "Disabled"
+        },
+        "code": {
+          "prop": "disabled"
+        }
+      }
+    }
+  ],
+  "states": [
+    "disabled",
+    "focus-visible",
+    "active",
+    "hover"
+  ],
+  "anatomy": {
+    "root": {}
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "SwitchRoot"
+      }
+    }
+  }
+}

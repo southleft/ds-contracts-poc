@@ -1,0 +1,22 @@
+{
+  "_marker": "EMOTION/CSS-VARS READER — SOURCE facts: the library's own emitted CSS named these tokens (var references verified against captured computed values, one indirection hop followed). The promote step aliases matching minted leaves; never auto-applied here.",
+  "component": "Switch",
+  "varPrefix": "--chakra-",
+  "facts": [],
+  "skips": [
+    "label.font-size: candidate --chakra-font-sizes-sm → \"font-sizes-sm\" = 0.875rem (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "label.font-weight: candidate --chakra-font-weights-medium → \"font-weights-medium\" = 500 (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "switch__control.cursor: candidate --chakra-cursor-switch → \"cursor-switch\" = pointer (value MATCHES the computed value) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind. The VALUE is right and only the NAME is unrecoverable: this is the shape of a semantic-over-primitive INDIRECTION (the referenced custom property is itself defined as var(<primitive>)), and the reader follows exactly ONE hop — the primitive behind the alias is never reached.",
+    "switch__thumb.box-shadow: candidate --chakra-shadows-sm → \"shadows-sm\" = 0px 2px 4px color-mix(in srgb, #18181b 10%, transparent),0px 0px 1px color-mix(in srgb, #18181b 30%, transparent) (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "switch__thumb.transition-duration: candidate --chakra-durations-fast → \"durations-fast\" = 150ms (value differs) — no candidate names a leaf of this library's DTCG token file, so there is no NAME to bind.",
+    "root.--switch-diff: source declares `calc(var(--switch-width) - var(--switch-height))` — a calc() over var(--switch-height, --switch-width). The computed value is the RESULT of the arithmetic, not the token's own value, so no candidate can verify by value equality and the token NAME is not carried (the calc ceiling). The resolved pixel is correct; only the name is lost."
+  ],
+  "shorthandCeiling": 1,
+  "shorthandSkips": [
+    "switch__control.background: SHORTHAND carrying var(--chakra-colors-color-palette-solid) — computed style enumerates LONGHANDS only, so a shorthand with a var() (a CSS pending-substitution value) has no computed value to verify against; the token this declaration names is NOT carried on any longhand it sets (the shorthand ceiling, task #27)"
+  ],
+  "calcDeclarations": 1,
+  "calcCeiling": 1,
+  "stylesheetCeiling": 0,
+  "stylesheetSkips": []
+}

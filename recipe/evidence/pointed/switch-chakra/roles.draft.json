@@ -1,0 +1,51 @@
+{
+  "roles": {
+    "track": "idx:1",
+    "thumb": "idx:1.0",
+    "thumbInsideTrack": true,
+    "travelOn": "idx:1.0",
+    "travelChannel": "translate",
+    "hit": "idx:1",
+    "label": "idx:2",
+    "row": "root"
+  },
+  "combos": {
+    "false.enabled": "unchecked.enabled",
+    "false.disabled": "unchecked.disabled",
+    "true.enabled": "checked.enabled",
+    "true.disabled": "checked.disabled"
+  },
+  "evidence": {
+    "track": {
+      "selector": "idx:1",
+      "why": "pill 40px×20px r=9999px span.chakra-switch__control paint rgba(228, 228, 231, 1) → rgba(24, 24, 27, 1)",
+      "confidence": "high"
+    },
+    "thumb": {
+      "selector": "idx:1.0",
+      "why": "round 20px span.chakra-switch__thumb bg rgba(255, 255, 255, 1) — INSIDE the track (opacity carried on the track)",
+      "confidence": "high"
+    },
+    "travelOn": {
+      "selector": "idx:1.0",
+      "why": "span.chakra-switch__thumb translate none → 20px",
+      "confidence": "high"
+    },
+    "hit": {
+      "selector": "idx:1",
+      "why": "the track is its own hit area",
+      "confidence": "medium"
+    },
+    "label": {
+      "selector": "idx:2",
+      "why": "span.chakra-switch__label carries text \"Enable\"",
+      "confidence": "high"
+    },
+    "row": {
+      "selector": "root",
+      "why": "nearest common ancestor of track and label: label display flex column-gap 10px",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

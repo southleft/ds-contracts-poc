@@ -106,6 +106,12 @@ ledger `extract/computed/out/shadcn/switch/captured-truth.json` · 34 facts: **2
 
 No drift — every mapped fact equals the ledger value (or is a named receipt).
 
+### chakra — @chakra-ui/react@3.37.0#Switch
+
+ledger `extract/computed/out/chakra/switch/captured-truth.json` · 34 facts: **33 match**, **0 drift**, 1 named receipts, 0 unread
+
+No drift — every mapped fact equals the ledger value (or is a named receipt).
+
 ### antd — antd@5.29.3#Switch
 
 ledger `extract/computed/out/antd/switch/captured-truth.json` · 34 facts: **21 match**, **0 drift**, 13 named receipts, 0 unread
@@ -528,6 +534,7 @@ No drift — every mapped fact equals the ledger value (or is a named receipt).
 - **switch/shadcn** `rowAlign` = `center` — flex align-items:center on the row — recipe spelling _[reviewed center]_
 - **switch/shadcn** `typography.label.family` = `Arial` — no label part in the mount _[reviewed]_
 - **switch/shadcn** `typography.label.style` = `Regular` — no label part in the mount _[reviewed]_
+- **switch/chakra** `rowAlign` = `center` — flex align-items:center on the row — recipe spelling _[reviewed center]_
 - **switch/antd** `wrapper.padding` = `0` — the 44×22 root has no extra padding — 0 is the recipe's spelling _[prepareComponentToken padding 2 is INSIDE the track — reviewed 0 on the wrapper]_
 - **switch/antd** `track.padding` = `2` — handle inset is 2px (padding token) — not a CSS padding on the root _[prepareComponentToken padding 2 — reviewed 2]_
 - **switch/antd** `thumb.travel` = `22` — travel = trackMinWidth − handleSize − 2×padding = 44 − 18 − 4 = 22; the handle inset is not a single computed channel _[v2 stay accuracyLoop travel 22 = 44-18-2*2 — reviewed 22]_
