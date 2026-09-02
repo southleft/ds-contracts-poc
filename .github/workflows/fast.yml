@@ -404,14 +404,23 @@ jobs:
       - name: recipe:button-scene-inversion:check (button scene inversion offline proof, writer plan and fixed point)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:button-scene-inversion:check
+      # The eleven steps below read inputs CI never has: the Input/Field
+      # comparison lanes re-derive committed receipts against the MUI source in
+      # the git-ignored recipe/sandboxes/input-field-mui sandbox, and the four
+      # signed lineages read the operator's private/*-security-attestation.json.
+      # Every one of them ran red in CI on every commit (ENOENT / antecedent
+      # drift), hiding the lane's other verdicts. Each is now conditioned on
+      # its input's presence (hashFiles on a git-ignored path is empty in CI),
+      # so CI shows them as SKIPPED by name, and a machine with the inputs runs
+      # them unchanged.
       - name: recipe:combobox:live:v42:check (the CURRENT combobox lineage — library-named overlay chrome remint; generated freshness, authorization self-test, broker/restore/extract smoke, lifecycle simulation)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:combobox:live:v42:check
       - name: recipe:table:live:v32:check (the CURRENT table lineage — the one Table V32 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:table:live:v32:check
       - name: recipe:calendar:live:v50:check (the CURRENT calendar lineage — the one Calendar V50 was signed on; generated freshness, authorization self-test, smoke, lifecycle simulation)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:calendar:live:v50:check
       - name: recipe:scene-readback:check (planned facts are compared only with actual scene properties)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
@@ -420,28 +429,28 @@ jobs:
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
         run: npm run recipe:pivot-status:check
       - name: recipe:input-field:live:v85:check (cleanup-on-failure-only; hashed v84 scene-readback and v19 writer frozen)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('private/*-security-attestation.json') != '' }}
         run: npm run recipe:input-field:live:v85:check
       - name: recipe:input-field:comparison:check (128 matched source cells, independent references, 256 opaque specimens, false and ungraded)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:check
       - name: recipe:input-field:comparison:v2:check (v1 bytes preserved, corrected packet sealed and ungraded)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:v2:check
       - name: recipe:input-field:comparison:v2:multi-rater:check (reliability, consensus, and unchanged-control instability)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:v2:multi-rater:check
       - name: recipe:input-field:comparison:calibrated:check (hidden duplicate packet, locked thresholds, and no double weighting)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:calibrated:check
       - name: recipe:input-field:comparison:calibration:v2:check (objective gold qualification, strict envelopes, and fresh sealed performance packet)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:calibration:v2:check
       - name: recipe:input-field:comparison:calibration:v3:check (imports exact B/C qualifications, excludes failed A, and blocks performance pending fresh D)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:calibration:v3:check
       - name: recipe:input-field:comparison:calibration:v3:adjudicate:check (opaque reliability fails closed before identity)
-        if: ${{ !cancelled() && steps.setup.outcome == 'success' }}
+        if: ${{ !cancelled() && steps.setup.outcome == 'success' && hashFiles('recipe/sandboxes/input-field-mui/node_modules/@mui/material/package.json') != '' }}
         run: npm run recipe:input-field:comparison:calibration:v3:adjudicate:check
       - name: recipe:input-field:paired:check (objective GOLD, side-swapped pairs, sealed key, and no double weighting)
         if: ${{ !cancelled() && steps.setup.outcome == 'success' }}

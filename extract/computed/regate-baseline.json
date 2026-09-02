@@ -489,6 +489,15 @@
       "gapCause": ""
     },
     {
+      "library": "chakra",
+      "component": "Switch",
+      "rerunPctEqual": 88.5989010989011,
+      "cellsCompared": 2912,
+      "unresolvedTokenRefs": 0,
+      "committedPctEqual": 88.5989010989011,
+      "gapCause": ""
+    },
+    {
       "library": "fluent",
       "component": "Avatar",
       "rerunPctEqual": 93.94977168949772,

@@ -249,10 +249,23 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   antd: { components: 13, drops: 25388, authored: 31, fallback: 21 },
   astryx: { components: 11, drops: 25096, authored: 0, fallback: 18 },
   carbon: { components: 10, drops: 37271, authored: 12, fallback: 32 },
-  fluent: { components: 11, drops: 20892, authored: 13, fallback: 19 },
-  mui: { components: 32, drops: 73325, authored: 0, fallback: 99 },
+  // 2026-09-02 — three rows re-pinned by hand, each move named (a moved count is
+  // a human's decision, in either direction):
+  //   · fluent 20,892 -> 20,886 (-6): the Avatar capture record was re-taken
+  //     with --keep-originals (Chromium 149 in the sandbox, 151 before) so the
+  //     proposed avatar@1 fixture could be scored against a real render; six
+  //     control-equal drops on that one component moved with the browser build.
+  //   · shadcn 12,244 -> 12,205 (-39): Avatar and Tooltip re-captured for the
+  //     same reason; the Checkbox and Switch records moved in the same run.
+  //   · mui 73,325 -> 72,991 (-334): PREDATES this session — the mui captures
+  //     changed at 48e68f107 (2026-09-01, the content remints) and the census
+  //     was not re-pinned then; no mui capture was re-recorded on 2026-09-02.
+  //     Re-pinned to what the committed tree measures; the cause of the
+  //     -334 is not established here and is named as such.
+  fluent: { components: 11, drops: 20886, authored: 13, fallback: 19 },
+  mui: { components: 32, drops: 72991, authored: 0, fallback: 99 },
   polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
-  shadcn: { components: 11, drops: 12244, authored: 1, fallback: 7 },
+  shadcn: { components: 11, drops: 12205, authored: 1, fallback: 7 },
   tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },
 };
 
