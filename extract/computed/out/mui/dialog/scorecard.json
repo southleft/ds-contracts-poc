@@ -7,9 +7,9 @@
   "combos": 5,
   "interactions": 4,
   "computed": {
-    "cellsCompared": 400,
-    "cellsEqual": 380,
-    "pctEqual": 95,
+    "cellsCompared": 580,
+    "cellsEqual": 560,
+    "pctEqual": 96.55172413793103,
     "rowsFullyEqual": 0,
     "rows": 20
   },
@@ -31,13 +31,13 @@
     "boundConfirmed": 0,
     "boundCells": 0,
     "contradictions": 0,
-    "mintedLeaves": 21,
-    "mintedLeavesUnfolded": 20,
-    "baseBindings": 34,
+    "mintedLeaves": 24,
+    "mintedLeavesUnfolded": 24,
+    "baseBindings": 48,
     "stateBindings": 0,
-    "codeOnlyChannels": 5,
+    "codeOnlyChannels": 6,
     "overflowBindings": 0,
-    "folds": 20
+    "folds": 40
   },
   "worstRows": [
     {
@@ -120,7 +120,8 @@
     "code-only: backdrop-root.position — declared-channel value outside the bounded grammar — named residue (v15)",
     "code-only: backdrop-root.z-index — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
     "code-only: dialog-paper.max-height — declared-channel value outside the bounded grammar — named residue (v15)",
-    "code-only: label.line-height — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-2.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it."
   ],
   "unresolvedTokenRefs": {
     "count": 0,
@@ -128,14 +129,27 @@
   },
   "shippedMinted": {
     "path": "examples/mui/tokens/mui-minted.dtcg.json",
-    "leavesAdded": 1972,
-    "divergent": []
+    "leavesAdded": 1976,
+    "divergent": [
+      {
+        "token": "imported.dialog.label.font-size",
+        "fresh": "20px",
+        "shipped": "16px",
+        "resolvedEqual": false
+      },
+      {
+        "token": "imported.dialog.label.font-weight",
+        "fresh": "500",
+        "shipped": "400",
+        "resolvedEqual": false
+      }
+    ]
   },
   "rows": [
     {
       "key": "xs__default",
-      "channelsCompared": 80,
-      "channelsEqual": 76,
+      "channelsCompared": 116,
+      "channelsEqual": 112,
       "pctExact": null,
       "pctAA": null,
       "unscorable": "size-mismatch",
@@ -199,8 +213,8 @@
     },
     {
       "key": "sm__default",
-      "channelsCompared": 80,
-      "channelsEqual": 76,
+      "channelsCompared": 116,
+      "channelsEqual": 112,
       "pctExact": null,
       "pctAA": null,
       "unscorable": "size-mismatch",
@@ -264,8 +278,8 @@
     },
     {
       "key": "md__default",
-      "channelsCompared": 80,
-      "channelsEqual": 76,
+      "channelsCompared": 116,
+      "channelsEqual": 112,
       "pctExact": null,
       "pctAA": null,
       "unscorable": "size-mismatch",
@@ -329,8 +343,8 @@
     },
     {
       "key": "lg__default",
-      "channelsCompared": 80,
-      "channelsEqual": 76,
+      "channelsCompared": 116,
+      "channelsEqual": 112,
       "pctExact": null,
       "pctAA": null,
       "unscorable": "size-mismatch",
@@ -394,8 +408,8 @@
     },
     {
       "key": "xl__default",
-      "channelsCompared": 80,
-      "channelsEqual": 76,
+      "channelsCompared": 116,
+      "channelsEqual": 112,
       "pctExact": null,
       "pctAA": null,
       "unscorable": "size-mismatch",

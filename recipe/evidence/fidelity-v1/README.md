@@ -541,3 +541,20 @@ v7 with five sources. See `f1-menu-proposed/`.
     menu/mui-proposed 4.73% · menu/chakra 5.64% (named) · menu/mui 6.79% (named)
 
     45 pass · 0 fringe · 18 known
+
+### 2026-09-02 — dialog@1 gets a proposer: every archetype has one
+
+The thirteenth and last. MUI's config now composes DialogTitle +
+DialogContent, the archetype's shape; the proposal reads the paper's
+asymmetric inset as sums along the edges the recipe draws and scores 4.92%,
+and the hand row, against the same reference, passes at 4.81% — its named
+content mismatch closes. Chakra's Dialog, captured the same day through a
+Portal composition (the backdrop left out: two portaled roots refuse by
+name), is held out at 2.57%. On the way: the shared runtime's font-style
+matcher had lost its whitespace escape inside the emitted template, so
+Figma's "Semi Bold" never matched a CSS "Semibold" — fixed at the source.
+Minted as dialog v7 with five sources. See `f1-dialog-proposed/`.
+
+    dialog/mui-proposed 4.92% · dialog/chakra 2.57% · dialog/mui 4.81% (closed)
+
+    48 pass · 0 fringe · 17 known

@@ -14,8 +14,20 @@
           "$value": "4px",
           "$type": "dimension"
         },
+        "color-000000de": {
+          "$value": "#000000de",
+          "$type": "color"
+        },
         "size-32": {
           "$value": "32px",
+          "$type": "dimension"
+        },
+        "size-16": {
+          "$value": "16px",
+          "$type": "dimension"
+        },
+        "size-24": {
+          "$value": "24px",
           "$type": "dimension"
         }
       },
@@ -41,10 +53,6 @@
             "$value": "rgba(0, 0, 0, 0.2) 0px 11px 15px -7px, rgba(0, 0, 0, 0.14) 0px 24px 38px 3px, rgba(0, 0, 0, 0.12) 0px 9px 46px 8px",
             "$type": "shadow"
           },
-          "color": {
-            "$value": "#000000de",
-            "$type": "color"
-          },
           "max-width": {
             "xs": {
               "$value": "444px",
@@ -69,36 +77,44 @@
           }
         },
         "label": {
-          "color": {
-            "$value": "#000000de",
-            "$type": "color"
-          },
-          "flex-grow": {
-            "$value": "1",
+          "flex-shrink": {
+            "$value": "0",
             "$type": "number"
           },
           "font-size": {
-            "$value": "16px",
+            "$value": "20px",
             "$type": "dimension"
           },
           "font-weight": {
-            "$value": "400",
+            "$value": "500",
+            "$type": "number"
+          },
+          "letter-spacing": {
+            "$value": "0.15px",
+            "$type": "dimension"
+          }
+        },
+        "dialogcontent-root": {
+          "flex-grow": {
+            "$value": "1",
             "$type": "number"
           },
           "padding-bottom": {
             "$value": "20px",
             "$type": "dimension"
+          }
+        },
+        "label-2": {
+          "color": {
+            "$value": "#00000099",
+            "$type": "color"
           },
-          "padding-left": {
-            "$value": "24px",
-            "$type": "dimension"
+          "font-weight": {
+            "$value": "400",
+            "$type": "number"
           },
-          "padding-right": {
-            "$value": "24px",
-            "$type": "dimension"
-          },
-          "padding-top": {
-            "$value": "20px",
+          "letter-spacing": {
+            "$value": "0.15008px",
             "$type": "dimension"
           }
         }
@@ -225,6 +241,126 @@
       "channel": "text-emphasis-color",
       "foldedInto": "color",
       "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "dialogcontent-root",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-bottom-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-left-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-right-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "border-top-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "caret-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "column-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "outline-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "row-rule-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-decoration-color",
+      "foldedInto": "color",
+      "class": "currentColor"
+    },
+    {
+      "part": "label-2",
+      "channel": "text-emphasis-color",
+      "foldedInto": "color",
+      "class": "currentColor"
     }
   ],
   "foldedStateSkips": [],
@@ -316,17 +452,22 @@
       {
         "part": "label",
         "channel": "font-family",
-        "value": "Times"
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       },
       {
-        "part": "label",
+        "part": "dialogcontent-root",
         "channel": "overflow-x",
         "value": "auto"
       },
       {
-        "part": "label",
+        "part": "dialogcontent-root",
         "channel": "overflow-y",
         "value": "auto"
+      },
+      {
+        "part": "label-2",
+        "channel": "font-family",
+        "value": "Roboto, Helvetica, Arial, sans-serif"
       }
     ],
     "state": []
@@ -362,9 +503,16 @@
     },
     {
       "part": "label",
-      "channel": "line-height",
-      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
-      "sample": "normal",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "isolate",
+      "distinctValues": 1
+    },
+    {
+      "part": "label-2",
+      "channel": "unicode-bidi",
+      "reason": "value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <p>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <p> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+      "sample": "isolate",
       "distinctValues": 1
     }
   ],
@@ -404,21 +552,38 @@
     "control-equal-drop: dialog-container — 384 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "control-equal-drop: dialog-paper — 559 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
     "control-equal-drop: dialog-paper — 356 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
-    "control-equal-drop: label — 577 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
-    "text-part-typography-carried: label — font-size/line-height/font-weight/font-family carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
-    "control-equal-drop: label — 370 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <h2> — span control used (part label)",
+    "ua-control-fallback: no UA baseline for <h2> — span UA control used (part label)",
+    "control-equal-drop: label — 573 of 595 admitted channels compared EQUAL to the <h2> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: label — 370 channel(s) EQUAL to the <h2> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-equal-drop: dialogcontent-root — 578 of 595 admitted channels compared EQUAL to the <div> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "control-equal-drop: dialogcontent-root — 375 channel(s) EQUAL to the <div> control and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
+    "control-fallback: no control for <p> — span control used (part label-2)",
+    "ua-control-fallback: no UA baseline for <p> — span UA control used (part label-2)",
+    "control-equal-drop: label-2 — 578 of 595 admitted channels compared EQUAL to the <p> UA baseline control (a page carrying no library CSS) and were dropped as user-agent defaults, not facts of this component",
+    "text-part-typography-carried: label-2 — font-size/font-weight carried even though equal to the control baseline (context-inherited typography IS the rendered truth; the generated surfaces have no library body context, and the canvas otherwise draws its own 14px/500/default-face defaults — round 5c + the font-family completion, altitude link round)",
+    "control-equal-drop: label-2 — 373 channel(s) EQUAL to the <p> control (SPAN FALLBACK — no control is rendered for this tag, so the baseline is the wrong element) and therefore NOT carried, on the premise that a value the bare control also has is the user agent's or the library's reset and the emitted DOM inherits it for free. 0 of them are DECLARED BY THE LIBRARY'S OWN STYLESHEET on this element, where that premise is false.",
     "geometry-excluded: backdrop-root — block-size 1000px, height 1000px, inline-size 900px, perspective-origin 450px 500px, transform-origin 450px 500px, width 900px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: dialog-container — block-size 1000px, height 1000px, inline-size 900px, perspective-origin 450px 500px, transform-origin 450px 500px, width 900px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "geometry-excluded: dialog-paper — block-size 58px, height 58px, inline-size 316.828px, perspective-origin 158.406px 29px, transform-origin 158.414px 29px, width 316.828px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "geometry-excluded: label — inline-size 268.828px, perspective-origin 158.406px 29px, transform-origin 158.414px 29px, width 268.828px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialog-paper — block-size 108px, height 108px, inline-size 344.625px, perspective-origin 172.312px 54px, transform-origin 172.312px 54px, width 344.625px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: dialogcontent-root — block-size 24px, height 24px, inline-size 296.625px, perspective-origin 172.312px 22px, transform-origin 172.312px 22px, width 296.625px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label — block-size 32px, height 32px, inline-size 296.625px, perspective-origin 172.312px 32px, transform-origin 172.312px 32px, width 296.625px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
+    "geometry-excluded: label-2 — block-size 24px, height 24px, inline-size 296.625px, perspective-origin 148.312px 12px, transform-origin 148.312px 12px, width 296.625px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
     "geometry-excluded: root — block-size 1000px, height 1000px, inline-size 900px, perspective-origin 450px 500px, transform-origin 450px 500px, width 900px — FC-GEOMETRY-EXCLUDED (Option B): box geometry is environment-dependent and is not fused; it is admitted only through the absolute-cluster, table-cell and block-root doors, none of which this part passed. The canvas sizes the box from its carried content, padding and min/max channels.",
-    "webkit-prefixed-channels-refused: 5 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (backdrop-root, dialog-container); -webkit-box-pack (backdrop-root, dialog-container); -webkit-tap-highlight-color (backdrop-root); -webkit-text-fill-color (dialog-paper, label); -webkit-text-stroke-color (dialog-paper, label)",
+    "webkit-prefixed-channels-refused: 5 vendor-prefixed channel(s) are STYLED by this component and refused by the blanket `-webkit-` fusion exclusion (isFusable) — named here because the exclusion used to be silent: -webkit-box-align (backdrop-root, dialog-container); -webkit-box-pack (backdrop-root, dialog-container); -webkit-tap-highlight-color (backdrop-root); -webkit-text-fill-color (dialog-paper, dialogcontent-root, label, label-2); -webkit-text-stroke-color (dialog-paper, dialogcontent-root, label, label-2)",
     "webkit-refusal-argued: -webkit-text-fill-color — NOT a loss: this channel is FOLDED INTO `color` at the read boundary (lib.ts foldTextFillColor) because it IS the painted text ink whenever it differs from `color`. It stays in the capture as the evidence for that fold.",
     "inheritance-check-rejected: dialog-paper.caret-color — values track ancestor \"dialog-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: dialog-paper.color — values track ancestor \"dialog-container\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-size — values track ancestor \"dialogcontent-root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.font-weight — values track ancestor \"dialogcontent-root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.letter-spacing — values track ancestor \"dialogcontent-root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label-2.line-height — values track ancestor \"dialogcontent-root\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-size — values track ancestor \"dialog-paper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.font-weight — values track ancestor \"dialog-paper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-check-rejected: label.letter-spacing — values track ancestor \"dialog-paper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
     "inheritance-check-rejected: label.line-height — values track ancestor \"dialog-paper\" but that ancestor carries the channel nowhere; the binding STAYS (dropping it would bind the channel nowhere)",
+    "inheritance-only: dialogcontent-root.caret-color equals ancestor \"dialog-paper\" on all 5 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
+    "inheritance-only: dialogcontent-root.color equals ancestor \"dialog-paper\" on all 5 captured planes — the part carries no independent color fact (CSS inheritance, observed)",
     "inheritance-only: label.caret-color equals ancestor \"dialog-paper\" on all 5 captured planes — the part carries no independent caret-color fact (CSS inheritance, observed)",
     "inheritance-only: label.color equals ancestor \"dialog-paper\" on all 5 captured planes — the part carries no independent color fact (CSS inheritance, observed)"
   ],
@@ -451,6 +616,14 @@
       {
         "part": "label",
         "join": "computed-only"
+      },
+      {
+        "part": "dialogcontent-root",
+        "join": "computed-only"
+      },
+      {
+        "part": "label-2",
+        "join": "computed-only"
       }
     ],
     "staticOnly": []
@@ -462,11 +635,14 @@
       "backdrop-root",
       "dialog-container",
       "dialog-paper",
-      "label"
+      "label",
+      "dialogcontent-root",
+      "label-2"
     ],
     "svgAssets": [],
     "receipts": [
-      "child-content-carried: label holds the children sample text — bound to minted text prop \"children\" (MUI CardContent class)"
+      "literal-text-carried: label = \"Dialog title\" (no text prop sample matches — the mounted value is carried verbatim)",
+      "literal-text-carried: label-2 = \"Dialog body copy for the molecule round.\" (no text prop sample matches — the mounted value is carried verbatim)"
     ],
     "refusals": []
   },
@@ -486,8 +662,9 @@
     "declared fact carried: dialog-paper.transition-duration = 0.3s (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialog-paper.transition-property = box-shadow (v15 declared vocabulary — declared-not-drawn on canvas)",
     "declared fact carried: dialog-paper.transition-timing-function = cubic-bezier(0.4, 0, 0.2, 1) (v15 declared vocabulary — declared-not-drawn on canvas)",
-    "declared fact carried: label.font-family = Times (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.overflow-x = auto (v15 declared vocabulary — canvas-drawable)",
-    "declared fact carried: label.overflow-y = auto (v15 declared vocabulary — canvas-drawable)"
+    "declared fact carried: label.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: dialogcontent-root.overflow-x = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: dialogcontent-root.overflow-y = auto (v15 declared vocabulary — canvas-drawable)",
+    "declared fact carried: label-2.font-family = Roboto, Helvetica, Arial, sans-serif (v15 declared vocabulary — canvas-drawable)"
   ]
 }

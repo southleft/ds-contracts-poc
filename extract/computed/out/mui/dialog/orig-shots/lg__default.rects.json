@@ -62,22 +62,50 @@
         "MuiDialog-paperWidthLg",
         "css-dc6isx-MuiPaper-root-MuiDialog-paper"
       ],
-      "x": 291.578125,
-      "y": 471,
-      "w": 316.828125,
-      "h": 58
+      "x": 277.6875,
+      "y": 446,
+      "w": 344.625,
+      "h": 108
     },
     {
       "idxPath": "2.0.0",
+      "tag": "h2",
+      "classes": [
+        "MuiTypography-root",
+        "MuiTypography-h6",
+        "MuiDialogTitle-root",
+        "css-rvoa5x-MuiTypography-root-MuiDialogTitle-root"
+      ],
+      "x": 277.6875,
+      "y": 446,
+      "w": 344.625,
+      "h": 64
+    },
+    {
+      "idxPath": "2.0.1",
       "tag": "div",
       "classes": [
         "MuiDialogContent-root",
         "css-kw13he-MuiDialogContent-root"
       ],
-      "x": 291.578125,
-      "y": 471,
-      "w": 316.828125,
-      "h": 58
+      "x": 277.6875,
+      "y": 510,
+      "w": 344.625,
+      "h": 44
+    },
+    {
+      "idxPath": "2.0.1.0",
+      "tag": "p",
+      "classes": [
+        "MuiTypography-root",
+        "MuiDialogContentText-root",
+        "MuiTypography-body1",
+        "css-ayzt6d-MuiTypography-root-MuiDialogContentText-root"
+      ],
+      "x": 301.6875,
+      "y": 510,
+      "w": 296.625,
+      "h": 24
     },
     {
       "idxPath": "3",

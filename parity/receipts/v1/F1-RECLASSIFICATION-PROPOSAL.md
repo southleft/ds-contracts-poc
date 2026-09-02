@@ -48,10 +48,10 @@ measured cause.
 | link | yes | Altitude, Chakra | both named | supported, named rows |
 | tabs | yes | Carbon | named content mismatch | supported, named row |
 | badge | yes | none exists (every foreign badge is an inline label) | own captures only | supported, no held-out |
-| dialog | no | — | reference cropping landed 7399b8084; unscored | experimental |
-| menu | no | — | same | experimental |
+| menu | yes | Chakra | 5.64% named (no panel min-width leaf) | supported, named row |
+| dialog | yes | Chakra | 2.57% | supported |
 
-Fidelity gate 44 pass · 0 fringe · 15 named. The plugin's paste verb was
+Fidelity gate 48 pass · 0 fringe · 17 named (updated the same evening: menu and dialog gained proposers and Chakra held-outs). The plugin's paste verb was
 exercised by the owner on 2026-09-02 (`recipe/evidence/pointed/switch-chakra/paste-verb-exercised.json`).
 
 ## The proposed replacement for the docs/26 status box
@@ -72,7 +72,7 @@ And, in the register at the foot of the page, the sentence "F1 is unmet and
 `overallSuccess` is not flipped except Table's existing v32 pin" becomes:
 
 > F1 is restated as the per-archetype held-out exam of the stranger sentence
-> and is met for the eleven archetypes above; `overallSuccess` is not flipped
+> and is met for all thirteen archetypes above; `overallSuccess` is not flipped
 > except Table's existing v32 pin.
 
 ## What this does NOT do

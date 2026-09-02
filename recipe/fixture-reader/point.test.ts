@@ -397,3 +397,19 @@ test("menu@1 reads MUI's two-item menu from its own capture — the panel inset 
   for (const [k, v] of [["panel.padding", 8], ["panel.radius", 4], ["item.paddingX", 16], ["item.paddingY", 6], ["lineHeightUnit", "px"]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
   assert.equal(Object.values(m.proposal.leaves).filter((l) => l.from !== "ledger").length, 0, "every leaf read");
 });
+
+import { draftDialogRoles } from "./draft-roles.js";
+import { proposeDialogFixture } from "./propose-dialog.js";
+import type { DialogRoles } from "./schema-dialog.js";
+
+test("dialog@1 reads MUI's title + body capture — the paper inset as paper plus title-block padding, the gap as the two blocks' inner padding — with nothing invented", () => {
+  const mui = draftDialogRoles(new Ledger(REPO, "extract/computed/out/mui/dialog/captured-truth.json"));
+  assert.deepEqual(mui.unresolved, []);
+  assert.ok(mui.roles.titleBlock && mui.roles.bodyBlock, "MUI's title and body sit in padded blocks");
+  const dir = mkdtempSync(path.join(tmpdir(), "point-"));
+  const m = proposeDialogFixture({ library: "mui", ledger: "extract/computed/out/mui/dialog/captured-truth.json", roles: mui.roles as DialogRoles, combo: mui.combo!, out: path.relative(REPO, path.join(dir, "dialog.mui.ts")), unsupported: ["hover"] });
+  assert.deepEqual(m.refused, []);
+  assert.equal(m.proposal.content.title, "Dialog title");
+  for (const [k, v] of [["paper.paddingX", 24], ["paper.paddingY", 16], ["paper.radius", 4], ["paper.itemSpacing", 16], ["titleFontSize", 20], ["titleLineHeight", 32], ["bodyFontSize", 16], ["lineHeightUnit", "px"], ["typography.title.style", "Medium"]] as const) assert.equal(m.proposal.leaves[k]?.value, v, k);
+  assert.equal(Object.values(m.proposal.leaves).filter((l) => l.from !== "ledger").length, 0, "every leaf read");
+});

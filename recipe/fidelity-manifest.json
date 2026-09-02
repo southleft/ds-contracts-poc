@@ -559,12 +559,30 @@
     },
     {
       "label": "dialog/mui",
-      "page": "218:90598",
+      "page": "229:94292",
       "component": "dialog/variant/default :: MUI Dialog",
-      "shot": "recipe/evidence/fidelity-v1/shots/dialog-mui-default-shared-v6.png",
+      "shot": "recipe/evidence/fidelity-v1/shots/dialog-mui-default-shared-v7.png",
       "reference": "extract/computed/out/mui/dialog/orig-shots/md__default.png",
       "referenceCrop": "cls:MuiDialog-paper",
       "_why": "OVERLAY REFERENCE (2026-09-02): the real screenshot is the whole modal root (900x1000 with the backdrop); the reference is cropped to the paper's rendered rect recorded beside the PNG at capture time (md__default.rects.json). First scorable dialog row."
+    },
+    {
+      "label": "dialog/mui-proposed",
+      "page": "229:94292",
+      "component": "dialog/variant/default :: MUI (proposed) Dialog",
+      "shot": "recipe/evidence/fidelity-v1/shots/dialog-mui-proposed-default-v7.png",
+      "reference": "extract/computed/out/mui/dialog/orig-shots/sm__default.png",
+      "referenceCrop": "cls:MuiDialog-paper",
+      "_why": "PROPOSED from MUI's own capture by the dialog@1 role schema (17 read, 0 invented) \u2014 the capture now mounts DialogTitle + DialogContent, the archetype's shape (the person's config step); the paper inset and gap are read as sums along the edges the recipe draws. Reference: the sm cell (the drafter's pick), cropped to MuiDialog-paper."
+    },
+    {
+      "label": "dialog/chakra",
+      "page": "229:94292",
+      "component": "dialog/variant/default :: Chakra (proposed) Dialog",
+      "shot": "recipe/evidence/fidelity-v1/shots/dialog-chakra-default-v7.png",
+      "reference": "extract/computed/out/chakra/dialog/orig-shots/__default.png",
+      "referenceCrop": "cls:chakra-dialog__content",
+      "_why": "HELD OUT: Chakra's Dialog, captured 2026-09-02 from a config entry a person wrote (DialogRoot open \u2283 DialogTrigger + Portal \u2283 DialogPositioner \u2283 DialogContent \u2283 DialogHeader \u2283 DialogTitle, DialogBody; the backdrop left out because two portaled roots refuse by name). 17 read, 0 invented. Reference cropped to the content paper."
     },
     {
       "label": "menu/mui",

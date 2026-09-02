@@ -1,0 +1,38 @@
+{
+  "roles": {
+    "title": "idx:1.0.0",
+    "body": "idx:1.0.1.0",
+    "paper": "idx:1.0",
+    "titleBlock": "idx:1.0.0",
+    "bodyBlock": "idx:1.0.1"
+  },
+  "combo": "sm",
+  "evidence": {
+    "title": {
+      "selector": "idx:1.0.0",
+      "why": "h2 carries \"Dialog title\" — the first text",
+      "confidence": "high"
+    },
+    "body": {
+      "selector": "idx:1.0.1.0",
+      "why": "p carries \"Dialog body copy for the molecule round.\" — the next text outside the title",
+      "confidence": "high"
+    },
+    "paper": {
+      "selector": "idx:1.0",
+      "why": "div.MuiPaper-root bg rgba(255, 255, 255, 1) radius 4px min-width auto — the painted ancestor of title and body",
+      "confidence": "high"
+    },
+    "titleBlock": {
+      "selector": "idx:1.0.0",
+      "why": "the title element itself pads: 16px / 24px",
+      "confidence": "high"
+    },
+    "bodyBlock": {
+      "selector": "idx:1.0.1",
+      "why": "div.MuiDialogContent-root pads the body: 0px / 24px",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

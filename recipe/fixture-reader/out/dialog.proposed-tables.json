@@ -221,6 +221,270 @@
     }
   },
   {
+    "library": "mui-proposed",
+    "archetype": "dialog",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Dialog"
+    },
+    "ledger": "extract/computed/out/mui/dialog/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "paper.paddingX": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.padding-left ; extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.padding-left — the paper's padding-left plus the title block's (MUI: 0 + 24)"
+      },
+      "paper.paddingY": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.padding-top ; extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.padding-top — the paper's padding-top plus the title block's (MUI: 0 + 16)"
+      },
+      "paper.radius": {
+        "fixture": 4,
+        "proposed": 4,
+        "verdict": "match",
+        "captured": 4,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.border-top-left-radius ; extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.height — border-top-left-radius; a percentage is of the paper's height; clamped to half the height as CSS clamps it"
+      },
+      "paper.itemSpacing": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.row-gap ; extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.padding-bottom ; extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.padding-top ; extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.margin-bottom ; extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.margin-top — the space between the title and the body: paper row-gap + title block padding-bottom + margin-bottom + body block padding-top + margin-top (keywords read 0)"
+      },
+      "paper.minWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.min-width — the paper's min-width as a length; `auto`/0 means the paper hugs"
+      },
+      "paper.fill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.background-color"
+      },
+      "titleFontSize": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 32,
+        "proposed": 32,
+        "verdict": "match",
+        "captured": 32,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.line-height — the title's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "bodyFontSize": {
+        "fixture": 16,
+        "proposed": 16,
+        "verdict": "match",
+        "captured": 16,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.font-size"
+      },
+      "bodyLineHeight": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.line-height — the body's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.line-height — `normal` → auto; a length → px (one unit for both texts, the recipe's shape)"
+      },
+      "title": {
+        "fixture": "#000000de",
+        "proposed": "#000000de",
+        "verdict": "match",
+        "captured": "#000000de",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.color"
+      },
+      "body": {
+        "fixture": "#00000099",
+        "proposed": "#00000099",
+        "verdict": "match",
+        "captured": "#00000099",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.color"
+      },
+      "typography.title.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.font-family — first family of the title's computed stack"
+      },
+      "typography.title.style": {
+        "fixture": "Medium",
+        "proposed": "Medium",
+        "verdict": "match",
+        "captured": "Medium",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.font-weight — title font-weight → style word"
+      },
+      "typography.body.family": {
+        "fixture": "Roboto",
+        "proposed": "Roboto",
+        "verdict": "match",
+        "captured": "Roboto",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.font-family — first family of the body's computed stack"
+      },
+      "typography.body.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.font-weight — body font-weight → style word"
+      }
+    }
+  },
+  {
+    "library": "chakra",
+    "archetype": "dialog",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Dialog"
+    },
+    "ledger": "extract/computed/out/chakra/dialog/captured-truth.json",
+    "note": "PROPOSED reviewed table — review input for a Phase-2 fixture update + remint. Every `proposed` value is either the fixture value (verdict match/receipt, carried) or the CAPTURED value (verdict drift). Nothing overwrites recipe/fixtures/* without review.",
+    "values": {
+      "paper.paddingX": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.padding-left ; extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-left — the paper's padding-left plus the title block's (MUI: 0 + 24)"
+      },
+      "paper.paddingY": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.padding-top ; extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-top — the paper's padding-top plus the title block's (MUI: 0 + 16)"
+      },
+      "paper.radius": {
+        "fixture": 6,
+        "proposed": 6,
+        "verdict": "match",
+        "captured": 6,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.border-top-left-radius ; extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.height — border-top-left-radius; a percentage is of the paper's height; clamped to half the height as CSS clamps it"
+      },
+      "paper.itemSpacing": {
+        "fixture": 24,
+        "proposed": 24,
+        "verdict": "match",
+        "captured": 24,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.row-gap ; extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-bottom ; extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.padding-top ; extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.margin-bottom ; extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.margin-top — the space between the title and the body: paper row-gap + title block padding-bottom + margin-bottom + body block padding-top + margin-top (keywords read 0)"
+      },
+      "paper.minWidth": {
+        "fixture": 0,
+        "proposed": 0,
+        "verdict": "match",
+        "captured": 0,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.min-width — the paper's min-width as a length; `auto`/0 means the paper hugs"
+      },
+      "paper.fill": {
+        "fixture": "#ffffffff",
+        "proposed": "#ffffffff",
+        "verdict": "match",
+        "captured": "#ffffffff",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.background-color"
+      },
+      "titleFontSize": {
+        "fixture": 18,
+        "proposed": 18,
+        "verdict": "match",
+        "captured": 18,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-size"
+      },
+      "titleLineHeight": {
+        "fixture": 28,
+        "proposed": 28,
+        "verdict": "match",
+        "captured": 28,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.line-height — the title's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "bodyFontSize": {
+        "fixture": 14,
+        "proposed": 14,
+        "verdict": "match",
+        "captured": 14,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-size"
+      },
+      "bodyLineHeight": {
+        "fixture": 20,
+        "proposed": 20,
+        "verdict": "match",
+        "captured": 20,
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.line-height — the body's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      "lineHeightUnit": {
+        "fixture": "px",
+        "proposed": "px",
+        "verdict": "match",
+        "captured": "px",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.line-height — `normal` → auto; a length → px (one unit for both texts, the recipe's shape)"
+      },
+      "title": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.color"
+      },
+      "body": {
+        "fixture": "#09090bff",
+        "proposed": "#09090bff",
+        "verdict": "match",
+        "captured": "#09090bff",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.color"
+      },
+      "typography.title.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-family — first family of the title's computed stack"
+      },
+      "typography.title.style": {
+        "fixture": "Semibold",
+        "proposed": "Semibold",
+        "verdict": "match",
+        "captured": "Semibold",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-weight — title font-weight → style word"
+      },
+      "typography.body.family": {
+        "fixture": "Inter",
+        "proposed": "Inter",
+        "verdict": "match",
+        "captured": "Inter",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-family — first family of the body's computed stack"
+      },
+      "typography.body.style": {
+        "fixture": "Regular",
+        "proposed": "Regular",
+        "verdict": "match",
+        "captured": "Regular",
+        "provenance": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-weight — body font-weight → style word"
+      }
+    }
+  },
+  {
     "library": "antd",
     "archetype": "dialog",
     "source": {

@@ -299,6 +299,420 @@
   },
   {
     "archetype": "dialog",
+    "library": "mui-proposed",
+    "source": {
+      "packageName": "@mui/material",
+      "version": "9.2.0",
+      "exportName": "Dialog"
+    },
+    "ledgerFile": "extract/computed/out/mui/dialog/captured-truth.json",
+    "rows": [
+      {
+        "path": "paper.paddingX",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.padding-left",
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.padding-left"
+        ],
+        "formula": "the paper's padding-left plus the title block's (MUI: 0 + 24)"
+      },
+      {
+        "path": "paper.paddingY",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.padding-top",
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.padding-top"
+        ],
+        "formula": "the paper's padding-top plus the title block's (MUI: 0 + 16)"
+      },
+      {
+        "path": "paper.radius",
+        "fixtureValue": 4,
+        "verdict": "match",
+        "capturedValue": 4,
+        "proposedValue": 4,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.border-top-left-radius",
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the paper's height; clamped to half the height as CSS clamps it"
+      },
+      {
+        "path": "paper.itemSpacing",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.row-gap",
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.padding-bottom",
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.padding-top",
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.margin-bottom",
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.margin-top"
+        ],
+        "formula": "the space between the title and the body: paper row-gap + title block padding-bottom + margin-bottom + body block padding-top + margin-top (keywords read 0)"
+      },
+      {
+        "path": "paper.minWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.min-width"
+        ],
+        "formula": "the paper's min-width as a length; `auto`/0 means the paper hugs"
+      },
+      {
+        "path": "paper.fill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.background-color"
+        ]
+      },
+      {
+        "path": "titleFontSize",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.font-size"
+        ]
+      },
+      {
+        "path": "titleLineHeight",
+        "fixtureValue": 32,
+        "verdict": "match",
+        "capturedValue": 32,
+        "proposedValue": 32,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.line-height"
+        ],
+        "formula": "the title's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "bodyFontSize",
+        "fixtureValue": 16,
+        "verdict": "match",
+        "capturedValue": 16,
+        "proposedValue": 16,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.font-size"
+        ]
+      },
+      {
+        "path": "bodyLineHeight",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.line-height"
+        ],
+        "formula": "the body's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.line-height"
+        ],
+        "formula": "`normal` → auto; a length → px (one unit for both texts, the recipe's shape)"
+      },
+      {
+        "path": "title",
+        "fixtureValue": "#000000de",
+        "verdict": "match",
+        "capturedValue": "#000000de",
+        "proposedValue": "#000000de",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.color"
+        ]
+      },
+      {
+        "path": "body",
+        "fixtureValue": "#00000099",
+        "verdict": "match",
+        "capturedValue": "#00000099",
+        "proposedValue": "#00000099",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.color"
+        ]
+      },
+      {
+        "path": "typography.title.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.font-family"
+        ],
+        "formula": "first family of the title's computed stack"
+      },
+      {
+        "path": "typography.title.style",
+        "fixtureValue": "Medium",
+        "verdict": "match",
+        "capturedValue": "Medium",
+        "proposedValue": "Medium",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.0.font-weight"
+        ],
+        "formula": "title font-weight → style word"
+      },
+      {
+        "path": "typography.body.family",
+        "fixtureValue": "Roboto",
+        "verdict": "match",
+        "capturedValue": "Roboto",
+        "proposedValue": "Roboto",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.font-family"
+        ],
+        "formula": "first family of the body's computed stack"
+      },
+      {
+        "path": "typography.body.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/mui/dialog/captured-truth.json#sm__default idx:1.0.1.0.font-weight"
+        ],
+        "formula": "body font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 17,
+      "drift": 0,
+      "receipt": 0,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "dialog",
+    "library": "chakra",
+    "source": {
+      "packageName": "@chakra-ui/react",
+      "version": "3.37.0",
+      "exportName": "Dialog"
+    },
+    "ledgerFile": "extract/computed/out/chakra/dialog/captured-truth.json",
+    "rows": [
+      {
+        "path": "paper.paddingX",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.padding-left",
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-left"
+        ],
+        "formula": "the paper's padding-left plus the title block's (MUI: 0 + 24)"
+      },
+      {
+        "path": "paper.paddingY",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.padding-top",
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-top"
+        ],
+        "formula": "the paper's padding-top plus the title block's (MUI: 0 + 16)"
+      },
+      {
+        "path": "paper.radius",
+        "fixtureValue": 6,
+        "verdict": "match",
+        "capturedValue": 6,
+        "proposedValue": 6,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.border-top-left-radius",
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.height"
+        ],
+        "formula": "border-top-left-radius; a percentage is of the paper's height; clamped to half the height as CSS clamps it"
+      },
+      {
+        "path": "paper.itemSpacing",
+        "fixtureValue": 24,
+        "verdict": "match",
+        "capturedValue": 24,
+        "proposedValue": 24,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.row-gap",
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-bottom",
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.padding-top",
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.margin-bottom",
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.margin-top"
+        ],
+        "formula": "the space between the title and the body: paper row-gap + title block padding-bottom + margin-bottom + body block padding-top + margin-top (keywords read 0)"
+      },
+      {
+        "path": "paper.minWidth",
+        "fixtureValue": 0,
+        "verdict": "match",
+        "capturedValue": 0,
+        "proposedValue": 0,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.min-width"
+        ],
+        "formula": "the paper's min-width as a length; `auto`/0 means the paper hugs"
+      },
+      {
+        "path": "paper.fill",
+        "fixtureValue": "#ffffffff",
+        "verdict": "match",
+        "capturedValue": "#ffffffff",
+        "proposedValue": "#ffffffff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.background-color"
+        ]
+      },
+      {
+        "path": "titleFontSize",
+        "fixtureValue": 18,
+        "verdict": "match",
+        "capturedValue": 18,
+        "proposedValue": 18,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-size"
+        ]
+      },
+      {
+        "path": "titleLineHeight",
+        "fixtureValue": 28,
+        "verdict": "match",
+        "capturedValue": 28,
+        "proposedValue": 28,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.line-height"
+        ],
+        "formula": "the title's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "bodyFontSize",
+        "fixtureValue": 14,
+        "verdict": "match",
+        "capturedValue": 14,
+        "proposedValue": 14,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-size"
+        ]
+      },
+      {
+        "path": "bodyLineHeight",
+        "fixtureValue": 20,
+        "verdict": "match",
+        "capturedValue": 20,
+        "proposedValue": 20,
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.line-height"
+        ],
+        "formula": "the body's line-height as a px length; `normal` is 0 with unit auto"
+      },
+      {
+        "path": "lineHeightUnit",
+        "fixtureValue": "px",
+        "verdict": "match",
+        "capturedValue": "px",
+        "proposedValue": "px",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.line-height"
+        ],
+        "formula": "`normal` → auto; a length → px (one unit for both texts, the recipe's shape)"
+      },
+      {
+        "path": "title",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.color"
+        ]
+      },
+      {
+        "path": "body",
+        "fixtureValue": "#09090bff",
+        "verdict": "match",
+        "capturedValue": "#09090bff",
+        "proposedValue": "#09090bff",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.color"
+        ]
+      },
+      {
+        "path": "typography.title.family",
+        "fixtureValue": "Inter",
+        "verdict": "match",
+        "capturedValue": "Inter",
+        "proposedValue": "Inter",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-family"
+        ],
+        "formula": "first family of the title's computed stack"
+      },
+      {
+        "path": "typography.title.style",
+        "fixtureValue": "Semibold",
+        "verdict": "match",
+        "capturedValue": "Semibold",
+        "proposedValue": "Semibold",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-weight"
+        ],
+        "formula": "title font-weight → style word"
+      },
+      {
+        "path": "typography.body.family",
+        "fixtureValue": "Inter",
+        "verdict": "match",
+        "capturedValue": "Inter",
+        "proposedValue": "Inter",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-family"
+        ],
+        "formula": "first family of the body's computed stack"
+      },
+      {
+        "path": "typography.body.style",
+        "fixtureValue": "Regular",
+        "verdict": "match",
+        "capturedValue": "Regular",
+        "proposedValue": "Regular",
+        "ledgerKeys": [
+          "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-weight"
+        ],
+        "formula": "body font-weight → style word"
+      }
+    ],
+    "counts": {
+      "match": 17,
+      "drift": 0,
+      "receipt": 0,
+      "unread": 0
+    }
+  },
+  {
+    "archetype": "dialog",
     "library": "antd",
     "source": {
       "packageName": "antd",

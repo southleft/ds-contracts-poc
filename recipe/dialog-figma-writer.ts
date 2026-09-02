@@ -25,7 +25,9 @@ import {
 
 export const DIALOG_FIGMA_NAMESPACE = "ds.contracts.dialog.recipe.v1";
 export const DIALOG_FIGMA_WRITER_VERSION = 1;
-export const DIALOG_FIGMA_RUN_SUFFIX = "dialog-v6";
+export const DIALOG_FIGMA_RUN_SUFFIX = "dialog-v7";
+/** v6 stay (dialog@1 proposer: MUI from its own title + body capture and Chakra's Dialog held out (Portal composition, captured today)) is preserved as evidence and never written again. */
+export const FORBIDDEN_DIALOG_V6_PAGE_ID = "218:90598";
 /** v5 stay (runtime: font style names compared without case or spacing (SemiBold ≡ Semibold)) is preserved as evidence and never written again. */
 export const FORBIDDEN_DIALOG_V5_PAGE_ID = "218:88008";
 /** v4 stay (runtime: a shadowed frame clips unless the IR says otherwise (measured against Chromium)) is preserved as evidence and never written again. */
@@ -266,6 +268,7 @@ const WRITER_RUNTIME_SPEC = {
     "field": "chip"
   },
   "forbiddenPages": [
+    { "id": "218:90598", "marker": "DIALOG-V6-PAGE" },
     { "id": "218:88008", "marker": "DIALOG-V5-PAGE" },
     { "id": "218:86515", "marker": "DIALOG-V4-PAGE" },
     { "id": "218:85033", "marker": "DIALOG-V3-PAGE" },

@@ -1,0 +1,65 @@
+{
+  "origin": "the portal root screenshot (top-left = 0,0)",
+  "parts": [
+    {
+      "idxPath": "",
+      "tag": "div",
+      "classes": [
+        "chakra-dialog__positioner",
+        "css-ueu1j7"
+      ],
+      "x": 0,
+      "y": 0,
+      "w": 900,
+      "h": 1000
+    },
+    {
+      "idxPath": "0",
+      "tag": "div",
+      "classes": [
+        "chakra-dialog__content",
+        "css-1n543c7"
+      ],
+      "x": 194,
+      "y": 64,
+      "w": 512,
+      "h": 120
+    },
+    {
+      "idxPath": "0.0",
+      "tag": "div",
+      "classes": [
+        "chakra-dialog__header",
+        "css-10gvpny"
+      ],
+      "x": 194,
+      "y": 64,
+      "w": 512,
+      "h": 68
+    },
+    {
+      "idxPath": "0.0.0",
+      "tag": "h2",
+      "classes": [
+        "chakra-dialog__title",
+        "css-1ka0vat"
+      ],
+      "x": 218,
+      "y": 88,
+      "w": 91.921875,
+      "h": 28
+    },
+    {
+      "idxPath": "0.1",
+      "tag": "div",
+      "classes": [
+        "chakra-dialog__body",
+        "css-aphhdw"
+      ],
+      "x": 194,
+      "y": 132,
+      "w": 512,
+      "h": 52
+    }
+  ]
+}

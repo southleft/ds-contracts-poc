@@ -31,6 +31,7 @@ import type { TextareaComboMap, TextareaRoles } from "./schema-textarea.js";
 import { ALERT_STATUSES, type AlertComboMap, type AlertRoles } from "./schema-alert.js";
 import type { BadgeRoles } from "./schema-badge.js";
 import type { MenuRoles } from "./schema-menu.js";
+import type { DialogRoles } from "./schema-dialog.js";
 
 export interface RoleDraft {
   roles: Partial<CheckboxRoles> & { dash?: { part: string; pseudo?: string } };
@@ -931,5 +932,52 @@ export function draftMenuRoles(ledger: Ledger): SimpleRoleDraft<MenuRoles> {
     evidence.panel = { selector: roles.panel, why: `${panel.tag}${panel.classes.length ? "." + panel.classes[0] : ""} bg ${panel.style["background-color"]} radius ${panel.style["border-top-left-radius"]} shadow ${(panel.style["box-shadow"] ?? "none").slice(0, 40)} — the painted ancestor of the items`, confidence: "high" };
     if (list && list.idxPath !== panel.idxPath) { roles.list = sel(list); evidence.list = { selector: roles.list, why: `the items' parent ${list.tag} (padding-top ${list.style["padding-top"]}, row-gap ${list.style["row-gap"]})`, confidence: "high" }; }
   }
+  return { roles, combo, evidence, unresolved };
+}
+
+
+/**
+ * Draft the dialog@1 role map by what the parts DO: the title is the first
+ * text-carrying part and the body the next one that is not inside it; the
+ * paper is the nearest painted ancestor common to both (fill, border or
+ * shadow); each text's BLOCK is its nearest ancestor below the paper that
+ * carries padding (MUI's DialogTitle / DialogContent), when there is one.
+ */
+export function draftDialogRoles(ledger: Ledger): SimpleRoleDraft<DialogRoles> {
+  const evidence: SimpleRoleDraft<DialogRoles>["evidence"] = {};
+  const unresolved: string[] = [];
+  const roles: Partial<DialogRoles> = {};
+  const combo = pickCombo(ledger, /(^|\.)(default|md|open)(\.|$)|^$/);
+  if (combo === null) { unresolved.push("combo: no captured cell"); return { roles, combo: null, evidence, unresolved }; }
+  const cap = ledger.capture(`${combo}__default`);
+  const byPath = new Map(cap.parts.map((p) => [p.idxPath, p] as const));
+  const texts = cap.parts.filter((p) => hasTextPart(p) && p.tag !== "input" && p.tag !== "button");
+  const title = texts[0];
+  const body = texts.find((p) => title && p !== title && !p.idxPath.startsWith(title.idxPath + "."));
+  if (!title || !body) { unresolved.push(`title/body: dialog@1 draws a title over a body; the capture carries ${texts.length} text part(s)`); return { roles, combo, evidence, unresolved }; }
+  roles.title = sel(title); roles.body = sel(body);
+  evidence.title = { selector: roles.title, why: `${title.tag} carries ${JSON.stringify(title.text.find((t) => t.trim()))} — the first text`, confidence: "high" };
+  evidence.body = { selector: roles.body, why: `${body.tag} carries ${JSON.stringify(body.text.find((t) => t.trim()))} — the next text outside the title`, confidence: "high" };
+  const paints = (p: LedgerPart): boolean => !isTransparent(p.style["background-color"]) || num(p.style["border-top-width"]) > 0 || (p.style["box-shadow"] ?? "none") !== "none";
+  let a: string | null = title.idxPath; const anc = new Set<string>();
+  while (a !== null) { anc.add(a); a = parentPath(a); }
+  let b: string | null = body.idxPath, common: string | null = null;
+  while (b !== null) { if (anc.has(b) && b !== title.idxPath) { common = b; break; } b = parentPath(b); }
+  let idx: string | null = common, paper: LedgerPart | undefined;
+  while (idx !== null) { const p = byPath.get(idx); if (p && paints(p)) { paper = p; break; } idx = parentPath(idx); }
+  paper = paper ?? (common !== null ? byPath.get(common) : undefined) ?? byPath.get("");
+  if (!paper) { unresolved.push("paper: no common painted ancestor of title and body"); return { roles, combo, evidence, unresolved }; }
+  roles.paper = sel(paper);
+  evidence.paper = { selector: roles.paper, why: `${paper.tag}${paper.classes.length ? "." + paper.classes[0] : ""} bg ${paper.style["background-color"]} radius ${paper.style["border-top-left-radius"]} min-width ${paper.style["min-width"]} — the painted ancestor of title and body`, confidence: "high" };
+  const blockOf = (text: LedgerPart): LedgerPart | undefined => {
+    let i: string | null = text.idxPath;
+    while (i !== null && i !== paper!.idxPath) { const p = byPath.get(i); if (p && p !== text && (num(p.style["padding-top"]) > 0 || num(p.style["padding-left"]) > 0)) return p; if (p === text && (num(p.style["padding-top"]) > 0 || num(p.style["padding-left"]) > 0)) return p; i = parentPath(i); }
+    return undefined;
+  };
+  const tb = blockOf(title), bb = blockOf(body);
+  if (tb && tb !== title) { roles.titleBlock = sel(tb); evidence.titleBlock = { selector: roles.titleBlock, why: `${tb.tag}${tb.classes.length ? "." + tb.classes[0] : ""} pads the title: ${tb.style["padding-top"]} / ${tb.style["padding-left"]}`, confidence: "high" }; }
+  else if (tb === title) { roles.titleBlock = sel(title); evidence.titleBlock = { selector: roles.titleBlock, why: `the title element itself pads: ${title.style["padding-top"]} / ${title.style["padding-left"]}`, confidence: "high" }; }
+  if (bb && bb !== body) { roles.bodyBlock = sel(bb); evidence.bodyBlock = { selector: roles.bodyBlock, why: `${bb.tag}${bb.classes.length ? "." + bb.classes[0] : ""} pads the body: ${bb.style["padding-top"]} / ${bb.style["padding-left"]}`, confidence: "high" }; }
+  else if (bb === body) { roles.bodyBlock = sel(body); evidence.bodyBlock = { selector: roles.bodyBlock, why: `the body element itself pads: ${body.style["padding-top"]} / ${body.style["padding-left"]}`, confidence: "high" }; }
   return { roles, combo, evidence, unresolved };
 }

@@ -7,7 +7,7 @@ import type {
 import { canonicalDialogRecipeInstance } from "./dialog.js";
 import type { DialogRecipeInstance } from "../recipes/dialog.js";
 
-const cloneTokens = (
+export const cloneTokens = (
   prefix: string,
   mutate: (path: string, fallback: string | number) => string | number,
 ): DialogRecipeInstance["tokens"] => {
@@ -339,7 +339,7 @@ const tokenFacts = (
   return facts;
 };
 
-const makeRefusals = (
+export const makeRefusals = (
   slug: string,
   rows: Array<{
     id: string;
@@ -423,7 +423,7 @@ const antdRefusals = makeRefusals("antd", [
   },
 ]);
 
-const buildConfig = (
+export const buildConfig = (
   slug: string,
   source: ReviewedDialogSource,
   tokens: DialogRecipeInstance["tokens"],
@@ -431,6 +431,8 @@ const buildConfig = (
   refusals: ReviewedDialogSourceFact[],
   extraIr: ReviewedDialogSourceFact[],
   unsupported: string[],
+  // A proposed fixture passes the captured title and body; the hand tables keep their pairing.
+  content: DialogRecipeInstance["content"] = { title: "Dialog title", body: "Dialog body" },
 ): ReviewedDialogAdapterConfig => {
   const facts = [
     ...tokenFacts(
@@ -460,7 +462,7 @@ const buildConfig = (
       },
     },
     identity,
-    content: { title: "Dialog title", body: "Dialog body" },
+    content: structuredClone(content),
     tokens: structuredClone(tokens),
     sourceFacts: facts,
     manualMappings,
@@ -483,7 +485,7 @@ const buildConfig = (
   };
 };
 
-const anatomyFacts = (
+export const anatomyFacts = (
   slug: string,
   source: ReviewedDialogSource,
 ): ReviewedDialogSourceFact[] => [

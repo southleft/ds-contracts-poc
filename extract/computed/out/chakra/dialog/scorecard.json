@@ -1,0 +1,303 @@
+{
+  "component": "Dialog",
+  "generatedBy": "extract/computed/gate.ts",
+  "browser": "149.0.7827.55",
+  "renderedBy": "149.0.7827.55",
+  "method": "enriched contract → core/emit-html (wrapped library tokens + minted token custom properties) vs the ORIGINAL npm package rendering, same pinned Chromium, per combo × interaction; computed-equality over the styled channel set (exact string, no tolerance) + pixelmatch at threshold 0 (AA counted) and 0.1 (AA excluded) — both quoted, never widened",
+  "combos": 1,
+  "interactions": 4,
+  "computed": {
+    "cellsCompared": 168,
+    "cellsEqual": 152,
+    "pctEqual": 90.47619047619048,
+    "rowsFullyEqual": 0,
+    "rows": 4
+  },
+  "pixel": {
+    "pairs": 1,
+    "perfectExact": 0,
+    "perfectAA": 0,
+    "measured": 0,
+    "unscored": {
+      "sizeMismatch": 1,
+      "noOriginal": 3,
+      "note": "sizeMismatch: our render is a different SIZE than the original, so pixelmatch cannot run — counted in `pairs` (it is a failed pair) and never `perfect`, but NOT averaged: there is no measurement to average. noOriginal: no original screenshot exists, so there was never a pair — excluded from `pairs` entirely."
+    },
+    "meanExact": null,
+    "meanAA": null,
+    "maxAA": null
+  },
+  "fusion": {
+    "boundConfirmed": 0,
+    "boundCells": 0,
+    "contradictions": 0,
+    "mintedLeaves": 24,
+    "mintedLeavesUnfolded": 24,
+    "baseBindings": 72,
+    "stateBindings": 0,
+    "codeOnlyChannels": 17,
+    "overflowBindings": 0,
+    "folds": 30
+  },
+  "worstRows": [
+    {
+      "key": "__default",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 16,
+      "unscorable": "size-mismatch"
+    },
+    {
+      "key": "__hover",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
+    },
+    {
+      "key": "__focus-visible",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
+    },
+    {
+      "key": "__active",
+      "pctAA": null,
+      "pctExact": null,
+      "channelsMismatched": 0,
+      "unscorable": "no-original"
+    }
+  ],
+  "topMismatchedChannels": [
+    [
+      "root.overflow-wrap",
+      1
+    ],
+    [
+      "root.overscroll-behavior-y",
+      1
+    ],
+    [
+      "root.position",
+      1
+    ],
+    [
+      "root.text-size-adjust",
+      1
+    ],
+    [
+      "dialog__content.animation-duration",
+      1
+    ],
+    [
+      "dialog__content.animation-name",
+      1
+    ],
+    [
+      "dialog__content.overflow-wrap",
+      1
+    ],
+    [
+      "dialog__content.text-size-adjust",
+      1
+    ],
+    [
+      "dialog__header.flex-basis",
+      1
+    ],
+    [
+      "dialog__header.overflow-wrap",
+      1
+    ],
+    [
+      "dialog__header.text-size-adjust",
+      1
+    ],
+    [
+      "label.overflow-wrap",
+      1
+    ],
+    [
+      "label.text-size-adjust",
+      1
+    ],
+    [
+      "label-2.flex-basis",
+      1
+    ],
+    [
+      "label-2.overflow-wrap",
+      1
+    ]
+  ],
+  "namedLosses": [
+    "code-only: root.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.overscroll-behavior-y — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: root.position — declared-channel value outside the bounded grammar — named residue (v15)",
+    "code-only: root.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: dialog__content.animation-duration — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: dialog__content.animation-name — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: dialog__content.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: dialog__content.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: dialog__header.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: dialog__header.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: dialog__header.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label.unicode-bidi — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today. NOTE — UNRELIABLE BASELINE: this part is a <h2>, and the harness renders a control for button/span/a/div only, so it was measured against the <span> control (see the `control-fallback` receipt). The difference from that control may be the USER AGENT's default for <h2> rather than a fact the library authored — this refusal loses nothing either way, but it must not be read as evidence the library declared it.",
+    "code-only: label-2.flex-basis — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.overflow-wrap — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today",
+    "code-only: label-2.text-size-adjust — value shape outside mintable kinds (color/px/number/shadow/gradient) and outside the declared-channel registry — no schema channel today"
+  ],
+  "unresolvedTokenRefs": {
+    "count": 0,
+    "refs": []
+  },
+  "shippedMinted": {
+    "path": "examples/chakra/tokens/chakra-minted.dtcg.json",
+    "leavesAdded": 0,
+    "bootstrap": true,
+    "note": "measured without a shipped minted tree — this library has never promoted one (tokens.mintedBootstrap). The gate inventory is base + this run's FRESH mint only; re-run the harness after the first promotion to measure against the shipped tree.",
+    "divergent": []
+  },
+  "rows": [
+    {
+      "key": "__default",
+      "channelsCompared": 168,
+      "channelsEqual": 152,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "size-mismatch",
+      "mismatches": [
+        {
+          "part": "root",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "root",
+          "channel": "overscroll-behavior-y",
+          "ours": "auto",
+          "theirs": "none"
+        },
+        {
+          "part": "root",
+          "channel": "position",
+          "ours": "static",
+          "theirs": "fixed"
+        },
+        {
+          "part": "root",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "dialog__content",
+          "channel": "animation-duration",
+          "ours": "0s",
+          "theirs": "0.2s"
+        },
+        {
+          "part": "dialog__content",
+          "channel": "animation-name",
+          "ours": "none",
+          "theirs": "scale-in, fade-in"
+        },
+        {
+          "part": "dialog__content",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "dialog__content",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "dialog__header",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "dialog__header",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "dialog__header",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        },
+        {
+          "part": "label-2",
+          "channel": "flex-basis",
+          "ours": "auto",
+          "theirs": "0%"
+        },
+        {
+          "part": "label-2",
+          "channel": "overflow-wrap",
+          "ours": "normal",
+          "theirs": "break-word"
+        },
+        {
+          "part": "label-2",
+          "channel": "text-size-adjust",
+          "ours": "auto",
+          "theirs": "100%"
+        }
+      ],
+      "note": "size mismatch ours 320x96 vs orig 900x1000 — NOT SCORED (a wrong-sized box is a geometry failure, not a percentage)"
+    },
+    {
+      "key": "__hover",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "__focus-visible",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    },
+    {
+      "key": "__active",
+      "channelsCompared": 0,
+      "channelsEqual": 0,
+      "pctExact": null,
+      "pctAA": null,
+      "unscorable": "no-original",
+      "mismatches": [],
+      "note": "no captured truth for this combo×state"
+    }
+  ]
+}

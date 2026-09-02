@@ -37,6 +37,8 @@ import { MUI_BADGE_LEDGER as MUI_BADGE_LEDGER_PROPOSED, muiBadgeAdapterConfig as
 import { ANTD_BADGE_LEDGER as ANTD_BADGE_LEDGER_PROPOSED, antdBadgeAdapterConfig as antdBadgeProposedConfig, antdBadgeMappings as antdBadgeProposedMappings } from "../fixtures/generated/badge.antd.js";
 import { MUI_MENU_LEDGER as MUI_MENU_LEDGER_PROPOSED, muiMenuAdapterConfig as muiMenuProposedConfig, muiMenuMappings as muiMenuProposedMappings } from "../fixtures/generated/menu.mui.js";
 import { CHAKRA_MENU_LEDGER, chakraMenuAdapterConfig, chakraMenuMappings } from "../fixtures/generated/menu.chakra.js";
+import { MUI_DIALOG_LEDGER as MUI_DIALOG_LEDGER_PROPOSED, muiDialogAdapterConfig as muiDialogProposedConfig, muiDialogMappings as muiDialogProposedMappings } from "../fixtures/generated/dialog.mui.js";
+import { CHAKRA_DIALOG_LEDGER, chakraDialogAdapterConfig, chakraDialogMappings } from "../fixtures/generated/dialog.chakra.js";
 import { CHAKRA_AVATAR_LEDGER, chakraAvatarAdapterConfig, chakraAvatarMappings } from "../fixtures/generated/avatar.chakra.js";
 import { CHAKRA_CHIP_LEDGER, chakraChipAdapterConfig, chakraChipMappings } from "../fixtures/generated/chip.chakra.js";
 import { CHAKRA_LINK_LEDGER, chakraLinkAdapterConfig, chakraLinkMappings } from "../fixtures/generated/link.chakra.js";
@@ -1080,6 +1082,26 @@ const SUBJECTS: Subject[] = [
     tokens: muiDialogAdapterConfig.tokens as unknown as Record<string, unknown>,
     mappings: muiDialogMappings,
     extras: extrasFor(muiDialogAdapterConfig.tokens as unknown as Record<string, unknown>, muiDialogMappings),
+  },
+  {
+    // PROPOSED from MUI's own title + body capture by the dialog@1 role schema (2026-09-02): the paper inset and gap as sums along the edges the recipe draws; 17 read, 0 invented.
+    archetype: "dialog",
+    library: "mui-proposed",
+    source: src(muiDialogProposedConfig),
+    ledgerFile: MUI_DIALOG_LEDGER_PROPOSED,
+    tokens: muiDialogProposedConfig.tokens as unknown as Record<string, unknown>,
+    mappings: muiDialogProposedMappings,
+    extras: extrasFor(muiDialogProposedConfig.tokens as unknown as Record<string, unknown>, muiDialogProposedMappings),
+  },
+  {
+    // HELD OUT (2026-09-02): Chakra's Dialog through a Portal composition (backdrop left out — two portaled roots refuse by name); 17 read, 0 invented.
+    archetype: "dialog",
+    library: "chakra",
+    source: src(chakraDialogAdapterConfig),
+    ledgerFile: CHAKRA_DIALOG_LEDGER,
+    tokens: chakraDialogAdapterConfig.tokens as unknown as Record<string, unknown>,
+    mappings: chakraDialogMappings,
+    extras: extrasFor(chakraDialogAdapterConfig.tokens as unknown as Record<string, unknown>, chakraDialogMappings),
   },
   {
     archetype: "dialog",

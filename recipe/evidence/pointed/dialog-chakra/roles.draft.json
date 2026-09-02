@@ -1,0 +1,38 @@
+{
+  "roles": {
+    "title": "idx:0.0.0",
+    "body": "idx:0.1",
+    "paper": "idx:0",
+    "titleBlock": "idx:0.0",
+    "bodyBlock": "idx:0.1"
+  },
+  "combo": "",
+  "evidence": {
+    "title": {
+      "selector": "idx:0.0.0",
+      "why": "h2 carries \"Dialog title\" — the first text",
+      "confidence": "high"
+    },
+    "body": {
+      "selector": "idx:0.1",
+      "why": "div carries \"Dialog body copy for the molecule round.\" — the next text outside the title",
+      "confidence": "high"
+    },
+    "paper": {
+      "selector": "idx:0",
+      "why": "div.chakra-dialog__content bg rgba(255, 255, 255, 1) radius 6px min-width auto — the painted ancestor of title and body",
+      "confidence": "high"
+    },
+    "titleBlock": {
+      "selector": "idx:0.0",
+      "why": "div.chakra-dialog__header pads the title: 24px / 24px",
+      "confidence": "high"
+    },
+    "bodyBlock": {
+      "selector": "idx:0.1",
+      "why": "the body element itself pads: 8px / 24px",
+      "confidence": "high"
+    }
+  },
+  "unresolved": []
+}

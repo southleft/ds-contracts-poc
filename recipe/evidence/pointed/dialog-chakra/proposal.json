@@ -1,0 +1,135 @@
+{
+  "archetype": "dialog",
+  "library": "chakra",
+  "ledger": "extract/computed/out/chakra/dialog/captured-truth.json",
+  "provenance": {
+    "package": "@chakra-ui/react",
+    "version": "3.37.0",
+    "browser": "Chromium 149.0.7827.55 (playwright-core, headless)"
+  },
+  "roles": {
+    "title": "idx:0.0.0",
+    "body": "idx:0.1",
+    "paper": "idx:0",
+    "titleBlock": "idx:0.0",
+    "bodyBlock": "idx:0.1"
+  },
+  "combo": "",
+  "leaves": {
+    "paper.paddingX": {
+      "value": 24,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.padding-left | extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-left",
+      "formula": "the paper's padding-left plus the title block's (MUI: 0 + 24)"
+    },
+    "paper.paddingY": {
+      "value": 24,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.padding-top | extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-top",
+      "formula": "the paper's padding-top plus the title block's (MUI: 0 + 16)"
+    },
+    "paper.radius": {
+      "value": 6,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.border-top-left-radius | extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.height",
+      "formula": "border-top-left-radius; a percentage is of the paper's height; clamped to half the height as CSS clamps it"
+    },
+    "paper.itemSpacing": {
+      "value": 24,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.row-gap | extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.padding-bottom | extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.padding-top | extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.margin-bottom | extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.margin-top",
+      "formula": "the space between the title and the body: paper row-gap + title block padding-bottom + margin-bottom + body block padding-top + margin-top (keywords read 0)"
+    },
+    "paper.minWidth": {
+      "value": 0,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.min-width",
+      "formula": "the paper's min-width as a length; `auto`/0 means the paper hugs"
+    },
+    "paper.fill": {
+      "value": "#ffffffff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.background-color"
+    },
+    "titleFontSize": {
+      "value": 18,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-size"
+    },
+    "titleLineHeight": {
+      "value": 28,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.line-height",
+      "formula": "the title's line-height as a px length; `normal` is 0 with unit auto"
+    },
+    "bodyFontSize": {
+      "value": 14,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-size"
+    },
+    "bodyLineHeight": {
+      "value": 20,
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.line-height",
+      "formula": "the body's line-height as a px length; `normal` is 0 with unit auto"
+    },
+    "lineHeightUnit": {
+      "value": "px",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.line-height",
+      "formula": "`normal` → auto; a length → px (one unit for both texts, the recipe's shape)"
+    },
+    "title": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.color"
+    },
+    "body": {
+      "value": "#09090bff",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.color"
+    },
+    "typography.title.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-family",
+      "formula": "first family of the title's computed stack"
+    },
+    "typography.title.style": {
+      "value": "Semibold",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.0.0.font-weight",
+      "formula": "title font-weight → style word"
+    },
+    "typography.body.family": {
+      "value": "Inter",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-family",
+      "formula": "first family of the body's computed stack"
+    },
+    "typography.body.style": {
+      "value": "Regular",
+      "from": "ledger",
+      "key": "extract/computed/out/chakra/dialog/captured-truth.json#__default idx:0.1.font-weight",
+      "formula": "body font-weight → style word"
+    }
+  },
+  "receipts": [],
+  "refused": [],
+  "content": {
+    "title": "Dialog title",
+    "body": "Dialog body copy for the molecule round."
+  },
+  "typography": {
+    "title": {
+      "family": "Inter",
+      "style": "Semibold",
+      "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+    },
+    "body": {
+      "family": "Inter",
+      "style": "Regular",
+      "stack": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\""
+    }
+  }
+}

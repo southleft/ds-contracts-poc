@@ -3,9 +3,9 @@
 > **Status: ACTIVE — 2026-09-01.** This is the product spine the
 > [2026-09-01 audit](../parity/receipts/v1/HONEST-SCORECARD.md) called for:
 > one command from a capture of a real package to a program the shipped
-> plugin can run in any file. It works today for **twelve archetypes**
+> plugin can run in any file. It works today for **all thirteen archetypes**
 > (checkbox@1, switch@1, avatar@1, tooltip@1, chip@1, link@1, tabs@1, radio@1,
-> textarea@1, alert@1, badge@1, menu@1) and has been proven on **libraries
+> textarea@1, alert@1, badge@1, menu@1, dialog@1) and has been proven on **libraries
 > the recipe path was never taught** — Chakra UI, shadcn, Altitude, Fluent and
 > Carbon — including six Chakra controls captured for the first time the same
 > day (a person wrote the config entry, the command did the rest; the Switch's
@@ -37,7 +37,7 @@ npm run recipe:point -- --archetype checkbox --library chakra \
 
 | flag | what |
 |---|---|
-| `--archetype` | one of checkbox, switch, avatar, tooltip, chip, link, tabs, radio, textarea, alert, badge, menu |
+| `--archetype` | one of checkbox, switch, avatar, tooltip, chip, link, tabs, radio, textarea, alert, badge, menu, dialog |
 | `--library <slug>` | the capture directory: `extract/computed/out/<slug>/…` |
 | `--capture <dir>` | the captured component's directory when the library names the archetype differently (AntD's and Carbon's `tag` as chip@1; Chakra's `textareafield` as textarea@1) |
 | `--slug <name>` | the fixture's own name when one library contributes two captures of an archetype (`chakra-field`); the ledger stays under `--library` |
@@ -108,6 +108,13 @@ which the legacy contract path quarantines on `text-underline-offset` — is
 scored against the real render anyway (the quarantine path now keeps the
 `--keep-originals` screenshots: the pixels are a measurement, not the
 contract's to refuse) and is a named one-row rasterisation difference.
+
+On dialog@1, the paper's asymmetric inset is read as sums along the edges
+the recipe draws (the title block's padding on top and left, the two
+blocks' inner padding between the texts); MUI's proposal scores 4.92% and
+its hand row passes too against the title + body reference, and Chakra's
+Dialog, captured the same day through a Portal composition, is held out at
+2.57% (`recipe/evidence/fidelity-v1/f1-dialog-proposed/`).
 
 On menu@1, the panel inset is read as the paper's padding plus the list's
 (MUI keeps 8 on the list, which the hand table had spelled 0) and the two
@@ -218,12 +225,12 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 
 ## What it does not do yet
 
-- **Other archetypes.** Twelve of the thirteen boilerplate archetypes have
-  proposers today; dialog still has a hand table only. It is scored now —
-  the capture records each overlay part's rendered rect beside its
-  screenshot and the gate crops the reference to the paper — and its first
-  score is a named content mismatch (the hand table's title line is not what
-  the capture renders), which a proposer would remove.
+- **Overlay archetypes are scored through a crop.** Dialog and menu's real
+  screenshots are the whole overlay; the capture records each part's
+  rendered rect beside the screenshot and the gate crops the reference to
+  the paper. A mount that puts two portaled roots in one Portal (Chakra's
+  backdrop beside its positioner) refuses by name; the backdrop is left out
+  of the capture entry.
 - **A panel minimum width.** menu@1 hugs its items; Chakra's content panel
   is 8rem wide. Named on the held-out row, not spelled.
 - **A held-out for badge@1.** Every foreign badge in the corpus is an
@@ -302,6 +309,7 @@ files), what stays as archive, and the three decisions that are the owner's.
 | `recipe/fixture-reader/schema-alert.ts`, `propose-alert.ts` | alert@1: box, icon svg + its one path (glyph d, fill-rule, fill), title; the viewBox reviewed |
 | `recipe/fixture-reader/schema-badge.ts`, `propose-badge.ts` | badge@1: host, pip (offset = transform − inset; a shadow ring as a border), count |
 | `recipe/fixture-reader/schema-menu.ts`, `propose-menu.ts` | menu@1: panel (paper + list inset), item, label; the first two text-carrying siblings are the content |
+| `recipe/fixture-reader/schema-dialog.ts`, `propose-dialog.ts` | dialog@1: paper, title and body with their padded blocks; the inset and gap as sums along the drawn edges |
 | `recipe/fixture-reader/point.ts` | the command |
 | `recipe/fixture-reader/rederive.ts` | runs a schema over a hand-written fixture's own ledger and reports agreement |
 | `recipe/figma-writer-runtime.ts` | the one IR → canvas program, scratch and plugin targets |

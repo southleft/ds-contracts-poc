@@ -37,21 +37,6 @@
           "prop": "maxWidth"
         }
       }
-    },
-    {
-      "name": "children",
-      "type": "text",
-      "default": "Dialog body copy for the molecule round.",
-      "description": "Promoted from the computed floor: the mounted children render as this part's text (captured mount proof).",
-      "bindings": {
-        "figma": {
-          "kind": "TEXT",
-          "property": "Content"
-        },
-        "code": {
-          "prop": "children"
-        }
-      }
     }
   ],
   "states": [],
@@ -94,25 +79,59 @@
               },
               "parts": {
                 "label": {
-                  "content": {
-                    "prop": "children"
+                  "element": "h2",
+                  "text": "Dialog title",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2|DialogTitle-root.Typography-h6.Typography-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "font-family": "Roboto, Helvetica, Arial, sans-serif"
                   },
+                  "tokens": {
+                    "color": "{imported.shared.color-000000de}",
+                    "flex-shrink": "{imported.dialog.label.flex-shrink}",
+                    "font-size": "{imported.dialog.label.font-size}",
+                    "font-weight": "{imported.dialog.label.font-weight}",
+                    "letter-spacing": "{imported.dialog.label.letter-spacing}",
+                    "line-height": "{imported.shared.size-32}",
+                    "padding-bottom": "{imported.shared.size-16}",
+                    "padding-left": "{imported.shared.size-24}",
+                    "padding-right": "{imported.shared.size-24}",
+                    "padding-top": "{imported.shared.size-16}"
+                  }
+                },
+                "dialogcontent-root": {
                   "description": "Promoted from the computed floor (round 4): rendered anatomy div|DialogContent-root — this element exists in the real component's DOM; the static layer had no part for it.",
                   "declared": {
                     "display": "block",
-                    "font-family": "Times",
                     "overflow-x": "auto",
                     "overflow-y": "auto"
                   },
+                  "parts": {
+                    "label-2": {
+                      "element": "p",
+                      "text": "Dialog body copy for the molecule round.",
+                      "description": "Promoted from the computed floor (round 4): rendered anatomy p|DialogContentText-root.Typography-body1.Typography-root — this element exists in the real component's DOM; the static layer had no part for it.",
+                      "declared": {
+                        "display": "block",
+                        "font-family": "Roboto, Helvetica, Arial, sans-serif"
+                      },
+                      "tokens": {
+                        "color": "{imported.dialog.label-2.color}",
+                        "font-size": "{imported.shared.size-16}",
+                        "font-weight": "{imported.dialog.label-2.font-weight}",
+                        "letter-spacing": "{imported.dialog.label-2.letter-spacing}",
+                        "line-height": "{imported.shared.size-24}",
+                        "min-height": "{imported.shared.size-0}",
+                        "min-width": "{imported.shared.size-0}"
+                      }
+                    }
+                  },
                   "tokens": {
-                    "color": "{imported.dialog.label.color}",
-                    "flex-grow": "{imported.dialog.label.flex-grow}",
-                    "font-size": "{imported.dialog.label.font-size}",
-                    "font-weight": "{imported.dialog.label.font-weight}",
-                    "padding-bottom": "{imported.dialog.label.padding-bottom}",
-                    "padding-left": "{imported.dialog.label.padding-left}",
-                    "padding-right": "{imported.dialog.label.padding-right}",
-                    "padding-top": "{imported.dialog.label.padding-top}"
+                    "color": "{imported.shared.color-000000de}",
+                    "flex-grow": "{imported.dialog.dialogcontent-root.flex-grow}",
+                    "padding-bottom": "{imported.dialog.dialogcontent-root.padding-bottom}",
+                    "padding-left": "{imported.shared.size-24}",
+                    "padding-right": "{imported.shared.size-24}"
                   }
                 }
               },
@@ -132,7 +151,7 @@
                 "border-top-right-radius": "{imported.shared.size-4}",
                 "bottom": "{imported.shared.size-0}",
                 "box-shadow": "{imported.dialog.dialog-paper.box-shadow}",
-                "color": "{imported.dialog.dialog-paper.color}",
+                "color": "{imported.shared.color-000000de}",
                 "left": "{imported.shared.size-0}",
                 "margin-bottom": "{imported.shared.size-32}",
                 "margin-left": "{imported.shared.size-32}",

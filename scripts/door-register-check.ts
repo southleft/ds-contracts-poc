@@ -273,7 +273,12 @@ export const PINNED_CENSUS: Record<string, { components: number; drops: number; 
   //     person's step for menu@1 — the archetype draws two), one item fewer
   //     than before, so its control-equal drops and one span-fallback part
   //     went with it. Named, re-pinned to what the committed tree measures.
-  mui: { components: 32, drops: 72647, authored: 0, fallback: 98 },
+  //   · mui 72,647 -> 73,395 drops, span-fallback 98 -> 100, the last move of
+  //     2026-09-02: the Dialog capture record was re-taken with DialogTitle +
+  //     DialogContent (the person's step for dialog@1 — a title over a body)
+  //     in place of DialogContent alone, two parts more per cell. Named,
+  //     re-pinned to what the committed tree measures.
+  mui: { components: 32, drops: 73395, authored: 0, fallback: 100 },
   polaris: { components: 12, drops: 44659, authored: 69, fallback: 43 },
   shadcn: { components: 11, drops: 12205, authored: 1, fallback: 7 },
   tailwind: { components: 11, drops: 8087, authored: 9, fallback: 7 },

@@ -10,24 +10,24 @@
   "receipt": "parity/receipts/console-loop/mui/components/menu.json",
   "status": "fail",
   "fileKey": "59mLQlOMiD5w5za6SUcoO5",
-  "fileVersion": "2384477865735882405",
+  "fileVersion": "2389961688576685812",
   "setNodeId": "21:451",
   "cellNodeId": "21:451",
   "cellName": "Menu",
   "cellPick": "standalone-node",
   "referenceResolvedFrom": "receipt.visual.reference",
   "metrics": {
-    "pctExactUnmasked": 97.17288669064749,
-    "pctAAUnmasked": 78.92873201438849,
-    "pctAAMasked": 78.92873201438849,
+    "pctExactUnmasked": 97.51573741007195,
+    "pctAAUnmasked": 79.23223920863309,
+    "pctAAMasked": 79.23223920863309,
     "maskCoveragePct": 0,
     "canvasPx": "128x139",
     "realPx": "128x139",
     "inkCanvasPct": 23.70166366906475,
-    "inkRealPct": 96.18367805755396
+    "inkRealPct": 96.599595323741
   },
   "reference": "extract/computed/out/mui/menu/orig-shots/__default.png",
-  "referenceSha256": "fdc0a62785072cc10fdbc40b9a9a239b3efdd81eb649cfbb02a8a10c723cce8d",
+  "referenceSha256": "8b6c8307210ed69c663406190ac47802c5c63b6529f17b966b643e1285eb5d5a",
   "canvasShot": "parity/receipts/console-loop/visual-truth/mui/shots/menu.png",
   "canvasShotSha256": "588a744753326af3cfc490bf5bba8e8de3b3a8e5449cca9550fceacbaf36a903",
   "diff": "parity/receipts/console-loop/visual-truth/mui/diffs/menu.diff.png",
@@ -36,8 +36,8 @@
   "framingTolerant": false,
   "reliedOnFramingTolerant": false,
   "scaleRatio": 1,
-  "inkDelta": 72.4820143884892,
+  "inkDelta": 72.89793165467626,
   "dprNormalized": false,
   "sizeNormalized": true,
-  "note": "composition mismatch (scaleRatio=1.00, inkDelta=72.5)"
+  "note": "composition mismatch (scaleRatio=1.00, inkDelta=72.9)"
 }

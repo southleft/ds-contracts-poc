@@ -1,0 +1,68 @@
+{
+  "liveFigma": true,
+  "humanGrade": "queued-for-TJ",
+  "overallSuccess": false,
+  "productV1": "INCOMPLETE",
+  "artifactVersion": "dialog-live-pivot-v7-prepare",
+  "teaching": "One named default Dialog paper; title and body; full-bleed scrim size is receipted",
+  "runIdentity": "e482eb49-b275da16-d479cda5-346a147b-22e17299-dialog-v7",
+  "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-346a147b-22e17299-dialog-v7",
+  "namespace": "ds.contracts.dialog.recipe.v1",
+  "recipeHashes": {
+    "Astryx": "e482eb490976c22f9c7527fbe8d3fb545ef450d75e7a03c75c1b392cb9371a8f",
+    "MUI": "b275da1672c18ab147c939c61bdc8192e415acf3bc412ea9758c6a91e6780ac7",
+    "Ant Design": "d479cda5dd84ed7a52f65ea671e23e51695c9ce4181be9a8b8807c11fc27ea6d",
+    "MUI (proposed)": "346a147b24aaac4dcb7e4d19b0c6bc01f7e60585427c61819e44074528786bb9",
+    "Chakra (proposed)": "22e172990e70bd067801d567e7d92c989f09554472a6826bc2961675f81a5d51"
+  },
+  "writerSha256": "41258c6bbe792d42e5e3df6276c6854fac03218ce884bf9b81cb1aeb232616f5",
+  "pageId": "229:94292",
+  "url": "https://www.figma.com/design/byMp6lt0Ij9b2QbkDGFwBh/Scratch-Project?node-id=229-94292",
+  "live": {
+    "recordedFrom": "dialog-v7-writer.raw.json",
+    "fileKey": "byMp6lt0Ij9b2QbkDGFwBh",
+    "pageName": "Recipe Pivot / Dialog / e482eb49-b275da16-d479cda5-346a147b-22e17299-dialog-v7",
+    "sources": [
+      {
+        "adapterIdentity": "astryx-dialog-reviewed-v1",
+        "sectionId": "229:94293",
+        "setId": "229:94307",
+        "collectionId": "VariableCollectionId:229:94294",
+        "variantCount": 1,
+        "comparedIrFacts": 20
+      },
+      {
+        "adapterIdentity": "mui-dialog-reviewed-v1",
+        "sectionId": "229:94311",
+        "setId": "229:94325",
+        "collectionId": "VariableCollectionId:229:94312",
+        "variantCount": 1,
+        "comparedIrFacts": 20
+      },
+      {
+        "adapterIdentity": "antd-dialog-reviewed-v1",
+        "sectionId": "229:94329",
+        "setId": "229:94343",
+        "collectionId": "VariableCollectionId:229:94330",
+        "variantCount": 1,
+        "comparedIrFacts": 20
+      },
+      {
+        "adapterIdentity": "mui-dialog-proposed-v1",
+        "sectionId": "229:94347",
+        "setId": "229:94360",
+        "collectionId": "VariableCollectionId:229:94348",
+        "variantCount": 1,
+        "comparedIrFacts": 19
+      },
+      {
+        "adapterIdentity": "chakra-dialog-proposed-v1",
+        "sectionId": "229:94364",
+        "setId": "229:94377",
+        "collectionId": "VariableCollectionId:229:94365",
+        "variantCount": 1,
+        "comparedIrFacts": 19
+      }
+    ]
+  }
+}

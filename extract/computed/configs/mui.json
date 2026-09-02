@@ -329,7 +329,7 @@
       "name": "Dialog",
       "importName": "Dialog",
       "contract": "examples/mui/contracts-seed/dialog.contract.json",
-      "sampleText": "Dialog body copy for the molecule round.",
+      "sampleText": "",
       "axes": [
         "maxWidth"
       ],
@@ -343,9 +343,22 @@
       "callbackProps": [
         "onClose"
       ],
-      "childWrap": {
-        "importName": "DialogContent"
-      }
+      "__note": "2026-09-02 (person's step for dialog@1): the mount composes DialogTitle 'Dialog title' + DialogContent ⊃ DialogContentText 'Dialog body copy for the molecule round.' — the archetype's shape (a title over a body) — so a proposal read from this capture is scored against a reference of the same shape; the earlier DialogContent-only mount is what the hand row was named against.",
+      "childrenSpec": [
+        {
+          "importName": "DialogTitle",
+          "text": "Dialog title"
+        },
+        {
+          "importName": "DialogContent",
+          "children": [
+            {
+              "importName": "DialogContentText",
+              "text": "Dialog body copy for the molecule round."
+            }
+          ]
+        }
+      ]
     },
     {
       "__note": "ORGANISM ROUND — Checkbox. Tri-state on ONE axis: MUI spells the tri-state as TWO independent booleans (checked + indeterminate), but the svg-content promotion carries per-value glyph assets only when the markup is a function of exactly ONE axis (svg-content-multi-axis refusal otherwise) — so the axis value expands into several library props through the $props grammar. All THREE glyphs (unchecked box, checked box, indeterminate dash) become distinct assets. disableRipple pinned (the Button/Switch precedent — the ripple never settles).",

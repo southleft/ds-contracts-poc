@@ -62,10 +62,6 @@
       "class": "real-defect",
       "cause": "8.28% width-normalised (heights 58 vs 56; was 9.52% before textarea@1 carried the label's line-height — InputLabel 23px). Resize grip absent (named refusal); the floating label offset differs by ~2px."
     },
-    "dialog/mui": {
-      "class": "content-mismatch",
-      "cause": "6.73% at 95x45 vs 318x58 — the FIRST scored dialog row (2026-09-02), the reference cropped to MuiDialog-paper's rendered rect recorded beside the portal screenshot. The hand fixture's shared content is a 'Dialog title' line over 'Dialog body'; the capture mounts DialogContent alone with the one line 'Dialog body copy for the molecule round.' (configs/mui.json sampleText), so the mint draws two lines the package never renders and the paper's width follows different text. Geometry is not in question here; the archetype has no proposer yet, so the content is the hand table's, not the capture's."
-    },
     "menu/mui": {
       "class": "content-mismatch",
       "cause": "6.79% at 65x61 vs 117x88 — the hand row against the two-item capture (the person's config step of 2026-09-02; the first score, 5.46%, was against three items). Content mismatch: the hand table carries 'Item One' / 'Item Two' where the capture renders 'Profile' / 'My account', and its panel.padding is 0 where the list carries 8. The proposed row beside it reads both from the capture and passes."

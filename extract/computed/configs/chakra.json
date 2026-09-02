@@ -445,6 +445,55 @@
           ]
         }
       ]
+    },
+    {
+      "__note": "Authored 2026-09-02 as the person's step of docs/36 for dialog@1. Portal: openDriver {open:true} on DialogRoot; DialogTrigger 'Open' + Portal ⊃ (DialogBackdrop, DialogPositioner ⊃ DialogContent ⊃ (DialogHeader ⊃ DialogTitle 'Dialog title', DialogBody 'Dialog body copy for the molecule round.')) — Chakra's documented composition; the backdrop is part of the overlay the portal screenshot captures, and the gate crops the reference to the content paper. | The DialogBackdrop is left out of the mount: with it, the Portal carries TWO portaled roots (backdrop + positioner) and the harness's single-root fusion refuses by name (MULTI-ROOT-CAPTURE, measured 2026-09-02); the backdrop is the overlay behind the paper the gate crops to, not a part of the paper.",
+      "name": "Dialog",
+      "importName": "DialogRoot",
+      "contract": "examples/chakra/contracts-seed/dialog.contract.json",
+      "sampleText": "",
+      "axes": [],
+      "portalCapture": true,
+      "openDriver": {
+        "open": true
+      },
+      "callbackProps": [
+        "onOpenChange"
+      ],
+      "childrenSpec": [
+        {
+          "importName": "DialogTrigger",
+          "text": "Open"
+        },
+        {
+          "importName": "Portal",
+          "children": [
+            {
+              "importName": "DialogPositioner",
+              "children": [
+                {
+                  "importName": "DialogContent",
+                  "children": [
+                    {
+                      "importName": "DialogHeader",
+                      "children": [
+                        {
+                          "importName": "DialogTitle",
+                          "text": "Dialog title"
+                        }
+                      ]
+                    },
+                    {
+                      "importName": "DialogBody",
+                      "text": "Dialog body copy for the molecule round."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,201 @@
+{
+  "$schema": "./contract.schema.json",
+  "id": "chakra.dialog",
+  "name": "Dialog",
+  "version": "0.1.0",
+  "status": "draft",
+  "description": "SEED contract for the Chakra UI Dialog capture — props/axes only; anatomy is promoted from captured DOM truth. Subject: @chakra-ui/react@3.37.0. Composition from the package's flat exports: DialogRoot(open) ⊃ (DialogTrigger 'Open', Portal ⊃ (DialogBackdrop, DialogPositioner ⊃ DialogContent ⊃ (DialogHeader ⊃ DialogTitle, DialogBody))). Authored 2026-09-02 as the person's step of docs/36 for dialog@1: a title over a body, the archetype's shape; the open plane is the Root's `open` prop via openDriver. COMPUTED-ENRICHED (extract/computed): unlabeled styled channels minted from computed-style capture of @chakra-ui/react@3.37.0 in headless Chromium 149.0.7827.55; overflow channels in the sibling extension file.",
+  "semantics": {
+    "element": "div"
+  },
+  "props": [],
+  "states": [],
+  "anatomy": {
+    "root": {
+      "layout": {
+        "display": "flex",
+        "align": "start",
+        "justify": "center"
+      },
+      "parts": {
+        "dialog__content": {
+          "description": "Promoted from the computed floor (round 4): rendered anatomy div|dialog__content — this element exists in the real component's DOM; the static layer had no part for it.",
+          "layout": {
+            "display": "flex",
+            "direction": "column"
+          },
+          "parts": {
+            "dialog__header": {
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|dialog__header — this element exists in the real component's DOM; the static layer had no part for it.",
+              "layout": {
+                "display": "flex"
+              },
+              "parts": {
+                "label": {
+                  "element": "h2",
+                  "text": "Dialog title",
+                  "description": "Promoted from the computed floor (round 4): rendered anatomy h2|dialog__title — this element exists in the real component's DOM; the static layer had no part for it.",
+                  "declared": {
+                    "display": "block",
+                    "border-bottom-style": "solid",
+                    "border-left-style": "solid",
+                    "border-right-style": "solid",
+                    "border-top-style": "solid",
+                    "box-sizing": "border-box",
+                    "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                    "font-feature-settings": "\"cv11\"",
+                    "text-rendering": "optimizelegibility"
+                  },
+                  "tokens": {
+                    "border-bottom-color": "{imported.shared.color-e4e4e7}",
+                    "border-left-color": "{imported.shared.color-e4e4e7}",
+                    "border-right-color": "{imported.shared.color-e4e4e7}",
+                    "border-top-color": "{imported.shared.color-e4e4e7}",
+                    "color": "{imported.shared.color-09090b}",
+                    "font-size": "{imported.dialog.label.font-size}",
+                    "font-weight": "{imported.dialog.label.font-weight}",
+                    "line-height": "{imported.dialog.label.line-height}",
+                    "tab-size": "{imported.shared.num-4}"
+                  }
+                }
+              },
+              "declared": {
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                "font-feature-settings": "\"cv11\"",
+                "text-rendering": "optimizelegibility"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-e4e4e7}",
+                "border-left-color": "{imported.shared.color-e4e4e7}",
+                "border-right-color": "{imported.shared.color-e4e4e7}",
+                "border-top-color": "{imported.shared.color-e4e4e7}",
+                "color": "{imported.shared.color-09090b}",
+                "column-gap": "{imported.shared.size-8}",
+                "font-size": "{imported.shared.size-14}",
+                "line-height": "{imported.shared.size-20}",
+                "padding-bottom": "{imported.dialog.dialog-header.padding-bottom}",
+                "padding-left": "{imported.shared.size-24}",
+                "padding-right": "{imported.shared.size-24}",
+                "padding-top": "{imported.shared.size-24}",
+                "row-gap": "{imported.shared.size-8}",
+                "tab-size": "{imported.shared.num-4}"
+              }
+            },
+            "label-2": {
+              "text": "Dialog body copy for the molecule round.",
+              "description": "Promoted from the computed floor (round 4): rendered anatomy div|dialog__body — this element exists in the real component's DOM; the static layer had no part for it.",
+              "declared": {
+                "display": "block",
+                "border-bottom-style": "solid",
+                "border-left-style": "solid",
+                "border-right-style": "solid",
+                "border-top-style": "solid",
+                "box-sizing": "border-box",
+                "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+                "font-feature-settings": "\"cv11\"",
+                "text-rendering": "optimizelegibility"
+              },
+              "tokens": {
+                "border-bottom-color": "{imported.shared.color-e4e4e7}",
+                "border-left-color": "{imported.shared.color-e4e4e7}",
+                "border-right-color": "{imported.shared.color-e4e4e7}",
+                "border-top-color": "{imported.shared.color-e4e4e7}",
+                "color": "{imported.shared.color-09090b}",
+                "flex-grow": "{imported.dialog.label-2.flex-grow}",
+                "font-size": "{imported.shared.size-14}",
+                "font-weight": "{imported.dialog.label-2.font-weight}",
+                "line-height": "{imported.shared.size-20}",
+                "padding-bottom": "{imported.shared.size-24}",
+                "padding-left": "{imported.shared.size-24}",
+                "padding-right": "{imported.shared.size-24}",
+                "padding-top": "{imported.shared.size-8}",
+                "tab-size": "{imported.shared.num-4}"
+              }
+            }
+          },
+          "declared": {
+            "border-bottom-style": "solid",
+            "border-left-style": "solid",
+            "border-right-style": "solid",
+            "border-top-style": "solid",
+            "box-sizing": "border-box",
+            "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+            "font-feature-settings": "\"cv11\"",
+            "position": "relative",
+            "text-rendering": "optimizelegibility"
+          },
+          "tokens": {
+            "background-color": "{imported.dialog.dialog-content.background-color}",
+            "border-bottom-color": "{imported.shared.color-e4e4e7}",
+            "border-bottom-left-radius": "{imported.shared.size-6}",
+            "border-bottom-right-radius": "{imported.shared.size-6}",
+            "border-left-color": "{imported.shared.color-e4e4e7}",
+            "border-right-color": "{imported.shared.color-e4e4e7}",
+            "border-top-color": "{imported.shared.color-e4e4e7}",
+            "border-top-left-radius": "{imported.shared.size-6}",
+            "border-top-right-radius": "{imported.shared.size-6}",
+            "bottom": "{imported.shared.size-0}",
+            "box-shadow": "{imported.dialog.dialog-content.box-shadow}",
+            "color": "{imported.shared.color-09090b}",
+            "font-size": "{imported.shared.size-14}",
+            "left": "{imported.shared.size-0}",
+            "line-height": "{imported.shared.size-20}",
+            "margin-bottom": "{imported.dialog.dialog-content.margin-bottom}",
+            "margin-left": "{imported.dialog.dialog-content.margin-left}",
+            "margin-right": "{imported.dialog.dialog-content.margin-right}",
+            "margin-top": "{imported.dialog.dialog-content.margin-top}",
+            "max-width": "{imported.dialog.dialog-content.max-width}",
+            "outline-width": "{imported.shared.size-0}",
+            "right": "{imported.shared.size-0}",
+            "tab-size": "{imported.shared.num-4}",
+            "top": "{imported.shared.size-0}",
+            "z-index": "{imported.dialog.dialog-content.z-index}"
+          }
+        }
+      },
+      "declared": {
+        "border-bottom-style": "solid",
+        "border-left-style": "solid",
+        "border-right-style": "solid",
+        "border-top-style": "solid",
+        "box-sizing": "border-box",
+        "font-family": "Inter, -apple-system, \"system-ui\", \"Segoe UI\", Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
+        "font-feature-settings": "\"cv11\"",
+        "overflow-x": "auto",
+        "overflow-y": "auto",
+        "text-rendering": "optimizelegibility"
+      },
+      "tokens": {
+        "border-bottom-color": "{imported.shared.color-e4e4e7}",
+        "border-left-color": "{imported.shared.color-e4e4e7}",
+        "border-right-color": "{imported.shared.color-e4e4e7}",
+        "border-top-color": "{imported.shared.color-e4e4e7}",
+        "color": "{imported.shared.color-09090b}",
+        "line-height": "{imported.shared.size-24}",
+        "min-height": "{imported.shared.size-0}",
+        "min-width": "{imported.shared.size-0}",
+        "tab-size": "{imported.shared.num-4}",
+        "z-index": "{imported.dialog.root.z-index}"
+      }
+    }
+  },
+  "bindings": {
+    "figma": {
+      "anchors": {
+        "fileKey": null,
+        "componentSetKey": null
+      }
+    },
+    "code": {
+      "anchors": {
+        "importPath": "@chakra-ui/react",
+        "export": "TooltipRoot"
+      }
+    }
+  }
+}
