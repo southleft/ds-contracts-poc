@@ -1,0 +1,27 @@
+{
+  "artifactVersion": "paste-verb-exercised-v1",
+  "what": "The plugin's Paste a script verb, exercised by a person for the first time: the Chakra Switch program emitted by `npm run recipe:point -- --archetype switch --library chakra` (writer.plugin.js, no file pin, no page list) pasted into the development plugin in Figma desktop.",
+  "exercisedAt": "2026-09-02",
+  "reviewer": {
+    "name": "TJ Pitre",
+    "identity": "human-owner",
+    "independent": true
+  },
+  "program": "recipe/evidence/pointed/switch-chakra/writer.plugin.js",
+  "runIdentity": "8fef9171-switch-v11",
+  "observed": {
+    "pageCreated": "Recipe Pivot / Chakra / 8fef9171 (the program's own page, as the plugin target promises)",
+    "set": "switch/set :: Chakra …",
+    "statesRendered": 4,
+    "comparedAgainst": "the Chakra UI docs' Switch preview (the person's screenshot of the docs beside the canvas)"
+  },
+  "verbatim": "They definitely do look the same. I will say it looks like the Chakra docs have another variant that wasn't caught, or maybe it just wasn't considered. Overall, for the ones that it matches, it definitely matches so I would call this a pass for the ones it matched against.",
+  "implications": {
+    "pasteVerbExercisedByAPerson": true,
+    "chakraSwitchMatchedCells": "the four captured states (unchecked/checked × enabled/disabled) at the package's defaults, variant solid and size md",
+    "notCaptured": "Chakra's Switch `variant: raised` and its sizes xs/sm/lg — library axes the person's config entry did not enumerate (axes: [checked]); switch@1 carries no size or variant plane, so they are outside the archetype, not misses of the reader. They are what the docs preview shows beside the defaults.",
+    "isThisAHumanGrade": "a human observation of the paste path and of the four matched states — not a docs/26 V1-CLASS-03 grade of a stayed archetype page (the Chakra switch is a held-out proof under the fidelity gate, which already measured its four states pixel-identical)",
+    "productV1Complete": false
+  },
+  "doNotClaimV1Complete": true
+}

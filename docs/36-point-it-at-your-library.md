@@ -254,9 +254,13 @@ recorded as none, which the gate had been excusing as anti-aliasing. See
 - **Pseudo-element glyphs.** AntD draws its check with `::after` borders;
   the drafter does not read pseudo-elements for the glyph role (the hand
   mapping does).
-- **The plugin's paste verb itself.** The program is proven through the
-  same execution shape the plugin uses; a person pasting it in Figma
-  desktop has not been exercised in this repository.
+- **The plugin's paste verb, exercised once.** On 2026-09-02 the owner pasted
+  the Chakra switch program into the development plugin in Figma desktop; it
+  created its own page and the four captured states matched the Chakra docs
+  beside it (`recipe/evidence/pointed/switch-chakra/paste-verb-exercised.json`,
+  verbatim). Chakra's `raised` variant and its sizes are outside switch@1 and
+  are named unsupported on the fixture, not misses. One person, one program:
+  the verb is exercised, not yet routine.
 - **A capture is still a capture.** `extract/computed` needs a sandbox with
   the real package installed and a capture config; that is the
   [21 — bring your own design system](21-bring-your-own-design-system.md)

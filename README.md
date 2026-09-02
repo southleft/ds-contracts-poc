@@ -11,7 +11,7 @@
 > It is proven for **eleven of thirteen archetypes** and on **libraries it was
 > never taught**, and every number below is from a gate run on `main`.
 > Product **v1 is not complete**: two archetypes still rest on hand-written
-> tables, the plugin's paste verb has not yet been exercised by a person, and
+> tables, the plugin's paste verb has been exercised by a person exactly once (the Chakra switch, 2 September), and
 > the capture step needs a config entry a person writes. The older
 > universal-contract path ([docs/35](docs/35-two-journey-v1-plan.md)) still
 > ships and is described further down this page; it is not the v1 proof.
